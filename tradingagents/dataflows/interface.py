@@ -41,6 +41,8 @@ from .tushare_research import (
     get_tushare_news,
     get_valuation_percentiles as get_tushare_valuation_percentiles,
 )
+from .commodity_research import get_commodity_context as get_tushare_commodity_context
+from .shipping_research import get_shipping_context as get_tushare_shipping_context
 
 # Configuration and routing logic
 from .config import get_config
@@ -66,6 +68,8 @@ TOOLS_CATEGORIES = {
             "get_balance_sheet",
             "get_cashflow",
             "get_income_statement",
+            "get_commodity_context",
+            "get_shipping_context",
             "get_peer_comparison",
             "get_valuation_percentiles",
             "get_market_sector_risk",
@@ -122,6 +126,12 @@ VENDOR_METHODS = {
         "alpha_vantage": get_alpha_vantage_income_statement,
         "tushare": get_tushare_income_statement,
         "yfinance": get_yfinance_income_statement,
+    },
+    "get_commodity_context": {
+        "tushare": get_tushare_commodity_context,
+    },
+    "get_shipping_context": {
+        "tushare": get_tushare_shipping_context,
     },
     "get_peer_comparison": {
         "tushare": get_tushare_peer_comparison,
@@ -196,6 +206,8 @@ def route_to_vendor(method: str, *args, **kwargs):
         "get_balance_sheet",
         "get_cashflow",
         "get_income_statement",
+        "get_commodity_context",
+        "get_shipping_context",
         "get_peer_comparison",
         "get_valuation_percentiles",
         "get_market_sector_risk",

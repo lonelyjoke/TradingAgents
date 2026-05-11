@@ -78,6 +78,32 @@ def get_income_statement(
 
 
 @tool
+def get_commodity_context(
+    ticker: Annotated[str, "ticker symbol"],
+    curr_date: Annotated[str, "current date you are trading at, yyyy-mm-dd"],
+    look_back_days: Annotated[int, "commodity/futures look-back window in days"] = 90,
+) -> str:
+    """
+    Retrieve evidence-backed commodity price, futures proxy, inventory/warehouse
+    receipt, and product-price context for an A-share company.
+    """
+    return route_to_vendor("get_commodity_context", ticker, curr_date, look_back_days)
+
+
+@tool
+def get_shipping_context(
+    ticker: Annotated[str, "ticker symbol"],
+    curr_date: Annotated[str, "current date you are trading at, yyyy-mm-dd"],
+    look_back_days: Annotated[int, "shipping/freight look-back window in days"] = 90,
+) -> str:
+    """
+    Retrieve evidence-backed shipping cycle context, including broad tanker,
+    product tanker, dry bulk, and route coverage notes for A-share shipping companies.
+    """
+    return route_to_vendor("get_shipping_context", ticker, curr_date, look_back_days)
+
+
+@tool
 def get_peer_comparison(
     ticker: Annotated[str, "ticker symbol"],
     curr_date: Annotated[str, "current date you are trading at, yyyy-mm-dd"],

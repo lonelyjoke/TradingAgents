@@ -143,6 +143,38 @@ def _fetch_major_news(terms: list[str], curr_date: str, look_back_days: int, lim
     return filtered.head(limit)
 
 
+def _fetch_news_feed(terms: list[str], curr_date: str, look_back_days: int, limit: int = 20) -> pd.DataFrame | TushareDataError:
+    start, end = _datetime_window(curr_date, look_back_days)
+    sources = ["sina", "10jqka", "eastmoney", "yuncaijing", "wallstreetcn"]
+    frames = []
+    errors = []
+    for src in sources:
+        result = _safe_optional_query(
+            "news",
+            src=src,
+            start_date=start,
+            end_date=end,
+            fields="datetime,content,title,channels",
+        )
+        if isinstance(result, TushareDataError):
+            errors.append(str(result))
+            continue
+        if result is not None and not result.empty:
+            result = result.copy()
+            result["src"] = src
+            frames.append(result)
+
+    if not frames:
+        return TushareDataError("; ".join(errors) if errors else "news returned no data.")
+
+    data = pd.concat(frames, ignore_index=True)
+    filtered = _filter_by_terms(data, terms, ["title", "content", "channels"])
+    filtered = _sort_by_existing_date(filtered, ["datetime"])
+    if "title" in filtered.columns:
+        filtered = filtered.drop_duplicates(subset=["title"], keep="first")
+    return filtered.head(limit)
+
+
 def _fetch_general_major_news(curr_date: str, look_back_days: int, limit: int) -> pd.DataFrame | TushareDataError:
     start, end = _datetime_window(curr_date, look_back_days)
     result = _safe_optional_query(
@@ -188,6 +220,41 @@ def _format_event_table(data: pd.DataFrame, columns: list[str], limit: int) -> s
     return _markdown_table(selected)
 
 
+def _classify_announcement(title: str) -> str:
+    text = str(title or "")
+    rules = [
+        ("业绩/财报", ["业绩", "年报", "季报", "半年报", "财务报表", "利润分配"]),
+        ("分红/权益", ["分红", "派息", "权益分派", "股息"]),
+        ("回购/增减持", ["回购", "增持", "减持", "持股变动"]),
+        ("融资/债券", ["债券", "可转债", "融资", "授信", "票据"]),
+        ("并购/投资", ["收购", "出售资产", "重大资产", "投资", "并购", "重组"]),
+        ("治理/人事", ["董事", "监事", "高管", "辞任", "聘任", "选举"]),
+        ("股东大会", ["股东大会"]),
+        ("关联交易", ["关联交易"]),
+        ("监管/法律", ["问询", "监管", "处罚", "诉讼", "仲裁", "法律意见书"]),
+    ]
+    for label, keywords in rules:
+        if any(keyword in text for keyword in keywords):
+            return label
+    return "一般公告"
+
+
+def _add_announcement_category(data: pd.DataFrame) -> pd.DataFrame:
+    if data is None or data.empty or "title" not in data.columns:
+        return data
+    enriched = data.copy()
+    enriched["event_type"] = enriched["title"].map(_classify_announcement)
+    return enriched
+
+
+def _announcement_type_summary(data: pd.DataFrame) -> str:
+    if data is None or data.empty or "event_type" not in data.columns:
+        return "No announcement category summary available."
+    counts = data["event_type"].value_counts().reset_index()
+    counts.columns = ["event_type", "count"]
+    return _markdown_table(counts)
+
+
 def get_company_events(ticker: str, curr_date: str, look_back_days: int = 30) -> str:
     """Return recent A-share announcements, company news, and policy context."""
     symbol = ticker.strip().upper()
@@ -216,15 +283,49 @@ def get_company_events(ticker: str, curr_date: str, look_back_days: int = 30) ->
     if isinstance(announcements, TushareDataError):
         lines.append(_format_error("Company announcements", announcements))
     else:
-        lines.append(_format_event_table(announcements, ["ann_date", "ts_code", "name", "title", "url"], 15))
+        announcements = _add_announcement_category(announcements)
+        lines.extend(
+            [
+                "### Announcement Type Summary",
+                _announcement_type_summary(announcements),
+                "",
+                "### Announcement Evidence",
+                _format_event_table(
+                    announcements,
+                    ["ann_date", "event_type", "ts_code", "name", "title", "url"],
+                    15,
+                ),
+            ]
+        )
 
     lines.extend(["", "## Company And Industry News"])
     news_terms = terms
     news = _fetch_major_news(news_terms, curr_date, look_back_days)
-    if isinstance(news, TushareDataError):
-        lines.append(_format_error("Major news", news))
+    news_feed = _fetch_news_feed(news_terms, curr_date, look_back_days)
+
+    if isinstance(news, TushareDataError) and isinstance(news_feed, TushareDataError):
+        lines.extend(
+            [
+                _format_error("Major news", news),
+                _format_error("News feed", news_feed),
+            ]
+        )
     else:
-        lines.append(_format_event_table(news, ["pub_time", "src", "title", "content"], 12))
+        if not isinstance(news, TushareDataError):
+            lines.extend(
+                [
+                    "### Major News Matches",
+                    _format_event_table(news, ["pub_time", "src", "title", "content"], 12),
+                ]
+            )
+        if not isinstance(news_feed, TushareDataError):
+            lines.extend(
+                [
+                    "",
+                    "### News Feed Matches",
+                    _format_event_table(news_feed, ["datetime", "src", "channels", "title", "content"], 12),
+                ]
+            )
 
     lines.extend(["", "## Policy And Macro Signals"])
     policy_terms = [term for term in terms if term not in {symbol, symbol.split(".")[0]}]

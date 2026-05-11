@@ -11,9 +11,11 @@ from tradingagents.agents.utils.fundamental_data_tools import (
     get_fundamentals,
     get_balance_sheet,
     get_cashflow,
+    get_commodity_context,
     get_income_statement,
     get_market_sector_risk,
     get_peer_comparison,
+    get_shipping_context,
     get_valuation_percentiles,
 )
 from tradingagents.agents.utils.news_data_tools import (
@@ -36,6 +38,18 @@ def get_language_instruction() -> str:
     if lang.strip().lower() == "english":
         return ""
     return f" Write your entire response in {lang}."
+
+
+def get_evidence_instruction() -> str:
+    """Return anti-hallucination rules for numeric investment claims."""
+    return (
+        " Evidence discipline: any concrete number, percentage, price, inventory, "
+        "capacity, production quota, product spread, or date-specific market claim "
+        "must be grounded in the supplied tool outputs or analyst reports. If the "
+        "supporting evidence is absent, explicitly label it as an unverified key "
+        "assumption and do not present it as fact. Never invent commodity prices, "
+        "inventory levels, product-price changes, or policy details."
+    )
 
 
 def build_instrument_context(ticker: str) -> str:

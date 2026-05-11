@@ -13,6 +13,7 @@ from __future__ import annotations
 from tradingagents.agents.schemas import PortfolioDecision, render_pm_decision
 from tradingagents.agents.utils.agent_utils import (
     build_instrument_context,
+    get_evidence_instruction,
     get_language_instruction,
 )
 from tradingagents.agents.utils.structured import (
@@ -61,7 +62,9 @@ def create_portfolio_manager(llm):
 
 ---
 
-Be decisive and ground every conclusion in specific evidence from the analysts.{get_language_instruction()}"""
+Be decisive and ground every conclusion in specific evidence from the analysts.
+{get_evidence_instruction()}
+If an important investment claim depends on an unverified commodity price, product spread, inventory, policy detail, or exact percentage, list it under an "Unverified Key Assumptions" paragraph instead of treating it as fact.{get_language_instruction()}"""
 
         final_trade_decision = invoke_structured_or_freetext(
             structured_llm,
