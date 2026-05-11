@@ -23,6 +23,16 @@ from .alpha_vantage import (
     get_global_news as get_alpha_vantage_global_news,
 )
 from .alpha_vantage_common import AlphaVantageRateLimitError
+from .tushare_a_stock import (
+    TushareDataError,
+    get_balance_sheet as get_tushare_balance_sheet,
+    get_cashflow as get_tushare_cashflow,
+    get_fundamentals as get_tushare_fundamentals,
+    get_indicator as get_tushare_indicator,
+    get_income_statement as get_tushare_income_statement,
+    get_stock as get_tushare_stock,
+    is_a_share_symbol,
+)
 
 # Configuration and routing logic
 from .config import get_config
@@ -63,6 +73,7 @@ TOOLS_CATEGORIES = {
 VENDOR_LIST = [
     "yfinance",
     "alpha_vantage",
+    "tushare",
 ]
 
 # Mapping of methods to their vendor-specific implementations
@@ -70,28 +81,34 @@ VENDOR_METHODS = {
     # core_stock_apis
     "get_stock_data": {
         "alpha_vantage": get_alpha_vantage_stock,
+        "tushare": get_tushare_stock,
         "yfinance": get_YFin_data_online,
     },
     # technical_indicators
     "get_indicators": {
         "alpha_vantage": get_alpha_vantage_indicator,
+        "tushare": get_tushare_indicator,
         "yfinance": get_stock_stats_indicators_window,
     },
     # fundamental_data
     "get_fundamentals": {
         "alpha_vantage": get_alpha_vantage_fundamentals,
+        "tushare": get_tushare_fundamentals,
         "yfinance": get_yfinance_fundamentals,
     },
     "get_balance_sheet": {
         "alpha_vantage": get_alpha_vantage_balance_sheet,
+        "tushare": get_tushare_balance_sheet,
         "yfinance": get_yfinance_balance_sheet,
     },
     "get_cashflow": {
         "alpha_vantage": get_alpha_vantage_cashflow,
+        "tushare": get_tushare_cashflow,
         "yfinance": get_yfinance_cashflow,
     },
     "get_income_statement": {
         "alpha_vantage": get_alpha_vantage_income_statement,
+        "tushare": get_tushare_income_statement,
         "yfinance": get_yfinance_income_statement,
     },
     # news_data
@@ -143,6 +160,23 @@ def route_to_vendor(method: str, *args, **kwargs):
     # Build fallback chain: primary vendors first, then remaining available vendors
     all_available_vendors = list(VENDOR_METHODS[method].keys())
     fallback_vendors = primary_vendors.copy()
+
+    # A-share tickers are not handled well by the default yfinance path.
+    # Prefer Tushare automatically for common exchange-qualified symbols.
+    if method in {
+        "get_stock_data",
+        "get_indicators",
+        "get_fundamentals",
+        "get_balance_sheet",
+        "get_cashflow",
+        "get_income_statement",
+    } and args:
+        symbol = str(args[0])
+        if is_a_share_symbol(symbol) and "tushare" in all_available_vendors:
+            fallback_vendors = ["tushare"] + [
+                vendor for vendor in fallback_vendors if vendor != "tushare"
+            ]
+
     for vendor in all_available_vendors:
         if vendor not in fallback_vendors:
             fallback_vendors.append(vendor)
@@ -158,5 +192,9 @@ def route_to_vendor(method: str, *args, **kwargs):
             return impl_func(*args, **kwargs)
         except AlphaVantageRateLimitError:
             continue  # Only rate limits trigger fallback
+        except TushareDataError:
+            if vendor == "tushare":
+                raise
+            continue
 
     raise RuntimeError(f"No available vendor for '{method}'")
