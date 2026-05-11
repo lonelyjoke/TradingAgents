@@ -33,6 +33,14 @@ from .tushare_a_stock import (
     get_stock as get_tushare_stock,
     is_a_share_symbol,
 )
+from .tushare_research import (
+    get_company_events as get_tushare_company_events,
+    get_market_sector_risk as get_tushare_market_sector_risk,
+    get_peer_comparison as get_tushare_peer_comparison,
+    get_tushare_global_news,
+    get_tushare_news,
+    get_valuation_percentiles as get_tushare_valuation_percentiles,
+)
 
 # Configuration and routing logic
 from .config import get_config
@@ -57,7 +65,10 @@ TOOLS_CATEGORIES = {
             "get_fundamentals",
             "get_balance_sheet",
             "get_cashflow",
-            "get_income_statement"
+            "get_income_statement",
+            "get_peer_comparison",
+            "get_valuation_percentiles",
+            "get_market_sector_risk",
         ]
     },
     "news_data": {
@@ -65,6 +76,7 @@ TOOLS_CATEGORIES = {
         "tools": [
             "get_news",
             "get_global_news",
+            "get_company_events",
             "get_insider_transactions",
         ]
     }
@@ -111,14 +123,28 @@ VENDOR_METHODS = {
         "tushare": get_tushare_income_statement,
         "yfinance": get_yfinance_income_statement,
     },
+    "get_peer_comparison": {
+        "tushare": get_tushare_peer_comparison,
+    },
+    "get_valuation_percentiles": {
+        "tushare": get_tushare_valuation_percentiles,
+    },
+    "get_market_sector_risk": {
+        "tushare": get_tushare_market_sector_risk,
+    },
     # news_data
     "get_news": {
         "alpha_vantage": get_alpha_vantage_news,
+        "tushare": get_tushare_news,
         "yfinance": get_news_yfinance,
     },
     "get_global_news": {
         "yfinance": get_global_news_yfinance,
+        "tushare": get_tushare_global_news,
         "alpha_vantage": get_alpha_vantage_global_news,
+    },
+    "get_company_events": {
+        "tushare": get_tushare_company_events,
     },
     "get_insider_transactions": {
         "alpha_vantage": get_alpha_vantage_insider_transactions,
@@ -170,6 +196,11 @@ def route_to_vendor(method: str, *args, **kwargs):
         "get_balance_sheet",
         "get_cashflow",
         "get_income_statement",
+        "get_peer_comparison",
+        "get_valuation_percentiles",
+        "get_market_sector_risk",
+        "get_news",
+        "get_company_events",
     } and args:
         symbol = str(args[0])
         if is_a_share_symbol(symbol) and "tushare" in all_available_vendors:

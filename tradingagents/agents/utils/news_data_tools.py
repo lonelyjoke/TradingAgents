@@ -38,6 +38,20 @@ def get_global_news(
     """
     return route_to_vendor("get_global_news", curr_date, look_back_days, limit)
 
+
+@tool
+def get_company_events(
+    ticker: Annotated[str, "ticker symbol"],
+    curr_date: Annotated[str, "current date you are trading at, yyyy-mm-dd"],
+    look_back_days: Annotated[int, "look-back window in days"] = 30,
+) -> str:
+    """
+    Retrieve recent company announcements, company news, and policy events.
+    For A-share tickers this uses Tushare where available and clearly reports
+    unavailable permissions instead of fabricating events.
+    """
+    return route_to_vendor("get_company_events", ticker, curr_date, look_back_days)
+
 @tool
 def get_insider_transactions(
     ticker: Annotated[str, "ticker symbol"],
