@@ -36,6 +36,7 @@ from .tushare_a_stock import (
 from .tushare_research import (
     get_company_events as get_tushare_company_events,
     get_market_sector_risk as get_tushare_market_sector_risk,
+    get_market_timing_context as get_tushare_market_timing_context,
     get_peer_comparison as get_tushare_peer_comparison,
     get_tushare_global_news,
     get_tushare_news,
@@ -73,6 +74,7 @@ TOOLS_CATEGORIES = {
             "get_peer_comparison",
             "get_valuation_percentiles",
             "get_market_sector_risk",
+            "get_market_timing_context",
         ]
     },
     "news_data": {
@@ -141,6 +143,9 @@ VENDOR_METHODS = {
     },
     "get_market_sector_risk": {
         "tushare": get_tushare_market_sector_risk,
+    },
+    "get_market_timing_context": {
+        "tushare": get_tushare_market_timing_context,
     },
     # news_data
     "get_news": {
@@ -211,6 +216,7 @@ def route_to_vendor(method: str, *args, **kwargs):
         "get_peer_comparison",
         "get_valuation_percentiles",
         "get_market_sector_risk",
+        "get_market_timing_context",
         "get_news",
         "get_company_events",
     } and args:

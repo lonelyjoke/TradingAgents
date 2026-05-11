@@ -741,6 +741,79 @@ def _risk_label(percentile_text: str, high_is_risky: bool = True) -> str:
     return "Neutral"
 
 
+def _pct_to_float(percentile_text: str) -> float | None:
+    if percentile_text == "N/A":
+        return None
+    try:
+        return float(str(percentile_text).rstrip("%"))
+    except Exception:
+        return None
+
+
+def _market_regime(rows: list[dict[str, str]]) -> tuple[str, str, str]:
+    price_positions = [
+        value for value in (_pct_to_float(row.get("price_position", "N/A")) for row in rows)
+        if value is not None
+    ]
+    pe_positions = [
+        value for value in (_pct_to_float(row.get("pe_ttm_percentile", "N/A")) for row in rows)
+        if value is not None
+    ]
+    pb_positions = [
+        value for value in (_pct_to_float(row.get("pb_percentile", "N/A")) for row in rows)
+        if value is not None
+    ]
+    drawdowns = []
+    for row in rows:
+        text = str(row.get("drawdown_from_high", "N/A"))
+        try:
+            drawdowns.append(float(text.rstrip("%")))
+        except Exception:
+            pass
+
+    if not price_positions:
+        return "Unknown", "No reliable index position data.", "Neutral"
+
+    avg_price = sum(price_positions) / len(price_positions)
+    valuation_positions = pe_positions + pb_positions
+    avg_valuation = (
+        sum(valuation_positions) / len(valuation_positions)
+        if valuation_positions
+        else 50.0
+    )
+    avg_drawdown = sum(drawdowns) / len(drawdowns) if drawdowns else 0.0
+
+    if avg_price <= 15 and avg_valuation <= 25:
+        return (
+            "Extreme pessimism / depressed market",
+            "Market price and valuation percentiles are both very low; contrarian opportunities deserve more attention, but liquidity and trend risk remain.",
+            "Allow slightly more aggressive entries after confirming company-level evidence.",
+        )
+    if avg_price <= 30 or avg_drawdown <= -15:
+        return (
+            "Bearish / risk-off market",
+            "Index position is low or drawdown is meaningful; trend risk is elevated.",
+            "Keep ratings conservative unless valuation, balance sheet, and catalysts are strong.",
+        )
+    if avg_price >= 85 and avg_valuation >= 75:
+        return (
+            "Extreme optimism / crowded market",
+            "Market price and valuation percentiles are both high; upside should be discounted and profit-taking discipline matters.",
+            "Be more conservative: prefer staged profit-taking and tighter risk controls.",
+        )
+    if avg_price >= 70 or avg_valuation >= 70:
+        return (
+            "Bullish but risk elevated",
+            "Market is strong or valuations are high; momentum may persist, but margin of safety is thinner.",
+            "Do not upgrade ratings mechanically; require stronger company-specific upside.",
+        )
+    return (
+        "Neutral / balanced market",
+        "No extreme market-wide sentiment or valuation condition is detected.",
+        "Use company and sector evidence as the primary rating driver.",
+    )
+
+
 def _industry_cross_section(symbol: str, curr_date: str) -> tuple[pd.Series, pd.DataFrame, pd.DataFrame]:
     basic = _fetch_stock_basic(symbol)
     if basic is None:
@@ -946,5 +1019,73 @@ def get_market_sector_risk(ticker: str, curr_date: str, look_back_days: int = 12
         "- If broad-market or sector valuation risk is high, reduce confidence in aggressive upside claims unless stock-specific evidence is strong.",
         "- If the sector is high-risk but the target is low versus peers, investigate whether it is mispriced or impaired.",
         "- Separate market beta risk, sector crowding risk, and company-specific risk.",
+    ]
+    return "\n".join(lines)
+
+
+def get_market_timing_context(ticker: str, curr_date: str, look_back_days: int = 120, years: int = 5) -> str:
+    """Return market mood and rating-calibration guidance for an A-share symbol."""
+    symbol = ticker.strip().upper()
+    if not is_a_share_symbol(symbol):
+        raise TushareDataError(
+            f"Tushare market timing expects A-share symbols like 000001.SZ or 600519.SH; got {ticker!r}."
+        )
+    if not curr_date:
+        curr_date = datetime.now().strftime("%Y-%m-%d")
+
+    indexes = {
+        "000001.SH": "SSE Composite",
+        "000300.SH": "CSI 300",
+        "000905.SH": "CSI 500",
+        "399006.SZ": "ChiNext Index",
+    }
+    rows = []
+    for code, name in indexes.items():
+        try:
+            price = _index_price_position(code, curr_date, look_back_days)
+        except Exception:
+            price = {
+                "recent_change": "N/A",
+                "drawdown_from_high": "N/A",
+                "price_position": "N/A",
+            }
+        try:
+            valuation = _index_valuation_position(code, curr_date, years)
+        except Exception:
+            valuation = {
+                "pe_ttm_percentile": "N/A",
+                "pb_percentile": "N/A",
+                "turnover_rate": "N/A",
+            }
+        rows.append(
+            {
+                "index": f"{name} ({code})",
+                "recent_change": price["recent_change"],
+                "drawdown_from_high": price["drawdown_from_high"],
+                "price_position": price["price_position"],
+                "pe_ttm_percentile": valuation["pe_ttm_percentile"],
+                "pb_percentile": valuation["pb_percentile"],
+                "turnover_rate": valuation["turnover_rate"],
+            }
+        )
+
+    regime, diagnosis, calibration = _market_regime(rows)
+
+    lines = [
+        f"# Market timing and rating calibration for {symbol} as of {curr_date}",
+        "",
+        f"- Market regime: {regime}",
+        f"- Diagnosis: {diagnosis}",
+        f"- Rating calibration: {calibration}",
+        "",
+        "## Market Mood Evidence",
+        _markdown_table(pd.DataFrame(rows)),
+        "",
+        "## Action Range Guidance",
+        "- If the final view is bullish, provide a staged profit-taking or trimming zone based on valuation percentile, resistance/price target, and market regime.",
+        "- If the final view is bearish, provide an entry watch zone where risk/reward may become attractive again, based on historical valuation, technical support, and market regime.",
+        "- In extreme pessimism, avoid being mechanically bearish at low valuations; require confirmation, but allow contrarian watch zones.",
+        "- In extreme optimism, avoid being mechanically bullish at high valuations; emphasize staged profit-taking and downside protection.",
+        "- Do not provide exact ranges unless supported by market/valuation/technical evidence; otherwise label them as scenario ranges.",
     ]
     return "\n".join(lines)

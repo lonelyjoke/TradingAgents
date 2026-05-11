@@ -132,6 +132,22 @@ class TraderProposal(BaseModel):
         default=None,
         description="Optional stop-loss price in the instrument's quote currency.",
     )
+    profit_taking_range: Optional[str] = Field(
+        default=None,
+        description=(
+            "Optional staged profit-taking or trimming range. Use this when the "
+            "view is bullish or the action is Buy/Hold with upside; express as "
+            "a price range or scenario range grounded in the research plan."
+        ),
+    )
+    entry_watch_range: Optional[str] = Field(
+        default=None,
+        description=(
+            "Optional entry or re-entry watch range. Use this when the view is "
+            "bearish/cautious or action is Sell/Hold; express where risk/reward "
+            "may become attractive again."
+        ),
+    )
     position_sizing: Optional[str] = Field(
         default=None,
         description="Optional sizing guidance, e.g. '5% of portfolio'.",
@@ -154,6 +170,10 @@ def render_trader_proposal(proposal: TraderProposal) -> str:
         parts.extend(["", f"**Entry Price**: {proposal.entry_price}"])
     if proposal.stop_loss is not None:
         parts.extend(["", f"**Stop Loss**: {proposal.stop_loss}"])
+    if proposal.profit_taking_range:
+        parts.extend(["", f"**Profit-Taking / Trimming Range**: {proposal.profit_taking_range}"])
+    if proposal.entry_watch_range:
+        parts.extend(["", f"**Entry / Re-entry Watch Range**: {proposal.entry_watch_range}"])
     if proposal.position_sizing:
         parts.extend(["", f"**Position Sizing**: {proposal.position_sizing}"])
     parts.extend([
@@ -196,6 +216,39 @@ class PortfolioDecision(BaseModel):
             "incorporate them; otherwise rely solely on the current analysis."
         ),
     )
+    market_regime_adjustment: Optional[str] = Field(
+        default=None,
+        description=(
+            "Explain how broad-market mood, market valuation, sector risk, and "
+            "the stock's own characteristics adjusted the rating. Be specific: "
+            "quality defensives, high-beta cyclicals, distressed value, and "
+            "commodity/shipping names should not be calibrated mechanically."
+        ),
+    )
+    profit_taking_range: Optional[str] = Field(
+        default=None,
+        description=(
+            "If the final view is bullish or constructive, provide a reasonable "
+            "staged profit-taking or trimming range, grounded in valuation, "
+            "technical levels, market regime, and evidence. If not applicable, omit."
+        ),
+    )
+    entry_watch_range: Optional[str] = Field(
+        default=None,
+        description=(
+            "If the final view is bearish or cautious, provide a reasonable entry "
+            "or re-entry watch range where risk/reward may improve, grounded in "
+            "valuation, support levels, market regime, and evidence. If not applicable, omit."
+        ),
+    )
+    unverified_key_assumptions: Optional[str] = Field(
+        default=None,
+        description=(
+            "List any important but unverified assumptions, especially product "
+            "prices, shipping rates, inventory, route-level TCE, policy details, "
+            "or exact percentage claims that lack tool evidence."
+        ),
+    )
     price_target: Optional[float] = Field(
         default=None,
         description="Optional target price in the instrument's quote currency.",
@@ -221,6 +274,14 @@ def render_pm_decision(decision: PortfolioDecision) -> str:
         "",
         f"**Investment Thesis**: {decision.investment_thesis}",
     ]
+    if decision.market_regime_adjustment:
+        parts.extend(["", f"**Market Regime Adjustment**: {decision.market_regime_adjustment}"])
+    if decision.profit_taking_range:
+        parts.extend(["", f"**Profit-Taking / Trimming Range**: {decision.profit_taking_range}"])
+    if decision.entry_watch_range:
+        parts.extend(["", f"**Entry / Re-entry Watch Range**: {decision.entry_watch_range}"])
+    if decision.unverified_key_assumptions:
+        parts.extend(["", f"**Unverified Key Assumptions**: {decision.unverified_key_assumptions}"])
     if decision.price_target is not None:
         parts.extend(["", f"**Price Target**: {decision.price_target}"])
     if decision.time_horizon:

@@ -143,3 +143,18 @@ def get_market_sector_risk(
     while the target itself looks relatively cheap.
     """
     return route_to_vendor("get_market_sector_risk", ticker, curr_date, look_back_days, years)
+
+
+@tool
+def get_market_timing_context(
+    ticker: Annotated[str, "ticker symbol"],
+    curr_date: Annotated[str, "current date you are trading at, yyyy-mm-dd"],
+    look_back_days: Annotated[int, "market mood look-back window in days"] = 120,
+    years: Annotated[int, "index valuation history years"] = 5,
+) -> str:
+    """
+    Retrieve market sentiment/regime context and rating-calibration guidance.
+    This helps adjust bullish or bearish conclusions based on broad-market
+    valuation and mood, while still requiring company-level evidence.
+    """
+    return route_to_vendor("get_market_timing_context", ticker, curr_date, look_back_days, years)
