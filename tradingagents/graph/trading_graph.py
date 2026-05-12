@@ -34,9 +34,16 @@ from tradingagents.agents.utils.agent_utils import (
     get_balance_sheet,
     get_cashflow,
     get_income_statement,
+    get_commodity_context,
     get_news,
+    get_company_events,
     get_insider_transactions,
-    get_global_news
+    get_global_news,
+    get_market_sector_risk,
+    get_market_timing_context,
+    get_peer_comparison,
+    get_shipping_context,
+    get_valuation_percentiles,
 )
 
 from .checkpointer import checkpoint_step, clear_checkpoint, get_checkpointer, thread_id
@@ -174,6 +181,7 @@ class TradingAgentsGraph:
                     # News and insider information
                     get_news,
                     get_global_news,
+                    get_company_events,
                     get_insider_transactions,
                 ]
             ),
@@ -184,6 +192,12 @@ class TradingAgentsGraph:
                     get_balance_sheet,
                     get_cashflow,
                     get_income_statement,
+                    get_commodity_context,
+                    get_shipping_context,
+                    get_peer_comparison,
+                    get_valuation_percentiles,
+                    get_market_sector_risk,
+                    get_market_timing_context,
                 ]
             ),
         }

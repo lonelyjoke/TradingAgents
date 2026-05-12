@@ -13,8 +13,12 @@ from __future__ import annotations
 from tradingagents.agents.schemas import PortfolioDecision, render_pm_decision
 from tradingagents.agents.utils.agent_utils import (
     build_instrument_context,
+    get_buy_side_thesis_instruction,
     get_evidence_instruction,
+    get_focused_report_instruction,
     get_language_instruction,
+    get_research_gap_instruction,
+    get_supply_demand_fallback_instruction,
 )
 from tradingagents.agents.utils.structured import (
     bind_structured,
@@ -47,11 +51,34 @@ def create_portfolio_manager(llm):
 ---
 
 **Rating Scale** (use exactly one):
-- **Buy**: Strong conviction to enter or add to position
-- **Overweight**: Favorable outlook, gradually increase exposure
-- **Hold**: Maintain current position, no action needed
-- **Underweight**: Reduce exposure, take partial profits
-- **Sell**: Exit position or avoid entry
+- **Buy**: Clear core bet, strong evidence/proxy support, attractive probability/payoff, and identifiable catalysts
+- **Overweight**: Positive expected value but some evidence gaps remain; suitable for gradual or partial exposure
+- **Hold**: No clear tradable thesis, weak expectation gap, or ordinary probability/payoff
+- **Underweight**: Negative expected value or unattractive payoff, but not enough evidence for a full exit call
+- **Sell**: Core thesis deteriorated or downside probability/payoff is clearly unfavorable
+
+**Market-Regime Calibration Rules:**
+- The rating is not static. Calibrate it against broad-market mood, market valuation, sector risk, and the stock's own traits.
+- Normal bull market: you may be slightly more constructive for reasonably valued, high-quality stocks with catalysts, but do not chase crowded/high-valuation names.
+- Normal bear market: be more conservative unless the stock has strong balance sheet, low valuation, resilient cash flow, and clear catalysts.
+- Extreme pessimism: do not become mechanically bearish. For resilient companies or depressed value opportunities, consider staged-entry/watch-zone logic.
+- Extreme optimism: do not become mechanically bullish. For expensive or high-beta names, emphasize profit-taking and tighter risk control.
+- Cyclical, commodity, shipping, high-beta, and event-driven stocks require specific cycle evidence; market mood alone must not determine the rating.
+- If bullish/constructive, provide a profit-taking or trimming range. If bearish/cautious, provide an entry or re-entry watch range.
+
+**Research-Gap and Supply-Demand Rules:**
+- Missing core operating data is a research gap, not neutral evidence.
+- Do not let PE/PB and technical indicators replace missing product price, spread, inventory, freight-rate, capacity, policy, or order-book evidence.
+- If micro evidence is unavailable, use product-specific macro supply-demand evidence where possible: upstream cost, downstream demand, capacity, utilization, imports/exports, substitution, policy, seasonality, and storability.
+- Macro proxies can support an evidence-limited directional view, but cannot be treated as exact product-price or spread facts.
+- If too many thesis-critical assumptions are unverified, reduce conviction and state what data would upgrade or downgrade the rating.
+
+**Buy-Side Decision Rules:**
+- The final decision must identify the Core Bet. If there is no Core Bet, explain why the rating is Hold or Underweight.
+- Evaluate whether the relevant boom-bust expectation can plausibly realize through macro context, industry cycle, company exposure, and available high-frequency/proxy data.
+- Use expectation gap: a good company is not enough if the market already priced the thesis; an imperfect company can be interesting if the market underprices an improving driver.
+- Use probability/payoff instead of simple evidence counting. Conflicting evidence can still justify a direction when the payoff is asymmetric and the thesis is falsifiable.
+- Match position size to conviction. Evidence-limited Overweight should usually be a staged or starter position, not a full-conviction Buy.
 
 **Context:**
 - Research Manager's investment plan: **{research_plan}**
@@ -64,6 +91,10 @@ def create_portfolio_manager(llm):
 
 Be decisive and ground every conclusion in specific evidence from the analysts.
 {get_evidence_instruction()}
+{get_research_gap_instruction()}
+{get_supply_demand_fallback_instruction()}
+{get_buy_side_thesis_instruction()}
+{get_focused_report_instruction()}
 If an important investment claim depends on an unverified commodity price, product spread, inventory, policy detail, or exact percentage, list it under an "Unverified Key Assumptions" paragraph instead of treating it as fact.{get_language_instruction()}"""
 
         final_trade_decision = invoke_structured_or_freetext(

@@ -70,9 +70,47 @@ class ResearchPlan(BaseModel):
     recommendation: PortfolioRating = Field(
         description=(
             "The investment recommendation. Exactly one of Buy / Overweight / "
-            "Hold / Underweight / Sell. Reserve Hold for situations where the "
-            "evidence on both sides is genuinely balanced; otherwise commit to "
-            "the side with the stronger arguments."
+            "Hold / Underweight / Sell. Reserve Hold for situations where there "
+            "is no clear tradable thesis, the expectation gap is weak, or the "
+            "probability/payoff is not attractive; otherwise commit to a "
+            "directional stance with calibrated conviction."
+        ),
+    )
+    core_bet: str = Field(
+        description=(
+            "One or two sentences stating the core bet: what future business, "
+            "cycle, policy, product-price, demand, cost, or valuation variable "
+            "the investor is underwriting."
+        ),
+    )
+    expectation_gap: str = Field(
+        description=(
+            "Explain whether the market appears to have priced the thesis, or "
+            "where a plausible expectation gap remains. Mention evidence and caveats."
+        ),
+    )
+    probability_payoff: str = Field(
+        description=(
+            "Summarize probability and payoff: likelihood of the core bet, upside "
+            "if it works, downside if it fails, and why the rating follows."
+        ),
+    )
+    catalyst_path: str = Field(
+        description=(
+            "Near- to medium-term events or data releases that could make the "
+            "market reprice the thesis."
+        ),
+    )
+    falsification_signals: str = Field(
+        description=(
+            "Specific signals that would prove the thesis wrong or require a "
+            "rating downgrade."
+        ),
+    )
+    conviction_level: str = Field(
+        description=(
+            "Conviction level and why: High / Medium / Low, tied to evidence "
+            "quality, data gaps, and probability/payoff."
         ),
     )
     rationale: str = Field(
@@ -94,6 +132,18 @@ def render_research_plan(plan: ResearchPlan) -> str:
     """Render a ResearchPlan to markdown for storage and the trader's prompt context."""
     return "\n".join([
         f"**Recommendation**: {plan.recommendation.value}",
+        "",
+        f"**Core Bet**: {plan.core_bet}",
+        "",
+        f"**Expectation Gap**: {plan.expectation_gap}",
+        "",
+        f"**Probability And Payoff**: {plan.probability_payoff}",
+        "",
+        f"**Catalyst Path**: {plan.catalyst_path}",
+        "",
+        f"**Falsification Signals**: {plan.falsification_signals}",
+        "",
+        f"**Conviction Level**: {plan.conviction_level}",
         "",
         f"**Rationale**: {plan.rationale}",
         "",
@@ -211,9 +261,61 @@ class PortfolioDecision(BaseModel):
     )
     investment_thesis: str = Field(
         description=(
-            "Detailed reasoning anchored in specific evidence from the analysts' "
-            "debate. If prior lessons are referenced in the prompt context, "
-            "incorporate them; otherwise rely solely on the current analysis."
+            "Focused reasoning anchored in specific evidence from the analysts' "
+            "debate. Do not provide an exhaustive data dump; explain why the "
+            "rating follows from thesis, expectation gap, probability/payoff, "
+            "and key risks."
+        ),
+    )
+    core_bet: Optional[str] = Field(
+        default=None,
+        description=(
+            "The core investment bet: what future variable must move or be "
+            "recognized by the market for the thesis to work."
+        ),
+    )
+    boom_bust_expectation: Optional[str] = Field(
+        default=None,
+        description=(
+            "Assess whether the relevant industry/business cycle expectation is "
+            "likely to realize, using macro context, industry data, product or "
+            "route evidence, company exposure, and bounded inference."
+        ),
+    )
+    expectation_gap: Optional[str] = Field(
+        default=None,
+        description=(
+            "Explain the potential expectation gap: what the market may be "
+            "underpricing or overpricing, and what evidence suggests that."
+        ),
+    )
+    probability_payoff: Optional[str] = Field(
+        default=None,
+        description=(
+            "Summarize win probability, upside payoff, downside risk, and whether "
+            "the risk/reward justifies the rating."
+        ),
+    )
+    catalyst_path: Optional[str] = Field(
+        default=None,
+        description=(
+            "List concrete catalysts or data checkpoints that could cause "
+            "repricing, such as freight indexes, product prices, policy, earnings, "
+            "orders, inventory, or sector moves."
+        ),
+    )
+    falsification_signals: Optional[str] = Field(
+        default=None,
+        description=(
+            "Specific observable signals that would invalidate the thesis or "
+            "force a lower rating/position."
+        ),
+    )
+    conviction_and_position: Optional[str] = Field(
+        default=None,
+        description=(
+            "State conviction level and matching position posture: full position, "
+            "overweight, starter position, watch only, trim, or avoid."
         ),
     )
     market_regime_adjustment: Optional[str] = Field(
@@ -249,6 +351,24 @@ class PortfolioDecision(BaseModel):
             "or exact percentage claims that lack tool evidence."
         ),
     )
+    evidence_limited_research_gaps: Optional[str] = Field(
+        default=None,
+        description=(
+            "List thesis-critical data gaps and explain how they limit conviction. "
+            "Do not use this as a vague disclaimer: name the exact missing product, "
+            "spread, inventory, freight, capacity, policy, or demand data and what "
+            "would change the rating if verified."
+        ),
+    )
+    supply_demand_fallback_view: Optional[str] = Field(
+        default=None,
+        description=(
+            "When micro operating data is missing, summarize the product-specific "
+            "macro supply-demand fallback view: upstream cost drivers, downstream "
+            "demand, capacity/utilization, inventories or proxies, import/export "
+            "exposure, policy, seasonality, substitution, and evidence strength."
+        ),
+    )
     price_target: Optional[float] = Field(
         default=None,
         description="Optional target price in the instrument's quote currency.",
@@ -274,6 +394,20 @@ def render_pm_decision(decision: PortfolioDecision) -> str:
         "",
         f"**Investment Thesis**: {decision.investment_thesis}",
     ]
+    if decision.core_bet:
+        parts.extend(["", f"**Core Bet**: {decision.core_bet}"])
+    if decision.boom_bust_expectation:
+        parts.extend(["", f"**Boom-Bust Expectation**: {decision.boom_bust_expectation}"])
+    if decision.expectation_gap:
+        parts.extend(["", f"**Expectation Gap**: {decision.expectation_gap}"])
+    if decision.probability_payoff:
+        parts.extend(["", f"**Probability And Payoff**: {decision.probability_payoff}"])
+    if decision.catalyst_path:
+        parts.extend(["", f"**Catalyst Path**: {decision.catalyst_path}"])
+    if decision.falsification_signals:
+        parts.extend(["", f"**Falsification Signals**: {decision.falsification_signals}"])
+    if decision.conviction_and_position:
+        parts.extend(["", f"**Conviction And Position**: {decision.conviction_and_position}"])
     if decision.market_regime_adjustment:
         parts.extend(["", f"**Market Regime Adjustment**: {decision.market_regime_adjustment}"])
     if decision.profit_taking_range:
@@ -282,6 +416,10 @@ def render_pm_decision(decision: PortfolioDecision) -> str:
         parts.extend(["", f"**Entry / Re-entry Watch Range**: {decision.entry_watch_range}"])
     if decision.unverified_key_assumptions:
         parts.extend(["", f"**Unverified Key Assumptions**: {decision.unverified_key_assumptions}"])
+    if decision.evidence_limited_research_gaps:
+        parts.extend(["", f"**Evidence-Limited Research Gaps**: {decision.evidence_limited_research_gaps}"])
+    if decision.supply_demand_fallback_view:
+        parts.extend(["", f"**Supply-Demand Fallback View**: {decision.supply_demand_fallback_view}"])
     if decision.price_target is not None:
         parts.extend(["", f"**Price Target**: {decision.price_target}"])
     if decision.time_horizon:

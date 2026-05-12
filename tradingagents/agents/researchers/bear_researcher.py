@@ -1,6 +1,12 @@
 
 
-from tradingagents.agents.utils.agent_utils import get_evidence_instruction
+from tradingagents.agents.utils.agent_utils import (
+    get_buy_side_thesis_instruction,
+    get_evidence_instruction,
+    get_focused_report_instruction,
+    get_research_gap_instruction,
+    get_supply_demand_fallback_instruction,
+)
 
 
 def create_bear_researcher(llm):
@@ -19,7 +25,11 @@ def create_bear_researcher(llm):
 
 Key points to focus on:
 
-- Risks and Challenges: Highlight factors like market saturation, financial instability, or macroeconomic threats that could hinder the stock's performance.
+- Core Bear Bet: State what future variable would make the stock unattractive or mispriced on the downside.
+- Boom-Bust Risk: Explain why the relevant industry/product/freight/business-cycle expectation may fail or reverse.
+- Negative Expectation Gap: Explain what downside risk the market may be underpricing.
+- Probability/Payoff: Argue why downside probability and payoff justify caution.
+- Risks and Challenges: Highlight factors like market saturation, financial instability, macroeconomic threats, product-price/freight weakness, or policy risks that could hinder the stock's performance.
 - Competitive Weaknesses: Emphasize vulnerabilities such as weaker market positioning, declining innovation, or threats from competitors.
 - Negative Indicators: Use evidence from financial data, market trends, or recent adverse news to support your position.
 - Bull Counterpoints: Critically analyze the bull argument with specific data and sound reasoning, exposing weaknesses or over-optimistic assumptions.
@@ -35,6 +45,10 @@ Conversation history of the debate: {history}
 Last bull argument: {current_response}
 Use this information to deliver a compelling bear argument, refute the bull's claims, and engage in a dynamic debate that demonstrates the risks and weaknesses of investing in the stock.
 {get_evidence_instruction()}
+{get_research_gap_instruction()}
+{get_supply_demand_fallback_instruction()}
+{get_buy_side_thesis_instruction()}
+{get_focused_report_instruction()}
 """
 
         response = llm.invoke(prompt)

@@ -1,6 +1,12 @@
 
 
-from tradingagents.agents.utils.agent_utils import get_evidence_instruction
+from tradingagents.agents.utils.agent_utils import (
+    get_buy_side_thesis_instruction,
+    get_evidence_instruction,
+    get_focused_report_instruction,
+    get_research_gap_instruction,
+    get_supply_demand_fallback_instruction,
+)
 
 
 def create_neutral_debator(llm):
@@ -31,7 +37,7 @@ Latest World Affairs Report: {news_report}
 Company Fundamentals Report: {fundamentals_report}
 Here is the current conversation history: {history} Here is the last response from the aggressive analyst: {current_aggressive_response} Here is the last response from the conservative analyst: {current_conservative_response}. If there are no responses from the other viewpoints yet, present your own argument based on the available data.
 
-Engage actively by analyzing both sides critically, addressing weaknesses in the aggressive and conservative arguments to advocate for a more balanced approach. Challenge each of their points to illustrate why a moderate risk strategy might offer the best of both worlds, providing growth potential while safeguarding against extreme volatility. Focus on debating rather than simply presenting data, aiming to show that a balanced view can lead to the most reliable outcomes. {get_evidence_instruction()} Output conversationally as if you are speaking without any special formatting."""
+Engage actively by analyzing both sides critically, addressing weaknesses in the aggressive and conservative arguments to advocate for a more balanced approach. Challenge each of their points to illustrate why a moderate risk strategy might offer the best of both worlds, providing growth potential while safeguarding against extreme volatility. Focus on debating rather than simply presenting data, aiming to show that a balanced view can lead to the most reliable outcomes. {get_evidence_instruction()} {get_research_gap_instruction()} {get_supply_demand_fallback_instruction()} {get_buy_side_thesis_instruction()} {get_focused_report_instruction()} Output conversationally as if you are speaking without any special formatting."""
 
         response = llm.invoke(prompt)
 

@@ -2,9 +2,11 @@ from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from tradingagents.agents.utils.agent_utils import (
     build_instrument_context,
     get_balance_sheet,
+    get_buy_side_thesis_instruction,
     get_commodity_context,
     get_evidence_instruction,
     get_cashflow,
+    get_focused_report_instruction,
     get_fundamentals,
     get_income_statement,
     get_insider_transactions,
@@ -12,7 +14,9 @@ from tradingagents.agents.utils.agent_utils import (
     get_market_sector_risk,
     get_market_timing_context,
     get_peer_comparison,
+    get_research_gap_instruction,
     get_shipping_context,
+    get_supply_demand_fallback_instruction,
     get_valuation_percentiles,
 )
 from tradingagents.dataflows.config import get_config
@@ -37,10 +41,19 @@ def create_fundamentals_analyst(llm):
         ]
 
         system_message = (
-            "You are a researcher tasked with analyzing fundamental information over the past week about a company. Please write a comprehensive report of the company's fundamental information such as financial documents, company profile, basic company financials, and company financial history to gain a full view of the company's fundamental information to inform traders. Make sure to include as much detail as possible. Provide specific, actionable insights with supporting evidence to help traders make informed decisions."
-            + " Make sure to append a Markdown table at the end of the report to organize key points in the report, organized and easy to read."
-            + " Use the available tools: `get_fundamentals` for comprehensive company analysis, `get_balance_sheet`, `get_cashflow`, and `get_income_statement` for specific financial statements. For A-share tickers, also use `get_commodity_context` to inspect main product prices or futures proxies, `get_shipping_context` for shipping companies and freight-cycle exposure, `get_peer_comparison` to compare the target with same-industry peers, `get_valuation_percentiles` to judge historical valuation zones, `get_market_sector_risk` to assess broad-market and sector valuation risk, and `get_market_timing_context` to calibrate ratings against market mood. If another peer looks better than the target, explain why with metrics and caveats. If the sector looks high-risk while the target looks relatively low, explicitly discuss whether this is a mispricing opportunity or a company-specific warning. Do not mechanically upgrade in bull markets or downgrade in bear markets: explain how market mood interacts with the company's valuation, quality, beta, cyclicality, balance sheet, and catalysts."
+            "You are a buy-side fundamental researcher. Write a focused investment memo, not an exhaustive data dump. "
+            "Your job is to identify the tradable thesis, test whether the business-cycle or boom-bust expectation can plausibly realize, and explain what evidence supports or weakens the thesis. "
+            "Use `get_fundamentals`, `get_balance_sheet`, `get_cashflow`, and `get_income_statement` for core financial quality. "
+            "For A-share tickers, also use `get_commodity_context` for product/futures exposure, `get_shipping_context` for freight-cycle exposure, `get_peer_comparison` for same-industry alternatives, `get_valuation_percentiles` for historical valuation zones, `get_market_sector_risk` for broad/sector risk, and `get_market_timing_context` for market mood. "
+            "Prioritize: Core Bet, key supporting evidence, key negative evidence, expectation gap, probability/payoff, catalysts, falsification signals, and data gaps. "
+            "If another peer looks better than the target, explain why with metrics and caveats. If the sector looks high-risk while the target looks relatively low, discuss whether this is a mispricing opportunity or a company-specific warning. "
+            "Do not mechanically upgrade in bull markets or downgrade in bear markets: explain how market mood interacts with the company's valuation, quality, beta, cyclicality, balance sheet, and catalysts. "
+            "Append a compact Markdown table only for the most decision-relevant points."
             + get_evidence_instruction()
+            + get_research_gap_instruction()
+            + get_supply_demand_fallback_instruction()
+            + get_buy_side_thesis_instruction()
+            + get_focused_report_instruction()
             + get_language_instruction(),
         )
 
