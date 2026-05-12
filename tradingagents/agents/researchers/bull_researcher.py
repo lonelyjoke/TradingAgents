@@ -3,6 +3,7 @@
 from tradingagents.agents.utils.agent_utils import (
     get_buy_side_thesis_instruction,
     get_evidence_instruction,
+    get_fair_cycle_valuation_instruction,
     get_focused_report_instruction,
     get_research_gap_instruction,
     get_supply_demand_fallback_instruction,
@@ -44,6 +45,7 @@ Use this information to deliver a compelling bull argument, refute the bear's co
 {get_research_gap_instruction()}
 {get_supply_demand_fallback_instruction()}
 {get_buy_side_thesis_instruction()}
+{get_fair_cycle_valuation_instruction()}
 {get_focused_report_instruction()}
 """
 

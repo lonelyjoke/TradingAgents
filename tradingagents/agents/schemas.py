@@ -95,6 +95,13 @@ class ResearchPlan(BaseModel):
             "if it works, downside if it fails, and why the rating follows."
         ),
     )
+    cycle_valuation_assessment: str = Field(
+        description=(
+            "Classify the valuation x prosperity setup and explain the fair "
+            "calibration: low/high valuation versus low/high prosperity, why the "
+            "setup deserves the recommendation, and what would change it."
+        ),
+    )
     catalyst_path: str = Field(
         description=(
             "Near- to medium-term events or data releases that could make the "
@@ -138,6 +145,8 @@ def render_research_plan(plan: ResearchPlan) -> str:
         f"**Expectation Gap**: {plan.expectation_gap}",
         "",
         f"**Probability And Payoff**: {plan.probability_payoff}",
+        "",
+        f"**Cycle-Valuation Assessment**: {plan.cycle_valuation_assessment}",
         "",
         f"**Catalyst Path**: {plan.catalyst_path}",
         "",
@@ -296,6 +305,15 @@ class PortfolioDecision(BaseModel):
             "the risk/reward justifies the rating."
         ),
     )
+    cycle_valuation_assessment: Optional[str] = Field(
+        default=None,
+        description=(
+            "Classify the stock's valuation x prosperity setup and explain why "
+            "the final rating is fair: low valuation/low prosperity, high "
+            "valuation/high prosperity, low valuation/high prosperity, or high "
+            "valuation/low prosperity."
+        ),
+    )
     catalyst_path: Optional[str] = Field(
         default=None,
         description=(
@@ -402,6 +420,8 @@ def render_pm_decision(decision: PortfolioDecision) -> str:
         parts.extend(["", f"**Expectation Gap**: {decision.expectation_gap}"])
     if decision.probability_payoff:
         parts.extend(["", f"**Probability And Payoff**: {decision.probability_payoff}"])
+    if decision.cycle_valuation_assessment:
+        parts.extend(["", f"**Cycle-Valuation Assessment**: {decision.cycle_valuation_assessment}"])
     if decision.catalyst_path:
         parts.extend(["", f"**Catalyst Path**: {decision.catalyst_path}"])
     if decision.falsification_signals:

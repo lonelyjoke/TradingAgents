@@ -2,10 +2,13 @@ from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from tradingagents.agents.utils.agent_utils import (
     build_instrument_context,
     get_balance_sheet,
+    get_buy_side_accounting_radar_instruction,
     get_buy_side_thesis_instruction,
     get_commodity_context,
     get_evidence_instruction,
     get_cashflow,
+    get_derived_financial_metric_instruction,
+    get_fair_cycle_valuation_instruction,
     get_focused_report_instruction,
     get_fundamentals,
     get_income_statement,
@@ -44,6 +47,7 @@ def create_fundamentals_analyst(llm):
             "You are a buy-side fundamental researcher. Write a focused investment memo, not an exhaustive data dump. "
             "Your job is to identify the tradable thesis, test whether the business-cycle or boom-bust expectation can plausibly realize, and explain what evidence supports or weakens the thesis. "
             "Use `get_fundamentals`, `get_balance_sheet`, `get_cashflow`, and `get_income_statement` for core financial quality. "
+            "Pay special attention to accounting items that may preview future performance, including contract liabilities, advance receipts, contract assets, receivables, inventories, prepayments, payables, goodwill, net cash, and working capital. "
             "For A-share tickers, also use `get_commodity_context` for product/futures exposure, `get_shipping_context` for freight-cycle exposure, `get_peer_comparison` for same-industry alternatives, `get_valuation_percentiles` for historical valuation zones, `get_market_sector_risk` for broad/sector risk, and `get_market_timing_context` for market mood. "
             "Prioritize: Core Bet, key supporting evidence, key negative evidence, expectation gap, probability/payoff, catalysts, falsification signals, and data gaps. "
             "If another peer looks better than the target, explain why with metrics and caveats. If the sector looks high-risk while the target looks relatively low, discuss whether this is a mispricing opportunity or a company-specific warning. "
@@ -52,7 +56,10 @@ def create_fundamentals_analyst(llm):
             + get_evidence_instruction()
             + get_research_gap_instruction()
             + get_supply_demand_fallback_instruction()
+            + get_derived_financial_metric_instruction()
+            + get_buy_side_accounting_radar_instruction()
             + get_buy_side_thesis_instruction()
+            + get_fair_cycle_valuation_instruction()
             + get_focused_report_instruction()
             + get_language_instruction(),
         )

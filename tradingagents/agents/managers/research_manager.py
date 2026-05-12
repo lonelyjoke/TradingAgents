@@ -7,6 +7,7 @@ from tradingagents.agents.utils.agent_utils import (
     build_instrument_context,
     get_buy_side_thesis_instruction,
     get_evidence_instruction,
+    get_fair_cycle_valuation_instruction,
     get_focused_report_instruction,
     get_research_gap_instruction,
     get_supply_demand_fallback_instruction,
@@ -50,6 +51,14 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 - Prefer Underweight over Hold when the negative thesis has positive expected value but still needs confirmation.
 - For every direction, specify expectation gap, probability/payoff, catalyst path, falsification signals, and conviction level.
 
+**Fair Cycle-Valuation Calibration:**
+- Judge every stock through the same valuation x prosperity lens.
+- Low valuation/low prosperity is not automatically bearish; ask whether pessimism is priced and whether an inflection is plausible.
+- High prosperity/high valuation is not automatically bullish; ask whether growth durability and earnings upgrades can digest valuation.
+- Low valuation/high prosperity can be attractive, but test whether earnings are sustainable or temporarily inflated.
+- High valuation/low prosperity normally requires a clear future inflection, scarce growth, or other special evidence to avoid Underweight.
+- The rating should reflect expected value, not style preference.
+
 **Market-Regime Calibration:**
 - Start from company evidence, then adjust for market/sector mood.
 - In a normal bull market, a high-quality stock with reasonable valuation can receive a slightly more constructive rating, but an expensive/crowded stock should not be upgraded mechanically.
@@ -80,6 +89,7 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 {get_research_gap_instruction()}
 {get_supply_demand_fallback_instruction()}
 {get_buy_side_thesis_instruction()}
+{get_fair_cycle_valuation_instruction()}
 {get_focused_report_instruction()}
 If a bull or bear argument contains an exact product price, inventory figure, product spread, percentage change, or date-specific market claim that is not supported by the analyst reports, downgrade that argument and list it as an unverified key assumption."""
 

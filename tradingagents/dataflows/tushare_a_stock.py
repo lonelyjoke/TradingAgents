@@ -225,6 +225,228 @@ def _fetch_fina_indicator(symbol: str, curr_date: str | None) -> pd.DataFrame:
     return _sort_latest_reports(data, curr_date, "quarterly", limit=8)
 
 
+def _fetch_income_statement_data(
+    symbol: str, curr_date: str | None, freq: str = "quarterly", limit: int = 8
+) -> pd.DataFrame:
+    fields = [
+        "ts_code",
+        "ann_date",
+        "end_date",
+        "basic_eps",
+        "diluted_eps",
+        "total_revenue",
+        "revenue",
+        "total_cogs",
+        "operate_profit",
+        "total_profit",
+        "n_income",
+        "n_income_attr_p",
+        "sell_exp",
+        "admin_exp",
+        "fin_exp",
+        "rd_exp",
+        "ebit",
+        "ebitda",
+    ]
+    data = _query_financial_api("income", symbol, curr_date, fields)
+    return _sort_latest_reports(data, curr_date, freq, limit=limit)
+
+
+def _fetch_balance_sheet_data(
+    symbol: str, curr_date: str | None, freq: str = "quarterly", limit: int = 8
+) -> pd.DataFrame:
+    fields = [
+        "ts_code",
+        "ann_date",
+        "end_date",
+        "total_assets",
+        "total_liab",
+        "total_hldr_eqy_exc_min_int",
+        "total_hldr_eqy_inc_min_int",
+        "money_cap",
+        "notes_receiv",
+        "accounts_receiv",
+        "oth_receiv",
+        "prepayment",
+        "inventories",
+        "contract_assets",
+        "fix_assets",
+        "goodwill",
+        "st_borr",
+        "lt_borr",
+        "bond_payable",
+        "notes_payable",
+        "acct_payable",
+        "oth_payable",
+        "adv_receipts",
+        "contract_liab",
+        "total_cur_assets",
+        "total_cur_liab",
+    ]
+    data = _query_financial_api("balancesheet", symbol, curr_date, fields)
+    return _sort_latest_reports(data, curr_date, freq, limit=limit)
+
+
+def _fetch_cashflow_data(
+    symbol: str, curr_date: str | None, freq: str = "quarterly", limit: int = 8
+) -> pd.DataFrame:
+    fields = [
+        "ts_code",
+        "ann_date",
+        "end_date",
+        "net_profit",
+        "finan_exp",
+        "c_fr_sale_sg",
+        "recp_tax_rends",
+        "n_cashflow_act",
+        "st_cash_out_act",
+        "n_cashflow_inv_act",
+        "n_cashflow_fin_act",
+        "c_cash_equ_beg_period",
+        "c_cash_equ_end_period",
+    ]
+    data = _query_financial_api("cashflow", symbol, curr_date, fields)
+    return _sort_latest_reports(data, curr_date, freq, limit=limit)
+
+
+def _matching_report_row(data: pd.DataFrame | TushareDataError, end_date: str) -> pd.Series:
+    if isinstance(data, TushareDataError) or data is None or data.empty or "end_date" not in data.columns:
+        return pd.Series(dtype="object")
+    matches = data[data["end_date"].astype(str) == str(end_date)]
+    if matches.empty:
+        return pd.Series(dtype="object")
+    return matches.iloc[0]
+
+
+def _numeric_value(row: pd.Series, *columns: str) -> float | None:
+    for col in columns:
+        if col in row.index:
+            value = pd.to_numeric(pd.Series([row.get(col)]), errors="coerce").iloc[0]
+            if not pd.isna(value):
+                return float(value)
+    return None
+
+
+def _safe_ratio(numerator: float | None, denominator: float | None, multiplier: float = 100.0) -> float | None:
+    if numerator is None or denominator is None:
+        return None
+    if pd.isna(numerator) or pd.isna(denominator) or denominator == 0:
+        return None
+    return numerator / denominator * multiplier
+
+
+def _derive_financial_metrics(
+    income: pd.DataFrame | TushareDataError,
+    balance: pd.DataFrame | TushareDataError,
+    cashflow: pd.DataFrame | TushareDataError,
+    fina_indicator: pd.DataFrame | TushareDataError,
+) -> pd.DataFrame:
+    if isinstance(income, TushareDataError) or income is None or income.empty:
+        return pd.DataFrame()
+
+    rows = []
+    for _, inc in income.iterrows():
+        end_date = str(inc.get("end_date", ""))
+        bal = _matching_report_row(balance, end_date)
+        cf = _matching_report_row(cashflow, end_date)
+        ind = _matching_report_row(fina_indicator, end_date)
+
+        revenue = _numeric_value(inc, "revenue", "total_revenue")
+        total_cogs = _numeric_value(inc, "total_cogs")
+        operating_profit = _numeric_value(inc, "operate_profit")
+        net_profit_parent = _numeric_value(inc, "n_income_attr_p", "n_income")
+        net_profit_cf = _numeric_value(cf, "net_profit")
+        operating_cash_flow = _numeric_value(cf, "n_cashflow_act")
+        total_assets = _numeric_value(bal, "total_assets")
+        total_liab = _numeric_value(bal, "total_liab")
+        equity = _numeric_value(bal, "total_hldr_eqy_inc_min_int", "total_hldr_eqy_exc_min_int")
+        receivables = sum(
+            value or 0
+            for value in [
+                _numeric_value(bal, "notes_receiv"),
+                _numeric_value(bal, "accounts_receiv"),
+                _numeric_value(bal, "oth_receiv"),
+            ]
+        )
+        inventories = _numeric_value(bal, "inventories")
+        contract_assets = _numeric_value(bal, "contract_assets")
+        contract_like_liab = sum(
+            value or 0
+            for value in [
+                _numeric_value(bal, "contract_liab"),
+                _numeric_value(bal, "adv_receipts"),
+            ]
+        )
+        interest_bearing_debt = sum(
+            value or 0
+            for value in [
+                _numeric_value(bal, "st_borr"),
+                _numeric_value(bal, "lt_borr"),
+                _numeric_value(bal, "bond_payable"),
+            ]
+        )
+        payables = sum(
+            value or 0
+            for value in [
+                _numeric_value(bal, "notes_payable"),
+                _numeric_value(bal, "acct_payable"),
+                _numeric_value(bal, "oth_payable"),
+            ]
+        )
+        money_cap = _numeric_value(bal, "money_cap")
+        total_cur_assets = _numeric_value(bal, "total_cur_assets")
+        total_cur_liab = _numeric_value(bal, "total_cur_liab")
+
+        rows.append(
+            {
+                "end_date": end_date,
+                "ann_date": inc.get("ann_date"),
+                "revenue_base": revenue,
+                "reported_gross_margin": _numeric_value(ind, "grossprofit_margin"),
+                "derived_gross_margin": _safe_ratio(
+                    None if revenue is None or total_cogs is None else revenue - total_cogs,
+                    revenue,
+                ),
+                "derived_operating_margin": _safe_ratio(operating_profit, revenue),
+                "derived_net_margin": _safe_ratio(net_profit_parent, revenue),
+                "selling_expense_ratio": _safe_ratio(_numeric_value(inc, "sell_exp"), revenue),
+                "admin_expense_ratio": _safe_ratio(_numeric_value(inc, "admin_exp"), revenue),
+                "rd_expense_ratio": _safe_ratio(_numeric_value(inc, "rd_exp"), revenue),
+                "finance_expense_ratio": _safe_ratio(_numeric_value(inc, "fin_exp"), revenue),
+                "ocf_to_net_profit": _safe_ratio(
+                    operating_cash_flow,
+                    net_profit_parent if net_profit_parent is not None else net_profit_cf,
+                    multiplier=1.0,
+                ),
+                "ocf_to_revenue": _safe_ratio(operating_cash_flow, revenue),
+                "debt_to_assets_derived": _safe_ratio(total_liab, total_assets),
+                "cash_to_assets": _safe_ratio(money_cap, total_assets),
+                "net_cash": None if money_cap is None else money_cap - interest_bearing_debt,
+                "working_capital": (
+                    None if total_cur_assets is None or total_cur_liab is None else total_cur_assets - total_cur_liab
+                ),
+                "contract_like_liab": contract_like_liab,
+                "contract_like_liab_to_revenue": _safe_ratio(contract_like_liab, revenue),
+                "receivables_to_revenue": _safe_ratio(receivables, revenue),
+                "inventory_to_revenue": _safe_ratio(inventories, revenue),
+                "contract_assets_to_revenue": _safe_ratio(contract_assets, revenue),
+                "prepayment_to_revenue": _safe_ratio(_numeric_value(bal, "prepayment"), revenue),
+                "payables_to_cogs": _safe_ratio(payables, total_cogs),
+                "goodwill_to_assets": _safe_ratio(_numeric_value(bal, "goodwill"), total_assets),
+                "equity_multiplier": _safe_ratio(total_assets, equity, multiplier=1.0),
+            }
+        )
+
+    derived = pd.DataFrame(rows)
+    for col in ["contract_like_liab", "receivables_to_revenue", "inventory_to_revenue"]:
+        if col in derived.columns:
+            prev = pd.to_numeric(derived[col].shift(-1), errors="coerce")
+            curr = pd.to_numeric(derived[col], errors="coerce")
+            derived[f"{col}_seq_change"] = (curr / prev - 1) * 100
+
+    return derived
+
+
 def _fetch_index_daily(ts_code: str, curr_date: str, lookback_days: int = 45) -> pd.DataFrame:
     pro = _get_pro_client()
     end_dt = datetime.strptime(curr_date, "%Y-%m-%d")
@@ -471,6 +693,12 @@ def get_fundamentals(
     fina_indicator = _safe_query(
         "fina_indicator", _fetch_fina_indicator, symbol, curr_date
     )
+    income_data = _safe_query("income", _fetch_income_statement_data, symbol, curr_date)
+    balance_data = _safe_query("balancesheet", _fetch_balance_sheet_data, symbol, curr_date)
+    cashflow_data = _safe_query("cashflow", _fetch_cashflow_data, symbol, curr_date)
+    derived_metrics = _derive_financial_metrics(
+        income_data, balance_data, cashflow_data, fina_indicator
+    )
 
     if basic is None and daily_basic is None:
         return f"No Tushare fundamentals data found for {symbol} as of {curr_date}."
@@ -566,6 +794,58 @@ def get_fundamentals(
         ]
         lines.append(_markdown_table(_select_existing(fina_indicator, trend_cols)))
 
+    if not derived_metrics.empty:
+        latest_derived = derived_metrics.iloc[0]
+        derived_cols = [
+            "end_date",
+            "revenue_base",
+            "reported_gross_margin",
+            "derived_gross_margin",
+            "derived_operating_margin",
+            "derived_net_margin",
+            "selling_expense_ratio",
+            "admin_expense_ratio",
+            "rd_expense_ratio",
+            "finance_expense_ratio",
+            "ocf_to_net_profit",
+            "debt_to_assets_derived",
+            "cash_to_assets",
+            "net_cash",
+            "working_capital",
+            "contract_like_liab",
+            "contract_like_liab_to_revenue",
+            "contract_like_liab_seq_change",
+            "receivables_to_revenue",
+            "receivables_to_revenue_seq_change",
+            "inventory_to_revenue",
+            "inventory_to_revenue_seq_change",
+            "prepayment_to_revenue",
+            "payables_to_cogs",
+            "goodwill_to_assets",
+        ]
+        lines.extend(
+            [
+                "",
+                "## Derived Financial Metrics",
+                "These ratios are calculated from Tushare income statement, balance sheet, and cash flow fields when ready-made financial indicators are missing. Treat interim-report income and cash-flow items as period-to-date unless separately adjusted.",
+                "Forward-looking accounting signals use contract liabilities/advance receipts, receivables, inventories, prepayments, payables, goodwill, net cash, and working capital to infer possible order visibility, collection pressure, stocking risk, upstream locking, bargaining power, impairment risk, and balance-sheet resilience.",
+                "",
+                "### Latest Derived Snapshot",
+                f"- Derived Gross Margin: {_format_value(latest_derived.get('derived_gross_margin'), '%')}",
+                f"- Derived Operating Margin: {_format_value(latest_derived.get('derived_operating_margin'), '%')}",
+                f"- Derived Net Margin: {_format_value(latest_derived.get('derived_net_margin'), '%')}",
+                f"- Operating Cash Flow / Net Profit: {_format_value(latest_derived.get('ocf_to_net_profit'))}",
+                f"- Derived Debt To Assets: {_format_value(latest_derived.get('debt_to_assets_derived'), '%')}",
+                f"- Contract Liabilities + Advance Receipts / Revenue: {_format_value(latest_derived.get('contract_like_liab_to_revenue'), '%')}",
+                f"- Receivables / Revenue: {_format_value(latest_derived.get('receivables_to_revenue'), '%')}",
+                f"- Inventory / Revenue: {_format_value(latest_derived.get('inventory_to_revenue'), '%')}",
+                f"- Payables / COGS: {_format_value(latest_derived.get('payables_to_cogs'), '%')}",
+                "",
+                "### Recent Derived Metric Trend",
+                _markdown_table(_select_existing(derived_metrics, derived_cols)),
+            ]
+        )
+
     lines.extend(["", _market_context(curr_date)])
 
     return "\n".join(lines)
@@ -582,17 +862,26 @@ def get_balance_sheet(ticker: str, freq: str = "quarterly", curr_date: str = Non
         "total_hldr_eqy_exc_min_int",
         "total_hldr_eqy_inc_min_int",
         "money_cap",
+        "notes_receiv",
         "accounts_receiv",
+        "oth_receiv",
+        "prepayment",
         "inventories",
+        "contract_assets",
         "fix_assets",
         "goodwill",
         "st_borr",
         "lt_borr",
         "bond_payable",
+        "notes_payable",
         "acct_payable",
+        "oth_payable",
+        "adv_receipts",
+        "contract_liab",
+        "total_cur_assets",
+        "total_cur_liab",
     ]
-    data = _query_financial_api("balancesheet", symbol, curr_date, fields)
-    data = _sort_latest_reports(data, curr_date, freq, limit=8)
+    data = _fetch_balance_sheet_data(symbol, curr_date, freq=freq, limit=8)
     value_cols = [col for col in fields if col not in {"ts_code", "ann_date", "end_date"}]
     return _format_dataframe_report(f"Tushare balance sheet for {symbol}", data, value_cols)
 
@@ -614,8 +903,7 @@ def get_cashflow(ticker: str, freq: str = "quarterly", curr_date: str = None) ->
         "c_cash_equ_beg_period",
         "c_cash_equ_end_period",
     ]
-    data = _query_financial_api("cashflow", symbol, curr_date, fields)
-    data = _sort_latest_reports(data, curr_date, freq, limit=8)
+    data = _fetch_cashflow_data(symbol, curr_date, freq=freq, limit=8)
     value_cols = [col for col in fields if col not in {"ts_code", "ann_date", "end_date"}]
     return _format_dataframe_report(f"Tushare cash flow statement for {symbol}", data, value_cols)
 
@@ -642,7 +930,6 @@ def get_income_statement(ticker: str, freq: str = "quarterly", curr_date: str = 
         "ebit",
         "ebitda",
     ]
-    data = _query_financial_api("income", symbol, curr_date, fields)
-    data = _sort_latest_reports(data, curr_date, freq, limit=8)
+    data = _fetch_income_statement_data(symbol, curr_date, freq=freq, limit=8)
     value_cols = [col for col in fields if col not in {"ts_code", "ann_date", "end_date"}]
     return _format_dataframe_report(f"Tushare income statement for {symbol}", data, value_cols)

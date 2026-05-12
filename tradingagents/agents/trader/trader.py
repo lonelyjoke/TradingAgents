@@ -11,6 +11,7 @@ from tradingagents.agents.utils.agent_utils import (
     build_instrument_context,
     get_buy_side_thesis_instruction,
     get_evidence_instruction,
+    get_fair_cycle_valuation_instruction,
     get_focused_report_instruction,
     get_research_gap_instruction,
     get_supply_demand_fallback_instruction,
@@ -44,6 +45,7 @@ def create_trader(llm):
                     f"{get_research_gap_instruction()}"
                     f"{get_supply_demand_fallback_instruction()}"
                     f"{get_buy_side_thesis_instruction()}"
+                    f"{get_fair_cycle_valuation_instruction()}"
                     f"{get_focused_report_instruction()}"
                 ),
             },

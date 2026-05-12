@@ -15,6 +15,7 @@ from tradingagents.agents.utils.agent_utils import (
     build_instrument_context,
     get_buy_side_thesis_instruction,
     get_evidence_instruction,
+    get_fair_cycle_valuation_instruction,
     get_focused_report_instruction,
     get_language_instruction,
     get_research_gap_instruction,
@@ -80,6 +81,13 @@ def create_portfolio_manager(llm):
 - Use probability/payoff instead of simple evidence counting. Conflicting evidence can still justify a direction when the payoff is asymmetric and the thesis is falsifiable.
 - Match position size to conviction. Evidence-limited Overweight should usually be a staged or starter position, not a full-conviction Buy.
 
+**Fair Cycle-Valuation Calibration:**
+- Apply the same fairness standard to low-valuation laggards and high-prosperity winners.
+- Low valuation/low prosperity: do not default to Underweight. Test pricing of pessimism, balance-sheet survival, cyclical versus structural decline, inflection evidence, and upside payoff.
+- High prosperity/high valuation: do not default to Buy. Test sustainability, crowding, valuation digestion, and drawdown if prosperity peaks.
+- Low valuation/high prosperity: possible Buy, but check one-off earnings, accounting quality, and cycle peak risk.
+- High valuation/low prosperity: normally cautious, unless there is credible future inflection or scarcity value.
+
 **Context:**
 - Research Manager's investment plan: **{research_plan}**
 - Trader's transaction proposal: **{trader_plan}**
@@ -94,6 +102,7 @@ Be decisive and ground every conclusion in specific evidence from the analysts.
 {get_research_gap_instruction()}
 {get_supply_demand_fallback_instruction()}
 {get_buy_side_thesis_instruction()}
+{get_fair_cycle_valuation_instruction()}
 {get_focused_report_instruction()}
 If an important investment claim depends on an unverified commodity price, product spread, inventory, policy detail, or exact percentage, list it under an "Unverified Key Assumptions" paragraph instead of treating it as fact.{get_language_instruction()}"""
 
