@@ -1,5 +1,6 @@
 from typing import Optional
 import datetime
+import re
 import typer
 from pathlib import Path
 from functools import wraps
@@ -38,6 +39,49 @@ app = typer.Typer(
     help="TradingAgents CLI: Multi-Agents LLM Financial Trading Framework",
     add_completion=True,  # Enable shell completion
 )
+
+
+def sanitize_filename_part(value: str, fallback: str = "unknown") -> str:
+    """Return a Windows/GitHub-friendly path segment."""
+    text = str(value or "").strip()
+    text = re.sub(r'[<>:"/\\|?*\x00-\x1f]', "_", text)
+    text = re.sub(r"\s+", "", text)
+    text = text.strip(" ._")
+    return text or fallback
+
+
+def extract_company_name_for_report(final_state: dict, ticker: str) -> str | None:
+    """Extract a readable company name from completed report text when available."""
+    report_candidates = [
+        final_state.get("fundamentals_report", ""),
+        final_state.get("final_trade_decision", ""),
+        final_state.get("trader_investment_plan", ""),
+    ]
+    patterns = [
+        r"(?im)^\s*-\s*Name:\s*([^\n\r|]+)",
+        r"(?im)^\s*-\s*Company:\s*([^\n\r|]+)",
+        r"(?im)标的[:：]\s*" + re.escape(ticker) + r"\s+([^\s，,。|]+)",
+    ]
+    for text in report_candidates:
+        for pattern in patterns:
+            match = re.search(pattern, text or "")
+            if match:
+                name = match.group(1).strip()
+                if name and name.upper() not in {"N/A", "UNKNOWN"}:
+                    return name
+    return None
+
+
+def build_default_report_path(ticker: str, final_state: dict, timestamp: str) -> Path:
+    """Build the default report directory name, keeping ticker first for validators."""
+    clean_ticker = sanitize_filename_part(ticker.upper(), "ticker")
+    company_name = extract_company_name_for_report(final_state, ticker)
+    if company_name:
+        clean_name = sanitize_filename_part(company_name)
+        folder_name = f"{clean_ticker}_{clean_name}_{timestamp}"
+    else:
+        folder_name = f"{clean_ticker}_{timestamp}"
+    return Path.cwd() / "reports" / folder_name
 
 
 # Create a deque to store recent messages with a maximum length
@@ -1178,7 +1222,9 @@ def run_analysis(checkpoint: bool = False):
     save_choice = typer.prompt("Save report?", default="Y").strip().upper()
     if save_choice in ("Y", "YES", ""):
         timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-        default_path = Path.cwd() / "reports" / f"{selections['ticker']}_{timestamp}"
+        default_path = build_default_report_path(
+            selections["ticker"], final_state, timestamp
+        )
         save_path_str = typer.prompt(
             "Save path (press Enter for default)",
             default=str(default_path)
