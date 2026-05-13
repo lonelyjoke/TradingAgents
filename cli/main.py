@@ -54,12 +54,15 @@ def extract_company_name_for_report(final_state: dict, ticker: str) -> str | Non
     """Extract a readable company name from completed report text when available."""
     report_candidates = [
         final_state.get("fundamentals_report", ""),
+        final_state.get("market_report", ""),
         final_state.get("final_trade_decision", ""),
         final_state.get("trader_investment_plan", ""),
     ]
     patterns = [
         r"(?im)^\s*-\s*Name:\s*([^\n\r|]+)",
         r"(?im)^\s*-\s*Company:\s*([^\n\r|]+)",
+        r"(?im)^\s*#\s*([^#\n\r（(]+?)\s*[（(]\s*" + re.escape(ticker) + r"\s*[）)]",
+        r"(?im)^\s*#\s*" + re.escape(ticker) + r"\s*[（(]\s*([^#\n\r）)]+?)\s*[）)]",
         r"(?im)标的[:：]\s*" + re.escape(ticker) + r"\s+([^\s，,。|]+)",
     ]
     for text in report_candidates:
