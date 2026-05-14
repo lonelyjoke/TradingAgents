@@ -88,6 +88,14 @@ def create_portfolio_manager(llm):
 - Low valuation/high prosperity: possible Buy, but check one-off earnings, accounting quality, and cycle peak risk.
 - High valuation/low prosperity: normally cautious, unless there is credible future inflection or scarcity value.
 
+**Public-Excerpt Writing Rules:**
+- Write the Portfolio Manager Decision as a self-contained excerpt that can be shared publicly without the rest of the report.
+- Begin with a short Company Snapshot: explain what the company does, its main business/profit drivers, and why those drivers matter to this thesis. Keep this introduction brief and practical, not encyclopedic.
+- Then give the rating and a one-line thesis before the executive summary.
+- Target roughly 3,000 Chinese characters when the output language is Chinese, or a similar concise long-form excerpt in other languages. It should be complete enough to preserve the report's main views and analytical path, but not padded.
+- Preserve the core logic from the full report: company context, final rating, core bet, expectation gap, probability/payoff, cycle/valuation setup, catalysts, falsification signals, position posture, risk controls, and evidence gaps.
+- Use a public-facing research-note tone: clear, readable, and investment-focused. Do not use marketing language, clickbait, or unsupported claims.
+
 **Context:**
 - Research Manager's investment plan: **{research_plan}**
 - Trader's transaction proposal: **{trader_plan}**

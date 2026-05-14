@@ -90,6 +90,8 @@ def _structured_pm_llm(captured: dict, decision: PortfolioDecision | None = None
     if decision is None:
         decision = PortfolioDecision(
             rating=PortfolioRating.HOLD,
+            company_snapshot="NVDA sells accelerated-computing platforms for data-center workloads.",
+            one_line_thesis="The setup is balanced because growth and valuation risks offset each other.",
             executive_summary="Hold the position; await catalyst.",
             investment_thesis="Balanced view; neither side carried the debate.",
         )
@@ -614,6 +616,11 @@ class TestPortfolioManagerInjection:
         captured = {}
         decision = PortfolioDecision(
             rating=PortfolioRating.OVERWEIGHT,
+            company_snapshot=(
+                "NVDA supplies accelerated-computing chips and systems; "
+                "data-center demand is the key profit driver."
+            ),
+            one_line_thesis="AI capex remains the investable driver, with valuation as the main caveat.",
             executive_summary="Build position gradually over the next two weeks.",
             investment_thesis="AI capex cycle remains intact; institutional flows constructive.",
             price_target=215.0,
@@ -623,11 +630,23 @@ class TestPortfolioManagerInjection:
         pm_node = create_portfolio_manager(llm)
         result = pm_node(_make_pm_state())
         md = result["final_trade_decision"]
+        assert md.startswith("**Company Snapshot**: NVDA supplies")
         assert "**Rating**: Overweight" in md
+        assert "**One-Line Thesis**: AI capex remains" in md
         assert "**Executive Summary**: Build position gradually" in md
         assert "**Investment Thesis**: AI capex cycle" in md
         assert "**Price Target**: 215.0" in md
         assert "**Time Horizon**: 3-6 months" in md
+
+    def test_pm_prompt_frames_decision_as_public_excerpt(self):
+        captured = {}
+        llm = _structured_pm_llm(captured)
+        pm_node = create_portfolio_manager(llm)
+        pm_node(_make_pm_state())
+        prompt = captured["prompt"]
+        assert "self-contained excerpt" in prompt
+        assert "short Company Snapshot" in prompt
+        assert "roughly 3,000 Chinese characters" in prompt
 
     def test_pm_falls_back_to_freetext_when_structured_unavailable(self):
         """If a provider does not support with_structured_output, the agent

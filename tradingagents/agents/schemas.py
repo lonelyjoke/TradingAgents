@@ -262,16 +262,33 @@ class PortfolioDecision(BaseModel):
             "Underweight / Sell, picked based on the analysts' debate."
         ),
     )
+    company_snapshot: str = Field(
+        description=(
+            "A short, self-contained company introduction for public sharing. "
+            "Identify what the company does, its main business or profit drivers, "
+            "and why those drivers matter to this investment case. Keep it clear "
+            "and concise rather than encyclopedic."
+        ),
+    )
+    one_line_thesis: str = Field(
+        description=(
+            "One sentence that states the investable view in plain language: "
+            "what the market may be missing, why the rating follows, and the "
+            "main caveat if needed."
+        ),
+    )
     executive_summary: str = Field(
         description=(
             "A concise action plan covering entry strategy, position sizing, "
-            "key risk levels, and time horizon. Two to four sentences."
+            "key risk levels, and time horizon. Write for readers who may only "
+            "see this Portfolio Manager Decision excerpt."
         ),
     )
     investment_thesis: str = Field(
         description=(
             "Focused reasoning anchored in specific evidence from the analysts' "
-            "debate. Do not provide an exhaustive data dump; explain why the "
+            "debate. Preserve the main analytical path from the full report "
+            "without turning it into an exhaustive data dump; explain why the "
             "rating follows from thesis, expectation gap, probability/payoff, "
             "and key risks."
         ),
@@ -406,7 +423,11 @@ def render_pm_decision(decision: PortfolioDecision) -> str:
     parsers and the report writers already handle.
     """
     parts = [
+        f"**Company Snapshot**: {decision.company_snapshot}",
+        "",
         f"**Rating**: {decision.rating.value}",
+        "",
+        f"**One-Line Thesis**: {decision.one_line_thesis}",
         "",
         f"**Executive Summary**: {decision.executive_summary}",
         "",
