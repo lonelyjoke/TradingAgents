@@ -92,7 +92,12 @@ def _structured_pm_llm(captured: dict, decision: PortfolioDecision | None = None
             rating=PortfolioRating.HOLD,
             company_snapshot="NVDA sells accelerated-computing platforms for data-center workloads.",
             one_line_thesis="The setup is balanced because growth and valuation risks offset each other.",
+            business_driver_map="Key drivers are data-center demand, gross margin, customer concentration, and capex cycle.",
+            bull_bear_debate="Bulls cite AI demand durability; bears cite customer concentration and valuation.",
+            debate_verdict="The evidence is balanced enough to wait for the next catalyst.",
+            investment_logic_chain="If AI capex holds, revenue and margins stay resilient; if not, valuation derates.",
             executive_summary="Hold the position; await catalyst.",
+            verification_and_falsification="Verify hyperscaler orders and margins; downgrade on capex cuts or margin compression.",
             investment_thesis="Balanced view; neither side carried the debate.",
         )
     structured = MagicMock()
@@ -159,6 +164,18 @@ class TestTradingMemoryLogCore:
         log.store_decision("NVDA", "2026-01-10", DECISION_BUY)
         text = (tmp_path / "trading_memory.md").read_text(encoding="utf-8")
         assert "[2026-01-10 | NVDA | Buy | pending]" in text
+
+    def test_recent_decision_context_includes_latest_pending_same_ticker(self, tmp_path):
+        log = make_log(tmp_path)
+        _seed_completed(tmp_path, "NVDA", "2026-01-05", DECISION_BUY, "Good call.")
+        log.store_decision("NVDA", "2026-01-10", DECISION_OVERWEIGHT)
+        log.store_decision("AAPL", "2026-01-11", DECISION_SELL)
+
+        context = log.get_recent_decision_context("NVDA")
+
+        assert "[2026-01-10 | NVDA | Overweight | pending outcome]" in context
+        assert DECISION_OVERWEIGHT in context
+        assert "Good call." not in context
 
     # Rating parsing
 
@@ -588,6 +605,7 @@ class TestPortfolioManagerInjection:
         propagator = Propagator()
         state = propagator.create_initial_state("NVDA", "2026-01-10")
         assert state["past_context"] == ""
+        assert state["recent_decision_context"] == ""
 
     # PM prompt
 
@@ -609,6 +627,20 @@ class TestPortfolioManagerInjection:
         pm_node(state)
         assert "Lessons from prior decisions" not in captured["prompt"]
 
+    def test_pm_prompt_includes_recent_same_ticker_decision(self):
+        captured = {}
+        llm = _structured_pm_llm(captured)
+        pm_node = create_portfolio_manager(llm)
+        state = _make_pm_state()
+        state["recent_decision_context"] = (
+            "[2026-01-09 | NVDA | Overweight | pending outcome]\n\n"
+            "DECISION:\nRating: Overweight\nPrior view."
+        )
+        pm_node(state)
+        assert "Most recent same-ticker decision" in captured["prompt"]
+        assert "pending outcome" in captured["prompt"]
+        assert "Prior view." in captured["prompt"]
+
     def test_pm_returns_rendered_markdown_with_rating(self):
         """The structured PortfolioDecision is rendered to markdown that
         downstream consumers (memory log, signal processor, CLI display)
@@ -621,10 +653,33 @@ class TestPortfolioManagerInjection:
                 "data-center demand is the key profit driver."
             ),
             one_line_thesis="AI capex remains the investable driver, with valuation as the main caveat.",
+            business_driver_map=(
+                "Key drivers are data-center demand, product cycle execution, "
+                "gross margin durability, and customer concentration risk."
+            ),
+            bull_bear_debate=(
+                "Bulls emphasize data-center growth and AI capex; bears emphasize "
+                "valuation and customer concentration."
+            ),
+            debate_verdict="The bull case carries, but sizing should reflect valuation risk.",
+            investment_logic_chain=(
+                "If AI capex and product execution remain strong, revenue and "
+                "margins support estimate revisions, which can offset valuation risk."
+            ),
             executive_summary="Build position gradually over the next two weeks.",
+            verification_and_falsification=(
+                "Verify data-center order momentum and margins; cut exposure if "
+                "hyperscaler capex slows or gross margin rolls over."
+            ),
             investment_thesis="AI capex cycle remains intact; institutional flows constructive.",
             price_target=215.0,
             time_horizon="3-6 months",
+            prior_rating="Hold",
+            new_evidence_since_prior="Hyperscaler capex guidance improved.",
+            unchanged_core_facts="Valuation remains elevated.",
+            rating_change_audit="Upgrade is justified by stronger demand evidence, not price action alone.",
+            material_catalysts="Business-realization: next-gen GPU ramp with confirmed orders.",
+            rejected_themes="Rejected: unsupported humanoid-robot narrative.",
         )
         llm = _structured_pm_llm(captured, decision)
         pm_node = create_portfolio_manager(llm)
@@ -633,10 +688,21 @@ class TestPortfolioManagerInjection:
         assert md.startswith("**Company Snapshot**: NVDA supplies")
         assert "**Rating**: Overweight" in md
         assert "**One-Line Thesis**: AI capex remains" in md
+        assert "**Business Driver Map**: Key drivers are data-center" in md
+        assert "**Bull-Bear Debate**: Bulls emphasize" in md
+        assert "**Debate Verdict**: The bull case carries" in md
+        assert "**Investment Logic Chain**: If AI capex" in md
         assert "**Executive Summary**: Build position gradually" in md
+        assert "**Verification & Falsification**: Verify data-center" in md
         assert "**Investment Thesis**: AI capex cycle" in md
         assert "**Price Target**: 215.0" in md
         assert "**Time Horizon**: 3-6 months" in md
+        assert "**Prior Rating**: Hold" in md
+        assert "**New Evidence Since Prior**: Hyperscaler capex guidance improved." in md
+        assert "**Unchanged Core Facts**: Valuation remains elevated." in md
+        assert "**Rating Change Audit**: Upgrade is justified" in md
+        assert "**Material Catalysts**: Business-realization" in md
+        assert "**Rejected Themes**: Rejected: unsupported humanoid-robot narrative." in md
 
     def test_pm_prompt_frames_decision_as_public_excerpt(self):
         captured = {}
@@ -646,7 +712,14 @@ class TestPortfolioManagerInjection:
         prompt = captured["prompt"]
         assert "self-contained excerpt" in prompt
         assert "short Company Snapshot" in prompt
+        assert "Business Driver Map" in prompt
+        assert "compact Bull-Bear Debate" in prompt
+        assert "Debate Verdict" in prompt
+        assert "Investment Logic Chain" in prompt
+        assert "Verification & Falsification" in prompt
         assert "roughly 3,000 Chinese characters" in prompt
+        assert "Decision-Continuity Rules" in prompt
+        assert "Material-catalyst discipline" in prompt
 
     def test_pm_falls_back_to_freetext_when_structured_unavailable(self):
         """If a provider does not support with_structured_output, the agent

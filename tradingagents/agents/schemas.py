@@ -133,11 +133,140 @@ class ResearchPlan(BaseModel):
             "including position sizing guidance consistent with the rating."
         ),
     )
+    prior_rating: Optional[str] = Field(
+        default=None,
+        description=(
+            "If a recent same-ticker decision exists, state its rating exactly; "
+            "otherwise omit."
+        ),
+    )
+    new_evidence_since_prior: Optional[str] = Field(
+        default=None,
+        description=(
+            "List the decisive new evidence since the most recent same-ticker "
+            "decision. If there is no decisive new evidence, say so explicitly."
+        ),
+    )
+    unchanged_core_facts: Optional[str] = Field(
+        default=None,
+        description=(
+            "Summarize the thesis-critical facts that remain unchanged versus the "
+            "most recent same-ticker decision."
+        ),
+    )
+    rating_change_audit: Optional[str] = Field(
+        default=None,
+        description=(
+            "Explain why the recommendation was preserved or changed relative to "
+            "the prior same-ticker decision. A price move alone is not enough for "
+            "a directional reversal."
+        ),
+    )
+    material_catalysts: Optional[str] = Field(
+        default=None,
+        description=(
+            "List only verified material catalysts that pass the four-gate test: "
+            "verifiable evidence, economic transmission, timetable, and materiality. "
+            "Classify each as asset-revaluation or business-realization."
+        ),
+    )
+    thematic_valuation_bridge: Optional[str] = Field(
+        default=None,
+        description=(
+            "Explain how each verified theme does or does not enter valuation. "
+            "For asset-revaluation themes, discuss ownership value, listed-company "
+            "materiality, and whether SOTP/NAV treatment is justified. For "
+            "business-realization themes, state whether disclosed monetization "
+            "evidence is strong enough for scenario or core valuation."
+        ),
+    )
+    rejected_themes: Optional[str] = Field(
+        default=None,
+        description=(
+            "List thematic claims reviewed but rejected from valuation because "
+            "they lack primary-source verification, economic transmission, "
+            "timetable, or materiality."
+        ),
+    )
+    peer_selection_verdict: Optional[str] = Field(
+        default=None,
+        description=(
+            "State whether the target is the best same-industry build candidate, "
+            "merely acceptable, or inferior to one or more peers. If a peer is "
+            "better, name it and explain the concrete valuation, quality, growth, "
+            "leverage, cash, or operating reasons plus the key caveat."
+        ),
+    )
+    supply_chain_position_verdict: Optional[str] = Field(
+        default=None,
+        description=(
+            "When a curated industrial-chain comparison exists, state whether the "
+            "target's own segment is the best place in the chain to build exposure "
+            "now or whether another chain position offers a better profit pool. "
+            "Explain why in terms of economics, valuation, pricing power, earnings "
+            "revision potential, or balance-sheet quality."
+        ),
+    )
+    earnings_model_bridge: Optional[str] = Field(
+        default=None,
+        description=(
+            "Summarize the earnings bridge that connects the thesis to revenue, "
+            "margin, profit, cash generation, and valuation under bull/base/bear "
+            "cases. Name the decisive modeled levers."
+        ),
+    )
+    market_implied_expectation: Optional[str] = Field(
+        default=None,
+        description=(
+            "State what the current quote appears to imply about earnings power, "
+            "sales scale, growth persistence, or margin durability, and where the "
+            "research view differs from that market expectation."
+        ),
+    )
+    company_quality_verdict: Optional[str] = Field(
+        default=None,
+        description=(
+            "Answer only whether this is a good business / good company, based on "
+            "moat, profitability, cash quality, balance sheet, management, and "
+            "durability rather than share price."
+        ),
+    )
+    current_odds_verdict: Optional[str] = Field(
+        default=None,
+        description=(
+            "Answer only whether today's price offers attractive expected value, "
+            "based on valuation, implied expectations, catalysts, downside, and "
+            "probability/payoff."
+        ),
+    )
+    relative_allocation_verdict: Optional[str] = Field(
+        default=None,
+        description=(
+            "Answer only whether this is the best current place to deploy capital "
+            "relative to same-industry peers and alternative chain positions."
+        ),
+    )
+    management_capital_allocation_verdict: Optional[str] = Field(
+        default=None,
+        description=(
+            "Judge stewardship from hard evidence: management alignment, capital "
+            "returns, capex discipline, financing, buybacks/dividends, M&A, and "
+            "whether capital allocation has compounded or diluted value."
+        ),
+    )
+    shareholder_structure_verdict: Optional[str] = Field(
+        default=None,
+        description=(
+            "Judge ownership and chip structure: concentration, holder-count trend, "
+            "insider increases/decreases, pledge, unlocks, and whether these create "
+            "stability or supply overhang."
+        ),
+    )
 
 
 def render_research_plan(plan: ResearchPlan) -> str:
     """Render a ResearchPlan to markdown for storage and the trader's prompt context."""
-    return "\n".join([
+    parts = [
         f"**Recommendation**: {plan.recommendation.value}",
         "",
         f"**Core Bet**: {plan.core_bet}",
@@ -157,7 +286,40 @@ def render_research_plan(plan: ResearchPlan) -> str:
         f"**Rationale**: {plan.rationale}",
         "",
         f"**Strategic Actions**: {plan.strategic_actions}",
-    ])
+    ]
+    if plan.prior_rating:
+        parts.extend(["", f"**Prior Rating**: {plan.prior_rating}"])
+    if plan.new_evidence_since_prior:
+        parts.extend(["", f"**New Evidence Since Prior**: {plan.new_evidence_since_prior}"])
+    if plan.unchanged_core_facts:
+        parts.extend(["", f"**Unchanged Core Facts**: {plan.unchanged_core_facts}"])
+    if plan.rating_change_audit:
+        parts.extend(["", f"**Rating Change Audit**: {plan.rating_change_audit}"])
+    if plan.material_catalysts:
+        parts.extend(["", f"**Material Catalysts**: {plan.material_catalysts}"])
+    if plan.thematic_valuation_bridge:
+        parts.extend(["", f"**Thematic Valuation Bridge**: {plan.thematic_valuation_bridge}"])
+    if plan.rejected_themes:
+        parts.extend(["", f"**Rejected Themes**: {plan.rejected_themes}"])
+    if plan.peer_selection_verdict:
+        parts.extend(["", f"**Peer Selection Verdict**: {plan.peer_selection_verdict}"])
+    if plan.supply_chain_position_verdict:
+        parts.extend(["", f"**Supply-Chain Position Verdict**: {plan.supply_chain_position_verdict}"])
+    if plan.earnings_model_bridge:
+        parts.extend(["", f"**Earnings Model Bridge**: {plan.earnings_model_bridge}"])
+    if plan.market_implied_expectation:
+        parts.extend(["", f"**Market-Implied Expectation**: {plan.market_implied_expectation}"])
+    if plan.company_quality_verdict:
+        parts.extend(["", f"**Company Quality Verdict**: {plan.company_quality_verdict}"])
+    if plan.current_odds_verdict:
+        parts.extend(["", f"**Current Odds Verdict**: {plan.current_odds_verdict}"])
+    if plan.relative_allocation_verdict:
+        parts.extend(["", f"**Relative Allocation Verdict**: {plan.relative_allocation_verdict}"])
+    if plan.management_capital_allocation_verdict:
+        parts.extend(["", f"**Management & Capital Allocation Verdict**: {plan.management_capital_allocation_verdict}"])
+    if plan.shareholder_structure_verdict:
+        parts.extend(["", f"**Shareholder Structure Verdict**: {plan.shareholder_structure_verdict}"])
+    return "\n".join(parts)
 
 
 # ---------------------------------------------------------------------------
@@ -277,11 +439,53 @@ class PortfolioDecision(BaseModel):
             "main caveat if needed."
         ),
     )
+    business_driver_map: str = Field(
+        description=(
+            "A compact map of the 3-5 variables that really drive the company's "
+            "business value and stock performance. Name the variables, explain "
+            "their direction of impact, and tie them to this company rather than "
+            "generic industry factors. Prefer a dense paragraph or short semicolon "
+            "separated list."
+        ),
+    )
+    bull_bear_debate: str = Field(
+        description=(
+            "A compact public-facing summary of the strongest bull argument and "
+            "the strongest bear argument from the research debate. Present it as "
+            "a real clash of views, not a generic pro/con list, and keep it short "
+            "enough to fit inside the Portfolio Manager excerpt."
+        ),
+    )
+    debate_verdict: str = Field(
+        description=(
+            "One concise paragraph explaining why the Portfolio Manager leans "
+            "toward one side, or stays balanced, after weighing the bull and bear "
+            "arguments. Tie the verdict to evidence quality, expectation gap, "
+            "probability/payoff, and research gaps."
+        ),
+    )
+    investment_logic_chain: str = Field(
+        description=(
+            "Explain the thesis as a causal chain: if the key business variables "
+            "move or are verified, then fundamentals change, then market "
+            "expectations or valuation may reprice, leading to the rating. Keep "
+            "it readable and information-dense."
+        ),
+    )
     executive_summary: str = Field(
         description=(
             "A concise action plan covering entry strategy, position sizing, "
             "key risk levels, and time horizon. Write for readers who may only "
-            "see this Portfolio Manager Decision excerpt."
+            "see this Portfolio Manager Decision excerpt. Keep it compressed: "
+            "two to three sentences or a short paragraph, not a full investment plan."
+        ),
+    )
+    verification_and_falsification: str = Field(
+        description=(
+            "A concise checklist of the next verification points and the signals "
+            "that would falsify or downgrade the thesis. Use concrete observable "
+            "items from the report, such as earnings, orders, product prices, "
+            "margins, cash flow, policy, inventory, technical levels, or sector data."
         ),
     )
     investment_thesis: str = Field(
@@ -350,7 +554,8 @@ class PortfolioDecision(BaseModel):
         default=None,
         description=(
             "State conviction level and matching position posture: full position, "
-            "overweight, starter position, watch only, trim, or avoid."
+            "overweight, starter position, watch only, trim, or avoid. Keep this "
+            "concise and avoid repeating the executive summary."
         ),
     )
     market_regime_adjustment: Optional[str] = Field(
@@ -412,6 +617,133 @@ class PortfolioDecision(BaseModel):
         default=None,
         description="Optional recommended holding period, e.g. '3-6 months'.",
     )
+    prior_rating: Optional[str] = Field(
+        default=None,
+        description=(
+            "If a recent same-ticker decision exists, state its rating exactly; "
+            "otherwise omit."
+        ),
+    )
+    new_evidence_since_prior: Optional[str] = Field(
+        default=None,
+        description=(
+            "List the decisive new evidence since the most recent same-ticker "
+            "decision. If there is no decisive new evidence, say so explicitly."
+        ),
+    )
+    unchanged_core_facts: Optional[str] = Field(
+        default=None,
+        description=(
+            "Summarize the thesis-critical facts that remain unchanged versus the "
+            "most recent same-ticker decision."
+        ),
+    )
+    rating_change_audit: Optional[str] = Field(
+        default=None,
+        description=(
+            "Explain why the final rating was preserved or changed relative to "
+            "the prior same-ticker decision. A price move alone is not enough for "
+            "a directional reversal."
+        ),
+    )
+    material_catalysts: Optional[str] = Field(
+        default=None,
+        description=(
+            "List only verified material catalysts that pass the four-gate test: "
+            "verifiable evidence, economic transmission, timetable, and materiality. "
+            "Classify each as asset-revaluation or business-realization."
+        ),
+    )
+    thematic_valuation_bridge: Optional[str] = Field(
+        default=None,
+        description=(
+            "Explain the valuation bridge for each verified theme: asset "
+            "revaluation versus business realization, disclosed value or monetization "
+            "evidence, materiality, whether it belongs in core valuation, scenario "
+            "valuation, SOTP/NAV, or only qualitative optionality, and the main "
+            "counterargument."
+        ),
+    )
+    rejected_themes: Optional[str] = Field(
+        default=None,
+        description=(
+            "List thematic claims reviewed but rejected from valuation because "
+            "they lack primary-source verification, economic transmission, "
+            "timetable, or materiality."
+        ),
+    )
+    peer_selection_verdict: Optional[str] = Field(
+        default=None,
+        description=(
+            "State the final cross-sectional verdict: whether the target is the "
+            "best build candidate in its sampled peer set, an acceptable but not "
+            "best option, or inferior to named peers. Explain the metrics and "
+            "business reasons, and how that affects position posture."
+        ),
+    )
+    supply_chain_position_verdict: Optional[str] = Field(
+        default=None,
+        description=(
+            "When a curated chain map exists, state whether the best current "
+            "opportunity lies in the target's own segment or another segment of "
+            "the same industrial chain, and explain how that affects the final "
+            "position decision."
+        ),
+    )
+    earnings_model_bridge: Optional[str] = Field(
+        default=None,
+        description=(
+            "Summarize the earnings bridge behind the final decision: which "
+            "volume, price, mix, margin, working-capital, or financing levers "
+            "must move under bull/base/bear cases."
+        ),
+    )
+    market_implied_expectation: Optional[str] = Field(
+        default=None,
+        description=(
+            "State what the current price seems to imply about earnings power, "
+            "growth, or margin durability, and identify the key disagreement "
+            "between the market quote and the research view."
+        ),
+    )
+    company_quality_verdict: Optional[str] = Field(
+        default=None,
+        description=(
+            "A clean verdict on business quality alone, independent of the stock "
+            "price: good / mixed / weak, with the main reason."
+        ),
+    )
+    current_odds_verdict: Optional[str] = Field(
+        default=None,
+        description=(
+            "A clean verdict on today's risk/reward alone: attractive / neutral / "
+            "unattractive, with the main reason."
+        ),
+    )
+    relative_allocation_verdict: Optional[str] = Field(
+        default=None,
+        description=(
+            "A clean verdict on relative deployment: best option / acceptable but "
+            "not best / inferior to alternatives, grounded in peer and chain "
+            "comparisons."
+        ),
+    )
+    management_capital_allocation_verdict: Optional[str] = Field(
+        default=None,
+        description=(
+            "A clean verdict on stewardship and capital allocation, grounded in "
+            "hard signals such as capex, buybacks, dividends, financing, M&A, "
+            "goodwill, leverage, and management alignment."
+        ),
+    )
+    shareholder_structure_verdict: Optional[str] = Field(
+        default=None,
+        description=(
+            "A clean verdict on ownership/chip structure, grounded in top holders, "
+            "float holders, holder count, insider trade, pledge, repurchase, and "
+            "unlock evidence."
+        ),
+    )
 
 
 def render_pm_decision(decision: PortfolioDecision) -> str:
@@ -429,7 +761,17 @@ def render_pm_decision(decision: PortfolioDecision) -> str:
         "",
         f"**One-Line Thesis**: {decision.one_line_thesis}",
         "",
+        f"**Business Driver Map**: {decision.business_driver_map}",
+        "",
+        f"**Bull-Bear Debate**: {decision.bull_bear_debate}",
+        "",
+        f"**Debate Verdict**: {decision.debate_verdict}",
+        "",
+        f"**Investment Logic Chain**: {decision.investment_logic_chain}",
+        "",
         f"**Executive Summary**: {decision.executive_summary}",
+        "",
+        f"**Verification & Falsification**: {decision.verification_and_falsification}",
         "",
         f"**Investment Thesis**: {decision.investment_thesis}",
     ]
@@ -465,4 +807,36 @@ def render_pm_decision(decision: PortfolioDecision) -> str:
         parts.extend(["", f"**Price Target**: {decision.price_target}"])
     if decision.time_horizon:
         parts.extend(["", f"**Time Horizon**: {decision.time_horizon}"])
+    if decision.prior_rating:
+        parts.extend(["", f"**Prior Rating**: {decision.prior_rating}"])
+    if decision.new_evidence_since_prior:
+        parts.extend(["", f"**New Evidence Since Prior**: {decision.new_evidence_since_prior}"])
+    if decision.unchanged_core_facts:
+        parts.extend(["", f"**Unchanged Core Facts**: {decision.unchanged_core_facts}"])
+    if decision.rating_change_audit:
+        parts.extend(["", f"**Rating Change Audit**: {decision.rating_change_audit}"])
+    if decision.material_catalysts:
+        parts.extend(["", f"**Material Catalysts**: {decision.material_catalysts}"])
+    if decision.thematic_valuation_bridge:
+        parts.extend(["", f"**Thematic Valuation Bridge**: {decision.thematic_valuation_bridge}"])
+    if decision.rejected_themes:
+        parts.extend(["", f"**Rejected Themes**: {decision.rejected_themes}"])
+    if decision.peer_selection_verdict:
+        parts.extend(["", f"**Peer Selection Verdict**: {decision.peer_selection_verdict}"])
+    if decision.supply_chain_position_verdict:
+        parts.extend(["", f"**Supply-Chain Position Verdict**: {decision.supply_chain_position_verdict}"])
+    if decision.earnings_model_bridge:
+        parts.extend(["", f"**Earnings Model Bridge**: {decision.earnings_model_bridge}"])
+    if decision.market_implied_expectation:
+        parts.extend(["", f"**Market-Implied Expectation**: {decision.market_implied_expectation}"])
+    if decision.company_quality_verdict:
+        parts.extend(["", f"**Company Quality Verdict**: {decision.company_quality_verdict}"])
+    if decision.current_odds_verdict:
+        parts.extend(["", f"**Current Odds Verdict**: {decision.current_odds_verdict}"])
+    if decision.relative_allocation_verdict:
+        parts.extend(["", f"**Relative Allocation Verdict**: {decision.relative_allocation_verdict}"])
+    if decision.management_capital_allocation_verdict:
+        parts.extend(["", f"**Management & Capital Allocation Verdict**: {decision.management_capital_allocation_verdict}"])
+    if decision.shareholder_structure_verdict:
+        parts.extend(["", f"**Shareholder Structure Verdict**: {decision.shareholder_structure_verdict}"])
     return "\n".join(parts)

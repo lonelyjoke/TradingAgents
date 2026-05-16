@@ -25,12 +25,16 @@ from tradingagents.agents.utils.agent_states import (
     RiskDebateState,
 )
 from tradingagents.dataflows.config import set_config
+from tradingagents.dataflows.interface import route_to_vendor
+from tradingagents.dataflows.tushare_a_stock import is_a_share_symbol
 
 # Import the new abstract tool methods from agent_utils
 from tradingagents.agents.utils.agent_utils import (
     get_stock_data,
     get_indicators,
     get_fundamentals,
+    get_earnings_model_context,
+    get_financial_report_intelligence_context,
     get_balance_sheet,
     get_cashflow,
     get_income_statement,
@@ -40,9 +44,14 @@ from tradingagents.agents.utils.agent_utils import (
     get_insider_transactions,
     get_global_news,
     get_market_sector_risk,
+    get_market_expectation_context,
     get_market_timing_context,
+    get_management_capital_allocation_context,
     get_peer_comparison,
+    get_shareholder_structure_context,
     get_shipping_context,
+    get_supply_chain_comparison,
+    get_thematic_catalyst_context,
     get_valuation_percentiles,
 )
 
@@ -183,6 +192,7 @@ class TradingAgentsGraph:
                     get_global_news,
                     get_company_events,
                     get_insider_transactions,
+                    get_thematic_catalyst_context,
                 ]
             ),
             "fundamentals": ToolNode(
@@ -195,9 +205,16 @@ class TradingAgentsGraph:
                     get_commodity_context,
                     get_shipping_context,
                     get_peer_comparison,
+                    get_supply_chain_comparison,
                     get_valuation_percentiles,
                     get_market_sector_risk,
                     get_market_timing_context,
+                    get_thematic_catalyst_context,
+                    get_financial_report_intelligence_context,
+                    get_earnings_model_context,
+                    get_market_expectation_context,
+                    get_management_capital_allocation_context,
+                    get_shareholder_structure_context,
                 ]
             ),
         }
@@ -314,12 +331,241 @@ class TradingAgentsGraph:
                 self._checkpointer_ctx = None
                 self.graph = self.workflow.compile()
 
+    def create_initial_state_with_context(self, company_name, trade_date):
+        """Build the initialized state shared by batch and CLI executions."""
+        past_context = self.memory_log.get_past_context(company_name)
+        recent_decision_context = self.memory_log.get_recent_decision_context(
+            company_name
+        )
+        thematic_catalyst_context = ""
+        filing_intelligence_context = ""
+        peer_comparison_context = ""
+        supply_chain_comparison_context = ""
+        earnings_model_context = ""
+        market_expectation_context = ""
+        management_capital_allocation_context = ""
+        shareholder_structure_context = ""
+        if is_a_share_symbol(company_name):
+            try:
+                thematic_catalyst_context = route_to_vendor(
+                    "get_thematic_catalyst_context",
+                    company_name,
+                    trade_date,
+                )
+            except Exception as exc:
+                thematic_catalyst_context = (
+                    "# Thematic catalyst cross-check unavailable\n\n"
+                    f"- Reason: {exc}"
+                )
+            try:
+                filing_intelligence_context = route_to_vendor(
+                    "get_financial_report_intelligence_context",
+                    company_name,
+                    trade_date,
+                )
+            except Exception as exc:
+                filing_intelligence_context = (
+                    "# Financial-report intelligence unavailable\n\n"
+                    f"- Reason: {exc}"
+                )
+            try:
+                peer_comparison_context = route_to_vendor(
+                    "get_peer_comparison",
+                    company_name,
+                    trade_date,
+                )
+            except Exception as exc:
+                peer_comparison_context = (
+                    "# Same-industry peer comparison unavailable\n\n"
+                    f"- Reason: {exc}"
+                )
+            try:
+                supply_chain_comparison_context = route_to_vendor(
+                    "get_supply_chain_comparison",
+                    company_name,
+                    trade_date,
+                )
+            except Exception as exc:
+                supply_chain_comparison_context = (
+                    "# Supply-chain position comparison unavailable\n\n"
+                    f"- Reason: {exc}"
+                )
+            try:
+                earnings_model_context = route_to_vendor(
+                    "get_earnings_model_context",
+                    company_name,
+                    trade_date,
+                )
+            except Exception as exc:
+                earnings_model_context = (
+                    "# Earnings-model context unavailable\n\n"
+                    f"- Reason: {exc}"
+                )
+            try:
+                market_expectation_context = route_to_vendor(
+                    "get_market_expectation_context",
+                    company_name,
+                    trade_date,
+                )
+            except Exception as exc:
+                market_expectation_context = (
+                    "# Market-expectation context unavailable\n\n"
+                    f"- Reason: {exc}"
+                )
+            try:
+                management_capital_allocation_context = route_to_vendor(
+                    "get_management_capital_allocation_context",
+                    company_name,
+                    trade_date,
+                )
+            except Exception as exc:
+                management_capital_allocation_context = (
+                    "# Management/capital-allocation context unavailable\n\n"
+                    f"- Reason: {exc}"
+                )
+            try:
+                shareholder_structure_context = route_to_vendor(
+                    "get_shareholder_structure_context",
+                    company_name,
+                    trade_date,
+                )
+            except Exception as exc:
+                shareholder_structure_context = (
+                    "# Shareholder-structure context unavailable\n\n"
+                    f"- Reason: {exc}"
+                )
+        return self.propagator.create_initial_state(
+            company_name,
+            trade_date,
+            past_context=past_context,
+            recent_decision_context=recent_decision_context,
+            thematic_catalyst_context=thematic_catalyst_context,
+            filing_intelligence_context=filing_intelligence_context,
+            peer_comparison_context=peer_comparison_context,
+            supply_chain_comparison_context=supply_chain_comparison_context,
+            earnings_model_context=earnings_model_context,
+            market_expectation_context=market_expectation_context,
+            management_capital_allocation_context=management_capital_allocation_context,
+            shareholder_structure_context=shareholder_structure_context,
+        )
+
     def _run_graph(self, company_name, trade_date):
         """Execute the graph and write the resulting state to disk and memory log."""
-        # Initialize state — inject memory log context for PM.
+        # Initialize state — inject continuity context plus resolved lessons.
         past_context = self.memory_log.get_past_context(company_name)
+        recent_decision_context = self.memory_log.get_recent_decision_context(
+            company_name
+        )
+        thematic_catalyst_context = ""
+        filing_intelligence_context = ""
+        peer_comparison_context = ""
+        supply_chain_comparison_context = ""
+        earnings_model_context = ""
+        market_expectation_context = ""
+        management_capital_allocation_context = ""
+        shareholder_structure_context = ""
+        if is_a_share_symbol(company_name):
+            try:
+                thematic_catalyst_context = route_to_vendor(
+                    "get_thematic_catalyst_context",
+                    company_name,
+                    trade_date,
+                )
+            except Exception as exc:
+                thematic_catalyst_context = (
+                    "# Thematic catalyst cross-check unavailable\n\n"
+                    f"- Reason: {exc}"
+                )
+            try:
+                filing_intelligence_context = route_to_vendor(
+                    "get_financial_report_intelligence_context",
+                    company_name,
+                    trade_date,
+                )
+            except Exception as exc:
+                filing_intelligence_context = (
+                    "# Financial-report intelligence unavailable\n\n"
+                    f"- Reason: {exc}"
+                )
+            try:
+                peer_comparison_context = route_to_vendor(
+                    "get_peer_comparison",
+                    company_name,
+                    trade_date,
+                )
+            except Exception as exc:
+                peer_comparison_context = (
+                    "# Same-industry peer comparison unavailable\n\n"
+                    f"- Reason: {exc}"
+                )
+            try:
+                supply_chain_comparison_context = route_to_vendor(
+                    "get_supply_chain_comparison",
+                    company_name,
+                    trade_date,
+                )
+            except Exception as exc:
+                supply_chain_comparison_context = (
+                    "# Supply-chain position comparison unavailable\n\n"
+                    f"- Reason: {exc}"
+                )
+            try:
+                earnings_model_context = route_to_vendor(
+                    "get_earnings_model_context",
+                    company_name,
+                    trade_date,
+                )
+            except Exception as exc:
+                earnings_model_context = (
+                    "# Earnings-model context unavailable\n\n"
+                    f"- Reason: {exc}"
+                )
+            try:
+                market_expectation_context = route_to_vendor(
+                    "get_market_expectation_context",
+                    company_name,
+                    trade_date,
+                )
+            except Exception as exc:
+                market_expectation_context = (
+                    "# Market-expectation context unavailable\n\n"
+                    f"- Reason: {exc}"
+                )
+            try:
+                management_capital_allocation_context = route_to_vendor(
+                    "get_management_capital_allocation_context",
+                    company_name,
+                    trade_date,
+                )
+            except Exception as exc:
+                management_capital_allocation_context = (
+                    "# Management/capital-allocation context unavailable\n\n"
+                    f"- Reason: {exc}"
+                )
+            try:
+                shareholder_structure_context = route_to_vendor(
+                    "get_shareholder_structure_context",
+                    company_name,
+                    trade_date,
+                )
+            except Exception as exc:
+                shareholder_structure_context = (
+                    "# Shareholder-structure context unavailable\n\n"
+                    f"- Reason: {exc}"
+                )
         init_agent_state = self.propagator.create_initial_state(
-            company_name, trade_date, past_context=past_context
+            company_name,
+            trade_date,
+            past_context=past_context,
+            recent_decision_context=recent_decision_context,
+            thematic_catalyst_context=thematic_catalyst_context,
+            filing_intelligence_context=filing_intelligence_context,
+            peer_comparison_context=peer_comparison_context,
+            supply_chain_comparison_context=supply_chain_comparison_context,
+            earnings_model_context=earnings_model_context,
+            market_expectation_context=market_expectation_context,
+            management_capital_allocation_context=management_capital_allocation_context,
+            shareholder_structure_context=shareholder_structure_context,
         )
         args = self.propagator.get_graph_args()
 
@@ -366,6 +612,30 @@ class TradingAgentsGraph:
         self.log_states_dict[str(trade_date)] = {
             "company_of_interest": final_state["company_of_interest"],
             "trade_date": final_state["trade_date"],
+            "thematic_catalyst_context": final_state.get(
+                "thematic_catalyst_context", ""
+            ),
+            "filing_intelligence_context": final_state.get(
+                "filing_intelligence_context", ""
+            ),
+            "peer_comparison_context": final_state.get(
+                "peer_comparison_context", ""
+            ),
+            "supply_chain_comparison_context": final_state.get(
+                "supply_chain_comparison_context", ""
+            ),
+            "earnings_model_context": final_state.get(
+                "earnings_model_context", ""
+            ),
+            "market_expectation_context": final_state.get(
+                "market_expectation_context", ""
+            ),
+            "management_capital_allocation_context": final_state.get(
+                "management_capital_allocation_context", ""
+            ),
+            "shareholder_structure_context": final_state.get(
+                "shareholder_structure_context", ""
+            ),
             "market_report": final_state["market_report"],
             "sentiment_report": final_state["sentiment_report"],
             "news_report": final_state["news_report"],

@@ -56,6 +56,14 @@ class AgentState(MessagesState):
         str, "Report from the News Researcher of current world affairs"
     ]
     fundamentals_report: Annotated[str, "Report from the Fundamentals Researcher"]
+    thematic_catalyst_context: Annotated[str, "Precomputed filing/news catalyst context"]
+    filing_intelligence_context: Annotated[str, "Precomputed filing intelligence context"]
+    peer_comparison_context: Annotated[str, "Precomputed same-industry peer context"]
+    supply_chain_comparison_context: Annotated[str, "Precomputed cross-position chain context"]
+    earnings_model_context: Annotated[str, "Precomputed earnings-model bridge context"]
+    market_expectation_context: Annotated[str, "Precomputed market-implied expectation context"]
+    management_capital_allocation_context: Annotated[str, "Precomputed management/capital-allocation context"]
+    shareholder_structure_context: Annotated[str, "Precomputed shareholder/chip context"]
 
     # researcher team discussion step
     investment_debate_state: Annotated[
@@ -71,3 +79,5 @@ class AgentState(MessagesState):
     ]
     final_trade_decision: Annotated[str, "Final decision made by the Risk Analysts"]
     past_context: Annotated[str, "Memory log context injected at run start (same-ticker decisions + cross-ticker lessons)"]
+    thematic_catalyst_context: Annotated[str, "Precomputed filing/news thematic cross-check for A-share names"]
+    filing_intelligence_context: Annotated[str, "Precomputed non-statement operating evidence mined from A-share financial reports"]

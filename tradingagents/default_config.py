@@ -2,11 +2,24 @@ import os
 
 _TRADINGAGENTS_HOME = os.path.join(os.path.expanduser("~"), ".tradingagents")
 
+
+def _env_or_default(name: str, default: str) -> str:
+    """Treat empty environment variables as unset.
+
+    Windows shells commonly leave variables present-but-empty after a session
+    or helper script mutates them. For path settings, an empty string should not
+    silently disable a core subsystem such as memory persistence.
+    """
+    return os.getenv(name) or default
+
 DEFAULT_CONFIG = {
     "project_dir": os.path.abspath(os.path.join(os.path.dirname(__file__), ".")),
-    "results_dir": os.getenv("TRADINGAGENTS_RESULTS_DIR", os.path.join(_TRADINGAGENTS_HOME, "logs")),
-    "data_cache_dir": os.getenv("TRADINGAGENTS_CACHE_DIR", os.path.join(_TRADINGAGENTS_HOME, "cache")),
-    "memory_log_path": os.getenv("TRADINGAGENTS_MEMORY_LOG_PATH", os.path.join(_TRADINGAGENTS_HOME, "memory", "trading_memory.md")),
+    "results_dir": _env_or_default("TRADINGAGENTS_RESULTS_DIR", os.path.join(_TRADINGAGENTS_HOME, "logs")),
+    "data_cache_dir": _env_or_default("TRADINGAGENTS_CACHE_DIR", os.path.join(_TRADINGAGENTS_HOME, "cache")),
+    "memory_log_path": _env_or_default(
+        "TRADINGAGENTS_MEMORY_LOG_PATH",
+        os.path.join(_TRADINGAGENTS_HOME, "memory", "trading_memory.md"),
+    ),
     # Optional cap on the number of resolved memory log entries. When set,
     # the oldest resolved entries are pruned once this limit is exceeded.
     # Pending entries are never pruned. None disables rotation entirely.

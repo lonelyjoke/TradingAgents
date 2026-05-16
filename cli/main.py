@@ -55,24 +55,46 @@ def extract_company_name_for_report(final_state: dict, ticker: str) -> str | Non
     report_candidates = [
         final_state.get("fundamentals_report", ""),
         final_state.get("market_report", ""),
+        final_state.get("news_report", ""),
         final_state.get("final_trade_decision", ""),
         final_state.get("trader_investment_plan", ""),
     ]
+    ticker_pattern = re.escape(ticker)
+    name_pattern = r"([\u4e00-\u9fffA-Za-z0-9&.\-\s]{2,40})"
+    left_paren = r"[\(\uff08]"
+    right_paren = r"[\)\uff09]"
+    colon = r"[:\uff1a]"
     patterns = [
-        r"(?im)^\s*-\s*Name:\s*([^\n\r|]+)",
-        r"(?im)^\s*-\s*Company:\s*([^\n\r|]+)",
-        r"(?im)^\s*#\s*([^#\n\r（(]+?)\s*[（(]\s*" + re.escape(ticker) + r"\s*[）)]",
-        r"(?im)^\s*#\s*" + re.escape(ticker) + r"\s*[（(]\s*([^#\n\r）)]+?)\s*[）)]",
-        r"(?im)标的[:：]\s*" + re.escape(ticker) + r"\s+([^\s，,。|]+)",
+        rf"(?im)^\s*-\s*(?:Name|Company|name|company)\s*{colon}\s*([^\n\r|]+)",
+        rf"(?im)^\s*-\s*(?:\u516c\u53f8|\u540d\u79f0|\u80a1\u7968\u7b80\u79f0)\s*{colon}\s*([^\n\r|]+)",
+        rf"(?im)^\s*#\s*(?:\u6295\u8d44\u5907\u5fd8\u5f55\s*{colon}\s*)?{ticker_pattern}\s*{left_paren}\s*{name_pattern}\s*{right_paren}",
+        rf"(?im)^\s*#\s*(?:\u6295\u8d44\u5907\u5fd8\u5f55\s*{colon}\s*)?{name_pattern}\s*{left_paren}\s*{ticker_pattern}\s*{right_paren}",
+        rf"(?im){ticker_pattern}\s*{left_paren}\s*{name_pattern}\s*{right_paren}",
+        rf"(?im){name_pattern}\s*{left_paren}\s*{ticker_pattern}\s*{right_paren}",
+        rf"(?im)\|\s*{ticker_pattern}\s*\|\s*{name_pattern}\s*\|",
+        rf"(?im)(?:\u6807\u7684|\u80a1\u7968|\u6807\u7684\u516c\u53f8)\s*{colon}\s*{ticker_pattern}\s+([^\s\uff0c,\u3002|]+)",
     ]
     for text in report_candidates:
         for pattern in patterns:
             match = re.search(pattern, text or "")
             if match:
-                name = match.group(1).strip()
+                name = _clean_report_company_name(match.group(1), ticker)
                 if name and name.upper() not in {"N/A", "UNKNOWN"}:
                     return name
     return None
+
+
+def _clean_report_company_name(name: str, ticker: str) -> str | None:
+    """Normalize an extracted company name so it is safe and useful in folder names."""
+    text = re.sub(r"[*_`#>\[\]]", "", str(name or "")).strip()
+    text = re.sub(r"\s+", "", text)
+    text = text.strip(" ._-|:：()（）")
+    text = re.sub(re.escape(ticker), "", text, flags=re.I).strip(" ._-|:：()（）")
+    if not text or text.upper() in {"N/A", "UNKNOWN"}:
+        return None
+    if re.fullmatch(r"[A-Za-z0-9.\-]+", text):
+        return None
+    return text[:30]
 
 
 def build_default_report_path(ticker: str, final_state: dict, timestamp: str) -> Path:
@@ -688,6 +710,64 @@ def save_report_to_disk(final_state, ticker: str, save_path: Path):
     save_path.mkdir(parents=True, exist_ok=True)
     sections = []
 
+    # 0. Precomputed context
+    if final_state.get("thematic_catalyst_context"):
+        context_dir = save_path / "0_context"
+        context_dir.mkdir(exist_ok=True)
+        (context_dir / "thematic_catalysts.md").write_text(
+            final_state["thematic_catalyst_context"],
+            encoding="utf-8",
+        )
+    if final_state.get("filing_intelligence_context"):
+        context_dir = save_path / "0_context"
+        context_dir.mkdir(exist_ok=True)
+        (context_dir / "filing_intelligence.md").write_text(
+            final_state["filing_intelligence_context"],
+            encoding="utf-8",
+        )
+    if final_state.get("peer_comparison_context"):
+        context_dir = save_path / "0_context"
+        context_dir.mkdir(exist_ok=True)
+        (context_dir / "peer_comparison.md").write_text(
+            final_state["peer_comparison_context"],
+            encoding="utf-8",
+        )
+    if final_state.get("supply_chain_comparison_context"):
+        context_dir = save_path / "0_context"
+        context_dir.mkdir(exist_ok=True)
+        (context_dir / "supply_chain_comparison.md").write_text(
+            final_state["supply_chain_comparison_context"],
+            encoding="utf-8",
+        )
+    if final_state.get("earnings_model_context"):
+        context_dir = save_path / "0_context"
+        context_dir.mkdir(exist_ok=True)
+        (context_dir / "earnings_model.md").write_text(
+            final_state["earnings_model_context"],
+            encoding="utf-8",
+        )
+    if final_state.get("market_expectation_context"):
+        context_dir = save_path / "0_context"
+        context_dir.mkdir(exist_ok=True)
+        (context_dir / "market_expectation.md").write_text(
+            final_state["market_expectation_context"],
+            encoding="utf-8",
+        )
+    if final_state.get("management_capital_allocation_context"):
+        context_dir = save_path / "0_context"
+        context_dir.mkdir(exist_ok=True)
+        (context_dir / "management_capital_allocation.md").write_text(
+            final_state["management_capital_allocation_context"],
+            encoding="utf-8",
+        )
+    if final_state.get("shareholder_structure_context"):
+        context_dir = save_path / "0_context"
+        context_dir.mkdir(exist_ok=True)
+        (context_dir / "shareholder_structure.md").write_text(
+            final_state["shareholder_structure_context"],
+            encoding="utf-8",
+        )
+
     # 1. Analysts
     analysts_dir = save_path / "1_analysts"
     analyst_parts = []
@@ -1090,8 +1170,11 @@ def run_analysis(checkpoint: bool = False):
         )
         update_display(layout, spinner_text, stats_handler=stats_handler, start_time=start_time)
 
-        # Initialize state and get graph args with callbacks
-        init_agent_state = graph.propagator.create_initial_state(
+        # Initialize state and get graph args with callbacks.
+        # Keep CLI runs on the same research path as graph.propagate(); otherwise
+        # the interactive flow silently loses precomputed context and memory continuity.
+        graph._resolve_pending_entries(selections["ticker"])
+        init_agent_state = graph.create_initial_state_with_context(
             selections["ticker"], selections["analysis_date"]
         )
         # Pass callbacks to graph config for tool execution tracking

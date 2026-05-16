@@ -44,6 +44,27 @@ from .tushare_research import (
 )
 from .commodity_research import get_commodity_context as get_tushare_commodity_context
 from .shipping_research import get_shipping_context as get_tushare_shipping_context
+from .thematic_research import (
+    get_thematic_catalyst_context as get_tushare_thematic_catalyst_context,
+)
+from .filing_research import (
+    get_financial_report_intelligence_context as get_tushare_financial_report_intelligence_context,
+)
+from .supply_chain_research import (
+    get_supply_chain_comparison as get_tushare_supply_chain_comparison,
+)
+from .earnings_modeling import (
+    get_earnings_model_context as get_tushare_earnings_model_context,
+)
+from .expectation_research import (
+    get_market_expectation_context as get_tushare_market_expectation_context,
+)
+from .governance_research import (
+    get_management_capital_allocation_context as get_tushare_management_capital_allocation_context,
+)
+from .shareholder_research import (
+    get_shareholder_structure_context as get_tushare_shareholder_structure_context,
+)
 
 # Configuration and routing logic
 from .config import get_config
@@ -72,9 +93,16 @@ TOOLS_CATEGORIES = {
             "get_commodity_context",
             "get_shipping_context",
             "get_peer_comparison",
+            "get_supply_chain_comparison",
             "get_valuation_percentiles",
             "get_market_sector_risk",
             "get_market_timing_context",
+            "get_thematic_catalyst_context",
+            "get_financial_report_intelligence_context",
+            "get_earnings_model_context",
+            "get_market_expectation_context",
+            "get_management_capital_allocation_context",
+            "get_shareholder_structure_context",
         ]
     },
     "news_data": {
@@ -138,6 +166,9 @@ VENDOR_METHODS = {
     "get_peer_comparison": {
         "tushare": get_tushare_peer_comparison,
     },
+    "get_supply_chain_comparison": {
+        "tushare": get_tushare_supply_chain_comparison,
+    },
     "get_valuation_percentiles": {
         "tushare": get_tushare_valuation_percentiles,
     },
@@ -146,6 +177,24 @@ VENDOR_METHODS = {
     },
     "get_market_timing_context": {
         "tushare": get_tushare_market_timing_context,
+    },
+    "get_thematic_catalyst_context": {
+        "tushare": get_tushare_thematic_catalyst_context,
+    },
+    "get_financial_report_intelligence_context": {
+        "tushare": get_tushare_financial_report_intelligence_context,
+    },
+    "get_earnings_model_context": {
+        "tushare": get_tushare_earnings_model_context,
+    },
+    "get_market_expectation_context": {
+        "tushare": get_tushare_market_expectation_context,
+    },
+    "get_management_capital_allocation_context": {
+        "tushare": get_tushare_management_capital_allocation_context,
+    },
+    "get_shareholder_structure_context": {
+        "tushare": get_tushare_shareholder_structure_context,
     },
     # news_data
     "get_news": {
@@ -214,9 +263,16 @@ def route_to_vendor(method: str, *args, **kwargs):
         "get_commodity_context",
         "get_shipping_context",
         "get_peer_comparison",
+        "get_supply_chain_comparison",
         "get_valuation_percentiles",
         "get_market_sector_risk",
         "get_market_timing_context",
+        "get_thematic_catalyst_context",
+        "get_financial_report_intelligence_context",
+        "get_earnings_model_context",
+        "get_market_expectation_context",
+        "get_management_capital_allocation_context",
+        "get_shareholder_structure_context",
         "get_news",
         "get_company_events",
     } and args:

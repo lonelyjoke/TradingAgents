@@ -15,11 +15,21 @@ from tradingagents.agents.utils.agent_utils import (
     build_instrument_context,
     get_buy_side_thesis_instruction,
     get_evidence_instruction,
+    get_earnings_model_instruction,
     get_fair_cycle_valuation_instruction,
+    get_filing_intelligence_instruction,
     get_focused_report_instruction,
     get_language_instruction,
+    get_market_expectation_instruction,
+    get_management_capital_allocation_instruction,
+    get_material_catalyst_instruction,
+    get_peer_selection_instruction,
     get_research_gap_instruction,
     get_supply_demand_fallback_instruction,
+    get_supply_chain_selection_instruction,
+    get_shareholder_structure_instruction,
+    get_three_layer_conclusion_instruction,
+    get_thematic_valuation_instruction,
 )
 from tradingagents.agents.utils.structured import (
     bind_structured,
@@ -37,11 +47,38 @@ def create_portfolio_manager(llm):
         risk_debate_state = state["risk_debate_state"]
         research_plan = state["investment_plan"]
         trader_plan = state["trader_investment_plan"]
+        thematic_catalyst_context = state.get("thematic_catalyst_context", "")
+        filing_intelligence_context = state.get("filing_intelligence_context", "")
+        peer_comparison_context = state.get("peer_comparison_context", "")
+        supply_chain_comparison_context = state.get("supply_chain_comparison_context", "")
+        earnings_model_context = state.get("earnings_model_context", "")
+        market_expectation_context = state.get("market_expectation_context", "")
+        management_capital_allocation_context = state.get("management_capital_allocation_context", "")
+        shareholder_structure_context = state.get("shareholder_structure_context", "")
+        investment_debate_state = state.get("investment_debate_state", {})
+        bull_bear_context = ""
+        if investment_debate_state:
+            bull_bear_context = f"""
+**Research Team Bull-Bear Debate Context:**
+- Bull case history:
+{investment_debate_state.get("bull_history", "")}
+- Bear case history:
+{investment_debate_state.get("bear_history", "")}
+- Research Manager ruling:
+{investment_debate_state.get("judge_decision", research_plan)}
+"""
 
         past_context = state.get("past_context", "")
+        recent_decision_context = state.get("recent_decision_context", "")
         lessons_line = (
             f"- Lessons from prior decisions and outcomes:\n{past_context}\n"
             if past_context
+            else ""
+        )
+        recent_decision_line = (
+            f"- Most recent same-ticker decision (may still be pending outcome):\n"
+            f"{recent_decision_context}\n"
+            if recent_decision_context
             else ""
         )
 
@@ -81,6 +118,14 @@ def create_portfolio_manager(llm):
 - Use probability/payoff instead of simple evidence counting. Conflicting evidence can still justify a direction when the payoff is asymmetric and the thesis is falsifiable.
 - Match position size to conviction. Evidence-limited Overweight should usually be a staged or starter position, not a full-conviction Buy.
 
+**Decision-Continuity Rules:**
+- Reassess the company fully every run, but treat the most recent same-ticker decision as the reference point for continuity.
+- If the final rating changes, state the prior rating, the new decisive evidence, the core facts that are unchanged, and why those changes are sufficient to alter the stance.
+- If there is no new decisive evidence, preserve the prior directional stance where possible and adjust conviction, position size, watch levels, or execution posture instead.
+- A lower share price or weaker chart alone may change valuation or trading posture, but it must not by itself justify crossing from a positive rating to a negative rating or vice versa.
+- If a recent same-ticker decision is present and you are writing free text rather than structured fields, include explicit sections titled **Prior Rating**, **New Evidence Since Prior**, **Unchanged Core Facts**, and **Rating Change Audit**.
+- If any verified theme affects the thesis and you are writing free text rather than structured fields, include an explicit section titled **Thematic Valuation Bridge** explaining whether the theme belongs in core valuation, scenario valuation, SOTP/NAV, or only qualitative optionality.
+
 **Fair Cycle-Valuation Calibration:**
 - Apply the same fairness standard to low-valuation laggards and high-prosperity winners.
 - Low valuation/low prosperity: do not default to Underweight. Test pricing of pessimism, balance-sheet survival, cyclical versus structural decline, inflection evidence, and upside payoff.
@@ -91,15 +136,33 @@ def create_portfolio_manager(llm):
 **Public-Excerpt Writing Rules:**
 - Write the Portfolio Manager Decision as a self-contained excerpt that can be shared publicly without the rest of the report.
 - Begin with a short Company Snapshot: explain what the company does, its main business/profit drivers, and why those drivers matter to this thesis. Keep this introduction brief and practical, not encyclopedic.
-- Then give the rating and a one-line thesis before the executive summary.
+- Then give the rating and a one-line thesis, followed by a Business Driver Map, compact Bull-Bear Debate, Debate Verdict, Investment Logic Chain, and compressed Executive Summary.
+- Keep three separate final verdicts visible in the public excerpt: Company Quality Verdict, Current Odds Verdict, and Relative Allocation Verdict. This is mandatory because a good business, a good current price, and the best place to deploy capital are different questions.
+- When hard-signal governance and ownership contexts are available, also keep Management & Capital Allocation Verdict and Shareholder Structure Verdict visible so the reader can see whether stewardship and chip structure reinforce or weaken the main thesis.
+- The Business Driver Map must help a reader understand the company quickly: identify the 3-5 variables that matter most to revenue, margin, cash flow, valuation, or cycle position, and explain how they affect the stock.
+- The Bull-Bear Debate must enrich the excerpt: summarize the strongest bull case, the strongest bear case, and the real point of disagreement based on the Research Team debate. Do not paste long debate history.
+- The Debate Verdict must explain why you lean toward one side, or remain balanced, after weighing evidence quality, expectation gap, probability/payoff, and unverified assumptions.
+- The Investment Logic Chain must connect business variables to fundamentals, market expectations, valuation, and the rating in a clear cause-effect sequence.
+- Include a Verification & Falsification checklist so readers know what future evidence would confirm, weaken, or overturn the thesis.
 - Target roughly 3,000 Chinese characters when the output language is Chinese, or a similar concise long-form excerpt in other languages. It should be complete enough to preserve the report's main views and analytical path, but not padded.
-- Preserve the core logic from the full report: company context, final rating, core bet, expectation gap, probability/payoff, cycle/valuation setup, catalysts, falsification signals, position posture, risk controls, and evidence gaps.
-- Use a public-facing research-note tone: clear, readable, and investment-focused. Do not use marketing language, clickbait, or unsupported claims.
+- Preserve the core logic from the full report: company context, business drivers, final rating, core bet, expectation gap, probability/payoff, cycle/valuation setup, catalysts, falsification signals, position posture, risk controls, and evidence gaps.
+- Keep the action summary / investment plan compressed. Do not spend a long section on execution mechanics; summarize position, entry/watch level, stop or downgrade trigger, and next verification point in one short paragraph or 3-4 tight bullets.
+- Use a public-facing research-note tone: clear, readable, and investment-focused. Keep each section information-dense; do not use marketing language, clickbait, filler, or unsupported claims.
 
 **Context:**
 - Research Manager's investment plan: **{research_plan}**
 - Trader's transaction proposal: **{trader_plan}**
+- Thematic catalyst cross-check and valuation bridge: **{thematic_catalyst_context}**
+- Financial-report intelligence: **{filing_intelligence_context}**
+- Same-industry peer comparison: **{peer_comparison_context}**
+- Cross-position supply-chain comparison: **{supply_chain_comparison_context}**
+- Earnings-model context: **{earnings_model_context}**
+- Market-expectation context: **{market_expectation_context}**
+- Management/capital-allocation context: **{management_capital_allocation_context}**
+- Shareholder-structure context: **{shareholder_structure_context}**
 {lessons_line}
+{recent_decision_line}
+{bull_bear_context}
 **Risk Analysts Debate History:**
 {history}
 
@@ -110,6 +173,16 @@ Be decisive and ground every conclusion in specific evidence from the analysts.
 {get_research_gap_instruction()}
 {get_supply_demand_fallback_instruction()}
 {get_buy_side_thesis_instruction()}
+{get_material_catalyst_instruction()}
+{get_thematic_valuation_instruction()}
+{get_filing_intelligence_instruction()}
+{get_peer_selection_instruction()}
+{get_supply_chain_selection_instruction()}
+{get_earnings_model_instruction()}
+{get_market_expectation_instruction()}
+{get_three_layer_conclusion_instruction()}
+{get_management_capital_allocation_instruction()}
+{get_shareholder_structure_instruction()}
 {get_fair_cycle_valuation_instruction()}
 {get_focused_report_instruction()}
 If an important investment claim depends on an unverified commodity price, product spread, inventory, policy detail, or exact percentage, list it under an "Unverified Key Assumptions" paragraph instead of treating it as fact.{get_language_instruction()}"""

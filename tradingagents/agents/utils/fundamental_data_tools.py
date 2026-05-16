@@ -118,6 +118,18 @@ def get_peer_comparison(
 
 
 @tool
+def get_supply_chain_comparison(
+    ticker: Annotated[str, "ticker symbol"],
+    curr_date: Annotated[str, "current date you are trading at, yyyy-mm-dd"],
+) -> str:
+    """
+    Compare a company with alternative profit pools across different positions
+    of the same industrial chain, when a curated chain map exists.
+    """
+    return route_to_vendor("get_supply_chain_comparison", ticker, curr_date)
+
+
+@tool
 def get_valuation_percentiles(
     ticker: Annotated[str, "ticker symbol"],
     curr_date: Annotated[str, "current date you are trading at, yyyy-mm-dd"],
@@ -158,3 +170,91 @@ def get_market_timing_context(
     valuation and mood, while still requiring company-level evidence.
     """
     return route_to_vendor("get_market_timing_context", ticker, curr_date, look_back_days, years)
+
+
+@tool
+def get_thematic_catalyst_context(
+    ticker: Annotated[str, "ticker symbol"],
+    curr_date: Annotated[str, "current date you are trading at, yyyy-mm-dd"],
+    financial_look_back_days: Annotated[int, "financial report look-back window in days"] = 900,
+    news_look_back_days: Annotated[int, "news look-back window in days"] = 180,
+) -> str:
+    """
+    Discover and cross-check A-share thematic catalysts from two directions:
+    filing-origin candidates are checked against news, while news-origin
+    candidates must be validated against annual/half-year report text.
+    """
+    return route_to_vendor(
+        "get_thematic_catalyst_context",
+        ticker,
+        curr_date,
+        financial_look_back_days,
+        news_look_back_days,
+    )
+
+
+@tool
+def get_financial_report_intelligence_context(
+    ticker: Annotated[str, "ticker symbol"],
+    curr_date: Annotated[str, "current date you are trading at, yyyy-mm-dd"],
+    look_back_days: Annotated[int, "financial report look-back window in days"] = 900,
+) -> str:
+    """
+    Extract non-statement operating evidence from annual and half-year reports:
+    orders, commercialization, pricing/margins, capacity/capex, customer/geography,
+    R&D/product, working-capital quality, and balance-sheet risk disclosures.
+    """
+    return route_to_vendor(
+        "get_financial_report_intelligence_context",
+        ticker,
+        curr_date,
+        look_back_days,
+    )
+
+
+@tool
+def get_earnings_model_context(
+    ticker: Annotated[str, "ticker symbol"],
+    curr_date: Annotated[str, "current date you are trading at, yyyy-mm-dd"],
+) -> str:
+    """
+    Retrieve an evidence-led earnings bridge for an A-share ticker, including
+    driver history and scenario-modeling instructions.
+    """
+    return route_to_vendor("get_earnings_model_context", ticker, curr_date)
+
+
+@tool
+def get_market_expectation_context(
+    ticker: Annotated[str, "ticker symbol"],
+    curr_date: Annotated[str, "current date you are trading at, yyyy-mm-dd"],
+) -> str:
+    """
+    Retrieve a reverse-looking expectation context that translates current
+    valuation into the earnings power the market is approximately implying.
+    """
+    return route_to_vendor("get_market_expectation_context", ticker, curr_date)
+
+
+@tool
+def get_management_capital_allocation_context(
+    ticker: Annotated[str, "ticker symbol"],
+    curr_date: Annotated[str, "current date you are trading at, yyyy-mm-dd"],
+) -> str:
+    """
+    Retrieve hard-signal context on management stewardship and capital
+    allocation behavior for an A-share company.
+    """
+    return route_to_vendor("get_management_capital_allocation_context", ticker, curr_date)
+
+
+@tool
+def get_shareholder_structure_context(
+    ticker: Annotated[str, "ticker symbol"],
+    curr_date: Annotated[str, "current date you are trading at, yyyy-mm-dd"],
+) -> str:
+    """
+    Retrieve shareholder concentration, float ownership, holder-count,
+    pledge, increase/decrease, and unlock context for an A-share company.
+    """
+    return route_to_vendor("get_shareholder_structure_context", ticker, curr_date)

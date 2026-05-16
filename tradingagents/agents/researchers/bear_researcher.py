@@ -3,10 +3,19 @@
 from tradingagents.agents.utils.agent_utils import (
     get_buy_side_thesis_instruction,
     get_evidence_instruction,
+    get_earnings_model_instruction,
     get_fair_cycle_valuation_instruction,
+    get_filing_intelligence_instruction,
     get_focused_report_instruction,
+    get_market_expectation_instruction,
+    get_management_capital_allocation_instruction,
+    get_peer_selection_instruction,
     get_research_gap_instruction,
     get_supply_demand_fallback_instruction,
+    get_supply_chain_selection_instruction,
+    get_shareholder_structure_instruction,
+    get_three_layer_conclusion_instruction,
+    get_thematic_valuation_instruction,
 )
 
 
@@ -21,6 +30,27 @@ def create_bear_researcher(llm):
         sentiment_report = state["sentiment_report"]
         news_report = state["news_report"]
         fundamentals_report = state["fundamentals_report"]
+        thematic_catalyst_context = state.get("thematic_catalyst_context", "")
+        filing_intelligence_context = state.get("filing_intelligence_context", "")
+        peer_comparison_context = state.get("peer_comparison_context", "")
+        supply_chain_comparison_context = state.get("supply_chain_comparison_context", "")
+        earnings_model_context = state.get("earnings_model_context", "")
+        market_expectation_context = state.get("market_expectation_context", "")
+        management_capital_allocation_context = state.get("management_capital_allocation_context", "")
+        shareholder_structure_context = state.get("shareholder_structure_context", "")
+        round_instruction = (
+            "This is a follow-up debate turn. Do not restate your full bear memo. "
+            "Respond only to the latest bull objections, add genuinely new evidence "
+            "or a sharper inference, and close with the single point that most "
+            "improves the bear case. Avoid repeating prior Core Bear Bet / Negative "
+            "Expectation Gap / Probability-Payoff sections unless you materially revise them."
+            if history.strip()
+            else (
+                "This is the opening bear turn. Present the core risk thesis clearly, "
+                "but keep it focused enough that later turns can add new debate "
+                "points instead of repeating the full memo."
+            )
+        )
 
         prompt = f"""You are a Bear Analyst making the case against investing in the stock. Your goal is to present a well-reasoned argument emphasizing risks, challenges, and negative indicators. Leverage the provided research and data to highlight potential downsides and counter bullish arguments effectively.
 
@@ -35,6 +65,7 @@ Key points to focus on:
 - Negative Indicators: Use evidence from financial data, market trends, or recent adverse news to support your position.
 - Bull Counterpoints: Critically analyze the bull argument with specific data and sound reasoning, exposing weaknesses or over-optimistic assumptions.
 - Engagement: Present your argument in a conversational style, directly engaging with the bull analyst's points and debating effectively rather than simply listing facts.
+- Anti-repetition discipline: {round_instruction}
 
 Resources available:
 
@@ -42,6 +73,14 @@ Market research report: {market_research_report}
 Social media sentiment report: {sentiment_report}
 Latest world affairs news: {news_report}
 Company fundamentals report: {fundamentals_report}
+Thematic catalyst cross-check and valuation bridge: {thematic_catalyst_context}
+Financial-report intelligence: {filing_intelligence_context}
+Same-industry peer comparison: {peer_comparison_context}
+Cross-position supply-chain comparison: {supply_chain_comparison_context}
+Earnings-model context: {earnings_model_context}
+Market-expectation context: {market_expectation_context}
+Management/capital-allocation context: {management_capital_allocation_context}
+Shareholder-structure context: {shareholder_structure_context}
 Conversation history of the debate: {history}
 Last bull argument: {current_response}
 Use this information to deliver a compelling bear argument, refute the bull's claims, and engage in a dynamic debate that demonstrates the risks and weaknesses of investing in the stock.
@@ -50,6 +89,15 @@ Use this information to deliver a compelling bear argument, refute the bull's cl
 {get_supply_demand_fallback_instruction()}
 {get_buy_side_thesis_instruction()}
 {get_fair_cycle_valuation_instruction()}
+{get_thematic_valuation_instruction()}
+{get_filing_intelligence_instruction()}
+{get_peer_selection_instruction()}
+{get_supply_chain_selection_instruction()}
+{get_earnings_model_instruction()}
+{get_market_expectation_instruction()}
+{get_three_layer_conclusion_instruction()}
+{get_management_capital_allocation_instruction()}
+{get_shareholder_structure_instruction()}
 {get_focused_report_instruction()}
 """
 

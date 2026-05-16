@@ -12,11 +12,18 @@ from tradingagents.agents.utils.fundamental_data_tools import (
     get_balance_sheet,
     get_cashflow,
     get_commodity_context,
+    get_earnings_model_context,
+    get_financial_report_intelligence_context,
     get_income_statement,
     get_market_sector_risk,
+    get_market_expectation_context,
     get_market_timing_context,
+    get_management_capital_allocation_context,
     get_peer_comparison,
+    get_shareholder_structure_context,
+    get_supply_chain_comparison,
     get_shipping_context,
+    get_thematic_catalyst_context,
     get_valuation_percentiles,
 )
 from tradingagents.agents.utils.news_data_tools import (
@@ -185,6 +192,168 @@ def get_fair_cycle_valuation_instruction() -> str:
         "or scarce growth to justify anything above Hold. The rating must follow "
         "expected value: probability, payoff, duration, balance-sheet resilience, "
         "and expectation gap."
+    )
+
+
+def get_material_catalyst_instruction() -> str:
+    """Return rules for handling genuine thematic catalysts without chasing noise."""
+    return (
+        " Material-catalyst discipline: for A-share names, actively check whether "
+        "there are company-specific themes that can genuinely affect cash flow, "
+        "asset value, or valuation anchors, such as investee IPOs, asset listings, "
+        "verified new-business commercialization, policy licenses, major signed "
+        "orders, or capacity milestones. A theme may enter valuation only if it "
+        "passes all four gates: (1) verifiable evidence from filings, exchange "
+        "documents, official disclosures, or equivalent primary sources; "
+        "(2) a clear economic transmission path to earnings, NAV, or valuation; "
+        "(3) a trackable catalyst timetable or milestone; and (4) materiality "
+        "large enough to matter for the listed company. Classify qualifying "
+        "themes as asset-revaluation catalysts or business-realization catalysts. "
+        "Use filing/news cross-validation rather than one-sided discovery: scan "
+        "annual and half-year report text for candidate investees, assets, and "
+        "new-business lines, then look for recent news catalysts; for any theme "
+        "first discovered in news, require validation from annual or half-year "
+        "report text before it may affect valuation. "
+        "If a topic is only a market label, media narrative, vague interaction, "
+        "or unsupported concept, list it as a rejected theme and do not let it "
+        "change valuation or rating."
+    )
+
+
+def get_thematic_valuation_instruction() -> str:
+    """Return rules for converting verified themes into valuation arguments."""
+    return (
+        " Thematic-valuation discipline: do not stop at naming a catalyst. "
+        "For every verified theme, state the valuation bridge explicitly. "
+        "For asset-revaluation themes, discuss ownership exposure, disclosed "
+        "carrying or fair value, listed-company market-cap materiality, catalyst "
+        "timing, realizability, dilution/lock-up/liquidity haircuts, and whether "
+        "the correct treatment is SOTP/NAV uplift, qualitative optionality, or "
+        "exclusion. For business-realization themes, require disclosed revenue, "
+        "profit, order, contract, or cash-flow evidence before allowing the theme "
+        "into core valuation; otherwise keep it as scenario upside rather than "
+        "base-case earnings. Bulls should quantify what the market may be "
+        "underpricing; bears should test monetization, ownership, double-counting, "
+        "timing, and materiality. Never let an attractive story enter valuation "
+        "without saying exactly how much value it could add and what would make "
+        "that bridge fail."
+    )
+
+
+def get_peer_selection_instruction() -> str:
+    """Return rules for deciding whether a same-industry peer is a better build candidate."""
+    return (
+        " Peer-selection discipline: every recommendation must answer the cross-sectional "
+        "question, not just the single-name question. Compare the target with same-industry "
+        "peers on valuation, profitability, growth, leverage, cash quality, shareholder "
+        "return, and any industry-specific operating metrics available. State explicitly "
+        "whether the target is the best build candidate in the sampled peer set, merely "
+        "acceptable, or inferior to one or more alternatives. If another peer is better, "
+        "name it, explain the concrete metrics and business reasons, and say whether that "
+        "weakens the target to watch/underweight rather than build now. If no peer is clearly "
+        "better, say why no superior alternative emerged; never treat a lower PE alone as "
+        "proof of superiority."
+    )
+
+
+def get_supply_chain_selection_instruction() -> str:
+    """Return rules for comparing different profit pools inside one industrial chain."""
+    return (
+        " Supply-chain-selection discipline: when a curated industrial-chain map is "
+        "available, answer a second cross-sectional question after peer selection: "
+        "is the target sitting in the best part of the chain to own now? Compare "
+        "different chain positions on economics, scarcity, pricing power, earnings "
+        "revision potential, valuation, and balance-sheet quality. State explicitly "
+        "whether the better build opportunity lies in the target's own segment or "
+        "in another profit pool of the same chain. If another segment is better, "
+        "explain why the investor should consider rotating across the chain rather "
+        "than merely switching names within one segment. Never force this verdict "
+        "for industries whose value-chain map is not yet defined."
+    )
+
+
+def get_earnings_model_instruction() -> str:
+    """Return rules for forcing every thesis through an earnings bridge."""
+    return (
+        " Earnings-model discipline: every investable thesis must pass through an "
+        "earnings bridge. State which operating levers move revenue, which levers "
+        "move margin, and how they flow into profit, cash generation, and finally "
+        "valuation. Use bull/base/bear scenarios only when each case changes a "
+        "specific modeled assumption such as volume, price, mix, utilization, "
+        "gross margin, working capital, or financing cost. A catalyst that cannot "
+        "be mapped to a modeled lever is not yet a valuation catalyst."
+    )
+
+
+def get_market_expectation_instruction() -> str:
+    """Return rules for separating business quality from what is already priced."""
+    return (
+        " Market-expectation discipline: always distinguish a good company from "
+        "a good investment. Read the current quote as an implied bundle of "
+        "assumptions about earnings power, sales scale, margin durability, and "
+        "growth persistence. State explicitly whether the market appears to price "
+        "recovery, stagnation, or deterioration, then identify the precise "
+        "assumption where your view differs. Never call a stock cheap or expensive "
+        "from PE/PB alone."
+    )
+
+
+def get_three_layer_conclusion_instruction() -> str:
+    """Return rules for splitting the final verdict into three different questions."""
+    return (
+        " Three-layer conclusion discipline: keep three questions separate in the "
+        "final verdict. Company quality asks whether the business is good. Current "
+        "odds ask whether today's price offers attractive expected value. Relative "
+        "allocation asks whether this is the best place to deploy capital versus "
+        "same-industry peers and alternative chain positions. A stock may score "
+        "well on one layer and poorly on another; do not collapse them into a "
+        "single undifferentiated opinion."
+    )
+
+
+def get_management_capital_allocation_instruction() -> str:
+    """Return rules for judging stewardship with hard evidence."""
+    return (
+        " Management-and-capital-allocation discipline: judge stewardship from "
+        "hard signals before praise. Use capital returns, buybacks, dividends, "
+        "financing, acquisitions, capex, leverage, goodwill, and later ROIC / "
+        "cash-flow outcomes to decide whether management compounds value, merely "
+        "grows assets, or dilutes owners. Treat management quality as a synthesis "
+        "variable: hard evidence can support or weaken the case, but a single "
+        "title, speech, or compensation table is never enough by itself."
+    )
+
+
+def get_shareholder_structure_instruction() -> str:
+    """Return rules for reading ownership and chip signals without overfitting them."""
+    return (
+        " Shareholder-structure discipline: use top holders, float holders, holder "
+        "count, insider increases/decreases, pledge ratio, repurchases, and unlock "
+        "schedule to refine supply-demand and governance risk. Explain whether "
+        "ownership is stabilizing, crowded, or becoming a supply overhang, but do "
+        "not let chip signals override the business thesis unless size, timing, "
+        "and materiality are clear."
+    )
+
+
+def get_filing_intelligence_instruction() -> str:
+    """Return rules for using business evidence buried inside filings."""
+    return (
+        " Filing-intelligence discipline: read quarterly, half-year, and annual "
+        "reports as business documents, not only as sources of the three statements. "
+        "Actively use filing-derived evidence on orders, backlog, customers, "
+        "commercialization, prices, margins, capacity, capex, overseas expansion, "
+        "R&D, receivables, inventory, cash collection, guarantees, litigation, "
+        "impairment, and related-party risk. Bulls should use quantified filing "
+        "evidence to support visibility, moat, monetization, and inflection. Bears "
+        "should use the same filings to challenge margin durability, working-capital "
+        "quality, capital intensity, customer concentration, governance, and tail "
+        "risk. Use quarterly reports to test short-cycle confirmation, half-year "
+        "reports to judge trend formation and segment mix, and annual reports to "
+        "judge business model, capital allocation, and long-cycle risk. Distinguish "
+        "audited or quantified disclosures from management narrative, prefer the "
+        "latest report when facts evolve, and explain what changed across reports "
+        "when that matters."
     )
 
 

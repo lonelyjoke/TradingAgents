@@ -7,10 +7,20 @@ from tradingagents.agents.utils.agent_utils import (
     build_instrument_context,
     get_buy_side_thesis_instruction,
     get_evidence_instruction,
+    get_earnings_model_instruction,
     get_fair_cycle_valuation_instruction,
+    get_filing_intelligence_instruction,
     get_focused_report_instruction,
+    get_market_expectation_instruction,
+    get_management_capital_allocation_instruction,
+    get_material_catalyst_instruction,
+    get_peer_selection_instruction,
     get_research_gap_instruction,
     get_supply_demand_fallback_instruction,
+    get_supply_chain_selection_instruction,
+    get_shareholder_structure_instruction,
+    get_three_layer_conclusion_instruction,
+    get_thematic_valuation_instruction,
 )
 from tradingagents.agents.utils.structured import (
     bind_structured,
@@ -24,6 +34,23 @@ def create_research_manager(llm):
     def research_manager_node(state) -> dict:
         instrument_context = build_instrument_context(state["company_of_interest"])
         history = state["investment_debate_state"].get("history", "")
+        recent_decision_context = state.get("recent_decision_context", "")
+        thematic_catalyst_context = state.get("thematic_catalyst_context", "")
+        filing_intelligence_context = state.get("filing_intelligence_context", "")
+        peer_comparison_context = state.get("peer_comparison_context", "")
+        supply_chain_comparison_context = state.get("supply_chain_comparison_context", "")
+        earnings_model_context = state.get("earnings_model_context", "")
+        market_expectation_context = state.get("market_expectation_context", "")
+        management_capital_allocation_context = state.get("management_capital_allocation_context", "")
+        shareholder_structure_context = state.get("shareholder_structure_context", "")
+        continuity_context = (
+            f"""
+**Most Recent Same-Ticker Decision (may still be pending outcome):**
+{recent_decision_context}
+"""
+            if recent_decision_context
+            else ""
+        )
 
         investment_debate_state = state["investment_debate_state"]
 
@@ -80,7 +107,42 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 - Treat macro proxies as lower-confidence evidence than verified micro prices. They can shape scenarios and watch ranges, but should not be presented as exact product-price conclusions.
 - If macro supply-demand evidence points clearly one way, do not default to Hold purely because product quotes are missing; instead state an evidence-limited directional view and what data would confirm or refute it.
 
+**Decision-Continuity Rules:**
+- Reassess the company fully, but do not silently reverse a recent same-ticker stance.
+- If the recommendation differs from the most recent same-ticker decision, explicitly identify the new decisive evidence, the core facts that remain unchanged, and why the prior stance is no longer preferred.
+- A lower share price by itself is not a new fundamental fact. It may change valuation or trading posture, but it cannot alone justify a reversal across the neutral line.
+- If there is no new decisive evidence, prefer preserving the prior directional stance while adjusting conviction, sizing, or watch levels.
+- If a recent same-ticker decision is present and you are writing free text rather than structured fields, include explicit sections titled **Prior Rating**, **New Evidence Since Prior**, **Unchanged Core Facts**, and **Rating Change Audit**.
+- If any verified theme matters to the thesis and you are writing free text rather than structured fields, include an explicit section titled **Thematic Valuation Bridge** that explains whether the theme belongs in core valuation, scenario valuation, SOTP/NAV, or only qualitative optionality.
+- If you are writing free text rather than structured fields, include explicit sections titled **Company Quality Verdict**, **Current Odds Verdict**, and **Relative Allocation Verdict** so that business quality, today's risk/reward, and best deployment choice are not collapsed into one view.
+- If you are writing free text rather than structured fields, also include **Management & Capital Allocation Verdict** and **Shareholder Structure Verdict** whenever the hard-signal contexts are available.
+
 ---
+
+{continuity_context}
+**Thematic Catalyst Cross-Check And Valuation Bridge:**
+{thematic_catalyst_context}
+
+**Financial-Report Intelligence:**
+{filing_intelligence_context}
+
+**Same-Industry Peer Comparison:**
+{peer_comparison_context}
+
+**Cross-Position Supply-Chain Comparison:**
+{supply_chain_comparison_context}
+
+**Earnings-Model Context:**
+{earnings_model_context}
+
+**Market-Expectation Context:**
+{market_expectation_context}
+
+**Management/Capital-Allocation Context:**
+{management_capital_allocation_context}
+
+**Shareholder-Structure Context:**
+{shareholder_structure_context}
 
 **Debate History:**
 {history}
@@ -89,6 +151,16 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 {get_research_gap_instruction()}
 {get_supply_demand_fallback_instruction()}
 {get_buy_side_thesis_instruction()}
+{get_material_catalyst_instruction()}
+{get_thematic_valuation_instruction()}
+{get_filing_intelligence_instruction()}
+{get_peer_selection_instruction()}
+{get_supply_chain_selection_instruction()}
+{get_earnings_model_instruction()}
+{get_market_expectation_instruction()}
+{get_three_layer_conclusion_instruction()}
+{get_management_capital_allocation_instruction()}
+{get_shareholder_structure_instruction()}
 {get_fair_cycle_valuation_instruction()}
 {get_focused_report_instruction()}
 If a bull or bear argument contains an exact product price, inventory figure, product spread, percentage change, or date-specific market claim that is not supported by the analyst reports, downgrade that argument and list it as an unverified key assumption."""

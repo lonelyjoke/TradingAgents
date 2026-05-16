@@ -68,6 +68,27 @@ class TradingMemoryLog:
         """Return entries with outcome:pending (for Phase B)."""
         return [e for e in self.load_entries() if e.get("pending")]
 
+    def get_latest_same_ticker_decision(self, ticker: str) -> Optional[dict]:
+        """Return the most recent same-ticker decision, including pending entries.
+
+        The latest view matters for continuity even before its outcome is known:
+        the next report should explain why it preserves or changes the prior
+        stance instead of silently re-litigating the whole case from scratch.
+        """
+        for entry in reversed(self.load_entries()):
+            if entry["ticker"] == ticker:
+                return entry
+        return None
+
+    def get_recent_decision_context(self, ticker: str) -> str:
+        """Return the latest same-ticker decision for continuity-aware prompts."""
+        entry = self.get_latest_same_ticker_decision(ticker)
+        if not entry:
+            return ""
+        status = "pending outcome" if entry.get("pending") else "resolved outcome"
+        tag = f"[{entry['date']} | {entry['ticker']} | {entry['rating']} | {status}]"
+        return f"{tag}\n\nDECISION:\n{entry['decision']}"
+
     def get_past_context(self, ticker: str, n_same: int = 5, n_cross: int = 3) -> str:
         """Return formatted past context string for agent prompt injection."""
         entries = [e for e in self.load_entries() if not e.get("pending")]

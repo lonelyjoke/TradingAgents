@@ -502,6 +502,11 @@ def get_peer_comparison(ticker: str, curr_date: str, peer_limit: int = 12) -> st
     target_score = scored.loc[scored["ts_code"] == symbol, "v4_score"]
     target_score_value = float(target_score.iloc[0]) if not target_score.empty else None
     better = scored[(scored["ts_code"] != symbol) & (scored["v4_score"] > (target_score_value or 0))]
+    ranked = scored.sort_values("v4_score", ascending=False).reset_index(drop=True)
+    target_rank = None
+    if symbol in ranked["ts_code"].values:
+        target_rank = int(ranked.index[ranked["ts_code"] == symbol][0]) + 1
+    best_peer = ranked.iloc[0] if not ranked.empty else None
 
     display_cols = [
         "ts_code",
@@ -530,8 +535,37 @@ def get_peer_comparison(ticker: str, curr_date: str, peer_limit: int = 12) -> st
         "## Peer Table",
         _markdown_table(display),
         "",
-        "## Potentially Better Peer Candidates",
+        "## Peer Selection Verdict",
     ]
+    if target_rank is None:
+        lines.append(
+            "Peer-selection verdict unavailable because the target could not be ranked in the selected sample."
+        )
+    elif better.empty:
+        lines.append(
+            f"The target ranks #{target_rank} of {len(ranked)} in the selected peer sample on the v4 screen, "
+            "and no sampled peer currently outranks it. Treat this as 'no clearly better alternative emerged,' "
+            "not as proof that the target is automatically the best investable name."
+        )
+    else:
+        leader_bits = []
+        if best_peer is not None:
+            leader_bits.append(
+                f"{_format_value(best_peer.get('name'))} ({_format_value(best_peer.get('ts_code'))}) "
+                f"leads the screen with v4_score {_format_value(best_peer.get('v4_score'))}"
+            )
+        leader_text = "; ".join(leader_bits) if leader_bits else "At least one peer outranks the target"
+        lines.append(
+            f"The target ranks #{target_rank} of {len(ranked)} in the selected peer sample. "
+            f"{leader_text}. A better build candidate may exist if its higher score is supported by "
+            "real business quality rather than a one-off or data distortion."
+        )
+    lines.extend(
+        [
+            "",
+        "## Potentially Better Peer Candidates",
+        ]
+    )
     if better.empty:
         lines.append(
             "No peer in this sample scored higher than the target on the simple v4 screen. This does not prove the target is best; it only means no clear alternative emerged from the selected valuation-quality-growth metrics."
