@@ -355,6 +355,17 @@ def _derive_financial_metrics(
         ind = _matching_report_row(fina_indicator, end_date)
 
         revenue = _numeric_value(inc, "revenue", "total_revenue")
+        # Balance-sheet items are stock measures while revenue is a flow
+        # measure. Annualize interim-period revenue before comparing the two,
+        # otherwise Q1 working-capital ratios look mechanically inflated.
+        annualization_factor = 1.0
+        if end_date.endswith("0331"):
+            annualization_factor = 4.0
+        elif end_date.endswith("0630"):
+            annualization_factor = 2.0
+        elif end_date.endswith("0930"):
+            annualization_factor = 4.0 / 3.0
+        revenue_for_stock_ratios = None if revenue is None else revenue * annualization_factor
         total_cogs = _numeric_value(inc, "total_cogs")
         operating_profit = _numeric_value(inc, "operate_profit")
         net_profit_parent = _numeric_value(inc, "n_income_attr_p", "n_income")
@@ -429,11 +440,11 @@ def _derive_financial_metrics(
                     None if total_cur_assets is None or total_cur_liab is None else total_cur_assets - total_cur_liab
                 ),
                 "contract_like_liab": contract_like_liab,
-                "contract_like_liab_to_revenue": _safe_ratio(contract_like_liab, revenue),
-                "receivables_to_revenue": _safe_ratio(receivables, revenue),
-                "inventory_to_revenue": _safe_ratio(inventories, revenue),
-                "contract_assets_to_revenue": _safe_ratio(contract_assets, revenue),
-                "prepayment_to_revenue": _safe_ratio(_numeric_value(bal, "prepayment"), revenue),
+                "contract_like_liab_to_revenue": _safe_ratio(contract_like_liab, revenue_for_stock_ratios),
+                "receivables_to_revenue": _safe_ratio(receivables, revenue_for_stock_ratios),
+                "inventory_to_revenue": _safe_ratio(inventories, revenue_for_stock_ratios),
+                "contract_assets_to_revenue": _safe_ratio(contract_assets, revenue_for_stock_ratios),
+                "prepayment_to_revenue": _safe_ratio(_numeric_value(bal, "prepayment"), revenue_for_stock_ratios),
                 "payables_to_cogs": _safe_ratio(payables, total_cogs),
                 "goodwill_to_assets": _safe_ratio(_numeric_value(bal, "goodwill"), total_assets),
                 "equity_multiplier": _safe_ratio(total_assets, equity, multiplier=1.0),
@@ -504,15 +515,27 @@ def _market_context(curr_date: str) -> str:
     return "\n".join(lines)
 
 
+_STOCK_BASIC_CACHE: dict[str, pd.Series | None] = {}
+
+
 def _fetch_stock_basic(symbol: str) -> pd.Series | None:
+    cached = _STOCK_BASIC_CACHE.get(symbol)
+    if cached is not None:
+        return cached.copy()
+    if symbol in _STOCK_BASIC_CACHE:
+        return None
+
     pro = _get_pro_client()
     data = pro.stock_basic(
         ts_code=symbol,
         fields="ts_code,symbol,name,area,industry,market,exchange,list_date",
     )
     if data is None or data.empty:
+        _STOCK_BASIC_CACHE[symbol] = None
         return None
-    return data.iloc[0]
+    row = data.iloc[0].copy()
+    _STOCK_BASIC_CACHE[symbol] = row
+    return row.copy()
 
 
 def _fetch_daily_basic_latest(symbol: str, curr_date: str) -> pd.Series | None:

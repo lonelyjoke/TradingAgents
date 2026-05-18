@@ -4,9 +4,13 @@ from tradingagents.agents.utils.agent_utils import (
     get_buy_side_thesis_instruction,
     get_evidence_instruction,
     get_fair_cycle_valuation_instruction,
+    get_filing_intelligence_instruction,
     get_focused_report_instruction,
+    get_investor_interaction_instruction,
+    get_policy_planning_instruction,
     get_research_gap_instruction,
     get_supply_demand_fallback_instruction,
+    get_thematic_valuation_instruction,
 )
 
 
@@ -23,6 +27,10 @@ def create_conservative_debator(llm):
         sentiment_report = state["sentiment_report"]
         news_report = state["news_report"]
         fundamentals_report = state["fundamentals_report"]
+        thematic_catalyst_context = state.get("thematic_catalyst_context", "")
+        filing_intelligence_context = state.get("filing_intelligence_context", "")
+        investor_interaction_context = state.get("investor_interaction_context", "")
+        policy_planning_context = state.get("policy_planning_context", "")
 
         trader_decision = state["trader_investment_plan"]
 
@@ -36,9 +44,13 @@ Market Research Report: {market_research_report}
 Social Media Sentiment Report: {sentiment_report}
 Latest World Affairs Report: {news_report}
 Company Fundamentals Report: {fundamentals_report}
+Verified Thematic Catalyst Bridge: {thematic_catalyst_context}
+Financial-Report Intelligence And Promoted Discussion Items: {filing_intelligence_context}
+Official Investor-Interaction Context: {investor_interaction_context}
+Official Policy-Planning Context: {policy_planning_context}
 Here is the current conversation history: {history} Here is the last response from the aggressive analyst: {current_aggressive_response} Here is the last response from the neutral analyst: {current_neutral_response}. If there are no responses from the other viewpoints yet, present your own argument based on the available data.
 
-Engage by questioning their optimism and emphasizing the potential downsides they may have overlooked. Address each of their counterpoints to showcase why a conservative stance is ultimately the safest path for the firm's assets. Focus on debating and critiquing their arguments to demonstrate the strength of a low-risk strategy over their approaches. {get_evidence_instruction()} {get_research_gap_instruction()} {get_supply_demand_fallback_instruction()} {get_buy_side_thesis_instruction()} {get_fair_cycle_valuation_instruction()} {get_focused_report_instruction()} Output conversationally as if you are speaking without any special formatting."""
+Engage by questioning their optimism and emphasizing the potential downsides they may have overlooked. Address each of their counterpoints to showcase why a conservative stance is ultimately the safest path for the firm's assets. Focus on debating and critiquing their arguments to demonstrate the strength of a low-risk strategy over their approaches. Preserve core discussion items that matter to the thesis even when they do not change the final action today. {get_evidence_instruction()} {get_research_gap_instruction()} {get_supply_demand_fallback_instruction()} {get_buy_side_thesis_instruction()} {get_fair_cycle_valuation_instruction()} {get_thematic_valuation_instruction()} {get_filing_intelligence_instruction()} {get_investor_interaction_instruction()} {get_policy_planning_instruction()} {get_focused_report_instruction()} Output conversationally as if you are speaking without any special formatting."""
 
         response = llm.invoke(prompt)
 

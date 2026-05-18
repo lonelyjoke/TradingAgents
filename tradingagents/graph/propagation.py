@@ -29,6 +29,8 @@ class Propagator:
         market_expectation_context: str = "",
         management_capital_allocation_context: str = "",
         shareholder_structure_context: str = "",
+        investor_interaction_context: str = "",
+        policy_planning_context: str = "",
     ) -> Dict[str, Any]:
         """Create the initial state for the agent graph."""
         return {
@@ -45,6 +47,8 @@ class Propagator:
             "market_expectation_context": market_expectation_context,
             "management_capital_allocation_context": management_capital_allocation_context,
             "shareholder_structure_context": shareholder_structure_context,
+            "investor_interaction_context": investor_interaction_context,
+            "policy_planning_context": policy_planning_context,
             "investment_debate_state": InvestDebateState(
                 {
                     "bull_history": "",

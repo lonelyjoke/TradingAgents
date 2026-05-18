@@ -1,7 +1,19 @@
 from tradingagents.dataflows.filing_research import (
+    _audit_filing_coverage,
     _answer_questions,
+    _build_business_model_map,
+    _build_paragraph_reading_pack,
+    _build_industry_reading_pack,
+    _build_report_to_report_bridge,
     _detect_report_type,
     _extract_filing_evidence,
+    _extract_deep_reading_excerpts,
+    _extract_growth_vectors,
+    _extract_material_filing_findings,
+    _extract_note_findings,
+    _extract_statement_table_signals,
+    _infer_financial_relations,
+    _promote_core_discussion_items,
     _question_candidates,
     _select_industry_profile,
 )
@@ -109,3 +121,578 @@ def test_question_candidates_include_new_priority_playbooks():
     assert any(q.question_id == "baijiu_channel_inventory" for q in _question_candidates("baijiu"))
     assert any(q.question_id == "airline_traffic_yield" for q in _question_candidates("airlines"))
     assert any(q.question_id == "insurance_nbv" for q in _question_candidates("insurance"))
+
+
+
+def test_industry_profile_prefers_power_operator_over_incidental_wind_mentions():
+    reports = [("annual", "\u98ce\u7535\u9879\u76ee\u4ec5\u4e3a\u80cc\u666f\u63d0\u53ca")]
+    assert _select_industry_profile("\u534f\u946b\u80fd\u79d1", "\u65b0\u578b\u7535\u529b", reports) == "power_operator"
+
+
+def test_industry_profile_detects_precision_equipment_before_wind_false_positive():
+    reports = [("annual", "\u516c\u53f8\u4ece\u4e8b\u592a\u9633\u80fd\u3001\u534a\u5bfc\u4f53\u3001\u663e\u793a\u8bbe\u5907\uff0c\u540c\u65f6\u62ab\u9732\u98ce\u7535\u5ba2\u6237")]
+    assert _select_industry_profile("\u8fc8\u4e3a\u80a1\u4efd", "\u4e13\u7528\u673a\u68b0", reports) == "precision_equipment"
+
+
+def test_material_filing_findings_promote_contracted_new_business():
+    reports = [
+        (
+            "2025年年度报告",
+            "公司生产绿色甲醇，同时与马士基、赫伯罗特等国际航运客户签订长期协议，形成产能建设到市场消纳的良性循环。",
+        )
+    ]
+
+    findings = _extract_material_filing_findings(reports)
+    types = {item.finding_type for item in findings}
+
+    assert "contracted-commercialization" in types
+    assert "named-customer-validation" in types
+    assert "capacity-to-demand-bridge" in types
+
+
+def test_wind_profile_wins_when_reports_are_clearly_wind_specific():
+    reports = [
+        (
+            "2025年年度报告",
+            "公司风电、风机、海上风电业务持续扩张，同时披露部分显示设备客户。",
+        )
+    ]
+
+    assert _select_industry_profile("金风科技", "电气设备", reports) == "wind_power_equipment"
+
+
+def test_business_model_map_reads_long_cycle_documents_first():
+    reports = [
+        ("2026年一季度报告", "营业收入增长63%。"),
+        ("2025年年度报告", "公司主营业务为风力发电机组销售，同时披露境外收入与研发投入。"),
+    ]
+
+    rows = _build_business_model_map(reports)
+    by_lens = {row.lens: row for row in rows}
+
+    assert by_lens["core_revenue_engine"].report_type == "annual"
+    assert "主营业务" in by_lens["core_revenue_engine"].evidence
+
+
+def test_growth_vector_map_stages_contracted_second_curve():
+    reports = [
+        (
+            "2025年年度报告",
+            "公司生产绿色甲醇，并与国际航运巨头签订长期协议，形成产能建设到市场消纳的良性循环。",
+        )
+    ]
+
+    rows = _extract_growth_vectors(reports)
+    row = next(item for item in rows if item.vector == "green-fuels")
+
+    assert row.stage == "contracted"
+
+
+def test_report_bridge_pairs_long_cycle_story_with_quarterly_checkpoint():
+    reports = [
+        ("2025年年度报告", "公司在手订单持续增长，推进新业务建设。"),
+        ("2026年一季度报告", "公司在手订单总计53,934.25MW。"),
+    ]
+
+    rows = _build_report_to_report_bridge(reports)
+    row = next(item for item in rows if item.topic == "orders_and_visibility")
+
+    assert row.bridge_status == "checkpoint-available"
+    assert row.bridge_read == "confirmed"
+    assert "年度报告" in row.long_cycle_evidence
+    assert "一季度报告" in row.checkpoint_evidence
+
+
+def test_growth_vector_map_ignores_accounting_noise():
+    reports = [
+        ("2026年一季度报告", "香港中央结算（代理人）有限公司 境外上市外资。"),
+        ("2025年年度报告", "公司海外订单持续增长。"),
+    ]
+
+    rows = _extract_growth_vectors(reports)
+
+    assert all("境外上市外资" not in row.evidence for row in rows)
+    assert any(row.vector == "overseas-expansion" for row in rows)
+
+
+def test_deep_reading_excerpts_collect_annual_and_quarterly_sections():
+    reports = [
+        (
+            "2025年年度报告",
+            "公司业务概要\n公司主营业务为风机制造。\n经营情况讨论与分析\n报告期内公司海外订单增长。",
+        ),
+        (
+            "2026年一季度报告",
+            "主要会计数据和财务指标发生变动的情况及原因\n营业收入同比增长。",
+        ),
+    ]
+
+    rows = _extract_deep_reading_excerpts(reports)
+    sections = {(row.report_type, row.section) for row in rows}
+
+    assert ("annual", "公司业务概要") in sections
+    assert ("quarterly", "主要会计数据和财务指标发生变动的情况及原因") in sections
+
+
+
+def test_growth_vector_map_rejects_macro_only_policy_mentions():
+    reports = [
+        (
+            "2025\u5e74\u5e74\u5ea6\u62a5\u544a",
+            "\u56fd\u5bb6\u653f\u7b56\u652f\u6301\u7eff\u8272\u7532\u9187\u548c\u50a8\u80fd\u53d1\u5c55\uff0c\u884c\u4e1a\u5e02\u573a\u7a7a\u95f4\u5e7f\u9614\u3002",
+        ),
+        (
+            "2025\u5e74\u5e74\u5ea6\u62a5\u544a",
+            "\u516c\u53f8\u5df2\u5efa\u8bbe\u7eff\u8272\u7532\u9187\u9879\u76ee\uff0c\u5e76\u4e0e\u5ba2\u6237\u7b7e\u8ba2\u957f\u671f\u534f\u8bae\u3002",
+        ),
+    ]
+
+    rows = _extract_growth_vectors(reports)
+
+    assert all("\u56fd\u5bb6\u653f\u7b56\u652f\u6301" not in row.evidence for row in rows)
+    assert any(row.vector == "green-fuels" for row in rows)
+
+
+
+def test_growth_vector_map_rejects_policy_reference_lines_without_company_bridge():
+    reports = [
+        (
+            "2025\u5e74\u5e74\u5ea6\u62a5\u544a",
+            "2025\u5e748\u670827\u65e5\uff0c\u56fd\u5bb6\u53d1\u5c55\u6539\u9769\u59d4\u3001\u56fd\u5bb6\u80fd\u6e90\u5c40\u5370\u53d1\u300a\u65b0\u578b\u50a8\u80fd\u89c4\u6a21\u5316\u5efa\u8bbe\u4e13\u9879\u884c\u52a8\u65b9\u6848\u300b\u3002",
+        ),
+        (
+            "2025\u5e74\u5e74\u5ea6\u62a5\u544a",
+            "\u516c\u53f8\u5df2\u5efa\u8bbe\u50a8\u80fd\u9879\u76ee\uff0c\u5e76\u4e0e\u5ba2\u6237\u7b7e\u8ba2\u8ba2\u5355\u3002",
+        ),
+    ]
+
+    rows = _extract_growth_vectors(reports)
+
+    assert all("\u56fd\u5bb6\u53d1\u5c55\u6539\u9769\u59d4" not in row.evidence for row in rows)
+    assert any(row.vector == "energy-storage" for row in rows)
+
+
+def test_capacity_to_demand_bridge_rejects_generic_consumption_line():
+    reports = [
+        (
+            "2025\u5e74\u5e74\u5ea6\u62a5\u544a",
+            "\u516c\u53f8\u63a8\u8fdb\u5149\u4f0f\u5efa\u7b51\u4e00\u4f53\u5316\u5efa\u8bbe\uff0c\u66f4\u597d\u4fc3\u8fdb\u65b0\u80fd\u6e90\u5c31\u5730\u6d88\u7eb3\u3002",
+        )
+    ]
+
+    findings = _extract_material_filing_findings(reports)
+
+    assert all(item.finding_type != "capacity-to-demand-bridge" for item in findings)
+
+
+def test_business_model_map_avoids_header_only_segment_lines():
+    reports = [
+        (
+            "2025\u5e74\u5e74\u5ea6\u62a5\u544a",
+            "\u5206\u4ea7\u54c1\n\u516c\u53f8\u4e3b\u8425\u4e1a\u52a1\u6309\u4ea7\u54c1\u5206\u4e3a\u98ce\u673a\u9500\u552e\u3001\u98ce\u7535\u573a\u5f00\u53d1\u548c\u98ce\u7535\u670d\u52a1\uff0c\u5176\u4e2d\u98ce\u673a\u9500\u552e\u6536\u5165\u5360\u6bd4\u6700\u9ad8\u3002",
+        ),
+    ]
+
+    rows = _build_business_model_map(reports)
+    by_lens = {row.lens: row for row in rows}
+
+    assert "\u5206\u4ea7\u54c1" not in by_lens["segment_mix"].evidence
+    assert "\u98ce\u673a\u9500\u552e" in by_lens["segment_mix"].evidence
+
+
+
+def test_paragraph_reading_pack_collects_cross_report_lenses():
+    reports = [
+        (
+            "2025\u5e74\u5e74\u5ea6\u62a5\u544a",
+            "\u516c\u53f8\u4e1a\u52a1\u6982\u8981\n\u516c\u53f8\u4e3b\u8425\u4e1a\u52a1\u4e3a\u98ce\u673a\u9500\u552e\uff0c\u540c\u65f6\u5e03\u5c40\u7eff\u8272\u7532\u9187\u65b0\u4e1a\u52a1\u3002\n\u6838\u5fc3\u7ade\u4e89\u529b\u5206\u6790\n\u516c\u53f8\u5177\u5907\u6280\u672f\u548c\u5e02\u573a\u5730\u4f4d\u4f18\u52bf\u3002\n\u91cd\u5927\u98ce\u9669\u63d0\u793a\n\u539f\u6750\u6599\u4ef7\u683c\u6ce2\u52a8\u53ef\u80fd\u5f71\u54cd\u6bdb\u5229\u7387\u3002",
+        ),
+        (
+            "2025\u5e74\u534a\u5e74\u5ea6\u62a5\u544a",
+            "\u7ecf\u8425\u60c5\u51b5\u8ba8\u8bba\u4e0e\u5206\u6790\n\u516c\u53f8\u6536\u5165\u589e\u957f\uff0c\u6d77\u5916\u8ba2\u5355\u6301\u7eed\u63d0\u5347\u3002",
+        ),
+        (
+            "2026\u5e74\u4e00\u5b63\u5ea6\u62a5\u544a",
+            "\u4e3b\u8981\u4f1a\u8ba1\u6570\u636e\u548c\u8d22\u52a1\u6307\u6807\u53d1\u751f\u53d8\u52a8\u7684\u60c5\u51b5\u53ca\u539f\u56e0\n\u8425\u4e1a\u6536\u5165\u540c\u6bd4\u589e\u957f\uff0c\u9884\u4ed8\u6b3e\u4e0e\u5e94\u6536\u8d26\u6b3e\u589e\u52a0\u3002",
+        ),
+    ]
+
+    rows = _build_paragraph_reading_pack(reports)
+    lenses = {row.lens for row in rows}
+
+    assert "business_model" in lenses
+    assert "second_curve" in lenses
+    assert "moat" in lenses
+    assert "long_cycle_risk" in lenses
+    assert "trend_formation" in lenses
+    assert "short_cycle_execution" in lenses
+
+
+def test_paragraph_reading_pack_prefers_relevant_annual_sections():
+    reports = [
+        (
+            "2025\u5e74\u5e74\u5ea6\u62a5\u544a",
+            "\u516c\u53f8\u4e1a\u52a1\u6982\u8981\n\u516c\u53f8\u4e3b\u8425\u4e1a\u52a1\u4e3a\u9500\u552e\u4ea7\u54c1\u3002\n\u516c\u53f8\u672a\u6765\u53d1\u5c55\u7684\u5c55\u671b\n\u516c\u53f8\u5df2\u5e03\u5c40\u65b0\u4e1a\u52a1\uff0c\u5e76\u4e0e\u5ba2\u6237\u7b7e\u8ba2\u8ba2\u5355\u3002",
+        ),
+    ]
+
+    rows = _build_paragraph_reading_pack(reports)
+    second_curve = next(row for row in rows if row.lens == "second_curve")
+
+    assert second_curve.section == "\u516c\u53f8\u672a\u6765\u53d1\u5c55\u7684\u5c55\u671b"
+    assert "\u5ba2\u6237\u7b7e\u8ba2\u8ba2\u5355" in second_curve.excerpt
+
+
+
+def test_paragraph_reading_pack_supports_financial_company_headings():
+    reports = [
+        (
+            "2025\u5e74\u5e74\u5ea6\u62a5\u544a",
+            "\u7ecf\u8425\u60c5\u51b5\u8ba8\u8bba\u53ca\u5206\u6790\n\u96c6\u56e2\u7efc\u5408\u91d1\u878d\u4e1a\u52a1\u5b9e\u73b0\u6536\u5165\u589e\u957f\u3002\n\u672a\u6765\u53d1\u5c55\u5c55\u671b\n\u516c\u53f8\u5c06\u7ee7\u7eed\u5e03\u5c40\u533b\u7597\u517b\u8001\u548c\u79d1\u6280\u8d4b\u80fd\u3002\n\u98ce\u9669\u7ba1\u7406\n\u5229\u7387\u3001\u5e02\u573a\u548c\u4fe1\u7528\u98ce\u9669\u9700\u8981\u6301\u7eed\u5173\u6ce8\u3002",
+        ),
+        (
+            "2026\u5e74\u4e00\u5b63\u5ea6\u62a5\u544a",
+            "\u5b63\u5ea6\u7ecf\u8425\u5206\u6790\n\u8425\u4e1a\u6536\u5165\u4e0b\u964d\uff0c\u7ecf\u8425\u6d3b\u52a8\u73b0\u91d1\u6d41\u91cf\u51c0\u989d\u4e0b\u964d\u3002",
+        ),
+    ]
+
+    rows = _build_paragraph_reading_pack(reports)
+    lenses = {row.lens for row in rows}
+
+    assert "business_model" in lenses
+    assert "second_curve" in lenses
+    assert "long_cycle_risk" in lenses
+    assert "short_cycle_execution" in lenses
+
+
+
+def test_industry_reading_pack_for_wind_prioritizes_backlog_margin_and_second_curve():
+    reports = [
+        (
+            "2025\u5e74\u5e74\u5ea6\u62a5\u544a",
+            "\u4e3b\u8425\u4e1a\u52a1\u5206\u6790\n\u516c\u53f8\u5728\u624b\u8ba2\u5355\u589e\u957f\uff0c\u6d77\u5916\u8ba2\u5355\u63d0\u5347\uff0c\u7eff\u8272\u7532\u9187\u5df2\u6295\u4ea7\u5e76\u4e0e\u5ba2\u6237\u7b7e\u8ba2\u8ba2\u5355\u3002\n\u516c\u53f8\u672a\u6765\u53d1\u5c55\u7684\u5c55\u671b\n\u516c\u53f8\u5c06\u7ee7\u7eed\u63a8\u8fdb\u50a8\u80fd\u548c\u6d77\u5916\u4e1a\u52a1\u3002",
+        ),
+        (
+            "2026\u5e74\u4e00\u5b63\u5ea6\u62a5\u544a",
+            "\u4e3b\u8981\u4f1a\u8ba1\u6570\u636e\u548c\u8d22\u52a1\u6307\u6807\u53d1\u751f\u53d8\u52a8\u7684\u60c5\u51b5\u53ca\u539f\u56e0\n\u8425\u4e1a\u6210\u672c\u589e\u52a0\uff0c\u6bdb\u5229\u7387\u627f\u538b\u3002",
+        ),
+    ]
+
+    rows = _build_industry_reading_pack(reports, "wind_power_equipment")
+    lenses = {row.lens for row in rows}
+
+    assert {"backlog_quality", "pricing_margin", "second_curve_monetization"}.issubset(lenses)
+
+
+def test_industry_reading_pack_for_insurance_reads_value_and_ecosystem():
+    reports = [
+        (
+            "2025\u5e74\u5e74\u5ea6\u62a5\u544a",
+            "\u7ecf\u8425\u60c5\u51b5\u8ba8\u8bba\u53ca\u5206\u6790\n\u65b0\u4e1a\u52a1\u4ef7\u503c\u589e\u957f\uff0c\u533b\u7597\u517b\u8001\u670d\u52a1\u6b63\u6210\u4e3a\u7b2c\u4e8c\u589e\u957f\u66f2\u7ebf\uff0c\u7efc\u5408\u6295\u8d44\u6536\u76ca\u7387\u4fdd\u6301\u7a33\u5065\u3002",
+        ),
+        (
+            "2026\u5e74\u4e00\u5b63\u5ea6\u62a5\u544a",
+            "\u5b63\u5ea6\u7ecf\u8425\u5206\u6790\n\u65b0\u4e1a\u52a1\u4ef7\u503c\u7ee7\u7eed\u63d0\u5347\u3002",
+        ),
+    ]
+
+    rows = _build_industry_reading_pack(reports, "insurance")
+    lenses = {row.lens for row in rows}
+
+    assert {"franchise_recovery", "investment_spread", "service_ecosystem"}.issubset(lenses)
+
+
+def test_industry_reading_pack_for_banking_reads_asset_quality_and_spread():
+    reports = [
+        (
+            "2025\u5e74\u5e74\u5ea6\u62a5\u544a",
+            "\u7ecf\u8425\u60c5\u51b5\u8ba8\u8bba\u53ca\u5206\u6790\n\u4e0d\u826f\u8d37\u6b3e\u7387\u4e0b\u964d\uff0c\u62e8\u5907\u8986\u76d6\u7387\u63d0\u5347\uff0c\u51c0\u606f\u5dee\u4ecd\u627f\u538b\uff0c\u624b\u7eed\u8d39\u6536\u5165\u589e\u957f\u3002",
+        ),
+    ]
+
+    rows = _build_industry_reading_pack(reports, "banking")
+    lenses = {row.lens for row in rows}
+
+    assert {"asset_quality", "spread_and_mix"}.issubset(lenses)
+
+
+def test_material_findings_read_across_pdf_line_breaks():
+    reports = [
+        (
+            "2025\u5e74\u5e74\u5ea6\u62a5\u544a",
+            "\u516c\u53f8\u7eff\u8272\u7532\u9187\u9879\u76ee\u5df2\u6295\u4ea7\uff0c\n"
+            "\u5e76\u4e0e\u9a6c\u58eb\u57fa\u3001\u8d6b\u4f2f\u7f57\u7279\u7b7e\u8ba2\u957f\u671f\u534f\u8bae\uff0c\n"
+            "\u4e3a\u65b0\u4e1a\u52a1\u63d0\u4f9b\u9700\u6c42\u9501\u5b9a\u3002",
+        )
+    ]
+
+    findings = _extract_material_filing_findings(reports)
+    types = {item.finding_type for item in findings}
+
+    assert "contracted-commercialization" in types
+    assert "named-customer-validation" in types
+    assert "capacity-to-demand-bridge" in types
+
+
+def test_question_answers_read_across_pdf_line_breaks():
+    reports = [
+        (
+            "2025\u5e74\u5e74\u5ea6\u62a5\u544a",
+            "\u516c\u53f8\u5728\u624b\u8ba2\u5355\u6301\u7eed\u589e\u957f\uff0c\n"
+            "\u5408\u540c\u8d1f\u503a\u4e0e\u6536\u5165\u786e\u8ba4\u540c\u5411\u6539\u5584\u3002",
+        )
+    ]
+
+    answers = _answer_questions(reports, _question_candidates("precision_equipment"))
+    answer_ids = {item.question_id for item in answers}
+
+    assert "equipment_orders" in answer_ids
+
+
+def test_filing_coverage_audit_marks_strong_pack():
+    reports = [
+        (
+            "2025\u5e74\u5e74\u5ea6\u62a5\u544a",
+            "\u516c\u53f8\u4e1a\u52a1\u6982\u8981\n"
+            "\u516c\u53f8\u4e3b\u8425\u4e1a\u52a1\u4e3a\u98ce\u673a\u9500\u552e\uff0c\u540c\u65f6\u5e03\u5c40\u7eff\u8272\u7532\u9187\u3002\n"
+            "\u516c\u53f8\u672a\u6765\u53d1\u5c55\u7684\u5c55\u671b\n"
+            "\u516c\u53f8\u5728\u624b\u8ba2\u5355\u589e\u957f\uff0c\u7eff\u8272\u7532\u9187\u5df2\u6295\u4ea7\u5e76\u4e0e\u5ba2\u6237\u7b7e\u8ba2\u8ba2\u5355\u3002",
+        ),
+        (
+            "2025\u5e74\u534a\u5e74\u5ea6\u62a5\u544a",
+            "\u516c\u53f8\u6d77\u5916\u8ba2\u5355\u63d0\u5347\uff0c\u7ecf\u8425\u8d8b\u52bf\u6539\u5584\u3002",
+        ),
+        (
+            "2026\u5e74\u4e00\u5b63\u5ea6\u62a5\u544a",
+            "\u4e3b\u8981\u4f1a\u8ba1\u6570\u636e\u548c\u8d22\u52a1\u6307\u6807\u53d1\u751f\u53d8\u52a8\u7684\u60c5\u51b5\u53ca\u539f\u56e0\n"
+            "\u516c\u53f8\u5728\u624b\u8ba2\u5355\u589e\u957f\uff0c\u8425\u4e1a\u6536\u5165\u540c\u6bd4\u589e\u957f\uff0c\u6bdb\u5229\u7387\u627f\u538b\u3002",
+        ),
+    ]
+    questions = _question_candidates("wind_power_equipment")
+    answers = _answer_questions(reports, questions)
+    audit = _audit_filing_coverage(
+        report_texts=reports,
+        questions=questions,
+        answers=answers,
+        business_model_map=_build_business_model_map(reports),
+        paragraph_reading_pack=_build_paragraph_reading_pack(reports),
+        industry_reading_pack=_build_industry_reading_pack(reports, "wind_power_equipment"),
+    )
+
+    assert audit.coverage_grade == "strong"
+    assert audit.core_pack_status == "ready"
+    assert audit.missing_report_types == ()
+
+
+def test_core_discussion_promotion_queue_prioritizes_investable_findings():
+    reports = [
+        (
+            "2025\u5e74\u5e74\u5ea6\u62a5\u544a",
+            "\u516c\u53f8\u7eff\u8272\u7532\u9187\u9879\u76ee\u5df2\u6295\u4ea7\uff0c"
+            "\u5e76\u4e0e\u9a6c\u58eb\u57fa\u7b7e\u8ba2\u957f\u671f\u534f\u8bae\u3002",
+        ),
+        (
+            "2026\u5e74\u4e00\u5b63\u5ea6\u62a5\u544a",
+            "\u516c\u53f8\u5728\u624b\u8ba2\u5355\u589e\u957f\uff0c\u6bdb\u5229\u7387\u627f\u538b\u3002",
+        ),
+    ]
+    findings = _extract_material_filing_findings(reports)
+    growth = _extract_growth_vectors(reports)
+    questions = _question_candidates("wind_power_equipment")
+    answers = _answer_questions(reports, questions)
+    promoted = _promote_core_discussion_items(
+        material_findings=findings,
+        growth_vectors=growth,
+        answers=answers,
+        report_bridge=_build_report_to_report_bridge(reports),
+    )
+
+    assert promoted[0].priority == "core"
+    assert any(item.topic == "green-fuels" and item.priority == "core" for item in promoted)
+
+
+def test_statement_table_pack_reads_key_financial_rows():
+    reports = [
+        (
+            "2025\u5e74\u5e74\u5ea6\u62a5\u544a",
+            "\u5408\u540c\u8d1f\u503a 19,760,000,000.00 11,940,000,000.00\n"
+            "\u5e94\u6536\u8d26\u6b3e 33,936,000,000.00 32,300,000,000.00\n"
+            "\u957f\u671f\u80a1\u6743\u6295\u8d44 3,560,000,000.00 2,980,000,000.00",
+        )
+    ]
+
+    rows = _extract_statement_table_signals(reports)
+    accounts = {item.account for item in rows}
+
+    assert {"contract_liabilities", "receivables", "long_term_equity_investments"}.issubset(accounts)
+
+
+def test_note_pack_reads_footnote_risks():
+    reports = [
+        (
+            "2025\u5e74\u5e74\u5ea6\u62a5\u544a",
+            "\u524d\u4e94\u5927\u5ba2\u6237\u9500\u552e\u989d\u5360\u6bd4 42.5%\n"
+            "\u516c\u53f8\u5b58\u5728\u5173\u8054\u65b9\u4ea4\u6613\uff0c\u5e76\u62ab\u9732\u5bf9\u5916\u62c5\u4fdd\u4f59\u989d\u3002",
+        )
+    ]
+
+    rows = _extract_note_findings(reports)
+    note_types = {item.note_type for item in rows}
+
+    assert {"customer_concentration", "related_party", "guarantees"}.issubset(note_types)
+
+
+def test_core_discussion_queue_promotes_table_and_note_signals():
+    reports = [
+        (
+            "2025\u5e74\u5e74\u5ea6\u62a5\u544a",
+            "\u5408\u540c\u8d1f\u503a 19,760,000,000.00 11,940,000,000.00\n"
+            "\u524d\u4e94\u5927\u5ba2\u6237\u9500\u552e\u989d\u5360\u6bd4 42.5%",
+        )
+    ]
+    promoted = _promote_core_discussion_items(
+        material_findings=[],
+        growth_vectors=[],
+        answers=[],
+        report_bridge=[],
+        statement_table_signals=_extract_statement_table_signals(reports),
+        note_findings=_extract_note_findings(reports),
+    )
+    by_topic = {item.topic: item for item in promoted}
+
+    assert by_topic["contract_liabilities"].priority == "core"
+    assert by_topic["customer_concentration"].priority == "core"
+
+
+def test_financial_relations_identify_cash_absorbing_growth():
+    import pandas as pd
+
+    derived = pd.DataFrame(
+        [
+            {
+                "end_date": "20260331",
+                "revenue_base": 160.0,
+                "reported_gross_margin": 16.8,
+                "derived_operating_margin": 8.0,
+                "derived_net_margin": 5.0,
+                "ocf_to_net_profit": -1.7,
+                "receivables_to_revenue": 55.8,
+                "inventory_to_revenue": 27.7,
+                "prepayment_to_revenue": 5.0,
+                "contract_like_liab": 197.6,
+                "debt_to_assets_derived": 60.0,
+                "finance_expense_ratio": 1.5,
+            },
+            {
+                "end_date": "20251231",
+                "revenue_base": 100.0,
+                "reported_gross_margin": 21.8,
+                "derived_operating_margin": 10.0,
+                "derived_net_margin": 6.0,
+                "ocf_to_net_profit": 1.1,
+                "receivables_to_revenue": 45.1,
+                "inventory_to_revenue": 23.0,
+                "prepayment_to_revenue": 2.0,
+                "contract_like_liab": 119.4,
+                "debt_to_assets_derived": 58.0,
+                "finance_expense_ratio": 1.0,
+            },
+        ]
+    )
+
+    rows = _infer_financial_relations(derived)
+    relation_types = {item.relation_type for item in rows}
+
+    assert "growth_without_margin" in relation_types
+    assert "cash_absorbing_growth" in relation_types
+    assert "visibility_not_yet_profitability" in relation_types
+
+
+def test_financial_relations_identify_quality_growth():
+    import pandas as pd
+
+    derived = pd.DataFrame(
+        [
+            {
+                "end_date": "20260331",
+                "revenue_base": 120.0,
+                "reported_gross_margin": 32.0,
+                "derived_operating_margin": 18.0,
+                "derived_net_margin": 12.0,
+                "ocf_to_net_profit": 1.2,
+                "receivables_to_revenue": 18.0,
+                "inventory_to_revenue": 12.0,
+                "prepayment_to_revenue": 1.0,
+                "contract_like_liab": 20.0,
+                "debt_to_assets_derived": 30.0,
+                "finance_expense_ratio": 0.5,
+            },
+            {
+                "end_date": "20251231",
+                "revenue_base": 100.0,
+                "reported_gross_margin": 29.0,
+                "derived_operating_margin": 15.0,
+                "derived_net_margin": 10.0,
+                "ocf_to_net_profit": 1.0,
+                "receivables_to_revenue": 20.0,
+                "inventory_to_revenue": 13.0,
+                "prepayment_to_revenue": 1.5,
+                "contract_like_liab": 18.0,
+                "debt_to_assets_derived": 31.0,
+                "finance_expense_ratio": 0.5,
+            },
+        ]
+    )
+
+    rows = _infer_financial_relations(derived)
+    relation_types = {item.relation_type for item in rows}
+
+    assert "quality_growth" in relation_types
+
+
+def test_core_discussion_queue_promotes_financial_relations():
+    import pandas as pd
+
+    derived = pd.DataFrame(
+        [
+            {
+                "end_date": "20260331",
+                "revenue_base": 160.0,
+                "reported_gross_margin": 16.8,
+                "derived_operating_margin": 8.0,
+                "derived_net_margin": 5.0,
+                "ocf_to_net_profit": -1.7,
+                "receivables_to_revenue": 55.8,
+                "inventory_to_revenue": 27.7,
+                "prepayment_to_revenue": 5.0,
+                "contract_like_liab": 197.6,
+                "debt_to_assets_derived": 60.0,
+                "finance_expense_ratio": 1.5,
+            },
+            {
+                "end_date": "20251231",
+                "revenue_base": 100.0,
+                "reported_gross_margin": 21.8,
+                "derived_operating_margin": 10.0,
+                "derived_net_margin": 6.0,
+                "ocf_to_net_profit": 1.1,
+                "receivables_to_revenue": 45.1,
+                "inventory_to_revenue": 23.0,
+                "prepayment_to_revenue": 2.0,
+                "contract_like_liab": 119.4,
+                "debt_to_assets_derived": 58.0,
+                "finance_expense_ratio": 1.0,
+            },
+        ]
+    )
+    relations = _infer_financial_relations(derived)
+    promoted = _promote_core_discussion_items(
+        material_findings=[],
+        growth_vectors=[],
+        answers=[],
+        report_bridge=[],
+        financial_relations=relations,
+    )
+    by_topic = {item.topic: item for item in promoted}
+
+    assert by_topic["cash_absorbing_growth"].priority == "core"

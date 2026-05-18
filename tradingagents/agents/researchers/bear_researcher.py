@@ -7,8 +7,10 @@ from tradingagents.agents.utils.agent_utils import (
     get_fair_cycle_valuation_instruction,
     get_filing_intelligence_instruction,
     get_focused_report_instruction,
+    get_investor_interaction_instruction,
     get_market_expectation_instruction,
     get_management_capital_allocation_instruction,
+    get_policy_planning_instruction,
     get_peer_selection_instruction,
     get_research_gap_instruction,
     get_supply_demand_fallback_instruction,
@@ -38,6 +40,8 @@ def create_bear_researcher(llm):
         market_expectation_context = state.get("market_expectation_context", "")
         management_capital_allocation_context = state.get("management_capital_allocation_context", "")
         shareholder_structure_context = state.get("shareholder_structure_context", "")
+        investor_interaction_context = state.get("investor_interaction_context", "")
+        policy_planning_context = state.get("policy_planning_context", "")
         round_instruction = (
             "This is a follow-up debate turn. Do not restate your full bear memo. "
             "Respond only to the latest bull objections, add genuinely new evidence "
@@ -63,6 +67,12 @@ Key points to focus on:
 - Risks and Challenges: Highlight factors like market saturation, financial instability, macroeconomic threats, product-price/freight weakness, or policy risks that could hinder the stock's performance.
 - Competitive Weaknesses: Emphasize vulnerabilities such as weaker market positioning, declining innovation, or threats from competitors.
 - Negative Indicators: Use evidence from financial data, market trends, or recent adverse news to support your position.
+- Thematic Catalyst Discipline: Discuss the valuable themes extracted by the system, including credible tier-3 narrative options if they are not fantastical. For each material theme, assess whether it is too small, too slow, too weakly evidenced, already priced, or disconnected from economics; state what would falsify it; and do not silently ignore a theme merely because it is not yet valuation-grade.
+- Investor-Interaction Discipline: If official Q&A context is available, discuss what investors keep pressing on, where management answers are non-committal or incomplete, and whether the answer pattern exposes unresolved risks, weak disclosure, or low catalyst visibility.
+- Policy-Planning Discipline: If official national or industry policy context is available, test whether policy merely expands the industry while competitors capture the economics, whether support is already priced, and whether the company is a real beneficiary rather than only adjacent to a favored direction.
+- Industry-Driver Discipline: Use the industry reading pack from the filing context to identify the sector-native variables that truly decide the thesis, then attack the weak links with outside evidence such as policy, investor Q&A, thematic catalysts, peers, and market expectations. Do not let generic revenue growth obscure the real industry question if the decisive variable is backlog quality, NBV, channel inventory, asset quality, utilization, or freight rate.
+- Relative Allocation Discipline: Explicitly answer why capital should not be deployed into a stronger peer or a better-positioned segment elsewhere in the same chain if such alternatives exist.
+- Market-Implied Expectation Discipline: State what the current quote already appears to assume, then identify the precise assumption the market is still too optimistic about.
 - Bull Counterpoints: Critically analyze the bull argument with specific data and sound reasoning, exposing weaknesses or over-optimistic assumptions.
 - Engagement: Present your argument in a conversational style, directly engaging with the bull analyst's points and debating effectively rather than simply listing facts.
 - Anti-repetition discipline: {round_instruction}
@@ -81,6 +91,8 @@ Earnings-model context: {earnings_model_context}
 Market-expectation context: {market_expectation_context}
 Management/capital-allocation context: {management_capital_allocation_context}
 Shareholder-structure context: {shareholder_structure_context}
+Official investor-interaction context: {investor_interaction_context}
+Official policy-planning context: {policy_planning_context}
 Conversation history of the debate: {history}
 Last bull argument: {current_response}
 Use this information to deliver a compelling bear argument, refute the bull's claims, and engage in a dynamic debate that demonstrates the risks and weaknesses of investing in the stock.
@@ -95,6 +107,8 @@ Use this information to deliver a compelling bear argument, refute the bull's cl
 {get_supply_chain_selection_instruction()}
 {get_earnings_model_instruction()}
 {get_market_expectation_instruction()}
+{get_investor_interaction_instruction()}
+{get_policy_planning_instruction()}
 {get_three_layer_conclusion_instruction()}
 {get_management_capital_allocation_instruction()}
 {get_shareholder_structure_instruction()}

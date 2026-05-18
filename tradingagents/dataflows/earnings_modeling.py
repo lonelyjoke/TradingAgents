@@ -156,13 +156,13 @@ def _build_driver_rows(derived: pd.DataFrame) -> list[dict[str, str]]:
             "driver": "Receivables / revenue",
             "latest_signal": _format_value(latest.get("receivables_to_revenue"), "%"),
             "change_vs_prior_report": _delta("receivables_to_revenue"),
-            "model_role": "tests working-capital drag",
+            "model_role": "tests working-capital drag; interim periods use annualized revenue",
         },
         {
             "driver": "Inventory / revenue",
             "latest_signal": _format_value(latest.get("inventory_to_revenue"), "%"),
             "change_vs_prior_report": _delta("inventory_to_revenue"),
-            "model_role": "tests inventory build and demand quality",
+            "model_role": "tests inventory build and demand quality; interim periods use annualized revenue",
         },
     ]
 
@@ -213,6 +213,10 @@ def get_earnings_model_context(ticker: str, curr_date: str) -> str:
         "## Operating Driver Bridge",
         _markdown_table(pd.DataFrame(_build_driver_rows(derived))),
         "",
+        "## Research Hygiene Notes",
+        "- Working-capital stock ratios use annualized revenue for interim periods so Q1/H1/Q3 snapshots remain comparable with FY.",
+        "- Treat one-quarter margin inflections as provisional until they recur or are explained by filing evidence.",
+        "",
         "## Scenario-Building Instructions",
         "- Build every forward case through revenue = volume × price × mix, then flow it through gross margin, operating margin, finance cost, and cash conversion.",
         "- Use three cases only: bull, base, bear. For each case, state which operating driver changes, not merely the target price.",
@@ -221,4 +225,3 @@ def get_earnings_model_context(ticker: str, curr_date: str) -> str:
         "- Do not upgrade a rating because a story is attractive; upgrade only when the earnings bridge or valuation bridge improves.",
     ]
     return "\n".join(lines)
-

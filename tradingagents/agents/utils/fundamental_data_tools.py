@@ -258,3 +258,28 @@ def get_shareholder_structure_context(
     pledge, increase/decrease, and unlock context for an A-share company.
     """
     return route_to_vendor("get_shareholder_structure_context", ticker, curr_date)
+
+
+@tool
+def get_investor_interaction_context(
+    ticker: Annotated[str, "ticker symbol"],
+    curr_date: Annotated[str, "current date you are trading at, yyyy-mm-dd"],
+) -> str:
+    """
+    Retrieve official investor-interaction history for an A-share company,
+    including normalized Q&A, theme reads, and narrative-evidence diagnostics.
+    """
+    return route_to_vendor("get_investor_interaction_context", ticker, curr_date)
+
+
+@tool
+def get_policy_planning_context(
+    ticker: Annotated[str, "ticker symbol"],
+    curr_date: Annotated[str, "current date you are trading at, yyyy-mm-dd"],
+) -> str:
+    """
+    Retrieve official policy-planning context for an A-share company, including
+    national-plan and routed industry-plan mapping plus analyst guidance on
+    policy-to-demand bridges.
+    """
+    return route_to_vendor("get_policy_planning_context", ticker, curr_date)

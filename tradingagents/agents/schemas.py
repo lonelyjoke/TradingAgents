@@ -262,6 +262,37 @@ class ResearchPlan(BaseModel):
             "stability or supply overhang."
         ),
     )
+    investor_communication_verdict: Optional[str] = Field(
+        default=None,
+        description=(
+            "Judge official investor communication: recurring investor concerns, "
+            "substantiveness of management answers, disclosure quality, and whether "
+            "the answer pattern raises or lowers thesis confidence."
+        ),
+    )
+    policy_direction_verdict: Optional[str] = Field(
+        default=None,
+        description=(
+            "Judge whether official national or industry policy strengthens the "
+            "company's demand lane, how directly it reaches the firm's economics, "
+            "and what bridge evidence remains missing."
+        ),
+    )
+    industry_driver_verdict: Optional[str] = Field(
+        default=None,
+        description=(
+            "Judge the sector-native variables that truly decide the thesis, using "
+            "the filing industry reading pack and outside confirmation or contradiction."
+        ),
+    )
+    strategic_optionality_verdict: Optional[str] = Field(
+        default=None,
+        description=(
+            "Summarize important but non-base-case optionality such as second growth "
+            "curves, investee holdings, asset revaluation, or thematic catalysts, "
+            "including why they matter and what would upgrade them."
+        ),
+    )
 
 
 def render_research_plan(plan: ResearchPlan) -> str:
@@ -319,6 +350,14 @@ def render_research_plan(plan: ResearchPlan) -> str:
         parts.extend(["", f"**Management & Capital Allocation Verdict**: {plan.management_capital_allocation_verdict}"])
     if plan.shareholder_structure_verdict:
         parts.extend(["", f"**Shareholder Structure Verdict**: {plan.shareholder_structure_verdict}"])
+    if plan.investor_communication_verdict:
+        parts.extend(["", f"**Investor Communication Verdict**: {plan.investor_communication_verdict}"])
+    if plan.policy_direction_verdict:
+        parts.extend(["", f"**Policy Direction Verdict**: {plan.policy_direction_verdict}"])
+    if plan.industry_driver_verdict:
+        parts.extend(["", f"**Industry Driver Verdict**: {plan.industry_driver_verdict}"])
+    if plan.strategic_optionality_verdict:
+        parts.extend(["", f"**Strategic Optionality Verdict**: {plan.strategic_optionality_verdict}"])
     return "\n".join(parts)
 
 
@@ -744,6 +783,40 @@ class PortfolioDecision(BaseModel):
             "unlock evidence."
         ),
     )
+    investor_communication_verdict: Optional[str] = Field(
+        default=None,
+        description=(
+            "A clean verdict on official investor communication: what investors "
+            "are asking about, whether management answers are substantive or "
+            "evasive, and whether disclosure quality strengthens or weakens "
+            "confidence in the thesis."
+        ),
+    )
+    policy_direction_verdict: Optional[str] = Field(
+        default=None,
+        description=(
+            "A clean verdict on official policy direction: whether national or "
+            "industry policy supports the demand lane, how directly it reaches "
+            "the company economics, and what bridge evidence is still missing."
+        ),
+    )
+    industry_driver_verdict: Optional[str] = Field(
+        default=None,
+        description=(
+            "A clean verdict on the industry-native variables that truly decide "
+            "the thesis, grounded in filing evidence plus outside confirmation "
+            "or contradiction."
+        ),
+    )
+    strategic_optionality_verdict: Optional[str] = Field(
+        default=None,
+        description=(
+            "Summarize important but non-base-case optionality such as new "
+            "business lines, investee holdings, asset revaluation, or thematic "
+            "catalysts. State why they matter, why they do or do not change the "
+            "rating today, and what would upgrade them."
+        ),
+    )
 
 
 def render_pm_decision(decision: PortfolioDecision) -> str:
@@ -752,8 +825,231 @@ def render_pm_decision(decision: PortfolioDecision) -> str:
     Memory log, CLI display, and saved report files all read this markdown,
     so the rendered output preserves the exact section headers (``**Rating**``,
     ``**Executive Summary**``, ``**Investment Thesis**``) that downstream
-    parsers and the report writers already handle.
+    parsers and the report writers already handle.  Internally, the manager
+    still reasons over many typed fields; externally, we deliberately collapse
+    them into a smaller number of denser research-note sections so the public
+    memo reads like an integrated buy-side write-up rather than a checklist.
     """
+    def _join(*items: Optional[str]) -> str:
+        return "\n\n".join(item for item in items if item)
+
+    thesis = _join(
+        decision.investment_thesis,
+        (
+            f"业务与行业判断：{decision.business_driver_map}"
+            if decision.business_driver_map
+            else None
+        ),
+        (
+            f"行业原生变量：{decision.industry_driver_verdict}"
+            if decision.industry_driver_verdict
+            else None
+        ),
+        (
+            f"政策与需求底色：{decision.policy_direction_verdict}"
+            if decision.policy_direction_verdict
+            else None
+        ),
+        (
+            f"估值与预期差：{decision.expectation_gap}"
+            if decision.expectation_gap
+            else None
+        ),
+        (
+            f"市场隐含预期：{decision.market_implied_expectation}"
+            if decision.market_implied_expectation
+            else None
+        ),
+        (
+            f"盈利桥梁：{decision.earnings_model_bridge}"
+            if decision.earnings_model_bridge
+            else None
+        ),
+        (
+            "投资判断三分法："
+            + "；".join(
+                part
+                for part in [
+                    (
+                        f"公司质量={decision.company_quality_verdict}"
+                        if decision.company_quality_verdict
+                        else None
+                    ),
+                    (
+                        f"当前赔率={decision.current_odds_verdict}"
+                        if decision.current_odds_verdict
+                        else None
+                    ),
+                    (
+                        f"相对配置={decision.relative_allocation_verdict}"
+                        if decision.relative_allocation_verdict
+                        else None
+                    ),
+                ]
+                if part
+            )
+            if any(
+                [
+                    decision.company_quality_verdict,
+                    decision.current_odds_verdict,
+                    decision.relative_allocation_verdict,
+                ]
+            )
+            else None
+        ),
+        (
+            f"管理层与资本配置：{decision.management_capital_allocation_verdict}"
+            if decision.management_capital_allocation_verdict
+            else None
+        ),
+        (
+            f"股东与筹码：{decision.shareholder_structure_verdict}"
+            if decision.shareholder_structure_verdict
+            else None
+        ),
+        (
+            f"投资者沟通：{decision.investor_communication_verdict}"
+            if decision.investor_communication_verdict
+            else None
+        ),
+        (
+            f"同业比较：{decision.peer_selection_verdict}"
+            if decision.peer_selection_verdict
+            else None
+        ),
+        (
+            f"产业链位置：{decision.supply_chain_position_verdict}"
+            if decision.supply_chain_position_verdict
+            else None
+        ),
+    )
+
+    debate_and_decision_logic = _join(
+        decision.bull_bear_debate,
+        decision.debate_verdict,
+        (
+            f"核心押注：{decision.core_bet}"
+            if decision.core_bet
+            else None
+        ),
+        (
+            f"景气判断：{decision.boom_bust_expectation}"
+            if decision.boom_bust_expectation
+            else None
+        ),
+        decision.investment_logic_chain,
+        (
+            f"概率与赔率：{decision.probability_payoff}"
+            if decision.probability_payoff
+            else None
+        ),
+        (
+            f"周期与估值：{decision.cycle_valuation_assessment}"
+            if decision.cycle_valuation_assessment
+            else None
+        ),
+    )
+
+    catalysts_optionality_and_falsification = _join(
+        (
+            f"已验证催化剂：{decision.material_catalysts}"
+            if decision.material_catalysts
+            else None
+        ),
+        (
+            f"主题估值桥梁：{decision.thematic_valuation_bridge}"
+            if decision.thematic_valuation_bridge
+            else None
+        ),
+        (
+            f"战略期权：{decision.strategic_optionality_verdict}"
+            if decision.strategic_optionality_verdict
+            else None
+        ),
+        (
+            f"催化剂路径：{decision.catalyst_path}"
+            if decision.catalyst_path
+            else None
+        ),
+        (
+            f"已否决主题：{decision.rejected_themes}"
+            if decision.rejected_themes
+            else None
+        ),
+        (
+            f"未验证关键假设：{decision.unverified_key_assumptions}"
+            if decision.unverified_key_assumptions
+            else None
+        ),
+        (
+            f"研究缺口：{decision.evidence_limited_research_gaps}"
+            if decision.evidence_limited_research_gaps
+            else None
+        ),
+        (
+            f"供需替代视角：{decision.supply_demand_fallback_view}"
+            if decision.supply_demand_fallback_view
+            else None
+        ),
+    )
+
+    execution_posture = _join(
+        decision.executive_summary,
+        (
+            f"仓位与把握度：{decision.conviction_and_position}"
+            if decision.conviction_and_position
+            else None
+        ),
+        (
+            f"市场环境校准：{decision.market_regime_adjustment}"
+            if decision.market_regime_adjustment
+            else None
+        ),
+        (
+            f"止盈/减仓区间：{decision.profit_taking_range}"
+            if decision.profit_taking_range
+            else None
+        ),
+        (
+            f"观察/再入场区间：{decision.entry_watch_range}"
+            if decision.entry_watch_range
+            else None
+        ),
+        (
+            f"目标价：{decision.price_target}"
+            if decision.price_target is not None
+            else None
+        ),
+        (
+            f"持有期：{decision.time_horizon}"
+            if decision.time_horizon
+            else None
+        ),
+    )
+
+    continuity = _join(
+        (
+            f"上一期评级：{decision.prior_rating}"
+            if decision.prior_rating
+            else None
+        ),
+        (
+            f"新增证据：{decision.new_evidence_since_prior}"
+            if decision.new_evidence_since_prior
+            else None
+        ),
+        (
+            f"未变事实：{decision.unchanged_core_facts}"
+            if decision.unchanged_core_facts
+            else None
+        ),
+        (
+            f"评级变化审计：{decision.rating_change_audit}"
+            if decision.rating_change_audit
+            else None
+        ),
+    )
+
     parts = [
         f"**Company Snapshot**: {decision.company_snapshot}",
         "",
@@ -761,82 +1057,21 @@ def render_pm_decision(decision: PortfolioDecision) -> str:
         "",
         f"**One-Line Thesis**: {decision.one_line_thesis}",
         "",
-        f"**Business Driver Map**: {decision.business_driver_map}",
+        f"**Investment Thesis**: {thesis}",
         "",
-        f"**Bull-Bear Debate**: {decision.bull_bear_debate}",
-        "",
-        f"**Debate Verdict**: {decision.debate_verdict}",
-        "",
-        f"**Investment Logic Chain**: {decision.investment_logic_chain}",
-        "",
-        f"**Executive Summary**: {decision.executive_summary}",
+        f"**Debate & Decision Logic**: {debate_and_decision_logic}",
         "",
         f"**Verification & Falsification**: {decision.verification_and_falsification}",
         "",
-        f"**Investment Thesis**: {decision.investment_thesis}",
+        f"**Executive Summary**: {execution_posture}",
     ]
-    if decision.core_bet:
-        parts.extend(["", f"**Core Bet**: {decision.core_bet}"])
-    if decision.boom_bust_expectation:
-        parts.extend(["", f"**Boom-Bust Expectation**: {decision.boom_bust_expectation}"])
-    if decision.expectation_gap:
-        parts.extend(["", f"**Expectation Gap**: {decision.expectation_gap}"])
-    if decision.probability_payoff:
-        parts.extend(["", f"**Probability And Payoff**: {decision.probability_payoff}"])
-    if decision.cycle_valuation_assessment:
-        parts.extend(["", f"**Cycle-Valuation Assessment**: {decision.cycle_valuation_assessment}"])
-    if decision.catalyst_path:
-        parts.extend(["", f"**Catalyst Path**: {decision.catalyst_path}"])
+    if catalysts_optionality_and_falsification:
+        parts[9:9] = [
+            f"**Catalysts, Optionality & Falsification**: {catalysts_optionality_and_falsification}",
+            "",
+        ]
+    if continuity:
+        parts.extend(["", f"**Decision Continuity**: {continuity}"])
     if decision.falsification_signals:
         parts.extend(["", f"**Falsification Signals**: {decision.falsification_signals}"])
-    if decision.conviction_and_position:
-        parts.extend(["", f"**Conviction And Position**: {decision.conviction_and_position}"])
-    if decision.market_regime_adjustment:
-        parts.extend(["", f"**Market Regime Adjustment**: {decision.market_regime_adjustment}"])
-    if decision.profit_taking_range:
-        parts.extend(["", f"**Profit-Taking / Trimming Range**: {decision.profit_taking_range}"])
-    if decision.entry_watch_range:
-        parts.extend(["", f"**Entry / Re-entry Watch Range**: {decision.entry_watch_range}"])
-    if decision.unverified_key_assumptions:
-        parts.extend(["", f"**Unverified Key Assumptions**: {decision.unverified_key_assumptions}"])
-    if decision.evidence_limited_research_gaps:
-        parts.extend(["", f"**Evidence-Limited Research Gaps**: {decision.evidence_limited_research_gaps}"])
-    if decision.supply_demand_fallback_view:
-        parts.extend(["", f"**Supply-Demand Fallback View**: {decision.supply_demand_fallback_view}"])
-    if decision.price_target is not None:
-        parts.extend(["", f"**Price Target**: {decision.price_target}"])
-    if decision.time_horizon:
-        parts.extend(["", f"**Time Horizon**: {decision.time_horizon}"])
-    if decision.prior_rating:
-        parts.extend(["", f"**Prior Rating**: {decision.prior_rating}"])
-    if decision.new_evidence_since_prior:
-        parts.extend(["", f"**New Evidence Since Prior**: {decision.new_evidence_since_prior}"])
-    if decision.unchanged_core_facts:
-        parts.extend(["", f"**Unchanged Core Facts**: {decision.unchanged_core_facts}"])
-    if decision.rating_change_audit:
-        parts.extend(["", f"**Rating Change Audit**: {decision.rating_change_audit}"])
-    if decision.material_catalysts:
-        parts.extend(["", f"**Material Catalysts**: {decision.material_catalysts}"])
-    if decision.thematic_valuation_bridge:
-        parts.extend(["", f"**Thematic Valuation Bridge**: {decision.thematic_valuation_bridge}"])
-    if decision.rejected_themes:
-        parts.extend(["", f"**Rejected Themes**: {decision.rejected_themes}"])
-    if decision.peer_selection_verdict:
-        parts.extend(["", f"**Peer Selection Verdict**: {decision.peer_selection_verdict}"])
-    if decision.supply_chain_position_verdict:
-        parts.extend(["", f"**Supply-Chain Position Verdict**: {decision.supply_chain_position_verdict}"])
-    if decision.earnings_model_bridge:
-        parts.extend(["", f"**Earnings Model Bridge**: {decision.earnings_model_bridge}"])
-    if decision.market_implied_expectation:
-        parts.extend(["", f"**Market-Implied Expectation**: {decision.market_implied_expectation}"])
-    if decision.company_quality_verdict:
-        parts.extend(["", f"**Company Quality Verdict**: {decision.company_quality_verdict}"])
-    if decision.current_odds_verdict:
-        parts.extend(["", f"**Current Odds Verdict**: {decision.current_odds_verdict}"])
-    if decision.relative_allocation_verdict:
-        parts.extend(["", f"**Relative Allocation Verdict**: {decision.relative_allocation_verdict}"])
-    if decision.management_capital_allocation_verdict:
-        parts.extend(["", f"**Management & Capital Allocation Verdict**: {decision.management_capital_allocation_verdict}"])
-    if decision.shareholder_structure_verdict:
-        parts.extend(["", f"**Shareholder Structure Verdict**: {decision.shareholder_structure_verdict}"])
     return "\n".join(parts)

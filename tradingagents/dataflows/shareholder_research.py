@@ -65,9 +65,12 @@ def _holder_display(data: pd.DataFrame) -> pd.DataFrame:
         return pd.DataFrame()
     display = data[[col for col in ["period", "holder_name", "hold_amount", "hold_ratio"] if col in data.columns]].copy()
     sort_cols = [col for col in ["period", "hold_ratio"] if col in display.columns]
+    if "period" in display.columns:
+        latest_period = display["period"].astype(str).max()
+        display = display[display["period"].astype(str) == latest_period]
     if sort_cols:
         display = display.sort_values(sort_cols, ascending=[False] * len(sort_cols))
-    return display.head(20)
+    return display.head(10)
 
 
 def _safe_sort_desc(data: pd.DataFrame, preferred_cols: list[str]) -> pd.DataFrame:
@@ -115,6 +118,63 @@ def _holder_trades(symbol: str, curr_date: str, years: int = 3) -> pd.DataFrame 
         "avg_price",
     ]
     return _safe_sort_desc(result[[col for col in keep if col in result.columns]], ["ann_date"])
+
+
+def _holder_trade_lifecycle(data: pd.DataFrame, curr_date: str) -> pd.DataFrame:
+    """Summarize whether large holder reductions are historical or still current.
+
+    Tushare's trade feed records executed changes, not necessarily the remaining
+    intent of the holder. This bridge therefore avoids treating every historical
+    reduction as a live overhang. Analysts still need separate evidence before
+    claiming future selling pressure.
+    """
+    columns = [
+        "holder_name",
+        "latest_trade_date",
+        "latest_direction",
+        "latest_after_ratio",
+        "days_since_latest_trade",
+        "lifecycle_read",
+    ]
+    if data is None or data.empty:
+        return pd.DataFrame(columns=columns)
+    required = {"holder_name", "ann_date", "in_de"}
+    if not required.issubset(data.columns):
+        return pd.DataFrame(columns=columns)
+
+    working = data.copy()
+    working["ann_date"] = pd.to_datetime(working["ann_date"].astype(str), format="%Y%m%d", errors="coerce")
+    working = working.dropna(subset=["ann_date"])
+    if working.empty:
+        return pd.DataFrame(columns=columns)
+
+    current = datetime.strptime(curr_date, "%Y-%m-%d")
+    rows = []
+    for holder_name, group in working.groupby("holder_name", dropna=False):
+        latest = group.sort_values("ann_date", ascending=False).iloc[0]
+        latest_date = latest["ann_date"]
+        days_since = (current - latest_date.to_pydatetime()).days
+        latest_direction = str(latest.get("in_de") or "")
+        if latest_direction == "DE":
+            if days_since > 45:
+                lifecycle = "executed historical reduction; future selling needs separate evidence"
+            else:
+                lifecycle = "recent executed reduction; monitor follow-through before calling it persistent"
+        elif latest_direction == "IN":
+            lifecycle = "latest disclosed action was an increase"
+        else:
+            lifecycle = "latest direction unclear; do not infer live pressure"
+        rows.append(
+            {
+                "holder_name": holder_name,
+                "latest_trade_date": latest_date.strftime("%Y%m%d"),
+                "latest_direction": latest_direction,
+                "latest_after_ratio": latest.get("after_ratio"),
+                "days_since_latest_trade": days_since,
+                "lifecycle_read": lifecycle,
+            }
+        )
+    return pd.DataFrame(rows).sort_values("days_since_latest_trade")
 
 
 def _pledge_stats(symbol: str) -> pd.DataFrame | TushareDataError:
@@ -218,6 +278,13 @@ def get_shareholder_structure_context(
         "## Holder Increase / Decrease",
         _markdown_table(holder_trade if isinstance(holder_trade, pd.DataFrame) else pd.DataFrame()),
         "",
+        "## Holder Trade Lifecycle",
+        _markdown_table(
+            _holder_trade_lifecycle(holder_trade, curr_date)
+            if isinstance(holder_trade, pd.DataFrame)
+            else pd.DataFrame()
+        ),
+        "",
         "## Pledge Statistics",
         _markdown_table(pledge_stat if isinstance(pledge_stat, pd.DataFrame) else pd.DataFrame()),
         "",
@@ -230,7 +297,8 @@ def get_shareholder_structure_context(
         "## Analyst Instructions",
         "- Distinguish ownership quality from short-term flow: concentrated strategic ownership can be stabilizing, while crowded float ownership can also amplify exits.",
         "- Read holder-count changes together with price action and float-holder changes before claiming retail crowding or institutional accumulation.",
-        "- Treat insider reductions, high pledge ratios, and near-term unlocks as potential supply overhangs, but connect them to size and timing before changing the thesis.",
+        "- Distinguish executed historical selling from live future supply. Once a disclosed reduction has already happened, do not keep calling it a current headwind unless later filings, unlock schedules, or new holder data support a separate future-overhang thesis.",
+        "- Treat insider reductions, high pledge ratios, and near-term unlocks as potential supply overhangs, but connect them to size, timing, lifecycle stage, and separately verified future tradability before changing the thesis.",
         "- Use this layer to refine current odds and relative allocation; it should rarely override core business quality by itself.",
     ]
     return "\n".join(lines)

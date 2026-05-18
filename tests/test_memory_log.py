@@ -688,20 +688,20 @@ class TestPortfolioManagerInjection:
         assert md.startswith("**Company Snapshot**: NVDA supplies")
         assert "**Rating**: Overweight" in md
         assert "**One-Line Thesis**: AI capex remains" in md
-        assert "**Business Driver Map**: Key drivers are data-center" in md
-        assert "**Bull-Bear Debate**: Bulls emphasize" in md
-        assert "**Debate Verdict**: The bull case carries" in md
-        assert "**Investment Logic Chain**: If AI capex" in md
+        assert "业务与行业判断：Key drivers are data-center" in md
+        assert "**Debate & Decision Logic**: Bulls emphasize" in md
+        assert "The bull case carries" in md
+        assert "If AI capex" in md
         assert "**Executive Summary**: Build position gradually" in md
         assert "**Verification & Falsification**: Verify data-center" in md
         assert "**Investment Thesis**: AI capex cycle" in md
-        assert "**Price Target**: 215.0" in md
-        assert "**Time Horizon**: 3-6 months" in md
-        assert "**Prior Rating**: Hold" in md
-        assert "**New Evidence Since Prior**: Hyperscaler capex guidance improved." in md
-        assert "**Unchanged Core Facts**: Valuation remains elevated." in md
-        assert "**Rating Change Audit**: Upgrade is justified" in md
-        assert "**Material Catalysts**: Business-realization" in md
+        assert "目标价：215.0" in md
+        assert "持有期：3-6 months" in md
+        assert "**Decision Continuity**: 上一期评级：Hold" in md
+        assert "新增证据：Hyperscaler capex guidance improved." in md
+        assert "未变事实：Valuation remains elevated." in md
+        assert "评级变化审计：Upgrade is justified" in md
+        assert "已验证催化剂：Business-realization" in md
         assert "**Rejected Themes**: Rejected: unsupported humanoid-robot narrative." in md
 
     def test_pm_prompt_frames_decision_as_public_excerpt(self):
@@ -710,14 +710,14 @@ class TestPortfolioManagerInjection:
         pm_node = create_portfolio_manager(llm)
         pm_node(_make_pm_state())
         prompt = captured["prompt"]
-        assert "self-contained excerpt" in prompt
+        assert "self-contained public research note" in prompt
         assert "short Company Snapshot" in prompt
-        assert "Business Driver Map" in prompt
-        assert "compact Bull-Bear Debate" in prompt
-        assert "Debate Verdict" in prompt
-        assert "Investment Logic Chain" in prompt
+        assert "public research note" in prompt
+        assert "Debate & Decision Logic" in prompt
+        assert "Catalysts, Optionality & Falsification" in prompt
+        assert "less fragmentation, more synthesis" in prompt
         assert "Verification & Falsification" in prompt
-        assert "roughly 3,000 Chinese characters" in prompt
+        assert "roughly 2,800-3,800 Chinese characters" in prompt
         assert "Decision-Continuity Rules" in prompt
         assert "Material-catalyst discipline" in prompt
 

@@ -38,6 +38,7 @@ from tradingagents.agents.utils.agent_utils import (
     get_balance_sheet,
     get_cashflow,
     get_income_statement,
+    get_investor_interaction_context,
     get_commodity_context,
     get_news,
     get_company_events,
@@ -47,6 +48,7 @@ from tradingagents.agents.utils.agent_utils import (
     get_market_expectation_context,
     get_market_timing_context,
     get_management_capital_allocation_context,
+    get_policy_planning_context,
     get_peer_comparison,
     get_shareholder_structure_context,
     get_shipping_context,
@@ -215,6 +217,8 @@ class TradingAgentsGraph:
                     get_market_expectation_context,
                     get_management_capital_allocation_context,
                     get_shareholder_structure_context,
+                    get_investor_interaction_context,
+                    get_policy_planning_context,
                 ]
             ),
         }
@@ -345,6 +349,8 @@ class TradingAgentsGraph:
         market_expectation_context = ""
         management_capital_allocation_context = ""
         shareholder_structure_context = ""
+        investor_interaction_context = ""
+        policy_planning_context = ""
         if is_a_share_symbol(company_name):
             try:
                 thematic_catalyst_context = route_to_vendor(
@@ -434,6 +440,28 @@ class TradingAgentsGraph:
                     "# Shareholder-structure context unavailable\n\n"
                     f"- Reason: {exc}"
                 )
+            try:
+                investor_interaction_context = route_to_vendor(
+                    "get_investor_interaction_context",
+                    company_name,
+                    trade_date,
+                )
+            except Exception as exc:
+                investor_interaction_context = (
+                    "# Investor-interaction context unavailable\n\n"
+                    f"- Reason: {exc}"
+                )
+            try:
+                policy_planning_context = route_to_vendor(
+                    "get_policy_planning_context",
+                    company_name,
+                    trade_date,
+                )
+            except Exception as exc:
+                policy_planning_context = (
+                    "# Policy-planning context unavailable\n\n"
+                    f"- Reason: {exc}"
+                )
         return self.propagator.create_initial_state(
             company_name,
             trade_date,
@@ -447,6 +475,8 @@ class TradingAgentsGraph:
             market_expectation_context=market_expectation_context,
             management_capital_allocation_context=management_capital_allocation_context,
             shareholder_structure_context=shareholder_structure_context,
+            investor_interaction_context=investor_interaction_context,
+            policy_planning_context=policy_planning_context,
         )
 
     def _run_graph(self, company_name, trade_date):
@@ -464,6 +494,8 @@ class TradingAgentsGraph:
         market_expectation_context = ""
         management_capital_allocation_context = ""
         shareholder_structure_context = ""
+        investor_interaction_context = ""
+        policy_planning_context = ""
         if is_a_share_symbol(company_name):
             try:
                 thematic_catalyst_context = route_to_vendor(
@@ -553,6 +585,28 @@ class TradingAgentsGraph:
                     "# Shareholder-structure context unavailable\n\n"
                     f"- Reason: {exc}"
                 )
+            try:
+                investor_interaction_context = route_to_vendor(
+                    "get_investor_interaction_context",
+                    company_name,
+                    trade_date,
+                )
+            except Exception as exc:
+                investor_interaction_context = (
+                    "# Investor-interaction context unavailable\n\n"
+                    f"- Reason: {exc}"
+                )
+            try:
+                policy_planning_context = route_to_vendor(
+                    "get_policy_planning_context",
+                    company_name,
+                    trade_date,
+                )
+            except Exception as exc:
+                policy_planning_context = (
+                    "# Policy-planning context unavailable\n\n"
+                    f"- Reason: {exc}"
+                )
         init_agent_state = self.propagator.create_initial_state(
             company_name,
             trade_date,
@@ -566,6 +620,8 @@ class TradingAgentsGraph:
             market_expectation_context=market_expectation_context,
             management_capital_allocation_context=management_capital_allocation_context,
             shareholder_structure_context=shareholder_structure_context,
+            investor_interaction_context=investor_interaction_context,
+            policy_planning_context=policy_planning_context,
         )
         args = self.propagator.get_graph_args()
 
@@ -635,6 +691,12 @@ class TradingAgentsGraph:
             ),
             "shareholder_structure_context": final_state.get(
                 "shareholder_structure_context", ""
+            ),
+            "investor_interaction_context": final_state.get(
+                "investor_interaction_context", ""
+            ),
+            "policy_planning_context": final_state.get(
+                "policy_planning_context", ""
             ),
             "market_report": final_state["market_report"],
             "sentiment_report": final_state["sentiment_report"],

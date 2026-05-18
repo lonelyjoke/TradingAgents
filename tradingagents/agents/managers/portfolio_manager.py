@@ -19,10 +19,12 @@ from tradingagents.agents.utils.agent_utils import (
     get_fair_cycle_valuation_instruction,
     get_filing_intelligence_instruction,
     get_focused_report_instruction,
+    get_investor_interaction_instruction,
     get_language_instruction,
     get_market_expectation_instruction,
     get_management_capital_allocation_instruction,
     get_material_catalyst_instruction,
+    get_policy_planning_instruction,
     get_peer_selection_instruction,
     get_research_gap_instruction,
     get_supply_demand_fallback_instruction,
@@ -55,6 +57,8 @@ def create_portfolio_manager(llm):
         market_expectation_context = state.get("market_expectation_context", "")
         management_capital_allocation_context = state.get("management_capital_allocation_context", "")
         shareholder_structure_context = state.get("shareholder_structure_context", "")
+        investor_interaction_context = state.get("investor_interaction_context", "")
+        policy_planning_context = state.get("policy_planning_context", "")
         investment_debate_state = state.get("investment_debate_state", {})
         bull_bear_context = ""
         if investment_debate_state:
@@ -134,20 +138,20 @@ def create_portfolio_manager(llm):
 - High valuation/low prosperity: normally cautious, unless there is credible future inflection or scarcity value.
 
 **Public-Excerpt Writing Rules:**
-- Write the Portfolio Manager Decision as a self-contained excerpt that can be shared publicly without the rest of the report.
-- Begin with a short Company Snapshot: explain what the company does, its main business/profit drivers, and why those drivers matter to this thesis. Keep this introduction brief and practical, not encyclopedic.
-- Then give the rating and a one-line thesis, followed by a Business Driver Map, compact Bull-Bear Debate, Debate Verdict, Investment Logic Chain, and compressed Executive Summary.
-- Keep three separate final verdicts visible in the public excerpt: Company Quality Verdict, Current Odds Verdict, and Relative Allocation Verdict. This is mandatory because a good business, a good current price, and the best place to deploy capital are different questions.
-- When hard-signal governance and ownership contexts are available, also keep Management & Capital Allocation Verdict and Shareholder Structure Verdict visible so the reader can see whether stewardship and chip structure reinforce or weaken the main thesis.
-- The Business Driver Map must help a reader understand the company quickly: identify the 3-5 variables that matter most to revenue, margin, cash flow, valuation, or cycle position, and explain how they affect the stock.
-- The Bull-Bear Debate must enrich the excerpt: summarize the strongest bull case, the strongest bear case, and the real point of disagreement based on the Research Team debate. Do not paste long debate history.
-- The Debate Verdict must explain why you lean toward one side, or remain balanced, after weighing evidence quality, expectation gap, probability/payoff, and unverified assumptions.
-- The Investment Logic Chain must connect business variables to fundamentals, market expectations, valuation, and the rating in a clear cause-effect sequence.
+- Write the Portfolio Manager Decision as a self-contained public research note, not as a checklist of every upstream module.
+- Important contexts such as policy, investor interaction, management quality, shareholder structure, second-growth curves, investee holdings, and thematic catalysts must inform your reasoning, but they do **not** each need their own standalone section in the public excerpt.
+- The public excerpt should read like a compact company deep-dive with a few thick sections, not many thin bullets. Prefer 4-6 integrated sections that each complete a full loop of **claim -> evidence -> implication for the stock**.
+- Begin with a short Company Snapshot, then give the rating and a one-line thesis.
+- In the main Investment Thesis, weave together the decisive business drivers, the industry-native variables, the market-implied expectation, the quality/price/relative-allocation distinction, and only the governance or disclosure evidence that materially strengthens or weakens that argument.
+- Use the Debate & Decision Logic section to summarize the strongest bull case, strongest bear case, the real disagreement, the core bet, and why you choose one side after weighing evidence quality, expectation gap, and probability/payoff.
+- Use the Catalysts, Optionality & Falsification section to distinguish what belongs in the base case from what remains scenario valuation or narrative option value. Preserve verified second-growth curves, investee holdings, policy support, and live thematic catalysts, but clearly say why they do or do not change today's rating.
+- Keep three judgments **clear in substance** even when integrated into prose rather than broken into separate headings: business quality, today's odds, and relative deployment versus alternatives.
+- When hard-signal governance, ownership, investor-interaction, policy, or filing contexts are available, incorporate them where they change the investment argument instead of listing them mechanically.
 - Include a Verification & Falsification checklist so readers know what future evidence would confirm, weaken, or overturn the thesis.
-- Target roughly 3,000 Chinese characters when the output language is Chinese, or a similar concise long-form excerpt in other languages. It should be complete enough to preserve the report's main views and analytical path, but not padded.
-- Preserve the core logic from the full report: company context, business drivers, final rating, core bet, expectation gap, probability/payoff, cycle/valuation setup, catalysts, falsification signals, position posture, risk controls, and evidence gaps.
+- Target roughly 2,800-3,800 Chinese characters when the output language is Chinese, or a similar concise long-form excerpt in other languages. Preserve the full research conclusion first, then compress only the execution plan. The goal is **less fragmentation, more synthesis**.
+- Preserve the core logic from the full report: company context, decisive business drivers, final rating, core bet, expectation gap, probability/payoff, cycle/valuation setup, catalysts, falsification signals, position posture, risk controls, and evidence gaps.
 - Keep the action summary / investment plan compressed. Do not spend a long section on execution mechanics; summarize position, entry/watch level, stop or downgrade trigger, and next verification point in one short paragraph or 3-4 tight bullets.
-- Use a public-facing research-note tone: clear, readable, and investment-focused. Keep each section information-dense; do not use marketing language, clickbait, filler, or unsupported claims.
+- Use a public-facing research-note tone: clear, readable, and investment-focused. Avoid micro-headings, repeated restatement, filler, and unsupported claims.
 
 **Context:**
 - Research Manager's investment plan: **{research_plan}**
@@ -160,6 +164,8 @@ def create_portfolio_manager(llm):
 - Market-expectation context: **{market_expectation_context}**
 - Management/capital-allocation context: **{management_capital_allocation_context}**
 - Shareholder-structure context: **{shareholder_structure_context}**
+- Official investor-interaction context: **{investor_interaction_context}**
+- Official policy-planning context: **{policy_planning_context}**
 {lessons_line}
 {recent_decision_line}
 {bull_bear_context}
@@ -180,6 +186,8 @@ Be decisive and ground every conclusion in specific evidence from the analysts.
 {get_supply_chain_selection_instruction()}
 {get_earnings_model_instruction()}
 {get_market_expectation_instruction()}
+{get_investor_interaction_instruction()}
+{get_policy_planning_instruction()}
 {get_three_layer_conclusion_instruction()}
 {get_management_capital_allocation_instruction()}
 {get_shareholder_structure_instruction()}

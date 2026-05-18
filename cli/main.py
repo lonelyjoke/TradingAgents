@@ -767,6 +767,20 @@ def save_report_to_disk(final_state, ticker: str, save_path: Path):
             final_state["shareholder_structure_context"],
             encoding="utf-8",
         )
+    if final_state.get("investor_interaction_context"):
+        context_dir = save_path / "0_context"
+        context_dir.mkdir(exist_ok=True)
+        (context_dir / "investor_interaction.md").write_text(
+            final_state["investor_interaction_context"],
+            encoding="utf-8",
+        )
+    if final_state.get("policy_planning_context"):
+        context_dir = save_path / "0_context"
+        context_dir.mkdir(exist_ok=True)
+        (context_dir / "policy_planning.md").write_text(
+            final_state["policy_planning_context"],
+            encoding="utf-8",
+        )
 
     # 1. Analysts
     analysts_dir = save_path / "1_analysts"

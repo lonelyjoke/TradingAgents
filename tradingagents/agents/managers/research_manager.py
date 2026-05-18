@@ -11,9 +11,11 @@ from tradingagents.agents.utils.agent_utils import (
     get_fair_cycle_valuation_instruction,
     get_filing_intelligence_instruction,
     get_focused_report_instruction,
+    get_investor_interaction_instruction,
     get_market_expectation_instruction,
     get_management_capital_allocation_instruction,
     get_material_catalyst_instruction,
+    get_policy_planning_instruction,
     get_peer_selection_instruction,
     get_research_gap_instruction,
     get_supply_demand_fallback_instruction,
@@ -43,6 +45,8 @@ def create_research_manager(llm):
         market_expectation_context = state.get("market_expectation_context", "")
         management_capital_allocation_context = state.get("management_capital_allocation_context", "")
         shareholder_structure_context = state.get("shareholder_structure_context", "")
+        investor_interaction_context = state.get("investor_interaction_context", "")
+        policy_planning_context = state.get("policy_planning_context", "")
         continuity_context = (
             f"""
 **Most Recent Same-Ticker Decision (may still be pending outcome):**
@@ -116,6 +120,10 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 - If any verified theme matters to the thesis and you are writing free text rather than structured fields, include an explicit section titled **Thematic Valuation Bridge** that explains whether the theme belongs in core valuation, scenario valuation, SOTP/NAV, or only qualitative optionality.
 - If you are writing free text rather than structured fields, include explicit sections titled **Company Quality Verdict**, **Current Odds Verdict**, and **Relative Allocation Verdict** so that business quality, today's risk/reward, and best deployment choice are not collapsed into one view.
 - If you are writing free text rather than structured fields, also include **Management & Capital Allocation Verdict** and **Shareholder Structure Verdict** whenever the hard-signal contexts are available.
+- If official investor-interaction context is available, keep an **Investor Communication Verdict** explicit enough for the downstream trader and risk team to understand the live concern map and disclosure quality.
+- If official policy context is available, keep a **Policy Direction Verdict** explicit enough to distinguish industry support from company-specific monetization.
+- If industry-specific filing context is available, keep an **Industry Driver Verdict** explicit enough to preserve the real sector-native variables that decide the thesis.
+- If verified but non-base-case optionality matters, keep a **Strategic Optionality Verdict** explicit enough that downstream agents do not erase a second growth curve, investee holding, asset revaluation path, or live thematic catalyst merely because it does not flip today's rating.
 
 ---
 
@@ -144,6 +152,12 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 **Shareholder-Structure Context:**
 {shareholder_structure_context}
 
+**Official Investor-Interaction Context:**
+{investor_interaction_context}
+
+**Official Policy-Planning Context:**
+{policy_planning_context}
+
 **Debate History:**
 {history}
 
@@ -158,6 +172,8 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 {get_supply_chain_selection_instruction()}
 {get_earnings_model_instruction()}
 {get_market_expectation_instruction()}
+{get_investor_interaction_instruction()}
+{get_policy_planning_instruction()}
 {get_three_layer_conclusion_instruction()}
 {get_management_capital_allocation_instruction()}
 {get_shareholder_structure_instruction()}

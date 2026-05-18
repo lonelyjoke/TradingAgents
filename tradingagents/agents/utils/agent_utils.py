@@ -15,6 +15,8 @@ from tradingagents.agents.utils.fundamental_data_tools import (
     get_earnings_model_context,
     get_financial_report_intelligence_context,
     get_income_statement,
+    get_investor_interaction_context,
+    get_policy_planning_context,
     get_market_sector_risk,
     get_market_expectation_context,
     get_market_timing_context,
@@ -209,14 +211,33 @@ def get_material_catalyst_instruction() -> str:
         "(3) a trackable catalyst timetable or milestone; and (4) materiality "
         "large enough to matter for the listed company. Classify qualifying "
         "themes as asset-revaluation catalysts or business-realization catalysts. "
+        "When mining annual or half-year reports for bull themes, reward themes "
+        "with filing-backed monetization evidence such as orders, revenue, delivery, "
+        "customers, commercialization, or capacity release; reject bare buzzwords "
+        "that lack a disclosed economic bridge. Use a three-tier ladder: tier-1 "
+        "hard catalysts may enter core valuation, tier-2 soft catalysts may support "
+        "scenario upside or improve odds, and tier-3 narrative options from media "
+        "association, concept linkage, or investor-interaction claims may receive "
+        "only a small imagination premium until filings verify them. "
         "Use filing/news cross-validation rather than one-sided discovery: scan "
         "annual and half-year report text for candidate investees, assets, and "
         "new-business lines, then look for recent news catalysts; for any theme "
         "first discovered in news, require validation from annual or half-year "
         "report text before it may affect valuation. "
+        "Keep economic hardness separate from evidence completeness: if a theme "
+        "already has a real monetization or NAV bridge but fetched corroboration "
+        "is still thin, label it as a latent hard catalyst / pending diligence "
+        "instead of demoting it to pure narrative or pretending proof is complete. "
         "If a topic is only a market label, media narrative, vague interaction, "
-        "or unsupported concept, list it as a rejected theme and do not let it "
-        "change valuation or rating."
+        "or unsupported concept, keep it in a narrative-option watchlist rather "
+        "than core valuation; it may support a small sentiment premium, but it "
+        "must not drive the rating before harder evidence appears."
+        " For A-share research, do not exclude non-fantastical low-confidence "
+        "themes from discussion merely because they are not yet valuation-grade. "
+        "Bring extracted themes into analysis, then interrogate them: source "
+        "quality, plausibility, market imagination, catalyst path, evidence gaps, "
+        "what would upgrade them, and what would falsify them. The discipline is "
+        "rational debate and bounded weighting, not silence."
     )
 
 
@@ -236,7 +257,13 @@ def get_thematic_valuation_instruction() -> str:
         "underpricing; bears should test monetization, ownership, double-counting, "
         "timing, and materiality. Never let an attractive story enter valuation "
         "without saying exactly how much value it could add and what would make "
-        "that bridge fail."
+        "that bridge fail. Also distinguish a one-off asset from a repeatable "
+        "capital-allocation capability: when filings show multiple successful "
+        "investee realizations plus current verified optionality, discuss whether "
+        "management's investing skill deserves a separate qualitative bull factor "
+        "instead of burying each holding as an isolated footnote. Narrative "
+        "options may still matter in A-shares, but they should be framed as low-weight "
+        "imagination premium, not mistaken for earnings evidence."
     )
 
 
@@ -298,6 +325,39 @@ def get_market_expectation_instruction() -> str:
     )
 
 
+def get_investor_interaction_instruction() -> str:
+    """Return rules for turning official investor Q&A into investable evidence."""
+    return (
+        " Investor-interaction discipline: when official exchange-platform Q&A "
+        "is available, do not treat it only as a source of themes. Read it on "
+        "three layers: (1) what investors repeatedly ask about, which reveals "
+        "the market's live concern map; (2) how management answers, separating "
+        "substantive, directional-but-unquantified, non-committal, and "
+        "unanswered replies; and (3) whether the answer pattern strengthens or "
+        "weakens management credibility, disclosure quality, or catalyst "
+        "visibility. Repeated questioning with weak answers is itself evidence "
+        "of unresolved uncertainty; substantive answers can improve confidence "
+        "but remain weaker than filings or announcements."
+    )
+
+
+def get_policy_planning_instruction() -> str:
+    """Return rules for using official policy plans in investment debate."""
+    return (
+        " Policy-planning discipline: when national plans or other official "
+        "policy files are available, use them to judge strategic priority, "
+        "future market expansion, and the likely durability of industry demand. "
+        "Separate three layers: policy direction, industry TAM, and "
+        "company-specific monetization. Bulls may use policy support to raise "
+        "confidence in demand slope when the company has a credible transmission "
+        "path into orders, pricing, capacity, or asset value. Bears should test "
+        "whether the policy only grows industry volume, benefits competitors "
+        "more, or remains too distant from the company's actual earnings bridge. "
+        "Policy support can strengthen optionality and scenario weight, but it "
+        "must not substitute for contracts, revenue, or cash-flow proof."
+    )
+
+
 def get_three_layer_conclusion_instruction() -> str:
     """Return rules for splitting the final verdict into three different questions."""
     return (
@@ -318,7 +378,10 @@ def get_management_capital_allocation_instruction() -> str:
         "hard signals before praise. Use capital returns, buybacks, dividends, "
         "financing, acquisitions, capex, leverage, goodwill, and later ROIC / "
         "cash-flow outcomes to decide whether management compounds value, merely "
-        "grows assets, or dilutes owners. Treat management quality as a synthesis "
+        "grows assets, or dilutes owners. For companies that repeatedly seed, "
+        "hold, and exit minority investments, also test whether realized gains "
+        "plus the current pipeline demonstrate a repeatable first-level investing "
+        "capability rather than one lucky mark-to-market. Treat management quality as a synthesis "
         "variable: hard evidence can support or weaken the case, but a single "
         "title, speech, or compensation table is never enough by itself."
     )
@@ -330,8 +393,10 @@ def get_shareholder_structure_instruction() -> str:
         " Shareholder-structure discipline: use top holders, float holders, holder "
         "count, insider increases/decreases, pledge ratio, repurchases, and unlock "
         "schedule to refine supply-demand and governance risk. Explain whether "
-        "ownership is stabilizing, crowded, or becoming a supply overhang, but do "
-        "not let chip signals override the business thesis unless size, timing, "
+        "ownership is stabilizing, crowded, or becoming a supply overhang. Distinguish "
+        "a historical sell-down that has already executed from a still-live future "
+        "overhang; after an event has landed, require separate evidence before "
+        "reusing it as a forward-looking bearish driver. Do not let chip signals override the business thesis unless size, timing, "
         "and materiality are clear."
     )
 
@@ -341,6 +406,27 @@ def get_filing_intelligence_instruction() -> str:
     return (
         " Filing-intelligence discipline: read quarterly, half-year, and annual "
         "reports as business documents, not only as sources of the three statements. "
+        "Use the filing context in ten passes: (1) filing reading coverage audit, "
+        "(2) paragraph reading pack, (3) industry reading pack, (4) statement table reading pack, "
+        "(5) filing note reading pack, (6) financial relationship reading pack, "
+        "(7) business model map, (8) growth vector map, "
+        "(9) material filing findings, and (10) report-to-report bridge. "
+        "If the coverage audit is partial, weak, or failed, state the confidence downgrade "
+        "before making any filing-backed claim. "
+        "The paragraph reading pack "
+        "is the closest thing to actually reading the report: answer its "
+        "paragraph-level questions before collapsing the company into ratios. "
+        "The industry reading pack is the specialist layer: use it to decide "
+        "which operating questions matter most for this company's business model "
+        "before interpreting valuation or sentiment. "
+        "The statement table reading pack is the hard-accounting layer: use it to test "
+        "contract liabilities, receivables, inventory, prepayments, capex, investment assets, "
+        "operating cash flow, and impairment. The filing note reading pack is the footnote layer: "
+        "use it to surface customer concentration, related parties, guarantees, litigation, "
+        "provisioning assumptions, and capitalization choices that may not appear in headline ratios. "
+        "The financial relationship reading pack is the integrative layer: use it to explain "
+        "how revenue, margin, cash conversion, and balance-sheet demands fit together before "
+        "forming a thesis. "
         "Actively use filing-derived evidence on orders, backlog, customers, "
         "commercialization, prices, margins, capacity, capex, overseas expansion, "
         "R&D, receivables, inventory, cash collection, guarantees, litigation, "
@@ -353,7 +439,33 @@ def get_filing_intelligence_instruction() -> str:
         "judge business model, capital allocation, and long-cycle risk. Distinguish "
         "audited or quantified disclosures from management narrative, prefer the "
         "latest report when facts evolve, and explain what changed across reports "
-        "when that matters."
+        "when that matters. When the filing context contains a core discussion promotion queue, "
+        "use it as the bridge from reading to investing: core items belong in the bull/bear debate, "
+        "supporting items reinforce or weaken an existing thesis, scenario items belong in "
+        "upside/downside cases, and watch items stay out of base-case valuation until upgraded. "
+        "Treat unanswered filing questions as explicit research gaps rather than neutral evidence; "
+        "if the thesis depends on one, reduce conviction or state what disclosure would close it. "
+        "When the filing context contains material findings such "
+        "as signed long-term agreements, named customers, capacity-to-demand bridges, "
+        "or commercialization milestones, discuss them explicitly in the core thesis "
+        "instead of leaving them as background color. Quarterly reports should be "
+        "used as short-cycle proof or disproof, half-year reports as structural "
+        "confirmation, and annual reports as the base text for business-model and "
+        "second-curve understanding. When a paragraph-level filing read contradicts "
+        "a surface-level ratio read, surface the contradiction rather than hiding it. "
+        "Cross-input synthesis rule: do not discuss filings, policy, investor "
+        "interactions, thematic catalysts, peers, and market expectations as "
+        "separate silos. Use filing evidence as the anchor, then ask whether each "
+        "external input upgrades, weakens, or merely decorates the relevant "
+        "industry reading lens. Policy should widen or narrow TAM, interactions "
+        "should confirm or challenge execution, thematic catalysts should be "
+        "classified by filing-backed monetization, peers should test relative "
+        "quality, and market expectations should tell you whether the filing "
+        "insight is already priced. If the filing context says report extraction "
+        "was unavailable or no readable report text was retrieved, explicitly "
+        "downgrade confidence, say that the system did not complete a deep filing "
+        "read, and do not claim second-curve, business-model, or filing-backed "
+        "catalyst conclusions from that missing layer."
     )
 
 

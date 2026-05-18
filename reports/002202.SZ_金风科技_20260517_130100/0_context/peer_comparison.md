@@ -1,0 +1,1 @@
+No Tushare stock_basic data found for 002202.SZ.

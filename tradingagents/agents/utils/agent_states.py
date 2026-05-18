@@ -64,6 +64,8 @@ class AgentState(MessagesState):
     market_expectation_context: Annotated[str, "Precomputed market-implied expectation context"]
     management_capital_allocation_context: Annotated[str, "Precomputed management/capital-allocation context"]
     shareholder_structure_context: Annotated[str, "Precomputed shareholder/chip context"]
+    investor_interaction_context: Annotated[str, "Precomputed official investor-interaction context"]
+    policy_planning_context: Annotated[str, "Precomputed national/industry policy-planning context"]
 
     # researcher team discussion step
     investment_debate_state: Annotated[

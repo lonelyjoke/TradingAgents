@@ -55,36 +55,31 @@ def test_research_plan_renders_peer_selection_verdict():
 def test_portfolio_decision_renders_peer_selection_verdict():
     decision = PortfolioDecision(
         rating=PortfolioRating.HOLD,
-        company_snapshot="公司简介。",
-        one_line_thesis="先观察。",
-        business_driver_map="价格；销量。",
-        bull_bear_debate="多空分歧。",
-        debate_verdict="证据尚不足。",
-        investment_logic_chain="变量变化会影响利润与估值。",
-        executive_summary="继续跟踪。",
-        verification_and_falsification="看订单与利润率。",
-        investment_thesis="当前尚未形成优势。",
-        peer_selection_verdict="同行A在ROE和成长性上更优，当前更适合优先建仓。",
-        supply_chain_position_verdict="当前链条内更值得布局的是上游资源，而非目标所在的制造环节。",
-        earnings_model_bridge="悲观情景来自价格战继续压缩毛利率。",
-        market_implied_expectation="市场已在定价较强恢复。",
-        company_quality_verdict="公司质量中等。",
-        current_odds_verdict="当前赔率偏弱。",
-        relative_allocation_verdict="同链条上游更优。",
-        management_capital_allocation_verdict="资本配置偏进取。",
-        shareholder_structure_verdict="存在解禁与减持压力。",
+        company_snapshot="Company snapshot.",
+        one_line_thesis="Watch first.",
+        business_driver_map="Price; volume.",
+        bull_bear_debate="Bull-bear split.",
+        debate_verdict="Evidence is not enough yet.",
+        investment_logic_chain="Variables affect earnings and valuation.",
+        executive_summary="Keep tracking.",
+        verification_and_falsification="Watch orders and margins.",
+        investment_thesis="No clear edge yet.",
+        peer_selection_verdict="Peer A is superior on ROE and growth.",
+        supply_chain_position_verdict="Upstream resources are currently more attractive than manufacturing.",
+        earnings_model_bridge="Bear case comes from continued price pressure.",
+        market_implied_expectation="The market already prices a strong recovery.",
+        company_quality_verdict="Quality is mixed.",
+        current_odds_verdict="Odds are weak.",
+        relative_allocation_verdict="Upstream is better.",
+        management_capital_allocation_verdict="Capital allocation is aggressive.",
+        shareholder_structure_verdict="Unlock and sell-down pressure exist.",
     )
 
-    assert (
-        "**Peer Selection Verdict**: 同行A在ROE和成长性上更优，当前更适合优先建仓。"
-        in render_pm_decision(decision)
-    )
-    assert (
-        "**Supply-Chain Position Verdict**: 当前链条内更值得布局的是上游资源，而非目标所在的制造环节。"
-        in render_pm_decision(decision)
-    )
-    assert "**Company Quality Verdict**: 公司质量中等。" in render_pm_decision(decision)
-    assert "**Current Odds Verdict**: 当前赔率偏弱。" in render_pm_decision(decision)
-    assert "**Relative Allocation Verdict**: 同链条上游更优。" in render_pm_decision(decision)
-    assert "**Management & Capital Allocation Verdict**: 资本配置偏进取。" in render_pm_decision(decision)
-    assert "**Shareholder Structure Verdict**: 存在解禁与减持压力。" in render_pm_decision(decision)
+    rendered = render_pm_decision(decision)
+    assert "\u540c\u4e1a\u6bd4\u8f83\uff1aPeer A is superior on ROE and growth." in rendered
+    assert "\u4ea7\u4e1a\u94fe\u4f4d\u7f6e\uff1aUpstream resources are currently more attractive than manufacturing." in rendered
+    assert "\u516c\u53f8\u8d28\u91cf=Quality is mixed." in rendered
+    assert "\u5f53\u524d\u8d54\u7387=Odds are weak." in rendered
+    assert "\u76f8\u5bf9\u914d\u7f6e=Upstream is better." in rendered
+    assert "\u7ba1\u7406\u5c42\u4e0e\u8d44\u672c\u914d\u7f6e\uff1aCapital allocation is aggressive." in rendered
+    assert "\u80a1\u4e1c\u4e0e\u7b79\u7801\uff1aUnlock and sell-down pressure exist." in rendered

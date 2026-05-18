@@ -4,9 +4,13 @@ from tradingagents.agents.utils.agent_utils import (
     get_buy_side_thesis_instruction,
     get_evidence_instruction,
     get_fair_cycle_valuation_instruction,
+    get_filing_intelligence_instruction,
     get_focused_report_instruction,
+    get_investor_interaction_instruction,
+    get_policy_planning_instruction,
     get_research_gap_instruction,
     get_supply_demand_fallback_instruction,
+    get_thematic_valuation_instruction,
 )
 
 
@@ -23,6 +27,10 @@ def create_aggressive_debator(llm):
         sentiment_report = state["sentiment_report"]
         news_report = state["news_report"]
         fundamentals_report = state["fundamentals_report"]
+        thematic_catalyst_context = state.get("thematic_catalyst_context", "")
+        filing_intelligence_context = state.get("filing_intelligence_context", "")
+        investor_interaction_context = state.get("investor_interaction_context", "")
+        policy_planning_context = state.get("policy_planning_context", "")
 
         trader_decision = state["trader_investment_plan"]
 
@@ -36,9 +44,13 @@ Market Research Report: {market_research_report}
 Social Media Sentiment Report: {sentiment_report}
 Latest World Affairs Report: {news_report}
 Company Fundamentals Report: {fundamentals_report}
+Verified Thematic Catalyst Bridge: {thematic_catalyst_context}
+Financial-Report Intelligence And Promoted Discussion Items: {filing_intelligence_context}
+Official Investor-Interaction Context: {investor_interaction_context}
+Official Policy-Planning Context: {policy_planning_context}
 Here is the current conversation history: {history} Here are the last arguments from the conservative analyst: {current_conservative_response} Here are the last arguments from the neutral analyst: {current_neutral_response}. If there are no responses from the other viewpoints yet, present your own argument based on the available data.
 
-Engage actively by addressing any specific concerns raised, refuting the weaknesses in their logic, and asserting the benefits of risk-taking to outpace market norms. Maintain a focus on debating and persuading, not just presenting data. Challenge each counterpoint to underscore why a high-risk approach is optimal. {get_evidence_instruction()} {get_research_gap_instruction()} {get_supply_demand_fallback_instruction()} {get_buy_side_thesis_instruction()} {get_fair_cycle_valuation_instruction()} {get_focused_report_instruction()} Output conversationally as if you are speaking without any special formatting."""
+Engage actively by addressing any specific concerns raised, refuting the weaknesses in their logic, and asserting the benefits of risk-taking to outpace market norms. Maintain a focus on debating and persuading, not just presenting data. Challenge each counterpoint to underscore why a high-risk approach is optimal. Preserve core discussion items that matter to the thesis even when they are optionality rather than base-case proof. {get_evidence_instruction()} {get_research_gap_instruction()} {get_supply_demand_fallback_instruction()} {get_buy_side_thesis_instruction()} {get_fair_cycle_valuation_instruction()} {get_thematic_valuation_instruction()} {get_filing_intelligence_instruction()} {get_investor_interaction_instruction()} {get_policy_planning_instruction()} {get_focused_report_instruction()} Output conversationally as if you are speaking without any special formatting."""
 
         response = llm.invoke(prompt)
 

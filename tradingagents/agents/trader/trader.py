@@ -12,9 +12,13 @@ from tradingagents.agents.utils.agent_utils import (
     get_buy_side_thesis_instruction,
     get_evidence_instruction,
     get_fair_cycle_valuation_instruction,
+    get_filing_intelligence_instruction,
     get_focused_report_instruction,
+    get_investor_interaction_instruction,
+    get_policy_planning_instruction,
     get_research_gap_instruction,
     get_supply_demand_fallback_instruction,
+    get_thematic_valuation_instruction,
 )
 from tradingagents.agents.utils.structured import (
     bind_structured,
@@ -29,6 +33,10 @@ def create_trader(llm):
         company_name = state["company_of_interest"]
         instrument_context = build_instrument_context(company_name)
         investment_plan = state["investment_plan"]
+        thematic_catalyst_context = state.get("thematic_catalyst_context", "")
+        filing_intelligence_context = state.get("filing_intelligence_context", "")
+        investor_interaction_context = state.get("investor_interaction_context", "")
+        policy_planning_context = state.get("policy_planning_context", "")
 
         messages = [
             {
@@ -46,6 +54,10 @@ def create_trader(llm):
                     f"{get_supply_demand_fallback_instruction()}"
                     f"{get_buy_side_thesis_instruction()}"
                     f"{get_fair_cycle_valuation_instruction()}"
+                    f"{get_thematic_valuation_instruction()}"
+                    f"{get_filing_intelligence_instruction()}"
+                    f"{get_investor_interaction_instruction()}"
+                    f"{get_policy_planning_instruction()}"
                     f"{get_focused_report_instruction()}"
                 ),
             },
@@ -57,6 +69,10 @@ def create_trader(llm):
                     f"insights from current technical market trends, macroeconomic indicators, and "
                     f"social media sentiment. Use this plan as a foundation for evaluating your next "
                     f"trading decision.\n\nProposed Investment Plan: {investment_plan}\n\n"
+                    f"Verified thematic catalyst bridge: {thematic_catalyst_context}\n\n"
+                    f"Financial-report intelligence and promoted discussion items: {filing_intelligence_context}\n\n"
+                    f"Official investor-interaction context: {investor_interaction_context}\n\n"
+                    f"Official policy-planning context: {policy_planning_context}\n\n"
                     f"Leverage these insights to make an informed and strategic decision."
                 ),
             },

@@ -133,7 +133,8 @@ def _repurchases(symbol: str, curr_date: str, years: int = 3) -> pd.DataFrame | 
         "high_limit",
         "low_limit",
     ]
-    return result[[col for col in keep if col in result.columns]].sort_values(
+    cleaned = result[[col for col in keep if col in result.columns]].drop_duplicates()
+    return cleaned.sort_values(
         ["ann_date"], ascending=False
     )
 
