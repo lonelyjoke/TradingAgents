@@ -698,6 +698,24 @@ def _combine_news_frames(*frames: pd.DataFrame | TushareDataError) -> pd.DataFra
     return combined
 
 
+def _filter_news_by_entity_terms(
+    frame: pd.DataFrame | TushareDataError,
+    entity_terms: Iterable[str],
+) -> pd.DataFrame | TushareDataError:
+    """Keep only news that actually mentions the target company or verified investees."""
+    if isinstance(frame, TushareDataError) or frame is None or frame.empty:
+        return frame
+    terms = [str(term).strip() for term in entity_terms if str(term).strip()]
+    if not terms:
+        return frame.iloc[0:0].copy()
+
+    def row_matches(row: pd.Series) -> bool:
+        text = " ".join(str(row.get(col) or "") for col in ("title", "content"))
+        return any(term in text for term in terms)
+
+    return frame[frame.apply(row_matches, axis=1)].reset_index(drop=True)
+
+
 def _extract_reported_amount_cny(text: str) -> float | None:
     """Best-effort amount parser for filing evidence lines.
 
@@ -1050,7 +1068,10 @@ def get_thematic_catalyst_context(
     )
     combined_major_news = _combine_news_frames(major_news, investee_major_news)
     combined_news_feed = _combine_news_frames(news_feed, investee_news_feed)
-    news_candidates = _extract_news_candidates(combined_major_news, combined_news_feed)
+    entity_terms = [*news_terms, *investee_terms]
+    filtered_major_news = _filter_news_by_entity_terms(combined_major_news, entity_terms)
+    filtered_news_feed = _filter_news_by_entity_terms(combined_news_feed, entity_terms)
+    news_candidates = _extract_news_candidates(filtered_major_news, filtered_news_feed)
     concept_memberships = _fetch_legacy_concept_memberships(symbol)
     try:
         interaction_records = fetch_investor_interaction_history(
@@ -1064,7 +1085,7 @@ def get_thematic_catalyst_context(
 
     financial_rows = []
     for candidate in financial_candidates:
-        matches = _candidate_news_matches(candidate, [combined_major_news, combined_news_feed])
+        matches = _candidate_news_matches(candidate, [filtered_major_news, filtered_news_feed])
         financial_rows.append(
             {
                 "candidate": candidate.name,
@@ -1106,16 +1127,16 @@ def get_thematic_catalyst_context(
         financial_candidates,
         news_candidates,
         report_texts,
-        combined_major_news,
-        combined_news_feed,
+        filtered_major_news,
+        filtered_news_feed,
         market_cap_cny,
     )
     portfolio_pattern = _portfolio_pattern_summary(financial_candidates, report_texts)
     narrative_option_rows = _build_narrative_option_rows(
         news_candidates,
         report_texts,
-        combined_major_news,
-        combined_news_feed,
+        filtered_major_news,
+        filtered_news_feed,
     )
     concept_membership_rows = _build_concept_membership_rows(concept_memberships)
     interaction_option_rows = _build_interaction_option_rows(interaction_records)

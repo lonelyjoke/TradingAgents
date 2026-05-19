@@ -2,10 +2,12 @@ import pandas as pd
 
 from tradingagents.dataflows.governance_research import (
     _announcement_category,
+    _repurchases,
 )
 from tradingagents.dataflows.shareholder_research import (
     _holder_display,
     _holder_concentration,
+    _holder_query,
     _holder_trade_lifecycle,
     _recent_quarter_ends,
     _safe_sort_desc,
@@ -17,6 +19,24 @@ def test_capital_allocation_announcement_categories():
     assert _announcement_category("关于回购公司股份的进展公告") == "repurchase"
     assert _announcement_category("关于向特定对象发行股票的公告") == "financing"
     assert _announcement_category("关于重大资产重组的提示性公告") == "mna"
+
+
+def test_repurchases_hard_filter_to_requested_symbol(monkeypatch):
+    frame = pd.DataFrame(
+        [
+            {"ts_code": "002714.SZ", "ann_date": "20260101", "amount": 100},
+            {"ts_code": "600519.SH", "ann_date": "20260102", "amount": 200},
+        ]
+    )
+
+    monkeypatch.setattr(
+        "tradingagents.dataflows.governance_research._safe_optional_query",
+        lambda *args, **kwargs: frame,
+    )
+
+    result = _repurchases("002714.SZ", "2026-05-18")
+
+    assert list(result["ann_date"]) == ["20260101"]
 
 
 def test_recent_quarter_ends_are_stable():
@@ -42,6 +62,23 @@ def test_holder_concentration_sums_top10_ratio_by_period():
 
     assert result.iloc[0]["period"] == "20251231"
     assert result.iloc[0]["top10_hold_ratio_sum"] == 30.0
+
+
+def test_holder_query_normalizes_end_date_into_period(monkeypatch):
+    frame = pd.DataFrame(
+        [
+            {"end_date": "20251231", "holder_name": "A", "hold_ratio": 20.0},
+        ]
+    )
+
+    monkeypatch.setattr(
+        "tradingagents.dataflows.shareholder_research._safe_optional_query",
+        lambda *args, **kwargs: frame,
+    )
+
+    result = _holder_query("top10_holders", "002714.SZ", ["20251231"])
+
+    assert list(result["period"]) == ["20251231"]
 
 
 def test_holder_display_gracefully_handles_missing_period():

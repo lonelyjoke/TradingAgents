@@ -237,6 +237,23 @@ def get_market_expectation_context(
 
 
 @tool
+def get_price_earnings_decomposition_context(
+    ticker: Annotated[str, "ticker symbol"],
+    curr_date: Annotated[str, "current date you are trading at, yyyy-mm-dd"],
+    years: Annotated[int, "historical look-back years"] = 5,
+) -> str:
+    """
+    Decompose historical stock-price moves into EPS-proxy change versus PE-multiple change.
+    """
+    return route_to_vendor(
+        "get_price_earnings_decomposition_context",
+        ticker,
+        curr_date,
+        years,
+    )
+
+
+@tool
 def get_management_capital_allocation_context(
     ticker: Annotated[str, "ticker symbol"],
     curr_date: Annotated[str, "current date you are trading at, yyyy-mm-dd"],

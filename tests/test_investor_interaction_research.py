@@ -5,6 +5,7 @@ from tradingagents.dataflows.investor_interaction_research import (
     _build_sse_company_url,
     _build_sse_feed_params,
     _classify_answer,
+    _dedupe_interaction_records,
     _extract_interaction_theme,
     _extract_sse_uid_from_company_page,
     _interaction_exchange,
@@ -176,3 +177,33 @@ def test_parse_sse_company_feed_records_normalizes_question_and_answer():
     assert result.iloc[0]["question"].startswith("恭喜公司2025年取得优异成绩")
     assert result.iloc[0]["answer_class"] == "substantive"
     assert result.iloc[0]["source_type"] == "sse_e_interaction"
+
+
+def test_dedupe_interaction_records_removes_same_visible_qa_with_different_ids():
+    records = _parse_cninfo_question_payload(
+        {
+            "rows": [
+                {
+                    "indexId": "1",
+                    "mainContent": "公司完全成本是多少？",
+                    "pubDate": 1777287734000,
+                    "attachedContent": "您好，公司完全成本持续下降。",
+                    "attachedPubDate": None,
+                    "updateDate": 1778145452000,
+                },
+                {
+                    "indexId": "2",
+                    "mainContent": "公司完全成本是多少？",
+                    "pubDate": 1777287734000,
+                    "attachedContent": "您好，公司完全成本持续下降。",
+                    "attachedPubDate": None,
+                    "updateDate": 1778145452000,
+                },
+            ]
+        },
+        "002714.SZ",
+    )
+
+    result = _dedupe_interaction_records(records)
+
+    assert len(result) == 1

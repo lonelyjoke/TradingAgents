@@ -351,6 +351,44 @@ _INDUSTRY_PLAYBOOKS: dict[str, tuple[FilingQuestion, ...]] = {
             "Stress execution, guarantees, and receivable risk.",
         ),
     ),
+    "livestock_hog": (
+        FilingQuestion(
+            "hog_cycle",
+            "pricing",
+            "生猪价格、仔猪价格、完全成本和猪粮比是否共同指向周期改善？",
+            ("生猪价格", "仔猪价格", "完全成本", "猪粮比", "养殖成本"),
+            ("quarterly", "semiannual", "annual"),
+            "Use realized pricing and cost spread to judge cycle position.",
+            "Challenge margin optimism if price recovery is not beating cost.",
+        ),
+        FilingQuestion(
+            "hog_breeding_base",
+            "capacity",
+            "能繁母猪、PSY、仔猪和出栏量是否显示公司在扩张、收缩还是提效？",
+            ("能繁母猪", "PSY", "仔猪", "出栏量", "种猪"),
+            ("quarterly", "semiannual", "annual"),
+            "Support durable supply advantage when breeding productivity improves.",
+            "Test whether volume growth comes from biological efficiency or simple herd expansion.",
+        ),
+        FilingQuestion(
+            "hog_slaughter_mix",
+            "mix",
+            "屠宰和肉食业务是在抬升利润池，还是仍只是规模补充？",
+            ("屠宰", "肉食", "屠宰量", "鲜品", "冻品"),
+            ("semiannual", "annual"),
+            "Identify whether downstream integration is becoming a real second curve.",
+            "Keep adjacent businesses out of core valuation until margins and utilization are disclosed.",
+        ),
+        FilingQuestion(
+            "hog_hedging",
+            "risk",
+            "期货套保、饲料采购和库存安排是在平滑利润，还是在放大周期判断风险？",
+            ("期货", "套期保值", "饲料", "原料采购", "库存"),
+            ("quarterly", "semiannual", "annual"),
+            "Recognize prudent cycle management when disclosure supports it.",
+            "Stress mark-to-market, basis, and procurement timing risk.",
+        ),
+    ),
     "environmental_services": (
         FilingQuestion(
             "env_order_quality",
@@ -739,6 +777,14 @@ def _select_industry_profile(
     wind_hits = sum(token in blob for token in ("\u98ce\u7535", "\u98ce\u673a", "\u53f6\u7247", "\u6d77\u4e0a\u98ce\u7535"))
     if any(token in identity_blob for token in ("\u98ce\u7535", "\u98ce\u673a")) or wind_hits >= 2:
         return "wind_power_equipment"
+    hog_hits = sum(
+        token in blob
+        for token in ("生猪", "养猪", "猪肉", "仔猪", "种猪", "能繁母猪", "PSY", "出栏")
+    )
+    if any(token in identity_blob for token in ("生猪", "养殖", "畜牧")) and hog_hits >= 1:
+        return "livestock_hog"
+    if hog_hits >= 3:
+        return "livestock_hog"
     if any(token in identity_blob for token in ("\u4e13\u7528\u673a\u68b0", "\u8bbe\u5907")) and any(
         token in blob for token in ("\u592a\u9633\u80fd", "\u534a\u5bfc\u4f53", "\u663e\u793a", "\u771f\u7a7a", "\u6fc0\u5149")
     ):
@@ -1547,6 +1593,70 @@ _INDUSTRY_PARAGRAPH_LENSES: dict[
             "Which adjacencies have crossed from story into commercial evidence?",
             "Promotes genuine second curves while capping concept-only premium.",
             "thematic catalysts + investor interactions + policy planning",
+        ),
+    ),
+    "livestock_hog": (
+        FilingQuestion(
+            "hog_cycle",
+            "pricing",
+            "生猪价格、仔猪价格、完全成本和猪粮比是否共同指向周期改善？",
+            ("生猪价格", "仔猪价格", "完全成本", "猪粮比", "养殖成本"),
+            ("quarterly", "semiannual", "annual"),
+            "Use realized pricing and cost spread to judge cycle position.",
+            "Challenge margin optimism if price recovery is not beating cost.",
+        ),
+        FilingQuestion(
+            "hog_breeding_base",
+            "capacity",
+            "能繁母猪、PSY、仔猪和出栏量是否显示公司在扩张、收缩还是提效？",
+            ("能繁母猪", "PSY", "仔猪", "出栏量", "种猪"),
+            ("quarterly", "semiannual", "annual"),
+            "Support durable supply advantage when breeding productivity improves.",
+            "Test whether volume growth comes from biological efficiency or simple herd expansion.",
+        ),
+        FilingQuestion(
+            "hog_slaughter_mix",
+            "mix",
+            "屠宰和肉食业务是在抬升利润池，还是仍只是规模补充？",
+            ("屠宰", "肉食", "屠宰量", "鲜品", "冻品"),
+            ("semiannual", "annual"),
+            "Identify whether downstream integration is becoming a real second curve.",
+            "Keep adjacent businesses out of core valuation until margins and utilization are disclosed.",
+        ),
+        FilingQuestion(
+            "hog_hedging",
+            "risk",
+            "期货套保、饲料采购和库存安排是在平滑利润，还是在放大周期判断风险？",
+            ("期货", "套期保值", "饲料", "原料采购", "库存"),
+            ("quarterly", "semiannual", "annual"),
+            "Recognize prudent cycle management when disclosure supports it.",
+            "Stress mark-to-market, basis, and procurement timing risk.",
+        ),
+    ),
+    "livestock_hog": (
+        (
+            "cycle_position",
+            ("主营业务分析", "经营情况讨论与分析", "经营情况讨论及分析", "季度经营分析"),
+            ("生猪价格", "仔猪价格", "猪粮比", "完全成本", "养殖成本"),
+            "Where is the company in the hog cycle after cost?",
+            "Livestock equities are priced off price-cost spread, not volume alone.",
+            "official livestock data + earnings model",
+        ),
+        (
+            "breeding_productivity",
+            ("主营业务分析", "经营情况讨论与分析", "经营情况讨论及分析"),
+            ("能繁母猪", "PSY", "仔猪", "种猪", "出栏量"),
+            "Is biological efficiency improving faster than herd size?",
+            "Separates enduring operating advantage from simple cyclical beta.",
+            "filing evidence + peer comparison",
+        ),
+        (
+            "slaughter_mix",
+            ("主营业务分析", "经营情况讨论与分析", "公司未来发展的展望", "未来发展展望"),
+            ("屠宰", "肉食", "鲜品", "冻品", "产能利用率"),
+            "Has downstream integration become a real profit pool?",
+            "Promotes true second curves while keeping adjacency claims disciplined.",
+            "thematic catalysts + valuation",
         ),
     ),
     "environmental_services": (

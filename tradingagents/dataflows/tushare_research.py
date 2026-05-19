@@ -1,9 +1,12 @@
 from __future__ import annotations
 
 from datetime import datetime, timedelta
+import html
+import re
 from typing import Iterable
 
 import pandas as pd
+import requests
 from dateutil.relativedelta import relativedelta
 
 from .tushare_a_stock import (
@@ -19,6 +22,9 @@ from .tushare_a_stock import (
     _to_tushare_date,
     is_a_share_symbol,
 )
+
+CNINFO_ANNOUNCEMENT_QUERY_URL = "http://www.cninfo.com.cn/new/hisAnnouncement/query"
+CNINFO_STATIC_BASE_URL = "http://static.cninfo.com.cn/"
 
 
 def _date_window(curr_date: str, look_back_days: int) -> tuple[datetime, datetime, str, str]:
@@ -104,6 +110,125 @@ def _sort_by_existing_date(data: pd.DataFrame, date_cols: list[str]) -> pd.DataF
     return data
 
 
+def _cninfo_exchange_params(symbol: str) -> tuple[str, str]:
+    if symbol.endswith(".SH"):
+        return "sse", "sh"
+    return "szse", "sz"
+
+
+def _clean_cninfo_title(value: object) -> str:
+    text = html.unescape(str(value or ""))
+    text = re.sub(r"<[^>]+>", "", text)
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def _format_cninfo_ann_date(value: object) -> str:
+    if value is None or pd.isna(value):
+        return ""
+    text = str(value).strip()
+    try:
+        if text.isdigit():
+            timestamp = int(text)
+            if timestamp > 10_000_000_000:
+                timestamp = timestamp // 1000
+            return datetime.fromtimestamp(timestamp).strftime("%Y%m%d")
+        return datetime.strptime(text[:10], "%Y-%m-%d").strftime("%Y%m%d")
+    except Exception:
+        return text[:8]
+
+
+def _cninfo_announcement_url(adjunct_url: object) -> str:
+    path = str(adjunct_url or "").strip()
+    if not path:
+        return ""
+    if path.startswith(("http://", "https://")):
+        return path
+    return CNINFO_STATIC_BASE_URL + path.lstrip("/")
+
+
+def _parse_cninfo_announcements(payload: dict, symbol: str) -> pd.DataFrame:
+    announcements = payload.get("announcements") or []
+    rows = []
+    for item in announcements:
+        title = _clean_cninfo_title(item.get("announcementTitle"))
+        if not title:
+            continue
+        rows.append(
+            {
+                "ann_date": _format_cninfo_ann_date(item.get("announcementTime")),
+                "ts_code": symbol,
+                "name": str(item.get("secName") or "").strip(),
+                "title": title,
+                "url": _cninfo_announcement_url(item.get("adjunctUrl")),
+                "rec_time": _format_cninfo_ann_date(item.get("announcementTime")),
+            }
+        )
+    if not rows:
+        return pd.DataFrame(columns=["ann_date", "ts_code", "name", "title", "url", "rec_time"])
+    return pd.DataFrame(rows)
+
+
+def _fetch_cninfo_announcements(symbol: str, curr_date: str, look_back_days: int) -> pd.DataFrame | TushareDataError:
+    start_dt, end_dt, _, _ = _date_window(curr_date, look_back_days)
+    column, plate = _cninfo_exchange_params(symbol)
+    stock_code = symbol.split(".")[0]
+    se_date = f"{start_dt.strftime('%Y-%m-%d')}~{end_dt.strftime('%Y-%m-%d')}"
+    page_size = 30
+    max_pages = 10 if look_back_days >= 365 else 4
+    rows = []
+    session = requests.Session()
+    headers = {
+        "Accept": "application/json, text/javascript, */*; q=0.01",
+        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "Referer": "http://www.cninfo.com.cn/new/commonUrl/pageOfSearch",
+        "User-Agent": "Mozilla/5.0 TradingAgents cninfo-announcement-fallback",
+        "X-Requested-With": "XMLHttpRequest",
+    }
+
+    try:
+        for page_num in range(1, max_pages + 1):
+            data = {
+                "stock": stock_code,
+                "searchkey": "",
+                "plate": plate,
+                "category": "",
+                "trade": "",
+                "column": column,
+                "columnTitle": "history",
+                "pageNum": str(page_num),
+                "pageSize": str(page_size),
+                "tabName": "fulltext",
+                "sortName": "",
+                "sortType": "",
+                "limit": "",
+                "showTitle": "",
+                "seDate": se_date,
+            }
+            response = session.post(
+                CNINFO_ANNOUNCEMENT_QUERY_URL,
+                data=data,
+                headers=headers,
+                timeout=20,
+            )
+            response.raise_for_status()
+            page = _parse_cninfo_announcements(response.json(), symbol)
+            if page.empty:
+                break
+            rows.append(page)
+            if len(page) < page_size:
+                break
+    except Exception as exc:
+        return TushareDataError(f"cninfo announcement fallback unavailable: {exc}")
+
+    if not rows:
+        return pd.DataFrame(columns=["ann_date", "ts_code", "name", "title", "url", "rec_time"])
+
+    data = pd.concat(rows, ignore_index=True)
+    if "title" in data.columns:
+        data = data.drop_duplicates(subset=["ann_date", "title", "url"], keep="first")
+    return _sort_by_existing_date(data, ["ann_date", "rec_time"])
+
+
 def _fetch_announcements(symbol: str, curr_date: str, look_back_days: int) -> pd.DataFrame | TushareDataError:
     _, _, start, end = _date_window(curr_date, look_back_days)
     fields = "ann_date,ts_code,name,title,url,rec_time"
@@ -122,8 +247,13 @@ def _fetch_announcements(symbol: str, curr_date: str, look_back_days: int) -> pd
             end_date=end,
             fields=fields,
         )
-    if isinstance(result, TushareDataError):
-        return result
+    if isinstance(result, TushareDataError) or result is None or result.empty:
+        fallback = _fetch_cninfo_announcements(symbol, curr_date, look_back_days)
+        if not isinstance(fallback, TushareDataError):
+            return fallback
+        if isinstance(result, TushareDataError):
+            return TushareDataError(f"{result}; {fallback}")
+        return fallback
     return _sort_by_existing_date(result, ["ann_date", "rec_time"])
 
 

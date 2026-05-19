@@ -17,6 +17,7 @@ from tradingagents.agents.utils.agent_utils import (
     get_material_catalyst_instruction,
     get_policy_planning_instruction,
     get_peer_selection_instruction,
+    get_price_earnings_decomposition_instruction,
     get_research_gap_instruction,
     get_supply_demand_fallback_instruction,
     get_supply_chain_selection_instruction,
@@ -43,6 +44,7 @@ def create_research_manager(llm):
         supply_chain_comparison_context = state.get("supply_chain_comparison_context", "")
         earnings_model_context = state.get("earnings_model_context", "")
         market_expectation_context = state.get("market_expectation_context", "")
+        price_earnings_decomposition_context = state.get("price_earnings_decomposition_context", "")
         management_capital_allocation_context = state.get("management_capital_allocation_context", "")
         shareholder_structure_context = state.get("shareholder_structure_context", "")
         investor_interaction_context = state.get("investor_interaction_context", "")
@@ -122,6 +124,7 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 - If you are writing free text rather than structured fields, also include **Management & Capital Allocation Verdict** and **Shareholder Structure Verdict** whenever the hard-signal contexts are available.
 - If official investor-interaction context is available, keep an **Investor Communication Verdict** explicit enough for the downstream trader and risk team to understand the live concern map and disclosure quality.
 - If official policy context is available, keep a **Policy Direction Verdict** explicit enough to distinguish industry support from company-specific monetization.
+- If historical price/EPS/PE decomposition context is available, keep the valuation-cycle verdict explicit enough to say whether the current price is supported by earnings improvement, multiple expansion, both, or neither.
 - If industry-specific filing context is available, keep an **Industry Driver Verdict** explicit enough to preserve the real sector-native variables that decide the thesis.
 - If verified but non-base-case optionality matters, keep a **Strategic Optionality Verdict** explicit enough that downstream agents do not erase a second growth curve, investee holding, asset revaluation path, or live thematic catalyst merely because it does not flip today's rating.
 
@@ -145,6 +148,9 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 
 **Market-Expectation Context:**
 {market_expectation_context}
+
+**Historical Price-EPS-PE Decomposition Context:**
+{price_earnings_decomposition_context}
 
 **Management/Capital-Allocation Context:**
 {management_capital_allocation_context}
@@ -172,6 +178,7 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 {get_supply_chain_selection_instruction()}
 {get_earnings_model_instruction()}
 {get_market_expectation_instruction()}
+{get_price_earnings_decomposition_instruction()}
 {get_investor_interaction_instruction()}
 {get_policy_planning_instruction()}
 {get_three_layer_conclusion_instruction()}

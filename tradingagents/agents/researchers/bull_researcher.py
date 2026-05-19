@@ -12,6 +12,7 @@ from tradingagents.agents.utils.agent_utils import (
     get_management_capital_allocation_instruction,
     get_policy_planning_instruction,
     get_peer_selection_instruction,
+    get_price_earnings_decomposition_instruction,
     get_research_gap_instruction,
     get_supply_demand_fallback_instruction,
     get_supply_chain_selection_instruction,
@@ -38,6 +39,7 @@ def create_bull_researcher(llm):
         supply_chain_comparison_context = state.get("supply_chain_comparison_context", "")
         earnings_model_context = state.get("earnings_model_context", "")
         market_expectation_context = state.get("market_expectation_context", "")
+        price_earnings_decomposition_context = state.get("price_earnings_decomposition_context", "")
         management_capital_allocation_context = state.get("management_capital_allocation_context", "")
         shareholder_structure_context = state.get("shareholder_structure_context", "")
         investor_interaction_context = state.get("investor_interaction_context", "")
@@ -70,6 +72,7 @@ Key points to focus on:
 - Industry-Driver Discipline: Use the industry reading pack from the filing context to identify the sector-native variables that truly decide the thesis, then connect each one to outside evidence such as policy, investor Q&A, thematic catalysts, peers, and market expectations. Do not lean on generic revenue growth when the real industry question is backlog quality, NBV, channel inventory, asset quality, utilization, or freight rate.
 - Relative Allocation Discipline: Explicitly answer why this stock deserves capital versus stronger same-industry peers or a better-positioned segment elsewhere in the chain; do not stop at saying the company itself is improving.
 - Market-Implied Expectation Discipline: State what the current quote already appears to assume, then identify the precise assumption the market is still too pessimistic about.
+- Historical Price/EPS/PE Discipline: Use the decomposition context to argue whether the upside is supported by EPS recovery/growth, multiple expansion, or a double-engine setup; do not present pure multiple expansion as hard fundamental proof.
 - Bear Counterpoints: Critically analyze the bear argument with specific data and sound reasoning, addressing concerns thoroughly and showing why the bull perspective holds stronger merit.
 - Engagement: Present your argument in a conversational style, engaging directly with the bear analyst's points and debating effectively rather than just listing data.
 - Anti-repetition discipline: {round_instruction}
@@ -85,6 +88,7 @@ Same-industry peer comparison: {peer_comparison_context}
 Cross-position supply-chain comparison: {supply_chain_comparison_context}
 Earnings-model context: {earnings_model_context}
 Market-expectation context: {market_expectation_context}
+Historical price-EPS-PE decomposition context: {price_earnings_decomposition_context}
 Management/capital-allocation context: {management_capital_allocation_context}
 Shareholder-structure context: {shareholder_structure_context}
 Official investor-interaction context: {investor_interaction_context}
@@ -103,6 +107,7 @@ Use this information to deliver a compelling bull argument, refute the bear's co
 {get_supply_chain_selection_instruction()}
 {get_earnings_model_instruction()}
 {get_market_expectation_instruction()}
+{get_price_earnings_decomposition_instruction()}
 {get_investor_interaction_instruction()}
 {get_policy_planning_instruction()}
 {get_three_layer_conclusion_instruction()}

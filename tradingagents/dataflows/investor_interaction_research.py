@@ -473,9 +473,30 @@ def _merge_interaction_cache(symbol: str, records: pd.DataFrame) -> pd.DataFrame
     if cache_path.exists():
         cached = pd.read_csv(cache_path)
         records = pd.concat([cached, records], ignore_index=True)
-    deduped = records.drop_duplicates(subset=["question_id"], keep="last")
+    deduped = _dedupe_interaction_records(records)
     deduped.to_csv(cache_path, index=False, encoding="utf-8-sig")
     return deduped
+
+
+def _dedupe_interaction_records(records: pd.DataFrame) -> pd.DataFrame:
+    """Deduplicate both transport ids and repeated visible Q&A content."""
+    if records is None or records.empty:
+        return records
+    deduped = records.drop_duplicates(subset=["question_id"], keep="last").copy()
+    for col in ("question", "answer"):
+        if col not in deduped.columns:
+            deduped[col] = ""
+    deduped["_question_norm"] = (
+        deduped["question"].fillna("").astype(str).str.replace(r"\s+", " ", regex=True).str.strip()
+    )
+    deduped["_answer_norm"] = (
+        deduped["answer"].fillna("").astype(str).str.replace(r"\s+", " ", regex=True).str.strip()
+    )
+    content_subset = ["_question_norm", "_answer_norm"]
+    if "question_time" in deduped.columns:
+        content_subset.insert(0, "question_time")
+    deduped = deduped.drop_duplicates(subset=content_subset, keep="last")
+    return deduped.drop(columns=["_question_norm", "_answer_norm"])
 
 
 def fetch_investor_interaction_history(
@@ -537,9 +558,7 @@ def fetch_investor_interaction_history(
     if not pages:
         return pd.DataFrame()
 
-    records = pd.concat(pages, ignore_index=True).drop_duplicates(
-        subset=["question_id"], keep="last"
-    )
+    records = _dedupe_interaction_records(pd.concat(pages, ignore_index=True))
     if use_cache:
         records = _merge_interaction_cache(symbol, records)
 

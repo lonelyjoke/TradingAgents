@@ -59,6 +59,9 @@ from .earnings_modeling import (
 from .expectation_research import (
     get_market_expectation_context as get_tushare_market_expectation_context,
 )
+from .price_earnings_decomposition import (
+    get_price_earnings_decomposition_context as get_tushare_price_earnings_decomposition_context,
+)
 from .governance_research import (
     get_management_capital_allocation_context as get_tushare_management_capital_allocation_context,
 )
@@ -107,6 +110,7 @@ TOOLS_CATEGORIES = {
             "get_financial_report_intelligence_context",
             "get_earnings_model_context",
             "get_market_expectation_context",
+            "get_price_earnings_decomposition_context",
             "get_management_capital_allocation_context",
             "get_shareholder_structure_context",
             "get_investor_interaction_context",
@@ -198,6 +202,9 @@ VENDOR_METHODS = {
     "get_market_expectation_context": {
         "tushare": get_tushare_market_expectation_context,
     },
+    "get_price_earnings_decomposition_context": {
+        "tushare": get_tushare_price_earnings_decomposition_context,
+    },
     "get_management_capital_allocation_context": {
         "tushare": get_tushare_management_capital_allocation_context,
     },
@@ -285,6 +292,7 @@ def route_to_vendor(method: str, *args, **kwargs):
         "get_financial_report_intelligence_context",
         "get_earnings_model_context",
         "get_market_expectation_context",
+        "get_price_earnings_decomposition_context",
         "get_management_capital_allocation_context",
         "get_shareholder_structure_context",
         "get_investor_interaction_context",

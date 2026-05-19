@@ -1,3 +1,5 @@
+import re
+
 import questionary
 from typing import List, Optional, Tuple, Dict
 
@@ -8,7 +10,7 @@ from tradingagents.llm_clients.model_catalog import get_model_options
 
 console = Console()
 
-TICKER_INPUT_EXAMPLES = "Examples: SPY, CNC.TO, 7203.T, 0700.HK"
+TICKER_INPUT_EXAMPLES = "Examples: SPY, CNC.TO, 7203.T, 0700.HK, 000001.SZ, 600519.SH"
 
 ANALYST_ORDER = [
     ("Market Analyst", AnalystType.MARKET),
@@ -39,8 +41,20 @@ def get_ticker() -> str:
 
 
 def normalize_ticker_symbol(ticker: str) -> str:
-    """Normalize ticker input while preserving exchange suffixes."""
-    return ticker.strip().upper()
+    """Normalize ticker input while preserving non-A-share exchange suffixes."""
+    symbol = ticker.strip().upper()
+    match = re.fullmatch(r"(\d{6})(?:\.(SZ|SH|BJ))?", symbol)
+    if not match:
+        return symbol
+
+    code, suffix = match.groups()
+    if code.startswith(("000", "001", "002", "003", "300", "301")):
+        return f"{code}.SZ"
+    if code.startswith(("600", "601", "603", "605", "688", "689")):
+        return f"{code}.SH"
+    if code.startswith(("43", "82", "83", "87", "88", "92")):
+        return f"{code}.BJ"
+    return f"{code}.{suffix}" if suffix else code
 
 
 def get_analysis_date() -> str:

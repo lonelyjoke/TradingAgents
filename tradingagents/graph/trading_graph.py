@@ -50,6 +50,7 @@ from tradingagents.agents.utils.agent_utils import (
     get_management_capital_allocation_context,
     get_policy_planning_context,
     get_peer_comparison,
+    get_price_earnings_decomposition_context,
     get_shareholder_structure_context,
     get_shipping_context,
     get_supply_chain_comparison,
@@ -215,6 +216,7 @@ class TradingAgentsGraph:
                     get_financial_report_intelligence_context,
                     get_earnings_model_context,
                     get_market_expectation_context,
+                    get_price_earnings_decomposition_context,
                     get_management_capital_allocation_context,
                     get_shareholder_structure_context,
                     get_investor_interaction_context,
@@ -347,6 +349,7 @@ class TradingAgentsGraph:
         supply_chain_comparison_context = ""
         earnings_model_context = ""
         market_expectation_context = ""
+        price_earnings_decomposition_context = ""
         management_capital_allocation_context = ""
         shareholder_structure_context = ""
         investor_interaction_context = ""
@@ -416,6 +419,17 @@ class TradingAgentsGraph:
             except Exception as exc:
                 market_expectation_context = (
                     "# Market-expectation context unavailable\n\n"
+                    f"- Reason: {exc}"
+                )
+            try:
+                price_earnings_decomposition_context = route_to_vendor(
+                    "get_price_earnings_decomposition_context",
+                    company_name,
+                    trade_date,
+                )
+            except Exception as exc:
+                price_earnings_decomposition_context = (
+                    "# Price-EPS-PE decomposition unavailable\n\n"
                     f"- Reason: {exc}"
                 )
             try:
@@ -473,6 +487,7 @@ class TradingAgentsGraph:
             supply_chain_comparison_context=supply_chain_comparison_context,
             earnings_model_context=earnings_model_context,
             market_expectation_context=market_expectation_context,
+            price_earnings_decomposition_context=price_earnings_decomposition_context,
             management_capital_allocation_context=management_capital_allocation_context,
             shareholder_structure_context=shareholder_structure_context,
             investor_interaction_context=investor_interaction_context,
@@ -492,6 +507,7 @@ class TradingAgentsGraph:
         supply_chain_comparison_context = ""
         earnings_model_context = ""
         market_expectation_context = ""
+        price_earnings_decomposition_context = ""
         management_capital_allocation_context = ""
         shareholder_structure_context = ""
         investor_interaction_context = ""
@@ -564,6 +580,17 @@ class TradingAgentsGraph:
                     f"- Reason: {exc}"
                 )
             try:
+                price_earnings_decomposition_context = route_to_vendor(
+                    "get_price_earnings_decomposition_context",
+                    company_name,
+                    trade_date,
+                )
+            except Exception as exc:
+                price_earnings_decomposition_context = (
+                    "# Price-EPS-PE decomposition unavailable\n\n"
+                    f"- Reason: {exc}"
+                )
+            try:
                 management_capital_allocation_context = route_to_vendor(
                     "get_management_capital_allocation_context",
                     company_name,
@@ -618,6 +645,7 @@ class TradingAgentsGraph:
             supply_chain_comparison_context=supply_chain_comparison_context,
             earnings_model_context=earnings_model_context,
             market_expectation_context=market_expectation_context,
+            price_earnings_decomposition_context=price_earnings_decomposition_context,
             management_capital_allocation_context=management_capital_allocation_context,
             shareholder_structure_context=shareholder_structure_context,
             investor_interaction_context=investor_interaction_context,
@@ -685,6 +713,9 @@ class TradingAgentsGraph:
             ),
             "market_expectation_context": final_state.get(
                 "market_expectation_context", ""
+            ),
+            "price_earnings_decomposition_context": final_state.get(
+                "price_earnings_decomposition_context", ""
             ),
             "management_capital_allocation_context": final_state.get(
                 "management_capital_allocation_context", ""

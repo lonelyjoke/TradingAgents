@@ -27,6 +27,8 @@ from tradingagents.agents.utils.agent_utils import (
     get_management_capital_allocation_instruction,
     get_peer_comparison,
     get_peer_selection_instruction,
+    get_price_earnings_decomposition_context,
+    get_price_earnings_decomposition_instruction,
     get_research_gap_instruction,
     get_shipping_context,
     get_shareholder_structure_context,
@@ -38,6 +40,7 @@ from tradingagents.agents.utils.agent_utils import (
     get_thematic_catalyst_context,
     get_valuation_percentiles,
 )
+from tradingagents.dataflows.tushare_a_stock import is_a_share_symbol
 from tradingagents.dataflows.config import get_config
 
 
@@ -51,37 +54,49 @@ def create_fundamentals_analyst(llm):
         supply_chain_comparison_context = state.get("supply_chain_comparison_context", "")
         earnings_model_context = state.get("earnings_model_context", "")
         market_expectation_context = state.get("market_expectation_context", "")
+        price_earnings_decomposition_context = state.get("price_earnings_decomposition_context", "")
         management_capital_allocation_context = state.get("management_capital_allocation_context", "")
         shareholder_structure_context = state.get("shareholder_structure_context", "")
+        is_a_share = is_a_share_symbol(state["company_of_interest"])
 
         tools = [
             get_fundamentals,
             get_balance_sheet,
             get_cashflow,
             get_income_statement,
-            get_commodity_context,
-            get_shipping_context,
-            get_peer_comparison,
-            get_supply_chain_comparison,
             get_valuation_percentiles,
             get_market_sector_risk,
             get_market_timing_context,
-            get_thematic_catalyst_context,
-            get_financial_report_intelligence_context,
-            get_earnings_model_context,
-            get_market_expectation_context,
-            get_management_capital_allocation_context,
-            get_shareholder_structure_context,
         ]
+        if not is_a_share:
+            tools.extend([get_commodity_context, get_shipping_context])
+        if not peer_comparison_context:
+            tools.append(get_peer_comparison)
+        if not supply_chain_comparison_context:
+            tools.append(get_supply_chain_comparison)
+        if not thematic_catalyst_context:
+            tools.append(get_thematic_catalyst_context)
+        if not filing_intelligence_context:
+            tools.append(get_financial_report_intelligence_context)
+        if not earnings_model_context:
+            tools.append(get_earnings_model_context)
+        if not market_expectation_context:
+            tools.append(get_market_expectation_context)
+        if not price_earnings_decomposition_context:
+            tools.append(get_price_earnings_decomposition_context)
+        if not management_capital_allocation_context:
+            tools.append(get_management_capital_allocation_context)
+        if not shareholder_structure_context:
+            tools.append(get_shareholder_structure_context)
 
         system_message = (
             "You are a buy-side fundamental researcher. Write a focused investment memo, not an exhaustive data dump. "
             "Your job is to identify the tradable thesis, test whether the business-cycle or boom-bust expectation can plausibly realize, and explain what evidence supports or weakens the thesis. "
             "Use `get_fundamentals`, `get_balance_sheet`, `get_cashflow`, and `get_income_statement` for core financial quality. "
             "Pay special attention to accounting items that may preview future performance, including contract liabilities, advance receipts, contract assets, receivables, inventories, prepayments, payables, goodwill, net cash, and working capital. "
-            "For A-share tickers, also use `get_commodity_context` for product/futures exposure, `get_shipping_context` for freight-cycle exposure, `get_peer_comparison` for same-industry alternatives, `get_valuation_percentiles` for historical valuation zones, `get_market_sector_risk` for broad/sector risk, `get_market_timing_context` for market mood, `get_thematic_catalyst_context` to cross-check filing-origin themes against news and news-origin themes against filing text, `get_financial_report_intelligence_context` to deep-read quarterly/half-year/annual filings for paragraph-level evidence, industry-native drivers, business model, growth vectors, material facts, and report-to-report validation, `get_earnings_model_context` to anchor the thesis in an earnings bridge, `get_market_expectation_context` to read what the current quote already implies, `get_management_capital_allocation_context` to assess stewardship and capital deployment, and `get_shareholder_structure_context` to inspect ownership concentration, insider activity, pledge, and unlock risk. "
+            "For A-share tickers, the system may provide precomputed thematic, filing, peer, supply-chain, earnings-model, market-expectation, price/EPS/PE decomposition, management/capital-allocation, and shareholder-structure context below. Use any precomputed context directly and do not call the same context tool again. Also use `get_valuation_percentiles` for historical valuation zones, `get_market_sector_risk` for broad/sector risk, and `get_market_timing_context` for market mood when those extra lenses are material. "
             "For A-share tickers, also use `get_supply_chain_comparison` when a curated chain map exists, so the memo can distinguish between a merely good company and the best profit pool in the chain. "
-            "For A-share tickers, call `get_thematic_catalyst_context` and `get_financial_report_intelligence_context` at least once before concluding the catalyst / filing-evidence sections. "
+            "For A-share tickers, if precomputed thematic and financial-report intelligence are present below, treat those as satisfying the catalyst / filing-evidence requirement. If they are absent, call the corresponding context tool once before concluding those sections. "
             "Before forming the thesis, read the filing context in industry order: first identify the sector-native variables that actually decide economics, then inspect the paragraph-level filing evidence around those variables, and only then synthesize generic financial metrics. "
             "Prioritize: Core Bet, key supporting evidence, key negative evidence, earnings bridge, market-implied expectation, expectation gap, probability/payoff, company quality, current odds, relative allocation, catalysts, falsification signals, and data gaps. "
             "If another peer looks better than the target, explain why with metrics and caveats. If the sector looks high-risk while the target looks relatively low, discuss whether this is a mispricing opportunity or a company-specific warning. "
@@ -99,6 +114,7 @@ def create_fundamentals_analyst(llm):
             + get_supply_chain_selection_instruction()
             + get_earnings_model_instruction()
             + get_market_expectation_instruction()
+            + get_price_earnings_decomposition_instruction()
             + get_three_layer_conclusion_instruction()
             + get_management_capital_allocation_instruction()
             + get_shareholder_structure_instruction()
@@ -136,6 +152,12 @@ def create_fundamentals_analyst(llm):
                 "\n\nPrecomputed market-expectation context:\n"
                 + market_expectation_context
                 if market_expectation_context
+                else ""
+            )
+            + (
+                "\n\nPrecomputed historical price-EPS-PE decomposition context:\n"
+                + price_earnings_decomposition_context
+                if price_earnings_decomposition_context
                 else ""
             )
             + (

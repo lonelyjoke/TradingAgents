@@ -15,6 +15,7 @@ from tradingagents.dataflows.thematic_research import (
     _extract_news_candidates,
     _extract_reliable_filing_theme_candidates,
     _extract_reported_amount_cny,
+    _filter_news_by_entity_terms,
     _news_has_catalyst,
     _portfolio_pattern_summary,
     _load_financial_report_texts,
@@ -112,6 +113,19 @@ def test_combine_news_frames_deduplicates_company_and_investee_news():
     result = _combine_news_frames(company_news, investee_news)
 
     assert list(result["title"]) == ["金风科技持有蓝箭航天", "蓝箭航天IPO辅导"]
+
+
+def test_filter_news_by_entity_terms_drops_unrelated_articles_before_theme_extraction():
+    news = pd.DataFrame(
+        [
+            {"title": "牧原股份推进降本", "content": "牧原股份披露完全成本改善。"},
+            {"title": "某新能源公司签约", "content": "商业航天与储能概念升温。"},
+        ]
+    )
+
+    result = _filter_news_by_entity_terms(news, ["牧原股份", "002714"])
+
+    assert list(result["title"]) == ["牧原股份推进降本"]
 
 
 def test_reported_amount_parser_accepts_raw_cny_table_values():

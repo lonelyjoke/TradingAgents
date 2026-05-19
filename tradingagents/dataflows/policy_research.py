@@ -79,6 +79,15 @@ INDUSTRY_POLICY_SOURCES: dict[str, tuple[PolicySource, ...]] = {
             url="https://www.ndrc.gov.cn/xxgk/zcfb/ghwb/202203/t20220323_1320038_ext.html",
         ),
     ),
+    "livestock-hog": (
+        PolicySource(
+            title="生猪产能调控实施方案（2024年修订）",
+            issuer="农业农村部",
+            publish_date="2024-03-01",
+            policy_level="industry-plan",
+            url="https://www.moa.gov.cn/govpublic/xmsyj/202403/t20240304_6450572.htm",
+        ),
+    ),
 }
 
 INDUSTRY_MATCH_RULES: dict[str, tuple[str, ...]] = {
@@ -86,6 +95,7 @@ INDUSTRY_MATCH_RULES: dict[str, tuple[str, ...]] = {
     "digital-economy": ("软件服务", "互联网", "通信设备", "计算机", "数据中心"),
     "future-industries": ("商业航天", "低空经济", "机器人", "人工智能", "高端装备"),
     "hydrogen": ("氢能", "绿色甲醇", "绿醇", "甲醇", "燃料电池"),
+    "livestock-hog": ("生猪", "猪肉", "畜牧", "养殖", "饲料"),
 }
 
 
@@ -131,6 +141,18 @@ POLICY_THEME_RULES: dict[str, dict[str, Any]] = {
         "market_read": "supports decarbonization pathways beyond electricity",
         "bull_use": "support new-business TAM expansion when commercialization exists",
         "bear_use": "require offtake, utilization, and revenue before valuation uplift",
+    },
+    "livestock-capacity": {
+        "aliases": ("生猪产能", "能繁母猪", "产能调控", "基础产能", "绿色区域"),
+        "market_read": "supports disciplined capacity management in the hog industry",
+        "bull_use": "argue that sector supply discipline can improve cycle visibility for efficient producers",
+        "bear_use": "test whether policy merely stabilizes supply without guaranteeing company-specific margin",
+    },
+    "food-security": {
+        "aliases": ("粮食安全", "重要农产品", "畜产品", "稳产保供", "农产品供给"),
+        "market_read": "signals strategic support for domestic agricultural supply resilience",
+        "bull_use": "frame efficient leaders as beneficiaries of long-run strategic relevance",
+        "bear_use": "separate policy importance from shareholder returns and pricing power",
     },
 }
 

@@ -26,6 +26,7 @@ from tradingagents.agents.utils.agent_utils import (
     get_material_catalyst_instruction,
     get_policy_planning_instruction,
     get_peer_selection_instruction,
+    get_price_earnings_decomposition_instruction,
     get_research_gap_instruction,
     get_supply_demand_fallback_instruction,
     get_supply_chain_selection_instruction,
@@ -55,6 +56,7 @@ def create_portfolio_manager(llm):
         supply_chain_comparison_context = state.get("supply_chain_comparison_context", "")
         earnings_model_context = state.get("earnings_model_context", "")
         market_expectation_context = state.get("market_expectation_context", "")
+        price_earnings_decomposition_context = state.get("price_earnings_decomposition_context", "")
         management_capital_allocation_context = state.get("management_capital_allocation_context", "")
         shareholder_structure_context = state.get("shareholder_structure_context", "")
         investor_interaction_context = state.get("investor_interaction_context", "")
@@ -143,6 +145,7 @@ def create_portfolio_manager(llm):
 - The public excerpt should read like a compact company deep-dive with a few thick sections, not many thin bullets. Prefer 4-6 integrated sections that each complete a full loop of **claim -> evidence -> implication for the stock**.
 - Begin with a short Company Snapshot, then give the rating and a one-line thesis.
 - In the main Investment Thesis, weave together the decisive business drivers, the industry-native variables, the market-implied expectation, the quality/price/relative-allocation distinction, and only the governance or disclosure evidence that materially strengthens or weakens that argument.
+- In the valuation/cycle discussion, integrate the historical price-EPS-PE decomposition: state whether today's quote is earnings-supported, multiple-supported, double-engine, or fragile, and connect that answer to the forward EPS bridge.
 - Use the Debate & Decision Logic section to summarize the strongest bull case, strongest bear case, the real disagreement, the core bet, and why you choose one side after weighing evidence quality, expectation gap, and probability/payoff.
 - Use the Catalysts, Optionality & Falsification section to distinguish what belongs in the base case from what remains scenario valuation or narrative option value. Preserve verified second-growth curves, investee holdings, policy support, and live thematic catalysts, but clearly say why they do or do not change today's rating.
 - Keep three judgments **clear in substance** even when integrated into prose rather than broken into separate headings: business quality, today's odds, and relative deployment versus alternatives.
@@ -162,6 +165,7 @@ def create_portfolio_manager(llm):
 - Cross-position supply-chain comparison: **{supply_chain_comparison_context}**
 - Earnings-model context: **{earnings_model_context}**
 - Market-expectation context: **{market_expectation_context}**
+- Historical price-EPS-PE decomposition context: **{price_earnings_decomposition_context}**
 - Management/capital-allocation context: **{management_capital_allocation_context}**
 - Shareholder-structure context: **{shareholder_structure_context}**
 - Official investor-interaction context: **{investor_interaction_context}**
@@ -186,6 +190,7 @@ Be decisive and ground every conclusion in specific evidence from the analysts.
 {get_supply_chain_selection_instruction()}
 {get_earnings_model_instruction()}
 {get_market_expectation_instruction()}
+{get_price_earnings_decomposition_instruction()}
 {get_investor_interaction_instruction()}
 {get_policy_planning_instruction()}
 {get_three_layer_conclusion_instruction()}

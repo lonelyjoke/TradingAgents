@@ -22,6 +22,8 @@ ALLOWED_DOMAINS = {
     "baiinfo.com",
     "www.100ppi.com",
     "100ppi.com",
+    "www.moa.gov.cn",
+    "moa.gov.cn",
 }
 
 
@@ -104,6 +106,17 @@ COMPANY_COMMODITY_MAP = {
         ],
         "spread_note": "For battery makers, lithium carbonate is a cost proxy rather than a direct revenue product.",
     },
+    "002714.SZ": {
+        "name": "Muyuan Foods",
+        "products": [
+            {"name": "Live hog", "type": "moa_livestock", "role": "main product", "keywords": ["活猪", "生猪"]},
+            {"name": "Piglet", "type": "moa_livestock", "role": "leading supply signal", "keywords": ["仔猪"]},
+            {"name": "Pork", "type": "moa_livestock", "role": "downstream price", "keywords": ["猪肉"]},
+            {"name": "Feed", "type": "moa_livestock", "role": "cost proxy", "keywords": ["活猪配合饲料", "饲料"]},
+            {"name": "Hog-grain ratio", "type": "moa_livestock", "role": "cycle spread", "keywords": ["猪粮比价", "猪粮比"]},
+        ],
+        "spread_note": "For hog breeders, read realized hog price together with piglet price, feed cost, and hog-grain spread before extrapolating earnings.",
+    },
 }
 
 
@@ -114,6 +127,18 @@ INDUSTRY_PRODUCT_HINTS = {
     "煤": [{"name": "Coking coal", "type": "futures", "role": "industry proxy", "prefix": "JM", "exchange": "DCE"}],
     "钢": [{"name": "Rebar", "type": "futures", "role": "industry proxy", "prefix": "RB", "exchange": "SHFE"}],
     "铝": [{"name": "Aluminum", "type": "futures", "role": "industry proxy", "prefix": "AL", "exchange": "SHFE"}],
+    "养殖": [
+        {"name": "Live hog", "type": "moa_livestock", "role": "main product", "keywords": ["活猪", "生猪"]},
+        {"name": "Piglet", "type": "moa_livestock", "role": "leading supply signal", "keywords": ["仔猪"]},
+        {"name": "Feed", "type": "moa_livestock", "role": "cost proxy", "keywords": ["活猪配合饲料", "饲料"]},
+        {"name": "Hog-grain ratio", "type": "moa_livestock", "role": "cycle spread", "keywords": ["猪粮比价", "猪粮比"]},
+    ],
+    "畜牧": [
+        {"name": "Live hog", "type": "moa_livestock", "role": "main product", "keywords": ["活猪", "生猪"]},
+        {"name": "Piglet", "type": "moa_livestock", "role": "leading supply signal", "keywords": ["仔猪"]},
+        {"name": "Feed", "type": "moa_livestock", "role": "cost proxy", "keywords": ["活猪配合饲料", "饲料"]},
+        {"name": "Hog-grain ratio", "type": "moa_livestock", "role": "cycle spread", "keywords": ["猪粮比价", "猪粮比"]},
+    ],
 }
 
 
@@ -202,6 +227,60 @@ def _fetch_web_spot(product: dict) -> dict:
         "change_over_window": "N/A",
         "inventory_or_receipt": "N/A",
         "evidence_status": "Unavailable; do not state price or change as fact.",
+        "evidence": "; ".join(errors)[:800],
+    }
+
+
+def _moa_monthly_archive_urls(curr_date: str, months_back: int = 6) -> list[str]:
+    anchor = datetime.strptime(curr_date, "%Y-%m-%d")
+    urls = []
+    for offset in range(months_back):
+        year = anchor.year
+        month = anchor.month - offset
+        while month <= 0:
+            month += 12
+            year -= 1
+        urls.append(f"https://www.moa.gov.cn/ztzl/szcpxx/jdsj/{year}/{year}{month:02d}/")
+    return urls
+
+
+def _fetch_moa_livestock_market(product: dict, curr_date: str) -> dict:
+    name = product["name"]
+    keywords = list(product.get("keywords", []))
+    errors = []
+    for url in _moa_monthly_archive_urls(curr_date):
+        try:
+            title, body = _fetch_whitelisted_page(url)
+            if not any(keyword in body for keyword in keywords):
+                continue
+            snippets = []
+            for keyword in keywords:
+                snippets.extend(_extract_evidence_snippets(keyword, title, body, max_snippets=2))
+            snippets = list(dict.fromkeys(snippets))
+            return {
+                "product": name,
+                "role": product.get("role", ""),
+                "data_type": "official livestock market evidence",
+                "latest_contract_or_source": url,
+                "latest_price": "See official source",
+                "latest_date": "See official source",
+                "change_over_window": "Not computed",
+                "inventory_or_receipt": "N/A",
+                "evidence_status": "Fetched official MOA livestock archive page; use as verified cycle evidence, parse exact series before quantifying.",
+                "evidence": " | ".join(snippets)[:800] if snippets else title,
+            }
+        except Exception as exc:
+            errors.append(f"{url}: {exc}")
+    return {
+        "product": name,
+        "role": product.get("role", ""),
+        "data_type": "official livestock market evidence",
+        "latest_contract_or_source": "MOA monthly livestock archive",
+        "latest_price": "N/A",
+        "latest_date": "N/A",
+        "change_over_window": "N/A",
+        "inventory_or_receipt": "N/A",
+        "evidence_status": "Unavailable; do not state hog-cycle data as fact.",
         "evidence": "; ".join(errors)[:800],
     }
 
@@ -392,6 +471,8 @@ def get_commodity_context(ticker: str, curr_date: str, look_back_days: int = 90)
             rows.append(_fetch_futures_product(product, curr_date, look_back_days))
         elif product.get("type") == "web_spot":
             rows.append(_fetch_web_spot(product))
+        elif product.get("type") == "moa_livestock":
+            rows.append(_fetch_moa_livestock_market(product, curr_date))
 
     lines = [
         f"# Commodity and product price context for {symbol} as of {curr_date}",
@@ -414,6 +495,7 @@ def get_commodity_context(ticker: str, curr_date: str, look_back_days: int = 90)
             "## Analyst Instructions",
             "- Treat Tushare futures data as a proxy only when it matches the company's main product or key input.",
             "- Treat whitelist web pages as evidence snippets unless an exact price/date/unit is parsed and shown.",
+            "- For livestock companies, treat official MOA market pages as high-confidence cycle evidence, but do not quantify the cycle unless the exact monthly/weekly series is parsed from the source.",
             "- Do not state R32, R125, lithium, copper, inventory, or spread changes as facts unless they appear in the evidence table.",
             "- If the product has no reliable data source, list it as an unverified key variable instead of inventing a price change.",
         ]

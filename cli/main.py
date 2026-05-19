@@ -683,7 +683,7 @@ def get_user_selections():
 
 def get_ticker():
     """Get ticker symbol from user input."""
-    return typer.prompt("", default="SPY")
+    return normalize_ticker_symbol(typer.prompt("", default="SPY"))
 
 
 def get_analysis_date():
@@ -751,6 +751,13 @@ def save_report_to_disk(final_state, ticker: str, save_path: Path):
         context_dir.mkdir(exist_ok=True)
         (context_dir / "market_expectation.md").write_text(
             final_state["market_expectation_context"],
+            encoding="utf-8",
+        )
+    if final_state.get("price_earnings_decomposition_context"):
+        context_dir = save_path / "0_context"
+        context_dir.mkdir(exist_ok=True)
+        (context_dir / "price_earnings_decomposition.md").write_text(
+            final_state["price_earnings_decomposition_context"],
             encoding="utf-8",
         )
     if final_state.get("management_capital_allocation_context"):
@@ -1187,10 +1194,17 @@ def run_analysis(checkpoint: bool = False):
         # Initialize state and get graph args with callbacks.
         # Keep CLI runs on the same research path as graph.propagate(); otherwise
         # the interactive flow silently loses precomputed context and memory continuity.
+        message_buffer.add_message(
+            "System",
+            "Preparing A-share context: filings, themes, peers, expectations, governance, and holders",
+        )
+        update_display(layout, stats_handler=stats_handler, start_time=start_time)
         graph._resolve_pending_entries(selections["ticker"])
         init_agent_state = graph.create_initial_state_with_context(
             selections["ticker"], selections["analysis_date"]
         )
+        message_buffer.add_message("System", "A-share context preparation completed")
+        update_display(layout, stats_handler=stats_handler, start_time=start_time)
         # Pass callbacks to graph config for tool execution tracking
         # (LLM tracking is handled separately via LLM constructor)
         args = graph.propagator.get_graph_args(callbacks=[stats_handler])

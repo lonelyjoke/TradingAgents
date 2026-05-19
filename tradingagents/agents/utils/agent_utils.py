@@ -22,6 +22,7 @@ from tradingagents.agents.utils.fundamental_data_tools import (
     get_market_timing_context,
     get_management_capital_allocation_context,
     get_peer_comparison,
+    get_price_earnings_decomposition_context,
     get_shareholder_structure_context,
     get_supply_chain_comparison,
     get_shipping_context,
@@ -322,6 +323,23 @@ def get_market_expectation_instruction() -> str:
         "recovery, stagnation, or deterioration, then identify the precise "
         "assumption where your view differs. Never call a stock cheap or expensive "
         "from PE/PB alone."
+    )
+
+
+def get_price_earnings_decomposition_instruction() -> str:
+    """Return rules for reading current price through historical EPS and PE drivers."""
+    return (
+        " Price-EPS-PE decomposition discipline: explain the stock's current quote "
+        "through two separate engines: earnings support and valuation multiple. "
+        "Use the historical close / PE TTM EPS proxy to ask whether past and current "
+        "price levels were supported by higher EPS, higher PE, or both. Do not treat "
+        "the proxy as reported EPS; use it as a market-consistent bridge from price "
+        "history to expectation. Bulls should prefer earnings-led or credible "
+        "double-engine setups. Bears should challenge multiple-led reratings when "
+        "EPS support is flat, falling, or already cyclical-peak. The Portfolio "
+        "Manager should fold this into the valuation/cycle setup rather than make "
+        "it a standalone checklist: say whether today's price is earnings-supported, "
+        "multiple-supported, double-engine, or fragile."
     )
 
 

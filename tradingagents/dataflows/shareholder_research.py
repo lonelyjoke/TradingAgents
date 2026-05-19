@@ -38,6 +38,9 @@ def _holder_query(api_name: str, symbol: str, periods: list[str]) -> pd.DataFram
         result = _safe_optional_query(api_name, ts_code=symbol, period=period)
         if isinstance(result, TushareDataError) or result is None or result.empty:
             continue
+        result = result.copy()
+        if "period" not in result.columns and "end_date" in result.columns:
+            result["period"] = result["end_date"].astype(str)
         frames.append(result)
     return pd.concat(frames, ignore_index=True) if frames else pd.DataFrame()
 

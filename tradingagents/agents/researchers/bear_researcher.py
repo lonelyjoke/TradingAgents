@@ -12,6 +12,7 @@ from tradingagents.agents.utils.agent_utils import (
     get_management_capital_allocation_instruction,
     get_policy_planning_instruction,
     get_peer_selection_instruction,
+    get_price_earnings_decomposition_instruction,
     get_research_gap_instruction,
     get_supply_demand_fallback_instruction,
     get_supply_chain_selection_instruction,
@@ -38,6 +39,7 @@ def create_bear_researcher(llm):
         supply_chain_comparison_context = state.get("supply_chain_comparison_context", "")
         earnings_model_context = state.get("earnings_model_context", "")
         market_expectation_context = state.get("market_expectation_context", "")
+        price_earnings_decomposition_context = state.get("price_earnings_decomposition_context", "")
         management_capital_allocation_context = state.get("management_capital_allocation_context", "")
         shareholder_structure_context = state.get("shareholder_structure_context", "")
         investor_interaction_context = state.get("investor_interaction_context", "")
@@ -73,6 +75,7 @@ Key points to focus on:
 - Industry-Driver Discipline: Use the industry reading pack from the filing context to identify the sector-native variables that truly decide the thesis, then attack the weak links with outside evidence such as policy, investor Q&A, thematic catalysts, peers, and market expectations. Do not let generic revenue growth obscure the real industry question if the decisive variable is backlog quality, NBV, channel inventory, asset quality, utilization, or freight rate.
 - Relative Allocation Discipline: Explicitly answer why capital should not be deployed into a stronger peer or a better-positioned segment elsewhere in the same chain if such alternatives exist.
 - Market-Implied Expectation Discipline: State what the current quote already appears to assume, then identify the precise assumption the market is still too optimistic about.
+- Historical Price/EPS/PE Discipline: Use the decomposition context to test whether the stock's move is supported by EPS improvement or mostly by PE expansion; challenge multiple-led reratings when the forward EPS bridge is weak.
 - Bull Counterpoints: Critically analyze the bull argument with specific data and sound reasoning, exposing weaknesses or over-optimistic assumptions.
 - Engagement: Present your argument in a conversational style, directly engaging with the bull analyst's points and debating effectively rather than simply listing facts.
 - Anti-repetition discipline: {round_instruction}
@@ -89,6 +92,7 @@ Same-industry peer comparison: {peer_comparison_context}
 Cross-position supply-chain comparison: {supply_chain_comparison_context}
 Earnings-model context: {earnings_model_context}
 Market-expectation context: {market_expectation_context}
+Historical price-EPS-PE decomposition context: {price_earnings_decomposition_context}
 Management/capital-allocation context: {management_capital_allocation_context}
 Shareholder-structure context: {shareholder_structure_context}
 Official investor-interaction context: {investor_interaction_context}
@@ -107,6 +111,7 @@ Use this information to deliver a compelling bear argument, refute the bull's cl
 {get_supply_chain_selection_instruction()}
 {get_earnings_model_instruction()}
 {get_market_expectation_instruction()}
+{get_price_earnings_decomposition_instruction()}
 {get_investor_interaction_instruction()}
 {get_policy_planning_instruction()}
 {get_three_layer_conclusion_instruction()}

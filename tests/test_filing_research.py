@@ -115,12 +115,24 @@ def test_industry_playbook_selects_new_priority_profiles():
         )
 
 
+def test_industry_playbook_selects_livestock_hog_before_incidental_environment_mentions():
+    reports = [
+        (
+            "2025年年度报告",
+            "公司主营生猪养殖，披露能繁母猪、PSY、仔猪、出栏量和完全成本，同时持续推进环保投入。",
+        )
+    ]
+
+    assert _select_industry_profile("牧原股份", "畜牧养殖", reports) == "livestock_hog"
+
+
 def test_question_candidates_include_new_priority_playbooks():
     assert any(q.question_id == "metals_resource_volume" for q in _question_candidates("metals_mining"))
     assert any(q.question_id == "battery_capacity_utilization" for q in _question_candidates("lithium_battery"))
     assert any(q.question_id == "baijiu_channel_inventory" for q in _question_candidates("baijiu"))
     assert any(q.question_id == "airline_traffic_yield" for q in _question_candidates("airlines"))
     assert any(q.question_id == "insurance_nbv" for q in _question_candidates("insurance"))
+    assert any(q.question_id == "hog_cycle" for q in _question_candidates("livestock_hog"))
 
 
 

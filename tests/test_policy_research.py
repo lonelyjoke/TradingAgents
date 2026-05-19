@@ -24,6 +24,12 @@ def test_select_industry_policy_sources_routes_by_company_terms():
     assert any(source.title == "“十四五”可再生能源发展规划" for source in sources)
 
 
+def test_select_industry_policy_sources_routes_hog_companies():
+    sources = _select_industry_policy_sources(["牧原股份", "畜牧养殖", "生猪"])
+
+    assert any(source.title == "生猪产能调控实施方案（2024年修订）" for source in sources)
+
+
 def test_policy_source_frame_renders_selected_sources():
     sources = (
         PolicySource(
@@ -67,3 +73,21 @@ def test_infer_policy_relevance_detects_multiple_policy_themes():
         "commercial-space",
         "ai-and-digital",
     }
+
+
+def test_infer_policy_relevance_detects_livestock_policy_themes():
+    docs = pd.DataFrame(
+        [
+            {
+                "title": "生猪产能调控实施方案（2024年修订）",
+                "issuer": "农业农村部",
+                "publish_date": "2024-03-01",
+                "policy_level": "industry-plan",
+                "text": "稳定生猪产能，调控能繁母猪存栏，保障重要农产品稳产保供。",
+            }
+        ]
+    )
+
+    result = _infer_policy_relevance(docs, ["牧原股份", "生猪"])
+
+    assert set(result["policy_theme"]) >= {"livestock-capacity", "food-security"}

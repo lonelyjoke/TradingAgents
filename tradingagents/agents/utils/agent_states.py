@@ -62,6 +62,7 @@ class AgentState(MessagesState):
     supply_chain_comparison_context: Annotated[str, "Precomputed cross-position chain context"]
     earnings_model_context: Annotated[str, "Precomputed earnings-model bridge context"]
     market_expectation_context: Annotated[str, "Precomputed market-implied expectation context"]
+    price_earnings_decomposition_context: Annotated[str, "Precomputed historical price/EPS/PE decomposition context"]
     management_capital_allocation_context: Annotated[str, "Precomputed management/capital-allocation context"]
     shareholder_structure_context: Annotated[str, "Precomputed shareholder/chip context"]
     investor_interaction_context: Annotated[str, "Precomputed official investor-interaction context"]

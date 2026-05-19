@@ -73,6 +73,10 @@ def _management_rewards(symbol: str, curr_date: str, years: int = 3) -> pd.DataF
     )
     if isinstance(result, TushareDataError) or result is None or result.empty:
         return result
+    if "ts_code" in result.columns:
+        result = result[result["ts_code"].astype(str) == symbol].copy()
+        if result.empty:
+            return result
     keep = [
         "ann_date",
         "end_date",
@@ -123,6 +127,10 @@ def _repurchases(symbol: str, curr_date: str, years: int = 3) -> pd.DataFrame | 
     )
     if isinstance(result, TushareDataError) or result is None or result.empty:
         return result
+    if "ts_code" in result.columns:
+        result = result[result["ts_code"].astype(str) == symbol].copy()
+        if result.empty:
+            return result
     keep = [
         "ann_date",
         "end_date",
