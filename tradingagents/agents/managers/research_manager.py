@@ -39,6 +39,7 @@ def create_research_manager(llm):
         history = state["investment_debate_state"].get("history", "")
         recent_decision_context = state.get("recent_decision_context", "")
         thematic_catalyst_context = state.get("thematic_catalyst_context", "")
+        commodity_context = state.get("commodity_context", "")
         filing_intelligence_context = state.get("filing_intelligence_context", "")
         peer_comparison_context = state.get("peer_comparison_context", "")
         supply_chain_comparison_context = state.get("supply_chain_comparison_context", "")
@@ -126,6 +127,7 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 - If official policy context is available, keep a **Policy Direction Verdict** explicit enough to distinguish industry support from company-specific monetization.
 - If historical price/EPS/PE decomposition context is available, keep the valuation-cycle verdict explicit enough to say whether the current price is supported by earnings improvement, multiple expansion, both, or neither.
 - If industry-specific filing context is available, keep an **Industry Driver Verdict** explicit enough to preserve the real sector-native variables that decide the thesis.
+- If commodity/product-price context is available, keep a **Commodity Cycle Verdict** explicit enough to say whether the product-price evidence supports or contradicts the margin/EPS/inventory part of the thesis.
 - If verified but non-base-case optionality matters, keep a **Strategic Optionality Verdict** explicit enough that downstream agents do not erase a second growth curve, investee holding, asset revaluation path, or live thematic catalyst merely because it does not flip today's rating.
 
 ---
@@ -133,6 +135,9 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 {continuity_context}
 **Thematic Catalyst Cross-Check And Valuation Bridge:**
 {thematic_catalyst_context}
+
+**Commodity/Product-Price Context:**
+{commodity_context}
 
 **Financial-Report Intelligence:**
 {filing_intelligence_context}

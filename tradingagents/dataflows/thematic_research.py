@@ -332,7 +332,7 @@ def _extract_financial_candidates(report_texts: Iterable[tuple[str, str]]) -> li
             if has_investment_marker:
                 for match in _COMPANY_NAME_RE.findall(line):
                     normalized = _normalize_company_name(match)
-                    if not normalized:
+                    if not _is_valid_asset_revaluation_candidate(normalized, line):
                         continue
                     key = (normalized, "asset-revaluation")
                     candidates[key] = ThemeCandidate(
@@ -512,11 +512,7 @@ def _extract_short_investee_name(line: str) -> str | None:
     if not match:
         return None
     candidate = _normalize_company_name(match.group(1))
-    if (
-        candidate in _SHORT_INVESTEE_EXCLUSIONS
-        or len(candidate) < 2
-        or _looks_like_accounting_row_name(candidate)
-    ):
+    if not _is_valid_asset_revaluation_candidate(candidate, line):
         return None
     return candidate
 
@@ -535,8 +531,72 @@ def _looks_like_accounting_row_name(value: str) -> bool:
         "\u51cf\u503c",
         "\u516c\u5141\u4ef7\u503c",
         "\u7efc\u5408\u6536\u76ca",
+        "\u501f\u6b3e",
+        "\u5408\u540c\u8d1f\u503a",
+        "\u9884\u4ed8\u6b3e",
+        "\u5e94\u6536\u6b3e\u9879",
+        "\u5b58\u8d27",
+        "\u6295\u8d44\u6027\u623f\u5730\u4ea7",
+        "\u957f\u671f\u80a1\u6743\u6295\u8d44",
+        "\u5176\u4ed6\u6743\u76ca\u5de5\u5177\u6295\u8d44",
+        "\u5408\u8ba1",
+        "\u5ba2\u6237",
+        "\u4f9b\u5e94\u5546",
+        "\u6301\u80a1",
+        "\u81ea\u7136\u4eba",
+        "\u80a1\u672c",
+        "\u8d44\u672c\u516c\u79ef",
+        "\u672a\u5206\u914d\u5229\u6da6",
+        "\u5c11\u6570\u80a1\u4e1c\u6743\u76ca",
     )
     return any(token in text for token in accounting_tokens)
+
+
+_ASSET_CANDIDATE_EXCLUSION_TOKENS = (
+    "\u77ed\u671f\u501f\u6b3e",
+    "\u957f\u671f\u501f\u6b3e",
+    "\u501f\u6b3e",
+    "\u5408\u8ba1",
+    "\u5ba2\u6237",
+    "\u4f9b\u5e94\u5546",
+    "\u6301\u80a1",
+    "\u81ea\u7136\u4eba",
+    "\u9884\u7b97\u62e8\u6b3e",
+    "\u6295\u8d44\u6027\u623f\u5730\u4ea7",
+    "\u6027\u623f\u5730\u4ea7",
+    "\u6743\u76ca\u5de5\u5177",
+    "\u503a\u6743\u6295\u8d44",
+    "\u5bf9\u5b50\u516c\u53f8\u6295\u8d44",
+    "\u5bf9\u8054\u8425\u4f01\u4e1a",
+    "\u8d26\u9762\u4ef7\u503c",
+    "\u53d7\u8ba9\u65b9",
+    "\u4e3b\u627f\u9500\u5546",
+    "\u4fdd\u8350\u4eba",
+    "\u672c\u6b21\u53d1\u884c",
+    "\u8bc9\u8bbc\u516c\u544a",
+    "\u8fd8\u9700\u83b7\u5f97",
+    "\u8d44\u4ea7",
+    "\u8d1f\u503a",
+    "\u73b0\u91d1\u6d41",
+    "\u6536\u5165",
+    "\u6210\u672c",
+    "\u8d39\u7528",
+)
+
+
+def _is_valid_asset_revaluation_candidate(candidate: str, evidence: str = "") -> bool:
+    text = str(candidate or "").strip()
+    if not text or len(text) < 2 or len(text) > 40:
+        return False
+    if text in _SHORT_INVESTEE_EXCLUSIONS:
+        return False
+    if _looks_like_accounting_row_name(text):
+        return False
+    if any(token in text for token in _ASSET_CANDIDATE_EXCLUSION_TOKENS):
+        return False
+    if re.fullmatch(r"[\d.,%\uff08\uff09()\-\s]+", text):
+        return False
+    return True
 
 
 def _iter_news_texts(*frames: pd.DataFrame | TushareDataError) -> Iterable[str]:
@@ -568,7 +628,7 @@ def _extract_news_candidates(*frames: pd.DataFrame | TushareDataError) -> list[T
                 )
         for match in _COMPANY_NAME_RE.findall(text):
             normalized = _normalize_company_name(match)
-            if not normalized:
+            if not _is_valid_asset_revaluation_candidate(normalized, text):
                 continue
             key = (normalized, "asset-revaluation")
             candidates.setdefault(
@@ -1054,6 +1114,7 @@ def get_thematic_catalyst_context(
             candidate.name
             for candidate in financial_candidates
             if candidate.kind == "asset-revaluation"
+            and _is_valid_asset_revaluation_candidate(candidate.name, candidate.evidence)
         }
     )
     investee_major_news = (

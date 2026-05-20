@@ -344,6 +344,7 @@ class TradingAgentsGraph:
             company_name
         )
         thematic_catalyst_context = ""
+        commodity_context = ""
         filing_intelligence_context = ""
         peer_comparison_context = ""
         supply_chain_comparison_context = ""
@@ -364,6 +365,17 @@ class TradingAgentsGraph:
             except Exception as exc:
                 thematic_catalyst_context = (
                     "# Thematic catalyst cross-check unavailable\n\n"
+                    f"- Reason: {exc}"
+                )
+            try:
+                commodity_context = route_to_vendor(
+                    "get_commodity_context",
+                    company_name,
+                    trade_date,
+                )
+            except Exception as exc:
+                commodity_context = (
+                    "# Commodity/product-price context unavailable\n\n"
                     f"- Reason: {exc}"
                 )
             try:
@@ -482,6 +494,7 @@ class TradingAgentsGraph:
             past_context=past_context,
             recent_decision_context=recent_decision_context,
             thematic_catalyst_context=thematic_catalyst_context,
+            commodity_context=commodity_context,
             filing_intelligence_context=filing_intelligence_context,
             peer_comparison_context=peer_comparison_context,
             supply_chain_comparison_context=supply_chain_comparison_context,
@@ -502,6 +515,7 @@ class TradingAgentsGraph:
             company_name
         )
         thematic_catalyst_context = ""
+        commodity_context = ""
         filing_intelligence_context = ""
         peer_comparison_context = ""
         supply_chain_comparison_context = ""
@@ -522,6 +536,17 @@ class TradingAgentsGraph:
             except Exception as exc:
                 thematic_catalyst_context = (
                     "# Thematic catalyst cross-check unavailable\n\n"
+                    f"- Reason: {exc}"
+                )
+            try:
+                commodity_context = route_to_vendor(
+                    "get_commodity_context",
+                    company_name,
+                    trade_date,
+                )
+            except Exception as exc:
+                commodity_context = (
+                    "# Commodity/product-price context unavailable\n\n"
                     f"- Reason: {exc}"
                 )
             try:
@@ -640,6 +665,7 @@ class TradingAgentsGraph:
             past_context=past_context,
             recent_decision_context=recent_decision_context,
             thematic_catalyst_context=thematic_catalyst_context,
+            commodity_context=commodity_context,
             filing_intelligence_context=filing_intelligence_context,
             peer_comparison_context=peer_comparison_context,
             supply_chain_comparison_context=supply_chain_comparison_context,
@@ -698,6 +724,9 @@ class TradingAgentsGraph:
             "trade_date": final_state["trade_date"],
             "thematic_catalyst_context": final_state.get(
                 "thematic_catalyst_context", ""
+            ),
+            "commodity_context": final_state.get(
+                "commodity_context", ""
             ),
             "filing_intelligence_context": final_state.get(
                 "filing_intelligence_context", ""

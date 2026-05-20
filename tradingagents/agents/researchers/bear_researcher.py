@@ -34,6 +34,7 @@ def create_bear_researcher(llm):
         news_report = state["news_report"]
         fundamentals_report = state["fundamentals_report"]
         thematic_catalyst_context = state.get("thematic_catalyst_context", "")
+        commodity_context = state.get("commodity_context", "")
         filing_intelligence_context = state.get("filing_intelligence_context", "")
         peer_comparison_context = state.get("peer_comparison_context", "")
         supply_chain_comparison_context = state.get("supply_chain_comparison_context", "")
@@ -72,6 +73,7 @@ Key points to focus on:
 - Thematic Catalyst Discipline: Discuss the valuable themes extracted by the system, including credible tier-3 narrative options if they are not fantastical. For each material theme, assess whether it is too small, too slow, too weakly evidenced, already priced, or disconnected from economics; state what would falsify it; and do not silently ignore a theme merely because it is not yet valuation-grade.
 - Investor-Interaction Discipline: If official Q&A context is available, discuss what investors keep pressing on, where management answers are non-committal or incomplete, and whether the answer pattern exposes unresolved risks, weak disclosure, or low catalyst visibility.
 - Policy-Planning Discipline: If official national or industry policy context is available, test whether policy merely expands the industry while competitors capture the economics, whether support is already priced, and whether the company is a real beneficiary rather than only adjacent to a favored direction.
+- Commodity/Product-Price Discipline: If commodity/product-price context is available, use it to attack or validate the cycle thesis. Test whether product prices, spreads, or futures proxies actually support margins, inventory marks, working capital, and EPS; do not let news-only narratives override weak commodity evidence.
 - Industry-Driver Discipline: Use the industry reading pack from the filing context to identify the sector-native variables that truly decide the thesis, then attack the weak links with outside evidence such as policy, investor Q&A, thematic catalysts, peers, and market expectations. Do not let generic revenue growth obscure the real industry question if the decisive variable is backlog quality, NBV, channel inventory, asset quality, utilization, or freight rate.
 - Relative Allocation Discipline: Explicitly answer why capital should not be deployed into a stronger peer or a better-positioned segment elsewhere in the same chain if such alternatives exist.
 - Market-Implied Expectation Discipline: State what the current quote already appears to assume, then identify the precise assumption the market is still too optimistic about.
@@ -87,6 +89,7 @@ Social media sentiment report: {sentiment_report}
 Latest world affairs news: {news_report}
 Company fundamentals report: {fundamentals_report}
 Thematic catalyst cross-check and valuation bridge: {thematic_catalyst_context}
+Commodity/product-price context: {commodity_context}
 Financial-report intelligence: {filing_intelligence_context}
 Same-industry peer comparison: {peer_comparison_context}
 Cross-position supply-chain comparison: {supply_chain_comparison_context}

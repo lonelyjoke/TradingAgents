@@ -57,6 +57,7 @@ class AgentState(MessagesState):
     ]
     fundamentals_report: Annotated[str, "Report from the Fundamentals Researcher"]
     thematic_catalyst_context: Annotated[str, "Precomputed filing/news catalyst context"]
+    commodity_context: Annotated[str, "Precomputed commodity/product-price context"]
     filing_intelligence_context: Annotated[str, "Precomputed filing intelligence context"]
     peer_comparison_context: Annotated[str, "Precomputed same-industry peer context"]
     supply_chain_comparison_context: Annotated[str, "Precomputed cross-position chain context"]
@@ -83,4 +84,5 @@ class AgentState(MessagesState):
     final_trade_decision: Annotated[str, "Final decision made by the Risk Analysts"]
     past_context: Annotated[str, "Memory log context injected at run start (same-ticker decisions + cross-ticker lessons)"]
     thematic_catalyst_context: Annotated[str, "Precomputed filing/news thematic cross-check for A-share names"]
+    commodity_context: Annotated[str, "Precomputed commodity/product-price context for cyclical/resource A-share names"]
     filing_intelligence_context: Annotated[str, "Precomputed non-statement operating evidence mined from A-share financial reports"]

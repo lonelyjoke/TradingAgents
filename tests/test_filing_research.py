@@ -1,4 +1,9 @@
 from tradingagents.dataflows.filing_research import (
+    BusinessModelFinding,
+    FilingCoverageAudit,
+    FilingTextSignal,
+    FinancialRelationInsight,
+    GrowthVectorFinding,
     _audit_filing_coverage,
     _answer_questions,
     _build_business_model_map,
@@ -12,6 +17,8 @@ from tradingagents.dataflows.filing_research import (
     _extract_material_filing_findings,
     _extract_note_findings,
     _extract_statement_table_signals,
+    _extract_textual_filing_signals,
+    _distill_filing_insights,
     _infer_financial_relations,
     _promote_core_discussion_items,
     _question_candidates,
@@ -708,3 +715,134 @@ def test_core_discussion_queue_promotes_financial_relations():
     by_topic = {item.topic: item for item in promoted}
 
     assert by_topic["cash_absorbing_growth"].priority == "core"
+
+
+def test_industry_profile_prefers_lithium_resource_over_incidental_environment_mentions():
+    reports = [
+        (
+            "annual",
+            "\u516c\u53f8\u4e3b\u8425\u78b3\u9178\u9502\u3001\u6c22\u6c27\u5316\u9502\u3001\u9502\u8f89\u77f3\u4ee5\u53ca\u76d0\u6e56\u5364\u6c34\u63d0\u9502\uff0c"
+            "\u540c\u65f6\u5728\u7ae0\u8282\u4e2d\u63d0\u5230\u73af\u4fdd\u5408\u89c4\u548c\u56de\u6536\u4e1a\u52a1\u3002",
+        )
+    ]
+
+    assert _select_industry_profile("\u8d63\u950b\u9502\u4e1a", "\u5c0f\u91d1\u5c5e", reports) == "lithium_battery"
+
+
+def test_industry_profile_keeps_true_environmental_services():
+    reports = [
+        (
+            "annual",
+            "\u516c\u53f8\u4e3b\u8425\u73af\u536b\u4e00\u4f53\u5316\u3001\u5783\u573e\u711a\u70e7\u53ca\u73af\u5883\u670d\u52a1\u9879\u76ee\uff0c\u65b0\u589e\u8ba2\u5355\u548c\u5728\u624b\u9879\u76ee\u662f\u6838\u5fc3\u53d8\u91cf\u3002",
+        )
+    ]
+
+    assert _select_industry_profile("\u67d0\u73af\u5883\u80a1\u4efd", "\u73af\u4fdd", reports) == "environmental_services"
+
+
+def test_industry_profile_prefers_industrial_components_over_downstream_wind_mentions():
+    reports = [
+        (
+            "annual",
+            "\u516c\u53f8\u4e3b\u8425\u7d22\u5177\u3001\u540a\u88c5\u5e26\u3001\u94a2\u4e1d\u7ef3\u548c\u94fe\u6761\u7d22\u5177\uff0c"
+            "\u4ea7\u54c1\u5e94\u7528\u4e8e\u6d77\u6d0b\u5de5\u7a0b\u3001\u7535\u529b\u3001\u98ce\u7535\u5ba2\u6237\u548c\u4f53\u80b2\u573a\u9986\u3002",
+        )
+    ]
+
+    assert _select_industry_profile("\u5de8\u529b\u7d22\u5177", "\u673a\u68b0\u57fa\u4ef6", reports) == "industrial_components"
+    assert any(q.question_id == "industrial_order_cash" for q in _question_candidates("industrial_components"))
+
+
+def test_textual_filing_signals_classify_wording_strength_and_missing_proof():
+    reports = [
+        (
+            "annual",
+            "\u516c\u53f8\u5df2\u7b7e\u8ba2\u6d77\u5916\u5ba2\u6237\u8ba2\u5355\u5e76\u5df2\u4ea4\u4ed8\u90e8\u5206\u4ea7\u54c1\u3002\n"
+            "\u516c\u53f8\u5c06\u79ef\u6781\u5e03\u5c40\u667a\u80fd\u88c5\u5907\u65b0\u4e1a\u52a1\u3002\n"
+            "\u516c\u53f8\u9762\u4e34\u56de\u6b3e\u538b\u529b\u548c\u51cf\u503c\u98ce\u9669\u3002",
+        )
+    ]
+    growth_vectors = [
+        GrowthVectorFinding(
+            vector="smart-equipment",
+            stage="planned",
+            evidence="annual: \u516c\u53f8\u5c06\u79ef\u6781\u5e03\u5c40\u667a\u80fd\u88c5\u5907\u65b0\u4e1a\u52a1\u3002",
+            valuation_treatment="narrative or early optionality only",
+            verification_need="check customers/orders/revenue",
+        )
+    ]
+
+    rows = _extract_textual_filing_signals(reports, growth_vectors=growth_vectors)
+    types = {row.signal_type for row in rows}
+
+    assert "management_claim_with_evidence" in types
+    assert "unquantified_strategy_language" in types
+    assert "risk_language_upgrade" in types
+    assert "watch_missing_monetization" in types
+
+
+def test_filing_insight_distillation_promotes_story_quality_tension():
+    coverage = FilingCoverageAudit(
+        coverage_grade="strong",
+        report_types_seen=("annual", "quarterly"),
+        missing_report_types=("semiannual",),
+        answered_question_count=6,
+        total_question_count=8,
+        core_pack_status="ready",
+        confidence_read="Annual base text and quarterly checkpoint are both present.",
+    )
+    business_model = [
+        BusinessModelFinding(
+            lens="core_revenue_engine",
+            report_type="annual",
+            evidence="annual report: main revenue comes from industrial components and project delivery.",
+            why_it_matters="Defines what actually drives the income statement.",
+        )
+    ]
+    growth_vectors = [
+        GrowthVectorFinding(
+            vector="overseas-expansion",
+            stage="contracted",
+            evidence="annual report: won overseas stadium projects.",
+            valuation_treatment="eligible for core discussion if scale and economics matter",
+            verification_need="check contract value, delivery, margin, and cash collection",
+        )
+    ]
+    relations = [
+        FinancialRelationInsight(
+            relation_type="cash_absorbing_growth",
+            importance="high",
+            evidence="revenue grew while operating cash flow stayed negative and prepayments rose.",
+            investment_read="Growth currently consumes working capital before proving owner economics.",
+            bull_use="Use only if cash conversion improves.",
+            bear_use="Challenge whether growth is self-funding.",
+        )
+    ]
+    textual_signals = [
+        FilingTextSignal(
+            signal_type="unquantified_strategy_language",
+            report_type="annual",
+            wording_stage="soft_or_intentional",
+            evidence="annual report: management says it will actively expand a new growth area without disclosed revenue.",
+            investment_read="Management is opening a second-curve narrative, but the filing has not yet proven monetization.",
+            bull_use="Use as upside optionality only.",
+            bear_use="Challenge proof, scale, timing, and cash cost before treating it as base-case value.",
+        )
+    ]
+
+    insights = _distill_filing_insights(
+        company_name="Example Co",
+        coverage_audit=coverage,
+        business_model_map=business_model,
+        growth_vectors=growth_vectors,
+        answers=[],
+        financial_relations=relations,
+        textual_signals=textual_signals,
+    )
+    insight_types = {item.insight_type for item in insights}
+
+    assert "core_business_engine" in insight_types
+    assert "second_curve_or_inflection_claim" in insight_types
+    assert "quality_of_growth_tension" in insight_types
+    assert "monetization_gap" in insight_types
+    assert "textual_filing_signal" in insight_types

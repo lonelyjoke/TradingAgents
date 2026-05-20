@@ -60,6 +60,20 @@ def test_financial_report_extracts_short_investee_rows_inside_investment_section
     assert ("蓝箭航天", "asset-revaluation") in names
 
 
+
+def test_short_investee_extractor_rejects_accounting_rows_and_keeps_real_investee():
+    noisy_rows = [
+        "\u77ed\u671f\u501f\u6b3e 10,000,000.00",
+        "\u957f\u671f\u501f\u6b3e 20,000,000.00",
+        "\u5ba2\u6237\u4e00 30,000,000.00",
+        "\u5408\u8ba1 40,000,000.00",
+        "\u5883\u5185\u81ea\u7136\u4eba\u6301\u80a1 50,000,000.00",
+        "\u6295\u8d44\u6027\u623f\u5730\u4ea7 60,000,000.00",
+    ]
+
+    assert all(_extract_short_investee_name(row) is None for row in noisy_rows)
+    assert _extract_short_investee_name("\u84dd\u7bad\u822a\u5929 811,952,039.53 150,662,280.21") == "\u84dd\u7bad\u822a\u5929"
+
 def test_news_candidate_requires_filing_validation():
     news = pd.DataFrame(
         [

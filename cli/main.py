@@ -718,6 +718,13 @@ def save_report_to_disk(final_state, ticker: str, save_path: Path):
             final_state["thematic_catalyst_context"],
             encoding="utf-8",
         )
+    if final_state.get("commodity_context"):
+        context_dir = save_path / "0_context"
+        context_dir.mkdir(exist_ok=True)
+        (context_dir / "commodity_context.md").write_text(
+            final_state["commodity_context"],
+            encoding="utf-8",
+        )
     if final_state.get("filing_intelligence_context"):
         context_dir = save_path / "0_context"
         context_dir.mkdir(exist_ok=True)

@@ -49,6 +49,7 @@ def create_fundamentals_analyst(llm):
         current_date = state["trade_date"]
         instrument_context = build_instrument_context(state["company_of_interest"])
         thematic_catalyst_context = state.get("thematic_catalyst_context", "")
+        commodity_context = state.get("commodity_context", "")
         filing_intelligence_context = state.get("filing_intelligence_context", "")
         peer_comparison_context = state.get("peer_comparison_context", "")
         supply_chain_comparison_context = state.get("supply_chain_comparison_context", "")
@@ -68,8 +69,10 @@ def create_fundamentals_analyst(llm):
             get_market_sector_risk,
             get_market_timing_context,
         ]
+        if is_a_share and not commodity_context:
+            tools.append(get_commodity_context)
         if not is_a_share:
-            tools.extend([get_commodity_context, get_shipping_context])
+            tools.append(get_shipping_context)
         if not peer_comparison_context:
             tools.append(get_peer_comparison)
         if not supply_chain_comparison_context:
@@ -94,7 +97,8 @@ def create_fundamentals_analyst(llm):
             "Your job is to identify the tradable thesis, test whether the business-cycle or boom-bust expectation can plausibly realize, and explain what evidence supports or weakens the thesis. "
             "Use `get_fundamentals`, `get_balance_sheet`, `get_cashflow`, and `get_income_statement` for core financial quality. "
             "Pay special attention to accounting items that may preview future performance, including contract liabilities, advance receipts, contract assets, receivables, inventories, prepayments, payables, goodwill, net cash, and working capital. "
-            "For A-share tickers, the system may provide precomputed thematic, filing, peer, supply-chain, earnings-model, market-expectation, price/EPS/PE decomposition, management/capital-allocation, and shareholder-structure context below. Use any precomputed context directly and do not call the same context tool again. Also use `get_valuation_percentiles` for historical valuation zones, `get_market_sector_risk` for broad/sector risk, and `get_market_timing_context` for market mood when those extra lenses are material. "
+            "For A-share tickers, the system may provide precomputed thematic, commodity/product-price, filing, peer, supply-chain, earnings-model, market-expectation, price/EPS/PE decomposition, management/capital-allocation, and shareholder-structure context below. Use any precomputed context directly and do not call the same context tool again. Also use `get_valuation_percentiles` for historical valuation zones, `get_market_sector_risk` for broad/sector risk, and `get_market_timing_context` for market mood when those extra lenses are material. "
+            "For commodity/resource/cyclical companies, treat the commodity/product-price context as a hard cycle variable: connect it to ASP, gross margin, inventory write-down/reversal risk, cash conversion, and valuation, and do not let news headlines substitute for product-price evidence. "
             "For A-share tickers, also use `get_supply_chain_comparison` when a curated chain map exists, so the memo can distinguish between a merely good company and the best profit pool in the chain. "
             "For A-share tickers, if precomputed thematic and financial-report intelligence are present below, treat those as satisfying the catalyst / filing-evidence requirement. If they are absent, call the corresponding context tool once before concluding those sections. "
             "Before forming the thesis, read the filing context in industry order: first identify the sector-native variables that actually decide economics, then inspect the paragraph-level filing evidence around those variables, and only then synthesize generic financial metrics. "
@@ -122,6 +126,12 @@ def create_fundamentals_analyst(llm):
                 "\n\nPrecomputed filing/news thematic cross-check:\n"
                 + thematic_catalyst_context
                 if thematic_catalyst_context
+                else ""
+            )
+            + (
+                "\n\nPrecomputed commodity/product-price context:\n"
+                + commodity_context
+                if commodity_context
                 else ""
             )
             + (

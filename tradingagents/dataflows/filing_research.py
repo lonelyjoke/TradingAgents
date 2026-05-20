@@ -173,6 +173,27 @@ class FinancialRelationInsight:
     bear_use: str
 
 
+@dataclass(frozen=True)
+class FilingInsight:
+    insight_type: str
+    analyst_question: str
+    distilled_read: str
+    evidence_basis: str
+    debate_use: str
+    what_would_change_mind: str
+
+
+@dataclass(frozen=True)
+class FilingTextSignal:
+    signal_type: str
+    report_type: str
+    wording_stage: str
+    evidence: str
+    investment_read: str
+    bull_use: str
+    bear_use: str
+
+
 _FILING_SIGNAL_RULES: tuple[tuple[str, tuple[str, ...], str, str], ...] = (
     (
         "demand_visibility",
@@ -311,6 +332,44 @@ _INDUSTRY_PLAYBOOKS: dict[str, tuple[FilingQuestion, ...]] = {
             ("semiannual", "annual"),
             "Show genuine mix upgrade when new lines are separately monetized.",
             "Keep optionality out of core valuation until segment economics are disclosed.",
+        ),
+    ),
+    "industrial_components": (
+        FilingQuestion(
+            "industrial_order_cash",
+            "orders",
+            "\u8ba2\u5355\u3001\u5408\u540c\u8d1f\u503a\u548c\u7ecf\u8425\u73b0\u91d1\u6d41\u662f\u5426\u540c\u6b65\u6539\u5584\uff0c\u8fd8\u662f\u53ea\u662f\u4ee5\u57ab\u8d44\u6362\u6536\u5165\uff1f",
+            ("\u8ba2\u5355", "\u5408\u540c\u8d1f\u503a", "\u7ecf\u8425\u73b0\u91d1\u6d41", "\u5e94\u6536\u8d26\u6b3e", "\u9884\u4ed8\u6b3e\u9879"),
+            ("quarterly", "semiannual", "annual"),
+            "Support demand visibility only when orders convert into cash.",
+            "Challenge apparent order growth if receivables, inventory, or prepayments absorb cash.",
+        ),
+        FilingQuestion(
+            "industrial_margin_mix",
+            "pricing",
+            "\u4ea7\u54c1\u7ed3\u6784\u3001\u9879\u76ee\u7ed3\u6784\u6216\u6d77\u5916\u8ba2\u5355\u662f\u5426\u771f\u6b63\u63d0\u5347\u6bdb\u5229\u7387\u4e0e\u51c0\u5229\u7387\uff1f",
+            ("\u6bdb\u5229\u7387", "\u6d77\u5916", "\u9879\u76ee", "\u4ea7\u54c1\u7ed3\u6784", "\u51c0\u5229\u7387", "\u9500\u552e\u5355\u4ef7"),
+            ("quarterly", "semiannual", "annual"),
+            "Support operating leverage and mix upgrade.",
+            "Expose low-margin growth or one-off project revenue.",
+        ),
+        FilingQuestion(
+            "industrial_capex_returns",
+            "capital_allocation",
+            "\u5728\u5efa\u5de5\u7a0b\u3001\u65b0\u57fa\u5730\u6216\u5b50\u516c\u53f8\u6269\u5f20\u662f\u5426\u6709\u660e\u786e\u4ea7\u80fd\u91ca\u653e\u4e0e\u56de\u62a5\u8def\u5f84\uff1f",
+            ("\u5728\u5efa\u5de5\u7a0b", "\u57fa\u5730", "\u5b50\u516c\u53f8", "\u8fbe\u4ea7", "\u4ea7\u80fd", "\u6295\u8d44"),
+            ("semiannual", "annual"),
+            "Treat capex as value-accretive only when utilization and returns are visible.",
+            "Question whether heavy assets are trapping capital without improving ROIC.",
+        ),
+        FilingQuestion(
+            "industrial_end_market",
+            "customer",
+            "\u4e0b\u6e38\u5ba2\u6237\u548c\u5e94\u7528\u573a\u666f\u7684\u53d8\u5316\u662f\u7ed3\u6784\u6027\u9700\u6c42\uff0c\u8fd8\u662f\u6982\u5ff5\u6620\u5c04\uff1f",
+            ("\u5ba2\u6237", "\u6d77\u6d0b\u5de5\u7a0b", "\u822a\u5929", "\u6e2f\u53e3", "\u9020\u8239", "\u7535\u529b", "\u4f53\u80b2\u573a\u9986"),
+            ("semiannual", "annual"),
+            "Connect end-market exposure to real orders and margin.",
+            "Keep adjacent narratives out of valuation until revenue contribution is disclosed.",
         ),
     ),
     "wind_power_equipment": (
@@ -774,9 +833,26 @@ def _select_industry_profile(
     identity_blob = f"{normalized_parts[0]} {normalized_parts[1]}"
     if any(token in identity_blob for token in ("\u65b0\u578b\u7535\u529b", "\u7efc\u5408\u80fd\u6e90", "\u7535\u529b")):
         return "power_operator"
-    wind_hits = sum(token in blob for token in ("\u98ce\u7535", "\u98ce\u673a", "\u53f6\u7247", "\u6d77\u4e0a\u98ce\u7535"))
-    if any(token in identity_blob for token in ("\u98ce\u7535", "\u98ce\u673a")) or wind_hits >= 2:
+    industrial_identity = any(
+        token in identity_blob
+        for token in (
+            "\u673a\u68b0\u57fa\u4ef6",
+            "\u7d22\u5177",
+            "\u540a\u88c5",
+            "\u94a2\u4e1d\u7ef3",
+            "\u94fe\u6761",
+            "\u7d27\u56fa\u4ef6",
+            "\u8f74\u627f",
+            "\u6db2\u538b",
+            "\u5de5\u4e1a\u96f6\u90e8\u4ef6",
+        )
+    )
+    wind_hits = sum(token in blob for token in ("\u98ce\u7535", "\u98ce\u673a", "\u98ce\u7535\u673a\u7ec4", "\u53f6\u7247", "\u6d77\u4e0a\u98ce\u7535", "\u6574\u673a"))
+    wind_identity = any(token in identity_blob for token in ("\u98ce\u7535", "\u98ce\u673a", "\u98ce\u7535\u8bbe\u5907"))
+    if wind_identity or (not industrial_identity and wind_hits >= 3):
         return "wind_power_equipment"
+    if industrial_identity:
+        return "industrial_components"
     hog_hits = sum(
         token in blob
         for token in ("生猪", "养猪", "猪肉", "仔猪", "种猪", "能繁母猪", "PSY", "出栏")
@@ -789,6 +865,58 @@ def _select_industry_profile(
         token in blob for token in ("\u592a\u9633\u80fd", "\u534a\u5bfc\u4f53", "\u663e\u793a", "\u771f\u7a7a", "\u6fc0\u5149")
     ):
         return "precision_equipment"
+    # Resource / battery names often mention environmental compliance,
+    # recycling, or ESG in filings. Those incidental words must not route a
+    # lithium/mining company into the environmental-services playbook.
+    lithium_hits = sum(
+        token in blob
+        for token in (
+            "\u9502",
+            "\u9502\u76d0",
+            "\u78b3\u9178\u9502",
+            "\u6c22\u6c27\u5316\u9502",
+            "\u9502\u8f89\u77f3",
+            "\u5364\u6c34\u63d0\u9502",
+            "\u76d0\u6e56\u63d0\u9502",
+            "\u9502\u7535",
+            "\u52a8\u529b\u7535\u6c60",
+            "\u50a8\u80fd\u7535\u6c60",
+            "\u56fa\u6001\u7535\u6c60",
+            "\u7535\u89e3\u6db2",
+            "\u9694\u819c",
+            "\u8d1f\u6781\u6750\u6599",
+            "\u6b63\u6781\u6750\u6599",
+        )
+    )
+    if any(
+        token in identity_blob
+        for token in (
+            "\u9502",
+            "\u8d63\u950b\u9502\u4e1a",
+            "\u5929\u9f50\u9502\u4e1a",
+            "\u76d0\u6e56\u80a1\u4efd",
+        )
+    ) or lithium_hits >= 2:
+        return "lithium_battery"
+    metals_hits = sum(
+        token in blob
+        for token in (
+            "\u6709\u8272",
+            "\u77ff\u4e1a",
+            "\u77ff\u5c71",
+            "\u77ff\u4ea7",
+            "\u91c7\u9009",
+            "\u54c1\u4f4d",
+            "\u50a8\u91cf",
+            "\u91d1\u5c5e\u91cf",
+            "\u94dc",
+            "\u94dd",
+            "\u9ec4\u91d1",
+            "\u7a00\u571f",
+        )
+    )
+    if any(token in identity_blob for token in ("\u6709\u8272", "\u77ff\u4e1a", "\u77ff\u5c71", "\u5c0f\u91d1\u5c5e")) or metals_hits >= 2:
+        return "metals_mining"
     if any(token in blob for token in ("\u73af\u536b", "\u73af\u4fdd", "\u5783\u573e\u711a\u70e7", "\u73af\u5883\u670d\u52a1")):
         return "environmental_services"
     if any(token in blob for token in ("\u9502\u7535", "\u52a8\u529b\u7535\u6c60", "\u50a8\u80fd\u7535\u6c60", "\u7535\u89e3\u6db2", "\u9694\u819c", "\u8d1f\u6781\u6750\u6599", "\u6b63\u6781\u6750\u6599")):
@@ -1569,6 +1697,32 @@ _INDUSTRY_PARAGRAPH_LENSES: dict[
             "peer comparison + valuation",
         ),
     ),
+    "industrial_components": (
+        (
+            "order_cash_quality",
+            ("\u4e3b\u8425\u4e1a\u52a1\u5206\u6790", "\u7ecf\u8425\u60c5\u51b5\u8ba8\u8bba\u4e0e\u5206\u6790", "\u7ecf\u8425\u60c5\u51b5\u8ba8\u8bba\u53ca\u5206\u6790"),
+            ("\u8ba2\u5355", "\u5408\u540c\u8d1f\u503a", "\u7ecf\u8425\u73b0\u91d1\u6d41", "\u5e94\u6536", "\u9884\u4ed8", "\u5b58\u8d27"),
+            "Are orders turning into cash, or does growth require working-capital funding?",
+            "Industrial component companies often look better on revenue than on cash conversion.",
+            "earnings model + investor interaction + receivables/inventory",
+        ),
+        (
+            "project_and_mix_margin",
+            ("\u4e3b\u8425\u4e1a\u52a1\u5206\u6790", "\u7ecf\u8425\u60c5\u51b5\u8ba8\u8bba\u4e0e\u5206\u6790", "\u7ecf\u8425\u60c5\u51b5\u8ba8\u8bba\u53ca\u5206\u6790"),
+            ("\u6bdb\u5229\u7387", "\u6d77\u5916", "\u9879\u76ee", "\u5ba2\u6237", "\u4ea7\u54c1\u7ed3\u6784", "\u9500\u552e\u5355\u4ef7"),
+            "Is the company improving mix and project economics, or just chasing low-margin volume?",
+            "Separates real operating leverage from concept-driven end-market exposure.",
+            "peer comparison + thematic catalysts + market expectation",
+        ),
+        (
+            "capex_and_new_base",
+            ("\u4e3b\u8425\u4e1a\u52a1\u5206\u6790", "\u5728\u5efa\u5de5\u7a0b", "\u91cd\u8981\u5b50\u516c\u53f8"),
+            ("\u5728\u5efa\u5de5\u7a0b", "\u57fa\u5730", "\u5b50\u516c\u53f8", "\u8fbe\u4ea7", "\u4ea7\u80fd", "\u6295\u8d44"),
+            "Does expansion have a clear utilization and return path?",
+            "Prevents asset-heavy expansion from being mistaken for value creation.",
+            "management capital allocation + cash-flow quality",
+        ),
+    ),
     "wind_power_equipment": (
         (
             "backlog_quality",
@@ -1903,6 +2057,199 @@ def _interpret_report_bridge(
         return "confirmed"
     return "checkpoint-present-but-indeterminate"
 
+
+
+_TEXTUAL_PROOF_TOKENS = (
+    "\u5df2\u5b9e\u73b0\u6536\u5165",
+    "\u5b9e\u73b0\u6536\u5165",
+    "\u786e\u8ba4\u6536\u5165",
+    "\u5df2\u4ea4\u4ed8",
+    "\u5df2\u6295\u4ea7",
+    "\u91cf\u4ea7",
+    "\u4e2d\u6807",
+    "\u7b7e\u8ba2",
+    "\u5408\u540c",
+    "\u8ba2\u5355",
+    "\u5ba2\u6237",
+)
+_TEXTUAL_EXECUTION_TOKENS = (
+    "\u5df2\u5b8c\u6210",
+    "\u5b8c\u6210\u5efa\u8bbe",
+    "\u8bd5\u751f\u4ea7",
+    "\u8bd5\u8fd0\u884c",
+    "\u4ea7\u80fd\u91ca\u653e",
+    "\u8fbe\u4ea7",
+    "\u843d\u5730",
+    "\u5b9e\u65bd",
+)
+_TEXTUAL_SOFT_TOKENS = (
+    "\u63a8\u8fdb",
+    "\u52a0\u5feb",
+    "\u5e03\u5c40",
+    "\u89c4\u5212",
+    "\u62df",
+    "\u5c06",
+    "\u529b\u4e89",
+    "\u63a2\u7d22",
+    "\u50a8\u5907",
+    "\u79ef\u6781",
+    "\u6301\u7eed",
+)
+_TEXTUAL_RISK_TOKENS = (
+    "\u4e0d\u786e\u5b9a",
+    "\u98ce\u9669",
+    "\u538b\u529b",
+    "\u4e0b\u6ed1",
+    "\u4e0b\u964d",
+    "\u4e8f\u635f",
+    "\u51cf\u503c",
+    "\u8bc9\u8bbc",
+    "\u5904\u7f5a",
+    "\u7acb\u6848",
+    "\u91cd\u5927\u4e0d\u5229",
+)
+_TEXTUAL_STRATEGY_TOKENS = (
+    "\u65b0\u4e1a\u52a1",
+    "\u65b0\u4ea7\u54c1",
+    "\u7b2c\u4e8c\u589e\u957f",
+    "\u8f6c\u578b",
+    "\u6570\u5b57\u5316",
+    "\u667a\u80fd",
+    "\u6d77\u5916",
+    "\u4ea7\u4e1a\u94fe",
+    "\u5546\u4e1a\u5316",
+    "\u4ea7\u80fd",
+)
+
+
+def _textual_wording_stage(text: str) -> str:
+    if any(token in text for token in _TEXTUAL_RISK_TOKENS):
+        return "risk-language"
+    if any(token in text for token in _TEXTUAL_PROOF_TOKENS):
+        return "proof-backed"
+    if any(token in text for token in _TEXTUAL_EXECUTION_TOKENS):
+        return "execution-stage"
+    if any(token in text for token in _TEXTUAL_SOFT_TOKENS):
+        return "soft-intention"
+    return "neutral"
+
+
+def _textual_signal_score(text: str, report_type: str, stage: str) -> int:
+    score = {"proof-backed": 5, "risk-language": 5, "execution-stage": 4, "soft-intention": 2}.get(stage, 0)
+    if re.search(r"\d", text):
+        score += 2
+    if report_type == "annual":
+        score += 1
+    if any(token in text for token in _TEXTUAL_STRATEGY_TOKENS):
+        score += 1
+    return score
+
+
+def _extract_textual_filing_signals(
+    report_texts: Iterable[tuple[str, str]],
+    report_bridge: Iterable[ReportBridgeFinding] = (),
+    growth_vectors: Iterable[GrowthVectorFinding] = (),
+    limit: int = 10,
+) -> list[FilingTextSignal]:
+    """Read management language, not just accounting numbers."""
+
+    ranked: list[tuple[int, FilingTextSignal]] = []
+    seen: set[tuple[str, str]] = set()
+    for title, text in report_texts:
+        report_type = _detect_report_type(title)
+        for unit in _iter_filing_text_units(text, limit=320):
+            repaired = _repair_mojibake(unit)
+            stage = _textual_wording_stage(repaired)
+            if stage == "neutral":
+                continue
+            if stage == "soft-intention" and not any(token in repaired for token in _TEXTUAL_STRATEGY_TOKENS):
+                continue
+            signal_type = {
+                "proof-backed": "management_claim_with_evidence",
+                "execution-stage": "execution_progress_language",
+                "soft-intention": "soft_strategy_language",
+                "risk-language": "risk_language_upgrade",
+            }[stage]
+            if stage == "soft-intention" and not re.search(r"\d", repaired):
+                signal_type = "unquantified_strategy_language"
+            key = (signal_type, repaired[:160])
+            if key in seen:
+                continue
+            seen.add(key)
+            investment_read = {
+                "management_claim_with_evidence": "Management language has a harder evidence bridge; debate materiality and economics rather than existence.",
+                "execution_progress_language": "The company is describing implementation progress; test whether execution reaches revenue, margin, or cash flow.",
+                "soft_strategy_language": "The company is still using intention/planning language; keep it below base-case valuation until proof appears.",
+                "unquantified_strategy_language": "Strategic wording is not yet quantified; useful for questions, weak for valuation.",
+                "risk_language_upgrade": "Risk wording deserves explicit bearish debate if it has become more concrete or financially relevant.",
+            }[signal_type]
+            ranked.append(
+                (
+                    _textual_signal_score(repaired, report_type, stage),
+                    FilingTextSignal(
+                        signal_type=signal_type,
+                        report_type=report_type,
+                        wording_stage=stage,
+                        evidence=f"{title}: {repaired}",
+                        investment_read=investment_read,
+                        bull_use="Use only after linking wording to disclosed orders, customers, revenue, capacity, or cash conversion.",
+                        bear_use="Challenge vague, unquantified, repetitive, or risk-upgraded language before it enters valuation.",
+                    ),
+                )
+            )
+
+    for vector in growth_vectors:
+        if vector.stage in {"planned", "capacity-building"}:
+            key = ("watch_missing_monetization", vector.vector)
+            if key in seen:
+                continue
+            seen.add(key)
+            ranked.append(
+                (
+                    3,
+                    FilingTextSignal(
+                        signal_type="watch_missing_monetization",
+                        report_type="annual/semiannual",
+                        wording_stage="missing-proof",
+                        evidence=vector.evidence,
+                        investment_read="The filing describes a possible growth vector, but monetization evidence is still incomplete.",
+                        bull_use="Use as a diligence agenda or scenario option, not a base-case valuation driver.",
+                        bear_use="Ask why the company has not disclosed revenue, margin, customers, delivery, or cash evidence yet.",
+                    ),
+                )
+            )
+
+    for bridge in report_bridge:
+        if bridge.bridge_read == "awaiting-evidence":
+            key = ("abnormal_silence_or_missing_update", bridge.topic)
+            if key in seen:
+                continue
+            seen.add(key)
+            ranked.append(
+                (
+                    4,
+                    FilingTextSignal(
+                        signal_type="abnormal_silence_or_missing_update",
+                        report_type="cross-report",
+                        wording_stage="missing-update",
+                        evidence=f"{bridge.long_cycle_evidence} || {bridge.checkpoint_evidence}",
+                        investment_read="A long-cycle narrative lacks short-cycle confirmation; silence or missing update is itself a research signal.",
+                        bull_use="Treat as pending proof rather than confirmed progress.",
+                        bear_use="Use as evidence that the story has not yet survived the next reporting checkpoint.",
+                    ),
+                )
+            )
+
+    selected: list[FilingTextSignal] = []
+    per_type: dict[str, int] = {}
+    for _, row in sorted(ranked, key=lambda item: item[0], reverse=True):
+        if per_type.get(row.signal_type, 0) >= 2:
+            continue
+        selected.append(row)
+        per_type[row.signal_type] = per_type.get(row.signal_type, 0) + 1
+        if len(selected) >= limit:
+            break
+    return selected
 
 def _extract_deep_reading_excerpts(
     report_texts: Iterable[tuple[str, str]],
@@ -2654,6 +3001,242 @@ def _promote_core_discussion_items(
     return sorted(items, key=lambda item: (priority_rank.get(item.priority, 9), item.topic))[:limit]
 
 
+def _distill_filing_insights(
+    company_name: str,
+    coverage_audit: FilingCoverageAudit,
+    business_model_map: Iterable[BusinessModelFinding],
+    growth_vectors: Iterable[GrowthVectorFinding],
+    answers: Iterable[FilingQuestionAnswer],
+    statement_table_signals: Iterable[FilingTableSignal] = (),
+    note_findings: Iterable[FilingNoteFinding] = (),
+    financial_relations: Iterable[FinancialRelationInsight] = (),
+    promoted_items: Iterable[CoreDiscussionItem] = (),
+    textual_signals: Iterable[FilingTextSignal] = (),
+    limit: int = 8,
+) -> list[FilingInsight]:
+    """Compress the filing read into buy-side insights instead of raw snippets.
+
+    This layer is deliberately industry-agnostic. Industry playbooks decide which
+    operating questions to ask; this layer decides which answers should become a
+    research memo's central argument.
+    """
+
+    insights: list[FilingInsight] = []
+    seen: set[str] = set()
+
+    def add(
+        insight_type: str,
+        analyst_question: str,
+        distilled_read: str,
+        evidence_basis: str,
+        debate_use: str,
+        what_would_change_mind: str,
+    ) -> None:
+        if insight_type in seen or not evidence_basis:
+            return
+        seen.add(insight_type)
+        insights.append(
+            FilingInsight(
+                insight_type=insight_type,
+                analyst_question=analyst_question,
+                distilled_read=distilled_read,
+                evidence_basis=evidence_basis,
+                debate_use=debate_use,
+                what_would_change_mind=what_would_change_mind,
+            )
+        )
+
+    business_rows = list(business_model_map)
+    vector_rows = list(growth_vectors)
+    answer_rows = list(answers)
+    table_rows = list(statement_table_signals)
+    note_rows = list(note_findings)
+    relation_rows = list(financial_relations)
+    promoted_rows = list(promoted_items)
+    text_rows = list(textual_signals)
+
+    core_engine = next((row for row in business_rows if row.lens == "core_revenue_engine"), None)
+    if core_engine:
+        add(
+            "core_business_engine",
+            "What actually drives this company's revenue and profit pool?",
+            (
+                "Start the memo from the operating engine disclosed in filings, "
+                "not from market labels, hot themes, or valuation screens."
+            ),
+            core_engine.evidence,
+            "Forces bulls and bears to debate the real business before discussing optionality.",
+            "A segment disclosure or order/customer evidence showing a different profit engine has become material.",
+        )
+
+    contracted_or_monetized = [
+        row for row in vector_rows if row.stage in {"monetized", "contracted", "capacity-building"}
+    ]
+    if contracted_or_monetized:
+        vector = sorted(
+            contracted_or_monetized,
+            key=lambda row: {"monetized": 0, "contracted": 1, "capacity-building": 2}.get(row.stage, 9),
+        )[0]
+        if vector.stage == "monetized":
+            read = "The filing contains a monetized growth vector; it deserves an earnings-bridge test, not just a narrative mention."
+            change = "Segment revenue, margin, recurrence, and cash collection either confirm scale or reveal it is immaterial."
+        elif vector.stage == "contracted":
+            read = "The filing contains a contracted growth vector; the key is not whether the story exists, but whether contract size and economics matter."
+            change = "Disclosed contract value, delivery schedule, gross margin, customer concentration, and cash conversion."
+        else:
+            read = "The filing contains capacity-building optionality; it should enter scenarios only after utilization and return path become visible."
+            change = "Commissioning, utilization, customer offtake, and ROIC evidence."
+        add(
+            "second_curve_or_inflection_claim",
+            "Is there a credible second curve or operating inflection hidden in filings?",
+            read,
+            vector.evidence,
+            "Bulls must quantify the bridge; bears must test scale, timing, margin, and whether it is already priced.",
+            change,
+        )
+
+    negative_relations = {
+        "growth_without_margin",
+        "cash_absorbing_growth",
+        "visibility_not_yet_profitability",
+        "below_gross_profit_help",
+        "leverage_funding_growth",
+    }
+    relation = next((row for row in relation_rows if row.relation_type in negative_relations), None)
+    if relation:
+        add(
+            "quality_of_growth_tension",
+            "Does reported growth improve owner economics, or merely consume capital?",
+            relation.investment_read,
+            relation.evidence,
+            "This should become a central bull/bear clash: growth deserves credit only if margin, cash conversion, and balance-sheet burden improve together.",
+            "Next report shows revenue growth with stable/rising margin, positive operating cash flow, and no worsening receivables/inventory/prepayments.",
+        )
+
+    quality_relation = next((row for row in relation_rows if row.relation_type == "quality_growth"), None)
+    if quality_relation:
+        add(
+            "quality_growth_confirmation",
+            "Is the company showing clean, investable operating improvement?",
+            quality_relation.investment_read,
+            quality_relation.evidence,
+            "Bulls can use this as high-quality proof; bears should ask whether it is cyclical, one-off, or already priced.",
+            "A reversal in margin, operating cash flow, or working-capital intensity.",
+        )
+
+    if vector_rows and not quality_relation:
+        vector = vector_rows[0]
+        add(
+            "monetization_gap",
+            "What is the gap between the story and the income statement?",
+            (
+                "The filing has a growth narrative, but the system has not found enough clean "
+                "financial confirmation to treat it as a base-case valuation driver."
+            ),
+            vector.evidence,
+            "Keeps the report from either ignoring the story or overpaying for it; use it as scenario evidence until economics are proven.",
+            "Quantified revenue/profit contribution, repeat orders, cash collection, and segment margin evidence.",
+        )
+
+    capex_signal = next(
+        (
+            row
+            for row in table_rows
+            if row.account
+            in {"capex", "construction_in_progress", "long_term_equity_investments", "investment_assets"}
+        ),
+        None,
+    )
+    if capex_signal:
+        add(
+            "capital_allocation_checkpoint",
+            "Is management turning reinvestment into future earnings power?",
+            capex_signal.why_it_matters,
+            capex_signal.evidence,
+            "Bulls must show reinvestment creates capacity, orders, or NAV; bears can attack trapped capital and weak ROIC.",
+            "Visible utilization, monetization, disposal gains, ROIC uplift, or impairment/disposal losses.",
+        )
+
+    tail_note = next(
+        (
+            row
+            for row in note_rows
+            if row.note_type in {"litigation", "guarantees", "related_party", "customer_concentration"}
+            or row.importance == "high"
+        ),
+        None,
+    )
+    if tail_note:
+        add(
+            "governance_or_tail_risk",
+            "Is there a footnote risk that changes the equity story?",
+            tail_note.why_it_matters,
+            tail_note.evidence,
+            "Use as a thesis modifier: it can cap valuation even when operating momentum looks acceptable.",
+            "Resolution, quantified liability, customer diversification, related-party cleanup, or explicit non-materiality evidence.",
+        )
+
+    strong_text = next(
+        (
+            row
+            for row in text_rows
+            if row.signal_type
+            in {
+                "management_claim_with_evidence",
+                "execution_progress_language",
+                "risk_language_upgrade",
+                "unquantified_strategy_language",
+                "abnormal_silence_or_missing_update",
+            }
+        ),
+        None,
+    )
+    if strong_text:
+        add(
+            "textual_filing_signal",
+            "What is management language trying to prove, soften, or avoid?",
+            strong_text.investment_read,
+            strong_text.evidence,
+            "Use wording as a debate input: hard wording must still clear materiality; soft wording needs proof; risk wording can cap valuation.",
+            strong_text.bear_use,
+        )
+
+    core_item = next((row for row in promoted_rows if row.priority == "core"), None)
+    if core_item:
+        add(
+            "core_debate_item",
+            "Which filing-derived point must enter the bull/bear debate?",
+            core_item.why_it_matters,
+            core_item.evidence_basis,
+            "Do not leave this as background context; make it one of the main debate pillars.",
+            core_item.verification_need,
+        )
+
+    if coverage_audit.coverage_grade in {"weak", "failed"}:
+        add(
+            "filing_read_confidence_gap",
+            "Can we trust a strong conclusion from the available filings?",
+            coverage_audit.confidence_read,
+            f"Coverage: {coverage_audit.coverage_grade}; reports seen: {'/'.join(coverage_audit.report_types_seen) or 'none'}",
+            "Cap conviction and explicitly name missing report types or unanswered thesis-critical questions.",
+            "Retrieve annual/semiannual/quarterly text and answer the core playbook with quantified evidence.",
+        )
+
+    priority = {
+        "core_business_engine": 0,
+        "quality_of_growth_tension": 1,
+        "quality_growth_confirmation": 1,
+        "second_curve_or_inflection_claim": 2,
+        "monetization_gap": 3,
+        "capital_allocation_checkpoint": 4,
+        "governance_or_tail_risk": 5,
+        "textual_filing_signal": 6,
+        "core_debate_item": 7,
+        "filing_read_confidence_gap": 8,
+    }
+    return sorted(insights, key=lambda row: priority.get(row.insight_type, 99))[:limit]
+
+
 def _question_memory_path(symbol: str) -> Path:
     root = Path(get_config()["data_cache_dir"]).expanduser()
     path = root / "filing_question_memory"
@@ -2755,6 +3338,11 @@ def get_financial_report_intelligence_context(
     business_model_map = _build_business_model_map(report_texts)
     growth_vectors = _extract_growth_vectors(report_texts)
     report_bridge = _build_report_to_report_bridge(report_texts)
+    textual_signals = _extract_textual_filing_signals(
+        report_texts,
+        report_bridge=report_bridge,
+        growth_vectors=growth_vectors,
+    )
     deep_reading_excerpts = _extract_deep_reading_excerpts(report_texts)
     paragraph_reading_pack = _build_paragraph_reading_pack(report_texts)
     profile = _select_industry_profile(company_name, industry, report_texts)
@@ -2780,6 +3368,18 @@ def get_financial_report_intelligence_context(
         statement_table_signals=statement_table_signals,
         note_findings=note_findings,
         financial_relations=financial_relations,
+    )
+    distilled_insights = _distill_filing_insights(
+        company_name=company_name,
+        coverage_audit=coverage_audit,
+        business_model_map=business_model_map,
+        growth_vectors=growth_vectors,
+        answers=answers,
+        statement_table_signals=statement_table_signals,
+        note_findings=note_findings,
+        financial_relations=financial_relations,
+        promoted_items=promoted_items,
+        textual_signals=textual_signals,
     )
     memory = _update_question_memory(symbol, curr_date, profile, answers)
 
@@ -2922,6 +3522,18 @@ def get_financial_report_intelligence_context(
         }
         for item in financial_relations
     ]
+    textual_rows = [
+        {
+            "signal_type": item.signal_type,
+            "report_type": item.report_type,
+            "wording_stage": item.wording_stage,
+            "textual_evidence": _compact_text(item.evidence, 240),
+            "investment_read": item.investment_read,
+            "bull_use": item.bull_use,
+            "bear_use": item.bear_use,
+        }
+        for item in textual_signals
+    ]
     coverage_rows = [
         {
             "coverage_grade": coverage_audit.coverage_grade,
@@ -2942,6 +3554,17 @@ def get_financial_report_intelligence_context(
             "verification_need": item.verification_need,
         }
         for item in promoted_items
+    ]
+    distilled_rows = [
+        {
+            "insight_type": item.insight_type,
+            "analyst_question": item.analyst_question,
+            "distilled_read": item.distilled_read,
+            "evidence_basis": _compact_text(item.evidence_basis, 220),
+            "debate_use": item.debate_use,
+            "what_would_change_mind": item.what_would_change_mind,
+        }
+        for item in distilled_insights
     ]
     answered_ids = {answer.question_id for answer in answers}
     unanswered_rows = [
@@ -3014,6 +3637,12 @@ def get_financial_report_intelligence_context(
         "## Financial Relationship Reading Pack",
         _build_table(relation_rows),
         "",
+        "## Filing Textual Signals",
+        _build_table(textual_rows),
+        "",
+        "## Filing Insight Distillation Layer",
+        _build_table(distilled_rows),
+        "",
         "## Core Discussion Promotion Queue",
         _build_table(promoted_rows),
         "",
@@ -3045,6 +3674,8 @@ def get_financial_report_intelligence_context(
         "- Use the statement table reading pack for the hard-accounting layer: contract liabilities, receivables, inventory, prepayments, capex, investment assets, operating cash flow, and impairment rows often decide whether the narrative survives contact with the numbers.",
         "- Use the filing note reading pack for footnote discipline: customer concentration, related parties, guarantees, litigation, impairment assumptions, and capitalization policies often reveal risks that the headline statements hide.",
         "- Use the financial relationship reading pack to connect the statements rather than reading metrics in isolation. Revenue growth only deserves praise if margin, cash conversion, and balance-sheet demands make sense together.",
+        "- Use the filing textual signals layer to read management wording strength, risk-language upgrades, abnormal silence, and strategic promises. Hard wording still needs materiality; soft wording belongs in scenarios/watchlist; risk wording can cap valuation. Keep a concise textual-signal module in the manager report when it changes the thesis.",
+        "- Use the filing insight distillation layer before writing the final thesis. It converts raw filing snippets into buy-side questions: core engine, second curve, quality of growth, monetization gap, capital allocation, and tail risk. The manager report should read like a company memo, not a list of disconnected data points.",
         "- Start from the selected question playbook, then answer only with evidence actually found in filings.",
         "- Use the core discussion promotion queue as the bridge from reading to investing: core items should enter bull/bear debate, supporting items should reinforce or challenge a thesis, scenario items belong in upside/downside cases, and watch items stay out of base-case valuation until upgraded.",
         "- Treat unanswered filing questions as explicit research gaps, not neutral evidence. If a thesis depends on an unanswered question, reduce conviction or state what disclosure would close the gap.",

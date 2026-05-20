@@ -51,6 +51,7 @@ def create_portfolio_manager(llm):
         research_plan = state["investment_plan"]
         trader_plan = state["trader_investment_plan"]
         thematic_catalyst_context = state.get("thematic_catalyst_context", "")
+        commodity_context = state.get("commodity_context", "")
         filing_intelligence_context = state.get("filing_intelligence_context", "")
         peer_comparison_context = state.get("peer_comparison_context", "")
         supply_chain_comparison_context = state.get("supply_chain_comparison_context", "")
@@ -146,6 +147,7 @@ def create_portfolio_manager(llm):
 - Begin with a short Company Snapshot, then give the rating and a one-line thesis.
 - In the main Investment Thesis, weave together the decisive business drivers, the industry-native variables, the market-implied expectation, the quality/price/relative-allocation distinction, and only the governance or disclosure evidence that materially strengthens or weakens that argument.
 - In the valuation/cycle discussion, integrate the historical price-EPS-PE decomposition: state whether today's quote is earnings-supported, multiple-supported, double-engine, or fragile, and connect that answer to the forward EPS bridge.
+- For commodity/resource/cyclical names, integrate the commodity/product-price context into the same valuation/cycle discussion: state whether product-price evidence supports or contradicts the expected EPS/margin/inventory turn.
 - Use the Debate & Decision Logic section to summarize the strongest bull case, strongest bear case, the real disagreement, the core bet, and why you choose one side after weighing evidence quality, expectation gap, and probability/payoff.
 - Use the Catalysts, Optionality & Falsification section to distinguish what belongs in the base case from what remains scenario valuation or narrative option value. Preserve verified second-growth curves, investee holdings, policy support, and live thematic catalysts, but clearly say why they do or do not change today's rating.
 - Keep three judgments **clear in substance** even when integrated into prose rather than broken into separate headings: business quality, today's odds, and relative deployment versus alternatives.
@@ -160,6 +162,7 @@ def create_portfolio_manager(llm):
 - Research Manager's investment plan: **{research_plan}**
 - Trader's transaction proposal: **{trader_plan}**
 - Thematic catalyst cross-check and valuation bridge: **{thematic_catalyst_context}**
+- Commodity/product-price context: **{commodity_context}**
 - Financial-report intelligence: **{filing_intelligence_context}**
 - Same-industry peer comparison: **{peer_comparison_context}**
 - Cross-position supply-chain comparison: **{supply_chain_comparison_context}**
