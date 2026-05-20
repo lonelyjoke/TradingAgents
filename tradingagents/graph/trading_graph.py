@@ -4,8 +4,10 @@ import logging
 import os
 from pathlib import Path
 import json
+import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timedelta
-from typing import Dict, Any, Tuple, List, Optional
+from typing import Callable, Dict, Any, Tuple, List, Optional
 
 import yfinance as yf
 
@@ -27,6 +29,7 @@ from tradingagents.agents.utils.agent_states import (
 from tradingagents.dataflows.config import set_config
 from tradingagents.dataflows.interface import route_to_vendor
 from tradingagents.dataflows.tushare_a_stock import is_a_share_symbol
+from tradingagents.dataflows.data_coverage import build_data_coverage_context
 
 # Import the new abstract tool methods from agent_utils
 from tradingagents.agents.utils.agent_utils import (
@@ -64,6 +67,91 @@ from .setup import GraphSetup
 from .propagation import Propagator
 from .reflection import Reflector
 from .signal_processing import SignalProcessor
+
+
+def _build_precomputed_data_coverage(
+    *,
+    thematic_catalyst_context: str,
+    commodity_context: str,
+    filing_intelligence_context: str,
+    peer_comparison_context: str,
+    supply_chain_comparison_context: str,
+    earnings_model_context: str,
+    market_expectation_context: str,
+    price_earnings_decomposition_context: str,
+    management_capital_allocation_context: str,
+    shareholder_structure_context: str,
+    investor_interaction_context: str,
+    policy_planning_context: str,
+) -> str:
+    return build_data_coverage_context(
+        {
+            "thematic_catalyst": thematic_catalyst_context,
+            "commodity_product_price": commodity_context,
+            "financial_report_intelligence": filing_intelligence_context,
+            "peer_comparison": peer_comparison_context,
+            "supply_chain_comparison": supply_chain_comparison_context,
+            "earnings_model": earnings_model_context,
+            "market_expectation": market_expectation_context,
+            "price_eps_pe_decomposition": price_earnings_decomposition_context,
+            "management_capital_allocation": management_capital_allocation_context,
+            "shareholder_structure": shareholder_structure_context,
+            "investor_interaction": investor_interaction_context,
+            "policy_planning": policy_planning_context,
+        }
+    )
+
+
+_A_SHARE_CONTEXT_SPECS = [
+    (
+        "thematic_catalyst_context",
+        "get_thematic_catalyst_context",
+        "Thematic catalyst cross-check",
+    ),
+    ("commodity_context", "get_commodity_context", "Commodity/product-price context"),
+    (
+        "filing_intelligence_context",
+        "get_financial_report_intelligence_context",
+        "Financial-report intelligence",
+    ),
+    ("peer_comparison_context", "get_peer_comparison", "Same-industry peer comparison"),
+    (
+        "supply_chain_comparison_context",
+        "get_supply_chain_comparison",
+        "Supply-chain position comparison",
+    ),
+    ("earnings_model_context", "get_earnings_model_context", "Earnings-model context"),
+    (
+        "market_expectation_context",
+        "get_market_expectation_context",
+        "Market-expectation context",
+    ),
+    (
+        "price_earnings_decomposition_context",
+        "get_price_earnings_decomposition_context",
+        "Price-EPS-PE decomposition",
+    ),
+    (
+        "management_capital_allocation_context",
+        "get_management_capital_allocation_context",
+        "Management/capital-allocation context",
+    ),
+    (
+        "shareholder_structure_context",
+        "get_shareholder_structure_context",
+        "Shareholder-structure context",
+    ),
+    (
+        "investor_interaction_context",
+        "get_investor_interaction_context",
+        "Investor-interaction context",
+    ),
+    ("policy_planning_context", "get_policy_planning_context", "Policy-planning context"),
+]
+
+
+def _context_unavailable(title: str, exc: Exception) -> str:
+    return f"# {title} unavailable\n\n- Reason: {exc}"
 
 
 class TradingAgentsGraph:
@@ -337,157 +425,103 @@ class TradingAgentsGraph:
                 self._checkpointer_ctx = None
                 self.graph = self.workflow.compile()
 
-    def create_initial_state_with_context(self, company_name, trade_date):
+    def _fetch_a_share_contexts(
+        self,
+        company_name: str,
+        trade_date: str,
+        progress_callback: Optional[
+            Callable[[str, str, str, Optional[float], Optional[int]], None]
+        ] = None,
+    ) -> Dict[str, str]:
+        """Fetch independent A-share precomputed contexts, usually in parallel."""
+        contexts = {key: "" for key, _, _ in _A_SHARE_CONTEXT_SPECS}
+        if not is_a_share_symbol(company_name):
+            return contexts
+
+        max_workers = int(self.config.get("a_share_context_fetch_workers", 4) or 1)
+        max_workers = max(1, min(max_workers, len(_A_SHARE_CONTEXT_SPECS)))
+
+        def fetch_one(key: str, method: str, title: str):
+            start = time.perf_counter()
+            try:
+                text = route_to_vendor(method, company_name, trade_date)
+                elapsed = time.perf_counter() - start
+                return key, title, text or "", elapsed, None
+            except Exception as exc:
+                elapsed = time.perf_counter() - start
+                return key, title, _context_unavailable(title, exc), elapsed, exc
+
+        if max_workers == 1:
+            for key, method, title in _A_SHARE_CONTEXT_SPECS:
+                if progress_callback:
+                    progress_callback("start", key, title, None, None)
+                key, title, text, elapsed, exc = fetch_one(key, method, title)
+                contexts[key] = text
+                if progress_callback:
+                    event = "failed" if exc else "done"
+                    progress_callback(event, key, title, elapsed, len(text))
+            return contexts
+
+        with ThreadPoolExecutor(max_workers=max_workers) as executor:
+            future_to_spec = {}
+            for key, method, title in _A_SHARE_CONTEXT_SPECS:
+                if progress_callback:
+                    progress_callback("start", key, title, None, None)
+                future = executor.submit(fetch_one, key, method, title)
+                future_to_spec[future] = (key, title)
+
+            for future in as_completed(future_to_spec):
+                key, title, text, elapsed, exc = future.result()
+                contexts[key] = text
+                if progress_callback:
+                    event = "failed" if exc else "done"
+                    progress_callback(event, key, title, elapsed, len(text))
+        return contexts
+
+    def create_initial_state_with_context(
+        self,
+        company_name,
+        trade_date,
+        progress_callback: Optional[
+            Callable[[str, str, str, Optional[float], Optional[int]], None]
+        ] = None,
+    ):
         """Build the initialized state shared by batch and CLI executions."""
         past_context = self.memory_log.get_past_context(company_name)
         recent_decision_context = self.memory_log.get_recent_decision_context(
             company_name
         )
-        thematic_catalyst_context = ""
-        commodity_context = ""
-        filing_intelligence_context = ""
-        peer_comparison_context = ""
-        supply_chain_comparison_context = ""
-        earnings_model_context = ""
-        market_expectation_context = ""
-        price_earnings_decomposition_context = ""
-        management_capital_allocation_context = ""
-        shareholder_structure_context = ""
-        investor_interaction_context = ""
-        policy_planning_context = ""
-        if is_a_share_symbol(company_name):
-            try:
-                thematic_catalyst_context = route_to_vendor(
-                    "get_thematic_catalyst_context",
-                    company_name,
-                    trade_date,
-                )
-            except Exception as exc:
-                thematic_catalyst_context = (
-                    "# Thematic catalyst cross-check unavailable\n\n"
-                    f"- Reason: {exc}"
-                )
-            try:
-                commodity_context = route_to_vendor(
-                    "get_commodity_context",
-                    company_name,
-                    trade_date,
-                )
-            except Exception as exc:
-                commodity_context = (
-                    "# Commodity/product-price context unavailable\n\n"
-                    f"- Reason: {exc}"
-                )
-            try:
-                filing_intelligence_context = route_to_vendor(
-                    "get_financial_report_intelligence_context",
-                    company_name,
-                    trade_date,
-                )
-            except Exception as exc:
-                filing_intelligence_context = (
-                    "# Financial-report intelligence unavailable\n\n"
-                    f"- Reason: {exc}"
-                )
-            try:
-                peer_comparison_context = route_to_vendor(
-                    "get_peer_comparison",
-                    company_name,
-                    trade_date,
-                )
-            except Exception as exc:
-                peer_comparison_context = (
-                    "# Same-industry peer comparison unavailable\n\n"
-                    f"- Reason: {exc}"
-                )
-            try:
-                supply_chain_comparison_context = route_to_vendor(
-                    "get_supply_chain_comparison",
-                    company_name,
-                    trade_date,
-                )
-            except Exception as exc:
-                supply_chain_comparison_context = (
-                    "# Supply-chain position comparison unavailable\n\n"
-                    f"- Reason: {exc}"
-                )
-            try:
-                earnings_model_context = route_to_vendor(
-                    "get_earnings_model_context",
-                    company_name,
-                    trade_date,
-                )
-            except Exception as exc:
-                earnings_model_context = (
-                    "# Earnings-model context unavailable\n\n"
-                    f"- Reason: {exc}"
-                )
-            try:
-                market_expectation_context = route_to_vendor(
-                    "get_market_expectation_context",
-                    company_name,
-                    trade_date,
-                )
-            except Exception as exc:
-                market_expectation_context = (
-                    "# Market-expectation context unavailable\n\n"
-                    f"- Reason: {exc}"
-                )
-            try:
-                price_earnings_decomposition_context = route_to_vendor(
-                    "get_price_earnings_decomposition_context",
-                    company_name,
-                    trade_date,
-                )
-            except Exception as exc:
-                price_earnings_decomposition_context = (
-                    "# Price-EPS-PE decomposition unavailable\n\n"
-                    f"- Reason: {exc}"
-                )
-            try:
-                management_capital_allocation_context = route_to_vendor(
-                    "get_management_capital_allocation_context",
-                    company_name,
-                    trade_date,
-                )
-            except Exception as exc:
-                management_capital_allocation_context = (
-                    "# Management/capital-allocation context unavailable\n\n"
-                    f"- Reason: {exc}"
-                )
-            try:
-                shareholder_structure_context = route_to_vendor(
-                    "get_shareholder_structure_context",
-                    company_name,
-                    trade_date,
-                )
-            except Exception as exc:
-                shareholder_structure_context = (
-                    "# Shareholder-structure context unavailable\n\n"
-                    f"- Reason: {exc}"
-                )
-            try:
-                investor_interaction_context = route_to_vendor(
-                    "get_investor_interaction_context",
-                    company_name,
-                    trade_date,
-                )
-            except Exception as exc:
-                investor_interaction_context = (
-                    "# Investor-interaction context unavailable\n\n"
-                    f"- Reason: {exc}"
-                )
-            try:
-                policy_planning_context = route_to_vendor(
-                    "get_policy_planning_context",
-                    company_name,
-                    trade_date,
-                )
-            except Exception as exc:
-                policy_planning_context = (
-                    "# Policy-planning context unavailable\n\n"
-                    f"- Reason: {exc}"
-                )
+        contexts = self._fetch_a_share_contexts(
+            company_name,
+            trade_date,
+            progress_callback=progress_callback,
+        )
+        thematic_catalyst_context = contexts["thematic_catalyst_context"]
+        commodity_context = contexts["commodity_context"]
+        filing_intelligence_context = contexts["filing_intelligence_context"]
+        peer_comparison_context = contexts["peer_comparison_context"]
+        supply_chain_comparison_context = contexts["supply_chain_comparison_context"]
+        earnings_model_context = contexts["earnings_model_context"]
+        market_expectation_context = contexts["market_expectation_context"]
+        price_earnings_decomposition_context = contexts["price_earnings_decomposition_context"]
+        management_capital_allocation_context = contexts["management_capital_allocation_context"]
+        shareholder_structure_context = contexts["shareholder_structure_context"]
+        investor_interaction_context = contexts["investor_interaction_context"]
+        policy_planning_context = contexts["policy_planning_context"]
+        data_coverage_context = _build_precomputed_data_coverage(
+            thematic_catalyst_context=thematic_catalyst_context,
+            commodity_context=commodity_context,
+            filing_intelligence_context=filing_intelligence_context,
+            peer_comparison_context=peer_comparison_context,
+            supply_chain_comparison_context=supply_chain_comparison_context,
+            earnings_model_context=earnings_model_context,
+            market_expectation_context=market_expectation_context,
+            price_earnings_decomposition_context=price_earnings_decomposition_context,
+            management_capital_allocation_context=management_capital_allocation_context,
+            shareholder_structure_context=shareholder_structure_context,
+            investor_interaction_context=investor_interaction_context,
+            policy_planning_context=policy_planning_context,
+        )
         return self.propagator.create_initial_state(
             company_name,
             trade_date,
@@ -505,6 +539,7 @@ class TradingAgentsGraph:
             shareholder_structure_context=shareholder_structure_context,
             investor_interaction_context=investor_interaction_context,
             policy_planning_context=policy_planning_context,
+            data_coverage_context=data_coverage_context,
         )
 
     def _run_graph(self, company_name, trade_date):
@@ -514,151 +549,33 @@ class TradingAgentsGraph:
         recent_decision_context = self.memory_log.get_recent_decision_context(
             company_name
         )
-        thematic_catalyst_context = ""
-        commodity_context = ""
-        filing_intelligence_context = ""
-        peer_comparison_context = ""
-        supply_chain_comparison_context = ""
-        earnings_model_context = ""
-        market_expectation_context = ""
-        price_earnings_decomposition_context = ""
-        management_capital_allocation_context = ""
-        shareholder_structure_context = ""
-        investor_interaction_context = ""
-        policy_planning_context = ""
-        if is_a_share_symbol(company_name):
-            try:
-                thematic_catalyst_context = route_to_vendor(
-                    "get_thematic_catalyst_context",
-                    company_name,
-                    trade_date,
-                )
-            except Exception as exc:
-                thematic_catalyst_context = (
-                    "# Thematic catalyst cross-check unavailable\n\n"
-                    f"- Reason: {exc}"
-                )
-            try:
-                commodity_context = route_to_vendor(
-                    "get_commodity_context",
-                    company_name,
-                    trade_date,
-                )
-            except Exception as exc:
-                commodity_context = (
-                    "# Commodity/product-price context unavailable\n\n"
-                    f"- Reason: {exc}"
-                )
-            try:
-                filing_intelligence_context = route_to_vendor(
-                    "get_financial_report_intelligence_context",
-                    company_name,
-                    trade_date,
-                )
-            except Exception as exc:
-                filing_intelligence_context = (
-                    "# Financial-report intelligence unavailable\n\n"
-                    f"- Reason: {exc}"
-                )
-            try:
-                peer_comparison_context = route_to_vendor(
-                    "get_peer_comparison",
-                    company_name,
-                    trade_date,
-                )
-            except Exception as exc:
-                peer_comparison_context = (
-                    "# Same-industry peer comparison unavailable\n\n"
-                    f"- Reason: {exc}"
-                )
-            try:
-                supply_chain_comparison_context = route_to_vendor(
-                    "get_supply_chain_comparison",
-                    company_name,
-                    trade_date,
-                )
-            except Exception as exc:
-                supply_chain_comparison_context = (
-                    "# Supply-chain position comparison unavailable\n\n"
-                    f"- Reason: {exc}"
-                )
-            try:
-                earnings_model_context = route_to_vendor(
-                    "get_earnings_model_context",
-                    company_name,
-                    trade_date,
-                )
-            except Exception as exc:
-                earnings_model_context = (
-                    "# Earnings-model context unavailable\n\n"
-                    f"- Reason: {exc}"
-                )
-            try:
-                market_expectation_context = route_to_vendor(
-                    "get_market_expectation_context",
-                    company_name,
-                    trade_date,
-                )
-            except Exception as exc:
-                market_expectation_context = (
-                    "# Market-expectation context unavailable\n\n"
-                    f"- Reason: {exc}"
-                )
-            try:
-                price_earnings_decomposition_context = route_to_vendor(
-                    "get_price_earnings_decomposition_context",
-                    company_name,
-                    trade_date,
-                )
-            except Exception as exc:
-                price_earnings_decomposition_context = (
-                    "# Price-EPS-PE decomposition unavailable\n\n"
-                    f"- Reason: {exc}"
-                )
-            try:
-                management_capital_allocation_context = route_to_vendor(
-                    "get_management_capital_allocation_context",
-                    company_name,
-                    trade_date,
-                )
-            except Exception as exc:
-                management_capital_allocation_context = (
-                    "# Management/capital-allocation context unavailable\n\n"
-                    f"- Reason: {exc}"
-                )
-            try:
-                shareholder_structure_context = route_to_vendor(
-                    "get_shareholder_structure_context",
-                    company_name,
-                    trade_date,
-                )
-            except Exception as exc:
-                shareholder_structure_context = (
-                    "# Shareholder-structure context unavailable\n\n"
-                    f"- Reason: {exc}"
-                )
-            try:
-                investor_interaction_context = route_to_vendor(
-                    "get_investor_interaction_context",
-                    company_name,
-                    trade_date,
-                )
-            except Exception as exc:
-                investor_interaction_context = (
-                    "# Investor-interaction context unavailable\n\n"
-                    f"- Reason: {exc}"
-                )
-            try:
-                policy_planning_context = route_to_vendor(
-                    "get_policy_planning_context",
-                    company_name,
-                    trade_date,
-                )
-            except Exception as exc:
-                policy_planning_context = (
-                    "# Policy-planning context unavailable\n\n"
-                    f"- Reason: {exc}"
-                )
+        contexts = self._fetch_a_share_contexts(company_name, trade_date)
+        thematic_catalyst_context = contexts["thematic_catalyst_context"]
+        commodity_context = contexts["commodity_context"]
+        filing_intelligence_context = contexts["filing_intelligence_context"]
+        peer_comparison_context = contexts["peer_comparison_context"]
+        supply_chain_comparison_context = contexts["supply_chain_comparison_context"]
+        earnings_model_context = contexts["earnings_model_context"]
+        market_expectation_context = contexts["market_expectation_context"]
+        price_earnings_decomposition_context = contexts["price_earnings_decomposition_context"]
+        management_capital_allocation_context = contexts["management_capital_allocation_context"]
+        shareholder_structure_context = contexts["shareholder_structure_context"]
+        investor_interaction_context = contexts["investor_interaction_context"]
+        policy_planning_context = contexts["policy_planning_context"]
+        data_coverage_context = _build_precomputed_data_coverage(
+            thematic_catalyst_context=thematic_catalyst_context,
+            commodity_context=commodity_context,
+            filing_intelligence_context=filing_intelligence_context,
+            peer_comparison_context=peer_comparison_context,
+            supply_chain_comparison_context=supply_chain_comparison_context,
+            earnings_model_context=earnings_model_context,
+            market_expectation_context=market_expectation_context,
+            price_earnings_decomposition_context=price_earnings_decomposition_context,
+            management_capital_allocation_context=management_capital_allocation_context,
+            shareholder_structure_context=shareholder_structure_context,
+            investor_interaction_context=investor_interaction_context,
+            policy_planning_context=policy_planning_context,
+        )
         init_agent_state = self.propagator.create_initial_state(
             company_name,
             trade_date,
@@ -676,6 +593,7 @@ class TradingAgentsGraph:
             shareholder_structure_context=shareholder_structure_context,
             investor_interaction_context=investor_interaction_context,
             policy_planning_context=policy_planning_context,
+            data_coverage_context=data_coverage_context,
         )
         args = self.propagator.get_graph_args()
 
@@ -757,6 +675,9 @@ class TradingAgentsGraph:
             ),
             "policy_planning_context": final_state.get(
                 "policy_planning_context", ""
+            ),
+            "data_coverage_context": final_state.get(
+                "data_coverage_context", ""
             ),
             "market_report": final_state["market_report"],
             "sentiment_report": final_state["sentiment_report"],

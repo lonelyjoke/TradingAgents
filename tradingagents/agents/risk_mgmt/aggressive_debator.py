@@ -12,6 +12,12 @@ from tradingagents.agents.utils.agent_utils import (
     get_supply_demand_fallback_instruction,
     get_thematic_valuation_instruction,
 )
+from tradingagents.dataflows.prompt_compaction import (
+    compact_analyst_report,
+    compact_for_prompt,
+    compact_risk_history,
+    compact_state_fields,
+)
 
 
 def create_aggressive_debator(llm):
@@ -23,15 +29,39 @@ def create_aggressive_debator(llm):
         current_conservative_response = risk_debate_state.get("current_conservative_response", "")
         current_neutral_response = risk_debate_state.get("current_neutral_response", "")
 
-        market_research_report = state["market_report"]
-        sentiment_report = state["sentiment_report"]
-        news_report = state["news_report"]
-        fundamentals_report = state["fundamentals_report"]
-        thematic_catalyst_context = state.get("thematic_catalyst_context", "")
-        commodity_context = state.get("commodity_context", "")
-        filing_intelligence_context = state.get("filing_intelligence_context", "")
-        investor_interaction_context = state.get("investor_interaction_context", "")
-        policy_planning_context = state.get("policy_planning_context", "")
+        market_research_report = compact_analyst_report(state["market_report"], profile="risk")
+        sentiment_report = compact_analyst_report(state["sentiment_report"], profile="risk")
+        news_report = compact_analyst_report(state["news_report"], profile="risk")
+        fundamentals_report = compact_analyst_report(state["fundamentals_report"], profile="risk")
+        prompt_contexts = compact_state_fields(
+            state,
+            profile="risk",
+            keys={
+                "thematic_catalyst_context",
+                "commodity_context",
+                "filing_intelligence_context",
+                "investor_interaction_context",
+                "policy_planning_context",
+            },
+        )
+        thematic_catalyst_context = prompt_contexts["thematic_catalyst_context"]
+        commodity_context = prompt_contexts["commodity_context"]
+        filing_intelligence_context = prompt_contexts["filing_intelligence_context"]
+        investor_interaction_context = prompt_contexts["investor_interaction_context"]
+        policy_planning_context = prompt_contexts["policy_planning_context"]
+        prompt_history = compact_risk_history(history, profile="risk")
+        prompt_conservative_response = compact_for_prompt(
+            current_conservative_response,
+            label="risk_history",
+            profile="risk",
+            max_chars=2500,
+        )
+        prompt_neutral_response = compact_for_prompt(
+            current_neutral_response,
+            label="risk_history",
+            profile="risk",
+            max_chars=2500,
+        )
 
         trader_decision = state["trader_investment_plan"]
 
@@ -50,7 +80,7 @@ Commodity/Product-Price Context: {commodity_context}
 Financial-Report Intelligence And Promoted Discussion Items: {filing_intelligence_context}
 Official Investor-Interaction Context: {investor_interaction_context}
 Official Policy-Planning Context: {policy_planning_context}
-Here is the current conversation history: {history} Here are the last arguments from the conservative analyst: {current_conservative_response} Here are the last arguments from the neutral analyst: {current_neutral_response}. If there are no responses from the other viewpoints yet, present your own argument based on the available data.
+Here is the current conversation history: {prompt_history} Here are the last arguments from the conservative analyst: {prompt_conservative_response} Here are the last arguments from the neutral analyst: {prompt_neutral_response}. If there are no responses from the other viewpoints yet, present your own argument based on the available data.
 
 Engage actively by addressing any specific concerns raised, refuting the weaknesses in their logic, and asserting the benefits of risk-taking to outpace market norms. Maintain a focus on debating and persuading, not just presenting data. Challenge each counterpoint to underscore why a high-risk approach is optimal. For commodity/resource/cyclical names, explicitly test whether product-price evidence supports or contradicts the risk stance. Preserve core discussion items that matter to the thesis even when they are optionality rather than base-case proof. {get_evidence_instruction()} {get_research_gap_instruction()} {get_supply_demand_fallback_instruction()} {get_buy_side_thesis_instruction()} {get_fair_cycle_valuation_instruction()} {get_thematic_valuation_instruction()} {get_filing_intelligence_instruction()} {get_investor_interaction_instruction()} {get_policy_planning_instruction()} {get_focused_report_instruction()} Output conversationally as if you are speaking without any special formatting."""
 

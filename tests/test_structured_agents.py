@@ -13,10 +13,12 @@ import pytest
 
 from tradingagents.agents.managers.research_manager import create_research_manager
 from tradingagents.agents.schemas import (
+    PortfolioDecision,
     PortfolioRating,
     ResearchPlan,
     TraderAction,
     TraderProposal,
+    render_pm_decision,
     render_research_plan,
     render_trader_proposal,
 )
@@ -85,6 +87,68 @@ class TestRenderResearchPlan:
             )
             md = render_research_plan(p)
             assert f"**Recommendation**: {rating.value}" in md
+
+
+@pytest.mark.unit
+class TestRenderPortfolioDecision:
+    def test_reader_takeaway_build_price_band_renders_after_thesis(self):
+        decision = PortfolioDecision(
+            rating=PortfolioRating.UNDERWEIGHT,
+            company_snapshot="Good business, expensive stock.",
+            one_line_thesis="Current odds are weak, but the franchise has value.",
+            reader_takeaway_entry_band=(
+                "Consider rebuilding only near 18-20x clean mid-cycle earnings, "
+                "provided cash conversion stays positive."
+            ),
+            reader_action_guidance=(
+                "Full holders should trim to benchmark weight; prospective builders "
+                "should wait for the valuation band before starting."
+            ),
+            business_driver_map="Revenue, margin, cash conversion.",
+            bull_bear_debate="Bull sees growth; bear sees valuation risk.",
+            debate_verdict="Bear case wins at today's price.",
+            investment_logic_chain="If earnings normalize, valuation compresses.",
+            executive_summary="Underweight now; wait for better odds.",
+            verification_and_falsification="Watch next quarter cash flow.",
+            investment_thesis="The market prices too much perfection.",
+        )
+        md = render_pm_decision(decision)
+        assert "**Reader Take-away / Build Price Band**:" in md
+        assert "**Reader Action Guidance / Holders vs Builders**:" in md
+        assert "18-20x clean mid-cycle earnings" in md
+        assert "Full holders should trim to benchmark weight" in md
+        assert md.index("**One-Line Thesis**") < md.index("**Reader Take-away / Build Price Band**")
+        assert md.index("**Reader Take-away / Build Price Band**") < md.index(
+            "**Reader Action Guidance / Holders vs Builders**"
+        )
+        assert md.index("**Reader Action Guidance / Holders vs Builders**") < md.index("**Investment Thesis**")
+
+    def test_buy_rating_includes_staged_builder_guidance(self):
+        decision = PortfolioDecision(
+            rating=PortfolioRating.OVERWEIGHT,
+            company_snapshot="Strong franchise with improving cash flow.",
+            one_line_thesis="The evidence supports adding exposure in stages.",
+            reader_takeaway_entry_band=(
+                "Start near 22x clean forward earnings and add on verified order "
+                "conversion rather than chasing a one-day move."
+            ),
+            reader_action_guidance=(
+                "Full holders can keep the core position and add only on pullbacks; "
+                "prospective builders can open a starter tranche, then add after "
+                "margin and cash-flow confirmation."
+            ),
+            business_driver_map="Orders, gross margin, cash conversion.",
+            bull_bear_debate="Bull sees order conversion; bear sees valuation risk.",
+            debate_verdict="Bull case wins with staged sizing.",
+            investment_logic_chain="If order conversion holds, earnings visibility improves.",
+            executive_summary="Overweight with staged entry.",
+            verification_and_falsification="Track orders and margin.",
+            investment_thesis="Risk/reward is constructive but should be built gradually.",
+        )
+        md = render_pm_decision(decision)
+        assert "**Reader Action Guidance / Holders vs Builders**:" in md
+        assert "Full holders can keep the core position" in md
+        assert "prospective builders can open a starter tranche" in md
 
 
 # ---------------------------------------------------------------------------

@@ -42,22 +42,34 @@ from tradingagents.agents.utils.agent_utils import (
 )
 from tradingagents.dataflows.tushare_a_stock import is_a_share_symbol
 from tradingagents.dataflows.config import get_config
+from tradingagents.dataflows.prompt_compaction import compact_state_fields
 
 
 def create_fundamentals_analyst(llm):
     def fundamentals_analyst_node(state):
         current_date = state["trade_date"]
         instrument_context = build_instrument_context(state["company_of_interest"])
-        thematic_catalyst_context = state.get("thematic_catalyst_context", "")
-        commodity_context = state.get("commodity_context", "")
-        filing_intelligence_context = state.get("filing_intelligence_context", "")
-        peer_comparison_context = state.get("peer_comparison_context", "")
-        supply_chain_comparison_context = state.get("supply_chain_comparison_context", "")
-        earnings_model_context = state.get("earnings_model_context", "")
-        market_expectation_context = state.get("market_expectation_context", "")
-        price_earnings_decomposition_context = state.get("price_earnings_decomposition_context", "")
-        management_capital_allocation_context = state.get("management_capital_allocation_context", "")
-        shareholder_structure_context = state.get("shareholder_structure_context", "")
+        raw_thematic_catalyst_context = state.get("thematic_catalyst_context", "")
+        raw_commodity_context = state.get("commodity_context", "")
+        raw_filing_intelligence_context = state.get("filing_intelligence_context", "")
+        raw_peer_comparison_context = state.get("peer_comparison_context", "")
+        raw_supply_chain_comparison_context = state.get("supply_chain_comparison_context", "")
+        raw_earnings_model_context = state.get("earnings_model_context", "")
+        raw_market_expectation_context = state.get("market_expectation_context", "")
+        raw_price_earnings_decomposition_context = state.get("price_earnings_decomposition_context", "")
+        raw_management_capital_allocation_context = state.get("management_capital_allocation_context", "")
+        raw_shareholder_structure_context = state.get("shareholder_structure_context", "")
+        prompt_contexts = compact_state_fields(state, profile="analyst")
+        thematic_catalyst_context = prompt_contexts["thematic_catalyst_context"]
+        commodity_context = prompt_contexts["commodity_context"]
+        filing_intelligence_context = prompt_contexts["filing_intelligence_context"]
+        peer_comparison_context = prompt_contexts["peer_comparison_context"]
+        supply_chain_comparison_context = prompt_contexts["supply_chain_comparison_context"]
+        earnings_model_context = prompt_contexts["earnings_model_context"]
+        market_expectation_context = prompt_contexts["market_expectation_context"]
+        price_earnings_decomposition_context = prompt_contexts["price_earnings_decomposition_context"]
+        management_capital_allocation_context = prompt_contexts["management_capital_allocation_context"]
+        shareholder_structure_context = prompt_contexts["shareholder_structure_context"]
         is_a_share = is_a_share_symbol(state["company_of_interest"])
 
         tools = [
@@ -69,27 +81,27 @@ def create_fundamentals_analyst(llm):
             get_market_sector_risk,
             get_market_timing_context,
         ]
-        if is_a_share and not commodity_context:
+        if is_a_share and not raw_commodity_context:
             tools.append(get_commodity_context)
         if not is_a_share:
             tools.append(get_shipping_context)
-        if not peer_comparison_context:
+        if not raw_peer_comparison_context:
             tools.append(get_peer_comparison)
-        if not supply_chain_comparison_context:
+        if not raw_supply_chain_comparison_context:
             tools.append(get_supply_chain_comparison)
-        if not thematic_catalyst_context:
+        if not raw_thematic_catalyst_context:
             tools.append(get_thematic_catalyst_context)
-        if not filing_intelligence_context:
+        if not raw_filing_intelligence_context:
             tools.append(get_financial_report_intelligence_context)
-        if not earnings_model_context:
+        if not raw_earnings_model_context:
             tools.append(get_earnings_model_context)
-        if not market_expectation_context:
+        if not raw_market_expectation_context:
             tools.append(get_market_expectation_context)
-        if not price_earnings_decomposition_context:
+        if not raw_price_earnings_decomposition_context:
             tools.append(get_price_earnings_decomposition_context)
-        if not management_capital_allocation_context:
+        if not raw_management_capital_allocation_context:
             tools.append(get_management_capital_allocation_context)
-        if not shareholder_structure_context:
+        if not raw_shareholder_structure_context:
             tools.append(get_shareholder_structure_context)
 
         system_message = (

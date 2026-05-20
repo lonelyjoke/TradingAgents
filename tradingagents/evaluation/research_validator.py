@@ -28,12 +28,17 @@ RATING_MAP = {
     "hold": "Hold",
     "underweight": "Underweight",
     "sell": "Sell",
+    "强烈买入": "Buy",
     "买入": "Buy",
+    "高配": "Overweight",
+    "超配": "Overweight",
     "增持": "Overweight",
     "持有": "Hold",
     "中性": "Hold",
+    "低配": "Underweight",
     "减持": "Underweight",
     "卖出": "Sell",
+    "回避": "Sell",
 }
 
 POSITIVE_RATINGS = {"Buy", "Overweight"}
@@ -60,21 +65,91 @@ def read_text_fallback(path: Path) -> str:
     return path.read_text(encoding="utf-8", errors="replace")
 
 
+def _plain_markdown_line(line: str) -> str:
+    line = line.strip()
+    line = re.sub(r"^#{1,6}\s*", "", line)
+    line = re.sub(r"^[>\-\u2022]\s*", "", line)
+    return line.replace("**", "").replace("__", "").strip()
+
+
+def _next_nonempty_line(lines: list[str], start_index: int) -> str:
+    for line in lines[start_index + 1 :]:
+        plain = _plain_markdown_line(line)
+        if plain:
+            return plain
+    return ""
+
+
 def _extract_section(text: str, names: Iterable[str]) -> str:
-    alternatives = "|".join(re.escape(name) for name in names)
-    pattern = rf"(?:\*\*)?(?:{alternatives})(?:\*\*)?\s*[:：]\s*(.+)"
-    match = re.search(pattern, text, flags=re.IGNORECASE)
-    return match.group(1).strip() if match else ""
+    """Extract a one-line markdown field or the paragraph after a field header."""
+    lines = text.splitlines()
+    sorted_names = sorted(names, key=len, reverse=True)
+
+    def _match_name_value(plain: str, name: str, *, anchored: bool) -> str | None:
+        suffix = r"(?:[（(][^）)]*[）)])?"
+        prefix = "^" if anchored else r"^.*?"
+        match = re.match(
+            rf"{prefix}{re.escape(name)}{suffix}\s*[:：是]\s*(.*)$",
+            plain,
+            flags=re.IGNORECASE,
+        )
+        if match:
+            return match.group(1).strip()
+        return None
+
+    for index, line in enumerate(lines):
+        plain = _plain_markdown_line(line)
+        for name in sorted_names:
+            value = _match_name_value(plain, name, anchored=True)
+            if value is not None:
+                return value if value else _next_nonempty_line(lines, index)
+
+            header_match = re.match(
+                rf"^{re.escape(name)}(?:[（(][^）)]*[）)])?$",
+                plain,
+                flags=re.IGNORECASE,
+            )
+            if header_match:
+                return _next_nonempty_line(lines, index)
+
+            if "核心" in name:
+                value = _match_name_value(plain, name, anchored=False)
+                if value is not None:
+                    return value if value else _next_nonempty_line(lines, index)
+    return ""
 
 
 def _normalize_rating(raw: str) -> str:
-    cleaned = raw.strip().strip("*").split()[0].strip("：:")
-    cleaned = re.sub(r"[，,。.;；].*$", "", cleaned)
-    return RATING_MAP.get(cleaned.lower(), RATING_MAP.get(cleaned, "Unknown"))
+    cleaned = _plain_markdown_line(raw).strip("：:")
+    if not cleaned:
+        return "Unknown"
+
+    for token, normalized in RATING_MAP.items():
+        if re.fullmatch(r"[a-z]+", token):
+            pattern = rf"\b{re.escape(token)}\b"
+            if re.search(pattern, cleaned, flags=re.IGNORECASE):
+                return normalized
+        elif token in cleaned:
+            return normalized
+
+    first_word = cleaned.split()[0].strip("：:")
+    first_word = re.sub(r"[，,。.;；].*$", "", first_word)
+    return RATING_MAP.get(first_word.lower(), RATING_MAP.get(first_word, "Unknown"))
 
 
 def _extract_rating(text: str) -> str:
-    raw_rating = _extract_section(text, ["Rating", "评级", "最终评级", "投资评级"])
+    raw_rating = _extract_section(
+        text,
+        [
+            "Rating",
+            "评级",
+            "最终评级",
+            "投资评级",
+            "投资决策",
+            "推荐",
+            "Recommendation",
+        ],
+    )
     rating = _normalize_rating(raw_rating)
     if rating != "Unknown":
         return rating
@@ -116,8 +191,42 @@ def parse_report_dir(report_dir: str | Path) -> ReportView:
         report_datetime = datetime.fromtimestamp(complete_path.stat().st_mtime)
 
     rating = _extract_rating(decision_text)
-    core_bet = _extract_section(decision_text, ["Core Bet", "核心下注主线", "核心交易主线"])
-    conviction = _extract_section(decision_text, ["Conviction And Position", "Conviction Level", "观点强度与仓位"])
+    core_bet = _extract_section(
+        decision_text,
+        [
+            "Core Bet",
+            "核心下注主线",
+            "核心交易主线",
+            "核心下注",
+            "核心押注",
+            "我们的核心押注",
+            "核心赌注",
+            "我们的核心赌注",
+            "核心判断",
+            "核心论点",
+            "核心论题",
+            "核心投资判断",
+            "核心投资论点",
+            "核心投资主线",
+        ],
+    )
+    conviction = _extract_section(
+        decision_text,
+        [
+            "Conviction And Position",
+            "Conviction Level",
+            "观点强度与仓位",
+            "仓位与把握度",
+            "仓位建议",
+            "执行与仓位",
+            "组合执行",
+            "交易与仓位",
+            "行动",
+            "操作建议",
+            "交易行动",
+            "持仓建议",
+        ],
+    )
 
     return ReportView(
         report_dir=report_dir,

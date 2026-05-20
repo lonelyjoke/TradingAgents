@@ -29,6 +29,11 @@ from tradingagents.agents.utils.structured import (
     bind_structured,
     invoke_structured_or_freetext,
 )
+from tradingagents.dataflows.prompt_compaction import (
+    compact_debate_history,
+    compact_for_prompt,
+    compact_state_fields,
+)
 
 
 def create_research_manager(llm):
@@ -37,19 +42,26 @@ def create_research_manager(llm):
     def research_manager_node(state) -> dict:
         instrument_context = build_instrument_context(state["company_of_interest"])
         history = state["investment_debate_state"].get("history", "")
-        recent_decision_context = state.get("recent_decision_context", "")
-        thematic_catalyst_context = state.get("thematic_catalyst_context", "")
-        commodity_context = state.get("commodity_context", "")
-        filing_intelligence_context = state.get("filing_intelligence_context", "")
-        peer_comparison_context = state.get("peer_comparison_context", "")
-        supply_chain_comparison_context = state.get("supply_chain_comparison_context", "")
-        earnings_model_context = state.get("earnings_model_context", "")
-        market_expectation_context = state.get("market_expectation_context", "")
-        price_earnings_decomposition_context = state.get("price_earnings_decomposition_context", "")
-        management_capital_allocation_context = state.get("management_capital_allocation_context", "")
-        shareholder_structure_context = state.get("shareholder_structure_context", "")
-        investor_interaction_context = state.get("investor_interaction_context", "")
-        policy_planning_context = state.get("policy_planning_context", "")
+        recent_decision_context = compact_for_prompt(
+            state.get("recent_decision_context", ""),
+            label="recent_decision_context",
+            profile="research",
+        )
+        prompt_contexts = compact_state_fields(state, profile="research")
+        thematic_catalyst_context = prompt_contexts["thematic_catalyst_context"]
+        commodity_context = prompt_contexts["commodity_context"]
+        filing_intelligence_context = prompt_contexts["filing_intelligence_context"]
+        peer_comparison_context = prompt_contexts["peer_comparison_context"]
+        supply_chain_comparison_context = prompt_contexts["supply_chain_comparison_context"]
+        earnings_model_context = prompt_contexts["earnings_model_context"]
+        market_expectation_context = prompt_contexts["market_expectation_context"]
+        price_earnings_decomposition_context = prompt_contexts["price_earnings_decomposition_context"]
+        management_capital_allocation_context = prompt_contexts["management_capital_allocation_context"]
+        shareholder_structure_context = prompt_contexts["shareholder_structure_context"]
+        investor_interaction_context = prompt_contexts["investor_interaction_context"]
+        policy_planning_context = prompt_contexts["policy_planning_context"]
+        data_coverage_context = prompt_contexts["data_coverage_context"]
+        prompt_history = compact_debate_history(history, profile="research")
         continuity_context = (
             f"""
 **Most Recent Same-Ticker Decision (may still be pending outcome):**
@@ -129,6 +141,7 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 - If industry-specific filing context is available, keep an **Industry Driver Verdict** explicit enough to preserve the real sector-native variables that decide the thesis.
 - If commodity/product-price context is available, keep a **Commodity Cycle Verdict** explicit enough to say whether the product-price evidence supports or contradicts the margin/EPS/inventory part of the thesis.
 - If verified but non-base-case optionality matters, keep a **Strategic Optionality Verdict** explicit enough that downstream agents do not erase a second growth curve, investee holding, asset revaluation path, or live thematic catalyst merely because it does not flip today's rating.
+- Always read the Data Coverage Audit before ruling. If a module is failed, missing, or partial and touches the core bet, explicitly state the gap and cap conviction; do not let the final plan sound more certain than the data coverage allows.
 
 ---
 
@@ -169,8 +182,11 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 **Official Policy-Planning Context:**
 {policy_planning_context}
 
+**Data Coverage Audit:**
+{data_coverage_context}
+
 **Debate History:**
-{history}
+{prompt_history}
 
 {get_evidence_instruction()}
 {get_research_gap_instruction()}

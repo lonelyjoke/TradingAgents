@@ -48,6 +48,17 @@ DEFAULT_CONFIG = {
     "max_debate_rounds": 1,
     "max_risk_discuss_rounds": 1,
     "max_recur_limit": 100,
+    # Deterministically compact long precomputed contexts before LLM prompt
+    # injection. Raw contexts are still kept in state and saved reports.
+    "prompt_context_compaction_enabled": True,
+    # A-share precomputed contexts are independent IO-heavy calls. Fetch a few
+    # in parallel so the CLI does not sit idle before the first analyst starts.
+    "a_share_context_fetch_workers": 4,
+    # Filing intelligence can become very slow on giant annual reports. This
+    # caps the text scanned by rule-based extractors while keeping high-signal
+    # keyword windows, opening slices, and ending slices.
+    "filing_intelligence_max_chars_per_report": 180_000,
+    "filing_intelligence_max_total_chars": 420_000,
     # Data vendor configuration
     # Category-level configuration (default for all tools in category)
     "data_vendors": {

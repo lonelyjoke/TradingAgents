@@ -3276,10 +3276,17 @@ def _update_question_memory(
         item["last_seen_date"] = curr_date
         item["last_report_type"] = answer.report_type
         item["last_evidence"] = answer.evidence
-    _question_memory_path(symbol).write_text(
-        json.dumps(memory, ensure_ascii=False, indent=2),
-        encoding="utf-8",
-    )
+    try:
+        _question_memory_path(symbol).write_text(
+            json.dumps(memory, ensure_ascii=False, indent=2),
+            encoding="utf-8",
+        )
+    except PermissionError:
+        # A live CLI run or antivirus scanner can briefly lock this tiny memory
+        # file on Windows. The filing context itself is still usable, so avoid
+        # failing the whole precompute stage just because the learning cache
+        # could not be updated.
+        pass
     return memory
 
 
@@ -3312,6 +3319,126 @@ def _build_table(rows: list[dict[str, str]]) -> str:
     return _markdown_table(pd.DataFrame(rows))
 
 
+_RUNTIME_READING_KEYWORDS = (
+    "主营",
+    "业务",
+    "收入",
+    "利润",
+    "毛利",
+    "毛利率",
+    "现金流",
+    "经营活动",
+    "订单",
+    "合同",
+    "客户",
+    "库存",
+    "存货",
+    "应收",
+    "预付款",
+    "产能",
+    "利用率",
+    "研发",
+    "费用",
+    "减值",
+    "商誉",
+    "风险",
+    "诉讼",
+    "担保",
+    "关联",
+    "分红",
+    "回购",
+    "电池",
+    "汽车",
+    "新能源",
+    "海外",
+    "出口",
+    "market",
+    "revenue",
+    "profit",
+    "margin",
+    "cash flow",
+    "order",
+    "inventory",
+    "capacity",
+    "customer",
+    "risk",
+)
+
+
+def _compact_report_text_for_runtime(
+    title: str,
+    text: str,
+    *,
+    max_chars: int,
+) -> str:
+    """Keep high-signal windows from a large filing text for rule extractors."""
+    if len(text) <= max_chars:
+        return text
+
+    head_budget = max(30_000, int(max_chars * 0.28))
+    tail_budget = max(20_000, int(max_chars * 0.16))
+    keyword_budget = max_chars - head_budget - tail_budget - 500
+    keyword_lines: list[str] = []
+    keyword_chars = 0
+    seen: set[str] = set()
+
+    for line in text.splitlines():
+        stripped = line.strip()
+        if not stripped or stripped in seen:
+            continue
+        lowered = stripped.lower()
+        if not any(token in lowered or token in stripped for token in _RUNTIME_READING_KEYWORDS):
+            continue
+        seen.add(stripped)
+        if len(stripped) > 500:
+            stripped = stripped[:480].rstrip() + " ... [line trimmed]"
+        keyword_lines.append(stripped)
+        keyword_chars += len(stripped) + 1
+        if keyword_chars >= keyword_budget:
+            break
+
+    return "\n".join(
+        [
+            f"[Runtime-compacted filing text for {title}: original {len(text)} chars, budget {max_chars} chars.]",
+            "",
+            "[Opening slice]",
+            text[:head_budget],
+            "",
+            "[Keyword evidence lines]",
+            "\n".join(keyword_lines) if keyword_lines else "(none detected)",
+            "",
+            "[Ending slice]",
+            text[-tail_budget:],
+        ]
+    )
+
+
+def _compact_report_texts_for_runtime(
+    report_texts: Iterable[tuple[str, str]],
+) -> tuple[list[tuple[str, str]], str]:
+    config = get_config()
+    per_report_limit = int(config.get("filing_intelligence_max_chars_per_report", 180_000))
+    total_limit = int(config.get("filing_intelligence_max_total_chars", 420_000))
+
+    compacted: list[tuple[str, str]] = []
+    notes: list[str] = []
+    total = 0
+    for title, text in report_texts:
+        remaining = total_limit - total
+        if remaining <= 0:
+            notes.append(f"- Skipped {title}: runtime text budget exhausted.")
+            break
+        budget = min(per_report_limit, remaining)
+        new_text = _compact_report_text_for_runtime(title, text or "", max_chars=budget)
+        compacted.append((title, new_text))
+        total += len(new_text)
+        if len(text or "") > len(new_text):
+            notes.append(
+                f"- Compacted {title}: {len(text or '')} chars -> {len(new_text)} chars."
+            )
+    return compacted, "\n".join(notes)
+
+
 def get_financial_report_intelligence_context(
     ticker: str,
     curr_date: str,
@@ -3328,6 +3455,7 @@ def get_financial_report_intelligence_context(
     company_name = _format_value(basic.get("name")) if basic is not None else symbol
     industry = _format_value(basic.get("industry")) if basic is not None else ""
     reports, report_texts = _load_financial_report_texts(symbol, curr_date, look_back_days)
+    report_texts, runtime_compaction_note = _compact_report_texts_for_runtime(report_texts)
     income = _fetch_income_statement_data(symbol, curr_date, freq="quarterly", limit=8)
     balance = _fetch_balance_sheet_data(symbol, curr_date, freq="quarterly", limit=8)
     cashflow = _fetch_cashflow_data(symbol, curr_date, freq="quarterly", limit=8)
@@ -3593,6 +3721,7 @@ def get_financial_report_intelligence_context(
         "- Research hygiene: industry-specific playbooks are conservative by design; if identity is ambiguous, generic questions are safer than a wrong template.",
         f"- Financial-report look-back: {look_back_days} days",
         f"- Extraction status: {extraction_note}",
+        *(["- Runtime compaction applied to oversized filing text.", runtime_compaction_note] if runtime_compaction_note else []),
         "",
         "## Financial Reports Considered",
         *report_titles,

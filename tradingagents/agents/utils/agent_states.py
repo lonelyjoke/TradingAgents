@@ -68,6 +68,7 @@ class AgentState(MessagesState):
     shareholder_structure_context: Annotated[str, "Precomputed shareholder/chip context"]
     investor_interaction_context: Annotated[str, "Precomputed official investor-interaction context"]
     policy_planning_context: Annotated[str, "Precomputed national/industry policy-planning context"]
+    data_coverage_context: Annotated[str, "Audit of which precomputed context modules loaded successfully and which failed or are partial"]
 
     # researcher team discussion step
     investment_debate_state: Annotated[

@@ -24,6 +24,7 @@ from tradingagents.agents.utils.structured import (
     bind_structured,
     invoke_structured_or_freetext,
 )
+from tradingagents.dataflows.prompt_compaction import compact_for_prompt, compact_state_fields
 
 
 def create_trader(llm):
@@ -32,11 +33,25 @@ def create_trader(llm):
     def trader_node(state, name):
         company_name = state["company_of_interest"]
         instrument_context = build_instrument_context(company_name)
-        investment_plan = state["investment_plan"]
-        thematic_catalyst_context = state.get("thematic_catalyst_context", "")
-        filing_intelligence_context = state.get("filing_intelligence_context", "")
-        investor_interaction_context = state.get("investor_interaction_context", "")
-        policy_planning_context = state.get("policy_planning_context", "")
+        investment_plan = compact_for_prompt(
+            state["investment_plan"],
+            label="investment_plan",
+            profile="trader",
+        )
+        prompt_contexts = compact_state_fields(
+            state,
+            profile="trader",
+            keys={
+                "thematic_catalyst_context",
+                "filing_intelligence_context",
+                "investor_interaction_context",
+                "policy_planning_context",
+            },
+        )
+        thematic_catalyst_context = prompt_contexts["thematic_catalyst_context"]
+        filing_intelligence_context = prompt_contexts["filing_intelligence_context"]
+        investor_interaction_context = prompt_contexts["investor_interaction_context"]
+        policy_planning_context = prompt_contexts["policy_planning_context"]
 
         messages = [
             {

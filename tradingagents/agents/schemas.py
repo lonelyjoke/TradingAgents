@@ -293,6 +293,14 @@ class ResearchPlan(BaseModel):
             "including why they matter and what would upgrade them."
         ),
     )
+    data_coverage_audit: Optional[str] = Field(
+        default=None,
+        description=(
+            "Summarize which supplied data modules were ready, partial, failed, or "
+            "missing when that affects the recommendation. Name thesis-critical gaps "
+            "and state how they cap conviction."
+        ),
+    )
 
 
 def render_research_plan(plan: ResearchPlan) -> str:
@@ -358,6 +366,8 @@ def render_research_plan(plan: ResearchPlan) -> str:
         parts.extend(["", f"**Industry Driver Verdict**: {plan.industry_driver_verdict}"])
     if plan.strategic_optionality_verdict:
         parts.extend(["", f"**Strategic Optionality Verdict**: {plan.strategic_optionality_verdict}"])
+    if plan.data_coverage_audit:
+        parts.extend(["", f"**Data Coverage Audit**: {plan.data_coverage_audit}"])
     return "\n".join(parts)
 
 
@@ -476,6 +486,33 @@ class PortfolioDecision(BaseModel):
             "One sentence that states the investable view in plain language: "
             "what the market may be missing, why the rating follows, and the "
             "main caveat if needed."
+        ),
+    )
+    reader_takeaway_entry_band: Optional[str] = Field(
+        default=None,
+        description=(
+            "A reader-facing take-away that answers: if the company's fundamentals "
+            "are not structurally impaired, what price band or valuation band would "
+            "make the stock worth building or rebuilding a position, even when the "
+            "current rating is Underweight or Sell. Give the range, the valuation or "
+            "earnings logic behind it, and the business conditions that must still "
+            "hold. If the business is fundamentally broken or no responsible entry "
+            "band can be justified, say so explicitly."
+        ),
+    )
+    reader_action_guidance: Optional[str] = Field(
+        default=None,
+        description=(
+            "Reader-facing action guidance split into two audiences: investors who "
+            "already hold a full or large position, and investors who are preparing "
+            "to build a position. The advice must fit the final rating. For Buy or "
+            "Overweight, explain how to build or add in stages, what evidence or "
+            "price/valuation zone justifies adding, and how much dry powder to keep. "
+            "For Hold, explain what full holders should monitor or rebalance, and "
+            "what new buyers should wait for before initiating. For Underweight or "
+            "Sell, explain how full holders should reduce or hedge, and what lower "
+            "price/valuation band would make new entry reasonable if fundamentals "
+            "remain intact. If no responsible build zone exists, say so explicitly."
         ),
     )
     business_driver_map: str = Field(
@@ -817,74 +854,61 @@ class PortfolioDecision(BaseModel):
             "rating today, and what would upgrade them."
         ),
     )
+    data_coverage_audit: Optional[str] = Field(
+        default=None,
+        description=(
+            "Concise audit of the supplied evidence set: which precomputed data "
+            "modules were ready, partial, failed, or missing; whether any gap is "
+            "thesis-critical; and how the gap affects confidence or next checks."
+        ),
+    )
 
 
 def render_pm_decision(decision: PortfolioDecision) -> str:
-    """Render a PortfolioDecision back to the markdown shape the rest of the system expects.
+    """Render a PortfolioDecision to the public markdown report shape.
 
-    Memory log, CLI display, and saved report files all read this markdown,
-    so the rendered output preserves the exact section headers (``**Rating**``,
-    ``**Executive Summary**``, ``**Investment Thesis**``) that downstream
-    parsers and the report writers already handle.  Internally, the manager
-    still reasons over many typed fields; externally, we deliberately collapse
-    them into a smaller number of denser research-note sections so the public
-    memo reads like an integrated buy-side write-up rather than a checklist.
+    This final definition intentionally uses ASCII labels for internally joined
+    optional details so report rendering remains stable across Windows console
+    encodings and saved markdown files.
     """
+
     def _join(*items: Optional[str]) -> str:
         return "\n\n".join(item for item in items if item)
 
     thesis = _join(
         decision.investment_thesis,
+        f"Business and industry verdict: {decision.business_driver_map}"
+        if decision.business_driver_map
+        else None,
+        f"Industry-native variables: {decision.industry_driver_verdict}"
+        if decision.industry_driver_verdict
+        else None,
+        f"Policy and demand backdrop: {decision.policy_direction_verdict}"
+        if decision.policy_direction_verdict
+        else None,
+        f"Valuation and expectation gap: {decision.expectation_gap}"
+        if decision.expectation_gap
+        else None,
+        f"Market-implied expectation: {decision.market_implied_expectation}"
+        if decision.market_implied_expectation
+        else None,
+        f"Earnings bridge: {decision.earnings_model_bridge}"
+        if decision.earnings_model_bridge
+        else None,
         (
-            f"业务与行业判断：{decision.business_driver_map}"
-            if decision.business_driver_map
-            else None
-        ),
-        (
-            f"行业原生变量：{decision.industry_driver_verdict}"
-            if decision.industry_driver_verdict
-            else None
-        ),
-        (
-            f"政策与需求底色：{decision.policy_direction_verdict}"
-            if decision.policy_direction_verdict
-            else None
-        ),
-        (
-            f"估值与预期差：{decision.expectation_gap}"
-            if decision.expectation_gap
-            else None
-        ),
-        (
-            f"市场隐含预期：{decision.market_implied_expectation}"
-            if decision.market_implied_expectation
-            else None
-        ),
-        (
-            f"盈利桥梁：{decision.earnings_model_bridge}"
-            if decision.earnings_model_bridge
-            else None
-        ),
-        (
-            "投资判断三分法："
-            + "；".join(
+            "Investment verdict split: "
+            + "; ".join(
                 part
                 for part in [
-                    (
-                        f"公司质量={decision.company_quality_verdict}"
-                        if decision.company_quality_verdict
-                        else None
-                    ),
-                    (
-                        f"当前赔率={decision.current_odds_verdict}"
-                        if decision.current_odds_verdict
-                        else None
-                    ),
-                    (
-                        f"相对配置={decision.relative_allocation_verdict}"
-                        if decision.relative_allocation_verdict
-                        else None
-                    ),
+                    f"company quality={decision.company_quality_verdict}"
+                    if decision.company_quality_verdict
+                    else None,
+                    f"current odds={decision.current_odds_verdict}"
+                    if decision.current_odds_verdict
+                    else None,
+                    f"relative allocation={decision.relative_allocation_verdict}"
+                    if decision.relative_allocation_verdict
+                    else None,
                 ]
                 if part
             )
@@ -897,158 +921,111 @@ def render_pm_decision(decision: PortfolioDecision) -> str:
             )
             else None
         ),
-        (
-            f"管理层与资本配置：{decision.management_capital_allocation_verdict}"
-            if decision.management_capital_allocation_verdict
-            else None
-        ),
-        (
-            f"股东与筹码：{decision.shareholder_structure_verdict}"
-            if decision.shareholder_structure_verdict
-            else None
-        ),
-        (
-            f"投资者沟通：{decision.investor_communication_verdict}"
-            if decision.investor_communication_verdict
-            else None
-        ),
-        (
-            f"同业比较：{decision.peer_selection_verdict}"
-            if decision.peer_selection_verdict
-            else None
-        ),
-        (
-            f"产业链位置：{decision.supply_chain_position_verdict}"
-            if decision.supply_chain_position_verdict
-            else None
-        ),
+        f"Management and capital allocation: {decision.management_capital_allocation_verdict}"
+        if decision.management_capital_allocation_verdict
+        else None,
+        f"Shareholder and float structure: {decision.shareholder_structure_verdict}"
+        if decision.shareholder_structure_verdict
+        else None,
+        f"Investor communication: {decision.investor_communication_verdict}"
+        if decision.investor_communication_verdict
+        else None,
+        f"Peer comparison: {decision.peer_selection_verdict}"
+        if decision.peer_selection_verdict
+        else None,
+        f"Supply-chain position: {decision.supply_chain_position_verdict}"
+        if decision.supply_chain_position_verdict
+        else None,
     )
 
     debate_and_decision_logic = _join(
         decision.bull_bear_debate,
         decision.debate_verdict,
-        (
-            f"核心押注：{decision.core_bet}"
-            if decision.core_bet
-            else None
-        ),
-        (
-            f"景气判断：{decision.boom_bust_expectation}"
-            if decision.boom_bust_expectation
-            else None
-        ),
+        f"Core bet: {decision.core_bet}" if decision.core_bet else None,
+        f"Cycle/prosperity view: {decision.boom_bust_expectation}"
+        if decision.boom_bust_expectation
+        else None,
         decision.investment_logic_chain,
-        (
-            f"概率与赔率：{decision.probability_payoff}"
-            if decision.probability_payoff
-            else None
-        ),
-        (
-            f"周期与估值：{decision.cycle_valuation_assessment}"
-            if decision.cycle_valuation_assessment
-            else None
-        ),
+        f"Probability and payoff: {decision.probability_payoff}"
+        if decision.probability_payoff
+        else None,
+        f"Cycle and valuation: {decision.cycle_valuation_assessment}"
+        if decision.cycle_valuation_assessment
+        else None,
     )
 
     catalysts_optionality_and_falsification = _join(
-        (
-            f"已验证催化剂：{decision.material_catalysts}"
-            if decision.material_catalysts
-            else None
-        ),
-        (
-            f"主题估值桥梁：{decision.thematic_valuation_bridge}"
-            if decision.thematic_valuation_bridge
-            else None
-        ),
-        (
-            f"战略期权：{decision.strategic_optionality_verdict}"
-            if decision.strategic_optionality_verdict
-            else None
-        ),
-        (
-            f"催化剂路径：{decision.catalyst_path}"
-            if decision.catalyst_path
-            else None
-        ),
-        (
-            f"已否决主题：{decision.rejected_themes}"
-            if decision.rejected_themes
-            else None
-        ),
-        (
-            f"未验证关键假设：{decision.unverified_key_assumptions}"
-            if decision.unverified_key_assumptions
-            else None
-        ),
-        (
-            f"研究缺口：{decision.evidence_limited_research_gaps}"
-            if decision.evidence_limited_research_gaps
-            else None
-        ),
-        (
-            f"供需替代视角：{decision.supply_demand_fallback_view}"
-            if decision.supply_demand_fallback_view
-            else None
-        ),
+        f"Verified catalysts: {decision.material_catalysts}"
+        if decision.material_catalysts
+        else None,
+        f"Thematic valuation bridge: {decision.thematic_valuation_bridge}"
+        if decision.thematic_valuation_bridge
+        else None,
+        f"Strategic optionality: {decision.strategic_optionality_verdict}"
+        if decision.strategic_optionality_verdict
+        else None,
+        f"Catalyst path: {decision.catalyst_path}" if decision.catalyst_path else None,
+        f"Rejected themes: {decision.rejected_themes}" if decision.rejected_themes else None,
+        f"Unverified key assumptions: {decision.unverified_key_assumptions}"
+        if decision.unverified_key_assumptions
+        else None,
+        f"Research gaps: {decision.evidence_limited_research_gaps}"
+        if decision.evidence_limited_research_gaps
+        else None,
+        f"Supply-demand fallback view: {decision.supply_demand_fallback_view}"
+        if decision.supply_demand_fallback_view
+        else None,
+        f"Data coverage audit: {decision.data_coverage_audit}"
+        if decision.data_coverage_audit
+        else None,
     )
 
     execution_posture = _join(
         decision.executive_summary,
-        (
-            f"仓位与把握度：{decision.conviction_and_position}"
-            if decision.conviction_and_position
-            else None
-        ),
-        (
-            f"市场环境校准：{decision.market_regime_adjustment}"
-            if decision.market_regime_adjustment
-            else None
-        ),
-        (
-            f"止盈/减仓区间：{decision.profit_taking_range}"
-            if decision.profit_taking_range
-            else None
-        ),
-        (
-            f"观察/再入场区间：{decision.entry_watch_range}"
-            if decision.entry_watch_range
-            else None
-        ),
-        (
-            f"目标价：{decision.price_target}"
-            if decision.price_target is not None
-            else None
-        ),
-        (
-            f"持有期：{decision.time_horizon}"
-            if decision.time_horizon
-            else None
-        ),
+        f"Position and conviction: {decision.conviction_and_position}"
+        if decision.conviction_and_position
+        else None,
+        f"Market regime adjustment: {decision.market_regime_adjustment}"
+        if decision.market_regime_adjustment
+        else None,
+        f"Profit-taking / trimming range: {decision.profit_taking_range}"
+        if decision.profit_taking_range
+        else None,
+        f"Watch / re-entry range: {decision.entry_watch_range}"
+        if decision.entry_watch_range
+        else None,
+        f"Target price: {decision.price_target}" if decision.price_target is not None else None,
+        f"Time horizon: {decision.time_horizon}" if decision.time_horizon else None,
     )
 
     continuity = _join(
-        (
-            f"上一期评级：{decision.prior_rating}"
-            if decision.prior_rating
-            else None
-        ),
-        (
-            f"新增证据：{decision.new_evidence_since_prior}"
-            if decision.new_evidence_since_prior
-            else None
-        ),
-        (
-            f"未变事实：{decision.unchanged_core_facts}"
-            if decision.unchanged_core_facts
-            else None
-        ),
-        (
-            f"评级变化审计：{decision.rating_change_audit}"
-            if decision.rating_change_audit
-            else None
-        ),
+        f"Prior rating: {decision.prior_rating}" if decision.prior_rating else None,
+        f"New evidence since prior: {decision.new_evidence_since_prior}"
+        if decision.new_evidence_since_prior
+        else None,
+        f"Unchanged core facts: {decision.unchanged_core_facts}"
+        if decision.unchanged_core_facts
+        else None,
+        f"Rating change audit: {decision.rating_change_audit}"
+        if decision.rating_change_audit
+        else None,
     )
+
+    take_away_parts = []
+    if decision.reader_takeaway_entry_band:
+        take_away_parts.extend(
+            [
+                f"**Reader Take-away / Build Price Band**: {decision.reader_takeaway_entry_band}",
+                "",
+            ]
+        )
+    if decision.reader_action_guidance:
+        take_away_parts.extend(
+            [
+                f"**Reader Action Guidance / Holders vs Builders**: {decision.reader_action_guidance}",
+                "",
+            ]
+        )
 
     parts = [
         f"**Company Snapshot**: {decision.company_snapshot}",
@@ -1057,19 +1034,26 @@ def render_pm_decision(decision: PortfolioDecision) -> str:
         "",
         f"**One-Line Thesis**: {decision.one_line_thesis}",
         "",
+        *take_away_parts,
         f"**Investment Thesis**: {thesis}",
         "",
         f"**Debate & Decision Logic**: {debate_and_decision_logic}",
         "",
-        f"**Verification & Falsification**: {decision.verification_and_falsification}",
-        "",
-        f"**Executive Summary**: {execution_posture}",
     ]
     if catalysts_optionality_and_falsification:
-        parts[9:9] = [
-            f"**Catalysts, Optionality & Falsification**: {catalysts_optionality_and_falsification}",
+        parts.extend(
+            [
+                f"**Catalysts, Optionality & Falsification**: {catalysts_optionality_and_falsification}",
+                "",
+            ]
+        )
+    parts.extend(
+        [
+            f"**Verification & Falsification**: {decision.verification_and_falsification}",
             "",
+            f"**Executive Summary**: {execution_posture}",
         ]
+    )
     if continuity:
         parts.extend(["", f"**Decision Continuity**: {continuity}"])
     if decision.falsification_signals:

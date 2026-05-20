@@ -711,6 +711,13 @@ def save_report_to_disk(final_state, ticker: str, save_path: Path):
     sections = []
 
     # 0. Precomputed context
+    if final_state.get("data_coverage_context"):
+        context_dir = save_path / "0_context"
+        context_dir.mkdir(exist_ok=True)
+        (context_dir / "data_coverage.md").write_text(
+            final_state["data_coverage_context"],
+            encoding="utf-8",
+        )
     if final_state.get("thematic_catalyst_context"):
         context_dir = save_path / "0_context"
         context_dir.mkdir(exist_ok=True)
@@ -1207,8 +1214,26 @@ def run_analysis(checkpoint: bool = False):
         )
         update_display(layout, stats_handler=stats_handler, start_time=start_time)
         graph._resolve_pending_entries(selections["ticker"])
+
+        def show_context_progress(event, _key, title, elapsed, chars):
+            if event == "start":
+                message_buffer.add_message("System", f"A-share context started: {title}")
+            elif event == "done":
+                message_buffer.add_message(
+                    "System",
+                    f"A-share context ready: {title} ({elapsed:.1f}s, {chars} chars)",
+                )
+            elif event == "failed":
+                message_buffer.add_message(
+                    "System",
+                    f"A-share context unavailable: {title} ({elapsed:.1f}s)",
+                )
+            update_display(layout, stats_handler=stats_handler, start_time=start_time)
+
         init_agent_state = graph.create_initial_state_with_context(
-            selections["ticker"], selections["analysis_date"]
+            selections["ticker"],
+            selections["analysis_date"],
+            progress_callback=show_context_progress,
         )
         message_buffer.add_message("System", "A-share context preparation completed")
         update_display(layout, stats_handler=stats_handler, start_time=start_time)

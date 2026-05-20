@@ -26,15 +26,17 @@ def create_news_analyst(llm):
         if is_a_share:
             # For A-share tickers, get_news routes to the same Tushare event
             # path as get_company_events. Exposing both makes the model often
-            # duplicate the slow announcements/news scan.
-            tools = [get_company_events, get_global_news]
+            # duplicate the slow announcements/news scan. Global news is also
+            # often rate-limited and lower signal than company/policy events
+            # for single-name A-share reports.
+            tools = [get_company_events]
         if not thematic_catalyst_context:
             tools.append(get_thematic_catalyst_context)
 
         system_message = (
             "You are an event and policy researcher. Write a focused catalyst memo, not a broad news digest. "
-            "Use get_news(query, start_date, end_date) for targeted company/industry searches, get_global_news(curr_date, look_back_days, limit) only when macro news is directly relevant, get_company_events for A-share announcements, company/industry news, and policy signals, and get_thematic_catalyst_context to validate news-discovered themes against filing text while also checking whether filing-origin themes have recent catalysts. "
-            "For A-share tickers, prefer `get_company_events`; do not duplicate it with `get_news` because both use the same Tushare event path. "
+            "Use get_news(query, start_date, end_date) for targeted company/industry searches, get_global_news(curr_date, look_back_days, limit) only when macro news is directly relevant and the tool is available, get_company_events for A-share announcements, company/industry news, and policy signals, and get_thematic_catalyst_context to validate news-discovered themes against filing text while also checking whether filing-origin themes have recent catalysts. "
+            "For A-share tickers, use `get_company_events`; do not duplicate it with `get_news` because both use the same Tushare event path, and rely on the policy-planning context rather than global-news scraping for broad macro policy. "
             "If precomputed filing/news thematic cross-check is provided below, use it directly instead of calling `get_thematic_catalyst_context` again. Otherwise, call `get_thematic_catalyst_context` once before finalizing the material-catalyst section. "
             "Separate company-specific events, industry events, and macro policy events. Cite dates, titles, and sources where available. Explain whether each event strengthens the Core Bet, weakens it, or is background noise. If an event source is unavailable because of Tushare permissions, state that limitation instead of inventing news."
             + get_evidence_instruction()
