@@ -38,6 +38,33 @@ _FINANCIAL_REPORT_TEXT_CACHE: dict[
 _FINANCIAL_REPORT_TITLE_RE = re.compile(
     r"(年度报告|半年度报告|季度报告|一季度报告|三季度报告|年报|半年报|季报|中期报告)(?!摘要)"
 )
+_FINANCIAL_REPORT_TITLE_RE = re.compile(
+    "|".join(
+        [
+            r"\u5e74\u5ea6\u62a5\u544a",
+            r"\u5e74\u62a5",
+            r"\u534a\u5e74\u5ea6\u62a5\u544a",
+            r"\u534a\u5e74\u62a5",
+            r"\u4e2d\u671f\u62a5\u544a",
+            r"\u4e00\u5b63\u5ea6\u62a5\u544a",
+            r"\u7b2c\u4e00\u5b63\u5ea6\u62a5\u544a",
+            r"\u4e09\u5b63\u5ea6\u62a5\u544a",
+            r"\u7b2c\u4e09\u5b63\u5ea6\u62a5\u544a",
+            r"\u5b63\u5ea6\u62a5\u544a",
+            r"\u5b63\u62a5",
+            r"éªžæ‘å®³éŽ¶ãƒ¥æ†¡",
+            r"é—å©‚å‹¾æ´ï¸½å§¤é›å¦¡ç€›ï½…å®³éŽ¶ãƒ¥æ†¡",
+            r"æ¶“â‚¬ç€›ï½…å®³éŽ¶ãƒ¥æ†¡",
+            r"æ¶“å¤Šî„œæ´ï¸½å§¤é›å¦¡éªžå­˜å§¤",
+            r"é—å©‚å‹¾éŽ¶îš‚ç€›ï½†å§¤",
+            r"æ¶“î…Ÿæ¹¡éŽ¶ãƒ¥æ†¡",
+        ]
+    )
+)
+_FINANCIAL_REPORT_EXCLUDE_RE = re.compile(
+    r"(?:\u6458\u8981|\u53d6\u6d88|\u66f4\u6b63|\u4fee\u8ba2|\u82f1\u6587|"
+    r"\u5ba1\u8ba1\u62a5\u544a|\u5185\u90e8\u63a7\u5236|\u793e\u4f1a\u8d23\u4efb|ESG)"
+)
 _COMPANY_NAME_RE = re.compile(
     r"[\u4e00-\u9fffA-Za-z0-9（）()·]{2,40}"
     r"(?:有限责任公司|股份有限公司|有限公司|有限合伙|合伙企业)"
@@ -224,7 +251,9 @@ def _financial_report_announcements(
     if "title" not in result.columns:
         return pd.DataFrame()
     titles = result["title"].fillna("").astype(str)
-    reports = result[titles.str.contains(_FINANCIAL_REPORT_TITLE_RE, regex=True)].copy()
+    is_report = titles.str.contains(_FINANCIAL_REPORT_TITLE_RE, regex=True)
+    is_excluded = titles.str.contains(_FINANCIAL_REPORT_EXCLUDE_RE, regex=True)
+    reports = result[is_report & ~is_excluded].copy()
     return reports.sort_values("ann_date", ascending=False).head(4)
 
 
@@ -1044,6 +1073,28 @@ def _build_concept_membership_rows(
     return rows
 
 
+def _interaction_candidate_label(row: pd.Series) -> str:
+    text = f"{row.get('question') or ''} {row.get('answer') or ''}"
+    theme = str(row.get("theme") or "official-interaction")
+    if "\u7b97\u529b" in text and "\u79df\u8d41" in text:
+        return "\u7b97\u529b\u79df\u8d41/\u667a\u4e91\u8ba1\u7b97"
+    if "\u667a\u4e91\u8ba1\u7b97" in text:
+        return "\u667a\u4e91\u8ba1\u7b97"
+    if "\u7b97\u529b" in text or "\u6570\u636e\u4e2d\u5fc3" in text:
+        return "\u7b97\u529b/\u6570\u636e\u4e2d\u5fc3"
+    if "\u7f51\u7edc\u5de5\u7a0b" in text:
+        return "\u7f51\u7edc\u5de5\u7a0b\u5efa\u8bbe"
+    return theme
+
+
+def _interaction_evidence(row: pd.Series) -> str:
+    question = str(row.get("question") or "").strip()
+    answer = str(row.get("answer") or "").strip()
+    if question and answer:
+        return _compact_text(f"Q: {question} / A: {answer}", 220)
+    return _compact_text(answer or question, 220)
+
+
 def _build_interaction_option_rows(
     interaction_records: pd.DataFrame | TushareDataError,
 ) -> list[dict[str, str]]:
@@ -1059,16 +1110,25 @@ def _build_interaction_option_rows(
     for _, row in interaction_records.iterrows():
         answer_class = str(row.get("answer_class") or "").strip()
         answer = str(row.get("answer") or "").strip()
-        if answer_class in {"", "unanswered", "non-committal", "unavailable"} or not answer:
+        theme = str(row.get("theme") or "unclassified")
+        if answer_class in {"", "unanswered", "unavailable"} or not answer:
             continue
+        if answer_class == "non-committal" and theme == "unclassified":
+            continue
+        if answer_class == "non-committal":
+            catalyst_tier = "tier-3 investor concern / unverified narrative"
+            valuation_weight = "no valuation credit; diligence red flag until filings clarify economics"
+        else:
+            catalyst_tier = "tier-3 narrative option"
+            valuation_weight = "small imagination premium only"
         rows.append(
             {
-                "candidate": str(row.get("theme") or "official-interaction"),
+                "candidate": _interaction_candidate_label(row),
                 "kind": "investor-interaction",
-                "catalyst_tier": "tier-3 narrative option",
-                "valuation_weight": "small imagination premium only",
+                "catalyst_tier": catalyst_tier,
+                "valuation_weight": valuation_weight,
                 "source": str(row.get("source_type") or "official interaction"),
-                "evidence": _compact_text(answer, 120),
+                "evidence": _interaction_evidence(row),
                 "story_read": str(row.get("story_read") or ""),
                 "proof_needed": str(row.get("proof_needed") or ""),
                 "credibility": str(row.get("credibility") or ""),

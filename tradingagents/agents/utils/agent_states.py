@@ -68,6 +68,7 @@ class AgentState(MessagesState):
     shareholder_structure_context: Annotated[str, "Precomputed shareholder/chip context"]
     investor_interaction_context: Annotated[str, "Precomputed official investor-interaction context"]
     policy_planning_context: Annotated[str, "Precomputed national/industry policy-planning context"]
+    web_fact_check_context: Annotated[str, "Precomputed web fact-check context for high-frequency facts"]
     data_coverage_context: Annotated[str, "Audit of which precomputed context modules loaded successfully and which failed or are partial"]
 
     # researcher team discussion step
@@ -87,3 +88,4 @@ class AgentState(MessagesState):
     thematic_catalyst_context: Annotated[str, "Precomputed filing/news thematic cross-check for A-share names"]
     commodity_context: Annotated[str, "Precomputed commodity/product-price context for cyclical/resource A-share names"]
     filing_intelligence_context: Annotated[str, "Precomputed non-statement operating evidence mined from A-share financial reports"]
+    web_fact_check_context: Annotated[str, "Precomputed web fact-check context for high-frequency facts"]

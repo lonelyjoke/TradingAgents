@@ -94,10 +94,10 @@ def get_market_expectation_context(ticker: str, curr_date: str, years: int = 5) 
 
     basic = _fetch_stock_basic(symbol)
     daily_basic = _fetch_daily_basic_latest(symbol, curr_date)
-    income = _fetch_income_statement_data(symbol, curr_date, freq="quarterly", limit=8)
+    income = _fetch_income_statement_data(symbol, curr_date, freq="quarterly", limit=20)
     latest_any_row, latest_annual_row = _latest_rows(income)
-    latest_any = _snapshot_from_income_row(latest_any_row)
-    latest_annual = _snapshot_from_income_row(latest_annual_row)
+    latest_any = _snapshot_from_income_row(latest_any_row, income)
+    latest_annual = _snapshot_from_income_row(latest_annual_row, income)
     implied = _implied_snapshot(daily_basic)
     history = _valuation_history(symbol, curr_date, years=years)
 
@@ -159,10 +159,20 @@ def get_market_expectation_context(ticker: str, curr_date: str, years: int = 5) 
     if latest_any is not None:
         comparison_rows.append(
             {
-                "benchmark": f"latest reported annualized parent profit ({latest_any.period})",
+                "benchmark": f"latest reported simple-run-rate parent profit ({latest_any.period})",
                 "value": latest_any.annualized_net_profit_parent,
                 "vs_implied_ttm_earnings": _safe_div(
                     latest_any.annualized_net_profit_parent,
+                    implied.implied_ttm_earnings_cny,
+                ),
+            }
+        )
+        comparison_rows.append(
+            {
+                "benchmark": f"latest reported seasonality-adjusted parent profit ({latest_any.period})",
+                "value": latest_any.seasonality_adjusted_net_profit_parent,
+                "vs_implied_ttm_earnings": _safe_div(
+                    latest_any.seasonality_adjusted_net_profit_parent,
                     implied.implied_ttm_earnings_cny,
                 ),
             }
@@ -183,7 +193,8 @@ def get_market_expectation_context(ticker: str, curr_date: str, years: int = 5) 
         "",
         "## Analyst Instructions",
         "- Do not call a stock cheap or expensive from PE/PB alone. State what earnings power, sales scale, or durability the current quote appears to require.",
-        "- Compare the implied TTM earnings with latest annual and latest annualized reported earnings before claiming an expectation gap.",
+        "- Compare the implied TTM earnings with latest annual, simple-run-rate interim earnings, and seasonality-adjusted interim earnings before claiming an expectation gap.",
+        "- Do not forecast a full year by mechanically multiplying Q1 by four when historical seasonal shares are available; treat simple run-rate as downside/upside stress only.",
         "- If current valuation already assumes recovery, say so; if it still prices in deterioration despite improving drivers, say so.",
         "- Translate every rating into a view on mispricing: which assumption in the market quote is too optimistic or too pessimistic?",
     ]

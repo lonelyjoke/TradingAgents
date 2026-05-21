@@ -74,6 +74,9 @@ from .investor_interaction_research import (
 from .policy_research import (
     get_policy_planning_context as get_tushare_policy_planning_context,
 )
+from .web_fact_research import (
+    get_web_fact_check_context as get_tushare_web_fact_check_context,
+)
 
 # Configuration and routing logic
 from .config import get_config
@@ -115,6 +118,7 @@ TOOLS_CATEGORIES = {
             "get_shareholder_structure_context",
             "get_investor_interaction_context",
             "get_policy_planning_context",
+            "get_web_fact_check_context",
         ]
     },
     "news_data": {
@@ -217,6 +221,9 @@ VENDOR_METHODS = {
     "get_policy_planning_context": {
         "tushare": get_tushare_policy_planning_context,
     },
+    "get_web_fact_check_context": {
+        "tushare": get_tushare_web_fact_check_context,
+    },
     # news_data
     "get_news": {
         "alpha_vantage": get_alpha_vantage_news,
@@ -297,6 +304,7 @@ def route_to_vendor(method: str, *args, **kwargs):
         "get_shareholder_structure_context",
         "get_investor_interaction_context",
         "get_policy_planning_context",
+        "get_web_fact_check_context",
         "get_news",
         "get_company_events",
     } and args:

@@ -19,6 +19,7 @@ from tradingagents.agents.utils.agent_utils import (
     get_shareholder_structure_instruction,
     get_three_layer_conclusion_instruction,
     get_thematic_valuation_instruction,
+    get_web_fact_check_instruction,
 )
 from tradingagents.dataflows.prompt_compaction import (
     compact_analyst_report,
@@ -52,6 +53,7 @@ def create_bull_researcher(llm):
         shareholder_structure_context = prompt_contexts["shareholder_structure_context"]
         investor_interaction_context = prompt_contexts["investor_interaction_context"]
         policy_planning_context = prompt_contexts["policy_planning_context"]
+        web_fact_check_context = prompt_contexts["web_fact_check_context"]
         prompt_history = compact_debate_history(history, profile="research")
         prompt_current_response = compact_for_prompt(
             current_response,
@@ -89,6 +91,7 @@ Key points to focus on:
 - Relative Allocation Discipline: Explicitly answer why this stock deserves capital versus stronger same-industry peers or a better-positioned segment elsewhere in the chain; do not stop at saying the company itself is improving.
 - Market-Implied Expectation Discipline: State what the current quote already appears to assume, then identify the precise assumption the market is still too pessimistic about.
 - Historical Price/EPS/PE Discipline: Use the decomposition context to argue whether the upside is supported by EPS recovery/growth, multiple expansion, or a double-engine setup; do not present pure multiple expansion as hard fundamental proof.
+- Web Fact-Check Discipline: If web fact-check context is available, use it to verify simple high-frequency facts such as wholesale prices, channel inventory, terminal discounts, and product price changes. Do not make a single web result into hard proof.
 - Bear Counterpoints: Critically analyze the bear argument with specific data and sound reasoning, addressing concerns thoroughly and showing why the bull perspective holds stronger merit.
 - Engagement: Present your argument in a conversational style, engaging directly with the bear analyst's points and debating effectively rather than just listing data.
 - Anti-repetition discipline: {round_instruction}
@@ -110,6 +113,7 @@ Management/capital-allocation context: {management_capital_allocation_context}
 Shareholder-structure context: {shareholder_structure_context}
 Official investor-interaction context: {investor_interaction_context}
 Official policy-planning context: {policy_planning_context}
+Web fact-check context: {web_fact_check_context}
 Conversation history of the debate: {prompt_history}
 Last bear argument: {prompt_current_response}
 Use this information to deliver a compelling bull argument, refute the bear's concerns, and engage in a dynamic debate that demonstrates the strengths of the bull position.
@@ -130,6 +134,7 @@ Use this information to deliver a compelling bull argument, refute the bear's co
 {get_three_layer_conclusion_instruction()}
 {get_management_capital_allocation_instruction()}
 {get_shareholder_structure_instruction()}
+{get_web_fact_check_instruction()}
 {get_focused_report_instruction()}
 """
 

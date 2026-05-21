@@ -447,7 +447,7 @@ def update_display(layout, spinner_text=None, stats_handler=None, start_time=Non
     all_messages.sort(key=lambda x: x[0], reverse=True)
 
     # Calculate how many messages we can show based on available space
-    max_messages = 12
+    max_messages = 16
 
     # Get the first N messages (newest ones)
     recent_messages = all_messages[:max_messages]
@@ -802,6 +802,13 @@ def save_report_to_disk(final_state, ticker: str, save_path: Path):
             final_state["policy_planning_context"],
             encoding="utf-8",
         )
+    if final_state.get("web_fact_check_context"):
+        context_dir = save_path / "0_context"
+        context_dir.mkdir(exist_ok=True)
+        (context_dir / "web_fact_check.md").write_text(
+            final_state["web_fact_check_context"],
+            encoding="utf-8",
+        )
 
     # 1. Analysts
     analysts_dir = save_path / "1_analysts"
@@ -1081,7 +1088,7 @@ def classify_message_type(message) -> tuple[str, str | None]:
     return ("System", content)
 
 
-def format_tool_args(args, max_length=80) -> str:
+def format_tool_args(args, max_length=140) -> str:
     """Format tool arguments for terminal display."""
     result = str(args)
     if len(result) > max_length:
@@ -1210,7 +1217,7 @@ def run_analysis(checkpoint: bool = False):
         # the interactive flow silently loses precomputed context and memory continuity.
         message_buffer.add_message(
             "System",
-            "Preparing A-share context: filings, themes, peers, expectations, governance, and holders",
+            "Preparing A-share context: filings, themes, peers, expectations, governance, holders, and web fact checks",
         )
         update_display(layout, stats_handler=stats_handler, start_time=start_time)
         graph._resolve_pending_entries(selections["ticker"])

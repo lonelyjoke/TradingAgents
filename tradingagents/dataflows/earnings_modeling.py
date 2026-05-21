@@ -26,6 +26,9 @@ class EarningsSnapshot:
     net_profit_parent: float | None
     annualized_revenue: float | None
     annualized_net_profit_parent: float | None
+    seasonality_adjusted_revenue: float | None
+    seasonality_adjusted_net_profit_parent: float | None
+    seasonality_method: str
 
 
 def _period_label(end_date: str) -> str:
@@ -61,7 +64,68 @@ def _annualize_cumulative(value: float | None, end_date: str) -> float | None:
     return None if factor is None else value * factor
 
 
-def _snapshot_from_income_row(row: pd.Series | None) -> EarningsSnapshot | None:
+def _seasonality_share(
+    income: pd.DataFrame,
+    *,
+    end_date: str,
+    value_col: str,
+) -> float | None:
+    """Estimate the historical cumulative-period share of full-year results."""
+    if income is None or income.empty:
+        return None
+    if value_col not in income.columns:
+        return None
+    text = str(end_date or "")
+    if len(text) < 8 or text.endswith("1231"):
+        return 1.0 if text.endswith("1231") else None
+    period_suffix = text[-4:]
+    current_year = text[:4]
+    data = income.copy()
+    data["end_date"] = data["end_date"].astype(str)
+    data[value_col] = pd.to_numeric(data.get(value_col), errors="coerce")
+    data["year"] = data["end_date"].str[:4]
+    shares: list[float] = []
+    for year, group in data.groupby("year"):
+        if year >= current_year:
+            continue
+        period_rows = group[group["end_date"].str.endswith(period_suffix)]
+        annual_rows = group[group["end_date"].str.endswith("1231")]
+        if period_rows.empty or annual_rows.empty:
+            continue
+        period_v = period_rows.sort_values("end_date").iloc[-1][value_col]
+        annual_v = annual_rows.sort_values("end_date").iloc[-1][value_col]
+        if pd.isna(period_v) or pd.isna(annual_v) or annual_v == 0:
+            continue
+        share = float(period_v) / float(annual_v)
+        if 0 < share < 1.5:
+            shares.append(share)
+    if not shares:
+        return None
+    return float(pd.Series(shares).median())
+
+
+def _seasonality_adjusted_value(
+    value: float | None,
+    *,
+    end_date: str,
+    income: pd.DataFrame | None,
+    value_col: str,
+) -> tuple[float | None, str]:
+    if value is None:
+        return None, "missing reported value"
+    if str(end_date or "").endswith("1231"):
+        return value, "FY actual"
+    share = _seasonality_share(income if income is not None else pd.DataFrame(), end_date=end_date, value_col=value_col)
+    if share:
+        return value / share, f"historical median {str(end_date)[-4:]} share {share:.1%}"
+    fallback = _annualize_cumulative(value, end_date)
+    return fallback, "simple run-rate fallback; no historical seasonal share available"
+
+
+def _snapshot_from_income_row(
+    row: pd.Series | None,
+    income: pd.DataFrame | None = None,
+) -> EarningsSnapshot | None:
     if row is None:
         return None
     end_date = str(row.get("end_date") or "")
@@ -75,6 +139,19 @@ def _snapshot_from_income_row(row: pd.Series | None) -> EarningsSnapshot | None:
     ).iloc[0]
     revenue_v = None if pd.isna(revenue) else float(revenue)
     profit_v = None if pd.isna(net_profit_parent) else float(net_profit_parent)
+    adjusted_revenue, revenue_method = _seasonality_adjusted_value(
+        revenue_v,
+        end_date=end_date,
+        income=income,
+        value_col="revenue",
+    )
+    adjusted_profit, profit_method = _seasonality_adjusted_value(
+        profit_v,
+        end_date=end_date,
+        income=income,
+        value_col="n_income_attr_p",
+    )
+    method = profit_method if profit_v is not None else revenue_method
     return EarningsSnapshot(
         end_date=end_date,
         period=_period_label(end_date),
@@ -82,6 +159,9 @@ def _snapshot_from_income_row(row: pd.Series | None) -> EarningsSnapshot | None:
         net_profit_parent=profit_v,
         annualized_revenue=_annualize_cumulative(revenue_v, end_date),
         annualized_net_profit_parent=_annualize_cumulative(profit_v, end_date),
+        seasonality_adjusted_revenue=adjusted_revenue,
+        seasonality_adjusted_net_profit_parent=adjusted_profit,
+        seasonality_method=method,
     )
 
 
@@ -176,14 +256,14 @@ def get_earnings_model_context(ticker: str, curr_date: str) -> str:
         )
 
     basic = _fetch_stock_basic(symbol)
-    income = _fetch_income_statement_data(symbol, curr_date, freq="quarterly", limit=8)
+    income = _fetch_income_statement_data(symbol, curr_date, freq="quarterly", limit=20)
     balance = _fetch_balance_sheet_data(symbol, curr_date, freq="quarterly", limit=8)
     cashflow = _fetch_cashflow_data(symbol, curr_date, freq="quarterly", limit=8)
     indicators = _fetch_fina_indicator(symbol, curr_date)
     derived = _derive_financial_metrics(income, balance, cashflow, indicators)
     latest_any_row, latest_annual_row = _latest_rows(income)
-    latest_any = _snapshot_from_income_row(latest_any_row)
-    latest_annual = _snapshot_from_income_row(latest_annual_row)
+    latest_any = _snapshot_from_income_row(latest_any_row, income)
+    latest_annual = _snapshot_from_income_row(latest_annual_row, income)
 
     snapshot_rows = []
     for label, snap in (("latest reported", latest_any), ("latest annual", latest_annual)):
@@ -198,6 +278,9 @@ def get_earnings_model_context(ticker: str, curr_date: str) -> str:
                 "net_profit_parent": snap.net_profit_parent,
                 "annualized_revenue": snap.annualized_revenue,
                 "annualized_net_profit_parent": snap.annualized_net_profit_parent,
+                "seasonality_adjusted_revenue": snap.seasonality_adjusted_revenue,
+                "seasonality_adjusted_net_profit_parent": snap.seasonality_adjusted_net_profit_parent,
+                "seasonality_method": snap.seasonality_method,
             }
         )
 
@@ -215,6 +298,8 @@ def get_earnings_model_context(ticker: str, curr_date: str) -> str:
         "",
         "## Research Hygiene Notes",
         "- Working-capital stock ratios use annualized revenue for interim periods so Q1/H1/Q3 snapshots remain comparable with FY.",
+        "- Treat simple annualized interim earnings as a run-rate stress test, not a forward forecast.",
+        "- Prefer the seasonality-adjusted estimate when judging full-year earnings power, and state the historical share used.",
         "- Treat one-quarter margin inflections as provisional until they recur or are explained by filing evidence.",
         "",
         "## Scenario-Building Instructions",

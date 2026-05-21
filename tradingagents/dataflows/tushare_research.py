@@ -580,6 +580,25 @@ def _score_peers(data: pd.DataFrame) -> pd.DataFrame:
     return scored.sort_values("v4_score", ascending=False)
 
 
+def _fetch_stock_basic_universe(pro) -> pd.DataFrame:
+    fields = "ts_code,symbol,name,area,industry,market,exchange,list_date"
+    try:
+        universe = pro.stock_basic(list_status="L", fields=fields)
+    except Exception:
+        universe = pro.stock_basic(list_status="L")
+    if universe is None:
+        return pd.DataFrame()
+    missing = {"ts_code", "name", "industry"} - set(universe.columns)
+    if missing:
+        try:
+            fallback = pro.stock_basic(list_status="L")
+        except Exception:
+            fallback = pd.DataFrame()
+        if fallback is not None and not fallback.empty:
+            universe = fallback
+    return universe if universe is not None else pd.DataFrame()
+
+
 def get_peer_comparison(ticker: str, curr_date: str, peer_limit: int = 12) -> str:
     """Compare an A-share company with same-industry peers."""
     symbol = ticker.strip().upper()
@@ -603,10 +622,14 @@ def get_peer_comparison(ticker: str, curr_date: str, peer_limit: int = 12) -> st
     trade_date = str(latest.get("trade_date"))
 
     pro = _get_pro_client()
-    universe = pro.stock_basic(
-        list_status="L",
-        fields="ts_code,symbol,name,area,industry,market,exchange,list_date",
-    )
+    universe = _fetch_stock_basic_universe(pro)
+    required_cols = {"ts_code", "name", "industry"}
+    missing_cols = sorted(required_cols - set(universe.columns))
+    if universe.empty or missing_cols:
+        return (
+            f"Same-industry peer comparison unavailable for {symbol}: "
+            f"Tushare stock_basic universe missing required columns {missing_cols or 'all'}."
+        )
     peers = universe[universe["industry"].fillna("").astype(str) == industry].copy()
     if peers.empty:
         return f"No same-industry peers found for {symbol} in Tushare stock_basic."

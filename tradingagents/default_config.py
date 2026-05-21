@@ -54,6 +54,13 @@ DEFAULT_CONFIG = {
     # A-share precomputed contexts are independent IO-heavy calls. Fetch a few
     # in parallel so the CLI does not sit idle before the first analyst starts.
     "a_share_context_fetch_workers": 4,
+    # Optional web-search context for simple but thesis-critical high-frequency
+    # facts not covered well by Tushare or filings, such as baijiu wholesale
+    # prices, channel inventory, terminal discounts, and product price changes.
+    "web_fact_check_enabled": True,
+    "web_fact_check_timeout_sec": 6,
+    "web_fact_check_max_queries": 3,
+    "web_fact_check_max_results_per_query": 4,
     # Filing intelligence can become very slow on giant annual reports. This
     # caps the text scanned by rule-based extractors while keeping high-signal
     # keyword windows, opening slices, and ending slices.

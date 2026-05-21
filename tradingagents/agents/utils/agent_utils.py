@@ -17,6 +17,7 @@ from tradingagents.agents.utils.fundamental_data_tools import (
     get_income_statement,
     get_investor_interaction_context,
     get_policy_planning_context,
+    get_web_fact_check_context,
     get_market_sector_risk,
     get_market_expectation_context,
     get_market_timing_context,
@@ -100,6 +101,23 @@ def get_supply_demand_fallback_instruction() -> str:
         "prices. Do not say 'demand is improving' or 'supply is tight' unless you "
         "name the concrete channel, affected upstream/downstream link, and evidence "
         "strength."
+    )
+
+
+def get_web_fact_check_instruction() -> str:
+    """Return rules for using web-searched high-frequency fact checks."""
+    return (
+        " Web fact-check discipline: use web-searched facts only for small, "
+        "high-frequency variables that filings and Tushare do not cover well, "
+        "such as baijiu wholesale prices, channel inventory, terminal discounts, "
+        "product price changes, monthly sales clues, or local policy details. "
+        "Keep the evidence hierarchy explicit: official filings/announcements "
+        "> exchange Q&A > reputable news/search corroboration > market rumor. "
+        "A single web result can create a watch item or research gap, but it "
+        "cannot become a hard trading trigger unless multiple recent independent "
+        "sources or an official source support it. Always preserve source date, "
+        "source name, and whether the searched fact is verified, corroborated, "
+        "conflicting, or unverified."
     )
 
 
@@ -315,7 +333,9 @@ def get_earnings_model_instruction() -> str:
         "valuation. Use bull/base/bear scenarios only when each case changes a "
         "specific modeled assumption such as volume, price, mix, utilization, "
         "gross margin, working capital, or financing cost. A catalyst that cannot "
-        "be mapped to a modeled lever is not yet a valuation catalyst."
+        "be mapped to a modeled lever is not yet a valuation catalyst. Treat simple "
+        "Q1/H1/Q3 annualization as a run-rate diagnostic only; when seasonality-adjusted "
+        "earnings are available, use that estimate or explain why it is inappropriate."
     )
 
 
@@ -328,7 +348,9 @@ def get_market_expectation_instruction() -> str:
         "growth persistence. State explicitly whether the market appears to price "
         "recovery, stagnation, or deterioration, then identify the precise "
         "assumption where your view differs. Never call a stock cheap or expensive "
-        "from PE/PB alone."
+        "from PE/PB alone. When comparing the quote with interim earnings, distinguish "
+        "simple-run-rate earnings from seasonality-adjusted earnings; do not build a "
+        "full-year forecast by mechanically multiplying Q1 by four."
     )
 
 
@@ -361,7 +383,12 @@ def get_investor_interaction_instruction() -> str:
         "weakens management credibility, disclosure quality, or catalyst "
         "visibility. Repeated questioning with weak answers is itself evidence "
         "of unresolved uncertainty; substantive answers can improve confidence "
-        "but remain weaker than filings or announcements."
+        "but remain weaker than filings or announcements. If investors repeatedly "
+        "ask about a possible new business or asset bucket, such as compute "
+        "leasing, data-center, network-engineering, or large subsidiary asset "
+        "movements, explicitly discuss it as an unverified operating-asset clue "
+        "or diligence gap; do not silently drop it merely because management "
+        "gave a boilerplate answer."
     )
 
 
@@ -433,8 +460,8 @@ def get_filing_intelligence_instruction() -> str:
         "Use the filing context in eleven passes: (1) filing reading coverage audit, "
         "(2) paragraph reading pack, (3) industry reading pack, (4) statement table reading pack, "
         "(5) filing note reading pack, (6) financial relationship reading pack, "
-        "(7) filing textual signals, (8) business model map, (9) growth vector map, "
-        "(10) material filing findings, and (11) report-to-report bridge. "
+        "(7) filing textual signals, (8) business model map, (9) segment economics pack, "
+        "(10) growth vector map, (11) material filing findings, and (12) report-to-report bridge. "
         "If the coverage audit is partial, weak, or failed, state the confidence downgrade "
         "before making any filing-backed claim. "
         "The paragraph reading pack "
@@ -460,6 +487,10 @@ def get_filing_intelligence_instruction() -> str:
         "second growth curve, quality of growth, monetization gap, capital allocation, and tail "
         "risks. The final manager report should synthesize these as a company thesis rather than "
         "scatter them across many isolated bullet points. "
+        "For companies with rich product lines or geographies, the segment economics pack is mandatory: "
+        "use annual and half-year product/geography/channel revenue, cost, gross margin, and growth-rate "
+        "splits to explain company introduction, bull observations, bear observations, and valuation bridges. "
+        "If this segment pack is unavailable or header-only, name that as a research gap before discussing mix. "
         "Actively use filing-derived evidence on orders, backlog, customers, "
         "commercialization, prices, margins, capacity, capex, overseas expansion, "
         "R&D, receivables, inventory, cash collection, guarantees, litigation, "

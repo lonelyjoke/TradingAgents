@@ -154,6 +154,14 @@ class FilingTableSignal:
 
 
 @dataclass(frozen=True)
+class SegmentEconomicsFinding:
+    segment_type: str
+    report_type: str
+    evidence: str
+    analyst_use: str
+
+
+@dataclass(frozen=True)
 class FilingNoteFinding:
     note_type: str
     importance: str
@@ -1048,6 +1056,95 @@ _BUSINESS_MODEL_RULES: tuple[tuple[str, tuple[str, ...], str], ...] = (
         "Shows how today's cash is being converted into tomorrow's earnings power.",
     ),
 )
+
+_SEGMENT_SECTION_TERMS: tuple[str, ...] = (
+    "分产品",
+    "分行业",
+    "分地区",
+    "分业务",
+    "主营业务分产品",
+    "主营业务分地区",
+    "主营业务分行业",
+)
+
+_SEGMENT_VALUE_TERMS: tuple[str, ...] = (
+    "营业收入",
+    "营业成本",
+    "毛利率",
+    "收入占比",
+    "同比",
+    "境外",
+    "海外",
+    "直销",
+    "批发",
+    "经销",
+    "茅台酒",
+    "系列酒",
+    "汽车",
+    "电池",
+    "电子",
+)
+
+
+def _segment_type(line: str) -> str:
+    if "产品" in line or any(token in line for token in ("茅台酒", "系列酒", "汽车", "电池", "电子")):
+        return "product"
+    if "直销" in line or "批发" in line or "经销" in line:
+        return "channel"
+    if "地区" in line or "境外" in line or "海外" in line:
+        return "geography"
+    return "business"
+
+
+def _extract_segment_economics(
+    report_texts: Iterable[tuple[str, str]],
+    *,
+    max_rows: int = 12,
+) -> list[SegmentEconomicsFinding]:
+    """Extract product/geography/channel economics from annual and half-year reports."""
+    rows: list[tuple[int, SegmentEconomicsFinding]] = []
+    seen: set[str] = set()
+    for report_index, (title, text) in enumerate(report_texts):
+        report_type = _detect_report_type(title)
+        if report_type not in {"annual", "semiannual"}:
+            continue
+        lines = [line.strip() for line in str(text or "").splitlines() if line.strip()]
+        for idx, raw_line in enumerate(lines):
+            window = " ".join(lines[idx : idx + 4])
+            compacted = _compact_text(window, limit=360)
+            if (
+                not compacted
+                or compacted in seen
+                or _is_low_signal_line(compacted)
+                or not any(term in compacted for term in _SEGMENT_SECTION_TERMS + _SEGMENT_VALUE_TERMS)
+                or not any(term in compacted for term in _SEGMENT_VALUE_TERMS)
+                or len(_TABLE_NUMBER_RE.findall(compacted)) < 2
+            ):
+                continue
+            seen.add(compacted)
+            score = len(_TABLE_NUMBER_RE.findall(compacted))
+            if any(term in compacted for term in ("营业收入", "营业成本", "毛利率")):
+                score += 4
+            if any(term in compacted for term in _SEGMENT_SECTION_TERMS):
+                score += 3
+            score += max(0, 3 - report_index)
+            rows.append(
+                (
+                    score,
+                    SegmentEconomicsFinding(
+                        segment_type=_segment_type(compacted),
+                        report_type=report_type,
+                        evidence=f"{title}: {compacted}",
+                        analyst_use=(
+                            "Use this to explain revenue mix, profit-pool quality, gross-margin dilution/accretion, "
+                            "and whether bull/bear claims depend on a specific product, geography, or channel."
+                        ),
+                    ),
+                )
+            )
+    rows.sort(key=lambda item: item[0], reverse=True)
+    return [row for _, row in rows[:max_rows]]
+
 
 _TABLE_NUMBER_RE = re.compile(r"(?<!\d)\d[\d,]*(?:\.\d+)?(?!\d)")
 _TABLE_ACCOUNT_RULES: tuple[
@@ -2787,13 +2884,18 @@ def _audit_filing_coverage(
 
     if not reports:
         return FilingCoverageAudit(
-            coverage_grade="failed",
+            coverage_grade="text_unavailable",
             report_types_seen=(),
             missing_report_types=required_types,
             answered_question_count=0,
             total_question_count=total_count,
             core_pack_status="unavailable",
-            confidence_read="No readable report text; deep filing read did not complete.",
+            confidence_read=(
+                "Narrative filing text was not readable, so business-model, segment, "
+                "and management-discussion evidence is unavailable. This does not by "
+                "itself mean structured financial statements, market data, or peer "
+                "data failed."
+            ),
         )
 
     answer_ratio = answered_count / total_count if total_count else 0.0
@@ -3212,7 +3314,7 @@ def _distill_filing_insights(
             core_item.verification_need,
         )
 
-    if coverage_audit.coverage_grade in {"weak", "failed"}:
+    if coverage_audit.coverage_grade in {"weak", "failed", "text_unavailable"}:
         add(
             "filing_read_confidence_gap",
             "Can we trust a strong conclusion from the available filings?",
@@ -3463,6 +3565,7 @@ def get_financial_report_intelligence_context(
     derived_metrics = _derive_financial_metrics(income, balance, cashflow, indicators)
     evidence = _extract_filing_evidence(report_texts)
     material_findings = _extract_material_filing_findings(report_texts)
+    segment_economics = _extract_segment_economics(report_texts)
     business_model_map = _build_business_model_map(report_texts)
     growth_vectors = _extract_growth_vectors(report_texts)
     report_bridge = _build_report_to_report_bridge(report_texts)
@@ -3554,6 +3657,15 @@ def get_financial_report_intelligence_context(
             "bear_use": item.bear_use,
         }
         for item in material_findings
+    ]
+    segment_rows = [
+        {
+            "segment_type": item.segment_type,
+            "report_type": item.report_type,
+            "filing_evidence": _compact_text(item.evidence, 240),
+            "analyst_use": item.analyst_use,
+        }
+        for item in segment_economics
     ]
     business_model_rows = [
         {
@@ -3709,7 +3821,12 @@ def get_financial_report_intelligence_context(
     extraction_note = (
         "Financial-report text extraction succeeded."
         if report_texts
-        else "Financial-report text extraction unavailable or no readable report text was retrieved."
+        else (
+            "Narrative filing text extraction unavailable: no readable annual, "
+            "semiannual, or quarterly report body was retrieved. Treat this as a "
+            "filing-text/segment-evidence gap, not as proof that structured "
+            "financial statements failed."
+        )
     )
 
     lines = [
@@ -3744,6 +3861,9 @@ def get_financial_report_intelligence_context(
         "",
         "## Business Model Map",
         _build_table(business_model_rows),
+        "",
+        "## Segment Economics Pack",
+        _build_table(segment_rows),
         "",
         "## Growth Vector Map",
         _build_table(growth_vector_rows),
@@ -3797,6 +3917,7 @@ def get_financial_report_intelligence_context(
         "- Start with the filing reading coverage audit. If coverage is partial, weak, or failed, explicitly downgrade confidence before using any filing-derived thesis.",
         "- Read quarterly reports for confirmation or reversal of short-cycle signals; read half-year reports for trend formation and segment mix; read annual reports for business model, capital allocation, and long-cycle risk.",
         "- Start with the business model map, then use the growth vector map to separate mature engines from emerging second curves.",
+        "- For multi-product or multi-region companies, read the Segment Economics Pack before the bull/bear debate. Do not collapse a company into headline revenue or profit when annual/half-year filings disclose product, geography, channel, revenue, cost, gross margin, or growth-rate splits.",
         "- Use the deep-reading excerpts as source text, not decorative context: annual-report excerpts define the company, semiannual excerpts test trend formation, and quarterly excerpts test short-cycle execution.",
         "- Use the paragraph reading pack for genuine report reading: answer the paragraph-level question first, then decide whether the business model, second curve, moat, trend, or cash-conversion thesis changed.",
         "- Use the industry reading pack as the specialist layer: the same filing should be read through the value drivers that matter for that business model, then linked to the external inputs named in `connect_to` before forming a conclusion.",

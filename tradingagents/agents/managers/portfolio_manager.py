@@ -33,6 +33,7 @@ from tradingagents.agents.utils.agent_utils import (
     get_shareholder_structure_instruction,
     get_three_layer_conclusion_instruction,
     get_thematic_valuation_instruction,
+    get_web_fact_check_instruction,
 )
 from tradingagents.agents.utils.structured import (
     bind_structured,
@@ -77,6 +78,7 @@ def create_portfolio_manager(llm):
         shareholder_structure_context = prompt_contexts["shareholder_structure_context"]
         investor_interaction_context = prompt_contexts["investor_interaction_context"]
         policy_planning_context = prompt_contexts["policy_planning_context"]
+        web_fact_check_context = prompt_contexts["web_fact_check_context"]
         data_coverage_context = prompt_contexts["data_coverage_context"]
         investment_debate_state = state.get("investment_debate_state", {})
         bull_bear_context = ""
@@ -155,6 +157,8 @@ def create_portfolio_manager(llm):
 - If micro evidence is unavailable, use product-specific macro supply-demand evidence where possible: upstream cost, downstream demand, capacity, utilization, imports/exports, substitution, policy, seasonality, and storability.
 - Macro proxies can support an evidence-limited directional view, but cannot be treated as exact product-price or spread facts.
 - If too many thesis-critical assumptions are unverified, reduce conviction and state what data would upgrade or downgrade the rating.
+- Do not use an unverified exact product price, wholesale price, spread, inventory level, or date-specific market statistic as a hard entry/exit trigger. Use it only as a watch item unless the source context labels it verified.
+- If web fact-check context exists, use it only to corroborate high-frequency facts. A single web result can support a watch item, but hard holder/builder triggers require multiple recent independent sources or an official source.
 
 **Buy-Side Decision Rules:**
 - The final decision must identify the Core Bet. If there is no Core Bet, explain why the rating is Hold or Underweight.
@@ -170,6 +174,7 @@ def create_portfolio_manager(llm):
 - For Hold: explain what full holders should monitor or rebalance, and what new buyers should wait for before initiating. Avoid calling it investable without a clear valuation or evidence trigger.
 - For Underweight / Sell: explain how full holders should reduce exposure or protect downside, and what lower price/valuation band could make new entry reasonable if the company's fundamentals remain intact.
 - The band must not be a loose technical level. Anchor it to valuation logic such as normalized earnings, clean EPS, EV/EBITDA, PB/ROE, FCF yield, cycle-midpoint profit, downside asset value, or peer-relative discount, then connect that valuation to business conditions that must remain true.
+- Use seasonality-adjusted or normalized earnings for valuation bands when available. If you cite a simple annualized Q1 profit number, label it as a run-rate stress case, not the base forecast.
 - If the business quality is structurally poor, governance is severely impaired, solvency is questionable, or the available evidence cannot justify any responsible entry/build band, say that explicitly instead of inventing a buy zone.
 - Distinguish four ideas: current rating, intrinsic value, action for full holders, and action for prospective builders. A negative current rating can coexist with a lower price band where probability/payoff becomes attractive.
 
@@ -203,6 +208,7 @@ def create_portfolio_manager(llm):
 - When hard-signal governance, ownership, investor-interaction, policy, or filing contexts are available, incorporate them where they change the investment argument instead of listing them mechanically.
 - Include a Verification & Falsification checklist so readers know what future evidence would confirm, weaken, or overturn the thesis.
 - Include a concise Data Coverage Audit when any precomputed module is failed, missing, or partial. Make clear which missing data matters to the rating and which verified evidence still supports the decision.
+- If financial-report intelligence only says readable report-body/narrative filing text was unavailable, do not use "the system failed to retrieve any readable annual/semiannual/quarterly reports" as the core reason for the rating. Check whether structured statements, valuation, market, peer, and earnings-model evidence are present, then describe the issue narrowly as a missing filing-text/segment/management-discussion evidence gap.
 - Target roughly 2,800-3,800 Chinese characters when the output language is Chinese, or a similar concise long-form excerpt in other languages. Preserve the full research conclusion first, then compress only the execution plan. The goal is **less fragmentation, more synthesis**.
 - Preserve the core logic from the full report: company context, decisive business drivers, final rating, core bet, expectation gap, probability/payoff, cycle/valuation setup, catalysts, falsification signals, position posture, risk controls, and evidence gaps.
 - Keep the action summary / investment plan compressed. Do not spend a long section on execution mechanics; summarize position, entry/watch level, stop or downgrade trigger, and next verification point in one short paragraph or 3-4 tight bullets.
@@ -223,6 +229,7 @@ def create_portfolio_manager(llm):
 - Shareholder-structure context: **{shareholder_structure_context}**
 - Official investor-interaction context: **{investor_interaction_context}**
 - Official policy-planning context: **{policy_planning_context}**
+- Web fact-check context: **{web_fact_check_context}**
 - Data coverage audit: **{data_coverage_context}**
 {lessons_line}
 {recent_decision_line}
@@ -250,9 +257,10 @@ Be decisive and ground every conclusion in specific evidence from the analysts.
 {get_three_layer_conclusion_instruction()}
 {get_management_capital_allocation_instruction()}
 {get_shareholder_structure_instruction()}
+{get_web_fact_check_instruction()}
 {get_fair_cycle_valuation_instruction()}
 {get_focused_report_instruction()}
-If an important investment claim depends on an unverified commodity price, product spread, inventory, policy detail, or exact percentage, list it under an "Unverified Key Assumptions" paragraph instead of treating it as fact.{get_language_instruction()}"""
+If an important investment claim depends on an unverified commodity price, product spread, inventory, policy detail, wholesale price, or exact percentage, list it under an "Unverified Key Assumptions" paragraph instead of treating it as fact. Do not place unverified exact prices in the holder/builder action plan as hard triggers; turn them into verification items.{get_language_instruction()}"""
 
         final_trade_decision = invoke_structured_or_freetext(
             structured_llm,

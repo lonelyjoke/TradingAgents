@@ -39,6 +39,8 @@ from tradingagents.agents.utils.agent_utils import (
     get_supply_demand_fallback_instruction,
     get_thematic_catalyst_context,
     get_valuation_percentiles,
+    get_web_fact_check_context,
+    get_web_fact_check_instruction,
 )
 from tradingagents.dataflows.tushare_a_stock import is_a_share_symbol
 from tradingagents.dataflows.config import get_config
@@ -59,6 +61,7 @@ def create_fundamentals_analyst(llm):
         raw_price_earnings_decomposition_context = state.get("price_earnings_decomposition_context", "")
         raw_management_capital_allocation_context = state.get("management_capital_allocation_context", "")
         raw_shareholder_structure_context = state.get("shareholder_structure_context", "")
+        raw_web_fact_check_context = state.get("web_fact_check_context", "")
         prompt_contexts = compact_state_fields(state, profile="analyst")
         thematic_catalyst_context = prompt_contexts["thematic_catalyst_context"]
         commodity_context = prompt_contexts["commodity_context"]
@@ -70,6 +73,7 @@ def create_fundamentals_analyst(llm):
         price_earnings_decomposition_context = prompt_contexts["price_earnings_decomposition_context"]
         management_capital_allocation_context = prompt_contexts["management_capital_allocation_context"]
         shareholder_structure_context = prompt_contexts["shareholder_structure_context"]
+        web_fact_check_context = prompt_contexts["web_fact_check_context"]
         is_a_share = is_a_share_symbol(state["company_of_interest"])
 
         tools = [
@@ -103,13 +107,15 @@ def create_fundamentals_analyst(llm):
             tools.append(get_management_capital_allocation_context)
         if not raw_shareholder_structure_context:
             tools.append(get_shareholder_structure_context)
+        if is_a_share and not raw_web_fact_check_context:
+            tools.append(get_web_fact_check_context)
 
         system_message = (
             "You are a buy-side fundamental researcher. Write a focused investment memo, not an exhaustive data dump. "
             "Your job is to identify the tradable thesis, test whether the business-cycle or boom-bust expectation can plausibly realize, and explain what evidence supports or weakens the thesis. "
             "Use `get_fundamentals`, `get_balance_sheet`, `get_cashflow`, and `get_income_statement` for core financial quality. "
             "Pay special attention to accounting items that may preview future performance, including contract liabilities, advance receipts, contract assets, receivables, inventories, prepayments, payables, goodwill, net cash, and working capital. "
-            "For A-share tickers, the system may provide precomputed thematic, commodity/product-price, filing, peer, supply-chain, earnings-model, market-expectation, price/EPS/PE decomposition, management/capital-allocation, and shareholder-structure context below. Use any precomputed context directly and do not call the same context tool again. Also use `get_valuation_percentiles` for historical valuation zones, `get_market_sector_risk` for broad/sector risk, and `get_market_timing_context` for market mood when those extra lenses are material. "
+            "For A-share tickers, the system may provide precomputed thematic, commodity/product-price, filing, peer, supply-chain, earnings-model, market-expectation, price/EPS/PE decomposition, management/capital-allocation, shareholder-structure, and web fact-check context below. Use any precomputed context directly and do not call the same context tool again. Also use `get_valuation_percentiles` for historical valuation zones, `get_market_sector_risk` for broad/sector risk, and `get_market_timing_context` for market mood when those extra lenses are material. "
             "For commodity/resource/cyclical companies, treat the commodity/product-price context as a hard cycle variable: connect it to ASP, gross margin, inventory write-down/reversal risk, cash conversion, and valuation, and do not let news headlines substitute for product-price evidence. "
             "For A-share tickers, also use `get_supply_chain_comparison` when a curated chain map exists, so the memo can distinguish between a merely good company and the best profit pool in the chain. "
             "For A-share tickers, if precomputed thematic and financial-report intelligence are present below, treat those as satisfying the catalyst / filing-evidence requirement. If they are absent, call the corresponding context tool once before concluding those sections. "
@@ -134,6 +140,7 @@ def create_fundamentals_analyst(llm):
             + get_three_layer_conclusion_instruction()
             + get_management_capital_allocation_instruction()
             + get_shareholder_structure_instruction()
+            + get_web_fact_check_instruction()
             + (
                 "\n\nPrecomputed filing/news thematic cross-check:\n"
                 + thematic_catalyst_context
@@ -192,6 +199,12 @@ def create_fundamentals_analyst(llm):
                 "\n\nPrecomputed shareholder-structure context:\n"
                 + shareholder_structure_context
                 if shareholder_structure_context
+                else ""
+            )
+            + (
+                "\n\nPrecomputed web fact-check context:\n"
+                + web_fact_check_context
+                if web_fact_check_context
                 else ""
             )
             + get_fair_cycle_valuation_instruction()

@@ -25,6 +25,7 @@ _IMPORTANT_RE = re.compile(
             r"\b(failed|failure|unavailable|missing|partial|thin|error|reason)\b",
             r"\b(revenue|profit|margin|cash flow|eps|pe|pb|roe|roic|debt)\b",
             r"\b(order|backlog|inventory|capacity|utilization|price|spread)\b",
+            r"\b(wholesale|source|published|corroborated|conflicting)\b",
             r"\b(supply|demand|policy|peer|shareholder|pledge|repurchase)\b",
             r"(评级|建议|结论|摘要|核心|下注|预期差|赔率|估值|催化)",
             r"(证伪|风险|缺口|未验证|假设|审计|失败|缺失|不可用|部分)",
@@ -49,6 +50,7 @@ _CONTEXT_KEYS = {
     "shareholder_structure_context",
     "investor_interaction_context",
     "policy_planning_context",
+    "web_fact_check_context",
     "data_coverage_context",
 }
 
@@ -71,6 +73,7 @@ _BASE_LIMITS = {
     "price_earnings_decomposition_context": 3500,
     "investor_interaction_context": 3500,
     "policy_planning_context": 3000,
+    "web_fact_check_context": 3500,
     "management_capital_allocation_context": 5000,
     "filing_intelligence_context": 6500,
     "shareholder_structure_context": 5500,
@@ -95,6 +98,22 @@ def _line_is_important(line: str) -> bool:
     stripped = line.strip()
     if not stripped:
         return False
+    if any(
+        token in stripped
+        for token in [
+            "\u7b97\u529b",
+            "\u79df\u8d41",
+            "\u667a\u4e91\u8ba1\u7b97",
+            "\u6570\u636e\u4e2d\u5fc3",
+            "\u7f51\u7edc\u5de5\u7a0b",
+            "\u5e7f\u4e1c\u76c8\u5cf0",
+            "\u6db2\u51b7",
+            "\u5149\u6a21\u5757",
+            "\u6307\u5b9a\u4fe1\u606f\u62ab\u9732\u5a92\u4f53",
+            "\u975e\u627f\u8bfa",
+        ]
+    ):
+        return True
     if _IMPORTANT_RE.search(stripped):
         return True
     if stripped.startswith("|") and any(

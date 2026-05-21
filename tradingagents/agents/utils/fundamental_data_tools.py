@@ -300,3 +300,25 @@ def get_policy_planning_context(
     policy-to-demand bridges.
     """
     return route_to_vendor("get_policy_planning_context", ticker, curr_date)
+
+
+@tool
+def get_web_fact_check_context(
+    ticker: Annotated[str, "ticker symbol"],
+    curr_date: Annotated[str, "current date you are trading at, yyyy-mm-dd"],
+    max_queries: Annotated[int, "maximum search queries to run"] = 3,
+    max_results_per_query: Annotated[int, "maximum search results per query"] = 4,
+) -> str:
+    """
+    Search the web for small but thesis-critical high-frequency facts such as
+    baijiu wholesale prices, channel inventory, terminal discounts, product
+    price changes, or recent sales clues. Results are evidence-ranked and must
+    not be treated as filing-grade proof unless the source is official.
+    """
+    return route_to_vendor(
+        "get_web_fact_check_context",
+        ticker,
+        curr_date,
+        max_queries,
+        max_results_per_query,
+    )

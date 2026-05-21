@@ -14,6 +14,7 @@ from tradingagents.dataflows.filing_research import (
     _extract_filing_evidence,
     _extract_deep_reading_excerpts,
     _extract_growth_vectors,
+    _extract_segment_economics,
     _extract_material_filing_findings,
     _extract_note_findings,
     _extract_statement_table_signals,
@@ -317,6 +318,26 @@ def test_business_model_map_avoids_header_only_segment_lines():
 
     assert "\u5206\u4ea7\u54c1" not in by_lens["segment_mix"].evidence
     assert "\u98ce\u673a\u9500\u552e" in by_lens["segment_mix"].evidence
+
+
+def test_segment_economics_pack_extracts_product_and_geography_rows():
+    reports = [
+        (
+            "2025\u5e74\u5e74\u5ea6\u62a5\u544a",
+            "\u5206\u4ea7\u54c1 \u8425\u4e1a\u6536\u5165 \u8425\u4e1a\u6210\u672c \u6bdb\u5229\u7387\uff08%\uff09\n"
+            "\u8305\u53f0\u9152 1,250.00 80.00 93.60 \u540c\u6bd4 12.00%\n"
+            "\u7cfb\u5217\u9152 240.00 48.00 80.00 \u540c\u6bd4 11.25%\n"
+            "\u5206\u5730\u533a \u5883\u5185 1,320.00 \u5883\u5916 170.00 \u540c\u6bd4 25.00%",
+        )
+    ]
+
+    rows = _extract_segment_economics(reports)
+    evidence = "\n".join(row.evidence for row in rows)
+
+    assert any(row.segment_type == "product" for row in rows)
+    assert "\u8305\u53f0\u9152" in evidence
+    assert "\u7cfb\u5217\u9152" in evidence
+    assert "\u5883\u5916" in evidence
 
 
 

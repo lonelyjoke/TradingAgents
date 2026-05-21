@@ -59,6 +59,7 @@ from tradingagents.agents.utils.agent_utils import (
     get_supply_chain_comparison,
     get_thematic_catalyst_context,
     get_valuation_percentiles,
+    get_web_fact_check_context,
 )
 
 from .checkpointer import checkpoint_step, clear_checkpoint, get_checkpointer, thread_id
@@ -83,6 +84,7 @@ def _build_precomputed_data_coverage(
     shareholder_structure_context: str,
     investor_interaction_context: str,
     policy_planning_context: str,
+    web_fact_check_context: str,
 ) -> str:
     return build_data_coverage_context(
         {
@@ -98,6 +100,7 @@ def _build_precomputed_data_coverage(
             "shareholder_structure": shareholder_structure_context,
             "investor_interaction": investor_interaction_context,
             "policy_planning": policy_planning_context,
+            "web_fact_check": web_fact_check_context,
         }
     )
 
@@ -147,6 +150,7 @@ _A_SHARE_CONTEXT_SPECS = [
         "Investor-interaction context",
     ),
     ("policy_planning_context", "get_policy_planning_context", "Policy-planning context"),
+    ("web_fact_check_context", "get_web_fact_check_context", "Web fact-check context"),
 ]
 
 
@@ -508,6 +512,7 @@ class TradingAgentsGraph:
         shareholder_structure_context = contexts["shareholder_structure_context"]
         investor_interaction_context = contexts["investor_interaction_context"]
         policy_planning_context = contexts["policy_planning_context"]
+        web_fact_check_context = contexts["web_fact_check_context"]
         data_coverage_context = _build_precomputed_data_coverage(
             thematic_catalyst_context=thematic_catalyst_context,
             commodity_context=commodity_context,
@@ -521,6 +526,7 @@ class TradingAgentsGraph:
             shareholder_structure_context=shareholder_structure_context,
             investor_interaction_context=investor_interaction_context,
             policy_planning_context=policy_planning_context,
+            web_fact_check_context=web_fact_check_context,
         )
         return self.propagator.create_initial_state(
             company_name,
@@ -539,6 +545,7 @@ class TradingAgentsGraph:
             shareholder_structure_context=shareholder_structure_context,
             investor_interaction_context=investor_interaction_context,
             policy_planning_context=policy_planning_context,
+            web_fact_check_context=web_fact_check_context,
             data_coverage_context=data_coverage_context,
         )
 
@@ -562,6 +569,7 @@ class TradingAgentsGraph:
         shareholder_structure_context = contexts["shareholder_structure_context"]
         investor_interaction_context = contexts["investor_interaction_context"]
         policy_planning_context = contexts["policy_planning_context"]
+        web_fact_check_context = contexts["web_fact_check_context"]
         data_coverage_context = _build_precomputed_data_coverage(
             thematic_catalyst_context=thematic_catalyst_context,
             commodity_context=commodity_context,
@@ -575,6 +583,7 @@ class TradingAgentsGraph:
             shareholder_structure_context=shareholder_structure_context,
             investor_interaction_context=investor_interaction_context,
             policy_planning_context=policy_planning_context,
+            web_fact_check_context=web_fact_check_context,
         )
         init_agent_state = self.propagator.create_initial_state(
             company_name,
@@ -593,6 +602,7 @@ class TradingAgentsGraph:
             shareholder_structure_context=shareholder_structure_context,
             investor_interaction_context=investor_interaction_context,
             policy_planning_context=policy_planning_context,
+            web_fact_check_context=web_fact_check_context,
             data_coverage_context=data_coverage_context,
         )
         args = self.propagator.get_graph_args()
@@ -675,6 +685,9 @@ class TradingAgentsGraph:
             ),
             "policy_planning_context": final_state.get(
                 "policy_planning_context", ""
+            ),
+            "web_fact_check_context": final_state.get(
+                "web_fact_check_context", ""
             ),
             "data_coverage_context": final_state.get(
                 "data_coverage_context", ""

@@ -24,6 +24,7 @@ from tradingagents.agents.utils.agent_utils import (
     get_shareholder_structure_instruction,
     get_three_layer_conclusion_instruction,
     get_thematic_valuation_instruction,
+    get_web_fact_check_instruction,
 )
 from tradingagents.agents.utils.structured import (
     bind_structured,
@@ -60,6 +61,7 @@ def create_research_manager(llm):
         shareholder_structure_context = prompt_contexts["shareholder_structure_context"]
         investor_interaction_context = prompt_contexts["investor_interaction_context"]
         policy_planning_context = prompt_contexts["policy_planning_context"]
+        web_fact_check_context = prompt_contexts["web_fact_check_context"]
         data_coverage_context = prompt_contexts["data_coverage_context"]
         prompt_history = compact_debate_history(history, profile="research")
         continuity_context = (
@@ -125,6 +127,7 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 - This fallback must be specific to the product or route: upstream cost, downstream demand, capacity, utilization, imports/exports, substitution, policy, seasonality, and storability.
 - Treat macro proxies as lower-confidence evidence than verified micro prices. They can shape scenarios and watch ranges, but should not be presented as exact product-price conclusions.
 - If macro supply-demand evidence points clearly one way, do not default to Hold purely because product quotes are missing; instead state an evidence-limited directional view and what data would confirm or refute it.
+- Do not let a bull or bear case use unverified exact wholesale prices, product prices, spreads, inventories, or date-specific market statistics as decisive facts. Keep them in an evidence-gap/watchlist bucket unless the source context labels them verified.
 
 **Decision-Continuity Rules:**
 - Reassess the company fully, but do not silently reverse a recent same-ticker stance.
@@ -142,6 +145,7 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 - If commodity/product-price context is available, keep a **Commodity Cycle Verdict** explicit enough to say whether the product-price evidence supports or contradicts the margin/EPS/inventory part of the thesis.
 - If verified but non-base-case optionality matters, keep a **Strategic Optionality Verdict** explicit enough that downstream agents do not erase a second growth curve, investee holding, asset revaluation path, or live thematic catalyst merely because it does not flip today's rating.
 - Always read the Data Coverage Audit before ruling. If a module is failed, missing, or partial and touches the core bet, explicitly state the gap and cap conviction; do not let the final plan sound more certain than the data coverage allows.
+- If financial-report intelligence says narrative filing text or readable report body was unavailable, do not write that the system failed to retrieve all financial data. First check whether structured statements, market data, peer comparison, valuation, and earnings-model contexts are present. Describe the gap narrowly as missing report-body/segment/management-discussion evidence unless those other modules also failed.
 
 ---
 
@@ -182,6 +186,9 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 **Official Policy-Planning Context:**
 {policy_planning_context}
 
+**Web Fact-Check Context:**
+{web_fact_check_context}
+
 **Data Coverage Audit:**
 {data_coverage_context}
 
@@ -205,9 +212,10 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 {get_three_layer_conclusion_instruction()}
 {get_management_capital_allocation_instruction()}
 {get_shareholder_structure_instruction()}
+{get_web_fact_check_instruction()}
 {get_fair_cycle_valuation_instruction()}
 {get_focused_report_instruction()}
-If a bull or bear argument contains an exact product price, inventory figure, product spread, percentage change, or date-specific market claim that is not supported by the analyst reports, downgrade that argument and list it as an unverified key assumption."""
+If a bull or bear argument contains an exact product price, inventory figure, product spread, percentage change, or date-specific market claim that is not supported by the analyst reports or corroborated web fact-check context, downgrade that argument and list it as an unverified key assumption."""
 
         investment_plan = invoke_structured_or_freetext(
             structured_llm,

@@ -58,6 +58,43 @@ _INTERACTION_THEME_RULES: dict[str, dict[str, Any]] = {
     },
 }
 
+_NON_COMMITTAL_ANSWER_MARKERS = (
+    "\u8bf7\u4ee5",
+    "\u4ee5\u516c\u53f8\u516c\u544a\u4e3a\u51c6",
+    "\u4ee5\u516c\u53f8\u5728\u6307\u5b9a\u4fe1\u606f\u62ab\u9732\u5a92\u4f53",
+    "\u8be6\u89c1\u516c\u53f8\u6307\u5b9a\u7684\u4fe1\u606f\u62ab\u9732\u5a92\u4f53",
+    "\u6307\u5b9a\u4fe1\u606f\u62ab\u9732\u5a92\u4f53",
+    "\u5de8\u6f6e\u8d44\u8baf\u7f51\u520a\u767b\u7684\u4fe1\u606f\u4e3a\u51c6",
+    "\u6709\u5173\u516c\u53f8\u7684\u4fe1\u606f\u5747\u4ee5",
+    "\u611f\u8c22\u60a8\u7684\u5efa\u8bae",
+    "\u6682\u65e0\u5e94\u62ab\u9732\u800c\u672a\u62ab\u9732",
+    "\u8bf7\u5173\u6ce8\u516c\u53f8\u540e\u7eed\u516c\u544a",
+)
+
+_QUANTITATIVE_ANSWER_MARKERS = (
+    "%",
+    "MW",
+    "\u4ebf\u5143",
+    "\u4e07\u5143",
+    "\u5143",
+    "\u4e07\u80a1",
+    "\u80a1",
+    "\u6237",
+    "\u8ba2\u5355",
+    "\u8425\u6536",
+    "\u6536\u5165",
+)
+
+_DIRECTIONAL_ANSWER_MARKERS = (
+    "\u5df2\u5f00\u5c55",
+    "\u5df2\u5e03\u5c40",
+    "\u6b63\u5728\u63a8\u8fdb",
+    "\u6301\u7eed\u63a8\u8fdb",
+    "\u6280\u672f\u50a8\u5907",
+    "\u5173\u6ce8",
+    "\u8ba1\u5212",
+)
+
 
 @dataclass(frozen=True)
 class InteractionRecord:
@@ -255,6 +292,12 @@ def _classify_answer(answer: str | None) -> str:
     text = (answer or "").strip()
     if not text:
         return "unanswered"
+    if re.fullmatch(r"[\s\uff0c\u3002\uff01!\u60a8\u597d\u611f\u8c22\u7684\u5173\u6ce8]+", text):
+        return "non-committal"
+    if any(marker in text for marker in _NON_COMMITTAL_ANSWER_MARKERS):
+        return "non-committal"
+    if any(marker in text for marker in _QUANTITATIVE_ANSWER_MARKERS):
+        return "substantive"
 
     quantitative_markers = (
         "亿元",
@@ -268,6 +311,8 @@ def _classify_answer(answer: str | None) -> str:
     )
     if any(marker in text for marker in quantitative_markers):
         return "substantive"
+    if any(marker in text for marker in _DIRECTIONAL_ANSWER_MARKERS):
+        return "directional-but-unquantified"
 
     directional_markers = (
         "已经开始",

@@ -50,3 +50,29 @@ def test_compact_state_fields_returns_compacted_copy_without_mutating_state():
     assert compacted["commodity_context"] == "short commodity context"
     assert len(compacted["thematic_catalyst_context"]) < len(long_context)
     assert state["thematic_catalyst_context"] == long_context
+
+
+def test_compaction_preserves_compute_leasing_diligence_gap():
+    text = "\n".join(
+        [
+            "# Thematic catalyst",
+            *[f"low value concept row {i} " + ("z" * 100) for i in range(80)],
+            (
+                "| \u7b97\u529b\u79df\u8d41/\u667a\u4e91\u8ba1\u7b97 | investor-interaction | "
+                "no valuation credit; diligence red flag until filings clarify economics | "
+                "Q: \u516c\u53f8\u662f\u5426\u5f00\u5c55\u7b97\u529b\u79df\u8d41\uff1f / "
+                "A: \u8bf7\u4ee5\u6307\u5b9a\u4fe1\u606f\u62ab\u9732\u5a92\u4f53\u4e3a\u51c6 |"
+            ),
+            *[f"more low value row {i} " + ("y" * 100) for i in range(80)],
+        ]
+    )
+
+    compacted = compact_for_prompt(
+        text,
+        label="thematic_catalyst_context",
+        profile="portfolio",
+        max_chars=1000,
+    )
+
+    assert "\u7b97\u529b\u79df\u8d41" in compacted
+    assert "\u6307\u5b9a\u4fe1\u606f\u62ab\u9732\u5a92\u4f53" in compacted

@@ -207,3 +207,14 @@ def test_dedupe_interaction_records_removes_same_visible_qa_with_different_ids()
     result = _dedupe_interaction_records(records)
 
     assert len(result) == 1
+
+
+def test_classify_answer_treats_designated_media_reply_as_non_committal():
+    answer = (
+        "\u5c0a\u656c\u7684\u6295\u8d44\u8005\uff0c\u516c\u53f8\u7ecf\u8425"
+        "\u60c5\u51b5\uff0c\u8be6\u89c1\u516c\u53f8\u6307\u5b9a\u7684"
+        "\u4fe1\u606f\u62ab\u9732\u5a92\u4f53\u548c\u5de8\u6f6e\u8d44\u8baf"
+        "\u7f51\u520a\u767b\u7684\u4fe1\u606f\u4e3a\u51c6\u3002"
+    )
+
+    assert _classify_answer(answer) == "non-committal"

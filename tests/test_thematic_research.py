@@ -375,6 +375,35 @@ def test_interaction_answer_becomes_low_weight_narrative_option():
     assert rows[0]["valuation_weight"] == "small imagination premium only"
 
 
+def test_non_committal_compute_leasing_question_stays_as_diligence_gap():
+    interactions = pd.DataFrame(
+        [
+            {
+                "question": (
+                    "\u516c\u53f8\u662f\u5426\u5728\u5f00\u5c55"
+                    "\u7b97\u529b\u79df\u8d41\u4e1a\u52a1\uff1f"
+                ),
+                "answer": (
+                    "\u516c\u53f8\u7ecf\u8425\u60c5\u51b5\u8be6\u89c1\u516c\u53f8"
+                    "\u6307\u5b9a\u4fe1\u606f\u62ab\u9732\u5a92\u4f53\u3002"
+                ),
+                "answer_class": "non-committal",
+                "theme": "compute-power",
+                "source_type": "cninfo_irm",
+                "story_read": "new-demand adjacency around power + computing infrastructure",
+                "proof_needed": "needs revenue, order, or project economics before valuation uplift",
+                "credibility": "weak-official-signal",
+            }
+        ]
+    )
+
+    rows = _build_interaction_option_rows(interactions)
+
+    assert rows[0]["candidate"] == "\u7b97\u529b\u79df\u8d41/\u667a\u4e91\u8ba1\u7b97"
+    assert rows[0]["valuation_weight"].startswith("no valuation credit")
+    assert "\u7b97\u529b\u79df\u8d41" in rows[0]["evidence"]
+
+
 def test_cross_source_validation_separates_pending_hard_from_correlated_narrative():
     filing = [
         ThemeCandidate(

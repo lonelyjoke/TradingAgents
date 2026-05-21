@@ -10,6 +10,7 @@ from .tushare_a_stock import (
     TushareDataError,
     _fetch_balance_sheet_data,
     _fetch_cashflow_data,
+    _fetch_daily_basic_latest,
     _fetch_stock_basic,
     _format_value,
     _markdown_table,
@@ -183,6 +184,54 @@ def _capital_flow_table(symbol: str, curr_date: str) -> pd.DataFrame:
     return merged[[col for col in cols if col in merged.columns]].copy()
 
 
+def _dividend_yield_cross_check(
+    dividends: pd.DataFrame | TushareDataError,
+    daily_basic: pd.Series | None,
+) -> pd.DataFrame:
+    rows: list[dict[str, object]] = []
+    close = None
+    dv_ttm = None
+    if daily_basic is not None:
+        close_v = pd.to_numeric(pd.Series([daily_basic.get("close")]), errors="coerce").iloc[0]
+        dv_ttm_v = pd.to_numeric(pd.Series([daily_basic.get("dv_ttm")]), errors="coerce").iloc[0]
+        close = None if pd.isna(close_v) else float(close_v)
+        dv_ttm = None if pd.isna(dv_ttm_v) else float(dv_ttm_v)
+    if dv_ttm is not None:
+        rows.append(
+            {
+                "basis": "Tushare daily_basic dv_ttm",
+                "cash_div_per_share": None,
+                "reference_price": close,
+                "yield_pct": dv_ttm,
+                "note": "Use as the primary trailing dividend-yield reference when present.",
+            }
+        )
+    if isinstance(dividends, pd.DataFrame) and not dividends.empty and "end_date" in dividends.columns:
+        data = dividends.copy()
+        if "cash_div_tax" in data.columns:
+            data["cash_div_tax"] = pd.to_numeric(data["cash_div_tax"], errors="coerce")
+            grouped = (
+                data.dropna(subset=["cash_div_tax"])
+                .groupby("end_date", dropna=False)["cash_div_tax"]
+                .sum()
+                .reset_index()
+                .sort_values("end_date", ascending=False)
+                .head(5)
+            )
+            for _, row in grouped.iterrows():
+                cash_div = float(row["cash_div_tax"])
+                rows.append(
+                    {
+                        "basis": f"sum of announced dividends for end_date {row['end_date']}",
+                        "cash_div_per_share": cash_div,
+                        "reference_price": close,
+                        "yield_pct": None if close in (None, 0) else cash_div / close * 100,
+                        "note": "Check whether this includes annual, interim, and special dividends before citing shareholder yield.",
+                    }
+                )
+    return pd.DataFrame(rows)
+
+
 def get_management_capital_allocation_context(
     ticker: str,
     curr_date: str,
@@ -202,6 +251,8 @@ def get_management_capital_allocation_context(
     repurchases = _repurchases(symbol, curr_date, years=look_back_years)
     capflows = _capital_flow_table(symbol, curr_date)
     announcements = _capital_allocation_announcements(symbol, curr_date, years=look_back_years)
+    daily_basic = _fetch_daily_basic_latest(symbol, curr_date)
+    dividend_yield_check = _dividend_yield_cross_check(dividends, daily_basic)
 
     lines = [
         f"# Management and capital-allocation context for {symbol} as of {curr_date}",
@@ -221,6 +272,9 @@ def get_management_capital_allocation_context(
         "## Dividend History",
         _markdown_table(dividends if isinstance(dividends, pd.DataFrame) else pd.DataFrame()),
         "",
+        "## Dividend Yield Cross-Check",
+        _markdown_table(dividend_yield_check),
+        "",
         "## Repurchase History",
         _markdown_table(repurchases if isinstance(repurchases, pd.DataFrame) else pd.DataFrame()),
         "",
@@ -231,6 +285,7 @@ def get_management_capital_allocation_context(
         "- Separate stewardship from narration: reward managers for durable ROIC, cash generation, sensible leverage, disciplined capex, and shareholder returns, not for grand plans alone.",
         "- Read investing cash outflow together with future revenue, margin, and ROIC evidence; capex is good only when later returns justify it.",
         "- Use goodwill, acquisitions, financing, dividends, and buybacks to judge whether capital is being compounded, hoarded, or diluted away.",
+        "- When citing dividend yield, prefer `dv_ttm` or a summed trailing dividend basis; do not mix a single annual proposal with full-year shareholder-return language unless you label it as annual-only.",
         "- Management quality is a synthesis variable: combine these hard signals with long-run delivery against prior promises in filings and announcements.",
     ]
     return "\n".join(lines)
