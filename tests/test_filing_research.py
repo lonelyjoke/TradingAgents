@@ -12,6 +12,7 @@ from tradingagents.dataflows.filing_research import (
     _build_report_to_report_bridge,
     _detect_report_type,
     _extract_filing_evidence,
+    _extract_banking_kpi_pack,
     _extract_deep_reading_excerpts,
     _extract_growth_vectors,
     _extract_segment_economics,
@@ -456,6 +457,37 @@ def test_industry_reading_pack_for_banking_reads_asset_quality_and_spread():
     assert {"asset_quality", "spread_and_mix"}.issubset(lenses)
 
 
+def test_banking_profile_wins_over_incidental_metal_and_capex_terms():
+    reports = [
+        (
+            "2026年第一季度报告",
+            "本行净息差、净利息收益率、不良贷款率和拨备覆盖率保持行业领先。"
+            "金融投资包括债券投资，风险管理中提及贵金属、铜、铝等市场价格风险。",
+        )
+    ]
+
+    assert _select_industry_profile("招商银行", "银行", reports) == "banking"
+    question_ids = {question.question_id for question in _question_candidates("banking")}
+
+    assert {"bank_asset_quality", "bank_nim", "bank_fees", "bank_capital", "bank_retail_book"}.issubset(question_ids)
+    assert "generic_cash_conversion" not in question_ids
+
+
+def test_banking_kpi_pack_extracts_bank_specific_metrics():
+    reports = [
+        (
+            "2026年第一季度报告",
+            "净利差1.77%，净利息收益率1.83%。不良贷款率0.94%，拨备覆盖率387.76%。"
+            "核心一级资本充足率13.50%，管理零售客户总资产(AUM)较上年末增长。",
+        )
+    ]
+
+    rows = _extract_banking_kpi_pack(reports)
+    lenses = {row["lens"] for row in rows}
+
+    assert {"spread_profitability", "asset_quality", "capital_and_payout", "retail_wealth_engine"}.issubset(lenses)
+
+
 def test_material_findings_read_across_pdf_line_breaks():
     reports = [
         (
@@ -867,3 +899,27 @@ def test_filing_insight_distillation_promotes_story_quality_tension():
     assert "quality_of_growth_tension" in insight_types
     assert "monetization_gap" in insight_types
     assert "textual_filing_signal" in insight_types
+
+
+def test_compute_leasing_assets_and_revenue_enter_filing_findings():
+    reports = [
+        (
+            "2025\u5e74\u5e74\u5ea6\u62a5\u544a",
+            "\u516c\u53f8\u667a\u4e91\u8ba1\u7b97\u677f\u5757\u5df2\u5f00\u5c55\u7b97\u529b\u79df\u8d41\u4e1a\u52a1\uff0c"
+            "\u79df\u8d41\u4e1a\u52a1\u89c4\u6a2122\u4ebf\u5143\uff0c\u5e76\u5b9e\u73b0\u76f8\u5173\u8425\u6536\u3002\n"
+            "\u5e7f\u4e1c\u76c8\u5cf0\u65b0\u589e1.39\u4ebf\u5143\u7f51\u7edc\u5de5\u7a0b\u5efa\u8bbe\u8d44\u4ea7\u3002\n"
+            "\u5206\u4e1a\u52a1\u770b\uff0c\u7b97\u529b\u79df\u8d41\u8425\u4e1a\u6536\u5165\u589e\u957f\uff0c\u6bdb\u5229\u7387\u5c1a\u9700\u6301\u7eed\u8ddf\u8e2a\u3002",
+        ),
+        (
+            "2026\u5e74\u7b2c\u4e00\u5b63\u5ea6\u62a5\u544a",
+            "\u516c\u53f8\u7b97\u529b\u79df\u8d41\u6536\u5165\u7ee7\u7eed\u786e\u8ba4\uff0c\u76f8\u5173\u8d44\u4ea7\u6295\u5165\u589e\u52a0\u3002",
+        ),
+    ]
+
+    material = _extract_material_filing_findings(reports)
+    growth = _extract_growth_vectors(reports)
+    segments = _extract_segment_economics(reports)
+
+    assert any(row.finding_type == "compute-leasing-monetization" for row in material)
+    assert any(row.vector == "ai-and-digital" and row.stage in {"monetized", "capacity-building"} for row in growth)
+    assert any("\u7b97\u529b\u79df\u8d41" in row.evidence for row in segments)

@@ -50,3 +50,37 @@ def test_peer_comparison_reports_missing_universe_columns_without_keyerror(monke
 
     assert "Same-industry peer comparison unavailable" in rendered
     assert "industry" in rendered
+
+
+def test_peer_comparison_recovers_target_basic_from_universe(monkeypatch):
+    latest = pd.Series({"trade_date": "20260520", "total_mv": 100, "pe_ttm": 6.0, "pb": 0.8, "dv_ttm": 5.0})
+
+    class FakePro:
+        pass
+
+    universe = pd.DataFrame(
+        [
+            {"ts_code": "600036.SH", "name": "招商银行", "industry": "银行"},
+            {"ts_code": "601398.SH", "name": "工商银行", "industry": "银行"},
+        ]
+    )
+    market = pd.DataFrame(
+        [
+            {"ts_code": "600036.SH", "trade_date": "20260520", "total_mv": 100, "pe_ttm": 6.0, "pb": 0.8, "dv_ttm": 5.0},
+            {"ts_code": "601398.SH", "trade_date": "20260520", "total_mv": 120, "pe_ttm": 5.0, "pb": 0.6, "dv_ttm": 6.0},
+        ]
+    )
+    indicators = pd.DataFrame([{"roe": 12.0, "roa": 1.2, "netprofit_yoy": 1.0, "debt_to_assets": 90.0}])
+
+    monkeypatch.setattr(tushare_research, "_fetch_stock_basic", lambda symbol: None)
+    monkeypatch.setattr(tushare_research, "_fetch_daily_basic_latest", lambda symbol, curr_date: latest)
+    monkeypatch.setattr(tushare_research, "_get_pro_client", lambda: FakePro())
+    monkeypatch.setattr(tushare_research, "_fetch_stock_basic_universe", lambda pro: universe)
+    monkeypatch.setattr(tushare_research, "_latest_daily_basic_market", lambda trade_date: market)
+    monkeypatch.setattr(tushare_research, "_fetch_fina_indicator", lambda symbol, curr_date: indicators)
+
+    rendered = tushare_research.get_peer_comparison("600036.SH", "2026-05-21")
+
+    assert "招商银行" in rendered
+    assert "Banking peer screen" in rendered
+    assert "NIM" in rendered

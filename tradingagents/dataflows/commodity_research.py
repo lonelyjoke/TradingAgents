@@ -437,6 +437,12 @@ def _infer_products(symbol: str) -> dict:
         }
 
     haystack = f"{basic.get('name', '')} {basic.get('industry', '')}"
+    if any(token in haystack for token in ("银行", "保险", "证券", "信托", "多元金融")):
+        return {
+            "name": _format_value(basic.get("name")),
+            "products": [],
+            "spread_note": "Not applicable: financial institutions do not have a primary commodity/product-price spread driver. Use bank/financial KPIs instead.",
+        }
     products = []
     for keyword, hints in INDUSTRY_PRODUCT_HINTS.items():
         if keyword in haystack:

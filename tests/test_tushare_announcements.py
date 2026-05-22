@@ -3,8 +3,15 @@ import pandas as pd
 from tradingagents.dataflows.tushare_a_stock import TushareDataError
 from tradingagents.dataflows.tushare_research import (
     _fetch_announcements,
+    _cninfo_stock_query_values,
     _parse_cninfo_announcements,
 )
+
+
+def test_cninfo_stock_query_values_include_exchange_org_id():
+    assert _cninfo_stock_query_values("000967.SZ")[0] == "000967,gssz0000967"
+    assert _cninfo_stock_query_values("600519.SH")[0] == "600519,gssh0600519"
+    assert _cninfo_stock_query_values("000967.SZ")[1] == "000967"
 
 
 def test_parse_cninfo_announcements_normalizes_pdf_rows():

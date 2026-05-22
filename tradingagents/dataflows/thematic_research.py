@@ -24,6 +24,7 @@ from .tushare_a_stock import (
 )
 from .tushare_research import (
     _fetch_announcements,
+    _fetch_cninfo_announcements,
     _fetch_major_news,
     _fetch_news_feed,
     _safe_optional_query,
@@ -106,6 +107,13 @@ _SHORT_INVESTEE_EXCLUSIONS = {
     "\u5f00\u53d1\u652f\u51fa",
     "\u957f\u671f\u80a1\u6743\u6295\u8d44",
     "\u5176\u4ed6\u975e\u6d41\u52a8\u91d1\u878d\u8d44\u4ea7",
+    "\u91d1\u878d\u6295\u8d44",
+    "\u5f53\u671f\u635f\u76ca\u7684\u91d1\u878d\u6295\u8d44",
+    "\u503a\u5238\u6295\u8d44\u53ca\u7968\u636e\u8d34\u73b0",
+    "\u540c\u4e1a\u548c\u5176\u4ed6\u91d1\u878d\u673a\u6784\u5b58\u653e\u6b3e\u9879",
+    "\u540c\u4e1a\u5f80\u6765",
+    "\u5229\u7387\u884d\u751f\u91d1\u878d\u5de5\u5177",
+    "\u8d27\u5e01\u884d\u751f\u91d1\u878d\u5de5\u5177",
     "\u6d3b\u52a8\u73b0\u91d1\u6d41\u5165\u5c0f\u8ba1",
     "\u6d3b\u52a8\u73b0\u91d1\u6d41\u51fa\u5c0f\u8ba1",
     "\u6d3b\u52a8\u4ea7\u751f\u7684\u73b0\u91d1\u6d41\u91cf\u51c0\u989d",
@@ -116,6 +124,13 @@ _SHORT_INVESTEE_EXCLUSIONS = {
     "\u4f7f\u7528\u6743\u8d44\u4ea7",
     "\u6295\u8d44\u6027\u623f\u5730\u4ea7",
     "\u503a\u6743\u6295\u8d44",
+    "\u91d1\u878d\u6295\u8d44",
+    "\u91d1\u878d\u5de5\u5177",
+    "\u7968\u636e\u8d34\u73b0",
+    "\u540c\u4e1a\u5f80\u6765",
+    "\u540c\u4e1a\u548c\u5176\u4ed6\u91d1\u878d\u673a\u6784",
+    "\u5229\u7387\u884d\u751f",
+    "\u8d27\u5e01\u884d\u751f",
     "\u5176\u4ed6\u6743\u76ca\u5de5\u5177\u6295\u8d44",
 }
 _BUSINESS_THEME_KEYWORDS = {
@@ -248,13 +263,26 @@ def _financial_report_announcements(
     result = _fetch_announcements(symbol, curr_date, look_back_days)
     if isinstance(result, TushareDataError) or result is None or result.empty:
         return result
+    reports = _filter_financial_report_announcements(result)
+    if not reports.empty:
+        return reports.sort_values("ann_date", ascending=False).head(4)
+
+    fallback = _fetch_cninfo_announcements(symbol, curr_date, look_back_days)
+    if isinstance(fallback, TushareDataError) or fallback is None or fallback.empty:
+        return reports
+    fallback_reports = _filter_financial_report_announcements(fallback)
+    if fallback_reports.empty:
+        return reports
+    return fallback_reports.sort_values("ann_date", ascending=False).head(4)
+
+
+def _filter_financial_report_announcements(result: pd.DataFrame) -> pd.DataFrame:
     if "title" not in result.columns:
         return pd.DataFrame()
     titles = result["title"].fillna("").astype(str)
     is_report = titles.str.contains(_FINANCIAL_REPORT_TITLE_RE, regex=True)
     is_excluded = titles.str.contains(_FINANCIAL_REPORT_EXCLUDE_RE, regex=True)
-    reports = result[is_report & ~is_excluded].copy()
-    return reports.sort_values("ann_date", ascending=False).head(4)
+    return result[is_report & ~is_excluded].copy()
 
 
 def _cache_dir() -> Path:

@@ -531,6 +531,16 @@ def _fetch_stock_basic(symbol: str) -> pd.Series | None:
         fields="ts_code,symbol,name,area,industry,market,exchange,list_date",
     )
     if data is None or data.empty:
+        try:
+            universe = pro.stock_basic(
+                list_status="L",
+                fields="ts_code,symbol,name,area,industry,market,exchange,list_date",
+            )
+        except Exception:
+            universe = pd.DataFrame()
+        if universe is not None and not universe.empty and "ts_code" in universe.columns:
+            data = universe[universe["ts_code"].astype(str) == symbol]
+    if data is None or data.empty:
         _STOCK_BASIC_CACHE[symbol] = None
         return None
     row = data.iloc[0].copy()

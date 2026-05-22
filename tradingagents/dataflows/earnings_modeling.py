@@ -247,6 +247,66 @@ def _build_driver_rows(derived: pd.DataFrame) -> list[dict[str, str]]:
     ]
 
 
+def _is_banking_stock(basic: pd.Series | None) -> bool:
+    if basic is None:
+        return False
+    text = f"{basic.get('name', '')} {basic.get('industry', '')}"
+    return "银行" in str(text)
+
+
+def _bank_driver_rows(
+    income: pd.DataFrame,
+    balance: pd.DataFrame,
+    indicators: pd.DataFrame,
+) -> list[dict[str, str]]:
+    rows: list[dict[str, str]] = []
+
+    def latest_row(frame: pd.DataFrame) -> pd.Series:
+        if frame is None or frame.empty or "end_date" not in frame.columns:
+            return pd.Series(dtype="object")
+        ordered = frame.copy()
+        ordered["end_date"] = ordered["end_date"].astype(str)
+        return ordered.sort_values("end_date", ascending=False).iloc[0]
+
+    latest_income = latest_row(income)
+    latest_balance = latest_row(balance)
+    latest_indicator = latest_row(indicators)
+
+    rows.append(
+        {
+            "driver": "Net profit run-rate",
+            "latest_signal": _format_value(latest_income.get("n_income_attr_p")),
+            "change_vs_prior_report": _format_value(latest_indicator.get("netprofit_yoy"), "%"),
+            "model_role": "starting point for bank EPS; use seasonality-adjusted profit, not generic sales-volume logic",
+        }
+    )
+    rows.append(
+        {
+            "driver": "ROE / ROA",
+            "latest_signal": f"ROE {_format_value(latest_indicator.get('roe'), '%')} / ROA {_format_value(latest_indicator.get('roa'), '%')}",
+            "change_vs_prior_report": "N/A",
+            "model_role": "connect PB valuation to sustainable profitability and cost of equity",
+        }
+    )
+    rows.append(
+        {
+            "driver": "Balance-sheet scale",
+            "latest_signal": f"assets {_format_value(latest_balance.get('total_assets'))} / liabilities {_format_value(latest_balance.get('total_liab'))}",
+            "change_vs_prior_report": "N/A",
+            "model_role": "loan/deposit and RWA growth must be checked in filings before treating expansion as positive",
+        }
+    )
+    rows.append(
+        {
+            "driver": "Required bank filing metrics",
+            "latest_signal": "NIM, loan yield, deposit cost, NPL, special-mention, overdue, provision coverage, CET1",
+            "change_vs_prior_report": "read from Banking KPI Pack",
+            "model_role": "core bank earnings bridge; do not substitute gross margin, inventory, receivables, or OCF ratios",
+        }
+    )
+    return rows
+
+
 def get_earnings_model_context(ticker: str, curr_date: str) -> str:
     """Build an evidence-led earnings bridge for A-share research workflows."""
     symbol = ticker.strip().upper()
@@ -261,6 +321,7 @@ def get_earnings_model_context(ticker: str, curr_date: str) -> str:
     cashflow = _fetch_cashflow_data(symbol, curr_date, freq="quarterly", limit=8)
     indicators = _fetch_fina_indicator(symbol, curr_date)
     derived = _derive_financial_metrics(income, balance, cashflow, indicators)
+    is_banking = _is_banking_stock(basic)
     latest_any_row, latest_annual_row = _latest_rows(income)
     latest_any = _snapshot_from_income_row(latest_any_row, income)
     latest_annual = _snapshot_from_income_row(latest_annual_row, income)
@@ -294,19 +355,42 @@ def get_earnings_model_context(ticker: str, curr_date: str) -> str:
         _markdown_table(pd.DataFrame(snapshot_rows)),
         "",
         "## Operating Driver Bridge",
-        _markdown_table(pd.DataFrame(_build_driver_rows(derived))),
+        _markdown_table(pd.DataFrame(_bank_driver_rows(income, balance, indicators) if is_banking else _build_driver_rows(derived))),
         "",
         "## Research Hygiene Notes",
-        "- Working-capital stock ratios use annualized revenue for interim periods so Q1/H1/Q3 snapshots remain comparable with FY.",
-        "- Treat simple annualized interim earnings as a run-rate stress test, not a forward forecast.",
-        "- Prefer the seasonality-adjusted estimate when judging full-year earnings power, and state the historical share used.",
-        "- Treat one-quarter margin inflections as provisional until they recur or are explained by filing evidence.",
+        *(
+            [
+                "- Banking earnings must be bridged through NIM, balance-sheet mix, fee income, credit cost, asset quality, capital adequacy, and payout capacity.",
+                "- Do not use manufacturing-style revenue = volume × price × mix, gross margin, inventory, receivables, or OCF conversion as primary bank drivers.",
+                "- Treat simple annualized interim earnings as a run-rate stress test, not a forward forecast.",
+                "- Prefer the seasonality-adjusted estimate when judging full-year earnings power, and verify bank-specific KPIs in the financial-report intelligence context.",
+            ]
+            if is_banking
+            else [
+                "- Working-capital stock ratios use annualized revenue for interim periods so Q1/H1/Q3 snapshots remain comparable with FY.",
+                "- Treat simple annualized interim earnings as a run-rate stress test, not a forward forecast.",
+                "- Prefer the seasonality-adjusted estimate when judging full-year earnings power, and state the historical share used.",
+                "- Treat one-quarter margin inflections as provisional until they recur or are explained by filing evidence.",
+            ]
+        ),
         "",
         "## Scenario-Building Instructions",
-        "- Build every forward case through revenue = volume × price × mix, then flow it through gross margin, operating margin, finance cost, and cash conversion.",
-        "- Use three cases only: bull, base, bear. For each case, state which operating driver changes, not merely the target price.",
-        "- Tie every catalyst to one modeled lever: order growth, ASP, utilization, product mix, gross margin, working capital, capex, or financing cost.",
-        "- When a thesis depends on a missing driver, keep the case conditional and state the exact future filing or industry datum that would update the model.",
-        "- Do not upgrade a rating because a story is attractive; upgrade only when the earnings bridge or valuation bridge improves.",
+        *(
+            [
+                "- Build every bank case through earning assets × NIM, fee income, credit cost, operating efficiency, tax/minority items, capital needs, and payout.",
+                "- Use three cases only: bull, base, bear. For each case, state which bank driver changes, not merely the target price.",
+                "- Tie every catalyst to one bank lever: NIM, deposit cost, retail/wholesale loan mix, fee take-rate, NPL/special-mention trend, provision coverage, CET1, or dividend.",
+                "- When a thesis depends on a missing bank driver, keep the case conditional and state the exact future filing datum that would update the model.",
+                "- Do not upgrade a rating because PB/PE is low; upgrade only when the bank-specific earnings or valuation bridge improves.",
+            ]
+            if is_banking
+            else [
+                "- Build every forward case through revenue = volume × price × mix, then flow it through gross margin, operating margin, finance cost, and cash conversion.",
+                "- Use three cases only: bull, base, bear. For each case, state which operating driver changes, not merely the target price.",
+                "- Tie every catalyst to one modeled lever: order growth, ASP, utilization, product mix, gross margin, working capital, capex, or financing cost.",
+                "- When a thesis depends on a missing driver, keep the case conditional and state the exact future filing or industry datum that would update the model.",
+                "- Do not upgrade a rating because a story is attractive; upgrade only when the earnings bridge or valuation bridge improves.",
+            ]
+        ),
     ]
     return "\n".join(lines)

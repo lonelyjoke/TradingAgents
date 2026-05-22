@@ -116,6 +116,15 @@ def _cninfo_exchange_params(symbol: str) -> tuple[str, str]:
     return "szse", "sz"
 
 
+def _cninfo_stock_query_values(symbol: str) -> tuple[str, ...]:
+    stock_code = symbol.split(".")[0]
+    if symbol.endswith(".SH"):
+        org_id = f"gssh{stock_code.zfill(7)}"
+    else:
+        org_id = f"gssz{stock_code.zfill(7)}"
+    return (f"{stock_code},{org_id}", stock_code)
+
+
 def _clean_cninfo_title(value: object) -> str:
     text = html.unescape(str(value or ""))
     text = re.sub(r"<[^>]+>", "", text)
@@ -171,7 +180,6 @@ def _parse_cninfo_announcements(payload: dict, symbol: str) -> pd.DataFrame:
 def _fetch_cninfo_announcements(symbol: str, curr_date: str, look_back_days: int) -> pd.DataFrame | TushareDataError:
     start_dt, end_dt, _, _ = _date_window(curr_date, look_back_days)
     column, plate = _cninfo_exchange_params(symbol)
-    stock_code = symbol.split(".")[0]
     se_date = f"{start_dt.strftime('%Y-%m-%d')}~{end_dt.strftime('%Y-%m-%d')}"
     page_size = 30
     max_pages = 10 if look_back_days >= 365 else 4
@@ -186,36 +194,39 @@ def _fetch_cninfo_announcements(symbol: str, curr_date: str, look_back_days: int
     }
 
     try:
-        for page_num in range(1, max_pages + 1):
-            data = {
-                "stock": stock_code,
-                "searchkey": "",
-                "plate": plate,
-                "category": "",
-                "trade": "",
-                "column": column,
-                "columnTitle": "history",
-                "pageNum": str(page_num),
-                "pageSize": str(page_size),
-                "tabName": "fulltext",
-                "sortName": "",
-                "sortType": "",
-                "limit": "",
-                "showTitle": "",
-                "seDate": se_date,
-            }
-            response = session.post(
-                CNINFO_ANNOUNCEMENT_QUERY_URL,
-                data=data,
-                headers=headers,
-                timeout=20,
-            )
-            response.raise_for_status()
-            page = _parse_cninfo_announcements(response.json(), symbol)
-            if page.empty:
-                break
-            rows.append(page)
-            if len(page) < page_size:
+        for stock_query in _cninfo_stock_query_values(symbol):
+            for page_num in range(1, max_pages + 1):
+                data = {
+                    "stock": stock_query,
+                    "searchkey": "",
+                    "plate": plate,
+                    "category": "",
+                    "trade": "",
+                    "column": column,
+                    "columnTitle": "history",
+                    "pageNum": str(page_num),
+                    "pageSize": str(page_size),
+                    "tabName": "fulltext",
+                    "sortName": "",
+                    "sortType": "",
+                    "limit": "",
+                    "showTitle": "",
+                    "seDate": se_date,
+                }
+                response = session.post(
+                    CNINFO_ANNOUNCEMENT_QUERY_URL,
+                    data=data,
+                    headers=headers,
+                    timeout=20,
+                )
+                response.raise_for_status()
+                page = _parse_cninfo_announcements(response.json(), symbol)
+                if page.empty:
+                    break
+                rows.append(page)
+                if len(page) < page_size:
+                    break
+            if rows:
                 break
     except Exception as exc:
         return TushareDataError(f"cninfo announcement fallback unavailable: {exc}")
@@ -548,6 +559,7 @@ def _merge_peer_financials(peer_data: pd.DataFrame, curr_date: str, limit: int) 
             rows.append(
                 {
                     "roe": latest.get("roe"),
+                    "roa": latest.get("roa"),
                     "grossprofit_margin": latest.get("grossprofit_margin"),
                     "netprofit_yoy": latest.get("netprofit_yoy"),
                     "debt_to_assets": latest.get("debt_to_assets"),
@@ -574,6 +586,21 @@ def _score_peers(data: pd.DataFrame) -> pd.DataFrame:
         + _percent_rank(scored.get("pe_ttm", pd.Series(dtype=float)), False) * 15
         + _percent_rank(scored.get("pb", pd.Series(dtype=float)), False) * 10
         + _percent_rank(scored.get("dv_ttm", pd.Series(dtype=float)), True) * 10
+        + _percent_rank(scored.get("total_mv", pd.Series(dtype=float)), True) * 5
+    )
+    scored["v4_score"] = scored["v4_score"].round(1)
+    return scored.sort_values("v4_score", ascending=False)
+
+
+def _score_bank_peers(data: pd.DataFrame) -> pd.DataFrame:
+    scored = data.copy()
+    scored["v4_score"] = (
+        _percent_rank(scored.get("roe", pd.Series(dtype=float)), True) * 30
+        + _percent_rank(scored.get("roa", pd.Series(dtype=float)), True) * 15
+        + _percent_rank(scored.get("pb", pd.Series(dtype=float)), False) * 20
+        + _percent_rank(scored.get("pe_ttm", pd.Series(dtype=float)), False) * 10
+        + _percent_rank(scored.get("dv_ttm", pd.Series(dtype=float)), True) * 15
+        + _percent_rank(scored.get("debt_to_assets", pd.Series(dtype=float)), False) * 5
         + _percent_rank(scored.get("total_mv", pd.Series(dtype=float)), True) * 5
     )
     scored["v4_score"] = scored["v4_score"].round(1)
@@ -610,8 +637,14 @@ def get_peer_comparison(ticker: str, curr_date: str, peer_limit: int = 12) -> st
         curr_date = datetime.now().strftime("%Y-%m-%d")
 
     basic = _fetch_stock_basic(symbol)
+    pro = _get_pro_client()
+    universe = _fetch_stock_basic_universe(pro)
+    if basic is None and not universe.empty and "ts_code" in universe.columns:
+        matched = universe[universe["ts_code"].astype(str) == symbol]
+        if not matched.empty:
+            basic = matched.iloc[0]
     if basic is None:
-        return f"No Tushare stock_basic data found for {symbol}."
+        return f"# Same-industry peer comparison unavailable for {symbol}\n\n- Reason: No Tushare stock_basic data found for {symbol}."
     industry = str(basic.get("industry") or "").strip()
     if not industry:
         return f"No industry classification found for {symbol}; peer comparison unavailable."
@@ -621,8 +654,6 @@ def get_peer_comparison(ticker: str, curr_date: str, peer_limit: int = 12) -> st
         return f"No daily_basic valuation snapshot found for {symbol} near {curr_date}."
     trade_date = str(latest.get("trade_date"))
 
-    pro = _get_pro_client()
-    universe = _fetch_stock_basic_universe(pro)
     required_cols = {"ts_code", "name", "industry"}
     missing_cols = sorted(required_cols - set(universe.columns))
     if universe.empty or missing_cols:
@@ -651,7 +682,8 @@ def get_peer_comparison(ticker: str, curr_date: str, peer_limit: int = 12) -> st
     )
 
     enriched = _merge_peer_financials(selected, curr_date, peer_count)
-    scored = _score_peers(enriched)
+    is_banking = "银行" in f"{basic.get('name', '')} {industry}"
+    scored = _score_bank_peers(enriched) if is_banking else _score_peers(enriched)
     target_score = scored.loc[scored["ts_code"] == symbol, "v4_score"]
     target_score_value = float(target_score.iloc[0]) if not target_score.empty else None
     better = scored[(scored["ts_code"] != symbol) & (scored["v4_score"] > (target_score_value or 0))]
@@ -671,6 +703,7 @@ def get_peer_comparison(ticker: str, curr_date: str, peer_limit: int = 12) -> st
         "ps_ttm",
         "dv_ttm",
         "roe",
+        "roa",
         "netprofit_yoy",
         "debt_to_assets",
         "v4_score",
@@ -684,6 +717,13 @@ def get_peer_comparison(ticker: str, curr_date: str, peer_limit: int = 12) -> st
         f"- Industry: {industry}",
         f"- Valuation trade date: {_format_yyyymmdd(trade_date)}",
         f"- Peer sample: same Tushare stock_basic industry, closest by market value.",
+        *(
+            [
+                "- Banking peer screen: PB/ROE, ROA, dividend yield, and capital-quality proxies receive priority; use filing KPIs for NIM, asset quality, provision coverage, and CET1 before making a final allocation call.",
+            ]
+            if is_banking
+            else []
+        ),
         "",
         "## Peer Table",
         _markdown_table(display),
@@ -724,7 +764,7 @@ def get_peer_comparison(ticker: str, curr_date: str, peer_limit: int = 12) -> st
             "No peer in this sample scored higher than the target on the simple v4 screen. This does not prove the target is best; it only means no clear alternative emerged from the selected valuation-quality-growth metrics."
         )
     else:
-        better_cols = ["ts_code", "name", "pe_ttm", "pb", "roe", "netprofit_yoy", "debt_to_assets", "v4_score"]
+        better_cols = ["ts_code", "name", "pe_ttm", "pb", "roe", "roa", "netprofit_yoy", "debt_to_assets", "v4_score"]
         lines.append(_markdown_table(_select_existing(better, better_cols)))
         lines.append(
             "These are screening candidates, not final recommendations. Ask whether the higher score comes from genuinely better business quality, temporarily depressed valuation, or data distortions."
@@ -735,6 +775,13 @@ def get_peer_comparison(ticker: str, curr_date: str, peer_limit: int = 12) -> st
             "",
             "## Analyst Instructions",
             "- Compare the target against peers on valuation, profitability, growth, leverage, and shareholder return.",
+            *(
+                [
+                    "- For banks, do not rank by generic leverage alone. Final peer judgment must compare PB/ROE, ROA, NIM, asset quality, provision coverage, CET1, RWA growth, and dividend sustainability.",
+                ]
+                if is_banking
+                else []
+            ),
             "- If another peer appears better, explain the specific metrics and the investment caveat.",
             "- Do not claim a peer is superior only because it has a lower PE; check quality and growth together.",
         ]
@@ -1015,10 +1062,13 @@ def _industry_cross_section(symbol: str, curr_date: str) -> tuple[pd.Series, pd.
     trade_date = str(latest.get("trade_date"))
 
     pro = _get_pro_client()
-    universe = pro.stock_basic(
-        list_status="L",
-        fields="ts_code,name,industry,market,exchange",
-    )
+    universe = _fetch_stock_basic_universe(pro)
+    required_cols = {"ts_code", "name", "industry"}
+    missing_cols = sorted(required_cols - set(universe.columns))
+    if universe.empty or missing_cols:
+        raise TushareDataError(
+            f"Tushare stock_basic universe missing required columns {missing_cols or 'all'}."
+        )
     daily = _latest_daily_basic_market(trade_date)
     merged = universe.merge(daily, on="ts_code", how="inner")
     merged["industry"] = merged["industry"].fillna("").astype(str)

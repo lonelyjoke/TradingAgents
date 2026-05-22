@@ -1,0 +1,1 @@
+No Tushare stock_basic data found for 600036.SH.

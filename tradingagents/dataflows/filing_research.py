@@ -253,6 +253,39 @@ _FILING_SIGNAL_RULES: tuple[tuple[str, tuple[str, ...], str, str], ...] = (
     ),
 )
 
+_BANKING_SIGNAL_RULES: tuple[tuple[str, tuple[str, ...], str, str], ...] = (
+    (
+        "bank_spread",
+        ("净息差", "净利差", "净利息收益率", "生息资产", "贷款收益率", "存款成本率"),
+        "Use spread stabilization, funding advantage, and asset-yield resilience to support bank earnings quality.",
+        "Challenge whether volume growth is masking spread compression or higher funding costs.",
+    ),
+    (
+        "bank_asset_quality",
+        ("不良贷款率", "不良贷款", "关注类贷款", "逾期贷款", "迁徙率", "拨备覆盖率", "贷款拨备率", "信用成本"),
+        "Use clean asset-quality metrics and reserve coverage to support lower credit-cost risk.",
+        "Stress early-warning loans, overdue migration, credit cost, and reserve erosion before headline NPLs move.",
+    ),
+    (
+        "bank_capital",
+        ("核心一级资本充足率", "一级资本充足率", "资本充足率", "风险加权资产", "内生资本", "分红"),
+        "Use capital adequacy and payout discipline to support shareholder-return durability.",
+        "Challenge growth or dividend claims if RWA growth consumes capital faster than earnings replenish it.",
+    ),
+    (
+        "bank_retail_wealth",
+        ("管理零售客户总资产", "AUM", "财富管理", "手续费", "佣金", "代理基金", "托管规模", "零售客户"),
+        "Use wealth-management monetization and retail franchise scale to support fee resilience.",
+        "Test whether AUM growth is translating into fee income or being offset by fee-rate compression.",
+    ),
+    (
+        "bank_balance_sheet_mix",
+        ("客户贷款", "客户存款", "活期存款", "零售贷款", "公司贷款", "房地产贷款", "信用卡贷款", "消费贷款"),
+        "Use loan/deposit mix to connect franchise quality to NIM and asset-quality outcomes.",
+        "Challenge retail-bank quality if weak mortgage, credit-card, or consumer-loan data undermine the core engine.",
+    ),
+)
+
 _GENERIC_QUESTIONS: tuple[FilingQuestion, ...] = (
     FilingQuestion(
         "generic_revenue_quality",
@@ -522,6 +555,24 @@ _INDUSTRY_PLAYBOOKS: dict[str, tuple[FilingQuestion, ...]] = {
             "Support business diversification.",
             "Question whether fee income is cyclical or shrinking.",
         ),
+        FilingQuestion(
+            "bank_capital",
+            "capital",
+            "资本充足率、核心一级资本和风险加权资产是否支持扩表与分红？",
+            ("资本充足率", "核心一级资本充足率", "一级资本充足率", "风险加权资产", "分红"),
+            ("quarterly", "semiannual", "annual"),
+            "Support growth and payout durability when capital is replenished internally.",
+            "Challenge expansion or dividend claims if RWA growth consumes capital.",
+        ),
+        FilingQuestion(
+            "bank_retail_book",
+            "loan_deposit_mix",
+            "零售贷款、客户存款和财富管理规模是否仍支撑零售银行护城河？",
+            ("零售贷款", "客户存款", "活期存款", "管理零售客户总资产", "AUM", "信用卡"),
+            ("quarterly", "semiannual", "annual"),
+            "Support the retail-bank moat when deposit and AUM growth remain healthy.",
+            "Challenge the moat if retail loan demand or deposit quality deteriorates.",
+        ),
     ),
     "shipping": (
         FilingQuestion(
@@ -772,6 +823,7 @@ def _line_contains_any(line: str, keywords: tuple[str, ...]) -> bool:
 def _extract_filing_evidence(
     report_texts: Iterable[tuple[str, str]],
     max_per_category: int = 3,
+    rules: tuple[tuple[str, tuple[str, ...], str, str], ...] = _FILING_SIGNAL_RULES,
 ) -> list[FilingEvidence]:
     seen: set[tuple[str, str]] = set()
     evidence_by_category: dict[str, list[FilingEvidence]] = {}
@@ -781,7 +833,7 @@ def _extract_filing_evidence(
             line = _compact_text(raw_line, limit=240)
             if not line:
                 continue
-            for category, keywords, bull_use, bear_use in _FILING_SIGNAL_RULES:
+            for category, keywords, bull_use, bear_use in rules:
                 if not _line_contains_any(line, keywords):
                     continue
                 key = (category, line)
@@ -799,7 +851,7 @@ def _extract_filing_evidence(
                 )
 
     rows: list[FilingEvidence] = []
-    for category, *_ in _FILING_SIGNAL_RULES:
+    for category, *_ in rules:
         rows.extend(evidence_by_category.get(category, [])[:max_per_category])
     return rows
 
@@ -839,6 +891,19 @@ def _select_industry_profile(
     normalized_parts.extend(_repair_mojibake(text) for _, text in report_texts)
     blob = " ".join(normalized_parts)
     identity_blob = f"{normalized_parts[0]} {normalized_parts[1]}"
+    if any(token in identity_blob for token in ("银行", "商业银行", "股份制银行")):
+        return "banking"
+    if any(
+        token in blob
+        for token in (
+            "净息差",
+            "净利息收益率",
+            "不良贷款率",
+            "拨备覆盖率",
+            "核心一级资本充足率",
+        )
+    ) and "银行" in blob:
+        return "banking"
     if any(token in identity_blob for token in ("\u65b0\u578b\u7535\u529b", "\u7efc\u5408\u80fd\u6e90", "\u7535\u529b")):
         return "power_operator"
     industrial_identity = any(
@@ -959,6 +1024,35 @@ def _extract_material_filing_findings(
         tuple[str, str, tuple[str, ...], tuple[str, ...], str, str, str],
         ...
     ] = (
+        (
+            "compute-leasing-monetization",
+            "high",
+            (
+                "\u7b97\u529b\u79df\u8d41",
+                "\u667a\u4e91\u8ba1\u7b97",
+                "\u667a\u7b97\u4e2d\u5fc3",
+                "\u7b97\u529b\u4e2d\u5fc3",
+                "\u6570\u636e\u4e2d\u5fc3",
+                "AI\u6570\u636e\u670d\u52a1",
+                "\u7f51\u7edc\u5de5\u7a0b",
+            ),
+            (
+                "\u6536\u5165",
+                "\u8425\u6536",
+                "\u5229\u6da6",
+                "\u6bdb\u5229",
+                "\u8d44\u4ea7",
+                "\u79df\u8d41\u4e1a\u52a1\u89c4\u6a21",
+                "\u8ba2\u5355",
+                "\u5ba2\u6237",
+                "\u9879\u76ee",
+                "\u5efa\u8bbe",
+                "\u65b0\u589e",
+            ),
+            "Compute leasing or digital infrastructure is disclosed with an economic bridge; it must enter the earnings and asset-quality debate.",
+            "Use as filing-grade evidence that the new business may already have operating assets or monetization.",
+            "Test ownership boundary, revenue recognition, asset intensity, lease terms, customer quality, margin, and cash conversion before assigning valuation credit.",
+        ),
         (
             "contracted-commercialization",
             "high",
@@ -1086,7 +1180,37 @@ _SEGMENT_VALUE_TERMS: tuple[str, ...] = (
 )
 
 
+_SEGMENT_SECTION_TERMS = (
+    *_SEGMENT_SECTION_TERMS,
+    "\u5206\u4ea7\u54c1",
+    "\u5206\u4e1a\u52a1",
+    "\u5206\u884c\u4e1a",
+    "\u4e3b\u8425\u4e1a\u52a1",
+    "\u7b97\u529b\u79df\u8d41",
+    "\u667a\u4e91\u8ba1\u7b97",
+    "\u667a\u7b97\u4e2d\u5fc3",
+    "\u7f51\u7edc\u5de5\u7a0b",
+)
+_SEGMENT_VALUE_TERMS = (
+    *_SEGMENT_VALUE_TERMS,
+    "\u6536\u5165",
+    "\u8425\u6536",
+    "\u8425\u4e1a\u6536\u5165",
+    "\u8425\u4e1a\u6210\u672c",
+    "\u6bdb\u5229",
+    "\u6bdb\u5229\u7387",
+    "\u540c\u6bd4",
+    "\u8d44\u4ea7",
+    "\u7b97\u529b\u79df\u8d41",
+    "\u667a\u4e91\u8ba1\u7b97",
+    "\u667a\u7b97\u4e2d\u5fc3",
+    "\u7f51\u7edc\u5de5\u7a0b",
+)
+
+
 def _segment_type(line: str) -> str:
+    if any(token in line for token in ("\u7b97\u529b\u79df\u8d41", "\u667a\u4e91\u8ba1\u7b97", "\u667a\u7b97\u4e2d\u5fc3", "\u7f51\u7edc\u5de5\u7a0b")):
+        return "business"
     if "产品" in line or any(token in line for token in ("茅台酒", "系列酒", "汽车", "电池", "电子")):
         return "product"
     if "直销" in line or "批发" in line or "经销" in line:
@@ -1433,6 +1557,36 @@ _GROWTH_VECTOR_RULES: dict[str, tuple[str, ...]] = {
 
 
 def _growth_stage(line: str) -> tuple[str, str, str]:
+    if any(token in line for token in ("\u79df\u8d41\u4e1a\u52a1\u89c4\u6a21", "\u6536\u5165", "\u8425\u6536", "\u5229\u6da6", "\u6bdb\u5229")) and any(
+        token in line
+        for token in (
+            "\u7b97\u529b\u79df\u8d41",
+            "\u667a\u4e91\u8ba1\u7b97",
+            "\u667a\u7b97\u4e2d\u5fc3",
+            "\u6570\u636e\u4e2d\u5fc3",
+            "\u7f51\u7edc\u5de5\u7a0b",
+        )
+    ):
+        return (
+            "monetized",
+            "eligible for valuation bridge review",
+            "check segment revenue, asset intensity, margin, lease terms, and cash conversion",
+        )
+    if any(token in line for token in ("\u5efa\u8bbe", "\u8d44\u4ea7", "\u65b0\u589e", "\u6295\u8d44")) and any(
+        token in line
+        for token in (
+            "\u7b97\u529b\u79df\u8d41",
+            "\u667a\u4e91\u8ba1\u7b97",
+            "\u667a\u7b97\u4e2d\u5fc3",
+            "\u6570\u636e\u4e2d\u5fc3",
+            "\u7f51\u7edc\u5de5\u7a0b",
+        )
+    ):
+        return (
+            "capacity-building",
+            "scenario upside, but capital intensity and utilization must be tested",
+            "check asset ownership, utilization, customer contracts, and commissioning timetable",
+        )
     if any(token in line for token in ("签订长期协议", "签订协议", "中标", "订单", "客户")):
         return (
             "contracted",
@@ -1523,6 +1677,53 @@ _COMPANY_SPECIFIC_COMMERCIAL_TOKENS: tuple[str, ...] = (
     "实现收入",
     "营业收入",
     "销售",
+)
+
+
+_GROWTH_VECTOR_RULES["ai-and-digital"] = (
+    *_GROWTH_VECTOR_RULES.get("ai-and-digital", ()),
+    "\u7b97\u529b",
+    "\u7b97\u529b\u79df\u8d41",
+    "\u667a\u4e91\u8ba1\u7b97",
+    "\u667a\u7b97\u4e2d\u5fc3",
+    "\u7b97\u529b\u4e2d\u5fc3",
+    "\u6570\u636e\u4e2d\u5fc3",
+    "\u7f51\u7edc\u5de5\u7a0b",
+    "AI\u6570\u636e\u670d\u52a1",
+)
+_COMPANY_SUBJECT_TOKENS = (
+    *_COMPANY_SUBJECT_TOKENS,
+    "\u516c\u53f8",
+    "\u672c\u516c\u53f8",
+    "\u5b50\u516c\u53f8",
+    "\u5e7f\u4e1c\u76c8\u5cf0",
+)
+_COMPANY_ACTION_TOKENS = (
+    *_COMPANY_ACTION_TOKENS,
+    "\u5f00\u5c55",
+    "\u5efa\u8bbe",
+    "\u6295\u8d44",
+    "\u8fd0\u8425",
+    "\u5b9e\u73b0",
+    "\u5f62\u6210",
+    "\u65b0\u589e",
+    "\u4ea7\u751f",
+)
+_COMPANY_SPECIFIC_COMMERCIAL_TOKENS = (
+    *_COMPANY_SPECIFIC_COMMERCIAL_TOKENS,
+    "\u6536\u5165",
+    "\u8425\u6536",
+    "\u5229\u6da6",
+    "\u6bdb\u5229",
+    "\u8d44\u4ea7",
+    "\u79df\u8d41\u4e1a\u52a1\u89c4\u6a21",
+    "\u8ba2\u5355",
+    "\u5ba2\u6237",
+    "\u7b97\u529b\u79df\u8d41",
+    "\u667a\u4e91\u8ba1\u7b97",
+    "\u667a\u7b97\u4e2d\u5fc3",
+    "\u6570\u636e\u4e2d\u5fc3",
+    "\u7f51\u7edc\u5de5\u7a0b",
 )
 
 
@@ -2518,6 +2719,8 @@ def _build_industry_reading_pack(
     return rows
 
 def _question_candidates(profile: str) -> tuple[FilingQuestion, ...]:
+    if profile == "banking":
+        return _INDUSTRY_PLAYBOOKS.get(profile, ())
     return _GENERIC_QUESTIONS + _INDUSTRY_PLAYBOOKS.get(profile, ())
 
 
@@ -2559,6 +2762,78 @@ def _answer_questions(
         if best is not None:
             answers.append(best[1])
     return answers
+
+
+_BANKING_KPI_RULES: tuple[tuple[str, tuple[str, ...], str, str], ...] = (
+    (
+        "spread_profitability",
+        ("净息差", "净利差", "净利息收益率", "生息资产收益率", "贷款收益率", "存款成本率"),
+        "NIM is the main earnings transmission belt for a bank; do not infer spread stabilization from revenue alone.",
+        "Require the actual spread/yield/cost disclosure before calling an earnings inflection.",
+    ),
+    (
+        "asset_quality",
+        ("不良贷款率", "不良贷款余额", "关注类贷款", "逾期贷款", "迁徙率", "信用成本", "拨备覆盖率", "贷款拨备率"),
+        "Asset-quality direction decides whether low PB is value or a trap.",
+        "Look for early deterioration in special-mention, overdue, migration, and reserve metrics before NPLs rise.",
+    ),
+    (
+        "capital_and_payout",
+        ("核心一级资本充足率", "一级资本充足率", "资本充足率", "风险加权资产", "分红率", "现金分红"),
+        "Capital adequacy links growth, dividends, and downside resilience.",
+        "Do not recommend aggressive growth or payout unless CET1/RWA evidence supports it.",
+    ),
+    (
+        "retail_wealth_engine",
+        ("管理零售客户总资产", "AUM", "零售客户", "财富管理", "手续费及佣金", "代理基金", "托管规模"),
+        "Retail AUM matters only when it converts into durable fee income and deposit stickiness.",
+        "Challenge AUM-led bulls if fees lag because of product mix or fee-rate compression.",
+    ),
+    (
+        "loan_deposit_mix",
+        ("客户贷款", "客户存款", "活期存款", "零售贷款", "公司贷款", "房地产贷款", "信用卡贷款", "消费贷款"),
+        "Loan/deposit mix explains whether franchise quality is improving or merely expanding the balance sheet.",
+        "Stress weak retail credit, mortgage, credit-card, or consumer-finance data when the thesis depends on retail banking.",
+    ),
+)
+
+
+def _extract_banking_kpi_pack(
+    report_texts: Iterable[tuple[str, str]],
+    max_per_lens: int = 4,
+) -> list[dict[str, str]]:
+    rows: list[dict[str, str]] = []
+    seen: set[tuple[str, str]] = set()
+    counts: dict[str, int] = {}
+    for title, text in report_texts:
+        report_type = _detect_report_type(title)
+        for unit in _iter_filing_text_units(text, limit=320):
+            if not unit:
+                continue
+            for lens, keywords, why_it_matters, bear_check in _BANKING_KPI_RULES:
+                if counts.get(lens, 0) >= max_per_lens:
+                    continue
+                if not _line_contains_any(unit, keywords):
+                    continue
+                strength = _evidence_strength(unit)
+                if strength != "quantified disclosure" and counts.get(lens, 0) >= 1:
+                    continue
+                key = (lens, unit)
+                if key in seen:
+                    continue
+                seen.add(key)
+                counts[lens] = counts.get(lens, 0) + 1
+                rows.append(
+                    {
+                        "lens": lens,
+                        "report_type": report_type,
+                        "evidence_strength": strength,
+                        "filing_evidence": f"{title}: {_compact_text(unit, 260)}",
+                        "why_it_matters": why_it_matters,
+                        "bear_check": bear_check,
+                    }
+                )
+    return rows
 
 
 def _extract_statement_table_signals(
@@ -3449,6 +3724,27 @@ _RUNTIME_READING_KEYWORDS = (
     "关联",
     "分红",
     "回购",
+    "净息差",
+    "净利差",
+    "净利息收益率",
+    "生息资产",
+    "贷款收益率",
+    "存款成本率",
+    "不良贷款率",
+    "关注类贷款",
+    "逾期贷款",
+    "迁徙率",
+    "拨备覆盖率",
+    "贷款拨备率",
+    "资本充足率",
+    "核心一级资本",
+    "风险加权资产",
+    "客户存款",
+    "客户贷款",
+    "零售贷款",
+    "财富管理",
+    "手续费",
+    "AUM",
     "电池",
     "汽车",
     "新能源",
@@ -3563,7 +3859,11 @@ def get_financial_report_intelligence_context(
     cashflow = _fetch_cashflow_data(symbol, curr_date, freq="quarterly", limit=8)
     indicators = _fetch_fina_indicator(symbol, curr_date)
     derived_metrics = _derive_financial_metrics(income, balance, cashflow, indicators)
-    evidence = _extract_filing_evidence(report_texts)
+    profile = _select_industry_profile(company_name, industry, report_texts)
+    evidence = _extract_filing_evidence(
+        report_texts,
+        rules=_BANKING_SIGNAL_RULES if profile == "banking" else _FILING_SIGNAL_RULES,
+    )
     material_findings = _extract_material_filing_findings(report_texts)
     segment_economics = _extract_segment_economics(report_texts)
     business_model_map = _build_business_model_map(report_texts)
@@ -3576,11 +3876,11 @@ def get_financial_report_intelligence_context(
     )
     deep_reading_excerpts = _extract_deep_reading_excerpts(report_texts)
     paragraph_reading_pack = _build_paragraph_reading_pack(report_texts)
-    profile = _select_industry_profile(company_name, industry, report_texts)
     industry_reading_pack = _build_industry_reading_pack(report_texts, profile)
-    statement_table_signals = _extract_statement_table_signals(report_texts)
+    banking_kpi_pack = _extract_banking_kpi_pack(report_texts) if profile == "banking" else []
+    statement_table_signals = [] if profile == "banking" else _extract_statement_table_signals(report_texts)
     note_findings = _extract_note_findings(report_texts)
-    financial_relations = _infer_financial_relations(derived_metrics)
+    financial_relations = [] if profile == "banking" else _infer_financial_relations(derived_metrics)
     questions = _question_candidates(profile)
     answers = _answer_questions(report_texts, questions)
     coverage_audit = _audit_filing_coverage(
@@ -3729,6 +4029,7 @@ def get_financial_report_intelligence_context(
         }
         for item in industry_reading_pack
     ]
+    banking_kpi_rows = banking_kpi_pack
     statement_table_rows = [
         {
             "account": item.account,
@@ -3877,6 +4178,9 @@ def get_financial_report_intelligence_context(
         "## Industry Reading Pack",
         _build_table(industry_rows),
         "",
+        "## Banking KPI Pack",
+        _build_table(banking_kpi_rows),
+        "",
         "## Statement Table Reading Pack",
         _build_table(statement_table_rows),
         "",
@@ -3927,6 +4231,7 @@ def get_financial_report_intelligence_context(
         "- Use the filing textual signals layer to read management wording strength, risk-language upgrades, abnormal silence, and strategic promises. Hard wording still needs materiality; soft wording belongs in scenarios/watchlist; risk wording can cap valuation. Keep a concise textual-signal module in the manager report when it changes the thesis.",
         "- Use the filing insight distillation layer before writing the final thesis. It converts raw filing snippets into buy-side questions: core engine, second curve, quality of growth, monetization gap, capital allocation, and tail risk. The manager report should read like a company memo, not a list of disconnected data points.",
         "- Start from the selected question playbook, then answer only with evidence actually found in filings.",
+        "- For banks, start from the Banking KPI Pack and the banking playbook. Do not use contract liabilities, inventory, gross margin, capex, or generic OCF conversion as core bank-quality evidence unless a bank-specific disclosure explicitly makes them decision-relevant.",
         "- Use the core discussion promotion queue as the bridge from reading to investing: core items should enter bull/bear debate, supporting items should reinforce or challenge a thesis, scenario items belong in upside/downside cases, and watch items stay out of base-case valuation until upgraded.",
         "- Treat unanswered filing questions as explicit research gaps, not neutral evidence. If a thesis depends on an unanswered question, reduce conviction or state what disclosure would close the gap.",
         "- Promote materially decision-relevant findings such as signed long-term agreements, named customers, take-or-pay/offtake signals, capacity-to-demand bridges, and commercialization milestones into the core debate rather than leaving them buried as generic snippets.",

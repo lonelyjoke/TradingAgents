@@ -20,6 +20,7 @@ from tradingagents.dataflows.thematic_research import (
     _portfolio_pattern_summary,
     _load_financial_report_texts,
     _extract_short_investee_name,
+    _is_valid_asset_revaluation_candidate,
 )
 
 
@@ -58,6 +59,11 @@ def test_financial_report_extracts_short_investee_rows_inside_investment_section
     names = {(candidate.name, candidate.kind) for candidate in candidates}
 
     assert ("蓝箭航天", "asset-revaluation") in names
+
+
+def test_bank_balance_sheet_rows_are_not_asset_revaluation_candidates():
+    assert not _is_valid_asset_revaluation_candidate("金融投资", "金融投资 (2,889) (2,400)")
+    assert not _is_valid_asset_revaluation_candidate("债券投资及票据贴现", "债券投资及票据贴现 107,179 167,930")
 
 
 
