@@ -4,8 +4,10 @@ from tradingagents.dataflows.filing_research import (
     FilingTextSignal,
     FinancialRelationInsight,
     GrowthVectorFinding,
+    SegmentEconomicsFinding,
     _audit_filing_coverage,
     _answer_questions,
+    _build_business_segment_valuation_map,
     _build_business_model_map,
     _build_paragraph_reading_pack,
     _build_industry_reading_pack,
@@ -112,6 +114,12 @@ def test_industry_playbook_selects_new_priority_profiles():
     cases = [
         ("江西铜业", "有色金属", "公司拥有铜矿资源储量与冶炼产能。", "metals_mining"),
         ("宁德时代", "电池", "公司动力电池与储能电池出货量增长。", "lithium_battery"),
+        (
+            "九号公司",
+            "摩托车",
+            "公司主营智能短交通，覆盖电动两轮车、电动滑板车、全地形车、割草机器人和Segway品牌。",
+            "smart_mobility",
+        ),
         ("山西汾酒", "白酒", "公司持续优化批价与经销商库存。", "baijiu"),
         ("中国国航", "航空运输", "公司客座率提升，航油成本仍需关注，机队稳步扩张。", "airlines"),
         ("中国平安", "保险", "公司新业务价值与内含价值持续改善。", "insurance"),
@@ -142,6 +150,7 @@ def test_question_candidates_include_new_priority_playbooks():
     assert any(q.question_id == "airline_traffic_yield" for q in _question_candidates("airlines"))
     assert any(q.question_id == "insurance_nbv" for q in _question_candidates("insurance"))
     assert any(q.question_id == "hog_cycle" for q in _question_candidates("livestock_hog"))
+    assert any(q.question_id == "mobility_product_mix" for q in _question_candidates("smart_mobility"))
 
 
 
@@ -321,6 +330,26 @@ def test_business_model_map_avoids_header_only_segment_lines():
     assert "\u98ce\u673a\u9500\u552e" in by_lens["segment_mix"].evidence
 
 
+def test_business_model_map_does_not_use_customer_table_as_core_engine():
+    reports = [
+        (
+            "2025年年度报告",
+            "\n".join(
+                [
+                    "报告期内公司贸易业务收入占营业收入比例超过 10%的贸易业务前五名销售客户 销售额 1,870,855,566.27",
+                    "公司主营业务为智能短交通和服务机器人产品，主要产品包括电动两轮车、电动滑板车、全地形车和割草机器人。",
+                ]
+            ),
+        )
+    ]
+
+    rows = _build_business_model_map(reports)
+    by_lens = {row.lens: row for row in rows}
+
+    assert "智能短交通" in by_lens["core_revenue_engine"].evidence
+    assert "前五名销售客户" not in by_lens["core_revenue_engine"].evidence
+
+
 def test_segment_economics_pack_extracts_product_and_geography_rows():
     reports = [
         (
@@ -339,6 +368,77 @@ def test_segment_economics_pack_extracts_product_and_geography_rows():
     assert "\u8305\u53f0\u9152" in evidence
     assert "\u7cfb\u5217\u9152" in evidence
     assert "\u5883\u5916" in evidence
+
+
+def test_segment_economics_filters_financial_assets_and_customer_tables():
+    reports = [
+        (
+            "2025年年度报告",
+            "\n".join(
+                [
+                    "银行理财产品投资 1,260,163,242.83 2,288,385,549.09 其他权益工具投资 69,134,417.81",
+                    "报告期内公司贸易业务收入占营业收入比例超过 10%的贸易业务前五名销售客户 销售额 1,870,855,566.27",
+                    "第一季度 第二季度 第三季度 第四季度 营业收入 5,112,484,338.21 6,629,649,256.44 6,647,531,252.20 2,888,211,820.10",
+                    "主营业务分产品情况 电动两轮车 营业收入 10,000.00 营业成本 7,000.00 毛利率 30.00 同比 45.00%",
+                ]
+            ),
+        )
+    ]
+
+    rows = _extract_segment_economics(reports)
+    evidence = "\n".join(row.evidence for row in rows)
+
+    assert "电动两轮车" in evidence
+    assert "银行理财产品" not in evidence
+    assert "前五名销售客户" not in evidence
+    assert "第一季度" not in evidence
+
+
+def test_business_segment_valuation_map_splits_core_and_new_business():
+    business_model_map = [
+        BusinessModelFinding(
+            lens="core_revenue_engine",
+            report_type="annual",
+            evidence="2025 annual: 公司主营业务为环保装备及服务，营业收入保持稳定。",
+            why_it_matters="Defines the core engine.",
+        )
+    ]
+    segment_economics = [
+        # Mature disclosed business.
+        SegmentEconomicsFinding(
+            segment_type="business",
+            report_type="annual",
+            evidence="2025 annual: 环保主业 营业收入 100.00 营业成本 75.00 毛利率 25.00 同比 8.00%",
+            analyst_use="",
+        ),
+        # Second curve that should not be blended into the old business.
+        SegmentEconomicsFinding(
+            segment_type="business",
+            report_type="annual",
+            evidence="2025 annual: 算力租赁业务 收入 5.00 毛利率 40.00 同比 200.00%",
+            analyst_use="",
+        ),
+    ]
+    growth_vectors = [
+        GrowthVectorFinding(
+            vector="ai-and-digital",
+            stage="monetized",
+            evidence="2025 annual: 算力租赁业务规模扩大并实现收入。",
+            valuation_treatment="eligible for valuation bridge review",
+            verification_need="check segment margin and cash conversion",
+        )
+    ]
+
+    rows = _build_business_segment_valuation_map(
+        business_model_map,
+        segment_economics,
+        growth_vectors,
+    )
+
+    assert rows[0].business_bucket == "core_revenue_engine"
+    assert any(row.business_bucket == "emerging_or_second_curve" for row in rows)
+    assert any("SOTP" in row.valuation_anchor for row in rows)
+    assert any("normalized earnings" in row.valuation_anchor for row in rows)
 
 
 

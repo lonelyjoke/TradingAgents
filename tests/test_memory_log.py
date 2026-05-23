@@ -717,7 +717,13 @@ class TestPortfolioManagerInjection:
         assert "Catalysts, Optionality & Falsification" in prompt
         assert "less fragmentation, more synthesis" in prompt
         assert "Verification & Falsification" in prompt
-        assert "roughly 2,800-3,800 Chinese characters" in prompt
+        assert "roughly 3,800-5,800 Chinese characters" in prompt
+        assert "higher information density" in prompt
+        assert "Bank Buy-Side Memo Overlay" in prompt
+        assert "If the target is not a bank" in prompt
+        assert "Route non-bank companies through their own industry-native drivers" in prompt
+        assert "PB/ROE/COE" in prompt
+        assert "earning assets x NIM" in prompt
         assert "Decision-Continuity Rules" in prompt
         assert "Material-catalyst discipline" in prompt
 

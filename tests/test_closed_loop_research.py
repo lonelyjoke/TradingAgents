@@ -3,6 +3,7 @@ import pandas as pd
 from tradingagents.dataflows.earnings_modeling import (
     _annualize_cumulative,
     _build_driver_rows,
+    _is_banking_stock,
     _period_label,
 )
 from tradingagents.dataflows.expectation_research import (
@@ -54,6 +55,11 @@ def test_driver_bridge_surfaces_latest_financial_levers():
     assert rows["Gross margin"]["change_vs_prior_report"] == "+2.00pp"
     assert rows["Finance-expense ratio"]["change_vs_prior_report"] == "-0.50pp"
     assert rows["Receivables / revenue"]["change_vs_prior_report"] == "+3.00pp"
+
+
+def test_bank_earnings_model_uses_symbol_fallback_when_basic_missing():
+    assert _is_banking_stock("600036.SH", None) is True
+    assert _is_banking_stock("300750.SZ", None) is False
 
 
 def test_implied_snapshot_reverse_engineers_market_quote():

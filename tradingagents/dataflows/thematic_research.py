@@ -13,6 +13,7 @@ import pandas as pd
 import requests
 
 from .config import get_config
+from .industry_classifier import is_banking_entity
 from .investor_interaction_research import fetch_investor_interaction_history
 from .tushare_a_stock import (
     TushareDataError,
@@ -1186,6 +1187,7 @@ def get_thematic_catalyst_context(
 
     basic = _fetch_stock_basic(symbol)
     company_name = _format_value(basic.get("name")) if basic is not None else symbol
+    is_banking = is_banking_entity(symbol, basic=basic, company_name=company_name)
     reports, report_texts = _load_financial_report_texts(
         symbol, curr_date, financial_look_back_days
     )
@@ -1196,6 +1198,9 @@ def get_thematic_catalyst_context(
 
     financial_candidates = _extract_financial_candidates(report_texts)
     reliable_filing_themes = _extract_reliable_filing_theme_candidates(report_texts)
+    if is_banking:
+        financial_candidates = []
+        reliable_filing_themes = []
     financial_candidates = financial_candidates + reliable_filing_themes
     investee_terms = sorted(
         {
@@ -1220,17 +1225,20 @@ def get_thematic_catalyst_context(
     entity_terms = [*news_terms, *investee_terms]
     filtered_major_news = _filter_news_by_entity_terms(combined_major_news, entity_terms)
     filtered_news_feed = _filter_news_by_entity_terms(combined_news_feed, entity_terms)
-    news_candidates = _extract_news_candidates(filtered_major_news, filtered_news_feed)
-    concept_memberships = _fetch_legacy_concept_memberships(symbol)
-    try:
-        interaction_records = fetch_investor_interaction_history(
-            symbol,
-            end_date=curr_date,
-            lookback_days=news_look_back_days,
-            max_pages=10,
-        )
-    except Exception as exc:
-        interaction_records = TushareDataError(str(exc))
+    news_candidates = [] if is_banking else _extract_news_candidates(filtered_major_news, filtered_news_feed)
+    concept_memberships = pd.DataFrame() if is_banking else _fetch_legacy_concept_memberships(symbol)
+    if is_banking:
+        interaction_records = pd.DataFrame()
+    else:
+        try:
+            interaction_records = fetch_investor_interaction_history(
+                symbol,
+                end_date=curr_date,
+                lookback_days=news_look_back_days,
+                max_pages=10,
+            )
+        except Exception as exc:
+            interaction_records = TushareDataError(str(exc))
 
     financial_rows = []
     for candidate in financial_candidates:
@@ -1317,6 +1325,13 @@ def get_thematic_catalyst_context(
         f"# Thematic catalyst cross-check for {symbol} as of {curr_date}",
         "",
         f"- Company: {company_name}",
+        *(
+            [
+                "- Bank-specific routing: generic thematic optionality is suppressed for banks; use the bank research stack for NIM, deposit cost, asset quality, capital, fee income, and dividend policy instead.",
+            ]
+            if is_banking
+            else []
+        ),
         f"- Financial-report look-back: {financial_look_back_days} days",
         f"- News look-back: {news_look_back_days} days",
         f"- Investee news terms: {', '.join(investee_terms) if investee_terms else 'none'}",
@@ -1359,5 +1374,12 @@ def get_thematic_catalyst_context(
         "- After reviewing single investees, ask a second-level question: is there a repeatable capital-allocation pattern? If filings show multiple verified investees plus realized exits, investment income, or fair-value gains over time, discuss whether management's first-level investing capability itself is a durable bull factor rather than treating each asset as an isolated anecdote.",
         "- Business-realization themes may enter core valuation only when filings disclose monetization evidence such as revenue, profit, orders, or cash-flow contribution; otherwise keep them as qualitative optionality.",
         "- If report text extraction is unavailable, say so explicitly and do not pretend that news-only themes were verified.",
+        *(
+            [
+                "- For banks, do not treat contract liabilities, orders, capacity release, precious metals, financial investments, or generic concept membership as valuation catalysts. Route the analysis to banking KPIs and regulatory/policy transmission.",
+            ]
+            if is_banking
+            else []
+        ),
     ]
     return "\n".join(lines)

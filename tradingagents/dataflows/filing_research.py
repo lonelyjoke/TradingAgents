@@ -9,6 +9,7 @@ from typing import Iterable
 import pandas as pd
 
 from .config import get_config
+from .industry_classifier import is_banking_entity
 from .tushare_a_stock import (
     TushareDataError,
     _derive_financial_metrics,
@@ -159,6 +160,16 @@ class SegmentEconomicsFinding:
     report_type: str
     evidence: str
     analyst_use: str
+
+
+@dataclass(frozen=True)
+class BusinessSegmentValuationFinding:
+    business_bucket: str
+    report_type: str
+    evidence: str
+    valuation_anchor: str
+    analyst_use: str
+    verification_need: str
 
 
 @dataclass(frozen=True)
@@ -708,6 +719,53 @@ _INDUSTRY_PLAYBOOKS: dict[str, tuple[FilingQuestion, ...]] = {
             "Challenge monetization, capex burden, and technology obsolescence.",
         ),
     ),
+    "smart_mobility": (
+        FilingQuestion(
+            "mobility_product_mix",
+            "mix",
+            "电动两轮车、滑板车、全地形车、割草机器人、服务机器人等产品线，谁在贡献收入和毛利？",
+            ("电动两轮车", "电动滑板车", "全地形车", "ATV", "割草机器人", "服务机器人", "分产品", "毛利率"),
+            ("semiannual", "annual"),
+            "Support a split valuation only when product-line revenue, margin, growth, or cash conversion is disclosed.",
+            "Challenge blended valuation if different product lines have different growth, margin, inventory, or channel economics.",
+        ),
+        FilingQuestion(
+            "mobility_channel_inventory",
+            "channel_inventory",
+            "渠道订单、合同负债、库存和终端动销是否同步，还是存在压货和降价风险？",
+            ("合同负债", "预收款项", "库存", "存货", "经销商", "渠道", "动销", "周转"),
+            ("quarterly", "semiannual", "annual"),
+            "Use synchronized contract liabilities, sell-through, and controlled inventory to validate demand.",
+            "Attack the thesis if inventory grows faster than sell-through or contract liabilities become stale channel pressure.",
+        ),
+        FilingQuestion(
+            "mobility_overseas_fx",
+            "overseas_fx",
+            "海外收入、汇率套保、关税和地区结构是否改善利润质量，还是放大利润波动？",
+            ("海外", "境外", "东南亚", "越南", "汇兑", "套期保值", "关税", "Segway"),
+            ("quarterly", "semiannual", "annual"),
+            "Support global growth when overseas revenue converts into stable margin and cash after FX.",
+            "Stress FX losses, tariff exposure, regional execution, and whether overseas growth is lower-quality revenue.",
+        ),
+        FilingQuestion(
+            "mobility_software_services",
+            "recurring_revenue",
+            "软件服务费、APP服务、订阅或增值服务是否已经形成可单独估值的经常性收入？",
+            ("软件服务费", "APP", "增值服务", "订阅", "服务费", "用户", "续费", "毛利率"),
+            ("quarterly", "semiannual", "annual"),
+            "Upgrade recurring revenue only when filings disclose scale, margin, user base, renewal, or retention.",
+            "Keep software optionality out of base-case valuation if it is only an interaction disclosure or below materiality.",
+        ),
+        FilingQuestion(
+            "mobility_new_category",
+            "new_business",
+            "新品类和第二增长曲线已经商业化，还是仍停留在产品规划和品牌叙事？",
+            ("新产品", "新品类", "割草机器人", "全地形车", "E-bike", "电切油", "油转电", "投产", "产能"),
+            ("semiannual", "annual"),
+            "Use monetized new categories as scenario/SOTP upside with explicit evidence gates.",
+            "Challenge new-category optimism when revenue, margin, orders, channels, or cash conversion are missing.",
+        ),
+    ),
     "baijiu": (
         FilingQuestion(
             "baijiu_channel_inventory",
@@ -906,6 +964,40 @@ def _select_industry_profile(
         return "banking"
     if any(token in identity_blob for token in ("\u65b0\u578b\u7535\u529b", "\u7efc\u5408\u80fd\u6e90", "\u7535\u529b")):
         return "power_operator"
+    smart_mobility_identity = any(
+        token in identity_blob
+        for token in (
+            "九号",
+            "Ninebot",
+            "Segway",
+            "摩托车",
+            "电动两轮车",
+            "两轮车",
+            "智能出行",
+        )
+    )
+    smart_mobility_hits = sum(
+        token in blob
+        for token in (
+            "电动两轮车",
+            "电动滑板车",
+            "电动平衡车",
+            "智能短交通",
+            "全地形车",
+            "ATV",
+            "割草机器人",
+            "服务机器人",
+            "Ninebot",
+            "Segway",
+            "E-bike",
+            "电切油",
+            "油转电",
+            "软件服务费",
+            "APP软件服务费",
+        )
+    )
+    if smart_mobility_identity and smart_mobility_hits >= 2:
+        return "smart_mobility"
     industrial_identity = any(
         token in identity_blob
         for token in (
@@ -1207,6 +1299,61 @@ _SEGMENT_VALUE_TERMS = (
     "\u7f51\u7edc\u5de5\u7a0b",
 )
 
+_SEGMENT_EXCLUDE_TERMS: tuple[str, ...] = (
+    "银行理财产品",
+    "理财产品投资",
+    "其他权益工具投资",
+    "其他非流动金融资产",
+    "交易性金融资产",
+    "衍生金融工具",
+    "外汇衍生金融工具",
+    "金融资产",
+    "金融负债",
+    "前五名客户",
+    "前五大客户",
+    "主要销售客户",
+    "客户及供应商信息",
+    "主要供应商",
+    "供应商采购额",
+    "第一季度",
+    "第二季度",
+    "第三季度",
+    "第四季度",
+    "（1-3 月份）",
+    "（4-6 月份）",
+    "（7-9 月份）",
+    "（10-12 月份）",
+)
+
+_STRICT_SEGMENT_CONTEXT_TERMS: tuple[str, ...] = (
+    "分产品",
+    "分业务",
+    "分行业",
+    "分地区",
+    "分销售模式",
+    "主营业务分产品",
+    "主营业务分地区",
+    "主营业务分行业",
+    "营业收入、营业成本的分解信息",
+    "算力租赁",
+    "智云计算",
+    "智算中心",
+    "网络工程",
+    "电动两轮车",
+    "电动滑板车",
+    "全地形车",
+    "割草机器人",
+    "服务机器人",
+)
+
+
+def _is_segment_noise(line: str) -> bool:
+    return any(term in line for term in _SEGMENT_EXCLUDE_TERMS)
+
+
+def _has_strict_segment_context(line: str) -> bool:
+    return any(term in line for term in _STRICT_SEGMENT_CONTEXT_TERMS)
+
 
 def _segment_type(line: str) -> str:
     if any(token in line for token in ("\u7b97\u529b\u79df\u8d41", "\u667a\u4e91\u8ba1\u7b97", "\u667a\u7b97\u4e2d\u5fc3", "\u7f51\u7edc\u5de5\u7a0b")):
@@ -1240,7 +1387,8 @@ def _extract_segment_economics(
                 not compacted
                 or compacted in seen
                 or _is_low_signal_line(compacted)
-                or not any(term in compacted for term in _SEGMENT_SECTION_TERMS + _SEGMENT_VALUE_TERMS)
+                or _is_segment_noise(compacted)
+                or not _has_strict_segment_context(compacted)
                 or not any(term in compacted for term in _SEGMENT_VALUE_TERMS)
                 or len(_TABLE_NUMBER_RE.findall(compacted)) < 2
             ):
@@ -1268,6 +1416,164 @@ def _extract_segment_economics(
             )
     rows.sort(key=lambda item: item[0], reverse=True)
     return [row for _, row in rows[:max_rows]]
+
+
+def _segment_valuation_anchor(segment_type: str, evidence: str) -> tuple[str, str, str]:
+    """Translate a filing-derived segment clue into a valuation treatment."""
+    text = evidence.lower()
+    has_margin = any(token in evidence for token in ("毛利", "毛利率", "姣涘埄", "姣涘埄鐜?"))
+    has_revenue = any(token in evidence for token in ("收入", "营收", "营业收入", "鏀跺叆", "钀ヤ笟鏀跺叆"))
+    has_growth = any(token in evidence for token in ("同比", "增长", "增速", "鍚屾瘮", "澧為暱"))
+    has_new_curve = any(
+        token in evidence
+        for token in (
+            "算力租赁",
+            "智云计算",
+            "智算中心",
+            "数据中心",
+            "网络工程",
+            "新业务",
+            "新产品",
+            "第二增长",
+            "compute",
+            "data center",
+        )
+    )
+
+    if has_new_curve:
+        return (
+            "emerging_or_second_curve",
+            "SOTP or scenario valuation only until segment revenue, margin, capex/utilization, customer quality, and cash conversion are disclosed.",
+            "Quantify revenue/profit contribution, asset intensity, utilization, contract terms, recurrence, and cash collection before moving it into base-case valuation.",
+        )
+    if segment_type == "geography":
+        return (
+            "geography_or_export_lane",
+            "Use as a growth/margin modifier for the core business; only value separately when regional revenue, margin, and regulatory risk are disclosed.",
+            "Check regional revenue growth, gross margin, channel inventory, currency/regulatory exposure, and whether the region has different economics.",
+        )
+    if segment_type == "channel":
+        return (
+            "channel_mix",
+            "Use as a sales-efficiency and working-capital modifier; do not value as a separate business unless channel economics are disclosed.",
+            "Check direct/dealer/platform split, take rate or gross margin, receivables, inventory burden, and customer acquisition cost.",
+        )
+    if segment_type == "product":
+        anchor = (
+            "Value product lines with normalized earnings or EV/EBIT/PE by segment "
+            "when revenue, cost, gross margin, and growth are disclosed; otherwise use as a mix-quality bridge."
+        )
+        if not (has_revenue and (has_margin or has_growth)):
+            anchor = (
+                "Use as product-mix context first; upgrade to separate valuation only after revenue, margin, and growth are disclosed."
+            )
+        return (
+            "core_product_line",
+            anchor,
+            "Check segment revenue scale, gross margin, growth durability, ASP/volume/mix, cash conversion, and peer multiples for that product line.",
+        )
+    return (
+        "core_or_adjacent_business",
+        "Start from normalized earnings/FCF for the mature engine; split into SOTP only when filings disclose distinct revenue, margin, assets, or growth profile.",
+        "Check whether the evidence identifies a real profit pool rather than a generic business description.",
+    )
+
+
+def _build_business_segment_valuation_map(
+    business_model_map: Iterable[BusinessModelFinding],
+    segment_economics: Iterable[SegmentEconomicsFinding],
+    growth_vectors: Iterable[GrowthVectorFinding],
+    *,
+    limit: int = 12,
+) -> list[BusinessSegmentValuationFinding]:
+    """Build a SOTP-oriented map from filing evidence.
+
+    The map is intentionally evidence-led: it does not invent segment values.
+    It tells downstream agents which disclosed business buckets can support
+    separate valuation and which remain scenario/watch items.
+    """
+    rows: list[BusinessSegmentValuationFinding] = []
+    seen: set[tuple[str, str]] = set()
+
+    def add(
+        business_bucket: str,
+        report_type: str,
+        evidence: str,
+        valuation_anchor: str,
+        analyst_use: str,
+        verification_need: str,
+    ) -> None:
+        compacted = _compact_text(evidence, 300)
+        key = (business_bucket, compacted)
+        if not compacted or key in seen:
+            return
+        seen.add(key)
+        rows.append(
+            BusinessSegmentValuationFinding(
+                business_bucket=business_bucket,
+                report_type=report_type,
+                evidence=compacted,
+                valuation_anchor=valuation_anchor,
+                analyst_use=analyst_use,
+                verification_need=verification_need,
+            )
+        )
+
+    for item in business_model_map:
+        if item.lens == "core_revenue_engine":
+            add(
+                "core_revenue_engine",
+                item.report_type,
+                item.evidence,
+                "Anchor the first valuation block on the mature revenue engine: normalized earnings, FCF yield, EV/EBITDA, PE, or peer-relative multiples depending on business model.",
+                "Use this as the company introduction before discussing optionality; every later segment should be compared with this core engine.",
+                "Confirm the core engine's revenue scale, margin, cash conversion, reinvestment need, and peer multiple range.",
+            )
+        elif item.lens in {"segment_mix", "geography", "customer_and_channel"}:
+            bucket, anchor, verification = _segment_valuation_anchor(item.lens.replace("customer_and_channel", "channel"), item.evidence)
+            add(
+                bucket,
+                item.report_type,
+                item.evidence,
+                anchor,
+                "Use this to decide whether the company needs a split valuation rather than one blended multiple.",
+                verification,
+            )
+
+    for item in segment_economics:
+        bucket, anchor, verification = _segment_valuation_anchor(item.segment_type, item.evidence)
+        add(
+            bucket,
+            item.report_type,
+            item.evidence,
+            anchor,
+            "Build the bull/base/bear case around this segment's own revenue, margin, growth, and cash-quality evidence instead of company-level averages only.",
+            verification,
+        )
+
+    for item in growth_vectors:
+        add(
+            "emerging_or_second_curve",
+            "filing",
+            item.evidence,
+            (
+                "Treat as SOTP/scenario value when stage is "
+                f"{item.stage}; include in base-case valuation only after monetization and economics are disclosed."
+            ),
+            "Use as the new-business block in a split valuation: size the option separately from the mature core business.",
+            item.verification_need,
+        )
+
+    priority = {
+        "core_revenue_engine": 0,
+        "core_product_line": 1,
+        "core_or_adjacent_business": 2,
+        "emerging_or_second_curve": 3,
+        "geography_or_export_lane": 4,
+        "channel_mix": 5,
+    }
+    rows.sort(key=lambda row: (priority.get(row.business_bucket, 9), row.report_type))
+    return rows[:limit]
 
 
 _TABLE_NUMBER_RE = re.compile(r"(?<!\d)\d[\d,]*(?:\.\d+)?(?!\d)")
@@ -1452,6 +1758,20 @@ _BUSINESS_MODEL_HEADER_ONLY_TERMS: tuple[str, ...] = (
     "公司业务概要",
 )
 
+_BUSINESS_MODEL_NOISE_TERMS: tuple[str, ...] = (
+    "前五名客户",
+    "前五大客户",
+    "主要销售客户",
+    "主要供应商",
+    "客户及供应商信息",
+    "贸易业务收入占营业收入比例超过 10%的贸易业务前五名销售客户",
+    "银行理财产品",
+    "其他权益工具投资",
+    "其他非流动金融资产",
+    "交易性金融资产",
+    "衍生金融工具",
+)
+
 
 def _business_model_line_score(lens: str, line: str) -> int:
     if line.strip() in _BUSINESS_MODEL_HEADER_ONLY_TERMS or len(line.strip()) <= 8:
@@ -1487,7 +1807,22 @@ def _best_business_model_line(
             if (
                 not line
                 or _is_low_signal_line(line)
+                or any(term in line for term in _BUSINESS_MODEL_NOISE_TERMS)
                 or not any(keyword in line for keyword in keywords)
+            ):
+                continue
+            if lens == "core_revenue_engine" and not any(
+                token in line
+                for token in (
+                    "主营业务",
+                    "主要产品",
+                    "主要服务",
+                    "产品包括",
+                    "业务包括",
+                    "覆盖",
+                    "从事",
+                    "营业收入",
+                )
             ):
                 continue
             if lens == "segment_mix" and not any(token in line for token in ("占比", "收入", "毛利率")):
@@ -3859,7 +4194,11 @@ def get_financial_report_intelligence_context(
     cashflow = _fetch_cashflow_data(symbol, curr_date, freq="quarterly", limit=8)
     indicators = _fetch_fina_indicator(symbol, curr_date)
     derived_metrics = _derive_financial_metrics(income, balance, cashflow, indicators)
-    profile = _select_industry_profile(company_name, industry, report_texts)
+    profile = (
+        "banking"
+        if is_banking_entity(symbol, basic=basic, company_name=company_name, industry=industry)
+        else _select_industry_profile(company_name, industry, report_texts)
+    )
     evidence = _extract_filing_evidence(
         report_texts,
         rules=_BANKING_SIGNAL_RULES if profile == "banking" else _FILING_SIGNAL_RULES,
@@ -3868,6 +4207,11 @@ def get_financial_report_intelligence_context(
     segment_economics = _extract_segment_economics(report_texts)
     business_model_map = _build_business_model_map(report_texts)
     growth_vectors = _extract_growth_vectors(report_texts)
+    business_segment_valuation_map = _build_business_segment_valuation_map(
+        business_model_map=business_model_map,
+        segment_economics=segment_economics,
+        growth_vectors=growth_vectors,
+    )
     report_bridge = _build_report_to_report_bridge(report_texts)
     textual_signals = _extract_textual_filing_signals(
         report_texts,
@@ -3985,6 +4329,17 @@ def get_financial_report_intelligence_context(
             "verification_need": item.verification_need,
         }
         for item in growth_vectors
+    ]
+    business_segment_valuation_rows = [
+        {
+            "business_bucket": item.business_bucket,
+            "report_type": item.report_type,
+            "filing_evidence": _compact_text(item.evidence, 220),
+            "valuation_anchor": item.valuation_anchor,
+            "analyst_use": item.analyst_use,
+            "verification_need": item.verification_need,
+        }
+        for item in business_segment_valuation_map
     ]
     report_bridge_rows = [
         {
@@ -4166,6 +4521,9 @@ def get_financial_report_intelligence_context(
         "## Segment Economics Pack",
         _build_table(segment_rows),
         "",
+        "## Business Segment Valuation Map",
+        _build_table(business_segment_valuation_rows),
+        "",
         "## Growth Vector Map",
         _build_table(growth_vector_rows),
         "",
@@ -4222,6 +4580,8 @@ def get_financial_report_intelligence_context(
         "- Read quarterly reports for confirmation or reversal of short-cycle signals; read half-year reports for trend formation and segment mix; read annual reports for business model, capital allocation, and long-cycle risk.",
         "- Start with the business model map, then use the growth vector map to separate mature engines from emerging second curves.",
         "- For multi-product or multi-region companies, read the Segment Economics Pack before the bull/bear debate. Do not collapse a company into headline revenue or profit when annual/half-year filings disclose product, geography, channel, revenue, cost, gross margin, or growth-rate splits.",
+        "- Use the Business Segment Valuation Map to build a split valuation before applying a blended multiple. Value mature/core businesses on normalized earnings, FCF, EV/EBITDA, PE, or peer-relative multiples; value emerging or second-curve businesses with SOTP/scenario treatment until segment revenue, margin, capex/utilization, customers, and cash conversion are proven.",
+        "- For unfamiliar companies, first explain the main business from filings, then split the investment case into disclosed business buckets. Do not discuss new businesses as free optionality unless the map shows filing-backed monetization or a clear verification path.",
         "- Use the deep-reading excerpts as source text, not decorative context: annual-report excerpts define the company, semiannual excerpts test trend formation, and quarterly excerpts test short-cycle execution.",
         "- Use the paragraph reading pack for genuine report reading: answer the paragraph-level question first, then decide whether the business model, second curve, moat, trend, or cash-conversion thesis changed.",
         "- Use the industry reading pack as the specialist layer: the same filing should be read through the value drivers that matter for that business model, then linked to the external inputs named in `connect_to` before forming a conclusion.",
@@ -4232,6 +4592,7 @@ def get_financial_report_intelligence_context(
         "- Use the filing insight distillation layer before writing the final thesis. It converts raw filing snippets into buy-side questions: core engine, second curve, quality of growth, monetization gap, capital allocation, and tail risk. The manager report should read like a company memo, not a list of disconnected data points.",
         "- Start from the selected question playbook, then answer only with evidence actually found in filings.",
         "- For banks, start from the Banking KPI Pack and the banking playbook. Do not use contract liabilities, inventory, gross margin, capex, or generic OCF conversion as core bank-quality evidence unless a bank-specific disclosure explicitly makes them decision-relevant.",
+        "- For banks, preserve the exact spread terminology from filings: `净利息收益率`, `净息差`, and `净利差` are not interchangeable. If the filing only supports 净利差 1.77% and 净利息收益率 1.83%, do not invent or substitute a 1.40%/1.50% NIM number. Treat NIM stabilization as conditional until the next filing confirms spread, loan yield, and deposit-cost movement together.",
         "- Use the core discussion promotion queue as the bridge from reading to investing: core items should enter bull/bear debate, supporting items should reinforce or challenge a thesis, scenario items belong in upside/downside cases, and watch items stay out of base-case valuation until upgraded.",
         "- Treat unanswered filing questions as explicit research gaps, not neutral evidence. If a thesis depends on an unanswered question, reduce conviction or state what disclosure would close the gap.",
         "- Promote materially decision-relevant findings such as signed long-term agreements, named customers, take-or-pay/offtake signals, capacity-to-demand bridges, and commercialization milestones into the core debate rather than leaving them buried as generic snippets.",

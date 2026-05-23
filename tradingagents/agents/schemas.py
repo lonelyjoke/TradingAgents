@@ -477,8 +477,9 @@ class PortfolioDecision(BaseModel):
         description=(
             "A short, self-contained company introduction for public sharing. "
             "Identify what the company does, its main business or profit drivers, "
-            "and why those drivers matter to this investment case. Keep it clear "
-            "and concise rather than encyclopedic."
+            "where the company sits in its industry cycle, and why those drivers "
+            "matter to this investment case. Keep it clear, information-dense, "
+            "and useful to a reader who does not already know the company."
         ),
     )
     one_line_thesis: str = Field(
@@ -520,8 +521,11 @@ class PortfolioDecision(BaseModel):
             "A compact map of the 3-5 variables that really drive the company's "
             "business value and stock performance. Name the variables, explain "
             "their direction of impact, and tie them to this company rather than "
-            "generic industry factors. Prefer a dense paragraph or short semicolon "
-            "separated list."
+            "generic industry factors. Include the industry-native variables that "
+            "a buy-side analyst would track. For banks, map earning assets, NIM/"
+            "deposit cost, fee income/AUM, asset quality/credit cost, capital/RWA, "
+            "and payout capacity rather than generic revenue, gross margin, orders, "
+            "inventory, or OCF."
         ),
     )
     bull_bear_debate: str = Field(
@@ -545,7 +549,9 @@ class PortfolioDecision(BaseModel):
             "Explain the thesis as a causal chain: if the key business variables "
             "move or are verified, then fundamentals change, then market "
             "expectations or valuation may reprice, leading to the rating. Keep "
-            "it readable and information-dense."
+            "it readable and information-dense. Make clear how the reader should "
+            "connect company economics, industry conditions, financial drivers, "
+            "valuation assumptions, and position action."
         ),
     )
     executive_summary: str = Field(
@@ -570,7 +576,9 @@ class PortfolioDecision(BaseModel):
             "debate. Preserve the main analytical path from the full report "
             "without turning it into an exhaustive data dump; explain why the "
             "rating follows from thesis, expectation gap, probability/payoff, "
-            "and key risks."
+            "and key risks. The reader should understand what the market appears "
+            "to price in, where the memo agrees or disagrees, why price and value "
+            "may be mismatched, and which facts would close that mismatch."
         ),
     )
     core_bet: Optional[str] = Field(
@@ -592,14 +600,20 @@ class PortfolioDecision(BaseModel):
         default=None,
         description=(
             "Explain the potential expectation gap: what the market may be "
-            "underpricing or overpricing, and what evidence suggests that."
+            "underpricing or overpricing, what assumptions today's valuation "
+            "appears to embed, and what evidence suggests those assumptions are "
+            "too pessimistic, too optimistic, or fair."
         ),
     )
     probability_payoff: Optional[str] = Field(
         default=None,
         description=(
             "Summarize win probability, upside payoff, downside risk, and whether "
-            "the risk/reward justifies the rating."
+            "the risk/reward justifies the rating. For scenario analysis, attach "
+            "probabilities to concrete driver assumptions, not generic labels. "
+            "For banks, specify NIM bps, fee-income growth, credit cost/provision "
+            "coverage, NPL movement, ROE, PB or dividend-yield assumptions, and "
+            "the corresponding position action."
         ),
     )
     cycle_valuation_assessment: Optional[str] = Field(
@@ -616,7 +630,9 @@ class PortfolioDecision(BaseModel):
         description=(
             "List concrete catalysts or data checkpoints that could cause "
             "repricing, such as freight indexes, product prices, policy, earnings, "
-            "orders, inventory, or sector moves."
+            "orders, inventory, or sector moves. For banks, focus on NIM/net "
+            "interest yield, deposit cost, fee income/AUM, NPL/provision coverage, "
+            "capital/RWA, dividend policy, and rate-policy transmission."
         ),
     )
     falsification_signals: Optional[str] = Field(
@@ -673,7 +689,9 @@ class PortfolioDecision(BaseModel):
             "List thesis-critical data gaps and explain how they limit conviction. "
             "Do not use this as a vague disclaimer: name the exact missing product, "
             "spread, inventory, freight, capacity, policy, or demand data and what "
-            "would change the rating if verified."
+            "would change the rating if verified. For banks, name the exact missing "
+            "NIM, deposit-cost, loan-yield, fee-rate, credit-cost, NPL, provision, "
+            "CET1/RWA, or payout data instead of generic operating gaps."
         ),
     )
     supply_demand_fallback_view: Optional[str] = Field(
@@ -771,7 +789,10 @@ class PortfolioDecision(BaseModel):
         description=(
             "Summarize the earnings bridge behind the final decision: which "
             "volume, price, mix, margin, working-capital, or financing levers "
-            "must move under bull/base/bear cases."
+            "must move under bull/base/bear cases. For banks, use earning assets "
+            "x NIM, fee income, credit cost/provisioning, operating efficiency, "
+            "capital consumption, and payout rather than manufacturing-style "
+            "volume, gross margin, inventory, OCF, orders, or contract liabilities."
         ),
     )
     market_implied_expectation: Optional[str] = Field(

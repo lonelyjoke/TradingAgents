@@ -10,6 +10,7 @@ import xml.etree.ElementTree as ET
 import requests
 
 from .config import get_config
+from .industry_classifier import banking_profile_hint, is_banking_entity
 from .tushare_a_stock import _fetch_stock_basic, _format_value, is_a_share_symbol
 
 
@@ -54,6 +55,13 @@ _EXPORT_SALES = "\u51fa\u53e3\u9500\u91cf"
 _MODEL_PRICE = "\u8f66\u578b\u4ef7\u683c"
 _PRODUCT_PRICE = "\u4ea7\u54c1\u4ef7\u683c"
 _ORDER_SALES_MARGIN = "\u8ba2\u5355 \u9500\u91cf \u6bdb\u5229\u7387"
+_NIM = "\u51c0\u606f\u5dee"
+_DEPOSIT_COST = "\u5b58\u6b3e\u6210\u672c\u7387"
+_MORTGAGE_REPRICING = "\u5b58\u91cf\u623f\u8d37\u91cd\u5b9a\u4ef7"
+_ASSET_QUALITY = "\u4e0d\u826f\u7387"
+_PROVISION_COVERAGE = "\u62e8\u5907\u8986\u76d6\u7387"
+_CET1 = "\u6838\u5fc3\u4e00\u7ea7\u8d44\u672c\u5145\u8db3\u7387"
+_WEALTH_MANAGEMENT = "\u8d22\u5bcc\u7ba1\u7406"
 
 _KNOWN_COMPANIES = {
     "600519.SH": ("\u8d35\u5dde\u8305\u53f0", _BAIJIU),
@@ -166,7 +174,8 @@ def _company_profile(symbol: str) -> tuple[str, str]:
     except Exception:
         basic = None
     if basic is None:
-        return _KNOWN_COMPANIES.get(symbol, (symbol, ""))
+        hint = banking_profile_hint(symbol)
+        return hint or _KNOWN_COMPANIES.get(symbol, (symbol, ""))
     return _format_value(basic.get("name")), _format_value(basic.get("industry"))
 
 
@@ -178,6 +187,12 @@ def _fact_queries(symbol: str, company_name: str, industry: str) -> list[str]:
             f"{name} {_FEITIAN_MAOTAI} {_WHOLESALE_PRICE} {_TODAY_WINE_PRICE}",
             f"{name} {_FEITIAN_MAOTAI} {_ORIGINAL_CARTON} {_LOOSE_BOTTLE} {_WHOLESALE_PRICE}",
             f"{name} {_CHANNEL_INVENTORY} {_WHOLESALE_PRICE} {_DEALER}",
+        ]
+    elif is_banking_entity(symbol, company_name=name, industry=industry):
+        queries = [
+            f"{name} {_NIM} {_DEPOSIT_COST}",
+            f"{name} {_ASSET_QUALITY} {_PROVISION_COVERAGE} {_CET1}",
+            f"{name} {_MORTGAGE_REPRICING} {_WEALTH_MANAGEMENT}",
         ]
     elif _AUTO in industry or _NEW_ENERGY in industry or "\u6bd4\u4e9a\u8fea" in name:
         queries = [
@@ -267,7 +282,7 @@ def get_web_fact_check_context(
         "",
         f"- Company: {company_name}",
         f"- Industry: {industry or 'N/A'}",
-        "- Purpose: fill small but thesis-critical high-frequency facts that filings and Tushare may not cover, such as baijiu wholesale prices, channel inventory, terminal discounts, product price changes, and recent sales clues.",
+        "- Purpose: fill small but thesis-critical high-frequency facts that filings and Tushare may not cover, such as baijiu wholesale prices, channel inventory, terminal discounts, bank NIM/deposit-cost commentary, asset-quality updates, and recent sales clues.",
         "- Evidence hierarchy: official filings/announcements > exchange Q&A > reputable news/search corroboration > market rumor. This context is search corroboration unless the source itself is official.",
         "",
         "## Search Queries",
@@ -292,6 +307,7 @@ def get_web_fact_check_context(
             "- A hard trading trigger based on a web-searched price needs either multiple recent independent sources or an official/company source. Otherwise mark it as a watch item.",
             "- When sources conflict, report the range and downgrade conviction rather than choosing the most convenient number.",
             "- For Maotai, distinguish Feitian loose-bottle, original-carton, wholesale/reference price, retail price, and company ex-factory/guided price before using any number.",
+            "- For banks, do not search or reason from orders, sales volume, gross margin, channel inventory, or product-price terms. Use web facts only to corroborate NIM/deposit cost, asset quality, provision coverage, capital adequacy, fee/wealth-management, and policy-rate transmission.",
         ]
     )
     return "\n".join(lines)

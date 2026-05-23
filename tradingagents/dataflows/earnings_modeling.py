@@ -4,6 +4,7 @@ from dataclasses import dataclass
 
 import pandas as pd
 
+from .industry_classifier import is_banking_entity
 from .tushare_a_stock import (
     TushareDataError,
     _derive_financial_metrics,
@@ -247,11 +248,8 @@ def _build_driver_rows(derived: pd.DataFrame) -> list[dict[str, str]]:
     ]
 
 
-def _is_banking_stock(basic: pd.Series | None) -> bool:
-    if basic is None:
-        return False
-    text = f"{basic.get('name', '')} {basic.get('industry', '')}"
-    return "银行" in str(text)
+def _is_banking_stock(symbol: str, basic: pd.Series | None) -> bool:
+    return is_banking_entity(symbol, basic=basic)
 
 
 def _bank_driver_rows(
@@ -321,7 +319,7 @@ def get_earnings_model_context(ticker: str, curr_date: str) -> str:
     cashflow = _fetch_cashflow_data(symbol, curr_date, freq="quarterly", limit=8)
     indicators = _fetch_fina_indicator(symbol, curr_date)
     derived = _derive_financial_metrics(income, balance, cashflow, indicators)
-    is_banking = _is_banking_stock(basic)
+    is_banking = _is_banking_stock(symbol, basic)
     latest_any_row, latest_annual_row = _latest_rows(income)
     latest_any = _snapshot_from_income_row(latest_any_row, income)
     latest_annual = _snapshot_from_income_row(latest_annual_row, income)

@@ -27,6 +27,24 @@ def test_classifies_large_context_with_extraction_failure_as_partial():
     assert coverage.status == "partial"
 
 
+def test_classifies_successful_filing_context_with_partial_instruction_as_ready():
+    text = (
+        "# Financial-report intelligence\n"
+        "- Extraction status: Financial-report text extraction succeeded.\n"
+        "## Filing Reading Coverage Audit\n"
+        "| coverage_grade | core_pack_status |\n"
+        "| --- | --- |\n"
+        "| strong | ready |\n"
+        "## Analyst Instructions\n"
+        "- If the coverage audit is partial, state the confidence downgrade.\n"
+        + ("verified row\n" * 100)
+    )
+
+    coverage = classify_context_coverage("filing", text)
+
+    assert coverage.status == "ready"
+
+
 def test_build_data_coverage_instructs_manager_on_gaps():
     audit = build_data_coverage_context(
         {

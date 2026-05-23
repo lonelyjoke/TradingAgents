@@ -76,3 +76,31 @@ def test_compaction_preserves_compute_leasing_diligence_gap():
 
     assert "\u7b97\u529b\u79df\u8d41" in compacted
     assert "\u6307\u5b9a\u4fe1\u606f\u62ab\u9732\u5a92\u4f53" in compacted
+
+
+def test_compaction_preserves_segment_valuation_and_competitor_sections():
+    text = "\n".join(
+        [
+            "# Combined context",
+            *[f"routine table row {i} " + ("x" * 100) for i in range(90)],
+            "## Business Segment Valuation Map",
+            "| business_bucket | valuation_anchor | verification_need |",
+            "| emerging_or_second_curve | SOTP/scenario value | verify revenue, margin, customer quality, and cash conversion |",
+            "## Competitor Analysis For Peer Recommendation",
+            "| competitor | apparent_edges | diligence_use |",
+            "| Peer Alpha | ROE higher and PE lower | Verify filing-based business overlap and segment economics |",
+            *[f"more routine row {i} " + ("y" * 100) for i in range(90)],
+        ]
+    )
+
+    compacted = compact_for_prompt(
+        text,
+        label="filing_intelligence_context",
+        profile="portfolio",
+        max_chars=1400,
+    )
+
+    assert "Business Segment Valuation Map" in compacted
+    assert "Competitor Analysis For Peer Recommendation" in compacted
+    assert "SOTP/scenario value" in compacted
+    assert "Verify filing-based business overlap" in compacted

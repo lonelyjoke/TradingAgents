@@ -12,6 +12,16 @@ def test_maotai_queries_target_wholesale_price_terms():
     assert any("\u539f\u7bb1" in query and "\u6563\u74f6" in query for query in queries)
 
 
+def test_bank_queries_use_bank_specific_fact_terms():
+    queries = web_facts._fact_queries("600036.SH", "\u62db\u5546\u94f6\u884c", "\u94f6\u884c")
+
+    joined = " ".join(queries)
+    assert "\u51c0\u606f\u5dee" in joined
+    assert "\u4e0d\u826f\u7387" in joined
+    assert "\u8ba2\u5355" not in joined
+    assert "\u6bdb\u5229\u7387" not in joined
+
+
 def test_bing_news_rss_parses_source_date_and_values(monkeypatch):
     class FakeResponse:
         text = """<?xml version="1.0" encoding="utf-8"?>

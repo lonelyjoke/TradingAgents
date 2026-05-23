@@ -21,6 +21,7 @@ from tradingagents.dataflows.thematic_research import (
     _load_financial_report_texts,
     _extract_short_investee_name,
     _is_valid_asset_revaluation_candidate,
+    get_thematic_catalyst_context,
 )
 
 
@@ -64,6 +65,46 @@ def test_financial_report_extracts_short_investee_rows_inside_investment_section
 def test_bank_balance_sheet_rows_are_not_asset_revaluation_candidates():
     assert not _is_valid_asset_revaluation_candidate("金融投资", "金融投资 (2,889) (2,400)")
     assert not _is_valid_asset_revaluation_candidate("债券投资及票据贴现", "债券投资及票据贴现 107,179 167,930")
+
+
+def test_bank_thematic_context_suppresses_generic_optionalities(monkeypatch):
+    monkeypatch.setattr(
+        "tradingagents.dataflows.thematic_research._fetch_stock_basic",
+        lambda symbol: pd.Series({"name": "\u62db\u5546\u94f6\u884c", "industry": "\u94f6\u884c"}),
+    )
+    monkeypatch.setattr(
+        "tradingagents.dataflows.thematic_research._load_financial_report_texts",
+        lambda symbol, curr_date, look_back_days: (
+            pd.DataFrame([{"ann_date": "20260430", "title": "2026 Q1"}]),
+            [
+                (
+                    "2026 Q1",
+                    "\u5408\u540c\u8d1f\u503a 3,386 3,548\n"
+                    "\u8d35\u91d1\u5c5e 2,889 2,400\n"
+                    "\u65b0\u589e\u8ba2\u5355 123,000,000 \u5143",
+                )
+            ],
+        ),
+    )
+    monkeypatch.setattr(
+        "tradingagents.dataflows.thematic_research._fetch_major_news",
+        lambda *args, **kwargs: pd.DataFrame([{"title": "\u5546\u4e1a\u822a\u5929", "content": "\u62db\u5546\u94f6\u884c \u5546\u4e1a\u822a\u5929"}]),
+    )
+    monkeypatch.setattr(
+        "tradingagents.dataflows.thematic_research._fetch_news_feed",
+        lambda *args, **kwargs: pd.DataFrame(),
+    )
+    monkeypatch.setattr(
+        "tradingagents.dataflows.thematic_research._safe_market_cap_cny",
+        lambda *args, **kwargs: None,
+    )
+
+    context = get_thematic_catalyst_context("600036.SH", "2026-05-22")
+
+    assert "Bank-specific routing" in context
+    assert "order-ramp" not in context
+    assert "commercial-space" not in context
+    assert "\u8d35\u91d1\u5c5e" not in context
 
 
 

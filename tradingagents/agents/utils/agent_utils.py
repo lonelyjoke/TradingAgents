@@ -49,7 +49,21 @@ def get_language_instruction() -> str:
     lang = get_config().get("output_language", "English")
     if lang.strip().lower() == "english":
         return ""
-    return f" Write your entire response in {lang}."
+    return (
+        f" Write your entire response in {lang}. "
+        "If the output language is Chinese, translate by meaning rather than word-for-word. "
+        "Use fluent Chinese buy-side research phrasing and avoid awkward literal translations, "
+        "machine-translation wording, or English sentence order. Preferred terms: translate "
+        "`investment thesis`, `core thesis`, or `thesis` as `投资论点`, `核心投资假设`, "
+        "`核心逻辑`, or `投资主线` depending on context; translate `falsification` as "
+        "`证伪`, `验证/证伪条件`, or `风险触发条件`; translate `watch item` as "
+        "`观察项` or `跟踪项`; translate `holder` as `已持有者`; translate `builder` "
+        "as `准备建仓者` or `增配者`; translate `probability/payoff` as `胜率/赔率` "
+        "or `概率收益比`; translate `expectation gap` as `预期差`; translate `core bet` "
+        "as `核心判断` or `核心押注`. Do not use `论文` to describe a stock pitch, "
+        "trading argument, investment case, or falsification framework unless the topic "
+        "is literally an academic paper."
+    )
 
 
 def get_evidence_instruction() -> str:
@@ -110,14 +124,18 @@ def get_web_fact_check_instruction() -> str:
         " Web fact-check discipline: use web-searched facts only for small, "
         "high-frequency variables that filings and Tushare do not cover well, "
         "such as baijiu wholesale prices, channel inventory, terminal discounts, "
-        "product price changes, monthly sales clues, or local policy details. "
+        "product price changes, bank NIM/deposit-cost commentary, bank asset-quality "
+        "updates, monthly sales clues, or local policy details. "
         "Keep the evidence hierarchy explicit: official filings/announcements "
         "> exchange Q&A > reputable news/search corroboration > market rumor. "
         "A single web result can create a watch item or research gap, but it "
         "cannot become a hard trading trigger unless multiple recent independent "
         "sources or an official source support it. Always preserve source date, "
         "source name, and whether the searched fact is verified, corroborated, "
-        "conflicting, or unverified."
+        "conflicting, or unverified. For banks, do not use orders, sales volume, "
+        "gross margin, channel inventory, or product-price searches as thesis "
+        "evidence; route web checks to NIM/deposit cost, NPL/provision coverage, "
+        "capital adequacy, fee income, wealth management, and rate-policy transmission."
     )
 
 
@@ -184,7 +202,10 @@ def get_buy_side_thesis_instruction() -> str:
         "already priced the thesis, or whether there is a plausible mispricing. "
         "State catalyst path, falsification signals, conviction level, and position "
         "implication. Use Hold only when there is no clear tradable thesis, the "
-        "expectation gap is weak, or probability/payoff is not attractive."
+        "expectation gap is weak, or probability/payoff is not attractive. If writing "
+        "in Chinese, use idiomatic buy-side wording: thesis = 投资论点/核心投资假设/投资主线, "
+        "not 论文; falsification = 证伪 or 验证/证伪条件; watch item = 观察项 or 跟踪项; "
+        "probability/payoff = 胜率/赔率 or 概率收益比; expectation gap = 预期差."
     )
 
 
@@ -304,7 +325,11 @@ def get_peer_selection_instruction() -> str:
         "name it, explain the concrete metrics and business reasons, and say whether that "
         "weakens the target to watch/underweight rather than build now. If no peer is clearly "
         "better, say why no superior alternative emerged; never treat a lower PE alone as "
-        "proof of superiority."
+        "proof of superiority. Use the competitor-analysis rows in the peer context as a "
+        "shortlist for deeper work, then verify from financial reports whether the peers "
+        "really compete with the target by product, customer, region, segment economics, "
+        "cash conversion, and valuation bucket. If either company has an emerging or second-curve "
+        "business, compare that segment separately instead of forcing one blended multiple."
     )
 
 
@@ -457,11 +482,12 @@ def get_filing_intelligence_instruction() -> str:
     return (
         " Filing-intelligence discipline: read quarterly, half-year, and annual "
         "reports as business documents, not only as sources of the three statements. "
-        "Use the filing context in eleven passes: (1) filing reading coverage audit, "
+        "Use the filing context in thirteen passes: (1) filing reading coverage audit, "
         "(2) paragraph reading pack, (3) industry reading pack, (4) statement table reading pack, "
         "(5) filing note reading pack, (6) financial relationship reading pack, "
         "(7) filing textual signals, (8) business model map, (9) segment economics pack, "
-        "(10) growth vector map, (11) material filing findings, and (12) report-to-report bridge. "
+        "(10) business segment valuation map, (11) growth vector map, "
+        "(12) material filing findings, and (13) report-to-report bridge. "
         "If the coverage audit is partial, weak, or failed, state the confidence downgrade "
         "before making any filing-backed claim. "
         "The paragraph reading pack "
@@ -491,6 +517,13 @@ def get_filing_intelligence_instruction() -> str:
         "use annual and half-year product/geography/channel revenue, cost, gross margin, and growth-rate "
         "splits to explain company introduction, bull observations, bear observations, and valuation bridges. "
         "If this segment pack is unavailable or header-only, name that as a research gap before discussing mix. "
+        "The business segment valuation map is mandatory for unfamiliar companies: first identify the "
+        "core revenue engine from filings, then split mature core businesses, emerging second curves, "
+        "geographies, and channels into separate valuation buckets. Mature disclosed businesses may use "
+        "normalized earnings, FCF yield, EV/EBITDA, PE, or peer-relative multiples; emerging businesses "
+        "belong in SOTP or scenario valuation until segment revenue, margin, asset intensity, utilization, "
+        "customer quality, and cash conversion are proven. Never apply one blended multiple before explaining "
+        "why a split valuation is unnecessary. "
         "Actively use filing-derived evidence on orders, backlog, customers, "
         "commercialization, prices, margins, capacity, capex, overseas expansion, "
         "R&D, receivables, inventory, cash collection, guarantees, litigation, "

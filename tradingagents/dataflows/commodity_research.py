@@ -1,12 +1,18 @@
 from __future__ import annotations
 
 from datetime import datetime, timedelta
+import re
 from urllib.parse import urlparse
 
 import pandas as pd
 import requests
-from parsel import Selector
 
+try:
+    from parsel import Selector
+except ModuleNotFoundError:  # pragma: no cover - exercised when optional dep is absent.
+    Selector = None
+
+from .industry_classifier import banking_profile_hint, is_banking_entity
 from .tushare_a_stock import (
     TushareDataError,
     _fetch_stock_basic,
@@ -166,9 +172,14 @@ def _fetch_whitelisted_page(url: str) -> tuple[str, str]:
     )
     response.raise_for_status()
     response.encoding = response.apparent_encoding or response.encoding
-    selector = Selector(text=response.text)
-    title = _clean_text(selector.xpath("//title/text()").get(""))
-    body = _clean_text(" ".join(selector.xpath("//body//text()").getall()))
+    if Selector is not None:
+        selector = Selector(text=response.text)
+        title = _clean_text(selector.xpath("//title/text()").get(""))
+        body = _clean_text(" ".join(selector.xpath("//body//text()").getall()))
+    else:
+        title_match = re.search(r"<title[^>]*>(.*?)</title>", response.text, re.I | re.S)
+        title = _clean_text(title_match.group(1) if title_match else "")
+        body = _clean_text(re.sub(r"<[^>]+>", " ", response.text))
     return title, body
 
 
@@ -417,6 +428,14 @@ def _fetch_futures_receipt(ts_code: str, exchange: str, trade_date: str) -> str:
 
 
 def _infer_products(symbol: str) -> dict:
+    symbol = str(symbol or "").strip().upper()
+    bank_hint = banking_profile_hint(symbol)
+    if bank_hint is not None:
+        return {
+            "name": bank_hint[0],
+            "products": [],
+            "spread_note": "Not applicable: financial institutions do not have a primary commodity/product-price spread driver. Use bank/financial KPIs instead.",
+        }
     mapped = COMPANY_COMMODITY_MAP.get(symbol)
     if mapped:
         return mapped
@@ -437,7 +456,7 @@ def _infer_products(symbol: str) -> dict:
         }
 
     haystack = f"{basic.get('name', '')} {basic.get('industry', '')}"
-    if any(token in haystack for token in ("银行", "保险", "证券", "信托", "多元金融")):
+    if is_banking_entity(symbol, basic=basic) or any(token in haystack for token in ("银行", "保险", "证券", "信托", "多元金融")):
         return {
             "name": _format_value(basic.get("name")),
             "products": [],

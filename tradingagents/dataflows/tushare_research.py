@@ -9,6 +9,7 @@ import pandas as pd
 import requests
 from dateutil.relativedelta import relativedelta
 
+from .industry_classifier import is_banking_entity
 from .tushare_a_stock import (
     TushareDataError,
     _fetch_daily_basic_latest,
@@ -555,11 +556,24 @@ def _merge_peer_financials(peer_data: pd.DataFrame, curr_date: str, limit: int) 
         if indicators is None or indicators.empty:
             rows.append({})
         else:
-            latest = indicators.iloc[0]
+            ordered = indicators.copy()
+            if "end_date" in ordered.columns:
+                ordered["end_date"] = ordered["end_date"].astype(str)
+                ordered = ordered.sort_values("end_date", ascending=False)
+            latest = ordered.iloc[0]
+            annual = (
+                ordered[ordered["end_date"].str.endswith("1231")].iloc[0]
+                if "end_date" in ordered.columns
+                and not ordered[ordered["end_date"].str.endswith("1231")].empty
+                else latest
+            )
             rows.append(
                 {
                     "roe": latest.get("roe"),
+                    "roe_annual": annual.get("roe"),
+                    "roe_waa_annual": annual.get("roe_waa"),
                     "roa": latest.get("roa"),
+                    "roa_annual": annual.get("roa"),
                     "grossprofit_margin": latest.get("grossprofit_margin"),
                     "netprofit_yoy": latest.get("netprofit_yoy"),
                     "debt_to_assets": latest.get("debt_to_assets"),
@@ -595,8 +609,8 @@ def _score_peers(data: pd.DataFrame) -> pd.DataFrame:
 def _score_bank_peers(data: pd.DataFrame) -> pd.DataFrame:
     scored = data.copy()
     scored["v4_score"] = (
-        _percent_rank(scored.get("roe", pd.Series(dtype=float)), True) * 30
-        + _percent_rank(scored.get("roa", pd.Series(dtype=float)), True) * 15
+        _percent_rank(scored.get("roe_annual", scored.get("roe", pd.Series(dtype=float))), True) * 30
+        + _percent_rank(scored.get("roa_annual", scored.get("roa", pd.Series(dtype=float))), True) * 15
         + _percent_rank(scored.get("pb", pd.Series(dtype=float)), False) * 20
         + _percent_rank(scored.get("pe_ttm", pd.Series(dtype=float)), False) * 10
         + _percent_rank(scored.get("dv_ttm", pd.Series(dtype=float)), True) * 15
@@ -624,6 +638,94 @@ def _fetch_stock_basic_universe(pro) -> pd.DataFrame:
         if fallback is not None and not fallback.empty:
             universe = fallback
     return universe if universe is not None else pd.DataFrame()
+
+
+def _row_numeric(row: pd.Series, columns: list[str]) -> float | None:
+    for col in columns:
+        if col not in row.index:
+            continue
+        value = pd.to_numeric(pd.Series([row.get(col)]), errors="coerce").iloc[0]
+        if not pd.isna(value):
+            return float(value)
+    return None
+
+
+def _metric_contrast(
+    peer: pd.Series,
+    target: pd.Series,
+    columns: list[str],
+    label: str,
+    higher_is_better: bool,
+    want_strength: bool,
+) -> str | None:
+    peer_value = _row_numeric(peer, columns)
+    target_value = _row_numeric(target, columns)
+    if peer_value is None or target_value is None or peer_value == target_value:
+        return None
+    is_strength = peer_value > target_value if higher_is_better else peer_value < target_value
+    if is_strength != want_strength:
+        return None
+    direction = "higher" if peer_value > target_value else "lower"
+    return f"{label} {direction} ({peer_value:.2f} vs target {target_value:.2f})"
+
+
+def _build_competitor_analysis_rows(
+    scored: pd.DataFrame,
+    symbol: str,
+    limit: int = 5,
+) -> list[dict[str, str]]:
+    if scored is None or scored.empty or "ts_code" not in scored.columns:
+        return []
+    target_rows = scored[scored["ts_code"] == symbol]
+    if target_rows.empty:
+        return []
+    target = target_rows.iloc[0]
+    target_score = _row_numeric(target, ["v4_score"])
+    candidates = scored[scored["ts_code"] != symbol].sort_values("v4_score", ascending=False).head(limit)
+    rows = []
+    metric_specs = [
+        (["pe_ttm"], "PE TTM", False),
+        (["pb"], "PB", False),
+        (["ps_ttm"], "PS TTM", False),
+        (["roe_annual", "roe"], "ROE", True),
+        (["roa_annual", "roa"], "ROA", True),
+        (["grossprofit_margin"], "gross margin", True),
+        (["netprofit_yoy"], "profit growth", True),
+        (["debt_to_assets"], "debt ratio", False),
+        (["dv_ttm"], "dividend yield", True),
+        (["total_mv"], "market cap scale", True),
+    ]
+    for rank, (_, peer) in enumerate(candidates.iterrows(), start=1):
+        strengths = [
+            signal
+            for columns, label, higher_is_better in metric_specs
+            if (signal := _metric_contrast(peer, target, columns, label, higher_is_better, True))
+        ]
+        weaknesses = [
+            signal
+            for columns, label, higher_is_better in metric_specs[:-1]
+            if (signal := _metric_contrast(peer, target, columns, label, higher_is_better, False))
+        ]
+        peer_score = _row_numeric(peer, ["v4_score"])
+        score_gap = (
+            f"{peer_score - target_score:+.1f}"
+            if peer_score is not None and target_score is not None
+            else "N/A"
+        )
+        rows.append(
+            {
+                "rank": str(rank),
+                "competitor": f"{_format_value(peer.get('name'))} ({_format_value(peer.get('ts_code'))})",
+                "score_gap_vs_target": score_gap,
+                "apparent_edges": "; ".join(strengths[:4]) if strengths else "No obvious quantitative edge versus target",
+                "possible_weaknesses": "; ".join(weaknesses[:3]) if weaknesses else "No obvious quantitative weakness in the selected metrics",
+                "diligence_use": (
+                    "Verify filing-based business overlap, segment economics, cash conversion, "
+                    "and whether the peer has a separate new-business valuation bucket."
+                ),
+            }
+        )
+    return rows
 
 
 def get_peer_comparison(ticker: str, curr_date: str, peer_limit: int = 12) -> str:
@@ -682,7 +784,7 @@ def get_peer_comparison(ticker: str, curr_date: str, peer_limit: int = 12) -> st
     )
 
     enriched = _merge_peer_financials(selected, curr_date, peer_count)
-    is_banking = "银行" in f"{basic.get('name', '')} {industry}"
+    is_banking = is_banking_entity(symbol, basic=basic, industry=industry)
     scored = _score_bank_peers(enriched) if is_banking else _score_peers(enriched)
     target_score = scored.loc[scored["ts_code"] == symbol, "v4_score"]
     target_score_value = float(target_score.iloc[0]) if not target_score.empty else None
@@ -702,6 +804,8 @@ def get_peer_comparison(ticker: str, curr_date: str, peer_limit: int = 12) -> st
         "pb",
         "ps_ttm",
         "dv_ttm",
+        "roe_annual",
+        "roa_annual",
         "roe",
         "roa",
         "netprofit_yoy",
@@ -709,6 +813,7 @@ def get_peer_comparison(ticker: str, curr_date: str, peer_limit: int = 12) -> st
         "v4_score",
     ]
     display = _select_existing(scored, display_cols)
+    competitor_rows = _build_competitor_analysis_rows(scored, symbol)
 
     lines = [
         f"# Tushare same-industry peer comparison for {symbol} as of {curr_date}",
@@ -720,6 +825,7 @@ def get_peer_comparison(ticker: str, curr_date: str, peer_limit: int = 12) -> st
         *(
             [
                 "- Banking peer screen: PB/ROE, ROA, dividend yield, and capital-quality proxies receive priority; use filing KPIs for NIM, asset quality, provision coverage, and CET1 before making a final allocation call.",
+                "- Banking ROE/ROA columns use latest annual rows when available for scoring; latest-period ROE/ROA are shown only as secondary context because interim Tushare ratios may be period-scaled.",
             ]
             if is_banking
             else []
@@ -773,6 +879,23 @@ def get_peer_comparison(ticker: str, curr_date: str, peer_limit: int = 12) -> st
     lines.extend(
         [
             "",
+            "## Competitor Analysis For Peer Recommendation",
+        ]
+    )
+    if competitor_rows:
+        lines.append(_markdown_table(pd.DataFrame(competitor_rows)))
+        lines.append(
+            "Use this table to decide which same-industry names deserve deeper competitor analysis. "
+            "The table is a quantitative screen; it must be reconciled with filing evidence on actual business overlap, segment economics, and split valuation."
+        )
+    else:
+        lines.append(
+            "No competitor analysis rows were generated because the target or peer scores were unavailable."
+        )
+
+    lines.extend(
+        [
+            "",
             "## Analyst Instructions",
             "- Compare the target against peers on valuation, profitability, growth, leverage, and shareholder return.",
             *(
@@ -784,6 +907,8 @@ def get_peer_comparison(ticker: str, curr_date: str, peer_limit: int = 12) -> st
             ),
             "- If another peer appears better, explain the specific metrics and the investment caveat.",
             "- Do not claim a peer is superior only because it has a lower PE; check quality and growth together.",
+            "- Use the competitor analysis table to choose which peers deserve deeper work, then verify from filings whether their products, customer mix, regions, and business segments truly compete with the target.",
+            "- If the target or peer has a new business or second curve, compare that segment separately instead of forcing one blended peer multiple.",
         ]
     )
     return "\n".join(lines)
