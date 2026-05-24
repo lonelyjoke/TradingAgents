@@ -30,6 +30,7 @@ FAILURE_PATTERNS = (
     "lookup unavailable",
     "unavailable\n\n- reason",
     "extraction status: financial-report text extraction unavailable",
+    "narrative filing text extraction unavailable",
     "financial-report text extraction unavailable",
     "no readable report text",
     "no commodity mapping found",

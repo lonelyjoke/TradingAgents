@@ -197,3 +197,44 @@ def test_peer_comparison_includes_competitor_analysis(monkeypatch):
     assert "score_gap_vs_target" in rendered
     assert "Verify filing-based business overlap" in rendered
     assert "compare that segment separately" in rendered
+
+
+def test_peer_comparison_falls_back_when_market_daily_lacks_ts_code(monkeypatch):
+    basic = pd.Series({"name": "Target Mobility", "industry": "Mobility"})
+    latest_by_symbol = {
+        "689009.SH": pd.Series({"trade_date": "20260520", "total_mv": 100, "pe_ttm": 12.0, "pb": 1.6}),
+        "300001.SZ": pd.Series({"trade_date": "20260520", "total_mv": 110, "pe_ttm": 8.0, "pb": 1.0}),
+        "300002.SZ": pd.Series({"trade_date": "20260520", "total_mv": 90, "pe_ttm": 18.0, "pb": 2.0}),
+    }
+
+    class FakePro:
+        pass
+
+    universe = pd.DataFrame(
+        [
+            {"ts_code": "689009.SH", "name": "Target Mobility", "industry": "Mobility"},
+            {"ts_code": "300001.SZ", "name": "Peer Alpha", "industry": "Mobility"},
+            {"ts_code": "300002.SZ", "name": "Peer Beta", "industry": "Mobility"},
+        ]
+    )
+    indicators = pd.DataFrame(
+        [{"end_date": "20251231", "roe": 10.0, "roa": 4.0, "netprofit_yoy": 8.0, "debt_to_assets": 45.0}]
+    )
+
+    monkeypatch.setattr(tushare_research, "_fetch_stock_basic", lambda symbol: basic)
+    monkeypatch.setattr(
+        tushare_research,
+        "_fetch_daily_basic_latest",
+        lambda symbol, curr_date: latest_by_symbol.get(symbol),
+    )
+    monkeypatch.setattr(tushare_research, "_get_pro_client", lambda: FakePro())
+    monkeypatch.setattr(tushare_research, "_fetch_stock_basic_universe", lambda pro: universe)
+    monkeypatch.setattr(tushare_research, "_latest_daily_basic_market", lambda trade_date: pd.DataFrame({"bad": [1]}))
+    monkeypatch.setattr(tushare_research, "_fetch_fina_indicator", lambda symbol, curr_date: indicators)
+
+    rendered = tushare_research.get_peer_comparison("689009.SH", "2026-05-21", peer_limit=3)
+
+    assert "Tushare same-industry peer comparison" in rendered
+    assert "Data note:" in rendered
+    assert "Peer Alpha" in rendered
+    assert "Reason: 'ts_code'" not in rendered

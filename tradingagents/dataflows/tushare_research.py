@@ -545,6 +545,54 @@ def _latest_daily_basic_market(trade_date: str) -> pd.DataFrame:
     return _query_optional_api("daily_basic", trade_date=trade_date, fields=fields)
 
 
+_PEER_DAILY_BASIC_COLS = [
+    "ts_code",
+    "trade_date",
+    "close",
+    "turnover_rate",
+    "pe_ttm",
+    "pb",
+    "ps_ttm",
+    "dv_ttm",
+    "total_mv",
+    "circ_mv",
+]
+
+
+def _daily_basic_row_dict(symbol: str, latest: pd.Series | None) -> dict[str, object]:
+    row = {col: pd.NA for col in _PEER_DAILY_BASIC_COLS}
+    row["ts_code"] = symbol
+    if latest is None:
+        return row
+    for col in _PEER_DAILY_BASIC_COLS:
+        if col in latest.index:
+            row[col] = latest.get(col)
+    row["ts_code"] = symbol
+    return row
+
+
+def _individual_peer_daily_basic(
+    peers: pd.DataFrame,
+    target_latest: pd.Series,
+    symbol: str,
+    curr_date: str,
+) -> pd.DataFrame:
+    rows = []
+    for _, row in peers.iterrows():
+        peer_symbol = str(row.get("ts_code") or "").strip()
+        if not peer_symbol:
+            continue
+        if peer_symbol == symbol:
+            latest = target_latest
+        else:
+            try:
+                latest = _fetch_daily_basic_latest(peer_symbol, curr_date)
+            except Exception:
+                latest = None
+        rows.append(_daily_basic_row_dict(peer_symbol, latest))
+    return pd.DataFrame(rows, columns=_PEER_DAILY_BASIC_COLS)
+
+
 def _merge_peer_financials(peer_data: pd.DataFrame, curr_date: str, limit: int) -> pd.DataFrame:
     rows = []
     for _, row in peer_data.head(limit).iterrows():
@@ -767,21 +815,47 @@ def get_peer_comparison(ticker: str, curr_date: str, peer_limit: int = 12) -> st
     if peers.empty:
         return f"No same-industry peers found for {symbol} in Tushare stock_basic."
 
-    market_daily = _latest_daily_basic_market(trade_date)
-    merged = peers.merge(market_daily, on="ts_code", how="left")
-    target_mv = pd.to_numeric(latest.get("total_mv"), errors="coerce")
-    merged["mv_distance"] = (
-        pd.to_numeric(merged["total_mv"], errors="coerce") - target_mv
-    ).abs()
-    merged["is_target"] = merged["ts_code"] == symbol
     peer_count = max(peer_limit, 3)
-    selected = pd.concat(
-        [
-            merged[merged["is_target"]],
-            merged[~merged["is_target"]].sort_values("mv_distance").head(peer_count - 1),
-        ],
-        ignore_index=True,
-    )
+    data_notes: list[str] = []
+    try:
+        market_daily = _latest_daily_basic_market(trade_date)
+    except Exception as exc:
+        market_daily = pd.DataFrame()
+        data_notes.append(f"daily_basic market snapshot unavailable, fell back to per-peer lookup: {exc}")
+
+    if market_daily is None or market_daily.empty or "ts_code" not in market_daily.columns:
+        if market_daily is not None and not market_daily.empty and "ts_code" not in market_daily.columns:
+            data_notes.append("daily_basic market snapshot lacked ts_code, fell back to per-peer lookup.")
+        target_rows = peers[peers["ts_code"] == symbol]
+        peer_rows = peers[peers["ts_code"] != symbol].head(peer_count - 1)
+        selected_basics = pd.concat([target_rows, peer_rows], ignore_index=True)
+        peer_daily = _individual_peer_daily_basic(selected_basics, latest, symbol, curr_date)
+        selected = selected_basics.merge(peer_daily, on="ts_code", how="left")
+    else:
+        merged = peers.merge(market_daily, on="ts_code", how="left")
+        target_mv = pd.to_numeric(latest.get("total_mv"), errors="coerce")
+        merged["mv_distance"] = (
+            pd.to_numeric(merged["total_mv"], errors="coerce") - target_mv
+        ).abs()
+        merged["is_target"] = merged["ts_code"] == symbol
+        selected = pd.concat(
+            [
+                merged[merged["is_target"]],
+                merged[~merged["is_target"]].sort_values("mv_distance").head(peer_count - 1),
+            ],
+            ignore_index=True,
+        )
+        if selected.empty:
+            selected_basics = pd.concat(
+                [
+                    peers[peers["ts_code"] == symbol],
+                    peers[peers["ts_code"] != symbol].head(peer_count - 1),
+                ],
+                ignore_index=True,
+            )
+            peer_daily = _individual_peer_daily_basic(selected_basics, latest, symbol, curr_date)
+            selected = selected_basics.merge(peer_daily, on="ts_code", how="left")
+            data_notes.append("same-industry market-value selection was empty, fell back to per-peer lookup.")
 
     enriched = _merge_peer_financials(selected, curr_date, peer_count)
     is_banking = is_banking_entity(symbol, basic=basic, industry=industry)
@@ -822,6 +896,7 @@ def get_peer_comparison(ticker: str, curr_date: str, peer_limit: int = 12) -> st
         f"- Industry: {industry}",
         f"- Valuation trade date: {_format_yyyymmdd(trade_date)}",
         f"- Peer sample: same Tushare stock_basic industry, closest by market value.",
+        *(f"- Data note: {note}" for note in data_notes),
         *(
             [
                 "- Banking peer screen: PB/ROE, ROA, dividend yield, and capital-quality proxies receive priority; use filing KPIs for NIM, asset quality, provision coverage, and CET1 before making a final allocation call.",

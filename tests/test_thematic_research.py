@@ -1,5 +1,6 @@
 import pandas as pd
 
+from tradingagents.dataflows import thematic_research
 from tradingagents.dataflows.thematic_research import (
     ThemeCandidate,
     _FINANCIAL_REPORT_TEXT_CACHE,
@@ -298,6 +299,8 @@ def test_financial_report_text_loader_reuses_same_run_bundle(monkeypatch, tmp_pa
     )
     pdf_path = tmp_path / "report.pdf"
     pdf_path.write_bytes(b"%PDF-1.4")
+    empty_cache_dir = tmp_path / "empty_disclosures"
+    empty_cache_dir.mkdir()
 
     def fake_announcements(symbol, curr_date, look_back_days):
         calls["announcements"] += 1
@@ -323,6 +326,7 @@ def test_financial_report_text_loader_reuses_same_run_bundle(monkeypatch, tmp_pa
         "tradingagents.dataflows.thematic_research._extract_pdf_text",
         fake_extract,
     )
+    monkeypatch.setattr(thematic_research, "_cache_dir", lambda: empty_cache_dir)
 
     first_reports, first_texts = _load_financial_report_texts("002202.SZ", "2026-05-17")
     second_reports, second_texts = _load_financial_report_texts("002202.SZ", "2026-05-17")
@@ -332,6 +336,36 @@ def test_financial_report_text_loader_reuses_same_run_bundle(monkeypatch, tmp_pa
         ("2025 annual report", "company disclosed signed customer orders")
     ]
     assert first_reports.equals(second_reports)
+
+
+def test_financial_report_text_loader_recovers_from_local_disclosure_cache(monkeypatch, tmp_path):
+    _FINANCIAL_REPORT_TEXT_CACHE.clear()
+    cache_dir = tmp_path / "disclosures"
+    cache_dir.mkdir()
+    cached_text = (
+        "公司代码：689009 公司简称：九号公司\n"
+        "九号有限公司2025 年年度报告\n"
+        "公司主营业务包括电动两轮车、电动滑板车、全地形车和割草机器人。"
+    )
+    (cache_dir / "ninebot.txt").write_text(cached_text, encoding="utf-8")
+
+    monkeypatch.setattr(
+        "tradingagents.dataflows.thematic_research._financial_report_announcements",
+        lambda *args: pd.DataFrame(),
+    )
+    monkeypatch.setattr(thematic_research, "_cache_dir", lambda: cache_dir)
+    monkeypatch.setattr(
+        thematic_research,
+        "_fetch_stock_basic",
+        lambda symbol: pd.Series({"name": "九号公司"}),
+    )
+
+    reports, texts = _load_financial_report_texts("689009.SH", "2026-05-23")
+
+    assert len(texts) == 1
+    assert "local disclosure cache" in texts[0][0]
+    assert "电动两轮车" in texts[0][1]
+    assert reports.iloc[0]["ts_code"] == "689009.SH"
 
 
 def test_short_investee_extractor_rejects_accounting_rows():

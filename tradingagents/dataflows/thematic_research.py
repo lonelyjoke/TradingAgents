@@ -293,6 +293,93 @@ def _cache_dir() -> Path:
     return path
 
 
+def _report_title_from_text(text: str, fallback: str) -> str:
+    for raw_line in str(text or "").splitlines()[:120]:
+        line = _compact_text(raw_line, limit=100)
+        if not line:
+            continue
+        if _FINANCIAL_REPORT_TITLE_RE.search(line) and not _FINANCIAL_REPORT_EXCLUDE_RE.search(line):
+            return line
+    return fallback
+
+
+def _cached_report_sort_key(item: tuple[Path, str, str]) -> tuple[int, float]:
+    path, title, _ = item
+    year_match = re.search(r"(20\d{2})", title)
+    year = int(year_match.group(1)) if year_match else 0
+    try:
+        mtime = path.stat().st_mtime
+    except OSError:
+        mtime = 0.0
+    return year, mtime
+
+
+def _load_cached_financial_report_texts(
+    symbol: str,
+    company_name: str | None = None,
+    limit: int = 4,
+) -> tuple[pd.DataFrame, list[tuple[str, str]]]:
+    """Recover readable filing text from the local disclosure cache.
+
+    Announcement vendors can be rate-limited or temporarily return an empty
+    result. When we already have parsed report text on disk, treating the
+    filing context as empty is worse than using that cached evidence with a
+    clear source marker.
+    """
+    code = symbol.split(".")[0]
+    terms = {symbol, code}
+    if company_name:
+        clean_name = str(company_name).strip()
+        if clean_name and clean_name != symbol:
+            terms.add(clean_name)
+            terms.add(clean_name.split("-")[0])
+
+    matches: list[tuple[Path, str, str]] = []
+    cache_path = _cache_dir()
+    for txt_path in cache_path.glob("*.txt"):
+        try:
+            text = txt_path.read_text(encoding="utf-8", errors="ignore")
+        except OSError:
+            continue
+        if not text or not any(term and term in text[:20_000] for term in terms):
+            continue
+        if not _FINANCIAL_REPORT_TITLE_RE.search(text[:20_000]):
+            continue
+        title = _report_title_from_text(text, f"cached financial report text: {txt_path.stem}")
+        if _FINANCIAL_REPORT_EXCLUDE_RE.search(title):
+            continue
+        matches.append((txt_path, title, text))
+
+    if not matches:
+        return pd.DataFrame(columns=["ann_date", "ts_code", "name", "title", "url", "rec_time"]), []
+
+    matches = sorted(matches, key=_cached_report_sort_key, reverse=True)
+    selected: list[tuple[Path, str, str]] = []
+    seen_titles: set[str] = set()
+    for item in matches:
+        title = item[1]
+        if title in seen_titles:
+            continue
+        selected.append(item)
+        seen_titles.add(title)
+        if len(selected) >= limit:
+            break
+
+    rows = [
+        {
+            "ann_date": "",
+            "ts_code": symbol,
+            "name": company_name or symbol,
+            "title": f"{title} [local disclosure cache]",
+            "url": str(path),
+            "rec_time": "",
+        }
+        for path, title, _ in selected
+    ]
+    texts = [(f"{title} [local disclosure cache]", text) for _, title, text in selected]
+    return pd.DataFrame(rows), texts
+
+
 def _download_disclosure(url: str) -> Path | None:
     if not url:
         return None
@@ -354,12 +441,19 @@ def _load_financial_report_texts(
         )
         return reports_copy, list(cached_texts)
 
+    try:
+        basic = _fetch_stock_basic(symbol)
+    except Exception:
+        basic = None
+    company_name = _format_value(basic.get("name")) if basic is not None else symbol
     reports = _financial_report_announcements(symbol, curr_date, look_back_days)
     if isinstance(reports, TushareDataError) or reports is None or reports.empty:
-        _FINANCIAL_REPORT_TEXT_CACHE[cache_key] = (
-            reports.copy() if isinstance(reports, pd.DataFrame) else reports,
-            [],
+        cached_reports, cached_texts = _load_cached_financial_report_texts(
+            symbol, company_name=company_name
         )
+        if cached_texts:
+            _FINANCIAL_REPORT_TEXT_CACHE[cache_key] = (cached_reports.copy(), list(cached_texts))
+            return cached_reports, cached_texts
         return reports, []
 
     texts: list[tuple[str, str]] = []
@@ -371,7 +465,25 @@ def _load_financial_report_texts(
         if text:
             title = str(row.get("title") or row.get("ann_date") or "financial report")
             texts.append((title, text))
-    _FINANCIAL_REPORT_TEXT_CACHE[cache_key] = (reports.copy(), list(texts))
+    cached_reports = pd.DataFrame()
+    cached_texts: list[tuple[str, str]] = []
+    if len(texts) < 3:
+        cached_reports, cached_texts = _load_cached_financial_report_texts(
+            symbol, company_name=company_name
+        )
+    if not texts and cached_texts:
+        reports = cached_reports
+        texts = cached_texts
+    elif texts and cached_texts:
+        seen_titles = {title.replace(" [local disclosure cache]", "") for title, _ in texts}
+        supplemental_texts = [
+            item for item in cached_texts if item[0].replace(" [local disclosure cache]", "") not in seen_titles
+        ]
+        if supplemental_texts:
+            texts.extend(supplemental_texts[: max(0, 4 - len(texts))])
+            reports = pd.concat([reports, cached_reports.head(len(supplemental_texts))], ignore_index=True)
+    if texts:
+        _FINANCIAL_REPORT_TEXT_CACHE[cache_key] = (reports.copy(), list(texts))
     return reports, texts
 
 

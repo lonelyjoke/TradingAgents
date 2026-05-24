@@ -27,6 +27,22 @@ def test_classifies_large_context_with_extraction_failure_as_partial():
     assert coverage.status == "partial"
 
 
+def test_classifies_narrative_filing_text_gap_as_partial_when_structured_context_exists():
+    text = (
+        "# Financial-report intelligence\n"
+        "- Extraction status: Narrative filing text extraction unavailable: no readable annual, semiannual, or quarterly report body was retrieved.\n"
+        "## Filing Reading Coverage Audit\n"
+        "| coverage_grade | core_pack_status |\n"
+        "| --- | --- |\n"
+        "| text_unavailable | unavailable |\n"
+        + ("structured financial row\n" * 100)
+    )
+
+    coverage = classify_context_coverage("filing", text)
+
+    assert coverage.status == "partial"
+
+
 def test_classifies_successful_filing_context_with_partial_instruction_as_ready():
     text = (
         "# Financial-report intelligence\n"
