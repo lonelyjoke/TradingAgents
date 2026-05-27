@@ -809,6 +809,27 @@ def save_report_to_disk(final_state, ticker: str, save_path: Path):
             final_state["web_fact_check_context"],
             encoding="utf-8",
         )
+    if final_state.get("baijiu_context"):
+        context_dir = save_path / "0_context"
+        context_dir.mkdir(exist_ok=True)
+        (context_dir / "baijiu_context.md").write_text(
+            final_state["baijiu_context"],
+            encoding="utf-8",
+        )
+    if final_state.get("compute_leasing_context"):
+        context_dir = save_path / "0_context"
+        context_dir.mkdir(exist_ok=True)
+        (context_dir / "compute_leasing_context.md").write_text(
+            final_state["compute_leasing_context"],
+            encoding="utf-8",
+        )
+    if final_state.get("dividend_defensive_context"):
+        context_dir = save_path / "0_context"
+        context_dir.mkdir(exist_ok=True)
+        (context_dir / "dividend_defensive_context.md").write_text(
+            final_state["dividend_defensive_context"],
+            encoding="utf-8",
+        )
 
     # 1. Analysts
     analysts_dir = save_path / "1_analysts"

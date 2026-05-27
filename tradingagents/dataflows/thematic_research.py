@@ -280,9 +280,12 @@ def _financial_report_announcements(
 def _filter_financial_report_announcements(result: pd.DataFrame) -> pd.DataFrame:
     if "title" not in result.columns:
         return pd.DataFrame()
-    titles = result["title"].fillna("").astype(str)
-    is_report = titles.str.contains(_FINANCIAL_REPORT_TITLE_RE, regex=True)
-    is_excluded = titles.str.contains(_FINANCIAL_REPORT_EXCLUDE_RE, regex=True)
+    # Force Python's regex engine here. Some pandas/pyarrow string backends route
+    # Series.str.contains to Arrow RE2, which rejects \uXXXX escapes used by the
+    # compiled Chinese-title patterns and raises ArrowInvalid.
+    titles = result["title"].fillna("").astype(object).map(str)
+    is_report = titles.map(lambda title: bool(_FINANCIAL_REPORT_TITLE_RE.search(title)))
+    is_excluded = titles.map(lambda title: bool(_FINANCIAL_REPORT_EXCLUDE_RE.search(title)))
     return result[is_report & ~is_excluded].copy()
 
 

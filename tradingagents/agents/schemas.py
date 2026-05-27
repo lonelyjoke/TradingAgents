@@ -122,9 +122,11 @@ class ResearchPlan(BaseModel):
     )
     rationale: str = Field(
         description=(
-            "Conversational summary of the key points from both sides of the "
-            "debate, ending with which arguments led to the recommendation. "
-            "Speak naturally, as if to a teammate."
+            "Detailed informative discussion of the bull/bear debate. Name the "
+            "bull's core bet, the bear's core bet, which evidence carries more "
+            "weight, which claims are unverified, and why the final recommendation "
+            "follows. This should read like an investment committee chair's "
+            "reasoned ruling, not a short recap."
         ),
     )
     strategic_actions: str = Field(
@@ -285,12 +287,66 @@ class ResearchPlan(BaseModel):
             "the filing industry reading pack and outside confirmation or contradiction."
         ),
     )
+    business_segment_valuation_verdict: Optional[str] = Field(
+        default=None,
+        description=(
+            "If filing evidence supports a segment or SOTP view, split the mature "
+            "core, emerging second curves, channels, geographies, and optionality. "
+            "Explain which parts deserve core valuation, scenario valuation, or no "
+            "valuation credit because revenue, margin, capex, customers, or cash "
+            "conversion are missing."
+        ),
+    )
+    commodity_cycle_verdict: Optional[str] = Field(
+        default=None,
+        description=(
+            "For commodity, product-price, spread, channel-price, or other cycle "
+            "variables, state whether verified price evidence supports or "
+            "contradicts the revenue, margin, inventory, or EPS thesis. If missing, "
+            "say exactly how that limits confidence."
+        ),
+    )
+    baijiu_channel_verification_verdict: Optional[str] = Field(
+        default=None,
+        description=(
+            "For baijiu/liquor targets only. Separate wholesale price evidence, "
+            "channel inventory/payment quality, contract-liability seasonality, "
+            "product mix, peer-basket comparison, and missing data. If not a "
+            "baijiu target, omit."
+        ),
+    )
+    compute_leasing_verification_verdict: Optional[str] = Field(
+        default=None,
+        description=(
+            "For compute-leasing targets only. Separate legacy business value, "
+            "verified compute-leasing revenue/value, unverified optionality, "
+            "unit-economics gaps, capex/funding risk, customer contract quality, "
+            "and transition credibility. If not applicable, omit."
+        ),
+    )
+    dividend_defensive_verdict: Optional[str] = Field(
+        default=None,
+        description=(
+            "For defensive/high-dividend targets only. Decide whether this is a "
+            "true defensive dividend candidate, a dividend-trap risk, inferior to "
+            "peer alternatives, or only a partial defensive sleeve. If not "
+            "applicable, omit."
+        ),
+    )
     strategic_optionality_verdict: Optional[str] = Field(
         default=None,
         description=(
             "Summarize important but non-base-case optionality such as second growth "
             "curves, investee holdings, asset revaluation, or thematic catalysts, "
             "including why they matter and what would upgrade them."
+        ),
+    )
+    evidence_gap_confidence_cap: Optional[str] = Field(
+        default=None,
+        description=(
+            "State the thesis-critical missing or partial evidence, distinguish "
+            "missing evidence from adverse evidence, and explain how it caps the "
+            "rating, position size, or conviction."
         ),
     )
     data_coverage_audit: Optional[str] = Field(
@@ -306,68 +362,89 @@ class ResearchPlan(BaseModel):
 def render_research_plan(plan: ResearchPlan) -> str:
     """Render a ResearchPlan to markdown for storage and the trader's prompt context."""
     parts = [
-        f"**Recommendation**: {plan.recommendation.value}",
+        "**Investment Decision Memo**",
         "",
-        f"**Core Bet**: {plan.core_bet}",
+        f"**Rating**: {plan.recommendation.value}",
         "",
-        f"**Expectation Gap**: {plan.expectation_gap}",
-        "",
-        f"**Probability And Payoff**: {plan.probability_payoff}",
-        "",
-        f"**Cycle-Valuation Assessment**: {plan.cycle_valuation_assessment}",
-        "",
-        f"**Catalyst Path**: {plan.catalyst_path}",
-        "",
-        f"**Falsification Signals**: {plan.falsification_signals}",
-        "",
-        f"**Conviction Level**: {plan.conviction_level}",
-        "",
-        f"**Rationale**: {plan.rationale}",
-        "",
-        f"**Strategic Actions**: {plan.strategic_actions}",
     ]
     if plan.prior_rating:
-        parts.extend(["", f"**Prior Rating**: {plan.prior_rating}"])
+        parts.extend(["### Prior Rating", plan.prior_rating])
     if plan.new_evidence_since_prior:
-        parts.extend(["", f"**New Evidence Since Prior**: {plan.new_evidence_since_prior}"])
+        parts.extend(["", "### New Evidence Since Prior", plan.new_evidence_since_prior])
     if plan.unchanged_core_facts:
-        parts.extend(["", f"**Unchanged Core Facts**: {plan.unchanged_core_facts}"])
+        parts.extend(["", "### Unchanged Core Facts", plan.unchanged_core_facts])
     if plan.rating_change_audit:
-        parts.extend(["", f"**Rating Change Audit**: {plan.rating_change_audit}"])
-    if plan.material_catalysts:
-        parts.extend(["", f"**Material Catalysts**: {plan.material_catalysts}"])
-    if plan.thematic_valuation_bridge:
-        parts.extend(["", f"**Thematic Valuation Bridge**: {plan.thematic_valuation_bridge}"])
-    if plan.rejected_themes:
-        parts.extend(["", f"**Rejected Themes**: {plan.rejected_themes}"])
-    if plan.peer_selection_verdict:
-        parts.extend(["", f"**Peer Selection Verdict**: {plan.peer_selection_verdict}"])
-    if plan.supply_chain_position_verdict:
-        parts.extend(["", f"**Supply-Chain Position Verdict**: {plan.supply_chain_position_verdict}"])
-    if plan.earnings_model_bridge:
-        parts.extend(["", f"**Earnings Model Bridge**: {plan.earnings_model_bridge}"])
-    if plan.market_implied_expectation:
-        parts.extend(["", f"**Market-Implied Expectation**: {plan.market_implied_expectation}"])
+        parts.extend(["", "### Rating Change Audit", plan.rating_change_audit])
     if plan.company_quality_verdict:
-        parts.extend(["", f"**Company Quality Verdict**: {plan.company_quality_verdict}"])
+        parts.extend(["", "### Company Quality Verdict", plan.company_quality_verdict])
     if plan.current_odds_verdict:
-        parts.extend(["", f"**Current Odds Verdict**: {plan.current_odds_verdict}"])
+        parts.extend(["", "### Current Odds Verdict", plan.current_odds_verdict])
     if plan.relative_allocation_verdict:
-        parts.extend(["", f"**Relative Allocation Verdict**: {plan.relative_allocation_verdict}"])
+        parts.extend(["", "### Relative Allocation Verdict", plan.relative_allocation_verdict])
+    if plan.material_catalysts:
+        parts.extend(["", "### Material Catalysts", plan.material_catalysts])
+    if plan.thematic_valuation_bridge:
+        parts.extend(["", "### Thematic Valuation Bridge", plan.thematic_valuation_bridge])
+    if plan.rejected_themes:
+        parts.extend(["", "### Rejected Themes", plan.rejected_themes])
+    if plan.peer_selection_verdict:
+        parts.extend(["", "### Peer Selection Verdict", plan.peer_selection_verdict])
+    if plan.supply_chain_position_verdict:
+        parts.extend(["", "### Supply-Chain Position Verdict", plan.supply_chain_position_verdict])
+    if plan.earnings_model_bridge:
+        parts.extend(["", "### Earnings Model Bridge", plan.earnings_model_bridge])
+    if plan.market_implied_expectation:
+        parts.extend(["", "### Market-Implied Expectation", plan.market_implied_expectation])
     if plan.management_capital_allocation_verdict:
-        parts.extend(["", f"**Management & Capital Allocation Verdict**: {plan.management_capital_allocation_verdict}"])
+        parts.extend(["", "### Management & Capital Allocation Verdict", plan.management_capital_allocation_verdict])
     if plan.shareholder_structure_verdict:
-        parts.extend(["", f"**Shareholder Structure Verdict**: {plan.shareholder_structure_verdict}"])
+        parts.extend(["", "### Shareholder Structure Verdict", plan.shareholder_structure_verdict])
     if plan.investor_communication_verdict:
-        parts.extend(["", f"**Investor Communication Verdict**: {plan.investor_communication_verdict}"])
+        parts.extend(["", "### Investor Communication Verdict", plan.investor_communication_verdict])
     if plan.policy_direction_verdict:
-        parts.extend(["", f"**Policy Direction Verdict**: {plan.policy_direction_verdict}"])
+        parts.extend(["", "### Policy Direction Verdict", plan.policy_direction_verdict])
     if plan.industry_driver_verdict:
-        parts.extend(["", f"**Industry Driver Verdict**: {plan.industry_driver_verdict}"])
+        parts.extend(["", "### Industry Driver Verdict", plan.industry_driver_verdict])
+    if plan.business_segment_valuation_verdict:
+        parts.extend(["", "### Business Segment Valuation Verdict", plan.business_segment_valuation_verdict])
+    if plan.commodity_cycle_verdict:
+        parts.extend(["", "### Commodity Cycle Verdict", plan.commodity_cycle_verdict])
+    if plan.baijiu_channel_verification_verdict:
+        parts.extend(["", "### Baijiu Channel Verification Verdict", plan.baijiu_channel_verification_verdict])
+    if plan.compute_leasing_verification_verdict:
+        parts.extend(["", "### Compute-Leasing Verification Verdict", plan.compute_leasing_verification_verdict])
+    if plan.dividend_defensive_verdict:
+        parts.extend(["", "### Dividend Defensive Verdict", plan.dividend_defensive_verdict])
     if plan.strategic_optionality_verdict:
-        parts.extend(["", f"**Strategic Optionality Verdict**: {plan.strategic_optionality_verdict}"])
+        parts.extend(["", "### Strategic Optionality Verdict", plan.strategic_optionality_verdict])
+    if plan.evidence_gap_confidence_cap:
+        parts.extend(["", "### Evidence Gap And Confidence Cap", plan.evidence_gap_confidence_cap])
     if plan.data_coverage_audit:
-        parts.extend(["", f"**Data Coverage Audit**: {plan.data_coverage_audit}"])
+        parts.extend(["", "### Data Coverage Audit", plan.data_coverage_audit])
+    parts.extend(
+        [
+            "",
+            "### Informative Discussion Of The Debate",
+            plan.rationale,
+            "",
+            "### Recommendation",
+            f"**Core Bet:** {plan.core_bet}",
+            "",
+            f"**Expectation Gap:** {plan.expectation_gap}",
+            "",
+            f"**Probability And Payoff:** {plan.probability_payoff}",
+            "",
+            f"**Cycle-Valuation Assessment:** {plan.cycle_valuation_assessment}",
+            "",
+            f"**Catalyst Path:** {plan.catalyst_path}",
+            "",
+            f"**Falsification Signals:** {plan.falsification_signals}",
+            "",
+            f"**Conviction Level:** {plan.conviction_level}",
+            "",
+            f"**Strategic Actions:** {plan.strategic_actions}",
+        ]
+    )
     return "\n".join(parts)
 
 
