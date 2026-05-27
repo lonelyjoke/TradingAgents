@@ -9,7 +9,10 @@ from langchain_core.messages import AIMessage
 from tradingagents.agents.schemas import TraderProposal, render_trader_proposal
 from tradingagents.agents.utils.agent_utils import (
     build_instrument_context,
+    get_baijiu_instruction,
     get_buy_side_thesis_instruction,
+    get_compute_leasing_instruction,
+    get_dividend_defensive_instruction,
     get_evidence_instruction,
     get_fair_cycle_valuation_instruction,
     get_filing_intelligence_instruction,
@@ -48,6 +51,9 @@ def create_trader(llm):
                 "investor_interaction_context",
                 "policy_planning_context",
                 "web_fact_check_context",
+                "baijiu_context",
+                "compute_leasing_context",
+                "dividend_defensive_context",
             },
         )
         thematic_catalyst_context = prompt_contexts["thematic_catalyst_context"]
@@ -55,6 +61,9 @@ def create_trader(llm):
         investor_interaction_context = prompt_contexts["investor_interaction_context"]
         policy_planning_context = prompt_contexts["policy_planning_context"]
         web_fact_check_context = prompt_contexts["web_fact_check_context"]
+        baijiu_context = prompt_contexts["baijiu_context"]
+        compute_leasing_context = prompt_contexts["compute_leasing_context"]
+        dividend_defensive_context = prompt_contexts["dividend_defensive_context"]
 
         messages = [
             {
@@ -66,7 +75,8 @@ def create_trader(llm):
                     "If the view is bullish, include a reasonable staged profit-taking or trimming range. "
                     "If the view is bearish or cautious, include an entry or re-entry watch range where risk/reward may become attractive again. "
                     "Calibrate action and ranges against market mood, sector valuation risk, stock beta/cyclicality, and company-specific quality. "
-                    "Translate the core bet, expectation gap, probability/payoff, and conviction level into action and position sizing."
+                    "Translate the core bet, expectation gap, probability/payoff, and conviction level into action and position sizing. "
+                    "Treat missing thesis-critical data as a confidence cap, not as bearish evidence; do not recommend trimming solely because a data source was unavailable."
                     f"{get_evidence_instruction()}"
                     f"{get_research_gap_instruction()}"
                     f"{get_supply_demand_fallback_instruction()}"
@@ -77,6 +87,9 @@ def create_trader(llm):
                     f"{get_investor_interaction_instruction()}"
                     f"{get_policy_planning_instruction()}"
                     f"{get_web_fact_check_instruction()}"
+                    f"{get_baijiu_instruction()}"
+                    f"{get_compute_leasing_instruction()}"
+                    f"{get_dividend_defensive_instruction()}"
                     f"{get_focused_report_instruction()}"
                 ),
             },
@@ -93,6 +106,9 @@ def create_trader(llm):
                     f"Official investor-interaction context: {investor_interaction_context}\n\n"
                     f"Official policy-planning context: {policy_planning_context}\n\n"
                     f"Web fact-check context: {web_fact_check_context}\n\n"
+                    f"Gated baijiu verification context: {baijiu_context}\n\n"
+                    f"Gated compute-leasing verification context: {compute_leasing_context}\n\n"
+                    f"Gated dividend defensive verification context: {dividend_defensive_context}\n\n"
                     f"Leverage these insights to make an informed and strategic decision."
                 ),
             },

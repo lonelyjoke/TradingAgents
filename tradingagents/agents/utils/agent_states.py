@@ -69,6 +69,9 @@ class AgentState(MessagesState):
     investor_interaction_context: Annotated[str, "Precomputed official investor-interaction context"]
     policy_planning_context: Annotated[str, "Precomputed national/industry policy-planning context"]
     web_fact_check_context: Annotated[str, "Precomputed web fact-check context for high-frequency facts"]
+    baijiu_context: Annotated[str, "Precomputed gated baijiu/liquor verification context for A-share names"]
+    compute_leasing_context: Annotated[str, "Precomputed gated compute-leasing verification context for A-share names"]
+    dividend_defensive_context: Annotated[str, "Precomputed gated defensive-dividend verification context for A-share names"]
     data_coverage_context: Annotated[str, "Audit of which precomputed context modules loaded successfully and which failed or are partial"]
 
     # researcher team discussion step
@@ -89,3 +92,6 @@ class AgentState(MessagesState):
     commodity_context: Annotated[str, "Precomputed commodity/product-price context for cyclical/resource A-share names"]
     filing_intelligence_context: Annotated[str, "Precomputed non-statement operating evidence mined from A-share financial reports"]
     web_fact_check_context: Annotated[str, "Precomputed web fact-check context for high-frequency facts"]
+    baijiu_context: Annotated[str, "Precomputed gated baijiu/liquor verification context for A-share names"]
+    compute_leasing_context: Annotated[str, "Precomputed gated compute-leasing verification context for A-share names"]
+    dividend_defensive_context: Annotated[str, "Precomputed gated defensive-dividend verification context for A-share names"]

@@ -5,6 +5,10 @@ from tradingagents.agents.utils.agent_utils import (
     get_buy_side_accounting_radar_instruction,
     get_buy_side_thesis_instruction,
     get_commodity_context,
+    get_compute_leasing_context,
+    get_compute_leasing_instruction,
+    get_dividend_defensive_context,
+    get_dividend_defensive_instruction,
     get_earnings_model_context,
     get_earnings_model_instruction,
     get_evidence_instruction,
@@ -25,6 +29,8 @@ from tradingagents.agents.utils.agent_utils import (
     get_market_timing_context,
     get_management_capital_allocation_context,
     get_management_capital_allocation_instruction,
+    get_baijiu_context,
+    get_baijiu_instruction,
     get_peer_comparison,
     get_peer_selection_instruction,
     get_price_earnings_decomposition_context,
@@ -62,6 +68,9 @@ def create_fundamentals_analyst(llm):
         raw_management_capital_allocation_context = state.get("management_capital_allocation_context", "")
         raw_shareholder_structure_context = state.get("shareholder_structure_context", "")
         raw_web_fact_check_context = state.get("web_fact_check_context", "")
+        raw_baijiu_context = state.get("baijiu_context", "")
+        raw_compute_leasing_context = state.get("compute_leasing_context", "")
+        raw_dividend_defensive_context = state.get("dividend_defensive_context", "")
         prompt_contexts = compact_state_fields(state, profile="analyst")
         thematic_catalyst_context = prompt_contexts["thematic_catalyst_context"]
         commodity_context = prompt_contexts["commodity_context"]
@@ -74,6 +83,9 @@ def create_fundamentals_analyst(llm):
         management_capital_allocation_context = prompt_contexts["management_capital_allocation_context"]
         shareholder_structure_context = prompt_contexts["shareholder_structure_context"]
         web_fact_check_context = prompt_contexts["web_fact_check_context"]
+        baijiu_context = prompt_contexts["baijiu_context"]
+        compute_leasing_context = prompt_contexts["compute_leasing_context"]
+        dividend_defensive_context = prompt_contexts["dividend_defensive_context"]
         is_a_share = is_a_share_symbol(state["company_of_interest"])
 
         tools = [
@@ -109,13 +121,19 @@ def create_fundamentals_analyst(llm):
             tools.append(get_shareholder_structure_context)
         if is_a_share and not raw_web_fact_check_context:
             tools.append(get_web_fact_check_context)
+        if is_a_share and not raw_baijiu_context:
+            tools.append(get_baijiu_context)
+        if is_a_share and not raw_compute_leasing_context:
+            tools.append(get_compute_leasing_context)
+        if is_a_share and not raw_dividend_defensive_context:
+            tools.append(get_dividend_defensive_context)
 
         system_message = (
             "You are a buy-side fundamental researcher. Write a focused investment memo, not an exhaustive data dump. "
             "Your job is to identify the tradable thesis, test whether the business-cycle or boom-bust expectation can plausibly realize, and explain what evidence supports or weakens the thesis. "
             "Use `get_fundamentals`, `get_balance_sheet`, `get_cashflow`, and `get_income_statement` for core financial quality. "
             "Pay special attention to accounting items that may preview future performance, including contract liabilities, advance receipts, contract assets, receivables, inventories, prepayments, payables, goodwill, net cash, and working capital. "
-            "For A-share tickers, the system may provide precomputed thematic, commodity/product-price, filing, peer, supply-chain, earnings-model, market-expectation, price/EPS/PE decomposition, management/capital-allocation, shareholder-structure, and web fact-check context below. Use any precomputed context directly and do not call the same context tool again. Also use `get_valuation_percentiles` for historical valuation zones, `get_market_sector_risk` for broad/sector risk, and `get_market_timing_context` for market mood when those extra lenses are material. "
+            "For A-share tickers, the system may provide precomputed thematic, commodity/product-price, filing, peer, supply-chain, earnings-model, market-expectation, price/EPS/PE decomposition, management/capital-allocation, shareholder-structure, web fact-check, gated compute-leasing, and gated dividend-defensive context below. Use any precomputed context directly and do not call the same context tool again. Also use `get_valuation_percentiles` for historical valuation zones, `get_market_sector_risk` for broad/sector risk, and `get_market_timing_context` for market mood when those extra lenses are material. "
             "For commodity/resource/cyclical companies, treat the commodity/product-price context as a hard cycle variable: connect it to ASP, gross margin, inventory write-down/reversal risk, cash conversion, and valuation, and do not let news headlines substitute for product-price evidence. "
             "For A-share tickers, also use `get_supply_chain_comparison` when a curated chain map exists, so the memo can distinguish between a merely good company and the best profit pool in the chain. "
             "For A-share tickers, if precomputed thematic and financial-report intelligence are present below, treat those as satisfying the catalyst / filing-evidence requirement. If they are absent, call the corresponding context tool once before concluding those sections. "
@@ -142,6 +160,9 @@ def create_fundamentals_analyst(llm):
             + get_management_capital_allocation_instruction()
             + get_shareholder_structure_instruction()
             + get_web_fact_check_instruction()
+            + get_baijiu_instruction()
+            + get_compute_leasing_instruction()
+            + get_dividend_defensive_instruction()
             + (
                 "\n\nPrecomputed filing/news thematic cross-check:\n"
                 + thematic_catalyst_context
@@ -206,6 +227,24 @@ def create_fundamentals_analyst(llm):
                 "\n\nPrecomputed web fact-check context:\n"
                 + web_fact_check_context
                 if web_fact_check_context
+                else ""
+            )
+            + (
+                "\n\nPrecomputed gated baijiu verification context:\n"
+                + baijiu_context
+                if baijiu_context
+                else ""
+            )
+            + (
+                "\n\nPrecomputed gated compute-leasing verification context:\n"
+                + compute_leasing_context
+                if compute_leasing_context
+                else ""
+            )
+            + (
+                "\n\nPrecomputed gated dividend defensive verification context:\n"
+                + dividend_defensive_context
+                if dividend_defensive_context
                 else ""
             )
             + get_fair_cycle_valuation_instruction()

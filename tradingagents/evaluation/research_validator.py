@@ -55,6 +55,183 @@ class ReportView:
     conviction: str = ""
 
 
+@dataclass(frozen=True)
+class DecisionDepthIssue:
+    section: str
+    severity: str
+    issue: str
+
+
+_SEGMENT_DEPTH_TERMS = (
+    "revenue",
+    "growth",
+    "gross margin",
+    "net margin",
+    "profit",
+    "cash",
+    "valuation",
+    "not disclosed",
+    "收入",
+    "增速",
+    "增长",
+    "毛利",
+    "净利",
+    "利润",
+    "现金",
+    "估值",
+    "未披露",
+)
+
+_PEER_DEPTH_TERMS = (
+    "rank",
+    "peer",
+    "comparable",
+    "valuation",
+    "ROE",
+    "margin",
+    "growth",
+    "leverage",
+    "allocation",
+    "排名",
+    "同行",
+    "可比",
+    "估值",
+    "盈利",
+    "毛利",
+    "增长",
+    "杠杆",
+    "配置",
+)
+
+_VALUATION_DEPTH_TERMS = (
+    "implied",
+    "expectation",
+    "EPS",
+    "ROE",
+    "cash flow",
+    "multiple",
+    "PE",
+    "PB",
+    "隐含",
+    "预期",
+    "每股收益",
+    "现金流",
+    "倍数",
+    "估值",
+)
+
+_FALSIFICATION_DEPTH_TERMS = (
+    "confirm",
+    "weaken",
+    "downgrade",
+    "falsify",
+    "margin",
+    "orders",
+    "cash",
+    "确认",
+    "削弱",
+    "下调",
+    "证伪",
+    "毛利",
+    "订单",
+    "现金",
+)
+
+
+def _section_text(text: str, label: str) -> str:
+    pattern = rf"\*\*{re.escape(label)}\*\*:\s*(.*?)(?:\n\n\*\*[^*\n]+\*\*:|\Z)"
+    match = re.search(pattern, text, flags=re.S)
+    return match.group(1).strip() if match else ""
+
+
+def _term_hits(text: str, terms: Iterable[str]) -> int:
+    lowered = text.lower()
+    return sum(1 for term in terms if term.lower() in lowered)
+
+
+def audit_decision_depth(decision_text: str) -> list[DecisionDepthIssue]:
+    """Flag final-decision sections that look present but too shallow.
+
+    This is a lightweight guardrail for saved reports. It intentionally avoids
+    scoring investment correctness; it checks whether the public memo contains
+    the minimum buy-side analytical loops that make a conclusion inspectable.
+    """
+    issues: list[DecisionDepthIssue] = []
+
+    segment = _section_text(decision_text, "Investment Thesis")
+    if "Business Segment Breakdown:" not in segment:
+        issues.append(
+            DecisionDepthIssue(
+                "business_segment_breakdown",
+                "warning",
+                "missing explicit Business Segment Breakdown in the final thesis",
+            )
+        )
+    elif _term_hits(segment, _SEGMENT_DEPTH_TERMS) < 5:
+        issues.append(
+            DecisionDepthIssue(
+                "business_segment_breakdown",
+                "warning",
+                "segment discussion lacks revenue/growth/margin/profit/cash/valuation depth",
+            )
+        )
+
+    if "Peer Comparison Summary:" not in segment:
+        issues.append(
+            DecisionDepthIssue(
+                "peer_comparison_summary",
+                "warning",
+                "missing explicit Peer Comparison Summary in the final thesis",
+            )
+        )
+    elif _term_hits(segment, _PEER_DEPTH_TERMS) < 5:
+        issues.append(
+            DecisionDepthIssue(
+                "peer_comparison_summary",
+                "warning",
+                "peer discussion lacks rank/comparability/valuation/profitability/allocation depth",
+            )
+        )
+
+    if _term_hits(decision_text, _VALUATION_DEPTH_TERMS) < 4:
+        issues.append(
+            DecisionDepthIssue(
+                "valuation_expectation",
+                "warning",
+                "valuation discussion does not translate price into implied EPS/ROE/cash-flow/multiple assumptions",
+            )
+        )
+
+    if _term_hits(decision_text, _FALSIFICATION_DEPTH_TERMS) < 4:
+        issues.append(
+            DecisionDepthIssue(
+                "verification_and_falsification",
+                "warning",
+                "verification section lacks concrete confirm/weaken/downgrade conditions",
+            )
+        )
+
+    return issues
+
+
+def audit_report_depth(report_dir: str | Path) -> pd.DataFrame:
+    """Audit the final portfolio decision for shallow buy-side sections."""
+    decision_path = Path(report_dir) / "5_portfolio" / "decision.md"
+    if not decision_path.exists():
+        raise FileNotFoundError(f"Missing portfolio decision: {decision_path}")
+    issues = audit_decision_depth(read_text_fallback(decision_path))
+    return pd.DataFrame(
+        [
+            {
+                "section": issue.section,
+                "severity": issue.severity,
+                "issue": issue.issue,
+            }
+            for issue in issues
+        ]
+    )
+
+
 def read_text_fallback(path: Path) -> str:
     """Read markdown using common encodings without raising Unicode errors."""
     for encoding in ("utf-8-sig", "utf-8", "gb18030"):

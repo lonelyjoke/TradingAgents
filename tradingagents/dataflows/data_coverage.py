@@ -27,6 +27,9 @@ FAILURE_PATTERNS = (
     "# shareholder-structure context unavailable",
     "# investor-interaction context unavailable",
     "# policy-planning context unavailable",
+    "# baijiu verification context unavailable",
+    "# compute-leasing verification layer unavailable",
+    "# dividend defensive verification layer unavailable",
     "lookup unavailable",
     "unavailable\n\n- reason",
     "extraction status: financial-report text extraction unavailable",
@@ -78,6 +81,9 @@ def classify_context_coverage(name: str, text: str) -> ContextCoverage:
         return ContextCoverage(name, "missing", "context is empty")
 
     lower = cleaned.lower()
+    if "status: not_applicable" in lower:
+        return ContextCoverage(name, "not_applicable", _first_relevant_line(cleaned))
+
     has_failure = any(pattern in lower for pattern in FAILURE_PATTERNS)
     has_success_hint = any(hint.lower() in lower for hint in SUCCESS_HINTS)
 

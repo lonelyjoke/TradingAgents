@@ -528,6 +528,21 @@ class PortfolioDecision(BaseModel):
             "inventory, or OCF."
         ),
     )
+    business_segment_breakdown: Optional[str] = Field(
+        default=None,
+        description=(
+            "Mandatory for unfamiliar or multi-business companies when financial-report "
+            "intelligence is available. Write this like a buy-side segment memo, "
+            "not a company-introduction paragraph. Cover five items: (1) what each "
+            "business line actually sells or delivers; (2) disclosed revenue scale "
+            "and growth by segment; (3) gross margin, net margin, profit contribution, "
+            "cash conversion, or why those economics are not disclosed; (4) whether "
+            "the segment is mature core, cyclical core, geography/channel mix, or "
+            "second curve; and (5) valuation treatment for each bucket. If revenue, "
+            "growth, margin, or profit by segment is not disclosed, write 'not "
+            "disclosed' for that item and state how the gap caps SOTP confidence."
+        ),
+    )
     bull_bear_debate: str = Field(
         description=(
             "A compact public-facing summary of the strongest bull argument and "
@@ -567,7 +582,9 @@ class PortfolioDecision(BaseModel):
             "A concise checklist of the next verification points and the signals "
             "that would falsify or downgrade the thesis. Use concrete observable "
             "items from the report, such as earnings, orders, product prices, "
-            "margins, cash flow, policy, inventory, technical levels, or sector data."
+            "margins, cash flow, policy, inventory, technical levels, or sector data. "
+            "Each item should say what data would confirm, what data would weaken, "
+            "and what action/rating change would follow."
         ),
     )
     investment_thesis: str = Field(
@@ -602,7 +619,9 @@ class PortfolioDecision(BaseModel):
             "Explain the potential expectation gap: what the market may be "
             "underpricing or overpricing, what assumptions today's valuation "
             "appears to embed, and what evidence suggests those assumptions are "
-            "too pessimistic, too optimistic, or fair."
+            "too pessimistic, too optimistic, or fair. Translate the gap into "
+            "specific revenue, margin, EPS, ROE, cash-flow, order, or multiple "
+            "assumptions rather than saying only that valuation is cheap/expensive."
         ),
     )
     probability_payoff: Optional[str] = Field(
@@ -775,6 +794,19 @@ class PortfolioDecision(BaseModel):
             "business reasons, and how that affects position posture."
         ),
     )
+    peer_comparison_summary: Optional[str] = Field(
+        default=None,
+        description=(
+            "Mandatory when same-industry peer comparison context is available. "
+            "Write this like a buy-side peer-relative allocation memo. Cover five "
+            "items: (1) peer-universe hygiene: which peers are true operating comps "
+            "and which are only broad-industry screens; (2) target rank and key "
+            "metrics versus peers; (3) whether valuation discount/premium is earned "
+            "by ROE, margin, growth, balance-sheet risk, cash return, or business "
+            "quality; (4) named better/worse alternatives and their caveats; and "
+            "(5) what the peer screen changes in sizing, rating, or follow-up work."
+        ),
+    )
     supply_chain_position_verdict: Optional[str] = Field(
         default=None,
         description=(
@@ -875,6 +907,17 @@ class PortfolioDecision(BaseModel):
             "rating today, and what would upgrade them."
         ),
     )
+    buy_side_depth_audit: Optional[str] = Field(
+        default=None,
+        description=(
+            "A short self-audit of the final memo's weak spots. Name any section "
+            "that remains evidence-light or potentially generic: segment economics, "
+            "peer comparability, valuation assumptions, catalyst timetable, "
+            "management/capital allocation, ownership overhang, market/technical "
+            "timing, or data coverage. For each weakness, say whether it caps "
+            "conviction, requires follow-up, or merely stays out of valuation."
+        ),
+    )
     data_coverage_audit: Optional[str] = Field(
         default=None,
         description=(
@@ -898,6 +941,9 @@ def render_pm_decision(decision: PortfolioDecision) -> str:
 
     thesis = _join(
         decision.investment_thesis,
+        f"Business Segment Breakdown: {decision.business_segment_breakdown}"
+        if decision.business_segment_breakdown
+        else None,
         f"Business and industry verdict: {decision.business_driver_map}"
         if decision.business_driver_map
         else None,
@@ -954,6 +1000,9 @@ def render_pm_decision(decision: PortfolioDecision) -> str:
         f"Peer comparison: {decision.peer_selection_verdict}"
         if decision.peer_selection_verdict
         else None,
+        f"Peer Comparison Summary: {decision.peer_comparison_summary}"
+        if decision.peer_comparison_summary
+        else None,
         f"Supply-chain position: {decision.supply_chain_position_verdict}"
         if decision.supply_chain_position_verdict
         else None,
@@ -984,6 +1033,9 @@ def render_pm_decision(decision: PortfolioDecision) -> str:
         else None,
         f"Strategic optionality: {decision.strategic_optionality_verdict}"
         if decision.strategic_optionality_verdict
+        else None,
+        f"Buy-side depth audit: {decision.buy_side_depth_audit}"
+        if decision.buy_side_depth_audit
         else None,
         f"Catalyst path: {decision.catalyst_path}" if decision.catalyst_path else None,
         f"Rejected themes: {decision.rejected_themes}" if decision.rejected_themes else None,

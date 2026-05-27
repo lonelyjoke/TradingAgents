@@ -5,7 +5,10 @@ from __future__ import annotations
 from tradingagents.agents.schemas import ResearchPlan, render_research_plan
 from tradingagents.agents.utils.agent_utils import (
     build_instrument_context,
+    get_baijiu_instruction,
     get_buy_side_thesis_instruction,
+    get_compute_leasing_instruction,
+    get_dividend_defensive_instruction,
     get_evidence_instruction,
     get_earnings_model_instruction,
     get_fair_cycle_valuation_instruction,
@@ -62,6 +65,9 @@ def create_research_manager(llm):
         investor_interaction_context = prompt_contexts["investor_interaction_context"]
         policy_planning_context = prompt_contexts["policy_planning_context"]
         web_fact_check_context = prompt_contexts["web_fact_check_context"]
+        baijiu_context = prompt_contexts["baijiu_context"]
+        compute_leasing_context = prompt_contexts["compute_leasing_context"]
+        dividend_defensive_context = prompt_contexts["dividend_defensive_context"]
         data_coverage_context = prompt_contexts["data_coverage_context"]
         prompt_history = compact_debate_history(history, profile="research")
         continuity_context = (
@@ -117,9 +123,11 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 
 **Evidence-Gap Calibration:**
 - Missing core operating data is not neutral evidence. It is a research gap that should reduce conviction in the affected thesis.
+- Missing data is also not adverse evidence by itself. Do not convert an unavailable data point into Underweight/Sell unless verified negative evidence independently supports the downside case.
 - Do not let PE/PB and technical indicators replace missing product-price, spread, inventory, freight-rate, policy, capacity, or order-book evidence.
 - If the unavailable data is central to the bull thesis, prefer evidence-limited Overweight/Hold or a staged watch plan over a high-conviction Buy.
 - If the unavailable data is central to the bear thesis, do not issue a strong Sell solely because evidence is missing; explain the risk scenario and what would confirm it.
+- If the same missing variable is central to both bull and bear cases, default to an evidence-limited Hold/watch-plan unless the verified financial, valuation, or cycle evidence already gives one side positive expected value.
 - Hold should mean balanced verified evidence, not "we could not fetch the important data."
 
 **Supply-Demand Fallback:**
@@ -144,6 +152,9 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 - If industry-specific filing context is available, keep an **Industry Driver Verdict** explicit enough to preserve the real sector-native variables that decide the thesis.
 - If the filing context contains a Business Segment Valuation Map or Segment Economics Pack, keep a **Business Segment Valuation Verdict** explicit enough to split mature core businesses from emerging second curves, geographies, and channels. Do not allow the debate to collapse a multi-business company into one blended PE unless the filings do not support a meaningful split.
 - If commodity/product-price context is available, keep a **Commodity Cycle Verdict** explicit enough to say whether the product-price evidence supports or contradicts the margin/EPS/inventory part of the thesis.
+- If gated baijiu context says `Status: triggered`, keep a **Baijiu Channel Verification Verdict** explicit enough to separate product wholesale price evidence, channel inventory/payment quality, contract-liability seasonality, product mix, peer-basket comparison, and missing data. If it says `Status: not_applicable`, do not force baijiu analysis into the stock.
+- If gated compute-leasing context says `Status: triggered`, keep a **Compute-Leasing Verification Verdict** explicit enough to separate legacy value, verified compute-leasing value, unverified compute optionality, unit-economics gaps, capex/funding risk, and transition credibility. If it says `Status: not_applicable`, do not force compute-leasing analysis into the stock.
+- If gated dividend-defensive context says `Status: triggered`, keep a **Dividend Defensive Verdict** explicit enough to say whether this is a true defensive dividend candidate, a dividend-trap risk, or inferior to peer alternatives. If it says `Status: not_applicable`, do not force a high-dividend thesis into the stock.
 - If verified but non-base-case optionality matters, keep a **Strategic Optionality Verdict** explicit enough that downstream agents do not erase a second growth curve, investee holding, asset revaluation path, or live thematic catalyst merely because it does not flip today's rating.
 - Always read the Data Coverage Audit before ruling. If a module is failed, missing, or partial and touches the core bet, explicitly state the gap and cap conviction; do not let the final plan sound more certain than the data coverage allows.
 - If financial-report intelligence says narrative filing text or readable report body was unavailable, do not write that the system failed to retrieve all financial data. First check whether structured statements, market data, peer comparison, valuation, and earnings-model contexts are present. Describe the gap narrowly as missing report-body/segment/management-discussion evidence unless those other modules also failed.
@@ -190,6 +201,15 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 **Web Fact-Check Context:**
 {web_fact_check_context}
 
+**Gated Baijiu Verification Context:**
+{baijiu_context}
+
+**Gated Compute-Leasing Verification Context:**
+{compute_leasing_context}
+
+**Gated Dividend Defensive Verification Context:**
+{dividend_defensive_context}
+
 **Data Coverage Audit:**
 {data_coverage_context}
 
@@ -214,6 +234,9 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 {get_management_capital_allocation_instruction()}
 {get_shareholder_structure_instruction()}
 {get_web_fact_check_instruction()}
+{get_baijiu_instruction()}
+{get_compute_leasing_instruction()}
+{get_dividend_defensive_instruction()}
 {get_fair_cycle_valuation_instruction()}
 {get_focused_report_instruction()}
 If a bull or bear argument contains an exact product price, inventory figure, product spread, percentage change, or date-specific market claim that is not supported by the analyst reports or corroborated web fact-check context, downgrade that argument and list it as an unverified key assumption."""

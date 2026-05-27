@@ -34,6 +34,9 @@ class Propagator:
         investor_interaction_context: str = "",
         policy_planning_context: str = "",
         web_fact_check_context: str = "",
+        baijiu_context: str = "",
+        compute_leasing_context: str = "",
+        dividend_defensive_context: str = "",
         data_coverage_context: str = "",
     ) -> Dict[str, Any]:
         """Create the initial state for the agent graph."""
@@ -56,6 +59,9 @@ class Propagator:
             "investor_interaction_context": investor_interaction_context,
             "policy_planning_context": policy_planning_context,
             "web_fact_check_context": web_fact_check_context,
+            "baijiu_context": baijiu_context,
+            "compute_leasing_context": compute_leasing_context,
+            "dividend_defensive_context": dividend_defensive_context,
             "data_coverage_context": data_coverage_context,
             "investment_debate_state": InvestDebateState(
                 {

@@ -1,16 +1,26 @@
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import date, datetime
+import re
 from typing import Annotated
 
 import pandas as pd
 from dateutil.relativedelta import relativedelta
 
-from .tushare_client import TushareClientError, get_tushare_pro_client
+from .tushare_client import (
+    TushareClientError,
+    get_tushare_pro_client,
+    get_tushare_pro_clients,
+)
 
 
 class TushareDataError(RuntimeError):
     """Raised when Tushare cannot provide the requested A-share data."""
+
+
+_A_SHARE_CODE_RE = re.compile(r"^\d{6}$")
+_A_SHARE_TS_CODE_RE = re.compile(r"^\d{6}\.(SZ|SH|BJ)$", re.I)
+_CJK_RE = re.compile(r"[\u3400-\u9fff]")
 
 
 INDICATOR_DESCRIPTIONS = {
@@ -80,11 +90,99 @@ INDICATOR_DESCRIPTIONS = {
 def is_a_share_symbol(symbol: str) -> bool:
     """Return True for common Tushare A-share symbols such as 000001.SZ."""
     upper = symbol.strip().upper()
-    return upper.endswith((".SZ", ".SH", ".BJ"))
+    return bool(_A_SHARE_TS_CODE_RE.match(upper))
+
+
+def infer_a_share_symbol(symbol: str) -> str | None:
+    """Infer a Tushare ts_code from common A-share shorthand when possible."""
+    text = str(symbol or "").strip().upper()
+    if not text:
+        return None
+    if is_a_share_symbol(text):
+        return text
+    if not _A_SHARE_CODE_RE.match(text):
+        return None
+    if text.startswith(("0", "3")):
+        return f"{text}.SZ"
+    if text.startswith("6"):
+        return f"{text}.SH"
+    if text.startswith(("4", "8", "9")):
+        return f"{text}.BJ"
+    return None
+
+
+def looks_like_a_share_query(symbol: str) -> bool:
+    """Return True for inputs that should be resolved as A-share names/codes."""
+    text = str(symbol or "").strip()
+    return bool(infer_a_share_symbol(text) or _CJK_RE.search(text))
+
+
+_A_SHARE_SYMBOL_RESOLUTION_CACHE: dict[str, str | None] = {}
+
+
+def _fetch_stock_basic_universe() -> pd.DataFrame:
+    fields = "ts_code,symbol,name,area,industry,market,exchange,list_date"
+    try:
+        universe = _query_pro_with_fallback("stock_basic", list_status="L", fields=fields)
+    except Exception:
+        universe = _query_pro_with_fallback("stock_basic", list_status="L")
+    return universe if universe is not None else pd.DataFrame()
+
+
+def resolve_a_share_symbol(symbol: str) -> str | None:
+    """Resolve exchange-qualified A-share ts_code from code shorthand or name."""
+    text = str(symbol or "").strip()
+    inferred = infer_a_share_symbol(text)
+    if inferred:
+        return inferred
+
+    if not text:
+        return None
+
+    cached = _A_SHARE_SYMBOL_RESOLUTION_CACHE.get(text)
+    if cached is not None:
+        return cached
+    if text in _A_SHARE_SYMBOL_RESOLUTION_CACHE:
+        return None
+
+    if not looks_like_a_share_query(text):
+        _A_SHARE_SYMBOL_RESOLUTION_CACHE[text] = None
+        return None
+
+    universe = _fetch_stock_basic_universe()
+    if universe.empty:
+        _A_SHARE_SYMBOL_RESOLUTION_CACHE[text] = None
+        return None
+
+    normalized = text.upper()
+    for col in ("ts_code", "symbol", "name"):
+        if col not in universe.columns:
+            continue
+        matches = universe[universe[col].astype(str).str.strip().str.upper() == normalized]
+        if not matches.empty and "ts_code" in matches.columns:
+            resolved = str(matches.iloc[0]["ts_code"]).strip().upper()
+            _A_SHARE_SYMBOL_RESOLUTION_CACHE[text] = resolved
+            return resolved
+
+    _A_SHARE_SYMBOL_RESOLUTION_CACHE[text] = None
+    return None
 
 
 def _to_tushare_date(date_str: str) -> str:
-    return datetime.strptime(date_str, "%Y-%m-%d").strftime("%Y%m%d")
+    """Normalize common date inputs into Tushare YYYYMMDD format."""
+    if isinstance(date_str, datetime):
+        return date_str.strftime("%Y%m%d")
+    if isinstance(date_str, date):
+        return date_str.strftime("%Y%m%d")
+
+    text = str(date_str or "").strip()
+    if len(text) == 8 and text.isdigit():
+        return datetime.strptime(text, "%Y%m%d").strftime("%Y%m%d")
+    if len(text) == 10:
+        return datetime.strptime(text, "%Y-%m-%d").strftime("%Y%m%d")
+    raise ValueError(
+        f"Unsupported date format {date_str!r}; expected YYYY-MM-DD or YYYYMMDD."
+    )
 
 
 def _get_pro_client():
@@ -92,6 +190,61 @@ def _get_pro_client():
         return get_tushare_pro_client()
     except TushareClientError as exc:
         raise TushareDataError(str(exc)) from exc
+
+
+def _query_pro_with_fallback(api_name: str, *, empty_ok: bool = False, **kwargs) -> pd.DataFrame:
+    """Query configured Tushare gateway, then official endpoint if needed."""
+    errors: list[str] = []
+    empty_sources: list[str] = []
+    try:
+        clients = list(get_tushare_pro_clients())
+    except TushareClientError as exc:
+        raise TushareDataError(str(exc)) from exc
+
+    for source, pro in clients:
+        try:
+            func = getattr(pro, api_name, None)
+            if callable(func):
+                data = func(**kwargs)
+            elif hasattr(pro, "query"):
+                data = pro.query(api_name, **kwargs)
+            else:
+                raise TushareDataError(f"Tushare client does not expose {api_name}.")
+        except Exception as exc:
+            errors.append(f"{source}: {exc}")
+            continue
+        if data is None:
+            empty_sources.append(source)
+            continue
+        if not isinstance(data, pd.DataFrame):
+            return data
+        if not data.empty or empty_ok:
+            return data
+        empty_sources.append(source)
+
+    if errors:
+        error_text = "; ".join(errors)
+        token_error_markers = (
+            "token不对",
+            "token is invalid",
+            "invalid token",
+            "token错误",
+            "token无效",
+        )
+        if any(marker.lower() in error_text.lower() for marker in token_error_markers):
+            empty_note = (
+                f"; empty responses from {', '.join(empty_sources)}"
+                if empty_sources
+                else ""
+            )
+            raise TushareDataError(
+                f"{api_name} unavailable: official Tushare rejected TUSHARE_TOKEN"
+                f"{empty_note}; errors: {error_text}"
+            )
+
+    if errors and not empty_sources:
+        raise TushareDataError(f"{api_name} unavailable: {'; '.join(errors)}")
+    return pd.DataFrame()
 
 
 def _format_value(value, suffix: str = "") -> str:
@@ -139,7 +292,6 @@ def _sort_latest_reports(data: pd.DataFrame, curr_date: str | None, freq: str, l
 
 
 def _query_financial_api(api_name: str, symbol: str, curr_date: str | None, fields: list[str], years: int = 6) -> pd.DataFrame:
-    pro = _get_pro_client()
     if not curr_date:
         curr_date = datetime.now().strftime("%Y-%m-%d")
 
@@ -147,14 +299,24 @@ def _query_financial_api(api_name: str, symbol: str, curr_date: str | None, fiel
     start = (end_dt - relativedelta(years=years)).strftime("%Y%m%d")
     end = end_dt.strftime("%Y%m%d")
 
-    query = getattr(pro, api_name)
     field_string = ",".join(fields)
     try:
-        return query(ts_code=symbol, start_date=start, end_date=end, fields=field_string)
+        return _query_pro_with_fallback(
+            api_name,
+            ts_code=symbol,
+            start_date=start,
+            end_date=end,
+            fields=field_string,
+        )
     except Exception:
         # Some shared gateways or Tushare versions are picky about fields. Fall
         # back to the default field set, then select what we can use locally.
-        return query(ts_code=symbol, start_date=start, end_date=end)
+        return _query_pro_with_fallback(
+            api_name,
+            ts_code=symbol,
+            start_date=start,
+            end_date=end,
+        )
 
 
 def _select_existing(data: pd.DataFrame, columns: list[str]) -> pd.DataFrame:
@@ -525,14 +687,15 @@ def _fetch_stock_basic(symbol: str) -> pd.Series | None:
     if symbol in _STOCK_BASIC_CACHE:
         return None
 
-    pro = _get_pro_client()
-    data = pro.stock_basic(
+    data = _query_pro_with_fallback(
+        "stock_basic",
         ts_code=symbol,
         fields="ts_code,symbol,name,area,industry,market,exchange,list_date",
     )
     if data is None or data.empty:
         try:
-            universe = pro.stock_basic(
+            universe = _query_pro_with_fallback(
+                "stock_basic",
                 list_status="L",
                 fields="ts_code,symbol,name,area,industry,market,exchange,list_date",
             )
@@ -549,7 +712,6 @@ def _fetch_stock_basic(symbol: str) -> pd.Series | None:
 
 
 def _fetch_daily_basic_latest(symbol: str, curr_date: str) -> pd.Series | None:
-    pro = _get_pro_client()
     curr_date_dt = datetime.strptime(curr_date, "%Y-%m-%d")
     start = (curr_date_dt - relativedelta(days=14)).strftime("%Y%m%d")
     end = curr_date_dt.strftime("%Y%m%d")
@@ -575,7 +737,13 @@ def _fetch_daily_basic_latest(symbol: str, curr_date: str) -> pd.Series | None:
             "circ_mv",
         ]
     )
-    data = pro.daily_basic(ts_code=symbol, start_date=start, end_date=end, fields=fields)
+    data = _query_pro_with_fallback(
+        "daily_basic",
+        ts_code=symbol,
+        start_date=start,
+        end_date=end,
+        fields=fields,
+    )
     if data is None or data.empty:
         return None
     data = data.sort_values("trade_date", ascending=False)
@@ -593,8 +761,17 @@ def _fetch_daily(symbol: str, start_date: str, end_date: str) -> pd.DataFrame:
     start = _to_tushare_date(start_date)
     end = _to_tushare_date(end_date)
 
-    pro = _get_pro_client()
-    data = pro.daily(ts_code=symbol, start_date=start, end_date=end)
+    try:
+        data = _query_pro_with_fallback(
+            "daily",
+            ts_code=symbol,
+            start_date=start,
+            end_date=end,
+        )
+    except Exception as exc:
+        raise TushareDataError(
+            f"Tushare daily data unavailable for {symbol} between {start} and {end}: {exc}"
+        ) from exc
 
     if data is None or data.empty:
         return pd.DataFrame()
@@ -634,15 +811,57 @@ def _fetch_daily(symbol: str, start_date: str, end_date: str) -> pd.DataFrame:
     return data
 
 
+def _fetch_daily_with_backfill(
+    symbol: str,
+    start_date: str,
+    end_date: str,
+    fallback_days: int = 540,
+) -> tuple[pd.DataFrame, str]:
+    """Fetch requested daily data, then widen the window if it has no rows."""
+    requested = _fetch_daily(symbol, start_date, end_date)
+    if not requested.empty:
+        return requested, ""
+
+    end_dt = datetime.strptime(_to_tushare_date(end_date), "%Y%m%d")
+    fallback_start = (end_dt - relativedelta(days=fallback_days)).strftime("%Y-%m-%d")
+    fallback = _fetch_daily(symbol, fallback_start, end_date)
+    if fallback.empty:
+        return fallback, ""
+
+    latest = fallback["Date"].max()
+    earliest = fallback["Date"].min()
+    notice = (
+        f"Requested window {start_date} to {end_date} returned no rows. "
+        f"Using latest available Tushare daily rows from "
+        f"{earliest.strftime('%Y-%m-%d')} to {latest.strftime('%Y-%m-%d')} "
+        "after widening the lookback. Treat signals as stale if the latest "
+        "available date is materially before the requested current date."
+    )
+    return fallback, notice
+
+
 def get_stock(
     symbol: Annotated[str, "A-share ticker symbol, e.g. 000001.SZ or 600519.SH"],
     start_date: Annotated[str, "Start date in yyyy-mm-dd format"],
     end_date: Annotated[str, "End date in yyyy-mm-dd format"],
 ) -> str:
     """Return Tushare A-share daily OHLCV data as a CSV string."""
-    data = _fetch_daily(symbol, start_date, end_date)
+    try:
+        data, notice = _fetch_daily_with_backfill(symbol, start_date, end_date)
+    except TushareDataError as exc:
+        return (
+            f"# Tushare A-share daily data unavailable for {symbol.upper()}\n\n"
+            f"- Requested window: {start_date} to {end_date}\n"
+            f"- Reason: {exc}\n"
+            "- Do not substitute Yahoo/Alpha Vantage data for this A-share ticker."
+        )
+
     if data.empty:
-        return f"No Tushare daily data found for symbol '{symbol}' between {start_date} and {end_date}"
+        return (
+            f"# Tushare A-share daily data unavailable for {symbol.upper()}\n\n"
+            f"No Tushare daily rows found between {start_date} and {end_date}, "
+            "or in the widened fallback window."
+        )
 
     rounded = data.copy()
     for col in ["Open", "High", "Low", "Close", "Amount", "pre_close", "change", "pct_chg"]:
@@ -651,6 +870,8 @@ def get_stock(
 
     header = f"# Tushare A-share daily data for {symbol.upper()} from {start_date} to {end_date}\n"
     header += f"# Total records: {len(rounded)}\n"
+    if notice:
+        header += f"# Notice: {notice}\n"
     header += f"# Data retrieved on: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n"
     return header + rounded.to_csv(index=False)
 
@@ -672,13 +893,29 @@ def get_indicator(
         )
 
     curr_date_dt = datetime.strptime(curr_date, "%Y-%m-%d")
-    before = curr_date_dt - relativedelta(days=look_back_days)
 
     # Fetch extra history so longer indicators like 50/200 SMA have enough context.
     history_start = curr_date_dt - relativedelta(days=max(look_back_days + 260, 320))
-    data = _fetch_daily(symbol, history_start.strftime("%Y-%m-%d"), curr_date)
+    try:
+        data, notice = _fetch_daily_with_backfill(
+            symbol,
+            history_start.strftime("%Y-%m-%d"),
+            curr_date,
+        )
+    except TushareDataError as exc:
+        return (
+            f"## {indicator} unavailable for {symbol}\n\n"
+            f"- Requested current date: {curr_date}\n"
+            f"- Reason: {exc}\n"
+            "- Do not substitute Yahoo/Alpha Vantage data for this A-share ticker."
+        )
+
     if data.empty:
         return f"No Tushare daily data found for {symbol} before {curr_date}"
+
+    latest_available = pd.to_datetime(data["Date"]).max()
+    effective_curr_date_dt = min(curr_date_dt, latest_available.to_pydatetime())
+    effective_before = effective_curr_date_dt - relativedelta(days=look_back_days)
 
     stats_data = data.rename(
         columns={
@@ -692,7 +929,7 @@ def get_indicator(
     df = wrap(stats_data[["Date", "open", "high", "low", "close", "volume"]].copy())
     df[indicator]
     df["Date"] = pd.to_datetime(df["Date"])
-    window = df[(df["Date"] >= before) & (df["Date"] <= curr_date_dt)]
+    window = df[(df["Date"] >= effective_before) & (df["Date"] <= effective_curr_date_dt)]
 
     ind_string = ""
     for _, row in window.iterrows():
@@ -703,9 +940,21 @@ def get_indicator(
     if not ind_string:
         ind_string = "No trading data available for the specified date range.\n"
 
+    effective_curr_date = effective_curr_date_dt.strftime("%Y-%m-%d")
+    stale_notice = ""
+    if effective_curr_date != curr_date:
+        stale_notice = (
+            f"\n\nNotice: Tushare has no rows through requested date {curr_date}; "
+            f"indicator window is anchored on latest available trading date "
+            f"{effective_curr_date}."
+        )
+    if notice:
+        stale_notice += f"\n\nNotice: {notice}"
+
     return (
-        f"## {indicator} values from {before.strftime('%Y-%m-%d')} to {curr_date}:\n\n"
+        f"## {indicator} values from {effective_before.strftime('%Y-%m-%d')} to {effective_curr_date}:\n\n"
         + ind_string
+        + stale_notice
         + "\n\n"
         + INDICATOR_DESCRIPTIONS[indicator]
     )

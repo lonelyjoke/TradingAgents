@@ -2,6 +2,8 @@
 
 from tradingagents.agents.utils.agent_utils import (
     get_buy_side_thesis_instruction,
+    get_compute_leasing_instruction,
+    get_dividend_defensive_instruction,
     get_evidence_instruction,
     get_fair_cycle_valuation_instruction,
     get_filing_intelligence_instruction,
@@ -42,6 +44,8 @@ def create_conservative_debator(llm):
                 "filing_intelligence_context",
                 "investor_interaction_context",
                 "policy_planning_context",
+                "compute_leasing_context",
+                "dividend_defensive_context",
             },
         )
         thematic_catalyst_context = prompt_contexts["thematic_catalyst_context"]
@@ -49,6 +53,8 @@ def create_conservative_debator(llm):
         filing_intelligence_context = prompt_contexts["filing_intelligence_context"]
         investor_interaction_context = prompt_contexts["investor_interaction_context"]
         policy_planning_context = prompt_contexts["policy_planning_context"]
+        compute_leasing_context = prompt_contexts["compute_leasing_context"]
+        dividend_defensive_context = prompt_contexts["dividend_defensive_context"]
         prompt_history = compact_risk_history(history, profile="risk")
         prompt_aggressive_response = compact_for_prompt(
             current_aggressive_response,
@@ -80,9 +86,11 @@ Commodity/Product-Price Context: {commodity_context}
 Financial-Report Intelligence And Promoted Discussion Items: {filing_intelligence_context}
 Official Investor-Interaction Context: {investor_interaction_context}
 Official Policy-Planning Context: {policy_planning_context}
+Gated Compute-Leasing Verification Context: {compute_leasing_context}
+Gated Dividend Defensive Verification Context: {dividend_defensive_context}
 Here is the current conversation history: {prompt_history} Here is the last response from the aggressive analyst: {prompt_aggressive_response} Here is the last response from the neutral analyst: {prompt_neutral_response}. If there are no responses from the other viewpoints yet, present your own argument based on the available data.
 
-Engage by questioning their optimism and emphasizing the potential downsides they may have overlooked. Address each of their counterpoints to showcase why a conservative stance is ultimately the safest path for the firm's assets. Focus on debating and critiquing their arguments to demonstrate the strength of a low-risk strategy over their approaches. For commodity/resource/cyclical names, explicitly test whether product-price evidence supports or contradicts the risk stance. Preserve core discussion items that matter to the thesis even when they do not change the final action today. {get_evidence_instruction()} {get_research_gap_instruction()} {get_supply_demand_fallback_instruction()} {get_buy_side_thesis_instruction()} {get_fair_cycle_valuation_instruction()} {get_thematic_valuation_instruction()} {get_filing_intelligence_instruction()} {get_investor_interaction_instruction()} {get_policy_planning_instruction()} {get_focused_report_instruction()} Output conversationally as if you are speaking without any special formatting."""
+Engage by questioning their optimism and emphasizing the potential downsides they may have overlooked. Address each of their counterpoints to showcase why a conservative stance is ultimately the safest path for the firm's assets. Focus on debating and critiquing their arguments to demonstrate the strength of a low-risk strategy over their approaches. For commodity/resource/cyclical names, explicitly test whether product-price evidence supports or contradicts the risk stance. Preserve core discussion items that matter to the thesis even when they do not change the final action today. {get_evidence_instruction()} {get_research_gap_instruction()} {get_supply_demand_fallback_instruction()} {get_buy_side_thesis_instruction()} {get_fair_cycle_valuation_instruction()} {get_thematic_valuation_instruction()} {get_filing_intelligence_instruction()} {get_investor_interaction_instruction()} {get_policy_planning_instruction()} {get_compute_leasing_instruction()} {get_dividend_defensive_instruction()} {get_focused_report_instruction()} Output conversationally as if you are speaking without any special formatting."""
 
         response = llm.invoke(prompt)
 

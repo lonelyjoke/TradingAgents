@@ -153,6 +153,9 @@ def test_portfolio_manager_prompt_includes_investor_interaction_context():
     assert "official policy signal" in prompt
     assert "Investor Communication Verdict" in prompt
     assert "Policy Direction Verdict" in prompt
+    assert "Business Segment Breakdown" in prompt
+    assert "Peer Comparison Summary" in prompt
+    assert "Buy-Side Depth Audit" in prompt
 
 
 @pytest.mark.unit
@@ -265,12 +268,18 @@ def test_pm_renderer_preserves_new_verdict_fields():
         executive_summary="summary",
         verification_and_falsification="verify",
         investment_thesis="investment thesis",
+        business_segment_breakdown="segment revenue growth margin",
+        peer_comparison_summary="peer rank and comparable alternatives",
         investor_communication_verdict="communication",
         policy_direction_verdict="policy",
         industry_driver_verdict="industry",
         strategic_optionality_verdict="optionality",
+        buy_side_depth_audit="remaining thin spots",
     )
     rendered = render_pm_decision(decision)
+    assert "Business Segment Breakdown: segment revenue growth margin" in rendered
+    assert "Peer Comparison Summary: peer rank and comparable alternatives" in rendered
+    assert "Buy-side depth audit: remaining thin spots" in rendered
     assert "投资者沟通：communication" in rendered
     assert "政策与需求底色：policy" in rendered
     assert "行业原生变量：industry" in rendered

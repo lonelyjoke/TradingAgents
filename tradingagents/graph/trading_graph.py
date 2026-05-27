@@ -28,7 +28,11 @@ from tradingagents.agents.utils.agent_states import (
 )
 from tradingagents.dataflows.config import set_config
 from tradingagents.dataflows.interface import route_to_vendor
-from tradingagents.dataflows.tushare_a_stock import is_a_share_symbol
+from tradingagents.dataflows.tushare_a_stock import (
+    looks_like_a_share_query,
+    resolve_a_share_symbol,
+    is_a_share_symbol,
+)
 from tradingagents.dataflows.data_coverage import build_data_coverage_context
 
 # Import the new abstract tool methods from agent_utils
@@ -43,6 +47,8 @@ from tradingagents.agents.utils.agent_utils import (
     get_income_statement,
     get_investor_interaction_context,
     get_commodity_context,
+    get_compute_leasing_context,
+    get_dividend_defensive_context,
     get_news,
     get_company_events,
     get_insider_transactions,
@@ -51,6 +57,7 @@ from tradingagents.agents.utils.agent_utils import (
     get_market_expectation_context,
     get_market_timing_context,
     get_management_capital_allocation_context,
+    get_baijiu_context,
     get_policy_planning_context,
     get_peer_comparison,
     get_price_earnings_decomposition_context,
@@ -85,6 +92,9 @@ def _build_precomputed_data_coverage(
     investor_interaction_context: str,
     policy_planning_context: str,
     web_fact_check_context: str,
+    baijiu_context: str,
+    compute_leasing_context: str,
+    dividend_defensive_context: str,
 ) -> str:
     return build_data_coverage_context(
         {
@@ -101,6 +111,9 @@ def _build_precomputed_data_coverage(
             "investor_interaction": investor_interaction_context,
             "policy_planning": policy_planning_context,
             "web_fact_check": web_fact_check_context,
+            "baijiu": baijiu_context,
+            "compute_leasing": compute_leasing_context,
+            "dividend_defensive": dividend_defensive_context,
         }
     )
 
@@ -151,6 +164,17 @@ _A_SHARE_CONTEXT_SPECS = [
     ),
     ("policy_planning_context", "get_policy_planning_context", "Policy-planning context"),
     ("web_fact_check_context", "get_web_fact_check_context", "Web fact-check context"),
+    ("baijiu_context", "get_baijiu_context", "Baijiu verification context"),
+    (
+        "compute_leasing_context",
+        "get_compute_leasing_context",
+        "Compute-leasing verification context",
+    ),
+    (
+        "dividend_defensive_context",
+        "get_dividend_defensive_context",
+        "Dividend defensive verification context",
+    ),
 ]
 
 
@@ -245,6 +269,26 @@ class TradingAgentsGraph:
         """Get provider-specific kwargs for LLM client creation."""
         kwargs = {}
         provider = self.config.get("llm_provider", "").lower()
+        openai_compatible = {
+            "openai",
+            "xai",
+            "deepseek",
+            "qwen",
+            "glm",
+            "ollama",
+            "openrouter",
+        }
+
+        timeout = self.config.get("llm_timeout")
+        if timeout is not None:
+            kwargs["timeout"] = timeout
+        max_retries = self.config.get("llm_max_retries")
+        if max_retries is not None:
+            kwargs["max_retries"] = max_retries
+        if provider in openai_compatible:
+            llm_proxy = self.config.get("llm_proxy")
+            if llm_proxy:
+                kwargs["proxy"] = llm_proxy
 
         if provider == "google":
             thinking_level = self.config.get("google_thinking_level")
@@ -313,6 +357,9 @@ class TradingAgentsGraph:
                     get_shareholder_structure_context,
                     get_investor_interaction_context,
                     get_policy_planning_context,
+                    get_baijiu_context,
+                    get_compute_leasing_context,
+                    get_dividend_defensive_context,
                 ]
             ),
         }
@@ -398,6 +445,12 @@ class TradingAgentsGraph:
         with a per-ticker SqliteSaver so a crashed run can resume from the last
         successful node on a subsequent invocation with the same ticker+date.
         """
+        if looks_like_a_share_query(company_name):
+            resolved_company_name = resolve_a_share_symbol(company_name)
+            if resolved_company_name:
+                logger.info("Resolved A-share input %s to %s", company_name, resolved_company_name)
+                company_name = resolved_company_name
+
         self.ticker = company_name
 
         # Resolve any pending memory-log entries for this ticker before the pipeline runs.
@@ -513,6 +566,9 @@ class TradingAgentsGraph:
         investor_interaction_context = contexts["investor_interaction_context"]
         policy_planning_context = contexts["policy_planning_context"]
         web_fact_check_context = contexts["web_fact_check_context"]
+        baijiu_context = contexts["baijiu_context"]
+        compute_leasing_context = contexts["compute_leasing_context"]
+        dividend_defensive_context = contexts["dividend_defensive_context"]
         data_coverage_context = _build_precomputed_data_coverage(
             thematic_catalyst_context=thematic_catalyst_context,
             commodity_context=commodity_context,
@@ -527,6 +583,9 @@ class TradingAgentsGraph:
             investor_interaction_context=investor_interaction_context,
             policy_planning_context=policy_planning_context,
             web_fact_check_context=web_fact_check_context,
+            baijiu_context=baijiu_context,
+            compute_leasing_context=compute_leasing_context,
+            dividend_defensive_context=dividend_defensive_context,
         )
         return self.propagator.create_initial_state(
             company_name,
@@ -546,6 +605,9 @@ class TradingAgentsGraph:
             investor_interaction_context=investor_interaction_context,
             policy_planning_context=policy_planning_context,
             web_fact_check_context=web_fact_check_context,
+            baijiu_context=baijiu_context,
+            compute_leasing_context=compute_leasing_context,
+            dividend_defensive_context=dividend_defensive_context,
             data_coverage_context=data_coverage_context,
         )
 
@@ -570,6 +632,9 @@ class TradingAgentsGraph:
         investor_interaction_context = contexts["investor_interaction_context"]
         policy_planning_context = contexts["policy_planning_context"]
         web_fact_check_context = contexts["web_fact_check_context"]
+        baijiu_context = contexts["baijiu_context"]
+        compute_leasing_context = contexts["compute_leasing_context"]
+        dividend_defensive_context = contexts["dividend_defensive_context"]
         data_coverage_context = _build_precomputed_data_coverage(
             thematic_catalyst_context=thematic_catalyst_context,
             commodity_context=commodity_context,
@@ -584,6 +649,9 @@ class TradingAgentsGraph:
             investor_interaction_context=investor_interaction_context,
             policy_planning_context=policy_planning_context,
             web_fact_check_context=web_fact_check_context,
+            baijiu_context=baijiu_context,
+            compute_leasing_context=compute_leasing_context,
+            dividend_defensive_context=dividend_defensive_context,
         )
         init_agent_state = self.propagator.create_initial_state(
             company_name,
@@ -603,6 +671,9 @@ class TradingAgentsGraph:
             investor_interaction_context=investor_interaction_context,
             policy_planning_context=policy_planning_context,
             web_fact_check_context=web_fact_check_context,
+            baijiu_context=baijiu_context,
+            compute_leasing_context=compute_leasing_context,
+            dividend_defensive_context=dividend_defensive_context,
             data_coverage_context=data_coverage_context,
         )
         args = self.propagator.get_graph_args()
@@ -688,6 +759,15 @@ class TradingAgentsGraph:
             ),
             "web_fact_check_context": final_state.get(
                 "web_fact_check_context", ""
+            ),
+            "baijiu_context": final_state.get(
+                "baijiu_context", ""
+            ),
+            "compute_leasing_context": final_state.get(
+                "compute_leasing_context", ""
+            ),
+            "dividend_defensive_context": final_state.get(
+                "dividend_defensive_context", ""
             ),
             "data_coverage_context": final_state.get(
                 "data_coverage_context", ""

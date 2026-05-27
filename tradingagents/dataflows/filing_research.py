@@ -346,6 +346,44 @@ _GENERIC_QUESTIONS: tuple[FilingQuestion, ...] = (
 )
 
 _INDUSTRY_PLAYBOOKS: dict[str, tuple[FilingQuestion, ...]] = {
+    "smart_grid_automation": (
+        FilingQuestion(
+            "grid_order_visibility",
+            "orders",
+            "\u7535\u7f51\u81ea\u52a8\u5316\u3001\u7ee7\u7535\u4fdd\u62a4\u3001\u8c03\u5ea6\u3001\u914d\u7535\u548c\u67d4\u6027\u8f93\u7535\u8ba2\u5355\u662f\u5426\u8f6c\u5316\u4e3a\u6536\u5165\u548c\u5408\u540c\u8d1f\u503a\uff1f",
+            ("\u7535\u7f51\u81ea\u52a8\u5316", "\u7ee7\u7535\u4fdd\u62a4", "\u8c03\u5ea6", "\u914d\u7535", "\u67d4\u6027\u8f93\u7535", "\u5408\u540c\u8d1f\u503a", "\u8ba2\u5355", "\u4e2d\u6807"),
+            ("quarterly", "semiannual", "annual"),
+            "Support demand visibility when grid capex, orders, and revenue conversion are aligned.",
+            "Challenge whether policy demand is already priced or delayed by project acceptance and collection.",
+        ),
+        FilingQuestion(
+            "grid_segment_margin",
+            "segment_margin",
+            "\u7535\u7f51\u4e8c\u6b21\u8bbe\u5907\u3001\u7535\u529b\u4fe1\u606f\u901a\u4fe1\u3001\u65b0\u80fd\u6e90\u53ca\u6d77\u5916\u4e1a\u52a1\u7684\u6536\u5165\u3001\u6bdb\u5229\u7387\u548c\u51c0\u5229\u7387\u6709\u4f55\u5dee\u5f02\uff1f",
+            ("\u4e8c\u6b21\u8bbe\u5907", "\u7535\u529b\u4fe1\u606f\u901a\u4fe1", "\u65b0\u80fd\u6e90", "\u6d77\u5916", "\u8425\u4e1a\u6536\u5165", "\u6bdb\u5229\u7387", "\u51c0\u5229\u7387"),
+            ("semiannual", "annual"),
+            "Build a split valuation around disclosed revenue, margin, and growth by business line.",
+            "Avoid giving equal multiple credit to lower-margin or unproven adjacent businesses.",
+        ),
+        FilingQuestion(
+            "grid_cash_conversion",
+            "cash_quality",
+            "\u56fd\u7f51\u3001\u5357\u7f51\u548c\u884c\u4e1a\u5ba2\u6237\u7684\u56de\u6b3e\u662f\u5426\u652f\u6491\u5229\u6da6\u8d28\u91cf\uff1f",
+            ("\u56fd\u5bb6\u7535\u7f51", "\u5357\u65b9\u7535\u7f51", "\u5e94\u6536\u8d26\u6b3e", "\u5408\u540c\u8d44\u4ea7", "\u7ecf\u8425\u6d3b\u52a8\u73b0\u91d1\u6d41", "\u56de\u6b3e"),
+            ("quarterly", "semiannual", "annual"),
+            "Validate earnings quality when profit converts into cash despite project cycles.",
+            "Stress collection, acceptance timing, and working-capital absorption.",
+        ),
+        FilingQuestion(
+            "grid_second_curve",
+            "new_business",
+            "\u50a8\u80fd\u3001IGBT\u3001\u7535\u529b\u673a\u5668\u4eba\u3001\u6d77\u5916PCS\u7b49\u65b0\u4e1a\u52a1\u662f\u5426\u5df2\u6709\u5206\u90e8\u6536\u5165\u3001\u6bdb\u5229\u7387\u3001\u8ba2\u5355\u6216\u5ba2\u6237\u8bc1\u636e\uff1f",
+            ("\u50a8\u80fd", "IGBT", "\u7535\u529b\u673a\u5668\u4eba", "PCS", "\u6d77\u5916", "\u5ba2\u6237", "\u8ba2\u5355", "\u6bdb\u5229\u7387", "\u8425\u4e1a\u6536\u5165"),
+            ("semiannual", "annual"),
+            "Treat monetized new businesses as scenario or SOTP upside when disclosure is specific.",
+            "Keep concept-only second curves out of base valuation until segment economics are disclosed.",
+        ),
+    ),
     "power_operator": (
         FilingQuestion(
             "power_generation_mix",
@@ -962,6 +1000,56 @@ def _select_industry_profile(
         )
     ) and "银行" in blob:
         return "banking"
+    smart_grid_identity = any(
+        token in identity_blob
+        for token in (
+            "\u56fd\u7535\u5357\u745e",
+            "\u5357\u745e",
+            "\u7535\u7f51\u81ea\u52a8\u5316",
+            "\u7535\u529b\u81ea\u52a8\u5316",
+            "\u7ee7\u7535\u4fdd\u62a4",
+            "\u667a\u80fd\u7535\u7f51",
+            "\u7535\u529b\u4e8c\u6b21\u8bbe\u5907",
+        )
+    )
+    smart_grid_hits = sum(
+        token in blob
+        for token in (
+            "\u7535\u7f51\u81ea\u52a8\u5316",
+            "\u7535\u529b\u81ea\u52a8\u5316",
+            "\u8c03\u5ea6\u81ea\u52a8\u5316",
+            "\u7535\u7f51\u8c03\u5ea6",
+            "\u7ee7\u7535\u4fdd\u62a4",
+            "\u53d8\u7535\u7ad9\u81ea\u52a8\u5316",
+            "\u914d\u7535\u81ea\u52a8\u5316",
+            "\u67d4\u6027\u8f93\u7535",
+            "\u7535\u529b\u4fe1\u606f\u901a\u4fe1",
+            "\u65b0\u578b\u7535\u529b\u7cfb\u7edf",
+            "\u56fd\u5bb6\u7535\u7f51",
+            "\u5357\u65b9\u7535\u7f51",
+            "\u667a\u80fd\u7535\u7f51",
+            "\u7535\u7f51\u5b89\u5168\u7a33\u5b9a\u63a7\u5236",
+            "\u7535\u7f51\u6570\u5b57\u5316",
+        )
+    )
+    smart_grid_core_hits = sum(
+        token in blob
+        for token in (
+            "\u7535\u7f51\u81ea\u52a8\u5316",
+            "\u7535\u529b\u81ea\u52a8\u5316",
+            "\u8c03\u5ea6\u81ea\u52a8\u5316",
+            "\u7535\u7f51\u8c03\u5ea6",
+            "\u7ee7\u7535\u4fdd\u62a4",
+            "\u53d8\u7535\u7ad9\u81ea\u52a8\u5316",
+            "\u914d\u7535\u81ea\u52a8\u5316",
+            "\u67d4\u6027\u8f93\u7535",
+            "\u7535\u529b\u4fe1\u606f\u901a\u4fe1",
+            "\u7535\u7f51\u5b89\u5168\u7a33\u5b9a\u63a7\u5236",
+            "\u7535\u7f51\u6570\u5b57\u5316",
+        )
+    )
+    if smart_grid_identity or (smart_grid_core_hits >= 1 and smart_grid_hits >= 2):
+        return "smart_grid_automation"
     if any(token in identity_blob for token in ("\u65b0\u578b\u7535\u529b", "\u7efc\u5408\u80fd\u6e90", "\u7535\u529b")):
         return "power_operator"
     smart_mobility_identity = any(
@@ -2294,6 +2382,32 @@ _INDUSTRY_PARAGRAPH_LENSES: dict[
     str,
     tuple[tuple[str, tuple[str, ...], tuple[str, ...], str, str, str], ...],
 ] = {
+    "smart_grid_automation": (
+        (
+            "grid_order_and_backlog",
+            ("\u4e3b\u8425\u4e1a\u52a1\u5206\u6790", "\u7ecf\u8425\u60c5\u51b5\u8ba8\u8bba\u4e0e\u5206\u6790", "\u7ecf\u8425\u60c5\u51b5\u8ba8\u8bba\u53ca\u5206\u6790", "\u8ba2\u5355"),
+            ("\u7535\u7f51\u81ea\u52a8\u5316", "\u7ee7\u7535\u4fdd\u62a4", "\u8c03\u5ea6", "\u914d\u7535", "\u5408\u540c\u8d1f\u503a", "\u4e2d\u6807", "\u56fd\u5bb6\u7535\u7f51"),
+            "Are grid orders and backlog converting into revenue, cash, and accepted projects?",
+            "Separates durable grid capex demand from delayed project acceptance or collection.",
+            "peer comparison + earnings model + policy planning",
+        ),
+        (
+            "segment_economics",
+            ("\u4e3b\u8425\u4e1a\u52a1\u5206\u6790", "\u5206\u4ea7\u54c1", "\u5206\u884c\u4e1a", "\u5206\u5730\u533a", "\u8425\u4e1a\u6536\u5165", "\u6bdb\u5229\u7387"),
+            ("\u7535\u7f51\u81ea\u52a8\u5316", "\u7535\u529b\u4fe1\u606f\u901a\u4fe1", "\u67d4\u6027\u8f93\u7535", "\u65b0\u80fd\u6e90", "\u6d77\u5916", "\u6bdb\u5229\u7387", "\u51c0\u5229\u7387"),
+            "Which disclosed business lines carry the revenue, growth, margin, and profit pool?",
+            "Forces the final memo to explain what the company actually does before assigning valuation credit.",
+            "Business Segment Valuation Map + peer comparison",
+        ),
+        (
+            "second_curve_evidence",
+            ("\u4e3b\u8425\u4e1a\u52a1\u5206\u6790", "\u672a\u6765\u53d1\u5c55\u5c55\u671b", "\u65b0\u4ea7\u54c1", "\u65b0\u4e1a\u52a1"),
+            ("\u50a8\u80fd", "IGBT", "\u7535\u529b\u673a\u5668\u4eba", "PCS", "\u6d77\u5916", "\u8ba2\u5355", "\u5ba2\u6237", "\u8425\u4e1a\u6536\u5165"),
+            "Which second curves have crossed from strategy into disclosed monetization?",
+            "Keeps optionality visible while preventing concept-only businesses from entering base valuation.",
+            "thematic catalysts + investor interaction + SOTP scenario",
+        ),
+    ),
     "power_operator": (
         (
             "generation_mix",

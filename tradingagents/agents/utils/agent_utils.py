@@ -12,6 +12,8 @@ from tradingagents.agents.utils.fundamental_data_tools import (
     get_balance_sheet,
     get_cashflow,
     get_commodity_context,
+    get_compute_leasing_context,
+    get_dividend_defensive_context,
     get_earnings_model_context,
     get_financial_report_intelligence_context,
     get_income_statement,
@@ -22,6 +24,7 @@ from tradingagents.agents.utils.fundamental_data_tools import (
     get_market_expectation_context,
     get_market_timing_context,
     get_management_capital_allocation_context,
+    get_baijiu_context,
     get_peer_comparison,
     get_price_earnings_decomposition_context,
     get_shareholder_structure_context,
@@ -136,6 +139,68 @@ def get_web_fact_check_instruction() -> str:
         "gross margin, channel inventory, or product-price searches as thesis "
         "evidence; route web checks to NIM/deposit cost, NPL/provision coverage, "
         "capital adequacy, fee income, wealth management, and rate-policy transmission."
+    )
+
+
+def get_baijiu_instruction() -> str:
+    """Return rules for gated A-share baijiu/liquor analysis."""
+    return (
+        " Baijiu verification gate: only use baijiu-specific channel, wholesale-price, "
+        "dealer-payment, and festival-demand logic when the supplied baijiu context "
+        "says `Status: triggered`, or when official filings clearly show a baijiu "
+        "business. When triggered, distinguish ex-factory price, guided retail price, "
+        "wholesale/reference price, loose-bottle price, original-carton price, and "
+        "terminal retail price. Contract liabilities must be interpreted with "
+        "baijiu seasonality: same-quarter YoY and multi-year seasonal baselines "
+        "matter more than a simple Q4-to-Q1 sequential drop. If core product "
+        "wholesale price, channel inventory, or peer-basket evidence is missing, "
+        "label it as a critical research gap and cap conviction. Do not make a "
+        "firm relative-allocation claim for a baijiu stock if the peer basket "
+        "failed, unless the conclusion is explicitly low-confidence."
+    )
+
+
+def get_compute_leasing_instruction() -> str:
+    """Return rules for gated A-share compute-leasing analysis."""
+    return (
+        " Compute-leasing gate: only analyze an A-share target as a compute-leasing "
+        "or AI-compute stock when the supplied compute-leasing context says "
+        "`Status: triggered`, or when official filings/announcements/investor "
+        "interaction in the prompt independently show a compute-leasing business. "
+        "If the context says `Status: not_applicable`, do not inject GPU, IDC, "
+        "AI-compute rental, or data-center valuation assumptions into the thesis. "
+        "When triggered, separate legacy business value, verified compute-leasing "
+        "business value, and unverified compute optionality. Require the asset "
+        "gate (GPU/server model, quantity, delivery, ownership/financing lease, "
+        "data-center/power/network/O&M status), contract gate (customer quality, "
+        "contract term, pricing, minimum usage, related-party risk, collections), "
+        "unit-economics gate (rent, utilization, electricity, rack, bandwidth, "
+        "O&M, depreciation, financing cost, ROIC/payback), capex/funding gate, "
+        "and transition-credibility gate before treating compute leasing as "
+        "base-case valuation. A-share compute-leasing facts are often hard to "
+        "obtain; missing GPU counts, lease prices, utilization, customer identity, "
+        "or power cost are research gaps, not neutral evidence. News-only or "
+        "framework-agreement evidence can create a watch item, but not a hard "
+        "valuation uplift."
+    )
+
+
+def get_dividend_defensive_instruction() -> str:
+    """Return rules for gated defensive-dividend analysis."""
+    return (
+        " Defensive-dividend gate: only call an A-share target a defensive "
+        "dividend asset when the supplied dividend defensive context says "
+        "`Status: triggered` and the evidence supports stable dividends, "
+        "profit/cash-flow or bank-capital coverage, non-declining industry "
+        "logic, and valuation buffer. If the context says `Status: not_applicable`, "
+        "do not force a red-chip/high-yield thesis. High dividend yield is only "
+        "the starting hypothesis: explicitly test the dividend-trap path where "
+        "profits shrink, FCF weakens, capital constraints bind, or the industry "
+        "is structurally eroding, causing future dividends to fall. When the "
+        "context supplies same-industry or cross-industry alternatives, compare "
+        "the target against them and state whether the entered ticker is the "
+        "best defensive expression, should be paired for diversification, or "
+        "should be substituted by a higher-quality/lower-risk peer."
     )
 
 

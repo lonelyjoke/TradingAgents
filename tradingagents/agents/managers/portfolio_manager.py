@@ -13,7 +13,10 @@ from __future__ import annotations
 from tradingagents.agents.schemas import PortfolioDecision, render_pm_decision
 from tradingagents.agents.utils.agent_utils import (
     build_instrument_context,
+    get_baijiu_instruction,
     get_buy_side_thesis_instruction,
+    get_compute_leasing_instruction,
+    get_dividend_defensive_instruction,
     get_evidence_instruction,
     get_earnings_model_instruction,
     get_fair_cycle_valuation_instruction,
@@ -79,6 +82,9 @@ def create_portfolio_manager(llm):
         investor_interaction_context = prompt_contexts["investor_interaction_context"]
         policy_planning_context = prompt_contexts["policy_planning_context"]
         web_fact_check_context = prompt_contexts["web_fact_check_context"]
+        baijiu_context = prompt_contexts["baijiu_context"]
+        compute_leasing_context = prompt_contexts["compute_leasing_context"]
+        dividend_defensive_context = prompt_contexts["dividend_defensive_context"]
         data_coverage_context = prompt_contexts["data_coverage_context"]
         investment_debate_state = state.get("investment_debate_state", {})
         bull_bear_context = ""
@@ -153,10 +159,12 @@ def create_portfolio_manager(llm):
 
 **Research-Gap and Supply-Demand Rules:**
 - Missing core operating data is a research gap, not neutral evidence.
+- Missing data is not bearish evidence by itself. A data outage can justify lower conviction, smaller sizing, a wait-for-confirmation plan, or a temporary Hold, but it must not be the decisive reason for Underweight/Sell.
 - Do not let PE/PB and technical indicators replace missing product price, spread, inventory, freight-rate, capacity, policy, or order-book evidence.
 - If micro evidence is unavailable, use product-specific macro supply-demand evidence where possible: upstream cost, downstream demand, capacity, utilization, imports/exports, substitution, policy, seasonality, and storability.
 - Macro proxies can support an evidence-limited directional view, but cannot be treated as exact product-price or spread facts.
 - If too many thesis-critical assumptions are unverified, reduce conviction and state what data would upgrade or downgrade the rating.
+- If the decisive variable is missing for both bull and bear interpretations, use the verified evidence to decide direction; if verified evidence is mixed, prefer Hold/watch rather than treating uncertainty itself as negative expected value.
 - Do not use an unverified exact product price, wholesale price, spread, inventory level, or date-specific market statistic as a hard entry/exit trigger. Use it only as a watch item unless the source context labels it verified.
 - If web fact-check context exists, use it only to corroborate high-frequency facts. A single web result can support a watch item, but hard holder/builder triggers require multiple recent independent sources or an official source.
 
@@ -200,16 +208,24 @@ def create_portfolio_manager(llm):
 - Begin with a short Company Snapshot, then give the rating and a one-line thesis.
 - Immediately after the one-line thesis, include the reader take-away / build price band and the holder-vs-builder action guidance so the reader knows what to do with an existing position and how or whether to build a new one.
 - In the main Investment Thesis, make the reader understand the company, its industry, and why price may differ from value. Cover: how the company makes money; where the industry is in its cycle; what the market currently appears to price in; where your view differs; how the difference can turn into EPS/ROE/cash-flow or multiple change; and what could prove the view wrong.
+- The final decision must visibly use financial-report text when financial-report intelligence is ready. Include a **Business Segment Breakdown** in the public memo: business line / disclosed revenue scale / growth / gross margin or net margin / profit or cash-quality read / valuation treatment. If a metric is not disclosed, write "not disclosed" and explain whether this caps SOTP confidence. Do not leave the reader unsure what the company actually does.
+- Buy-side segment depth standard: do not stop at "the company has several businesses." For each material segment, answer: what it sells, how large it is, how fast it is growing, whether margin/profit/cash quality is better or worse than the group, whether it deserves core valuation or only scenario/SOTP value, and what exact disclosure would change that treatment. If filings give only a header or noisy table fragment, say the segment economics are not disclosed and reduce SOTP confidence rather than inventing precision.
 - For unfamiliar or multi-business companies, explicitly start from financial-report evidence on main businesses, then build a split valuation view. Separate mature/core businesses from new businesses or second curves; discuss each bucket's revenue scale, margin, growth, cash conversion, asset intensity, peer multiple or SOTP treatment, and evidence threshold. Examples: environmental core business versus compute-leasing new business, or legacy mobility products versus newer high-end/smart product lines.
 - If the filing context includes a Business Segment Valuation Map, include a compact markdown table titled **Business Segment Valuation / Evidence Gate** unless the company is clearly single-business. Columns should cover: business bucket, filing evidence, valuation treatment, what is already proven, what is still unproven, and report impact. If segment revenue or margin is unavailable, write "not disclosed" rather than reverting to one blended PE.
+- The final decision must visibly integrate same-industry peer comparison when peer context is ready. Include a **Peer Comparison Summary** that names the target's peer rank, 2-4 relevant peers, key valuation/profitability/growth/leverage/cash-return differences, and whether those peers are truly business-comparable. If the broad industry peer pool is imperfect, say so and use it as a screen rather than ignoring it.
+- Buy-side peer depth standard: split the peer set into true operating comparables and broad-industry screening names. Explain whether the target's valuation premium/discount is deserved by ROE, margin, growth, leverage, cash conversion, dividend/buyback, or business durability. Name at least one peer that strengthens the target case and one peer that challenges it when the peer context supplies candidates; otherwise say why no peer changes the allocation.
 - Do not merely say a stock is cheap or expensive. Translate valuation into assumptions: what today's PE/PB/EV/EBITDA/FCF yield/dividend yield implies about earnings durability, ROE, growth, risk premium, or cycle normalization, and compare that with the evidence.
 - Build an earnings or value driver bridge. Name the 3-6 variables that actually move value, explain their direction, and state which ones are verified, which are inferred, and which remain research gaps.
 - When discussing industry context, teach the reader what variables matter for that industry and where the company sits versus peers. Avoid generic sector background unless it changes the investment case.
 - The report must include a differentiated view: what consensus or market pricing appears to believe, which part you agree with, which part you challenge, and what future evidence would cause the market to reprice.
 - In the valuation/cycle discussion, integrate the historical price-EPS-PE decomposition: state whether today's quote is earnings-supported, multiple-supported, double-engine, or fragile, and connect that answer to the forward EPS bridge.
 - For commodity/resource/cyclical names, integrate the commodity/product-price context into the same valuation/cycle discussion: state whether product-price evidence supports or contradicts the expected EPS/margin/inventory turn.
+- For A-share compute-leasing names, use the gated compute-leasing context only when it says `Status: triggered` or official evidence in the prompt independently proves the business. If it says `Status: not_applicable`, do not mention compute leasing as a valuation driver. When triggered, explicitly separate legacy business value, verified compute-leasing value, and unverified compute optionality; discuss asset ownership/delivery, customer contracts, unit economics, capex/funding, transition credibility, and falsification signals.
+- For defensive/high-dividend candidates, use the gated dividend defensive context only when it says `Status: triggered` or when other supplied evidence independently proves a stable dividend defensive thesis. Decide whether the target is a true defensive dividend asset, a dividend-trap risk, inferior to alternatives, or best used as one sleeve in a diversified defensive basket.
 - Use the Debate & Decision Logic section to summarize the strongest bull case, strongest bear case, the real disagreement, the core bet, and why you choose one side after weighing evidence quality, expectation gap, and probability/payoff.
 - Use the Catalysts, Optionality & Falsification section to distinguish what belongs in the base case from what remains scenario valuation or narrative option value. Preserve verified second-growth curves, investee holdings, policy support, and live thematic catalysts, but clearly say why they do or do not change today's rating.
+- Shallow-section guardrail: valuation/expectation gap, catalysts, management/capital allocation, shareholder structure, market/technical timing, and thematic optionality must not be standalone data dumps. Use them only when they complete a loop of **evidence -> financial transmission -> valuation/position implication**. If a module is present but does not change the investment case, summarize it as non-decisive instead of padding the report.
+- Add a brief **Buy-Side Depth Audit** when any important section remains thin. Typical weak spots to flag are: no clean segment margin, broad-but-not-true peer universe, valuation not linked to forward EPS/ROE/cash, catalysts without timetable, management praise without ROIC/capital-return proof, ownership data without supply-demand implication, and technical signals not linked to fundamental odds.
 - Keep three judgments **clear in substance** even when integrated into prose rather than broken into separate headings: business quality, today's odds, and relative deployment versus alternatives.
 - When hard-signal governance, ownership, investor-interaction, policy, or filing contexts are available, incorporate them where they change the investment argument instead of listing them mechanically.
 - Include a Verification & Falsification checklist so readers know what future evidence would confirm, weaken, or overturn the thesis.
@@ -247,6 +263,9 @@ def create_portfolio_manager(llm):
 - Official investor-interaction context: **{investor_interaction_context}**
 - Official policy-planning context: **{policy_planning_context}**
 - Web fact-check context: **{web_fact_check_context}**
+- Gated baijiu verification context: **{baijiu_context}**
+- Gated compute-leasing verification context: **{compute_leasing_context}**
+- Gated dividend defensive verification context: **{dividend_defensive_context}**
 - Data coverage audit: **{data_coverage_context}**
 {lessons_line}
 {recent_decision_line}
@@ -275,6 +294,9 @@ Be decisive and ground every conclusion in specific evidence from the analysts.
 {get_management_capital_allocation_instruction()}
 {get_shareholder_structure_instruction()}
 {get_web_fact_check_instruction()}
+{get_baijiu_instruction()}
+{get_compute_leasing_instruction()}
+{get_dividend_defensive_instruction()}
 {get_fair_cycle_valuation_instruction()}
 {get_focused_report_instruction()}
 If an important investment claim depends on an unverified commodity price, product spread, inventory, policy detail, wholesale price, or exact percentage, list it under an "Unverified Key Assumptions" paragraph instead of treating it as fact. Do not place unverified exact prices in the holder/builder action plan as hard triggers; turn them into verification items.{get_language_instruction()}"""

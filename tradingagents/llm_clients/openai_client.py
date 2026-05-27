@@ -1,6 +1,7 @@
 import os
 from typing import Any, Optional
 
+import httpx
 from langchain_core.messages import AIMessage
 from langchain_openai import ChatOpenAI
 
@@ -163,6 +164,15 @@ class OpenAIClient(BaseLLMClient):
         for key in _PASSTHROUGH_KWARGS:
             if key in self.kwargs:
                 llm_kwargs[key] = self.kwargs[key]
+
+        proxy = self.kwargs.get("proxy")
+        if proxy and "http_client" not in llm_kwargs:
+            timeout = self.kwargs.get("timeout", 60)
+            llm_kwargs["http_client"] = httpx.Client(proxy=proxy, timeout=timeout)
+            llm_kwargs["http_async_client"] = httpx.AsyncClient(
+                proxy=proxy,
+                timeout=timeout,
+            )
 
         # Native OpenAI: use Responses API for consistent behavior across
         # all model families. Third-party providers use Chat Completions.

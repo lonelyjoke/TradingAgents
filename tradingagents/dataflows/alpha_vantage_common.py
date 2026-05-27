@@ -7,11 +7,18 @@ from io import StringIO
 
 API_BASE_URL = "https://www.alphavantage.co/query"
 
+class AlphaVantageRateLimitError(Exception):
+    """Exception raised when Alpha Vantage API is unavailable for fallback."""
+    pass
+
+
 def get_api_key() -> str:
     """Retrieve the API key for Alpha Vantage from environment variables."""
     api_key = os.getenv("ALPHA_VANTAGE_API_KEY")
     if not api_key:
-        raise ValueError("ALPHA_VANTAGE_API_KEY environment variable is not set.")
+        raise AlphaVantageRateLimitError(
+            "ALPHA_VANTAGE_API_KEY environment variable is not set."
+        )
     return api_key
 
 def format_datetime_for_api(date_input) -> str:
@@ -34,10 +41,6 @@ def format_datetime_for_api(date_input) -> str:
         return date_input.strftime("%Y%m%dT%H%M")
     else:
         raise ValueError(f"Date must be string or datetime object, got {type(date_input)}")
-
-class AlphaVantageRateLimitError(Exception):
-    """Exception raised when Alpha Vantage API rate limit is exceeded."""
-    pass
 
 def _make_api_request(function_name: str, params: dict) -> dict | str:
     """Helper function to make API requests and handle responses.

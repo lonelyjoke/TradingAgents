@@ -19,6 +19,7 @@ from .tushare_a_stock import (
     _format_yyyymmdd,
     _get_pro_client,
     _markdown_table,
+    _query_pro_with_fallback,
     _select_existing,
     _to_tushare_date,
     is_a_share_symbol,
@@ -26,6 +27,23 @@ from .tushare_a_stock import (
 
 CNINFO_ANNOUNCEMENT_QUERY_URL = "http://www.cninfo.com.cn/new/hisAnnouncement/query"
 CNINFO_STATIC_BASE_URL = "http://static.cninfo.com.cn/"
+
+BAIJIU_PEER_FALLBACK = {
+    "600519.SH": "贵州茅台",
+    "000858.SZ": "五粮液",
+    "000568.SZ": "泸州老窖",
+    "600809.SH": "山西汾酒",
+    "002304.SZ": "洋河股份",
+    "000596.SZ": "古井贡酒",
+    "603369.SH": "今世缘",
+    "600779.SH": "水井坊",
+    "600702.SH": "舍得酒业",
+    "603198.SH": "迎驾贡酒",
+    "603589.SH": "口子窖",
+    "600559.SH": "老白干酒",
+    "000799.SZ": "酒鬼酒",
+    "600197.SH": "伊力特",
+}
 
 
 def _date_window(curr_date: str, look_back_days: int) -> tuple[datetime, datetime, str, str]:
@@ -40,15 +58,7 @@ def _datetime_window(curr_date: str, look_back_days: int) -> tuple[str, str]:
 
 
 def _query_optional_api(api_name: str, **kwargs) -> pd.DataFrame:
-    pro = _get_pro_client()
-    func = getattr(pro, api_name, None)
-    if callable(func):
-        data = func(**kwargs)
-    elif hasattr(pro, "query"):
-        data = pro.query(api_name, **kwargs)
-    else:
-        raise TushareDataError(f"Tushare client does not expose {api_name}.")
-
+    data = _query_pro_with_fallback(api_name, empty_ok=True, **kwargs)
     if data is None:
         return pd.DataFrame()
     return data
@@ -669,23 +679,70 @@ def _score_bank_peers(data: pd.DataFrame) -> pd.DataFrame:
     return scored.sort_values("v4_score", ascending=False)
 
 
-def _fetch_stock_basic_universe(pro) -> pd.DataFrame:
+def _fetch_stock_basic_universe(pro=None) -> pd.DataFrame:
     fields = "ts_code,symbol,name,area,industry,market,exchange,list_date"
     try:
-        universe = pro.stock_basic(list_status="L", fields=fields)
+        if pro is None:
+            universe = _query_pro_with_fallback(
+                "stock_basic", empty_ok=True, list_status="L", fields=fields
+            )
+        else:
+            universe = pro.stock_basic(list_status="L", fields=fields)
     except Exception:
-        universe = pro.stock_basic(list_status="L")
+        if pro is None:
+            universe = _query_pro_with_fallback(
+                "stock_basic", empty_ok=True, list_status="L"
+            )
+        else:
+            universe = pro.stock_basic(list_status="L")
     if universe is None:
         return pd.DataFrame()
+    if universe.empty and pro is None:
+        try:
+            fallback = _query_pro_with_fallback(
+                "stock_basic", empty_ok=True, list_status="L"
+            )
+        except Exception:
+            fallback = pd.DataFrame()
+        if fallback is not None and not fallback.empty:
+            universe = fallback
     missing = {"ts_code", "name", "industry"} - set(universe.columns)
     if missing:
         try:
-            fallback = pro.stock_basic(list_status="L")
+            if pro is None:
+                fallback = _query_pro_with_fallback(
+                    "stock_basic", empty_ok=True, list_status="L"
+                )
+            else:
+                fallback = pro.stock_basic(list_status="L")
         except Exception:
             fallback = pd.DataFrame()
         if fallback is not None and not fallback.empty:
             universe = fallback
     return universe if universe is not None else pd.DataFrame()
+
+
+def _curated_peer_universe(symbol: str, basic: pd.Series | None) -> pd.DataFrame:
+    """Return a small curated peer universe when broad stock_basic is unavailable."""
+    industry = str(basic.get("industry") if basic is not None else "" or "").strip()
+    company_name = str(basic.get("name") if basic is not None else "" or "").strip()
+    is_baijiu = (
+        symbol in BAIJIU_PEER_FALLBACK
+        or "白酒" in industry
+        or any(term in company_name for term in ("茅台", "五粮液", "老窖", "汾酒", "洋河"))
+    )
+    if not is_baijiu:
+        return pd.DataFrame()
+    rows = [
+        {
+            "ts_code": code,
+            "symbol": code.split(".")[0],
+            "name": name,
+            "industry": "白酒",
+        }
+        for code, name in BAIJIU_PEER_FALLBACK.items()
+    ]
+    return pd.DataFrame(rows)
 
 
 def _row_numeric(row: pd.Series, columns: list[str]) -> float | None:
@@ -787,8 +844,9 @@ def get_peer_comparison(ticker: str, curr_date: str, peer_limit: int = 12) -> st
         curr_date = datetime.now().strftime("%Y-%m-%d")
 
     basic = _fetch_stock_basic(symbol)
-    pro = _get_pro_client()
-    universe = _fetch_stock_basic_universe(pro)
+    universe = _fetch_stock_basic_universe(None)
+    if universe.empty:
+        universe = _curated_peer_universe(symbol, basic)
     if basic is None and not universe.empty and "ts_code" in universe.columns:
         matched = universe[universe["ts_code"].astype(str) == symbol]
         if not matched.empty:

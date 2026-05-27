@@ -1,4 +1,7 @@
+import os
 from typing import Annotated
+
+from yfinance.exceptions import YFRateLimitError
 
 # Import from vendor-specific modules
 from .y_finance import (
@@ -32,6 +35,8 @@ from .tushare_a_stock import (
     get_income_statement as get_tushare_income_statement,
     get_stock as get_tushare_stock,
     is_a_share_symbol,
+    looks_like_a_share_query,
+    resolve_a_share_symbol,
 )
 from .tushare_research import (
     get_company_events as get_tushare_company_events,
@@ -77,6 +82,13 @@ from .policy_research import (
 from .web_fact_research import (
     get_web_fact_check_context as get_tushare_web_fact_check_context,
 )
+from .baijiu_research import get_baijiu_context as get_tushare_baijiu_context
+from .compute_leasing_research import (
+    get_compute_leasing_context as get_tushare_compute_leasing_context,
+)
+from .dividend_defensive_research import (
+    get_dividend_defensive_context as get_tushare_dividend_defensive_context,
+)
 
 # Configuration and routing logic
 from .config import get_config
@@ -119,6 +131,9 @@ TOOLS_CATEGORIES = {
             "get_investor_interaction_context",
             "get_policy_planning_context",
             "get_web_fact_check_context",
+            "get_baijiu_context",
+            "get_compute_leasing_context",
+            "get_dividend_defensive_context",
         ]
     },
     "news_data": {
@@ -224,6 +239,15 @@ VENDOR_METHODS = {
     "get_web_fact_check_context": {
         "tushare": get_tushare_web_fact_check_context,
     },
+    "get_baijiu_context": {
+        "tushare": get_tushare_baijiu_context,
+    },
+    "get_compute_leasing_context": {
+        "tushare": get_tushare_compute_leasing_context,
+    },
+    "get_dividend_defensive_context": {
+        "tushare": get_tushare_dividend_defensive_context,
+    },
     # news_data
     "get_news": {
         "alpha_vantage": get_alpha_vantage_news,
@@ -243,6 +267,64 @@ VENDOR_METHODS = {
         "yfinance": get_yfinance_insider_transactions,
     },
 }
+
+A_SHARE_TUSHARE_METHODS = {
+    "get_stock_data",
+    "get_indicators",
+    "get_fundamentals",
+    "get_balance_sheet",
+    "get_cashflow",
+    "get_income_statement",
+    "get_commodity_context",
+    "get_shipping_context",
+    "get_peer_comparison",
+    "get_supply_chain_comparison",
+    "get_valuation_percentiles",
+    "get_market_sector_risk",
+    "get_market_timing_context",
+    "get_thematic_catalyst_context",
+    "get_financial_report_intelligence_context",
+    "get_earnings_model_context",
+    "get_market_expectation_context",
+    "get_price_earnings_decomposition_context",
+    "get_management_capital_allocation_context",
+    "get_shareholder_structure_context",
+    "get_investor_interaction_context",
+    "get_policy_planning_context",
+    "get_web_fact_check_context",
+    "get_baijiu_context",
+    "get_compute_leasing_context",
+    "get_dividend_defensive_context",
+    "get_news",
+    "get_company_events",
+}
+
+
+def _normalize_a_share_args(method: str, args: tuple, available_vendors: list[str]) -> tuple[tuple, bool]:
+    """Normalize the first symbol arg for A-share-capable Tushare tools."""
+    if method not in A_SHARE_TUSHARE_METHODS or not args or "tushare" not in available_vendors:
+        return args, False
+
+    raw_symbol = str(args[0])
+    try:
+        resolved_symbol = resolve_a_share_symbol(raw_symbol)
+    except TushareDataError:
+        if looks_like_a_share_query(raw_symbol):
+            raise
+        return args, False
+
+    if resolved_symbol:
+        return (resolved_symbol, *args[1:]), True
+
+    if looks_like_a_share_query(raw_symbol):
+        raise TushareDataError(
+            f"Could not resolve A-share symbol/name {raw_symbol!r}. "
+            "Use an exchange-qualified Tushare ts_code such as 301396.SZ, "
+            "or check TUSHARE_TOKEN/network access for stock_basic."
+        )
+
+    return args, False
+
 
 def get_category_for_method(method: str) -> str:
     """Get the category that contains the specified method."""
@@ -266,60 +348,66 @@ def get_vendor(category: str, method: str = None) -> str:
     # Fall back to category-level configuration
     return config.get("data_vendors", {}).get(category, "default")
 
+
+def _default_vendor_for_method(method: str) -> str:
+    if "yfinance" in VENDOR_METHODS.get(method, {}):
+        return "yfinance"
+    if "tushare" in VENDOR_METHODS.get(method, {}):
+        return "tushare"
+    available = list(VENDOR_METHODS.get(method, {}).keys())
+    return available[0] if available else "default"
+
+
+def _primary_vendors_from_config(vendor_config: str, method: str) -> list[str]:
+    vendors = [v.strip() for v in str(vendor_config or "").split(",") if v.strip()]
+    expanded: list[str] = []
+    for vendor in vendors or ["default"]:
+        if vendor == "default":
+            vendor = _default_vendor_for_method(method)
+        if vendor not in expanded:
+            expanded.append(vendor)
+    return expanded
+
+
+def _vendor_is_configured(vendor: str) -> bool:
+    if vendor == "alpha_vantage" and not os.getenv("ALPHA_VANTAGE_API_KEY"):
+        return False
+    return True
+
+
 def route_to_vendor(method: str, *args, **kwargs):
     """Route method calls to appropriate vendor implementation with fallback support."""
     category = get_category_for_method(method)
     vendor_config = get_vendor(category, method)
-    primary_vendors = [v.strip() for v in vendor_config.split(',')]
 
     if method not in VENDOR_METHODS:
         raise ValueError(f"Method '{method}' not supported")
 
     # Build fallback chain: primary vendors first, then remaining available vendors
     all_available_vendors = list(VENDOR_METHODS[method].keys())
+    primary_vendors = _primary_vendors_from_config(vendor_config, method)
     fallback_vendors = primary_vendors.copy()
 
-    # A-share tickers are not handled well by the default yfinance path.
-    # Prefer Tushare automatically for common exchange-qualified symbols.
-    if method in {
-        "get_stock_data",
-        "get_indicators",
-        "get_fundamentals",
-        "get_balance_sheet",
-        "get_cashflow",
-        "get_income_statement",
-        "get_commodity_context",
-        "get_shipping_context",
-        "get_peer_comparison",
-        "get_supply_chain_comparison",
-        "get_valuation_percentiles",
-        "get_market_sector_risk",
-        "get_market_timing_context",
-        "get_thematic_catalyst_context",
-        "get_financial_report_intelligence_context",
-        "get_earnings_model_context",
-        "get_market_expectation_context",
-        "get_price_earnings_decomposition_context",
-        "get_management_capital_allocation_context",
-        "get_shareholder_structure_context",
-        "get_investor_interaction_context",
-        "get_policy_planning_context",
-        "get_web_fact_check_context",
-        "get_news",
-        "get_company_events",
-    } and args:
-        symbol = str(args[0])
-        if is_a_share_symbol(symbol) and "tushare" in all_available_vendors:
-            fallback_vendors = ["tushare"] + [
-                vendor for vendor in fallback_vendors if vendor != "tushare"
-            ]
+    # A-share symbols and names should stay on Tushare. yfinance often cannot
+    # resolve them correctly and may fail the whole run with Yahoo 429s.
+    args, force_tushare_for_a_share = _normalize_a_share_args(
+        method, args, all_available_vendors
+    )
+    if force_tushare_for_a_share:
+        fallback_vendors = ["tushare"]
+    elif args and is_a_share_symbol(str(args[0])) and "tushare" in all_available_vendors:
+        fallback_vendors = ["tushare"]
 
     for vendor in all_available_vendors:
+        if force_tushare_for_a_share:
+            break
         if vendor not in fallback_vendors:
             fallback_vendors.append(vendor)
 
     for vendor in fallback_vendors:
         if vendor not in VENDOR_METHODS[method]:
+            continue
+        if not _vendor_is_configured(vendor):
             continue
 
         vendor_impl = VENDOR_METHODS[method][vendor]
@@ -329,6 +417,12 @@ def route_to_vendor(method: str, *args, **kwargs):
             return impl_func(*args, **kwargs)
         except AlphaVantageRateLimitError:
             continue  # Only rate limits trigger fallback
+        except YFRateLimitError:
+            continue  # Yahoo 429s should not abort if another vendor is available
+        except ValueError as exc:
+            if vendor == "alpha_vantage" and "ALPHA_VANTAGE_API_KEY" in str(exc):
+                continue
+            raise
         except TushareDataError:
             if vendor == "tushare":
                 raise

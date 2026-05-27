@@ -1,7 +1,10 @@
 
 
 from tradingagents.agents.utils.agent_utils import (
+    get_baijiu_instruction,
     get_buy_side_thesis_instruction,
+    get_compute_leasing_instruction,
+    get_dividend_defensive_instruction,
     get_evidence_instruction,
     get_earnings_model_instruction,
     get_fair_cycle_valuation_instruction,
@@ -54,6 +57,9 @@ def create_bull_researcher(llm):
         investor_interaction_context = prompt_contexts["investor_interaction_context"]
         policy_planning_context = prompt_contexts["policy_planning_context"]
         web_fact_check_context = prompt_contexts["web_fact_check_context"]
+        baijiu_context = prompt_contexts["baijiu_context"]
+        compute_leasing_context = prompt_contexts["compute_leasing_context"]
+        dividend_defensive_context = prompt_contexts["dividend_defensive_context"]
         prompt_history = compact_debate_history(history, profile="research")
         prompt_current_response = compact_for_prompt(
             current_response,
@@ -93,6 +99,9 @@ Key points to focus on:
 - Market-Implied Expectation Discipline: State what the current quote already appears to assume, then identify the precise assumption the market is still too pessimistic about.
 - Historical Price/EPS/PE Discipline: Use the decomposition context to argue whether the upside is supported by EPS recovery/growth, multiple expansion, or a double-engine setup; do not present pure multiple expansion as hard fundamental proof.
 - Web Fact-Check Discipline: If web fact-check context is available, use it to verify simple high-frequency facts such as wholesale prices, channel inventory, terminal discounts, and product price changes. Do not make a single web result into hard proof.
+- Baijiu Discipline: If gated baijiu context says `Status: triggered`, the bull case must pass channel-price, contract-liability seasonality, product mix, cash conversion, and peer-basket checks. If prices or peers are missing, keep the thesis evidence-limited.
+- Compute-Leasing Discipline: If gated compute-leasing context says `Status: triggered`, make the bull case pass asset, contract, unit-economics, capex/funding, and transition-credibility gates. If it says `Status: not_applicable`, do not use compute leasing as a bull theme.
+- Dividend-Defensive Discipline: If gated dividend defensive context says `Status: triggered`, argue only from sustainable payout evidence: dividend stability, profit/cash-flow or bank-capital coverage, non-declining industry logic, valuation buffer, and alternatives. Do not call a high yield defensive if the context flags dividend-trap risk.
 - Bear Counterpoints: Critically analyze the bear argument with specific data and sound reasoning, addressing concerns thoroughly and showing why the bull perspective holds stronger merit.
 - Engagement: Present your argument in a conversational style, engaging directly with the bear analyst's points and debating effectively rather than just listing data.
 - Anti-repetition discipline: {round_instruction}
@@ -115,6 +124,9 @@ Shareholder-structure context: {shareholder_structure_context}
 Official investor-interaction context: {investor_interaction_context}
 Official policy-planning context: {policy_planning_context}
 Web fact-check context: {web_fact_check_context}
+Gated baijiu verification context: {baijiu_context}
+Gated compute-leasing verification context: {compute_leasing_context}
+Gated dividend defensive verification context: {dividend_defensive_context}
 Conversation history of the debate: {prompt_history}
 Last bear argument: {prompt_current_response}
 Use this information to deliver a compelling bull argument, refute the bear's concerns, and engage in a dynamic debate that demonstrates the strengths of the bull position.
@@ -136,6 +148,9 @@ Use this information to deliver a compelling bull argument, refute the bear's co
 {get_management_capital_allocation_instruction()}
 {get_shareholder_structure_instruction()}
 {get_web_fact_check_instruction()}
+{get_baijiu_instruction()}
+{get_compute_leasing_instruction()}
+{get_dividend_defensive_instruction()}
 {get_focused_report_instruction()}
 """
 

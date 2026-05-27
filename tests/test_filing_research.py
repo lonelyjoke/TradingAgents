@@ -151,12 +151,29 @@ def test_question_candidates_include_new_priority_playbooks():
     assert any(q.question_id == "insurance_nbv" for q in _question_candidates("insurance"))
     assert any(q.question_id == "hog_cycle" for q in _question_candidates("livestock_hog"))
     assert any(q.question_id == "mobility_product_mix" for q in _question_candidates("smart_mobility"))
+    assert any(q.question_id == "grid_segment_margin" for q in _question_candidates("smart_grid_automation"))
 
 
 
 def test_industry_profile_prefers_power_operator_over_incidental_wind_mentions():
     reports = [("annual", "\u98ce\u7535\u9879\u76ee\u4ec5\u4e3a\u80cc\u666f\u63d0\u53ca")]
     assert _select_industry_profile("\u534f\u946b\u80fd\u79d1", "\u65b0\u578b\u7535\u529b", reports) == "power_operator"
+
+
+def test_industry_profile_selects_smart_grid_before_wind_false_positive():
+    reports = [
+        (
+            "annual",
+            (
+                "\u516c\u53f8\u4e3b\u8981\u4ece\u4e8b\u7535\u7f51\u81ea\u52a8\u5316\u3001\u7535\u7f51\u8c03\u5ea6\u3001"
+                "\u7ee7\u7535\u4fdd\u62a4\u3001\u914d\u7535\u81ea\u52a8\u5316\u548c\u7535\u529b\u4fe1\u606f\u901a\u4fe1\uff0c"
+                "\u670d\u52a1\u56fd\u5bb6\u7535\u7f51\u548c\u5357\u65b9\u7535\u7f51\u3002"
+                "\u65b0\u578b\u7535\u529b\u7cfb\u7edf\u80cc\u666f\u4e0b\u4e5f\u4f1a\u6d89\u53ca\u98ce\u7535\u5e76\u7f51\u573a\u666f\u3002"
+            ),
+        )
+    ]
+
+    assert _select_industry_profile("\u56fd\u7535\u5357\u745e", "\u7535\u6c14\u8bbe\u5907", reports) == "smart_grid_automation"
 
 
 def test_industry_profile_detects_precision_equipment_before_wind_false_positive():

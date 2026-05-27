@@ -322,3 +322,66 @@ def get_web_fact_check_context(
         max_queries,
         max_results_per_query,
     )
+
+
+@tool
+def get_baijiu_context(
+    ticker: Annotated[str, "ticker symbol"],
+    curr_date: Annotated[str, "current date you are trading at, yyyy-mm-dd"],
+    look_back_days: Annotated[int, "financial report look-back window in days"] = 900,
+) -> str:
+    """
+    Run a gated baijiu/liquor verification layer for A-share names. It returns
+    not_applicable unless the target is a baijiu company, then checks channel
+    price, contract-liability seasonality, product mix, cash quality, and
+    required peer-basket evidence.
+    """
+    return route_to_vendor("get_baijiu_context", ticker, curr_date, look_back_days)
+
+
+@tool
+def get_compute_leasing_context(
+    ticker: Annotated[str, "ticker symbol"],
+    curr_date: Annotated[str, "current date you are trading at, yyyy-mm-dd"],
+    financial_look_back_days: Annotated[int, "financial report look-back window in days"] = 900,
+    event_look_back_days: Annotated[int, "announcement look-back window in days"] = 365,
+    interaction_look_back_days: Annotated[int, "investor-interaction look-back window in days"] = 365,
+    news_look_back_days: Annotated[int, "news look-back window in days"] = 180,
+) -> str:
+    """
+    Run a gated compute-leasing verification layer for A-share names. It returns
+    a not_applicable status unless official or semi-official evidence indicates
+    a compute-leasing / AI-compute business, avoiding generic AI analysis for
+    unrelated stocks.
+    """
+    return route_to_vendor(
+        "get_compute_leasing_context",
+        ticker,
+        curr_date,
+        financial_look_back_days,
+        event_look_back_days,
+        interaction_look_back_days,
+        news_look_back_days,
+    )
+
+
+@tool
+def get_dividend_defensive_context(
+    ticker: Annotated[str, "ticker symbol"],
+    curr_date: Annotated[str, "current date you are trading at, yyyy-mm-dd"],
+    look_back_years: Annotated[int, "dividend and financial look-back window in years"] = 6,
+    peer_limit: Annotated[int, "maximum peer alternatives to return"] = 10,
+) -> str:
+    """
+    Run a gated defensive-dividend verification layer for A-share names. It
+    tests whether dividend yield is supported by stable profits, cash-flow
+    coverage, non-declining industry logic, valuation buffer, and better peer
+    alternatives.
+    """
+    return route_to_vendor(
+        "get_dividend_defensive_context",
+        ticker,
+        curr_date,
+        look_back_years,
+        peer_limit,
+    )

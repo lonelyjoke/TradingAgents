@@ -1,10 +1,39 @@
 """Tests for saved-report parsing used by validation scripts."""
 
 from tradingagents.evaluation.research_validator import (
+    audit_decision_depth,
     _extract_rating,
     _extract_section,
     _normalize_rating,
 )
+
+
+def test_audit_decision_depth_flags_missing_segment_and_peer_sections():
+    issues = audit_decision_depth(
+        "**Investment Thesis**: 公司很好，估值合理。\n\n"
+        "**Verification & Falsification**: 继续观察。"
+    )
+    sections = {issue.section for issue in issues}
+
+    assert "business_segment_breakdown" in sections
+    assert "peer_comparison_summary" in sections
+    assert "valuation_expectation" in sections
+    assert "verification_and_falsification" in sections
+
+
+def test_audit_decision_depth_accepts_rich_buy_side_sections():
+    text = (
+        "**Investment Thesis**: Business Segment Breakdown: 核心业务收入规模、收入增长、"
+        "毛利率、净利率、利润贡献、现金转换和估值处理均已讨论；第二曲线未披露利润，"
+        "因此 not disclosed 并只给场景估值。Peer Comparison Summary: 同行排名、"
+        "可比公司、估值、ROE、margin、growth、leverage 和 allocation 影响均已说明。"
+        "Market-implied expectation: current PE multiple implied EPS and ROE recovery, "
+        "but cash flow must confirm.\n\n"
+        "**Verification & Falsification**: confirm orders and margin; weaken if cash "
+        "flow falls; downgrade if revenue growth and 毛利 deteriorate."
+    )
+
+    assert audit_decision_depth(text) == []
 
 
 def test_normalize_rating_handles_empty_label_value():

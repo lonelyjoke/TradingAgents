@@ -877,3 +877,89 @@ tests/test_financial_report_title_filter.py
 tests/test_tushare_announcements.py                  40 passed
 py_compile for touched dataflow modules               passed
 ```
+
+## v4.7.3：行业画像纠偏与最终决策报告强制财报/同业落地
+
+国电南瑞样本暴露出两个报告层面的质量问题：一是电网自动化公司被误路由到风电设备画像；二是虽然上游已经拿到财报正文和同行比较，最终投资决策报告仍可能没有把“分业务收入/利润结构”和“同行对比结论”显性写出来。
+
+本轮修复把这两点从提示要求升级为更硬的输出纪律：
+
+- 新增 `smart_grid_automation` 财报阅读画像，覆盖电网自动化、继电保护、调度自动化、配电自动化、柔性输电、电力信息通信、新型电力系统、国网/南网客户等变量。
+- 行业画像选择时，国电南瑞/南瑞、电网自动化、继电保护、智能电网等证据会优先进入 `smart_grid_automation`，避免被财报里的“风电并网/新能源消纳”背景词误判为 `wind_power_equipment`。
+- 组合经理结构化输出新增 `business_segment_breakdown`，要求最终报告在财报可用时写清楚公司各业务线的收入规模、增速、毛利率/净利率、利润或现金质量、估值处理；未披露的数据必须写 `not disclosed`。
+- 组合经理结构化输出新增 `peer_comparison_summary`，要求最终报告在同行比较可用时写清楚目标公司的同行排名、可比/不可比同行、估值/盈利/成长/杠杆/现金回报差异，以及这些差异如何影响最终仓位。
+- 组合经理提示词新增显性规则：最终投资决策报告必须包含 `Business Segment Breakdown` 和 `Peer Comparison Summary`，不能只在上游上下文里出现财报和同行数据。
+
+验证状态：
+
+```text
+tests/test_filing_research.py                         50 passed
+direct schema render check                            passed
+py_compile for touched modules/tests                  passed
+```
+
+当前 `quant` 环境缺少 `langchain_core`/`pydantic`，因此涉及完整 agent 导入的测试在本地未能收集执行；本轮已用语法编译和直接 schema 渲染覆盖新增字段的基本稳定性。
+
+## v4.7.4：买方深度框架与最终报告浅层输出审计
+
+在 v4.7.3 把“分业务财报拆解”和“同行对比摘要”接入最终投资决策报告之后，本轮继续把这两个板块从“有字段”升级为“有买方分析深度”。
+
+### 1. 分业务财报拆解升级为 Segment Memo
+
+`business_segment_breakdown` 不再只是公司介绍，而是要求回答：
+
+- 每个业务线到底卖什么、交付什么；
+- 财报披露的收入规模和增速；
+- 毛利率、净利率、利润贡献、现金转换或“未披露”的明确说明；
+- 该业务属于成熟主业、周期主业、地区/渠道结构，还是第二曲线；
+- 每个业务桶应该进入基础估值、SOTP/场景估值，还是暂不进入估值。
+
+如果财报只给出表头、碎片化表格或没有分部利润率，报告必须写 `not disclosed`，并说明这会降低 SOTP 置信度，不能编造精确利润率。
+
+### 2. 同行对比升级为 Relative Allocation Memo
+
+`peer_comparison_summary` 被要求回答：
+
+- 哪些是真正经营可比的同行，哪些只是宽行业筛选结果；
+- 目标公司在同行里的排名和关键指标差异；
+- 估值折价/溢价是否由 ROE、毛利率、增速、杠杆、现金回报或业务质量解释；
+- 哪些同行强化目标公司的配置理由，哪些同行挑战目标公司的配置理由；
+- 同行比较最终如何改变评级、仓位或后续研究优先级。
+
+这样同行比较不只是表格展示，而是变成“为什么买它而不是买别人”的相对配置判断。
+
+### 3. 新增 Buy-Side Depth Audit
+
+组合经理结构化输出新增 `buy_side_depth_audit`，用于在最终报告中主动指出仍然薄弱的研究环节，例如：
+
+- 分部毛利率或利润贡献缺失；
+- 同行池太宽，不完全可比；
+- 估值没有落到 EPS/ROE/现金流隐含假设；
+- 催化剂只有方向，没有时间表或证伪条件；
+- 管理层/资本开支/股东结构只是数据罗列，没有投资含义；
+- 技术面或市场情绪没有和基本面赔率连接。
+
+### 4. 后验质检函数
+
+新增 `audit_decision_depth(decision_text)` 和 `audit_report_depth(report_dir)`，用于检查最终投资决策报告是否存在浅层输出：
+
+- 缺少 `Business Segment Breakdown`；
+- 缺少 `Peer Comparison Summary`；
+- 分业务缺收入/增速/利润率/现金/估值深度；
+- 同行比较缺排名/可比性/估值/盈利/配置深度；
+- 估值讨论没有翻译成隐含 EPS、ROE、现金流或倍数假设；
+- 证伪清单缺少确认、削弱、下调评级的具体条件。
+
+验证状态：
+
+```text
+tests/test_research_validator.py
+tests/test_filing_research.py
+tests/test_thematic_research.py
+tests/test_peer_comparison_resilience.py
+tests/test_data_coverage.py
+tests/test_financial_report_title_filter.py
+tests/test_tushare_announcements.py                  98 passed
+direct schema render check                            passed
+py_compile for touched modules/tests                  passed
+```
