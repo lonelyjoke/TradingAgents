@@ -203,6 +203,15 @@ class FilingInsight:
 
 
 @dataclass(frozen=True)
+class FilingInternalQualityModule:
+    module: str
+    purpose: str
+    evidence: str
+    analyst_use: str
+    missing_or_next_check: str
+
+
+@dataclass(frozen=True)
 class FilingTextSignal:
     signal_type: str
     report_type: str
@@ -4063,6 +4072,259 @@ def _distill_filing_insights(
     return sorted(insights, key=lambda row: priority.get(row.insight_type, 99))[:limit]
 
 
+def _build_internal_filing_quality_modules(
+    coverage_audit: FilingCoverageAudit,
+    statement_table_signals: Iterable[FilingTableSignal] = (),
+    note_findings: Iterable[FilingNoteFinding] = (),
+    financial_relations: Iterable[FinancialRelationInsight] = (),
+    segment_economics: Iterable[SegmentEconomicsFinding] = (),
+    business_segment_valuation_map: Iterable[BusinessSegmentValuationFinding] = (),
+    growth_vectors: Iterable[GrowthVectorFinding] = (),
+    report_bridge: Iterable[ReportBridgeFinding] = (),
+    textual_signals: Iterable[FilingTextSignal] = (),
+    answers: Iterable[FilingQuestionAnswer] = (),
+    banking_kpi_pack: Iterable[dict[str, str]] = (),
+) -> list[FilingInternalQualityModule]:
+    """Synthesize ten filing-only review modules from already extracted evidence."""
+
+    table_rows = list(statement_table_signals)
+    note_rows = list(note_findings)
+    relation_rows = list(financial_relations)
+    segment_rows = list(segment_economics)
+    valuation_rows = list(business_segment_valuation_map)
+    vector_rows = list(growth_vectors)
+    bridge_rows = list(report_bridge)
+    text_rows = list(textual_signals)
+    answer_rows = list(answers)
+    bank_rows = list(banking_kpi_pack)
+
+    def evidence_or_gap(evidence: str | None, gap: str) -> tuple[str, str]:
+        if evidence:
+            return _compact_text(evidence, 260), gap
+        return "Not enough direct filing evidence found in the readable report pack.", gap
+
+    def table_evidence(accounts: set[str]) -> str | None:
+        parts = [
+            f"{row.account}: {row.evidence}"
+            for row in table_rows
+            if row.account in accounts
+        ]
+        return " | ".join(parts[:2]) or None
+
+    def note_evidence(types: set[str] | None = None) -> str | None:
+        parts = [
+            f"{row.note_type}: {row.evidence}"
+            for row in note_rows
+            if types is None or row.note_type in types
+        ]
+        return " | ".join(parts[:2]) or None
+
+    def answer_evidence(categories: set[str]) -> str | None:
+        parts = [
+            f"{row.question_id}: {row.evidence}"
+            for row in answer_rows
+            if row.category in categories
+        ]
+        return " | ".join(parts[:2]) or None
+
+    def relation_evidence(types: set[str] | None = None) -> str | None:
+        parts = [
+            f"{row.relation_type}: {row.evidence}"
+            for row in relation_rows
+            if types is None or row.relation_type in types
+        ]
+        return " | ".join(parts[:2]) or None
+
+    modules: list[FilingInternalQualityModule] = []
+
+    def add(
+        module: str,
+        purpose: str,
+        evidence: str | None,
+        analyst_use: str,
+        missing_or_next_check: str,
+    ) -> None:
+        evidence_text, next_check = evidence_or_gap(evidence, missing_or_next_check)
+        modules.append(
+            FilingInternalQualityModule(
+                module=module,
+                purpose=purpose,
+                evidence=evidence_text,
+                analyst_use=analyst_use,
+                missing_or_next_check=next_check,
+            )
+        )
+
+    accounting_evidence = (
+        relation_evidence()
+        or table_evidence(
+            {
+                "operating_cash_flow",
+                "receivables",
+                "inventory",
+                "prepayments",
+                "contract_liabilities",
+                "impairment",
+            }
+        )
+        or (" | ".join(str(row) for row in bank_rows[:2]) if bank_rows else None)
+    )
+    add(
+        "accounting_reconciliation",
+        "Check signs, units, periods, and cross-statement consistency before a number enters the PM memo.",
+        accounting_evidence,
+        "Use as the report's source-of-truth layer; flag conflicting cash-flow, profit, leverage, or period claims instead of averaging narratives.",
+        "If debate numbers conflict, cite the exact filing period and reconcile revenue, profit, OCF, working capital, and leverage before rating impact.",
+    )
+
+    segment_evidence = " | ".join(
+        [row.evidence for row in segment_rows[:2]]
+        + [row.evidence for row in valuation_rows[:2]]
+    )
+    add(
+        "segment_economics_depth",
+        "Decide whether each business line has enough disclosed scale, growth, margin, cash quality, and valuation treatment.",
+        segment_evidence or None,
+        "Core segments can support base-case value; thin or header-only second curves stay in SOTP/scenario value.",
+        "Require revenue, cost/gross margin, profit or cash-quality evidence by product, channel, geography, or business bucket.",
+    )
+
+    add(
+        "footnote_radar",
+        "Surface decision-relevant notes that can hide risk or change confidence.",
+        note_evidence(),
+        "Use footnotes as valuation modifiers for customer concentration, related parties, guarantees, litigation, impairment, and capitalization choices.",
+        "If note evidence is thin, avoid claiming footnote cleanliness; keep guarantees, litigation, impairment assumptions, and related parties on the checklist.",
+    )
+
+    cash_evidence = (
+        relation_evidence(
+            {
+                "cash_absorbing_growth",
+                "quality_growth",
+                "growth_without_margin",
+                "visibility_not_yet_profitability",
+                "below_gross_profit_help",
+            }
+        )
+        or table_evidence(
+            {
+                "operating_cash_flow",
+                "receivables",
+                "inventory",
+                "prepayments",
+                "contract_liabilities",
+            }
+        )
+        or answer_evidence({"cash_quality", "revenue_quality", "profit_quality"})
+    )
+    add(
+        "cash_flow_quality_decomposition",
+        "Separate accounting profit from cash conversion, working-capital drag, and demand visibility.",
+        cash_evidence,
+        "Upgrade growth only when revenue, margin, OCF, receivables, inventory, and contract liabilities point in the same direction.",
+        "Next filing should confirm OCF/net profit, collections, inventory turns, and whether contract liabilities convert at acceptable margin.",
+    )
+
+    capex_evidence = (
+        table_evidence(
+            {
+                "capex",
+                "construction_in_progress",
+                "fixed_assets",
+                "long_term_equity_investments",
+                "investment_assets",
+            }
+        )
+        or " | ".join(row.evidence for row in vector_rows if row.stage == "capacity-building")[:520]
+        or answer_evidence({"capital_allocation"})
+    )
+    add(
+        "capex_cip_return_bridge",
+        "Test whether capex, construction-in-progress, or investment assets are building returns or just absorbing capital.",
+        capex_evidence or None,
+        "Put projects with unclear utilization, payback, or ROIC in scenario value; require demand and margin evidence before base-case valuation credit.",
+        "Track commissioning, utilization or occupancy, capex-to-revenue, payback/ROIC, impairment, and disposal gains or losses.",
+    )
+
+    mdna_evidence = (
+        " | ".join(f"{row.signal_type}: {row.evidence}" for row in text_rows[:2])
+        or " | ".join(
+            f"{row.topic}: {row.long_cycle_evidence} -> {row.checkpoint_evidence}"
+            for row in bridge_rows[:2]
+        )
+    )
+    add(
+        "mdna_text_change",
+        "Read management wording changes, proof-backed claims, risk-language upgrades, and abnormal silence across reports.",
+        mdna_evidence or None,
+        "Use text changes to decide whether management is proving, softening, or avoiding a theme; do not let soft wording replace hard evidence.",
+        "Compare the next quarterly MD&A against annual/semiannual promises, especially on strategy, project ramp, risks, and cash conversion.",
+    )
+
+    non_recurring_evidence = (
+        table_evidence({"impairment", "investment_assets"})
+        or answer_evidence({"profit_quality"})
+        or note_evidence({"impairment", "capitalization_policy", "fair_value", "government_subsidy"})
+    )
+    add(
+        "non_recurring_profit_quality",
+        "Distinguish core operating profit from investment income, fair-value moves, subsidies, asset disposals, impairment, and other one-off items.",
+        non_recurring_evidence,
+        "Use this to prevent headline EPS from receiving a core multiple when profit quality depends on non-operating or non-recurring items.",
+        "Require a bridge from gross profit/operating profit to net profit, and isolate investment income, fair-value gains, subsidies, disposals, and impairments.",
+    )
+
+    balance_sheet_evidence = table_evidence(
+        {
+            "contract_liabilities",
+            "receivables",
+            "inventory",
+            "prepayments",
+            "payables",
+            "capex",
+            "construction_in_progress",
+            "debt",
+        }
+    ) or relation_evidence({"cash_absorbing_growth", "visibility_not_yet_profitability", "leverage_funding_growth"})
+    add(
+        "balance_sheet_forward_signals",
+        "Read balance-sheet leads before income-statement confirmation.",
+        balance_sheet_evidence,
+        "Contract liabilities and payables can signal demand/funding; receivables, inventory, prepayments, debt, and CIP can signal execution burden.",
+        "Track whether leading assets/liabilities convert into revenue, margin, and cash rather than reversals, impairments, or financing drag.",
+    )
+
+    shareholder_return_evidence = (
+        note_evidence({"dividend", "shareholder_return", "buyback", "capital_allocation"})
+        or answer_evidence({"capital_allocation"})
+        or (" | ".join(str(row) for row in bank_rows if "payout" in str(row).lower())[:520] or None)
+    )
+    add(
+        "shareholder_return_authenticity",
+        "Test whether dividends, buybacks, and capital returns are funded by durable profit and cash rather than leverage or asset sales.",
+        shareholder_return_evidence,
+        "Treat shareholder yield as quality only when payout, FCF/OCF coverage, leverage, capex needs, and dilution risk line up.",
+        "Verify dividend payout, buyback execution/cancellation, FCF coverage, leverage movement, and whether capital needs crowd out future returns.",
+    )
+
+    disclosure_evidence = (
+        f"Coverage grade {coverage_audit.coverage_grade}; reports seen "
+        f"{'/'.join(coverage_audit.report_types_seen) or 'none'}; answered "
+        f"{coverage_audit.answered_question_count}/{coverage_audit.total_question_count}; "
+        f"core pack {coverage_audit.core_pack_status}. {coverage_audit.confidence_read}"
+    )
+    add(
+        "disclosure_quality_score",
+        "Grade whether filing disclosure is rich enough for a buy-side thesis or only a watchlist view.",
+        disclosure_evidence,
+        "High disclosure quality raises conviction; weak or partial coverage should cap sizing and push more assumptions into verification.",
+        "Improve confidence by retrieving missing annual/semiannual/quarterly text and answering unanswered thesis-critical filing questions.",
+    )
+
+    return modules
+
+
 def _question_memory_path(symbol: str) -> Path:
     root = Path(get_config()["data_cache_dir"]).expanduser()
     path = root / "filing_question_memory"
@@ -4370,6 +4632,19 @@ def get_financial_report_intelligence_context(
         promoted_items=promoted_items,
         textual_signals=textual_signals,
     )
+    internal_quality_modules = _build_internal_filing_quality_modules(
+        coverage_audit=coverage_audit,
+        statement_table_signals=statement_table_signals,
+        note_findings=note_findings,
+        financial_relations=financial_relations,
+        segment_economics=segment_economics,
+        business_segment_valuation_map=business_segment_valuation_map,
+        growth_vectors=growth_vectors,
+        report_bridge=report_bridge,
+        textual_signals=textual_signals,
+        answers=answers,
+        banking_kpi_pack=banking_kpi_pack,
+    )
     memory = _update_question_memory(symbol, curr_date, profile, answers)
 
     report_titles = []
@@ -4576,6 +4851,16 @@ def get_financial_report_intelligence_context(
         }
         for item in distilled_insights
     ]
+    internal_quality_rows = [
+        {
+            "module": item.module,
+            "purpose": item.purpose,
+            "filing_evidence": item.evidence,
+            "analyst_use": item.analyst_use,
+            "missing_or_next_check": item.missing_or_next_check,
+        }
+        for item in internal_quality_modules
+    ]
     answered_ids = {answer.question_id for answer in answers}
     unanswered_rows = [
         {
@@ -4615,6 +4900,9 @@ def get_financial_report_intelligence_context(
         "",
         "## Filing Reading Coverage Audit",
         _build_table(coverage_rows),
+        "",
+        "## Internal Filing Quality Modules",
+        _build_table(internal_quality_rows),
         "",
         "## Selected Filing Question Playbook",
         _build_table(
@@ -4691,6 +4979,7 @@ def get_financial_report_intelligence_context(
         "",
         "## Analyst Instructions",
         "- Start with the filing reading coverage audit. If coverage is partial, weak, or failed, explicitly downgrade confidence before using any filing-derived thesis.",
+        "- Use the Internal Filing Quality Modules as a ten-part filing-only review: accounting reconciliation, segment economics, footnote radar, cash-flow quality, capex/CIP return bridge, MD&A text change, non-recurring profit quality, balance-sheet forward signals, shareholder-return authenticity, and disclosure quality. The final PM memo should integrate these into PM Summary, Investment Thesis, Valuation, Risk, and Verification rather than dumping a checklist.",
         "- Read quarterly reports for confirmation or reversal of short-cycle signals; read half-year reports for trend formation and segment mix; read annual reports for business model, capital allocation, and long-cycle risk.",
         "- Start with the business model map, then use the growth vector map to separate mature engines from emerging second curves.",
         "- For multi-product or multi-region companies, read the Segment Economics Pack before the bull/bear debate. Do not collapse a company into headline revenue or profit when annual/half-year filings disclose product, geography, channel, revenue, cost, gross margin, or growth-rate splits.",

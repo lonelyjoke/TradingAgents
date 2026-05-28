@@ -7,6 +7,7 @@ from tradingagents.agents.utils.agent_utils import (
     build_instrument_context,
     get_baijiu_instruction,
     get_buy_side_thesis_instruction,
+    get_buy_side_underwriting_modules_instruction,
     get_compute_leasing_instruction,
     get_dividend_defensive_instruction,
     get_evidence_instruction,
@@ -149,8 +150,10 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 - If official investor-interaction context is available, keep an **Investor Communication Verdict** explicit enough for the downstream trader and risk team to understand the live concern map and disclosure quality.
 - If official policy context is available, keep a **Policy Direction Verdict** explicit enough to distinguish industry support from company-specific monetization.
 - If historical price/EPS/PE decomposition context is available, keep the valuation-cycle verdict explicit enough to say whether the current price is supported by earnings improvement, multiple expansion, both, or neither.
+- For value stocks, blue chips, banks, defensive dividend names, and mature cash-flow compounders, preserve a **Safety Price / Defensive Build Anchor** when financial state supports it: normalized low-cycle EPS or FCF, sustainable dividend yield, book value/PB and ROE, cash conversion, leverage or net cash, asset quality, payout capacity, and peer/historical valuation floors. If the company is structurally impaired, highly leveraged, deeply cyclical, or evidence-thin, say no reliable safety price can be assigned.
 - If industry-specific filing context is available, keep an **Industry Driver Verdict** explicit enough to preserve the real sector-native variables that decide the thesis.
 - If the filing context contains a Business Segment Valuation Map or Segment Economics Pack, keep a **Business Segment Valuation Verdict** explicit enough to split mature core businesses from emerging second curves, geographies, and channels. Do not allow the debate to collapse a multi-business company into one blended PE unless the filings do not support a meaningful split.
+- If the filing context contains Internal Filing Quality Modules, keep a **Filing Internal Quality Verdict** explicit enough to summarize accounting reconciliation, segment economics, footnotes, cash-flow quality, capex/CIP returns, MD&A text changes, non-recurring profit quality, balance-sheet leading signals, shareholder-return authenticity, and disclosure quality. Synthesize the material points; do not mechanically repeat all ten if some are immaterial.
 - If commodity/product-price context is available, keep a **Commodity Cycle Verdict** explicit enough to say whether the product-price evidence supports or contradicts the margin/EPS/inventory part of the thesis.
 - If gated baijiu context says `Status: triggered`, keep a **Baijiu Channel Verification Verdict** explicit enough to separate product wholesale price evidence, channel inventory/payment quality, contract-liability seasonality, product mix, peer-basket comparison, and missing data. If it says `Status: not_applicable`, do not force baijiu analysis into the stock.
 - If gated compute-leasing context says `Status: triggered`, keep a **Compute-Leasing Verification Verdict** explicit enough to separate legacy value, verified compute-leasing value, unverified compute optionality, unit-economics gaps, capex/funding risk, and transition credibility. If it says `Status: not_applicable`, do not force compute-leasing analysis into the stock.
@@ -220,6 +223,7 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 {get_research_gap_instruction()}
 {get_supply_demand_fallback_instruction()}
 {get_buy_side_thesis_instruction()}
+{get_buy_side_underwriting_modules_instruction()}
 {get_material_catalyst_instruction()}
 {get_thematic_valuation_instruction()}
 {get_filing_intelligence_instruction()}

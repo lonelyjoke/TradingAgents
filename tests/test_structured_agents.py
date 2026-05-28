@@ -150,6 +150,37 @@ class TestRenderPortfolioDecision:
         assert "Full holders can keep the core position" in md
         assert "prospective builders can open a starter tranche" in md
 
+    def test_value_stock_safety_price_renders_before_action_guidance(self):
+        decision = PortfolioDecision(
+            rating=PortfolioRating.HOLD,
+            company_snapshot="Blue-chip cash generator with a resilient balance sheet.",
+            one_line_thesis="Current odds are fair, but a lower price would offer a margin of safety.",
+            reader_takeaway_entry_band="Wait for a valuation floor before building.",
+            value_stock_safety_price=(
+                "Safety price is 8.0-8.5, derived from normalized low-cycle EPS, "
+                "FCF, dividend yield, PB/ROE, cash conversion, leverage, payout "
+                "capacity, and peer valuation floor; invalidate if cash flow or "
+                "asset quality deteriorates."
+            ),
+            reader_action_guidance="Builders should accumulate slowly only around the safety band.",
+            business_driver_map="FCF, payout, ROE, balance-sheet resilience.",
+            bull_bear_debate="Bull sees cash returns; bear sees limited growth.",
+            debate_verdict="Hold until price improves.",
+            investment_logic_chain="Value appears only if price falls to the safety band.",
+            executive_summary="Hold with a defensive build anchor.",
+            verification_and_falsification="Confirm cash flow and payout; downgrade if leverage rises.",
+            investment_thesis="The franchise is stable but not cheap enough today.",
+        )
+        md = render_pm_decision(decision)
+        assert "**Safety Price / Defensive Build Anchor**:" in md
+        assert "8.0-8.5" in md
+        assert md.index("**Reader Take-away / Build Price Band**") < md.index(
+            "**Safety Price / Defensive Build Anchor**"
+        )
+        assert md.index("**Safety Price / Defensive Build Anchor**") < md.index(
+            "**Reader Action Guidance / Holders vs Builders**"
+        )
+
 
 # ---------------------------------------------------------------------------
 # Trader agent: structured happy path + fallback

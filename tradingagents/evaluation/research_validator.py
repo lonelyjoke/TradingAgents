@@ -28,17 +28,17 @@ RATING_MAP = {
     "hold": "Hold",
     "underweight": "Underweight",
     "sell": "Sell",
-    "强烈买入": "Buy",
-    "买入": "Buy",
-    "高配": "Overweight",
-    "超配": "Overweight",
-    "增持": "Overweight",
-    "持有": "Hold",
-    "中性": "Hold",
-    "低配": "Underweight",
-    "减持": "Underweight",
-    "卖出": "Sell",
-    "回避": "Sell",
+    "\u5f3a\u70c8\u4e70\u5165": "Buy",
+    "\u4e70\u5165": "Buy",
+    "\u9ad8\u914d": "Overweight",
+    "\u8d85\u914d": "Overweight",
+    "\u589e\u6301": "Overweight",
+    "\u6301\u6709": "Hold",
+    "\u4e2d\u6027": "Hold",
+    "\u4f4e\u914d": "Underweight",
+    "\u51cf\u6301": "Underweight",
+    "\u5356\u51fa": "Sell",
+    "\u56de\u907f": "Sell",
 }
 
 POSITIVE_RATINGS = {"Buy", "Overweight"}
@@ -120,6 +120,26 @@ _VALUATION_DEPTH_TERMS = (
     "估值",
 )
 
+_SAFETY_PRICE_TERMS = (
+    "safety price",
+    "defensive build anchor",
+    "margin of safety",
+    "slow accumulation",
+    "normalized",
+    "low-cycle",
+    "fcf",
+    "dividend yield",
+    "book value",
+    "pb",
+    "roe",
+    "cash conversion",
+    "leverage",
+    "payout",
+    "valuation floor",
+    "mean-revert",
+    "invalidate",
+)
+
 _FALSIFICATION_DEPTH_TERMS = (
     "confirm",
     "weaken",
@@ -135,6 +155,110 @@ _FALSIFICATION_DEPTH_TERMS = (
     "毛利",
     "订单",
     "现金",
+)
+
+
+_KEY_DATA_TERMS = (
+    "key data check",
+    "reconcile",
+    "source-backed",
+    "revenue",
+    "net profit",
+    "eps",
+    "market cap",
+    "operating cash flow",
+    "capex",
+    "contract liabilities",
+    "orders",
+    "backlog",
+    "pe",
+    "pb",
+    "关键数据",
+    "校验",
+    "收入",
+    "净利润",
+    "每股收益",
+    "市值",
+    "经营现金流",
+    "资本开支",
+    "合同负债",
+    "订单",
+)
+
+_EXPECTATION_GAP_EVIDENCE_TERMS = (
+    "expectation-gap evidence",
+    "market-implied",
+    "valuation percentile",
+    "price-eps",
+    "multiple",
+    "consensus",
+    "sell-side",
+    "holder",
+    "technical",
+    "investor interaction",
+    "预期差",
+    "市场隐含",
+    "估值分位",
+    "一致预期",
+    "股东",
+    "技术面",
+    "投资者互动",
+)
+
+_UNDERWRITING_OPTIONALITY_TERMS = (
+    "unit-economics bridge",
+    "project ramp",
+    "capacity bridge",
+    "financing / listing scenario",
+    "take rate",
+    "breakeven",
+    "occupancy",
+    "utilization",
+    "dilution",
+    "use of proceeds",
+    "单位经济",
+    "费率",
+    "盈亏平衡",
+    "出租率",
+    "利用率",
+    "上市",
+    "融资",
+    "摊薄",
+)
+
+_FILING_INTERNAL_QUALITY_TERMS = (
+    "filing internal quality",
+    "accounting reconciliation",
+    "segment economics",
+    "footnote",
+    "cash-flow quality",
+    "cash flow quality",
+    "capex",
+    "cip",
+    "md&a",
+    "non-recurring",
+    "balance-sheet forward",
+    "shareholder-return",
+    "disclosure quality",
+)
+
+_VERIFICATION_CALENDAR_TERMS = (
+    "verification calendar",
+    "next disclosure",
+    "add",
+    "hold",
+    "trim",
+    "downgrade",
+    "exit",
+    "半年度",
+    "三季报",
+    "年报",
+    "加仓",
+    "持有",
+    "减仓",
+    "下调",
+    "退出",
+    "验证日历",
 )
 
 
@@ -202,12 +326,66 @@ def audit_decision_depth(decision_text: str) -> list[DecisionDepthIssue]:
             )
         )
 
+    if "Safety Price / Defensive Build Anchor" in decision_text and _term_hits(decision_text, _SAFETY_PRICE_TERMS) < 6:
+        issues.append(
+            DecisionDepthIssue(
+                "value_stock_safety_price",
+                "warning",
+                "safety price is present but lacks enough financial-state support, margin-of-safety logic, or invalidation conditions",
+            )
+        )
+
     if _term_hits(decision_text, _FALSIFICATION_DEPTH_TERMS) < 4:
         issues.append(
             DecisionDepthIssue(
                 "verification_and_falsification",
                 "warning",
                 "verification section lacks concrete confirm/weaken/downgrade conditions",
+            )
+        )
+
+    if _term_hits(decision_text, _KEY_DATA_TERMS) < 5:
+        issues.append(
+            DecisionDepthIssue(
+                "key_data_check",
+                "warning",
+                "missing or shallow key data check for thesis-critical figures and unit/period conflicts",
+            )
+        )
+
+    if _term_hits(decision_text, _EXPECTATION_GAP_EVIDENCE_TERMS) < 4:
+        issues.append(
+            DecisionDepthIssue(
+                "expectation_gap_evidence",
+                "warning",
+                "expectation gap is asserted without enough market-implied or consensus/holder/technical evidence",
+            )
+        )
+
+    if _term_hits(decision_text, _UNDERWRITING_OPTIONALITY_TERMS) < 3:
+        issues.append(
+            DecisionDepthIssue(
+                "underwriting_modules",
+                "warning",
+                "missing unit-economics, project-ramp, or financing/listing scenario bridge where applicable",
+            )
+        )
+
+    if _term_hits(decision_text, _FILING_INTERNAL_QUALITY_TERMS) < 5:
+        issues.append(
+            DecisionDepthIssue(
+                "filing_internal_quality",
+                "warning",
+                "missing or shallow filing-internal quality review across accounting, footnotes, cash flow, capex, disclosure, or shareholder-return evidence",
+            )
+        )
+
+    if _term_hits(decision_text, _VERIFICATION_CALENDAR_TERMS) < 4:
+        issues.append(
+            DecisionDepthIssue(
+                "verification_calendar",
+                "warning",
+                "missing action-linked verification calendar for add/hold/trim/downgrade decisions",
             )
         )
 

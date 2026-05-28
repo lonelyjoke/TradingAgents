@@ -578,6 +578,25 @@ class PortfolioDecision(BaseModel):
             "band can be justified, say so explicitly."
         ),
     )
+    value_stock_safety_price: Optional[str] = Field(
+        default=None,
+        description=(
+            "For value stocks, blue chips, cash-flow compounders, defensive "
+            "dividend names, banks, or other financially resilient mature "
+            "companies only: provide a conservative safety price or safety price "
+            "band for slow accumulation by new builders. This is not a target "
+            "price and not a stop-loss. Anchor it in financial state such as "
+            "normalized low-cycle EPS or FCF, sustainable dividend yield, book "
+            "value/PB and ROE, net cash or leverage, cash conversion, asset "
+            "quality, payout capacity, and peer/historical valuation floors. "
+            "Explain why the price has a margin of safety, why a break below it "
+            "would probably be mean-reverting if fundamentals hold, and what "
+            "financial deterioration would invalidate the safety price. If the "
+            "company is cyclical, highly leveraged, structurally declining, or "
+            "the evidence is insufficient, state that no reliable safety price "
+            "can be assigned."
+        ),
+    )
     reader_action_guidance: Optional[str] = Field(
         default=None,
         description=(
@@ -912,6 +931,85 @@ class PortfolioDecision(BaseModel):
             "between the market quote and the research view."
         ),
     )
+    pm_summary: Optional[str] = Field(
+        default=None,
+        description=(
+            "A 5-8 line buy-side PM summary: rating, action, position size, time "
+            "horizon, core bet, why now, biggest risk, and next verification date. "
+            "This should be useful as a one-page investment committee front box."
+        ),
+    )
+    key_data_check: Optional[str] = Field(
+        default=None,
+        description=(
+            "Reconcile the thesis-critical numbers used in the memo. Include 6-10 "
+            "items such as revenue, net profit, EPS, market cap, PE/PB, operating "
+            "cash flow, contract liabilities/orders/backlog, capex, dividend, net "
+            "debt, and key segment metrics. If the debate contains conflicting "
+            "signs, units, periods, or magnitudes, flag the conflict and state the "
+            "source-backed figure used in the final decision."
+        ),
+    )
+    filing_internal_quality_review: Optional[str] = Field(
+        default=None,
+        description=(
+            "A synthesized review of the ten filing-only quality modules when "
+            "financial-report intelligence supplies them: accounting reconciliation, "
+            "segment economics depth, footnote radar, cash-flow quality, capex/CIP "
+            "return bridge, MD&A text change, non-recurring profit quality, "
+            "balance-sheet forward signals, shareholder-return authenticity, and "
+            "disclosure quality. Integrate the material conclusions into the PM "
+            "summary and investment case rather than listing all ten mechanically."
+        ),
+    )
+    expectation_gap_evidence: Optional[str] = Field(
+        default=None,
+        description=(
+            "Evidence that the expectation gap is real rather than asserted: "
+            "valuation percentile, price-EPS-multiple decomposition, consensus or "
+            "sell-side expectations when supplied, institutional/holder behavior, "
+            "technical price action, and investor-interaction question patterns."
+        ),
+    )
+    unit_economics_bridge: Optional[str] = Field(
+        default=None,
+        description=(
+            "For any second curve, platform, service, new product, project, channel, "
+            "or financing business, build a unit-economics bridge such as revenue/"
+            "GMV/volume x take rate or ASP x gross margin/net margin x reinvestment "
+            "or working capital. If take rate, margin, breakeven, utilization, "
+            "retention, or loss rate is not disclosed, say 'not disclosed' and keep "
+            "the business in scenario value rather than core valuation."
+        ),
+    )
+    project_ramp_bridge: Optional[str] = Field(
+        default=None,
+        description=(
+            "For new plants, mines, stores, malls, data centers, ships, property "
+            "projects, or platforms, track capacity/area/users, utilization or "
+            "occupancy, price/rent, ramp timetable, incremental margin, capex, "
+            "ROIC/payback, and the source of demand. Omit if there is no material "
+            "project or capacity ramp."
+        ),
+    )
+    financing_listing_scenario: Optional[str] = Field(
+        default=None,
+        description=(
+            "For H-share or secondary listings, private placements, convertibles, "
+            "debt refinancing, major capex funding, or asset sales, provide bull/"
+            "base/bear pricing or cost-of-capital scenarios, use of proceeds, "
+            "dilution, ROE/FCF impact, and whether the event creates an anchor or "
+            "an overhang. Omit if no financing/listing/dilution event matters."
+        ),
+    )
+    verification_calendar: Optional[str] = Field(
+        default=None,
+        description=(
+            "A date- or event-based verification calendar. For each next disclosure "
+            "or operating data point, state what would trigger add/hold/trim/"
+            "downgrade/exit. Keep it concrete and action-linked."
+        ),
+    )
     company_quality_verdict: Optional[str] = Field(
         default=None,
         description=(
@@ -1036,8 +1134,18 @@ def render_pm_decision(decision: PortfolioDecision) -> str:
         f"Market-implied expectation: {decision.market_implied_expectation}"
         if decision.market_implied_expectation
         else None,
+        f"Expectation-gap evidence: {decision.expectation_gap_evidence}"
+        if decision.expectation_gap_evidence
+        else None,
+        f"Key data check: {decision.key_data_check}" if decision.key_data_check else None,
+        f"Filing internal quality review: {decision.filing_internal_quality_review}"
+        if decision.filing_internal_quality_review
+        else None,
         f"Earnings bridge: {decision.earnings_model_bridge}"
         if decision.earnings_model_bridge
+        else None,
+        f"Unit-economics bridge: {decision.unit_economics_bridge}"
+        if decision.unit_economics_bridge
         else None,
         (
             "Investment verdict split: "
@@ -1111,6 +1219,12 @@ def render_pm_decision(decision: PortfolioDecision) -> str:
         f"Strategic optionality: {decision.strategic_optionality_verdict}"
         if decision.strategic_optionality_verdict
         else None,
+        f"Project ramp / capacity bridge: {decision.project_ramp_bridge}"
+        if decision.project_ramp_bridge
+        else None,
+        f"Financing / listing scenario: {decision.financing_listing_scenario}"
+        if decision.financing_listing_scenario
+        else None,
         f"Buy-side depth audit: {decision.buy_side_depth_audit}"
         if decision.buy_side_depth_audit
         else None,
@@ -1169,6 +1283,13 @@ def render_pm_decision(decision: PortfolioDecision) -> str:
                 "",
             ]
         )
+    if decision.value_stock_safety_price:
+        take_away_parts.extend(
+            [
+                f"**Safety Price / Defensive Build Anchor**: {decision.value_stock_safety_price}",
+                "",
+            ]
+        )
     if decision.reader_action_guidance:
         take_away_parts.extend(
             [
@@ -1176,6 +1297,9 @@ def render_pm_decision(decision: PortfolioDecision) -> str:
                 "",
             ]
         )
+    pm_summary_parts = []
+    if decision.pm_summary:
+        pm_summary_parts.extend([f"**PM Summary**: {decision.pm_summary}", ""])
 
     parts = [
         f"**Company Snapshot**: {decision.company_snapshot}",
@@ -1185,6 +1309,7 @@ def render_pm_decision(decision: PortfolioDecision) -> str:
         f"**One-Line Thesis**: {decision.one_line_thesis}",
         "",
         *take_away_parts,
+        *pm_summary_parts,
         f"**Investment Thesis**: {thesis}",
         "",
         f"**Debate & Decision Logic**: {debate_and_decision_logic}",
@@ -1197,13 +1322,10 @@ def render_pm_decision(decision: PortfolioDecision) -> str:
                 "",
             ]
         )
-    parts.extend(
-        [
-            f"**Verification & Falsification**: {decision.verification_and_falsification}",
-            "",
-            f"**Executive Summary**: {execution_posture}",
-        ]
-    )
+    parts.extend([f"**Verification & Falsification**: {decision.verification_and_falsification}", ""])
+    if decision.verification_calendar:
+        parts.extend([f"**Verification Calendar**: {decision.verification_calendar}", ""])
+    parts.extend([f"**Executive Summary**: {execution_posture}"])
     if continuity:
         parts.extend(["", f"**Decision Continuity**: {continuity}"])
     if decision.falsification_signals:
