@@ -39,7 +39,10 @@ _stub_module(
         "get_fundamentals",
         "get_balance_sheet",
         "get_cashflow",
+        "get_baijiu_context",
         "get_commodity_context",
+        "get_compute_leasing_context",
+        "get_dividend_defensive_context",
         "get_earnings_model_context",
         "get_financial_report_intelligence_context",
         "get_income_statement",
@@ -100,6 +103,16 @@ def test_buy_side_instruction_contains_chinese_idiomatic_terms():
     assert "not 论文" in instruction
     assert "probability/payoff = 胜率/赔率" in instruction
     assert "expectation gap = 预期差" in instruction
+
+
+def test_resource_valuation_instruction_prioritizes_forward_or_normalized_pe():
+    combined = (
+        agent_utils_under_test.get_earnings_model_instruction()
+        + agent_utils_under_test.get_market_expectation_instruction()
+    )
+
+    assert "PE TTM as the primary valuation anchor" in combined
+    assert "forward/normalized earnings scenarios" in combined
 
 
 def test_english_language_instruction_stays_empty():

@@ -1,0 +1,1 @@
+No daily_basic valuation snapshot found for 601899.SH near 2026-06-01.

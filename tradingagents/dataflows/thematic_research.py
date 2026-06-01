@@ -7,6 +7,7 @@ import re
 import shutil
 import subprocess
 import tempfile
+import time
 from typing import Iterable
 
 import pandas as pd
@@ -388,7 +389,7 @@ def _download_disclosure(url: str) -> Path | None:
         return None
     digest = sha1(url.encode("utf-8")).hexdigest()
     pdf_path = _cache_dir() / f"{digest}.pdf"
-    if pdf_path.exists():
+    if pdf_path.exists() and pdf_path.stat().st_size > 0:
         return pdf_path
     try:
         response = requests.get(
@@ -397,7 +398,9 @@ def _download_disclosure(url: str) -> Path | None:
             timeout=20,
         )
         response.raise_for_status()
-        pdf_path.write_bytes(response.content)
+        tmp_path = pdf_path.with_suffix(f".{digest}.tmp")
+        tmp_path.write_bytes(response.content)
+        tmp_path.replace(pdf_path)
         return pdf_path
     except Exception:
         return None
@@ -405,7 +408,7 @@ def _download_disclosure(url: str) -> Path | None:
 
 def _extract_pdf_text(pdf_path: Path) -> str:
     txt_path = pdf_path.with_suffix(".txt")
-    if txt_path.exists():
+    if txt_path.exists() and txt_path.stat().st_size > 0:
         return txt_path.read_text(encoding="utf-8", errors="ignore")
 
     pdftotext = shutil.which("pdftotext")
@@ -430,6 +433,33 @@ def _extract_pdf_text(pdf_path: Path) -> str:
         return ""
 
 
+def _retry_cached_financial_report_texts(
+    symbol: str,
+    company_name: str | None,
+    *,
+    attempts: int = 3,
+    delay_sec: float = 0.6,
+) -> tuple[pd.DataFrame, list[tuple[str, str]]]:
+    """Wait briefly for concurrently extracted disclosure text to appear.
+
+    A-share context modules are fetched in parallel. One worker may be writing a
+    large PDF/text sidecar while another worker is deciding whether filing text
+    is unavailable. A short cache retry avoids falsely marking the run as
+    `text_unavailable` when the same run has already downloaded the filings.
+    """
+    cached_reports = pd.DataFrame()
+    cached_texts: list[tuple[str, str]] = []
+    for attempt in range(max(1, attempts)):
+        cached_reports, cached_texts = _load_cached_financial_report_texts(
+            symbol, company_name=company_name
+        )
+        if cached_texts:
+            return cached_reports, cached_texts
+        if attempt < attempts - 1:
+            time.sleep(delay_sec)
+    return cached_reports, cached_texts
+
+
 def _load_financial_report_texts(
     symbol: str, curr_date: str, look_back_days: int = 900
 ) -> tuple[pd.DataFrame | TushareDataError, list[tuple[str, str]]]:
@@ -451,7 +481,7 @@ def _load_financial_report_texts(
     company_name = _format_value(basic.get("name")) if basic is not None else symbol
     reports = _financial_report_announcements(symbol, curr_date, look_back_days)
     if isinstance(reports, TushareDataError) or reports is None or reports.empty:
-        cached_reports, cached_texts = _load_cached_financial_report_texts(
+        cached_reports, cached_texts = _retry_cached_financial_report_texts(
             symbol, company_name=company_name
         )
         if cached_texts:
@@ -471,7 +501,7 @@ def _load_financial_report_texts(
     cached_reports = pd.DataFrame()
     cached_texts: list[tuple[str, str]] = []
     if len(texts) < 3:
-        cached_reports, cached_texts = _load_cached_financial_report_texts(
+        cached_reports, cached_texts = _retry_cached_financial_report_texts(
             symbol, company_name=company_name
         )
     if not texts and cached_texts:
@@ -1028,13 +1058,13 @@ def _valuation_treatment(
             )
         if ratio >= 0.01 and has_news_catalyst:
             return (
-                "eligible for SOTP/NAV review",
+                "eligible for SOTP/NAV review; include as a primary-investment NAV line item",
                 "A verified, material asset with a live catalyst can support upside beyond core operations.",
                 "Stress realizability, haircut assumptions, timing, and double-counting versus current book value.",
             )
         if ratio >= 0.01:
             return (
-                "material asset; keep in valuation watchlist pending catalyst",
+                "material asset; include in SOTP/NAV watchlist with carrying-value, haircut, and upside scenarios",
                 "Material verified ownership may become an upside lever if a catalyst emerges.",
                 "Without a catalyst, current carrying value may already be the cleanest anchor.",
             )
@@ -1054,6 +1084,35 @@ def _valuation_treatment(
         "real theme, not yet separately quantifiable",
         "Shows strategic direction and may deserve qualitative optionality.",
         "Keep it out of core valuation until revenue, profit, orders, or cash-flow contribution is separately evidenced.",
+    )
+
+
+def _primary_investment_nav_ladder(
+    candidate: ThemeCandidate,
+    reported_amount_cny: float | None,
+    market_cap_cny: float | None,
+    has_news_catalyst: bool,
+) -> str:
+    """Return how a verified investee should be carried into NAV/SOTP work."""
+    if candidate.kind != "asset-revaluation":
+        return "N/A"
+    ratio = (
+        reported_amount_cny / market_cap_cny
+        if reported_amount_cny is not None and market_cap_cny
+        else None
+    )
+    if reported_amount_cny is None:
+        return "research gap: ownership/carrying value undisclosed; do not quantify"
+    if ratio is not None and ratio < 0.01:
+        return "immaterial NAV item: note only unless multiple assets form a portfolio pattern"
+    if has_news_catalyst:
+        return (
+            "required: conservative=carrying value haircut, base=carrying/latest-round value, "
+            "upside=IPO/exit repricing x probability x lock-up/liquidity haircut"
+        )
+    return (
+        "required: conservative=carrying value haircut, base=carrying value, "
+        "upside=repricing only after a visible exit/IPO catalyst"
     )
 
 
@@ -1132,6 +1191,12 @@ def _build_valuation_rows(
                 "reported_value": _format_cny(reported_amount_cny),
                 "vs_listed_mkt_cap": f"{ratio:.1%}" if ratio is not None else "N/A",
                 "valuation_treatment": treatment,
+                "primary_investment_nav_ladder": _primary_investment_nav_ladder(
+                    candidate,
+                    reported_amount_cny,
+                    market_cap_cny,
+                    _news_has_catalyst(news_matches),
+                ),
                 "bull_angle": bull_angle,
                 "bear_check": bear_check,
             }
@@ -1486,6 +1551,7 @@ def get_thematic_catalyst_context(
         "- Use a three-tier ladder: tier-1 hard catalysts can enter core/SOTP valuation; tier-2 soft catalysts can support scenario upside or probability; tier-3 narrative options from news, interaction, concept linkage, or media association may justify only a small imagination premium until filings verify them.",
         "- Keep economic hardness separate from evidence completeness. If a filing-backed theme has a real monetization bridge but the fetched corroboration is thin, mark it as tier-1 pending diligence / latent hard catalyst instead of demoting it to pure narrative or pretending proof is complete.",
         "- Asset-revaluation themes may enter SOTP/NAV only when ownership value is disclosed, material versus listed-company market cap, and realizability is discussed.",
+        "- For material primary investments, build a NAV ladder instead of using a vague imagination premium: conservative value = carrying value with liquidity/exit haircut; base value = carrying value or latest financing/IPO reference with an explicit discount; upside value = exit/IPO repricing multiplied by probability and lock-up/liquidity haircuts. Keep this separate from operating earnings so the report does not confuse market theme value with recurring business profit.",
         "- After reviewing single investees, ask a second-level question: is there a repeatable capital-allocation pattern? If filings show multiple verified investees plus realized exits, investment income, or fair-value gains over time, discuss whether management's first-level investing capability itself is a durable bull factor rather than treating each asset as an isolated anecdote.",
         "- Business-realization themes may enter core valuation only when filings disclose monetization evidence such as revenue, profit, orders, or cash-flow contribution; otherwise keep them as qualitative optionality.",
         "- If report text extraction is unavailable, say so explicitly and do not pretend that news-only themes were verified.",

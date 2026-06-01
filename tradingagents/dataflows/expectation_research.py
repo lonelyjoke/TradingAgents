@@ -36,6 +36,12 @@ def _safe_div(numerator: float | None, denominator: float | None) -> float | Non
     return numerator / denominator
 
 
+def _pe_on_earnings(market_cap: float | None, earnings: float | None) -> float | None:
+    if market_cap is None or earnings is None or earnings <= 0:
+        return None
+    return market_cap / earnings
+
+
 def _implied_snapshot(daily_basic: pd.Series | None) -> ImpliedExpectationSnapshot:
     if daily_basic is None:
         return ImpliedExpectationSnapshot(None, None, None, None, None)
@@ -150,6 +156,10 @@ def get_market_expectation_context(ticker: str, curr_date: str, years: int = 5) 
             {
                 "benchmark": "latest annual parent profit",
                 "value": latest_annual.net_profit_parent,
+                "implied_pe_at_benchmark_profit": _pe_on_earnings(
+                    implied.market_cap_cny,
+                    latest_annual.net_profit_parent,
+                ),
                 "vs_implied_ttm_earnings": _safe_div(
                     latest_annual.net_profit_parent,
                     implied.implied_ttm_earnings_cny,
@@ -161,6 +171,10 @@ def get_market_expectation_context(ticker: str, curr_date: str, years: int = 5) 
             {
                 "benchmark": f"latest reported simple-run-rate parent profit ({latest_any.period})",
                 "value": latest_any.annualized_net_profit_parent,
+                "implied_pe_at_benchmark_profit": _pe_on_earnings(
+                    implied.market_cap_cny,
+                    latest_any.annualized_net_profit_parent,
+                ),
                 "vs_implied_ttm_earnings": _safe_div(
                     latest_any.annualized_net_profit_parent,
                     implied.implied_ttm_earnings_cny,
@@ -171,6 +185,10 @@ def get_market_expectation_context(ticker: str, curr_date: str, years: int = 5) 
             {
                 "benchmark": f"latest reported seasonality-adjusted parent profit ({latest_any.period})",
                 "value": latest_any.seasonality_adjusted_net_profit_parent,
+                "implied_pe_at_benchmark_profit": _pe_on_earnings(
+                    implied.market_cap_cny,
+                    latest_any.seasonality_adjusted_net_profit_parent,
+                ),
                 "vs_implied_ttm_earnings": _safe_div(
                     latest_any.seasonality_adjusted_net_profit_parent,
                     implied.implied_ttm_earnings_cny,
@@ -194,6 +212,7 @@ def get_market_expectation_context(ticker: str, curr_date: str, years: int = 5) 
         "## Analyst Instructions",
         "- Do not call a stock cheap or expensive from PE/PB alone. State what earnings power, sales scale, or durability the current quote appears to require.",
         "- Compare the implied TTM earnings with latest annual, simple-run-rate interim earnings, and seasonality-adjusted interim earnings before claiming an expectation gap.",
+        "- Treat implied PE at benchmark profit as a forward/normalized earnings proxy, not analyst-consensus forward PE; for resource or cyclical companies, make this proxy and explicit bull/base/bear profit scenarios more important than trailing PE TTM.",
         "- Do not forecast a full year by mechanically multiplying Q1 by four when historical seasonal shares are available; treat simple run-rate as downside/upside stress only.",
         "- If current valuation already assumes recovery, say so; if it still prices in deterioration despite improving drivers, say so.",
         "- Translate every rating into a view on mispricing: which assumption in the market quote is too optimistic or too pessimistic?",

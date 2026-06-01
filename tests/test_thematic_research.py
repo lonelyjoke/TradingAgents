@@ -231,8 +231,10 @@ def test_valuation_bridge_separates_asset_revaluation_from_unquantified_business
     rows_by_name = {row["candidate"]: row for row in rows}
 
     assert rows_by_name["蓝箭航天空间科技股份有限公司"]["vs_listed_mkt_cap"] == "8.1%"
-    assert rows_by_name["蓝箭航天空间科技股份有限公司"]["valuation_treatment"] == "eligible for SOTP/NAV review"
+    assert "SOTP/NAV review" in rows_by_name["蓝箭航天空间科技股份有限公司"]["valuation_treatment"]
+    assert "upside=IPO/exit repricing" in rows_by_name["蓝箭航天空间科技股份有限公司"]["primary_investment_nav_ladder"]
     assert rows_by_name["算力租赁"]["valuation_treatment"] == "real theme, not yet separately quantifiable"
+    assert rows_by_name["算力租赁"]["primary_investment_nav_ladder"] == "N/A"
 
 
 def test_portfolio_pattern_summary_detects_repeat_investing_skill_signal():
@@ -366,6 +368,77 @@ def test_financial_report_text_loader_recovers_from_local_disclosure_cache(monke
     assert "local disclosure cache" in texts[0][0]
     assert "电动两轮车" in texts[0][1]
     assert reports.iloc[0]["ts_code"] == "689009.SH"
+
+
+def test_financial_report_text_loader_retries_cache_after_extract_miss(monkeypatch, tmp_path):
+    _FINANCIAL_REPORT_TEXT_CACHE.clear()
+    reports = pd.DataFrame(
+        [
+            {
+                "ann_date": "20260328",
+                "title": "紫金矿业：2025 年年度报告",
+                "url": "https://example.com/zijin.pdf",
+            }
+        ]
+    )
+    cache_dir = tmp_path / "disclosures"
+    cache_dir.mkdir()
+    cached_text = (
+        "紫金矿业集团股份有限公司\n"
+        "601899.SH\n"
+        "2025 年年度报告\n"
+        "公司从事铜、金等金属矿产资源勘查和开发。"
+    )
+    attempts = {"cache": 0}
+
+    def fake_cached(symbol, company_name=None, limit=4):
+        attempts["cache"] += 1
+        if attempts["cache"] == 1:
+            return pd.DataFrame(), []
+        return (
+            pd.DataFrame(
+                [
+                    {
+                        "ann_date": "",
+                        "ts_code": symbol,
+                        "name": company_name,
+                        "title": "2025 年年度报告 [local disclosure cache]",
+                        "url": str(cache_dir / "zijin.txt"),
+                        "rec_time": "",
+                    }
+                ]
+            ),
+            [("2025 年年度报告 [local disclosure cache]", cached_text)],
+        )
+
+    monkeypatch.setattr(
+        "tradingagents.dataflows.thematic_research._financial_report_announcements",
+        lambda *args: reports,
+    )
+    monkeypatch.setattr(
+        "tradingagents.dataflows.thematic_research._download_disclosure",
+        lambda url: tmp_path / "missing.pdf",
+    )
+    monkeypatch.setattr(
+        "tradingagents.dataflows.thematic_research._extract_pdf_text",
+        lambda path: "",
+    )
+    monkeypatch.setattr(
+        "tradingagents.dataflows.thematic_research._load_cached_financial_report_texts",
+        fake_cached,
+    )
+    monkeypatch.setattr(thematic_research.time, "sleep", lambda seconds: None)
+    monkeypatch.setattr(
+        thematic_research,
+        "_fetch_stock_basic",
+        lambda symbol: pd.Series({"name": "紫金矿业"}),
+    )
+
+    _, texts = _load_financial_report_texts("601899.SH", "2026-06-01")
+
+    assert attempts["cache"] == 2
+    assert len(texts) == 1
+    assert "铜、金" in texts[0][1]
 
 
 def test_short_investee_extractor_rejects_accounting_rows():

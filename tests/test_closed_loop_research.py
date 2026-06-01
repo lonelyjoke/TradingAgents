@@ -8,6 +8,7 @@ from tradingagents.dataflows.earnings_modeling import (
 )
 from tradingagents.dataflows.expectation_research import (
     _implied_snapshot,
+    _pe_on_earnings,
 )
 
 
@@ -76,3 +77,9 @@ def test_implied_snapshot_reverse_engineers_market_quote():
     assert snap.market_cap_cny == 1_000_000_000.0
     assert snap.implied_ttm_earnings_cny == 50_000_000.0
     assert snap.implied_ttm_sales_cny == 500_000_000.0
+
+
+def test_pe_on_earnings_uses_positive_forward_profit_only():
+    assert _pe_on_earnings(1_000_000_000.0, 50_000_000.0) == 20.0
+    assert _pe_on_earnings(1_000_000_000.0, 0.0) is None
+    assert _pe_on_earnings(1_000_000_000.0, -10_000_000.0) is None

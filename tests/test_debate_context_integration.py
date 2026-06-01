@@ -89,6 +89,7 @@ def test_bull_prompt_forces_interaction_relative_allocation_and_market_expectati
     assert "official policy signal" in prompt
     assert "Investor-Interaction Discipline" in prompt
     assert "Policy-Planning Discipline" in prompt
+    assert "Primary-Investment Optionality Discipline" in prompt
     assert "Relative Allocation Discipline" in prompt
     assert "Market-Implied Expectation Discipline" in prompt
 

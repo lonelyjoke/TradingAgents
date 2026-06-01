@@ -418,7 +418,14 @@ def get_thematic_valuation_instruction() -> str:
         "carrying or fair value, listed-company market-cap materiality, catalyst "
         "timing, realizability, dilution/lock-up/liquidity haircuts, and whether "
         "the correct treatment is SOTP/NAV uplift, qualitative optionality, or "
-        "exclusion. For business-realization themes, require disclosed revenue, "
+        "exclusion. For material primary investments or non-listed equity holdings, "
+        "build a three-step NAV ladder: conservative value equals carrying value "
+        "with liquidity/exit haircut, base value equals carrying value or latest "
+        "financing/IPO reference with explicit discount, and upside value equals "
+        "exit/IPO repricing multiplied by probability and lock-up/liquidity "
+        "haircuts. Keep this NAV value separate from recurring operating earnings, "
+        "but do not erase it as mere narrative when ownership value and a plausible "
+        "exit path are disclosed. For business-realization themes, require disclosed revenue, "
         "profit, order, contract, or cash-flow evidence before allowing the theme "
         "into core valuation; otherwise keep it as scenario upside rather than "
         "base-case earnings. Bulls should quantify what the market may be "
@@ -482,7 +489,10 @@ def get_earnings_model_instruction() -> str:
         "gross margin, working capital, or financing cost. A catalyst that cannot "
         "be mapped to a modeled lever is not yet a valuation catalyst. Treat simple "
         "Q1/H1/Q3 annualization as a run-rate diagnostic only; when seasonality-adjusted "
-        "earnings are available, use that estimate or explain why it is inappropriate."
+        "earnings are available, use that estimate or explain why it is inappropriate. "
+        "For commodity, resource, shipping, and other cyclical businesses, do not use "
+        "PE TTM as the primary valuation anchor; build bull/base/bear forward or "
+        "normalized earnings and then discuss the PE or EV/EBITDA implied by each case."
     )
 
 
@@ -497,7 +507,9 @@ def get_market_expectation_instruction() -> str:
         "assumption where your view differs. Never call a stock cheap or expensive "
         "from PE/PB alone. When comparing the quote with interim earnings, distinguish "
         "simple-run-rate earnings from seasonality-adjusted earnings; do not build a "
-        "full-year forecast by mechanically multiplying Q1 by four."
+        "full-year forecast by mechanically multiplying Q1 by four. For resource and "
+        "other cyclical companies, treat PE TTM as a backward-looking snapshot and "
+        "make forward/normalized earnings scenarios the main valuation test."
     )
 
 

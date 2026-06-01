@@ -1,0 +1,1 @@
+No daily_basic valuation snapshot found for 002202.SZ near 2026-05-29.

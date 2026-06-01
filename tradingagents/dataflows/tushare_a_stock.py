@@ -713,38 +713,59 @@ def _fetch_stock_basic(symbol: str) -> pd.Series | None:
 
 def _fetch_daily_basic_latest(symbol: str, curr_date: str) -> pd.Series | None:
     curr_date_dt = datetime.strptime(curr_date, "%Y-%m-%d")
-    start = (curr_date_dt - relativedelta(days=14)).strftime("%Y%m%d")
     end = curr_date_dt.strftime("%Y%m%d")
-    fields = ",".join(
-        [
-            "ts_code",
-            "trade_date",
-            "close",
-            "turnover_rate",
-            "turnover_rate_f",
-            "volume_ratio",
-            "pe",
-            "pe_ttm",
-            "pb",
-            "ps",
-            "ps_ttm",
-            "dv_ratio",
-            "dv_ttm",
-            "total_share",
-            "float_share",
-            "free_share",
-            "total_mv",
-            "circ_mv",
-        ]
-    )
-    data = _query_pro_with_fallback(
-        "daily_basic",
-        ts_code=symbol,
-        start_date=start,
-        end_date=end,
-        fields=fields,
-    )
+    field_list = [
+        "ts_code",
+        "trade_date",
+        "close",
+        "turnover_rate",
+        "turnover_rate_f",
+        "volume_ratio",
+        "pe",
+        "pe_ttm",
+        "pb",
+        "ps",
+        "ps_ttm",
+        "dv_ratio",
+        "dv_ttm",
+        "total_share",
+        "float_share",
+        "free_share",
+        "total_mv",
+        "circ_mv",
+    ]
+    fields = ",".join(field_list)
+    data = pd.DataFrame()
+    for lookback_days in (14, 45, 120):
+        start = (curr_date_dt - relativedelta(days=lookback_days)).strftime("%Y%m%d")
+        data = _query_pro_with_fallback(
+            "daily_basic",
+            ts_code=symbol,
+            start_date=start,
+            end_date=end,
+            fields=fields,
+        )
+        if data is not None and not data.empty:
+            break
     if data is None or data.empty:
+        start = (curr_date_dt - relativedelta(days=120)).strftime("%Y%m%d")
+        data = _query_pro_with_fallback(
+            "daily_basic",
+            ts_code=symbol,
+            start_date=start,
+            end_date=end,
+        )
+    if data is None or data.empty:
+        return None
+    if "trade_date" not in data.columns:
+        return None
+    has_ts_code = "ts_code" in data.columns
+    for col in field_list:
+        if col not in data.columns:
+            data[col] = pd.NA
+    if has_ts_code:
+        data = data[data["ts_code"].astype(str).str.upper() == symbol]
+    if data.empty:
         return None
     data = data.sort_values("trade_date", ascending=False)
     return data.iloc[0]

@@ -20,7 +20,7 @@ from .tushare_a_stock import (
     _markdown_table,
     is_a_share_symbol,
 )
-from .tushare_research import _date_window, _query_optional_api
+from .tushare_research import _date_window, _fetch_announcements, _query_optional_api
 
 
 ALLOWED_DOMAINS = {
@@ -115,7 +115,9 @@ COMPANY_COMMODITY_MAP = {
     "002714.SZ": {
         "name": "Muyuan Foods",
         "products": [
+            {"name": "Breeding sow inventory", "type": "moa_livestock", "role": "capacity leading signal", "keywords": ["能繁母猪", "存栏"]},
             {"name": "Live hog", "type": "moa_livestock", "role": "main product", "keywords": ["活猪", "生猪"]},
+            {"name": "Live hog futures", "type": "futures", "role": "timely market-implied price signal", "prefix": "LH", "exchange": "DCE", "selection": "near_month_with_main_reference"},
             {"name": "Piglet", "type": "moa_livestock", "role": "leading supply signal", "keywords": ["仔猪"]},
             {"name": "Pork", "type": "moa_livestock", "role": "downstream price", "keywords": ["猪肉"]},
             {"name": "Feed", "type": "moa_livestock", "role": "cost proxy", "keywords": ["活猪配合饲料", "饲料"]},
@@ -134,13 +136,17 @@ INDUSTRY_PRODUCT_HINTS = {
     "钢": [{"name": "Rebar", "type": "futures", "role": "industry proxy", "prefix": "RB", "exchange": "SHFE"}],
     "铝": [{"name": "Aluminum", "type": "futures", "role": "industry proxy", "prefix": "AL", "exchange": "SHFE"}],
     "养殖": [
+        {"name": "Breeding sow inventory", "type": "moa_livestock", "role": "capacity leading signal", "keywords": ["能繁母猪", "存栏"]},
         {"name": "Live hog", "type": "moa_livestock", "role": "main product", "keywords": ["活猪", "生猪"]},
+        {"name": "Live hog futures", "type": "futures", "role": "timely market-implied price signal", "prefix": "LH", "exchange": "DCE", "selection": "near_month_with_main_reference"},
         {"name": "Piglet", "type": "moa_livestock", "role": "leading supply signal", "keywords": ["仔猪"]},
         {"name": "Feed", "type": "moa_livestock", "role": "cost proxy", "keywords": ["活猪配合饲料", "饲料"]},
         {"name": "Hog-grain ratio", "type": "moa_livestock", "role": "cycle spread", "keywords": ["猪粮比价", "猪粮比"]},
     ],
     "畜牧": [
+        {"name": "Breeding sow inventory", "type": "moa_livestock", "role": "capacity leading signal", "keywords": ["能繁母猪", "存栏"]},
         {"name": "Live hog", "type": "moa_livestock", "role": "main product", "keywords": ["活猪", "生猪"]},
+        {"name": "Live hog futures", "type": "futures", "role": "timely market-implied price signal", "prefix": "LH", "exchange": "DCE", "selection": "near_month_with_main_reference"},
         {"name": "Piglet", "type": "moa_livestock", "role": "leading supply signal", "keywords": ["仔猪"]},
         {"name": "Feed", "type": "moa_livestock", "role": "cost proxy", "keywords": ["活猪配合饲料", "饲料"]},
         {"name": "Hog-grain ratio", "type": "moa_livestock", "role": "cycle spread", "keywords": ["猪粮比价", "猪粮比"]},
@@ -296,6 +302,57 @@ def _fetch_moa_livestock_market(product: dict, curr_date: str) -> dict:
     }
 
 
+def _fetch_livestock_sales_announcements(symbol: str, curr_date: str, look_back_days: int) -> dict:
+    """Use company sales briefs as stable, ticker-specific hog-cycle evidence."""
+    try:
+        announcements = _fetch_announcements(symbol, curr_date, look_back_days)
+        if isinstance(announcements, TushareDataError):
+            raise announcements
+        if announcements is None or announcements.empty:
+            raise TushareDataError("No recent company announcement rows returned.")
+
+        data = announcements.copy()
+        title = data.get("title", pd.Series(dtype=str)).fillna("").astype(str)
+        mask = title.str.contains("销售简报|销售情况|商品猪|生猪销售|活猪销售", regex=True)
+        matches = data[mask].copy()
+        if matches.empty:
+            raise TushareDataError("No recent livestock sales brief announcement found.")
+
+        sort_cols = [col for col in ("ann_date", "rec_time") if col in matches.columns]
+        if sort_cols:
+            matches = matches.sort_values(sort_cols, ascending=False)
+        latest = matches.iloc[0]
+        snippets = []
+        for _, row in matches.head(3).iterrows():
+            date = _format_value(row.get("ann_date") or row.get("rec_time"))
+            snippets.append(f"{date}: {_clean_text(row.get('title', ''))}")
+        return {
+            "product": "Company monthly hog sales brief",
+            "role": "ticker-specific realized volume/price evidence",
+            "data_type": "company announcement",
+            "latest_contract_or_source": _format_value(latest.get("url") or "Tushare/CNINFO announcements"),
+            "latest_price": "Not parsed",
+            "latest_date": _format_value(latest.get("ann_date") or latest.get("rec_time")),
+            "change_over_window": "Not computed",
+            "inventory_or_receipt": "N/A",
+            "evidence_status": "Fetched stable company announcement titles; parse the PDF/text before quantifying realized price or volume.",
+            "evidence": " | ".join(snippets)[:800],
+        }
+    except Exception as exc:
+        return {
+            "product": "Company monthly hog sales brief",
+            "role": "ticker-specific realized volume/price evidence",
+            "data_type": "company announcement",
+            "latest_contract_or_source": "Tushare/CNINFO announcements",
+            "latest_price": "N/A",
+            "latest_date": "N/A",
+            "change_over_window": "N/A",
+            "inventory_or_receipt": "N/A",
+            "evidence_status": "Unavailable; do not state company realized hog price or sales volume as fact.",
+            "evidence": str(exc)[:800],
+        }
+
+
 def _latest_futures_trade_date(curr_date: str, exchange: str) -> pd.DataFrame:
     end_dt = datetime.strptime(curr_date, "%Y-%m-%d")
     fields = "ts_code,trade_date,open,high,low,close,vol,amount,oi"
@@ -320,6 +377,77 @@ def _latest_futures_trade_date(curr_date: str, exchange: str) -> pd.DataFrame:
     )
 
 
+def _contract_month_key(ts_code: object) -> int | None:
+    match = re.match(r"^[A-Za-z]+(\d{4})", str(ts_code or "").split(".")[0])
+    if not match:
+        return None
+    yy = int(match.group(1)[:2])
+    mm = int(match.group(1)[2:])
+    if mm < 1 or mm > 12:
+        return None
+    return (2000 + yy) * 100 + mm
+
+
+def _trade_month_key(trade_date: object, curr_date: str) -> int:
+    raw = re.sub(r"\D", "", str(trade_date or ""))
+    if len(raw) >= 6:
+        return int(raw[:6])
+    return int(datetime.strptime(curr_date, "%Y-%m-%d").strftime("%Y%m"))
+
+
+def _futures_curve_summary(candidates: pd.DataFrame, limit: int = 6) -> str:
+    if candidates is None or candidates.empty:
+        return "N/A"
+    curve = candidates.copy()
+    if "contract_month_key" not in curve.columns:
+        curve["contract_month_key"] = curve.get("ts_code", pd.Series(dtype=str)).map(_contract_month_key)
+    if "oi_numeric" not in curve.columns:
+        curve["oi_numeric"] = pd.to_numeric(curve.get("oi"), errors="coerce").fillna(0)
+    if "vol_numeric" not in curve.columns:
+        curve["vol_numeric"] = pd.to_numeric(curve.get("vol"), errors="coerce").fillna(0)
+    curve = curve.dropna(subset=["contract_month_key"]).copy()
+    if curve.empty:
+        return "N/A"
+    curve = curve.sort_values(["contract_month_key", "oi_numeric", "vol_numeric"], ascending=[True, False, False])
+    parts = []
+    for _, row in curve.head(limit).iterrows():
+        parts.append(
+            f"{row.get('ts_code')} close={_format_value(row.get('close'))}, "
+            f"oi={_format_value(row.get('oi'))}, vol={_format_value(row.get('vol'))}"
+        )
+    return " | ".join(parts)
+
+
+def _select_futures_contracts(candidates: pd.DataFrame, curr_date: str, selection: str) -> tuple[pd.Series, pd.Series, str]:
+    candidates = candidates.copy()
+    candidates["oi_numeric"] = pd.to_numeric(candidates.get("oi"), errors="coerce").fillna(0)
+    candidates["vol_numeric"] = pd.to_numeric(candidates.get("vol"), errors="coerce").fillna(0)
+    candidates["close_numeric"] = pd.to_numeric(candidates.get("close"), errors="coerce")
+    candidates["contract_month_key"] = candidates.get("ts_code", pd.Series(dtype=str)).map(_contract_month_key)
+
+    main_board = candidates.sort_values(["oi_numeric", "vol_numeric"], ascending=False)
+    main = main_board.iloc[0]
+
+    if selection != "near_month_with_main_reference":
+        return main, main, "selected by open interest/volume"
+
+    trade_month = _trade_month_key(main.get("trade_date"), curr_date)
+    liquid = candidates[candidates["close_numeric"].notna() & (candidates["close_numeric"] > 0)].copy()
+    if liquid.empty:
+        return main, main, "selected by open interest/volume; no liquid near-month candidate"
+
+    forward = liquid[liquid["contract_month_key"].fillna(0) >= trade_month].copy()
+    if forward.empty:
+        forward = liquid.copy()
+    forward = forward.sort_values(
+        ["contract_month_key", "oi_numeric", "vol_numeric"],
+        ascending=[True, False, False],
+    )
+    near = forward.iloc[0]
+    reason = "selected nearest active contract; main/open-interest contract kept as reference"
+    return near, main, reason
+
+
 def _fetch_futures_product(product: dict, curr_date: str, look_back_days: int) -> dict:
     name = product["name"]
     prefix = product["prefix"].upper()
@@ -332,10 +460,11 @@ def _fetch_futures_product(product: dict, curr_date: str, look_back_days: int) -
         if candidates.empty:
             raise TushareDataError(f"No {prefix} futures contract found on latest trade date.")
 
-        candidates["oi_numeric"] = pd.to_numeric(candidates.get("oi"), errors="coerce")
-        candidates["vol_numeric"] = pd.to_numeric(candidates.get("vol"), errors="coerce")
-        candidates = candidates.sort_values(["oi_numeric", "vol_numeric"], ascending=False)
-        latest = candidates.iloc[0]
+        latest, main_contract, selection_reason = _select_futures_contracts(
+            candidates,
+            curr_date,
+            str(product.get("selection", "")),
+        )
         ts_code = latest["ts_code"]
 
         _, _, start, end = _date_window(curr_date, look_back_days)
@@ -348,6 +477,13 @@ def _fetch_futures_product(product: dict, curr_date: str, look_back_days: int) -
             pct = "N/A"
 
         receipt = _fetch_futures_receipt(ts_code, exchange, str(latest.get("trade_date")))
+        main_note = ""
+        if str(main_contract.get("ts_code")) != str(ts_code):
+            main_note = (
+                f"; main_contract={main_contract.get('ts_code')} "
+                f"close={_format_value(main_contract.get('close'))}, "
+                f"oi={_format_value(main_contract.get('oi'))}"
+            )
         return {
             "product": name,
             "role": product.get("role", ""),
@@ -360,7 +496,8 @@ def _fetch_futures_product(product: dict, curr_date: str, look_back_days: int) -
             "evidence_status": "Verified by Tushare futures daily data.",
             "evidence": (
                 f"exchange={exchange}, query_exchange={latest.get('query_exchange', 'N/A')}, "
-                f"prefix={prefix}, selected by open interest/volume"
+                f"prefix={prefix}, {selection_reason}{main_note}; "
+                f"curve={_futures_curve_summary(candidates)}"
             ),
         }
     except Exception as exc:
@@ -478,6 +615,60 @@ def _infer_products(symbol: str) -> dict:
     }
 
 
+def _source_priority_rows(products: list[dict]) -> list[dict[str, str]]:
+    has_livestock = any(product.get("type") == "moa_livestock" for product in products)
+    has_futures = any(product.get("type") == "futures" for product in products)
+    has_web_spot = any(product.get("type") == "web_spot" for product in products)
+    if has_livestock:
+        return [
+            {
+                "priority": "1 - stable hard evidence",
+                "source": "official MOA monthly data + company sales announcements",
+                "use": "capacity direction, realized company price/volume after parsing",
+                "limitation": "monthly and usually delayed",
+            },
+            {
+                "priority": "2 - timely proxy",
+                "source": "DCE live-hog futures via Tushare",
+                "use": "market-implied cycle/timing signal",
+                "limitation": "proxy, not company realized spot price",
+            },
+            {
+                "priority": "3 - optional high-frequency spot",
+                "source": "authorized third-party spot datasets",
+                "use": "daily regional hog price, piglet price, slaughter weight, secondary fattening",
+                "limitation": "requires source permission and口径 validation before hard triggers",
+            },
+        ]
+    rows = [
+        {
+            "priority": "1 - company hard evidence",
+            "source": "official filings, production reports, and sales announcements",
+            "use": "realized product mix, output, unit cost, and cash-flow conversion",
+            "limitation": "usually delayed and may not include daily spot prices",
+        }
+    ]
+    if has_futures:
+        rows.append(
+            {
+                "priority": "2 - exchange market proxy",
+                "source": "Tushare futures daily data for mapped SHFE/DCE/CZCE/GFEX/INE contracts",
+                "use": "timely product-price direction, curve shape, and scenario stress",
+                "limitation": "proxy, not the company's realized selling price or mine cost curve",
+            }
+        )
+    if has_web_spot:
+        rows.append(
+            {
+                "priority": "3 - optional authorized spot",
+                "source": "whitelisted industry spot-price pages",
+                "use": "cross-check product and input spreads when exact price/date/unit is parsed",
+                "limitation": "source permission and口径 validation required before hard triggers",
+            }
+        )
+    return rows
+
+
 def get_commodity_context(ticker: str, curr_date: str, look_back_days: int = 90) -> str:
     """Return evidence-backed commodity price context for A-share companies."""
     symbol = ticker.strip().upper()
@@ -491,6 +682,9 @@ def get_commodity_context(ticker: str, curr_date: str, look_back_days: int = 90)
     mapping = _infer_products(symbol)
     products = mapping.get("products", [])
     rows = []
+    has_livestock_products = any(product.get("type") == "moa_livestock" for product in products)
+    if has_livestock_products:
+        rows.append(_fetch_livestock_sales_announcements(symbol, curr_date, max(look_back_days, 90)))
     for product in products:
         if product.get("type") == "futures":
             rows.append(_fetch_futures_product(product, curr_date, look_back_days))
@@ -506,6 +700,9 @@ def get_commodity_context(ticker: str, curr_date: str, look_back_days: int = 90)
         f"- Look-back window for futures proxies: {look_back_days} days",
         f"- Spread note: {mapping.get('spread_note', 'N/A')}",
         "",
+        "## Source Priority",
+        _markdown_table(pd.DataFrame(_source_priority_rows(products))),
+        "",
         "## Evidence Table",
     ]
 
@@ -514,15 +711,19 @@ def get_commodity_context(ticker: str, curr_date: str, look_back_days: int = 90)
     else:
         lines.append("No commodity mapping is available for this ticker.")
 
-    lines.extend(
-        [
-            "",
-            "## Analyst Instructions",
-            "- Treat Tushare futures data as a proxy only when it matches the company's main product or key input.",
-            "- Treat whitelist web pages as evidence snippets unless an exact price/date/unit is parsed and shown.",
-            "- For livestock companies, treat official MOA market pages as high-confidence cycle evidence, but do not quantify the cycle unless the exact monthly/weekly series is parsed from the source.",
-            "- Do not state R32, R125, lithium, copper, inventory, or spread changes as facts unless they appear in the evidence table.",
-            "- If the product has no reliable data source, list it as an unverified key variable instead of inventing a price change.",
+    instructions = [
+        "",
+        "## Analyst Instructions",
+        "- Treat Tushare futures data as a proxy only when it matches the company's main product or key input.",
+        "- Treat whitelist web pages as evidence snippets unless an exact price/date/unit is parsed and shown.",
+        "- Do not state R32, R125, lithium, copper, gold, inventory, or spread changes as facts unless they appear in the evidence table.",
+        "- If the product has no reliable data source, list it as an unverified key variable instead of inventing a price change.",
+    ]
+    if has_livestock_products:
+        instructions[3:3] = [
+            "- For livestock companies, prioritize stable official/company evidence first, then use timely futures or authorized spot feeds to monitor the turn.",
+            "- Treat official MOA market pages as high-confidence cycle evidence, but do not quantify the cycle unless the exact monthly/weekly series is parsed from the source.",
+            "- If the current-month breeding-sow inventory has not yet been officially released, state the latest available month and keep the current month as a verification item.",
         ]
-    )
+    lines.extend(instructions)
     return "\n".join(lines)

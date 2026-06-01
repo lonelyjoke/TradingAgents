@@ -62,6 +62,13 @@ _ASSET_QUALITY = "\u4e0d\u826f\u7387"
 _PROVISION_COVERAGE = "\u62e8\u5907\u8986\u76d6\u7387"
 _CET1 = "\u6838\u5fc3\u4e00\u7ea7\u8d44\u672c\u5145\u8db3\u7387"
 _WEALTH_MANAGEMENT = "\u8d22\u5bcc\u7ba1\u7406"
+_COPPER = "\u94dc"
+_GOLD = "\u9ec4\u91d1"
+_INVENTORY = "\u5e93\u5b58"
+_OUTPUT = "\u4ea7\u91cf"
+_UNIT_COST = "\u6210\u672c"
+_MINE_PROJECT = "\u77ff\u5c71 \u9879\u76ee\u8fdb\u5c55"
+_ACQUISITION = "\u5e76\u8d2d"
 
 _KNOWN_COMPANIES = {
     "600519.SH": ("\u8d35\u5dde\u8305\u53f0", _BAIJIU),
@@ -200,6 +207,12 @@ def _fact_queries(symbol: str, company_name: str, industry: str) -> list[str]:
             f"{name} {_MONTHLY_SALES} {_EXPORT_SALES}",
             f"{name} {_MODEL_PRICE} {_TERMINAL_DISCOUNT}",
         ]
+    elif any(keyword in industry for keyword in (_COPPER, _GOLD, "\u77ff", "\u6709\u8272")):
+        queries = [
+            f"{name} {_COPPER} {_GOLD} {_PRODUCT_PRICE} {_INVENTORY}",
+            f"{name} {_OUTPUT} {_UNIT_COST} {_ORDER_SALES_MARGIN}",
+            f"{name} {_MINE_PROJECT} {_ACQUISITION}",
+        ]
     else:
         queries = [
             f"{name} {_PRODUCT_PRICE} {_CHANNEL_INVENTORY}",
@@ -228,6 +241,34 @@ def _markdown_table(rows: list[dict[str, str]]) -> str:
         ]
         lines.append("| " + " | ".join(cells) + " |")
     return "\n".join(lines)
+
+
+def _purpose_for_profile(symbol: str, company_name: str, industry: str) -> str:
+    if symbol == "600519.SH" or _MAOTAI in company_name or _BAIJIU in industry:
+        return (
+            "fill small but thesis-critical high-frequency facts that filings and Tushare may not cover, "
+            "such as baijiu wholesale prices, channel inventory, terminal discounts, and dealer commentary."
+        )
+    if is_banking_entity(symbol, company_name=company_name, industry=industry):
+        return (
+            "corroborate bank-specific high-frequency facts that filings and Tushare may lag, such as "
+            "NIM/deposit-cost commentary, asset-quality updates, provision coverage, capital adequacy, "
+            "fee income, and policy-rate transmission."
+        )
+    if _AUTO in industry or _NEW_ENERGY in industry or "\u6bd4\u4e9a\u8fea" in company_name:
+        return (
+            "fill high-frequency auto or new-energy facts that filings and Tushare may lag, such as "
+            "terminal discounts, price-war signals, monthly sales, exports, and model-price changes."
+        )
+    if any(keyword in industry for keyword in (_COPPER, _GOLD, "\u77ff", "\u6709\u8272")):
+        return (
+            "corroborate resource-company facts that filings and Tushare may lag, such as commodity-price "
+            "moves, exchange inventories, production/cost updates, mine-project progress, and M&A milestones."
+        )
+    return (
+        "fill small but thesis-critical high-frequency facts that filings and Tushare may not cover, "
+        "such as product prices, channel inventory, sales clues, orders, and gross-margin commentary."
+    )
 
 
 def get_web_fact_check_context(
@@ -282,7 +323,7 @@ def get_web_fact_check_context(
         "",
         f"- Company: {company_name}",
         f"- Industry: {industry or 'N/A'}",
-        "- Purpose: fill small but thesis-critical high-frequency facts that filings and Tushare may not cover, such as baijiu wholesale prices, channel inventory, terminal discounts, bank NIM/deposit-cost commentary, asset-quality updates, and recent sales clues.",
+        f"- Purpose: {_purpose_for_profile(symbol, company_name, industry)}",
         "- Evidence hierarchy: official filings/announcements > exchange Q&A > reputable news/search corroboration > market rumor. This context is search corroboration unless the source itself is official.",
         "",
         "## Search Queries",
@@ -300,14 +341,23 @@ def get_web_fact_check_context(
                 "",
             ]
         )
-    lines.extend(
-        [
-            "## Analyst Instructions",
-            "- Use this context to decide what must be verified next; do not treat a single web result as filing-grade evidence.",
-            "- A hard trading trigger based on a web-searched price needs either multiple recent independent sources or an official/company source. Otherwise mark it as a watch item.",
-            "- When sources conflict, report the range and downgrade conviction rather than choosing the most convenient number.",
-            "- For Maotai, distinguish Feitian loose-bottle, original-carton, wholesale/reference price, retail price, and company ex-factory/guided price before using any number.",
-            "- For banks, do not search or reason from orders, sales volume, gross margin, channel inventory, or product-price terms. Use web facts only to corroborate NIM/deposit cost, asset quality, provision coverage, capital adequacy, fee/wealth-management, and policy-rate transmission.",
-        ]
-    )
+    instructions = [
+        "## Analyst Instructions",
+        "- Use this context to decide what must be verified next; do not treat a single web result as filing-grade evidence.",
+        "- A hard trading trigger based on a web-searched price needs either multiple recent independent sources or an official/company source. Otherwise mark it as a watch item.",
+        "- When sources conflict, report the range and downgrade conviction rather than choosing the most convenient number.",
+    ]
+    if symbol == "600519.SH" or _MAOTAI in company_name or _BAIJIU in industry:
+        instructions.append(
+            "- For Maotai, distinguish Feitian loose-bottle, original-carton, wholesale/reference price, retail price, and company ex-factory/guided price before using any number."
+        )
+    if is_banking_entity(symbol, company_name=company_name, industry=industry):
+        instructions.append(
+            "- For banks, do not search or reason from orders, sales volume, gross margin, channel inventory, or product-price terms. Use web facts only to corroborate NIM/deposit cost, asset quality, provision coverage, capital adequacy, fee/wealth-management, and policy-rate transmission."
+        )
+    if any(keyword in industry for keyword in (_COPPER, _GOLD, "\u77ff", "\u6709\u8272")):
+        instructions.append(
+            "- For resource companies, separate exchange commodity prices and inventories from company realized selling prices, unit costs, mine grades, and project execution evidence."
+        )
+    lines.extend(instructions)
     return "\n".join(lines)

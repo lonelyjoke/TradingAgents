@@ -22,6 +22,16 @@ def test_bank_queries_use_bank_specific_fact_terms():
     assert "\u6bdb\u5229\u7387" not in joined
 
 
+def test_resource_queries_use_resource_specific_fact_terms():
+    queries = web_facts._fact_queries("601899.SH", "\u7d2b\u91d1\u77ff\u4e1a", "\u94dc")
+
+    joined = " ".join(queries)
+    assert "\u94dc" in joined
+    assert "\u9ec4\u91d1" in joined
+    assert "\u77ff\u5c71 \u9879\u76ee\u8fdb\u5c55" in joined
+    assert "\u767d\u9152" not in joined
+
+
 def test_bing_news_rss_parses_source_date_and_values(monkeypatch):
     class FakeResponse:
         text = """<?xml version="1.0" encoding="utf-8"?>
@@ -89,3 +99,26 @@ def test_bing_news_rss_falls_back_when_news_endpoint_is_not_rss(monkeypatch):
 
     assert urls == ["https://www.bing.com/news/search", "https://www.bing.com/search"]
     assert rows[0].source == "Search Source"
+
+
+def test_resource_web_fact_context_uses_resource_purpose(monkeypatch):
+    monkeypatch.setattr(
+        web_facts,
+        "_company_profile",
+        lambda symbol: ("\u7d2b\u91d1\u77ff\u4e1a", "\u94dc"),
+    )
+    monkeypatch.setattr(web_facts, "_bing_news_rss", lambda *args, **kwargs: [])
+    monkeypatch.setattr(web_facts.time, "sleep", lambda seconds: None)
+
+    context = web_facts.get_web_fact_check_context(
+        "601899.SH",
+        "2026-06-01",
+        max_queries=3,
+        max_results_per_query=1,
+    )
+
+    assert "resource-company facts" in context
+    assert "\u7d2b\u91d1\u77ff\u4e1a \u94dc \u9ec4\u91d1 \u4ea7\u54c1\u4ef7\u683c \u5e93\u5b58" in context
+    assert "\u77ff\u5c71 \u9879\u76ee\u8fdb\u5c55 \u5e76\u8d2d" in context
+    assert "baijiu wholesale prices" not in context
+    assert "For resource companies" in context
