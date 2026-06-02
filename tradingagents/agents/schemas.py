@@ -581,20 +581,20 @@ class PortfolioDecision(BaseModel):
     value_stock_safety_price: Optional[str] = Field(
         default=None,
         description=(
-            "For value stocks, blue chips, cash-flow compounders, defensive "
-            "dividend names, banks, or other financially resilient mature "
-            "companies only: provide a conservative safety price or safety price "
-            "band for slow accumulation by new builders. This is not a target "
-            "price and not a stop-loss. Anchor it in financial state such as "
-            "normalized low-cycle EPS or FCF, sustainable dividend yield, book "
-            "value/PB and ROE, net cash or leverage, cash conversion, asset "
-            "quality, payout capacity, and peer/historical valuation floors. "
-            "Explain why the price has a margin of safety, why a break below it "
-            "would probably be mean-reverting if fundamentals hold, and what "
-            "financial deterioration would invalidate the safety price. If the "
-            "company is cyclical, highly leveraged, structurally declining, or "
-            "the evidence is insufficient, state that no reliable safety price "
-            "can be assigned."
+            "Standalone Safety Price / Defensive Build Anchor section content. "
+            "For financially resilient mature companies, provide a conservative "
+            "safety price or safety price band for slow accumulation by new "
+            "builders. For commodity/resource/cyclical companies, provide a "
+            "cycle-trough or stress-case build anchor if the evidence supports "
+            "one; otherwise explicitly state that no reliable safety price can "
+            "be assigned. This is not a target price and not a stop-loss. Anchor "
+            "it in financial state such as normalized low-cycle EPS or FCF, "
+            "cycle-midpoint earnings, sustainable dividend yield, book value/PB "
+            "and ROE, net cash or leverage, cash conversion, asset quality, "
+            "payout capacity, and peer/historical valuation floors. Include the "
+            "price band, formula or valuation bridge, business conditions that "
+            "must remain true, how builders should accumulate around it, and "
+            "what financial or operating deterioration would invalidate it."
         ),
     )
     reader_action_guidance: Optional[str] = Field(
@@ -1286,7 +1286,9 @@ def render_pm_decision(decision: PortfolioDecision) -> str:
     if decision.value_stock_safety_price:
         take_away_parts.extend(
             [
-                f"**Safety Price / Defensive Build Anchor**: {decision.value_stock_safety_price}",
+                "## Safety Price / Defensive Build Anchor",
+                "",
+                decision.value_stock_safety_price,
                 "",
             ]
         )

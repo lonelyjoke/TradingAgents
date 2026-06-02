@@ -172,12 +172,12 @@ class TestRenderPortfolioDecision:
             investment_thesis="The franchise is stable but not cheap enough today.",
         )
         md = render_pm_decision(decision)
-        assert "**Safety Price / Defensive Build Anchor**:" in md
+        assert "## Safety Price / Defensive Build Anchor" in md
         assert "8.0-8.5" in md
         assert md.index("**Reader Take-away / Build Price Band**") < md.index(
-            "**Safety Price / Defensive Build Anchor**"
+            "## Safety Price / Defensive Build Anchor"
         )
-        assert md.index("**Safety Price / Defensive Build Anchor**") < md.index(
+        assert md.index("## Safety Price / Defensive Build Anchor") < md.index(
             "**Reader Action Guidance / Holders vs Builders**"
         )
 
