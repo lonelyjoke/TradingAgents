@@ -23,6 +23,7 @@ class Propagator:
         recent_decision_context: str = "",
         thematic_catalyst_context: str = "",
         commodity_context: str = "",
+        shipping_context: str = "",
         filing_intelligence_context: str = "",
         peer_comparison_context: str = "",
         supply_chain_comparison_context: str = "",
@@ -37,6 +38,7 @@ class Propagator:
         baijiu_context: str = "",
         compute_leasing_context: str = "",
         dividend_defensive_context: str = "",
+        building_materials_context: str = "",
         data_coverage_context: str = "",
     ) -> Dict[str, Any]:
         """Create the initial state for the agent graph."""
@@ -48,6 +50,7 @@ class Propagator:
             "recent_decision_context": recent_decision_context,
             "thematic_catalyst_context": thematic_catalyst_context,
             "commodity_context": commodity_context,
+            "shipping_context": shipping_context,
             "filing_intelligence_context": filing_intelligence_context,
             "peer_comparison_context": peer_comparison_context,
             "supply_chain_comparison_context": supply_chain_comparison_context,
@@ -62,6 +65,7 @@ class Propagator:
             "baijiu_context": baijiu_context,
             "compute_leasing_context": compute_leasing_context,
             "dividend_defensive_context": dividend_defensive_context,
+            "building_materials_context": building_materials_context,
             "data_coverage_context": data_coverage_context,
             "investment_debate_state": InvestDebateState(
                 {

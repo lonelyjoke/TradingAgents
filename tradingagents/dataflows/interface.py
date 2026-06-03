@@ -89,6 +89,9 @@ from .compute_leasing_research import (
 from .dividend_defensive_research import (
     get_dividend_defensive_context as get_tushare_dividend_defensive_context,
 )
+from .building_materials_research import (
+    get_building_materials_context as get_tushare_building_materials_context,
+)
 
 # Configuration and routing logic
 from .config import get_config
@@ -134,6 +137,7 @@ TOOLS_CATEGORIES = {
             "get_baijiu_context",
             "get_compute_leasing_context",
             "get_dividend_defensive_context",
+            "get_building_materials_context",
         ]
     },
     "news_data": {
@@ -248,6 +252,9 @@ VENDOR_METHODS = {
     "get_dividend_defensive_context": {
         "tushare": get_tushare_dividend_defensive_context,
     },
+    "get_building_materials_context": {
+        "tushare": get_tushare_building_materials_context,
+    },
     # news_data
     "get_news": {
         "alpha_vantage": get_alpha_vantage_news,
@@ -295,6 +302,7 @@ A_SHARE_TUSHARE_METHODS = {
     "get_baijiu_context",
     "get_compute_leasing_context",
     "get_dividend_defensive_context",
+    "get_building_materials_context",
     "get_news",
     "get_company_events",
 }

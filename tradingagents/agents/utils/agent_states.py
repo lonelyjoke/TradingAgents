@@ -58,6 +58,7 @@ class AgentState(MessagesState):
     fundamentals_report: Annotated[str, "Report from the Fundamentals Researcher"]
     thematic_catalyst_context: Annotated[str, "Precomputed filing/news catalyst context"]
     commodity_context: Annotated[str, "Precomputed commodity/product-price context"]
+    shipping_context: Annotated[str, "Precomputed shipping/freight-rate cycle context"]
     filing_intelligence_context: Annotated[str, "Precomputed filing intelligence context"]
     peer_comparison_context: Annotated[str, "Precomputed same-industry peer context"]
     supply_chain_comparison_context: Annotated[str, "Precomputed cross-position chain context"]
@@ -72,6 +73,7 @@ class AgentState(MessagesState):
     baijiu_context: Annotated[str, "Precomputed gated baijiu/liquor verification context for A-share names"]
     compute_leasing_context: Annotated[str, "Precomputed gated compute-leasing verification context for A-share names"]
     dividend_defensive_context: Annotated[str, "Precomputed gated defensive-dividend verification context for A-share names"]
+    building_materials_context: Annotated[str, "Precomputed gated building-materials verification context for A-share names"]
     data_coverage_context: Annotated[str, "Audit of which precomputed context modules loaded successfully and which failed or are partial"]
 
     # researcher team discussion step
@@ -90,8 +92,10 @@ class AgentState(MessagesState):
     past_context: Annotated[str, "Memory log context injected at run start (same-ticker decisions + cross-ticker lessons)"]
     thematic_catalyst_context: Annotated[str, "Precomputed filing/news thematic cross-check for A-share names"]
     commodity_context: Annotated[str, "Precomputed commodity/product-price context for cyclical/resource A-share names"]
+    shipping_context: Annotated[str, "Precomputed shipping/freight-rate cycle context for A-share shipping names"]
     filing_intelligence_context: Annotated[str, "Precomputed non-statement operating evidence mined from A-share financial reports"]
     web_fact_check_context: Annotated[str, "Precomputed web fact-check context for high-frequency facts"]
     baijiu_context: Annotated[str, "Precomputed gated baijiu/liquor verification context for A-share names"]
     compute_leasing_context: Annotated[str, "Precomputed gated compute-leasing verification context for A-share names"]
     dividend_defensive_context: Annotated[str, "Precomputed gated defensive-dividend verification context for A-share names"]
+    building_materials_context: Annotated[str, "Precomputed gated building-materials verification context for A-share names"]

@@ -69,10 +69,30 @@ _OUTPUT = "\u4ea7\u91cf"
 _UNIT_COST = "\u6210\u672c"
 _MINE_PROJECT = "\u77ff\u5c71 \u9879\u76ee\u8fdb\u5c55"
 _ACQUISITION = "\u5e76\u8d2d"
+_SHIPPING = "\u6c34\u8fd0"
+_MARINE_SHIPPING = "\u822a\u8fd0"
+_FREIGHT_RATE = "\u8fd0\u4ef7"
+_OIL_TANKER = "\u6cb9\u8fd0"
+_TANKER = "\u6cb9\u8f6e"
+_DRY_BULK = "\u5e72\u6563\u8d27"
+_HORMUZ = "\u970d\u5c14\u6728\u5179"
+_RESTOCKING = "\u8865\u5e93"
+
+_SHIPPING_NAME_HINTS = (
+    "\u8f6e\u8239",
+    "\u822a\u8fd0",
+    "\u6d77\u80fd",
+    "\u5357\u6cb9",
+    "\u6d77\u63a7",
+)
 
 _KNOWN_COMPANIES = {
     "600519.SH": ("\u8d35\u5dde\u8305\u53f0", _BAIJIU),
     "002594.SZ": ("\u6bd4\u4e9a\u8fea", _AUTO),
+    "601872.SH": ("\u62db\u5546\u8f6e\u8239", _SHIPPING),
+    "600026.SH": ("\u4e2d\u8fdc\u6d77\u80fd", _SHIPPING),
+    "601975.SH": ("\u62db\u5546\u5357\u6cb9", _SHIPPING),
+    "601919.SH": ("\u4e2d\u8fdc\u6d77\u63a7", _SHIPPING),
 }
 
 
@@ -186,6 +206,12 @@ def _company_profile(symbol: str) -> tuple[str, str]:
     return _format_value(basic.get("name")), _format_value(basic.get("industry"))
 
 
+def _is_shipping_profile(company_name: str, industry: str) -> bool:
+    return any(keyword in industry for keyword in (_SHIPPING, _MARINE_SHIPPING)) or any(
+        keyword in company_name for keyword in _SHIPPING_NAME_HINTS
+    )
+
+
 def _fact_queries(symbol: str, company_name: str, industry: str) -> list[str]:
     name = company_name if company_name and company_name != "N/A" else symbol
     queries: list[str]
@@ -212,6 +238,13 @@ def _fact_queries(symbol: str, company_name: str, industry: str) -> list[str]:
             f"{name} {_COPPER} {_GOLD} {_PRODUCT_PRICE} {_INVENTORY}",
             f"{name} {_OUTPUT} {_UNIT_COST} {_ORDER_SALES_MARGIN}",
             f"{name} {_MINE_PROJECT} {_ACQUISITION}",
+        ]
+    elif _is_shipping_profile(name, industry):
+        queries = [
+            f"{name} VLCC TD3C TCE {_FREIGHT_RATE} {_OIL_TANKER}",
+            f"{name} BDTI CTFI {_TANKER} {_FREIGHT_RATE}",
+            f"{name} {_HORMUZ} {_RESTOCKING} {_OIL_TANKER}",
+            f"{name} BDI BCI BPI {_DRY_BULK} {_FREIGHT_RATE}",
         ]
     else:
         queries = [
@@ -264,6 +297,12 @@ def _purpose_for_profile(symbol: str, company_name: str, industry: str) -> str:
         return (
             "corroborate resource-company facts that filings and Tushare may lag, such as commodity-price "
             "moves, exchange inventories, production/cost updates, mine-project progress, and M&A milestones."
+        )
+    if _is_shipping_profile(company_name, industry):
+        return (
+            "corroborate shipping-cycle facts that filings and Tushare may lag, such as VLCC TD3C/TCE, "
+            "BDTI/BCTI/BDI proxies, CTFI China-import crude freight, Hormuz disruptions/reopening, "
+            "restocking demand, ton-mile changes, and route-specific freight-rate commentary."
         )
     return (
         "fill small but thesis-critical high-frequency facts that filings and Tushare may not cover, "
@@ -358,6 +397,13 @@ def get_web_fact_check_context(
     if any(keyword in industry for keyword in (_COPPER, _GOLD, "\u77ff", "\u6709\u8272")):
         instructions.append(
             "- For resource companies, separate exchange commodity prices and inventories from company realized selling prices, unit costs, mine grades, and project execution evidence."
+        )
+    if _is_shipping_profile(company_name, industry):
+        instructions.extend(
+            [
+                "- For shipping names, separate route-level rates (VLCC TD3C/TCE, CTFI) from broad proxies (BDTI/BCTI/BDI). Do not treat broad indices as exact voyage economics.",
+                "- Treat Hormuz reopening as a two-sided mechanism: lower risk premium and faster vessel turnover can pressure rates, while restocking, queue normalization, and renewed cargo flows can support near-term demand. Require freight-rate or cargo-flow evidence before calling it bullish or bearish.",
+            ]
         )
     lines.extend(instructions)
     return "\n".join(lines)

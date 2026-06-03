@@ -47,6 +47,7 @@ def create_trader(llm):
             profile="trader",
             keys={
                 "thematic_catalyst_context",
+                "shipping_context",
                 "filing_intelligence_context",
                 "investor_interaction_context",
                 "policy_planning_context",
@@ -57,6 +58,7 @@ def create_trader(llm):
             },
         )
         thematic_catalyst_context = prompt_contexts["thematic_catalyst_context"]
+        shipping_context = prompt_contexts["shipping_context"]
         filing_intelligence_context = prompt_contexts["filing_intelligence_context"]
         investor_interaction_context = prompt_contexts["investor_interaction_context"]
         policy_planning_context = prompt_contexts["policy_planning_context"]
@@ -77,6 +79,7 @@ def create_trader(llm):
                     "Calibrate action and ranges against market mood, sector valuation risk, stock beta/cyclicality, and company-specific quality. "
                     "Translate the core bet, expectation gap, probability/payoff, and conviction level into action and position sizing. "
                     "Treat missing thesis-critical data as a confidence cap, not as bearish evidence; do not recommend trimming solely because a data source was unavailable."
+                    " For shipping names, translate route-level freight evidence or its absence into sizing and watch triggers; do not collapse Hormuz reopening into a one-way bullish or bearish signal without freight-rate/cargo-flow confirmation."
                     f"{get_evidence_instruction()}"
                     f"{get_research_gap_instruction()}"
                     f"{get_supply_demand_fallback_instruction()}"
@@ -102,6 +105,7 @@ def create_trader(llm):
                     f"social media sentiment. Use this plan as a foundation for evaluating your next "
                     f"trading decision.\n\nProposed Investment Plan: {investment_plan}\n\n"
                     f"Verified thematic catalyst bridge: {thematic_catalyst_context}\n\n"
+                    f"Shipping/freight-rate context: {shipping_context}\n\n"
                     f"Financial-report intelligence and promoted discussion items: {filing_intelligence_context}\n\n"
                     f"Official investor-interaction context: {investor_interaction_context}\n\n"
                     f"Official policy-planning context: {policy_planning_context}\n\n"

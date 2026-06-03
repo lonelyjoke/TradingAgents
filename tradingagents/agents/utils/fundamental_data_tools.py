@@ -385,3 +385,19 @@ def get_dividend_defensive_context(
         look_back_years,
         peer_limit,
     )
+
+
+@tool
+def get_building_materials_context(
+    ticker: Annotated[str, "ticker symbol"],
+    curr_date: Annotated[str, "current date you are trading at, yyyy-mm-dd"],
+    look_back_days: Annotated[int, "financial report look-back window in days"] = 900,
+) -> str:
+    """
+    Run a gated building-materials verification layer for A-share names. It
+    returns not_applicable unless the target is a cement, waterproofing, glass,
+    fiberglass, gypsum-board, pipe, coating, ceramic, hardware, or wood-panel
+    company, then frames sector-native cycle, price/cost, channel, working
+    capital, low-PB, and dividend-trap checks.
+    """
+    return route_to_vendor("get_building_materials_context", ticker, curr_date, look_back_days)

@@ -732,6 +732,13 @@ def save_report_to_disk(final_state, ticker: str, save_path: Path):
             final_state["commodity_context"],
             encoding="utf-8",
         )
+    if final_state.get("shipping_context"):
+        context_dir = save_path / "0_context"
+        context_dir.mkdir(exist_ok=True)
+        (context_dir / "shipping_context.md").write_text(
+            final_state["shipping_context"],
+            encoding="utf-8",
+        )
     if final_state.get("filing_intelligence_context"):
         context_dir = save_path / "0_context"
         context_dir.mkdir(exist_ok=True)
@@ -828,6 +835,13 @@ def save_report_to_disk(final_state, ticker: str, save_path: Path):
         context_dir.mkdir(exist_ok=True)
         (context_dir / "dividend_defensive_context.md").write_text(
             final_state["dividend_defensive_context"],
+            encoding="utf-8",
+        )
+    if final_state.get("building_materials_context"):
+        context_dir = save_path / "0_context"
+        context_dir.mkdir(exist_ok=True)
+        (context_dir / "building_materials_context.md").write_text(
+            final_state["building_materials_context"],
             encoding="utf-8",
         )
 

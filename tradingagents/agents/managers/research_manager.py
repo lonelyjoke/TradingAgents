@@ -6,6 +6,7 @@ from tradingagents.agents.schemas import ResearchPlan, render_research_plan
 from tradingagents.agents.utils.agent_utils import (
     build_instrument_context,
     get_baijiu_instruction,
+    get_building_materials_instruction,
     get_buy_side_thesis_instruction,
     get_buy_side_underwriting_modules_instruction,
     get_compute_leasing_instruction,
@@ -55,6 +56,7 @@ def create_research_manager(llm):
         prompt_contexts = compact_state_fields(state, profile="research")
         thematic_catalyst_context = prompt_contexts["thematic_catalyst_context"]
         commodity_context = prompt_contexts["commodity_context"]
+        shipping_context = prompt_contexts["shipping_context"]
         filing_intelligence_context = prompt_contexts["filing_intelligence_context"]
         peer_comparison_context = prompt_contexts["peer_comparison_context"]
         supply_chain_comparison_context = prompt_contexts["supply_chain_comparison_context"]
@@ -69,6 +71,7 @@ def create_research_manager(llm):
         baijiu_context = prompt_contexts["baijiu_context"]
         compute_leasing_context = prompt_contexts["compute_leasing_context"]
         dividend_defensive_context = prompt_contexts["dividend_defensive_context"]
+        building_materials_context = prompt_contexts["building_materials_context"]
         data_coverage_context = prompt_contexts["data_coverage_context"]
         prompt_history = compact_debate_history(history, profile="research")
         continuity_context = (
@@ -155,9 +158,11 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 - If the filing context contains a Business Segment Valuation Map or Segment Economics Pack, keep a **Business Segment Valuation Verdict** explicit enough to split mature core businesses from emerging second curves, geographies, and channels. Do not allow the debate to collapse a multi-business company into one blended PE unless the filings do not support a meaningful split.
 - If the filing context contains Internal Filing Quality Modules, keep a **Filing Internal Quality Verdict** explicit enough to summarize accounting reconciliation, segment economics, footnotes, cash-flow quality, capex/CIP returns, MD&A text changes, non-recurring profit quality, balance-sheet leading signals, shareholder-return authenticity, and disclosure quality. Synthesize the material points; do not mechanically repeat all ten if some are immaterial.
 - If commodity/product-price context is available, keep a **Commodity Cycle Verdict** explicit enough to say whether the product-price evidence supports or contradicts the margin/EPS/inventory part of the thesis.
+- If shipping/freight-rate context is available, keep a **Shipping Cycle Verdict** explicit enough to separate broad proxies (BDTI/BCTI/BDI/BCI/BPI) from route-level economics (VLCC TD3C/TCE/CTFI), and explicitly test two-sided Hormuz mechanisms: reopening can reduce risk premium and improve vessel turnover, while restocking, queue normalization, and renewed cargo flows can support near-term cargo demand. Missing route-level freight is a conviction cap, not automatically bearish evidence.
 - If gated baijiu context says `Status: triggered`, keep a **Baijiu Channel Verification Verdict** explicit enough to separate product wholesale price evidence, channel inventory/payment quality, contract-liability seasonality, product mix, peer-basket comparison, and missing data. If it says `Status: not_applicable`, do not force baijiu analysis into the stock.
 - If gated compute-leasing context says `Status: triggered`, keep a **Compute-Leasing Verification Verdict** explicit enough to separate legacy value, verified compute-leasing value, unverified compute optionality, unit-economics gaps, capex/funding risk, and transition credibility. If it says `Status: not_applicable`, do not force compute-leasing analysis into the stock.
 - If gated dividend-defensive context says `Status: triggered`, keep a **Dividend Defensive Verdict** explicit enough to say whether this is a true defensive dividend candidate, a dividend-trap risk, or inferior to peer alternatives. If it says `Status: not_applicable`, do not force a high-dividend thesis into the stock.
+- If gated building-materials context says `Status: triggered`, use it as a discipline layer: anchor first on company filings and management wording, then classify the industry stage and likely evolution path, and then cover product price/ASP, regional demand, property-completion/infrastructure/renovation exposure, capacity/utilization, upstream costs, inventory, receivables, cash collection, payout safety, and whether low PB/high dividend is real safety or a value trap. Add a dedicated **Building Materials Operating Cycle Verdict** only when it changes the rating, valuation, sizing, or action plan; otherwise integrate the relevant points into the main business/valuation/risk discussion. Treat repurchases and dividends as shareholder-return, safety-margin, and controlling-shareholder-attitude evidence, not as the whole thesis. If it says `Status: not_applicable`, do not force building-materials logic into the stock.
 - If verified but non-base-case optionality matters, keep a **Strategic Optionality Verdict** explicit enough that downstream agents do not erase a second growth curve, investee holding, asset revaluation path, or live thematic catalyst merely because it does not flip today's rating.
 - If the thematic valuation bridge contains material `asset-revaluation` or primary-investment holdings, build an explicit **Primary Investment NAV Verdict**. Separate operating earnings from investee/NAV value; use conservative/base/upside values with liquidity, lock-up, exit-probability, and double-counting haircuts. Do not collapse verified non-listed equity holdings into a vague "small imagination premium" when ownership value, materiality, and an IPO/exit path are disclosed.
 - Always read the Data Coverage Audit before ruling. If a module is failed, missing, or partial and touches the core bet, explicitly state the gap and cap conviction; do not let the final plan sound more certain than the data coverage allows.
@@ -171,6 +176,9 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 
 **Commodity/Product-Price Context:**
 {commodity_context}
+
+**Shipping/Freight-Rate Context:**
+{shipping_context}
 
 **Financial-Report Intelligence:**
 {filing_intelligence_context}
@@ -214,6 +222,9 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 **Gated Dividend Defensive Verification Context:**
 {dividend_defensive_context}
 
+**Gated Building-Materials Verification Context:**
+{building_materials_context}
+
 **Data Coverage Audit:**
 {data_coverage_context}
 
@@ -242,6 +253,7 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 {get_baijiu_instruction()}
 {get_compute_leasing_instruction()}
 {get_dividend_defensive_instruction()}
+{get_building_materials_instruction()}
 {get_fair_cycle_valuation_instruction()}
 {get_focused_report_instruction()}
 If a bull or bear argument contains an exact product price, inventory figure, product spread, percentage change, or date-specific market claim that is not supported by the analyst reports or corroborated web fact-check context, downgrade that argument and list it as an unverified key assumption."""

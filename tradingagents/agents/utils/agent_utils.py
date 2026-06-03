@@ -25,6 +25,7 @@ from tradingagents.agents.utils.fundamental_data_tools import (
     get_market_timing_context,
     get_management_capital_allocation_context,
     get_baijiu_context,
+    get_building_materials_context,
     get_peer_comparison,
     get_price_earnings_decomposition_context,
     get_shareholder_structure_context,
@@ -201,6 +202,40 @@ def get_dividend_defensive_instruction() -> str:
         "the target against them and state whether the entered ticker is the "
         "best defensive expression, should be paired for diversification, or "
         "should be substituted by a higher-quality/lower-risk peer."
+    )
+
+
+def get_building_materials_instruction() -> str:
+    """Return rules for gated A-share building-materials analysis."""
+    return (
+        " Building-materials gate: only use building-materials-specific logic "
+        "when the supplied building-materials context says `Status: triggered`, "
+        "or when official filings independently show cement, waterproofing, "
+        "glass/fiberglass, gypsum-board, pipe, coating, ceramic-tile, hardware, "
+        "wood-panel, or other building-material operations. When triggered, "
+        "use it as a discipline layer, not a replacement for the core memo. "
+        "Anchor on company filings and management wording, then classify "
+        "the industry stage and likely evolution path, and then use product ASP, "
+        "regional demand, property-completion or infrastructure "
+        "exposure, renovation/retail versus engineering channel mix, capacity "
+        "and utilization, upstream energy/raw-material costs, inventory, "
+        "receivables, impairment, cash collection, and maintenance capex. "
+        "For cement/glass/fiberglass names, require price, inventory, cost, and "
+        "utilization evidence before treating a cycle inflection as proven. For "
+        "waterproofing/coating/pipe/hardware names, require channel health, "
+        "receivable quality, impairment, and cash-collection evidence before "
+        "calling revenue growth investable. For low-PB/high-dividend building "
+        "material leaders, explicitly explain why book-value discount or dividend "
+        "yield is not enough unless asset value, payout coverage, cash conversion, "
+        "and capital-allocation proof all hold. Treat buyback/dividend analysis "
+        "as shareholder-return, safety-margin, and controlling-shareholder-attitude "
+        "evidence, but do not let it crowd out operating evidence from filings "
+        "or the industry-cycle interpretation. Add a dedicated building-materials "
+        "verdict only when it changes rating, valuation, sizing, or action; "
+        "otherwise integrate the relevant points into the business, valuation, "
+        "or risk discussion. If the context says "
+        "`Status: not_applicable`, do not inject cement/property-completion "
+        "logic unless other primary evidence proves relevance."
     )
 
 

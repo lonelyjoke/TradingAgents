@@ -44,12 +44,14 @@ def create_aggressive_debator(llm):
                 "filing_intelligence_context",
                 "investor_interaction_context",
                 "policy_planning_context",
+                "shipping_context",
                 "compute_leasing_context",
                 "dividend_defensive_context",
             },
         )
         thematic_catalyst_context = prompt_contexts["thematic_catalyst_context"]
         commodity_context = prompt_contexts["commodity_context"]
+        shipping_context = prompt_contexts["shipping_context"]
         filing_intelligence_context = prompt_contexts["filing_intelligence_context"]
         investor_interaction_context = prompt_contexts["investor_interaction_context"]
         policy_planning_context = prompt_contexts["policy_planning_context"]
@@ -83,6 +85,7 @@ Latest World Affairs Report: {news_report}
 Company Fundamentals Report: {fundamentals_report}
 Verified Thematic Catalyst Bridge: {thematic_catalyst_context}
 Commodity/Product-Price Context: {commodity_context}
+Shipping/Freight-Rate Context: {shipping_context}
 Financial-Report Intelligence And Promoted Discussion Items: {filing_intelligence_context}
 Official Investor-Interaction Context: {investor_interaction_context}
 Official Policy-Planning Context: {policy_planning_context}
@@ -90,7 +93,7 @@ Gated Compute-Leasing Verification Context: {compute_leasing_context}
 Gated Dividend Defensive Verification Context: {dividend_defensive_context}
 Here is the current conversation history: {prompt_history} Here are the last arguments from the conservative analyst: {prompt_conservative_response} Here are the last arguments from the neutral analyst: {prompt_neutral_response}. If there are no responses from the other viewpoints yet, present your own argument based on the available data.
 
-Engage actively by addressing any specific concerns raised, refuting the weaknesses in their logic, and asserting the benefits of risk-taking to outpace market norms. Maintain a focus on debating and persuading, not just presenting data. Challenge each counterpoint to underscore why a high-risk approach is optimal. For commodity/resource/cyclical names, explicitly test whether product-price evidence supports or contradicts the risk stance. Preserve core discussion items that matter to the thesis even when they are optionality rather than base-case proof. {get_evidence_instruction()} {get_research_gap_instruction()} {get_supply_demand_fallback_instruction()} {get_buy_side_thesis_instruction()} {get_fair_cycle_valuation_instruction()} {get_thematic_valuation_instruction()} {get_filing_intelligence_instruction()} {get_investor_interaction_instruction()} {get_policy_planning_instruction()} {get_compute_leasing_instruction()} {get_dividend_defensive_instruction()} {get_focused_report_instruction()} Output conversationally as if you are speaking without any special formatting."""
+Engage actively by addressing any specific concerns raised, refuting the weaknesses in their logic, and asserting the benefits of risk-taking to outpace market norms. Maintain a focus on debating and persuading, not just presenting data. Challenge each counterpoint to underscore why a high-risk approach is optimal. For commodity/resource/cyclical names, explicitly test whether product-price evidence supports or contradicts the risk stance. For shipping names, use freight-rate context to decide whether missing route data is a sizing cap or whether available proxy/company evidence still supports taking risk; test both Hormuz risk-premium compression and restocking/cargo-flow upside. Preserve core discussion items that matter to the thesis even when they are optionality rather than base-case proof. {get_evidence_instruction()} {get_research_gap_instruction()} {get_supply_demand_fallback_instruction()} {get_buy_side_thesis_instruction()} {get_fair_cycle_valuation_instruction()} {get_thematic_valuation_instruction()} {get_filing_intelligence_instruction()} {get_investor_interaction_instruction()} {get_policy_planning_instruction()} {get_compute_leasing_instruction()} {get_dividend_defensive_instruction()} {get_focused_report_instruction()} Output conversationally as if you are speaking without any special formatting."""
 
         response = llm.invoke(prompt)
 

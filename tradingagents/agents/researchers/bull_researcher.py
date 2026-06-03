@@ -2,6 +2,7 @@
 
 from tradingagents.agents.utils.agent_utils import (
     get_baijiu_instruction,
+    get_building_materials_instruction,
     get_buy_side_thesis_instruction,
     get_compute_leasing_instruction,
     get_dividend_defensive_instruction,
@@ -46,6 +47,7 @@ def create_bull_researcher(llm):
         prompt_contexts = compact_state_fields(state, profile="research")
         thematic_catalyst_context = prompt_contexts["thematic_catalyst_context"]
         commodity_context = prompt_contexts["commodity_context"]
+        shipping_context = prompt_contexts["shipping_context"]
         filing_intelligence_context = prompt_contexts["filing_intelligence_context"]
         peer_comparison_context = prompt_contexts["peer_comparison_context"]
         supply_chain_comparison_context = prompt_contexts["supply_chain_comparison_context"]
@@ -60,6 +62,7 @@ def create_bull_researcher(llm):
         baijiu_context = prompt_contexts["baijiu_context"]
         compute_leasing_context = prompt_contexts["compute_leasing_context"]
         dividend_defensive_context = prompt_contexts["dividend_defensive_context"]
+        building_materials_context = prompt_contexts["building_materials_context"]
         prompt_history = compact_debate_history(history, profile="research")
         prompt_current_response = compact_for_prompt(
             current_response,
@@ -94,6 +97,7 @@ Key points to focus on:
 - Investor-Interaction Discipline: If official Q&A context is available, discuss what investors are repeatedly worried about, whether management answered substantively or evasively, and whether the answer pattern strengthens the bull case through credibility, disclosure quality, or catalyst visibility.
 - Policy-Planning Discipline: If official national or industry policy context is available, explain whether policy widens the industry's future demand pool, whether this company has a credible transmission path into orders/revenue/margins, and whether policy support improves the durability of the bull case rather than merely adding slogans.
 - Commodity/Product-Price Discipline: If commodity/product-price context is available, use it as a hard cycle variable. Explain whether product prices, spreads, or futures proxies support ASP, margin, inventory, and cash-flow improvement; do not substitute thematic news for commodity evidence.
+- Shipping/Freight-Rate Discipline: If shipping context is available, use it as the hard freight-cycle layer. Separate broad proxies (BDTI/BCTI/BDI) from route-level rates (VLCC TD3C/TCE/CTFI), and test whether Hormuz reopening creates a bullish restocking/ton-mile/cargo-flow expectation rather than only reducing risk premium.
 - Industry-Driver Discipline: Use the industry reading pack from the filing context to identify the sector-native variables that truly decide the thesis, then connect each one to outside evidence such as policy, investor Q&A, thematic catalysts, peers, and market expectations. Do not lean on generic revenue growth when the real industry question is backlog quality, NBV, channel inventory, asset quality, utilization, or freight rate.
 - Business-Segment Valuation Discipline: Use the Business Segment Valuation Map and Segment Economics Pack to argue from business buckets, not only from consolidated PE. Separate the mature core business from emerging second curves, geography, and channel mix; explain which bucket deserves core valuation credit and which remains scenario/SOTP optionality.
 - Relative Allocation Discipline: Explicitly answer why this stock deserves capital versus stronger same-industry peers or a better-positioned segment elsewhere in the chain; do not stop at saying the company itself is improving.
@@ -103,6 +107,7 @@ Key points to focus on:
 - Baijiu Discipline: If gated baijiu context says `Status: triggered`, the bull case must pass channel-price, contract-liability seasonality, product mix, cash conversion, and peer-basket checks. If prices or peers are missing, keep the thesis evidence-limited.
 - Compute-Leasing Discipline: If gated compute-leasing context says `Status: triggered`, make the bull case pass asset, contract, unit-economics, capex/funding, and transition-credibility gates. If it says `Status: not_applicable`, do not use compute leasing as a bull theme.
 - Dividend-Defensive Discipline: If gated dividend defensive context says `Status: triggered`, argue only from sustainable payout evidence: dividend stability, profit/cash-flow or bank-capital coverage, non-declining industry logic, valuation buffer, and alternatives. Do not call a high yield defensive if the context flags dividend-trap risk.
+- Building-Materials Discipline: If gated building-materials context says `Status: triggered`, use it to discipline the bull case rather than expand the memo mechanically. Anchor on company filings and management wording, then state the industry stage and likely evolution path, then pass sector-native checks: product ASP or price inflection, regional demand, property-completion/infrastructure/renovation exposure, capacity and utilization, upstream energy/raw-material costs, inventory, receivables, cash collection, and capital-return proof. For low-PB/high-dividend names, explain why the discount is mispriced rather than a value trap; buybacks and dividends are shareholder-return and safety-margin evidence, not substitutes for operating proof.
 - Bear Counterpoints: Critically analyze the bear argument with specific data and sound reasoning, addressing concerns thoroughly and showing why the bull perspective holds stronger merit.
 - Engagement: Present your argument in a conversational style, engaging directly with the bear analyst's points and debating effectively rather than just listing data.
 - Anti-repetition discipline: {round_instruction}
@@ -114,6 +119,7 @@ Latest world affairs news: {news_report}
 Company fundamentals report: {fundamentals_report}
 Thematic catalyst cross-check and valuation bridge: {thematic_catalyst_context}
 Commodity/product-price context: {commodity_context}
+Shipping/freight-rate context: {shipping_context}
 Financial-report intelligence: {filing_intelligence_context}
 Same-industry peer comparison: {peer_comparison_context}
 Cross-position supply-chain comparison: {supply_chain_comparison_context}
@@ -128,6 +134,7 @@ Web fact-check context: {web_fact_check_context}
 Gated baijiu verification context: {baijiu_context}
 Gated compute-leasing verification context: {compute_leasing_context}
 Gated dividend defensive verification context: {dividend_defensive_context}
+Gated building-materials verification context: {building_materials_context}
 Conversation history of the debate: {prompt_history}
 Last bear argument: {prompt_current_response}
 Use this information to deliver a compelling bull argument, refute the bear's concerns, and engage in a dynamic debate that demonstrates the strengths of the bull position.
@@ -152,6 +159,7 @@ Use this information to deliver a compelling bull argument, refute the bear's co
 {get_baijiu_instruction()}
 {get_compute_leasing_instruction()}
 {get_dividend_defensive_instruction()}
+{get_building_materials_instruction()}
 {get_focused_report_instruction()}
 """
 

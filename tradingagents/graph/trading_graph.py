@@ -58,6 +58,7 @@ from tradingagents.agents.utils.agent_utils import (
     get_market_timing_context,
     get_management_capital_allocation_context,
     get_baijiu_context,
+    get_building_materials_context,
     get_policy_planning_context,
     get_peer_comparison,
     get_price_earnings_decomposition_context,
@@ -81,6 +82,7 @@ def _build_precomputed_data_coverage(
     *,
     thematic_catalyst_context: str,
     commodity_context: str,
+    shipping_context: str,
     filing_intelligence_context: str,
     peer_comparison_context: str,
     supply_chain_comparison_context: str,
@@ -95,11 +97,13 @@ def _build_precomputed_data_coverage(
     baijiu_context: str,
     compute_leasing_context: str,
     dividend_defensive_context: str,
+    building_materials_context: str,
 ) -> str:
     return build_data_coverage_context(
         {
             "thematic_catalyst": thematic_catalyst_context,
             "commodity_product_price": commodity_context,
+            "shipping_cycle": shipping_context,
             "financial_report_intelligence": filing_intelligence_context,
             "peer_comparison": peer_comparison_context,
             "supply_chain_comparison": supply_chain_comparison_context,
@@ -114,6 +118,7 @@ def _build_precomputed_data_coverage(
             "baijiu": baijiu_context,
             "compute_leasing": compute_leasing_context,
             "dividend_defensive": dividend_defensive_context,
+            "building_materials": building_materials_context,
         }
     )
 
@@ -125,6 +130,7 @@ _A_SHARE_CONTEXT_SPECS = [
         "Thematic catalyst cross-check",
     ),
     ("commodity_context", "get_commodity_context", "Commodity/product-price context"),
+    ("shipping_context", "get_shipping_context", "Shipping/freight-rate context"),
     (
         "filing_intelligence_context",
         "get_financial_report_intelligence_context",
@@ -174,6 +180,11 @@ _A_SHARE_CONTEXT_SPECS = [
         "dividend_defensive_context",
         "get_dividend_defensive_context",
         "Dividend defensive verification context",
+    ),
+    (
+        "building_materials_context",
+        "get_building_materials_context",
+        "Building-materials verification context",
     ),
 ]
 
@@ -360,6 +371,7 @@ class TradingAgentsGraph:
                     get_baijiu_context,
                     get_compute_leasing_context,
                     get_dividend_defensive_context,
+                    get_building_materials_context,
                 ]
             ),
         }
@@ -555,6 +567,7 @@ class TradingAgentsGraph:
         )
         thematic_catalyst_context = contexts["thematic_catalyst_context"]
         commodity_context = contexts["commodity_context"]
+        shipping_context = contexts["shipping_context"]
         filing_intelligence_context = contexts["filing_intelligence_context"]
         peer_comparison_context = contexts["peer_comparison_context"]
         supply_chain_comparison_context = contexts["supply_chain_comparison_context"]
@@ -569,9 +582,11 @@ class TradingAgentsGraph:
         baijiu_context = contexts["baijiu_context"]
         compute_leasing_context = contexts["compute_leasing_context"]
         dividend_defensive_context = contexts["dividend_defensive_context"]
+        building_materials_context = contexts["building_materials_context"]
         data_coverage_context = _build_precomputed_data_coverage(
             thematic_catalyst_context=thematic_catalyst_context,
             commodity_context=commodity_context,
+            shipping_context=shipping_context,
             filing_intelligence_context=filing_intelligence_context,
             peer_comparison_context=peer_comparison_context,
             supply_chain_comparison_context=supply_chain_comparison_context,
@@ -586,6 +601,7 @@ class TradingAgentsGraph:
             baijiu_context=baijiu_context,
             compute_leasing_context=compute_leasing_context,
             dividend_defensive_context=dividend_defensive_context,
+            building_materials_context=building_materials_context,
         )
         return self.propagator.create_initial_state(
             company_name,
@@ -594,6 +610,7 @@ class TradingAgentsGraph:
             recent_decision_context=recent_decision_context,
             thematic_catalyst_context=thematic_catalyst_context,
             commodity_context=commodity_context,
+            shipping_context=shipping_context,
             filing_intelligence_context=filing_intelligence_context,
             peer_comparison_context=peer_comparison_context,
             supply_chain_comparison_context=supply_chain_comparison_context,
@@ -608,6 +625,7 @@ class TradingAgentsGraph:
             baijiu_context=baijiu_context,
             compute_leasing_context=compute_leasing_context,
             dividend_defensive_context=dividend_defensive_context,
+            building_materials_context=building_materials_context,
             data_coverage_context=data_coverage_context,
         )
 
@@ -621,6 +639,7 @@ class TradingAgentsGraph:
         contexts = self._fetch_a_share_contexts(company_name, trade_date)
         thematic_catalyst_context = contexts["thematic_catalyst_context"]
         commodity_context = contexts["commodity_context"]
+        shipping_context = contexts["shipping_context"]
         filing_intelligence_context = contexts["filing_intelligence_context"]
         peer_comparison_context = contexts["peer_comparison_context"]
         supply_chain_comparison_context = contexts["supply_chain_comparison_context"]
@@ -635,9 +654,11 @@ class TradingAgentsGraph:
         baijiu_context = contexts["baijiu_context"]
         compute_leasing_context = contexts["compute_leasing_context"]
         dividend_defensive_context = contexts["dividend_defensive_context"]
+        building_materials_context = contexts["building_materials_context"]
         data_coverage_context = _build_precomputed_data_coverage(
             thematic_catalyst_context=thematic_catalyst_context,
             commodity_context=commodity_context,
+            shipping_context=shipping_context,
             filing_intelligence_context=filing_intelligence_context,
             peer_comparison_context=peer_comparison_context,
             supply_chain_comparison_context=supply_chain_comparison_context,
@@ -652,6 +673,7 @@ class TradingAgentsGraph:
             baijiu_context=baijiu_context,
             compute_leasing_context=compute_leasing_context,
             dividend_defensive_context=dividend_defensive_context,
+            building_materials_context=building_materials_context,
         )
         init_agent_state = self.propagator.create_initial_state(
             company_name,
@@ -660,6 +682,7 @@ class TradingAgentsGraph:
             recent_decision_context=recent_decision_context,
             thematic_catalyst_context=thematic_catalyst_context,
             commodity_context=commodity_context,
+            shipping_context=shipping_context,
             filing_intelligence_context=filing_intelligence_context,
             peer_comparison_context=peer_comparison_context,
             supply_chain_comparison_context=supply_chain_comparison_context,
@@ -674,6 +697,7 @@ class TradingAgentsGraph:
             baijiu_context=baijiu_context,
             compute_leasing_context=compute_leasing_context,
             dividend_defensive_context=dividend_defensive_context,
+            building_materials_context=building_materials_context,
             data_coverage_context=data_coverage_context,
         )
         args = self.propagator.get_graph_args()
@@ -727,6 +751,9 @@ class TradingAgentsGraph:
             "commodity_context": final_state.get(
                 "commodity_context", ""
             ),
+            "shipping_context": final_state.get(
+                "shipping_context", ""
+            ),
             "filing_intelligence_context": final_state.get(
                 "filing_intelligence_context", ""
             ),
@@ -768,6 +795,9 @@ class TradingAgentsGraph:
             ),
             "dividend_defensive_context": final_state.get(
                 "dividend_defensive_context", ""
+            ),
+            "building_materials_context": final_state.get(
+                "building_materials_context", ""
             ),
             "data_coverage_context": final_state.get(
                 "data_coverage_context", ""
