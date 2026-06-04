@@ -23,6 +23,7 @@ class Propagator:
         recent_decision_context: str = "",
         thematic_catalyst_context: str = "",
         commodity_context: str = "",
+        price_move_attribution_context: str = "",
         shipping_context: str = "",
         filing_intelligence_context: str = "",
         peer_comparison_context: str = "",
@@ -39,6 +40,11 @@ class Propagator:
         compute_leasing_context: str = "",
         dividend_defensive_context: str = "",
         building_materials_context: str = "",
+        biopharma_context: str = "",
+        software_context: str = "",
+        insurance_context: str = "",
+        medical_device_context: str = "",
+        metals_mining_context: str = "",
         data_coverage_context: str = "",
     ) -> Dict[str, Any]:
         """Create the initial state for the agent graph."""
@@ -50,6 +56,7 @@ class Propagator:
             "recent_decision_context": recent_decision_context,
             "thematic_catalyst_context": thematic_catalyst_context,
             "commodity_context": commodity_context,
+            "price_move_attribution_context": price_move_attribution_context,
             "shipping_context": shipping_context,
             "filing_intelligence_context": filing_intelligence_context,
             "peer_comparison_context": peer_comparison_context,
@@ -66,6 +73,11 @@ class Propagator:
             "compute_leasing_context": compute_leasing_context,
             "dividend_defensive_context": dividend_defensive_context,
             "building_materials_context": building_materials_context,
+            "biopharma_context": biopharma_context,
+            "software_context": software_context,
+            "insurance_context": insurance_context,
+            "medical_device_context": medical_device_context,
+            "metals_mining_context": metals_mining_context,
             "data_coverage_context": data_coverage_context,
             "investment_debate_state": InvestDebateState(
                 {

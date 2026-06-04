@@ -92,6 +92,12 @@ from .dividend_defensive_research import (
 from .building_materials_research import (
     get_building_materials_context as get_tushare_building_materials_context,
 )
+from .biopharma_research import get_biopharma_context as get_tushare_biopharma_context
+from .software_research import get_software_context as get_tushare_software_context
+from .insurance_research import get_insurance_context as get_tushare_insurance_context
+from .medical_device_research import get_medical_device_context as get_tushare_medical_device_context
+from .metals_mining_research import get_metals_mining_context as get_tushare_metals_mining_context
+from .price_move_attribution_research import get_price_move_attribution_context as get_tushare_price_move_attribution_context
 
 # Configuration and routing logic
 from .config import get_config
@@ -118,6 +124,7 @@ TOOLS_CATEGORIES = {
             "get_cashflow",
             "get_income_statement",
             "get_commodity_context",
+            "get_price_move_attribution_context",
             "get_shipping_context",
             "get_peer_comparison",
             "get_supply_chain_comparison",
@@ -138,6 +145,11 @@ TOOLS_CATEGORIES = {
             "get_compute_leasing_context",
             "get_dividend_defensive_context",
             "get_building_materials_context",
+            "get_biopharma_context",
+            "get_software_context",
+            "get_insurance_context",
+            "get_medical_device_context",
+            "get_metals_mining_context",
         ]
     },
     "news_data": {
@@ -194,6 +206,9 @@ VENDOR_METHODS = {
     },
     "get_commodity_context": {
         "tushare": get_tushare_commodity_context,
+    },
+    "get_price_move_attribution_context": {
+        "tushare": get_tushare_price_move_attribution_context,
     },
     "get_shipping_context": {
         "tushare": get_tushare_shipping_context,
@@ -255,6 +270,21 @@ VENDOR_METHODS = {
     "get_building_materials_context": {
         "tushare": get_tushare_building_materials_context,
     },
+    "get_biopharma_context": {
+        "tushare": get_tushare_biopharma_context,
+    },
+    "get_software_context": {
+        "tushare": get_tushare_software_context,
+    },
+    "get_insurance_context": {
+        "tushare": get_tushare_insurance_context,
+    },
+    "get_medical_device_context": {
+        "tushare": get_tushare_medical_device_context,
+    },
+    "get_metals_mining_context": {
+        "tushare": get_tushare_metals_mining_context,
+    },
     # news_data
     "get_news": {
         "alpha_vantage": get_alpha_vantage_news,
@@ -283,6 +313,7 @@ A_SHARE_TUSHARE_METHODS = {
     "get_cashflow",
     "get_income_statement",
     "get_commodity_context",
+    "get_price_move_attribution_context",
     "get_shipping_context",
     "get_peer_comparison",
     "get_supply_chain_comparison",
@@ -303,6 +334,11 @@ A_SHARE_TUSHARE_METHODS = {
     "get_compute_leasing_context",
     "get_dividend_defensive_context",
     "get_building_materials_context",
+    "get_biopharma_context",
+    "get_software_context",
+    "get_insurance_context",
+    "get_medical_device_context",
+    "get_metals_mining_context",
     "get_news",
     "get_company_events",
 }

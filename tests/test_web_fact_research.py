@@ -32,6 +32,52 @@ def test_resource_queries_use_resource_specific_fact_terms():
     assert "\u767d\u9152" not in joined
 
 
+def test_biopharma_fact_queries_prioritize_clinical_and_regulatory_terms():
+    queries = web_facts._fact_queries(
+        "688235.SH",
+        "\u767e\u6d4e\u795e\u5dde",
+        "\u751f\u7269\u533b\u836f",
+    )
+
+    joined = " ".join(queries)
+    assert "\u4e34\u5e8a" in joined
+    assert "\u7ba1\u7ebf" in joined
+    assert "NMPA" in joined
+    assert "FDA" in joined
+    assert "\u4ea7\u54c1\u4ef7\u683c \u6e20\u9053\u5e93\u5b58" not in joined
+
+
+def test_pharma_services_fact_queries_prioritize_cro_cdmo_order_risk():
+    queries = web_facts._fact_queries(
+        "603259.SH",
+        "\u836f\u660e\u5eb7\u5fb7",
+        "\u533b\u836f\u670d\u52a1",
+    )
+
+    joined = " ".join(queries)
+    assert "CRO" in joined
+    assert "CDMO" in joined
+    assert "\u8ba2\u5355" in joined
+    assert "\u5730\u7f18\u98ce\u9669" in joined
+
+
+def test_medical_device_fact_queries_prioritize_device_terms():
+    queries = web_facts._fact_queries(
+        "300760.SZ",
+        "\u8fc8\u745e\u533b\u7597",
+        "\u533b\u7597\u5668\u68b0",
+    )
+
+    joined = " ".join(queries)
+    assert "\u8bbe\u5907\u66f4\u65b0" in joined
+    assert "\u88c5\u673a" in joined
+    assert "\u8bd5\u5242" in joined
+    assert "\u96c6\u91c7" in joined
+    assert "\u6ce8\u518c\u8bc1" in joined
+    assert "\u4e34\u5e8a" not in joined
+    assert "\u7ba1\u7ebf" not in joined
+
+
 def test_bing_news_rss_parses_source_date_and_values(monkeypatch):
     class FakeResponse:
         text = """<?xml version="1.0" encoding="utf-8"?>

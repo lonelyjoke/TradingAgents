@@ -91,6 +91,22 @@ def get_commodity_context(
 
 
 @tool
+def get_price_move_attribution_context(
+    ticker: Annotated[str, "ticker symbol"],
+    curr_date: Annotated[str, "current date you are trading at, yyyy-mm-dd"],
+    look_back_days: Annotated[int, "short-horizon attribution look-back window in days"] = 60,
+) -> str:
+    """
+    Attribute a recent A-share price move across market indexes, same-metal
+    equities, cross-metal equities, mapped commodity futures, company events,
+    and valuation/trading diagnostics. Use it for sharp drops or rallies where
+    the question is whether the move is commodity-led, sector-led,
+    stock-specific, failed-rebound/trend continuation, or possible emotion kill.
+    """
+    return route_to_vendor("get_price_move_attribution_context", ticker, curr_date, look_back_days)
+
+
+@tool
 def get_shipping_context(
     ticker: Annotated[str, "ticker symbol"],
     curr_date: Annotated[str, "current date you are trading at, yyyy-mm-dd"],
@@ -401,3 +417,85 @@ def get_building_materials_context(
     capital, low-PB, and dividend-trap checks.
     """
     return route_to_vendor("get_building_materials_context", ticker, curr_date, look_back_days)
+
+
+@tool
+def get_biopharma_context(
+    ticker: Annotated[str, "ticker symbol"],
+    curr_date: Annotated[str, "current date you are trading at, yyyy-mm-dd"],
+    look_back_days: Annotated[int, "financial report look-back window in days"] = 900,
+) -> str:
+    """
+    Run a gated biopharma/pharma-services verification layer for A-share names.
+    It returns not_applicable unless the target is an innovative-drug,
+    biotech, or pharma-services company, then frames official clinical,
+    regulatory, reimbursement, pipeline, commercialization, cash-runway, and
+    CRO/CDMO order-cycle checks.
+    """
+    return route_to_vendor("get_biopharma_context", ticker, curr_date, look_back_days)
+
+
+@tool
+def get_software_context(
+    ticker: Annotated[str, "ticker symbol"],
+    curr_date: Annotated[str, "current date you are trading at, yyyy-mm-dd"],
+    look_back_days: Annotated[int, "financial report look-back window in days"] = 900,
+) -> str:
+    """
+    Run a gated software/SaaS verification layer for A-share names. It returns
+    not_applicable unless the target is a software, SaaS, financial IT,
+    cybersecurity, industrial software, AI software, or hardware-plus-service
+    company, then frames ARR/ARPU/paid-user/renewal, project-delivery,
+    contract-liability, AI-monetization, and peer-model checks.
+    """
+    return route_to_vendor("get_software_context", ticker, curr_date, look_back_days)
+
+
+@tool
+def get_insurance_context(
+    ticker: Annotated[str, "ticker symbol"],
+    curr_date: Annotated[str, "current date you are trading at, yyyy-mm-dd"],
+    look_back_days: Annotated[int, "financial report look-back window in days"] = 900,
+    peer_limit: Annotated[int, "maximum same-industry insurance peers to return"] = 8,
+) -> str:
+    """
+    Run a gated insurance verification layer for A-share insurers. It returns
+    not_applicable unless the target is an insurer, then frames NBV, EV/P-EV,
+    channel quality, solvency, investment yield, P&C COR, dividend safety, and
+    insurance peer-comparison checks.
+    """
+    return route_to_vendor("get_insurance_context", ticker, curr_date, look_back_days, peer_limit)
+
+
+@tool
+def get_medical_device_context(
+    ticker: Annotated[str, "ticker symbol"],
+    curr_date: Annotated[str, "current date you are trading at, yyyy-mm-dd"],
+    look_back_days: Annotated[int, "financial report look-back window in days"] = 900,
+    peer_limit: Annotated[int, "maximum same-industry medical-device peers to return"] = 8,
+) -> str:
+    """
+    Run a gated medical-device verification layer for A-share companies. It
+    returns not_applicable unless the target is a medical equipment, IVD,
+    reagent/consumables, or high-value device company, then frames installed
+    base, tender cadence, VBP, registration, overseas channel, reagent
+    pull-through, gross-margin durability, and cash-conversion checks.
+    """
+    return route_to_vendor("get_medical_device_context", ticker, curr_date, look_back_days, peer_limit)
+
+
+@tool
+def get_metals_mining_context(
+    ticker: Annotated[str, "ticker symbol"],
+    curr_date: Annotated[str, "current date you are trading at, yyyy-mm-dd"],
+    look_back_days: Annotated[int, "financial report and price look-back window in days"] = 900,
+    peer_limit: Annotated[int, "maximum same-industry metals/mining peers to return"] = 8,
+) -> str:
+    """
+    Run a gated metals/mining verification layer for A-share companies. It
+    returns not_applicable unless the target is a miner, smelter, or metal
+    resource company, then frames reserve/grade/equity output, AISC/unit cost,
+    commodity-price source chains, hedging, capex, mine NAV/SOTP, and
+    cycle-trough valuation checks.
+    """
+    return route_to_vendor("get_metals_mining_context", ticker, curr_date, look_back_days, peer_limit)

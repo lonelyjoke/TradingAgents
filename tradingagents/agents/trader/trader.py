@@ -17,9 +17,13 @@ from tradingagents.agents.utils.agent_utils import (
     get_fair_cycle_valuation_instruction,
     get_filing_intelligence_instruction,
     get_focused_report_instruction,
+    get_insurance_instruction,
+    get_medical_device_instruction,
+    get_metals_mining_instruction,
     get_investor_interaction_instruction,
     get_policy_planning_instruction,
     get_research_gap_instruction,
+    get_software_instruction,
     get_supply_demand_fallback_instruction,
     get_thematic_valuation_instruction,
     get_web_fact_check_instruction,
@@ -47,6 +51,7 @@ def create_trader(llm):
             profile="trader",
             keys={
                 "thematic_catalyst_context",
+                "commodity_context",
                 "shipping_context",
                 "filing_intelligence_context",
                 "investor_interaction_context",
@@ -55,9 +60,15 @@ def create_trader(llm):
                 "baijiu_context",
                 "compute_leasing_context",
                 "dividend_defensive_context",
+                "biopharma_context",
+                "software_context",
+                "insurance_context",
+                "medical_device_context",
+                "metals_mining_context",
             },
         )
         thematic_catalyst_context = prompt_contexts["thematic_catalyst_context"]
+        commodity_context = prompt_contexts["commodity_context"]
         shipping_context = prompt_contexts["shipping_context"]
         filing_intelligence_context = prompt_contexts["filing_intelligence_context"]
         investor_interaction_context = prompt_contexts["investor_interaction_context"]
@@ -66,6 +77,11 @@ def create_trader(llm):
         baijiu_context = prompt_contexts["baijiu_context"]
         compute_leasing_context = prompt_contexts["compute_leasing_context"]
         dividend_defensive_context = prompt_contexts["dividend_defensive_context"]
+        biopharma_context = prompt_contexts["biopharma_context"]
+        software_context = prompt_contexts["software_context"]
+        insurance_context = prompt_contexts["insurance_context"]
+        medical_device_context = prompt_contexts["medical_device_context"]
+        metals_mining_context = prompt_contexts["metals_mining_context"]
 
         messages = [
             {
@@ -93,6 +109,10 @@ def create_trader(llm):
                     f"{get_baijiu_instruction()}"
                     f"{get_compute_leasing_instruction()}"
                     f"{get_dividend_defensive_instruction()}"
+                    f"{get_software_instruction()}"
+                    f"{get_insurance_instruction()}"
+                    f"{get_medical_device_instruction()}"
+                    f"{get_metals_mining_instruction()}"
                     f"{get_focused_report_instruction()}"
                 ),
             },
@@ -105,6 +125,7 @@ def create_trader(llm):
                     f"social media sentiment. Use this plan as a foundation for evaluating your next "
                     f"trading decision.\n\nProposed Investment Plan: {investment_plan}\n\n"
                     f"Verified thematic catalyst bridge: {thematic_catalyst_context}\n\n"
+                    f"Commodity/product-price context: {commodity_context}\n\n"
                     f"Shipping/freight-rate context: {shipping_context}\n\n"
                     f"Financial-report intelligence and promoted discussion items: {filing_intelligence_context}\n\n"
                     f"Official investor-interaction context: {investor_interaction_context}\n\n"
@@ -113,6 +134,11 @@ def create_trader(llm):
                     f"Gated baijiu verification context: {baijiu_context}\n\n"
                     f"Gated compute-leasing verification context: {compute_leasing_context}\n\n"
                     f"Gated dividend defensive verification context: {dividend_defensive_context}\n\n"
+                    f"Gated biopharma verification context: {biopharma_context}\n\n"
+                    f"Gated software verification context: {software_context}\n\n"
+                    f"Gated insurance verification context: {insurance_context}\n\n"
+                    f"Gated medical-device verification context: {medical_device_context}\n\n"
+                    f"Gated metals/mining verification context: {metals_mining_context}\n\n"
                     f"Leverage these insights to make an informed and strategic decision."
                 ),
             },

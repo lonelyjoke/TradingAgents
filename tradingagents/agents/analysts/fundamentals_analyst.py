@@ -20,6 +20,14 @@ from tradingagents.agents.utils.agent_utils import (
     get_fundamentals,
     get_financial_report_intelligence_context,
     get_income_statement,
+    get_insurance_context,
+    get_insurance_instruction,
+    get_medical_device_context,
+    get_medical_device_instruction,
+    get_metals_mining_context,
+    get_metals_mining_instruction,
+    get_price_move_attribution_context,
+    get_price_move_attribution_instruction,
     get_insider_transactions,
     get_language_instruction,
     get_material_catalyst_instruction,
@@ -31,8 +39,12 @@ from tradingagents.agents.utils.agent_utils import (
     get_management_capital_allocation_instruction,
     get_baijiu_context,
     get_baijiu_instruction,
+    get_biopharma_context,
+    get_biopharma_instruction,
     get_building_materials_context,
     get_building_materials_instruction,
+    get_software_context,
+    get_software_instruction,
     get_peer_comparison,
     get_peer_selection_instruction,
     get_price_earnings_decomposition_context,
@@ -61,6 +73,7 @@ def create_fundamentals_analyst(llm):
         instrument_context = build_instrument_context(state["company_of_interest"])
         raw_thematic_catalyst_context = state.get("thematic_catalyst_context", "")
         raw_commodity_context = state.get("commodity_context", "")
+        raw_price_move_attribution_context = state.get("price_move_attribution_context", "")
         raw_filing_intelligence_context = state.get("filing_intelligence_context", "")
         raw_peer_comparison_context = state.get("peer_comparison_context", "")
         raw_supply_chain_comparison_context = state.get("supply_chain_comparison_context", "")
@@ -75,9 +88,15 @@ def create_fundamentals_analyst(llm):
         raw_compute_leasing_context = state.get("compute_leasing_context", "")
         raw_dividend_defensive_context = state.get("dividend_defensive_context", "")
         raw_building_materials_context = state.get("building_materials_context", "")
+        raw_biopharma_context = state.get("biopharma_context", "")
+        raw_software_context = state.get("software_context", "")
+        raw_insurance_context = state.get("insurance_context", "")
+        raw_medical_device_context = state.get("medical_device_context", "")
+        raw_metals_mining_context = state.get("metals_mining_context", "")
         prompt_contexts = compact_state_fields(state, profile="analyst")
         thematic_catalyst_context = prompt_contexts["thematic_catalyst_context"]
         commodity_context = prompt_contexts["commodity_context"]
+        price_move_attribution_context = prompt_contexts["price_move_attribution_context"]
         shipping_context = prompt_contexts["shipping_context"]
         filing_intelligence_context = prompt_contexts["filing_intelligence_context"]
         peer_comparison_context = prompt_contexts["peer_comparison_context"]
@@ -92,6 +111,11 @@ def create_fundamentals_analyst(llm):
         compute_leasing_context = prompt_contexts["compute_leasing_context"]
         dividend_defensive_context = prompt_contexts["dividend_defensive_context"]
         building_materials_context = prompt_contexts["building_materials_context"]
+        biopharma_context = prompt_contexts["biopharma_context"]
+        software_context = prompt_contexts["software_context"]
+        insurance_context = prompt_contexts["insurance_context"]
+        medical_device_context = prompt_contexts["medical_device_context"]
+        metals_mining_context = prompt_contexts["metals_mining_context"]
         is_a_share = is_a_share_symbol(state["company_of_interest"])
 
         tools = [
@@ -105,6 +129,8 @@ def create_fundamentals_analyst(llm):
         ]
         if is_a_share and not raw_commodity_context:
             tools.append(get_commodity_context)
+        if is_a_share and not raw_price_move_attribution_context:
+            tools.append(get_price_move_attribution_context)
         if is_a_share and not raw_shipping_context:
             tools.append(get_shipping_context)
         if not raw_peer_comparison_context:
@@ -135,13 +161,23 @@ def create_fundamentals_analyst(llm):
             tools.append(get_dividend_defensive_context)
         if is_a_share and not raw_building_materials_context:
             tools.append(get_building_materials_context)
+        if is_a_share and not raw_biopharma_context:
+            tools.append(get_biopharma_context)
+        if is_a_share and not raw_software_context:
+            tools.append(get_software_context)
+        if is_a_share and not raw_insurance_context:
+            tools.append(get_insurance_context)
+        if is_a_share and not raw_medical_device_context:
+            tools.append(get_medical_device_context)
+        if is_a_share and not raw_metals_mining_context:
+            tools.append(get_metals_mining_context)
 
         system_message = (
             "You are a buy-side fundamental researcher. Write a focused investment memo, not an exhaustive data dump. "
             "Your job is to identify the tradable thesis, test whether the business-cycle or boom-bust expectation can plausibly realize, and explain what evidence supports or weakens the thesis. "
             "Use `get_fundamentals`, `get_balance_sheet`, `get_cashflow`, and `get_income_statement` for core financial quality. "
             "Pay special attention to accounting items that may preview future performance, including contract liabilities, advance receipts, contract assets, receivables, inventories, prepayments, payables, goodwill, net cash, and working capital. "
-            "For A-share tickers, the system may provide precomputed thematic, commodity/product-price, shipping/freight-rate, filing, peer, supply-chain, earnings-model, market-expectation, price/EPS/PE decomposition, management/capital-allocation, shareholder-structure, web fact-check, gated compute-leasing, gated dividend-defensive, and gated building-materials context below. Use any precomputed context directly and do not call the same context tool again. Also use `get_valuation_percentiles` for historical valuation zones, `get_market_sector_risk` for broad/sector risk, and `get_market_timing_context` for market mood when those extra lenses are material. "
+            "For A-share tickers, the system may provide precomputed thematic, commodity/product-price, price-move attribution, shipping/freight-rate, filing, peer, supply-chain, earnings-model, market-expectation, price/EPS/PE decomposition, management/capital-allocation, shareholder-structure, web fact-check, gated compute-leasing, gated dividend-defensive, gated building-materials, gated biopharma, gated software, gated insurance, gated medical-device, and gated metals/mining context below. Use any precomputed context directly and do not call the same context tool again. Also use `get_valuation_percentiles` for historical valuation zones, `get_market_sector_risk` for broad/sector risk, and `get_market_timing_context` for market mood when those extra lenses are material. "
             "For commodity/resource/cyclical companies, treat the commodity/product-price context as a hard cycle variable: connect it to ASP, gross margin, inventory write-down/reversal risk, cash conversion, and valuation, and do not let news headlines substitute for product-price evidence. "
             "For shipping companies, treat shipping/freight-rate context as the hard cycle variable: separate route-level VLCC TD3C/TCE/CTFI evidence from broad BDTI/BCTI/BDI proxies, and explicitly test two-sided Hormuz mechanisms such as risk-premium compression versus restocking and ton-mile recovery. "
             "For A-share tickers, also use `get_supply_chain_comparison` when a curated chain map exists, so the memo can distinguish between a merely good company and the best profit pool in the chain. "
@@ -173,6 +209,12 @@ def create_fundamentals_analyst(llm):
             + get_compute_leasing_instruction()
             + get_dividend_defensive_instruction()
             + get_building_materials_instruction()
+            + get_biopharma_instruction()
+            + get_software_instruction()
+            + get_insurance_instruction()
+            + get_medical_device_instruction()
+            + get_metals_mining_instruction()
+            + get_price_move_attribution_instruction()
             + (
                 "\n\nPrecomputed filing/news thematic cross-check:\n"
                 + thematic_catalyst_context
@@ -183,6 +225,12 @@ def create_fundamentals_analyst(llm):
                 "\n\nPrecomputed commodity/product-price context:\n"
                 + commodity_context
                 if commodity_context
+                else ""
+            )
+            + (
+                "\n\nPrecomputed price-move attribution context:\n"
+                + price_move_attribution_context
+                if price_move_attribution_context
                 else ""
             )
             + (
@@ -267,6 +315,36 @@ def create_fundamentals_analyst(llm):
                 "\n\nPrecomputed gated building-materials verification context:\n"
                 + building_materials_context
                 if building_materials_context
+                else ""
+            )
+            + (
+                "\n\nPrecomputed gated biopharma verification context:\n"
+                + biopharma_context
+                if biopharma_context
+                else ""
+            )
+            + (
+                "\n\nPrecomputed gated software verification context:\n"
+                + software_context
+                if software_context
+                else ""
+            )
+            + (
+                "\n\nPrecomputed gated insurance verification context:\n"
+                + insurance_context
+                if insurance_context
+                else ""
+            )
+            + (
+                "\n\nPrecomputed gated medical-device verification context:\n"
+                + medical_device_context
+                if medical_device_context
+                else ""
+            )
+            + (
+                "\n\nPrecomputed gated metals/mining verification context:\n"
+                + metals_mining_context
+                if metals_mining_context
                 else ""
             )
             + get_fair_cycle_valuation_instruction()

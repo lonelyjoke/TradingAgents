@@ -34,6 +34,7 @@ from tradingagents.dataflows.tushare_a_stock import (
     is_a_share_symbol,
 )
 from tradingagents.dataflows.data_coverage import build_data_coverage_context
+from tradingagents.dataflows.a_share_preflight import run_a_share_data_preflight
 
 # Import the new abstract tool methods from agent_utils
 from tradingagents.agents.utils.agent_utils import (
@@ -45,6 +46,9 @@ from tradingagents.agents.utils.agent_utils import (
     get_balance_sheet,
     get_cashflow,
     get_income_statement,
+    get_insurance_context,
+    get_medical_device_context,
+    get_metals_mining_context,
     get_investor_interaction_context,
     get_commodity_context,
     get_compute_leasing_context,
@@ -57,8 +61,11 @@ from tradingagents.agents.utils.agent_utils import (
     get_market_expectation_context,
     get_market_timing_context,
     get_management_capital_allocation_context,
+    get_price_move_attribution_context,
     get_baijiu_context,
+    get_biopharma_context,
     get_building_materials_context,
+    get_software_context,
     get_policy_planning_context,
     get_peer_comparison,
     get_price_earnings_decomposition_context,
@@ -82,6 +89,7 @@ def _build_precomputed_data_coverage(
     *,
     thematic_catalyst_context: str,
     commodity_context: str,
+    price_move_attribution_context: str,
     shipping_context: str,
     filing_intelligence_context: str,
     peer_comparison_context: str,
@@ -98,11 +106,17 @@ def _build_precomputed_data_coverage(
     compute_leasing_context: str,
     dividend_defensive_context: str,
     building_materials_context: str,
+    biopharma_context: str,
+    software_context: str,
+    insurance_context: str,
+    medical_device_context: str,
+    metals_mining_context: str,
 ) -> str:
     return build_data_coverage_context(
         {
             "thematic_catalyst": thematic_catalyst_context,
             "commodity_product_price": commodity_context,
+            "price_move_attribution": price_move_attribution_context,
             "shipping_cycle": shipping_context,
             "financial_report_intelligence": filing_intelligence_context,
             "peer_comparison": peer_comparison_context,
@@ -119,6 +133,11 @@ def _build_precomputed_data_coverage(
             "compute_leasing": compute_leasing_context,
             "dividend_defensive": dividend_defensive_context,
             "building_materials": building_materials_context,
+            "biopharma": biopharma_context,
+            "software": software_context,
+            "insurance": insurance_context,
+            "medical_device": medical_device_context,
+            "metals_mining": metals_mining_context,
         }
     )
 
@@ -130,6 +149,11 @@ _A_SHARE_CONTEXT_SPECS = [
         "Thematic catalyst cross-check",
     ),
     ("commodity_context", "get_commodity_context", "Commodity/product-price context"),
+    (
+        "price_move_attribution_context",
+        "get_price_move_attribution_context",
+        "Price-move attribution context",
+    ),
     ("shipping_context", "get_shipping_context", "Shipping/freight-rate context"),
     (
         "filing_intelligence_context",
@@ -186,6 +210,31 @@ _A_SHARE_CONTEXT_SPECS = [
         "get_building_materials_context",
         "Building-materials verification context",
     ),
+    (
+        "biopharma_context",
+        "get_biopharma_context",
+        "Biopharma verification context",
+    ),
+    (
+        "software_context",
+        "get_software_context",
+        "Software/SaaS verification context",
+    ),
+    (
+        "insurance_context",
+        "get_insurance_context",
+        "Insurance verification context",
+    ),
+    (
+        "medical_device_context",
+        "get_medical_device_context",
+        "Medical-device verification context",
+    ),
+    (
+        "metals_mining_context",
+        "get_metals_mining_context",
+        "Metals/mining verification context",
+    ),
 ]
 
 
@@ -214,6 +263,7 @@ class TradingAgentsGraph:
         self.debug = debug
         self.config = config or DEFAULT_CONFIG
         self.callbacks = callbacks or []
+        self.selected_analysts = list(selected_analysts or [])
 
         # Update the interface's config
         set_config(self.config)
@@ -353,6 +403,7 @@ class TradingAgentsGraph:
                     get_cashflow,
                     get_income_statement,
                     get_commodity_context,
+                    get_price_move_attribution_context,
                     get_shipping_context,
                     get_peer_comparison,
                     get_supply_chain_comparison,
@@ -372,6 +423,11 @@ class TradingAgentsGraph:
                     get_compute_leasing_context,
                     get_dividend_defensive_context,
                     get_building_materials_context,
+                    get_biopharma_context,
+                    get_software_context,
+                    get_insurance_context,
+                    get_medical_device_context,
+                    get_metals_mining_context,
                 ]
             ),
         }
@@ -547,6 +603,19 @@ class TradingAgentsGraph:
                     progress_callback(event, key, title, elapsed, len(text))
         return contexts
 
+    def _run_a_share_data_preflight(self, company_name: str, trade_date: str) -> str:
+        if not self.config.get("a_share_data_preflight_enabled", True):
+            return ""
+        return run_a_share_data_preflight(
+            company_name,
+            str(trade_date),
+            selected_analysts=self.selected_analysts,
+            max_staleness_days=int(
+                self.config.get("a_share_data_preflight_max_staleness_days", 21)
+                or 21
+            ),
+        )
+
     def create_initial_state_with_context(
         self,
         company_name,
@@ -556,6 +625,7 @@ class TradingAgentsGraph:
         ] = None,
     ):
         """Build the initialized state shared by batch and CLI executions."""
+        self._run_a_share_data_preflight(company_name, trade_date)
         past_context = self.memory_log.get_past_context(company_name)
         recent_decision_context = self.memory_log.get_recent_decision_context(
             company_name
@@ -567,6 +637,7 @@ class TradingAgentsGraph:
         )
         thematic_catalyst_context = contexts["thematic_catalyst_context"]
         commodity_context = contexts["commodity_context"]
+        price_move_attribution_context = contexts["price_move_attribution_context"]
         shipping_context = contexts["shipping_context"]
         filing_intelligence_context = contexts["filing_intelligence_context"]
         peer_comparison_context = contexts["peer_comparison_context"]
@@ -583,9 +654,15 @@ class TradingAgentsGraph:
         compute_leasing_context = contexts["compute_leasing_context"]
         dividend_defensive_context = contexts["dividend_defensive_context"]
         building_materials_context = contexts["building_materials_context"]
+        biopharma_context = contexts["biopharma_context"]
+        software_context = contexts["software_context"]
+        insurance_context = contexts["insurance_context"]
+        medical_device_context = contexts["medical_device_context"]
+        metals_mining_context = contexts["metals_mining_context"]
         data_coverage_context = _build_precomputed_data_coverage(
             thematic_catalyst_context=thematic_catalyst_context,
             commodity_context=commodity_context,
+            price_move_attribution_context=price_move_attribution_context,
             shipping_context=shipping_context,
             filing_intelligence_context=filing_intelligence_context,
             peer_comparison_context=peer_comparison_context,
@@ -602,6 +679,11 @@ class TradingAgentsGraph:
             compute_leasing_context=compute_leasing_context,
             dividend_defensive_context=dividend_defensive_context,
             building_materials_context=building_materials_context,
+            biopharma_context=biopharma_context,
+            software_context=software_context,
+            insurance_context=insurance_context,
+            medical_device_context=medical_device_context,
+            metals_mining_context=metals_mining_context,
         )
         return self.propagator.create_initial_state(
             company_name,
@@ -610,6 +692,7 @@ class TradingAgentsGraph:
             recent_decision_context=recent_decision_context,
             thematic_catalyst_context=thematic_catalyst_context,
             commodity_context=commodity_context,
+            price_move_attribution_context=price_move_attribution_context,
             shipping_context=shipping_context,
             filing_intelligence_context=filing_intelligence_context,
             peer_comparison_context=peer_comparison_context,
@@ -626,12 +709,18 @@ class TradingAgentsGraph:
             compute_leasing_context=compute_leasing_context,
             dividend_defensive_context=dividend_defensive_context,
             building_materials_context=building_materials_context,
+            biopharma_context=biopharma_context,
+            software_context=software_context,
+            insurance_context=insurance_context,
+            medical_device_context=medical_device_context,
+            metals_mining_context=metals_mining_context,
             data_coverage_context=data_coverage_context,
         )
 
     def _run_graph(self, company_name, trade_date):
         """Execute the graph and write the resulting state to disk and memory log."""
         # Initialize state — inject continuity context plus resolved lessons.
+        self._run_a_share_data_preflight(company_name, trade_date)
         past_context = self.memory_log.get_past_context(company_name)
         recent_decision_context = self.memory_log.get_recent_decision_context(
             company_name
@@ -639,6 +728,7 @@ class TradingAgentsGraph:
         contexts = self._fetch_a_share_contexts(company_name, trade_date)
         thematic_catalyst_context = contexts["thematic_catalyst_context"]
         commodity_context = contexts["commodity_context"]
+        price_move_attribution_context = contexts["price_move_attribution_context"]
         shipping_context = contexts["shipping_context"]
         filing_intelligence_context = contexts["filing_intelligence_context"]
         peer_comparison_context = contexts["peer_comparison_context"]
@@ -655,9 +745,15 @@ class TradingAgentsGraph:
         compute_leasing_context = contexts["compute_leasing_context"]
         dividend_defensive_context = contexts["dividend_defensive_context"]
         building_materials_context = contexts["building_materials_context"]
+        biopharma_context = contexts["biopharma_context"]
+        software_context = contexts["software_context"]
+        insurance_context = contexts["insurance_context"]
+        medical_device_context = contexts["medical_device_context"]
+        metals_mining_context = contexts["metals_mining_context"]
         data_coverage_context = _build_precomputed_data_coverage(
             thematic_catalyst_context=thematic_catalyst_context,
             commodity_context=commodity_context,
+            price_move_attribution_context=price_move_attribution_context,
             shipping_context=shipping_context,
             filing_intelligence_context=filing_intelligence_context,
             peer_comparison_context=peer_comparison_context,
@@ -674,6 +770,11 @@ class TradingAgentsGraph:
             compute_leasing_context=compute_leasing_context,
             dividend_defensive_context=dividend_defensive_context,
             building_materials_context=building_materials_context,
+            biopharma_context=biopharma_context,
+            software_context=software_context,
+            insurance_context=insurance_context,
+            medical_device_context=medical_device_context,
+            metals_mining_context=metals_mining_context,
         )
         init_agent_state = self.propagator.create_initial_state(
             company_name,
@@ -682,6 +783,7 @@ class TradingAgentsGraph:
             recent_decision_context=recent_decision_context,
             thematic_catalyst_context=thematic_catalyst_context,
             commodity_context=commodity_context,
+            price_move_attribution_context=price_move_attribution_context,
             shipping_context=shipping_context,
             filing_intelligence_context=filing_intelligence_context,
             peer_comparison_context=peer_comparison_context,
@@ -698,6 +800,11 @@ class TradingAgentsGraph:
             compute_leasing_context=compute_leasing_context,
             dividend_defensive_context=dividend_defensive_context,
             building_materials_context=building_materials_context,
+            biopharma_context=biopharma_context,
+            software_context=software_context,
+            insurance_context=insurance_context,
+            medical_device_context=medical_device_context,
+            metals_mining_context=metals_mining_context,
             data_coverage_context=data_coverage_context,
         )
         args = self.propagator.get_graph_args()
@@ -751,6 +858,9 @@ class TradingAgentsGraph:
             "commodity_context": final_state.get(
                 "commodity_context", ""
             ),
+            "price_move_attribution_context": final_state.get(
+                "price_move_attribution_context", ""
+            ),
             "shipping_context": final_state.get(
                 "shipping_context", ""
             ),
@@ -798,6 +908,21 @@ class TradingAgentsGraph:
             ),
             "building_materials_context": final_state.get(
                 "building_materials_context", ""
+            ),
+            "biopharma_context": final_state.get(
+                "biopharma_context", ""
+            ),
+            "software_context": final_state.get(
+                "software_context", ""
+            ),
+            "insurance_context": final_state.get(
+                "insurance_context", ""
+            ),
+            "medical_device_context": final_state.get(
+                "medical_device_context", ""
+            ),
+            "metals_mining_context": final_state.get(
+                "metals_mining_context", ""
             ),
             "data_coverage_context": final_state.get(
                 "data_coverage_context", ""

@@ -47,7 +47,173 @@ EXCHANGE_ALIASES = {
 }
 
 
+METAL_FUTURES_SOURCE_REGISTRY = {
+    "Gold": {
+        "domestic_exchange": "SHFE",
+        "tushare_prefix": "AU",
+        "contract_example": "AU.SHF",
+        "overseas_cross_checks": "COMEX GC futures; LBMA gold benchmark",
+        "coverage": "live domestic futures via Tushare; overseas sources are research cross-checks, not fetched by this module",
+    },
+    "Silver": {
+        "domestic_exchange": "SHFE",
+        "tushare_prefix": "AG",
+        "contract_example": "AG.SHF",
+        "overseas_cross_checks": "COMEX SI futures; LBMA silver benchmark",
+        "coverage": "live domestic futures via Tushare; overseas sources are research cross-checks, not fetched by this module",
+    },
+    "Copper": {
+        "domestic_exchange": "SHFE",
+        "tushare_prefix": "CU",
+        "contract_example": "CU.SHF",
+        "overseas_cross_checks": "COMEX HG futures; LME copper",
+        "coverage": "live domestic futures via Tushare; overseas sources are research cross-checks, not fetched by this module",
+    },
+    "Aluminum": {
+        "domestic_exchange": "SHFE",
+        "tushare_prefix": "AL",
+        "contract_example": "AL.SHF",
+        "overseas_cross_checks": "LME aluminum",
+        "coverage": "live domestic futures via Tushare; overseas sources are research cross-checks, not fetched by this module",
+    },
+    "Zinc": {
+        "domestic_exchange": "SHFE",
+        "tushare_prefix": "ZN",
+        "contract_example": "ZN.SHF",
+        "overseas_cross_checks": "LME zinc",
+        "coverage": "live domestic futures via Tushare; overseas sources are research cross-checks, not fetched by this module",
+    },
+    "Lead": {
+        "domestic_exchange": "SHFE",
+        "tushare_prefix": "PB",
+        "contract_example": "PB.SHF",
+        "overseas_cross_checks": "LME lead",
+        "coverage": "live domestic futures via Tushare; overseas sources are research cross-checks, not fetched by this module",
+    },
+    "Nickel": {
+        "domestic_exchange": "SHFE",
+        "tushare_prefix": "NI",
+        "contract_example": "NI.SHF",
+        "overseas_cross_checks": "LME nickel",
+        "coverage": "live domestic futures via Tushare; overseas sources are research cross-checks, not fetched by this module",
+    },
+    "Tin": {
+        "domestic_exchange": "SHFE",
+        "tushare_prefix": "SN",
+        "contract_example": "SN.SHF",
+        "overseas_cross_checks": "LME tin",
+        "coverage": "live domestic futures via Tushare; overseas sources are research cross-checks, not fetched by this module",
+    },
+    "Lithium carbonate": {
+        "domestic_exchange": "GFEX",
+        "tushare_prefix": "LC",
+        "contract_example": "LC.GFE",
+        "overseas_cross_checks": "Fastmarkets / Benchmark / SMM lithium carbonate or hydroxide assessments",
+        "coverage": "live GFEX futures via Tushare; global spot assessment sources require separate licensed data",
+    },
+    "Industrial silicon": {
+        "domestic_exchange": "GFEX",
+        "tushare_prefix": "SI",
+        "contract_example": "SI.GFE",
+        "overseas_cross_checks": "SMM / Asian Metal silicon spot assessments",
+        "coverage": "live GFEX futures via Tushare; spot assessments require separate licensed data",
+    },
+}
+
+
+def _metal_product(name: str, role: str = "main product") -> dict:
+    source = METAL_FUTURES_SOURCE_REGISTRY[name]
+    return {
+        "name": name,
+        "type": "futures",
+        "role": role,
+        "prefix": source["tushare_prefix"],
+        "exchange": source["domestic_exchange"],
+        "overseas_cross_checks": source["overseas_cross_checks"],
+    }
+
+
 COMPANY_COMMODITY_MAP = {
+    "600547.SH": {
+        "name": "Shandong Gold",
+        "products": [_metal_product("Gold")],
+        "spread_note": "Use SHFE gold futures as the timely domestic proxy; realized mine price, output, grade, and unit cost still require filings and production disclosures.",
+    },
+    "000975.SZ": {
+        "name": "Shanjin International Gold",
+        "products": [_metal_product("Gold")],
+        "spread_note": "Use SHFE gold futures as the timely domestic proxy; validate equity output, mine cost, and overseas asset exposure from filings.",
+    },
+    "600489.SH": {
+        "name": "Zhongjin Gold",
+        "products": [_metal_product("Gold")],
+        "spread_note": "Use SHFE gold futures as the timely domestic proxy; separate mining profit from smelting/trading contribution.",
+    },
+    "600988.SH": {
+        "name": "Chifeng Gold",
+        "products": [_metal_product("Gold")],
+        "spread_note": "Use SHFE gold futures as the timely domestic proxy; overseas mine jurisdiction, grade, and unit cost are separate diligence items.",
+    },
+    "002155.SZ": {
+        "name": "Hunan Gold",
+        "products": [_metal_product("Gold"), _metal_product("Silver")],
+        "spread_note": "Use SHFE gold/silver futures as proxies; antimony and other by-products need separate spot or filing evidence before quantification.",
+    },
+    "002237.SZ": {
+        "name": "Hengbang",
+        "products": [_metal_product("Gold"), _metal_product("Silver")],
+        "spread_note": "Use SHFE precious-metal futures as proxies; split mining, smelting, and processing/trading economics.",
+    },
+    "601899.SH": {
+        "name": "Zijin Mining",
+        "products": [_metal_product("Copper"), _metal_product("Gold")],
+        "spread_note": "Use metal futures as price proxies; mine cost curves still require external research.",
+    },
+    "603993.SH": {
+        "name": "CMOC",
+        "products": [_metal_product("Copper"), _metal_product("Nickel", "secondary product")],
+        "spread_note": "Use SHFE copper/nickel as domestic proxies; cobalt and molybdenum need separate spot benchmarks and company disclosures.",
+    },
+    "600362.SH": {
+        "name": "Jiangxi Copper",
+        "products": [_metal_product("Copper")],
+        "spread_note": "Use SHFE copper as the timely proxy; separate mining, smelting TC/RC, inventory, and trading exposure.",
+    },
+    "000878.SZ": {
+        "name": "Yunnan Copper",
+        "products": [_metal_product("Copper")],
+        "spread_note": "Use SHFE copper as the timely proxy; smelting margins and TC/RC can offset copper-price beta.",
+    },
+    "000630.SZ": {
+        "name": "Tongling Nonferrous",
+        "products": [_metal_product("Copper")],
+        "spread_note": "Use SHFE copper as the timely proxy; validate mine share versus smelting/trading share before extrapolating margins.",
+    },
+    "601600.SH": {
+        "name": "Chalco",
+        "products": [_metal_product("Aluminum")],
+        "spread_note": "Use SHFE aluminum as the timely proxy; alumina, power cost, and capacity utilization drive spreads.",
+    },
+    "000807.SZ": {
+        "name": "Yunnan Aluminium",
+        "products": [_metal_product("Aluminum")],
+        "spread_note": "Use SHFE aluminum as the timely proxy; power cost, hydro availability, and alumina cost determine margin pass-through.",
+    },
+    "002460.SZ": {
+        "name": "Ganfeng Lithium",
+        "products": [_metal_product("Lithium carbonate")],
+        "spread_note": "Lithium carbonate futures proxy product price; lithium concentrate costs require external data.",
+    },
+    "002466.SZ": {
+        "name": "Tianqi Lithium",
+        "products": [_metal_product("Lithium carbonate")],
+        "spread_note": "GFEX lithium carbonate futures proxy downstream product price; upstream spodumene and equity-accounted assets require separate checks.",
+    },
+    "600111.SH": {
+        "name": "China Northern Rare Earth",
+        "products": [],
+        "spread_note": "Rare-earth oxide prices are not covered by the Tushare futures chain here; use official/licensed spot benchmarks before making price claims.",
+    },
     "600160.SH": {
         "name": "Juhua Group",
         "products": [
@@ -89,21 +255,6 @@ COMPANY_COMMODITY_MAP = {
             },
         ],
         "spread_note": "Watch refrigerant selling prices against fluorite and hydrofluoric acid cost proxies.",
-    },
-    "601899.SH": {
-        "name": "Zijin Mining",
-        "products": [
-            {"name": "Copper", "type": "futures", "role": "main product", "prefix": "CU", "exchange": "SHFE"},
-            {"name": "Gold", "type": "futures", "role": "main product", "prefix": "AU", "exchange": "SHFE"},
-        ],
-        "spread_note": "Use metal futures as price proxies; mine cost curves still require external research.",
-    },
-    "002460.SZ": {
-        "name": "Ganfeng Lithium",
-        "products": [
-            {"name": "Lithium carbonate", "type": "futures", "role": "main product", "prefix": "LC", "exchange": "GFEX"},
-        ],
-        "spread_note": "Lithium carbonate futures proxy product price; lithium concentrate costs require external data.",
     },
     "300750.SZ": {
         "name": "CATL",
@@ -669,6 +820,28 @@ def _source_priority_rows(products: list[dict]) -> list[dict[str, str]]:
     return rows
 
 
+def _metal_price_source_audit_rows(products: list[dict]) -> list[dict[str, str]]:
+    rows = []
+    for product in products:
+        name = str(product.get("name", ""))
+        source = METAL_FUTURES_SOURCE_REGISTRY.get(name)
+        if not source:
+            continue
+        rows.append(
+            {
+                "metal": name,
+                "domestic_price_chain": (
+                    f"Tushare fut_daily -> {source['domestic_exchange']} "
+                    f"{source['tushare_prefix']} contracts"
+                ),
+                "contract_example": source["contract_example"],
+                "overseas_cross_check": source["overseas_cross_checks"],
+                "coverage_status": source["coverage"],
+            }
+        )
+    return rows
+
+
 def get_commodity_context(ticker: str, curr_date: str, look_back_days: int = 90) -> str:
     """Return evidence-backed commodity price context for A-share companies."""
     symbol = ticker.strip().upper()
@@ -703,8 +876,19 @@ def get_commodity_context(ticker: str, curr_date: str, look_back_days: int = 90)
         "## Source Priority",
         _markdown_table(pd.DataFrame(_source_priority_rows(products))),
         "",
-        "## Evidence Table",
+        "## Metal Price Source Audit",
     ]
+    metal_rows = _metal_price_source_audit_rows(products)
+    if metal_rows:
+        lines.append(_markdown_table(pd.DataFrame(metal_rows)))
+    else:
+        lines.append("No exchange-traded metal source audit applies to the mapped products.")
+    lines.extend(
+        [
+            "",
+            "## Evidence Table",
+        ]
+    )
 
     if rows:
         lines.append(_markdown_table(pd.DataFrame(rows)))

@@ -77,6 +77,46 @@ _TANKER = "\u6cb9\u8f6e"
 _DRY_BULK = "\u5e72\u6563\u8d27"
 _HORMUZ = "\u970d\u5c14\u6728\u5179"
 _RESTOCKING = "\u8865\u5e93"
+_BIOPHARMA = "\u751f\u7269\u533b\u836f"
+_INNOVATIVE_DRUG = "\u521b\u65b0\u836f"
+_CLINICAL_TRIAL = "\u4e34\u5e8a"
+_PIPELINE = "\u7ba1\u7ebf"
+_INDICATION = "\u9002\u5e94\u75c7"
+_NMPA = "NMPA"
+_FDA = "FDA"
+_CDE = "CDE"
+_MEDICAL_INSURANCE = "\u533b\u4fdd"
+_APPROVAL = "\u83b7\u6279"
+_COMMERCIALIZATION = "\u5546\u4e1a\u5316"
+_CASH_FLOW = "\u73b0\u91d1\u6d41"
+_CRO = "CRO"
+_CDMO = "CDMO"
+_GEOPOLITICAL_RISK = "\u5730\u7f18\u98ce\u9669"
+_ORDER_BACKLOG = "\u8ba2\u5355"
+_SOFTWARE = "\u8f6f\u4ef6"
+_SAAS = "SaaS"
+_SUBSCRIPTION = "\u8ba2\u9605"
+_PAID_USERS = "\u4ed8\u8d39\u7528\u6237"
+_ARPU = "ARPU"
+_MAU = "MAU"
+_CONTRACT_LIABILITY = "\u5408\u540c\u8d1f\u503a"
+_RENEWAL = "\u7eed\u8d39"
+_XINCHUANG = "\u4fe1\u521b"
+_TENDER = "\u62db\u6807"
+_AI_PAID = "AI \u4ed8\u8d39"
+_WPS = "WPS"
+_MEDICAL_DEVICE = "\u533b\u7597\u5668\u68b0"
+_MEDICAL_EQUIPMENT = "\u533b\u7597\u8bbe\u5907"
+_IVD = "IVD"
+_REAGENT = "\u8bd5\u5242"
+_CONSUMABLE = "\u8017\u6750"
+_INSTALLED_BASE = "\u88c5\u673a"
+_EQUIPMENT_RENEWAL = "\u8bbe\u5907\u66f4\u65b0"
+_VBP = "\u96c6\u91c7"
+_REGISTRATION_CERT = "\u6ce8\u518c\u8bc1"
+_OVERSEAS_CHANNEL = "\u6d77\u5916\u6e20\u9053"
+_ULTRASOUND = "\u8d85\u58f0"
+_ENDOSCOPY = "\u5185\u7aa5\u955c"
 
 _SHIPPING_NAME_HINTS = (
     "\u8f6e\u8239",
@@ -86,6 +126,42 @@ _SHIPPING_NAME_HINTS = (
     "\u6d77\u63a7",
 )
 
+_BIOPHARMA_NAME_HINTS = (
+    "\u767e\u6d4e",
+    "\u6052\u745e",
+    "\u4fe1\u8fbe",
+    "\u5eb7\u65b9",
+    "\u541b\u5b9e",
+    "\u836f\u660e\u5eb7\u5fb7",
+    "\u836f\u660e",
+    "\u751f\u7269",
+    "\u533b\u836f",
+)
+
+_SOFTWARE_NAME_HINTS = (
+    "\u91d1\u5c71\u529e\u516c",
+    "\u7528\u53cb",
+    "\u6052\u751f\u7535\u5b50",
+    "\u5b9d\u4fe1\u8f6f\u4ef6",
+    "\u5e7f\u8054\u8fbe",
+    "\u540c\u82b1\u987a",
+    "\u6df1\u4fe1\u670d",
+    "\u79d1\u5927\u8baf\u98de",
+    "\u9053\u901a\u79d1\u6280",
+)
+
+_MEDICAL_DEVICE_NAME_HINTS = (
+    "\u8fc8\u745e\u533b\u7597",
+    "\u8054\u5f71\u533b\u7597",
+    "\u9c7c\u8dc3\u533b\u7597",
+    "\u65b0\u4ea7\u4e1a",
+    "\u5b89\u56fe\u751f\u7269",
+    "\u5f00\u7acb\u533b\u7597",
+    "\u5357\u5fae\u533b\u5b66",
+    "\u5fc3\u8109\u533b\u7597",
+    "\u60e0\u6cf0\u533b\u7597",
+)
+
 _KNOWN_COMPANIES = {
     "600519.SH": ("\u8d35\u5dde\u8305\u53f0", _BAIJIU),
     "002594.SZ": ("\u6bd4\u4e9a\u8fea", _AUTO),
@@ -93,6 +169,24 @@ _KNOWN_COMPANIES = {
     "600026.SH": ("\u4e2d\u8fdc\u6d77\u80fd", _SHIPPING),
     "601975.SH": ("\u62db\u5546\u5357\u6cb9", _SHIPPING),
     "601919.SH": ("\u4e2d\u8fdc\u6d77\u63a7", _SHIPPING),
+    "688235.SH": ("\u767e\u6d4e\u795e\u5dde", _BIOPHARMA),
+    "600276.SH": ("\u6052\u745e\u533b\u836f", _INNOVATIVE_DRUG),
+    "688180.SH": ("\u541b\u5b9e\u751f\u7269", _BIOPHARMA),
+    "603259.SH": ("\u836f\u660e\u5eb7\u5fb7", "\u533b\u836f\u670d\u52a1"),
+    "688111.SH": ("\u91d1\u5c71\u529e\u516c", _SOFTWARE),
+    "600588.SH": ("\u7528\u53cb\u7f51\u7edc", _SOFTWARE),
+    "600570.SH": ("\u6052\u751f\u7535\u5b50", "\u91d1\u878dIT"),
+    "600845.SH": ("\u5b9d\u4fe1\u8f6f\u4ef6", "\u5de5\u4e1a\u8f6f\u4ef6"),
+    "002410.SZ": ("\u5e7f\u8054\u8fbe", _SOFTWARE),
+    "300033.SZ": ("\u540c\u82b1\u987a", "\u91d1\u878d\u4fe1\u606f\u670d\u52a1"),
+    "300454.SZ": ("\u6df1\u4fe1\u670d", "\u7f51\u7edc\u5b89\u5168"),
+    "002230.SZ": ("\u79d1\u5927\u8baf\u98de", "AI \u8f6f\u4ef6"),
+    "688208.SH": ("\u9053\u901a\u79d1\u6280", "\u6c7d\u8f66\u8bca\u65ad\u8f6f\u4ef6"),
+    "300760.SZ": ("\u8fc8\u745e\u533b\u7597", _MEDICAL_DEVICE),
+    "688271.SH": ("\u8054\u5f71\u533b\u7597", _MEDICAL_EQUIPMENT),
+    "002223.SZ": ("\u9c7c\u8dc3\u533b\u7597", _MEDICAL_DEVICE),
+    "300832.SZ": ("\u65b0\u4ea7\u4e1a", "\u4f53\u5916\u8bca\u65ad"),
+    "603658.SH": ("\u5b89\u56fe\u751f\u7269", "\u4f53\u5916\u8bca\u65ad"),
 }
 
 
@@ -212,6 +306,32 @@ def _is_shipping_profile(company_name: str, industry: str) -> bool:
     )
 
 
+def _is_biopharma_profile(company_name: str, industry: str) -> bool:
+    return any(
+        keyword in industry
+        for keyword in (_BIOPHARMA, _INNOVATIVE_DRUG, "\u533b\u836f", "\u5236\u836f")
+    ) or any(keyword in company_name for keyword in _BIOPHARMA_NAME_HINTS)
+
+
+def _is_medical_device_profile(company_name: str, industry: str) -> bool:
+    return any(
+        keyword in industry
+        for keyword in (
+            _MEDICAL_DEVICE,
+            _MEDICAL_EQUIPMENT,
+            "\u533b\u7528\u8017\u6750",
+            "\u4f53\u5916\u8bca\u65ad",
+        )
+    ) or any(keyword in company_name for keyword in _MEDICAL_DEVICE_NAME_HINTS)
+
+
+def _is_software_profile(company_name: str, industry: str) -> bool:
+    return any(
+        keyword in industry
+        for keyword in (_SOFTWARE, "\u91d1\u878dIT", "\u5de5\u4e1a\u8f6f\u4ef6", "\u7f51\u7edc\u5b89\u5168", "AI")
+    ) or any(keyword in company_name for keyword in _SOFTWARE_NAME_HINTS)
+
+
 def _fact_queries(symbol: str, company_name: str, industry: str) -> list[str]:
     name = company_name if company_name and company_name != "N/A" else symbol
     queries: list[str]
@@ -246,6 +366,43 @@ def _fact_queries(symbol: str, company_name: str, industry: str) -> list[str]:
             f"{name} {_HORMUZ} {_RESTOCKING} {_OIL_TANKER}",
             f"{name} BDI BCI BPI {_DRY_BULK} {_FREIGHT_RATE}",
         ]
+    elif _is_medical_device_profile(name, industry):
+        queries = [
+            f"{name} {_MEDICAL_DEVICE} {_EQUIPMENT_RENEWAL} {_TENDER}",
+            f"{name} {_IVD} {_INSTALLED_BASE} {_REAGENT} {_CONSUMABLE}",
+            f"{name} {_VBP} {_MEDICAL_DEVICE} {_PRODUCT_PRICE}",
+            f"{name} {_REGISTRATION_CERT} {_FDA} CE {_OVERSEAS_CHANNEL}",
+            f"{name} {_ULTRASOUND} {_ENDOSCOPY} {_MEDICAL_EQUIPMENT}",
+        ]
+    elif _is_biopharma_profile(name, industry):
+        if "\u836f\u660e\u5eb7\u5fb7" in name or _CRO in industry or _CDMO in industry:
+            queries = [
+                f"{name} {_CRO} {_CDMO} {_ORDER_BACKLOG} {_GEOPOLITICAL_RISK}",
+                f"{name} {_ORDER_BACKLOG} {_CASH_FLOW} {_COMMERCIALIZATION}",
+                f"{name} BIOSECURE {_GEOPOLITICAL_RISK} {_CRO} {_CDMO}",
+            ]
+        else:
+            queries = [
+                f"{name} {_CLINICAL_TRIAL} {_PIPELINE} {_INDICATION} {_NMPA} {_FDA}",
+                f"{name} {_CDE} {_NMPA} {_FDA} {_APPROVAL}",
+                f"{name} {_MEDICAL_INSURANCE} {_COMMERCIALIZATION} {_CASH_FLOW}",
+                f"{name} {_PIPELINE} {_CLINICAL_TRIAL} ORR PFS OS",
+            ]
+    elif _is_software_profile(name, industry):
+        if "\u91d1\u5c71\u529e\u516c" in name or _WPS in name:
+            queries = [
+                f"{name} {_WPS} {_AI_PAID} {_ARPU} {_PAID_USERS} {_SUBSCRIPTION}",
+                f"{name} {_CONTRACT_LIABILITY} {_SUBSCRIPTION} \u673a\u6784\u8ba2\u9605 \u6388\u6743",
+                f"{name} {_XINCHUANG} {_TENDER} WPS 365",
+                f"{name} {_WPS} AI \u4ef7\u683c {_SUBSCRIPTION} Copilot",
+            ]
+        else:
+            queries = [
+                f"{name} {_SAAS} ARR {_ARPU} {_RENEWAL} {_CONTRACT_LIABILITY}",
+                f"{name} {_SUBSCRIPTION} {_PAID_USERS} {_MAU} {_AI_PAID}",
+                f"{name} {_ORDER_BACKLOG} \u9879\u76ee \u9a8c\u6536 \u56de\u6b3e",
+                f"{name} {_XINCHUANG} {_TENDER} {_SOFTWARE}",
+            ]
     else:
         queries = [
             f"{name} {_PRODUCT_PRICE} {_CHANNEL_INVENTORY}",
@@ -303,6 +460,25 @@ def _purpose_for_profile(symbol: str, company_name: str, industry: str) -> str:
             "corroborate shipping-cycle facts that filings and Tushare may lag, such as VLCC TD3C/TCE, "
             "BDTI/BCTI/BDI proxies, CTFI China-import crude freight, Hormuz disruptions/reopening, "
             "restocking demand, ton-mile changes, and route-specific freight-rate commentary."
+        )
+    if _is_medical_device_profile(company_name, industry):
+        return (
+            "corroborate medical-device facts that filings and Tushare may lag, such as equipment "
+            "renewal and tender cadence, installed base, IVD reagent pull-through, VBP price pressure, "
+            "NMPA/FDA/CE registration, overseas channel quality, service network, and channel inventory."
+        )
+    if _is_biopharma_profile(company_name, industry):
+        return (
+            "corroborate biopharma facts that filings and Tushare may lag, such as clinical-trial "
+            "status, CDE/NMPA/FDA/EMA regulatory updates, approved labels, reimbursement/pricing, "
+            "commercialization, cash-runway commentary, and for CRO/CDMO names order-cycle or "
+            "geopolitical-risk signals."
+        )
+    if _is_software_profile(company_name, industry):
+        return (
+            "corroborate software/SaaS facts that filings and Tushare may lag, such as ARR/ARPU, "
+            "paid users, MAU conversion, renewal/churn, contract-liability structure, AI paid "
+            "adoption, pricing tiers, Xinchuang tenders, project acceptance, and cash collection."
         )
     return (
         "fill small but thesis-critical high-frequency facts that filings and Tushare may not cover, "
@@ -403,6 +579,21 @@ def get_web_fact_check_context(
             [
                 "- For shipping names, separate route-level rates (VLCC TD3C/TCE, CTFI) from broad proxies (BDTI/BCTI/BDI). Do not treat broad indices as exact voyage economics.",
                 "- Treat Hormuz reopening as a two-sided mechanism: lower risk premium and faster vessel turnover can pressure rates, while restocking, queue normalization, and renewed cargo flows can support near-term demand. Require freight-rate or cargo-flow evidence before calling it bullish or bearish.",
+            ]
+        )
+    if _is_biopharma_profile(company_name, industry):
+        instructions.extend(
+            [
+                "- For biopharma names, separate official clinical/regulatory sources from news repetition. Use trial phase, endpoint, comparator, enrollment, and label status before turning a web result into a catalyst.",
+                "- For CRO/CDMO/pharma-services names, search evidence should support order visibility, customer funding, utilization, geopolitical risk, or FCF durability; do not apply drug-owner pipeline valuation unless the company owns product economics.",
+            ]
+        )
+    if _is_software_profile(company_name, industry):
+        instructions.extend(
+            [
+                "- For software/SaaS names, do not use channel-inventory or generic product-price searches as thesis evidence unless the company sells hardware through channels. Route web checks to ARR/ARPU, paid users, renewal/churn, contract-liability structure, AI paid adoption, pricing tiers, tenders, project acceptance, and cash collection.",
+                "- For WPS/office software, separate MAU from paid users, paid users from ARPU, AI feature launches from AI paid revenue, and contract liabilities from verified subscription renewal.",
+                "- For project-heavy software, web evidence should support order backlog, implementation/acceptance timing, receivables, and collection rather than SaaS valuation shortcuts.",
             ]
         )
     lines.extend(instructions)

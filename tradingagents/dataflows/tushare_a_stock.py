@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from datetime import date, datetime
 import re
+import time
 from typing import Annotated
 
 import pandas as pd
@@ -192,7 +193,14 @@ def _get_pro_client():
         raise TushareDataError(str(exc)) from exc
 
 
-def _query_pro_with_fallback(api_name: str, *, empty_ok: bool = False, **kwargs) -> pd.DataFrame:
+def _query_pro_with_fallback(
+    api_name: str,
+    *,
+    empty_ok: bool = False,
+    empty_retries: int = 2,
+    retry_sleep_sec: float = 0.4,
+    **kwargs,
+) -> pd.DataFrame:
     """Query configured Tushare gateway, then official endpoint if needed."""
     errors: list[str] = []
     empty_sources: list[str] = []
@@ -202,25 +210,33 @@ def _query_pro_with_fallback(api_name: str, *, empty_ok: bool = False, **kwargs)
         raise TushareDataError(str(exc)) from exc
 
     for source, pro in clients:
-        try:
-            func = getattr(pro, api_name, None)
-            if callable(func):
-                data = func(**kwargs)
-            elif hasattr(pro, "query"):
-                data = pro.query(api_name, **kwargs)
-            else:
-                raise TushareDataError(f"Tushare client does not expose {api_name}.")
-        except Exception as exc:
-            errors.append(f"{source}: {exc}")
-            continue
-        if data is None:
+        attempts = max(1, empty_retries + 1 if source == "configured_http_url" else 1)
+        for attempt in range(attempts):
+            try:
+                func = getattr(pro, api_name, None)
+                if callable(func):
+                    data = func(**kwargs)
+                elif hasattr(pro, "query"):
+                    data = pro.query(api_name, **kwargs)
+                else:
+                    raise TushareDataError(f"Tushare client does not expose {api_name}.")
+            except Exception as exc:
+                errors.append(f"{source}: {exc}")
+                break
+            if data is None:
+                if attempt + 1 < attempts:
+                    time.sleep(retry_sleep_sec)
+                    continue
+                empty_sources.append(source)
+                break
+            if not isinstance(data, pd.DataFrame):
+                return data
+            if not data.empty or empty_ok:
+                return data
+            if attempt + 1 < attempts:
+                time.sleep(retry_sleep_sec)
+                continue
             empty_sources.append(source)
-            continue
-        if not isinstance(data, pd.DataFrame):
-            return data
-        if not data.empty or empty_ok:
-            return data
-        empty_sources.append(source)
 
     if errors:
         error_text = "; ".join(errors)
@@ -233,12 +249,12 @@ def _query_pro_with_fallback(api_name: str, *, empty_ok: bool = False, **kwargs)
         )
         if any(marker.lower() in error_text.lower() for marker in token_error_markers):
             empty_note = (
-                f"; empty responses from {', '.join(empty_sources)}"
+                f"; configured gateway returned empty responses from {', '.join(empty_sources)}"
                 if empty_sources
                 else ""
             )
             raise TushareDataError(
-                f"{api_name} unavailable: official Tushare rejected TUSHARE_TOKEN"
+                f"{api_name} unavailable: official fallback rejected TUSHARE_TOKEN"
                 f"{empty_note}; errors: {error_text}"
             )
 
@@ -736,10 +752,19 @@ def _fetch_daily_basic_latest(symbol: str, curr_date: str) -> pd.Series | None:
     ]
     fields = ",".join(field_list)
     data = pd.DataFrame()
+    errors: list[str] = []
+
+    def query_daily_basic(**kwargs) -> pd.DataFrame:
+        try:
+            result = _query_pro_with_fallback("daily_basic", **kwargs)
+        except Exception as exc:
+            errors.append(str(exc))
+            return pd.DataFrame()
+        return result if isinstance(result, pd.DataFrame) else pd.DataFrame()
+
     for lookback_days in (14, 45, 120):
         start = (curr_date_dt - relativedelta(days=lookback_days)).strftime("%Y%m%d")
-        data = _query_pro_with_fallback(
-            "daily_basic",
+        data = query_daily_basic(
             ts_code=symbol,
             start_date=start,
             end_date=end,
@@ -749,12 +774,24 @@ def _fetch_daily_basic_latest(symbol: str, curr_date: str) -> pd.Series | None:
             break
     if data is None or data.empty:
         start = (curr_date_dt - relativedelta(days=120)).strftime("%Y%m%d")
-        data = _query_pro_with_fallback(
-            "daily_basic",
+        data = query_daily_basic(
             ts_code=symbol,
             start_date=start,
             end_date=end,
         )
+    if data is None or data.empty:
+        for offset in range(0, 45):
+            trade_date = (curr_date_dt - relativedelta(days=offset)).strftime("%Y%m%d")
+            for kwargs in (
+                {"ts_code": symbol, "trade_date": trade_date, "fields": fields},
+                {"ts_code": symbol, "trade_date": trade_date},
+                {"trade_date": trade_date, "fields": fields},
+            ):
+                data = query_daily_basic(**kwargs)
+                if data is not None and not data.empty:
+                    break
+            if data is not None and not data.empty:
+                break
     if data is None or data.empty:
         return None
     if "trade_date" not in data.columns:
@@ -771,32 +808,9 @@ def _fetch_daily_basic_latest(symbol: str, curr_date: str) -> pd.Series | None:
     return data.iloc[0]
 
 
-def _fetch_daily(symbol: str, start_date: str, end_date: str) -> pd.DataFrame:
-    symbol = symbol.strip().upper()
-    if not is_a_share_symbol(symbol):
-        raise TushareDataError(
-            f"Tushare A-share vendor expects symbols like 000001.SZ, 600519.SH, "
-            f"or 920001.BJ; got {symbol!r}."
-        )
-
-    start = _to_tushare_date(start_date)
-    end = _to_tushare_date(end_date)
-
-    try:
-        data = _query_pro_with_fallback(
-            "daily",
-            ts_code=symbol,
-            start_date=start,
-            end_date=end,
-        )
-    except Exception as exc:
-        raise TushareDataError(
-            f"Tushare daily data unavailable for {symbol} between {start} and {end}: {exc}"
-        ) from exc
-
+def _normalize_daily_frame(data: pd.DataFrame) -> pd.DataFrame:
     if data is None or data.empty:
         return pd.DataFrame()
-
     data = data.rename(
         columns={
             "trade_date": "Date",
@@ -830,6 +844,73 @@ def _fetch_daily(symbol: str, start_date: str, end_date: str) -> pd.DataFrame:
     data[numeric_cols] = data[numeric_cols].apply(pd.to_numeric, errors="coerce")
 
     return data
+
+
+def _fetch_daily(symbol: str, start_date: str, end_date: str) -> pd.DataFrame:
+    symbol = symbol.strip().upper()
+    if not is_a_share_symbol(symbol):
+        raise TushareDataError(
+            f"Tushare A-share vendor expects symbols like 000001.SZ, 600519.SH, "
+            f"or 920001.BJ; got {symbol!r}."
+        )
+
+    start = _to_tushare_date(start_date)
+    end = _to_tushare_date(end_date)
+    daily_fields = "ts_code,trade_date,open,high,low,close,pre_close,change,pct_chg,vol,amount"
+    raw_frames: list[pd.DataFrame] = []
+    errors: list[str] = []
+
+    def query_daily(**kwargs) -> pd.DataFrame:
+        try:
+            result = _query_pro_with_fallback("daily", **kwargs)
+        except Exception as exc:
+            errors.append(str(exc))
+            return pd.DataFrame()
+        if not isinstance(result, pd.DataFrame) or result.empty:
+            return pd.DataFrame()
+        if "ts_code" in result.columns:
+            result = result[result["ts_code"].astype(str).str.upper() == symbol]
+        return result
+
+    for kwargs in (
+        {"ts_code": symbol, "start_date": start, "end_date": end},
+        {"ts_code": symbol, "start_date": start, "end_date": end, "fields": daily_fields},
+    ):
+        data = query_daily(**kwargs)
+        if not data.empty:
+            raw_frames.append(data)
+            break
+
+    if not raw_frames:
+        end_dt = datetime.strptime(end, "%Y%m%d")
+        for offset in range(0, 45):
+            trade_date = (end_dt - relativedelta(days=offset)).strftime("%Y%m%d")
+            for kwargs in (
+                {"ts_code": symbol, "trade_date": trade_date, "fields": daily_fields},
+                {"ts_code": symbol, "trade_date": trade_date},
+                {"trade_date": trade_date, "fields": daily_fields},
+            ):
+                data = query_daily(**kwargs)
+                if not data.empty:
+                    raw_frames.append(data)
+                    break
+            if raw_frames:
+                break
+
+    if not raw_frames:
+        if errors:
+            rendered_errors = "; ".join(dict.fromkeys(errors))
+            raise TushareDataError(
+                f"Tushare daily data unavailable for {symbol} between {start} and {end}: {rendered_errors}"
+            )
+        return pd.DataFrame()
+
+    data = pd.concat(raw_frames, ignore_index=True)
+    if "trade_date" not in data.columns:
+        raise TushareDataError(
+            f"Tushare daily data unavailable for {symbol} between {start} and {end}: response lacked trade_date."
+        )
+    return _normalize_daily_frame(data.drop_duplicates(subset=["trade_date"], keep="first"))
 
 
 def _fetch_daily_with_backfill(
@@ -995,7 +1076,11 @@ def get_fundamentals(
         curr_date = datetime.now().strftime("%Y-%m-%d")
 
     basic = _fetch_stock_basic(symbol)
-    daily_basic = _fetch_daily_basic_latest(symbol, curr_date)
+    daily_basic_note = ""
+    daily_basic = _safe_query("daily_basic", _fetch_daily_basic_latest, symbol, curr_date)
+    if isinstance(daily_basic, TushareDataError):
+        daily_basic_note = str(daily_basic)
+        daily_basic = None
     fina_indicator = _safe_query(
         "fina_indicator", _fetch_fina_indicator, symbol, curr_date
     )
@@ -1056,6 +1141,15 @@ def get_fundamentals(
                 f"| Turnover Rate | {_format_value(daily_basic.get('turnover_rate'), '%')} |",
                 f"| Total Market Value | {_format_value(total_mv)} ten-thousand CNY |",
                 f"| Circulating Market Value | {_format_value(circ_mv)} ten-thousand CNY |",
+            ]
+        )
+    elif daily_basic_note:
+        lines.extend(
+            [
+                "## Valuation And Trading Snapshot",
+                f"- Snapshot unavailable: {daily_basic_note}",
+                "- Impact: PE/PB/market-cap snapshot is missing, but company profile and statement data can still be used if available.",
+                "",
             ]
         )
 

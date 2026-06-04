@@ -2,6 +2,7 @@
 
 from tradingagents.agents.utils.agent_utils import (
     get_baijiu_instruction,
+    get_biopharma_instruction,
     get_building_materials_instruction,
     get_buy_side_thesis_instruction,
     get_compute_leasing_instruction,
@@ -11,6 +12,9 @@ from tradingagents.agents.utils.agent_utils import (
     get_fair_cycle_valuation_instruction,
     get_filing_intelligence_instruction,
     get_focused_report_instruction,
+    get_insurance_instruction,
+    get_medical_device_instruction,
+    get_metals_mining_instruction,
     get_investor_interaction_instruction,
     get_market_expectation_instruction,
     get_management_capital_allocation_instruction,
@@ -21,6 +25,7 @@ from tradingagents.agents.utils.agent_utils import (
     get_supply_demand_fallback_instruction,
     get_supply_chain_selection_instruction,
     get_shareholder_structure_instruction,
+    get_software_instruction,
     get_three_layer_conclusion_instruction,
     get_thematic_valuation_instruction,
     get_web_fact_check_instruction,
@@ -63,6 +68,11 @@ def create_bear_researcher(llm):
         compute_leasing_context = prompt_contexts["compute_leasing_context"]
         dividend_defensive_context = prompt_contexts["dividend_defensive_context"]
         building_materials_context = prompt_contexts["building_materials_context"]
+        biopharma_context = prompt_contexts["biopharma_context"]
+        software_context = prompt_contexts["software_context"]
+        insurance_context = prompt_contexts["insurance_context"]
+        medical_device_context = prompt_contexts["medical_device_context"]
+        metals_mining_context = prompt_contexts["metals_mining_context"]
         prompt_history = compact_debate_history(history, profile="research")
         prompt_current_response = compact_for_prompt(
             current_response,
@@ -110,6 +120,11 @@ Key points to focus on:
 - Compute-Leasing Discipline: If gated compute-leasing context says `Status: triggered`, attack weak asset delivery, customer contract, unit-economics, capex/funding, transition-credibility, and disclosure gaps. If it says `Status: not_applicable`, do not use compute leasing as a bear theme.
 - Dividend-Defensive Discipline: If gated dividend defensive context says `Status: triggered`, attack dividend-trap risk: shrinking profit, weak FCF, excessive payout, bank capital constraints, industry erosion, or better peer alternatives. If it says `Status: not_applicable`, do not force a high-dividend bear frame.
 - Building-Materials Discipline: If gated building-materials context says `Status: triggered`, use it to discipline the bear case rather than expand the memo mechanically. Anchor on company filings and management wording, then state the industry stage and likely evolution path, then test sector-native variables: product ASP, regional demand, property-completion/infrastructure/renovation exposure, capacity and utilization, upstream energy/raw-material costs, inventory, receivables, cash collection, impairment, and maintenance capex. For low-PB/high-dividend names, explain when book-value discount and dividend yield are value-trap signals rather than safety; do not let buybacks distract from weak operating or product-cycle evidence.
+- Biopharma Discipline: If gated biopharma context says `Status: triggered`, attack weak product sales, reimbursement/price pressure, trial design, immature endpoints, regulatory uncertainty, cash burn, dilution risk, BD economics, and competitive intensity. For CRO/CDMO names, attack order visibility, customer funding, project conversion, utilization, capex returns, geopolitical restrictions, and FCF durability. Missing clinical/regulatory evidence is a conviction cap, not standalone bearish proof.
+- Software Discipline: If gated software context says `Status: triggered`, attack the precise software evidence gap: missing paid users, ARPU, renewal/churn, contract-liability conversion, AI paid adoption, implementation acceptance, receivables, or cash collection. Do not treat missing SaaS metrics as automatic bearish proof; use it to cap conviction and challenge valuation credit.
+- Insurance Discipline: If gated insurance context says `Status: triggered`, attack weak NBV/EV growth, channel productivity, solvency buffer, investment-yield spread, P&C COR, dividend coverage, and SOTP over-crediting. Keep the bank subsidiary separate from insurance-core evidence.
+- Medical-Device Discipline: If gated medical-device context says `Status: triggered`, attack weak installed-base evidence, tender/procurement slowdown, VBP price pressure, poor reagent pull-through, overseas channel inventory, registration delays, receivable growth, cash-conversion gaps, and product-mix/gross-margin deterioration.
+- Metals-Mining Discipline: If gated metals/mining context says `Status: triggered`, attack weak reserve/grade evidence, high or undisclosed AISC, falling equity output, project delays, smelting/trading dilution, inventory and derivative losses, leverage, capex overruns, jurisdiction risk, and unsupported NAV/SOTP.
 - Bull Counterpoints: Critically analyze the bull argument with specific data and sound reasoning, exposing weaknesses or over-optimistic assumptions.
 - Engagement: Present your argument in a conversational style, directly engaging with the bull analyst's points and debating effectively rather than simply listing facts.
 - Anti-repetition discipline: {round_instruction}
@@ -138,6 +153,11 @@ Gated baijiu verification context: {baijiu_context}
 Gated compute-leasing verification context: {compute_leasing_context}
 Gated dividend defensive verification context: {dividend_defensive_context}
 Gated building-materials verification context: {building_materials_context}
+Gated biopharma verification context: {biopharma_context}
+Gated software verification context: {software_context}
+Gated insurance verification context: {insurance_context}
+Gated medical-device verification context: {medical_device_context}
+Gated metals/mining verification context: {metals_mining_context}
 Conversation history of the debate: {prompt_history}
 Last bull argument: {prompt_current_response}
 Use this information to deliver a compelling bear argument, refute the bull's claims, and engage in a dynamic debate that demonstrates the risks and weaknesses of investing in the stock.
@@ -163,6 +183,11 @@ Use this information to deliver a compelling bear argument, refute the bull's cl
 {get_compute_leasing_instruction()}
 {get_dividend_defensive_instruction()}
 {get_building_materials_instruction()}
+{get_biopharma_instruction()}
+{get_software_instruction()}
+{get_insurance_instruction()}
+{get_medical_device_instruction()}
+{get_metals_mining_instruction()}
 {get_focused_report_instruction()}
 """
 

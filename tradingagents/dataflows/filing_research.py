@@ -690,6 +690,94 @@ _INDUSTRY_PLAYBOOKS: dict[str, tuple[FilingQuestion, ...]] = {
             "Reject concept-only rerating without monetization.",
         ),
     ),
+    "medical_device": (
+        FilingQuestion(
+            "device_installed_base",
+            "installed_base",
+            "Installed base, replacement cycle, tender cadence, and delivery/acceptance must support equipment-cycle claims.",
+            (
+                "\u88c5\u673a",
+                "\u8bbe\u5907\u66f4\u65b0",
+                "\u62db\u6295\u6807",
+                "\u91c7\u8d2d",
+                "\u4ea4\u4ed8",
+                "\u9a8c\u6536",
+                "\u76d1\u62a4\u4eea",
+                "\u9ebb\u9189\u673a",
+                "\u8d85\u58f0",
+                "\u5f71\u50cf\u8bbe\u5907",
+            ),
+            ("quarterly", "semiannual", "annual"),
+            "Support the equipment cycle when installed base and tender evidence convert into accepted revenue.",
+            "Challenge equipment optimism if procurement, delivery, or acceptance evidence is weak.",
+        ),
+        FilingQuestion(
+            "device_ivd_reagent",
+            "recurring_revenue",
+            "IVD analyzer installed base should convert into reagent/consumable pull-through, not just one-off equipment sales.",
+            (
+                "\u4f53\u5916\u8bca\u65ad",
+                "\u8bca\u65ad\u8bd5\u5242",
+                "\u8bd5\u5242",
+                "\u8017\u6750",
+                "\u68c0\u9a8c\u8bbe\u5907",
+                "\u6d41\u6c34\u7ebf",
+                "IVD",
+            ),
+            ("quarterly", "semiannual", "annual"),
+            "Support recurring revenue and margin durability when reagent pull-through is disclosed.",
+            "Question recurring-quality claims if analyzer placement lacks reagent volume or menu evidence.",
+        ),
+        FilingQuestion(
+            "device_vbp_policy",
+            "policy_pricing",
+            "VBP, centralized procurement, and equipment-renewal policy must be translated into price, volume, and margin impact.",
+            (
+                "\u96c6\u91c7",
+                "\u5e26\u91cf\u91c7\u8d2d",
+                "\u8bbe\u5907\u66f4\u65b0",
+                "\u8d34\u606f\u8d37\u6b3e",
+                "\u533b\u7597\u65b0\u57fa\u5efa",
+                "\u56fd\u4ea7\u66ff\u4ee3",
+            ),
+            ("quarterly", "semiannual", "annual"),
+            "Support demand or share gains when policy transmission is company-specific.",
+            "Challenge if policy only expands the industry while pricing pressure erodes economics.",
+        ),
+        FilingQuestion(
+            "device_overseas_registration",
+            "overseas",
+            "Overseas growth requires registration, distributor quality, localization, service network, and channel-inventory evidence.",
+            (
+                "\u6d77\u5916",
+                "\u51fa\u6d77",
+                "\u6ce8\u518c\u8bc1",
+                "\u6e20\u9053",
+                "\u7ecf\u9500\u5546",
+                "FDA",
+                "CE",
+                "NMPA",
+            ),
+            ("semiannual", "annual"),
+            "Support overseas optionality when registration and sell-through evidence exist.",
+            "Challenge shipment-led growth if channel inventory or local service quality is unclear.",
+        ),
+        FilingQuestion(
+            "device_cash_quality",
+            "cash_quality",
+            "Receivables, inventory, distributor credit, and operating cash flow must confirm profit quality.",
+            (
+                "\u5e94\u6536\u8d26\u6b3e",
+                "\u5b58\u8d27",
+                "\u7ecf\u8425\u6027\u73b0\u91d1\u6d41",
+                "\u73b0\u91d1\u6d41",
+                "\u7ecf\u9500\u5546",
+            ),
+            ("quarterly", "semiannual", "annual"),
+            "Validate high-quality growth when profit converts into cash.",
+            "Expose channel stuffing, collection risk, or inventory pressure.",
+        ),
+    ),
     "metals_mining": (
         FilingQuestion(
             "metals_resource_volume",
@@ -996,6 +1084,41 @@ def _select_industry_profile(
     normalized_parts.extend(_repair_mojibake(text) for _, text in report_texts)
     blob = " ".join(normalized_parts)
     identity_blob = f"{normalized_parts[0]} {normalized_parts[1]}"
+    if any(token in identity_blob for token in ("\u4fdd\u9669", "\u5bff\u9669", "\u8d22\u9669", "\u4ea7\u9669")):
+        return "insurance"
+    medical_device_identity = any(
+        token in identity_blob
+        for token in (
+            "\u8fc8\u745e\u533b\u7597",
+            "\u8054\u5f71\u533b\u7597",
+            "\u533b\u7597\u5668\u68b0",
+            "\u533b\u7597\u8bbe\u5907",
+            "\u533b\u7528\u8017\u6750",
+            "\u4f53\u5916\u8bca\u65ad",
+        )
+    )
+    medical_device_hits = sum(
+        token in blob
+        for token in (
+            "\u533b\u7597\u5668\u68b0",
+            "\u533b\u7597\u8bbe\u5907",
+            "\u533b\u7528\u8017\u6750",
+            "\u4f53\u5916\u8bca\u65ad",
+            "\u8bca\u65ad\u8bd5\u5242",
+            "\u76d1\u62a4\u4eea",
+            "\u9ebb\u9189\u673a",
+            "\u8d85\u58f0",
+            "\u5185\u7aa5\u955c",
+            "\u5f71\u50cf\u8bbe\u5907",
+            "\u88c5\u673a",
+            "\u6ce8\u518c\u8bc1",
+            "\u96c6\u91c7",
+            "\u8bbe\u5907\u66f4\u65b0",
+            "IVD",
+        )
+    )
+    if medical_device_identity or medical_device_hits >= 3:
+        return "medical_device"
     if any(token in identity_blob for token in ("银行", "商业银行", "股份制银行")):
         return "banking"
     if any(
@@ -1192,6 +1315,18 @@ def _select_industry_profile(
         return "airlines"
     if any(token in blob for token in ("\u4fdd\u9669", "\u65b0\u4e1a\u52a1\u4ef7\u503c", "\u5185\u542b\u4ef7\u503c", "\u7efc\u5408\u6210\u672c\u7387", "\u7ee7\u7eed\u7387")):
         return "insurance"
+    if any(
+        token in blob
+        for token in (
+            "\u533b\u7597\u5668\u68b0",
+            "\u533b\u7597\u8bbe\u5907",
+            "\u533b\u7528\u8017\u6750",
+            "\u4f53\u5916\u8bca\u65ad",
+            "\u8bca\u65ad\u8bd5\u5242",
+            "\u8bbe\u5907\u66f4\u65b0",
+        )
+    ):
+        return "medical_device"
     if any(token in blob for token in ("\u6709\u8272", "\u77ff\u4e1a", "\u77ff\u5c71", "\u94dc", "\u94dd", "\u9ec4\u91d1", "\u7a00\u571f", "\u91d1\u5c5e\u91cf")):
         return "metals_mining"
     if "\u94f6\u884c" in blob:

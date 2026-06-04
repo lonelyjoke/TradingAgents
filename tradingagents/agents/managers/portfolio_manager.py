@@ -14,6 +14,7 @@ from tradingagents.agents.schemas import PortfolioDecision, render_pm_decision
 from tradingagents.agents.utils.agent_utils import (
     build_instrument_context,
     get_baijiu_instruction,
+    get_biopharma_instruction,
     get_building_materials_instruction,
     get_buy_side_thesis_instruction,
     get_buy_side_underwriting_modules_instruction,
@@ -24,6 +25,10 @@ from tradingagents.agents.utils.agent_utils import (
     get_fair_cycle_valuation_instruction,
     get_filing_intelligence_instruction,
     get_focused_report_instruction,
+    get_insurance_instruction,
+    get_medical_device_instruction,
+    get_metals_mining_instruction,
+    get_price_move_attribution_instruction,
     get_investor_interaction_instruction,
     get_language_instruction,
     get_market_expectation_instruction,
@@ -36,6 +41,7 @@ from tradingagents.agents.utils.agent_utils import (
     get_supply_demand_fallback_instruction,
     get_supply_chain_selection_instruction,
     get_shareholder_structure_instruction,
+    get_software_instruction,
     get_three_layer_conclusion_instruction,
     get_thematic_valuation_instruction,
     get_web_fact_check_instruction,
@@ -73,6 +79,7 @@ def create_portfolio_manager(llm):
         prompt_contexts = compact_state_fields(state, profile="portfolio")
         thematic_catalyst_context = prompt_contexts["thematic_catalyst_context"]
         commodity_context = prompt_contexts["commodity_context"]
+        price_move_attribution_context = prompt_contexts["price_move_attribution_context"]
         shipping_context = prompt_contexts["shipping_context"]
         filing_intelligence_context = prompt_contexts["filing_intelligence_context"]
         peer_comparison_context = prompt_contexts["peer_comparison_context"]
@@ -89,6 +96,11 @@ def create_portfolio_manager(llm):
         compute_leasing_context = prompt_contexts["compute_leasing_context"]
         dividend_defensive_context = prompt_contexts["dividend_defensive_context"]
         building_materials_context = prompt_contexts["building_materials_context"]
+        biopharma_context = prompt_contexts["biopharma_context"]
+        software_context = prompt_contexts["software_context"]
+        insurance_context = prompt_contexts["insurance_context"]
+        medical_device_context = prompt_contexts["medical_device_context"]
+        metals_mining_context = prompt_contexts["metals_mining_context"]
         data_coverage_context = prompt_contexts["data_coverage_context"]
         investment_debate_state = state.get("investment_debate_state", {})
         bull_bear_context = ""
@@ -231,10 +243,15 @@ def create_portfolio_manager(llm):
 - The report must include a differentiated view: what consensus or market pricing appears to believe, which part you agree with, which part you challenge, and what future evidence would cause the market to reprice.
 - In the valuation/cycle discussion, integrate the historical price-EPS-PE decomposition: state whether today's quote is earnings-supported, multiple-supported, double-engine, or fragile, and connect that answer to the forward EPS bridge.
 - For commodity/resource/cyclical names, integrate the commodity/product-price context into the same valuation/cycle discussion: state whether product-price evidence supports or contradicts the expected EPS/margin/inventory turn.
+- When price-move attribution context is available, integrate it into the action plan: separate market, same-metal equity, cross-metal equity, mapped commodity, company-event, valuation, and failed-rebound explanations. A large drop with mild commodity futures is not automatically an emotion-kill buy; require valuation/NAV support, no material company event, and stabilization evidence before upgrading.
 - For shipping names, integrate the shipping/freight-rate context into the same valuation/cycle discussion: separate broad freight proxies from route-level rates, identify the route economics that matter for the company, and test two-sided Hormuz reopening/restocking mechanisms before calling the setup bullish or bearish. If VLCC TD3C/TCE/CTFI is missing, cap conviction and define the exact evidence that would turn a watch thesis into an add/trim decision; do not use the missing data alone as the decisive Underweight/Sell reason.
 - For A-share compute-leasing names, use the gated compute-leasing context only when it says `Status: triggered` or official evidence in the prompt independently proves the business. If it says `Status: not_applicable`, do not mention compute leasing as a valuation driver. When triggered, explicitly separate legacy business value, verified compute-leasing value, and unverified compute optionality; discuss asset ownership/delivery, customer contracts, unit economics, capex/funding, transition credibility, and falsification signals.
 - For defensive/high-dividend candidates, use the gated dividend defensive context only when it says `Status: triggered` or when other supplied evidence independently proves a stable dividend defensive thesis. Decide whether the target is a true defensive dividend asset, a dividend-trap risk, inferior to alternatives, or best used as one sleeve in a diversified defensive basket.
 - For building-materials candidates, use the gated building-materials context only when it says `Status: triggered` or when other supplied evidence independently proves a cement, waterproofing, glass/fiberglass, gypsum-board, pipe, coating, ceramic-tile, hardware, wood-panel, or adjacent building-materials business. Treat it as a discipline layer, not the whole memo: anchor first on company filings and management wording, then classify the industry stage and likely evolution path, then explain low-PB/high-dividend setups through asset value, product cycle, cash conversion, payout safety, and capital allocation. Add a dedicated **Building Materials Operating Cycle Verdict** only when it changes the rating, valuation, sizing, or action plan; otherwise integrate the relevant points into the business, valuation, or risk sections. Treat buybacks and dividends as shareholder-return, safety-margin, and controlling-shareholder-attitude evidence, not as the whole thesis.
+- For software/SaaS candidates, use the gated software context only when it says `Status: triggered` or when other supplied evidence independently proves a software, SaaS, financial IT, cybersecurity, industrial software, AI software, or hardware-plus-service business. Classify the model before valuation. For SaaS/product-led names, require paid users, ARPU, renewal/churn, contract-liability conversion, and AI paid adoption before giving SaaS-like or AI-uplift valuation credit. For project-heavy software, require backlog, acceptance, receivables, and collection. Broad software-service peer baskets are not final relative-value proof.
+- For insurance candidates, use the gated insurance context only when it says `Status: triggered` or when other supplied evidence independently proves an insurance business. Write through insurance-native drivers: NBV, EV/P-EV, channel quality, solvency, investment yield versus liability cost, P&C COR, dividend capacity, and SOTP for bank/technology/asset-management subsidiaries. Do not let a bank subsidiary turn an integrated insurer into a pure bank memo.
+- For medical-device candidates, use the gated medical-device context only when it says `Status: triggered` or when other supplied evidence independently proves a medical equipment, IVD, reagent/consumables, or high-value device business. Write through device-native drivers: installed base, replacement cycle, tender/procurement cadence, reagent pull-through, VBP price-volume offset, registration, overseas channel quality, service attach rate, receivables, cash conversion, product mix, and gross-margin durability. Do not value the company like an innovative-drug pipeline unless it owns drug-like asset economics.
+- For metals/mining candidates, use the gated metals/mining context only when it says `Status: triggered` or when other supplied evidence independently proves a mining, smelting, refining, or metal-resource business. Write through mining-native drivers: exchange price proxies, realized selling price, reserve/resource quality, grade, equity output, AISC/unit cost, smelting/trading split, hedging/inventory, project capex/ramp, jurisdiction risk, balance-sheet survival, and NAV/SOTP. Do not let metal-price beta alone carry a Buy or Sell call.
 - Use the Debate & Decision Logic section to summarize the strongest bull case, strongest bear case, the real disagreement, the core bet, and why you choose one side after weighing evidence quality, expectation gap, and probability/payoff.
 - Use the Catalysts, Optionality & Falsification section to distinguish what belongs in the base case from what remains scenario valuation or narrative option value. Preserve verified second-growth curves, investee holdings, policy support, and live thematic catalysts, but clearly say why they do or do not change today's rating.
 - When verified primary investments, non-listed equity holdings, investee IPOs, or asset-revaluation candidates are material, include a **Primary Investment NAV / Asset Revaluation** bridge. Separate this from recurring operating earnings; show conservative/base/upside values with carrying value, latest financing or IPO reference where available, exit probability, lock-up/liquidity haircuts, tax/dilution or double-counting checks, and the resulting per-share or market-cap impact. Market theme enthusiasm may affect probability/payoff, but only the haircut-adjusted incremental NAV should enter pure value investing estimates.
@@ -267,6 +284,7 @@ def create_portfolio_manager(llm):
 - Trader's transaction proposal: **{trader_plan}**
 - Thematic catalyst cross-check and valuation bridge: **{thematic_catalyst_context}**
 - Commodity/product-price context: **{commodity_context}**
+- Price-move attribution context: **{price_move_attribution_context}**
 - Shipping/freight-rate context: **{shipping_context}**
 - Financial-report intelligence: **{filing_intelligence_context}**
 - Same-industry peer comparison: **{peer_comparison_context}**
@@ -283,6 +301,11 @@ def create_portfolio_manager(llm):
 - Gated compute-leasing verification context: **{compute_leasing_context}**
 - Gated dividend defensive verification context: **{dividend_defensive_context}**
 - Gated building-materials verification context: **{building_materials_context}**
+- Gated biopharma verification context: **{biopharma_context}**
+- Gated software verification context: **{software_context}**
+- Gated insurance verification context: **{insurance_context}**
+- Gated medical-device verification context: **{medical_device_context}**
+- Gated metals/mining verification context: **{metals_mining_context}**
 - Data coverage audit: **{data_coverage_context}**
 {lessons_line}
 {recent_decision_line}
@@ -301,6 +324,10 @@ Be decisive and ground every conclusion in specific evidence from the analysts.
 {get_material_catalyst_instruction()}
 {get_thematic_valuation_instruction()}
 {get_filing_intelligence_instruction()}
+{get_insurance_instruction()}
+{get_medical_device_instruction()}
+{get_metals_mining_instruction()}
+{get_price_move_attribution_instruction()}
 {get_peer_selection_instruction()}
 {get_supply_chain_selection_instruction()}
 {get_earnings_model_instruction()}
@@ -316,6 +343,8 @@ Be decisive and ground every conclusion in specific evidence from the analysts.
 {get_compute_leasing_instruction()}
 {get_dividend_defensive_instruction()}
 {get_building_materials_instruction()}
+{get_biopharma_instruction()}
+{get_software_instruction()}
 {get_fair_cycle_valuation_instruction()}
 {get_focused_report_instruction()}
 If an important investment claim depends on an unverified commodity price, product spread, inventory, policy detail, wholesale price, or exact percentage, list it under an "Unverified Key Assumptions" paragraph instead of treating it as fact. Do not place unverified exact prices in the holder/builder action plan as hard triggers; turn them into verification items.{get_language_instruction()}"""

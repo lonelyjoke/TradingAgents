@@ -6,6 +6,7 @@ from tradingagents.agents.schemas import ResearchPlan, render_research_plan
 from tradingagents.agents.utils.agent_utils import (
     build_instrument_context,
     get_baijiu_instruction,
+    get_biopharma_instruction,
     get_building_materials_instruction,
     get_buy_side_thesis_instruction,
     get_buy_side_underwriting_modules_instruction,
@@ -16,6 +17,10 @@ from tradingagents.agents.utils.agent_utils import (
     get_fair_cycle_valuation_instruction,
     get_filing_intelligence_instruction,
     get_focused_report_instruction,
+    get_insurance_instruction,
+    get_medical_device_instruction,
+    get_metals_mining_instruction,
+    get_price_move_attribution_instruction,
     get_investor_interaction_instruction,
     get_market_expectation_instruction,
     get_management_capital_allocation_instruction,
@@ -27,6 +32,7 @@ from tradingagents.agents.utils.agent_utils import (
     get_supply_demand_fallback_instruction,
     get_supply_chain_selection_instruction,
     get_shareholder_structure_instruction,
+    get_software_instruction,
     get_three_layer_conclusion_instruction,
     get_thematic_valuation_instruction,
     get_web_fact_check_instruction,
@@ -56,6 +62,7 @@ def create_research_manager(llm):
         prompt_contexts = compact_state_fields(state, profile="research")
         thematic_catalyst_context = prompt_contexts["thematic_catalyst_context"]
         commodity_context = prompt_contexts["commodity_context"]
+        price_move_attribution_context = prompt_contexts["price_move_attribution_context"]
         shipping_context = prompt_contexts["shipping_context"]
         filing_intelligence_context = prompt_contexts["filing_intelligence_context"]
         peer_comparison_context = prompt_contexts["peer_comparison_context"]
@@ -72,6 +79,11 @@ def create_research_manager(llm):
         compute_leasing_context = prompt_contexts["compute_leasing_context"]
         dividend_defensive_context = prompt_contexts["dividend_defensive_context"]
         building_materials_context = prompt_contexts["building_materials_context"]
+        biopharma_context = prompt_contexts["biopharma_context"]
+        software_context = prompt_contexts["software_context"]
+        insurance_context = prompt_contexts["insurance_context"]
+        medical_device_context = prompt_contexts["medical_device_context"]
+        metals_mining_context = prompt_contexts["metals_mining_context"]
         data_coverage_context = prompt_contexts["data_coverage_context"]
         prompt_history = compact_debate_history(history, profile="research")
         continuity_context = (
@@ -158,11 +170,17 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 - If the filing context contains a Business Segment Valuation Map or Segment Economics Pack, keep a **Business Segment Valuation Verdict** explicit enough to split mature core businesses from emerging second curves, geographies, and channels. Do not allow the debate to collapse a multi-business company into one blended PE unless the filings do not support a meaningful split.
 - If the filing context contains Internal Filing Quality Modules, keep a **Filing Internal Quality Verdict** explicit enough to summarize accounting reconciliation, segment economics, footnotes, cash-flow quality, capex/CIP returns, MD&A text changes, non-recurring profit quality, balance-sheet leading signals, shareholder-return authenticity, and disclosure quality. Synthesize the material points; do not mechanically repeat all ten if some are immaterial.
 - If commodity/product-price context is available, keep a **Commodity Cycle Verdict** explicit enough to say whether the product-price evidence supports or contradicts the margin/EPS/inventory part of the thesis.
+- If price-move attribution context is available, keep a **Sharp Move Attribution Verdict** explicit enough to say whether a recent move is market-led, same-metal sector-led, cross-metal residual, mapped-commodity-led, stock-specific, failed-rebound/trend continuation, or possible emotion kill. Do not call a drop mispriced until valuation/NAV support and event checks pass.
 - If shipping/freight-rate context is available, keep a **Shipping Cycle Verdict** explicit enough to separate broad proxies (BDTI/BCTI/BDI/BCI/BPI) from route-level economics (VLCC TD3C/TCE/CTFI), and explicitly test two-sided Hormuz mechanisms: reopening can reduce risk premium and improve vessel turnover, while restocking, queue normalization, and renewed cargo flows can support near-term cargo demand. Missing route-level freight is a conviction cap, not automatically bearish evidence.
 - If gated baijiu context says `Status: triggered`, keep a **Baijiu Channel Verification Verdict** explicit enough to separate product wholesale price evidence, channel inventory/payment quality, contract-liability seasonality, product mix, peer-basket comparison, and missing data. If it says `Status: not_applicable`, do not force baijiu analysis into the stock.
 - If gated compute-leasing context says `Status: triggered`, keep a **Compute-Leasing Verification Verdict** explicit enough to separate legacy value, verified compute-leasing value, unverified compute optionality, unit-economics gaps, capex/funding risk, and transition credibility. If it says `Status: not_applicable`, do not force compute-leasing analysis into the stock.
 - If gated dividend-defensive context says `Status: triggered`, keep a **Dividend Defensive Verdict** explicit enough to say whether this is a true defensive dividend candidate, a dividend-trap risk, or inferior to peer alternatives. If it says `Status: not_applicable`, do not force a high-dividend thesis into the stock.
 - If gated building-materials context says `Status: triggered`, use it as a discipline layer: anchor first on company filings and management wording, then classify the industry stage and likely evolution path, and then cover product price/ASP, regional demand, property-completion/infrastructure/renovation exposure, capacity/utilization, upstream costs, inventory, receivables, cash collection, payout safety, and whether low PB/high dividend is real safety or a value trap. Add a dedicated **Building Materials Operating Cycle Verdict** only when it changes the rating, valuation, sizing, or action plan; otherwise integrate the relevant points into the main business/valuation/risk discussion. Treat repurchases and dividends as shareholder-return, safety-margin, and controlling-shareholder-attitude evidence, not as the whole thesis. If it says `Status: not_applicable`, do not force building-materials logic into the stock.
+- If gated biopharma context says `Status: triggered`, keep a **Biopharma Verification Verdict** explicit enough to separate commercialized products, label expansion, late-stage pipeline, early pipeline, regulatory review, reimbursement/pricing, BD economics, R&D spend, cash runway, and dilution risk. For CRO/CDMO/pharma-services names, separate order visibility, customer funding cycle, project conversion, capacity utilization, capex returns, geopolitical risk, and FCF durability from drug-owner pipeline logic. Clinical or regulatory missing data caps conviction and belongs in the research-gap section; it is not proof of either approval or failure.
+- If gated software context says `Status: triggered`, keep a **Software Verification Verdict** explicit enough to classify the software model and separate subscription/ARR quality, paid users, ARPU, renewal/churn, contract-liability conversion, project acceptance, receivables/cash collection, AI paid adoption, and model-labeled peer valuation. If these metrics are missing, cap conviction rather than letting AI or broad software-service peer narratives carry the rating.
+- If gated insurance context says `Status: triggered`, keep an **Insurance Verification Verdict** explicit enough to separate life/health NBV and EV, channel quality, solvency, investment-yield spread, P&C COR, bank-subsidiary contribution, dividends, and SOTP optionality. If it says `Status: not_applicable`, do not force insurance analysis into the stock.
+- If gated medical-device context says `Status: triggered`, keep a **Medical Device Verification Verdict** explicit enough to separate equipment installed base/replacement cycle, IVD analyzer plus reagent pull-through, consumables/procedure volume, VBP/procurement price pressure, registration/overseas channel quality, receivables/cash conversion, and product-mix/gross-margin durability. If it says `Status: not_applicable`, do not force medical-device analysis into the stock.
+- If gated metals/mining context says `Status: triggered`, keep a **Metals / Mining Verification Verdict** explicit enough to separate exchange price proxies, realized selling price, reserve/resource quality, grade, equity production, AISC/unit cost, smelting/trading split, hedging/inventory, project capex/ramp, jurisdiction risk, balance-sheet survival, and NAV/SOTP. If it says `Status: not_applicable`, do not force metals/mining analysis into the stock.
 - If verified but non-base-case optionality matters, keep a **Strategic Optionality Verdict** explicit enough that downstream agents do not erase a second growth curve, investee holding, asset revaluation path, or live thematic catalyst merely because it does not flip today's rating.
 - If the thematic valuation bridge contains material `asset-revaluation` or primary-investment holdings, build an explicit **Primary Investment NAV Verdict**. Separate operating earnings from investee/NAV value; use conservative/base/upside values with liquidity, lock-up, exit-probability, and double-counting haircuts. Do not collapse verified non-listed equity holdings into a vague "small imagination premium" when ownership value, materiality, and an IPO/exit path are disclosed.
 - Always read the Data Coverage Audit before ruling. If a module is failed, missing, or partial and touches the core bet, explicitly state the gap and cap conviction; do not let the final plan sound more certain than the data coverage allows.
@@ -176,6 +194,9 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 
 **Commodity/Product-Price Context:**
 {commodity_context}
+
+**Price-Move Attribution Context:**
+{price_move_attribution_context}
 
 **Shipping/Freight-Rate Context:**
 {shipping_context}
@@ -225,6 +246,21 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 **Gated Building-Materials Verification Context:**
 {building_materials_context}
 
+**Gated Biopharma Verification Context:**
+{biopharma_context}
+
+**Gated Software Verification Context:**
+{software_context}
+
+**Gated Insurance Verification Context:**
+{insurance_context}
+
+**Gated Medical-Device Verification Context:**
+{medical_device_context}
+
+**Gated Metals/Mining Verification Context:**
+{metals_mining_context}
+
 **Data Coverage Audit:**
 {data_coverage_context}
 
@@ -239,6 +275,10 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 {get_material_catalyst_instruction()}
 {get_thematic_valuation_instruction()}
 {get_filing_intelligence_instruction()}
+{get_insurance_instruction()}
+{get_medical_device_instruction()}
+{get_metals_mining_instruction()}
+{get_price_move_attribution_instruction()}
 {get_peer_selection_instruction()}
 {get_supply_chain_selection_instruction()}
 {get_earnings_model_instruction()}
@@ -254,6 +294,8 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 {get_compute_leasing_instruction()}
 {get_dividend_defensive_instruction()}
 {get_building_materials_instruction()}
+{get_biopharma_instruction()}
+{get_software_instruction()}
 {get_fair_cycle_valuation_instruction()}
 {get_focused_report_instruction()}
 If a bull or bear argument contains an exact product price, inventory figure, product spread, percentage change, or date-specific market claim that is not supported by the analyst reports or corroborated web fact-check context, downgrade that argument and list it as an unverified key assumption."""

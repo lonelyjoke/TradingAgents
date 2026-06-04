@@ -26,6 +26,7 @@ from rich.align import Align
 from rich.rule import Rule
 
 from tradingagents.graph.trading_graph import TradingAgentsGraph
+from tradingagents.dataflows.a_share_preflight import AShareDataPreflightError
 from tradingagents.default_config import DEFAULT_CONFIG
 from cli.models import AnalystType
 from cli.utils import *
@@ -844,6 +845,20 @@ def save_report_to_disk(final_state, ticker: str, save_path: Path):
             final_state["building_materials_context"],
             encoding="utf-8",
         )
+    if final_state.get("biopharma_context"):
+        context_dir = save_path / "0_context"
+        context_dir.mkdir(exist_ok=True)
+        (context_dir / "biopharma_context.md").write_text(
+            final_state["biopharma_context"],
+            encoding="utf-8",
+        )
+    if final_state.get("software_context"):
+        context_dir = save_path / "0_context"
+        context_dir.mkdir(exist_ok=True)
+        (context_dir / "software_context.md").write_text(
+            final_state["software_context"],
+            encoding="utf-8",
+        )
 
     # 1. Analysts
     analysts_dir = save_path / "1_analysts"
@@ -1254,6 +1269,10 @@ def run_analysis(checkpoint: bool = False):
             "System",
             "Preparing A-share context: filings, themes, peers, expectations, governance, holders, and web fact checks",
         )
+        message_buffer.add_message(
+            "System",
+            "Running A-share data preflight: core Tushare market and financial endpoints must be available before LLM generation",
+        )
         update_display(layout, stats_handler=stats_handler, start_time=start_time)
         graph._resolve_pending_entries(selections["ticker"])
 
@@ -1272,11 +1291,22 @@ def run_analysis(checkpoint: bool = False):
                 )
             update_display(layout, stats_handler=stats_handler, start_time=start_time)
 
-        init_agent_state = graph.create_initial_state_with_context(
-            selections["ticker"],
-            selections["analysis_date"],
-            progress_callback=show_context_progress,
-        )
+        try:
+            init_agent_state = graph.create_initial_state_with_context(
+                selections["ticker"],
+                selections["analysis_date"],
+                progress_callback=show_context_progress,
+            )
+        except AShareDataPreflightError as exc:
+            failure_text = str(exc)
+            (results_dir / "preflight_failure.md").write_text(
+                failure_text,
+                encoding="utf-8",
+            )
+            message_buffer.add_message("System", "A-share data preflight failed; analysis stopped before LLM generation")
+            message_buffer.update_report_section("final_trade_decision", failure_text)
+            update_display(layout, stats_handler=stats_handler, start_time=start_time)
+            raise typer.Exit(code=1)
         message_buffer.add_message("System", "A-share context preparation completed")
         update_display(layout, stats_handler=stats_handler, start_time=start_time)
         # Pass callbacks to graph config for tool execution tracking

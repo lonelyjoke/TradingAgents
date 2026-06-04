@@ -2,6 +2,7 @@ import pandas as pd
 
 from tradingagents.dataflows import commodity_research
 from tradingagents.dataflows.commodity_research import (
+    METAL_FUTURES_SOURCE_REGISTRY,
     _infer_products,
     _moa_monthly_archive_urls,
 )
@@ -113,6 +114,39 @@ def test_resource_commodity_context_does_not_use_livestock_template(monkeypatch)
     assert "Gold" in context
     assert "DCE live-hog futures" not in context
     assert "breeding-sow inventory" not in context
+    assert "## Metal Price Source Audit" in context
+    assert "COMEX HG futures" in context
+    assert "COMEX GC futures" in context
+
+
+def test_metal_price_registry_covers_core_domestic_and_overseas_links():
+    expected = {
+        "Gold": ("SHFE", "AU", "COMEX GC futures"),
+        "Silver": ("SHFE", "AG", "COMEX SI futures"),
+        "Copper": ("SHFE", "CU", "COMEX HG futures"),
+        "Aluminum": ("SHFE", "AL", "LME aluminum"),
+        "Zinc": ("SHFE", "ZN", "LME zinc"),
+        "Lead": ("SHFE", "PB", "LME lead"),
+        "Nickel": ("SHFE", "NI", "LME nickel"),
+        "Tin": ("SHFE", "SN", "LME tin"),
+        "Lithium carbonate": ("GFEX", "LC", "Fastmarkets"),
+        "Industrial silicon": ("GFEX", "SI", "SMM"),
+    }
+
+    for metal, (exchange, prefix, overseas) in expected.items():
+        source = METAL_FUTURES_SOURCE_REGISTRY[metal]
+        assert source["domestic_exchange"] == exchange
+        assert source["tushare_prefix"] == prefix
+        assert overseas in source["overseas_cross_checks"]
+
+
+def test_gold_company_mapping_uses_shfe_gold_proxy():
+    mapping = _infer_products("600547.SH")
+    product = mapping["products"][0]
+
+    assert product["name"] == "Gold"
+    assert product["prefix"] == "AU"
+    assert product["exchange"] == "SHFE"
 
 
 def test_live_hog_futures_prefers_near_month_with_main_reference(monkeypatch):

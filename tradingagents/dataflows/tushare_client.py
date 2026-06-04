@@ -1,33 +1,113 @@
 from __future__ import annotations
 
 import os
+from pathlib import Path
 from typing import Iterable
+from urllib.parse import urlparse
+
+
+EXPECTED_TUSHARE_TOKEN_LENGTH = 64
 
 
 class TushareClientError(RuntimeError):
     """Raised when the Tushare client cannot be initialized."""
 
 
+def _load_env_file(path: Path, *, override: bool = True) -> bool:
+    """Minimal .env loader used when python-dotenv is not installed."""
+    if not path.exists():
+        return False
+    for raw_line in path.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        if line.startswith("export "):
+            line = line[len("export ") :].strip()
+        key, value = line.split("=", 1)
+        key = key.strip()
+        if not key:
+            continue
+        value = value.strip()
+        if (
+            len(value) >= 2
+            and value[0] == value[-1]
+            and value[0] in {"'", '"'}
+        ):
+            value = value[1:-1]
+        if override or key not in os.environ:
+            os.environ[key] = value
+    return True
+
+
 def _load_env() -> None:
+    cwd_env = Path.cwd() / ".env"
+    repo_env = Path(__file__).resolve().parents[2] / ".env"
     try:
         from dotenv import load_dotenv
 
         # Prefer the project .env over an already-open shell session so users
         # can switch Tushare tokens without restarting PowerShell.
-        load_dotenv(override=True)
+        if cwd_env.exists():
+            load_dotenv(cwd_env, override=True)
+        elif repo_env.exists():
+            load_dotenv(repo_env, override=True)
+        else:
+            load_dotenv(override=True)
     except ImportError:
-        pass
+        _load_env_file(cwd_env, override=True) or _load_env_file(repo_env, override=True)
 
 
 def get_tushare_token() -> str:
     """Read the Tushare token from environment or .env."""
     _load_env()
-    token = os.getenv("TUSHARE_TOKEN")
+    token = (os.getenv("TUSHARE_TOKEN") or "").strip()
     if not token:
         raise TushareClientError(
             "TUSHARE_TOKEN is not configured. Set it in the current shell or .env."
         )
+    if len(token) != EXPECTED_TUSHARE_TOKEN_LENGTH:
+        raise TushareClientError(
+            "TUSHARE_TOKEN length is "
+            f"{len(token)}, expected {EXPECTED_TUSHARE_TOKEN_LENGTH}. "
+            "The full token is not printed; update .env or clear the stale shell "
+            "environment variable before running A-share research."
+        )
     return token
+
+
+def _is_probable_local_proxy_url(value: str | None) -> bool:
+    """Return True when TUSHARE_HTTP_URL looks like a local VPN/proxy endpoint."""
+    if not value:
+        return False
+    try:
+        parsed = urlparse(value)
+    except Exception:
+        return False
+    host = (parsed.hostname or "").lower()
+    port = parsed.port
+    return host in {"127.0.0.1", "localhost", "::1"} and port in {
+        7890,
+        7891,
+        7897,
+        1080,
+        10809,
+    }
+
+
+def _env_flag(name: str) -> bool:
+    return (os.getenv(name) or "").lower() in {"1", "true", "yes", "on"}
+
+
+def _official_fallback_enabled(use_configured_gateway: bool) -> bool:
+    if not use_configured_gateway:
+        return False
+    if _env_flag("TUSHARE_ENABLE_OFFICIAL_FALLBACK"):
+        return True
+    if _env_flag("TUSHARE_DISABLE_OFFICIAL_FALLBACK"):
+        return False
+    # Gateway tokens are often not valid on official api.waditu.com. Keep the
+    # official endpoint opt-in to avoid repeated false "token invalid" errors.
+    return False
 
 
 def get_tushare_pro_client():
@@ -51,7 +131,7 @@ def get_tushare_pro_client():
 
     pro = ts.pro_api(get_tushare_token())
     http_url = os.getenv("TUSHARE_HTTP_URL")
-    if http_url:
+    if http_url and not _is_probable_local_proxy_url(http_url):
         pro._DataApi__http_url = http_url.rstrip("/") + "/"
     return pro
 
@@ -78,18 +158,14 @@ def get_tushare_pro_clients() -> Iterable[tuple[str, object]]:
     clients: list[tuple[str, object]] = []
 
     configured = ts.pro_api(token)
-    if http_url:
+    use_configured_gateway = bool(http_url) and not _is_probable_local_proxy_url(http_url)
+    if use_configured_gateway:
         configured._DataApi__http_url = http_url.rstrip("/") + "/"
         clients.append(("configured_http_url", configured))
     else:
         clients.append(("official", configured))
 
-    fallback_enabled = os.getenv("TUSHARE_DISABLE_OFFICIAL_FALLBACK", "").lower() not in {
-        "1",
-        "true",
-        "yes",
-    }
-    if http_url and fallback_enabled:
+    if _official_fallback_enabled(use_configured_gateway):
         clients.append(("official", ts.pro_api(token)))
 
     return clients

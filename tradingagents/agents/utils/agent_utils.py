@@ -17,6 +17,10 @@ from tradingagents.agents.utils.fundamental_data_tools import (
     get_earnings_model_context,
     get_financial_report_intelligence_context,
     get_income_statement,
+    get_insurance_context,
+    get_medical_device_context,
+    get_metals_mining_context,
+    get_price_move_attribution_context,
     get_investor_interaction_context,
     get_policy_planning_context,
     get_web_fact_check_context,
@@ -25,7 +29,9 @@ from tradingagents.agents.utils.fundamental_data_tools import (
     get_market_timing_context,
     get_management_capital_allocation_context,
     get_baijiu_context,
+    get_biopharma_context,
     get_building_materials_context,
+    get_software_context,
     get_peer_comparison,
     get_price_earnings_decomposition_context,
     get_shareholder_structure_context,
@@ -236,6 +242,176 @@ def get_building_materials_instruction() -> str:
         "or risk discussion. If the context says "
         "`Status: not_applicable`, do not inject cement/property-completion "
         "logic unless other primary evidence proves relevance."
+    )
+
+
+def get_biopharma_instruction() -> str:
+    """Return rules for gated A-share biopharma / pharma-services analysis."""
+    return (
+        " Biopharma verification gate: only use biopharma-specific clinical, "
+        "regulatory, reimbursement, pipeline, or CRO/CDMO order-cycle logic when "
+        "the supplied biopharma context says `Status: triggered`, or when "
+        "official filings independently show an innovative-drug, biotech, "
+        "pharma, or pharma-services business. When triggered, separate approved "
+        "commercial assets, label expansion, late-stage pipeline, early pipeline, "
+        "BD/licensing economics, and cash runway before valuation. Commercialized "
+        "products can support base earnings only when label, sales, reimbursement, "
+        "and competitive evidence exists; clinical pipeline should use "
+        "risk-adjusted NPV or scenario optionality, not a simple PE/PB shortcut. "
+        "Require official evidence from filings/IR, ClinicalTrials.gov or CDE "
+        "trial registration, CDE/NMPA/FDA/EMA decisions and labels, NRDL or "
+        "procurement/pricing records, and conference/paper readouts before "
+        "treating a catalyst as hard. For Phase I/II assets, small single-arm "
+        "data, or immature endpoints, cap base-case valuation credit and label "
+        "the thesis as evidence-limited. For CRO/CDMO/pharma-services companies "
+        "such as WuXi AppTec, analyze order backlog, customer funding, project "
+        "conversion, capacity utilization, capex returns, geopolitical risk, and "
+        "FCF rather than valuing them like drug-owner pipelines. Missing trial "
+        "IDs, regulatory status, product sales, reimbursement/pricing, endpoint "
+        "quality, or cash-runway data is a critical research gap, not permission "
+        "to invent clinical or commercial numbers."
+    )
+
+
+def get_software_instruction() -> str:
+    """Return rules for gated A-share software / SaaS analysis."""
+    return (
+        " Software verification gate: only use software/SaaS-specific ARR, ARPU, "
+        "paid-user, renewal, churn, NRR/GRR, seat, project-delivery, or "
+        "AI-monetization logic when the supplied software context says "
+        "`Status: triggered`, or when official filings independently show a "
+        "software, SaaS, financial IT, cybersecurity, industrial software, AI "
+        "software, or hardware-plus-service business. When triggered, first "
+        "classify the revenue model and sales motion: product-led subscription, "
+        "enterprise-seat SaaS, project implementation, financial IT, industrial "
+        "software, cybersecurity appliance plus subscription, cloud/IDC hybrid, "
+        "or hardware plus service. Do not call all software companies SaaS. "
+        "For subscription models, require paid users, ARPU, conversion, renewal, "
+        "billing duration, contract-liability conversion, churn, and preferably "
+        "ARR/MRR or NRR/GRR before assigning a SaaS-like multiple. For project "
+        "software, require order backlog, implementation/acceptance timing, "
+        "receivables, collection, and project gross margin. AI features are not "
+        "AI revenue: require paid AI users, attach rate, AI ARPU uplift, pricing, "
+        "and compute/cloud cost before putting AI into base-case earnings. "
+        "Broad A-share `software service` peer screens are only a starting point; "
+        "model-label peers before making relative allocation claims. Missing "
+        "ARR, ARPU, paid-user, renewal, churn, segment margin, or contract-"
+        "liability-structure evidence is a critical research gap and should cap "
+        "conviction rather than be filled by narrative."
+    )
+
+
+def get_insurance_instruction() -> str:
+    """Return rules for gated A-share insurance analysis."""
+    return (
+        " Insurance verification gate: only use insurance-specific NBV, EV, "
+        "P/EV, solvency, agent, bancassurance, persistency, surrender, CSM/NCSM, "
+        "investment-yield, and P&C COR logic when the supplied insurance context "
+        "says `Status: triggered`, or when official filings independently prove "
+        "a material insurance business. When triggered, treat PE/PB as cross-checks "
+        "rather than the whole valuation. For life/health insurance, start from "
+        "new-business value growth, NBV margin, channel productivity, EV growth, "
+        "CSM/NCSM movement, and liability-cost versus investment-yield spread. "
+        "For P&C insurance, separate premium growth from underwriting profitability "
+        "through COR, loss ratio, expense ratio, catastrophe exposure, and auto "
+        "pricing. For integrated insurers with banking or technology subsidiaries, "
+        "split the case into insurance core, bank subsidiary, asset-management / "
+        "technology optionality, and capital-return policy; do not let a bank "
+        "subsidiary make the whole company read like a pure bank. Dividends and "
+        "buybacks require solvency, capital generation, and regulatory-capital "
+        "support. Hidden investee holdings or IPO optionality belong in SOTP or "
+        "scenario value unless ownership, fair value, exit timing, lock-up, tax, "
+        "and double-counting checks are available. Missing NBV, EV, solvency, "
+        "investment-yield, COR, or channel-quality evidence is a critical research "
+        "gap and should cap conviction."
+    )
+
+
+def get_medical_device_instruction() -> str:
+    """Return rules for gated A-share medical-device analysis."""
+    return (
+        " Medical-device verification gate: only use medical-device-specific "
+        "installed-base, tender/procurement, VBP, reagent pull-through, "
+        "registration, overseas-channel, service attach-rate, and device "
+        "replacement-cycle logic when the supplied medical-device context says "
+        "`Status: triggered`, or when official filings independently prove a "
+        "material medical equipment, IVD, reagent/consumables, or high-value "
+        "device business. When triggered, separate capital equipment, IVD "
+        "closed-loop analyzers plus reagents, consumables/procedure volume, "
+        "service revenue, overseas expansion, and policy/procurement impact "
+        "before valuation. For equipment companies, require installed base, "
+        "replacement cycle, tender cadence, delivery/acceptance, service attach "
+        "rate, and hospital capex evidence. For IVD, require analyzer installed "
+        "base, tests per machine, reagent menu breadth, reagent gross margin, "
+        "and lab automation pull-through before calling revenue recurring. For "
+        "consumables and high-value devices, test procedure/testing volume, VBP "
+        "price reset, hospital access, product approval, and price-volume offset. "
+        "For overseas growth, require registration status such as NMPA/FDA/CE or "
+        "local equivalents, distributor quality, localization, channel inventory, "
+        "service network, FX, and tariff exposure. Do not value a device company "
+        "like an innovative-drug pipeline unless it owns drug-like clinical asset "
+        "economics. Missing installed-base, tender, VBP, registration, overseas "
+        "channel, receivable, cash-flow, or reagent pull-through evidence is a "
+        "critical research gap and should cap conviction."
+    )
+
+
+def get_metals_mining_instruction() -> str:
+    """Return rules for gated A-share metals/mining analysis."""
+    return (
+        " Metals/mining verification gate: only use metals/mining-specific reserve, "
+        "grade, equity-output, AISC/unit-cost, mine-life, project-ramp, hedging, "
+        "inventory, capex, NAV/SOTP, and cycle-trough logic when the supplied "
+        "metals/mining context says `Status: triggered`, or when official filings "
+        "independently prove a material mining, smelting, refining, or metal-resource "
+        "business. When triggered, do not stop at commodity-price direction or PE TTM. "
+        "Separate mine asset quality, realized selling price versus exchange proxy, "
+        "volume, cost curve, FX, sustaining capex, smelting/trading contribution, "
+        "working capital, derivatives, leverage, and project execution. Domestic "
+        "exchange futures can be used as timely proxies only when the source/date/unit "
+        "is shown; COMEX/LME/LBMA or licensed spot benchmarks should be treated as "
+        "cross-checks unless explicitly fetched. Build valuation through bull/base/bear "
+        "metal-price sensitivity and, for diversified miners, mine/metal SOTP or NAV. "
+        "Missing reserve, grade, equity-output, AISC, project-ramp, hedging, or NAV "
+        "evidence is a critical research gap and should cap conviction. "
+        "For nonferrous metals such as aluminum, copper, zinc, nickel, lithium, "
+        "silver, and gold, split the conclusion into four layers before the final "
+        "rating: Industry Cycle View, Company Expression View, Valuation/Odds View, "
+        "and Tactical Attribution View. A high-prosperity metal cycle with supply "
+        "constraints, low TTM/forward PE, profit release, operating cash-flow release, "
+        "or dividend support must not be collapsed into Underweight solely because "
+        "PB is high, EPS percentile is high, or one-quarter working-capital items "
+        "look weaker. Treat PE-low/PB-high as a live fork: it can be a peak-earnings "
+        "trap, or it can be an ROE re-rating path if supply discipline, margin, "
+        "cash conversion, and payout are durable. To issue Underweight/Sell in that "
+        "setup, explicitly answer the strongest bull case and prove at least one "
+        "hard path: metal-price/profit-center downshift, company cash-cycle "
+        "deterioration beyond seasonality, materially superior peer expression, "
+        "or valuation already pricing the favorable scenario. One-quarter receivables, "
+        "contract liabilities, inventory, or impairment direction can cap conviction, "
+        "but cannot be decisive without seasonality, aging, peer comparison, and "
+        "cash-conversion evidence. For aluminum names, explicitly bridge supply "
+        "ceiling/capacity policy, LME-SHFE or domestic-overseas price gaps, alumina "
+        "and power costs, property drag, grid/PV/EV/lightweighting demand, exports, "
+        "and inflation/liquidity beta; AI or robotics demand should be treated as "
+        "indirect optionality unless aluminum-volume linkage is quantified."
+    )
+
+
+def get_price_move_attribution_instruction() -> str:
+    """Return rules for short-horizon sharp-move attribution."""
+    return (
+        " Price-move attribution discipline: when a stock has a sharp short-horizon "
+        "move, separate market beta, same-industry or same-metal equity moves, "
+        "cross-metal equity moves, mapped commodity futures moves, company events, "
+        "valuation support, liquidity/turnover, and trend context before assigning "
+        "a cause. Do not call a drop `emotionally undervalued` merely because the "
+        "commodity did not fall. A stronger emotion-kill conclusion needs weak "
+        "commodity explanation, no material company event, target residual worse "
+        "than peers, credible valuation or NAV/PB support, and signs that forced "
+        "selling is stabilizing. If copper, silver, lithium, or other metal equities "
+        "behave differently from the target's metal basket, discuss that cross-metal "
+        "residual explicitly."
     )
 
 

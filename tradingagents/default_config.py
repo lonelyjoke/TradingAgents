@@ -122,6 +122,11 @@ DEFAULT_CONFIG = {
     # A-share precomputed contexts are independent IO-heavy calls. Fetch a few
     # in parallel so the CLI does not sit idle before the first analyst starts.
     "a_share_context_fetch_workers": 4,
+    # Fail fast before LLM generation when required A-share Tushare data is
+    # unavailable. This avoids spending tokens on reports built from missing
+    # core market/fundamental data.
+    "a_share_data_preflight_enabled": True,
+    "a_share_data_preflight_max_staleness_days": 21,
     # Optional web-search context for simple but thesis-critical high-frequency
     # facts not covered well by Tushare or filings, such as baijiu wholesale
     # prices, channel inventory, terminal discounts, and product price changes.

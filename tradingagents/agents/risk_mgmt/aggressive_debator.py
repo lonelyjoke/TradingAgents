@@ -2,15 +2,20 @@
 
 from tradingagents.agents.utils.agent_utils import (
     get_buy_side_thesis_instruction,
+    get_biopharma_instruction,
     get_compute_leasing_instruction,
     get_dividend_defensive_instruction,
     get_evidence_instruction,
     get_fair_cycle_valuation_instruction,
     get_filing_intelligence_instruction,
     get_focused_report_instruction,
+    get_insurance_instruction,
+    get_medical_device_instruction,
+    get_metals_mining_instruction,
     get_investor_interaction_instruction,
     get_policy_planning_instruction,
     get_research_gap_instruction,
+    get_software_instruction,
     get_supply_demand_fallback_instruction,
     get_thematic_valuation_instruction,
 )
@@ -47,6 +52,11 @@ def create_aggressive_debator(llm):
                 "shipping_context",
                 "compute_leasing_context",
                 "dividend_defensive_context",
+                "biopharma_context",
+                "software_context",
+                "insurance_context",
+                "medical_device_context",
+                "metals_mining_context",
             },
         )
         thematic_catalyst_context = prompt_contexts["thematic_catalyst_context"]
@@ -57,6 +67,11 @@ def create_aggressive_debator(llm):
         policy_planning_context = prompt_contexts["policy_planning_context"]
         compute_leasing_context = prompt_contexts["compute_leasing_context"]
         dividend_defensive_context = prompt_contexts["dividend_defensive_context"]
+        biopharma_context = prompt_contexts["biopharma_context"]
+        software_context = prompt_contexts["software_context"]
+        insurance_context = prompt_contexts["insurance_context"]
+        medical_device_context = prompt_contexts["medical_device_context"]
+        metals_mining_context = prompt_contexts["metals_mining_context"]
         prompt_history = compact_risk_history(history, profile="risk")
         prompt_conservative_response = compact_for_prompt(
             current_conservative_response,
@@ -91,9 +106,14 @@ Official Investor-Interaction Context: {investor_interaction_context}
 Official Policy-Planning Context: {policy_planning_context}
 Gated Compute-Leasing Verification Context: {compute_leasing_context}
 Gated Dividend Defensive Verification Context: {dividend_defensive_context}
+Gated Biopharma Verification Context: {biopharma_context}
+Gated Software Verification Context: {software_context}
+Gated Insurance Verification Context: {insurance_context}
+Gated Medical-Device Verification Context: {medical_device_context}
+Gated Metals/Mining Verification Context: {metals_mining_context}
 Here is the current conversation history: {prompt_history} Here are the last arguments from the conservative analyst: {prompt_conservative_response} Here are the last arguments from the neutral analyst: {prompt_neutral_response}. If there are no responses from the other viewpoints yet, present your own argument based on the available data.
 
-Engage actively by addressing any specific concerns raised, refuting the weaknesses in their logic, and asserting the benefits of risk-taking to outpace market norms. Maintain a focus on debating and persuading, not just presenting data. Challenge each counterpoint to underscore why a high-risk approach is optimal. For commodity/resource/cyclical names, explicitly test whether product-price evidence supports or contradicts the risk stance. For shipping names, use freight-rate context to decide whether missing route data is a sizing cap or whether available proxy/company evidence still supports taking risk; test both Hormuz risk-premium compression and restocking/cargo-flow upside. Preserve core discussion items that matter to the thesis even when they are optionality rather than base-case proof. {get_evidence_instruction()} {get_research_gap_instruction()} {get_supply_demand_fallback_instruction()} {get_buy_side_thesis_instruction()} {get_fair_cycle_valuation_instruction()} {get_thematic_valuation_instruction()} {get_filing_intelligence_instruction()} {get_investor_interaction_instruction()} {get_policy_planning_instruction()} {get_compute_leasing_instruction()} {get_dividend_defensive_instruction()} {get_focused_report_instruction()} Output conversationally as if you are speaking without any special formatting."""
+Engage actively by addressing any specific concerns raised, refuting the weaknesses in their logic, and asserting the benefits of risk-taking to outpace market norms. Maintain a focus on debating and persuading, not just presenting data. Challenge each counterpoint to underscore why a high-risk approach is optimal. For commodity/resource/cyclical names, explicitly test whether product-price evidence supports or contradicts the risk stance. For shipping names, use freight-rate context to decide whether missing route data is a sizing cap or whether available proxy/company evidence still supports taking risk; test both Hormuz risk-premium compression and restocking/cargo-flow upside. For biopharma names, distinguish investable optionality from base-case evidence; do not erase upside from late-stage/approved assets, but keep trial, approval, reimbursement, and cash-runway gaps visible. For software names, distinguish investable subscription/AI optionality from base-case evidence; do not erase upside from paid-user, ARPU, or AI adoption paths, but keep missing renewal, churn, contract-liability conversion, and cash-collection gaps visible. For insurance names, distinguish investable NBV/EV/dividend/SOTP optionality from base-case evidence, and keep solvency, investment-yield, channel, P&C COR, and bank-subsidiary separation visible. For medical-device names, distinguish investable installed-base, reagent, overseas, and replacement-cycle optionality from base-case evidence, and keep VBP, registration, channel inventory, receivables, and cash-conversion gaps visible. For metals/mining names, distinguish investable metal-price, reserve, output, and NAV/SOTP optionality from base-case evidence, and keep AISC, grade, hedge, inventory, capex, project-ramp, jurisdiction, and leverage gaps visible. Preserve core discussion items that matter to the thesis even when they are optionality rather than base-case proof. {get_evidence_instruction()} {get_research_gap_instruction()} {get_supply_demand_fallback_instruction()} {get_buy_side_thesis_instruction()} {get_fair_cycle_valuation_instruction()} {get_thematic_valuation_instruction()} {get_filing_intelligence_instruction()} {get_investor_interaction_instruction()} {get_policy_planning_instruction()} {get_compute_leasing_instruction()} {get_dividend_defensive_instruction()} {get_biopharma_instruction()} {get_software_instruction()} {get_insurance_instruction()} {get_medical_device_instruction()} {get_metals_mining_instruction()} {get_focused_report_instruction()} Output conversationally as if you are speaking without any special formatting."""
 
         response = llm.invoke(prompt)
 

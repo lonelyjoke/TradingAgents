@@ -2,6 +2,7 @@
 
 from tradingagents.agents.utils.agent_utils import (
     get_baijiu_instruction,
+    get_biopharma_instruction,
     get_building_materials_instruction,
     get_buy_side_thesis_instruction,
     get_compute_leasing_instruction,
@@ -11,6 +12,9 @@ from tradingagents.agents.utils.agent_utils import (
     get_fair_cycle_valuation_instruction,
     get_filing_intelligence_instruction,
     get_focused_report_instruction,
+    get_insurance_instruction,
+    get_medical_device_instruction,
+    get_metals_mining_instruction,
     get_investor_interaction_instruction,
     get_market_expectation_instruction,
     get_management_capital_allocation_instruction,
@@ -21,6 +25,7 @@ from tradingagents.agents.utils.agent_utils import (
     get_supply_demand_fallback_instruction,
     get_supply_chain_selection_instruction,
     get_shareholder_structure_instruction,
+    get_software_instruction,
     get_three_layer_conclusion_instruction,
     get_thematic_valuation_instruction,
     get_web_fact_check_instruction,
@@ -63,6 +68,11 @@ def create_bull_researcher(llm):
         compute_leasing_context = prompt_contexts["compute_leasing_context"]
         dividend_defensive_context = prompt_contexts["dividend_defensive_context"]
         building_materials_context = prompt_contexts["building_materials_context"]
+        biopharma_context = prompt_contexts["biopharma_context"]
+        software_context = prompt_contexts["software_context"]
+        insurance_context = prompt_contexts["insurance_context"]
+        medical_device_context = prompt_contexts["medical_device_context"]
+        metals_mining_context = prompt_contexts["metals_mining_context"]
         prompt_history = compact_debate_history(history, profile="research")
         prompt_current_response = compact_for_prompt(
             current_response,
@@ -108,6 +118,11 @@ Key points to focus on:
 - Compute-Leasing Discipline: If gated compute-leasing context says `Status: triggered`, make the bull case pass asset, contract, unit-economics, capex/funding, and transition-credibility gates. If it says `Status: not_applicable`, do not use compute leasing as a bull theme.
 - Dividend-Defensive Discipline: If gated dividend defensive context says `Status: triggered`, argue only from sustainable payout evidence: dividend stability, profit/cash-flow or bank-capital coverage, non-declining industry logic, valuation buffer, and alternatives. Do not call a high yield defensive if the context flags dividend-trap risk.
 - Building-Materials Discipline: If gated building-materials context says `Status: triggered`, use it to discipline the bull case rather than expand the memo mechanically. Anchor on company filings and management wording, then state the industry stage and likely evolution path, then pass sector-native checks: product ASP or price inflection, regional demand, property-completion/infrastructure/renovation exposure, capacity and utilization, upstream energy/raw-material costs, inventory, receivables, cash collection, and capital-return proof. For low-PB/high-dividend names, explain why the discount is mispriced rather than a value trap; buybacks and dividends are shareholder-return and safety-margin evidence, not substitutes for operating proof.
+- Biopharma Discipline: If gated biopharma context says `Status: triggered`, build the bull case from approved product sales, label expansion, clinical/regulatory milestones, reimbursement/pricing, risk-adjusted pipeline value, BD economics, and cash runway. For CRO/CDMO names, use order backlog, customer funding, capacity utilization, geopolitical risk, and FCF rather than drug-owner pipeline logic. Do not turn Phase I/II assets or unaudited pipeline wording into base-case valuation credit.
+- Software Discipline: If gated software context says `Status: triggered`, build the bull case from the right software business model. For SaaS/product-led names, require paid users, ARPU, renewal, contract-liability conversion, and AI paid adoption before claiming ARPU uplift. For project-heavy software, require order backlog, acceptance, receivables, and collection. Do not use broad `software service` peer screens as valuation proof until peers are model-labeled.
+- Insurance Discipline: If gated insurance context says `Status: triggered`, build the bull case from NBV/EV recovery, channel quality, solvency buffer, investment-yield spread, P&C COR, bank-subsidiary contribution, dividend durability, and SOTP optionality. Do not let a bank subsidiary turn an integrated insurer into a pure bank memo.
+- Medical-Device Discipline: If gated medical-device context says `Status: triggered`, build the bull case from installed base, replacement cycle, tender cadence, reagent/consumable pull-through, VBP volume offset, product registration, overseas channel quality, service attach rate, receivables/cash conversion, and gross-margin durability. Do not value a device company like an innovative-drug pipeline.
+- Metals-Mining Discipline: If gated metals/mining context says `Status: triggered`, build the bull case from reserve quality, grade, equity output, AISC/unit cost, project ramp, commodity-price source-chain evidence, hedging discipline, capex, balance-sheet survival, and NAV/SOTP. Do not let metal-price beta alone carry the thesis.
 - Bear Counterpoints: Critically analyze the bear argument with specific data and sound reasoning, addressing concerns thoroughly and showing why the bull perspective holds stronger merit.
 - Engagement: Present your argument in a conversational style, engaging directly with the bear analyst's points and debating effectively rather than just listing data.
 - Anti-repetition discipline: {round_instruction}
@@ -135,6 +150,11 @@ Gated baijiu verification context: {baijiu_context}
 Gated compute-leasing verification context: {compute_leasing_context}
 Gated dividend defensive verification context: {dividend_defensive_context}
 Gated building-materials verification context: {building_materials_context}
+Gated biopharma verification context: {biopharma_context}
+Gated software verification context: {software_context}
+Gated insurance verification context: {insurance_context}
+Gated medical-device verification context: {medical_device_context}
+Gated metals/mining verification context: {metals_mining_context}
 Conversation history of the debate: {prompt_history}
 Last bear argument: {prompt_current_response}
 Use this information to deliver a compelling bull argument, refute the bear's concerns, and engage in a dynamic debate that demonstrates the strengths of the bull position.
@@ -160,6 +180,11 @@ Use this information to deliver a compelling bull argument, refute the bear's co
 {get_compute_leasing_instruction()}
 {get_dividend_defensive_instruction()}
 {get_building_materials_instruction()}
+{get_biopharma_instruction()}
+{get_software_instruction()}
+{get_insurance_instruction()}
+{get_medical_device_instruction()}
+{get_metals_mining_instruction()}
 {get_focused_report_instruction()}
 """
 

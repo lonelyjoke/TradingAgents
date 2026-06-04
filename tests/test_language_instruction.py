@@ -40,12 +40,18 @@ _stub_module(
         "get_balance_sheet",
         "get_cashflow",
         "get_baijiu_context",
+        "get_biopharma_context",
+        "get_building_materials_context",
         "get_commodity_context",
+        "get_price_move_attribution_context",
         "get_compute_leasing_context",
         "get_dividend_defensive_context",
         "get_earnings_model_context",
         "get_financial_report_intelligence_context",
         "get_income_statement",
+        "get_insurance_context",
+        "get_medical_device_context",
+        "get_metals_mining_context",
         "get_investor_interaction_context",
         "get_policy_planning_context",
         "get_web_fact_check_context",
@@ -58,6 +64,7 @@ _stub_module(
         "get_shareholder_structure_context",
         "get_supply_chain_comparison",
         "get_shipping_context",
+        "get_software_context",
         "get_thematic_catalyst_context",
         "get_valuation_percentiles",
     ],
@@ -113,6 +120,19 @@ def test_resource_valuation_instruction_prioritizes_forward_or_normalized_pe():
 
     assert "PE TTM as the primary valuation anchor" in combined
     assert "forward/normalized earnings scenarios" in combined
+
+
+def test_metals_mining_instruction_requires_nonferrous_rating_layers():
+    instruction = agent_utils_under_test.get_metals_mining_instruction()
+
+    assert "Industry Cycle View" in instruction
+    assert "Company Expression View" in instruction
+    assert "Valuation/Odds View" in instruction
+    assert "Tactical Attribution View" in instruction
+    assert "PE-low/PB-high" in instruction
+    assert "Underweight/Sell" in instruction
+    assert "strongest bull case" in instruction
+    assert "AI or robotics demand" in instruction
 
 
 def test_english_language_instruction_stays_empty():
