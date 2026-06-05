@@ -595,6 +595,9 @@ class PortfolioDecision(BaseModel):
             "price band, formula or valuation bridge, business conditions that "
             "must remain true, how builders should accumulate around it, and "
             "what financial or operating deterioration would invalidate it."
+            " Keep it concise: this is a margin-of-safety anchor, not a second "
+            "valuation essay. Prefer one short paragraph or a compact 3-4 row "
+            "table; put detailed valuation debate in the Investment Thesis."
         ),
     )
     reader_action_guidance: Optional[str] = Field(
@@ -637,6 +640,23 @@ class PortfolioDecision(BaseModel):
             "second curve; and (5) valuation treatment for each bucket. If revenue, "
             "growth, margin, or profit by segment is not disclosed, write 'not "
             "disclosed' for that item and state how the gap caps SOTP confidence."
+        ),
+    )
+    business_model_supply_chain_primer: Optional[str] = Field(
+        default=None,
+        description=(
+            "A standalone reader-education section for the Portfolio Manager memo. "
+            "Explain the company's business model in plain language: what it sells, "
+            "who pays, how revenue turns into profit and cash flow, and which cost, "
+            "price, volume, utilization, asset-turnover, or credit variables matter. "
+            "Then explain the industry value chain: upstream inputs or suppliers, "
+            "midstream manufacturing/service/platform links, downstream customers "
+            "or application markets, and where this company sits in that chain. "
+            "When supplied context names listed upstream/downstream companies or "
+            "true peers, mention a few as examples and state their chain role; do "
+            "not invent listed-company names that are not supported by the prompt. "
+            "If names are unavailable, describe the categories and say names are "
+            "not verified. Keep the section educational but investment-relevant."
         ),
     )
     bull_bear_debate: str = Field(
@@ -1122,12 +1142,6 @@ def render_pm_decision(decision: PortfolioDecision) -> str:
         f"Business and industry verdict: {decision.business_driver_map}"
         if decision.business_driver_map
         else None,
-        f"Industry-native variables: {decision.industry_driver_verdict}"
-        if decision.industry_driver_verdict
-        else None,
-        f"Policy and demand backdrop: {decision.policy_direction_verdict}"
-        if decision.policy_direction_verdict
-        else None,
         f"Valuation and expectation gap: {decision.expectation_gap}"
         if decision.expectation_gap
         else None,
@@ -1138,14 +1152,23 @@ def render_pm_decision(decision: PortfolioDecision) -> str:
         if decision.expectation_gap_evidence
         else None,
         f"Key data check: {decision.key_data_check}" if decision.key_data_check else None,
-        f"Filing internal quality review: {decision.filing_internal_quality_review}"
-        if decision.filing_internal_quality_review
-        else None,
         f"Earnings bridge: {decision.earnings_model_bridge}"
         if decision.earnings_model_bridge
         else None,
         f"Unit-economics bridge: {decision.unit_economics_bridge}"
         if decision.unit_economics_bridge
+        else None,
+    )
+
+    supporting_evidence = _join(
+        f"Industry-native variables: {decision.industry_driver_verdict}"
+        if decision.industry_driver_verdict
+        else None,
+        f"Policy and demand backdrop: {decision.policy_direction_verdict}"
+        if decision.policy_direction_verdict
+        else None,
+        f"Filing internal quality review: {decision.filing_internal_quality_review}"
+        if decision.filing_internal_quality_review
         else None,
         (
             "Investment verdict split: "
@@ -1209,7 +1232,7 @@ def render_pm_decision(decision: PortfolioDecision) -> str:
         else None,
     )
 
-    catalysts_optionality_and_falsification = _join(
+    catalysts_and_optionality = _join(
         f"Verified catalysts: {decision.material_catalysts}"
         if decision.material_catalysts
         else None,
@@ -1225,11 +1248,11 @@ def render_pm_decision(decision: PortfolioDecision) -> str:
         f"Financing / listing scenario: {decision.financing_listing_scenario}"
         if decision.financing_listing_scenario
         else None,
-        f"Buy-side depth audit: {decision.buy_side_depth_audit}"
-        if decision.buy_side_depth_audit
-        else None,
         f"Catalyst path: {decision.catalyst_path}" if decision.catalyst_path else None,
         f"Rejected themes: {decision.rejected_themes}" if decision.rejected_themes else None,
+    )
+
+    evidence_gaps_and_coverage = _join(
         f"Unverified key assumptions: {decision.unverified_key_assumptions}"
         if decision.unverified_key_assumptions
         else None,
@@ -1241,6 +1264,9 @@ def render_pm_decision(decision: PortfolioDecision) -> str:
         else None,
         f"Data coverage audit: {decision.data_coverage_audit}"
         if decision.data_coverage_audit
+        else None,
+        f"Buy-side depth audit: {decision.buy_side_depth_audit}"
+        if decision.buy_side_depth_audit
         else None,
     )
 
@@ -1303,6 +1329,18 @@ def render_pm_decision(decision: PortfolioDecision) -> str:
     if decision.pm_summary:
         pm_summary_parts.extend([f"**PM Summary**: {decision.pm_summary}", ""])
 
+    primer_parts = []
+    if decision.business_model_supply_chain_primer:
+        primer_parts.extend(
+            [
+                (
+                    "**Business Model & Industry Chain Primer**: "
+                    f"{decision.business_model_supply_chain_primer}"
+                ),
+                "",
+            ]
+        )
+
     parts = [
         f"**Company Snapshot**: {decision.company_snapshot}",
         "",
@@ -1312,24 +1350,32 @@ def render_pm_decision(decision: PortfolioDecision) -> str:
         "",
         *take_away_parts,
         *pm_summary_parts,
+        *primer_parts,
         f"**Investment Thesis**: {thesis}",
         "",
-        f"**Debate & Decision Logic**: {debate_and_decision_logic}",
-        "",
     ]
-    if catalysts_optionality_and_falsification:
+    if supporting_evidence:
+        parts.extend([f"**Supporting Evidence Integration**: {supporting_evidence}", ""])
+    parts.extend([f"**Debate & Decision Logic**: {debate_and_decision_logic}", ""])
+    if catalysts_and_optionality:
         parts.extend(
             [
-                f"**Catalysts, Optionality & Falsification**: {catalysts_optionality_and_falsification}",
+                f"**Catalysts & Optionality**: {catalysts_and_optionality}",
                 "",
             ]
         )
-    parts.extend([f"**Verification & Falsification**: {decision.verification_and_falsification}", ""])
+    if evidence_gaps_and_coverage:
+        parts.extend([f"**Evidence Gaps & Data Coverage**: {evidence_gaps_and_coverage}", ""])
+    verification_and_falsification = _join(
+        decision.verification_and_falsification,
+        f"Falsification signals: {decision.falsification_signals}"
+        if decision.falsification_signals
+        else None,
+    )
+    parts.extend([f"**Verification & Falsification**: {verification_and_falsification}", ""])
     if decision.verification_calendar:
         parts.extend([f"**Verification Calendar**: {decision.verification_calendar}", ""])
     parts.extend([f"**Executive Summary**: {execution_posture}"])
     if continuity:
         parts.extend(["", f"**Decision Continuity**: {continuity}"])
-    if decision.falsification_signals:
-        parts.extend(["", f"**Falsification Signals**: {decision.falsification_signals}"])
     return "\n".join(parts)

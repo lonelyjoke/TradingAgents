@@ -22,6 +22,8 @@ from tradingagents.agents.utils.agent_utils import (
     get_income_statement,
     get_insurance_context,
     get_insurance_instruction,
+    get_investor_interaction_context,
+    get_investor_interaction_instruction,
     get_medical_device_context,
     get_medical_device_instruction,
     get_metals_mining_context,
@@ -45,6 +47,8 @@ from tradingagents.agents.utils.agent_utils import (
     get_building_materials_instruction,
     get_software_context,
     get_software_instruction,
+    get_policy_planning_context,
+    get_policy_planning_instruction,
     get_peer_comparison,
     get_peer_selection_instruction,
     get_price_earnings_decomposition_context,
@@ -82,6 +86,8 @@ def create_fundamentals_analyst(llm):
         raw_price_earnings_decomposition_context = state.get("price_earnings_decomposition_context", "")
         raw_management_capital_allocation_context = state.get("management_capital_allocation_context", "")
         raw_shareholder_structure_context = state.get("shareholder_structure_context", "")
+        raw_investor_interaction_context = state.get("investor_interaction_context", "")
+        raw_policy_planning_context = state.get("policy_planning_context", "")
         raw_shipping_context = state.get("shipping_context", "")
         raw_web_fact_check_context = state.get("web_fact_check_context", "")
         raw_baijiu_context = state.get("baijiu_context", "")
@@ -106,6 +112,8 @@ def create_fundamentals_analyst(llm):
         price_earnings_decomposition_context = prompt_contexts["price_earnings_decomposition_context"]
         management_capital_allocation_context = prompt_contexts["management_capital_allocation_context"]
         shareholder_structure_context = prompt_contexts["shareholder_structure_context"]
+        investor_interaction_context = prompt_contexts["investor_interaction_context"]
+        policy_planning_context = prompt_contexts["policy_planning_context"]
         web_fact_check_context = prompt_contexts["web_fact_check_context"]
         baijiu_context = prompt_contexts["baijiu_context"]
         compute_leasing_context = prompt_contexts["compute_leasing_context"]
@@ -116,6 +124,7 @@ def create_fundamentals_analyst(llm):
         insurance_context = prompt_contexts["insurance_context"]
         medical_device_context = prompt_contexts["medical_device_context"]
         metals_mining_context = prompt_contexts["metals_mining_context"]
+        data_coverage_context = prompt_contexts["data_coverage_context"]
         is_a_share = is_a_share_symbol(state["company_of_interest"])
 
         tools = [
@@ -151,6 +160,10 @@ def create_fundamentals_analyst(llm):
             tools.append(get_management_capital_allocation_context)
         if not raw_shareholder_structure_context:
             tools.append(get_shareholder_structure_context)
+        if is_a_share and not raw_investor_interaction_context:
+            tools.append(get_investor_interaction_context)
+        if is_a_share and not raw_policy_planning_context:
+            tools.append(get_policy_planning_context)
         if is_a_share and not raw_web_fact_check_context:
             tools.append(get_web_fact_check_context)
         if is_a_share and not raw_baijiu_context:
@@ -177,7 +190,7 @@ def create_fundamentals_analyst(llm):
             "Your job is to identify the tradable thesis, test whether the business-cycle or boom-bust expectation can plausibly realize, and explain what evidence supports or weakens the thesis. "
             "Use `get_fundamentals`, `get_balance_sheet`, `get_cashflow`, and `get_income_statement` for core financial quality. "
             "Pay special attention to accounting items that may preview future performance, including contract liabilities, advance receipts, contract assets, receivables, inventories, prepayments, payables, goodwill, net cash, and working capital. "
-            "For A-share tickers, the system may provide precomputed thematic, commodity/product-price, price-move attribution, shipping/freight-rate, filing, peer, supply-chain, earnings-model, market-expectation, price/EPS/PE decomposition, management/capital-allocation, shareholder-structure, web fact-check, gated compute-leasing, gated dividend-defensive, gated building-materials, gated biopharma, gated software, gated insurance, gated medical-device, and gated metals/mining context below. Use any precomputed context directly and do not call the same context tool again. Also use `get_valuation_percentiles` for historical valuation zones, `get_market_sector_risk` for broad/sector risk, and `get_market_timing_context` for market mood when those extra lenses are material. "
+            "For A-share tickers, the system may provide precomputed thematic, commodity/product-price, price-move attribution, shipping/freight-rate, filing, peer, supply-chain, earnings-model, market-expectation, price/EPS/PE decomposition, management/capital-allocation, shareholder-structure, investor-interaction, policy-planning, web fact-check, gated compute-leasing, gated dividend-defensive, gated building-materials, gated biopharma, gated software, gated insurance, gated medical-device, and gated metals/mining context below. Use any precomputed context directly and do not call the same context tool again. Also use `get_valuation_percentiles` for historical valuation zones, `get_market_sector_risk` for broad/sector risk, and `get_market_timing_context` for market mood when those extra lenses are material. "
             "For commodity/resource/cyclical companies, treat the commodity/product-price context as a hard cycle variable: connect it to ASP, gross margin, inventory write-down/reversal risk, cash conversion, and valuation, and do not let news headlines substitute for product-price evidence. "
             "For shipping companies, treat shipping/freight-rate context as the hard cycle variable: separate route-level VLCC TD3C/TCE/CTFI evidence from broad BDTI/BCTI/BDI proxies, and explicitly test two-sided Hormuz mechanisms such as risk-premium compression versus restocking and ton-mile recovery. "
             "For A-share tickers, also use `get_supply_chain_comparison` when a curated chain map exists, so the memo can distinguish between a merely good company and the best profit pool in the chain. "
@@ -204,6 +217,8 @@ def create_fundamentals_analyst(llm):
             + get_three_layer_conclusion_instruction()
             + get_management_capital_allocation_instruction()
             + get_shareholder_structure_instruction()
+            + get_investor_interaction_instruction()
+            + get_policy_planning_instruction()
             + get_web_fact_check_instruction()
             + get_baijiu_instruction()
             + get_compute_leasing_instruction()
@@ -288,6 +303,18 @@ def create_fundamentals_analyst(llm):
                 else ""
             )
             + (
+                "\n\nPrecomputed official investor-interaction context:\n"
+                + investor_interaction_context
+                if investor_interaction_context
+                else ""
+            )
+            + (
+                "\n\nPrecomputed official policy-planning context:\n"
+                + policy_planning_context
+                if policy_planning_context
+                else ""
+            )
+            + (
                 "\n\nPrecomputed web fact-check context:\n"
                 + web_fact_check_context
                 if web_fact_check_context
@@ -345,6 +372,12 @@ def create_fundamentals_analyst(llm):
                 "\n\nPrecomputed gated metals/mining verification context:\n"
                 + metals_mining_context
                 if metals_mining_context
+                else ""
+            )
+            + (
+                "\n\nPrecomputed data coverage audit:\n"
+                + data_coverage_context
+                if data_coverage_context
                 else ""
             )
             + get_fair_cycle_valuation_instruction()

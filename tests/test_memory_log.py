@@ -657,6 +657,11 @@ class TestPortfolioManagerInjection:
                 "Key drivers are data-center demand, product cycle execution, "
                 "gross margin durability, and customer concentration risk."
             ),
+            business_model_supply_chain_primer=(
+                "NVDA sells chips, systems, and software into the AI infrastructure "
+                "chain; upstream inputs include foundry and memory capacity, while "
+                "downstream customers are hyperscalers and enterprise AI builders."
+            ),
             bull_bear_debate=(
                 "Bulls emphasize data-center growth and AI capex; bears emphasize "
                 "valuation and customer concentration."
@@ -680,29 +685,40 @@ class TestPortfolioManagerInjection:
             rating_change_audit="Upgrade is justified by stronger demand evidence, not price action alone.",
             material_catalysts="Business-realization: next-gen GPU ramp with confirmed orders.",
             rejected_themes="Rejected: unsupported humanoid-robot narrative.",
+            falsification_signals="If hyperscaler capex falls, reduce exposure.",
         )
         llm = _structured_pm_llm(captured, decision)
         pm_node = create_portfolio_manager(llm)
         result = pm_node(_make_pm_state())
         md = result["final_trade_decision"]
-        assert md.startswith("**Company Snapshot**: NVDA supplies")
-        assert "**Rating**: Overweight" in md
-        assert "**One-Line Thesis**: AI capex remains" in md
-        assert "业务与行业判断：Key drivers are data-center" in md
-        assert "**Debate & Decision Logic**: Bulls emphasize" in md
-        assert "The bull case carries" in md
-        assert "If AI capex" in md
-        assert "**Executive Summary**: Build position gradually" in md
-        assert "**Verification & Falsification**: Verify data-center" in md
-        assert "**Investment Thesis**: AI capex cycle" in md
-        assert "目标价：215.0" in md
-        assert "持有期：3-6 months" in md
-        assert "**Decision Continuity**: 上一期评级：Hold" in md
-        assert "新增证据：Hyperscaler capex guidance improved." in md
-        assert "未变事实：Valuation remains elevated." in md
-        assert "评级变化审计：Upgrade is justified" in md
-        assert "已验证催化剂：Business-realization" in md
-        assert "**Rejected Themes**: Rejected: unsupported humanoid-robot narrative." in md
+        expected_fragments = [
+            "**Company Snapshot**: NVDA supplies",
+            "**Rating**: Overweight",
+            "**One-Line Thesis**: AI capex remains",
+            "**Business Model & Industry Chain Primer**: NVDA sells chips",
+            "Business and industry verdict: Key drivers are data-center",
+            "**Debate & Decision Logic**: Bulls emphasize",
+            "The bull case carries",
+            "If AI capex",
+            "**Executive Summary**: Build position gradually",
+            "**Verification & Falsification**: Verify data-center",
+            "Falsification signals: If hyperscaler capex falls, reduce exposure.",
+            "**Investment Thesis**: AI capex cycle",
+            "Target price: 215.0",
+            "Time horizon: 3-6 months",
+            "**Decision Continuity**: Prior rating: Hold",
+            "New evidence since prior: Hyperscaler capex guidance improved.",
+            "Unchanged core facts: Valuation remains elevated.",
+            "Rating change audit: Upgrade is justified",
+            "Verified catalysts: Business-realization",
+            "Rejected themes: Rejected: unsupported humanoid-robot narrative.",
+        ]
+        for fragment in expected_fragments:
+            assert fragment in md
+        assert "**Falsification Signals**" not in md
+        assert md.index("**Business Model & Industry Chain Primer**") < md.index(
+            "**Investment Thesis**"
+        )
 
     def test_pm_prompt_frames_decision_as_public_excerpt(self):
         captured = {}
@@ -714,7 +730,14 @@ class TestPortfolioManagerInjection:
         assert "short Company Snapshot" in prompt
         assert "public research note" in prompt
         assert "Debate & Decision Logic" in prompt
-        assert "Catalysts, Optionality & Falsification" in prompt
+        assert "Business Model & Industry Chain Primer" in prompt
+        assert "upstream-midstream-downstream chain" in prompt
+        assert "Do not invent A-share/H-share/U.S.-listed companies" in prompt
+        assert "Use this narrative order" in prompt
+        assert "materiality gates, not a checklist" in prompt
+        assert "Avoid repeating the same fact" in prompt
+        assert "Catalysts & Optionality" in prompt
+        assert "Evidence Gaps & Data Coverage" in prompt
         assert "less fragmentation, more synthesis" in prompt
         assert "Verification & Falsification" in prompt
         assert "roughly 3,800-5,800 Chinese characters" in prompt

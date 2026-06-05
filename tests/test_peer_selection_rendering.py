@@ -40,16 +40,14 @@ def test_research_plan_renders_peer_selection_verdict():
         shareholder_structure_verdict="筹码结构稳定。",
     )
 
-    assert "**Peer Selection Verdict**: 同行里暂未出现更优替代。" in render_research_plan(plan)
-    assert (
-        "**Supply-Chain Position Verdict**: 目标所处环节仍是当前更优利润池。"
-        in render_research_plan(plan)
-    )
-    assert "**Company Quality Verdict**: 好公司。" in render_research_plan(plan)
-    assert "**Current Odds Verdict**: 赔率一般。" in render_research_plan(plan)
-    assert "**Relative Allocation Verdict**: 同业中可配，但不是绝对最优。" in render_research_plan(plan)
-    assert "**Management & Capital Allocation Verdict**: 资本配置总体克制。" in render_research_plan(plan)
-    assert "**Shareholder Structure Verdict**: 筹码结构稳定。" in render_research_plan(plan)
+    rendered = render_research_plan(plan)
+    assert "### Peer Selection Verdict\n同行里暂未出现更优替代。" in rendered
+    assert "### Supply-Chain Position Verdict\n目标所处环节仍是当前更优利润池。" in rendered
+    assert "### Company Quality Verdict\n好公司。" in rendered
+    assert "### Current Odds Verdict\n赔率一般。" in rendered
+    assert "### Relative Allocation Verdict\n同业中可配，但不是绝对最优。" in rendered
+    assert "### Management & Capital Allocation Verdict\n资本配置总体克制。" in rendered
+    assert "### Shareholder Structure Verdict\n筹码结构稳定。" in rendered
 
 
 def test_portfolio_decision_renders_peer_selection_verdict():
@@ -76,10 +74,11 @@ def test_portfolio_decision_renders_peer_selection_verdict():
     )
 
     rendered = render_pm_decision(decision)
-    assert "\u540c\u4e1a\u6bd4\u8f83\uff1aPeer A is superior on ROE and growth." in rendered
-    assert "\u4ea7\u4e1a\u94fe\u4f4d\u7f6e\uff1aUpstream resources are currently more attractive than manufacturing." in rendered
-    assert "\u516c\u53f8\u8d28\u91cf=Quality is mixed." in rendered
-    assert "\u5f53\u524d\u8d54\u7387=Odds are weak." in rendered
-    assert "\u76f8\u5bf9\u914d\u7f6e=Upstream is better." in rendered
-    assert "\u7ba1\u7406\u5c42\u4e0e\u8d44\u672c\u914d\u7f6e\uff1aCapital allocation is aggressive." in rendered
-    assert "\u80a1\u4e1c\u4e0e\u7b79\u7801\uff1aUnlock and sell-down pressure exist." in rendered
+    assert "**Supporting Evidence Integration**" in rendered
+    assert "Peer comparison: Peer A is superior on ROE and growth." in rendered
+    assert "Supply-chain position: Upstream resources are currently more attractive than manufacturing." in rendered
+    assert "company quality=Quality is mixed." in rendered
+    assert "current odds=Odds are weak." in rendered
+    assert "relative allocation=Upstream is better." in rendered
+    assert "Management and capital allocation: Capital allocation is aggressive." in rendered
+    assert "Shareholder and float structure: Unlock and sell-down pressure exist." in rendered

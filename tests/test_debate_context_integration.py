@@ -157,6 +157,8 @@ def test_portfolio_manager_prompt_includes_investor_interaction_context():
     assert "Business Segment Breakdown" in prompt
     assert "Peer Comparison Summary" in prompt
     assert "Buy-Side Depth Audit" in prompt
+    assert "Use this narrative order" in prompt
+    assert "materiality gates, not a checklist" in prompt
 
 
 @pytest.mark.unit
@@ -279,12 +281,13 @@ def test_pm_renderer_preserves_new_verdict_fields():
     )
     rendered = render_pm_decision(decision)
     assert "Business Segment Breakdown: segment revenue growth margin" in rendered
+    assert "**Supporting Evidence Integration**" in rendered
     assert "Peer Comparison Summary: peer rank and comparable alternatives" in rendered
     assert "Buy-side depth audit: remaining thin spots" in rendered
-    assert "投资者沟通：communication" in rendered
-    assert "政策与需求底色：policy" in rendered
-    assert "行业原生变量：industry" in rendered
-    assert "战略期权：optionality" in rendered
+    assert "Investor communication: communication" in rendered
+    assert "Policy and demand backdrop: policy" in rendered
+    assert "Industry-native variables: industry" in rendered
+    assert "Strategic optionality: optionality" in rendered
 
 
 @pytest.mark.unit
