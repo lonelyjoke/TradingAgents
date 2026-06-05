@@ -190,3 +190,38 @@ def test_metals_mining_context_not_applicable_for_non_miner(monkeypatch):
 
     assert "- Status: not_applicable" in rendered
     assert "Do not force reserve" in rendered
+
+
+def test_metals_mining_context_not_applicable_for_optical_module_resource_wording(monkeypatch):
+    monkeypatch.setattr(
+        metals_mining_research,
+        "_fetch_stock_basic",
+        lambda symbol: pd.Series(
+            {
+                "ts_code": symbol,
+                "name": "\u4e2d\u9645\u65ed\u521b",
+                "industry": "\u901a\u4fe1\u8bbe\u5907",
+            }
+        ),
+    )
+    monkeypatch.setattr(
+        metals_mining_research,
+        "_load_financial_report_texts",
+        lambda symbol, curr_date, look_back_days: (
+            [],
+            [
+                (
+                    "2025 annual report",
+                    "\u516c\u53f8\u56f4\u7ed5AI\u6570\u636e\u4e2d\u5fc3\u3001\u5ba2\u6237\u8d44\u6e90\u3001"
+                    "\u4f9b\u5e94\u94fe\u8d44\u6e90\u4e0e\u539f\u6750\u6599\u4fdd\u969c\u5c55\u5f00\u7ecf\u8425\uff0c"
+                    "\u4e3b\u8981\u4ea7\u54c1\u4e3a\u9ad8\u901f\u5149\u6a21\u5757\u3002",
+                )
+            ],
+        ),
+    )
+    monkeypatch.setattr(metals_mining_research, "_inferred_metals", lambda symbol: ())
+
+    rendered = get_metals_mining_context("300308.SZ", "2026-06-05")
+
+    assert "- Status: not_applicable" in rendered
+    assert "Do not force reserve" in rendered

@@ -62,6 +62,28 @@ class FilingQuestionAnswer:
 
 
 @dataclass(frozen=True)
+class PreDebateUnderwritingQuestion:
+    question_id: str
+    theme: str
+    underwriting_question: str
+    preliminary_answer: str
+    evidence_strength: str
+    evidence_basis: str
+    bull_debate_use: str
+    bear_debate_use: str
+    pm_integration: str
+
+
+@dataclass(frozen=True)
+class CompanyBusinessArchetype:
+    archetype_id: str
+    archetype_name: str
+    evidence_strength: str
+    evidence_basis: str
+    underwriting_focus: str
+
+
+@dataclass(frozen=True)
 class MaterialFilingFinding:
     finding_type: str
     importance: str
@@ -395,6 +417,53 @@ _INDUSTRY_PLAYBOOKS: dict[str, tuple[FilingQuestion, ...]] = {
             ("semiannual", "annual"),
             "Treat monetized new businesses as scenario or SOTP upside when disclosure is specific.",
             "Keep concept-only second curves out of base valuation until segment economics are disclosed.",
+        ),
+    ),
+    "market_operator": (
+        FilingQuestion(
+            "market_rental_engine",
+            "business_model",
+            "公司的核心收入和利润到底来自商位/物业租赁、市场经营服务、商品销售，还是贸易服务？各资产如何形成经营闭环？",
+            ("市场经营", "商位", "租赁", "物业", "租金", "服务费", "营业收入", "分行业", "分业务"),
+            ("annual", "semiannual"),
+            "Support the bull case when recurring rent/service income is durable and segment economics are visible.",
+            "Challenge any blended valuation that ignores low-growth rent assets, volatile trade revenue, or weak segment margin disclosure.",
+        ),
+        FilingQuestion(
+            "market_moat_and_traffic",
+            "moat",
+            "线下市场的护城河来自低成本商户集聚、客流/货流、供应链配套、品牌还是地方资源？这些优势是否能保护租金和入住率？",
+            ("市场地位", "商户", "客流", "货流", "供应链", "义乌", "品牌", "核心竞争力", "入住率", "出租率"),
+            ("annual", "semiannual"),
+            "Use verified merchant, traffic, occupancy, and supply-chain evidence to argue the market has a durable network effect.",
+            "Attack the moat if the filing only contains slogans and lacks occupancy, rent, merchant, traffic, or cash evidence.",
+        ),
+        FilingQuestion(
+            "market_online_disruption",
+            "channel_shift",
+            "线上电商、跨境电商和数字平台是在颠覆线下市场，还是通过Chinagoods/数字化/支付/物流增强线下商户生态？",
+            ("线上", "电商", "跨境电商", "Chinagoods", "数字化", "平台", "义支付", "支付", "履约"),
+            ("annual", "semiannual", "quarterly"),
+            "Support a stronger ecosystem thesis when online tools increase merchant stickiness, transaction services, or monetization.",
+            "Challenge the rent model if online channels bypass the physical market or platform monetization remains unproven.",
+        ),
+        FilingQuestion(
+            "market_growth_drivers",
+            "growth_driver",
+            "主业未来增长来自租金/出租率提升、市场扩容、商户数量、交易额、会展客流、跨境贸易，还是配套服务货币化？",
+            ("租金", "出租率", "交易额", "商户", "会展", "客流", "跨境", "贸易", "市场扩建", "营业收入"),
+            ("annual", "semiannual", "quarterly"),
+            "Separate sustainable rent/traffic growth from one-off trade revenue or construction-cycle noise.",
+            "Question growth durability if filings do not show rent, occupancy, merchant, transaction, or service monetization data.",
+        ),
+        FilingQuestion(
+            "market_second_curve",
+            "second_curve",
+            "第二增长曲线是否已经从概念进入收入、利润或现金流，例如数字贸易、支付、物流、会展、供应链金融或海外市场？",
+            ("第二增长", "数字贸易", "Chinagoods", "义支付", "物流", "供应链金融", "会展", "海外仓", "跨境", "收入", "利润"),
+            ("annual", "semiannual"),
+            "Promote monetized new services into scenario/SOTP value when revenue, margin, users, or transaction data are disclosed.",
+            "Keep second-curve claims out of base valuation if they lack disclosed economics or remain policy/narrative only.",
         ),
     ),
     "power_operator": (
@@ -1136,6 +1205,37 @@ def _select_industry_profile(
         )
     ) and "银行" in blob:
         return "banking"
+    market_operator_identity = any(
+        token in identity_blob
+        for token in (
+            "小商品城",
+            "中国小商品城",
+            "商业百货",
+            "一般零售",
+            "商品市场",
+        )
+    )
+    market_operator_hits = sum(
+        token in blob
+        for token in (
+            "市场经营",
+            "商位",
+            "商铺",
+            "租赁",
+            "租金",
+            "物业",
+            "义乌",
+            "Chinagoods",
+            "义支付",
+            "跨境电商",
+            "数字贸易",
+            "供应链服务",
+            "会展",
+            "市场商户",
+        )
+    )
+    if market_operator_identity or market_operator_hits >= 4:
+        return "market_operator"
     smart_grid_identity = any(
         token in identity_blob
         for token in (
@@ -1357,25 +1457,27 @@ def _extract_material_filing_findings(
             "high",
             (
                 "\u7b97\u529b\u79df\u8d41",
+                "\u7b97\u529b\u79df\u7528",
+                "\u7b97\u529b\u51fa\u79df",
                 "\u667a\u4e91\u8ba1\u7b97",
-                "\u667a\u7b97\u4e2d\u5fc3",
-                "\u7b97\u529b\u4e2d\u5fc3",
-                "\u6570\u636e\u4e2d\u5fc3",
+                "\u7b97\u529b\u8fd0\u8425",
+                "\u7b97\u529b\u670d\u52a1\u6536\u5165",
+                "\u7b97\u529b\u4e1a\u52a1\u6536\u5165",
+                "GPU\u79df\u8d41",
+                "\u673a\u67dc\u79df\u8d41",
                 "AI\u6570\u636e\u670d\u52a1",
-                "\u7f51\u7edc\u5de5\u7a0b",
             ),
             (
-                "\u6536\u5165",
+                "\u79df\u8d41\u4e1a\u52a1\u89c4\u6a21",
+                "\u79df\u8d41\u6536\u5165",
+                "\u670d\u52a1\u6536\u5165",
+                "\u4e1a\u52a1\u6536\u5165",
+                "\u8fd0\u8425\u6536\u5165",
                 "\u8425\u6536",
-                "\u5229\u6da6",
                 "\u6bdb\u5229",
                 "\u8d44\u4ea7",
-                "\u79df\u8d41\u4e1a\u52a1\u89c4\u6a21",
-                "\u8ba2\u5355",
-                "\u5ba2\u6237",
-                "\u9879\u76ee",
-                "\u5efa\u8bbe",
-                "\u65b0\u589e",
+                "\u4e0a\u67b6",
+                "\u6295\u8fd0",
             ),
             "Compute leasing or digital infrastructure is disclosed with an economic bridge; it must enter the earnings and asset-quality debate.",
             "Use as filing-grade evidence that the new business may already have operating assets or monetization.",
@@ -3361,6 +3463,641 @@ def _answer_questions(
     return answers
 
 
+def _evidence_strength_from_text(text: str) -> str:
+    if not text:
+        return "unanswered"
+    return _evidence_strength(text)
+
+
+def _preliminary_answer(evidence: str, *, empty: str) -> str:
+    if not evidence:
+        return empty
+    return _compact_text(evidence, 260)
+
+
+def _first_evidence(
+    rows: Iterable[object],
+    *,
+    predicate,
+    attr: str = "evidence",
+) -> str:
+    for row in rows:
+        if predicate(row):
+            return str(getattr(row, attr, "") or "")
+    return ""
+
+
+_BUSINESS_ARCHETYPE_RULES: tuple[dict[str, object], ...] = (
+    {
+        "archetype_id": "market_operator",
+        "archetype_name": "市场经营 / 资产收益 + 商户生态型",
+        "keywords": (
+            "市场经营",
+            "商位",
+            "商铺",
+            "租赁",
+            "租金",
+            "物业",
+            "商户",
+            "Chinagoods",
+            "义支付",
+            "跨境电商",
+            "数字贸易",
+            "会展",
+        ),
+        "question": "这家公司是否本质上是资产收益、商户流量和配套服务货币化的组合？租金/服务费、出租率、商户生态、线上平台之间怎样形成闭环？",
+        "focus": "拆清租金/服务费的稳定性、出租率和商户粘性，再看数字贸易、支付、物流、会展等服务是否已经贡献收入或利润。",
+        "bull": "当租金/服务费现金流稳定、商户生态增强、线上工具提升粘性或交易服务货币化时，支持更高质量的资产运营估值。",
+        "bear": "如果平台化只是叙事、线下资产增长慢、租金或出租率缺乏披露，应压低第二曲线和估值溢价。",
+        "pm": "PM报告应把它写成资产收益+生态服务的经营模型，而不是简单写成商业百货或电商概念。",
+    },
+    {
+        "archetype_id": "high_r_and_d_technology",
+        "archetype_name": "高研发技术产品型",
+        "keywords": (
+            "研发",
+            "技术",
+            "专利",
+            "芯片",
+            "模块",
+            "算法",
+            "软件",
+            "高速",
+            "800G",
+            "1.6T",
+            "客户认证",
+            "迭代",
+            "新产品",
+        ),
+        "question": "这家公司是靠技术迭代、客户认证和产品升级驱动增长，还是只是行业景气里的产能/出货扩张？研发投入如何转化为ASP、份额、毛利率和客户粘性？",
+        "focus": "重点验证产品代际、客户认证、研发转化率、ASP/毛利率、供应链瓶颈、资本开支和库存风险。",
+        "bull": "当新产品已通过客户认证、出货放量、毛利率/ASP或份额改善时，支持高增长技术股的盈利弹性。",
+        "bear": "如果只有技术口号而缺少客户、订单、产品代际或盈利质量证据，应警惕估值先行和景气透支。",
+        "pm": "PM报告应把技术升级、客户认证、产能和盈利质量串起来，而不是只写AI或科技高景气。",
+    },
+    {
+        "archetype_id": "product_manufacturer",
+        "archetype_name": "产品制造 / 产能出货型",
+        "keywords": (
+            "生产",
+            "制造",
+            "产品",
+            "产能",
+            "产量",
+            "销量",
+            "出货",
+            "良率",
+            "原材料",
+            "库存",
+            "毛利率",
+            "工厂",
+        ),
+        "question": "这家公司增长来自价格、销量、产能利用率、产品结构还是成本下降？扩产、库存和原材料波动会怎样影响毛利率和现金流？",
+        "focus": "拆解量价成本、产品结构、产能利用率、库存、原材料和资本开支回报。",
+        "bull": "当产能利用率提升、产品结构升级、成本下降或订单支撑出货时，可支持盈利弹性。",
+        "bear": "若扩产先行、库存累积、原材料扰动或毛利率承压，应质疑增长质量。",
+        "pm": "PM报告应围绕量价利和现金转换，而不是只引用收入增速。",
+    },
+    {
+        "archetype_id": "brand_channel_consumer",
+        "archetype_name": "品牌消费 / 渠道动销型",
+        "keywords": (
+            "品牌",
+            "经销商",
+            "渠道",
+            "终端",
+            "门店",
+            "动销",
+            "库存",
+            "会员",
+            "客单价",
+            "复购",
+            "促销",
+            "新品",
+            "冷链",
+        ),
+        "question": "这家公司靠品牌力、渠道覆盖、终端动销、产品升级还是价格带扩张赚钱？渠道库存和促销是否透支了真实需求？",
+        "focus": "验证品牌定价权、渠道质量、终端动销、库存水位、新品放量、费用投放效率和现金回款。",
+        "bull": "当动销、渠道扩张、新品结构和费用效率共同改善时，可支持消费股的质量成长。",
+        "bear": "若收入依赖压货、促销或费用投放，且现金流/库存不配合，应质疑可持续性。",
+        "pm": "PM报告应结合行业数据、宏观消费和渠道库存，而不是泛泛讲消费复苏。",
+    },
+    {
+        "archetype_id": "project_delivery",
+        "archetype_name": "项目订单 / 交付回款型",
+        "keywords": (
+            "项目",
+            "合同",
+            "订单",
+            "在手订单",
+            "招投标",
+            "交付",
+            "验收",
+            "工程",
+            "EPC",
+            "回款",
+            "应收账款",
+            "合同资产",
+        ),
+        "question": "订单和项目储备能否转化为收入、毛利和现金？交付、验收、回款周期是否会吞噬利润质量？",
+        "focus": "验证订单质量、交付节奏、验收确认、毛利率、应收/合同资产和现金回款。",
+        "bull": "当在手订单高质量且交付回款顺畅时，支持收入可见度和盈利兑现。",
+        "bear": "若订单不等于利润，或应收/合同资产扩张快于收入，应下调确定性。",
+        "pm": "PM报告应把订单、收入确认和现金流三者串联起来。",
+    },
+    {
+        "archetype_id": "platform_ecosystem",
+        "archetype_name": "平台生态 / 交易服务型",
+        "keywords": (
+            "平台",
+            "用户",
+            "商户",
+            "生态",
+            "交易额",
+            "GMV",
+            "支付",
+            "广告",
+            "订阅",
+            "佣金",
+            "SaaS",
+            "数字化",
+            "流量",
+        ),
+        "question": "平台的用户、商户、交易额或流量能否转化为佣金、广告、支付、订阅或SaaS收入？生态价值是否已进入利润和现金流？",
+        "focus": "验证用户/商户留存、交易额、变现率、服务收入、获客成本和利润率。",
+        "bull": "当平台规模和变现率同步改善时，可支持网络效应和估值溢价。",
+        "bear": "若只有流量/用户叙事但缺少变现率和利润，应把平台价值放入观察项。",
+        "pm": "PM报告应区分平台指标和财务贡献，避免把生态叙事直接资本化。",
+    },
+    {
+        "archetype_id": "asset_yield_operator",
+        "archetype_name": "重资产收益 / 利用率型",
+        "keywords": (
+            "出租率",
+            "利用率",
+            "装机",
+            "发电量",
+            "运力",
+            "收费",
+            "港口",
+            "机场",
+            "高速",
+            "园区",
+            "IDC",
+            "在建工程",
+            "资本开支",
+        ),
+        "question": "重资产是否能产生足够ROIC？利用率、价格/费率、折旧、资本开支和融资成本如何影响股东回报？",
+        "focus": "验证资产利用率、费率/价格、折旧、维护资本开支、融资成本和ROIC。",
+        "bull": "当利用率和价格改善且资本开支回报清晰时，可支持资产价值重估。",
+        "bear": "若资产扩张吃现金而回报率不清晰，应压低估值和仓位。",
+        "pm": "PM报告应从资产回报率出发，而不是只看规模扩张。",
+    },
+    {
+        "archetype_id": "resource_cycle",
+        "archetype_name": "资源周期 / 商品价格型",
+        "keywords": (
+            "矿",
+            "储量",
+            "品位",
+            "冶炼",
+            "金属",
+            "煤炭",
+            "原油",
+            "天然气",
+            "价格",
+            "吨成本",
+            "产量",
+            "铜",
+            "铝",
+            "金",
+            "锂",
+        ),
+        "question": "股权价值主要受商品价格、产量、成本曲线、储量/品位和资本开支驱动吗？周期上行能否真正变成自由现金流？",
+        "focus": "验证商品价格敏感性、产量、成本曲线、资源储量、扩产资本开支和现金分配。",
+        "bull": "当价格上行叠加低成本资源和现金分配时，可支持周期弹性。",
+        "bear": "若成本、品位、资本开支或价格假设过乐观，应降低周期收益可信度。",
+        "pm": "PM报告应给出商品价格和成本敏感性，而不是简单讲资源稀缺。",
+    },
+    {
+        "archetype_id": "regulated_pipeline",
+        "archetype_name": "监管审批 / 产品管线型",
+        "keywords": (
+            "临床",
+            "注册",
+            "获批",
+            "医保",
+            "集采",
+            "管线",
+            "适应症",
+            "创新药",
+            "医疗器械",
+            "许可证",
+            "认证",
+        ),
+        "question": "核心价值来自已商业化产品，还是监管审批/临床管线的可选项？医保、集采、注册和商业化节奏如何改变利润曲线？",
+        "focus": "验证管线阶段、获批概率、商业化能力、医保/集采价格压力和研发现金消耗。",
+        "bull": "当管线进入商业化且价格/放量路径清晰时，可支持成长估值。",
+        "bear": "若审批、价格或商业化不确定性高，应把管线放在情景估值而非基准估值。",
+        "pm": "PM报告应区分存量利润和管线期权。",
+    },
+    {
+        "archetype_id": "financial_intermediary",
+        "archetype_name": "金融中介 / 资产负债表型",
+        "keywords": (
+            "银行",
+            "保险",
+            "券商",
+            "信托",
+            "贷款",
+            "存款",
+            "净息差",
+            "不良率",
+            "拨备",
+            "资本充足率",
+            "保费",
+            "投资收益",
+        ),
+        "question": "这家公司真正的利润驱动来自息差、资产质量、资本约束、保费/手续费，还是投资收益？资产负债表风险是否被低估？",
+        "focus": "验证息差、资产质量、资本充足、负债成本、费用率、投资收益和分红能力。",
+        "bull": "当资产质量稳定、资本充足且核心收入改善时，支持估值修复。",
+        "bear": "若利润依赖投资收益或拨备调节，且资产质量承压，应降低信心。",
+        "pm": "PM报告应从资产负债表和资本回报出发，而不是用一般制造业框架。",
+    },
+)
+
+
+def _infer_company_business_archetypes(
+    *,
+    company_name: str,
+    profile: str,
+    vendor_industry: str = "",
+    report_texts: Iterable[tuple[str, str]] = (),
+    business_model_map: Iterable[BusinessModelFinding] = (),
+    segment_economics: Iterable[SegmentEconomicsFinding] = (),
+    growth_vectors: Iterable[GrowthVectorFinding] = (),
+    paragraph_reading_pack: Iterable[FilingParagraphInsight] = (),
+    industry_reading_pack: Iterable[IndustryReadingInsight] = (),
+    answers: Iterable[FilingQuestionAnswer] = (),
+    limit: int = 3,
+) -> list[CompanyBusinessArchetype]:
+    """Infer company-level operating archetypes from filings, not only industry labels."""
+
+    evidence_sources: list[str] = [company_name, vendor_industry, profile]
+    for collection, attr in (
+        (business_model_map, "evidence"),
+        (segment_economics, "evidence"),
+        (growth_vectors, "evidence"),
+        (paragraph_reading_pack, "excerpt"),
+        (industry_reading_pack, "excerpt"),
+        (answers, "evidence"),
+    ):
+        for row in collection:
+            value = str(getattr(row, attr, "") or "")
+            if value:
+                evidence_sources.append(value)
+    for title, text in report_texts:
+        if _detect_report_type(title) in {"annual", "semiannual"}:
+            evidence_sources.append(f"{title}: {str(text or '')[:6000]}")
+
+    blob = "\n".join(evidence_sources)
+    scored: list[tuple[int, CompanyBusinessArchetype]] = []
+    for rule in _BUSINESS_ARCHETYPE_RULES:
+        keywords = tuple(str(item) for item in rule["keywords"])
+        hits = [keyword for keyword in keywords if keyword and keyword in blob]
+        if not hits:
+            continue
+        score = len(hits)
+        if profile == rule["archetype_id"]:
+            score += 8
+        if str(rule["archetype_id"]) in {"high_r_and_d_technology", "product_manufacturer"} and any(
+            token in vendor_industry for token in ("通信设备", "电子", "半导体", "计算机", "专用设备")
+        ):
+            score += 2
+        if str(rule["archetype_id"]) == "brand_channel_consumer" and any(
+            token in vendor_industry for token in ("食品", "饮料", "家电", "服饰", "零售", "消费")
+        ):
+            score += 2
+        evidence = ""
+        for source in evidence_sources:
+            if any(keyword in source for keyword in hits):
+                evidence = _compact_text(source, 260)
+                break
+        scored.append(
+            (
+                score,
+                CompanyBusinessArchetype(
+                    archetype_id=str(rule["archetype_id"]),
+                    archetype_name=str(rule["archetype_name"]),
+                    evidence_strength=_evidence_strength_from_text(evidence),
+                    evidence_basis=evidence or "Matched company identity or industry, but no concise filing evidence was isolated.",
+                    underwriting_focus=str(rule["focus"]),
+                ),
+            )
+        )
+
+    if not scored:
+        fallback = _first_evidence(
+            business_model_map,
+            predicate=lambda row: row.lens == "core_revenue_engine",
+        )
+        scored.append(
+            (
+                0,
+                CompanyBusinessArchetype(
+                    archetype_id="company_specific_generalist",
+                    archetype_name="通用经营模型待拆解型",
+                    evidence_strength=_evidence_strength_from_text(fallback),
+                    evidence_basis=fallback or "No clear archetype evidence found from readable filings.",
+                    underwriting_focus="先从年报抽取收入来源、利润池、资产/资本投入、客户渠道和现金转换，再决定是否需要行业专属工具包。",
+                ),
+            )
+        )
+
+    selected: list[CompanyBusinessArchetype] = []
+    seen: set[str] = set()
+    for _, item in sorted(scored, key=lambda pair: pair[0], reverse=True):
+        if item.archetype_id in seen:
+            continue
+        seen.add(item.archetype_id)
+        selected.append(item)
+        if len(selected) >= limit:
+            break
+    return selected
+
+
+def _build_pre_debate_underwriting_questions(
+    *,
+    company_name: str,
+    profile: str,
+    business_model_map: Iterable[BusinessModelFinding],
+    segment_economics: Iterable[SegmentEconomicsFinding],
+    business_segment_valuation_map: Iterable[BusinessSegmentValuationFinding],
+    growth_vectors: Iterable[GrowthVectorFinding],
+    paragraph_reading_pack: Iterable[FilingParagraphInsight],
+    industry_reading_pack: Iterable[IndustryReadingInsight],
+    answers: Iterable[FilingQuestionAnswer],
+    statement_table_signals: Iterable[FilingTableSignal],
+    note_findings: Iterable[FilingNoteFinding],
+    financial_relations: Iterable[FinancialRelationInsight],
+    vendor_industry: str = "",
+    report_texts: Iterable[tuple[str, str]] = (),
+    business_archetypes: Iterable[CompanyBusinessArchetype] = (),
+) -> list[PreDebateUnderwritingQuestion]:
+    """Convert raw filing reads into company-specific questions for the debate."""
+
+    business_model = list(business_model_map)
+    segments = list(segment_economics)
+    segment_valuation = list(business_segment_valuation_map)
+    growth = list(growth_vectors)
+    paragraphs = list(paragraph_reading_pack)
+    industry_rows = list(industry_reading_pack)
+    answered = list(answers)
+    table_signals = list(statement_table_signals)
+    notes = list(note_findings)
+    relations = list(financial_relations)
+    archetypes = list(business_archetypes) or _infer_company_business_archetypes(
+        company_name=company_name,
+        profile=profile,
+        vendor_industry=vendor_industry,
+        report_texts=report_texts,
+        business_model_map=business_model,
+        segment_economics=segments,
+        growth_vectors=growth,
+        paragraph_reading_pack=paragraphs,
+        industry_reading_pack=industry_rows,
+        answers=answered,
+    )
+
+    rows: list[PreDebateUnderwritingQuestion] = []
+    seen: set[str] = set()
+
+    def add(
+        question_id: str,
+        theme: str,
+        question: str,
+        evidence: str,
+        *,
+        empty: str,
+        bull: str,
+        bear: str,
+        pm: str,
+    ) -> None:
+        if question_id in seen:
+            return
+        seen.add(question_id)
+        rows.append(
+            PreDebateUnderwritingQuestion(
+                question_id=question_id,
+                theme=theme,
+                underwriting_question=question,
+                preliminary_answer=_preliminary_answer(evidence, empty=empty),
+                evidence_strength=_evidence_strength_from_text(evidence),
+                evidence_basis=_compact_text(evidence, 220) if evidence else "No direct filing evidence found.",
+                bull_debate_use=bull,
+                bear_debate_use=bear,
+                pm_integration=pm,
+            )
+        )
+
+    core_evidence = _first_evidence(
+        business_model,
+        predicate=lambda row: row.lens == "core_revenue_engine",
+    ) or _first_evidence(segments, predicate=lambda row: True)
+    segment_evidence = _first_evidence(
+        business_model,
+        predicate=lambda row: row.lens == "segment_mix",
+    ) or _first_evidence(segments, predicate=lambda row: row.segment_type in {"business", "product", "geography"})
+    add(
+        "pre_debate_business_model",
+        "business_model",
+        f"{company_name}到底靠什么赚钱，收入、利润和资产之间如何形成经营闭环？",
+        core_evidence or segment_evidence,
+        empty="Readable filings did not provide a clean business-model answer; debate should start by acknowledging this gap.",
+        bull="Use disclosed core engine and segment mix to prove the thesis is tied to real economics, not a slogan.",
+        bear="Attack any rating that relies on an undefined or over-blended business model.",
+        pm="Put a concise business-model explanation before valuation and avoid using one blended multiple if segments differ.",
+    )
+
+    moat_evidence = _first_evidence(paragraphs, predicate=lambda row: row.lens == "moat") or _first_evidence(
+        industry_rows,
+        predicate=lambda row: any(token in row.lens for token in ("moat", "franchise", "quality", "traffic", "channel")),
+        attr="excerpt",
+    )
+    add(
+        "pre_debate_moat",
+        "moat",
+        "这家公司的护城河来自哪里，它能否保护价格、份额、租金、毛利率或客户粘性？",
+        moat_evidence,
+        empty="No direct moat section or industry-specific moat evidence was found; treat moat as unproven until corroborated.",
+        bull="Support durable valuation only when filings show customer stickiness, network effect, cost advantage, brand, license, technology, or location advantage.",
+        bear="Challenge generic competitive-advantage language when it lacks numbers or transmission into returns.",
+        pm="Use this question to decide business quality and deserved valuation premium/discount.",
+    )
+
+    rule_by_id = {str(rule["archetype_id"]): rule for rule in _BUSINESS_ARCHETYPE_RULES}
+    for archetype in archetypes[:2]:
+        rule = rule_by_id.get(archetype.archetype_id, {})
+        add(
+            f"pre_debate_archetype_{archetype.archetype_id}",
+            "company_archetype",
+            str(
+                rule.get(
+                    "question",
+                    f"{company_name}最像哪一种经营模型？收入、利润、资产投入和现金流的关键验证点分别是什么？",
+                )
+            ),
+            archetype.evidence_basis,
+            empty="No direct filing evidence was found for this company archetype; keep the diagnosis tentative.",
+            bull=str(
+                rule.get(
+                    "bull",
+                    "Use the archetype only when its operating evidence can be tied to revenue, margin, cash flow, or valuation.",
+                )
+            ),
+            bear=str(
+                rule.get(
+                    "bear",
+                    "Attack any thesis that names an archetype but cannot show how it transmits into owner earnings.",
+                )
+            ),
+            pm=str(
+                rule.get(
+                    "pm",
+                    "Use the archetype to organize the PM report's business-model primer and verification agenda.",
+                )
+            ),
+        )
+
+    if profile == "market_operator":
+        online_answer = _first_evidence(
+            answered,
+            predicate=lambda row: row.question_id == "market_online_disruption",
+        ) or _first_evidence(
+            answered,
+            predicate=lambda row: row.category == "channel_shift",
+        ) or _first_evidence(
+            paragraphs,
+            predicate=lambda row: any(
+                token in row.excerpt
+                for token in ("线上", "电商", "Chinagoods", "数字化", "义支付", "支付", "履约")
+            ),
+            attr="excerpt",
+        ) or _first_evidence(
+            growth,
+            predicate=lambda row: any(
+                token in row.evidence
+                for token in ("线上", "电商", "Chinagoods", "数字化", "义支付", "支付", "履约")
+            ),
+        )
+        add(
+            "pre_debate_online_disruption",
+            "channel_shift",
+            "线上电商、跨境电商和数字平台是在颠覆线下市场，还是增强商户生态和租金/服务收入？",
+            online_answer,
+            empty="No direct filing evidence was found on online/offline integration; do not assume digitalization is either disruption or upside.",
+            bull="Argue digital tools strengthen merchant stickiness only if filings show users, transaction services, payments, logistics, revenue, or retention.",
+            bear="Attack the rent/market model if online channels bypass the physical market or platform economics remain undisclosed.",
+            pm="Integrate this into the business-model primer and second-curve/scenario valuation, not as a generic internet label.",
+        )
+
+    growth_evidence = _first_evidence(
+        answered,
+        predicate=lambda row: row.category in {"growth_driver", "orders", "new_business", "mix"},
+    ) or _first_evidence(growth, predicate=lambda row: True)
+    add(
+        "pre_debate_growth_driver",
+        "growth_driver",
+        "未来增长主要来自价格、销量/客流、利用率/出租率、产能、客户、区域扩张，还是产品/服务结构升级？",
+        growth_evidence,
+        empty="No clear growth-driver answer was found; debate should separate proven drivers from extrapolation.",
+        bull="Use this to show which value driver can still beat market expectations.",
+        bear="Use this to expose where growth depends on unverified volume, price, utilization, or mix assumptions.",
+        pm="Tie valuation and rating to 3-6 named value drivers rather than generic growth.",
+    )
+
+    second_curve_evidence = _first_evidence(growth, predicate=lambda row: True) or _first_evidence(
+        paragraphs,
+        predicate=lambda row: row.lens == "second_curve",
+    )
+    add(
+        "pre_debate_second_curve",
+        "second_curve",
+        "是否存在第二增长曲线？它已经变成收入、利润、订单、客户或现金流，还是仍停留在战略叙事？",
+        second_curve_evidence,
+        empty="No monetized second-curve evidence was found; keep optionality out of base valuation unless other contexts prove it.",
+        bull="Promote second curves only when filings show monetization, contracted demand, users, capacity, customers, or cash conversion.",
+        bear="Challenge concept-only optionality, especially when capex or working capital rises before revenue proof.",
+        pm="Classify each second curve as core valuation, scenario/SOTP value, watch item, or narrative only.",
+    )
+
+    cash_evidence = _first_evidence(
+        answered,
+        predicate=lambda row: row.category in {"cash_quality", "revenue_quality"},
+    ) or _first_evidence(
+        table_signals,
+        predicate=lambda row: row.account in {"operating_cash_flow", "receivables", "inventory", "prepayments", "contract_liabilities"},
+    ) or _first_evidence(
+        relations,
+        predicate=lambda row: "cash" in row.relation_type or "working" in row.relation_type,
+    )
+    add(
+        "pre_debate_cash_quality",
+        "cash_quality",
+        "利润和收入能否转化为现金？应收、存货、预付款、合同负债或资本开支是否改变了增长质量？",
+        cash_evidence,
+        empty="No direct cash-quality answer was found; structured statements may still be needed before conviction rises.",
+        bull="Use cash conversion and disciplined working capital to validate earnings quality.",
+        bear="Use working-capital absorption, weak OCF, or capex-before-proof to attack reported growth.",
+        pm="Let cash quality affect conviction, sizing, and safety-price work.",
+    )
+
+    valuation_evidence = _first_evidence(segment_valuation, predicate=lambda row: True)
+    add(
+        "pre_debate_segment_valuation",
+        "valuation",
+        "不同业务、地区、渠道或第二曲线应如何分开估值，而不是简单套一个合并PE/PB？",
+        valuation_evidence or segment_evidence,
+        empty="No clean segment valuation map was available; use blended valuation only with a clear caveat.",
+        bull="Give premium credit only to segments with proven growth, margin, cash conversion, or scarcity.",
+        bear="Attack over-blending when low-quality or unproven businesses are valued like the best segment.",
+        pm="Use split valuation when segment evidence exists; otherwise state why a blended multiple is only a rough cross-check.",
+    )
+
+    risk_evidence = _first_evidence(notes, predicate=lambda row: True) or _first_evidence(
+        paragraphs,
+        predicate=lambda row: row.lens in {"long_cycle_risk", "risk_update"},
+    )
+    add(
+        "pre_debate_key_risks",
+        "risk",
+        "哪些风险会真正改变股权价值，而不只是年报里的常规风险披露？",
+        risk_evidence,
+        empty="No specific risk evidence was surfaced; debate should still test valuation, competition, cash, governance, and cycle risks.",
+        bull="Use absence of material negative notes cautiously; it is not proof of safety unless coverage is strong.",
+        bear="Prioritize risks with direct financial transmission: impairment, litigation, guarantees, customer concentration, margin pressure, leverage, or policy exposure.",
+        pm="Put only decision-relevant risks into verification/falsification and avoid padding with boilerplate.",
+    )
+
+    for answer in answered:
+        if len(rows) >= 9:
+            break
+        if answer.question_id in seen:
+            continue
+        add(
+            answer.question_id,
+            answer.category,
+            answer.question,
+            answer.evidence,
+            empty="No filing answer found.",
+            bull=answer.bull_use,
+            bear=answer.bear_use,
+            pm="Use this answered company-specific question as a debate checkpoint if it affects rating, valuation, or sizing.",
+        )
+
+    return rows[:9]
+
+
 _BANKING_KPI_RULES: tuple[tuple[str, tuple[str, ...], str, str], ...] = (
     (
         "spread_profitability",
@@ -4785,6 +5522,35 @@ def get_financial_report_intelligence_context(
         answers=answers,
         banking_kpi_pack=banking_kpi_pack,
     )
+    business_archetypes = _infer_company_business_archetypes(
+        company_name=company_name,
+        profile=profile,
+        vendor_industry=industry,
+        report_texts=report_texts,
+        business_model_map=business_model_map,
+        segment_economics=segment_economics,
+        growth_vectors=growth_vectors,
+        paragraph_reading_pack=paragraph_reading_pack,
+        industry_reading_pack=industry_reading_pack,
+        answers=answers,
+    )
+    pre_debate_questions = _build_pre_debate_underwriting_questions(
+        company_name=company_name,
+        profile=profile,
+        business_model_map=business_model_map,
+        segment_economics=segment_economics,
+        business_segment_valuation_map=business_segment_valuation_map,
+        growth_vectors=growth_vectors,
+        paragraph_reading_pack=paragraph_reading_pack,
+        industry_reading_pack=industry_reading_pack,
+        answers=answers,
+        statement_table_signals=statement_table_signals,
+        note_findings=note_findings,
+        financial_relations=financial_relations,
+        vendor_industry=industry,
+        report_texts=report_texts,
+        business_archetypes=business_archetypes,
+    )
     memory = _update_question_memory(symbol, curr_date, profile, answers)
 
     report_titles = []
@@ -5001,6 +5767,30 @@ def get_financial_report_intelligence_context(
         }
         for item in internal_quality_modules
     ]
+    business_archetype_rows = [
+        {
+            "archetype_id": item.archetype_id,
+            "archetype_name": item.archetype_name,
+            "evidence_strength": item.evidence_strength,
+            "evidence_basis": _compact_text(item.evidence_basis, 220),
+            "underwriting_focus": item.underwriting_focus,
+        }
+        for item in business_archetypes
+    ]
+    pre_debate_rows = [
+        {
+            "question_id": item.question_id,
+            "theme": item.theme,
+            "underwriting_question": item.underwriting_question,
+            "preliminary_answer": item.preliminary_answer,
+            "evidence_strength": item.evidence_strength,
+            "evidence_basis": item.evidence_basis,
+            "bull_debate_use": item.bull_debate_use,
+            "bear_debate_use": item.bear_debate_use,
+            "pm_integration": item.pm_integration,
+        }
+        for item in pre_debate_questions
+    ]
     answered_ids = {answer.question_id for answer in answers}
     unanswered_rows = [
         {
@@ -5046,6 +5836,12 @@ def get_financial_report_intelligence_context(
         "",
         "## Internal Filing Quality Modules",
         _build_table(internal_quality_rows),
+        "",
+        "## Company-Specific Business Archetype",
+        _build_table(business_archetype_rows),
+        "",
+        "## Pre-Debate Underwriting Questions",
+        _build_table(pre_debate_rows),
         "",
         "## Selected Filing Question Playbook",
         _build_table(
@@ -5123,6 +5919,7 @@ def get_financial_report_intelligence_context(
         "## Analyst Instructions",
         "- Start with the filing reading coverage audit. If coverage is partial, weak, or failed, explicitly downgrade confidence before using any filing-derived thesis.",
         "- Use the Internal Filing Quality Modules as a ten-part filing-only review: accounting reconciliation, segment economics, footnote radar, cash-flow quality, capex/CIP return bridge, MD&A text change, non-recurring profit quality, balance-sheet forward signals, shareholder-return authenticity, and disclosure quality. The final PM memo should integrate these into PM Summary, Investment Thesis, Valuation, Risk, and Verification rather than dumping a checklist.",
+        "- Use the Pre-Debate Underwriting Questions before the bull/bear debate. These are the company-specific buy-side questions that should frame the debate: business model, moat, growth driver, second curve, cash quality, segment valuation, and decision-relevant risks. Bulls and bears should answer or attack these questions directly rather than debating generic sector slogans.",
         "- Read quarterly reports for confirmation or reversal of short-cycle signals; read half-year reports for trend formation and segment mix; read annual reports for business model, capital allocation, and long-cycle risk.",
         "- Start with the business model map, then use the growth vector map to separate mature engines from emerging second curves.",
         "- For multi-product or multi-region companies, read the Segment Economics Pack before the bull/bear debate. Do not collapse a company into headline revenue or profit when annual/half-year filings disclose product, geography, channel, revenue, cost, gross margin, or growth-rate splits.",

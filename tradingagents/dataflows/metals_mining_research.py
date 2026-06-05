@@ -167,6 +167,39 @@ METALS_MINING_TERMS = (
     "COMEX",
 )
 
+METALS_PROFILE_TRIGGER_TERMS = (
+    "\u6709\u8272\u91d1\u5c5e",
+    "\u9ec4\u91d1",
+    "\u7a00\u571f",
+    "\u77ff\u5c71",
+    "\u77ff\u4e1a",
+    "\u91c7\u77ff",
+    "\u51b6\u70bc",
+    "\u77ff\u77f3",
+    "\u9502\u4e1a",
+    "\u94dd\u4e1a",
+    "\u94dc\u4e1a",
+)
+
+METALS_TEXT_TRIGGER_TERMS = (
+    "\u77ff\u5c71",
+    "\u77ff\u4e1a",
+    "\u91c7\u77ff",
+    "\u51b6\u70bc",
+    "\u77ff\u77f3",
+    "\u54c1\u4f4d",
+    "\u8d44\u6e90\u50a8\u91cf",
+    "\u6743\u76ca\u4ea7\u91cf",
+    "\u5b8c\u5168\u6210\u672c",
+    "\u73b0\u91d1\u6210\u672c",
+    "\u91d1\u77ff",
+    "\u94dc\u77ff",
+    "\u9502\u77ff",
+    "\u94dd\u571f\u77ff",
+    "AISC",
+    "TC/RC",
+)
+
 METALS_EVIDENCE_TERMS = (
     "\u8d44\u6e90\u50a8\u91cf",
     "\u50a8\u91cf",
@@ -271,6 +304,16 @@ def _contains_terms(terms: tuple[str, ...], *parts: object) -> bool:
     return any(str(term).lower() in text for term in terms if str(term or "").strip())
 
 
+def _count_terms(terms: tuple[str, ...], *parts: object) -> int:
+    text = " ".join(str(part or "") for part in parts).lower()
+    return sum(1 for term in terms if str(term or "").strip() and str(term).lower() in text)
+
+
+def _filing_has_metals_business_signal(text_probe: str) -> bool:
+    hits = _count_terms(METALS_TEXT_TRIGGER_TERMS, text_probe)
+    return hits >= 2
+
+
 def _snippet_around_terms(text: str, terms: tuple[str, ...], window: int = 220) -> str:
     cleaned = re.sub(r"\s+", " ", _safe_text(text))
     lower = cleaned.lower()
@@ -315,8 +358,10 @@ def _company_profile(symbol: str, curr_date: str, look_back_days: int) -> Metals
         reason = "curated A-share metals / mining ticker list"
     elif inferred_metals:
         reason = "commodity map contains exchange-traded metal products"
-    elif _contains_terms(METALS_MINING_TERMS, company_name, industry, text_probe):
-        reason = "company name / Tushare industry / filing text contains metals-mining terms"
+    elif _contains_terms(METALS_PROFILE_TRIGGER_TERMS, company_name, industry):
+        reason = "company name / Tushare industry contains metals-mining terms"
+    elif _filing_has_metals_business_signal(text_probe):
+        reason = "filing text contains multiple mining / smelting business signals"
     else:
         return None
 

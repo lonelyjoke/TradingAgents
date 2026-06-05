@@ -23,19 +23,31 @@ class ComputeEvidenceHit:
     evidence_grade: str
 
 
-_STRONG_TERMS = (
+_HARD_LEASING_TERMS = (
     "\u7b97\u529b\u79df\u8d41",
-    "\u7b97\u529b\u670d\u52a1",
+    "\u7b97\u529b\u79df\u7528",
+    "\u7b97\u529b\u51fa\u79df",
+    "\u7b97\u529b\u670d\u52a1\u6536\u5165",
+    "\u7b97\u529b\u4e1a\u52a1\u6536\u5165",
     "\u7b97\u529b\u8fd0\u8425",
+    "\u667a\u7b97\u4e2d\u5fc3\u8fd0\u8425",
+    "\u7b97\u529b\u4e2d\u5fc3\u8fd0\u8425",
+    "GPU\u79df\u8d41",
+    "GPU\u79df\u7528",
+    "GPU\u51fa\u79df",
+    "\u673a\u67dc\u79df\u8d41",
+)
+_COMPUTE_ASSET_TERMS = (
+    "\u7b97\u529b\u670d\u52a1",
     "\u667a\u7b97\u4e2d\u5fc3",
     "\u7b97\u529b\u4e2d\u5fc3",
     "\u667a\u80fd\u7b97\u529b\u4e2d\u5fc3",
-    "GPU\u79df\u8d41",
     "AI\u7b97\u529b",
     "\u9ad8\u6027\u80fd\u7b97\u529b",
     "\u8bad\u7ec3\u7b97\u529b",
     "\u63a8\u7406\u7b97\u529b",
 )
+_STRONG_TERMS = _HARD_LEASING_TERMS + _COMPUTE_ASSET_TERMS
 _WEAK_TERMS = (
     "\u7b97\u529b",
     "\u667a\u7b97",
@@ -55,16 +67,15 @@ _WEAK_TERMS = (
 )
 _MONETIZATION_TERMS = (
     "\u79df\u8d41",
-    "\u670d\u52a1",
-    "\u8ba2\u5355",
-    "\u5408\u540c",
-    "\u5ba2\u6237",
-    "\u6536\u5165",
-    "\u8425\u6536",
-    "\u4ea4\u4ed8",
+    "\u79df\u7528",
+    "\u51fa\u79df",
+    "\u670d\u52a1\u6536\u5165",
+    "\u4e1a\u52a1\u6536\u5165",
+    "\u8fd0\u8425\u6536\u5165",
+    "\u6708\u79df",
+    "\u79df\u91d1",
     "\u4e0a\u67b6",
     "\u6295\u8fd0",
-    "\u91c7\u8d2d",
     "\u878d\u8d44\u79df\u8d41",
 )
 _NON_COMMITTAL_TERMS = (
@@ -117,8 +128,12 @@ def _excerpt_around_terms(text: str, terms: Iterable[str], *, radius: int = 120)
 
 
 def _hit_grade(source: str, text: str, strong_terms: list[str], weak_terms: list[str]) -> str:
-    if source in {"filing", "announcement"} and strong_terms:
-        return "official hard signal; still needs economics verification"
+    hard_terms = [term for term in strong_terms if term in _HARD_LEASING_TERMS]
+    asset_terms = [term for term in strong_terms if term in _COMPUTE_ASSET_TERMS]
+    if source in {"filing", "announcement"} and hard_terms:
+        return "official hard compute-leasing signal; still needs economics verification"
+    if source in {"filing", "announcement"} and asset_terms:
+        return "official compute/AI-infrastructure adjacency; needs leasing or operating economics"
     if source == "interaction" and strong_terms:
         if any(term in text for term in _NON_COMMITTAL_TERMS):
             return "official Q&A but non-committal; watch item only"
@@ -187,11 +202,14 @@ def _scan_table_rows(
 
 def _trigger_verdict(hits: list[ComputeEvidenceHit]) -> tuple[bool, str]:
     official_hits = [hit for hit in hits if hit.source in {"filing", "announcement", "interaction"}]
-    official_strong = [
-        hit for hit in official_hits if any(term in hit.matched_terms for term in _STRONG_TERMS)
+    official_hard = [
+        hit for hit in official_hits if any(term in hit.matched_terms for term in _HARD_LEASING_TERMS)
     ]
-    filing_or_announcement_strong = [
-        hit for hit in official_strong if hit.source in {"filing", "announcement"}
+    filing_or_announcement_hard = [
+        hit for hit in official_hard if hit.source in {"filing", "announcement"}
+    ]
+    official_asset = [
+        hit for hit in official_hits if any(term in hit.matched_terms for term in _COMPUTE_ASSET_TERMS)
     ]
     official_weak = [
         hit for hit in official_hits if any(term in hit.matched_terms for term in _WEAK_TERMS)
@@ -202,10 +220,10 @@ def _trigger_verdict(hits: list[ComputeEvidenceHit]) -> tuple[bool, str]:
         if any(term in hit.excerpt for term in _MONETIZATION_TERMS)
     ]
 
-    if filing_or_announcement_strong:
+    if filing_or_announcement_hard:
         return True, "triggered by official filing/announcement strong compute-leasing signal"
-    if official_strong and monetization_hits:
-        return True, "triggered by official Q&A strong signal plus monetization wording"
+    if official_hard and monetization_hits:
+        return True, "triggered by official Q&A hard compute-leasing signal plus monetization wording"
     if len(official_weak) >= 2 and monetization_hits:
         return True, "triggered by multiple official weak compute signals plus monetization wording"
     return False, "no sufficient official compute-leasing trigger"

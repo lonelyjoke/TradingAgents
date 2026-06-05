@@ -46,6 +46,24 @@ def test_financial_report_extracts_investee_and_business_theme():
     assert ("算力租赁", "business-realization") in names
 
 
+def test_financial_report_does_not_treat_cloud_customer_demand_as_compute_leasing():
+    reports = [
+        (
+            "2025 annual report",
+            (
+                "公司主营业务为高端光通信收发模块的研发、生产及销售，"
+                "产品服务于云计算数据中心客户，并为客户提供800G和1.6T高速光模块。"
+                "受益于终端客户对AI算力基础设施投入加速，公司产品出货持续增长。"
+            ),
+        )
+    ]
+
+    candidates = _extract_financial_candidates(reports)
+    names = {(candidate.name, candidate.kind) for candidate in candidates}
+
+    assert ("算力租赁", "business-realization") not in names
+
+
 def test_financial_report_extracts_short_investee_rows_inside_investment_section():
     reports = [
         (
@@ -541,6 +559,24 @@ def test_financial_report_text_audit_records_total_text_failure(monkeypatch):
     assert "local_text_cache" in audit
     assert "final_text_bundle" in audit
     assert "No readable filing narrative text available" in audit
+
+
+def test_financial_report_filter_excludes_disclosure_policy_titles():
+    rows = pd.DataFrame(
+        [
+            {"ann_date": "20260331", "title": "2025\u5e74\u5e74\u5ea6\u62a5\u544a", "url": "annual.pdf"},
+            {
+                "ann_date": "20260113",
+                "title": "\u5e74\u62a5\u4fe1\u606f\u62ab\u9732\u91cd\u5927\u5dee\u9519\u8d23\u4efb\u8ffd\u7a76\u5236\u5ea6",
+                "url": "policy.pdf",
+            },
+            {"ann_date": "20260417", "title": "2026\u5e74\u4e00\u5b63\u5ea6\u62a5\u544a", "url": "q1.pdf"},
+        ]
+    )
+
+    filtered = thematic_research._filter_financial_report_announcements(rows)
+
+    assert list(filtered["url"]) == ["annual.pdf", "q1.pdf"]
 
 
 def test_short_investee_extractor_rejects_accounting_rows():

@@ -70,7 +70,8 @@ _FINANCIAL_REPORT_EXCLUDE_RE = re.compile(
     r"(?:\u6458\u8981|\u53d6\u6d88|\u66f4\u6b63|\u4fee\u8ba2|\u82f1\u6587|"
     r"\u5ba1\u8ba1\u62a5\u544a|\u5185\u90e8\u63a7\u5236|\u793e\u4f1a\u8d23\u4efb|"
     r"\u63d0\u793a\u6027\u516c\u544a|\u9884\u7ea6\u62ab\u9732|"
-    r"\u62ab\u9732\u65f6\u95f4|ESG)"
+    r"\u62ab\u9732\u65f6\u95f4|\u4fe1\u606f\u62ab\u9732\u91cd\u5927\u5dee\u9519|"
+    r"\u8d23\u4efb\u8ffd\u7a76|\u7ba1\u7406\u5236\u5ea6|\u5236\u5ea6|ESG)"
 )
 _FINANCIAL_REPORT_MOJIBAKE_MARKERS = (
     "骞村勾搴︽姤鍛",
@@ -151,7 +152,16 @@ _SHORT_INVESTEE_EXCLUSIONS = {
     "\u5176\u4ed6\u6743\u76ca\u5de5\u5177\u6295\u8d44",
 }
 _BUSINESS_THEME_KEYWORDS = {
-    "算力租赁": ("算力租赁", "算力服务", "智算中心", "算力中心", "GPU租赁"),
+    "算力租赁": (
+        "算力租赁",
+        "算力租用",
+        "算力出租",
+        "算力运营",
+        "算力服务收入",
+        "算力业务收入",
+        "GPU租赁",
+        "机柜租赁",
+    ),
     "商业航天": ("商业航天", "火箭", "卫星互联网", "运载火箭"),
     "低空经济": ("低空经济", "无人机", "eVTOL"),
     "机器人": ("机器人", "人形机器人"),

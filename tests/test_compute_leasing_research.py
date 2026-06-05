@@ -76,6 +76,36 @@ def test_compute_leasing_context_does_not_trigger_on_news_only(monkeypatch):
     assert "News-only mentions cannot support valuation uplift" not in context
 
 
+def test_compute_leasing_context_does_not_trigger_on_optical_module_ai_demand(monkeypatch):
+    _empty_sources(monkeypatch)
+    monkeypatch.setattr(
+        clr,
+        "_load_financial_report_texts",
+        lambda *args, **kwargs: (
+            pd.DataFrame(),
+            [
+                (
+                    "2025 annual report",
+                    "\u53d7\u76ca\u4e8e\u4e0b\u6e38\u7ec8\u7aef\u5ba2\u6237AI\u7b97\u529b\u57fa\u7840\u8bbe\u65bd"
+                    "\u6295\u5165\u52a0\u901f\uff0c\u6570\u636e\u4e2d\u5fc3\u5149\u6a21\u5757\u9700\u6c42\u589e\u957f\uff0c"
+                    "\u516c\u53f8\u63a8\u8fdb\u9ad8\u901f\u5149\u901a\u4fe1\u6a21\u5757\u4ea7\u54c1\u4ea4\u4ed8\u3002",
+                ),
+                (
+                    "2026 Q1 report",
+                    "\u7ec8\u7aef\u5ba2\u6237\u5bf9\u7b97\u529b\u57fa\u7840\u8bbe\u65bd\u7684\u6295\u5165"
+                    "\u5e26\u52a8\u516c\u53f8\u5149\u6a21\u5757\u8425\u4e1a\u6536\u5165\u589e\u957f\uff0c"
+                    "\u4ea7\u54c1\u51fa\u8d27\u548c\u4ea4\u4ed8\u6301\u7eed\u63d0\u5347\u3002",
+                )
+            ],
+        ),
+    )
+
+    context = get_compute_leasing_context("300308.SZ", "2026-06-05")
+
+    assert "Status: not_applicable" in context
+    assert "AI\u7b97\u529b" in context
+
+
 def test_trigger_verdict_accepts_multiple_official_weak_signals_with_monetization():
     hits = [
         ComputeEvidenceHit(

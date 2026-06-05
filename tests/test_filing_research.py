@@ -9,6 +9,7 @@ from tradingagents.dataflows.filing_research import (
     _answer_questions,
     _build_business_segment_valuation_map,
     _build_business_model_map,
+    _build_pre_debate_underwriting_questions,
     _build_paragraph_reading_pack,
     _build_industry_reading_pack,
     _build_report_to_report_bridge,
@@ -24,6 +25,7 @@ from tradingagents.dataflows.filing_research import (
     _extract_textual_filing_signals,
     _distill_filing_insights,
     _infer_financial_relations,
+    _infer_company_business_archetypes,
     _promote_core_discussion_items,
     _question_candidates,
     _select_industry_profile,
@@ -123,6 +125,12 @@ def test_industry_playbook_selects_new_priority_profiles():
         ("山西汾酒", "白酒", "公司持续优化批价与经销商库存。", "baijiu"),
         ("中国国航", "航空运输", "公司客座率提升，航油成本仍需关注，机队稳步扩张。", "airlines"),
         ("中国平安", "保险", "公司新业务价值与内含价值持续改善。", "insurance"),
+        (
+            "小商品城",
+            "商业百货",
+            "公司以市场经营、商位租赁、Chinagoods、义支付和跨境电商服务为核心。",
+            "market_operator",
+        ),
     ]
 
     for company_name, industry, report_text, expected in cases:
@@ -152,7 +160,126 @@ def test_question_candidates_include_new_priority_playbooks():
     assert any(q.question_id == "hog_cycle" for q in _question_candidates("livestock_hog"))
     assert any(q.question_id == "mobility_product_mix" for q in _question_candidates("smart_mobility"))
     assert any(q.question_id == "grid_segment_margin" for q in _question_candidates("smart_grid_automation"))
+    assert any(q.question_id == "market_online_disruption" for q in _question_candidates("market_operator"))
+    assert any(q.question_id == "market_second_curve" for q in _question_candidates("market_operator"))
 
+
+def test_market_operator_pre_debate_questions_cover_business_model_and_online_shift():
+    reports = [
+        (
+            "2025年年度报告",
+            "\n".join(
+                [
+                    "公司主营业务为市场经营、商位租赁、商品销售和数字贸易服务。",
+                    "分业务看，市场经营服务收入占比提升，商位出租率保持稳定。",
+                    "核心竞争力分析",
+                    "公司依托义乌市场商户集聚、物流和供应链配套形成流量与货流护城河。",
+                    "未来发展展望",
+                    "公司推进线上平台Chinagoods、义支付、跨境电商、会展和物流服务，以增强线下市场商户生态。",
+                ]
+            ),
+        ),
+        (
+            "2026年一季度报告",
+            "营业收入同比增长，经营活动现金流净额改善，应收账款保持可控。",
+        ),
+    ]
+    profile = _select_industry_profile("小商品城", "商业百货", reports)
+    questions = _question_candidates(profile)
+    answers = _answer_questions(reports, questions)
+    business_model = _build_business_model_map(reports)
+    paragraphs = _build_paragraph_reading_pack(reports)
+    growth = _extract_growth_vectors(reports)
+    segment_economics = _extract_segment_economics(reports)
+    segment_valuation = _build_business_segment_valuation_map(
+        business_model,
+        segment_economics,
+        growth,
+    )
+    rows = _build_pre_debate_underwriting_questions(
+        company_name="小商品城",
+        profile=profile,
+        business_model_map=business_model,
+        segment_economics=segment_economics,
+        business_segment_valuation_map=segment_valuation,
+        growth_vectors=growth,
+        paragraph_reading_pack=paragraphs,
+        industry_reading_pack=[],
+        answers=answers,
+        statement_table_signals=[],
+        note_findings=[],
+        financial_relations=[],
+    )
+    by_id = {row.question_id: row for row in rows}
+
+    assert profile == "market_operator"
+    assert "pre_debate_business_model" in by_id
+    assert "pre_debate_moat" in by_id
+    assert "pre_debate_online_disruption" in by_id
+    assert "pre_debate_growth_driver" in by_id
+    assert "pre_debate_cash_quality" in by_id
+    assert "Chinagoods" in by_id["pre_debate_online_disruption"].preliminary_answer
+
+
+
+def test_company_specific_archetype_questions_are_not_limited_to_market_operators():
+    reports = [
+        (
+            "2025年年度报告",
+            "\n".join(
+                [
+                    "公司主营业务为高端光通信收发模块的研发、生产和销售。",
+                    "公司产品包括800G、1.6T等高速光模块，服务于云计算数据中心客户。",
+                    "公司持续推进新产品研发、客户认证和产能建设，提升产品迭代速度。",
+                    "受益于客户需求增长，公司出货量提升，但需关注原材料、库存和毛利率变化。",
+                ]
+            ),
+        ),
+        (
+            "2026年一季度报告",
+            "公司营业收入同比增长，研发投入增加，部分高速产品出货持续放量。",
+        ),
+    ]
+    business_model = _build_business_model_map(reports)
+    paragraphs = _build_paragraph_reading_pack(reports)
+    growth = _extract_growth_vectors(reports)
+    segments = _extract_segment_economics(reports)
+    answers = _answer_questions(reports, _question_candidates("generic"))
+    archetypes = _infer_company_business_archetypes(
+        company_name="中际旭创",
+        profile="generic",
+        vendor_industry="通信设备",
+        report_texts=reports,
+        business_model_map=business_model,
+        segment_economics=segments,
+        growth_vectors=growth,
+        paragraph_reading_pack=paragraphs,
+        answers=answers,
+    )
+    rows = _build_pre_debate_underwriting_questions(
+        company_name="中际旭创",
+        profile="generic",
+        vendor_industry="通信设备",
+        report_texts=reports,
+        business_archetypes=archetypes,
+        business_model_map=business_model,
+        segment_economics=segments,
+        business_segment_valuation_map=[],
+        growth_vectors=growth,
+        paragraph_reading_pack=paragraphs,
+        industry_reading_pack=[],
+        answers=answers,
+        statement_table_signals=[],
+        note_findings=[],
+        financial_relations=[],
+    )
+    archetype_ids = {item.archetype_id for item in archetypes}
+    question_ids = {item.question_id for item in rows}
+
+    assert "high_r_and_d_technology" in archetype_ids
+    assert "product_manufacturer" in archetype_ids
+    assert "pre_debate_archetype_high_r_and_d_technology" in question_ids
+    assert any("研发" in item.underwriting_question for item in rows)
 
 
 def test_industry_profile_prefers_power_operator_over_incidental_wind_mentions():
@@ -1040,3 +1167,26 @@ def test_compute_leasing_assets_and_revenue_enter_filing_findings():
     assert any(row.finding_type == "compute-leasing-monetization" for row in material)
     assert any(row.vector == "ai-and-digital" and row.stage in {"monetized", "capacity-building"} for row in growth)
     assert any("\u7b97\u529b\u79df\u8d41" in row.evidence for row in segments)
+
+
+def test_optical_module_cloud_customer_language_does_not_become_compute_leasing_finding():
+    reports = [
+        (
+            "2025\u5e74\u5e74\u5ea6\u62a5\u544a",
+            "\u516c\u53f8\u4e3b\u8425\u4e1a\u52a1\u4e3a\u9ad8\u7aef\u5149\u901a\u4fe1\u6536\u53d1\u6a21\u5757\u7684"
+            "\u7814\u53d1\u3001\u751f\u4ea7\u53ca\u9500\u552e\uff0c\u4ea7\u54c1\u670d\u52a1\u4e8e\u4e91\u8ba1\u7b97"
+            "\u6570\u636e\u4e2d\u5fc3\u3001\u6570\u636e\u901a\u4fe1\u30015G\u65e0\u7ebf\u7f51\u7edc\u7b49\u9886\u57df\u7684"
+            "\u56fd\u5185\u5916\u5ba2\u6237\uff0c\u4e3a\u4e91\u6570\u636e\u4e2d\u5fc3\u5ba2\u6237\u63d0\u4f9b800G\u548c1.6T"
+            "\u9ad8\u901f\u5149\u6a21\u5757\u3002",
+        ),
+        (
+            "2026\u5e74\u7b2c\u4e00\u5b63\u5ea6\u62a5\u544a",
+            "\u53d7\u76ca\u4e8e\u7ec8\u7aef\u5ba2\u6237\u5bf9\u7b97\u529b\u57fa\u7840\u8bbe\u65bd\u7684\u5f3a\u52b2"
+            "\u6295\u5165\uff0c\u516c\u53f8\u4ea7\u54c1\u51fa\u8d27\u6301\u7eed\u589e\u957f\uff0c\u8425\u4e1a\u6536\u5165"
+            "\u540c\u6bd4\u589e\u957f\u3002",
+        ),
+    ]
+
+    material = _extract_material_filing_findings(reports)
+
+    assert not any(row.finding_type == "compute-leasing-monetization" for row in material)

@@ -187,7 +187,7 @@ def _assess(
 
     candidate = bool(
         (dv_ttm is not None and dv_ttm >= 2.0)
-        or dividend_years >= 3
+        or (dividend_years >= 4 and dv_ttm is not None and dv_ttm >= 1.0)
         or is_bank
         or defensive_industry
     )
