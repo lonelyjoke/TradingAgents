@@ -68,7 +68,9 @@ _FINANCIAL_REPORT_TITLE_RE = re.compile(
 )
 _FINANCIAL_REPORT_EXCLUDE_RE = re.compile(
     r"(?:\u6458\u8981|\u53d6\u6d88|\u66f4\u6b63|\u4fee\u8ba2|\u82f1\u6587|"
-    r"\u5ba1\u8ba1\u62a5\u544a|\u5185\u90e8\u63a7\u5236|\u793e\u4f1a\u8d23\u4efb|ESG)"
+    r"\u5ba1\u8ba1\u62a5\u544a|\u5185\u90e8\u63a7\u5236|\u793e\u4f1a\u8d23\u4efb|"
+    r"\u63d0\u793a\u6027\u516c\u544a|\u9884\u7ea6\u62ab\u9732|"
+    r"\u62ab\u9732\u65f6\u95f4|ESG)"
 )
 _FINANCIAL_REPORT_MOJIBAKE_MARKERS = (
     "骞村勾搴︽姤鍛",
@@ -294,7 +296,18 @@ def _financial_report_announcements(
 ) -> pd.DataFrame | TushareDataError:
     result = _fetch_announcements(symbol, curr_date, look_back_days)
     if isinstance(result, TushareDataError) or result is None or result.empty:
-        return result
+        fallback = _fetch_cninfo_announcements(
+            symbol,
+            curr_date,
+            look_back_days,
+            categories=CNINFO_FINANCIAL_REPORT_CATEGORIES,
+        )
+        if isinstance(fallback, TushareDataError) or fallback is None or fallback.empty:
+            return result
+        fallback_reports = _filter_financial_report_announcements(fallback)
+        if fallback_reports.empty:
+            return result
+        return fallback_reports.sort_values("ann_date", ascending=False).head(4)
     reports = _filter_financial_report_announcements(result)
     if not reports.empty:
         return reports.sort_values("ann_date", ascending=False).head(4)

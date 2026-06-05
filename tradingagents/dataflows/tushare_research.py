@@ -25,8 +25,9 @@ from .tushare_a_stock import (
     is_a_share_symbol,
 )
 
-CNINFO_ANNOUNCEMENT_QUERY_URL = "http://www.cninfo.com.cn/new/hisAnnouncement/query"
-CNINFO_STATIC_BASE_URL = "http://static.cninfo.com.cn/"
+CNINFO_ANNOUNCEMENT_QUERY_URL = "https://www.cninfo.com.cn/new/hisAnnouncement/query"
+CNINFO_TOP_SEARCH_URL = "https://www.cninfo.com.cn/new/information/topSearch/detailOfQuery"
+CNINFO_STATIC_BASE_URL = "https://static.cninfo.com.cn/"
 CNINFO_FINANCIAL_REPORT_CATEGORIES = (
     "category_ndbg_szsh",
     "category_bndbg_szsh",
@@ -142,6 +143,48 @@ def _cninfo_stock_query_values(symbol: str) -> tuple[str, ...]:
     return (f"{stock_code},{org_id}", stock_code)
 
 
+def _cninfo_stock_query_values_from_top_search(
+    symbol: str,
+    session: requests.Session,
+    headers: dict[str, str],
+) -> tuple[str, ...]:
+    """Ask CNINFO for the exact stock/orgId pair before falling back to rules."""
+    stock_code = symbol.split(".")[0]
+    try:
+        response = session.post(
+            CNINFO_TOP_SEARCH_URL,
+            data={"keyWord": stock_code, "maxSecNum": "10", "maxListNum": "10"},
+            headers=headers,
+            timeout=12,
+        )
+        response.raise_for_status()
+        payload = response.json()
+    except Exception:
+        return ()
+
+    values: list[str] = []
+    for item in payload.get("keyBoardList") or []:
+        code = str(item.get("code") or "").strip()
+        org_id = str(item.get("orgId") or "").strip()
+        if code != stock_code or not org_id:
+            continue
+        values.append(f"{code},{org_id}")
+    return tuple(dict.fromkeys(values))
+
+
+def _cninfo_category_values(categories: tuple[str, ...] | None) -> tuple[str, ...]:
+    if not categories:
+        return ("",)
+    cleaned = [category.strip().rstrip(";") for category in categories if category.strip()]
+    values: list[str] = []
+    if len(cleaned) > 1:
+        values.append(";".join(cleaned) + ";")
+    for category in cleaned:
+        values.append(category)
+        values.append(category + ";")
+    return tuple(dict.fromkeys(values))
+
+
 def _clean_cninfo_title(value: object) -> str:
     text = html.unescape(str(value or ""))
     text = re.sub(r"<[^>]+>", "", text)
@@ -208,50 +251,60 @@ def _fetch_cninfo_announcements(
     max_pages = 10 if look_back_days >= 365 else 4
     rows = []
     session = requests.Session()
-    categories_to_try = categories or ("",)
+    categories_to_try = _cninfo_category_values(categories)
     headers = {
         "Accept": "application/json, text/javascript, */*; q=0.01",
         "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-        "Referer": "http://www.cninfo.com.cn/new/commonUrl/pageOfSearch",
+        "Origin": "https://www.cninfo.com.cn",
+        "Referer": "https://www.cninfo.com.cn/new/commonUrl/pageOfSearch",
         "User-Agent": "Mozilla/5.0 TradingAgents cninfo-announcement-fallback",
         "X-Requested-With": "XMLHttpRequest",
     }
 
     try:
-        for stock_query in _cninfo_stock_query_values(symbol):
+        stock_queries = tuple(
+            dict.fromkeys(
+                _cninfo_stock_query_values_from_top_search(symbol, session, headers)
+                + _cninfo_stock_query_values(symbol)
+            )
+        )
+        plate_values = (plate, "")
+        for stock_query in stock_queries:
             stock_rows_start = len(rows)
-            for category in categories_to_try:
-                for page_num in range(1, max_pages + 1):
-                    data = {
-                        "stock": stock_query,
-                        "searchkey": "",
-                        "plate": plate,
-                        "category": category,
-                        "trade": "",
-                        "column": column,
-                        "columnTitle": "history",
-                        "pageNum": str(page_num),
-                        "pageSize": str(page_size),
-                        "tabName": "fulltext",
-                        "sortName": "",
-                        "sortType": "",
-                        "limit": "",
-                        "showTitle": "",
-                        "seDate": se_date,
-                    }
-                    response = session.post(
-                        CNINFO_ANNOUNCEMENT_QUERY_URL,
-                        data=data,
-                        headers=headers,
-                        timeout=20,
-                    )
-                    response.raise_for_status()
-                    page = _parse_cninfo_announcements(response.json(), symbol)
-                    if page.empty:
-                        break
-                    rows.append(page)
-                    if len(page) < page_size:
-                        break
+            for plate_value in plate_values:
+                for category in categories_to_try:
+                    for page_num in range(1, max_pages + 1):
+                        data = {
+                            "stock": stock_query,
+                            "searchkey": "",
+                            "plate": plate_value,
+                            "category": category,
+                            "trade": "",
+                            "column": column,
+                            "columnTitle": "history",
+                            "pageNum": str(page_num),
+                            "pageSize": str(page_size),
+                            "tabName": "fulltext",
+                            "sortName": "",
+                            "sortType": "",
+                            "limit": "",
+                            "showTitle": "",
+                            "isHLtitle": "false",
+                            "seDate": se_date,
+                        }
+                        response = session.post(
+                            CNINFO_ANNOUNCEMENT_QUERY_URL,
+                            data=data,
+                            headers=headers,
+                            timeout=20,
+                        )
+                        response.raise_for_status()
+                        page = _parse_cninfo_announcements(response.json(), symbol)
+                        if page.empty:
+                            break
+                        rows.append(page)
+                        if len(page) < page_size:
+                            break
             if len(rows) > stock_rows_start:
                 break
     except Exception as exc:

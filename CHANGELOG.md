@@ -6,6 +6,30 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 Breaking changes within the 0.x line are called out explicitly.
 
+## [Unreleased]
+
+### Added
+
+- A-share current research system documentation: module map, data-to-debate chain,
+  PM report structure, and debugging workflow.
+- A-share gated industry/sector toolkit inventory covering 11 toolkits: baijiu,
+  compute leasing, defensive dividend, building materials, consumer staples,
+  optical modules / AI datacom, biopharma, software/SaaS, insurance, medical
+  devices, and metals/mining.
+- Saved report context files for newer A-share toolkits, including consumer
+  staples, optical modules, insurance, medical devices, and metals/mining.
+
+### Changed
+
+- A-share preflight treats readable filing text as a required second-layer input
+  before LLM generation, alongside core market data, valuation, income statement,
+  balance sheet, and cash-flow data.
+- CNINFO announcement fallback now uses HTTPS, top-search stock/orgId discovery,
+  category-format variants, and a financial-report-specific retry path.
+- Financial-report title filtering excludes prompt notices and scheduled
+  disclosure-time notices so the filing text bundle is not polluted by thin
+  non-report announcements.
+
 ## [0.2.4] — 2026-04-25
 
 ### Added

@@ -845,6 +845,20 @@ def save_report_to_disk(final_state, ticker: str, save_path: Path):
             final_state["building_materials_context"],
             encoding="utf-8",
         )
+    if final_state.get("consumer_staples_context"):
+        context_dir = save_path / "0_context"
+        context_dir.mkdir(exist_ok=True)
+        (context_dir / "consumer_staples_context.md").write_text(
+            final_state["consumer_staples_context"],
+            encoding="utf-8",
+        )
+    if final_state.get("optical_module_context"):
+        context_dir = save_path / "0_context"
+        context_dir.mkdir(exist_ok=True)
+        (context_dir / "optical_module_context.md").write_text(
+            final_state["optical_module_context"],
+            encoding="utf-8",
+        )
     if final_state.get("biopharma_context"):
         context_dir = save_path / "0_context"
         context_dir.mkdir(exist_ok=True)
@@ -857,6 +871,27 @@ def save_report_to_disk(final_state, ticker: str, save_path: Path):
         context_dir.mkdir(exist_ok=True)
         (context_dir / "software_context.md").write_text(
             final_state["software_context"],
+            encoding="utf-8",
+        )
+    if final_state.get("insurance_context"):
+        context_dir = save_path / "0_context"
+        context_dir.mkdir(exist_ok=True)
+        (context_dir / "insurance_context.md").write_text(
+            final_state["insurance_context"],
+            encoding="utf-8",
+        )
+    if final_state.get("medical_device_context"):
+        context_dir = save_path / "0_context"
+        context_dir.mkdir(exist_ok=True)
+        (context_dir / "medical_device_context.md").write_text(
+            final_state["medical_device_context"],
+            encoding="utf-8",
+        )
+    if final_state.get("metals_mining_context"):
+        context_dir = save_path / "0_context"
+        context_dir.mkdir(exist_ok=True)
+        (context_dir / "metals_mining_context.md").write_text(
+            final_state["metals_mining_context"],
             encoding="utf-8",
         )
 
