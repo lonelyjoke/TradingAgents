@@ -6,6 +6,7 @@ from tradingagents.agents.utils.agent_utils import (
     get_building_materials_instruction,
     get_buy_side_thesis_instruction,
     get_compute_leasing_instruction,
+    get_consumer_staples_instruction,
     get_dividend_defensive_instruction,
     get_evidence_instruction,
     get_earnings_model_instruction,
@@ -15,6 +16,7 @@ from tradingagents.agents.utils.agent_utils import (
     get_insurance_instruction,
     get_medical_device_instruction,
     get_metals_mining_instruction,
+    get_optical_module_instruction,
     get_investor_interaction_instruction,
     get_market_expectation_instruction,
     get_management_capital_allocation_instruction,
@@ -68,6 +70,8 @@ def create_bear_researcher(llm):
         compute_leasing_context = prompt_contexts["compute_leasing_context"]
         dividend_defensive_context = prompt_contexts["dividend_defensive_context"]
         building_materials_context = prompt_contexts["building_materials_context"]
+        consumer_staples_context = prompt_contexts["consumer_staples_context"]
+        optical_module_context = prompt_contexts["optical_module_context"]
         biopharma_context = prompt_contexts["biopharma_context"]
         software_context = prompt_contexts["software_context"]
         insurance_context = prompt_contexts["insurance_context"]
@@ -120,6 +124,7 @@ Key points to focus on:
 - Compute-Leasing Discipline: If gated compute-leasing context says `Status: triggered`, attack weak asset delivery, customer contract, unit-economics, capex/funding, transition-credibility, and disclosure gaps. If it says `Status: not_applicable`, do not use compute leasing as a bear theme.
 - Dividend-Defensive Discipline: If gated dividend defensive context says `Status: triggered`, attack dividend-trap risk: shrinking profit, weak FCF, excessive payout, bank capital constraints, industry erosion, or better peer alternatives. If it says `Status: not_applicable`, do not force a high-dividend bear frame.
 - Building-Materials Discipline: If gated building-materials context says `Status: triggered`, use it to discipline the bear case rather than expand the memo mechanically. Anchor on company filings and management wording, then state the industry stage and likely evolution path, then test sector-native variables: product ASP, regional demand, property-completion/infrastructure/renovation exposure, capacity and utilization, upstream energy/raw-material costs, inventory, receivables, cash collection, impairment, and maintenance capex. For low-PB/high-dividend names, explain when book-value discount and dividend yield are value-trap signals rather than safety; do not let buybacks distract from weak operating or product-cycle evidence.
+- Optical-Module Discipline: If gated optical-module context says `Status: triggered`, attack over-optimistic AI capex extrapolation, customer concentration, 800G/1.6T qualification gaps, ASP erosion, inventory build, receivable growth, weak OCF conversion, capacity/yield risk, export/tariff exposure, and CPO/LPO/silicon-photonics substitution. Missing order/customer/ASP evidence caps conviction; it is not automatic proof of downside by itself.
 - Biopharma Discipline: If gated biopharma context says `Status: triggered`, attack weak product sales, reimbursement/price pressure, trial design, immature endpoints, regulatory uncertainty, cash burn, dilution risk, BD economics, and competitive intensity. For CRO/CDMO names, attack order visibility, customer funding, project conversion, utilization, capex returns, geopolitical restrictions, and FCF durability. Missing clinical/regulatory evidence is a conviction cap, not standalone bearish proof.
 - Software Discipline: If gated software context says `Status: triggered`, attack the precise software evidence gap: missing paid users, ARPU, renewal/churn, contract-liability conversion, AI paid adoption, implementation acceptance, receivables, or cash collection. Do not treat missing SaaS metrics as automatic bearish proof; use it to cap conviction and challenge valuation credit.
 - Insurance Discipline: If gated insurance context says `Status: triggered`, attack weak NBV/EV growth, channel productivity, solvency buffer, investment-yield spread, P&C COR, dividend coverage, and SOTP over-crediting. Keep the bank subsidiary separate from insurance-core evidence.
@@ -153,6 +158,8 @@ Gated baijiu verification context: {baijiu_context}
 Gated compute-leasing verification context: {compute_leasing_context}
 Gated dividend defensive verification context: {dividend_defensive_context}
 Gated building-materials verification context: {building_materials_context}
+Gated consumer-staples verification context: {consumer_staples_context}
+Gated AI optical-module verification context: {optical_module_context}
 Gated biopharma verification context: {biopharma_context}
 Gated software verification context: {software_context}
 Gated insurance verification context: {insurance_context}
@@ -173,6 +180,7 @@ Use this information to deliver a compelling bear argument, refute the bull's cl
 {get_earnings_model_instruction()}
 {get_market_expectation_instruction()}
 {get_price_earnings_decomposition_instruction()}
+{get_consumer_staples_instruction()}
 {get_investor_interaction_instruction()}
 {get_policy_planning_instruction()}
 {get_three_layer_conclusion_instruction()}
@@ -183,6 +191,7 @@ Use this information to deliver a compelling bear argument, refute the bull's cl
 {get_compute_leasing_instruction()}
 {get_dividend_defensive_instruction()}
 {get_building_materials_instruction()}
+{get_optical_module_instruction()}
 {get_biopharma_instruction()}
 {get_software_instruction()}
 {get_insurance_instruction()}

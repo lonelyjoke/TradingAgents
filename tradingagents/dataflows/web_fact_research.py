@@ -216,6 +216,56 @@ def _extract_values(text: str) -> str:
     return ", ".join(values[:8])
 
 
+def _company_relevance_terms(symbol: str, company_name: str) -> list[str]:
+    terms = [symbol, symbol.split(".")[0]]
+    clean_name = re.sub(r"\s+", "", str(company_name or ""))
+    if clean_name and clean_name != "N/A":
+        terms.append(clean_name)
+        for suffix in (
+            "\u80a1\u4efd\u6709\u9650\u516c\u53f8",
+            "\u6709\u9650\u516c\u53f8",
+            "\u80a1\u4efd",
+            "\u98df\u54c1",
+            "\u533b\u7597",
+            "\u836f\u4e1a",
+            "\u79d1\u6280",
+            "\u7535\u5b50",
+            "\u8f6f\u4ef6",
+        ):
+            if clean_name.endswith(suffix) and len(clean_name) - len(suffix) >= 2:
+                terms.append(clean_name[: -len(suffix)])
+        if len(clean_name) >= 4:
+            terms.append(clean_name[-4:])
+        if len(clean_name) >= 3:
+            terms.append(clean_name[-3:])
+    deduped: list[str] = []
+    for term in terms:
+        term = str(term or "").strip()
+        if len(term) < 2 or term in deduped:
+            continue
+        deduped.append(term)
+    return deduped
+
+
+def _is_relevant_web_fact_item(
+    item: WebFactItem,
+    *,
+    symbol: str,
+    company_name: str,
+) -> bool:
+    haystack = re.sub(
+        r"\s+",
+        "",
+        f"{item.title} {item.snippet} {item.source} {item.link}",
+    ).lower()
+    if not haystack:
+        return False
+    for term in _company_relevance_terms(symbol, company_name):
+        if term.lower() in haystack:
+            return True
+    return False
+
+
 def _find_child_text(item: ET.Element, local_name: str) -> str:
     for child in item:
         if child.tag.rsplit("}", 1)[-1] == local_name:
@@ -511,11 +561,21 @@ def get_web_fact_check_context(
     queries = _fact_queries(symbol, company_name, industry)[:max_queries]
     items: list[WebFactItem] = []
     errors: list[str] = []
+    filtered_out = 0
     for query in queries:
         try:
-            items.extend(
-                _bing_news_rss(query, timeout=timeout, max_results=max_results_per_query)
+            query_items = _bing_news_rss(
+                query, timeout=timeout, max_results=max_results_per_query
             )
+            relevant_items = [
+                item
+                for item in query_items
+                if _is_relevant_web_fact_item(
+                    item, symbol=symbol, company_name=company_name
+                )
+            ]
+            filtered_out += len(query_items) - len(relevant_items)
+            items.extend(relevant_items)
             time.sleep(0.2)
         except Exception as exc:
             errors.append(f"- {query}: {exc}")
@@ -548,6 +608,21 @@ def get_web_fact_check_context(
         _markdown_table(rows),
         "",
     ]
+    if filtered_out or not rows:
+        lines.extend(
+            [
+                "## Relevance Filter",
+                f"- Filtered out {filtered_out} search result(s) that did not mention the company name, ticker, or stable company alias.",
+                *(
+                    [
+                        "- Context unavailable: search provider returned no relevant web fact rows after company relevance filtering.",
+                    ]
+                    if not rows
+                    else []
+                ),
+                "",
+            ]
+        )
     if errors:
         lines.extend(
             [

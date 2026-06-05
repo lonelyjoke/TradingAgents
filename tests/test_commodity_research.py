@@ -188,6 +188,64 @@ def test_live_hog_futures_prefers_near_month_with_main_reference(monkeypatch):
     assert "main_contract=LH2609.DCE" in result["evidence"]
 
 
+def test_single_letter_futures_prefix_matches_exact_root(monkeypatch):
+    board = pd.DataFrame(
+        [
+            {"ts_code": "CU2607.SHF", "trade_date": "20260605", "close": 81000, "oi": 9000, "vol": 5000},
+            {"ts_code": "C2607.DCE", "trade_date": "20260605", "close": 2450, "oi": 1000, "vol": 600},
+            {"ts_code": "C2609.DCE", "trade_date": "20260605", "close": 2480, "oi": 5000, "vol": 2000},
+            {"ts_code": "PP2607.DCE", "trade_date": "20260605", "close": 7600, "oi": 7000, "vol": 3000},
+            {"ts_code": "P2607.DCE", "trade_date": "20260605", "close": 8200, "oi": 800, "vol": 400},
+        ]
+    )
+    queried = []
+
+    monkeypatch.setattr(commodity_research, "_latest_futures_trade_date", lambda curr_date, exchange: board)
+
+    def fake_history(ts_code, exchange, start, end):
+        queried.append(ts_code)
+        return pd.DataFrame(
+            [
+                {"ts_code": ts_code, "trade_date": "20260501", "close": 2400, "vol": 1, "oi": 1},
+                {"ts_code": ts_code, "trade_date": "20260605", "close": 2450, "vol": 1, "oi": 1},
+            ]
+        )
+
+    monkeypatch.setattr(commodity_research, "_query_futures_history", fake_history)
+    monkeypatch.setattr(commodity_research, "_fetch_futures_receipt", lambda ts_code, exchange, trade_date: "N/A")
+
+    corn = commodity_research._fetch_futures_product(
+        {
+            "name": "Corn futures",
+            "type": "futures",
+            "role": "cost proxy",
+            "prefix": "C",
+            "exchange": "DCE",
+            "selection": "near_month_with_main_reference",
+        },
+        "2026-06-05",
+        90,
+    )
+    palm = commodity_research._fetch_futures_product(
+        {
+            "name": "Palm oil futures",
+            "type": "futures",
+            "role": "cost proxy",
+            "prefix": "P",
+            "exchange": "DCE",
+            "selection": "near_month_with_main_reference",
+        },
+        "2026-06-05",
+        90,
+    )
+
+    assert corn["latest_contract_or_source"] == "C2607.DCE"
+    assert palm["latest_contract_or_source"] == "P2607.DCE"
+    assert queried == ["C2607.DCE", "P2607.DCE"]
+    assert "CU2607.SHF" not in corn["evidence"]
+    assert "PP2607.DCE" not in palm["evidence"]
+
+
 def test_financial_institution_commodity_context_is_not_applicable(monkeypatch):
     monkeypatch.setattr(
         commodity_research,

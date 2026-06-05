@@ -25,6 +25,7 @@ from .tushare_a_stock import (
     is_a_share_symbol,
 )
 from .tushare_research import (
+    CNINFO_FINANCIAL_REPORT_CATEGORIES,
     _fetch_announcements,
     _fetch_cninfo_announcements,
     _fetch_major_news,
@@ -36,6 +37,7 @@ from .tushare_research import (
 _FINANCIAL_REPORT_TEXT_CACHE: dict[
     tuple[str, str, int], tuple[pd.DataFrame | TushareDataError, list[tuple[str, str]]]
 ] = {}
+_FINANCIAL_REPORT_TEXT_AUDIT_CACHE: dict[tuple[str, str, int], list[dict[str, str]]] = {}
 
 
 _FINANCIAL_REPORT_TITLE_RE = re.compile(
@@ -67,6 +69,17 @@ _FINANCIAL_REPORT_TITLE_RE = re.compile(
 _FINANCIAL_REPORT_EXCLUDE_RE = re.compile(
     r"(?:\u6458\u8981|\u53d6\u6d88|\u66f4\u6b63|\u4fee\u8ba2|\u82f1\u6587|"
     r"\u5ba1\u8ba1\u62a5\u544a|\u5185\u90e8\u63a7\u5236|\u793e\u4f1a\u8d23\u4efb|ESG)"
+)
+_FINANCIAL_REPORT_MOJIBAKE_MARKERS = (
+    "骞村勾搴︽姤鍛",
+    "骞村害鎶ュ憡",
+    "鍗婂勾搴︽姤鍛",
+    "鍗婂勾鎶",
+    "涓€瀛ｅ害鎶ュ憡",
+    "绗竴瀛ｅ害鎶ュ憡",
+    "涓夊搴︽姤鍛",
+    "绗笁瀛ｅ害鎶ュ憡",
+    "瀛ｅ害鎶ュ憡",
 )
 _COMPANY_NAME_RE = re.compile(
     r"[\u4e00-\u9fffA-Za-z0-9（）()·]{2,40}"
@@ -250,6 +263,23 @@ def _compact_text(value: str, limit: int = 180) -> str:
     return text[:limit] + ("..." if len(text) > limit else "")
 
 
+def _audit_row(stage: str, status: str, detail: str) -> dict[str, str]:
+    return {
+        "stage": stage,
+        "status": status,
+        "detail": _compact_text(detail, 220),
+    }
+
+
+def _financial_report_text_audit_markdown(
+    symbol: str, curr_date: str, look_back_days: int = 900
+) -> str:
+    rows = _FINANCIAL_REPORT_TEXT_AUDIT_CACHE.get((symbol, curr_date, look_back_days), [])
+    if not rows:
+        return "No financial-report text audit was recorded for this run."
+    return _markdown_table(pd.DataFrame(rows))
+
+
 def _normalize_company_name(value: str) -> str:
     name = str(value or "").strip()
     for prefix in _COMPANY_NAME_PREFIXES:
@@ -269,13 +299,42 @@ def _financial_report_announcements(
     if not reports.empty:
         return reports.sort_values("ann_date", ascending=False).head(4)
 
-    fallback = _fetch_cninfo_announcements(symbol, curr_date, look_back_days)
+    fallback = _fetch_cninfo_announcements(
+        symbol,
+        curr_date,
+        look_back_days,
+        categories=CNINFO_FINANCIAL_REPORT_CATEGORIES,
+    )
     if isinstance(fallback, TushareDataError) or fallback is None or fallback.empty:
         return reports
     fallback_reports = _filter_financial_report_announcements(fallback)
     if fallback_reports.empty:
         return reports
     return fallback_reports.sort_values("ann_date", ascending=False).head(4)
+
+
+def _cninfo_financial_report_announcements(
+    symbol: str, curr_date: str, look_back_days: int
+) -> pd.DataFrame | TushareDataError:
+    reports = _fetch_cninfo_announcements(
+        symbol,
+        curr_date,
+        look_back_days,
+        categories=CNINFO_FINANCIAL_REPORT_CATEGORIES,
+    )
+    if isinstance(reports, TushareDataError) or reports is None or reports.empty:
+        return reports
+    filtered = _filter_financial_report_announcements(reports)
+    if filtered.empty:
+        return filtered
+    return filtered.sort_values("ann_date", ascending=False).head(4)
+
+
+def _looks_like_financial_report_title(title: str) -> bool:
+    value = str(title or "")
+    if _FINANCIAL_REPORT_TITLE_RE.search(value):
+        return True
+    return any(marker in value for marker in _FINANCIAL_REPORT_MOJIBAKE_MARKERS)
 
 
 def _filter_financial_report_announcements(result: pd.DataFrame) -> pd.DataFrame:
@@ -285,7 +344,7 @@ def _filter_financial_report_announcements(result: pd.DataFrame) -> pd.DataFrame
     # Series.str.contains to Arrow RE2, which rejects \uXXXX escapes used by the
     # compiled Chinese-title patterns and raises ArrowInvalid.
     titles = result["title"].fillna("").astype(object).map(str)
-    is_report = titles.map(lambda title: bool(_FINANCIAL_REPORT_TITLE_RE.search(title)))
+    is_report = titles.map(_looks_like_financial_report_title)
     is_excluded = titles.map(lambda title: bool(_FINANCIAL_REPORT_EXCLUDE_RE.search(title)))
     return result[is_report & ~is_excluded].copy()
 
@@ -466,6 +525,16 @@ def _load_financial_report_texts(
     cache_key = (symbol, curr_date, look_back_days)
     cached = _FINANCIAL_REPORT_TEXT_CACHE.get(cache_key)
     if cached is not None:
+        _FINANCIAL_REPORT_TEXT_AUDIT_CACHE.setdefault(
+            cache_key,
+            [
+                _audit_row(
+                    "memory_cache",
+                    "ready",
+                    "Reused financial-report text bundle already loaded in this Python process.",
+                )
+            ],
+        )
         cached_reports, cached_texts = cached
         reports_copy = (
             cached_reports.copy()
@@ -479,30 +548,153 @@ def _load_financial_report_texts(
     except Exception:
         basic = None
     company_name = _format_value(basic.get("name")) if basic is not None else symbol
+    audit_rows = [
+        _audit_row(
+            "runtime_dependency",
+            "ready" if shutil.which("pdftotext") else "missing",
+            "pdftotext is available for PDF text extraction."
+            if shutil.which("pdftotext")
+            else "pdftotext is not available; downloaded PDFs cannot be converted to readable text.",
+        )
+    ]
     reports = _financial_report_announcements(symbol, curr_date, look_back_days)
     if isinstance(reports, TushareDataError) or reports is None or reports.empty:
+        audit_rows.append(
+            _audit_row(
+                "announcement_lookup",
+                "failed",
+                str(reports)
+                if isinstance(reports, TushareDataError)
+                else "No financial-report announcements found from primary/fallback lookup.",
+            )
+        )
         cached_reports, cached_texts = _retry_cached_financial_report_texts(
             symbol, company_name=company_name
         )
         if cached_texts:
+            audit_rows.append(
+                _audit_row(
+                    "local_text_cache",
+                    "ready",
+                    f"Recovered {len(cached_texts)} readable report text(s) from local disclosure cache.",
+                )
+            )
+            audit_rows.append(
+                _audit_row(
+                    "final_text_bundle",
+                    "ready",
+                    f"Using {len(cached_texts)} cached readable report text(s).",
+                )
+            )
+            _FINANCIAL_REPORT_TEXT_AUDIT_CACHE[cache_key] = audit_rows
             _FINANCIAL_REPORT_TEXT_CACHE[cache_key] = (cached_reports.copy(), list(cached_texts))
             return cached_reports, cached_texts
+        audit_rows.append(
+            _audit_row(
+                "local_text_cache",
+                "failed",
+                "No matching cached annual, semiannual, or quarterly report text found.",
+            )
+        )
+        audit_rows.append(
+            _audit_row(
+                "final_text_bundle",
+                "failed",
+                "No readable filing narrative text available; structured financial statements may still be usable.",
+            )
+        )
+        _FINANCIAL_REPORT_TEXT_AUDIT_CACHE[cache_key] = audit_rows
         return reports, []
 
-    texts: list[tuple[str, str]] = []
-    for _, row in reports.iterrows():
-        pdf_path = _download_disclosure(str(row.get("url") or ""))
-        if pdf_path is None:
-            continue
-        text = _extract_pdf_text(pdf_path)
-        if text:
+    audit_rows.append(
+        _audit_row(
+            "primary_announcement_lookup",
+            "ready",
+            f"Found {len(reports)} candidate financial-report announcement(s).",
+        )
+    )
+
+    def extract_texts(source_reports: pd.DataFrame, source_label: str) -> list[tuple[str, str]]:
+        extracted: list[tuple[str, str]] = []
+        for _, row in source_reports.iterrows():
             title = str(row.get("title") or row.get("ann_date") or "financial report")
-            texts.append((title, text))
+            url = str(row.get("url") or "")
+            if not url:
+                audit_rows.append(
+                    _audit_row(source_label, "failed", f"{title}: announcement has no disclosure URL.")
+                )
+                continue
+            pdf_path = _download_disclosure(url)
+            if pdf_path is None:
+                audit_rows.append(
+                    _audit_row(source_label, "failed", f"{title}: PDF download failed from {url}.")
+                )
+                continue
+            text = _extract_pdf_text(pdf_path)
+            if text:
+                extracted.append((title, text))
+                audit_rows.append(
+                    _audit_row(
+                        source_label,
+                        "ready",
+                        f"{title}: extracted {len(text)} characters of readable report text.",
+                    )
+                )
+            else:
+                audit_rows.append(
+                    _audit_row(
+                        source_label,
+                        "failed",
+                        f"{title}: PDF downloaded but no readable text was extracted from {pdf_path.name}.",
+                    )
+                )
+        return extracted
+
+    texts = extract_texts(reports, "primary_pdf_text_extraction")
+    if not texts:
+        cninfo_reports = _cninfo_financial_report_announcements(
+            symbol, curr_date, look_back_days
+        )
+        if (
+            not isinstance(cninfo_reports, TushareDataError)
+            and cninfo_reports is not None
+            and not cninfo_reports.empty
+        ):
+            audit_rows.append(
+                _audit_row(
+                    "cninfo_financial_report_retry",
+                    "ready",
+                    f"Found {len(cninfo_reports)} CNINFO financial-report announcement(s) after primary text extraction miss.",
+                )
+            )
+            cninfo_texts = extract_texts(cninfo_reports, "cninfo_pdf_text_extraction")
+            if cninfo_texts:
+                reports = cninfo_reports
+                texts = cninfo_texts
+        else:
+            audit_rows.append(
+                _audit_row(
+                    "cninfo_financial_report_retry",
+                    "failed",
+                    str(cninfo_reports)
+                    if isinstance(cninfo_reports, TushareDataError)
+                    else "No CNINFO financial-report announcements found for retry.",
+                )
+            )
     cached_reports = pd.DataFrame()
     cached_texts: list[tuple[str, str]] = []
     if len(texts) < 3:
         cached_reports, cached_texts = _retry_cached_financial_report_texts(
             symbol, company_name=company_name
+        )
+        audit_rows.append(
+            _audit_row(
+                "local_text_cache",
+                "ready" if cached_texts else "thin",
+                f"Recovered {len(cached_texts)} supplemental cached report text(s)."
+                if cached_texts
+                else "No supplemental cached report text found.",
+            )
         )
     if not texts and cached_texts:
         reports = cached_reports
@@ -516,7 +708,23 @@ def _load_financial_report_texts(
             texts.extend(supplemental_texts[: max(0, 4 - len(texts))])
             reports = pd.concat([reports, cached_reports.head(len(supplemental_texts))], ignore_index=True)
     if texts:
+        audit_rows.append(
+            _audit_row(
+                "final_text_bundle",
+                "ready",
+                f"Prepared {len(texts)} readable report text(s) for filing intelligence.",
+            )
+        )
         _FINANCIAL_REPORT_TEXT_CACHE[cache_key] = (reports.copy(), list(texts))
+    else:
+        audit_rows.append(
+            _audit_row(
+                "final_text_bundle",
+                "failed",
+                "No readable filing narrative text available; structured financial statements may still be usable.",
+            )
+        )
+    _FINANCIAL_REPORT_TEXT_AUDIT_CACHE[cache_key] = audit_rows
     return reports, texts
 
 
@@ -1371,6 +1579,9 @@ def get_thematic_catalyst_context(
     reports, report_texts = _load_financial_report_texts(
         symbol, curr_date, financial_look_back_days
     )
+    text_audit = _financial_report_text_audit_markdown(
+        symbol, curr_date, financial_look_back_days
+    )
     news_terms = [symbol, symbol.split(".")[0], company_name]
     major_news = _fetch_major_news(news_terms, curr_date, news_look_back_days)
     news_feed = _fetch_news_feed(news_terms, curr_date, news_look_back_days)
@@ -1519,6 +1730,9 @@ def get_thematic_catalyst_context(
         "",
         "## Financial Reports Considered",
         *report_titles,
+        "",
+        "## Financial Report Text Acquisition Audit",
+        text_audit,
         "",
         "## Filing-Origin Candidates -> News Catalyst Check",
         _build_candidate_table(financial_rows),

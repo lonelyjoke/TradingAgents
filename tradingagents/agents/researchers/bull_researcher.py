@@ -6,6 +6,7 @@ from tradingagents.agents.utils.agent_utils import (
     get_building_materials_instruction,
     get_buy_side_thesis_instruction,
     get_compute_leasing_instruction,
+    get_consumer_staples_instruction,
     get_dividend_defensive_instruction,
     get_evidence_instruction,
     get_earnings_model_instruction,
@@ -15,6 +16,7 @@ from tradingagents.agents.utils.agent_utils import (
     get_insurance_instruction,
     get_medical_device_instruction,
     get_metals_mining_instruction,
+    get_optical_module_instruction,
     get_investor_interaction_instruction,
     get_market_expectation_instruction,
     get_management_capital_allocation_instruction,
@@ -68,6 +70,8 @@ def create_bull_researcher(llm):
         compute_leasing_context = prompt_contexts["compute_leasing_context"]
         dividend_defensive_context = prompt_contexts["dividend_defensive_context"]
         building_materials_context = prompt_contexts["building_materials_context"]
+        consumer_staples_context = prompt_contexts["consumer_staples_context"]
+        optical_module_context = prompt_contexts["optical_module_context"]
         biopharma_context = prompt_contexts["biopharma_context"]
         software_context = prompt_contexts["software_context"]
         insurance_context = prompt_contexts["insurance_context"]
@@ -118,6 +122,7 @@ Key points to focus on:
 - Compute-Leasing Discipline: If gated compute-leasing context says `Status: triggered`, make the bull case pass asset, contract, unit-economics, capex/funding, and transition-credibility gates. If it says `Status: not_applicable`, do not use compute leasing as a bull theme.
 - Dividend-Defensive Discipline: If gated dividend defensive context says `Status: triggered`, argue only from sustainable payout evidence: dividend stability, profit/cash-flow or bank-capital coverage, non-declining industry logic, valuation buffer, and alternatives. Do not call a high yield defensive if the context flags dividend-trap risk.
 - Building-Materials Discipline: If gated building-materials context says `Status: triggered`, use it to discipline the bull case rather than expand the memo mechanically. Anchor on company filings and management wording, then state the industry stage and likely evolution path, then pass sector-native checks: product ASP or price inflection, regional demand, property-completion/infrastructure/renovation exposure, capacity and utilization, upstream energy/raw-material costs, inventory, receivables, cash collection, and capital-return proof. For low-PB/high-dividend names, explain why the discount is mispriced rather than a value trap; buybacks and dividends are shareholder-return and safety-margin evidence, not substitutes for operating proof.
+- Optical-Module Discipline: If gated optical-module context says `Status: triggered`, build the bull case from supply-chain role, AI capex bridge, 800G/1.6T migration, overseas cloud customer orders, customer qualification, shipment mix, gross margin, inventory/revenue, receivables/revenue, OCF, and technology-route optionality. Do not let a generic AI hardware narrative replace evidence of delivery quality and valuation digestion.
 - Biopharma Discipline: If gated biopharma context says `Status: triggered`, build the bull case from approved product sales, label expansion, clinical/regulatory milestones, reimbursement/pricing, risk-adjusted pipeline value, BD economics, and cash runway. For CRO/CDMO names, use order backlog, customer funding, capacity utilization, geopolitical risk, and FCF rather than drug-owner pipeline logic. Do not turn Phase I/II assets or unaudited pipeline wording into base-case valuation credit.
 - Software Discipline: If gated software context says `Status: triggered`, build the bull case from the right software business model. For SaaS/product-led names, require paid users, ARPU, renewal, contract-liability conversion, and AI paid adoption before claiming ARPU uplift. For project-heavy software, require order backlog, acceptance, receivables, and collection. Do not use broad `software service` peer screens as valuation proof until peers are model-labeled.
 - Insurance Discipline: If gated insurance context says `Status: triggered`, build the bull case from NBV/EV recovery, channel quality, solvency buffer, investment-yield spread, P&C COR, bank-subsidiary contribution, dividend durability, and SOTP optionality. Do not let a bank subsidiary turn an integrated insurer into a pure bank memo.
@@ -150,6 +155,8 @@ Gated baijiu verification context: {baijiu_context}
 Gated compute-leasing verification context: {compute_leasing_context}
 Gated dividend defensive verification context: {dividend_defensive_context}
 Gated building-materials verification context: {building_materials_context}
+Gated consumer-staples verification context: {consumer_staples_context}
+Gated AI optical-module verification context: {optical_module_context}
 Gated biopharma verification context: {biopharma_context}
 Gated software verification context: {software_context}
 Gated insurance verification context: {insurance_context}
@@ -170,6 +177,7 @@ Use this information to deliver a compelling bull argument, refute the bear's co
 {get_earnings_model_instruction()}
 {get_market_expectation_instruction()}
 {get_price_earnings_decomposition_instruction()}
+{get_consumer_staples_instruction()}
 {get_investor_interaction_instruction()}
 {get_policy_planning_instruction()}
 {get_three_layer_conclusion_instruction()}
@@ -180,6 +188,7 @@ Use this information to deliver a compelling bull argument, refute the bear's co
 {get_compute_leasing_instruction()}
 {get_dividend_defensive_instruction()}
 {get_building_materials_instruction()}
+{get_optical_module_instruction()}
 {get_biopharma_instruction()}
 {get_software_instruction()}
 {get_insurance_instruction()}

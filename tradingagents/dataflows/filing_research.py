@@ -22,7 +22,11 @@ from .tushare_a_stock import (
     _markdown_table,
     is_a_share_symbol,
 )
-from .thematic_research import _compact_text, _load_financial_report_texts
+from .thematic_research import (
+    _compact_text,
+    _financial_report_text_audit_markdown,
+    _load_financial_report_texts,
+)
 
 
 @dataclass(frozen=True)
@@ -4699,6 +4703,7 @@ def get_financial_report_intelligence_context(
     company_name = _format_value(basic.get("name")) if basic is not None else symbol
     industry = _format_value(basic.get("industry")) if basic is not None else ""
     reports, report_texts = _load_financial_report_texts(symbol, curr_date, look_back_days)
+    text_audit = _financial_report_text_audit_markdown(symbol, curr_date, look_back_days)
     report_texts, runtime_compaction_note = _compact_report_texts_for_runtime(report_texts)
     income = _fetch_income_statement_data(symbol, curr_date, freq="quarterly", limit=8)
     balance = _fetch_balance_sheet_data(symbol, curr_date, freq="quarterly", limit=8)
@@ -5032,6 +5037,9 @@ def get_financial_report_intelligence_context(
         "",
         "## Financial Reports Considered",
         *report_titles,
+        "",
+        "## Financial Report Text Acquisition Audit",
+        text_audit,
         "",
         "## Filing Reading Coverage Audit",
         _build_table(coverage_rows),

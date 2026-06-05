@@ -11,6 +11,7 @@ from tradingagents.agents.utils.agent_utils import (
     get_buy_side_thesis_instruction,
     get_buy_side_underwriting_modules_instruction,
     get_compute_leasing_instruction,
+    get_consumer_staples_instruction,
     get_dividend_defensive_instruction,
     get_evidence_instruction,
     get_earnings_model_instruction,
@@ -20,6 +21,7 @@ from tradingagents.agents.utils.agent_utils import (
     get_insurance_instruction,
     get_medical_device_instruction,
     get_metals_mining_instruction,
+    get_optical_module_instruction,
     get_price_move_attribution_instruction,
     get_investor_interaction_instruction,
     get_market_expectation_instruction,
@@ -79,6 +81,8 @@ def create_research_manager(llm):
         compute_leasing_context = prompt_contexts["compute_leasing_context"]
         dividend_defensive_context = prompt_contexts["dividend_defensive_context"]
         building_materials_context = prompt_contexts["building_materials_context"]
+        consumer_staples_context = prompt_contexts["consumer_staples_context"]
+        optical_module_context = prompt_contexts["optical_module_context"]
         biopharma_context = prompt_contexts["biopharma_context"]
         software_context = prompt_contexts["software_context"]
         insurance_context = prompt_contexts["insurance_context"]
@@ -176,6 +180,8 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 - If gated compute-leasing context says `Status: triggered`, keep a **Compute-Leasing Verification Verdict** explicit enough to separate legacy value, verified compute-leasing value, unverified compute optionality, unit-economics gaps, capex/funding risk, and transition credibility. If it says `Status: not_applicable`, do not force compute-leasing analysis into the stock.
 - If gated dividend-defensive context says `Status: triggered`, keep a **Dividend Defensive Verdict** explicit enough to say whether this is a true defensive dividend candidate, a dividend-trap risk, or inferior to peer alternatives. If it says `Status: not_applicable`, do not force a high-dividend thesis into the stock.
 - If gated building-materials context says `Status: triggered`, use it as a discipline layer: anchor first on company filings and management wording, then classify the industry stage and likely evolution path, and then cover product price/ASP, regional demand, property-completion/infrastructure/renovation exposure, capacity/utilization, upstream costs, inventory, receivables, cash collection, payout safety, and whether low PB/high dividend is real safety or a value trap. Add a dedicated **Building Materials Operating Cycle Verdict** only when it changes the rating, valuation, sizing, or action plan; otherwise integrate the relevant points into the main business/valuation/risk discussion. Treat repurchases and dividends as shareholder-return, safety-margin, and controlling-shareholder-attitude evidence, not as the whole thesis. If it says `Status: not_applicable`, do not force building-materials logic into the stock.
+- If gated consumer-staples context says `Status: triggered`, keep a **Consumer Staples Verification Verdict** explicit enough to decide whether the thesis is category demand, channel restocking, cost pass-through, product-mix upgrade, prepared-dish optionality, dividend defensiveness, or merely valuation mean reversion. For frozen-food names such as Anjoy, explicitly test Spring Festival seasonality, distributor inventory, contract liabilities/advance receipts, inventory-to-revenue, raw-material cost proxies, promotion intensity, and Q2/Q3 margin follow-through. If it says `Status: not_applicable`, do not force food/beverage logic into the stock.
+- If gated optical-module context says `Status: triggered`, keep an **AI Optical-Module Verification Verdict** explicit enough to decide whether the thesis is 800G share gain, 1.6T ramp, overseas cloud customer orders, product price/mix, exchange-rate tailwind, capacity/yield, AI capex durability, or merely valuation momentum. For Zhongji Innolight, Eoptolink, and similar names, explicitly test customer qualification, shipment mix, inventory/revenue, receivables/revenue, operating cash flow, gross margin, customer concentration, export/tariff risk, and CPO/LPO/silicon-photonics route risk. If it says `Status: not_applicable`, do not force optical-module or AI datacom logic into the stock.
 - If gated biopharma context says `Status: triggered`, keep a **Biopharma Verification Verdict** explicit enough to separate commercialized products, label expansion, late-stage pipeline, early pipeline, regulatory review, reimbursement/pricing, BD economics, R&D spend, cash runway, and dilution risk. For CRO/CDMO/pharma-services names, separate order visibility, customer funding cycle, project conversion, capacity utilization, capex returns, geopolitical risk, and FCF durability from drug-owner pipeline logic. Clinical or regulatory missing data caps conviction and belongs in the research-gap section; it is not proof of either approval or failure.
 - If gated software context says `Status: triggered`, keep a **Software Verification Verdict** explicit enough to classify the software model and separate subscription/ARR quality, paid users, ARPU, renewal/churn, contract-liability conversion, project acceptance, receivables/cash collection, AI paid adoption, and model-labeled peer valuation. If these metrics are missing, cap conviction rather than letting AI or broad software-service peer narratives carry the rating.
 - If gated insurance context says `Status: triggered`, keep an **Insurance Verification Verdict** explicit enough to separate life/health NBV and EV, channel quality, solvency, investment-yield spread, P&C COR, bank-subsidiary contribution, dividends, and SOTP optionality. If it says `Status: not_applicable`, do not force insurance analysis into the stock.
@@ -246,6 +252,12 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 **Gated Building-Materials Verification Context:**
 {building_materials_context}
 
+**Gated Consumer-Staples Verification Context:**
+{consumer_staples_context}
+
+**Gated AI Optical-Module Verification Context:**
+{optical_module_context}
+
 **Gated Biopharma Verification Context:**
 {biopharma_context}
 
@@ -294,6 +306,8 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 {get_compute_leasing_instruction()}
 {get_dividend_defensive_instruction()}
 {get_building_materials_instruction()}
+{get_consumer_staples_instruction()}
+{get_optical_module_instruction()}
 {get_biopharma_instruction()}
 {get_software_instruction()}
 {get_fair_cycle_valuation_instruction()}

@@ -17,6 +17,10 @@ from .tushare_a_stock import (
     _format_yyyymmdd,
     is_a_share_symbol,
 )
+from .thematic_research import (
+    _financial_report_text_audit_markdown,
+    _load_financial_report_texts,
+)
 
 
 class AShareDataPreflightError(RuntimeError):
@@ -140,6 +144,57 @@ def _check_frame(name: str, func, symbol: str, curr_date: str) -> PreflightCheck
     return PreflightCheck(name, "ready", detail)
 
 
+def _check_filing_text(
+    symbol: str,
+    curr_date: str,
+    *,
+    look_back_days: int,
+    min_total_chars: int,
+) -> PreflightCheck:
+    try:
+        reports, texts = _load_financial_report_texts(
+            symbol, curr_date, look_back_days=look_back_days
+        )
+    except Exception as exc:
+        return PreflightCheck("filing_text", "failed", str(exc))
+
+    if isinstance(reports, TushareDataError):
+        audit = _financial_report_text_audit_markdown(symbol, curr_date, look_back_days)
+        return PreflightCheck("filing_text", "failed", f"{reports}; {audit}")
+
+    total_chars = sum(len(text or "") for _, text in texts)
+    report_count = 0 if reports is None or reports.empty else len(reports)
+    if not texts:
+        audit = _financial_report_text_audit_markdown(symbol, curr_date, look_back_days)
+        return PreflightCheck(
+            "filing_text",
+            "failed",
+            (
+                f"no readable annual/semiannual/quarterly report text returned; "
+                f"candidate reports={report_count}; {audit}"
+            ),
+        )
+    if total_chars < min_total_chars:
+        audit = _financial_report_text_audit_markdown(symbol, curr_date, look_back_days)
+        return PreflightCheck(
+            "filing_text",
+            "failed",
+            (
+                f"readable report text too thin: {total_chars} chars "
+                f"< required {min_total_chars}; reports={report_count}; {audit}"
+            ),
+        )
+    titles = ", ".join(title for title, _ in texts[:3])
+    return PreflightCheck(
+        "filing_text",
+        "ready",
+        (
+            f"{len(texts)} readable report text(s), {total_chars} chars; "
+            f"reports={report_count}; warmed cache for filing intelligence; {titles}"
+        ),
+    )
+
+
 def _render_checks(symbol: str, curr_date: str, checks: list[PreflightCheck]) -> str:
     lines = [
         f"# A-share Data Preflight for {symbol} as of {curr_date}",
@@ -159,6 +214,9 @@ def run_a_share_data_preflight(
     *,
     selected_analysts: list[str] | tuple[str, ...] | None = None,
     max_staleness_days: int = 21,
+    require_filing_text: bool = True,
+    filing_text_look_back_days: int = 900,
+    min_filing_text_chars: int = 500,
 ) -> str:
     """Verify core A-share data before spending LLM tokens."""
     symbol = ticker.strip().upper()
@@ -178,6 +236,15 @@ def run_a_share_data_preflight(
                 _check_frame("balancesheet", _fetch_balance_sheet_data, symbol, curr_date),
                 _check_frame("cashflow", _fetch_cashflow_data, symbol, curr_date),
             ]
+        )
+    if require_filing_text:
+        checks.append(
+            _check_filing_text(
+                symbol,
+                curr_date,
+                look_back_days=filing_text_look_back_days,
+                min_total_chars=min_filing_text_chars,
+            )
         )
 
     failed = [check for check in checks if check.status == "failed"]

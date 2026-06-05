@@ -127,6 +127,12 @@ DEFAULT_CONFIG = {
     # core market/fundamental data.
     "a_share_data_preflight_enabled": True,
     "a_share_data_preflight_max_staleness_days": 21,
+    # Treat readable filing text as a required pre-LLM input for A-share work.
+    # This warms the disclosure cache and blocks shallow reports when MD&A,
+    # segment, and business-model text cannot be read.
+    "a_share_filing_text_preflight_enabled": True,
+    "a_share_filing_text_preflight_look_back_days": 900,
+    "a_share_filing_text_preflight_min_chars": 500,
     # Optional web-search context for simple but thesis-critical high-frequency
     # facts not covered well by Tushare or filings, such as baijiu wholesale
     # prices, channel inventory, terminal discounts, and product price changes.

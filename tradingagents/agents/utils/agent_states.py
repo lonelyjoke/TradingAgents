@@ -75,6 +75,8 @@ class AgentState(MessagesState):
     compute_leasing_context: Annotated[str, "Precomputed gated compute-leasing verification context for A-share names"]
     dividend_defensive_context: Annotated[str, "Precomputed gated defensive-dividend verification context for A-share names"]
     building_materials_context: Annotated[str, "Precomputed gated building-materials verification context for A-share names"]
+    consumer_staples_context: Annotated[str, "Precomputed gated consumer-staples / food-beverage verification context for A-share names"]
+    optical_module_context: Annotated[str, "Precomputed gated AI optical-module / datacom hardware verification context for A-share names"]
     biopharma_context: Annotated[str, "Precomputed gated biopharma/pharma-services verification context for A-share names"]
     software_context: Annotated[str, "Precomputed gated software/SaaS verification context for A-share names"]
     insurance_context: Annotated[str, "Precomputed gated insurance verification context for A-share insurers"]

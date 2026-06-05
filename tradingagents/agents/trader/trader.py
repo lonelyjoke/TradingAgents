@@ -20,6 +20,7 @@ from tradingagents.agents.utils.agent_utils import (
     get_insurance_instruction,
     get_medical_device_instruction,
     get_metals_mining_instruction,
+    get_optical_module_instruction,
     get_investor_interaction_instruction,
     get_policy_planning_instruction,
     get_research_gap_instruction,
@@ -59,6 +60,7 @@ def create_trader(llm):
                 "web_fact_check_context",
                 "baijiu_context",
                 "compute_leasing_context",
+                "optical_module_context",
                 "dividend_defensive_context",
                 "biopharma_context",
                 "software_context",
@@ -76,6 +78,7 @@ def create_trader(llm):
         web_fact_check_context = prompt_contexts["web_fact_check_context"]
         baijiu_context = prompt_contexts["baijiu_context"]
         compute_leasing_context = prompt_contexts["compute_leasing_context"]
+        optical_module_context = prompt_contexts["optical_module_context"]
         dividend_defensive_context = prompt_contexts["dividend_defensive_context"]
         biopharma_context = prompt_contexts["biopharma_context"]
         software_context = prompt_contexts["software_context"]
@@ -108,6 +111,7 @@ def create_trader(llm):
                     f"{get_web_fact_check_instruction()}"
                     f"{get_baijiu_instruction()}"
                     f"{get_compute_leasing_instruction()}"
+                    f"{get_optical_module_instruction()}"
                     f"{get_dividend_defensive_instruction()}"
                     f"{get_software_instruction()}"
                     f"{get_insurance_instruction()}"
@@ -133,6 +137,7 @@ def create_trader(llm):
                     f"Web fact-check context: {web_fact_check_context}\n\n"
                     f"Gated baijiu verification context: {baijiu_context}\n\n"
                     f"Gated compute-leasing verification context: {compute_leasing_context}\n\n"
+                    f"Gated AI optical-module verification context: {optical_module_context}\n\n"
                     f"Gated dividend defensive verification context: {dividend_defensive_context}\n\n"
                     f"Gated biopharma verification context: {biopharma_context}\n\n"
                     f"Gated software verification context: {software_context}\n\n"

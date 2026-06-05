@@ -33,6 +33,8 @@ FAILURE_PATTERNS = (
     "# compute-leasing verification layer unavailable",
     "# dividend defensive verification layer unavailable",
     "# building-materials verification context unavailable",
+    "# consumer-staples verification context unavailable",
+    "# ai optical-module context unavailable",
     "# biopharma verification context unavailable",
     "# software verification context unavailable",
     "# insurance verification context unavailable",
@@ -45,6 +47,8 @@ FAILURE_PATTERNS = (
     "narrative filing text extraction unavailable",
     "financial-report text extraction unavailable",
     "no readable report text",
+    "no relevant web fact rows",
+    "search provider returned no relevant web fact rows",
     "no commodity mapping found",
     "| failed |",
     "api error",
@@ -57,6 +61,18 @@ FAILURE_PATTERNS = (
     "请指定正确的接口名",
     "无可读",
     "失败",
+)
+
+NOT_APPLICABLE_PATTERNS = (
+    "status: not_applicable",
+    "no shipping mapping found",
+    "no mapped public shipping index",
+    "no curated consumer-staples mapping",
+    "no curated optical-module mapping",
+    "no curated building-materials mapping",
+    "no curated software mapping",
+    "no curated compute-leasing mapping",
+    "no curated metals/mining mapping",
 )
 
 SUCCESS_HINTS = (
@@ -90,7 +106,7 @@ def classify_context_coverage(name: str, text: str) -> ContextCoverage:
         return ContextCoverage(name, "missing", "context is empty")
 
     lower = cleaned.lower()
-    if "status: not_applicable" in lower:
+    if any(pattern in lower for pattern in NOT_APPLICABLE_PATTERNS):
         return ContextCoverage(name, "not_applicable", _first_relevant_line(cleaned))
 
     has_failure = any(pattern in lower for pattern in FAILURE_PATTERNS)

@@ -4,6 +4,7 @@ from tradingagents.agents.utils.agent_utils import (
     get_buy_side_thesis_instruction,
     get_biopharma_instruction,
     get_compute_leasing_instruction,
+    get_consumer_staples_instruction,
     get_dividend_defensive_instruction,
     get_evidence_instruction,
     get_fair_cycle_valuation_instruction,
@@ -12,6 +13,7 @@ from tradingagents.agents.utils.agent_utils import (
     get_insurance_instruction,
     get_medical_device_instruction,
     get_metals_mining_instruction,
+    get_optical_module_instruction,
     get_investor_interaction_instruction,
     get_policy_planning_instruction,
     get_research_gap_instruction,
@@ -51,6 +53,8 @@ def create_neutral_debator(llm):
                 "policy_planning_context",
                 "shipping_context",
                 "compute_leasing_context",
+                "consumer_staples_context",
+                "optical_module_context",
                 "dividend_defensive_context",
                 "biopharma_context",
                 "software_context",
@@ -66,6 +70,8 @@ def create_neutral_debator(llm):
         investor_interaction_context = prompt_contexts["investor_interaction_context"]
         policy_planning_context = prompt_contexts["policy_planning_context"]
         compute_leasing_context = prompt_contexts["compute_leasing_context"]
+        consumer_staples_context = prompt_contexts["consumer_staples_context"]
+        optical_module_context = prompt_contexts["optical_module_context"]
         dividend_defensive_context = prompt_contexts["dividend_defensive_context"]
         biopharma_context = prompt_contexts["biopharma_context"]
         software_context = prompt_contexts["software_context"]
@@ -105,6 +111,8 @@ Financial-Report Intelligence And Promoted Discussion Items: {filing_intelligenc
 Official Investor-Interaction Context: {investor_interaction_context}
 Official Policy-Planning Context: {policy_planning_context}
 Gated Compute-Leasing Verification Context: {compute_leasing_context}
+Gated Consumer-Staples Verification Context: {consumer_staples_context}
+Gated AI Optical-Module Verification Context: {optical_module_context}
 Gated Dividend Defensive Verification Context: {dividend_defensive_context}
 Gated Biopharma Verification Context: {biopharma_context}
 Gated Software Verification Context: {software_context}
@@ -113,7 +121,7 @@ Gated Medical-Device Verification Context: {medical_device_context}
 Gated Metals/Mining Verification Context: {metals_mining_context}
 Here is the current conversation history: {prompt_history} Here is the last response from the aggressive analyst: {prompt_aggressive_response} Here is the last response from the conservative analyst: {prompt_conservative_response}. If there are no responses from the other viewpoints yet, present your own argument based on the available data.
 
-Engage actively by analyzing both sides critically, addressing weaknesses in the aggressive and conservative arguments to advocate for a more balanced approach. Challenge each of their points to illustrate why a moderate risk strategy might offer the best of both worlds, providing growth potential while safeguarding against extreme volatility. Focus on debating rather than simply presenting data, aiming to show that a balanced view can lead to the most reliable outcomes. For commodity/resource/cyclical names, explicitly test whether product-price evidence supports or contradicts the risk stance. For shipping names, distinguish freight-rate evidence from freight-rate gaps, and evaluate two-sided Hormuz reopening/restocking mechanisms before changing risk posture. For biopharma names, balance pipeline optionality against clinical/regulatory/reimbursement/cash-runway evidence gaps, and keep CRO/CDMO order-cycle risk separate from drug-owner pipeline risk. For software names, balance subscription/AI optionality against paid-user, ARPU, renewal/churn, contract-liability conversion, project acceptance, and cash-collection evidence gaps; translate missing software-native evidence into sizing, verification calendar, and falsification triggers. For insurance names, balance NBV/EV/dividend/SOTP optionality against solvency, investment-yield, channel, P&C COR, and bank-subsidiary evidence gaps; translate missing insurance-native evidence into sizing, verification calendar, and falsification triggers. For medical-device names, balance installed-base, reagent, replacement-cycle, and overseas optionality against VBP, registration, tender, channel inventory, receivable, and cash-conversion evidence gaps; translate missing device-native evidence into sizing, verification calendar, and falsification triggers. For metals/mining names, balance metal-price, reserve, output, and NAV/SOTP optionality against AISC, grade, hedge, inventory, capex, project-ramp, jurisdiction, leverage, and data-source gaps; translate missing mining-native evidence into sizing, verification calendar, and falsification triggers. Preserve core discussion items that matter to the thesis even when they belong in scenario analysis rather than the base case. {get_evidence_instruction()} {get_research_gap_instruction()} {get_supply_demand_fallback_instruction()} {get_buy_side_thesis_instruction()} {get_fair_cycle_valuation_instruction()} {get_thematic_valuation_instruction()} {get_filing_intelligence_instruction()} {get_investor_interaction_instruction()} {get_policy_planning_instruction()} {get_compute_leasing_instruction()} {get_dividend_defensive_instruction()} {get_biopharma_instruction()} {get_software_instruction()} {get_insurance_instruction()} {get_medical_device_instruction()} {get_metals_mining_instruction()} {get_focused_report_instruction()} Output conversationally as if you are speaking without any special formatting."""
+Engage actively by analyzing both sides critically, addressing weaknesses in the aggressive and conservative arguments to advocate for a more balanced approach. Challenge each of their points to illustrate why a moderate risk strategy might offer the best of both worlds, providing growth potential while safeguarding against extreme volatility. Focus on debating rather than simply presenting data, aiming to show that a balanced view can lead to the most reliable outcomes. For commodity/resource/cyclical names, explicitly test whether product-price evidence supports or contradicts the risk stance. For shipping names, distinguish freight-rate evidence from freight-rate gaps, and evaluate two-sided Hormuz reopening/restocking mechanisms before changing risk posture. For consumer-staples names, balance category demand and valuation support against channel sell-through, distributor inventory, raw-material cost, promotion intensity, food-safety, and Q2/Q3 margin evidence gaps; translate missing consumer-native evidence into sizing, verification calendar, and falsification triggers. For optical-module names, balance AI capex / 800G / 1.6T optionality against customer concentration, ASP, inventory, receivables, OCF, capacity/yield, export, and CPO/LPO/silicon-photonics evidence gaps; translate missing optical-module evidence into sizing, verification calendar, and falsification triggers. For biopharma names, balance pipeline optionality against clinical/regulatory/reimbursement/cash-runway evidence gaps, and keep CRO/CDMO order-cycle risk separate from drug-owner pipeline risk. For software names, balance subscription/AI optionality against paid-user, ARPU, renewal/churn, contract-liability conversion, project acceptance, and cash-collection evidence gaps; translate missing software-native evidence into sizing, verification calendar, and falsification triggers. For insurance names, balance NBV/EV/dividend/SOTP optionality against solvency, investment-yield, channel, P&C COR, and bank-subsidiary evidence gaps; translate missing insurance-native evidence into sizing, verification calendar, and falsification triggers. For medical-device names, balance installed-base, reagent, replacement-cycle, and overseas optionality against VBP, registration, tender, channel inventory, receivable, and cash-conversion evidence gaps; translate missing device-native evidence into sizing, verification calendar, and falsification triggers. For metals/mining names, balance metal-price, reserve, output, and NAV/SOTP optionality against AISC, grade, hedge, inventory, capex, project-ramp, jurisdiction, leverage, and data-source gaps; translate missing mining-native evidence into sizing, verification calendar, and falsification triggers. Preserve core discussion items that matter to the thesis even when they belong in scenario analysis rather than the base case. {get_evidence_instruction()} {get_research_gap_instruction()} {get_supply_demand_fallback_instruction()} {get_buy_side_thesis_instruction()} {get_fair_cycle_valuation_instruction()} {get_thematic_valuation_instruction()} {get_filing_intelligence_instruction()} {get_investor_interaction_instruction()} {get_policy_planning_instruction()} {get_compute_leasing_instruction()} {get_consumer_staples_instruction()} {get_optical_module_instruction()} {get_dividend_defensive_instruction()} {get_biopharma_instruction()} {get_software_instruction()} {get_insurance_instruction()} {get_medical_device_instruction()} {get_metals_mining_instruction()} {get_focused_report_instruction()} Output conversationally as if you are speaking without any special formatting."""
 
         response = llm.invoke(prompt)
 

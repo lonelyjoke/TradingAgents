@@ -80,7 +80,7 @@ def test_financial_report_announcements_use_cninfo_when_tushare_lacks_reports(mo
     )
 
     monkeypatch.setattr(thematic_research, "_fetch_announcements", lambda *args: tushare_rows)
-    monkeypatch.setattr(thematic_research, "_fetch_cninfo_announcements", lambda *args: cninfo_rows)
+    monkeypatch.setattr(thematic_research, "_fetch_cninfo_announcements", lambda *args, **kwargs: cninfo_rows)
 
     reports = thematic_research._financial_report_announcements(
         "000967.SZ", "2026-05-21", 900
@@ -89,3 +89,30 @@ def test_financial_report_announcements_use_cninfo_when_tushare_lacks_reports(mo
     assert len(reports) == 2
     assert reports["title"].str.contains("\u5e74\u5ea6\u62a5\u544a").any()
     assert reports["title"].str.contains("\u7b2c\u4e00\u5b63\u5ea6\u62a5\u544a").any()
+
+
+def test_financial_report_title_filter_accepts_cached_mojibake_titles():
+    data = pd.DataFrame(
+        [
+            {
+                "ann_date": "20260430",
+                "ts_code": "603345.SH",
+                "name": "\u5b89\u4e95\u98df\u54c1",
+                "title": "2025骞村勾搴︽姤鍛?",
+                "url": "https://example.com/annual.pdf",
+                "rec_time": "20260430",
+            },
+            {
+                "ann_date": "20260429",
+                "ts_code": "603345.SH",
+                "name": "\u5b89\u4e95\u98df\u54c1",
+                "title": "2026骞寸涓€瀛ｅ害鎶ュ憡",
+                "url": "https://example.com/q1.pdf",
+                "rec_time": "20260429",
+            },
+        ]
+    )
+
+    reports = thematic_research._filter_financial_report_announcements(data)
+
+    assert len(reports) == 2

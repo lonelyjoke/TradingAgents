@@ -27,6 +27,12 @@ from .tushare_a_stock import (
 
 CNINFO_ANNOUNCEMENT_QUERY_URL = "http://www.cninfo.com.cn/new/hisAnnouncement/query"
 CNINFO_STATIC_BASE_URL = "http://static.cninfo.com.cn/"
+CNINFO_FINANCIAL_REPORT_CATEGORIES = (
+    "category_ndbg_szsh",
+    "category_bndbg_szsh",
+    "category_yjdbg_szsh",
+    "category_sjdbg_szsh",
+)
 
 BAIJIU_PEER_FALLBACK = {
     "600519.SH": "贵州茅台",
@@ -188,7 +194,13 @@ def _parse_cninfo_announcements(payload: dict, symbol: str) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
-def _fetch_cninfo_announcements(symbol: str, curr_date: str, look_back_days: int) -> pd.DataFrame | TushareDataError:
+def _fetch_cninfo_announcements(
+    symbol: str,
+    curr_date: str,
+    look_back_days: int,
+    *,
+    categories: tuple[str, ...] | None = None,
+) -> pd.DataFrame | TushareDataError:
     start_dt, end_dt, _, _ = _date_window(curr_date, look_back_days)
     column, plate = _cninfo_exchange_params(symbol)
     se_date = f"{start_dt.strftime('%Y-%m-%d')}~{end_dt.strftime('%Y-%m-%d')}"
@@ -196,6 +208,7 @@ def _fetch_cninfo_announcements(symbol: str, curr_date: str, look_back_days: int
     max_pages = 10 if look_back_days >= 365 else 4
     rows = []
     session = requests.Session()
+    categories_to_try = categories or ("",)
     headers = {
         "Accept": "application/json, text/javascript, */*; q=0.01",
         "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
@@ -206,38 +219,40 @@ def _fetch_cninfo_announcements(symbol: str, curr_date: str, look_back_days: int
 
     try:
         for stock_query in _cninfo_stock_query_values(symbol):
-            for page_num in range(1, max_pages + 1):
-                data = {
-                    "stock": stock_query,
-                    "searchkey": "",
-                    "plate": plate,
-                    "category": "",
-                    "trade": "",
-                    "column": column,
-                    "columnTitle": "history",
-                    "pageNum": str(page_num),
-                    "pageSize": str(page_size),
-                    "tabName": "fulltext",
-                    "sortName": "",
-                    "sortType": "",
-                    "limit": "",
-                    "showTitle": "",
-                    "seDate": se_date,
-                }
-                response = session.post(
-                    CNINFO_ANNOUNCEMENT_QUERY_URL,
-                    data=data,
-                    headers=headers,
-                    timeout=20,
-                )
-                response.raise_for_status()
-                page = _parse_cninfo_announcements(response.json(), symbol)
-                if page.empty:
-                    break
-                rows.append(page)
-                if len(page) < page_size:
-                    break
-            if rows:
+            stock_rows_start = len(rows)
+            for category in categories_to_try:
+                for page_num in range(1, max_pages + 1):
+                    data = {
+                        "stock": stock_query,
+                        "searchkey": "",
+                        "plate": plate,
+                        "category": category,
+                        "trade": "",
+                        "column": column,
+                        "columnTitle": "history",
+                        "pageNum": str(page_num),
+                        "pageSize": str(page_size),
+                        "tabName": "fulltext",
+                        "sortName": "",
+                        "sortType": "",
+                        "limit": "",
+                        "showTitle": "",
+                        "seDate": se_date,
+                    }
+                    response = session.post(
+                        CNINFO_ANNOUNCEMENT_QUERY_URL,
+                        data=data,
+                        headers=headers,
+                        timeout=20,
+                    )
+                    response.raise_for_status()
+                    page = _parse_cninfo_announcements(response.json(), symbol)
+                    if page.empty:
+                        break
+                    rows.append(page)
+                    if len(page) < page_size:
+                        break
+            if len(rows) > stock_rows_start:
                 break
     except Exception as exc:
         return TushareDataError(f"cninfo announcement fallback unavailable: {exc}")

@@ -168,3 +168,74 @@ def test_resource_web_fact_context_uses_resource_purpose(monkeypatch):
     assert "\u77ff\u5c71 \u9879\u76ee\u8fdb\u5c55 \u5e76\u8d2d" in context
     assert "baijiu wholesale prices" not in context
     assert "For resource companies" in context
+
+
+def test_web_fact_context_filters_irrelevant_single_character_results(monkeypatch):
+    monkeypatch.setattr(
+        web_facts,
+        "_company_profile",
+        lambda symbol: ("\u5b89\u4e95\u98df\u54c1", "\u98df\u54c1"),
+    )
+    monkeypatch.setattr(
+        web_facts,
+        "_bing_news_rss",
+        lambda *args, **kwargs: [
+            web_facts.WebFactItem(
+                query="\u5b89\u4e95\u98df\u54c1 \u6e20\u9053\u5e93\u5b58",
+                title="\u5b89_\u767e\u5ea6\u767e\u79d1",
+                source="\u767e\u5ea6\u767e\u79d1",
+                published="2026-06-01",
+                link="https://example.com/an-character",
+                snippet="\u5b89\u662f\u4e00\u4e2a\u6c49\u5b57\u3002",
+                extracted_values="",
+                evidence_grade="web-news reference; not filing/announcement-grade evidence",
+            )
+        ],
+    )
+    monkeypatch.setattr(web_facts.time, "sleep", lambda seconds: None)
+
+    context = web_facts.get_web_fact_check_context(
+        "603345.SH",
+        "2026-06-05",
+        max_queries=1,
+        max_results_per_query=1,
+    )
+
+    assert "Filtered out 1 search result" in context
+    assert "no relevant web fact rows" in context
+    assert "\u5b89_\u767e\u5ea6\u767e\u79d1" not in context
+
+
+def test_web_fact_context_keeps_company_alias_results(monkeypatch):
+    monkeypatch.setattr(
+        web_facts,
+        "_company_profile",
+        lambda symbol: ("\u5b89\u4e95\u98df\u54c1", "\u98df\u54c1"),
+    )
+    monkeypatch.setattr(
+        web_facts,
+        "_bing_news_rss",
+        lambda *args, **kwargs: [
+            web_facts.WebFactItem(
+                query="\u5b89\u4e95\u98df\u54c1 \u6e20\u9053\u5e93\u5b58",
+                title="\u5b89\u4e95\u6e20\u9053\u5e93\u5b58\u8ddf\u8e2a",
+                source="Example Source",
+                published="2026-06-01",
+                link="https://example.com/anjoy",
+                snippet="\u5b89\u4e95\u98df\u54c1\u7ecf\u9500\u5546\u5e93\u5b58\u8ddf\u8e2a\u3002",
+                extracted_values="",
+                evidence_grade="web-news reference; not filing/announcement-grade evidence",
+            )
+        ],
+    )
+    monkeypatch.setattr(web_facts.time, "sleep", lambda seconds: None)
+
+    context = web_facts.get_web_fact_check_context(
+        "603345.SH",
+        "2026-06-05",
+        max_queries=1,
+        max_results_per_query=1,
+    )
+
+    assert "\u5b89\u4e95\u6e20\u9053\u5e93\u5b58\u8ddf\u8e2a" in context
+    assert "no relevant web fact rows" not in context

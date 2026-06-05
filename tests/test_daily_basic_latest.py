@@ -128,6 +128,35 @@ def test_tushare_query_retries_empty_configured_gateway(monkeypatch):
     assert result.iloc[0]["close"] == 10.9
 
 
+def test_financial_query_falls_back_to_period_when_range_returns_empty(monkeypatch):
+    calls = []
+
+    def fake_query(api_name, **kwargs):
+        calls.append((api_name, kwargs.copy()))
+        if kwargs.get("period") == "20260331":
+            return pd.DataFrame(
+                [
+                    {
+                        "ts_code": "603345.SH",
+                        "ann_date": "20260425",
+                        "end_date": "20260331",
+                        "n_cashflow_act": 9.6,
+                    }
+                ]
+            )
+        return pd.DataFrame()
+
+    monkeypatch.setattr(tushare_a_stock, "_query_pro_with_fallback", fake_query)
+
+    data = tushare_a_stock._fetch_cashflow_data("603345.SH", "2026-06-05", limit=8)
+
+    assert not data.empty
+    assert data.iloc[0]["end_date"] == "20260331"
+    assert data.iloc[0]["n_cashflow_act"] == 9.6
+    assert any(kwargs.get("start_date") == "20200605" for _api, kwargs in calls)
+    assert any(kwargs.get("period") == "20260331" for _api, kwargs in calls)
+
+
 def test_fundamentals_continues_when_daily_basic_times_out(monkeypatch):
     monkeypatch.setattr(
         tushare_a_stock,

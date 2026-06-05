@@ -307,6 +307,46 @@ def _sort_latest_reports(data: pd.DataFrame, curr_date: str | None, freq: str, l
     return reports.head(limit)
 
 
+def _financial_report_periods(curr_date: str, years: int = 6) -> list[str]:
+    end_dt = datetime.strptime(curr_date, "%Y-%m-%d")
+    cutoff = int(end_dt.strftime("%Y%m%d"))
+    periods: list[str] = []
+    for year in range(end_dt.year, end_dt.year - years - 1, -1):
+        for suffix in ("1231", "0930", "0630", "0331"):
+            period = f"{year}{suffix}"
+            if int(period) <= cutoff:
+                periods.append(period)
+    return periods
+
+
+def _query_financial_api_by_period(
+    api_name: str, symbol: str, fields: list[str], periods: list[str]
+) -> pd.DataFrame:
+    field_string = ",".join(fields)
+    rows: list[pd.DataFrame] = []
+    for period in periods:
+        try:
+            data = _query_pro_with_fallback(
+                api_name,
+                ts_code=symbol,
+                period=period,
+                fields=field_string,
+                empty_retries=0,
+            )
+        except Exception:
+            data = _query_pro_with_fallback(
+                api_name,
+                ts_code=symbol,
+                period=period,
+                empty_retries=0,
+            )
+        if isinstance(data, pd.DataFrame) and not data.empty:
+            rows.append(data)
+    if not rows:
+        return pd.DataFrame()
+    return pd.concat(rows, ignore_index=True)
+
+
 def _query_financial_api(api_name: str, symbol: str, curr_date: str | None, fields: list[str], years: int = 6) -> pd.DataFrame:
     if not curr_date:
         curr_date = datetime.now().strftime("%Y-%m-%d")
@@ -316,8 +356,9 @@ def _query_financial_api(api_name: str, symbol: str, curr_date: str | None, fiel
     end = end_dt.strftime("%Y%m%d")
 
     field_string = ",".join(fields)
+    used_default_fields = False
     try:
-        return _query_pro_with_fallback(
+        data = _query_pro_with_fallback(
             api_name,
             ts_code=symbol,
             start_date=start,
@@ -327,12 +368,37 @@ def _query_financial_api(api_name: str, symbol: str, curr_date: str | None, fiel
     except Exception:
         # Some shared gateways or Tushare versions are picky about fields. Fall
         # back to the default field set, then select what we can use locally.
-        return _query_pro_with_fallback(
+        used_default_fields = True
+        data = _query_pro_with_fallback(
             api_name,
             ts_code=symbol,
             start_date=start,
             end_date=end,
         )
+    if isinstance(data, pd.DataFrame) and not data.empty:
+        return data
+    if not used_default_fields:
+        try:
+            data_without_fields = _query_pro_with_fallback(
+                api_name,
+                ts_code=symbol,
+                start_date=start,
+                end_date=end,
+            )
+        except Exception:
+            data_without_fields = pd.DataFrame()
+        if isinstance(data_without_fields, pd.DataFrame) and not data_without_fields.empty:
+            return data_without_fields
+
+    period_data = _query_financial_api_by_period(
+        api_name,
+        symbol,
+        fields,
+        _financial_report_periods(curr_date, years),
+    )
+    if isinstance(period_data, pd.DataFrame) and not period_data.empty:
+        return period_data
+    return data
 
 
 def _select_existing(data: pd.DataFrame, columns: list[str]) -> pd.DataFrame:

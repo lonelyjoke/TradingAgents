@@ -49,9 +49,11 @@ from tradingagents.agents.utils.agent_utils import (
     get_insurance_context,
     get_medical_device_context,
     get_metals_mining_context,
+    get_optical_module_context,
     get_investor_interaction_context,
     get_commodity_context,
     get_compute_leasing_context,
+    get_consumer_staples_context,
     get_dividend_defensive_context,
     get_news,
     get_company_events,
@@ -106,6 +108,8 @@ def _build_precomputed_data_coverage(
     compute_leasing_context: str,
     dividend_defensive_context: str,
     building_materials_context: str,
+    consumer_staples_context: str,
+    optical_module_context: str,
     biopharma_context: str,
     software_context: str,
     insurance_context: str,
@@ -133,6 +137,8 @@ def _build_precomputed_data_coverage(
             "compute_leasing": compute_leasing_context,
             "dividend_defensive": dividend_defensive_context,
             "building_materials": building_materials_context,
+            "consumer_staples": consumer_staples_context,
+            "optical_module": optical_module_context,
             "biopharma": biopharma_context,
             "software": software_context,
             "insurance": insurance_context,
@@ -209,6 +215,16 @@ _A_SHARE_CONTEXT_SPECS = [
         "building_materials_context",
         "get_building_materials_context",
         "Building-materials verification context",
+    ),
+    (
+        "consumer_staples_context",
+        "get_consumer_staples_context",
+        "Consumer-staples verification context",
+    ),
+    (
+        "optical_module_context",
+        "get_optical_module_context",
+        "AI optical-module verification context",
     ),
     (
         "biopharma_context",
@@ -423,6 +439,8 @@ class TradingAgentsGraph:
                     get_compute_leasing_context,
                     get_dividend_defensive_context,
                     get_building_materials_context,
+                    get_consumer_staples_context,
+                    get_optical_module_context,
                     get_biopharma_context,
                     get_software_context,
                     get_insurance_context,
@@ -614,6 +632,17 @@ class TradingAgentsGraph:
                 self.config.get("a_share_data_preflight_max_staleness_days", 21)
                 or 21
             ),
+            require_filing_text=bool(
+                self.config.get("a_share_filing_text_preflight_enabled", True)
+            ),
+            filing_text_look_back_days=int(
+                self.config.get("a_share_filing_text_preflight_look_back_days", 900)
+                or 900
+            ),
+            min_filing_text_chars=int(
+                self.config.get("a_share_filing_text_preflight_min_chars", 500)
+                or 500
+            ),
         )
 
     def create_initial_state_with_context(
@@ -654,6 +683,8 @@ class TradingAgentsGraph:
         compute_leasing_context = contexts["compute_leasing_context"]
         dividend_defensive_context = contexts["dividend_defensive_context"]
         building_materials_context = contexts["building_materials_context"]
+        consumer_staples_context = contexts["consumer_staples_context"]
+        optical_module_context = contexts["optical_module_context"]
         biopharma_context = contexts["biopharma_context"]
         software_context = contexts["software_context"]
         insurance_context = contexts["insurance_context"]
@@ -679,6 +710,8 @@ class TradingAgentsGraph:
             compute_leasing_context=compute_leasing_context,
             dividend_defensive_context=dividend_defensive_context,
             building_materials_context=building_materials_context,
+            consumer_staples_context=consumer_staples_context,
+            optical_module_context=optical_module_context,
             biopharma_context=biopharma_context,
             software_context=software_context,
             insurance_context=insurance_context,
@@ -709,6 +742,8 @@ class TradingAgentsGraph:
             compute_leasing_context=compute_leasing_context,
             dividend_defensive_context=dividend_defensive_context,
             building_materials_context=building_materials_context,
+            consumer_staples_context=consumer_staples_context,
+            optical_module_context=optical_module_context,
             biopharma_context=biopharma_context,
             software_context=software_context,
             insurance_context=insurance_context,
@@ -745,6 +780,8 @@ class TradingAgentsGraph:
         compute_leasing_context = contexts["compute_leasing_context"]
         dividend_defensive_context = contexts["dividend_defensive_context"]
         building_materials_context = contexts["building_materials_context"]
+        consumer_staples_context = contexts["consumer_staples_context"]
+        optical_module_context = contexts["optical_module_context"]
         biopharma_context = contexts["biopharma_context"]
         software_context = contexts["software_context"]
         insurance_context = contexts["insurance_context"]
@@ -770,6 +807,8 @@ class TradingAgentsGraph:
             compute_leasing_context=compute_leasing_context,
             dividend_defensive_context=dividend_defensive_context,
             building_materials_context=building_materials_context,
+            consumer_staples_context=consumer_staples_context,
+            optical_module_context=optical_module_context,
             biopharma_context=biopharma_context,
             software_context=software_context,
             insurance_context=insurance_context,
@@ -800,6 +839,8 @@ class TradingAgentsGraph:
             compute_leasing_context=compute_leasing_context,
             dividend_defensive_context=dividend_defensive_context,
             building_materials_context=building_materials_context,
+            consumer_staples_context=consumer_staples_context,
+            optical_module_context=optical_module_context,
             biopharma_context=biopharma_context,
             software_context=software_context,
             insurance_context=insurance_context,
@@ -908,6 +949,12 @@ class TradingAgentsGraph:
             ),
             "building_materials_context": final_state.get(
                 "building_materials_context", ""
+            ),
+            "consumer_staples_context": final_state.get(
+                "consumer_staples_context", ""
+            ),
+            "optical_module_context": final_state.get(
+                "optical_module_context", ""
             ),
             "biopharma_context": final_state.get(
                 "biopharma_context", ""

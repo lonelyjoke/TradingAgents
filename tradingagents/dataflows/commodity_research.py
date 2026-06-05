@@ -199,6 +199,16 @@ COMPANY_COMMODITY_MAP = {
         "products": [_metal_product("Aluminum")],
         "spread_note": "Use SHFE aluminum as the timely proxy; power cost, hydro availability, and alumina cost determine margin pass-through.",
     },
+    "603345.SH": {
+        "name": "Anjoy Foods",
+        "products": [
+            {"name": "Live hog futures", "type": "futures", "role": "meat raw-material cost proxy", "prefix": "LH", "exchange": "DCE", "selection": "near_month_with_main_reference"},
+            {"name": "Soybean meal futures", "type": "futures", "role": "feed and protein-chain cost proxy", "prefix": "M", "exchange": "DCE", "selection": "near_month_with_main_reference"},
+            {"name": "Corn futures", "type": "futures", "role": "feed and starch/flour-chain cost proxy", "prefix": "C", "exchange": "DCE", "selection": "near_month_with_main_reference"},
+            {"name": "Palm oil futures", "type": "futures", "role": "edible-oil cost proxy for prepared dishes", "prefix": "P", "exchange": "DCE", "selection": "near_month_with_main_reference"},
+        ],
+        "spread_note": "For frozen-food processors, these are cost proxies rather than realized input prices. Fish paste/surimi, poultry, flour, packaging, cold-chain and channel promotion still require filings, official data, or reputable industry checks before quantification.",
+    },
     "002460.SZ": {
         "name": "Ganfeng Lithium",
         "products": [_metal_product("Lithium carbonate")],
@@ -539,6 +549,12 @@ def _contract_month_key(ts_code: object) -> int | None:
     return (2000 + yy) * 100 + mm
 
 
+def _futures_root(ts_code: object) -> str:
+    code = str(ts_code or "").split(".")[0].upper()
+    match = re.match(r"^([A-Z]+)(?:\d{4})?$", code)
+    return match.group(1) if match else ""
+
+
 def _trade_month_key(trade_date: object, curr_date: str) -> int:
     raw = re.sub(r"\D", "", str(trade_date or ""))
     if len(raw) >= 6:
@@ -606,7 +622,7 @@ def _fetch_futures_product(product: dict, curr_date: str, look_back_days: int) -
     try:
         latest_board = _latest_futures_trade_date(curr_date, exchange)
         candidates = latest_board[
-            latest_board["ts_code"].fillna("").astype(str).str.upper().str.startswith(prefix)
+            latest_board["ts_code"].fillna("").astype(str).map(_futures_root) == prefix
         ].copy()
         if candidates.empty:
             raise TushareDataError(f"No {prefix} futures contract found on latest trade date.")
@@ -703,10 +719,8 @@ def _fetch_futures_receipt(ts_code: str, exchange: str, trade_date: str) -> str:
                 break
         if receipt is None or receipt.empty:
             return "N/A"
-        symbol = "".join([char for char in str(ts_code).split(".")[0] if char.isalpha()])
-        matches = receipt[
-            receipt["symbol"].fillna("").astype(str).str.upper().str.startswith(symbol.upper())
-        ]
+        symbol = _futures_root(ts_code)
+        matches = receipt[receipt["symbol"].fillna("").astype(str).map(_futures_root) == symbol]
         if matches.empty or "vol" not in matches.columns:
             return "N/A"
         total = pd.to_numeric(matches["vol"], errors="coerce").sum()

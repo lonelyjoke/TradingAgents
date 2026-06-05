@@ -92,6 +92,12 @@ from .dividend_defensive_research import (
 from .building_materials_research import (
     get_building_materials_context as get_tushare_building_materials_context,
 )
+from .consumer_staples_research import (
+    get_consumer_staples_context as get_tushare_consumer_staples_context,
+)
+from .optical_module_research import (
+    get_optical_module_context as get_tushare_optical_module_context,
+)
 from .biopharma_research import get_biopharma_context as get_tushare_biopharma_context
 from .software_research import get_software_context as get_tushare_software_context
 from .insurance_research import get_insurance_context as get_tushare_insurance_context
@@ -145,6 +151,8 @@ TOOLS_CATEGORIES = {
             "get_compute_leasing_context",
             "get_dividend_defensive_context",
             "get_building_materials_context",
+            "get_consumer_staples_context",
+            "get_optical_module_context",
             "get_biopharma_context",
             "get_software_context",
             "get_insurance_context",
@@ -270,6 +278,12 @@ VENDOR_METHODS = {
     "get_building_materials_context": {
         "tushare": get_tushare_building_materials_context,
     },
+    "get_consumer_staples_context": {
+        "tushare": get_tushare_consumer_staples_context,
+    },
+    "get_optical_module_context": {
+        "tushare": get_tushare_optical_module_context,
+    },
     "get_biopharma_context": {
         "tushare": get_tushare_biopharma_context,
     },
@@ -334,6 +348,8 @@ A_SHARE_TUSHARE_METHODS = {
     "get_compute_leasing_context",
     "get_dividend_defensive_context",
     "get_building_materials_context",
+    "get_consumer_staples_context",
+    "get_optical_module_context",
     "get_biopharma_context",
     "get_software_context",
     "get_insurance_context",

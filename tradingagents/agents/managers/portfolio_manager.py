@@ -19,6 +19,7 @@ from tradingagents.agents.utils.agent_utils import (
     get_buy_side_thesis_instruction,
     get_buy_side_underwriting_modules_instruction,
     get_compute_leasing_instruction,
+    get_consumer_staples_instruction,
     get_dividend_defensive_instruction,
     get_evidence_instruction,
     get_earnings_model_instruction,
@@ -28,6 +29,7 @@ from tradingagents.agents.utils.agent_utils import (
     get_insurance_instruction,
     get_medical_device_instruction,
     get_metals_mining_instruction,
+    get_optical_module_instruction,
     get_price_move_attribution_instruction,
     get_investor_interaction_instruction,
     get_language_instruction,
@@ -70,6 +72,7 @@ def create_portfolio_manager(llm):
             state["investment_plan"],
             label="investment_plan",
             profile="portfolio",
+            max_chars=11000,
         )
         trader_plan = compact_for_prompt(
             state["trader_investment_plan"],
@@ -96,6 +99,8 @@ def create_portfolio_manager(llm):
         compute_leasing_context = prompt_contexts["compute_leasing_context"]
         dividend_defensive_context = prompt_contexts["dividend_defensive_context"]
         building_materials_context = prompt_contexts["building_materials_context"]
+        consumer_staples_context = prompt_contexts["consumer_staples_context"]
+        optical_module_context = prompt_contexts["optical_module_context"]
         biopharma_context = prompt_contexts["biopharma_context"]
         software_context = prompt_contexts["software_context"]
         insurance_context = prompt_contexts["insurance_context"]
@@ -117,6 +122,7 @@ def create_portfolio_manager(llm):
                 investment_debate_state.get("judge_decision", research_plan),
                 label="investment_plan",
                 profile="portfolio",
+                max_chars=10000,
             )
             bull_bear_context = f"""
 **Research Team Bull-Bear Debate Context:**
@@ -253,6 +259,8 @@ def create_portfolio_manager(llm):
 - For A-share compute-leasing names, use the gated compute-leasing context only when it says `Status: triggered` or official evidence in the prompt independently proves the business. If it says `Status: not_applicable`, do not mention compute leasing as a valuation driver. When triggered, explicitly separate legacy business value, verified compute-leasing value, and unverified compute optionality; discuss asset ownership/delivery, customer contracts, unit economics, capex/funding, transition credibility, and falsification signals.
 - For defensive/high-dividend candidates, use the gated dividend defensive context only when it says `Status: triggered` or when other supplied evidence independently proves a stable dividend defensive thesis. Decide whether the target is a true defensive dividend asset, a dividend-trap risk, inferior to alternatives, or best used as one sleeve in a diversified defensive basket.
 - For building-materials candidates, use the gated building-materials context only when it says `Status: triggered` or when other supplied evidence independently proves a cement, waterproofing, glass/fiberglass, gypsum-board, pipe, coating, ceramic-tile, hardware, wood-panel, or adjacent building-materials business. Treat it as a discipline layer, not the whole memo: anchor first on company filings and management wording, then classify the industry stage and likely evolution path, then explain low-PB/high-dividend setups through asset value, product cycle, cash conversion, payout safety, and capital allocation. Add a dedicated **Building Materials Operating Cycle Verdict** only when it changes the rating, valuation, sizing, or action plan; otherwise integrate the relevant points into the business, valuation, or risk sections. Treat buybacks and dividends as shareholder-return, safety-margin, and controlling-shareholder-attitude evidence, not as the whole thesis.
+- For consumer-staples / food-beverage candidates, use the gated consumer-staples context only when it says `Status: triggered` or when other supplied evidence independently proves a food, beverage, dairy, meat, condiment, snack, frozen-food, or prepared-dish business. For Anjoy/frozen-food names, the PM memo must explicitly decide what Q1 strength means: Spring Festival seasonality, distributor restocking after destocking, lower input cost, product-mix improvement, prepared-dish ramp, or durable end-demand acceleration. Tie the rating to restaurant/household demand, channel sell-through, distributor inventory, contract liabilities or advance receipts, inventory/revenue, receivables, gross margin, raw-material cost proxies, promotion intensity, and food-safety risk. Do not write a generic "consumption recovery" or "cheap consumer leader" memo unless those variables support it.
+- For optical-module / AI datacom candidates, use the gated optical-module context only when it says `Status: triggered` or when other supplied evidence independently proves an optical-module, optical-component, optical-chip, or AI datacom hardware business. For Zhongji Innolight, Eoptolink, and similar names, the PM memo must explicitly decide whether growth is driven by 800G share gain, 1.6T ramp, overseas cloud customer orders, price/mix, exchange rate, capacity/yield, or temporary supply shortage. Tie the rating to hyperscaler AI capex, switch-speed upgrade, customer qualification, shipment mix, gross margin, inventory/revenue, receivables/revenue, operating cash flow, customer concentration, export/tariff risk, and CPO/LPO/silicon-photonics route risk. Do not write a generic "AI high-growth leader" memo unless those variables support it.
 - For software/SaaS candidates, use the gated software context only when it says `Status: triggered` or when other supplied evidence independently proves a software, SaaS, financial IT, cybersecurity, industrial software, AI software, or hardware-plus-service business. Classify the model before valuation. For SaaS/product-led names, require paid users, ARPU, renewal/churn, contract-liability conversion, and AI paid adoption before giving SaaS-like or AI-uplift valuation credit. For project-heavy software, require backlog, acceptance, receivables, and collection. Broad software-service peer baskets are not final relative-value proof.
 - For insurance candidates, use the gated insurance context only when it says `Status: triggered` or when other supplied evidence independently proves an insurance business. Write through insurance-native drivers: NBV, EV/P-EV, channel quality, solvency, investment yield versus liability cost, P&C COR, dividend capacity, and SOTP for bank/technology/asset-management subsidiaries. Do not let a bank subsidiary turn an integrated insurer into a pure bank memo.
 - For medical-device candidates, use the gated medical-device context only when it says `Status: triggered` or when other supplied evidence independently proves a medical equipment, IVD, reagent/consumables, or high-value device business. Write through device-native drivers: installed base, replacement cycle, tender/procurement cadence, reagent pull-through, VBP price-volume offset, registration, overseas channel quality, service attach rate, receivables, cash conversion, product mix, and gross-margin durability. Do not value the company like an innovative-drug pipeline unless it owns drug-like asset economics.
@@ -307,6 +315,8 @@ def create_portfolio_manager(llm):
 - Gated compute-leasing verification context: **{compute_leasing_context}**
 - Gated dividend defensive verification context: **{dividend_defensive_context}**
 - Gated building-materials verification context: **{building_materials_context}**
+- Gated consumer-staples verification context: **{consumer_staples_context}**
+- Gated AI optical-module verification context: **{optical_module_context}**
 - Gated biopharma verification context: **{biopharma_context}**
 - Gated software verification context: **{software_context}**
 - Gated insurance verification context: **{insurance_context}**
@@ -349,6 +359,8 @@ Be decisive and ground every conclusion in specific evidence from the analysts.
 {get_compute_leasing_instruction()}
 {get_dividend_defensive_instruction()}
 {get_building_materials_instruction()}
+{get_consumer_staples_instruction()}
+{get_optical_module_instruction()}
 {get_biopharma_instruction()}
 {get_software_instruction()}
 {get_fair_cycle_valuation_instruction()}

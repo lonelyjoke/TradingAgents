@@ -3,6 +3,7 @@ import pandas as pd
 from tradingagents.dataflows import thematic_research
 from tradingagents.dataflows.thematic_research import (
     ThemeCandidate,
+    _FINANCIAL_REPORT_TEXT_AUDIT_CACHE,
     _FINANCIAL_REPORT_TEXT_CACHE,
     _build_interaction_option_rows,
     _build_cross_source_validation_rows,
@@ -17,6 +18,7 @@ from tradingagents.dataflows.thematic_research import (
     _extract_reliable_filing_theme_candidates,
     _extract_reported_amount_cny,
     _filter_news_by_entity_terms,
+    _financial_report_text_audit_markdown,
     _news_has_catalyst,
     _portfolio_pattern_summary,
     _load_financial_report_texts,
@@ -439,6 +441,106 @@ def test_financial_report_text_loader_retries_cache_after_extract_miss(monkeypat
     assert attempts["cache"] == 2
     assert len(texts) == 1
     assert "铜、金" in texts[0][1]
+
+
+def test_financial_report_text_loader_tries_cninfo_after_primary_extract_miss(monkeypatch, tmp_path):
+    _FINANCIAL_REPORT_TEXT_CACHE.clear()
+    _FINANCIAL_REPORT_TEXT_AUDIT_CACHE.clear()
+    primary_reports = pd.DataFrame(
+        [
+            {
+                "ann_date": "20260429",
+                "title": "\u5b89\u4e95\u98df\u54c1\uff1a2026\u5e74\u7b2c\u4e00\u5b63\u5ea6\u62a5\u544a",
+                "url": "https://vendor.example.com/q1.pdf",
+            }
+        ]
+    )
+    cninfo_reports = pd.DataFrame(
+        [
+            {
+                "ann_date": "20260429",
+                "title": "\u5b89\u4e95\u98df\u54c1\uff1a2026\u5e74\u7b2c\u4e00\u5b63\u5ea6\u62a5\u544a",
+                "url": "http://static.cninfo.com.cn/finalpage/2026-04-29/q1.PDF",
+            }
+        ]
+    )
+    primary_pdf = tmp_path / "primary.pdf"
+    cninfo_pdf = tmp_path / "cninfo.pdf"
+    primary_pdf.write_bytes(b"%PDF-1.4")
+    cninfo_pdf.write_bytes(b"%PDF-1.4")
+
+    monkeypatch.setattr(
+        "tradingagents.dataflows.thematic_research._financial_report_announcements",
+        lambda *args: primary_reports,
+    )
+    monkeypatch.setattr(
+        "tradingagents.dataflows.thematic_research._cninfo_financial_report_announcements",
+        lambda *args: cninfo_reports,
+    )
+    monkeypatch.setattr(
+        "tradingagents.dataflows.thematic_research._download_disclosure",
+        lambda url: cninfo_pdf if "cninfo" in url else primary_pdf,
+    )
+    monkeypatch.setattr(
+        "tradingagents.dataflows.thematic_research._extract_pdf_text",
+        lambda path: (
+            "\u5b89\u4e95\u98df\u54c1\u4e3b\u8425\u901f\u51bb\u706b\u9505\u6599\u3001"
+            "\u901f\u51bb\u9762\u7c73\u5236\u54c1\u548c\u901f\u51bb\u83dc\u80b4\u5236\u54c1\u3002"
+            if path.name == "cninfo.pdf"
+            else ""
+        ),
+    )
+    monkeypatch.setattr(
+        thematic_research,
+        "_fetch_stock_basic",
+        lambda symbol: pd.Series({"name": "\u5b89\u4e95\u98df\u54c1"}),
+    )
+    monkeypatch.setattr(
+        "tradingagents.dataflows.thematic_research._load_cached_financial_report_texts",
+        lambda *args, **kwargs: (pd.DataFrame(), []),
+    )
+    monkeypatch.setattr(thematic_research.time, "sleep", lambda seconds: None)
+
+    reports, texts = _load_financial_report_texts("603345.SH", "2026-06-05")
+
+    assert reports.equals(cninfo_reports)
+    assert len(texts) == 1
+    assert "\u901f\u51bb\u706b\u9505\u6599" in texts[0][1]
+    audit = _financial_report_text_audit_markdown("603345.SH", "2026-06-05")
+    assert "primary_pdf_text_extraction" in audit
+    assert "cninfo_financial_report_retry" in audit
+    assert "cninfo_pdf_text_extraction" in audit
+    assert "final_text_bundle" in audit
+
+
+def test_financial_report_text_audit_records_total_text_failure(monkeypatch):
+    _FINANCIAL_REPORT_TEXT_CACHE.clear()
+    _FINANCIAL_REPORT_TEXT_AUDIT_CACHE.clear()
+
+    monkeypatch.setattr(
+        "tradingagents.dataflows.thematic_research._financial_report_announcements",
+        lambda *args: pd.DataFrame(),
+    )
+    monkeypatch.setattr(
+        "tradingagents.dataflows.thematic_research._load_cached_financial_report_texts",
+        lambda *args, **kwargs: (pd.DataFrame(), []),
+    )
+    monkeypatch.setattr(
+        thematic_research,
+        "_fetch_stock_basic",
+        lambda symbol: pd.Series({"name": "\u5b89\u4e95\u98df\u54c1"}),
+    )
+    monkeypatch.setattr(thematic_research.time, "sleep", lambda seconds: None)
+
+    reports, texts = _load_financial_report_texts("603345.SH", "2026-06-05")
+
+    assert reports.empty
+    assert texts == []
+    audit = _financial_report_text_audit_markdown("603345.SH", "2026-06-05")
+    assert "announcement_lookup" in audit
+    assert "local_text_cache" in audit
+    assert "final_text_bundle" in audit
+    assert "No readable filing narrative text available" in audit
 
 
 def test_short_investee_extractor_rejects_accounting_rows():

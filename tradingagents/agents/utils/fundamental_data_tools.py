@@ -120,6 +120,33 @@ def get_shipping_context(
 
 
 @tool
+def get_consumer_staples_context(
+    ticker: Annotated[str, "ticker symbol"],
+    curr_date: Annotated[str, "current date you are trading at, yyyy-mm-dd"],
+    look_back_days: Annotated[int, "financial report and consumer context look-back window in days"] = 900,
+) -> str:
+    """
+    Retrieve gated consumer-staples / food-beverage context for A-share companies,
+    including category-native demand, channel, inventory, cost, and macro evidence discipline.
+    """
+    return route_to_vendor("get_consumer_staples_context", ticker, curr_date, look_back_days)
+
+
+@tool
+def get_optical_module_context(
+    ticker: Annotated[str, "ticker symbol"],
+    curr_date: Annotated[str, "current date you are trading at, yyyy-mm-dd"],
+    look_back_days: Annotated[int, "financial report and optical-module context look-back window in days"] = 900,
+) -> str:
+    """
+    Retrieve gated AI optical-module / datacom hardware context for A-share
+    companies, including supply-chain role, AI capex bridge, high-speed module
+    migration, working-capital quality, customer concentration, and technology-route risk.
+    """
+    return route_to_vendor("get_optical_module_context", ticker, curr_date, look_back_days)
+
+
+@tool
 def get_peer_comparison(
     ticker: Annotated[str, "ticker symbol"],
     curr_date: Annotated[str, "current date you are trading at, yyyy-mm-dd"],

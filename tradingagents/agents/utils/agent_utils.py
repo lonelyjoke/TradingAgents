@@ -13,6 +13,7 @@ from tradingagents.agents.utils.fundamental_data_tools import (
     get_cashflow,
     get_commodity_context,
     get_compute_leasing_context,
+    get_consumer_staples_context,
     get_dividend_defensive_context,
     get_earnings_model_context,
     get_financial_report_intelligence_context,
@@ -20,6 +21,7 @@ from tradingagents.agents.utils.fundamental_data_tools import (
     get_insurance_context,
     get_medical_device_context,
     get_metals_mining_context,
+    get_optical_module_context,
     get_price_move_attribution_context,
     get_investor_interaction_context,
     get_policy_planning_context,
@@ -208,6 +210,60 @@ def get_dividend_defensive_instruction() -> str:
         "the target against them and state whether the entered ticker is the "
         "best defensive expression, should be paired for diversification, or "
         "should be substituted by a higher-quality/lower-risk peer."
+    )
+
+
+def get_consumer_staples_instruction() -> str:
+    """Return rules for gated A-share consumer staples / food-beverage analysis."""
+    return (
+        " Consumer-staples verification gate: only use food/beverage-specific "
+        "channel, category, raw-material, distributor, and consumption-macro logic "
+        "when the supplied consumer-staples context says `Status: triggered`, or "
+        "when official filings independently prove a food, beverage, dairy, meat, "
+        "condiment, frozen-food, prepared-dish, snack, or similar consumer-staples "
+        "business. When triggered, classify the category first: frozen prepared "
+        "food, meat processing, dairy, condiment, snacks, beverage, or general "
+        "consumer staples. Do not stop at static PE/PB, dividend yield, or generic "
+        "`consumption recovery`. Tie the thesis to the native variables: restaurant "
+        "traffic or household demand, channel sell-through, distributor inventory, "
+        "contract liabilities/advance receipts, inventory-to-revenue, receivables, "
+        "gross margin, promotion intensity, raw-material proxies, cold-chain or "
+        "logistics cost, product mix, and food-safety risk. For Anjoy/frozen-food "
+        "names, explicitly test whether strong Q1 results are Spring Festival "
+        "seasonality, distributor restocking after destocking, lower raw-material "
+        "costs, high-margin core-category mix, prepared-dish ramp, or durable "
+        "end-demand acceleration. Missing restaurant traffic, channel inventory, "
+        "surimi/poultry/flour/oil cost, segment margin, or prepared-dish sell-"
+        "through evidence is a research gap that caps conviction, not permission "
+        "to write a generic consumer-stock thesis."
+    )
+
+
+def get_optical_module_instruction() -> str:
+    """Return rules for gated A-share AI optical-module / datacom hardware analysis."""
+    return (
+        " AI optical-module gate: only use optical-module, AI datacom, 800G/1.6T, "
+        "CPO/LPO, silicon-photonics, or hyperscaler-capex logic when the supplied "
+        "optical-module context says `Status: triggered`, or when official filings "
+        "independently prove an optical-communication / AI datacom hardware business. "
+        "When triggered, start from supply-chain position rather than generic "
+        "high-growth technology labeling: module integrator, optical component, "
+        "connector, optical chip, telecom/device supplier, or technology-route "
+        "optionality. Bridge downstream AI capex into company revenue through "
+        "GPU/ASIC cluster buildout, switch upgrade, 400G/800G/1.6T migration, "
+        "customer qualification, capacity, yield, shipment mix, and pricing. "
+        "For Zhongji Innolight, Eoptolink, and similar names, explicitly test "
+        "whether growth comes from 800G share gain, 1.6T ramp, overseas cloud "
+        "orders, product mix, exchange rate, or temporary supply tightness. "
+        "Revenue acceleration is investable only when gross margin, inventory/"
+        "revenue, receivables/revenue, operating cash flow, customer concentration, "
+        "and overseas exposure form a coherent delivery story. Missing customer, "
+        "order, ASP, shipment, capacity, qualification, or 1.6T roadmap evidence "
+        "is a research gap that caps conviction. Treat CPO/LPO/silicon photonics, "
+        "export controls, tariffs, customer concentration, price erosion, and "
+        "technology-route substitution as thesis-critical risks. Valuation must "
+        "separate base-case earnings already implied by the current multiple from "
+        "scenario value tied to future AI capex and technology optionality."
     )
 
 
