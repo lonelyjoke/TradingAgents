@@ -2094,6 +2094,10 @@ _BUSINESS_MODEL_HEADER_ONLY_TERMS: tuple[str, ...] = (
     "分地区",
     "主营业务分析",
     "公司业务概要",
+    "占公司营业收入或营业利润 10%以上的行业、产品、地区、销售模式的情况",
+    "占公司营业收入或营业利润10%以上的行业、产品、地区、销售模式的情况",
+    "营业收入、营业成本的分解信息",
+    "合同分类",
 )
 
 _BUSINESS_MODEL_NOISE_TERMS: tuple[str, ...] = (
@@ -2108,6 +2112,10 @@ _BUSINESS_MODEL_NOISE_TERMS: tuple[str, ...] = (
     "其他非流动金融资产",
     "交易性金融资产",
     "衍生金融工具",
+    "占公司营业收入或营业利润 10%以上",
+    "占公司营业收入或营业利润10%以上",
+    "营业收入、营业成本的分解信息",
+    "合同分类",
 )
 
 
@@ -3529,6 +3537,30 @@ _BUSINESS_ARCHETYPE_RULES: tuple[dict[str, object], ...] = (
             "迭代",
             "新产品",
         ),
+        "required_keywords": (
+            "研发",
+            "技术",
+            "专利",
+            "芯片",
+            "模块",
+            "800G",
+            "1.6T",
+            "客户认证",
+            "迭代",
+            "新产品",
+        ),
+        "min_required_hits": 1,
+        "noise_terms": (
+            "非主营业务分析",
+            "应收账款",
+            "存货",
+            "合同负债",
+            "形成原因",
+            "资产规模",
+            "重大减值",
+            "主要会计数据和财务指标",
+            "营业收入、营业成本的分解信息",
+        ),
         "question": "这家公司是靠技术迭代、客户认证和产品升级驱动增长，还是只是行业景气里的产能/出货扩张？研发投入如何转化为ASP、份额、毛利率和客户粘性？",
         "focus": "重点验证产品代际、客户认证、研发转化率、ASP/毛利率、供应链瓶颈、资本开支和库存风险。",
         "bull": "当新产品已通过客户认证、出货放量、毛利率/ASP或份额改善时，支持高增长技术股的盈利弹性。",
@@ -3598,6 +3630,29 @@ _BUSINESS_ARCHETYPE_RULES: tuple[dict[str, object], ...] = (
             "回款",
             "应收账款",
             "合同资产",
+        ),
+        "required_keywords": (
+            "在手订单",
+            "招投标",
+            "交付",
+            "验收",
+            "工程",
+            "EPC",
+            "合同资产",
+        ),
+        "min_required_hits": 1,
+        "noise_terms": (
+            "合同分类",
+            "营业收入、营业成本的分解信息",
+            "占公司营业收入或营业利润",
+            "主营业务",
+            "其他业务",
+            "主要会计数据和财务指标",
+            "货币资金",
+            "交易性金融资产",
+            "销售回款",
+            "单位：元",
+            "变动原因",
         ),
         "question": "订单和项目储备能否转化为收入、毛利和现金？交付、验收、回款周期是否会吞噬利润质量？",
         "focus": "验证订单质量、交付节奏、验收确认、毛利率、应收/合同资产和现金回款。",
@@ -3743,7 +3798,11 @@ def _infer_company_business_archetypes(
 ) -> list[CompanyBusinessArchetype]:
     """Infer company-level operating archetypes from filings, not only industry labels."""
 
-    evidence_sources: list[str] = [company_name, vendor_industry, profile]
+    evidence_sources: list[tuple[int, str]] = [
+        (1, company_name),
+        (1, vendor_industry),
+        (1, profile),
+    ]
     for collection, attr in (
         (business_model_map, "evidence"),
         (segment_economics, "evidence"),
@@ -3755,17 +3814,22 @@ def _infer_company_business_archetypes(
         for row in collection:
             value = str(getattr(row, attr, "") or "")
             if value:
-                evidence_sources.append(value)
+                evidence_sources.append((4, value))
     for title, text in report_texts:
         if _detect_report_type(title) in {"annual", "semiannual"}:
-            evidence_sources.append(f"{title}: {str(text or '')[:6000]}")
+            evidence_sources.append((2, f"{title}: {str(text or '')[:6000]}"))
 
-    blob = "\n".join(evidence_sources)
+    blob = "\n".join(source for _, source in evidence_sources)
     scored: list[tuple[int, CompanyBusinessArchetype]] = []
     for rule in _BUSINESS_ARCHETYPE_RULES:
         keywords = tuple(str(item) for item in rule["keywords"])
         hits = [keyword for keyword in keywords if keyword and keyword in blob]
         if not hits:
+            continue
+        required_keywords = tuple(str(item) for item in rule.get("required_keywords", ()))
+        min_required_hits = int(rule.get("min_required_hits", 1))
+        required_hit_count = sum(1 for keyword in required_keywords if keyword in blob)
+        if required_keywords and required_hit_count < min_required_hits:
             continue
         score = len(hits)
         if profile == rule["archetype_id"]:
@@ -3778,11 +3842,34 @@ def _infer_company_business_archetypes(
             token in vendor_industry for token in ("食品", "饮料", "家电", "服饰", "零售", "消费")
         ):
             score += 2
-        evidence = ""
-        for source in evidence_sources:
-            if any(keyword in source for keyword in hits):
-                evidence = _compact_text(source, 260)
-                break
+        noise_terms = tuple(str(item) for item in rule.get("noise_terms", ()))
+        evidence_candidates: list[tuple[int, int, str]] = []
+        for source_priority, source in evidence_sources:
+            if not any(keyword in source for keyword in hits):
+                continue
+            if noise_terms and any(term in source for term in noise_terms):
+                continue
+            source_hits = sum(1 for keyword in hits if keyword in source)
+            source_required_hits = sum(1 for keyword in required_keywords if keyword in source)
+            if required_keywords and source_required_hits < min_required_hits:
+                continue
+            evidence_candidates.append((source_priority, source_hits + source_required_hits, source))
+        if not evidence_candidates and noise_terms:
+            for source_priority, source in evidence_sources:
+                if any(keyword in source for keyword in hits) and not any(term in source for term in noise_terms):
+                    source_hits = sum(1 for keyword in hits if keyword in source)
+                    evidence_candidates.append((source_priority, source_hits, source))
+        if not evidence_candidates:
+            if required_keywords or noise_terms:
+                continue
+            for source_priority, source in evidence_sources:
+                if any(keyword in source for keyword in hits):
+                    source_hits = sum(1 for keyword in hits if keyword in source)
+                    evidence_candidates.append((source_priority, source_hits, source))
+        if not evidence_candidates:
+            continue
+        _, _, evidence_source = max(evidence_candidates, key=lambda item: (item[0], item[1], len(item[2])))
+        evidence = _compact_text(evidence_source, 260)
         scored.append(
             (
                 score,
