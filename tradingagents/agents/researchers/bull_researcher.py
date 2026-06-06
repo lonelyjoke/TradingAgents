@@ -54,6 +54,7 @@ def create_bull_researcher(llm):
         prompt_contexts = compact_state_fields(state, profile="research")
         thematic_catalyst_context = prompt_contexts["thematic_catalyst_context"]
         commodity_context = prompt_contexts["commodity_context"]
+        relative_strength_context = prompt_contexts["relative_strength_context"]
         shipping_context = prompt_contexts["shipping_context"]
         filing_intelligence_context = prompt_contexts["filing_intelligence_context"]
         peer_comparison_context = prompt_contexts["peer_comparison_context"]
@@ -112,8 +113,10 @@ Key points to focus on:
 - Policy-Planning Discipline: If official national or industry policy context is available, explain whether policy widens the industry's future demand pool, whether this company has a credible transmission path into orders/revenue/margins, and whether policy support improves the durability of the bull case rather than merely adding slogans.
 - Commodity/Product-Price Discipline: If commodity/product-price context is available, use it as a hard cycle variable. Explain whether product prices, spreads, or futures proxies support ASP, margin, inventory, and cash-flow improvement; do not substitute thematic news for commodity evidence.
 - Shipping/Freight-Rate Discipline: If shipping context is available, use it as the hard freight-cycle layer. Separate broad proxies (BDTI/BCTI/BDI) from route-level rates (VLCC TD3C/TCE/CTFI), and test whether Hormuz reopening creates a bullish restocking/ton-mile/cargo-flow expectation rather than only reducing risk premium.
+- Relative-Strength Discipline: If relative-strength/index-linkage context is available, use it as market-validation evidence. A bull case is stronger when the stock outperforms its style index or same-industry basket for company-specific reasons; if outperformance is highly correlated with the benchmark, admit that sector beta may explain part of the move.
 - Industry-Driver Discipline: Use the industry reading pack from the filing context to identify the sector-native variables that truly decide the thesis, then connect each one to outside evidence such as policy, investor Q&A, thematic catalysts, peers, and market expectations. Do not lean on generic revenue growth when the real industry question is backlog quality, NBV, channel inventory, asset quality, utilization, or freight rate.
 - Business-Segment Valuation Discipline: Use the Business Segment Valuation Map and Segment Economics Pack to argue from business buckets, not only from consolidated PE. Separate the mature core business from emerging second curves, geography, and channel mix; explain which bucket deserves core valuation credit and which remains scenario/SOTP optionality.
+- Growth Sustainability Discipline: If the financial-report intelligence contains Growth Sustainability & Ramp Conditions, build the bull case around the specific revenue/profit drivers that can keep compounding or ramp further. State which drivers are filing-verified, which are inferred, what conditions must hold, and what evidence would invalidate the bull case.
 - Pre-Debate Underwriting Questions: If the financial-report intelligence contains this section, use it as the agenda for the opening bull case. Answer the company-specific questions on business model, moat, growth driver, second curve, cash quality, segment valuation, and risks before adding broader sector arguments.
 - Relative Allocation Discipline: Explicitly answer why this stock deserves capital versus stronger same-industry peers or a better-positioned segment elsewhere in the chain; do not stop at saying the company itself is improving.
 - Market-Implied Expectation Discipline: State what the current quote already appears to assume, then identify the precise assumption the market is still too pessimistic about.
@@ -140,6 +143,7 @@ Latest world affairs news: {news_report}
 Company fundamentals report: {fundamentals_report}
 Thematic catalyst cross-check and valuation bridge: {thematic_catalyst_context}
 Commodity/product-price context: {commodity_context}
+Relative-strength / index-linkage context: {relative_strength_context}
 Shipping/freight-rate context: {shipping_context}
 Financial-report intelligence: {filing_intelligence_context}
 Same-industry peer comparison: {peer_comparison_context}

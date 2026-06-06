@@ -62,6 +62,7 @@ from tradingagents.agents.utils.agent_utils import (
     get_market_sector_risk,
     get_market_expectation_context,
     get_market_timing_context,
+    get_relative_strength_context,
     get_management_capital_allocation_context,
     get_price_move_attribution_context,
     get_baijiu_context,
@@ -92,6 +93,7 @@ def _build_precomputed_data_coverage(
     thematic_catalyst_context: str,
     commodity_context: str,
     price_move_attribution_context: str,
+    relative_strength_context: str,
     shipping_context: str,
     filing_intelligence_context: str,
     peer_comparison_context: str,
@@ -121,6 +123,7 @@ def _build_precomputed_data_coverage(
             "thematic_catalyst": thematic_catalyst_context,
             "commodity_product_price": commodity_context,
             "price_move_attribution": price_move_attribution_context,
+            "relative_strength": relative_strength_context,
             "shipping_cycle": shipping_context,
             "financial_report_intelligence": filing_intelligence_context,
             "peer_comparison": peer_comparison_context,
@@ -159,6 +162,11 @@ _A_SHARE_CONTEXT_SPECS = [
         "price_move_attribution_context",
         "get_price_move_attribution_context",
         "Price-move attribution context",
+    ),
+    (
+        "relative_strength_context",
+        "get_relative_strength_context",
+        "Relative strength / index linkage context",
     ),
     ("shipping_context", "get_shipping_context", "Shipping/freight-rate context"),
     (
@@ -420,6 +428,7 @@ class TradingAgentsGraph:
                     get_income_statement,
                     get_commodity_context,
                     get_price_move_attribution_context,
+                    get_relative_strength_context,
                     get_shipping_context,
                     get_peer_comparison,
                     get_supply_chain_comparison,
@@ -667,6 +676,7 @@ class TradingAgentsGraph:
         thematic_catalyst_context = contexts["thematic_catalyst_context"]
         commodity_context = contexts["commodity_context"]
         price_move_attribution_context = contexts["price_move_attribution_context"]
+        relative_strength_context = contexts["relative_strength_context"]
         shipping_context = contexts["shipping_context"]
         filing_intelligence_context = contexts["filing_intelligence_context"]
         peer_comparison_context = contexts["peer_comparison_context"]
@@ -694,6 +704,7 @@ class TradingAgentsGraph:
             thematic_catalyst_context=thematic_catalyst_context,
             commodity_context=commodity_context,
             price_move_attribution_context=price_move_attribution_context,
+            relative_strength_context=relative_strength_context,
             shipping_context=shipping_context,
             filing_intelligence_context=filing_intelligence_context,
             peer_comparison_context=peer_comparison_context,
@@ -726,6 +737,7 @@ class TradingAgentsGraph:
             thematic_catalyst_context=thematic_catalyst_context,
             commodity_context=commodity_context,
             price_move_attribution_context=price_move_attribution_context,
+            relative_strength_context=relative_strength_context,
             shipping_context=shipping_context,
             filing_intelligence_context=filing_intelligence_context,
             peer_comparison_context=peer_comparison_context,
@@ -764,6 +776,7 @@ class TradingAgentsGraph:
         thematic_catalyst_context = contexts["thematic_catalyst_context"]
         commodity_context = contexts["commodity_context"]
         price_move_attribution_context = contexts["price_move_attribution_context"]
+        relative_strength_context = contexts["relative_strength_context"]
         shipping_context = contexts["shipping_context"]
         filing_intelligence_context = contexts["filing_intelligence_context"]
         peer_comparison_context = contexts["peer_comparison_context"]
@@ -791,6 +804,7 @@ class TradingAgentsGraph:
             thematic_catalyst_context=thematic_catalyst_context,
             commodity_context=commodity_context,
             price_move_attribution_context=price_move_attribution_context,
+            relative_strength_context=relative_strength_context,
             shipping_context=shipping_context,
             filing_intelligence_context=filing_intelligence_context,
             peer_comparison_context=peer_comparison_context,
@@ -823,6 +837,7 @@ class TradingAgentsGraph:
             thematic_catalyst_context=thematic_catalyst_context,
             commodity_context=commodity_context,
             price_move_attribution_context=price_move_attribution_context,
+            relative_strength_context=relative_strength_context,
             shipping_context=shipping_context,
             filing_intelligence_context=filing_intelligence_context,
             peer_comparison_context=peer_comparison_context,
@@ -901,6 +916,9 @@ class TradingAgentsGraph:
             ),
             "price_move_attribution_context": final_state.get(
                 "price_move_attribution_context", ""
+            ),
+            "relative_strength_context": final_state.get(
+                "relative_strength_context", ""
             ),
             "shipping_context": final_state.get(
                 "shipping_context", ""

@@ -1,3 +1,5 @@
+import pandas as pd
+
 from tradingagents.dataflows.filing_research import (
     BusinessModelFinding,
     FilingCoverageAudit,
@@ -9,6 +11,7 @@ from tradingagents.dataflows.filing_research import (
     _answer_questions,
     _build_business_segment_valuation_map,
     _build_business_model_map,
+    _build_growth_sustainability_map,
     _build_pre_debate_underwriting_questions,
     _build_paragraph_reading_pack,
     _build_industry_reading_pack,
@@ -23,12 +26,14 @@ from tradingagents.dataflows.filing_research import (
     _extract_note_findings,
     _extract_statement_table_signals,
     _extract_textual_filing_signals,
+    _filter_question_memory_for_profile,
     _distill_filing_insights,
     _infer_financial_relations,
     _infer_company_business_archetypes,
     _promote_core_discussion_items,
     _question_candidates,
     _select_industry_profile,
+    _structured_balance_sheet_rows,
 )
 
 
@@ -131,6 +136,12 @@ def test_industry_playbook_selects_new_priority_profiles():
             "公司以市场经营、商位租赁、Chinagoods、义支付和跨境电商服务为核心。",
             "market_operator",
         ),
+        (
+            "中国中免",
+            "旅游服务",
+            "公司经营离岛免税、机场免税、口岸免税和旅游零售业务，披露客流、会员、DFS整合和销售收入。",
+            "travel_retail",
+        ),
     ]
 
     for company_name, industry, report_text, expected in cases:
@@ -162,6 +173,71 @@ def test_question_candidates_include_new_priority_playbooks():
     assert any(q.question_id == "grid_segment_margin" for q in _question_candidates("smart_grid_automation"))
     assert any(q.question_id == "market_online_disruption" for q in _question_candidates("market_operator"))
     assert any(q.question_id == "market_second_curve" for q in _question_candidates("market_operator"))
+    assert any(q.question_id == "travel_retail_revenue_engine" for q in _question_candidates("travel_retail"))
+    assert any(q.question_id == "travel_retail_demand_visibility" for q in _question_candidates("travel_retail"))
+
+
+def test_travel_retail_profile_beats_incidental_insurance_mentions():
+    reports = [
+        (
+            "2025年年度报告",
+            "公司主营离岛免税、口岸免税、旅游零售和线上会员服务。风险章节提及财产保险、责任保险和风险管理安排。",
+        )
+    ]
+
+    profile = _select_industry_profile("中国中免", "旅游服务", reports)
+    questions = _question_candidates(profile)
+
+    assert profile == "travel_retail"
+    assert any(q.question_id == "travel_retail_margin_mix" for q in questions)
+    assert not any(q.question_id == "insurance_nbv" for q in questions)
+
+
+def test_structured_balance_sheet_rows_expose_contract_liability_history():
+    balance = pd.DataFrame(
+        [
+            {
+                "ann_date": "20260429",
+                "end_date": "20260331",
+                "contract_liab": 1_200_000_000,
+                "adv_receipts": 300_000_000,
+                "inventories": 4_000_000_000,
+                "accounts_receiv": 500_000_000,
+                "money_cap": 2_000_000_000,
+                "total_liab": 5_000_000_000,
+                "total_assets": 10_000_000_000,
+            },
+            {
+                "ann_date": "20250331",
+                "end_date": "20251231",
+                "contract_liab": 900_000_000,
+                "adv_receipts": 200_000_000,
+                "inventories": 3_600_000_000,
+                "accounts_receiv": 450_000_000,
+                "money_cap": 1_800_000_000,
+                "total_liab": 4_800_000_000,
+                "total_assets": 9_600_000_000,
+            },
+            {
+                "ann_date": "20250429",
+                "end_date": "20250331",
+                "contract_liab": 1_000_000_000,
+                "adv_receipts": 100_000_000,
+                "inventories": 3_200_000_000,
+                "accounts_receiv": 420_000_000,
+                "money_cap": 1_700_000_000,
+                "total_liab": 4_400_000_000,
+                "total_assets": 8_800_000_000,
+            },
+        ]
+    )
+
+    rows = _structured_balance_sheet_rows(balance)
+
+    assert rows[0]["end_date"] == "20260331"
+    assert rows[0]["contract_plus_adv"] == "15.00亿元"
+    assert rows[0]["yoy_change"] == "+4.00亿元 (+36.4%)"
+    assert "forward demand/liability signal available" in rows[0]["analyst_read"]
 
 
 def test_market_operator_pre_debate_questions_cover_business_model_and_online_shift():
@@ -219,6 +295,117 @@ def test_market_operator_pre_debate_questions_cover_business_model_and_online_sh
     assert "pre_debate_growth_driver" in by_id
     assert "pre_debate_cash_quality" in by_id
     assert "Chinagoods" in by_id["pre_debate_online_disruption"].preliminary_answer
+
+
+def test_market_operator_archetype_avoids_high_r_and_d_from_digital_language():
+    reports = [
+        (
+            "2025年年度报告",
+            "\n".join(
+                [
+                    "公司以市场经营、商位租赁、Chinagoods、义支付和跨境电商服务为核心。",
+                    "公司持续推进数字贸易和信息技术建设，以提升商户服务能力和线上线下融合。",
+                    "核心竞争力来自义乌市场商户集聚、物流配套、会展服务和供应链生态。",
+                ]
+            ),
+        )
+    ]
+    rows = _infer_company_business_archetypes(
+        company_name="小商品城",
+        profile="market_operator",
+        vendor_industry="商业百货",
+        report_texts=reports,
+        business_model_map=_build_business_model_map(reports),
+        growth_vectors=_extract_growth_vectors(reports),
+        paragraph_reading_pack=_build_paragraph_reading_pack(reports),
+    )
+    archetype_ids = {row.archetype_id for row in rows}
+
+    assert "market_operator" in archetype_ids
+    assert "high_r_and_d_technology" not in archetype_ids
+
+
+def test_question_memory_filters_stale_profile_questions():
+    memory = {
+        "profile": "baijiu",
+        "questions": {
+            "generic_revenue_quality": {
+                "question": "收入增长是否真实？",
+                "category": "revenue_quality",
+                "times_seen": 2,
+                "profile": "generic",
+            },
+            "baijiu_channel_inventory": {
+                "question": "批价和渠道库存如何？",
+                "category": "channel",
+                "times_seen": 3,
+                "profile": "baijiu",
+            },
+            "market_online_disruption": {
+                "question": "线上是否颠覆线下？",
+                "category": "channel_shift",
+                "times_seen": 1,
+                "profile": "market_operator",
+            },
+        },
+    }
+
+    filtered = _filter_question_memory_for_profile(memory, "market_operator")
+
+    assert "generic_revenue_quality" in filtered["questions"]
+    assert "market_online_disruption" in filtered["questions"]
+    assert "baijiu_channel_inventory" not in filtered["questions"]
+    assert filtered["profile"] == "market_operator"
+    assert filtered["previous_profiles"] == ["baijiu"]
+
+
+def test_growth_sustainability_map_builds_pm_ramp_and_falsification_rows():
+    business_model = [
+        BusinessModelFinding(
+            lens="core_revenue_engine",
+            report_type="annual",
+            evidence="公司主营业务为市场经营和商位租赁，市场经营服务收入保持增长。",
+            why_it_matters="Core engine.",
+        )
+    ]
+    growth = [
+        GrowthVectorFinding(
+            vector="digital-trade-platform",
+            stage="monetized",
+            evidence="公司推进Chinagoods、义支付和跨境电商服务，平台服务收入增长。",
+            valuation_treatment="Core if disclosed revenue and margin keep improving.",
+            verification_need="Verify platform revenue, paying merchants, margin and cash conversion.",
+        )
+    ]
+    relations = [
+        FinancialRelationInsight(
+            relation_type="cash_absorbing_growth",
+            importance="core",
+            evidence="营业收入增长但经营活动现金流净额下降，应收账款增加。",
+            investment_read="growth needs cash-quality verification.",
+            bull_use="Only if cash normalizes.",
+            bear_use="Use as quality challenge.",
+        )
+    ]
+
+    rows = _build_growth_sustainability_map(
+        business_model_map=business_model,
+        segment_economics=[],
+        business_segment_valuation_map=[],
+        growth_vectors=growth,
+        answers=[],
+        statement_table_signals=[],
+        financial_relations=relations,
+        paragraph_reading_pack=[],
+        industry_reading_pack=[],
+        business_archetypes=[],
+    )
+    by_source = {row.growth_source: row for row in rows}
+
+    assert "core_revenue_and_profit_engine" in by_source
+    assert "growth_vector_digital-trade-platform" in by_source
+    assert "cash_absorbing_growth" in by_source["core_revenue_and_profit_engine"].sustainability_read
+    assert "falsify" in by_source["growth_vector_digital-trade-platform"].falsification_signals
 
 
 

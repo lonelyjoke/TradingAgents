@@ -710,6 +710,7 @@ def save_report_to_disk(final_state, ticker: str, save_path: Path):
     """Save complete analysis report to disk with organized subfolders."""
     save_path.mkdir(parents=True, exist_ok=True)
     sections = []
+    pm_section = None
 
     # 0. Precomputed context
     if final_state.get("data_coverage_context"):
@@ -717,6 +718,20 @@ def save_report_to_disk(final_state, ticker: str, save_path: Path):
         context_dir.mkdir(exist_ok=True)
         (context_dir / "data_coverage.md").write_text(
             final_state["data_coverage_context"],
+            encoding="utf-8",
+        )
+    if final_state.get("relative_strength_context"):
+        context_dir = save_path / "0_context"
+        context_dir.mkdir(exist_ok=True)
+        (context_dir / "relative_strength.md").write_text(
+            final_state["relative_strength_context"],
+            encoding="utf-8",
+        )
+    if final_state.get("price_move_attribution_context"):
+        context_dir = save_path / "0_context"
+        context_dir.mkdir(exist_ok=True)
+        (context_dir / "price_move_attribution.md").write_text(
+            final_state["price_move_attribution_context"],
             encoding="utf-8",
         )
     if final_state.get("thematic_catalyst_context"):
@@ -972,11 +987,21 @@ def save_report_to_disk(final_state, ticker: str, save_path: Path):
             portfolio_dir = save_path / "5_portfolio"
             portfolio_dir.mkdir(exist_ok=True)
             (portfolio_dir / "decision.md").write_text(risk["judge_decision"], encoding="utf-8")
-            sections.append(f"## V. Portfolio Manager Decision\n\n### Portfolio Manager\n{risk['judge_decision']}")
+            pm_section = f"## Portfolio Manager Decision\n\n### Portfolio Manager\n{risk['judge_decision']}"
 
     # Write consolidated report
     header = f"# Trading Analysis Report: {ticker}\n\nGenerated: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n"
-    (save_path / "complete_report.md").write_text(header + "\n\n".join(sections), encoding="utf-8")
+    complete_sections = []
+    if pm_section:
+        complete_sections.append(pm_section)
+    if sections:
+        appendix_heading = (
+            "## Appendix: Upstream Research and Debate\n\n"
+            "The final PM decision above is the primary report. The sections below preserve "
+            "raw analyst, debate, trading, and risk-manager materials for audit and replay."
+        )
+        complete_sections.append(appendix_heading + "\n\n" + "\n\n".join(sections))
+    (save_path / "complete_report.md").write_text(header + "\n\n".join(complete_sections), encoding="utf-8")
     return save_path / "complete_report.md"
 
 

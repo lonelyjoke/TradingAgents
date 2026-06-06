@@ -65,6 +65,7 @@ def create_research_manager(llm):
         thematic_catalyst_context = prompt_contexts["thematic_catalyst_context"]
         commodity_context = prompt_contexts["commodity_context"]
         price_move_attribution_context = prompt_contexts["price_move_attribution_context"]
+        relative_strength_context = prompt_contexts["relative_strength_context"]
         shipping_context = prompt_contexts["shipping_context"]
         filing_intelligence_context = prompt_contexts["filing_intelligence_context"]
         peer_comparison_context = prompt_contexts["peer_comparison_context"]
@@ -171,11 +172,13 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 - If historical price/EPS/PE decomposition context is available, keep the valuation-cycle verdict explicit enough to say whether the current price is supported by earnings improvement, multiple expansion, both, or neither.
 - Preserve a concise standalone **Safety Price / Defensive Build Anchor** when financial state supports it; when writing Chinese, title it `## 安全价格区间 / 防御性建仓锚`. For value stocks, blue chips, banks, defensive dividend names, and mature cash-flow compounders, anchor it in normalized low-cycle EPS or FCF, sustainable dividend yield, book value/PB and ROE, cash conversion, leverage or net cash, asset quality, payout capacity, and peer/historical valuation floors. For commodity/resource/cyclical names, anchor it in cycle-trough or stress-case earnings, conservative product prices, unit-cost resilience, balance-sheet survival, maintenance capex, and normalized PE/PB floors. Include only the practical anchor: price band, valuation bridge, business conditions that must remain true, slow-build plan, and deterioration that invalidates it. Prefer one short paragraph or a compact 3-4 row table, not a second valuation essay. If the company is structurally impaired, highly leveraged, deeply cyclical without survivable trough economics, or evidence-thin, still keep the section and say no reliable safety price can be assigned.
 - If industry-specific filing context is available, keep an **Industry Driver Verdict** explicit enough to preserve the real sector-native variables that decide the thesis.
+- If the filing context contains **Growth Sustainability & Ramp Conditions**, keep a **Growth Sustainability Verdict** explicit enough to judge whether revenue/profit growth can continue or ramp further. Require the debate to separate verified drivers, inferred drivers, needed ramp conditions, and falsification signals before accepting any Buy/Underweight conclusion.
 - If the filing context contains **Pre-Debate Underwriting Questions**, use them as the judging agenda. Decide which side better answered the company-specific business-model, moat, growth-driver, second-curve, cash-quality, segment-valuation, and risk questions. Do not let the final plan ignore an unanswered pre-debate question that is central to the rating.
 - If the filing context contains a Business Segment Valuation Map or Segment Economics Pack, keep a **Business Segment Valuation Verdict** explicit enough to split mature core businesses from emerging second curves, geographies, and channels. Do not allow the debate to collapse a multi-business company into one blended PE unless the filings do not support a meaningful split.
 - If the filing context contains Internal Filing Quality Modules, keep a **Filing Internal Quality Verdict** explicit enough to summarize accounting reconciliation, segment economics, footnotes, cash-flow quality, capex/CIP returns, MD&A text changes, non-recurring profit quality, balance-sheet leading signals, shareholder-return authenticity, and disclosure quality. Synthesize the material points; do not mechanically repeat all ten if some are immaterial.
 - If commodity/product-price context is available, keep a **Commodity Cycle Verdict** explicit enough to say whether the product-price evidence supports or contradicts the margin/EPS/inventory part of the thesis.
 - If price-move attribution context is available, keep a **Sharp Move Attribution Verdict** explicit enough to say whether a recent move is market-led, same-metal sector-led, cross-metal residual, mapped-commodity-led, stock-specific, failed-rebound/trend continuation, or possible emotion kill. Do not call a drop mispriced until valuation/NAV support and event checks pass.
+- If relative-strength/index-linkage context is available, keep a **Relative Strength Verdict** explicit enough to decide whether the stock is stronger or weaker than its style index and same-industry basket, whether correlation/Beta suggest benchmark beta or company alpha, and how that changes timing, sizing, and thesis validation.
 - If shipping/freight-rate context is available, keep a **Shipping Cycle Verdict** explicit enough to separate broad proxies (BDTI/BCTI/BDI/BCI/BPI) from route-level economics (VLCC TD3C/TCE/CTFI), and explicitly test two-sided Hormuz mechanisms: reopening can reduce risk premium and improve vessel turnover, while restocking, queue normalization, and renewed cargo flows can support near-term cargo demand. Missing route-level freight is a conviction cap, not automatically bearish evidence.
 - If gated baijiu context says `Status: triggered`, keep a **Baijiu Channel Verification Verdict** explicit enough to separate product wholesale price evidence, channel inventory/payment quality, contract-liability seasonality, product mix, peer-basket comparison, and missing data. If it says `Status: not_applicable`, do not force baijiu analysis into the stock.
 - If gated compute-leasing context says `Status: triggered`, keep a **Compute-Leasing Verification Verdict** explicit enough to separate legacy value, verified compute-leasing value, unverified compute optionality, unit-economics gaps, capex/funding risk, and transition credibility. If it says `Status: not_applicable`, do not force compute-leasing analysis into the stock.
@@ -204,6 +207,9 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 
 **Price-Move Attribution Context:**
 {price_move_attribution_context}
+
+**Relative-Strength / Index-Linkage Context:**
+{relative_strength_context}
 
 **Shipping/Freight-Rate Context:**
 {shipping_context}

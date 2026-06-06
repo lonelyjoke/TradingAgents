@@ -43,6 +43,7 @@ from .tushare_research import (
     get_market_sector_risk as get_tushare_market_sector_risk,
     get_market_timing_context as get_tushare_market_timing_context,
     get_peer_comparison as get_tushare_peer_comparison,
+    get_relative_strength_context as get_tushare_relative_strength_context,
     get_tushare_global_news,
     get_tushare_news,
     get_valuation_percentiles as get_tushare_valuation_percentiles,
@@ -137,6 +138,7 @@ TOOLS_CATEGORIES = {
             "get_valuation_percentiles",
             "get_market_sector_risk",
             "get_market_timing_context",
+            "get_relative_strength_context",
             "get_thematic_catalyst_context",
             "get_financial_report_intelligence_context",
             "get_earnings_model_context",
@@ -236,6 +238,9 @@ VENDOR_METHODS = {
     "get_market_timing_context": {
         "tushare": get_tushare_market_timing_context,
     },
+    "get_relative_strength_context": {
+        "tushare": get_tushare_relative_strength_context,
+    },
     "get_thematic_catalyst_context": {
         "tushare": get_tushare_thematic_catalyst_context,
     },
@@ -334,6 +339,7 @@ A_SHARE_TUSHARE_METHODS = {
     "get_valuation_percentiles",
     "get_market_sector_risk",
     "get_market_timing_context",
+    "get_relative_strength_context",
     "get_thematic_catalyst_context",
     "get_financial_report_intelligence_context",
     "get_earnings_model_context",

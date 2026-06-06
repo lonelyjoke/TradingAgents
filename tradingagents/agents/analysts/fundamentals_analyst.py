@@ -41,6 +41,7 @@ from tradingagents.agents.utils.agent_utils import (
     get_market_expectation_context,
     get_market_expectation_instruction,
     get_market_timing_context,
+    get_relative_strength_context,
     get_management_capital_allocation_context,
     get_management_capital_allocation_instruction,
     get_baijiu_context,
@@ -82,6 +83,7 @@ def create_fundamentals_analyst(llm):
         raw_thematic_catalyst_context = state.get("thematic_catalyst_context", "")
         raw_commodity_context = state.get("commodity_context", "")
         raw_price_move_attribution_context = state.get("price_move_attribution_context", "")
+        raw_relative_strength_context = state.get("relative_strength_context", "")
         raw_filing_intelligence_context = state.get("filing_intelligence_context", "")
         raw_peer_comparison_context = state.get("peer_comparison_context", "")
         raw_supply_chain_comparison_context = state.get("supply_chain_comparison_context", "")
@@ -109,6 +111,7 @@ def create_fundamentals_analyst(llm):
         thematic_catalyst_context = prompt_contexts["thematic_catalyst_context"]
         commodity_context = prompt_contexts["commodity_context"]
         price_move_attribution_context = prompt_contexts["price_move_attribution_context"]
+        relative_strength_context = prompt_contexts["relative_strength_context"]
         shipping_context = prompt_contexts["shipping_context"]
         filing_intelligence_context = prompt_contexts["filing_intelligence_context"]
         peer_comparison_context = prompt_contexts["peer_comparison_context"]
@@ -148,6 +151,8 @@ def create_fundamentals_analyst(llm):
             tools.append(get_commodity_context)
         if is_a_share and not raw_price_move_attribution_context:
             tools.append(get_price_move_attribution_context)
+        if is_a_share and not raw_relative_strength_context:
+            tools.append(get_relative_strength_context)
         if is_a_share and not raw_shipping_context:
             tools.append(get_shipping_context)
         if not raw_peer_comparison_context:
@@ -202,7 +207,7 @@ def create_fundamentals_analyst(llm):
             "Your job is to identify the tradable thesis, test whether the business-cycle or boom-bust expectation can plausibly realize, and explain what evidence supports or weakens the thesis. "
             "Use `get_fundamentals`, `get_balance_sheet`, `get_cashflow`, and `get_income_statement` for core financial quality. "
             "Pay special attention to accounting items that may preview future performance, including contract liabilities, advance receipts, contract assets, receivables, inventories, prepayments, payables, goodwill, net cash, and working capital. "
-            "For A-share tickers, the system may provide precomputed thematic, commodity/product-price, price-move attribution, shipping/freight-rate, filing, peer, supply-chain, earnings-model, market-expectation, price/EPS/PE decomposition, management/capital-allocation, shareholder-structure, investor-interaction, policy-planning, web fact-check, gated compute-leasing, gated dividend-defensive, gated building-materials, gated consumer-staples, gated optical-module/AI datacom, gated biopharma, gated software, gated insurance, gated medical-device, and gated metals/mining context below. Use any precomputed context directly and do not call the same context tool again. Also use `get_valuation_percentiles` for historical valuation zones, `get_market_sector_risk` for broad/sector risk, and `get_market_timing_context` for market mood when those extra lenses are material. "
+            "For A-share tickers, the system may provide precomputed thematic, commodity/product-price, price-move attribution, relative-strength/index-linkage, shipping/freight-rate, filing, peer, supply-chain, earnings-model, market-expectation, price/EPS/PE decomposition, management/capital-allocation, shareholder-structure, investor-interaction, policy-planning, web fact-check, gated compute-leasing, gated dividend-defensive, gated building-materials, gated consumer-staples, gated optical-module/AI datacom, gated biopharma, gated software, gated insurance, gated medical-device, and gated metals/mining context below. Use any precomputed context directly and do not call the same context tool again. Also use `get_valuation_percentiles` for historical valuation zones, `get_market_sector_risk` for broad/sector risk, `get_market_timing_context` for market mood, and `get_relative_strength_context` for stock-versus-index validation when those extra lenses are material. "
             "For commodity/resource/cyclical companies, treat the commodity/product-price context as a hard cycle variable: connect it to ASP, gross margin, inventory write-down/reversal risk, cash conversion, and valuation, and do not let news headlines substitute for product-price evidence. "
             "For shipping companies, treat shipping/freight-rate context as the hard cycle variable: separate route-level VLCC TD3C/TCE/CTFI evidence from broad BDTI/BCTI/BDI proxies, and explicitly test two-sided Hormuz mechanisms such as risk-premium compression versus restocking and ton-mile recovery. "
             "For A-share tickers, also use `get_supply_chain_comparison` when a curated chain map exists, so the memo can distinguish between a merely good company and the best profit pool in the chain. "
@@ -260,6 +265,12 @@ def create_fundamentals_analyst(llm):
                 "\n\nPrecomputed price-move attribution context:\n"
                 + price_move_attribution_context
                 if price_move_attribution_context
+                else ""
+            )
+            + (
+                "\n\nPrecomputed relative-strength / index-linkage context:\n"
+                + relative_strength_context
+                if relative_strength_context
                 else ""
             )
             + (

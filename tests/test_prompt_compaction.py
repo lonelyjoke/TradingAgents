@@ -104,3 +104,27 @@ def test_compaction_preserves_segment_valuation_and_competitor_sections():
     assert "Competitor Analysis For Peer Recommendation" in compacted
     assert "SOTP/scenario value" in compacted
     assert "Verify filing-based business overlap" in compacted
+
+
+def test_compaction_preserves_growth_sustainability_section():
+    text = "\n".join(
+        [
+            "# Filing intelligence",
+            *[f"routine table row {i} " + ("x" * 100) for i in range(90)],
+            "## Growth Sustainability & Ramp Conditions",
+            "| growth_source | sustainability_read | ramp_conditions | falsification_signals |",
+            "| core_revenue_and_profit_engine | conditional | verify occupancy, rent, margin, and cash conversion | falsify if revenue decouples from cash flow |",
+            *[f"more routine row {i} " + ("y" * 100) for i in range(90)],
+        ]
+    )
+
+    compacted = compact_for_prompt(
+        text,
+        label="filing_intelligence_context",
+        profile="portfolio",
+        max_chars=1200,
+    )
+
+    assert "Growth Sustainability & Ramp Conditions" in compacted
+    assert "core_revenue_and_profit_engine" in compacted
+    assert "falsify if revenue decouples" in compacted

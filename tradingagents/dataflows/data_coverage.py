@@ -19,6 +19,7 @@ FAILURE_PATTERNS = (
     "# thematic catalyst cross-check unavailable",
     "# commodity/product-price context unavailable",
     "# price-move attribution context unavailable",
+    "# relative strength / index linkage context unavailable",
     "# shipping cycle context unavailable",
     "# same-industry peer comparison unavailable",
     "# supply-chain position comparison unavailable",

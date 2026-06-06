@@ -54,6 +54,7 @@ def create_bear_researcher(llm):
         prompt_contexts = compact_state_fields(state, profile="research")
         thematic_catalyst_context = prompt_contexts["thematic_catalyst_context"]
         commodity_context = prompt_contexts["commodity_context"]
+        relative_strength_context = prompt_contexts["relative_strength_context"]
         shipping_context = prompt_contexts["shipping_context"]
         filing_intelligence_context = prompt_contexts["filing_intelligence_context"]
         peer_comparison_context = prompt_contexts["peer_comparison_context"]
@@ -114,8 +115,10 @@ Key points to focus on:
 - Policy-Planning Discipline: If official national or industry policy context is available, test whether policy merely expands the industry while competitors capture the economics, whether support is already priced, and whether the company is a real beneficiary rather than only adjacent to a favored direction.
 - Commodity/Product-Price Discipline: If commodity/product-price context is available, use it to attack or validate the cycle thesis. Test whether product prices, spreads, or futures proxies actually support margins, inventory marks, working capital, and EPS; do not let news-only narratives override weak commodity evidence.
 - Shipping/Freight-Rate Discipline: If shipping context is available, use it to attack or validate the freight-cycle thesis. Separate broad proxies (BDTI/BCTI/BDI) from route-level rates (VLCC TD3C/TCE/CTFI), and test whether Hormuz reopening lowers risk premium, shortens effective ton-miles, or increases vessel turnover enough to offset any restocking cargo demand.
+- Relative-Strength Discipline: If relative-strength/index-linkage context is available, use it to test whether the bull case is already priced, mostly benchmark/sector beta, or contradicted by persistent underperformance versus the same-industry basket. Do not use weak relative strength alone as proof of fundamental deterioration; connect it to valuation, expectations, liquidity, and evidence gaps.
 - Industry-Driver Discipline: Use the industry reading pack from the filing context to identify the sector-native variables that truly decide the thesis, then attack the weak links with outside evidence such as policy, investor Q&A, thematic catalysts, peers, and market expectations. Do not let generic revenue growth obscure the real industry question if the decisive variable is backlog quality, NBV, channel inventory, asset quality, utilization, or freight rate.
 - Business-Segment Valuation Discipline: Use the Business Segment Valuation Map and Segment Economics Pack to challenge each business bucket separately. Attack over-blending: mature core profit pools may deserve one multiple, while new businesses or second curves need disclosed revenue, margin, capex/utilization, customers, and cash conversion before they receive base-case valuation credit.
+- Growth Sustainability Discipline: If the financial-report intelligence contains Growth Sustainability & Ramp Conditions, attack the thesis through the exact revenue/profit sustainability gates: missing verified drivers, weak ramp conditions, margin dilution, working-capital absorption, valuation-before-proof, and falsification signals.
 - Pre-Debate Underwriting Questions: If the financial-report intelligence contains this section, use it as the agenda for the opening bear case. Attack weak answers, missing evidence, and over-optimistic inferences around business model, moat, growth driver, second curve, cash quality, segment valuation, and risks before adding broader sector objections.
 - Relative Allocation Discipline: Explicitly answer why capital should not be deployed into a stronger peer or a better-positioned segment elsewhere in the same chain if such alternatives exist.
 - Market-Implied Expectation Discipline: State what the current quote already appears to assume, then identify the precise assumption the market is still too optimistic about.
@@ -143,6 +146,7 @@ Latest world affairs news: {news_report}
 Company fundamentals report: {fundamentals_report}
 Thematic catalyst cross-check and valuation bridge: {thematic_catalyst_context}
 Commodity/product-price context: {commodity_context}
+Relative-strength / index-linkage context: {relative_strength_context}
 Shipping/freight-rate context: {shipping_context}
 Financial-report intelligence: {filing_intelligence_context}
 Same-industry peer comparison: {peer_comparison_context}

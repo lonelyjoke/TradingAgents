@@ -216,6 +216,22 @@ def get_market_timing_context(
 
 
 @tool
+def get_relative_strength_context(
+    ticker: Annotated[str, "ticker symbol"],
+    curr_date: Annotated[str, "current date you are trading at, yyyy-mm-dd"],
+    look_back_days: Annotated[int, "relative-strength look-back calendar days"] = 380,
+    peer_limit: Annotated[int, "same-industry peer count for equal-weight basket"] = 12,
+) -> str:
+    """
+    Retrieve stock-versus-index relative strength, excess return, correlation,
+    beta, and same-industry basket context for an A-share ticker. Use it to
+    judge whether price action confirms the thesis, is mostly sector beta, or
+    reveals a stock-specific divergence.
+    """
+    return route_to_vendor("get_relative_strength_context", ticker, curr_date, look_back_days, peer_limit)
+
+
+@tool
 def get_thematic_catalyst_context(
     ticker: Annotated[str, "ticker symbol"],
     curr_date: Annotated[str, "current date you are trading at, yyyy-mm-dd"],

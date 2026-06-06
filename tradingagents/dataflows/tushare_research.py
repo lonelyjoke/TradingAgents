@@ -12,6 +12,7 @@ from dateutil.relativedelta import relativedelta
 from .industry_classifier import is_banking_entity
 from .tushare_a_stock import (
     TushareDataError,
+    _fetch_daily,
     _fetch_daily_basic_latest,
     _fetch_fina_indicator,
     _fetch_stock_basic,
@@ -50,6 +51,14 @@ BAIJIU_PEER_FALLBACK = {
     "600559.SH": "老白干酒",
     "000799.SZ": "酒鬼酒",
     "600197.SH": "伊力特",
+}
+
+_STYLE_BENCHMARKS: dict[str, str] = {
+    "000300.SH": "CSI 300 / 沪深300",
+    "000905.SH": "CSI 500 / 中证500",
+    "000852.SH": "CSI 1000 / 中证1000",
+    "399006.SZ": "ChiNext Index / 创业板指",
+    "000688.SH": "STAR 50 / 科创50",
 }
 
 
@@ -1374,6 +1383,244 @@ def _market_regime(rows: list[dict[str, str]]) -> tuple[str, str, str]:
     )
 
 
+def _normalize_price_series(data: pd.DataFrame, label: str) -> pd.Series:
+    if data is None or data.empty:
+        return pd.Series(dtype=float, name=label)
+    frame = data.copy()
+    if "Date" in frame.columns:
+        date_col = "Date"
+    elif "trade_date" in frame.columns:
+        date_col = "trade_date"
+    else:
+        return pd.Series(dtype=float, name=label)
+    if "Close" in frame.columns:
+        close_col = "Close"
+    elif "close" in frame.columns:
+        close_col = "close"
+    else:
+        return pd.Series(dtype=float, name=label)
+    dates = pd.to_datetime(frame[date_col].astype(str), errors="coerce")
+    close = pd.to_numeric(frame[close_col], errors="coerce")
+    series = pd.Series(close.to_numpy(), index=dates, name=label).dropna()
+    series = series[~series.index.isna()].sort_index()
+    return series[~series.index.duplicated(keep="last")]
+
+
+def _fetch_index_close_series(ts_code: str, curr_date: str, look_back_days: int, label: str) -> pd.Series:
+    _, _, start, end = _date_window(curr_date, look_back_days)
+    data = _query_optional_api(
+        "index_daily",
+        ts_code=ts_code,
+        start_date=start,
+        end_date=end,
+        fields="ts_code,trade_date,close,pct_chg",
+    )
+    return _normalize_price_series(data, label)
+
+
+def _choose_style_benchmark(symbol: str, basic: pd.Series | None, curr_date: str) -> tuple[str, str, str]:
+    code = symbol.split(".")[0]
+    if code.startswith(("300", "301")):
+        return "399006.SZ", _STYLE_BENCHMARKS["399006.SZ"], "创业板股票优先用创业板指作为风格基准。"
+    if code.startswith("688"):
+        return "000688.SH", _STYLE_BENCHMARKS["000688.SH"], "科创板股票优先用科创50作为风格基准。"
+    latest = None
+    try:
+        latest = _fetch_daily_basic_latest(symbol, curr_date)
+    except Exception:
+        latest = None
+    total_mv = None
+    if latest is not None:
+        total_mv = pd.to_numeric(pd.Series([latest.get("total_mv")]), errors="coerce").iloc[0]
+    if total_mv is not None and pd.notna(total_mv):
+        if float(total_mv) >= 20_000_000:
+            return "000300.SH", _STYLE_BENCHMARKS["000300.SH"], "大市值股票用沪深300作为风格基准。"
+        if float(total_mv) >= 5_000_000:
+            return "000905.SH", _STYLE_BENCHMARKS["000905.SH"], "中等市值股票用中证500作为风格基准。"
+        return "000852.SH", _STYLE_BENCHMARKS["000852.SH"], "小市值股票用中证1000作为风格基准。"
+    if symbol.endswith(".SH"):
+        return "000300.SH", _STYLE_BENCHMARKS["000300.SH"], "未能取得市值，沪市股票默认用沪深300作为风格基准。"
+    return "000905.SH", _STYLE_BENCHMARKS["000905.SH"], "未能取得市值，深市非创业板股票默认用中证500作为风格基准。"
+
+
+def _same_industry_peer_symbols(symbol: str, industry: str, curr_date: str, limit: int) -> list[str]:
+    if not industry:
+        return []
+    pro = _get_pro_client()
+    universe = _fetch_stock_basic_universe(pro)
+    required = {"ts_code", "industry"}
+    if universe.empty or not required.issubset(universe.columns):
+        return []
+    same = universe[
+        (universe["industry"].fillna("").astype(str) == industry)
+        & (universe["ts_code"].fillna("").astype(str).str.upper() != symbol)
+    ].copy()
+    if same.empty:
+        return []
+    try:
+        latest = _fetch_daily_basic_latest(symbol, curr_date)
+        trade_date = str(latest.get("trade_date")) if latest is not None else ""
+        market = _latest_daily_basic_market(trade_date) if trade_date else pd.DataFrame()
+        if not market.empty and "ts_code" in market.columns:
+            same = same.merge(market[["ts_code", "total_mv"]], on="ts_code", how="left")
+            same["total_mv"] = pd.to_numeric(same["total_mv"], errors="coerce")
+            same = same.sort_values("total_mv", ascending=False)
+    except Exception:
+        same = same.sort_values("ts_code")
+    return [str(value).upper() for value in same["ts_code"].head(max(1, limit)).tolist()]
+
+
+def _build_same_industry_basket_series(
+    symbol: str,
+    industry: str,
+    curr_date: str,
+    look_back_days: int,
+    peer_limit: int,
+) -> tuple[pd.Series, list[str], list[str]]:
+    peers = _same_industry_peer_symbols(symbol, industry, curr_date, peer_limit)
+    if not peers:
+        return pd.Series(dtype=float, name="same_industry_basket"), [], ["No same-industry peer symbols available for basket proxy."]
+    _, _, start, end = _date_window(curr_date, look_back_days)
+    returns: list[pd.Series] = []
+    used: list[str] = []
+    notes: list[str] = []
+    for peer in peers:
+        try:
+            data = _fetch_daily(peer, start, end)
+            series = _normalize_price_series(data, peer)
+            ret = series.pct_change().dropna()
+            if len(ret) >= 20:
+                returns.append(ret.rename(peer))
+                used.append(peer)
+        except Exception as exc:
+            notes.append(f"{peer}: {exc}")
+    if not returns:
+        return pd.Series(dtype=float, name="same_industry_basket"), [], notes[:3] or ["Same-industry peers had no usable daily returns."]
+    merged = pd.concat(returns, axis=1).sort_index()
+    basket_returns = merged.mean(axis=1, skipna=True).dropna()
+    if basket_returns.empty:
+        return pd.Series(dtype=float, name="same_industry_basket"), used, notes[:3]
+    basket_close = (1.0 + basket_returns).cumprod()
+    basket_close.name = "same_industry_basket"
+    return basket_close, used, notes[:3]
+
+
+def _format_percent(value: float | None) -> str:
+    if value is None or pd.isna(value):
+        return "N/A"
+    return f"{float(value) * 100:.2f}%"
+
+
+def _format_float(value: float | None, digits: int = 2) -> str:
+    if value is None or pd.isna(value):
+        return "N/A"
+    return f"{float(value):.{digits}f}"
+
+
+def _relative_strength_label(excess_return: float | None, correlation: float | None) -> str:
+    if excess_return is None or pd.isna(excess_return):
+        return "insufficient_data"
+    if excess_return >= 0.10:
+        strength = "strong_outperform"
+    elif excess_return >= 0.03:
+        strength = "modest_outperform"
+    elif excess_return <= -0.10:
+        strength = "strong_underperform"
+    elif excess_return <= -0.03:
+        strength = "modest_underperform"
+    else:
+        strength = "in_line"
+    if correlation is not None and pd.notna(correlation):
+        if correlation >= 0.65:
+            return f"{strength}_high_correlation"
+        if correlation <= 0.25:
+            return f"{strength}_low_correlation"
+    return strength
+
+
+def _window_relative_metrics(
+    stock: pd.Series,
+    benchmark: pd.Series,
+    benchmark_name: str,
+    window: int,
+) -> dict[str, str]:
+    aligned = pd.concat([stock.rename("stock"), benchmark.rename("benchmark")], axis=1).dropna()
+    if len(aligned) < max(8, min(window, 20)):
+        return {
+            "benchmark": benchmark_name,
+            "window": f"{window}d",
+            "stock_return": "N/A",
+            "benchmark_return": "N/A",
+            "excess_return": "N/A",
+            "correlation": "N/A",
+            "beta": "N/A",
+            "relative_read": "insufficient_data",
+        }
+    sample = aligned.tail(window + 1) if len(aligned) > window else aligned
+    stock_return = sample["stock"].iloc[-1] / sample["stock"].iloc[0] - 1
+    benchmark_return = sample["benchmark"].iloc[-1] / sample["benchmark"].iloc[0] - 1
+    excess_return = stock_return - benchmark_return
+    returns = sample.pct_change().dropna()
+    correlation = returns["stock"].corr(returns["benchmark"]) if len(returns) >= 8 else None
+    variance = returns["benchmark"].var() if len(returns) >= 8 else None
+    beta = returns["stock"].cov(returns["benchmark"]) / variance if variance and variance > 0 else None
+    return {
+        "benchmark": benchmark_name,
+        "window": f"{window}d",
+        "stock_return": _format_percent(stock_return),
+        "benchmark_return": _format_percent(benchmark_return),
+        "excess_return": _format_percent(excess_return),
+        "correlation": _format_float(correlation),
+        "beta": _format_float(beta),
+        "relative_read": _relative_strength_label(excess_return, correlation),
+    }
+
+
+def _summarize_relative_strength(rows: list[dict[str, str]], style_name: str, industry_name: str) -> tuple[str, str, str]:
+    usable = [row for row in rows if row.get("excess_return") != "N/A"]
+    if not usable:
+        return (
+            "insufficient_data",
+            "No reliable aligned stock/index return history was available.",
+            "Do not use relative strength as a decisive input; rely on fundamentals, valuation, and verified catalysts.",
+        )
+    long_rows = [row for row in usable if row.get("window") in {"120d", "250d"}] or usable
+    excess_values = []
+    high_corr = 0
+    low_corr = 0
+    for row in long_rows:
+        try:
+            excess_values.append(float(str(row["excess_return"]).rstrip("%")) / 100)
+        except Exception:
+            pass
+        try:
+            corr = float(row["correlation"])
+            if corr >= 0.65:
+                high_corr += 1
+            if corr <= 0.25:
+                low_corr += 1
+        except Exception:
+            pass
+    avg_excess = sum(excess_values) / len(excess_values) if excess_values else 0.0
+    if avg_excess >= 0.08:
+        verdict = "relative_outperformer"
+        read = f"The stock has delivered clear medium/long-window excess return versus {style_name} and {industry_name}."
+        pm_use = "Treat price action as market confirmation, but still test whether the outperformance is company alpha or sector/theme beta before increasing valuation credit."
+    elif avg_excess <= -0.08:
+        verdict = "relative_laggard"
+        read = f"The stock has lagged its style or industry proxy over medium/long windows."
+        pm_use = "Use this as a warning or contrarian screen: if fundamentals are improving, ask why the market disagrees; if fundamentals are weak, avoid averaging down too early."
+    else:
+        verdict = "relative_neutral"
+        read = "Relative performance is broadly in line with benchmarks; price action is not a strong independent thesis signal."
+        pm_use = "Keep fundamentals, valuation, and catalysts as the primary rating drivers."
+    if high_corr > low_corr and high_corr > 0:
+        read += " Correlation is high, so part of the move is likely benchmark/sector beta rather than pure company alpha."
+    elif low_corr > 0:
+        read += " Correlation is low in at least one key window, suggesting stock-specific forces may be more important than benchmark beta."
+    return verdict, read, pm_use
+
+
 def _industry_cross_section(symbol: str, curr_date: str) -> tuple[pd.Series, pd.DataFrame, pd.DataFrame]:
     basic = _fetch_stock_basic(symbol)
     if basic is None:
@@ -1650,5 +1897,126 @@ def get_market_timing_context(ticker: str, curr_date: str, look_back_days: int =
         "- In extreme pessimism, avoid being mechanically bearish at low valuations; require confirmation, but allow contrarian watch zones.",
         "- In extreme optimism, avoid being mechanically bullish at high valuations; emphasize staged profit-taking and downside protection.",
         "- Do not provide exact ranges unless supported by market/valuation/technical evidence; otherwise label them as scenario ranges.",
+    ]
+    return "\n".join(lines)
+
+
+def get_relative_strength_context(
+    ticker: str,
+    curr_date: str,
+    look_back_days: int = 380,
+    peer_limit: int = 12,
+) -> str:
+    """Compare stock trend, excess return, correlation, and beta versus benchmarks."""
+
+    symbol = ticker.strip().upper()
+    if not is_a_share_symbol(symbol):
+        raise TushareDataError(
+            f"Tushare relative-strength context expects A-share symbols like 000001.SZ or 600519.SH; got {ticker!r}."
+        )
+    if not curr_date:
+        curr_date = datetime.now().strftime("%Y-%m-%d")
+
+    basic = _fetch_stock_basic(symbol)
+    company_name = str(basic.get("name") if basic is not None else symbol)
+    industry = str(basic.get("industry") if basic is not None else "").strip()
+    style_code, style_name, style_reason = _choose_style_benchmark(symbol, basic, curr_date)
+    fetch_days = max(look_back_days, 380)
+    _, _, start, end = _date_window(curr_date, fetch_days)
+
+    notes: list[str] = []
+    stock_data = _fetch_daily(symbol, start, end)
+    stock_close = _normalize_price_series(stock_data, symbol)
+    style_close = _fetch_index_close_series(style_code, curr_date, fetch_days, style_code)
+    industry_close, industry_peers, industry_notes = _build_same_industry_basket_series(
+        symbol,
+        industry,
+        curr_date,
+        fetch_days,
+        peer_limit,
+    )
+    notes.extend(industry_notes)
+
+    benchmark_specs: list[tuple[str, str, pd.Series]] = [
+        (style_code, style_name, style_close),
+    ]
+    if not industry_close.empty:
+        benchmark_specs.append(
+            (
+                "same_industry_equal_weight",
+                f"Tushare same-industry equal-weight basket / {industry or 'unknown industry'}",
+                industry_close,
+            )
+        )
+
+    windows = [20, 60, 120, 250]
+    rows: list[dict[str, str]] = []
+    for _, name, benchmark in benchmark_specs:
+        for window in windows:
+            rows.append(_window_relative_metrics(stock_close, benchmark, name, window))
+
+    industry_name = f"same-industry basket ({len(industry_peers)} peers)" if industry_peers else "same-industry basket unavailable"
+    verdict, read, pm_use = _summarize_relative_strength(rows, style_name, industry_name)
+
+    benchmark_rows = [
+        {
+            "benchmark_type": "style_or_broad_index",
+            "benchmark": f"{style_name} ({style_code})",
+            "selection_basis": style_reason,
+        },
+        {
+            "benchmark_type": "industry_proxy",
+            "benchmark": industry_name,
+            "selection_basis": (
+                f"Tushare stock_basic industry={industry}; equal-weight daily-return basket from peers: "
+                + (", ".join(industry_peers[:8]) if industry_peers else "N/A")
+            ),
+        },
+    ]
+
+    latest_date = stock_close.index.max().strftime("%Y-%m-%d") if not stock_close.empty else "N/A"
+    earliest_date = stock_close.index.min().strftime("%Y-%m-%d") if not stock_close.empty else "N/A"
+    coverage_rows = [
+        {
+            "item": "stock_daily",
+            "status": "ready" if not stock_close.empty else "failed",
+            "detail": f"{len(stock_close)} observations; {earliest_date} to {latest_date}",
+        },
+        {
+            "item": "style_index_daily",
+            "status": "ready" if not style_close.empty else "failed",
+            "detail": f"{style_name}; {len(style_close)} observations",
+        },
+        {
+            "item": "same_industry_basket",
+            "status": "ready" if not industry_close.empty else "partial",
+            "detail": f"{len(industry_peers)} peers used; notes: {'; '.join(notes[:2]) if notes else 'none'}",
+        },
+    ]
+
+    lines = [
+        f"# Relative strength and index linkage for {symbol} as of {curr_date}",
+        "",
+        f"- Company: {company_name}",
+        f"- Tushare industry: {industry or 'N/A'}",
+        f"- Verdict: {verdict}",
+        f"- Buy-side read: {read}",
+        f"- PM use: {pm_use}",
+        "",
+        "## Benchmark Selection",
+        _markdown_table(pd.DataFrame(benchmark_rows)),
+        "",
+        "## Relative Strength Window Table",
+        _markdown_table(pd.DataFrame(rows)),
+        "",
+        "## Data Coverage",
+        _markdown_table(pd.DataFrame(coverage_rows)),
+        "",
+        "## Analyst Instructions",
+        "- Use this module as market validation and position-timing evidence, not as a replacement for fundamentals.",
+        "- High excess return plus high correlation usually means benchmark/sector beta is important; require company evidence before calling it alpha.",
+        "- Strong relative performance with low correlation can indicate stock-specific capital preference, hidden catalysts, or crowding; verify against filings, news, peers, and expectations.",
+        "- Persistent underperformance versus the industry proxy is a warning when fundamentals are weak, but can be a contrarian setup if valuation and operating evidence are improving.",
+        "- PM reports should include a standalone `相对走势与指数联动` module when this context is ready: trend versus benchmark, correlation/Beta, stronger/weaker verdict, and what it means for sizing, entry timing, and thesis validation.",
     ]
     return "\n".join(lines)

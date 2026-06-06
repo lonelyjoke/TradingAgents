@@ -84,6 +84,17 @@ class CompanyBusinessArchetype:
 
 
 @dataclass(frozen=True)
+class GrowthSustainabilityFinding:
+    growth_source: str
+    sustainability_read: str
+    evidence_strength: str
+    evidence_basis: str
+    ramp_conditions: str
+    falsification_signals: str
+    pm_use: str
+
+
+@dataclass(frozen=True)
 class MaterialFilingFinding:
     finding_type: str
     importance: str
@@ -464,6 +475,53 @@ _INDUSTRY_PLAYBOOKS: dict[str, tuple[FilingQuestion, ...]] = {
             ("annual", "semiannual"),
             "Promote monetized new services into scenario/SOTP value when revenue, margin, users, or transaction data are disclosed.",
             "Keep second-curve claims out of base valuation if they lack disclosed economics or remain policy/narrative only.",
+        ),
+    ),
+    "travel_retail": (
+        FilingQuestion(
+            "travel_retail_revenue_engine",
+            "business_model",
+            "免税/旅游零售收入到底由客流、转化率、客单价、门店/口岸布局、线上会员还是商品结构驱动？",
+            ("免税", "离岛免税", "旅游零售", "客流", "客单价", "会员", "门店", "口岸", "商品结构", "收入"),
+            ("annual", "semiannual", "quarterly"),
+            "Support revenue durability when traffic, conversion, ticket size, and store/channel mix point in the same direction.",
+            "Challenge a rebound thesis if growth is only price promotion, channel transfer, or one-off travel recovery.",
+        ),
+        FilingQuestion(
+            "travel_retail_margin_mix",
+            "margin",
+            "毛利率和利润率受品牌采购、折扣促销、租金/扣点、销售费用、线上线下结构影响后，是否还有经营杠杆？",
+            ("毛利率", "折扣", "促销", "销售费用", "租金", "扣点", "采购", "品牌", "经营杠杆"),
+            ("annual", "semiannual", "quarterly"),
+            "Argue operating leverage when margin, expense ratio, and mix improve together.",
+            "Stress profit quality if revenue recovery is bought with discounts, rent pressure, or heavier sales expense.",
+        ),
+        FilingQuestion(
+            "travel_retail_channel_assets",
+            "channel",
+            "海南离岛免税、机场/口岸免税、市内免税、线上平台和海外/DFS资产各自处于什么盈利和扩张阶段？",
+            ("海南", "离岛免税", "机场", "口岸", "市内免税", "线上", "DFS", "海外", "门店", "资产"),
+            ("annual", "semiannual"),
+            "Build SOTP or scenario value only where channel economics and ramp stage are disclosed.",
+            "Avoid giving equal multiple credit to early, loss-making, or disclosure-thin channels.",
+        ),
+        FilingQuestion(
+            "travel_retail_demand_visibility",
+            "demand_visibility",
+            "合同负债/预收款、会员、库存、应收和经营现金流是否证明消费需求真实，而不是库存或促销推动？",
+            ("合同负债", "预收款", "会员", "库存", "存货", "应收", "经营活动现金流", "回款"),
+            ("quarterly", "semiannual", "annual"),
+            "Validate demand when forward-liability, inventory, receivable, and cash-flow signals are coherent.",
+            "Cap conviction if demand visibility depends on anecdotal travel recovery without working-capital support.",
+        ),
+        FilingQuestion(
+            "travel_retail_second_curve",
+            "second_curve",
+            "DFS/海外并购、市内免税、数字化会员和供应链协同是否已经形成第二增长曲线，还是仍是战略叙事？",
+            ("DFS", "海外", "并购", "市内免税", "数字化", "会员", "供应链", "协同", "第二增长"),
+            ("annual", "semiannual"),
+            "Promote second curves only when filings show revenue, margin, integration, or customer evidence.",
+            "Keep strategic optionality out of base valuation if monetization and integration are not disclosed.",
         ),
     ),
     "power_operator": (
@@ -1157,6 +1215,43 @@ def _select_industry_profile(
     normalized_parts.extend(_repair_mojibake(text) for _, text in report_texts)
     blob = " ".join(normalized_parts)
     identity_blob = f"{normalized_parts[0]} {normalized_parts[1]}"
+    travel_retail_identity = any(
+        token in identity_blob
+        for token in (
+            "中国中免",
+            "中免",
+            "免税",
+            "旅游零售",
+            "旅行零售",
+        )
+    )
+    travel_retail_hits = sum(
+        token in blob
+        for token in (
+            "离岛免税",
+            "免税店",
+            "免税业务",
+            "旅游零售",
+            "旅行零售",
+            "海南免税",
+            "三亚国际免税城",
+            "海口国际免税城",
+            "口岸免税",
+            "机场免税",
+            "市内免税",
+            "DFS",
+            "LVMH",
+            "客流",
+            "客单价",
+            "会员",
+        )
+    )
+    travel_retail_industry_hint = (
+        any(token in identity_blob for token in ("旅游服务", "商业零售", "商业百货"))
+        and travel_retail_hits >= 2
+    )
+    if travel_retail_identity or travel_retail_industry_hint or travel_retail_hits >= 4:
+        return "travel_retail"
     if any(token in identity_blob for token in ("\u4fdd\u9669", "\u5bff\u9669", "\u8d22\u9669", "\u4ea7\u9669")):
         return "insurance"
     medical_device_identity = any(
@@ -1417,7 +1512,19 @@ def _select_industry_profile(
         and any(token in blob for token in ("\u822a\u6cb9", "\u673a\u961f", "\u822a\u7ebf", "ASK", "RPK"))
     ):
         return "airlines"
-    if any(token in blob for token in ("\u4fdd\u9669", "\u65b0\u4e1a\u52a1\u4ef7\u503c", "\u5185\u542b\u4ef7\u503c", "\u7efc\u5408\u6210\u672c\u7387", "\u7ee7\u7eed\u7387")):
+    insurance_hits = sum(
+        token in blob
+        for token in (
+            "\u4fdd\u9669",
+            "\u65b0\u4e1a\u52a1\u4ef7\u503c",
+            "\u5185\u542b\u4ef7\u503c",
+            "\u7efc\u5408\u6210\u672c\u7387",
+            "\u7ee7\u7eed\u7387",
+            "\u4fdd\u8d39",
+            "\u4ee3\u7406\u4eba",
+        )
+    )
+    if insurance_hits >= 3 and not travel_retail_identity and not market_operator_identity:
         return "insurance"
     if any(
         token in blob
@@ -2962,6 +3069,40 @@ _INDUSTRY_PARAGRAPH_LENSES: dict[
             "macro risk + earnings model",
         ),
     ),
+    "travel_retail": (
+        (
+            "traffic_ticket_and_conversion",
+            ("经营情况讨论与分析", "经营情况讨论及分析", "主营业务分析", "季度经营分析"),
+            ("免税", "离岛免税", "客流", "客单价", "会员", "转化率", "销售收入"),
+            "Is revenue growth driven by traffic, ticket size, conversion, or temporary channel effects?",
+            "Duty-free retail value depends on traffic-to-sales conversion and mix, not generic consumption recovery.",
+            "relative strength + market expectation + filing working-capital signals",
+        ),
+        (
+            "margin_promotion_and_rent",
+            ("主营业务分析", "经营情况讨论与分析", "经营情况讨论及分析"),
+            ("毛利率", "折扣", "促销", "销售费用", "租金", "扣点", "采购", "品牌"),
+            "Is the rebound profitable after promotion, rent, and sales-expense pressure?",
+            "Separates healthy operating leverage from discount-led revenue repair.",
+            "earnings model + peer comparison",
+        ),
+        (
+            "channel_asset_mix",
+            ("主营业务分析", "公司未来发展的展望", "未来发展展望"),
+            ("海南", "口岸", "机场", "市内免税", "线上", "DFS", "海外", "门店"),
+            "Which channel or asset base deserves core valuation, scenario value, or only watchlist credit?",
+            "Prevents blended retail multiples from hiding channel-specific economics and ramp risk.",
+            "Business Segment Valuation Map + management capital allocation",
+        ),
+        (
+            "working_capital_visibility",
+            ("主要会计数据和财务指标发生变动的情况及原因", "经营情况讨论与分析", "经营情况讨论及分析"),
+            ("合同负债", "预收款", "存货", "库存", "应收账款", "经营活动现金流"),
+            "Do contract liabilities, inventory, receivables, and operating cash flow confirm real demand?",
+            "Working-capital signals are the second layer of proof for consumption names.",
+            "structured balance-sheet history + cash-flow quality",
+        ),
+    ),
     "insurance": (
         (
             "franchise_recovery",
@@ -3495,6 +3636,51 @@ def _first_evidence(
     return ""
 
 
+_EVIDENCE_NOISE_TERMS: tuple[str, ...] = (
+    "现金流量表",
+    "资产负债表",
+    "利润表",
+    "所有者权益变动表",
+    "主要会计数据和财务指标",
+    "营业收入、营业成本的分解信息",
+    "非经常性损益",
+    "单位：元",
+    "项目 本报告期",
+    "本报告期 上年同期",
+)
+
+
+def _best_text_evidence(
+    sources: Iterable[str],
+    keywords: Iterable[str],
+    *,
+    max_len: int = 260,
+) -> str:
+    """Pick narrative evidence that actually contains the company-specific issue."""
+
+    keyword_tuple = tuple(keyword for keyword in keywords if keyword)
+    ranked: list[tuple[int, str]] = []
+    for raw_text in sources:
+        text = str(raw_text or "").strip()
+        if not text or not keyword_tuple:
+            continue
+        hit_count = sum(1 for keyword in keyword_tuple if keyword in text)
+        if hit_count <= 0:
+            continue
+        score = hit_count * 6
+        if _evidence_strength_from_text(text) == "quantified disclosure":
+            score += 4
+        if any(term in text for term in _EVIDENCE_NOISE_TERMS):
+            score -= 6
+        if any(token in text for token in ("核心竞争力", "主营业务", "经营模式", "未来发展", "平台", "客户", "订单")):
+            score += 2
+        ranked.append((score, text))
+    if not ranked:
+        return ""
+    _, best = max(ranked, key=lambda item: (item[0], len(item[1])))
+    return _compact_text(best, max_len)
+
+
 _BUSINESS_ARCHETYPE_RULES: tuple[dict[str, object], ...] = (
     {
         "archetype_id": "market_operator",
@@ -3538,18 +3724,39 @@ _BUSINESS_ARCHETYPE_RULES: tuple[dict[str, object], ...] = (
             "新产品",
         ),
         "required_keywords": (
-            "研发",
-            "技术",
             "专利",
             "芯片",
             "模块",
+            "算法",
+            "软件产品",
             "800G",
             "1.6T",
             "客户认证",
-            "迭代",
-            "新产品",
+            "产品迭代",
+            "技术路线",
+            "新产品研发",
+            "技术壁垒",
+            "研发平台",
         ),
         "min_required_hits": 1,
+        "hard_keywords": (
+            "专利",
+            "芯片",
+            "模块",
+            "算法",
+            "软件产品",
+            "800G",
+            "1.6T",
+            "客户认证",
+            "产品迭代",
+            "技术路线",
+            "新产品研发",
+            "技术壁垒",
+            "研发平台",
+        ),
+        "min_hard_hits": 1,
+        "incompatible_profiles": ("market_operator", "banking", "insurance"),
+        "incompatible_profile_min_hard_hits": 2,
         "noise_terms": (
             "非主营业务分析",
             "应收账款",
@@ -3831,6 +4038,16 @@ def _infer_company_business_archetypes(
         required_hit_count = sum(1 for keyword in required_keywords if keyword in blob)
         if required_keywords and required_hit_count < min_required_hits:
             continue
+        hard_keywords = tuple(str(item) for item in rule.get("hard_keywords", ()))
+        min_hard_hits = int(rule.get("min_hard_hits", 0))
+        hard_hit_count = sum(1 for keyword in hard_keywords if keyword in blob)
+        if hard_keywords and min_hard_hits and hard_hit_count < min_hard_hits:
+            continue
+        incompatible_profiles = set(str(item) for item in rule.get("incompatible_profiles", ()))
+        if profile in incompatible_profiles:
+            incompatible_min_hits = int(rule.get("incompatible_profile_min_hard_hits", min_hard_hits + 1))
+            if hard_hit_count < incompatible_min_hits:
+                continue
         score = len(hits)
         if profile == rule["archetype_id"]:
             score += 8
@@ -3853,12 +4070,21 @@ def _infer_company_business_archetypes(
             source_required_hits = sum(1 for keyword in required_keywords if keyword in source)
             if required_keywords and source_required_hits < min_required_hits:
                 continue
-            evidence_candidates.append((source_priority, source_hits + source_required_hits, source))
+            source_hard_hits = sum(1 for keyword in hard_keywords if keyword in source)
+            if hard_keywords and min_hard_hits and source_hard_hits < min_hard_hits:
+                continue
+            evidence_candidates.append((source_priority, source_hits + source_required_hits + source_hard_hits, source))
         if not evidence_candidates and noise_terms:
             for source_priority, source in evidence_sources:
                 if any(keyword in source for keyword in hits) and not any(term in source for term in noise_terms):
                     source_hits = sum(1 for keyword in hits if keyword in source)
-                    evidence_candidates.append((source_priority, source_hits, source))
+                    source_required_hits = sum(1 for keyword in required_keywords if keyword in source)
+                    if required_keywords and source_required_hits < min_required_hits:
+                        continue
+                    source_hard_hits = sum(1 for keyword in hard_keywords if keyword in source)
+                    if hard_keywords and min_hard_hits and source_hard_hits < min_hard_hits:
+                        continue
+                    evidence_candidates.append((source_priority, source_hits + source_required_hits + source_hard_hits, source))
         if not evidence_candidates:
             if required_keywords or noise_terms:
                 continue
@@ -3911,6 +4137,162 @@ def _infer_company_business_archetypes(
         if len(selected) >= limit:
             break
     return selected
+
+
+def _build_growth_sustainability_map(
+    *,
+    business_model_map: Iterable[BusinessModelFinding],
+    segment_economics: Iterable[SegmentEconomicsFinding],
+    business_segment_valuation_map: Iterable[BusinessSegmentValuationFinding],
+    growth_vectors: Iterable[GrowthVectorFinding],
+    answers: Iterable[FilingQuestionAnswer],
+    statement_table_signals: Iterable[FilingTableSignal],
+    financial_relations: Iterable[FinancialRelationInsight],
+    paragraph_reading_pack: Iterable[FilingParagraphInsight],
+    industry_reading_pack: Iterable[IndustryReadingInsight],
+    business_archetypes: Iterable[CompanyBusinessArchetype] = (),
+    limit: int = 6,
+) -> list[GrowthSustainabilityFinding]:
+    """Turn filing snippets into a PM-ready growth durability and ramp checklist."""
+
+    business_rows = list(business_model_map)
+    segment_rows = list(segment_economics)
+    valuation_rows = list(business_segment_valuation_map)
+    vector_rows = list(growth_vectors)
+    answer_rows = list(answers)
+    table_rows = list(statement_table_signals)
+    relation_rows = list(financial_relations)
+    paragraph_rows = list(paragraph_reading_pack)
+    industry_rows = list(industry_reading_pack)
+    archetype_rows = list(business_archetypes)
+    rows: list[GrowthSustainabilityFinding] = []
+    seen: set[str] = set()
+
+    def add(
+        growth_source: str,
+        evidence: str,
+        sustainability_read: str,
+        ramp_conditions: str,
+        falsification_signals: str,
+        pm_use: str,
+    ) -> None:
+        if growth_source in seen or not evidence:
+            return
+        seen.add(growth_source)
+        rows.append(
+            GrowthSustainabilityFinding(
+                growth_source=growth_source,
+                sustainability_read=sustainability_read,
+                evidence_strength=_evidence_strength_from_text(evidence),
+                evidence_basis=_compact_text(evidence, 240),
+                ramp_conditions=ramp_conditions,
+                falsification_signals=falsification_signals,
+                pm_use=pm_use,
+            )
+        )
+
+    def text_from(items: Iterable[object], attr: str = "evidence") -> list[str]:
+        return [str(getattr(item, attr, "") or "") for item in items if str(getattr(item, attr, "") or "")]
+
+    core_evidence = _first_evidence(
+        business_rows,
+        predicate=lambda row: row.lens == "core_revenue_engine",
+    ) or _best_text_evidence(
+        text_from(paragraph_rows, "excerpt") + text_from(industry_rows, "excerpt"),
+        ("主营业务", "经营模式", "收入", "利润", "客户", "销售", "租赁", "服务"),
+    )
+    quality_relation = next((row for row in relation_rows if row.relation_type == "quality_growth"), None)
+    weak_relation = next(
+        (
+            row
+            for row in relation_rows
+            if row.relation_type
+            in {
+                "growth_without_margin",
+                "cash_absorbing_growth",
+                "visibility_not_yet_profitability",
+                "leverage_funding_growth",
+            }
+        ),
+        None,
+    )
+    if quality_relation:
+        core_read = "current filing mix supports higher-quality growth, but it still needs period-to-period confirmation."
+        core_evidence = f"{core_evidence} | {quality_relation.evidence}" if core_evidence else quality_relation.evidence
+    elif weak_relation:
+        core_read = f"growth is conditional because {weak_relation.relation_type} weakens durability."
+        core_evidence = f"{core_evidence} | {weak_relation.evidence}" if core_evidence else weak_relation.evidence
+    else:
+        core_read = "growth durability is not proven by the current readable filings; treat it as a verification item."
+    add(
+        "core_revenue_and_profit_engine",
+        core_evidence,
+        core_read,
+        "Revenue and profit can keep expanding only if the disclosed core engine keeps volume/price/utilization/customer growth while margins and cash conversion do not deteriorate.",
+        "Revenue growth decouples from gross margin, operating cash flow, receivables, inventory, contract liabilities, utilization, or disclosed customer/order evidence.",
+        "Use as the first growth paragraph in the PM memo: what has to remain true for consolidated revenue and profit growth to be sustainable.",
+    )
+
+    segment_evidence = _first_evidence(
+        business_rows,
+        predicate=lambda row: row.lens == "segment_mix",
+    ) or _first_evidence(segment_rows, predicate=lambda row: True) or _first_evidence(valuation_rows, predicate=lambda row: True)
+    add(
+        "segment_mix_and_profit_pool",
+        segment_evidence,
+        "segment mix can support growth only if higher-growth buckets are material and do not dilute margin or cash quality.",
+        "Track segment revenue scale, growth rate, margin/profit contribution, cash conversion, and valuation treatment separately instead of relying on consolidated growth.",
+        "High-growth segments remain too small, undisclosed, margin-dilutive, capital-intensive, or valued like the best segment without proof.",
+        "Use this as the bridge between Business Segment Breakdown and valuation/SOTP evidence gates.",
+    )
+
+    for vector in vector_rows[:3]:
+        stage_read = {
+            "monetized": "already monetized; can enter core valuation if margin and cash conversion are also visible.",
+            "contracted": "has demand visibility, but ramp, delivery, margin, and cash collection still decide sustainability.",
+            "capacity-building": "capacity or project buildout is ahead of proof; keep base-case credit conditional.",
+            "narrative": "mostly narrative; keep it as scenario/watch value until financial contribution is disclosed.",
+        }.get(vector.stage, "requires more filing confirmation before assigning core valuation credit.")
+        add(
+            f"growth_vector_{vector.vector}",
+            vector.evidence,
+            stage_read,
+            vector.verification_need,
+            "The next annual/half-year/quarterly report would falsify the vector if it fails to show revenue, customers/orders, utilization, margin, cash conversion, or management wording progress.",
+            "Classify this vector as core value, scenario/SOTP value, watch item, or narrative only.",
+        )
+
+    cash_evidence = _first_evidence(
+        answer_rows,
+        predicate=lambda row: row.category in {"cash_quality", "revenue_quality"},
+    ) or _first_evidence(
+        table_rows,
+        predicate=lambda row: row.account in {"operating_cash_flow", "receivables", "inventory", "prepayments", "contract_liabilities"},
+    ) or _first_evidence(
+        relation_rows,
+        predicate=lambda row: row.relation_type in {"cash_absorbing_growth", "quality_growth", "visibility_not_yet_profitability"},
+    )
+    add(
+        "cash_conversion_and_working_capital",
+        cash_evidence,
+        "growth is higher quality only if cash conversion and working capital move with earnings rather than against them.",
+        "Track operating cash flow, receivables/revenue, inventory/revenue, prepayments, contract liabilities, capex, and leverage alongside revenue/profit growth.",
+        "Profit growth is absorbed by receivables, inventory, prepayments, capex, debt, or weak operating cash flow.",
+        "Use this row to decide conviction, sizing, and whether a high-growth story deserves a higher multiple.",
+    )
+
+    if archetype_rows:
+        archetype = archetype_rows[0]
+        add(
+            f"archetype_ramp_{archetype.archetype_id}",
+            archetype.evidence_basis,
+            "the primary business archetype sets the company-specific ramp variables; growth is only durable when those variables improve together.",
+            archetype.underwriting_focus,
+            "The next evidence pack fails on the archetype's own value drivers, even if headline revenue still grows.",
+            "Use as the company-specific final check before the bull/bear debate and PM rating.",
+        )
+
+    return rows[:limit]
 
 
 def _build_pre_debate_underwriting_questions(
@@ -3987,6 +4369,14 @@ def _build_pre_debate_underwriting_questions(
             )
         )
 
+    narrative_sources = (
+        [row.excerpt for row in paragraphs]
+        + [row.excerpt for row in industry_rows]
+        + [row.evidence for row in business_model]
+        + [row.evidence for row in growth]
+        + [row.evidence for row in answered]
+    )
+
     core_evidence = _first_evidence(
         business_model,
         predicate=lambda row: row.lens == "core_revenue_engine",
@@ -4006,7 +4396,10 @@ def _build_pre_debate_underwriting_questions(
         pm="Put a concise business-model explanation before valuation and avoid using one blended multiple if segments differ.",
     )
 
-    moat_evidence = _first_evidence(paragraphs, predicate=lambda row: row.lens == "moat") or _first_evidence(
+    moat_evidence = _best_text_evidence(
+        narrative_sources,
+        ("核心竞争力", "护城河", "商户", "客户粘性", "网络效应", "成本优势", "品牌", "专利", "牌照", "区位", "流量", "供应链"),
+    ) or _first_evidence(paragraphs, predicate=lambda row: row.lens == "moat") or _first_evidence(
         industry_rows,
         predicate=lambda row: any(token in row.lens for token in ("moat", "franchise", "quality", "traffic", "channel")),
         attr="excerpt",
@@ -4057,12 +4450,13 @@ def _build_pre_debate_underwriting_questions(
         )
 
     if profile == "market_operator":
-        online_answer = _first_evidence(
-            answered,
-            predicate=lambda row: row.question_id == "market_online_disruption",
-        ) or _first_evidence(
-            answered,
-            predicate=lambda row: row.category == "channel_shift",
+        online_answer = _best_text_evidence(
+            [row.excerpt for row in paragraphs]
+            + [row.excerpt for row in industry_rows]
+            + [row.evidence for row in growth]
+            + [row.evidence for row in business_model]
+            + [row.evidence for row in answered],
+            ("线上", "电商", "Chinagoods", "数字化", "义支付", "支付", "跨境", "履约", "平台", "商户生态"),
         ) or _first_evidence(
             paragraphs,
             predicate=lambda row: any(
@@ -4076,6 +4470,12 @@ def _build_pre_debate_underwriting_questions(
                 token in row.evidence
                 for token in ("线上", "电商", "Chinagoods", "数字化", "义支付", "支付", "履约")
             ),
+        ) or _first_evidence(
+            answered,
+            predicate=lambda row: row.question_id == "market_online_disruption",
+        ) or _first_evidence(
+            answered,
+            predicate=lambda row: row.category == "channel_shift",
         )
         add(
             "pre_debate_online_disruption",
@@ -4088,7 +4488,10 @@ def _build_pre_debate_underwriting_questions(
             pm="Integrate this into the business-model primer and second-curve/scenario valuation, not as a generic internet label.",
         )
 
-    growth_evidence = _first_evidence(
+    growth_evidence = _best_text_evidence(
+        narrative_sources,
+        ("增长", "放量", "订单", "客户", "产能", "利用率", "出租率", "销量", "价格", "产品结构", "第二增长", "新业务", "平台"),
+    ) or _first_evidence(
         answered,
         predicate=lambda row: row.category in {"growth_driver", "orders", "new_business", "mix"},
     ) or _first_evidence(growth, predicate=lambda row: True)
@@ -5305,14 +5708,50 @@ def _load_question_memory(symbol: str) -> dict:
         return {}
 
 
+def _question_profile(question_id: str) -> str:
+    generic_ids = {question.question_id for question in _GENERIC_QUESTIONS}
+    if question_id in generic_ids or question_id.startswith("generic_"):
+        return "generic"
+    for profile, questions in _INDUSTRY_PLAYBOOKS.items():
+        if any(question.question_id == question_id for question in questions):
+            return profile
+    return "generic"
+
+
+def _filter_question_memory_for_profile(memory: dict, profile: str) -> dict:
+    """Prevent stale industry playbook questions from leaking into later runs."""
+
+    filtered = dict(memory or {})
+    questions = filtered.get("questions", {})
+    if not isinstance(questions, dict):
+        filtered["questions"] = {}
+        filtered["profile"] = profile
+        return filtered
+    allowed: dict[str, dict] = {}
+    for question_id, payload in questions.items():
+        if not isinstance(payload, dict):
+            continue
+        question_owner = str(payload.get("profile") or _question_profile(str(question_id)))
+        if question_owner in {"generic", profile}:
+            allowed[str(question_id)] = payload
+    previous_profile = filtered.get("profile")
+    if previous_profile and previous_profile != profile:
+        previous_profiles = list(filtered.get("previous_profiles", []))
+        if previous_profile not in previous_profiles:
+            previous_profiles.append(previous_profile)
+        filtered["previous_profiles"] = previous_profiles[-5:]
+    filtered["profile"] = profile
+    filtered["questions"] = allowed
+    return filtered
+
+
 def _update_question_memory(
     symbol: str,
     curr_date: str,
     profile: str,
     answers: Iterable[FilingQuestionAnswer],
 ) -> dict:
-    memory = _load_question_memory(symbol)
-    memory.setdefault("profile", profile)
+    memory = _filter_question_memory_for_profile(_load_question_memory(symbol), profile)
     memory.setdefault("questions", {})
     for answer in answers:
         item = memory["questions"].setdefault(
@@ -5321,8 +5760,10 @@ def _update_question_memory(
                 "question": answer.question,
                 "category": answer.category,
                 "times_seen": 0,
+                "profile": _question_profile(answer.question_id),
             },
         )
+        item["profile"] = _question_profile(answer.question_id)
         item["times_seen"] += 1
         item["last_seen_date"] = curr_date
         item["last_report_type"] = answer.report_type
@@ -5341,8 +5782,9 @@ def _update_question_memory(
     return memory
 
 
-def _memory_rows(memory: dict, limit: int = 8) -> list[dict[str, str]]:
-    questions = list(memory.get("questions", {}).items())
+def _memory_rows(memory: dict, limit: int = 8, profile: str | None = None) -> list[dict[str, str]]:
+    filtered = _filter_question_memory_for_profile(memory, profile) if profile else memory
+    questions = list(filtered.get("questions", {}).items())
     questions.sort(
         key=lambda item: (
             item[1].get("times_seen", 0),
@@ -5368,6 +5810,130 @@ def _build_table(rows: list[dict[str, str]]) -> str:
     if not rows:
         return "No filing-derived evidence snippets found."
     return _markdown_table(pd.DataFrame(rows))
+
+
+def _numeric_cell(row: pd.Series, *columns: str) -> float | None:
+    for column in columns:
+        if column not in row.index:
+            continue
+        value = pd.to_numeric(pd.Series([row.get(column)]), errors="coerce").iloc[0]
+        if not pd.isna(value):
+            return float(value)
+    return None
+
+
+def _format_cny_yi(value: float | None) -> str:
+    if value is None or pd.isna(value):
+        return "N/A"
+    return f"{value / 100_000_000:.2f}亿元"
+
+
+def _format_delta_yi(current: float | None, prior: float | None) -> str:
+    if current is None or prior is None or pd.isna(current) or pd.isna(prior):
+        return "N/A"
+    delta = (current - prior) / 100_000_000
+    if prior == 0:
+        return f"{delta:+.2f}亿元"
+    pct = (current / prior - 1) * 100
+    return f"{delta:+.2f}亿元 ({pct:+.1f}%)"
+
+
+def _working_capital_read(
+    contract_liab: float | None,
+    adv_receipts: float | None,
+    inventories: float | None,
+    receivables: float | None,
+) -> str:
+    forward_cash_items = [value for value in (contract_liab, adv_receipts) if value is not None]
+    forward_cash = sum(forward_cash_items) if forward_cash_items else None
+    if forward_cash is None and inventories is None and receivables is None:
+        return "structured balance-sheet fields unavailable"
+    reads: list[str] = []
+    if forward_cash is not None:
+        reads.append("forward demand/liability signal available")
+    if inventories is not None:
+        reads.append("inventory signal available")
+    if receivables is not None:
+        reads.append("receivable signal available")
+    return "; ".join(reads)
+
+
+def _structured_balance_sheet_rows(balance: pd.DataFrame | TushareDataError) -> list[dict[str, str]]:
+    if isinstance(balance, TushareDataError) or balance is None or balance.empty:
+        return []
+    if "end_date" not in balance.columns:
+        return []
+
+    frame = balance.copy()
+    frame["end_date"] = frame["end_date"].astype(str)
+    frame = frame.sort_values("end_date", ascending=False).drop_duplicates("end_date", keep="first")
+    records = list(frame.iterrows())
+    rows: list[dict[str, str]] = []
+
+    values_by_period: dict[str, dict[str, float | None]] = {}
+    for _, row in records:
+        end_date = str(row.get("end_date", ""))
+        values_by_period[end_date] = {
+            "contract_liab": _numeric_cell(row, "contract_liab"),
+            "adv_receipts": _numeric_cell(row, "adv_receipts"),
+        }
+
+    for index, (_, row) in enumerate(records[:8]):
+        end_date = str(row.get("end_date", ""))
+        contract_liab = _numeric_cell(row, "contract_liab")
+        adv_receipts = _numeric_cell(row, "adv_receipts")
+        inventories = _numeric_cell(row, "inventories")
+        receivables = _numeric_cell(row, "accounts_receiv", "notes_receiv")
+        money_cap = _numeric_cell(row, "money_cap")
+        total_liab = _numeric_cell(row, "total_liab")
+        total_assets = _numeric_cell(row, "total_assets")
+        forward_cash = None
+        if contract_liab is not None or adv_receipts is not None:
+            forward_cash = (contract_liab or 0.0) + (adv_receipts or 0.0)
+
+        prior_row = records[index + 1][1] if index + 1 < len(records) else pd.Series(dtype="object")
+        prior_forward_cash = None
+        if not prior_row.empty:
+            prior_contract = _numeric_cell(prior_row, "contract_liab")
+            prior_adv = _numeric_cell(prior_row, "adv_receipts")
+            if prior_contract is not None or prior_adv is not None:
+                prior_forward_cash = (prior_contract or 0.0) + (prior_adv or 0.0)
+
+        yoy_period = f"{int(end_date[:4]) - 1}{end_date[4:]}" if len(end_date) == 8 and end_date[:4].isdigit() else ""
+        yoy_values = values_by_period.get(yoy_period, {})
+        yoy_forward_cash = None
+        if yoy_values:
+            yoy_contract = yoy_values.get("contract_liab")
+            yoy_adv = yoy_values.get("adv_receipts")
+            if yoy_contract is not None or yoy_adv is not None:
+                yoy_forward_cash = (yoy_contract or 0.0) + (yoy_adv or 0.0)
+
+        leverage = "N/A"
+        if total_assets not in (None, 0) and total_liab is not None:
+            leverage = f"{total_liab / total_assets * 100:.1f}%"
+
+        rows.append(
+            {
+                "end_date": end_date or "N/A",
+                "ann_date": _format_value(row.get("ann_date")),
+                "contract_liab": _format_cny_yi(contract_liab),
+                "adv_receipts": _format_cny_yi(adv_receipts),
+                "contract_plus_adv": _format_cny_yi(forward_cash),
+                "qoq_change": _format_delta_yi(forward_cash, prior_forward_cash),
+                "yoy_change": _format_delta_yi(forward_cash, yoy_forward_cash),
+                "inventories": _format_cny_yi(inventories),
+                "receivables": _format_cny_yi(receivables),
+                "money_cap": _format_cny_yi(money_cap),
+                "liab_to_assets": leverage,
+                "analyst_read": _working_capital_read(
+                    contract_liab,
+                    adv_receipts,
+                    inventories,
+                    receivables,
+                ),
+            }
+        )
+    return rows
 
 
 _RUNTIME_READING_KEYWORDS = (
@@ -5621,6 +6187,18 @@ def get_financial_report_intelligence_context(
         industry_reading_pack=industry_reading_pack,
         answers=answers,
     )
+    growth_sustainability_map = _build_growth_sustainability_map(
+        business_model_map=business_model_map,
+        segment_economics=segment_economics,
+        business_segment_valuation_map=business_segment_valuation_map,
+        growth_vectors=growth_vectors,
+        answers=answers,
+        statement_table_signals=statement_table_signals,
+        financial_relations=financial_relations,
+        paragraph_reading_pack=paragraph_reading_pack,
+        industry_reading_pack=industry_reading_pack,
+        business_archetypes=business_archetypes,
+    )
     pre_debate_questions = _build_pre_debate_underwriting_questions(
         company_name=company_name,
         profile=profile,
@@ -5800,6 +6378,7 @@ def get_financial_report_intelligence_context(
         }
         for item in financial_relations
     ]
+    structured_balance_rows = _structured_balance_sheet_rows(balance)
     textual_rows = [
         {
             "signal_type": item.signal_type,
@@ -5864,6 +6443,18 @@ def get_financial_report_intelligence_context(
         }
         for item in business_archetypes
     ]
+    growth_sustainability_rows = [
+        {
+            "growth_source": item.growth_source,
+            "sustainability_read": item.sustainability_read,
+            "evidence_strength": item.evidence_strength,
+            "evidence_basis": item.evidence_basis,
+            "ramp_conditions": item.ramp_conditions,
+            "falsification_signals": item.falsification_signals,
+            "pm_use": item.pm_use,
+        }
+        for item in growth_sustainability_map
+    ]
     pre_debate_rows = [
         {
             "question_id": item.question_id,
@@ -5927,6 +6518,9 @@ def get_financial_report_intelligence_context(
         "## Company-Specific Business Archetype",
         _build_table(business_archetype_rows),
         "",
+        "## Growth Sustainability & Ramp Conditions",
+        _build_table(growth_sustainability_rows),
+        "",
         "## Pre-Debate Underwriting Questions",
         _build_table(pre_debate_rows),
         "",
@@ -5967,6 +6561,9 @@ def get_financial_report_intelligence_context(
         "## Banking KPI Pack",
         _build_table(banking_kpi_rows),
         "",
+        "## Structured Balance-Sheet History",
+        _build_table(structured_balance_rows),
+        "",
         "## Statement Table Reading Pack",
         _build_table(statement_table_rows),
         "",
@@ -5998,7 +6595,7 @@ def get_financial_report_intelligence_context(
         _build_table(report_bridge_rows),
         "",
         "## Company-Specific Watch Questions",
-        _build_table(_memory_rows(memory)),
+        _build_table(_memory_rows(memory, profile=profile)),
         "",
         "## Filing-Derived Operating Evidence",
         _build_table(evidence_rows),
@@ -6006,7 +6603,9 @@ def get_financial_report_intelligence_context(
         "## Analyst Instructions",
         "- Start with the filing reading coverage audit. If coverage is partial, weak, or failed, explicitly downgrade confidence before using any filing-derived thesis.",
         "- Use the Internal Filing Quality Modules as a ten-part filing-only review: accounting reconciliation, segment economics, footnote radar, cash-flow quality, capex/CIP return bridge, MD&A text change, non-recurring profit quality, balance-sheet forward signals, shareholder-return authenticity, and disclosure quality. The final PM memo should integrate these into PM Summary, Investment Thesis, Valuation, Risk, and Verification rather than dumping a checklist.",
+        "- Use the Growth Sustainability & Ramp Conditions table before assigning upside or downside. For each company, explain whether revenue and profit growth are sustainable, what must happen for growth to keep ramping, which evidence is already verified, and what would falsify the growth thesis.",
         "- Use the Pre-Debate Underwriting Questions before the bull/bear debate. These are the company-specific buy-side questions that should frame the debate: business model, moat, growth driver, second curve, cash quality, segment valuation, and decision-relevant risks. Bulls and bears should answer or attack these questions directly rather than debating generic sector slogans.",
+        "- Use Structured Balance-Sheet History as the second-layer financial-statement proof for contract liabilities/advance receipts, inventory, receivables, cash, and leverage. If this table is ready, do not call contract liabilities or working-capital history missing merely because the PDF narrative excerpt did not mention it.",
         "- Read quarterly reports for confirmation or reversal of short-cycle signals; read half-year reports for trend formation and segment mix; read annual reports for business model, capital allocation, and long-cycle risk.",
         "- Start with the business model map, then use the growth vector map to separate mature engines from emerging second curves.",
         "- For multi-product or multi-region companies, read the Segment Economics Pack before the bull/bear debate. Do not collapse a company into headline revenue or profit when annual/half-year filings disclose product, geography, channel, revenue, cost, gross margin, or growth-rate splits.",
