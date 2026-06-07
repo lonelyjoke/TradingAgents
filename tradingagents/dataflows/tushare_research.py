@@ -1173,17 +1173,46 @@ def get_valuation_percentiles(ticker: str, curr_date: str, years: int = 5) -> st
     end_dt = datetime.strptime(curr_date, "%Y-%m-%d")
     start_dt = end_dt - relativedelta(years=max(1, years))
     fields = "ts_code,trade_date,pe_ttm,pb,ps_ttm,dv_ttm,total_mv"
-    data = _query_optional_api(
+    result = _safe_optional_query(
         "daily_basic",
         ts_code=symbol,
         start_date=start_dt.strftime("%Y%m%d"),
         end_date=end_dt.strftime("%Y%m%d"),
         fields=fields,
     )
+    if isinstance(result, TushareDataError):
+        return "\n".join(
+            [
+                f"# Tushare historical valuation percentiles for {symbol} as of {curr_date}",
+                "",
+                "- Status: unavailable",
+                f"- Reason: {result}",
+                "",
+                "## Analyst Instructions",
+                "- Historical valuation percentile data is unavailable for this run; treat it as a valuation-context gap, not as evidence for or against the stock.",
+                "- Continue the report with verified financial statements, earnings bridge, peer comparison, market expectation, and price/EPS/PE decomposition when those contexts are available.",
+            ]
+        )
+
+    data = result
     if data is None or data.empty:
         return f"No Tushare daily_basic valuation history found for {symbol}."
     data = data.sort_values("trade_date")
-    latest = data.dropna(how="all", subset=["pe_ttm", "pb", "ps_ttm", "dv_ttm"]).iloc[-1]
+    valuation_history = data.dropna(how="all", subset=["pe_ttm", "pb", "ps_ttm", "dv_ttm"])
+    if valuation_history.empty:
+        return "\n".join(
+            [
+                f"# Tushare historical valuation percentiles for {symbol} as of {curr_date}",
+                "",
+                "- Status: unavailable",
+                "- Reason: daily_basic returned rows, but PE/PB/PS/dividend-yield fields were all empty.",
+                "",
+                "## Analyst Instructions",
+                "- Do not infer valuation cheapness or expensiveness from missing percentile data.",
+                "- Use peer comparison, market expectation, earnings-model, and price/EPS/PE decomposition as fallback valuation evidence.",
+            ]
+        )
+    latest = valuation_history.iloc[-1]
 
     metric_names = {
         "pe_ttm": "PE TTM",

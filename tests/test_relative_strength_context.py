@@ -1,7 +1,11 @@
 import pandas as pd
 
 from tradingagents.dataflows import tushare_research as research
-from tradingagents.dataflows.tushare_research import get_relative_strength_context
+from tradingagents.dataflows.tushare_a_stock import TushareDataError
+from tradingagents.dataflows.tushare_research import (
+    get_relative_strength_context,
+    get_valuation_percentiles,
+)
 
 
 def _price_frame(symbol: str, start: float, step: float, periods: int = 280) -> pd.DataFrame:
@@ -104,3 +108,19 @@ def test_relative_strength_chooses_chinext_style_benchmark(monkeypatch):
     assert code == "399006.SZ"
     assert "创业板" in name
     assert "创业板" in reason
+
+
+def test_valuation_percentiles_degrades_on_optional_daily_basic_timeout(monkeypatch):
+    def fake_safe_optional_query(api_name: str, **kwargs):
+        return TushareDataError(
+            "daily_basic unavailable: configured_http_url: HTTPConnectionPool(host='127.0.0.1', port=7890): Read timed out."
+        )
+
+    monkeypatch.setattr(research, "_safe_optional_query", fake_safe_optional_query)
+
+    rendered = get_valuation_percentiles("300751.SZ", "2026-06-06")
+
+    assert "# Tushare historical valuation percentiles for 300751.SZ" in rendered
+    assert "- Status: unavailable" in rendered
+    assert "Read timed out" in rendered
+    assert "valuation-context gap" in rendered
