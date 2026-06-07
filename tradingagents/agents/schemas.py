@@ -659,6 +659,22 @@ class PortfolioDecision(BaseModel):
             "not verified. Keep the section educational but investment-relevant."
         ),
     )
+    core_research_questions: Optional[str] = Field(
+        default=None,
+        description=(
+            "A standalone Core Research Questions section for the Portfolio Manager "
+            "memo when the financial-report intelligence supplies Pre-Debate "
+            "Underwriting Questions. Do not paste the upstream question table. "
+            "Select the 4-7 most decision-relevant, company-specific questions, "
+            "then answer them using the post-debate PM judgment: what the bull "
+            "case proved, what the bear case exposed, which evidence settled the "
+            "question, what remains unresolved, and how the answer changes rating, "
+            "valuation, sizing, or the next verification action. Prefer a compact "
+            "markdown table with columns such as question, debate-informed answer, "
+            "evidence, PM implication, and remaining verification. When writing "
+            "Chinese, title the section `核心投研问题与辩论后的答案`."
+        ),
+    )
     bull_bear_debate: str = Field(
         description=(
             "A compact public-facing summary of the strongest bull argument and "
@@ -1341,6 +1357,18 @@ def render_pm_decision(decision: PortfolioDecision) -> str:
             ]
         )
 
+    core_question_parts = []
+    if decision.core_research_questions:
+        core_question_parts.extend(
+            [
+                (
+                    "**Core Research Questions & Debate-Informed Answers**: "
+                    f"{decision.core_research_questions}"
+                ),
+                "",
+            ]
+        )
+
     parts = [
         f"**Company Snapshot**: {decision.company_snapshot}",
         "",
@@ -1351,6 +1379,7 @@ def render_pm_decision(decision: PortfolioDecision) -> str:
         *take_away_parts,
         *pm_summary_parts,
         *primer_parts,
+        *core_question_parts,
         f"**Investment Thesis**: {thesis}",
         "",
     ]

@@ -150,6 +150,41 @@ class TestRenderPortfolioDecision:
         assert "Full holders can keep the core position" in md
         assert "prospective builders can open a starter tranche" in md
 
+    def test_core_research_questions_render_between_primer_and_thesis(self):
+        decision = PortfolioDecision(
+            rating=PortfolioRating.OVERWEIGHT,
+            company_snapshot="Asset-light market operator.",
+            one_line_thesis="The market underprices durable rent visibility.",
+            reader_action_guidance="Build in stages after cash-flow confirmation.",
+            business_driver_map="Rent, occupancy, contract liabilities, cash conversion.",
+            business_model_supply_chain_primer=(
+                "The company earns rent and service income from merchants, then "
+                "uses the market ecosystem to add trade services."
+            ),
+            core_research_questions=(
+                "| question | debate-informed answer |\n"
+                "| --- | --- |\n"
+                "| Can rent growth persist? | Bulls proved visibility, bears exposed cash-flow timing. |"
+            ),
+            bull_bear_debate="Bull sees contract liabilities; bear sees cash-flow timing.",
+            debate_verdict="Overweight wins, but only with staged sizing.",
+            investment_logic_chain="If rent converts to cash, valuation can recover.",
+            executive_summary="Starter position only.",
+            verification_and_falsification="Confirm cash conversion and occupancy.",
+            investment_thesis="Contract liabilities support revenue visibility.",
+        )
+
+        md = render_pm_decision(decision)
+
+        assert "**Core Research Questions & Debate-Informed Answers**" in md
+        assert "Can rent growth persist?" in md
+        assert md.index("**Business Model & Industry Chain Primer**") < md.index(
+            "**Core Research Questions & Debate-Informed Answers**"
+        )
+        assert md.index("**Core Research Questions & Debate-Informed Answers**") < md.index(
+            "**Investment Thesis**"
+        )
+
     def test_value_stock_safety_price_renders_before_action_guidance(self):
         decision = PortfolioDecision(
             rating=PortfolioRating.HOLD,

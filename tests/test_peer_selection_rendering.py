@@ -82,3 +82,35 @@ def test_portfolio_decision_renders_peer_selection_verdict():
     assert "relative allocation=Upstream is better." in rendered
     assert "Management and capital allocation: Capital allocation is aggressive." in rendered
     assert "Shareholder and float structure: Unlock and sell-down pressure exist." in rendered
+
+
+def test_portfolio_decision_renders_core_research_questions_before_thesis():
+    decision = PortfolioDecision(
+        rating=PortfolioRating.OVERWEIGHT,
+        company_snapshot="Company snapshot.",
+        one_line_thesis="Watch the core questions.",
+        business_driver_map="Rent; cash conversion.",
+        business_model_supply_chain_primer="Business model primer.",
+        core_research_questions=(
+            "| question | debate-informed answer |\n"
+            "| --- | --- |\n"
+            "| Is growth durable? | Bulls proved visibility; bears exposed cash timing. |"
+        ),
+        bull_bear_debate="Bull-bear split.",
+        debate_verdict="Staged Overweight.",
+        investment_logic_chain="Variables affect earnings and valuation.",
+        executive_summary="Keep tracking.",
+        verification_and_falsification="Watch contract liabilities and cash flow.",
+        investment_thesis="The thesis follows from debate-tested evidence.",
+    )
+
+    rendered = render_pm_decision(decision)
+
+    assert "**Core Research Questions & Debate-Informed Answers**" in rendered
+    assert "Is growth durable?" in rendered
+    assert rendered.index("**Business Model & Industry Chain Primer**") < rendered.index(
+        "**Core Research Questions & Debate-Informed Answers**"
+    )
+    assert rendered.index("**Core Research Questions & Debate-Informed Answers**") < rendered.index(
+        "**Investment Thesis**"
+    )
