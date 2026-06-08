@@ -1,0 +1,162 @@
+# Thematic catalyst cross-check for 000425.SZ as of 2026-06-08
+
+- Company: 徐工机械
+- Financial-report look-back: 900 days
+- News look-back: 180 days
+- Investee news terms: 上海经石投资管理中心（有限合伙, 上海经石投资管理中心（有限合伙）, 业投资合伙, 中国人寿保险股份有限公司, 债务工具投资, 其他, 出总额的, 创业投资, 北京磐茂投资管理有限公司, 南京欧米麦克机器人科技有限公司, 合伙, 徐州大任登峰企业管理咨询合伙（有限合伙, 徐州大器引领企业管理咨询合伙（有限合伙, 徐州大道互联企业管理咨询合伙（有限合伙, 徐州徐工叁号股权投资合伙企业, 徐州徐工叁号股权投资合伙企业(有限合伙, 徐州徐工股权投资有限公司, 徐州特许机, 徐工欧洲投资发展有限公司, 徐工集团产业投资发展（徐州）有限公司, 徐工集团巴西投资有限公司, 有限公司, 本公司投资的合伙企业, 权投资合伙企业, 江苏集萃道路工程技术与装备研究所有限公司, 江阴大地装备股份有限公司, 淄博金石彭衡股权投资合伙企业, 湖州盈灿投资合伙企业, 益投资的账面, 睿工投资, 管理, （1）债务工具投资
+- Extraction status: Financial-report text extraction succeeded.
+
+## Financial Reports Considered
+- 20260429: 2026年一季度报告
+- 20260429: 2025年年度报告
+- 20251031: 2025年三季度报告
+- 20250830: 半年报监事会决议公告
+
+## Financial Report Text Acquisition Audit
+| stage | status | detail |
+| --- | --- | --- |
+| runtime_dependency | ready | pdftotext is available for PDF text extraction. |
+| primary_announcement_lookup | ready | Found 4 candidate financial-report announcement(s). |
+| primary_pdf_text_extraction | ready | 2026年一季度报告: extracted 21430 characters of readable report text. |
+| primary_pdf_text_extraction | ready | 2025年年度报告: extracted 657763 characters of readable report text. |
+| primary_pdf_text_extraction | ready | 2025年三季度报告: extracted 23945 characters of readable report text. |
+| primary_pdf_text_extraction | ready | 半年报监事会决议公告: extracted 1241 characters of readable report text. |
+| final_text_bundle | ready | Prepared 4 readable report text(s) for filing intelligence. |
+
+## Filing-Origin Candidates -> News Catalyst Check
+| candidate | kind | financial_report_evidence | recent_news_match | catalyst_signal |
+| --- | --- | --- | --- | --- |
+| 有限公司 | asset-revaluation | 2025年三季度报告: 投资有限公司 | no | no |
+| 湖州盈灿投资合伙企业 | asset-revaluation | 2025年三季度报告: 湖州盈灿投资合伙企业（有限合 | no | no |
+| 徐州徐工叁号股权投资合伙企业 | asset-revaluation | 2025年年度报告: 徐州徐工叁号股权投资合伙企业 (有 | no | no |
+| 北京磐茂投资管理有限公司 | asset-revaluation | 2025年年度报告: 士学位。现任徐工机械董事，北京磐茂投资管理有限公司总经理、董事总经理、执行董事。 | no | no |
+| 中国人寿保险股份有限公司 | asset-revaluation | 2025年年度报告: 经理、党委委员，中国人寿保险股份有限公司总裁助理、销售总监，中信产业投资基金管 | no | no |
+| 江阴大地装备股份有限公司 | asset-revaluation | 2025年年度报告: 江阴大地装备股份有限公司证券部部长，徐工机械证券部投资者关系管理主管、部长助理、 | no | no |
+| 权投资合伙企业 | asset-revaluation | 2025年年度报告: 权投资合伙企业 274,156,963 0 274,156,963 0 暨关联交易向交易 | no | no |
+| 合伙 | asset-revaluation | 2025年年度报告: 投资合伙 境内非国 367,957,13 367,957,13 | no | no |
+| 出总额的 | asset-revaluation | 2025年年度报告: 出总额的 10%以上且金额大于 5 亿元 | no | no |
+| 机器人 | business-realization | 2025年年度报告: 徐州徐工道金特种机器人技术有限公 | no | no |
+| 债务工具投资 | asset-revaluation | 2025年年度报告: 债务工具投资 10,128,188.41 9,054,450.05 | no | no |
+| 徐州徐工股权投资有限公司 | asset-revaluation | 2025年年度报告: 其他应付款 徐州徐工股权投资有限公司 781,566.17 | no | no |
+| 上海经石投资管理中心（有限合伙 | asset-revaluation | 2025年年度报告: 上海经石投资管理中心（有限合伙） 本公司投资的合伙企业 | no | no |
+| 上海经石投资管理中心（有限合伙） | asset-revaluation | 2025年年度报告: 上海经石投资管理中心（有限合伙） 1,200,000.00 | no | no |
+| 管理 | asset-revaluation | 2025年年度报告: 投资管理 2,389,000,0 2,389,000,0 170,500,00 | no | no |
+| 创业投资 | asset-revaluation | 2025年年度报告: 创业投资 168,248,58 191,777,33 | no | no |
+| 睿工投资 | asset-revaluation | 2025年年度报告: 睿工投资 63,000,000. 20,036,960. 52,500,000. | no | no |
+| 徐州特许机 | asset-revaluation | 2025年年度报告: 徐州特许机 2,655,1 -148,1 | no | no |
+| 其他 | asset-revaluation | 2025年年度报告: 其他 30,000,000.00 | no | no |
+| 徐工欧洲投资发展有限公司 | asset-revaluation | 2025年年度报告: 徐工欧洲投资发展有限公司 德国 欧元 日常收支以欧元为主 | no | no |
+| 徐州徐工叁号股权投资合伙企业(有限合伙 | asset-revaluation | 2025年年度报告: 徐州徐工叁号股权投资合伙企业(有限合伙) 注销 | no | no |
+| 业投资合伙 | asset-revaluation | 2025年年度报告: 业投资合伙 9,217,000,00 | no | no |
+| 益投资的账面 | asset-revaluation | 2025年年度报告: 益投资的账面 688,991,376.24 887,405,414.83 691,196,472.03 891,439,568.12 | no | no |
+| （1）债务工具投资 | asset-revaluation | 2025年年度报告: （1）债务工具投资 10,128,188.41 10,128,188.41 | no | no |
+| 徐工集团产业投资发展（徐州）有限公司 | asset-revaluation | 2025年年度报告: 徐工集团产业投资发展（徐州）有限公司 同受徐工集团控制 | no | no |
+| 徐工集团巴西投资有限公司 | asset-revaluation | 2025年年度报告: 应付账款 徐工集团巴西投资有限公司 35,587,231.78 | no | no |
+| 储能 | business-realization | 2025年年度报告: 徐州新挖储能技术有限公司 同受徐工集团控制 | no | no |
+| 本公司投资的合伙企业 | asset-revaluation | 2025年年度报告: 徐州大任登峰企业管理咨询合伙（有限合伙） 本公司投资的合伙企业 | no | no |
+| 徐州大器引领企业管理咨询合伙（有限合伙 | asset-revaluation | 2025年年度报告: 徐州大器引领企业管理咨询合伙（有限合伙） 本公司投资的合伙企业 | no | no |
+| 徐州大道互联企业管理咨询合伙（有限合伙 | asset-revaluation | 2025年年度报告: 徐州大道互联企业管理咨询合伙（有限合伙） 本公司投资的合伙企业 | no | no |
+| 徐州大任登峰企业管理咨询合伙（有限合伙 | asset-revaluation | 2025年年度报告: 徐州大任登峰企业管理咨询合伙（有限合伙） 本公司投资的合伙企业 | no | no |
+| 江苏集萃道路工程技术与装备研究所有限公司 | asset-revaluation | 2025年年度报告: 江苏集萃道路工程技术与装备研究所有限公司 本公司参股公司 | no | no |
+| 南京欧米麦克机器人科技有限公司 | asset-revaluation | 2025年年度报告: 南京欧米麦克机器人科技有限公司 本公司参股公司 | no | no |
+| 淄博金石彭衡股权投资合伙企业 | asset-revaluation | 2025年三季度报告: 淄博金石彭衡股权投资合伙企业 | no | no |
+| order-ramp | business-realization | 2026年一季度报告: 合同负债 7,191,853,144.25 6,357,507,413.12 | no | no |
+| overseas-expansion | business-realization | 2025年年度报告: BOM 平台，实现订单配置全链路数字化打通。推广 X-GSS 海外协同制作平台，实现徐工 | no | no |
+| capacity-release | business-realization | 2025年年度报告: 注：统计口径为项目投产后产品实现的营业收入金额。其中大型桩工机械产业化升级技改工程项目为技改扩产项目，由 | no | no |
+
+## Reliable Filing-Origin Bull Themes
+| candidate | kind | financial_report_evidence | reliability_gate | story_read | proof_needed |
+| --- | --- | --- | --- | --- | --- |
+| order-ramp | business-realization | 2026年一季度报告: 合同负债 7,191,853,144.25 6,357,507,413.12 | filing-backed + monetization evidence | demand visibility is improving | watch conversion into delivery, revenue, and cash collection |
+| overseas-expansion | business-realization | 2025年年度报告: BOM 平台，实现订单配置全链路数字化打通。推广 X-GSS 海外协同制作平台，实现徐工 | filing-backed + monetization evidence | geographic expansion can widen the earnings runway | watch order quality, localization, and profitability |
+| capacity-release | business-realization | 2025年年度报告: 注：统计口径为项目投产后产品实现的营业收入金额。其中大型桩工机械产业化升级技改工程项目为技改扩产项目，由 | filing-backed + monetization evidence | supply capability may be unlocking future revenue | watch utilization, sell-through, and return on capital |
+
+## News-Origin Candidates -> Filing Validation
+No candidates found.
+
+## Thematic Valuation Bridge
+| candidate | kind | catalyst_tier | valuation_weight | reported_value | vs_listed_mkt_cap | valuation_treatment | primary_investment_nav_ladder | bull_angle | bear_check |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 湖州盈灿投资合伙企业 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 徐州徐工叁号股权投资合伙企业 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 北京磐茂投资管理有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 中国人寿保险股份有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 江阴大地装备股份有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 权投资合伙企业 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | 2.74 亿元 | 0.2% | verified but immaterial to core valuation | immaterial NAV item: note only unless multiple assets form a portfolio pattern | Useful as optionality, not as the spine of the thesis. | Argue that even full revaluation would not move listed-company value enough to matter. |
+| 合伙 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | 36.80 万元 | 0.0% | verified but immaterial to core valuation | immaterial NAV item: note only unless multiple assets form a portfolio pattern | Useful as optionality, not as the spine of the thesis. | Argue that even full revaluation would not move listed-company value enough to matter. |
+| 出总额的 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | 5.00 亿元 | 0.4% | verified but immaterial to core valuation | immaterial NAV item: note only unless multiple assets form a portfolio pattern | Useful as optionality, not as the spine of the thesis. | Argue that even full revaluation would not move listed-company value enough to matter. |
+| 机器人 | business-realization | tier-2 soft catalyst | scenario support only | not separately disclosed | N/A | real theme, not yet separately quantifiable | N/A | Shows strategic direction and may deserve qualitative optionality. | Keep it out of core valuation until revenue, profit, orders, or cash-flow contribution is separately evidenced. |
+| 债务工具投资 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | 1012.82 万元 | 0.0% | verified but immaterial to core valuation | immaterial NAV item: note only unless multiple assets form a portfolio pattern | Useful as optionality, not as the spine of the thesis. | Argue that even full revaluation would not move listed-company value enough to matter. |
+| 徐州徐工股权投资有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | 78.16 万元 | 0.0% | verified but immaterial to core valuation | immaterial NAV item: note only unless multiple assets form a portfolio pattern | Useful as optionality, not as the spine of the thesis. | Argue that even full revaluation would not move listed-company value enough to matter. |
+| 上海经石投资管理中心（有限合伙 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 上海经石投资管理中心（有限合伙） | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | 120.00 万元 | 0.0% | verified but immaterial to core valuation | immaterial NAV item: note only unless multiple assets form a portfolio pattern | Useful as optionality, not as the spine of the thesis. | Argue that even full revaluation would not move listed-company value enough to matter. |
+| 管理 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | 238.90 万元 | 0.0% | verified but immaterial to core valuation | immaterial NAV item: note only unless multiple assets form a portfolio pattern | Useful as optionality, not as the spine of the thesis. | Argue that even full revaluation would not move listed-company value enough to matter. |
+| 创业投资 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | 19.18 万元 | 0.0% | verified but immaterial to core valuation | immaterial NAV item: note only unless multiple assets form a portfolio pattern | Useful as optionality, not as the spine of the thesis. | Argue that even full revaluation would not move listed-company value enough to matter. |
+| 睿工投资 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | 6300.00 万元 | 0.1% | verified but immaterial to core valuation | immaterial NAV item: note only unless multiple assets form a portfolio pattern | Useful as optionality, not as the spine of the thesis. | Argue that even full revaluation would not move listed-company value enough to matter. |
+| 徐州特许机 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | 2655 元 | 0.0% | verified but immaterial to core valuation | immaterial NAV item: note only unless multiple assets form a portfolio pattern | Useful as optionality, not as the spine of the thesis. | Argue that even full revaluation would not move listed-company value enough to matter. |
+| 其他 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | 3000.00 万元 | 0.0% | verified but immaterial to core valuation | immaterial NAV item: note only unless multiple assets form a portfolio pattern | Useful as optionality, not as the spine of the thesis. | Argue that even full revaluation would not move listed-company value enough to matter. |
+| 徐工欧洲投资发展有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 徐州徐工叁号股权投资合伙企业(有限合伙 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 业投资合伙 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | 921.70 万元 | 0.0% | verified but immaterial to core valuation | immaterial NAV item: note only unless multiple assets form a portfolio pattern | Useful as optionality, not as the spine of the thesis. | Argue that even full revaluation would not move listed-company value enough to matter. |
+| 益投资的账面 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | 8.91 亿元 | 0.8% | verified but immaterial to core valuation | immaterial NAV item: note only unless multiple assets form a portfolio pattern | Useful as optionality, not as the spine of the thesis. | Argue that even full revaluation would not move listed-company value enough to matter. |
+| （1）债务工具投资 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | 1012.82 万元 | 0.0% | verified but immaterial to core valuation | immaterial NAV item: note only unless multiple assets form a portfolio pattern | Useful as optionality, not as the spine of the thesis. | Argue that even full revaluation would not move listed-company value enough to matter. |
+| 徐工集团产业投资发展（徐州）有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 徐工集团巴西投资有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | 3558.72 万元 | 0.0% | verified but immaterial to core valuation | immaterial NAV item: note only unless multiple assets form a portfolio pattern | Useful as optionality, not as the spine of the thesis. | Argue that even full revaluation would not move listed-company value enough to matter. |
+| 储能 | business-realization | tier-2 soft catalyst | scenario support only | not separately disclosed | N/A | real theme, not yet separately quantifiable | N/A | Shows strategic direction and may deserve qualitative optionality. | Keep it out of core valuation until revenue, profit, orders, or cash-flow contribution is separately evidenced. |
+| 本公司投资的合伙企业 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 徐州大器引领企业管理咨询合伙（有限合伙 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 徐州大道互联企业管理咨询合伙（有限合伙 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 徐州大任登峰企业管理咨询合伙（有限合伙 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 江苏集萃道路工程技术与装备研究所有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 南京欧米麦克机器人科技有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 淄博金石彭衡股权投资合伙企业 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| order-ramp | business-realization | tier-1 hard catalyst | scenario-to-core bridge eligible | 71.92 亿元 | 6.5% | eligible for scenario valuation, not automatic core valuation | N/A | Verified commercialization evidence can justify upside scenarios if revenue/profit contribution scales. | Test whether disclosed contribution is recurring, profitable, and large enough versus the existing business. |
+| overseas-expansion | business-realization | tier-1 hard catalyst | scenario-to-core bridge eligible | not separately disclosed | N/A | eligible for scenario valuation, not automatic core valuation | N/A | Verified commercialization evidence can justify upside scenarios if revenue/profit contribution scales. | Test whether disclosed contribution is recurring, profitable, and large enough versus the existing business. |
+| capacity-release | business-realization | tier-1 hard catalyst | scenario-to-core bridge eligible | not separately disclosed | N/A | eligible for scenario valuation, not automatic core valuation | N/A | Verified commercialization evidence can justify upside scenarios if revenue/profit contribution scales. | Test whether disclosed contribution is recurring, profitable, and large enough versus the existing business. |
+
+## Narrative Optionality Watchlist
+| candidate | kind | catalyst_tier | valuation_weight | source | evidence | story_read | proof_needed | credibility |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| unclassified | investor-interaction | tier-3 narrative option | small imagination premium only | cninfo_irm | Q: 董秘您好，近期三一重工、徐工机械先后宣布挖掘机产品涨价3-5%。请问:1.您如何看待本次工程机械行业的涨价潮，这是否意味着行业供需关系已经发生根本性改善？2.预计本次涨价能否有效传导至行业整体利润水平，缓解原材料上涨带来的成本压力？感谢您的回复。 / A: 您好，1.本轮涨价是在国内需求边际回暖、出口持续高增长及原材料成本上行的背景下的合理反映，供需关系有所改善。2.公司正扎实推进“智改数转”一号工程，聚焦“高端化、智能化、绿色化... | official interaction without a mapped investable theme | manual review required | medium-official-signal |
+| unclassified | investor-interaction | tier-3 narrative option | small imagination premium only | cninfo_irm | Q: 董秘您好，5月1日中国对53个非洲建交国全面实施零关税政策。请问：1.您认为本次零关税政策对中国工程机械行业整体出口会带来多大的拉动作用？2.预计2026年中国工程机械对非洲出口的同比增速能达到多少？感谢您的回复。 / A: 您好，徐工机械海外业务已有全球布局与强大的国际化拓展能力，营销网络覆盖全球190余个国家和地区。当前主要出口区域有东南亚、中亚、非洲、南美、欧洲、北美、西亚北非、中美洲、大洋洲等等。其中，非洲区域是重要市场之... | official interaction without a mapped investable theme | manual review required | higher-official-signal |
+| unclassified | investor-interaction | tier-3 narrative option | small imagination premium only | cninfo_irm | Q: 董秘您好，近年来中国工程机械出口持续高增，已经成为全球最大的工程机械出口国。请问：1.您认为中国工程机械在全球市场的竞争优势是否在持续增强？2.预计2026年中国工程机械行业整体出口增速能达到多少？感谢您的回复。 / A: 您好，徐工机械海外业务已有全球布局与强大的国际化拓展能力，营销网络覆盖全球190余个国家和地区。当前主要出口区域有东南亚、中亚、非洲、南美、欧洲、北美、西亚北非、中美洲、大洋洲等等。近年来，徐工机械国际化收入增... | official interaction without a mapped investable theme | manual review required | higher-official-signal |
+| unclassified | investor-interaction | tier-3 narrative option | small imagination premium only | cninfo_irm | Q: 董秘您好，一季度工程机械行业销量实现了两位数增长。请问：1.目前整个工程机械行业的订单饱满度如何？二季度行业整体需求是否延续了一季度的复苏势头？2.当前行业主要企业的平均产能利用率大概在什么水平？感谢您的回复。 / A: 您好，目前行业内销持续改善，出口延续高增长态势，徐工机械将坚持“高质量、强安全、世界级、稳增长”经营方针，深度推进高端化、智能化、绿色化、全球化、服务化“五化”转型，全力打好智改数转网联“三大战役”，加快锻造新质... | official interaction without a mapped investable theme | manual review required | medium-official-signal |
+| unclassified | investor-interaction | tier-3 narrative option | small imagination premium only | cninfo_irm | Q: 董秘您好，国家出台了大规模设备更新政策，多地也出台了老旧工程机械淘汰补贴。请问：1.目前设备更新政策的落地效果如何？更新需求占行业总需求的比例大概是多少？2.预计2026-2027年设备更新需求能否成为行业增长的核心驱动力？感谢您的回复。 / A: 您好，目前行业内销持续改善，更新需求是当前内销增长的重要支撑之一，预计2026-2027年设备更新需求将继续是行业增长的重要驱动力。徐工机械将坚持“高质量、强安全、世界级、稳增长”经营... | official interaction without a mapped investable theme | manual review required | medium-official-signal |
+| unclassified | investor-interaction | tier-3 narrative option | small imagination premium only | cninfo_irm | Q: 您好，关注到贵司正在招聘登机桥相关的岗位，请问徐工是否有开拓机场相关业务的规划？谢谢！ / A: 您好，公司主要从事土方机械、起重机械、桩工机械、混凝土机械、路面机械、高空作业机械、矿业机械和其他工程机械及备件的研发、制造、销售和服务工作。新业务技术研发、产品预研及人才储备，结合市场及战略推进业务拓展，感谢关注！ | official interaction without a mapped investable theme | manual review required | medium-official-signal |
+| unclassified | investor-interaction | tier-3 narrative option | small imagination premium only | cninfo_irm | Q: 董秘您好，公司一季度海外业务增长势头强劲，但受人民币升值影响，公司的汇兑损失大概在什么范围？公司股价2天跌超6%，是否反应公司外汇风险敞口覆盖情况不容乐观？ / A: 您好，2026年一季度以来人民币持续走强，是国内出口型企业普遍面临的共性压力。受汇率波动影响，公司一季度存在汇兑损失，具体数据见参见一季报。公司高度重视外汇风险管理，持续通过优化结算币种结构、依托资产负债自然对冲、运用金融衍生品工具等多元化方式，常态化管控汇率敞口。... | official interaction without a mapped investable theme | manual review required | higher-official-signal |
+| unclassified | investor-interaction | tier-3 narrative option | small imagination premium only | cninfo_irm | Q: 领导您好，请问公司电动矿车产品覆盖哪些吨位？是否适用于重载上坡工况？重载上坡工况下，大吨位矿车与小吨位矿车哪种更适用？电动车与燃油车哪种更适用？ / A: 您好，公司在行业内最早布局电动化产品，目前电动化产品：叉车、高空作业车/平台、装载机、港口机械、小挖/微挖、轮挖、水平定向钻、压路机、平地机、矿卡、随车起重机、环卫车辆、混凝土搅拌车、泵车、汽车起重机、矿用自卸车等。臂式高空作业平台、装载机电动化产品市场占有率行业第一，混凝土搅... | official interaction without a mapped investable theme | manual review required | medium-official-signal |
+| unclassified | investor-interaction | tier-3 narrative option | small imagination premium only | cninfo_irm | Q: 您好，请问贵公司业务在欧盟的占比是多少？未来在欧盟的布局是什么样的趋势？ / A: 您好，2025年公司出口（不含并购业务产值）销往欧盟区域收入占公司整体收入比例约2%+。未来公司将继续深化欧盟本地化布局，推进研产供销服融全链条建设，加快德国研发中心、备件中心与融资租赁平台运营，夯实本地化制造基础，持续推进新能源、智能化产品合规认证，完善核心市场网络，稳步扩大在欧业务规模与盈利贡献。感谢关注！ | official interaction without a mapped investable theme | manual review required | higher-official-signal |
+| unclassified | investor-interaction | tier-3 narrative option | small imagination premium only | cninfo_irm | Q: 公司新能源电动化产品去年销售金额多少？国内行业第几？主要什么产品？ / A: 您好，徐工机械新能源（纯电、混动、氢能）2025年销售额约占营业收入的13%，销售额连续多年位居行业上市公司第一，主要产品包括新能源装载机、挖掘机、自卸车、混凝土运输车、宽体车、高空作业平台、港口机械等电动成套化装备。其中，纯电动装载机、混动挖掘机等产品技术国际领先，覆盖纯电、混合动力、氢燃料电池三大技术路线。感谢关注！ | official interaction without a mapped investable theme | manual review required | higher-official-signal |
+| unclassified | investor-interaction | tier-3 narrative option | small imagination premium only | cninfo_irm | Q: 公司设备是否会跟随央企建设公司出海参与战后重建？ / A: 您好，公司长期为央企海外项目提供全系列工程装备及专业服务保障，据销售部门初步统计，在央国企海外施工配套及国内重点项目招标中，近年来始终保持大型国央企招标之中标最高份额，中标金额约占整体招标金额的一半。公司依托覆盖全球190余个国家和地区的营销网络，深度参与“一带一路”沿线及国际重大项目。公司将依托全球化布局与成熟合作机制，积极协同央企出海，提供全系列工程设备与本地化服务，... | official interaction without a mapped investable theme | manual review required | medium-official-signal |
+| unclassified | investor-interaction | tier-3 narrative option | small imagination premium only | cninfo_irm | Q: 请问现在的股东人数是多少 / A: 您好，公司已回复类似问题，请查阅公司已回复，感谢关注！ | official interaction without a mapped investable theme | manual review required | medium-official-signal |
+| unclassified | investor-interaction | tier-3 narrative option | small imagination premium only | cninfo_irm | Q: 董秘，您好，1我看到抖音你们和华能一起开发的电动卡车特别震撼，能简单介绍下吗？2感觉这款设备以后登陆月球火星至少需要几万辆，公司有在研发适合登陆月球火星的自动驾驶卡车吗？3自动重卡以后军事上也会大量需要，公司有军队出售的资质吗？ / A: 您好，2025年徐工纯电无人驾驶矿卡交付华能伊敏露天煤矿，正式投入编组运营，该项目拥有全球首套智能换电、无人矿卡集群作业装备及系统，集成无人驾驶、5G通信、智能换电、智能安全管控等核心技术。目前... | official interaction without a mapped investable theme | manual review required | medium-official-signal |
+| unclassified | investor-interaction | tier-3 narrative option | small imagination premium only | cninfo_irm | Q: 公司氢能源产业发展情况？ / A: 您好，公司积极布局氢能源产业，已形成氢能矿卡、氢能装载机等全场景产品矩阵，推出全球最大吨位260吨级氢能矿卡，覆盖矿山、化工园区等场景。公司坚持纯电、氢能等多技术路线并行，持续攻关燃料电池、储氢及智能控制核心技术，依托自主产业链提升产品竞争力，推动工程装备绿色低碳转型，相关业务进展将按规定及时披露。感谢关注！ | official interaction without a mapped investable theme | manual review required | medium-official-signal |
+| unclassified | investor-interaction | tier-3 narrative option | small imagination premium only | cninfo_irm | Q: 徐工机械最近几天大跌，是近几年少有的，请问董秘:贵公司最近生产经营是否一切正常？今年订单是否旺盛？敬请回复！谢谢！ / A: 您好！公司生产经营一切正常，近年来基本面持续向好，国内外市场业务稳步推进，改革红利进入逐步释放期。公司将持续聚焦主业，不断提升经营质量与核心竞争力，积极培育第二增长曲线；同时已推出全球投资者未来三年（2025-2027）回报计划等举措，切实维护全体股东利益。感谢关注！ | official interaction without a mapped investable theme | manual review required | higher-official-signal |
+| unclassified | investor-interaction | tier-3 narrative option | small imagination premium only | cninfo_irm | Q: 大股东还在增持嘛？ / A: 您好！公司及控股股东严格执行全球投资者未来三年（2025-2027）回报计划。公司控股股东徐工集团增持徐工机械的计划正在实施中，本次增持期限为2025年12月26日至2026年6月25日，增持金额不低于8000万元且不超过1.6亿元。公司将按照规定，严格履行信息披露义务。感谢关注！ | official interaction without a mapped investable theme | manual review required | higher-official-signal |
+| unclassified | investor-interaction | tier-3 narrative option | small imagination premium only | cninfo_irm | Q: 公司在央企海外施工设备占比多少？ / A: 您好！公司长期为央企海外项目提供全系列工程装备及专业服务保障，据销售部门初步统计，在央国企海外施工配套及国内重点项目招标中，近年来始终保持大型国央企招标之中标最高份额，中标金额约占整体招标金额的一半。相关具体数据属于商业合作细节，不在公开披露范围。感谢关注！ | official interaction without a mapped investable theme | manual review required | medium-official-signal |
+
+## Cross-Source Theme Validation
+| theme | source_families | source_count | hard_evidence | cross_source_read | suggested_tier | upgrade_path |
+| --- | --- | --- | --- | --- | --- | --- |
+| capacity-release | filing | 1 | yes | latent hard catalyst; economic bridge exists but fetched corroboration is thin | tier-1 pending diligence | seek a second independent source or direct milestone |
+| order-ramp | filing | 1 | yes | latent hard catalyst; economic bridge exists but fetched corroboration is thin | tier-1 pending diligence | seek a second independent source or direct milestone |
+| overseas-expansion | filing | 1 | yes | latent hard catalyst; economic bridge exists but fetched corroboration is thin | tier-1 pending diligence | seek a second independent source or direct milestone |
+
+## Portfolio Pattern Check
+| verified_investee_count | realized_investment_signal | pattern_read |
+| --- | --- | --- |
+| 32 | yes | repeat-investor pattern worth explicit review: filings show multiple verified investees plus realized-investment language |
+
+## Analyst Instructions
+- Treat filing-origin candidates as the first-pass candidate pool for investee IPOs, asset listings, and verified new-business lines.
+- Treat filing-origin operating themes as bull support only when the filing itself contains a believable economic bridge such as orders, revenue, delivery, customers, commercialization, or capacity release; reject bare buzzwords without monetization evidence.
+- Treat news-origin candidates as unverified until annual or half-year report text supports the same investee, asset, or business line.
+- A candidate may influence valuation only after filing verification plus a clear economic transmission path, timetable, and materiality check.
+- Use a three-tier ladder: tier-1 hard catalysts can enter core/SOTP valuation; tier-2 soft catalysts can support scenario upside or probability; tier-3 narrative options from news, interaction, concept linkage, or media association may justify only a small imagination premium until filings verify them.
+- Keep economic hardness separate from evidence completeness. If a filing-backed theme has a real monetization bridge but the fetched corroboration is thin, mark it as tier-1 pending diligence / latent hard catalyst instead of demoting it to pure narrative or pretending proof is complete.
+- Asset-revaluation themes may enter SOTP/NAV only when ownership value is disclosed, material versus listed-company market cap, and realizability is discussed.
+- For material primary investments, build a NAV ladder instead of using a vague imagination premium: conservative value = carrying value with liquidity/exit haircut; base value = carrying value or latest financing/IPO reference with an explicit discount; upside value = exit/IPO repricing multiplied by probability and lock-up/liquidity haircuts. Keep this separate from operating earnings so the report does not confuse market theme value with recurring business profit.
+- After reviewing single investees, ask a second-level question: is there a repeatable capital-allocation pattern? If filings show multiple verified investees plus realized exits, investment income, or fair-value gains over time, discuss whether management's first-level investing capability itself is a durable bull factor rather than treating each asset as an isolated anecdote.
+- Business-realization themes may enter core valuation only when filings disclose monetization evidence such as revenue, profit, orders, or cash-flow contribution; otherwise keep them as qualitative optionality.
+- If report text extraction is unavailable, say so explicitly and do not pretend that news-only themes were verified.

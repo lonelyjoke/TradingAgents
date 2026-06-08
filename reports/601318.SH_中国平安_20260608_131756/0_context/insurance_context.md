@@ -1,0 +1,3 @@
+# Insurance verification context unavailable
+
+- Reason: The truth value of a DataFrame is ambiguous. Use a.empty, a.bool(), a.item(), a.any() or a.all().
