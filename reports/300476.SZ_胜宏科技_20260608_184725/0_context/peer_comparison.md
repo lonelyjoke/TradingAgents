@@ -1,0 +1,1 @@
+Same-industry peer comparison unavailable for 300476.SZ: Tushare stock_basic universe missing required columns ['industry', 'name', 'ts_code'].
