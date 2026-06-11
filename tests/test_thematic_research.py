@@ -461,7 +461,7 @@ def test_financial_report_text_loader_retries_cache_after_extract_miss(monkeypat
     assert "铜、金" in texts[0][1]
 
 
-def test_financial_report_text_loader_tries_cninfo_after_primary_extract_miss(monkeypatch, tmp_path):
+def test_financial_report_text_loader_includes_cninfo_in_initial_candidate_pool(monkeypatch, tmp_path):
     _FINANCIAL_REPORT_TEXT_CACHE.clear()
     _FINANCIAL_REPORT_TEXT_AUDIT_CACHE.clear()
     primary_reports = pd.DataFrame(
@@ -521,13 +521,13 @@ def test_financial_report_text_loader_tries_cninfo_after_primary_extract_miss(mo
 
     reports, texts = _load_financial_report_texts("603345.SH", "2026-06-05")
 
-    assert reports.equals(cninfo_reports)
+    assert set(reports["url"]) == set(primary_reports["url"]) | set(cninfo_reports["url"])
     assert len(texts) == 1
     assert "\u901f\u51bb\u706b\u9505\u6599" in texts[0][1]
     audit = _financial_report_text_audit_markdown("603345.SH", "2026-06-05")
-    assert "primary_pdf_text_extraction" in audit
-    assert "cninfo_financial_report_retry" in audit
-    assert "cninfo_pdf_text_extraction" in audit
+    assert "announcement_lookup" in audit
+    assert "pdf_text_extraction" in audit
+    assert "cninfo_financial_report_retry" not in audit
     assert "final_text_bundle" in audit
 
 

@@ -47,6 +47,7 @@ from tradingagents.agents.utils.agent_utils import (
     get_cashflow,
     get_income_statement,
     get_insurance_context,
+    get_intraday_behavior_context,
     get_medical_device_context,
     get_metals_mining_context,
     get_optical_module_context,
@@ -93,6 +94,7 @@ def _build_precomputed_data_coverage(
     thematic_catalyst_context: str,
     commodity_context: str,
     price_move_attribution_context: str,
+    intraday_behavior_context: str,
     relative_strength_context: str,
     shipping_context: str,
     filing_intelligence_context: str,
@@ -123,6 +125,7 @@ def _build_precomputed_data_coverage(
             "thematic_catalyst": thematic_catalyst_context,
             "commodity_product_price": commodity_context,
             "price_move_attribution": price_move_attribution_context,
+            "intraday_minute_behavior": intraday_behavior_context,
             "relative_strength": relative_strength_context,
             "shipping_cycle": shipping_context,
             "financial_report_intelligence": filing_intelligence_context,
@@ -162,6 +165,11 @@ _A_SHARE_CONTEXT_SPECS = [
         "price_move_attribution_context",
         "get_price_move_attribution_context",
         "Price-move attribution context",
+    ),
+    (
+        "intraday_behavior_context",
+        "get_intraday_behavior_context",
+        "Intraday minute-line behavior context",
     ),
     (
         "relative_strength_context",
@@ -428,6 +436,7 @@ class TradingAgentsGraph:
                     get_income_statement,
                     get_commodity_context,
                     get_price_move_attribution_context,
+                    get_intraday_behavior_context,
                     get_relative_strength_context,
                     get_shipping_context,
                     get_peer_comparison,
@@ -676,6 +685,7 @@ class TradingAgentsGraph:
         thematic_catalyst_context = contexts["thematic_catalyst_context"]
         commodity_context = contexts["commodity_context"]
         price_move_attribution_context = contexts["price_move_attribution_context"]
+        intraday_behavior_context = contexts["intraday_behavior_context"]
         relative_strength_context = contexts["relative_strength_context"]
         shipping_context = contexts["shipping_context"]
         filing_intelligence_context = contexts["filing_intelligence_context"]
@@ -704,6 +714,7 @@ class TradingAgentsGraph:
             thematic_catalyst_context=thematic_catalyst_context,
             commodity_context=commodity_context,
             price_move_attribution_context=price_move_attribution_context,
+            intraday_behavior_context=intraday_behavior_context,
             relative_strength_context=relative_strength_context,
             shipping_context=shipping_context,
             filing_intelligence_context=filing_intelligence_context,
@@ -737,6 +748,7 @@ class TradingAgentsGraph:
             thematic_catalyst_context=thematic_catalyst_context,
             commodity_context=commodity_context,
             price_move_attribution_context=price_move_attribution_context,
+            intraday_behavior_context=intraday_behavior_context,
             relative_strength_context=relative_strength_context,
             shipping_context=shipping_context,
             filing_intelligence_context=filing_intelligence_context,
@@ -776,6 +788,7 @@ class TradingAgentsGraph:
         thematic_catalyst_context = contexts["thematic_catalyst_context"]
         commodity_context = contexts["commodity_context"]
         price_move_attribution_context = contexts["price_move_attribution_context"]
+        intraday_behavior_context = contexts["intraday_behavior_context"]
         relative_strength_context = contexts["relative_strength_context"]
         shipping_context = contexts["shipping_context"]
         filing_intelligence_context = contexts["filing_intelligence_context"]
@@ -804,6 +817,7 @@ class TradingAgentsGraph:
             thematic_catalyst_context=thematic_catalyst_context,
             commodity_context=commodity_context,
             price_move_attribution_context=price_move_attribution_context,
+            intraday_behavior_context=intraday_behavior_context,
             relative_strength_context=relative_strength_context,
             shipping_context=shipping_context,
             filing_intelligence_context=filing_intelligence_context,
@@ -837,6 +851,7 @@ class TradingAgentsGraph:
             thematic_catalyst_context=thematic_catalyst_context,
             commodity_context=commodity_context,
             price_move_attribution_context=price_move_attribution_context,
+            intraday_behavior_context=intraday_behavior_context,
             relative_strength_context=relative_strength_context,
             shipping_context=shipping_context,
             filing_intelligence_context=filing_intelligence_context,
@@ -916,6 +931,9 @@ class TradingAgentsGraph:
             ),
             "price_move_attribution_context": final_state.get(
                 "price_move_attribution_context", ""
+            ),
+            "intraday_behavior_context": final_state.get(
+                "intraday_behavior_context", ""
             ),
             "relative_strength_context": final_state.get(
                 "relative_strength_context", ""

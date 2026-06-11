@@ -30,6 +30,7 @@ from tradingagents.agents.utils.agent_utils import (
     get_policy_planning_instruction,
     get_peer_selection_instruction,
     get_price_earnings_decomposition_instruction,
+    get_question_led_debate_instruction,
     get_research_gap_instruction,
     get_supply_demand_fallback_instruction,
     get_supply_chain_selection_instruction,
@@ -173,7 +174,7 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 - Preserve a concise standalone **Safety Price / Defensive Build Anchor** when financial state supports it; when writing Chinese, title it `## 安全价格区间 / 防御性建仓锚`. For value stocks, blue chips, banks, defensive dividend names, and mature cash-flow compounders, anchor it in normalized low-cycle EPS or FCF, sustainable dividend yield, book value/PB and ROE, cash conversion, leverage or net cash, asset quality, payout capacity, and peer/historical valuation floors. For commodity/resource/cyclical names, anchor it in cycle-trough or stress-case earnings, conservative product prices, unit-cost resilience, balance-sheet survival, maintenance capex, and normalized PE/PB floors. Include only the practical anchor: price band, valuation bridge, business conditions that must remain true, slow-build plan, and deterioration that invalidates it. Prefer one short paragraph or a compact 3-4 row table, not a second valuation essay. If the company is structurally impaired, highly leveraged, deeply cyclical without survivable trough economics, or evidence-thin, still keep the section and say no reliable safety price can be assigned.
 - If industry-specific filing context is available, keep an **Industry Driver Verdict** explicit enough to preserve the real sector-native variables that decide the thesis.
 - If the filing context contains **Growth Sustainability & Ramp Conditions**, keep a **Growth Sustainability Verdict** explicit enough to judge whether revenue/profit growth can continue or ramp further. Require the debate to separate verified drivers, inferred drivers, needed ramp conditions, and falsification signals before accepting any Buy/Underweight conclusion.
-- If the filing context contains **Pre-Debate Underwriting Questions**, use them as the judging agenda. Decide which side better answered the company-specific business-model, moat, growth-driver, second-curve, cash-quality, segment-valuation, and risk questions. Do not let the final plan ignore an unanswered pre-debate question that is central to the rating.
+- If the filing context contains **Pre-Debate Underwriting Questions**, use them as the judging agenda. Decide which side better answered the company-specific business-model, moat, growth-driver, second-curve, cash-quality, segment-valuation, and risk questions. Populate the structured `question_led_debate_audit` field with a compact issue-log table covering question, initial skepticism, bull answer, bear attack, evidence verdict, valuation/sizing impact, and next verification. Do not let the final plan ignore an unanswered pre-debate question that is central to the rating.
 - If the filing context contains a Business Segment Valuation Map or Segment Economics Pack, keep a **Business Segment Valuation Verdict** explicit enough to split mature core businesses from emerging second curves, geographies, and channels. Do not allow the debate to collapse a multi-business company into one blended PE unless the filings do not support a meaningful split.
 - If the filing context contains Internal Filing Quality Modules, keep a **Filing Internal Quality Verdict** explicit enough to summarize accounting reconciliation, segment economics, footnotes, cash-flow quality, capex/CIP returns, MD&A text changes, non-recurring profit quality, balance-sheet leading signals, shareholder-return authenticity, and disclosure quality. Synthesize the material points; do not mechanically repeat all ten if some are immaterial.
 - If commodity/product-price context is available, keep a **Commodity Cycle Verdict** explicit enough to say whether the product-price evidence supports or contradicts the margin/EPS/inventory part of the thesis.
@@ -294,6 +295,7 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 {get_material_catalyst_instruction()}
 {get_thematic_valuation_instruction()}
 {get_filing_intelligence_instruction()}
+{get_question_led_debate_instruction()}
 {get_insurance_instruction()}
 {get_medical_device_instruction()}
 {get_metals_mining_instruction()}

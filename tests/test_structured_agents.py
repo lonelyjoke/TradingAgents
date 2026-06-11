@@ -117,11 +117,11 @@ class TestRenderPortfolioDecision:
         assert "**Reader Action Guidance / Holders vs Builders**:" in md
         assert "18-20x clean mid-cycle earnings" in md
         assert "Full holders should trim to benchmark weight" in md
-        assert md.index("**One-Line Thesis**") < md.index("**Reader Take-away / Build Price Band**")
+        assert md.index("**Investment Thesis**") < md.index("**Reader Take-away / Build Price Band**")
         assert md.index("**Reader Take-away / Build Price Band**") < md.index(
             "**Reader Action Guidance / Holders vs Builders**"
         )
-        assert md.index("**Reader Action Guidance / Holders vs Builders**") < md.index("**Investment Thesis**")
+        assert md.index("**Reader Action Guidance / Holders vs Builders**") < md.index("**Execution Posture**")
 
     def test_buy_rating_includes_staged_builder_guidance(self):
         decision = PortfolioDecision(
@@ -215,6 +215,34 @@ class TestRenderPortfolioDecision:
         assert md.index("## Safety Price / Defensive Build Anchor") < md.index(
             "**Reader Action Guidance / Holders vs Builders**"
         )
+        assert md.index("**Investment Thesis**") < md.index(
+            "## Safety Price / Defensive Build Anchor"
+        )
+
+    def test_pm_deep_research_fields_render_before_execution(self):
+        decision = PortfolioDecision(
+            rating=PortfolioRating.OVERWEIGHT,
+            company_snapshot="Segmented industrial company.",
+            one_line_thesis="The market underprices normalized earnings.",
+            reader_action_guidance="Builders should wait for confirmation before adding.",
+            business_driver_map="Volume, ASP, margin, capex.",
+            bull_bear_debate="Bull sees margin recovery; bear sees weak demand.",
+            debate_verdict="Bull case has better payoff after stress testing.",
+            investment_logic_chain="If volume and margin recover, EPS rises and valuation can rerate.",
+            executive_summary="Overweight with staged sizing.",
+            verification_and_falsification="Track orders and margin.",
+            investment_thesis="Company economics support a better earnings base.",
+            forward_forecast_model="2026E revenue grows from volume and mix; EPS depends on margin.",
+            valuation_framework="Core business uses PE, project ramp uses scenario SOTP.",
+            market_behavior_validation="Minute-line late-session strength supports timing only.",
+        )
+        md = render_pm_decision(decision)
+        assert "Forward forecast model: 2026E revenue grows" in md
+        assert "Valuation framework: Core business uses PE" in md
+        assert "Market behavior validation: Minute-line late-session strength" in md
+        assert md.index("Forward forecast model") < md.index("**Execution Posture**")
+        assert md.index("Valuation framework") < md.index("**Execution Posture**")
+        assert md.index("Market behavior validation") < md.index("**Execution Posture**")
 
 
 # ---------------------------------------------------------------------------

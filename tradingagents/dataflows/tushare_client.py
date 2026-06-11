@@ -2,11 +2,11 @@ from __future__ import annotations
 
 import os
 from pathlib import Path
-from typing import Iterable
+from typing import Any, Iterable
 from urllib.parse import urlparse
 
 
-EXPECTED_TUSHARE_TOKEN_LENGTH = 64
+MIN_TUSHARE_TOKEN_LENGTH = 32
 
 
 class TushareClientError(RuntimeError):
@@ -17,7 +17,7 @@ def _load_env_file(path: Path, *, override: bool = True) -> bool:
     """Minimal .env loader used when python-dotenv is not installed."""
     if not path.exists():
         return False
-    for raw_line in path.read_text(encoding="utf-8").splitlines():
+    for raw_line in path.read_text(encoding="utf-8-sig").splitlines():
         line = raw_line.strip()
         if not line or line.startswith("#") or "=" not in line:
             continue
@@ -65,10 +65,10 @@ def get_tushare_token() -> str:
         raise TushareClientError(
             "TUSHARE_TOKEN is not configured. Set it in the current shell or .env."
         )
-    if len(token) != EXPECTED_TUSHARE_TOKEN_LENGTH:
+    if len(token) < MIN_TUSHARE_TOKEN_LENGTH:
         raise TushareClientError(
             "TUSHARE_TOKEN length is "
-            f"{len(token)}, expected {EXPECTED_TUSHARE_TOKEN_LENGTH}. "
+            f"{len(token)}, expected at least {MIN_TUSHARE_TOKEN_LENGTH}. "
             "The full token is not printed; update .env or clear the stale shell "
             "environment variable before running A-share research."
         )
@@ -118,8 +118,13 @@ def get_tushare_pro_client():
     - TUSHARE_HTTP_URL: optional custom Tushare-compatible gateway.
 
     Some shared/proxied Tushare deployments require overriding the private
-    DataApi endpoint after creating the client. Keep that detail in one place
-    so the dataflow modules do not need to duplicate it.
+    DataApi endpoint after creating the client, for example:
+
+        pro = ts.pro_api(token)
+        pro._DataApi__http_url = "https://tt.dailyfetch.top/"
+
+    Keep that detail in one place so the dataflow modules do not need to
+    duplicate it.
     """
     try:
         import tushare as ts
@@ -134,6 +139,25 @@ def get_tushare_pro_client():
     if http_url and not _is_probable_local_proxy_url(http_url):
         pro._DataApi__http_url = http_url.rstrip("/") + "/"
     return pro
+
+
+def get_tushare_pro_bar(**kwargs: Any):
+    """Call ``ts.pro_bar`` with the shared configured pro client.
+
+    Shared Tushare gateways often require ``ts.pro_bar(api=pro, ...)`` instead
+    of letting ``pro_bar`` create its own official client. Use this wrapper for
+    daily/minute/bar data so the configured gateway and token are always used.
+    """
+    try:
+        import tushare as ts
+    except ImportError as exc:
+        raise TushareClientError(
+            "The tushare package is not installed. Install it with: "
+            "python -m pip install tushare"
+        ) from exc
+
+    kwargs.setdefault("api", get_tushare_pro_client())
+    return ts.pro_bar(**kwargs)
 
 
 def get_tushare_pro_clients() -> Iterable[tuple[str, object]]:

@@ -542,6 +542,31 @@ def _retry_cached_financial_report_texts(
     return cached_reports, cached_texts
 
 
+def _merge_financial_report_announcements(
+    *frames: pd.DataFrame | TushareDataError | None,
+) -> pd.DataFrame:
+    """Merge disclosure candidates from all official/primary lookups.
+
+    Financial-report text should be loaded from the full candidate set in one
+    pass.  This keeps CNINFO official reports on the normal path instead of
+    treating them as a late fallback after a failed extraction attempt.
+    """
+    candidates: list[pd.DataFrame] = []
+    for frame in frames:
+        if isinstance(frame, TushareDataError) or frame is None or frame.empty:
+            continue
+        candidates.append(frame.copy())
+    if not candidates:
+        return pd.DataFrame()
+
+    merged = pd.concat(candidates, ignore_index=True, sort=False)
+    if "url" in merged.columns:
+        merged = merged.drop_duplicates(subset=["url"], keep="first")
+    else:
+        merged = merged.drop_duplicates(keep="first")
+    return merged.reset_index(drop=True)
+
+
 def _load_financial_report_texts(
     symbol: str, curr_date: str, look_back_days: int = 900
 ) -> tuple[pd.DataFrame | TushareDataError, list[tuple[str, str]]]:
@@ -580,15 +605,28 @@ def _load_financial_report_texts(
             else "pdftotext is not available; downloaded PDFs cannot be converted to readable text.",
         )
     ]
-    reports = _financial_report_announcements(symbol, curr_date, look_back_days)
-    if isinstance(reports, TushareDataError) or reports is None or reports.empty:
+    primary_reports = _financial_report_announcements(symbol, curr_date, look_back_days)
+    cninfo_reports = _cninfo_financial_report_announcements(
+        symbol, curr_date, look_back_days
+    )
+    reports = _merge_financial_report_announcements(primary_reports, cninfo_reports)
+    if reports.empty:
         audit_rows.append(
             _audit_row(
                 "announcement_lookup",
                 "failed",
-                str(reports)
-                if isinstance(reports, TushareDataError)
-                else "No financial-report announcements found from primary/fallback lookup.",
+                "; ".join(
+                    detail
+                    for detail in [
+                        str(primary_reports)
+                        if isinstance(primary_reports, TushareDataError)
+                        else "No primary financial-report announcements found.",
+                        str(cninfo_reports)
+                        if isinstance(cninfo_reports, TushareDataError)
+                        else "No CNINFO financial-report announcements found.",
+                    ]
+                    if detail
+                ),
             )
         )
         cached_reports, cached_texts = _retry_cached_financial_report_texts(
@@ -627,13 +665,13 @@ def _load_financial_report_texts(
             )
         )
         _FINANCIAL_REPORT_TEXT_AUDIT_CACHE[cache_key] = audit_rows
-        return reports, []
+        return primary_reports, []
 
     audit_rows.append(
         _audit_row(
-            "primary_announcement_lookup",
+            "announcement_lookup",
             "ready",
-            f"Found {len(reports)} candidate financial-report announcement(s).",
+            f"Found {len(reports)} candidate financial-report announcement(s) from primary and CNINFO sources.",
         )
     )
 
@@ -673,37 +711,7 @@ def _load_financial_report_texts(
                 )
         return extracted
 
-    texts = extract_texts(reports, "primary_pdf_text_extraction")
-    if not texts:
-        cninfo_reports = _cninfo_financial_report_announcements(
-            symbol, curr_date, look_back_days
-        )
-        if (
-            not isinstance(cninfo_reports, TushareDataError)
-            and cninfo_reports is not None
-            and not cninfo_reports.empty
-        ):
-            audit_rows.append(
-                _audit_row(
-                    "cninfo_financial_report_retry",
-                    "ready",
-                    f"Found {len(cninfo_reports)} CNINFO financial-report announcement(s) after primary text extraction miss.",
-                )
-            )
-            cninfo_texts = extract_texts(cninfo_reports, "cninfo_pdf_text_extraction")
-            if cninfo_texts:
-                reports = cninfo_reports
-                texts = cninfo_texts
-        else:
-            audit_rows.append(
-                _audit_row(
-                    "cninfo_financial_report_retry",
-                    "failed",
-                    str(cninfo_reports)
-                    if isinstance(cninfo_reports, TushareDataError)
-                    else "No CNINFO financial-report announcements found for retry.",
-                )
-            )
+    texts = extract_texts(reports, "pdf_text_extraction")
     cached_reports = pd.DataFrame()
     cached_texts: list[tuple[str, str]] = []
     if len(texts) < 3:

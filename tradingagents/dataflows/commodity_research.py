@@ -199,6 +199,16 @@ COMPANY_COMMODITY_MAP = {
         "products": [_metal_product("Aluminum")],
         "spread_note": "Use SHFE aluminum as the timely proxy; power cost, hydro availability, and alumina cost determine margin pass-through.",
     },
+    "000426.SZ": {
+        "name": "Xingye Silver & Tin",
+        "products": [
+            _metal_product("Silver"),
+            _metal_product("Tin"),
+            _metal_product("Lead", "secondary product"),
+            _metal_product("Zinc", "secondary product"),
+        ],
+        "spread_note": "Use SHFE silver, tin, lead, and zinc futures as timely product-price proxies; reserve grade, equity output, AISC/unit cost, and mine ramp still require filing or production disclosure before extrapolating margins.",
+    },
     "603345.SH": {
         "name": "Anjoy Foods",
         "products": [
@@ -290,12 +300,16 @@ COMPANY_COMMODITY_MAP = {
 
 
 INDUSTRY_PRODUCT_HINTS = {
-    "铜": [{"name": "Copper", "type": "futures", "role": "industry proxy", "prefix": "CU", "exchange": "SHFE"}],
-    "黄金": [{"name": "Gold", "type": "futures", "role": "industry proxy", "prefix": "AU", "exchange": "SHFE"}],
-    "锂": [{"name": "Lithium carbonate", "type": "futures", "role": "industry proxy", "prefix": "LC", "exchange": "GFEX"}],
+    "铜": [_metal_product("Copper", "industry proxy")],
+    "黄金": [_metal_product("Gold", "industry proxy")],
+    "银": [_metal_product("Silver", "industry proxy")],
+    "锡": [_metal_product("Tin", "industry proxy")],
+    "铅": [_metal_product("Lead", "industry proxy")],
+    "锌": [_metal_product("Zinc", "industry proxy")],
+    "锂": [_metal_product("Lithium carbonate", "industry proxy")],
     "煤": [{"name": "Coking coal", "type": "futures", "role": "industry proxy", "prefix": "JM", "exchange": "DCE"}],
     "钢": [{"name": "Rebar", "type": "futures", "role": "industry proxy", "prefix": "RB", "exchange": "SHFE"}],
-    "铝": [{"name": "Aluminum", "type": "futures", "role": "industry proxy", "prefix": "AL", "exchange": "SHFE"}],
+    "铝": [_metal_product("Aluminum", "industry proxy")],
     "养殖": [
         {"name": "Breeding sow inventory", "type": "moa_livestock", "role": "capacity leading signal", "keywords": ["能繁母猪", "存栏"]},
         {"name": "Live hog", "type": "moa_livestock", "role": "main product", "keywords": ["活猪", "生猪"]},
@@ -313,7 +327,6 @@ INDUSTRY_PRODUCT_HINTS = {
         {"name": "Hog-grain ratio", "type": "moa_livestock", "role": "cycle spread", "keywords": ["猪粮比价", "猪粮比"]},
     ],
 }
-
 
 def _is_allowed_url(url: str) -> bool:
     host = urlparse(url).netloc.lower()

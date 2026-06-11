@@ -272,6 +272,9 @@ def test_pm_renderer_preserves_new_verdict_fields():
         verification_and_falsification="verify",
         investment_thesis="investment thesis",
         business_segment_breakdown="segment revenue growth margin",
+        forward_forecast_model="forecast revenue margin eps",
+        valuation_framework="SOTP core and scenario value",
+        market_behavior_validation="minute-line validation only",
         peer_comparison_summary="peer rank and comparable alternatives",
         investor_communication_verdict="communication",
         policy_direction_verdict="policy",
@@ -281,6 +284,9 @@ def test_pm_renderer_preserves_new_verdict_fields():
     )
     rendered = render_pm_decision(decision)
     assert "Business Segment Breakdown: segment revenue growth margin" in rendered
+    assert "Forward forecast model: forecast revenue margin eps" in rendered
+    assert "Valuation framework: SOTP core and scenario value" in rendered
+    assert "Market behavior validation: minute-line validation only" in rendered
     assert "**Supporting Evidence Integration**" in rendered
     assert "Peer Comparison Summary: peer rank and comparable alternatives" in rendered
     assert "Buy-side depth audit: remaining thin spots" in rendered

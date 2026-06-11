@@ -105,6 +105,7 @@ from .insurance_research import get_insurance_context as get_tushare_insurance_c
 from .medical_device_research import get_medical_device_context as get_tushare_medical_device_context
 from .metals_mining_research import get_metals_mining_context as get_tushare_metals_mining_context
 from .price_move_attribution_research import get_price_move_attribution_context as get_tushare_price_move_attribution_context
+from .intraday_research import get_intraday_behavior_context as get_tushare_intraday_behavior_context
 
 # Configuration and routing logic
 from .config import get_config
@@ -132,6 +133,7 @@ TOOLS_CATEGORIES = {
             "get_income_statement",
             "get_commodity_context",
             "get_price_move_attribution_context",
+            "get_intraday_behavior_context",
             "get_shipping_context",
             "get_peer_comparison",
             "get_supply_chain_comparison",
@@ -219,6 +221,9 @@ VENDOR_METHODS = {
     },
     "get_price_move_attribution_context": {
         "tushare": get_tushare_price_move_attribution_context,
+    },
+    "get_intraday_behavior_context": {
+        "tushare": get_tushare_intraday_behavior_context,
     },
     "get_shipping_context": {
         "tushare": get_tushare_shipping_context,
@@ -333,6 +338,7 @@ A_SHARE_TUSHARE_METHODS = {
     "get_income_statement",
     "get_commodity_context",
     "get_price_move_attribution_context",
+    "get_intraday_behavior_context",
     "get_shipping_context",
     "get_peer_comparison",
     "get_supply_chain_comparison",

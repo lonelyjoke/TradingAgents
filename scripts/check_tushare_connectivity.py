@@ -7,6 +7,11 @@ import sys
 import time
 
 
+REPO_ROOT = Path(__file__).resolve().parents[1]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+
 def _fingerprint(value: str) -> str:
     if not value:
         return "<empty>"
@@ -29,7 +34,21 @@ def _load_env() -> tuple[str, dict[str, str]]:
             }
         load_dotenv(dotenv_path or None, override=True)
     except ImportError:
-        dotenv_path = "<python-dotenv not installed>"
+        fallback_path = Path.cwd() / ".env"
+        if not fallback_path.exists():
+            fallback_path = REPO_ROOT / ".env"
+        dotenv_path = str(fallback_path) if fallback_path.exists() else "<not found>"
+        if fallback_path.exists():
+            for raw_line in fallback_path.read_text(encoding="utf-8").splitlines():
+                line = raw_line.strip()
+                if not line or line.startswith("#") or "=" not in line:
+                    continue
+                key, value = line.split("=", 1)
+                key = key.strip()
+                value = value.strip().strip("'\"")
+                if key:
+                    dotenv_values[key] = value
+                    os.environ[key] = value
     return dotenv_path, dotenv_values
 
 
@@ -82,6 +101,10 @@ def main() -> None:
 
     try:
         import tushare as ts
+        from tradingagents.dataflows.tushare_client import (
+            get_tushare_pro_bar,
+            get_tushare_pro_clients,
+        )
     except Exception as exc:
         print(f"tushare import failed: {type(exc).__name__}: {exc}")
         return
@@ -90,17 +113,11 @@ def main() -> None:
     if not token:
         return
 
-    clients = []
-    if http_url:
-        configured = ts.pro_api(token)
-        configured._DataApi__http_url = http_url.rstrip("/") + "/"
-        clients.append(("configured_http_url", configured))
-    if not disable_official_fallback:
-        clients.append(("official", ts.pro_api(token)))
-    elif not http_url:
-        print("official client skipped, but no TUSHARE_HTTP_URL is configured.")
-    else:
-        print("official client skipped because TUSHARE_DISABLE_OFFICIAL_FALLBACK=true")
+    try:
+        clients = list(get_tushare_pro_clients())
+    except Exception as exc:
+        print(f"shared client init failed: {type(exc).__name__}: {exc}")
+        return
 
     for name, pro in clients:
         print(f"\nCLIENT {name}")
@@ -126,6 +143,8 @@ def main() -> None:
                     f"elapsed={time.time() - started:.2f}s"
                 )
 
+        check("index_basic", lambda pro=pro: pro.index_basic(limit=5))
+        check("pro_bar", lambda: get_tushare_pro_bar(ts_code="000001.SZ", limit=3))
         check(
             "stock_basic_one",
             lambda pro=pro: pro.stock_basic(

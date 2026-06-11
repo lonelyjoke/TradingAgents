@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 from typing import Any, Optional
 
 import httpx
@@ -121,6 +122,16 @@ _PROVIDER_CONFIG = {
 }
 
 
+def _load_provider_env() -> None:
+    try:
+        from dotenv import load_dotenv
+    except Exception:
+        return
+    repo_root = Path(__file__).resolve().parents[2]
+    load_dotenv(repo_root / ".env", override=False, encoding="utf-8-sig")
+    load_dotenv(repo_root / ".env.enterprise", override=False, encoding="utf-8-sig")
+
+
 class OpenAIClient(BaseLLMClient):
     """Client for OpenAI, Ollama, OpenRouter, and xAI providers.
 
@@ -142,6 +153,7 @@ class OpenAIClient(BaseLLMClient):
 
     def get_llm(self) -> Any:
         """Return configured ChatOpenAI instance."""
+        _load_provider_env()
         self.warn_if_unknown_model()
         llm_kwargs = {"model": self.model}
 

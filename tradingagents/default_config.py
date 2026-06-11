@@ -12,8 +12,12 @@ _REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
 def _load_environment_files() -> None:
     if load_dotenv is None:
         return
-    load_dotenv(os.path.join(_REPO_ROOT, ".env"), override=False)
-    load_dotenv(os.path.join(_REPO_ROOT, ".env.enterprise"), override=False)
+    load_dotenv(os.path.join(_REPO_ROOT, ".env"), override=False, encoding="utf-8-sig")
+    load_dotenv(
+        os.path.join(_REPO_ROOT, ".env.enterprise"),
+        override=False,
+        encoding="utf-8-sig",
+    )
 
 
 _load_environment_files()

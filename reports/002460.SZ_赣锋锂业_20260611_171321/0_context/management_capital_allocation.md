@@ -1,0 +1,107 @@
+# Management and capital-allocation context for 002460.SZ as of 2026-06-11
+
+- Company: 赣锋锂业
+- Scope: use hard evidence to assess stewardship; do not pretend management quality is fully quantifiable from one snapshot.
+
+## Management Snapshot
+| ts_code | chairman | manager | secretary | reg_capital | setup_date | province | main_business |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 002460.SZ | 李良彬 | 王晓申 | 任宇尘 | 209669.4404 | 20000302 | 江西 | 主营业务为深加工锂产品的研究,开发,生产与销售.主要产品包括金属锂(工业级,电池级),碳酸锂(电池级),氯化锂(工业级,催化剂级),丁基锂,氟化锂(工业级,电池级)等二十余种. |
+
+## Management Compensation And Holdings
+No data returned.
+
+## Capital Allocation Cash Flows
+| end_date | n_cashflow_act | c_pay_acq_const_fiolta | c_pay_dist_dpcp_int_exp | n_cashflow_inv_act | money_cap | goodwill | total_assets | total_liab |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 20251231 | 2944844627.19 | 7421739392.18 | 1374562092.58 | -4407008991.53 | 8421690110.98 | 182010569.66 | 113258091671.48 | 61420515699.89 |
+| 20241231 | 5161271999.89 | 9221133472.14 | 2497988896.56 | -12241868414.81 | 5944109610.27 | 182010569.66 | 100832297997.29 | 53244401050.02 |
+| 20231231 | 146480693.21 | 8646144451.56 | 2547612205.75 | -10183079882.6 | 9482364757.61 | 17615150.54 | 91697900969.28 | 39382038192.52 |
+| 20221231 | 12490633286.43 | 4949717124.89 | 679952364.18 | -15312394980.83 | 9914045039.34 | 17615150.54 | 79159910068.14 | 30293601966.45 |
+| 20211231 | 2620393303.77 | 3413363545.84 | 596538418.63 | -6175842141.22 | 6332206445.27 | 17615150.54 | 39056652559.96 | 12889954121.27 |
+
+## Dividend History
+| ann_date | end_date | div_proc | cash_div_tax | stk_div | record_date | ex_date | pay_date |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 20260331 | 20251231 | 预案 | 0.15 | 0 | N/A | N/A | N/A |
+| 20260331 | 20251231 | 股东大会通过 | 0.15 | 0 | N/A | N/A | N/A |
+| 20250823 | 20250630 | 预案 | 0 | 0 | N/A | N/A | N/A |
+| 20250329 | 20241231 | 实施 | 0.15 | 0 | 20250716 | 20250717 | 20250717 |
+| 20250329 | 20241231 | 股东大会通过 | 0.15 | 0 | N/A | N/A | N/A |
+| 20250329 | 20241231 | 预案 | 0.15 | 0 | N/A | N/A | N/A |
+| 20240829 | 20240630 | 预案 | 0 | 0 | N/A | N/A | N/A |
+| 20240329 | 20231231 | 实施 | 0.8 | 0 | 20240723 | 20240724 | 20240724 |
+| 20240329 | 20231231 | 股东大会通过 | 0.8 | 0 | N/A | N/A | N/A |
+| 20240329 | 20231231 | 预案 | 0.8 | 0 | N/A | N/A | N/A |
+| 20230830 | 20230630 | 预案 | 0 | 0 | N/A | N/A | N/A |
+| 20230330 | 20221231 | 实施 | 1 | 0 | 20230711 | 20230712 | 20230712 |
+| 20230330 | 20221231 | 股东大会通过 | 1 | 0 | N/A | N/A | N/A |
+| 20230330 | 20221231 | 预案 | 1 | 0 | N/A | N/A | N/A |
+| 20220831 | 20220630 | 预案 | 0 | 0 | N/A | N/A | N/A |
+| 20220331 | 20211231 | 实施 | 0.3 | 0.4 | 20220701 | 20220704 | 20220704 |
+| 20220331 | 20211231 | 股东大会通过 | 0.3 | 0.4 | N/A | N/A | N/A |
+| 20220331 | 20211231 | 预案 | 0.3 | 0.4 | N/A | N/A | N/A |
+| 20210831 | 20210630 | 预案 | 0 | 0 | N/A | N/A | N/A |
+| 20210331 | 20201231 | 实施 | 0.3 | 0 | 20210713 | 20210714 | 20210714 |
+| 20210331 | 20201231 | 股东大会通过 | 0.3 | 0 | N/A | N/A | N/A |
+| 20210331 | 20201231 | 预案 | 0.3 | 0 | N/A | N/A | N/A |
+| 20200826 | 20200630 | 预案 | 0 | 0 | N/A | N/A | N/A |
+| 20200424 | 20191231 | 实施 | 0.3 | 0 | 20200721 | 20200722 | 20200722 |
+| 20200424 | 20191231 | 股东大会通过 | 0.3 | 0 | N/A | N/A | N/A |
+| 20200424 | 20191231 | 预案 | 0.3 | 0 | N/A | N/A | N/A |
+| 20190829 | 20190630 | 预案 | 0 | 0 | N/A | N/A | N/A |
+| 20190329 | 20181231 | 实施 | 0.3 | 0 | 20190725 | 20190726 | 20190726 |
+| 20190329 | 20181231 | 股东大会通过 | 0.3 | 0 | N/A | N/A | N/A |
+| 20190329 | 20181231 | 预案 | 0.3 | 0 | N/A | N/A | N/A |
+| 20180821 | 20180630 | 预案 | 0 | 0 | N/A | N/A | N/A |
+| 20180402 | 20171231 | 实施 | 0.4 | 0.5 | 20180528 | 20180529 | 20180529 |
+| 20170412 | 20161231 | 实施 | 0.1 | 0 | 20170706 | 20170707 | 20170707 |
+| 20160412 | 20151231 | 实施 | 0.15 | 1 | 20160623 | 20160624 | 20160624 |
+| 20150414 | 20141231 | 实施 | 0.1 | 0 | 20150604 | 20150605 | 20150605 |
+| 20140415 | 20131231 | 实施 | 0.15 | 1 | 20140703 | 20140704 | 20140704 |
+| 20130402 | 20121231 | 实施 | 0.2 | 0 | 20130619 | 20130620 | 20130620 |
+| 20120313 | 20111231 | 实施 | 0.2 | 0 | 20120516 | 20120517 | 20120517 |
+| 20110419 | 20101231 | 实施 | 0.4 | 0.5 | 20110526 | 20110527 | 20110527 |
+
+## Dividend Yield Cross-Check
+| basis | cash_div_per_share | reference_price | yield_pct | note |
+| --- | --- | --- | --- | --- |
+| sum of announced dividends for end_date 20251231 | 0.3 | 69.94 | 0.4289 | Check whether this includes annual, interim, and special dividends before citing shareholder yield. |
+| sum of announced dividends for end_date 20250630 | 0 | 69.94 | 0 | Check whether this includes annual, interim, and special dividends before citing shareholder yield. |
+| sum of announced dividends for end_date 20241231 | 0.45 | 69.94 | 0.6434 | Check whether this includes annual, interim, and special dividends before citing shareholder yield. |
+| sum of announced dividends for end_date 20240630 | 0 | 69.94 | 0 | Check whether this includes annual, interim, and special dividends before citing shareholder yield. |
+| sum of announced dividends for end_date 20231231 | 2.4 | 69.94 | 3.4315 | Check whether this includes annual, interim, and special dividends before citing shareholder yield. |
+
+## Repurchase History
+No data returned.
+
+## Capital Allocation Announcements
+| ann_date | category | title |
+| --- | --- | --- |
+| 20260611 | equity_incentive | 关于2023年员工持股计划首次授予部分第二个归属期符合归属条件的部分股份非交易过户完成的公告 |
+| 20260603 | equity_incentive | 关于2023年员工持股计划首次授予部分第二个归属期权益归属的提示性公告 |
+| 20260603 | equity_incentive | 关于调整2023年员工持股计划管理委员会委员的公告 |
+| 20260428 | financing | 关于公司2026年度第一期绿色中期票据发行结果的公告 |
+| 20260331 | dividend | 关于2025年度利润分配预案的公告 |
+| 20260331 | financing | 关于公司与合营公司作为联合承租人开展融资租赁业务的公告 |
+| 20260331 | financing | 关于增发公司H股股份一般性授权的公告 |
+| 20251224 | mna | 关于公司2025年度第一期科技创新债券（并购）发行结果的公告 |
+| 20251218 | financing | 关于公司2024年度第一期短期融资券（科创票据）兑付完成的公告 |
+| 20251210 | financing | 关于H股可转换公司债券转股及赎回的进展公告 |
+| 20251107 | financing | 关于提前赎回H股可转换公司债券的提示性公告 |
+| 20251106 | financing | 关于公司2025年度第一期绿色短期融资券发行结果的公告 |
+| 20250926 | financing | 关于公司与合营公司作为联合承租人开展融资租赁业务的公告 |
+| 20250913 | equity_incentive | 关于2023年员工持股计划预留授予部分第一个归属期权益归属的提示性公告 |
+| 20250903 | financing | 关于新增H股配售完成及可转换公司债券发行完成的公告 |
+| 20250826 | financing | 关于根据一般性授权发行可转换公司债券以及配售新增H股的公告 |
+| 20250717 | equity_incentive | 关于2023年员工持股计划预留授予部分锁定期届满提示性公告 |
+| 20250703 | mna | 关于收购Mali Lithium公司部分股权涉及矿业权投资的进展公告 |
+| 20250612 | financing | 关于公司与合营公司作为联合承租人开展融资租赁业务暨关联交易的公告 |
+| 20250516 | equity_incentive | 关于2023年员工持股计划首次授予部分第一个归属期权益归属的提示性公告 |
+
+## Analyst Instructions
+- Separate stewardship from narration: reward managers for durable ROIC, cash generation, sensible leverage, disciplined capex, and shareholder returns, not for grand plans alone.
+- Read investing cash outflow together with future revenue, margin, and ROIC evidence; capex is good only when later returns justify it.
+- Use goodwill, acquisitions, financing, dividends, and buybacks to judge whether capital is being compounded, hoarded, or diluted away.
+- When citing dividend yield, prefer `dv_ttm` or a summed trailing dividend basis; do not mix a single annual proposal with full-year shareholder-return language unless you label it as annual-only.
+- Management quality is a synthesis variable: combine these hard signals with long-run delivery against prior promises in filings and announcements.

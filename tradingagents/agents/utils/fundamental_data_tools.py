@@ -107,6 +107,21 @@ def get_price_move_attribution_context(
 
 
 @tool
+def get_intraday_behavior_context(
+    ticker: Annotated[str, "ticker symbol"],
+    curr_date: Annotated[str, "current date you are trading at, yyyy-mm-dd"],
+    look_back_days: Annotated[int, "minute K-line look-back window in calendar days"] = 10,
+) -> str:
+    """
+    Retrieve A-share historical minute K-line behavior context for PM validation.
+    Use it after fundamental research to assess intraday confirmation, liquidity,
+    volume concentration, entry timing, and whether the move looks like company
+    alpha, sector beta, or broad risk appetite.
+    """
+    return route_to_vendor("get_intraday_behavior_context", ticker, curr_date, look_back_days)
+
+
+@tool
 def get_shipping_context(
     ticker: Annotated[str, "ticker symbol"],
     curr_date: Annotated[str, "current date you are trading at, yyyy-mm-dd"],

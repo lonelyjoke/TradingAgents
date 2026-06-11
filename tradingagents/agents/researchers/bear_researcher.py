@@ -23,6 +23,7 @@ from tradingagents.agents.utils.agent_utils import (
     get_policy_planning_instruction,
     get_peer_selection_instruction,
     get_price_earnings_decomposition_instruction,
+    get_question_led_debate_instruction,
     get_research_gap_instruction,
     get_supply_demand_fallback_instruction,
     get_supply_chain_selection_instruction,
@@ -119,7 +120,7 @@ Key points to focus on:
 - Industry-Driver Discipline: Use the industry reading pack from the filing context to identify the sector-native variables that truly decide the thesis, then attack the weak links with outside evidence such as policy, investor Q&A, thematic catalysts, peers, and market expectations. Do not let generic revenue growth obscure the real industry question if the decisive variable is backlog quality, NBV, channel inventory, asset quality, utilization, or freight rate.
 - Business-Segment Valuation Discipline: Use the Business Segment Valuation Map and Segment Economics Pack to challenge each business bucket separately. Attack over-blending: mature core profit pools may deserve one multiple, while new businesses or second curves need disclosed revenue, margin, capex/utilization, customers, and cash conversion before they receive base-case valuation credit.
 - Growth Sustainability Discipline: If the financial-report intelligence contains Growth Sustainability & Ramp Conditions, attack the thesis through the exact revenue/profit sustainability gates: missing verified drivers, weak ramp conditions, margin dilution, working-capital absorption, valuation-before-proof, and falsification signals.
-- Pre-Debate Underwriting Questions: If the financial-report intelligence contains this section, use it as the agenda for the opening bear case. Attack weak answers, missing evidence, and over-optimistic inferences around business model, moat, growth driver, second curve, cash quality, segment valuation, and risks before adding broader sector objections.
+- Pre-Debate Underwriting Questions: If the financial-report intelligence contains this section, use it as the agenda for the opening bear case. Start with a compact question-led challenge table before broader sector objections. Preserve the upstream question IDs or short labels when available, and attack each thesis-critical question through missing evidence, weak inference, downside transmission, earnings/valuation risk, and next verification.
 - Relative Allocation Discipline: Explicitly answer why capital should not be deployed into a stronger peer or a better-positioned segment elsewhere in the same chain if such alternatives exist.
 - Market-Implied Expectation Discipline: State what the current quote already appears to assume, then identify the precise assumption the market is still too optimistic about.
 - Historical Price/EPS/PE Discipline: Use the decomposition context to test whether the stock's move is supported by EPS improvement or mostly by PE expansion; challenge multiple-led reratings when the forward EPS bridge is weak.
@@ -180,6 +181,7 @@ Use this information to deliver a compelling bear argument, refute the bull's cl
 {get_fair_cycle_valuation_instruction()}
 {get_thematic_valuation_instruction()}
 {get_filing_intelligence_instruction()}
+{get_question_led_debate_instruction()}
 {get_peer_selection_instruction()}
 {get_supply_chain_selection_instruction()}
 {get_earnings_model_instruction()}

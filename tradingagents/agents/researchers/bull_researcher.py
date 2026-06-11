@@ -23,6 +23,7 @@ from tradingagents.agents.utils.agent_utils import (
     get_policy_planning_instruction,
     get_peer_selection_instruction,
     get_price_earnings_decomposition_instruction,
+    get_question_led_debate_instruction,
     get_research_gap_instruction,
     get_supply_demand_fallback_instruction,
     get_supply_chain_selection_instruction,
@@ -117,7 +118,7 @@ Key points to focus on:
 - Industry-Driver Discipline: Use the industry reading pack from the filing context to identify the sector-native variables that truly decide the thesis, then connect each one to outside evidence such as policy, investor Q&A, thematic catalysts, peers, and market expectations. Do not lean on generic revenue growth when the real industry question is backlog quality, NBV, channel inventory, asset quality, utilization, or freight rate.
 - Business-Segment Valuation Discipline: Use the Business Segment Valuation Map and Segment Economics Pack to argue from business buckets, not only from consolidated PE. Separate the mature core business from emerging second curves, geography, and channel mix; explain which bucket deserves core valuation credit and which remains scenario/SOTP optionality.
 - Growth Sustainability Discipline: If the financial-report intelligence contains Growth Sustainability & Ramp Conditions, build the bull case around the specific revenue/profit drivers that can keep compounding or ramp further. State which drivers are filing-verified, which are inferred, what conditions must hold, and what evidence would invalidate the bull case.
-- Pre-Debate Underwriting Questions: If the financial-report intelligence contains this section, use it as the agenda for the opening bull case. Answer the company-specific questions on business model, moat, growth driver, second curve, cash quality, segment valuation, and risks before adding broader sector arguments.
+- Pre-Debate Underwriting Questions: If the financial-report intelligence contains this section, use it as the agenda for the opening bull case. Start with a compact question-led table before the broader bull thesis. Preserve the upstream question IDs or short labels when available, and answer each thesis-critical question with bull evidence, bear risk acknowledged, evidence verdict, earnings/valuation impact, and next verification.
 - Relative Allocation Discipline: Explicitly answer why this stock deserves capital versus stronger same-industry peers or a better-positioned segment elsewhere in the chain; do not stop at saying the company itself is improving.
 - Market-Implied Expectation Discipline: State what the current quote already appears to assume, then identify the precise assumption the market is still too pessimistic about.
 - Historical Price/EPS/PE Discipline: Use the decomposition context to argue whether the upside is supported by EPS recovery/growth, multiple expansion, or a double-engine setup; do not present pure multiple expansion as hard fundamental proof.
@@ -177,6 +178,7 @@ Use this information to deliver a compelling bull argument, refute the bear's co
 {get_fair_cycle_valuation_instruction()}
 {get_thematic_valuation_instruction()}
 {get_filing_intelligence_instruction()}
+{get_question_led_debate_instruction()}
 {get_peer_selection_instruction()}
 {get_supply_chain_selection_instruction()}
 {get_earnings_model_instruction()}

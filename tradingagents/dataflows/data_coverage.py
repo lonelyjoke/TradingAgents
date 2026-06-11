@@ -154,7 +154,7 @@ def build_data_coverage_context(contexts: dict[str, str]) -> str:
                 "- Do not treat failed or missing modules as neutral evidence.",
                 "- Distinguish a narrative filing-text extraction gap from a full financial-data failure. If structured statements, market data, peers, or valuation contexts are present, say only that report-body/segment/management-discussion evidence is missing.",
                 "- If a failed or partial module touches the core bet, name it as a research gap and cap conviction.",
-                "- If other verified modules still support a directional view, state the view as evidence-limited and list the data needed to confirm or refute it.",
+                "- If other verified modules still support a directional view, keep the rating label clean and put the limitation in conviction, sizing, Evidence Gaps, and Verification Calendar. Use an evidence-limited rating label only when a core module for the thesis is failed/partial or the decisive valuation driver lacks direct evidence.",
             ]
         )
     return "\n".join(lines)

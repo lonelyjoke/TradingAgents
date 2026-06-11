@@ -149,6 +149,14 @@ def test_gold_company_mapping_uses_shfe_gold_proxy():
     assert product["exchange"] == "SHFE"
 
 
+def test_xingye_silver_tin_mapping_covers_core_metals():
+    mapping = _infer_products("000426.SZ")
+    product_names = {product["name"] for product in mapping["products"]}
+
+    assert {"Silver", "Tin", "Lead", "Zinc"} <= product_names
+    assert "silver, tin, lead, and zinc futures" in mapping["spread_note"]
+
+
 def test_live_hog_futures_prefers_near_month_with_main_reference(monkeypatch):
     board = pd.DataFrame(
         [

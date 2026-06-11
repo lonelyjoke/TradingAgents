@@ -59,6 +59,7 @@ class AgentState(MessagesState):
     thematic_catalyst_context: Annotated[str, "Precomputed filing/news catalyst context"]
     commodity_context: Annotated[str, "Precomputed commodity/product-price context"]
     price_move_attribution_context: Annotated[str, "Precomputed short-horizon price-move attribution context"]
+    intraday_behavior_context: Annotated[str, "Precomputed historical minute K-line behavior context"]
     relative_strength_context: Annotated[str, "Precomputed stock-versus-index relative strength and correlation context"]
     shipping_context: Annotated[str, "Precomputed shipping/freight-rate cycle context"]
     filing_intelligence_context: Annotated[str, "Precomputed filing intelligence context"]

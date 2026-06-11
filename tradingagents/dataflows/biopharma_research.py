@@ -85,6 +85,20 @@ BIOPHARMA_TERMS = (
 SERVICES_TERMS = ("CRO", "CDMO", "药明康德", "药明生物", "临床前", "药物发现")
 
 
+NON_BIOPHARMA_INDUSTRY_TERMS = (
+    "小金属",
+    "有色",
+    "锂",
+    "电池",
+    "化工",
+    "矿",
+    "金属",
+    "材料",
+)
+
+STRONG_BIOPHARMA_TERMS = BIOPHARMA_TERMS + SERVICES_TERMS
+
+
 @dataclass(frozen=True)
 class BiopharmaProfile:
     symbol: str
@@ -108,6 +122,20 @@ def _contains_terms(terms: tuple[str, ...], *parts: object) -> bool:
     return any(term.lower() in text.lower() for term in terms)
 
 
+def _has_strong_biopharma_identity(company_name: str, industry: str, text_probe: str) -> bool:
+    identity_text = " ".join([company_name or "", industry or ""])
+    if _contains_terms(STRONG_BIOPHARMA_TERMS, identity_text):
+        return True
+    if _contains_terms(NON_BIOPHARMA_INDUSTRY_TERMS, company_name, industry):
+        return False
+    matched = {
+        term
+        for term in STRONG_BIOPHARMA_TERMS
+        if term.lower() in text_probe.lower()
+    }
+    return len(matched) >= 2
+
+
 def _company_profile(symbol: str, curr_date: str, look_back_days: int) -> BiopharmaProfile | None:
     basic = _safe_fetch("stock_basic", _fetch_stock_basic, symbol)
     curated = BIOPHARMA_COMPANIES.get(symbol, {})
@@ -121,7 +149,7 @@ def _company_profile(symbol: str, curr_date: str, look_back_days: int) -> Biopha
     text_probe = " ".join(text[:3500] for _, text in report_texts[:4])
     if symbol in BIOPHARMA_COMPANIES:
         reason = "curated A-share biopharma / pharma-services ticker list"
-    elif _contains_terms(BIOPHARMA_TERMS + SERVICES_TERMS, company_name, industry, text_probe):
+    elif _has_strong_biopharma_identity(company_name, industry, text_probe):
         reason = "company name / Tushare industry / filing text contains biopharma terms"
     else:
         return None

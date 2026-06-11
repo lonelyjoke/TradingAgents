@@ -129,6 +129,19 @@ class ResearchPlan(BaseModel):
             "reasoned ruling, not a short recap."
         ),
     )
+    question_led_debate_audit: Optional[str] = Field(
+        default=None,
+        description=(
+            "Mandatory when financial-report intelligence supplies Pre-Debate "
+            "Underwriting Questions. Write a compact investment-committee issue "
+            "log for the 4-7 questions that can change rating, valuation, sizing, "
+            "or next verification. Prefer a markdown table with columns such as "
+            "question, initial skepticism, bull answer, bear attack, evidence "
+            "verdict, valuation/sizing impact, and next verification. Preserve "
+            "question IDs or short labels when available, and explicitly mark any "
+            "unanswered thesis-critical question as a research gap."
+        ),
+    )
     strategic_actions: str = Field(
         description=(
             "Concrete steps for the trader to implement the recommendation, "
@@ -421,6 +434,8 @@ def render_research_plan(plan: ResearchPlan) -> str:
         parts.extend(["", "### Evidence Gap And Confidence Cap", plan.evidence_gap_confidence_cap])
     if plan.data_coverage_audit:
         parts.extend(["", "### Data Coverage Audit", plan.data_coverage_audit])
+    if plan.question_led_debate_audit:
+        parts.extend(["", "### Question-Led Debate Audit", plan.question_led_debate_audit])
     parts.extend(
         [
             "",
@@ -670,8 +685,9 @@ class PortfolioDecision(BaseModel):
             "case proved, what the bear case exposed, which evidence settled the "
             "question, what remains unresolved, and how the answer changes rating, "
             "valuation, sizing, or the next verification action. Prefer a compact "
-            "markdown table with columns such as question, debate-informed answer, "
-            "evidence, PM implication, and remaining verification. When writing "
+            "markdown table with columns such as core question, initial skeptical "
+            "prior, bull evidence, bear evidence, PM ruling, earnings/valuation "
+            "impact, and next verification. When writing "
             "Chinese, title the section `核心投研问题与辩论后的答案`."
         ),
     )
@@ -959,6 +975,42 @@ class PortfolioDecision(BaseModel):
             "volume, gross margin, inventory, OCF, orders, or contract liabilities."
         ),
     )
+    forward_forecast_model: Optional[str] = Field(
+        default=None,
+        description=(
+            "A sell-side-style forward forecast bridge for the next two to three "
+            "years or the next four quarters. State revenue, gross margin, expense "
+            "ratio, operating profit, net profit, EPS, cash-flow, capex, and balance-"
+            "sheet assumptions where material. Distinguish disclosed facts, model "
+            "assumptions, and scenario estimates. If exact forecasts cannot be "
+            "supported, provide a driver-based model skeleton and say which inputs "
+            "must be verified before target valuation can carry high confidence."
+        ),
+    )
+    valuation_framework: Optional[str] = Field(
+        default=None,
+        description=(
+            "The valuation framework that follows from the company research, not "
+            "a generic target-price paragraph. Explain which method is primary "
+            "for each business bucket or scenario: PE, PB/ROE, EV/EBITDA, DCF, "
+            "NAV/SOTP, dividend yield, liquidation/asset value, or peer-relative "
+            "valuation. State why the chosen method fits the business economics, "
+            "which parts enter core value, which stay in scenario value, and what "
+            "current price implies versus the research view."
+        ),
+    )
+    market_behavior_validation: Optional[str] = Field(
+        default=None,
+        description=(
+            "Use historical daily and minute K-line behavior as a validation and "
+            "timing layer after the fundamental thesis. Discuss intraday reversal, "
+            "high-low range, first/last-30-minute behavior, volume concentration, "
+            "liquidity, and whether recent action looks like company alpha, sector "
+            "beta, commodity beta, or broad risk appetite. Do not let technical or "
+            "minute-line behavior replace company research; connect it only to "
+            "confidence, sizing, entry timing, or verification."
+        ),
+    )
     market_implied_expectation: Optional[str] = Field(
         default=None,
         description=(
@@ -1171,6 +1223,12 @@ def render_pm_decision(decision: PortfolioDecision) -> str:
         f"Earnings bridge: {decision.earnings_model_bridge}"
         if decision.earnings_model_bridge
         else None,
+        f"Forward forecast model: {decision.forward_forecast_model}"
+        if decision.forward_forecast_model
+        else None,
+        f"Valuation framework: {decision.valuation_framework}"
+        if decision.valuation_framework
+        else None,
         f"Unit-economics bridge: {decision.unit_economics_bridge}"
         if decision.unit_economics_bridge
         else None,
@@ -1229,6 +1287,9 @@ def render_pm_decision(decision: PortfolioDecision) -> str:
         else None,
         f"Supply-chain position: {decision.supply_chain_position_verdict}"
         if decision.supply_chain_position_verdict
+        else None,
+        f"Market behavior validation: {decision.market_behavior_validation}"
+        if decision.market_behavior_validation
         else None,
     )
 
@@ -1376,7 +1437,6 @@ def render_pm_decision(decision: PortfolioDecision) -> str:
         "",
         f"**One-Line Thesis**: {decision.one_line_thesis}",
         "",
-        *take_away_parts,
         *pm_summary_parts,
         *primer_parts,
         *core_question_parts,
@@ -1404,7 +1464,7 @@ def render_pm_decision(decision: PortfolioDecision) -> str:
     parts.extend([f"**Verification & Falsification**: {verification_and_falsification}", ""])
     if decision.verification_calendar:
         parts.extend([f"**Verification Calendar**: {decision.verification_calendar}", ""])
-    parts.extend([f"**Executive Summary**: {execution_posture}"])
+    parts.extend([*take_away_parts, f"**Execution Posture**: {execution_posture}"])
     if continuity:
         parts.extend(["", f"**Decision Continuity**: {continuity}"])
     return "\n".join(parts)

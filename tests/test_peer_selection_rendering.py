@@ -114,3 +114,28 @@ def test_portfolio_decision_renders_core_research_questions_before_thesis():
     assert rendered.index("**Core Research Questions & Debate-Informed Answers**") < rendered.index(
         "**Investment Thesis**"
     )
+
+
+def test_research_plan_renders_question_led_debate_audit():
+    plan = ResearchPlan(
+        recommendation=PortfolioRating.OVERWEIGHT,
+        core_bet="Demand recovery with margin repair.",
+        expectation_gap="Market underprices the operating improvement.",
+        probability_payoff="Upside remains asymmetric.",
+        cycle_valuation_assessment="Low valuation, improving cycle.",
+        catalyst_path="Orders and margin data improve.",
+        falsification_signals="Orders fail to recover.",
+        conviction_level="Medium",
+        rationale="The debate is constructive but still evidence-aware.",
+        strategic_actions="Build gradually.",
+        question_led_debate_audit=(
+            "| question | initial skepticism | PM ruling |\n"
+            "| --- | --- | --- |\n"
+            "| Q1: Is growth durable? | Margins may be cyclical. | Evidence supports staged Overweight. |"
+        ),
+    )
+
+    rendered = render_research_plan(plan)
+
+    assert "### Question-Led Debate Audit" in rendered
+    assert "Q1: Is growth durable?" in rendered

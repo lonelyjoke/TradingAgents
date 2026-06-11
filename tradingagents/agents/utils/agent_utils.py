@@ -19,6 +19,7 @@ from tradingagents.agents.utils.fundamental_data_tools import (
     get_financial_report_intelligence_context,
     get_income_statement,
     get_insurance_context,
+    get_intraday_behavior_context,
     get_medical_device_context,
     get_metals_mining_context,
     get_optical_module_context,
@@ -990,6 +991,30 @@ def get_filing_intelligence_instruction() -> str:
         "downgrade confidence, say that the system did not complete a deep filing "
         "read, and do not claim second-curve, business-model, or filing-backed "
         "catalyst conclusions from that missing layer."
+    )
+
+
+def get_question_led_debate_instruction() -> str:
+    """Return rules that force the debate to start from skeptical questions."""
+    return (
+        " Question-led debate discipline: when Financial-report intelligence "
+        "contains Pre-Debate Underwriting Questions, treat them as the live "
+        "research agenda rather than a background appendix. Preserve the same "
+        "question IDs or short labels across the bull case, bear case, Research "
+        "Manager ruling, and Portfolio Manager memo so the debate does not talk "
+        "past itself. Before writing a directional story, select the 4-7 "
+        "questions that can actually change rating, valuation, sizing, or the "
+        "next verification action. For each question, keep the full loop: "
+        "initial skeptical prior, bull evidence, bear evidence, evidence verdict, "
+        "earnings or valuation impact, position-size impact, and next "
+        "verification or falsification item. The opening bull turn should answer "
+        "the agenda before broader optimism; the opening bear turn should attack "
+        "the same agenda before broader objections. Research Manager and PM "
+        "outputs should include a compact question-led audit table when the "
+        "agenda is supplied. Do not paste the upstream table mechanically; "
+        "rewrite it as an investment committee issue log. If a thesis-critical "
+        "question remains unanswered, make it an explicit research gap and cap "
+        "conviction, SOTP credit, or position size instead of hiding the gap."
     )
 
 
