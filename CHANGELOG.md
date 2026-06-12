@@ -12,23 +12,35 @@ Breaking changes within the 0.x line are called out explicitly.
 
 - A-share current research system documentation: module map, data-to-debate chain,
   PM report structure, and debugging workflow.
+- A-share sell-side depth gap note documenting the newly added derived research
+  modules, current strengths, remaining gaps, and the path toward consistently
+  deep sell-side reports.
 - A-share gated industry/sector toolkit inventory covering 11 toolkits: baijiu,
   compute leasing, defensive dividend, building materials, consumer staples,
   optical modules / AI datacom, biopharma, software/SaaS, insurance, medical
   devices, and metals/mining.
 - Saved report context files for newer A-share toolkits, including consumer
   staples, optical modules, insurance, medical devices, and metals/mining.
+- Derived sell-side scaffolds for A-share reports: industry cycle, company
+  business model, industry KPI checklist, forecast model, and quality audit
+  contexts.
 
 ### Changed
 
 - A-share preflight treats readable filing text as a required second-layer input
   before LLM generation, alongside core market data, valuation, income statement,
   balance sheet, and cash-flow data.
+- A-share commodity and supply-chain research now infer battery-material /
+  lithium-chain exposure from stock metadata and recent filing text, reducing
+  dependence on curated ticker mappings.
 - CNINFO announcement fallback now uses HTTPS, top-search stock/orgId discovery,
   category-format variants, and a financial-report-specific retry path.
 - Financial-report title filtering excludes prompt notices and scheduled
   disclosure-time notices so the filing text bundle is not polluted by thin
   non-report announcements.
+- Report-depth validation now includes battery-material driver-bridge gates for
+  reports that discuss cathode, lithium materials, ASP, capacity, spread, or
+  lithium-carbonate cost without enough supporting analysis.
 
 ## [0.2.4] — 2026-04-25
 

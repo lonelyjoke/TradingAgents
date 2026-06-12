@@ -33,6 +33,19 @@ def test_lithium_industry_kpi_checklist_uses_metals_cycle_drivers():
     assert "inventory" in context.lower()
 
 
+def test_battery_material_kpi_checklist_uses_spread_drivers():
+    context = build_industry_kpi_context(
+        "301999.SZ",
+        "2026-06-12",
+        filing_intelligence_context="公司主营磷酸铁锂正极材料，碳酸锂成本、正极材料ASP、产能利用率和客户结构影响盈利。",
+    )
+
+    assert "lithium battery materials / cathode chain" in context
+    assert "cathode ASP" in context
+    assert "processing fee / spread" in context
+    assert "customer mix" in context
+
+
 def test_forecast_model_scaffold_requires_three_year_driver_bridge():
     context = build_forecast_model_context(
         "300750.SZ",
@@ -48,6 +61,19 @@ def test_forecast_model_scaffold_requires_three_year_driver_bridge():
     assert "2027E" in context
     assert "2028E" in context
     assert "net profit/EPS" in context
+
+
+def test_forecast_model_scaffold_uses_battery_material_bridge():
+    context = build_forecast_model_context(
+        "301999.SZ",
+        "2026-06-12",
+        company_business_model_context="公司主营磷酸铁锂正极材料，盈利取决于碳酸锂价格传导、加工费价差和产能利用率。",
+        industry_kpi_context="Required KPI Map: cathode ASP, lithium carbonate, processing fee, capacity utilization.",
+    )
+
+    assert "Cathode / material revenue" in context
+    assert "shipment volume x cathode ASP" in context
+    assert "Manufacturing spread" in context
 
 
 def test_quality_audit_requires_formula_period_and_evidence_status():

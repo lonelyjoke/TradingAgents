@@ -149,6 +149,36 @@ def test_gold_company_mapping_uses_shfe_gold_proxy():
     assert product["exchange"] == "SHFE"
 
 
+def test_hunan_yuneng_uses_lithium_carbonate_cost_proxy():
+    mapping = _infer_products("301358.SZ")
+    product = mapping["products"][0]
+
+    assert mapping["name"] == "Hunan Yuneng"
+    assert product["name"] == "Lithium carbonate"
+    assert product["role"] == "LFP cathode raw-material cost proxy"
+    assert "not the realized cathode selling price" in mapping["spread_note"]
+
+
+def test_unmapped_cathode_company_infers_lithium_cost_proxy_from_filings(monkeypatch):
+    monkeypatch.setattr(
+        commodity_research,
+        "_fetch_stock_basic",
+        lambda symbol: pd.Series({"ts_code": symbol, "name": "测试材料", "industry": "电气设备"}),
+    )
+
+    def fake_load_reports(symbol, curr_date, look_back_days):
+        return [], [("年报", "公司主营磷酸铁锂正极材料，碳酸锂成本和正极材料售价影响毛利率。")]
+
+    monkeypatch.setattr("tradingagents.dataflows.filing_research._load_financial_report_texts", fake_load_reports)
+
+    mapping = _infer_products("301999.SZ", "2026-06-12")
+    product = mapping["products"][0]
+
+    assert product["name"] == "Lithium carbonate"
+    assert product["role"] == "lithium-battery-material raw-material cost proxy"
+    assert "stock name/industry and recent filing text" in mapping["spread_note"]
+
+
 def test_xingye_silver_tin_mapping_covers_core_metals():
     mapping = _infer_products("000426.SZ")
     product_names = {product["name"] for product in mapping["products"]}

@@ -283,6 +283,13 @@ COMPANY_COMMODITY_MAP = {
         ],
         "spread_note": "For battery makers, lithium carbonate is a cost proxy rather than a direct revenue product.",
     },
+    "301358.SZ": {
+        "name": "Hunan Yuneng",
+        "products": [
+            {"name": "Lithium carbonate", "type": "futures", "role": "LFP cathode raw-material cost proxy", "prefix": "LC", "exchange": "GFEX"},
+        ],
+        "spread_note": "For LFP cathode producers, lithium carbonate is a critical raw-material cost proxy, not the realized cathode selling price. Margin work still needs LFP cathode ASP, iron phosphate cost, processing fee, capacity utilization, customer mix, and inventory-cost lag evidence.",
+    },
     "002714.SZ": {
         "name": "Muyuan Foods",
         "products": [
@@ -327,6 +334,31 @@ INDUSTRY_PRODUCT_HINTS = {
         {"name": "Hog-grain ratio", "type": "moa_livestock", "role": "cycle spread", "keywords": ["猪粮比价", "猪粮比"]},
     ],
 }
+
+LITHIUM_MATERIAL_HINTS = (
+    "正极",
+    "负极",
+    "磷酸铁锂",
+    "三元材料",
+    "前驱体",
+    "锂电材料",
+    "电池材料",
+    "LFP",
+    "cathode",
+    "precursor",
+)
+
+
+def _lithium_material_products() -> list[dict]:
+    return [
+        {
+            "name": "Lithium carbonate",
+            "type": "futures",
+            "role": "lithium-battery-material raw-material cost proxy",
+            "prefix": "LC",
+            "exchange": "GFEX",
+        }
+    ]
 
 def _is_allowed_url(url: str) -> bool:
     host = urlparse(url).netloc.lower()
@@ -742,7 +774,19 @@ def _fetch_futures_receipt(ts_code: str, exchange: str, trade_date: str) -> str:
         return "N/A"
 
 
-def _infer_products(symbol: str) -> dict:
+def _filing_text_probe(symbol: str, curr_date: str | None, look_back_days: int) -> str:
+    if not curr_date:
+        return ""
+    try:
+        from .filing_research import _load_financial_report_texts
+
+        _, reports = _load_financial_report_texts(symbol, curr_date, look_back_days)
+    except Exception:
+        return ""
+    return " ".join(text[:6000] for _, text in reports[:4])
+
+
+def _infer_products(symbol: str, curr_date: str | None = None, look_back_days: int = 900) -> dict:
     symbol = str(symbol or "").strip().upper()
     bank_hint = banking_profile_hint(symbol)
     if bank_hint is not None:
@@ -771,6 +815,8 @@ def _infer_products(symbol: str) -> dict:
         }
 
     haystack = f"{basic.get('name', '')} {basic.get('industry', '')}"
+    filing_probe = _filing_text_probe(symbol, curr_date, look_back_days)
+    evidence_haystack = f"{haystack} {filing_probe}"
     if is_banking_entity(symbol, basic=basic) or any(token in haystack for token in ("银行", "保险", "证券", "信托", "多元金融")):
         return {
             "name": _format_value(basic.get("name")),
@@ -778,15 +824,26 @@ def _infer_products(symbol: str) -> dict:
             "spread_note": "Not applicable: financial institutions do not have a primary commodity/product-price spread driver. Use bank/financial KPIs instead.",
         }
     products = []
+    if any(token in evidence_haystack for token in LITHIUM_MATERIAL_HINTS):
+        products.extend(_lithium_material_products())
     for keyword, hints in INDUSTRY_PRODUCT_HINTS.items():
-        if keyword in haystack:
+        if keyword in evidence_haystack:
             products.extend(hints)
+    deduped = []
+    seen = set()
+    for product in products:
+        key = (product.get("name"), product.get("type"), product.get("prefix"), product.get("exchange"))
+        if key in seen:
+            continue
+        seen.add(key)
+        deduped.append(product)
+    products = deduped
 
     return {
         "name": _format_value(basic.get("name")),
         "products": products,
         "spread_note": (
-            "Products inferred from stock name/industry. Verify whether these proxies match the company's actual revenue mix."
+            "Products inferred from stock name/industry and recent filing text. Verify whether these proxies match the company's actual revenue mix."
             if products
             else "No commodity mapping found. Add this ticker to COMPANY_COMMODITY_MAP before making product-price claims."
         ),
@@ -879,7 +936,7 @@ def get_commodity_context(ticker: str, curr_date: str, look_back_days: int = 90)
     if not curr_date:
         curr_date = datetime.now().strftime("%Y-%m-%d")
 
-    mapping = _infer_products(symbol)
+    mapping = _infer_products(symbol, curr_date, look_back_days)
     products = mapping.get("products", [])
     rows = []
     has_livestock_products = any(product.get("type") == "moa_livestock" for product in products)

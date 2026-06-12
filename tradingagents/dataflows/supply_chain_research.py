@@ -53,10 +53,13 @@ _SUPPLY_CHAIN_MAPS: tuple[SupplyChainMap, ...] = (
             "300438.SZ",
             "688567.SH",
             "300073.SZ",
+            "301358.SZ",
+            "300769.SZ",
             "002709.SZ",
             "300568.SZ",
             "300037.SZ",
             "603659.SH",
+            "688275.SH",
         ),
         segments=(
             SupplyChainSegment(
@@ -69,7 +72,7 @@ _SUPPLY_CHAIN_MAPS: tuple[SupplyChainMap, ...] = (
                 key="midstream_materials",
                 name="Midstream materials",
                 role="cathode / electrolyte / separator / anode materials",
-                tickers=("300073.SZ", "002709.SZ", "300568.SZ", "300037.SZ", "603659.SH"),
+                tickers=("301358.SZ", "300073.SZ", "300769.SZ", "688275.SH", "002709.SZ", "300568.SZ", "300037.SZ", "603659.SH"),
             ),
             SupplyChainSegment(
                 key="downstream_cells",
@@ -124,6 +127,46 @@ def _find_supply_chain(symbol: str) -> SupplyChainMap | None:
         if clean in chain.target_symbols:
             return chain
     return None
+
+
+def _supply_chain_filing_probe(symbol: str, curr_date: str) -> str:
+    try:
+        from .filing_research import _load_financial_report_texts
+
+        _, reports = _load_financial_report_texts(symbol, curr_date, 900)
+    except Exception:
+        return ""
+    return " ".join(text[:5000] for _, text in reports[:3])
+
+
+def _infer_lithium_chain_segment(symbol: str, curr_date: str = "") -> tuple[SupplyChainMap, SupplyChainSegment, str] | None:
+    try:
+        basic = _fetch_stock_basic(symbol)
+    except Exception:
+        basic = None
+    if basic is None:
+        return None
+    haystack = f"{_format_value(basic.get('name'))} {_format_value(basic.get('industry'))} {_supply_chain_filing_probe(symbol, curr_date)}"
+    chain = next((item for item in _SUPPLY_CHAIN_MAPS if item.key == "lithium_battery_chain"), None)
+    if chain is None:
+        return None
+    segment_key = ""
+    reason = ""
+    if any(token in haystack for token in ("锂矿", "盐湖", "锂业", "小金属")):
+        segment_key = "upstream_resources"
+        reason = "inferred from lithium resource / mining name or industry keywords"
+    elif any(token in haystack for token in ("正极", "负极", "材料", "磷酸铁锂", "三元", "隔膜", "电解液", "化工原料")):
+        segment_key = "midstream_materials"
+        reason = "inferred from lithium-battery material keywords"
+    elif any(token in haystack for token in ("电池", "储能", "电芯", "电气设备")):
+        segment_key = "downstream_cells"
+        reason = "inferred from battery / cell / storage keywords"
+    if not segment_key:
+        return None
+    segment = next((item for item in chain.segments if item.key == segment_key), None)
+    if segment is None:
+        return None
+    return chain, segment, reason
 
 
 def _chain_universe(chain: SupplyChainMap) -> pd.DataFrame:
@@ -186,12 +229,17 @@ def get_supply_chain_comparison(ticker: str, curr_date: str) -> str:
         )
 
     chain = _find_supply_chain(symbol)
+    inferred_segment: SupplyChainSegment | None = None
+    inferred_reason = ""
     if chain is None:
-        return (
-            f"# Supply-chain position comparison for {symbol} as of {curr_date}\n\n"
-            "- No curated supply-chain map is available for this ticker yet.\n"
-            "- Do not invent a cross-position verdict when the value chain has not been explicitly mapped."
-        )
+        inferred = _infer_lithium_chain_segment(symbol, curr_date)
+        if inferred is None:
+            return (
+                f"# Supply-chain position comparison for {symbol} as of {curr_date}\n\n"
+                "- No curated or inferred supply-chain map is available for this ticker yet.\n"
+                "- Do not invent a cross-position verdict when the value chain has not been explicitly mapped."
+            )
+        chain, inferred_segment, inferred_reason = inferred
 
     latest = _fetch_daily_basic_latest(symbol, curr_date)
     if latest is None:
@@ -201,6 +249,26 @@ def get_supply_chain_comparison(ticker: str, curr_date: str) -> str:
     universe = _chain_universe(chain)
     if universe.empty:
         return f"No curated supply-chain universe found for {symbol}."
+    if symbol not in set(universe["ts_code"].astype(str)) and inferred_segment is not None:
+        basic = _fetch_stock_basic(symbol)
+        universe = pd.concat(
+            [
+                universe,
+                pd.DataFrame(
+                    [
+                        {
+                            "ts_code": symbol,
+                            "segment_key": inferred_segment.key,
+                            "segment": inferred_segment.name,
+                            "segment_role": inferred_segment.role,
+                            "name": None if basic is None else basic.get("name"),
+                            "industry": None if basic is None else basic.get("industry"),
+                        }
+                    ]
+                ),
+            ],
+            ignore_index=True,
+        )
 
     market_daily = _latest_daily_basic_market(trade_date)
     merged = universe.merge(market_daily, on="ts_code", how="left")
@@ -234,6 +302,7 @@ def get_supply_chain_comparison(ticker: str, curr_date: str) -> str:
         "",
         f"- Chain: {chain.name}",
         f"- Target segment: {target_segment_name}",
+        f"- Mapping basis: {'curated ticker map' if inferred_segment is None else inferred_reason}",
         f"- Valuation trade date: {_format_yyyymmdd(trade_date)}",
         "- Method: curated chain universe, then cross-position comparison using valuation / quality / growth / leverage metrics.",
         "",
@@ -274,4 +343,3 @@ def get_supply_chain_comparison(ticker: str, curr_date: str) -> str:
         ]
     )
     return "\n".join(lines)
-

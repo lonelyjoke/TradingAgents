@@ -102,6 +102,54 @@ def test_audit_decision_depth_accepts_medical_device_gate_depth():
     assert audit_decision_depth(text) == []
 
 
+def test_audit_decision_depth_flags_shallow_battery_material_gate():
+    issues = audit_decision_depth(
+        "**Investment Thesis**: Business Segment Breakdown: 磷酸铁锂正极材料 公司毛利改善。"
+        "Peer Comparison Summary: peer rank, comparable valuation, ROE, margin, growth, leverage.\n\n"
+        "**Verification & Falsification**: confirm orders and margin; weaken if cash flow falls; "
+        "downgrade if revenue growth and margin deteriorate.\n\n"
+        "**Verification Calendar**: next disclosure: add on margin confirmation, hold if stable, "
+        "trim on weak cash flow, downgrade and exit on failed evidence."
+    )
+    sections = {issue.section for issue in issues}
+
+    assert "battery_material_evidence_gate" in sections
+    assert "battery_material_driver_bridge" in sections
+
+
+def test_audit_decision_depth_accepts_battery_material_gate_depth():
+    text = (
+        "**Investment Thesis**: Business Segment Breakdown: 磷酸铁锂正极材料 revenue, "
+        "growth, gross margin, net margin, profit, cash conversion, valuation, and "
+        "not disclosed second-curve economics are discussed. Peer Comparison Summary: "
+        "peer rank, comparable universe, valuation, ROE, margin, growth, leverage, "
+        "and allocation impact are discussed. Battery-material evidence gate: ASP, "
+        "lithium carbonate, processing fee, spread, pass-through, capacity utilization, "
+        "shipment, customer mix, CATL, BYD, contract liabilities, receivables, "
+        "inventory, OCF, credit impairment, and capex are tested. KPI evidence gate "
+        "feeds the forecast driver bridge and verification calendar; unresolved "
+        "research gap items cap conviction and sizing. Market-implied expectation: "
+        "current PE multiple implied EPS and ROE recovery, but cash flow must confirm. "
+        "Key data check: reconcile revenue, net profit, EPS, market cap, PE, PB, "
+        "operating cash flow, capex, and contract liabilities. Expectation-gap evidence: "
+        "valuation percentile, price-EPS decomposition, consensus, holder behavior, "
+        "technical action, and investor interaction. Filing internal quality review: "
+        "accounting reconciliation, segment economics, footnote radar, cash-flow quality, "
+        "capex CIP return bridge, MD&A text change, non-recurring profit, balance-sheet "
+        "forward signals, shareholder-return authenticity, and disclosure quality are "
+        "integrated. Unit-economics bridge: volume x ASP less lithium carbonate cost "
+        "and processing fee; breakeven not disclosed. Project ramp capacity bridge: "
+        "occupancy and utilization drive capex ROIC. Financing / listing scenario: use "
+        "of proceeds and dilution are tested.\n\n"
+        "**Verification & Falsification**: confirm orders and margin; weaken if cash "
+        "flow falls; downgrade if revenue growth and margin deteriorate.\n\n"
+        "**Verification Calendar**: next disclosure: add on margin confirmation, "
+        "hold if stable, trim on weak cash flow, downgrade and exit on failed evidence."
+    )
+
+    assert audit_decision_depth(text) == []
+
+
 def test_normalize_rating_handles_empty_label_value():
     assert _normalize_rating("") == "Unknown"
 

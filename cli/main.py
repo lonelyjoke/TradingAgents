@@ -909,6 +909,21 @@ def save_report_to_disk(final_state, ticker: str, save_path: Path):
             final_state["metals_mining_context"],
             encoding="utf-8",
         )
+    derived_context_files = {
+        "industry_cycle_context": "industry_cycle.md",
+        "company_business_model_context": "company_business_model.md",
+        "industry_kpi_context": "industry_kpi.md",
+        "forecast_model_context": "forecast_model.md",
+        "quality_audit_context": "quality_audit.md",
+    }
+    for state_key, file_name in derived_context_files.items():
+        if final_state.get(state_key):
+            context_dir = save_path / "0_context"
+            context_dir.mkdir(exist_ok=True)
+            (context_dir / file_name).write_text(
+                final_state[state_key],
+                encoding="utf-8",
+            )
 
     # 1. Analysts
     analysts_dir = save_path / "1_analysts"

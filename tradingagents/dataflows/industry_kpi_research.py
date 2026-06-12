@@ -33,6 +33,21 @@ def _matching_lines(text: str, patterns: tuple[str, ...], *, limit: int = 6) -> 
 
 def _detect_playbook(symbol: str, combined_text: str) -> tuple[str, list[tuple[str, str, str]]]:
     lower = f"{symbol}\n{combined_text}".lower()
+    if any(
+        token in combined_text
+        for token in ("正极材料", "磷酸铁锂", "三元材料", "前驱体", "锂电材料", "电池材料")
+    ) or any(token in lower for token in ("cathode", "precursor", "lfp")):
+        return (
+            "lithium battery materials / cathode chain",
+            [
+                ("Demand", "LFP / ternary cathode output, downstream battery installation, ESS demand, customer order cadence", "shipment volume"),
+                ("Price", "cathode ASP, lithium carbonate pass-through, processing fee / spread, contract pricing clauses", "revenue and gross margin"),
+                ("Cost", "lithium carbonate, iron phosphate / precursor, energy, depreciation, inventory-cost lag", "unit margin"),
+                ("Capacity", "effective capacity, utilization, new-line ramp, maintenance shutdowns", "operating leverage"),
+                ("Customers", "CATL/BYD/major customer mix, concentration, credit terms, contract liabilities", "visibility and bargaining power"),
+                ("Cash", "receivables, notes, inventory, OCF/NI, credit impairment", "earnings quality"),
+            ],
+        )
     if (
         "300750" in lower
         or "动力电池" in combined_text

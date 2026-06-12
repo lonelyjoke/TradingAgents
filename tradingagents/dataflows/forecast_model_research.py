@@ -33,6 +33,14 @@ def _is_battery_context(symbol: str, text: str) -> bool:
     )
 
 
+def _is_battery_material_context(symbol: str, text: str) -> bool:
+    lower = f"{symbol}\n{text}".lower()
+    return any(
+        token in text
+        for token in ("正极材料", "磷酸铁锂", "三元材料", "前驱体", "锂电材料", "电池材料")
+    ) or any(token in lower for token in ("cathode", "precursor", "lfp"))
+
+
 def build_forecast_model_context(
     symbol: str,
     curr_date: str,
@@ -61,7 +69,15 @@ def build_forecast_model_context(
         ),
         limit=10,
     )
-    if _is_battery_context(symbol, combined):
+    if _is_battery_material_context(symbol, combined):
+        drivers = [
+            ("Cathode / material revenue", "shipment volume x cathode ASP", "LFP/ternary demand, customer order cadence, pass-through clauses"),
+            ("Manufacturing spread", "cathode ASP - lithium carbonate / precursor / energy / processing cost", "raw-material price, inventory-cost lag, processing fee"),
+            ("Gross profit", "shipment volume x unit spread", "capacity utilization, yield, depreciation, product mix"),
+            ("Operating profit", "gross profit - R&D - SG&A - credit impairment", "customer concentration, receivables, scale leverage"),
+            ("net profit/EPS / FCF", "operating profit - tax/minority + working-capital/capex bridge", "OCF/NI, inventory, capex, expansion cycle"),
+        ]
+    elif _is_battery_context(symbol, combined):
         drivers = [
             ("Power battery revenue", "GWh shipments x ASP", "installation demand, share, customer mix, price clauses"),
             ("Energy-storage revenue", "GWh shipments x ASP", "storage tenders, overseas demand, project delivery"),

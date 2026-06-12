@@ -335,6 +335,72 @@ _MEDICAL_DEVICE_QUESTION_TERMS = (
     "仓位",
 )
 
+_BATTERY_MATERIAL_TRIGGER_TERMS = (
+    "cathode",
+    "precursor",
+    "LFP",
+    "lithium battery materials",
+    "正极材料",
+    "磷酸铁锂",
+    "三元材料",
+    "前驱体",
+    "锂电材料",
+    "电池材料",
+)
+
+_BATTERY_MATERIAL_DEPTH_TERMS = (
+    "ASP",
+    "lithium carbonate",
+    "processing fee",
+    "spread",
+    "pass-through",
+    "capacity utilization",
+    "shipment",
+    "customer mix",
+    "CATL",
+    "BYD",
+    "contract liabilities",
+    "receivables",
+    "inventory",
+    "OCF",
+    "credit impairment",
+    "capex",
+    "碳酸锂",
+    "售价",
+    "价差",
+    "加工费",
+    "价格传导",
+    "产能利用率",
+    "出货",
+    "销量",
+    "客户结构",
+    "宁德时代",
+    "比亚迪",
+    "合同负债",
+    "应收",
+    "票据",
+    "存货",
+    "经营现金流",
+    "信用减值",
+    "资本开支",
+)
+
+_BATTERY_MATERIAL_GATE_TERMS = (
+    "KPI",
+    "evidence gate",
+    "driver bridge",
+    "forecast",
+    "verification calendar",
+    "research gap",
+    "证据门禁",
+    "驱动桥",
+    "预测",
+    "验证日历",
+    "研究缺口",
+    "确信度",
+    "仓位",
+)
+
 
 def _section_text(text: str, label: str) -> str:
     pattern = rf"\*\*{re.escape(label)}\*\*:\s*(.*?)(?:\n\n\*\*[^*\n]+\*\*:|\Z)"
@@ -478,6 +544,24 @@ def audit_decision_depth(decision_text: str) -> list[DecisionDepthIssue]:
                     "medical_device_follow_up_questions",
                     "warning",
                     "medical-device report does not carry unanswered company-specific questions into gaps, conviction, sizing, or verification calendar",
+                )
+            )
+
+    if _term_hits(decision_text, _BATTERY_MATERIAL_TRIGGER_TERMS) >= 1:
+        if _term_hits(decision_text, _BATTERY_MATERIAL_DEPTH_TERMS) < 9:
+            issues.append(
+                DecisionDepthIssue(
+                    "battery_material_evidence_gate",
+                    "warning",
+                    "battery-material report lacks ASP/lithium-cost/spread/utilization/customer/cash-conversion evidence-gate depth",
+                )
+            )
+        if _term_hits(decision_text, _BATTERY_MATERIAL_GATE_TERMS) < 3:
+            issues.append(
+                DecisionDepthIssue(
+                    "battery_material_driver_bridge",
+                    "warning",
+                    "battery-material report does not turn industry KPIs into forecast drivers, conviction caps, sizing, and verification calendar",
                 )
             )
 
