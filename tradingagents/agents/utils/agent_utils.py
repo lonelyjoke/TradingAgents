@@ -411,9 +411,12 @@ def get_medical_device_instruction() -> str:
         "local equivalents, distributor quality, localization, channel inventory, "
         "service network, FX, and tariff exposure. Do not value a device company "
         "like an innovative-drug pipeline unless it owns drug-like clinical asset "
-        "economics. Missing installed-base, tender, VBP, registration, overseas "
-        "channel, receivable, cash-flow, or reagent pull-through evidence is a "
-        "critical research gap and should cap conviction."
+        "economics. If the context includes a Medical-Device Evidence Gate Matrix "
+        "or Company-Specific Follow-Up Questions, the final PM memo must explicitly "
+        "answer each thesis-critical gate or carry it into Evidence Gaps, sizing, "
+        "and the dated verification calendar. Missing installed-base, tender, VBP, "
+        "registration, overseas channel, receivable, cash-flow, or reagent "
+        "pull-through evidence is a critical research gap and should cap conviction."
     )
 
 

@@ -68,10 +68,56 @@ def test_medical_device_context_triggers_for_curated_mindray(monkeypatch):
     assert "- Status: triggered" in rendered
     assert "Medical-Device KPI Screen" in rendered
     assert "Business Model / Evidence Gate" in rendered
+    assert "Medical-Device Evidence Gate Matrix" in rendered
+    assert "Company-Specific Follow-Up Questions" in rendered
+    assert "Depth Gate Verdict" in rendered
     assert "Required Medical-Device Valuation Bridge" in rendered
     assert "installed base" in rendered
     assert "IVD" in rendered
     assert "VBP" in rendered
+    assert "Europe / overseas growth" in rendered
+
+
+def test_medical_device_context_marks_thin_gates(monkeypatch):
+    monkeypatch.setattr(
+        medical_device_research,
+        "_fetch_stock_basic",
+        lambda symbol: pd.Series(
+            {
+                "ts_code": symbol,
+                "name": "\u8fc8\u745e\u533b\u7597",
+                "industry": "\u533b\u7597\u5668\u68b0",
+            }
+        ),
+    )
+    monkeypatch.setattr(
+        medical_device_research,
+        "_fetch_daily_basic_latest",
+        lambda symbol, curr_date: pd.Series({"pe_ttm": 25.0, "pb": 6.2, "dv_ttm": 2.1}),
+    )
+    monkeypatch.setattr(
+        medical_device_research,
+        "_fetch_fina_indicator",
+        lambda symbol, curr_date: pd.DataFrame(),
+    )
+    monkeypatch.setattr(
+        medical_device_research,
+        "_load_financial_report_texts",
+        lambda symbol, curr_date, look_back_days: (
+            [],
+            [("\u5e74\u62a5", "\u516c\u53f8\u662f\u533b\u7597\u5668\u68b0\u5e73\u53f0\uff0c\u4f46\u672a\u62ab\u9732\u66f4\u591a\u7ec6\u8282\u3002")],
+        ),
+    )
+    monkeypatch.setattr(
+        medical_device_research,
+        "_fetch_stock_basic_universe",
+        lambda: pd.DataFrame(),
+    )
+
+    rendered = get_medical_device_context("300760.SZ", "2026-06-04")
+
+    assert "Evidence-Limited" in rendered
+    assert "missing" in rendered
 
 
 def test_medical_device_context_not_applicable_for_non_device(monkeypatch):

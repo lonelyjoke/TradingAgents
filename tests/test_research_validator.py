@@ -26,6 +26,21 @@ def test_audit_decision_depth_flags_missing_buy_side_sections():
     assert "verification_calendar" in sections
 
 
+def test_audit_decision_depth_flags_shallow_medical_device_gate():
+    issues = audit_decision_depth(
+        "**Investment Thesis**: Business Segment Breakdown: 医疗器械 IVD 平台收入增长很好，"
+        "Peer Comparison Summary: peer rank, comparable valuation, ROE, margin, growth, leverage.\n\n"
+        "**Verification & Falsification**: confirm orders and margin; weaken if cash flow falls; "
+        "downgrade if revenue growth and margin deteriorate.\n\n"
+        "**Verification Calendar**: next disclosure: add on margin confirmation, hold if stable, "
+        "trim on weak cash flow, downgrade and exit on failed evidence."
+    )
+    sections = {issue.section for issue in issues}
+
+    assert "medical_device_evidence_gate" in sections
+    assert "medical_device_follow_up_questions" in sections
+
+
 def test_audit_decision_depth_accepts_rich_buy_side_sections():
     text = (
         "**Investment Thesis**: Business Segment Breakdown: core business revenue, "
@@ -45,6 +60,39 @@ def test_audit_decision_depth_accepts_rich_buy_side_sections():
         "Unit-economics bridge: platform GMV x take rate x margin; breakeven not disclosed. "
         "Project ramp capacity bridge: occupancy and utilization drive capex ROIC. "
         "Financing / listing scenario: use of proceeds and dilution are tested.\n\n"
+        "**Verification & Falsification**: confirm orders and margin; weaken if cash "
+        "flow falls; downgrade if revenue growth and margin deteriorate.\n\n"
+        "**Verification Calendar**: next disclosure: add on margin confirmation, "
+        "hold if stable, trim on weak cash flow, downgrade and exit on failed evidence."
+    )
+
+    assert audit_decision_depth(text) == []
+
+
+def test_audit_decision_depth_accepts_medical_device_gate_depth():
+    text = (
+        "**Investment Thesis**: Business Segment Breakdown: medical device IVD reagent "
+        "platform revenue, growth, gross margin, net margin, profit, cash conversion, "
+        "valuation, and not disclosed second-curve economics are discussed. "
+        "Peer Comparison Summary: peer rank, comparable universe, valuation, ROE, "
+        "margin, growth, leverage, and allocation impact are discussed. "
+        "Medical-device evidence gate: installed base, replacement cycle, tender, "
+        "procurement, VBP, registration, FDA, CE, NMPA, channel inventory, "
+        "distributor, reagent pull-through, service attach, segment gross margin, "
+        "receivables, inventory, contract liabilities, cash conversion, and SOTP are "
+        "answered. Company-specific follow-up questions are carried into research gaps, "
+        "conviction cap, sizing, and verification calendar. Market-implied expectation: "
+        "current PE multiple implied EPS and ROE recovery, but cash flow must confirm. "
+        "Key data check: reconcile revenue, net profit, EPS, market cap, PE, PB, "
+        "operating cash flow, capex, and contract liabilities. Expectation-gap evidence: "
+        "valuation percentile, price-EPS decomposition, consensus, holder behavior, "
+        "technical action, and investor interaction. Filing internal quality review: "
+        "accounting reconciliation, segment economics, footnote radar, cash-flow quality, "
+        "capex CIP return bridge, MD&A text change, non-recurring profit, balance-sheet "
+        "forward signals, shareholder-return authenticity, and disclosure quality are "
+        "integrated. Unit-economics bridge: platform GMV x take rate x margin; breakeven "
+        "not disclosed. Project ramp capacity bridge: occupancy and utilization drive "
+        "capex ROIC. Financing / listing scenario: use of proceeds and dilution are tested.\n\n"
         "**Verification & Falsification**: confirm orders and margin; weaken if cash "
         "flow falls; downgrade if revenue growth and margin deteriorate.\n\n"
         "**Verification Calendar**: next disclosure: add on margin confirmation, "

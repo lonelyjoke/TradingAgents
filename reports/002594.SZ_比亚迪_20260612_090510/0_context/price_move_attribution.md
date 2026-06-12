@@ -1,0 +1,84 @@
+# Price-move attribution context for 002594.SZ as of 2026-06-12
+
+- Status: ready
+- Company: 比亚迪
+- Basket: 汽车整车
+- Attribution label: weak_trend_continuation
+- Attribution reason: The stock was already in a weak 20-day trend; the drop looks like failed rebound / trend continuation, not a fresh commodity shock alone.
+
+## Target Move Snapshot
+| symbol | name | basket | close | one_day_pct | ret_20d_pct | ret_window_pct | drawdown_from_window_high_pct | pre_today_rebound_from_30d_low_pct | realized_vol_20d_daily_pct | volume_ratio | pe_ttm | pb |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 002594.SZ | 比亚迪 | 汽车整车 | 89.8 | -0.5647 | -9.0449 | -15.7914 | -15.7914 | 0 | 1.7144 | 1.05 | 29.7193 | 3.5303 |
+
+## Attribution Residual Table
+| bucket | proxy | one_day_pct | target_minus_proxy |
+| --- | --- | --- | --- |
+| market | SSE/CSI median | -0.3483 | -0.2164 |
+| same_metal_equities | 汽车整车 | N/A | N/A |
+| cross_metal_equities | all configured metal equity baskets | 1.3333 | -1.898 |
+| mapped_commodity | mapped futures products | N/A | N/A |
+
+## Market Index Reference
+| index | trade_date | close | one_day_pct | ret_20d_pct | ret_window_pct |
+| --- | --- | --- | --- | --- | --- |
+| SSE Composite | 20260611 | 3987.015 | -0.1555 | -4.5693 | 2.7242 |
+| CSI 300 | 20260611 | 4722.412 | -0.5513 | -3.9105 | 5.5353 |
+| CSI 500 | 20260611 | 8035.779 | -0.3483 | -7.3168 | 5.7705 |
+
+## Mapped Commodity Reference
+| product | role | exchange_proxy | latest_price | latest_date | window_change | status | one_day_pct | ret_20d_pct | realized_vol_20d_daily_pct |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| N/A | N/A | No mapped futures product | N/A | N/A | N/A | No commodity mapping; do not attribute the move to commodity prices without evidence. | N/A | N/A | N/A |
+
+## Cross-Metal Equity Reference
+| symbol | name | basket | close | one_day_pct | ret_20d_pct | ret_window_pct | drawdown_from_window_high_pct | pre_today_rebound_from_30d_low_pct | realized_vol_20d_daily_pct | volume_ratio | pe_ttm | pb |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 601899.SH | 紫金矿业 | copper | 27.33 | -1.3357 | -18.4666 | -15.1242 | -23.3595 | 0 | 2.8522 | 1.15 | 11.7803 | 3.6838 |
+| 600362.SH | 江西铜业 | copper | 40.14 | -0.8644 | -17.0661 | -8.2095 | -19.8162 | 0 | 3.8968 | 0.74 | 17.3844 | 1.6525 |
+| 002594.SZ | 比亚迪 | 汽车整车 | 89.8 | -0.5647 | -9.0449 | -15.7914 | -15.7914 | 0 | 1.7144 | 1.05 | 29.7193 | 3.5303 |
+| 600595.SH | 中孚实业 | aluminum | 6.6 | -0.3021 | -14.1743 | -6.9111 | -25.4237 | 2.4768 | 3.6455 | 0.57 | 11.9781 | 1.5349 |
+| 002532.SZ | 天山铝业 | aluminum | 13.41 | 0.1494 | -19.2655 | -13.428 | -31.8944 | 1.7477 | 3.8689 | 0.82 | 10.3824 | 2.0571 |
+| 000612.SZ | 焦作万方 | aluminum | 10.58 | 0.2844 | -16.4297 | -6.2057 | -23.3333 | 1.1505 | 3.1892 | 0.68 | 8.8798 | 1.7235 |
+| 600988.SH | 赤峰黄金 | precious_metals | 28.26 | 0.3195 | -28.7802 | -21.7608 | -40.3294 | 0 | 3.2498 | 0.86 | 14.9715 | 3.9256 |
+| 600219.SH | 南山铝业 | aluminum | 4.58 | 0.4386 | -16.1172 | -22.1088 | -29.4299 | 0 | 3.5445 | 0.64 | 12.7268 | 1.0649 |
+| 002237.SZ | 恒邦股份 | precious_metals | 12.29 | 0.6552 | -23.7593 | -14.116 | -33.4957 | 0 | 2.4092 | 0.85 | 26.4788 | 1.3231 |
+| 000878.SZ | 云南铜业 | copper | 16.08 | 0.7519 | -18.541 | -12.5136 | -22.2437 | 0 | 3.4615 | 0.78 | 27.5168 | 2.1822 |
+| 600489.SH | 中金黄金 | precious_metals | 20.64 | 0.7813 | -20.6764 | -16.1998 | -27.3239 | 0 | 2.9481 | 1.07 | 15.9424 | 3.0505 |
+| 603799.SH | 华友钴业 | nickel_cobalt | 47.53 | 0.8059 | -21.1905 | -15.6372 | -30.3079 | 0.9204 | 2.4575 | 1.09 | 12.2563 | 1.819 |
+| 300618.SZ | 寒锐钴业 | nickel_cobalt | 34.9 | 0.8962 | -18.1712 | -14.4817 | -29.1658 | 1.1404 | 2.2501 | 1.08 | 39.1032 | 1.9667 |
+| 600547.SH | 山东黄金 | precious_metals | 26.95 | 1.2777 | -19.7678 | -30.3077 | -36.5733 | 0.5669 | 2.7859 | 1.11 | 24.0825 | 3.8818 |
+| 000975.SZ | 山金国际 | precious_metals | 20.52 | 1.3333 | -24 | -22.8861 | -35.6336 | 0 | 3.1524 | 0.93 | 15.495 | 3.8426 |
+| 000751.SZ | 锌业股份 | zinc_lead_tin | 4.63 | 1.5351 | -24.7154 | -12.1442 | -31.3056 | 0 | 3.708 | 0.77 | 65.9752 | 2.0333 |
+| 002340.SZ | 格林美 | nickel_cobalt | 7.13 | 1.567 | -17.3812 | -8.5897 | -26.0373 | 2.4818 | 2.1076 | 0.96 | 22.8589 | 1.6675 |
+| 000630.SZ | 铜陵有色 | copper | 6.45 | 1.5748 | -3.5874 | 11.0155 | -8.8983 | 9.8616 | 4.6937 | 0.94 | 32.954 | 2.3494 |
+| 000933.SZ | 神火股份 | aluminum | 26.77 | 1.981 | -16.3438 | -8.2591 | -24.3999 | 0 | 3.3932 | 0.6 | 10.7765 | 2.3979 |
+| 000807.SZ | 云铝股份 | aluminum | 27.23 | 2.1764 | -13.7745 | -2.0856 | -25.7431 | 0 | 3.7166 | 0.76 | 10.8791 | 2.7501 |
+| 601600.SH | 中国铝业 | aluminum | 10.33 | 2.2772 | -11.025 | -8.5841 | -19.2969 | 0.7984 | 4.3115 | 0.7 | 12.0852 | 2.1974 |
+| 002466.SZ | 天齐锂业 | lithium | 61 | 2.5555 | -13.7077 | 18.1484 | -25.3457 | 5.8363 | 2.6327 | 1.53 | 46.772 | 2.2546 |
+| 000960.SZ | 锡业股份 | zinc_lead_tin | 34.86 | 2.62 | -10.4317 | 11.3382 | -20.32 | 0 | 5.1108 | 0.8 | 24.5723 | 2.8245 |
+| 600497.SH | 驰宏锌锗 | zinc_lead_tin | 8.44 | 2.8015 | -22.4265 | 8.4833 | -22.4265 | 0 | 4.7371 | 0.74 | 35.3682 | 2.5265 |
+
+## Recent Company Event Check
+No recent announcement rows found in the short event window.
+
+## News & Rumor Probe
+| grade | topic | source_type | source | published | title | rationale | link |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| weak_rumor | unclassified | web_search | Bing News | 周四, 11 6月 | 比亚迪 (BYD)集团 | Web/search corroboration only; not filing or announcement grade. | https://www.bydglobal.com/cn/index.html |
+| weak_rumor | unclassified | web_search | Bing News | 周四, 11 6月 | 比亚迪汽车官方网站-海洋首页 | Web/search corroboration only; not filing or announcement grade. | https://www.byd.com/cn/ocean-home |
+| weak_rumor | unclassified | web_search | Bing News | 周三, 10 6月 | 易车-价格全知道,买车不吃亏,中国领先的汽车网 | Web/search corroboration only; not filing or announcement grade. | https://www.yiche.com/ |
+
+## News Probe Notes
+- tushare_major_news: no matching rows or unavailable (major_news unavailable: major_news unavailable: configured_http_url: 请联系管理员添加此权限).
+- tushare_news_feed: no matching rows or unavailable (news unavailable: news unavailable: configured_http_url: 请联系管理员添加此权限; news unavailable: news unavailable: configured_http_url: 请联系管理员添加此权限; news unavailable: news unavailable: configured_http_url: 请联系管理员添加此权限; news unavailable: news unavailable: configured_http_url: 请联系管理员添加此权限; news unavailable: news unavailable: configured_http_url: 请联系管理员添加此权限).
+- web_search 比亚迪 大跌 原因: skipped low-signal result 比亚迪（涵盖电池、电机、电控等新能源汽车全产业链核心 ....
+- web_search 比亚迪 下跌 传闻: skipped low-signal result 比亚迪（涵盖电池、电机、电控等新能源汽车全产业链核心 ....
+- web_search 汽车整车 板块 大跌 原因: skipped low-signal result 汽车之家_看车买车用车换车,省时省心省钱.
+- web_search 汽车整车 板块 大跌 原因: skipped low-signal result 懂车帝.
+
+## Mispricing Decision Gate
+- Do not call a sharp drop `emotionally undervalued` just because commodity futures did not fall.
+- A higher-confidence emotion-kill setup needs: weak commodity explanation, no material company event, target residual worse than peers, valuation/NAV/PB support, and stabilization after the forced selling day.
+- If PB/NAV or asset-value evidence is still high, classify the move as equity risk-premium reset or failed rebound until valuation support improves.
+- If copper/silver/small-metal equities did not sell off as much, highlight cross-metal underperformance as a separate residual instead of hiding it inside generic sector weakness.

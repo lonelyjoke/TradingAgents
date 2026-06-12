@@ -261,6 +261,80 @@ _VERIFICATION_CALENDAR_TERMS = (
     "验证日历",
 )
 
+_MEDICAL_DEVICE_TRIGGER_TERMS = (
+    "medical device",
+    "IVD",
+    "in vitro diagnostic",
+    "reagent",
+    "analyzer",
+    "医疗器械",
+    "医疗设备",
+    "体外诊断",
+    "试剂",
+    "耗材",
+    "装机",
+    "监护仪",
+    "麻醉机",
+    "超声",
+    "医学影像",
+)
+
+_MEDICAL_DEVICE_DEPTH_TERMS = (
+    "installed base",
+    "replacement cycle",
+    "tender",
+    "procurement",
+    "VBP",
+    "registration",
+    "FDA",
+    "CE",
+    "NMPA",
+    "channel inventory",
+    "distributor",
+    "reagent pull-through",
+    "service attach",
+    "segment gross margin",
+    "cash conversion",
+    "receivables",
+    "inventory",
+    "contract liabilities",
+    "SOTP",
+    "装机",
+    "替换周期",
+    "招标",
+    "中标",
+    "采购",
+    "集采",
+    "带量采购",
+    "注册证",
+    "海外渠道",
+    "渠道库存",
+    "经销商",
+    "试剂拉动",
+    "试剂耗材",
+    "服务收入",
+    "分部毛利",
+    "应收",
+    "存货",
+    "合同负债",
+    "现金转化",
+    "分部估值",
+)
+
+_MEDICAL_DEVICE_QUESTION_TERMS = (
+    "evidence gate",
+    "company-specific follow-up",
+    "research gaps",
+    "verification calendar",
+    "conviction cap",
+    "证据门禁",
+    "公司专属",
+    "研究缺口",
+    "验证日历",
+    "确信度",
+    "仓位",
+)
+
 
 def _section_text(text: str, label: str) -> str:
     pattern = rf"\*\*{re.escape(label)}\*\*:\s*(.*?)(?:\n\n\*\*[^*\n]+\*\*:|\Z)"
@@ -388,6 +462,24 @@ def audit_decision_depth(decision_text: str) -> list[DecisionDepthIssue]:
                 "missing action-linked verification calendar for add/hold/trim/downgrade decisions",
             )
         )
+
+    if _term_hits(decision_text, _MEDICAL_DEVICE_TRIGGER_TERMS) >= 2:
+        if _term_hits(decision_text, _MEDICAL_DEVICE_DEPTH_TERMS) < 8:
+            issues.append(
+                DecisionDepthIssue(
+                    "medical_device_evidence_gate",
+                    "warning",
+                    "medical-device report lacks installed-base/reagent/VBP/registration/channel/cash-conversion evidence-gate depth",
+                )
+            )
+        if _term_hits(decision_text, _MEDICAL_DEVICE_QUESTION_TERMS) < 3:
+            issues.append(
+                DecisionDepthIssue(
+                    "medical_device_follow_up_questions",
+                    "warning",
+                    "medical-device report does not carry unanswered company-specific questions into gaps, conviction, sizing, or verification calendar",
+                )
+            )
 
     return issues
 

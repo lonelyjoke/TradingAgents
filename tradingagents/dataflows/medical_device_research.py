@@ -185,6 +185,140 @@ MISSING_MEDICAL_DEVICE_ITEMS = (
     "R&D pipeline, product approval calendar, and domestic-substitution proof",
 )
 
+MEDICAL_DEVICE_EVIDENCE_GATES = (
+    {
+        "gate": "capital_equipment_cycle",
+        "must_answer": "installed base, replacement cycle, tender cadence, delivery / acceptance, service attach rate",
+        "terms": (
+            "\u88c5\u673a",
+            "\u8bbe\u5907\u66f4\u65b0",
+            "\u66ff\u6362\u5468\u671f",
+            "\u62db\u6807",
+            "\u4e2d\u6807",
+            "\u9a8c\u6536",
+            "\u670d\u52a1\u6536\u5165",
+            "installed base",
+            "replacement",
+            "tender",
+            "acceptance",
+        ),
+        "rating_impact": "equipment-cycle upside stays scenario value until tender and acceptance evidence is visible",
+    },
+    {
+        "gate": "ivd_reagent_pull_through",
+        "must_answer": "analyzer installed base, test volume per machine, reagent menu, reagent gross margin, lab automation",
+        "terms": (
+            "IVD",
+            "\u4f53\u5916\u8bca\u65ad",
+            "\u8bd5\u5242",
+            "\u8017\u6750",
+            "\u68c0\u6d4b\u91cf",
+            "\u5355\u673a",
+            "\u6d41\u6c34\u7ebf",
+            "\u5b9e\u9a8c\u5ba4\u81ea\u52a8\u5316",
+            "reagent",
+            "analyzer",
+            "lab automation",
+        ),
+        "rating_impact": "do not award recurring-revenue multiple unless reagent pull-through is proven",
+    },
+    {
+        "gate": "vbp_procurement_price_reset",
+        "must_answer": "centralized procurement / VBP price reset, volume offset, hospital access, margin effect",
+        "terms": (
+            "\u96c6\u91c7",
+            "\u5e26\u91cf\u91c7\u8d2d",
+            "\u91c7\u8d2d",
+            "\u964d\u4ef7",
+            "\u4ee5\u91cf\u8865\u4ef7",
+            "\u533b\u9662\u51c6\u5165",
+            "VBP",
+            "procurement",
+            "price reset",
+        ),
+        "rating_impact": "policy tailwind/headwind must flow through price, volume, and gross margin before valuation",
+    },
+    {
+        "gate": "overseas_registration_channel",
+        "must_answer": "NMPA/FDA/CE or local registration, distributor quality, localization, inventory, service network, FX/tariff",
+        "terms": (
+            "NMPA",
+            "FDA",
+            "CE",
+            "\u6ce8\u518c\u8bc1",
+            "\u6d77\u5916",
+            "\u51fa\u6d77",
+            "\u7ecf\u9500",
+            "\u6e20\u9053",
+            "\u5e93\u5b58",
+            "\u672c\u5730\u5316",
+            "\u6c47\u7387",
+            "registration",
+            "distributor",
+            "channel inventory",
+        ),
+        "rating_impact": "overseas growth remains evidence-limited without sell-through and registration/channel proof",
+    },
+    {
+        "gate": "cash_conversion_working_capital",
+        "must_answer": "receivables, inventory, contract liabilities, operating cash flow, distributor credit, warranty/service obligations",
+        "terms": (
+            "\u5e94\u6536\u8d26\u6b3e",
+            "\u5b58\u8d27",
+            "\u5408\u540c\u8d1f\u503a",
+            "\u7ecf\u8425\u6027\u73b0\u91d1\u6d41",
+            "\u73b0\u91d1\u8f6c\u5316",
+            "\u4fe1\u7528\u653f\u7b56",
+            "\u8d28\u4fdd",
+            "receivable",
+            "inventory",
+            "contract liabilities",
+            "operating cash flow",
+            "cash conversion",
+        ),
+        "rating_impact": "profit growth deserves a haircut when receivables, inventory, or cash conversion diverge",
+    },
+    {
+        "gate": "segment_sotp_disclosure",
+        "must_answer": "segment revenue, gross margin, service/consumable mix, second-curve materiality, SOTP treatment",
+        "terms": (
+            "\u5206\u90e8",
+            "\u4ea7\u7ebf",
+            "\u751f\u547d\u4fe1\u606f",
+            "\u533b\u5b66\u5f71\u50cf",
+            "\u65b0\u5174\u4e1a\u52a1",
+            "\u6bdb\u5229\u7387",
+            "\u670d\u52a1",
+            "segment",
+            "SOTP",
+            "gross margin",
+            "second curve",
+        ),
+        "rating_impact": "use blended PE only as a cross-check when segment economics are not disclosed",
+    },
+)
+
+COMPANY_SPECIFIC_QUESTIONS = {
+    "300760.SZ": (
+        "Is Europe / overseas growth real sell-through or channel restocking, and does it convert into cash?",
+        "Can contract-liability growth convert into revenue without receivable or inventory pressure?",
+        "Which acquisition targets support the large goodwill balance, and are impairment assumptions transparent?",
+        "Does IVD revenue have reagent pull-through evidence rather than one-off analyzer shipment evidence?",
+        "Has domestic equipment-renewal tender cadence actually recovered after anti-corruption disruption?",
+        "Are controlling-shareholder pledges stable, falling, or rising at low prices?",
+    ),
+    "688271.SH": (
+        "Do CT/MRI/PET-CT installed-base and tender wins prove high-end substitution, or only shipment timing?",
+        "Is overseas certification translating into delivery, service coverage, and cash collection?",
+        "Does capex / R&D spend improve utilization and margin rather than absorbing capital?",
+    ),
+    "300832.SZ": (
+        "Are analyzer placements converting into reagent revenue per machine and menu expansion?",
+        "Is overseas distributor growth supported by registration, sell-through, and collection evidence?",
+        "Does high profitability survive reagent price pressure and lab automation competition?",
+    ),
+}
+
 
 @dataclass(frozen=True)
 class MedicalDeviceProfile:
@@ -372,6 +506,62 @@ def _report_snippets(profile: MedicalDeviceProfile) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
+def _evidence_gate_rows(profile: MedicalDeviceProfile) -> pd.DataFrame:
+    text = "\n".join(f"{title}\n{body[:50000]}" for title, body in profile.report_texts[:8])
+    rows: list[dict[str, str]] = []
+    for gate in MEDICAL_DEVICE_EVIDENCE_GATES:
+        terms = tuple(gate["terms"])
+        hits = [term for term in terms if _contains_terms((str(term),), text)]
+        if len(hits) >= 3:
+            status = "filing_evidence_present"
+        elif hits:
+            status = "thin_or_indirect"
+        else:
+            status = "missing"
+        rows.append(
+            {
+                "evidence_gate": str(gate["gate"]),
+                "status": status,
+                "hits": ", ".join(str(hit) for hit in hits[:5]) if hits else "none",
+                "must_answer": str(gate["must_answer"]),
+                "rating_impact": str(gate["rating_impact"]),
+            }
+        )
+    return pd.DataFrame(rows)
+
+
+def _company_question_rows(profile: MedicalDeviceProfile) -> pd.DataFrame:
+    questions = COMPANY_SPECIFIC_QUESTIONS.get(profile.symbol, ())
+    if not questions:
+        questions = (
+            "Which business bucket actually drives revenue, profit, cash conversion, and valuation?",
+            "Which medical-device evidence gate is missing and thesis-critical?",
+            "What next disclosure would upgrade or falsify the base case?",
+        )
+    return pd.DataFrame(
+        [
+            {
+                "question": question,
+                "required_treatment": "answer with filing / announcement / tender / registration / cash evidence, or carry as conviction cap",
+            }
+            for question in questions
+        ]
+    )
+
+
+def _depth_gate_verdict(evidence_gates: pd.DataFrame) -> str:
+    if evidence_gates.empty:
+        return "Evidence-Limited: no medical-device evidence gate matrix was produced."
+    weak = evidence_gates[evidence_gates["status"].isin(["missing", "thin_or_indirect"])]
+    if weak.empty:
+        return "Ready for high-conviction debate if valuation, peer, and cash-flow contexts also support the thesis."
+    weak_names = ", ".join(weak["evidence_gate"].astype(str).tolist())
+    return (
+        "Evidence-Limited: the following medical-device gates are missing or thin and must cap conviction "
+        f"unless the final report explicitly explains why they are not thesis-critical: {weak_names}."
+    )
+
+
 def _peer_screen(symbol: str, curr_date: str, limit: int = 8) -> pd.DataFrame:
     basic = _fetch_stock_basic(symbol)
     if basic is None:
@@ -431,6 +621,8 @@ def get_medical_device_context(
     watchlist = "\n".join(f"- {item}" for item in profile.watchlist)
     snapshot = _financial_snapshot(symbol, curr_date)
     snippets = _report_snippets(profile)
+    evidence_gates = _evidence_gate_rows(profile)
+    question_rows = _company_question_rows(profile)
     peer_screen = _peer_screen(symbol, curr_date, limit=peer_limit)
     snippet_block = (
         _markdown_table(snippets)
@@ -459,6 +651,15 @@ def get_medical_device_context(
         "## Business Model / Evidence Gate",
         _markdown_table(_business_model_gate(profile)),
         "",
+        "## Medical-Device Evidence Gate Matrix",
+        _markdown_table(evidence_gates),
+        "",
+        "## Company-Specific Follow-Up Questions",
+        _markdown_table(question_rows),
+        "",
+        "## Depth Gate Verdict",
+        f"- {_depth_gate_verdict(evidence_gates)}",
+        "",
         "## Filing Text Evidence Snippets",
         snippet_block,
         "",
@@ -479,5 +680,6 @@ def get_medical_device_context(
         "- Treat this as the specialist medical-device layer. It should override generic pharma, pure manufacturing, or software framing when the target is a device / IVD / consumables company.",
         "- Separate capital equipment, reagent / consumable recurrence, service revenue, overseas expansion, and policy-procurement impact before valuation.",
         "- Missing installed-base, tender, VBP, registration, overseas channel, receivable, or reagent pull-through evidence caps conviction and belongs in research gaps.",
+        "- The final PM memo must answer the company-specific follow-up questions or carry each unanswered item into Evidence Gaps, sizing, and the verification calendar.",
     ]
     return "\n".join(lines)
