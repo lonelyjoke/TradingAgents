@@ -3,6 +3,7 @@ import pandas as pd
 from tradingagents.dataflows.supply_chain_research import (
     _find_supply_chain,
     _infer_lithium_chain_segment,
+    _infer_wind_chain_segment,
     _summarize_segments,
 )
 
@@ -35,6 +36,30 @@ def test_supply_chain_can_infer_lithium_material_segment_from_filings(monkeypatc
     assert chain.key == "lithium_battery_chain"
     assert segment.key == "midstream_materials"
     assert "lithium-battery material" in reason
+
+
+def test_supply_chain_does_not_route_broad_electrical_wind_company_to_lithium(monkeypatch):
+    import tradingagents.dataflows.supply_chain_research as supply_chain_research
+
+    monkeypatch.setattr(
+        supply_chain_research,
+        "_fetch_stock_basic",
+        lambda symbol: pd.Series({"ts_code": symbol, "name": "测试风电", "industry": "电气设备"}),
+    )
+
+    def fake_load_reports(symbol, curr_date, look_back_days):
+        return [], [("年报", "公司主营海上风电装备、塔筒、管桩、导管架，订单来自海外海工项目。")]
+
+    monkeypatch.setattr("tradingagents.dataflows.filing_research._load_financial_report_texts", fake_load_reports)
+
+    assert _infer_lithium_chain_segment("301998.SZ", "2026-06-12") is None
+    inferred = _infer_wind_chain_segment("301998.SZ", "2026-06-12")
+
+    assert inferred is not None
+    chain, segment, reason = inferred
+    assert chain.key == "wind_power_chain"
+    assert segment.key == "components"
+    assert "wind-power equipment" in reason
 
 
 def test_segment_summary_ranks_stronger_profit_pool_first():

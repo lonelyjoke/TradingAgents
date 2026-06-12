@@ -41,6 +41,19 @@ def _is_battery_material_context(symbol: str, text: str) -> bool:
     ) or any(token in lower for token in ("cathode", "precursor", "lfp"))
 
 
+def _is_wind_power_context(symbol: str, text: str) -> bool:
+    lower = f"{symbol}\n{text}".lower()
+    wind_hits = sum(
+        token in text
+        for token in ("风电", "海上风电", "海风", "塔筒", "管桩", "导管架", "海工", "风电装备", "风机")
+    ) + sum(token in lower for token in ("wind power", "offshore wind", "monopile", "jacket foundation", "tower"))
+    battery_hits = sum(
+        token in text
+        for token in ("动力电池", "储能电池", "锂离子电池", "正极材料", "磷酸铁锂", "三元材料", "电芯")
+    ) + sum(token in lower for token in ("battery", "cathode", "precursor", "lfp"))
+    return wind_hits >= 2 and battery_hits == 0
+
+
 def build_forecast_model_context(
     symbol: str,
     curr_date: str,
@@ -69,7 +82,15 @@ def build_forecast_model_context(
         ),
         limit=10,
     )
-    if _is_battery_material_context(symbol, combined):
+    if _is_wind_power_context(symbol, combined):
+        drivers = [
+            ("Wind-equipment revenue", "opening backlog + new orders - delivered orders", "offshore wind tenders, overseas customer awards, delivery schedule"),
+            ("Project ASP / mix", "delivered tonnage or MW-equivalent x project ASP", "monopile/jacket/tower mix, export share, FX clauses"),
+            ("Gross profit", "project revenue x project gross margin", "steel plate cost, fabrication yield, port/logistics cost, utilization, FX"),
+            ("Operating profit", "gross profit - R&D - SG&A - finance cost - impairment", "scale leverage, capex depreciation, receivables, credit risk"),
+            ("net profit/EPS / FCF", "operating profit - tax/minority + working-capital/capex bridge", "contract liabilities, prepayments, inventory, OCF/NI, capex cycle"),
+        ]
+    elif _is_battery_material_context(symbol, combined):
         drivers = [
             ("Cathode / material revenue", "shipment volume x cathode ASP", "LFP/ternary demand, customer order cadence, pass-through clauses"),
             ("Manufacturing spread", "cathode ASP - lithium carbonate / precursor / energy / processing cost", "raw-material price, inventory-cost lag, processing fee"),

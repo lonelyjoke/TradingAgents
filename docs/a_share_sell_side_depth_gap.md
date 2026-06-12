@@ -99,6 +99,57 @@ The fix generalizes beyond one ticker:
   can be flagged when they discuss cathode/lithium materials without driver
   bridges.
 
+The Dajin Heavy Industry sample exposed a different systemic problem: a broad
+`电气设备` label can route an offshore wind-equipment company into the lithium
+battery chain. That creates wrong KPI maps, wrong supply-chain peers, wrong
+commodity proxies, and wrong forecast bridges even when the final PM memo partly
+recovers.
+
+The fix generalizes beyond one ticker:
+
+- Industry KPI routing now gives wind/offshore equipment evidence priority over
+  broad electrical-equipment or generic new-energy terms.
+- Wind/offshore equipment now has a native KPI playbook covering offshore wind
+  tenders, order backlog, contract liabilities, project ASP/mix, steel cost,
+  port/logistics constraints, utilization, capex, FX, and cash conversion.
+- Forecast scaffolds now bind to the selected playbook, so wind-equipment
+  companies receive an order/backlog/project-margin bridge instead of a cathode
+  ASP / lithium-carbonate spread bridge.
+- Supply-chain inference no longer treats `电气设备` alone as a lithium-battery
+  signal; it first checks wind-equipment terms and can infer a wind-power chain
+  segment from filing text.
+- Commodity inference now treats wind/offshore equipment as a steel-cost proxy
+  problem and avoids incidental precious-metal/lithium matches.
+- Report validation now flags saved-context playbook mismatches, such as
+  wind/offshore equipment evidence mixed with lithium-battery KPI, supply-chain,
+  or forecast drivers.
+
+The same Dajin sample also exposed non-routing depth gaps in the final research
+note. Even when the final PM memo found the right broad thesis, it still lacked
+several sell-side-depth bridges:
+
+- Project/order bridge: order-driven companies need opening backlog + new
+  orders - delivered/revenue-recognized orders = ending backlog, reconciled
+  against contract liabilities, receivables, inventory/goods shipped, and cash
+  collection.
+- True peer alternatives: broad exchange-industry peers must be separated from
+  true operating peers and substitute expressions.
+- Forecast and valuation sensitivity: safety-price or target-price conclusions
+  need bull/base/bear assumptions, not a jump from one profit number to a price.
+- Filing-internal quality: project companies need deeper checks on receivables,
+  notes, inventory components, contract assets/liabilities, capex/CIP,
+  depreciation, FX, impairment, and disclosure quality.
+- Second-curve treatment: new businesses, ships, capacity, platforms, mines, or
+  investee holdings should stay in scenario/optionality value unless unit
+  economics, control rights, utilization, capex, customer evidence, and cash
+  conversion are disclosed.
+- Evidence grading: decisive claims must be marked as reported, calculated,
+  estimated, proxy, stale, missing, or unverified and then linked to the
+  verification calendar.
+
+The system now pushes those requirements into the sell-side quality-audit
+context, the PM generation prompt, and the post-run report-depth validator.
+
 ## Direction To Reach Stable Deep Sell-side Reports
 
 The next phase should focus on stability, not more isolated modules:
@@ -113,4 +164,3 @@ The next phase should focus on stability, not more isolated modules:
    reliability in `data_coverage`.
 6. Make the final PM report explicitly tie rating and position to forecast
    drivers, valuation assumptions, peer alternatives, and falsification signals.
-

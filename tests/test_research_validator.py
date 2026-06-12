@@ -1,10 +1,20 @@
 """Tests for saved-report parsing used by validation scripts."""
 
 from tradingagents.evaluation.research_validator import (
+    audit_context_alignment,
     audit_decision_depth,
     _extract_rating,
     _extract_section,
     _normalize_rating,
+)
+
+_DEEP_BRIDGE_PHRASE = (
+    "True operating peers are separated from broad industry screens; substitute "
+    "alternatives and relative allocation are compared. Evidence grades are "
+    "reported, calculated, estimated, proxy, missing, unverified, and source period. "
+    "Bull/base/bear 2026E 2027E 2028E sensitivity assumptions are shown. "
+    "Second curve treatment separates scenario value from core value with unit economics, "
+    "utilization, capex, cash conversion, control rights, and customer evidence. "
 )
 
 
@@ -24,6 +34,8 @@ def test_audit_decision_depth_flags_missing_buy_side_sections():
     assert "underwriting_modules" in sections
     assert "filing_internal_quality" in sections
     assert "verification_calendar" in sections
+    assert "true_peer_alternatives" in sections
+    assert "evidence_grade_table" in sections
 
 
 def test_audit_decision_depth_flags_shallow_medical_device_gate():
@@ -57,6 +69,7 @@ def test_audit_decision_depth_accepts_rich_buy_side_sections():
         "footnote radar, cash-flow quality, capex CIP return bridge, MD&A text change, "
         "non-recurring profit, balance-sheet forward signals, shareholder-return "
         "authenticity, and disclosure quality are integrated into risk and valuation. "
+        f"{_DEEP_BRIDGE_PHRASE}"
         "Unit-economics bridge: platform GMV x take rate x margin; breakeven not disclosed. "
         "Project ramp capacity bridge: occupancy and utilization drive capex ROIC. "
         "Financing / listing scenario: use of proceeds and dilution are tested.\n\n"
@@ -90,7 +103,7 @@ def test_audit_decision_depth_accepts_medical_device_gate_depth():
         "accounting reconciliation, segment economics, footnote radar, cash-flow quality, "
         "capex CIP return bridge, MD&A text change, non-recurring profit, balance-sheet "
         "forward signals, shareholder-return authenticity, and disclosure quality are "
-        "integrated. Unit-economics bridge: platform GMV x take rate x margin; breakeven "
+        f"integrated. {_DEEP_BRIDGE_PHRASE}Unit-economics bridge: platform GMV x take rate x margin; breakeven "
         "not disclosed. Project ramp capacity bridge: occupancy and utilization drive "
         "capex ROIC. Financing / listing scenario: use of proceeds and dilution are tested.\n\n"
         "**Verification & Falsification**: confirm orders and margin; weaken if cash "
@@ -137,7 +150,7 @@ def test_audit_decision_depth_accepts_battery_material_gate_depth():
         "accounting reconciliation, segment economics, footnote radar, cash-flow quality, "
         "capex CIP return bridge, MD&A text change, non-recurring profit, balance-sheet "
         "forward signals, shareholder-return authenticity, and disclosure quality are "
-        "integrated. Unit-economics bridge: volume x ASP less lithium carbonate cost "
+        f"integrated. {_DEEP_BRIDGE_PHRASE}Unit-economics bridge: volume x ASP less lithium carbonate cost "
         "and processing fee; breakeven not disclosed. Project ramp capacity bridge: "
         "occupancy and utilization drive capex ROIC. Financing / listing scenario: use "
         "of proceeds and dilution are tested.\n\n"
@@ -148,6 +161,74 @@ def test_audit_decision_depth_accepts_battery_material_gate_depth():
     )
 
     assert audit_decision_depth(text) == []
+
+
+def test_audit_decision_depth_flags_project_order_report_without_full_bridge():
+    issues = audit_decision_depth(
+        "**Investment Thesis**: Business Segment Breakdown: project revenue, growth, gross margin, "
+        "net margin, profit, cash conversion, valuation. Peer Comparison Summary: peer rank, comparable "
+        "valuation, ROE, margin, growth, leverage. The thesis depends on overseas orders, backlog, "
+        "contract liabilities and project delivery. Valuation uses PE and EPS but only one case.\n\n"
+        "**Verification & Falsification**: confirm orders and margin; weaken if cash flow falls; "
+        "downgrade if revenue growth and margin deteriorate.\n\n"
+        "**Verification Calendar**: next disclosure: add on margin confirmation, hold if stable, "
+        "trim on weak cash flow, downgrade and exit on failed evidence."
+    )
+    sections = {issue.section for issue in issues}
+
+    assert "order_backlog_bridge" in sections
+    assert "true_peer_alternatives" in sections
+    assert "scenario_sensitivity_bridge" in sections
+    assert "evidence_grade_table" in sections
+
+
+def test_audit_decision_depth_accepts_project_order_bridge_depth():
+    text = (
+        "**Investment Thesis**: Business Segment Breakdown: project revenue, growth, gross margin, "
+        "net margin, profit, cash conversion, valuation are discussed. Peer Comparison Summary: "
+        "peer rank, comparable universe, valuation, ROE, margin, growth, leverage, and allocation "
+        f"impact are discussed. {_DEEP_BRIDGE_PHRASE}Key data check: reconcile revenue, net profit, "
+        "EPS, market cap, PE, PB, operating cash flow, capex, and contract liabilities. "
+        "Order bridge: opening backlog + new orders - delivered orders = ending backlog; "
+        "receivables, inventory, goods shipped, and cash collection reconcile delivery quality. "
+        "Market-implied expectation: current PE multiple implied EPS and ROE recovery, but cash flow "
+        "must confirm. Expectation-gap evidence: valuation percentile, price-EPS decomposition, "
+        "consensus, holder behavior, technical action, and investor interaction. Filing internal "
+        "quality review: accounting reconciliation, segment economics, footnote radar, cash-flow "
+        "quality, capex CIP return bridge, MD&A text change, non-recurring profit, balance-sheet "
+        "forward signals, shareholder-return authenticity, and disclosure quality are integrated. "
+        "Unit-economics bridge: project ASP x delivered volume x margin. Project ramp capacity "
+        "bridge: utilization and capex ROIC are tested. Financing / listing scenario: use of "
+        "proceeds and dilution are tested.\n\n"
+        "**Verification & Falsification**: confirm orders and margin; weaken if cash flow falls; "
+        "downgrade if revenue growth and margin deteriorate.\n\n"
+        "**Verification Calendar**: next disclosure: add on margin confirmation, hold if stable, "
+        "trim on weak cash flow, downgrade and exit on failed evidence."
+    )
+
+    assert audit_decision_depth(text) == []
+
+
+def test_audit_context_alignment_flags_wind_lithium_playbook_mismatch(tmp_path):
+    context_dir = tmp_path / "0_context"
+    context_dir.mkdir()
+    (context_dir / "company_business_model.md").write_text(
+        "公司主营海上风电装备、塔筒、管桩、导管架和海外海工订单。",
+        encoding="utf-8",
+    )
+    (context_dir / "industry_kpi.md").write_text(
+        "Playbook: battery / energy-storage chain\nRequired KPI Map: lithium carbonate, power battery GWh.",
+        encoding="utf-8",
+    )
+    (context_dir / "forecast_model.md").write_text(
+        "Driver Bridge: Cathode / material revenue, lithium carbonate cost.",
+        encoding="utf-8",
+    )
+
+    issues = audit_context_alignment(tmp_path)
+
+    assert [issue.section for issue in issues] == ["industry_playbook_alignment"]
+    assert issues[0].severity == "error"
 
 
 def test_normalize_rating_handles_empty_label_value():

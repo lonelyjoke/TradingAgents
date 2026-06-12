@@ -96,13 +96,14 @@ _SUPPLY_CHAIN_MAPS: tuple[SupplyChainMap, ...] = (
             "601016.SH",
             "600905.SH",
             "600163.SH",
+            "002487.SZ",
         ),
         segments=(
             SupplyChainSegment(
                 key="components",
                 name="Components",
                 role="towers / forgings / blades / key parts",
-                tickers=("002531.SZ", "300129.SZ", "300443.SZ"),
+                tickers=("002531.SZ", "300129.SZ", "300443.SZ", "002487.SZ"),
             ),
             SupplyChainSegment(
                 key="turbine_oem",
@@ -152,16 +153,46 @@ def _infer_lithium_chain_segment(symbol: str, curr_date: str = "") -> tuple[Supp
         return None
     segment_key = ""
     reason = ""
+    if any(token in haystack for token in ("风电", "海上风电", "海风", "塔筒", "管桩", "导管架", "海工", "风电装备")):
+        return None
     if any(token in haystack for token in ("锂矿", "盐湖", "锂业", "小金属")):
         segment_key = "upstream_resources"
         reason = "inferred from lithium resource / mining name or industry keywords"
     elif any(token in haystack for token in ("正极", "负极", "材料", "磷酸铁锂", "三元", "隔膜", "电解液", "化工原料")):
         segment_key = "midstream_materials"
         reason = "inferred from lithium-battery material keywords"
-    elif any(token in haystack for token in ("电池", "储能", "电芯", "电气设备")):
+    elif any(token in haystack for token in ("动力电池", "储能电池", "锂离子电池", "电芯", "电池系统")):
         segment_key = "downstream_cells"
         reason = "inferred from battery / cell / storage keywords"
     if not segment_key:
+        return None
+    segment = next((item for item in chain.segments if item.key == segment_key), None)
+    if segment is None:
+        return None
+    return chain, segment, reason
+
+
+def _infer_wind_chain_segment(symbol: str, curr_date: str = "") -> tuple[SupplyChainMap, SupplyChainSegment, str] | None:
+    try:
+        basic = _fetch_stock_basic(symbol)
+    except Exception:
+        basic = None
+    if basic is None:
+        return None
+    haystack = f"{_format_value(basic.get('name'))} {_format_value(basic.get('industry'))} {_supply_chain_filing_probe(symbol, curr_date)}"
+    chain = next((item for item in _SUPPLY_CHAIN_MAPS if item.key == "wind_power_chain"), None)
+    if chain is None:
+        return None
+    if any(token in haystack for token in ("整机", "风机", "风力发电机组", "风电主机")):
+        segment_key = "turbine_oem"
+        reason = "inferred from wind turbine OEM keywords"
+    elif any(token in haystack for token in ("塔筒", "管桩", "导管架", "海工", "叶片", "铸件", "锻件", "风电装备", "海上风电")):
+        segment_key = "components"
+        reason = "inferred from wind-power equipment / offshore foundation keywords"
+    elif any(token in haystack for token in ("风电场", "新能源发电", "发电运营", "上网电量")):
+        segment_key = "operators"
+        reason = "inferred from wind-farm operator keywords"
+    else:
         return None
     segment = next((item for item in chain.segments if item.key == segment_key), None)
     if segment is None:
@@ -232,7 +263,7 @@ def get_supply_chain_comparison(ticker: str, curr_date: str) -> str:
     inferred_segment: SupplyChainSegment | None = None
     inferred_reason = ""
     if chain is None:
-        inferred = _infer_lithium_chain_segment(symbol, curr_date)
+        inferred = _infer_wind_chain_segment(symbol, curr_date) or _infer_lithium_chain_segment(symbol, curr_date)
         if inferred is None:
             return (
                 f"# Supply-chain position comparison for {symbol} as of {curr_date}\n\n"

@@ -179,6 +179,26 @@ def test_unmapped_cathode_company_infers_lithium_cost_proxy_from_filings(monkeyp
     assert "stock name/industry and recent filing text" in mapping["spread_note"]
 
 
+def test_unmapped_wind_equipment_uses_steel_proxy_not_incidental_precious_metal(monkeypatch):
+    monkeypatch.setattr(
+        commodity_research,
+        "_fetch_stock_basic",
+        lambda symbol: pd.Series({"ts_code": symbol, "name": "测试重工", "industry": "电气设备"}),
+    )
+
+    def fake_load_reports(symbol, curr_date, look_back_days):
+        return [], [("年报", "公司主营海上风电装备、塔筒、管桩和导管架，钢材成本、港口物流和汇率影响项目毛利。")]
+
+    monkeypatch.setattr("tradingagents.dataflows.filing_research._load_financial_report_texts", fake_load_reports)
+
+    mapping = _infer_products("301997.SZ", "2026-06-12")
+    product_names = {product["name"] for product in mapping["products"]}
+
+    assert "Rebar" in product_names
+    assert "Silver" not in product_names
+    assert "Lithium carbonate" not in product_names
+
+
 def test_xingye_silver_tin_mapping_covers_core_metals():
     mapping = _infer_products("000426.SZ")
     product_names = {product["name"] for product in mapping["products"]}

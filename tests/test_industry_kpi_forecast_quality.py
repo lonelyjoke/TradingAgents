@@ -46,6 +46,20 @@ def test_battery_material_kpi_checklist_uses_spread_drivers():
     assert "customer mix" in context
 
 
+def test_wind_equipment_kpi_checklist_preempts_broad_electrical_battery_route():
+    context = build_industry_kpi_context(
+        "301999.SZ",
+        "2026-06-12",
+        filing_intelligence_context="公司主营海上风电装备、塔筒、管桩和导管架，出口海工项目订单和合同负债影响收入。",
+        company_business_model_context="Vendor industry: 电气设备。核心商业模式为项目订单交付回款型。",
+    )
+
+    assert "wind power / offshore foundation equipment" in context
+    assert "offshore wind tenders" in context
+    assert "contract liabilities" in context
+    assert "lithium carbonate" not in context
+
+
 def test_forecast_model_scaffold_requires_three_year_driver_bridge():
     context = build_forecast_model_context(
         "300750.SZ",
@@ -74,6 +88,20 @@ def test_forecast_model_scaffold_uses_battery_material_bridge():
     assert "Cathode / material revenue" in context
     assert "shipment volume x cathode ASP" in context
     assert "Manufacturing spread" in context
+
+
+def test_forecast_model_scaffold_uses_wind_equipment_order_bridge():
+    context = build_forecast_model_context(
+        "301999.SZ",
+        "2026-06-12",
+        company_business_model_context="公司主营海上风电管桩、导管架和塔筒，盈利取决于海外订单、交付节奏、钢材成本、港口物流和汇率。",
+        industry_kpi_context="Playbook: wind power / offshore foundation equipment. Required KPI Map: offshore wind tenders, contract liabilities, steel plate cost, utilization.",
+    )
+
+    assert "Wind-equipment revenue" in context
+    assert "opening backlog + new orders - delivered orders" in context
+    assert "steel plate cost" in context
+    assert "Cathode / material revenue" not in context
 
 
 def test_quality_audit_requires_formula_period_and_evidence_status():

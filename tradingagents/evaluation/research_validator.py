@@ -401,6 +401,152 @@ _BATTERY_MATERIAL_GATE_TERMS = (
     "仓位",
 )
 
+_WIND_EQUIPMENT_TERMS = (
+    "wind power",
+    "offshore wind",
+    "monopile",
+    "jacket foundation",
+    "风电",
+    "海上风电",
+    "海风",
+    "塔筒",
+    "管桩",
+    "导管架",
+    "海工",
+    "风电装备",
+)
+
+_LITHIUM_BATTERY_ROUTE_TERMS = (
+    "Lithium battery chain",
+    "battery / energy-storage chain",
+    "Cathode / material revenue",
+    "lithium carbonate",
+    "Downstream cells",
+    "Power battery revenue",
+    "锂电",
+    "动力电池",
+    "储能电池",
+    "碳酸锂",
+    "正极材料",
+    "电芯",
+)
+
+_PROJECT_ORDER_TRIGGER_TERMS = (
+    "order",
+    "backlog",
+    "contract liabilities",
+    "project",
+    "订单",
+    "在手订单",
+    "新签",
+    "合同负债",
+    "项目",
+    "交付",
+)
+
+_ORDER_BRIDGE_TERMS = (
+    "opening backlog",
+    "new orders",
+    "delivered",
+    "ending backlog",
+    "receivables",
+    "inventory",
+    "cash collection",
+    "期初",
+    "新签",
+    "交付",
+    "期末",
+    "应收",
+    "存货",
+    "发出商品",
+    "回款",
+)
+
+_TRUE_PEER_TERMS = (
+    "true operating peer",
+    "business-comparable",
+    "broad industry",
+    "substitute",
+    "alternative",
+    "relative allocation",
+    "真实可比",
+    "业务可比",
+    "宽行业",
+    "替代表达",
+    "相对配置",
+)
+
+_SCENARIO_SENSITIVITY_TERMS = (
+    "bull",
+    "base",
+    "bear",
+    "sensitivity",
+    "scenario",
+    "assumption",
+    "2026E",
+    "2027E",
+    "2028E",
+    "牛",
+    "中",
+    "熊",
+    "敏感性",
+    "情景",
+    "假设",
+)
+
+_SECOND_CURVE_TRIGGER_TERMS = (
+    "second curve",
+    "new business",
+    "optionality",
+    "ship",
+    "capacity",
+    "project ramp",
+    "第二曲线",
+    "新业务",
+    "期权",
+    "船舶",
+    "产能",
+    "放量",
+)
+
+_SECOND_CURVE_DEPTH_TERMS = (
+    "scenario value",
+    "core value",
+    "unit economics",
+    "utilization",
+    "capex",
+    "cash conversion",
+    "control rights",
+    "customer",
+    "场景价值",
+    "核心估值",
+    "单位经济",
+    "利用率",
+    "资本开支",
+    "现金转化",
+    "控制权",
+    "客户",
+)
+
+_EVIDENCE_GRADE_TERMS = (
+    "reported",
+    "calculated",
+    "estimated",
+    "proxy",
+    "stale",
+    "missing",
+    "unverified",
+    "source period",
+    "已披露",
+    "计算",
+    "估算",
+    "代理",
+    "滞后",
+    "缺失",
+    "未验证",
+    "来源期间",
+)
+
 
 def _section_text(text: str, label: str) -> str:
     pattern = rf"\*\*{re.escape(label)}\*\*:\s*(.*?)(?:\n\n\*\*[^*\n]+\*\*:|\Z)"
@@ -529,6 +675,59 @@ def audit_decision_depth(decision_text: str) -> list[DecisionDepthIssue]:
             )
         )
 
+    order_triggered = any(
+        token in decision_text.lower()
+        for token in ("order", "backlog", "订单", "新签", "在手订单")
+    )
+    if order_triggered and _term_hits(decision_text, _PROJECT_ORDER_TRIGGER_TERMS) >= 4 and _term_hits(decision_text, _ORDER_BRIDGE_TERMS) < 6:
+        issues.append(
+            DecisionDepthIssue(
+                "order_backlog_bridge",
+                "warning",
+                "project/order-driven thesis lacks a full backlog/new-order/delivery/working-capital/cash-collection bridge",
+            )
+        )
+
+    if _term_hits(decision_text, _TRUE_PEER_TERMS) < 3:
+        issues.append(
+            DecisionDepthIssue(
+                "true_peer_alternatives",
+                "warning",
+                "peer work does not clearly separate true operating comparables from broad industry screens or substitute expressions",
+            )
+        )
+
+    if _term_hits(decision_text, _VALUATION_DEPTH_TERMS) >= 2 and _term_hits(decision_text, _SCENARIO_SENSITIVITY_TERMS) < 5:
+        issues.append(
+            DecisionDepthIssue(
+                "scenario_sensitivity_bridge",
+                "warning",
+                "valuation or safety-price conclusion lacks bull/base/bear, sensitivity, or explicit multi-period assumption bridge",
+            )
+        )
+
+    second_curve_triggered = any(
+        token in decision_text.lower()
+        for token in ("second curve", "new business", "shipbuilding", "vessel", "第二曲线", "新业务", "船舶")
+    )
+    if second_curve_triggered and _term_hits(decision_text, _SECOND_CURVE_TRIGGER_TERMS) >= 3 and _term_hits(decision_text, _SECOND_CURVE_DEPTH_TERMS) < 5:
+        issues.append(
+            DecisionDepthIssue(
+                "second_curve_optionality",
+                "warning",
+                "second-curve/new-business discussion lacks scenario/core-value treatment, unit economics, utilization, capex, or cash-conversion evidence",
+            )
+        )
+
+    if _term_hits(decision_text, _EVIDENCE_GRADE_TERMS) < 5:
+        issues.append(
+            DecisionDepthIssue(
+                "evidence_grade_table",
+                "warning",
+                "decisive claims do not carry enough source/evidence grades such as reported, calculated, estimated, proxy, missing, or unverified",
+            )
+        )
+
     if _term_hits(decision_text, _MEDICAL_DEVICE_TRIGGER_TERMS) >= 2:
         if _term_hits(decision_text, _MEDICAL_DEVICE_DEPTH_TERMS) < 8:
             issues.append(
@@ -568,12 +767,41 @@ def audit_decision_depth(decision_text: str) -> list[DecisionDepthIssue]:
     return issues
 
 
+def audit_context_alignment(report_dir: str | Path) -> list[DecisionDepthIssue]:
+    """Flag industry/playbook mismatches across saved contexts."""
+    context_dir = Path(report_dir) / "0_context"
+    if not context_dir.exists():
+        return []
+
+    combined = "\n".join(
+        read_text_fallback(path)
+        for path in (
+            context_dir / "company_business_model.md",
+            context_dir / "industry_kpi.md",
+            context_dir / "forecast_model.md",
+            context_dir / "supply_chain_comparison.md",
+            context_dir / "commodity_context.md",
+        )
+        if path.exists()
+    )
+    if _term_hits(combined, _WIND_EQUIPMENT_TERMS) >= 2 and _term_hits(combined, _LITHIUM_BATTERY_ROUTE_TERMS) >= 2:
+        return [
+            DecisionDepthIssue(
+                "industry_playbook_alignment",
+                "error",
+                "saved contexts mix wind/offshore equipment evidence with lithium-battery playbook, supply-chain, or forecast drivers",
+            )
+        ]
+    return []
+
+
 def audit_report_depth(report_dir: str | Path) -> pd.DataFrame:
     """Audit the final portfolio decision for shallow buy-side sections."""
     decision_path = Path(report_dir) / "5_portfolio" / "decision.md"
     if not decision_path.exists():
         raise FileNotFoundError(f"Missing portfolio decision: {decision_path}")
     issues = audit_decision_depth(read_text_fallback(decision_path))
+    issues.extend(audit_context_alignment(report_dir))
     return pd.DataFrame(
         [
             {

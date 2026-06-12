@@ -824,9 +824,17 @@ def _infer_products(symbol: str, curr_date: str | None = None, look_back_days: i
             "spread_note": "Not applicable: financial institutions do not have a primary commodity/product-price spread driver. Use bank/financial KPIs instead.",
         }
     products = []
-    if any(token in evidence_haystack for token in LITHIUM_MATERIAL_HINTS):
+    wind_equipment = any(
+        token in evidence_haystack
+        for token in ("风电", "海上风电", "海风", "塔筒", "管桩", "导管架", "海工", "风电装备")
+    )
+    if wind_equipment:
+        products.append({"name": "Rebar", "type": "futures", "role": "steel cost proxy", "prefix": "RB", "exchange": "SHFE"})
+    if any(token in evidence_haystack for token in LITHIUM_MATERIAL_HINTS) and not wind_equipment:
         products.extend(_lithium_material_products())
     for keyword, hints in INDUSTRY_PRODUCT_HINTS.items():
+        if wind_equipment and keyword in {"银", "黄金", "铜", "锂"}:
+            continue
         if keyword in evidence_haystack:
             products.extend(hints)
     deduped = []

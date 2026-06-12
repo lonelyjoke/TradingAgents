@@ -33,6 +33,30 @@ def _matching_lines(text: str, patterns: tuple[str, ...], *, limit: int = 6) -> 
 
 def _detect_playbook(symbol: str, combined_text: str) -> tuple[str, list[tuple[str, str, str]]]:
     lower = f"{symbol}\n{combined_text}".lower()
+    wind_hits = sum(
+        token in combined_text
+        for token in ("风电", "海上风电", "海风", "塔筒", "管桩", "导管架", "海工", "风电装备", "风机")
+    ) + sum(token in lower for token in ("wind power", "offshore wind", "monopile", "jacket foundation", "tower"))
+    battery_material_hits = sum(
+        token in combined_text
+        for token in ("正极材料", "磷酸铁锂", "三元材料", "前驱体", "锂电材料", "电池材料")
+    ) + sum(token in lower for token in ("cathode", "precursor", "lfp"))
+    battery_hits = sum(
+        token in combined_text
+        for token in ("动力电池", "储能电池", "锂离子电池", "电芯")
+    ) + sum(token in lower for token in ("300750", "battery cell", "power battery"))
+    if wind_hits >= 2 and battery_material_hits == 0 and battery_hits == 0:
+        return (
+            "wind power / offshore foundation equipment",
+            [
+                ("Demand", "offshore wind tenders, project approvals, grid-connection schedule, overseas capex cycle", "order intake and delivery volume"),
+                ("Backlog", "new orders, order backlog, contract liabilities, order-to-revenue ratio", "revenue visibility"),
+                ("Price", "tower/monopile/jacket ASP, project mix, export pricing, FX clauses", "revenue and gross margin"),
+                ("Cost", "steel plate, welding/processing, logistics, port cost, FX, warranty", "project gross margin"),
+                ("Capacity", "base capacity, dock/port resources, utilization, capex and depreciation", "operating leverage"),
+                ("Cash", "prepayments, receivables, inventory, OCF/NI, capex, debt maturity", "cash conversion and balance-sheet risk"),
+            ],
+        )
     if any(
         token in combined_text
         for token in ("正极材料", "磷酸铁锂", "三元材料", "前驱体", "锂电材料", "电池材料")

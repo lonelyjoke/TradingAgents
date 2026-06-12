@@ -24,6 +24,9 @@ Breaking changes within the 0.x line are called out explicitly.
 - Derived sell-side scaffolds for A-share reports: industry cycle, company
   business model, industry KPI checklist, forecast model, and quality audit
   contexts.
+- Wind/offshore equipment playbook support in the derived KPI and forecast
+  layers, including order backlog, contract liabilities, project ASP/mix, steel
+  cost, utilization, port/logistics constraints, capex, FX, and cash conversion.
 
 ### Changed
 
@@ -33,6 +36,9 @@ Breaking changes within the 0.x line are called out explicitly.
 - A-share commodity and supply-chain research now infer battery-material /
   lithium-chain exposure from stock metadata and recent filing text, reducing
   dependence on curated ticker mappings.
+- Broad `电气设备` labels no longer route a company into the lithium-battery
+  chain by themselves; wind/offshore equipment evidence preempts lithium
+  routing and uses wind-chain peers plus steel-cost commodity proxies.
 - CNINFO announcement fallback now uses HTTPS, top-search stock/orgId discovery,
   category-format variants, and a financial-report-specific retry path.
 - Financial-report title filtering excludes prompt notices and scheduled
@@ -41,6 +47,13 @@ Breaking changes within the 0.x line are called out explicitly.
 - Report-depth validation now includes battery-material driver-bridge gates for
   reports that discuss cathode, lithium materials, ASP, capacity, spread, or
   lithium-carbonate cost without enough supporting analysis.
+- Report-depth validation now flags industry playbook mismatches across saved
+  contexts, such as wind/offshore equipment evidence mixed with lithium-battery
+  KPI, supply-chain, or forecast drivers.
+- Sell-side depth validation now checks additional non-routing quality gaps:
+  order/backlog bridges, true-peer alternatives, bull/base/bear sensitivity,
+  second-curve optionality treatment, and evidence-grade disclosure for
+  decisive claims.
 
 ## [0.2.4] — 2026-04-25
 
