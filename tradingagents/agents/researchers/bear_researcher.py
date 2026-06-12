@@ -79,6 +79,11 @@ def create_bear_researcher(llm):
         insurance_context = prompt_contexts["insurance_context"]
         medical_device_context = prompt_contexts["medical_device_context"]
         metals_mining_context = prompt_contexts["metals_mining_context"]
+        industry_cycle_context = prompt_contexts["industry_cycle_context"]
+        company_business_model_context = prompt_contexts["company_business_model_context"]
+        industry_kpi_context = prompt_contexts["industry_kpi_context"]
+        forecast_model_context = prompt_contexts["forecast_model_context"]
+        quality_audit_context = prompt_contexts["quality_audit_context"]
         prompt_history = compact_debate_history(history, profile="research")
         prompt_current_response = compact_for_prompt(
             current_response,
@@ -111,6 +116,11 @@ Key points to focus on:
 - Risks and Challenges: Highlight factors like market saturation, financial instability, macroeconomic threats, product-price/freight weakness, or policy risks that could hinder the stock's performance.
 - Competitive Weaknesses: Emphasize vulnerabilities such as weaker market positioning, declining innovation, or threats from competitors.
 - Negative Indicators: Use evidence from financial data, market trends, or recent adverse news to support your position.
+- Industry Cycle Scan Discipline: Attack unsupported cycle language through the Industry Cycle Scan. If the scan is bottom-testing, evidence-limited, or contradicts the thesis, make that a core debate point; if it supports the bull case, shift the attack to company pass-through, valuation, or confirmation risk.
+- Company Business Model Discipline: Use the Company Business Model Primer to challenge over-blending, weak segment disclosure, low-quality second curves, capital intensity, or moats that are asserted but not proven by filings.
+- Industry KPI Discipline: Use the Industry KPI Checklist to attack the weakest sector-native evidence layer: demand, price/spread, share, backlog, utilization, inventory, or cash conversion. Missing KPI evidence caps conviction; it is not bearish proof unless verified negative evidence supports it.
+- Forecast-Model Discipline: Use the Forward Forecast Model Scaffold to challenge the assumptions that drive the next two to three years of earnings and FCF. Attack valuation when the earnings bridge is missing or too sensitive to unverified drivers.
+- Key-Number Discipline: Use the Sell-Side Depth And Key-Number Audit to challenge target price, safety price, PE/PB, dividend yield, margins, ASP, shipments, and backlog claims that lack formula, period, or evidence status.
 - Thematic Catalyst Discipline: Discuss the valuable themes extracted by the system, including credible tier-3 narrative options if they are not fantastical. For each material theme, assess whether it is too small, too slow, too weakly evidenced, already priced, or disconnected from economics; state what would falsify it; and do not silently ignore a theme merely because it is not yet valuation-grade.
 - Investor-Interaction Discipline: If official Q&A context is available, discuss what investors keep pressing on, where management answers are non-committal or incomplete, and whether the answer pattern exposes unresolved risks, weak disclosure, or low catalyst visibility.
 - Policy-Planning Discipline: If official national or industry policy context is available, test whether policy merely expands the industry while competitors capture the economics, whether support is already priced, and whether the company is a real beneficiary rather than only adjacent to a favored direction.
@@ -145,6 +155,11 @@ Market research report: {market_research_report}
 Social media sentiment report: {sentiment_report}
 Latest world affairs news: {news_report}
 Company fundamentals report: {fundamentals_report}
+Industry-cycle scan: {industry_cycle_context}
+Company business-model primer: {company_business_model_context}
+Industry KPI checklist: {industry_kpi_context}
+Forward forecast-model scaffold: {forecast_model_context}
+Sell-side depth and key-number audit: {quality_audit_context}
 Thematic catalyst cross-check and valuation bridge: {thematic_catalyst_context}
 Commodity/product-price context: {commodity_context}
 Relative-strength / index-linkage context: {relative_strength_context}

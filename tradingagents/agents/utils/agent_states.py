@@ -84,6 +84,11 @@ class AgentState(MessagesState):
     insurance_context: Annotated[str, "Precomputed gated insurance verification context for A-share insurers"]
     medical_device_context: Annotated[str, "Precomputed gated medical-device verification context for A-share names"]
     metals_mining_context: Annotated[str, "Precomputed gated metals/mining verification context for A-share names"]
+    industry_cycle_context: Annotated[str, "Derived industry-cycle scan and cycle-stage verdict for A-share names"]
+    company_business_model_context: Annotated[str, "Derived company business-model, segment-economics, moat, and evidence-gate primer"]
+    industry_kpi_context: Annotated[str, "Derived industry-specific KPI checklist and evidence-gap map"]
+    forecast_model_context: Annotated[str, "Derived forward forecast-model scaffold and three-year driver bridge"]
+    quality_audit_context: Annotated[str, "Derived sell-side depth and key-number audit context"]
     data_coverage_context: Annotated[str, "Audit of which precomputed context modules loaded successfully and which failed or are partial"]
 
     # researcher team discussion step

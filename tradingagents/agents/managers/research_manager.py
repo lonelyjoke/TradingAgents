@@ -90,6 +90,11 @@ def create_research_manager(llm):
         insurance_context = prompt_contexts["insurance_context"]
         medical_device_context = prompt_contexts["medical_device_context"]
         metals_mining_context = prompt_contexts["metals_mining_context"]
+        industry_cycle_context = prompt_contexts["industry_cycle_context"]
+        company_business_model_context = prompt_contexts["company_business_model_context"]
+        industry_kpi_context = prompt_contexts["industry_kpi_context"]
+        forecast_model_context = prompt_contexts["forecast_model_context"]
+        quality_audit_context = prompt_contexts["quality_audit_context"]
         data_coverage_context = prompt_contexts["data_coverage_context"]
         prompt_history = compact_debate_history(history, profile="research")
         continuity_context = (
@@ -169,6 +174,11 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 - If you are writing free text rather than structured fields, include explicit sections titled **Company Quality Verdict**, **Current Odds Verdict**, and **Relative Allocation Verdict** so that business quality, today's risk/reward, and best deployment choice are not collapsed into one view.
 - If you are writing free text rather than structured fields, also include **Management & Capital Allocation Verdict** and **Shareholder Structure Verdict** whenever the hard-signal contexts are available.
 - If official investor-interaction context is available, keep an **Investor Communication Verdict** explicit enough for the downstream trader and risk team to understand the live concern map and disclosure quality.
+- Keep an **Industry Cycle Verdict** explicit enough to state the current cycle stage before valuation: downturn, bottom-testing, bottom-right validation, early upcycle, mid-cycle expansion, peak/rollover, or evidence insufficient. Do not let company PE or one-quarter profit alone establish the cycle stage.
+- Keep a **Business Model / Segment Economics Verdict** explicit enough to teach how the company makes money, which segments are mature core value, which are second-curve/scenario value, what moat is actually evidenced, and which segment disclosures are still missing.
+- Keep an **Industry KPI Verdict** explicit enough to say which sector-native KPI layers are verified, partial, or missing, and whether those gaps change conviction, sizing, valuation, or the verification calendar.
+- Keep a **Forward Forecast Model Verdict** explicit enough to connect the rating to a two-to-three-year revenue, margin, net profit/EPS, and cash-flow bridge. If the bridge is missing, do not allow target-price confidence to outrun the evidence.
+- Keep a **Key Number Audit Verdict** explicit enough to police decisive PE/PB/EV multiples, target price, safety price, dividend yield, margins, ASP, shipments, utilization, backlog, and contract-liability claims. Require formula, period, source, and evidence status when those numbers drive the rating.
 - If official policy context is available, keep a **Policy Direction Verdict** explicit enough to distinguish industry support from company-specific monetization.
 - If historical price/EPS/PE decomposition context is available, keep the valuation-cycle verdict explicit enough to say whether the current price is supported by earnings improvement, multiple expansion, both, or neither.
 - Preserve a concise standalone **Safety Price / Defensive Build Anchor** when financial state supports it; when writing Chinese, title it `## 安全价格区间 / 防御性建仓锚`. For value stocks, blue chips, banks, defensive dividend names, and mature cash-flow compounders, anchor it in normalized low-cycle EPS or FCF, sustainable dividend yield, book value/PB and ROE, cash conversion, leverage or net cash, asset quality, payout capacity, and peer/historical valuation floors. For commodity/resource/cyclical names, anchor it in cycle-trough or stress-case earnings, conservative product prices, unit-cost resilience, balance-sheet survival, maintenance capex, and normalized PE/PB floors. Include only the practical anchor: price band, valuation bridge, business conditions that must remain true, slow-build plan, and deterioration that invalidates it. Prefer one short paragraph or a compact 3-4 row table, not a second valuation essay. If the company is structurally impaired, highly leveraged, deeply cyclical without survivable trough economics, or evidence-thin, still keep the section and say no reliable safety price can be assigned.
@@ -202,6 +212,21 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 {continuity_context}
 **Thematic Catalyst Cross-Check And Valuation Bridge:**
 {thematic_catalyst_context}
+
+**Industry Cycle Scan:**
+{industry_cycle_context}
+
+**Company Business Model Primer:**
+{company_business_model_context}
+
+**Industry KPI Checklist:**
+{industry_kpi_context}
+
+**Forward Forecast Model Scaffold:**
+{forecast_model_context}
+
+**Sell-Side Depth And Key-Number Audit:**
+{quality_audit_context}
 
 **Commodity/Product-Price Context:**
 {commodity_context}

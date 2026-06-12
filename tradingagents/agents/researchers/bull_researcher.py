@@ -79,6 +79,11 @@ def create_bull_researcher(llm):
         insurance_context = prompt_contexts["insurance_context"]
         medical_device_context = prompt_contexts["medical_device_context"]
         metals_mining_context = prompt_contexts["metals_mining_context"]
+        industry_cycle_context = prompt_contexts["industry_cycle_context"]
+        company_business_model_context = prompt_contexts["company_business_model_context"]
+        industry_kpi_context = prompt_contexts["industry_kpi_context"]
+        forecast_model_context = prompt_contexts["forecast_model_context"]
+        quality_audit_context = prompt_contexts["quality_audit_context"]
         prompt_history = compact_debate_history(history, profile="research")
         prompt_current_response = compact_for_prompt(
             current_response,
@@ -108,6 +113,11 @@ Key points to focus on:
 - Expectation Gap: Explain what the market may be underpricing.
 - Probability/Payoff: Argue why the upside probability and payoff justify a constructive stance.
 - Positive Indicators: Use financial health, industry trends, valuation, high-frequency/proxy data, and recent news as evidence.
+- Industry Cycle Scan Discipline: Before claiming a bottom or reversal, cite the Industry Cycle Scan. If it says bottom-testing, evidence-limited, or right-side validation, use conditional language and state the exact confirmation data needed.
+- Company Business Model Discipline: Use the Company Business Model Primer to explain how the company makes money, which segments are mature core profit pools, which are second curves, and where moat or capital intensity sits. Do not let a broad industry story substitute for company economics.
+- Industry KPI Discipline: Use the Industry KPI Checklist to prove the bull thesis through sector-native KPIs. If key demand, price, share, backlog, utilization, or cash-conversion evidence is missing, make the bull case staged and falsifiable rather than full-conviction.
+- Forecast-Model Discipline: Use the Forward Forecast Model Scaffold to show which two or three assumptions drive upside over the next two to three years. Do not ask the manager to pay a higher multiple without an earnings/cash-flow bridge.
+- Key-Number Discipline: Use the Sell-Side Depth And Key-Number Audit to keep target price, safety price, PE/PB, dividend yield, margins, ASP, shipments, and backlog claims sourceable and formula-based.
 - Thematic Catalyst Discipline: Discuss the valuable themes extracted by the system, including credible tier-3 narrative options if they are not fantastical. For each material theme, explain how it could affect A-share expectations, probability/payoff, or valuation; distinguish core proof from optionality; state what evidence would upgrade it; and do not silently ignore a theme just because it is not yet valuation-grade.
 - Primary-Investment Optionality Discipline: When the thematic bridge contains verified primary investments, non-listed equity holdings, investee IPOs, or asset-revaluation candidates, make them part of the bull testimony. Separate (a) pure value-investing incremental NAV after liquidity, lock-up, exit-probability, and double-counting haircuts from (b) A-share theme imagination and trading optionality. Explain why the market may pay attention, how much value could reasonably accrue, what catalyst could unlock it, and why it should or should not change the rating.
 - Investor-Interaction Discipline: If official Q&A context is available, discuss what investors are repeatedly worried about, whether management answered substantively or evasively, and whether the answer pattern strengthens the bull case through credibility, disclosure quality, or catalyst visibility.
@@ -142,6 +152,11 @@ Market research report: {market_research_report}
 Social media sentiment report: {sentiment_report}
 Latest world affairs news: {news_report}
 Company fundamentals report: {fundamentals_report}
+Industry-cycle scan: {industry_cycle_context}
+Company business-model primer: {company_business_model_context}
+Industry KPI checklist: {industry_kpi_context}
+Forward forecast-model scaffold: {forecast_model_context}
+Sell-side depth and key-number audit: {quality_audit_context}
 Thematic catalyst cross-check and valuation bridge: {thematic_catalyst_context}
 Commodity/product-price context: {commodity_context}
 Relative-strength / index-linkage context: {relative_strength_context}

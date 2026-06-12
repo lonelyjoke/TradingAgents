@@ -109,6 +109,11 @@ def create_portfolio_manager(llm):
         insurance_context = prompt_contexts["insurance_context"]
         medical_device_context = prompt_contexts["medical_device_context"]
         metals_mining_context = prompt_contexts["metals_mining_context"]
+        industry_cycle_context = prompt_contexts["industry_cycle_context"]
+        company_business_model_context = prompt_contexts["company_business_model_context"]
+        industry_kpi_context = prompt_contexts["industry_kpi_context"]
+        forecast_model_context = prompt_contexts["forecast_model_context"]
+        quality_audit_context = prompt_contexts["quality_audit_context"]
         data_coverage_context = prompt_contexts["data_coverage_context"]
         investment_debate_state = state.get("investment_debate_state", {})
         bull_bear_context = ""
@@ -237,6 +242,11 @@ def create_portfolio_manager(llm):
 - Include a valuation framework that follows from the business buckets: PE/PB/ROE/EV-EBITDA/DCF/NAV/SOTP/dividend yield as appropriate, with core value separated from scenario value or optionality. Do not write valuation as a generic multiple paragraph detached from segment economics.
 - Use historical minute K-line context as market-behavior validation only after the fundamental work: intraday reversal, high-low range, first/last-30-minute behavior, volume concentration, liquidity, and whether the move is company alpha, sector beta, commodity beta, or broad risk appetite. Minute-line behavior may adjust timing, confidence, or sizing; it must not replace company research or valuation.
 - Use this narrative order: (1) what the company is and the decision, (2) how the business model and industry chain work, (3) business segment breakdown and unit economics, (4) the core investment thesis and earnings/valuation bridge, (5) supporting evidence that changes confidence or sizing, (6) bull/bear decision logic, (7) catalysts/optionality and evidence gaps, (8) verification/falsification, and only then (9) concise holder/builder execution posture.
+- Include the Industry Cycle Scan in the valuation/cycle discussion. State the cycle stage before using cycle valuation multiples, and downgrade language from `cycle bottom confirmed` to `bottom-right validation` or `bottom-testing` when the scan is not decisive.
+- Include the Company Business Model Primer before valuation. The reader should understand the revenue engine, profit pools, customers/channels, cost drivers, moat, capital intensity, and second-curve evidence gates before seeing PE/PB/SOTP.
+- Include the Industry KPI Checklist as the operating-data agenda. The final memo should say which sector-native KPIs are verified, partial, or missing, and which ones most affect rating, valuation, sizing, or next verification.
+- Include the Forward Forecast Model Scaffold in the earnings bridge. A constructive or negative rating should be tied to two-to-three-year revenue, margin, net profit/EPS, and cash-flow assumptions, even if some cells are explicitly evidence-limited.
+- Include the Sell-Side Depth And Key-Number Audit in the background discipline. Decisive PE/PB/EV multiples, target price, safety price, dividend yield, margins, ASP, shipments, utilization, backlog, and contract-liability claims need formula, source period, and evidence status.
 - Treat structured optional fields as materiality gates, not a checklist. Fill a specialized field only when it changes the rating, valuation, position size, confidence, or next verification action. If a module is merely background, summarize it in one sentence inside the main thesis or omit it; if it is missing/partial, put it in Data Coverage Audit or Buy-Side Depth Audit rather than creating a standalone mini-section.
 - Avoid repeating the same fact in Company Snapshot, Business Model & Industry Chain Primer, Business Segment Breakdown, Investment Thesis, and Business Driver Map. Let each section do one job: primer teaches the operating model, segment breakdown explains disclosed economics, thesis explains why price may diverge from value, and supporting evidence explains what changed conviction.
 - If the financial-report intelligence contains **Growth Sustainability & Ramp Conditions**, include a standalone Chinese section titled `## 营收与利润增长可持续性 / 放量条件`. Explain the 3-6 variables that decide whether revenue and profit growth can continue, which are verified by filings, which are inferred, what must happen for growth to keep ramping, and what would falsify the thesis. Do not treat analyst estimates or back-solved profit buckets as facts; label estimates, formulas, periods, and uncertainty explicitly.
@@ -312,6 +322,11 @@ def create_portfolio_manager(llm):
 - Research Manager's investment plan: **{research_plan}**
 - Trader's transaction proposal: **{trader_plan}**
 - Thematic catalyst cross-check and valuation bridge: **{thematic_catalyst_context}**
+- Industry cycle scan: **{industry_cycle_context}**
+- Company business-model primer: **{company_business_model_context}**
+- Industry KPI checklist: **{industry_kpi_context}**
+- Forward forecast-model scaffold: **{forecast_model_context}**
+- Sell-side depth and key-number audit: **{quality_audit_context}**
 - Commodity/product-price context: **{commodity_context}**
 - Price-move attribution context: **{price_move_attribution_context}**
 - Historical minute K-line / intraday behavior context: **{intraday_behavior_context}**

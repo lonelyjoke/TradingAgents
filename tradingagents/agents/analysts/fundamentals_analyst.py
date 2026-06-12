@@ -109,6 +109,11 @@ def create_fundamentals_analyst(llm):
         raw_insurance_context = state.get("insurance_context", "")
         raw_medical_device_context = state.get("medical_device_context", "")
         raw_metals_mining_context = state.get("metals_mining_context", "")
+        raw_industry_cycle_context = state.get("industry_cycle_context", "")
+        raw_company_business_model_context = state.get("company_business_model_context", "")
+        raw_industry_kpi_context = state.get("industry_kpi_context", "")
+        raw_forecast_model_context = state.get("forecast_model_context", "")
+        raw_quality_audit_context = state.get("quality_audit_context", "")
         prompt_contexts = compact_state_fields(state, profile="analyst")
         thematic_catalyst_context = prompt_contexts["thematic_catalyst_context"]
         commodity_context = prompt_contexts["commodity_context"]
@@ -138,6 +143,11 @@ def create_fundamentals_analyst(llm):
         insurance_context = prompt_contexts["insurance_context"]
         medical_device_context = prompt_contexts["medical_device_context"]
         metals_mining_context = prompt_contexts["metals_mining_context"]
+        industry_cycle_context = prompt_contexts["industry_cycle_context"]
+        company_business_model_context = prompt_contexts["company_business_model_context"]
+        industry_kpi_context = prompt_contexts["industry_kpi_context"]
+        forecast_model_context = prompt_contexts["forecast_model_context"]
+        quality_audit_context = prompt_contexts["quality_audit_context"]
         data_coverage_context = prompt_contexts["data_coverage_context"]
         is_a_share = is_a_share_symbol(state["company_of_interest"])
 
@@ -212,13 +222,17 @@ def create_fundamentals_analyst(llm):
             "Your job is to identify the tradable thesis, test whether the business-cycle or boom-bust expectation can plausibly realize, and explain what evidence supports or weakens the thesis. "
             "Use `get_fundamentals`, `get_balance_sheet`, `get_cashflow`, and `get_income_statement` for core financial quality. "
             "Pay special attention to accounting items that may preview future performance, including contract liabilities, advance receipts, contract assets, receivables, inventories, prepayments, payables, goodwill, net cash, and working capital. "
-            "For A-share tickers, the system may provide precomputed thematic, commodity/product-price, price-move attribution, intraday minute-line behavior, relative-strength/index-linkage, shipping/freight-rate, filing, peer, supply-chain, earnings-model, market-expectation, price/EPS/PE decomposition, management/capital-allocation, shareholder-structure, investor-interaction, policy-planning, web fact-check, gated compute-leasing, gated dividend-defensive, gated building-materials, gated consumer-staples, gated optical-module/AI datacom, gated biopharma, gated software, gated insurance, gated medical-device, and gated metals/mining context below. Use any precomputed context directly and do not call the same context tool again. Also use `get_valuation_percentiles` for historical valuation zones, `get_market_sector_risk` for broad/sector risk, `get_market_timing_context` for market mood, and `get_relative_strength_context` / `get_intraday_behavior_context` for stock-versus-index and minute-line validation when those extra lenses are material. "
+            "For A-share tickers, the system may provide precomputed industry-cycle scan, company business-model primer, thematic, commodity/product-price, price-move attribution, intraday minute-line behavior, relative-strength/index-linkage, shipping/freight-rate, filing, peer, supply-chain, earnings-model, market-expectation, price/EPS/PE decomposition, management/capital-allocation, shareholder-structure, investor-interaction, policy-planning, web fact-check, gated compute-leasing, gated dividend-defensive, gated building-materials, gated consumer-staples, gated optical-module/AI datacom, gated biopharma, gated software, gated insurance, gated medical-device, and gated metals/mining context below. Use any precomputed context directly and do not call the same context tool again. Also use `get_valuation_percentiles` for historical valuation zones, `get_market_sector_risk` for broad/sector risk, `get_market_timing_context` for market mood, and `get_relative_strength_context` / `get_intraday_behavior_context` for stock-versus-index and minute-line validation when those extra lenses are material. "
             "For commodity/resource/cyclical companies, treat the commodity/product-price context as a hard cycle variable: connect it to ASP, gross margin, inventory write-down/reversal risk, cash conversion, and valuation, and do not let news headlines substitute for product-price evidence. "
             "For shipping companies, treat shipping/freight-rate context as the hard cycle variable: separate route-level VLCC TD3C/TCE/CTFI evidence from broad BDTI/BCTI/BDI proxies, and explicitly test two-sided Hormuz mechanisms such as risk-premium compression versus restocking and ton-mile recovery. "
             "For A-share tickers, also use `get_supply_chain_comparison` when a curated chain map exists, so the memo can distinguish between a merely good company and the best profit pool in the chain. "
             "For A-share tickers, if precomputed thematic and financial-report intelligence are present below, treat those as satisfying the catalyst / filing-evidence requirement. If they are absent, call the corresponding context tool once before concluding those sections. "
             "Before forming the thesis, read the filing context in industry order: first identify the sector-native variables that actually decide economics, then inspect the paragraph-level filing evidence around those variables, and only then synthesize generic financial metrics. "
-            "For an unfamiliar company, first explain its disclosed main businesses from financial reports, then use the Business Segment Valuation Map / Segment Economics Pack to split mature core businesses, new second-curve businesses, geographies, and channels before discussing valuation. Do not apply one blended PE multiple until you have explained why split valuation is unnecessary. "
+            "Before using words such as `cycle bottom`, `周期底部`, `cycle reversal`, or `景气反转`, first cite the Industry Cycle Scan and say whether the evidence is confirmed, bottom-right validation, bottom-testing, downcycle, or insufficient. "
+            "For an unfamiliar company, first explain its disclosed main businesses from the Company Business Model Primer and financial reports, then use the Business Segment Valuation Map / Segment Economics Pack to split mature core businesses, new second-curve businesses, geographies, and channels before discussing valuation. Do not apply one blended PE multiple until you have explained why split valuation is unnecessary. "
+            "Use the Industry KPI Checklist as the sector-native evidence agenda: state which KPI layers are verified, partial, or missing, and do not turn a missing KPI into a hard positive or negative fact. "
+            "Use the Forward Forecast Model Scaffold to connect segment drivers to the next two to three years of revenue, margin, net profit/EPS, and cash flow. If assumptions are missing, label the forecast bridge evidence-limited instead of writing a free-floating target multiple. "
+            "Use the Sell-Side Depth And Key-Number Audit to police decisive numbers: PE/PB/EV multiples, target price, safety price, dividend yield, margins, ASP, shipments, utilization, backlog, and contract liabilities need formula, source period, and evidence status. "
             "Prioritize: Core Bet, key supporting evidence, key negative evidence, earnings bridge, market-implied expectation, expectation gap, probability/payoff, company quality, current odds, relative allocation, catalysts, falsification signals, and data gaps. "
             "If another peer looks better than the target, explain why with metrics and caveats. If the sector looks high-risk while the target looks relatively low, discuss whether this is a mispricing opportunity or a company-specific warning. "
             "Do not mechanically upgrade in bull markets or downgrade in bear markets: explain how market mood interacts with the company's valuation, quality, beta, cyclicality, balance sheet, and catalysts. "
@@ -254,6 +268,36 @@ def create_fundamentals_analyst(llm):
             + get_medical_device_instruction()
             + get_metals_mining_instruction()
             + get_price_move_attribution_instruction()
+            + (
+                "\n\nPrecomputed industry-cycle scan:\n"
+                + industry_cycle_context
+                if industry_cycle_context
+                else ""
+            )
+            + (
+                "\n\nPrecomputed company business-model primer:\n"
+                + company_business_model_context
+                if company_business_model_context
+                else ""
+            )
+            + (
+                "\n\nPrecomputed industry KPI checklist:\n"
+                + industry_kpi_context
+                if industry_kpi_context
+                else ""
+            )
+            + (
+                "\n\nPrecomputed forward forecast-model scaffold:\n"
+                + forecast_model_context
+                if forecast_model_context
+                else ""
+            )
+            + (
+                "\n\nPrecomputed sell-side depth and key-number audit:\n"
+                + quality_audit_context
+                if quality_audit_context
+                else ""
+            )
             + (
                 "\n\nPrecomputed filing/news thematic cross-check:\n"
                 + thematic_catalyst_context

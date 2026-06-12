@@ -1,0 +1,95 @@
+from tradingagents.dataflows.data_coverage import build_data_coverage_context
+from tradingagents.dataflows.forecast_model_research import build_forecast_model_context
+from tradingagents.dataflows.industry_kpi_research import build_industry_kpi_context
+from tradingagents.dataflows.prompt_compaction import compact_state_fields
+from tradingagents.dataflows.quality_audit_research import build_quality_audit_context
+
+
+def test_battery_industry_kpi_checklist_uses_sector_native_drivers():
+    context = build_industry_kpi_context(
+        "300750.SZ",
+        "2026-06-11",
+        filing_intelligence_context="公司披露动力电池、储能电池业务，产能和合同负债为核心跟踪项。",
+        company_business_model_context="Segment Economics Pack: power battery revenue and storage battery gross margin.",
+    )
+
+    assert "battery / energy-storage chain" in context
+    assert "NEV sales/penetration" in context
+    assert "GWh" in context
+    assert "contract liabilities" in context
+    assert "verified, partial, or missing" in context
+
+
+def test_lithium_industry_kpi_checklist_uses_metals_cycle_drivers():
+    context = build_industry_kpi_context(
+        "002460.SZ",
+        "2026-06-11",
+        filing_intelligence_context="赣锋锂业锂盐、锂矿和电池业务，锂价、库存、产能利用率影响利润。",
+    )
+
+    assert "lithium / metals cycle" in context
+    assert "lithium carbonate/hydroxide price" in context
+    assert "Cost Curve" in context
+    assert "inventory" in context.lower()
+
+
+def test_forecast_model_scaffold_requires_three_year_driver_bridge():
+    context = build_forecast_model_context(
+        "300750.SZ",
+        "2026-06-11",
+        earnings_model_context="Revenue grew; gross margin improved; net profit and EPS are thesis-critical.",
+        company_business_model_context="动力电池和储能电池是主要收入和利润池。",
+        industry_kpi_context="Required KPI Map: GWh shipments, ASP, utilization, contract liabilities.",
+    )
+
+    assert "Forward Forecast Model Scaffold" in context
+    assert "GWh shipments x ASP" in context
+    assert "2026E" in context
+    assert "2027E" in context
+    assert "2028E" in context
+    assert "net profit/EPS" in context
+
+
+def test_quality_audit_requires_formula_period_and_evidence_status():
+    context = build_quality_audit_context(
+        "300750.SZ",
+        "2026-06-11",
+        industry_cycle_context="# Industry Cycle Scan\n\n- Cycle verdict: bottom-right validation stage",
+        company_business_model_context="# Company Business Model Primer\n\n## Segment Economics / Profit Pools\n动力电池",
+        industry_kpi_context="# Industry KPI Checklist\n\n## Required KPI Map\n| Demand | evidence | driver |",
+        forecast_model_context="# Forward Forecast Model Scaffold\n\n| item | 2026E | 2027E | 2028E |",
+        peer_comparison_context="# Same-Industry Peer Comparison\n\n| peer | valuation |",
+        price_earnings_decomposition_context="# Price-EPS-PE Decomposition\n\nready",
+        earnings_model_context="# Earnings Model\n\nready",
+        filing_intelligence_context="# Financial-Report Intelligence\n\nready",
+    )
+
+    assert "Sell-Side Depth And Key-Number Audit" in context
+    assert "formula" in context
+    assert "source period" in context
+    assert "evidence status" in context
+    assert "Weak or incomplete modules" in context
+
+
+def test_new_contexts_are_compacted_and_covered():
+    state = {
+        "industry_kpi_context": "# Industry KPI Checklist\n\n## Required KPI Map\n" + "GWh ASP utilization\n" * 80,
+        "forecast_model_context": "# Forward Forecast Model Scaffold\n\n## Mandatory Three-Year Table\n2026E 2027E 2028E\n",
+        "quality_audit_context": "# Sell-Side Depth And Key-Number Audit\n\n## Key Number Audit Rules\nformula source period\n",
+    }
+    compacted = compact_state_fields(state, profile="portfolio")
+    assert "industry_kpi_context" in compacted
+    assert "forecast_model_context" in compacted
+    assert "quality_audit_context" in compacted
+    assert "Required KPI Map" in compacted["industry_kpi_context"]
+
+    coverage = build_data_coverage_context(
+        {
+            "industry_kpi_checklist": state["industry_kpi_context"],
+            "forecast_model_scaffold": state["forecast_model_context"],
+            "sell_side_quality_audit": state["quality_audit_context"],
+        }
+    )
+    assert "| industry_kpi_checklist | ready |" in coverage
+    assert "| forecast_model_scaffold |" in coverage
+    assert "| sell_side_quality_audit |" in coverage

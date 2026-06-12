@@ -49,6 +49,11 @@ class Propagator:
         insurance_context: str = "",
         medical_device_context: str = "",
         metals_mining_context: str = "",
+        industry_cycle_context: str = "",
+        company_business_model_context: str = "",
+        industry_kpi_context: str = "",
+        forecast_model_context: str = "",
+        quality_audit_context: str = "",
         data_coverage_context: str = "",
     ) -> Dict[str, Any]:
         """Create the initial state for the agent graph."""
@@ -86,6 +91,11 @@ class Propagator:
             "insurance_context": insurance_context,
             "medical_device_context": medical_device_context,
             "metals_mining_context": metals_mining_context,
+            "industry_cycle_context": industry_cycle_context,
+            "company_business_model_context": company_business_model_context,
+            "industry_kpi_context": industry_kpi_context,
+            "forecast_model_context": forecast_model_context,
+            "quality_audit_context": quality_audit_context,
             "data_coverage_context": data_coverage_context,
             "investment_debate_state": InvestDebateState(
                 {
