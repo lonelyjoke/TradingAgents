@@ -60,6 +60,21 @@ def test_wind_equipment_kpi_checklist_preempts_broad_electrical_battery_route():
     assert "lithium carbonate" not in context
 
 
+def test_telecom_operator_kpi_checklist_uses_operator_drivers():
+    context = build_industry_kpi_context(
+        "601728.SH",
+        "2026-06-12",
+        filing_intelligence_context="中国电信为电信运营商，披露移动用户、宽带用户、天翼云、ARPU、资本开支和分红。",
+        company_business_model_context="Vendor industry: 电信运营。传统通信现金牛与云AI第二曲线。",
+    )
+
+    assert "telecom operator / high-dividend SOE" in context
+    assert "mobile subscribers" in context
+    assert "mobile ARPU" in context
+    assert "dividend yield" in context
+    assert "lithium carbonate" not in context
+
+
 def test_forecast_model_scaffold_requires_three_year_driver_bridge():
     context = build_forecast_model_context(
         "300750.SZ",
@@ -101,6 +116,21 @@ def test_forecast_model_scaffold_uses_wind_equipment_order_bridge():
     assert "Wind-equipment revenue" in context
     assert "opening backlog + new orders - delivered orders" in context
     assert "steel plate cost" in context
+    assert "Cathode / material revenue" not in context
+
+
+def test_forecast_model_scaffold_uses_telecom_operator_bridge():
+    context = build_forecast_model_context(
+        "601728.SH",
+        "2026-06-12",
+        company_business_model_context="中国电信是电信运营商，核心变量包括移动用户、移动ARPU、宽带用户、天翼云、资本开支、经营现金流和分红。",
+        industry_kpi_context="Playbook: telecom operator / high-dividend SOE. Required KPI Map: mobile subscribers, ARPU, cloud, capex, dividend.",
+    )
+
+    assert "Mobile service revenue" in context
+    assert "mobile subscribers x mobile ARPU" in context
+    assert "Enterprise / cloud / AI revenue" in context
+    assert "dividend capacity" in context
     assert "Cathode / material revenue" not in context
 
 

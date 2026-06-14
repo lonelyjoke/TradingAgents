@@ -8,6 +8,7 @@ from dataclasses import dataclass
 import pandas as pd
 
 from .filing_research import _load_financial_report_texts
+from .industry_identity import is_telecom_operator_text
 from .tushare_a_stock import (
     _fetch_daily_basic_latest,
     _fetch_fina_indicator,
@@ -369,6 +370,8 @@ def _company_profile(symbol: str, curr_date: str, look_back_days: int) -> Medica
 
     _, report_texts = _load_financial_report_texts(symbol, curr_date, look_back_days)
     text_probe = " ".join(text[:4000] for _, text in report_texts[:4])
+    if symbol not in MEDICAL_DEVICE_COMPANIES and is_telecom_operator_text(company_name, industry, text_probe):
+        return None
     if symbol in MEDICAL_DEVICE_COMPANIES:
         reason = "curated A-share medical-device ticker list"
     elif _contains_terms(MEDICAL_DEVICE_TERMS, company_name, industry, text_probe):

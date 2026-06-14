@@ -199,6 +199,19 @@ def test_unmapped_wind_equipment_uses_steel_proxy_not_incidental_precious_metal(
     assert "Lithium carbonate" not in product_names
 
 
+def test_telecom_operator_commodity_context_is_not_applicable(monkeypatch):
+    monkeypatch.setattr(
+        commodity_research,
+        "_fetch_stock_basic",
+        lambda symbol: pd.Series({"ts_code": symbol, "name": "中国电信", "industry": "电信运营"}),
+    )
+
+    mapping = _infer_products("601728.SH", "2026-06-12")
+
+    assert mapping["products"] == []
+    assert "Not applicable: telecom operators" in mapping["spread_note"]
+
+
 def test_xingye_silver_tin_mapping_covers_core_metals():
     mapping = _infer_products("000426.SZ")
     product_names = {product["name"] for product in mapping["products"]}

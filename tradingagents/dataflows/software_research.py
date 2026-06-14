@@ -6,6 +6,7 @@ import re
 import pandas as pd
 
 from .thematic_research import _compact_text, _load_financial_report_texts
+from .industry_identity import is_telecom_operator_text
 from .tushare_a_stock import (
     TushareDataError,
     _fetch_stock_basic,
@@ -166,6 +167,8 @@ def _company_profile(symbol: str, curr_date: str, look_back_days: int) -> Softwa
 
     _, report_texts = _load_financial_report_texts(symbol, curr_date, look_back_days)
     text_probe = " ".join(text[:3500] for _, text in report_texts[:4])
+    if symbol not in SOFTWARE_COMPANIES and is_telecom_operator_text(company_name, industry, text_probe):
+        return None
     if symbol in SOFTWARE_COMPANIES:
         reason = "curated A-share software / SaaS ticker list"
     elif _contains_terms(SOFTWARE_TERMS, company_name, industry, text_probe):

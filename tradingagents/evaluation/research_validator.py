@@ -431,6 +431,24 @@ _LITHIUM_BATTERY_ROUTE_TERMS = (
     "电芯",
 )
 
+_TELECOM_OPERATOR_TERMS = (
+    "telecom operator",
+    "telecommunication",
+    "mobile subscribers",
+    "mobile ARPU",
+    "broadband",
+    "cloud/AI",
+    "中国电信",
+    "中国移动",
+    "中国联通",
+    "电信运营",
+    "移动用户",
+    "宽带",
+    "ARPU",
+    "天翼云",
+    "分红",
+)
+
 _PROJECT_ORDER_TRIGGER_TERMS = (
     "order",
     "backlog",
@@ -790,6 +808,14 @@ def audit_context_alignment(report_dir: str | Path) -> list[DecisionDepthIssue]:
                 "industry_playbook_alignment",
                 "error",
                 "saved contexts mix wind/offshore equipment evidence with lithium-battery playbook, supply-chain, or forecast drivers",
+            )
+        ]
+    if _term_hits(combined, _TELECOM_OPERATOR_TERMS) >= 2 and _term_hits(combined, _LITHIUM_BATTERY_ROUTE_TERMS) >= 2:
+        return [
+            DecisionDepthIssue(
+                "industry_playbook_alignment",
+                "error",
+                "saved contexts mix telecom-operator evidence with lithium-battery/metals playbook, supply-chain, or forecast drivers",
             )
         ]
     return []

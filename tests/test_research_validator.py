@@ -231,6 +231,28 @@ def test_audit_context_alignment_flags_wind_lithium_playbook_mismatch(tmp_path):
     assert issues[0].severity == "error"
 
 
+def test_audit_context_alignment_flags_telecom_lithium_playbook_mismatch(tmp_path):
+    context_dir = tmp_path / "0_context"
+    context_dir.mkdir()
+    (context_dir / "company_business_model.md").write_text(
+        "中国电信为电信运营商，核心变量包括移动用户、宽带、ARPU、天翼云和分红。",
+        encoding="utf-8",
+    )
+    (context_dir / "industry_kpi.md").write_text(
+        "Playbook: lithium / metals cycle\nRequired KPI Map: lithium carbonate and battery demand.",
+        encoding="utf-8",
+    )
+    (context_dir / "forecast_model.md").write_text(
+        "Driver Bridge: Cathode / material revenue, lithium carbonate cost.",
+        encoding="utf-8",
+    )
+
+    issues = audit_context_alignment(tmp_path)
+
+    assert [issue.section for issue in issues] == ["industry_playbook_alignment"]
+    assert "telecom-operator" in issues[0].issue
+
+
 def test_normalize_rating_handles_empty_label_value():
     assert _normalize_rating("") == "Unknown"
 

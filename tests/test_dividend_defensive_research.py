@@ -71,6 +71,23 @@ def test_dividend_defensive_context_triggers_for_stable_cash_cow(monkeypatch):
     assert "Dividend trap risk: low" in context
 
 
+def test_dividend_defensive_context_triggers_for_telecom_operator(monkeypatch):
+    _base_mocks(
+        monkeypatch,
+        basic={"name": "\u4e2d\u56fd\u7535\u4fe1", "industry": "\u7535\u4fe1\u8fd0\u8425"},
+        daily={"trade_date": "20260525", "dv_ttm": 3.1, "dv_ratio": 60, "pe_ttm": 17, "pb": 1.2, "total_mv": 600000},
+        income=pd.DataFrame([{"end_date": "20251231", "total_revenue": 500, "n_income_attr_p": 30}]),
+        cashflow=pd.DataFrame(
+            [{"end_date": "20251231", "n_cashflow_act": 90, "c_pay_acq_const_fiolta": 40, "c_pay_dist_dpcp_int_exp": 18}]
+        ),
+    )
+
+    context = ddr.get_dividend_defensive_context("601728.SH", "2026-05-26")
+
+    assert "Status: triggered" in context
+    assert "Dividend defensive verification context" in context
+
+
 def test_dividend_defensive_context_flags_trap_risk_on_cut_and_weak_coverage(monkeypatch):
     dividends = pd.DataFrame(
         [

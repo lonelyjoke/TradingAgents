@@ -150,6 +150,40 @@ several sell-side-depth bridges:
 The system now pushes those requirements into the sell-side quality-audit
 context, the PM generation prompt, and the post-run report-depth validator.
 
+The China Telecom sample exposed a third systemic problem: the saved context
+chain can look superficially rich while several upstream modules are routed to
+the wrong industry. In that run, telecom-operator evidence coexisted with a
+lithium/metals KPI and forecast playbook, while unrelated AI optical-module,
+software, medical-device, and compute-leasing modules were marked as ready.
+The final memo partly recovered because the PM layer had enough telecom facts,
+but the system health audit correctly showed that the research chain was not
+stable.
+
+The fix generalizes beyond one ticker:
+
+- Industry KPI routing now has a telecom-operator / high-dividend SOE playbook
+  covering mobile subscribers, 5G penetration, mobile ARPU, broadband/home
+  ARPU, cloud/AI/IDC revenue and margin, capex-to-revenue, depreciation, FCF,
+  payout ratio, net cash/debt, dividend yield, and China Mobile / China Unicom
+  relative allocation.
+- Forecast scaffolds now use a telecom-native revenue and cash-flow bridge:
+  mobile subscribers x ARPU, broadband subscribers x home ARPU, enterprise /
+  cloud / AI revenue, EBITDA/operating profit after depreciation, and dividend
+  capacity from FCF after capex.
+- Commodity context now returns not-applicable for telecom operators instead
+  of forcing a product-price spread model.
+- Optical-module, software, medical-device, and compute-leasing contexts now
+  require direct evidence before triggering for telecom operators; telecom
+  cloud/AI should live inside the operator playbook unless a separately
+  disclosed third-party compute-leasing or software/device business is proven.
+- Dividend-defensive routing now recognizes `电信运营`, `通信运营`, `运营商`,
+  `通信服务`, and SOE defensive wording so high-dividend operators enter the
+  payout-sustainability playbook.
+- Report-depth validation now flags saved-context mismatches when
+  telecom-operator evidence is mixed with lithium-battery/metals playbooks.
+- Data coverage classifies explicitly gated not-applicable contexts as
+  `not_applicable`, reducing false health signals from irrelevant modules.
+
 ## Direction To Reach Stable Deep Sell-side Reports
 
 The next phase should focus on stability, not more isolated modules:

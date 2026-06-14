@@ -5,6 +5,7 @@ from dataclasses import dataclass
 import pandas as pd
 
 from .thematic_research import _compact_text, _load_financial_report_texts
+from .industry_identity import is_telecom_operator_text
 from .tushare_a_stock import (
     TushareDataError,
     _fetch_balance_sheet_data,
@@ -127,6 +128,8 @@ def _company_profile(symbol: str, curr_date: str, look_back_days: int) -> Optica
 
     _, report_texts = _load_financial_report_texts(symbol, curr_date, look_back_days)
     text_probe = " ".join(text[:3000] for _, text in report_texts[:4])
+    if symbol not in OPTICAL_MODULE_SYMBOLS and is_telecom_operator_text(company_name, industry, text_probe):
+        return None
 
     if symbol in OPTICAL_MODULE_SYMBOLS:
         reason = "curated A-share AI optical-module supply-chain ticker list"

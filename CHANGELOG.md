@@ -27,6 +27,11 @@ Breaking changes within the 0.x line are called out explicitly.
 - Wind/offshore equipment playbook support in the derived KPI and forecast
   layers, including order backlog, contract liabilities, project ASP/mix, steel
   cost, utilization, port/logistics constraints, capex, FX, and cash conversion.
+- Telecom-operator / high-dividend SOE playbook support in the derived KPI and
+  forecast layers, including subscriber/ARPU bridges, broadband/home ARPU,
+  enterprise cloud/AI/IDC drivers, capex/depreciation, FCF coverage, payout
+  sustainability, dividend yield, and China Mobile / China Unicom relative
+  allocation.
 
 ### Changed
 
@@ -54,6 +59,11 @@ Breaking changes within the 0.x line are called out explicitly.
   order/backlog bridges, true-peer alternatives, bull/base/bear sensitivity,
   second-curve optionality treatment, and evidence-grade disclosure for
   decisive claims.
+- A-share health routing now marks irrelevant telecom-operator commodity,
+  optical-module, software, medical-device, and compute-leasing contexts as
+  not applicable unless direct evidence proves the specialized business, while
+  dividend-defensive routing recognizes telecom operators and SOE defensive
+  profiles.
 
 ## [0.2.4] — 2026-04-25
 

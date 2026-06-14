@@ -9,6 +9,8 @@ from __future__ import annotations
 import re
 from typing import Mapping
 
+from .industry_identity import is_telecom_operator_text
+
 
 def _compact_line(line: str, *, max_len: int = 260) -> str:
     line = re.sub(r"\s+", " ", (line or "").strip())
@@ -33,6 +35,18 @@ def _matching_lines(text: str, patterns: tuple[str, ...], *, limit: int = 6) -> 
 
 def _detect_playbook(symbol: str, combined_text: str) -> tuple[str, list[tuple[str, str, str]]]:
     lower = f"{symbol}\n{combined_text}".lower()
+    if is_telecom_operator_text(symbol, combined_text):
+        return (
+            "telecom operator / high-dividend SOE",
+            [
+                ("Mobile", "mobile subscribers, 5G penetration, mobile ARPU, DOU, churn, package mix", "service revenue and margin durability"),
+                ("Broadband/Home", "broadband subscribers, household ARPU, gigabit penetration, smart-home attach", "cash-cow stability"),
+                ("Enterprise/Cloud", "IDC, cloud revenue, cloud gross margin, AI/industry-digital revenue, contract liabilities", "second-curve growth and margin mix"),
+                ("Capex", "5G/cloud/AI capex, depreciation, network utilization, capex-to-revenue", "FCF and ROIC"),
+                ("Cash/Dividend", "OCF, FCF after capex, payout ratio, net cash/debt, dividend yield", "defensive yield and downside protection"),
+                ("Peer Allocation", "China Mobile / China Unicom comparison, ARPU, ROE, FCF, dividend, cloud growth", "relative allocation"),
+            ],
+        )
     wind_hits = sum(
         token in combined_text
         for token in ("风电", "海上风电", "海风", "塔筒", "管桩", "导管架", "海工", "风电装备", "风机")
@@ -170,6 +184,7 @@ def build_industry_kpi_context(
             r"capacity|utilization|shipment|installation|GWh|market share|share",
             r"contract liabilit|backlog|order|inventory|cash flow|capex",
             r"锂|电池|储能|装机|份额|产能|利用率|合同负债|库存|价格|毛利|现金流",
+            r"ARPU|subscriber|broadband|cloud|IDC|capex|dividend|payout|用户|宽带|天翼云|智算|资本开支|分红|派息",
         ),
         limit=10,
     )

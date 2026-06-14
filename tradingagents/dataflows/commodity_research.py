@@ -13,6 +13,7 @@ except ModuleNotFoundError:  # pragma: no cover - exercised when optional dep is
     Selector = None
 
 from .industry_classifier import banking_profile_hint, is_banking_entity
+from .industry_identity import is_telecom_operator_text
 from .tushare_a_stock import (
     TushareDataError,
     _fetch_stock_basic,
@@ -822,6 +823,12 @@ def _infer_products(symbol: str, curr_date: str | None = None, look_back_days: i
             "name": _format_value(basic.get("name")),
             "products": [],
             "spread_note": "Not applicable: financial institutions do not have a primary commodity/product-price spread driver. Use bank/financial KPIs instead.",
+        }
+    if is_telecom_operator_text(symbol, haystack, filing_probe):
+        return {
+            "name": _format_value(basic.get("name")),
+            "products": [],
+            "spread_note": "Not applicable: telecom operators do not have a primary commodity/product-price spread driver. Use telecom ARPU, subscribers, cloud/AI, capex, FCF, and dividend KPIs instead.",
         }
     products = []
     wind_equipment = any(

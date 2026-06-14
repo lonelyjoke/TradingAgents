@@ -7,6 +7,7 @@ from typing import Iterable
 import pandas as pd
 
 from .config import get_config
+from .industry_identity import is_telecom_operator_text
 from .investor_interaction_research import fetch_investor_interaction_history
 from .thematic_research import _load_financial_report_texts
 from .tushare_a_stock import TushareDataError, _fetch_stock_basic, _format_value, is_a_share_symbol
@@ -457,6 +458,16 @@ def get_compute_leasing_context(
     config = get_config()
     if not config.get("compute_leasing_context_enabled", True):
         return "# Compute-leasing verification layer disabled\n\n- Status: not_applicable"
+
+    company_name, industry = _company_profile(symbol)
+    if is_telecom_operator_text(company_name, industry):
+        return _render_not_applicable(
+            symbol,
+            curr_date,
+            "telecom operator / cloud-network company; route AI/cloud compute into telecom-operator playbook unless a separately disclosed third-party compute-leasing business is proven",
+            [],
+            [],
+        )
 
     hits, errors = _fetch_sources(
         symbol,

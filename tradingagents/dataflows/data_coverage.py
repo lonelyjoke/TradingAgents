@@ -84,6 +84,8 @@ NOT_APPLICABLE_PATTERNS = (
     "no curated software mapping",
     "no curated compute-leasing mapping",
     "no curated metals/mining mapping",
+    "no curated or inferred supply-chain map is available",
+    "not applicable: telecom operators do not have a primary commodity/product-price spread driver",
 )
 
 SUCCESS_HINTS = (

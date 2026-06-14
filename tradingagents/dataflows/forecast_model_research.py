@@ -5,6 +5,8 @@ from __future__ import annotations
 import re
 from typing import Mapping
 
+from .industry_identity import is_telecom_operator_text
+
 
 def _compact_lines(text: str, patterns: tuple[str, ...], *, limit: int = 8) -> list[str]:
     compiled = [re.compile(pattern, re.I) for pattern in patterns]
@@ -82,7 +84,15 @@ def build_forecast_model_context(
         ),
         limit=10,
     )
-    if _is_wind_power_context(symbol, combined):
+    if is_telecom_operator_text(symbol, combined):
+        drivers = [
+            ("Mobile service revenue", "mobile subscribers x mobile ARPU", "5G penetration, package mix, churn, DOU, pricing discipline"),
+            ("Broadband / home revenue", "broadband subscribers x household ARPU", "gigabit penetration, smart-home attach, bundling"),
+            ("Enterprise / cloud / AI revenue", "customer count x cloud/IDC/AI ARPU or project revenue", "cloud growth, AI paid adoption, IDC utilization, contract liabilities"),
+            ("EBITDA / operating profit", "service revenue x margin - depreciation - SG&A/R&D", "network scale, cloud gross margin, depreciation, personnel and maintenance cost"),
+            ("net profit/EPS / dividend capacity", "operating profit - tax/minority + FCF after capex", "capex-to-revenue, OCF/NI, payout ratio, net cash/debt"),
+        ]
+    elif _is_wind_power_context(symbol, combined):
         drivers = [
             ("Wind-equipment revenue", "opening backlog + new orders - delivered orders", "offshore wind tenders, overseas customer awards, delivery schedule"),
             ("Project ASP / mix", "delivered tonnage or MW-equivalent x project ASP", "monopile/jacket/tower mix, export share, FX clauses"),
