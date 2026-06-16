@@ -89,6 +89,7 @@ class AgentState(MessagesState):
     industry_kpi_context: Annotated[str, "Derived industry-specific KPI checklist and evidence-gap map"]
     forecast_model_context: Annotated[str, "Derived forward forecast-model scaffold and three-year driver bridge"]
     quality_audit_context: Annotated[str, "Derived sell-side depth and key-number audit context"]
+    thesis_question_context: Annotated[str, "Derived company-specific soul-question agenda for bull/bear debate"]
     data_coverage_context: Annotated[str, "Audit of which precomputed context modules loaded successfully and which failed or are partial"]
 
     # researcher team discussion step

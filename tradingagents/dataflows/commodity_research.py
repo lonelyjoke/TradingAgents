@@ -77,6 +77,13 @@ METAL_FUTURES_SOURCE_REGISTRY = {
         "overseas_cross_checks": "LME aluminum",
         "coverage": "live domestic futures via Tushare; overseas sources are research cross-checks, not fetched by this module",
     },
+    "Alumina": {
+        "domestic_exchange": "SHFE",
+        "tushare_prefix": "AO",
+        "contract_example": "AO.SHF",
+        "overseas_cross_checks": "domestic alumina spot assessments from SMM / Baiinfo / Mysteel when licensed",
+        "coverage": "live domestic futures via Tushare as an alumina cost/spread proxy; spot assessments require separate licensed data",
+    },
     "Zinc": {
         "domestic_exchange": "SHFE",
         "tushare_prefix": "ZN",
@@ -131,6 +138,15 @@ def _metal_product(name: str, role: str = "main product") -> dict:
         "prefix": source["tushare_prefix"],
         "exchange": source["domestic_exchange"],
         "overseas_cross_checks": source["overseas_cross_checks"],
+    }
+
+
+def _unavailable_key_driver(name: str, role: str, source_hint: str) -> dict:
+    return {
+        "name": name,
+        "type": "unavailable_key_driver",
+        "role": role,
+        "source_hint": source_hint,
     }
 
 
@@ -192,13 +208,34 @@ COMPANY_COMMODITY_MAP = {
     },
     "601600.SH": {
         "name": "Chalco",
-        "products": [_metal_product("Aluminum")],
-        "spread_note": "Use SHFE aluminum as the timely proxy; alumina, power cost, and capacity utilization drive spreads.",
+        "products": [
+            _metal_product("Aluminum"),
+            _metal_product("Alumina", "raw-material / upstream spread proxy"),
+            _unavailable_key_driver(
+                "Power cost",
+                "electricity input cost driver",
+                "company filings, regional tariff/self-generation disclosures, or licensed power-cost datasets",
+            ),
+            _unavailable_key_driver(
+                "Carbon anode cost",
+                "carbon/anode input cost driver",
+                "company filings or licensed petroleum-coke / prebaked-anode spot datasets",
+            ),
+        ],
+        "spread_note": "Use SHFE aluminum as the timely selling-price proxy and SHFE alumina as a cost/spread proxy; power cost, anode cost, and capacity utilization still require company disclosures or licensed datasets. Missing cost data is a neutral evidence gap, not bearish evidence.",
     },
     "000807.SZ": {
         "name": "Yunnan Aluminium",
-        "products": [_metal_product("Aluminum")],
-        "spread_note": "Use SHFE aluminum as the timely proxy; power cost, hydro availability, and alumina cost determine margin pass-through.",
+        "products": [
+            _metal_product("Aluminum"),
+            _metal_product("Alumina", "raw-material / upstream spread proxy"),
+            _unavailable_key_driver(
+                "Power cost",
+                "hydro/power-tariff input cost driver",
+                "company filings, regional hydropower/tariff disclosures, or licensed power-cost datasets",
+            ),
+        ],
+        "spread_note": "Use SHFE aluminum as the timely selling-price proxy and SHFE alumina as a cost/spread proxy; power cost, hydro availability, and capacity utilization determine margin pass-through. Missing cost data is a neutral evidence gap, not bearish evidence.",
     },
     "000426.SZ": {
         "name": "Xingye Silver & Tin",
@@ -728,6 +765,21 @@ def _fetch_futures_product(product: dict, curr_date: str, look_back_days: int) -
         }
 
 
+def _missing_key_driver_row(product: dict) -> dict:
+    return {
+        "product": product.get("name", ""),
+        "role": product.get("role", ""),
+        "data_type": "unavailable key driver",
+        "latest_contract_or_source": product.get("source_hint", "No reliable mapped source"),
+        "latest_price": "N/A",
+        "latest_date": "N/A",
+        "change_over_window": "N/A",
+        "inventory_or_receipt": "N/A",
+        "evidence_status": "Missing; neutral for direction, confidence cap only.",
+        "evidence": "Do not treat this unavailable cost driver as margin deterioration or margin resilience without independent verified evidence.",
+    }
+
+
 def _query_futures_history(ts_code: str, exchange: str, start: str, end: str) -> pd.DataFrame:
     fields = "ts_code,trade_date,close,vol,oi"
     exchanges = EXCHANGE_ALIASES.get(exchange.upper(), [exchange, ""])
@@ -964,6 +1016,8 @@ def get_commodity_context(ticker: str, curr_date: str, look_back_days: int = 90)
             rows.append(_fetch_web_spot(product))
         elif product.get("type") == "moa_livestock":
             rows.append(_fetch_moa_livestock_market(product, curr_date))
+        elif product.get("type") == "unavailable_key_driver":
+            rows.append(_missing_key_driver_row(product))
 
     lines = [
         f"# Commodity and product price context for {symbol} as of {curr_date}",
@@ -1001,6 +1055,7 @@ def get_commodity_context(ticker: str, curr_date: str, look_back_days: int = 90)
         "- Treat whitelist web pages as evidence snippets unless an exact price/date/unit is parsed and shown.",
         "- Do not state R32, R125, lithium, copper, gold, inventory, or spread changes as facts unless they appear in the evidence table.",
         "- If the product has no reliable data source, list it as an unverified key variable instead of inventing a price change.",
+        "- If a thesis-critical input is marked missing, treat it as neutral for direction and only as a confidence cap; it cannot prove margin deterioration or margin resilience by itself.",
     ]
     if has_livestock_products:
         instructions[3:3] = [

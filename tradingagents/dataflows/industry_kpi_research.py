@@ -33,6 +33,69 @@ def _matching_lines(text: str, patterns: tuple[str, ...], *, limit: int = 6) -> 
     return rows
 
 
+def _metals_context_triggered(text: str) -> bool:
+    return "status: triggered" in (text or "").lower() and "metals-mining" in (text or "").lower()
+
+
+def _metals_covered(text: str) -> str:
+    match = re.search(r"metals covered:\s*([^\n]+)", text or "", re.I)
+    return match.group(1).strip().lower() if match else ""
+
+
+def _metals_playbook(symbol: str, combined_text: str) -> tuple[str, list[tuple[str, str, str]]] | None:
+    covered = _metals_covered(combined_text)
+    lower = f"{symbol}\n{combined_text}".lower()
+    if "aluminum" in covered or "601600" in lower or "000807" in lower or "铝" in combined_text:
+        return (
+            "nonferrous metals / aluminum chain",
+            [
+                ("Cycle/Price", "SHFE/LME aluminum price, curve, inventory, LME-SHFE spread, import/export arbitrage", "realized ASP and cycle stage"),
+                ("Cost Spread", "alumina price, bauxite cost/self-supply, power tariff/self-generation, anode/carbon cost", "smelting margin and gross margin"),
+                ("Supply Discipline", "domestic capacity ceiling, operating rate, curtailments/restarts, policy and energy constraints", "supply elasticity and margin durability"),
+                ("Demand Mix", "property/construction, grid, PV, EV lightweighting, packaging, exports, general manufacturing", "volume, mix, and pricing resilience"),
+                ("Segment Economics", "alumina, primary aluminum, trading, energy and overseas segment revenue/margin split", "valuation bucket and SOTP treatment"),
+                ("Cash/Balance Sheet", "inventory, receivables, contract liabilities, OCF/NI, capex, debt maturity, dividend coverage", "cycle survival and payout capacity"),
+            ],
+        )
+    if "copper" in covered or any(code in lower for code in ("601899", "600362", "000630", "000878", "601168")):
+        return (
+            "nonferrous metals / copper-mining-smelting",
+            [
+                ("Cycle/Price", "SHFE/LME/COMEX copper price, curve, warehouse inventory, premiums/discounts, import arbitrage", "realized ASP and cycle stage"),
+                ("Mine Assets", "reserve/resource tonnage, grade, recovery rate, mine life, equity copper output and ramp", "resource quality and volume runway"),
+                ("Cost Curve", "cash cost, AISC/unit cost, sustaining capex, by-product credits, FX and energy/labor sensitivity", "margin resilience and downside"),
+                ("Smelting Spread", "TC/RC, concentrate sourcing, cathode premium, utilization, inventory and derivative exposure", "smelting/refining profit pool"),
+                ("Segment/SOTP", "mining, smelting/refining, processing, trading and new-project NAV split", "valuation bucket and multiple/NAV treatment"),
+                ("Cash/Risk", "working capital, hedging, impairment, leverage, jurisdiction risk, project capex", "earnings quality and balance-sheet survival"),
+            ],
+        )
+    if "gold" in covered or "黄金" in combined_text:
+        return (
+            "nonferrous metals / precious metals",
+            [
+                ("Macro Price", "SHFE/COMEX gold/silver, real rates, USD, central-bank buying, risk premium", "realized ASP and multiple support"),
+                ("Mine Assets", "reserve/resource tonnage, grade, recovery, mine life, equity gold/silver output", "asset quality and production runway"),
+                ("Cost Curve", "cash cost, AISC per gram/ounce, sustaining capex, labor/energy/FX", "margin resilience and downside"),
+                ("Growth Projects", "mine ramp, acquisition integration, capex, permitting, jurisdiction risk", "NAV optionality and execution risk"),
+                ("Risk Management", "hedging, inventory, impairment, taxes/royalties, minority interest, debt maturity", "earnings quality and FCF"),
+                ("Valuation", "NAV/P-NAV, EV/resource, PE/FCF cross-check, dividend coverage", "probability/payoff and peer allocation"),
+            ],
+        )
+    if "lithium" in covered or "锂" in combined_text:
+        return (
+            "lithium / metals cycle",
+            [
+                ("Price", "lithium carbonate/hydroxide price, futures curve, realized ASP", "revenue and inventory gains/losses"),
+                ("Spread", "ore/salt-lake/brine cost, processing spread, by-product credits", "cash margin"),
+                ("Inventory", "industry and company inventory, downstream restocking/destocking", "cycle stage"),
+                ("Output", "equity resource output, conversion capacity, ramp schedule", "volume"),
+                ("Demand", "battery installation, ESS, cathode output, export/import", "end demand"),
+                ("Cost Curve", "peer cost curve, project grade, AISC/cash cost, impairment risk", "moat and downside"),
+            ],
+        )
+    return None
+
+
 def _detect_playbook(symbol: str, combined_text: str) -> tuple[str, list[tuple[str, str, str]]]:
     lower = f"{symbol}\n{combined_text}".lower()
     if is_telecom_operator_text(symbol, combined_text):
@@ -45,6 +108,74 @@ def _detect_playbook(symbol: str, combined_text: str) -> tuple[str, list[tuple[s
                 ("Capex", "5G/cloud/AI capex, depreciation, network utilization, capex-to-revenue", "FCF and ROIC"),
                 ("Cash/Dividend", "OCF, FCF after capex, payout ratio, net cash/debt, dividend yield", "defensive yield and downside protection"),
                 ("Peer Allocation", "China Mobile / China Unicom comparison, ARPU, ROE, FCF, dividend, cloud growth", "relative allocation"),
+            ],
+        )
+    metals_playbook = _metals_playbook(symbol, combined_text)
+    if _metals_context_triggered(combined_text) and metals_playbook is not None:
+        return metals_playbook
+    metals_hits = sum(
+        token in combined_text
+        for token in (
+            "有色金属",
+            "铜",
+            "铝",
+            "锌",
+            "铅",
+            "锡",
+            "金",
+            "银",
+            "矿山",
+            "矿业",
+            "采矿",
+            "采选",
+            "冶炼",
+            "矿石",
+            "品位",
+            "储量",
+            "权益产量",
+            "现金成本",
+            "完全成本",
+            "加工费",
+            "套期保值",
+        )
+    ) + sum(
+        token in lower
+        for token in (
+            "601168",
+            "601899",
+            "600362",
+            "000630",
+            "000878",
+            "600547",
+            "copper",
+            "aluminum",
+            "zinc",
+            "lead",
+            "gold",
+            "silver",
+            "mining",
+            "smelting",
+            "aisc",
+            "tc/rc",
+            "nav/sotp",
+        )
+    )
+    battery_chain_hits = sum(
+        token in combined_text
+        for token in ("动力电池", "储能电池", "锂离子电池", "正极材料", "磷酸铁锂", "三元材料", "前驱体", "电池材料")
+    ) + sum(token in lower for token in ("300750", "battery", "cathode", "precursor", "lfp"))
+    if metals_hits >= 2 and battery_chain_hits == 0:
+        if metals_playbook is not None:
+            return metals_playbook
+        return (
+            "nonferrous metals / mining",
+            [
+                ("Cycle", "SHFE/LME/COMEX price, futures curve, inventory, import/export, TC/RC or processing spread", "cycle stage and realized price"),
+                ("Resource", "reserve/resource tonnage, grade, recovery rate, mine life, equity output by mine", "asset quality and volume runway"),
+                ("Cost Curve", "cash cost, AISC/unit cost, sustaining capex, energy/labor/FX sensitivity", "margin resilience and downside"),
+                ("Segment Mix", "mining, smelting/refining, processing, trading revenue and margin split", "valuation bucket and multiple/NAV treatment"),
+                ("Projects", "capex budget, construction-in-progress, commissioning, permitting, jurisdiction risk", "NAV/SOTP optionality and execution risk"),
+                ("Risk/Cash", "hedging, derivatives, inventory marks, working capital, OCF/NI, leverage, debt maturity", "earnings quality and cycle survival"),
             ],
         )
     wind_hits = sum(
@@ -104,7 +235,7 @@ def _detect_playbook(symbol: str, combined_text: str) -> tuple[str, list[tuple[s
                 ("Backlog", "contract liabilities, orders, storage pipeline, customer concentration", "visibility"),
             ],
         )
-    if any(token in lower for token in ["002460", "赣锋", "锂", "lithium", "metals", "mining"]):
+    if any(token in lower for token in ["002460", "赣锋", "锂", "lithium"]):
         return (
             "lithium / metals cycle",
             [
@@ -159,6 +290,7 @@ def build_industry_kpi_context(
     industry_cycle_context: str = "",
     company_business_model_context: str = "",
     commodity_context: str = "",
+    metals_mining_context: str = "",
     peer_comparison_context: str = "",
     investor_interaction_context: str = "",
     policy_planning_context: str = "",
@@ -169,6 +301,7 @@ def build_industry_kpi_context(
             filing_intelligence_context,
             industry_cycle_context,
             company_business_model_context,
+            metals_mining_context,
             commodity_context,
             peer_comparison_context,
             investor_interaction_context,
@@ -183,7 +316,7 @@ def build_industry_kpi_context(
             r"revenue|profit|gross margin|ASP|price|latest_price|change_over_window",
             r"capacity|utilization|shipment|installation|GWh|market share|share",
             r"contract liabilit|backlog|order|inventory|cash flow|capex",
-            r"锂|电池|储能|装机|份额|产能|利用率|合同负债|库存|价格|毛利|现金流",
+            r"铝|铜|锌|铅|锡|金|银|氧化铝|电力|电价|铝土矿|加工费|TC/RC|AISC|品位|储量|权益产量|锂|电池|储能|装机|份额|产能|利用率|合同负债|库存|价格|毛利|现金流",
             r"ARPU|subscriber|broadband|cloud|IDC|capex|dividend|payout|用户|宽带|天翼云|智算|资本开支|分红|派息",
         ),
         limit=10,
@@ -231,6 +364,7 @@ def get_industry_kpi_context(
         industry_cycle_context=supplied.get("industry_cycle_context", ""),
         company_business_model_context=supplied.get("company_business_model_context", ""),
         commodity_context=supplied.get("commodity_context", ""),
+        metals_mining_context=supplied.get("metals_mining_context", ""),
         peer_comparison_context=supplied.get("peer_comparison_context", ""),
         investor_interaction_context=supplied.get("investor_interaction_context", ""),
         policy_planning_context=supplied.get("policy_planning_context", ""),

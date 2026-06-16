@@ -125,6 +125,7 @@ def test_metal_price_registry_covers_core_domestic_and_overseas_links():
         "Silver": ("SHFE", "AG", "COMEX SI futures"),
         "Copper": ("SHFE", "CU", "COMEX HG futures"),
         "Aluminum": ("SHFE", "AL", "LME aluminum"),
+        "Alumina": ("SHFE", "AO", "domestic alumina spot"),
         "Zinc": ("SHFE", "ZN", "LME zinc"),
         "Lead": ("SHFE", "PB", "LME lead"),
         "Nickel": ("SHFE", "NI", "LME nickel"),
@@ -147,6 +148,37 @@ def test_gold_company_mapping_uses_shfe_gold_proxy():
     assert product["name"] == "Gold"
     assert product["prefix"] == "AU"
     assert product["exchange"] == "SHFE"
+
+
+def test_chalco_mapping_fetches_alumina_and_marks_unavailable_costs_neutral(monkeypatch):
+    monkeypatch.setattr(
+        commodity_research,
+        "_fetch_futures_product",
+        lambda product, curr_date, look_back_days: {
+            "product": product["name"],
+            "role": product.get("role", ""),
+            "data_type": "Tushare futures proxy",
+            "latest_contract_or_source": f"{product['prefix']}.SHF",
+            "latest_price": "100",
+            "latest_date": "20260616",
+            "change_over_window": "N/A",
+            "inventory_or_receipt": "N/A",
+            "evidence_status": "Verified by Tushare futures daily data.",
+            "evidence": "mock futures evidence",
+        },
+    )
+
+    mapping = _infer_products("601600.SH")
+    context = commodity_research.get_commodity_context("601600.SH", "2026-06-16")
+    product_names = {product["name"] for product in mapping["products"]}
+
+    assert {"Aluminum", "Alumina", "Power cost", "Carbon anode cost"} <= product_names
+    assert "Alumina" in context
+    assert "AO.SHF" in context
+    assert "Power cost" in context
+    assert "Carbon anode cost" in context
+    assert "Missing; neutral for direction, confidence cap only." in context
+    assert "cannot prove margin deterioration" in context
 
 
 def test_hunan_yuneng_uses_lithium_carbonate_cost_proxy():

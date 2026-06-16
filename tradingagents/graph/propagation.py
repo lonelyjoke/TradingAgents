@@ -54,6 +54,7 @@ class Propagator:
         industry_kpi_context: str = "",
         forecast_model_context: str = "",
         quality_audit_context: str = "",
+        thesis_question_context: str = "",
         data_coverage_context: str = "",
     ) -> Dict[str, Any]:
         """Create the initial state for the agent graph."""
@@ -96,6 +97,7 @@ class Propagator:
             "industry_kpi_context": industry_kpi_context,
             "forecast_model_context": forecast_model_context,
             "quality_audit_context": quality_audit_context,
+            "thesis_question_context": thesis_question_context,
             "data_coverage_context": data_coverage_context,
             "investment_debate_state": InvestDebateState(
                 {

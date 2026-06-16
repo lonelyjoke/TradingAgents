@@ -33,6 +33,41 @@ def test_lithium_industry_kpi_checklist_uses_metals_cycle_drivers():
     assert "inventory" in context.lower()
 
 
+def test_copper_miner_kpi_checklist_uses_nonferrous_mining_drivers():
+    context = build_industry_kpi_context(
+        "601168.SH",
+        "2026-06-16",
+        filing_intelligence_context="西部矿业主营铜、锌、铅等有色金属采选冶，矿山储量、品位、权益产量和冶炼加工费影响利润。",
+        company_business_model_context="Business model: multi-metal mining, beneficiation, smelting, and trading platform.",
+    )
+
+    assert "nonferrous metals / copper-mining-smelting" in context
+    assert "reserve/resource tonnage" in context
+    assert "TC/RC" in context
+    assert "Segment/SOTP" in context
+    assert "new-project NAV split" in context
+    assert "battery / energy-storage chain" not in context
+
+
+def test_aluminum_kpi_checklist_uses_nonferrous_chain_even_with_battery_downstream_mentions():
+    context = build_industry_kpi_context(
+        "601600.SH",
+        "2026-06-16",
+        filing_intelligence_context=(
+            "中国铝业主营氧化铝、电解铝和贸易，铝价、氧化铝、电力成本、"
+            "产能利用率影响利润。动力电池只是铝需求下游之一。"
+        ),
+        commodity_context="# Commodity\n\n| Aluminum | main product |\n| Alumina | cost/spread driver |",
+        metals_mining_context="# Metals-mining verification context\n\n- Status: triggered\n- Metals covered: Aluminum",
+    )
+
+    assert "nonferrous metals / aluminum chain" in context
+    assert "alumina price" in context
+    assert "power tariff" in context
+    assert "LME-SHFE spread" in context
+    assert "battery / energy-storage chain" not in context
+
+
 def test_battery_material_kpi_checklist_uses_spread_drivers():
     context = build_industry_kpi_context(
         "301999.SZ",
@@ -134,6 +169,38 @@ def test_forecast_model_scaffold_uses_telecom_operator_bridge():
     assert "Cathode / material revenue" not in context
 
 
+def test_forecast_model_scaffold_uses_metals_mining_bridge():
+    context = build_forecast_model_context(
+        "601168.SH",
+        "2026-06-16",
+        company_business_model_context="公司主营铜、锌、铅等有色金属采选冶，盈利取决于权益产量、储量品位、冶炼加工费和现金成本。",
+        industry_kpi_context="Playbook: nonferrous metals / mining. Required KPI Map: reserve/resource tonnage, AISC, TC/RC, NAV/SOTP.",
+    )
+
+    assert "Mining revenue" in context
+    assert "equity copper/by-product output x realized selling price" in context
+    assert "Smelting / refining spread" in context
+    assert "NAV / SOTP value" in context
+    assert "Cathode / material revenue" not in context
+
+
+def test_forecast_model_scaffold_uses_aluminum_spread_bridge():
+    context = build_forecast_model_context(
+        "601600.SH",
+        "2026-06-16",
+        company_business_model_context="中国铝业是氧化铝和电解铝一体化平台，动力电池只是下游需求之一。",
+        industry_kpi_context="Playbook: nonferrous metals / aluminum chain. Required KPI Map: alumina price, power tariff, LME-SHFE spread.",
+        metals_mining_context="# Metals-mining verification context\n\n- Status: triggered\n- Metals covered: Aluminum",
+    )
+
+    assert "Primary aluminum revenue" in context
+    assert "primary aluminum output x realized aluminum price" in context
+    assert "Alumina / upstream spread" in context
+    assert "Smelting margin" in context
+    assert "power tariff/self-generation" in context
+    assert "Cathode / material revenue" not in context
+
+
 def test_quality_audit_requires_formula_period_and_evidence_status():
     context = build_quality_audit_context(
         "300750.SZ",
@@ -153,6 +220,35 @@ def test_quality_audit_requires_formula_period_and_evidence_status():
     assert "source period" in context
     assert "evidence status" in context
     assert "Weak or incomplete modules" in context
+
+
+def test_quality_audit_flags_metals_template_mismatch_and_missing_aluminum_spread():
+    context = build_quality_audit_context(
+        "601600.SH",
+        "2026-06-16",
+        industry_cycle_context="# Industry Cycle Scan\n\n- Cycle verdict: bottom-testing",
+        company_business_model_context="# Company Business Model Primer\n\nintegrated aluminum and alumina producer",
+        industry_kpi_context="# Industry KPI Checklist\n\n- Playbook: battery / energy-storage chain\ncathode ASP",
+        forecast_model_context="# Forward Forecast Model Scaffold\n\n| Cathode / material revenue | shipment volume x cathode ASP |",
+        peer_comparison_context="# Peer\n\nready",
+        price_earnings_decomposition_context="# PE/PB\n\nready",
+        earnings_model_context="# Earnings\n\nready",
+        filing_intelligence_context="# Filing\n\nready",
+        metals_mining_context="# Metals-mining verification context\n\n- Status: triggered\n- Metals covered: Aluminum",
+        commodity_context=(
+            "# Commodity\n\n"
+            "| product | data_type | latest_price | evidence_status |\n"
+            "| Aluminum | Tushare futures proxy | 23830 | Verified by Tushare futures daily data. |\n"
+            "| Power cost | unavailable key driver | N/A | Missing; neutral for direction, confidence cap only. |"
+        ),
+    )
+
+    assert "Metals/mining KPI routing | partial" in context
+    assert "Metals/mining forecast bridge | partial" in context
+    assert "Aluminum spread driver coverage | partial" in context
+    assert "neutral for direction" in context
+    assert "Underweight/Sell needs independent verified evidence" in context
+    assert "do not permit strong Buy/Sell language" in context
 
 
 def test_new_contexts_are_compacted_and_covered():

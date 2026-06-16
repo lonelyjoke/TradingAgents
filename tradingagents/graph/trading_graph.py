@@ -42,6 +42,7 @@ from tradingagents.dataflows.forecast_model_research import build_forecast_model
 from tradingagents.dataflows.industry_cycle_research import build_industry_cycle_context
 from tradingagents.dataflows.industry_kpi_research import build_industry_kpi_context
 from tradingagents.dataflows.quality_audit_research import build_quality_audit_context
+from tradingagents.dataflows.thesis_question_research import build_thesis_question_context
 
 # Import the new abstract tool methods from agent_utils
 from tradingagents.agents.utils.agent_utils import (
@@ -131,9 +132,11 @@ def _build_precomputed_data_coverage(
     industry_kpi_context: str,
     forecast_model_context: str,
     quality_audit_context: str,
+    thesis_question_context: str,
 ) -> str:
     return build_data_coverage_context(
         {
+            "thesis_question_context": thesis_question_context,
             "industry_cycle_scan": industry_cycle_context,
             "company_business_model": company_business_model_context,
             "industry_kpi_checklist": industry_kpi_context,
@@ -756,6 +759,7 @@ class TradingAgentsGraph:
             industry_cycle_context=industry_cycle_context,
             company_business_model_context=company_business_model_context,
             commodity_context=commodity_context,
+            metals_mining_context=metals_mining_context,
             peer_comparison_context=peer_comparison_context,
             investor_interaction_context=investor_interaction_context,
             policy_planning_context=policy_planning_context,
@@ -769,6 +773,7 @@ class TradingAgentsGraph:
             filing_intelligence_context=filing_intelligence_context,
             peer_comparison_context=peer_comparison_context,
             industry_kpi_context=industry_kpi_context,
+            metals_mining_context=metals_mining_context,
         )
         quality_audit_context = build_quality_audit_context(
             company_name,
@@ -781,6 +786,41 @@ class TradingAgentsGraph:
             price_earnings_decomposition_context=price_earnings_decomposition_context,
             earnings_model_context=earnings_model_context,
             filing_intelligence_context=filing_intelligence_context,
+            metals_mining_context=metals_mining_context,
+            commodity_context=commodity_context,
+        )
+        thesis_question_context = build_thesis_question_context(
+            company_name,
+            str(trade_date),
+            industry_cycle_context=industry_cycle_context,
+            company_business_model_context=company_business_model_context,
+            industry_kpi_context=industry_kpi_context,
+            forecast_model_context=forecast_model_context,
+            quality_audit_context=quality_audit_context,
+            filing_intelligence_context=filing_intelligence_context,
+            peer_comparison_context=peer_comparison_context,
+            supply_chain_comparison_context=supply_chain_comparison_context,
+            earnings_model_context=earnings_model_context,
+            market_expectation_context=market_expectation_context,
+            price_earnings_decomposition_context=price_earnings_decomposition_context,
+            management_capital_allocation_context=management_capital_allocation_context,
+            shareholder_structure_context=shareholder_structure_context,
+            investor_interaction_context=investor_interaction_context,
+            policy_planning_context=policy_planning_context,
+            web_fact_check_context=web_fact_check_context,
+            commodity_context=commodity_context,
+            shipping_context=shipping_context,
+            baijiu_context=baijiu_context,
+            compute_leasing_context=compute_leasing_context,
+            dividend_defensive_context=dividend_defensive_context,
+            building_materials_context=building_materials_context,
+            consumer_staples_context=consumer_staples_context,
+            optical_module_context=optical_module_context,
+            biopharma_context=biopharma_context,
+            software_context=software_context,
+            insurance_context=insurance_context,
+            medical_device_context=medical_device_context,
+            metals_mining_context=metals_mining_context,
         )
         data_coverage_context = _build_precomputed_data_coverage(
             thematic_catalyst_context=thematic_catalyst_context,
@@ -816,6 +856,7 @@ class TradingAgentsGraph:
             industry_kpi_context=industry_kpi_context,
             forecast_model_context=forecast_model_context,
             quality_audit_context=quality_audit_context,
+            thesis_question_context=thesis_question_context,
         )
         return self.propagator.create_initial_state(
             company_name,
@@ -855,6 +896,7 @@ class TradingAgentsGraph:
             industry_kpi_context=industry_kpi_context,
             forecast_model_context=forecast_model_context,
             quality_audit_context=quality_audit_context,
+            thesis_question_context=thesis_question_context,
             data_coverage_context=data_coverage_context,
         )
 
@@ -924,6 +966,7 @@ class TradingAgentsGraph:
             industry_cycle_context=industry_cycle_context,
             company_business_model_context=company_business_model_context,
             commodity_context=commodity_context,
+            metals_mining_context=metals_mining_context,
             peer_comparison_context=peer_comparison_context,
             investor_interaction_context=investor_interaction_context,
             policy_planning_context=policy_planning_context,
@@ -937,6 +980,7 @@ class TradingAgentsGraph:
             filing_intelligence_context=filing_intelligence_context,
             peer_comparison_context=peer_comparison_context,
             industry_kpi_context=industry_kpi_context,
+            metals_mining_context=metals_mining_context,
         )
         quality_audit_context = build_quality_audit_context(
             company_name,
@@ -949,6 +993,41 @@ class TradingAgentsGraph:
             price_earnings_decomposition_context=price_earnings_decomposition_context,
             earnings_model_context=earnings_model_context,
             filing_intelligence_context=filing_intelligence_context,
+            metals_mining_context=metals_mining_context,
+            commodity_context=commodity_context,
+        )
+        thesis_question_context = build_thesis_question_context(
+            company_name,
+            str(trade_date),
+            industry_cycle_context=industry_cycle_context,
+            company_business_model_context=company_business_model_context,
+            industry_kpi_context=industry_kpi_context,
+            forecast_model_context=forecast_model_context,
+            quality_audit_context=quality_audit_context,
+            filing_intelligence_context=filing_intelligence_context,
+            peer_comparison_context=peer_comparison_context,
+            supply_chain_comparison_context=supply_chain_comparison_context,
+            earnings_model_context=earnings_model_context,
+            market_expectation_context=market_expectation_context,
+            price_earnings_decomposition_context=price_earnings_decomposition_context,
+            management_capital_allocation_context=management_capital_allocation_context,
+            shareholder_structure_context=shareholder_structure_context,
+            investor_interaction_context=investor_interaction_context,
+            policy_planning_context=policy_planning_context,
+            web_fact_check_context=web_fact_check_context,
+            commodity_context=commodity_context,
+            shipping_context=shipping_context,
+            baijiu_context=baijiu_context,
+            compute_leasing_context=compute_leasing_context,
+            dividend_defensive_context=dividend_defensive_context,
+            building_materials_context=building_materials_context,
+            consumer_staples_context=consumer_staples_context,
+            optical_module_context=optical_module_context,
+            biopharma_context=biopharma_context,
+            software_context=software_context,
+            insurance_context=insurance_context,
+            medical_device_context=medical_device_context,
+            metals_mining_context=metals_mining_context,
         )
         data_coverage_context = _build_precomputed_data_coverage(
             thematic_catalyst_context=thematic_catalyst_context,
@@ -984,6 +1063,7 @@ class TradingAgentsGraph:
             industry_kpi_context=industry_kpi_context,
             forecast_model_context=forecast_model_context,
             quality_audit_context=quality_audit_context,
+            thesis_question_context=thesis_question_context,
         )
         init_agent_state = self.propagator.create_initial_state(
             company_name,
@@ -1023,6 +1103,7 @@ class TradingAgentsGraph:
             industry_kpi_context=industry_kpi_context,
             forecast_model_context=forecast_model_context,
             quality_audit_context=quality_audit_context,
+            thesis_question_context=thesis_question_context,
             data_coverage_context=data_coverage_context,
         )
         args = self.propagator.get_graph_args()
@@ -1090,6 +1171,9 @@ class TradingAgentsGraph:
             ),
             "quality_audit_context": final_state.get(
                 "quality_audit_context", ""
+            ),
+            "thesis_question_context": final_state.get(
+                "thesis_question_context", ""
             ),
             "price_move_attribution_context": final_state.get(
                 "price_move_attribution_context", ""

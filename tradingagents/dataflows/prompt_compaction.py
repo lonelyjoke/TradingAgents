@@ -24,6 +24,7 @@ _IMPORTANT_RE = re.compile(
             r"\b(safety price|defensive build anchor|margin of safety|mean[- ]revert|slow accumulation)\b",
             r"\b(key data check|growth sustainability|ramp conditions|unit[- ]economics|verification calendar|project ramp)\b",
             r"\b(pre[- ]debate|underwriting question|business archetype|company[- ]specific business archetype|business model map|business segment valuation)\b",
+            r"\b(thesis question|soul question|question-led|bull must prove|bear must attack|decisive evidence|PM implication)\b",
             r"\b(industry KPI|KPI checklist|required KPI|three[- ]year|forecast model|driver bridge|key[- ]number audit|depth checklist|formula|source period)\b",
             r"\b(internal filing quality|filing internal quality|accounting reconciliation|footnote radar|disclosure quality)\b",
             r"\b(non[- ]recurring|balance[- ]sheet forward|cash[- ]flow quality|capex|CIP|MD&A)\b",
@@ -96,6 +97,7 @@ _CONTEXT_KEYS = {
     "industry_kpi_context",
     "forecast_model_context",
     "quality_audit_context",
+    "thesis_question_context",
     "data_coverage_context",
 }
 
@@ -139,6 +141,7 @@ _BASE_LIMITS = {
     "industry_kpi_context": 4500,
     "forecast_model_context": 4500,
     "quality_audit_context": 4500,
+    "thesis_question_context": 5000,
     "management_capital_allocation_context": 5000,
     "filing_intelligence_context": 8000,
     "shareholder_structure_context": 5500,

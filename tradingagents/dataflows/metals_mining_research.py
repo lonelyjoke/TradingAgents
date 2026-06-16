@@ -96,6 +96,18 @@ METALS_MINING_COMPANIES = {
             "capex returns and cash-flow conversion",
         ),
     },
+    "601168.SH": {
+        "name": "Western Mining",
+        "metals": ("Copper", "Zinc", "Lead", "Silver", "Tin"),
+        "business_model": "multi-metal mining, beneficiation, smelting, and trading platform",
+        "watchlist": (
+            "mine-by-mine reserves, grade, recovery rate, and equity copper/zinc/lead output",
+            "cash cost / AISC, sustaining capex, and by-product credit sensitivity",
+            "mining versus smelting versus metal-trading profit-pool split",
+            "TC/RC, realized selling price versus SHFE proxy, inventory and hedging exposure",
+            "project capex, construction-in-progress, mine ramp, and NAV/SOTP bridge",
+        ),
+    },
     "601600.SH": {
         "name": "Chalco",
         "metals": ("Aluminum",),
@@ -234,6 +246,39 @@ MISSING_METALS_ITEMS = (
     "commodity-price sensitivity table across metal price, FX, volume, and cost",
     "inventory, hedging / derivatives, working-capital, and impairment exposure",
     "project capex, construction-in-progress, jurisdiction risk, and NAV / SOTP bridge",
+)
+
+SELL_SIDE_METALS_TEMPLATE_ROWS = (
+    {
+        "section": "1. Cycle and price deck",
+        "must_answer": "cycle stage, SHFE/LME/COMEX price deck, inventory/spread/import-export evidence, bull/base/bear metal prices",
+        "output_standard": "state whether the thesis is structural tightness, restocking, or peak-cycle extension",
+    },
+    {
+        "section": "2. Asset and production table",
+        "must_answer": "reserve/resource tonnage, grade, recovery rate, mine life, equity output, ramp schedule by material mine",
+        "output_standard": "mark each mine/asset as reported, estimated, proxy, stale, or missing",
+    },
+    {
+        "section": "3. Cost curve and margins",
+        "must_answer": "cash cost, AISC/unit cost, sustaining capex, by-product credits, energy/labor/FX, TC/RC for smelting",
+        "output_standard": "show why margin expands or compresses under each metal-price scenario",
+    },
+    {
+        "section": "4. Segment SOTP / NAV",
+        "must_answer": "mining NAV, smelting/refining earnings value, trading value, new-project optionality, minority interest and debt",
+        "output_standard": "do not value pass-through trading revenue at scarce-resource multiples",
+    },
+    {
+        "section": "5. Sensitivity and balance sheet",
+        "must_answer": "net profit/EPS/FCF sensitivity to metal price, output, AISC, FX, capex, hedging and inventory marks",
+        "output_standard": "connect target price, entry band, and stop-loss to explicit scenario assumptions",
+    },
+    {
+        "section": "6. Verification calendar",
+        "must_answer": "dated catalysts, production reports, interim reports, project milestones, contract-liability conversion, dividend/capex signals",
+        "output_standard": "turn each missing thesis-critical item into a dated follow-up item",
+    },
 )
 
 NONFERROUS_CYCLE_GATE_ROWS = (
@@ -488,6 +533,10 @@ def _business_model_gate() -> pd.DataFrame:
     )
 
 
+def _sell_side_template() -> pd.DataFrame:
+    return pd.DataFrame(list(SELL_SIDE_METALS_TEMPLATE_ROWS))
+
+
 def _nonferrous_cycle_gate() -> pd.DataFrame:
     return pd.DataFrame(list(NONFERROUS_CYCLE_GATE_ROWS))
 
@@ -609,6 +658,9 @@ def get_metals_mining_context(
         "## Nonferrous Cycle Rating Gate",
         _markdown_table(_nonferrous_cycle_gate()),
         "",
+        "## Sell-Side Metals Deep-Dive Template",
+        _markdown_table(_sell_side_template()),
+        "",
         "## Aluminum Demand Bridge",
         _markdown_table(aluminum_bridge)
         if not aluminum_bridge.empty
@@ -622,8 +674,10 @@ def get_metals_mining_context(
         "",
         "## Required Metals Valuation Bridge",
         "- Build bull/base/bear cases from metal price, equity output, unit cost/AISC, FX, sustaining capex, and tax / minority interest.",
+        "- Include a price-sensitivity table: for each key metal, show the assumed realized price, output, unit cost/AISC, gross-profit effect, net-profit/EPS effect, and evidence status.",
         "- Separate mining NAV from smelting, refining, processing, trading, and investment income. Do not assign scarce-resource multiples to pass-through volume.",
         "- Use mine-by-mine or segment SOTP when material assets have different metals, grades, jurisdictions, ramp status, or cost curves.",
+        "- If mine-level reserves, grade, equity output, or AISC are missing, keep the rating at observation/medium conviction unless the upside is explicitly sized as scenario value.",
         "- Treat domestic exchange futures as timely proxies. Overseas COMEX/LME/LBMA or licensed spot sources are cross-checks unless explicitly fetched and dated.",
         "- Safety-price work must use cycle-trough metal prices, survivable balance sheet, maintenance capex, and historical/peer trough valuation floors.",
         "- For nonferrous names, split the rating into Industry Cycle View, Company Expression View, Valuation/Odds View, and Tactical Attribution View before issuing the final action.",
@@ -635,6 +689,7 @@ def get_metals_mining_context(
         "",
         "## Analyst Instructions",
         "- Treat this as the specialist metals / mining layer. It should override generic manufacturing or broad commodity framing when the target is a miner, smelter, or metal resource company.",
+        "- Write the public memo like a sell-side sector deep dive: cycle call first, then asset table, cost curve, segment SOTP/NAV, sensitivity, peer opportunity cost, and dated verification calendar.",
         "- Price beta is not enough: connect exchange prices to realized selling price, volume, cost curve, inventory, hedging, capex, and balance-sheet survival.",
         "- Missing reserve, grade, equity output, AISC, project-ramp, hedging, or NAV/SOTP evidence caps conviction and belongs in research gaps.",
         "- If the final action is Underweight/Sell despite structural supply constraints, low PE, dividend support, or visible profit release, explicitly prove the profit-center downshift, cash-cycle deterioration, superior peer alternative, or over-pricing path.",

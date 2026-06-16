@@ -114,6 +114,7 @@ def create_portfolio_manager(llm):
         industry_kpi_context = prompt_contexts["industry_kpi_context"]
         forecast_model_context = prompt_contexts["forecast_model_context"]
         quality_audit_context = prompt_contexts["quality_audit_context"]
+        thesis_question_context = prompt_contexts["thesis_question_context"]
         data_coverage_context = prompt_contexts["data_coverage_context"]
         investment_debate_state = state.get("investment_debate_state", {})
         bull_bear_context = ""
@@ -188,12 +189,13 @@ def create_portfolio_manager(llm):
 - If bullish/constructive, provide a profit-taking or trimming range. If bearish/cautious, provide an entry or re-entry watch range.
 
 **Research-Gap and Supply-Demand Rules:**
-- Missing core operating data is a research gap, not neutral evidence.
+- Missing core operating data is neutral evidence for direction, but not neutral for conviction. It is a research gap that should reduce confidence in the affected thesis.
 - Missing data is not bearish evidence by itself. A data outage can justify lower conviction, smaller sizing, a wait-for-confirmation plan, or a temporary Hold, but it must not be the decisive reason for Underweight/Sell.
 - Do not let PE/PB and technical indicators replace missing product price, spread, inventory, freight-rate, capacity, policy, or order-book evidence.
 - If micro evidence is unavailable, use product-specific macro supply-demand evidence where possible: upstream cost, downstream demand, capacity, utilization, imports/exports, substitution, policy, seasonality, and storability.
 - Macro proxies can support an evidence-limited directional view, but cannot be treated as exact product-price or spread facts.
 - If too many thesis-critical assumptions are unverified, reduce conviction and state what data would upgrade or downgrade the rating.
+- For aluminum names, missing alumina, power, or anode cost evidence cannot by itself support Underweight/Sell, margin-collapse claims, or "perfect scenario priced" language. Require independent verified cost squeeze, segment-margin compression, cash-flow deterioration, inventory loss, peer opportunity cost, or valuation stress.
 - Keep the rating label itself clean: use exactly Buy / Overweight / Hold / Underweight / Sell. Do not append phrases such as "evidence-limited" or "证据受限" to the rating name. Put evidence limitations in conviction, sizing, Evidence Gaps & Data Coverage, and Verification Calendar instead.
 - Do not label the whole conclusion evidence-limited just because a non-core module is partial, not_applicable, or failed. For example, web fact-check partial or an unrelated gated industry context must not cap the rating when filings, statements, commodity data, peer data, and valuation context are ready.
 - If the decisive variable is missing for both bull and bear interpretations, use the verified evidence to decide direction; if verified evidence is mixed, prefer Hold/watch rather than treating uncertainty itself as negative expected value.
@@ -247,6 +249,7 @@ def create_portfolio_manager(llm):
 - Include the Industry KPI Checklist as the operating-data agenda. The final memo should say which sector-native KPIs are verified, partial, or missing, and which ones most affect rating, valuation, sizing, or next verification.
 - Include the Forward Forecast Model Scaffold in the earnings bridge. A constructive or negative rating should be tied to two-to-three-year revenue, margin, net profit/EPS, and cash-flow assumptions, even if some cells are explicitly evidence-limited.
 - Include the Sell-Side Depth And Key-Number Audit in the background discipline. Decisive PE/PB/EV multiples, target price, safety price, dividend yield, margins, ASP, shipments, utilization, backlog, and contract-liability claims need formula, source period, and evidence status.
+- Include the Thesis Question Context as the core-question spine. Answer the target-specific question IDs that matter most, state which side won each question after the debate, and move unanswered thesis-critical questions into Evidence Gaps or Verification Calendar.
 - Deep sell-side bridge standard: when the business is project/order/backlog driven, include an explicit order bridge (opening backlog + new orders - delivered/revenue-recognized orders = ending backlog) and reconcile contract liabilities, receivables, inventory/goods shipped, and cash collection. When valuation uses a safety price, target price, or downside anchor, show bull/base/bear or sensitivity assumptions rather than jumping from one profit number to a price. When peers are broad industry screens, split true operating peers from broad screens and name substitute expressions if the context supports them. When a second curve/new business/capacity/ship/mine/platform is mentioned, state whether it is core value, scenario value, or rejected optionality and what evidence would change that status. Include a compact evidence-grade table or paragraph for decisive numbers: reported, calculated, estimated, proxy, stale, missing, or unverified.
 - Treat structured optional fields as materiality gates, not a checklist. Fill a specialized field only when it changes the rating, valuation, position size, confidence, or next verification action. If a module is merely background, summarize it in one sentence inside the main thesis or omit it; if it is missing/partial, put it in Data Coverage Audit or Buy-Side Depth Audit rather than creating a standalone mini-section.
 - Avoid repeating the same fact in Company Snapshot, Business Model & Industry Chain Primer, Business Segment Breakdown, Investment Thesis, and Business Driver Map. Let each section do one job: primer teaches the operating model, segment breakdown explains disclosed economics, thesis explains why price may diverge from value, and supporting evidence explains what changed conviction.
@@ -329,6 +332,7 @@ def create_portfolio_manager(llm):
 - Industry KPI checklist: **{industry_kpi_context}**
 - Forward forecast-model scaffold: **{forecast_model_context}**
 - Sell-side depth and key-number audit: **{quality_audit_context}**
+- Thesis-question context: **{thesis_question_context}**
 - Commodity/product-price context: **{commodity_context}**
 - Price-move attribution context: **{price_move_attribution_context}**
 - Historical minute K-line / intraday behavior context: **{intraday_behavior_context}**

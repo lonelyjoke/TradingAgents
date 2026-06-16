@@ -95,6 +95,7 @@ def create_research_manager(llm):
         industry_kpi_context = prompt_contexts["industry_kpi_context"]
         forecast_model_context = prompt_contexts["forecast_model_context"]
         quality_audit_context = prompt_contexts["quality_audit_context"]
+        thesis_question_context = prompt_contexts["thesis_question_context"]
         data_coverage_context = prompt_contexts["data_coverage_context"]
         prompt_history = compact_debate_history(history, profile="research")
         continuity_context = (
@@ -149,12 +150,13 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 - For cyclical, commodity, shipping, high-beta, or event-driven stocks, calibrate the rating using the stock's own cycle drivers, not only broad-market mood.
 
 **Evidence-Gap Calibration:**
-- Missing core operating data is not neutral evidence. It is a research gap that should reduce conviction in the affected thesis.
+- Missing core operating data is neutral evidence for direction, but not neutral for conviction. It is a research gap that should reduce confidence in the affected thesis.
 - Missing data is also not adverse evidence by itself. Do not convert an unavailable data point into Underweight/Sell unless verified negative evidence independently supports the downside case.
 - Do not let PE/PB and technical indicators replace missing product-price, spread, inventory, freight-rate, policy, capacity, or order-book evidence.
 - If the unavailable data is central to the bull thesis, prefer evidence-limited Overweight/Hold or a staged watch plan over a high-conviction Buy.
 - If the unavailable data is central to the bear thesis, do not issue a strong Sell solely because evidence is missing; explain the risk scenario and what would confirm it.
 - If the same missing variable is central to both bull and bear cases, default to an evidence-limited Hold/watch-plan unless the verified financial, valuation, or cycle evidence already gives one side positive expected value.
+- For aluminum names, missing alumina, power, or anode cost evidence cannot by itself support Underweight/Sell, margin-collapse claims, or "perfect scenario priced" language. Require independent verified cost squeeze, segment-margin compression, cash-flow deterioration, inventory loss, peer opportunity cost, or valuation stress.
 - Hold should mean balanced verified evidence, not "we could not fetch the important data."
 
 **Supply-Demand Fallback:**
@@ -179,6 +181,7 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 - Keep an **Industry KPI Verdict** explicit enough to say which sector-native KPI layers are verified, partial, or missing, and whether those gaps change conviction, sizing, valuation, or the verification calendar.
 - Keep a **Forward Forecast Model Verdict** explicit enough to connect the rating to a two-to-three-year revenue, margin, net profit/EPS, and cash-flow bridge. If the bridge is missing, do not allow target-price confidence to outrun the evidence.
 - Keep a **Key Number Audit Verdict** explicit enough to police decisive PE/PB/EV multiples, target price, safety price, dividend yield, margins, ASP, shipments, utilization, backlog, and contract-liability claims. Require formula, period, source, and evidence status when those numbers drive the rating.
+- Keep a **Question-Led Thesis Verdict** explicit enough to say which Thesis Question Context IDs were answered by the bull, which were successfully attacked by the bear, which remain unanswered, and how that changes rating, valuation, sizing, and next verification.
 - If official policy context is available, keep a **Policy Direction Verdict** explicit enough to distinguish industry support from company-specific monetization.
 - If historical price/EPS/PE decomposition context is available, keep the valuation-cycle verdict explicit enough to say whether the current price is supported by earnings improvement, multiple expansion, both, or neither.
 - Preserve a concise standalone **Safety Price / Defensive Build Anchor** when financial state supports it; when writing Chinese, title it `## 安全价格区间 / 防御性建仓锚`. For value stocks, blue chips, banks, defensive dividend names, and mature cash-flow compounders, anchor it in normalized low-cycle EPS or FCF, sustainable dividend yield, book value/PB and ROE, cash conversion, leverage or net cash, asset quality, payout capacity, and peer/historical valuation floors. For commodity/resource/cyclical names, anchor it in cycle-trough or stress-case earnings, conservative product prices, unit-cost resilience, balance-sheet survival, maintenance capex, and normalized PE/PB floors. Include only the practical anchor: price band, valuation bridge, business conditions that must remain true, slow-build plan, and deterioration that invalidates it. Prefer one short paragraph or a compact 3-4 row table, not a second valuation essay. If the company is structurally impaired, highly leveraged, deeply cyclical without survivable trough economics, or evidence-thin, still keep the section and say no reliable safety price can be assigned.
@@ -227,6 +230,9 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 
 **Sell-Side Depth And Key-Number Audit:**
 {quality_audit_context}
+
+**Thesis Question Context:**
+{thesis_question_context}
 
 **Commodity/Product-Price Context:**
 {commodity_context}

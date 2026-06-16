@@ -56,6 +56,117 @@ def _is_wind_power_context(symbol: str, text: str) -> bool:
     return wind_hits >= 2 and battery_hits == 0
 
 
+def _is_metals_mining_context(symbol: str, text: str) -> bool:
+    lower = f"{symbol}\n{text}".lower()
+    if "status: triggered" in lower and "metals-mining" in lower:
+        return True
+    metals_hits = sum(
+        token in text
+        for token in (
+            "有色金属",
+            "铜",
+            "铝",
+            "锌",
+            "铅",
+            "锡",
+            "黄金",
+            "白银",
+            "矿山",
+            "矿业",
+            "采矿",
+            "采选",
+            "冶炼",
+            "矿石",
+            "品位",
+            "储量",
+            "权益产量",
+            "现金成本",
+            "完全成本",
+            "加工费",
+            "套期保值",
+        )
+    ) + sum(
+        token in lower
+        for token in (
+            "601168",
+            "601899",
+            "600362",
+            "000630",
+            "000878",
+            "600547",
+            "nonferrous metals / mining",
+            "metals-mining",
+            "copper",
+            "aluminum",
+            "zinc",
+            "lead",
+            "gold",
+            "silver",
+            "mining",
+            "smelting",
+            "aisc",
+            "tc/rc",
+            "nav/sotp",
+        )
+    )
+    battery_hits = sum(
+        token in text
+        for token in ("动力电池", "储能电池", "锂离子电池", "正极材料", "磷酸铁锂", "三元材料", "电芯")
+    ) + sum(token in lower for token in ("battery", "cathode", "precursor", "lfp"))
+    return metals_hits >= 2 and battery_hits == 0
+
+
+def _metals_covered(text: str) -> str:
+    match = re.search(r"metals covered:\s*([^\n]+)", text or "", re.I)
+    return match.group(1).strip().lower() if match else ""
+
+
+def _metals_forecast_drivers(symbol: str, text: str) -> list[tuple[str, str, str]]:
+    lower = f"{symbol}\n{text}".lower()
+    covered = _metals_covered(text)
+    if "aluminum" in covered or "601600" in lower or "000807" in lower or "铝" in text:
+        return [
+            ("Primary aluminum revenue", "primary aluminum output x realized aluminum price", "SHFE/LME price, premium/discount, capacity utilization, sales mix"),
+            ("Alumina / upstream spread", "alumina output or self-supply x alumina spread", "alumina price, bauxite cost, self-sufficiency, import cost, inventory lag"),
+            ("Smelting margin", "aluminum ASP - alumina - power - anode/carbon - other cash cost", "power tariff/self-generation, coal/energy cost, anode price, carbon policy"),
+            ("Segment SOTP value", "alumina value + primary aluminum earnings value + trading/energy value + overseas/project optionality", "segment margin, capex, project timetable, jurisdiction and execution haircut"),
+            ("net profit/EPS / FCF", "operating profit - tax/minority/finance cost + working-capital/capex bridge", "minority interest, debt cost, OCF/NI, inventory, receivables, dividend coverage"),
+        ]
+    if "copper" in covered or any(code in lower for code in ("601899", "600362", "000630", "000878", "601168")):
+        return [
+            ("Mining revenue", "equity copper/by-product output x realized selling price", "reserve grade, recovery, mine life, ramp schedule, realized price versus SHFE/LME/COMEX proxy"),
+            ("Smelting / refining spread", "processed volume x TC/RC or processing margin", "concentrate supply, treatment/refining charges, utilization, power and energy cost"),
+            ("Trading / pass-through revenue", "traded volume x thin gross spread", "inventory exposure, customer credit, working-capital intensity; do not value like scarce resources"),
+            ("Gross profit", "mining gross profit + smelting spread + by-product credits - unit cash/AISC cost", "cash cost, AISC/unit cost, sustaining capex, FX, energy/labor, product mix"),
+            ("NAV / SOTP value", "mine-by-mine NAV + smelting/trading earnings value + project optionality", "capex, construction-in-progress, commissioning, permitting, jurisdiction risk, discount/haircut"),
+            ("net profit/EPS / FCF", "operating profit - tax/minority/finance cost + working-capital/capex bridge", "minority interest, debt maturity, OCF/NI, hedging/derivatives, inventory marks"),
+        ]
+    if "gold" in covered or "黄金" in text:
+        return [
+            ("Gold / silver revenue", "equity precious-metal output x realized selling price", "SHFE/COMEX/LBMA proxy, real-rate/USD sensitivity, grade, recovery, sales mix"),
+            ("Mine margin", "realized price - cash cost/AISC per gram or ounce", "AISC, sustaining capex, labor/energy, FX, tax/royalty"),
+            ("Project / acquisition value", "mine-by-mine NAV + ramp/acquisition optionality", "reserve life, capex, commissioning, jurisdiction and integration risk"),
+            ("FCF / dividend capacity", "mine operating cash flow - sustaining/growth capex - tax/minority/finance cost", "OCF/NI, debt maturity, hedging, inventory, dividend policy"),
+            ("P/NAV / PE value", "NAV per share or normalized EPS x multiple", "gold-price deck, cost curve, reserve replacement, peer P/NAV"),
+        ]
+    if "lithium" in covered or "锂" in text:
+        return [
+            ("Lithium revenue", "lithium carbonate/hydroxide shipment x realized ASP", "futures/spot price, customer mix, pass-through, export/import"),
+            ("Resource / processing spread", "realized ASP - spodumene/brine/salt-lake cost - conversion cost", "ore cost, brine yield, utilization, inventory lag"),
+            ("Project ramp value", "equity resource output x ramp probability x margin", "grade, recovery, capex, commissioning, permits, impairment risk"),
+            ("Inventory / impairment bridge", "inventory quantity x price change + impairment reversals/charges", "cycle stage, cost layers, downstream restocking"),
+            ("net profit/EPS / FCF", "operating profit - tax/minority/finance cost + working-capital/capex bridge", "OCF/NI, leverage, capex, equity-accounted earnings"),
+        ]
+    return [
+        ("Mining revenue", "equity output by metal x realized selling price", "reserve grade, recovery rate, mine life, ramp schedule, realized price versus SHFE/LME/COMEX proxy"),
+        ("Smelting / refining spread", "processed volume x TC/RC or processing margin", "concentrate supply, treatment/refining charges, utilization, power and energy cost"),
+        ("Trading / pass-through revenue", "traded volume x thin gross spread", "inventory exposure, customer credit, working-capital intensity; do not value like scarce resources"),
+        ("Gross profit", "mining gross profit + smelting spread + by-product credits - unit cash/AISC cost", "cash cost, AISC/unit cost, sustaining capex, FX, energy/labor, product mix"),
+        ("NAV / SOTP value", "mine-by-mine NAV + smelting/trading earnings value + project optionality", "capex, construction-in-progress, commissioning, permitting, jurisdiction risk, discount/haircut"),
+        ("net profit/EPS / FCF", "operating profit - tax/minority/finance cost + working-capital/capex bridge", "minority interest, debt maturity, OCF/NI, hedging/derivatives, inventory marks"),
+    ]
+
+
 def build_forecast_model_context(
     symbol: str,
     curr_date: str,
@@ -65,6 +176,7 @@ def build_forecast_model_context(
     filing_intelligence_context: str = "",
     peer_comparison_context: str = "",
     industry_kpi_context: str = "",
+    metals_mining_context: str = "",
 ) -> str:
     combined = "\n".join(
         [
@@ -73,6 +185,7 @@ def build_forecast_model_context(
             filing_intelligence_context,
             peer_comparison_context,
             industry_kpi_context,
+            metals_mining_context,
         ]
     )
     evidence = _compact_lines(
@@ -92,6 +205,8 @@ def build_forecast_model_context(
             ("EBITDA / operating profit", "service revenue x margin - depreciation - SG&A/R&D", "network scale, cloud gross margin, depreciation, personnel and maintenance cost"),
             ("net profit/EPS / dividend capacity", "operating profit - tax/minority + FCF after capex", "capex-to-revenue, OCF/NI, payout ratio, net cash/debt"),
         ]
+    elif _is_metals_mining_context(symbol, combined):
+        drivers = _metals_forecast_drivers(symbol, combined)
     elif _is_wind_power_context(symbol, combined):
         drivers = [
             ("Wind-equipment revenue", "opening backlog + new orders - delivered orders", "offshore wind tenders, overseas customer awards, delivery schedule"),
@@ -171,4 +286,5 @@ def get_forecast_model_context(
         filing_intelligence_context=supplied.get("filing_intelligence_context", ""),
         peer_comparison_context=supplied.get("peer_comparison_context", ""),
         industry_kpi_context=supplied.get("industry_kpi_context", ""),
+        metals_mining_context=supplied.get("metals_mining_context", ""),
     )

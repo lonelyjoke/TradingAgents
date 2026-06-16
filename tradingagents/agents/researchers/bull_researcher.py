@@ -84,6 +84,7 @@ def create_bull_researcher(llm):
         industry_kpi_context = prompt_contexts["industry_kpi_context"]
         forecast_model_context = prompt_contexts["forecast_model_context"]
         quality_audit_context = prompt_contexts["quality_audit_context"]
+        thesis_question_context = prompt_contexts["thesis_question_context"]
         prompt_history = compact_debate_history(history, profile="research")
         prompt_current_response = compact_for_prompt(
             current_response,
@@ -118,6 +119,7 @@ Key points to focus on:
 - Industry KPI Discipline: Use the Industry KPI Checklist to prove the bull thesis through sector-native KPIs. If key demand, price, share, backlog, utilization, or cash-conversion evidence is missing, make the bull case staged and falsifiable rather than full-conviction.
 - Forecast-Model Discipline: Use the Forward Forecast Model Scaffold to show which two or three assumptions drive upside over the next two to three years. Do not ask the manager to pay a higher multiple without an earnings/cash-flow bridge.
 - Key-Number Discipline: Use the Sell-Side Depth And Key-Number Audit to keep target price, safety price, PE/PB, dividend yield, margins, ASP, shipments, and backlog claims sourceable and formula-based.
+- Thesis-Question Discipline: Use the Thesis Question Context as the opening agenda. Answer the question IDs in the `bull must prove` column before writing broad optimism, and admit any unanswered thesis-critical question as a conviction cap rather than skipping it.
 - Thematic Catalyst Discipline: Discuss the valuable themes extracted by the system, including credible tier-3 narrative options if they are not fantastical. For each material theme, explain how it could affect A-share expectations, probability/payoff, or valuation; distinguish core proof from optionality; state what evidence would upgrade it; and do not silently ignore a theme just because it is not yet valuation-grade.
 - Primary-Investment Optionality Discipline: When the thematic bridge contains verified primary investments, non-listed equity holdings, investee IPOs, or asset-revaluation candidates, make them part of the bull testimony. Separate (a) pure value-investing incremental NAV after liquidity, lock-up, exit-probability, and double-counting haircuts from (b) A-share theme imagination and trading optionality. Explain why the market may pay attention, how much value could reasonably accrue, what catalyst could unlock it, and why it should or should not change the rating.
 - Investor-Interaction Discipline: If official Q&A context is available, discuss what investors are repeatedly worried about, whether management answered substantively or evasively, and whether the answer pattern strengthens the bull case through credibility, disclosure quality, or catalyst visibility.
@@ -157,6 +159,7 @@ Company business-model primer: {company_business_model_context}
 Industry KPI checklist: {industry_kpi_context}
 Forward forecast-model scaffold: {forecast_model_context}
 Sell-side depth and key-number audit: {quality_audit_context}
+Thesis-question context: {thesis_question_context}
 Thematic catalyst cross-check and valuation bridge: {thematic_catalyst_context}
 Commodity/product-price context: {commodity_context}
 Relative-strength / index-linkage context: {relative_strength_context}

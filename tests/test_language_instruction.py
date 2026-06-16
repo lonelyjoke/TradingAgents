@@ -52,6 +52,7 @@ _stub_module(
         "get_financial_report_intelligence_context",
         "get_income_statement",
         "get_insurance_context",
+        "get_intraday_behavior_context",
         "get_medical_device_context",
         "get_metals_mining_context",
         "get_optical_module_context",
@@ -136,6 +137,19 @@ def test_metals_mining_instruction_requires_nonferrous_rating_layers():
     assert "Underweight/Sell" in instruction
     assert "strongest bull case" in instruction
     assert "AI or robotics demand" in instruction
+    assert "sell-side-depth metals memo" in instruction
+    assert "commodity-price sensitivity table" in instruction
+    assert "dated verification calendar" in instruction
+    assert "neutral for direction" in instruction
+    assert "perfect scenario priced" in instruction
+
+
+def test_research_gap_instruction_treats_missing_data_as_directionally_neutral():
+    instruction = agent_utils_under_test.get_research_gap_instruction()
+
+    assert "neutral for direction" in instruction
+    assert "Underweight/Sell" in instruction
+    assert "independent verified evidence" in instruction
 
 
 def test_english_language_instruction_stays_empty():

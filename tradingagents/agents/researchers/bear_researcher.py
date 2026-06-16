@@ -84,6 +84,7 @@ def create_bear_researcher(llm):
         industry_kpi_context = prompt_contexts["industry_kpi_context"]
         forecast_model_context = prompt_contexts["forecast_model_context"]
         quality_audit_context = prompt_contexts["quality_audit_context"]
+        thesis_question_context = prompt_contexts["thesis_question_context"]
         prompt_history = compact_debate_history(history, profile="research")
         prompt_current_response = compact_for_prompt(
             current_response,
@@ -121,6 +122,7 @@ Key points to focus on:
 - Industry KPI Discipline: Use the Industry KPI Checklist to attack the weakest sector-native evidence layer: demand, price/spread, share, backlog, utilization, inventory, or cash conversion. Missing KPI evidence caps conviction; it is not bearish proof unless verified negative evidence supports it.
 - Forecast-Model Discipline: Use the Forward Forecast Model Scaffold to challenge the assumptions that drive the next two to three years of earnings and FCF. Attack valuation when the earnings bridge is missing or too sensitive to unverified drivers.
 - Key-Number Discipline: Use the Sell-Side Depth And Key-Number Audit to challenge target price, safety price, PE/PB, dividend yield, margins, ASP, shipments, and backlog claims that lack formula, period, or evidence status.
+- Thesis-Question Discipline: Use the Thesis Question Context as the opening attack agenda. Attack the same question IDs in the `bear must attack` column before writing broad downside, and do not treat a missing answer as bearish proof unless verified negative evidence supports it.
 - Thematic Catalyst Discipline: Discuss the valuable themes extracted by the system, including credible tier-3 narrative options if they are not fantastical. For each material theme, assess whether it is too small, too slow, too weakly evidenced, already priced, or disconnected from economics; state what would falsify it; and do not silently ignore a theme merely because it is not yet valuation-grade.
 - Investor-Interaction Discipline: If official Q&A context is available, discuss what investors keep pressing on, where management answers are non-committal or incomplete, and whether the answer pattern exposes unresolved risks, weak disclosure, or low catalyst visibility.
 - Policy-Planning Discipline: If official national or industry policy context is available, test whether policy merely expands the industry while competitors capture the economics, whether support is already priced, and whether the company is a real beneficiary rather than only adjacent to a favored direction.
@@ -160,6 +162,7 @@ Company business-model primer: {company_business_model_context}
 Industry KPI checklist: {industry_kpi_context}
 Forward forecast-model scaffold: {forecast_model_context}
 Sell-side depth and key-number audit: {quality_audit_context}
+Thesis-question context: {thesis_question_context}
 Thematic catalyst cross-check and valuation bridge: {thematic_catalyst_context}
 Commodity/product-price context: {commodity_context}
 Relative-strength / index-linkage context: {relative_strength_context}
