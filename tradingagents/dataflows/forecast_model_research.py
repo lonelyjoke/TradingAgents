@@ -120,6 +120,11 @@ def _is_metals_mining_context(symbol: str, text: str) -> bool:
     return metals_hits >= 2 and battery_hits == 0
 
 
+def _insurance_context_triggered(text: str) -> bool:
+    lower = (text or "").lower()
+    return "status: triggered" in lower and "insurance verification context" in lower
+
+
 def _metals_covered(text: str) -> str:
     match = re.search(r"metals covered:\s*([^\n]+)", text or "", re.I)
     return match.group(1).strip().lower() if match else ""
@@ -205,13 +210,16 @@ def build_forecast_model_context(
     metals_mining_context: str = "",
     insurance_context: str = "",
 ) -> str:
+    gated_insurance_context = (
+        insurance_context if _insurance_context_triggered(insurance_context) else ""
+    )
     combined = "\n".join(
         [
             earnings_model_context,
             company_business_model_context,
             filing_intelligence_context,
             peer_comparison_context,
-            insurance_context,
+            gated_insurance_context,
             industry_kpi_context,
             metals_mining_context,
         ]

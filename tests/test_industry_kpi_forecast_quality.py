@@ -147,6 +147,30 @@ def test_ping_an_kpi_checklist_uses_insurance_not_metals_or_hog():
     assert "hog breeding" not in context
 
 
+def test_not_applicable_insurance_context_does_not_route_generic_stock_to_insurance():
+    insurance_context = (
+        "# Insurance verification context\n\n"
+        "- Status: not_applicable\n"
+        "- Analyst Instructions: Do not force NBV, EV, solvency, or COR analysis."
+    )
+    kpi = build_industry_kpi_context(
+        "600519.SH",
+        "2026-06-18",
+        insurance_context=insurance_context,
+        filing_intelligence_context="Revenue, gross margin, contract liabilities and cash conversion are relevant.",
+    )
+    forecast = build_forecast_model_context(
+        "600519.SH",
+        "2026-06-18",
+        insurance_context=insurance_context,
+        industry_kpi_context=kpi,
+    )
+
+    assert "insurance / integrated financial services" not in kpi
+    assert "Life NBV" not in forecast
+    assert "P&C underwriting profit" not in forecast
+
+
 def test_forecast_model_scaffold_requires_three_year_driver_bridge():
     context = build_forecast_model_context(
         "300750.SZ",
@@ -251,6 +275,9 @@ def test_insurance_context_handles_dataframe_report_list(monkeypatch):
     assert "- Status: triggered" in context
     assert "- Reports considered: Ping An 2025 annual report" in context
     assert "Insurance-Native KPI Screen" in context
+    assert "P/EV, NBV multiple, PB/ROE, dividend yield, and SOTP" in context
+    assert "Q1 net profit, non-recurring profit, or operating cash flow deterioration is a warning signal" in context
+    assert "relative Underweight/watch" in context
 
 
 def test_forecast_model_scaffold_uses_battery_material_bridge():

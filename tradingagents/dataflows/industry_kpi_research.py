@@ -41,6 +41,11 @@ def _metals_context_triggered(text: str) -> bool:
     return "status: triggered" in (text or "").lower() and "metals-mining" in (text or "").lower()
 
 
+def _insurance_context_triggered(text: str) -> bool:
+    lower = (text or "").lower()
+    return "status: triggered" in lower and "insurance verification context" in lower
+
+
 def _metals_covered(text: str) -> str:
     match = re.search(r"metals covered:\s*([^\n]+)", text or "", re.I)
     return match.group(1).strip().lower() if match else ""
@@ -329,12 +334,15 @@ def build_industry_kpi_context(
     web_fact_check_context: str = "",
     insurance_context: str = "",
 ) -> str:
+    gated_insurance_context = (
+        insurance_context if _insurance_context_triggered(insurance_context) else ""
+    )
     combined = "\n".join(
         [
             filing_intelligence_context,
             industry_cycle_context,
             company_business_model_context,
-            insurance_context,
+            gated_insurance_context,
             metals_mining_context,
             commodity_context,
             peer_comparison_context,

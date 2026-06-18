@@ -300,6 +300,8 @@ def get_insurance_context(
             "- Investment book: test net, total, and comprehensive investment yield against liability cost, duration, equity-market beta, and impairment risk.",
             "- Solvency and payout: dividends and buybacks are investable only when solvency adequacy, capital generation, and regulatory constraints support them.",
             "- Valuation: use P/EV, NBV multiple, PB/ROE, dividend yield, and SOTP together; PE is a cross-check, not the primary insurance anchor.",
+            "- Defensive-rating calibration: Q1 net profit, non-recurring profit, or operating cash flow deterioration is a warning signal, not standalone proof that a high-dividend insurer has lost defensive value.",
+            "- Allocation language: distinguish absolute downside from insurance-sector relative low-weighting and defensive-basket suitability; use Hold or relative Underweight/watch when NBV/OPAT evidence is still missing or mixed.",
             "",
             "## Research Gaps To Close Before High Conviction",
             _render_missing_items(),

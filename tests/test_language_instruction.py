@@ -144,6 +144,20 @@ def test_metals_mining_instruction_requires_nonferrous_rating_layers():
     assert "perfect scenario priced" in instruction
 
 
+def test_insurance_instruction_calibrates_defensive_relative_underweight():
+    instruction = agent_utils_under_test.get_insurance_instruction()
+
+    assert "one-quarter net profit" in instruction
+    assert "operating cash flow mechanically drive the rating" in instruction
+    assert "P/EV or EV growth" in instruction
+    assert "NBV multiple" in instruction
+    assert "PB-ROE" in instruction
+    assert "dividend yield/payout sustainability" in instruction
+    assert "Underweight-as-relative-low-weight/watch" in instruction
+    assert "absolute downside" in instruction
+    assert "defensive-basket suitability" in instruction
+
+
 def test_research_gap_instruction_treats_missing_data_as_directionally_neutral():
     instruction = agent_utils_under_test.get_research_gap_instruction()
 
