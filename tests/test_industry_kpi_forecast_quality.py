@@ -1,3 +1,8 @@
+from pathlib import Path
+
+import pandas as pd
+
+from tradingagents.dataflows import insurance_research
 from tradingagents.dataflows.data_coverage import build_data_coverage_context
 from tradingagents.dataflows.forecast_model_research import build_forecast_model_context
 from tradingagents.dataflows.industry_kpi_research import build_industry_kpi_context
@@ -110,6 +115,38 @@ def test_telecom_operator_kpi_checklist_uses_operator_drivers():
     assert "lithium carbonate" not in context
 
 
+def test_muyuan_kpi_checklist_uses_hog_cycle_even_with_battery_noise():
+    context = build_industry_kpi_context(
+        "002714.SZ",
+        "2026-06-18",
+        company_business_model_context="Legacy report had battery and energy-storage noise, but the company sells commodity hogs.",
+        commodity_context="DCE LH2611.DCE close=12815; company complete cost is thesis-critical.",
+        investor_interaction_context="Management discussed live hog ASP, output, complete cost, and breeding-sow supply.",
+    )
+
+    assert "hog breeding / live-hog cycle" in context
+    assert "company monthly commodity-hog ASP" in context
+    assert "breeding-sow supply" in context
+    assert "hog-price sensitivity" in context
+    assert "battery / energy-storage chain" not in context
+
+
+def test_ping_an_kpi_checklist_uses_insurance_not_metals_or_hog():
+    context = build_industry_kpi_context(
+        "601318.SH",
+        "2026-06-18",
+        insurance_context="# Insurance verification context\n\n- Status: triggered\n- Company: Ping An",
+        company_business_model_context="Integrated insurer with life, P&C, bank and asset-management subsidiaries.",
+        filing_intelligence_context="NBV, embedded value, solvency, COR, investment yield and dividend capacity drive the thesis.",
+    )
+
+    assert "insurance / integrated financial services" in context
+    assert "new business value" in context
+    assert "P&C Underwriting" in context
+    assert "nonferrous metals" not in context
+    assert "hog breeding" not in context
+
+
 def test_forecast_model_scaffold_requires_three_year_driver_bridge():
     context = build_forecast_model_context(
         "300750.SZ",
@@ -125,6 +162,95 @@ def test_forecast_model_scaffold_requires_three_year_driver_bridge():
     assert "2027E" in context
     assert "2028E" in context
     assert "net profit/EPS" in context
+
+
+def test_muyuan_forecast_scaffold_requires_hog_price_sensitivity():
+    context = build_forecast_model_context(
+        "002714.SZ",
+        "2026-06-18",
+        earnings_model_context="Market cap and valuation need an implied hog price bridge.",
+        company_business_model_context="Muyuan output, average sale weight, live hog ASP, and complete cost drive earnings.",
+        industry_kpi_context="Playbook: hog breeding / live-hog cycle. Required KPI Map: hog ASP, complete cost, sales kilograms, breeding-sow inventory.",
+    )
+    lower = context.lower()
+
+    assert "hog sales kilograms" in lower
+    assert "realized hog asp - complete hog-breeding cost" in lower
+    assert "hog-breeding sensitivity requirement" in lower
+    assert "reverse-engineer the hog asp implied by current market cap" in lower
+    assert "GWh shipments x ASP" not in context
+
+
+def test_ping_an_forecast_scaffold_uses_insurance_bridge_not_hog():
+    context = build_forecast_model_context(
+        "601318.SH",
+        "2026-06-18",
+        insurance_context="# Insurance verification context\n\n- Status: triggered\n- Company: Ping An",
+        earnings_model_context="Net profit, OPAT, dividend capacity and ROE need an insurance-native bridge.",
+        industry_kpi_context="Playbook: insurance / integrated financial services. Required KPI Map: NBV, EV, COR, solvency.",
+    )
+    lower = context.lower()
+
+    assert "life nbv" in lower
+    assert "new premium x nbv margin" in lower
+    assert "p&c underwriting profit" in lower
+    assert "investment assets x" in lower
+    assert "hog-breeding sensitivity requirement" not in lower
+    assert "hog sales kilograms" not in lower
+
+
+def test_insurance_context_handles_dataframe_report_list(monkeypatch):
+    monkeypatch.setattr(
+        insurance_research,
+        "_fetch_stock_basic",
+        lambda symbol: pd.Series(
+            {"ts_code": symbol, "name": "Ping An", "industry": "Insurance"}
+        ),
+    )
+    monkeypatch.setattr(
+        insurance_research,
+        "_fetch_daily_basic_latest",
+        lambda symbol, curr_date: pd.Series({"pe_ttm": 7.2, "pb": 0.9, "dv_ttm": 5.1}),
+    )
+    monkeypatch.setattr(
+        insurance_research,
+        "_fetch_fina_indicator",
+        lambda symbol, curr_date: pd.DataFrame(
+            [
+                {
+                    "end_date": "20260331",
+                    "roe_annual": 11.0,
+                    "roe": 2.6,
+                    "netprofit_yoy": -7.4,
+                    "debt_to_assets": 90.0,
+                }
+            ]
+        ),
+    )
+    monkeypatch.setattr(
+        insurance_research,
+        "_load_financial_report_texts",
+        lambda symbol, curr_date, look_back_days: (
+            pd.DataFrame([{"title": "Ping An 2025 annual report"}]),
+            [("Ping An 2025 annual report", "NBV embedded value solvency COR investment yield")],
+        ),
+    )
+    monkeypatch.setattr(
+        insurance_research,
+        "_fetch_stock_basic_universe",
+        lambda: pd.DataFrame(
+            [
+                {"ts_code": "601318.SH", "name": "Ping An", "industry": "Insurance"},
+                {"ts_code": "601601.SH", "name": "CPIC", "industry": "Insurance"},
+            ]
+        ),
+    )
+
+    context = insurance_research.get_insurance_context("601318.SH", "2026-06-18")
+
+    assert "- Status: triggered" in context
+    assert "- Reports considered: Ping An 2025 annual report" in context
+    assert "Insurance-Native KPI Screen" in context
 
 
 def test_forecast_model_scaffold_uses_battery_material_bridge():
@@ -249,6 +375,18 @@ def test_quality_audit_flags_metals_template_mismatch_and_missing_aluminum_sprea
     assert "neutral for direction" in context
     assert "Underweight/Sell needs independent verified evidence" in context
     assert "do not permit strong Buy/Sell language" in context
+
+
+def test_global_instructions_force_hog_breeding_valuation_bridge():
+    agent_utils_source = Path("tradingagents/agents/utils/agent_utils.py").read_text(encoding="utf-8")
+
+    assert "For hog breeders" in agent_utils_source
+    assert "sales kilograms = hog output x" in agent_utils_source
+    assert "average sale weight" in agent_utils_source
+    assert "hog-price sensitivity table" in agent_utils_source
+    assert "reverse-engineer the hog-price center" in agent_utils_source
+    assert "current" in agent_utils_source
+    assert "market cap" in agent_utils_source
 
 
 def test_new_contexts_are_compacted_and_covered():

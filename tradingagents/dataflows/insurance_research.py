@@ -8,6 +8,7 @@ from dataclasses import dataclass
 import pandas as pd
 
 from .filing_research import _load_financial_report_texts
+from .industry_identity import is_insurance_text
 from .tushare_a_stock import (
     _fetch_daily_basic_latest,
     _fetch_fina_indicator,
@@ -90,9 +91,9 @@ def _is_insurance_profile(symbol: str, basic: pd.Series | None) -> InsuranceProf
     company_name = _format_value(basic.get("name")) if basic is not None else ""
     industry = _format_value(basic.get("industry")) if basic is not None else ""
     text = f"{symbol} {company_name} {industry}"
-    if symbol.upper() in INSURANCE_SYMBOL_HINTS:
+    if is_insurance_text(symbol):
         return InsuranceProfile("triggered", "curated A-share insurer ticker", company_name, industry)
-    if any(term in text for term in INSURANCE_TERMS):
+    if is_insurance_text("", text):
         return InsuranceProfile(
             "triggered",
             "company name or Tushare industry contains insurance terms",
@@ -224,6 +225,26 @@ def _render_missing_items() -> str:
     return "\n".join(f"- {item}" for item in MISSING_INSURANCE_ITEMS)
 
 
+def _report_titles(reports: object, limit: int = 4) -> list[str]:
+    if isinstance(reports, pd.DataFrame):
+        if reports.empty:
+            return []
+        rows = reports.head(limit).to_dict("records")
+    elif isinstance(reports, list):
+        rows = reports[:limit]
+    else:
+        return []
+    titles: list[str] = []
+    for row in rows:
+        if isinstance(row, dict):
+            title = _format_value(row.get("title"))
+        else:
+            title = _format_value(row)
+        if title:
+            titles.append(title)
+    return titles
+
+
 def get_insurance_context(
     symbol: str,
     curr_date: str,
@@ -290,7 +311,7 @@ def get_insurance_context(
             "- If the report lacks NBV, EV, solvency, investment-yield, or COR evidence, cap conviction and keep the conclusion as evidence-limited.",
         ]
     )
-    if reports:
-        report_titles = ", ".join(_format_value(report.get("title")) for report in reports[:4])
-        lines.insert(7, f"- Reports considered: {report_titles}")
+    report_titles = _report_titles(reports)
+    if report_titles:
+        lines.insert(7, f"- Reports considered: {', '.join(report_titles)}")
     return "\n".join(lines)

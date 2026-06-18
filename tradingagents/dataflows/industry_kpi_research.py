@@ -9,7 +9,11 @@ from __future__ import annotations
 import re
 from typing import Mapping
 
-from .industry_identity import is_telecom_operator_text
+from .industry_identity import (
+    is_hog_breeding_text,
+    is_insurance_text,
+    is_telecom_operator_text,
+)
 
 
 def _compact_line(line: str, *, max_len: int = 260) -> str:
@@ -96,6 +100,20 @@ def _metals_playbook(symbol: str, combined_text: str) -> tuple[str, list[tuple[s
     return None
 
 
+def _insurance_playbook() -> tuple[str, list[tuple[str, str, str]]]:
+    return (
+        "insurance / integrated financial services",
+        [
+            ("Life NBV", "new business value, NBV margin, agent count/productivity, bancassurance contribution", "life franchise growth and P/EV repair"),
+            ("Embedded Value", "EV growth, operating experience variance, CSM/NCSM movement, insurance service result", "capital generation and valuation anchor"),
+            ("P&C Underwriting", "premium growth, COR, loss ratio, expense ratio, catastrophe/auto-pricing context", "underwriting profit quality"),
+            ("Investment Spread", "net, total, and comprehensive investment yield versus liability cost and duration", "earnings volatility and book-value risk"),
+            ("Solvency / Capital", "core/comprehensive solvency ratio, capital generation, payout ratio, dividend and buyback constraints", "dividend durability and downside"),
+            ("SOTP / Subsidiaries", "insurance core, bank subsidiary, asset management, technology, and holding-company discount", "valuation bucket and double-counting control"),
+        ],
+    )
+
+
 def _detect_playbook(symbol: str, combined_text: str) -> tuple[str, list[tuple[str, str, str]]]:
     lower = f"{symbol}\n{combined_text}".lower()
     if is_telecom_operator_text(symbol, combined_text):
@@ -108,6 +126,20 @@ def _detect_playbook(symbol: str, combined_text: str) -> tuple[str, list[tuple[s
                 ("Capex", "5G/cloud/AI capex, depreciation, network utilization, capex-to-revenue", "FCF and ROIC"),
                 ("Cash/Dividend", "OCF, FCF after capex, payout ratio, net cash/debt, dividend yield", "defensive yield and downside protection"),
                 ("Peer Allocation", "China Mobile / China Unicom comparison, ARPU, ROE, FCF, dividend, cloud growth", "relative allocation"),
+            ],
+        )
+    if is_insurance_text(symbol, combined_text):
+        return _insurance_playbook()
+    if is_hog_breeding_text(symbol, combined_text):
+        return (
+            "hog breeding / live-hog cycle",
+            [
+                ("Realized Hog Price", "company monthly commodity-hog ASP, national live-hog spot price, DCE live-hog futures curve", "revenue and cycle stage"),
+                ("Cost Curve", "monthly complete hog-breeding cost, feed cost, PSY/FCR, mortality/disease spend, finance cost", "unit spread and downside resilience"),
+                ("Volume / Weight", "commodity-hog output, average slaughter weight, piglet/breeding-hog mix, capacity utilization", "sales kilograms and operating leverage"),
+                ("Supply Cycle", "national breeding-sow inventory, company sow herd, piglet price, slaughter volume, frozen pork inventory", "timing and amplitude of hog-price reversal"),
+                ("Cash / Balance Sheet", "OCF, inventory and biological assets, impairment, capex, debt maturity, financing access", "bottom-cycle survival and dilution risk"),
+                ("Valuation / Sensitivity", "hog-price sensitivity table, implied hog price from current market cap, PB floor cross-check", "rating, position size, and falsification trigger"),
             ],
         )
     metals_playbook = _metals_playbook(symbol, combined_text)
@@ -295,12 +327,14 @@ def build_industry_kpi_context(
     investor_interaction_context: str = "",
     policy_planning_context: str = "",
     web_fact_check_context: str = "",
+    insurance_context: str = "",
 ) -> str:
     combined = "\n".join(
         [
             filing_intelligence_context,
             industry_cycle_context,
             company_business_model_context,
+            insurance_context,
             metals_mining_context,
             commodity_context,
             peer_comparison_context,
@@ -316,11 +350,29 @@ def build_industry_kpi_context(
             r"revenue|profit|gross margin|ASP|price|latest_price|change_over_window",
             r"capacity|utilization|shipment|installation|GWh|market share|share",
             r"contract liabilit|backlog|order|inventory|cash flow|capex",
+            r"NBV|embedded value|P/EV|solvency|COR|loss ratio|expense ratio|investment yield|bancassurance|agent productivity|CSM|NCSM",
+            r"hog|pig|piglet|sow|live hog|slaughter|complete cost|breeding sow|pork|DCE|LH\d+|ASP",
+            r"\u751f\u732a|\u5546\u54c1\u732a|\u4ed4\u732a|\u79cd\u732a|\u80fd\u7e41\u6bcd\u732a|\u6bcd\u732a\u5b58\u680f|\u732a\u4ef7|\u732a\u5468\u671f|\u51fa\u680f|\u5c60\u5bb0|\u5b8c\u5168\u6210\u672c|\u81ea\u7e41\u81ea\u517b|\u732a\u8089",
             r"铝|铜|锌|铅|锡|金|银|氧化铝|电力|电价|铝土矿|加工费|TC/RC|AISC|品位|储量|权益产量|锂|电池|储能|装机|份额|产能|利用率|合同负债|库存|价格|毛利|现金流",
             r"ARPU|subscriber|broadband|cloud|IDC|capex|dividend|payout|用户|宽带|天翼云|智算|资本开支|分红|派息",
         ),
         limit=10,
     )
+    analyst_instructions = [
+        "- Do not let a generic sector label replace the KPI map. State which KPI layers are verified, partial, or missing.",
+        "- If the report uses cycle language, connect it to at least demand, price/spread, inventory/backlog, and capacity/utilization evidence.",
+        "- If a thesis-critical KPI is missing, cap conviction or move the item to the verification calendar instead of converting it into a hard trigger.",
+    ]
+    if playbook == "hog breeding / live-hog cycle":
+        analyst_instructions.insert(
+            2,
+            "- For hog breeders, do not use consumer-staples or battery-chain KPIs. Force the analysis through hog ASP, complete cost, sales kilograms, breeding-sow supply, cash survival, and hog-price sensitivity.",
+        )
+    if playbook == "insurance / integrated financial services":
+        analyst_instructions.insert(
+            2,
+            "- For insurers, PE is only a cross-check. Force the thesis through NBV, EV/P-EV, solvency, investment-yield spread, P&C COR, dividend capacity, and SOTP/subsidiary separation.",
+        )
     missing_rows = [
         f"- {name}: verify {metric}; explain impact on {driver}."
         for name, metric, driver in kpis
@@ -344,9 +396,7 @@ def build_industry_kpi_context(
             *missing_rows,
             "",
             "## Analyst Instructions",
-            "- Do not let a generic sector label replace the KPI map. State which KPI layers are verified, partial, or missing.",
-            "- If the report uses cycle language, connect it to at least demand, price/spread, inventory/backlog, and capacity/utilization evidence.",
-            "- If a thesis-critical KPI is missing, cap conviction or move the item to the verification calendar instead of converting it into a hard trigger.",
+            *analyst_instructions,
         ]
     )
 
@@ -369,4 +419,5 @@ def get_industry_kpi_context(
         investor_interaction_context=supplied.get("investor_interaction_context", ""),
         policy_planning_context=supplied.get("policy_planning_context", ""),
         web_fact_check_context=supplied.get("web_fact_check_context", ""),
+        insurance_context=supplied.get("insurance_context", ""),
     )

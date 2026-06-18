@@ -562,7 +562,11 @@ class PortfolioDecision(BaseModel):
     rating: PortfolioRating = Field(
         description=(
             "The final position rating. Exactly one of Buy / Overweight / Hold / "
-            "Underweight / Sell, picked based on the analysts' debate."
+            "Underweight / Sell, picked based on the analysts' debate. All other "
+            "text fields must be consistent with this final rating; upstream "
+            "Research Manager, Trader, or risk-analyst ratings may be discussed "
+            "only as non-final prior/upstream views, never as the current or final "
+            "Portfolio Manager rating."
         ),
     )
     company_snapshot: str = Field(
@@ -578,7 +582,8 @@ class PortfolioDecision(BaseModel):
         description=(
             "One sentence that states the investable view in plain language: "
             "what the market may be missing, why the rating follows, and the "
-            "main caveat if needed."
+            "main caveat if needed. The stated action and tone must match the "
+            "final rating field."
         ),
     )
     reader_takeaway_entry_band: Optional[str] = Field(
@@ -627,7 +632,10 @@ class PortfolioDecision(BaseModel):
             "what new buyers should wait for before initiating. For Underweight or "
             "Sell, explain how full holders should reduce or hedge, and what lower "
             "price/valuation band would make new entry reasonable if fundamentals "
-            "remain intact. If no responsible build zone exists, say so explicitly."
+            "remain intact. If no responsible build zone exists, say so explicitly. "
+            "Do not tell holders to reduce to Underweight or tell new buyers to "
+            "avoid the stock when the final rating is Buy or Overweight, unless that "
+            "sentence is explicitly framed as a rejected upstream view."
         ),
     )
     business_driver_map: str = Field(
@@ -722,7 +730,8 @@ class PortfolioDecision(BaseModel):
             "A concise action plan covering entry strategy, position sizing, "
             "key risk levels, and time horizon. Write for readers who may only "
             "see this Portfolio Manager Decision excerpt. Keep it compressed: "
-            "two to three sentences or a short paragraph, not a full investment plan."
+            "two to three sentences or a short paragraph, not a full investment plan. "
+            "The action plan must use the same final rating as the rating field."
         ),
     )
     verification_and_falsification: str = Field(

@@ -5,7 +5,11 @@ from __future__ import annotations
 import re
 from typing import Mapping
 
-from .industry_identity import is_telecom_operator_text
+from .industry_identity import (
+    is_hog_breeding_text,
+    is_insurance_text,
+    is_telecom_operator_text,
+)
 
 
 def _compact_lines(text: str, patterns: tuple[str, ...], *, limit: int = 8) -> list[str]:
@@ -167,6 +171,28 @@ def _metals_forecast_drivers(symbol: str, text: str) -> list[tuple[str, str, str
     ]
 
 
+def _hog_breeding_forecast_drivers() -> list[tuple[str, str, str]]:
+    return [
+        ("Hog sales kilograms", "commodity-hog output x average sale weight", "monthly company output, slaughter weight, piglet/breeding-hog mix, capacity utilization"),
+        ("Realized hog revenue", "sales kg x company commodity-hog ASP + piglet/breeding-hog revenue treated separately", "company ASP versus national spot and DCE live-hog curve; product mix and seasonality"),
+        ("Unit spread", "realized hog ASP - complete hog-breeding cost", "feed cost, PSY/FCR, mortality/disease control, finance cost, scale efficiency"),
+        ("Core breeding profit", "sales kg x unit spread", "hog-price sensitivity, cost sensitivity, output elasticity, inventory/biological-asset marks"),
+        ("Cash profit / FCF", "core breeding profit + depreciation - working capital - capex - interest - tax/minority", "OCF/NI, inventory build, capex cuts or restarts, debt maturity"),
+        ("Valuation bridge", "scenario profit x normalized cyclical PE with PB-floor cross-check", "implied hog price from current market cap, cycle stage, balance-sheet survival and dilution risk"),
+    ]
+
+
+def _insurance_forecast_drivers() -> list[tuple[str, str, str]]:
+    return [
+        ("Life NBV", "new business value = new premium x NBV margin by channel", "agent productivity, agent count, bancassurance mix, product margin, persistency/surrender"),
+        ("Embedded value / CSM", "opening EV + expected return + operating variance + NBV contribution +/- market variance", "EV growth, CSM/NCSM movement, insurance-service result, assumption changes"),
+        ("P&C underwriting profit", "earned premium x (1 - COR)", "premium growth, loss ratio, expense ratio, catastrophe losses, auto-pricing discipline"),
+        ("Investment income", "investment assets x net/total/comprehensive yield - liability cost pressure", "bond yield, equity-market beta, impairment, duration mismatch, accounting classification"),
+        ("OPAT / net profit / EPS", "insurance service result + investment spread + bank/subsidiary contribution - tax/minority/non-recurring", "core operating profit, Ping An Bank contribution, one-offs, share count"),
+        ("Dividend / SOTP value", "capital generation and solvency-supported payout + insurance core P/EV + bank/asset-management/tech value", "solvency ratio, payout policy, holding-company discount, double-counting checks"),
+    ]
+
+
 def build_forecast_model_context(
     symbol: str,
     curr_date: str,
@@ -177,6 +203,7 @@ def build_forecast_model_context(
     peer_comparison_context: str = "",
     industry_kpi_context: str = "",
     metals_mining_context: str = "",
+    insurance_context: str = "",
 ) -> str:
     combined = "\n".join(
         [
@@ -184,15 +211,20 @@ def build_forecast_model_context(
             company_business_model_context,
             filing_intelligence_context,
             peer_comparison_context,
+            insurance_context,
             industry_kpi_context,
             metals_mining_context,
         ]
     )
+    is_hog_breeder = is_hog_breeding_text(symbol, combined)
     evidence = _compact_lines(
         combined,
         (
             r"revenue|gross margin|net profit|EPS|OCF|FCF|capex|ROE",
             r"segment|business model|profit pool|valuation",
+            r"NBV|embedded value|P/EV|solvency|COR|loss ratio|expense ratio|investment yield|bancassurance|agent productivity|CSM|NCSM|OPAT",
+            r"hog|pig|piglet|sow|live hog|slaughter|complete cost|breeding sow|pork|DCE|LH\d+|ASP",
+            r"\u751f\u732a|\u5546\u54c1\u732a|\u4ed4\u732a|\u80fd\u7e41\u6bcd\u732a|\u6bcd\u732a\u5b58\u680f|\u732a\u4ef7|\u732a\u5468\u671f|\u51fa\u680f|\u5b8c\u5168\u6210\u672c|\u732a\u8089",
             r"收入|毛利|净利润|归母|现金流|资本开支|分部|业务",
         ),
         limit=10,
@@ -205,6 +237,10 @@ def build_forecast_model_context(
             ("EBITDA / operating profit", "service revenue x margin - depreciation - SG&A/R&D", "network scale, cloud gross margin, depreciation, personnel and maintenance cost"),
             ("net profit/EPS / dividend capacity", "operating profit - tax/minority + FCF after capex", "capex-to-revenue, OCF/NI, payout ratio, net cash/debt"),
         ]
+    elif is_insurance_text(symbol, combined):
+        drivers = _insurance_forecast_drivers()
+    elif is_hog_breeder:
+        drivers = _hog_breeding_forecast_drivers()
     elif _is_metals_mining_context(symbol, combined):
         drivers = _metals_forecast_drivers(symbol, combined)
     elif _is_wind_power_context(symbol, combined):
@@ -241,6 +277,21 @@ def build_forecast_model_context(
             ("Free cash flow", "net profit + D&A - working capital - capex", "cash conversion and reinvestment"),
         ]
 
+    hog_sensitivity_section = []
+    if is_hog_breeder:
+        hog_sensitivity_section = [
+            "",
+            "## Hog-Breeding Sensitivity Requirement",
+            "| item | Formula / requirement |",
+            "| --- | --- |",
+            "| Sales kg | commodity-hog output x average sale weight |",
+            "| Unit spread | realized commodity-hog ASP - complete hog-breeding cost |",
+            "| Breeding profit | sales kg x unit spread |",
+            "| Sensitivity | show at least bear/base/bull hog ASP cases and each 1 CNY/kg move where data permits |",
+            "| Implied cycle | reverse-engineer the hog ASP implied by current market cap under normalized PE/PB bands |",
+            "- No Buy/Overweight or Underweight/Sell conclusion is complete without linking rating triggers to hog ASP, complete cost, breeding-sow inventory, OCF, and leverage.",
+        ]
+
     return "\n".join(
         [
             f"# Forward Forecast Model Scaffold for {symbol} as of {curr_date}",
@@ -254,6 +305,7 @@ def build_forecast_model_context(
             "| Forecast line | Formula / bridge | Required assumptions |",
             "| --- | --- | --- |",
             *[f"| {name} | {formula} | {assumption} |" for name, formula, assumption in drivers],
+            *hog_sensitivity_section,
             "",
             "## Mandatory Three-Year Table",
             "| item | 2026E | 2027E | 2028E | evidence / assumption status |",
@@ -287,4 +339,5 @@ def get_forecast_model_context(
         peer_comparison_context=supplied.get("peer_comparison_context", ""),
         industry_kpi_context=supplied.get("industry_kpi_context", ""),
         metals_mining_context=supplied.get("metals_mining_context", ""),
+        insurance_context=supplied.get("insurance_context", ""),
     )

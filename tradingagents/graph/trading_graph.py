@@ -759,6 +759,7 @@ class TradingAgentsGraph:
             industry_cycle_context=industry_cycle_context,
             company_business_model_context=company_business_model_context,
             commodity_context=commodity_context,
+            insurance_context=insurance_context,
             metals_mining_context=metals_mining_context,
             peer_comparison_context=peer_comparison_context,
             investor_interaction_context=investor_interaction_context,
@@ -772,6 +773,7 @@ class TradingAgentsGraph:
             company_business_model_context=company_business_model_context,
             filing_intelligence_context=filing_intelligence_context,
             peer_comparison_context=peer_comparison_context,
+            insurance_context=insurance_context,
             industry_kpi_context=industry_kpi_context,
             metals_mining_context=metals_mining_context,
         )
@@ -966,6 +968,7 @@ class TradingAgentsGraph:
             industry_cycle_context=industry_cycle_context,
             company_business_model_context=company_business_model_context,
             commodity_context=commodity_context,
+            insurance_context=insurance_context,
             metals_mining_context=metals_mining_context,
             peer_comparison_context=peer_comparison_context,
             investor_interaction_context=investor_interaction_context,
@@ -979,6 +982,7 @@ class TradingAgentsGraph:
             company_business_model_context=company_business_model_context,
             filing_intelligence_context=filing_intelligence_context,
             peer_comparison_context=peer_comparison_context,
+            insurance_context=insurance_context,
             industry_kpi_context=industry_kpi_context,
             metals_mining_context=metals_mining_context,
         )

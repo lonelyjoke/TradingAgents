@@ -791,7 +791,11 @@ def get_earnings_model_instruction() -> str:
         "earnings are available, use that estimate or explain why it is inappropriate. "
         "For commodity, resource, shipping, and other cyclical businesses, do not use "
         "PE TTM as the primary valuation anchor; build bull/base/bear forward or "
-        "normalized earnings and then discuss the PE or EV/EBITDA implied by each case."
+        "normalized earnings and then discuss the PE or EV/EBITDA implied by each case. "
+        "For hog breeders, force the bridge through sales kilograms = hog output x "
+        "average sale weight, unit spread = realized commodity-hog ASP - complete "
+        "hog-breeding cost, and a hog-price sensitivity table for each material "
+        "1 CNY/kg ASP or cost move."
     )
 
 
@@ -808,7 +812,10 @@ def get_market_expectation_instruction() -> str:
         "simple-run-rate earnings from seasonality-adjusted earnings; do not build a "
         "full-year forecast by mechanically multiplying Q1 by four. For resource and "
         "other cyclical companies, treat PE TTM as a backward-looking snapshot and "
-        "make forward/normalized earnings scenarios the main valuation test."
+        "make forward/normalized earnings scenarios the main valuation test. For hog "
+        "breeders, reverse-engineer the hog-price center already implied by the current "
+        "market cap under reasonable normalized PE/PB bands before calling the stock "
+        "cheap, expensive, or fairly priced."
     )
 
 

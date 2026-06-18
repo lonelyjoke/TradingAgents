@@ -159,6 +159,10 @@ def test_portfolio_manager_prompt_includes_investor_interaction_context():
     assert "Buy-Side Depth Audit" in prompt
     assert "Use this narrative order" in prompt
     assert "materiality gates, not a checklist" in prompt
+    assert "Final-Rating Consistency Rules" in prompt
+    assert "The structured `rating` field is the final Portfolio Manager rating" in prompt
+    assert "Research Manager, Trader, and risk-analyst ratings are upstream, non-final inputs" in prompt
+    assert "holder/builder action" in prompt
 
 
 @pytest.mark.unit

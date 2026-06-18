@@ -1,0 +1,28 @@
+# Commodity and product price context for 300750.SZ as of 2026-06-16
+
+- Company/product map: CATL
+- Look-back window for futures proxies: 90 days
+- Spread note: For battery makers, lithium carbonate is a cost proxy rather than a direct revenue product.
+
+## Source Priority
+| priority | source | use | limitation |
+| --- | --- | --- | --- |
+| 1 - company hard evidence | official filings, production reports, and sales announcements | realized product mix, output, unit cost, and cash-flow conversion | usually delayed and may not include daily spot prices |
+| 2 - exchange market proxy | Tushare futures daily data for mapped SHFE/DCE/CZCE/GFEX/INE contracts | timely product-price direction, curve shape, and scenario stress | proxy, not the company's realized selling price or mine cost curve |
+
+## Metal Price Source Audit
+| metal | domestic_price_chain | contract_example | overseas_cross_check | coverage_status |
+| --- | --- | --- | --- | --- |
+| Lithium carbonate | Tushare fut_daily -> GFEX LC contracts | LC.GFE | Fastmarkets / Benchmark / SMM lithium carbonate or hydroxide assessments | live GFEX futures via Tushare; global spot assessment sources require separate licensed data |
+
+## Evidence Table
+| product | role | data_type | latest_contract_or_source | latest_price | latest_date | change_over_window | inventory_or_receipt | evidence_status | evidence |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Lithium carbonate | raw material proxy | Tushare futures proxy | LC.GFE | 169980 | 20260616 | 13.23% | N/A | Verified by Tushare futures daily data. | exchange=GFEX, query_exchange=GFE, prefix=LC, selected by open interest/volume; curve=LC2607.GFE close=165220, oi=37649, vol=10863 | LC2608.GFE close=169580, oi=15242, vol=3132 | LC2609.GFE close=169980, oi=449952, vol=187954 | LC2610.GFE close=170500, oi=9266, vol=312 | LC2611.GFE close=170900, oi=31534, vol=5730 | LC2612.GFE close=172640, oi=13309, vol=1823 |
+
+## Analyst Instructions
+- Treat Tushare futures data as a proxy only when it matches the company's main product or key input.
+- Treat whitelist web pages as evidence snippets unless an exact price/date/unit is parsed and shown.
+- Do not state R32, R125, lithium, copper, gold, inventory, or spread changes as facts unless they appear in the evidence table.
+- If the product has no reliable data source, list it as an unverified key variable instead of inventing a price change.
+- If a thesis-critical input is marked missing, treat it as neutral for direction and only as a confidence cap; it cannot prove margin deterioration or margin resilience by itself.

@@ -179,6 +179,13 @@ def create_portfolio_manager(llm):
 - **Underweight**: Negative expected value or unattractive payoff, but not enough evidence for a full exit call
 - **Sell**: Core thesis deteriorated or downside probability/payoff is clearly unfavorable
 
+**Final-Rating Consistency Rules:**
+- The structured `rating` field is the final Portfolio Manager rating. Every PM summary, one-line thesis, holder/builder action, position posture, and execution paragraph must be consistent with that final rating.
+- Research Manager, Trader, and risk-analyst ratings are upstream, non-final inputs. If you discuss a different upstream rating, label it explicitly as `upstream Research Manager view`, `upstream Trader view`, or `prior non-final view`; never call it the current, final, or PM rating.
+- Before finalizing, check that no sentence says `current rating`, `final rating`, `本次评级`, `当前评级`, or `最终评级` equals a tier different from the structured final rating.
+- If the final PM rating differs from the Research Manager or Trader rating, explain the change in Debate & Decision Logic or Rating Change Audit, then make the action guidance follow the final PM rating only.
+- For Buy / Overweight, do not tell holders to reduce to Underweight or avoid new positions unless you clearly mark that as a rejected upstream view. For Underweight / Sell, do not tell builders to add or overweight unless it is a lower-price re-entry watch condition.
+
 **Market-Regime Calibration Rules:**
 - The rating is not static. Calibrate it against broad-market mood, market valuation, sector risk, and the stock's own traits.
 - Normal bull market: you may be slightly more constructive for reasonably valued, high-quality stocks with catalysts, but do not chase crowded/high-valuation names.
