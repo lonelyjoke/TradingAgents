@@ -399,6 +399,30 @@ def get_web_fact_check_context(
 
 
 @tool
+def get_knowledge_planet_context(
+    ticker: Annotated[str, "ticker symbol"],
+    curr_date: Annotated[str, "current date you are trading at, yyyy-mm-dd"],
+    look_back_days: Annotated[int, "local Knowledge Planet look-back window in days"] = 30,
+    max_items: Annotated[int, "maximum stream items to return"] = 30,
+    max_reports: Annotated[int, "maximum PDF reports to return"] = 12,
+) -> str:
+    """
+    Retrieve locally imported Knowledge Planet stream/PDF intelligence for a
+    ticker. This is alternative intelligence: useful for expectations,
+    channel checks, industry data, and sell-side research lenses, but not
+    filing-grade proof.
+    """
+    return route_to_vendor(
+        "get_knowledge_planet_context",
+        ticker,
+        curr_date,
+        look_back_days,
+        max_items,
+        max_reports,
+    )
+
+
+@tool
 def get_baijiu_context(
     ticker: Annotated[str, "ticker symbol"],
     curr_date: Annotated[str, "current date you are trading at, yyyy-mm-dd"],

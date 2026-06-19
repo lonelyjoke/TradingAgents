@@ -832,6 +832,13 @@ def save_report_to_disk(final_state, ticker: str, save_path: Path):
             final_state["web_fact_check_context"],
             encoding="utf-8",
         )
+    if final_state.get("knowledge_planet_context"):
+        context_dir = save_path / "0_context"
+        context_dir.mkdir(exist_ok=True)
+        (context_dir / "knowledge_planet.md").write_text(
+            final_state["knowledge_planet_context"],
+            encoding="utf-8",
+        )
     if final_state.get("baijiu_context"):
         context_dir = save_path / "0_context"
         context_dir.mkdir(exist_ok=True)

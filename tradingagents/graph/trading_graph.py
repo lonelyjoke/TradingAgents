@@ -87,6 +87,7 @@ from tradingagents.agents.utils.agent_utils import (
     get_thematic_catalyst_context,
     get_valuation_percentiles,
     get_web_fact_check_context,
+    get_knowledge_planet_context,
 )
 
 from .checkpointer import checkpoint_step, clear_checkpoint, get_checkpointer, thread_id
@@ -116,6 +117,7 @@ def _build_precomputed_data_coverage(
     investor_interaction_context: str,
     policy_planning_context: str,
     web_fact_check_context: str,
+    knowledge_planet_context: str,
     baijiu_context: str,
     compute_leasing_context: str,
     dividend_defensive_context: str,
@@ -159,6 +161,7 @@ def _build_precomputed_data_coverage(
             "investor_interaction": investor_interaction_context,
             "policy_planning": policy_planning_context,
             "web_fact_check": web_fact_check_context,
+            "knowledge_planet": knowledge_planet_context,
             "baijiu": baijiu_context,
             "compute_leasing": compute_leasing_context,
             "dividend_defensive": dividend_defensive_context,
@@ -236,6 +239,11 @@ _A_SHARE_CONTEXT_SPECS = [
     ),
     ("policy_planning_context", "get_policy_planning_context", "Policy-planning context"),
     ("web_fact_check_context", "get_web_fact_check_context", "Web fact-check context"),
+    (
+        "knowledge_planet_context",
+        "get_knowledge_planet_context",
+        "Knowledge Planet stream/PDF intelligence context",
+    ),
     ("baijiu_context", "get_baijiu_context", "Baijiu verification context"),
     (
         "compute_leasing_context",
@@ -468,6 +476,7 @@ class TradingAgentsGraph:
                     get_financial_report_intelligence_context,
                     get_earnings_model_context,
                     get_market_expectation_context,
+                    get_knowledge_planet_context,
                     get_price_earnings_decomposition_context,
                     get_management_capital_allocation_context,
                     get_shareholder_structure_context,
@@ -719,6 +728,7 @@ class TradingAgentsGraph:
         investor_interaction_context = contexts["investor_interaction_context"]
         policy_planning_context = contexts["policy_planning_context"]
         web_fact_check_context = contexts["web_fact_check_context"]
+        knowledge_planet_context = contexts["knowledge_planet_context"]
         baijiu_context = contexts["baijiu_context"]
         compute_leasing_context = contexts["compute_leasing_context"]
         dividend_defensive_context = contexts["dividend_defensive_context"]
@@ -842,6 +852,7 @@ class TradingAgentsGraph:
             investor_interaction_context=investor_interaction_context,
             policy_planning_context=policy_planning_context,
             web_fact_check_context=web_fact_check_context,
+            knowledge_planet_context=knowledge_planet_context,
             baijiu_context=baijiu_context,
             compute_leasing_context=compute_leasing_context,
             dividend_defensive_context=dividend_defensive_context,
@@ -882,6 +893,7 @@ class TradingAgentsGraph:
             investor_interaction_context=investor_interaction_context,
             policy_planning_context=policy_planning_context,
             web_fact_check_context=web_fact_check_context,
+            knowledge_planet_context=knowledge_planet_context,
             baijiu_context=baijiu_context,
             compute_leasing_context=compute_leasing_context,
             dividend_defensive_context=dividend_defensive_context,
@@ -928,6 +940,7 @@ class TradingAgentsGraph:
         investor_interaction_context = contexts["investor_interaction_context"]
         policy_planning_context = contexts["policy_planning_context"]
         web_fact_check_context = contexts["web_fact_check_context"]
+        knowledge_planet_context = contexts["knowledge_planet_context"]
         baijiu_context = contexts["baijiu_context"]
         compute_leasing_context = contexts["compute_leasing_context"]
         dividend_defensive_context = contexts["dividend_defensive_context"]
@@ -1051,6 +1064,7 @@ class TradingAgentsGraph:
             investor_interaction_context=investor_interaction_context,
             policy_planning_context=policy_planning_context,
             web_fact_check_context=web_fact_check_context,
+            knowledge_planet_context=knowledge_planet_context,
             baijiu_context=baijiu_context,
             compute_leasing_context=compute_leasing_context,
             dividend_defensive_context=dividend_defensive_context,
@@ -1091,6 +1105,7 @@ class TradingAgentsGraph:
             investor_interaction_context=investor_interaction_context,
             policy_planning_context=policy_planning_context,
             web_fact_check_context=web_fact_check_context,
+            knowledge_planet_context=knowledge_planet_context,
             baijiu_context=baijiu_context,
             compute_leasing_context=compute_leasing_context,
             dividend_defensive_context=dividend_defensive_context,
@@ -1223,6 +1238,9 @@ class TradingAgentsGraph:
             ),
             "web_fact_check_context": final_state.get(
                 "web_fact_check_context", ""
+            ),
+            "knowledge_planet_context": final_state.get(
+                "knowledge_planet_context", ""
             ),
             "baijiu_context": final_state.get(
                 "baijiu_context", ""

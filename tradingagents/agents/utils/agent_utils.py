@@ -25,6 +25,7 @@ from tradingagents.agents.utils.fundamental_data_tools import (
     get_optical_module_context,
     get_price_move_attribution_context,
     get_investor_interaction_context,
+    get_knowledge_planet_context,
     get_policy_planning_context,
     get_web_fact_check_context,
     get_market_sector_risk,
@@ -153,6 +154,23 @@ def get_web_fact_check_instruction() -> str:
         "gross margin, channel inventory, or product-price searches as thesis "
         "evidence; route web checks to NIM/deposit cost, NPL/provision coverage, "
         "capital adequacy, fee income, wealth management, and rate-policy transmission."
+    )
+
+
+def get_knowledge_planet_instruction() -> str:
+    """Return rules for using locally imported Knowledge Planet intelligence."""
+    return (
+        " Knowledge Planet discipline: treat locally imported stream/PDF context "
+        "as alternative intelligence, not filing-grade proof. Preserve the source "
+        "label: industry weekly data, channel checks, company research feedback, "
+        "PDF sell-side frameworks, sell-side push, or rumor/sentiment. "
+        "Do not discard hard-to-publicly-verify industry data or research feedback "
+        "merely because it is not public; instead use it as a labeled clue and define "
+        "the next observable proxy. For promoted names, force the story-to-profit "
+        "bridge: product or business driver -> revenue/margin/FCF -> valuation -> "
+        "catalyst clock -> falsification signal. Target-market-cap, strong-call, "
+        "and dramatic upside claims must be treated as optimism bias until supported "
+        "by fundamentals, price/volume confirmation, and a credible expectation gap."
     )
 
 

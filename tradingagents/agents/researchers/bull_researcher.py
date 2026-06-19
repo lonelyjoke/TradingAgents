@@ -18,6 +18,7 @@ from tradingagents.agents.utils.agent_utils import (
     get_metals_mining_instruction,
     get_optical_module_instruction,
     get_investor_interaction_instruction,
+    get_knowledge_planet_instruction,
     get_market_expectation_instruction,
     get_management_capital_allocation_instruction,
     get_policy_planning_instruction,
@@ -68,6 +69,7 @@ def create_bull_researcher(llm):
         investor_interaction_context = prompt_contexts["investor_interaction_context"]
         policy_planning_context = prompt_contexts["policy_planning_context"]
         web_fact_check_context = prompt_contexts["web_fact_check_context"]
+        knowledge_planet_context = prompt_contexts["knowledge_planet_context"]
         baijiu_context = prompt_contexts["baijiu_context"]
         compute_leasing_context = prompt_contexts["compute_leasing_context"]
         dividend_defensive_context = prompt_contexts["dividend_defensive_context"]
@@ -135,6 +137,7 @@ Key points to focus on:
 - Market-Implied Expectation Discipline: State what the current quote already appears to assume, then identify the precise assumption the market is still too pessimistic about.
 - Historical Price/EPS/PE Discipline: Use the decomposition context to argue whether the upside is supported by EPS recovery/growth, multiple expansion, or a double-engine setup; do not present pure multiple expansion as hard fundamental proof.
 - Web Fact-Check Discipline: If web fact-check context is available, use it to verify simple high-frequency facts such as wholesale prices, channel inventory, terminal discounts, and product price changes. Do not make a single web result into hard proof.
+- Knowledge Planet Discipline: If local stream/PDF intelligence is available, use industry weekly data, channel checks, and research feedback as labeled private/proxy clues. For sell-side pushes, convert the story into a product-to-profit bridge, catalyst clock, evidence upgrade path, and falsification signal before arguing it is investable.
 - Baijiu Discipline: If gated baijiu context says `Status: triggered`, the bull case must pass channel-price, contract-liability seasonality, product mix, cash conversion, and peer-basket checks. If prices or peers are missing, keep the thesis evidence-limited.
 - Compute-Leasing Discipline: If gated compute-leasing context says `Status: triggered`, make the bull case pass asset, contract, unit-economics, capex/funding, and transition-credibility gates. If it says `Status: not_applicable`, do not use compute leasing as a bull theme.
 - Dividend-Defensive Discipline: If gated dividend defensive context says `Status: triggered`, argue only from sustainable payout evidence: dividend stability, profit/cash-flow or bank-capital coverage, non-declining industry logic, valuation buffer, and alternatives. Do not call a high yield defensive if the context flags dividend-trap risk.
@@ -175,6 +178,7 @@ Shareholder-structure context: {shareholder_structure_context}
 Official investor-interaction context: {investor_interaction_context}
 Official policy-planning context: {policy_planning_context}
 Web fact-check context: {web_fact_check_context}
+Knowledge Planet stream/PDF intelligence: {knowledge_planet_context}
 Gated baijiu verification context: {baijiu_context}
 Gated compute-leasing verification context: {compute_leasing_context}
 Gated dividend defensive verification context: {dividend_defensive_context}
@@ -209,6 +213,7 @@ Use this information to deliver a compelling bull argument, refute the bear's co
 {get_management_capital_allocation_instruction()}
 {get_shareholder_structure_instruction()}
 {get_web_fact_check_instruction()}
+{get_knowledge_planet_instruction()}
 {get_baijiu_instruction()}
 {get_compute_leasing_instruction()}
 {get_dividend_defensive_instruction()}

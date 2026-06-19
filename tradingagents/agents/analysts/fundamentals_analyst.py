@@ -36,6 +36,8 @@ from tradingagents.agents.utils.agent_utils import (
     get_price_move_attribution_context,
     get_price_move_attribution_instruction,
     get_insider_transactions,
+    get_knowledge_planet_context,
+    get_knowledge_planet_instruction,
     get_language_instruction,
     get_material_catalyst_instruction,
     get_market_sector_risk,
@@ -98,6 +100,7 @@ def create_fundamentals_analyst(llm):
         raw_policy_planning_context = state.get("policy_planning_context", "")
         raw_shipping_context = state.get("shipping_context", "")
         raw_web_fact_check_context = state.get("web_fact_check_context", "")
+        raw_knowledge_planet_context = state.get("knowledge_planet_context", "")
         raw_baijiu_context = state.get("baijiu_context", "")
         raw_compute_leasing_context = state.get("compute_leasing_context", "")
         raw_dividend_defensive_context = state.get("dividend_defensive_context", "")
@@ -133,6 +136,7 @@ def create_fundamentals_analyst(llm):
         investor_interaction_context = prompt_contexts["investor_interaction_context"]
         policy_planning_context = prompt_contexts["policy_planning_context"]
         web_fact_check_context = prompt_contexts["web_fact_check_context"]
+        knowledge_planet_context = prompt_contexts["knowledge_planet_context"]
         baijiu_context = prompt_contexts["baijiu_context"]
         compute_leasing_context = prompt_contexts["compute_leasing_context"]
         dividend_defensive_context = prompt_contexts["dividend_defensive_context"]
@@ -196,6 +200,8 @@ def create_fundamentals_analyst(llm):
             tools.append(get_policy_planning_context)
         if is_a_share and not raw_web_fact_check_context:
             tools.append(get_web_fact_check_context)
+        if is_a_share and not raw_knowledge_planet_context:
+            tools.append(get_knowledge_planet_context)
         if is_a_share and not raw_baijiu_context:
             tools.append(get_baijiu_context)
         if is_a_share and not raw_compute_leasing_context:
@@ -236,6 +242,7 @@ def create_fundamentals_analyst(llm):
             "Use the Forward Forecast Model Scaffold to connect segment drivers to the next two to three years of revenue, margin, net profit/EPS, and cash flow. If assumptions are missing, label the forecast bridge evidence-limited instead of writing a free-floating target multiple. "
             "Use the Sell-Side Depth And Key-Number Audit to police decisive numbers: PE/PB/EV multiples, target price, safety price, dividend yield, margins, ASP, shipments, utilization, backlog, and contract liabilities need formula, source period, and evidence status. "
             "Use the Thesis Question Context as the memo's interrogation agenda: answer the company-specific soul questions before broad positives or negatives, and make unanswered thesis-critical questions explicit research gaps. "
+            "Use Knowledge Planet stream/PDF intelligence to borrow useful sell-side and channel perspectives, but label private clues, separate industry data from promotion, and force promoted stories into a product-to-profit bridge before they affect valuation or rating. "
             "Prioritize: Core Bet, key supporting evidence, key negative evidence, earnings bridge, market-implied expectation, expectation gap, probability/payoff, company quality, current odds, relative allocation, catalysts, falsification signals, and data gaps. "
             "If another peer looks better than the target, explain why with metrics and caveats. If the sector looks high-risk while the target looks relatively low, discuss whether this is a mispricing opportunity or a company-specific warning. "
             "Do not mechanically upgrade in bull markets or downgrade in bear markets: explain how market mood interacts with the company's valuation, quality, beta, cyclicality, balance sheet, and catalysts. "
@@ -259,6 +266,7 @@ def create_fundamentals_analyst(llm):
             + get_investor_interaction_instruction()
             + get_policy_planning_instruction()
             + get_web_fact_check_instruction()
+            + get_knowledge_planet_instruction()
             + get_baijiu_instruction()
             + get_compute_leasing_instruction()
             + get_dividend_defensive_instruction()
@@ -407,6 +415,12 @@ def create_fundamentals_analyst(llm):
                 "\n\nPrecomputed web fact-check context:\n"
                 + web_fact_check_context
                 if web_fact_check_context
+                else ""
+            )
+            + (
+                "\n\nPrecomputed Knowledge Planet stream/PDF intelligence:\n"
+                + knowledge_planet_context
+                if knowledge_planet_context
                 else ""
             )
             + (

@@ -106,6 +106,7 @@ from .medical_device_research import get_medical_device_context as get_tushare_m
 from .metals_mining_research import get_metals_mining_context as get_tushare_metals_mining_context
 from .price_move_attribution_research import get_price_move_attribution_context as get_tushare_price_move_attribution_context
 from .intraday_research import get_intraday_behavior_context as get_tushare_intraday_behavior_context
+from .knowledge_planet_research import get_knowledge_planet_context as get_local_knowledge_planet_context
 
 # Configuration and routing logic
 from .config import get_config
@@ -151,6 +152,7 @@ TOOLS_CATEGORIES = {
             "get_investor_interaction_context",
             "get_policy_planning_context",
             "get_web_fact_check_context",
+            "get_knowledge_planet_context",
             "get_baijiu_context",
             "get_compute_leasing_context",
             "get_dividend_defensive_context",
@@ -179,6 +181,7 @@ VENDOR_LIST = [
     "yfinance",
     "alpha_vantage",
     "tushare",
+    "local",
 ]
 
 # Mapping of methods to their vendor-specific implementations
@@ -275,6 +278,9 @@ VENDOR_METHODS = {
     },
     "get_web_fact_check_context": {
         "tushare": get_tushare_web_fact_check_context,
+    },
+    "get_knowledge_planet_context": {
+        "local": get_local_knowledge_planet_context,
     },
     "get_baijiu_context": {
         "tushare": get_tushare_baijiu_context,

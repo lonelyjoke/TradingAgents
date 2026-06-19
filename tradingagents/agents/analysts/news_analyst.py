@@ -6,6 +6,7 @@ from tradingagents.agents.utils.agent_utils import (
     get_evidence_instruction,
     get_focused_report_instruction,
     get_global_news,
+    get_knowledge_planet_instruction,
     get_language_instruction,
     get_material_catalyst_instruction,
     get_news,
@@ -28,6 +29,7 @@ def create_news_analyst(llm):
                 "price_move_attribution_context",
                 "policy_planning_context",
                 "web_fact_check_context",
+                "knowledge_planet_context",
                 "data_coverage_context",
             },
         )
@@ -35,6 +37,7 @@ def create_news_analyst(llm):
         price_move_attribution_context = prompt_contexts["price_move_attribution_context"]
         policy_planning_context = prompt_contexts["policy_planning_context"]
         web_fact_check_context = prompt_contexts["web_fact_check_context"]
+        knowledge_planet_context = prompt_contexts["knowledge_planet_context"]
         data_coverage_context = prompt_contexts["data_coverage_context"]
 
         is_a_share = is_a_share_symbol(state["company_of_interest"])
@@ -57,6 +60,7 @@ def create_news_analyst(llm):
             "Separate company-specific events, industry events, and macro policy events. Cite dates, titles, and sources where available. Explain whether each event strengthens the Core Bet, weakens it, or is background noise. If an event source is unavailable because of Tushare permissions, state that limitation instead of inventing news. "
             "For A-share reports, do not say the whole news interface is disconnected when only Tushare major_news/news/cctv_news is permission-limited. Split the evidence path: official announcements/CNINFO or local filing cache, Tushare news permissions, precomputed price-move News & Rumor Probe, web fact-check, and policy-planning context. If one path fails, use the remaining precomputed contexts and mark that path as a limitation rather than treating all catalysts as unavailable."
             + get_evidence_instruction()
+            + get_knowledge_planet_instruction()
             + get_buy_side_thesis_instruction()
             + get_material_catalyst_instruction()
             + (
@@ -81,6 +85,12 @@ def create_news_analyst(llm):
                 "\n\nPrecomputed web fact-check context:\n"
                 + web_fact_check_context
                 if web_fact_check_context
+                else ""
+            )
+            + (
+                "\n\nPrecomputed Knowledge Planet stream/PDF intelligence:\n"
+                + knowledge_planet_context
+                if knowledge_planet_context
                 else ""
             )
             + (

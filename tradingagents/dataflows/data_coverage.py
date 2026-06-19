@@ -41,6 +41,8 @@ FAILURE_PATTERNS = (
     "# insurance verification context unavailable",
     "# medical-device verification context unavailable",
     "# metals-mining verification context unavailable",
+    "# knowledge planet intelligence context unavailable",
+    "# knowledge planet daily report unavailable",
     "# industry cycle scan unavailable",
     "# company business model primer unavailable",
     "# industry kpi checklist unavailable",

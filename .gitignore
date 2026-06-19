@@ -217,3 +217,17 @@ __marimo__/
 
 # Cache
 **/data_cache/
+
+# Local private Knowledge Planet research inbox and generated indexes.
+data/knowledge_planet/index.sqlite*
+data/knowledge_planet/inbox/*
+!data/knowledge_planet/inbox/README.md
+!data/knowledge_planet/inbox/post_template.md
+!data/knowledge_planet/inbox/daily_stream_template.md
+data/knowledge_planet/processed/**
+data/knowledge_planet/failed/**
+data/knowledge_planet/reports/inbox/**
+data/knowledge_planet/reports/processed/**
+data/knowledge_planet/reports/failed/**
+data/knowledge_planet/reports/extracted/**
+reports/knowledge_planet_daily/**

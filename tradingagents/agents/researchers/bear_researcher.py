@@ -18,6 +18,7 @@ from tradingagents.agents.utils.agent_utils import (
     get_metals_mining_instruction,
     get_optical_module_instruction,
     get_investor_interaction_instruction,
+    get_knowledge_planet_instruction,
     get_market_expectation_instruction,
     get_management_capital_allocation_instruction,
     get_policy_planning_instruction,
@@ -68,6 +69,7 @@ def create_bear_researcher(llm):
         investor_interaction_context = prompt_contexts["investor_interaction_context"]
         policy_planning_context = prompt_contexts["policy_planning_context"]
         web_fact_check_context = prompt_contexts["web_fact_check_context"]
+        knowledge_planet_context = prompt_contexts["knowledge_planet_context"]
         baijiu_context = prompt_contexts["baijiu_context"]
         compute_leasing_context = prompt_contexts["compute_leasing_context"]
         dividend_defensive_context = prompt_contexts["dividend_defensive_context"]
@@ -137,6 +139,7 @@ Key points to focus on:
 - Market-Implied Expectation Discipline: State what the current quote already appears to assume, then identify the precise assumption the market is still too optimistic about.
 - Historical Price/EPS/PE Discipline: Use the decomposition context to test whether the stock's move is supported by EPS improvement or mostly by PE expansion; challenge multiple-led reratings when the forward EPS bridge is weak.
 - Web Fact-Check Discipline: If web fact-check context is available, use it to verify simple high-frequency facts such as wholesale prices, channel inventory, terminal discounts, and product price changes. Do not make a single web result into hard proof.
+- Knowledge Planet Discipline: If local stream/PDF intelligence is available, do not dismiss industry weekly data, channel checks, or research feedback just because they are hard to publicly verify. Instead, attack the weak link: whether the clue is stale, biased, already priced, disconnected from company economics, or missing a product-to-profit bridge. Treat target-market-cap and strong-call language as optimism bias until independently supported.
 - Baijiu Discipline: If gated baijiu context says `Status: triggered`, attack or validate the downside through product wholesale price evidence, channel inventory/payment quality, contract-liability seasonality, cash conversion, and relative peer alternatives. Do not turn a missing price or peer dataset into bearish proof by itself.
 - Compute-Leasing Discipline: If gated compute-leasing context says `Status: triggered`, attack weak asset delivery, customer contract, unit-economics, capex/funding, transition-credibility, and disclosure gaps. If it says `Status: not_applicable`, do not use compute leasing as a bear theme.
 - Dividend-Defensive Discipline: If gated dividend defensive context says `Status: triggered`, attack dividend-trap risk: shrinking profit, weak FCF, excessive payout, bank capital constraints, industry erosion, or better peer alternatives. If it says `Status: not_applicable`, do not force a high-dividend bear frame.
@@ -178,6 +181,7 @@ Shareholder-structure context: {shareholder_structure_context}
 Official investor-interaction context: {investor_interaction_context}
 Official policy-planning context: {policy_planning_context}
 Web fact-check context: {web_fact_check_context}
+Knowledge Planet stream/PDF intelligence: {knowledge_planet_context}
 Gated baijiu verification context: {baijiu_context}
 Gated compute-leasing verification context: {compute_leasing_context}
 Gated dividend defensive verification context: {dividend_defensive_context}
@@ -212,6 +216,7 @@ Use this information to deliver a compelling bear argument, refute the bull's cl
 {get_management_capital_allocation_instruction()}
 {get_shareholder_structure_instruction()}
 {get_web_fact_check_instruction()}
+{get_knowledge_planet_instruction()}
 {get_baijiu_instruction()}
 {get_compute_leasing_instruction()}
 {get_dividend_defensive_instruction()}

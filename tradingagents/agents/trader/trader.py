@@ -18,6 +18,7 @@ from tradingagents.agents.utils.agent_utils import (
     get_filing_intelligence_instruction,
     get_focused_report_instruction,
     get_insurance_instruction,
+    get_knowledge_planet_instruction,
     get_medical_device_instruction,
     get_metals_mining_instruction,
     get_optical_module_instruction,
@@ -58,6 +59,7 @@ def create_trader(llm):
                 "investor_interaction_context",
                 "policy_planning_context",
                 "web_fact_check_context",
+                "knowledge_planet_context",
                 "baijiu_context",
                 "compute_leasing_context",
                 "optical_module_context",
@@ -76,6 +78,7 @@ def create_trader(llm):
         investor_interaction_context = prompt_contexts["investor_interaction_context"]
         policy_planning_context = prompt_contexts["policy_planning_context"]
         web_fact_check_context = prompt_contexts["web_fact_check_context"]
+        knowledge_planet_context = prompt_contexts["knowledge_planet_context"]
         baijiu_context = prompt_contexts["baijiu_context"]
         compute_leasing_context = prompt_contexts["compute_leasing_context"]
         optical_module_context = prompt_contexts["optical_module_context"]
@@ -109,6 +112,7 @@ def create_trader(llm):
                     f"{get_investor_interaction_instruction()}"
                     f"{get_policy_planning_instruction()}"
                     f"{get_web_fact_check_instruction()}"
+                    f"{get_knowledge_planet_instruction()}"
                     f"{get_baijiu_instruction()}"
                     f"{get_compute_leasing_instruction()}"
                     f"{get_optical_module_instruction()}"
@@ -135,6 +139,7 @@ def create_trader(llm):
                     f"Official investor-interaction context: {investor_interaction_context}\n\n"
                     f"Official policy-planning context: {policy_planning_context}\n\n"
                     f"Web fact-check context: {web_fact_check_context}\n\n"
+                    f"Knowledge Planet stream/PDF intelligence: {knowledge_planet_context}\n\n"
                     f"Gated baijiu verification context: {baijiu_context}\n\n"
                     f"Gated compute-leasing verification context: {compute_leasing_context}\n\n"
                     f"Gated AI optical-module verification context: {optical_module_context}\n\n"

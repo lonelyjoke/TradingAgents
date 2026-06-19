@@ -144,6 +144,23 @@ DEFAULT_CONFIG = {
     "web_fact_check_timeout_sec": 6,
     "web_fact_check_max_queries": 3,
     "web_fact_check_max_results_per_query": 4,
+    # Local Knowledge Planet alternative-intelligence layer. The importer
+    # builds the SQLite/PDF-text index ahead of time, so single-stock analysis
+    # only performs bounded local lookups in the recent window.
+    "knowledge_planet_enabled": True,
+    "knowledge_planet_db_path": _env_or_none("KNOWLEDGE_PLANET_DB_PATH"),
+    "knowledge_planet_lookback_days": _env_int_or_default(
+        "KNOWLEDGE_PLANET_LOOKBACK_DAYS",
+        30,
+    ),
+    "knowledge_planet_max_items": _env_int_or_default(
+        "KNOWLEDGE_PLANET_MAX_ITEMS",
+        30,
+    ),
+    "knowledge_planet_max_reports": _env_int_or_default(
+        "KNOWLEDGE_PLANET_MAX_REPORTS",
+        12,
+    ),
     # Gated A-share compute-leasing verification layer. The module returns a
     # not_applicable status unless official or semi-official evidence indicates
     # compute leasing / AI-compute exposure, so unrelated names are not forced

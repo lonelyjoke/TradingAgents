@@ -27,6 +27,7 @@ from tradingagents.agents.utils.agent_utils import (
     get_filing_intelligence_instruction,
     get_focused_report_instruction,
     get_insurance_instruction,
+    get_knowledge_planet_instruction,
     get_medical_device_instruction,
     get_metals_mining_instruction,
     get_optical_module_instruction,
@@ -98,6 +99,7 @@ def create_portfolio_manager(llm):
         investor_interaction_context = prompt_contexts["investor_interaction_context"]
         policy_planning_context = prompt_contexts["policy_planning_context"]
         web_fact_check_context = prompt_contexts["web_fact_check_context"]
+        knowledge_planet_context = prompt_contexts["knowledge_planet_context"]
         baijiu_context = prompt_contexts["baijiu_context"]
         compute_leasing_context = prompt_contexts["compute_leasing_context"]
         dividend_defensive_context = prompt_contexts["dividend_defensive_context"]
@@ -366,6 +368,7 @@ def create_portfolio_manager(llm):
 - Official investor-interaction context: **{investor_interaction_context}**
 - Official policy-planning context: **{policy_planning_context}**
 - Web fact-check context: **{web_fact_check_context}**
+- Knowledge Planet stream/PDF intelligence: **{knowledge_planet_context}**
 - Gated baijiu verification context: **{baijiu_context}**
 - Gated compute-leasing verification context: **{compute_leasing_context}**
 - Gated dividend defensive verification context: **{dividend_defensive_context}**
@@ -411,6 +414,7 @@ Be decisive and ground every conclusion in specific evidence from the analysts.
 {get_management_capital_allocation_instruction()}
 {get_shareholder_structure_instruction()}
 {get_web_fact_check_instruction()}
+{get_knowledge_planet_instruction()}
 {get_baijiu_instruction()}
 {get_compute_leasing_instruction()}
 {get_dividend_defensive_instruction()}

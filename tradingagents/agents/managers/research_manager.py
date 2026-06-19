@@ -24,6 +24,7 @@ from tradingagents.agents.utils.agent_utils import (
     get_optical_module_instruction,
     get_price_move_attribution_instruction,
     get_investor_interaction_instruction,
+    get_knowledge_planet_instruction,
     get_market_expectation_instruction,
     get_management_capital_allocation_instruction,
     get_material_catalyst_instruction,
@@ -79,6 +80,7 @@ def create_research_manager(llm):
         investor_interaction_context = prompt_contexts["investor_interaction_context"]
         policy_planning_context = prompt_contexts["policy_planning_context"]
         web_fact_check_context = prompt_contexts["web_fact_check_context"]
+        knowledge_planet_context = prompt_contexts["knowledge_planet_context"]
         baijiu_context = prompt_contexts["baijiu_context"]
         compute_leasing_context = prompt_contexts["compute_leasing_context"]
         dividend_defensive_context = prompt_contexts["dividend_defensive_context"]
@@ -196,6 +198,7 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 - If commodity/product-price context is available, keep a **Commodity Cycle Verdict** explicit enough to say whether the product-price evidence supports or contradicts the margin/EPS/inventory part of the thesis.
 - If price-move attribution context is available, keep a **Sharp Move Attribution Verdict** explicit enough to say whether a recent move is market-led, same-metal sector-led, cross-metal residual, mapped-commodity-led, stock-specific, failed-rebound/trend continuation, or possible emotion kill. Do not call a drop mispriced until valuation/NAV support and event checks pass.
 - If relative-strength/index-linkage context is available, keep a **Relative Strength Verdict** explicit enough to decide whether the stock is stronger or weaker than its style index and same-industry basket, whether correlation/Beta suggest benchmark beta or company alpha, and how that changes timing, sizing, and thesis validation.
+- If Knowledge Planet context is available, keep a **Knowledge Planet Intelligence Verdict** explicit enough to separate information-rich industry data/channel checks/research feedback from sell-side promotion. Decide whether it upgrades the catalyst/expectation gap, only creates a watch item, or raises pump/crowding risk.
 - If shipping/freight-rate context is available, keep a **Shipping Cycle Verdict** explicit enough to separate broad proxies (BDTI/BCTI/BDI/BCI/BPI) from route-level economics (VLCC TD3C/TCE/CTFI), and explicitly test two-sided Hormuz mechanisms: reopening can reduce risk premium and improve vessel turnover, while restocking, queue normalization, and renewed cargo flows can support near-term cargo demand. Missing route-level freight is a conviction cap, not automatically bearish evidence.
 - If gated baijiu context says `Status: triggered`, keep a **Baijiu Channel Verification Verdict** explicit enough to separate product wholesale price evidence, channel inventory/payment quality, contract-liability seasonality, product mix, peer-basket comparison, and missing data. If it says `Status: not_applicable`, do not force baijiu analysis into the stock.
 - If gated compute-leasing context says `Status: triggered`, keep a **Compute-Leasing Verification Verdict** explicit enough to separate legacy value, verified compute-leasing value, unverified compute optionality, unit-economics gaps, capex/funding risk, and transition credibility. If it says `Status: not_applicable`, do not force compute-leasing analysis into the stock.
@@ -286,6 +289,9 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 **Web Fact-Check Context:**
 {web_fact_check_context}
 
+**Knowledge Planet Stream/PDF Intelligence:**
+{knowledge_planet_context}
+
 **Gated Baijiu Verification Context:**
 {baijiu_context}
 
@@ -349,6 +355,7 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 {get_management_capital_allocation_instruction()}
 {get_shareholder_structure_instruction()}
 {get_web_fact_check_instruction()}
+{get_knowledge_planet_instruction()}
 {get_baijiu_instruction()}
 {get_compute_leasing_instruction()}
 {get_dividend_defensive_instruction()}
