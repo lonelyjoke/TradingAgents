@@ -43,6 +43,13 @@ def _env_int_or_default(name: str, default: int) -> int:
         return default
 
 
+def _env_bool_or_default(name: str, default: bool) -> bool:
+    value = os.getenv(name)
+    if value is None or value == "":
+        return default
+    return value.strip().lower() not in {"0", "false", "no", "off"}
+
+
 def _env_or_none(name: str) -> str | None:
     value = os.getenv(name)
     return value or None
@@ -160,6 +167,32 @@ DEFAULT_CONFIG = {
     "knowledge_planet_max_reports": _env_int_or_default(
         "KNOWLEDGE_PLANET_MAX_REPORTS",
         12,
+    ),
+    # Auto-sync upstream zsxq data before Knowledge Planet contexts/reports are
+    # read. A date-level stamp prevents repeated downloads during the same day.
+    "knowledge_planet_auto_sync_enabled": _env_bool_or_default(
+        "KNOWLEDGE_PLANET_AUTO_SYNC",
+        True,
+    ),
+    "knowledge_planet_auto_sync_group": _env_or_default(
+        "KNOWLEDGE_PLANET_AUTO_SYNC_GROUP",
+        "28888112822211:前沿信息收录",
+    ),
+    "knowledge_planet_auto_sync_max_pages": _env_int_or_default(
+        "KNOWLEDGE_PLANET_AUTO_SYNC_MAX_PAGES",
+        20,
+    ),
+    "knowledge_planet_auto_sync_max_image_downloads": _env_int_or_default(
+        "KNOWLEDGE_PLANET_AUTO_SYNC_MAX_IMAGE_DOWNLOADS",
+        100,
+    ),
+    "knowledge_planet_auto_sync_max_file_downloads": _env_int_or_default(
+        "KNOWLEDGE_PLANET_AUTO_SYNC_MAX_FILE_DOWNLOADS",
+        50,
+    ),
+    "knowledge_planet_auto_sync_min_interval_minutes": _env_int_or_default(
+        "KNOWLEDGE_PLANET_AUTO_SYNC_MIN_INTERVAL_MINUTES",
+        30,
     ),
     # Gated A-share compute-leasing verification layer. The module returns a
     # not_applicable status unless official or semi-official evidence indicates

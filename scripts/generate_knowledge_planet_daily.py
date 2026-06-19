@@ -45,6 +45,48 @@ def main() -> int:
         help="Maximum candidate rows to include in the ranking table.",
     )
     parser.add_argument(
+        "--max-scored-candidates",
+        type=int,
+        default=12,
+        help="Maximum top candidates to enrich with real A-share fundamental/technical scores.",
+    )
+    parser.add_argument(
+        "--no-market-scoring",
+        action="store_true",
+        help="Skip A-share fundamental/technical enrichment and only rank Knowledge Planet signals.",
+    )
+    parser.add_argument(
+        "--llm-market-analysis",
+        action="store_true",
+        help="Use an LLM, default DeepSeek, to analyze candidate theme logic and trading action.",
+    )
+    parser.add_argument(
+        "--max-llm-candidates",
+        type=int,
+        default=8,
+        help="Maximum top candidates to send to the LLM market-analysis layer.",
+    )
+    parser.add_argument(
+        "--llm-provider",
+        default="deepseek",
+        help="LLM provider for --llm-market-analysis.",
+    )
+    parser.add_argument(
+        "--llm-model",
+        default="deepseek-chat",
+        help="LLM model for --llm-market-analysis.",
+    )
+    parser.add_argument(
+        "--llm-base-url",
+        default=None,
+        help="Optional base URL override for the LLM provider.",
+    )
+    parser.add_argument(
+        "--quiet",
+        action="store_true",
+        help="Suppress per-candidate market-scoring progress output.",
+    )
+    parser.add_argument(
         "--db",
         type=Path,
         default=None,
@@ -61,10 +103,37 @@ def main() -> int:
     if args.db:
         set_config({"knowledge_planet_db_path": str(args.db.resolve())})
 
+    include_market_scores = not args.no_market_scoring
+    print(f"python: {sys.executable}")
+    print(
+        "market scoring: "
+        + (
+            f"enabled, max scored candidates={args.max_scored_candidates}"
+            if include_market_scores
+            else "disabled by --no-market-scoring"
+        )
+    )
+    print(
+        "llm market analysis: "
+        + (
+            f"enabled, provider={args.llm_provider}, model={args.llm_model}, max candidates={args.max_llm_candidates}"
+            if args.llm_market_analysis
+            else "disabled"
+        )
+    )
+
     report = build_knowledge_planet_daily_report(
         args.date,
         look_back_days=args.lookback_days,
         max_candidates=args.max_candidates,
+        include_market_scores=include_market_scores,
+        max_scored_candidates=args.max_scored_candidates,
+        include_llm_market_analysis=args.llm_market_analysis,
+        max_llm_candidates=args.max_llm_candidates,
+        llm_provider=args.llm_provider,
+        llm_model=args.llm_model,
+        llm_base_url=args.llm_base_url,
+        progress=None if args.quiet else print,
     )
     output = args.output
     if output is None:

@@ -15,6 +15,60 @@ On Windows, the easiest command is:
 
 This wrapper prefers the bundled Python runtime that includes PDF extraction dependencies. If you prefer PowerShell scripts and your execution policy allows them, `.\scripts\import_knowledge_planet.ps1` works too.
 
+## Optional zsxq-cli Sync
+
+If your Knowledge Planet account is logged in through `zsxq-cli`, supported
+groups can be synced directly into the local stream inbox. The current primary
+source is:
+
+`.\scripts\sync_knowledge_planet_from_zsxq.cmd --date 2026-06-19 --group-id 28888112822211:前沿信息收录`
+
+Then run the normal importer:
+
+`.\scripts\import_knowledge_planet.cmd`
+
+In normal TradingAgents usage this upstream step is now also guarded
+automatically. Before single-stock Knowledge Planet context is read, and before
+the standalone theme-trading daily report is generated, the system attempts:
+
+`zsxq sync -> import_knowledge_planet`
+
+The result is stamped under `data/knowledge_planet/.sync_state/`. By default a
+second run within 30 minutes reuses the already-synced local index instead of
+downloading the same images/PDFs again; after that interval the next project run
+attempts a fresh upstream sync.
+
+Optional environment overrides:
+
+- `KNOWLEDGE_PLANET_AUTO_SYNC=0` disables automatic upstream sync.
+- `KNOWLEDGE_PLANET_AUTO_SYNC_GROUP=28888112822211:前沿信息收录`
+- `KNOWLEDGE_PLANET_AUTO_SYNC_MAX_PAGES=20`
+- `KNOWLEDGE_PLANET_AUTO_SYNC_MAX_IMAGE_DOWNLOADS=100`
+- `KNOWLEDGE_PLANET_AUTO_SYNC_MAX_FILE_DOWNLOADS=50`
+- `KNOWLEDGE_PLANET_AUTO_SYNC_MIN_INTERVAL_MINUTES=30`
+
+Not every joined group allows API access. If `zsxq-cli` reports a message such
+as `该星球内容仅限成员在星球内查看，暂不支持通过 API 访问`, keep using the
+manual inbox workflow for that group. The sync script writes only a daily
+markdown stream under `data/knowledge_planet/inbox/`.
+
+The sync script also attempts to enrich non-text material:
+
+- topic images are downloaded to `data/knowledge_planet/attachments/images/YYYY-MM-DD/`;
+- Windows OCR is run on downloaded images and the OCR text is embedded back into
+  the daily markdown stream, so screenshot essays become searchable;
+- file attachments are resolved through zsxq file download URLs;
+- PDF attachments are downloaded to `data/knowledge_planet/reports/inbox/`, so
+  the normal PDF importer can extract and index them.
+
+Useful safety limits:
+
+`.\scripts\sync_knowledge_planet_from_zsxq.cmd --date 2026-06-19 --group-id 28888112822211:前沿信息收录 --max-pages 20 --max-image-downloads 100 --max-file-downloads 50`
+
+If you only want text sync:
+
+`.\scripts\sync_knowledge_planet_from_zsxq.cmd --date 2026-06-19 --group-id 28888112822211:前沿信息收录 --no-download-images --no-download-files`
+
 The importer will:
 
 - split daily post streams into individual items;
@@ -94,6 +148,48 @@ Use `--lookback-days 0` for the exact day, or a larger value such as `3` when
 you want a rolling window. The report ranks mentioned candidates by information
 content, catalyst clues, and pump-risk signals. It is a theme-trading shortlist,
 not a direct buy list.
+
+By default the report also attempts an A-share trader-style validation for the
+top ranked candidates. Fundamentals are used as cross-validation for the
+narrative, not as a standalone additive score: strong fundamentals confirm and
+amplify the theme, weak fundamentals cap or penalize the ranking, and missing
+data prevents an A-bucket call. This validation looks at growth, profitability,
+cash/leverage, valuation tolerance, and market-cap elasticity. The technical
+score remains an independent timing/risk check covering trend, 5/20/60-day
+momentum, turnover/volume confirmation, distance from recent highs, and overheat
+risk. If Tushare or ticker resolution is unavailable, the candidate is marked as
+unscored rather than filled with fake data. To skip this slower validation step,
+run:
+
+`.\scripts\generate_knowledge_planet_daily.cmd --date 2026-06-19 --no-market-scoring`
+
+For the high-quality theme-trading version, add DeepSeek LLM analysis. This
+uses deterministic scores only as inputs, then asks the model to decompose the
+thesis path, company relevance, verification points, falsification points,
+trading action, and pump risk:
+
+`.\scripts\generate_knowledge_planet_daily.cmd --date 2026-06-19 --lookback-days 0 --llm-market-analysis --max-llm-candidates 8`
+
+The LLM layer is explicit because it consumes API tokens. Mention count remains
+only a recall signal; it should not be treated as the reason a candidate ranks
+highly.
+
+The daily report now follows a trading-desk chain:
+
+- parse raw posts into event signals such as order/production, price hikes,
+  inventory/supply-demand, customer validation, policy, overseas mapping, or
+  sell-side promotion;
+- rank theme mainlines and show a pre-market playbook before listing stocks;
+- translate each candidate into expectation gap, company pass-through,
+  fundamental validation, technical trading window, win-rate/payoff, entry plan,
+  sizing, verification points, and falsification points.
+
+Single-stock TradingAgents uses this knowledge base differently. It treats
+Knowledge Planet as supplemental alternative intelligence: it can enrich
+sell-side frameworks, channel clues, KPI questions, and expectation-gap
+hypotheses, but official filings, announcements, financial statements, reputable
+news, and price/volume evidence remain the objective anchor. If the private
+stream conflicts with objective evidence, the objective evidence caps conviction.
 
 ## TradingAgents Integration
 

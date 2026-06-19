@@ -220,6 +220,8 @@ __marimo__/
 
 # Local private Knowledge Planet research inbox and generated indexes.
 data/knowledge_planet/index.sqlite*
+data/knowledge_planet/.sync_state/**
+data/knowledge_planet/attachments/**
 data/knowledge_planet/inbox/*
 !data/knowledge_planet/inbox/README.md
 !data/knowledge_planet/inbox/post_template.md
