@@ -375,6 +375,29 @@ def test_quality_audit_requires_formula_period_and_evidence_status():
     assert "Weak or incomplete modules" in context
 
 
+def test_quality_audit_catches_report_specific_number_and_attribution_errors():
+    context = build_quality_audit_context(
+        "601318.SH",
+        "2026-06-18",
+        industry_cycle_context="# Industry Cycle Scan\n\n- Cycle verdict: bottom-testing",
+        company_business_model_context="# Company Business Model Primer\n\nintegrated insurer",
+        industry_kpi_context="# Industry KPI Checklist\n\ninsurance KPI ready",
+        forecast_model_context="# Forward Forecast Model Scaffold\n\ninsurance forecast ready",
+        peer_comparison_context="# Same-Industry Peer Comparison\n\ninsurance peer screen ready",
+        price_earnings_decomposition_context="# Price-EPS-PE Decomposition\n\nready",
+        earnings_model_context="# Earnings Model\n\nready",
+        filing_intelligence_context="# Financial-Report Intelligence\n\nready",
+    )
+
+    assert "Do not confuse dividend yield with DPS" in context
+    assert "percentage as DPS" in context
+    assert "yuan/ten-thousand-yuan/100-million-yuan conversion error" in context
+    assert "PE/PB/ROE/dividend yield/one-quarter profit growth" in context
+    assert "not enough to prove a peer is a superior substitute" in context
+    assert "do not infer institutional rotation" in context
+    assert "trading volume alone" in context
+
+
 def test_quality_audit_flags_metals_template_mismatch_and_missing_aluminum_spread():
     context = build_quality_audit_context(
         "601600.SH",

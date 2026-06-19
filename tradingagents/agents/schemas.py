@@ -566,7 +566,13 @@ class PortfolioDecision(BaseModel):
             "text fields must be consistent with this final rating; upstream "
             "Research Manager, Trader, or risk-analyst ratings may be discussed "
             "only as non-final prior/upstream views, never as the current or final "
-            "Portfolio Manager rating."
+            "Portfolio Manager rating. The rating must follow from the company's "
+            "standalone fundamental chain, not from the failure of the opposite "
+            "case. If the justified action is only a starter/observation position "
+            "pending one decisive disclosure, prefer Hold with positive-bias "
+            "guidance unless the report independently proves Overweight through "
+            "business quality, operating trend, valuation gap, catalyst path, and "
+            "bounded downside."
         ),
     )
     company_snapshot: str = Field(
@@ -628,11 +634,19 @@ class PortfolioDecision(BaseModel):
             "to build a position. The advice must fit the final rating. For Buy or "
             "Overweight, explain how to build or add in stages, what evidence or "
             "price/valuation zone justifies adding, and how much dry powder to keep. "
-            "For Hold, explain what full holders should monitor or rebalance, and "
-            "what new buyers should wait for before initiating. For Underweight or "
+            "For Hold, do not write a low-information neutral paragraph; explain "
+            "the live thesis, whether a starter/observation position is justified, "
+            "what full holders should monitor or rebalance, what new buyers should "
+            "wait for before initiating or adding, and the exact upgrade/downgrade "
+            "triggers. For Underweight or "
             "Sell, explain how full holders should reduce or hedge, and what lower "
             "price/valuation band would make new entry reasonable if fundamentals "
             "remain intact. If no responsible build zone exists, say so explicitly. "
+            "For insurance or defensive-dividend names, if the final rating is "
+            "Overweight but recommended sizing is only a starter or below normal "
+            "target weight, reconcile why Overweight is independently proven; "
+            "otherwise use Hold with positive-bias starter guidance and name the "
+            "disclosure that unlocks full sizing. "
             "Do not tell holders to reduce to Underweight or tell new buyers to "
             "avoid the stock when the final rating is Buy or Overweight, unless that "
             "sentence is explicitly framed as a rejected upstream view."
@@ -647,7 +661,10 @@ class PortfolioDecision(BaseModel):
             "a buy-side analyst would track. For banks, map earning assets, NIM/"
             "deposit cost, fee income/AUM, asset quality/credit cost, capital/RWA, "
             "and payout capacity rather than generic revenue, gross margin, orders, "
-            "inventory, or OCF."
+            "inventory, or OCF. For insurers, map life NBV/EV and channel quality, "
+            "investment yield versus liability cost, P&C COR, solvency/capital, "
+            "dividend capacity, and subsidiary/SOTP value rather than generic PE "
+            "or one-quarter OCF alone."
         ),
     )
     business_segment_breakdown: Optional[str] = Field(
@@ -789,7 +806,11 @@ class PortfolioDecision(BaseModel):
             "probabilities to concrete driver assumptions, not generic labels. "
             "For banks, specify NIM bps, fee-income growth, credit cost/provision "
             "coverage, NPL movement, ROE, PB or dividend-yield assumptions, and "
-            "the corresponding position action."
+            "the corresponding position action. For insurers, label probabilities "
+            "as subjective PM underwriting weights unless they come from a supplied "
+            "source, and attach them to NBV growth, EV/P-EV, OPAT/core profit, "
+            "investment spread, solvency, COR, dividend coverage, and SOTP discount "
+            "assumptions."
         ),
     )
     cycle_valuation_assessment: Optional[str] = Field(
@@ -916,6 +937,28 @@ class PortfolioDecision(BaseModel):
             "a directional reversal."
         ),
     )
+    rating_evidence_audit: Optional[str] = Field(
+        default=None,
+        description=(
+            "A compact rating-quality audit that makes the final rating easy to "
+            "understand without reader interpretation. Separate at least five "
+            "items: absolute company view, sector-relative allocation view, data "
+            "sufficiency, key-number or unit conflicts, and why the selected "
+            "rating tier follows instead of the adjacent tiers. Explain why the "
+            "rating follows from the fundamental chain itself rather than from the "
+            "failure of the opposite case. If choosing Overweight with only starter "
+            "sizing, explicitly prove why this is not merely Hold/positive watch; "
+            "if choosing Hold, make it useful by stating the live thesis, upgrade "
+            "gate, downgrade gate, and current position implication. If a negative "
+            "rating relies mainly on peer substitution, state whether the peer "
+            "is verified on the same industry-native drivers. For insurers, a "
+            "peer screen based only on PE/PB/ROE/dividend yield/one-quarter "
+            "profit growth is insufficient for Underweight/Sell unless the peer "
+            "is also checked on NBV growth, NBV margin, EV or P/EV, OCF/cash "
+            "quality, solvency, investment spread, payout coverage, channel mix, "
+            "and P&C COR where applicable."
+        ),
+    )
     material_catalysts: Optional[str] = Field(
         default=None,
         description=(
@@ -949,6 +992,11 @@ class PortfolioDecision(BaseModel):
             "best build candidate in its sampled peer set, an acceptable but not "
             "best option, or inferior to named peers. Explain the metrics and "
             "business reasons, and how that affects position posture."
+            " For insurers, name whether the target is a higher-beta NBV/SOTP "
+            "recovery expression, a cleaner insurance-quality compounder, a "
+            "dividend sleeve, or inferior to true insurer peers. Do not call a "
+            "peer a verified superior substitute from PE/PB/ROE alone; require "
+            "same-driver insurance evidence or label the switch as a hypothesis."
         ),
     )
     peer_comparison_summary: Optional[str] = Field(
@@ -962,6 +1010,9 @@ class PortfolioDecision(BaseModel):
             "by ROE, margin, growth, balance-sheet risk, cash return, or business "
             "quality; (4) named better/worse alternatives and their caveats; and "
             "(5) what the peer screen changes in sizing, rating, or follow-up work."
+            " For insurers, compare true life/P&C/integrated-insurer peers separately "
+            "from broad financial screens, and explain why the target is preferable "
+            "or inferior versus named alternatives."
         ),
     )
     supply_chain_position_verdict: Optional[str] = Field(
@@ -1005,7 +1056,12 @@ class PortfolioDecision(BaseModel):
             "NAV/SOTP, dividend yield, liquidation/asset value, or peer-relative "
             "valuation. State why the chosen method fits the business economics, "
             "which parts enter core value, which stay in scenario value, and what "
-            "current price implies versus the research view."
+            "current price implies versus the research view. For insurers, include "
+            "or explicitly mark missing P/EV or EV growth, NBV multiple, PB-ROE, "
+            "dividend yield with payout/solvency coverage, and SOTP with segment "
+            "formula, ownership/stake, per-share conversion, holding-company "
+            "discount, and double-counting checks. If current EV is missing, use "
+            "latest annual EV only as a stale-base cross-check and label it."
         ),
     )
     market_behavior_validation: Optional[str] = Field(
@@ -1446,12 +1502,18 @@ def render_pm_decision(decision: PortfolioDecision) -> str:
         "",
         f"**One-Line Thesis**: {decision.one_line_thesis}",
         "",
-        *pm_summary_parts,
-        *primer_parts,
-        *core_question_parts,
-        f"**Investment Thesis**: {thesis}",
-        "",
     ]
+    if decision.rating_evidence_audit:
+        parts.extend([f"**Rating Evidence Audit**: {decision.rating_evidence_audit}", ""])
+    parts.extend(
+        [
+            *pm_summary_parts,
+            *primer_parts,
+            *core_question_parts,
+            f"**Investment Thesis**: {thesis}",
+            "",
+        ]
+    )
     if supporting_evidence:
         parts.extend([f"**Supporting Evidence Integration**: {supporting_evidence}", ""])
     parts.extend([f"**Debate & Decision Logic**: {debate_and_decision_logic}", ""])

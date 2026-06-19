@@ -185,6 +185,65 @@ class TestRenderPortfolioDecision:
             "**Investment Thesis**"
         )
 
+    def test_rating_evidence_audit_renders_immediately_after_one_line_thesis(self):
+        decision = PortfolioDecision(
+            rating=PortfolioRating.HOLD,
+            company_snapshot="Integrated insurer with low valuation and mixed evidence.",
+            one_line_thesis="Absolute downside is limited, but peer substitution is unverified.",
+            rating_evidence_audit=(
+                "Absolute company view: low PB and dividend support remain. "
+                "Sector-relative view: peer screen is only a hypothesis until "
+                "NBV, EV, OCF, solvency, and payout coverage are matched. "
+                "Rating tier: Hold rather than Underweight."
+            ),
+            business_driver_map="NBV, EV, OCF, solvency, dividend coverage.",
+            bull_bear_debate="Bull sees value; bear sees peer opportunity cost.",
+            debate_verdict="Evidence supports a watch stance, not a peer-switch sell call.",
+            investment_logic_chain="Valuation support offsets unverified relative substitution.",
+            executive_summary="Hold with verification calendar.",
+            verification_and_falsification="Verify NBV margin and OCF in the interim report.",
+            investment_thesis="The stock is cheap but needs insurance-native verification.",
+        )
+
+        md = render_pm_decision(decision)
+
+        assert "**Rating Evidence Audit**:" in md
+        assert "peer screen is only a hypothesis" in md
+        assert md.index("**One-Line Thesis**") < md.index("**Rating Evidence Audit**")
+        assert md.index("**Rating Evidence Audit**") < md.index("**Investment Thesis**")
+
+    def test_hold_can_be_actionable_positive_watch_not_empty_neutral(self):
+        decision = PortfolioDecision(
+            rating=PortfolioRating.HOLD,
+            company_snapshot="Insurer with improving NBV but unresolved cash-flow attribution.",
+            one_line_thesis="The live thesis is valid but waits for interim-report proof.",
+            rating_evidence_audit=(
+                "Fundamental chain: NBV and OPAT are improving, but OCF attribution "
+                "and current EV are unresolved. Rating tier: Hold/positive watch "
+                "rather than Overweight until the upgrade gate is met."
+            ),
+            reader_action_guidance=(
+                "Builders may keep a starter observation position; upgrade to "
+                "Overweight only if NBV margin stabilizes and OCF recovers, and "
+                "downgrade if NBV slows below the gate or cash-flow deterioration persists."
+            ),
+            business_driver_map="NBV, OPAT, COR, OCF attribution, EV.",
+            bull_bear_debate="Bull sees valuation gap; bear sees cash-flow risk.",
+            debate_verdict="Hold is actionable because the next disclosure decides sizing.",
+            investment_logic_chain="Positive evidence is real, but the decisive cash-flow gate is pending.",
+            executive_summary="Hold with positive watch and starter-position discipline.",
+            verification_and_falsification="Upgrade on NBV/OCF proof; downgrade on persistent deterioration.",
+            investment_thesis="The company may be mispriced, but full conviction waits for evidence.",
+        )
+
+        md = render_pm_decision(decision)
+
+        assert "**Rating**: Hold" in md
+        assert "Hold/positive watch" in md
+        assert "starter observation position" in md
+        assert "upgrade to Overweight" in md
+        assert "downgrade if" in md
+
     def test_value_stock_safety_price_renders_before_action_guidance(self):
         decision = PortfolioDecision(
             rating=PortfolioRating.HOLD,
