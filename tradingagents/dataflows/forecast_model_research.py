@@ -209,6 +209,7 @@ def build_forecast_model_context(
     industry_kpi_context: str = "",
     metals_mining_context: str = "",
     insurance_context: str = "",
+    knowledge_planet_context: str = "",
 ) -> str:
     gated_insurance_context = (
         insurance_context if _insurance_context_triggered(insurance_context) else ""
@@ -222,6 +223,7 @@ def build_forecast_model_context(
             gated_insurance_context,
             industry_kpi_context,
             metals_mining_context,
+            knowledge_planet_context,
         ]
     )
     is_hog_breeder = is_hog_breeding_text(symbol, combined)
@@ -297,7 +299,10 @@ def build_forecast_model_context(
             "| Breeding profit | sales kg x unit spread |",
             "| Sensitivity | show at least bear/base/bull hog ASP cases and each 1 CNY/kg move where data permits |",
             "| Implied cycle | reverse-engineer the hog ASP implied by current market cap under normalized PE/PB bands |",
-            "- No Buy/Overweight or Underweight/Sell conclusion is complete without linking rating triggers to hog ASP, complete cost, breeding-sow inventory, OCF, and leverage.",
+            "| Valuation floor | stress-case book value / NAV after losses and impairment, cross-checked with trough PB |",
+            "- No Buy/Overweight or Underweight/Sell conclusion is complete without linking rating triggers to hog ASP, complete cost, breeding-sow inventory, OCF, leverage, and current-market-cap implied hog price.",
+            "- The scenario table must be monotonic in economic logic: a positive-spread recovery case cannot have a selected fair-value range below a worse loss-making stress case unless the report explicitly explains why PB support disappears.",
+            "- Use PE only on normalized cycle earnings. Do not use TTM PE or a one-year trough/peak EPS as the primary hog-breeder valuation anchor.",
         ]
 
     return "\n".join(
@@ -328,6 +333,7 @@ def build_forecast_model_context(
             "- A Buy/Overweight call should identify which two or three assumptions drive most of the upside.",
             "- Do not cite target price, safety price, or re-rating multiple without showing the earnings/cash-flow bridge behind it.",
             "- If only a run-rate quarter is available, label it as run-rate or stress/base scenario, not as a full forecast.",
+            "- Knowledge Planet can supply private/proxy assumptions, but each assumption must be tagged and reconciled with filings, public prices, Tushare data, or a verification calendar before it changes valuation.",
         ]
     )
 
@@ -348,4 +354,5 @@ def get_forecast_model_context(
         industry_kpi_context=supplied.get("industry_kpi_context", ""),
         metals_mining_context=supplied.get("metals_mining_context", ""),
         insurance_context=supplied.get("insurance_context", ""),
+        knowledge_planet_context=supplied.get("knowledge_planet_context", ""),
     )

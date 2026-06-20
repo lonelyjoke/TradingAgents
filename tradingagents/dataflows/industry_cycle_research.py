@@ -110,6 +110,7 @@ def build_industry_cycle_context(
     policy_planning_context: str = "",
     investor_interaction_context: str = "",
     filing_intelligence_context: str = "",
+    knowledge_planet_context: str = "",
 ) -> str:
     """Build a compact industry-cycle verdict from existing evidence contexts."""
 
@@ -157,6 +158,14 @@ def build_industry_cycle_context(
                 "Metals/mining context is available; realized prices, reserves, grade, AISC/unit cost, project ramp, hedging, and NAV/SOTP should govern cycle language.",
             )
         )
+    if _has_usable_context(knowledge_planet_context):
+        active_layers.append(
+            (
+                "Knowledge Planet private/proxy intelligence",
+                "private cycle clues require objective bridge",
+                "Knowledge Planet context is available; industry weekly data, channel checks, and PDF research may improve cycle timing, but sell-side pushes must be converted into price/spread/inventory/cost evidence before valuation.",
+            )
+        )
 
     if not active_layers:
         active_layers.append(
@@ -187,6 +196,7 @@ def build_industry_cycle_context(
                 policy_planning_context,
                 investor_interaction_context,
                 filing_intelligence_context,
+                knowledge_planet_context,
             ]
         ),
         (
@@ -253,4 +263,5 @@ def get_industry_cycle_context(
         policy_planning_context=supplied.get("policy_planning_context", ""),
         investor_interaction_context=supplied.get("investor_interaction_context", ""),
         filing_intelligence_context=supplied.get("filing_intelligence_context", ""),
+        knowledge_planet_context=supplied.get("knowledge_planet_context", ""),
     )

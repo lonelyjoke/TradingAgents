@@ -9,6 +9,8 @@ from __future__ import annotations
 
 import re
 
+from .industry_identity import is_hog_breeding_text
+
 
 QuestionRow = tuple[str, str, str, str, str, str]
 
@@ -54,6 +56,7 @@ def _detect_archetype(
     dividend_defensive_context: str = "",
     compute_leasing_context: str = "",
     shipping_context: str = "",
+    knowledge_planet_context: str = "",
 ) -> str:
     text = "\n".join(
         [
@@ -72,9 +75,12 @@ def _detect_archetype(
             dividend_defensive_context,
             compute_leasing_context,
             shipping_context,
+            knowledge_planet_context,
         ]
     )
     lower = _lower(text)
+    if is_hog_breeding_text(symbol, text):
+        return "hog-breeding cyclical company"
     if _triggered(metals_mining_context):
         if "aluminum" in lower or "601600" in lower or "000807" in lower:
             return "aluminum integrated producer"
@@ -146,6 +152,13 @@ def _rows_for_archetype(archetype: str) -> list[QuestionRow]:
             ("IN-1", "Is value driven by NBV/EV recovery, investment spread, P&C COR, bank subsidiary, or dividend?", "prove the precise value engine and avoid mixed financial conglomerate shortcuts", "attack channel quality, solvency, investment-yield drag, COR deterioration, or SOTP over-credit", "NBV, EV, solvency, investment yield, COR, dividend coverage, subsidiary valuation", "sets P/EV, PB/ROE, and SOTP weights"),
             ("IN-2", "Is dividend yield sustainable under capital and asset-quality stress?", "prove payout capacity, capital buffer, and recurring profit", "attack capital constraints, asset impairments, and profit volatility", "payout ratio, solvency, free surplus, investment losses, regulatory capital", "defines defensive status"),
         ]
+    if archetype == "hog-breeding cyclical company":
+        return [
+            ("HG-1", "Where exactly are we in the hog cycle: downcycle, bottom-testing, bottom-right validation, or early upcycle?", "prove the cycle stage with hog ASP, piglet price, sow inventory, slaughter/output, frozen inventory, and futures/spot confirmation", "attack false-bottom risk, inventory rebuild, weak demand, or one-source private data", "company ASP, national spot, DCE LH curve, piglet/sow price, breeding-sow inventory, slaughter volume, frozen inventory", "sets whether valuation should lean on PB floor, normalized earnings, or recovery option value"),
+            ("HG-2", "Is the company creating alpha through cost advantage or just carrying hog-price beta?", "prove complete cost, PSY/FCR, mortality, feed cost, finance cost, scale efficiency, and cash survival versus peers", "attack cost disclosure sparsity, disease/mortality risk, debt pressure, capex burden, and peer cost catch-up", "monthly complete cost, feed cost, OCF, debt maturity, biological assets, impairment, peer cost", "decides whether it deserves premium PB/normalized PE and higher position size"),
+            ("HG-3", "What hog price and cost spread is already implied by the current market cap?", "reverse-engineer implied hog ASP/spread and show upside if ASP moves to 14/16/18/20 CNY/kg", "attack optimism if current price already discounts recovery or if PB floor is eroding", "market cap, sales kg, cost deck, normalized PE, PB/NAV floor, losses/impairments", "prevents target-price tables from mixing PE and PB inconsistently"),
+            ("HG-4", "Which Knowledge Planet clues are real operating data versus sell-side promotion?", "map private data into piglet/sow price, industry destocking, company cost/output, and catalyst clock", "attack stale, biased, non-company-specific, or unverified claims and target-market-cap leaps", "Knowledge Planet source type, date, KPI, verification status, PDF framework, public cross-check", "determines whether private intelligence upgrades the expectation gap or only creates a watch item"),
+        ]
     if archetype == "bank / financial institution":
         return [
             ("BK-1", "Is low PB pricing asset-quality fear, weak ROE, or a mispriced deposit franchise?", "prove NIM, credit cost, capital, and deposit advantage", "attack NPL migration, provision weakness, fee-income pressure, and ROE dilution", "NIM, deposit cost, NPL/SML/overdue, provision coverage, CET1, ROE", "sets PB/ROE/COE valuation"),
@@ -192,6 +205,7 @@ def build_thesis_question_context(
     insurance_context: str = "",
     medical_device_context: str = "",
     metals_mining_context: str = "",
+    knowledge_planet_context: str = "",
 ) -> str:
     archetype = _detect_archetype(
         symbol,
@@ -209,6 +223,7 @@ def build_thesis_question_context(
         dividend_defensive_context=dividend_defensive_context,
         compute_leasing_context=compute_leasing_context,
         shipping_context=shipping_context,
+        knowledge_planet_context=knowledge_planet_context,
     )
     rows = _rows_for_archetype(archetype)
     question_table = [
@@ -221,7 +236,14 @@ def build_thesis_question_context(
     )
 
     decisive_lines = _find_lines(
-        "\n".join([industry_kpi_context, forecast_model_context, quality_audit_context]),
+        "\n".join(
+            [
+                industry_kpi_context,
+                forecast_model_context,
+                quality_audit_context,
+                knowledge_planet_context,
+            ]
+        ),
         (
             r"playbook|required KPI|driver|forecast|scaffold|audit|missing|partial|verified|evidence status",
             r"price|spread|margin|output|capacity|utilization|inventory|backlog|cash|debt|NAV|SOTP|AISC|TC/RC",
@@ -241,6 +263,7 @@ def build_thesis_question_context(
                 web_fact_check_context,
                 commodity_context,
                 shipping_context,
+                knowledge_planet_context,
             ]
         ),
         (
@@ -278,6 +301,7 @@ def build_thesis_question_context(
             "- Opening bear case: attack the same question IDs; do not introduce generic downside without linking it to a question.",
             "- Missing evidence rule: a missing thesis-critical answer is neutral for direction but reduces confidence, SOTP credit, and position size.",
             "- Aluminum cost rule: missing alumina, power, or anode cost evidence cannot prove profit deterioration; bearish margin claims need verified cost squeeze, segment-margin compression, inventory/cash deterioration, peer opportunity cost, or valuation stress.",
+            "- Hog-breeder rule: force bull, bear, and PM to answer HG questions when triggered. Do not accept PE-only valuation, generic consumer-staples framing, or a scenario table that mixes PE and PB without a selected-value reconciliation.",
             "- Research manager: render a compact question-led issue log with question, bull answer, bear attack, evidence verdict, valuation/sizing impact, and next verification.",
             "- Portfolio manager: unresolved thesis-critical questions must appear in Evidence Gaps & Data Coverage or Verification Calendar and should cap rating/sizing confidence.",
         ]
@@ -318,4 +342,5 @@ def get_thesis_question_context(ticker: str, curr_date: str, **supplied: str) ->
         insurance_context=supplied.get("insurance_context", ""),
         medical_device_context=supplied.get("medical_device_context", ""),
         metals_mining_context=supplied.get("metals_mining_context", ""),
+        knowledge_planet_context=supplied.get("knowledge_planet_context", ""),
     )

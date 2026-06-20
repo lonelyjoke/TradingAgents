@@ -189,10 +189,11 @@ def test_daily_report_flags_information_and_pump_risk(tmp_path, monkeypatch):
 
     assert "候选标的综合排序" in report
     assert "PM总控层：最终取舍" in report
-    assert "双评分系统：主升潜力 vs 短线交易" in report
-    assert "结构化事件库" in report
-    assert "PDF 研报结构化抽取层" in report
-    assert "机会研究流水线状态" in report
+    assert "今日真增量到交易映射" in report
+    assert "建仓价值候选 Top 5" in report
+    assert "评分拆解" in report
+    assert "高位与低位挖掘" in report
+    assert "研究流水线状态" in report
     assert "宁德时代" in report
     assert "高价值产业/调研线索" in report
     assert "卖方推票 / 吹票风险观察" in report
@@ -316,6 +317,76 @@ def test_daily_report_can_include_mocked_llm_market_analysis(tmp_path, monkeypat
     assert "86" in report
     assert "建仓候选，等待量价确认" in report
     assert "新能源车需求->动力电池订单" in report
+
+
+def test_candidate_target_selection_keeps_low_frequency_and_research_lanes():
+    rows = [
+        (
+            f"tech_{idx}",
+            {
+                "display_name": f"科技热门{idx}",
+                "mentions": 10,
+                "score": 90 - idx,
+                "pump": 20,
+                "recency_score": 8,
+                "preprocess_evidence": ["AI 算力 半导体 热门推荐"],
+                "source_labels": ["候选机会资产"],
+                "opportunity_types": ["热门优选"],
+            },
+        )
+        for idx in range(10)
+    ]
+    rows.extend(
+        [
+            (
+                "non_tech",
+                {
+                    "display_name": "山高环能",
+                    "mentions": 2,
+                    "score": 70,
+                    "pump": 0,
+                    "recency_score": 2,
+                    "preprocess_evidence": ["环保 资源化 UCO 稀缺资产"],
+                    "source_labels": ["候选机会资产"],
+                    "opportunity_types": ["观察池"],
+                },
+            ),
+            (
+                "report",
+                {
+                    "display_name": "三力制药",
+                    "mentions": 1,
+                    "score": 66,
+                    "pump": 0,
+                    "recency_score": 1,
+                    "preprocess_evidence": ["中药主业修复 研报假设"],
+                    "source_labels": ["研报假设资产"],
+                    "opportunity_types": ["研报假设待交叉验证"],
+                },
+            ),
+            (
+                "low_freq",
+                {
+                    "display_name": "低频周期股",
+                    "mentions": 1,
+                    "score": 60,
+                    "pump": 0,
+                    "recency_score": 1,
+                    "preprocess_evidence": ["煤炭 价格 库存"],
+                    "source_labels": ["候选机会资产"],
+                    "opportunity_types": ["低频预期差"],
+                },
+            ),
+        ]
+    )
+
+    selected = kp._select_candidate_targets(rows, 6)
+    selected_keys = {key for key, _data in selected}
+
+    assert "non_tech" in selected_keys
+    assert "report" in selected_keys
+    assert "low_freq" in selected_keys
+    assert sum(1 for key in selected_keys if key.startswith("tech_")) < 6
 
 
 def test_trading_graph_wires_knowledge_planet_context():

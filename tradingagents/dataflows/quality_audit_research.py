@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from typing import Mapping
 
+from .industry_identity import is_hog_breeding_text
+
 
 def _status(text: str, *, fail_markers: tuple[str, ...] = ()) -> str:
     cleaned = (text or "").strip()
@@ -116,6 +118,7 @@ def build_quality_audit_context(
     filing_intelligence_context: str = "",
     metals_mining_context: str = "",
     commodity_context: str = "",
+    knowledge_planet_context: str = "",
 ) -> str:
     rows = [
         ("Industry cycle stage", _status(industry_cycle_context, fail_markers=("cycle evidence insufficient",)), "cycle verdict must precede valuation language"),
@@ -126,6 +129,7 @@ def build_quality_audit_context(
         ("PE/PB/EPS decomposition", _status(price_earnings_decomposition_context), "multiple changes must be separated from earnings changes"),
         ("Financial-statement extraction", _status(earnings_model_context), "base numbers and latest snapshots must be traceable"),
         ("Filing intelligence", _status(filing_intelligence_context), "MD&A, segment, risk, and business description evidence"),
+        ("Knowledge Planet intelligence", _status(knowledge_planet_context, fail_markers=("unavailable", "disabled")), "private/proxy data must be separated from sell-side promotion and mapped into KPI/forecast assumptions"),
     ]
     rows.extend(
         _metals_quality_rows(
@@ -135,6 +139,31 @@ def build_quality_audit_context(
             commodity_context=commodity_context,
         )
     )
+    combined = "\n".join(
+        [
+            symbol,
+            industry_kpi_context,
+            forecast_model_context,
+            knowledge_planet_context,
+            commodity_context,
+            filing_intelligence_context,
+        ]
+    )
+    if is_hog_breeding_text(symbol, combined):
+        rows.extend(
+            [
+                (
+                    "Hog-breeder valuation framework",
+                    "ready" if "Hog-Breeding Sensitivity Requirement" in forecast_model_context else "partial",
+                    "must use hog ASP x complete-cost spread, sales kg, PB/NAV floor, normalized cycle earnings, and implied hog price; PE TTM alone is not acceptable",
+                ),
+                (
+                    "Hog-cycle private-data bridge",
+                    "ready" if "Hog-Breeding Intelligence Routing" in knowledge_planet_context else "partial",
+                    "Knowledge Planet livestock clues must be extracted into hog price, piglet/sow price, breeding-sow inventory, cost, output, and cash-survival assumptions before affecting rating",
+                ),
+            ]
+        )
     weak = [name for name, status, _ in rows if status != "ready"]
     return "\n".join(
         [
@@ -167,6 +196,8 @@ def build_quality_audit_context(
             "- Objectivity guardrail: if a decisive industry-native driver is partial or missing on both sides of the debate, cap conviction and prefer Hold/watch or smaller sizing unless verified evidence independently proves a strong probability/payoff skew.",
             "- For aluminum names, if alumina, power, or anode cost evidence is missing, do not call margin deterioration proven. Underweight/Sell needs independent verified evidence such as cost squeeze, segment-margin compression, inventory/cash deterioration, superior peer opportunity cost, or valuation stress.",
             "- For metals/mining, do not permit strong Buy/Sell language from PE/PB, technicals, one-quarter working capital, or one exchange futures proxy when the key spread/cost driver is missing.",
+            "- For hog breeders, do not permit a scenario table where a mild recovery case is economically worse than a bottom/stress case unless the report explicitly explains why PB/NAV support collapses. Show both earnings value and PB/NAV floor before selecting the fair-value range.",
+            "- For hog breeders, PE TTM is a context metric only. Target value must be anchored in hog-price sensitivity, unit spread, cash survival, normalized cycle earnings, PB/NAV floor, and current-market-cap implied hog price.",
             "",
             "## Report Quality Verdict",
             f"- Weak or incomplete modules: {', '.join(weak) if weak else 'none detected from supplied contexts'}",
@@ -194,4 +225,5 @@ def get_quality_audit_context(
         filing_intelligence_context=supplied.get("filing_intelligence_context", ""),
         metals_mining_context=supplied.get("metals_mining_context", ""),
         commodity_context=supplied.get("commodity_context", ""),
+        knowledge_planet_context=supplied.get("knowledge_planet_context", ""),
     )

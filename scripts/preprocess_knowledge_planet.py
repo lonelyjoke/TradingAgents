@@ -68,7 +68,7 @@ def main() -> int:
     print(f"ocr low quality: {stats.ocr_low_quality}")
     print(f"pdf pending/limited: {stats.pdf_pending_or_limited}")
     print(f"status: {stats.status}")
-    return 0 if stats.status in {"ok", "no_db"} else 1
+    return 0 if stats.status in {"ok", "cached", "no_db"} else 1
 
 
 if __name__ == "__main__":

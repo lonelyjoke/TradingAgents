@@ -752,6 +752,7 @@ class TradingAgentsGraph:
             policy_planning_context=policy_planning_context,
             investor_interaction_context=investor_interaction_context,
             filing_intelligence_context=filing_intelligence_context,
+            knowledge_planet_context=knowledge_planet_context,
         )
         company_business_model_context = build_company_business_model_context(
             company_name,
@@ -775,6 +776,7 @@ class TradingAgentsGraph:
             investor_interaction_context=investor_interaction_context,
             policy_planning_context=policy_planning_context,
             web_fact_check_context=web_fact_check_context,
+            knowledge_planet_context=knowledge_planet_context,
         )
         forecast_model_context = build_forecast_model_context(
             company_name,
@@ -786,6 +788,7 @@ class TradingAgentsGraph:
             insurance_context=insurance_context,
             industry_kpi_context=industry_kpi_context,
             metals_mining_context=metals_mining_context,
+            knowledge_planet_context=knowledge_planet_context,
         )
         quality_audit_context = build_quality_audit_context(
             company_name,
@@ -800,6 +803,7 @@ class TradingAgentsGraph:
             filing_intelligence_context=filing_intelligence_context,
             metals_mining_context=metals_mining_context,
             commodity_context=commodity_context,
+            knowledge_planet_context=knowledge_planet_context,
         )
         thesis_question_context = build_thesis_question_context(
             company_name,
@@ -833,6 +837,7 @@ class TradingAgentsGraph:
             insurance_context=insurance_context,
             medical_device_context=medical_device_context,
             metals_mining_context=metals_mining_context,
+            knowledge_planet_context=knowledge_planet_context,
         )
         data_coverage_context = _build_precomputed_data_coverage(
             thematic_catalyst_context=thematic_catalyst_context,
@@ -964,6 +969,7 @@ class TradingAgentsGraph:
             policy_planning_context=policy_planning_context,
             investor_interaction_context=investor_interaction_context,
             filing_intelligence_context=filing_intelligence_context,
+            knowledge_planet_context=knowledge_planet_context,
         )
         company_business_model_context = build_company_business_model_context(
             company_name,
@@ -987,6 +993,7 @@ class TradingAgentsGraph:
             investor_interaction_context=investor_interaction_context,
             policy_planning_context=policy_planning_context,
             web_fact_check_context=web_fact_check_context,
+            knowledge_planet_context=knowledge_planet_context,
         )
         forecast_model_context = build_forecast_model_context(
             company_name,
@@ -998,6 +1005,7 @@ class TradingAgentsGraph:
             insurance_context=insurance_context,
             industry_kpi_context=industry_kpi_context,
             metals_mining_context=metals_mining_context,
+            knowledge_planet_context=knowledge_planet_context,
         )
         quality_audit_context = build_quality_audit_context(
             company_name,
@@ -1012,6 +1020,7 @@ class TradingAgentsGraph:
             filing_intelligence_context=filing_intelligence_context,
             metals_mining_context=metals_mining_context,
             commodity_context=commodity_context,
+            knowledge_planet_context=knowledge_planet_context,
         )
         thesis_question_context = build_thesis_question_context(
             company_name,
@@ -1045,6 +1054,7 @@ class TradingAgentsGraph:
             insurance_context=insurance_context,
             medical_device_context=medical_device_context,
             metals_mining_context=metals_mining_context,
+            knowledge_planet_context=knowledge_planet_context,
         )
         data_coverage_context = _build_precomputed_data_coverage(
             thematic_catalyst_context=thematic_catalyst_context,

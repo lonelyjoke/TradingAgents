@@ -333,6 +333,7 @@ def build_industry_kpi_context(
     policy_planning_context: str = "",
     web_fact_check_context: str = "",
     insurance_context: str = "",
+    knowledge_planet_context: str = "",
 ) -> str:
     gated_insurance_context = (
         insurance_context if _insurance_context_triggered(insurance_context) else ""
@@ -349,6 +350,7 @@ def build_industry_kpi_context(
             investor_interaction_context,
             policy_planning_context,
             web_fact_check_context,
+            knowledge_planet_context,
         ]
     )
     playbook, kpis = _detect_playbook(symbol, combined)
@@ -397,6 +399,10 @@ def build_industry_kpi_context(
             "| --- | --- | --- |",
             *[f"| {name} | {metric} | {driver} |" for name, metric, driver in kpis],
             "",
+            "## Knowledge Planet Treatment",
+            "- If Knowledge Planet provides industry weekly data, channel checks, company research feedback, or PDF research lenses, map each useful clue into the KPI layer above with evidence status: private/proxy, public-verified, stale, conflicting, or unverified.",
+            "- Sell-side promotion and target-market-cap language cannot directly upgrade a KPI. Convert it into product price, volume, cost, inventory, order, cash-flow, or valuation assumptions before using it.",
+            "",
             "## Evidence Already Present",
             *([f"- {line}" for line in evidence] if evidence else ["- No compact KPI evidence was extracted from existing contexts."]),
             "",
@@ -428,4 +434,5 @@ def get_industry_kpi_context(
         policy_planning_context=supplied.get("policy_planning_context", ""),
         web_fact_check_context=supplied.get("web_fact_check_context", ""),
         insurance_context=supplied.get("insurance_context", ""),
+        knowledge_planet_context=supplied.get("knowledge_planet_context", ""),
     )

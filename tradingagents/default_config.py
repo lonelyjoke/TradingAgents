@@ -205,6 +205,18 @@ DEFAULT_CONFIG = {
         "KNOWLEDGE_PLANET_PREPROCESS",
         True,
     ),
+    "knowledge_planet_preprocess_cache_enabled": _env_bool_or_default(
+        "KNOWLEDGE_PLANET_PREPROCESS_CACHE",
+        True,
+    ),
+    "knowledge_planet_context_item_display_limit": _env_int_or_default(
+        "KNOWLEDGE_PLANET_CONTEXT_ITEM_DISPLAY_LIMIT",
+        12,
+    ),
+    "knowledge_planet_context_report_display_limit": _env_int_or_default(
+        "KNOWLEDGE_PLANET_CONTEXT_REPORT_DISPLAY_LIMIT",
+        8,
+    ),
     # Gated A-share compute-leasing verification layer. The module returns a
     # not_applicable status unless official or semi-official evidence indicates
     # compute leasing / AI-compute exposure, so unrelated names are not forced
