@@ -35,8 +35,8 @@ def main() -> int:
     parser.add_argument(
         "--lookback-days",
         type=int,
-        default=0,
-        help="Number of prior calendar days to include. 0 means only --date.",
+        default=6,
+        help="Number of prior calendar days to include. Defaults to 6, meaning a 7-day window including --date.",
     )
     parser.add_argument(
         "--max-candidates",
@@ -87,6 +87,11 @@ def main() -> int:
         help="Suppress per-candidate market-scoring progress output.",
     )
     parser.add_argument(
+        "--no-preprocess",
+        action="store_true",
+        help="Skip the cached Knowledge Planet preprocessing layer for a faster debug run.",
+    )
+    parser.add_argument(
         "--db",
         type=Path,
         default=None,
@@ -102,6 +107,8 @@ def main() -> int:
 
     if args.db:
         set_config({"knowledge_planet_db_path": str(args.db.resolve())})
+    if args.no_preprocess:
+        set_config({"knowledge_planet_preprocess_enabled": False})
 
     include_market_scores = not args.no_market_scoring
     print(f"python: {sys.executable}")
@@ -121,6 +128,7 @@ def main() -> int:
             else "disabled"
         )
     )
+    print("preprocess: " + ("disabled by --no-preprocess" if args.no_preprocess else "enabled"))
 
     report = build_knowledge_planet_daily_report(
         args.date,

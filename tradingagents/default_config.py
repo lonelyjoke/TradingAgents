@@ -180,7 +180,7 @@ DEFAULT_CONFIG = {
     ),
     "knowledge_planet_auto_sync_max_pages": _env_int_or_default(
         "KNOWLEDGE_PLANET_AUTO_SYNC_MAX_PAGES",
-        20,
+        120,
     ),
     "knowledge_planet_auto_sync_max_image_downloads": _env_int_or_default(
         "KNOWLEDGE_PLANET_AUTO_SYNC_MAX_IMAGE_DOWNLOADS",
@@ -193,6 +193,17 @@ DEFAULT_CONFIG = {
     "knowledge_planet_auto_sync_min_interval_minutes": _env_int_or_default(
         "KNOWLEDGE_PLANET_AUTO_SYNC_MIN_INTERVAL_MINUTES",
         30,
+    ),
+    "knowledge_planet_auto_sync_context_lookback_days": _env_int_or_default(
+        "KNOWLEDGE_PLANET_AUTO_SYNC_CONTEXT_LOOKBACK_DAYS",
+        30,
+    ),
+    # Build cached intermediate research assets from raw Knowledge Planet
+    # content before reports/contexts are generated. This keeps expensive LLM
+    # calls focused on judgment instead of repeatedly cleaning raw streams.
+    "knowledge_planet_preprocess_enabled": _env_bool_or_default(
+        "KNOWLEDGE_PLANET_PREPROCESS",
+        True,
     ),
     # Gated A-share compute-leasing verification layer. The module returns a
     # not_applicable status unless official or semi-official evidence indicates

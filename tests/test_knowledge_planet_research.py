@@ -67,6 +67,7 @@ def _insert_item(
     *,
     source_type: str = "raw_note",
     ticker: str = "300750.SZ",
+    published_at: str = "2026-06-19 10:33",
 ) -> int:
     cursor = conn.execute(
         """
@@ -85,7 +86,7 @@ def _insert_item(
             title,
             text,
             text[:120],
-            "2026-06-19 10:33",
+            published_at,
             "2026-06-19T11:00:00",
             "tester",
             json.dumps([ticker], ensure_ascii=False),
@@ -187,10 +188,35 @@ def test_daily_report_flags_information_and_pump_risk(tmp_path, monkeypatch):
     report = kp.build_knowledge_planet_daily_report("2026-06-19")
 
     assert "候选标的综合排序" in report
+    assert "PM总控层：最终取舍" in report
+    assert "双评分系统：主升潜力 vs 短线交易" in report
+    assert "结构化事件库" in report
+    assert "PDF 研报结构化抽取层" in report
+    assert "机会研究流水线状态" in report
     assert "宁德时代" in report
     assert "高价值产业/调研线索" in report
     assert "卖方推票 / 吹票风险观察" in report
     assert "飞天科技" in report
+
+
+def test_daily_report_includes_iso_zsxq_timestamps(tmp_path, monkeypatch):
+    db_path = tmp_path / "kp.sqlite"
+    _make_db(db_path)
+    conn = sqlite3.connect(db_path)
+    _insert_item(
+        conn,
+        "ISO timestamp item",
+        "This item uses the native zsxq timestamp format.",
+        published_at="2026-06-17T23:33:57.028+0800",
+    )
+    conn.commit()
+    conn.close()
+
+    monkeypatch.setattr(kp, "DEFAULT_KP_DB", db_path)
+
+    report = kp.build_knowledge_planet_daily_report("2026-06-17")
+
+    assert "ISO timestamp item" in report
 
 
 def test_daily_report_can_include_mocked_fundamental_and_technical_scores(tmp_path, monkeypatch):
@@ -298,3 +324,29 @@ def test_trading_graph_wires_knowledge_planet_context():
     assert '"knowledge_planet_context"' in source
     assert '"get_knowledge_planet_context"' in source
     assert "knowledge_planet_context=knowledge_planet_context" in source
+
+
+def test_window_sync_covers_each_date(monkeypatch):
+    calls = []
+
+    def fake_sync(sync_date, *, force=False, progress=None):
+        calls.append(sync_date)
+        return "synced"
+
+    monkeypatch.setattr(kp, "ensure_knowledge_planet_upstream_synced", fake_sync)
+
+    status = kp.ensure_knowledge_planet_upstream_synced_for_window("2026-06-19", 2)
+
+    assert calls == ["2026-06-17", "2026-06-18", "2026-06-19"]
+    assert "2026-06-17=synced" in status
+    assert "2026-06-19=synced" in status
+
+
+def test_stock_terms_include_common_aliases_without_tushare(monkeypatch):
+    monkeypatch.setattr(kp, "_fetch_stock_basic", None)
+
+    terms = kp._stock_terms("601318.SH")
+
+    assert "601318.SH" in terms
+    assert "601318" in terms
+    assert "中国平安" in terms

@@ -562,7 +562,7 @@ def main() -> int:
         help="Group id to sync. Use id:name to keep a display name. Can be repeated.",
     )
     parser.add_argument("--limit-per-page", type=int, default=30, help="Topics per API page, max 30.")
-    parser.add_argument("--max-pages", type=int, default=20, help="Maximum pages to scan per group.")
+    parser.add_argument("--max-pages", type=int, default=120, help="Maximum pages to scan per group.")
     parser.add_argument("--root", type=Path, default=DEFAULT_ROOT, help="Knowledge Planet data root.")
     parser.add_argument("--output", type=Path, default=None, help="Optional output markdown path.")
     parser.add_argument("--no-download-images", action="store_true", help="Do not download topic images.")

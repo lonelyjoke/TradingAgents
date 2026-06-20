@@ -36,16 +36,18 @@ the standalone theme-trading daily report is generated, the system attempts:
 The result is stamped under `data/knowledge_planet/.sync_state/`. By default a
 second run within 30 minutes reuses the already-synced local index instead of
 downloading the same images/PDFs again; after that interval the next project run
-attempts a fresh upstream sync.
+attempts a fresh upstream sync. Empty sync results are retried instead of being
+treated as final, because older dates may require deeper pagination.
 
 Optional environment overrides:
 
 - `KNOWLEDGE_PLANET_AUTO_SYNC=0` disables automatic upstream sync.
 - `KNOWLEDGE_PLANET_AUTO_SYNC_GROUP=28888112822211:前沿信息收录`
-- `KNOWLEDGE_PLANET_AUTO_SYNC_MAX_PAGES=20`
+- `KNOWLEDGE_PLANET_AUTO_SYNC_MAX_PAGES=120`
 - `KNOWLEDGE_PLANET_AUTO_SYNC_MAX_IMAGE_DOWNLOADS=100`
 - `KNOWLEDGE_PLANET_AUTO_SYNC_MAX_FILE_DOWNLOADS=50`
 - `KNOWLEDGE_PLANET_AUTO_SYNC_MIN_INTERVAL_MINUTES=30`
+- `KNOWLEDGE_PLANET_AUTO_SYNC_CONTEXT_LOOKBACK_DAYS=30`
 
 Not every joined group allows API access. If `zsxq-cli` reports a message such
 as `该星球内容仅限成员在星球内查看，暂不支持通过 API 访问`, keep using the
@@ -63,7 +65,7 @@ The sync script also attempts to enrich non-text material:
 
 Useful safety limits:
 
-`.\scripts\sync_knowledge_planet_from_zsxq.cmd --date 2026-06-19 --group-id 28888112822211:前沿信息收录 --max-pages 20 --max-image-downloads 100 --max-file-downloads 50`
+`.\scripts\sync_knowledge_planet_from_zsxq.cmd --date 2026-06-19 --group-id 28888112822211:前沿信息收录 --max-pages 120 --max-image-downloads 100 --max-file-downloads 50`
 
 If you only want text sync:
 
@@ -135,6 +137,19 @@ After import, the SQLite database is:
 
 ## Theme-Trading Daily Report
 
+For the easiest interactive workflow, run the menu launcher:
+
+`.\scripts\generate_knowledge_planet_daily_interactive.cmd`
+
+Or double-click the repository-root launcher:
+
+`KnowledgePlanetDaily.cmd`
+
+The launcher lets you choose the report end date, look-back window, run mode,
+LLM provider, model, Tushare scoring depth, and LLM candidate count. The default
+mode is the full workflow: Knowledge Planet stream/PDFs, Tushare
+fundamental/technical validation, and DeepSeek-style LLM thesis decomposition.
+
 After the daily import finishes, generate the standalone Knowledge Planet
 daily report with:
 
@@ -148,6 +163,18 @@ Use `--lookback-days 0` for the exact day, or a larger value such as `3` when
 you want a rolling window. The report ranks mentioned candidates by information
 content, catalyst clues, and pump-risk signals. It is a theme-trading shortlist,
 not a direct buy list.
+
+For a rolling daily report, `--lookback-days` now syncs and imports every
+calendar day in the window before the report is built. The command-line default
+is `--lookback-days 6`, which means a seven-day window including the report
+date. For example, `--date 2026-06-19 --lookback-days 2` covers 2026-06-17
+through 2026-06-19.
+
+The daily report applies a recency weighting to stream signals: report-date
+items receive the highest weight, the prior two days receive a medium weight,
+and days four through seven act as background continuity. The report also
+prints a marginal-change table so you can see whether a theme is newly heating
+up, continuing over several days, or fading.
 
 By default the report also attempts an A-share trader-style validation for the
 top ranked candidates. Fundamentals are used as cross-validation for the
@@ -190,6 +217,7 @@ sell-side frameworks, channel clues, KPI questions, and expectation-gap
 hypotheses, but official filings, announcements, financial statements, reputable
 news, and price/volume evidence remain the objective anchor. If the private
 stream conflicts with objective evidence, the objective evidence caps conviction.
+The single-stock default remains a 30-day Knowledge Planet window.
 
 ## TradingAgents Integration
 
