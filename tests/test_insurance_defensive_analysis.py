@@ -124,3 +124,52 @@ def test_starter_insurance_position_does_not_automatically_map_to_overweight():
     for source in (pm_source, research_source):
         assert "staged/cautious Overweight" in source
         assert "only when" in source
+
+
+def test_hold_ratings_must_expose_action_posture():
+    pm_source = (
+        ROOT / "tradingagents" / "agents" / "managers" / "portfolio_manager.py"
+    ).read_text(encoding="utf-8")
+    research_source = (
+        ROOT / "tradingagents" / "agents" / "managers" / "research_manager.py"
+    ).read_text(encoding="utf-8")
+    shared_source = (
+        ROOT / "tradingagents" / "agents" / "utils" / "agent_utils.py"
+    ).read_text(encoding="utf-8")
+    schema_source = (
+        ROOT / "tradingagents" / "agents" / "schemas.py"
+    ).read_text(encoding="utf-8")
+
+    for source in (pm_source, research_source, schema_source):
+        assert "Hold / Positive Watch" in source
+        assert "Hold / Defensive Starter" in source
+        assert "Hold / Neutral Wait" in source
+        assert "Hold / Negative Watch" in source
+
+    assert "rating_posture" in pm_source
+    assert "rating_posture" in schema_source
+    assert "does not hide the intended trade" in shared_source
+
+
+def test_pm_requires_information_utilization_audit():
+    pm_source = (
+        ROOT / "tradingagents" / "agents" / "managers" / "portfolio_manager.py"
+    ).read_text(encoding="utf-8")
+    research_source = (
+        ROOT / "tradingagents" / "agents" / "managers" / "research_manager.py"
+    ).read_text(encoding="utf-8")
+    schema_source = (
+        ROOT / "tradingagents" / "agents" / "schemas.py"
+    ).read_text(encoding="utf-8")
+    kp_source = (
+        ROOT / "tradingagents" / "dataflows" / "knowledge_planet_research.py"
+    ).read_text(encoding="utf-8")
+
+    assert "information_utilization_audit" in pm_source
+    assert "information_utilization_audit" in schema_source
+    assert "Information Utilization Audit" in schema_source
+    assert "probability adjustment" in pm_source
+    assert "sizing/timing adjustment" in pm_source
+    assert "not as a standalone proof" in research_source
+    assert "not company-specific" in kp_source
+    assert "scenario probabilities" in kp_source

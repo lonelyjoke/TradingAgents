@@ -33,11 +33,12 @@ the standalone theme-trading daily report is generated, the system attempts:
 
 `zsxq sync -> import_knowledge_planet`
 
-The result is stamped under `data/knowledge_planet/.sync_state/`. By default a
-second run within 30 minutes reuses the already-synced local index instead of
-downloading the same images/PDFs again; after that interval the next project run
-attempts a fresh upstream sync. Empty sync results are retried instead of being
-treated as final, because older dates may require deeper pagination.
+The result is stamped under `data/knowledge_planet/.sync_state/`. The standalone
+daily workflow can run the full sync/OCR/PDF ingest. Single-stock TradingAgents
+reports use a lighter path by default: they read the existing SQLite/preprocess
+cache and, at most, perform a text-only sync for the end date. This keeps
+single-stock reports fast while preserving quality as long as the daily
+sync/preprocess job has refreshed the local knowledge base.
 
 Optional environment overrides:
 
@@ -47,7 +48,19 @@ Optional environment overrides:
 - `KNOWLEDGE_PLANET_AUTO_SYNC_MAX_IMAGE_DOWNLOADS=100`
 - `KNOWLEDGE_PLANET_AUTO_SYNC_MAX_FILE_DOWNLOADS=50`
 - `KNOWLEDGE_PLANET_AUTO_SYNC_MIN_INTERVAL_MINUTES=30`
-- `KNOWLEDGE_PLANET_AUTO_SYNC_CONTEXT_LOOKBACK_DAYS=30`
+- `KNOWLEDGE_PLANET_AUTO_SYNC_CONTEXT_LOOKBACK_DAYS=0`
+- `KNOWLEDGE_PLANET_CONTEXT_SYNC_MAX_PAGES=20`
+- `KNOWLEDGE_PLANET_CONTEXT_SYNC_MAX_IMAGE_DOWNLOADS=0`
+- `KNOWLEDGE_PLANET_CONTEXT_SYNC_MAX_FILE_DOWNLOADS=0`
+
+Recommended operating model:
+
+1. Run the daily report or full sync/preprocess once before/after the market.
+2. Run single-stock TradingAgents reports repeatedly during research; they reuse
+   the cached 30-day knowledge window instead of redownloading/OCRing the whole
+   source stream.
+3. If you want the single-stock entry to force a full upstream refresh, override
+   the context sync environment variables temporarily.
 
 Not every joined group allows API access. If `zsxq-cli` reports a message such
 as `该星球内容仅限成员在星球内查看，暂不支持通过 API 访问`, keep using the

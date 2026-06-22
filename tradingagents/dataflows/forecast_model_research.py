@@ -6,6 +6,7 @@ import re
 from typing import Mapping
 
 from .industry_identity import (
+    consumer_staples_subsector_hints,
     is_hog_breeding_text,
     is_insurance_text,
     is_telecom_operator_text,
@@ -198,6 +199,28 @@ def _insurance_forecast_drivers() -> list[tuple[str, str, str]]:
     ]
 
 
+def _consumer_staples_forecast_drivers(symbol: str, text: str) -> list[tuple[str, str, str]] | None:
+    subsectors = consumer_staples_subsector_hints(symbol, text)
+    if not subsectors:
+        return None
+    if "functional_beverage" in subsectors:
+        return [
+            ("Core energy-drink revenue", "Dongpeng Special Drink volume x realized ASP x channel mix", "category growth, weather, terminal coverage, regional penetration, terminal price and same-store productivity"),
+            ("Second-curve revenue", "new-product volume x ASP x repeat-purchase/channel penetration", "electrolyte water, juice tea, coffee/tea shelf penetration, repeat purchase, cannibalization versus incrementality"),
+            ("Gross profit", "revenue x gross margin by product/channel", "sugar, PET/can/packaging, logistics, product mix, price discipline and promotion intensity"),
+            ("Operating profit", "gross profit - selling expense - admin/R&D", "advertising, rebate/lottery policy, salesforce expansion, scale leverage"),
+            ("Cash profit / FCF", "net profit + D&A - working capital - capex", "contract liabilities/prepayments, distributor inventory, receivables, inventory and buyback/dividend execution"),
+            ("Valuation bridge", "normalized EPS/FCF x consumer-growth multiple with ROE/payout cross-check", "H1/H2 revenue growth, margin stability, second-curve proof, channel health and downside entry band"),
+        ]
+    return [
+        ("Core revenue", "category volume x ASP x product/channel mix", "category growth, traffic/weather/catering recovery, regional penetration and product mix"),
+        ("Gross profit", "revenue x gross margin", "raw-material and packaging costs, price/mix, promotion intensity and logistics"),
+        ("Operating profit", "gross profit - selling/admin/R&D expense", "sales expense, channel rebates, scale leverage and brand investment"),
+        ("Cash profit / FCF", "net profit + D&A - working capital - capex", "contract liabilities/prepayments, inventory, receivables, OCF/NI and capex"),
+        ("Valuation bridge", "normalized EPS/FCF x category-appropriate multiple with ROE/payout cross-check", "growth durability, channel health, margin stability and shareholder return"),
+    ]
+
+
 def build_forecast_model_context(
     symbol: str,
     curr_date: str,
@@ -251,6 +274,8 @@ def build_forecast_model_context(
         drivers = _insurance_forecast_drivers()
     elif is_hog_breeder:
         drivers = _hog_breeding_forecast_drivers()
+    elif (consumer_drivers := _consumer_staples_forecast_drivers(symbol, combined)) is not None:
+        drivers = consumer_drivers
     elif _is_metals_mining_context(symbol, combined):
         drivers = _metals_forecast_drivers(symbol, combined)
     elif _is_wind_power_context(symbol, combined):

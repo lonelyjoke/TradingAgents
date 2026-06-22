@@ -1,0 +1,44 @@
+# Investor interaction context for 601318.SH as of 2026-06-20
+
+- Exchange route: sse
+- Official source home: https://sns.sseinfo.com/
+- Canonical company route: https://sns.sseinfo.com/company.do?stockcode=601318
+
+## Official Endpoint Probe
+| source | status | company_page | uid | feed_preview |
+| --- | --- | --- | --- | --- |
+| cninfo | not_applicable | N/A | N/A | N/A |
+| sse | reachable | {'title': '上证e互动', 'has_company_page': True, 'has_qa_section': True} | 1318 | {'is_empty_recent_reply': False, 'text_preview': '投资者_1703858904000 :中国平安(601318) 公司近一年来投资的股票大多是金融类，如果银行出现业绩下滑对公司的稳定经营影响巨大。本着分散投资的原则，是否考虑投资电力和港口运营中的优质股票，其中也有业绩稳健的 2026年05月19日 08:53 来自 微信 ◆ ◆ 中国平安 感谢您的建议。公司建立了严格的投资资产集中度风险管理制度，确保相关投资并表层面集中度风险可控。公司投资多元、分散，金融股只是公司投资组合中的一部分。 | 收藏 | 评论 --> 2026年'} |
+
+## Recent Official Q&A
+| question_time | answer_time | question | answer | answer_class |
+| --- | --- | --- | --- | --- |
+| 2026-05-19 | 2026-06-17 | 公司近一年来投资的股票大多是金融类，如果银行出现业绩下滑对公司的稳定经营影响巨大。本着分散投资的原则，是否考虑投资电力和港口运营中的优质股票，其中也有业绩稳健的 | 感谢您的建议。公司建立了严格的投资资产集中度风险管理制度，确保相关投资并表层面集中度风险可控。公司投资多元、分散，金融股只是公司投资组合中的一部分。 | non-committal |
+| 2026-05-18 | 2026-06-17 | 今年指数不断新高，公司股价今年确不断创新低，并跌破净资产。这种背离走势，公司内部有什么利空消息吗？董秘能不能回应一下我们投资者对于公司股价连续下跌的关切？ | 最近股价下跌有多重外部市场因素。公司战略清晰、基本面稳固、各项主营业务经营向好。平安是耐心资本，我们也希望广大投资者能和平安一起耐心成长。 | substantive |
+| 2026-05-15 | 2026-06-17 | 你们公司是不是觉得自己的股票严重高估？ | 最近股价下跌有多重外部市场因素。公司战略清晰、基本面稳固、各项主营业务经营向好。平安是耐心资本，我们也希望广大投资者能和平安一起耐心成长。 | substantive |
+| 2026-04-27 | 2026-06-17 | 自家公司的股价一直跌，为何增持别人家的保险公司，自家的都不回购，是不是清楚自家的业绩跟管理很烂，完全没有信心投资？ | 公司高度重视股东回报，一直在寻找对市值管理最佳的平衡。回购和分红都是股东回报的重要组成部分，目前来看，绝大部分投资者更重视现金分红，公司现金分红水平已经超过10年保持上涨。我们将保持稳定、一致的分红政策。 | substantive |
+| 2026-04-17 | 2026-05-18 | 请问公司近几年的NBV新业务价值率一直在提升，但为什么NCSM新业务利润率却一直在下降？然后25年报营运假设以及模型变动是-137亿，但调整合同服务边际的估计变更却是+25亿？ | 您好，根据会计准则要求，NBCSM和NBV计算方法不同，导致短期差异，全周期来看，保单利润创造不受影响。 合同服务边际变动表中调整合同服务边际的估计变更项与内含价值变动表中的营运假设以及模型变动项定义和计算方法不同，两者不可比。 | substantive |
+| 2026-04-17 | 2026-05-18 | 董秘，您好，作为持有平安8年有余的股东，想问平安几个问题。1️⃣怎么看待平安牛市不牛问题？2️⃣平安为什么没有回购注销计划。哪怕每年回购注销1-2亿股，这也是一个积极信号。3️⃣平安的投资能力在市场上争议很大，后续投资能力怎么提升？创业板七姐妹平安投资了多少？4️⃣平安是否以伯克希尔为标杆，怎么去提升平安的投资收益？。 | 您好，公司高度重视股东回报，一直在寻找对市值管理最佳的平衡，回购和分红都是股东回报的重要组成部分，目前来看，绝大部分投资者更重视现金分红，公司现金分红水平已经超过10年保持上涨。我们将保持稳定、一致的分红政策。 公司保险资金投资始终秉持长期投资、匹配负债的指导思想，坚持长期投资、价值投资、均衡配置，追求长期稳健的投资回报。2025年公司综合投资收益率达到6.3%，为近5年最高。近10年，平安实现平均综合投资收益率4.9%，超内含价值长期投资回报假设。 未来，公司也将持续强化自身投资价值创造能力，通过高质量发展为投资者提供更好回报。 | substantive |
+| 2026-04-13 | 2026-05-18 | 你们是不是觉得自己的股价严重高估，所以不用回购，不用增持，可以一直跌 | 您好，回购、增持以及分红都是股东回报的重要组成部分，目前来看，绝大部分投资者更重视现金分红，公司现金分红水平连续超过10年保持上涨。我们将保持稳定、一致的分红政策，谢谢。 | substantive |
+| 2026-04-13 | 2026-05-18 | 董秘你好，贵公司保险行业是否有内部监督机制，日常是否能真正落实到位，某地如发生违法事情，贵公司是否会介入调查处理。 | 您好，公司贯彻落实《保险集团公司监督管理办法》，统筹管理集团人力资源、财务会计、数据治理、信息系统、资金运用、品牌文化等事项，指导子公司建立规范的公司治理结构，持续完善覆盖集团整体的风险管理、内控合规和内部审计体系。对子公司内控监督评价的主要业务和事项、重点关注的高风险领域及评价结论等情况请参阅2025年年报“内部控制体系的建立和健全情况”部分。谢谢！ | directional-but-unquantified |
+
+## Official Interaction Theme Reads
+| theme | story_read | proof_needed | mentions | answered | substantive | latest_question_time | signal_read |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| buyback-shareholder-return | shareholder-return / valuation-support narrative | needs board approval, execution, and funding visibility | 3 | 3 | 3 | 2026-04-27 | repeated + substantive |
+
+## Normalized Record Schema
+| field | meaning |
+| --- | --- |
+| ts_code | A-share ticker |
+| question_time / answer_time | official timestamps when exposed |
+| question / answer | verbatim official interaction text |
+| answer_class | substantive, directional-but-unquantified, non-committal, or unanswered |
+| theme / story_read / proof_needed | mapped narrative, interpretation, and what still needs verification |
+| source_type | cninfo_irm or sse_e_interaction |
+
+## Analyst Instructions
+- Treat official company answers as stronger narrative evidence than media association, but weaker than filings or announcements.
+- Before feeding interaction content into valuation, classify answers as substantive, directional-but-unquantified, non-committal, or unanswered.
+- Non-committal answers such as '感谢您的关注' or '请以公司公告为准' may remain narrative options, but they should not raise conviction.
+- Use substantive interaction answers as tier-3 narrative options unless filings or announcements independently verify the same claim.

@@ -23,6 +23,8 @@ class TradingMemoryLog:
         if path:
             self._log_path = Path(path).expanduser()
             self._log_path.parent.mkdir(parents=True, exist_ok=True)
+        repo_root = Path(__file__).resolve().parents[3]
+        self._reports_dir = Path(cfg.get("reports_dir") or repo_root / "reports")
         # Optional cap on resolved entries. None disables rotation.
         self._max_entries = cfg.get("memory_log_max_entries")
 
@@ -78,7 +80,7 @@ class TradingMemoryLog:
         for entry in reversed(self.load_entries()):
             if entry["ticker"] == ticker:
                 return entry
-        return None
+        return self._load_latest_same_ticker_report_decision(ticker)
 
     def get_recent_decision_context(self, ticker: str) -> str:
         """Return the latest same-ticker decision for continuity-aware prompts."""
@@ -88,6 +90,46 @@ class TradingMemoryLog:
         status = "pending outcome" if entry.get("pending") else "resolved outcome"
         tag = f"[{entry['date']} | {entry['ticker']} | {entry['rating']} | {status}]"
         return f"{tag}\n\nDECISION:\n{entry['decision']}"
+
+    def _load_latest_same_ticker_report_decision(self, ticker: str) -> Optional[dict]:
+        """Fallback continuity source from saved reports when memory log is absent."""
+        if not self._reports_dir.exists():
+            return None
+
+        candidates = []
+        prefix = f"{ticker}_"
+        for report_dir in self._reports_dir.iterdir():
+            if not report_dir.is_dir() or not report_dir.name.startswith(prefix):
+                continue
+            decision_path = report_dir / "5_portfolio" / "decision.md"
+            if decision_path.exists():
+                candidates.append((report_dir.name, report_dir.stat().st_mtime, decision_path))
+
+        if not candidates:
+            return None
+
+        name, _mtime, decision_path = sorted(candidates, key=lambda item: (item[0], item[1]))[-1]
+        try:
+            decision = decision_path.read_text(encoding="utf-8").strip()
+        except OSError:
+            return None
+        if not decision:
+            return None
+
+        date_match = re.search(r"_(\d{8})_\d{6}$", name)
+        date = (
+            f"{date_match.group(1)[:4]}-{date_match.group(1)[4:6]}-{date_match.group(1)[6:]}"
+            if date_match
+            else "saved-report"
+        )
+        return {
+            "date": date,
+            "ticker": ticker,
+            "rating": parse_rating(decision),
+            "pending": True,
+            "decision": decision,
+            "source": "saved_report",
+        }
 
     def get_past_context(self, ticker: str, n_same: int = 5, n_cross: int = 3) -> str:
         """Return formatted past context string for agent prompt injection."""

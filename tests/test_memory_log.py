@@ -177,6 +177,26 @@ class TestTradingMemoryLogCore:
         assert DECISION_OVERWEIGHT in context
         assert "Good call." not in context
 
+    def test_recent_decision_context_falls_back_to_saved_report(self, tmp_path):
+        reports_dir = tmp_path / "reports"
+        decision_dir = reports_dir / "NVDA_英伟达_20260110_120000" / "5_portfolio"
+        decision_dir.mkdir(parents=True)
+        (decision_dir / "decision.md").write_text(
+            "Rating: Overweight\nPrior saved report.",
+            encoding="utf-8",
+        )
+        log = TradingMemoryLog(
+            {
+                "memory_log_path": str(tmp_path / "missing" / "trading_memory.md"),
+                "reports_dir": str(reports_dir),
+            }
+        )
+
+        context = log.get_recent_decision_context("NVDA")
+
+        assert "[2026-01-10 | NVDA | Overweight | pending outcome]" in context
+        assert "Prior saved report." in context
+
     # Rating parsing
 
     def test_rating_parsed_buy(self, tmp_path):

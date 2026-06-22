@@ -17,6 +17,10 @@ from .tushare_a_stock import (
     is_a_share_symbol,
 )
 from .tushare_research import _query_optional_api
+from .industry_identity import (
+    CONSUMER_STAPLES_SYMBOL_HINTS,
+    consumer_staples_subsector_hints,
+)
 
 
 CONSUMER_STAPLES_SYMBOLS = {
@@ -29,6 +33,7 @@ CONSUMER_STAPLES_SYMBOLS = {
     "603517.SH": "Juewei Food",
     "002557.SZ": "Qiaqia Food",
     "605089.SH": "Weizhixiang",
+    "605499.SH": "Eastroc Beverage",
 }
 
 CONSUMER_PRODUCT_TERMS = (
@@ -64,6 +69,16 @@ SUBSECTOR_TERMS = {
     "snack_food": ("休闲食品", "坚果", "瓜子", "零食", "snack"),
     "beverage": ("饮料", "茶饮", "果汁", "beverage"),
 }
+
+SUBSECTOR_TERMS["functional_beverage"] = (
+    "\u4e1c\u9e4f\u7279\u996e",
+    "\u529f\u80fd\u996e\u6599",
+    "\u80fd\u91cf\u996e\u6599",
+    "\u7535\u89e3\u8d28\u6c34",
+    "\u679c\u6c41\u8336",
+    "functional beverage",
+    "energy drink",
+)
 
 SUBSECTOR_DRIVER_ROWS = {
     "frozen_prepared_food": (
@@ -103,6 +118,14 @@ SUBSECTOR_DRIVER_ROWS = {
         ("Forward signals", "inventory, distributor prepayment, marketing spend and gross margin"),
     ),
 }
+
+SUBSECTOR_DRIVER_ROWS["functional_beverage"] = (
+    ("Demand", "energy-drink category growth, weather/temperature, outdoor and blue-collar traffic, convenience-store and traditional-channel sell-through"),
+    ("Core SKU", "Dongpeng Special Drink volume, ASP, terminal price discipline, regional penetration and same-store productivity"),
+    ("Second curve", "electrolyte water, juice tea, coffee/tea SKU repeat purchase, shelf penetration, and cannibalization versus incremental demand"),
+    ("Cost", "sugar, PET, cans/packaging, logistics, advertising/rebate intensity and lottery/promotion policy"),
+    ("Forward signals", "distributor prepayment, contract liabilities, channel inventory, terminal promotion, gross margin and selling-expense ratio"),
+)
 
 
 @dataclass(frozen=True)
@@ -156,18 +179,23 @@ def _company_profile(symbol: str, curr_date: str, look_back_days: int) -> Consum
     _, report_texts = _load_financial_report_texts(symbol, curr_date, look_back_days)
     text_probe = " ".join(text[:3000] for _, text in report_texts[:4])
 
-    if symbol in CONSUMER_STAPLES_SYMBOLS:
+    subsector_hints = consumer_staples_subsector_hints(symbol, company_name, industry, text_probe)
+
+    if symbol in CONSUMER_STAPLES_SYMBOLS or symbol in CONSUMER_STAPLES_SYMBOL_HINTS:
         reason = "curated A-share consumer-staples ticker list"
     elif _contains_terms(CONSUMER_PRODUCT_TERMS, company_name, industry, text_probe):
         reason = "company name / Tushare industry / filing text contains consumer-staples terms"
     else:
         return None
+    subsectors = tuple(
+        dict.fromkeys(subsector_hints or _detect_subsectors(company_name, industry, text_probe))
+    )
 
     return ConsumerStaplesProfile(
         symbol=symbol,
         company_name=company_name,
         industry=industry,
-        subsectors=_detect_subsectors(company_name, industry, text_probe),
+        subsectors=subsectors,
         trigger_reason=reason,
         report_texts=list(report_texts),
     )
@@ -180,6 +208,7 @@ def _latest_rows(data, columns: list[str], limit: int = 6) -> pd.DataFrame:
     if not cols:
         return pd.DataFrame()
     rows = data[cols].copy()
+    rows = rows.loc[:, ~rows.columns.duplicated()].copy()
     if "end_date" in rows.columns:
         rows["end_date"] = rows["end_date"].astype(str)
         rows = rows.sort_values("end_date", ascending=False)
@@ -261,12 +290,12 @@ def _macro_table(curr_date: str) -> tuple[pd.DataFrame, list[str]]:
     frames: list[pd.DataFrame] = []
     for api_name, fields, label in [
         ("cn_cpi", "month,nt_val,nt_yoy,town_yoy,cnt_yoy", "CPI"),
-        ("cn_ppi", "month,ppi_yoy,ppi_mp_yoy,ppi_yoy", "PPI"),
+        ("cn_ppi", "month,ppi_yoy,ppi_mp_yoy", "PPI"),
     ]:
         try:
             data = _query_optional_api(api_name, fields=fields)
             if data is not None and not data.empty:
-                data = data.copy()
+                data = data.loc[:, ~data.columns.duplicated()].copy()
                 data["macro_source"] = label
                 frames.append(data.head(6))
             else:
@@ -276,6 +305,7 @@ def _macro_table(curr_date: str) -> tuple[pd.DataFrame, list[str]]:
     if not frames:
         return pd.DataFrame(), notes
     combined = pd.concat(frames, ignore_index=True, sort=False)
+    combined = combined.loc[:, ~combined.columns.duplicated()].copy()
     cols = [col for col in ["macro_source", "month", "nt_yoy", "town_yoy", "cnt_yoy", "ppi_yoy", "ppi_mp_yoy"] if col in combined.columns]
     return combined[cols].head(12), notes
 

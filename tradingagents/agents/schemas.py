@@ -575,6 +575,19 @@ class PortfolioDecision(BaseModel):
             "bounded downside."
         ),
     )
+    rating_posture: Optional[str] = Field(
+        default=None,
+        description=(
+            "A short action qualifier for the final rating. Keep the clean rating "
+            "field unchanged, but label the actual PM posture so Hold does not "
+            "hide the trade. For Hold, choose one of: Hold / Positive Watch, "
+            "Hold / Defensive Starter, Hold / Neutral Wait, Hold / Negative Watch. "
+            "Then explain in one sentence whether new capital should wait, "
+            "open only a starter, or avoid. For Overweight, state whether it is "
+            "staged/cautious or normal. For Underweight, state whether it is "
+            "absolute risk reduction or relative low-weight/watch."
+        ),
+    )
     company_snapshot: str = Field(
         description=(
             "A short, self-contained company introduction for public sharing. "
@@ -957,6 +970,22 @@ class PortfolioDecision(BaseModel):
             "is also checked on NBV growth, NBV margin, EV or P/EV, OCF/cash "
             "quality, solvency, investment spread, payout coverage, channel mix, "
             "and P&C COR where applicable."
+        ),
+    )
+    information_utilization_audit: Optional[str] = Field(
+        default=None,
+        description=(
+            "A compact PM audit of how the report used the available information. "
+            "Cover five buckets when available: filings/official disclosures, "
+            "Tushare market and financial data, Knowledge Planet stream or PDF "
+            "intelligence, peer/industry KPI context, and price-volume/relative "
+            "strength. For each bucket, state the decision-use: core valuation "
+            "input, probability adjustment, catalyst/verification item, sizing/"
+            "timing adjustment, rejected/noisy clue, or missing. If Knowledge "
+            "Planet contains high-quality private/proxy clues, do not dismiss "
+            "them merely as unofficial; say how they changed bull/base/bear "
+            "probabilities, what objective anchor is still needed, and whether "
+            "the clue affects rating, posture, or only the verification calendar."
         ),
     )
     material_catalysts: Optional[str] = Field(
@@ -1503,8 +1532,17 @@ def render_pm_decision(decision: PortfolioDecision) -> str:
         f"**One-Line Thesis**: {decision.one_line_thesis}",
         "",
     ]
+    if decision.rating_posture:
+        parts.extend([f"**Rating Posture**: {decision.rating_posture}", ""])
     if decision.rating_evidence_audit:
         parts.extend([f"**Rating Evidence Audit**: {decision.rating_evidence_audit}", ""])
+    if decision.information_utilization_audit:
+        parts.extend(
+            [
+                f"**Information Utilization Audit**: {decision.information_utilization_audit}",
+                "",
+            ]
+        )
     parts.extend(
         [
             *pm_summary_parts,

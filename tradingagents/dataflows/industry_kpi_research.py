@@ -10,6 +10,8 @@ import re
 from typing import Mapping
 
 from .industry_identity import (
+    consumer_staples_subsector_hints,
+    is_consumer_staples_text,
     is_hog_breeding_text,
     is_insurance_text,
     is_telecom_operator_text,
@@ -119,6 +121,45 @@ def _insurance_playbook() -> tuple[str, list[tuple[str, str, str]]]:
     )
 
 
+def _consumer_staples_playbook(symbol: str, combined_text: str) -> tuple[str, list[tuple[str, str, str]]] | None:
+    subsectors = consumer_staples_subsector_hints(symbol, combined_text)
+    if not subsectors:
+        return None
+    if "functional_beverage" in subsectors:
+        return (
+            "consumer staples / functional beverage",
+            [
+                ("Category Demand", "energy-drink category growth, temperature/weather, outdoor/blue-collar traffic, convenience-store and traditional-channel sell-through", "volume runway and seasonality"),
+                ("Core SKU", "Dongpeng Special Drink volume, ASP, terminal price, regional penetration, same-store terminal productivity", "core revenue durability and valuation multiple"),
+                ("Second Curve", "electrolyte water, juice tea, coffee/tea SKU shelf penetration, repeat purchase, cannibalization versus incremental demand", "revenue growth quality and optionality"),
+                ("Channel Health", "distributor inventory, contract liabilities/prepayments, rebate/lottery policy, terminal promotion intensity", "forward revenue visibility and channel stuffing risk"),
+                ("Cost / Margin", "sugar, PET/can/packaging, logistics, product mix, advertising and selling-expense ratio", "gross margin and operating leverage"),
+                ("Cash / Capital Return", "OCF/NI, receivables, inventory turnover, dividend/buyback execution, ROE sustainability", "earnings quality and downside support"),
+            ],
+        )
+    if "baijiu" in subsectors:
+        return (
+            "baijiu / consumer channel",
+            [
+                ("Price", "wholesale price, retail price, promotion intensity", "brand power"),
+                ("Channel", "channel inventory, distributor payment, contract liabilities", "cycle pressure"),
+                ("Demand", "banquet/business demand, sell-through, regional traffic", "volume"),
+                ("Mix", "high-end/sub-high-end mix, product upgrade/downgrade", "margin"),
+                ("Cash", "receivables, advance receipts, cash conversion", "quality"),
+            ],
+        )
+    return (
+        "consumer staples / food-beverage channel",
+        [
+            ("Demand", "category growth, weather/traffic, retail/catering channel sell-through, regional penetration", "volume and mix"),
+            ("Price / Mix", "ASP, premiumization, discounting, product mix, new-product repeat purchase", "revenue and gross margin"),
+            ("Channel", "contract liabilities/prepayments, distributor inventory, receivables, rebate and promotion policy", "revenue visibility and channel health"),
+            ("Cost", "sugar, raw milk/meat/grain/oil/PET/packaging/logistics depending on subsector", "gross margin"),
+            ("Cash / Quality", "OCF/NI, inventory freshness, receivables, dividend/buyback, ROE sustainability", "earnings quality and downside"),
+        ],
+    )
+
+
 def _detect_playbook(symbol: str, combined_text: str) -> tuple[str, list[tuple[str, str, str]]]:
     lower = f"{symbol}\n{combined_text}".lower()
     if is_telecom_operator_text(symbol, combined_text):
@@ -147,6 +188,9 @@ def _detect_playbook(symbol: str, combined_text: str) -> tuple[str, list[tuple[s
                 ("Valuation / Sensitivity", "hog-price sensitivity table, implied hog price from current market cap, PB floor cross-check", "rating, position size, and falsification trigger"),
             ],
         )
+    consumer_playbook = _consumer_staples_playbook(symbol, combined_text)
+    if consumer_playbook is not None:
+        return consumer_playbook
     metals_playbook = _metals_playbook(symbol, combined_text)
     if _metals_context_triggered(combined_text) and metals_playbook is not None:
         return metals_playbook

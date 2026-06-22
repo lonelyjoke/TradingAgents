@@ -31,9 +31,11 @@ except Exception:  # pragma: no cover - terminal fallback
 
 try:
     from tradingagents.llm_clients.model_catalog import MODEL_OPTIONS, get_model_options
+    from tradingagents.dataflows.knowledge_planet_research import DAILY_ANALYSIS_TARGETS
 except Exception:  # pragma: no cover - terminal fallback
     MODEL_OPTIONS = {}
     get_model_options = None
+    DAILY_ANALYSIS_TARGETS = 15
 
 
 console = Console() if Console else None
@@ -85,7 +87,7 @@ def _print_header() -> None:
     title = "知识星球题材交易日报"
     body = (
         "选择截至日期、回溯窗口和模型后，系统会先同步/读取知识星球资料，"
-        "再生成本地日报。完整版会调用大模型，对前排候选做交易逻辑拆解。"
+        "再生成本地日报。分析层固定输出主榜10个、观察榜5个，完整版会对15个候选做交易逻辑拆解。"
     )
     if console and Panel:
         console.print(Panel(body, title=title, border_style="cyan"))
@@ -212,6 +214,7 @@ def _show_summary(args: list[str], end_date: str, lookback_days: int, mode: str,
         table.add_column("选择")
         table.add_row("信息窗口", f"{start_date} 至 {end_date}（含当天）")
         table.add_row("运行模式", mode)
+        table.add_row("分析标的", f"固定 {DAILY_ANALYSIS_TARGETS} 个（主榜10 + 观察榜5）")
         table.add_row("LLM", f"{provider}/{model}" if provider and model else "不调用")
         table.add_row("输出文件", str(output))
         console.print(table)
@@ -220,6 +223,7 @@ def _show_summary(args: list[str], end_date: str, lookback_days: int, mode: str,
         print("运行配置")
         print(f"- 信息窗口: {start_date} 至 {end_date}（含当天）")
         print(f"- 运行模式: {mode}")
+        print(f"- 分析标的: 固定 {DAILY_ANALYSIS_TARGETS} 个（主榜10 + 观察榜5）")
         print(f"- LLM: {provider}/{model}" if provider and model else "- LLM: 不调用")
         print(f"- 输出文件: {output}")
         print("实际命令: " + " ".join(args))
@@ -242,17 +246,11 @@ def main() -> int:
     )
     mode = _select("请选择运行模式", RUN_MODES, default="full")
 
-    max_scored = 0
-    max_llm = 0
     provider_option: ProviderOption | None = None
     model: str | None = None
     base_url: str | None = None
 
-    if mode in {"full", "market"}:
-        max_scored = _int("Tushare 基本面/技术面打分候选数量", 12, minimum=1, maximum=80)
-
     if mode == "full":
-        max_llm = _int("送入大模型做深度拆解的候选数量", 8, minimum=1, maximum=30)
         provider_option = _select(
             "请选择大模型供应商",
             [(option.label, option) for option in PROVIDERS],
@@ -271,8 +269,6 @@ def main() -> int:
     ]
     if mode == "fast":
         args.append("--no-market-scoring")
-    else:
-        args.extend(["--max-scored-candidates", str(max_scored)])
 
     if mode == "full" and provider_option and model:
         args.extend(
@@ -282,8 +278,6 @@ def main() -> int:
                 provider_option.provider,
                 "--llm-model",
                 model,
-                "--max-llm-candidates",
-                str(max_llm),
             ]
         )
         if base_url:

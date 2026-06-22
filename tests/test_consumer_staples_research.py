@@ -83,6 +83,73 @@ def test_consumer_staples_context_triggers_for_anjoy(monkeypatch):
     assert "Spring Festival restocking" in rendered
 
 
+def test_consumer_staples_context_triggers_for_eastroc_functional_beverage(monkeypatch):
+    monkeypatch.setattr(
+        consumer_staples_research,
+        "_fetch_stock_basic",
+        lambda symbol: pd.Series({"name": "Dongpeng Beverage", "industry": "Soft Drinks"}),
+    )
+    monkeypatch.setattr(
+        consumer_staples_research,
+        "_load_financial_report_texts",
+        lambda symbol, curr_date, look_back_days: (
+            pd.DataFrame(),
+            [("annual", "Dongpeng Special Drink, energy drink, channel sell-through.")],
+        ),
+    )
+    monkeypatch.setattr(
+        consumer_staples_research,
+        "_fetch_income_statement_data",
+        lambda *args, **kwargs: pd.DataFrame(
+            {
+                "end_date": ["20260331"],
+                "total_revenue": [585.0],
+                "n_income_attr_p": [13.6],
+            }
+        ),
+    )
+    monkeypatch.setattr(
+        consumer_staples_research,
+        "_fetch_balance_sheet_data",
+        lambda *args, **kwargs: pd.DataFrame(
+            {
+                "end_date": ["20260331"],
+                "inventories": [38.0],
+                "contract_liab": [72.0],
+                "money_cap": [180.0],
+                "total_liab": [120.0],
+                "total_assets": [520.0],
+            }
+        ),
+    )
+    monkeypatch.setattr(
+        consumer_staples_research,
+        "_fetch_cashflow_data",
+        lambda *args, **kwargs: pd.DataFrame(
+            {"end_date": ["20260331"], "n_cashflow_act": [19.2], "c_fr_sale_sg": [620.0]}
+        ),
+    )
+    monkeypatch.setattr(
+        consumer_staples_research,
+        "_fetch_fina_indicator",
+        lambda *args, **kwargs: pd.DataFrame(
+            {
+                "end_date": ["20260331"],
+                "grossprofit_margin": [44.0],
+                "q_gr_yoy": [18.5],
+            }
+        ),
+    )
+    monkeypatch.setattr(consumer_staples_research, "_macro_table", lambda curr_date: (pd.DataFrame(), []))
+
+    rendered = get_consumer_staples_context("605499.SH", "2026-06-20")
+
+    assert "Status: triggered" in rendered
+    assert "Detected subsectors: functional_beverage, beverage" in rendered
+    assert "Dongpeng Special Drink volume" in rendered
+    assert "contract liabilities" in rendered
+
+
 def test_consumer_staples_context_not_applicable_for_non_consumer(monkeypatch):
     monkeypatch.setattr(
         consumer_staples_research,

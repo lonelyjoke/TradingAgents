@@ -10,11 +10,13 @@ from __future__ import annotations
 
 import json
 import hashlib
+import math
 import os
 import re
 import sqlite3
 import subprocess
 import sys
+import time
 import urllib.error
 import urllib.request
 from collections import Counter, defaultdict
@@ -46,6 +48,11 @@ except Exception:  # pragma: no cover - defensive import guard
 
 _REPO_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_KP_DB = _REPO_ROOT / "data" / "knowledge_planet" / "index.sqlite"
+DAILY_MAIN_BOARD_SIZE = 10
+DAILY_WATCH_BOARD_SIZE = 5
+DAILY_ANALYSIS_TARGETS = DAILY_MAIN_BOARD_SIZE + DAILY_WATCH_BOARD_SIZE
+DAILY_MAIN_MIN_SCORE = 55
+DAILY_WATCH_MIN_SCORE = 35
 
 PREPROCESS_SCHEMA_VERSION = 2
 
@@ -258,7 +265,18 @@ COMMON_A_SHARE_ALIASES = {
     "华虹公司": "688347.SH",
     "裕同科技": "002831.SZ",
     "和胜股份": "002824.SZ",
+    "中国太保": "601601.SH",
+    "海航控股": "600221.SH",
+    "生益科技": "600183.SH",
+    "中际旭创": "300308.SZ",
+    "力源信息": "300184.SZ",
+    "西部材料": "002149.SZ",
+    "三夫户外": "002780.SZ",
+    "上海银行": "601229.SH",
+    "同星科技": "301252.SZ",
 }
+
+COMMON_A_SHARE_NAMES_BY_SYMBOL = {symbol: name for name, symbol in COMMON_A_SHARE_ALIASES.items()}
 
 BROKER_TEAM_PREFIXES = (
     "国金",
@@ -468,12 +486,21 @@ class _DirectDeepSeekLLM:
             },
             method="POST",
         )
-        try:
-            with urllib.request.urlopen(request, timeout=self.timeout) as response:
-                raw = response.read().decode("utf-8")
-        except urllib.error.HTTPError as exc:
-            body = exc.read().decode("utf-8", errors="replace")
-            raise RuntimeError(f"DeepSeek HTTP {exc.code}: {_compact_text(body, 300)}") from exc
+        last_error: Exception | None = None
+        for attempt in range(3):
+            try:
+                with urllib.request.urlopen(request, timeout=self.timeout) as response:
+                    raw = response.read().decode("utf-8")
+                break
+            except urllib.error.HTTPError as exc:
+                body = exc.read().decode("utf-8", errors="replace")
+                raise RuntimeError(f"DeepSeek HTTP {exc.code}: {_compact_text(body, 300)}") from exc
+            except Exception as exc:
+                last_error = exc
+                if attempt < 2:
+                    time.sleep(1.2 * (attempt + 1))
+                    continue
+                raise RuntimeError(f"DeepSeek request failed after retries: {_compact_text(str(last_error), 220)}") from exc
         data = json.loads(raw)
         content = data["choices"][0]["message"]["content"]
         return _SimpleLLMResponse(content=content)
@@ -573,6 +600,9 @@ def ensure_knowledge_planet_upstream_synced(
     *,
     force: bool = False,
     progress: Callable[[str], None] | None = None,
+    max_pages: int | None = None,
+    max_image_downloads: int | None = None,
+    max_file_downloads: int | None = None,
 ) -> str:
     """Sync zsxq upstream data and import it before local reads.
 
@@ -603,9 +633,21 @@ def ensure_knowledge_planet_upstream_synced(
     if not group_spec:
         return "auto_sync_skipped:no_group"
 
-    max_pages = int(config.get("knowledge_planet_auto_sync_max_pages", 20))
-    max_images = int(config.get("knowledge_planet_auto_sync_max_image_downloads", 100))
-    max_files = int(config.get("knowledge_planet_auto_sync_max_file_downloads", 50))
+    max_pages = int(
+        config.get("knowledge_planet_auto_sync_max_pages", 20)
+        if max_pages is None
+        else max_pages
+    )
+    max_images = int(
+        config.get("knowledge_planet_auto_sync_max_image_downloads", 100)
+        if max_image_downloads is None
+        else max_image_downloads
+    )
+    max_files = int(
+        config.get("knowledge_planet_auto_sync_max_file_downloads", 50)
+        if max_file_downloads is None
+        else max_file_downloads
+    )
 
     sync_script = _REPO_ROOT / "scripts" / "sync_knowledge_planet_from_zsxq.py"
     import_script = _REPO_ROOT / "scripts" / "import_knowledge_planet.py"
@@ -734,12 +776,16 @@ def ensure_knowledge_planet_upstream_synced_for_window(
     *,
     force: bool = False,
     progress: Callable[[str], None] | None = None,
+    max_pages: int | None = None,
+    max_image_downloads: int | None = None,
+    max_file_downloads: int | None = None,
 ) -> str:
     """Best-effort upstream sync for every calendar date in a report/context window."""
     statuses: list[str] = []
     for sync_date in _dates_for_window(end_date, look_back_days):
         statuses.append(
-            f"{sync_date}={ensure_knowledge_planet_upstream_synced(sync_date, force=force, progress=progress)}"
+            f"{sync_date}="
+            f"{ensure_knowledge_planet_upstream_synced(sync_date, force=force, progress=progress, max_pages=max_pages, max_image_downloads=max_image_downloads, max_file_downloads=max_file_downloads)}"
         )
     return "; ".join(statuses) if statuses else "auto_sync_skipped:no_dates"
 
@@ -1144,15 +1190,21 @@ def _query_reports(
     """
     rows = [_row_to_report(row) for row in conn.execute(sql, params)]
     primary = primary_terms or terms
-    rows.sort(
-        key=lambda report: (
-            _report_match_score(report, terms, primary),
-            report.published_at or "",
-            report.row_id,
+    scored = [
+        (_report_match_score(report, terms, primary), report)
+        for report in rows
+    ]
+    min_score = 80 if primary_terms else 0
+    scored = [(score, report) for score, report in scored if score >= min_score]
+    scored.sort(
+        key=lambda pair: (
+            pair[0],
+            pair[1].published_at or "",
+            pair[1].row_id,
         ),
         reverse=True,
     )
-    return rows[: int(limit)]
+    return [report for _, report in scored[: int(limit)]]
 
 
 def _compact_text(text: str, max_chars: int) -> str:
@@ -1912,6 +1964,93 @@ def _theme_marginal_view(theme: str, one_day: int, three_day: int, seven_day: in
     if seven_day >= 5:
         return "七日延续", "有持续关注度，但需要公司层面验证承接。"
     return "低频线索", "作为观察项，暂不单独驱动交易。"
+
+
+def _theme_daily_share_data(items: list[KpItem], report_dates: list[str], max_themes: int = 6) -> tuple[list[str], list[str], dict[str, list[float]]]:
+    day_total: dict[str, int] = {date: 0 for date in report_dates}
+    day_theme_counts: dict[str, Counter] = {date: Counter() for date in report_dates}
+    seen_by_day: dict[str, set[str]] = {date: set() for date in report_dates}
+    valid_dates = set(report_dates)
+    for item in items:
+        date = _item_date(item)
+        if date not in valid_dates:
+            continue
+        key = _compact_text(f"{item.title}|{item.summary or item.text}", 120)
+        if key in seen_by_day[date]:
+            continue
+        seen_by_day[date].add(key)
+        text = f"{item.title}\n{item.text}\n{item.summary}"
+        matched = [theme for theme in THEME_KEYWORDS if theme.lower() in text.lower()]
+        if not matched:
+            continue
+        day_total[date] += 1
+        for theme in set(matched):
+            day_theme_counts[date][theme] += 1
+    theme_scores = Counter()
+    for date in report_dates:
+        total = max(1, day_total[date])
+        for theme, count in day_theme_counts[date].items():
+            theme_scores[theme] += count / total
+    top_themes = [theme for theme, _score in theme_scores.most_common(max_themes)]
+    shares: dict[str, list[float]] = {}
+    for theme in top_themes:
+        shares[theme] = [
+            round(day_theme_counts[date][theme] * 100 / max(1, day_total[date]), 1)
+            for date in report_dates
+        ]
+    return report_dates, top_themes, shares
+
+
+def _sparkline(values: list[float]) -> str:
+    if not values:
+        return ""
+    blocks = "▁▂▃▄▅▆▇█"
+    low = min(values)
+    high = max(values)
+    if high <= low:
+        return blocks[0] * len(values)
+    return "".join(blocks[min(len(blocks) - 1, int((value - low) / (high - low) * (len(blocks) - 1)))] for value in values)
+
+
+def _theme_share_trend_lines(items: list[KpItem], report_dates: list[str]) -> list[str]:
+    dates, themes, shares = _theme_daily_share_data(items, report_dates, max_themes=6)
+    lines = [
+        "",
+        "## 题材热度边际变化",
+        "",
+        "按每日去重后的观点流占比衡量热度，而不是看绝对条数。这样能避免某天信息总量变化造成误判。",
+    ]
+    if not themes:
+        lines.append("- 本窗口没有足够题材数据形成趋势。")
+        return lines
+    labels = [date[5:] for date in dates]
+    max_share = max(max(values) for values in shares.values()) if shares else 10
+    y_max = max(10, int(math.ceil(max_share / 10.0) * 10))
+    lines.extend(["", "```mermaid", "xychart-beta", '  title "近七日题材热度占比（去重后）"'])
+    lines.append("  x-axis [" + ", ".join(f'"{label}"' for label in labels) + "]")
+    lines.append(f'  y-axis "占比%" 0 --> {y_max}')
+    for theme in themes[:4]:
+        values = ", ".join(f"{value:.1f}" for value in shares[theme])
+        lines.append(f"  line [{values}]")
+    lines.extend(["```", ""])
+    lines.extend(["| 题材 | 趋势 | " + " | ".join(labels) + " | 边际判断 |", "| --- | --- | " + " | ".join("---:" for _ in labels) + " | --- |"])
+    for theme in themes:
+        values = shares[theme]
+        first = values[0] if values else 0.0
+        last = values[-1] if values else 0.0
+        delta = last - first
+        if delta >= 5:
+            view = f"占比提升 {delta:.1f}pct，边际升温"
+        elif delta <= -5:
+            view = f"占比下降 {abs(delta):.1f}pct，边际降温"
+        else:
+            view = "占比变化不大，更多是延续"
+        lines.append(
+            f"| {_md_cell(theme)} | {_sparkline(values)} | "
+            + " | ".join(f"{value:.1f}%" for value in values)
+            + f" | {_md_cell(view)} |"
+        )
+    return lines
 
 
 def _theme_lifecycle_view(theme: str, one_day: int, three_day: int, seven_day: int) -> tuple[str, str, str]:
@@ -3137,7 +3276,13 @@ def _row_int(row: dict, key: str, default: int = 0) -> int:
 
 
 def _row_label(row: dict) -> str:
-    return f"{row.get('name')}（{row.get('symbol')}）"
+    name = str(row.get("name") or "").strip()
+    symbol = str(row.get("symbol") or "").strip()
+    if not symbol or symbol == "未评分":
+        return name
+    if name and name != symbol:
+        return f"{name}（{symbol}）"
+    return f"未命名标的（{symbol}）"
 
 
 def _is_low_frequency_candidate(row: dict) -> bool:
@@ -3154,6 +3299,413 @@ def _is_hot_candidate(row: dict) -> bool:
     )
 
 
+def _looks_like_generated_evidence(text: str) -> bool:
+    return any(
+        marker in text
+        for marker in (
+            "候选机会资产",
+            "热门优选",
+            "验证：跟踪",
+            "风险：警惕",
+            "预处理资产",
+        )
+    )
+
+
+def _format_item_evidence(item: KpItem, max_chars: int = 520) -> str:
+    title = _clean_report_snippet(item.title, 120)
+    body = _clean_report_snippet(item.text or item.summary, max_chars)
+    if not body:
+        body = _clean_report_snippet(item.summary, max_chars)
+    if title and body and title not in body:
+        return f"{item.published_at[:16]}｜{title}｜{body}"
+    return f"{item.published_at[:16]}｜{body or title}"
+
+
+def _candidate_raw_snippets(row: dict, limit: int = 2) -> list[str]:
+    raw = row.get("raw_evidence")
+    primary: list[str] = []
+    fallback: list[str] = []
+    if isinstance(raw, list):
+        for item in raw:
+            text = _compact_text(str(item or ""), 520)
+            if not text:
+                continue
+            target = fallback if _looks_like_generated_evidence(text) else primary
+            if text not in primary and text not in fallback:
+                target.append(text)
+            if len(primary) >= limit:
+                return primary[:limit]
+    note = _compact_text(str(row.get("note") or ""), 280)
+    snippets = primary or fallback
+    return snippets[:limit] or ([note] if note else [])
+
+
+def _candidate_column_score(row: dict) -> str:
+    scorecard = row.get("scorecard")
+    if isinstance(scorecard, dict):
+        parts = scorecard.get("components", {})
+        if isinstance(parts, dict):
+            detail = "；".join(f"{key}{value}" for key, value in parts.items())
+        else:
+            detail = ""
+        return f"交易可行性 {scorecard.get('total', 0)}/100；{detail}"
+    return (
+        f"综合优先级 {_opportunity_priority(row)}；"
+        f"LLM/信号 {_row_int(row, 'llm_score', _row_int(row, 'signal_score'))}，"
+        f"主升 {_row_int(row, 'main_rise_score')}，短线 {_row_int(row, 'short_trade_score')}，"
+        f"基本面 {row.get('fundamental_text')}，技术 {row.get('technical')}/40。"
+    )
+
+
+def _candidate_trade_type(row: dict) -> str:
+    text = " ".join(
+        str(row.get(key) or "")
+        for key in (
+            "signal_interpretation",
+            "expectation_gap",
+            "thesis_path",
+            "note",
+            "opportunity_types",
+            "raw_evidence",
+        )
+    )
+    if any(word in text for word in ("涨价", "提价", "价格", "业绩", "指引", "毛利", "利润")):
+        return "业绩/价格上修"
+    if any(word in text for word in ("政策", "定增", "公告", "中标", "客户验证", "认证", "订单")):
+        return "事件催化"
+    if (
+        str(row.get("candidate_lane") or "") == "tech_hot"
+        or _is_hot_candidate(row)
+        or _candidate_position_bucket(row) in {"高位强趋势", "高位过热"}
+    ):
+        return "高热趋势延续"
+    if str(row.get("candidate_lane") or "") in {"non_tech_alpha", "report_assumption", "low_frequency"} or _candidate_position_bucket(row) == "低位/左侧":
+        return "低位拐点反转"
+    return "主题扩散"
+
+
+def _candidate_trade_lane(row: dict) -> str:
+    trade_type = str(row.get("trade_type") or _candidate_trade_type(row))
+    if trade_type in {"高热趋势延续", "业绩/价格上修", "事件催化"}:
+        return "高热/催化验证"
+    if trade_type == "低位拐点反转":
+        return "低位拐点验证"
+    return "主题扩散验证"
+
+
+def _component_logic(row: dict, max_points: int) -> int:
+    score = _row_int(row, "llm_score", _row_int(row, "signal_score"))
+    value = int(min(max_points, max_points * max(0, min(score, 100)) / 100))
+    if str(row.get("llm_status") or "") != "analyzed":
+        value = min(value, int(max_points * 0.55))
+    return value
+
+
+def _component_expectation(row: dict, max_points: int) -> int:
+    text = " ".join(str(row.get(key) or "") for key in ("expectation_gap", "signal_interpretation", "note"))
+    value = 0
+    if text:
+        value += int(max_points * 0.35)
+    if any(word in text for word in ("预期差", "未充分", "低估", "修复", "拐点", "上修", "超预期")):
+        value += int(max_points * 0.35)
+    if _row_int(row, "hard_increment_count") > 0:
+        value += int(max_points * 0.25)
+    if str(row.get("candidate_lane") or "") in {"non_tech_alpha", "low_frequency", "report_assumption"}:
+        value += int(max_points * 0.15)
+    return min(max_points, value)
+
+
+def _component_fundamental(row: dict, max_points: int) -> int:
+    text = str(row.get("fundamental_text") or "")
+    if "验证通过" in text:
+        return max_points
+    if "部分验证" in text:
+        return int(max_points * 0.72)
+    if "弱验证" in text:
+        return int(max_points * 0.45)
+    if "承接不足" in text:
+        return int(max_points * 0.18)
+    return int(max_points * 0.28) if text and "待验证" not in text else 0
+
+
+def _component_technical(row: dict, trade_type: str, max_points: int) -> int:
+    technical = _row_int(row, "technical", -1)
+    if technical < 0:
+        return 0
+    if trade_type == "低位拐点反转":
+        if 12 <= technical <= 26:
+            return int(max_points * 0.85)
+        if 27 <= technical <= 33:
+            return int(max_points * 0.65)
+        if technical < 12:
+            return int(max_points * 0.35)
+        return int(max_points * 0.25)
+    if trade_type == "高热趋势延续":
+        if 24 <= technical <= 34:
+            return max_points
+        if 18 <= technical < 24:
+            return int(max_points * 0.65)
+        if technical > 34:
+            return int(max_points * 0.55)
+        return int(max_points * 0.25)
+    return min(max_points, int(technical * max_points / 40))
+
+
+def _component_catalyst(row: dict, max_points: int) -> int:
+    text = " ".join(str(row.get(key) or "") for key in ("catalyst_clock", "verification_points", "entry_plan", "raw_evidence"))
+    value = min(max_points, _row_int(row, "hard_increment_count") * int(max_points * 0.35))
+    if text:
+        value += int(max_points * 0.35)
+    if any(word in text for word in ("1天", "1周", "公告", "订单", "价格", "中报", "季报", "验证", "催化")):
+        value += int(max_points * 0.30)
+    return min(max_points, value)
+
+
+def _risk_penalty(row: dict, trade_type: str) -> int:
+    penalty = min(20, _row_int(row, "pump") // 2)
+    technical = _row_int(row, "technical", -1)
+    if technical >= 35:
+        penalty += 10 if trade_type != "高热趋势延续" else 6
+    if str(row.get("llm_status") or "") != "analyzed":
+        penalty += 8
+    if str(row.get("fundamental_text") or "").startswith("待验证"):
+        penalty += 8
+    if any(word in str(row.get("action") or "") for word in ("回避", "放弃", "不参与")):
+        penalty += 18
+    if trade_type == "主题扩散":
+        penalty += 8
+    return min(35, penalty)
+
+
+def _candidate_trade_hypothesis(row: dict) -> str:
+    thesis = str(row.get("thesis_path") or "").strip()
+    if thesis:
+        return thesis
+    signal = str(row.get("signal_interpretation") or row.get("expectation_gap") or "").strip()
+    if signal:
+        return _compact_text(signal, 220)
+    snippets = _candidate_raw_snippets(row, limit=1)
+    if snippets:
+        return _compact_text(snippets[0], 220)
+    return "未能从观点源抽出清晰交易假设"
+
+
+def _candidate_scorecard(row: dict) -> dict:
+    trade_type = _candidate_trade_type(row)
+    if trade_type == "高热趋势延续":
+        weights = {"逻辑": 15, "预期差": 15, "基本面": 15, "技术": 25, "催化": 10}
+    elif trade_type == "低位拐点反转":
+        weights = {"逻辑": 20, "预期差": 25, "基本面": 25, "技术": 10, "催化": 10}
+    elif trade_type == "业绩/价格上修":
+        weights = {"逻辑": 15, "预期差": 20, "基本面": 25, "技术": 15, "催化": 15}
+    elif trade_type == "事件催化":
+        weights = {"逻辑": 20, "预期差": 15, "基本面": 15, "技术": 15, "催化": 25}
+    else:
+        weights = {"逻辑": 15, "预期差": 15, "基本面": 15, "技术": 10, "催化": 10}
+    components = {
+        "逻辑": _component_logic(row, weights["逻辑"]),
+        "预期差": _component_expectation(row, weights["预期差"]),
+        "基本面": _component_fundamental(row, weights["基本面"]),
+        "技术": _component_technical(row, trade_type, weights["技术"]),
+        "催化": _component_catalyst(row, weights["催化"]),
+    }
+    penalty = _risk_penalty(row, trade_type)
+    total = max(0, min(100, sum(components.values()) - penalty))
+    hard_reject_reasons = _candidate_hard_gate_failures(row)
+    if "基本面承接不足" in hard_reject_reasons and trade_type in {"事件催化", "主题扩散"}:
+        hard_reject_reasons = [reason for reason in hard_reject_reasons if reason != "基本面承接不足"]
+    return {
+        "trade_type": trade_type,
+        "components": components,
+        "risk_penalty": penalty,
+        "total": total,
+        "hard_reject": bool(hard_reject_reasons),
+        "hard_reject_reasons": hard_reject_reasons,
+    }
+
+
+def _candidate_column_lines(row: dict, idx: int, board_title: str) -> list[str]:
+    scorecard = row.get("scorecard") if isinstance(row.get("scorecard"), dict) else {}
+    lane_title = str(scorecard.get("trade_type") or row.get("trade_type") or _candidate_trade_type(row))
+    snippets = _candidate_raw_snippets(row, limit=2)
+    raw_lines = [f"> {snippet}" for snippet in snippets] or ["> 暂无可展示原始段子，需回看知识星球原文。"]
+    hot_or_low_question = (
+        "高热票先判断上行空间、拥挤度和回踩买点，不能只看逻辑正确。"
+        if lane_title in {"高热趋势延续", "业绩/价格上修", "事件催化"}
+        else "低位票先判断拐点是否真实、市场为何没定价，以及赔率能否覆盖等待成本。"
+    )
+    if lane_title in {"高热趋势延续", "业绩/价格上修", "事件催化"}:
+        key_question = _compact_text(
+            str(row.get("payoff_risk") or row.get("expectation_gap") or "重点判断高位是否仍有预期差、空间和量价承接。"),
+            220,
+        )
+    else:
+        key_question = _compact_text(
+            str(row.get("expectation_gap") or row.get("signal_interpretation") or "重点判断卖方/私域线索能否落到未来1-4周可验证的业绩或价格拐点。"),
+            220,
+        )
+    thesis = _compact_text(_candidate_trade_hypothesis(row), 220)
+    verification = _compact_text(str(row.get("verification_points") or row.get("entry_plan") or "等待公告、财报、价格和量价确认。"), 220)
+    risk = _compact_text(str(row.get("falsification_points") or row.get("risk_flags") or "若后续没有硬数据验证，则降级。"), 220)
+    score_reasons = ""
+    if scorecard:
+        components = scorecard.get("components", {})
+        component_text = "；".join(f"{key}{value}" for key, value in components.items()) if isinstance(components, dict) else ""
+        reject = "；硬淘汰风险：" + "、".join(scorecard.get("hard_reject_reasons", [])) if scorecard.get("hard_reject_reasons") else ""
+        score_reasons = f"{component_text}；风险扣分{scorecard.get('risk_penalty', 0)}{reject}"
+    return [
+        "",
+        "---",
+        "",
+        f"### {idx}. {_md_cell(_row_label(row))}｜{board_title}｜{lane_title}｜{row.get('position_bucket') or _candidate_position_bucket(row)}｜{row.get('buildability_label') or _candidate_buildability_label(row)}",
+        "",
+        f"**最终结论**：{_candidate_clear_conclusion(row)}",
+        "",
+        f"**排序得分**：{_candidate_column_score(row)}",
+        "",
+        f"**漏斗评分解释**：{score_reasons or '暂无结构化评分解释'}",
+        "",
+        "**参考段子**：",
+        *raw_lines,
+        "",
+        f"**1. 卖方观点识别**：{_compact_text(str(row.get('signal_interpretation') or row.get('note') or '卖方观点尚未被充分抽取'), 220)}",
+        "",
+        f"**2. 交易假设**：{thesis}",
+        "",
+        f"**3. 类型判断**：{lane_title}。{hot_or_low_question}",
+        "",
+        f"**4. 预期差/空间判断**：{key_question}",
+        "",
+        f"**5. 基本面与技术面验证**：{row.get('fundamental_text')}；技术 {row.get('technical')}/40；位置判断为 {row.get('position_bucket') or _candidate_position_bucket(row)}。"
+        f" {verification}",
+        "",
+        f"**6. 交易处理**：{_compact_text(str(row.get('action') or row.get('bucket') or '观察'), 220)}",
+        "",
+        f"**7. 证伪/风险**：{risk}",
+    ]
+
+
+def _candidate_board_rows(
+    candidate_rows: list[dict],
+    *,
+    main_size: int = DAILY_MAIN_BOARD_SIZE,
+    watch_size: int = DAILY_WATCH_BOARD_SIZE,
+) -> tuple[list[dict], list[dict]]:
+    sorted_rows = sorted(candidate_rows, key=_opportunity_priority, reverse=True)
+
+    def main_threshold(row: dict) -> int:
+        return DAILY_MAIN_MIN_SCORE if row.get("llm_required") or row.get("market_scores_required") else 20
+
+    def watch_threshold(row: dict) -> int:
+        return DAILY_WATCH_MIN_SCORE if row.get("llm_required") or row.get("market_scores_required") else 10
+
+    main_rows = [
+        row
+        for row in sorted_rows
+        if not _candidate_hard_gate_failures(row)
+        and _opportunity_priority(row) >= main_threshold(row)
+    ]
+    watch_rows = [
+        row
+        for row in sorted_rows
+        if row not in main_rows
+        and (not row.get("llm_required") or str(row.get("llm_status") or "") == "analyzed")
+        and not any(word in str(row.get("action") or "") for word in ("回避", "放弃", "不参与"))
+        and _opportunity_priority(row) >= watch_threshold(row)
+    ]
+    return main_rows[:main_size], watch_rows[:watch_size]
+
+
+def _candidate_pending_analysis_rows(candidate_rows: list[dict], limit: int = 8) -> list[dict]:
+    pending = [
+        row
+        for row in candidate_rows
+        if row.get("llm_required") and str(row.get("llm_status") or "") != "analyzed"
+    ]
+    return sorted(pending, key=lambda row: (int(row.get("signal_score") or 0), int(row.get("mentions_1d") or 0)), reverse=True)[:limit]
+
+
+def _board_summary_lines(rows: list[dict]) -> list[str]:
+    lines = [
+        "| 排名 | 标的 | 类型 | 交易可行性 | 位置 | 动作 |",
+        "| ---: | --- | --- | ---: | --- | --- |",
+    ]
+    for idx, row in enumerate(rows, start=1):
+        lines.append(
+            f"| {idx} | {_md_cell(_row_label(row))} | {_md_cell(_candidate_trade_lane(row))} | "
+            f"{_opportunity_priority(row)} | {_md_cell(row.get('position_bucket') or _candidate_position_bucket(row))} | "
+            f"{_md_cell(_candidate_clear_conclusion(row))} |"
+        )
+    return lines
+
+
+def _board_section_lines(title: str, rows: list[dict]) -> list[str]:
+    lines = ["", f"#### {title}"]
+    if not rows:
+        lines.append("- 暂无合格标的。")
+        return lines
+    lines.extend(_board_summary_lines(rows))
+    return lines
+
+
+def _board_candidate_lines(candidate_rows: list[dict]) -> list[str]:
+    main_rows, watch_rows = _candidate_board_rows(candidate_rows)
+    pending_rows = _candidate_pending_analysis_rows(candidate_rows)
+    main_hot = [row for row in main_rows if _candidate_trade_lane(row) == "高热/催化验证"]
+    main_low = [row for row in main_rows if _candidate_trade_lane(row) == "低位拐点验证"]
+    main_other = [row for row in main_rows if row not in main_hot and row not in main_low]
+    lines = [
+        "",
+        "## 今日主榜与观察榜",
+        "",
+        f"主榜容量 {DAILY_MAIN_BOARD_SIZE} 个，观察榜容量 {DAILY_WATCH_BOARD_SIZE} 个；宁缺毋滥，不因格式固定而强行填满。排序目标是交易可行性，不是信息热度。",
+        f"今日合格：主榜 {len(main_rows)}/{DAILY_MAIN_BOARD_SIZE}，观察榜 {len(watch_rows)}/{DAILY_WATCH_BOARD_SIZE}，待补分析 {len(pending_rows)} 个。",
+        "",
+        "### 主榜 10",
+        ]
+    lines.extend(_board_section_lines("高热/催化验证", main_hot))
+    lines.extend(_board_section_lines("低位拐点验证", main_low))
+    if main_other:
+        lines.extend(_board_section_lines("主题扩散验证", main_other))
+    if main_rows:
+        for idx, row in enumerate(main_rows, start=1):
+            lines.extend(_candidate_column_lines(row, idx, "主榜"))
+    else:
+        lines.append("- 今日没有主榜候选。")
+    lines.extend(
+        [
+            "",
+            "### 观察榜 5",
+        ]
+    )
+    lines.extend(_board_summary_lines(watch_rows))
+    if watch_rows:
+        for idx, row in enumerate(watch_rows, start=1):
+            lines.extend(_candidate_column_lines(row, idx, "观察榜"))
+    else:
+        lines.append("- 今日没有观察榜候选。")
+    if pending_rows:
+        lines.extend(
+            [
+                "",
+                "### 待补分析池",
+                "",
+                "以下候选未完成 LLM 深度拆解，暂不进入主榜/观察榜；优先排查网络、返回截断或 JSON 解析问题后重跑。",
+                "",
+                "| 标的 | 信号分 | 失败/缺口 | 原始线索 |",
+                "| --- | ---: | --- | --- |",
+            ]
+        )
+        for row in pending_rows:
+            snippets = _candidate_raw_snippets(row, limit=1)
+            lines.append(
+                f"| {_md_cell(_row_label(row))} | {_row_int(row, 'signal_score')} | "
+                f"{_md_cell(_candidate_clear_conclusion(row))} | {_md_cell(snippets[0] if snippets else '')} |"
+            )
+    return lines
+
+
 def _is_fully_analyzed_candidate(row: dict) -> bool:
     """Top opportunities should not bypass the analyst stack."""
     if str(row.get("llm_status") or "") != "analyzed":
@@ -3166,6 +3718,8 @@ def _is_fully_analyzed_candidate(row: dict) -> bool:
 
 
 def _opportunity_priority(row: dict) -> int:
+    if row.get("tradability_score") is not None:
+        return _row_int(row, "tradability_score")
     llm_score = _row_int(row, "llm_score", _row_int(row, "signal_score"))
     main_score = _row_int(row, "main_rise_score")
     trade_score = _row_int(row, "short_trade_score")
@@ -3320,12 +3874,18 @@ def _candidate_position_bucket(row: dict) -> str:
 def _candidate_buildability_label(row: dict) -> str:
     action = str(row.get("action") or "")
     fundamental_text = str(row.get("fundamental_text") or "")
+    market_required = bool(row.get("market_scores_required"))
     position = _candidate_position_bucket(row)
     priority = _opportunity_priority(row)
     hard_increment_count = _row_int(row, "hard_increment_count")
+    llm_required = bool(row.get("llm_required"))
+    if llm_required and str(row.get("llm_status") or "") == "failed":
+        return "待补分析：LLM短证据重试仍失败"
+    if llm_required and str(row.get("llm_status") or "") == "not_run":
+        return "待补分析：未进入LLM深度拆解"
     if any(word in action for word in ("回避", "放弃", "不参与")):
         return "不建仓：动作层已回避"
-    if "待验证" in fundamental_text or str(row.get("technical")) == "NA":
+    if market_required and ("待验证" in fundamental_text or str(row.get("technical")) == "NA"):
         return "不可建仓：基本面/技术面未闭环"
     if hard_increment_count == 0:
         return "观察：缺少可映射真增量"
@@ -3338,7 +3898,44 @@ def _candidate_buildability_label(row: dict) -> str:
     return "观察：赔率或胜率不足"
 
 
+def _candidate_hard_gate_failures(row: dict) -> list[str]:
+    failures: list[str] = []
+    llm_required = bool(row.get("llm_required"))
+    if llm_required and str(row.get("llm_status") or "") != "analyzed":
+        failures.append("LLM未完成深度拆解")
+    if _candidate_trade_hypothesis(row) == "未能从观点源抽出清晰交易假设":
+        failures.append("缺少清晰交易假设")
+    market_required = bool(row.get("market_scores_required"))
+    if market_required and "承接不足" in str(row.get("fundamental_text") or ""):
+        failures.append("基本面承接不足")
+    if market_required and str(row.get("technical") or "NA") == "NA":
+        failures.append("缺少技术面评分")
+    if _row_int(row, "technical", -1) >= 35 and _row_int(row, "hard_increment_count") == 0:
+        failures.append("高位且缺少新增变量")
+    if any(word in str(row.get("action") or "") for word in ("回避", "放弃", "不参与")):
+        failures.append("动作层已回避")
+    return failures
+
+
+def _candidate_clear_conclusion(row: dict) -> str:
+    failures = _candidate_hard_gate_failures(row)
+    if failures:
+        return f"{_candidate_buildability_label(row)}：{'、'.join(failures[:2])}"
+    action = str(row.get("action") or "").strip()
+    if action:
+        return _compact_text(action, 110)
+    return _candidate_buildability_label(row)
+
+
 def _candidate_score_breakdown(row: dict) -> str:
+    scorecard = row.get("scorecard")
+    if isinstance(scorecard, dict):
+        components = scorecard.get("components", {})
+        component_text = " + ".join(f"{key}{value}" for key, value in components.items()) if isinstance(components, dict) else ""
+        return (
+            f"交易可行性 {scorecard.get('total', 0)} = {component_text} "
+            f"- 风险扣分{scorecard.get('risk_penalty', 0)}"
+        )
     increment = f"真增量+{min(18, _row_int(row, 'hard_increment_count') * 9)}"
     llm_score = _row_int(row, "llm_score", _row_int(row, "signal_score"))
     main_score = _row_int(row, "main_rise_score")
@@ -3993,10 +4590,7 @@ def _quality_daily_main_lines(
 ) -> list[str]:
     lines: list[str] = []
     lines.extend(_pm_one_page_lines(pm_control, candidate_rows, event_reviews, preprocessed_snapshot))
-    lines.extend(_increment_to_opportunity_lines(event_reviews, event_signals, candidate_rows, limit=6))
-    lines.extend(_opportunity_card_lines(candidate_rows, limit=5))
-    lines.extend(_position_opportunity_lines(candidate_rows, limit=8))
-    lines.extend(_non_tech_alpha_queue_lines(candidate_rows, limit=8))
+    lines.extend(_board_candidate_lines(candidate_rows))
     lines.extend(_watch_and_avoid_lines(candidate_rows, limit=8))
     lines.extend(_report_cross_validation_lines(reports, candidate_rows, preprocessed_snapshot, max_rows=4))
     lines.extend(_review_task_lines(candidate_rows, event_reviews, research_state_status))
@@ -4061,12 +4655,14 @@ def _build_llm_market_prompt(
     name: str,
     data: dict,
     market: CandidateMarketScore | None,
+    *,
+    evidence_limit: int = 6,
 ) -> str:
     market_summary = market.summary if market else "未取得行情/财务评分。"
     symbol = market.symbol if market and market.symbol else "未解析"
     fundamental = market.fundamental_score if market else None
     technical = market.technical_score if market else None
-    evidence = _compact_evidence_for_llm(name, data)
+    evidence = _compact_evidence_for_llm(name, data, limit=evidence_limit)
     return f"""你是A股题材交易日报的资深交易员和深度卖方分析师。请只基于下面给定材料做盘前交易分析，不要编造未给出的事实。
 
 候选标的：{name}
@@ -4125,69 +4721,88 @@ def _run_llm_market_analysis(
     market: CandidateMarketScore | None,
     llm,
 ) -> CandidateLLMAnalysis:
-    try:
-        prompt = _build_llm_market_prompt(name, data, market)
-        system_text = (
-            "你是A股题材交易盘前助手。输出必须是可解析JSON。"
-            "不要给投资建议保证，不要编造事实。"
-        )
+    last_error = ""
+    for attempt, evidence_limit in enumerate((6, 3, 1), start=1):
         try:
-            from langchain_core.messages import HumanMessage, SystemMessage
+            prompt = _build_llm_market_prompt(name, data, market, evidence_limit=evidence_limit)
+            system_text = (
+                "你是A股题材交易盘前助手。输出必须是可解析JSON。"
+                "不要给投资建议保证，不要编造事实。"
+            )
+            try:
+                from langchain_core.messages import HumanMessage, SystemMessage
 
-            llm_input = [SystemMessage(content=system_text), HumanMessage(content=prompt)]
-        except Exception:
-            llm_input = f"{system_text}\n\n{prompt}"
-        response = llm.invoke(llm_input)
-        content = getattr(response, "content", response)
-        parsed = _json_from_text(str(content))
-        logic_score = parsed.get("logic_score")
-        try:
-            logic_score = int(logic_score)
-        except Exception:
-            logic_score = None
-        if logic_score is not None:
-            logic_score = max(0, min(100, logic_score))
-        return CandidateLLMAnalysis(
-            candidate=name,
-            logic_score=logic_score,
-            information_quality=str(parsed.get("information_quality", "待验证")),
-            signal_interpretation=_compact_text(str(parsed.get("signal_interpretation", "")), 220),
-            expectation_gap=_compact_text(str(parsed.get("expectation_gap", "")), 220),
-            thesis_path=_compact_text(str(parsed.get("thesis_path", "")), 220),
-            company_relevance=_compact_text(str(parsed.get("company_relevance", "")), 160),
-            win_rate_view=_compact_text(str(parsed.get("win_rate_view", "")), 180),
-            payoff_risk=_compact_text(str(parsed.get("payoff_risk", "")), 180),
-            catalyst_clock=_compact_text(str(parsed.get("catalyst_clock", "")), 180),
-            verification_points=_compact_text(str(parsed.get("verification_points", "")), 180),
-            falsification_points=_compact_text(str(parsed.get("falsification_points", "")), 180),
-            entry_plan=_compact_text(str(parsed.get("entry_plan", "")), 180),
-            position_sizing=_compact_text(str(parsed.get("position_sizing", "")), 140),
-            trading_action=_compact_text(str(parsed.get("trading_action", "")), 140),
-            risk_flags=_compact_text(str(parsed.get("risk_flags", "")), 180),
-            summary=_compact_text(str(parsed.get("summary", "")), 220),
-            status="analyzed",
-        )
-    except Exception as exc:
-        return CandidateLLMAnalysis(
-            candidate=name,
-            logic_score=None,
-            information_quality="分析失败",
-            signal_interpretation="",
-            expectation_gap="",
-            thesis_path="",
-            company_relevance="",
-            win_rate_view="",
-            payoff_risk="",
-            catalyst_clock="",
-            verification_points="",
-            falsification_points="",
-            entry_plan="",
-            position_sizing="",
-            trading_action="",
-            risk_flags="",
-            summary=f"LLM 分析失败: {_compact_text(str(exc), 180)}",
-            status="failed",
-        )
+                llm_input = [SystemMessage(content=system_text), HumanMessage(content=prompt)]
+            except Exception:
+                llm_input = f"{system_text}\n\n{prompt}"
+            response = llm.invoke(llm_input)
+            content = getattr(response, "content", response)
+            parsed = _json_from_text(str(content))
+            logic_score = parsed.get("logic_score")
+            try:
+                logic_score = int(logic_score)
+            except Exception:
+                logic_score = None
+            if logic_score is not None:
+                logic_score = max(0, min(100, logic_score))
+            retry_note = "" if attempt == 1 else f"；第{attempt}轮短证据重试成功"
+            return CandidateLLMAnalysis(
+                candidate=name,
+                logic_score=logic_score,
+                information_quality=str(parsed.get("information_quality", "待验证")),
+                signal_interpretation=_compact_text(str(parsed.get("signal_interpretation", "")), 220),
+                expectation_gap=_compact_text(str(parsed.get("expectation_gap", "")), 220),
+                thesis_path=_compact_text(str(parsed.get("thesis_path", "")), 220),
+                company_relevance=_compact_text(str(parsed.get("company_relevance", "")), 160),
+                win_rate_view=_compact_text(str(parsed.get("win_rate_view", "")), 180),
+                payoff_risk=_compact_text(str(parsed.get("payoff_risk", "")), 180),
+                catalyst_clock=_compact_text(str(parsed.get("catalyst_clock", "")), 180),
+                verification_points=_compact_text(str(parsed.get("verification_points", "")), 180),
+                falsification_points=_compact_text(str(parsed.get("falsification_points", "")), 180),
+                entry_plan=_compact_text(str(parsed.get("entry_plan", "")), 180),
+                position_sizing=_compact_text(str(parsed.get("position_sizing", "")), 140),
+                trading_action=_compact_text(str(parsed.get("trading_action", "")), 140),
+                risk_flags=_compact_text(str(parsed.get("risk_flags", "")), 180),
+                summary=_compact_text(f"{parsed.get('summary', '')}{retry_note}", 220),
+                status="analyzed",
+            )
+        except Exception as exc:
+            last_error = _compact_text(str(exc), 180)
+            if attempt < 3:
+                time.sleep(0.8 * attempt)
+                continue
+            break
+    return CandidateLLMAnalysis(
+        candidate=name,
+        logic_score=None,
+        information_quality="分析失败",
+        signal_interpretation="",
+        expectation_gap="",
+        thesis_path="",
+        company_relevance="",
+        win_rate_view="",
+        payoff_risk="",
+        catalyst_clock="",
+        verification_points="",
+        falsification_points="",
+        entry_plan="",
+        position_sizing="",
+        trading_action="",
+        risk_flags="",
+        summary=f"LLM 分析失败，已用短证据重试仍未成功: {last_error}",
+        status="failed",
+    )
+
+
+def _llm_failure_diagnostics(analyses: dict[str, CandidateLLMAnalysis], limit: int = 3) -> str:
+    failures = [
+        f"{analysis.candidate}: {_compact_text(analysis.summary, 90)}"
+        for analysis in analyses.values()
+        if analysis.status == "failed"
+    ]
+    if not failures:
+        return "无"
+    return "；".join(failures[:limit])
 
 
 def _init_preprocess_tables(conn: sqlite3.Connection) -> None:
@@ -4465,6 +5080,71 @@ def preprocess_knowledge_planet_window(
     now_text = datetime.now().isoformat(timespec="seconds")
     run_key = f"{start_date}:{end_date}:v{PREPROCESS_SCHEMA_VERSION}"
 
+    if bool(get_config().get("knowledge_planet_preprocess_cache_enabled", True)):
+        cached = conn.execute(
+            """
+            SELECT *
+            FROM kp_preprocess_runs
+            WHERE run_key = ? AND status = 'ok'
+            """,
+            (run_key,),
+        ).fetchone()
+        if cached is not None:
+            item_count = int(
+                conn.execute(
+                    """
+                    SELECT COUNT(*) AS n
+                    FROM kp_items
+                    WHERE substr(COALESCE(NULLIF(published_at, ''), imported_at), 1, 10) >= ?
+                      AND substr(COALESCE(NULLIF(published_at, ''), imported_at), 1, 10) <= ?
+                    """,
+                    (start_date, end_date),
+                ).fetchone()["n"]
+                or 0
+            )
+            report_count = int(
+                conn.execute(
+                    """
+                    SELECT COUNT(*) AS n
+                    FROM kp_reports
+                    WHERE substr(COALESCE(NULLIF(published_at, ''), imported_at), 1, 10) >= ?
+                      AND substr(COALESCE(NULLIF(published_at, ''), imported_at), 1, 10) <= ?
+                    """,
+                    (start_date, end_date),
+                ).fetchone()["n"]
+                or 0
+            )
+            if (
+                int(cached["items_scanned"] or 0) == item_count
+                and int(cached["reports_scanned"] or 0) == report_count
+            ):
+                conn.close()
+                stats = KpPreprocessStats(
+                    start_date=start_date,
+                    end_date=end_date,
+                    items_scanned=int(cached["items_scanned"] or 0),
+                    reports_scanned=int(cached["reports_scanned"] or 0),
+                    quality_rows=int(cached["quality_rows"] or 0),
+                    content_units=int(cached["content_units"] or 0),
+                    events=int(cached["events"] or 0),
+                    clusters=int(cached["clusters"] or 0),
+                    mappings=int(cached["mappings"] or 0),
+                    report_assumptions=int(cached["report_assumptions"] or 0),
+                    opportunities=int(cached["opportunities"] or 0),
+                    ocr_low_quality=int(cached["ocr_low_quality"] or 0),
+                    pdf_pending_or_limited=int(cached["pdf_pending_or_limited"] or 0),
+                    status="cached",
+                )
+                if progress:
+                    progress(
+                        "[preprocess] cached: "
+                        f"items={item_count}, reports={report_count}, "
+                        f"events={stats.events}, clusters={stats.clusters}, "
+                        f"opportunities={stats.opportunities}, "
+                        f"ocr_low_quality={stats.ocr_low_quality}"
+                    )
+                return stats
+
     item_rows = conn.execute(
         """
         SELECT *
@@ -4489,45 +5169,6 @@ def preprocess_knowledge_planet_window(
     reports = [_row_to_report(row) for row in report_rows]
     if progress:
         progress(f"[preprocess] items={len(items)}, reports={len(reports)}, window={start_date}..{end_date}")
-
-    if bool(get_config().get("knowledge_planet_preprocess_cache_enabled", True)):
-        cached = conn.execute(
-            """
-            SELECT *
-            FROM kp_preprocess_runs
-            WHERE run_key = ? AND status = 'ok'
-            """,
-            (run_key,),
-        ).fetchone()
-        if (
-            cached is not None
-            and int(cached["items_scanned"] or 0) == len(items)
-            and int(cached["reports_scanned"] or 0) == len(reports)
-        ):
-            conn.close()
-            stats = KpPreprocessStats(
-                start_date=start_date,
-                end_date=end_date,
-                items_scanned=int(cached["items_scanned"] or 0),
-                reports_scanned=int(cached["reports_scanned"] or 0),
-                quality_rows=int(cached["quality_rows"] or 0),
-                content_units=int(cached["content_units"] or 0),
-                events=int(cached["events"] or 0),
-                clusters=int(cached["clusters"] or 0),
-                mappings=int(cached["mappings"] or 0),
-                report_assumptions=int(cached["report_assumptions"] or 0),
-                opportunities=int(cached["opportunities"] or 0),
-                ocr_low_quality=int(cached["ocr_low_quality"] or 0),
-                pdf_pending_or_limited=int(cached["pdf_pending_or_limited"] or 0),
-                status="cached",
-            )
-            if progress:
-                progress(
-                    "[preprocess] cached: "
-                    f"events={stats.events}, clusters={stats.clusters}, opportunities={stats.opportunities}, "
-                    f"ocr_low_quality={stats.ocr_low_quality}"
-                )
-            return stats
 
     old_clusters = [
         str(row["cluster_key"])
@@ -5270,10 +5911,14 @@ def _stock_fusion_pack_lines(
             "",
             "### Fusion Instructions For Agents",
             "- Use Knowledge Planet as an alternative-intelligence prior, then reconcile it with filings, Tushare financials, peer data, price/volume behavior, and official announcements.",
+            "- Treat industry weekly data, channel checks, broker survey data, and company research feedback as thesis-grade private/proxy evidence when source type and content quality are high. These clues may change the bull/base/bear probabilities, but they must be mapped into KPI, forecast, valuation, catalyst, and falsification fields.",
             "- Promote a clue into the main thesis only when it has a clear path: information -> business driver -> earnings/cash-flow or valuation assumption -> catalyst clock -> falsification signal.",
+            "- For every high-information clue, downstream agents must assign one decision role: probability adjustment, valuation input, catalyst/verification item, sizing/timing adjustment, or rejected/noisy clue. Do not leave company-specific or industry-KPI-like clues as generic background.",
+            "- If a clue is not used, state the exact rejection reason: stale, promotional, not company-specific / not ticker-specific, contradicted by filings/Tushare/price-volume data, already priced, or missing a product-to-profit bridge.",
+            "- When a clue is used only as private/proxy evidence, translate it into scenario probabilities and verification gates rather than treating it as a hard fact.",
             "- Respect the research-layer tags: industry KPI data feeds the KPI/forecast layer; channel/research feedback feeds hypothesis and verification; macro/overseas mapping sets context; sell-side narratives go through bear-side challenge first.",
             "- If Knowledge Planet contradicts objective data, surface the contradiction instead of averaging the views.",
-            "- If Knowledge Planet is rich but objective data is missing, keep the conclusion as private/proxy evidence with smaller sizing and a dated verification task.",
+            "- If Knowledge Planet is rich but objective data is missing, do not dismiss it as noise. Use it to shape the working hypothesis, cap sizing/conviction, and create dated verification tasks.",
             "- To save tokens, downstream agents should use this fusion pack first; raw stream notes below are backup evidence, not the main reasoning spine.",
             "",
         ]
@@ -5302,7 +5947,17 @@ def get_knowledge_planet_context(
         lookback,
         int(config.get("knowledge_planet_auto_sync_context_lookback_days", 7) or 0),
     )
-    sync_status = ensure_knowledge_planet_upstream_synced_for_window(curr_date, sync_lookback)
+    sync_status = ensure_knowledge_planet_upstream_synced_for_window(
+        curr_date,
+        sync_lookback,
+        max_pages=int(config.get("knowledge_planet_context_sync_max_pages", 20) or 0),
+        max_image_downloads=int(
+            config.get("knowledge_planet_context_sync_max_image_downloads", 0) or 0
+        ),
+        max_file_downloads=int(
+            config.get("knowledge_planet_context_sync_max_file_downloads", 0) or 0
+        ),
+    )
     preprocess_status = "disabled"
     if bool(config.get("knowledge_planet_preprocess_enabled", True)):
         preprocess_stats = preprocess_knowledge_planet_window(curr_date, lookback)
@@ -5377,7 +6032,7 @@ def get_knowledge_planet_context(
         f"- Preprocess: {preprocess_status}",
         f"- Matched stream items: {len(items)}",
         f"- Matched PDF reports: {len(reports)}",
-        "- Evidence discipline: this is supplemental alternative/local research intelligence. Use it to enrich the objective TradingAgents chain, not to replace filings, announcements, financial statements, price/volume evidence, or reputable news. Industry weekly data, channel checks, and company research feedback may be valuable hard-to-publicly-verify clues; sell-side pushes and target-market-cap claims require story-to-profit validation and objective cross-checks.",
+        "- Evidence discipline: this is supplemental alternative/local research intelligence. Use it to enrich the objective TradingAgents chain, not to replace filings, announcements, financial statements, price/volume evidence, or reputable news. Industry weekly data, channel checks, broker survey data, and company research feedback are thesis-grade private/proxy evidence when content quality is high; they can change scenario probabilities after being mapped into KPI, forecast, valuation, catalyst, and falsification fields. Sell-side pushes and target-market-cap claims require story-to-profit validation and objective cross-checks.",
         "",
     ]
 
@@ -5478,6 +6133,7 @@ def get_knowledge_planet_context(
             "## Required Agent Treatment",
             "- Use this context to discover what market participants may be trading and what sell-side frameworks are using.",
             "- Separate hard-to-publicly-verify but information-rich data from rumor or pure promotion.",
+            "- High-confidence private/channel evidence should affect the research conclusion through scenario probabilities, catalyst timing, and verification thresholds; do not ignore it merely because it is not an official announcement.",
             "- Translate every promoted story into a product, revenue/profit driver, valuation assumption, catalyst clock, and falsification signal.",
             "- The bull case may use private/channel evidence as a tradable clue, but must label it as such and size conviction accordingly.",
             "- The bear case should attack optimistic sell-side bridges, target-market-cap leaps, crowded trades, and missing public verification without dismissing all private data as worthless.",
@@ -5649,17 +6305,20 @@ def _seed_candidate_scores_from_preprocessed_assets(
 def build_knowledge_planet_daily_report(
     report_date: str,
     look_back_days: int = 6,
-    max_candidates: int = 30,
+    max_candidates: int = DAILY_ANALYSIS_TARGETS,
     include_market_scores: bool = False,
-    max_scored_candidates: int = 12,
+    max_scored_candidates: int = DAILY_ANALYSIS_TARGETS,
     include_llm_market_analysis: bool = False,
-    max_llm_candidates: int = 8,
+    max_llm_candidates: int = DAILY_ANALYSIS_TARGETS,
     llm_provider: str = "deepseek",
     llm_model: str = "deepseek-chat",
     llm_base_url: str | None = None,
     progress: Callable[[str], None] | None = None,
 ) -> str:
     """Build a deterministic theme-trading daily report from the local database."""
+    max_candidates = max(DAILY_ANALYSIS_TARGETS, int(max_candidates or 0))
+    max_scored_candidates = DAILY_ANALYSIS_TARGETS
+    max_llm_candidates = DAILY_ANALYSIS_TARGETS
     sync_status = ensure_knowledge_planet_upstream_synced_for_window(
         report_date,
         look_back_days,
@@ -5697,6 +6356,7 @@ def build_knowledge_planet_daily_report(
     conn.close()
 
     start_date, end_date = _date_window(report_date, look_back_days)
+    report_dates = _dates_for_window(end_date, look_back_days)
     source_counts = Counter(infer_private_source_type(f"{item.title}\n{item.text}", item.source_type) for item in items)
     theme_counts = Counter()
     theme_weighted_counts = Counter()
@@ -5880,6 +6540,7 @@ def build_knowledge_planet_daily_report(
             + (
                 f"已尝试 {llm_attempted} 个，成功 {sum(1 for a in llm_analyses.values() if a.status == 'analyzed')} 个，"
                 f"失败 {sum(1 for a in llm_analyses.values() if a.status == 'failed')} 个"
+                f"，失败样例：{_llm_failure_diagnostics(llm_analyses)}"
                 + (f"，初始化失败：{llm_unavailable_reason}" if llm_unavailable_reason else "")
                 if include_llm_market_analysis
                 else "未启用"
@@ -5899,13 +6560,14 @@ def build_knowledge_planet_daily_report(
         "",
         "## 评分口径",
         "",
+        "- 先过硬门槛，再做软评分：LLM深度拆解、清晰交易假设、公司承接、技术评分、位置风险和动作层结论缺一不可；不过门槛不进主榜。",
         "- 观点流信号只用于候选召回和辅助展示，不作为高质量排序的核心依据；提及次数本身不构成买入理由。",
         "- LLM 逻辑拆解是高质量日报的主评分：先把段子翻译成真实增量信息，再判断预期差、公司承接、胜率赔率、催化剂时钟、交易计划和吹票风险。",
         "- 基本面验证不是独立加分项，而是题材逻辑的交叉验证：验证通过会强化观点流，承接不足会压低综合分上限；缺数据时不能进入 A 桶。",
         "- 基本面验证重点看收入/利润增速、ROE/毛利率、现金流/负债、估值和市值弹性，用来回答“故事能不能落到业绩和市值承接”。",
         "- 技术面最高 40 分，作为相对独立的交易时点评估：均线趋势、5/20/60 日动量、换手/量能确认、距离高点和过热风险。",
         "- 吹票/拥挤风险作为独立扣分项；A 桶仍需要单票 TradingAgents 复核后再考虑建仓。",
-        "- 时间维度上，近 1 日和近 3 日的边际升温优先影响交易排序；近 7 日用于判断主线是否连续、是否只是短线噪声。",
+        "- 题材边际变化用每日去重后的观点流占比衡量，避免单日信息总量变化造成误判；近 7 日用于判断主线是否连续、是否只是短线噪声。",
         "",
         "## 来源结构",
         "",
@@ -5922,32 +6584,7 @@ def build_knowledge_planet_daily_report(
     for theme, count in theme_weighted_counts.most_common(15):
         lines.append(f"| {theme} | {theme_counts[theme]} | {float(count):.1f} |")
 
-    lines.extend(
-        [
-            "",
-            "## 边际变化观察",
-            "",
-            "| 题材 | 近1日 | 近3日 | 近7日 | 边际变化 | 交易含义 |",
-            "| --- | ---: | ---: | ---: | --- | --- |",
-        ]
-    )
-    marginal_themes = {
-        *theme_7d_counts.keys(),
-        *theme_3d_counts.keys(),
-        *theme_1d_counts.keys(),
-    }
-    for theme in sorted(
-        marginal_themes,
-        key=lambda item: (theme_1d_counts[item] * 3 + theme_3d_counts[item] * 2 + theme_7d_counts[item]),
-        reverse=True,
-    )[:12]:
-        one_day = int(theme_1d_counts[theme])
-        three_day = int(theme_3d_counts[theme])
-        seven_day = int(theme_7d_counts[theme])
-        label, implication = _theme_marginal_view(theme, one_day, three_day, seven_day)
-        lines.append(
-            f"| {_md_cell(theme)} | {one_day} | {three_day} | {seven_day} | {_md_cell(label)} | {_md_cell(implication)} |"
-        )
+    lines.extend(_theme_share_trend_lines(items, report_dates))
 
     candidate_rows: list[dict] = []
     display_ranked = stock_ranked if stock_ranked else ranked
@@ -6013,20 +6650,30 @@ def build_knowledge_planet_daily_report(
             note = _compact_text("；".join(part for part in llm_parts if part), 320)
         if market and market.summary:
             note = _compact_text(f"{note}；{market.summary}" if note else market.summary, 360)
+        raw_evidence: list[str] = []
         if isinstance(item_list, list) and item_list:
             title_note = _compact_text("; ".join(item.title for item in item_list), 180)
             note = _compact_text(f"{note}；{title_note}" if note else title_note, 420)
+            for item in item_list[:3]:
+                raw_evidence.append(_format_item_evidence(item, max_chars=520))
         preprocess_evidence = data.get("preprocess_evidence")
         if isinstance(preprocess_evidence, list) and preprocess_evidence:
             asset_note = _compact_text("；".join(str(row) for row in preprocess_evidence[:2]), 260)
             note = _compact_text(f"{note}；{asset_note}" if note else asset_note, 520)
+            for evidence in preprocess_evidence[:3]:
+                raw_evidence.append(str(evidence))
         aliases = data.get("aliases")
         alias_text = ""
         if isinstance(aliases, list) and len(aliases) > 1:
             alias_text = " / ".join(str(alias) for alias in aliases[:4])
+        row_display_name = display_name
+        if market and market.company_name and re.fullmatch(r"\d{6}\.(?:SH|SZ|BJ)|\d{6}|BJ\d{6}", row_display_name, flags=re.IGNORECASE):
+            row_display_name = market.company_name
+        elif re.fullmatch(r"\d{6}\.(?:SH|SZ|BJ)", row_display_name, flags=re.IGNORECASE):
+            row_display_name = COMMON_A_SHARE_NAMES_BY_SYMBOL.get(row_display_name.upper(), row_display_name)
         candidate_rows.append(
             {
-                "name": display_name,
+                "name": row_display_name,
                 "symbol": (market.symbol if market and market.symbol else str(data.get("symbol") or "未评分")),
                 "aliases": alias_text,
                 "signal_score": signal_score,
@@ -6037,6 +6684,8 @@ def build_knowledge_planet_daily_report(
                 "latest_date": str(data.get("latest_date") or ""),
                 "llm_score": llm_analysis.logic_score if llm_analysis else None,
                 "llm_status": llm_analysis.status if llm_analysis else "not_run",
+                "llm_required": bool(include_llm_market_analysis),
+                "market_scores_required": bool(include_market_scores),
                 "information_quality": llm_analysis.information_quality if llm_analysis else "",
                 "signal_interpretation": llm_analysis.signal_interpretation if llm_analysis else "",
                 "expectation_gap": llm_analysis.expectation_gap if llm_analysis else "",
@@ -6066,6 +6715,7 @@ def build_knowledge_planet_daily_report(
                     else ("LLM分析失败" if llm_analysis and llm_analysis.status == "failed" else "未做LLM分析")
                 ),
                 "note": note,
+                "raw_evidence": raw_evidence,
             }
         )
         candidate_rows[-1]["theme_stock_style"] = _theme_stock_style(candidate_rows[-1])
@@ -6079,13 +6729,18 @@ def build_knowledge_planet_daily_report(
         candidate_rows[-1]["hard_increment_count"] = sum(1 for event in linked_events if _event_is_trade_increment(event))
         candidate_rows[-1]["position_bucket"] = _candidate_position_bucket(candidate_rows[-1])
         candidate_rows[-1]["buildability_label"] = _candidate_buildability_label(candidate_rows[-1])
+        candidate_rows[-1]["trade_hypothesis"] = _candidate_trade_hypothesis(candidate_rows[-1])
+        candidate_rows[-1]["trade_type"] = _candidate_trade_type(candidate_rows[-1])
+        candidate_rows[-1]["scorecard"] = _candidate_scorecard(candidate_rows[-1])
+        candidate_rows[-1]["tradability_score"] = int(candidate_rows[-1]["scorecard"]["total"])
         candidate_rows[-1]["priority_score"] = _opportunity_priority(candidate_rows[-1])
         candidate_rows[-1]["score_breakdown"] = _candidate_score_breakdown(candidate_rows[-1])
 
     candidate_rows.sort(
         key=lambda row: (
-            _opportunity_priority(row),
             1 if _is_fully_analyzed_candidate(row) else 0,
+            0 if _candidate_hard_gate_failures(row) else 1,
+            _opportunity_priority(row),
             int(row.get("total_score") or 0),
             int(row.get("llm_score") or -1),
             int(row.get("signal_score") or 0),

@@ -196,7 +196,23 @@ DEFAULT_CONFIG = {
     ),
     "knowledge_planet_auto_sync_context_lookback_days": _env_int_or_default(
         "KNOWLEDGE_PLANET_AUTO_SYNC_CONTEXT_LOOKBACK_DAYS",
-        30,
+        0,
+    ),
+    # Single-stock reports should not repeatedly perform the expensive daily
+    # ingestion job. They use a lightweight text-only sync for the end date,
+    # then read the local SQLite/preprocess cache. Run the standalone daily
+    # report or sync/import scripts for full image OCR and PDF downloads.
+    "knowledge_planet_context_sync_max_pages": _env_int_or_default(
+        "KNOWLEDGE_PLANET_CONTEXT_SYNC_MAX_PAGES",
+        20,
+    ),
+    "knowledge_planet_context_sync_max_image_downloads": _env_int_or_default(
+        "KNOWLEDGE_PLANET_CONTEXT_SYNC_MAX_IMAGE_DOWNLOADS",
+        0,
+    ),
+    "knowledge_planet_context_sync_max_file_downloads": _env_int_or_default(
+        "KNOWLEDGE_PLANET_CONTEXT_SYNC_MAX_FILE_DOWNLOADS",
+        0,
     ),
     # Build cached intermediate research assets from raw Knowledge Planet
     # content before reports/contexts are generated. This keeps expensive LLM

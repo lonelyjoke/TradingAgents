@@ -212,9 +212,38 @@ class TestRenderPortfolioDecision:
         assert md.index("**One-Line Thesis**") < md.index("**Rating Evidence Audit**")
         assert md.index("**Rating Evidence Audit**") < md.index("**Investment Thesis**")
 
+    def test_information_utilization_audit_renders_near_rating(self):
+        decision = PortfolioDecision(
+            rating=PortfolioRating.HOLD,
+            company_snapshot="Consumer company with high quality and pending catalyst.",
+            one_line_thesis="Quality is proven, but H1 growth decides sizing.",
+            information_utilization_audit=(
+                "Filings are core valuation input; Tushare verifies valuation; "
+                "Knowledge Planet changes H1 probability but remains private/proxy; "
+                "relative strength adjusts timing only."
+            ),
+            business_driver_map="Revenue growth, margin, channel inventory.",
+            bull_bear_debate="Bull trusts channel checks; bear fears growth deceleration.",
+            debate_verdict="Wait for H1 before adding.",
+            investment_logic_chain="Channel clue must become revenue growth before rating upgrade.",
+            executive_summary="Hold with positive watch.",
+            verification_and_falsification="Upgrade if H1 growth exceeds the gate.",
+            investment_thesis="The setup is interesting but not yet decisive.",
+        )
+
+        md = render_pm_decision(decision)
+
+        assert "**Information Utilization Audit**:" in md
+        assert "Knowledge Planet changes H1 probability" in md
+        assert md.index("**Information Utilization Audit**") < md.index("**Investment Thesis**")
+
     def test_hold_can_be_actionable_positive_watch_not_empty_neutral(self):
         decision = PortfolioDecision(
             rating=PortfolioRating.HOLD,
+            rating_posture=(
+                "Hold / Positive Watch: starter only, upgrade after NBV and OCF "
+                "verification."
+            ),
             company_snapshot="Insurer with improving NBV but unresolved cash-flow attribution.",
             one_line_thesis="The live thesis is valid but waits for interim-report proof.",
             rating_evidence_audit=(
@@ -239,6 +268,7 @@ class TestRenderPortfolioDecision:
         md = render_pm_decision(decision)
 
         assert "**Rating**: Hold" in md
+        assert "**Rating Posture**: Hold / Positive Watch" in md
         assert "Hold/positive watch" in md
         assert "starter observation position" in md
         assert "upgrade to Overweight" in md

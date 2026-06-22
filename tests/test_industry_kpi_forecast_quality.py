@@ -147,6 +147,40 @@ def test_ping_an_kpi_checklist_uses_insurance_not_metals_or_hog():
     assert "hog breeding" not in context
 
 
+def test_eastroc_kpi_checklist_uses_functional_beverage_not_battery():
+    context = build_industry_kpi_context(
+        "605499.SH",
+        "2026-06-20",
+        company_business_model_context="Dongpeng Beverage sells Dongpeng Special Drink and other energy drink products.",
+        knowledge_planet_context=(
+            "Knowledge Planet channel_check: H1 revenue growth not lower than 15%, "
+            "profit faster than revenue, juice tea and coffee products sell-through improved."
+        ),
+    )
+
+    assert "consumer staples / functional beverage" in context
+    assert "Dongpeng Special Drink volume" in context
+    assert "distributor inventory" in context
+    assert "battery / energy-storage chain" not in context
+    assert "lithium carbonate" not in context
+
+
+def test_eastroc_forecast_scaffold_uses_beverage_driver_bridge_not_battery():
+    context = build_forecast_model_context(
+        "605499.SH",
+        "2026-06-20",
+        earnings_model_context="Revenue, gross margin, selling expense and OCF are thesis-critical.",
+        industry_kpi_context="Playbook: consumer staples / functional beverage. Required KPI Map: core SKU, channel health, cost and margin.",
+    )
+
+    assert "Core energy-drink revenue" in context
+    assert "Dongpeng Special Drink volume x realized ASP" in context
+    assert "Second-curve revenue" in context
+    assert "contract liabilities/prepayments" in context
+    assert "GWh shipments x ASP" not in context
+    assert "Cathode / material revenue" not in context
+
+
 def test_not_applicable_insurance_context_does_not_route_generic_stock_to_insurance():
     insurance_context = (
         "# Insurance verification context\n\n"

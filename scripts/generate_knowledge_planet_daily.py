@@ -12,6 +12,7 @@ sys.path.insert(0, str(REPO_ROOT))
 
 from tradingagents.dataflows.config import set_config
 from tradingagents.dataflows.knowledge_planet_research import (
+    DAILY_ANALYSIS_TARGETS,
     build_knowledge_planet_daily_report,
 )
 
@@ -41,14 +42,14 @@ def main() -> int:
     parser.add_argument(
         "--max-candidates",
         type=int,
-        default=30,
-        help="Maximum candidate rows to include in the ranking table.",
+        default=DAILY_ANALYSIS_TARGETS,
+        help=argparse.SUPPRESS,
     )
     parser.add_argument(
         "--max-scored-candidates",
         type=int,
-        default=12,
-        help="Maximum top candidates to enrich with real A-share fundamental/technical scores.",
+        default=DAILY_ANALYSIS_TARGETS,
+        help=argparse.SUPPRESS,
     )
     parser.add_argument(
         "--no-market-scoring",
@@ -63,8 +64,8 @@ def main() -> int:
     parser.add_argument(
         "--max-llm-candidates",
         type=int,
-        default=8,
-        help="Maximum top candidates to send to the LLM market-analysis layer.",
+        default=DAILY_ANALYSIS_TARGETS,
+        help=argparse.SUPPRESS,
     )
     parser.add_argument(
         "--llm-provider",
@@ -115,7 +116,7 @@ def main() -> int:
     print(
         "market scoring: "
         + (
-            f"enabled, max scored candidates={args.max_scored_candidates}"
+            f"enabled, fixed analysis targets={DAILY_ANALYSIS_TARGETS} (主榜10 + 观察榜5)"
             if include_market_scores
             else "disabled by --no-market-scoring"
         )
@@ -123,7 +124,7 @@ def main() -> int:
     print(
         "llm market analysis: "
         + (
-            f"enabled, provider={args.llm_provider}, model={args.llm_model}, max candidates={args.max_llm_candidates}"
+            f"enabled, provider={args.llm_provider}, model={args.llm_model}, fixed analysis targets={DAILY_ANALYSIS_TARGETS}"
             if args.llm_market_analysis
             else "disabled"
         )
