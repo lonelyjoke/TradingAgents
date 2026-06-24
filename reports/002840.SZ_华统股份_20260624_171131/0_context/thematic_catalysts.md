@@ -1,0 +1,181 @@
+# Thematic catalyst cross-check for 002840.SZ as of 2026-06-24
+
+- Company: 华统股份
+- Financial-report look-back: 900 days
+- News look-back: 180 days
+- Investee news terms: 上海渊奥实业投资有限公司, 东阳华统牧业有限公司, 中信证券股份有限公司, 中国农业产业发展基金有限公司, 中央企业乡村产业投资基金股份有限公司, 丽水海大华统生物科技有限公司, 义乌华昇牧业有限公司, 义乌市农牧发展有限公司, 义乌市华捷置业有限公司, 产业投资基金, 凯桥管理咨询（北京）有限责任公司, 北京核芯达科技有限公司, 华统集团公司, 合伙企业（有限合伙, 国新风险投资管理（深圳）有限公司, 基金, 基金股份有限, 宁波一川股权投资合伙企业（有限合伙, 宁波坤灵股权投资合伙企业（有限合伙, 安徽省绿色食品产业主题投资基金合伙企业（有限合伙, 展股权投资基金合伙, 履约保证金, 广州越秀华统食品有限公司, 康工业互联网股份有限公司, 徽金扁担股权投资有限公司, 承诺投资项目小计, 换情况, 新疆天山天池富源文化投资有限公司, 本人作为合规投资者参与浙江华统肉制品股份有限公司, 本公司未投资其他与浙江华统肉制品股份有限公司, 欠发达地区产业发展基金有限公司, 正大食品（义乌）有限公司, 正大饲料（义乌）有限公司, 洛阳科创集团有限公司, 浙江一亿润丰控股股份有限公司, 浙江富国超市有限公司, 浙江省产业基金有限公司, 浙江金华, 浦江华统牧业有限公司, 渊奥实业投资有限公司, 电投国华（义乌）新能源有限公司, 统股权投资合伙企业, 萍乡市赣莲企业管理中心（有限合伙, 高乐新能源科技（浙江）有限公司, 黄山供赢华统股权投资合伙企业(有限合伙, 黄山华徽食品有限公司, 黄山市歙州农文旅发展集团有限公司, 黟县国有投资集团有限公司
+- Extraction status: Financial-report text extraction succeeded.
+
+## Financial Reports Considered
+- 20260430: 2026年一季度报告
+- 20260427: 2025年年度报告
+- 20251028: 2025年三季度报告
+- 20250827: 半年报董事会决议公告
+- 20250827: 2025年半年度报告
+
+## Financial Report Text Acquisition Audit
+| stage | status | detail |
+| --- | --- | --- |
+| runtime_dependency | ready | pdftotext is available for PDF text extraction. |
+| announcement_lookup | ready | Found 5 candidate financial-report announcement(s) from primary and CNINFO sources. |
+| pdf_text_extraction | ready | 2026年一季度报告: extracted 20586 characters of readable report text. |
+| pdf_text_extraction | ready | 2025年年度报告: extracted 462153 characters of readable report text. |
+| pdf_text_extraction | ready | 2025年三季度报告: extracted 22144 characters of readable report text. |
+| pdf_text_extraction | ready | 半年报董事会决议公告: extracted 3064 characters of readable report text. |
+| pdf_text_extraction | ready | 2025年半年度报告: extracted 333040 characters of readable report text. |
+| final_text_bundle | ready | Prepared 5 readable report text(s) for filing intelligence. |
+
+## Filing-Origin Candidates -> News Catalyst Check
+| candidate | kind | financial_report_evidence | recent_news_match | catalyst_signal |
+| --- | --- | --- | --- | --- |
+| 中央企业乡村产业投资基金股份有限公司 | asset-revaluation | 2025年半年度报告: 中央企业乡村产业投资基金股份有限公司、方庆红、萍乡市赣莲企业管理中心（有限合 | no | no |
+| 浙江富国超市有限公司 | asset-revaluation | 2025年半年度报告: 富国超市 指 浙江富国超市有限公司—公司参股子公司 | no | no |
+| 正大饲料（义乌）有限公司 | asset-revaluation | 2025年半年度报告: 正大饲料 指 正大饲料（义乌）有限公司—公司参股子公司 | no | no |
+| 正大食品（义乌）有限公司 | asset-revaluation | 2025年半年度报告: 正大食品 指 正大食品（义乌）有限公司—公司参股子公司 | no | no |
+| 电投国华（义乌）新能源有限公司 | asset-revaluation | 2025年半年度报告: 国华新能源 指 电投国华（义乌）新能源有限公司—公司参股子公司 | no | no |
+| 广州越秀华统食品有限公司 | asset-revaluation | 2025年半年度报告: 广州越秀 指 广州越秀华统食品有限公司—公司参股子公司 | no | no |
+| 义乌市农牧发展有限公司 | asset-revaluation | 2025年半年度报告: 义乌农牧 指 义乌市农牧发展有限公司—公司参股子公司 | no | no |
+| 丽水海大华统生物科技有限公司 | asset-revaluation | 2025年半年度报告: 海大华统 指 丽水海大华统生物科技有限公司—公司参股子公司 | no | no |
+| 黄山华徽食品有限公司 | asset-revaluation | 2025年半年度报告: 黄山食品 指 黄山华徽食品有限公司—公司参股子公司 | no | no |
+| 渊奥实业投资有限公司 | asset-revaluation | 2025年年度报告: 渊奥实业投资有限公司董事、义乌市华捷置业有限公司董事、高乐新能源科技（浙江）有限公司执行董 | no | no |
+| 义乌市华捷置业有限公司 | asset-revaluation | 2025年年度报告: 渊奥实业投资有限公司董事、义乌市华捷置业有限公司董事、高乐新能源科技（浙江）有限公司执行董 | no | no |
+| 高乐新能源科技（浙江）有限公司 | asset-revaluation | 2025年年度报告: 渊奥实业投资有限公司董事、义乌市华捷置业有限公司董事、高乐新能源科技（浙江）有限公司执行董 | no | no |
+| 中信证券股份有限公司 | asset-revaluation | 2025年年度报告: 马威华振会计师事务所审计师、中信证券股份有限公司高级经理、国新风险投资管理（深圳）有限公司 | no | no |
+| 国新风险投资管理（深圳）有限公司 | asset-revaluation | 2025年年度报告: 马威华振会计师事务所审计师、中信证券股份有限公司高级经理、国新风险投资管理（深圳）有限公司 | no | no |
+| 凯桥管理咨询（北京）有限责任公司 | asset-revaluation | 2025年年度报告: 高级经理、凯桥管理咨询（北京）有限责任公司投资副总裁、北京核芯达科技有限公司 IR 总监、富士 | no | no |
+| 北京核芯达科技有限公司 | asset-revaluation | 2025年年度报告: 高级经理、凯桥管理咨询（北京）有限责任公司投资副总裁、北京核芯达科技有限公司 IR 总监、富士 | no | no |
+| 康工业互联网股份有限公司 | asset-revaluation | 2025年年度报告: 康工业互联网股份有限公司投资总监等职务，现任本公司董事会秘书。 | no | no |
+| 上海渊奥实业投资有限公司 | asset-revaluation | 2025年半年度报告: 上海渊奥实业投资有限公司 关联人担任董事 | no | no |
+| 本公司未投资其他与浙江华统肉制品股份有限公司 | asset-revaluation | 2025年年度报告: 上海华俭 关于避免 本公司未投资其他与浙江华统肉制品股份有限公司（以下简称“上市公司”）及其子公司相 2021 长期 报告期 | no | no |
+| 本人作为合规投资者参与浙江华统肉制品股份有限公司 | asset-revaluation | 2025年年度报告: 本公司/本人作为合规投资者参与浙江华统肉制品股份有限公司 (以下简称“华统股份”)向特 | no | no |
+| 统股权投资合伙企业 | asset-revaluation | 2025年年度报告: 统股权投资合伙企业 | no | no |
+| 承诺投资项目小计 | asset-revaluation | 2025年年度报告: 承诺投资项目小计 -- 251,656.52 250,268.73 63,944.31 146,386.28 -- -- -14.39 -14.39 -- -- | no | no |
+| 安徽省绿色食品产业主题投资基金合伙企业（有限合伙 | asset-revaluation | 2025年半年度报告: 资本”）、安徽省绿色食品产业主题投资基金合伙企业（有限合伙）（以下简称“绿色食品基金”）、安 | no | no |
+| 徽金扁担股权投资有限公司 | asset-revaluation | 2025年半年度报告: 徽金扁担股权投资有限公司（以下简称“金扁担投资”）、黄山市歙州农文旅发展集团有限公司（以下简 | no | no |
+| 黄山市歙州农文旅发展集团有限公司 | asset-revaluation | 2025年半年度报告: 徽金扁担股权投资有限公司（以下简称“金扁担投资”）、黄山市歙州农文旅发展集团有限公司（以下简 | no | no |
+| 黟县国有投资集团有限公司 | asset-revaluation | 2025年半年度报告: 称“歙州农文旅”）、黟县国有投资集团有限公司（以下简称“黟县国投”）签署《黄山供赢华统股权投资 | no | no |
+| 合伙企业（有限合伙 | asset-revaluation | 2025年半年度报告: 合伙企业（有限合伙）合伙协议》（以下简称《合伙协议》），共同投资黄山供赢华统股权投资合伙企 | no | no |
+| 黄山供赢华统股权投资合伙企业(有限合伙 | asset-revaluation | 2025年半年度报告: 银河资本、京亚资本签署了《黄山供赢华统股权投资合伙企业(有限合伙)私募基金份额转让协议》，前 | no | no |
+| 基金 | asset-revaluation | 2025年年度报告: 投资基金 国有法 0.60% 4,838,709.00 4,838,709.00 0 4,838,709.00 0 | no | no |
+| 萍乡市赣莲企业管理中心（有限合伙 | asset-revaluation | 2025年年度报告: 战略投资者或一般法 中央企业乡村产业投资基金股份有限公司、方庆红、萍乡市赣莲企业管理中心（有限合伙）、 | no | no |
+| 欠发达地区产业发展基金有限公司 | asset-revaluation | 2025年年度报告: 人因配售新股成为前 欠发达地区产业发展基金有限公司、洛阳科创集团有限公司、蒲江县产业功能区发展股权投资 | no | no |
+| 洛阳科创集团有限公司 | asset-revaluation | 2025年年度报告: 人因配售新股成为前 欠发达地区产业发展基金有限公司、洛阳科创集团有限公司、蒲江县产业功能区发展股权投资 | no | no |
+| 展股权投资基金合伙 | asset-revaluation | 2025年年度报告: 展股权投资基金合伙 4,838,709.00 币普 4,838,709.00 | no | no |
+| 履约保证金 | asset-revaluation | 2025年年度报告: 履约保证金 2,300,000.00 2,300,000.00 2,300,000.00 2,300,000.00 | no | no |
+| 浙江省产业基金有限公司 | asset-revaluation | 2025年年度报告: 公司、浙江省产业基金有限公司、义乌华昇牧业有限公司（以下简称华昇牧业公司）签订的《股权投资 | no | no |
+| 义乌华昇牧业有限公司 | asset-revaluation | 2025年半年度报告: 《保证合同》，其为《东阳华统牧业有限公司股权投资协议》《义乌华昇牧业有限公司股权投资协议》项 | no | no |
+| 浦江华统牧业有限公司 | asset-revaluation | 2025年年度报告: 司）、浦江华统牧业有限公司（以下简称浦江牧业公司）签订的《投资协议》，由于本公司不能无条件 | no | no |
+| 华统集团公司 | asset-revaluation | 2025年年度报告: 华统集团公司 浙江金华 投资 50,097.50 万元 24.54% 24.54% | no | no |
+| 东阳华统牧业有限公司 | asset-revaluation | 2025年半年度报告: 《保证合同》，其为《东阳华统牧业有限公司股权投资协议》《义乌华昇牧业有限公司股权投资协议》项 | no | no |
+| 换情况 | asset-revaluation | 2025年半年度报告: 换情况 及已支付发行费用的自筹资金的议案》 ，同意公司使用募集资金 5,749.40 万元置换预先投入募集资金投资 | no | no |
+| 产业投资基金 | asset-revaluation | 2025年半年度报告: 产业投资基金 0 0 26,881,720 26,881,720首发后限售股 2025 年 11 月 16 日 | no | no |
+| 基金股份有限 | asset-revaluation | 2025年半年度报告: 投资基金股份有限 国有法人 3.34% 26,881,72026,881,720 26,881,720 0 不适用 0 | no | no |
+| 中国农业产业发展基金有限公司 | asset-revaluation | 2025年半年度报告: 根据本公司、中国农业产业发展基金有限公司、仙居县广信公司、浦江牧业公司签订的《投资协 | no | no |
+| 浙江金华 | asset-revaluation | 2025年半年度报告: 浙江金华 投资 50,097.50 万元 30.15% 30.15% | no | no |
+| 新疆天山天池富源文化投资有限公司 | asset-revaluation | 2025年半年度报告: 新疆天山天池富源文化投资有限公司 公司控股股东控制的企业 | no | no |
+| 宁波一川股权投资合伙企业（有限合伙 | asset-revaluation | 2025年半年度报告: 宁波一川股权投资合伙企业（有限合伙） 华统资产为执行事务合伙人，朱俭勇、朱俭军为合伙人 | no | no |
+| 宁波坤灵股权投资合伙企业（有限合伙 | asset-revaluation | 2025年半年度报告: 宁波坤灵股权投资合伙企业（有限合伙） 华统资产为执行事务合伙人，朱俭勇、朱俭军为合伙人 | no | no |
+| 浙江一亿润丰控股股份有限公司 | asset-revaluation | 2025年半年度报告: 浙江一亿润丰控股股份有限公司 控股股东持股 35%，董事、高管均为控股股东员工 | no | no |
+| order-ramp | business-realization | 2026年一季度报告: 合同负债 51,352,264.86 63,084,748.26 | no | no |
+| capacity-release | business-realization | 2025年年度报告: 受中游生猪养殖的周期性波动影响,下游屠宰行业的产能利用不稳定。一般来说，屠宰利润与养殖 | no | no |
+
+## Reliable Filing-Origin Bull Themes
+| candidate | kind | financial_report_evidence | reliability_gate | story_read | proof_needed |
+| --- | --- | --- | --- | --- | --- |
+| order-ramp | business-realization | 2026年一季度报告: 合同负债 51,352,264.86 63,084,748.26 | filing-backed + monetization evidence | demand visibility is improving | watch conversion into delivery, revenue, and cash collection |
+| capacity-release | business-realization | 2025年年度报告: 受中游生猪养殖的周期性波动影响,下游屠宰行业的产能利用不稳定。一般来说，屠宰利润与养殖 | filing-backed + monetization evidence | supply capability may be unlocking future revenue | watch utilization, sell-through, and return on capital |
+
+## News-Origin Candidates -> Filing Validation
+No candidates found.
+
+## Thematic Valuation Bridge
+| candidate | kind | catalyst_tier | valuation_weight | reported_value | vs_listed_mkt_cap | valuation_treatment | primary_investment_nav_ladder | bull_angle | bear_check |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 中央企业乡村产业投资基金股份有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 浙江富国超市有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 正大饲料（义乌）有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 正大食品（义乌）有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 电投国华（义乌）新能源有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 广州越秀华统食品有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 义乌市农牧发展有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 丽水海大华统生物科技有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 黄山华徽食品有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 渊奥实业投资有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 义乌市华捷置业有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 高乐新能源科技（浙江）有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 中信证券股份有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 国新风险投资管理（深圳）有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 凯桥管理咨询（北京）有限责任公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 北京核芯达科技有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 康工业互联网股份有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 上海渊奥实业投资有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 本公司未投资其他与浙江华统肉制品股份有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 本人作为合规投资者参与浙江华统肉制品股份有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 统股权投资合伙企业 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 承诺投资项目小计 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | 25.17 万元 | 0.0% | verified but immaterial to core valuation | immaterial NAV item: note only unless multiple assets form a portfolio pattern | Useful as optionality, not as the spine of the thesis. | Argue that even full revaluation would not move listed-company value enough to matter. |
+| 安徽省绿色食品产业主题投资基金合伙企业（有限合伙 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 徽金扁担股权投资有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 黄山市歙州农文旅发展集团有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 黟县国有投资集团有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 合伙企业（有限合伙 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 黄山供赢华统股权投资合伙企业(有限合伙 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 基金 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | 483.87 万元 | 0.1% | verified but immaterial to core valuation | immaterial NAV item: note only unless multiple assets form a portfolio pattern | Useful as optionality, not as the spine of the thesis. | Argue that even full revaluation would not move listed-company value enough to matter. |
+| 萍乡市赣莲企业管理中心（有限合伙 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 欠发达地区产业发展基金有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 洛阳科创集团有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 展股权投资基金合伙 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | 483.87 万元 | 0.1% | verified but immaterial to core valuation | immaterial NAV item: note only unless multiple assets form a portfolio pattern | Useful as optionality, not as the spine of the thesis. | Argue that even full revaluation would not move listed-company value enough to matter. |
+| 履约保证金 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | 230.00 万元 | 0.0% | verified but immaterial to core valuation | immaterial NAV item: note only unless multiple assets form a portfolio pattern | Useful as optionality, not as the spine of the thesis. | Argue that even full revaluation would not move listed-company value enough to matter. |
+| 浙江省产业基金有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 义乌华昇牧业有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 浦江华统牧业有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 华统集团公司 | asset-revaluation | tier-2 soft catalyst | scenario valuation / watchlist | 5.01 亿元 | 8.4% | material asset; include in SOTP/NAV watchlist with carrying-value, haircut, and upside scenarios | required: conservative=carrying value haircut, base=carrying value, upside=repricing only after a visible exit/IPO catalyst | Material verified ownership may become an upside lever if a catalyst emerges. | Without a catalyst, current carrying value may already be the cleanest anchor. |
+| 东阳华统牧业有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 换情况 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | 5749.40 万元 | 1.0% | verified but immaterial to core valuation | immaterial NAV item: note only unless multiple assets form a portfolio pattern | Useful as optionality, not as the spine of the thesis. | Argue that even full revaluation would not move listed-company value enough to matter. |
+| 产业投资基金 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | 2688.17 万元 | 0.5% | verified but immaterial to core valuation | immaterial NAV item: note only unless multiple assets form a portfolio pattern | Useful as optionality, not as the spine of the thesis. | Argue that even full revaluation would not move listed-company value enough to matter. |
+| 基金股份有限 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | 2688.17 万元 | 0.5% | verified but immaterial to core valuation | immaterial NAV item: note only unless multiple assets form a portfolio pattern | Useful as optionality, not as the spine of the thesis. | Argue that even full revaluation would not move listed-company value enough to matter. |
+| 中国农业产业发展基金有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 浙江金华 | asset-revaluation | tier-2 soft catalyst | scenario valuation / watchlist | 5.01 亿元 | 8.4% | material asset; include in SOTP/NAV watchlist with carrying-value, haircut, and upside scenarios | required: conservative=carrying value haircut, base=carrying value, upside=repricing only after a visible exit/IPO catalyst | Material verified ownership may become an upside lever if a catalyst emerges. | Without a catalyst, current carrying value may already be the cleanest anchor. |
+| 新疆天山天池富源文化投资有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 宁波一川股权投资合伙企业（有限合伙 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 宁波坤灵股权投资合伙企业（有限合伙 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 浙江一亿润丰控股股份有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| order-ramp | business-realization | tier-1 hard catalyst | scenario-to-core bridge eligible | 6308.47 万元 | 1.1% | eligible for scenario valuation, not automatic core valuation | N/A | Verified commercialization evidence can justify upside scenarios if revenue/profit contribution scales. | Test whether disclosed contribution is recurring, profitable, and large enough versus the existing business. |
+| capacity-release | business-realization | tier-1 hard catalyst | scenario-to-core bridge eligible | not separately disclosed | N/A | eligible for scenario valuation, not automatic core valuation | N/A | Verified commercialization evidence can justify upside scenarios if revenue/profit contribution scales. | Test whether disclosed contribution is recurring, profitable, and large enough versus the existing business. |
+
+## Narrative Optionality Watchlist
+| candidate | kind | catalyst_tier | valuation_weight | source | evidence | story_read | proof_needed | credibility |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 养鸡 | concept-membership | tier-3 narrative option | small imagination premium only | tushare concept_detail | concept_id=TS713; in_date=N/A | N/A | N/A | N/A |
+| 猪肉 | concept-membership | tier-3 narrative option | small imagination premium only | tushare concept_detail | concept_id=TS314; in_date=N/A | N/A | N/A | N/A |
+| 饲料 | concept-membership | tier-3 narrative option | small imagination premium only | tushare concept_detail | concept_id=TS20; in_date=N/A | N/A | N/A | N/A |
+| unclassified | investor-interaction | tier-3 narrative option | small imagination premium only | cninfo_irm | Q: 董秘您好！贵公司到底出什么事了短短1个半月从14块跌到7块难道什么问题都没有吗？如果没有问题麻烦采取一些手段维护股价可以吗？ / A: 您好，截至目前，公司目前各板块业务经营正常，公司股价受宏观经济形势、市场情绪等众多因素影响，具有不确定性。后续如有相关计划，公司将严格按照相关规定及时履行信息披露义务。谢谢! | official interaction without a mapped investable theme | manual review required | higher-official-signal |
+| unclassified | investor-interaction | tier-3 narrative option | small imagination premium only | cninfo_irm | Q: 华统股份俞村养殖场的环保措施落实如何？如何改善臭气排放的现状？ / A: 尊敬的投资者您好，感谢您的关注。公司始终秉持可持续发展的理念，严格遵循大气污染防治法等法律法规要求，确保废气排放符合国家和地区标准，并积极履行环境责任，通过先进的技术手段和科学的管理措施，对废气进行全面治理，为环境保护和可持续发展做出积极贡献。谢谢! | official interaction without a mapped investable theme | manual review required | medium-official-signal |
+| unclassified | investor-interaction | tier-3 narrative option | small imagination premium only | cninfo_irm | Q: 华统股份义乌俞村肉猪养殖场每晚排气，臭气熏天，严重影响周边居民生活健康，请问董秘贵司针对合规经营和环保处理及社会责任方面，有什么具体的举措，谢谢！ / A: 尊敬的投资者您好，感谢您的关注。公司始终秉持可持续发展的理念，严格遵循大气污染防治法等法律法规要求，确保废气排放符合国家和地区标准，并积极履行环境责任，通过先进的技术手段和科学的管理措施，对废气进行全面治理，为环境保护和可持续发展做出积极贡献。谢谢! | official interaction without a mapped investable theme | manual review required | medium-official-signal |
+| unclassified | investor-interaction | tier-3 narrative option | small imagination premium only | cninfo_irm | Q: 董秘你好，生猪行情不尽人意，猪价持续下跌，公司现金流是否充裕，中长期是否有资金断裂的风险，公司是否按计划目标降本增效，降负债率，在金蝶和pic得加持下，华统未来是否能大幅度降低养殖成本。 / A: 您好，公司目前货币资金充足，经营性现金流良好，银行授信也比较宽裕，整体不存在较大的资金压力。公司也将密切关注行业态势及资金状况，拓宽市场融资渠道。公司目前各板块业务经营正常，养殖成本持续降低，未来公司将继续通过加强采购管理、优化饲料配方... | official interaction without a mapped investable theme | manual review required | medium-official-signal |
+
+## Cross-Source Theme Validation
+| theme | source_families | source_count | hard_evidence | cross_source_read | suggested_tier | upgrade_path |
+| --- | --- | --- | --- | --- | --- | --- |
+| capacity-release | filing | 1 | yes | latent hard catalyst; economic bridge exists but fetched corroboration is thin | tier-1 pending diligence | seek a second independent source or direct milestone |
+| order-ramp | filing | 1 | yes | latent hard catalyst; economic bridge exists but fetched corroboration is thin | tier-1 pending diligence | seek a second independent source or direct milestone |
+| 养鸡 | concept | 1 | no | single-source narrative | tier-3 narrative option | collect independent corroboration |
+| 猪肉 | concept | 1 | no | single-source narrative | tier-3 narrative option | collect independent corroboration |
+| 饲料 | concept | 1 | no | single-source narrative | tier-3 narrative option | collect independent corroboration |
+
+## Portfolio Pattern Check
+| verified_investee_count | realized_investment_signal | pattern_read |
+| --- | --- | --- |
+| 48 | yes | repeat-investor pattern worth explicit review: filings show multiple verified investees plus realized-investment language |
+
+## Analyst Instructions
+- Treat filing-origin candidates as the first-pass candidate pool for investee IPOs, asset listings, and verified new-business lines.
+- Treat filing-origin operating themes as bull support only when the filing itself contains a believable economic bridge such as orders, revenue, delivery, customers, commercialization, or capacity release; reject bare buzzwords without monetization evidence.
+- Treat news-origin candidates as unverified until annual or half-year report text supports the same investee, asset, or business line.
+- A candidate may influence valuation only after filing verification plus a clear economic transmission path, timetable, and materiality check.
+- Use a three-tier ladder: tier-1 hard catalysts can enter core/SOTP valuation; tier-2 soft catalysts can support scenario upside or probability; tier-3 narrative options from news, interaction, concept linkage, or media association may justify only a small imagination premium until filings verify them.
+- Keep economic hardness separate from evidence completeness. If a filing-backed theme has a real monetization bridge but the fetched corroboration is thin, mark it as tier-1 pending diligence / latent hard catalyst instead of demoting it to pure narrative or pretending proof is complete.
+- Asset-revaluation themes may enter SOTP/NAV only when ownership value is disclosed, material versus listed-company market cap, and realizability is discussed.
+- For material primary investments, build a NAV ladder instead of using a vague imagination premium: conservative value = carrying value with liquidity/exit haircut; base value = carrying value or latest financing/IPO reference with an explicit discount; upside value = exit/IPO repricing multiplied by probability and lock-up/liquidity haircuts. Keep this separate from operating earnings so the report does not confuse market theme value with recurring business profit.
+- After reviewing single investees, ask a second-level question: is there a repeatable capital-allocation pattern? If filings show multiple verified investees plus realized exits, investment income, or fair-value gains over time, discuss whether management's first-level investing capability itself is a durable bull factor rather than treating each asset as an isolated anecdote.
+- Business-realization themes may enter core valuation only when filings disclose monetization evidence such as revenue, profit, orders, or cash-flow contribution; otherwise keep them as qualitative optionality.
+- If report text extraction is unavailable, say so explicitly and do not pretend that news-only themes were verified.
