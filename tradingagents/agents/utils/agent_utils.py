@@ -176,8 +176,13 @@ def get_knowledge_planet_instruction() -> str:
         "-> valuation -> catalyst clock -> falsification signal. Target-market-cap, "
         "strong-call, and dramatic upside claims must be treated as optimism bias "
         "until supported by fundamentals, price/volume confirmation, and a credible "
-        "expectation gap. If Knowledge Planet conflicts with objective data, state "
-        "the conflict explicitly and let the objective data cap conviction."
+        "expectation gap. When a PDF Report Structured Thesis Map is present, use it "
+        "as a sell-side hypothesis ledger: compare core assumptions, earnings forecasts, "
+        "valuation methods, target/rating changes, and key chart numbers against the "
+        "TradingAgents earnings model, valuation bridge, industry KPI gates, and price "
+        "confirmation before changing rating or sizing. If Knowledge Planet conflicts "
+        "with objective data or the TradingAgents model, state the conflict explicitly "
+        "and let the objective data cap conviction."
     )
 
 

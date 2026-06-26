@@ -13,6 +13,23 @@ class ContextCoverage:
     note: str
 
 
+@dataclass(frozen=True)
+class KeyFact:
+    fact_id: str
+    source_module: str
+    status: str
+    role: str
+    evidence: str
+
+
+@dataclass(frozen=True)
+class CoreVariableGate:
+    profile: str
+    variable: str
+    status: str
+    evidence: str
+
+
 FAILURE_PATTERNS = (
     "context unavailable",
     "# financial-report intelligence unavailable",
@@ -98,6 +115,152 @@ SUCCESS_HINTS = (
     "Earnings Snapshots",
 )
 
+FALSE_FAILURE_PATTERNS = (
+    "weak or incomplete modules: none detected",
+)
+
+FACT_SOURCE_PRIORITY = (
+    "financial_report_intelligence",
+    "earnings_model",
+    "market_expectation",
+    "price_eps_pe_decomposition",
+    "commodity_product_price",
+    "industry_kpi_checklist",
+    "peer_comparison",
+    "management_capital_allocation",
+    "investor_interaction",
+    "knowledge_planet",
+)
+
+KEY_FACT_TERMS = (
+    ("revenue", "core valuation input"),
+    ("operating revenue", "core valuation input"),
+    ("net profit", "core valuation input"),
+    ("gross margin", "core margin input"),
+    ("operating cash flow", "cash-quality input"),
+    ("ocf", "cash-quality input"),
+    ("capex", "cash-quality input"),
+    ("cash", "balance-sheet input"),
+    ("contract liabilities", "demand-visibility input"),
+    ("pe", "valuation input"),
+    ("pb", "valuation input"),
+    ("roe", "quality/valuation input"),
+    ("eps", "valuation input"),
+    ("dividend", "shareholder-return input"),
+    ("nim", "bank-native input"),
+    ("npl", "bank-native input"),
+    ("cet1", "bank-native input"),
+    ("nbv", "insurance-native input"),
+    ("csm", "insurance-native input"),
+    ("cor", "insurance-native input"),
+    ("hog price", "hog-cycle input"),
+    ("piglet", "hog-cycle input"),
+    ("sow", "hog-cycle input"),
+    ("complete cost", "hog-cycle input"),
+    ("copper", "commodity input"),
+    ("shfe", "commodity input"),
+    ("aisc", "mining-native input"),
+    ("reserve", "mining-native input"),
+    ("grade", "mining-native input"),
+)
+
+PROFILE_RULES = (
+    {
+        "profile": "bank",
+        "triggers": (
+            "reading profile: banking",
+            "nim",
+            "cet1",
+            "npl",
+            "deposit",
+            "provision coverage",
+            "bank kpi",
+        ),
+        "variables": (
+            ("NIM / net interest spread", ("nim", "net interest", "interest spread")),
+            ("Asset quality", ("npl", "non-performing", "provision coverage", "overdue")),
+            ("Capital adequacy", ("cet1", "capital adequacy", "tier 1")),
+            ("ROE / PB valuation bridge", ("roe", "pb", "cost of equity")),
+            ("Dividend coverage", ("dividend", "payout", "capital constraint")),
+        ),
+    },
+    {
+        "profile": "insurance",
+        "triggers": (
+            "insurance",
+            "nbv",
+            "embedded value",
+            "csm",
+            "solvency",
+            "combined ratio",
+        ),
+        "variables": (
+            ("NBV growth and margin", ("nbv", "new business value", "nbv margin")),
+            ("EV / CSM bridge", ("embedded value", "csm", "contractual service margin")),
+            ("Solvency and capital", ("solvency", "capital adequacy")),
+            ("P&C COR", ("cor", "combined ratio")),
+            ("Dividend coverage", ("dividend", "payout", "solvency")),
+        ),
+    },
+    {
+        "profile": "hog breeding",
+        "triggers": (
+            "hog",
+            "piglet",
+            "sow",
+            "breeding",
+            "livestock",
+            "complete cost",
+        ),
+        "variables": (
+            ("Hog ASP / futures curve", ("hog price", "dce", "lh", "asp")),
+            ("Piglet and sow supply", ("piglet", "sow", "breeding sow")),
+            ("Complete breeding cost", ("complete cost", "cost per kg", "breeding cost")),
+            ("Monthly sales volume/price", ("monthly sales", "sales volume", "realized price")),
+            ("OCF / leverage survival", ("ocf", "operating cash flow", "leverage", "cash")),
+            ("PB / NAV stress floor", ("pb", "nav", "book value")),
+        ),
+    },
+    {
+        "profile": "consumer staples",
+        "triggers": (
+            "consumer-staples",
+            "beverage",
+            "food",
+            "distributor",
+            "channel inventory",
+            "sell-through",
+        ),
+        "variables": (
+            ("Sell-through / channel inventory", ("sell-through", "channel inventory", "distributor")),
+            ("Price system / ASP", ("asp", "terminal price", "wholesale price")),
+            ("Contract liabilities", ("contract liabilities", "advance receipts")),
+            ("Gross margin and raw materials", ("gross margin", "raw material", "promotion")),
+            ("Food safety / quality risk", ("food safety", "quality risk")),
+        ),
+    },
+    {
+        "profile": "metals/mining",
+        "triggers": (
+            "metals-mining",
+            "mining",
+            "copper",
+            "shfe",
+            "aisc",
+            "reserve",
+            "grade",
+        ),
+        "variables": (
+            ("Metal price proxy", ("shfe", "copper", "aluminum", "gold")),
+            ("Reserve / resource quality", ("reserve", "resource", "grade")),
+            ("Equity output / volume", ("equity output", "production", "output")),
+            ("AISC / unit cost", ("aisc", "unit cost", "cash cost")),
+            ("NAV / SOTP", ("nav", "sotp", "resource value")),
+            ("Capex / project ramp", ("capex", "project ramp", "construction")),
+        ),
+    },
+)
+
 
 def _first_relevant_line(text: str) -> str:
     for raw in text.splitlines():
@@ -114,13 +277,20 @@ def _first_relevant_line(text: str) -> str:
     return ""
 
 
+def _clean_failure_text(text: str) -> str:
+    lower = text.lower()
+    for pattern in FALSE_FAILURE_PATTERNS:
+        lower = lower.replace(pattern, "")
+    return lower
+
+
 def classify_context_coverage(name: str, text: str) -> ContextCoverage:
     """Classify whether one precomputed research context is usable."""
     cleaned = (text or "").strip()
     if not cleaned:
         return ContextCoverage(name, "missing", "context is empty")
 
-    lower = cleaned.lower()
+    lower = _clean_failure_text(cleaned)
     if any(pattern in lower for pattern in NOT_APPLICABLE_PATTERNS):
         return ContextCoverage(name, "not_applicable", _first_relevant_line(cleaned))
 
@@ -137,6 +307,167 @@ def classify_context_coverage(name: str, text: str) -> ContextCoverage:
     if len(note) > 180:
         note = note[:177] + "..."
     return ContextCoverage(name, status, note)
+
+
+def _truncate_cell(text: str, limit: int = 160) -> str:
+    normalized = re.sub(r"\s+", " ", text).strip().replace("|", "/")
+    return normalized[: limit - 3] + "..." if len(normalized) > limit else normalized
+
+
+def _line_has_number(line: str) -> bool:
+    return bool(re.search(r"[-+]?\d+(?:\.\d+)?\s*(?:%|x|倍|亿|万|元|kg|吨|bps)?", line, re.I))
+
+
+def _find_role(line: str) -> str:
+    lower = line.lower()
+    for term, role in KEY_FACT_TERMS:
+        if term in lower:
+            return role
+    return "source-backed input"
+
+
+def _parse_markdown_row(line: str) -> list[str]:
+    return [cell.strip() for cell in line.strip().strip("|").split("|")]
+
+
+def _knowledge_planet_evidence_fact(line: str) -> tuple[str, str] | None:
+    cells = _parse_markdown_row(line)
+    if not cells or not re.match(r"^KPE\d+", cells[0], re.I):
+        return None
+    if len(cells) >= 8:
+        role = cells[5] or "private/proxy evidence"
+        evidence = f"{cells[0]} {cells[6]} verification: {cells[7]}"
+        return role, _truncate_cell(evidence, 190)
+    return "private/proxy evidence", _truncate_cell(line, 190)
+
+
+def _extract_key_facts(
+    contexts: dict[str, str],
+    coverage_by_name: dict[str, ContextCoverage],
+    max_facts: int = 12,
+) -> list[KeyFact]:
+    facts: list[KeyFact] = []
+    fact_no = 1
+    prioritized_names = [
+        name for name in FACT_SOURCE_PRIORITY if name in contexts
+    ] + [
+        name for name in contexts if name not in FACT_SOURCE_PRIORITY
+    ]
+    seen: set[str] = set()
+    for name in prioritized_names:
+        coverage = coverage_by_name.get(name)
+        if not coverage or coverage.status in {"failed", "missing", "not_applicable"}:
+            continue
+        for raw in contexts.get(name, "").splitlines():
+            line = raw.strip(" -")
+            kp_fact = (
+                _knowledge_planet_evidence_fact(line)
+                if name == "knowledge_planet"
+                else None
+            )
+            if kp_fact:
+                role, evidence = kp_fact
+                if evidence.lower() in seen:
+                    continue
+                seen.add(evidence.lower())
+                facts.append(
+                    KeyFact(
+                        fact_id=f"KF{fact_no:02d}",
+                        source_module=name,
+                        status="private_proxy",
+                        role=role,
+                        evidence=evidence,
+                    )
+                )
+                fact_no += 1
+                if len(facts) >= max_facts:
+                    return facts
+                continue
+            if (
+                len(line) < 18
+                or line.startswith("| ---")
+                or not _line_has_number(line)
+            ):
+                continue
+            lower = line.lower()
+            if not any(term in lower for term, _ in KEY_FACT_TERMS):
+                continue
+            evidence = _truncate_cell(line)
+            if evidence.lower() in seen:
+                continue
+            seen.add(evidence.lower())
+            facts.append(
+                KeyFact(
+                    fact_id=f"KF{fact_no:02d}",
+                    source_module=name,
+                    status=coverage.status,
+                    role=_find_role(line),
+                    evidence=evidence,
+                )
+            )
+            fact_no += 1
+            if len(facts) >= max_facts:
+                return facts
+    return facts
+
+
+def _matching_line(text: str, terms: tuple[str, ...]) -> str:
+    lowered_terms = tuple(term.lower() for term in terms)
+    for raw in text.splitlines():
+        line = raw.strip(" -")
+        lower = line.lower()
+        if any(term in lower for term in lowered_terms):
+            return _truncate_cell(line)
+    return ""
+
+
+def _detect_profiles(blob: str) -> list[dict[str, object]]:
+    lower = blob.lower()
+    profiles = [
+        rule for rule in PROFILE_RULES if any(term in lower for term in rule["triggers"])
+    ]
+    if not profiles:
+        return []
+    return profiles[:2]
+
+
+def _build_core_variable_gates(
+    contexts: dict[str, str],
+    coverage_by_name: dict[str, ContextCoverage],
+) -> list[CoreVariableGate]:
+    blob = "\n".join(contexts.values())
+    gates: list[CoreVariableGate] = []
+    for rule in _detect_profiles(blob):
+        profile = str(rule["profile"])
+        for variable, terms in rule["variables"]:  # type: ignore[index]
+            evidence = ""
+            evidence_status = "missing"
+            for name, text in contexts.items():
+                line = _matching_line(text, terms)
+                if not line:
+                    continue
+                coverage = coverage_by_name.get(name)
+                evidence = f"{name}: {line}"
+                if name == "knowledge_planet":
+                    if evidence_status != "ready":
+                        evidence_status = "private_proxy"
+                    continue
+                if coverage and coverage.status == "ready":
+                    evidence_status = "ready"
+                    break
+                if coverage and coverage.status in {"thin", "partial"}:
+                    evidence_status = "partial"
+                else:
+                    evidence_status = "partial"
+            gates.append(
+                CoreVariableGate(
+                    profile=profile,
+                    variable=str(variable),
+                    status=evidence_status,
+                    evidence=evidence or "No explicit source-backed evidence found.",
+                )
+            )
+    return gates
 
 
 def build_data_coverage_context(contexts: dict[str, str]) -> str:
@@ -158,17 +489,72 @@ def build_data_coverage_context(contexts: dict[str, str]) -> str:
         note = row.note.replace("|", "/")
         lines.append(f"| {row.name} | {row.status} | {note} |")
 
+    coverage_by_name = {row.name: row for row in rows}
+    key_facts = _extract_key_facts(contexts, coverage_by_name)
+    if key_facts:
+        lines.extend(
+            [
+                "",
+                "## Key Facts Ledger",
+                "",
+                "| fact_id | source_module | status | decision_role | evidence |",
+                "| --- | --- | --- | --- | --- |",
+            ]
+        )
+        for fact in key_facts:
+            lines.append(
+                f"| {fact.fact_id} | {fact.source_module} | {fact.status} | "
+                f"{fact.role} | {fact.evidence} |"
+            )
+
+    gates = _build_core_variable_gates(contexts, coverage_by_name)
+    if gates:
+        lines.extend(
+            [
+                "",
+                "## Core Variable Gates",
+                "",
+                "| profile | core_variable | status | evidence |",
+                "| --- | --- | --- | --- |",
+            ]
+        )
+        for gate in gates:
+            lines.append(
+                f"| {gate.profile} | {gate.variable} | {gate.status} | "
+                f"{gate.evidence.replace('|', '/')} |"
+            )
+
     failed = [row.name for row in rows if row.status in {"failed", "missing"}]
     partial = [row.name for row in rows if row.status == "partial"]
-    if failed or partial:
+    private_proxy_rows = any(fact.status == "private_proxy" for fact in key_facts) or any(
+        gate.status == "private_proxy" for gate in gates
+    )
+    if failed or partial or key_facts or gates:
         lines.extend(
             [
                 "",
                 "## Required Manager Treatment",
-                "- Do not treat failed or missing modules as neutral evidence.",
-                "- Distinguish a narrative filing-text extraction gap from a full financial-data failure. If structured statements, market data, peers, or valuation contexts are present, say only that report-body/segment/management-discussion evidence is missing.",
-                "- If a failed or partial module touches the core bet, name it as a research gap and cap conviction.",
-                "- If other verified modules still support a directional view, keep the rating label clean and put the limitation in conviction, sizing, Evidence Gaps, and Verification Calendar. Use an evidence-limited rating label only when a core module for the thesis is failed/partial or the decisive valuation driver lacks direct evidence.",
             ]
         )
+        if failed or partial:
+            lines.extend(
+                [
+                    "- Do not treat failed or missing modules as neutral evidence.",
+                    "- Distinguish a narrative filing-text extraction gap from a full financial-data failure. If structured statements, market data, peers, or valuation contexts are present, say only that report-body/segment/management-discussion evidence is missing.",
+                    "- If a failed or partial module touches the core bet, name it as a research gap and cap conviction.",
+                    "- If other verified modules still support a directional view, keep the rating label clean and put the limitation in conviction, sizing, Evidence Gaps, and Verification Calendar. Use an evidence-limited rating label only when a core module for the thesis is failed/partial or the decisive valuation driver lacks direct evidence.",
+                ]
+            )
+        if key_facts:
+            lines.append(
+                "- Use Key Facts Ledger fact_ids as the only source for decisive numeric claims. If a debate participant cites a conflicting number, correct it before changing rating or sizing."
+            )
+        if gates:
+            lines.append(
+                "- Use Core Variable Gates as rating-strength guardrails. Missing thesis-critical variables should cap conviction and normally prevent Buy/Overweight unless downside is independently bounded and the missing variable is explicitly placed in the Verification Calendar."
+            )
+        if private_proxy_rows:
+            lines.append(
+                "- Treat `private_proxy` rows from Knowledge Planet as alternative-intelligence clues only. They may adjust probabilities, timing, sizing, or verification tasks, but they cannot serve as filing-grade facts unless cross-checked by announcements, Tushare/financial data, reputable news, or market price/volume evidence."
+            )
     return "\n".join(lines)

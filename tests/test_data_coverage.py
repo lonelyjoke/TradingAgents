@@ -72,6 +72,77 @@ def test_build_data_coverage_instructs_manager_on_gaps():
     assert "Do not treat failed or missing modules as neutral evidence" in audit
 
 
+def test_quality_audit_none_detected_is_not_partial():
+    text = "# Sell-side depth and key-number audit\n\nWeak or incomplete modules: none detected\n"
+    coverage = classify_context_coverage("sell_side_quality_audit", text + ("x" * 200))
+
+    assert coverage.status == "ready"
+
+
+def test_build_data_coverage_adds_key_fact_ledger():
+    audit = build_data_coverage_context(
+        {
+            "earnings_model": (
+                "# Earnings Snapshots\n"
+                "| metric | value |\n"
+                "| --- | --- |\n"
+                "| operating cash flow | -11.66 billion yuan |\n"
+                "| net profit | -10.70 billion yuan |\n"
+            ),
+            "market_expectation": "# Market expectation\nPE 35.9x and PB 1.98x.",
+        }
+    )
+
+    assert "## Key Facts Ledger" in audit
+    assert "KF01" in audit
+    assert "operating cash flow" in audit
+    assert "Use Key Facts Ledger fact_ids" in audit
+
+
+def test_build_data_coverage_adds_bank_core_variable_gates():
+    audit = build_data_coverage_context(
+        {
+            "industry_kpi_checklist": (
+                "# Bank KPI checklist\n"
+                "- NIM: 1.95% latest disclosed value.\n"
+                "- CET1 ratio: 12.4%.\n"
+                "- PB valuation bridge: 0.85x PB versus 13% ROE.\n"
+            ),
+            "earnings_model": "# Earnings model\n" + ("bank row\n" * 50),
+        }
+    )
+
+    assert "## Core Variable Gates" in audit
+    assert "| bank | NIM / net interest spread | ready |" in audit
+    assert "| bank | Asset quality | missing |" in audit
+    assert "Use Core Variable Gates as rating-strength guardrails" in audit
+
+
+def test_build_data_coverage_treats_knowledge_planet_kpe_as_private_proxy():
+    audit = build_data_coverage_context(
+        {
+            "knowledge_planet": (
+                "# Knowledge Planet Alternative Intelligence Context\n"
+                "### Private / Proxy Evidence Ledger\n"
+                "| evidence_id | date | source | type | credibility | decision_role | evidence | verification |\n"
+                "| --- | --- | --- | --- | --- | --- | --- | --- |\n"
+                "| KPE01 | 2026-06-19 | stream_item | industry_weekly_data | broker_survey_or_industry_data | KPI/forecast proxy | hog price improved and piglet price rose | check with Tushare and official monthly sales |\n"
+                "### Hog KPI Extraction\n"
+                "| core_variable | status | evidence_ids | clue |\n"
+                "| --- | --- | --- | --- |\n"
+                "| hog ASP / live-hog price | private_proxy | KPE01 | hog price improved |\n"
+                "| piglet price | private_proxy | KPE01 | piglet price rose |\n"
+            )
+        }
+    )
+
+    assert "## Key Facts Ledger" in audit
+    assert "| KF01 | knowledge_planet | private_proxy | KPI/forecast proxy |" in audit
+    assert "## Core Variable Gates" in audit
+    assert "| hog breeding | Hog ASP / futures curve | private_proxy |" in audit
+    assert "Treat `private_proxy` rows from Knowledge Planet" in audit
+
+
 def test_classifies_unmapped_supply_chain_as_not_applicable():
     text = (
         "# Supply-chain position comparison for 601728.SH\n\n"

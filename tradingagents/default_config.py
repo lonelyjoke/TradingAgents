@@ -225,6 +225,22 @@ DEFAULT_CONFIG = {
         "KNOWLEDGE_PLANET_PREPROCESS_CACHE",
         True,
     ),
+    "knowledge_planet_llm_report_analysis_enabled": _env_bool_or_default(
+        "KNOWLEDGE_PLANET_LLM_REPORT_ANALYSIS",
+        False,
+    ),
+    "knowledge_planet_llm_report_analysis_max_reports": _env_int_or_default(
+        "KNOWLEDGE_PLANET_LLM_REPORT_ANALYSIS_MAX_REPORTS",
+        8,
+    ),
+    "knowledge_planet_llm_provider": _env_or_default(
+        "KNOWLEDGE_PLANET_LLM_PROVIDER",
+        _DEFAULT_LLM_PROVIDER,
+    ),
+    "knowledge_planet_llm_model": _env_or_default(
+        "KNOWLEDGE_PLANET_LLM_MODEL",
+        _default_quick_model(_DEFAULT_LLM_PROVIDER),
+    ),
     "knowledge_planet_context_item_display_limit": _env_int_or_default(
         "KNOWLEDGE_PLANET_CONTEXT_ITEM_DISPLAY_LIMIT",
         12,

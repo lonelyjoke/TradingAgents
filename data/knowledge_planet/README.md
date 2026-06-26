@@ -62,6 +62,16 @@ Recommended operating model:
 3. If you want the single-stock entry to force a full upstream refresh, override
    the context sync environment variables temporarily.
 
+For scheduled single-stock research support, use the one-command rolling update:
+
+`.\scripts\update_knowledge_planet_30d.cmd`
+
+This syncs the rolling 30-day window, imports stream posts and PDF attachments,
+backfills missing PDF text, and rebuilds cached research assets. Existing date
+sync stamps under `data/knowledge_planet/.sync_state/` and importer content
+hashes skip already-synced dates and already-imported items. Use `--force` only
+when you intentionally want to resync a date window.
+
 Not every joined group allows API access. If `zsxq-cli` reports a message such
 as `该星球内容仅限成员在星球内查看，暂不支持通过 API 访问`, keep using the
 manual inbox workflow for that group. The sync script writes only a daily
@@ -239,10 +249,20 @@ Single-stock A-share analysis now preloads local Knowledge Planet context when
 
 - recent matched stream items from the configured look-back window;
 - matched PDF research reports and extracted PDF text hits;
+- a structured PDF thesis map with core assumptions, earnings forecasts,
+  valuation methods, target/rating changes, key chart numbers, and model
+  conflict checks;
 - source labels such as industry weekly data, channel check, research feedback,
   sell-side push, and rumor/sentiment;
 - instructions to treat private/channel evidence as labeled clues and sell-side
   promotion as optimism-biased until validated.
+
+PDF report structures are stored in `kp_report_structures`. They are intended
+to be consumed as a sell-side hypothesis ledger, not as conclusions: every
+extracted forecast, valuation method, target/rating change, and key number must
+be checked against the TradingAgents earnings model, valuation bridge, industry
+KPI gates, filings/Tushare data, and price/volume evidence before it can affect
+rating or sizing.
 
 Useful optional environment overrides:
 

@@ -54,7 +54,7 @@ DAILY_ANALYSIS_TARGETS = DAILY_MAIN_BOARD_SIZE + DAILY_WATCH_BOARD_SIZE
 DAILY_MAIN_MIN_SCORE = 55
 DAILY_WATCH_MIN_SCORE = 35
 
-PREPROCESS_SCHEMA_VERSION = 2
+PREPROCESS_SCHEMA_VERSION = 3
 
 INFORMATION_RICH_TYPES = {
     "industry_weekly_data",
@@ -327,6 +327,18 @@ class KpReport:
     companies: tuple[str, ...]
     industries: tuple[str, ...]
     themes: tuple[str, ...]
+
+
+@dataclass(frozen=True)
+class KnowledgePlanetEvidence:
+    evidence_id: str
+    published_at: str
+    source: str
+    source_type: str
+    credibility: str
+    decision_role: str
+    evidence: str
+    verification: str
 
 
 @dataclass(frozen=True)
@@ -1147,15 +1159,21 @@ def _query_items(
     """
     rows = [_row_to_item(row) for row in conn.execute(sql, params)]
     primary = primary_terms or terms
-    rows.sort(
-        key=lambda item: (
-            _item_match_score(item, terms, primary),
-            item.published_at or "",
-            item.row_id,
+    scored = [
+        (_item_match_score(item, terms, primary), item)
+        for item in rows
+    ]
+    min_score = 80 if primary_terms else 0
+    scored = [(score, item) for score, item in scored if score >= min_score]
+    scored.sort(
+        key=lambda pair: (
+            pair[0],
+            pair[1].published_at or "",
+            pair[1].row_id,
         ),
         reverse=True,
     )
-    return rows[: int(limit)]
+    return [item for _, item in scored[: int(limit)]]
 
 
 def _query_reports(
@@ -4921,6 +4939,22 @@ def _init_preprocess_tables(conn: sqlite3.Connection) -> None:
             status TEXT NOT NULL,
             updated_at TEXT NOT NULL
         );
+        CREATE TABLE IF NOT EXISTS kp_report_structures (
+            structure_id TEXT PRIMARY KEY,
+            report_id INTEGER NOT NULL,
+            published_at TEXT,
+            title TEXT NOT NULL,
+            broker TEXT,
+            category TEXT NOT NULL,
+            extracted_value TEXT NOT NULL,
+            evidence TEXT NOT NULL,
+            model_check TEXT NOT NULL,
+            linked_tickers_json TEXT NOT NULL,
+            linked_companies_json TEXT NOT NULL,
+            linked_themes_json TEXT NOT NULL,
+            status TEXT NOT NULL,
+            updated_at TEXT NOT NULL
+        );
         CREATE TABLE IF NOT EXISTS kp_candidate_opportunities (
             report_date TEXT NOT NULL,
             symbol_or_name TEXT NOT NULL,
@@ -5058,6 +5092,144 @@ def _report_assumption_type(report: KpReport) -> str:
     if any(word in text for word in ("海外", "美股", "全球", "高盛", "摩根")):
         return "overseas_mapping"
     return "industry_framework"
+
+
+REPORT_STRUCTURE_CATEGORIES: tuple[tuple[str, tuple[str, ...], str], ...] = (
+    (
+        "core_assumption",
+        ("核心假设", "核心逻辑", "投资逻辑", "我们认为", "看好", "预计", "assume", "assumption", "expect", "thesis"),
+        "map to business driver, KPI gate, scenario probability, and falsification trigger",
+    ),
+    (
+        "earnings_forecast",
+        ("盈利预测", "业绩预测", "收入", "营收", "净利润", "归母", "eps", "revenue", "net profit", "profit forecast"),
+        "compare with TradingAgents earnings model, Tushare financials, and forward forecast scaffold",
+    ),
+    (
+        "valuation_method",
+        ("估值", "pe", "pb", "dcf", "sotp", "ev/ebitda", "目标市值", "valuation"),
+        "compare with TradingAgents valuation bridge, PE/PB decomposition, and downside support",
+    ),
+    (
+        "rating_target_change",
+        ("评级", "目标价", "买入", "增持", "上调", "下调", "维持", "target price", "rating", "buy", "outperform"),
+        "challenge rating and target-price math before it affects rating or sizing",
+    ),
+    (
+        "key_chart_number",
+        ("图表", "表", "figure", "chart", "数据", "kpi", "同比", "环比", "%", "pct"),
+        "promote only if the number is useful for a KPI gate, forecast input, or verification calendar",
+    ),
+)
+
+
+def _report_structure_model_check(category: str) -> str:
+    return {
+        "core_assumption": "Compare against official filings, Tushare financials, industry KPI gates, and price-volume evidence; record contradiction instead of averaging.",
+        "earnings_forecast": "Reconcile revenue/profit/EPS numbers with TradingAgents earnings model and Tushare statements before using in valuation.",
+        "valuation_method": "Rebuild PE/PB/DCF/SOTP math in our valuation bridge; test downside and implied assumptions.",
+        "rating_target_change": "Treat as sell-side opinion; use only after target-price math, catalyst clock, and crowding risk are challenged.",
+        "key_chart_number": "Use as a source candidate for Key Facts Ledger only after cross-checking source/date/unit and objective data.",
+        "model_conflict_check": "Explicitly list whether the report is above/below our forecast, valuation, KPI, rating, or timing assumptions.",
+    }.get(category, "Cross-check against TradingAgents model before use.")
+
+
+def _report_lines_for_structure(text: str) -> list[str]:
+    cleaned = _strip_zsxq_metadata(text)
+    raw_lines = re.split(r"[\n\r。；;]+", cleaned)
+    lines: list[str] = []
+    for raw in raw_lines:
+        line = re.sub(r"\s+", " ", raw).strip(" -:：|")
+        if len(line) < 12:
+            continue
+        if line not in lines:
+            lines.append(line)
+        if len(lines) >= 160:
+            break
+    return lines
+
+
+def _line_matches_any(line: str, keywords: tuple[str, ...]) -> bool:
+    lower = line.lower()
+    return any(keyword.lower() in lower for keyword in keywords)
+
+
+def _extract_report_structures(report: KpReport) -> list[dict[str, str]]:
+    text = _report_research_excerpt(report, max_chars=9000)
+    lines = _report_lines_for_structure(text)
+    structures: list[dict[str, str]] = []
+    seen: set[tuple[str, str]] = set()
+
+    for category, keywords, default_check in REPORT_STRUCTURE_CATEGORIES:
+        matched: list[str] = []
+        for line in lines:
+            if not _line_matches_any(line, keywords):
+                continue
+            if category in {"earnings_forecast", "valuation_method", "rating_target_change", "key_chart_number"} and not _line_has_numeric_or_rating(line):
+                continue
+            matched.append(line)
+            if len(matched) >= 2:
+                break
+        for line in matched:
+            evidence = _compact_text(line, 240)
+            key = (category, evidence.lower())
+            if key in seen:
+                continue
+            seen.add(key)
+            structures.append(
+                {
+                    "category": category,
+                    "extracted_value": evidence,
+                    "evidence": evidence,
+                    "model_check": default_check,
+                    "status": "pdf_text_available" if report.extracted_text_path else "metadata_only",
+                }
+            )
+
+    metrics = _extract_key_metrics(text, limit=6)
+    for metric in metrics:
+        evidence = _compact_text(metric, 220)
+        key = ("key_chart_number", evidence.lower())
+        if key in seen:
+            continue
+        seen.add(key)
+        structures.append(
+            {
+                "category": "key_chart_number",
+                "extracted_value": evidence,
+                "evidence": evidence,
+                "model_check": _report_structure_model_check("key_chart_number"),
+                "status": "pdf_text_available" if report.extracted_text_path else "metadata_only",
+            }
+        )
+        if sum(1 for row in structures if row["category"] == "key_chart_number") >= 4:
+            break
+
+    if structures:
+        conflict_basis = "; ".join(
+            row["extracted_value"]
+            for row in structures
+            if row["category"] in {"earnings_forecast", "valuation_method", "rating_target_change"}
+        )
+        if not conflict_basis:
+            conflict_basis = structures[0]["extracted_value"]
+        structures.append(
+            {
+                "category": "model_conflict_check",
+                "extracted_value": _compact_text(conflict_basis, 240),
+                "evidence": _compact_text(conflict_basis, 240),
+                "model_check": _report_structure_model_check("model_conflict_check"),
+                "status": "needs_tradingagents_model_comparison",
+            }
+        )
+    return structures[:12]
+
+
+def _line_has_numeric_or_rating(line: str) -> bool:
+    return bool(
+        re.search(r"\d+(?:\.\d+)?\s*(?:%|pct|x|倍|元|亿元|亿|万|bp|bps)?", line, re.I)
+        or re.search(r"(买入|增持|中性|卖出|上调|下调|维持|buy|outperform|neutral|sell|target)", line, re.I)
+    )
 
 
 def _insert_json(conn: sqlite3.Connection, sql: str, params: tuple[object, ...]) -> None:
@@ -5207,6 +5379,14 @@ def preprocess_knowledge_planet_window(
     conn.execute(
         """
         DELETE FROM kp_report_assumptions
+        WHERE substr(COALESCE(NULLIF(published_at, ''), ?), 1, 10) >= ?
+          AND substr(COALESCE(NULLIF(published_at, ''), ?), 1, 10) <= ?
+        """,
+        (end_date, start_date, end_date, end_date),
+    )
+    conn.execute(
+        """
+        DELETE FROM kp_report_structures
         WHERE substr(COALESCE(NULLIF(published_at, ''), ?), 1, 10) >= ?
           AND substr(COALESCE(NULLIF(published_at, ''), ?), 1, 10) <= ?
         """,
@@ -5506,6 +5686,34 @@ def preprocess_knowledge_planet_window(
                 now_text,
             ),
         )
+        for idx, structure in enumerate(_extract_report_structures(report), start=1):
+            structure_id = f"report:{report.row_id}:structure:{idx}:{structure['category']}"
+            _insert_json(
+                conn,
+                """
+                INSERT OR REPLACE INTO kp_report_structures (
+                    structure_id, report_id, published_at, title, broker, category,
+                    extracted_value, evidence, model_check, linked_tickers_json,
+                    linked_companies_json, linked_themes_json, status, updated_at
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    structure_id,
+                    report.row_id,
+                    report.published_at,
+                    title,
+                    report.broker,
+                    structure["category"],
+                    structure["extracted_value"],
+                    structure["evidence"],
+                    structure["model_check"],
+                    json.dumps(list(report.tickers), ensure_ascii=False),
+                    json.dumps(list(report.companies), ensure_ascii=False),
+                    json.dumps(list(report.themes), ensure_ascii=False),
+                    structure["status"],
+                    now_text,
+                ),
+            )
         linked_names = [
             *list(report.tickers),
             *list(report.companies),
@@ -5661,6 +5869,19 @@ def _preprocess_snapshot(
         ("title", "key_assumption", "linked_tickers_json", "linked_companies_json", "linked_themes_json"),
         terms or [],
     )
+    structure_filter, structure_params = _like_filter_for_fields(
+        (
+            "title",
+            "category",
+            "extracted_value",
+            "evidence",
+            "model_check",
+            "linked_tickers_json",
+            "linked_companies_json",
+            "linked_themes_json",
+        ),
+        terms or [],
+    )
     try:
         snapshot["events"] = conn.execute(
             f"""
@@ -5721,6 +5942,29 @@ def _preprocess_snapshot(
         ).fetchall()
     except sqlite3.OperationalError:
         snapshot["assumptions"] = []
+    try:
+        snapshot["structures"] = conn.execute(
+            f"""
+            SELECT *
+            FROM kp_report_structures
+            WHERE substr(COALESCE(NULLIF(published_at, ''), ?), 1, 10) >= ?
+              AND substr(COALESCE(NULLIF(published_at, ''), ?), 1, 10) <= ?
+              {structure_filter}
+            ORDER BY published_at DESC, report_id DESC,
+                     CASE category
+                       WHEN 'model_conflict_check' THEN 0
+                       WHEN 'earnings_forecast' THEN 1
+                       WHEN 'valuation_method' THEN 2
+                       WHEN 'rating_target_change' THEN 3
+                       WHEN 'core_assumption' THEN 4
+                       ELSE 5
+                     END
+            LIMIT {int(limit)}
+            """,
+            [window_end, start_date, window_end, window_end, *structure_params],
+        ).fetchall()
+    except sqlite3.OperationalError:
+        snapshot["structures"] = []
     try:
         snapshot["quality"] = conn.execute(
             """
@@ -5812,6 +6056,116 @@ def _row_get(row: sqlite3.Row, field: str, default: str = "") -> str:
     return str(value or default)
 
 
+def _kp_decision_role(source_type: str, text: str = "") -> str:
+    lowered = f"{source_type}\n{text}".lower()
+    if source_type in {"industry_weekly_data", "industry_data_snippet"}:
+        return "KPI/forecast proxy"
+    if source_type in {"channel_check", "broker_survey_data", "company_research_feedback", "expert_call"}:
+        return "probability/verification proxy"
+    if source_type in SELL_SIDE_TYPES or "target" in lowered:
+        return "narrative challenge"
+    return "background/reject unless verified"
+
+
+def _build_kp_evidence_ledger(
+    *,
+    items: list[KpItem],
+    preprocessed_snapshot: dict[str, list[sqlite3.Row]],
+    max_rows: int = 8,
+) -> list[KnowledgePlanetEvidence]:
+    rows: list[KnowledgePlanetEvidence] = []
+    seen: set[str] = set()
+
+    for row in preprocessed_snapshot.get("events", []):
+        source_type = str(row["source_type"] or "")
+        if source_type not in INFORMATION_RICH_TYPES and source_type not in SELL_SIDE_TYPES:
+            continue
+        evidence = _compact_text(str(row["summary"] or row["title"] or ""), 150)
+        key = f"event:{source_type}:{evidence.lower()}"
+        if not evidence or key in seen:
+            continue
+        seen.add(key)
+        rows.append(
+            KnowledgePlanetEvidence(
+                evidence_id=f"KPE{len(rows) + 1:02d}",
+                published_at=str(row["published_at"] or "")[:16],
+                source="preprocessed_event",
+                source_type=source_type,
+                credibility=str(row["evidence_grade"] or infer_credibility(source_type)),
+                decision_role=_kp_decision_role(source_type, evidence),
+                evidence=evidence,
+                verification=_compact_text(
+                    _row_get(row, "objective_anchor", row["verification"]),
+                    120,
+                ),
+            )
+        )
+        if len(rows) >= max_rows:
+            return rows
+
+    for item in items:
+        text = f"{item.title}\n{item.text}"
+        source_type = infer_private_source_type(text, item.source_type)
+        if source_type not in INFORMATION_RICH_TYPES and source_type not in SELL_SIDE_TYPES:
+            continue
+        evidence = _compact_text(item.summary or item.text or item.title, 150)
+        key = f"item:{item.row_id}:{evidence.lower()}"
+        if not evidence or key in seen:
+            continue
+        seen.add(key)
+        rows.append(
+            KnowledgePlanetEvidence(
+                evidence_id=f"KPE{len(rows) + 1:02d}",
+                published_at=item.published_at[:16],
+                source="stream_item",
+                source_type=source_type,
+                credibility=infer_credibility(source_type),
+                decision_role=_kp_decision_role(source_type, evidence),
+                evidence=evidence,
+                verification="cross-check with filings/Tushare/price-volume/announcements before hard use",
+            )
+        )
+        if len(rows) >= max_rows:
+            break
+
+    return rows
+
+
+HOG_KPI_EVIDENCE_TERMS: tuple[tuple[str, tuple[str, ...]], ...] = (
+    ("hog ASP / live-hog price", ("hog price", "live hog", "asp", "\u732a\u4ef7", "\u751f\u732a")),
+    ("piglet price", ("piglet", "\u4ed4\u732a")),
+    ("sow inventory / sow price", ("sow", "breeding sow", "\u6bcd\u732a", "\u80fd\u7e41\u6bcd\u732a")),
+    ("complete breeding cost", ("complete cost", "breeding cost", "\u5b8c\u5168\u6210\u672c", "\u517b\u6b96\u6210\u672c")),
+    ("output / slaughter volume", ("slaughter", "output", "\u51fa\u680f", "\u5c60\u5bb0")),
+    ("feed cost", ("feed", "corn", "soymeal", "\u9972\u6599", "\u7389\u7c73", "\u8c46\u7c95")),
+    ("frozen-pork inventory", ("frozen", "inventory", "\u51bb\u54c1\u5e93\u5b58", "\u5e93\u5b58")),
+)
+
+
+def _hog_kpi_evidence_lines(evidence_rows: list[KnowledgePlanetEvidence]) -> list[str]:
+    lines = [
+        "",
+        "### Hog KPI Extraction",
+        "| core_variable | status | evidence_ids | clue |",
+        "| --- | --- | --- | --- |",
+    ]
+    for variable, terms in HOG_KPI_EVIDENCE_TERMS:
+        matches = [
+            row
+            for row in evidence_rows
+            if any(_term_in_text(term, row.evidence) for term in terms)
+        ]
+        if matches:
+            ids = ", ".join(row.evidence_id for row in matches[:3])
+            clue = _compact_text(matches[0].evidence, 130)
+            lines.append(f"| {variable} | private_proxy | {ids} | {_md_cell(clue)} |")
+        else:
+            lines.append(
+                f"| {variable} | missing | - | No Knowledge Planet clue found in matched evidence. |"
+            )
+    return lines
+
+
 def _stock_fusion_pack_lines(
     *,
     ticker: str,
@@ -5823,6 +6177,7 @@ def _stock_fusion_pack_lines(
 ) -> list[str]:
     events = list(preprocessed_snapshot.get("events", []))
     assumptions = list(preprocessed_snapshot.get("assumptions", []))
+    structures = list(preprocessed_snapshot.get("structures", []))
     opportunities = list(preprocessed_snapshot.get("opportunities", []))
     quality_rows = list(preprocessed_snapshot.get("quality", []))
     quality = {str(row["quality_status"]): int(row["n"]) for row in quality_rows}
@@ -5870,6 +6225,31 @@ def _stock_fusion_pack_lines(
             + ", ".join(f"{key}={value}" for key, value in increment_mix.most_common(6))
         )
 
+    evidence_rows = _build_kp_evidence_ledger(
+        items=items,
+        preprocessed_snapshot=preprocessed_snapshot,
+    )
+    lines.extend(["", "### Private / Proxy Evidence Ledger"])
+    if evidence_rows:
+        lines.extend(
+            [
+                "| evidence_id | date | source | type | credibility | decision_role | evidence | verification |",
+                "| --- | --- | --- | --- | --- | --- | --- | --- |",
+            ]
+        )
+        for row in evidence_rows:
+            lines.append(
+                f"| {row.evidence_id} | {_md_cell(row.published_at)} | {_md_cell(row.source)} | "
+                f"{_md_cell(row.source_type)} | {_md_cell(row.credibility)} | "
+                f"{_md_cell(row.decision_role)} | {_md_cell(row.evidence)} | "
+                f"{_md_cell(row.verification)} |"
+            )
+    else:
+        lines.append("- No company-specific high-information private/proxy evidence survived recall filtering.")
+
+    if is_hog_breeding_text(ticker, *primary_terms, *expanded_terms):
+        lines.extend(_hog_kpi_evidence_lines(evidence_rows))
+
     lines.extend(["", "### Hard / Proxy Clues To Fuse"])
     if hard_events:
         lines.extend(["| date | layer | type | evidence | clue | objective anchor |", "| --- | --- | --- | --- | --- | --- |"])
@@ -5906,12 +6286,30 @@ def _stock_fusion_pack_lines(
     else:
         lines.append("- No matched PDF assumption was found; do not infer sell-side research support from unrelated report lists.")
 
+    lines.extend(["", "### PDF Report Structured Thesis Map"])
+    if structures:
+        lines.extend(
+            [
+                "| date | category | extracted value | model conflict / use check |",
+                "| --- | --- | --- | --- |",
+            ]
+        )
+        for row in structures[:10]:
+            lines.append(
+                f"| {str(row['published_at'])[:10]} | {_md_cell(row['category'])} | "
+                f"{_md_cell(_compact_text(row['extracted_value'], 150))} | "
+                f"{_md_cell(_compact_text(row['model_check'], 130))} |"
+            )
+    else:
+        lines.append("- No structured PDF thesis map was extracted. Treat matched PDFs as weak title/metadata clues until text extraction improves.")
+
     lines.extend(
         [
             "",
             "### Fusion Instructions For Agents",
             "- Use Knowledge Planet as an alternative-intelligence prior, then reconcile it with filings, Tushare financials, peer data, price/volume behavior, and official announcements.",
             "- Treat industry weekly data, channel checks, broker survey data, and company research feedback as thesis-grade private/proxy evidence when source type and content quality are high. These clues may change the bull/base/bear probabilities, but they must be mapped into KPI, forecast, valuation, catalyst, and falsification fields.",
+            "- Use `PDF Report Structured Thesis Map` as a sell-side hypothesis ledger: compare earnings forecasts, valuation methods, target/rating changes, and key chart numbers with the TradingAgents model before changing the PM conclusion.",
             "- Promote a clue into the main thesis only when it has a clear path: information -> business driver -> earnings/cash-flow or valuation assumption -> catalyst clock -> falsification signal.",
             "- For every high-information clue, downstream agents must assign one decision role: probability adjustment, valuation input, catalyst/verification item, sizing/timing adjustment, or rejected/noisy clue. Do not leave company-specific or industry-KPI-like clues as generic background.",
             "- If a clue is not used, state the exact rejection reason: stale, promotional, not company-specific / not ticker-specific, contradicted by filings/Tushare/price-volume data, already priced, or missing a product-to-profit bridge.",
@@ -6130,6 +6528,11 @@ def get_knowledge_planet_context(
 
     lines.extend(
         [
+            "## PM Knowledge Planet Clue Verdict",
+            "- PM report must include one concise verdict: useful private/proxy edge, weak/noisy background, or no relevant clue.",
+            "- If useful, cite KPE ids and state the exact portfolio role: probability change, valuation input, catalyst/verification item, sizing/timing input, or rejected clue.",
+            "- Do not promote any KPE item into a hard fact unless it is cross-checked by filings, Tushare data, official announcements, or market price/volume evidence.",
+            "",
             "## Required Agent Treatment",
             "- Use this context to discover what market participants may be trading and what sell-side frameworks are using.",
             "- Separate hard-to-publicly-verify but information-rich data from rumor or pure promotion.",

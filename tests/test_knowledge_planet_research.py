@@ -223,6 +223,160 @@ def test_single_stock_pdf_recall_filters_sector_only_reports(tmp_path):
     ]
 
 
+def test_single_stock_stream_recall_filters_sector_only_items(tmp_path):
+    db_path = tmp_path / "kp.sqlite"
+    _make_db(db_path)
+    conn = sqlite3.connect(db_path)
+    conn.row_factory = sqlite3.Row
+    _insert_item(
+        conn,
+        "Eastroc Beverage 605499.SH channel note",
+        "Company-specific distributor feedback shows energy drink sell-through improved.",
+        source_type="channel_check",
+        ticker="605499.SH",
+    )
+    _insert_item(
+        conn,
+        "General beverage weekly",
+        "Beverage sector inventory and promotions are being discussed, without target company detail.",
+        source_type="industry_weekly_data",
+        ticker="",
+    )
+    conn.commit()
+
+    rows = kp._query_items(
+        conn,
+        terms=["Eastroc Beverage", "605499.SH", "beverage"],
+        primary_terms=["Eastroc Beverage", "605499.SH"],
+        start_date="2026-06-18",
+        end_date="2026-06-20",
+        limit=10,
+    )
+    conn.close()
+
+    assert [row.title for row in rows] == [
+        "Eastroc Beverage 605499.SH channel note"
+    ]
+
+
+def test_single_stock_context_includes_private_proxy_evidence_ledger(tmp_path, monkeypatch):
+    db_path = tmp_path / "kp.sqlite"
+    _make_db(db_path)
+    conn = sqlite3.connect(db_path)
+    conn.row_factory = sqlite3.Row
+    _insert_item(
+        conn,
+        "Eastroc Beverage 605499.SH channel note",
+        "Company-specific channel check says sell-through improved and inventory was lower.",
+        source_type="channel_check",
+        ticker="605499.SH",
+    )
+    conn.commit()
+    conn.close()
+
+    monkeypatch.setattr(kp, "DEFAULT_KP_DB", db_path)
+    monkeypatch.setattr(kp, "_fetch_stock_basic", None)
+
+    context = kp.get_knowledge_planet_context("605499.SH", "2026-06-19")
+
+    assert "### Private / Proxy Evidence Ledger" in context
+    assert "KPE01" in context
+    assert "probability/verification proxy" in context
+    assert "## PM Knowledge Planet Clue Verdict" in context
+
+
+def test_hog_context_extracts_private_proxy_kpis(tmp_path, monkeypatch):
+    db_path = tmp_path / "kp.sqlite"
+    _make_db(db_path)
+    conn = sqlite3.connect(db_path)
+    conn.row_factory = sqlite3.Row
+    _insert_item(
+        conn,
+        "hog breeder 002714.SZ industry weekly",
+        "Hog price improved, piglet price rose, sow inventory declined, complete cost was lower.",
+        source_type="industry_weekly_data",
+        ticker="002714.SZ",
+    )
+    conn.commit()
+    conn.close()
+
+    monkeypatch.setattr(kp, "DEFAULT_KP_DB", db_path)
+    monkeypatch.setattr(kp, "_fetch_stock_basic", None)
+    monkeypatch.setattr(kp, "is_hog_breeding_text", lambda *_args: True)
+
+    context = kp.get_knowledge_planet_context("hog breeder 002714.SZ", "2026-06-19")
+
+    assert "### Hog KPI Extraction" in context
+    assert "| hog ASP / live-hog price | private_proxy |" in context
+    assert "| piglet price | private_proxy |" in context
+    assert "| sow inventory / sow price | private_proxy |" in context
+    assert "| complete breeding cost | private_proxy |" in context
+
+
+def test_preprocess_extracts_pdf_report_structures(tmp_path, monkeypatch):
+    db_path = tmp_path / "kp.sqlite"
+    _make_db(db_path)
+    text_path = tmp_path / "catl_report.txt"
+    text_path.write_text(
+        "\n".join(
+            [
+                "Core assumption: battery orders recover and utilization rises.",
+                "Revenue forecast: 2026 revenue 120 billion yuan and net profit 15 billion yuan.",
+                "Valuation: apply 25x PE and target price 120 yuan.",
+                "Rating: upgrade to Buy from Neutral.",
+                "Figure 3: utilization reaches 85% and gross margin improves 3pct.",
+            ]
+        ),
+        encoding="utf-8",
+    )
+    conn = sqlite3.connect(db_path)
+    conn.row_factory = sqlite3.Row
+    _insert_report(conn)
+    conn.execute(
+        """
+        UPDATE kp_reports
+        SET title = ?, summary = ?, extracted_text_path = ?
+        WHERE id = 1
+        """,
+        (
+            "CATL 300750.SZ earnings forecast and target price",
+            "CATL revenue forecast valuation target price rating",
+            str(text_path),
+        ),
+    )
+    conn.commit()
+    conn.close()
+
+    monkeypatch.setattr(kp, "DEFAULT_KP_DB", db_path)
+    monkeypatch.setattr(kp, "_fetch_stock_basic", None)
+
+    stats = kp.preprocess_knowledge_planet_window("2026-06-19", 6)
+
+    conn = sqlite3.connect(db_path)
+    conn.row_factory = sqlite3.Row
+    rows = conn.execute(
+        "SELECT category, extracted_value, model_check FROM kp_report_structures ORDER BY category"
+    ).fetchall()
+    conn.close()
+    categories = {row["category"] for row in rows}
+
+    assert stats.report_assumptions == 1
+    assert "core_assumption" in categories
+    assert "earnings_forecast" in categories
+    assert "valuation_method" in categories
+    assert "rating_target_change" in categories
+    assert "key_chart_number" in categories
+    assert "model_conflict_check" in categories
+    assert any("TradingAgents earnings model" in row["model_check"] for row in rows)
+
+    context = kp.get_knowledge_planet_context("300750.SZ", "2026-06-19")
+
+    assert "### PDF Report Structured Thesis Map" in context
+    assert "earnings_forecast" in context
+    assert "valuation_method" in context
+    assert "model_conflict_check" in context
+
+
 def test_single_stock_knowledge_defaults_use_lightweight_sync():
     assert DEFAULT_CONFIG["knowledge_planet_auto_sync_context_lookback_days"] == 0
     assert DEFAULT_CONFIG["knowledge_planet_context_sync_max_pages"] == 20
@@ -246,10 +400,10 @@ def test_preprocess_cache_check_returns_before_loading_details(tmp_path, monkeyp
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """,
         (
-            "2026-06-14:2026-06-20:v2",
+            "2026-06-14:2026-06-20:v3",
             "2026-06-14",
             "2026-06-20",
-            2,
+            3,
             0,
             0,
             0,
