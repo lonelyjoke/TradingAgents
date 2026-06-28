@@ -209,6 +209,14 @@ def get_market_expectation_context(ticker: str, curr_date: str, years: int = 5) 
         "## Earnings Benchmarks Versus Implied TTM Earnings",
         _markdown_table(pd.DataFrame(comparison_rows)),
         "",
+        "## External Consensus Integration Contract",
+        "| layer | status in this module | permitted interpretation |",
+        "| --- | --- | --- |",
+        "| Current-price implied expectation | calculated | reverse market cap/valuation into earnings or sales power; this is not analyst consensus |",
+        "| Company-specific analyst consensus | not supplied by Tushare daily-basic | use only when a dated company-specific forecast set is supplied; retain broker/count/range or median |",
+        "| One broker or industry report | secondary hypothesis | compare assumptions, but never relabel it as consensus |",
+        "| TradingAgents forecast | downstream estimate | compare exact volume/price/margin/EPS/FCF variables and periods with the other layers |",
+        "",
         "## Analyst Instructions",
         "- Do not call a stock cheap or expensive from PE/PB alone. State what earnings power, sales scale, or durability the current quote appears to require.",
         "- Compare the implied TTM earnings with latest annual, simple-run-rate interim earnings, and seasonality-adjusted interim earnings before claiming an expectation gap.",
@@ -216,5 +224,6 @@ def get_market_expectation_context(ticker: str, curr_date: str, years: int = 5) 
         "- Do not forecast a full year by mechanically multiplying Q1 by four when historical seasonal shares are available; treat simple run-rate as downside/upside stress only.",
         "- If current valuation already assumes recovery, say so; if it still prices in deterioration despite improving drivers, say so.",
         "- Translate every rating into a view on mispricing: which assumption in the market quote is too optimistic or too pessimistic?",
+        "- A valid expectation gap must state variable, period, magnitude, evidence grade, and the next disclosure capable of resolving the disagreement.",
     ]
     return "\n".join(lines)

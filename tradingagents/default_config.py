@@ -130,6 +130,22 @@ DEFAULT_CONFIG = {
     # Deterministically compact long precomputed contexts before LLM prompt
     # injection. Raw contexts are still kept in state and saved reports.
     "prompt_context_compaction_enabled": True,
+    # Convert heterogeneous Markdown contexts into a typed JSON research bundle
+    # before analysts run. The quick model performs semantic extraction while
+    # deterministic validation checks grounding, periods, units, probabilities,
+    # and financial transmission. Markdown remains a display/fallback layer.
+    "structured_research_preprocess_enabled": _env_bool_or_default(
+        "STRUCTURED_RESEARCH_PREPROCESS_ENABLED",
+        True,
+    ),
+    "structured_research_llm_enabled": _env_bool_or_default(
+        "STRUCTURED_RESEARCH_LLM_ENABLED",
+        True,
+    ),
+    "structured_research_prompt_max_chars": _env_int_or_default(
+        "STRUCTURED_RESEARCH_PROMPT_MAX_CHARS",
+        42000,
+    ),
     # A-share precomputed contexts are independent IO-heavy calls. Fetch a few
     # in parallel so the CLI does not sit idle before the first analyst starts.
     "a_share_context_fetch_workers": 4,

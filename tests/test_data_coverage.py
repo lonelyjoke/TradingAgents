@@ -143,7 +143,8 @@ def test_build_data_coverage_prefers_explicit_battery_profile_over_incidental_no
     )
 
     assert "| battery / energy storage | Power-battery shipments / share | ready |" in audit
-    assert "| battery / energy storage | Capacity utilization | ready |" in audit
+    assert "| battery / energy storage | Capacity utilization | missing |" in audit
+    assert "Capacity utilization remains a model gap" in audit
     assert "| bank |" not in audit
     assert "| insurance |" not in audit
 

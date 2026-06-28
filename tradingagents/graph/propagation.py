@@ -57,6 +57,7 @@ class Propagator:
         quality_audit_context: str = "",
         thesis_question_context: str = "",
         data_coverage_context: str = "",
+        structured_research_context: Optional[Dict[str, Any]] = None,
     ) -> Dict[str, Any]:
         """Create the initial state for the agent graph."""
         return {
@@ -101,6 +102,7 @@ class Propagator:
             "quality_audit_context": quality_audit_context,
             "thesis_question_context": thesis_question_context,
             "data_coverage_context": data_coverage_context,
+            "structured_research_context": structured_research_context or {},
             "investment_debate_state": InvestDebateState(
                 {
                     "bull_history": "",

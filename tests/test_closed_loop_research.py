@@ -58,6 +58,21 @@ def test_driver_bridge_surfaces_latest_financial_levers():
     assert rows["Receivables / revenue"]["change_vs_prior_report"] == "+3.00pp"
 
 
+def test_driver_bridge_prefers_same_period_yoy_over_prior_fy():
+    derived = pd.DataFrame(
+        [
+            {"end_date": "20260331", "reported_gross_margin": 24.8},
+            {"end_date": "20251231", "reported_gross_margin": 26.3},
+            {"end_date": "20250331", "reported_gross_margin": 24.4},
+        ]
+    )
+
+    rows = {row["driver"]: row for row in _build_driver_rows(derived)}
+
+    assert rows["Gross margin"]["change_vs_prior_report"] == "+0.40pp"
+    assert rows["Gross margin"]["comparison_basis"] == "YoY: 20260331 vs 20250331"
+
+
 def test_bank_earnings_model_uses_symbol_fallback_when_basic_missing():
     assert _is_banking_stock("600036.SH", None) is True
     assert _is_banking_stock("300750.SZ", None) is False

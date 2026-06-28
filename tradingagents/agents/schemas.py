@@ -695,6 +695,24 @@ class PortfolioDecision(BaseModel):
             "disclosed' for that item and state how the gap caps SOTP confidence."
         ),
     )
+    segment_prosperity_analysis: Optional[str] = Field(
+        default=None,
+        description=(
+            "A mandatory deep segment-level prosperity analysis for multi-business "
+            "companies. Analyze every material business separately before assigning "
+            "a consolidated prosperity label. For each segment provide: revenue and "
+            "profit weight; current prosperity level (high, medium-high, neutral, "
+            "weakening, low, bottom-testing, or recovery); marginal direction; a "
+            "written demand -> supply/capacity -> price/volume -> utilization/mix -> "
+            "margin -> cash-flow causal explanation; dated supporting data across at "
+            "least three relevant dimensions; strongest counterevidence; confidence; "
+            "EPS/FCF and valuation implication; and the next verification point. "
+            "Distinguish level from direction. Aggregate to the company using revenue, "
+            "gross-profit/profit contribution, cash intensity, and capital intensity, "
+            "not a simple average. If evidence is unavailable, mark it missing and cap "
+            "confidence rather than filling the matrix with generic industry prose."
+        ),
+    )
     business_model_supply_chain_primer: Optional[str] = Field(
         default=None,
         description=(
@@ -986,6 +1004,9 @@ class PortfolioDecision(BaseModel):
             "them merely as unofficial; say how they changed bull/base/bear "
             "probabilities, what objective anchor is still needed, and whether "
             "the clue affects rating, posture, or only the verification calendar."
+            " Cite promoted clues by KPE id and show a numeric assumption old->new, "
+            "scenario probability before->after, unchanged/watch result, or rejection "
+            "reason. Do not claim a probability change without values."
         ),
     )
     material_catalysts: Optional[str] = Field(
@@ -1073,7 +1094,11 @@ class PortfolioDecision(BaseModel):
             "sheet assumptions where material. Distinguish disclosed facts, model "
             "assumptions, and scenario estimates. If exact forecasts cannot be "
             "supported, provide a driver-based model skeleton and say which inputs "
-            "must be verified before target valuation can carry high confidence."
+            "must be verified before target valuation can carry high confidence. "
+            "Use the supplied business-bucket matrix and provide three distinct "
+            "forward years (or four quarters), with segment-to-consolidated revenue, "
+            "profit/EPS, OCF/FCF reconciliation and evidence status for each decisive "
+            "assumption. Do not leave placeholder cells in the final report."
         ),
     )
     valuation_framework: Optional[str] = Field(
@@ -1300,6 +1325,9 @@ def render_pm_decision(decision: PortfolioDecision) -> str:
         decision.investment_thesis,
         f"Business Segment Breakdown: {decision.business_segment_breakdown}"
         if decision.business_segment_breakdown
+        else None,
+        f"Segment Prosperity Analysis: {decision.segment_prosperity_analysis}"
+        if decision.segment_prosperity_analysis
         else None,
         f"Business and industry verdict: {decision.business_driver_map}"
         if decision.business_driver_map

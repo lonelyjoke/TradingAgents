@@ -40,6 +40,7 @@ from tradingagents.dataflows.prompt_compaction import (
     compact_for_prompt,
     compact_state_fields,
 )
+from tradingagents.dataflows.structured_research import compact_structured_research_for_prompt
 
 
 def create_bull_researcher(llm):
@@ -87,6 +88,9 @@ def create_bull_researcher(llm):
         forecast_model_context = prompt_contexts["forecast_model_context"]
         quality_audit_context = prompt_contexts["quality_audit_context"]
         thesis_question_context = prompt_contexts["thesis_question_context"]
+        structured_research_context = compact_structured_research_for_prompt(
+            state.get("structured_research_context", {}),
+        )
         prompt_history = compact_debate_history(history, profile="research")
         prompt_current_response = compact_for_prompt(
             current_response,
@@ -131,6 +135,7 @@ Key points to focus on:
 - Relative-Strength Discipline: If relative-strength/index-linkage context is available, use it as market-validation evidence. A bull case is stronger when the stock outperforms its style index or same-industry basket for company-specific reasons; if outperformance is highly correlated with the benchmark, admit that sector beta may explain part of the move.
 - Industry-Driver Discipline: Use the industry reading pack from the filing context to identify the sector-native variables that truly decide the thesis, then connect each one to outside evidence such as policy, investor Q&A, thematic catalysts, peers, and market expectations. Do not lean on generic revenue growth when the real industry question is backlog quality, NBV, channel inventory, asset quality, utilization, or freight rate.
 - Business-Segment Valuation Discipline: Use the Business Segment Valuation Map and Segment Economics Pack to argue from business buckets, not only from consolidated PE. Separate the mature core business from emerging second curves, geography, and channel mix; explain which bucket deserves core valuation credit and which remains scenario/SOTP optionality.
+- Segment-Prosperity Discipline: Complete the segment-level prosperity logic before calling the whole company high-prosperity. For each material business, distinguish prosperity level from direction and prove the constructive case through dated demand/orders, supply/capacity/utilization, price/ASP, volume/share, margin, working-capital/cash evidence, plus the strongest counterevidence. Explain in prose how the segment evidence reaches EPS/FCF and valuation; a small high-growth second curve cannot carry the consolidated bull case by itself.
 - Growth Sustainability Discipline: If the financial-report intelligence contains Growth Sustainability & Ramp Conditions, build the bull case around the specific revenue/profit drivers that can keep compounding or ramp further. State which drivers are filing-verified, which are inferred, what conditions must hold, and what evidence would invalidate the bull case.
 - Pre-Debate Underwriting Questions: If the financial-report intelligence contains this section, use it as the agenda for the opening bull case. Start with a compact question-led table before the broader bull thesis. Preserve the upstream question IDs or short labels when available, and answer each thesis-critical question with bull evidence, bear risk acknowledged, evidence verdict, earnings/valuation impact, and next verification.
 - Relative Allocation Discipline: Explicitly answer why this stock deserves capital versus stronger same-industry peers or a better-positioned segment elsewhere in the chain; do not stop at saying the company itself is improving.
@@ -159,6 +164,7 @@ Latest world affairs news: {news_report}
 Company fundamentals report: {fundamentals_report}
 Industry-cycle scan: {industry_cycle_context}
 Company business-model primer: {company_business_model_context}
+Structured research bundle (JSON source of record): {structured_research_context}
 Industry KPI checklist: {industry_kpi_context}
 Forward forecast-model scaffold: {forecast_model_context}
 Sell-side depth and key-number audit: {quality_audit_context}

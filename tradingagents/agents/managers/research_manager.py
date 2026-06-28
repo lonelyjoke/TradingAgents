@@ -50,6 +50,7 @@ from tradingagents.dataflows.prompt_compaction import (
     compact_for_prompt,
     compact_state_fields,
 )
+from tradingagents.dataflows.structured_research import compact_structured_research_for_prompt
 
 
 def create_research_manager(llm):
@@ -99,6 +100,9 @@ def create_research_manager(llm):
         quality_audit_context = prompt_contexts["quality_audit_context"]
         thesis_question_context = prompt_contexts["thesis_question_context"]
         data_coverage_context = prompt_contexts["data_coverage_context"]
+        structured_research_context = compact_structured_research_for_prompt(
+            state.get("structured_research_context", {}),
+        )
         prompt_history = compact_debate_history(history, profile="research")
         continuity_context = (
             f"""
@@ -194,7 +198,7 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 - Keep an **Industry Cycle Verdict** explicit enough to state the current cycle stage before valuation: downturn, bottom-testing, bottom-right validation, early upcycle, mid-cycle expansion, peak/rollover, or evidence insufficient. Do not let company PE or one-quarter profit alone establish the cycle stage.
 - Keep a **Business Model / Segment Economics Verdict** explicit enough to teach how the company makes money, which segments are mature core value, which are second-curve/scenario value, what moat is actually evidenced, and which segment disclosures are still missing.
 - Keep an **Industry KPI Verdict** explicit enough to say which sector-native KPI layers are verified, partial, or missing, and whether those gaps change conviction, sizing, valuation, or the verification calendar.
-- Keep a **Forward Forecast Model Verdict** explicit enough to connect the rating to a two-to-three-year revenue, margin, net profit/EPS, and cash-flow bridge. If the bridge is missing, do not allow target-price confidence to outrun the evidence.
+- Keep a **Forward Forecast Model Verdict** with three explicit forward years (or four forward quarters), segment drivers, consolidated revenue, margin, parent profit/EPS, OCF, capex and FCF. Missing inputs must appear as `missing/not disclosed` with a research task; a one-year range is incomplete and cannot support a target or safety price.
 - Keep a **Key Number Audit Verdict** explicit enough to police decisive PE/PB/EV multiples, target price, safety price, dividend yield, margins, ASP, shipments, utilization, backlog, and contract-liability claims. Require formula, period, source, and evidence status when those numbers drive the rating.
 - Keep a **Question-Led Thesis Verdict** explicit enough to say which Thesis Question Context IDs were answered by the bull, which were successfully attacked by the bear, which remain unanswered, and how that changes rating, valuation, sizing, and next verification.
 - If official policy context is available, keep a **Policy Direction Verdict** explicit enough to distinguish industry support from company-specific monetization.
@@ -204,11 +208,16 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 - If the filing context contains **Growth Sustainability & Ramp Conditions**, keep a **Growth Sustainability Verdict** explicit enough to judge whether revenue/profit growth can continue or ramp further. Require the debate to separate verified drivers, inferred drivers, needed ramp conditions, and falsification signals before accepting any Buy/Underweight conclusion.
 - If the filing context contains **Pre-Debate Underwriting Questions**, use them as the judging agenda. Decide which side better answered the company-specific business-model, moat, growth-driver, second-curve, cash-quality, segment-valuation, and risk questions. Populate the structured `question_led_debate_audit` field with a compact issue-log table covering question, initial skepticism, bull answer, bear attack, evidence verdict, valuation/sizing impact, and next verification. Do not let the final plan ignore an unanswered pre-debate question that is central to the rating.
 - If the filing context contains a Business Segment Valuation Map or Segment Economics Pack, keep a **Business Segment Valuation Verdict** explicit enough to split mature core businesses from emerging second curves, geographies, and channels. Do not allow the debate to collapse a multi-business company into one blended PE unless the filings do not support a meaningful split.
+- Keep a **Segment Prosperity Verdict** for multi-business companies. Judge each material segment on both current prosperity level and marginal direction using dated demand, supply/capacity, price/volume/share, utilization/mix, margin, working-capital and cash evidence. Require written causal analysis, strongest counterevidence, confidence, EPS/FCF transmission, and profit-weighted company aggregation; do not let one commodity proxy or a small fashionable segment determine the whole-company verdict.
+- Enforce same-period segment ranking: compare every disclosed material segment's revenue growth and margin change before accepting `fastest-growing`, `highest-margin`, or `dominant profit pool`. A consolidated prosperity label is invalid until the segment matrix is complete or its missing links are explicitly disclosed.
 - If the filing context contains Internal Filing Quality Modules, keep a **Filing Internal Quality Verdict** explicit enough to summarize accounting reconciliation, segment economics, footnotes, cash-flow quality, capex/CIP returns, MD&A text changes, non-recurring profit quality, balance-sheet leading signals, shareholder-return authenticity, and disclosure quality. Synthesize the material points; do not mechanically repeat all ten if some are immaterial.
 - If commodity/product-price context is available, keep a **Commodity Cycle Verdict** explicit enough to say whether the product-price evidence supports or contradicts the margin/EPS/inventory part of the thesis.
 - If price-move attribution context is available, keep a **Sharp Move Attribution Verdict** explicit enough to say whether a recent move is market-led, same-metal sector-led, cross-metal residual, mapped-commodity-led, stock-specific, failed-rebound/trend continuation, or possible emotion kill. Do not call a drop mispriced until valuation/NAV support and event checks pass.
 - If relative-strength/index-linkage context is available, keep a **Relative Strength Verdict** explicit enough to decide whether the stock is stronger or weaker than its style index and same-industry basket, whether correlation/Beta suggest benchmark beta or company alpha, and how that changes timing, sizing, and thesis validation.
 - If Knowledge Planet context is available, keep a **Knowledge Planet Intelligence Verdict** explicit enough to use the Single-Stock Knowledge Fusion Pack first, separate information-rich industry data/channel checks/research feedback from sell-side promotion, and reconcile private/proxy clues with filings, Tushare data, peer evidence, price/volume behavior, and official announcements. Decide whether it upgrades the catalyst/expectation gap, only creates a watch item, or raises pump/crowding risk.
+- Use the Structured Research Bundle as the machine-readable source of record for segment identities, grounded metrics, source conflicts, and KPE financial transmission. Do not promote semantic rows marked unverified or missing-period into decisive evidence. When KPE quantification lacks a revenue base, margin, share count, cash conversion, or valid probability triplet, make the missing input an explicit research task instead of filling it narratively.
+- Read and disclose the bundle's `preprocessing_mode` and `preprocessing_notes`. If semantic preprocessing failed, use deterministic filing-row segments only as a controlled fallback and cap confidence in semantic conflict/KPE mapping. For each company-specific KPE item, preserve one explicit downstream outcome: numeric old->new, probability before->after, unchanged/watch with verification gate, or rejected with reason.
+- Reject period or per-share bridges that do not reconcile. H1 equals Q1 plus Q2 single-quarter profit and cannot reuse Q2 labels; BVPS=current price/PB, EPS=parent profit/diluted shares, and safety/target price must equal the stated EPSxPE or BVPSxPB formula with consistent units. If a required denominator is missing, require `no reliable safety price can be assigned` rather than an approximate range.
 - Do not dismiss Knowledge Planet merely because it is unofficial. If a clue is company-specific, industry-KPI-like, channel-check-like, or broker research feedback, translate it into a thesis variable: driver, expected earnings/cash-flow effect, probability shift, catalyst clock, objective anchor, and falsification signal. If the clue is ignored, state the precise reason: stale, promotional, not company-specific, contradicted by objective data, already priced, or lacking a product-to-profit bridge.
 - Treat relative strength and technical weakness as market-confirmation/timing evidence, not as a standalone proof that the thesis is false. It can reduce sizing or require staged execution; it should not override verified fundamentals without a linked fundamental explanation.
 - If shipping/freight-rate context is available, keep a **Shipping Cycle Verdict** explicit enough to separate broad proxies (BDTI/BCTI/BDI/BCI/BPI) from route-level economics (VLCC TD3C/TCE/CTFI), and explicitly test two-sided Hormuz mechanisms: reopening can reduce risk premium and improve vessel turnover, while restocking, queue normalization, and renewed cargo flows can support near-term cargo demand. Missing route-level freight is a conviction cap, not automatically bearish evidence.
@@ -243,6 +252,9 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 
 **Company Business Model Primer:**
 {company_business_model_context}
+
+**Structured Research Bundle (JSON source of record):**
+{structured_research_context}
 
 **Industry KPI Checklist:**
 {industry_kpi_context}

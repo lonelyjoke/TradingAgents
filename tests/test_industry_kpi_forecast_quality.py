@@ -246,6 +246,22 @@ def test_forecast_model_scaffold_requires_three_year_driver_bridge():
     assert "2028E" in context
     assert "net profit/EPS" in context
     assert "Valuation monotonicity" in context
+    assert "Model-Ready Evidence Ledger" in context
+    assert "Consensus And Market-Implied Expectation Gap" in context
+    assert "Assumption Change And Valuation Transmission Ledger" in context
+
+
+def test_forecast_model_uses_analysis_year_instead_of_hardcoded_horizon():
+    context = build_forecast_model_context(
+        "600036.SH",
+        "2027-02-10",
+        earnings_model_context="2026 annual report net profit 100000000000.",
+    )
+
+    assert "2027E" in context
+    assert "2028E" in context
+    assert "2029E" in context
+    assert "2026E | 2027E | 2028E" not in context
 
 
 def test_battery_forecast_maps_knowledge_planet_clues_to_model_variables():

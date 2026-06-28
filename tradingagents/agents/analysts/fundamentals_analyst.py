@@ -77,6 +77,7 @@ from tradingagents.agents.utils.agent_utils import (
 from tradingagents.dataflows.tushare_a_stock import is_a_share_symbol
 from tradingagents.dataflows.config import get_config
 from tradingagents.dataflows.prompt_compaction import compact_state_fields
+from tradingagents.dataflows.structured_research import compact_structured_research_for_prompt
 
 
 def create_fundamentals_analyst(llm):
@@ -155,6 +156,9 @@ def create_fundamentals_analyst(llm):
         quality_audit_context = prompt_contexts["quality_audit_context"]
         thesis_question_context = prompt_contexts["thesis_question_context"]
         data_coverage_context = prompt_contexts["data_coverage_context"]
+        structured_research_context = compact_structured_research_for_prompt(
+            state.get("structured_research_context", {}),
+        )
         is_a_share = is_a_share_symbol(state["company_of_interest"])
 
         tools = [
@@ -239,10 +243,12 @@ def create_fundamentals_analyst(llm):
             "Before using words such as `cycle bottom`, `周期底部`, `cycle reversal`, or `景气反转`, first cite the Industry Cycle Scan and say whether the evidence is confirmed, bottom-right validation, bottom-testing, downcycle, or insufficient. "
             "For an unfamiliar company, first explain its disclosed main businesses from the Company Business Model Primer and financial reports, then use the Business Segment Valuation Map / Segment Economics Pack to split mature core businesses, new second-curve businesses, geographies, and channels before discussing valuation. Do not apply one blended PE multiple until you have explained why split valuation is unnecessary. "
             "Use the Industry KPI Checklist as the sector-native evidence agenda: state which KPI layers are verified, partial, or missing, and do not turn a missing KPI into a hard positive or negative fact. "
-            "Use the Forward Forecast Model Scaffold to connect segment drivers to the next two to three years of revenue, margin, net profit/EPS, and cash flow. If assumptions are missing, label the forecast bridge evidence-limited instead of writing a free-floating target multiple. "
+            "Use the Forward Forecast Model Scaffold to produce three explicit forward years (or four forward quarters) connecting segment drivers to consolidated revenue, margin, net profit/EPS, OCF, capex and FCF. If assumptions are missing, put `missing/not disclosed` in the affected cell, name the required input, and label valuation confidence evidence-limited; a one-year profit range is not a completed forecast bridge. "
             "Use the Sell-Side Depth And Key-Number Audit to police decisive numbers: PE/PB/EV multiples, target price, safety price, dividend yield, margins, ASP, shipments, utilization, backlog, and contract liabilities need formula, source period, and evidence status. "
             "Use the Thesis Question Context as the memo's interrogation agenda: answer the company-specific soul questions before broad positives or negatives, and make unanswered thesis-critical questions explicit research gaps. "
-            "Use Knowledge Planet stream/PDF intelligence through the Single-Stock Knowledge Fusion Pack first: label private/proxy clues, separate industry data from promotion, map PDF assumptions into sector-native KPIs, and cross-check them against filings, Tushare financials, peers, price/volume, and official announcements before they affect valuation or rating. "
+            "Use Knowledge Planet stream/PDF intelligence through the Single-Stock Knowledge Fusion Pack first: label private/proxy clues, separate industry data from promotion, map PDF assumptions into sector-native KPIs, and cross-check them against filings, Tushare financials, peers, price/volume, and official announcements before they affect valuation or rating. Cite each used clue by KPE id and give one auditable result: numeric assumption old->new, probability triplet before->after, unchanged/watch with verification gate, or rejected with reason. "
+            "For multi-business companies, complete a segment prosperity matrix before assigning a consolidated label. Show each material segment's same-period revenue weight, growth, margin and margin change, then explain demand -> supply/capacity -> ASP/volume -> utilization/mix -> margin -> working capital/cash -> EPS/FCF. Never call a segment fastest-growing without comparing all disclosed segments for the same period. "
+            "Keep period and per-share arithmetic explicit: H1 is cumulative Q1+Q2; Q2 single-quarter and H1 thresholds need different labels. Reconcile BVPS=current price/PB, EPS=parent profit/diluted shares, and price=EPSxPE or BVPSxPB before publishing a safety/target price; otherwise withhold the range. "
             "Prioritize: Core Bet, key supporting evidence, key negative evidence, earnings bridge, market-implied expectation, expectation gap, probability/payoff, company quality, current odds, relative allocation, catalysts, falsification signals, and data gaps. "
             "If another peer looks better than the target, explain why with metrics and caveats. If the sector looks high-risk while the target looks relatively low, discuss whether this is a mispricing opportunity or a company-specific warning. "
             "Do not mechanically upgrade in bull markets or downgrade in bear markets: explain how market mood interacts with the company's valuation, quality, beta, cyclicality, balance sheet, and catalysts. "
@@ -289,6 +295,12 @@ def create_fundamentals_analyst(llm):
                 "\n\nPrecomputed company business-model primer:\n"
                 + company_business_model_context
                 if company_business_model_context
+                else ""
+            )
+            + (
+                "\n\nStructured research bundle (JSON source of record):\n"
+                + structured_research_context
+                if structured_research_context != "{}"
                 else ""
             )
             + (

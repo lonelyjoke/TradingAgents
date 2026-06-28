@@ -7,7 +7,7 @@ import json
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timedelta
-from typing import Callable, Dict, Any, Tuple, List, Optional
+from typing import Callable, Dict, Any, Tuple, List, Optional, Mapping
 
 import yfinance as yf
 
@@ -42,6 +42,7 @@ from tradingagents.dataflows.forecast_model_research import build_forecast_model
 from tradingagents.dataflows.industry_cycle_research import build_industry_cycle_context
 from tradingagents.dataflows.industry_kpi_research import build_industry_kpi_context
 from tradingagents.dataflows.quality_audit_research import build_quality_audit_context
+from tradingagents.dataflows.structured_research import build_structured_research_bundle
 from tradingagents.dataflows.thesis_question_research import build_thesis_question_context
 
 # Import the new abstract tool methods from agent_utils
@@ -692,6 +693,29 @@ class TradingAgentsGraph:
             ),
         )
 
+    def _build_structured_research_context(
+        self,
+        company_name: str,
+        trade_date: str,
+        contexts: Mapping[str, str],
+    ) -> dict[str, Any]:
+        """Build the typed evidence/segment/KPE bundle consumed by agents."""
+        if not self.config.get("structured_research_preprocess_enabled", True):
+            return {}
+        return build_structured_research_bundle(
+            company_name,
+            str(trade_date),
+            contexts=contexts,
+            llm=self.quick_thinking_llm,
+            enable_llm=bool(
+                self.config.get("structured_research_llm_enabled", True)
+            ),
+            max_prompt_chars=int(
+                self.config.get("structured_research_prompt_max_chars", 42000)
+                or 42000
+            ),
+        )
+
     def create_initial_state_with_context(
         self,
         company_name,
@@ -762,6 +786,10 @@ class TradingAgentsGraph:
             supply_chain_comparison_context=supply_chain_comparison_context,
             commodity_context=commodity_context,
             investor_interaction_context=investor_interaction_context,
+            industry_cycle_context=industry_cycle_context,
+            earnings_model_context=earnings_model_context,
+            policy_planning_context=policy_planning_context,
+            knowledge_planet_context=knowledge_planet_context,
         )
         industry_kpi_context = build_industry_kpi_context(
             company_name,
@@ -778,6 +806,23 @@ class TradingAgentsGraph:
             web_fact_check_context=web_fact_check_context,
             knowledge_planet_context=knowledge_planet_context,
         )
+        structured_research_context = self._build_structured_research_context(
+            company_name,
+            str(trade_date),
+            {
+                "filing_intelligence": filing_intelligence_context,
+                "earnings_model": earnings_model_context,
+                "company_business_model": company_business_model_context,
+                "industry_cycle": industry_cycle_context,
+                "industry_kpi": industry_kpi_context,
+                "market_expectation": market_expectation_context,
+                "peer_comparison": peer_comparison_context,
+                "commodity": commodity_context,
+                "policy": policy_planning_context,
+                "investor_interaction": investor_interaction_context,
+                "knowledge_planet": knowledge_planet_context,
+            },
+        )
         forecast_model_context = build_forecast_model_context(
             company_name,
             str(trade_date),
@@ -789,6 +834,8 @@ class TradingAgentsGraph:
             industry_kpi_context=industry_kpi_context,
             metals_mining_context=metals_mining_context,
             knowledge_planet_context=knowledge_planet_context,
+            market_expectation_context=market_expectation_context,
+            structured_research_context=structured_research_context,
         )
         quality_audit_context = build_quality_audit_context(
             company_name,
@@ -917,6 +964,7 @@ class TradingAgentsGraph:
             quality_audit_context=quality_audit_context,
             thesis_question_context=thesis_question_context,
             data_coverage_context=data_coverage_context,
+            structured_research_context=structured_research_context,
         )
 
     def _run_graph(self, company_name, trade_date):
@@ -979,6 +1027,10 @@ class TradingAgentsGraph:
             supply_chain_comparison_context=supply_chain_comparison_context,
             commodity_context=commodity_context,
             investor_interaction_context=investor_interaction_context,
+            industry_cycle_context=industry_cycle_context,
+            earnings_model_context=earnings_model_context,
+            policy_planning_context=policy_planning_context,
+            knowledge_planet_context=knowledge_planet_context,
         )
         industry_kpi_context = build_industry_kpi_context(
             company_name,
@@ -995,6 +1047,23 @@ class TradingAgentsGraph:
             web_fact_check_context=web_fact_check_context,
             knowledge_planet_context=knowledge_planet_context,
         )
+        structured_research_context = self._build_structured_research_context(
+            company_name,
+            str(trade_date),
+            {
+                "filing_intelligence": filing_intelligence_context,
+                "earnings_model": earnings_model_context,
+                "company_business_model": company_business_model_context,
+                "industry_cycle": industry_cycle_context,
+                "industry_kpi": industry_kpi_context,
+                "market_expectation": market_expectation_context,
+                "peer_comparison": peer_comparison_context,
+                "commodity": commodity_context,
+                "policy": policy_planning_context,
+                "investor_interaction": investor_interaction_context,
+                "knowledge_planet": knowledge_planet_context,
+            },
+        )
         forecast_model_context = build_forecast_model_context(
             company_name,
             str(trade_date),
@@ -1006,6 +1075,8 @@ class TradingAgentsGraph:
             industry_kpi_context=industry_kpi_context,
             metals_mining_context=metals_mining_context,
             knowledge_planet_context=knowledge_planet_context,
+            market_expectation_context=market_expectation_context,
+            structured_research_context=structured_research_context,
         )
         quality_audit_context = build_quality_audit_context(
             company_name,
@@ -1134,6 +1205,7 @@ class TradingAgentsGraph:
             quality_audit_context=quality_audit_context,
             thesis_question_context=thesis_question_context,
             data_coverage_context=data_coverage_context,
+            structured_research_context=structured_research_context,
         )
         args = self.propagator.get_graph_args()
 

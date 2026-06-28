@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 
+from datetime import datetime
 import re
-from typing import Mapping
+from typing import Any, Mapping
 
 from .industry_identity import (
     consumer_staples_subsector_hints,
@@ -13,6 +14,7 @@ from .industry_identity import (
     is_lithium_battery_text,
     is_telecom_operator_text,
 )
+from .research_evidence import extract_evidence_records, infer_model_variable
 
 
 def _compact_lines(text: str, patterns: tuple[str, ...], *, limit: int = 8) -> list[str]:
@@ -20,7 +22,7 @@ def _compact_lines(text: str, patterns: tuple[str, ...], *, limit: int = 8) -> l
     rows: list[str] = []
     for raw in (text or "").splitlines():
         line = re.sub(r"\s+", " ", raw.strip())
-        if not line or line.startswith("| ---"):
+        if not line or line.startswith("#") or line.startswith("| ---"):
             continue
         if any(pattern.search(line) for pattern in compiled):
             if len(line) > 280:
@@ -46,13 +48,32 @@ def _battery_forecast_drivers() -> list[tuple[str, str, str]]:
     ]
 
 
-def _knowledge_planet_assumption_rows(text: str, *, limit: int = 8) -> list[tuple[str, str, str, str]]:
+_MODEL_VARIABLE_LABELS = {
+    "segment_volume": "segment volume / utilization / backlog",
+    "market_share": "market share / segment volume",
+    "asp_or_price": "realized ASP / price pass-through",
+    "unit_cost": "unit cost / gross margin",
+    "utilization_or_backlog": "segment volume / utilization / backlog",
+    "segment_margin": "segment gross margin",
+    "revenue": "segment revenue",
+    "operating_expense": "operating expense ratio",
+    "profit_or_eps": "net profit / EPS",
+    "cash_conversion": "OCF / FCF conversion",
+    "capex_or_roic": "capex / ROIC / scenario probability",
+    "balance_sheet": "working capital / balance-sheet risk",
+    "valuation": "valuation multiple / risk premium",
+    "scenario_probability": "scenario probability",
+    "unmapped": "working hypothesis / verification calendar",
+}
+
+
+def _knowledge_planet_assumption_rows(text: str, *, limit: int = 8) -> list[tuple[str, str, str, str, str]]:
     """Translate KPE ledger rows into model variables for downstream LLM judgment.
 
     This deliberately stops short of changing a forecast.  It makes the model
     state the affected variable, allowed use, and public verification gate.
     """
-    rows: list[tuple[str, str, str, str]] = []
+    rows: list[tuple[str, str, str, str, str]] = []
     for raw in (text or "").splitlines():
         line = raw.strip()
         if not re.match(r"^\|\s*KPE\d+\s*\|", line, re.I):
@@ -63,30 +84,81 @@ def _knowledge_planet_assumption_rows(text: str, *, limit: int = 8) -> list[tupl
         evidence_id = cells[0]
         evidence = cells[6]
         verification = cells[7]
-        lowered = evidence.lower()
-        if any(term in lowered for term in ("订单", "排产", "出货", "销量", "shipment", "order")):
-            variable = "segment volume / utilization / backlog"
-        elif any(term in lowered for term in ("asp", "价格", "price", "折扣")):
-            variable = "realized ASP / price pass-through"
-        elif any(term in lowered for term in ("锂价", "碳酸锂", "原材料", "cost", "lithium")):
-            variable = "unit cost / gross margin"
-        elif any(term in lowered for term in ("储能", "钠电", "aidc", "机器人", "storage", "sodium")):
-            variable = "new-business revenue / capex / scenario probability"
-        elif any(term in lowered for term in ("关税", "制裁", "地缘", "tariff", "sanction")):
-            variable = "overseas revenue / valuation risk premium"
-        else:
-            variable = "working hypothesis / verification calendar"
+        raw_variable = cells[8] if len(cells) >= 9 and cells[8] else infer_model_variable(evidence)
+        variable = _MODEL_VARIABLE_LABELS.get(raw_variable, raw_variable)
+        outcome = (
+            cells[9]
+            if len(cells) >= 10 and cells[9]
+            else "numeric delta / probability before-after / rejection reason"
+        )
         rows.append(
             (
                 evidence_id,
                 variable,
                 "private/proxy prior; quantify delta or reject, never use as a hard fact",
                 verification or "public filing, announcement, market or operating KPI cross-check",
+                outcome,
             )
         )
         if len(rows) >= limit:
             break
     return rows
+
+
+def _forecast_years(curr_date: str) -> tuple[str, str, str]:
+    try:
+        year = datetime.fromisoformat(str(curr_date)[:10]).year
+    except ValueError:
+        year = datetime.now().year
+    return tuple(f"{year + offset}E" for offset in range(3))  # type: ignore[return-value]
+
+
+def _expectation_excerpt(text: str, patterns: tuple[str, ...]) -> str:
+    rows = _compact_lines(text, patterns, limit=2)
+    return " / ".join(rows) if rows else "missing; do not invent"
+
+
+def _sell_side_expectation_excerpt(text: str) -> str:
+    categories = ("earnings_forecast", "valuation_method", "rating_target_change")
+    for raw in (text or "").splitlines():
+        line = re.sub(r"\s+", " ", raw.strip())
+        if not line.startswith("|") or not any(f"| {category} |" in line for category in categories):
+            continue
+        return line.replace("|", "/")[:520]
+    return "missing; no company-specific external forecast supplied"
+
+
+def _structured_kpe_quantification_section(
+    bundle: Mapping[str, Any] | None,
+) -> list[str]:
+    impacts = list((bundle or {}).get("kpe_impacts", []))
+    if not impacts:
+        return []
+    lines = [
+        "",
+        "## Structured KPE Physical And Financial Quantification",
+        "| evidence_id | segment | variable | assumption delta | revenue delta CNY mn | parent-profit delta CNY mn | EPS delta | FCF delta CNY mn | probability treatment | status | audited outcome | missing inputs |",
+        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
+    ]
+    for impact in impacts[:12]:
+        probability = (
+            f"bull {impact.get('bull_probability_before_pct')}->{impact.get('bull_probability_after_pct')}; "
+            f"base {impact.get('base_probability_before_pct')}->{impact.get('base_probability_after_pct')}; "
+            f"bear {impact.get('bear_probability_before_pct')}->{impact.get('bear_probability_after_pct')}"
+        )
+        missing = ", ".join(str(item) for item in impact.get("missing_inputs", [])) or "none"
+        lines.append(
+            f"| {impact.get('evidence_id', '')} | {impact.get('segment', '')} | "
+            f"{impact.get('variable', '')} | {impact.get('assumption_delta')} {impact.get('unit', '')} | "
+            f"{impact.get('revenue_delta_cny_mn')} | {impact.get('parent_profit_delta_cny_mn')} | "
+            f"{impact.get('eps_delta_cny')} | {impact.get('fcf_delta_cny_mn')} | {probability} | "
+            f"{impact.get('quantification_status', '')} | "
+            f"{str(impact.get('decision_outcome', '')).replace('|', '/')} | {missing.replace('|', '/')} |"
+        )
+    lines.append(
+        "- Only grounded and deterministically quantified rows may change a base-case forecast. Missing or unverified rows remain probability/watch inputs until the listed baselines or unit economics are supplied."
+    )
+    return lines
 
 
 def _is_battery_material_context(symbol: str, text: str) -> bool:
@@ -286,6 +358,8 @@ def build_forecast_model_context(
     metals_mining_context: str = "",
     insurance_context: str = "",
     knowledge_planet_context: str = "",
+    market_expectation_context: str = "",
+    structured_research_context: Mapping[str, Any] | None = None,
 ) -> str:
     gated_insurance_context = (
         insurance_context if _insurance_context_triggered(insurance_context) else ""
@@ -300,6 +374,7 @@ def build_forecast_model_context(
             industry_kpi_context,
             metals_mining_context,
             knowledge_planet_context,
+            market_expectation_context,
         ]
     )
     is_hog_breeder = is_hog_breeding_text(symbol, combined)
@@ -397,24 +472,117 @@ def build_forecast_model_context(
             "- Missing shipment, ASP, utilization, or segment-margin evidence must remain an explicit model gap and cap conviction; narrative strength cannot fill a numeric cell.",
         ]
 
-    kp_assumption_rows = (
-        _knowledge_planet_assumption_rows(knowledge_planet_context)
-        if is_battery_company
-        else []
-    )
+    kp_assumption_rows = _knowledge_planet_assumption_rows(knowledge_planet_context)
     kp_assumption_section = []
     if kp_assumption_rows:
         kp_assumption_section = [
             "",
             "## Alternative-Intelligence Assumption Bridge",
-            "| evidence_id | affected model variable | permitted use | verification gate |",
-            "| --- | --- | --- | --- |",
+            "| evidence_id | affected model variable | permitted use | verification gate | required audited outcome |",
+            "| --- | --- | --- | --- | --- |",
             *[
-                f"| {evidence_id} | {variable} | {use} | {verification} |"
-                for evidence_id, variable, use, verification in kp_assumption_rows
+                f"| {evidence_id} | {variable} | {use} | {verification} | {outcome} |"
+                for evidence_id, variable, use, verification, outcome in kp_assumption_rows
             ],
             "- The downstream model must state an explicit numeric assumption delta, scenario-probability delta, or rejection reason for every listed KPE item.",
         ]
+
+    evidence_records = [
+        record
+        for record in extract_evidence_records(
+            {
+                "earnings_model": earnings_model_context,
+                "financial_report_intelligence": filing_intelligence_context,
+                "industry_kpi": industry_kpi_context,
+                "market_expectation": market_expectation_context,
+                "knowledge_planet": knowledge_planet_context,
+            },
+            max_records=100,
+        )
+        if record.model_variable != "unmapped"
+    ]
+    evidence_records.sort(
+        key=lambda row: {
+            "reported": 0,
+            "calculated": 1,
+            "private_proxy": 2,
+            "estimated": 3,
+            "missing": 4,
+        }.get(row.status, 5)
+    )
+    evidence_records = evidence_records[:16]
+    evidence_ledger_section = [
+        "",
+        "## Model-Ready Evidence Ledger",
+        "| evidence_id | source | tier | status | model variable | source period | evidence |",
+        "| --- | --- | --- | --- | --- | --- | --- |",
+    ]
+    if evidence_records:
+        evidence_ledger_section.extend(
+            f"| {row.evidence_id} | {row.source_module} | {row.source_tier} | {row.status} | "
+            f"{row.model_variable} | {row.period} | {row.text} |"
+            for row in evidence_records
+        )
+    else:
+        evidence_ledger_section.append(
+            "| - | - | - | missing | - | - | No model-ready numeric evidence extracted; keep forecasts explicitly assumption-led. |"
+        )
+
+    year_1, year_2, year_3 = _forecast_years(curr_date)
+    structured_segments = list((structured_research_context or {}).get("segments", []))
+    structured_segment_rows = [
+        (
+            f"| {segment.get('segment', 'unmapped')} | segment revenue = volume/units x ASP/mix | "
+            "to be estimated | to be estimated | to be estimated | "
+            f"base period={segment.get('period', 'unspecified')}; reported revenue={segment.get('revenue_reported_value')} "
+            f"({segment.get('revenue_reported_unit', 'unit missing')}); revenue weight={segment.get('revenue_weight_pct')}%; "
+            f"growth={segment.get('revenue_growth_pct')}%; gross margin={segment.get('gross_margin_pct')}%; "
+            f"margin change={segment.get('gross_margin_change_pp')}pp; source={segment.get('source_module', '')}; "
+            f"mode={segment.get('extraction_mode', '')} |"
+        )
+        for segment in structured_segments[:10]
+        if segment.get("segment")
+    ]
+    segment_matrix_section = [
+        "",
+        "## Segment / Business-Bucket Three-Year Operating Matrix",
+        f"| business bucket / driver | formula | {year_1} | {year_2} | {year_3} | evidence ids / assumption status |",
+        "| --- | --- | --- | --- | --- | --- |",
+        *(
+            structured_segment_rows
+            if structured_segment_rows
+            else [
+                f"| {name} | {formula} | to be estimated | to be estimated | to be estimated | link EV ids; reported / calculated / estimated / proxy / missing |"
+                for name, formula, _ in drivers
+            ]
+        ),
+        "- Consolidated revenue, profit, and cash flow must reconcile to the sum of business buckets; do not model only the fastest-growing segment.",
+    ]
+
+    expectation_section = [
+        "",
+        "## Consensus And Market-Implied Expectation Gap",
+        "| comparison layer | supplied evidence | required model treatment |",
+        "| --- | --- | --- |",
+        f"| Current market-implied expectation | {_expectation_excerpt(market_expectation_context, (r'implied|PE TTM|market cap|隐含|市值',))} | reverse current price into earnings, growth, margin, ROE/FCF or asset-value assumptions |",
+        f"| External sell-side / consensus proxy | {_sell_side_expectation_excerpt(knowledge_planet_context)} | label broker/date/count; use range or median only when the source is company-specific |",
+        "| TradingAgents model | missing until downstream analyst fills the operating matrix | compare our driver assumptions line by line with market and external expectations |",
+        "- A claimed expectation gap is invalid unless it identifies the exact differing variable, period, magnitude, evidence grade, and next event that can close the gap.",
+        "- An industry report mentioning the company is not company consensus. Keep it as a sector prior unless it supplies company-specific forecasts.",
+    ]
+
+    assumption_change_section = [
+        "",
+        "## Assumption Change And Valuation Transmission Ledger",
+        "| evidence_id | model variable | old assumption | new assumption | earnings/FCF formula impact | bull/base/bear probability before -> after | valuation impact | disposition |",
+        "| --- | --- | --- | --- | --- | --- | --- | --- |",
+        "| required per promoted clue | required | numeric or explicit missing | numeric or unchanged | show affected forecast line and delta | probabilities must sum to 100% before and after | target/SOTP/multiple delta or none | accepted / watch / rejected with reason |",
+        "- Recalculate revenue, profit/EPS, FCF, scenario values, and probability-weighted value after any accepted assumption change; narrative-only changes are invalid.",
+        "- Private/proxy evidence may change probability or timing before it changes a base-case number, but the before/after values and public verification gate are mandatory.",
+    ]
+    structured_kpe_section = _structured_kpe_quantification_section(
+        structured_research_context
+    )
 
     return "\n".join(
         [
@@ -432,11 +600,16 @@ def build_forecast_model_context(
             *hog_sensitivity_section,
             *battery_model_section,
             *kp_assumption_section,
+            *evidence_ledger_section,
+            *segment_matrix_section,
+            *expectation_section,
+            *assumption_change_section,
+            *structured_kpe_section,
             "",
             "## Mandatory Three-Year Table",
-            "| item | 2026E | 2027E | 2028E | evidence / assumption status |",
+            f"| item | {year_1} | {year_2} | {year_3} | evidence / assumption status |",
             "| --- | --- | --- | --- | --- |",
-            "| Revenue | to be estimated | to be estimated | to be estimated | tie to segment volume, ASP, and mix |",
+            "| Revenue | to be estimated | to be estimated | to be estimated | reconcile segment volume, ASP, mix, and eliminations |",
             "| Gross margin | to be estimated | to be estimated | to be estimated | tie to price/spread, cost, utilization, and mix |",
             "| Operating expense ratio | to be estimated | to be estimated | to be estimated | tie to R&D, sales, admin, and scale leverage |",
             "| Net profit / EPS | to be estimated | to be estimated | to be estimated | tie to tax, minority, non-recurring, and share count |",
@@ -447,6 +620,7 @@ def build_forecast_model_context(
             "- Do not cite target price, safety price, or re-rating multiple without showing the earnings/cash-flow bridge behind it.",
             "- If only a run-rate quarter is available, label it as run-rate or stress/base scenario, not as a full forecast.",
             "- Knowledge Planet can supply private/proxy assumptions, but each assumption must be tagged and reconciled with filings, public prices, Tushare data, or a verification calendar before it changes valuation.",
+            "- Never copy an external sell-side target or rating. Compare its operating assumptions with this model, record conflicts, and let the system-generated rating follow from the reconciled model.",
         ]
     )
 
@@ -454,7 +628,7 @@ def build_forecast_model_context(
 def get_forecast_model_context(
     ticker: str,
     curr_date: str,
-    contexts: Mapping[str, str] | None = None,
+    contexts: Mapping[str, Any] | None = None,
 ) -> str:
     supplied = dict(contexts or {})
     return build_forecast_model_context(
@@ -468,4 +642,6 @@ def get_forecast_model_context(
         metals_mining_context=supplied.get("metals_mining_context", ""),
         insurance_context=supplied.get("insurance_context", ""),
         knowledge_planet_context=supplied.get("knowledge_planet_context", ""),
+        market_expectation_context=supplied.get("market_expectation_context", ""),
+        structured_research_context=supplied.get("structured_research_context", {}),
     )

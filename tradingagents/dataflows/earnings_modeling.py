@@ -185,7 +185,24 @@ def _build_driver_rows(derived: pd.DataFrame) -> list[dict[str, str]]:
     ordered["end_date"] = ordered["end_date"].astype(str)
     ordered = ordered.sort_values("end_date", ascending=False)
     latest = ordered.iloc[0]
-    previous = ordered.iloc[1] if len(ordered) > 1 else None
+    latest_end_date = str(latest.get("end_date") or "")
+    comparable = ordered[
+        (ordered["end_date"].str[-4:] == latest_end_date[-4:])
+        & (ordered["end_date"] < latest_end_date)
+    ]
+    # Same-period year-on-year comparison is the only clean basis for an
+    # interim margin delta.  Fall back to the immediately prior report only
+    # when the history does not contain a comparable period, and label it.
+    if not comparable.empty:
+        previous = comparable.iloc[0]
+        comparison_basis = f"YoY: {latest_end_date} vs {previous.get('end_date')}"
+    else:
+        previous = ordered.iloc[1] if len(ordered) > 1 else None
+        comparison_basis = (
+            f"sequential-report fallback: {latest_end_date} vs {previous.get('end_date')}"
+            if previous is not None
+            else "N/A"
+        )
 
     def _delta(col: str) -> str:
         if previous is None:
@@ -201,48 +218,56 @@ def _build_driver_rows(derived: pd.DataFrame) -> list[dict[str, str]]:
             "driver": "Revenue base",
             "latest_signal": _format_value(latest.get("revenue_base")),
             "change_vs_prior_report": "N/A",
+            "comparison_basis": comparison_basis,
             "model_role": "top-line starting point for volume × price × mix",
         },
         {
             "driver": "Gross margin",
             "latest_signal": _format_value(latest.get("reported_gross_margin"), "%"),
             "change_vs_prior_report": _delta("reported_gross_margin"),
+            "comparison_basis": comparison_basis,
             "model_role": "main bridge from demand to gross profit",
         },
         {
             "driver": "Operating margin",
             "latest_signal": _format_value(latest.get("derived_operating_margin"), "%"),
             "change_vs_prior_report": _delta("derived_operating_margin"),
+            "comparison_basis": comparison_basis,
             "model_role": "tests pricing, mix, and cost absorption",
         },
         {
             "driver": "Net margin",
             "latest_signal": _format_value(latest.get("derived_net_margin"), "%"),
             "change_vs_prior_report": _delta("derived_net_margin"),
+            "comparison_basis": comparison_basis,
             "model_role": "captures final earnings conversion",
         },
         {
             "driver": "Finance-expense ratio",
             "latest_signal": _format_value(latest.get("finance_expense_ratio"), "%"),
             "change_vs_prior_report": _delta("finance_expense_ratio"),
+            "comparison_basis": comparison_basis,
             "model_role": "captures leverage drag or relief",
         },
         {
             "driver": "OCF / net profit",
             "latest_signal": _format_value(latest.get("ocf_to_net_profit")),
             "change_vs_prior_report": "N/A",
+            "comparison_basis": comparison_basis,
             "model_role": "tests earnings quality and cash realization",
         },
         {
             "driver": "Receivables / revenue",
             "latest_signal": _format_value(latest.get("receivables_to_revenue"), "%"),
             "change_vs_prior_report": _delta("receivables_to_revenue"),
+            "comparison_basis": comparison_basis,
             "model_role": "tests working-capital drag; interim periods use annualized revenue",
         },
         {
             "driver": "Inventory / revenue",
             "latest_signal": _format_value(latest.get("inventory_to_revenue"), "%"),
             "change_vs_prior_report": _delta("inventory_to_revenue"),
+            "comparison_basis": comparison_basis,
             "model_role": "tests inventory build and demand quality; interim periods use annualized revenue",
         },
     ]

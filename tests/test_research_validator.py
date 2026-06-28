@@ -3,6 +3,7 @@
 from tradingagents.evaluation.research_validator import (
     audit_context_alignment,
     audit_decision_depth,
+    audit_decision_integrity,
     _extract_rating,
     _extract_section,
     _normalize_rating,
@@ -251,6 +252,59 @@ def test_audit_context_alignment_flags_telecom_lithium_playbook_mismatch(tmp_pat
 
     assert [issue.section for issue in issues] == ["industry_playbook_alignment"]
     assert "telecom-operator" in issues[0].issue
+
+
+def test_post_generation_integrity_catches_period_calendar_and_kpe_failures():
+    decision = (
+        "盈利预测桥仅列示2026E和2027E。2026年Q1毛利率同比下降1.46pp。"
+        "知识星球信息提高牛市概率，但未说明调整幅度。下一个节点为Q2半年报，预计10月发布。"
+    )
+    earnings = (
+        "| driver | latest_signal | change_vs_prior_report | comparison_basis |\n"
+        "| --- | --- | --- | --- |\n"
+        "| Gross margin | 24.82% | -1.46pp | sequential-report fallback: 20260331 vs 20251231 |"
+    )
+
+    sections = {
+        issue.section
+        for issue in audit_decision_integrity(
+            decision,
+            earnings_model_context=earnings,
+        )
+    }
+
+    assert "three_year_forecast_completion" in sections
+    assert "financial_calendar_period" in sections
+    assert "period_comparator_lineage" in sections
+    assert "alternative_intelligence_lineage" in sections
+
+
+def test_post_generation_integrity_recomputes_scenario_value():
+    decision = (
+        "| 情景 | 目标价 | 概率 | 期望值贡献 |\n"
+        "| --- | --- | --- | --- |\n"
+        "| 牛市 | 500 | 40% | 200 |\n"
+        "| 基准 | 400 | 40% | 160 |\n"
+        "| 熊市 | 250 | 20% | 50 |\n"
+        "| 期望价值 | 420 | - | - |"
+    )
+
+    sections = {issue.section for issue in audit_decision_integrity(decision)}
+
+    assert "scenario_weighted_value_math" in sections
+
+
+def test_post_generation_integrity_reconciles_profit_and_eps_share_count():
+    decision = (
+        "| 驱动因素 | 2025年实际 | 2026E | 2027E |\n"
+        "| --- | --- | --- | --- |\n"
+        "| 归母净利润（亿元） | 722 | 750-800 | 850-950 |\n"
+        "| EPS（元） | 17.07 | 17.5-18.5 | 19-21 |"
+    )
+
+    sections = {issue.section for issue in audit_decision_integrity(decision)}
+
+    assert "eps_profit_share_count_consistency" in sections
 
 
 def test_normalize_rating_handles_empty_label_value():

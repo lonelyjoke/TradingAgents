@@ -1,5 +1,6 @@
 from typing import Optional
 import datetime
+import json
 import re
 import typer
 from pathlib import Path
@@ -720,6 +721,18 @@ def save_report_to_disk(final_state, ticker: str, save_path: Path):
             final_state["data_coverage_context"],
             encoding="utf-8",
         )
+    if final_state.get("structured_research_context"):
+        context_dir = save_path / "0_context"
+        context_dir.mkdir(exist_ok=True)
+        (context_dir / "structured_research.json").write_text(
+            json.dumps(
+                final_state["structured_research_context"],
+                ensure_ascii=False,
+                indent=2,
+                default=str,
+            ),
+            encoding="utf-8",
+        )
     if final_state.get("relative_strength_context"):
         context_dir = save_path / "0_context"
         context_dir.mkdir(exist_ok=True)
@@ -1010,6 +1023,38 @@ def save_report_to_disk(final_state, ticker: str, save_path: Path):
             portfolio_dir.mkdir(exist_ok=True)
             (portfolio_dir / "decision.md").write_text(risk["judge_decision"], encoding="utf-8")
             pm_section = f"## Portfolio Manager Decision\n\n### Portfolio Manager\n{risk['judge_decision']}"
+
+    # Run deterministic QA only after every context and the final PM memo have
+    # been persisted. The audit never changes the model-generated rating, but
+    # any deterministic error visibly blocks the memo from publication.
+    decision_path = save_path / "5_portfolio" / "decision.md"
+    if decision_path.exists():
+        from tradingagents.evaluation.research_validator import render_post_generation_audit
+
+        audit_text = render_post_generation_audit(save_path)
+        (save_path / "5_portfolio" / "post_generation_audit.md").write_text(
+            audit_text,
+            encoding="utf-8",
+        )
+        error_match = re.search(r"FAIL:\s*errors=(\d+)", audit_text, re.I)
+        error_count = int(error_match.group(1)) if error_match else 0
+        if error_count > 0:
+            publication_banner = (
+                "> **Publication status: BLOCKED / 研究发布状态：阻断。** "
+                f"确定性审计发现 {error_count} 个错误；本报告仅可作为研究草稿，"
+                "在 `post_generation_audit.md` 所列错误完成核对前，不应作为正式投委会或对外报告。"
+            )
+            raw_decision = decision_path.read_text(encoding="utf-8")
+            decision_path.write_text(
+                publication_banner + "\n\n" + raw_decision,
+                encoding="utf-8",
+            )
+            (save_path / "5_portfolio" / "publication_status.md").write_text(
+                publication_banner + "\n",
+                encoding="utf-8",
+            )
+            if pm_section:
+                pm_section = publication_banner + "\n\n" + pm_section
 
     # Write consolidated report
     header = f"# Trading Analysis Report: {ticker}\n\nGenerated: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n"

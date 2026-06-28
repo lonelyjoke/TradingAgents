@@ -92,6 +92,7 @@ class AgentState(MessagesState):
     quality_audit_context: Annotated[str, "Derived sell-side depth and key-number audit context"]
     thesis_question_context: Annotated[str, "Derived company-specific soul-question agenda for bull/bear debate"]
     data_coverage_context: Annotated[str, "Audit of which precomputed context modules loaded successfully and which failed or are partial"]
+    structured_research_context: Annotated[dict, "Typed JSON research bundle containing segments, metrics, conflicts, and quantified Knowledge Planet impacts"]
 
     # researcher team discussion step
     investment_debate_state: Annotated[

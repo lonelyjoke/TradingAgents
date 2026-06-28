@@ -11,6 +11,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from datetime import datetime, timedelta
 from pathlib import Path
+import json
 import re
 from typing import Iterable
 
@@ -101,6 +102,36 @@ _PEER_DEPTH_TERMS = (
     "增长",
     "杠杆",
     "配置",
+)
+
+_SEGMENT_PROSPERITY_TERMS = (
+    "segment prosperity",
+    "prosperity level",
+    "marginal direction",
+    "demand",
+    "supply",
+    "capacity",
+    "utilization",
+    "asp",
+    "margin",
+    "working capital",
+    "cash flow",
+    "counterevidence",
+    "confidence",
+    "eps",
+    "fcf",
+    "分部景气",
+    "景气水平",
+    "边际方向",
+    "需求",
+    "供给",
+    "产能",
+    "利用率",
+    "价格",
+    "毛利",
+    "现金流",
+    "反证",
+    "置信度",
 )
 
 _VALUATION_DEPTH_TERMS = (
@@ -587,7 +618,12 @@ def audit_decision_depth(decision_text: str) -> list[DecisionDepthIssue]:
     issues: list[DecisionDepthIssue] = []
 
     segment = _section_text(decision_text, "Investment Thesis")
-    if "Business Segment Breakdown:" not in segment:
+    has_segment_section = "Business Segment Breakdown:" in segment or any(
+        marker in decision_text
+        for marker in ("## 业务分部", "## 业务板块", "### 业务分部", "业务分部与估值")
+    )
+    segment_scope = segment if "Business Segment Breakdown:" in segment else decision_text
+    if not has_segment_section:
         issues.append(
             DecisionDepthIssue(
                 "business_segment_breakdown",
@@ -595,7 +631,7 @@ def audit_decision_depth(decision_text: str) -> list[DecisionDepthIssue]:
                 "missing explicit Business Segment Breakdown in the final thesis",
             )
         )
-    elif _term_hits(segment, _SEGMENT_DEPTH_TERMS) < 5:
+    elif _term_hits(segment_scope, _SEGMENT_DEPTH_TERMS) < 5:
         issues.append(
             DecisionDepthIssue(
                 "business_segment_breakdown",
@@ -604,7 +640,26 @@ def audit_decision_depth(decision_text: str) -> list[DecisionDepthIssue]:
             )
         )
 
-    if "Peer Comparison Summary:" not in segment:
+    if has_segment_section:
+        has_prosperity_section = "Segment Prosperity Analysis:" in decision_text or any(
+            marker in decision_text
+            for marker in ("## 分部景气", "## 业务景气", "分业务景气度", "分部景气度")
+        )
+        if not has_prosperity_section or _term_hits(decision_text, _SEGMENT_PROSPERITY_TERMS) < 9:
+            issues.append(
+                DecisionDepthIssue(
+                    "segment_prosperity_analysis",
+                    "warning",
+                    "multi-business report lacks a deep segment-level prosperity matrix with level, direction, dated demand/supply/price/utilization/margin/cash evidence, counterevidence, and EPS/FCF transmission",
+                )
+            )
+
+    has_peer_section = "Peer Comparison Summary:" in segment or any(
+        marker in decision_text
+        for marker in ("## 同行", "## 同业", "## 可比公司", "同业/产业对比", "相比同行")
+    )
+    peer_scope = segment if "Peer Comparison Summary:" in segment else decision_text
+    if not has_peer_section:
         issues.append(
             DecisionDepthIssue(
                 "peer_comparison_summary",
@@ -612,7 +667,7 @@ def audit_decision_depth(decision_text: str) -> list[DecisionDepthIssue]:
                 "missing explicit Peer Comparison Summary in the final thesis",
             )
         )
-    elif _term_hits(segment, _PEER_DEPTH_TERMS) < 5:
+    elif _term_hits(peer_scope, _PEER_DEPTH_TERMS) < 5:
         issues.append(
             DecisionDepthIssue(
                 "peer_comparison_summary",
@@ -764,7 +819,12 @@ def audit_decision_depth(decision_text: str) -> list[DecisionDepthIssue]:
                 )
             )
 
-    if _term_hits(decision_text, _BATTERY_MATERIAL_TRIGGER_TERMS) >= 1:
+    battery_material_hits = _term_hits(decision_text, _BATTERY_MATERIAL_TRIGGER_TERMS)
+    battery_system_hits = _term_hits(
+        decision_text,
+        ("power battery system", "energy-storage battery system", "动力电池系统", "储能电池系统", "GWh"),
+    )
+    if battery_material_hits >= 2 and battery_system_hits < 2:
         if _term_hits(decision_text, _BATTERY_MATERIAL_DEPTH_TERMS) < 9:
             issues.append(
                 DecisionDepthIssue(
@@ -781,6 +841,393 @@ def audit_decision_depth(decision_text: str) -> list[DecisionDepthIssue]:
                     "battery-material report does not turn industry KPIs into forecast drivers, conviction caps, sizing, and verification calendar",
                 )
             )
+
+    return issues
+
+
+def _markdown_tables(text: str) -> list[tuple[list[str], list[list[str]]]]:
+    """Parse simple pipe tables without depending on report-language headings."""
+    lines = text.splitlines()
+    tables: list[tuple[list[str], list[list[str]]]] = []
+    index = 0
+    while index + 1 < len(lines):
+        header_line = lines[index].strip()
+        separator = lines[index + 1].strip()
+        if not (header_line.startswith("|") and separator.startswith("|")):
+            index += 1
+            continue
+        if not all(set(cell.strip()) <= {"-", ":"} for cell in separator.strip("|").split("|")):
+            index += 1
+            continue
+        header = [cell.strip().replace("**", "") for cell in header_line.strip("|").split("|")]
+        body: list[list[str]] = []
+        index += 2
+        while index < len(lines) and lines[index].strip().startswith("|"):
+            body.append([cell.strip().replace("**", "") for cell in lines[index].strip().strip("|").split("|")])
+            index += 1
+        tables.append((header, body))
+    return tables
+
+
+def _first_number(text: str) -> float | None:
+    match = re.search(r"[-+]?\d[\d,]*(?:\.\d+)?", text or "")
+    if not match:
+        return None
+    try:
+        return float(match.group(0).replace(",", ""))
+    except ValueError:
+        return None
+
+
+def _range_midpoint(text: str) -> float | None:
+    numbers = [
+        float(value.replace(",", ""))
+        for value in re.findall(r"(?<![\d.])[-+]?\d[\d,]*(?:\.\d+)?", text or "")[:2]
+    ]
+    if not numbers:
+        return None
+    return sum(numbers) / len(numbers)
+
+
+def _eps_profit_consistency_issues(decision_text: str) -> list[DecisionDepthIssue]:
+    issues: list[DecisionDepthIssue] = []
+    for header, rows in _markdown_tables(decision_text):
+        year_columns = [index for index, cell in enumerate(header) if re.search(r"20\d{2}(?:E|年|实际)?", cell, re.I)]
+        if len(year_columns) < 2:
+            continue
+        profit_row = next(
+            (
+                row
+                for row in rows
+                if row and any(term in row[0].lower() for term in ("net profit", "归母净利润", "净利润"))
+            ),
+            None,
+        )
+        eps_row = next(
+            (
+                row
+                for row in rows
+                if row and ("eps" in row[0].lower() or "每股收益" in row[0])
+            ),
+            None,
+        )
+        if not profit_row or not eps_row:
+            continue
+        implied_share_proxies: list[float] = []
+        for index in year_columns:
+            if index >= len(profit_row) or index >= len(eps_row):
+                continue
+            profit = _range_midpoint(profit_row[index])
+            eps = _range_midpoint(eps_row[index])
+            if profit is not None and eps is not None and eps > 0:
+                implied_share_proxies.append(profit / eps)
+        if len(implied_share_proxies) >= 2:
+            spread = max(implied_share_proxies) / min(implied_share_proxies) - 1.0
+            if spread > 0.05:
+                issues.append(
+                    DecisionDepthIssue(
+                        "eps_profit_share_count_consistency",
+                        "error",
+                        f"net-profit/EPS rows imply share-count proxies that differ by {spread:.1%}; reconcile units, actual-vs-TTM EPS, dilution, and the share-count assumption",
+                    )
+                )
+                break
+    return issues
+
+
+def _valuation_bridge_issues(decision_text: str) -> list[DecisionDepthIssue]:
+    """Reconcile the per-share arithmetic behind PB/PE safety-price claims."""
+    issues: list[DecisionDepthIssue] = []
+    price_match = re.search(
+        r"(?:current price|当前价格|现价)\D{0,18}(\d+(?:\.\d+)?)",
+        decision_text,
+        re.I,
+    )
+    combined_pe_pb_match = re.search(
+        r"(?:TTM\s*)?PE\s*/\s*PB\D{0,12}(\d+(?:\.\d+)?)\s*/\s*(\d+(?:\.\d+)?)",
+        decision_text,
+        re.I,
+    )
+    pb_match = re.search(
+        r"(?:\bPB\b|P/B|市净率)\s*(?:TTM)?\s*[:：/]?\s*(\d+(?:\.\d+)?)\s*(?:x|倍)?",
+        decision_text,
+        re.I,
+    )
+    bvps_match = re.search(
+        r"(?:BVPS|每股净资产)\D{0,18}(\d+(?:\.\d+)?)",
+        decision_text,
+        re.I,
+    )
+    current_price = float(price_match.group(1)) if price_match else None
+    current_pb = (
+        float(combined_pe_pb_match.group(2))
+        if combined_pe_pb_match
+        else float(pb_match.group(1))
+        if pb_match
+        else None
+    )
+    stated_bvps = float(bvps_match.group(1)) if bvps_match else None
+    derived_bvps: float | None = None
+    if current_price and current_pb and current_pb > 0:
+        derived_bvps = current_price / current_pb
+    if derived_bvps and stated_bvps:
+        gap = abs(stated_bvps - derived_bvps) / derived_bvps
+        if gap > 0.08:
+            issues.append(
+                DecisionDepthIssue(
+                    "pb_bvps_arithmetic",
+                    "error",
+                    f"stated BVPS {stated_bvps:.2f} does not reconcile to current price/PB {current_price:.2f}/{current_pb:.2f}={derived_bvps:.2f}",
+                )
+            )
+
+    safety_lines = [
+        line
+        for line in decision_text.splitlines()
+        if any(token in line.lower() for token in ("安全", "safety", "build anchor", "建仓"))
+        and any(token in line.lower() for token in ("p/b", "pb", "市净率"))
+    ]
+    if derived_bvps:
+        for line in safety_lines:
+            price_range = re.search(
+                r"(?:¥|￥)?\s*(\d+(?:\.\d+)?)\s*(?:-|–|—|至|~)\s*(?:¥|￥)?\s*(\d+(?:\.\d+)?)",
+                line,
+            )
+            pb_range = re.search(
+                r"(\d+(?:\.\d+)?)\s*(?:x|倍)?\s*(?:-|–|—|至|~)\s*(\d+(?:\.\d+)?)\s*(?:x|倍)?\s*(?:P/B|PB|市净率)",
+                line,
+                re.I,
+            )
+            if not price_range or not pb_range:
+                continue
+            stated_low, stated_high = sorted(
+                (float(price_range.group(1)), float(price_range.group(2)))
+            )
+            multiple_low, multiple_high = sorted(
+                (float(pb_range.group(1)), float(pb_range.group(2)))
+            )
+            expected_low = derived_bvps * multiple_low
+            expected_high = derived_bvps * multiple_high
+            if (
+                abs(stated_low - expected_low) / max(expected_low, 1.0) > 0.10
+                or abs(stated_high - expected_high) / max(expected_high, 1.0) > 0.10
+            ):
+                issues.append(
+                    DecisionDepthIssue(
+                        "safety_price_pb_bridge",
+                        "error",
+                        "safety-price range does not reconcile to current BVPS and the stated PB range",
+                    )
+                )
+                break
+
+    for line in decision_text.splitlines():
+        lowered_line = line.lower()
+        if not (
+            ("净利润" in line or "parent net profit" in lowered_line)
+            and re.search(r"\d+(?:\.\d+)?\s*(?:x|倍)\s*(?:PE|P/E|市盈率)?", line, re.I)
+            and re.search(r"(?:¥|￥)\s*\d|\d+\s*(?:元|cny)", line, re.I)
+        ):
+            continue
+        if not any(token in lowered_line for token in ("eps", "每股收益", "股本", "share count")):
+            issues.append(
+                DecisionDepthIssue(
+                    "profit_pe_per_share_bridge",
+                    "error",
+                    "a per-share price is derived from aggregate net profit and PE without an explicit diluted share-count/EPS bridge",
+                )
+            )
+            break
+    return issues
+
+
+def _period_semantic_issues(decision_text: str) -> list[DecisionDepthIssue]:
+    issues: list[DecisionDepthIssue] = []
+    q2_windows = re.findall(
+        r"(?:Q2|二季度|第二季度).{0,100}",
+        decision_text,
+        re.I | re.S,
+    )
+    h1_windows = re.findall(
+        r"(?:H1|上半年|半年报|中报).{0,100}",
+        decision_text,
+        re.I | re.S,
+    )
+
+    def _profit_thresholds(windows: list[str]) -> set[str]:
+        values: set[str] = set()
+        for window in windows:
+            if not any(token in window.lower() for token in ("profit", "净利润", "归母")):
+                continue
+            for low, high in re.findall(
+                r"(\d+(?:\.\d+)?)\s*(?:-|–|—|至|~)\s*(\d+(?:\.\d+)?)\s*亿",
+                window,
+            ):
+                values.add(f"range:{low}-{high}")
+            for value in re.findall(
+                r"(?:[<>≥≤]|低于|高于|超过|超|不低于|不高于)\s*(?:¥|￥)?\s*(\d+(?:\.\d+)?)\s*亿",
+                window,
+            ):
+                values.add(f"threshold:{value}")
+        return values
+
+    reused = _profit_thresholds(q2_windows) & _profit_thresholds(h1_windows)
+    if reused:
+        issues.append(
+            DecisionDepthIssue(
+                "q2_h1_period_semantics",
+                "error",
+                "the same profit threshold is assigned to Q2 single-quarter and H1 cumulative periods; reconcile H1 = Q1 + Q2 and relabel every trigger",
+            )
+        )
+
+    preview_claimed = re.search(
+        r"(?:上半年|H1|半年度).{0,16}(?:业绩预告|earnings preview)",
+        decision_text,
+        re.I,
+    )
+    if preview_claimed and not any(
+        token in decision_text.lower()
+        for token in ("official calendar", "官方日历", "公告日期", "披露规则", "scheduled disclosure")
+    ):
+        issues.append(
+            DecisionDepthIssue(
+                "unverified_disclosure_calendar",
+                "warning",
+                "memo assumes a half-year earnings preview without citing an official calendar, announcement, or applicable disclosure rule",
+            )
+        )
+    return issues
+
+
+def _scenario_arithmetic_issues(decision_text: str) -> list[DecisionDepthIssue]:
+    issues: list[DecisionDepthIssue] = []
+    for header, rows in _markdown_tables(decision_text):
+        lowered = [cell.lower() for cell in header]
+        scenario_idx = next((i for i, cell in enumerate(lowered) if "scenario" in cell or "情景" in cell), None)
+        target_idx = next((i for i, cell in enumerate(lowered) if "target" in cell or "目标价" in cell or "fair value" in cell), None)
+        probability_idx = next((i for i, cell in enumerate(lowered) if "probability" in cell or "概率" in cell), None)
+        contribution_idx = next((i for i, cell in enumerate(lowered) if "contribution" in cell or "贡献" in cell), None)
+        if scenario_idx is None or target_idx is None or probability_idx is None:
+            continue
+        scenario_rows: list[tuple[float, float, float | None]] = []
+        expected_value: float | None = None
+        for row in rows:
+            if len(row) <= max(scenario_idx, target_idx, probability_idx):
+                continue
+            label = row[scenario_idx].lower()
+            if any(token in label for token in ("expected", "期望", "加权")):
+                expected_value = _first_number(row[target_idx])
+                continue
+            if not any(token in label for token in ("bull", "base", "bear", "牛", "基准", "中性", "熊")):
+                continue
+            target = _first_number(row[target_idx])
+            probability = _first_number(row[probability_idx])
+            contribution = (
+                _first_number(row[contribution_idx])
+                if contribution_idx is not None and len(row) > contribution_idx
+                else None
+            )
+            if target is not None and probability is not None:
+                scenario_rows.append((target, probability, contribution))
+        if len(scenario_rows) < 3:
+            continue
+        probability_sum = sum(row[1] for row in scenario_rows)
+        if abs(probability_sum - 100.0) > 0.6:
+            issues.append(DecisionDepthIssue("scenario_probability_math", "error", f"scenario probabilities sum to {probability_sum:.2f}%, not 100%"))
+        weighted_value = sum(target * probability / 100.0 for target, probability, _ in scenario_rows)
+        if expected_value is not None and abs(weighted_value - expected_value) > max(1.0, expected_value * 0.01):
+            issues.append(DecisionDepthIssue("scenario_weighted_value_math", "error", f"reported expected value {expected_value:.2f} does not reconcile to probability-weighted scenario value {weighted_value:.2f}"))
+        for target, probability, contribution in scenario_rows:
+            expected_contribution = target * probability / 100.0
+            if contribution is not None and abs(expected_contribution - contribution) > max(1.0, expected_contribution * 0.02):
+                issues.append(DecisionDepthIssue("scenario_contribution_math", "error", f"scenario contribution {contribution:.2f} does not reconcile to target {target:.2f} x probability {probability:.2f}%"))
+                break
+    return issues
+
+
+def audit_decision_integrity(
+    decision_text: str,
+    *,
+    earnings_model_context: str = "",
+) -> list[DecisionDepthIssue]:
+    """Audit final-output arithmetic, period semantics, and information lineage.
+
+    This deliberately does not judge or rewrite the rating.  It checks whether
+    the generated memo obeys the model and evidence contracts supplied to it.
+    """
+    issues = _scenario_arithmetic_issues(decision_text)
+    issues.extend(_eps_profit_consistency_issues(decision_text))
+    issues.extend(_valuation_bridge_issues(decision_text))
+    issues.extend(_period_semantic_issues(decision_text))
+    lowered = decision_text.lower()
+
+    forecast_years = sorted(set(re.findall(r"20\d{2}E", decision_text, re.I)))
+    forecast_triggered = any(token in lowered for token in ("forward forecast", "盈利预测", "预测桥", "earnings bridge"))
+    rich_company_memo = len(decision_text) >= 2200
+    if (forecast_triggered or rich_company_memo) and len(forecast_years) < 3:
+        issues.append(DecisionDepthIssue("three_year_forecast_completion", "error", "final memo invokes a forecast bridge but does not provide three distinct forward years"))
+    if len(forecast_years) >= 3:
+        forecast_metric_hits = sum(
+            1
+            for tokens in (
+                ("revenue", "营业收入", "收入"),
+                ("net profit", "归母净利润", "净利润"),
+                ("eps", "每股收益"),
+                ("ocf", "经营现金流"),
+                ("capex", "资本开支"),
+                ("fcf", "自由现金流"),
+            )
+            if any(token in lowered for token in tokens)
+        )
+        if forecast_metric_hits < 5:
+            issues.append(
+                DecisionDepthIssue(
+                    "three_year_forecast_reconciliation",
+                    "error",
+                    "three forward years are named but the memo does not reconcile enough of revenue, parent profit, EPS, OCF, capex, and FCF",
+                )
+            )
+    if "to be estimated" in lowered or "待估算" in decision_text:
+        issues.append(DecisionDepthIssue("forecast_placeholder", "error", "final memo still contains unfilled forecast placeholders"))
+
+    if re.search(r"(?:Q2|二季报|第二季度|半年报|中报).{0,35}(?:10月|october)", decision_text, re.I | re.S):
+        issues.append(DecisionDepthIssue("financial_calendar_period", "error", "Q2/half-year disclosure is linked to October; verify whether the memo has confused the half-year and Q3 reporting windows"))
+
+    yoy_claims = re.findall(r"(?:同比|YoY).{0,25}?([-+]?\d+(?:\.\d+)?)\s*(?:pp|个百分点)", decision_text, re.I)
+    if yoy_claims and earnings_model_context:
+        gross_margin_rows = [line for line in earnings_model_context.splitlines() if "Gross margin" in line]
+        for claim in yoy_claims:
+            if any(claim in line and "YoY:" not in line for line in gross_margin_rows):
+                issues.append(DecisionDepthIssue("period_comparator_lineage", "error", f"final memo labels {claim}pp as YoY, but the matching earnings-model row does not carry a same-period YoY comparison basis"))
+                break
+
+    kp_claimed = any(token in lowered for token in ("knowledge planet", "知识星球", "private/proxy", "私域"))
+    kp_ids = sorted(set(re.findall(r"KPE\d+", decision_text, re.I)))
+    if kp_claimed and not kp_ids:
+        issues.append(DecisionDepthIssue("alternative_intelligence_lineage", "warning", "Knowledge Planet affects the memo but no KPE evidence id is cited"))
+    if kp_ids and not re.search(r"(?:before\s*(?:->|→)\s*after|调整前.{0,30}调整后|拒绝|rejected|unchanged|不采纳)", decision_text, re.I | re.S):
+        issues.append(DecisionDepthIssue("alternative_intelligence_transmission", "error", "KPE evidence is cited without probability before/after values, an explicit unchanged result, or a rejection reason"))
+
+    for match in re.finditer(
+        r"(?:current price|当前价格|现价)\s*[:：]?\s*(\d+(?:\.\d+)?).{0,45}?"
+        r"(?:EV|expected value|期望价值|目标价)\s*[:：]?\s*(\d+(?:\.\d+)?).{0,30}?"
+        r"(折价|discount|upside|上涨空间)\s*(?:约)?\s*(\d+(?:\.\d+)?)%",
+        decision_text,
+        re.I | re.S,
+    ):
+        current, value, label, stated = float(match.group(1)), float(match.group(2)), match.group(3).lower(), float(match.group(4))
+        calculated = ((value - current) / value * 100.0) if label in {"折价", "discount"} else ((value - current) / current * 100.0)
+        if abs(calculated - stated) > 0.6:
+            issues.append(DecisionDepthIssue("upside_discount_math", "error", f"stated {label} {stated:.2f}% does not reconcile to current price {current:.2f} and value {value:.2f}; calculated {calculated:.2f}%"))
+            break
+
+    causal_flow_claims = ("forced selling", "institutional rotation", "止损盘", "情绪宣泄", "资金出逃", "机构调仓")
+    if any(claim in lowered for claim in causal_flow_claims) and not any(
+        evidence in lowered
+        for evidence in ("fund flow", "northbound", "block trade", "holder change", "etf flow", "资金流", "北向", "大宗交易", "持有人变化")
+    ):
+        issues.append(DecisionDepthIssue("price_move_causal_attribution", "warning", "memo makes a causal flow/sentiment attribution without flow, block-trade, holder-change, or equivalent evidence"))
 
     return issues
 
@@ -821,12 +1268,175 @@ def audit_context_alignment(report_dir: str | Path) -> list[DecisionDepthIssue]:
     return []
 
 
+def audit_structured_research_usage(
+    report_dir: str | Path,
+    decision_text: str,
+) -> list[DecisionDepthIssue]:
+    path = Path(report_dir) / "0_context" / "structured_research.json"
+    if not path.exists():
+        return []
+    try:
+        bundle = json.loads(read_text_fallback(path))
+    except Exception as exc:
+        return [
+            DecisionDepthIssue(
+                "structured_research_bundle",
+                "error",
+                f"structured_research.json is not readable JSON: {exc}",
+            )
+        ]
+
+    issues: list[DecisionDepthIssue] = []
+    preprocessing_mode = str(bundle.get("preprocessing_mode", ""))
+    preprocessing_notes = " ".join(
+        str(note) for note in bundle.get("preprocessing_notes", [])
+    )
+    if (
+        preprocessing_mode == "deterministic_only"
+        and "semantic llm failed" in preprocessing_notes.lower()
+    ):
+        issues.append(
+            DecisionDepthIssue(
+                "semantic_preprocessing_failure",
+                "error",
+                "semantic LLM preprocessing failed; the memo may use deterministic filing-row fallback but cannot claim full semantic segment/conflict/KPE processing",
+            )
+        )
+
+    segments = [
+        str(row.get("segment", "")).strip()
+        for row in bundle.get("segments", [])
+        if str(row.get("segment", "")).strip()
+    ]
+    if not segments and bundle.get("deterministic_evidence"):
+        issues.append(
+            DecisionDepthIssue(
+                "structured_segment_extraction",
+                "error",
+                "structured preprocessing produced no segment rows despite having deterministic evidence; segment prosperity cannot be considered complete",
+            )
+        )
+    if len(segments) >= 2:
+        material_segments = [
+            str(row.get("segment", "")).strip()
+            for row in bundle.get("segments", [])
+            if str(row.get("segment", "")).strip()
+            and (
+                row.get("revenue_weight_pct") is None
+                or float(row.get("revenue_weight_pct") or 0.0) >= 10.0
+            )
+        ]
+        missing_segments = [
+            segment for segment in material_segments if segment not in decision_text
+        ]
+        if missing_segments:
+            issues.append(
+                DecisionDepthIssue(
+                    "structured_segment_usage",
+                    "error",
+                    "PM memo omits material structured segment(s): "
+                    + ", ".join(missing_segments[:8]),
+                )
+            )
+
+        growth_rows = [
+            row
+            for row in bundle.get("segments", [])
+            if row.get("revenue_growth_pct") is not None
+            and str(row.get("segment", "")).strip()
+        ]
+        if growth_rows:
+            fastest = max(
+                growth_rows,
+                key=lambda row: float(row.get("revenue_growth_pct") or 0.0),
+            )
+            for row in growth_rows:
+                segment = str(row.get("segment", "")).strip()
+                if segment == str(fastest.get("segment", "")).strip():
+                    continue
+                if re.search(
+                    re.escape(segment) + r".{0,28}(?:增长最快|fastest[- ]growing)",
+                    decision_text,
+                    re.I | re.S,
+                ):
+                    issues.append(
+                        DecisionDepthIssue(
+                            "segment_growth_rank_consistency",
+                            "error",
+                            f"memo calls {segment} the fastest-growing segment, but structured same-period filing rows show {fastest.get('segment')} has the higher revenue growth rate",
+                        )
+                    )
+                    break
+
+    actionable_kpe = [
+        row
+        for row in bundle.get("kpe_impacts", [])
+        if row.get("quantification_status") in {"quantified", "probability_only"}
+        and row.get("grounding_status") == "grounded_quote"
+    ]
+    missing_kpe = [
+        str(row.get("evidence_id"))
+        for row in actionable_kpe
+        if str(row.get("evidence_id")) not in decision_text
+    ]
+    if missing_kpe:
+        issues.append(
+            DecisionDepthIssue(
+                "structured_kpe_usage",
+                "warning",
+                "grounded quantified KPE rows are absent from the PM memo: "
+                + ", ".join(missing_kpe[:8]),
+            )
+        )
+
+    incomplete_kpe_outcomes = [
+        str(row.get("evidence_id", ""))
+        for row in bundle.get("kpe_impacts", [])
+        if str(row.get("evidence_id", "")).strip()
+        and not str(row.get("decision_outcome", "")).strip()
+    ]
+    if incomplete_kpe_outcomes:
+        issues.append(
+            DecisionDepthIssue(
+                "structured_kpe_decision_outcome",
+                "error",
+                "KPE rows lack an explicit quantified/probability/unchanged/rejected outcome: "
+                + ", ".join(incomplete_kpe_outcomes[:8]),
+            )
+        )
+
+    unresolved_conflicts = list(bundle.get("conflicts", []))
+    if unresolved_conflicts and not any(
+        token in decision_text.lower()
+        for token in ("conflict", "contradiction", "口径冲突", "数据冲突", "矛盾")
+    ):
+        issues.append(
+            DecisionDepthIssue(
+                "structured_conflict_usage",
+                "warning",
+                "structured preprocessing found source conflicts, but the PM memo does not reconcile or disclose them",
+            )
+        )
+    return issues
+
+
 def audit_report_depth(report_dir: str | Path) -> pd.DataFrame:
-    """Audit the final portfolio decision for shallow buy-side sections."""
-    decision_path = Path(report_dir) / "5_portfolio" / "decision.md"
+    """Audit the final portfolio decision for depth and deterministic integrity."""
+    report_path = Path(report_dir)
+    decision_path = report_path / "5_portfolio" / "decision.md"
     if not decision_path.exists():
         raise FileNotFoundError(f"Missing portfolio decision: {decision_path}")
-    issues = audit_decision_depth(read_text_fallback(decision_path))
+    decision_text = read_text_fallback(decision_path)
+    earnings_path = report_path / "0_context" / "earnings_model.md"
+    earnings_context = read_text_fallback(earnings_path) if earnings_path.exists() else ""
+    issues = audit_decision_depth(decision_text)
+    issues.extend(
+        audit_decision_integrity(
+            decision_text,
+            earnings_model_context=earnings_context,
+        )
+    )
+    issues.extend(audit_structured_research_usage(report_dir, decision_text))
     issues.extend(audit_context_alignment(report_dir))
     return pd.DataFrame(
         [
@@ -838,6 +1448,40 @@ def audit_report_depth(report_dir: str | Path) -> pd.DataFrame:
             for issue in issues
         ]
     )
+
+
+def render_post_generation_audit(report_dir: str | Path) -> str:
+    """Render a sidecar QA report after the PM memo has been generated."""
+    rows = audit_report_depth(report_dir)
+    lines = [
+        "# Post-Generation Research Integrity Audit",
+        "",
+        "- Scope: deterministic checks on final-report depth, arithmetic, period semantics, evidence lineage, and context alignment.",
+        "- This audit does not change or independently assign the investment rating.",
+        "",
+    ]
+    if rows.empty:
+        lines.extend(["## Verdict", "", "- PASS: no deterministic issue detected."])
+        return "\n".join(lines)
+    errors = int((rows["severity"] == "error").sum())
+    warnings = int((rows["severity"] == "warning").sum())
+    lines.extend(
+        [
+            "## Verdict",
+            "",
+            f"- {'FAIL' if errors else 'REVIEW'}: errors={errors}, warnings={warnings}.",
+            "- Any error must be reconciled before the memo is treated as publication- or investment-committee-ready.",
+            "",
+            "## Findings",
+            "",
+            "| section | severity | issue |",
+            "| --- | --- | --- |",
+        ]
+    )
+    for _, row in rows.iterrows():
+        issue = str(row["issue"]).replace("|", "/")
+        lines.append(f"| {row['section']} | {row['severity']} | {issue} |")
+    return "\n".join(lines)
 
 
 def read_text_fallback(path: Path) -> str:

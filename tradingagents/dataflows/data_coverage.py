@@ -5,6 +5,12 @@ from __future__ import annotations
 from dataclasses import dataclass
 import re
 
+from .research_evidence import (
+    build_evidence_record,
+    classify_evidence_text,
+    line_is_usable_evidence,
+)
+
 
 @dataclass(frozen=True)
 class ContextCoverage:
@@ -20,6 +26,9 @@ class KeyFact:
     status: str
     role: str
     evidence: str
+    source_tier: str = ""
+    evidence_type: str = ""
+    period: str = ""
 
 
 @dataclass(frozen=True)
@@ -396,6 +405,9 @@ def _extract_key_facts(
                         status="private_proxy",
                         role=role,
                         evidence=evidence,
+                        source_tier="private_alternative",
+                        evidence_type="private_proxy",
+                        period="see KPE date",
                     )
                 )
                 fact_no += 1
@@ -408,6 +420,8 @@ def _extract_key_facts(
                 or not _line_has_number(line)
             ):
                 continue
+            if not line_is_usable_evidence(name, line):
+                continue
             lower = line.lower()
             if not any(term in lower for term, _ in KEY_FACT_TERMS):
                 continue
@@ -415,13 +429,17 @@ def _extract_key_facts(
             if evidence.lower() in seen:
                 continue
             seen.add(evidence.lower())
+            semantic = build_evidence_record(f"KF{fact_no:02d}", name, line)
             facts.append(
                 KeyFact(
                     fact_id=f"KF{fact_no:02d}",
                     source_module=name,
-                    status=coverage.status,
+                    status=semantic.status,
                     role=_find_role(line),
                     evidence=evidence,
+                    source_tier=semantic.source_tier,
+                    evidence_type=semantic.evidence_type,
+                    period=semantic.period,
                 )
             )
             fact_no += 1
@@ -430,14 +448,24 @@ def _extract_key_facts(
     return facts
 
 
-def _matching_line(text: str, terms: tuple[str, ...]) -> str:
+def _matching_line(
+    source_module: str,
+    text: str,
+    terms: tuple[str, ...],
+) -> tuple[str, str]:
     lowered_terms = tuple(term.lower() for term in terms)
+    first_gap = ""
     for raw in text.splitlines():
         line = raw.strip(" -")
         lower = line.lower()
-        if any(term in lower for term in lowered_terms):
-            return _truncate_cell(line)
-    return ""
+        if not any(term in lower for term in lowered_terms):
+            continue
+        _, status = classify_evidence_text(source_module, line)
+        if status in {"reported", "calculated", "estimated", "private_proxy"}:
+            return _truncate_cell(line), status
+        if status == "missing" and not first_gap:
+            first_gap = _truncate_cell(line)
+    return first_gap, "missing"
 
 
 def _detect_profiles(contexts: dict[str, str]) -> list[dict[str, object]]:
@@ -482,18 +510,23 @@ def _build_core_variable_gates(
             evidence = ""
             evidence_status = "missing"
             for name, text in contexts.items():
-                line = _matching_line(text, terms)
+                line, semantic_status = _matching_line(name, text, terms)
                 if not line:
                     continue
                 coverage = coverage_by_name.get(name)
                 evidence = f"{name}: {line}"
+                if semantic_status == "missing":
+                    continue
                 if name == "knowledge_planet":
                     if evidence_status != "ready":
                         evidence_status = "private_proxy"
                     continue
-                if coverage and coverage.status == "ready":
+                if semantic_status in {"reported", "calculated"} and coverage and coverage.status == "ready":
                     evidence_status = "ready"
                     break
+                if semantic_status == "estimated" and evidence_status == "missing":
+                    evidence_status = "estimated"
+                    continue
                 if coverage and coverage.status in {"thin", "partial"}:
                     evidence_status = "partial"
                 else:
@@ -536,14 +569,15 @@ def build_data_coverage_context(contexts: dict[str, str]) -> str:
                 "",
                 "## Key Facts Ledger",
                 "",
-                "| fact_id | source_module | status | decision_role | evidence |",
-                "| --- | --- | --- | --- | --- |",
+                "| fact_id | source_module | status | decision_role | evidence | source_tier | evidence_type | source_period |",
+                "| --- | --- | --- | --- | --- | --- | --- | --- |",
             ]
         )
         for fact in key_facts:
             lines.append(
                 f"| {fact.fact_id} | {fact.source_module} | {fact.status} | "
-                f"{fact.role} | {fact.evidence} |"
+                f"{fact.role} | {fact.evidence} | {fact.source_tier} | "
+                f"{fact.evidence_type} | {fact.period} |"
             )
 
     gates = _build_core_variable_gates(contexts, coverage_by_name)

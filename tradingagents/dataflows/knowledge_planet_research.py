@@ -28,6 +28,7 @@ from typing import Callable, Iterable
 
 from tradingagents.dataflows.config import get_config
 from tradingagents.dataflows.industry_identity import is_hog_breeding_text
+from tradingagents.dataflows.research_evidence import infer_model_variable
 
 try:  # Optional: only used to add company name/industry search terms.
     from tradingagents.dataflows.tushare_a_stock import (
@@ -340,6 +341,8 @@ class KnowledgePlanetEvidence:
     decision_role: str
     evidence: str
     verification: str
+    model_variable: str
+    required_outcome: str
 
 
 @dataclass(frozen=True)
@@ -6376,6 +6379,16 @@ def _kp_decision_role(source_type: str, text: str = "") -> str:
     return "background/reject unless verified"
 
 
+def _kp_required_outcome(decision_role: str) -> str:
+    if decision_role == "KPI/forecast proxy":
+        return "numeric assumption delta or explicit rejection"
+    if decision_role == "probability/verification proxy":
+        return "scenario probability before->after or watch/reject"
+    if decision_role == "narrative challenge":
+        return "model conflict result and accepted/rejected reason"
+    return "verification-calendar item or rejection reason"
+
+
 def _build_kp_evidence_ledger(
     *,
     items: list[KpItem],
@@ -6401,12 +6414,14 @@ def _build_kp_evidence_ledger(
                 source="preprocessed_event",
                 source_type=source_type,
                 credibility=str(row["evidence_grade"] or infer_credibility(source_type)),
-                decision_role=_kp_decision_role(source_type, evidence),
+                decision_role=(decision_role := _kp_decision_role(source_type, evidence)),
                 evidence=evidence,
                 verification=_compact_text(
                     _row_get(row, "objective_anchor", row["verification"]),
                     120,
                 ),
+                model_variable=infer_model_variable(evidence),
+                required_outcome=_kp_required_outcome(decision_role),
             )
         )
         if len(rows) >= max_rows:
@@ -6429,9 +6444,11 @@ def _build_kp_evidence_ledger(
                 source="stream_item",
                 source_type=source_type,
                 credibility=infer_credibility(source_type),
-                decision_role=_kp_decision_role(source_type, evidence),
+                decision_role=(decision_role := _kp_decision_role(source_type, evidence)),
                 evidence=evidence,
                 verification="cross-check with filings/Tushare/price-volume/announcements before hard use",
+                model_variable=infer_model_variable(evidence),
+                required_outcome=_kp_required_outcome(decision_role),
             )
         )
         if len(rows) >= max_rows:
@@ -6542,8 +6559,8 @@ def _stock_fusion_pack_lines(
     if evidence_rows:
         lines.extend(
             [
-                "| evidence_id | date | source | type | credibility | decision_role | evidence | verification |",
-                "| --- | --- | --- | --- | --- | --- | --- | --- |",
+                "| evidence_id | date | source | type | credibility | decision_role | evidence | verification | affected_variable | required_outcome |",
+                "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
             ]
         )
         for row in evidence_rows:
@@ -6551,7 +6568,8 @@ def _stock_fusion_pack_lines(
                 f"| {row.evidence_id} | {_md_cell(row.published_at)} | {_md_cell(row.source)} | "
                 f"{_md_cell(row.source_type)} | {_md_cell(row.credibility)} | "
                 f"{_md_cell(row.decision_role)} | {_md_cell(row.evidence)} | "
-                f"{_md_cell(row.verification)} |"
+                f"{_md_cell(row.verification)} | {_md_cell(row.model_variable)} | "
+                f"{_md_cell(row.required_outcome)} |"
             )
     else:
         lines.append("- No company-specific high-information private/proxy evidence survived recall filtering.")

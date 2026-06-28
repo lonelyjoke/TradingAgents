@@ -40,6 +40,7 @@ from tradingagents.dataflows.prompt_compaction import (
     compact_for_prompt,
     compact_state_fields,
 )
+from tradingagents.dataflows.structured_research import compact_structured_research_for_prompt
 
 
 def create_bear_researcher(llm):
@@ -87,6 +88,9 @@ def create_bear_researcher(llm):
         forecast_model_context = prompt_contexts["forecast_model_context"]
         quality_audit_context = prompt_contexts["quality_audit_context"]
         thesis_question_context = prompt_contexts["thesis_question_context"]
+        structured_research_context = compact_structured_research_for_prompt(
+            state.get("structured_research_context", {}),
+        )
         prompt_history = compact_debate_history(history, profile="research")
         prompt_current_response = compact_for_prompt(
             current_response,
@@ -133,6 +137,7 @@ Key points to focus on:
 - Relative-Strength Discipline: If relative-strength/index-linkage context is available, use it to test whether the bull case is already priced, mostly benchmark/sector beta, or contradicted by persistent underperformance versus the same-industry basket. Do not use weak relative strength alone as proof of fundamental deterioration; connect it to valuation, expectations, liquidity, and evidence gaps.
 - Industry-Driver Discipline: Use the industry reading pack from the filing context to identify the sector-native variables that truly decide the thesis, then attack the weak links with outside evidence such as policy, investor Q&A, thematic catalysts, peers, and market expectations. Do not let generic revenue growth obscure the real industry question if the decisive variable is backlog quality, NBV, channel inventory, asset quality, utilization, or freight rate.
 - Business-Segment Valuation Discipline: Use the Business Segment Valuation Map and Segment Economics Pack to challenge each business bucket separately. Attack over-blending: mature core profit pools may deserve one multiple, while new businesses or second curves need disclosed revenue, margin, capex/utilization, customers, and cash conversion before they receive base-case valuation credit.
+- Segment-Prosperity Discipline: Challenge the prosperity level and marginal direction of every material business separately. Test whether demand, supply/capacity, price, utilization, margin, inventory/working capital, and cash data agree; surface conflicts and lags rather than using one weak segment to label the whole company. Attack any consolidated high-prosperity claim that is driven by a small segment, proxy-only evidence, or growth that does not reach segment profit and FCF.
 - Growth Sustainability Discipline: If the financial-report intelligence contains Growth Sustainability & Ramp Conditions, attack the thesis through the exact revenue/profit sustainability gates: missing verified drivers, weak ramp conditions, margin dilution, working-capital absorption, valuation-before-proof, and falsification signals.
 - Pre-Debate Underwriting Questions: If the financial-report intelligence contains this section, use it as the agenda for the opening bear case. Start with a compact question-led challenge table before broader sector objections. Preserve the upstream question IDs or short labels when available, and attack each thesis-critical question through missing evidence, weak inference, downside transmission, earnings/valuation risk, and next verification.
 - Relative Allocation Discipline: Explicitly answer why capital should not be deployed into a stronger peer or a better-positioned segment elsewhere in the same chain if such alternatives exist.
@@ -162,6 +167,7 @@ Latest world affairs news: {news_report}
 Company fundamentals report: {fundamentals_report}
 Industry-cycle scan: {industry_cycle_context}
 Company business-model primer: {company_business_model_context}
+Structured research bundle (JSON source of record): {structured_research_context}
 Industry KPI checklist: {industry_kpi_context}
 Forward forecast-model scaffold: {forecast_model_context}
 Sell-side depth and key-number audit: {quality_audit_context}
