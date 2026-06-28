@@ -11,9 +11,11 @@ from typing import Mapping
 
 from .industry_identity import (
     consumer_staples_subsector_hints,
+    has_lithium_battery_symbol_hint,
     is_consumer_staples_text,
     is_hog_breeding_text,
     is_insurance_text,
+    is_lithium_battery_text,
     is_telecom_operator_text,
 )
 
@@ -160,8 +162,27 @@ def _consumer_staples_playbook(symbol: str, combined_text: str) -> tuple[str, li
     )
 
 
+def _battery_playbook() -> tuple[str, list[tuple[str, str, str]]]:
+    return (
+        "battery / energy-storage chain",
+        [
+            ("Demand", "NEV sales/penetration, power-battery installation GWh, storage tenders/shipments GWh", "volume and mix"),
+            ("Share", "domestic/global battery-install share, key customer mix, overseas certification", "competitive position"),
+            ("Price", "battery ASP, lithium/material pass-through, pricing clauses", "revenue and gross margin"),
+            ("Cost", "lithium carbonate, cathode/anode/electrolyte, manufacturing yield, warranty", "unit margin"),
+            ("Capacity", "effective capacity, utilization, new bases, capex and depreciation", "operating leverage"),
+            ("Backlog", "contract liabilities, orders, storage pipeline, customer concentration", "visibility"),
+            ("Cash / Return", "OCF/NI, working capital, capex, FCF and ROIC", "earnings quality and reinvestment return"),
+        ],
+    )
+
+
 def _detect_playbook(symbol: str, combined_text: str) -> tuple[str, list[tuple[str, str, str]]]:
     lower = f"{symbol}\n{combined_text}".lower()
+    # Structured company identity outranks incidental keywords from generic
+    # metals, software, telecom, or thematic contexts.
+    if has_lithium_battery_symbol_hint(symbol):
+        return _battery_playbook()
     if is_telecom_operator_text(symbol, combined_text):
         return (
             "telecom operator / high-dividend SOE",
@@ -283,10 +304,13 @@ def _detect_playbook(symbol: str, combined_text: str) -> tuple[str, list[tuple[s
                 ("Cash", "prepayments, receivables, inventory, OCF/NI, capex, debt maturity", "cash conversion and balance-sheet risk"),
             ],
         )
-    if any(
-        token in combined_text
-        for token in ("正极材料", "磷酸铁锂", "三元材料", "前驱体", "锂电材料", "电池材料")
-    ) or any(token in lower for token in ("cathode", "precursor", "lfp")):
+    if "300750" not in lower and (
+        any(
+            token in combined_text
+            for token in ("正极材料", "磷酸铁锂", "三元材料", "前驱体", "锂电材料", "电池材料")
+        )
+        or any(token in lower for token in ("cathode", "precursor", "lfp"))
+    ):
         return (
             "lithium battery materials / cathode chain",
             [
@@ -298,24 +322,8 @@ def _detect_playbook(symbol: str, combined_text: str) -> tuple[str, list[tuple[s
                 ("Cash", "receivables, notes, inventory, OCF/NI, credit impairment", "earnings quality"),
             ],
         )
-    if (
-        "300750" in lower
-        or "动力电池" in combined_text
-        or "储能电池" in combined_text
-        or "锂离子电池" in combined_text
-        or "battery" in lower
-    ):
-        return (
-            "battery / energy-storage chain",
-            [
-                ("Demand", "NEV sales/penetration, power-battery installation GWh, storage tenders/shipments GWh", "volume and mix"),
-                ("Share", "domestic/global battery-install share, key customer mix, overseas certification", "competitive position"),
-                ("Price", "battery ASP, lithium/material pass-through, pricing clauses", "revenue and gross margin"),
-                ("Cost", "lithium carbonate, cathode/anode/electrolyte, manufacturing yield, warranty", "unit margin"),
-                ("Capacity", "effective capacity, utilization, new bases, capex and depreciation", "operating leverage"),
-                ("Backlog", "contract liabilities, orders, storage pipeline, customer concentration", "visibility"),
-            ],
-        )
+    if is_lithium_battery_text(symbol, combined_text):
+        return _battery_playbook()
     if any(token in lower for token in ["002460", "赣锋", "锂", "lithium"]):
         return (
             "lithium / metals cycle",

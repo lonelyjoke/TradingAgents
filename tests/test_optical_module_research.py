@@ -5,6 +5,12 @@ from tradingagents.dataflows.data_coverage import classify_context_coverage
 from tradingagents.dataflows.optical_module_research import get_optical_module_context
 
 
+def test_optical_module_context_skips_structured_battery_cell_company():
+    rendered = get_optical_module_context("300750.SZ", "2026-06-27")
+
+    assert "- Status: not_applicable" in rendered
+
+
 def test_optical_module_context_triggers_for_zhongji(monkeypatch):
     monkeypatch.setattr(
         optical_module_research,

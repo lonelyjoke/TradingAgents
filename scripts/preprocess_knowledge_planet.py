@@ -46,6 +46,15 @@ def main() -> int:
         action="store_true",
         help="Suppress progress output.",
     )
+    parser.add_argument(
+        "--llm-report-analysis",
+        action="store_true",
+        help="Use the configured LLM to enrich PDF report structures.",
+    )
+    parser.add_argument("--llm-provider", default=None, help="Optional LLM provider override.")
+    parser.add_argument("--llm-model", default=None, help="Optional LLM model override.")
+    parser.add_argument("--llm-base-url", default=None, help="Optional LLM base URL override.")
+    parser.add_argument("--max-llm-reports", type=int, default=None, help="Maximum PDF reports to enrich.")
     args = parser.parse_args()
 
     if args.db:
@@ -55,6 +64,11 @@ def main() -> int:
         args.date,
         args.lookback_days,
         progress=None if args.quiet else print,
+        include_llm_report_analysis=bool(args.llm_report_analysis),
+        llm_provider=args.llm_provider,
+        llm_model=args.llm_model,
+        llm_base_url=args.llm_base_url,
+        max_llm_reports=args.max_llm_reports,
     )
     print("Knowledge Planet preprocessing complete")
     print(f"window: {stats.start_date} to {stats.end_date}")

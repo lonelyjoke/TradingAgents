@@ -5,7 +5,7 @@ from dataclasses import dataclass
 import pandas as pd
 
 from .thematic_research import _compact_text, _load_financial_report_texts
-from .industry_identity import is_telecom_operator_text
+from .industry_identity import has_lithium_battery_symbol_hint, is_telecom_operator_text
 from .tushare_a_stock import (
     TushareDataError,
     _fetch_balance_sheet_data,
@@ -249,6 +249,12 @@ def get_optical_module_context(
         return f"# AI optical-module context unavailable\n\n- Reason: expected A-share symbol; got {ticker!r}."
 
     symbol = ticker.upper()
+    if has_lithium_battery_symbol_hint(symbol):
+        return (
+            f"# AI optical-module context for {symbol}\n\n"
+            "- Status: not_applicable\n"
+            "- Reason: structured battery-cell/system identity overrides incidental AI/datacom terms; keep AIDC exposure in the battery scenario layer."
+        )
     profile = _company_profile(symbol, curr_date, look_back_days)
     if profile is None:
         return (

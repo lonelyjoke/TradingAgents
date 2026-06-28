@@ -7,8 +7,10 @@ from typing import Mapping
 
 from .industry_identity import (
     consumer_staples_subsector_hints,
+    has_lithium_battery_symbol_hint,
     is_hog_breeding_text,
     is_insurance_text,
+    is_lithium_battery_text,
     is_telecom_operator_text,
 )
 
@@ -30,18 +32,69 @@ def _compact_lines(text: str, patterns: tuple[str, ...], *, limit: int = 8) -> l
 
 
 def _is_battery_context(symbol: str, text: str) -> bool:
-    lower = f"{symbol}\n{text}".lower()
-    return (
-        "300750" in lower
-        or "battery" in lower
-        or "动力电池" in text
-        or "储能电池" in text
-        or "锂离子电池" in text
-    )
+    return is_lithium_battery_text(symbol, text)
+
+
+def _battery_forecast_drivers() -> list[tuple[str, str, str]]:
+    return [
+        ("Power battery revenue", "GWh shipments x ASP", "installation demand, share, customer mix, price clauses"),
+        ("Energy-storage revenue", "GWh shipments x ASP", "storage tenders, overseas demand, project delivery"),
+        ("Materials / recycling / other", "volume x realized spread or service revenue", "vertical integration and utilization"),
+        ("Gross profit", "segment revenue x segment gross margin", "lithium/material cost, yield, depreciation, warranty"),
+        ("Operating profit", "gross profit - R&D - SG&A", "R&D capitalization/expense, scale leverage"),
+        ("net profit/EPS / FCF", "operating profit - tax/minority + working-capital/capex bridge", "cash conversion and capex cycle"),
+    ]
+
+
+def _knowledge_planet_assumption_rows(text: str, *, limit: int = 8) -> list[tuple[str, str, str, str]]:
+    """Translate KPE ledger rows into model variables for downstream LLM judgment.
+
+    This deliberately stops short of changing a forecast.  It makes the model
+    state the affected variable, allowed use, and public verification gate.
+    """
+    rows: list[tuple[str, str, str, str]] = []
+    for raw in (text or "").splitlines():
+        line = raw.strip()
+        if not re.match(r"^\|\s*KPE\d+\s*\|", line, re.I):
+            continue
+        cells = [cell.strip() for cell in line.strip("|").split("|")]
+        if len(cells) < 8:
+            continue
+        evidence_id = cells[0]
+        evidence = cells[6]
+        verification = cells[7]
+        lowered = evidence.lower()
+        if any(term in lowered for term in ("订单", "排产", "出货", "销量", "shipment", "order")):
+            variable = "segment volume / utilization / backlog"
+        elif any(term in lowered for term in ("asp", "价格", "price", "折扣")):
+            variable = "realized ASP / price pass-through"
+        elif any(term in lowered for term in ("锂价", "碳酸锂", "原材料", "cost", "lithium")):
+            variable = "unit cost / gross margin"
+        elif any(term in lowered for term in ("储能", "钠电", "aidc", "机器人", "storage", "sodium")):
+            variable = "new-business revenue / capex / scenario probability"
+        elif any(term in lowered for term in ("关税", "制裁", "地缘", "tariff", "sanction")):
+            variable = "overseas revenue / valuation risk premium"
+        else:
+            variable = "working hypothesis / verification calendar"
+        rows.append(
+            (
+                evidence_id,
+                variable,
+                "private/proxy prior; quantify delta or reject, never use as a hard fact",
+                verification or "public filing, announcement, market or operating KPI cross-check",
+            )
+        )
+        if len(rows) >= limit:
+            break
+    return rows
 
 
 def _is_battery_material_context(symbol: str, text: str) -> bool:
     lower = f"{symbol}\n{text}".lower()
+    # Cell/system makers discuss cathodes and LFP extensively; those upstream
+    # mentions must not reroute their full-company model to a material spread.
+    if str(symbol or "").strip().upper() == "300750.SZ":
+        return False
     return any(
         token in text
         for token in ("正极材料", "磷酸铁锂", "三元材料", "前驱体", "锂电材料", "电池材料")
@@ -250,6 +303,7 @@ def build_forecast_model_context(
         ]
     )
     is_hog_breeder = is_hog_breeding_text(symbol, combined)
+    is_battery_company = _is_battery_context(symbol, combined)
     evidence = _compact_lines(
         combined,
         (
@@ -262,7 +316,9 @@ def build_forecast_model_context(
         ),
         limit=10,
     )
-    if is_telecom_operator_text(symbol, combined):
+    if has_lithium_battery_symbol_hint(symbol):
+        drivers = _battery_forecast_drivers()
+    elif is_telecom_operator_text(symbol, combined):
         drivers = [
             ("Mobile service revenue", "mobile subscribers x mobile ARPU", "5G penetration, package mix, churn, DOU, pricing discipline"),
             ("Broadband / home revenue", "broadband subscribers x household ARPU", "gigabit penetration, smart-home attach, bundling"),
@@ -294,15 +350,8 @@ def build_forecast_model_context(
             ("Operating profit", "gross profit - R&D - SG&A - credit impairment", "customer concentration, receivables, scale leverage"),
             ("net profit/EPS / FCF", "operating profit - tax/minority + working-capital/capex bridge", "OCF/NI, inventory, capex, expansion cycle"),
         ]
-    elif _is_battery_context(symbol, combined):
-        drivers = [
-            ("Power battery revenue", "GWh shipments x ASP", "installation demand, share, customer mix, price clauses"),
-            ("Energy-storage revenue", "GWh shipments x ASP", "storage tenders, overseas demand, project delivery"),
-            ("Materials / recycling / other", "volume x realized spread or service revenue", "vertical integration and utilization"),
-            ("Gross profit", "segment revenue x segment gross margin", "lithium/material cost, yield, depreciation, warranty"),
-            ("Operating profit", "gross profit - R&D - SG&A", "R&D capitalization/expense, scale leverage"),
-            ("net profit/EPS / FCF", "operating profit - tax/minority + working-capital/capex bridge", "cash conversion and capex cycle"),
-        ]
+    elif is_battery_company:
+        drivers = _battery_forecast_drivers()
     else:
         drivers = [
             ("Core revenue", "volume x ASP x mix", "demand, price, market share"),
@@ -330,6 +379,43 @@ def build_forecast_model_context(
             "- Use PE only on normalized cycle earnings. Do not use TTM PE or a one-year trough/peak EPS as the primary hog-breeder valuation anchor.",
         ]
 
+    battery_model_section = []
+    if is_battery_company:
+        battery_model_section = [
+            "",
+            "## Battery Forecast And Valuation Controls",
+            "| control | Mandatory treatment |",
+            "| --- | --- |",
+            "| Segment model | model power battery, energy storage, materials/recycling, and other businesses separately |",
+            "| Revenue bridge | GWh shipments x realized ASP by segment; reconcile mix and consolidation eliminations |",
+            "| Margin bridge | ASP/pass-through - lithium/material cost - manufacturing/depreciation/warranty; show utilization sensitivity |",
+            "| Earnings bridge | segment gross profit - R&D/SG&A/finance - tax/minority/non-recurring = parent net profit/EPS |",
+            "| Cash bridge | net profit + D&A - working capital - capex = FCF; reconcile OCF/NI and capacity expansion |",
+            "| Scenario discipline | show bear/base/bull shipment, ASP, utilization, gross margin, EPS, FCF, and valuation multiple |",
+            "| Valuation monotonicity | a deterioration case must not receive a higher multiple than base without an explicit, evidence-backed reason |",
+            "| Probability audit | record scenario probabilities before and after each private/proxy clue; unexplained probability changes are invalid |",
+            "- Missing shipment, ASP, utilization, or segment-margin evidence must remain an explicit model gap and cap conviction; narrative strength cannot fill a numeric cell.",
+        ]
+
+    kp_assumption_rows = (
+        _knowledge_planet_assumption_rows(knowledge_planet_context)
+        if is_battery_company
+        else []
+    )
+    kp_assumption_section = []
+    if kp_assumption_rows:
+        kp_assumption_section = [
+            "",
+            "## Alternative-Intelligence Assumption Bridge",
+            "| evidence_id | affected model variable | permitted use | verification gate |",
+            "| --- | --- | --- | --- |",
+            *[
+                f"| {evidence_id} | {variable} | {use} | {verification} |"
+                for evidence_id, variable, use, verification in kp_assumption_rows
+            ],
+            "- The downstream model must state an explicit numeric assumption delta, scenario-probability delta, or rejection reason for every listed KPE item.",
+        ]
+
     return "\n".join(
         [
             f"# Forward Forecast Model Scaffold for {symbol} as of {curr_date}",
@@ -344,6 +430,8 @@ def build_forecast_model_context(
             "| --- | --- | --- |",
             *[f"| {name} | {formula} | {assumption} |" for name, formula, assumption in drivers],
             *hog_sensitivity_section,
+            *battery_model_section,
+            *kp_assumption_section,
             "",
             "## Mandatory Three-Year Table",
             "| item | 2026E | 2027E | 2028E | evidence / assumption status |",

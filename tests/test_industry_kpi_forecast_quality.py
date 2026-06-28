@@ -25,6 +25,31 @@ def test_battery_industry_kpi_checklist_uses_sector_native_drivers():
     assert "verified, partial, or missing" in context
 
 
+def test_battery_gwh_decimal_does_not_trigger_telecom_playbook():
+    filing = (
+        "宁德时代主营动力电池和储能电池。2025年新型储能新增装机规模达"
+        "189.5GWh，公司电池销量和产能利用率是核心变量。"
+    )
+
+    kpi = build_industry_kpi_context(
+        "300750.SZ",
+        "2026-06-27",
+        filing_intelligence_context=filing,
+    )
+    forecast = build_forecast_model_context(
+        "300750.SZ",
+        "2026-06-27",
+        filing_intelligence_context=filing,
+        industry_kpi_context=kpi,
+    )
+
+    assert "battery / energy-storage chain" in kpi
+    assert "telecom operator" not in kpi
+    assert "Power battery revenue" in forecast
+    assert "Mobile service revenue" not in forecast
+    assert "Battery Forecast And Valuation Controls" in forecast
+
+
 def test_lithium_industry_kpi_checklist_uses_metals_cycle_drivers():
     context = build_industry_kpi_context(
         "002460.SZ",
@@ -220,6 +245,26 @@ def test_forecast_model_scaffold_requires_three_year_driver_bridge():
     assert "2027E" in context
     assert "2028E" in context
     assert "net profit/EPS" in context
+    assert "Valuation monotonicity" in context
+
+
+def test_battery_forecast_maps_knowledge_planet_clues_to_model_variables():
+    context = build_forecast_model_context(
+        "300750.SZ",
+        "2026-06-27",
+        company_business_model_context="动力电池和储能电池是主要利润池。",
+        knowledge_planet_context=(
+            "### Private / Proxy Evidence Ledger\n"
+            "| evidence_id | date | source | type | credibility | decision_role | evidence | verification |\n"
+            "| --- | --- | --- | --- | --- | --- | --- | --- |\n"
+            "| KPE01 | 2026-06-24 | preprocessed_event | industry_weekly_data | high | KPI/forecast proxy | 钠电储能订单与排产提升 | check official order and shipment disclosure |\n"
+        ),
+    )
+
+    assert "Alternative-Intelligence Assumption Bridge" in context
+    assert "KPE01" in context
+    assert "segment volume / utilization / backlog" in context
+    assert "numeric assumption delta, scenario-probability delta, or rejection reason" in context
 
 
 def test_muyuan_forecast_scaffold_requires_hog_price_sensitivity():
@@ -430,6 +475,34 @@ def test_quality_audit_catches_report_specific_number_and_attribution_errors():
     assert "not enough to prove a peer is a superior substitute" in context
     assert "do not infer institutional rotation" in context
     assert "trading volume alone" in context
+
+
+def test_quality_audit_blocks_battery_telecom_template_mismatch():
+    context = build_quality_audit_context(
+        "300750.SZ",
+        "2026-06-27",
+        industry_cycle_context="# Industry Cycle Scan\n\ncycle evidence ready " + "x" * 150,
+        company_business_model_context="# Business Model\n\n动力电池、储能电池和电芯 " + "x" * 150,
+        industry_kpi_context=(
+            "# Industry KPI Checklist\n\n- Playbook: telecom operator / high-dividend SOE\n"
+            "mobile subscribers, 5G penetration and mobile ARPU " + "x" * 150
+        ),
+        forecast_model_context=(
+            "# Forecast\n\nMobile service revenue = mobile subscribers x mobile ARPU "
+            + "x" * 150
+        ),
+        peer_comparison_context="# Peers\n\nready " + "x" * 150,
+        price_earnings_decomposition_context="# PE EPS\n\nready " + "x" * 150,
+        earnings_model_context="# Earnings\n\nready " + "x" * 150,
+        filing_intelligence_context="# Filing\n\n动力电池销量与储能电池毛利率 " + "x" * 150,
+    )
+
+    assert "Battery KPI routing | partial" in context
+    assert "Battery forecast bridge | partial" in context
+    assert "Industry KPI checklist | partial" in context
+    assert "Three-year forecast bridge | partial" in context
+    assert "Quarterly reports must preserve their disclosed audit status" in context
+    assert "Scenario valuation must be economically monotonic" in context
 
 
 def test_quality_audit_flags_metals_template_mismatch_and_missing_aluminum_spread():

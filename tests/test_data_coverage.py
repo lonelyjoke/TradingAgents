@@ -118,6 +118,36 @@ def test_build_data_coverage_adds_bank_core_variable_gates():
     assert "Use Core Variable Gates as rating-strength guardrails" in audit
 
 
+def test_build_data_coverage_prefers_explicit_battery_profile_over_incidental_noise():
+    audit = build_data_coverage_context(
+        {
+            "industry_kpi_checklist": (
+                "# Industry KPI Checklist\n"
+                "- Playbook: battery / energy-storage chain\n"
+                "- Power-battery shipments: 661GWh.\n"
+                "- Segment gross margin: 24.8%.\n"
+                "- Capacity utilization remains a model gap.\n"
+            ),
+            "forecast_model_scaffold": (
+                "# Forecast Model\n"
+                "Power battery revenue = GWh shipments x ASP.\n"
+                "OCF and capex determine FCF.\n"
+            ),
+            "insurance_context": (
+                "# Insurance verification context\n"
+                "- Status: not_applicable\n"
+                "Do not force NBV, EV, solvency or COR analysis into this stock.\n"
+            ),
+            "dividend_context": "For banks, capital adequacy can constrain dividends.\n" + "x" * 150,
+        }
+    )
+
+    assert "| battery / energy storage | Power-battery shipments / share | ready |" in audit
+    assert "| battery / energy storage | Capacity utilization | ready |" in audit
+    assert "| bank |" not in audit
+    assert "| insurance |" not in audit
+
+
 def test_build_data_coverage_treats_knowledge_planet_kpe_as_private_proxy():
     audit = build_data_coverage_context(
         {

@@ -2,6 +2,17 @@
 
 from __future__ import annotations
 
+import re
+
+
+TELECOM_OPERATOR_SYMBOL_HINTS = frozenset(
+    {
+        "600050.SH",  # China Unicom
+        "600941.SH",  # China Mobile
+        "601728.SH",  # China Telecom
+    }
+)
+
 
 TELECOM_OPERATOR_TERMS = (
     "电信运营",
@@ -19,12 +30,91 @@ TELECOM_OPERATOR_TERMS = (
     "telecommunication operator",
 )
 
+TELECOM_OPERATOR_STRONG_TERMS = (
+    "电信运营",
+    "通信运营",
+    "运营商",
+    "中国电信",
+    "中国移动",
+    "中国联通",
+    "移动通信服务",
+    "宽带接入",
+    "天翼云",
+    "ARPU",
+    "telecom operator",
+    "telecommunication operator",
+)
 
-def is_telecom_operator_text(*parts: object) -> bool:
+
+LITHIUM_BATTERY_SYMBOL_HINTS = frozenset(
+    {
+        "300750.SZ",  # CATL
+        "300014.SZ",  # EVE Energy
+        "002074.SZ",  # Gotion High-Tech
+        "300438.SZ",  # Great Power
+        "688567.SH",  # Farasis Energy
+    }
+)
+
+LITHIUM_BATTERY_TERMS = (
+    "动力电池",
+    "储能电池",
+    "锂离子电池",
+    "电芯",
+    "电池系统",
+    "power battery",
+    "energy-storage battery",
+    "battery cell",
+    "catl",
+    "宁德时代",
+)
+
+
+def _standalone_ascii_term(text: str, term: str) -> bool:
+    """Match short ASCII identity terms without leaking across numbers/units.
+
+    In particular, ``189.5GWh`` must not be read as evidence that a battery
+    company is a 5G telecom operator.
+    """
+    return bool(
+        re.search(
+            rf"(?<![A-Za-z0-9.]){re.escape(term)}(?![A-Za-z0-9])",
+            text,
+            flags=re.IGNORECASE,
+        )
+    )
+
+
+def is_telecom_operator_text(symbol: object = "", *parts: object) -> bool:
     """Return True when the text points to a telecom operator business."""
-    text = " ".join(str(part or "") for part in parts)
+    normalized_symbol = str(symbol or "").strip().upper()
+    if normalized_symbol in TELECOM_OPERATOR_SYMBOL_HINTS:
+        return True
+    text = " ".join([str(symbol or ""), *(str(part or "") for part in parts)])
     lower = text.lower()
-    return any(term.lower() in lower for term in TELECOM_OPERATOR_TERMS)
+    if any(term.lower() in lower for term in TELECOM_OPERATOR_STRONG_TERMS):
+        return True
+    # 5G is useful only as a standalone token and is too weak on its own.
+    # Require a second operator-native feature before selecting the playbook.
+    return _standalone_ascii_term(text, "5G") and any(
+        term in lower for term in ("subscriber", "broadband", "mobile arpu", "cloud revenue")
+    )
+
+
+def is_lithium_battery_text(symbol: object = "", *parts: object) -> bool:
+    """Return True for battery-cell/system companies, not incidental demand mentions."""
+    normalized_symbol = str(symbol or "").strip().upper()
+    if normalized_symbol in LITHIUM_BATTERY_SYMBOL_HINTS:
+        return True
+    text = " ".join([str(symbol or ""), *(str(part or "") for part in parts)])
+    lower = text.lower()
+    hits = sum(term.lower() in lower for term in LITHIUM_BATTERY_TERMS)
+    return hits >= 2
+
+
+def has_lithium_battery_symbol_hint(symbol: object = "") -> bool:
+    """Return whether structured symbol identity proves a cell/system maker."""
+    return str(symbol or "").strip().upper() in LITHIUM_BATTERY_SYMBOL_HINTS
 
 
 INSURANCE_SYMBOL_HINTS = frozenset(

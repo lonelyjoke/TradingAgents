@@ -7,6 +7,8 @@ from dataclasses import dataclass
 
 import pandas as pd
 
+from .industry_identity import has_lithium_battery_symbol_hint
+
 from .commodity_research import (
     METAL_FUTURES_SOURCE_REGISTRY,
     _infer_products,
@@ -388,8 +390,10 @@ def _inferred_metals(symbol: str) -> tuple[str, ...]:
 
 
 def _company_profile(symbol: str, curr_date: str, look_back_days: int) -> MetalsMiningProfile | None:
-    basic = _fetch_stock_basic(symbol)
     curated = METALS_MINING_COMPANIES.get(symbol, {})
+    if has_lithium_battery_symbol_hint(symbol) and not curated:
+        return None
+    basic = _fetch_stock_basic(symbol)
     company_name = str(curated.get("name") or symbol)
     industry = ""
     if basic is not None:

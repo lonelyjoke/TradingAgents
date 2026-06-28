@@ -166,6 +166,25 @@ KEY_FACT_TERMS = (
 
 PROFILE_RULES = (
     {
+        "profile": "battery / energy storage",
+        "triggers": (
+            "playbook: battery / energy-storage chain",
+            "power battery revenue",
+            "gwh shipments x asp",
+            "动力电池",
+            "储能电池",
+        ),
+        "variables": (
+            ("Power-battery shipments / share", ("power-battery", "power battery", "gwh", "动力电池")),
+            ("Energy-storage shipments / orders", ("energy-storage", "storage battery", "储能", "storage pipeline")),
+            ("Battery ASP / pass-through", ("battery asp", "realized asp", "price pass-through", "pricing clauses")),
+            ("Lithium/material cost", ("lithium carbonate", "material cost", "碳酸锂", "原材料")),
+            ("Capacity utilization", ("capacity utilization", "utilization", "产能利用率")),
+            ("Segment gross margin", ("segment gross margin", "gross margin", "毛利率")),
+            ("OCF / FCF / capex", ("ocf", "fcf", "capex", "operating cash flow")),
+        ),
+    },
+    {
         "profile": "bank",
         "triggers": (
             "reading profile: banking",
@@ -421,7 +440,28 @@ def _matching_line(text: str, terms: tuple[str, ...]) -> str:
     return ""
 
 
-def _detect_profiles(blob: str) -> list[dict[str, object]]:
+def _detect_profiles(contexts: dict[str, str]) -> list[dict[str, object]]:
+    kpi_text = "\n".join(
+        value
+        for name, value in contexts.items()
+        if "industry_kpi" in name or "forecast_model" in name
+    ).lower()
+    explicit_markers = (
+        ("battery / energy-storage chain", "battery / energy storage"),
+        ("telecom operator / high-dividend soe", "telecom operator"),
+        ("insurance / integrated financial services", "insurance"),
+        ("hog breeding / live-hog cycle", "hog breeding"),
+        ("consumer staples /", "consumer staples"),
+        ("nonferrous metals /", "metals/mining"),
+        ("lithium / metals cycle", "metals/mining"),
+    )
+    for marker, profile_name in explicit_markers:
+        if marker in kpi_text:
+            matched = [rule for rule in PROFILE_RULES if rule["profile"] == profile_name]
+            if matched:
+                return matched
+
+    blob = "\n".join(contexts.values())
     lower = blob.lower()
     profiles = [
         rule for rule in PROFILE_RULES if any(term in lower for term in rule["triggers"])
@@ -435,9 +475,8 @@ def _build_core_variable_gates(
     contexts: dict[str, str],
     coverage_by_name: dict[str, ContextCoverage],
 ) -> list[CoreVariableGate]:
-    blob = "\n".join(contexts.values())
     gates: list[CoreVariableGate] = []
-    for rule in _detect_profiles(blob):
+    for rule in _detect_profiles(contexts):
         profile = str(rule["profile"])
         for variable, terms in rule["variables"]:  # type: ignore[index]
             evidence = ""

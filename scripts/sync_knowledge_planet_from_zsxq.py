@@ -22,6 +22,10 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
+for _stream in (sys.stdout, sys.stderr):
+    if hasattr(_stream, "reconfigure"):
+        _stream.reconfigure(encoding="utf-8", errors="replace")
+
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_ROOT = REPO_ROOT / "data" / "knowledge_planet"
@@ -438,16 +442,25 @@ def _format_topic_block(
     return "\n".join(lines).strip()
 
 
-def fetch_topics_for_date(
+class PaginationLimitReached(RuntimeError):
+    """Raised when the requested date range was not fully reached."""
+
+
+def fetch_topics_for_window(
     group: ZsxqGroup,
-    target_date: str,
+    start_date: str,
+    end_date: str,
     *,
     limit_per_page: int,
     max_pages: int,
 ) -> list[dict[str, Any]]:
     topics: list[dict[str, Any]] = []
     end_time = ""
+    oldest_date = ""
+    has_more = False
+    pages_scanned = 0
     for _page in range(max_pages):
+        pages_scanned += 1
         args = [
             "group",
             "+topics",
@@ -470,18 +483,42 @@ def fetch_topics_for_date(
             if not isinstance(topic, dict):
                 continue
             topic_date = _date_from_topic(topic)
-            if topic_date == target_date:
+            if start_date <= topic_date <= end_date:
                 topics.append(topic)
 
         oldest_date = _date_from_topic(page_topics[-1]) if isinstance(page_topics[-1], dict) else ""
-        if oldest_date and oldest_date < target_date:
+        if oldest_date and oldest_date < start_date:
             break
-        if not data.get("has_more"):
+        has_more = bool(data.get("has_more"))
+        if not has_more:
             break
         end_time = str(data.get("next_end_time") or "")
         if not end_time:
             break
+    else:
+        if has_more and (not oldest_date or oldest_date >= start_date):
+            raise PaginationLimitReached(
+                "pagination limit reached before the requested window was fully covered: "
+                f"pages={pages_scanned}, oldest_date={oldest_date or 'unknown'}, "
+                f"requested={start_date}..{end_date}; increase --max-pages"
+            )
     return topics
+
+
+def fetch_topics_for_date(
+    group: ZsxqGroup,
+    target_date: str,
+    *,
+    limit_per_page: int,
+    max_pages: int,
+) -> list[dict[str, Any]]:
+    return fetch_topics_for_window(
+        group,
+        target_date,
+        target_date,
+        limit_per_page=limit_per_page,
+        max_pages=max_pages,
+    )
 
 
 def write_daily_markdown(
@@ -505,6 +542,7 @@ def write_daily_markdown(
     for group in groups:
         topics = topics_by_group.get(group.group_id, [])
         for topic in topics:
+            topic_date = _date_from_topic(topic) or target_date[:10]
             image_remaining = (
                 None
                 if max_image_downloads is None
@@ -518,7 +556,7 @@ def write_daily_markdown(
             attachment_result = sync_topic_attachments(
                 topic,
                 root=root,
-                target_date=target_date,
+                target_date=topic_date,
                 download_images=download_images,
                 ocr_images=ocr_images,
                 ocr_language=ocr_language,
@@ -554,7 +592,12 @@ def parse_group(value: str) -> ZsxqGroup:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Sync zsxq topics into data/knowledge_planet/inbox.")
-    parser.add_argument("--date", default=datetime.now().strftime("%Y-%m-%d"), help="Target local date, YYYY-MM-DD.")
+    parser.add_argument("--date", default=datetime.now().strftime("%Y-%m-%d"), help="Window end date, YYYY-MM-DD.")
+    parser.add_argument(
+        "--start-date",
+        default=None,
+        help="Optional window start date. Defaults to --date for a single-day sync.",
+    )
     parser.add_argument(
         "--group-id",
         action="append",
@@ -562,7 +605,7 @@ def main() -> int:
         help="Group id to sync. Use id:name to keep a display name. Can be repeated.",
     )
     parser.add_argument("--limit-per-page", type=int, default=30, help="Topics per API page, max 30.")
-    parser.add_argument("--max-pages", type=int, default=120, help="Maximum pages to scan per group.")
+    parser.add_argument("--max-pages", type=int, default=600, help="Maximum pages to scan per group.")
     parser.add_argument("--root", type=Path, default=DEFAULT_ROOT, help="Knowledge Planet data root.")
     parser.add_argument("--output", type=Path, default=None, help="Optional output markdown path.")
     parser.add_argument("--no-download-images", action="store_true", help="Do not download topic images.")
@@ -577,27 +620,44 @@ def main() -> int:
     if not groups:
         raise SystemExit("Please pass at least one --group-id. Example: --group-id 28888112822211:前沿信息收录")
 
-    output = args.output or args.root / "inbox" / f"{args.date}_zsxq_sync.md"
+    start_date = str(args.start_date or args.date)
+    end_date = str(args.date)
+    if start_date > end_date:
+        raise SystemExit("--start-date must be earlier than or equal to --date")
+    output_name = (
+        f"{end_date}_zsxq_sync.md"
+        if start_date == end_date
+        else f"{start_date}_to_{end_date}_zsxq_sync.md"
+    )
+    output = args.output or args.root / "inbox" / output_name
     topics_by_group: dict[str, list[dict[str, Any]]] = {}
     failures: list[str] = []
     for group in groups:
         try:
-            topics = fetch_topics_for_date(
+            topics = fetch_topics_for_window(
                 group,
-                args.date,
+                start_date,
+                end_date,
                 limit_per_page=max(1, min(30, args.limit_per_page)),
                 max_pages=max(1, args.max_pages),
             )
             topics_by_group[group.group_id] = topics
-            print(f"{group.group_id} {group.name or ''}: {len(topics)} topic(s)")
+            print(
+                f"{group.group_id} {group.name or ''}: {len(topics)} topic(s) "
+                f"for {start_date}..{end_date}"
+            )
         except Exception as exc:
             failures.append(f"{group.group_id} {group.name or ''}: {exc}")
             print(f"{group.group_id} {group.name or ''}: failed - {exc}")
 
+    if failures and not topics_by_group:
+        print("Sync failed before any complete group result was available; no stream file was written.")
+        return 1
+
     count, attachment_totals = write_daily_markdown(
         groups,
         topics_by_group,
-        args.date,
+        end_date if start_date == end_date else f"{start_date}..{end_date}",
         output,
         root=args.root,
         download_images=not args.no_download_images,
@@ -620,7 +680,7 @@ def main() -> int:
         print("Some groups failed:")
         for failure in failures:
             print(f"- {failure}")
-    return 0 if count or not failures else 1
+    return 1 if failures else 0
 
 
 if __name__ == "__main__":

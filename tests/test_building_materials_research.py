@@ -6,6 +6,12 @@ from tradingagents.dataflows.building_materials_research import (
 )
 
 
+def test_building_materials_context_skips_structured_battery_cell_company():
+    rendered = get_building_materials_context("300750.SZ", "2026-06-27")
+
+    assert "- Status: not_applicable" in rendered
+
+
 def test_building_materials_context_triggers_for_curated_conch(monkeypatch):
     monkeypatch.setattr(building_materials_research, "_fetch_stock_basic", lambda symbol: None)
     monkeypatch.setattr(

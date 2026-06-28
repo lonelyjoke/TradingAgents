@@ -180,7 +180,7 @@ DEFAULT_CONFIG = {
     ),
     "knowledge_planet_auto_sync_max_pages": _env_int_or_default(
         "KNOWLEDGE_PLANET_AUTO_SYNC_MAX_PAGES",
-        120,
+        600,
     ),
     "knowledge_planet_auto_sync_max_image_downloads": _env_int_or_default(
         "KNOWLEDGE_PLANET_AUTO_SYNC_MAX_IMAGE_DOWNLOADS",

@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import json
 import hashlib
+import importlib.util
 import math
 import os
 import re
@@ -54,7 +55,7 @@ DAILY_ANALYSIS_TARGETS = DAILY_MAIN_BOARD_SIZE + DAILY_WATCH_BOARD_SIZE
 DAILY_MAIN_MIN_SCORE = 55
 DAILY_WATCH_MIN_SCORE = 35
 
-PREPROCESS_SCHEMA_VERSION = 3
+PREPROCESS_SCHEMA_VERSION = 4
 
 INFORMATION_RICH_TYPES = {
     "industry_weekly_data",
@@ -591,9 +592,14 @@ def _is_past_sync_date(sync_date: str) -> bool:
     return sync_dt.date() < datetime.now().date()
 
 
-def _run_project_script(args: list[str], timeout: int = 900) -> tuple[int, str]:
+def _run_project_script(
+    args: list[str],
+    timeout: int = 900,
+    *,
+    python_executable: str | None = None,
+) -> tuple[int, str]:
     completed = subprocess.run(
-        [sys.executable, *args],
+        [python_executable or sys.executable, *args],
         cwd=str(_REPO_ROOT),
         text=True,
         encoding="utf-8",
@@ -605,6 +611,135 @@ def _run_project_script(args: list[str], timeout: int = 900) -> tuple[int, str]:
     )
     output = "\n".join(part for part in (completed.stdout.strip(), completed.stderr.strip()) if part)
     return completed.returncode, output
+
+
+def _pdf_import_python() -> str:
+    if importlib.util.find_spec("pypdf") is not None:
+        return sys.executable
+    bundled = (
+        Path.home()
+        / ".cache"
+        / "codex-runtimes"
+        / "codex-primary-runtime"
+        / "dependencies"
+        / "python"
+        / "python.exe"
+    )
+    return str(bundled) if bundled.exists() else sys.executable
+
+
+def _import_knowledge_planet_local_index() -> str:
+    import_script = _REPO_ROOT / "scripts" / "import_knowledge_planet.py"
+    if not import_script.exists():
+        return "local_import_failed:missing_script"
+    args = [str(import_script), "--backfill-report-text"]
+    if _db_path() != DEFAULT_KP_DB:
+        args.extend(["--db", str(_db_path())])
+    try:
+        code, output = _run_project_script(
+            args,
+            timeout=1800,
+            python_executable=_pdf_import_python(),
+        )
+    except Exception as exc:
+        return f"local_import_failed:exception:{_compact_text(str(exc), 180)}"
+    if code != 0:
+        return f"local_import_failed:exit_{code}:{_compact_text(output, 240)}"
+    return f"local_import_ok:{_compact_text(output, 240)}"
+
+
+def _sync_skip_status(sync_date: str, *, force: bool, min_interval: int) -> str | None:
+    stamp = _sync_stamp_path(sync_date)
+    if not stamp.exists() or force or _sync_stamp_is_empty(stamp):
+        return None
+    if _is_past_sync_date(sync_date):
+        return f"already_synced_past_date:{stamp}"
+    if min_interval > 0:
+        stamp_age = datetime.now() - datetime.fromtimestamp(stamp.stat().st_mtime)
+        if stamp_age < timedelta(minutes=min_interval):
+            age_minutes = max(0, int(stamp_age.total_seconds() // 60))
+            return f"recently_synced:{age_minutes}m:{stamp}"
+    return None
+
+
+def _sync_knowledge_planet_range(
+    start_date: str,
+    end_date: str,
+    stamp_dates: list[str],
+    *,
+    progress: Callable[[str], None] | None,
+    max_pages: int | None,
+    max_image_downloads: int | None,
+    max_file_downloads: int | None,
+) -> str:
+    config = get_config()
+    group_spec = str(config.get("knowledge_planet_auto_sync_group") or "").strip()
+    if not group_spec:
+        return "auto_sync_skipped:no_group"
+
+    pages = int(
+        config.get("knowledge_planet_auto_sync_max_pages", 600)
+        if max_pages is None
+        else max_pages
+    )
+    max_images = int(
+        config.get("knowledge_planet_auto_sync_max_image_downloads", 100)
+        if max_image_downloads is None
+        else max_image_downloads
+    )
+    max_files = int(
+        config.get("knowledge_planet_auto_sync_max_file_downloads", 50)
+        if max_file_downloads is None
+        else max_file_downloads
+    )
+    sync_script = _REPO_ROOT / "scripts" / "sync_knowledge_planet_from_zsxq.py"
+    if not sync_script.exists():
+        return "auto_sync_failed:missing_sync_script"
+
+    if progress:
+        progress(
+            f"[knowledge planet sync] syncing {group_spec} for {start_date}..{end_date}"
+        )
+    sync_args = [
+        str(sync_script),
+        "--start-date",
+        start_date,
+        "--date",
+        end_date,
+        "--group-id",
+        group_spec,
+        "--max-pages",
+        str(max(1, pages)),
+        "--max-image-downloads",
+        str(max(0, max_images)),
+        "--max-file-downloads",
+        str(max(0, max_files)),
+    ]
+    try:
+        sync_code, sync_output = _run_project_script(sync_args, timeout=1800)
+    except Exception as exc:
+        return f"auto_sync_failed:sync_exception:{_compact_text(str(exc), 180)}"
+    if sync_code != 0:
+        return f"auto_sync_failed:sync_exit_{sync_code}:{_compact_text(sync_output, 320)}"
+    if progress and sync_output:
+        progress(_compact_text(sync_output, 600))
+
+    _sync_state_dir().mkdir(parents=True, exist_ok=True)
+    stamp_text = "\n".join(
+        [
+            f"window={start_date}..{end_date}",
+            f"group={group_spec}",
+            f"synced_at={datetime.now().isoformat(timespec='seconds')}",
+            "",
+            sync_output,
+        ]
+    )
+    for sync_date in stamp_dates:
+        _sync_stamp_path(sync_date).write_text(
+            f"date={sync_date}\n{stamp_text}",
+            encoding="utf-8",
+        )
+    return f"synced_window:{start_date}..{end_date}:dates={len(stamp_dates)}"
 
 
 def ensure_knowledge_planet_upstream_synced(
@@ -629,94 +764,28 @@ def ensure_knowledge_planet_upstream_synced(
         return "auto_sync_skipped:pytest"
 
     sync_date = (sync_date or datetime.now().strftime("%Y-%m-%d"))[:10]
-    stamp = _sync_stamp_path(sync_date)
     config = get_config()
     min_interval = int(config.get("knowledge_planet_auto_sync_min_interval_minutes", 30) or 0)
-    if stamp.exists() and not force and not _sync_stamp_is_empty(stamp):
-        if _is_past_sync_date(sync_date):
-            return f"already_synced_past_date:{stamp}"
-        if min_interval > 0:
-            stamp_age = datetime.now() - datetime.fromtimestamp(stamp.stat().st_mtime)
-            if stamp_age < timedelta(minutes=min_interval):
-                age_minutes = max(0, int(stamp_age.total_seconds() // 60))
-                return f"recently_synced:{age_minutes}m:{stamp}"
-
-    group_spec = str(config.get("knowledge_planet_auto_sync_group") or "").strip()
-    if not group_spec:
-        return "auto_sync_skipped:no_group"
-
-    max_pages = int(
-        config.get("knowledge_planet_auto_sync_max_pages", 20)
-        if max_pages is None
-        else max_pages
-    )
-    max_images = int(
-        config.get("knowledge_planet_auto_sync_max_image_downloads", 100)
-        if max_image_downloads is None
-        else max_image_downloads
-    )
-    max_files = int(
-        config.get("knowledge_planet_auto_sync_max_file_downloads", 50)
-        if max_file_downloads is None
-        else max_file_downloads
-    )
-
-    sync_script = _REPO_ROOT / "scripts" / "sync_knowledge_planet_from_zsxq.py"
-    import_script = _REPO_ROOT / "scripts" / "import_knowledge_planet.py"
-    if not sync_script.exists() or not import_script.exists():
-        return "auto_sync_failed:missing_scripts"
-
-    if progress:
-        progress(f"[knowledge planet sync] syncing {group_spec} for {sync_date}")
-
-    sync_args = [
-        str(sync_script),
-        "--date",
+    skip_status = _sync_skip_status(
         sync_date,
-        "--group-id",
-        group_spec,
-        "--max-pages",
-        str(max_pages),
-        "--max-image-downloads",
-        str(max_images),
-        "--max-file-downloads",
-        str(max_files),
-    ]
-    try:
-        sync_code, sync_output = _run_project_script(sync_args, timeout=1200)
-    except Exception as exc:
-        return f"auto_sync_failed:sync_exception:{_compact_text(str(exc), 180)}"
-    if sync_code != 0:
-        return f"auto_sync_failed:sync_exit_{sync_code}:{_compact_text(sync_output, 240)}"
-
-    if progress and sync_output:
-        progress(_compact_text(sync_output, 500))
-
-    try:
-        import_code, import_output = _run_project_script([str(import_script)], timeout=1200)
-    except Exception as exc:
-        return f"auto_sync_failed:import_exception:{_compact_text(str(exc), 180)}"
-    if import_code != 0:
-        return f"auto_sync_failed:import_exit_{import_code}:{_compact_text(import_output, 240)}"
-
-    _sync_state_dir().mkdir(parents=True, exist_ok=True)
-    stamp.write_text(
-        "\n".join(
-            [
-                f"date={sync_date}",
-                f"group={group_spec}",
-                f"synced_at={datetime.now().isoformat(timespec='seconds')}",
-                "",
-                sync_output,
-                "",
-                import_output,
-            ]
-        ),
-        encoding="utf-8",
+        force=force,
+        min_interval=min_interval,
     )
-    if progress:
-        progress(f"[knowledge planet sync] done; stamp={stamp}")
-    return f"synced:{stamp}"
+    if skip_status:
+        return skip_status
+    status = _sync_knowledge_planet_range(
+        sync_date,
+        sync_date,
+        [sync_date],
+        progress=progress,
+        max_pages=max_pages,
+        max_image_downloads=max_image_downloads,
+        max_file_downloads=max_file_downloads,
+    )
+    if status.startswith("auto_sync_failed:"):
+        return status
+    import_status = _import_knowledge_planet_local_index()
+    return f"{status}; {import_status}"
 
 
 def _json_tuple(value: str | None) -> tuple[str, ...]:
@@ -791,15 +860,56 @@ def ensure_knowledge_planet_upstream_synced_for_window(
     max_pages: int | None = None,
     max_image_downloads: int | None = None,
     max_file_downloads: int | None = None,
+    import_local: bool = True,
 ) -> str:
-    """Best-effort upstream sync for every calendar date in a report/context window."""
-    statuses: list[str] = []
-    for sync_date in _dates_for_window(end_date, look_back_days):
-        statuses.append(
-            f"{sync_date}="
-            f"{ensure_knowledge_planet_upstream_synced(sync_date, force=force, progress=progress, max_pages=max_pages, max_image_downloads=max_image_downloads, max_file_downloads=max_file_downloads)}"
+    """Sync a date window in one upstream scan, then refresh the shared local index."""
+    dates = _dates_for_window(end_date, look_back_days)
+    if not dates:
+        return "auto_sync_skipped:no_dates"
+
+    statuses: dict[str, str] = {}
+    refresh_dates: list[str] = []
+    if not _enabled():
+        statuses = {sync_date: "disabled" for sync_date in dates}
+    elif not _auto_sync_enabled():
+        statuses = {sync_date: "auto_sync_disabled" for sync_date in dates}
+    elif os.getenv("PYTEST_CURRENT_TEST"):
+        statuses = {sync_date: "auto_sync_skipped:pytest" for sync_date in dates}
+    else:
+        min_interval = int(
+            get_config().get("knowledge_planet_auto_sync_min_interval_minutes", 30)
+            or 0
         )
-    return "; ".join(statuses) if statuses else "auto_sync_skipped:no_dates"
+        for sync_date in dates:
+            skip_status = _sync_skip_status(
+                sync_date,
+                force=force,
+                min_interval=min_interval,
+            )
+            if skip_status:
+                statuses[sync_date] = skip_status
+            else:
+                refresh_dates.append(sync_date)
+        if refresh_dates:
+            batch_status = _sync_knowledge_planet_range(
+                min(refresh_dates),
+                max(refresh_dates),
+                refresh_dates,
+                progress=progress,
+                max_pages=max_pages,
+                max_image_downloads=max_image_downloads,
+                max_file_downloads=max_file_downloads,
+            )
+            for sync_date in refresh_dates:
+                statuses[sync_date] = batch_status
+
+    parts = [f"{sync_date}={statuses[sync_date]}" for sync_date in dates]
+    if import_local and not os.getenv("PYTEST_CURRENT_TEST"):
+        import_status = _import_knowledge_planet_local_index()
+        parts.append(f"local_index={import_status}")
+        if progress:
+            progress(f"[knowledge planet import] {import_status}")
+    return "; ".join(parts)
 
 
 def _safe_like_term(term: str) -> str:
@@ -5225,6 +5335,118 @@ def _extract_report_structures(report: KpReport) -> list[dict[str, str]]:
     return structures[:12]
 
 
+def _build_report_llm_prompt(report: KpReport, rule_structures: list[dict[str, str]]) -> str:
+    text = _report_research_excerpt(report, max_chars=12000)
+    rule_summary = "\n".join(
+        f"- {row['category']}: {row['extracted_value']}"
+        for row in rule_structures[:10]
+    ) or "- no deterministic extraction"
+    return f"""你是A股买方研究团队的研报结构化分析师。请只基于给定PDF正文和规则抽取底稿，输出严格JSON，不要编造正文没有的信息。
+
+研报标题：{report.title}
+券商/来源：{report.broker or "unknown"}
+关联代码：{", ".join(report.tickers) if report.tickers else "unknown"}
+关联公司：{", ".join(report.companies) if report.companies else "unknown"}
+主题：{", ".join(report.themes) if report.themes else "unknown"}
+
+规则抽取底稿：
+{rule_summary}
+
+PDF正文摘录：
+{_compact_text(text, 12000)}
+
+请把研报拆成“卖方假设账本”，用于和TradingAgents自己的盈利模型、估值桥、行业KPI、价格量能和公告/Tushare数据做对照。不要直接采纳卖方结论。返回JSON格式：
+{{
+  "structures": [
+    {{
+      "category": "core_assumption|earnings_forecast|valuation_method|rating_target_change|key_chart_number|model_conflict_check|research_value|contradiction_or_gap|verification_plan",
+      "extracted_value": "一句话抽取该项内容，保留关键数字/年份/单位",
+      "evidence": "正文中支持该项的短证据",
+      "model_check": "我们的投研系统应如何验证或挑战它",
+      "status": "llm_enriched"
+    }}
+  ]
+}}
+
+要求：
+1. 至少覆盖核心假设、盈利预测或估值方法中的一个；如果正文没有，就不要硬编。
+2. 必须给出 model_conflict_check：说明它可能与我们模型在哪些地方冲突或需要比较。
+3. 关键数字必须保留单位和年份；无法确认单位时写明“单位需核对”。
+4. 研报目标价、评级、上调/下调只能作为卖方观点，必须说明验证路径。
+5. 最多输出10条 structures。
+"""
+
+
+def _run_llm_report_structure_analysis(
+    report: KpReport,
+    rule_structures: list[dict[str, str]],
+    llm,
+) -> list[dict[str, str]]:
+    try:
+        prompt = _build_report_llm_prompt(report, rule_structures)
+        system_text = (
+            "你是买方投研系统的数据结构化助手。输出必须是可解析JSON。"
+            "只能基于用户提供的研报正文，不得编造事实。"
+        )
+        try:
+            from langchain_core.messages import HumanMessage, SystemMessage
+
+            llm_input = [SystemMessage(content=system_text), HumanMessage(content=prompt)]
+        except Exception:
+            llm_input = f"{system_text}\n\n{prompt}"
+        response = llm.invoke(llm_input)
+        parsed = _json_from_text(str(getattr(response, "content", response)))
+        raw_rows = parsed.get("structures", [])
+        if not isinstance(raw_rows, list):
+            return []
+        rows: list[dict[str, str]] = []
+        allowed = {
+            "core_assumption",
+            "earnings_forecast",
+            "valuation_method",
+            "rating_target_change",
+            "key_chart_number",
+            "model_conflict_check",
+            "research_value",
+            "contradiction_or_gap",
+            "verification_plan",
+        }
+        for raw in raw_rows[:10]:
+            if not isinstance(raw, dict):
+                continue
+            category = str(raw.get("category") or "").strip()
+            if category not in allowed:
+                category = "research_value"
+            extracted = _compact_text(str(raw.get("extracted_value") or ""), 260)
+            evidence = _compact_text(str(raw.get("evidence") or extracted), 260)
+            model_check = _compact_text(
+                str(raw.get("model_check") or _report_structure_model_check(category)),
+                260,
+            )
+            if not extracted:
+                continue
+            rows.append(
+                {
+                    "category": category,
+                    "extracted_value": extracted,
+                    "evidence": evidence,
+                    "model_check": model_check,
+                    "status": "llm_enriched",
+                }
+            )
+        return rows
+    except Exception as exc:
+        return [
+            {
+                "category": "llm_report_analysis_failed",
+                "extracted_value": _compact_text(str(exc), 220),
+                "evidence": "LLM report analysis failed; deterministic structures remain available.",
+                "model_check": "Retry scheduled Knowledge Planet update or inspect provider/API configuration.",
+                "status": "failed",
+            }
+        ]
+
+
 def _line_has_numeric_or_rating(line: str) -> bool:
     return bool(
         re.search(r"\d+(?:\.\d+)?\s*(?:%|pct|x|倍|元|亿元|亿|万|bp|bps)?", line, re.I)
@@ -5241,6 +5463,11 @@ def preprocess_knowledge_planet_window(
     look_back_days: int = 6,
     *,
     progress: Callable[[str], None] | None = None,
+    include_llm_report_analysis: bool | None = None,
+    llm_provider: str | None = None,
+    llm_model: str | None = None,
+    llm_base_url: str | None = None,
+    max_llm_reports: int | None = None,
 ) -> KpPreprocessStats:
     """Build cached research assets from raw Knowledge Planet items/reports."""
     conn = _connect()
@@ -5250,7 +5477,43 @@ def preprocess_knowledge_planet_window(
     _init_preprocess_tables(conn)
     start_date, end_date = _date_window(report_date, look_back_days)
     now_text = datetime.now().isoformat(timespec="seconds")
-    run_key = f"{start_date}:{end_date}:v{PREPROCESS_SCHEMA_VERSION}"
+    source_state = conn.execute(
+        """
+        SELECT
+            (SELECT COUNT(*) FROM kp_items
+             WHERE substr(COALESCE(NULLIF(published_at, ''), imported_at), 1, 10) BETWEEN ? AND ?) AS item_count,
+            (SELECT COALESCE(MAX(imported_at), '') FROM kp_items
+             WHERE substr(COALESCE(NULLIF(published_at, ''), imported_at), 1, 10) BETWEEN ? AND ?) AS item_max_imported,
+            (SELECT COUNT(*) FROM kp_reports
+             WHERE substr(COALESCE(NULLIF(published_at, ''), imported_at), 1, 10) BETWEEN ? AND ?) AS report_count,
+            (SELECT COALESCE(MAX(imported_at), '') FROM kp_reports
+             WHERE substr(COALESCE(NULLIF(published_at, ''), imported_at), 1, 10) BETWEEN ? AND ?) AS report_max_imported,
+            (SELECT COUNT(*) FROM kp_reports
+             WHERE substr(COALESCE(NULLIF(published_at, ''), imported_at), 1, 10) BETWEEN ? AND ?
+               AND extraction_status = 'ok') AS report_text_ready
+        """,
+        (
+            start_date,
+            end_date,
+            start_date,
+            end_date,
+            start_date,
+            end_date,
+            start_date,
+            end_date,
+            start_date,
+            end_date,
+        ),
+    ).fetchone()
+    source_fingerprint = hashlib.sha1(
+        "|".join(
+            "" if source_state[key] is None else str(source_state[key])
+            for key in source_state.keys()
+        ).encode("utf-8")
+    ).hexdigest()[:12]
+    run_key = (
+        f"{start_date}:{end_date}:v{PREPROCESS_SCHEMA_VERSION}:{source_fingerprint}"
+    )
 
     if bool(get_config().get("knowledge_planet_preprocess_cache_enabled", True)):
         cached = conn.execute(
@@ -5341,6 +5604,34 @@ def preprocess_knowledge_planet_window(
     reports = [_row_to_report(row) for row in report_rows]
     if progress:
         progress(f"[preprocess] items={len(items)}, reports={len(reports)}, window={start_date}..{end_date}")
+
+    config = get_config()
+    use_llm_reports = (
+        bool(config.get("knowledge_planet_llm_report_analysis_enabled", False))
+        if include_llm_report_analysis is None
+        else bool(include_llm_report_analysis)
+    )
+    llm_report_limit = int(
+        config.get("knowledge_planet_llm_report_analysis_max_reports", 8)
+        if max_llm_reports is None
+        else max_llm_reports
+    )
+    report_llm = None
+    if use_llm_reports and reports and llm_report_limit > 0:
+        provider = str(llm_provider or config.get("knowledge_planet_llm_provider") or config.get("llm_provider") or "deepseek")
+        model = str(llm_model or config.get("knowledge_planet_llm_model") or config.get("quick_think_llm") or "deepseek-chat")
+        try:
+            report_llm = _create_market_analysis_llm(
+                provider,
+                model,
+                llm_base_url or config.get("backend_url"),
+                progress=progress,
+            )
+            if progress:
+                progress(f"[preprocess] LLM report analysis enabled: {provider}/{model}, max_reports={llm_report_limit}")
+        except Exception as exc:
+            if progress:
+                progress(f"[preprocess] LLM report analysis unavailable: {_compact_text(str(exc), 180)}")
 
     old_clusters = [
         str(row["cluster_key"])
@@ -5654,12 +5945,13 @@ def preprocess_knowledge_planet_window(
                 )
 
     report_assumptions = 0
+    llm_reports_done = 0
     for report in reports:
         assumption_type = _report_assumption_type(report)
         title = report.title or report.summary or "Untitled report"
         assumption = _clean_report_snippet(_report_research_excerpt(report), 620)
         status = "pdf_text_available" if report.extracted_text_path else "metadata_only"
-        if "download" in status.lower():
+        if not report.extracted_text_path:
             pdf_pending_or_limited += 1
         assumption_id = f"report:{report.row_id}:{assumption_type}"
         report_assumptions += 1
@@ -5686,8 +5978,25 @@ def preprocess_knowledge_planet_window(
                 now_text,
             ),
         )
-        for idx, structure in enumerate(_extract_report_structures(report), start=1):
-            structure_id = f"report:{report.row_id}:structure:{idx}:{structure['category']}"
+        rule_structures = _extract_report_structures(report)
+        llm_structures: list[dict[str, str]] = []
+        if report_llm is not None and llm_reports_done < llm_report_limit:
+            llm_structures = _run_llm_report_structure_analysis(
+                report,
+                rule_structures,
+                report_llm,
+            )
+            llm_reports_done += 1
+            if progress:
+                analyzed = sum(1 for row in llm_structures if row.get("status") == "llm_enriched")
+                progress(f"[preprocess] LLM report structures {llm_reports_done}/{llm_report_limit}: report_id={report.row_id}, rows={analyzed}")
+        combined_structures = [
+            *rule_structures,
+            *llm_structures,
+        ]
+        for idx, structure in enumerate(combined_structures, start=1):
+            source_prefix = "llm" if structure.get("status") == "llm_enriched" else "structure"
+            structure_id = f"report:{report.row_id}:{source_prefix}:{idx}:{structure['category']}"
             _insert_json(
                 conn,
                 """
@@ -6290,13 +6599,14 @@ def _stock_fusion_pack_lines(
     if structures:
         lines.extend(
             [
-                "| date | category | extracted value | model conflict / use check |",
-                "| --- | --- | --- | --- |",
+                "| date | category | status | extracted value | model conflict / use check |",
+                "| --- | --- | --- | --- | --- |",
             ]
         )
         for row in structures[:10]:
             lines.append(
                 f"| {str(row['published_at'])[:10]} | {_md_cell(row['category'])} | "
+                f"{_md_cell(row['status'])} | "
                 f"{_md_cell(_compact_text(row['extracted_value'], 150))} | "
                 f"{_md_cell(_compact_text(row['model_check'], 130))} |"
             )
@@ -6355,6 +6665,7 @@ def get_knowledge_planet_context(
         max_file_downloads=int(
             config.get("knowledge_planet_context_sync_max_file_downloads", 0) or 0
         ),
+        import_local=False,
     )
     preprocess_status = "disabled"
     if bool(config.get("knowledge_planet_preprocess_enabled", True)):

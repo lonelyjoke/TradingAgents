@@ -44,7 +44,7 @@ Optional environment overrides:
 
 - `KNOWLEDGE_PLANET_AUTO_SYNC=0` disables automatic upstream sync.
 - `KNOWLEDGE_PLANET_AUTO_SYNC_GROUP=28888112822211:前沿信息收录`
-- `KNOWLEDGE_PLANET_AUTO_SYNC_MAX_PAGES=120`
+- `KNOWLEDGE_PLANET_AUTO_SYNC_MAX_PAGES=600`
 - `KNOWLEDGE_PLANET_AUTO_SYNC_MAX_IMAGE_DOWNLOADS=100`
 - `KNOWLEDGE_PLANET_AUTO_SYNC_MAX_FILE_DOWNLOADS=50`
 - `KNOWLEDGE_PLANET_AUTO_SYNC_MIN_INTERVAL_MINUTES=30`
@@ -55,7 +55,9 @@ Optional environment overrides:
 
 Recommended operating model:
 
-1. Run the daily report or full sync/preprocess once before/after the market.
+1. Run the daily report before/after the market. It refreshes the shared local
+   index, backfills PDF text, preprocesses the selected window, and then reads
+   that same SQLite database; no separate import command is required.
 2. Run single-stock TradingAgents reports repeatedly during research; they reuse
    the cached 30-day knowledge window instead of redownloading/OCRing the whole
    source stream.
@@ -66,11 +68,20 @@ For scheduled single-stock research support, use the one-command rolling update:
 
 `.\scripts\update_knowledge_planet_30d.cmd`
 
-This syncs the rolling 30-day window, imports stream posts and PDF attachments,
+This scans the rolling 30-day window once, imports stream posts and PDF attachments,
 backfills missing PDF text, and rebuilds cached research assets. Existing date
 sync stamps under `data/knowledge_planet/.sync_state/` and importer content
 hashes skip already-synced dates and already-imported items. Use `--force` only
 when you intentionally want to resync a date window.
+
+The scheduled 30-day updater uses the configured LLM by default to enrich PDF
+research-report structures. Disable that layer with:
+
+`.\scripts\update_knowledge_planet_30d.cmd --no-llm-report-analysis`
+
+Override the model with:
+
+`.\scripts\update_knowledge_planet_30d.cmd --llm-provider deepseek --llm-model deepseek-chat`
 
 Not every joined group allows API access. If `zsxq-cli` reports a message such
 as `该星球内容仅限成员在星球内查看，暂不支持通过 API 访问`, keep using the
@@ -88,7 +99,10 @@ The sync script also attempts to enrich non-text material:
 
 Useful safety limits:
 
-`.\scripts\sync_knowledge_planet_from_zsxq.cmd --date 2026-06-19 --group-id 28888112822211:前沿信息收录 --max-pages 120 --max-image-downloads 100 --max-file-downloads 50`
+`.\scripts\sync_knowledge_planet_from_zsxq.cmd --start-date 2026-05-20 --date 2026-06-19 --group-id 28888112822211:前沿信息收录 --max-pages 600 --max-image-downloads 100 --max-file-downloads 50`
+
+If `--max-pages` is exhausted before the start date is reached, the command now
+fails explicitly instead of recording a successful empty day.
 
 If you only want text sync:
 
@@ -173,8 +187,7 @@ LLM provider, model, Tushare scoring depth, and LLM candidate count. The default
 mode is the full workflow: Knowledge Planet stream/PDFs, Tushare
 fundamental/technical validation, and DeepSeek-style LLM thesis decomposition.
 
-After the daily import finishes, generate the standalone Knowledge Planet
-daily report with:
+Generate the standalone Knowledge Planet daily report with:
 
 `.\scripts\generate_knowledge_planet_daily.cmd --date 2026-06-19`
 
@@ -187,8 +200,9 @@ you want a rolling window. The report ranks mentioned candidates by information
 content, catalyst clues, and pump-risk signals. It is a theme-trading shortlist,
 not a direct buy list.
 
-For a rolling daily report, `--lookback-days` now syncs and imports every
-calendar day in the window before the report is built. The command-line default
+For a rolling daily report, `--lookback-days` syncs the complete date window in
+one upstream scan, imports/backfills the shared local index, and preprocesses it
+before the report is built. The command-line default
 is `--lookback-days 6`, which means a seven-day window including the report
 date. For example, `--date 2026-06-19 --lookback-days 2` covers 2026-06-17
 through 2026-06-19.
@@ -262,7 +276,8 @@ to be consumed as a sell-side hypothesis ledger, not as conclusions: every
 extracted forecast, valuation method, target/rating change, and key number must
 be checked against the TradingAgents earnings model, valuation bridge, industry
 KPI gates, filings/Tushare data, and price/volume evidence before it can affect
-rating or sizing.
+rating or sizing. Rows with `status=llm_enriched` come from the configured LLM;
+rule-based rows remain available as a deterministic fallback.
 
 Useful optional environment overrides:
 

@@ -1,6 +1,12 @@
 from tradingagents.dataflows.software_research import get_software_context
 
 
+def test_software_context_skips_structured_battery_cell_company():
+    rendered = get_software_context("300750.SZ", "2026-06-27")
+
+    assert "- Status: not_applicable" in rendered
+
+
 def test_software_context_triggers_for_kingsoft_office(monkeypatch):
     monkeypatch.setattr(
         "tradingagents.dataflows.software_research._fetch_stock_basic",

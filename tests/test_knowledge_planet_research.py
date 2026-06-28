@@ -1,4 +1,5 @@
 import json
+import hashlib
 import sqlite3
 from pathlib import Path
 from types import SimpleNamespace
@@ -155,7 +156,7 @@ def test_single_stock_context_retrieves_stream_and_pdf(tmp_path, monkeypatch):
     monkeypatch.setattr(kp, "DEFAULT_KP_DB", db_path)
     monkeypatch.setattr(kp, "_fetch_stock_basic", None)
 
-    context = kp.get_knowledge_planet_context("300750.SZ", "2026-06-19")
+    context = kp.get_knowledge_planet_context("300750.SZ", "2026-06-19", look_back_days=6)
 
     assert "Matched stream items: 1" in context
     assert "Matched PDF reports: 1" in context
@@ -369,12 +370,91 @@ def test_preprocess_extracts_pdf_report_structures(tmp_path, monkeypatch):
     assert "model_conflict_check" in categories
     assert any("TradingAgents earnings model" in row["model_check"] for row in rows)
 
-    context = kp.get_knowledge_planet_context("300750.SZ", "2026-06-19")
+    context = kp.get_knowledge_planet_context("300750.SZ", "2026-06-19", look_back_days=6)
 
     assert "### PDF Report Structured Thesis Map" in context
     assert "earnings_forecast" in context
     assert "valuation_method" in context
     assert "model_conflict_check" in context
+
+
+def test_preprocess_can_llm_enrich_pdf_report_structures(tmp_path, monkeypatch):
+    db_path = tmp_path / "kp.sqlite"
+    _make_db(db_path)
+    text_path = tmp_path / "sellside_report.txt"
+    text_path.write_text(
+        "Revenue forecast: 2026 revenue 120 billion yuan. Valuation: 25x PE target price 120 yuan.",
+        encoding="utf-8",
+    )
+    conn = sqlite3.connect(db_path)
+    conn.row_factory = sqlite3.Row
+    _insert_report(conn)
+    conn.execute(
+        "UPDATE kp_reports SET title = ?, summary = ?, extracted_text_path = ? WHERE id = 1",
+        (
+            "CATL 300750.SZ model conflict report",
+            "CATL revenue forecast valuation target price",
+            str(text_path),
+        ),
+    )
+    conn.commit()
+    conn.close()
+
+    class DummyLLM:
+        def invoke(self, _messages):
+            return SimpleNamespace(
+                content=json.dumps(
+                    {
+                        "structures": [
+                            {
+                                "category": "research_value",
+                                "extracted_value": "Sell-side assumes battery recovery drives 2026 revenue.",
+                                "evidence": "2026 revenue 120 billion yuan",
+                                "model_check": "Compare with TradingAgents revenue bridge and utilization assumptions.",
+                                "status": "llm_enriched",
+                            },
+                            {
+                                "category": "model_conflict_check",
+                                "extracted_value": "25x PE and 120 yuan target may exceed our valuation bridge.",
+                                "evidence": "25x PE target price 120 yuan",
+                                "model_check": "Rebuild target-price math and downside support before using rating.",
+                                "status": "llm_enriched",
+                            },
+                        ]
+                    },
+                    ensure_ascii=False,
+                )
+            )
+
+    monkeypatch.setattr(kp, "DEFAULT_KP_DB", db_path)
+    monkeypatch.setattr(kp, "_fetch_stock_basic", None)
+    monkeypatch.setattr(
+        kp,
+        "_create_market_analysis_llm",
+        lambda *_args, **_kwargs: DummyLLM(),
+    )
+
+    kp.preprocess_knowledge_planet_window(
+        "2026-06-19",
+        6,
+        include_llm_report_analysis=True,
+        max_llm_reports=1,
+    )
+
+    conn = sqlite3.connect(db_path)
+    conn.row_factory = sqlite3.Row
+    rows = conn.execute(
+        "SELECT category, status, extracted_value FROM kp_report_structures WHERE status = 'llm_enriched'"
+    ).fetchall()
+    conn.close()
+
+    assert {row["category"] for row in rows} >= {"research_value", "model_conflict_check"}
+    assert any("Sell-side assumes" in row["extracted_value"] for row in rows)
+
+    context = kp.get_knowledge_planet_context("300750.SZ", "2026-06-19", look_back_days=6)
+
+    assert "llm_enriched" in context
+    assert "research_value" in context
 
 
 def test_single_stock_knowledge_defaults_use_lightweight_sync():
@@ -400,10 +480,11 @@ def test_preprocess_cache_check_returns_before_loading_details(tmp_path, monkeyp
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """,
         (
-            "2026-06-14:2026-06-20:v3",
+                "2026-06-14:2026-06-20:v4:"
+                + hashlib.sha1("0||0||0".encode("utf-8")).hexdigest()[:12],
             "2026-06-14",
             "2026-06-20",
-            3,
+                4,
             0,
             0,
             0,
@@ -759,17 +840,27 @@ def test_trading_graph_wires_knowledge_planet_context():
 def test_window_sync_covers_each_date(monkeypatch):
     calls = []
 
-    def fake_sync(sync_date, *, force=False, progress=None, **kwargs):
-        calls.append(sync_date)
-        return "synced"
+    def fake_sync(start_date, end_date, stamp_dates, **_kwargs):
+        calls.append((start_date, end_date, stamp_dates))
+        return "synced_window"
 
-    monkeypatch.setattr(kp, "ensure_knowledge_planet_upstream_synced", fake_sync)
+    monkeypatch.delenv("PYTEST_CURRENT_TEST", raising=False)
+    monkeypatch.setattr(kp, "_enabled", lambda: True)
+    monkeypatch.setattr(kp, "_auto_sync_enabled", lambda: True)
+    monkeypatch.setattr(kp, "_sync_skip_status", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(kp, "_sync_knowledge_planet_range", fake_sync)
 
-    status = kp.ensure_knowledge_planet_upstream_synced_for_window("2026-06-19", 2)
+    status = kp.ensure_knowledge_planet_upstream_synced_for_window(
+        "2026-06-19",
+        2,
+        import_local=False,
+    )
 
-    assert calls == ["2026-06-17", "2026-06-18", "2026-06-19"]
-    assert "2026-06-17=synced" in status
-    assert "2026-06-19=synced" in status
+    assert calls == [
+        ("2026-06-17", "2026-06-19", ["2026-06-17", "2026-06-18", "2026-06-19"])
+    ]
+    assert "2026-06-17=synced_window" in status
+    assert "2026-06-19=synced_window" in status
 
 
 def test_stock_terms_include_common_aliases_without_tushare(monkeypatch):

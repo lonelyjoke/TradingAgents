@@ -4,7 +4,11 @@ from __future__ import annotations
 
 from typing import Mapping
 
-from .industry_identity import is_hog_breeding_text
+from .industry_identity import (
+    has_lithium_battery_symbol_hint,
+    is_hog_breeding_text,
+    is_lithium_battery_text,
+)
 
 
 def _status(text: str, *, fail_markers: tuple[str, ...] = ()) -> str:
@@ -39,6 +43,7 @@ def _commodity_driver_is_listed_missing(commodity_lower: str, *names: str) -> bo
 
 def _metals_quality_rows(
     *,
+    symbol: str = "",
     metals_mining_context: str,
     industry_kpi_context: str,
     forecast_model_context: str,
@@ -47,6 +52,14 @@ def _metals_quality_rows(
     metals_lower = (metals_mining_context or "").lower()
     if "status: triggered" not in metals_lower:
         return []
+    if has_lithium_battery_symbol_hint(symbol):
+        return [
+            (
+                "Irrelevant metals/mining context",
+                "partial",
+                "battery-cell/system target received a triggered metals/mining module; exclude this module from identity and KPI routing unless a separately disclosed mining profit pool is material",
+            )
+        ]
 
     rows: list[tuple[str, str, str]] = []
     kpi_lower = (industry_kpi_context or "").lower()
@@ -104,6 +117,57 @@ def _metals_quality_rows(
     return rows
 
 
+def _battery_quality_rows(
+    *,
+    symbol: str,
+    company_business_model_context: str,
+    filing_intelligence_context: str,
+    industry_kpi_context: str,
+    forecast_model_context: str,
+) -> list[tuple[str, str, str]]:
+    identity_blob = "\n".join(
+        [symbol, company_business_model_context, filing_intelligence_context]
+    )
+    if not is_lithium_battery_text(symbol, identity_blob):
+        return []
+
+    kpi_lower = (industry_kpi_context or "").lower()
+    forecast_lower = (forecast_model_context or "").lower()
+    rows: list[tuple[str, str, str]] = []
+    if "battery / energy-storage chain" not in kpi_lower or any(
+        marker in kpi_lower
+        for marker in ("telecom operator", "mobile subscribers", "mobile arpu")
+    ):
+        rows.append(
+            (
+                "Battery KPI routing",
+                "partial",
+                "battery target lacks the battery/energy-storage KPI playbook or contains a conflicting telecom template; reroute before manager synthesis",
+            )
+        )
+
+    required_forecast_markers = (
+        "gwh shipments x asp",
+        "segment revenue x segment gross margin",
+        "working-capital/capex bridge",
+        "battery forecast and valuation controls",
+    )
+    missing = [marker for marker in required_forecast_markers if marker not in forecast_lower]
+    if missing or any(
+        marker in forecast_lower
+        for marker in ("mobile service revenue", "mobile subscribers x mobile arpu")
+    ):
+        rows.append(
+            (
+                "Battery forecast bridge",
+                "partial",
+                "battery forecast must show segment GWh x ASP, segment margins, earnings/FCF conversion, scenario inputs, and monotonic valuation; missing or conflicting markers: "
+                + ", ".join(missing or ["telecom formulas detected"]),
+            )
+        )
+    return rows
+
+
 def build_quality_audit_context(
     symbol: str,
     curr_date: str,
@@ -120,11 +184,24 @@ def build_quality_audit_context(
     commodity_context: str = "",
     knowledge_planet_context: str = "",
 ) -> str:
+    battery_rows = _battery_quality_rows(
+        symbol=symbol,
+        company_business_model_context=company_business_model_context,
+        filing_intelligence_context=filing_intelligence_context,
+        industry_kpi_context=industry_kpi_context,
+        forecast_model_context=forecast_model_context,
+    )
+    kpi_status = _status(industry_kpi_context)
+    forecast_status = _status(forecast_model_context)
+    if any(name == "Battery KPI routing" for name, _, _ in battery_rows):
+        kpi_status = "partial"
+    if any(name == "Battery forecast bridge" for name, _, _ in battery_rows):
+        forecast_status = "partial"
     rows = [
         ("Industry cycle stage", _status(industry_cycle_context, fail_markers=("cycle evidence insufficient",)), "cycle verdict must precede valuation language"),
         ("Business model / segment economics", _status(company_business_model_context, fail_markers=("no clean business-model",)), "reader must understand how the company earns money"),
-        ("Industry KPI checklist", _status(industry_kpi_context), "sector-native KPIs must be verified or listed as gaps"),
-        ("Three-year forecast bridge", _status(forecast_model_context), "valuation must connect to revenue/profit/cash-flow assumptions"),
+        ("Industry KPI checklist", kpi_status, "sector-native KPIs must be verified or listed as gaps"),
+        ("Three-year forecast bridge", forecast_status, "valuation must connect to revenue/profit/cash-flow assumptions"),
         ("True peer and valuation cross-check", _status(peer_comparison_context), "peer set should match business buckets, not just exchange industry label"),
         ("PE/PB/EPS decomposition", _status(price_earnings_decomposition_context), "multiple changes must be separated from earnings changes"),
         ("Financial-statement extraction", _status(earnings_model_context), "base numbers and latest snapshots must be traceable"),
@@ -133,12 +210,14 @@ def build_quality_audit_context(
     ]
     rows.extend(
         _metals_quality_rows(
+            symbol=symbol,
             metals_mining_context=metals_mining_context,
             industry_kpi_context=industry_kpi_context,
             forecast_model_context=forecast_model_context,
             commodity_context=commodity_context,
         )
     )
+    rows.extend(battery_rows)
     combined = "\n".join(
         [
             symbol,
@@ -183,6 +262,8 @@ def build_quality_audit_context(
             "- Every margin, ASP, shipment, utilization, inventory, backlog, and contract-liability claim must name its evidence status: verified, proxy, stale, or missing.",
             "- If a number comes from one quarter, label it as quarterly/run-rate evidence and reconcile seasonality before annualizing. Sanity-check units and magnitude; for example, a quarterly net profit of tens of billions should not become a multi-trillion annualized profit because of a yuan/ten-thousand-yuan/100-million-yuan conversion error.",
             "- If the report uses SOTP, separate core value, scenario value, and optionality; do not bury speculative second curves inside the base multiple.",
+            "- Scenario valuation must be economically monotonic: a worse earnings/margin/demand case cannot receive a higher multiple than the base case unless the report provides an explicit source-backed regime-change reason.",
+            "- Quarterly reports must preserve their disclosed audit status. Do not call an unaudited quarterly filing audited evidence.",
             "",
             "## Deep Sell-Side Bridge Requirements",
             "- Order/project companies: include an order bridge: opening backlog + new orders - delivered/revenue-recognized orders = ending backlog; reconcile contract liabilities, receivables, inventory/goods shipped, and cash collection.",
@@ -192,6 +273,7 @@ def build_quality_audit_context(
             "- Filing quality: discuss receivables, notes, inventory components, contract assets/liabilities, cash conversion, capex/CIP, depreciation, FX, impairments, and disclosure quality when material.",
             "- Second curves: treat new business, ships, mines, capacity, platforms, data centers, or investee holdings as scenario/optionality value unless unit economics, customer evidence, utilization, capex, cash conversion, and control rights are disclosed.",
             "- Evidence grading: mark each decisive claim as reported, calculated, estimated, proxy, stale, missing, or unverified, and carry missing thesis-critical items into the verification calendar.",
+            "- Alternative intelligence: every Knowledge Planet or channel clue must end in one of three auditable outcomes: a numeric model-variable delta, a scenario-probability delta with before/after values, or a documented rejection reason.",
             "- Objectivity guardrail: missing thesis-critical evidence is neutral for direction but material for confidence. It can reduce conviction, sizing, and valuation credit, but it cannot be the decisive reason for Buy/Sell, Underweight/Sell, or 'perfect scenario priced' language.",
             "- Objectivity guardrail: if a decisive industry-native driver is partial or missing on both sides of the debate, cap conviction and prefer Hold/watch or smaller sizing unless verified evidence independently proves a strong probability/payoff skew.",
             "- For aluminum names, if alumina, power, or anode cost evidence is missing, do not call margin deterioration proven. Underweight/Sell needs independent verified evidence such as cost squeeze, segment-margin compression, inventory/cash deterioration, superior peer opportunity cost, or valuation stress.",

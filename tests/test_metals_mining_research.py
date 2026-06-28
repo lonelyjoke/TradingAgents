@@ -4,6 +4,12 @@ from tradingagents.dataflows import metals_mining_research
 from tradingagents.dataflows.metals_mining_research import get_metals_mining_context
 
 
+def test_metals_mining_context_skips_structured_battery_cell_company():
+    rendered = get_metals_mining_context("300750.SZ", "2026-06-27")
+
+    assert "- Status: not_applicable" in rendered
+
+
 def test_metals_mining_context_triggers_for_curated_gold_miner(monkeypatch):
     monkeypatch.setattr(
         metals_mining_research,

@@ -4,6 +4,7 @@ from dataclasses import dataclass
 
 import pandas as pd
 
+from .industry_identity import has_lithium_battery_symbol_hint
 from .thematic_research import _compact_text, _load_financial_report_texts
 from .tushare_a_stock import (
     TushareDataError,
@@ -318,6 +319,13 @@ def get_building_materials_context(
         return (
             "# Building-materials verification context unavailable\n\n"
             f"- Reason: expected A-share symbol; got {ticker!r}."
+        )
+
+    if has_lithium_battery_symbol_hint(symbol):
+        return (
+            f"# Building-materials verification context for {symbol} as of {curr_date}\n\n"
+            "- Status: not_applicable\n"
+            "- Trigger: structured battery-cell/system identity overrides incidental construction-material terms in filings or thematic context."
         )
 
     profile = _company_profile(symbol, curr_date, look_back_days)
