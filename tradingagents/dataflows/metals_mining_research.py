@@ -686,7 +686,7 @@ def get_metals_mining_context(
         "- Safety-price work must use cycle-trough metal prices, survivable balance sheet, maintenance capex, and historical/peer trough valuation floors.",
         "- For nonferrous names, split the rating into Industry Cycle View, Company Expression View, Valuation/Odds View, and Tactical Attribution View before issuing the final action.",
         "- A low PE / high PB setup must be tested as either peak-earnings trap or ROE re-rating; PB alone is not enough for Underweight when earnings, cash flow, and dividends are being released.",
-        "- One-quarter receivables, contract liabilities, inventory, or impairment direction can cap conviction, but should not decide the rating without seasonality, aging, peer comparison, and cash-conversion evidence.",
+        "- One-quarter receivables, contract liabilities, inventory, or impairment direction must not decide the rating without seasonality, aging, peer comparison, and cash-conversion evidence.",
         "",
         "## Research Gaps To Close Before High Conviction",
         _render_missing_items(),
@@ -695,7 +695,7 @@ def get_metals_mining_context(
         "- Treat this as the specialist metals / mining layer. It should override generic manufacturing or broad commodity framing when the target is a miner, smelter, or metal resource company.",
         "- Write the public memo like a sell-side sector deep dive: cycle call first, then asset table, cost curve, segment SOTP/NAV, sensitivity, peer opportunity cost, and dated verification calendar.",
         "- Price beta is not enough: connect exchange prices to realized selling price, volume, cost curve, inventory, hedging, capex, and balance-sheet survival.",
-        "- Missing reserve, grade, equity output, AISC, project-ramp, hedging, or NAV/SOTP evidence caps conviction and belongs in research gaps.",
+        "- Missing reserve, grade, equity output, AISC, project-ramp, hedging, or NAV/SOTP evidence is neutral non-evidence and belongs in retrieval tasks; it must not mechanically alter the rating.",
         "- If the final action is Underweight/Sell despite structural supply constraints, low PE, dividend support, or visible profit release, explicitly prove the profit-center downshift, cash-cycle deterioration, superior peer alternative, or over-pricing path.",
     ]
     return "\n".join(lines)

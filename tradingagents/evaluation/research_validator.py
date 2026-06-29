@@ -13,7 +13,7 @@ from datetime import datetime, timedelta
 from pathlib import Path
 import json
 import re
-from typing import Iterable
+from typing import Any, Iterable, Mapping
 
 import pandas as pd
 
@@ -61,6 +61,60 @@ class DecisionDepthIssue:
     section: str
     severity: str
     issue: str
+
+
+# Only deterministic contradictions can block formal publication.  Missing
+# inputs, incomplete modules and unavailable preprocessing remain visible in
+# the audit, but they are coverage issues rather than negative evidence and do
+# not stop a report from being generated.
+PUBLICATION_BLOCKING_SECTIONS = frozenset(
+    {
+        "eps_profit_share_count_consistency",
+        "pb_bvps_arithmetic",
+        "safety_price_pb_bridge",
+        "profit_pe_per_share_bridge",
+        "q2_h1_period_semantics",
+        "scenario_probability_math",
+        "scenario_weighted_value_math",
+        "scenario_contribution_math",
+        "financial_calendar_period",
+        "period_comparator_lineage",
+        "upside_discount_math",
+        "industry_playbook_alignment",
+        "segment_growth_rank_consistency",
+    }
+)
+
+
+def _is_publication_blocker(section: str, severity: str) -> bool:
+    return severity == "error" and section in PUBLICATION_BLOCKING_SECTIONS
+
+
+def _normalized_mention(text: object) -> str:
+    return re.sub(r"[\W_]+", "", str(text or "")).lower()
+
+
+def _segment_is_mentioned(row: Mapping[str, Any], decision_text: str) -> bool:
+    normalized_decision = _normalized_mention(decision_text)
+    segment = str(row.get("segment", "")).strip()
+    root = re.split(r"[（(]", segment, maxsplit=1)[0].strip()
+    aliases = row.get("aliases") or []
+    if isinstance(aliases, str):
+        aliases = [aliases]
+    candidates = [segment, root, *list(aliases)]
+    normalized_candidates = {
+        _normalized_mention(candidate)
+        for candidate in candidates
+        if len(_normalized_mention(candidate)) >= 2
+    }
+    return any(candidate in normalized_decision for candidate in normalized_candidates)
+
+
+def _safe_float(value: object) -> float:
+    try:
+        return float(value or 0.0)
+    except (TypeError, ValueError):
+        return 0.0
 
 
 _SEGMENT_DEPTH_TERMS = (
@@ -1266,7 +1320,12 @@ def audit_decision_integrity(
     kp_ids = sorted(set(re.findall(r"KPE\d+", decision_text, re.I)))
     if kp_claimed and not kp_ids:
         issues.append(DecisionDepthIssue("alternative_intelligence_lineage", "warning", "Knowledge Planet affects the memo but no KPE evidence id is cited"))
-    if kp_ids and not re.search(r"(?:before\s*(?:->|→)\s*after|调整前.{0,30}调整后|拒绝|rejected|unchanged|不采纳)", decision_text, re.I | re.S):
+    if kp_ids and not re.search(
+        r"(?:before\s*(?:->|→)\s*after|调整前.{0,30}调整后|拒绝|rejected|unchanged|"
+        r"不采纳|不改变|未改变|无模型影响|无模型变化|保持不变)",
+        decision_text,
+        re.I | re.S,
+    ):
         issues.append(DecisionDepthIssue("alternative_intelligence_transmission", "error", "KPE evidence is cited without probability before/after values, an explicit unchanged result, or a rejection reason"))
 
     for match in re.finditer(
@@ -1450,19 +1509,29 @@ def audit_structured_research_usage(
             )
         )
     if len(segments) >= 2:
-        material_segments = [
-            str(row.get("segment", "")).strip()
+        segment_rows = [
+            row
             for row in bundle.get("segments", [])
             if str(row.get("segment", "")).strip()
             and str(row.get("segment", "")).strip().lower()
             not in {"consolidated", "group", "company", "合并", "公司整体"}
-            and (
-                row.get("revenue_weight_pct") is None
-                or float(row.get("revenue_weight_pct") or 0.0) >= 10.0
-            )
         ]
+        material_rows = [
+            row
+            for row in segment_rows
+            if _safe_float(row.get("revenue_weight_pct")) >= 10.0
+            or _safe_float(row.get("revenue_reported_value")) > 0.0
+            or _safe_float(row.get("revenue_cny_mn")) > 0.0
+        ]
+        # When semantic preprocessing returns only unquantified rows, preserve
+        # the primary company segment without treating every unproven optional
+        # business as material merely because its weight is unknown.
+        if not material_rows and segment_rows:
+            material_rows = segment_rows[:1]
         missing_segments = [
-            segment for segment in material_segments if segment not in decision_text
+            str(row.get("segment", "")).strip()
+            for row in material_rows
+            if not _segment_is_mentioned(row, decision_text)
         ]
         if missing_segments:
             issues.append(
@@ -1600,22 +1669,35 @@ def render_post_generation_audit(report_dir: str | Path) -> str:
         return "\n".join(lines)
     errors = int((rows["severity"] == "error").sum())
     warnings = int((rows["severity"] == "warning").sum())
+    blocking_errors = sum(
+        _is_publication_blocker(str(row["section"]), str(row["severity"]))
+        for _, row in rows.iterrows()
+    )
+    verdict = "BLOCKED" if blocking_errors else "REVIEW"
     lines.extend(
         [
             "## Verdict",
             "",
-            f"- {'FAIL' if errors else 'REVIEW'}: errors={errors}, warnings={warnings}.",
-            "- Any error must be reconciled before the memo is treated as publication- or investment-committee-ready.",
+            f"- {verdict}: blocking_errors={blocking_errors}, research_errors={errors}, warnings={warnings}.",
+            "- Missing, partial or unavailable data is non-blocking and neutral for investment direction; it must be disclosed with a retrieval or verification task.",
+            "- Only deterministic arithmetic, period, classification or fact-consistency contradictions block formal publication.",
             "",
             "## Findings",
             "",
-            "| section | severity | issue |",
-            "| --- | --- | --- |",
+            "| section | severity | publication impact | issue |",
+            "| --- | --- | --- | --- |",
         ]
     )
     for _, row in rows.iterrows():
         issue = str(row["issue"]).replace("|", "/")
-        lines.append(f"| {row['section']} | {row['severity']} | {issue} |")
+        impact = (
+            "blocks formal publication"
+            if _is_publication_blocker(str(row["section"]), str(row["severity"]))
+            else "review only"
+        )
+        lines.append(
+            f"| {row['section']} | {row['severity']} | {impact} | {issue} |"
+        )
     return "\n".join(lines)
 
 

@@ -6644,7 +6644,7 @@ def _stock_fusion_pack_lines(
             "- When a clue is used only as private/proxy evidence, translate it into scenario probabilities and verification gates rather than treating it as a hard fact.",
             "- Respect the research-layer tags: industry KPI data feeds the KPI/forecast layer; channel/research feedback feeds hypothesis and verification; macro/overseas mapping sets context; sell-side narratives go through bear-side challenge first.",
             "- If Knowledge Planet contradicts objective data, surface the contradiction instead of averaging the views.",
-            "- If Knowledge Planet is rich but objective data is missing, do not dismiss it as noise. Use it to shape the working hypothesis, cap sizing/conviction, and create dated verification tasks.",
+            "- If Knowledge Planet is rich but objective data is missing, use it only to shape a working hypothesis and dated verification tasks. Do not let proxy richness or objective-data absence mechanically change rating, conviction, or sizing.",
             "- To save tokens, downstream agents should use this fusion pack first; raw stream notes below are backup evidence, not the main reasoning spine.",
             "",
         ]

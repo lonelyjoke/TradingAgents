@@ -420,7 +420,7 @@ def _render_triggered(symbol: str, curr_date: str, reason: str, hits: list[Compu
         "",
         "## Analyst Instructions",
         "- Keep the compute-leasing thesis conditional unless the asset, contract, unit-economics, and funding gates are all supported by official evidence.",
-        "- If only one or two gates are verified, cap conviction and present the compute business as evidence-limited optionality.",
+        "- If only one or two gates are verified, keep unsupported compute value out of the numeric base case and list retrieval tasks; missing gates do not mechanically alter the overall company rating.",
         "- When external information is hard to obtain, list the exact missing fields instead of inventing GPU counts, prices, utilization, customers, or margins.",
     ]
     if errors:

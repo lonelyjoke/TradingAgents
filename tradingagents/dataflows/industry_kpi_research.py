@@ -442,7 +442,7 @@ def build_industry_kpi_context(
     analyst_instructions = [
         "- Do not let a generic sector label replace the KPI map. State which KPI layers are verified, partial, or missing.",
         "- If the report uses cycle language, connect it to at least demand, price/spread, inventory/backlog, and capacity/utilization evidence.",
-        "- If a thesis-critical KPI is missing, cap conviction or move the item to the verification calendar instead of converting it into a hard trigger.",
+        "- If a thesis-critical KPI is missing, move it to the retrieval/verification calendar as neutral non-evidence instead of converting it into a hard trigger or rating adjustment.",
     ]
     if playbook == "hog breeding / live-hog cycle":
         analyst_instructions.insert(

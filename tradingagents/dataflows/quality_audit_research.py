@@ -110,7 +110,7 @@ def _metals_quality_rows(
                 (
                     "Aluminum spread driver coverage",
                     "partial",
-                    f"SHFE aluminum proxy is present, but usable cost evidence is missing for {missing_text}; treat missing cost data as neutral for direction and only as a confidence cap. Margin-collapse or margin-resilience claims require independent verified cost, spread, inventory, cash-flow, or segment-margin evidence",
+                    f"SHFE aluminum proxy is present, but usable cost evidence is missing for {missing_text}; treat missing cost data as neutral non-evidence and a retrieval task. Margin-collapse or margin-resilience claims require independent verified cost, spread, inventory, cash-flow, or segment-margin evidence",
                 )
             )
 
@@ -296,8 +296,8 @@ def build_quality_audit_context(
             "- Alternative intelligence: every Knowledge Planet or channel clue must end in one of three auditable outcomes: a numeric model-variable delta, a scenario-probability delta with before/after values, or a documented rejection reason.",
             "- Consensus discipline: distinguish company-specific consensus from an industry report, one broker forecast, a market-implied proxy, and the TradingAgents model. Show the exact variable and period disagreement; do not call one report 'consensus'.",
             "- Forecast completion: the final memo must fill three forward years (or four forward quarters) for the material business buckets and reconcile segment revenue/profit/cash flow to consolidated totals. A scaffold containing `to be estimated` is not a completed forecast.",
-            "- Objectivity guardrail: missing thesis-critical evidence is neutral for direction but material for confidence. It can reduce conviction, sizing, and valuation credit, but it cannot be the decisive reason for Buy/Sell, Underweight/Sell, or 'perfect scenario priced' language.",
-            "- Objectivity guardrail: if a decisive industry-native driver is partial or missing on both sides of the debate, cap conviction and prefer Hold/watch or smaller sizing unless verified evidence independently proves a strong probability/payoff skew.",
+            "- Objectivity guardrail: missing thesis-critical evidence is neutral non-evidence. It must not mechanically change rating, conviction tier, sizing, valuation multiple, or publication status, and it cannot justify directional language.",
+            "- If an industry-native driver is partial or missing, continue the report with available verified evidence, leave unsupported cells null, widen conditional scenarios where needed, and add an exact retrieval/verification task. Do not default to Hold solely because data is unavailable.",
             "- For aluminum names, if alumina, power, or anode cost evidence is missing, do not call margin deterioration proven. Underweight/Sell needs independent verified evidence such as cost squeeze, segment-margin compression, inventory/cash deterioration, superior peer opportunity cost, or valuation stress.",
             "- For metals/mining, do not permit strong Buy/Sell language from PE/PB, technicals, one-quarter working capital, or one exchange futures proxy when the key spread/cost driver is missing.",
             "- For hog breeders, do not permit a scenario table where a mild recovery case is economically worse than a bottom/stress case unless the report explicitly explains why PB/NAV support collapses. Show both earnings value and PB/NAV floor before selecting the fair-value range.",
@@ -305,7 +305,7 @@ def build_quality_audit_context(
             "",
             "## Pre-Generation Readiness Verdict",
             f"- Weak or incomplete modules: {', '.join(weak) if weak else 'none detected from supplied contexts'}",
-            "- Manager instruction: if any weak module is thesis-critical, cap rating conviction or make the missing data a dated verification item.",
+            "- Manager instruction: weak or unavailable modules are non-blocking. Preserve an evidence-based rating, and make every material gap a dated retrieval or verification item.",
             "- Scope warning: this verdict checks input/scaffold readiness only. It cannot certify the generated PM memo. After generation, run the deterministic post-generation audit for arithmetic, period semantics, financial calendar, KPE transmission, forecast completion, and context alignment.",
         ]
     )

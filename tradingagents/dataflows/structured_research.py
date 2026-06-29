@@ -308,10 +308,22 @@ _SEGMENT_NUMERIC_ROW_RE = re.compile(
     r"(?P<name>[\u4e00-\u9fffA-Za-z0-9][^|\n\r%]{1,48}?)\s+"
     r"(?P<revenue>-?[\d,]+(?:\.\d+)?)\s+"
     r"(?P<cost>-?[\d,]+(?:\.\d+)?)\s+"
-    r"(?P<margin>-?\d+(?:\.\d+)?)%\s+"
-    r"(?P<growth>-?\d+(?:\.\d+)?)%\s+"
-    r"(?P<cost_growth>-?\d+(?:\.\d+)?)%\s+"
-    r"(?P<margin_change>-?\d+(?:\.\d+)?)%"
+    r"(?P<margin>-?\d+(?:\.\d+)?)%?\s+"
+    r"(?P<growth>-?\d+(?:\.\d+)?)%?\s+"
+    r"(?P<cost_growth>-?\d+(?:\.\d+)?)%?\s+"
+    r"(?P<margin_change>-?\d+(?:\.\d+)?)%?"
+)
+
+# PDF extraction sometimes drops the cost-growth column while preserving the
+# other audited fields. Recover that row instead of discarding every later
+# product and asking the LLM to reconstruct the table from prose.
+_SEGMENT_NUMERIC_COMPACT_ROW_RE = re.compile(
+    r"(?P<name>[\u4e00-\u9fffA-Za-z0-9][^|\n\r%]{1,48}?)\s+"
+    r"(?P<revenue>-?[\d,]+(?:\.\d+)?)\s+"
+    r"(?P<cost>-?[\d,]+(?:\.\d+)?)\s+"
+    r"(?P<margin>-?\d+(?:\.\d+)?)%?\s+"
+    r"(?P<growth>-?\d+(?:\.\d+)?)%?\s+"
+    r"(?P<margin_change>-?\d+(?:\.\d+)?)%?"
 )
 
 
@@ -322,6 +334,9 @@ def _clean_segment_name(value: str) -> str:
             name = name.rsplit(marker, 1)[-1]
     if ":" in name or "：" in name:
         name = re.split(r"[:：]", name)[-1]
+    for header in ("营业收入", "营业成本", "毛利率", "比上年增减", "同比"):
+        name = name.replace(header, " ")
+    name = re.sub(r"\s+", " ", name).strip()
     name = re.sub(
         r"^(?:项目|营业收入|营业成本|毛利率|主营业务|年度报告|半年度报告)\s*",
         "",
@@ -381,7 +396,10 @@ def _deterministic_segment_profiles(
                 continue
             if "年度报告" not in line or "半年度报告" in line:
                 continue
-            for match in _SEGMENT_NUMERIC_ROW_RE.finditer(line):
+            matches = list(_SEGMENT_NUMERIC_ROW_RE.finditer(line))
+            if not matches:
+                matches = list(_SEGMENT_NUMERIC_COMPACT_ROW_RE.finditer(line))
+            for match in matches:
                 name = _clean_segment_name(match.group("name"))
                 if not name or name in excluded or len(name) < 2:
                     continue
@@ -402,7 +420,7 @@ def _deterministic_segment_profiles(
                         "growth": growth,
                         "margin_change": margin_change,
                         "source_module": source_module,
-                        "quote": line[:700],
+                        "quote": line[:2400],
                     },
                 )
     if not candidates:

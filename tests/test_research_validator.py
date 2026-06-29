@@ -1,9 +1,12 @@
 """Tests for saved-report parsing used by validation scripts."""
 
+import json
+
 from tradingagents.evaluation.research_validator import (
     audit_context_alignment,
     audit_decision_depth,
     audit_decision_integrity,
+    audit_structured_research_usage,
     _extract_rating,
     _extract_section,
     _normalize_rating,
@@ -277,6 +280,56 @@ def test_post_generation_integrity_catches_period_calendar_and_kpe_failures():
     assert "financial_calendar_period" in sections
     assert "period_comparator_lineage" in sections
     assert "alternative_intelligence_lineage" in sections
+
+
+def test_post_generation_integrity_accepts_explicit_chinese_unchanged_kpe_outcome():
+    decision = (
+        "知识星球 KPE01、KPE02 仅作观察，无模型影响，"
+        "不改变模型假设、情景概率、评级或仓位。"
+    )
+
+    sections = {issue.section for issue in audit_decision_integrity(decision)}
+
+    assert "alternative_intelligence_transmission" not in sections
+
+
+def test_structured_segment_usage_accepts_aliases_and_does_not_treat_all_unknown_weights_as_material(tmp_path):
+    context_dir = tmp_path / "0_context"
+    context_dir.mkdir()
+    bundle = {
+        "preprocessing_mode": "llm_semantic_plus_deterministic_validation",
+        "preprocessing_notes": [],
+        "deterministic_evidence": [{"evidence_id": "EV01"}],
+        "underwriting_packet": {"research_readiness": "partial", "company_model": {}},
+        "segments": [
+            {
+                "segment": "汽车零部件 (八大业务板块)",
+                "aliases": ["汽车零部件", "八大业务"],
+                "revenue_weight_pct": None,
+                "revenue_reported_value": None,
+            },
+            {
+                "segment": "车规级制氧",
+                "aliases": ["车规制氧", "制氧"],
+                "revenue_weight_pct": None,
+                "revenue_reported_value": None,
+            },
+        ],
+        "kpe_impacts": [],
+        "conflicts": [],
+    }
+    (context_dir / "structured_research.json").write_text(
+        json.dumps(bundle, ensure_ascii=False),
+        encoding="utf-8",
+    )
+
+    issues = audit_structured_research_usage(
+        tmp_path,
+        "业务分部包括汽车零部件（主营）以及尚在验证中的车规制氧。",
+    )
+    sections = {issue.section for issue in issues}
+
+    assert "structured_segment_usage" not in sections
 
 
 def test_post_generation_integrity_recomputes_scenario_value():

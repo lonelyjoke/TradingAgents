@@ -779,7 +779,7 @@ def _missing_key_driver_row(product: dict) -> dict:
         "latest_date": "N/A",
         "change_over_window": "N/A",
         "inventory_or_receipt": "N/A",
-        "evidence_status": "Missing; neutral for direction, confidence cap only.",
+        "evidence_status": "Missing; neutral non-evidence and retrieval task only.",
         "evidence": "Do not treat this unavailable cost driver as margin deterioration or margin resilience without independent verified evidence.",
     }
 
@@ -1087,7 +1087,7 @@ def get_commodity_context(ticker: str, curr_date: str, look_back_days: int = 90)
         "- Treat whitelist web pages as evidence snippets unless an exact price/date/unit is parsed and shown.",
         "- Do not state R32, R125, lithium, copper, gold, inventory, or spread changes as facts unless they appear in the evidence table.",
         "- If the product has no reliable data source, list it as an unverified key variable instead of inventing a price change.",
-        "- If a thesis-critical input is marked missing, treat it as neutral for direction and only as a confidence cap; it cannot prove margin deterioration or margin resilience by itself.",
+        "- If a thesis-critical input is marked missing, treat it as neutral non-evidence and a retrieval task; it cannot prove margin deterioration/resilience or mechanically change rating, conviction, or sizing.",
     ]
     if has_livestock_products:
         instructions[3:3] = [

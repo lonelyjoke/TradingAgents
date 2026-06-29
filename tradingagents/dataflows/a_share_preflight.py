@@ -24,7 +24,7 @@ from .thematic_research import (
 
 
 class AShareDataPreflightError(RuntimeError):
-    """Raised before LLM generation when required A-share data is unavailable."""
+    """Raised only when an explicitly strict A-share preflight is requested."""
 
 
 @dataclass(frozen=True)
@@ -217,8 +217,15 @@ def run_a_share_data_preflight(
     require_filing_text: bool = True,
     filing_text_look_back_days: int = 900,
     min_filing_text_chars: int = 500,
+    strict: bool = False,
 ) -> str:
-    """Verify core A-share data before spending LLM tokens."""
+    """Audit A-share inputs without silently substituting synthetic data.
+
+    Missing channels are non-blocking by default.  The downstream report should
+    use the real inputs that remain available and disclose the failed checks as
+    research gaps.  ``strict=True`` is retained for operators who explicitly
+    want the legacy fail-fast behavior.
+    """
     symbol = ticker.strip().upper()
     if not is_a_share_symbol(symbol):
         return f"# A-share Data Preflight\n\n- Status: skipped\n- Reason: {ticker!r} is not an A-share symbol."
@@ -251,7 +258,15 @@ def run_a_share_data_preflight(
     rendered = _render_checks(symbol, curr_date, checks)
     if failed:
         failed_names = ", ".join(check.name for check in failed)
-        raise AShareDataPreflightError(
-            f"A-share data preflight failed for {symbol}: {failed_names}\n\n{rendered}"
+        if strict:
+            raise AShareDataPreflightError(
+                f"A-share data preflight failed for {symbol}: {failed_names}\n\n{rendered}"
+            )
+        rendered += (
+            "\n\n## Coverage Policy\n\n"
+            f"- Status: partial; unavailable checks: {failed_names}.\n"
+            "- These gaps do not stop report generation and are neutral for investment direction.\n"
+            "- Continue with the remaining real data, disclose each gap and its next retrieval task, "
+            "and never replace the missing input with sample or invented data."
         )
     return rendered

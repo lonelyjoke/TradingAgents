@@ -553,7 +553,7 @@ def build_forecast_model_context(
             "| Scenario discipline | show bear/base/bull shipment, ASP, utilization, gross margin, EPS, FCF, and valuation multiple |",
             "| Valuation monotonicity | a deterioration case must not receive a higher multiple than base without an explicit, evidence-backed reason |",
             "| Probability audit | record scenario probabilities before and after each private/proxy clue; unexplained probability changes are invalid |",
-            "- Missing shipment, ASP, utilization, or segment-margin evidence must remain an explicit model gap and cap conviction; narrative strength cannot fill a numeric cell.",
+            "- Missing shipment, ASP, utilization, or segment-margin evidence must remain a neutral explicit model gap; narrative strength cannot fill a numeric cell, and the gap must not mechanically alter the rating.",
         ]
 
     kp_assumption_rows = _knowledge_planet_assumption_rows(knowledge_planet_context)

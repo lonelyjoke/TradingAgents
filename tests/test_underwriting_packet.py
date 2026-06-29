@@ -4,6 +4,7 @@ from types import SimpleNamespace
 from tradingagents.dataflows.underwriting_packet import (
     build_company_underwriting_packet,
 )
+from tradingagents.dataflows.structured_research import _deterministic_segment_profiles
 
 
 class RepairingFakeLLM:
@@ -38,6 +39,24 @@ class RepairingFakeLLM:
             }
             return SimpleNamespace(content=json.dumps(payload, ensure_ascii=False))
         return SimpleNamespace(content='{"schema_version":1 "symbol":"601689.SH"}')
+
+
+def test_deterministic_preprocessing_recovers_all_filing_product_rows():
+    filing_context = (
+        "| product | annual | 拓普集团2025年年度报告: 分产品 营业收入 营业成本 毛利率 "
+        "减震系统 4,255,569,426.20 3,392,822,605.40 20.27 -3.33 -0.83 "
+        "热管理系统 2,091,304,714.40 1,749,547,261.44 16.34 -2.26 -0.77 "
+        "机器人执行器 13,591,176.43 9,751,669.09 28.25 1.22 -22.65 |"
+    )
+
+    rows = _deterministic_segment_profiles(
+        {"filing_intelligence": filing_context}
+    )
+    by_name = {row.segment: row for row in rows}
+
+    assert "减震系统" in by_name
+    assert by_name["热管理系统"].gross_margin_pct == 16.34
+    assert by_name["机器人执行器"].revenue_reported_value == 13_591_176.43
 
 
 def test_underwriting_packet_repairs_malformed_llm_json_instead_of_blank_fallback():

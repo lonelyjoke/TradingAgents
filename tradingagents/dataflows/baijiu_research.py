@@ -243,7 +243,7 @@ def get_baijiu_context(
         "",
         "## How This Layer Should Be Used",
         "- This layer is only for baijiu/liquor targets. Do not apply its channel-price logic to unrelated consumer names.",
-        "- Treat wholesale price, channel inventory, and dealer payment evidence as thesis-critical. If they are missing, cap conviction instead of substituting generic PE or technical patterns.",
+        "- Treat wholesale price, channel inventory, and dealer payment evidence as thesis-critical. If unavailable, keep them as neutral retrieval tasks; do not substitute generic PE/technicals or mechanically alter the rating.",
         "- Contract liabilities must be read with seasonality: compare same-quarter YoY and multi-year seasonal baselines before calling a Q4-to-Q1 move demand deterioration.",
         "- For Maotai specifically, separate Feitian loose-bottle, original-carton, retail price, wholesale/reference price, ex-factory price, and company guided price.",
         "",

@@ -205,7 +205,7 @@ def _evidence_source_rows(profile: BiopharmaProfile) -> pd.DataFrame:
             "data_bucket": "Reimbursement / pricing",
             "source": "医保目录/NRDL, national and provincial procurement, official tender/platform prices",
             "use": "access, negotiated price, volume trade-off, margin pressure, competitive intensity",
-            "valuation_treatment": "commercial ramp and margin input; missing price data caps conviction",
+            "valuation_treatment": "commercial ramp and margin input; missing price data remains a neutral retrieval task",
         },
         {
             "data_bucket": "Clinical readouts",
@@ -363,6 +363,6 @@ def get_biopharma_context(
         "- Commercial assets can enter base valuation only when sales/reimbursement/label evidence is present; clinical assets should use risk-adjusted NPV or scenario optionality.",
         "- Do not treat Phase I/II, conference abstracts, or management pipeline wording as base-case earnings without trial quality, regulatory path, and competitive context.",
         "- For CRO/CDMO/pharma-services names, analyze order visibility, customer funding, capacity utilization, geopolitical risk, and FCF; do not value them like drug-owner pipelines.",
-        "- Missing clinical-trial IDs, regulatory status, reimbursement/price data, or product sales is a research gap that caps conviction rather than a reason to invent numbers.",
+        "- Missing clinical-trial IDs, regulatory status, reimbursement/price data, or product sales is a neutral research gap. Do not invent numbers or mechanically alter the rating.",
     ]
     return "\n".join(lines)

@@ -162,14 +162,15 @@ DEFAULT_CONFIG = {
     # A-share precomputed contexts are independent IO-heavy calls. Fetch a few
     # in parallel so the CLI does not sit idle before the first analyst starts.
     "a_share_context_fetch_workers": 4,
-    # Fail fast before LLM generation when required A-share Tushare data is
-    # unavailable. This avoids spending tokens on reports built from missing
-    # core market/fundamental data.
+    # Audit A-share data before LLM generation. Missing individual channels are
+    # non-blocking by default: continue with the remaining real data, disclose
+    # the gap, and never substitute sample data. Operators can opt back into
+    # legacy fail-fast behavior with the strict switch.
     "a_share_data_preflight_enabled": True,
+    "a_share_data_preflight_strict": False,
     "a_share_data_preflight_max_staleness_days": 21,
-    # Treat readable filing text as a required pre-LLM input for A-share work.
-    # This warms the disclosure cache and blocks shallow reports when MD&A,
-    # segment, and business-model text cannot be read.
+    # Warm and audit readable filing text before A-share work. Failure is
+    # recorded as a coverage gap rather than stopping the whole report.
     "a_share_filing_text_preflight_enabled": True,
     "a_share_filing_text_preflight_look_back_days": 900,
     "a_share_filing_text_preflight_min_chars": 500,

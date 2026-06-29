@@ -1036,9 +1036,9 @@ def save_report_to_disk(final_state, ticker: str, save_path: Path):
             pm_section = f"## Portfolio Manager Decision\n\n### Portfolio Manager\n{risk['judge_decision']}"
 
     # Run deterministic QA only after every context and the final PM memo have
-    # been persisted. A failed audit preserves the model output as a draft for
-    # diagnosis, but suppresses ratings, target prices, sizing and trade
-    # instructions from the publishable decision and consolidated report.
+    # been persisted. Coverage gaps never stop or downgrade report generation.
+    # Even a hard integrity contradiction keeps the complete research memo
+    # visible, while a banner blocks only its formal-publication status.
     decision_path = save_path / "5_portfolio" / "decision.md"
     if decision_path.exists():
         from tradingagents.evaluation.research_validator import render_post_generation_audit
@@ -1048,28 +1048,27 @@ def save_report_to_disk(final_state, ticker: str, save_path: Path):
             audit_text,
             encoding="utf-8",
         )
-        error_match = re.search(r"FAIL:\s*errors=(\d+)", audit_text, re.I)
-        error_count = int(error_match.group(1)) if error_match else 0
-        if error_count > 0:
+        blocker_match = re.search(r"blocking_errors=(\d+)", audit_text, re.I)
+        blocker_count = int(blocker_match.group(1)) if blocker_match else 0
+        review_match = re.search(
+            r"research_errors=(\d+),\s*warnings=(\d+)", audit_text, re.I
+        )
+        research_error_count = int(review_match.group(1)) if review_match else 0
+        warning_count = int(review_match.group(2)) if review_match else 0
+        raw_decision = decision_path.read_text(encoding="utf-8")
+        if blocker_count > 0:
             publication_banner = (
                 "> **Publication status: BLOCKED / 研究发布状态：阻断。** "
-                f"确定性审计发现 {error_count} 个错误；本报告仅可作为研究草稿，"
-                "在 `post_generation_audit.md` 所列错误完成核对前，不应作为正式投委会或对外报告。"
+                f"确定性审计发现 {blocker_count} 个事实、算术、期间或分类一致性错误；"
+                "完整研究报告仍然输出，但在错误核对前不应作为正式投委会或对外报告。"
             )
-            raw_decision = decision_path.read_text(encoding="utf-8")
             (save_path / "5_portfolio" / "decision_draft.md").write_text(
                 raw_decision,
                 encoding="utf-8",
             )
-            suppressed_decision = (
-                publication_banner
-                + "\n\n"
-                + "评级、目标价、仓位、替代标的与交易指令已自动抑制。"
-                + "原始模型输出仅保存在 `decision_draft.md`，用于修复研究链路，"
-                + "不得作为投资建议。\n"
-            )
+            published_decision = publication_banner + "\n\n" + raw_decision
             decision_path.write_text(
-                suppressed_decision,
+                published_decision,
                 encoding="utf-8",
             )
             (save_path / "5_portfolio" / "publication_status.md").write_text(
@@ -1078,8 +1077,21 @@ def save_report_to_disk(final_state, ticker: str, save_path: Path):
             )
             pm_section = (
                 "## Research Publication Status\n\n"
-                + suppressed_decision
+                + published_decision
             )
+        elif research_error_count or warning_count:
+            review_banner = (
+                "> **Publication status: REVIEW / 研究发布状态：可输出、待复核。** "
+                f"审计记录 {research_error_count} 个研究完整性问题和 {warning_count} 个提示；"
+                "数据缺失本身不改变评级方向，也不阻止完整报告输出。"
+            )
+            reviewed_decision = review_banner + "\n\n" + raw_decision
+            decision_path.write_text(reviewed_decision, encoding="utf-8")
+            (save_path / "5_portfolio" / "publication_status.md").write_text(
+                review_banner + "\n",
+                encoding="utf-8",
+            )
+            pm_section = "## Research Publication Status\n\n" + reviewed_decision
 
     # Write consolidated report
     header = f"# Trading Analysis Report: {ticker}\n\nGenerated: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n"

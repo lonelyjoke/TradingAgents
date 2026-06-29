@@ -1,0 +1,390 @@
+{
+  "schema_version": 1,
+  "symbol": "601689.SH",
+  "as_of_date": "2026-06-29",
+  "forecast_years": [
+    "2026E",
+    "2027E",
+    "2028E"
+  ],
+  "research_readiness": "blocked",
+  "readiness_reasons": [
+    "LLM company underwriting failed; only deterministic skeleton is available."
+  ],
+  "company_model": {
+    "model_profile": "corporate",
+    "business_archetype": "",
+    "value_proposition_and_customers": "",
+    "revenue_equation": "",
+    "profit_equation": "",
+    "cash_flow_equation": "",
+    "capital_intensity_and_reinvestment": "",
+    "diluted_share_count_mn": null,
+    "share_count_period": "",
+    "share_count_evidence_id": "",
+    "moat_mechanisms": [],
+    "moat_to_financial_transmission": [],
+    "structural_risks": [],
+    "key_unknowns": [],
+    "evidence_ids": []
+  },
+  "segment_models": [
+    {
+      "segment": "robot_actuator",
+      "products_or_services": "",
+      "customers_and_channel": "",
+      "revenue_weight_pct": null,
+      "profit_weight_pct": null,
+      "base_period": "unspecified",
+      "base_revenue_value": null,
+      "base_revenue_unit": "",
+      "base_revenue_growth_pct": null,
+      "base_margin_pct": null,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [],
+      "industry_supply_and_capacity": "",
+      "volume_share_utilization": "",
+      "price_asp_take_rate": "",
+      "unit_cost_and_input_prices": "",
+      "margin_and_operating_leverage": "",
+      "working_capital_and_cash_conversion": "",
+      "prosperity_level": "unprofitable_early_stage",
+      "marginal_direction": "unknown",
+      "causal_analysis": "Reported segment economics were recovered, but the full demand, supply, price, utilization, margin and cash causal chain requires LLM underwriting.",
+      "valuation_treatment": "evidence_limited",
+      "strongest_counterevidence": [],
+      "evidence_ids": [],
+      "missing_inputs": [
+        "revenue",
+        "cost",
+        "margin",
+        "order book",
+        "capacity plans"
+      ],
+      "next_verification": ""
+    },
+    {
+      "segment": "汽车零 减少 1.38",
+      "products_or_services": "",
+      "customers_and_channel": "",
+      "revenue_weight_pct": 86.60912686083745,
+      "profit_weight_pct": 85.19882898690805,
+      "base_period": "annual filing",
+      "base_revenue_value": 27524056756.31,
+      "base_revenue_unit": "filing table unit not explicit in extracted row",
+      "base_revenue_growth_pct": 10.04,
+      "base_margin_pct": 18.04,
+      "base_margin_change_pp": 11.93,
+      "demand_and_order_drivers": [],
+      "industry_supply_and_capacity": "",
+      "volume_share_utilization": "",
+      "price_asp_take_rate": "",
+      "unit_cost_and_input_prices": "",
+      "margin_and_operating_leverage": "",
+      "working_capital_and_cash_conversion": "",
+      "prosperity_level": "medium-high",
+      "marginal_direction": "improving",
+      "causal_analysis": "Reported segment economics were recovered, but the full demand, supply, price, utilization, margin and cash causal chain requires LLM underwriting.",
+      "valuation_treatment": "evidence_limited",
+      "strongest_counterevidence": [
+        "A filing growth rate alone cannot establish full segment prosperity."
+      ],
+      "evidence_ids": [],
+      "missing_inputs": [
+        "dated demand/order evidence",
+        "capacity/utilization evidence",
+        "ASP/price evidence",
+        "segment cash-conversion evidence"
+      ],
+      "next_verification": ""
+    },
+    {
+      "segment": "减震系",
+      "products_or_services": "",
+      "customers_and_channel": "",
+      "revenue_weight_pct": 13.390873139162546,
+      "profit_weight_pct": 14.80117101309194,
+      "base_period": "annual filing",
+      "base_revenue_value": 4255569426.2,
+      "base_revenue_unit": "filing table unit not explicit in extracted row",
+      "base_revenue_growth_pct": -3.33,
+      "base_margin_pct": 20.27,
+      "base_margin_change_pp": -2.32,
+      "demand_and_order_drivers": [],
+      "industry_supply_and_capacity": "",
+      "volume_share_utilization": "",
+      "price_asp_take_rate": "",
+      "unit_cost_and_input_prices": "",
+      "margin_and_operating_leverage": "",
+      "working_capital_and_cash_conversion": "",
+      "prosperity_level": "weakening",
+      "marginal_direction": "deteriorating",
+      "causal_analysis": "Reported segment economics were recovered, but the full demand, supply, price, utilization, margin and cash causal chain requires LLM underwriting.",
+      "valuation_treatment": "evidence_limited",
+      "strongest_counterevidence": [
+        "A filing growth rate alone cannot establish full segment prosperity."
+      ],
+      "evidence_ids": [],
+      "missing_inputs": [
+        "dated demand/order evidence",
+        "capacity/utilization evidence",
+        "ASP/price evidence",
+        "segment cash-conversion evidence"
+      ],
+      "next_verification": ""
+    }
+  ],
+  "underwriting_questions": [],
+  "forecast_lines": [
+    {
+      "segment": "consolidated",
+      "metric": "revenue",
+      "unit": "",
+      "base_period": "",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "requires company-specific operating bridge",
+      "assumption_status": "missing",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "LLM underwriting model unavailable"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "gross_margin",
+      "unit": "",
+      "base_period": "",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "requires company-specific operating bridge",
+      "assumption_status": "missing",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "LLM underwriting model unavailable"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "operating_profit",
+      "unit": "",
+      "base_period": "",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "requires company-specific operating bridge",
+      "assumption_status": "missing",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "LLM underwriting model unavailable"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "parent_net_profit",
+      "unit": "",
+      "base_period": "",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "requires company-specific operating bridge",
+      "assumption_status": "missing",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "LLM underwriting model unavailable"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "EPS",
+      "unit": "",
+      "base_period": "",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "requires company-specific operating bridge",
+      "assumption_status": "missing",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "LLM underwriting model unavailable"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "OCF",
+      "unit": "",
+      "base_period": "",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "requires company-specific operating bridge",
+      "assumption_status": "missing",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "LLM underwriting model unavailable"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "capex",
+      "unit": "",
+      "base_period": "",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "requires company-specific operating bridge",
+      "assumption_status": "missing",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "LLM underwriting model unavailable"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "FCF",
+      "unit": "",
+      "base_period": "",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "requires company-specific operating bridge",
+      "assumption_status": "missing",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "LLM underwriting model unavailable"
+      ]
+    }
+  ],
+  "scenarios": [
+    {
+      "scenario": "bull",
+      "probability_pct": null,
+      "operating_assumptions": [],
+      "parent_net_profit_cny_mn": null,
+      "eps_cny": null,
+      "fcf_cny_mn": null,
+      "valuation_method": "",
+      "valuation_multiple": null,
+      "fair_value_per_share": null,
+      "evidence_ids": [],
+      "falsification": "",
+      "missing_inputs": []
+    },
+    {
+      "scenario": "base",
+      "probability_pct": null,
+      "operating_assumptions": [],
+      "parent_net_profit_cny_mn": null,
+      "eps_cny": null,
+      "fcf_cny_mn": null,
+      "valuation_method": "",
+      "valuation_multiple": null,
+      "fair_value_per_share": null,
+      "evidence_ids": [],
+      "falsification": "",
+      "missing_inputs": []
+    },
+    {
+      "scenario": "bear",
+      "probability_pct": null,
+      "operating_assumptions": [],
+      "parent_net_profit_cny_mn": null,
+      "eps_cny": null,
+      "fcf_cny_mn": null,
+      "valuation_method": "",
+      "valuation_multiple": null,
+      "fair_value_per_share": null,
+      "evidence_ids": [],
+      "falsification": "",
+      "missing_inputs": []
+    }
+  ],
+  "evidence_change_rules": [
+    {
+      "evidence_id": "KPE01",
+      "affected_segment": "robot_actuator",
+      "affected_variable": "unmapped",
+      "old_assumption": "missing",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "KPE02",
+      "affected_segment": "robot_actuator",
+      "affected_variable": "unmapped",
+      "old_assumption": "missing",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "KPE03",
+      "affected_segment": "robot_actuator",
+      "affected_variable": "unmapped",
+      "old_assumption": "missing",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "KPE04",
+      "affected_segment": "robot_actuator",
+      "affected_variable": "unmapped",
+      "old_assumption": "missing",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "KPE05",
+      "affected_segment": "robot_actuator",
+      "affected_variable": "unmapped",
+      "old_assumption": "missing",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    }
+  ],
+  "reconciliation_checks": [
+    "Material segment revenue must reconcile to consolidated revenue.",
+    "Parent profit / diluted shares must reconcile to EPS.",
+    "OCF - capex must reconcile to FCF.",
+    "Bull/base/bear probabilities must sum to 100 before expected value is used."
+  ],
+  "analyst_instructions": [
+    "Do not write a final report from this fallback skeleton.",
+    "Fill company-specific driver chains and three-year values before valuation or rating."
+  ],
+  "preprocessing_notes": [
+    "LLM underwriting failed: 1 validation error for CompanyUnderwritingPacket\ncompany_model.share_count_evidence_id\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+  ]
+}

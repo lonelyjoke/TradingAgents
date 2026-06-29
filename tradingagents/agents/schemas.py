@@ -422,16 +422,17 @@ class ResearchPlan(BaseModel):
         default=None,
         description=(
             "State the thesis-critical missing or partial evidence, distinguish "
-            "missing evidence from adverse evidence, and explain how it caps the "
-            "rating, position size, or conviction."
+            "neutral absence from adverse evidence, identify the affected model cell, "
+            "and specify the exact retrieval task. Missing data must not mechanically "
+            "change rating, position size, or conviction tier."
         ),
     )
     data_coverage_audit: Optional[str] = Field(
         default=None,
         description=(
             "Summarize which supplied data modules were ready, partial, failed, or "
-            "missing when that affects the recommendation. Name thesis-critical gaps "
-            "and state how they cap conviction."
+            "missing. Name thesis-critical gaps and retrieval tasks, while keeping "
+            "absence neutral and separate from the recommendation."
         ),
     )
 
@@ -661,7 +662,9 @@ class SellSidePMDecision(BaseModel):
     research_readiness: Literal["ready", "partial", "blocked"] = Field(
         description=(
             "Readiness of the shared company-underwriting model. Copy and explain "
-            "the underwriting packet status; do not disguise partial research as confidence."
+            "the underwriting packet status. Partial means disclosed coverage gaps and "
+            "does not mechanically alter the investment rating; blocked is reserved for "
+            "deterministic fact, unit, period, or arithmetic contradictions."
         )
     )
     one_line_thesis: str = Field(
@@ -721,11 +724,9 @@ class PortfolioDecision(BaseModel):
             "only as non-final prior/upstream views, never as the current or final "
             "Portfolio Manager rating. The rating must follow from the company's "
             "standalone fundamental chain, not from the failure of the opposite "
-            "case. If the justified action is only a starter/observation position "
-            "pending one decisive disclosure, prefer Hold with positive-bias "
-            "guidance unless the report independently proves Overweight through "
-            "business quality, operating trend, valuation gap, catalyst path, and "
-            "bounded downside."
+            "case. A pending disclosure or missing field is neutral and must not "
+            "mechanically force Hold; choose Hold only when the available verified "
+            "evidence and expected-value distribution are genuinely balanced."
         ),
     )
     rating_posture: Optional[str] = Field(
@@ -862,8 +863,9 @@ class PortfolioDecision(BaseModel):
             "EPS/FCF and valuation implication; and the next verification point. "
             "Distinguish level from direction. Aggregate to the company using revenue, "
             "gross-profit/profit contribution, cash intensity, and capital intensity, "
-            "not a simple average. If evidence is unavailable, mark it missing and cap "
-            "confidence rather than filling the matrix with generic industry prose."
+            "not a simple average. If evidence is unavailable, mark the cell missing and "
+            "add a retrieval task rather than filling the matrix with generic prose or "
+            "mechanically changing the rating."
         ),
     )
     business_model_supply_chain_primer: Optional[str] = Field(
@@ -1067,10 +1069,11 @@ class PortfolioDecision(BaseModel):
     evidence_limited_research_gaps: Optional[str] = Field(
         default=None,
         description=(
-            "List thesis-critical data gaps and explain how they limit conviction. "
+            "List thesis-critical data gaps as neutral non-evidence and identify the "
+            "affected model cells. "
             "Do not use this as a vague disclaimer: name the exact missing product, "
             "spread, inventory, freight, capacity, policy, or demand data and what "
-            "would change the rating if verified. For banks, name the exact missing "
+            "model assumption it would update if retrieved. For banks, name the exact missing "
             "NIM, deposit-cost, loan-yield, fee-rate, credit-cost, NPL, provision, "
             "CET1/RWA, or payout data instead of generic operating gaps."
         ),
@@ -1449,8 +1452,8 @@ class PortfolioDecision(BaseModel):
             "that remains evidence-light or potentially generic: segment economics, "
             "peer comparability, valuation assumptions, catalyst timetable, "
             "management/capital allocation, ownership overhang, market/technical "
-            "timing, or data coverage. For each weakness, say whether it caps "
-            "conviction, requires follow-up, or merely stays out of valuation."
+            "timing, or data coverage. For each weakness, separate verified adverse "
+            "evidence from neutral missing data and state the follow-up or valuation treatment."
         ),
     )
     data_coverage_audit: Optional[str] = Field(
@@ -1458,7 +1461,8 @@ class PortfolioDecision(BaseModel):
         description=(
             "Concise audit of the supplied evidence set: which precomputed data "
             "modules were ready, partial, failed, or missing; whether any gap is "
-            "thesis-critical; and how the gap affects confidence or next checks."
+            "thesis-critical; and the exact retrieval or verification task. Do not "
+            "convert unavailable data into directional evidence."
         ),
     )
 

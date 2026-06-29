@@ -457,7 +457,7 @@ def _source_rows() -> pd.DataFrame:
             {
                 "data_bucket": "Distributor / overseas channel checks",
                 "use": "channel inventory, sell-through, localization, FX, service network",
-                "rule": "caps conviction when unavailable; do not turn shipment into terminal demand without support",
+                "rule": "neutral retrieval task when unavailable; do not turn shipment into terminal demand without support",
             },
         ]
     )
@@ -560,7 +560,7 @@ def _depth_gate_verdict(evidence_gates: pd.DataFrame) -> str:
         return "Ready for high-conviction debate if valuation, peer, and cash-flow contexts also support the thesis."
     weak_names = ", ".join(weak["evidence_gate"].astype(str).tolist())
     return (
-        "Evidence-Limited: the following medical-device gates are missing or thin and must cap conviction "
+        "Coverage Gaps: the following medical-device gates are missing or thin and remain neutral retrieval tasks "
         f"unless the final report explicitly explains why they are not thesis-critical: {weak_names}."
     )
 
@@ -682,7 +682,7 @@ def get_medical_device_context(
         "## Analyst Instructions",
         "- Treat this as the specialist medical-device layer. It should override generic pharma, pure manufacturing, or software framing when the target is a device / IVD / consumables company.",
         "- Separate capital equipment, reagent / consumable recurrence, service revenue, overseas expansion, and policy-procurement impact before valuation.",
-        "- Missing installed-base, tender, VBP, registration, overseas channel, receivable, or reagent pull-through evidence caps conviction and belongs in research gaps.",
+        "- Missing installed-base, tender, VBP, registration, overseas channel, receivable, or reagent pull-through evidence is neutral non-evidence and belongs in retrieval tasks; it must not mechanically alter the rating.",
         "- The final PM memo must answer the company-specific follow-up questions or carry each unanswered item into Evidence Gaps, sizing, and the verification calendar.",
     ]
     return "\n".join(lines)

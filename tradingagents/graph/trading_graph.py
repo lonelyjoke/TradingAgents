@@ -692,6 +692,9 @@ class TradingAgentsGraph:
                 self.config.get("a_share_filing_text_preflight_min_chars", 500)
                 or 500
             ),
+            strict=bool(
+                self.config.get("a_share_data_preflight_strict", False)
+            ),
         )
 
     def _build_structured_research_context(

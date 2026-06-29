@@ -1187,6 +1187,18 @@ def get_fundamentals(
     if daily_basic is not None:
         total_mv = daily_basic.get("total_mv")
         circ_mv = daily_basic.get("circ_mv")
+        total_share = pd.to_numeric(
+            pd.Series([daily_basic.get("total_share")]), errors="coerce"
+        ).iloc[0]
+        float_share = pd.to_numeric(
+            pd.Series([daily_basic.get("float_share")]), errors="coerce"
+        ).iloc[0]
+        total_share_mn = (
+            float(total_share) / 100.0 if pd.notna(total_share) else None
+        )
+        float_share_mn = (
+            float(float_share) / 100.0 if pd.notna(float_share) else None
+        )
         lines.extend(
             [
                 "## Valuation And Trading Snapshot",
@@ -1204,6 +1216,8 @@ def get_fundamentals(
                 f"- Volume Ratio: {_format_value(daily_basic.get('volume_ratio'))}",
                 f"- Total Market Value: {_format_value(total_mv)} ten-thousand CNY",
                 f"- Circulating Market Value: {_format_value(circ_mv)} ten-thousand CNY",
+                f"- Total Share Count: {_format_value(total_share_mn)} million shares (Tushare total_share converted from 10,000 shares)",
+                f"- Float Share Count: {_format_value(float_share_mn)} million shares (Tushare float_share converted from 10,000 shares)",
                 "",
                 "## Key Metrics Table",
                 "| Metric | Value |",
@@ -1215,6 +1229,8 @@ def get_fundamentals(
                 f"| Turnover Rate | {_format_value(daily_basic.get('turnover_rate'), '%')} |",
                 f"| Total Market Value | {_format_value(total_mv)} ten-thousand CNY |",
                 f"| Circulating Market Value | {_format_value(circ_mv)} ten-thousand CNY |",
+                f"| Total Share Count | {_format_value(total_share_mn)} million shares |",
+                f"| Float Share Count | {_format_value(float_share_mn)} million shares |",
             ]
         )
     elif daily_basic_note:

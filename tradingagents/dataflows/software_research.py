@@ -532,6 +532,6 @@ def get_software_context(
             "- Do not use broad 'software service' peer rankings as relative-value proof until the peers are model-labeled.",
             "- Contract liabilities are visibility evidence only after checking billing duration, renewal, and conversion into revenue; flat or falling balances may be deceleration.",
             "- AI features are not AI revenue. Require paid users, attach rate, ARPU uplift, pricing, and compute/cloud cost before putting AI into base-case earnings.",
-            "- Missing ARR, ARPU, paid users, renewal, NRR/GRR, churn, segment gross margin, or contract-liability structure caps conviction and must appear as a research gap.",
+            "- Missing ARR, ARPU, paid users, renewal, NRR/GRR, churn, segment gross margin, or contract-liability structure is neutral non-evidence and must appear as a retrieval task, not a rating adjustment.",
         ]
     )

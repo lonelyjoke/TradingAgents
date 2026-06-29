@@ -310,7 +310,7 @@ def get_insurance_context(
             "- Treat this as the specialist insurance layer. It should override generic manufacturing, commodity, shipping, or pure-bank framing when the target is an insurer.",
             "- For integrated insurers with banking subsidiaries, split the thesis into insurance core, bank subsidiary, asset-management / technology optionality, and capital-return policy.",
             "- Do not call hidden investee holdings a core valuation driver unless ownership, fair value, exit path, lock-up, and tax/double-counting checks are available.",
-            "- If the report lacks NBV, EV, solvency, investment-yield, or COR evidence, cap conviction and keep the conclusion as evidence-limited.",
+            "- If the report lacks NBV, EV, solvency, investment-yield, or COR evidence, keep the fields null and add retrieval tasks; absence alone must not change the company rating.",
         ]
     )
     report_titles = _report_titles(reports)

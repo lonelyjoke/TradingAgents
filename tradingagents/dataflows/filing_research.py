@@ -5494,9 +5494,14 @@ def _build_internal_filing_quality_modules(
     answer_rows = list(answers)
     bank_rows = list(banking_kpi_pack)
 
-    def evidence_or_gap(evidence: str | None, gap: str) -> tuple[str, str]:
+    def evidence_or_gap(
+        evidence: str | None,
+        gap: str,
+        *,
+        limit: int = 260,
+    ) -> tuple[str, str]:
         if evidence:
-            return _compact_text(evidence, 260), gap
+            return _compact_text(evidence, limit), gap
         return "Not enough direct filing evidence found in the readable report pack.", gap
 
     def table_evidence(accounts: set[str]) -> str | None:
@@ -5539,8 +5544,14 @@ def _build_internal_filing_quality_modules(
         evidence: str | None,
         analyst_use: str,
         missing_or_next_check: str,
+        *,
+        evidence_limit: int = 260,
     ) -> None:
-        evidence_text, next_check = evidence_or_gap(evidence, missing_or_next_check)
+        evidence_text, next_check = evidence_or_gap(
+            evidence,
+            missing_or_next_check,
+            limit=evidence_limit,
+        )
         modules.append(
             FilingInternalQualityModule(
                 module=module,
@@ -5583,6 +5594,7 @@ def _build_internal_filing_quality_modules(
         segment_evidence or None,
         "Core segments can support base-case value; thin or header-only second curves stay in SOTP/scenario value.",
         "Require revenue, cost/gross margin, profit or cash-quality evidence by product, channel, geography, or business bucket.",
+        evidence_limit=2400,
     )
 
     add(
@@ -6296,7 +6308,10 @@ def get_financial_report_intelligence_context(
         {
             "segment_type": item.segment_type,
             "report_type": item.report_type,
-            "filing_evidence": _compact_text(item.evidence, 240),
+            # Segment tables are structured source data, not prose excerpts.
+            # Keep the full extracted row window so downstream deterministic
+            # preprocessing can recover later product rows and their margins.
+            "filing_evidence": _compact_text(item.evidence, 2400),
             "analyst_use": item.analyst_use,
         }
         for item in segment_economics
@@ -6324,7 +6339,7 @@ def get_financial_report_intelligence_context(
         {
             "business_bucket": item.business_bucket,
             "report_type": item.report_type,
-            "filing_evidence": _compact_text(item.evidence, 220),
+            "filing_evidence": _compact_text(item.evidence, 1800),
             "valuation_anchor": item.valuation_anchor,
             "analyst_use": item.analyst_use,
             "verification_need": item.verification_need,
@@ -6653,7 +6668,7 @@ def get_financial_report_intelligence_context(
         "- For banks, start from the Banking KPI Pack and the banking playbook. Do not use contract liabilities, inventory, gross margin, capex, or generic OCF conversion as core bank-quality evidence unless a bank-specific disclosure explicitly makes them decision-relevant.",
         "- For banks, preserve the exact spread terminology from filings: `净利息收益率`, `净息差`, and `净利差` are not interchangeable. If the filing only supports 净利差 1.77% and 净利息收益率 1.83%, do not invent or substitute a 1.40%/1.50% NIM number. Treat NIM stabilization as conditional until the next filing confirms spread, loan yield, and deposit-cost movement together.",
         "- Use the core discussion promotion queue as the bridge from reading to investing: core items should enter bull/bear debate, supporting items should reinforce or challenge a thesis, scenario items belong in upside/downside cases, and watch items stay out of base-case valuation until upgraded.",
-        "- Treat unanswered filing questions as explicit research gaps, not neutral evidence. If a thesis depends on an unanswered question, reduce conviction or state what disclosure would close the gap.",
+        "- Treat unanswered filing questions as neutral non-evidence and explicit retrieval tasks. State what disclosure would close each gap; do not mechanically reduce or raise the rating or conviction tier.",
         "- Promote materially decision-relevant findings such as signed long-term agreements, named customers, take-or-pay/offtake signals, capacity-to-demand bridges, and commercialization milestones into the core debate rather than leaving them buried as generic snippets.",
         "- Use the report-to-report bridge to ask whether annual/semiannual narratives are being confirmed, weakened, or still waiting for quarterly proof.",
         "- Treat annual reports, half-year reports, and quarterly reports as a linked evidence chain: annual reports define the long-cycle thesis, half-year reports test trend formation, and quarterly reports confirm, weaken, or leave unresolved the latest checkpoint.",

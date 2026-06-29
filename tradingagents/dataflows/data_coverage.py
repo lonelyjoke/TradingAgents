@@ -631,10 +631,10 @@ def build_data_coverage_context(contexts: dict[str, str]) -> str:
         if failed or partial:
             lines.extend(
                 [
-                    "- Do not treat failed or missing modules as neutral evidence.",
+                    "- Treat failed, missing or partial modules as neutral non-evidence. A retrieval failure is neither bullish nor bearish.",
                     "- Distinguish a narrative filing-text extraction gap from a full financial-data failure. If structured statements, market data, peers, or valuation contexts are present, say only that report-body/segment/management-discussion evidence is missing.",
-                    "- If a failed or partial module touches the core bet, name it as a research gap and cap conviction.",
-                    "- If other verified modules still support a directional view, keep the rating label clean and put the limitation in conviction, sizing, Evidence Gaps, and Verification Calendar. Use an evidence-limited rating label only when a core module for the thesis is failed/partial or the decisive valuation driver lacks direct evidence.",
+                    "- If a failed or partial module touches the core bet, name it as a research gap and add a dated retrieval or verification task; do not mechanically alter rating, sizing or publication status.",
+                    "- Keep the rating and expected-value conclusion based only on available verified evidence. Put unavailable fields in Evidence Gaps and the Verification Calendar without converting absence into a negative signal.",
                 ]
             )
         if key_facts:
@@ -643,7 +643,7 @@ def build_data_coverage_context(contexts: dict[str, str]) -> str:
             )
         if gates:
             lines.append(
-                "- Use Core Variable Gates as rating-strength guardrails. Missing thesis-critical variables should cap conviction and normally prevent Buy/Overweight unless downside is independently bounded and the missing variable is explicitly placed in the Verification Calendar."
+                "- Use Core Variable Gates as coverage and retrieval guardrails, not rating gates. Missing thesis-critical variables must be disclosed and scheduled for verification, but must not automatically prevent Buy/Overweight, force Hold, or support Underweight/Sell."
             )
         if private_proxy_rows:
             lines.append(
