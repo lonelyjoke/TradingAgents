@@ -12,6 +12,7 @@ from typing import Mapping
 from .industry_identity import (
     consumer_staples_subsector_hints,
     has_lithium_battery_symbol_hint,
+    is_automotive_components_text,
     is_consumer_staples_text,
     is_hog_breeding_text,
     is_insurance_text,
@@ -123,6 +124,22 @@ def _insurance_playbook() -> tuple[str, list[tuple[str, str, str]]]:
     )
 
 
+def _automotive_components_playbook() -> tuple[str, list[tuple[str, str, str]]]:
+    return (
+        "automotive components / platform supplier",
+        [
+            ("Customer / Vehicle Exposure", "top-customer revenue, customer vehicle sales, supplied platforms/models, content per vehicle, nomination and SOP schedule", "volume, concentration and revenue visibility"),
+            ("Product Profit Pools", "filing-reported product revenue, volume, ASP/mix, gross margin, gross-profit contribution and lifecycle stage", "segment growth and consolidated margin mix"),
+            ("Pricing / Annual Reduction", "OEM annual price-down clauses, raw-material pass-through, rebates, FX clauses and launch pricing", "realized ASP and pricing power"),
+            ("Capacity / Utilization", "effective capacity, utilization, new-plant ramp, PPAP/SOP timing, depreciation and overseas localization", "operating leverage and ramp losses"),
+            ("Cost / Margin Bridge", "aluminum/steel/rubber/plastics/electronics exposure as applicable, labor, freight, yield and product mix", "gross-margin attribution rather than proxy correlation"),
+            ("Working Capital / Cash", "receivables and notes, inventory, contract assets/liabilities, OCF/NI, capex, depreciation and FCF", "cash conversion and customer bargaining power"),
+            ("Reinvestment / ROIC", "incremental fixed assets/CIP/capex versus incremental revenue, EBIT and invested capital", "whether expansion creates value"),
+            ("Second Curves", "customer nomination, order amount, delivery period, unit economics, required capex and revenue recognition for robotics/liquid cooling or other adjacencies", "optionality separated from core value"),
+        ],
+    )
+
+
 def _consumer_staples_playbook(symbol: str, combined_text: str) -> tuple[str, list[tuple[str, str, str]]] | None:
     subsectors = consumer_staples_subsector_hints(symbol, combined_text)
     if not subsectors:
@@ -183,6 +200,8 @@ def _detect_playbook(symbol: str, combined_text: str) -> tuple[str, list[tuple[s
     # metals, software, telecom, or thematic contexts.
     if has_lithium_battery_symbol_hint(symbol):
         return _battery_playbook()
+    if is_automotive_components_text(symbol, combined_text):
+        return _automotive_components_playbook()
     if is_telecom_operator_text(symbol, combined_text):
         return (
             "telecom operator / high-dividend SOE",

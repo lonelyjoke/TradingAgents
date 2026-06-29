@@ -18,6 +18,10 @@ from typing import Any, Literal, Mapping
 from pydantic import BaseModel, Field
 
 from .research_evidence import extract_evidence_records
+from .underwriting_packet import (
+    build_company_underwriting_packet,
+    compact_underwriting_packet,
+)
 
 
 EvidenceStatus = Literal[
@@ -192,7 +196,16 @@ def _compact_source_payload(
             line = re.sub(r"\s+", " ", raw.strip())
             if not line or line.startswith("| ---") or not semantic_terms.search(line):
                 continue
-            clipped = line[:700]
+            wide_segment_row = any(
+                marker in line.lower()
+                for marker in (
+                    "segment economics pack",
+                    "filing_segment",
+                    "分产品",
+                    "主营业务分产品",
+                )
+            )
+            clipped = line[:2400] if wide_segment_row else line[:700]
             if chars + len(clipped) > per_source_limit:
                 break
             selected.append(clipped)
@@ -631,8 +644,11 @@ def build_structured_research_bundle(
     *,
     contexts: Mapping[str, str],
     llm: Any = None,
+    underwriting_llm: Any = None,
     enable_llm: bool = True,
+    enable_underwriting: bool = True,
     max_prompt_chars: int = 42000,
+    underwriting_prompt_max_chars: int = 60000,
 ) -> dict[str, Any]:
     payload = _compact_source_payload(contexts, max_chars=max_prompt_chars)
     kpe_rows = _known_kpe_rows(contexts.get("knowledge_planet", ""))
@@ -725,8 +741,8 @@ def build_structured_research_bundle(
             }
         )
 
-    return {
-        "schema_version": 2,
+    bundle: dict[str, Any] = {
+        "schema_version": 3,
         "symbol": symbol,
         "as_of_date": str(as_of_date),
         "preprocessing_mode": mode,
@@ -739,6 +755,16 @@ def build_structured_research_bundle(
         "known_kpe_ledger": kpe_rows,
         "preprocessing_notes": [*semantic.preprocessing_notes, *errors],
     }
+    bundle["underwriting_packet"] = build_company_underwriting_packet(
+        symbol,
+        str(as_of_date),
+        contexts=contexts,
+        structured_research=bundle,
+        llm=underwriting_llm or llm,
+        enable_llm=enable_underwriting,
+        max_prompt_chars=underwriting_prompt_max_chars,
+    )
+    return bundle
 
 
 def compact_structured_research_for_prompt(
@@ -760,6 +786,9 @@ def compact_structured_research_for_prompt(
         "conflicts": list(bundle.get("conflicts", []))[:12],
         "kpe_impacts": list(bundle.get("kpe_impacts", []))[:12],
         "preprocessing_notes": list(bundle.get("preprocessing_notes", []))[:8],
+        "underwriting_packet": compact_underwriting_packet(
+            bundle.get("underwriting_packet", {})
+        ),
     }
     rendered = json.dumps(compact, ensure_ascii=False, separators=(",", ":"))
     if len(rendered) <= max_chars:
@@ -771,4 +800,15 @@ def compact_structured_research_for_prompt(
         while values and len(rendered) > max_chars:
             values.pop()
             rendered = json.dumps(compact, ensure_ascii=False, separators=(",", ":"))
+    if len(rendered) > max_chars and isinstance(compact.get("underwriting_packet"), dict):
+        packet = compact["underwriting_packet"]
+        for key in ("preprocessing_notes", "analyst_instructions", "reconciliation_checks"):
+            packet.pop(key, None)
+        for key in ("underwriting_questions", "evidence_change_rules", "scenarios", "forecast_lines", "segment_models"):
+            values = packet.get(key)
+            if not isinstance(values, list):
+                continue
+            while values and len(rendered) > max_chars:
+                values.pop()
+                rendered = json.dumps(compact, ensure_ascii=False, separators=(",", ":"))
     return rendered

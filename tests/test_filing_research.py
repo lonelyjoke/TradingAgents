@@ -701,6 +701,34 @@ def test_segment_economics_pack_extracts_product_and_geography_rows():
     assert "\u5883\u5916" in evidence
 
 
+def test_segment_economics_preserves_later_rows_from_pdf_split_table():
+    reports = [
+        (
+            "2025年年度报告",
+            "\n".join(
+                [
+                    "主营业务分产品情况",
+                    "分产品 营业收入 营业成本 毛利率（%） 营业收入比上年增减（%） 毛利率比上年增减（%）",
+                    "减震系统 4,255,569,426.20 3,392,822,605.40 20.27 -3.33 -0.83",
+                    "内饰功能件 9,672,496,003.46 8,040,106,182.07 16.88 14.69 -1.24",
+                    "底盘系统 8,722,483,962.64 7,053,405,799.83 19.14 6.34 -1.28",
+                    "汽车电子 2,768,611,473.18 2,312,443,298.49 16.48 52.11 -2.94",
+                    "热管理系统 2,091,304,714.40 1,749,547,261.44 16.34 -2.26 -0.77",
+                    "机器人执行器 13,591,176.43 9,751,669.09 28.25 1.22 -22.65",
+                ]
+            ),
+        )
+    ]
+
+    rows = _extract_segment_economics(reports)
+    evidence = "\n".join(row.evidence for row in rows)
+
+    assert "减震系统" in evidence
+    assert "热管理系统" in evidence
+    assert "机器人执行器" in evidence
+    assert "16.34" in evidence
+
+
 def test_segment_economics_filters_financial_assets_and_customer_tables():
     reports = [
         (

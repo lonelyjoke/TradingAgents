@@ -640,7 +640,28 @@ def audit_decision_depth(decision_text: str) -> list[DecisionDepthIssue]:
             )
         )
 
-    if has_segment_section:
+    explicit_multi_business = any(
+        marker in decision_text.lower()
+        for marker in (
+            "multi-business",
+            "multiple business segments",
+            "each material segment",
+            "segment prosperity analysis",
+            "分业务景气",
+            "分部景气",
+            "业务板块经济与景气",
+            "各业务板块",
+            "各业务分部",
+        )
+    )
+    markdown_segment_rows = sum(
+        1
+        for line in decision_text.splitlines()
+        if line.strip().startswith("|")
+        and line.count("|") >= 4
+        and not re.search(r"\|\s*[-:]+", line)
+    )
+    if has_segment_section and (explicit_multi_business or markdown_segment_rows >= 3):
         has_prosperity_section = "Segment Prosperity Analysis:" in decision_text or any(
             marker in decision_text
             for marker in ("## 分部景气", "## 业务景气", "分业务景气度", "分部景气度")
@@ -1168,9 +1189,44 @@ def audit_decision_integrity(
     if (forecast_triggered or rich_company_memo) and len(forecast_years) < 3:
         issues.append(DecisionDepthIssue("three_year_forecast_completion", "error", "final memo invokes a forecast bridge but does not provide three distinct forward years"))
     if len(forecast_years) >= 3:
-        forecast_metric_hits = sum(
-            1
-            for tokens in (
+        if sum(token in lowered for token in ("nim", "net interest", "credit cost", "cet1", "净息差", "信用成本", "资本充足")) >= 2:
+            forecast_groups = (
+                ("nim", "net interest", "净息差", "净利息收入"),
+                ("fee income", "手续费", "非息收入"),
+                ("credit cost", "信用成本", "拨备"),
+                ("net profit", "归母净利润", "eps"),
+                ("roe", "净资产收益率"),
+                ("cet1", "资本充足", "npl", "不良率"),
+            )
+        elif sum(token in lowered for token in ("nbv", "embedded value", "solvency", "cor", "新业务价值", "内含价值", "偿付能力")) >= 2:
+            forecast_groups = (
+                ("premium", "ape", "保费"),
+                ("nbv", "新业务价值"),
+                ("embedded value", "内含价值", "csm"),
+                ("investment spread", "投资收益率", "负债成本"),
+                ("cor", "综合成本率"),
+                ("net profit", "opat", "归母净利润", "eps"),
+                ("solvency", "偿付能力"),
+            )
+        elif sum(token in lowered for token in ("brokerage", "investment banking", "proprietary trading", "资本充足率", "经纪业务", "投行业务", "自营")) >= 2:
+            forecast_groups = (
+                ("brokerage", "经纪业务"),
+                ("investment banking", "投行业务"),
+                ("asset management", "资管业务"),
+                ("trading income", "proprietary", "自营", "投资收益"),
+                ("net profit", "归母净利润", "eps"),
+                ("roe", "资本充足率", "净资本"),
+            )
+        elif sum(token in lowered for token in ("occupancy", "distributable cash", "noi", "出租率", "可供分配金额")) >= 2:
+            forecast_groups = (
+                ("occupancy", "出租率"),
+                ("rent", "租金"),
+                ("noi", "净营业收入"),
+                ("distributable cash", "可供分配"),
+                ("payout", "分派率"),
+            )
+        else:
+            forecast_groups = (
                 ("revenue", "营业收入", "收入"),
                 ("net profit", "归母净利润", "净利润"),
                 ("eps", "每股收益"),
@@ -1178,9 +1234,13 @@ def audit_decision_integrity(
                 ("capex", "资本开支"),
                 ("fcf", "自由现金流"),
             )
+        forecast_metric_hits = sum(
+            1
+            for tokens in forecast_groups
             if any(token in lowered for token in tokens)
         )
-        if forecast_metric_hits < 5:
+        required_hits = max(4, len(forecast_groups) - 1)
+        if forecast_metric_hits < required_hits:
             issues.append(
                 DecisionDepthIssue(
                     "three_year_forecast_reconciliation",
@@ -1303,10 +1363,83 @@ def audit_structured_research_usage(
             )
         )
 
+    underwriting_packet = bundle.get("underwriting_packet", {})
+    if not underwriting_packet:
+        issues.append(
+            DecisionDepthIssue(
+                "shared_underwriting_packet",
+                "error",
+                "shared company underwriting packet is missing; agents may have produced independent narratives instead of one reconciled operating model",
+            )
+        )
+    else:
+        readiness = str(underwriting_packet.get("research_readiness", "")).lower()
+        if readiness == "blocked":
+            issues.append(
+                DecisionDepthIssue(
+                    "underwriting_readiness",
+                    "error",
+                    "shared company underwriting packet is blocked: "
+                    + "; ".join(
+                        str(item)
+                        for item in underwriting_packet.get("readiness_reasons", [])[:6]
+                    ),
+                )
+            )
+        elif readiness == "partial":
+            issues.append(
+                DecisionDepthIssue(
+                    "underwriting_readiness",
+                    "warning",
+                    "shared company underwriting packet remains partial; report must disclose the incomplete model lines and cap valuation confidence",
+                )
+            )
+        company_model = underwriting_packet.get("company_model", {})
+        if not company_model.get("revenue_equation") or not company_model.get("profit_equation"):
+            issues.append(
+                DecisionDepthIssue(
+                    "company_operating_model",
+                    "error",
+                    "company revenue/profit operating equations are absent from the shared underwriting packet",
+                )
+            )
+        question_ids = [
+            str(row.get("question_id", "")).strip()
+            for row in underwriting_packet.get("underwriting_questions", [])
+            if str(row.get("question_id", "")).strip()
+        ]
+        if question_ids and not any(question_id in decision_text for question_id in question_ids):
+            issues.append(
+                DecisionDepthIssue(
+                    "underwriting_question_usage",
+                    "warning",
+                    "PM memo does not visibly answer any company-specific question from the shared underwriting packet",
+                )
+            )
+        if not any(
+            marker in decision_text.lower()
+            for marker in (
+                "shared underwriting model change audit",
+                "shared model change",
+                "model change ledger",
+                "承保模型变更",
+                "模型变更台账",
+            )
+        ):
+            issues.append(
+                DecisionDepthIssue(
+                    "shared_model_change_audit",
+                    "error",
+                    "PM memo does not reconcile the fundamental/bull/bear changes to the shared underwriting model",
+                )
+            )
+
     segments = [
         str(row.get("segment", "")).strip()
         for row in bundle.get("segments", [])
         if str(row.get("segment", "")).strip()
+        and str(row.get("segment", "")).strip().lower()
+        not in {"consolidated", "group", "company", "合并", "公司整体"}
     ]
     if not segments and bundle.get("deterministic_evidence"):
         issues.append(
@@ -1321,6 +1454,8 @@ def audit_structured_research_usage(
             str(row.get("segment", "")).strip()
             for row in bundle.get("segments", [])
             if str(row.get("segment", "")).strip()
+            and str(row.get("segment", "")).strip().lower()
+            not in {"consolidated", "group", "company", "合并", "公司整体"}
             and (
                 row.get("revenue_weight_pct") is None
                 or float(row.get("revenue_weight_pct") or 0.0) >= 10.0

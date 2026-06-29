@@ -12,12 +12,14 @@ _REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
 def _load_environment_files() -> None:
     if load_dotenv is None:
         return
-    load_dotenv(os.path.join(_REPO_ROOT, ".env"), override=False, encoding="utf-8-sig")
-    load_dotenv(
-        os.path.join(_REPO_ROOT, ".env.enterprise"),
-        override=False,
-        encoding="utf-8-sig",
-    )
+    for filename in (".env", ".env.enterprise"):
+        path = os.path.join(_REPO_ROOT, filename)
+        try:
+            load_dotenv(path, override=False, encoding="utf-8-sig")
+        except TypeError:
+            # Compatibility with older python-dotenv releases and lightweight
+            # test/plugin shims that do not expose the encoding keyword.
+            load_dotenv(path, override=False)
 
 
 _load_environment_files()
@@ -145,6 +147,17 @@ DEFAULT_CONFIG = {
     "structured_research_prompt_max_chars": _env_int_or_default(
         "STRUCTURED_RESEARCH_PROMPT_MAX_CHARS",
         42000,
+    ),
+    # Build one shared, rating-free company underwriting packet with the deep
+    # model. Every downstream research agent consumes the same company model,
+    # segment driver chains, underwriting questions and three-year forecast.
+    "company_underwriting_packet_enabled": _env_bool_or_default(
+        "COMPANY_UNDERWRITING_PACKET_ENABLED",
+        True,
+    ),
+    "company_underwriting_prompt_max_chars": _env_int_or_default(
+        "COMPANY_UNDERWRITING_PROMPT_MAX_CHARS",
+        60000,
     ),
     # A-share precomputed contexts are independent IO-heavy calls. Fetch a few
     # in parallel so the CLI does not sit idle before the first analyst starts.

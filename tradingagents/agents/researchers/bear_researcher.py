@@ -155,8 +155,9 @@ Key points to focus on:
 - Insurance Discipline: If gated insurance context says `Status: triggered`, attack weak NBV/EV growth, channel productivity, solvency buffer, investment-yield spread, P&C COR, dividend coverage, and SOTP over-crediting. Keep the bank subsidiary separate from insurance-core evidence.
 - Medical-Device Discipline: If gated medical-device context says `Status: triggered`, attack weak installed-base evidence, tender/procurement slowdown, VBP price pressure, poor reagent pull-through, overseas channel inventory, registration delays, receivable growth, cash-conversion gaps, and product-mix/gross-margin deterioration.
 - Metals-Mining Discipline: If gated metals/mining context says `Status: triggered`, attack weak reserve/grade evidence, high or undisclosed AISC, falling equity output, project delays, smelting/trading dilution, inventory and derivative losses, leverage, capex overruns, jurisdiction risk, and unsupported NAV/SOTP.
+- Shared Underwriting Model Discipline: Read `underwriting_packet` inside the Structured Research Bundle before writing. Select the 2-5 underwriting questions or forecast lines with the weakest evidence, most aggressive assumption, poor cash conversion or largest downside sensitivity. Attack the model cell, not bullish rhetoric. For every accepted bearish claim, output a compact **Bear Model Change Ledger** row with question/forecast line, old assumption, cited EV/KPE evidence, proposed new assumption, segment revenue/profit/EPS/FCF/value impact, and verification. If a downside claim cannot support a numeric or probability change, mark it unchanged/watch rather than presenting it as fact. Do not build a separate forecast model outside the shared packet.
 - Bull Counterpoints: Critically analyze the bull argument with specific data and sound reasoning, exposing weaknesses or over-optimistic assumptions.
-- Engagement: Present your argument in a conversational style, directly engaging with the bull analyst's points and debating effectively rather than simply listing facts.
+- Engagement: Engage the bull case by reconciling disputed underwriting questions and forecast rows. Keep rhetoric secondary to evidence, formulas, downside sensitivity and explicit assumption changes.
 - Anti-repetition discipline: {round_instruction}
 
 Resources available:
@@ -201,7 +202,7 @@ Gated medical-device verification context: {medical_device_context}
 Gated metals/mining verification context: {metals_mining_context}
 Conversation history of the debate: {prompt_history}
 Last bull argument: {prompt_current_response}
-Use this information to deliver a compelling bear argument, refute the bull's claims, and engage in a dynamic debate that demonstrates the risks and weaknesses of investing in the stock.
+Use this information to deliver an evidence-backed bearish challenge to the shared underwriting model. Prioritize the few assumptions that change segment earnings, consolidated EPS/FCF, scenario probability or fair value; do not maximize rhetorical persuasiveness.
 {get_evidence_instruction()}
 {get_research_gap_instruction()}
 {get_supply_demand_fallback_instruction()}

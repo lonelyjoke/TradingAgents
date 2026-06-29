@@ -7,6 +7,7 @@ import re
 from typing import Any, Mapping
 
 from .industry_identity import (
+    is_automotive_components_text,
     consumer_staples_subsector_hints,
     has_lithium_battery_symbol_hint,
     is_hog_breeding_text,
@@ -15,6 +16,7 @@ from .industry_identity import (
     is_telecom_operator_text,
 )
 from .research_evidence import extract_evidence_records, infer_model_variable
+from .underwriting_packet import compact_underwriting_packet
 
 
 def _compact_lines(text: str, patterns: tuple[str, ...], *, limit: int = 8) -> list[str]:
@@ -158,6 +160,75 @@ def _structured_kpe_quantification_section(
     lines.append(
         "- Only grounded and deterministically quantified rows may change a base-case forecast. Missing or unverified rows remain probability/watch inputs until the listed baselines or unit economics are supplied."
     )
+    return lines
+
+
+def _shared_underwriting_section(
+    bundle: Mapping[str, Any] | None,
+) -> list[str]:
+    packet = compact_underwriting_packet(
+        (bundle or {}).get("underwriting_packet", {})
+    )
+    if not packet:
+        return []
+    lines = [
+        "",
+        "## Shared Company Underwriting Packet",
+        f"- Research readiness: {packet.get('research_readiness', 'missing')}",
+        f"- Readiness reasons: {'; '.join(str(item) for item in packet.get('readiness_reasons', [])) or 'none supplied'}",
+        f"- Forecast years: {', '.join(str(item) for item in packet.get('forecast_years', []))}",
+        "- This is the common model. Analysts must propose explicit changes to these rows instead of creating separate narrative forecasts.",
+    ]
+    company = packet.get("company_model", {})
+    if company:
+        lines.extend(
+            [
+                "",
+                "### Company Operating Equations",
+                f"- Revenue: {company.get('revenue_equation', 'missing')}",
+                f"- Profit: {company.get('profit_equation', 'missing')}",
+                f"- Cash flow: {company.get('cash_flow_equation', 'missing')}",
+                f"- Reinvestment: {company.get('capital_intensity_and_reinvestment', 'missing')}",
+            ]
+        )
+    questions = list(packet.get("underwriting_questions", []))
+    if questions:
+        lines.extend(
+            [
+                "",
+                "### Company-Specific Underwriting Questions",
+                "| id | question | current answer | decisive variables | affected financial lines | missing evidence / next verification |",
+                "| --- | --- | --- | --- | --- | --- |",
+            ]
+        )
+        for row in questions[:8]:
+            lines.append(
+                f"| {row.get('question_id', '')} | {str(row.get('question', '')).replace('|', '/')} | "
+                f"{str(row.get('current_answer', '')).replace('|', '/')} | "
+                f"{', '.join(str(item) for item in row.get('decisive_model_variables', []))} | "
+                f"{', '.join(str(item) for item in row.get('affected_financial_lines', []))} | "
+                f"{', '.join(str(item) for item in row.get('missing_evidence', []))}; "
+                f"{str(row.get('next_verification', '')).replace('|', '/')} |"
+            )
+    forecast = list(packet.get("forecast_lines", []))
+    if forecast:
+        years = list(packet.get("forecast_years", [])) + ["Y1", "Y2", "Y3"]
+        lines.extend(
+            [
+                "",
+                "### Shared Three-Year Model Lines",
+                f"| segment | metric | unit | base | {years[0]} | {years[1]} | {years[2]} | formula | status | sensitivity / missing |",
+                "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
+            ]
+        )
+        for row in forecast[:36]:
+            lines.append(
+                f"| {row.get('segment', '')} | {row.get('metric', '')} | {row.get('unit', '')} | "
+                f"{row.get('base_value')} | {row.get('year_1_value')} | {row.get('year_2_value')} | "
+                f"{row.get('year_3_value')} | {str(row.get('formula', '')).replace('|', '/')} | "
+                f"{row.get('assumption_status', '')} | {str(row.get('key_sensitivity', '')).replace('|', '/')}; "
+                f"{', '.join(str(item) for item in row.get('missing_inputs', []))} |"
+            )
     return lines
 
 
@@ -324,6 +395,17 @@ def _insurance_forecast_drivers() -> list[tuple[str, str, str]]:
     ]
 
 
+def _automotive_components_forecast_drivers() -> list[tuple[str, str, str]]:
+    return [
+        ("Core product revenue", "sum(customer vehicle volume x platform share x content per vehicle), cross-checked with segment units x ASP", "customer/model exposure, SOP cadence, annual price reductions and product mix"),
+        ("Segment gross profit", "sum(segment revenue x segment gross margin)", "ASP, material pass-through, utilization, launch/ramp cost and mix"),
+        ("Operating profit", "segment gross profit - R&D - selling/admin - impairment", "R&D conversion, scale leverage, depreciation and credit risk"),
+        ("Parent net profit / EPS", "operating profit +/- finance and FX - tax - minority; divided by diluted shares", "interest versus FX decomposition, subsidies/one-offs and share count"),
+        ("OCF / capex / FCF / incremental ROIC", "net profit + D&A - working capital - capex; incremental EBIT after tax / incremental invested capital", "receivables, inventory, new-plant ramp, capex discipline and cash conversion"),
+        ("Second-curve scenario value", "qualified delivered units x ASP x margin, valued separately until unit economics and cash conversion are verified", "customer nomination, order-to-revenue schedule, capex, utilization and probability"),
+    ]
+
+
 def _consumer_staples_forecast_drivers(symbol: str, text: str) -> list[tuple[str, str, str]] | None:
     subsectors = consumer_staples_subsector_hints(symbol, text)
     if not subsectors:
@@ -393,6 +475,8 @@ def build_forecast_model_context(
     )
     if has_lithium_battery_symbol_hint(symbol):
         drivers = _battery_forecast_drivers()
+    elif is_automotive_components_text(symbol, combined):
+        drivers = _automotive_components_forecast_drivers()
     elif is_telecom_operator_text(symbol, combined):
         drivers = [
             ("Mobile service revenue", "mobile subscribers x mobile ARPU", "5G penetration, package mix, churn, DOU, pricing discipline"),
@@ -583,6 +667,58 @@ def build_forecast_model_context(
     structured_kpe_section = _structured_kpe_quantification_section(
         structured_research_context
     )
+    shared_underwriting_section = _shared_underwriting_section(
+        structured_research_context
+    )
+    underwriting_packet = (structured_research_context or {}).get(
+        "underwriting_packet", {}
+    )
+    model_profile = str(
+        underwriting_packet.get("company_model", {}).get(
+            "model_profile", "corporate"
+        )
+    )
+    mandatory_rows_by_profile = {
+        "bank": [
+            ("Earning assets / NIM", "asset mix, loan/deposit pricing and funding cost"),
+            ("Net interest / fee income", "volume x spread plus fee/AUM drivers"),
+            ("Pre-provision profit / credit cost", "cost efficiency, NPL migration and provisions"),
+            ("Parent profit / EPS / ROE", "tax, shares, capital consumption and payout"),
+            ("NPL / provision coverage / CET1", "asset quality and regulatory capital"),
+        ],
+        "insurance": [
+            ("Premium / APE / NBV", "channel volume, margin, persistency and product mix"),
+            ("EV / CSM / investment spread", "liability growth and investment return versus cost"),
+            ("P&C COR where applicable", "loss ratio and expense ratio"),
+            ("OPAT / parent profit / EPS", "operating and market-sensitive profit bridge"),
+            ("Solvency / payout", "capital consumption and distributable capacity"),
+        ],
+        "securities": [
+            ("Brokerage / investment banking", "turnover, fee rate and issuance pipeline"),
+            ("Asset management", "AUM, fee rate and product mix"),
+            ("Trading / investment income", "market exposure, leverage and risk budget"),
+            ("Parent profit / EPS / ROE", "business mix, tax and share count"),
+            ("Net capital / capital adequacy", "regulatory and balance-sheet constraint"),
+        ],
+        "reit": [
+            ("Occupancy / rent per unit", "lease renewal, supply and tenant quality"),
+            ("NOI", "rental revenue less property operating cost"),
+            ("Distributable cash flow", "NOI, interest, maintenance capex and working cash"),
+            ("Payout / per-unit distribution", "distribution policy and unit count"),
+            ("NAV / cap rate", "asset valuation and financing sensitivity"),
+        ],
+        "corporate": [
+            ("Revenue", "reconcile segment volume, ASP, mix, and eliminations"),
+            ("Gross margin", "tie to price/spread, cost, utilization, and mix"),
+            ("Operating expense ratio", "tie to R&D, sales, admin, and scale leverage"),
+            ("Net profit / EPS", "tie to tax, minority, non-recurring, and share count"),
+            ("Operating cash flow / capex / FCF", "tie to working capital and reinvestment"),
+        ],
+    }
+    mandatory_rows = mandatory_rows_by_profile.get(
+        model_profile,
+        mandatory_rows_by_profile["corporate"],
+    )
 
     return "\n".join(
         [
@@ -604,16 +740,16 @@ def build_forecast_model_context(
             *segment_matrix_section,
             *expectation_section,
             *assumption_change_section,
+            *shared_underwriting_section,
             *structured_kpe_section,
             "",
             "## Mandatory Three-Year Table",
             f"| item | {year_1} | {year_2} | {year_3} | evidence / assumption status |",
             "| --- | --- | --- | --- | --- |",
-            "| Revenue | to be estimated | to be estimated | to be estimated | reconcile segment volume, ASP, mix, and eliminations |",
-            "| Gross margin | to be estimated | to be estimated | to be estimated | tie to price/spread, cost, utilization, and mix |",
-            "| Operating expense ratio | to be estimated | to be estimated | to be estimated | tie to R&D, sales, admin, and scale leverage |",
-            "| Net profit / EPS | to be estimated | to be estimated | to be estimated | tie to tax, minority, non-recurring, and share count |",
-            "| Operating cash flow / FCF | to be estimated | to be estimated | to be estimated | tie to working capital and capex |",
+            *[
+                f"| {item} | to be estimated | to be estimated | to be estimated | {requirement} |"
+                for item, requirement in mandatory_rows
+            ],
             "",
             "## Analyst Instructions",
             "- A Buy/Overweight call should identify which two or three assumptions drive most of the upside.",

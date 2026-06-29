@@ -6,6 +6,7 @@ from pathlib import Path
 import json
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from collections import defaultdict
 from datetime import datetime, timedelta
 from typing import Callable, Dict, Any, Tuple, List, Optional, Mapping
 
@@ -707,12 +708,20 @@ class TradingAgentsGraph:
             str(trade_date),
             contexts=contexts,
             llm=self.quick_thinking_llm,
+            underwriting_llm=self.deep_thinking_llm,
             enable_llm=bool(
                 self.config.get("structured_research_llm_enabled", True)
+            ),
+            enable_underwriting=bool(
+                self.config.get("company_underwriting_packet_enabled", True)
             ),
             max_prompt_chars=int(
                 self.config.get("structured_research_prompt_max_chars", 42000)
                 or 42000
+            ),
+            underwriting_prompt_max_chars=int(
+                self.config.get("company_underwriting_prompt_max_chars", 60000)
+                or 60000
             ),
         )
 
@@ -817,6 +826,7 @@ class TradingAgentsGraph:
                 "industry_kpi": industry_kpi_context,
                 "market_expectation": market_expectation_context,
                 "peer_comparison": peer_comparison_context,
+                "management_capital_allocation": management_capital_allocation_context,
                 "commodity": commodity_context,
                 "policy": policy_planning_context,
                 "investor_interaction": investor_interaction_context,
@@ -975,7 +985,17 @@ class TradingAgentsGraph:
         recent_decision_context = self.memory_log.get_recent_decision_context(
             company_name
         )
-        contexts = self._fetch_a_share_contexts(company_name, trade_date)
+        raw_contexts = self._fetch_a_share_contexts(company_name, trade_date)
+        normalized_contexts = (
+            {
+                str(key): value
+                for key, value in raw_contexts.items()
+                if isinstance(value, str)
+            }
+            if isinstance(raw_contexts, Mapping)
+            else {}
+        )
+        contexts = defaultdict(str, normalized_contexts)
         thematic_catalyst_context = contexts["thematic_catalyst_context"]
         commodity_context = contexts["commodity_context"]
         price_move_attribution_context = contexts["price_move_attribution_context"]
@@ -1058,12 +1078,15 @@ class TradingAgentsGraph:
                 "industry_kpi": industry_kpi_context,
                 "market_expectation": market_expectation_context,
                 "peer_comparison": peer_comparison_context,
+                "management_capital_allocation": management_capital_allocation_context,
                 "commodity": commodity_context,
                 "policy": policy_planning_context,
                 "investor_interaction": investor_interaction_context,
                 "knowledge_planet": knowledge_planet_context,
             },
         )
+        if not isinstance(structured_research_context, Mapping):
+            structured_research_context = {}
         forecast_model_context = build_forecast_model_context(
             company_name,
             str(trade_date),

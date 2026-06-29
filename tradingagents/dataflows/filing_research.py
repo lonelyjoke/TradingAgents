@@ -1825,6 +1825,36 @@ def _extract_segment_economics(
         if report_type not in {"annual", "semiannual"}:
             continue
         lines = [line.strip() for line in str(text or "").splitlines() if line.strip()]
+        # Preserve one wider table window. PDF extraction often places the
+        # section header and every product row on separate lines; the legacy
+        # four-line window retained only the first product and encouraged the
+        # downstream LLM to invent or over-blend the remaining profit pools.
+        for idx, raw_line in enumerate(lines):
+            if not any(term in raw_line for term in _SEGMENT_SECTION_TERMS):
+                continue
+            compacted_block = _compact_text(" ".join(lines[idx : idx + 28]), limit=2400)
+            if (
+                compacted_block
+                and compacted_block not in seen
+                and not _is_segment_noise(compacted_block)
+                and len(_TABLE_NUMBER_RE.findall(compacted_block)) >= 6
+            ):
+                seen.add(compacted_block)
+                rows.append(
+                    (
+                        50 + max(0, 3 - report_index),
+                        SegmentEconomicsFinding(
+                            segment_type=_segment_type(compacted_block),
+                            report_type=report_type,
+                            evidence=f"{title}: {compacted_block}",
+                            analyst_use=(
+                                "Parse every disclosed row before LLM interpretation; use reported revenue, "
+                                "cost, margin and growth as the deterministic segment baseline."
+                            ),
+                        ),
+                    )
+                )
+            break
         for idx, raw_line in enumerate(lines):
             window = " ".join(lines[idx : idx + 4])
             compacted = _compact_text(window, limit=360)

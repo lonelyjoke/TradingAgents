@@ -2,7 +2,10 @@
 
 from __future__ import annotations
 
-from tradingagents.agents.schemas import ResearchPlan, render_research_plan
+from tradingagents.agents.schemas import (
+    UnderwritingResearchPlan,
+    render_underwriting_research_plan,
+)
 from tradingagents.agents.utils.agent_utils import (
     build_instrument_context,
     get_baijiu_instruction,
@@ -54,7 +57,11 @@ from tradingagents.dataflows.structured_research import compact_structured_resea
 
 
 def create_research_manager(llm):
-    structured_llm = bind_structured(llm, ResearchPlan, "Research Manager")
+    structured_llm = bind_structured(
+        llm,
+        UnderwritingResearchPlan,
+        "Research Manager",
+    )
 
     def research_manager_node(state) -> dict:
         instrument_context = build_instrument_context(state["company_of_interest"])
@@ -198,7 +205,7 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 - Keep an **Industry Cycle Verdict** explicit enough to state the current cycle stage before valuation: downturn, bottom-testing, bottom-right validation, early upcycle, mid-cycle expansion, peak/rollover, or evidence insufficient. Do not let company PE or one-quarter profit alone establish the cycle stage.
 - Keep a **Business Model / Segment Economics Verdict** explicit enough to teach how the company makes money, which segments are mature core value, which are second-curve/scenario value, what moat is actually evidenced, and which segment disclosures are still missing.
 - Keep an **Industry KPI Verdict** explicit enough to say which sector-native KPI layers are verified, partial, or missing, and whether those gaps change conviction, sizing, valuation, or the verification calendar.
-- Keep a **Forward Forecast Model Verdict** with three explicit forward years (or four forward quarters), segment drivers, consolidated revenue, margin, parent profit/EPS, OCF, capex and FCF. Missing inputs must appear as `missing/not disclosed` with a research task; a one-year range is incomplete and cannot support a target or safety price.
+- Keep a **Forward Forecast Model Verdict** with three explicit forward years (or four forward quarters), segment drivers and the shared packet's model-profile-appropriate earnings, cash/capital, asset-quality and per-share lines. Ordinary companies use revenue/margin/parent profit/EPS/OCF/capex/FCF; banks, insurers, securities firms and REITs use their native driver sets. Missing inputs must appear as `missing/not disclosed` with a research task; a one-year range is incomplete and cannot support a target or safety price.
 - Keep a **Key Number Audit Verdict** explicit enough to police decisive PE/PB/EV multiples, target price, safety price, dividend yield, margins, ASP, shipments, utilization, backlog, and contract-liability claims. Require formula, period, source, and evidence status when those numbers drive the rating.
 - Keep a **Question-Led Thesis Verdict** explicit enough to say which Thesis Question Context IDs were answered by the bull, which were successfully attacked by the bear, which remain unanswered, and how that changes rating, valuation, sizing, and next verification.
 - If official policy context is available, keep a **Policy Direction Verdict** explicit enough to distinguish industry support from company-specific monetization.
@@ -206,7 +213,8 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 - Preserve a concise standalone **Safety Price / Defensive Build Anchor** when financial state supports it; when writing Chinese, title it `## 安全价格区间 / 防御性建仓锚`. For value stocks, blue chips, banks, defensive dividend names, and mature cash-flow compounders, anchor it in normalized low-cycle EPS or FCF, sustainable dividend yield, book value/PB and ROE, cash conversion, leverage or net cash, asset quality, payout capacity, and peer/historical valuation floors. For commodity/resource/cyclical names, anchor it in cycle-trough or stress-case earnings, conservative product prices, unit-cost resilience, balance-sheet survival, maintenance capex, and normalized PE/PB floors. Include only the practical anchor: price band, valuation bridge, business conditions that must remain true, slow-build plan, and deterioration that invalidates it. Prefer one short paragraph or a compact 3-4 row table, not a second valuation essay. If the company is structurally impaired, highly leveraged, deeply cyclical without survivable trough economics, or evidence-thin, still keep the section and say no reliable safety price can be assigned.
 - If industry-specific filing context is available, keep an **Industry Driver Verdict** explicit enough to preserve the real sector-native variables that decide the thesis.
 - If the filing context contains **Growth Sustainability & Ramp Conditions**, keep a **Growth Sustainability Verdict** explicit enough to judge whether revenue/profit growth can continue or ramp further. Require the debate to separate verified drivers, inferred drivers, needed ramp conditions, and falsification signals before accepting any Buy/Underweight conclusion.
-- If the filing context contains **Pre-Debate Underwriting Questions**, use them as the judging agenda. Decide which side better answered the company-specific business-model, moat, growth-driver, second-curve, cash-quality, segment-valuation, and risk questions. Populate the structured `question_led_debate_audit` field with a compact issue-log table covering question, initial skepticism, bull answer, bear attack, evidence verdict, valuation/sizing impact, and next verification. Do not let the final plan ignore an unanswered pre-debate question that is central to the rating.
+- Fill the compact `UnderwritingResearchPlan` schema. Put the reconciled operating/forecast/scenario model in `accepted_underwriting_model`, all assumption changes in `model_change_ledger`, unresolved company-specific questions in `unresolved_questions_and_gaps`, and a concise constraint set in `handoff_to_pm_and_trader`. Do not recreate the legacy optional-field checklist.
+- If the filing context or shared packet contains **Pre-Debate Underwriting Questions**, use them as the judging agenda. Reconcile initial assumption, bull evidence, bear attack, accepted model value, EPS/FCF/valuation impact and next verification inside `model_change_ledger`. Do not let the final plan ignore an unanswered question that is central to the recommendation.
 - If the filing context contains a Business Segment Valuation Map or Segment Economics Pack, keep a **Business Segment Valuation Verdict** explicit enough to split mature core businesses from emerging second curves, geographies, and channels. Do not allow the debate to collapse a multi-business company into one blended PE unless the filings do not support a meaningful split.
 - Keep a **Segment Prosperity Verdict** for multi-business companies. Judge each material segment on both current prosperity level and marginal direction using dated demand, supply/capacity, price/volume/share, utilization/mix, margin, working-capital and cash evidence. Require written causal analysis, strongest counterevidence, confidence, EPS/FCF transmission, and profit-weighted company aggregation; do not let one commodity proxy or a small fashionable segment determine the whole-company verdict.
 - Enforce same-period segment ranking: compare every disclosed material segment's revenue growth and margin change before accepting `fastest-growing`, `highest-margin`, or `dominant profit pool`. A consolidated prosperity label is invalid until the segment matrix is complete or its missing links are explicitly disclosed.
@@ -216,6 +224,8 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 - If relative-strength/index-linkage context is available, keep a **Relative Strength Verdict** explicit enough to decide whether the stock is stronger or weaker than its style index and same-industry basket, whether correlation/Beta suggest benchmark beta or company alpha, and how that changes timing, sizing, and thesis validation.
 - If Knowledge Planet context is available, keep a **Knowledge Planet Intelligence Verdict** explicit enough to use the Single-Stock Knowledge Fusion Pack first, separate information-rich industry data/channel checks/research feedback from sell-side promotion, and reconcile private/proxy clues with filings, Tushare data, peer evidence, price/volume behavior, and official announcements. Decide whether it upgrades the catalyst/expectation gap, only creates a watch item, or raises pump/crowding risk.
 - Use the Structured Research Bundle as the machine-readable source of record for segment identities, grounded metrics, source conflicts, and KPE financial transmission. Do not promote semantic rows marked unverified or missing-period into decisive evidence. When KPE quantification lacks a revenue base, margin, share count, cash conversion, or valid probability triplet, make the missing input an explicit research task instead of filling it narratively.
+- Treat `underwriting_packet` inside that bundle as the single shared company model. Act as a model referee: reconcile the fundamental analyst's Shared Model Update Ledger with the Bull and Bear Model Change Ledgers question by question and forecast line by forecast line. Produce one **Accepted Underwriting Model** covering the company operating equations, all material segments, three forward years, the appropriate consolidated earnings/cash/capital/per-share model, and bull/base/bear probability/value. For each disputed line record old assumption, bull proposal, bear proposal, accepted assumption, evidence ids, financial impact, and next verification. Do not resolve disagreement by prose compromise or by choosing a rating first.
+- The research plan handed to Trader and PM must state the packet's `research_readiness`, the accepted model changes, unresolved model cells and reconciliation failures. A missing model cell is not a neutral opinion and must not be converted into a convenient middle rating; it is an explicit analytical gap.
 - Read and disclose the bundle's `preprocessing_mode` and `preprocessing_notes`. If semantic preprocessing failed, use deterministic filing-row segments only as a controlled fallback and cap confidence in semantic conflict/KPE mapping. For each company-specific KPE item, preserve one explicit downstream outcome: numeric old->new, probability before->after, unchanged/watch with verification gate, or rejected with reason.
 - Reject period or per-share bridges that do not reconcile. H1 equals Q1 plus Q2 single-quarter profit and cannot reuse Q2 labels; BVPS=current price/PB, EPS=parent profit/diluted shares, and safety/target price must equal the stated EPSxPE or BVPSxPB formula with consistent units. If a required denominator is missing, require `no reliable safety price can be assigned` rather than an approximate range.
 - Do not dismiss Knowledge Planet merely because it is unofficial. If a clue is company-specific, industry-KPI-like, channel-check-like, or broker research feedback, translate it into a thesis variable: driver, expected earnings/cash-flow effect, probability shift, catalyst clock, objective anchor, and falsification signal. If the clue is ignored, state the precise reason: stale, promotional, not company-specific, contradicted by objective data, already priced, or lacking a product-to-profit bridge.
@@ -396,7 +406,7 @@ If a bull or bear argument contains an exact product price, inventory figure, pr
             structured_llm,
             llm,
             prompt,
-            render_research_plan,
+            render_underwriting_research_plan,
             "Research Manager",
         )
 

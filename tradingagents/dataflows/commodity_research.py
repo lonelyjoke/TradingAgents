@@ -13,7 +13,7 @@ except ModuleNotFoundError:  # pragma: no cover - exercised when optional dep is
     Selector = None
 
 from .industry_classifier import banking_profile_hint, is_banking_entity
-from .industry_identity import is_telecom_operator_text
+from .industry_identity import is_automotive_components_text, is_telecom_operator_text
 from .tushare_a_stock import (
     TushareDataError,
     _fetch_stock_basic,
@@ -347,7 +347,11 @@ COMPANY_COMMODITY_MAP = {
 INDUSTRY_PRODUCT_HINTS = {
     "铜": [_metal_product("Copper", "industry proxy")],
     "黄金": [_metal_product("Gold", "industry proxy")],
-    "银": [_metal_product("Silver", "industry proxy")],
+    # A single Chinese character "银" also appears in 银行 and creates severe
+    # false positives in ordinary company filings.  Generic inference requires
+    # an explicit silver identity; known silver producers remain covered by
+    # COMPANY_COMMODITY_MAP.
+    "白银": [_metal_product("Silver", "industry proxy")],
     "锡": [_metal_product("Tin", "industry proxy")],
     "铅": [_metal_product("Lead", "industry proxy")],
     "锌": [_metal_product("Zinc", "industry proxy")],
@@ -881,6 +885,34 @@ def _infer_products(symbol: str, curr_date: str | None = None, look_back_days: i
             "name": _format_value(basic.get("name")),
             "products": [],
             "spread_note": "Not applicable: telecom operators do not have a primary commodity/product-price spread driver. Use telecom ARPU, subscribers, cloud/AI, capex, FCF, and dividend KPIs instead.",
+        }
+    if is_automotive_components_text(symbol, haystack, filing_probe):
+        products: list[dict] = []
+        if any(term in evidence_haystack for term in ("铝合金", "铝材", "铝锭")):
+            products.append(_metal_product("Aluminum", "unverified input-cost proxy"))
+        if any(term in evidence_haystack for term in ("钢材", "钢板", "钢卷")):
+            products.append(
+                {
+                    "name": "Rebar",
+                    "type": "futures",
+                    "role": "unverified steel-cost proxy",
+                    "prefix": "RB",
+                    "exchange": "SHFE",
+                }
+            )
+        if any(term in evidence_haystack for term in ("铜材", "铜线", "铜排")):
+            products.append(_metal_product("Copper", "unverified input-cost proxy"))
+        return {
+            "name": _format_value(basic.get("name")),
+            "products": products,
+            "spread_note": (
+                "Automotive-supplier commodity rows are unverified input-cost proxies only. "
+                "Do not infer margin direction until filing evidence establishes material cost share, "
+                "purchase-price lag/pass-through, customer annual price reductions, product mix and utilization."
+                if products
+                else "No filing-supported material commodity exposure was identified for this automotive supplier. "
+                "Use product mix, OEM annual price reductions, utilization and company-disclosed input costs instead."
+            ),
         }
     products = []
     wind_equipment = any(

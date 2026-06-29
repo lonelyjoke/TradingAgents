@@ -231,6 +231,34 @@ def test_unmapped_wind_equipment_uses_steel_proxy_not_incidental_precious_metal(
     assert "Lithium carbonate" not in product_names
 
 
+def test_automotive_supplier_does_not_treat_bank_text_as_silver_exposure(monkeypatch):
+    monkeypatch.setattr(
+        commodity_research,
+        "_fetch_stock_basic",
+        lambda symbol: pd.Series({"ts_code": symbol, "name": "拓普集团", "industry": "汽车配件"}),
+    )
+
+    def fake_load_reports(symbol, curr_date, look_back_days):
+        return [], [
+            (
+                "年报",
+                "公司主营汽车零部件、底盘系统和热管理系统。银行借款及银行承兑汇票属于财务披露，"
+                "未披露白银采购或白银成本敞口。",
+            )
+        ]
+
+    monkeypatch.setattr(
+        "tradingagents.dataflows.filing_research._load_financial_report_texts",
+        fake_load_reports,
+    )
+
+    mapping = _infer_products("601689.SH", "2026-06-29")
+    product_names = {product["name"] for product in mapping["products"]}
+
+    assert "Silver" not in product_names
+    assert "Automotive-supplier commodity rows" in mapping["spread_note"] or not product_names
+
+
 def test_telecom_operator_commodity_context_is_not_applicable(monkeypatch):
     monkeypatch.setattr(
         commodity_research,

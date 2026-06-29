@@ -925,6 +925,7 @@ def _fetch_daily(symbol: str, start_date: str, end_date: str) -> pd.DataFrame:
     daily_fields = "ts_code,trade_date,open,high,low,close,pre_close,change,pct_chg,vol,amount"
     raw_frames: list[pd.DataFrame] = []
     errors: list[str] = []
+    range_query_completed = False
 
     def query_daily(**kwargs) -> pd.DataFrame:
         try:
@@ -942,7 +943,10 @@ def _fetch_daily(symbol: str, start_date: str, end_date: str) -> pd.DataFrame:
         {"ts_code": symbol, "start_date": start, "end_date": end},
         {"ts_code": symbol, "start_date": start, "end_date": end, "fields": daily_fields},
     ):
+        errors_before = len(errors)
         data = query_daily(**kwargs)
+        if len(errors) == errors_before:
+            range_query_completed = True
         if not data.empty:
             raw_frames.append(data)
             break
@@ -964,7 +968,11 @@ def _fetch_daily(symbol: str, start_date: str, end_date: str) -> pd.DataFrame:
                 break
 
     if not raw_frames:
-        if errors:
+        # An accepted range query that legitimately returned zero rows should
+        # flow into the caller's wider-window backfill. Unsupported optional
+        # trade_date/fields snapshot signatures must not convert that normal
+        # empty-window condition into a hard failure.
+        if errors and not range_query_completed:
             rendered_errors = "; ".join(dict.fromkeys(errors))
             raise TushareDataError(
                 f"Tushare daily data unavailable for {symbol} between {start} and {end}: {rendered_errors}"

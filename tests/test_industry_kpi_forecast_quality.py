@@ -230,6 +230,65 @@ def test_not_applicable_insurance_context_does_not_route_generic_stock_to_insura
     assert "P&C underwriting profit" not in forecast
 
 
+def test_tuopu_uses_automotive_supplier_model_despite_cross_industry_noise():
+    filing = (
+        "拓普集团主营汽车零部件，为整车厂提供底盘系统、减震系统、内外饰、"
+        "热管理系统、空气悬架和汽车电子，采用Tier0.5合作模式。"
+    )
+    noisy_context = (
+        "Generic template examples mention insurance NBV, embedded value, solvency, "
+        "battery GWh, silver and robotics. These are not target-company identity facts."
+    )
+
+    kpi = build_industry_kpi_context(
+        "601689.SH",
+        "2026-06-29",
+        filing_intelligence_context=filing,
+        company_business_model_context=noisy_context,
+    )
+    forecast = build_forecast_model_context(
+        "601689.SH",
+        "2026-06-29",
+        filing_intelligence_context=filing,
+        company_business_model_context=noisy_context,
+        industry_kpi_context=kpi,
+    )
+
+    assert "automotive components / platform supplier" in kpi
+    assert "Customer / Vehicle Exposure" in kpi
+    assert "Pricing / Annual Reduction" in kpi
+    assert "Reinvestment / ROIC" in kpi
+    assert "Core product revenue" in forecast
+    assert "customer vehicle volume x platform share x content per vehicle" in forecast
+    assert "interest versus FX decomposition" in forecast
+    assert "Life NBV" not in forecast
+    assert "P&C underwriting profit" not in forecast
+
+
+def test_automotive_profile_controls_data_coverage_gates():
+    contexts = {
+        "industry_kpi_checklist": (
+            "# Industry KPI Checklist\n\n"
+            "- Playbook: automotive components / platform supplier\n"
+            "Customer vehicle sales, content per vehicle, product revenue, gross margin, "
+            "utilization, OCF, FCF, capex and incremental ROIC are required."
+        ),
+        "forecast_model_scaffold": (
+            "# Forward Forecast Model Scaffold\n\n"
+            "Core product revenue = customer vehicle sales x content per vehicle."
+        ),
+        "insurance": (
+            "# Insurance verification context\n\n- Status: not_applicable\n"
+            "NBV, EV, solvency and COR must not be used."
+        ),
+    }
+
+    coverage = build_data_coverage_context(contexts)
+
+    assert "| automotive components |" in coverage
+    assert "| insurance | NBV growth and margin |" not in coverage
+
+
 def test_forecast_model_scaffold_requires_three_year_driver_bridge():
     context = build_forecast_model_context(
         "300750.SZ",

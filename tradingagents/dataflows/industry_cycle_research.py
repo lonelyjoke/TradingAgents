@@ -114,6 +114,24 @@ def build_industry_cycle_context(
 ) -> str:
     """Build a compact industry-cycle verdict from existing evidence contexts."""
 
+    # Context producers normally return strings, but optional/non-A-share
+    # paths and mocked integrations may supply None or proxy objects.  Treat
+    # those as unavailable rather than letting one optional layer crash the
+    # entire research graph.
+    def _context_text(value: object) -> str:
+        return value if isinstance(value, str) else ""
+
+    commodity_context = _context_text(commodity_context)
+    shipping_context = _context_text(shipping_context)
+    baijiu_context = _context_text(baijiu_context)
+    building_materials_context = _context_text(building_materials_context)
+    consumer_staples_context = _context_text(consumer_staples_context)
+    metals_mining_context = _context_text(metals_mining_context)
+    policy_planning_context = _context_text(policy_planning_context)
+    investor_interaction_context = _context_text(investor_interaction_context)
+    filing_intelligence_context = _context_text(filing_intelligence_context)
+    knowledge_planet_context = _context_text(knowledge_planet_context)
+
     active_layers: list[tuple[str, str, str]] = []
     if _has_usable_context(commodity_context):
         stage, reason = _commodity_stage(commodity_context)

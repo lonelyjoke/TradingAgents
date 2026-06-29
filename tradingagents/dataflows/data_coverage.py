@@ -175,6 +175,24 @@ KEY_FACT_TERMS = (
 
 PROFILE_RULES = (
     {
+        "profile": "automotive components",
+        "triggers": (
+            "playbook: automotive components / platform supplier",
+            "customer / vehicle exposure",
+            "content per vehicle",
+            "annual price-down",
+        ),
+        "variables": (
+            ("Customer/model volume bridge", ("customer vehicle sales", "vehicle volume", "车型", "客户定点")),
+            ("Content per vehicle / ASP", ("content per vehicle", "单车配套", "asp", "annual price-down")),
+            ("Segment revenue / gross margin", ("product revenue", "segment revenue", "gross margin", "分产品")),
+            ("Capacity utilization / SOP", ("utilization", "sop", "ppap", "产能利用率")),
+            ("Working capital / FCF", ("receivables", "inventory", "ocf", "fcf", "capex")),
+            ("Incremental ROIC", ("incremental roic", "invested capital", "固定资产", "在建工程")),
+            ("Second-curve order-to-revenue", ("order-to-revenue", "customer nomination", "第二曲线", "机器人")),
+        ),
+    },
+    {
         "profile": "battery / energy storage",
         "triggers": (
             "playbook: battery / energy-storage chain",
@@ -475,6 +493,7 @@ def _detect_profiles(contexts: dict[str, str]) -> list[dict[str, object]]:
         if "industry_kpi" in name or "forecast_model" in name
     ).lower()
     explicit_markers = (
+        ("automotive components / platform supplier", "automotive components"),
         ("battery / energy-storage chain", "battery / energy storage"),
         ("telecom operator / high-dividend soe", "telecom operator"),
         ("insurance / integrated financial services", "insurance"),

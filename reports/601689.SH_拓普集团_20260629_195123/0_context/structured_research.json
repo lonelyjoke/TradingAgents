@@ -1,0 +1,2771 @@
+{
+  "schema_version": 3,
+  "symbol": "601689.SH",
+  "as_of_date": "2026-06-29",
+  "preprocessing_mode": "llm_semantic_plus_deterministic_validation",
+  "company_summary": "Tuopu Group (601689.SH) is a diversified automotive parts manufacturer with eight core product lines (NVH, interior/exterior, lightweight, smart cockpit, thermal, chassis, air suspension, intelligent driving), plus emerging businesses: robot actuator, liquid cooling server, and medical oxygen. As of 2026-06-29, the company shows stable consolidated revenue growth but margin compression in Q1 2026 YoY, with ongoing capacity expansion overseas and new business development.",
+  "segments": [
+    {
+      "segment": "汽车零部件 (八大业务板块)",
+      "aliases": [
+        "NVH减震系统",
+        "内外饰系统",
+        "轻量化车身",
+        "智能座舱部件",
+        "热管理系统",
+        "底盘系统",
+        "空气悬架系统",
+        "智能驾驶系统"
+      ],
+      "products_or_services": "汽车零部件的研发、生产及销售，包括NVH减震系统、内外饰系统、轻量化车身、智能座舱部件、热管理系统、底盘系统、空气悬架系统、智能驾驶系统",
+      "revenue_weight_pct": null,
+      "gross_profit_or_profit_weight_pct": null,
+      "business_model": "产能出货型，产品制造，高研发技术产品型",
+      "key_drivers": [
+        "全球汽车销量",
+        "新能源车渗透率",
+        "客户定点订单",
+        "产品平台化",
+        "海外产能释放"
+      ],
+      "prosperity_level": "evidence_limited",
+      "marginal_direction": "unknown",
+      "causal_chain": "Global vehicle demand → OEM orders → production volume & mix → capacity utilization and pricing → gross margin & operating leverage → net profit & cash flow",
+      "supporting_metric_refs": [
+        "EV012",
+        "EV014",
+        "EV015",
+        "EV016",
+        "EV018",
+        "EV030"
+      ],
+      "counterevidence": [],
+      "confidence": "low",
+      "missing_inputs": [
+        "segment-level revenue breakdown",
+        "segment-level gross margin",
+        "customer concentration",
+        "utilization rates"
+      ],
+      "revenue_cny_mn": null,
+      "revenue_reported_value": null,
+      "revenue_reported_unit": "",
+      "revenue_growth_pct": null,
+      "gross_margin_pct": null,
+      "gross_margin_change_pp": null,
+      "period": "unspecified",
+      "source_module": "",
+      "evidence_quote": "",
+      "extraction_mode": "llm_semantic"
+    },
+    {
+      "segment": "机器人执行器",
+      "aliases": [
+        "具身智能",
+        "机器人"
+      ],
+      "products_or_services": "机器人执行器、具身智能业务",
+      "revenue_weight_pct": null,
+      "gross_profit_or_profit_weight_pct": null,
+      "business_model": "新兴业务，成立机器人执行器事业部",
+      "key_drivers": [
+        "特斯拉机器人进展",
+        "具身智能行业渗透",
+        "首批订单",
+        "产能规划"
+      ],
+      "prosperity_level": "evidence_limited",
+      "marginal_direction": "unknown",
+      "causal_chain": "Robot industry development → demand for actuators → company R&D and capacity → orders and revenue → margin contribution",
+      "supporting_metric_refs": [
+        "EV021",
+        "EV028",
+        "EV083"
+      ],
+      "counterevidence": [],
+      "confidence": "low",
+      "missing_inputs": [
+        "revenue",
+        "gross margin",
+        "order backlog",
+        "capacity",
+        "unit economics"
+      ],
+      "revenue_cny_mn": null,
+      "revenue_reported_value": null,
+      "revenue_reported_unit": "",
+      "revenue_growth_pct": null,
+      "gross_margin_pct": null,
+      "gross_margin_change_pp": null,
+      "period": "unspecified",
+      "source_module": "",
+      "evidence_quote": "",
+      "extraction_mode": "llm_semantic"
+    },
+    {
+      "segment": "液冷服务器",
+      "aliases": [
+        "液冷",
+        "服务器"
+      ],
+      "products_or_services": "液冷服务器相关业务",
+      "revenue_weight_pct": null,
+      "gross_profit_or_profit_weight_pct": null,
+      "business_model": "新业务拓展",
+      "key_drivers": [
+        "数据中心需求",
+        "首批订单",
+        "客户拓展"
+      ],
+      "prosperity_level": "evidence_limited",
+      "marginal_direction": "unknown",
+      "causal_chain": "Data center cooling demand → product development → initial orders → revenue growth",
+      "supporting_metric_refs": [
+        "EV025"
+      ],
+      "counterevidence": [],
+      "confidence": "low",
+      "missing_inputs": [
+        "revenue",
+        "margin",
+        "order size",
+        "timeline"
+      ],
+      "revenue_cny_mn": null,
+      "revenue_reported_value": null,
+      "revenue_reported_unit": "",
+      "revenue_growth_pct": null,
+      "gross_margin_pct": null,
+      "gross_margin_change_pp": null,
+      "period": "unspecified",
+      "source_module": "",
+      "evidence_quote": "",
+      "extraction_mode": "llm_semantic"
+    },
+    {
+      "segment": "车规级制氧",
+      "aliases": [
+        "制氧",
+        "医疗"
+      ],
+      "products_or_services": "车规级制氧新业务",
+      "revenue_weight_pct": null,
+      "gross_profit_or_profit_weight_pct": null,
+      "business_model": "新兴业务，有序落地推进",
+      "key_drivers": [
+        "产品落地",
+        "客户接受",
+        "量产进度"
+      ],
+      "prosperity_level": "evidence_limited",
+      "marginal_direction": "unknown",
+      "causal_chain": "Product development → customer validation → initial revenue → scale-up",
+      "supporting_metric_refs": [
+        "EV084"
+      ],
+      "counterevidence": [],
+      "confidence": "low",
+      "missing_inputs": [
+        "revenue",
+        "margin",
+        "production status",
+        "order book"
+      ],
+      "revenue_cny_mn": null,
+      "revenue_reported_value": null,
+      "revenue_reported_unit": "",
+      "revenue_growth_pct": null,
+      "gross_margin_pct": null,
+      "gross_margin_change_pp": null,
+      "period": "unspecified",
+      "source_module": "",
+      "evidence_quote": "",
+      "extraction_mode": "llm_semantic"
+    }
+  ],
+  "semantic_metrics": [
+    {
+      "segment": "consolidated",
+      "variable": "revenue",
+      "value": 6628185769.77,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "20260331",
+      "comparison_basis": "YoY: 20260331 vs 20250331 (Q1 2025 not provided)",
+      "source_module": "earnings_model",
+      "source_quote": "/ Revenue base / 6628185769.77 / N/A / YoY: 20260331 vs 20250331 / top-line starting point for volume × price × mix /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "top_line",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "net_profit_parent",
+      "value": 551799928.86,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "20260331",
+      "comparison_basis": "Q1 2026 reported",
+      "source_module": "earnings_model",
+      "source_quote": "/ latest reported / Q1 / 20260331 / 6628185769.77 / 551799928.86 / 26512743079.08 / 2207199715.44 / 30082691428.6121 / 2600214199.5427 / historical median 0331 share 21.2% /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "profit",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "gross_margin",
+      "value": 19.2562,
+      "value_text": "",
+      "unit": "%",
+      "period": "20260331",
+      "comparison_basis": "YoY: 20260331 vs 20250331, change -0.64pp",
+      "source_module": "earnings_model",
+      "source_quote": "/ Gross margin / 19.2562% / -0.64pp / YoY: 20260331 vs 20250331 / main bridge from demand to gross profit /",
+      "evidence_status": "unverified",
+      "direction": "down",
+      "materiality": "high",
+      "model_role": "margin_bridge",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "operating_margin",
+      "value": 10.3067,
+      "value_text": "",
+      "unit": "%",
+      "period": "20260331",
+      "comparison_basis": "YoY: 20260331 vs 20250331, change -1.25pp",
+      "source_module": "earnings_model",
+      "source_quote": "/ Operating margin / 10.3067% / -1.25pp / YoY: 20260331 vs 20250331 / tests pricing, mix, and cost absorption /",
+      "evidence_status": "unverified",
+      "direction": "down",
+      "materiality": "high",
+      "model_role": "operating_efficiency",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "net_margin",
+      "value": 8.3251,
+      "value_text": "",
+      "unit": "%",
+      "period": "20260331",
+      "comparison_basis": "YoY: 20260331 vs 20250331, change -1.48pp",
+      "source_module": "earnings_model",
+      "source_quote": "/ Net margin / 8.3251% / -1.48pp / YoY: 20260331 vs 20250331 / captures final earnings conversion /",
+      "evidence_status": "unverified",
+      "direction": "down",
+      "materiality": "high",
+      "model_role": "profitability",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "finance_expense_ratio",
+      "value": 1.455,
+      "value_text": "",
+      "unit": "%",
+      "period": "20260331",
+      "comparison_basis": "YoY: 20260331 vs 20250331, change +1.36pp",
+      "source_module": "earnings_model",
+      "source_quote": "/ Finance-expense ratio / 1.455% / +1.36pp / YoY: 20260331 vs 20250331 / captures leverage drag or relief /",
+      "evidence_status": "unverified",
+      "direction": "up",
+      "materiality": "medium",
+      "model_role": "leverage_impact",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "ocf_to_net_profit",
+      "value": 0.9917,
+      "value_text": "",
+      "unit": "ratio",
+      "period": "20260331",
+      "comparison_basis": "YoY: 20260331 vs 20250331",
+      "source_module": "earnings_model",
+      "source_quote": "/ OCF / net profit / 0.9917 / N/A / YoY: 20260331 vs 20250331 / tests earnings quality and cash realization /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "medium",
+      "model_role": "quality",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "receivables_to_revenue",
+      "value": 21.5404,
+      "value_text": "",
+      "unit": "%",
+      "period": "20260331",
+      "comparison_basis": "YoY: 20260331 vs 20250331, change -0.89pp; annualized revenue used",
+      "source_module": "earnings_model",
+      "source_quote": "/ Receivables / revenue / 21.5404% / -0.89pp / YoY: 20260331 vs 20250331 / tests working-capital drag; interim periods use annualized revenue /",
+      "evidence_status": "unverified",
+      "direction": "up",
+      "materiality": "medium",
+      "model_role": "working_capital",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "inventory_to_revenue",
+      "value": 16.3813,
+      "value_text": "",
+      "unit": "%",
+      "period": "20260331",
+      "comparison_basis": "YoY: 20260331 vs 20250331, change -0.19pp; annualized revenue used",
+      "source_module": "earnings_model",
+      "source_quote": "/ Inventory / revenue / 16.3813% / -0.19pp / YoY: 20260331 vs 20250331 / tests inventory build and demand quality; interim periods use annualized revenue /",
+      "evidence_status": "unverified",
+      "direction": "down",
+      "materiality": "medium",
+      "model_role": "working_capital",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "market_cap",
+      "value": 90975693660.0,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "2026-06-29",
+      "comparison_basis": "",
+      "source_module": "market_expectation",
+      "source_quote": "/ Market cap (CNY) / 90975693660 / current equity value /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "valuation_input",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "pe_ttm",
+      "value": 32.8978,
+      "value_text": "",
+      "unit": "x",
+      "period": "TTM",
+      "comparison_basis": "",
+      "source_module": "market_expectation",
+      "source_quote": "/ PE TTM / 32.8978 / earnings multiple the market is paying now /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "valuation",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "ps_ttm",
+      "value": 2.9885,
+      "value_text": "",
+      "unit": "x",
+      "period": "TTM",
+      "comparison_basis": "",
+      "source_module": "market_expectation",
+      "source_quote": "/ PS TTM / 2.9885 / sales multiple the market is paying now /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "valuation",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "implied_ttm_earnings",
+      "value": 2765403572.8833,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "TTM",
+      "comparison_basis": "calculated: market cap / PE TTM",
+      "source_module": "market_expectation",
+      "source_quote": "/ Implied TTM earnings (CNY) / 2765403572.8833 / market cap divided by PE TTM /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "medium",
+      "model_role": "implied_earnings",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "implied_ttm_sales",
+      "value": 30441925266.8563,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "TTM",
+      "comparison_basis": "calculated: market cap / PS TTM",
+      "source_module": "market_expectation",
+      "source_quote": "/ Implied TTM sales (CNY) / 30441925266.8563 / market cap divided by PS TTM /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "medium",
+      "model_role": "implied_sales",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "pe_percentile_5yr",
+      "value": 27.0,
+      "value_text": "",
+      "unit": "percentile",
+      "period": "5-year",
+      "comparison_basis": "",
+      "source_module": "market_expectation",
+      "source_quote": "/ PE percentile / 27 / 5-year valuation position /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "medium",
+      "model_role": "valuation_position",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "pb_percentile_5yr",
+      "value": 8.3,
+      "value_text": "",
+      "unit": "percentile",
+      "period": "5-year",
+      "comparison_basis": "",
+      "source_module": "market_expectation",
+      "source_quote": "/ PB percentile / 8.3 / 5-year valuation position /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "medium",
+      "model_role": "valuation_position",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "ps_percentile_5yr",
+      "value": 6.0,
+      "value_text": "",
+      "unit": "percentile",
+      "period": "5-year",
+      "comparison_basis": "",
+      "source_module": "market_expectation",
+      "source_quote": "/ PS percentile / 6 / 5-year valuation position /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "medium",
+      "model_role": "valuation_position",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "revenue_fy2025",
+      "value": 29581458675.27,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "20251231",
+      "comparison_basis": "FY2025 actual",
+      "source_module": "earnings_model",
+      "source_quote": "/ latest annual / FY / 20251231 / 29581458675.27 / 2779071103.34 / 29581458675.27 / 2779071103.34 / 29581458675.27 / 2779071103.34 / FY actual /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "historical_revenue",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "net_profit_parent_fy2025",
+      "value": 2779071103.34,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "20251231",
+      "comparison_basis": "FY2025 actual",
+      "source_module": "earnings_model",
+      "source_quote": "/ latest annual / FY / 20251231 / 29581458675.27 / 2779071103.34 / 29581458675.27 / 2779071103.34 / 29581458675.27 / 2779071103.34 / FY actual /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "historical_profit",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "dividend_per_share",
+      "value": 0.49,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "20251231",
+      "comparison_basis": "FY2025 proposal, implemented",
+      "source_module": "management_capital_allocation",
+      "source_quote": "/ 20260324 / 20251231 / 实施 / 0.49 / 0 / 20260521 / 20260522 / 20260522 /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "low",
+      "model_role": "shareholder_return",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "机器人执行器",
+      "variable": "capacity_update",
+      "value": null,
+      "value_text": "波兰工厂现有产线正常运营，二期正在筹划扩建；泰国一期工厂按计划建设推进，将于2026年投产并逐步爬坡放量。",
+      "unit": "",
+      "period": "2026-06-24",
+      "comparison_basis": "",
+      "source_module": "investor_interaction",
+      "source_quote": "公司全球化产能布局稳步推进，波兰工厂现有产线正常运营，二期正在筹划扩建，进一步承接欧洲本土订单；泰国一期工厂按计划建设推进，将于2026年投产并逐步爬坡放量。",
+      "evidence_status": "reported",
+      "direction": "positive",
+      "materiality": "medium",
+      "model_role": "capacity_visibility",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "non_recurring_items",
+      "value": null,
+      "value_text": "非流动性资产处置损益 -4,792,504.20; 公允价值变动收益 77,642,035.79 (来自EV036, EV039)",
+      "unit": "CNY",
+      "period": "20260331",
+      "comparison_basis": "",
+      "source_module": "industry_kpi",
+      "source_quote": "/ impairment_policy: 拓普集团2026年第一季度报告: 单位:元 币种:人民币 非经常性损益项目 本期金额 说明 非流动性资产处置损益，包括已计提资产减值准备的冲销部分 -4,792,504.20",
+      "evidence_status": "reported",
+      "direction": "",
+      "materiality": "low",
+      "model_role": "quality_check",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    }
+  ],
+  "deterministic_evidence": [
+    {
+      "evidence_id": "EV001",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Financial-report look-back: 900 days"
+    },
+    {
+      "evidence_id": "EV002",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "Compacted 拓普集团2025年年度报告: 374123 chars -> 140297 chars."
+    },
+    {
+      "evidence_id": "EV003",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 半年",
+      "text": "Compacted 拓普集团2025年半年度报告: 327185 chars -> 128979 chars."
+    },
+    {
+      "evidence_id": "EV004",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260430, 2026, 季度",
+      "text": "20260430: 拓普集团2026年第一季度报告"
+    },
+    {
+      "evidence_id": "EV005",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260324, 2025, 年度",
+      "text": "20260324: 拓普集团2025年年度报告"
+    },
+    {
+      "evidence_id": "EV006",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20251202, 2025",
+      "text": "20251202: 拓普集团2025年三季报业绩说明会预告公告"
+    },
+    {
+      "evidence_id": "EV007",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20251031, 2025, 季度",
+      "text": "20251031: 拓普集团2025年第三季度报告"
+    },
+    {
+      "evidence_id": "EV008",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20250829, 2025, 半年",
+      "text": "20250829: 拓普集团2025年半年度报告"
+    },
+    {
+      "evidence_id": "EV009",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ announcement_lookup / ready / Found 5 candidate financial-report announcement(s) from primary and CNINFO sources. /"
+    },
+    {
+      "evidence_id": "EV010",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026, 季度",
+      "text": "/ pdf_text_extraction / ready / 拓普集团2026年第一季度报告: extracted 18329 characters of readable report text. /"
+    },
+    {
+      "evidence_id": "EV011",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "Q1, 20260331",
+      "text": "/ latest reported / Q1 / 20260331 / 6628185769.77 / 551799928.86 / 26512743079.08 / 2207199715.44 / 30082691428.6121 / 2600214199.5427 / historical median 0331 share 21.2% /"
+    },
+    {
+      "evidence_id": "EV012",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "FY, 20251231",
+      "text": "/ latest annual / FY / 20251231 / 29581458675.27 / 2779071103.34 / 29581458675.27 / 2779071103.34 / 29581458675.27 / 2779071103.34 / FY actual /"
+    },
+    {
+      "evidence_id": "EV013",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "revenue",
+      "period": "20260331, 20250331",
+      "text": "/ Revenue base / 6628185769.77 / N/A / YoY: 20260331 vs 20250331 / top-line starting point for volume × price × mix /"
+    },
+    {
+      "evidence_id": "EV014",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "20260331, 20250331",
+      "text": "/ Gross margin / 19.2562% / -0.64pp / YoY: 20260331 vs 20250331 / main bridge from demand to gross profit /"
+    },
+    {
+      "evidence_id": "EV015",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260331, 20250331",
+      "text": "/ Operating margin / 10.3067% / -1.25pp / YoY: 20260331 vs 20250331 / tests pricing, mix, and cost absorption /"
+    },
+    {
+      "evidence_id": "EV016",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "20260331, 20250331",
+      "text": "/ Net margin / 8.3251% / -1.48pp / YoY: 20260331 vs 20250331 / captures final earnings conversion /"
+    },
+    {
+      "evidence_id": "EV017",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "operating_expense",
+      "period": "20260331, 20250331",
+      "text": "/ Finance-expense ratio / 1.455% / +1.36pp / YoY: 20260331 vs 20250331 / captures leverage drag or relief /"
+    },
+    {
+      "evidence_id": "EV018",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "profit_or_eps",
+      "period": "20260331, 20250331",
+      "text": "/ OCF / net profit / 0.9917 / N/A / YoY: 20260331 vs 20250331 / tests earnings quality and cash realization /"
+    },
+    {
+      "evidence_id": "EV019",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "revenue",
+      "period": "20260331, 20250331",
+      "text": "/ Receivables / revenue / 21.5404% / -0.89pp / YoY: 20260331 vs 20250331 / tests working-capital drag; interim periods use annualized revenue /"
+    },
+    {
+      "evidence_id": "EV020",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "revenue",
+      "period": "20260331, 20250331",
+      "text": "/ Inventory / revenue / 16.3813% / -0.19pp / YoY: 20260331 vs 20250331 / tests inventory build and demand quality; interim periods use annualized revenue /"
+    },
+    {
+      "evidence_id": "EV021",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_volume",
+      "period": "2025, 年度",
+      "text": "/ product_manufacturer / 产品制造 / 产能出货型 / quantified disclosure / 拓普集团2025年年度报告: 公司主营业务为汽车零部件的研发、生产及销售，主要产品包括汽车 NVH 减震系统、内外 饰系统、轻量化车身、智能座舱部件、热管理系统、底盘系统、空气悬架系统、智能驾驶系统共 八大业务板块，主要客户包括国际国内智能电动车企和传统 OEM 车企等。另外，成立机器人执 行器事业部切入具身智能业务是公司的一个重要战略举措。该产业是一个具有广阔发展前景的领 域，通过..."
+    },
+    {
+      "evidence_id": "EV022",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "/ high_r_and_d_technology / 高研发技术产品型 / quantified disclosure / 拓普集团2025年年度报告: 四、报告期内核心竞争力分析 √适用 □不适用 公司自成立四十多年来，不断提升综合竞争力，提高竞争门槛构建护城河。 1、产品平台化优势。 公司把握行业发展趋势，深耕智能电动汽车赛道，持续扩大产品线，形成平台型企业。目前 已经拥有 8 大系列产品，即汽车 NVH 减震系统、内外饰系统、车身轻量化、智能座舱部件、热 管理系统、底盘系统、空气悬架系统、智能驾驶系统..."
+    },
+    {
+      "evidence_id": "EV023",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "2025, 年度",
+      "text": "/ core_revenue_engine / annual / 拓普集团2025年年度报告: 2025 年度，拓普集团主营业务收入为 2、我们通过审阅销售合同及与管理层的访谈，了解和评 / Defines what actually drives the income statement. /"
+    },
+    {
+      "evidence_id": "EV024",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "revenue",
+      "period": "2025, 年度",
+      "text": "/ segment_mix / annual / 拓普集团2025年年度报告: 分产品 营业收入 营业成本 率 比上年增 比上年增 上年增减 / Shows whether different profit pools are being mixed together. /"
+    },
+    {
+      "evidence_id": "EV025",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "utilization_or_backlog",
+      "period": "2025, 年度",
+      "text": "/ customer_and_channel / annual / 拓普集团2025年年度报告: 等行业，并取得首批订单 15 亿元，为公司开拓了全新的市场增长领域。液冷服务器相关业务介绍 / Reveals demand source, concentration, and market validation. /"
+    },
+    {
+      "evidence_id": "EV026",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "/ geography / annual / 拓普集团2025年年度报告: 男，1979 年出生，中国籍，无永久境外居留权，本科学历。历任宁波拓普机电进出口有限公司总经理、宁波拓普集团股份有限公司监事。 / Explains whether growth depends on a specific geography or expansion lane. /"
+    },
+    {
+      "evidence_id": "EV027",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "/ reinvestment_engine / annual / 拓普集团2025年年度报告: 1、科技化战略。公司始终坚持研发与创新，每年将销售收入 5%左右的资金投入基础研究和 / Shows how today's cash is being converted into tomorrow's earnings power. /"
+    },
+    {
+      "evidence_id": "EV028",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "/ product / annual / 拓普集团2025年年度报告: 公司主营业务为汽车零部件的研发、生产及销售，主要产品包括汽车 NVH 减震系统、内外 饰系统、轻量化车身、智能座舱部件、热管理系统、底盘系统、空气悬架系统、智能驾驶系统共 八大业务板块，主要客户包括国际国内智能电动车企和传统 OEM 车企等。另外，成立机器人执 行器事业部切入具身智能业务是公司的一个重要战略举措。该产业是一个具有广阔发展前景的领 域，通过拓展机器人执行器等相关业务，为公司打造新的增长曲线。 公司奉行为客户创造价值的经营理念..."
+    },
+    {
+      "evidence_id": "EV029",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_volume",
+      "period": "2025, 半年",
+      "text": "/ product / semiannual / 拓普集团2025年半年度报告: 一、报告期内公司所属行业及主营业务情况说明 （一）行业情况说明 2025 年上半年，全球乘用车销售约 3008.7 万台，同比上升 4.9%；中国市场销售约 1373.9 万 台，同比增长 12.8%。全球新能源乘用车销售约 866.8 万台，同比增长 33.2%，占全球总销量的 28.8%；其中中国新能源乘用车销售约 645.4 万台，同比增长 37.5%，占国内总销量的 47.0%。 （二）公司主营业务情况 1、主要业务 公..."
+    },
+    {
+      "evidence_id": "EV030",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "revenue",
+      "period": "2025, 年度",
+      "text": "/ business / annual / 拓普集团2025年年度报告: 主营业务 8,030,287,420.92 6,154,662,894.31 7,767,565,077.41 5,924,322,701.09 其他业务 970,852,599.47 645,395,069.47 810,631,788.08 544,363,779.07 合计 9,001,140,020.39 6,800,057,963.78 8,578,196,865.49 6,468,686,480.16 (2). 营业收入、营..."
+    },
+    {
+      "evidence_id": "EV031",
+      "source_module": "industry_cycle",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "balance_sheet",
+      "period": "unspecified",
+      "text": "Do not state R32, R125, lithium, copper, gold, inventory, or spread changes as facts unless they appear in the evidence table."
+    },
+    {
+      "evidence_id": "EV032",
+      "source_module": "industry_cycle",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "gap",
+      "status": "missing",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "If cycle evidence says bottom-testing or evidence-limited, use language such as `bottom-right validation stage`, `右侧待验证`, or `needs confirmation`."
+    },
+    {
+      "evidence_id": "EV033",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "gap",
+      "status": "missing",
+      "model_variable": "segment_margin",
+      "period": "unspecified",
+      "text": "/ coverage_grade / report_types_seen / missing_report_types / answered_questions / core_pack_status / confidence_read /"
+    },
+    {
+      "evidence_id": "EV034",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "20251231, 20260331",
+      "text": "/ accounting_reconciliation / Check signs, units, periods, and cross-statement consistency before a number enters the PM memo. / visibility_not_yet_profitability: 20251231->20260331: revenue growth -77.59%, gross margin change -0.17pp, operating margin chan..."
+    },
+    {
+      "evidence_id": "EV035",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "/ segment_economics_depth / Decide whether each business line has enough disclosed scale, growth, margin, cash quality, and valuation treatment. / 拓普集团2025年年度报告: 公司主营业务为汽车零部件的研发、生产及销售，主要产品包括汽车 NVH 减震系统、内外 饰系统、轻量化车身、智能座舱部件、热管理系统、底盘系统、空气悬架系统、智能驾驶系统共 八大业务板块，主要..."
+    },
+    {
+      "evidence_id": "EV036",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026, 季度",
+      "text": "/ footnote_radar / Surface decision-relevant notes that can hide risk or change confidence. / impairment_policy: 拓普集团2026年第一季度报告: 单位:元 币种:人民币 非经常性损益项目 本期金额 说明 非流动性资产处置损益，包括已计提资产减值准备的冲销部分 -4,792,504.20 / impairment_policy: 拓普集团2026年第一季度报告: 非经常性损益项目 本期金额 说明 非..."
+    },
+    {
+      "evidence_id": "EV037",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "20251231, 20260331",
+      "text": "/ cash_flow_quality_decomposition / Separate accounting profit from cash conversion, working-capital drag, and demand visibility. / visibility_not_yet_profitability: 20251231->20260331: revenue growth -77.59%, gross margin change -0.17pp, operating margin c..."
+    },
+    {
+      "evidence_id": "EV038",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "capex_or_roic",
+      "period": "2026, 季度",
+      "text": "/ capex_cip_return_bridge / Test whether capex, construction-in-progress, or investment assets are building returns or just absorbing capital. / long_term_equity_investments: 拓普集团2026年第一季度报告: 其他债权投资 长期应收款 长期股权投资 113,137,486.17 105,254,429.52 / long_term_equ..."
+    },
+    {
+      "evidence_id": "EV039",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "2026, 季度",
+      "text": "/ non_recurring_profit_quality / Distinguish core operating profit from investment income, fair-value moves, subsidies, asset disposals, impairment, and other one-off items. / impairment: 拓普集团2026年第一季度报告: 公允价值变动收益（损失以“-”号 填列） 信用减值损失（损失以“-”号填列） 77,642,035.79..."
+    },
+    {
+      "evidence_id": "EV040",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "balance_sheet",
+      "period": "2026, 季度",
+      "text": "/ balance_sheet_forward_signals / Read balance-sheet leads before income-statement confirmation. / receivables: 拓普集团2026年第一季度报告: 交易性金融资产 601,000,000.00 400,000,000.00 衍生金融资产 应收票据 26,062,354.01 15,798,084.56 / receivables: 拓普集团2026年第一季度报告: 衍生金融资产 应收票据 26,062..."
+    },
+    {
+      "evidence_id": "EV041",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "revenue",
+      "period": "2025, 年度",
+      "text": "/ shareholder_return_authenticity / Test whether dividends, buybacks, and capital returns are funded by durable profit and cash rather than leverage or asset sales. / generic_capital_allocation: 拓普集团2025年年度报告: 余未分配利润滚存至下一年度。 如在本利润分配预案披露之日至实施权益分派的股权登记日期间，公司总..."
+    },
+    {
+      "evidence_id": "EV042",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "unspecified",
+      "text": "/ disclosure_quality_score / Grade whether filing disclosure is rich enough for a buy-side thesis or only a watchlist view. / Coverage grade strong; reports seen annual/quarterly/semiannual; answered 9/9; core pack ready. Annual base text and quarterly chec..."
+    },
+    {
+      "evidence_id": "EV043",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-06-29",
+      "text": "Valuation trade date: 2026-06-29"
+    },
+    {
+      "evidence_id": "EV044",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ Market cap (CNY) / 90975693660 / current equity value /"
+    },
+    {
+      "evidence_id": "EV045",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "valuation",
+      "period": "TTM",
+      "text": "/ PE TTM / 32.8978 / earnings multiple the market is paying now /"
+    },
+    {
+      "evidence_id": "EV046",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "revenue",
+      "period": "TTM",
+      "text": "/ PS TTM / 2.9885 / sales multiple the market is paying now /"
+    },
+    {
+      "evidence_id": "EV047",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "valuation",
+      "period": "TTM",
+      "text": "/ Implied TTM earnings (CNY) / 2765403572.8833 / market cap divided by PE TTM /"
+    },
+    {
+      "evidence_id": "EV048",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "revenue",
+      "period": "TTM",
+      "text": "/ Implied TTM sales (CNY) / 30441925266.8563 / market cap divided by PS TTM /"
+    },
+    {
+      "evidence_id": "EV049",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "valuation",
+      "period": "unspecified",
+      "text": "/ PE percentile / 27 / 5-year valuation position /"
+    },
+    {
+      "evidence_id": "EV050",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "valuation",
+      "period": "unspecified",
+      "text": "/ PB percentile / 8.3 / 5-year valuation position /"
+    },
+    {
+      "evidence_id": "EV051",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "valuation",
+      "period": "unspecified",
+      "text": "/ PS percentile / 6 / 5-year valuation position /"
+    },
+    {
+      "evidence_id": "EV052",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ latest annual parent profit / 2779071103.34 / 32.736 / 1.0049 /"
+    },
+    {
+      "evidence_id": "EV053",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-06-29",
+      "text": "Valuation trade date: 2026-06-29"
+    },
+    {
+      "evidence_id": "EV054",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 603049.SH / 中策橡胶 / 汽车配件 / 3970164.624 / 9.4179 / 1.5534 / 0.8724 / 3.1498 / 19.6154 / 9.33 / 4.8428 / 2.6161 / 5.9108 / 52.4985 / 82.5 /"
+    },
+    {
+      "evidence_id": "EV055",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 601058.SH / 赛轮轮胎 / 汽车配件 / 3919415.5576 / 11.0708 / 1.7485 / 1.0357 / 2.7685 / 23.6459 / 13.4578 / 4.7983 / 2.7971 / 1.7166 / 51.2359 / 76.2 /"
+    },
+    {
+      "evidence_id": "EV056",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 600660.SH / 福耀玻璃 / 汽车配件 / 13609812.3525 / 15.1319 / 3.4771 / 2.9401 / 4.0268 / 25.4258 / 15.9234 / 4.4631 / 2.5744 / -15.6769 / 46.6335 / 70.4 /"
+    },
+    {
+      "evidence_id": "EV057",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 600741.SH / 华域汽车 / 汽车配件 / 5044358.4 / 7.0317 / 0.7406 / 0.2747 / 5 / 11.1577 / 5.124 / 1.8394 / 0.8823 / -2.6273 / 62.1208 / 58.8 /"
+    },
+    {
+      "evidence_id": "EV058",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 002920.SZ / 德赛西威 / 汽车配件 / 4690921.098 / 20.1083 / 3.0945 / 1.4541 / 1.5827 / 19.5806 / 10.0753 / 3.0185 / 1.8864 / -20.7404 / 49.3564 / 56.7 /"
+    },
+    {
+      "evidence_id": "EV059",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 601689.SH / 拓普集团 / 汽车配件 / 9097569.366 / 32.8978 / 3.7 / 2.9885 / 0.936 / 12.7339 / 8.035 / 2.2668 / 1.6405 / -2.4171 / 40.7749 / 56.2 /"
+    },
+    {
+      "evidence_id": "EV060",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 300432.SZ / 富临精工 / 汽车配件 / 3373356.8746 / 66.5885 / 6.8825 / 2.1297 / 0.5068 / 9.6363 / 5.4431 / 4.2253 / 1.9366 / 63.8655 / 62.1609 / 47.9 /"
+    },
+    {
+      "evidence_id": "EV061",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 002126.SZ / 银轮股份 / 汽车配件 / 3946117.0924 / 41.1514 / 5.2751 / 2.3906 / 0.2544 / 14.1087 / 6.5268 / 2.8707 / 1.3421 / 0.793 / 62.5238 / 43.3 /"
+    },
+    {
+      "evidence_id": "EV062",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 603179.SH / 新泉股份 / 汽车配件 / 3399585.812 / 42.2136 / 4.4973 / 2.173 / 0.4502 / 12.5221 / 5.8131 / 2.7185 / 1.3453 / -4.5681 / 59.2111 / 37.9 /"
+    },
+    {
+      "evidence_id": "EV063",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20040422",
+      "text": "/ 601689.SH / 邬建树 / 王斌 / 王明臻 / 173783.558 / 20040422 / 浙江 / 汽车核心零部件研发、生产与销售。 /"
+    },
+    {
+      "evidence_id": "EV064",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20251231",
+      "text": "/ 20251231 / 4482090128.26 / 3497176813.63 / 1016095511.02 / -3015049735.71 / 5219806007.92 / 340475037.28 / 43934595369.02 / 19800042448.08 /"
+    },
+    {
+      "evidence_id": "EV065",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20241231",
+      "text": "/ 20241231 / 3236068686.84 / 3145862082.45 / 788539373.05 / -3727762109.68 / 3987765850.28 / 202102686.43 / 37543871905.42 / 17960618429.96 /"
+    },
+    {
+      "evidence_id": "EV066",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20231231",
+      "text": "/ 20231231 / 3365629276.74 / 3176917076.36 / 648393139.87 / -3410258600.39 / 2855366991.27 / 203183057.72 / 30769771206.88 / 16955468301.15 /"
+    },
+    {
+      "evidence_id": "EV067",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20221231",
+      "text": "/ 20221231 / 2284020088.4 / 5425571755.88 / 396583649.33 / -5105820338.36 / 2795531830.43 / 209241595.49 / 27510130823.47 / 15350226682.14 /"
+    },
+    {
+      "evidence_id": "EV068",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20211231",
+      "text": "/ 20211231 / 1186819193.35 / 3520648226.25 / 207000683.79 / -3736424732.92 / 1271450147.37 / 208676584.61 / 18682692767.26 / 8062267357.95 /"
+    },
+    {
+      "evidence_id": "EV069",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260324, 20251231",
+      "text": "/ 20260324 / 20251231 / 预案 / 0.49 / 0 / N/A / N/A / N/A /"
+    },
+    {
+      "evidence_id": "EV070",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260324, 20251231, 20260521",
+      "text": "/ 20260324 / 20251231 / 实施 / 0.49 / 0 / 20260521 / 20260522 / 20260522 /"
+    },
+    {
+      "evidence_id": "EV071",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260324, 20251231",
+      "text": "/ 20260324 / 20251231 / 股东大会通过 / 0.49 / 0 / N/A / N/A / N/A /"
+    },
+    {
+      "evidence_id": "EV072",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20250829, 20250630",
+      "text": "/ 20250829 / 20250630 / 预案 / 0 / 0 / N/A / N/A / N/A /"
+    },
+    {
+      "evidence_id": "EV073",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Look-back window for futures proxies: 90 days"
+    },
+    {
+      "evidence_id": "EV074",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_volume",
+      "period": "unspecified",
+      "text": "/ 1 - company hard evidence / official filings, production reports, and sales announcements / realized product mix, output, unit cost, and cash-flow conversion / usually delayed and may not include daily spot prices /"
+    },
+    {
+      "evidence_id": "EV075",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "balance_sheet",
+      "period": "unspecified",
+      "text": "Do not state R32, R125, lithium, copper, gold, inventory, or spread changes as facts unless they appear in the evidence table."
+    },
+    {
+      "evidence_id": "EV076",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "gap",
+      "status": "missing",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "If a thesis-critical input is marked missing, treat it as neutral for direction and only as a confidence cap; it cannot prove margin deterioration or margin resilience by itself."
+    },
+    {
+      "evidence_id": "EV077",
+      "source_module": "policy",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025-10-28, 2025",
+      "text": "/ 中共中央关于制定国民经济和社会发展第十五个五年规划的建议 / 中国政府网 / 2025-10-28 / national-plan / ok / https://www.gov.cn/gongbao/2025/issue_12386/202511/content_7047415.html /"
+    },
+    {
+      "evidence_id": "EV078",
+      "source_module": "policy",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2024-08-11",
+      "text": "/ 中共中央 国务院关于加快经济社会发展全面绿色转型的意见 / 中国政府网 / 2024-08-11 / national-direction / ok / https://www.gov.cn/zhengce/202408/content_6967663.htm /"
+    },
+    {
+      "evidence_id": "EV079",
+      "source_module": "policy",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2024-08-11",
+      "text": "/ renewable-energy / 绿色转型 / 中共中央 国务院关于加快经济社会发展全面绿色转型的意见 / 中国政府网 / 2024-08-11 / national-direction / / supports multi-year demand visibility for clean-energy equipment and infrastructure / argue the company sits inside a policy-backed demand pool / test whether"
+    },
+    {
+      "evidence_id": "EV080",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Canonical company route: https://sns.sseinfo.com/company.do?stockcode=601689"
+    },
+    {
+      "evidence_id": "EV081",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026",
+      "text": "/ sse / reachable / {'title': '上证e互动', 'has_company_page': True, 'has_qa_section': True} / 30633 / {'is_empty_recent_reply': False, 'text_preview': '投资者_1563521359000 :拓普集团(601689) 董秘您好，请问公司有翻板铣和镜像铣产品吗？谢谢。 2026年05月13日 17:47 来自 微信 ◆ ◆ 拓普集团 公司具备全栈自研的机械、电控、电机、精密加"
+    },
+    {
+      "evidence_id": "EV082",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-05-13, 2026-06-24",
+      "text": "/ 2026-05-13 / 2026-06-24 / 董秘您好，请问公司有翻板铣和镜像铣产品吗？谢谢。 / 公司具备全栈自研的机械、电控、电机、精密加工等核心能力，可根据客户需求与行业技术趋势开展相关产品与技术的研发工作。关于特定产品的研发进展、技术参数、客户配套等具体信息，属于商业机密范畴，公司严格按照相关要求予以保密，相关可披露信息请以公司定期报告及官方公告为准。 / non-committal /"
+    },
+    {
+      "evidence_id": "EV083",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "utilization_or_backlog",
+      "period": "2026-05-11, 2026-06-24, 2026",
+      "text": "/ 2026-05-11 / 2026-06-24 / 董秘你好，我是公司百万级长期重仓股东。公司海外生产基地布局，是否已提前为远期机器人等智能硬件业务的海外落地，做产能、供应链的配套预留？ / 公司全球化产能布局稳步推进，波兰工厂现有产线正常运营，二期正在筹划扩建，进一步承接欧洲本土订单；泰国一期工厂按计划建设推进，将于2026年投产并逐步爬坡放量。海外基地整体遵循先投产、再爬坡、后稳步贡献产能的节奏，各基地建设进度、产能释放规划及具体经营财务数据，请大家详细参阅公司2025年年度报告。 / substantiv"
+    },
+    {
+      "evidence_id": "EV084",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "utilization_or_backlog",
+      "period": "2026-04-29, 2026-06-24, 2025",
+      "text": "/ 2026-04-29 / 2026-06-24 / 汽车零部件业务承压，机器人业务蹭特斯拉概念，几乎没有业绩？公司还有像样的业务？不谈未来预期，还有增长点吗？ / 尊敬的投资者您好，公司生产经营整体稳健，2025 年实现营业收入 295.81 亿元，同比稳步增长，主营汽车底盘、热管理、内饰等传统业务依托国内外优质车企定点订单持续贡献稳定营收与利润，是公司扎实的基本盘。2025 年相关营收在年报中已披露；除原有汽车主业外，新兴业务如车规级制氧新业务有序落地推进，后续将逐步形成新增业绩增长点，详细经营数据与业务进展"
+    },
+    {
+      "evidence_id": "EV085",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-04-27, 2026-06-24",
+      "text": "/ 2026-04-27 / 2026-06-24 / 公司是特斯拉一级供应商吗？一年的供货金额是多少？ / 您所询问的相关信息属于公司未公开的经营信息/商业机密范畴，公司严格按照监管要求与信息披露规则，仅在指定官方平台发布可披露的经营信息，相关内容请以公司在上交所、证监会指定平台发布的定期报告及正式公告为准，敬请理解。 / non-committal /"
+    },
+    {
+      "evidence_id": "EV086",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-04-24, 2026-06-24",
+      "text": "/ 2026-04-24 / 2026-06-24 / 1.贵司董秘应该是忙！众多投资者的问题积压了几个月了，没见到回复过！ 2.贵司是否有做市值管理计划，具体是如何计划？已经连续跌了4个月了，套现完就不管了吗？ 3.是否有商业航天的业务计划？ / 尊敬的投资者您好，公司股价受宏观经济、行业周期、市场情绪等多重因素综合影响，公司管理层始终专注于主业经营，扎实推进各项战略落地，持续提升公司核心竞争力与长期内在价值，以稳定的经营业绩回报广大投资者。关于市值管理，公司严格遵守监管相关规定，合规开展投资者关系管理工作，及时"
+    },
+    {
+      "evidence_id": "EV087",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-04-10, 2026-06-24",
+      "text": "/ 2026-04-10 / 2026-06-24 / 您好，请问一下贵公司最新的股东人数有多少呢？ / 尊敬的投资者您好，股东人数请参阅公司发布的定期报告. / substantive /"
+    },
+    {
+      "evidence_id": "EV088",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-04-09, 2026-06-24",
+      "text": "/ 2026-04-09 / 2026-06-24 / 公司上市以来，不太考虑投资者的利益，分红太少，在股市融资金额不少，高管应该多考虑一下投资者的利益 / 非常感谢您的关注与宝贵建议，公司始终高度重视全体股东的合理诉求与投资回报，严格遵守监管要求，持续建立并完善稳定、科学的股东回报机制。公司始终坚持稳健的现金分红政策，现金分红比例均保持在 30% 以上，持续以真金白银的方式回报全体股东，与投资者共享公司经营发展的成果。除稳定的现金分红外，公司也始终专注主业深耕，持续提升核心技术壁垒与全球市场竞争力，通过稳健的经营"
+    },
+    {
+      "evidence_id": "EV089",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-03-30, 2026-06-17",
+      "text": "/ 2026-03-30 / 2026-06-17 / 目前的股价已经反映了你公司实力不行，在资本市场三花智控永远比你牛！你好好学习一下吧！ / 尊敬的投资者您好，公司股价受宏观经济、行业周期、市场情绪等多重因素综合影响，公司管理层始终专注于主业经营，扎实推进各项战略落地，持续提升公司核心竞争力与长期内在价值，以稳定的经营业绩回报广大投资者。 / substantive /"
+    },
+    {
+      "evidence_id": "EV090",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "2026-05-30, 2026-06-29",
+      "text": "Window: 2026-05-30 to 2026-06-29 (30 days)"
+    },
+    {
+      "evidence_id": "EV091",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Primary query terms: 601689.SH, 601689SH, 601689, 拓普集团, 汽车配件"
+    },
+    {
+      "evidence_id": "EV092",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "2026-06-29",
+      "text": "Upstream sync: 2026-06-29=synced_window:2026-06-29..2026-06-29:dates=1"
+    },
+    {
+      "evidence_id": "EV093",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Preprocess: cached: events=5254, clusters=76, opportunities=147, ocr_low_quality=820"
+    },
+    {
+      "evidence_id": "EV094",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Matched stream items: 5"
+    },
+    {
+      "evidence_id": "EV095",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Matched PDF reports: 0"
+    },
+    {
+      "evidence_id": "EV096",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Fusion target: 601689.SH"
+    },
+    {
+      "evidence_id": "EV097",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Direct terms: 601689.SH, 601689SH, 601689, 拓普集团, 汽车配件"
+    },
+    {
+      "evidence_id": "EV098",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Raw matches: stream=5, pdf=0; preprocessed matches: events=0, opportunities=0, pdf_assumptions=0"
+    },
+    {
+      "evidence_id": "EV099",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Raw quality mix: low_quality=820, ok=5110, usable_with_warnings=144"
+    }
+  ],
+  "conflicts": [
+    {
+      "topic": "Gross margin change Q1 2026 YoY vs FY2025 to Q1 annualized",
+      "segment": "consolidated",
+      "claim_a": "Gross margin change -0.64pp YoY for Q1 2026 vs Q1 2025",
+      "source_a": "earnings_model (EV014)",
+      "claim_b": "Gross margin change -0.17pp from 20251231 to 20260331 (annualized)",
+      "source_b": "filing_intelligence accounting_reconciliation snippet",
+      "conflict_type": "discrepancy in reported magnitude",
+      "required_resolution": "Reconcile periods: Q1 2026 vs Q1 2025 YoY vs FY2025 annualized to Q1 annualized; determine which metric is correct for margin trending."
+    },
+    {
+      "topic": "Revenue growth comparison -77.59% vs Q1 2026 revenue",
+      "segment": "consolidated",
+      "claim_a": "Q1 2026 revenue 6.63bn (implied positive YoY growth, but no Q1 2025 base provided)",
+      "source_a": "earnings_model (EV011, EV013)",
+      "claim_b": "Revenue growth -77.59% from 20251231 to 20260331",
+      "source_b": "filing_intelligence accounting_reconciliation snippet",
+      "conflict_type": "incompatible growth rates",
+      "required_resolution": "Clarify that Q1 2026 revenue should be compared to Q1 2025, not to FY2025; the -77.59% is likely a mislabel of annualized comparison. Need Q1 2025 revenue base to compute valid growth."
+    }
+  ],
+  "kpe_impacts": [
+    {
+      "evidence_id": "KPE01",
+      "segment": "consolidated",
+      "variable": "market_sentiment",
+      "direction": "unknown",
+      "horizon": "",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "# 盘前热点事件 一、昨日热点 ...",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "missing_inputs": [
+        "baseline_value",
+        "revised_value",
+        "revenue_base_cny_mn",
+        "revenue_impact_pct",
+        "margin_impact_pp",
+        "incremental_net_margin_pct",
+        "tax_rate_pct",
+        "share_count_mn",
+        "cash_conversion_ratio",
+        "bull_probability_before_pct",
+        "bull_probability_after_pct",
+        "base_probability_before_pct",
+        "base_probability_after_pct",
+        "bear_probability_before_pct",
+        "bear_probability_after_pct"
+      ],
+      "known_kpe": {
+        "date": "2026-06-24T07:22",
+        "source": "stream_item",
+        "source_type": "channel_check",
+        "credibility": "high_private_channel_hard_to_verify",
+        "decision_role": "probability/verification proxy",
+        "evidence": "# 盘前热点事件 一、昨日热点 ... source: zsxq group_id: 28888112822211 group_name: 前沿信息收录 topic_id: 45544522428444448 author: 纪要小能手 published_at: 2026-06-24T07:...",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "unmapped",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE02",
+      "segment": "机器人执行器",
+      "variable": "industry_sentiment",
+      "direction": "unknown",
+      "horizon": "",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "# 🔥机器人板块周观点：静待下半年...",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "missing_inputs": [
+        "baseline_value",
+        "revised_value",
+        "revenue_base_cny_mn",
+        "revenue_impact_pct",
+        "margin_impact_pp",
+        "incremental_net_margin_pct",
+        "tax_rate_pct",
+        "share_count_mn",
+        "cash_conversion_ratio",
+        "bull_probability_before_pct",
+        "bull_probability_after_pct",
+        "base_probability_before_pct",
+        "base_probability_after_pct",
+        "bear_probability_before_pct",
+        "bear_probability_after_pct"
+      ],
+      "known_kpe": {
+        "date": "2026-06-22T09:20",
+        "source": "stream_item",
+        "source_type": "channel_check",
+        "credibility": "high_private_channel_hard_to_verify",
+        "decision_role": "probability/verification proxy",
+        "evidence": "# 🔥机器人板块周观点：静待下半年... source: zsxq group_id: 28888112822211 group_name: 前沿信息收录 topic_id: 22255242541825211 author: 纪要小能手 published_at: 2026-06-22T09...",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "unmapped",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE03",
+      "segment": "机器人执行器",
+      "variable": "demand_signal",
+      "direction": "unknown",
+      "horizon": "",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "# 太阳太阳【长江电新】特斯拉得州...",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "missing_inputs": [
+        "baseline_value",
+        "revised_value",
+        "revenue_base_cny_mn",
+        "revenue_impact_pct",
+        "margin_impact_pp",
+        "incremental_net_margin_pct",
+        "tax_rate_pct",
+        "share_count_mn",
+        "cash_conversion_ratio",
+        "bull_probability_before_pct",
+        "bull_probability_after_pct",
+        "base_probability_before_pct",
+        "base_probability_after_pct",
+        "bear_probability_before_pct",
+        "bear_probability_after_pct"
+      ],
+      "known_kpe": {
+        "date": "2026-06-22T09:10",
+        "source": "stream_item",
+        "source_type": "channel_check",
+        "credibility": "high_private_channel_hard_to_verify",
+        "decision_role": "probability/verification proxy",
+        "evidence": "# 太阳太阳【长江电新】特斯拉得州... source: zsxq group_id: 28888112822211 group_name: 前沿信息收录 topic_id: 82255242544418822 author: 纪要小能手 published_at: 2026-06-22T09...",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "unmapped",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE04",
+      "segment": "机器人执行器",
+      "variable": "industry_sentiment",
+      "direction": "unknown",
+      "horizon": "",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "# 机器人板块周观点：特斯拉机器人...",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "missing_inputs": [
+        "baseline_value",
+        "revised_value",
+        "revenue_base_cny_mn",
+        "revenue_impact_pct",
+        "margin_impact_pp",
+        "incremental_net_margin_pct",
+        "tax_rate_pct",
+        "share_count_mn",
+        "cash_conversion_ratio",
+        "bull_probability_before_pct",
+        "bull_probability_after_pct",
+        "base_probability_before_pct",
+        "base_probability_after_pct",
+        "bear_probability_before_pct",
+        "bear_probability_after_pct"
+      ],
+      "known_kpe": {
+        "date": "2026-06-15T09:21",
+        "source": "stream_item",
+        "source_type": "channel_check",
+        "credibility": "high_private_channel_hard_to_verify",
+        "decision_role": "probability/verification proxy",
+        "evidence": "# 机器人板块周观点：特斯拉机器人... source: zsxq group_id: 28888112822211 group_name: 前沿信息收录 topic_id: 45544551558121418 author: 纪要小能手 published_at: 2026-06-15T09...",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "unmapped",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE05",
+      "segment": "consolidated",
+      "variable": "supply_chain_input",
+      "direction": "unknown",
+      "horizon": "",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "# 6月15日：芯片、算力金属、高...",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "missing_inputs": [
+        "baseline_value",
+        "revised_value",
+        "revenue_base_cny_mn",
+        "revenue_impact_pct",
+        "margin_impact_pp",
+        "incremental_net_margin_pct",
+        "tax_rate_pct",
+        "share_count_mn",
+        "cash_conversion_ratio",
+        "bull_probability_before_pct",
+        "bull_probability_after_pct",
+        "base_probability_before_pct",
+        "base_probability_after_pct",
+        "bear_probability_before_pct",
+        "bear_probability_after_pct"
+      ],
+      "known_kpe": {
+        "date": "2026-06-15T08:32",
+        "source": "stream_item",
+        "source_type": "industry_weekly_data",
+        "credibility": "broker_survey_or_industry_data",
+        "decision_role": "KPI/forecast proxy",
+        "evidence": "# 6月15日：芯片、算力金属、高... source: zsxq group_id: 28888112822211 group_name: 前沿信息收录 topic_id: 14422448454811882 author: 纪要小能手 published_at: 2026-06-15T08...",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "unmapped",
+        "required_outcome": "numeric assumption delta or explicit rejection"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "grounding_status": "grounded_quote"
+    }
+  ],
+  "known_kpe_ledger": {
+    "KPE01": {
+      "date": "2026-06-24T07:22",
+      "source": "stream_item",
+      "source_type": "channel_check",
+      "credibility": "high_private_channel_hard_to_verify",
+      "decision_role": "probability/verification proxy",
+      "evidence": "# 盘前热点事件 一、昨日热点 ... source: zsxq group_id: 28888112822211 group_name: 前沿信息收录 topic_id: 45544522428444448 author: 纪要小能手 published_at: 2026-06-24T07:...",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "unmapped",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE02": {
+      "date": "2026-06-22T09:20",
+      "source": "stream_item",
+      "source_type": "channel_check",
+      "credibility": "high_private_channel_hard_to_verify",
+      "decision_role": "probability/verification proxy",
+      "evidence": "# 🔥机器人板块周观点：静待下半年... source: zsxq group_id: 28888112822211 group_name: 前沿信息收录 topic_id: 22255242541825211 author: 纪要小能手 published_at: 2026-06-22T09...",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "unmapped",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE03": {
+      "date": "2026-06-22T09:10",
+      "source": "stream_item",
+      "source_type": "channel_check",
+      "credibility": "high_private_channel_hard_to_verify",
+      "decision_role": "probability/verification proxy",
+      "evidence": "# 太阳太阳【长江电新】特斯拉得州... source: zsxq group_id: 28888112822211 group_name: 前沿信息收录 topic_id: 82255242544418822 author: 纪要小能手 published_at: 2026-06-22T09...",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "unmapped",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE04": {
+      "date": "2026-06-15T09:21",
+      "source": "stream_item",
+      "source_type": "channel_check",
+      "credibility": "high_private_channel_hard_to_verify",
+      "decision_role": "probability/verification proxy",
+      "evidence": "# 机器人板块周观点：特斯拉机器人... source: zsxq group_id: 28888112822211 group_name: 前沿信息收录 topic_id: 45544551558121418 author: 纪要小能手 published_at: 2026-06-15T09...",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "unmapped",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE05": {
+      "date": "2026-06-15T08:32",
+      "source": "stream_item",
+      "source_type": "industry_weekly_data",
+      "credibility": "broker_survey_or_industry_data",
+      "decision_role": "KPI/forecast proxy",
+      "evidence": "# 6月15日：芯片、算力金属、高... source: zsxq group_id: 28888112822211 group_name: 前沿信息收录 topic_id: 14422448454811882 author: 纪要小能手 published_at: 2026-06-15T08...",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "unmapped",
+      "required_outcome": "numeric assumption delta or explicit rejection"
+    }
+  },
+  "preprocessing_notes": [
+    "Segment-level revenue breakdown not extracted from filings; consolidated numbers used.",
+    "No analyst consensus or forward forecast data provided in evidence.",
+    "Knowledge Planet clues are high-level weekly views without quantified impact; all KPE hypotheses set to watch with missing inputs.",
+    "Conflict identified between earnings_model gross margin change (-0.64pp) and filing_intelligence accounting_reconciliation snippet (-0.17pp); requires period reconciliation.",
+    "Revenue growth of -77.59% in filing_intelligence snippet is likely a mislabeled comparison (FY2025 vs Q1 annualized) and conflicts with reported Q1 revenue; Q1 2025 revenue base needed for valid YoY growth.",
+    "Emerging segments (robot actuator, liquid cooling, medical oxygen) have no disclosed revenue or margin data; only qualitative progress mentioned.",
+    "Overseas capacity expansion details (Poland, Thailand) are qualitative; no specific utilization or financial impact provided.",
+    "Working-capital ratios (receivables/inventory to revenue) are calculated using annualized interim revenue per filing note.",
+    "Non-recurring items identified in Q1 2026 but aggregate impact not separated from operating profit in evidence.",
+    "Policy references (15th Five-Year Plan, green transition) support long-term demand for clean-energy equipment but not directly company-specific orders."
+  ],
+  "underwriting_packet": {
+    "schema_version": 1,
+    "symbol": "601689.SH",
+    "as_of_date": "2026-06-29",
+    "forecast_years": [
+      "2026E",
+      "2027E",
+      "2028E"
+    ],
+    "research_readiness": "partial",
+    "readiness_reasons": [
+      "稀释后总股本缺失，EPS和每股公允价值无法计算",
+      "资本支出（capex）及自由现金流（FCF）历史数据与计划未充分披露，前瞻估计依赖假设",
+      "机器人执行器、液冷服务器、车规级制氧等新兴业务缺乏收入、毛利率、订单等量化数据，仅作期权价值处理",
+      "分部收入未按八大板块拆分，仅使用主营业务/其他业务总额",
+      "存在关键冲突：Q1毛利率变动-0.64pp与财年化变动-0.17pp，需明确比较期间",
+      "2025Q1实际收入基数未提供，无法计算Q1 2026真实同比增速",
+      "Three-year values remain missing for consolidated line(s): EPS, Capex, FCF",
+      "Material segment three-year driver lines are missing: 机器人执行器, 汽车零部件 (八大业务板块), 液冷服务器, 车规级制氧",
+      "Bull/base/bear per-share valuation is incomplete."
+    ],
+    "company_model": {
+      "model_profile": "corporate",
+      "business_archetype": "产能出货型汽车零部件制造商，以八大产品板块向全球OEM交付，并布局机器人执行器等新兴业务",
+      "value_proposition_and_customers": "为全球主流智能电动车企和传统OEM提供平台化、高性价比的汽车零部件，帮助客户降低采购复杂性并提升整车性能；下游客户包括国际国内头部整车厂，通过长期定点合同锁定销量。",
+      "revenue_equation": "营收 = 单车配套价值（产品组合×ASP） × 配套车型数量 × 车型产销量 + 新业务零星收入。核心由定点订单、整车销量、新能源渗透率驱动。",
+      "profit_equation": "毛利 = 营收 - 营业成本（直接材料约60-70%、人工、制造费用）；营业利润 = 毛利 - 销售/管理/研发费用（研发费用约占收入5%） - 财务费用（利息支出等）；税前利润 - 所得税 = 净利润；少数股东损益极小，归母净利润接近净利润。",
+      "cash_flow_equation": "经营性现金流≈归母净利润 + 折旧摊销 - 营运资本增加（应收账款和存货占比高，OEM账期3-6个月）；资本开支主要用于海内外产能建设和研发设备，规模较大；自由现金流 = 经营现金流 - 资本支出，现阶段可能偏弱。",
+      "capital_intensity_and_reinvestment": "资本密集：年研发投入约占收入5%，产能扩张（波兰二期、泰国一期等）需要大量资本开支，在建工程和固定资产占比较高。再投资回报需待产能爬坡后释放，短期内ROIC承压。",
+      "diluted_share_count_mn": null,
+      "share_count_period": "未获取",
+      "share_count_evidence_id": "",
+      "moat_mechanisms": [
+        "产品平台化：覆盖8大系统，可提高单车配套价值，增强客户粘性和切换成本",
+        "全栈自研及垂直整合：掌握机械、电控、电机等核心技术，具备成本控制与快速响应的能力",
+        "先发客户关系：深度绑定全球智能电动车龙头，长期定点合同提供订单可见性",
+        "全球化产能布局：波兰、泰国等地工厂可降低关税与物流成本，强化就近供应能力"
+      ],
+      "moat_to_financial_transmission": [
+        "平台化→单车配套价值提升→收入增速高于行业销量，摊薄固定成本",
+        "自研与垂直整合→制造成本低于外购→毛利率保持行业较高水平",
+        "长期定点→产能利用率和生产计划稳定→经营杠杆释放，边际利润上升",
+        "海外工厂落地→本地化交付降低运费和关税→增强成本优势，支撑海外市场份额"
+      ],
+      "structural_risks": [
+        "全球汽车销量周期性波动，尤其欧美市场可能进一步放缓",
+        "OEM持续施加年降压力，原材料（铝、钢、塑料等）价格波动侵蚀毛利",
+        "客户集中度较高（特斯拉等），若核心客户销量或份额下降将直接冲击订单",
+        "海外工厂受地缘政治、贸易壁垒和汇率波动影响，投产及爬坡存在不确定性",
+        "新业务（机器人、液冷、制氧）商业化周期长，前期投入可能无法回收，拖累整体ROE",
+        "研发资本化与募投项目频繁变更，隐含执行风险和回报不确定性"
+      ],
+      "key_unknowns": [
+        "机器人执行器量产时间、订单金额与盈利能力",
+        "海外工厂（波兰二期、泰国一期）投产进度、产能利用率和成本结构",
+        "液冷服务器、车规级制氧能否获得实质性订单并贡献收入",
+        "主要客户车型周期与单车配套金额变化，尤其是高端底盘和热管理品类",
+        "融资租赁售后回租等金融工具对杠杆和自由现金流的影响"
+      ],
+      "evidence_ids": [
+        "EV021",
+        "EV022",
+        "EV025",
+        "EV027",
+        "EV028",
+        "EV029",
+        "EV030",
+        "EV035",
+        "EV036",
+        "EV039",
+        "EV040"
+      ]
+    },
+    "segment_models": [
+      {
+        "segment": "汽车零部件 (八大业务板块)",
+        "products_or_services": "汽车NVH减震系统、内外饰系统、轻量化车身、智能座舱部件、热管理系统、底盘系统、空气悬架系统、智能驾驶系统",
+        "customers_and_channel": "国际国内智能电动车企（含特斯拉等头部新能源客户）和传统OEM车企，通过直接定点供货，部分产品通过Tier1集成",
+        "revenue_weight_pct": 93.0,
+        "profit_weight_pct": 90.0,
+        "base_period": "FY2025",
+        "base_revenue_value": 27524.0,
+        "base_revenue_unit": "CNY mn",
+        "base_revenue_growth_pct": 10.0,
+        "base_margin_pct": 18.04,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [
+          "全球乘用车销量，特别是新能源车渗透率",
+          "客户新车定点及平台化车型量产节奏",
+          "单车配套价值提升（从单一产品到系统集成）",
+          "海外本土化订单承接能力"
+        ],
+        "industry_supply_and_capacity": "国内竞争激烈但公司凭借平台化优势获取份额；海外本土化产能仍处扩张期，竞争格局相对有利",
+        "volume_share_utilization": "受益于头部新能源客户销量增长及平台化，公司配套份额稳步提升；产能利用率预计2026年后随泰国工厂投产小幅承压，随后爬坡改善",
+        "price_asp_take_rate": "零部件年降压力普遍，但高附加值产品（底盘、热管理、空悬）ASP较高，产品组合升级可部分抵消降价影响",
+        "unit_cost_and_input_prices": "主要原材料为铝、钢、橡胶、塑料等，价格波动影响成本；规模效应和垂直整合降低单位固定成本",
+        "margin_and_operating_leverage": "毛利率受产能利用率、原材料价格和客户年降影响；研发费用刚性（~5%收入），管理费用随海外扩张上升，收入增长带来正向经营杠杆",
+        "working_capital_and_cash_conversion": "应收账款周转天数较长（OEM行业特性），存货增加但周转尚可；经营现金流与净利润基本同步（OCF/NI≈0.99）",
+        "prosperity_level": "stable_with_headwinds",
+        "marginal_direction": "improving_slowly",
+        "causal_analysis": "全球汽车行业总量平稳，新能源结构性增长。公司底盘、热管理等新品类持续放量，加上泰国工厂2026年投产，有望在2027-2028年贡献增量。但Q1 2026毛利率同比下滑0.64pp，显示短期成本或降价压力仍存。随着产能利用率提升及产品结构优化，中期盈利能力有望温和改善。",
+        "valuation_treatment": "核心盈利资产，给予15-25倍前瞻PE或对应EV/EBITDA估值；新业务（机器人等）采用实物期权单独评估",
+        "strongest_counterevidence": [
+          "Q1 2026毛利率同比下降0.64pp，显示竞争或成本传导不充分",
+          "全球汽车销量增速可能进一步放缓，尤其是欧美市场",
+          "大客户要求更大幅度年降，压低ASP"
+        ],
+        "evidence_ids": [
+          "EV014",
+          "EV015",
+          "EV016",
+          "EV018",
+          "EV019",
+          "EV020",
+          "EV021",
+          "EV022",
+          "EV025",
+          "EV029",
+          "EV030"
+        ],
+        "missing_inputs": [
+          "八大板块分部收入及毛利率",
+          "主要客户收入占比（如特斯拉）",
+          "各工厂产能利用率"
+        ],
+        "next_verification": "2026半年报需确认汽车零部件分部毛利率变动、海外工厂投产进度及新定点订单数量"
+      },
+      {
+        "segment": "机器人执行器",
+        "products_or_services": "机器人执行器、关节模组等具身智能零部件",
+        "customers_and_channel": "潜在客户包括特斯拉等机器人整机厂商，处于研发配套和产能规划阶段",
+        "revenue_weight_pct": null,
+        "profit_weight_pct": null,
+        "base_period": "unspecified",
+        "base_revenue_value": null,
+        "base_revenue_unit": "CNY mn",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [
+          "人形机器人行业进展和量产节奏",
+          "特斯拉机器人等下游客户订单",
+          "公司产能建设和产品认证"
+        ],
+        "industry_supply_and_capacity": "尚处于早期，全球竞争格局未定，公司依托精密加工和自研能力布局",
+        "volume_share_utilization": "尚无量产订单，产能规划中，预计2027年后或见首批产品",
+        "price_asp_take_rate": "未知",
+        "unit_cost_and_input_prices": "未知",
+        "margin_and_operating_leverage": "初期可能负毛利，爬坡后有望获得较高附加值",
+        "working_capital_and_cash_conversion": "无",
+        "prosperity_level": "evidence_limited",
+        "marginal_direction": "unknown",
+        "causal_analysis": "公司成立机器人执行器事业部，处于研发和产能准备阶段。特斯拉机器人进展、行业渗透决定需求斜率。2026年泰国工厂可能预留部分产能，但大批量订单尚未确认。预计2027-2028年可能产生少量收入，盈利时点高度不确定，当前体现为期权价值。",
+        "valuation_treatment": "实物期权，DCF-SOTP中单独估值，取决于量产概率和订单规模",
+        "strongest_counterevidence": [
+          "未获任何具名订单，客户进度不明",
+          "机器人行业技术路线未定，可能被替代技术颠覆"
+        ],
+        "evidence_ids": [
+          "EV021",
+          "EV028",
+          "KPE02",
+          "KPE03",
+          "KPE04"
+        ],
+        "missing_inputs": [
+          "收入、毛利率、订单金额、产能规划、单位经济模型",
+          "具体客户定点情况"
+        ],
+        "next_verification": "关注公司是否公告机器人执行器定点合同或样板订单"
+      },
+      {
+        "segment": "液冷服务器",
+        "products_or_services": "液冷服务器散热相关产品",
+        "customers_and_channel": "数据中心及服务器客户，尚在拓展初期",
+        "revenue_weight_pct": null,
+        "profit_weight_pct": null,
+        "base_period": "unspecified",
+        "base_revenue_value": null,
+        "base_revenue_unit": "CNY mn",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [
+          "数据中心建设及液冷渗透率",
+          "首批订单转化"
+        ],
+        "industry_supply_and_capacity": "液冷赛道参与者增多，公司技术基础可复用，但客户导入周期长",
+        "volume_share_utilization": "2025年报披露取得首批订单约15亿元，但收入确认时间与毛利率未知",
+        "price_asp_take_rate": "未知",
+        "unit_cost_and_input_prices": "未知",
+        "margin_and_operating_leverage": "初期规模不经济",
+        "working_capital_and_cash_conversion": "未知",
+        "prosperity_level": "evidence_limited",
+        "marginal_direction": "unknown",
+        "causal_analysis": "公司已获得首批液冷订单（金额15亿元），为全新市场增长点。但订单周期、交付时间、毛利率均未披露。预计2027年起逐步贡献收入，短期内对盈利影响有限。",
+        "valuation_treatment": "期权价值，根据订单转化率和利润率假设置于SOTP情景",
+        "strongest_counterevidence": [
+          "15亿元订单未明确交付时间表和盈利性",
+          "液冷市场竞争激烈，公司缺乏数据中心客户积淀"
+        ],
+        "evidence_ids": [
+          "EV025"
+        ],
+        "missing_inputs": [
+          "收入、毛利率、交付期限、客户构成"
+        ],
+        "next_verification": "2026年报或公告披露液冷订单的收入确认或新增订单情况"
+      },
+      {
+        "segment": "车规级制氧",
+        "products_or_services": "车规级制氧相关新业务",
+        "customers_and_channel": "整车厂或医疗应用方向，尚在落地推进",
+        "revenue_weight_pct": null,
+        "profit_weight_pct": null,
+        "base_period": "unspecified",
+        "base_revenue_value": null,
+        "base_revenue_unit": "CNY mn",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [
+          "产品落地和客户验证"
+        ],
+        "industry_supply_and_capacity": "处于萌芽期",
+        "volume_share_utilization": "无",
+        "price_asp_take_rate": "未知",
+        "unit_cost_and_input_prices": "未知",
+        "margin_and_operating_leverage": "未知",
+        "working_capital_and_cash_conversion": "无",
+        "prosperity_level": "evidence_limited",
+        "marginal_direction": "unknown",
+        "causal_analysis": "公司提及车规级制氧新业务有序落地推进，但无任何收入或订单数据。预计2027年前不会产生有意义的收入贡献。",
+        "valuation_treatment": "尚无估值条件",
+        "strongest_counterevidence": [
+          "无公开订单或产品技术参数"
+        ],
+        "evidence_ids": [
+          "EV084"
+        ],
+        "missing_inputs": [
+          "收入、毛利率、量产状态、订单",
+          "具体应用场景和客户"
+        ],
+        "next_verification": "若半年报中未提及进展，视为概念阶段"
+      },
+      {
+        "segment": "其他业务",
+        "products_or_services": "非汽车类配套业务、残次品销售等",
+        "customers_and_channel": "分散",
+        "revenue_weight_pct": 7.0,
+        "profit_weight_pct": 10.0,
+        "base_period": "FY2025",
+        "base_revenue_value": 2057.0,
+        "base_revenue_unit": "CNY mn",
+        "base_revenue_growth_pct": 29.5,
+        "base_margin_pct": 38.0,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [
+          "与主营业务量相关"
+        ],
+        "industry_supply_and_capacity": "非独立竞争领域",
+        "volume_share_utilization": "随主营一同波动",
+        "price_asp_take_rate": "稳定",
+        "unit_cost_and_input_prices": "低",
+        "margin_and_operating_leverage": "高毛利，利润稳定",
+        "working_capital_and_cash_conversion": "小",
+        "prosperity_level": "stable",
+        "marginal_direction": "stable",
+        "causal_analysis": "其他业务以原材料残值销售等为主，利润率较高，但增速与主营业务相关。2025年增速较快，但绝对规模有限。",
+        "valuation_treatment": "合并进核心汽车业务估值",
+        "strongest_counterevidence": [],
+        "evidence_ids": [
+          "EV030"
+        ],
+        "missing_inputs": [],
+        "next_verification": "关注是否持续高增长"
+      }
+    ],
+    "underwriting_questions": [
+      {
+        "question_id": "Q1",
+        "question": "机器人执行器何时获得首批量产定点订单，订单金额和毛利率预期如何？",
+        "why_it_matters": "机器人业务是当前市场给予公司新增长曲线的核心叙事。若2027-2028年未能产生实质收入，将削弱想象力估值，并可能导致估值从30x+PE向纯汽车零部件20x以下压缩，对EPS和公允价值影响极大。",
+        "current_answer": "未获得公开定点，无明确时间表，公司处于产能筹备和研发阶段",
+        "bull_evidence": [
+          "KPE03：特斯拉得州工厂机器人相关进展被频繁提及",
+          "KPE04：行业周观点认为2026H2将有关键订单催化",
+          "公司已成立事业部，并在年报中多次强调战略重要性"
+        ],
+        "bear_evidence": [
+          "无任何正式定点公告，进度不明",
+          "机器人行业仍处于0到1阶段，大量供应商竞争",
+          "公司历史上新业务初期多低于预期（如液冷订单金额大但盈利不明）"
+        ],
+        "decisive_model_variables": [
+          "机器人执行器分部收入、毛利率",
+          "SOTP中机器人业务估值倍数",
+          "bull scenario概率"
+        ],
+        "affected_financial_lines": [
+          "2027E/2028E机器人业务收入",
+          "归母净利润",
+          "EPS",
+          "公允价值/股"
+        ],
+        "evidence_ids": [
+          "KPE02",
+          "KPE03",
+          "KPE04",
+          "EV021",
+          "EV028"
+        ],
+        "missing_evidence": [
+          "定点公告或合同金额",
+          "样品客户测试反馈",
+          "产能建设和时间表"
+        ],
+        "next_verification": "等待特斯拉Optimus或国内人形机器人厂商的Tier1定点公告，或公司半年报/年报中披露具体订单金额"
+      },
+      {
+        "question_id": "Q2",
+        "question": "海外工厂（波兰二期、泰国一期）产能爬坡进度和成本结构能否支撑毛利率回升？",
+        "why_it_matters": "海外产能是未来两年收入增长和成本优化的重要杠杆，直接影响毛利率回升速度和整体盈利能力。若爬坡慢或成本高企，毛利率可能持续低于19%，压抑经营利润和FCF。",
+        "current_answer": "泰国一期计划2026年投产并逐步放量；波兰二期筹划扩建。无具体爬坡曲线和毛利率指引。",
+        "bull_evidence": [
+          "公司互动平台明确‘2026年投产并逐步爬坡放量’",
+          "海外工厂可降低关税和物流成本，有助于争取欧洲本土订单"
+        ],
+        "bear_evidence": [
+          "Q1 2026毛利率同比-0.64pp，未体现海外降本效果",
+          "新厂初期产能利用率低，固定成本摊销高，毛利率可能先降后升",
+          "海外建厂案例中，爬坡期通常1-2年，2026-2027可能是成本投入期"
+        ],
+        "decisive_model_variables": [
+          "汽车零部件毛利率假设",
+          "2026E/2027E营收增速",
+          "capex与折旧"
+        ],
+        "affected_financial_lines": [
+          "2027E/2028E毛利率",
+          "营业利润",
+          "FCF"
+        ],
+        "evidence_ids": [
+          "EV014",
+          "EV015",
+          "EV016",
+          "EV017"
+        ],
+        "missing_evidence": [
+          "分工厂产能利用率",
+          "海外工厂盈亏数据",
+          "单位制造成本变化"
+        ],
+        "next_verification": "2026半年报是否披露海外工厂营收、利润或产能利用率；并与公司互动中‘爬坡放量’定性描述对照"
+      },
+      {
+        "question_id": "Q3",
+        "question": "全球汽车销量（尤其中国和欧洲）2026-2028年增长斜率会否低于公司隐含的客户订单增长？",
+        "why_it_matters": "公司营收高度依赖下游整车销量和客户车型周期。若行业增速低于公司产能扩张节奏，将面临量增价减或产能闲置，收入和利润预测需要显著下修。",
+        "current_answer": "2025年全球销量温和增长，中国新能源乘用车仍保持中高增速，但2026年不确定性上升。",
+        "bull_evidence": [
+          "2025H1全球新能源乘用车销量同比增长33.2%，中国增长37.5%",
+          "公司底盘、热管理等新品类渗透率仍有提升空间",
+          "波兰、泰国工厂帮助拓宽欧洲和东南亚客户"
+        ],
+        "bear_evidence": [
+          "全球汽车行业面临宏观经济和关税风险，2026年可能有负增长压力",
+          "中国乘用车市场渗透率已高，增速可能放缓",
+          "公司当前估值隐含高增长，若行业增速降至个位数，估值承压"
+        ],
+        "decisive_model_variables": [
+          "汽车零部件收入增速",
+          "估值倍数（PE）",
+          "bull/base概率"
+        ],
+        "affected_financial_lines": [
+          "2026E-2028E营收",
+          "归母净利润",
+          "EPS"
+        ],
+        "evidence_ids": [
+          "EV029",
+          "EV030",
+          "KPE05"
+        ],
+        "missing_evidence": [
+          "公司按客户/区域的销量指引",
+          "核心客户（如特斯拉）的整车产量计划"
+        ],
+        "next_verification": "密切关注全球主要汽车市场月度销量数据和公司主要客户季度交付数据"
+      },
+      {
+        "question_id": "Q4",
+        "question": "融资成本和杠杆率上升（财务费用率YoY+1.36pp）是否会持续侵蚀净利润？",
+        "why_it_matters": "公司有大量融资租赁、募投项目变更和海外建厂投入，可能推高负债和利息支出。如果财务费用率维持高位，将蚕食本已承压的净利率，并压低FCF。",
+        "current_answer": "Q1 2026财务费用率1.455%，同比+1.36pp，大幅上升。原因未明。",
+        "bull_evidence": [
+          "若经营现金流强劲，可偿还部分债务降低利息",
+          "海外利率环境可能放松"
+        ],
+        "bear_evidence": [
+          "公司融资租赁和售后回租行为增加，表明资金需求大",
+          "募投项目频繁变更，可能推高资本需求",
+          "当前利息费用增加趋势明显"
+        ],
+        "decisive_model_variables": [
+          "财务费用率假设",
+          "净利润率",
+          "EPS",
+          "FCF"
+        ],
+        "affected_financial_lines": [
+          "归母净利润",
+          "利润率",
+          "FCF"
+        ],
+        "evidence_ids": [
+          "EV017",
+          "EV036",
+          "EV038",
+          "EV041"
+        ],
+        "missing_evidence": [
+          "新增有息负债规模与利率",
+          "2026年利息费用指引"
+        ],
+        "next_verification": "2026年半年报披露利息支出和负债结构，分析融资租赁义务"
+      },
+      {
+        "question_id": "Q5",
+        "question": "液冷服务器和车规级制氧等第一批新业务能否在2027年前产生可辨识的收入和利润？",
+        "why_it_matters": "市场对公司‘第二增长曲线’有预期，若新业务不及预期，可能引发估值折价。反之，若液冷订单确认收入且毛利正面，可提振整体估值和盈利。",
+        "current_answer": "液冷获15亿订单，但交付时间和盈利不明；制氧无实质进展。",
+        "bull_evidence": [
+          "液冷15亿订单金额可观，显示客户初步认可",
+          "数据中心液冷需求长期趋势明确"
+        ],
+        "bear_evidence": [
+          "订单无交付时间，可能分散在多年，年均贡献有限",
+          "制氧业务完全空白，可能长期无法商业化",
+          "汽车零部件公司跨界数据中心制造，竞争能力存疑"
+        ],
+        "decisive_model_variables": [
+          "其他新业务收入",
+          "SOTP选项价值",
+          "bull场景概率"
+        ],
+        "affected_financial_lines": [
+          "2027E/2028E营收",
+          "归母净利润",
+          "估值"
+        ],
+        "evidence_ids": [
+          "EV025",
+          "EV084"
+        ],
+        "missing_evidence": [
+          "液冷订单交付计划、毛利率",
+          "制氧产品进度和客户"
+        ],
+        "next_verification": "2026年半年报是否将液冷、制氧业务收入单独列示"
+      }
+    ],
+    "forecast_lines": [
+      {
+        "segment": "consolidated",
+        "metric": "Revenue",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 29581.5,
+        "year_1_value": 31264.0,
+        "year_2_value": 35016.0,
+        "year_3_value": 38518.0,
+        "formula": "基于Q1 2026年化估算，叠加温和增长",
+        "assumption_status": "model_driven",
+        "evidence_ids": [
+          "EV012",
+          "EV013",
+          "EV030"
+        ],
+        "key_sensitivity": "需求驱动：汽车销量、新订单，新业务贡献",
+        "missing_inputs": []
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Gross Margin",
+        "unit": "%",
+        "base_period": "FY2025",
+        "base_value": 19.43,
+        "year_1_value": 19.5,
+        "year_2_value": 20.0,
+        "year_3_value": 20.5,
+        "formula": "毛利率随产能利用率和产品结构改善温和回升",
+        "assumption_status": "estimated",
+        "evidence_ids": [
+          "EV014",
+          "EV018",
+          "EV030"
+        ],
+        "key_sensitivity": "原材料成本、年降压力、新厂爬坡",
+        "missing_inputs": []
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Operating Margin",
+        "unit": "%",
+        "base_period": "FY2025",
+        "base_value": null,
+        "year_1_value": 11.0,
+        "year_2_value": 12.0,
+        "year_3_value": 12.5,
+        "formula": "毛利率改善叠加经营杠杆，但研发和管理费用刚性增长",
+        "assumption_status": "estimated",
+        "evidence_ids": [
+          "EV015",
+          "EV016"
+        ],
+        "key_sensitivity": "费用控制、收入增速",
+        "missing_inputs": [
+          "FY2025营业利润及营业利润率"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Operating Profit",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": null,
+        "year_1_value": 3439.0,
+        "year_2_value": 4202.0,
+        "year_3_value": 4815.0,
+        "formula": "营收 × 营业利润率",
+        "assumption_status": "computed",
+        "evidence_ids": [],
+        "key_sensitivity": "同上",
+        "missing_inputs": []
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Parent Net Profit",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 2779.1,
+        "year_1_value": 2814.0,
+        "year_2_value": 3151.0,
+        "year_3_value": 3478.0,
+        "formula": "从营业利润减去财务费用、非经常损益和所得税，净利率约9.0-9.5%",
+        "assumption_status": "estimated",
+        "evidence_ids": [
+          "EV012",
+          "EV016",
+          "EV017",
+          "EV036",
+          "EV039"
+        ],
+        "key_sensitivity": "财务费用率、有效税率、非经常项目",
+        "missing_inputs": []
+      },
+      {
+        "segment": "consolidated",
+        "metric": "EPS",
+        "unit": "CNY",
+        "base_period": "FY2025",
+        "base_value": null,
+        "year_1_value": null,
+        "year_2_value": null,
+        "year_3_value": null,
+        "formula": "归母净利润 / 稀释后总股本",
+        "assumption_status": "missing",
+        "evidence_ids": [],
+        "key_sensitivity": "股本数量、净利润",
+        "missing_inputs": [
+          "稀释后总股本"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "OCF",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": null,
+        "year_1_value": 2786.0,
+        "year_2_value": 3120.0,
+        "year_3_value": 3443.0,
+        "formula": "归母净利润 × 0.99 (Q1 OCF/NI ratio)",
+        "assumption_status": "model_driven",
+        "evidence_ids": [
+          "EV018"
+        ],
+        "key_sensitivity": "营运资本波动",
+        "missing_inputs": [
+          "折旧摊销"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Capex",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": null,
+        "year_1_value": null,
+        "year_2_value": null,
+        "year_3_value": null,
+        "formula": "产能建设资本开支，无公开指引",
+        "assumption_status": "missing",
+        "evidence_ids": [
+          "EV038"
+        ],
+        "key_sensitivity": "扩张节奏、外部融资",
+        "missing_inputs": [
+          "资本支出计划"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "FCF",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": null,
+        "year_1_value": null,
+        "year_2_value": null,
+        "year_3_value": null,
+        "formula": "OCF - Capex",
+        "assumption_status": "missing",
+        "evidence_ids": [],
+        "key_sensitivity": "Capex",
+        "missing_inputs": [
+          "Capex"
+        ]
+      }
+    ],
+    "scenarios": [
+      {
+        "scenario": "base",
+        "probability_pct": 60.0,
+        "operating_assumptions": [
+          "全球汽车销量低个位数增长，新能源渗透率小幅提升",
+          "公司现有定点车型如期量产，泰国工厂2026年投产并缓慢贡献，波兰工厂满产",
+          "毛利率2026E/2027E/2028E：19.5%/20.0%/20.5%",
+          "新业务（机器人等）2028年前无实质收入；液冷分批确认少量收入但利润微薄",
+          "财务费用率维持2026Q1高位，后略有下降",
+          "资本开支保持较高水平，无大规模并购"
+        ],
+        "parent_net_profit_cny_mn": 3478.0,
+        "eps_cny": null,
+        "fcf_cny_mn": null,
+        "valuation_method": "核心汽车业务25x 2028E PE，新业务期权价值暂时赋予零",
+        "valuation_multiple": null,
+        "fair_value_per_share": null,
+        "evidence_ids": [
+          "EV012",
+          "EV013",
+          "EV014",
+          "EV015",
+          "EV016",
+          "EV017"
+        ],
+        "falsification": "若2026Q3毛利率继续同比下滑或泰国工厂量产延迟，下调概率和盈利预测",
+        "missing_inputs": [
+          "稀释后总股本",
+          "资本支出计划",
+          "机器人执行器订单",
+          "财务费用率改善路径"
+        ]
+      },
+      {
+        "scenario": "bull",
+        "probability_pct": 20.0,
+        "operating_assumptions": [
+          "全球新能源车超预期增长，叠加公司新车型定点超预期释放",
+          "泰国工厂快速爬坡，波兰二期提前投产；毛利率2026E/2027E/2028E：20.5%/21.5%/22.5%",
+          "机器人执行器2027年获定点并贡献少量收入，2028年放量",
+          "液冷服务器订单加速交付，毛利率正向贡献",
+          "费用率控制良好，财务费用因经营性现金流改善而下降",
+          "净利润率提升至10.5%"
+        ],
+        "parent_net_profit_cny_mn": 4500.0,
+        "eps_cny": null,
+        "fcf_cny_mn": null,
+        "valuation_method": "核心汽车业务28x 2028E PE + 新业务成功概率调整为50%，赋予4000 mn额外市值",
+        "valuation_multiple": null,
+        "fair_value_per_share": null,
+        "evidence_ids": [
+          "KPE03",
+          "KPE04",
+          "EV025",
+          "EV021"
+        ],
+        "falsification": "2027年若仍无机器人定点，调回base情形",
+        "missing_inputs": [
+          "稀释后总股本"
+        ]
+      },
+      {
+        "scenario": "bear",
+        "probability_pct": 20.0,
+        "operating_assumptions": [
+          "全球汽车销量下滑（受宏观经济和关税影响），新能源汽车增速放缓至个位数",
+          "核心客户订单量缩减，年降压力加大，毛利率2026E-2028E：19.0%/18.5%/18.0%",
+          "泰国工厂投产进度慢于预期，利用率不足，拉高单位成本",
+          "新业务均未贡献收入，研发和资本开支维持高位",
+          "财务费用率升至2%，利润大幅压缩"
+        ],
+        "parent_net_profit_cny_mn": 2200.0,
+        "eps_cny": null,
+        "fcf_cny_mn": null,
+        "valuation_method": "核心汽车业务18x 2028E PE，无新业务价值",
+        "valuation_multiple": null,
+        "fair_value_per_share": null,
+        "evidence_ids": [
+          "EV014",
+          "EV015",
+          "EV016",
+          "EV017",
+          "EV025"
+        ],
+        "falsification": "若2026年上半年全球汽车销量数据强于预期，上调概率",
+        "missing_inputs": [
+          "稀释后总股本"
+        ]
+      }
+    ],
+    "evidence_change_rules": [
+      {
+        "evidence_id": "KPE01",
+        "affected_segment": "consolidated",
+        "affected_variable": "market_sentiment",
+        "old_assumption": "no modelled impact",
+        "new_assumption": "unchanged",
+        "financial_transmission": "none until quantified",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+      },
+      {
+        "evidence_id": "KPE02",
+        "affected_segment": "机器人执行器",
+        "affected_variable": "industry_sentiment",
+        "old_assumption": "no modelled impact",
+        "new_assumption": "unchanged",
+        "financial_transmission": "none until quantified",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+      },
+      {
+        "evidence_id": "KPE03",
+        "affected_segment": "机器人执行器",
+        "affected_variable": "demand_signal",
+        "old_assumption": "no modelled impact",
+        "new_assumption": "unchanged",
+        "financial_transmission": "none until quantified",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+      },
+      {
+        "evidence_id": "KPE04",
+        "affected_segment": "机器人执行器",
+        "affected_variable": "industry_sentiment",
+        "old_assumption": "no modelled impact",
+        "new_assumption": "unchanged",
+        "financial_transmission": "none until quantified",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+      },
+      {
+        "evidence_id": "KPE05",
+        "affected_segment": "consolidated",
+        "affected_variable": "supply_chain_input",
+        "old_assumption": "no modelled impact",
+        "new_assumption": "unchanged",
+        "financial_transmission": "none until quantified",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+      }
+    ],
+    "reconciliation_checks": [
+      "毛利率变动差异：Q1 2026同比-0.64pp（earnings_model EV014）与FY2025→Q1年化变动-0.17pp（filing_intelligence）矛盾，需确认比较期间并统一口径",
+      "Q1 2026营收增长无法准确计算，因缺少Q1 2025营收基数，-77.59%为错误对比（年化vsFY），需获取2025Q1实际收入",
+      "FY2025主营业务收入27524mn与其他报告中的9.0bn数值不符，建议使用年报最终审定数据"
+    ],
+    "analyst_instructions": [
+      "更新稀释后总股本数据（可从最新公告或股东大会决议获取），计算EPS和每股公允价值",
+      "从2026半年报提取分业务收入（汽车零部件八大板块是否细分）、海外工厂产能利用率和毛利率，校准经营假设",
+      "追踪特斯拉及核心客户车型销量和定点信息，验证订单增长假设",
+      "关注资本开支公告及融资活动，更新capex预测和财务费用率",
+      "持续监控机器人执行器定点、液冷交付和制氧新业务的具体进展，用于调整bull场景概率",
+      "若毛利率连续两个季度恶化或订单数据弱于预期，需下调base概率并提升bear情景权重"
+    ],
+    "preprocessing_notes": [
+      "分部收入未拆分，使用主营业务和其他业务总额代理",
+      "未提供分析师一致预期或前瞻预测数据",
+      "知识星球线索均为周度观点，无量化影响，所有KPE假设设为watch",
+      "毛利率变动存在冲突，需期间协调",
+      "新兴业务（机器人、液冷、制氧）均无量纲数据，仅定性进展",
+      "波兰、泰国产能描述为定性，利用率不明确",
+      "营运资本比率使用年化中间收入计算",
+      "2026Q1非经常性项目已识别但未与营业利润分离",
+      "政策文件（十五五规划、绿色转型）支持长期需求方向，但未直接指向公司订单",
+      "unknown evidence ids removed from underwriting packet",
+      "unknown evidence ids removed from underwriting packet",
+      "unknown evidence ids removed from underwriting packet"
+    ]
+  }
+}

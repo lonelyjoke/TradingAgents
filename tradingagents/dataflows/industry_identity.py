@@ -142,6 +142,20 @@ INSURANCE_TERMS = (
     "solvency",
 )
 
+INSURANCE_IDENTITY_TERMS = (
+    "保险公司",
+    "保险集团",
+    "寿险公司",
+    "财险公司",
+    "再保险公司",
+    "综合金融保险集团",
+    "integrated insurer",
+    "insurance company",
+    "insurance group",
+    "life insurer",
+    "p&c insurer",
+)
+
 
 def is_insurance_text(symbol: object = "", *parts: object) -> bool:
     """Return True when the target should use an insurance playbook."""
@@ -150,7 +164,74 @@ def is_insurance_text(symbol: object = "", *parts: object) -> bool:
         return True
     text = " ".join(str(part or "") for part in parts)
     lower = text.lower()
-    return any(term.lower() in lower for term in INSURANCE_TERMS)
+    if any(term.lower() in lower for term in INSURANCE_IDENTITY_TERMS):
+        return True
+    # Generic research documents often mention NBV, solvency, or insurance as
+    # examples of *other* industry templates.  One incidental token must not
+    # re-route a non-insurer into the insurance model.
+    hits = sum(term.lower() in lower for term in INSURANCE_TERMS)
+    return hits >= 3 and any(
+        term in lower
+        for term in ("underwriting", "保费", "保险服务收入", "赔付", "代理人")
+    )
+
+
+AUTOMOTIVE_COMPONENT_SYMBOL_HINTS = frozenset(
+    {
+        "601689.SH",  # Tuopu Group
+        "600660.SH",  # Fuyao Glass
+        "600741.SH",  # HASCO
+        "002920.SZ",  # Desay SV
+    }
+)
+
+AUTOMOTIVE_COMPONENT_IDENTITY_TERMS = (
+    "汽车零部件",
+    "汽车配件",
+    "汽车部件",
+    "汽配供应商",
+    "整车配套供应商",
+    "tier 0.5",
+    "tier0.5",
+    "tier-0.5",
+    "tier 1 automotive supplier",
+    "automotive component",
+    "auto parts supplier",
+)
+
+AUTOMOTIVE_COMPONENT_PRODUCT_TERMS = (
+    "底盘系统",
+    "减震系统",
+    "内外饰",
+    "热管理系统",
+    "空气悬架",
+    "线控制动",
+    "智能座舱",
+    "车身轻量化",
+    "汽车电子",
+    "执行器",
+)
+
+
+def is_automotive_components_text(symbol: object = "", *parts: object) -> bool:
+    """Return True for automotive-component suppliers, not vehicle OEMs.
+
+    The explicit identity layer takes precedence over incidental downstream
+    words such as battery, insurance, metals, AI, or robotics that commonly
+    occur in diversified supplier filings.
+    """
+    normalized_symbol = str(symbol or "").strip().upper()
+    if normalized_symbol in AUTOMOTIVE_COMPONENT_SYMBOL_HINTS:
+        return True
+    text = " ".join(str(part or "") for part in parts)
+    lower = text.lower()
+    if any(term.lower() in lower for term in AUTOMOTIVE_COMPONENT_IDENTITY_TERMS):
+        return True
+    product_hits = sum(term.lower() in lower for term in AUTOMOTIVE_COMPONENT_PRODUCT_TERMS)
+    return product_hits >= 3 and any(
+        term in lower
+        for term in ("整车厂", "主机厂", "车型", "单车配套", "客户定点", "ppap")
+    )
 
 
 HOG_BREEDING_SYMBOL_HINTS = frozenset(

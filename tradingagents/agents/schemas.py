@@ -19,7 +19,7 @@ so that:
 from __future__ import annotations
 
 from enum import Enum
-from typing import Optional
+from typing import Literal, Optional
 
 from pydantic import BaseModel, Field
 
@@ -58,6 +58,63 @@ class TraderAction(str, Enum):
 # ---------------------------------------------------------------------------
 
 
+class UnderwritingResearchPlan(BaseModel):
+    """Compact model-referee handoff from research debate to PM/Trader."""
+
+    recommendation: PortfolioRating = Field(
+        description=(
+            "Provisional research recommendation derived only after reconciling the "
+            "shared three-year underwriting model and scenario expected value."
+        )
+    )
+    research_readiness: Literal["ready", "partial", "blocked"] = Field(
+        description="Readiness of the accepted underwriting model after debate."
+    )
+    core_bet: str = Field(
+        default="Not supplied; derive from the accepted underwriting model.",
+        description="The few operating variables that decide the investment outcome."
+    )
+    accepted_underwriting_model: str = Field(
+        description=(
+            "Detailed Markdown model accepted after the debate. Cover company operating "
+            "equations, every material segment causal chain, three forward years of segment "
+            "drivers and the model-profile-appropriate consolidated earnings, balance-sheet, "
+            "cash/capital and per-share lines, plus bull/base/bear "
+            "probabilities and valuation. Use missing/not disclosed rather than invention."
+        )
+    )
+    model_change_ledger: str = Field(
+        description=(
+            "Markdown ledger: question or forecast line, original assumption, bull proposal, "
+            "bear proposal, accepted assumption, evidence ids, EPS/FCF/value impact and next check."
+        )
+    )
+    debate_verdict: str = Field(
+        description=(
+            "Explain which side improved the model on each decisive question and why, without "
+            "turning the result into a rhetorical winner/loser recap."
+        )
+    )
+    probability_payoff: str = Field(
+        description=(
+            "Reconciled bull/base/bear probability, fair value, expected value, downside and "
+            "the operating assumptions responsible for the distribution."
+        )
+    )
+    unresolved_questions_and_gaps: str = Field(
+        description=(
+            "Company-specific unresolved questions, missing model cells, conflicting evidence, "
+            "and the exact disclosure or operating data required."
+        )
+    )
+    handoff_to_pm_and_trader: str = Field(
+        description=(
+            "Concise handoff: accepted model version, position constraints, catalysts, "
+            "falsification and what the PM must not assume beyond the model."
+        )
+    )
+
+
 class ResearchPlan(BaseModel):
     """Structured investment plan produced by the Research Manager.
 
@@ -77,6 +134,7 @@ class ResearchPlan(BaseModel):
         ),
     )
     core_bet: str = Field(
+        default="Not supplied; derive from the accepted underwriting model.",
         description=(
             "One or two sentences stating the core bet: what future business, "
             "cycle, policy, product-price, demand, cost, or valuation variable "
@@ -84,18 +142,21 @@ class ResearchPlan(BaseModel):
         ),
     )
     expectation_gap: str = Field(
+        default="Not supplied; compare the model with market-implied expectations.",
         description=(
             "Explain whether the market appears to have priced the thesis, or "
             "where a plausible expectation gap remains. Mention evidence and caveats."
         ),
     )
     probability_payoff: str = Field(
+        default="Not supplied; complete bull/base/bear probabilities and payoff.",
         description=(
             "Summarize probability and payoff: likelihood of the core bet, upside "
             "if it works, downside if it fails, and why the rating follows."
         ),
     )
     cycle_valuation_assessment: str = Field(
+        default="Not supplied; reconcile prosperity, valuation and cash returns.",
         description=(
             "Classify the valuation x prosperity setup and explain the fair "
             "calibration: low/high valuation versus low/high prosperity, why the "
@@ -103,18 +164,21 @@ class ResearchPlan(BaseModel):
         ),
     )
     catalyst_path: str = Field(
+        default="Not supplied; identify dated model-changing events.",
         description=(
             "Near- to medium-term events or data releases that could make the "
             "market reprice the thesis."
         ),
     )
     falsification_signals: str = Field(
+        default="Not supplied; define model-variable falsification gates.",
         description=(
             "Specific signals that would prove the thesis wrong or require a "
             "rating downgrade."
         ),
     )
     conviction_level: str = Field(
+        default="Low until the shared underwriting model is complete.",
         description=(
             "Conviction level and why: High / Medium / Low, tied to evidence "
             "quality, data gaps, and probability/payoff."
@@ -372,12 +436,34 @@ class ResearchPlan(BaseModel):
     )
 
 
+def render_underwriting_research_plan(plan: UnderwritingResearchPlan) -> str:
+    """Render one reconciled model-referee handoff without optional-field sprawl."""
+    if isinstance(plan, ResearchPlan):
+        return render_research_plan(plan)
+    return "\n\n".join(
+        [
+            "# Research Manager Accepted Underwriting Model",
+            f"**Rating**: {plan.recommendation.value}",
+            f"**Research Readiness**: {plan.research_readiness}",
+            f"**Core Bet**: {plan.core_bet}",
+            "## Accepted Underwriting Model\n\n" + plan.accepted_underwriting_model.strip(),
+            "## Model Change Ledger\n\n" + plan.model_change_ledger.strip(),
+            "## Debate Verdict\n\n" + plan.debate_verdict.strip(),
+            "## Probability and Payoff\n\n" + plan.probability_payoff.strip(),
+            "## Unresolved Questions and Evidence Gaps\n\n"
+            + plan.unresolved_questions_and_gaps.strip(),
+            "## Handoff to PM and Trader\n\n" + plan.handoff_to_pm_and_trader.strip(),
+        ]
+    )
+
+
 def render_research_plan(plan: ResearchPlan) -> str:
     """Render a ResearchPlan to markdown for storage and the trader's prompt context."""
     parts = [
         "**Investment Decision Memo**",
         "",
         f"**Rating**: {plan.recommendation.value}",
+        f"**Recommendation**: {plan.recommendation.value}",
         "",
     ]
     if plan.prior_rating:
@@ -413,11 +499,11 @@ def render_research_plan(plan: ResearchPlan) -> str:
     if plan.shareholder_structure_verdict:
         parts.extend(["", "### Shareholder Structure Verdict", plan.shareholder_structure_verdict])
     if plan.investor_communication_verdict:
-        parts.extend(["", "### Investor Communication Verdict", plan.investor_communication_verdict])
+        parts.extend(["", f"**Investor Communication Verdict**: {plan.investor_communication_verdict}"])
     if plan.policy_direction_verdict:
-        parts.extend(["", "### Policy Direction Verdict", plan.policy_direction_verdict])
+        parts.extend(["", f"**Policy Direction Verdict**: {plan.policy_direction_verdict}"])
     if plan.industry_driver_verdict:
-        parts.extend(["", "### Industry Driver Verdict", plan.industry_driver_verdict])
+        parts.extend(["", f"**Industry Driver Verdict**: {plan.industry_driver_verdict}"])
     if plan.business_segment_valuation_verdict:
         parts.extend(["", "### Business Segment Valuation Verdict", plan.business_segment_valuation_verdict])
     if plan.commodity_cycle_verdict:
@@ -429,7 +515,7 @@ def render_research_plan(plan: ResearchPlan) -> str:
     if plan.dividend_defensive_verdict:
         parts.extend(["", "### Dividend Defensive Verdict", plan.dividend_defensive_verdict])
     if plan.strategic_optionality_verdict:
-        parts.extend(["", "### Strategic Optionality Verdict", plan.strategic_optionality_verdict])
+        parts.extend(["", f"**Strategic Optionality Verdict**: {plan.strategic_optionality_verdict}"])
     if plan.evidence_gap_confidence_cap:
         parts.extend(["", "### Evidence Gap And Confidence Cap", plan.evidence_gap_confidence_cap])
     if plan.data_coverage_audit:
@@ -441,6 +527,7 @@ def render_research_plan(plan: ResearchPlan) -> str:
             "",
             "### Informative Discussion Of The Debate",
             plan.rationale,
+            f"**Rationale**: {plan.rationale}",
             "",
             "### Recommendation",
             f"**Core Bet:** {plan.core_bet}",
@@ -458,6 +545,7 @@ def render_research_plan(plan: ResearchPlan) -> str:
             f"**Conviction Level:** {plan.conviction_level}",
             "",
             f"**Strategic Actions:** {plan.strategic_actions}",
+            f"**Strategic Actions**: {plan.strategic_actions}",
         ]
     )
     return "\n".join(parts)
@@ -548,6 +636,71 @@ def render_trader_proposal(proposal: TraderProposal) -> str:
 # ---------------------------------------------------------------------------
 # Portfolio Manager
 # ---------------------------------------------------------------------------
+
+
+class SellSidePMDecision(BaseModel):
+    """Compact PM schema whose main artifact is one integrated sell-side report.
+
+    The legacy PortfolioDecision remains available for compatibility, but its
+    many optional fields encouraged checklist writing and made provider-level
+    structured output fragile.  This smaller schema keeps rating metadata
+    structured while allowing the report itself to be a coherent long-form
+    analytical document built from the shared underwriting packet.
+    """
+
+    rating: PortfolioRating = Field(
+        description=(
+            "Final system rating: Buy, Overweight, Hold, Underweight, or Sell. "
+            "It must follow from the reconciled bull/base/bear underwriting model, "
+            "not merely from missing evidence or a pending disclosure."
+        )
+    )
+    rating_posture: str = Field(
+        description="Concise position posture consistent with the final rating."
+    )
+    research_readiness: Literal["ready", "partial", "blocked"] = Field(
+        description=(
+            "Readiness of the shared company-underwriting model. Copy and explain "
+            "the underwriting packet status; do not disguise partial research as confidence."
+        )
+    )
+    one_line_thesis: str = Field(
+        description=(
+            "One sentence connecting the decisive operating variable, expectation gap, "
+            "valuation/payoff and principal caveat."
+        )
+    )
+    report_markdown: str = Field(
+        description=(
+            "The complete public-facing deep sell-side report in Markdown. Prefer five or "
+            "six thick integrated sections rather than many small headings. It must teach "
+            "how the company makes money; analyze every material segment through demand, "
+            "supply/capacity, volume/share/utilization, price/ASP, unit cost, margin and cash; "
+            "explain moat and financial-statement quality; show three explicit forward years "
+            "for segment drivers and model-profile-appropriate consolidated earnings, cash, "
+            "capital, asset-quality and per-share lines (use OCF/capex/FCF for ordinary "
+            "companies, but bank/insurance/securities/REIT-native metrics where appropriate); "
+            "show bull/base/bear assumptions, probabilities and valuation; reconcile KPE model "
+            "changes; explain expectation gap, counterevidence and verification; and only then "
+            "state rating and position implications. Every major section must complete claim "
+            "-> evidence -> mechanism -> financial impact -> valuation/position implication. "
+            "Use missing/not disclosed rather than invented precision."
+        )
+    )
+    shared_model_change_audit: str = Field(
+        description=(
+            "Compact ledger of the final accepted changes to the shared underwriting model: "
+            "question/forecast line, old assumption, challenged evidence, new assumption, "
+            "EPS/FCF/value impact, and disposition. Include unchanged/rejected important clues."
+        )
+    )
+    report_quality_self_check: str = Field(
+        description=(
+            "State whether segment coverage, three-year reconciliation, scenario valuation, "
+            "evidence lineage, period/unit arithmetic and KPE transmission are complete. Name "
+            "any remaining gap without changing or rationalizing the rating."
+        )
+    )
 
 
 class PortfolioDecision(BaseModel):
@@ -1310,6 +1463,25 @@ class PortfolioDecision(BaseModel):
     )
 
 
+def render_sell_side_pm_decision(decision: SellSidePMDecision) -> str:
+    """Render the compact PM schema without fragmenting the long-form report."""
+    if isinstance(decision, PortfolioDecision):
+        return render_pm_decision(decision)
+    return "\n\n".join(
+        [
+            f"**Rating**: {decision.rating.value}",
+            f"**Rating Posture**: {decision.rating_posture}",
+            f"**Research Readiness**: {decision.research_readiness}",
+            f"**One-Line Thesis**: {decision.one_line_thesis}",
+            decision.report_markdown.strip(),
+            "## Shared Underwriting Model Change Audit\n\n"
+            + decision.shared_model_change_audit.strip(),
+            "## Report Quality Self-Check\n\n"
+            + decision.report_quality_self_check.strip(),
+        ]
+    )
+
+
 def render_pm_decision(decision: PortfolioDecision) -> str:
     """Render a PortfolioDecision to the public markdown report shape.
 
@@ -1583,6 +1755,7 @@ def render_pm_decision(decision: PortfolioDecision) -> str:
     if supporting_evidence:
         parts.extend([f"**Supporting Evidence Integration**: {supporting_evidence}", ""])
     parts.extend([f"**Debate & Decision Logic**: {debate_and_decision_logic}", ""])
+    parts.extend([f"**Executive Summary**: {decision.executive_summary}", ""])
     if catalysts_and_optionality:
         parts.extend(
             [
@@ -1605,3 +1778,18 @@ def render_pm_decision(decision: PortfolioDecision) -> str:
     if continuity:
         parts.extend(["", f"**Decision Continuity**: {continuity}"])
     return "\n".join(parts)
+
+
+# Some test/plugin loaders execute this module through ``spec_from_file_location``
+# without first registering it in ``sys.modules``.  Pydantic then cannot resolve
+# postponed enum/Literal annotations lazily.  Rebuild against the module globals
+# once so both normal imports and plugin-style loads receive complete schemas.
+for _schema_model in (
+    UnderwritingResearchPlan,
+    ResearchPlan,
+    TraderProposal,
+    SellSidePMDecision,
+    PortfolioDecision,
+):
+    if hasattr(_schema_model, "model_rebuild"):
+        _schema_model.model_rebuild(_types_namespace=globals())

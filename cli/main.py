@@ -724,15 +724,26 @@ def save_report_to_disk(final_state, ticker: str, save_path: Path):
     if final_state.get("structured_research_context"):
         context_dir = save_path / "0_context"
         context_dir.mkdir(exist_ok=True)
+        structured_bundle = final_state["structured_research_context"]
         (context_dir / "structured_research.json").write_text(
             json.dumps(
-                final_state["structured_research_context"],
+                structured_bundle,
                 ensure_ascii=False,
                 indent=2,
                 default=str,
             ),
             encoding="utf-8",
         )
+        if structured_bundle.get("underwriting_packet"):
+            (context_dir / "company_underwriting.json").write_text(
+                json.dumps(
+                    structured_bundle["underwriting_packet"],
+                    ensure_ascii=False,
+                    indent=2,
+                    default=str,
+                ),
+                encoding="utf-8",
+            )
     if final_state.get("relative_strength_context"):
         context_dir = save_path / "0_context"
         context_dir.mkdir(exist_ok=True)
@@ -1025,8 +1036,9 @@ def save_report_to_disk(final_state, ticker: str, save_path: Path):
             pm_section = f"## Portfolio Manager Decision\n\n### Portfolio Manager\n{risk['judge_decision']}"
 
     # Run deterministic QA only after every context and the final PM memo have
-    # been persisted. The audit never changes the model-generated rating, but
-    # any deterministic error visibly blocks the memo from publication.
+    # been persisted. A failed audit preserves the model output as a draft for
+    # diagnosis, but suppresses ratings, target prices, sizing and trade
+    # instructions from the publishable decision and consolidated report.
     decision_path = save_path / "5_portfolio" / "decision.md"
     if decision_path.exists():
         from tradingagents.evaluation.research_validator import render_post_generation_audit
@@ -1045,16 +1057,29 @@ def save_report_to_disk(final_state, ticker: str, save_path: Path):
                 "在 `post_generation_audit.md` 所列错误完成核对前，不应作为正式投委会或对外报告。"
             )
             raw_decision = decision_path.read_text(encoding="utf-8")
+            (save_path / "5_portfolio" / "decision_draft.md").write_text(
+                raw_decision,
+                encoding="utf-8",
+            )
+            suppressed_decision = (
+                publication_banner
+                + "\n\n"
+                + "评级、目标价、仓位、替代标的与交易指令已自动抑制。"
+                + "原始模型输出仅保存在 `decision_draft.md`，用于修复研究链路，"
+                + "不得作为投资建议。\n"
+            )
             decision_path.write_text(
-                publication_banner + "\n\n" + raw_decision,
+                suppressed_decision,
                 encoding="utf-8",
             )
             (save_path / "5_portfolio" / "publication_status.md").write_text(
                 publication_banner + "\n",
                 encoding="utf-8",
             )
-            if pm_section:
-                pm_section = publication_banner + "\n\n" + pm_section
+            pm_section = (
+                "## Research Publication Status\n\n"
+                + suppressed_decision
+            )
 
     # Write consolidated report
     header = f"# Trading Analysis Report: {ticker}\n\nGenerated: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n"
@@ -1062,12 +1087,15 @@ def save_report_to_disk(final_state, ticker: str, save_path: Path):
     if pm_section:
         complete_sections.append(pm_section)
     if sections:
-        appendix_heading = (
-            "## Appendix: Upstream Research and Debate\n\n"
-            "The final PM decision above is the primary report. The sections below preserve "
-            "raw analyst, debate, trading, and risk-manager materials for audit and replay."
+        # Raw agent transcripts are useful for audit/replay but bury the
+        # decision-useful memo when concatenated into a 100k+ character file.
+        # They remain available in the numbered subdirectories.
+        complete_sections.append(
+            "## Appendix Index\n\n"
+            "Raw analyst, research-debate, trading and risk transcripts are saved "
+            "separately under `1_analysts/`, `2_research/`, `3_trading/` and `4_risk/`. "
+            "They are audit artifacts, not part of the publishable investment memo."
         )
-        complete_sections.append(appendix_heading + "\n\n" + "\n\n".join(sections))
     (save_path / "complete_report.md").write_text(header + "\n\n".join(complete_sections), encoding="utf-8")
     return save_path / "complete_report.md"
 
