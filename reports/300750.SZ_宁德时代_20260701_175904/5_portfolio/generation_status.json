@@ -1,0 +1,17 @@
+{
+  "mode": "schema_prompt_structured",
+  "agent": "Portfolio Manager",
+  "structured_error": "",
+  "schema": "SellSidePMDecision",
+  "initial_mode": "schema_prompt_structured",
+  "editorial_review_mode": "schema_prompt_structured",
+  "editorial_revision_requested": true,
+  "editorial_revision_applied": true,
+  "editorial_revision_mode": "schema_prompt_structured",
+  "remaining_handoff_issues": [],
+  "full_report_chars": "12996",
+  "public_report_chars": "12256",
+  "appendix_chars": "738",
+  "sections_moved_to_appendix": "附录A：模型变更与交接审计, 附录B：质量自检",
+  "public_h2_count": "20"
+}

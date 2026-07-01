@@ -864,6 +864,7 @@ class TradingAgentsGraph:
             metals_mining_context=metals_mining_context,
             commodity_context=commodity_context,
             knowledge_planet_context=knowledge_planet_context,
+            structured_research_context=structured_research_context,
         )
         thesis_question_context = build_thesis_question_context(
             company_name,
@@ -1118,6 +1119,7 @@ class TradingAgentsGraph:
             metals_mining_context=metals_mining_context,
             commodity_context=commodity_context,
             knowledge_planet_context=knowledge_planet_context,
+            structured_research_context=structured_research_context,
         )
         thesis_question_context = build_thesis_question_context(
             company_name,

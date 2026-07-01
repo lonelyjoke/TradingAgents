@@ -84,6 +84,8 @@ def test_peer_comparison_recovers_target_basic_from_universe(monkeypatch):
     assert "招商银行" in rendered
     assert "Banking peer screen" in rendered
     assert "NIM" in rendered
+    assert "total_mv_cny_100m" in rendered
+    assert "`total_mv / 10,000`" in rendered
 
 
 def test_peer_comparison_includes_competitor_analysis(monkeypatch):

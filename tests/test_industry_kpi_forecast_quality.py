@@ -605,6 +605,41 @@ def test_quality_audit_flags_metals_template_mismatch_and_missing_aluminum_sprea
     assert "Metals/mining forecast bridge | partial" in context
     assert "Aluminum spread driver coverage | partial" in context
     assert "neutral for direction" in context
+
+
+def test_quality_audit_surfaces_blocked_shared_underwriting_model():
+    context = build_quality_audit_context(
+        "601689.SH",
+        "2026-06-29",
+        industry_cycle_context="# Industry Cycle\n\nready evidence " * 10,
+        company_business_model_context=(
+            "# Company Business Model\n\nSegment-Level Prosperity Underwriting Contract "
+            + "business evidence " * 10
+        ),
+        industry_kpi_context="# Industry KPI\n\nready evidence " * 10,
+        forecast_model_context=(
+            "# Forecast\n\nmodel-ready evidence ledger\n"
+            "segment / business-bucket three-year operating matrix\n"
+            "consensus and market-implied expectation gap\n"
+            "assumption change and valuation transmission ledger\n"
+            + "forecast evidence " * 10
+        ),
+        peer_comparison_context="# Peer\n\nready evidence " * 10,
+        price_earnings_decomposition_context="# PE/PB\n\nready evidence " * 10,
+        earnings_model_context="# Earnings\n\nready evidence " * 10,
+        filing_intelligence_context="# Filing\n\nready evidence " * 10,
+        knowledge_planet_context="# KPE\n\nready evidence " * 10,
+        structured_research_context={
+            "underwriting_packet": {
+                "research_readiness": "blocked",
+                "readiness_reasons": ["company operating equations are missing"],
+            }
+        },
+    )
+
+    assert "Shared company underwriting model | blocked" in context
+    assert "company operating equations are missing" in context
+    assert "release-blocking" in context
     assert "Underweight/Sell needs independent verified evidence" in context
     assert "do not permit strong Buy/Sell language" in context
 

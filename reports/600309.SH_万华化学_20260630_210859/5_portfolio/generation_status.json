@@ -1,0 +1,10 @@
+{
+  "mode": "schema_repaired_fallback",
+  "agent": "Portfolio Manager",
+  "structured_error": "Error code: 400 - {'error': {'message': 'Thinking mode does not support this tool_choice', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_request_error'}}",
+  "schema": "SellSidePMDecision",
+  "full_report_chars": "3673",
+  "public_report_chars": "3475",
+  "appendix_chars": "196",
+  "sections_moved_to_appendix": "Report Quality Self-Check"
+}

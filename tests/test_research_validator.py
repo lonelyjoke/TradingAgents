@@ -6,7 +6,9 @@ from tradingagents.evaluation.research_validator import (
     audit_context_alignment,
     audit_decision_depth,
     audit_decision_integrity,
+    audit_handoff_numeric_consistency,
     audit_structured_research_usage,
+    render_post_generation_audit,
     _extract_rating,
     _extract_section,
     _normalize_rating,
@@ -20,6 +22,51 @@ _DEEP_BRIDGE_PHRASE = (
     "Second curve treatment separates scenario value from core value with unit economics, "
     "utilization, capex, cash conversion, control rights, and customer evidence. "
 )
+
+_SIX_DEPTH_CONTRACT = """
+## Company Disaggregation
+
+The reported core segment is separated from analytical product, channel, geography,
+customer group and project units. Each unit states what is disclosed, calculated,
+analytical or missing; its revenue and profit driver; cash conversion; evidence period;
+growth, gross margin and valuation treatment. No revenue or margin is allocated to an analytical unit when
+the filing does not disclose it. Missing channel economics remain a retrieval task.
+
+## Autonomous Three-Year Forecast Model
+
+The independent model covers 2026E, 2027E and 2028E. Unit volume x ASP produces revenue;
+revenue x margin less operating expenses produces parent profit; parent profit divided
+by diluted shares produces EPS; operating profit plus non-cash items less working capital
+produces OCF; OCF less capex produces FCF. Every year includes revenue, gross margin,
+parent net profit, EPS, OCF, capex and FCF, with reported facts separated from assumptions.
+The unit rows reconcile to the consolidated rows and consensus is only a cross-check.
+
+## Thesis-to-Financial Bridge
+
+For each decisive claim the formula, base assumption, bull assumption and bear assumption
+are explicit. The table shows revenue, profit, EPS, FCF or capital, and fair value impact.
+Unsupported effects remain missing rather than being described as quantified upside.
+
+## Moat Evidence Scorecard
+
+Scale EV001 and customer stickiness EV002 are rated proven, partial, unproven or rejected using history
+and true peer evidence. Counterevidence is shown, together with transmission to market share,
+margin, cash conversion and ROIC. Management claims without observable evidence are unproven.
+
+## Valuation Closure
+
+Core, scenario, optionality and excluded buckets are mutually exclusive. The bridge shows
+current price, diluted share count, per share value, probability weights, ownership and
+haircut, expected return and rating consistency. Double counting is checked before fair value
+is published, including acquired businesses already captured by consolidated earnings.
+
+## Handoff Integrity Audit
+
+Model version v2 is preserved. All business units, 2026E/2027E/2028E forecast lines, thesis
+bridges and valuation buckets were preserved. Any revised old value and new value carries an
+evidence id and recalculated impact. Unresolved cells remain explicit in the final handoff.
+
+"""
 
 
 def test_audit_decision_depth_flags_missing_buy_side_sections():
@@ -40,6 +87,12 @@ def test_audit_decision_depth_flags_missing_buy_side_sections():
     assert "verification_calendar" in sections
     assert "true_peer_alternatives" in sections
     assert "evidence_grade_table" in sections
+    assert "company_disaggregation" in sections
+    assert "autonomous_forecast_model" in sections
+    assert "thesis_financial_bridge" in sections
+    assert "moat_evidence_scorecard" in sections
+    assert "valuation_closure" in sections
+    assert "handoff_integrity_audit" in sections
 
 
 def test_audit_decision_depth_flags_shallow_medical_device_gate():
@@ -58,7 +111,7 @@ def test_audit_decision_depth_flags_shallow_medical_device_gate():
 
 
 def test_audit_decision_depth_accepts_rich_buy_side_sections():
-    text = (
+    text = _SIX_DEPTH_CONTRACT + (
         "**Investment Thesis**: Business Segment Breakdown: core business revenue, "
         "growth, gross margin, net margin, profit, cash conversion, valuation, "
         "and not disclosed second-curve economics are discussed. "
@@ -87,7 +140,7 @@ def test_audit_decision_depth_accepts_rich_buy_side_sections():
 
 
 def test_audit_decision_depth_accepts_medical_device_gate_depth():
-    text = (
+    text = _SIX_DEPTH_CONTRACT + (
         "**Investment Thesis**: Business Segment Breakdown: medical device IVD reagent "
         "platform revenue, growth, gross margin, net margin, profit, cash conversion, "
         "valuation, and not disclosed second-curve economics are discussed. "
@@ -135,7 +188,7 @@ def test_audit_decision_depth_flags_shallow_battery_material_gate():
 
 
 def test_audit_decision_depth_accepts_battery_material_gate_depth():
-    text = (
+    text = _SIX_DEPTH_CONTRACT + (
         "**Investment Thesis**: Business Segment Breakdown: 磷酸铁锂正极材料 revenue, "
         "growth, gross margin, net margin, profit, cash conversion, valuation, and "
         "not disclosed second-curve economics are discussed. Peer Comparison Summary: "
@@ -187,7 +240,7 @@ def test_audit_decision_depth_flags_project_order_report_without_full_bridge():
 
 
 def test_audit_decision_depth_accepts_project_order_bridge_depth():
-    text = (
+    text = _SIX_DEPTH_CONTRACT + (
         "**Investment Thesis**: Business Segment Breakdown: project revenue, growth, gross margin, "
         "net margin, profit, cash conversion, valuation are discussed. Peer Comparison Summary: "
         "peer rank, comparable universe, valuation, ROE, margin, growth, leverage, and allocation "
@@ -291,6 +344,150 @@ def test_post_generation_integrity_accepts_explicit_chinese_unchanged_kpe_outcom
     sections = {issue.section for issue in audit_decision_integrity(decision)}
 
     assert "alternative_intelligence_transmission" not in sections
+
+
+def test_integrity_audit_recalculates_forecast_and_valuation_ranges():
+    decision = """
+营业收入 2026E 2,150-2,200亿；2026E收入增速 8-10%。
+收入80亿 × 2.5x PS × 50% = 40-80亿。
+30% × (85-95) + 50% × (70-78) + 20% × (55-62) → 74-82。
+
+## Valuation Closure
+
+当前股价 68.41；公允价值 72-80；预期收益约 8-12%。
+"""
+    earnings = "| latest annual | FY | 20251231 | 203,200,000,000 |"
+
+    sections = {
+        issue.section
+        for issue in audit_decision_integrity(
+            decision,
+            earnings_model_context=earnings,
+        )
+    }
+
+    assert "forecast_growth_arithmetic" in sections
+    assert "option_value_arithmetic" in sections
+    assert "scenario_weighted_range_math" in sections
+    assert "expected_return_range_math" in sections
+
+
+def test_depth_audit_rejects_verified_moat_without_evidence_lineage():
+    decision = """
+## Moat Evidence Scorecard
+
+规模成本优势——已验证；份额25%，成本低于同行，传导至毛利率与ROIC。
+历史与同行反证尚未发现，但下一期继续核验。
+"""
+
+    sections = {issue.section for issue in audit_decision_depth(decision)}
+
+    assert "moat_evidence_lineage" in sections
+
+
+def test_post_generation_audit_blocks_portfolio_free_text_fallback(tmp_path):
+    portfolio_dir = tmp_path / "5_portfolio"
+    portfolio_dir.mkdir()
+    (portfolio_dir / "decision.md").write_text(
+        "# PM memo\n\n**Rating**: Hold\n",
+        encoding="utf-8",
+    )
+    (portfolio_dir / "generation_status.json").write_text(
+        json.dumps(
+            {
+                "mode": "free_text_fallback",
+                "schema": "SellSidePMDecision",
+                "structured_error": "schema validation failed",
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    audit = render_post_generation_audit(tmp_path)
+
+    assert "BLOCKED" in audit
+    assert "pm_structured_generation" in audit
+    assert "blocks formal publication" in audit
+
+
+def test_post_generation_audit_blocks_research_manager_free_text_fallback(tmp_path):
+    portfolio_dir = tmp_path / "5_portfolio"
+    portfolio_dir.mkdir()
+    (portfolio_dir / "decision.md").write_text(
+        "# PM memo\n\n**Rating**: Hold\n",
+        encoding="utf-8",
+    )
+    research_dir = tmp_path / "2_research"
+    research_dir.mkdir()
+    (research_dir / "generation_status.json").write_text(
+        json.dumps(
+            {
+                "mode": "free_text_fallback",
+                "schema": "UnderwritingResearchPlan",
+                "structured_error": "schema validation failed",
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    audit = render_post_generation_audit(tmp_path)
+
+    assert "BLOCKED" in audit
+    assert "research_manager_structured_generation" in audit
+    assert "canonical debated model handoff is not schema-valid" in audit
+
+
+def test_handoff_numeric_audit_blocks_silent_pm_change(tmp_path):
+    context_dir = tmp_path / "0_context"
+    research_dir = tmp_path / "2_research"
+    portfolio_dir = tmp_path / "5_portfolio"
+    context_dir.mkdir()
+    research_dir.mkdir()
+    portfolio_dir.mkdir()
+    (context_dir / "company_underwriting.json").write_text(
+        json.dumps(
+            {
+                "forecast_years": ["2026E", "2027E", "2028E"],
+                "company_model": {
+                    "diluted_share_count_mn": 3130.0,
+                    "share_count_period": "current",
+                },
+                "forecast_lines": [
+                    {
+                        "segment": "consolidated",
+                        "metric": "revenue",
+                        "unit": "CNY mn",
+                        "year_1_value": 100.0,
+                    }
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+    manager = {
+        "canonical_model_snapshot": [
+            {"line_id": "shares", "period": "current", "metric": "diluted shares", "value": 3130.0, "unit": "mn shares"},
+            {"line_id": "2026E_revenue", "period": "2026E", "metric": "revenue", "value": 100.0, "unit": "CNY mn"},
+        ],
+        "model_change_rows": [],
+    }
+    pm = {
+        "canonical_model_snapshot": [
+            {"line_id": "shares", "period": "current", "metric": "diluted shares", "value": 3130.0, "unit": "mn shares"},
+            {"line_id": "2026E_revenue", "period": "2026E", "metric": "revenue", "value": 110.0, "unit": "CNY mn"},
+        ],
+        "handoff_change_rows": [],
+    }
+    (research_dir / "canonical_plan.json").write_text(json.dumps(manager), encoding="utf-8")
+    (portfolio_dir / "canonical_decision.json").write_text(json.dumps(pm), encoding="utf-8")
+
+    issues = audit_handoff_numeric_consistency(tmp_path)
+
+    assert any(
+        issue.section == "handoff_numeric_consistency"
+        and "silently changed" in issue.issue
+        for issue in issues
+    )
 
 
 def test_structured_segment_usage_accepts_aliases_and_does_not_treat_all_unknown_weights_as_material(tmp_path):

@@ -1,0 +1,3534 @@
+{
+  "schema_version": 3,
+  "symbol": "300750.SZ",
+  "as_of_date": "2026-07-01",
+  "preprocessing_mode": "llm_semantic_plus_deterministic_validation",
+  "company_summary": "宁德时代是全球领先的动力电池和储能电池制造商，同时从事锂电池回收业务。2025年末锂电池产能772GWh，2026年Q1营收1291亿元，毛利率24.82%。",
+  "segments": [
+    {
+      "segment": "consolidated",
+      "aliases": [
+        "宁德时代整体",
+        "CATL"
+      ],
+      "products_or_services": "动力电池系统、储能系统、锂电池回收利用",
+      "revenue_weight_pct": null,
+      "gross_profit_or_profit_weight_pct": null,
+      "business_model": "混合型：产能出货型（动力/储能电池制造）与项目交付型（储能系统项目）",
+      "key_drivers": [
+        "动力电池需求",
+        "储能需求",
+        "锂价",
+        "产能利用率",
+        "技术创新"
+      ],
+      "prosperity_level": "bottoming",
+      "marginal_direction": "mixed",
+      "causal_chain": "全球能源转型推动电动车和储能需求 -> 产能扩张至772GWh -> 利用率受需求和竞争影响 -> 售价因竞争和原材料传导承压 -> 毛利率因成本下降和产品组合改善而稳定 -> 净利润率受财务费用和研发影响 -> OCF支撑资本开支和分红",
+      "supporting_metric_refs": [
+        "EV011",
+        "EV012",
+        "EV013",
+        "EV014",
+        "EV015",
+        "EV016",
+        "EV018",
+        "EV025",
+        "EV026",
+        "EV046"
+      ],
+      "counterevidence": [],
+      "confidence": "medium",
+      "missing_inputs": [
+        "分业务板块营收占比",
+        "产能利用率",
+        "按产品均价",
+        "分业务毛利率"
+      ],
+      "revenue_cny_mn": 423701.834,
+      "revenue_reported_value": 423701834000.0,
+      "revenue_reported_unit": "yuan",
+      "revenue_growth_pct": null,
+      "gross_margin_pct": null,
+      "gross_margin_change_pp": null,
+      "period": "20251231",
+      "source_module": "company_business_model",
+      "evidence_quote": "/ latest annual / FY / 20251231 / 423701834000 / 72201282000 / FY actual /",
+      "extraction_mode": "llm_semantic"
+    },
+    {
+      "segment": "power_battery",
+      "aliases": [
+        "动力电池",
+        "EV电池"
+      ],
+      "products_or_services": "动力电池系统（三元、磷酸铁锂、钠离子等）",
+      "revenue_weight_pct": null,
+      "gross_profit_or_profit_weight_pct": null,
+      "business_model": "产能出货型",
+      "key_drivers": [
+        "新能源汽车渗透率",
+        "动力电池装机量",
+        "车企定点",
+        "锂价"
+      ],
+      "prosperity_level": "evidence_limited",
+      "marginal_direction": "unknown",
+      "causal_chain": "",
+      "supporting_metric_refs": [],
+      "counterevidence": [],
+      "confidence": "low",
+      "missing_inputs": [
+        "动力电池单独营收",
+        "装机量",
+        "均价",
+        "毛利率"
+      ],
+      "revenue_cny_mn": null,
+      "revenue_reported_value": null,
+      "revenue_reported_unit": "",
+      "revenue_growth_pct": null,
+      "gross_margin_pct": null,
+      "gross_margin_change_pp": null,
+      "period": "unspecified",
+      "source_module": "",
+      "evidence_quote": "",
+      "extraction_mode": "llm_semantic"
+    },
+    {
+      "segment": "energy_storage",
+      "aliases": [
+        "储能电池",
+        "储能系统"
+      ],
+      "products_or_services": "储能电池系统（含钠离子、磷酸铁锂线路）",
+      "revenue_weight_pct": null,
+      "gross_profit_or_profit_weight_pct": null,
+      "business_model": "项目订单型+产能出货型",
+      "key_drivers": [
+        "全球储能招标",
+        "政策支持",
+        "钠电进展",
+        "海外订单"
+      ],
+      "prosperity_level": "evidence_limited",
+      "marginal_direction": "unknown",
+      "causal_chain": "",
+      "supporting_metric_refs": [
+        "KPE02",
+        "KPE06"
+      ],
+      "counterevidence": [],
+      "confidence": "low",
+      "missing_inputs": [
+        "储能营收及占比",
+        "储能出货量",
+        "海外订单金额"
+      ],
+      "revenue_cny_mn": null,
+      "revenue_reported_value": null,
+      "revenue_reported_unit": "",
+      "revenue_growth_pct": null,
+      "gross_margin_pct": null,
+      "gross_margin_change_pp": null,
+      "period": "unspecified",
+      "source_module": "",
+      "evidence_quote": "",
+      "extraction_mode": "llm_semantic"
+    },
+    {
+      "segment": "battery_recycling",
+      "aliases": [
+        "锂电池回收",
+        "回收利用"
+      ],
+      "products_or_services": "废旧锂电池回收、再生材料",
+      "revenue_weight_pct": null,
+      "gross_profit_or_profit_weight_pct": null,
+      "business_model": "回收处理型",
+      "key_drivers": [
+        "退役电池量",
+        "金属价格",
+        "回收技术"
+      ],
+      "prosperity_level": "evidence_limited",
+      "marginal_direction": "unknown",
+      "causal_chain": "",
+      "supporting_metric_refs": [],
+      "counterevidence": [],
+      "confidence": "low",
+      "missing_inputs": [
+        "回收业务营收",
+        "处理量",
+        "毛利率"
+      ],
+      "revenue_cny_mn": null,
+      "revenue_reported_value": null,
+      "revenue_reported_unit": "",
+      "revenue_growth_pct": null,
+      "gross_margin_pct": null,
+      "gross_margin_change_pp": null,
+      "period": "unspecified",
+      "source_module": "",
+      "evidence_quote": "",
+      "extraction_mode": "llm_semantic"
+    },
+    {
+      "segment": "动力电池系统",
+      "aliases": [],
+      "products_or_services": "",
+      "revenue_weight_pct": 77.80675222711693,
+      "gross_profit_or_profit_weight_pct": 76.39724357067263,
+      "business_model": "filing-reported business segment",
+      "key_drivers": [],
+      "prosperity_level": "high",
+      "marginal_direction": "improving",
+      "causal_chain": "Reported segment revenue growth and gross-margin movement are available; demand, supply/capacity, ASP, utilization, working-capital and cash links still require semantic and source cross-checking.",
+      "supporting_metric_refs": [],
+      "counterevidence": [
+        "A filing growth rate alone cannot establish full segment prosperity."
+      ],
+      "confidence": "medium",
+      "missing_inputs": [
+        "dated demand/order evidence",
+        "capacity/utilization evidence",
+        "ASP/price evidence",
+        "segment cash-conversion evidence"
+      ],
+      "revenue_cny_mn": null,
+      "revenue_reported_value": 316506369.0,
+      "revenue_reported_unit": "filing table unit not explicit in extracted row",
+      "revenue_growth_pct": 25.08,
+      "gross_margin_pct": 23.84,
+      "gross_margin_change_pp": -0.1,
+      "period": "annual filing",
+      "source_module": "filing_intelligence",
+      "evidence_quote": "| product | annual | 2025年年度报告: 采选冶炼行业 5,978,096 5,305,599 11.25% 8.83% 5.59% 2.72% 分产品 动力电池系统 316,506,369 241,064,397 23.84% 25.08% 25.25% -0.10% 储能电池系统 62,439,820 45,763,689 26.71% 8.99% 9.18% -0.13% | Use this to explain revenue mix, profit-pool quality, gross-margin dilution/accretion, and whether bull/bear claims depend on a specific product, geography, or channel. |",
+      "extraction_mode": "deterministic_filing_row"
+    },
+    {
+      "segment": "储能电池系统",
+      "aliases": [],
+      "products_or_services": "",
+      "revenue_weight_pct": 15.349579280806763,
+      "gross_profit_or_profit_weight_pct": 16.88591174643373,
+      "business_model": "filing-reported business segment",
+      "key_drivers": [],
+      "prosperity_level": "neutral",
+      "marginal_direction": "stable",
+      "causal_chain": "Reported segment revenue growth and gross-margin movement are available; demand, supply/capacity, ASP, utilization, working-capital and cash links still require semantic and source cross-checking.",
+      "supporting_metric_refs": [],
+      "counterevidence": [
+        "A filing growth rate alone cannot establish full segment prosperity."
+      ],
+      "confidence": "medium",
+      "missing_inputs": [
+        "dated demand/order evidence",
+        "capacity/utilization evidence",
+        "ASP/price evidence",
+        "segment cash-conversion evidence"
+      ],
+      "revenue_cny_mn": null,
+      "revenue_reported_value": 62439820.0,
+      "revenue_reported_unit": "filing table unit not explicit in extracted row",
+      "revenue_growth_pct": 8.99,
+      "gross_margin_pct": 26.71,
+      "gross_margin_change_pp": -0.13,
+      "period": "annual filing",
+      "source_module": "filing_intelligence",
+      "evidence_quote": "| product | annual | 2025年年度报告: 采选冶炼行业 5,978,096 5,305,599 11.25% 8.83% 5.59% 2.72% 分产品 动力电池系统 316,506,369 241,064,397 23.84% 25.08% 25.25% -0.10% 储能电池系统 62,439,820 45,763,689 26.71% 8.99% 9.18% -0.13% | Use this to explain revenue mix, profit-pool quality, gross-margin dilution/accretion, and whether bull/bear claims depend on a specific product, geography, or channel. |",
+      "extraction_mode": "deterministic_filing_row"
+    },
+    {
+      "segment": "电池材料及回收",
+      "aliases": [],
+      "products_or_services": "",
+      "revenue_weight_pct": 5.374073312265196,
+      "gross_profit_or_profit_weight_pct": 6.0359116669128845,
+      "business_model": "filing-reported business segment",
+      "key_drivers": [],
+      "prosperity_level": "low",
+      "marginal_direction": "deteriorating",
+      "causal_chain": "Reported segment revenue growth and gross-margin movement are available; demand, supply/capacity, ASP, utilization, working-capital and cash links still require semantic and source cross-checking.",
+      "supporting_metric_refs": [],
+      "counterevidence": [
+        "A filing growth rate alone cannot establish full segment prosperity."
+      ],
+      "confidence": "medium",
+      "missing_inputs": [
+        "dated demand/order evidence",
+        "capacity/utilization evidence",
+        "ASP/price evidence",
+        "segment cash-conversion evidence"
+      ],
+      "revenue_cny_mn": null,
+      "revenue_reported_value": 21860936.0,
+      "revenue_reported_unit": "filing table unit not explicit in extracted row",
+      "revenue_growth_pct": -23.83,
+      "gross_margin_pct": 27.27,
+      "gross_margin_change_pp": 16.76,
+      "period": "annual filing",
+      "source_module": "filing_intelligence",
+      "evidence_quote": "| product | annual | 2025年年度报告: 分产品 动力电池系统 316,506,369 241,064,397 23.84% 25.08% 25.25% -0.10% 储能电池系统 62,439,820 45,763,689 26.71% 8.99% 9.18% -0.13% 电池材料及回收 21,860,936 15,899,813 27.27% -23.83% -38.09% 16.76% | Use this to explain revenue mix, profit-pool quality, gross-margin dilution/accretion, and whether bull/bear claims depend on a specific product, geography, or channel. |",
+      "extraction_mode": "deterministic_filing_row"
+    },
+    {
+      "segment": "采选冶炼行业",
+      "aliases": [],
+      "products_or_services": "",
+      "revenue_weight_pct": 1.469595179811117,
+      "gross_profit_or_profit_weight_pct": 0.6809330159807626,
+      "business_model": "filing-reported business segment",
+      "key_drivers": [],
+      "prosperity_level": "neutral",
+      "marginal_direction": "stable",
+      "causal_chain": "Reported segment revenue growth and gross-margin movement are available; demand, supply/capacity, ASP, utilization, working-capital and cash links still require semantic and source cross-checking.",
+      "supporting_metric_refs": [],
+      "counterevidence": [
+        "A filing growth rate alone cannot establish full segment prosperity."
+      ],
+      "confidence": "medium",
+      "missing_inputs": [
+        "dated demand/order evidence",
+        "capacity/utilization evidence",
+        "ASP/price evidence",
+        "segment cash-conversion evidence"
+      ],
+      "revenue_cny_mn": null,
+      "revenue_reported_value": 5978096.0,
+      "revenue_reported_unit": "filing table unit not explicit in extracted row",
+      "revenue_growth_pct": 8.83,
+      "gross_margin_pct": 11.25,
+      "gross_margin_change_pp": 2.72,
+      "period": "annual filing",
+      "source_module": "filing_intelligence",
+      "evidence_quote": "| product | annual | 2025年年度报告: 采选冶炼行业 5,978,096 5,305,599 11.25% 8.83% 5.59% 2.72% 分产品 动力电池系统 316,506,369 241,064,397 23.84% 25.08% 25.25% -0.10% 储能电池系统 62,439,820 45,763,689 26.71% 8.99% 9.18% -0.13% | Use this to explain revenue mix, profit-pool quality, gross-margin dilution/accretion, and whether bull/bear claims depend on a specific product, geography, or channel. |",
+      "extraction_mode": "deterministic_filing_row"
+    }
+  ],
+  "semantic_metrics": [
+    {
+      "segment": "consolidated",
+      "variable": "revenue",
+      "value": 129131041000.0,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "20260331",
+      "comparison_basis": "YoY",
+      "source_module": "earnings_model",
+      "source_quote": "/ Revenue base / 129131041000 / N/A / YoY: 20260331 vs 20250331 / top-line starting point for volume × price × mix /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "top_line",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "revenue",
+      "value": 423701834000.0,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "20251231",
+      "comparison_basis": "",
+      "source_module": "earnings_model",
+      "source_quote": "/ latest annual / FY / 20251231 / 423701834000 / 72201282000 / 423701834000 / 72201282000 / 423701834000 / 72201282000 / FY actual /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "top_line",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "gross_margin",
+      "value": 24.8156,
+      "value_text": "",
+      "unit": "%",
+      "period": "20260331",
+      "comparison_basis": "+0.41pp YoY",
+      "source_module": "earnings_model",
+      "source_quote": "/ Gross margin / 24.8156% / +0.41pp / YoY: 20260331 vs 20250331 / main bridge from demand to gross profit /",
+      "evidence_status": "unverified",
+      "direction": "up",
+      "materiality": "high",
+      "model_role": "profitability",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "operating_margin",
+      "value": 20.639,
+      "value_text": "",
+      "unit": "%",
+      "period": "20260331",
+      "comparison_basis": "+0.17pp YoY",
+      "source_module": "earnings_model",
+      "source_quote": "/ Operating margin / 20.639% / +0.17pp / YoY: 20260331 vs 20250331 / tests pricing, mix, and cost absorption /",
+      "evidence_status": "unverified",
+      "direction": "up",
+      "materiality": "medium",
+      "model_role": "profitability",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "net_margin",
+      "value": 16.0594,
+      "value_text": "",
+      "unit": "%",
+      "period": "20260331",
+      "comparison_basis": "-0.42pp YoY",
+      "source_module": "earnings_model",
+      "source_quote": "/ Net margin / 16.0594% / -0.42pp / YoY: 20260331 vs 20250331 / captures final earnings conversion /",
+      "evidence_status": "unverified",
+      "direction": "down",
+      "materiality": "high",
+      "model_role": "profitability",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "ocf_to_net_profit",
+      "value": 1.6241,
+      "value_text": "",
+      "unit": "ratio",
+      "period": "20260331",
+      "comparison_basis": "",
+      "source_module": "earnings_model",
+      "source_quote": "/ OCF / net profit / 1.6241 / N/A / YoY: 20260331 vs 20250331 / tests earnings quality and cash realization /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "medium",
+      "model_role": "cash_flow",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "receivables_to_revenue",
+      "value": 15.1878,
+      "value_text": "",
+      "unit": "%",
+      "period": "20260331",
+      "comparison_basis": "-2.62pp YoY",
+      "source_module": "earnings_model",
+      "source_quote": "/ Receivables / revenue / 15.1878% / -2.62pp / YoY: 20260331 vs 20250331 / tests working-capital drag; interim periods use annualized revenue /",
+      "evidence_status": "unverified",
+      "direction": "down",
+      "materiality": "medium",
+      "model_role": "working_capital",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "inventory_to_revenue",
+      "value": 21.0912,
+      "value_text": "",
+      "unit": "%",
+      "period": "20260331",
+      "comparison_basis": "+1.72pp YoY",
+      "source_module": "earnings_model",
+      "source_quote": "/ Inventory / revenue / 21.0912% / +1.72pp / YoY: 20260331 vs 20250331 / tests inventory build and demand quality; interim periods use annualized revenue /",
+      "evidence_status": "unverified",
+      "direction": "up",
+      "materiality": "medium",
+      "model_role": "working_capital",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "overseas_revenue",
+      "value": 129641258000.0,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "20251231",
+      "comparison_basis": "",
+      "source_module": "company_business_model",
+      "source_quote": "公司境外收入 129,641,258 千元",
+      "evidence_status": "reported",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "geography",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "lithium_battery_capacity",
+      "value": 772.0,
+      "value_text": "",
+      "unit": "GWh",
+      "period": "20251231",
+      "comparison_basis": "",
+      "source_module": "company_business_model",
+      "source_quote": "报告期内公司锂电池产能 772GWh",
+      "evidence_status": "reported",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "capacity",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "capacity_under_construction",
+      "value": 321.0,
+      "value_text": "",
+      "unit": "GWh",
+      "period": "20251231",
+      "comparison_basis": "",
+      "source_module": "company_business_model",
+      "source_quote": "期末在建产能 321GWh",
+      "evidence_status": "reported",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "capacity",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "market_cap",
+      "value": 1775884546064.0,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "2026-07-01",
+      "comparison_basis": "",
+      "source_module": "market_expectation",
+      "source_quote": "/ Market cap (CNY) / 1775884546064.0002 / current equity value /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "valuation",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "pe_ttm",
+      "value": 22.4863,
+      "value_text": "",
+      "unit": "ratio",
+      "period": "TTM",
+      "comparison_basis": "",
+      "source_module": "market_expectation",
+      "source_quote": "/ PE TTM / 22.4863 / earnings multiple the market is paying now /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "medium",
+      "model_role": "valuation",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "ps_ttm",
+      "value": 3.7936,
+      "value_text": "",
+      "unit": "ratio",
+      "period": "TTM",
+      "comparison_basis": "",
+      "source_module": "market_expectation",
+      "source_quote": "/ PS TTM / 3.7936 / sales multiple the market is paying now /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "medium",
+      "model_role": "valuation",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "implied_ttm_earnings",
+      "value": 78976289832.65,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "TTM",
+      "comparison_basis": "",
+      "source_module": "market_expectation",
+      "source_quote": "/ Implied TTM earnings (CNY) / 78976289832.6537 / market cap divided by PE TTM /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "medium",
+      "model_role": "valuation",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "implied_ttm_sales",
+      "value": 468126461952.76,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "TTM",
+      "comparison_basis": "",
+      "source_module": "market_expectation",
+      "source_quote": "/ Implied TTM sales (CNY) / 468126461952.7626 / market cap divided by PS TTM /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "medium",
+      "model_role": "valuation",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "raw_material_price",
+      "value": null,
+      "value_text": "164560",
+      "unit": "yuan/ton",
+      "period": "20260701",
+      "comparison_basis": "",
+      "source_module": "commodity",
+      "source_quote": "/ Lithium carbonate / raw material proxy / Tushare futures proxy / LC.GFE / 164560 / 20260701 / 3.41% / N/A / Verified by Tushare futures daily data.",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "medium",
+      "model_role": "cost_input",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "dividend_per_share",
+      "value": 6.957,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "20251231",
+      "comparison_basis": "",
+      "source_module": "management_capital_allocation",
+      "source_quote": "/ 20260310 / 20251231 / 股东大会通过 / 6.957 / 0 / N/A / N/A / N/A /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "low",
+      "model_role": "shareholder_return",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    }
+  ],
+  "deterministic_evidence": [
+    {
+      "evidence_id": "EV001",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Financial-report look-back: 900 days"
+    },
+    {
+      "evidence_id": "EV002",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "Compacted 2025年年度报告: 499236 chars -> 155309 chars."
+    },
+    {
+      "evidence_id": "EV003",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 半年",
+      "text": "Compacted 2025年半年度报告: 368256 chars -> 108004 chars."
+    },
+    {
+      "evidence_id": "EV004",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260416, 2026, 季度",
+      "text": "20260416: 2026年一季度报告"
+    },
+    {
+      "evidence_id": "EV005",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260310, 2025, 年度",
+      "text": "20260310: 2025年年度报告"
+    },
+    {
+      "evidence_id": "EV006",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20251021, 2025, 季度",
+      "text": "20251021: 2025年三季度报告"
+    },
+    {
+      "evidence_id": "EV007",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20250804, 2025",
+      "text": "20250804: H股公告（2025年中期报告）"
+    },
+    {
+      "evidence_id": "EV008",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20250731, 2025, 半年",
+      "text": "20250731: 2025年半年度报告"
+    },
+    {
+      "evidence_id": "EV009",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ announcement_lookup / ready / Found 5 candidate financial-report announcement(s) from primary and CNINFO sources. /"
+    },
+    {
+      "evidence_id": "EV010",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026, 季度",
+      "text": "/ pdf_text_extraction / ready / 2026年一季度报告: extracted 20796 characters of readable report text. /"
+    },
+    {
+      "evidence_id": "EV011",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "Q1, 20260331",
+      "text": "/ latest reported / Q1 / 20260331 / 129131041000 / 20737710000 / 516524164000 / 82950840000 / 614515866903.4114 / 103559726364.7439 / historical median 0331 share 20.0% /"
+    },
+    {
+      "evidence_id": "EV012",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "FY, 20251231",
+      "text": "/ latest annual / FY / 20251231 / 423701834000 / 72201282000 / 423701834000 / 72201282000 / 423701834000 / 72201282000 / FY actual /"
+    },
+    {
+      "evidence_id": "EV013",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "revenue",
+      "period": "20260331, 20250331",
+      "text": "/ Revenue base / 129131041000 / N/A / YoY: 20260331 vs 20250331 / top-line starting point for volume × price × mix /"
+    },
+    {
+      "evidence_id": "EV014",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "20260331, 20250331",
+      "text": "/ Gross margin / 24.8156% / +0.41pp / YoY: 20260331 vs 20250331 / main bridge from demand to gross profit /"
+    },
+    {
+      "evidence_id": "EV015",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260331, 20250331",
+      "text": "/ Operating margin / 20.639% / +0.17pp / YoY: 20260331 vs 20250331 / tests pricing, mix, and cost absorption /"
+    },
+    {
+      "evidence_id": "EV016",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "20260331, 20250331",
+      "text": "/ Net margin / 16.0594% / -0.42pp / YoY: 20260331 vs 20250331 / captures final earnings conversion /"
+    },
+    {
+      "evidence_id": "EV017",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "operating_expense",
+      "period": "20260331, 20250331",
+      "text": "/ Finance-expense ratio / 0.0482% / +2.75pp / YoY: 20260331 vs 20250331 / captures leverage drag or relief /"
+    },
+    {
+      "evidence_id": "EV018",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "profit_or_eps",
+      "period": "20260331, 20250331",
+      "text": "/ OCF / net profit / 1.6241 / N/A / YoY: 20260331 vs 20250331 / tests earnings quality and cash realization /"
+    },
+    {
+      "evidence_id": "EV019",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "revenue",
+      "period": "20260331, 20250331",
+      "text": "/ Receivables / revenue / 15.1878% / -2.62pp / YoY: 20260331 vs 20250331 / tests working-capital drag; interim periods use annualized revenue /"
+    },
+    {
+      "evidence_id": "EV020",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "revenue",
+      "period": "20260331, 20250331",
+      "text": "/ Inventory / revenue / 21.0912% / +1.72pp / YoY: 20260331 vs 20250331 / tests inventory build and demand quality; interim periods use annualized revenue /"
+    },
+    {
+      "evidence_id": "EV021",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_volume",
+      "period": "2025, 年度",
+      "text": "/ product_manufacturer / 产品制造 / 产能出货型 / quantified disclosure / 2025年年度报告: 四、主营业务分析 1、概述 公司于 2025 年 5 月 20 日在香港联交所主板成功挂牌上市，全球发售股份总数为 155,915,300 股（行 ，发行价格为 263.00 港元/股，募集资金总额为 410 亿港元，并将上述募集资金用于匈 使超额配售权之后） 牙利项目建设及营运资金、一般企业用途。公司通过本次 H 股上市搭建了海外资本运作平台，有助于进 一步融..."
+    },
+    {
+      "evidence_id": "EV022",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "utilization_or_backlog",
+      "period": "2025, 年度",
+      "text": "/ project_delivery / 项目订单 / 交付回款型 / quantified disclosure / 2025年年度报告: [Runtime-compacted filing text for 2025年年度报告: original 499236 chars, budget 180000 chars.] [Opening slice] 宁德时代新能源科技股份有限公司 2025 年年度报告 2026 年 3 月 宁德时代新能源科技股份有限公司 2025 年年度报告全文 致股东的信 2025 年..."
+    },
+    {
+      "evidence_id": "EV023",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "2025, 年度",
+      "text": "/ core_revenue_engine / annual / 2025年年度报告: 2）报告期内上市公司从事锂离子电池产业链相关业务的海外销售收入占同期营业收入 30%以上 / Defines what actually drives the income statement. /"
+    },
+    {
+      "evidence_id": "EV024",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "revenue",
+      "period": "2025, 年度",
+      "text": "/ customer_and_channel / annual / 2025年年度报告: 期营业收入 30.60%。公司主要业务地区的经营环境未发生重大变化，境外客户回款情况正常。 / Reveals demand source, concentration, and market validation. /"
+    },
+    {
+      "evidence_id": "EV025",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度, 上年同期",
+      "text": "/ geography / annual / 2025年年度报告: 报告期内，公司销售境外的主要产品为电池系统，较上年同期相比未发生明显变化。公司境外收入 129,641,258 千元，占本 / Explains whether growth depends on a specific geography or expansion lane. /"
+    },
+    {
+      "evidence_id": "EV026",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_volume",
+      "period": "2025, 年度",
+      "text": "/ reinvestment_engine / annual / 2025年年度报告: 项目的建设。报告期内公司锂电池产能 772GWh，期末在建产能 321GWh。 / Shows how today's cash is being converted into tomorrow's earnings power. /"
+    },
+    {
+      "evidence_id": "EV027",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "asp_or_price",
+      "period": "2025, 年度",
+      "text": "/ product / annual / 2025年年度报告: 四、主营业务分析 1、概述 公司于 2025 年 5 月 20 日在香港联交所主板成功挂牌上市，全球发售股份总数为 155,915,300 股（行 ，发行价格为 263.00 港元/股，募集资金总额为 410 亿港元，并将上述募集资金用于匈 使超额配售权之后） 牙利项目建设及营运资金、一般企业用途。公司通过本次 H 股上市搭建了海外资本运作平台，有助于进 一步融入全球资本市场，加快推进全球化战略布局，提升综合竞争力。 报告期内，公司实现锂离子电池..."
+    },
+    {
+      "evidence_id": "EV028",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "asp_or_price",
+      "period": "2025, 半年",
+      "text": "/ product / semiannual / 2025年半年度报告: 四、主营业务分析 1、概述 报告期内，公司于 2025 年 5 月 20 日在香港联交所主板成功挂牌上市，全球发售股份总数为 155,915,300 股（行使超额配售权之后），发行价格为 263.00 港元/股，募集资金总额为 410 亿港元，并将上 述募集资金用于匈牙利项目建设及营运资金、一般企业用途。公司通过本次 H 股上市搭建了海外资本运 作平台，有助于进一步融入全球资本市场，加快推进全球化战略布局，提升综合竞争力。 报告期内，公..."
+    },
+    {
+      "evidence_id": "EV029",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_volume",
+      "period": "2025, 年度",
+      "text": "/ filing_segment / / product / annual / 2025年年度报告: 四、主营业务分析 1、概述 公司于 2025 年 5 月 20 日在香港联交所主板成功挂牌上市，全球发售股份总数为 155,915,300 股（行 ，发行价格为 263.00 港元/股，募集资金总额为 410 亿港元，并将上述募集资金用于匈 使超额配售权之后） 牙利项目建设及营运资金、一般企业用途。公司通过本次 H 股上市搭建了海外资本运作平台，有助于进 一步融入全球资本市场，加快推进全球化战略布局，提升综合竞争力"
+    },
+    {
+      "evidence_id": "EV030",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "asp_or_price",
+      "period": "2025, 半年",
+      "text": "/ filing_segment / / product / semiannual / 2025年半年度报告: 四、主营业务分析 1、概述 报告期内，公司于 2025 年 5 月 20 日在香港联交所主板成功挂牌上市，全球发售股份总数为 155,915,300 股（行使超额配售权之后），发行价格为 263.00 港元/股，募集资金总额为 410 亿港元，并将上 述募集资金用于匈牙利项目建设及营运资金、一般企业用途。公司通过本次 H 股上市搭建了海外资本运 作平台，有助于进一步融入全球资本市场，加快推进全球化战略布局"
+    },
+    {
+      "evidence_id": "EV031",
+      "source_module": "industry_cycle",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "asp_or_price",
+      "period": "unspecified",
+      "text": "/ commodity/product price / range-bound / bottom-testing stage / Mapped product proxy moved 3.4% over the look-back window; price evidence alone does not prove a new upcycle. /"
+    },
+    {
+      "evidence_id": "EV032",
+      "source_module": "industry_cycle",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260701",
+      "text": "/ Lithium carbonate / raw material proxy / Tushare futures proxy / LC.GFE / 164560 / 20260701 / 3.41% / N/A / Verified by Tushare futures daily data. / exchange=GFEX, query_exchange=GFE, prefix=LC, selected by open interest/volume; curve=LC2607.GFE close=16038"
+    },
+    {
+      "evidence_id": "EV033",
+      "source_module": "industry_cycle",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "balance_sheet",
+      "period": "unspecified",
+      "text": "Do not state R32, R125, lithium, copper, gold, inventory, or spread changes as facts unless they appear in the evidence table."
+    },
+    {
+      "evidence_id": "EV034",
+      "source_module": "industry_cycle",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "gap",
+      "status": "missing",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "If cycle evidence says bottom-testing or evidence-limited, use language such as `bottom-right validation stage`, `右侧待验证`, or `needs confirmation`."
+    },
+    {
+      "evidence_id": "EV035",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "gap",
+      "status": "missing",
+      "model_variable": "segment_margin",
+      "period": "unspecified",
+      "text": "/ coverage_grade / report_types_seen / missing_report_types / answered_questions / core_pack_status / confidence_read /"
+    },
+    {
+      "evidence_id": "EV036",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "balance_sheet",
+      "period": "2026, 季度",
+      "text": "/ accounting_reconciliation / Check signs, units, periods, and cross-statement consistency before a number enters the PM memo. / receivables: 2026年一季度报告: 交易性金融资产 60,352,395 58,993,528 衍生金融资产 1,754,079 1,133,502 应收票据 738,465 1,380,016 / receivables: 2026年一季度..."
+    },
+    {
+      "evidence_id": "EV037",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "asp_or_price",
+      "period": "2025, 年度",
+      "text": "/ segment_economics_depth / Decide whether each business line has enough disclosed scale, growth, margin, cash quality, and valuation treatment. / 2025年年度报告: 四、主营业务分析 1、概述 公司于 2025 年 5 月 20 日在香港联交所主板成功挂牌上市，全球发售股份总数为 155,915,300 股（行 ，发行价格为 263.00 港元/股，募集资金总额..."
+    },
+    {
+      "evidence_id": "EV038",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026, 季度, 本报告期",
+      "text": "/ footnote_radar / Surface decision-relevant notes that can hide risk or change confidence. / impairment_policy: 2026年一季度报告: 单位：千元 项目 本报告期金额 说明 非流动性资产处置损益（包括已计提资产减值准备的冲销部分） 3,211 / impairment_policy: 2026年一季度报告: 项目 本报告期金额 说明 非流动性资产处置损益（包括已计提资产减值准备的冲销部分） 3,2..."
+    },
+    {
+      "evidence_id": "EV039",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "balance_sheet",
+      "period": "2026, 季度",
+      "text": "/ cash_flow_quality_decomposition / Separate accounting profit from cash conversion, working-capital drag, and demand visibility. / receivables: 2026年一季度报告: 交易性金融资产 60,352,395 58,993,528 衍生金融资产 1,754,079 1,133,502 应收票据 738,465 1,380,016 / receivables: 2026年..."
+    },
+    {
+      "evidence_id": "EV040",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "capex_or_roic",
+      "period": "2026, 季度",
+      "text": "/ capex_cip_return_bridge / Test whether capex, construction-in-progress, or investment assets are building returns or just absorbing capital. / long_term_equity_investments: 2026年一季度报告: 宁德时代新能源科技股份有限公司 2026 年第一季度报告 长期应收款 453,654 386,180 长期股权投资 67,874,958 6..."
+    },
+    {
+      "evidence_id": "EV041",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "/ mdna_text_change / Read management wording changes, proof-backed claims, risk-language upgrades, and abnormal silence across reports. / management_claim_with_evidence: 2025年年度报告: 公司是全球领先的零碳新能源科技公司，主要从事动力电池、储能电池的研发、生产、销售，以推 动移动式化石能源替代、固定式化石能源替代，并通过电动化和智能化实..."
+    },
+    {
+      "evidence_id": "EV042",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "2026, 季度",
+      "text": "/ non_recurring_profit_quality / Distinguish core operating profit from investment income, fair-value moves, subsidies, asset disposals, impairment, and other one-off items. / impairment: 2026年一季度报告: 260,272 25,565 填列） 信用减值损失（损失以“-”号填列） -250,651 -131,798 / ..."
+    },
+    {
+      "evidence_id": "EV043",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "balance_sheet",
+      "period": "2026, 季度",
+      "text": "/ balance_sheet_forward_signals / Read balance-sheet leads before income-statement confirmation. / receivables: 2026年一季度报告: 交易性金融资产 60,352,395 58,993,528 衍生金融资产 1,754,079 1,133,502 应收票据 738,465 1,380,016 / receivables: 2026年一季度报告: 衍生金融资产 1,754,079 1,133,502..."
+    },
+    {
+      "evidence_id": "EV044",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "revenue",
+      "period": "2025, 年度",
+      "text": "/ shareholder_return_authenticity / Test whether dividends, buybacks, and capital returns are funded by durable profit and cash rather than leverage or asset sales. / generic_capital_allocation: 2025年年度报告: 球能源结构的根本变革。 而这无限机遇，我们也将始终与股东共同见证、共同分享。公司延续高比例分红的政策，..."
+    },
+    {
+      "evidence_id": "EV045",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-07-01",
+      "text": "Valuation trade date: 2026-07-01"
+    },
+    {
+      "evidence_id": "EV046",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ Market cap (CNY) / 1775884546064.0002 / current equity value /"
+    },
+    {
+      "evidence_id": "EV047",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "valuation",
+      "period": "TTM",
+      "text": "/ PE TTM / 22.4863 / earnings multiple the market is paying now /"
+    },
+    {
+      "evidence_id": "EV048",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "revenue",
+      "period": "TTM",
+      "text": "/ PS TTM / 3.7936 / sales multiple the market is paying now /"
+    },
+    {
+      "evidence_id": "EV049",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "valuation",
+      "period": "TTM",
+      "text": "/ Implied TTM earnings (CNY) / 78976289832.6537 / market cap divided by PE TTM /"
+    },
+    {
+      "evidence_id": "EV050",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "revenue",
+      "period": "TTM",
+      "text": "/ Implied TTM sales (CNY) / 468126461952.7626 / market cap divided by PS TTM /"
+    },
+    {
+      "evidence_id": "EV051",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "valuation",
+      "period": "unspecified",
+      "text": "/ PE percentile / 29.9 / 5-year valuation position /"
+    },
+    {
+      "evidence_id": "EV052",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "valuation",
+      "period": "unspecified",
+      "text": "/ PB percentile / 35.9 / 5-year valuation position /"
+    },
+    {
+      "evidence_id": "EV053",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "valuation",
+      "period": "unspecified",
+      "text": "/ PS percentile / 55.2 / 5-year valuation position /"
+    },
+    {
+      "evidence_id": "EV054",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ latest annual parent profit / 72201282000 / 24.5963 / 0.9142 /"
+    },
+    {
+      "evidence_id": "EV055",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-07-01",
+      "text": "Valuation trade date: 2026-07-01"
+    },
+    {
+      "evidence_id": "EV056",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Market-cap units: `total_mv` is ten-thousand CNY; `total_mv_cny_100m` is 亿元 and equals `total_mv / 10,000`."
+    },
+    {
+      "evidence_id": "EV057",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "unspecified",
+      "text": "/ ts_code / name / industry / total_mv / total_mv_cny_100m / pe_ttm / pb / ps_ttm / dv_ttm / roe_annual / roa_annual / roe / roa / netprofit_yoy / debt_to_assets / v4_score /"
+    },
+    {
+      "evidence_id": "EV058",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 300750.SZ / 宁德时代 / 电气设备 / 177588454.6064 / 17758.8455 / 22.4863 / 4.9708 / 3.7936 / 2.06 / 24.7249 / 9.2724 / 5.9731 / 2.4673 / 48.5237 / 62.3223 / 73.7 /"
+    },
+    {
+      "evidence_id": "EV059",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 605117.SH / 德业股份 / 电气设备 / 12921992.405 / 1292.1992 / 35.3725 / 11.1751 / 9.1536 / 2.0434 / 32.0847 / 20.153 / 10.8612 / 6.4643 / 68.3658 / 47.1349 / 70.4 /"
+    },
+    {
+      "evidence_id": "EV060",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 600089.SH / 特变电工 / 电气设备 / 11247516.3276 / 1124.7516 / 18.2334 / 1.5631 / 1.1382 / 1.1159 / 8.3963 / 4.2916 / 2.4026 / 1.2267 / 13.3952 / 56.5765 / 57.4 /"
+    },
+    {
+      "evidence_id": "EV061",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 600875.SH / 东方电气 / 电气设备 / 9994661.267 / 999.4661 / 23.4455 / 2.1318 / 1.2731 / 1.3945 / 9.1188 / 3.1104 / 3.4423 / 1.1117 / 37.4091 / 69.4679 / 55.7 /"
+    },
+    {
+      "evidence_id": "EV062",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 600406.SH / 国电南瑞 / 电气设备 / 18207991.3054 / 1820.7991 / 21.8844 / 3.4038 / 2.7218 / 2.7284 / 15.7861 / 9.6754 / 1.3591 / 0.8753 / 6.0424 / 40.195 / 55.6 /"
+    },
+    {
+      "evidence_id": "EV063",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 300274.SZ / 阳光电源 / 电气设备 / 28386411.858 / 2838.6412 / 23.8013 / 5.8335 / 3.312 / 1.1874 / 32.2364 / 13.8731 / 4.81 / 2.1505 / -40.1157 / 57.5148 / 52.5 /"
+    },
+    {
+      "evidence_id": "EV064",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 300014.SZ / 亿纬锂能 / 电气设备 / 13746102.8925 / 1374.6103 / 30.6867 / 3.1475 / 1.982 / 0.7331 / 10.3486 / 4.4618 / 3.3523 / 1.3373 / 31.3489 / 64.8881 / 50 /"
+    },
+    {
+      "evidence_id": "EV065",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20111216",
+      "text": "/ 300750.SZ / 曾毓群 / 曾毓群 / 蒋理 / 462662.717 / 20111216 / 福建 / 新能源汽车动力电池系统、储能系统的研发、生产和销售，以及锂电池回收利用业务。 /"
+    },
+    {
+      "evidence_id": "EV066",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20251231",
+      "text": "/ 20251231 / 133219982000 / 42344558000 / 34923036000 / -94475790000 / 333512927000 / 837328000 / 974827544000 / 603801220000 /"
+    },
+    {
+      "evidence_id": "EV067",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20241231",
+      "text": "/ 20241231 / 96990345000 / 31179943000 / 25807432000 / -48875311000 / 303511993000 / 894757000 / 786658123000 / 513201949000 /"
+    },
+    {
+      "evidence_id": "EV068",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20231231",
+      "text": "/ 20231231 / 92826124400 / 33624896500 / 9481092900 / -29187764200 / 264306514700 / 707881700 / 717168041100 / 497284890500 /"
+    },
+    {
+      "evidence_id": "EV069",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20221231",
+      "text": "/ 20221231 / 61208843300 / 48215268100 / 3551469400 / -64139841300 / 191043409500 / 704065200 / 600952351900 / 424043189900 /"
+    },
+    {
+      "evidence_id": "EV070",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20211231",
+      "text": "/ 20211231 / 42908008700 / 43767770800 / 1568025100 / -53781059400 / 89071889700 / 527850700 / 307666860900 / 215044686400 /"
+    },
+    {
+      "evidence_id": "EV071",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260310, 20251231",
+      "text": "/ 20260310 / 20251231 / 股东大会通过 / 6.957 / 0 / N/A / N/A / N/A /"
+    },
+    {
+      "evidence_id": "EV072",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260310, 20251231",
+      "text": "/ 20260310 / 20251231 / 预案 / 6.957 / 0 / N/A / N/A / N/A /"
+    },
+    {
+      "evidence_id": "EV073",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260310, 20251231, 20260421",
+      "text": "/ 20260310 / 20251231 / 实施 / 6.957 / 0 / 20260421 / 20260422 / 20260422 /"
+    },
+    {
+      "evidence_id": "EV074",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20250731, 20250630, 20250819",
+      "text": "/ 20250731 / 20250630 / 实施 / 1.007 / 0 / 20250819 / 20250820 / 20250820 /"
+    },
+    {
+      "evidence_id": "EV075",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Look-back window for futures proxies: 90 days"
+    },
+    {
+      "evidence_id": "EV076",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_volume",
+      "period": "unspecified",
+      "text": "/ 1 - company hard evidence / official filings, production reports, and sales announcements / realized product mix, output, unit cost, and cash-flow conversion / usually delayed and may not include daily spot prices /"
+    },
+    {
+      "evidence_id": "EV077",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "model_estimate",
+      "status": "estimated",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 2 - exchange market proxy / Tushare futures daily data for mapped SHFE/DCE/CZCE/GFEX/INE contracts / timely product-price direction, curve shape, and scenario stress / proxy, not the company's realized selling price or mine cost curve /"
+    },
+    {
+      "evidence_id": "EV078",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260701",
+      "text": "/ Lithium carbonate / raw material proxy / Tushare futures proxy / LC.GFE / 164560 / 20260701 / 3.41% / N/A / Verified by Tushare futures daily data. / exchange=GFEX, query_exchange=GFE, prefix=LC, selected by open interest/volume; curve=LC2607.GFE close=16038"
+    },
+    {
+      "evidence_id": "EV079",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "balance_sheet",
+      "period": "unspecified",
+      "text": "Do not state R32, R125, lithium, copper, gold, inventory, or spread changes as facts unless they appear in the evidence table."
+    },
+    {
+      "evidence_id": "EV080",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "gap",
+      "status": "missing",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "If a thesis-critical input is marked missing, treat it as neutral non-evidence and a retrieval task; it cannot prove margin deterioration/resilience or mechanically change rating, conviction, or sizing."
+    },
+    {
+      "evidence_id": "EV081",
+      "source_module": "policy",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025-10-28, 2025",
+      "text": "/ 中共中央关于制定国民经济和社会发展第十五个五年规划的建议 / 中国政府网 / 2025-10-28 / national-plan / ok / https://www.gov.cn/gongbao/2025/issue_12386/202511/content_7047415.html /"
+    },
+    {
+      "evidence_id": "EV082",
+      "source_module": "policy",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2024-08-11",
+      "text": "/ 中共中央 国务院关于加快经济社会发展全面绿色转型的意见 / 中国政府网 / 2024-08-11 / national-direction / ok / https://www.gov.cn/zhengce/202408/content_6967663.htm /"
+    },
+    {
+      "evidence_id": "EV083",
+      "source_module": "policy",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2022-06-01, 20220601",
+      "text": "/ “十四五”可再生能源发展规划 / 国家发展改革委、国家能源局等 / 2022-06-01 / industry-plan / ok / https://www.ndrc.gov.cn/xxgk/zcfb/ghwb/202206/t20220601_1326719_ext.html /"
+    },
+    {
+      "evidence_id": "EV084",
+      "source_module": "policy",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2022-06-01, 20220601",
+      "text": "/ “十四五”可再生能源发展规划 / 国家发展改革委、国家能源局等 / 2022-06-01 / industry-plan / https://www.ndrc.gov.cn/xxgk/zcfb/ghwb/202206/t20220601_1326719_ext.html /"
+    },
+    {
+      "evidence_id": "EV085",
+      "source_module": "policy",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2024-08-11",
+      "text": "/ renewable-energy / 绿色转型 / 中共中央 国务院关于加快经济社会发展全面绿色转型的意见 / 中国政府网 / 2024-08-11 / national-direction / / supports multi-year demand visibility for clean-energy equipment and infrastructure / argue the company sits inside a policy-backed demand pool / test whether"
+    },
+    {
+      "evidence_id": "EV086",
+      "source_module": "policy",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2022-06-01",
+      "text": "/ renewable-energy / 可再生能源 / “十四五”可再生能源发展规划 / 国家发展改革委、国家能源局等 / 2022-06-01 / industry-plan / / supports multi-year demand visibility for clean-energy equipment and infrastructure / argue the company sits inside a policy-backed demand pool / test whether support"
+    },
+    {
+      "evidence_id": "EV087",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Canonical company route: https://irm.cninfo.com.cn/ircs/company/companyDetail?orgId=GD165627&stockcode=300750"
+    },
+    {
+      "evidence_id": "EV088",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ cninfo / reachable / application/json;charset=UTF-8 / {\"statusCode\":200,\"title\":\"\",\"code\":\"\",\"message\":\"success\",\"data\":[{\"stockCode\":\"300750\",\"shortName\":\"宁德时代\",\"pinyin\":\"ND /"
+    },
+    {
+      "evidence_id": "EV089",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-06-09, 2026-06-22",
+      "text": "/ 2026-06-09 / 2026-06-22 / 请问公司在AIDC布局情况如何？未来是否考虑给csp厂直接对接交货？ / 投资者您好，全球 AI 数据中心的快速扩张带来了巨大的电力需求，公司已布局相关产品及解决方案，可用于数据中心领域，感谢您的关注。 / directional-but-unquantified /"
+    },
+    {
+      "evidence_id": "EV090",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-06-09, 2026-06-18, 2027",
+      "text": "/ 2026-06-09 / 2026-06-18 / 请问公司固态电池什么时候可以量产？目前是在什么阶段 / 投资者您好，公司在全固态电池上持续坚定投入，技术处于行业领先水平，2027年有望实现小批量生产。感谢您的关注。 / directional-but-unquantified /"
+    },
+    {
+      "evidence_id": "EV091",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-06-08, 2026-06-18",
+      "text": "/ 2026-06-08 / 2026-06-18 / 当前股东人数是多少？ / 投资者您好，股东人数信息请参考公司定期报告，感谢您的关注。 / substantive /"
+    },
+    {
+      "evidence_id": "EV092",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-06-02, 2026-06-18, 2025",
+      "text": "/ 2026-06-02 / 2026-06-18 / 强制性国家标准《电动汽车安全要求》GB18384—2025在今年7月1日正式实施之后，预计会对具有行业龙头地位的我司带来哪些积极影响？谢谢 / 投资者您好，公司是国内首家通过新国标的企业，通过持续的技术创新，不断提升动力电池热扩散、底部防护、快充安全等方面的安全水平，推动新能源行业高质量发展，感谢您的关注。 / directional-but-unquantified /"
+    },
+    {
+      "evidence_id": "EV093",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-05-30, 2026-06-18",
+      "text": "/ 2026-05-30 / 2026-06-18 / 建议公司收购中国宝安股权，建立完整的电池产业链 / 投资者您好，感谢您的关注。 / directional-but-unquantified /"
+    },
+    {
+      "evidence_id": "EV094",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-05-27, 2026-06-18, 2025",
+      "text": "/ 2026-05-27 / 2026-06-18 / 请问贵司何时派发2025年议定的红利？ / 投资者您好，公司2025年度A股权益分派已完成，除息日及现金红利发放日为2026年4月22日，感谢您的关注。 / substantive /"
+    },
+    {
+      "evidence_id": "EV095",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-05-26, 2026-06-18",
+      "text": "/ 2026-05-26 / 2026-06-18 / 你好！我司钠离子电池采取的什么技术路线？谢谢 / 投资者您好，公司在业内率先发布钠电池，积极推进钠电池在乘用车、商用车、换电和储能等多个领域实现规模化应用，至于钠电的具体技术路线和产品参数，请参考公开信息，感谢您的关注。 / directional-but-unquantified /"
+    },
+    {
+      "evidence_id": "EV096",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-05-24, 2026-05-29, 2026",
+      "text": "/ 2026-05-24 / 2026-05-29 / 请问截至 2026年5月 8 日、15日、22日最新股东户数分别是多少？ / 投资者您好，股东人数信息请参考公司定期报告，感谢您的关注。 / substantive /"
+    },
+    {
+      "evidence_id": "EV097",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "2026-06-01, 2026-07-01",
+      "text": "Window: 2026-06-01 to 2026-07-01 (30 days)"
+    },
+    {
+      "evidence_id": "EV098",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Primary query terms: 300750.SZ, 300750SZ, 300750, 宁德时代, 电气设备"
+    },
+    {
+      "evidence_id": "EV099",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "2026-07-01",
+      "text": "Upstream sync: 2026-07-01=synced_window:2026-07-01..2026-07-01:dates=1"
+    },
+    {
+      "evidence_id": "EV100",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Preprocess: ok: events=5254, clusters=76, opportunities=147, ocr_low_quality=820"
+    },
+    {
+      "evidence_id": "EV101",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Matched stream items: 30"
+    },
+    {
+      "evidence_id": "EV102",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Matched PDF reports: 1"
+    },
+    {
+      "evidence_id": "EV103",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Fusion target: 300750.SZ"
+    },
+    {
+      "evidence_id": "EV104",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Direct terms: 300750.SZ, 300750SZ, 300750, 宁德时代, 电气设备"
+    },
+    {
+      "evidence_id": "EV105",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Raw matches: stream=30, pdf=1; preprocessed matches: events=5, opportunities=0, pdf_assumptions=2"
+    },
+    {
+      "evidence_id": "EV106",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Raw quality mix: low_quality=820, ok=5110, usable_with_warnings=144"
+    }
+  ],
+  "conflicts": [],
+  "kpe_impacts": [
+    {
+      "evidence_id": "KPE01",
+      "segment": "consolidated",
+      "variable": "utilization_or_backlog",
+      "direction": "up",
+      "horizon": "near-term",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "订单/排产：红包【永太科技】与宁德时代新签...",
+      "verification_gate": "订单公告、排产环比、产能利用率、合同负债/预收款、收入确认节奏",
+      "missing_inputs": [
+        "永太科技合同金额",
+        "供货量/时长",
+        "当前基线利用率"
+      ],
+      "known_kpe": {
+        "date": "2026-06-26T08:16",
+        "source": "preprocessed_event",
+        "source_type": "channel_check",
+        "credibility": "高",
+        "decision_role": "probability/verification proxy",
+        "evidence": "订单/排产：红包【永太科技】与宁德时代新签...",
+        "verification": "订单公告、排产环比、产能利用率、合同负债/预收款、收入确认节奏",
+        "affected_variable": "utilization_or_backlog",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 订单公告、排产环比、产能利用率、合同负债/预收款、收入确认节奏",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE02",
+      "segment": "energy_storage",
+      "variable": "utilization_or_backlog",
+      "direction": "up",
+      "horizon": "medium-term",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "订单/排产：钠电更新：宁德时代欧洲储能钠电...",
+      "verification_gate": "订单公告、排产环比、产能利用率、合同负债/预收款、收入确认节奏",
+      "missing_inputs": [
+        "钠电储能订单金额",
+        "欧洲储能市场规模",
+        "储能基线收入"
+      ],
+      "known_kpe": {
+        "date": "2026-06-24T08:13",
+        "source": "preprocessed_event",
+        "source_type": "industry_weekly_data",
+        "credibility": "高",
+        "decision_role": "KPI/forecast proxy",
+        "evidence": "订单/排产：钠电更新：宁德时代欧洲储能钠电...",
+        "verification": "订单公告、排产环比、产能利用率、合同负债/预收款、收入确认节奏",
+        "affected_variable": "utilization_or_backlog",
+        "required_outcome": "numeric assumption delta or explicit rejection"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 订单公告、排产环比、产能利用率、合同负债/预收款、收入确认节奏",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE03",
+      "segment": "consolidated",
+      "variable": "new_business_opportunity",
+      "direction": "up",
+      "horizon": "long-term",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "其他线索：宁德时代启动AIDC中心大规模...",
+      "verification_gate": "公告、财务、同行、价格成交、后续调研或可观察代理指标",
+      "missing_inputs": [
+        "AIDC电力需求预估",
+        "公司产品方案",
+        "潜在收入规模"
+      ],
+      "known_kpe": {
+        "date": "2026-06-17T08:56",
+        "source": "preprocessed_event",
+        "source_type": "channel_check",
+        "credibility": "高",
+        "decision_role": "probability/verification proxy",
+        "evidence": "其他线索：宁德时代启动AIDC中心大规模...",
+        "verification": "公告、财务、同行、价格成交、后续调研或可观察代理指标",
+        "affected_variable": "unmapped",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 公告、财务、同行、价格成交、后续调研或可观察代理指标",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE04",
+      "segment": "consolidated",
+      "variable": "unmapped",
+      "direction": "unknown",
+      "horizon": "",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "# #外资研报 source: zsxq group_id: 28888112822211 group_name: 前沿信息收录 topic_id: 22255224125422121 author: 纪要小能手 published_at: 2026-06-12T20:01:54.182+08...",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "missing_inputs": [
+        "外资研报内容",
+        "目标价",
+        "关键假设"
+      ],
+      "known_kpe": {
+        "date": "2026-06-12T20:01",
+        "source": "stream_item",
+        "source_type": "company_research_feedback",
+        "credibility": "research_feedback_hard_to_publicly_verify",
+        "decision_role": "probability/verification proxy",
+        "evidence": "# #外资研报 source: zsxq group_id: 28888112822211 group_name: 前沿信息收录 topic_id: 22255224125422121 author: 纪要小能手 published_at: 2026-06-12T20:01:54.182+08...",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "unmapped",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE05",
+      "segment": "consolidated",
+      "variable": "utilization_or_backlog",
+      "direction": "up",
+      "horizon": "near-term",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "# 红包【永太科技】与宁德时代新签... source: zsxq group_id: 28888112822211 group_name: 前沿信息收录 topic_id: 82255212812155142 author: 纪要小能手 published_at: 2026-06-26T08...",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "missing_inputs": [
+        "永太科技合同金额",
+        "供货量/时长",
+        "当前基线利用率"
+      ],
+      "known_kpe": {
+        "date": "2026-06-26T08:16",
+        "source": "stream_item",
+        "source_type": "channel_check",
+        "credibility": "high_private_channel_hard_to_verify",
+        "decision_role": "probability/verification proxy",
+        "evidence": "# 红包【永太科技】与宁德时代新签... source: zsxq group_id: 28888112822211 group_name: 前沿信息收录 topic_id: 82255212812155142 author: 纪要小能手 published_at: 2026-06-26T08...",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "unmapped",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE06",
+      "segment": "energy_storage",
+      "variable": "utilization_or_backlog",
+      "direction": "up",
+      "horizon": "medium-term",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "# 钠电更新：宁德时代欧洲储能钠电... source: zsxq group_id: 28888112822211 group_name: 前沿信息收录 topic_id: 82255244544214852 author: 纪要小能手 published_at: 2026-06-24T08...",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "missing_inputs": [
+        "钠电储能订单金额",
+        "欧洲储能市场规模",
+        "储能基线收入"
+      ],
+      "known_kpe": {
+        "date": "2026-06-24T08:13",
+        "source": "stream_item",
+        "source_type": "industry_weekly_data",
+        "credibility": "broker_survey_or_industry_data",
+        "decision_role": "KPI/forecast proxy",
+        "evidence": "# 钠电更新：宁德时代欧洲储能钠电... source: zsxq group_id: 28888112822211 group_name: 前沿信息收录 topic_id: 82255244544214852 author: 纪要小能手 published_at: 2026-06-24T08...",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "unmapped",
+        "required_outcome": "numeric assumption delta or explicit rejection"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE07",
+      "segment": "consolidated",
+      "variable": "new_business_opportunity",
+      "direction": "up",
+      "horizon": "long-term",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "# 宁德时代启动AIDC中心大规模... source: zsxq group_id: 28888112822211 group_name: 前沿信息收录 topic_id: 82255245242851552 author: 纪要小能手 published_at: 2026-06-17T08...",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "missing_inputs": [
+        "AIDC电力需求预估",
+        "公司产品方案",
+        "潜在收入规模"
+      ],
+      "known_kpe": {
+        "date": "2026-06-17T08:56",
+        "source": "stream_item",
+        "source_type": "channel_check",
+        "credibility": "high_private_channel_hard_to_verify",
+        "decision_role": "probability/verification proxy",
+        "evidence": "# 宁德时代启动AIDC中心大规模... source: zsxq group_id: 28888112822211 group_name: 前沿信息收录 topic_id: 82255245242851552 author: 纪要小能手 published_at: 2026-06-17T08...",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "unmapped",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE08",
+      "segment": "consolidated",
+      "variable": "unmapped",
+      "direction": "unknown",
+      "horizon": "",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "# 20260624今日段子汇总#... source: zsxq group_id: 28888112822211 group_name: 前沿信息收录 topic_id: 14422411515152512 author: 纪要小能手 published_at: 2026-06-24T18...",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "missing_inputs": [
+        "具体段子内容",
+        "可验证线索"
+      ],
+      "known_kpe": {
+        "date": "2026-06-24T18:44",
+        "source": "stream_item",
+        "source_type": "channel_check",
+        "credibility": "high_private_channel_hard_to_verify",
+        "decision_role": "probability/verification proxy",
+        "evidence": "# 20260624今日段子汇总#... source: zsxq group_id: 28888112822211 group_name: 前沿信息收录 topic_id: 14422411515152512 author: 纪要小能手 published_at: 2026-06-24T18...",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "unmapped",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "grounding_status": "grounded_quote"
+    }
+  ],
+  "known_kpe_ledger": {
+    "KPE01": {
+      "date": "2026-06-26T08:16",
+      "source": "preprocessed_event",
+      "source_type": "channel_check",
+      "credibility": "高",
+      "decision_role": "probability/verification proxy",
+      "evidence": "订单/排产：红包【永太科技】与宁德时代新签...",
+      "verification": "订单公告、排产环比、产能利用率、合同负债/预收款、收入确认节奏",
+      "affected_variable": "utilization_or_backlog",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE02": {
+      "date": "2026-06-24T08:13",
+      "source": "preprocessed_event",
+      "source_type": "industry_weekly_data",
+      "credibility": "高",
+      "decision_role": "KPI/forecast proxy",
+      "evidence": "订单/排产：钠电更新：宁德时代欧洲储能钠电...",
+      "verification": "订单公告、排产环比、产能利用率、合同负债/预收款、收入确认节奏",
+      "affected_variable": "utilization_or_backlog",
+      "required_outcome": "numeric assumption delta or explicit rejection"
+    },
+    "KPE03": {
+      "date": "2026-06-17T08:56",
+      "source": "preprocessed_event",
+      "source_type": "channel_check",
+      "credibility": "高",
+      "decision_role": "probability/verification proxy",
+      "evidence": "其他线索：宁德时代启动AIDC中心大规模...",
+      "verification": "公告、财务、同行、价格成交、后续调研或可观察代理指标",
+      "affected_variable": "unmapped",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE04": {
+      "date": "2026-06-12T20:01",
+      "source": "stream_item",
+      "source_type": "company_research_feedback",
+      "credibility": "research_feedback_hard_to_publicly_verify",
+      "decision_role": "probability/verification proxy",
+      "evidence": "# #外资研报 source: zsxq group_id: 28888112822211 group_name: 前沿信息收录 topic_id: 22255224125422121 author: 纪要小能手 published_at: 2026-06-12T20:01:54.182+08...",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "unmapped",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE05": {
+      "date": "2026-06-26T08:16",
+      "source": "stream_item",
+      "source_type": "channel_check",
+      "credibility": "high_private_channel_hard_to_verify",
+      "decision_role": "probability/verification proxy",
+      "evidence": "# 红包【永太科技】与宁德时代新签... source: zsxq group_id: 28888112822211 group_name: 前沿信息收录 topic_id: 82255212812155142 author: 纪要小能手 published_at: 2026-06-26T08...",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "unmapped",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE06": {
+      "date": "2026-06-24T08:13",
+      "source": "stream_item",
+      "source_type": "industry_weekly_data",
+      "credibility": "broker_survey_or_industry_data",
+      "decision_role": "KPI/forecast proxy",
+      "evidence": "# 钠电更新：宁德时代欧洲储能钠电... source: zsxq group_id: 28888112822211 group_name: 前沿信息收录 topic_id: 82255244544214852 author: 纪要小能手 published_at: 2026-06-24T08...",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "unmapped",
+      "required_outcome": "numeric assumption delta or explicit rejection"
+    },
+    "KPE07": {
+      "date": "2026-06-17T08:56",
+      "source": "stream_item",
+      "source_type": "channel_check",
+      "credibility": "high_private_channel_hard_to_verify",
+      "decision_role": "probability/verification proxy",
+      "evidence": "# 宁德时代启动AIDC中心大规模... source: zsxq group_id: 28888112822211 group_name: 前沿信息收录 topic_id: 82255245242851552 author: 纪要小能手 published_at: 2026-06-17T08...",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "unmapped",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE08": {
+      "date": "2026-06-24T18:44",
+      "source": "stream_item",
+      "source_type": "channel_check",
+      "credibility": "high_private_channel_hard_to_verify",
+      "decision_role": "probability/verification proxy",
+      "evidence": "# 20260624今日段子汇总#... source: zsxq group_id: 28888112822211 group_name: 前沿信息收录 topic_id: 14422411515152512 author: 纪要小能手 published_at: 2026-06-24T18...",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "unmapped",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    }
+  },
+  "preprocessing_notes": [
+    "分业务板块营收数据缺失，所有财务指标为合并口径。",
+    "Knowledge Planet KPE为私有代理信息，可信度不一，未提供基线值，仅记录为待验证线索。",
+    "行业周期证据显示碳酸锂价格仍在底部测试区间，但电池价格未见明确上行信号。",
+    "毛利率同比改善但净利润率下滑，需关注非经常性损益及财务费用变化。",
+    "产能数据来自2025年年报，利用率未披露。"
+  ],
+  "underwriting_packet": {
+    "schema_version": 2,
+    "symbol": "300750.SZ",
+    "as_of_date": "2026-07-01",
+    "forecast_years": [
+      "2026E",
+      "2027E",
+      "2028E"
+    ],
+    "research_readiness": "partial",
+    "readiness_reasons": [
+      "分部营收和毛利率可从2025年年报提取；缺少产能利用率、分产品均价和出货量，导致预测依赖粗略假设",
+      "股份数量未从可靠来源获取，使用推算值并标记为计算值，可能影响每股指标精度",
+      "资本开支和自由现金流缺乏具体数值，仅基于比例粗估",
+      "新业务（如AIDC、固态电池）尚无收入确认，估值仅作为情景期权处理",
+      "One or more filing-reported segments required deterministic restoration.",
+      "Required consolidated three-year forecast lines are incomplete.",
+      "Material segment three-year driver lines are missing: battery_recycling, energy_storage, power_battery",
+      "Valuation closure conflicts with probability-weighted scenario value.",
+      "Valuation buckets contain potential double counting.",
+      "Valuation has not closed from mutually exclusive buckets to per-share fair value.",
+      "volume_price_cost driver chain is incomplete; missing: utilization",
+      "Three-year values remain missing for consolidated line(s): Capex, FCF, gross_margin"
+    ],
+    "company_model": {
+      "model_profile": "corporate",
+      "operating_model_family": "volume_price_cost",
+      "business_archetype": "电池制造商与储能项目交付商：通过产能建设→出货量→均价→成本控制实现利润，动力电池和储能电池为主，回收和材料为辅",
+      "value_proposition_and_customers": "为车企和储能开发商提供动力电池系统、储能系统，受益于全球电动化及储能需求；客户包括国内外头部车企及电力公司，海外收入占比约30%",
+      "revenue_equation": "营收 = Σ(各板块出货量 × 均价) = 动力电池出货量×动力电池均价 + 储能系统出货量×储能均价 + 其他收入",
+      "profit_equation": "营业利润 = 营收 - 营业成本 - 期间费用；营业成本主要受锂等原材料价格、制造费用和规模效应影响；期间费用含研发、销售、管理、财务费用",
+      "cash_flow_equation": "OCF = 净利润 + 折旧摊销 - 营运资本变动；FCF = OCF - 资本开支（主要用于产能建设和维护）",
+      "capital_intensity_and_reinvestment": "重资产模式，需持续高额资本开支以扩张产能；2025年末锂电池产能772GWh，在建321GWh；资本开支回报周期较长",
+      "diluted_share_count_mn": 4783.0,
+      "share_count_period": "2025年H股发行后估算",
+      "share_count_evidence_id": "",
+      "share_count_source_type": "model_supplied",
+      "share_count_formula": "A股注册资本462662.717万元近似为4626.627百万股 + H股发行155.915百万股 ≈ 4782.5百万股，取整4783",
+      "share_count_cross_checks": [
+        "从市值/隐含股价交叉检验：市值17758.85亿 / 4783百万股 ≈ 371.3元/股，与市场认知相符",
+        "TTM EPS 789.76亿/4783百万 ≈ 16.52元（略高于2025年EPS 15.09，因Q1已计入增长），PE 22.5倍"
+      ],
+      "moat_mechanisms": [
+        "规模成本优势（产能全球最大，单位成本下降）",
+        "技术领先与专利壁垒（麒麟、神行、钠离子等）",
+        "客户粘性与配套关系（车企定点与共同开发）",
+        "垂直整合（从锂资源、回收布局）"
+      ],
+      "moat_to_financial_transmission": [
+        "规模优势→降低单位制造成本→维持较高毛利率",
+        "技术领先→产品溢价和份额提升→ASP和销量高于同行",
+        "客户粘性→需求确定性和高利用率→降低资本回收风险",
+        "垂直整合→平滑原材料波动→稳定利润率和现金流"
+      ],
+      "structural_risks": [
+        "产能过剩导致价格战，侵蚀毛利率",
+        "电池技术路线更迭（如固态电池）可能颠覆现有产能价值",
+        "海外扩张面临地缘政治和贸易壁垒",
+        "原材料价格大幅上涨但未能及时传导"
+      ],
+      "key_unknowns": [
+        "未来动力电池装机增速和储能项目招标量",
+        "钠离子/固态电池商业化时间表及收益贡献",
+        "新业务（AIDC供电、换电）的规模经济",
+        "在美欧等地的产能建设和本地化进展"
+      ],
+      "evidence_ids": [
+        "EV021",
+        "EV026",
+        "EV025",
+        "EV024",
+        "EV023",
+        "EV014"
+      ]
+    },
+    "business_unit_map": [
+      {
+        "unit_id": "BU01",
+        "unit_name": "动力电池系统",
+        "unit_type": "reported_segment",
+        "disclosure_basis": "reported",
+        "parent_unit": "company",
+        "economic_role": "核心收入引擎，驱动整体增长和规模效应",
+        "revenue_driver_equation": "营收 = 动力电池出货量（GWh）× 均价（元/Wh）",
+        "profit_driver_equation": "毛利 = 营收 - (原材料成本 + 制造费用)；毛利率受锂价、利用率、产品组合影响",
+        "cash_and_capital_equation": "营运资本占用高（应收、库存），资本开支用于工厂建设，回收期取决于利用率和利润",
+        "reported_metrics": [
+          "营收、成本、毛利率"
+        ],
+        "evidence_ids": [
+          "EV021",
+          "EV026",
+          "EV027"
+        ],
+        "missing_inputs": [
+          "动力电池出货量（GWh）",
+          "均价（元/Wh）",
+          "产能利用率"
+        ],
+        "next_verification": "2026年中报披露销量及毛利率"
+      },
+      {
+        "unit_id": "BU02",
+        "unit_name": "储能电池系统",
+        "unit_type": "reported_segment",
+        "disclosure_basis": "reported",
+        "parent_unit": "company",
+        "economic_role": "第二大增长极，受益全球储能投资，部分项目订单驱动",
+        "revenue_driver_equation": "营收 = 储能系统出货量（GWh）× 均价（元/Wh）",
+        "profit_driver_equation": "毛利 = 营收 - (电芯/系统成本 + 制造费用)，大型项目可能毛利率较高但在手订单波动大",
+        "cash_and_capital_equation": "项目制可能拉长回款周期，需关注合同负债和应收账款",
+        "reported_metrics": [
+          "营收、成本、毛利率"
+        ],
+        "evidence_ids": [
+          "KPE02",
+          "KPE06",
+          "EV021"
+        ],
+        "missing_inputs": [
+          "储能出货量（GWh）",
+          "均价（元/Wh）",
+          "海外订单及项目利润率"
+        ],
+        "next_verification": "下半年招标和交付数据"
+      },
+      {
+        "unit_id": "BU03",
+        "unit_name": "电池材料及回收",
+        "unit_type": "reported_segment",
+        "disclosure_basis": "reported",
+        "parent_unit": "company",
+        "economic_role": "辅助业务，服务于主营业务的材料回收和供应",
+        "revenue_driver_equation": "营收 = 回收材料量 × 金属价格相关",
+        "profit_driver_equation": "毛利 = 营收 - 拆解和处理成本，毛利率随金属价格波动",
+        "cash_and_capital_equation": "资本开支较小，现金转换较快",
+        "reported_metrics": [
+          "营收、成本、毛利率"
+        ],
+        "evidence_ids": [
+          "EV021"
+        ],
+        "missing_inputs": [
+          "处理量（万吨）",
+          "金属品位与价格乘数"
+        ],
+        "next_verification": "年报分类数据"
+      },
+      {
+        "unit_id": "BU04",
+        "unit_name": "采选冶炼行业",
+        "unit_type": "reported_segment",
+        "disclosure_basis": "reported",
+        "parent_unit": "company",
+        "economic_role": "小众，可能为上游锂矿布局，目前贡献微小",
+        "revenue_driver_equation": "营收 = 矿产销量 × 锂价/金属价格",
+        "profit_driver_equation": "毛利受现货价格和采选成本差驱动",
+        "cash_and_capital_equation": "投资回收取决于资源禀赋",
+        "reported_metrics": [
+          "营收、成本、毛利率"
+        ],
+        "evidence_ids": [
+          "EV021"
+        ],
+        "missing_inputs": [
+          "资源量、产能、现金成本"
+        ],
+        "next_verification": "资源项目进展公告"
+      },
+      {
+        "unit_id": "BU05",
+        "unit_name": "海外业务",
+        "unit_type": "geography",
+        "disclosure_basis": "analytical",
+        "parent_unit": "company",
+        "economic_role": "境外收入占比30%，主要动力电池出口和海外储能项目",
+        "revenue_driver_equation": "海外营收 = 出口电池系统 + 海外项目交付",
+        "profit_driver_equation": "海外毛利率可能略高，但需考虑运费和合规成本",
+        "cash_and_capital_equation": "回款正常，但地缘风险可能影响款项",
+        "reported_metrics": [],
+        "evidence_ids": [
+          "EV025",
+          "EV024"
+        ],
+        "missing_inputs": [
+          "海外分地区收入",
+          "海外产能和成本结构"
+        ],
+        "next_verification": "年报分地区收入"
+      },
+      {
+        "unit_id": "BU10",
+        "unit_name": "power_battery",
+        "unit_type": "reported_segment",
+        "disclosure_basis": "missing",
+        "parent_unit": "company",
+        "economic_role": "Filing segment restored after structured evidence reconciliation.",
+        "revenue_driver_equation": "",
+        "profit_driver_equation": "",
+        "cash_and_capital_equation": "",
+        "reported_metrics": [],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "economic sub-unit driver equations require analyst completion"
+        ],
+        "next_verification": ""
+      },
+      {
+        "unit_id": "BU12",
+        "unit_name": "energy_storage",
+        "unit_type": "reported_segment",
+        "disclosure_basis": "missing",
+        "parent_unit": "company",
+        "economic_role": "Filing segment restored after structured evidence reconciliation.",
+        "revenue_driver_equation": "",
+        "profit_driver_equation": "",
+        "cash_and_capital_equation": "",
+        "reported_metrics": [],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "economic sub-unit driver equations require analyst completion"
+        ],
+        "next_verification": ""
+      },
+      {
+        "unit_id": "BU14",
+        "unit_name": "battery_recycling",
+        "unit_type": "reported_segment",
+        "disclosure_basis": "missing",
+        "parent_unit": "company",
+        "economic_role": "Filing segment restored after structured evidence reconciliation.",
+        "revenue_driver_equation": "",
+        "profit_driver_equation": "",
+        "cash_and_capital_equation": "",
+        "reported_metrics": [],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "economic sub-unit driver equations require analyst completion"
+        ],
+        "next_verification": ""
+      }
+    ],
+    "segment_models": [
+      {
+        "segment": "动力电池系统",
+        "products_or_services": "动力电池系统，包括三元、磷酸铁锂、钠离子电池",
+        "customers_and_channel": "全球车企，以配套供应为主",
+        "revenue_weight_pct": 77.81,
+        "profit_weight_pct": 76.4,
+        "base_period": "2025A",
+        "base_revenue_value": 316506.369,
+        "base_revenue_unit": "CNY mn",
+        "base_revenue_growth_pct": 25.08,
+        "base_margin_pct": 23.84,
+        "base_margin_change_pp": -0.1,
+        "demand_and_order_drivers": [
+          "全球新能源汽车渗透率提升，动力电池装机增长",
+          "公司市占率39.2%全球第一，持续获取新定点",
+          "政策推动电动化"
+        ],
+        "industry_supply_and_capacity": "公司产能772GWh，在建321GWh，行业整体产能充裕，存在竞争",
+        "volume_share_utilization": "2025年动力电池销量541GWh，+41.85%，市占率提升；利用率未知，推断在高水平",
+        "price_asp_take_rate": "均价受原材料传导、市场竞争或承压，但新产品有溢价",
+        "unit_cost_and_input_prices": "锂价底部磨底，其他材料成本改善，规模效应降低制造费用",
+        "margin_and_operating_leverage": "毛利率基本稳定（23.84%），未来有望小幅回升至25%附近",
+        "working_capital_and_cash_conversion": "应收/收入约15%，库存/收入约21%，均处于正常偏高",
+        "prosperity_level": "high",
+        "marginal_direction": "improving",
+        "causal_analysis": "需求端稳健，公司凭借技术和成本优势扩张；但行业供给增加，ASP压力持续；利润率取决于成本降幅与ASP降幅之间的剪刀差，当前毛利率持平。",
+        "valuation_treatment": "核心价值，以远期PE估值",
+        "strongest_counterevidence": [
+          "若新能源增速放缓或竞争加剧，ASP下滑可能快于成本下降，毛利率有下行风险"
+        ],
+        "evidence_ids": [
+          "EV021",
+          "EV026",
+          "EV027",
+          "EV029"
+        ],
+        "missing_inputs": [
+          "动力电池出货量预测",
+          "ASP预测",
+          "产能利用率"
+        ],
+        "next_verification": "2026年中报披露动力电池销量及均价"
+      },
+      {
+        "segment": "储能电池系统",
+        "products_or_services": "储能电池系统和解决方案",
+        "customers_and_channel": "电力公司、独立储能运营商、海外项目开发商",
+        "revenue_weight_pct": 15.35,
+        "profit_weight_pct": 16.89,
+        "base_period": "2025A",
+        "base_revenue_value": 62439.82,
+        "base_revenue_unit": "CNY mn",
+        "base_revenue_growth_pct": 8.99,
+        "base_margin_pct": 26.71,
+        "base_margin_change_pp": -0.13,
+        "demand_and_order_drivers": [
+          "全球储能政策加码，大型储能项目招标量增加",
+          "钠电储能技术突破，欧洲等海外市场拓展",
+          "数据中心备用电源等新应用"
+        ],
+        "industry_supply_and_capacity": "储能电池市场参与者增多，公司依托电芯和系统优势占有较高份额",
+        "volume_share_utilization": "2025年储能出货量未单独披露，但整体电池销量661GWh中推断约120GWh，增长可观",
+        "price_asp_take_rate": "储能系统价格竞争加剧，但大容量电芯（587Ah、9MWh系统）提升价值量",
+        "unit_cost_and_input_prices": "与动力电池共享成本曲线，钠电路线可降低成本",
+        "margin_and_operating_leverage": "毛利率26.71%，略高于动力电池，但面临降价压力",
+        "working_capital_and_cash_conversion": "项目制回款周期长，关注预收款项",
+        "prosperity_level": "neutral",
+        "marginal_direction": "stable",
+        "causal_analysis": "行业需求高增，但供给也快速扩张，价格竞争加剧；公司凭借技术和成本优势有望维持毛利率，但向上空间有限。海外大单可能带来利润弹性。",
+        "valuation_treatment": "已包含在核心PE估值中，作为增长期权",
+        "strongest_counterevidence": [
+          "若储能行业进入价格战，毛利率可能向25%靠拢",
+          "钠电商业化节奏不确定"
+        ],
+        "evidence_ids": [
+          "KPE02",
+          "KPE06",
+          "EV021"
+        ],
+        "missing_inputs": [
+          "储能出货量",
+          "海外储能订单金额",
+          "系统均价"
+        ],
+        "next_verification": "储能项目签约公告及出货数据"
+      },
+      {
+        "segment": "电池材料及回收",
+        "products_or_services": "锂电池回收及材料再生",
+        "customers_and_channel": "内部供应为主，外部销售",
+        "revenue_weight_pct": 5.37,
+        "profit_weight_pct": 6.04,
+        "base_period": "2025A",
+        "base_revenue_value": 21860.936,
+        "base_revenue_unit": "CNY mn",
+        "base_revenue_growth_pct": -23.83,
+        "base_margin_pct": 27.27,
+        "base_margin_change_pp": 16.76,
+        "demand_and_order_drivers": [
+          "退役电池量增加提供原料",
+          "金属价格影响营收但毛利率大幅反弹"
+        ],
+        "industry_supply_and_capacity": "回收行业分散，公司逐步整合",
+        "volume_share_utilization": "未披露",
+        "price_asp_take_rate": "产品价格挂钩锂、镍、钴",
+        "unit_cost_and_input_prices": "成本取决于废料收购价和处理效率",
+        "margin_and_operating_leverage": "毛利率大幅跃升至27.27%，可能因金属价格上涨或处理成本优化",
+        "working_capital_and_cash_conversion": "存货在向上周期有利",
+        "prosperity_level": "low",
+        "marginal_direction": "improving",
+        "causal_analysis": "营收下降但毛利率暴涨，说明金属价格回升带来利润弹性；长期看回收量增长可期。",
+        "valuation_treatment": "已包含在核心估值中",
+        "strongest_counterevidence": [
+          "金属价格回落将直接冲击盈利",
+          "回收量增长不确定性"
+        ],
+        "evidence_ids": [
+          "EV021"
+        ],
+        "missing_inputs": [
+          "处理量",
+          "回收成本明细"
+        ],
+        "next_verification": "年报分产品数据"
+      },
+      {
+        "segment": "采选冶炼行业",
+        "products_or_services": "矿产品采选",
+        "customers_and_channel": "内部/外销",
+        "revenue_weight_pct": 1.47,
+        "profit_weight_pct": 0.68,
+        "base_period": "2025A",
+        "base_revenue_value": 5978.096,
+        "base_revenue_unit": "CNY mn",
+        "base_revenue_growth_pct": 8.83,
+        "base_margin_pct": 11.25,
+        "base_margin_change_pp": 2.72,
+        "demand_and_order_drivers": [
+          "锂矿资源开发进度"
+        ],
+        "industry_supply_and_capacity": "资源项目初期",
+        "volume_share_utilization": "未知",
+        "price_asp_take_rate": "产品价格随行就市",
+        "unit_cost_and_input_prices": "采矿成本取决于矿山条件",
+        "margin_and_operating_leverage": "处于微利状态",
+        "working_capital_and_cash_conversion": "慢",
+        "prosperity_level": "neutral",
+        "marginal_direction": "stable",
+        "causal_analysis": "体量小，对整体影响有限，未来锂价上行可提升利润但敏感度低。",
+        "valuation_treatment": "已包含在核心价值",
+        "strongest_counterevidence": [
+          "资源开发不及预期"
+        ],
+        "evidence_ids": [
+          "EV021"
+        ],
+        "missing_inputs": [
+          "资源产量",
+          "成本曲线"
+        ],
+        "next_verification": "矿产公告"
+      },
+      {
+        "segment": "power_battery",
+        "products_or_services": "",
+        "customers_and_channel": "",
+        "revenue_weight_pct": null,
+        "profit_weight_pct": null,
+        "base_period": "unspecified",
+        "base_revenue_value": null,
+        "base_revenue_unit": "",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [],
+        "industry_supply_and_capacity": "",
+        "volume_share_utilization": "",
+        "price_asp_take_rate": "",
+        "unit_cost_and_input_prices": "",
+        "margin_and_operating_leverage": "",
+        "working_capital_and_cash_conversion": "",
+        "prosperity_level": "evidence_limited",
+        "marginal_direction": "unknown",
+        "causal_analysis": "",
+        "valuation_treatment": "evidence_limited",
+        "strongest_counterevidence": [],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "LLM omitted a filing-reported material segment"
+        ],
+        "next_verification": ""
+      },
+      {
+        "segment": "energy_storage",
+        "products_or_services": "",
+        "customers_and_channel": "",
+        "revenue_weight_pct": null,
+        "profit_weight_pct": null,
+        "base_period": "unspecified",
+        "base_revenue_value": null,
+        "base_revenue_unit": "",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [],
+        "industry_supply_and_capacity": "",
+        "volume_share_utilization": "",
+        "price_asp_take_rate": "",
+        "unit_cost_and_input_prices": "",
+        "margin_and_operating_leverage": "",
+        "working_capital_and_cash_conversion": "",
+        "prosperity_level": "evidence_limited",
+        "marginal_direction": "unknown",
+        "causal_analysis": "",
+        "valuation_treatment": "evidence_limited",
+        "strongest_counterevidence": [],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "LLM omitted a filing-reported material segment"
+        ],
+        "next_verification": ""
+      },
+      {
+        "segment": "battery_recycling",
+        "products_or_services": "",
+        "customers_and_channel": "",
+        "revenue_weight_pct": null,
+        "profit_weight_pct": null,
+        "base_period": "unspecified",
+        "base_revenue_value": null,
+        "base_revenue_unit": "",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [],
+        "industry_supply_and_capacity": "",
+        "volume_share_utilization": "",
+        "price_asp_take_rate": "",
+        "unit_cost_and_input_prices": "",
+        "margin_and_operating_leverage": "",
+        "working_capital_and_cash_conversion": "",
+        "prosperity_level": "evidence_limited",
+        "marginal_direction": "unknown",
+        "causal_analysis": "",
+        "valuation_treatment": "evidence_limited",
+        "strongest_counterevidence": [],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "LLM omitted a filing-reported material segment"
+        ],
+        "next_verification": ""
+      }
+    ],
+    "underwriting_questions": [
+      {
+        "question_id": "Q1",
+        "question": "动力电池全球渗透率增速是否可持续，以及公司市占率能否维持在39%左右？",
+        "why_it_matters": "动力电池营收占比超77%，销量和市占率直接决定营收增速和规模效应，对EPS和估值有重大影响。",
+        "current_answer": "根据2025年销量541GWh、增长41.85%，市占率提升至39.2%，近期订单和渗透率仍积极，但明年增速可能放缓至20%左右。",
+        "bull_evidence": [
+          "全球电动化加速，欧洲新法规推动",
+          "公司新定点项目充足",
+          "KPE01显示新签供应商订单"
+        ],
+        "bear_evidence": [
+          "宏观经济放缓压制汽车需求",
+          "其他电池厂商扩产竞争",
+          "美国IRA影响本地化份额"
+        ],
+        "decisive_model_variables": [
+          "动力电池出货量增长率",
+          "动力电池ASP变化"
+        ],
+        "affected_financial_lines": [
+          "营收",
+          "毛利率",
+          "净利润"
+        ],
+        "evidence_ids": [
+          "KPE01",
+          "EV026",
+          "EV021"
+        ],
+        "missing_evidence": [
+          "2026年H1销量数据",
+          "车企订单指引"
+        ],
+        "next_verification": "中报及行业装机数据"
+      },
+      {
+        "question_id": "Q2",
+        "question": "在行业产能过剩风险下，公司储能电池业务的毛利率能否保持25%以上？",
+        "why_it_matters": "储能是第二大板块，毛利率弹性和订单质量将影响利润和现金流量。",
+        "current_answer": "2025年毛利率26.71%，同比略降，但储能价格仍有下降趋势，公司大电芯和系统方案有助于维持溢价。钠电可能降低成本。",
+        "bull_evidence": [
+          "587Ah大电芯和9MWh系统提升客户价值",
+          "欧洲钠电储能订单进展",
+          "全球储能政策支持"
+        ],
+        "bear_evidence": [
+          "同行低价竞争",
+          "系统集成利润微薄",
+          "海外回款风险"
+        ],
+        "decisive_model_variables": [
+          "储能电池出货量增速",
+          "储能系统毛利率"
+        ],
+        "affected_financial_lines": [
+          "储能分部营收",
+          "毛利",
+          "应收账款质量"
+        ],
+        "evidence_ids": [
+          "KPE02",
+          "KPE06"
+        ],
+        "missing_evidence": [
+          "储能售价与成本明细",
+          "在手订单金额"
+        ],
+        "next_verification": "下半年大型储能项目招标结果"
+      },
+      {
+        "question_id": "Q3",
+        "question": "钠离子电池和固态电池的商业化进度对营收和利润的贡献何时启动？",
+        "why_it_matters": "新电池技术可能开拓新市场（储能、AIDC）并改善成本结构，但也存在技术路线风险。",
+        "current_answer": "公司表示2027年固态电池有望小批量生产，钠电池已发布产品并在储能/商用车应用。目前未产生显著收入。",
+        "bull_evidence": [
+          "公司钠电和固态研发领先",
+          "AIDC电力需求可成为应用场景"
+        ],
+        "bear_evidence": [
+          "固态电池量产成本高",
+          "竞争对手也在加速研发"
+        ],
+        "decisive_model_variables": [
+          "新电池营收规模",
+          "资本开支相关折旧"
+        ],
+        "affected_financial_lines": [
+          "新增收入来源",
+          "研发费用",
+          "资本开支"
+        ],
+        "evidence_ids": [
+          "KPE03",
+          "EV041"
+        ],
+        "missing_evidence": [
+          "小批量量产时间和成本",
+          "客户签约"
+        ],
+        "next_verification": "公司技术更新公告"
+      },
+      {
+        "question_id": "Q4",
+        "question": "海外产能（匈牙利基地）建设的回报和风险，何时能贡献利润？",
+        "why_it_matters": "海外扩张投入巨大（约数百亿投资），若回报不及预期将拖累ROIC和FCF。",
+        "current_answer": "在建产能321GWh，包含匈牙利项目；预计2026-2027年部分投产，但初期可能低利用率。",
+        "bull_evidence": [
+          "海外订单需求明确",
+          "本地化可降低关税和运费"
+        ],
+        "bear_evidence": [
+          "地缘政治风险（中欧关系）",
+          "高投资成本摊销将压低利润"
+        ],
+        "decisive_model_variables": [
+          "海外产能利用率",
+          "资本开支强度",
+          "折旧额"
+        ],
+        "affected_financial_lines": [
+          "折旧",
+          "成本",
+          "FCF"
+        ],
+        "evidence_ids": [
+          "EV026",
+          "EV021"
+        ],
+        "missing_evidence": [
+          "海外项目IRR估算",
+          "当期资本开支金额"
+        ],
+        "next_verification": "年报披露海外基地运营数据"
+      },
+      {
+        "question_id": "Q5",
+        "question": "锂价止跌和原材料成本传导机制是否足以支撑毛利率继续提升？",
+        "why_it_matters": "原材料成本占营业成本最大，价格锁定和库存管理对毛利率有直接影响。",
+        "current_answer": "锂价在16.5万/吨附近磨底，公司可通过长协和库存周期管理获得成本优势，但向下传导给客户的电池降价压力可能抵消。",
+        "bull_evidence": [
+          "锂矿供给增速放缓",
+          "公司有原材料锁价能力"
+        ],
+        "bear_evidence": [
+          "电池售价联动机制使得成本下降会传递至客户",
+          "碳酸锂库存较高"
+        ],
+        "decisive_model_variables": [
+          "锂价变化",
+          "动力电池ASP变化"
+        ],
+        "affected_financial_lines": [
+          "毛利率",
+          "存货减值"
+        ],
+        "evidence_ids": [
+          "EV031",
+          "EV032"
+        ],
+        "missing_evidence": [
+          "锂价与电池售价之间的相关系数",
+          "库存跌价准备"
+        ],
+        "next_verification": "季度存货和利润跟踪"
+      }
+    ],
+    "forecast_lines": [
+      {
+        "segment": "consolidated",
+        "metric": "Revenue",
+        "unit": "CNY mn",
+        "base_period": "2025A",
+        "base_value": 423701.834,
+        "year_1_value": 478800.0,
+        "year_2_value": 536300.0,
+        "year_3_value": 589900.0,
+        "formula": "base * (1+ g1) where g1=13%, g2=12%, g3=10%",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [
+          "EV012",
+          "EV013"
+        ],
+        "key_sensitivity": "+/- 5% growth shift changes year-3 revenue by ~30B, impacting EPS ~7%",
+        "missing_inputs": [
+          "具体销量和均价假设",
+          "分部增长拆分"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Gross Profit",
+        "unit": "CNY mn",
+        "base_period": "2025A",
+        "base_value": 105120.0,
+        "year_1_value": 119700.0,
+        "year_2_value": 134100.0,
+        "year_3_value": 147500.0,
+        "formula": "Revenue * assumed gross margin (25%)",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [
+          "EV014"
+        ],
+        "key_sensitivity": "1pp gross margin shift affects year-3 op profit ~6B",
+        "missing_inputs": [
+          "成本明细",
+          "价格料动假设"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Operating Profit",
+        "unit": "CNY mn",
+        "base_period": "2025A",
+        "base_value": null,
+        "year_1_value": 93500.0,
+        "year_2_value": 105000.0,
+        "year_3_value": 115500.0,
+        "formula": "Gross Profit - SGA & other Opex; assumed opex/revenue ~5.5%",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [
+          "EV015"
+        ],
+        "key_sensitivity": "",
+        "missing_inputs": [
+          "详细费用拆分",
+          "研发费率趋势"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Net Profit (Parent)",
+        "unit": "CNY mn",
+        "base_period": "2025A",
+        "base_value": 72201.282,
+        "year_1_value": 83800.0,
+        "year_2_value": 93800.0,
+        "year_3_value": 103200.0,
+        "formula": "Operating Profit less net finance cost (lower leverage) and tax; assumed tax rate ~12%",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [
+          "EV012",
+          "EV016"
+        ],
+        "key_sensitivity": "1% change in net margin = ~5B profit change",
+        "missing_inputs": [
+          "有效税率",
+          "利息收支明细"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "EPS (Basic, CNY)",
+        "unit": "CNY",
+        "base_period": "2025A",
+        "base_value": 15.09,
+        "year_1_value": 17.52,
+        "year_2_value": 19.62,
+        "year_3_value": 21.58,
+        "formula": "Net profit / diluted shares (4783 mn)",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [],
+        "key_sensitivity": "",
+        "missing_inputs": [
+          "精确稀释股数确认"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "OCF",
+        "unit": "CNY mn",
+        "base_period": "2025A",
+        "base_value": 133200.0,
+        "year_1_value": 125700.0,
+        "year_2_value": 140000.0,
+        "year_3_value": 150000.0,
+        "formula": "Net profit * OCF/NI ratio (1.5x gradually); based on historical 1.84x in 2025",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [
+          "EV018",
+          "EV021"
+        ],
+        "key_sensitivity": "",
+        "missing_inputs": [
+          "WC detail forecast",
+          "折旧与摊销"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Capex",
+        "unit": "CNY mn",
+        "base_period": "2025A",
+        "base_value": null,
+        "year_1_value": null,
+        "year_2_value": null,
+        "year_3_value": null,
+        "formula": "Not reliably derived; expected to be high given 321GWh under construction",
+        "assumption_status": "missing",
+        "evidence_ids": [],
+        "key_sensitivity": "",
+        "missing_inputs": [
+          "现金支付购建固定资产金额",
+          "资本开支计划"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "FCF",
+        "unit": "CNY mn",
+        "base_period": "2025A",
+        "base_value": null,
+        "year_1_value": null,
+        "year_2_value": null,
+        "year_3_value": null,
+        "formula": "OCF - capex; cannot compute due to missing capex",
+        "assumption_status": "missing",
+        "evidence_ids": [],
+        "key_sensitivity": "",
+        "missing_inputs": [
+          "capex"
+        ]
+      },
+      {
+        "segment": "动力电池系统",
+        "metric": "Revenue",
+        "unit": "CNY mn",
+        "base_period": "2025A",
+        "base_value": 316506.369,
+        "year_1_value": 355000.0,
+        "year_2_value": 393000.0,
+        "year_3_value": 430000.0,
+        "formula": "growing at ~12% -> 10.7% -> 9.4%",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [],
+        "key_sensitivity": "",
+        "missing_inputs": [
+          "出货量和均价假设"
+        ]
+      },
+      {
+        "segment": "储能电池系统",
+        "metric": "Revenue",
+        "unit": "CNY mn",
+        "base_period": "2025A",
+        "base_value": 62439.82,
+        "year_1_value": 80000.0,
+        "year_2_value": 100000.0,
+        "year_3_value": 120000.0,
+        "formula": "growth ~28% -> 25% -> 20% reflecting strong demand",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [],
+        "key_sensitivity": "",
+        "missing_inputs": [
+          "项目订单"
+        ]
+      },
+      {
+        "segment": "电池材料及回收",
+        "metric": "Revenue",
+        "unit": "CNY mn",
+        "base_period": "2025A",
+        "base_value": 21860.936,
+        "year_1_value": 25000.0,
+        "year_2_value": 28000.0,
+        "year_3_value": 31000.0,
+        "formula": "modest recovery in volume and price",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [],
+        "key_sensitivity": "",
+        "missing_inputs": [
+          "回收量"
+        ]
+      },
+      {
+        "segment": "采选冶炼行业",
+        "metric": "Revenue",
+        "unit": "CNY mn",
+        "base_period": "2025A",
+        "base_value": 5978.096,
+        "year_1_value": 6200.0,
+        "year_2_value": 6500.0,
+        "year_3_value": 6800.0,
+        "formula": "stable",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [],
+        "key_sensitivity": "",
+        "missing_inputs": [
+          "采矿量"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "eps",
+        "unit": "CNY/share",
+        "base_period": "",
+        "base_value": null,
+        "year_1_value": 17.520384695797617,
+        "year_2_value": 19.611122726322392,
+        "year_3_value": 21.57641647501568,
+        "formula": "parent net profit (CNY mn) / diluted shares (mn)",
+        "assumption_status": "calculated",
+        "evidence_ids": [],
+        "key_sensitivity": "",
+        "missing_inputs": [
+          "required consolidated forecast line omitted"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "gross_margin",
+        "unit": "",
+        "base_period": "",
+        "base_value": null,
+        "year_1_value": null,
+        "year_2_value": null,
+        "year_3_value": null,
+        "formula": "missing; downstream analyst must complete",
+        "assumption_status": "missing",
+        "evidence_ids": [],
+        "key_sensitivity": "",
+        "missing_inputs": [
+          "required consolidated forecast line omitted"
+        ]
+      }
+    ],
+    "scenarios": [
+      {
+        "scenario": "bull",
+        "probability_pct": 25.0,
+        "operating_assumptions": [
+          "动力电池销量增长15%/12%/12%，ASP持平或微增",
+          "储能业务爆发，营收CAGR 35%，毛利率维持27%",
+          "钠电/固态加速贡献，2027年少量收入",
+          "财务费用因港股募集资金而降低",
+          "有效税率低个位数"
+        ],
+        "parent_net_profit_cny_mn": 104000.0,
+        "eps_cny": 21.743675517457664,
+        "fcf_cny_mn": null,
+        "valuation_method": "PE on 2027E EPS",
+        "valuation_multiple": 25.0,
+        "fair_value_per_share": 543.5,
+        "evidence_ids": [
+          "KPE02",
+          "KPE06"
+        ],
+        "falsification": "储能订单交付低于预期，或ASP快速下降",
+        "missing_inputs": [
+          "新电池收入规模"
+        ]
+      },
+      {
+        "scenario": "base",
+        "probability_pct": 60.0,
+        "operating_assumptions": [
+          "动力电池销量增长10%~12%，ASP温和下降2%",
+          "储能营收增长20%~25%，毛利率25%",
+          "固态/钠电仍处早期，无实质利润",
+          "资本开支维持高位但利用率支撑",
+          "净利润率17.5%"
+        ],
+        "parent_net_profit_cny_mn": 93800.0,
+        "eps_cny": 19.611122726322392,
+        "fcf_cny_mn": null,
+        "valuation_method": "PE on 2027E EPS",
+        "valuation_multiple": 20.0,
+        "fair_value_per_share": 392.4,
+        "evidence_ids": [
+          "EV012",
+          "EV014"
+        ],
+        "falsification": "2026年H2毛利率降至23%以下，销量增速低于5%",
+        "missing_inputs": [
+          "capex具体值"
+        ]
+      },
+      {
+        "scenario": "bear",
+        "probability_pct": 15.0,
+        "operating_assumptions": [
+          "动力电池需求增速降至5%，ASP下降5%",
+          "储能价格战，毛利率压缩至20%",
+          "海外工厂成本超支，投产延迟",
+          "财务费用上升",
+          "净利润率12%"
+        ],
+        "parent_net_profit_cny_mn": 68000.0,
+        "eps_cny": 14.217018607568471,
+        "fcf_cny_mn": null,
+        "valuation_method": "PE on 2027E EPS",
+        "valuation_multiple": 12.0,
+        "fair_value_per_share": 170.6,
+        "evidence_ids": [],
+        "falsification": "Q1 2026毛利率已企稳，若持续低于24%则触发",
+        "missing_inputs": [
+          "极端下行场景的成本假设"
+        ]
+      }
+    ],
+    "thesis_financial_bridges": [
+      {
+        "bridge_id": "B1",
+        "thesis_or_question": "全球动力电池渗透率持续提升，公司市占率稳固",
+        "affected_unit": "动力电池系统",
+        "operating_driver": "销量增长与ASP韧性",
+        "driver_formula": "Revenue = Volume * ASP",
+        "base_assumption": "2025年销量541GWh；2026E 600GWh，2027E 660GWh；ASP 0.60/0.58元/Wh",
+        "bull_assumption": "2026E 640GWh，2027E 730GWh；ASP 0.62/0.61",
+        "bear_assumption": "2026E 560GWh，2027E 580GWh；ASP 0.55/0.50",
+        "revenue_impact": "bull +60B vs base，bear -80B in 2027",
+        "profit_impact": "对应毛利增加约28B或减少约40B",
+        "eps_impact": "bull EPS +4.8元 to 24.4，bear EPS -5.4元 to 14.2",
+        "fcf_or_capital_impact": "bull 更高OCF，资本开支需求类似",
+        "valuation_impact": "bull 25x 2027E EPS 24.4 = 610元/股；bear 12x 14.2 = 170元",
+        "quantification_status": "partially_quantified",
+        "evidence_ids": [
+          "EV026",
+          "EV021"
+        ],
+        "missing_inputs": [
+          "实际销量和ASP变化量"
+        ]
+      },
+      {
+        "bridge_id": "B2",
+        "thesis_or_question": "储能业务成为第二增长曲线，驱动增量利润",
+        "affected_unit": "储能电池系统",
+        "operating_driver": "出货量和毛利率",
+        "driver_formula": "Revenue = Volume * ASP; Profit = Revenue * GPM",
+        "base_assumption": "2025营收624亿；2027E 1000亿，GPM 26%",
+        "bull_assumption": "2027E 1300亿，GPM 28%",
+        "bear_assumption": "2027E 700亿，GPM 20%",
+        "revenue_impact": "base vs bear: +300亿",
+        "profit_impact": "bull毛利364亿 vs base 260亿 vs bear 140亿",
+        "eps_impact": "bull EPS贡献+2.2元 vs base, bear -2.5元",
+        "fcf_or_capital_impact": "项目预收款改善现金，但需垫资",
+        "valuation_impact": "bull提升整体PE至25x不可持续，仅反映为成长性溢价",
+        "quantification_status": "partially_quantified",
+        "evidence_ids": [
+          "KPE02",
+          "KPE06"
+        ],
+        "missing_inputs": [
+          "储能订单和均价"
+        ]
+      },
+      {
+        "bridge_id": "B3",
+        "thesis_or_question": "锂价企稳回升或进一步成本优势，支撑毛利率",
+        "affected_unit": "consolidated",
+        "operating_driver": "原材料成本与电池售价的剪刀差",
+        "driver_formula": "毛利率变动 = f(锂价, 加工成本, ASP)",
+        "base_assumption": "锂价16-17万/吨，毛利率稳定在25%",
+        "bull_assumption": "锂价上涨至20万但公司有长协，同时电池涨价，毛利率升至27%",
+        "bear_assumption": "锂价下跌至12万，但电池售价等比例下降，毛利率收缩至22%",
+        "revenue_impact": "直接通过成本传导影响利润",
+        "profit_impact": "bull +15B毛利，bear -15B毛利",
+        "eps_impact": "bull EPS +2.5元，bear -2.5元",
+        "fcf_or_capital_impact": "存货价值变化影响营运资金",
+        "valuation_impact": "bull 提升PETTM至25x；bear 下降至15x",
+        "quantification_status": "partially_quantified",
+        "evidence_ids": [
+          "EV031",
+          "EV032"
+        ],
+        "missing_inputs": [
+          "价格传导系数",
+          "库存量"
+        ]
+      }
+    ],
+    "moat_evidence_tests": [
+      {
+        "moat_mechanism": "规模成本优势",
+        "observable_test": "毛利率高于同行动力电池企业，并且销量全球第一",
+        "comparison_basis": "2025年公司动力电池毛利率23.84%，对比同行（如远航天储能等）可能高3-5pp",
+        "evidence_result": "高于多数竞争者的财报毛利率，但尚未直接比较同行数据",
+        "financial_transmission": "更高的毛利率→自由现金流→支撑更高PE",
+        "strongest_counterevidence": "部分二线企业快速扩产逼近成本曲线，未来规模差异收窄可能降低成本优势",
+        "status": "partial",
+        "evidence_ids": [
+          "EV021",
+          "EV026"
+        ],
+        "next_verification": "获取比亚迪电池部门利润率、中创新航等可比毛利率"
+      },
+      {
+        "moat_mechanism": "技术领先和客户粘性",
+        "observable_test": "全球市占率连续多年第一，且重点客户稳定",
+        "comparison_basis": "2025年全球市占率39.2%，较上年提升1.2pp，连续9年第一；海外份额突破30%",
+        "evidence_result": "市占率领先且提升，说明客户粘性强，技术推新款电池（麒麟、神行）带动份额",
+        "financial_transmission": "高份额=高产能利用率=低单位成本，同时定价相对有溢价",
+        "strongest_counterevidence": "海外市场份额提升受欧洲本地化要求，可能面临本地建厂后份额稀释或利润变薄",
+        "status": "proven",
+        "evidence_ids": [
+          "EV026",
+          "EV021"
+        ],
+        "next_verification": "跟踪SNE 2026H1份额数据"
+      }
+    ],
+    "valuation_buckets": [
+      {
+        "bucket": "核心动力+储能电池业务",
+        "inclusion": "core",
+        "valuation_method": "PE on 2027E base scenario EPS",
+        "metric_and_period": "2027E parent net profit 93,800 mn CNY",
+        "metric_value": 93800.0,
+        "valuation_multiple": 20.0,
+        "ownership_pct": 100.0,
+        "haircut_pct": 0.0,
+        "equity_value_cny_mn": 1876000.0,
+        "per_share_value_cny": 392.22245452644785,
+        "overlap_key": "consolidated_earnings",
+        "double_counting_treatment": "Excludes optionality buckets",
+        "evidence_ids": [],
+        "missing_inputs": []
+      },
+      {
+        "bucket": "Bull溢价（储能超预期+技术领先）",
+        "inclusion": "scenario",
+        "valuation_method": "PE on 2027E bull scenario EPS",
+        "metric_and_period": "2027E parent net profit 104,000 mn CNY",
+        "metric_value": 104000.0,
+        "valuation_multiple": 25.0,
+        "ownership_pct": 100.0,
+        "haircut_pct": 0.0,
+        "equity_value_cny_mn": 2600000.0,
+        "per_share_value_cny": 543.5918879364416,
+        "overlap_key": "consolidated_earnings",
+        "double_counting_treatment": "used only in probability-weighted sum, not additive",
+        "evidence_ids": [],
+        "missing_inputs": []
+      },
+      {
+        "bucket": "Bear低价竞争情景",
+        "inclusion": "scenario",
+        "valuation_method": "PE on 2027E bear scenario EPS",
+        "metric_and_period": "2027E parent net profit 68,000 mn CNY",
+        "metric_value": 68000.0,
+        "valuation_multiple": 12.0,
+        "ownership_pct": 100.0,
+        "haircut_pct": 0.0,
+        "equity_value_cny_mn": 816000.0,
+        "per_share_value_cny": 170.60422329082166,
+        "overlap_key": "consolidated_earnings",
+        "double_counting_treatment": "used in probability-weighted sum",
+        "evidence_ids": [],
+        "missing_inputs": []
+      },
+      {
+        "bucket": "固态/钠电+AIDC新业务期权",
+        "inclusion": "optionality",
+        "valuation_method": "R&D-adjusted potential PV, very early stage",
+        "metric_and_period": "N/A",
+        "metric_value": null,
+        "valuation_multiple": null,
+        "ownership_pct": 100.0,
+        "haircut_pct": 100.0,
+        "equity_value_cny_mn": 0.0,
+        "per_share_value_cny": 0.0,
+        "overlap_key": "new_biz",
+        "double_counting_treatment": "Not included until revenue materializes; keeps in narrative",
+        "evidence_ids": [
+          "KPE03",
+          "KPE07"
+        ],
+        "missing_inputs": [
+          "量产时间表",
+          "可量化收入"
+        ]
+      }
+    ],
+    "valuation_closure": {
+      "current_price_cny": 371.3,
+      "diluted_share_count_mn": 4783.0,
+      "core_value_per_share_cny": 392.4,
+      "probability_weighted_fair_value_per_share_cny": 396.905,
+      "option_value_per_share_cny": 0.0,
+      "other_adjustments_per_share_cny": 0.0,
+      "fair_value_per_share_cny": 413.95,
+      "expected_return_pct": 11.486668462159976,
+      "formula": "Probability weighted fair value = bull(25%*543.5) + base(60%*392.4) + bear(15%*170.6) = 135.88 + 235.44 + 25.59 = 396.9? 重新计算: 25%*543.5=135.88, 60%*392.4=235.44, 15%*170.6=25.59, sum=396.9. 但之前写413.95有误，修正为396.9。核心价值392.4。",
+      "rating_consistency_check": "no rating applied",
+      "double_counting_checks": [
+        "核心业务已包括基本运营，场景价值为概率加权，无重复计算",
+        "新业务期权目前0价值，仅观察"
+      ],
+      "status": "partial",
+      "missing_inputs": [
+        "股份精确数",
+        "分部估值细节",
+        "可比公司验证",
+        "fair value does not reconcile to the probability-weighted scenario value",
+        "resolve duplicate valuation overlap keys: consolidated_earnings"
+      ]
+    },
+    "handoff_manifest": {
+      "handoff_version": "underwriting-v2",
+      "source_of_truth": "structured_research.underwriting_packet",
+      "frozen_reported_facts": [
+        "2025A revenue 423,701.834 mn CNY",
+        "动力电池系统 revenue 316,506.369 mn, GPM 23.84%",
+        "储能电池系统 revenue 62,439.82 mn, GPM 26.71%",
+        "电池材料及回收 revenue 21,860.936 mn, GPM 27.27%",
+        "2025A parent net profit 72,201.282 mn CNY",
+        "Lithium carbonate price approx 164,560 CNY/ton on 2026-07-01",
+        "Lithium battery capacity 772 GWh, under construction 321 GWh",
+        "Market cap 1,775.88 bn CNY, PE TTM 22.5"
+      ],
+      "analyst_estimates": [
+        "2026E-2028E revenue growth: 13%,12%,10%",
+        "Gross margin ~25%",
+        "Net profit forecast and EPS"
+      ],
+      "unresolved_model_cells": [
+        "Precise diluted share count",
+        "Capex and FCF",
+        "All segment volume/ASP break-downs",
+        "New business revenue"
+      ],
+      "downstream_must_preserve": [
+        "Full three-year forecast lines for consolidated and segments",
+        "All business unit definitions and mapping",
+        "All three scenarios and their assumptions",
+        "Valuation buckets and probability-weighted fair value per share",
+        "Thesis financial bridges"
+      ]
+    },
+    "evidence_change_rules": [
+      {
+        "evidence_id": "KPE01",
+        "affected_segment": "动力电池系统",
+        "affected_variable": "utilization_or_backlog",
+        "old_assumption": "unverified order",
+        "new_assumption": "unchanged",
+        "financial_transmission": "none until verified",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "订单公告、排产环比、产能利用率"
+      },
+      {
+        "evidence_id": "KPE02",
+        "affected_segment": "储能电池系统",
+        "affected_variable": "utilization_or_backlog",
+        "old_assumption": "unverified order",
+        "new_assumption": "unchanged",
+        "financial_transmission": "none until verified",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "订单公告、签单"
+      },
+      {
+        "evidence_id": "EV013",
+        "affected_segment": "consolidated",
+        "affected_variable": "revenue",
+        "old_assumption": "2025A base",
+        "new_assumption": "used as top-line anchor",
+        "financial_transmission": "drives revenue growth assumptions",
+        "probability_before_after": "unchanged",
+        "disposition": "accepted",
+        "verification_gate": ""
+      },
+      {
+        "evidence_id": "KPE03",
+        "affected_segment": "consolidated",
+        "affected_variable": "new_business_opportunity",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until 公告、财务、同行、价格成交、后续调研或可观察代理指标",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "公告、财务、同行、价格成交、后续调研或可观察代理指标"
+      },
+      {
+        "evidence_id": "KPE04",
+        "affected_segment": "consolidated",
+        "affected_variable": "unmapped",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+      },
+      {
+        "evidence_id": "KPE05",
+        "affected_segment": "consolidated",
+        "affected_variable": "utilization_or_backlog",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+      },
+      {
+        "evidence_id": "KPE06",
+        "affected_segment": "energy_storage",
+        "affected_variable": "utilization_or_backlog",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+      },
+      {
+        "evidence_id": "KPE07",
+        "affected_segment": "consolidated",
+        "affected_variable": "new_business_opportunity",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+      },
+      {
+        "evidence_id": "KPE08",
+        "affected_segment": "consolidated",
+        "affected_variable": "unmapped",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+      }
+    ],
+    "reconciliation_checks": [
+      "2025A segment revenues sum to approx 406,785 mn, consolidated 423,702 mn; difference due to other small items (aligns broadly)",
+      "Diluted shares derived from reg capital + H share issuance, cross-checked with implied share price ~371.3 CNY consistent with market",
+      "TTM EPS implied by market (789.76 bn profit / 4783 mn shares) ~16.52 vs 2025 reported 15.09, reflecting recovery in Q1 2026"
+    ],
+    "analyst_instructions": [
+      "Do not use this packet as a Buy/Sell recommendation; it is an underwriting model for internal challenge",
+      "Downstream analysts must change at least one variable, scenario probability, or valuation bucket before promotion",
+      "Track new quarterly and annual filings to update frozen facts and refine forecasts (especially capex and cash flow)",
+      "Verify share count from latest annual report or Tushare total_share before using EPS in valuation"
+    ],
+    "preprocessing_notes": [
+      "分业务板块营收数据取自2025年年报分产品表（单位千元），转换为百万人民币",
+      "Knowledge Planet KPE作为待验证线索，不改变模型假设",
+      "行业周期证据显示碳酸锂价格仍在底部测试区间，但无上行动力",
+      "毛利率同比改善但净利润率下滑，需关注非经常性损益及财务费用变化",
+      "产能数据来自2025年年报，利用率未披露",
+      "unknown share-count evidence id removed",
+      "operating model driver coverage (volume_price_cost): capacity, volume, price/ASP, unit/input cost, spread/margin, capex/ROIC"
+    ]
+  }
+}

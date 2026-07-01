@@ -119,3 +119,28 @@ def test_demand_terms_alone_do_not_trigger_building_materials_context(monkeypatc
     rendered = get_building_materials_context("301396.SZ", "2026-06-02")
 
     assert "Status: not_applicable" in rendered
+
+
+def test_building_materials_context_does_not_misroute_chemical_pipe_mentions(monkeypatch):
+    monkeypatch.setattr(
+        building_materials_research,
+        "_fetch_stock_basic",
+        lambda symbol: pd.Series({"name": "万华化学", "industry": "化工原料"}),
+    )
+    monkeypatch.setattr(
+        building_materials_research,
+        "_load_financial_report_texts",
+        lambda symbol, curr_date, look_back_days: (
+            pd.DataFrame(),
+            [
+                (
+                    "annual",
+                    "公司生产MDI、TDI与石化产品，部分材料用于保温板、涂料和管道应用，但主营业务并非建材生产销售。",
+                )
+            ],
+        ),
+    )
+
+    rendered = get_building_materials_context("600309.SH", "2026-06-30")
+
+    assert "Status: not_applicable" in rendered

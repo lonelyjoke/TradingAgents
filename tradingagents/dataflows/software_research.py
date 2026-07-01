@@ -132,6 +132,29 @@ SOFTWARE_TERMS = (
     "AI",
 )
 
+SOFTWARE_IDENTITY_TERMS = (
+    "软件",
+    "SaaS",
+    "IT服务",
+    "信息技术服务",
+    "金融IT",
+    "工业软件",
+    "网络安全",
+    "云服务",
+)
+
+SOFTWARE_ECONOMIC_TERMS = (
+    "软件收入",
+    "软件业务",
+    "订阅收入",
+    "授权收入",
+    "云服务收入",
+    "技术服务收入",
+    "付费用户",
+    "续费率",
+    "ARR",
+)
+
 
 @dataclass(frozen=True)
 class SoftwareProfile:
@@ -156,6 +179,11 @@ def _contains_terms(terms: tuple[str, ...], *parts: object) -> bool:
     return any(term.lower() in text.lower() for term in terms)
 
 
+def _term_hit_count(terms: tuple[str, ...], text: str) -> int:
+    lowered = text.lower()
+    return sum(1 for term in terms if term.lower() in lowered)
+
+
 def _company_profile(symbol: str, curr_date: str, look_back_days: int) -> SoftwareProfile | None:
     basic = _safe_fetch("stock_basic", _fetch_stock_basic, symbol)
     curated = SOFTWARE_COMPANIES.get(symbol, {})
@@ -171,8 +199,13 @@ def _company_profile(symbol: str, curr_date: str, look_back_days: int) -> Softwa
         return None
     if symbol in SOFTWARE_COMPANIES:
         reason = "curated A-share software / SaaS ticker list"
-    elif _contains_terms(SOFTWARE_TERMS, company_name, industry, text_probe):
-        reason = "company name / Tushare industry / filing text contains software terms"
+    elif _contains_terms(SOFTWARE_IDENTITY_TERMS, company_name, industry):
+        reason = "company name or Tushare industry identifies a software / IT-services business"
+    elif (
+        _term_hit_count(SOFTWARE_IDENTITY_TERMS, text_probe) >= 2
+        and _contains_terms(SOFTWARE_ECONOMIC_TERMS, text_probe)
+    ):
+        reason = "filing text contains multiple software identity terms plus software-native revenue/KPI evidence"
     else:
         return None
 

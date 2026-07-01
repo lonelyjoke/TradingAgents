@@ -1,0 +1,6 @@
+{
+  "mode": "schema_repaired_fallback",
+  "agent": "Portfolio Manager",
+  "structured_error": "Error code: 400 - {'error': {'message': 'Thinking mode does not support this tool_choice', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_request_error'}}",
+  "schema": "SellSidePMDecision"
+}

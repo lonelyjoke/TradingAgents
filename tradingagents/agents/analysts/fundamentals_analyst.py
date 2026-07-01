@@ -4,6 +4,7 @@ from tradingagents.agents.utils.agent_utils import (
     get_balance_sheet,
     get_buy_side_accounting_radar_instruction,
     get_buy_side_thesis_instruction,
+    get_company_depth_contract_instruction,
     get_commodity_context,
     get_compute_leasing_context,
     get_compute_leasing_instruction,
@@ -261,6 +262,7 @@ def create_fundamentals_analyst(llm):
             + get_derived_financial_metric_instruction()
             + get_buy_side_accounting_radar_instruction()
             + get_buy_side_thesis_instruction()
+            + get_company_depth_contract_instruction()
             + get_material_catalyst_instruction()
             + get_filing_intelligence_instruction()
             + get_peer_selection_instruction()

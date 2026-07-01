@@ -21,6 +21,7 @@ from .research_evidence import extract_evidence_records
 from .underwriting_packet import (
     build_company_underwriting_packet,
     compact_underwriting_packet,
+    derive_share_count_control,
 )
 
 
@@ -326,6 +327,11 @@ _SEGMENT_NUMERIC_COMPACT_ROW_RE = re.compile(
     r"(?P<margin_change>-?\d+(?:\.\d+)?)%?"
 )
 
+_DIRECTIONAL_MARGIN_CHANGE_RE = re.compile(
+    r"(?P<direction>增加|上升|提升|减少|下降|下滑)\s*"
+    r"(?P<value>\d+(?:\.\d+)?)\s*(?:个?百分点|%)?"
+)
+
 
 def _clean_segment_name(value: str) -> str:
     name = re.sub(r"\s+", " ", str(value or "")).strip(" :：-/")
@@ -343,6 +349,47 @@ def _clean_segment_name(value: str) -> str:
         name,
     ).strip()
     return name[-32:].strip()
+
+
+def _signed_directional_change(text: str, *, anchored: bool = False) -> float | None:
+    pattern = _DIRECTIONAL_MARGIN_CHANGE_RE
+    match = pattern.match(text.strip()) if anchored else None
+    if match is None and not anchored:
+        matches = list(pattern.finditer(text))
+        match = matches[-1] if matches else None
+    if match is None:
+        return None
+    value = float(match.group("value"))
+    if match.group("direction") in {"减少", "下降", "下滑"}:
+        value = -value
+    return value
+
+
+def _strip_embedded_margin_change(name: str) -> tuple[str, float | None]:
+    """Remove PDF-wrapped ``减少 1.38`` text from a segment label."""
+    matches = list(_DIRECTIONAL_MARGIN_CHANGE_RE.finditer(name))
+    if not matches:
+        return name, None
+    match = matches[-1]
+    if name[match.end() :].strip():
+        return name, None
+    cleaned = name[: match.start()].strip()
+    return cleaned, _signed_directional_change(match.group(0))
+
+
+def _complete_truncated_segment_name(name: str, corpus: str) -> str:
+    """Recover short PDF column truncations from names present in filing prose."""
+    endings = ("系统", "部件", "业务", "产品", "服务", "板块", "材料", "设备")
+    if len(name) > 5 or name.endswith(endings):
+        return name
+    candidates: list[str] = []
+    for extra_chars in range(1, 5):
+        pattern = re.compile(re.escape(name) + rf"[\u4e00-\u9fff]{{{extra_chars}}}")
+        for match in pattern.finditer(corpus):
+            candidate = match.group(0)
+            if candidate.endswith(endings):
+                candidates.append(candidate)
+    return min(candidates, key=len) if candidates else name
 
 
 def _prosperity_from_reported_growth(
@@ -388,7 +435,9 @@ def _deterministic_segment_profiles(
         "总计",
         "其他",
     }
-    for source_module in ("filing_intelligence", "company_business_model"):
+    source_modules = ("filing_intelligence", "company_business_model")
+    corpus = "\n".join(contexts.get(source, "") for source in source_modules)
+    for source_module in source_modules:
         text = contexts.get(source_module, "")
         for raw in text.splitlines():
             line = re.sub(r"\s+", " ", raw.strip())
@@ -401,14 +450,40 @@ def _deterministic_segment_profiles(
                 matches = list(_SEGMENT_NUMERIC_COMPACT_ROW_RE.finditer(line))
             for match in matches:
                 name = _clean_segment_name(match.group("name"))
-                if not name or name in excluded or len(name) < 2:
+                name, wrapped_margin_change = _strip_embedded_margin_change(name)
+                name = _complete_truncated_segment_name(name, corpus)
+                if (
+                    not name
+                    or name in excluded
+                    or len(name) < 2
+                    or re.search(r"\d", name)
+                    or any(token in name for token in ("增加", "减少", "上升", "下降"))
+                ):
                     continue
                 revenue = float(match.group("revenue").replace(",", ""))
                 cost = float(match.group("cost").replace(",", ""))
                 margin = float(match.group("margin"))
                 growth = float(match.group("growth"))
-                margin_change = float(match.group("margin_change"))
-                if revenue <= 0 or not (-100.0 <= margin <= 100.0):
+                trailing_margin_change = _signed_directional_change(
+                    line[match.end() : match.end() + 40], anchored=True
+                )
+                margin_change = (
+                    trailing_margin_change
+                    if trailing_margin_change is not None
+                    else wrapped_margin_change
+                    if wrapped_margin_change is not None
+                    else float(match.group("margin_change"))
+                )
+                implied_margin = (revenue - cost) / revenue * 100.0 if revenue else None
+                if (
+                    revenue <= 0
+                    or cost < 0
+                    or not (-100.0 <= margin <= 100.0)
+                    or implied_margin is None
+                    or abs(implied_margin - margin) > 0.35
+                    or not (-100.0 <= growth <= 1000.0)
+                    or not (-100.0 <= margin_change <= 100.0)
+                ):
                     continue
                 candidates.setdefault(
                     _normalize(name),
@@ -709,6 +784,68 @@ def build_structured_research_bundle(
             item["control_flags"] = []
         validated_metrics.append(item)
 
+    share_control = derive_share_count_control(contexts)
+    canonical_shares_mn = share_control.get("canonical_share_count_mn")
+    if canonical_shares_mn:
+        profit_by_period: dict[str, float] = {}
+        for item in validated_metrics:
+            variable = str(item.get("variable", "")).lower()
+            if variable not in {
+                "net_profit_parent",
+                "parent_net_profit",
+                "n_income_attr_p",
+            }:
+                continue
+            value = _safe_float(item.get("value"))
+            if value is None:
+                continue
+            unit = str(item.get("unit", "")).lower()
+            if unit in {"cny", "rmb", "yuan"}:
+                value /= 1_000_000.0
+            elif unit not in {"cny mn", "cny_mn", "rmb mn"}:
+                continue
+            profit_by_period[str(item.get("period", ""))] = value
+        for item in validated_metrics:
+            variable = str(item.get("variable", "")).lower()
+            if variable not in {
+                "eps",
+                "basic_eps",
+                "diluted_eps",
+                "earnings_per_share",
+            }:
+                continue
+            period = str(item.get("period", ""))
+            profit_cny_mn = profit_by_period.get(period)
+            reported_eps = _safe_float(item.get("value"))
+            if profit_cny_mn is None or reported_eps is None:
+                continue
+            implied_eps = profit_cny_mn / float(canonical_shares_mn)
+            difference_pct = (
+                abs(reported_eps - implied_eps) / max(abs(implied_eps), 0.01) * 100.0
+            )
+            if difference_pct <= 2.0:
+                continue
+            item["control_flags"] = list(
+                dict.fromkeys(
+                    [
+                        *item.get("control_flags", []),
+                        "eps_profit_share_count_conflict",
+                        "pdf_table_column_shift_suspected",
+                    ]
+                )
+            )
+            item["evidence_status"] = "unverified"
+            item["rejected_value"] = reported_eps
+            item["value"] = None
+            item["value_text"] = (
+                f"rejected {reported_eps}; implied EPS is {implied_eps:.4f} from "
+                "parent profit / deterministic diluted shares"
+            )
+            errors.append(
+                f"rejected {period} EPS {reported_eps}: parent profit / diluted "
+                f"shares implies {implied_eps:.4f} ({difference_pct:.1f}% difference)"
+            )
+
     quantified_kpe: list[dict[str, Any]] = []
     quantified_ids: set[str] = set()
     for hypothesis in semantic.kpe_hypotheses:
@@ -788,7 +925,7 @@ def build_structured_research_bundle(
 def compact_structured_research_for_prompt(
     bundle: Mapping[str, Any] | None,
     *,
-    max_chars: int = 18000,
+    max_chars: int = 26000,
 ) -> str:
     if not bundle:
         return "{}"

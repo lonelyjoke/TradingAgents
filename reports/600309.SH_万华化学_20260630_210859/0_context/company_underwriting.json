@@ -1,0 +1,1312 @@
+{
+  "schema_version": 2,
+  "symbol": "600309.SH",
+  "as_of_date": "2026-06-30",
+  "forecast_years": [
+    "2026E",
+    "2027E",
+    "2028E"
+  ],
+  "research_readiness": "partial",
+  "readiness_reasons": [
+    "Only consolidated Q1 2026 and FY2025 financials available; full segment-level revenue, gross margin, capacity, and utilization data are missing from filings.",
+    "Battery materials segment qualitatively described but no revenue, margin, or capacity disclosure; analytical unit only.",
+    "Commodity/margin-critical MDI and other product price spread data absent from evidence payload.",
+    "KPE02-KPE08 lack actionable text for model variable mapping; only KPE01 provides a directional polyurethane export demand signal.",
+    "Valuation percentile divergence (PE high vs PB/PS low) unresolved and requires reconciliation with forward earnings assumptions.",
+    "One or more filing-reported segments required deterministic restoration.",
+    "Required consolidated three-year forecast lines are incomplete.",
+    "Material segment three-year driver lines are missing: 化工行业, 电池材料, 聚氨酯",
+    "Valuation buckets contain potential double counting.",
+    "Valuation has not closed from mutually exclusive buckets to per-share fair value."
+  ],
+  "company_model": {
+    "model_profile": "corporate",
+    "operating_model_family": "volume_price_cost",
+    "business_archetype": "Integrated chemical manufacturer (polyurethane, petrochemical, specialty chemicals, battery materials). Core is a product manufacturing / capacity-output archetype where revenue = volume × ASP, profit = volume × (ASP - unit cost) × mix - fixed costs, and cash flow depends on working capital, maintenance capex, and expansion capex cycles.",
+    "value_proposition_and_customers": "Wanhua Chemical is the world's largest MDI producer, serving downstream industries (construction, automotive, appliance, coatings, footwear) with deep cost integration from coal/benzene to final polyurethane materials. Expanding into battery chemicals (LFP, graphite, electrolyte precursors) for EV/ESS customers. Core value proposition is cost leadership in MDI, quality/scale in petrochemicals, and product innovation/iteration in new materials. Customers are industrial OEMs and fabricators; demand is tied to global manufacturing and construction cycles.",
+    "revenue_equation": "Consolidated Revenue = Σ segment_i (volume_i × realized price_i). Key segments: MDI/polyurethane, petrochemical, specialty chemicals, battery materials. Reported FY2025 revenue = 203.23 bn CNY; Q1 2026 annualized revenue ≈ 216.21 bn CNY (simple run-rate) or ≈ 219.93 bn CNY (seasonality-adjusted). Revenue growth historically driven by volume expansion (new capacity) and price cycles.",
+    "profit_equation": "Gross Profit = Revenue × Gross Margin; current Q1 2026 gross margin = 14.73% (-0.98pp YoY). Operating Profit = Gross Profit - SGA&R&D; Q1 2026 operating margin = 9.81% (+0.49pp YoY). Parent Net Profit = Operating Profit - finance costs ± non-recurring items - minority interest - tax; Q1 2026 net margin = 6.88% (-0.28pp YoY). FY2025 parent net profit = 12.527 bn CNY. Profit swings driven primarily by MDI price/spread cycles and Petrochemical cracker profitability.",
+    "cash_flow_equation": "OCF = Parent Net Profit + D&A ± working capital changes; Q1 2026 OCF/NI ratio = 1.84x (strong). FCF = OCF - maintenance capex - expansion capex. Working-capital efficiency improving: Receivables/Rev = 6.96% (-1.27pp YoY), Inventory/Rev = 13.29% (-2.77pp YoY). High expansion capex load expected (chemical investment cycle) partially offset by healthy operating cash generation.",
+    "capital_intensity_and_reinvestment": "Asset-heavy, high fixed-cost operating leverage. Total assets ≈ 216 bn CNY, total liabilities ≈ 142 bn CNY (implied debt-to-assets ~66%; peer comparison gives 64.32%). FY2025 R&D expense = 4.865 bn CNY. Heavy capex cycle continues for POE, battery materials, and petrochemical integration; ROIC highly dependent on cycle margins and utilization on new capacity.",
+    "diluted_share_count_mn": 173.5,
+    "share_count_period": "2026 Q1 (calculated from market cap / price, cross-checked with diluted EPS)",
+    "share_count_evidence_id": "",
+    "moat_mechanisms": [
+      "Cost advantage: Integrated MDI manufacturing from coal/benzene, lowest cash cost globally.",
+      "Scale: World's largest MDI capacity, enabling cost absorption and pricing influence.",
+      "Customer stickiness: Long-term supply agreements with large industrial OEMs.",
+      "R&D and technology: Continuous iteration in polyurethane, specialty chemicals, and new materials, especially battery chemicals."
+    ],
+    "moat_to_financial_transmission": [
+      "Cost advantage → structurally higher gross margin vs peers across the cycle, higher operating margin, superior FCF in downturns.",
+      "Scale → pricing power in MDI markets, ability to run high utilization rates, lower unit costs, higher ROIC.",
+      "Customer stickiness → lower receivables risk, stable volumes in mild downturns, repeat orders.",
+      "R&D iteration → battery chemicals and new materials can lift mix (higher ASP/margin) and reduce dependence on commodity MDI cycles."
+    ],
+    "structural_risks": [
+      "MDI/commodity price cycle: Gross margin declined 0.98pp YoY; MDI capacity additions globally could erode pricing.",
+      "Trade policy and tariffs: Geopolitical tensions, import/export restrictions could disrupt polyurethane export demand and supply chains.",
+      "Battery materials execution: Segment not yet profitable at scale; LFP and related materials suffer from overcapacity and intense competition in China.",
+      "High leverage and capex burden: Debt-to-assets >60%; heavy investment in petrochemical and battery projects raises fixed costs and depreciation, reducing profitability if demand/timing is weak.",
+      "Environmental and safety risk: Large chemical facilities face regulatory and incident risk; carbon policy may increase compliance cost."
+    ],
+    "key_unknowns": [
+      "Segment-level revenue and margin breakdown: especially polyurethane vs petrochemical vs specialty contribution to profit.",
+      "MDI real-time realized price/volume data; current gross margin decomposition.",
+      "Battery chemicals financial contribution and profitability timeline.",
+      "Expansion capex path for 2026-2028 and targeted ROIC on new projects.",
+      "Dividend and capital-return policy sustainability versus reinvestment needs."
+    ],
+    "evidence_ids": [
+      "EV011",
+      "EV012",
+      "EV013",
+      "EV014",
+      "EV015",
+      "EV016",
+      "EV021",
+      "EV024",
+      "EV030",
+      "EV034",
+      "EV044"
+    ]
+  },
+  "business_unit_map": [
+    {
+      "unit_id": "BU_PU",
+      "unit_name": "聚氨酯",
+      "unit_type": "product",
+      "disclosure_basis": "analytical",
+      "parent_unit": "company",
+      "economic_role": "Core profit engine; world-leading MDI/polyurethane production and sales. Revenue = MDI volume × price + polyol/TDI revenue. Profit = revenue - raw material cost (coal/benzene) - processing cost.",
+      "revenue_driver_equation": "MDI volume (tonnes) × realized price (CNY/tonne) + other polyurethane products",
+      "profit_driver_equation": "(MDI price - benzene/coal cost per unit) × volume + fixed-cost absorption - R&D",
+      "cash_and_capital_equation": "Heavy capex for new MDI/TDI capacity; working capital tied to benzene/LPG input inventories and receivables from large clients",
+      "reported_metrics": [
+        "MDI export demand signal (KPE01)"
+      ],
+      "evidence_ids": [
+        "KPE01",
+        "EV021",
+        "EV024",
+        "EV030"
+      ],
+      "missing_inputs": [
+        "Polyurethane segment revenue",
+        "MDI volume (tonnes)",
+        "MDI realized price",
+        "MDI-specific gross margin",
+        "Capacity (tonnes/year)",
+        "Utilization rate"
+      ],
+      "next_verification": "Filing annex or product-line revenue note disclosing polyurethane revenue, volume, ASP, and margin; industry MDI price index cross-referenced with company realized price."
+    },
+    {
+      "unit_id": "BU_BATTERY",
+      "unit_name": "电池材料",
+      "unit_type": "product",
+      "disclosure_basis": "analytical",
+      "parent_unit": "company",
+      "economic_role": "Growth option: LFP, graphite anode, battery-grade sulfate, NMP, PAA. Currently pre-revenue or early revenue without disclosed financials. Demand tied to EV and energy storage.",
+      "revenue_driver_equation": "LFP/graphite volume × processing fee / ASP + NMP/solvent revenue",
+      "profit_driver_equation": "Revenue - lithium/lithium carbonate input cost - processing cost - D&A - R&D",
+      "cash_and_capital_equation": "Intensive capex for precursor and cathode capacity; working capital for lithium and raw materials; high R&D expense",
+      "reported_metrics": [],
+      "evidence_ids": [
+        "EV022"
+      ],
+      "missing_inputs": [
+        "Segment revenue",
+        "Product volume (tonnes)",
+        "Customer list / certification status",
+        "Capacity (planned or operational)",
+        "Gross margin or profitability",
+        "Capital invested"
+      ],
+      "next_verification": "Next annual or semi-annual filing disclosing battery segment revenue, volume, external customer names, and margin; industry data on LFP processing fees and lithium pass-through terms."
+    },
+    {
+      "unit_id": "BU_OTHER",
+      "unit_name": "石化与精细化学品及其他",
+      "unit_type": "product",
+      "disclosure_basis": "calculated",
+      "parent_unit": "company",
+      "economic_role": "Residual segment including Petrochemical (PO/SM, acrylic acid, polyol, etc.), Performance Materials (PC, nylon 12, biodegradable), Specialty Amines, ADI derivatives, and other new materials. Revenue accounted as Consolidated - PU disclosed (when available) - Battery disclosed (when available).",
+      "revenue_driver_equation": "Consolidated revenue - 聚氨酯 revenue - 电池材料 revenue",
+      "profit_driver_equation": "Derived from consolidated gross profit less PU and battery contributors once known; otherwise treated as consolidated blended economics.",
+      "cash_and_capital_equation": "Heavy capex for petrochemical crackers, POE, and specialty projects; working capital similar to large-volume chemical trading",
+      "reported_metrics": [
+        "Consolidated FY2025 revenue 203.23 bn CNY",
+        "Consolidated Q1 2026 annualized revenue 216.21 bn CNY"
+      ],
+      "evidence_ids": [
+        "EV011",
+        "EV012",
+        "EV013",
+        "EV024",
+        "EV030"
+      ],
+      "missing_inputs": [
+        "Petrochemical-specific revenue and margin",
+        "Performance Materials revenue and margin",
+        "Specialty Amines revenue and margin"
+      ],
+      "next_verification": "Product-level revenue and gross margin disclosure in annual filing appendix."
+    },
+    {
+      "unit_id": "BU_CONSOLIDATED",
+      "unit_name": "合并报表",
+      "unit_type": "reported_segment",
+      "disclosure_basis": "reported",
+      "parent_unit": "company",
+      "economic_role": "Legal consolidation of all business units.",
+      "revenue_driver_equation": "Sum of all BU revenues including internal elimination",
+      "profit_driver_equation": "Gross margin 14.728% (Q1 2026) → operating margin 9.814% → net margin 6.878%",
+      "cash_and_capital_equation": "OCF/NI = 1.844x; high capex; FCF = OCF - capex paid",
+      "reported_metrics": [
+        "Revenue (2026 Q1): 54052.17 mn CNY",
+        "Net profit parent (2026 Q1): 3717.71 mn CNY",
+        "Gross margin (2026 Q1): 14.728%",
+        "Operating margin (2026 Q1): 9.8142%",
+        "Net margin (2026 Q1): 6.878%",
+        "Annual parent profit FY2025: 12527.20 mn CNY",
+        "Diluted EPS (2026 Q1): 21.43 CNY/share"
+      ],
+      "evidence_ids": [
+        "EV011",
+        "EV012",
+        "EV013",
+        "EV014",
+        "EV015",
+        "EV016",
+        "EV017",
+        "EV018",
+        "EV019",
+        "EV020"
+      ],
+      "missing_inputs": [
+        "Full-year capex guidance",
+        "Segment profit attribution"
+      ],
+      "next_verification": "2026 H1 filing for segment revenue and full-year capex indication."
+    },
+    {
+      "unit_id": "BU05",
+      "unit_name": "consolidated",
+      "unit_type": "reported_segment",
+      "disclosure_basis": "reported",
+      "parent_unit": "company",
+      "economic_role": "Filing segment restored after structured evidence reconciliation.",
+      "revenue_driver_equation": "",
+      "profit_driver_equation": "",
+      "cash_and_capital_equation": "",
+      "reported_metrics": [],
+      "evidence_ids": [
+        "EV011",
+        "EV012",
+        "EV013",
+        "EV014",
+        "EV015",
+        "EV016",
+        "EV018",
+        "EV019",
+        "EV020"
+      ],
+      "missing_inputs": [
+        "economic sub-unit driver equations require analyst completion"
+      ],
+      "next_verification": ""
+    },
+    {
+      "unit_id": "BU09",
+      "unit_name": "化工行业",
+      "unit_type": "reported_segment",
+      "disclosure_basis": "reported",
+      "parent_unit": "company",
+      "economic_role": "Filing segment restored after structured evidence reconciliation.",
+      "revenue_driver_equation": "",
+      "profit_driver_equation": "",
+      "cash_and_capital_equation": "",
+      "reported_metrics": [],
+      "evidence_ids": [],
+      "missing_inputs": [
+        "economic sub-unit driver equations require analyst completion"
+      ],
+      "next_verification": ""
+    }
+  ],
+  "segment_models": [
+    {
+      "segment": "consolidated",
+      "products_or_services": "Polyurethane, petrochemical, fine chemicals, battery materials",
+      "customers_and_channel": "Global industrial OEMs, construction, automotive, appliance, and battery manufacturers; direct sales and distribution.",
+      "revenue_weight_pct": 100.0,
+      "profit_weight_pct": 100.0,
+      "base_period": "FY2025",
+      "base_revenue_value": 203234.57,
+      "base_revenue_unit": "CNY mn",
+      "base_revenue_growth_pct": 11.88,
+      "base_margin_pct": 13.48,
+      "base_margin_change_pp": -2.61,
+      "demand_and_order_drivers": [
+        "Global MDI demand growth (construction, automotive, appliance, footwear)",
+        "Polyurethane export demand (China competitive advantage)",
+        "EV and energy storage battery installation growth",
+        "Infrastructure and construction spending in China and developing economies",
+        "Consumer goods and packaging demand for specialty and bio-based plastics"
+      ],
+      "industry_supply_and_capacity": "MDI industry globally concentrated (Wanhua, Covestro, BASF, Huntsman, Tosoh) with Wanhua adding capacity. LFP and battery chemicals suffer from domestic overcapacity and price competition. Petrochemical sector globally oversupplied after multiple capacity additions.",
+      "volume_share_utilization": "Wanhua holds ~28% global MDI nameplate capacity, likely running high utilization given market position. Volume growth from new MDI trains, petrochemical crackers, and ramp of battery chemicals. No quantitative utilization data in evidence payload.",
+      "price_asp_take_rate": "MDI price is cyclical; gross margin decline 0.98pp YoY suggests some pricing pressure or input cost increase. Q1 2026 operating margin improved 0.49pp despite margin pressure, implying cost control. No quantitative ASP data available.",
+      "unit_cost_and_input_prices": "Integrated coal-to-olefins and benzene chains provide cost advantage. Energy, raw coal, and LPG/naphtha costs are major inputs. Non-recurring items and finance costs (1.38% of revenue, +0.04pp) modest relative to operating scale.",
+      "margin_and_operating_leverage": "Gross margin down 0.98pp YoY but operating margin up 0.49pp suggests SG&A/overhead leverage or lower R&D capitalization. Net margin down 0.28pp YoY driven by non-operating items and finance costs. Operating leverage positive if volume and prices recover.",
+      "working_capital_and_cash_conversion": "Working capital improving: Receivables/Rev down 1.27pp to 6.96%, Inventory/Rev down 2.77pp to 13.29%. OCF/NI = 1.84x, indicating strong cash conversion. Contract liabilities / prepayments not detailed but likely improving with demand recovery.",
+      "prosperity_level": "medium",
+      "marginal_direction": "deteriorating",
+      "causal_analysis": "FY2025 revenue +11.88% but gross margin -2.61pp suggests volume-led growth with price or mix pressure. Q1 2026 gross margin continued down 0.98pp but operating margin +0.49pp reflects cost levers. Polyurethane export demand signal (KPE01) positive but unquantified. Battery chemicals still investment phase. Consolidated prosperity: medium and deteriorating until MDI price recovery or battery scale changes trajectory.",
+      "valuation_treatment": "Core PE-based or DCF approach. Trailing PE TTM 16.27x on implied TTM earnings ~13.16 bn CNY corresponds approximately to FY2025 actual earnings level. Low PB (1.92x) and PS (1.0x) suggest market discounts asset-heavy model post margin compression. Forward valuation will be driven by MDI cycle recovery timing, battery contribution, and capex returns.",
+      "strongest_counterevidence": [
+        "Gross margin declined 0.98pp YoY despite revenue growth, indicating price/cost headwinds persist.",
+        "Net margin down 0.28pp YoY and below operating leverage improvement suggests below-the-line pressure.",
+        "No battery segment financials disclosed; revenue and margin contribution unknown.",
+        "PB and PS at 5-year low percentiles suggests structural repricing risk rather than cyclical opportunity."
+      ],
+      "evidence_ids": [
+        "EV011",
+        "EV012",
+        "EV013",
+        "EV014",
+        "EV015",
+        "EV016",
+        "EV018",
+        "EV019",
+        "EV020"
+      ],
+      "missing_inputs": [
+        "BU-level revenue, volume, price",
+        "MDI industry price/spread trend",
+        "Battery segment revenue and profitability",
+        "Expansion capex schedule 2026-2028",
+        "Next catalyst disclosure date (H1 2026 filing)"
+      ],
+      "next_verification": "2026 H1 filing around late August 2026."
+    },
+    {
+      "segment": "聚氨酯",
+      "products_or_services": "",
+      "customers_and_channel": "",
+      "revenue_weight_pct": null,
+      "profit_weight_pct": null,
+      "base_period": "unspecified",
+      "base_revenue_value": null,
+      "base_revenue_unit": "",
+      "base_revenue_growth_pct": null,
+      "base_margin_pct": null,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [],
+      "industry_supply_and_capacity": "",
+      "volume_share_utilization": "",
+      "price_asp_take_rate": "",
+      "unit_cost_and_input_prices": "",
+      "margin_and_operating_leverage": "",
+      "working_capital_and_cash_conversion": "",
+      "prosperity_level": "evidence_limited",
+      "marginal_direction": "unknown",
+      "causal_analysis": "",
+      "valuation_treatment": "evidence_limited",
+      "strongest_counterevidence": [],
+      "evidence_ids": [],
+      "missing_inputs": [
+        "LLM omitted a filing-reported material segment"
+      ],
+      "next_verification": ""
+    },
+    {
+      "segment": "电池材料",
+      "products_or_services": "",
+      "customers_and_channel": "",
+      "revenue_weight_pct": null,
+      "profit_weight_pct": null,
+      "base_period": "unspecified",
+      "base_revenue_value": null,
+      "base_revenue_unit": "",
+      "base_revenue_growth_pct": null,
+      "base_margin_pct": null,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [],
+      "industry_supply_and_capacity": "",
+      "volume_share_utilization": "",
+      "price_asp_take_rate": "",
+      "unit_cost_and_input_prices": "",
+      "margin_and_operating_leverage": "",
+      "working_capital_and_cash_conversion": "",
+      "prosperity_level": "evidence_limited",
+      "marginal_direction": "unknown",
+      "causal_analysis": "",
+      "valuation_treatment": "evidence_limited",
+      "strongest_counterevidence": [],
+      "evidence_ids": [],
+      "missing_inputs": [
+        "LLM omitted a filing-reported material segment"
+      ],
+      "next_verification": ""
+    },
+    {
+      "segment": "化工行业",
+      "products_or_services": "",
+      "customers_and_channel": "",
+      "revenue_weight_pct": 100.0,
+      "profit_weight_pct": 100.0,
+      "base_period": "annual filing",
+      "base_revenue_value": 201109817784.79,
+      "base_revenue_unit": "filing table unit not explicit in extracted row",
+      "base_revenue_growth_pct": 11.88,
+      "base_margin_pct": 13.48,
+      "base_margin_change_pp": -2.61,
+      "demand_and_order_drivers": [],
+      "industry_supply_and_capacity": "",
+      "volume_share_utilization": "",
+      "price_asp_take_rate": "",
+      "unit_cost_and_input_prices": "",
+      "margin_and_operating_leverage": "",
+      "working_capital_and_cash_conversion": "",
+      "prosperity_level": "evidence_limited",
+      "marginal_direction": "unknown",
+      "causal_analysis": "",
+      "valuation_treatment": "evidence_limited",
+      "strongest_counterevidence": [],
+      "evidence_ids": [],
+      "missing_inputs": [
+        "LLM omitted a filing-reported material segment"
+      ],
+      "next_verification": ""
+    }
+  ],
+  "underwriting_questions": [
+    {
+      "question_id": "UQ01",
+      "question": "What is the trajectory of Wanhua's realized MDI/polyurethane price and unit margin for 2026-2028, and can operating margins expand back to 12%+ sustainably?",
+      "why_it_matters": "Polyurethane is the dominant profit pool. MDI cycle timing defines EPS and FCF for the base business. Without quantified price/volume data, the consolidated income statement cannot be forecast beyond historical trend extrapolation.",
+      "current_answer": "Unresolved. Q1 2026 gross margin 14.73% (-0.98pp YoY), operating margin 9.81% (+0.49pp YoY). KPE01 signals 'bullish polyurethane export demand', but no price or margin bridge quantified.",
+      "bull_evidence": [
+        "KPE01: Industry weekly data signals bullish polyurethane export demand.",
+        "Operating leverage improving despite gross margin decline suggests internal cost absorption capacity."
+      ],
+      "bear_evidence": [
+        "FY2025 gross margin down 2.61pp to 13.48%; sequential gross margin decline continuing into Q1 2026.",
+        "Global petrochemical industry structural oversupply narrative from management discussion (EV021).",
+        "MDI global capacity additions by competitors could pressure pricing."
+      ],
+      "decisive_model_variables": [
+        "MDI volume growth",
+        "MDI ASP CNY/tonne",
+        "Unit cost trajectory",
+        "Gross margin %",
+        "Operating margin %"
+      ],
+      "affected_financial_lines": [
+        "Consolidated revenue growth",
+        "Gross profit",
+        "Operating profit",
+        "EPS",
+        "FCF"
+      ],
+      "evidence_ids": [
+        "KPE01",
+        "EV014",
+        "EV015",
+        "EV021"
+      ],
+      "missing_evidence": [
+        "MDI price index (e.g., aggregated MDI / polymer MDI spot and contract prices)",
+        "Monthly MDI shipment volume data",
+        "Input cost series (benzene, coal, LPG)",
+        "Company realized price vs market price spread analysis"
+      ],
+      "next_verification": "Q2 2026 semi-annual filing segment revenue/margin; industry weekly MDI price/volume reports from ICIS or domestic data providers; management commentary on H1 2026 margins."
+    },
+    {
+      "question_id": "UQ02",
+      "question": "Can the battery materials segment achieve material revenue (e.g., >3 bn CNY) and break-even or better gross margin by 2027, or does overcapacity and intense competition prevent a profitable second curve?",
+      "why_it_matters": "Battery materials represent the primary growth option beyond MDI/polyurethane. If the segment cannot scale profitably, it becomes a value-destroying capital sink. SOTP valuation or premium multiple attribution depends on proving commercialization.",
+      "current_answer": "Unresolved. Filing mentions product portfolio and application areas but discloses zero revenue, margin, or customer reference. Industry context indicates severe overcapacity in LFP and battery chemicals.",
+      "bull_evidence": [
+        "Battery subsidiary established with full product portfolio; Wanhua has chemical engineering and integration expertise to potentially drive cost lower.",
+        "Large addressable market in EV and energy storage; policy support for domestic supply chain."
+      ],
+      "bear_evidence": [
+        "No financial disclosure at all indicates segment is immaterial or pre-revenue.",
+        "LFP industry in China is massively oversupplied with processing fees declining.",
+        "Battery customers (CATL, BYD) have strong bargaining power over chemical suppliers.",
+        "Hard to reach acceptable margins without lithium resource integration."
+      ],
+      "decisive_model_variables": [
+        "Battery segment revenue",
+        "Battery segment gross margin",
+        "Customer certification milestone",
+        "Capacity utilization",
+        "Capex invested vs revenue generated"
+      ],
+      "affected_financial_lines": [
+        "Revenue diversification",
+        "Consolidated gross margin mix",
+        "Capex",
+        "FCF",
+        "Valuation multiple (re-rating potential)"
+      ],
+      "evidence_ids": [
+        "EV022",
+        "EV035"
+      ],
+      "missing_evidence": [
+        "Battery segment revenue (CNY mn) for 2025 or 2026",
+        "Battery segment gross margin or operating profit",
+        "Signed customer contracts beyond qualification/testing"
+      ],
+      "next_verification": "2025 annual report appendix or 2026 semi-annual report segment note disclosing battery materials revenue and production capacity; industry data on LFP processing fees and Wanhua customer wins."
+    },
+    {
+      "question_id": "UQ03",
+      "question": "Is the strong operating cash flow (OCF/NI ratio 1.84x in Q1 2026) sustainable, and what portion of capex must be maintenance vs growth, allowing FCF to cover dividends without additional leverage?",
+      "why_it_matters": "FCF is the core for DCF valuation and dividend sustainability. High capex cycle without corresponding returns can create capital allocation risk. Dividends (proposed ~3.9 bn CNY for FY2025) need FCF coverage.",
+      "current_answer": "Partially resolved. OCF/NI = 1.84x in Q1 2026 indicates strong cash conversion. Working capital ratios improving. However, total capex (maintenance + expansion) not separately disclosed, and total FCF cannot be derived without full cash flow statement.",
+      "bull_evidence": [
+        "OCF/NI ratio of 1.84x, well above parity, suggesting high accounting earnings quality.",
+        "Receivables and inventory ratios declining YoY, releasing working capital.",
+        "Management commentary: 'sales of goods received cash increase' per EV034."
+      ],
+      "bear_evidence": [
+        "High liability ratio (~64%) implies leverage capacity constrained; FCF must service debt and capex.",
+        "Expansion project list (POE, battery, petrochemical) is extensive; total capex likely to remain high.",
+        "Dividend payout ratio against FCF unknown without detailed capex split."
+      ],
+      "decisive_model_variables": [
+        "OCF (CNY mn)",
+        "Maintenance capex (CNY mn)",
+        "Growth capex (CNY mn)",
+        "FCF (CNY mn)",
+        "Dividend payout (CNY mn)"
+      ],
+      "affected_financial_lines": [
+        "FCF",
+        "Net debt",
+        "Dividend capacity",
+        "DCF valuation per share"
+      ],
+      "evidence_ids": [
+        "EV018",
+        "EV019",
+        "EV020",
+        "EV040"
+      ],
+      "missing_evidence": [
+        "Full cash flow statement (2026 Q1 and FY2025 detailed)",
+        "Capex split maintenance vs expansion",
+        "Construction-in-progress schedule and expected commissioning",
+        "Target leverage or capex budget guidance from management"
+      ],
+      "next_verification": "2025 annual report cash flow statement details; management capex guidance in annual report MD&A; H1 2026 interim cash flow statement."
+    },
+    {
+      "question_id": "UQ04",
+      "question": "Does the extreme valuation percentile divergence (PE TTM at 58th percentile vs PB at 6.6th and PS at 5.3rd percentile) represent a cyclical earnings trough requiring a normalized PE of 12-14x on mid-cycle earnings, or does it indicate a permanent low return on assets that justifies 1x PS and sub-2x PB?",
+      "why_it_matters": "This is the central valuation question. If the former, the stock is potentially undervalued on a mid-cycle basis. If the latter, current price may be appropriate for a structurally lower-return business. Resolution determines fair value per share and expected return.",
+      "current_answer": "Unresolved. FY2025 net profit of 12.5 bn CNY and Q1 2026 run-rate of ~14.9 bn CNY produce PE TTM of 16.3x. PB of ~1.9x implies ROE ~14-15%. PS of ~1.0x is consistent with net margin ~6.9%. 5-year percentile divergence suggests earnings are near mid-cycle lows but the market doubts recovery or fears permanent value destruction.",
+      "bull_evidence": [
+        "PB at 6.6 percentile and PS at 5.3 percentile suggest asset and sales valuation near cyclical trough.",
+        "Operating cash flow quality high; company not burning cash.",
+        "PE percentile moderate at 58 but on a potentially compressed earnings base."
+      ],
+      "bear_evidence": [
+        "PB at 1.9x on asset-heavy chemical model may not be cheap if ROIC is structurally below cost of capital.",
+        "PS of 1.0x on 6.9% net margin implies market doubts margin recovery.",
+        "Global chemical peers may be re-rating lower permanently on energy transition risks."
+      ],
+      "decisive_model_variables": [
+        "Mid-cycle normalized EPS",
+        "Sustainable ROE / ROIC",
+        "Terminal growth rate / competitive advantage period",
+        "Asset turnover",
+        "Net margin at mid-cycle"
+      ],
+      "affected_financial_lines": [
+        "Normalized PE multiple",
+        "Price/Book multiple",
+        "Fair value per share",
+        "Expected return vs current price"
+      ],
+      "evidence_ids": [
+        "EV043",
+        "EV044",
+        "EV045",
+        "EV049",
+        "EV050",
+        "EV051"
+      ],
+      "missing_evidence": [
+        "10-year normalized EPS or mid-cycle earnings estimate",
+        "Detailed peer ROIC and multiples for MDI/chemical subgroup",
+        "Segment-level ROA for polyurethane vs petrochemical vs specialtys"
+      ],
+      "next_verification": "Build normalized 'mid-cycle' earnings scenario with explicit MDI price/volume assumptions; compare with peer and historical own-cycle normalized multiples."
+    },
+    {
+      "question_id": "UQ05",
+      "question": "What is the hard evidence for 'polyurethane export demand' strength (KPE01), and can it translate into 2026-2027 realized price and volume improvement of at least 5% annually?",
+      "why_it_matters": "This is the only immediately positive catalyst signal. If export demand is strengthening, it should show up in H2 2026 revenue, margin improvement, and potentially higher valuation multiple. Without hard verification, the positive signal cannot be priced.",
+      "current_answer": "Unresolved. KPE01 states 'bullish polyurethane export demand' from industry weekly data but provides no quantitative price, volume, or margin link to Wanhua specifically.",
+      "bull_evidence": [
+        "Separate industry data source from Wanhua (industry weekly) indicates positive export demand outlook.",
+        "Wanhua is the global cost leader and a primary beneficiary of any MDI demand recovery."
+      ],
+      "bear_evidence": [
+        "No quantitative export volume growth, realized price improvement, or margin consequences documented.",
+        "Trade friction and rising tariffs could offset export demand drivers.",
+        "China domestic demand slowdown could release more domestic supply to exports, diluting net price improvement."
+      ],
+      "decisive_model_variables": [
+        "China MDI export volume growth %",
+        "MDI FOB China price vs CFR Asia price",
+        "Wanhua polyurethane segment revenue growth",
+        "Realized gross margin improvement"
+      ],
+      "affected_financial_lines": [
+        "Polyurethane segment revenue",
+        "Gross margin",
+        "EPS",
+        "Valuation multiple (justifying above-historical-average PE)"
+      ],
+      "evidence_ids": [
+        "KPE01",
+        "EV026",
+        "EV014"
+      ],
+      "missing_evidence": [
+        "Monthly MDI export data (China customs)",
+        "Wanhua export share of polyurethane revenue",
+        "MDI regional price spread (China vs Middle East vs Europe)",
+        "Segment revenue for polyurethane (disaggregation)"
+      ],
+      "next_verification": "China customs MDI export monthly data; Q2 2026 segment revenue disclosure; management trade/export commentary."
+    },
+    {
+      "question_id": "UQ06",
+      "question": "What are the specific catalysts and timeline for MDI gross margin recovery to mid-cycle levels (15-16%+), and what falsification signals would indicate the thesis is broken?",
+      "why_it_matters": "Margin recovery is the core earnings driver. Without a margin recovery path, the stock is fairly valued at 1x PS and 1.9x PB. The question also forces defining what 'recovery' looks like and what evidence would reject the bull case.",
+      "current_answer": "Unresolved. No explicit margin recovery path or timeline defined in evidence. FY2025 gross margin declined 2.61pp to 13.48%; Q1 2026 14.73% but still below historical mid-cycle (probably 16%+). No catalyst date identified.",
+      "bull_evidence": [
+        "Operating margin inflection +0.49pp in Q1 2026 suggests cost restructuring may precede price recovery.",
+        "Working capital efficiency improvement (receivables down, inventory down) suggests demand not worse than sales.",
+        "KPE01 export demand signal if verified could drive H2 2026 volume and pricing."
+      ],
+      "bear_evidence": [
+        "Gross margin negative trajectory persisting into Q1 2026 (YoY -0.98pp).",
+        "Commodity chemical cycle often takes longer than expected to bottom and recover.",
+        "China and global construction and auto demand may stay soft."
+      ],
+      "decisive_model_variables": [
+        "Gross margin trajectory (quarterly)",
+        "MDI price Asian benchmark",
+        "Input cost index (benzene, coal)",
+        "Capacity utilization rate"
+      ],
+      "affected_financial_lines": [
+        "Gross profit",
+        "Operating profit",
+        "EPS",
+        "FCF"
+      ],
+      "evidence_ids": [
+        "EV014",
+        "EV015",
+        "EV016",
+        "KPE01"
+      ],
+      "missing_evidence": [
+        "Mid-cycle historical gross margin band",
+        "Quarterly gross margin history for MDI segment",
+        "Catalyst calendar (Q2 earnings, industry conferences, contract season)"
+      ],
+      "next_verification": "Next quarterly filing gross margin; industry Asian MDI price monthly; management call on margin outlook."
+    }
+  ],
+  "forecast_lines": [
+    {
+      "segment": "consolidated",
+      "metric": "Revenue",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 203234.57,
+      "year_1_value": 207299.27,
+      "year_2_value": 213518.24,
+      "year_3_value": 219923.79,
+      "formula": "Base × (1 + annual growth). 2026E +2.0% (demand recovery offset by price pressure), 2027E +3.0% (volume growth begins to offset price normalization), 2028E +3.0% (MDI cycle upswing, battery materials contribute first material revenue).",
+      "assumption_status": "analyst_estimate",
+      "evidence_ids": [
+        "EV012",
+        "EV013"
+      ],
+      "key_sensitivity": "Revenue growth is the product of volume and price; a 1pp change in organic growth moves EPS ~0.20 CNY (approx).",
+      "missing_inputs": [
+        "Segment volume and price split",
+        "Battery materials revenue contribution"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Gross margin",
+      "unit": "%",
+      "base_period": "FY2025",
+      "base_value": 13.48,
+      "year_1_value": 14.2,
+      "year_2_value": 14.8,
+      "year_3_value": 15.5,
+      "formula": "Input cost recovery + mix improvement. 2026E +0.72pp from modest price/cost improvement and cost levers. 2027E +0.6pp driven by polyurethane export demand and specialty mix. 2028E +0.7pp with battery contribution and improving MDI cycle.",
+      "assumption_status": "analyst_estimate",
+      "evidence_ids": [
+        "EV014",
+        "KPE01"
+      ],
+      "key_sensitivity": "Every 1pp gross margin change impacts pre-tax profit ~2.07-2.20 bn CNY and EPS ~1.0-1.1 CNY.",
+      "missing_inputs": [
+        "MDI realized price and spread",
+        "Battery segment margin contribution",
+        "Input cost trajectory"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Operating Profit",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 18936.91,
+      "year_1_value": 19491.0,
+      "year_2_value": 20734.0,
+      "year_3_value": 22203.0,
+      "formula": "Revenue × Operating margin. Operating margin = gross margin - SG&A/Rev - R&D/Rev.",
+      "assumption_status": "calculated",
+      "evidence_ids": [
+        "EV015"
+      ],
+      "key_sensitivity": "Throughput from revenue and gross margin; 1% revenue growth translates to ~190-200 mn operating profit at base margin.",
+      "missing_inputs": [
+        "SG&A rate forecast",
+        "R&D expense rate",
+        "Non-recurring items split"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Parent Net Profit",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 12527.2,
+      "year_1_value": 13400.0,
+      "year_2_value": 14500.0,
+      "year_3_value": 15800.0,
+      "formula": "Operating Profit - net finance costs - tax ± non-recurring - minority interest. Finance cost ratio ~1.4% of revenue; effective tax rate ~15-20% historically; minority interest ~2-3% of operating profit.",
+      "assumption_status": "analyst_estimate",
+      "evidence_ids": [
+        "EV012",
+        "EV016",
+        "EV017"
+      ],
+      "key_sensitivity": "±1% effective tax rate changes net profit ~±190-200 mn; ±10% finance expense changes net profit ~±290 mn.",
+      "missing_inputs": [
+        "Interest expense and financial income split",
+        "Joint venture / associate profit contribution",
+        "Minority interest projection"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Diluted EPS",
+      "unit": "CNY/share",
+      "base_period": "FY2025",
+      "base_value": 72.21,
+      "year_1_value": 77.23,
+      "year_2_value": 83.57,
+      "year_3_value": 91.07,
+      "formula": "Parent Net Profit / Diluted shares outstanding (173.5 mn).",
+      "assumption_status": "calculated",
+      "evidence_ids": [
+        "EV034"
+      ],
+      "key_sensitivity": "1 bn CNY net profit change moves EPS ~5.76 CNY/share.",
+      "missing_inputs": [
+        "Share buyback program impact",
+        "Equity incentive dilution"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Operating Cash Flow (OCF)",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 24901.05,
+      "year_1_value": 26000.0,
+      "year_2_value": 28000.0,
+      "year_3_value": 30000.0,
+      "formula": "Net Profit × OCF/NI ratio (assumed ~1.8-1.9x, consistent with Q1 2026).",
+      "assumption_status": "analyst_estimate",
+      "evidence_ids": [
+        "EV018"
+      ],
+      "key_sensitivity": "Working capital improvement in 2026 supports OCF/NI above 1.8x; if margins expand, ratio may decline toward 1.5x but absolute OCF rises.",
+      "missing_inputs": [
+        "Detailed working-capital forecast",
+        "D&A schedule"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Capital Expenditure (Capex)",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": null,
+      "year_1_value": 22000.0,
+      "year_2_value": 20000.0,
+      "year_3_value": 18500.0,
+      "formula": "High expansion cycle in battery and petrochemical, gradually normalizing. No base period value extracted from payments for acquisition of fixed assets; assumed 20-22 bn CNY annual outlay.",
+      "assumption_status": "analyst_estimate",
+      "evidence_ids": [
+        "EV037",
+        "EV040"
+      ],
+      "key_sensitivity": "±10% capex variance = ±2.0-2.2 bn FCF impact directly.",
+      "missing_inputs": [
+        "FY2025 actual capex paid (cash flow statement detail)",
+        "Construction-in-progress details",
+        "Capex guidance in MD&A"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Free Cash Flow (FCF)",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": null,
+      "year_1_value": 4000.0,
+      "year_2_value": 8000.0,
+      "year_3_value": 11500.0,
+      "formula": "OCF - Capex. FCF = 26000 - 22000 = 4000 (2026E); 28000 - 20000 = 8000 (2027E); 30000 - 18500 = 11500 (2028E).",
+      "assumption_status": "calculated",
+      "evidence_ids": [],
+      "key_sensitivity": "FCF highly sensitive to both OCF (margin/working capital) and capex cycle; a 10% improvement in OCF/NI ratio adds ~1.5-2.0 bn FCF.",
+      "missing_inputs": [
+        "FY2025 base FCF calculation pending capex data"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "eps",
+      "unit": "CNY/share",
+      "base_period": "",
+      "base_value": null,
+      "year_1_value": 77.23342939481267,
+      "year_2_value": 83.57348703170028,
+      "year_3_value": 91.06628242074927,
+      "formula": "missing; downstream analyst must complete",
+      "assumption_status": "calculated",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "required consolidated forecast line omitted"
+      ]
+    }
+  ],
+  "scenarios": [
+    {
+      "scenario": "base",
+      "probability_pct": 60.0,
+      "operating_assumptions": [
+        "Revenue CAGR ~2.5% driven by volume growth; pricing remains stable but not strongly recovering.",
+        "Gross margin improves slowly from 14.2% (2026E) to 15.5% (2028E) as input costs moderate and specialty mix improves.",
+        "Battery materials revenue emerges (~2-3 bn by 2028E) at break-even gross margin; no material EPS contribution yet.",
+        "Capex remains high 20-22 bn but declining; FCF turns positive and expands toward 11.5 bn by 2028E.",
+        "Implied mid-cycle PE of 17-19x on lower current earnings base; normalized 12-14x on ~14-16 bn net profit.",
+        "Dividend maintained around 3.9 bn CNY annually."
+      ],
+      "parent_net_profit_cny_mn": 14500.0,
+      "eps_cny": 83.57,
+      "fcf_cny_mn": 8000.0,
+      "valuation_method": "Normalized PE multiple on 2027E earnings; current PE TTM 16.3x transitions to 14x on medium-term earnings.",
+      "valuation_multiple": 14.0,
+      "fair_value_per_share": 1170.0,
+      "evidence_ids": [
+        "EV012",
+        "EV014",
+        "EV015",
+        "EV016",
+        "EV045"
+      ],
+      "falsification": "Gross margin flat or declining beyond 2026; battery revenue stagnates below 1 bn; export demand fails to materialize in volume growth; PE TTM de-rates below 12x and remains there.",
+      "missing_inputs": [
+        "MDI price deck",
+        "Battery revenue curve",
+        "Segment profitability breakdown"
+      ]
+    },
+    {
+      "scenario": "bull",
+      "probability_pct": 20.0,
+      "operating_assumptions": [
+        "Strong polyurethane export demand verified; MDI price recovery 5-10% CAGR 2026-2028; gross margin reaches 16.5% by 2028E.",
+        "Revenue CAGR ~5% driven by price and volume; battery materials achieve ~5 bn revenue by 2028E with 15% gross margin.",
+        "Operating leverage results in operating margin expanding to >12% and net margin ~9% by 2028E.",
+        "Capex stays at 20-21 bn; FCF reaches 12-14 bn by 2028E.",
+        "Market re-rates to 16-18x PE on normalized earnings of 18-20 bn; low PB and PS mean-revert to 30th+ percentile.",
+        "Dividend increase possible if FCF exceeds payout needs."
+      ],
+      "parent_net_profit_cny_mn": 19200.0,
+      "eps_cny": 110.66,
+      "fcf_cny_mn": 14000.0,
+      "valuation_method": "PE 16x on 2028E earnings; justified by mid-cycle growth and battery option value.",
+      "valuation_multiple": 16.0,
+      "fair_value_per_share": 1770.0,
+      "evidence_ids": [
+        "KPE01",
+        "EV018",
+        "EV019",
+        "EV020"
+      ],
+      "falsification": "MDI price index fails to rise by Q4 2026; battery segment continues to report 0 revenue; OCF declines vs net profit; working capital rebuilds.",
+      "missing_inputs": [
+        "MDI price rise quantified",
+        "Battery segment customer contract evidence",
+        "Input cost decline evidence"
+      ]
+    },
+    {
+      "scenario": "bear",
+      "probability_pct": 20.0,
+      "operating_assumptions": [
+        "Demand recovery stalls; trade tariffs intensify; MDI price declines another 5-10% and cost inputs rise; gross margin contracts to 12.5% by 2027E.",
+        "Revenue CAGR 0-1%; battery materials stay <1 bn revenue and generate operating losses.",
+        "Net margin compresses to 4-5%; parent net profit falls to ~9-10 bn.",
+        "Capex remains high 22 bn; FCF turns negative or negligible; dividend cut or maintained with borrowing.",
+        "Market de-rates to 1.5x PB and 0.8x PS; PE TTM rises on lower earnings and valuation remains at 12-14x; implied price decline to 900-1000 CNY/share.",
+        "Asset write-down risk on battery and petrochemical projects if demand fails to meet expectations."
+      ],
+      "parent_net_profit_cny_mn": 9800.0,
+      "eps_cny": 56.48,
+      "fcf_cny_mn": -1500.0,
+      "valuation_method": "PB-based floor on tangible book (~1.5x on BVPS ~560 CNY); secondary PS check 0.8x.",
+      "valuation_multiple": 16.0,
+      "fair_value_per_share": 903.0,
+      "evidence_ids": [
+        "EV014",
+        "EV016",
+        "EV021"
+      ],
+      "falsification": "MDI price stability and margin improvement in H2 2026; China exports accelerate.",
+      "missing_inputs": [
+        "Detailed cost structure vulnerability to oil/coal price spikes",
+        "Worst-case MDI price scenario"
+      ]
+    }
+  ],
+  "thesis_financial_bridges": [
+    {
+      "bridge_id": "BRIDGE_01",
+      "thesis_or_question": "MDI gross margin recovery drives operating leverage and lifts EPS from 72 CNY (FY2025) to 83-91 CNY (base case 2027-2028E).",
+      "affected_unit": "consolidated",
+      "operating_driver": "Gross margin",
+      "driver_formula": "Gross Margin = (Σ segment_i volume × (ASP_i - unit cost_i)) / Revenue; MDI is ~50%+ of mix.",
+      "base_assumption": "Gross margin recovers from 13.48% (FY2025) to 15.5% (2028E); MDI price mild recovery, cost stability.",
+      "bull_assumption": "Gross margin expands to 16.5% by 2028E on robust MDI price and lower relative input costs; specialty and battery mix accretive.",
+      "bear_assumption": "Gross margin contracts to 12.5% by 2027E on oversupply, tariffs, and demand recession; battery remains nil margin.",
+      "revenue_impact": "Revenue volume grows across cases but price is the swing factor: base +2.5% CAGR, bull +5%, bear flat.",
+      "profit_impact": "Gross profit range: base 33.1 bn (2027E), bull 37.4 bn, bear 26.5 bn. Operating profit: base 20.7 bn, bull 24.5 bn, bear 14.4 bn.",
+      "eps_impact": "EPS base 83.57 CNY (2027E), bull ~111 CNY, bear ~56 CNY.",
+      "fcf_or_capital_impact": "FCF breakeven/cash drain in bear; 8 bn+ in base by 2027E; >12 bn in bull.",
+      "valuation_impact": "Base fair value ~1170 CNY/shr; Bull ~1770; Bear ~903 at PB/PE floor.",
+      "quantification_status": "partially_quantified",
+      "evidence_ids": [
+        "EV014",
+        "EV015",
+        "EV016",
+        "KPE01"
+      ],
+      "missing_inputs": [
+        "MDI precise volume and price for FY2025 and Q1 2026",
+        "Segment gross margin for polyurethane vs petrochemical vs others"
+      ]
+    },
+    {
+      "bridge_id": "BRIDGE_02",
+      "thesis_or_question": "Battery materials second curve creates a new 10-30 CNY/share optionality value if revenue scales >3 bn and margin reaches break-even by 2028E.",
+      "affected_unit": "电池材料",
+      "operating_driver": "Revenue ramp and margin inflection",
+      "driver_formula": "Segment value = (revenue × target P/S at scale - capital invested) × ownership. Revenue = capacity × utilization × ASP; margin = ASP - input cost - processing.",
+      "base_assumption": "Battery materials revenue reaches ~2 bn by 2028E, gross margin break-even to slightly positive; negligible EPS contribution; <10 CNY/share option.",
+      "bull_assumption": "Revenue 5 bn, gross margin 15%, net margin 5% by 2028E; contributes net profit ~250 mn CNY; option value 15-25 CNY/share at premium multiple.",
+      "bear_assumption": "Battery segment stays <1 bn revenue, operating loss; destroy value on capital invested; option value zero or negative; subtract 5-10 CNY/share from SOTP.",
+      "revenue_impact": "Directly adds 2-5 bn to consolidated top-line.",
+      "profit_impact": "Break-even to positive 250 mn CNY; bear adds losses of 200-500 mn CNY.",
+      "eps_impact": "~1.4 CNY/share (bull incremental); Bear -1.2 to -2.9 CNY/share from losses.",
+      "fcf_or_capital_impact": "Absorbs 3-5 bn capex in payback period; negative FCF in early years.",
+      "valuation_impact": "Option value add 15-25 CNY in bull; zero in base; -10 CNY in bear.",
+      "quantification_status": "unquantified",
+      "evidence_ids": [
+        "EV022"
+      ],
+      "missing_inputs": [
+        "Revenue actuals",
+        "Capacity and utilization",
+        "Customer orders",
+        "Profit/loss actuals"
+      ]
+    },
+    {
+      "bridge_id": "BRIDGE_03",
+      "thesis_or_question": "Working capital efficiency and OCF quality allow FCF to inflect positively in 2027E, supporting DCF valuation and dividend security.",
+      "affected_unit": "consolidated",
+      "operating_driver": "OCF/NI ratio and capex cycle",
+      "driver_formula": "FCF = OCF - Total Capex = (Net Profit × OCF_conversion) - (Maintenance + Growth Capex).",
+      "base_assumption": "OCF/NI ratio sustains ~1.8x as receivables and inventory ratios remain lean; capex declines 22->18.5 bn; FCF positive and expanding.",
+      "bull_assumption": "OCF/NI ratio >1.9x with additional working capital release; capex discipline at 20 bn; FCF 12-14 bn by 2028E.",
+      "bear_assumption": "OCF/NI ratio falls to 1.2x if receivables and inventories build; capex rigid at 22 bn; FCF negative or trivial.",
+      "revenue_impact": "No direct revenue impact; working capital efficiency is independent of top-line growth assumption.",
+      "profit_impact": "No direct P&L impact (D&A affects non-cash).",
+      "eps_impact": "None.",
+      "fcf_or_capital_impact": "FCF base 8 bn (2027E) vs bear -1.5 bn vs bull 14 bn.",
+      "valuation_impact": "DCF valuation highly sensitive to FCF inflection timing; 1 bn FCF contributes ~25-30 CNY/share in DCF.",
+      "quantification_status": "partially_quantified",
+      "evidence_ids": [
+        "EV018",
+        "EV019",
+        "EV020",
+        "EV037"
+      ],
+      "missing_inputs": [
+        "Detailed historical capex split",
+        "Target working-capital ratio guidance"
+      ]
+    }
+  ],
+  "moat_evidence_tests": [
+    {
+      "moat_mechanism": "Cost advantage",
+      "observable_test": "Compare Wanhua gross margin against closest peer Covestro (相似业务) and Chinese chemical peers on a normalized basis excluding cycle extremes. Wanhua should consistently be at the top quartile.",
+      "comparison_basis": "Wanhua consolidated gross margin FY2025 13.48% vs Covestro gross margin in industrial MDI/polyurethane unit; also vs 宝丰能源 37.40% (different product), 卫星化学 24.34%, 天赐材料 38.65%.",
+      "evidence_result": "Partially positive. Wanhua gross margin is below specialty and some peers but comparable to chemical commodity margins. Peer cross-section shows Wanhua is not at the top; however, the peers listed may not overlap perfectly in MDI. Need direct MDI segment gross margin comparison.",
+      "financial_transmission": "Superior gross margin → higher operating profit per unit of revenue → higher ROIC -> higher justified PB multiple.",
+      "strongest_counterevidence": "FY2025 gross margin 13.48% is well below several listed peers and has been declining; operating margin improvement offset but net margin still down. The moat may be real but temporarily obscured by extreme cycle lows or diluted by lower-margin petrochemical and new business expansion.",
+      "status": "partial",
+      "evidence_ids": [
+        "EV014",
+        "EV024",
+        "EV030"
+      ],
+      "next_verification": "Obtain MDI segment-level gross margin for Wanhua and Covestro; compare 10-year average gross margin across chemical cycle."
+    },
+    {
+      "moat_mechanism": "Scale",
+      "observable_test": "Wanhua's global MDI market capacity share and capacity utilization vs competitors. The share should be stable or growing, with utilization consistently above industry average.",
+      "comparison_basis": "Wanhua nameplate capacity is reportedly ~3.0-3.2 million tonnes MDI (global ~11 million tonnes). Covestro ~1.7 million, BASF ~1.8 million, Huntsman ~1.3 million.",
+      "evidence_result": "Qualitatively strong but unverified with current data. Wanhua is the largest by nameplate capacity. Recent capex pattern and construction-in-progress suggest capacity expansion.",
+      "financial_transmission": "Scale allows absorption of fixed costs (R&D, overhead), enables global supply reliability (customer stickiness), and pricing power oligopoly dynamics in MDI.",
+      "strongest_counterevidence": "Global MDI industry still sees capacity additions by all major players; scale does not guarantee pricing discipline. Oversupply could eliminate scale benefits in weak demand.",
+      "status": "partial",
+      "evidence_ids": [
+        "EV021",
+        "EV037"
+      ],
+      "next_verification": "Exact current nameplate capacity and operating rate from annual report; MDI global supply/demand balance report."
+    },
+    {
+      "moat_mechanism": "R&D and technology",
+      "observable_test": "FY2025 R&D spending of 4.865 bn CNY vs total revenue (2.4% of sales); technology leads to new products and lower unit costs. Patents granted, new product launches, and process innovation milestones.",
+      "comparison_basis": "Compare R&D/sales ratio with Covestro and Chinese chemical leaders; examine battery chemicals technology development status relative to incumbents.",
+      "evidence_result": "Quantitative evidence on R&D spend present, but no patent count, new product revenue, or cost-reduction metric to judge effectiveness.",
+      "financial_transmission": "R&D investment eventually translates into new product revenue with higher margin, lower process cost, or both. Battery materials pipeline is the most visible test.",
+      "strongest_counterevidence": "R&D spend is a cost until proven; battery segment has zero disclosed revenue and faces commoditized competition; many R&D investments may never achieve commercial scale.",
+      "status": "partial",
+      "evidence_ids": [
+        "EV027",
+        "EV022"
+      ],
+      "next_verification": "Patents granted count and product/project pipeline disclosure; battery materials revenue milestone."
+    }
+  ],
+  "valuation_buckets": [
+    {
+      "bucket": "Core MDI and polyurethane business (mid-cycle earnings)",
+      "inclusion": "core",
+      "valuation_method": "PE on normalized mid-cycle net profit",
+      "metric_and_period": "Normalized annual parent net profit, mid-cycle 2027E",
+      "metric_value": 14500.0,
+      "valuation_multiple": 12.0,
+      "ownership_pct": 100.0,
+      "haircut_pct": 0.0,
+      "equity_value_cny_mn": 174000.0,
+      "per_share_value_cny": 1002.88,
+      "overlap_key": "consolidated_earnings",
+      "double_counting_treatment": "This is the primary earnings stream; represents 100% of consolidated net profit in mid-cycle base case. Battery business revenues and profits when material will be additive or part of next bucket.",
+      "evidence_ids": [
+        "EV012",
+        "EV045"
+      ],
+      "missing_inputs": [
+        "Exact mid-cycle earnings estimate requires product price and volume assumptions."
+      ]
+    },
+    {
+      "bucket": "Battery materials optionality",
+      "inclusion": "optionality",
+      "valuation_method": "EV/Revenue scenario multiple on 2028E revenue at 15x and 30% probability of success, net of capital invested.",
+      "metric_and_period": "Battery segment revenue 2028E bull case 5 bn CNY",
+      "metric_value": 5000.0,
+      "valuation_multiple": 15.0,
+      "ownership_pct": 100.0,
+      "haircut_pct": 30.0,
+      "equity_value_cny_mn": 22500.0,
+      "per_share_value_cny": 129.68,
+      "overlap_key": "standalone_battery_unit",
+      "double_counting_treatment": "This value is over and above base case core earnings, which assumes battery is break-even with negligible contribution. If battery is successful, revenue and profit are incremental. Apply probability weight separately at closure.",
+      "evidence_ids": [
+        "EV022"
+      ],
+      "missing_inputs": [
+        "Revenue estimate highly speculative; no track record.",
+        "Capital invested quantum.",
+        "Probability of success."
+      ]
+    },
+    {
+      "bucket": "Petrochemical and other segments (normalized)",
+      "inclusion": "core",
+      "valuation_method": "Included within core mid-cycle earnings (PE bundle).",
+      "metric_and_period": "Already captured in consolidated net profit core bucket.",
+      "metric_value": null,
+      "valuation_multiple": null,
+      "ownership_pct": null,
+      "haircut_pct": null,
+      "equity_value_cny_mn": null,
+      "per_share_value_cny": null,
+      "overlap_key": "consolidated_earnings",
+      "double_counting_treatment": "Excluded as separate bucket; fully embedded in core mid-cycle earnings. Do not add again.",
+      "evidence_ids": [
+        "EV012",
+        "EV030"
+      ],
+      "missing_inputs": []
+    },
+    {
+      "bucket": "Net debt / surplus cash adjustment",
+      "inclusion": "core",
+      "valuation_method": "Book value adjustment: net debt reduction from equity value.",
+      "metric_and_period": "Net debt position FY2025/Q1 2026",
+      "metric_value": null,
+      "valuation_multiple": null,
+      "ownership_pct": 100.0,
+      "haircut_pct": 0.0,
+      "equity_value_cny_mn": null,
+      "per_share_value_cny": null,
+      "overlap_key": "balance_sheet",
+      "double_counting_treatment": "Adjust equity value down for net debt; core PE valuation is on equity earnings, so net debt must be subtracted to get to equity value per share. Amount tbd pending balance sheet detail.",
+      "evidence_ids": [
+        "EV039"
+      ],
+      "missing_inputs": [
+        "Net debt (total debt - cash & equivalents) figure from balance sheet"
+      ]
+    }
+  ],
+  "valuation_closure": {
+    "current_price_cny": null,
+    "diluted_share_count_mn": 173.5,
+    "core_value_per_share_cny": 1002.88,
+    "probability_weighted_fair_value_per_share_cny": 1236.6,
+    "option_value_per_share_cny": 38.9,
+    "other_adjustments_per_share_cny": null,
+    "fair_value_per_share_cny": 1236.6,
+    "expected_return_pct": null,
+    "formula": "Weighted fair value = Σ scenario (probability × fair_value_per_share_scenario) + option_value. Current price not supplied in structured evidence; cannot compute expected return. For core value per share, used base case mid-cycle PE 12x on 14.5 bn net profit = 174 bn equity value / 173.5 mn shares = 1002.88 CNY. Option value: 129.68 × 30% bull probability = 38.90 CNY. Need to add bull x probability and bear x probability to get total weighted value.",
+    "rating_consistency_check": "Not applicable as rating-free. Underwriting packet purposes only.",
+    "double_counting_checks": [
+      "Battery optionality bucket excluded from core earnings; core already embeds break-even battery assumption. Battery bucket is pure incremental option.",
+      "Net debt not yet subtracted from core value; core PE is on equity earnings, but need to deduct net debt to arrive at net equity value per share. Net debt figure missing.",
+      "Potential overlap of base and bull GDP scenarios with core bucket must be prevented by probability weighting."
+    ],
+    "status": "partial",
+    "missing_inputs": [
+      "Current stock price not provided; cannot calculate expected return",
+      "Net debt figure for balance sheet adjustment",
+      "Detailed segment earnings for bull/bear precise probability-weighted fair value",
+      "resolve duplicate valuation overlap keys: consolidated_earnings"
+    ]
+  },
+  "handoff_manifest": {
+    "handoff_version": "underwriting-v2",
+    "source_of_truth": "structured_research.underwriting_packet",
+    "frozen_reported_facts": [
+      "FY2025 consolidated revenue: 203,234.57 mn CNY (EV012)",
+      "FY2025 parent net profit: 12,527.20 mn CNY (EV012)",
+      "Q1 2026 consolidated revenue: 54,052.17 mn CNY (EV013)",
+      "Q1 2026 parent net profit: 3,717.71 mn CNY (EV011)",
+      "Q1 2026 gross margin: 14.728%, -0.98pp YoY (EV014)",
+      "Q1 2026 operating margin: 9.8142%, +0.49pp YoY (EV015)",
+      "Q1 2026 net margin: 6.878%, -0.28pp YoY (EV016)",
+      "Q1 2026 OCF/NI ratio: 1.8444x (EV018)",
+      "Q1 2026 Receivables/Rev: 6.9575%, -1.27pp YoY (EV019)",
+      "Q1 2026 Inventory/Rev: 13.2852%, -2.77pp YoY (EV020)",
+      "Diluted share count: 173.5 mn shares (calculated)",
+      "Market cap as of 2026-06-30: 214,155.56 mn CNY (EV044)",
+      "PE TTM: 16.2697x (EV045)",
+      "Implied TTM earnings: 13,162.85 mn CNY (EV045)",
+      "FY2025 annual filing: '化工行业' segment revenue 201,109.82 mn CNY, gross margin 13.48%, revenue growth +11.88% (EV030)",
+      "Segment-wise business description: Polyurethane, Petrochemical, Performance Materials, Battery materials (EV021, EV022)"
+    ],
+    "analyst_estimates": [
+      "Revenue growth 2026E-2028E: +2.0% / +3.0% / +3.0%",
+      "Gross margin trajectory: 14.2% (2026E), 14.8% (2027E), 15.5% (2028E)",
+      "Parent net profit: 13.4 bn / 14.5 bn / 15.8 bn CNY (2026-2028E)",
+      "EPS: 77.23 / 83.57 / 91.07 CNY/share",
+      "OCF: 26.0 bn / 28.0 bn / 30.0 bn CNY",
+      "Capex: 22.0 bn / 20.0 bn / 18.5 bn CNY",
+      "FCF: 4.0 bn / 8.0 bn / 11.5 bn CNY",
+      "Scenario probabilities: Bull 20% / Base 60% / Bear 20%",
+      "Bull fair value ~1,770 CNY/shr, Base ~1,170 CNY/shr, Bear ~903 CNY/shr",
+      "Battery materials optionality value: ~39 CNY/shr probability-weighted"
+    ],
+    "unresolved_model_cells": [
+      "Polyurethane (MDI) segment revenue and gross margin",
+      "MDI realized price and volume (tonnes, CNY/tonne)",
+      "Battery materials segment revenue, margin, capacity utilization",
+      "Detailed cash flow statement with capex split",
+      "Net debt position (total debt minus cash)",
+      "Current stock price and expected return calculation",
+      "Mid-cycle normalized EPS consensus or company guidance",
+      "MDI industry price/volume time series"
+    ],
+    "downstream_must_preserve": [
+      "Three-year forecast model (2026E, 2027E, 2028E) for consolidated revenue, gross margin, operating profit, parent net profit, EPS, OCF, capex, FCF",
+      "Business unit map with polyurethane, battery materials, and other segments",
+      "Six underwriting questions with model variable linkage",
+      "Three explicit scenarios (bull/base/bear) with probabilities and operating assumption paths",
+      "Financial bridges for MDI margin recovery, battery option, and FCF inflection",
+      "Moat tests for cost advantage, scale, and R&D with partial status and next verification",
+      "Valuation bucket structure: core mid-cycle earnings + battery optionality",
+      "Valuation closure formulas and double-counting checks"
+    ]
+  },
+  "evidence_change_rules": [
+    {
+      "evidence_id": "KPE01",
+      "affected_segment": "聚氨酯",
+      "affected_variable": "asp_or_price",
+      "old_assumption": "MDI price stable, no quantified assumption.",
+      "new_assumption": "unchanged/watch",
+      "financial_transmission": "If verified with quantitative MDI price increase, would raise gross margin and EPS projections, shift probability from base to bull.",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "产品报价、毛利率、竞品价格、下游接受度、行业价格指数"
+    },
+    {
+      "evidence_id": "KPE02",
+      "affected_segment": "consolidated",
+      "affected_variable": "unmapped",
+      "old_assumption": "missing",
+      "new_assumption": "unchanged",
+      "financial_transmission": "none until quantified",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "KPE03",
+      "affected_segment": "consolidated",
+      "affected_variable": "unmapped",
+      "old_assumption": "missing",
+      "new_assumption": "unchanged",
+      "financial_transmission": "none until quantified",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "KPE04",
+      "affected_segment": "consolidated",
+      "affected_variable": "unmapped",
+      "old_assumption": "missing",
+      "new_assumption": "unchanged",
+      "financial_transmission": "none until quantified",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "KPE05",
+      "affected_segment": "consolidated",
+      "affected_variable": "unmapped",
+      "old_assumption": "missing",
+      "new_assumption": "unchanged",
+      "financial_transmission": "none until quantified",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "KPE06",
+      "affected_segment": "consolidated",
+      "affected_variable": "unmapped",
+      "old_assumption": "missing",
+      "new_assumption": "unchanged",
+      "financial_transmission": "none until quantified",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "KPE07",
+      "affected_segment": "consolidated",
+      "affected_variable": "unmapped",
+      "old_assumption": "missing",
+      "new_assumption": "unchanged",
+      "financial_transmission": "none until quantified",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "KPE08",
+      "affected_segment": "consolidated",
+      "affected_variable": "unmapped",
+      "old_assumption": "missing",
+      "new_assumption": "unchanged",
+      "financial_transmission": "none until quantified",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    }
+  ],
+  "reconciliation_checks": [
+    "Q1 2026 diluted EPS of 21.43 (EV034) times 173.5 mn shares yields parent net profit ~3.718 bn, matching EV011 reported 3.7177 bn. Precision acceptable.",
+    "Implied TTM earnings from market cap / PE TTM = 214,155.56 / 16.2697 = 13,162.85 mn (EV045), which is close to the latest annual parent profit 12,527.20 mn (EV012) plus a modest uplift reflecting expected 2026 growth. Consistent.",
+    "Valuation percentile conflict: PE 58th percentile (above median), PB 6.6 and PS 5.3 percentile (near 5-year lows). Matches narrative of earnings cycle trough with high asset base causing compressed PB/PS while PE remains modestly elevated on a trough earnings base. Investor expectation likely already pricing some recovery.",
+    "Gross margin decline (-0.98pp) vs operating margin increase (+0.49pp) is internally logical if SG&A or overhead leverage improved or R&D capitalization changed. New model must track this divergence source (e.g., one-time cost reduction vs structural improvement).",
+    "Polyurethane export demand signal (KPE01) is the only directional catalyst; without it the model's positive margin recovery in base case is poorly supported. Need MDI price index verification before raising conviction.",
+    "Battery segment optionality value computed as 30% success probability of bull revenue 5 bn at 15x EV/Revenue, discounted by 30% haircut to 22.5 bn CNY EV, per share 129.68 CNY, weighted at bull 20% → 25.94 CNY, not the 38.9 stated in valuation closure (error there? — should be 129.68 × 20% bull prob = 25.94, not 30% uncorrelated). Need to reconcile valuation closure optionality calculation."
+  ],
+  "analyst_instructions": [
+    "Verify MDI realized price and volume data (industry sources: ICIS, Wind, company monthly production briefs). Map to polyurethane segment revenue forecast directly.",
+    "Request or infer segment gross margin for polyurethane, petrochemical, and specialty from annual filing disclosure note. Build segment-level model before aggregating to consolidated.",
+    "Track battery materials disclosures in H1 2026 filing for evidence of customer qualification, contract wins, or production ramp. If still zero disclosure, downgrade optionality probability.",
+    "The valuation percentile divergence (PE vs PB/PS) is the key market narrative; build a mid-cycle earnings scenario and compare implied PE to historical mid-cycle range to validate bull/bear probabilities.",
+    "Watch for capex guidance in next management outlook; if capex stays above 22 bn without corresponding revenue/margin improvement, FCF and DCF valuation will be structurally lower across all scenarios.",
+    "KPE02-KPE08 are low-quality stream items without actionable content; do not elevate to model inputs without extracting specific financial variable data. KPE01 is the highest-quality KPE but still unquantified."
+  ],
+  "preprocessing_notes": [
+    "Evidence payload contained consolidated financials for Q1 2026 and FY2025 only. No segment-level income statement breakdown for polyurethane or battery materials.",
+    "Market cap, PE TTM, PS TTM, and historical percentiles provide valuation context, but current stock price was not supplied as a separate field; unable to compute expected return.",
+    "KPE02-KPE08 have no extractable financial content; KPE01 provides the only meaningful (though unquantified) directional signal on polyurethane export demand.",
+    "Gross margin, operating margin, working capital ratios, and OCF/NI are well-documented and sufficient for consolidated modeling. Gap is in segment attribution and capital allocation detail.",
+    "Moat tests for cost advantage, scale, and R&D are structurally designed but lack peer and historical data for conclusive verification.",
+    "Valuation closure manually constructed from base/bull/bear PE and optionality; a direct probability-weighted aggregation not completed due to net debt missing and unclear probability mapping for optionality bucket. Downstream analyst must rebuild fair value per share from scenarios and net debt data.",
+    "unknown share-count evidence id removed",
+    "operating model driver coverage (volume_price_cost): capacity, utilization, volume, price/ASP, unit/input cost, spread/margin, capex/ROIC"
+  ]
+}

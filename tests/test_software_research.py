@@ -45,6 +45,29 @@ def test_software_context_not_applicable_for_unrelated_stock(monkeypatch):
     assert "Status: not_applicable" in rendered
 
 
+def test_software_context_does_not_misroute_chemical_company_with_ai_mentions(monkeypatch):
+    monkeypatch.setattr(
+        "tradingagents.dataflows.software_research._fetch_stock_basic",
+        lambda symbol: {"name": "万华化学", "industry": "化工原料"},
+    )
+    monkeypatch.setattr(
+        "tradingagents.dataflows.software_research._load_financial_report_texts",
+        lambda symbol, curr_date, look_back_days: (
+            "",
+            [
+                (
+                    "annual",
+                    "公司使用AI与信息技术软件提升化工装置效率，并披露合同负债；主营收入仍来自MDI、TDI和石化产品。",
+                )
+            ],
+        ),
+    )
+
+    rendered = get_software_context("600309.SH", "2026-06-30")
+
+    assert "Status: not_applicable" in rendered
+
+
 def test_software_web_queries_use_saas_terms():
     from tradingagents.dataflows.web_fact_research import _fact_queries
 

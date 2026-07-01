@@ -110,7 +110,7 @@ def _metals_quality_rows(
                 (
                     "Aluminum spread driver coverage",
                     "partial",
-                    f"SHFE aluminum proxy is present, but usable cost evidence is missing for {missing_text}; treat missing cost data as neutral non-evidence and a retrieval task. Margin-collapse or margin-resilience claims require independent verified cost, spread, inventory, cash-flow, or segment-margin evidence",
+                    f"SHFE aluminum proxy is present, but usable cost evidence is missing for {missing_text}; treat missing cost data as neutral non-evidence, neutral for direction, and a retrieval task. Margin-collapse or margin-resilience claims require independent verified cost, spread, inventory, cash-flow, or segment-margin evidence",
                 )
             )
 
@@ -183,6 +183,7 @@ def build_quality_audit_context(
     metals_mining_context: str = "",
     commodity_context: str = "",
     knowledge_planet_context: str = "",
+    structured_research_context: Mapping[str, object] | None = None,
 ) -> str:
     battery_rows = _battery_quality_rows(
         symbol=symbol,
@@ -208,7 +209,85 @@ def build_quality_audit_context(
         kpi_status = "partial"
     if any(name == "Battery forecast bridge" for name, _, _ in battery_rows):
         forecast_status = "partial"
+    structured_bundle = dict(structured_research_context or {})
+    underwriting_packet = structured_bundle.get("underwriting_packet", {})
+    if not isinstance(underwriting_packet, Mapping):
+        underwriting_packet = {}
+    underwriting_readiness = str(
+        underwriting_packet.get("research_readiness", "missing")
+    ).lower()
+    underwriting_status = (
+        underwriting_readiness
+        if underwriting_readiness in {"ready", "partial", "blocked"}
+        else "missing"
+    )
+    underwriting_reasons = underwriting_packet.get("readiness_reasons", [])
+    if isinstance(underwriting_reasons, str):
+        underwriting_reasons = [underwriting_reasons]
+    underwriting_treatment = (
+        "shared company model must contain operating equations, material segments, "
+        "underwriting questions, three-year forecasts and scenarios"
+    )
+    if underwriting_reasons:
+        underwriting_treatment += "; " + "; ".join(
+            str(reason) for reason in list(underwriting_reasons)[:3]
+        )
+
+    business_units = list(underwriting_packet.get("business_unit_map", []))
+    thesis_bridges = list(
+        underwriting_packet.get("thesis_financial_bridges", [])
+    )
+    moat_tests = list(underwriting_packet.get("moat_evidence_tests", []))
+    valuation_buckets = list(underwriting_packet.get("valuation_buckets", []))
+    valuation_closure = underwriting_packet.get("valuation_closure", {})
+    if not isinstance(valuation_closure, Mapping):
+        valuation_closure = {}
+    handoff_manifest = underwriting_packet.get("handoff_manifest", {})
+    if not isinstance(handoff_manifest, Mapping):
+        handoff_manifest = {}
+
     rows = [
+        (
+            "Shared company underwriting model",
+            underwriting_status,
+            underwriting_treatment,
+        ),
+        (
+            "Economic company disaggregation",
+            "ready" if business_units else "partial",
+            "separate reported segments from product/channel/geography/customer/project or financial-business units",
+        ),
+        (
+            "Thesis-to-financial transmission",
+            "ready"
+            if any(
+                str(row.get("quantification_status", ""))
+                in {"quantified", "partially_quantified"}
+                for row in thesis_bridges
+                if isinstance(row, Mapping)
+            )
+            else "partial",
+            "decisive claims need formulas and earnings/cash-or-capital/fair-value impact",
+        ),
+        (
+            "Moat evidence tests",
+            "ready" if moat_tests else "partial",
+            "claimed advantages require observable history/true-peer tests and counterevidence",
+        ),
+        (
+            "Valuation closure",
+            "ready"
+            if valuation_buckets
+            and str(valuation_closure.get("status", "")) == "closed"
+            and valuation_closure.get("fair_value_per_share_cny") is not None
+            else "partial",
+            "mutually exclusive buckets must reconcile to per-share value without double counting",
+        ),
+        (
+            "Lossless agent handoff",
+            "ready" if handoff_manifest.get("downstream_must_preserve") else "partial",
+            "preserve business units, three years, bridges, value buckets and unresolved cells",
+        ),
         ("Industry cycle stage", _status(industry_cycle_context, fail_markers=("cycle evidence insufficient",)), "cycle verdict must precede valuation language"),
         ("Business model / segment economics", _status(company_business_model_context, fail_markers=("no clean business-model",)), "reader must understand how the company earns money"),
         (
@@ -305,7 +384,7 @@ def build_quality_audit_context(
             "",
             "## Pre-Generation Readiness Verdict",
             f"- Weak or incomplete modules: {', '.join(weak) if weak else 'none detected from supplied contexts'}",
-            "- Manager instruction: weak or unavailable modules are non-blocking. Preserve an evidence-based rating, and make every material gap a dated retrieval or verification item.",
+            "- Manager instruction: ordinary source-coverage gaps are non-blocking and neutral. A blocked shared underwriting model, corrupted source, invalid unit/period, missing company operating equations, or failed structured PM output is release-blocking and must remain a draft until repaired.",
             "- Scope warning: this verdict checks input/scaffold readiness only. It cannot certify the generated PM memo. After generation, run the deterministic post-generation audit for arithmetic, period semantics, financial calendar, KPE transmission, forecast completion, and context alignment.",
         ]
     )
@@ -331,4 +410,5 @@ def get_quality_audit_context(
         metals_mining_context=supplied.get("metals_mining_context", ""),
         commodity_context=supplied.get("commodity_context", ""),
         knowledge_planet_context=supplied.get("knowledge_planet_context", ""),
+        structured_research_context=supplied.get("structured_research_context", {}),
     )

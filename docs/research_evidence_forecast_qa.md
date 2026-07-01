@@ -110,5 +110,120 @@ integrity, including:
 - industry/playbook context alignment.
 
 The audit never changes or independently assigns the investment rating. Any
-`error` must be reconciled before the report is treated as publication- or
-investment-committee-ready.
+publication blocker must be reconciled before the report is treated as
+publication- or investment-committee-ready. Blockers include deterministic
+arithmetic/period/unit contradictions, a blocked shared company-underwriting
+packet, failed Portfolio Manager structured generation, omitted material
+segments, an unreconciled three-year model, and missing mandatory deep-research
+sections. Missing source availability remains neutral evidence, but it must be
+named with a retrieval task.
+
+When blocked, the raw PM response is retained only as
+`5_portfolio/decision_draft.md`; ratings, target prices, sizing, substitutes, and
+trade instructions are suppressed from `decision.md` and `complete_report.md`.
+`5_portfolio/generation_status.json` records whether the PM response was native
+structured output, schema-repaired fallback, or unvalidated free text.
+
+The public `complete_report.md` contains the schema-valid company deep-dive and
+an artifact coverage table. Raw analyst/debate/risk transcripts are preserved
+separately in `research_archive.md` and the numbered subdirectories so modules
+remain auditable without turning the public memo into a concatenated transcript.
+
+## 6. Universal company-depth contract (schema v2)
+
+Every A-share company passes the same six analytical contracts, while
+`model_profile` selects industry-native metrics:
+
+1. **Company disaggregation** separates filing segments from the product,
+   channel, geography, customer, project/asset, or financial-business units
+   that actually drive economics. Analytical units may organize diligence but
+   may not receive invented revenue, margin, or value.
+2. **Autonomous three-year model** starts from operating drivers and reconciles
+   material units to group earnings, cash/capital, and per-share lines. Banks,
+   insurers, securities firms, and REITs retain their native model lines.
+3. **Thesis-to-financial bridges** map each decisive claim through a formula and
+   bull/base/bear assumptions to earnings, cash/capital, and fair value.
+4. **Moat evidence tests** classify claimed advantages as proven, partial,
+   unproven, or rejected using observable history/true-peer evidence,
+   counterevidence, and financial transmission.
+5. **Valuation closure** uses mutually exclusive core/scenario/optionality/
+   excluded buckets and reconciles probability, share count, per-share value,
+   expected return, rating consistency, and double-counting checks.
+6. **Lossless handoff** preserves economic units, all three forecast years,
+   thesis bridges, valuation buckets, reported facts, estimates, and unresolved
+   cells across Fundamental Analyst, Bull/Bear, Research Manager, and PM.
+
+The PM renderer emits explicit sections for all six contracts. Missing or shallow
+analysis is sent to the selected deep model's senior sell-side editorial pass for
+section-specific revision; it is not a mechanical publication blocker. Ordinary
+unavailable source data remains neutral: the affected cell stays missing with an
+explicit retrieval task and confidence cap instead of invented precision or a mechanical
+rating change.
+
+## 7. Deterministic depth and report-length controls
+
+The shared company model selects one `operating_model_family`. The validator
+then checks the corresponding native driver chain, rather than accepting a
+generic revenue-growth narrative. Supported families cover volume/price/cost,
+store traffic/conversion/ticket, users/ARPU/retention, project backlog/delivery,
+commodity output/realized price/cash cost, bank spread/credit, insurance value,
+and REIT occupancy/rent economics. Missing drivers keep the model partial and
+are named as retrieval/modeling tasks.
+
+Chinese and English forecast-line aliases are canonicalized before required
+rows are added, so one economic metric cannot appear once as a populated Chinese
+row and again as an empty English row. When the same snapshot contains market
+capitalization and latest close, diluted shares are calculated as market cap /
+close; EPS, FCF, scenario PE value, valuation-bucket per-share value,
+probability-weighted value, and expected return are recalculated deterministically.
+
+A moat cannot remain `proven` or `partial` without a valid `EV`, `KPE`, or `KF`
+evidence id. The final audit also recalculates reported-to-forecast growth,
+option-value formulas, scenario-weighted ranges, and fair-value returns.
+Research Manager and PM free-text fallbacks are saved for diagnosis but block
+formal publication because the model handoff is not schema-valid.
+
+The public PM memo uses eight stable reader-facing sections, but length follows company
+complexity and analytical closure rather than a character quota. Duplicate PM summaries,
+debate retellings, repeated
+model/valuation sections, information-use audits, and generation self-checks move to
+`5_portfolio/research_appendix.md`; they remain auditable without making the
+decision memo read like an agent transcript.
+
+## 8. Share-count, handoff, and fixed-PM controls
+
+Diluted shares are deterministic master data. The pipeline first reads the
+latest Tushare `pledge_stat.total_share` value (10,000 shares, converted to
+million shares), then cross-checks market capitalization divided by the same
+snapshot close. A difference above 2% blocks release. LLM-supplied share count
+cannot override either source. Parent profit / diluted shares recalculates every
+forecast and scenario EPS; PE fair value and equity-value/share conversions are
+then recalculated. A non-PE per-share valuation built on a rejected denominator
+is cleared and must be rebuilt rather than cosmetically rescaled.
+
+Reported EPS extracted from filing text is cross-checked against same-period
+parent profit and deterministic shares. A difference above 2% marks the EPS as
+unverified with `pdf_table_column_shift_suspected`; it cannot enter the shared
+model as a reported fact.
+
+Research Manager and PM outputs now persist `canonical_model_snapshot` arrays
+and explicit accepted change rows. Saved artifacts are
+`2_research/canonical_plan.json` and
+`5_portfolio/canonical_decision.json`. The release audit compares underwriting
+packet -> Research Manager -> PM values and units. A changed or dropped line
+without a matching accepted change row blocks publication.
+
+DeepSeek thinking models that reject `tool_choice` use one schema-prompt JSON
+call followed by Pydantic validation. This is recorded as
+`schema_prompt_structured`, not an unvalidated free-text fallback.
+
+The PM renderer owns the normal report structure. The public memo has eight Chinese
+sections: conclusion/core conflict; company/profit pools; industry/competition;
+three-year forecast; thesis/moat/transmission; accounting/capital allocation;
+valuation/expected return; and risks/catalysts/verification. Their depth and length adapt
+to the company and available evidence. Model-change, handoff, quality and legacy overflow
+text are moved to the research appendix. After the first schema-valid draft, the selected
+deep model performs a senior sell-side editorial review and, when warranted, one targeted
+revision. The review trace is saved as `5_portfolio/editorial_review.json`. Review failure
+keeps the first draft and does not stop the pipeline; only unrecoverable numeric, unit,
+period, structured-output, or canonical-handoff contradictions can block publication.

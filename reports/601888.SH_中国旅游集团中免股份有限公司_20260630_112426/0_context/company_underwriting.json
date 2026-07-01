@@ -1,0 +1,706 @@
+{
+  "schema_version": 1,
+  "symbol": "601888.SH",
+  "as_of_date": "2026-06-30",
+  "forecast_years": [
+    "2026E",
+    "2027E",
+    "2028E"
+  ],
+  "research_readiness": "partial",
+  "readiness_reasons": [
+    "Segment-level channel breakdown (Hainan offshore, airport, online, DFS) not disclosed; revenue/profit-weight allocation is missing.",
+    "Q1 2025 comparable revenue/earnings figures absent; YoY growth rates are inferred from margin changes only.",
+    "No sell-side consensus or internal baseline forecasting assumptions supplied; forecast scaffold uses Q1 2026 annualised/reference PDF figures.",
+    "KPE evidence items (KPE01, KPE02) have no content to map to model variables; they remain on watch.",
+    "Conflict EV036 (revenue growth -68.51%) unresolved; reliance on direct reported figures from EV011/EV012.",
+    "EPS forecast lacks a validated CNY-million parent-profit / diluted-share-count bridge."
+  ],
+  "company_model": {
+    "model_profile": "corporate",
+    "business_archetype": "Brand Consumer (品牌消费) + Channel Distribution (渠道动销型) + Platform Ecosystem (平台生态)",
+    "value_proposition_and_customers": "Operates China's largest duty-free retail network, selling luxury goods, cosmetics, perfumes, tobacco, and alcohol to domestic and international travellers. Customers are primarily mainland Chinese tourists in Hainan, outbound/inbound travellers at airports and city stores, and online duty-free shoppers. The company aggregates demand through direct-owned stores, concession agreements, and a membership platform with ~53 million members.",
+    "revenue_equation": "Revenue = Σ (Channel footfall × Conversion rate × Average transaction value) ≈ Main business duty-free retail across offshore island, airport, city downtown, online, and DFS Greater China channels. Revenue is volume-driven with some ASP mix uplift from luxury goods.",
+    "profit_equation": "Gross profit = Revenue - cost of goods sold (brand purchases, logistics). Operating profit = Gross profit - selling & administrative expenses (concession fees, labour, marketing, depreciation) - R&D. Net profit = Operating profit + non-operating items - tax. Q1 2026 margin structure: gross 33.6%, operating 16.5%, net 13.9%.",
+    "cash_flow_equation": "OCF from strong cash conversion (OCF/net profit ratio 1.66x in Q1 2026) as duty-free sales are largely cash/card; working capital is inventory-heavy but stable (inventory/revenue ~23.5% of annualized revenue). FCF = OCF - capex (store expansion, digital systems, DFS integration).",
+    "capital_intensity_and_reinvestment": "Asset-light retail model; main capex goes to new store fit-out, leasehold improvements, digital platform, and M&A (DFS). FY2025 R&D expense surged 352.74% for digitalization. Intangible amortisation partly capitalised into construction-in-progress.",
+    "diluted_share_count_mn": null,
+    "share_count_period": "",
+    "share_count_evidence_id": "",
+    "moat_mechanisms": [
+      "Exclusive government concessions for duty-free operations at prime locations (Hainan, major airports).",
+      "Scale-driven procurement power with global luxury brands, enabling competitive pricing and exclusivity.",
+      "High loyalty and repeat purchase from 53-million-member platform and data-driven targeting.",
+      "Network effects: breadth of locations increases brand attractiveness to both consumers and suppliers.",
+      "Post-DFS acquisition, expanded Greater China coverage and supply-chain synergies."
+    ],
+    "moat_to_financial_transmission": [
+      "Concession renewals at favourable terms lock in long-term gross margin floors.",
+      "Membership and personalisation drive traffic and conversion, stabilising revenue per store.",
+      "Brand exclusivity allows ASP premiums and faster inventory turns.",
+      "Scale procurement reduces unit costs, supporting gross margins or price competitiveness."
+    ],
+    "structural_risks": [
+      "Dependence on China duty-free policy; changes in Hainan offshore duty-free limits, departure tax refund rules, or licensing could abruptly shrink the addressable market.",
+      "Competition from global luxury brands' own direct retail, cross-border e-commerce, and other duty-free operators (e.g., Hainan new entrants, airport concessions).",
+      "Tourism and macro sensitivity: demand is tied to domestic travel, consumer confidence, and international flight capacity.",
+      "Foreign exchange exposure from international procurement and DFS operations, as noted in filings.",
+      "DFS integration risk: execution in merging systems, culture, and brand relationships."
+    ],
+    "key_unknowns": [
+      "Hainan offshore duty-free policy stability and potential relaxation for non-duty-free competitors after 2025 island-wide customs closure.",
+      "DFS acquisition revenue contribution and margin profile, including integration costs.",
+      "Airport traffic recovery trajectory and any step-change in minimum guaranteed rent/cost structure under new concession agreements."
+    ],
+    "evidence_ids": [
+      "EV021",
+      "EV022",
+      "EV024",
+      "EV025",
+      "EV029",
+      "EV030"
+    ]
+  },
+  "segment_models": [
+    {
+      "segment": "主营业务",
+      "products_or_services": "Duty-free retail of luxury goods, cosmetics, perfumes, tobacco, alcohol, and other travel retail products across offshore island (Hainan), airport terminals, city downtown stores, online platforms, and recently consolidated DFS Greater China operations.",
+      "customers_and_channel": "Mainland Chinese travellers (Hainan), outbound/inbound air passengers, and online shoppers. Channels: offshore island stores, airport shops (concessions), city downtown duty-free, online duty-free platforms, and the newly added DFS retail network.",
+      "revenue_weight_pct": 97.9,
+      "profit_weight_pct": null,
+      "base_period": "FY2025",
+      "base_revenue_value": 52552.697,
+      "base_revenue_unit": "CNY mn",
+      "base_revenue_growth_pct": null,
+      "base_margin_pct": null,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [
+        "Tourist footfall (Hainan visitors, airport throughput)",
+        "Consumer spending confidence and luxury goods demand",
+        "Duty-free policy adjustments (e.g., purchase limits, new qualifying categories)",
+        "Membership engagement and repeat purchase rate",
+        "Brand assortment and exclusivity availability"
+      ],
+      "industry_supply_and_capacity": "Hainan duty-free capacity is expanding with multiple operators, but China Tourism Group Duty Free retains the largest store network and established brand relationships. Airport concession supply is contract-renewal driven, with the company recently winning new terminals at Shanghai and Beijing. DFS acquisition adds capacity in Greater China.",
+      "volume_share_utilization": "The company likely holds the dominant share of Hainan duty-free sales (estimated >80% historically) and significant airport duty-free market share. Volumes are directly correlated with tourist traffic and conversion.",
+      "price_asp_take_rate": "Duty-free prices are lower than domestic retail due to tax exemptions; ASP is influenced by product mix (higher share of luxury and cosmetics elevates ASP). The company's membership pricing and promotions provide some control over average transaction value.",
+      "unit_cost_and_input_prices": "Main cost is cost of goods sold (brand procurement). Procurement scale allows negotiation leverage. Concession fees (variable rent) are a significant operating expense tied to revenue. Logistics and store labour are relatively fixed.",
+      "margin_and_operating_leverage": "Gross margin improved to 33.6% in Q1 2026 (+0.65pp YoY) driven by mix shift and potentially better procurement terms. Operating leverage is high: fixed store costs and digital spend can be spread over higher volumes, driving operating margin expansion.",
+      "working_capital_and_cash_conversion": "Inventory intensity is moderate (23.5% of annualised revenue) but stable. Receivables are negligible (0.25% of revenue). Cash conversion is strong (OCF/net profit 1.66x in Q1 2026).",
+      "prosperity_level": "moderate",
+      "marginal_direction": "improving",
+      "causal_analysis": "Demand is recovering as tourism picks up and duty-free policy becomes more supportive. Supply is disciplined, with the company leveraging scale and DFS integration. Price/mix improvements are visible in higher gross margin, and volume growth should follow traffic recovery. Operating leverage suggests margins will expand as revenue scales. Cash conversion remains robust.",
+      "valuation_treatment": "Core profit pool; valued on earnings power (PE, EBITDA) given earnings visibility and moat. DFS addition adds SOTP element.",
+      "strongest_counterevidence": [
+        "FY2025 revenue decline of ~5.8% YoY indicates the market has not yet stabilised.",
+        "Conflicting signal in EV036 (revenue growth -68.51%) raises data reliability concerns.",
+        "No quantitative segment breakdown; sub-channel growth differences are unclear."
+      ],
+      "evidence_ids": [
+        "EV011",
+        "EV012",
+        "EV013",
+        "EV014",
+        "EV021",
+        "EV029",
+        "EV030"
+      ],
+      "missing_inputs": [
+        "Revenue by channel (Hainan offshore, airport, online, DFS) for segmentation and growth analysis.",
+        "Gross margin by channel to identify profit-pool quality.",
+        "Volume metrics (footfall, conversion) and ASP data.",
+        "DFS acquisition actual revenue and profit contribution."
+      ],
+      "next_verification": "Await H1 2026 report for segment revenue split and DFS integration progress; monitor monthly Hainan tourist arrivals and duty-free sales data."
+    },
+    {
+      "segment": "其他业务",
+      "products_or_services": "Likely property rental, management services, or other non-core retail activities.",
+      "customers_and_channel": "Undisclosed; minor contributor.",
+      "revenue_weight_pct": 2.1,
+      "profit_weight_pct": null,
+      "base_period": "FY2025",
+      "base_revenue_value": 1140.882,
+      "base_revenue_unit": "CNY mn",
+      "base_revenue_growth_pct": null,
+      "base_margin_pct": null,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [
+        "Unknown"
+      ],
+      "industry_supply_and_capacity": "Insufficient evidence.",
+      "volume_share_utilization": "Insufficient evidence.",
+      "price_asp_take_rate": "Insufficient evidence.",
+      "unit_cost_and_input_prices": "Insufficient evidence.",
+      "margin_and_operating_leverage": "Insufficient evidence.",
+      "working_capital_and_cash_conversion": "Insufficient evidence.",
+      "prosperity_level": "evidence_limited",
+      "marginal_direction": "unknown",
+      "causal_analysis": "Revenue is immaterial; no causal chain can be established.",
+      "valuation_treatment": "Valued as a residual; likely included in SOTP only if disclosed.",
+      "strongest_counterevidence": [],
+      "evidence_ids": [
+        "EV029",
+        "EV030"
+      ],
+      "missing_inputs": [
+        "Nature of other business operations",
+        "Revenue and profit breakdown",
+        "Growth and margin trends"
+      ],
+      "next_verification": "None unless segment materiality increases."
+    }
+  ],
+  "underwriting_questions": [
+    {
+      "question_id": "Q1",
+      "question": "What is the sustainable revenue growth rate for the duty-free main business, broken down by Hainan offshore, airport, online, and DFS channels, and what drives volume vs ASP?",
+      "why_it_matters": "Revenue is the top-line driver; misjudging channel mix or growth trajectory directly impacts EPS and DCF valuation. The market currently prices PE of 27.9x, assuming some recovery; a weaker recovery could de-rate.",
+      "current_answer": "unresolved",
+      "bull_evidence": [
+        "Q1 2026 annualised revenue suggests strong recovery (16.9bn Q1 / 0.525 seasonal factor implies ~32bn, but simple run-rate implies 67.6bn).",
+        "Policy support: new Hainan duty-free measures since Nov 2025, expansion of eligible categories, and city-store online pre-order capability.",
+        "DFS acquisition closed March 2026, adding a new channel with cross-sell potential.",
+        "Management commentary cites core brand supply recovery and strong traffic."
+      ],
+      "bear_evidence": [
+        "FY2025 main business revenue declined ~5.8% YoY, showing persistent weakness in a supposedly recovering tourism market.",
+        "No peer breakdown to verify market share or competitive pressures.",
+        "Online and DFS channels are lower margin; mix could dilute overall profitability."
+      ],
+      "decisive_model_variables": [
+        "segment revenue by channel",
+        "volume growth (footfall, conversion)",
+        "ASP trend"
+      ],
+      "affected_financial_lines": [
+        "revenue",
+        "revenue growth",
+        "gross profit",
+        "EPS"
+      ],
+      "evidence_ids": [
+        "EV013",
+        "EV021",
+        "EV029"
+      ],
+      "missing_evidence": [
+        "Segmented revenue by channel (Hainan airport/offshore, city, online, DFS)",
+        "Historical footfall and conversion data",
+        "Competitor market share shifts"
+      ],
+      "next_verification": "H1 2026 report segment revenue, Q2 2026 management call commentary on channel trends."
+    },
+    {
+      "question_id": "Q2",
+      "question": "How sustainable and improvable is the gross margin at ~33.6%, considering brand mix, procurement scale, DFS lower-margin retail, and potential concession fee renegotiations?",
+      "why_it_matters": "Gross margin is the largest swing factor for net profit. A 1pp change in gross margin shifts parent profit by ~CNY 530-670mn, directly affecting EPS and valuation multiple support.",
+      "current_answer": "unresolved",
+      "bull_evidence": [
+        "Q1 2026 gross margin improved +0.65pp YoY, driven by mix and procurement optimisation.",
+        "DFS adds scale in brand negotiations, potentially improving overall cost-of-goods.",
+        "New airport concessions (Shanghai, Beijing) may have more favourable rent terms than previous cycles."
+      ],
+      "bear_evidence": [
+        "DFS retail historically has lower margins, so consolidation could dilute group margin.",
+        "Intense competition in Hainan could force price wars, eroding gross margin.",
+        "Luxury brands increasingly seek direct-to-consumer channels, reducing duty-free operator's pricing power."
+      ],
+      "decisive_model_variables": [
+        "consolidated gross margin",
+        "brand procurement terms",
+        "concession cost structure",
+        "DFS margin impact"
+      ],
+      "affected_financial_lines": [
+        "gross margin",
+        "operating margin",
+        "net profit",
+        "EPS"
+      ],
+      "evidence_ids": [
+        "EV014",
+        "EV024"
+      ],
+      "missing_evidence": [
+        "DFS segment gross margin stand-alone",
+        "Blended Hainan and airport channel margins",
+        "Details of new airport concession fee agreements"
+      ],
+      "next_verification": "H1 2026 gross margin and management discussion of DFS integration and concession costs."
+    },
+    {
+      "question_id": "Q3",
+      "question": "What is the true cash conversion and free cash flow generation of the business once DFS integration capex, working capital needs, and tax payments are normalised?",
+      "why_it_matters": "FCF is the basis for dividend sustainability and buyback capacity. Current OCF/net profit ratio of 1.66x is exceptionally high; understanding its durability justifies (or challenges) the 40%+ dividend payout.",
+      "current_answer": "unresolved",
+      "bull_evidence": [
+        "Q1 2026 OCF was CNY 3,891mn vs net profit CNY 2,337mn, 1.66x conversion.",
+        "Receivables are negligible; inventory is stable; working capital is not a drain.",
+        "Management commits to high dividend payout (40.5% of profit)."
+      ],
+      "bear_evidence": [
+        "DFS integration could require significant capex and restructuring cash outflows.",
+        "Higher tax payments from higher profits may reduce OCF.",
+        "Intangible amortisation and asset impairment could be non-cash but signal economic cost."
+      ],
+      "decisive_model_variables": [
+        "operating cash flow",
+        "capex",
+        "free cash flow"
+      ],
+      "affected_financial_lines": [
+        "OCF",
+        "FCF",
+        "dividend per share"
+      ],
+      "evidence_ids": [
+        "EV018",
+        "EV039",
+        "EV040"
+      ],
+      "missing_evidence": [
+        "Detailed capex plan for DFS integration and store network",
+        "Normalised working capital cycle",
+        "Cash tax rate"
+      ],
+      "next_verification": "H1 2026 cash flow statement and management guidance on capex and dividend."
+    },
+    {
+      "question_id": "Q4",
+      "question": "What is the EPS impact of the DFS acquisition (including one-off integration costs, H-share issuance dilution, and synergy realisation), and what is the path to accretion?",
+      "why_it_matters": "DFS is a large recent acquisition, and the market is uncertain about dilution, integration costs, and incremental earnings. Misjudging accretion can misprice the stock significantly.",
+      "current_answer": "unresolved",
+      "bull_evidence": [
+        "Management states performance is in line with expectations; synergies could include brand access and operational cost savings.",
+        "Acquisition was partly funded by H-share placement, diluting existing shareholders only modestly.",
+        "DFS gives immediate access to Greater China retail network."
+      ],
+      "bear_evidence": [
+        "DFS retail historically generated lower margins; no evidence of immediate margin uplift.",
+        "Integration costs are being charged through restructuring and operational expenses.",
+        "Dilution from new shares issued reduces EPS for existing holders."
+      ],
+      "decisive_model_variables": [
+        "DFS revenue contribution",
+        "DFS margin",
+        "integration costs",
+        "share count"
+      ],
+      "affected_financial_lines": [
+        "parent net profit",
+        "diluted EPS",
+        "FCF"
+      ],
+      "evidence_ids": [
+        "KPE01",
+        "KPE02",
+        "EV040"
+      ],
+      "missing_evidence": [
+        "DFS segment P&L post-acquisition",
+        "Number of new H-shares issued",
+        "One-off integration cost schedule"
+      ],
+      "next_verification": "Full-year 2026 filing with DFS pro-forma and segment note."
+    },
+    {
+      "question_id": "Q5",
+      "question": "Can the current market valuation (PE TTM 27.9x, PS 2.07x) be justified by the earnings growth trajectory implied by our base case (~40% profit growth in 2026E) and structural moat?",
+      "why_it_matters": "The valuation multiple determines most of the return. If the market is under-pricing the recovery, the stock offers upside even without multiple expansion; if it is already pricing in full recovery, returns may be modest.",
+      "current_answer": "unresolved",
+      "bull_evidence": [
+        "PE is at 20.2 percentile over 5 years, PB at 0.2 percentile, PS at 3.3 percentile – historically cheap.",
+        "Implied TTM earnings CNY 3,997mn vs base case 2026E net profit CNY 5,000mn suggests 25% earnings growth is not fully reflected.",
+        "Duty-free industry has regulatory moats and high barriers, supporting above-average multiples."
+      ],
+      "bear_evidence": [
+        "The TTM PE of 27.9x is still above average global retail peers.",
+        "The market may be discounting a structural shift in duty-free spending patterns.",
+        "Even at a 20x multiple, upside is limited if EPS only reaches CNY 2.50."
+      ],
+      "decisive_model_variables": [
+        "fair PE multiple",
+        "earnings growth",
+        "competitive position"
+      ],
+      "affected_financial_lines": [
+        "fair value per share",
+        "P/E ratio"
+      ],
+      "evidence_ids": [
+        "EV043",
+        "EV044",
+        "EV045"
+      ],
+      "missing_evidence": [
+        "Peer-implied multiple range justified by ROIC and growth",
+        "Precise share count for PE computation"
+      ],
+      "next_verification": "Peer analysis using Tushare peer table, review of management capital allocation history."
+    }
+  ],
+  "forecast_lines": [
+    {
+      "segment": "主营业务",
+      "metric": "revenue",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 52552.697,
+      "year_1_value": 57808.0,
+      "year_2_value": 63589.0,
+      "year_3_value": 69948.0,
+      "formula": "base_value * (1+10%) for 2026E, then +10%, +10% driven by tourism recovery, DFS contribution, and policy uplift.",
+      "assumption_status": "assumed",
+      "evidence_ids": [
+        "EV011",
+        "EV029"
+      ],
+      "key_sensitivity": "1% revenue change = ~CNY 580mn in 2026E, affecting gross profit by ~CNY 195mn.",
+      "missing_inputs": [
+        "Channel-level build-up",
+        "DFS organic growth vs base"
+      ]
+    },
+    {
+      "segment": "其他业务",
+      "metric": "revenue",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 1140.882,
+      "year_1_value": 1140.882,
+      "year_2_value": 1140.882,
+      "year_3_value": 1140.882,
+      "formula": "held flat, given lack of disclosure and immateriality.",
+      "assumption_status": "assumed",
+      "evidence_ids": [
+        "EV030"
+      ],
+      "key_sensitivity": "negligible",
+      "missing_inputs": [
+        "Business nature and growth prospects"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "revenue",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 53693.579,
+      "year_1_value": 58948.882,
+      "year_2_value": 64729.882,
+      "year_3_value": 71088.882,
+      "formula": "sum of segment revenues; base from EV012.",
+      "assumption_status": "computed",
+      "evidence_ids": [
+        "EV012",
+        "EV011"
+      ],
+      "key_sensitivity": "top-line driver for margins and cash flow",
+      "missing_inputs": []
+    },
+    {
+      "segment": "consolidated",
+      "metric": "gross_margin",
+      "unit": "%",
+      "base_period": "FY2025",
+      "base_value": null,
+      "year_1_value": 34.5,
+      "year_2_value": 35.0,
+      "year_3_value": 35.5,
+      "formula": "Q1 2026 actual 33.63%, +1pp improvement per year from mix, scale, and DFS synergies.",
+      "assumption_status": "assumed",
+      "evidence_ids": [
+        "EV014"
+      ],
+      "key_sensitivity": "1pp change shifts gross profit by CNY 590-711mn.",
+      "missing_inputs": [
+        "FY2025 actual gross margin for calculation"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "operating_margin",
+      "unit": "%",
+      "base_period": "FY2025",
+      "base_value": null,
+      "year_1_value": 17.5,
+      "year_2_value": 18.5,
+      "year_3_value": 19.5,
+      "formula": "Q1 2026 actual 16.52%, +1pp per year from operating leverage and cost control.",
+      "assumption_status": "assumed",
+      "evidence_ids": [
+        "EV015"
+      ],
+      "key_sensitivity": "operating leverage sensitivity",
+      "missing_inputs": [
+        "FY2025 actual operating margin"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "operating_profit",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": null,
+      "year_1_value": 10316.0,
+      "year_2_value": 11975.0,
+      "year_3_value": 13862.0,
+      "formula": "revenue * operating_margin",
+      "assumption_status": "computed",
+      "evidence_ids": [],
+      "key_sensitivity": "revenue and margin interaction",
+      "missing_inputs": [
+        "FY2025 operating profit for base"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "parent_net_profit",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 3586.178,
+      "year_1_value": 5000.0,
+      "year_2_value": 5930.0,
+      "year_3_value": 5990.0,
+      "formula": "Based on reference research (Great Wall Securities) forecast: 2026E 50亿, 2027E 59.3亿, 2028E 59.9亿; consistent with margin recovery and moderate revenue growth.",
+      "assumption_status": "assumed (from external PDF reference)",
+      "evidence_ids": [
+        "EV012",
+        "EV016"
+      ],
+      "key_sensitivity": "dominant driver of EPS and valuation",
+      "missing_inputs": [
+        "Tax rate, minority interest allocation"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "eps",
+      "unit": "CNY",
+      "base_period": "FY2025",
+      "base_value": null,
+      "year_1_value": 2.41,
+      "year_2_value": 2.85,
+      "year_3_value": 2.88,
+      "formula": "parent_net_profit / diluted_share_count (assumed 2078 mn shares from Tushare reg_capital).",
+      "assumption_status": "calculated",
+      "evidence_ids": [],
+      "key_sensitivity": "share count and profit",
+      "missing_inputs": [
+        "Accurate diluted share count including H-shares post-DFS"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "ocf",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": null,
+      "year_1_value": 7500.0,
+      "year_2_value": 8895.0,
+      "year_3_value": 8985.0,
+      "formula": "parent_net_profit * 1.5x cash conversion (conservative vs Q1 1.66x).",
+      "assumption_status": "assumed",
+      "evidence_ids": [
+        "EV018"
+      ],
+      "key_sensitivity": "cash conversion rate",
+      "missing_inputs": [
+        "FY2025 OCF"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "capex",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": null,
+      "year_1_value": 2000.0,
+      "year_2_value": 1800.0,
+      "year_3_value": 1600.0,
+      "formula": "moderate capex for store maintenance and digital; DFS integration spend front-loaded.",
+      "assumption_status": "assumed",
+      "evidence_ids": [],
+      "key_sensitivity": "directly affects FCF",
+      "missing_inputs": [
+        "FY2025 capex",
+        "DFS capex plan"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "fcf",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": null,
+      "year_1_value": 5500.0,
+      "year_2_value": 7095.0,
+      "year_3_value": 7385.0,
+      "formula": "OCF - capex",
+      "assumption_status": "computed",
+      "evidence_ids": [],
+      "key_sensitivity": "dividend capacity",
+      "missing_inputs": []
+    }
+  ],
+  "scenarios": [
+    {
+      "scenario": "base",
+      "probability_pct": 60.0,
+      "operating_assumptions": [
+        "Revenue grows ~10% p.a. driven by Hainan tourism recovery, DFS contribution, and policy support.",
+        "Gross margin improves to 34.5%/35.0%/35.5% in 26E/27E/28E.",
+        "Operating margin expands to 17.5%/18.5%/19.5% from operating leverage.",
+        "DFS integration proceeds smoothly, with no major goodwill impairment.",
+        "Dividend payout maintained at 40%."
+      ],
+      "parent_net_profit_cny_mn": 5000.0,
+      "eps_cny": 2.41,
+      "fcf_cny_mn": 5500.0,
+      "valuation_method": "PE multiple based on comparable duty-free/retail sector and growth profile",
+      "valuation_multiple": 24.0,
+      "fair_value_per_share": 57.84,
+      "evidence_ids": [
+        "EV044",
+        "EV045"
+      ],
+      "falsification": "If H1 2026 revenue growth is negative or margins decline, the base case is at risk.",
+      "missing_inputs": [
+        "Peer multiple justification",
+        "Accurate diluted share count"
+      ]
+    },
+    {
+      "scenario": "bull",
+      "probability_pct": 20.0,
+      "operating_assumptions": [
+        "Revenue growth accelerates to 15%+ on stronger-than-expected tourism, earlier DFS synergy, and new policy tailwinds.",
+        "Gross margin reaches 36% by 2028E due to brand mix and scale.",
+        "Operating margin exceeds 20% by 2028E.",
+        "DFS acquisition generates immediate accretion and no goodwill issues.",
+        "Higher dividend or buyback initiated."
+      ],
+      "parent_net_profit_cny_mn": 9000.0,
+      "eps_cny": 4.33,
+      "fcf_cny_mn": 12000.0,
+      "valuation_method": "PE multiple",
+      "valuation_multiple": 26.0,
+      "fair_value_per_share": 112.58,
+      "evidence_ids": [
+        "EV014",
+        "EV016"
+      ],
+      "falsification": "Bull case requires sustained GDP growth >6%, outbound travel exceeding 200 million trips, and no negative policy changes.",
+      "missing_inputs": [
+        "Long-term growth trajectory"
+      ]
+    },
+    {
+      "scenario": "bear",
+      "probability_pct": 20.0,
+      "operating_assumptions": [
+        "Revenue stagnates due to increased Hainan competition, weak luxury demand, and slower tourism.",
+        "Gross margin declines to 32% as price competition intensifies.",
+        "Operating margin drops to 14% due to fixed cost deleverage.",
+        "DFS integration proves dilutive early on, requiring restructuring charges.",
+        "Dividend payout reduced to preserve cash."
+      ],
+      "parent_net_profit_cny_mn": 3800.0,
+      "eps_cny": 1.83,
+      "fcf_cny_mn": 3000.0,
+      "valuation_method": "PE multiple",
+      "valuation_multiple": 18.0,
+      "fair_value_per_share": 32.94,
+      "evidence_ids": [
+        "EV012"
+      ],
+      "falsification": "A sustained drop in Hainan tourist arrivals below 50 million per year or policy reversal would validate bear case.",
+      "missing_inputs": [
+        "Detailed competitive landscape analysis"
+      ]
+    }
+  ],
+  "evidence_change_rules": [
+    {
+      "evidence_id": "KPE01",
+      "affected_segment": "consolidated",
+      "affected_variable": "unmapped",
+      "old_assumption": "missing",
+      "new_assumption": "unchanged",
+      "financial_transmission": "none until quantified",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "Cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "KPE02",
+      "affected_segment": "consolidated",
+      "affected_variable": "unmapped",
+      "old_assumption": "missing",
+      "new_assumption": "unchanged",
+      "financial_transmission": "none until quantified",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "Cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "EV014",
+      "affected_segment": "consolidated",
+      "affected_variable": "gross_margin",
+      "old_assumption": "FY2025 margin unknown",
+      "new_assumption": "Q1 2026 margin 33.63% as base trend",
+      "financial_transmission": "Used to set 2026E gross margin at 34.5%, +0.87pp from Q1.",
+      "probability_before_after": "unchanged",
+      "disposition": "incorporated",
+      "verification_gate": "Compare H1 2026 gross margin vs Q1 2026 to confirm trend."
+    },
+    {
+      "evidence_id": "EV015",
+      "affected_segment": "consolidated",
+      "affected_variable": "operating_margin",
+      "old_assumption": "missing",
+      "new_assumption": "Q1 2026 operating margin 16.52% as baseline for improvement",
+      "financial_transmission": "Used to project operating margin expansion to 17.5% in 2026E.",
+      "probability_before_after": "unchanged",
+      "disposition": "incorporated",
+      "verification_gate": "Check if operating leverage is sustained in H1 2026."
+    },
+    {
+      "evidence_id": "EV036",
+      "affected_segment": "consolidated",
+      "affected_variable": "revenue",
+      "old_assumption": "Revenue growth from Q4 2025 to Q1 2026 -68.51% (conflicting)",
+      "new_assumption": "Rejected; rely on reported Q1 2026 revenue CNY 16,906 mn and FY2025 CNY 53,694 mn.",
+      "financial_transmission": "None; conflict resolved by preferring direct reported figures.",
+      "probability_before_after": "unchanged",
+      "disposition": "rejected",
+      "verification_gate": "Seek clarification of EV036 metric definition."
+    }
+  ],
+  "reconciliation_checks": [
+    "Q1 2026 parent net profit (2,348mn) vs annualised run-rate (9,393mn) reconciles with seasonality share 52.5% -> adjusted EBITDA.",
+    "Diluted share count assumed 2,077.8 mn from Tushare reg_capital; verify with actual outstanding shares post-DFS H-share issuance.",
+    "Base case EPS 2.41 * PE 24 = FV 57.84; current implied price ~53.6 implies ~5% upside, consistent with partial recovery pricing.",
+    "FCF = OCF - capex: 7,500 - 2,000 = 5,500 for 2026E, sufficient to cover 40% dividend of 2,000mn.",
+    "EBITDA proxy: Operating profit 10,316 + D&A (unknown) ~12,000mn."
+  ],
+  "analyst_instructions": [
+    "Treat all forward assumptions as default placeholders; update with explicit growth rates, margin estimates, and share count from verified filings or consensus.",
+    "Replace base-case net profit with own model; the current 2026E 5,000mn is sourced from Great Wall Securities PDF and must be reconciled with TradingAgents earnings bridge.",
+    "Resolve conflict EV036 definitively before any investment decision.",
+    "Acquire diluted share count from latest filing (including H-shares) to calculate accurate EPS.",
+    "Collect Hainan monthly tourist and duty-free sales data to validate demand trajectory and adjust volume assumptions."
+  ],
+  "preprocessing_notes": [
+    "Company segment-level financials beyond main/other are not disclosed in the evidence. Therefore, the segment profiles for '主营业务' and '其他业务' are based on the only available split. Sub-channels (offshore, airport, online, DFS) are treated as aliases within the main segment.",
+    "Contradiction in EV036 (revenue growth -68.51%) vs reported Q1/FY revenue is flagged as a conflict. It is likely a data error or refers to a different metric; resolved by relying on direct reported figures.",
+    "Knowledge Planet evidence (KPE01, KPE02) lack content and cannot be mapped to specific model variables. They are placed on watch with missing inputs highlighted.",
+    "No sell-side consensus or explicit baseline assumptions provided; base-case net profit uses external PDF reference from Great Wall Securities.",
+    "All metrics from earnings_model are consolidated; no segment-level margins available.",
+    "Causal chain for main business is based on qualitative descriptions from annual report and investor interactions.",
+    "Share count is set to registered capital (207779.6644万 shares) as a placeholder; actual diluted count may differ post DFS H-share issuance.",
+    "unknown evidence ids removed from underwriting packet",
+    "unknown evidence ids removed from underwriting packet"
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "mode": "schema_prompt_structured",
+  "agent": "Research Manager",
+  "structured_error": "",
+  "schema": "UnderwritingResearchPlan"
+}

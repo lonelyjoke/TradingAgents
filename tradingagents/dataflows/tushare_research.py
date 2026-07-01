@@ -1004,11 +1004,24 @@ def get_peer_comparison(ticker: str, curr_date: str, peer_limit: int = 12) -> st
         target_rank = int(ranked.index[ranked["ts_code"] == symbol][0]) + 1
     best_peer = ranked.iloc[0] if not ranked.empty else None
 
+    # Tushare daily_basic.total_mv is expressed in ten-thousand CNY. Expose an
+    # explicit 100-million-CNY conversion so downstream LLMs cannot relabel a
+    # 91.0 billion CNY market cap as 91.0 亿元 (a tenfold unit error).
+    total_mv_series = (
+        scored["total_mv"]
+        if "total_mv" in scored.columns
+        else pd.Series(index=scored.index, dtype=float)
+    )
+    scored["total_mv_cny_100m"] = (
+        pd.to_numeric(total_mv_series, errors="coerce") / 10_000.0
+    )
+
     display_cols = [
         "ts_code",
         "name",
         "industry",
         "total_mv",
+        "total_mv_cny_100m",
         "pe_ttm",
         "pb",
         "ps_ttm",
@@ -1031,6 +1044,7 @@ def get_peer_comparison(ticker: str, curr_date: str, peer_limit: int = 12) -> st
         f"- Industry: {industry}",
         f"- Valuation trade date: {_format_yyyymmdd(trade_date)}",
         f"- Peer sample: same Tushare stock_basic industry, closest by market value.",
+        "- Market-cap units: `total_mv` is ten-thousand CNY; `total_mv_cny_100m` is 亿元 and equals `total_mv / 10,000`.",
         *(f"- Data note: {note}" for note in data_notes),
         *(
             [

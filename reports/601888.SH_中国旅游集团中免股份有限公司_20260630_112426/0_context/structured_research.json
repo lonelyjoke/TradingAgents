@@ -1,0 +1,2226 @@
+{
+  "schema_version": 3,
+  "symbol": "601888.SH",
+  "as_of_date": "2026-06-30",
+  "preprocessing_mode": "llm_semantic_plus_deterministic_validation",
+  "company_summary": "中国旅游集团中免股份有限公司 (601888.SH) is a duty-free retail operator primarily in China, with operations in offshore duty-free in Hainan, airport duty-free, city stores, and online channels. The company recently acquired DFS Greater China retail business. Main revenue from duty-free retail. Segment-level financials beyond main/other are not publicly disclosed.",
+  "segments": [
+    {
+      "segment": "主营业务",
+      "aliases": [
+        "离岛免税",
+        "机场免税",
+        "市内免税",
+        "线上免税",
+        "DFS大中华区零售",
+        "duty-free retail"
+      ],
+      "products_or_services": "Duty-free retail of luxury goods, cosmetics, perfumes, tobacco, alcohol, and other travel retail products across multiple channels including offshore island (Hainan), airport terminals, city downtown stores, online platforms, and recently consolidated DFS Greater China operations.",
+      "revenue_weight_pct": 97.9,
+      "gross_profit_or_profit_weight_pct": null,
+      "business_model": "渠道动销型, 品牌消费, 平台生态. Revenue is generated through direct sales to consumers across physical stores and online platforms. The company sources products from global brands and sells at duty-free prices. Membership program with ~53 million members drives repeat purchases. Asset-light model with inventory management and supply chain optimization.",
+      "key_drivers": [
+        "Hainan offshore duty-free policy adjustments",
+        "Tourist footfall and consumer spending",
+        "Airport traffic recovery and new concessions",
+        "Online conversion and membership engagement",
+        "Brand assortment and exclusivity",
+        "DFS acquisition integration"
+      ],
+      "prosperity_level": "moderate",
+      "marginal_direction": "improving",
+      "causal_chain": "Demand (tourism recovery, consumer spending, policy support) -> Supply/capacity (store network expansion, inventory management, brand relationships) -> Price/volume (average transaction value, footfall, conversion rate) -> Utilization/mix (store-level traffic, product mix shift to high-margin luxury goods) -> Margin (gross margin improvement from mix and scale, operating leverage) -> Cash flow (strong OCF conversion, dividend payout). Marginal direction improving: Q1 2026 net margin +2.32pp YoY and operating margin +1.48pp YoY, despite revenue decline from FY2025 annualized run-rate.",
+      "supporting_metric_refs": [
+        "EV011",
+        "EV012",
+        "EV013",
+        "EV014",
+        "EV015",
+        "EV016",
+        "EV017",
+        "EV018",
+        "EV029",
+        "EV030"
+      ],
+      "counterevidence": [
+        "EV036 shows revenue growth -68.51% from 20251231 to 20260331, which contradicts the positive annual revenue comparison; this appears to be a data compilation error or misinterpretation of the metric."
+      ],
+      "confidence": "medium",
+      "missing_inputs": [
+        "Segment-level revenue and profit breakdown by channel (offshore, airport, online, DFS)",
+        "Revenue and margin for Q1 2025 for YoY comparison",
+        "Volume metrics (footfall, conversion), average transaction value, product mix",
+        "Integration costs and revenue contribution from DFS"
+      ],
+      "revenue_cny_mn": 52552.697,
+      "revenue_reported_value": 52552697083.91,
+      "revenue_reported_unit": "CNY",
+      "revenue_growth_pct": null,
+      "gross_margin_pct": null,
+      "gross_margin_change_pp": null,
+      "period": "FY2025",
+      "source_module": "company_business_model",
+      "evidence_quote": "主营业务 52,552,697,083.91 35,779,710,755.06",
+      "extraction_mode": "llm_semantic"
+    },
+    {
+      "segment": "其他业务",
+      "aliases": [
+        "other",
+        "非主营业务"
+      ],
+      "products_or_services": "Likely property rental, management services, or non-core retail activities.",
+      "revenue_weight_pct": 2.1,
+      "gross_profit_or_profit_weight_pct": null,
+      "business_model": "Not clearly disclosed; minor contributor to total revenue and profit.",
+      "key_drivers": [
+        "Unknown"
+      ],
+      "prosperity_level": "evidence_limited",
+      "marginal_direction": "unknown",
+      "causal_chain": "Insufficient evidence to establish a causal chain.",
+      "supporting_metric_refs": [
+        "EV029",
+        "EV030"
+      ],
+      "counterevidence": [],
+      "confidence": "low",
+      "missing_inputs": [
+        "Nature of other business operations",
+        "Revenue and profit breakdown",
+        "Growth and margin trends"
+      ],
+      "revenue_cny_mn": 1140.882,
+      "revenue_reported_value": 1140882117.61,
+      "revenue_reported_unit": "CNY",
+      "revenue_growth_pct": null,
+      "gross_margin_pct": null,
+      "gross_margin_change_pp": null,
+      "period": "FY2025",
+      "source_module": "company_business_model",
+      "evidence_quote": "其他业务 1,140,882,117.61 329,006,719.27",
+      "extraction_mode": "llm_semantic"
+    }
+  ],
+  "semantic_metrics": [
+    {
+      "segment": "consolidated",
+      "variable": "revenue",
+      "value": 16906021992.25,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "Q1 2026 (2026-03-31)",
+      "comparison_basis": "single quarter, reported",
+      "source_module": "earnings_model",
+      "source_quote": "/ Revenue base / 16906021992.25 / N/A / YoY: 20260331 vs 20250331 / top-line starting point for volume × price × mix /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "top-line input",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "gross_margin",
+      "value": 33.6318,
+      "value_text": "33.6318%",
+      "unit": "%",
+      "period": "Q1 2026",
+      "comparison_basis": "YoY change +0.65pp vs Q1 2025",
+      "source_module": "earnings_model",
+      "source_quote": "/ Gross margin / 33.6318% / +0.65pp / YoY: 20260331 vs 20250331 / main bridge from demand to gross profit /",
+      "evidence_status": "unverified",
+      "direction": "improving",
+      "materiality": "high",
+      "model_role": "margin driver",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "operating_margin",
+      "value": 16.5216,
+      "value_text": "16.5216%",
+      "unit": "%",
+      "period": "Q1 2026",
+      "comparison_basis": "YoY change +1.48pp vs Q1 2025",
+      "source_module": "earnings_model",
+      "source_quote": "/ Operating margin / 16.5216% / +1.48pp / YoY: 20260331 vs 20250331 / tests pricing, mix, and cost absorption /",
+      "evidence_status": "unverified",
+      "direction": "improving",
+      "materiality": "high",
+      "model_role": "profitability metric",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "net_margin",
+      "value": 13.8903,
+      "value_text": "13.8903%",
+      "unit": "%",
+      "period": "Q1 2026",
+      "comparison_basis": "YoY change +2.32pp vs Q1 2025",
+      "source_module": "earnings_model",
+      "source_quote": "/ Net margin / 13.8903% / +2.32pp / YoY: 20260331 vs 20250331 / captures final earnings conversion /",
+      "evidence_status": "unverified",
+      "direction": "improving",
+      "materiality": "high",
+      "model_role": "bottom-line metric",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "ocf_over_net_profit",
+      "value": 1.6568,
+      "value_text": "",
+      "unit": "ratio",
+      "period": "Q1 2026",
+      "comparison_basis": "YoY: Q1 2026 vs Q1 2025",
+      "source_module": "earnings_model",
+      "source_quote": "/ OCF / net profit / 1.6568 / N/A / YoY: 20260331 vs 20250331 / tests earnings quality and cash realization /",
+      "evidence_status": "unverified",
+      "direction": "strong",
+      "materiality": "medium",
+      "model_role": "cash quality",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "finance_expense_ratio",
+      "value": -1.013,
+      "value_text": "-1.013%",
+      "unit": "% of revenue",
+      "period": "Q1 2026",
+      "comparison_basis": "YoY change +0.20pp vs Q1 2025",
+      "source_module": "earnings_model",
+      "source_quote": "/ Finance-expense ratio / -1.013% / +0.20pp / YoY: 20260331 vs 20250331 / captures leverage drag or relief /",
+      "evidence_status": "unverified",
+      "direction": "slightly worse (higher expense ratio)",
+      "materiality": "low",
+      "model_role": "cost item",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "receivables_over_revenue",
+      "value": 0.2455,
+      "value_text": "0.2455%",
+      "unit": "%",
+      "period": "Q1 2026 (annualized revenue basis)",
+      "comparison_basis": "YoY change -0.16pp vs Q1 2025",
+      "source_module": "earnings_model",
+      "source_quote": "/ Receivables / revenue / 0.2455% / -0.16pp / YoY: 20260331 vs 20250331 / tests working-capital drag; interim periods use annualized revenue /",
+      "evidence_status": "unverified",
+      "direction": "improving",
+      "materiality": "low",
+      "model_role": "working capital efficiency",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "inventory_over_revenue",
+      "value": 23.4993,
+      "value_text": "23.4993%",
+      "unit": "%",
+      "period": "Q1 2026 (annualized revenue basis)",
+      "comparison_basis": "YoY change -0.02pp vs Q1 2025",
+      "source_module": "earnings_model",
+      "source_quote": "/ Inventory / revenue / 23.4993% / -0.02pp / YoY: 20260331 vs 20250331 / tests inventory build and demand quality; interim periods use annualized revenue /",
+      "evidence_status": "unverified",
+      "direction": "stable",
+      "materiality": "medium",
+      "model_role": "working capital and demand signal",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "主营业务",
+      "variable": "revenue",
+      "value": 52552697083.91,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "FY2025",
+      "comparison_basis": "single period",
+      "source_module": "company_business_model",
+      "source_quote": "主营业务 52,552,697,083.91 35,779,710,755.06",
+      "evidence_status": "reported",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "segment revenue",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "其他业务",
+      "variable": "revenue",
+      "value": 1140882117.61,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "FY2025",
+      "comparison_basis": "single period",
+      "source_module": "company_business_model",
+      "source_quote": "其他业务 1,140,882,117.61 329,006,719.27",
+      "evidence_status": "reported",
+      "direction": "",
+      "materiality": "low",
+      "model_role": "segment revenue",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "market_cap",
+      "value": 111369897760.0,
+      "value_text": "111,369,897,760 CNY",
+      "unit": "CNY",
+      "period": "2026-06-29",
+      "comparison_basis": "current",
+      "source_module": "market_expectation",
+      "source_quote": "/ Market cap (CNY) / 111369897760 / current equity value /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "valuation input",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "pe_ttm",
+      "value": 27.866,
+      "value_text": "",
+      "unit": "ratio",
+      "period": "TTM as of 2026-06-29",
+      "comparison_basis": "current",
+      "source_module": "market_expectation",
+      "source_quote": "/ PE TTM / 27.866 / earnings multiple the market is paying now /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "valuation metric",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "ps_ttm",
+      "value": 2.068,
+      "value_text": "",
+      "unit": "ratio",
+      "period": "TTM as of 2026-06-29",
+      "comparison_basis": "current",
+      "source_module": "market_expectation",
+      "source_quote": "/ PS TTM / 2.068 / sales multiple the market is paying now /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "valuation metric",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "pe_percentile_5y",
+      "value": 20.2,
+      "value_text": "20.2%",
+      "unit": "%",
+      "period": "5-year as of 2026-06-29",
+      "comparison_basis": "historical percentile",
+      "source_module": "market_expectation",
+      "source_quote": "/ PE percentile / 20.2 / 5-year valuation position /",
+      "evidence_status": "unverified",
+      "direction": "low",
+      "materiality": "medium",
+      "model_role": "valuation context",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "pb_percentile_5y",
+      "value": 0.2,
+      "value_text": "0.2%",
+      "unit": "%",
+      "period": "5-year as of 2026-06-29",
+      "comparison_basis": "historical percentile",
+      "source_module": "market_expectation",
+      "source_quote": "/ PB percentile / 0.2 / 5-year valuation position /",
+      "evidence_status": "unverified",
+      "direction": "very low",
+      "materiality": "medium",
+      "model_role": "valuation context",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "ps_percentile_5y",
+      "value": 3.3,
+      "value_text": "3.3%",
+      "unit": "%",
+      "period": "5-year as of 2026-06-29",
+      "comparison_basis": "historical percentile",
+      "source_module": "market_expectation",
+      "source_quote": "/ PS percentile / 3.3 / 5-year valuation position /",
+      "evidence_status": "unverified",
+      "direction": "very low",
+      "materiality": "medium",
+      "model_role": "valuation context",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    }
+  ],
+  "deterministic_evidence": [
+    {
+      "evidence_id": "EV001",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Financial-report look-back: 900 days"
+    },
+    {
+      "evidence_id": "EV002",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "Compacted 中国旅游集团中免股份有限公司2025年年度报告: 307134 chars -> 128193 chars."
+    },
+    {
+      "evidence_id": "EV003",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 半年",
+      "text": "Compacted 中国旅游集团中免股份有限公司2025年半年度报告: 243555 chars -> 118768 chars."
+    },
+    {
+      "evidence_id": "EV004",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260430, 2026, 季度",
+      "text": "20260430: 中国旅游集团中免股份有限公司2026年第一季度报告"
+    },
+    {
+      "evidence_id": "EV005",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260331, 2025, 年度",
+      "text": "20260331: 中国旅游集团中免股份有限公司2025年年度报告"
+    },
+    {
+      "evidence_id": "EV006",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20251031, 2025, 季度",
+      "text": "20251031: 中国旅游集团中免股份有限公司2025年第三季度报告"
+    },
+    {
+      "evidence_id": "EV007",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20250827, 2025, 半年",
+      "text": "20250827: 中国旅游集团中免股份有限公司2025年半年度报告"
+    },
+    {
+      "evidence_id": "EV008",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ announcement_lookup / ready / Found 4 candidate financial-report announcement(s) from primary and CNINFO sources. /"
+    },
+    {
+      "evidence_id": "EV009",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026, 季度",
+      "text": "/ pdf_text_extraction / ready / 中国旅游集团中免股份有限公司2026年第一季度报告: extracted 17693 characters of readable report text. /"
+    },
+    {
+      "evidence_id": "EV010",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "/ pdf_text_extraction / ready / 中国旅游集团中免股份有限公司2025年年度报告: extracted 307134 characters of readable report text. /"
+    },
+    {
+      "evidence_id": "EV011",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "Q1, 20260331",
+      "text": "/ latest reported / Q1 / 20260331 / 16906021992.25 / 2348297359.76 / 67624087969 / 9393189439.04 / 54518538875.6162 / 4473078487.7401 / historical median 0331 share 52.5% /"
+    },
+    {
+      "evidence_id": "EV012",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "FY, 20251231",
+      "text": "/ latest annual / FY / 20251231 / 53693579201.52 / 3586177592.36 / 53693579201.52 / 3586177592.36 / 53693579201.52 / 3586177592.36 / FY actual /"
+    },
+    {
+      "evidence_id": "EV013",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "revenue",
+      "period": "20260331, 20250331",
+      "text": "/ Revenue base / 16906021992.25 / N/A / YoY: 20260331 vs 20250331 / top-line starting point for volume × price × mix /"
+    },
+    {
+      "evidence_id": "EV014",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "20260331, 20250331",
+      "text": "/ Gross margin / 33.6318% / +0.65pp / YoY: 20260331 vs 20250331 / main bridge from demand to gross profit /"
+    },
+    {
+      "evidence_id": "EV015",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260331, 20250331",
+      "text": "/ Operating margin / 16.5216% / +1.48pp / YoY: 20260331 vs 20250331 / tests pricing, mix, and cost absorption /"
+    },
+    {
+      "evidence_id": "EV016",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "20260331, 20250331",
+      "text": "/ Net margin / 13.8903% / +2.32pp / YoY: 20260331 vs 20250331 / captures final earnings conversion /"
+    },
+    {
+      "evidence_id": "EV017",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "operating_expense",
+      "period": "20260331, 20250331",
+      "text": "/ Finance-expense ratio / -1.013% / +0.20pp / YoY: 20260331 vs 20250331 / captures leverage drag or relief /"
+    },
+    {
+      "evidence_id": "EV018",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "profit_or_eps",
+      "period": "20260331, 20250331",
+      "text": "/ OCF / net profit / 1.6568 / N/A / YoY: 20260331 vs 20250331 / tests earnings quality and cash realization /"
+    },
+    {
+      "evidence_id": "EV019",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "revenue",
+      "period": "20260331, 20250331",
+      "text": "/ Receivables / revenue / 0.2455% / -0.16pp / YoY: 20260331 vs 20250331 / tests working-capital drag; interim periods use annualized revenue /"
+    },
+    {
+      "evidence_id": "EV020",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "revenue",
+      "period": "20260331, 20250331",
+      "text": "/ Inventory / revenue / 23.4993% / -0.02pp / YoY: 20260331 vs 20250331 / tests inventory build and demand quality; interim periods use annualized revenue /"
+    },
+    {
+      "evidence_id": "EV021",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "/ brand_channel_consumer / 品牌消费 / 渠道动销型 / quantified disclosure / 中国旅游集团中免股份有限公司2025年年度报告: 三、经营情况讨论与分析 2025 年公司坚决落实发展战略，持续深耕主业、锤炼核心竞争力，全力推动企业高质量发展， 实现了业务发展的稳健运行。 （一）持续深耕海南，全力稳固离岛免税业务 公司紧抓海南全岛封关运作历史机遇，从场景创新、服务升级、供应链保障三大维度精准发 力，为海南国际旅游消费中心和自贸港建设展现担当、贡献力量。深化“免..."
+    },
+    {
+      "evidence_id": "EV022",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "/ platform_ecosystem / 平台生态 / 交易服务型 / quantified disclosure / 中国旅游集团中免股份有限公司2025年年度报告: 共创价值的生态服务能力。持续提升客户运营能力，连续 2 年发布会员白皮书，率先引领行业迈 入“精准触达、深度运营”的圈层精耕新阶段。深化近 5,300 万会员分层分级运营，有效提升客 户粘性，持续夯实品牌价值。加强数字化建设，以星云项目数据赋能线上平台推荐算法优化，并 / 验证用户/商户留存、交易额、变现率、服务收入、获客成本和利润率。 /"
+    },
+    {
+      "evidence_id": "EV023",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "2025, 年度",
+      "text": "/ core_revenue_engine / annual / 中国旅游集团中免股份有限公司2025年年度报告: 贸易业务占营业收入比例超过 10%前五名销售客户 / Defines what actually drives the income statement. /"
+    },
+    {
+      "evidence_id": "EV024",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "revenue",
+      "period": "2025, 年度",
+      "text": "/ segment_mix / annual / 中国旅游集团中免股份有限公司2025年年度报告: 分产品 营业收入 营业成本 / Shows whether different profit pools are being mixed together. /"
+    },
+    {
+      "evidence_id": "EV025",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "/ customer_and_channel / annual / 中国旅游集团中免股份有限公司2025年年度报告: 进入越南市场，斩获越南河内、富国机场 10 年供货协议，境外业务持续扩大。公司还积极推动国 / Reveals demand source, concentration, and market validation. /"
+    },
+    {
+      "evidence_id": "EV026",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "/ geography / annual / 中国旅游集团中免股份有限公司2025年年度报告: 3．财务风险。由于国际业务多以外币结算，人民币对外币汇率波动加大、汇兑差异等因素， / Explains whether growth depends on a specific geography or expansion lane. /"
+    },
+    {
+      "evidence_id": "EV027",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "operating_expense",
+      "period": "2025, 年度",
+      "text": "/ reinvestment_engine / annual / 中国旅游集团中免股份有限公司2025年年度报告: 报告期内，公司研发费用同比增加 352.74%，主要是报告期内加快数字化建设，各项软件系 / Shows how today's cash is being converted into tomorrow's earnings power. /"
+    },
+    {
+      "evidence_id": "EV028",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "/ geography / annual / 中国旅游集团中免股份有限公司2025年年度报告: 报告期内公司新增重要非主营业务的说明 □适用 √不适用 二、报告期内公司所处行业情况 （一） 旅游行业 1. 全球国际旅游行业 2025 年全球旅游业稳健增长，旅游消费需求强劲。根据联合国旅游组织最新发布的《世界旅 游业晴雨表》，2025 年国际旅客数量预计达 15.2 亿人次，较 2024 年增加近 6,000 万人次，同比 增长 4%。2025 年全球国际旅游收入预计达 1.9 万亿美元，较 2024 年增长 ..."
+    },
+    {
+      "evidence_id": "EV029",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "revenue",
+      "period": "2025, 年度",
+      "text": "/ business / annual / 中国旅游集团中免股份有限公司2025年年度报告: 收入 成本 收入 成本 主营业务 52,552,697,083.91 35,779,710,755.06 55,760,492,510.03 38,187,809,515.93 其他业务 1,140,882,117.61 329,006,719.27 713,355,777.04 197,344,287.40 (2). 营业收入、营业成本的分解信息 / Use this to explain revenue mix,..."
+    },
+    {
+      "evidence_id": "EV030",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "revenue",
+      "period": "2025, 年度",
+      "text": "/ business / annual / 中国旅游集团中免股份有限公司2025年年度报告: 主营业务 52,552,697,083.91 35,779,710,755.06 55,760,492,510.03 38,187,809,515.93 其他业务 1,140,882,117.61 329,006,719.27 713,355,777.04 197,344,287.40 (2). 营业收入、营业成本的分解信息 合同分类 / Use this to explain revenue mix, profit..."
+    },
+    {
+      "evidence_id": "EV031",
+      "source_module": "industry_cycle",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "balance_sheet",
+      "period": "unspecified",
+      "text": "Do not state R32, R125, lithium, copper, gold, inventory, or spread changes as facts unless they appear in the evidence table."
+    },
+    {
+      "evidence_id": "EV032",
+      "source_module": "industry_cycle",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "gap",
+      "status": "missing",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "If cycle evidence says bottom-testing or evidence-limited, use language such as `bottom-right validation stage`, `右侧待验证`, or `needs confirmation`."
+    },
+    {
+      "evidence_id": "EV033",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "revenue",
+      "period": "unspecified",
+      "text": "/ Mobile / mobile subscribers, 5G penetration, mobile ARPU, DOU, churn, package mix / service revenue and margin durability /"
+    },
+    {
+      "evidence_id": "EV034",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "utilization_or_backlog",
+      "period": "unspecified",
+      "text": "/ Capex / 5G/cloud/AI capex, depreciation, network utilization, capex-to-revenue / FCF and ROIC /"
+    },
+    {
+      "evidence_id": "EV035",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "gap",
+      "status": "missing",
+      "model_variable": "segment_margin",
+      "period": "unspecified",
+      "text": "/ coverage_grade / report_types_seen / missing_report_types / answered_questions / core_pack_status / confidence_read /"
+    },
+    {
+      "evidence_id": "EV036",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "20251231, 20260331",
+      "text": "/ accounting_reconciliation / Check signs, units, periods, and cross-statement consistency before a number enters the PM memo. / leverage_funding_growth: 20251231->20260331: revenue growth -68.51%, gross margin change 0.88pp, operating margin change 6.64pp,..."
+    },
+    {
+      "evidence_id": "EV037",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "/ segment_economics_depth / Decide whether each business line has enough disclosed scale, growth, margin, cash quality, and valuation treatment. / 中国旅游集团中免股份有限公司2025年年度报告: 报告期内公司新增重要非主营业务的说明 □适用 √不适用 二、报告期内公司所处行业情况 （一） 旅游行业 1. 全球国际旅游行业 2025 年全球旅游业稳健增长，旅游消费需..."
+    },
+    {
+      "evidence_id": "EV038",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026, 季度",
+      "text": "/ footnote_radar / Surface decision-relevant notes that can hide risk or change confidence. / impairment_policy: 中国旅游集团中免股份有限公司2026年第一季度报告: 单位:元 币种:人民币 非经常性损益项目 本期金额 说明 非流动性资产处置损益，包括已计提资产减值准备的 / impairment_policy: 中国旅游集团中免股份有限公司2026年第一季度报告: 非经常性损益项目 本期金额 说明..."
+    },
+    {
+      "evidence_id": "EV039",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "profit_or_eps",
+      "period": "2026, 季度",
+      "text": "/ cash_flow_quality_decomposition / Separate accounting profit from cash conversion, working-capital drag, and demand visibility. / operating_cash_flow: 中国旅游集团中免股份有限公司2026年第一季度报告: 2,337,473,944.03 1,935,678,057.03 20.76 经常性损益的净利润 经营活动产生的现金流量净额 3,890,593,863..."
+    },
+    {
+      "evidence_id": "EV040",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "capex_or_roic",
+      "period": "2026, 季度",
+      "text": "/ capex_cip_return_bridge / Test whether capex, construction-in-progress, or investment assets are building returns or just absorbing capital. / long_term_equity_investments: 中国旅游集团中免股份有限公司2026年第一季度报告: 其他债权投资 长期应收款 长期股权投资 3,521,892,787.37 3,555,925,424.25 /..."
+    },
+    {
+      "evidence_id": "EV041",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "2026, 季度",
+      "text": "/ non_recurring_profit_quality / Distinguish core operating profit from investment income, fair-value moves, subsidies, asset disposals, impairment, and other one-off items. / impairment: 中国旅游集团中免股份有限公司2026年第一季度报告: 净敞口套期收益（损失以“-”号填列） 公允价值变动收益（损失以“-”号填列） 信用减..."
+    },
+    {
+      "evidence_id": "EV042",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "balance_sheet",
+      "period": "2026, 季度",
+      "text": "/ balance_sheet_forward_signals / Read balance-sheet leads before income-statement confirmation. / receivables: 中国旅游集团中免股份有限公司2026年第一季度报告: 衍生金融资产 应收票据 应收账款 165,988,736.55 72,759,182.37 / receivables: 中国旅游集团中免股份有限公司2026年第一季度报告: 应收票据 应收账款 165,988,736.55 72,75..."
+    },
+    {
+      "evidence_id": "EV043",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-06-29",
+      "text": "Valuation trade date: 2026-06-29"
+    },
+    {
+      "evidence_id": "EV044",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ Market cap (CNY) / 111369897760 / current equity value /"
+    },
+    {
+      "evidence_id": "EV045",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "valuation",
+      "period": "TTM",
+      "text": "/ PE TTM / 27.866 / earnings multiple the market is paying now /"
+    },
+    {
+      "evidence_id": "EV046",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "revenue",
+      "period": "TTM",
+      "text": "/ PS TTM / 2.068 / sales multiple the market is paying now /"
+    },
+    {
+      "evidence_id": "EV047",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "valuation",
+      "period": "TTM",
+      "text": "/ Implied TTM earnings (CNY) / 3996623044.5704 / market cap divided by PE TTM /"
+    },
+    {
+      "evidence_id": "EV048",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "revenue",
+      "period": "TTM",
+      "text": "/ Implied TTM sales (CNY) / 53853915744.6808 / market cap divided by PS TTM /"
+    },
+    {
+      "evidence_id": "EV049",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "valuation",
+      "period": "unspecified",
+      "text": "/ PE percentile / 20.2 / 5-year valuation position /"
+    },
+    {
+      "evidence_id": "EV050",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "valuation",
+      "period": "unspecified",
+      "text": "/ PB percentile / 0.2 / 5-year valuation position /"
+    },
+    {
+      "evidence_id": "EV051",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "valuation",
+      "period": "unspecified",
+      "text": "/ PS percentile / 3.3 / 5-year valuation position /"
+    },
+    {
+      "evidence_id": "EV052",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ latest annual parent profit / 3586177592.36 / 31.0553 / 0.8973 /"
+    },
+    {
+      "evidence_id": "EV053",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-06-29",
+      "text": "Valuation trade date: 2026-06-29"
+    },
+    {
+      "evidence_id": "EV054",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Market-cap units: `total_mv` is ten-thousand CNY; `total_mv_cny_100m` is 亿元 and equals `total_mv / 10,000`."
+    },
+    {
+      "evidence_id": "EV055",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "unspecified",
+      "text": "/ ts_code / name / industry / total_mv / total_mv_cny_100m / pe_ttm / pb / ps_ttm / dv_ttm / roe_annual / roa_annual / roe / roa / netprofit_yoy / debt_to_assets / v4_score /"
+    },
+    {
+      "evidence_id": "EV056",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 601888.SH / 中国中免 / 旅游服务 / 11136989.776 / 1113.699 / 27.866 / 1.9216 / 2.068 / 0.4664 / 6.4869 / 6.076 / 4.1407 / 3.31 / 21.1803 / 25.544 / 67.7 /"
+    },
+    {
+      "evidence_id": "EV057",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2082",
+      "text": "/ 002159.SZ / 三特索道 / 旅游服务 / 224818.1752 / 22.4818 / 16.7955 / 1.5188 / 3.4978 / 2.2082 / 10.1418 / 11.7978 / 1.4058 / 1.974 / -31.4586 / 18.6181 / 63.4 /"
+    },
+    {
+      "evidence_id": "EV058",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2023",
+      "text": "/ 600185.SH / 珠免集团 / 旅游服务 / 852022.6216 / 85.2023 / N/A / 98.6886 / 2.6838 / N/A / -45.0023 / -1.5553 / 40.6617 / 2.2134 / 142.9063 / 82.1329 / 61.2 /"
+    },
+    {
+      "evidence_id": "EV059",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 000524.SZ / 岭南控股 / 旅游服务 / N/A / N/A / N/A / N/A / N/A / N/A / 3.0765 / 2.3813 / 1.4288 / 1.0111 / 23.6348 / 38.9852 / 60.4 /"
+    },
+    {
+      "evidence_id": "EV060",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 000796.SZ / 凯撒旅业 / 旅游服务 / 607835.9931 / 60.7836 / 171.9696 / 6.6919 / 7.1108 / N/A / -11.6049 / -4.8546 / 0.3103 / 0.5451 / 161.7095 / 45.5167 / 43 /"
+    },
+    {
+      "evidence_id": "EV061",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 000610.SZ / *ST西旅 / 旅游服务 / 127370.3702 / 12.737 / N/A / N/A / 2.3386 / N/A / -70.9653 / -9.6998 / N/A / -1.2233 / 17.5845 / 106.6196 / 40.7 /"
+    },
+    {
+      "evidence_id": "EV062",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 300859.SZ / 西域旅游 / 旅游服务 / 398040 / 39.804 / 51.2956 / 5.2713 / 12.1024 / 1.1682 / 9.7035 / 8.2535 / -3.4743 / -2.5122 / 9.8467 / 26.5226 / 38 /"
+    },
+    {
+      "evidence_id": "EV063",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20080328",
+      "text": "/ 601888.SH / 范云军 / 常筑军 / 杨洪义 / 207779.6644 / 20080328 / 北京 / 以免税为主的旅游零售业务。 /"
+    },
+    {
+      "evidence_id": "EV064",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20251231",
+      "text": "/ 20251231 / 6058560224.26 / 1273061670.55 / 3100916807.35 / -3480344870.63 / 33781245387.6 / 484800778.13 / 74982870241.97 / 13857345805.32 /"
+    },
+    {
+      "evidence_id": "EV065",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20241231",
+      "text": "/ 20241231 / 7939327277.01 / 1118981469.64 / 3556287787.81 / -454304775.3 / 34817316170.94 / 822659525.79 / 76260373740.6 / 15312036850.03 /"
+    },
+    {
+      "evidence_id": "EV066",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20231231",
+      "text": "/ 20231231 / 15126419298.22 / 1801600787.99 / 2524860421.48 / -4715789031.63 / 31838425096.1 / 822460130.18 / 78869406192.71 / 19687771057.47 /"
+    },
+    {
+      "evidence_id": "EV067",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20221231",
+      "text": "/ 20221231 / -3415245341.32 / 2995380376.95 / 3676147989.42 / -3806652280.06 / 26891700248.67 / 822460130.18 / 75907603880.98 / 21780192148.77 /"
+    },
+    {
+      "evidence_id": "EV068",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20211231",
+      "text": "/ 20211231 / 8328824733 / 2154846659.59 / 3430862498.22 / -2317534083.08 / 16856199437.51 / 822460130.18 / 55473728507.58 / 20682335234.43 /"
+    },
+    {
+      "evidence_id": "EV069",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260331, 20251231",
+      "text": "/ 20260331 / 20251231 / 预案 / 0.45 / 0 / N/A / N/A / N/A /"
+    },
+    {
+      "evidence_id": "EV070",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20251031, 20250930, 20251215",
+      "text": "/ 20251031 / 20250930 / 实施 / 0.25 / 0 / 20251215 / 20251216 / 20251216 /"
+    },
+    {
+      "evidence_id": "EV071",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20251031, 20250930",
+      "text": "/ 20251031 / 20250930 / 股东大会通过 / 0.25 / 0 / N/A / N/A / N/A /"
+    },
+    {
+      "evidence_id": "EV072",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20251031, 20250930",
+      "text": "/ 20251031 / 20250930 / 预案 / 0.25 / 0 / N/A / N/A / N/A /"
+    },
+    {
+      "evidence_id": "EV073",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Look-back window for futures proxies: 90 days"
+    },
+    {
+      "evidence_id": "EV074",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_volume",
+      "period": "unspecified",
+      "text": "/ 1 - company hard evidence / official filings, production reports, and sales announcements / realized product mix, output, unit cost, and cash-flow conversion / usually delayed and may not include daily spot prices /"
+    },
+    {
+      "evidence_id": "EV075",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "balance_sheet",
+      "period": "unspecified",
+      "text": "Do not state R32, R125, lithium, copper, gold, inventory, or spread changes as facts unless they appear in the evidence table."
+    },
+    {
+      "evidence_id": "EV076",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "gap",
+      "status": "missing",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "If a thesis-critical input is marked missing, treat it as neutral non-evidence and a retrieval task; it cannot prove margin deterioration/resilience or mechanically change rating, conviction, or sizing."
+    },
+    {
+      "evidence_id": "EV077",
+      "source_module": "policy",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025-10-28, 2025",
+      "text": "/ 中共中央关于制定国民经济和社会发展第十五个五年规划的建议 / 中国政府网 / 2025-10-28 / national-plan / ok / https://www.gov.cn/gongbao/2025/issue_12386/202511/content_7047415.html /"
+    },
+    {
+      "evidence_id": "EV078",
+      "source_module": "policy",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2024-08-11",
+      "text": "/ 中共中央 国务院关于加快经济社会发展全面绿色转型的意见 / 中国政府网 / 2024-08-11 / national-direction / ok / https://www.gov.cn/zhengce/202408/content_6967663.htm /"
+    },
+    {
+      "evidence_id": "EV079",
+      "source_module": "policy",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2024-08-11",
+      "text": "/ renewable-energy / 绿色转型 / 中共中央 国务院关于加快经济社会发展全面绿色转型的意见 / 中国政府网 / 2024-08-11 / national-direction / / supports multi-year demand visibility for clean-energy equipment and infrastructure / argue the company sits inside a policy-backed demand pool / test whether"
+    },
+    {
+      "evidence_id": "EV080",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Canonical company route: https://sns.sseinfo.com/company.do?stockcode=601888"
+    },
+    {
+      "evidence_id": "EV081",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026",
+      "text": "/ sse / reachable / {'title': '上证e互动', 'has_company_page': True, 'has_qa_section': True} / 1888 / {'is_empty_recent_reply': False, 'text_preview': '投资者_1779345016982 :中国中免(601888) 股市已经跌成这样了，是否有维稳计划？ 2026年05月29日 14:05 来自 IOS ◆ ◆ 中国中免 尊敬的投资者，您好！长期来看，股价围绕公司内在价值波动"
+    },
+    {
+      "evidence_id": "EV082",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-05-29, 2026-06-15",
+      "text": "/ 2026-05-29 / 2026-06-15 / 股市已经跌成这样了，是否有维稳计划？ / 尊敬的投资者，您好！长期来看，股价围绕公司内在价值波动，短期内则会受到多重因素影响，比如行业周期、资金偏好、市场预期等。公司非常重视维护中小股东的利益，并根据监管要求，持续聚焦主业，改善经营效率和盈利能力，以提高上市公司质量为基础，增强信息披露质量和透明度，增进与投资者沟通互动。感谢您的关注。 / substantive /"
+    },
+    {
+      "evidence_id": "EV083",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-05-26, 2026-06-15, 2025",
+      "text": "/ 2026-05-26 / 2026-06-15 / 在如今的消费市场，大家需要的不是一个固守什么都不做的董事长，大家需要的是一个能破局的领导者，从中国旅游破局到免税行业，再到海南10万免税额，再到国内和这么多国家免签，企业的利润是王小二过年一年不如一年，怪市场环境，怪政策，旅游业来说以往到现在从来没有这么好的政策 / 尊敬的投资者，您好！公司业务主要围绕以下几个方面开展：一、2025年11月《关于调整海南离岛旅客免税购物政策的公告》和《关于完善免税店政策支持提振消费的通知》落地实施，公司围绕扩张品类，引入新品牌"
+    },
+    {
+      "evidence_id": "EV084",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "valuation",
+      "period": "2026-05-26, 2026-06-15, 年度",
+      "text": "/ 2026-05-26 / 2026-06-15 / 您好，公司近期利润端大幅修复、同时落地年度高比例现金分红 中期分红，持续通过盈利、分红回馈股东，但二级市场市值持续走低，基本面与股价出现明显背离。 1、公司认为业绩提振、分红方案无法有效提振市值，核心制约因素是什么？ 2、现有分红、提质增效的市值管理手段是否已达不到当前市场预期？ 3、针对估值长期错配，除经营与分红外，有无回购、加强机构沟通、披露增长规划等新增市值管理方案？ / 尊敬的投资者，您好！公司非常重视维护中小股东的利益，坚持通过高比例分红回报投资人，"
+    },
+    {
+      "evidence_id": "EV085",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-05-22, 2026-06-15, 2025",
+      "text": "/ 2026-05-22 / 2026-06-15 / 贵公司股票天天跌，请问公司懂事长什么措施 / 尊敬的投资者，您好！公司非常重视维护中小股东的利益，并根据监管要求，持续聚焦主业，改善经营效率和盈利能力，以提高上市公司质量为基础，增强信息披露质量和透明度，增进与投资者沟通互动。2025年三季度，公司首次开展中期分红，2025年年报披露年度利润分配预案，预计现金分红比例为40.5%。4月29日一季报挂网后，4月30日公司管理层面向投资人召开2026年第一次电话会，介绍2025年度及2026年第一季度主要情况，并就"
+    },
+    {
+      "evidence_id": "EV086",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-05-21, 2026-06-15, 2025",
+      "text": "/ 2026-05-21 / 2026-06-15 / 尊敬的董秘您好，年后公司股价持续大幅下行，市值大幅缩水，既造成国有资产市值流失，也让广大中小投资者损失惨重。 请问公司是否重视市值管理与广大股东切身利益？面对股价持续大跌行情，公司有无稳定股价、提振市场信心的具体举措？恳请管理层正视投资者诉求，积极出台举措维护股东权益。 / 尊敬的投资者，您好！公司非常重视维护中小股东的利益，并根据监管要求，持续聚焦主业，改善经营效率和盈利能力，以提高上市公司质量为基础，增强信息披露质量和透明度，增进与投资者沟通互动。2025"
+    },
+    {
+      "evidence_id": "EV087",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "capex_or_roic",
+      "period": "2026-05-21, 2026-06-15, 2025",
+      "text": "/ 2026-05-21 / 2026-06-15 / 您好，请问贵公司的2025年年度报告里的现金流量表补充资料部分的无形资产摊销82,696,465.75元为什么与报告附注里的无形资产本期摊销额97,305,382.36元不一致？ / 尊敬的投资者，您好！两者差异的原因是土地部分摊销计入在建工程并资本化处理。感谢您的关注。 / directional-but-unquantified /"
+    },
+    {
+      "evidence_id": "EV088",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-05-20, 2026-06-15, 2025",
+      "text": "/ 2026-05-20 / 2026-06-15 / 董秘您好，公司的运营是否出现了什么严重问题，市值已经跌了快1000亿了，30多万的投资者也是公司的客户啊，管理层就这么无动于衷么？ / 尊敬的投资者，您好！长期来看，股价围绕公司内在价值波动，短期内则会受到多重因素影响，比如行业周期、资金偏好、市场预期等。公司非常重视维护中小股东的利益，并根据监管要求，持续聚焦主业，改善经营效率和盈利能力，以提高上市公司质量为基础，增强信息披露质量和透明度，增进与投资者沟通互动。2025年三季度，公司首次开展中期分红，2025"
+    },
+    {
+      "evidence_id": "EV089",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-05-20, 2026-06-15, 2025",
+      "text": "/ 2026-05-20 / 2026-06-15 / 请问贵公司是怎么经营的，股价跌成白菜价了，有没有什么措施来保护投资者利益。 / 尊敬的投资者，您好！公司业务正常开展，今年以来主要围绕以下几个方面：一、2025年11月《关于调整海南离岛旅客免税购物政策的公告》和《关于完善免税店政策支持提振消费的通知》落地实施，公司围绕扩张品类，引入新品牌等持续发力，坚持推动国产品进店销售。完善免税店便利化措施方面，公司目前已实现10家市内店及口岸店支持线上预定（可在“中免海南”APP和微信小程序的“出入境免税”板块进入）。二"
+    },
+    {
+      "evidence_id": "EV090",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "2026-05-31, 2026-06-30",
+      "text": "Window: 2026-05-31 to 2026-06-30 (30 days)"
+    },
+    {
+      "evidence_id": "EV091",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Primary query terms: 601888.SH, 601888SH, 601888, 中国中免, 旅游服务"
+    },
+    {
+      "evidence_id": "EV092",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "2026-06-30",
+      "text": "Upstream sync: 2026-06-30=synced_window:2026-06-30..2026-06-30:dates=1"
+    },
+    {
+      "evidence_id": "EV093",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Preprocess: ok: events=5254, clusters=76, opportunities=147, ocr_low_quality=820"
+    },
+    {
+      "evidence_id": "EV094",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Matched stream items: 2"
+    },
+    {
+      "evidence_id": "EV095",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Matched PDF reports: 3"
+    },
+    {
+      "evidence_id": "EV096",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Fusion target: 601888.SH"
+    },
+    {
+      "evidence_id": "EV097",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Direct terms: 601888.SH, 601888SH, 601888, 中国中免, 旅游服务"
+    },
+    {
+      "evidence_id": "EV098",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Raw matches: stream=2, pdf=3; preprocessed matches: events=0, opportunities=0, pdf_assumptions=3"
+    },
+    {
+      "evidence_id": "EV099",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Raw quality mix: low_quality=820, ok=5110, usable_with_warnings=144"
+    }
+  ],
+  "conflicts": [
+    {
+      "topic": "Revenue growth from FY2025 to Q1 2026 (annualized)",
+      "segment": "consolidated",
+      "claim_a": "Revenue growth -68.51% from 20251231 to 20260331",
+      "source_a": "industry_kpi accounting_reconciliation (EV036)",
+      "claim_b": "Q1 2026 revenue 16.91B vs FY2025 revenue 53.69B implies positive annualized growth (67.6B annualized Q1 vs 53.69B FY2025 = +25.9% growth)",
+      "source_b": "earnings_model reported revenue (EV011, EV012)",
+      "conflict_type": "contradictory figures",
+      "required_resolution": "Verify the exact metric definition in EV036. The -68.51% likely refers to a different measure (e.g., sequential quarterly comparison or a specific product line). Until clarified, use the directly reported revenue figures from earnings_model."
+    }
+  ],
+  "kpe_impacts": [
+    {
+      "evidence_id": "KPE01",
+      "segment": "consolidated",
+      "variable": "unmapped",
+      "direction": "unknown",
+      "horizon": "",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "# #调研纪要 source: zsxq group_id: 28888112822211 group_name: 前沿信息收录 topic_id: 55522558841858814 author: August published_at: 2026-06-15T23:06:24.887+0...",
+      "verification_gate": "Cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "missing_inputs": [
+        "Full content of the research note",
+        "Affected variable mapping",
+        "Baseline and revised values",
+        "Scenario probabilities"
+      ],
+      "known_kpe": {
+        "date": "2026-06-15T23:06",
+        "source": "stream_item",
+        "source_type": "company_research_feedback",
+        "credibility": "research_feedback_hard_to_publicly_verify",
+        "decision_role": "probability/verification proxy",
+        "evidence": "# #调研纪要 source: zsxq group_id: 28888112822211 group_name: 前沿信息收录 topic_id: 55522558841858814 author: August published_at: 2026-06-15T23:06:24.887+0...",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "unmapped",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until Cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE02",
+      "segment": "consolidated",
+      "variable": "unmapped",
+      "direction": "unknown",
+      "horizon": "",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "# #外资研报 source: zsxq group_id: 28888112822211 group_name: 前沿信息收录 topic_id: 14422415481518182 author: 纪要小助手 published_at: 2026-06-19T21:24:08.849+08...",
+      "verification_gate": "Cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "missing_inputs": [
+        "Full content of the research report",
+        "Affected variable mapping",
+        "Model conflict outcome"
+      ],
+      "known_kpe": {
+        "date": "2026-06-19T21:24",
+        "source": "stream_item",
+        "source_type": "report_list_post",
+        "credibility": "unclassified_needs_review",
+        "decision_role": "narrative challenge",
+        "evidence": "# #外资研报 source: zsxq group_id: 28888112822211 group_name: 前沿信息收录 topic_id: 14422415481518182 author: 纪要小助手 published_at: 2026-06-19T21:24:08.849+08...",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "unmapped",
+        "required_outcome": "model conflict result and accepted/rejected reason"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until Cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "grounding_status": "grounded_quote"
+    }
+  ],
+  "known_kpe_ledger": {
+    "KPE01": {
+      "date": "2026-06-15T23:06",
+      "source": "stream_item",
+      "source_type": "company_research_feedback",
+      "credibility": "research_feedback_hard_to_publicly_verify",
+      "decision_role": "probability/verification proxy",
+      "evidence": "# #调研纪要 source: zsxq group_id: 28888112822211 group_name: 前沿信息收录 topic_id: 55522558841858814 author: August published_at: 2026-06-15T23:06:24.887+0...",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "unmapped",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE02": {
+      "date": "2026-06-19T21:24",
+      "source": "stream_item",
+      "source_type": "report_list_post",
+      "credibility": "unclassified_needs_review",
+      "decision_role": "narrative challenge",
+      "evidence": "# #外资研报 source: zsxq group_id: 28888112822211 group_name: 前沿信息收录 topic_id: 14422415481518182 author: 纪要小助手 published_at: 2026-06-19T21:24:08.849+08...",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "unmapped",
+      "required_outcome": "model conflict result and accepted/rejected reason"
+    }
+  },
+  "preprocessing_notes": [
+    "Company segment-level financials beyond main/other are not disclosed in the evidence. Therefore, the segment profiles for '主营业务' and '其他业务' are based on the only available split. Sub-channels (offshore, airport, online, DFS) are treated as aliases within the main segment.",
+    "Contradiction in EV036 (revenue growth -68.51%) vs reported Q1/FY revenue is flagged as a conflict. It is likely a data error or refers to a different metric; resolved by relying on direct reported figures.",
+    "Knowledge Planet evidence (KPE01, KPE02) lack content and cannot be mapped to specific model variables. They are placed on watch with missing inputs highlighted.",
+    "No sell-side consensus or explicit baseline assumptions provided; missing_inputs lists omitted baseline values.",
+    "All metrics from earnings_model are consolidated; no segment-level margins available.",
+    "Causal chain for main business is based on qualitative descriptions from annual report and investor interactions."
+  ],
+  "underwriting_packet": {
+    "schema_version": 1,
+    "symbol": "601888.SH",
+    "as_of_date": "2026-06-30",
+    "forecast_years": [
+      "2026E",
+      "2027E",
+      "2028E"
+    ],
+    "research_readiness": "partial",
+    "readiness_reasons": [
+      "Segment-level channel breakdown (Hainan offshore, airport, online, DFS) not disclosed; revenue/profit-weight allocation is missing.",
+      "Q1 2025 comparable revenue/earnings figures absent; YoY growth rates are inferred from margin changes only.",
+      "No sell-side consensus or internal baseline forecasting assumptions supplied; forecast scaffold uses Q1 2026 annualised/reference PDF figures.",
+      "KPE evidence items (KPE01, KPE02) have no content to map to model variables; they remain on watch.",
+      "Conflict EV036 (revenue growth -68.51%) unresolved; reliance on direct reported figures from EV011/EV012.",
+      "EPS forecast lacks a validated CNY-million parent-profit / diluted-share-count bridge."
+    ],
+    "company_model": {
+      "model_profile": "corporate",
+      "business_archetype": "Brand Consumer (品牌消费) + Channel Distribution (渠道动销型) + Platform Ecosystem (平台生态)",
+      "value_proposition_and_customers": "Operates China's largest duty-free retail network, selling luxury goods, cosmetics, perfumes, tobacco, and alcohol to domestic and international travellers. Customers are primarily mainland Chinese tourists in Hainan, outbound/inbound travellers at airports and city stores, and online duty-free shoppers. The company aggregates demand through direct-owned stores, concession agreements, and a membership platform with ~53 million members.",
+      "revenue_equation": "Revenue = Σ (Channel footfall × Conversion rate × Average transaction value) ≈ Main business duty-free retail across offshore island, airport, city downtown, online, and DFS Greater China channels. Revenue is volume-driven with some ASP mix uplift from luxury goods.",
+      "profit_equation": "Gross profit = Revenue - cost of goods sold (brand purchases, logistics). Operating profit = Gross profit - selling & administrative expenses (concession fees, labour, marketing, depreciation) - R&D. Net profit = Operating profit + non-operating items - tax. Q1 2026 margin structure: gross 33.6%, operating 16.5%, net 13.9%.",
+      "cash_flow_equation": "OCF from strong cash conversion (OCF/net profit ratio 1.66x in Q1 2026) as duty-free sales are largely cash/card; working capital is inventory-heavy but stable (inventory/revenue ~23.5% of annualized revenue). FCF = OCF - capex (store expansion, digital systems, DFS integration).",
+      "capital_intensity_and_reinvestment": "Asset-light retail model; main capex goes to new store fit-out, leasehold improvements, digital platform, and M&A (DFS). FY2025 R&D expense surged 352.74% for digitalization. Intangible amortisation partly capitalised into construction-in-progress.",
+      "diluted_share_count_mn": null,
+      "share_count_period": "",
+      "share_count_evidence_id": "",
+      "moat_mechanisms": [
+        "Exclusive government concessions for duty-free operations at prime locations (Hainan, major airports).",
+        "Scale-driven procurement power with global luxury brands, enabling competitive pricing and exclusivity.",
+        "High loyalty and repeat purchase from 53-million-member platform and data-driven targeting.",
+        "Network effects: breadth of locations increases brand attractiveness to both consumers and suppliers.",
+        "Post-DFS acquisition, expanded Greater China coverage and supply-chain synergies."
+      ],
+      "moat_to_financial_transmission": [
+        "Concession renewals at favourable terms lock in long-term gross margin floors.",
+        "Membership and personalisation drive traffic and conversion, stabilising revenue per store.",
+        "Brand exclusivity allows ASP premiums and faster inventory turns.",
+        "Scale procurement reduces unit costs, supporting gross margins or price competitiveness."
+      ],
+      "structural_risks": [
+        "Dependence on China duty-free policy; changes in Hainan offshore duty-free limits, departure tax refund rules, or licensing could abruptly shrink the addressable market.",
+        "Competition from global luxury brands' own direct retail, cross-border e-commerce, and other duty-free operators (e.g., Hainan new entrants, airport concessions).",
+        "Tourism and macro sensitivity: demand is tied to domestic travel, consumer confidence, and international flight capacity.",
+        "Foreign exchange exposure from international procurement and DFS operations, as noted in filings.",
+        "DFS integration risk: execution in merging systems, culture, and brand relationships."
+      ],
+      "key_unknowns": [
+        "Hainan offshore duty-free policy stability and potential relaxation for non-duty-free competitors after 2025 island-wide customs closure.",
+        "DFS acquisition revenue contribution and margin profile, including integration costs.",
+        "Airport traffic recovery trajectory and any step-change in minimum guaranteed rent/cost structure under new concession agreements."
+      ],
+      "evidence_ids": [
+        "EV021",
+        "EV022",
+        "EV024",
+        "EV025",
+        "EV029",
+        "EV030"
+      ]
+    },
+    "segment_models": [
+      {
+        "segment": "主营业务",
+        "products_or_services": "Duty-free retail of luxury goods, cosmetics, perfumes, tobacco, alcohol, and other travel retail products across offshore island (Hainan), airport terminals, city downtown stores, online platforms, and recently consolidated DFS Greater China operations.",
+        "customers_and_channel": "Mainland Chinese travellers (Hainan), outbound/inbound air passengers, and online shoppers. Channels: offshore island stores, airport shops (concessions), city downtown duty-free, online duty-free platforms, and the newly added DFS retail network.",
+        "revenue_weight_pct": 97.9,
+        "profit_weight_pct": null,
+        "base_period": "FY2025",
+        "base_revenue_value": 52552.697,
+        "base_revenue_unit": "CNY mn",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [
+          "Tourist footfall (Hainan visitors, airport throughput)",
+          "Consumer spending confidence and luxury goods demand",
+          "Duty-free policy adjustments (e.g., purchase limits, new qualifying categories)",
+          "Membership engagement and repeat purchase rate",
+          "Brand assortment and exclusivity availability"
+        ],
+        "industry_supply_and_capacity": "Hainan duty-free capacity is expanding with multiple operators, but China Tourism Group Duty Free retains the largest store network and established brand relationships. Airport concession supply is contract-renewal driven, with the company recently winning new terminals at Shanghai and Beijing. DFS acquisition adds capacity in Greater China.",
+        "volume_share_utilization": "The company likely holds the dominant share of Hainan duty-free sales (estimated >80% historically) and significant airport duty-free market share. Volumes are directly correlated with tourist traffic and conversion.",
+        "price_asp_take_rate": "Duty-free prices are lower than domestic retail due to tax exemptions; ASP is influenced by product mix (higher share of luxury and cosmetics elevates ASP). The company's membership pricing and promotions provide some control over average transaction value.",
+        "unit_cost_and_input_prices": "Main cost is cost of goods sold (brand procurement). Procurement scale allows negotiation leverage. Concession fees (variable rent) are a significant operating expense tied to revenue. Logistics and store labour are relatively fixed.",
+        "margin_and_operating_leverage": "Gross margin improved to 33.6% in Q1 2026 (+0.65pp YoY) driven by mix shift and potentially better procurement terms. Operating leverage is high: fixed store costs and digital spend can be spread over higher volumes, driving operating margin expansion.",
+        "working_capital_and_cash_conversion": "Inventory intensity is moderate (23.5% of annualised revenue) but stable. Receivables are negligible (0.25% of revenue). Cash conversion is strong (OCF/net profit 1.66x in Q1 2026).",
+        "prosperity_level": "moderate",
+        "marginal_direction": "improving",
+        "causal_analysis": "Demand is recovering as tourism picks up and duty-free policy becomes more supportive. Supply is disciplined, with the company leveraging scale and DFS integration. Price/mix improvements are visible in higher gross margin, and volume growth should follow traffic recovery. Operating leverage suggests margins will expand as revenue scales. Cash conversion remains robust.",
+        "valuation_treatment": "Core profit pool; valued on earnings power (PE, EBITDA) given earnings visibility and moat. DFS addition adds SOTP element.",
+        "strongest_counterevidence": [
+          "FY2025 revenue decline of ~5.8% YoY indicates the market has not yet stabilised.",
+          "Conflicting signal in EV036 (revenue growth -68.51%) raises data reliability concerns.",
+          "No quantitative segment breakdown; sub-channel growth differences are unclear."
+        ],
+        "evidence_ids": [
+          "EV011",
+          "EV012",
+          "EV013",
+          "EV014",
+          "EV021",
+          "EV029",
+          "EV030"
+        ],
+        "missing_inputs": [
+          "Revenue by channel (Hainan offshore, airport, online, DFS) for segmentation and growth analysis.",
+          "Gross margin by channel to identify profit-pool quality.",
+          "Volume metrics (footfall, conversion) and ASP data.",
+          "DFS acquisition actual revenue and profit contribution."
+        ],
+        "next_verification": "Await H1 2026 report for segment revenue split and DFS integration progress; monitor monthly Hainan tourist arrivals and duty-free sales data."
+      },
+      {
+        "segment": "其他业务",
+        "products_or_services": "Likely property rental, management services, or other non-core retail activities.",
+        "customers_and_channel": "Undisclosed; minor contributor.",
+        "revenue_weight_pct": 2.1,
+        "profit_weight_pct": null,
+        "base_period": "FY2025",
+        "base_revenue_value": 1140.882,
+        "base_revenue_unit": "CNY mn",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [
+          "Unknown"
+        ],
+        "industry_supply_and_capacity": "Insufficient evidence.",
+        "volume_share_utilization": "Insufficient evidence.",
+        "price_asp_take_rate": "Insufficient evidence.",
+        "unit_cost_and_input_prices": "Insufficient evidence.",
+        "margin_and_operating_leverage": "Insufficient evidence.",
+        "working_capital_and_cash_conversion": "Insufficient evidence.",
+        "prosperity_level": "evidence_limited",
+        "marginal_direction": "unknown",
+        "causal_analysis": "Revenue is immaterial; no causal chain can be established.",
+        "valuation_treatment": "Valued as a residual; likely included in SOTP only if disclosed.",
+        "strongest_counterevidence": [],
+        "evidence_ids": [
+          "EV029",
+          "EV030"
+        ],
+        "missing_inputs": [
+          "Nature of other business operations",
+          "Revenue and profit breakdown",
+          "Growth and margin trends"
+        ],
+        "next_verification": "None unless segment materiality increases."
+      }
+    ],
+    "underwriting_questions": [
+      {
+        "question_id": "Q1",
+        "question": "What is the sustainable revenue growth rate for the duty-free main business, broken down by Hainan offshore, airport, online, and DFS channels, and what drives volume vs ASP?",
+        "why_it_matters": "Revenue is the top-line driver; misjudging channel mix or growth trajectory directly impacts EPS and DCF valuation. The market currently prices PE of 27.9x, assuming some recovery; a weaker recovery could de-rate.",
+        "current_answer": "unresolved",
+        "bull_evidence": [
+          "Q1 2026 annualised revenue suggests strong recovery (16.9bn Q1 / 0.525 seasonal factor implies ~32bn, but simple run-rate implies 67.6bn).",
+          "Policy support: new Hainan duty-free measures since Nov 2025, expansion of eligible categories, and city-store online pre-order capability.",
+          "DFS acquisition closed March 2026, adding a new channel with cross-sell potential.",
+          "Management commentary cites core brand supply recovery and strong traffic."
+        ],
+        "bear_evidence": [
+          "FY2025 main business revenue declined ~5.8% YoY, showing persistent weakness in a supposedly recovering tourism market.",
+          "No peer breakdown to verify market share or competitive pressures.",
+          "Online and DFS channels are lower margin; mix could dilute overall profitability."
+        ],
+        "decisive_model_variables": [
+          "segment revenue by channel",
+          "volume growth (footfall, conversion)",
+          "ASP trend"
+        ],
+        "affected_financial_lines": [
+          "revenue",
+          "revenue growth",
+          "gross profit",
+          "EPS"
+        ],
+        "evidence_ids": [
+          "EV013",
+          "EV021",
+          "EV029"
+        ],
+        "missing_evidence": [
+          "Segmented revenue by channel (Hainan airport/offshore, city, online, DFS)",
+          "Historical footfall and conversion data",
+          "Competitor market share shifts"
+        ],
+        "next_verification": "H1 2026 report segment revenue, Q2 2026 management call commentary on channel trends."
+      },
+      {
+        "question_id": "Q2",
+        "question": "How sustainable and improvable is the gross margin at ~33.6%, considering brand mix, procurement scale, DFS lower-margin retail, and potential concession fee renegotiations?",
+        "why_it_matters": "Gross margin is the largest swing factor for net profit. A 1pp change in gross margin shifts parent profit by ~CNY 530-670mn, directly affecting EPS and valuation multiple support.",
+        "current_answer": "unresolved",
+        "bull_evidence": [
+          "Q1 2026 gross margin improved +0.65pp YoY, driven by mix and procurement optimisation.",
+          "DFS adds scale in brand negotiations, potentially improving overall cost-of-goods.",
+          "New airport concessions (Shanghai, Beijing) may have more favourable rent terms than previous cycles."
+        ],
+        "bear_evidence": [
+          "DFS retail historically has lower margins, so consolidation could dilute group margin.",
+          "Intense competition in Hainan could force price wars, eroding gross margin.",
+          "Luxury brands increasingly seek direct-to-consumer channels, reducing duty-free operator's pricing power."
+        ],
+        "decisive_model_variables": [
+          "consolidated gross margin",
+          "brand procurement terms",
+          "concession cost structure",
+          "DFS margin impact"
+        ],
+        "affected_financial_lines": [
+          "gross margin",
+          "operating margin",
+          "net profit",
+          "EPS"
+        ],
+        "evidence_ids": [
+          "EV014",
+          "EV024"
+        ],
+        "missing_evidence": [
+          "DFS segment gross margin stand-alone",
+          "Blended Hainan and airport channel margins",
+          "Details of new airport concession fee agreements"
+        ],
+        "next_verification": "H1 2026 gross margin and management discussion of DFS integration and concession costs."
+      },
+      {
+        "question_id": "Q3",
+        "question": "What is the true cash conversion and free cash flow generation of the business once DFS integration capex, working capital needs, and tax payments are normalised?",
+        "why_it_matters": "FCF is the basis for dividend sustainability and buyback capacity. Current OCF/net profit ratio of 1.66x is exceptionally high; understanding its durability justifies (or challenges) the 40%+ dividend payout.",
+        "current_answer": "unresolved",
+        "bull_evidence": [
+          "Q1 2026 OCF was CNY 3,891mn vs net profit CNY 2,337mn, 1.66x conversion.",
+          "Receivables are negligible; inventory is stable; working capital is not a drain.",
+          "Management commits to high dividend payout (40.5% of profit)."
+        ],
+        "bear_evidence": [
+          "DFS integration could require significant capex and restructuring cash outflows.",
+          "Higher tax payments from higher profits may reduce OCF.",
+          "Intangible amortisation and asset impairment could be non-cash but signal economic cost."
+        ],
+        "decisive_model_variables": [
+          "operating cash flow",
+          "capex",
+          "free cash flow"
+        ],
+        "affected_financial_lines": [
+          "OCF",
+          "FCF",
+          "dividend per share"
+        ],
+        "evidence_ids": [
+          "EV018",
+          "EV039",
+          "EV040"
+        ],
+        "missing_evidence": [
+          "Detailed capex plan for DFS integration and store network",
+          "Normalised working capital cycle",
+          "Cash tax rate"
+        ],
+        "next_verification": "H1 2026 cash flow statement and management guidance on capex and dividend."
+      },
+      {
+        "question_id": "Q4",
+        "question": "What is the EPS impact of the DFS acquisition (including one-off integration costs, H-share issuance dilution, and synergy realisation), and what is the path to accretion?",
+        "why_it_matters": "DFS is a large recent acquisition, and the market is uncertain about dilution, integration costs, and incremental earnings. Misjudging accretion can misprice the stock significantly.",
+        "current_answer": "unresolved",
+        "bull_evidence": [
+          "Management states performance is in line with expectations; synergies could include brand access and operational cost savings.",
+          "Acquisition was partly funded by H-share placement, diluting existing shareholders only modestly.",
+          "DFS gives immediate access to Greater China retail network."
+        ],
+        "bear_evidence": [
+          "DFS retail historically generated lower margins; no evidence of immediate margin uplift.",
+          "Integration costs are being charged through restructuring and operational expenses.",
+          "Dilution from new shares issued reduces EPS for existing holders."
+        ],
+        "decisive_model_variables": [
+          "DFS revenue contribution",
+          "DFS margin",
+          "integration costs",
+          "share count"
+        ],
+        "affected_financial_lines": [
+          "parent net profit",
+          "diluted EPS",
+          "FCF"
+        ],
+        "evidence_ids": [
+          "KPE01",
+          "KPE02",
+          "EV040"
+        ],
+        "missing_evidence": [
+          "DFS segment P&L post-acquisition",
+          "Number of new H-shares issued",
+          "One-off integration cost schedule"
+        ],
+        "next_verification": "Full-year 2026 filing with DFS pro-forma and segment note."
+      },
+      {
+        "question_id": "Q5",
+        "question": "Can the current market valuation (PE TTM 27.9x, PS 2.07x) be justified by the earnings growth trajectory implied by our base case (~40% profit growth in 2026E) and structural moat?",
+        "why_it_matters": "The valuation multiple determines most of the return. If the market is under-pricing the recovery, the stock offers upside even without multiple expansion; if it is already pricing in full recovery, returns may be modest.",
+        "current_answer": "unresolved",
+        "bull_evidence": [
+          "PE is at 20.2 percentile over 5 years, PB at 0.2 percentile, PS at 3.3 percentile – historically cheap.",
+          "Implied TTM earnings CNY 3,997mn vs base case 2026E net profit CNY 5,000mn suggests 25% earnings growth is not fully reflected.",
+          "Duty-free industry has regulatory moats and high barriers, supporting above-average multiples."
+        ],
+        "bear_evidence": [
+          "The TTM PE of 27.9x is still above average global retail peers.",
+          "The market may be discounting a structural shift in duty-free spending patterns.",
+          "Even at a 20x multiple, upside is limited if EPS only reaches CNY 2.50."
+        ],
+        "decisive_model_variables": [
+          "fair PE multiple",
+          "earnings growth",
+          "competitive position"
+        ],
+        "affected_financial_lines": [
+          "fair value per share",
+          "P/E ratio"
+        ],
+        "evidence_ids": [
+          "EV043",
+          "EV044",
+          "EV045"
+        ],
+        "missing_evidence": [
+          "Peer-implied multiple range justified by ROIC and growth",
+          "Precise share count for PE computation"
+        ],
+        "next_verification": "Peer analysis using Tushare peer table, review of management capital allocation history."
+      }
+    ],
+    "forecast_lines": [
+      {
+        "segment": "主营业务",
+        "metric": "revenue",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 52552.697,
+        "year_1_value": 57808.0,
+        "year_2_value": 63589.0,
+        "year_3_value": 69948.0,
+        "formula": "base_value * (1+10%) for 2026E, then +10%, +10% driven by tourism recovery, DFS contribution, and policy uplift.",
+        "assumption_status": "assumed",
+        "evidence_ids": [
+          "EV011",
+          "EV029"
+        ],
+        "key_sensitivity": "1% revenue change = ~CNY 580mn in 2026E, affecting gross profit by ~CNY 195mn.",
+        "missing_inputs": [
+          "Channel-level build-up",
+          "DFS organic growth vs base"
+        ]
+      },
+      {
+        "segment": "其他业务",
+        "metric": "revenue",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 1140.882,
+        "year_1_value": 1140.882,
+        "year_2_value": 1140.882,
+        "year_3_value": 1140.882,
+        "formula": "held flat, given lack of disclosure and immateriality.",
+        "assumption_status": "assumed",
+        "evidence_ids": [
+          "EV030"
+        ],
+        "key_sensitivity": "negligible",
+        "missing_inputs": [
+          "Business nature and growth prospects"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "revenue",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 53693.579,
+        "year_1_value": 58948.882,
+        "year_2_value": 64729.882,
+        "year_3_value": 71088.882,
+        "formula": "sum of segment revenues; base from EV012.",
+        "assumption_status": "computed",
+        "evidence_ids": [
+          "EV012",
+          "EV011"
+        ],
+        "key_sensitivity": "top-line driver for margins and cash flow",
+        "missing_inputs": []
+      },
+      {
+        "segment": "consolidated",
+        "metric": "gross_margin",
+        "unit": "%",
+        "base_period": "FY2025",
+        "base_value": null,
+        "year_1_value": 34.5,
+        "year_2_value": 35.0,
+        "year_3_value": 35.5,
+        "formula": "Q1 2026 actual 33.63%, +1pp improvement per year from mix, scale, and DFS synergies.",
+        "assumption_status": "assumed",
+        "evidence_ids": [
+          "EV014"
+        ],
+        "key_sensitivity": "1pp change shifts gross profit by CNY 590-711mn.",
+        "missing_inputs": [
+          "FY2025 actual gross margin for calculation"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "operating_margin",
+        "unit": "%",
+        "base_period": "FY2025",
+        "base_value": null,
+        "year_1_value": 17.5,
+        "year_2_value": 18.5,
+        "year_3_value": 19.5,
+        "formula": "Q1 2026 actual 16.52%, +1pp per year from operating leverage and cost control.",
+        "assumption_status": "assumed",
+        "evidence_ids": [
+          "EV015"
+        ],
+        "key_sensitivity": "operating leverage sensitivity",
+        "missing_inputs": [
+          "FY2025 actual operating margin"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "operating_profit",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": null,
+        "year_1_value": 10316.0,
+        "year_2_value": 11975.0,
+        "year_3_value": 13862.0,
+        "formula": "revenue * operating_margin",
+        "assumption_status": "computed",
+        "evidence_ids": [],
+        "key_sensitivity": "revenue and margin interaction",
+        "missing_inputs": [
+          "FY2025 operating profit for base"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "parent_net_profit",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 3586.178,
+        "year_1_value": 5000.0,
+        "year_2_value": 5930.0,
+        "year_3_value": 5990.0,
+        "formula": "Based on reference research (Great Wall Securities) forecast: 2026E 50亿, 2027E 59.3亿, 2028E 59.9亿; consistent with margin recovery and moderate revenue growth.",
+        "assumption_status": "assumed (from external PDF reference)",
+        "evidence_ids": [
+          "EV012",
+          "EV016"
+        ],
+        "key_sensitivity": "dominant driver of EPS and valuation",
+        "missing_inputs": [
+          "Tax rate, minority interest allocation"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "eps",
+        "unit": "CNY",
+        "base_period": "FY2025",
+        "base_value": null,
+        "year_1_value": 2.41,
+        "year_2_value": 2.85,
+        "year_3_value": 2.88,
+        "formula": "parent_net_profit / diluted_share_count (assumed 2078 mn shares from Tushare reg_capital).",
+        "assumption_status": "calculated",
+        "evidence_ids": [],
+        "key_sensitivity": "share count and profit",
+        "missing_inputs": [
+          "Accurate diluted share count including H-shares post-DFS"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "ocf",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": null,
+        "year_1_value": 7500.0,
+        "year_2_value": 8895.0,
+        "year_3_value": 8985.0,
+        "formula": "parent_net_profit * 1.5x cash conversion (conservative vs Q1 1.66x).",
+        "assumption_status": "assumed",
+        "evidence_ids": [
+          "EV018"
+        ],
+        "key_sensitivity": "cash conversion rate",
+        "missing_inputs": [
+          "FY2025 OCF"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "capex",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": null,
+        "year_1_value": 2000.0,
+        "year_2_value": 1800.0,
+        "year_3_value": 1600.0,
+        "formula": "moderate capex for store maintenance and digital; DFS integration spend front-loaded.",
+        "assumption_status": "assumed",
+        "evidence_ids": [],
+        "key_sensitivity": "directly affects FCF",
+        "missing_inputs": [
+          "FY2025 capex",
+          "DFS capex plan"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "fcf",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": null,
+        "year_1_value": 5500.0,
+        "year_2_value": 7095.0,
+        "year_3_value": 7385.0,
+        "formula": "OCF - capex",
+        "assumption_status": "computed",
+        "evidence_ids": [],
+        "key_sensitivity": "dividend capacity",
+        "missing_inputs": []
+      }
+    ],
+    "scenarios": [
+      {
+        "scenario": "base",
+        "probability_pct": 60.0,
+        "operating_assumptions": [
+          "Revenue grows ~10% p.a. driven by Hainan tourism recovery, DFS contribution, and policy support.",
+          "Gross margin improves to 34.5%/35.0%/35.5% in 26E/27E/28E.",
+          "Operating margin expands to 17.5%/18.5%/19.5% from operating leverage.",
+          "DFS integration proceeds smoothly, with no major goodwill impairment.",
+          "Dividend payout maintained at 40%."
+        ],
+        "parent_net_profit_cny_mn": 5000.0,
+        "eps_cny": 2.41,
+        "fcf_cny_mn": 5500.0,
+        "valuation_method": "PE multiple based on comparable duty-free/retail sector and growth profile",
+        "valuation_multiple": 24.0,
+        "fair_value_per_share": 57.84,
+        "evidence_ids": [
+          "EV044",
+          "EV045"
+        ],
+        "falsification": "If H1 2026 revenue growth is negative or margins decline, the base case is at risk.",
+        "missing_inputs": [
+          "Peer multiple justification",
+          "Accurate diluted share count"
+        ]
+      },
+      {
+        "scenario": "bull",
+        "probability_pct": 20.0,
+        "operating_assumptions": [
+          "Revenue growth accelerates to 15%+ on stronger-than-expected tourism, earlier DFS synergy, and new policy tailwinds.",
+          "Gross margin reaches 36% by 2028E due to brand mix and scale.",
+          "Operating margin exceeds 20% by 2028E.",
+          "DFS acquisition generates immediate accretion and no goodwill issues.",
+          "Higher dividend or buyback initiated."
+        ],
+        "parent_net_profit_cny_mn": 9000.0,
+        "eps_cny": 4.33,
+        "fcf_cny_mn": 12000.0,
+        "valuation_method": "PE multiple",
+        "valuation_multiple": 26.0,
+        "fair_value_per_share": 112.58,
+        "evidence_ids": [
+          "EV014",
+          "EV016"
+        ],
+        "falsification": "Bull case requires sustained GDP growth >6%, outbound travel exceeding 200 million trips, and no negative policy changes.",
+        "missing_inputs": [
+          "Long-term growth trajectory"
+        ]
+      },
+      {
+        "scenario": "bear",
+        "probability_pct": 20.0,
+        "operating_assumptions": [
+          "Revenue stagnates due to increased Hainan competition, weak luxury demand, and slower tourism.",
+          "Gross margin declines to 32% as price competition intensifies.",
+          "Operating margin drops to 14% due to fixed cost deleverage.",
+          "DFS integration proves dilutive early on, requiring restructuring charges.",
+          "Dividend payout reduced to preserve cash."
+        ],
+        "parent_net_profit_cny_mn": 3800.0,
+        "eps_cny": 1.83,
+        "fcf_cny_mn": 3000.0,
+        "valuation_method": "PE multiple",
+        "valuation_multiple": 18.0,
+        "fair_value_per_share": 32.94,
+        "evidence_ids": [
+          "EV012"
+        ],
+        "falsification": "A sustained drop in Hainan tourist arrivals below 50 million per year or policy reversal would validate bear case.",
+        "missing_inputs": [
+          "Detailed competitive landscape analysis"
+        ]
+      }
+    ],
+    "evidence_change_rules": [
+      {
+        "evidence_id": "KPE01",
+        "affected_segment": "consolidated",
+        "affected_variable": "unmapped",
+        "old_assumption": "missing",
+        "new_assumption": "unchanged",
+        "financial_transmission": "none until quantified",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "Cross-check with filings/Tushare/price-volume/announcements before hard use"
+      },
+      {
+        "evidence_id": "KPE02",
+        "affected_segment": "consolidated",
+        "affected_variable": "unmapped",
+        "old_assumption": "missing",
+        "new_assumption": "unchanged",
+        "financial_transmission": "none until quantified",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "Cross-check with filings/Tushare/price-volume/announcements before hard use"
+      },
+      {
+        "evidence_id": "EV014",
+        "affected_segment": "consolidated",
+        "affected_variable": "gross_margin",
+        "old_assumption": "FY2025 margin unknown",
+        "new_assumption": "Q1 2026 margin 33.63% as base trend",
+        "financial_transmission": "Used to set 2026E gross margin at 34.5%, +0.87pp from Q1.",
+        "probability_before_after": "unchanged",
+        "disposition": "incorporated",
+        "verification_gate": "Compare H1 2026 gross margin vs Q1 2026 to confirm trend."
+      },
+      {
+        "evidence_id": "EV015",
+        "affected_segment": "consolidated",
+        "affected_variable": "operating_margin",
+        "old_assumption": "missing",
+        "new_assumption": "Q1 2026 operating margin 16.52% as baseline for improvement",
+        "financial_transmission": "Used to project operating margin expansion to 17.5% in 2026E.",
+        "probability_before_after": "unchanged",
+        "disposition": "incorporated",
+        "verification_gate": "Check if operating leverage is sustained in H1 2026."
+      },
+      {
+        "evidence_id": "EV036",
+        "affected_segment": "consolidated",
+        "affected_variable": "revenue",
+        "old_assumption": "Revenue growth from Q4 2025 to Q1 2026 -68.51% (conflicting)",
+        "new_assumption": "Rejected; rely on reported Q1 2026 revenue CNY 16,906 mn and FY2025 CNY 53,694 mn.",
+        "financial_transmission": "None; conflict resolved by preferring direct reported figures.",
+        "probability_before_after": "unchanged",
+        "disposition": "rejected",
+        "verification_gate": "Seek clarification of EV036 metric definition."
+      }
+    ],
+    "reconciliation_checks": [
+      "Q1 2026 parent net profit (2,348mn) vs annualised run-rate (9,393mn) reconciles with seasonality share 52.5% -> adjusted EBITDA.",
+      "Diluted share count assumed 2,077.8 mn from Tushare reg_capital; verify with actual outstanding shares post-DFS H-share issuance.",
+      "Base case EPS 2.41 * PE 24 = FV 57.84; current implied price ~53.6 implies ~5% upside, consistent with partial recovery pricing.",
+      "FCF = OCF - capex: 7,500 - 2,000 = 5,500 for 2026E, sufficient to cover 40% dividend of 2,000mn.",
+      "EBITDA proxy: Operating profit 10,316 + D&A (unknown) ~12,000mn."
+    ],
+    "analyst_instructions": [
+      "Treat all forward assumptions as default placeholders; update with explicit growth rates, margin estimates, and share count from verified filings or consensus.",
+      "Replace base-case net profit with own model; the current 2026E 5,000mn is sourced from Great Wall Securities PDF and must be reconciled with TradingAgents earnings bridge.",
+      "Resolve conflict EV036 definitively before any investment decision.",
+      "Acquire diluted share count from latest filing (including H-shares) to calculate accurate EPS.",
+      "Collect Hainan monthly tourist and duty-free sales data to validate demand trajectory and adjust volume assumptions."
+    ],
+    "preprocessing_notes": [
+      "Company segment-level financials beyond main/other are not disclosed in the evidence. Therefore, the segment profiles for '主营业务' and '其他业务' are based on the only available split. Sub-channels (offshore, airport, online, DFS) are treated as aliases within the main segment.",
+      "Contradiction in EV036 (revenue growth -68.51%) vs reported Q1/FY revenue is flagged as a conflict. It is likely a data error or refers to a different metric; resolved by relying on direct reported figures.",
+      "Knowledge Planet evidence (KPE01, KPE02) lack content and cannot be mapped to specific model variables. They are placed on watch with missing inputs highlighted.",
+      "No sell-side consensus or explicit baseline assumptions provided; base-case net profit uses external PDF reference from Great Wall Securities.",
+      "All metrics from earnings_model are consolidated; no segment-level margins available.",
+      "Causal chain for main business is based on qualitative descriptions from annual report and investor interactions.",
+      "Share count is set to registered capital (207779.6644万 shares) as a placeholder; actual diluted count may differ post DFS H-share issuance.",
+      "unknown evidence ids removed from underwriting packet",
+      "unknown evidence ids removed from underwriting packet"
+    ]
+  }
+}

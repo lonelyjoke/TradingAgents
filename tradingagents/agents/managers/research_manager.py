@@ -13,6 +13,7 @@ from tradingagents.agents.utils.agent_utils import (
     get_building_materials_instruction,
     get_buy_side_thesis_instruction,
     get_buy_side_underwriting_modules_instruction,
+    get_company_depth_contract_instruction,
     get_compute_leasing_instruction,
     get_consumer_staples_instruction,
     get_dividend_defensive_instruction,
@@ -228,6 +229,7 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 - If industry-specific filing context is available, keep an **Industry Driver Verdict** explicit enough to preserve the real sector-native variables that decide the thesis.
 - If the filing context contains **Growth Sustainability & Ramp Conditions**, keep a **Growth Sustainability Verdict** explicit enough to judge whether revenue/profit growth can continue or ramp further. Require the debate to separate verified drivers, inferred drivers, needed ramp conditions, and falsification signals before accepting any Buy/Underweight conclusion.
 - Fill the compact `UnderwritingResearchPlan` schema. Put the reconciled operating/forecast/scenario model in `accepted_underwriting_model`, all assumption changes in `model_change_ledger`, unresolved company-specific questions in `unresolved_questions_and_gaps`, and a concise constraint set in `handoff_to_pm_and_trader`. Do not recreate the legacy optional-field checklist.
+- Fill `canonical_model_snapshot` with the deterministic diluted-share line and every populated consolidated forecast/scenario line from the underwriting packet. Use stable line ids such as `shares`, `2026E_revenue`, `2026E_parent_net_profit`, `2026E_eps`, `base_fair_value`. Copy unchanged values and units exactly. Every changed value or unit must have a matching accepted `model_change_rows` entry with old/new values, evidence ids and recalculated impact; otherwise keep the packet value or mark the line unresolved.
 - If the filing context or shared packet contains **Pre-Debate Underwriting Questions**, use them as the judging agenda. Reconcile initial assumption, bull evidence, bear attack, accepted model value, EPS/FCF/valuation impact and next verification inside `model_change_ledger`. Do not let the final plan ignore an unanswered question that is central to the recommendation.
 - If the filing context contains a Business Segment Valuation Map or Segment Economics Pack, keep a **Business Segment Valuation Verdict** explicit enough to split mature core businesses from emerging second curves, geographies, and channels. Do not allow the debate to collapse a multi-business company into one blended PE unless the filings do not support a meaningful split.
 - Keep a **Segment Prosperity Verdict** for multi-business companies. Judge each material segment on both current prosperity level and marginal direction using dated demand, supply/capacity, price/volume/share, utilization/mix, margin, working-capital and cash evidence. Require written causal analysis, strongest counterevidence, confidence, EPS/FCF transmission, and profit-weighted company aggregation; do not let one commodity proxy or a small fashionable segment determine the whole-company verdict.
@@ -391,6 +393,7 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 {get_supply_demand_fallback_instruction()}
 {get_buy_side_thesis_instruction()}
 {get_buy_side_underwriting_modules_instruction()}
+{get_company_depth_contract_instruction()}
 {get_material_catalyst_instruction()}
 {get_thematic_valuation_instruction()}
 {get_filing_intelligence_instruction()}
@@ -423,13 +426,20 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 {get_focused_report_instruction()}
 If a bull or bear argument contains an exact product price, inventory figure, product spread, percentage change, or date-specific market claim that is not supported by the analyst reports or corroborated web fact-check context, downgrade that argument and list it as an unverified key assumption."""
 
-        investment_plan = invoke_structured_or_freetext(
+        investment_plan, research_manager_generation_status = invoke_structured_or_freetext(
             structured_llm,
             llm,
             prompt,
             render_underwriting_research_plan,
             "Research Manager",
+            return_metadata=True,
+            fallback_schema=UnderwritingResearchPlan,
         )
+        research_manager_plan_payload = research_manager_generation_status.pop(
+            "validated_payload",
+            {},
+        )
+        research_manager_generation_status["schema"] = "UnderwritingResearchPlan"
 
         new_investment_debate_state = {
             "judge_decision": investment_plan,
@@ -443,6 +453,8 @@ If a bull or bear argument contains an exact product price, inventory figure, pr
         return {
             "investment_debate_state": new_investment_debate_state,
             "investment_plan": investment_plan,
+            "research_manager_generation_status": research_manager_generation_status,
+            "research_manager_plan_payload": research_manager_plan_payload,
         }
 
     return research_manager_node

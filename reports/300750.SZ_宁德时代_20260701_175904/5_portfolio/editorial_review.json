@@ -1,0 +1,67 @@
+{
+  "review": {
+    "revision_required": true,
+    "company_understanding_score": 4,
+    "independent_model_score": 4,
+    "evidence_and_counterevidence_score": 3,
+    "valuation_closure_score": 3,
+    "readability_and_synthesis_score": 4,
+    "strongest_aspects": [
+      "分部拆解清晰，动力电池与储能的财务桥接逻辑扎实",
+      "OCF/NI、应付/成本等会计质量分析紧扣护城河证据",
+      "概率加权估值闭合方法规范，避免了双重计算"
+    ],
+    "findings": [
+      {
+        "section": "valuation_and_expectation_gap",
+        "priority": "must_revise",
+        "issue": "结论称“当前价格已进入合理偏低的价值投资区间”，但概率加权公允价值仅高出5.5%，隐含总回报（含股息）约7.6%，对于一个存在周期波动与政策风险的制造业龙头，该安全边际难称“合理偏低”，与“分阶段谨慎增持”的评级姿态形成温和矛盾。",
+        "evidence_or_logic_gap": "文档自身计算：基准公允价值400.4元，概率加权405.2元，现价383.84元，升值空间仅5.5%。加上2%股息约7.6%总回报，接近权益风险溢价下沿，缺乏深度安全边际。且2027E PE 22x的基准已自辩论前的20x上调，估值修复空间已被部分消耗。若半年报仅确认而非超预期，估值可能难以上行。",
+        "revision_instruction": "重写估值结论段落，将表述从“合理偏低”修正为“估值合理偏低但安全边际有限，投资吸引力主要来自质量溢价与下行保护，而非显著低估”。明确向上的催化依赖半年报超预期，否则价格可能继续受22–23倍PE约束。保持‘分阶段/谨慎增持’与估值结论一致。"
+      },
+      {
+        "section": "industry_cycle_and_competition",
+        "priority": "should_revise",
+        "issue": "竞争格局分析仅定性描述CATL的规模优势，未对海外本土化生产、地缘政治风险（欧盟反补贴调查、美国IRA法案）等关键反证提供足够的财务映射。",
+        "evidence_or_logic_gap": "文档仅在风险部分提及“海外地缘风险”，但未在产业格局中量化：海外收入占比30.6%，若关税或准入限制上升，可能显著侵蚀利润。匈牙利工厂建设亏损、当地成本超支等未纳入情景分析。",
+        "revision_instruction": "在行业竞争部分加入一段对海外结构性风险的专题讨论，引用现有禁令/反补贴调查的进展，并说明如何影响海外毛利率和营收增速的假设，增强反证覆盖深度。无需新增数据，可利用已提到的海外收入占比和在建产能线索。"
+      },
+      {
+        "section": "valuation_and_expectation_gap",
+        "priority": "should_revise",
+        "issue": "预期差分析过于依赖毛利率企稳与储能增速回升，未充分回应熊方关于“估值收缩可能长期化”的论点——即便2026年半年报确认毛利率25%，如果市场仍给予低PE，估值修复可能不会发生。",
+        "evidence_or_logic_gap": "过去6个月PE收缩了17%，EPS增长22%。市场已表明对动力电池制造行业存在系统性低估值倾向。报告仅以‘质量溢价’为由上修PE至22x，但未讨论若行业整体估值中枢下行，CATL能否单独维持20x以上的情景。",
+        "revision_instruction": "在预期差部分增加一个段落，讨论估值收缩的系统性风险，并给出在‘盈利增长但PE持平’情况下投资者的预期回报（持有收益主要来自盈利增长而非估值扩张），让读者看到估值不回归时的底线性收益。"
+      },
+      {
+        "section": "risks_catalysts_verification",
+        "priority": "should_revise",
+        "issue": "加仓/减仓触发条件与估值目标价格区间存在脱节。当前383元已接近360–440元区间的中枢，但建仓策略建议40%仓位现在买入，剩余在350–360元加仓，意味着预期股价可能先跌后涨，缺乏对当前价格区间的风险分析。",
+        "evidence_or_logic_gap": "价格已位于200日均线384元附近，且相对电力设备行业跑输61%。若市场情绪低迷，股价可能轻易跌破380元至360元，当前建仓的40%仓位将面临短期浮亏。策略未评估该情景下投资者的心理承受能力和应急处理。",
+        "revision_instruction": "修改执行清单，补充对当前价位（383元）的风险评估：如果不在半年报前建仓会错失什么？如果建仓后跌破370元应如何处理？增加一条等待半年报再建仓的替代路径，供风险偏好较低的投资者参考，使策略更具操作性和弹性。"
+      },
+      {
+        "section": "accounting_and_capital_allocation",
+        "priority": "optional",
+        "issue": "资本分配部分未提及ROIC趋势或资本开支效率评估。尽管产能扩张逻辑成立，但大规模资本开支（2026E 450亿）的回报率是影响长期估值的关键，目前缺失这一分析。",
+        "evidence_or_logic_gap": "可用的2025年财报数据包括营业利润895亿和固定资产规模，可以估算近似ROIC。虽然精确数字需要更多拆分，但目前的论述仅强调‘建更高围墙’，未讨论资本配置效率是否在下降。",
+        "revision_instruction": "基于已有数据粗略估算ROIC（如营业利润/（固定资产+在建工程））并陈述趋势；如果数据不足以精确计算，可定性讨论全球产能扩张的IRR预期及其对长期自由现金流的影响，体现对资本配置质量的批判性考察。"
+      }
+    ],
+    "overall_editorial_verdict": "报告在分部拆解、财务桥接和护城河分析上具备扎实基础，模型假设清晰且经过辩论折中。但估值闭合与投资结论之间存在温和矛盾，表现为将有限的上行空间表述为‘合理偏低’的价值区间，淡化了估值修复依赖催化剂的事实。此外，海外地缘政策风险和中长期资本开支效率的分析深度不足，导致反证覆盖略显薄弱。需要修订以上指出的3个should_revise/1个must_revise问题，但不改变超配评级，保持分阶段谨慎增持的取向。"
+  },
+  "review_status": {
+    "mode": "schema_prompt_structured",
+    "agent": "Sell-Side Research Editor",
+    "structured_error": ""
+  },
+  "revision_requested": true,
+  "revision_applied": true,
+  "revision_status": {
+    "mode": "schema_prompt_structured",
+    "agent": "Portfolio Manager Editorial Revision",
+    "structured_error": ""
+  },
+  "initial_handoff_issues": [],
+  "remaining_handoff_issues": []
+}

@@ -10,7 +10,10 @@ back gracefully to free-text generation.
 
 from __future__ import annotations
 
+import json
+
 from tradingagents.agents.schemas import (
+    SellSideEditorialReview,
     SellSidePMDecision,
     render_sell_side_pm_decision,
 )
@@ -21,6 +24,7 @@ from tradingagents.agents.utils.agent_utils import (
     get_building_materials_instruction,
     get_buy_side_thesis_instruction,
     get_buy_side_underwriting_modules_instruction,
+    get_company_depth_contract_instruction,
     get_compute_leasing_instruction,
     get_consumer_staples_instruction,
     get_dividend_defensive_instruction,
@@ -63,11 +67,139 @@ from tradingagents.dataflows.prompt_compaction import (
     compact_risk_history,
     compact_state_fields,
 )
+from tradingagents.dataflows.pm_report_compaction import split_pm_public_report
 from tradingagents.dataflows.structured_research import compact_structured_research_for_prompt
+
+
+def _canonical_handoff_issues(
+    manager_payload: dict,
+    pm_payload: dict,
+) -> list[str]:
+    """Find silent PM snapshot changes before the saved-report audit."""
+
+    def line_map(payload: dict) -> dict[str, dict]:
+        return {
+            str(row.get("line_id", "")).strip().lower(): dict(row)
+            for row in payload.get("canonical_model_snapshot", []) or []
+            if str(row.get("line_id", "")).strip()
+        }
+
+    manager_lines = line_map(manager_payload)
+    pm_lines = line_map(pm_payload)
+    accepted_changes = {
+        str(row.get("line_id", "")).strip().lower()
+        for row in pm_payload.get("handoff_change_rows", []) or []
+        if str(row.get("disposition", "")).lower() == "accepted"
+    }
+    issues: list[str] = []
+    for line_id, manager_line in manager_lines.items():
+        pm_line = pm_lines.get(line_id)
+        if pm_line is None:
+            issues.append(f"dropped canonical line: {line_id}")
+            continue
+        manager_value = manager_line.get("value")
+        pm_value = pm_line.get("value")
+        value_changed = manager_value != pm_value
+        try:
+            left = float(manager_value)
+            right = float(pm_value)
+            value_changed = abs(left - right) > max(abs(left) * 0.02, 0.01)
+        except (TypeError, ValueError):
+            pass
+        manager_unit = str(manager_line.get("unit", "")).strip().lower()
+        pm_unit = str(pm_line.get("unit", "")).strip().lower()
+        unit_changed = bool(manager_unit and pm_unit and manager_unit != pm_unit)
+        if (value_changed or unit_changed) and line_id not in accepted_changes:
+            issues.append(
+                f"silent change {line_id}: {manager_value} {manager_unit} -> "
+                f"{pm_value} {pm_unit}"
+            )
+    return issues
+
+
+def _editorial_review_prompt(
+    *,
+    decision_payload: dict,
+    manager_payload: dict,
+    structured_research_context: str,
+    fundamentals_context: str,
+    handoff_issues: list[str],
+) -> str:
+    return f"""You are the senior sell-side research editor for an A-share deep-dive memo.
+
+Judge analytical depth, not writing length or keyword coverage. Missing unavailable data is
+not itself a defect when it is disclosed and handled conditionally. Require revision only
+where the memo can improve using evidence already supplied, where logic/financial
+transmission is shallow, where counterevidence is missing, where valuation does not answer
+the expectation gap, where company economics are generic, or where sections contradict.
+
+Do not change the rating and do not rewrite the report in this call. Return only the
+SellSideEditorialReview JSON object. Make revision instructions section-specific and
+actionable. A complex company may need more detail; a simple company may be concise.
+
+Deterministic handoff issues detected before review:
+{json.dumps(handoff_issues, ensure_ascii=False)}
+
+Research Manager canonical plan:
+{json.dumps(manager_payload, ensure_ascii=False, separators=(',', ':'))[:30000]}
+
+Structured research source of record:
+{structured_research_context}
+
+Fundamental reconciliation excerpt:
+{fundamentals_context}
+
+PM decision draft JSON:
+{json.dumps(decision_payload, ensure_ascii=False, separators=(',', ':'))}
+"""
+
+
+def _editorial_revision_prompt(
+    *,
+    original_prompt: str,
+    decision_payload: dict,
+    review_payload: dict,
+    handoff_issues: list[str],
+) -> str:
+    """Ask the same selected deep model for one bounded, evidence-preserving revision."""
+
+    return f"""{original_prompt}
+
+---
+
+SENIOR SELL-SIDE EDITOR REVISION PASS
+Revise the PM draft once using the editorial findings below. Return the complete
+SellSidePMDecision object, including fields that are unchanged.
+
+Hard preservation rules:
+- Keep the original rating exactly unchanged.
+- Do not invent facts, estimates, sources, segment allocations, or unavailable data.
+- Preserve the Research Manager canonical snapshot exactly unless an explicit accepted
+  handoff change row states old value, new value, evidence, and recalculated impact.
+- Resolve deterministic handoff issues by restoring the manager value or documenting a
+  valid accepted change; do not hide the discrepancy in prose.
+- Revise only sections named by the editor or needed for cross-section consistency.
+- Improve causal and financial transmission, counterevidence, and valuation closure using
+  the supplied record. Depth is judged by analytical closure, not word count.
+
+Original PM draft JSON:
+{json.dumps(decision_payload, ensure_ascii=False, separators=(',', ':'))}
+
+Editorial review JSON:
+{json.dumps(review_payload, ensure_ascii=False, separators=(',', ':'))}
+
+Deterministic handoff issues:
+{json.dumps(handoff_issues, ensure_ascii=False)}
+"""
 
 
 def create_portfolio_manager(llm):
     structured_llm = bind_structured(llm, SellSidePMDecision, "Portfolio Manager")
+    editorial_review_llm = bind_structured(
+        llm,
+        SellSideEditorialReview,
+        "Sell-Side Research Editor",
+    )
 
     def portfolio_manager_node(state) -> dict:
         instrument_context = build_instrument_context(state["company_of_interest"])
@@ -78,7 +210,7 @@ def create_portfolio_manager(llm):
             state["investment_plan"],
             label="investment_plan",
             profile="portfolio",
-            max_chars=16000,
+            max_chars=30000,
         )
         trader_plan = compact_for_prompt(
             state["trader_investment_plan"],
@@ -122,9 +254,45 @@ def create_portfolio_manager(llm):
         quality_audit_context = prompt_contexts["quality_audit_context"]
         thesis_question_context = prompt_contexts["thesis_question_context"]
         data_coverage_context = prompt_contexts["data_coverage_context"]
+
+        # Sector playbooks are intentionally large. Inject only those whose
+        # deterministic gate fired; sending every bank, mining, software,
+        # biopharma, baijiu, and optical-module rule to an automotive supplier
+        # diluted company-specific evidence and made structured PM output less
+        # reliable.
+        gated_playbooks = [
+            ("Baijiu", baijiu_context, get_baijiu_instruction),
+            ("Compute leasing", compute_leasing_context, get_compute_leasing_instruction),
+            ("Defensive dividend", dividend_defensive_context, get_dividend_defensive_instruction),
+            ("Building materials", building_materials_context, get_building_materials_instruction),
+            ("Consumer staples", consumer_staples_context, get_consumer_staples_instruction),
+            ("Optical module", optical_module_context, get_optical_module_instruction),
+            ("Biopharma", biopharma_context, get_biopharma_instruction),
+            ("Software", software_context, get_software_instruction),
+            ("Insurance", insurance_context, get_insurance_instruction),
+            ("Medical device", medical_device_context, get_medical_device_instruction),
+            ("Metals/mining", metals_mining_context, get_metals_mining_instruction),
+        ]
+
+        def _gate_triggered(context: str) -> bool:
+            lowered = str(context or "").lower()
+            return "status: triggered" in lowered or "status：triggered" in lowered
+
+        active_playbooks = [
+            (label, context, instruction())
+            for label, context, instruction in gated_playbooks
+            if _gate_triggered(context)
+        ]
+        gated_sector_context = "\n".join(
+            f"- {label} context: **{context}**"
+            for label, context, _ in active_playbooks
+        ) or "- No gated sector playbook was triggered for this company."
+        gated_sector_instructions = "".join(
+            instruction for _, _, instruction in active_playbooks
+        )
         structured_research_context = compact_structured_research_for_prompt(
             state.get("structured_research_context", {}),
-            max_chars=22000,
+            max_chars=32000,
         )
         fundamentals_reconciliation_context = compact_for_prompt(
             state.get("fundamentals_report", ""),
@@ -132,6 +300,11 @@ def create_portfolio_manager(llm):
             profile="portfolio",
             max_chars=9000,
         )
+        research_manager_payload_context = json.dumps(
+            state.get("research_manager_plan_payload", {}),
+            ensure_ascii=False,
+            separators=(",", ":"),
+        )[:30000]
         investment_debate_state = state.get("investment_debate_state", {})
         bull_bear_context = ""
         if investment_debate_state:
@@ -215,7 +388,9 @@ def create_portfolio_manager(llm):
 - Treat the Research Manager's Accepted Underwriting Model as the canonical post-analyst version. It supersedes earlier `missing` markers only where the manager records a reproducible filing/Tushare calculation or a clearly labeled estimate. Do not resurrect a resolved gap, and do not silently change an accepted assumption without showing old value, new value, evidence, formula and EPS/FCF/value impact.
 - The Research Manager's `Accepted Underwriting Model` and `Model Change Ledger` are the authoritative debated revisions to the initial packet. Apply those revisions line by line. When the accepted model conflicts with the initial packet, disclose the change and use the accepted value only when its evidence and arithmetic reconcile; otherwise keep the line unresolved rather than choosing whichever supports the desired rating.
 - The PM is a report synthesizer and final allocator, not the first analyst to understand the company. Do not summarize upstream prose sequentially. Reconstruct the investment case from the shared operating equations and accepted model changes, then use debate excerpts only to explain why an assumption changed or stayed unchanged.
-- Fill the compact `SellSidePMDecision` schema. Put the coherent long-form report in `report_markdown`; put assumption changes in `shared_model_change_audit`; put remaining analytical weaknesses in `report_quality_self_check`. Do not recreate the legacy 70-field checklist inside the prose.
+- Fill every required field in `SellSidePMDecision`. The renderer, not the model, owns all H1/H2 headings and produces exactly eight public Chinese sections. Do not put H2 headings in any field. `report_markdown` is legacy overflow only and should normally be empty.
+- Copy the machine-readable Research Manager `canonical_model_snapshot` line for line, including ids, periods, values and units. Any PM revision requires a matching accepted `handoff_change_rows` entry with old/new value, evidence ids and recalculated EPS/FCF/valuation impact. A prose claim of "no change" never overrides a numeric difference.
+- Depth and duplication contract: let length follow company complexity and evidence density. Each section must answer its investment question with company-specific evidence, mechanism, financial transmission, counterevidence and implication, but do not pad a simple business or repeat forecast/valuation/conclusion text. Debate transcripts, KPE-by-KPE audit, information-utilization audit, model-change details, handoff audit and report self-check belong to the research appendix.
 - Always generate the complete PM memo. It should attempt all five items below inside a small number of integrated sections: (1) material business-segment economics and a segment prosperity matrix, (2) three distinct forward years or four forward quarters reconciled to the packet's model-profile-appropriate consolidated earnings, cash/capital, asset-quality and per-share lines, (3) formula-auditable valuation and safety-price arithmetic, (4) period-consistent verification thresholds, and (5) an explicit KPE outcome ledger. If an item cannot be completed, state the exact missing input, leave unsupported cells null, and add a retrieval task; do not suppress or mechanically downgrade the report.
 - Read `preprocessing_mode` and `preprocessing_notes` in the Structured Research Bundle. If semantic preprocessing failed or the mode is deterministic-only, disclose that limitation. Use deterministic filing-row segments when present, but do not claim that semantic extraction or conflict resolution succeeded.
 - For every material segment, show the latest disclosed revenue, revenue weight, revenue growth, gross margin and margin change when available. Never call a segment the fastest-growing, highest-margin, or dominant profit pool without comparing it against every disclosed material segment for the same period and metric.
@@ -377,7 +552,7 @@ def create_portfolio_manager(llm):
 - Include a **Verification Calendar** for the next disclosures or operating data points that would lead to add, hold, trim, downgrade, or exit decisions.
 - Include a concise Data Coverage Audit when any precomputed module is failed, missing, or partial. Make clear which missing data matters to the rating and which verified evidence still supports the decision.
 - If financial-report intelligence only says readable report-body/narrative filing text was unavailable, do not use "the system failed to retrieve any readable annual/semiannual/quarterly reports" as the core reason for the rating. Check whether structured statements, valuation, market, peer, and earnings-model evidence are present, then describe the issue narrowly as a missing filing-text/segment/management-discussion evidence gap.
-- Target roughly 3,800-5,800 Chinese characters when the output language is Chinese and the evidence set is rich, or a similar long-form excerpt in other languages. Preserve the full research conclusion first, then compress only the execution plan. The goal is **higher information density, less fragmentation, more synthesis**.
+- Let the eight-section memo expand for complex multi-business companies and stay tighter for simple businesses. Judge adequacy by analytical closure rather than word count: company mechanics, product/segment drivers, forecast, valuation, counterevidence and verification must survive; compress only execution details. The goal is **higher information density, less fragmentation, more synthesis**.
 - Depth and readability discipline: prefer a small number of thick, integrated sections rather than many thin sections. There is no hard word-count or section-count target; roughly 5-8 substantive sections is usually enough when related material is combined well. A natural structure is: company/business model and segment prosperity; core thesis and industry evidence; financial forecast and expectation gap; valuation and bull/base/bear cases; accounting/cash quality and risks; verification and concise execution. Each major section must complete a claim -> evidence -> causal transmission -> valuation/position implication loop. Start with the conclusion, support it with a compact table where useful, then develop the causal reasoning in prose. Merge policy, peers, Knowledge Planet, management, and technical evidence into the section whose conclusion they actually change instead of creating standalone mini-sections. Let report length follow analytical needs: being somewhat longer is acceptable, but never add headings or words merely to satisfy a quota.
 - Do not let the report become a tool-output catalog. Merge supporting modules into the nearest decision loop: business model, core questions, thesis/valuation, debate verdict, catalysts/optionality, evidence gaps, verification calendar, and execution. If a module is non-decisive, say so once and move on.
 - Preserve the core logic from the full report: company context, decisive business drivers, final rating, core bet, expectation gap, probability/payoff, cycle/valuation setup, catalysts, falsification signals, position posture, risk controls, and evidence gaps.
@@ -397,6 +572,7 @@ def create_portfolio_manager(llm):
 
 **Context:**
 - Research Manager's investment plan: **{research_plan}**
+- Machine-readable Research Manager canonical model (authoritative numeric handoff): **{research_manager_payload_context or '{}'}**
 - Trader's transaction proposal: **{trader_plan}**
 - Thematic catalyst cross-check and valuation bridge: **{thematic_catalyst_context}**
 - Industry cycle scan: **{industry_cycle_context}**
@@ -424,17 +600,8 @@ def create_portfolio_manager(llm):
 - Official policy-planning context: **{policy_planning_context}**
 - Web fact-check context: **{web_fact_check_context}**
 - Knowledge Planet stream/PDF intelligence: **{knowledge_planet_context}**
-- Gated baijiu verification context: **{baijiu_context}**
-- Gated compute-leasing verification context: **{compute_leasing_context}**
-- Gated dividend defensive verification context: **{dividend_defensive_context}**
-- Gated building-materials verification context: **{building_materials_context}**
-- Gated consumer-staples verification context: **{consumer_staples_context}**
-- Gated AI optical-module verification context: **{optical_module_context}**
-- Gated biopharma verification context: **{biopharma_context}**
-- Gated software verification context: **{software_context}**
-- Gated insurance verification context: **{insurance_context}**
-- Gated medical-device verification context: **{medical_device_context}**
-- Gated metals/mining verification context: **{metals_mining_context}**
+- Active gated sector contexts:
+{gated_sector_context}
 - Data coverage audit: **{data_coverage_context}**
 {lessons_line}
 {recent_decision_line}
@@ -450,13 +617,12 @@ Be decisive and ground every conclusion in specific evidence from the analysts.
 {get_supply_demand_fallback_instruction()}
 {get_buy_side_thesis_instruction()}
 {get_buy_side_underwriting_modules_instruction()}
+{get_company_depth_contract_instruction()}
 {get_material_catalyst_instruction()}
 {get_thematic_valuation_instruction()}
 {get_filing_intelligence_instruction()}
 {get_question_led_debate_instruction()}
-{get_insurance_instruction()}
-{get_medical_device_instruction()}
-{get_metals_mining_instruction()}
+{gated_sector_instructions}
 {get_price_move_attribution_instruction()}
 {get_peer_selection_instruction()}
 {get_supply_chain_selection_instruction()}
@@ -470,24 +636,137 @@ Be decisive and ground every conclusion in specific evidence from the analysts.
 {get_shareholder_structure_instruction()}
 {get_web_fact_check_instruction()}
 {get_knowledge_planet_instruction()}
-{get_baijiu_instruction()}
-{get_compute_leasing_instruction()}
-{get_dividend_defensive_instruction()}
-{get_building_materials_instruction()}
-{get_consumer_staples_instruction()}
-{get_optical_module_instruction()}
-{get_biopharma_instruction()}
-{get_software_instruction()}
 {get_fair_cycle_valuation_instruction()}
 {get_focused_report_instruction()}
 If an important investment claim depends on an unverified commodity price, product spread, inventory, policy detail, wholesale price, or exact percentage, list it under an "Unverified Key Assumptions" paragraph instead of treating it as fact. Do not place unverified exact prices in the holder/builder action plan as hard triggers; turn them into verification items.{get_language_instruction()}"""
 
-        final_trade_decision = invoke_structured_or_freetext(
+        final_trade_decision, pm_generation_status = invoke_structured_or_freetext(
             structured_llm,
             llm,
             prompt,
             render_sell_side_pm_decision,
             "Portfolio Manager",
+            return_metadata=True,
+            fallback_schema=SellSidePMDecision,
+        )
+        pm_decision_payload = pm_generation_status.pop("validated_payload", {})
+        pm_generation_status["schema"] = "SellSidePMDecision"
+
+        manager_payload = state.get("research_manager_plan_payload", {}) or {}
+        initial_handoff_issues = _canonical_handoff_issues(
+            manager_payload,
+            pm_decision_payload,
+        )
+        editorial_review_payload: dict = {}
+        editorial_review_status: dict = {
+            "mode": "not_run",
+            "agent": "Sell-Side Research Editor",
+            "structured_error": "initial PM output was not schema-validated",
+        }
+        revision_requested = False
+        revision_applied = False
+        revision_status: dict = {"mode": "not_run"}
+        remaining_handoff_issues = list(initial_handoff_issues)
+
+        # The editor is advisory: a provider failure never fragments or blocks the
+        # report. A valid review can request one bounded revision from the same
+        # user-selected deep model.
+        if pm_decision_payload:
+            _review_text, editorial_review_status = invoke_structured_or_freetext(
+                editorial_review_llm,
+                llm,
+                _editorial_review_prompt(
+                    decision_payload=pm_decision_payload,
+                    manager_payload=manager_payload,
+                    structured_research_context=structured_research_context,
+                    fundamentals_context=fundamentals_reconciliation_context,
+                    handoff_issues=initial_handoff_issues,
+                ),
+                lambda value: value.model_dump_json(),
+                "Sell-Side Research Editor",
+                return_metadata=True,
+                fallback_schema=SellSideEditorialReview,
+            )
+            editorial_review_payload = editorial_review_status.pop(
+                "validated_payload", {}
+            )
+            revision_requested = bool(initial_handoff_issues) or bool(
+                editorial_review_payload.get("revision_required")
+            )
+
+        if revision_requested:
+            revised_decision, revision_status = invoke_structured_or_freetext(
+                structured_llm,
+                llm,
+                _editorial_revision_prompt(
+                    original_prompt=prompt,
+                    decision_payload=pm_decision_payload,
+                    review_payload=editorial_review_payload,
+                    handoff_issues=initial_handoff_issues,
+                ),
+                render_sell_side_pm_decision,
+                "Portfolio Manager Editorial Revision",
+                return_metadata=True,
+                fallback_schema=SellSidePMDecision,
+            )
+            revised_payload = revision_status.pop("validated_payload", {})
+            if revised_payload:
+                revised_handoff_issues = _canonical_handoff_issues(
+                    manager_payload,
+                    revised_payload,
+                )
+                rating_preserved = revised_payload.get("rating") == pm_decision_payload.get(
+                    "rating"
+                )
+                handoff_not_worsened = len(revised_handoff_issues) <= len(
+                    initial_handoff_issues
+                )
+                if rating_preserved and handoff_not_worsened:
+                    final_trade_decision = revised_decision
+                    pm_decision_payload = revised_payload
+                    remaining_handoff_issues = revised_handoff_issues
+                    revision_applied = True
+
+        initial_mode = pm_generation_status.get("mode", "unknown")
+        if revision_applied:
+            pm_generation_status["mode"] = revision_status.get("mode", initial_mode)
+        pm_generation_status.update(
+            {
+                "initial_mode": initial_mode,
+                "editorial_review_mode": editorial_review_status.get("mode", "not_run"),
+                "editorial_revision_requested": revision_requested,
+                "editorial_revision_applied": revision_applied,
+                "editorial_revision_mode": revision_status.get("mode", "not_run"),
+                "remaining_handoff_issues": remaining_handoff_issues,
+            }
+        )
+        pm_editorial_review = {
+            "review": editorial_review_payload,
+            "review_status": editorial_review_status,
+            "revision_requested": revision_requested,
+            "revision_applied": revision_applied,
+            "revision_status": revision_status,
+            "initial_handoff_issues": initial_handoff_issues,
+            "remaining_handoff_issues": remaining_handoff_issues,
+        }
+        full_pm_decision = final_trade_decision
+        final_trade_decision, pm_research_appendix, moved_sections = (
+            split_pm_public_report(full_pm_decision)
+        )
+        pm_generation_status.update(
+            {
+                "full_report_chars": str(len(full_pm_decision)),
+                "public_report_chars": str(len(final_trade_decision)),
+                "appendix_chars": str(len(pm_research_appendix)),
+                "sections_moved_to_appendix": ", ".join(moved_sections),
+                "public_h2_count": str(
+                    sum(
+                        1
+                        for line in final_trade_decision.splitlines()
+                        if line.startswith("## ")
+                    )
+                ),
+            }
         )
 
         new_risk_debate_state = {
@@ -506,6 +785,10 @@ If an important investment claim depends on an unverified commodity price, produ
         return {
             "risk_debate_state": new_risk_debate_state,
             "final_trade_decision": final_trade_decision,
+            "pm_generation_status": pm_generation_status,
+            "pm_decision_payload": pm_decision_payload,
+            "pm_editorial_review": pm_editorial_review,
+            "pm_research_appendix": pm_research_appendix,
         }
 
     return portfolio_manager_node

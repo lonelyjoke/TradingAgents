@@ -53,6 +53,76 @@ class TraderAction(str, Enum):
     SELL = "Sell"
 
 
+class CanonicalModelLine(BaseModel):
+    """One machine-comparable model value carried across agent boundaries."""
+
+    line_id: str = Field(description="Stable id such as shares, 2026E_revenue or base_fair_value.")
+    period: str = Field(description="Reported or forecast period, for example 2026E.")
+    metric: str = Field(description="Canonical metric name, not a prose alias.")
+    value: float | None = Field(description="Numeric value; null only when explicitly unresolved.")
+    unit: str = Field(description="Exact unit, for example CNY mn, CNY/share, %, or mn shares.")
+    status: Literal["reported", "calculated", "estimated", "missing"] = Field(
+        description="Evidence status of this value."
+    )
+    evidence_ids: list[str] = Field(
+        default_factory=list,
+        description="Traceable EV/KPE/KF evidence ids; estimates cite their input ids.",
+    )
+    formula: str = Field(default="", description="Reproducible formula when calculated or estimated.")
+
+
+class ModelHandoffChange(BaseModel):
+    """Explicit, auditable revision to a canonical model line."""
+
+    line_id: str
+    old_value: float | None
+    new_value: float | None
+    unit: str
+    evidence_ids: list[str] = Field(default_factory=list)
+    reason: str
+    eps_fcf_valuation_impact: str
+    disposition: Literal["accepted", "rejected", "unchanged", "unresolved"]
+
+
+class PMEditorialFinding(BaseModel):
+    """One company-specific revision request from the sell-side editor."""
+
+    section: Literal[
+        "investment_conclusion",
+        "company_disaggregation",
+        "industry_cycle_and_competition",
+        "three_year_forecast",
+        "thesis_moat_financial_bridge",
+        "accounting_and_capital_allocation",
+        "valuation_and_expectation_gap",
+        "risks_catalysts_verification",
+        "cross_section_consistency",
+    ]
+    priority: Literal["must_revise", "should_revise", "optional"]
+    issue: str
+    evidence_or_logic_gap: str
+    revision_instruction: str
+
+
+class SellSideEditorialReview(BaseModel):
+    """LLM research-editor judgment; advisory and revision-driving, not a hard gate."""
+
+    revision_required: bool = Field(
+        description=(
+            "True when one or more sections need substantive revision before the memo is useful. "
+            "Do not require revision for style preference or missing unavailable data alone."
+        )
+    )
+    company_understanding_score: int = Field(ge=1, le=5)
+    independent_model_score: int = Field(ge=1, le=5)
+    evidence_and_counterevidence_score: int = Field(ge=1, le=5)
+    valuation_closure_score: int = Field(ge=1, le=5)
+    readability_and_synthesis_score: int = Field(ge=1, le=5)
+    strongest_aspects: list[str] = Field(default_factory=list)
+    findings: list[PMEditorialFinding] = Field(default_factory=list)
+    overall_editorial_verdict: str
+
+
 # ---------------------------------------------------------------------------
 # Research Manager
 # ---------------------------------------------------------------------------
@@ -73,6 +143,55 @@ class UnderwritingResearchPlan(BaseModel):
     core_bet: str = Field(
         default="Not supplied; derive from the accepted underwriting model.",
         description="The few operating variables that decide the investment outcome."
+    )
+    company_disaggregation: str = Field(
+        description=(
+            "Post-debate economic unit map. Separate filing segments from the product, "
+            "channel, geography, customer, project/asset or financial-business units that "
+            "actually drive economics. Carry reported scale/margin/cash metrics and mark "
+            "analytical or missing cells explicitly."
+        )
+    )
+    autonomous_forecast_model: str = Field(
+        description=(
+            "The accepted independent three-year model, built from operating drivers rather "
+            "than copied consensus. Reconcile every material unit to industry-native group "
+            "earnings, cash/capital, per-share lines and sources."
+        )
+    )
+    thesis_financial_bridge: str = Field(
+        description=(
+            "Ledger for the 3-6 decisive claims: operating formula, bull/base/bear assumptions, "
+            "and revenue/profit/EPS/FCF-or-capital/fair-value impact. Leave unsupported effects missing."
+        )
+    )
+    moat_evidence_verdict: str = Field(
+        description=(
+            "Evidence tests for every claimed moat versus history and true peers, including "
+            "counterevidence and the transmission to share, price, margin, turnover, cash or ROIC."
+        )
+    )
+    valuation_closure: str = Field(
+        description=(
+            "Mutually exclusive core/scenario/optionality/excluded value buckets, share-count "
+            "and probability reconciliation, double-counting checks, current-price expected "
+            "return and consistency with the provisional recommendation."
+        )
+    )
+    canonical_model_snapshot: list[CanonicalModelLine] = Field(
+        min_length=4,
+        description=(
+            "Machine-readable accepted source of truth. Include diluted shares and every "
+            "three-year consolidated forecast line plus scenario fair values. Copy unchanged "
+            "values exactly; any revision must also appear in model_change_rows."
+        ),
+    )
+    model_change_rows: list[ModelHandoffChange] = Field(
+        default_factory=list,
+        description=(
+            "Every difference from the underwriting packet, including unit corrections. "
+            "Silent changes are prohibited."
+        ),
     )
     accepted_underwriting_model: str = Field(
         description=(
@@ -111,6 +230,13 @@ class UnderwritingResearchPlan(BaseModel):
         description=(
             "Concise handoff: accepted model version, position constraints, catalysts, "
             "falsification and what the PM must not assume beyond the model."
+        )
+    )
+    handoff_integrity_audit: str = Field(
+        description=(
+            "Loss-prevention manifest: model version; frozen reported facts; accepted estimates; "
+            "unresolved cells; and every business unit, forecast line, financial bridge and "
+            "valuation bucket the PM must preserve or explicitly revise."
         )
     )
 
@@ -437,6 +563,39 @@ class ResearchPlan(BaseModel):
     )
 
 
+def _render_canonical_model_table(lines: list[CanonicalModelLine]) -> str:
+    rows = [
+        "| line_id | period | metric | value | unit | status | evidence/formula |",
+        "| --- | --- | --- | ---: | --- | --- | --- |",
+    ]
+    for line in lines:
+        value = "missing" if line.value is None else f"{line.value:.8g}"
+        lineage = ", ".join(line.evidence_ids) or line.formula or "unresolved"
+        rows.append(
+            f"| {line.line_id} | {line.period} | {line.metric} | {value} | "
+            f"{line.unit} | {line.status} | {lineage} |"
+        )
+    return "\n".join(rows)
+
+
+def _render_model_change_table(rows_in: list[ModelHandoffChange]) -> str:
+    if not rows_in:
+        return "No numeric or unit changes; canonical snapshot preserved exactly."
+    rows = [
+        "| line_id | old | new | unit | evidence | reason | impact | disposition |",
+        "| --- | ---: | ---: | --- | --- | --- | --- | --- |",
+    ]
+    for row in rows_in:
+        old = "missing" if row.old_value is None else f"{row.old_value:.8g}"
+        new = "missing" if row.new_value is None else f"{row.new_value:.8g}"
+        rows.append(
+            f"| {row.line_id} | {old} | {new} | {row.unit} | "
+            f"{', '.join(row.evidence_ids) or 'none'} | {row.reason} | "
+            f"{row.eps_fcf_valuation_impact} | {row.disposition} |"
+        )
+    return "\n".join(rows)
+
+
 def render_underwriting_research_plan(plan: UnderwritingResearchPlan) -> str:
     """Render one reconciled model-referee handoff without optional-field sprawl."""
     if isinstance(plan, ResearchPlan):
@@ -447,13 +606,25 @@ def render_underwriting_research_plan(plan: UnderwritingResearchPlan) -> str:
             f"**Rating**: {plan.recommendation.value}",
             f"**Research Readiness**: {plan.research_readiness}",
             f"**Core Bet**: {plan.core_bet}",
+            "## Company Disaggregation\n\n" + plan.company_disaggregation.strip(),
+            "## Autonomous Three-Year Forecast Model\n\n"
+            + plan.autonomous_forecast_model.strip(),
+            "## Thesis-to-Financial Bridge\n\n" + plan.thesis_financial_bridge.strip(),
+            "## Moat Evidence Verdict\n\n" + plan.moat_evidence_verdict.strip(),
+            "## Valuation Closure\n\n" + plan.valuation_closure.strip(),
+            "## Canonical Model Snapshot\n\n"
+            + _render_canonical_model_table(plan.canonical_model_snapshot),
             "## Accepted Underwriting Model\n\n" + plan.accepted_underwriting_model.strip(),
-            "## Model Change Ledger\n\n" + plan.model_change_ledger.strip(),
+            "## Model Change Ledger\n\n"
+            + _render_model_change_table(plan.model_change_rows)
+            + "\n\n"
+            + plan.model_change_ledger.strip(),
             "## Debate Verdict\n\n" + plan.debate_verdict.strip(),
             "## Probability and Payoff\n\n" + plan.probability_payoff.strip(),
             "## Unresolved Questions and Evidence Gaps\n\n"
             + plan.unresolved_questions_and_gaps.strip(),
             "## Handoff to PM and Trader\n\n" + plan.handoff_to_pm_and_trader.strip(),
+            "## Handoff Integrity Audit\n\n" + plan.handoff_integrity_audit.strip(),
         ]
     )
 
@@ -673,21 +844,103 @@ class SellSidePMDecision(BaseModel):
             "valuation/payoff and principal caveat."
         )
     )
-    report_markdown: str = Field(
+    investment_conclusion_and_core_conflict: str = Field(
         description=(
-            "The complete public-facing deep sell-side report in Markdown. Prefer five or "
-            "six thick integrated sections rather than many small headings. It must teach "
-            "how the company makes money; analyze every material segment through demand, "
-            "supply/capacity, volume/share/utilization, price/ASP, unit cost, margin and cash; "
-            "explain moat and financial-statement quality; show three explicit forward years "
-            "for segment drivers and model-profile-appropriate consolidated earnings, cash, "
-            "capital, asset-quality and per-share lines (use OCF/capex/FCF for ordinary "
-            "companies, but bank/insurance/securities/REIT-native metrics where appropriate); "
-            "show bull/base/bear assumptions, probabilities and valuation; reconcile KPE model "
-            "changes; explain expectation gap, counterevidence and verification; and only then "
-            "state rating and position implications. Every major section must complete claim "
-            "-> evidence -> mechanism -> financial impact -> valuation/position implication. "
-            "Use missing/not disclosed rather than invented precision."
+            "Public opening section. State the final rating and posture, core bet, decisive "
+            "unresolved conflict, probability/payoff, holder/builder action and the evidence "
+            "that upgrades or downgrades the view. Do not repeat later tables."
+        ),
+    )
+    canonical_model_snapshot: list[CanonicalModelLine] = Field(
+        min_length=4,
+        description=(
+            "Copy the Research Manager canonical model snapshot exactly. If the PM changes "
+            "a value, include the replacement here and a matching handoff_change_rows entry."
+        ),
+    )
+    handoff_change_rows: list[ModelHandoffChange] = Field(
+        default_factory=list,
+        description=(
+            "Every PM change versus the Research Manager snapshot. An empty list means exact "
+            "preservation; prose claims of no change do not override numeric differences."
+        ),
+    )
+    company_disaggregation: str = Field(
+        description=(
+            "Economic company map, not a company-introduction paragraph. Separate reported "
+            "segments from analytical product/channel/geography/customer/project/asset units; "
+            "show what each unit sells, drivers, disclosed scale/margin/cash, valuation treatment "
+            "and missing disclosure without invented allocations."
+        )
+    )
+    industry_cycle_and_competition: str = Field(
+        description=(
+            "Industry cycle and competitive structure using sector-native supply, demand, "
+            "capacity, utilization, price/spread and true-peer evidence. Separate verified "
+            "facts from proxies and explain the financial transmission."
+        ),
+    )
+    autonomous_forecast_model: str = Field(
+        description=(
+            "Final accepted three-year independent forecast. Show material-unit drivers and "
+            "reconcile to model-profile-appropriate group earnings, cash/capital, per-share lines, "
+            "formulas, evidence status and share count. Do not substitute consensus narrative."
+        )
+    )
+    thesis_financial_bridge: str = Field(
+        description=(
+            "For each decisive thesis state driver formula, bull/base/bear assumptions and the "
+            "resulting revenue, profit, EPS, FCF/capital and fair-value effect. Explicit missing "
+            "inputs are acceptable; qualitative claims posing as quantified effects are not."
+        )
+    )
+    moat_evidence_scorecard: str = Field(
+        description=(
+            "Score every claimed moat proven/partial/unproven/rejected using observable history "
+            "or true-peer evidence, counterevidence and financial transmission to share, price, "
+            "margin, turnover, cash conversion or ROIC."
+        )
+    )
+    valuation_closure: str = Field(
+        description=(
+            "Close mutually exclusive core/scenario/optionality/excluded buckets to probability-"
+            "weighted per-share fair value. Reconcile current price, share count, method, metric, "
+            "multiple, ownership/haircut, double counting, expected return and rating consistency."
+        )
+    )
+    accounting_and_capital_allocation: str = Field(
+        description=(
+            "Accounting quality, cash conversion, working capital, capex/CIP, leverage, "
+            "impairment, dividend/buyback and management capital-allocation assessment. "
+            "Connect each material item to earnings quality, FCF, ROIC and valuation."
+        ),
+    )
+    expectation_gap_and_market_pricing: str = Field(
+        description=(
+            "What the current price implies versus the independent model, company-specific "
+            "consensus when available, and true-peer alternatives. Name the exact variable, "
+            "period and magnitude of the expectation gap."
+        ),
+    )
+    risks_catalysts_verification: str = Field(
+        description=(
+            "Integrated downside, catalysts, falsification and dated verification calendar. "
+            "Separate verified adverse evidence from missing data and state add/hold/trim/"
+            "downgrade consequences consistent with the final rating."
+        ),
+    )
+    handoff_integrity_audit: str = Field(
+        description=(
+            "Compare the final memo with the Research Manager accepted model and underwriting "
+            "manifest. List preserved units/years/bridges/buckets and every revision with old value, "
+            "new value, evidence and recalculated financial/valuation impact."
+        )
+    )
+    report_markdown: str = Field(
+        default="",
+        description=(
+            "Legacy overflow only. Do not place public H2 sections here. Any supplied text is "
+            "moved to the research appendix and cannot replace the fixed eight-section memo."
         )
     )
     shared_model_change_audit: str = Field(
@@ -1468,20 +1721,49 @@ class PortfolioDecision(BaseModel):
 
 
 def render_sell_side_pm_decision(decision: SellSidePMDecision) -> str:
-    """Render the compact PM schema without fragmenting the long-form report."""
+    """Render one fixed Chinese eight-section PM memo plus internal appendices."""
     if isinstance(decision, PortfolioDecision):
         return render_pm_decision(decision)
+    appendix_overflow = decision.report_markdown.strip()
     return "\n\n".join(
         [
-            f"**Rating**: {decision.rating.value}",
-            f"**Rating Posture**: {decision.rating_posture}",
-            f"**Research Readiness**: {decision.research_readiness}",
-            f"**One-Line Thesis**: {decision.one_line_thesis}",
-            decision.report_markdown.strip(),
-            "## Shared Underwriting Model Change Audit\n\n"
-            + decision.shared_model_change_audit.strip(),
-            "## Report Quality Self-Check\n\n"
-            + decision.report_quality_self_check.strip(),
+            "# 公司深度研究与投资决策",
+            "| 最终评级 | 仓位姿态 | 研究就绪度 |\n"
+            "| --- | --- | --- |\n"
+            f"| {decision.rating.value} | {decision.rating_posture} | "
+            f"{decision.research_readiness} |",
+            f"> **一句话结论：** {decision.one_line_thesis}",
+            "## 一、投资结论与核心矛盾\n\n"
+            + decision.investment_conclusion_and_core_conflict.strip(),
+            "## 二、公司业务与利润池拆解\n\n"
+            + decision.company_disaggregation.strip(),
+            "## 三、行业周期与竞争格局\n\n"
+            + decision.industry_cycle_and_competition.strip(),
+            "## 四、三年盈利及现金流预测\n\n"
+            + _render_canonical_model_table(decision.canonical_model_snapshot)
+            + "\n\n"
+            + decision.autonomous_forecast_model.strip(),
+            "## 五、核心论点、护城河与财务传导\n\n"
+            + decision.thesis_financial_bridge.strip()
+            + "\n\n### 护城河证据评分\n\n"
+            + decision.moat_evidence_scorecard.strip(),
+            "## 六、会计质量与资本配置\n\n"
+            + decision.accounting_and_capital_allocation.strip(),
+            "## 七、估值、情景与预期收益\n\n"
+            + decision.expectation_gap_and_market_pricing.strip()
+            + "\n\n### 估值闭环\n\n"
+            + decision.valuation_closure.strip(),
+            "## 八、风险、催化剂与验证日历\n\n"
+            + decision.risks_catalysts_verification.strip(),
+            "## 附录A：模型变更与交接审计\n\n"
+            + _render_model_change_table(decision.handoff_change_rows)
+            + "\n\n### 共享模型变更审计\n\n"
+            + decision.shared_model_change_audit.strip()
+            + "\n\n### 交接完整性审计\n\n"
+            + decision.handoff_integrity_audit.strip(),
+            "## 附录B：质量自检\n\n"
+            + decision.report_quality_self_check.strip()
+            + ("\n\n### 兼容性溢出文本\n\n" + appendix_overflow if appendix_overflow else ""),
         ]
     )
 

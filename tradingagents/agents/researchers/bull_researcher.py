@@ -5,6 +5,7 @@ from tradingagents.agents.utils.agent_utils import (
     get_biopharma_instruction,
     get_building_materials_instruction,
     get_buy_side_thesis_instruction,
+    get_company_depth_contract_instruction,
     get_compute_leasing_instruction,
     get_consumer_staples_instruction,
     get_dividend_defensive_instruction,
@@ -204,6 +205,7 @@ Use this information to deliver an evidence-backed bullish challenge to the shar
 {get_research_gap_instruction()}
 {get_supply_demand_fallback_instruction()}
 {get_buy_side_thesis_instruction()}
+{get_company_depth_contract_instruction()}
 {get_fair_cycle_valuation_instruction()}
 {get_thematic_valuation_instruction()}
 {get_filing_intelligence_instruction()}

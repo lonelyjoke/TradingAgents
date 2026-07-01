@@ -1,0 +1,1376 @@
+{
+  "schema_version": 2,
+  "symbol": "600309.SH",
+  "as_of_date": "2026-06-30",
+  "forecast_years": [
+    "2026E",
+    "2027E",
+    "2028E"
+  ],
+  "research_readiness": "partial",
+  "readiness_reasons": [
+    "Key segment-level revenue/margin for polyurethane, petrochemical and fine chemicals are not disclosed separately; only a broad 'chemical industry' segment and tiny 'other' segment are reported. Without product-level economics the model cannot fully reflect polyurethane cycle or new-material contribution.",
+    "Diluted share count is not supplied and cannot be reliably calculated from the evidence; equity per-share values, EPS and per-share valuation closure remain open.",
+    "Capex, OCF and FCF data are unavailable for FY2025 or Q1 2026; the reinvestment and cash-flow equations are placeholder.",
+    "External industry data for MDI price, capacity, utilization, and new-material ASP/margin are missing; the causal chain from demand to cash flow remains evidence-limited outside of company-level margin and revenue.",
+    "Market price is available only as aggregate market cap, and share count missing makes current price and expected return unquantified.",
+    "One or more filing-reported segments required deterministic restoration.",
+    "Required consolidated three-year forecast lines are incomplete.",
+    "Three-year values remain missing for consolidated line(s): capex, eps, fcf, gross_margin, ocf, operating_profit, parent_net_profit, revenue",
+    "Material segment three-year driver lines are missing: 化工行业, 石化, 精细化学品与新材料, 聚氨酯",
+    "Bull/base/bear per-share valuation is incomplete.",
+    "All claimed moat mechanisms remain unproven by observable evidence.",
+    "Valuation has not closed from mutually exclusive buckets to per-share fair value."
+  ],
+  "company_model": {
+    "model_profile": "corporate",
+    "business_archetype": "全球领先的MDI制造商和高附加值化工新材料企业：以产能扩张和成本优势为核心，同时延伸至石化、精细化学品和电池材料，属于资本密集、重周期的大宗化学品与特种材料混合体",
+    "value_proposition_and_customers": "向下游建筑保温、冰箱家电、汽车、粘合剂、涂料、新能源电池、高端聚合物等行业提供MDI、TDI、聚醚、石化原料、精细化学品和电池材料等产品，客户遍及全球，出口依赖度较高，部分产品通过贸易渠道分销",
+    "revenue_equation": "营业收入 = Σ(产品销量i × ASPi) ，其中主要产品类别为MDI/TDI聚氨酯、石化产品和精细化学品/新材料；贸易业务亦提供约10%收入",
+    "profit_equation": "毛利 = 营业收入 – [原材料成本(苯、丙烯、煤等) + 能源 + 折旧 + 其他制造成本]； 营业利润 = 毛利 – 销售管理费用 – 研发费用； 归母净利润 = 营业利润 – 财务费用 – 所得税 ± 非经常性损益",
+    "cash_flow_equation": "经营活动现金流 = 归母净利润 + 折旧摊销 ± 营运资本变动； 自由现金流 = 经营现金流 – 资本开支（含在建工程转固后的新增资本支出）； 由于持续的产能建设，FCF 常常为负或低",
+    "capital_intensity_and_reinvestment": "固定资产和在建工程规模极大，资本密集度很高；每年研发投入48.65亿元（2025年），大量项目进入建设和爬坡期，回报率取决于新产能的产能利用率、产品价差和下游需求",
+    "diluted_share_count_mn": null,
+    "share_count_period": "",
+    "share_count_evidence_id": "",
+    "moat_mechanisms": [
+      "MDI 成本优势和技术壁垒（全球少数掌握全流程MDI技术的企业，一体化园区降低成本）",
+      "规模经济（全球最大MDI产能）",
+      "下游配方锁定和转换成本（客户依赖稳定的MDI供应与技术服务）",
+      "化工新材料研发积累与客户认证壁垒"
+    ],
+    "moat_to_financial_transmission": [
+      "成本优势 → 即使在行业低谷也能保持正毛利 → 支撑市场份额和销售增长",
+      "规模与一体化 → 单位成本低于竞争对手 → 更强的定价弹性和毛利率",
+      "转换成本 → 客户粘性 → 更高且更稳定的销量和价格 → 提高现金转化能力"
+    ],
+    "structural_risks": [
+      "全球MDI产能持续扩张，供过于求格局可能长期压制价格和毛利率",
+      "化工行业周期性波动，宏观需求放缓直接冲击量价",
+      "原材料（石油、煤炭、纯苯等）价格剧烈波动，侵蚀成本优势",
+      "贸易摩擦与关税升级，制约出口增长",
+      "电池材料等新业务面临激烈竞争和产能过剩，可能无法实现预期回报"
+    ],
+    "key_unknowns": [
+      "MDI/TDI 全行业产能利用率与价格中枢",
+      "各产品线（聚氨酯、石化、精细化学品）的分部收入和毛利率",
+      "电池材料等新业务能否实现正现金流和接受ROIC",
+      "未来3年资本开支规模与对应的回报周期"
+    ],
+    "evidence_ids": [
+      "EV021",
+      "EV022",
+      "EV027",
+      "EV030",
+      "EV034",
+      "EV037"
+    ]
+  },
+  "business_unit_map": [
+    {
+      "unit_id": "chemical_industry",
+      "unit_name": "化工行业",
+      "unit_type": "reported_segment",
+      "disclosure_basis": "reported",
+      "parent_unit": "company",
+      "economic_role": "绝对核心收入与利润来源，涵盖聚氨酯、石化、精细化学品和电池材料等所有化学业务",
+      "revenue_driver_equation": "收入 = Σ(各化学品销量 × 平均售价) ，主要受MDI/TDI价格、裂解价差、新材料出货量驱动",
+      "profit_driver_equation": "毛利率 = (收入 - 原材料及能源成本 - 折旧) / 收入；经营杠杆来自产能利用率和成本控制",
+      "cash_and_capital_equation": "大量资本开支用于产能建设和维护，FCF高度依赖营业现金流和投资节奏",
+      "reported_metrics": [
+        "营业收入",
+        "营业成本",
+        "毛利率",
+        "营业收入增长率"
+      ],
+      "evidence_ids": [
+        "EV030",
+        "EV024",
+        "EV029"
+      ],
+      "missing_inputs": [
+        "分部产品销量/均价",
+        "分部产能利用率",
+        "分部营运资本"
+      ],
+      "next_verification": "等待半年度或年度报告披露化工行业分产品销量、价格和毛利率"
+    },
+    {
+      "unit_id": "other_business",
+      "unit_name": "其他业务",
+      "unit_type": "reported_segment",
+      "disclosure_basis": "reported",
+      "parent_unit": "company",
+      "economic_role": "规模极小、利润率高但增速下滑，可能包括技术服务、废旧物料销售等",
+      "revenue_driver_equation": "零星交易，收入规模小",
+      "profit_driver_equation": "毛利率高但贡献微薄",
+      "cash_and_capital_equation": "无需专门资本安排",
+      "reported_metrics": [
+        "营业收入",
+        "营业成本",
+        "毛利率",
+        "营业收入增长率"
+      ],
+      "evidence_ids": [
+        "EV030"
+      ],
+      "missing_inputs": [
+        "业务明细"
+      ],
+      "next_verification": "无需重点关注"
+    },
+    {
+      "unit_id": "polyurethane",
+      "unit_name": "聚氨酯（MDI/TDI/聚醚）",
+      "unit_type": "product",
+      "disclosure_basis": "analytical",
+      "parent_unit": "chemical_industry",
+      "economic_role": "公司核心利润引擎，全球最大MDI供应商",
+      "revenue_driver_equation": "收入 = MDI销量×MDI价格 + TDI销量×TDI价格 + 聚醚销量×聚醚价格",
+      "profit_driver_equation": "毛利 = 收入 - 纯苯/煤炭等原料成本 - 能源 - 折旧 - 其他",
+      "cash_and_capital_equation": "MDI装置弹性运营，资本开支集中于扩建和技改",
+      "reported_metrics": [],
+      "evidence_ids": [
+        "KPE01",
+        "KPE02"
+      ],
+      "missing_inputs": [
+        "聚氨酯收入占比",
+        "聚氨酯毛利率",
+        "MDI/TDI价格趋势",
+        "聚氨酯产能及利用率"
+      ],
+      "next_verification": "通过行业价格数据库或公司拆分披露获取MDI价格和销量"
+    },
+    {
+      "unit_id": "petrochemical",
+      "unit_name": "石化（乙烯/丙烯/聚烯烃）",
+      "unit_type": "product",
+      "disclosure_basis": "analytical",
+      "parent_unit": "chemical_industry",
+      "economic_role": "规模巨大但毛利率较低，受裂解价差影响大",
+      "revenue_driver_equation": "收入 = 聚烯烃/乙烯等产量×售价，售价与油价和行业景气度紧密相关",
+      "profit_driver_equation": "毛利 = 产品价差 - 运营成本",
+      "cash_and_capital_equation": "资本开支大，产能爬坡期可能拖累整体ROIC",
+      "reported_metrics": [],
+      "evidence_ids": [],
+      "missing_inputs": [
+        "石化收入占比",
+        "石化毛利率",
+        "产能利用率",
+        "裂解价差"
+      ],
+      "next_verification": "跟踪石化行业报告或公司未来可能披露的分部数据"
+    },
+    {
+      "unit_id": "fine_chemicals_new_materials",
+      "unit_name": "精细化学品与新材料（包括电池材料）",
+      "unit_type": "product",
+      "disclosure_basis": "analytical",
+      "parent_unit": "chemical_industry",
+      "economic_role": "未来潜在增长极，但目前体量不明，电池材料面临激烈竞争",
+      "revenue_driver_equation": "收入 = 电池材料量×价格 + 特种异氰酸酯等销量×价格",
+      "profit_driver_equation": "毛利 = 收入 - 研发/客户认证成本 - 供应链成本",
+      "cash_and_capital_equation": "高资本投入，回报路径不确定",
+      "reported_metrics": [],
+      "evidence_ids": [
+        "EV022"
+      ],
+      "missing_inputs": [
+        "精细化学品收入占比",
+        "电池材料毛利率",
+        "研发投入转化率"
+      ],
+      "next_verification": "需确认电池材料客户的认证进展和实际出货量"
+    },
+    {
+      "unit_id": "BU08",
+      "unit_name": "聚氨酯",
+      "unit_type": "reported_segment",
+      "disclosure_basis": "missing",
+      "parent_unit": "company",
+      "economic_role": "Filing segment restored after structured evidence reconciliation.",
+      "revenue_driver_equation": "",
+      "profit_driver_equation": "",
+      "cash_and_capital_equation": "",
+      "reported_metrics": [],
+      "evidence_ids": [],
+      "missing_inputs": [
+        "economic sub-unit driver equations require analyst completion"
+      ],
+      "next_verification": ""
+    },
+    {
+      "unit_id": "BU10",
+      "unit_name": "石化",
+      "unit_type": "reported_segment",
+      "disclosure_basis": "missing",
+      "parent_unit": "company",
+      "economic_role": "Filing segment restored after structured evidence reconciliation.",
+      "revenue_driver_equation": "",
+      "profit_driver_equation": "",
+      "cash_and_capital_equation": "",
+      "reported_metrics": [],
+      "evidence_ids": [],
+      "missing_inputs": [
+        "economic sub-unit driver equations require analyst completion"
+      ],
+      "next_verification": ""
+    },
+    {
+      "unit_id": "BU12",
+      "unit_name": "精细化学品与新材料",
+      "unit_type": "reported_segment",
+      "disclosure_basis": "missing",
+      "parent_unit": "company",
+      "economic_role": "Filing segment restored after structured evidence reconciliation.",
+      "revenue_driver_equation": "",
+      "profit_driver_equation": "",
+      "cash_and_capital_equation": "",
+      "reported_metrics": [],
+      "evidence_ids": [],
+      "missing_inputs": [
+        "economic sub-unit driver equations require analyst completion"
+      ],
+      "next_verification": ""
+    }
+  ],
+  "segment_models": [
+    {
+      "segment": "化工行业",
+      "products_or_services": "聚氨酯（MDI、TDI、聚醚）、石化产品（乙烯、丙烯、聚烯烃等）、精细化学品及新材料（ADI、电池材料等）",
+      "customers_and_channel": "下游覆盖建筑保温、冰箱家电、汽车、涂料与粘合剂、新能源等；销售以直销和贸易结合，出口占相当比例",
+      "revenue_weight_pct": 98.96,
+      "profit_weight_pct": 98.96,
+      "base_period": "FY2025",
+      "base_revenue_value": 201109.82,
+      "base_revenue_unit": "CNY mn",
+      "base_revenue_growth_pct": 11.88,
+      "base_margin_pct": 13.48,
+      "base_margin_change_pp": -2.61,
+      "demand_and_order_drivers": [
+        "全球建筑和家电复苏程度",
+        "汽车产量和轻量化趋势",
+        "聚氨酯出口订单（尤其东南亚、中东、非洲）",
+        "新能源汽车与储能对电池材料的需求",
+        "宏观经济增速与政策刺激"
+      ],
+      "industry_supply_and_capacity": "全球MDI产能仍在扩张，巴斯夫、亨斯迈等扩产计划增加供应；石化产能中国大量投放，整体供过于求；精细化学品/电池材料产能严重过剩，竞争激烈",
+      "volume_share_utilization": "公司是全球MDI龙头，份额约25-30%，但2025-2026年产能利用率受需求拖累可能处于较低水平；新石化装置的利用率正处于爬坡期",
+      "price_asp_take_rate": "MDI价格经过2022-2023年下行后目前处于中低位横盘，部分渠道反馈出口需求好转但价格仍承压；石化产品裂解价差因高油价和需求疲弱而处于微利状态",
+      "unit_cost_and_input_prices": "纯苯、煤炭等核心原料价格较高，能源成本受区域定价影响；公司一体化园区部分降低了物流和中间产品成本，但原料压力仍压制毛利率",
+      "margin_and_operating_leverage": "2025年毛利率13.48%同比下降2.61pp，主要受售价拖累和成本传导滞后；随着营收增长，管理费用和研发费用占比略有改善，使得经营利润率小幅提升（+0.49pp in Q1 2026）",
+      "working_capital_and_cash_conversion": "Q1 2026应收账款/收入6.96%（-1.27pp）、存货/收入13.29%（-2.77pp），营运资本效率改善，OCF/净利润比率1.84x，现金流质量较好",
+      "prosperity_level": "bottom-testing",
+      "marginal_direction": "mixed",
+      "causal_analysis": "需求底部整固，供给压力未消，成本高位使得毛利率同比下滑；但公司通过降本增效和产品结构调整，经营利润率略有回升，营运资本改善释放现金流；景气度可能处于底部右侧待确认阶段。",
+      "valuation_treatment": "核心化工业务现金流稳定，可作为PE/PB估值基础；电池等新材料处于投入期，应作为期权单独评估",
+      "strongest_counterevidence": [
+        "MDI全球新增产能可能进一步拉低价格中枢",
+        "石化裂解利润可能持续低位甚至亏损",
+        "电池材料行业严重过剩可能拖累集团整体利润率"
+      ],
+      "evidence_ids": [
+        "EV030",
+        "EV014",
+        "EV015",
+        "EV016",
+        "EV018",
+        "EV019",
+        "EV020"
+      ],
+      "missing_inputs": [
+        "下游分行业需求增速",
+        "MDI/TDI 实际成交价格",
+        "各产品线产能利用率"
+      ],
+      "next_verification": "跟踪公司2026年中报对产品销量、价格和毛利率的分部说明"
+    },
+    {
+      "segment": "其他业务",
+      "products_or_services": "可能包含技术服务、副产品、废旧材料等",
+      "customers_and_channel": "分散",
+      "revenue_weight_pct": 0.62,
+      "profit_weight_pct": 0.62,
+      "base_period": "FY2025",
+      "base_revenue_value": 1272.69,
+      "base_revenue_unit": "CNY mn",
+      "base_revenue_growth_pct": -19.87,
+      "base_margin_pct": 27.89,
+      "base_margin_change_pp": 4.56,
+      "demand_and_order_drivers": [],
+      "industry_supply_and_capacity": "",
+      "volume_share_utilization": "",
+      "price_asp_take_rate": "",
+      "unit_cost_and_input_prices": "",
+      "margin_and_operating_leverage": "",
+      "working_capital_and_cash_conversion": "",
+      "prosperity_level": "evidence_limited",
+      "marginal_direction": "unknown",
+      "causal_analysis": "规模极微，贡献极小，对整体财务无显著影响。",
+      "valuation_treatment": "可并入化工行业共同估值",
+      "strongest_counterevidence": [],
+      "evidence_ids": [
+        "EV030"
+      ],
+      "missing_inputs": [
+        "业务明细"
+      ],
+      "next_verification": ""
+    },
+    {
+      "segment": "聚氨酯",
+      "products_or_services": "",
+      "customers_and_channel": "",
+      "revenue_weight_pct": null,
+      "profit_weight_pct": null,
+      "base_period": "unspecified",
+      "base_revenue_value": null,
+      "base_revenue_unit": "",
+      "base_revenue_growth_pct": null,
+      "base_margin_pct": null,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [],
+      "industry_supply_and_capacity": "",
+      "volume_share_utilization": "",
+      "price_asp_take_rate": "",
+      "unit_cost_and_input_prices": "",
+      "margin_and_operating_leverage": "",
+      "working_capital_and_cash_conversion": "",
+      "prosperity_level": "evidence_limited",
+      "marginal_direction": "unknown",
+      "causal_analysis": "",
+      "valuation_treatment": "evidence_limited",
+      "strongest_counterevidence": [],
+      "evidence_ids": [],
+      "missing_inputs": [
+        "LLM omitted a filing-reported material segment"
+      ],
+      "next_verification": ""
+    },
+    {
+      "segment": "石化",
+      "products_or_services": "",
+      "customers_and_channel": "",
+      "revenue_weight_pct": null,
+      "profit_weight_pct": null,
+      "base_period": "unspecified",
+      "base_revenue_value": null,
+      "base_revenue_unit": "",
+      "base_revenue_growth_pct": null,
+      "base_margin_pct": null,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [],
+      "industry_supply_and_capacity": "",
+      "volume_share_utilization": "",
+      "price_asp_take_rate": "",
+      "unit_cost_and_input_prices": "",
+      "margin_and_operating_leverage": "",
+      "working_capital_and_cash_conversion": "",
+      "prosperity_level": "evidence_limited",
+      "marginal_direction": "unknown",
+      "causal_analysis": "",
+      "valuation_treatment": "evidence_limited",
+      "strongest_counterevidence": [],
+      "evidence_ids": [],
+      "missing_inputs": [
+        "LLM omitted a filing-reported material segment"
+      ],
+      "next_verification": ""
+    },
+    {
+      "segment": "精细化学品与新材料",
+      "products_or_services": "",
+      "customers_and_channel": "",
+      "revenue_weight_pct": null,
+      "profit_weight_pct": null,
+      "base_period": "unspecified",
+      "base_revenue_value": null,
+      "base_revenue_unit": "",
+      "base_revenue_growth_pct": null,
+      "base_margin_pct": null,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [],
+      "industry_supply_and_capacity": "",
+      "volume_share_utilization": "",
+      "price_asp_take_rate": "",
+      "unit_cost_and_input_prices": "",
+      "margin_and_operating_leverage": "",
+      "working_capital_and_cash_conversion": "",
+      "prosperity_level": "evidence_limited",
+      "marginal_direction": "unknown",
+      "causal_analysis": "",
+      "valuation_treatment": "evidence_limited",
+      "strongest_counterevidence": [],
+      "evidence_ids": [],
+      "missing_inputs": [
+        "LLM omitted a filing-reported material segment"
+      ],
+      "next_verification": ""
+    }
+  ],
+  "underwriting_questions": [
+    {
+      "question_id": "Q01",
+      "question": "万华化学在MDI领域的成本优势能否在竞争对手产能扩张和原料成本上升的环境下持续？这直接决定聚氨酯业务的毛利率底线和市场份额。",
+      "why_it_matters": "MDI贡献公司大部分利润，毛利率的防御性直接影响EPS和估值中枢；若成本优势被侵蚀，公司将从周期成长股转向普通周期股，估值将大幅下调。",
+      "current_answer": "unresolved",
+      "bull_evidence": [
+        "公司拥有全球最大MDI产能和一体化园区，历史单位成本低于同行",
+        "2026年Q1经营利润率同比小幅改善，管理效率提升",
+        "出口端有增量订单的迹象（KPE01提及聚氨酯出口需求）"
+      ],
+      "bear_evidence": [
+        "全球MDI产能扩建计划（巴斯夫、亨斯迈等）将加剧竞争",
+        "原料纯苯/煤炭价格高位，短期内成本压力不减",
+        "2025年化工行业毛利率同比大幅下滑2.61pp，反映定价权减弱"
+      ],
+      "decisive_model_variables": [
+        "化工行业毛利率",
+        "聚氨酯分部毛利率（需拆分）",
+        "MDI出口价格指数"
+      ],
+      "affected_financial_lines": [
+        "化工行业收入",
+        "化工行业毛利",
+        "归母净利润",
+        "每股收益"
+      ],
+      "evidence_ids": [
+        "EV030",
+        "EV014",
+        "KPE01"
+      ],
+      "missing_evidence": [
+        "公司相对同行的MDI单吨成本比较",
+        "原料成本指数化的具体比例",
+        "出口合同价格证据"
+      ],
+      "next_verification": "获取第三方MDI行业报告和海关出口数据，并在下一次年报中寻找分部毛利率披露"
+    },
+    {
+      "question_id": "Q02",
+      "question": "全球MDI/TDI供需格局何时能从供过于求转为平衡，公司聚氨酯均价何时能迎来拐点？",
+      "why_it_matters": "价格拐点将是盈利弹性最大的驱动因素，直接决定收入增长和毛利扩张，会影响2026-2028年的EPS和FCF情景。",
+      "current_answer": "unresolved",
+      "bull_evidence": [
+        "出口市场需求回升（KPE01/KPE02提及）",
+        "北美建筑保温和工业景气可能刺激MDI需求",
+        "国内冰箱和汽车消费政策可能有支撑"
+      ],
+      "bear_evidence": [
+        "2025年石化化工行业供过于求结构性矛盾突出（EV021）",
+        "新增产能持续释放，至今未见明显去产能",
+        "全球经济增长放缓，终端需求恢复缓慢"
+      ],
+      "decisive_model_variables": [
+        "MDI均价假设",
+        "销售收入增长率",
+        "化工行业毛利率"
+      ],
+      "affected_financial_lines": [
+        "化工行业收入",
+        "毛利",
+        "营业利润",
+        "自由现金流"
+      ],
+      "evidence_ids": [
+        "EV021",
+        "EV030",
+        "KPE01",
+        "KPE02"
+      ],
+      "missing_evidence": [
+        "MDI行业开工率和库存水平",
+        "海外竞争对手减产消息",
+        "下游冰箱/汽车新订单数据"
+      ],
+      "next_verification": "跟踪Platts/ICIS MDI价格指数和季度产销公告"
+    },
+    {
+      "question_id": "Q03",
+      "question": "公司持续大规模的资本开支（石化、电池材料、新材料）能否带来超过资本成本的回报，还是仅仅是吞噬现金的沉没成本？",
+      "why_it_matters": "直接影响自由现金流和ROIC，决定公司能否从重资产扩张中创造股东价值。如果回报率不佳，高负债将压制估值并降低股息可持续性。",
+      "current_answer": "unresolved",
+      "bull_evidence": [
+        "石化项目是产业链延伸，一体化可降低成本",
+        "化工新材料受政策支持（绿色转型政策）",
+        "公司历史项目成功率高"
+      ],
+      "bear_evidence": [
+        "中国石化产能过剩，裂解利润甚至为负",
+        "电池材料行业严重供过于求，EV022显示竞争激烈",
+        "在建工程规模庞大，但投资回报周期未知（EV037）"
+      ],
+      "decisive_model_variables": [
+        "资本开支金额",
+        "新增项目毛利率",
+        "产能利用率",
+        "折旧/摊销对利润的负担"
+      ],
+      "affected_financial_lines": [
+        "自由现金流",
+        "资产负债率",
+        "财务费用",
+        "每股收益（稀释后）"
+      ],
+      "evidence_ids": [
+        "EV022",
+        "EV037",
+        "EV027"
+      ],
+      "missing_evidence": [
+        "各重大项目的IRR和回收期",
+        "新增产能的预期产量和成本曲线",
+        "电池材料客户认证进度"
+      ],
+      "next_verification": "查阅中报或投资者交流记录中关于新项目进展和对财务的影响"
+    },
+    {
+      "question_id": "Q04",
+      "question": "公司整体毛利率在2025年大幅下降后，2026年能否触底并温和回升？成本控制和产品结构升级力度是否足以抵消价格压力？",
+      "why_it_matters": "毛利率是连接收入与净利的核心桥梁，1pp的变动会对归母净利润产生数亿元影响，对估值显著敏感。",
+      "current_answer": "unresolved",
+      "bull_evidence": [
+        "2026Q1毛利率14.73%高于2025全年13.48%，显示环比改善",
+        "公司存货/收入比下降，保销压力减轻",
+        "经营利润率+0.49pp，费用控制有效"
+      ],
+      "bear_evidence": [
+        "Q1毛利率同比下降0.98pp，同比仍在下滑",
+        "石化产品价格低迷，可能拖累整体毛利率",
+        "精细化学品扩量可能拉低平均毛利率"
+      ],
+      "decisive_model_variables": [
+        "化工行业毛利率",
+        "营业成本增速",
+        "产品收入结构"
+      ],
+      "affected_financial_lines": [
+        "毛利",
+        "营业利润",
+        "归母净利润",
+        "每股收益"
+      ],
+      "evidence_ids": [
+        "EV014",
+        "EV015",
+        "EV016",
+        "EV020"
+      ],
+      "missing_evidence": [
+        "分部毛利率趋势",
+        "原材料成本指数走势",
+        "高毛利产品占比"
+      ],
+      "next_verification": "跟踪Q2 2026季报毛利率并与同期比较"
+    },
+    {
+      "question_id": "Q05",
+      "question": "公司电池材料和新材料业务的未来体量能否支撑估值溢价？还是会因为低利润率和激烈竞争成为估值拖累？",
+      "why_it_matters": "当前市场隐含的16x P/E可能已部分包含新材料溢价，如果该业务不能兑现，估值可能面临收缩。",
+      "current_answer": "unresolved",
+      "bull_evidence": [
+        "公司研发投入高，电池材料技术迭代可能形成壁垒",
+        "新能源长期需求增长趋势明确"
+      ],
+      "bear_evidence": [
+        "EV022提及电池材料行业众多玩家，产能严重过剩",
+        "该业务从未单独披露，收入和利润贡献不明",
+        "客户认证周期长，可能长时间无法实现盈利"
+      ],
+      "decisive_model_variables": [
+        "精细化学品/新材料收入占比",
+        "新材料业务毛利率",
+        "资本开支转化率"
+      ],
+      "affected_financial_lines": [
+        "化工行业收入",
+        "毛利",
+        "每股收益",
+        "估值乘数"
+      ],
+      "evidence_ids": [
+        "EV022"
+      ],
+      "missing_evidence": [
+        "电池材料实际出货量",
+        "客户合同或框架协议",
+        "新材料业务利润率"
+      ],
+      "next_verification": "等待公司披露新材料业务销售额或关键客户进展"
+    }
+  ],
+  "forecast_lines": [
+    {
+      "segment": "consolidated",
+      "metric": "营业收入",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 203234.57,
+      "year_1_value": 220000.0,
+      "year_2_value": 240000.0,
+      "year_3_value": 258000.0,
+      "formula": "基于2025年实际203.23bn，假设2026E +8.3%（产能释放和温和需求恢复），2027E +9.1%，2028E +7.5%",
+      "assumption_status": "分析师估计",
+      "evidence_ids": [
+        "EV012",
+        "EV030",
+        "EV014"
+      ],
+      "key_sensitivity": "每±1%收入变动影响约2.2bn收入",
+      "missing_inputs": []
+    },
+    {
+      "segment": "consolidated",
+      "metric": "营业成本",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 175000.0,
+      "year_1_value": 187000.0,
+      "year_2_value": 201600.0,
+      "year_3_value": 215600.0,
+      "formula": "基于2025年毛利率13.48%推算营业成本=收入*(1-毛利率)；2025年收入203.23bn，成本约175.8bn，取175bn；2026E毛利率15%→成本187bn；2027E毛利率16%→成本201.6bn；2028E毛利率16.5%→成本215.6bn",
+      "assumption_status": "分析师估计",
+      "evidence_ids": [
+        "EV014",
+        "EV015"
+      ],
+      "key_sensitivity": "毛利率每+1pp，营业利润增加约2.4bn",
+      "missing_inputs": []
+    },
+    {
+      "segment": "consolidated",
+      "metric": "毛利",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 28234.57,
+      "year_1_value": 33000.0,
+      "year_2_value": 38400.0,
+      "year_3_value": 42400.0,
+      "formula": "毛利 = 营业收入 - 营业成本；2025年203.23bn-175bn≈28.23bn",
+      "assumption_status": "分析师估计",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": []
+    },
+    {
+      "segment": "consolidated",
+      "metric": "毛利率",
+      "unit": "%",
+      "base_period": "FY2025",
+      "base_value": 13.48,
+      "year_1_value": 15.0,
+      "year_2_value": 16.0,
+      "year_3_value": 16.5,
+      "formula": "保守假定毛利率从2025年低谷逐步修复，2026E 15%（接近Q1实际），2027E 16%，2028E 16.5%",
+      "assumption_status": "分析师估计",
+      "evidence_ids": [
+        "EV014",
+        "EV030"
+      ],
+      "key_sensitivity": "毛利率每+1pp，母净利润增约1.5bn（扣除税费）",
+      "missing_inputs": []
+    },
+    {
+      "segment": "consolidated",
+      "metric": "营业利润",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 19000.0,
+      "year_1_value": 23000.0,
+      "year_2_value": 27600.0,
+      "year_3_value": 31000.0,
+      "formula": "营业利润率假设：2025年约9.4% (19bn/203bn)，2026E 10.5%，2027E 11.5%，2028E 12.0%；营业利润 = 营业收入 × 营业利润率",
+      "assumption_status": "分析师估计",
+      "evidence_ids": [
+        "EV015"
+      ],
+      "key_sensitivity": "营业利润率每±0.5pp，营业利润变动约1.2bn",
+      "missing_inputs": []
+    },
+    {
+      "segment": "consolidated",
+      "metric": "营业利润率",
+      "unit": "%",
+      "base_period": "FY2025",
+      "base_value": 9.35,
+      "year_1_value": 10.5,
+      "year_2_value": 11.5,
+      "year_3_value": 12.0,
+      "formula": "基于毛利率恢复和费用控制",
+      "assumption_status": "分析师估计",
+      "evidence_ids": [
+        "EV015"
+      ],
+      "key_sensitivity": "",
+      "missing_inputs": []
+    },
+    {
+      "segment": "consolidated",
+      "metric": "归母净利润",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 12527.2,
+      "year_1_value": 15400.0,
+      "year_2_value": 18500.0,
+      "year_3_value": 21000.0,
+      "formula": "净利率假设：2025年6.16% (12.5/203.23)，2026E 7.0%，2027E 7.7%，2028E 8.1%；归母净利润 = 营业收入 × 净利率",
+      "assumption_status": "分析师估计",
+      "evidence_ids": [
+        "EV012",
+        "EV016"
+      ],
+      "key_sensitivity": "净利率每±0.2pp，归母净利润变动约0.5bn",
+      "missing_inputs": []
+    },
+    {
+      "segment": "consolidated",
+      "metric": "净利率",
+      "unit": "%",
+      "base_period": "FY2025",
+      "base_value": 6.16,
+      "year_1_value": 7.0,
+      "year_2_value": 7.7,
+      "year_3_value": 8.1,
+      "formula": "跟随营业利润率改善，财务费用和税率基本稳定",
+      "assumption_status": "分析师估计",
+      "evidence_ids": [
+        "EV016"
+      ],
+      "key_sensitivity": "",
+      "missing_inputs": []
+    },
+    {
+      "segment": "consolidated",
+      "metric": "基本每股收益",
+      "unit": "CNY",
+      "base_period": "FY2025",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "EPS = 归母净利润 / 稀释股本数；因稀释股本数未知，留空",
+      "assumption_status": "missing",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "稀释股本数（百万股）"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "经营活动现金流净额",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": null,
+      "year_1_value": 28000.0,
+      "year_2_value": 33500.0,
+      "year_3_value": 38000.0,
+      "formula": "参照Q1 OCF/净利润1.84x，假设全年1.8x，2026E OCF = 15400*1.8 ≈ 27720，取28bn；后续保持相似比率",
+      "assumption_status": "分析师估计",
+      "evidence_ids": [
+        "EV018"
+      ],
+      "key_sensitivity": "OCF/净利润比率每±0.2，OCF变动约3bn",
+      "missing_inputs": [
+        "折旧摊销及营运资本具体金额"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "资本支出",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "",
+      "assumption_status": "missing",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "购建固定资产、无形资产和其他长期资产支付的现金"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "自由现金流",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "自由现金流 = 经营活动现金流净额 - 资本支出；因资本支出缺失，无法计算",
+      "assumption_status": "missing",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "资本支出"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "capex",
+      "unit": "",
+      "base_period": "",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "missing; downstream analyst must complete",
+      "assumption_status": "missing",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "required consolidated forecast line omitted"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "eps",
+      "unit": "",
+      "base_period": "",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "missing; downstream analyst must complete",
+      "assumption_status": "missing",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "required consolidated forecast line omitted"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "fcf",
+      "unit": "",
+      "base_period": "",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "missing; downstream analyst must complete",
+      "assumption_status": "missing",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "required consolidated forecast line omitted"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "gross_margin",
+      "unit": "",
+      "base_period": "",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "missing; downstream analyst must complete",
+      "assumption_status": "missing",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "required consolidated forecast line omitted"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "ocf",
+      "unit": "",
+      "base_period": "",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "missing; downstream analyst must complete",
+      "assumption_status": "missing",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "required consolidated forecast line omitted"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "operating_profit",
+      "unit": "",
+      "base_period": "",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "missing; downstream analyst must complete",
+      "assumption_status": "missing",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "required consolidated forecast line omitted"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "parent_net_profit",
+      "unit": "",
+      "base_period": "",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "missing; downstream analyst must complete",
+      "assumption_status": "missing",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "required consolidated forecast line omitted"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "revenue",
+      "unit": "",
+      "base_period": "",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "missing; downstream analyst must complete",
+      "assumption_status": "missing",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "required consolidated forecast line omitted"
+      ]
+    }
+  ],
+  "scenarios": [
+    {
+      "scenario": "base",
+      "probability_pct": 60.0,
+      "operating_assumptions": [
+        "MDI价格在2026H2微幅上涨后横盘，出口温和增长",
+        "石化产品价差维持低位但不再恶化",
+        "整体营业收入8-9%复合增长，毛利率从13.5%回升至16.5%",
+        "营业利润率约10.5-12%，归母净利润15.4-21.0bn",
+        "资本开支维持高位但现金流自给，FCF轻微转正在2028E"
+      ],
+      "parent_net_profit_cny_mn": null,
+      "eps_cny": null,
+      "fcf_cny_mn": null,
+      "valuation_method": "PE法，基于2026E/2027E/2028E平均EPS给予13-15倍PE",
+      "valuation_multiple": 14.0,
+      "fair_value_per_share": null,
+      "evidence_ids": [
+        "EV014",
+        "EV015",
+        "EV030"
+      ],
+      "falsification": "若2026年全年毛利率<14%或MDI价格跌破1400美金/吨，考虑下调至bear",
+      "missing_inputs": [
+        "每股数据和确切资本开支，公平值每股暂时无法给出"
+      ]
+    },
+    {
+      "scenario": "bull",
+      "probability_pct": 20.0,
+      "operating_assumptions": [
+        "MDI/TDI需求超预期，海外装置停产，价格大幅上涨（+10-15%）",
+        "石化裂解价差随油价回落改善",
+        "电池材料客户突破，带来高毛利收入",
+        "整体收入复合增长12-15%，毛利率快速回升至18-20%",
+        "净利润达到18-25bn，FCF大幅增加"
+      ],
+      "parent_net_profit_cny_mn": null,
+      "eps_cny": null,
+      "fcf_cny_mn": null,
+      "valuation_method": "PE法，景气周期可给予16-18倍PE",
+      "valuation_multiple": 17.0,
+      "fair_value_per_share": null,
+      "evidence_ids": [
+        "KPE01"
+      ],
+      "falsification": "若MDI出口数据持续平淡，需求无亮点，下调至base",
+      "missing_inputs": [
+        "实时MDI价格和出口统计"
+      ]
+    },
+    {
+      "scenario": "bear",
+      "probability_pct": 20.0,
+      "operating_assumptions": [
+        "全球衰退，MDI需求萎缩，新增产能冲击，价格进一步走低",
+        "石化亏损扩大，老旧装置被迫停产",
+        "精细化学品拖后腿，整体毛利率跌破12%",
+        "收入增长停滞甚至下滑，利润大幅缩减至8-10bn",
+        "现金流紧张，削减股息"
+      ],
+      "parent_net_profit_cny_mn": null,
+      "eps_cny": null,
+      "fcf_cny_mn": null,
+      "valuation_method": "PE法，给予低景气倍数8-10倍",
+      "valuation_multiple": 9.0,
+      "fair_value_per_share": null,
+      "evidence_ids": [
+        "EV021"
+      ],
+      "falsification": "若毛利率连续两季改善并>15%，则bear概率降低",
+      "missing_inputs": [
+        "下行风险敏感度分析"
+      ]
+    }
+  ],
+  "thesis_financial_bridges": [
+    {
+      "bridge_id": "B01",
+      "thesis_or_question": "MDI价格复苏驱动利润弹性",
+      "affected_unit": "polyurethane",
+      "operating_driver": "MDI均价与销量",
+      "driver_formula": "Δ营业利润 ≈ MDI产量 × ΔMDI均价，净影响考虑原料联动",
+      "base_assumption": "2026E MDI均价环比+2%，销量增长5%",
+      "bull_assumption": "MDI均价+10%，销量+10%，贡献额外营业利润约40-50亿",
+      "bear_assumption": "MDI均价-5%，销量持平，利润进一步压缩",
+      "revenue_impact": "bull下聚氨酯收入额外增加约80-100亿",
+      "profit_impact": "bull下营业利润增加40-50亿，bear下减少20亿",
+      "eps_impact": "未量化（缺股本）",
+      "fcf_or_capital_impact": "bull下FCF显著改善",
+      "valuation_impact": "bull可提升PE至16x+，公司市值增加600-900亿",
+      "quantification_status": "partially_quantified",
+      "evidence_ids": [
+        "KPE01",
+        "EV030"
+      ],
+      "missing_inputs": [
+        "聚氨酯收入基数",
+        "MDI价格弹性系数"
+      ]
+    },
+    {
+      "bridge_id": "B02",
+      "thesis_or_question": "成本控制与产品结构优化带来的毛利率改善",
+      "affected_unit": "consolidated",
+      "operating_driver": "综合毛利率提升",
+      "driver_formula": "Δ毛利 = (本年度毛利率-上年度毛利率) × 营业收入",
+      "base_assumption": "毛利率从13.5%升至15%，营收220bn，增厚毛利33亿",
+      "bull_assumption": "毛利率升至18%，增厚毛利99亿",
+      "bear_assumption": "毛利率12%，毛利减少约3亿",
+      "revenue_impact": "无直接收入影响",
+      "profit_impact": "base：营业利润增加33亿；bull：+99亿；bear：-3亿",
+      "eps_impact": "未量化",
+      "fcf_or_capital_impact": "利润增加直接提升经营现金流",
+      "valuation_impact": "毛利率每高1pp，可支撑估值中枢上移",
+      "quantification_status": "quantified",
+      "evidence_ids": [
+        "EV014",
+        "EV015"
+      ],
+      "missing_inputs": []
+    },
+    {
+      "bridge_id": "B03",
+      "thesis_or_question": "电池材料等新业务的实物期权价值",
+      "affected_unit": "fine_chemicals_new_materials",
+      "operating_driver": "新业务能否实现10%+收入占比且盈亏平衡",
+      "driver_formula": "新业务EV = (未来5年营收×预期净利率)折现×成功概率",
+      "base_assumption": "2028E 新业务占收入5%，亏损/微利，期权价值约50亿",
+      "bull_assumption": "新业务2028E收入15%，净利率10%，期权价值200亿",
+      "bear_assumption": "业务无实质进展，期权价值0",
+      "revenue_impact": "bull下新增收入约40亿",
+      "profit_impact": "bull下增加净利约4-5亿",
+      "eps_impact": "未量化",
+      "fcf_or_capital_impact": "前期需要大量资本投入，消耗FCF",
+      "valuation_impact": "作为独立估值桶，bull可增厚市值200亿",
+      "quantification_status": "partially_quantified",
+      "evidence_ids": [
+        "EV022"
+      ],
+      "missing_inputs": [
+        "新业务客户合同、产线规划、盈亏时间表"
+      ]
+    },
+    {
+      "bridge_id": "B04",
+      "thesis_or_question": "石化业务扭亏为盈的可能性",
+      "affected_unit": "petrochemical",
+      "operating_driver": "裂解价差和开工率",
+      "driver_formula": "Δ营业利润 ≈ 石化产能 × 产能利用率 × (聚烯烃价差-吨成本)",
+      "base_assumption": "2026-2028年石化仍处于盈亏平衡附近，对利润无增量贡献",
+      "bull_assumption": "全球经济复苏、油价下跌，裂解利润恢复，增利20亿",
+      "bear_assumption": "持续深度亏损，拖累集团利润10亿",
+      "revenue_impact": "石化收入随产能释放增长，但价格低迷",
+      "profit_impact": "bull增利20亿，bear减利10亿",
+      "eps_impact": "未量化",
+      "fcf_or_capital_impact": "资本开支完成后，若盈利则开始贡献FCF",
+      "valuation_impact": "bull下可提升整体估值，否则压制倍数",
+      "quantification_status": "unquantified",
+      "evidence_ids": [],
+      "missing_inputs": [
+        "石化分部收入、成本、产能利用率和价差"
+      ]
+    }
+  ],
+  "moat_evidence_tests": [
+    {
+      "moat_mechanism": "MDI成本优势与技术壁垒",
+      "observable_test": "对比全球主要MDI厂商的单位生产成本和毛利率，万华应持续低于巴斯夫/亨斯迈，且全球市场份额稳定",
+      "comparison_basis": "巴斯夫、亨斯迈、科思创等公开财务和行业报告",
+      "evidence_result": "missing",
+      "financial_transmission": "低成本 → 高毛利 → 周期底部仍保持正利润，从而维持产能和客户，强化定价权",
+      "strongest_counterevidence": "全球竞争对手也在建设更大型装置，技术差距可能缩小；2025年公司毛利率大幅下滑，成本优势未能完全抵御价格下降",
+      "status": "unproven",
+      "evidence_ids": [],
+      "next_verification": "获取行业成本曲线报告和公司未来详细的成本披露"
+    },
+    {
+      "moat_mechanism": "下游转换成本与客户粘性",
+      "observable_test": "前5大客户收入占比及客户留存率，是否因技术和认证形成长期合约",
+      "comparison_basis": "公司披露的客户集中度和多年合作史",
+      "evidence_result": "未观察到客户高度集中或长期合约披露",
+      "financial_transmission": "转换成本 → 客户稳定 → 销量和定价可预期 → 提升FCF可预测性",
+      "strongest_counterevidence": "公司贸易业务占比超10%，部分客户可能流动性强；未见有公开的长期供应协议",
+      "status": "unproven",
+      "evidence_ids": [
+        "EV025"
+      ],
+      "next_verification": "查阅投资者问答中关于客户关系和长约比例"
+    },
+    {
+      "moat_mechanism": "规模和一体化园区带来的成本协同",
+      "observable_test": "公司园区内的联产品和能源循环利用是否显著降低单位总成本，与独立装置比较",
+      "comparison_basis": "同类石化园区和MDI装置的经济性对比",
+      "evidence_result": "未获得量化数据",
+      "financial_transmission": "一体化 → 降低原料、能源、物流成本 → 更高且更稳定的毛利",
+      "strongest_counterevidence": "原材料价格大幅波动可能抵消园区优势，且部分竞争对手如巴斯夫也有高度一体化基地",
+      "status": "unproven",
+      "evidence_ids": [],
+      "next_verification": "需公司或行业机构出具的成本对比分析"
+    }
+  ],
+  "valuation_buckets": [
+    {
+      "bucket": "核心化工业务（聚氨酯+石化+已有精细化学品）",
+      "inclusion": "core",
+      "valuation_method": "PE倍数应用至基础情景归母净利润",
+      "metric_and_period": "2026E-2028E平均归母净利润",
+      "metric_value": 18300.0,
+      "valuation_multiple": 14.0,
+      "ownership_pct": 100.0,
+      "haircut_pct": 0.0,
+      "equity_value_cny_mn": 256200.0,
+      "per_share_value_cny": null,
+      "overlap_key": "核心化工",
+      "double_counting_treatment": "其他业务桶不重复计算",
+      "evidence_ids": [
+        "EV030",
+        "EV014"
+      ],
+      "missing_inputs": [
+        "每股价值需要股本数"
+      ]
+    },
+    {
+      "bucket": "电池材料与新材料期权",
+      "inclusion": "optionality",
+      "valuation_method": "实物期权简化：估算5年后的可能收入现值和成功概率",
+      "metric_and_period": "2028E收入及利润率情景",
+      "metric_value": 8000.0,
+      "valuation_multiple": 2.5,
+      "ownership_pct": 100.0,
+      "haircut_pct": 50.0,
+      "equity_value_cny_mn": 40000.0,
+      "per_share_value_cny": null,
+      "overlap_key": "新材料",
+      "double_counting_treatment": "不在核心化工利润中",
+      "evidence_ids": [
+        "EV022"
+      ],
+      "missing_inputs": [
+        "具体项目节点"
+      ]
+    },
+    {
+      "bucket": "超额景气周期价值（bull场景）",
+      "inclusion": "scenario",
+      "valuation_method": "bull情景下使用16x PE减去base情景价值",
+      "metric_and_period": "bull下归母净利润",
+      "metric_value": 22000.0,
+      "valuation_multiple": 16.0,
+      "ownership_pct": 100.0,
+      "haircut_pct": 0.0,
+      "equity_value_cny_mn": 95200.0,
+      "per_share_value_cny": null,
+      "overlap_key": "bull减去base",
+      "double_counting_treatment": "此为增量，将在概率加权中处理",
+      "evidence_ids": [],
+      "missing_inputs": []
+    }
+  ],
+  "valuation_closure": {
+    "current_price_cny": null,
+    "diluted_share_count_mn": null,
+    "core_value_per_share_cny": null,
+    "probability_weighted_fair_value_per_share_cny": null,
+    "option_value_per_share_cny": null,
+    "other_adjustments_per_share_cny": null,
+    "fair_value_per_share_cny": null,
+    "expected_return_pct": null,
+    "formula": "公允价值 = 核心化工业务股权价值（概率加权，含bull/bear） + 新材料期权价值。由于缺少股本，无法计算每股价值。",
+    "rating_consistency_check": "",
+    "double_counting_checks": [
+      "核心化工业务利润已包含所有现有业务，未重复计算新材料期权；期权桶独立处理",
+      "bull情境增量在概率加权时已处理，未同时计入核心"
+    ],
+    "status": "not_valued",
+    "missing_inputs": [
+      "稀释股本数",
+      "当前股价",
+      "市场预期收益率"
+    ]
+  },
+  "handoff_manifest": {
+    "handoff_version": "underwriting-v2",
+    "source_of_truth": "structured_research.underwriting_packet",
+    "frozen_reported_facts": [
+      "FY2025 营业收入 203,234,573,814.42 (EV012)",
+      "FY2025 化工行业 收入 201,109,817,784.79 毛利率 13.48% (EV030)",
+      "Q1 2026 毛利率 14.728%，营业利润率 9.8142%，净利率6.878% (EV014-EV016)",
+      "Q1 2026 OCF/净利润 1.8444 (EV018)",
+      "2025年资本开支和研发投入定性描述 (EV027, EV037)"
+    ],
+    "analyst_estimates": [
+      "2026-2028 收入、毛利率、营业利润率、归母净利润等预测值均为分析师估计",
+      "场景概率 (bull 20% / base 60% / bear 20%) 为主观判断",
+      "核心化工业务PE倍数14x和新材料期权价值为分析师假设"
+    ],
+    "unresolved_model_cells": [
+      "稀释股本数及所有每股指标",
+      "资本支出和自由现金流",
+      "分部收入和毛利率 (聚氨酯/石化/新材料)",
+      "电池材料业务的具体规模和盈亏"
+    ],
+    "downstream_must_preserve": [
+      "三个业务单元（化工行业、其他、以及分析性单元聚氨酯/石化/精细化学品）的全部分解",
+      "三年预测模型 (2026E-2028E) 的收入、毛利、营业利润、归母净利润",
+      "六项承保问题转化为研究任务",
+      "三个情景及概率，每个情景的营业假设和估值方法",
+      "四项财务桥梁 (MDI价格、毛利率、新材料期权、石化扭亏)",
+      "估值桶 (核心/期权/情景) 及不重复计算处理"
+    ]
+  },
+  "evidence_change_rules": [
+    {
+      "evidence_id": "KPE01",
+      "affected_segment": "polyurethane",
+      "affected_variable": "asp_or_price",
+      "old_assumption": "无具体假设，视为横盘",
+      "new_assumption": "unchanged",
+      "financial_transmission": "如确认MDI出口价格上涨，上调聚氨酯均价假设，增加收入和毛利",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "产品报价、毛利率、竞品价格、下游接受度、行业价格指数"
+    },
+    {
+      "evidence_id": "KPE02",
+      "affected_segment": "polyurethane",
+      "affected_variable": "unmapped",
+      "old_assumption": "missing",
+      "new_assumption": "unchanged",
+      "financial_transmission": "none until quantified",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "KPE03",
+      "affected_segment": "consolidated",
+      "affected_variable": "unmapped",
+      "old_assumption": "missing",
+      "new_assumption": "unchanged",
+      "financial_transmission": "none until quantified",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "验证万华在电容供应链中的角色"
+    },
+    {
+      "evidence_id": "KPE04",
+      "affected_segment": "consolidated",
+      "affected_variable": "unmapped",
+      "old_assumption": "missing",
+      "new_assumption": "unchanged",
+      "financial_transmission": "none until quantified",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "验证电容涨价与万华的关联"
+    },
+    {
+      "evidence_id": "KPE05",
+      "affected_segment": "consolidated",
+      "affected_variable": "unmapped",
+      "old_assumption": "missing",
+      "new_assumption": "unchanged",
+      "financial_transmission": "none until quantified",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "cross-check with filings"
+    },
+    {
+      "evidence_id": "KPE06",
+      "affected_segment": "consolidated",
+      "affected_variable": "unmapped",
+      "old_assumption": "missing",
+      "new_assumption": "unchanged",
+      "financial_transmission": "none until quantified",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "化工行业周度观点需具体化"
+    },
+    {
+      "evidence_id": "KPE07",
+      "affected_segment": "consolidated",
+      "affected_variable": "unmapped",
+      "old_assumption": "missing",
+      "new_assumption": "unchanged",
+      "financial_transmission": "none until quantified",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "cross-check with filings"
+    },
+    {
+      "evidence_id": "KPE08",
+      "affected_segment": "consolidated",
+      "affected_variable": "unmapped",
+      "old_assumption": "missing",
+      "new_assumption": "unchanged",
+      "financial_transmission": "none until quantified",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "验证电容行业与公司的相关性"
+    }
+  ],
+  "reconciliation_checks": [
+    "化工行业2025年收入201.11bn + 其他业务1.27bn ≈ 202.38bn，与合并2023.41年度的203.23bn微差可能因内部抵消或四舍五入，不构成矛盾",
+    "2026Q1简单年化利润14.87bn与季节调整利润13.16bn相比市场隐含TTM 13.16bn接近，表明当前股价定价于季节性正常盈利",
+    "营业利润率与毛利率变化方向不一致，Q1 2026毛利率同比下降但营业利润率上升，需确认费用控制持续性",
+    "OCF/净利润高达1.84x，回款和存货下降明显，改善是真实的，但需排除一次性项目"
+  ],
+  "analyst_instructions": [
+    "所有基于KPE的假设必须通过公司公告、Tushare数据或行业价格指数验证后方可进入模型",
+    "不要把底部反转视为事实，当前仅属右侧待验证阶段，须等待MDI价格和销量数据的确认",
+    "务必在获得稀释股本后立即更新EPS和每股估值",
+    "资本支出数字一旦公开，必须立即回填自由现金流并审查资本回报假设",
+    "季度毛利率、经营现金流和存货/收入比率是验证行业景气度转向的关键先行指标"
+  ],
+  "preprocessing_notes": [
+    "段收入分解缺失，无法细分各业务收入权重，统一使用合并段",
+    "KPE03-KPE08未直接提及万华化学，假设为行业背景，变量标记为unmapped",
+    "毛利率和经营利润率趋势方向不一致，需进一步验证原因",
+    "证据EV031、EV075禁止陈述特定产品价格变动，未使用",
+    "证据EV076标记缺失输入作为中性非证据，未用于任何推断",
+    "无矛盾发现，conflicts为空",
+    "所有KPE假设均设为watch需验证，无基线/修订值支持"
+  ]
+}

@@ -63,10 +63,11 @@ class DecisionDepthIssue:
     issue: str
 
 
-# Only deterministic contradictions can block formal publication.  Missing
-# inputs, incomplete modules and unavailable preprocessing remain visible in
-# the audit, but they are coverage issues rather than negative evidence and do
-# not stop a report from being generated.
+# Deterministic contradictions and missing mandatory deep-research contracts
+# block formal publication. Ordinary unavailable inputs remain neutral evidence:
+# they can leave a cell missing and cap confidence, but cannot manufacture a
+# bullish/bearish conclusion. The six universal company-depth sections are
+# publication requirements because a memo without them is not a deep report.
 PUBLICATION_BLOCKING_SECTIONS = frozenset(
     {
         "eps_profit_share_count_consistency",
@@ -77,17 +78,218 @@ PUBLICATION_BLOCKING_SECTIONS = frozenset(
         "scenario_probability_math",
         "scenario_weighted_value_math",
         "scenario_contribution_math",
+        "forecast_growth_arithmetic",
+        "option_value_arithmetic",
+        "scenario_weighted_range_math",
+        "expected_return_range_math",
         "financial_calendar_period",
         "period_comparator_lineage",
         "upside_discount_math",
         "industry_playbook_alignment",
         "segment_growth_rank_consistency",
+        "underwriting_readiness",
+        "shared_model_change_audit",
+        "pm_structured_generation",
+        "research_manager_structured_generation",
+        "share_count_source_conflict",
+        "handoff_numeric_consistency",
     }
 )
 
 
+def _handoff_metric_key(period: Any, metric: Any) -> tuple[str, str]:
+    normalized_period = re.sub(r"\s+", "", str(period or "")).lower()
+    normalized_metric = re.sub(r"[^a-z0-9\u4e00-\u9fff]+", "", str(metric or "")).lower()
+    aliases = {
+        "dilutedsharecount": "dilutedshares",
+        "sharecount": "dilutedshares",
+        "dilutedshares": "dilutedshares",
+        "稀释股本": "dilutedshares",
+        "总股本": "dilutedshares",
+        "revenue": "revenue",
+        "营业收入": "revenue",
+        "营收": "revenue",
+        "parentnetprofit": "parentnetprofit",
+        "netprofitparent": "parentnetprofit",
+        "归母净利润": "parentnetprofit",
+        "dilutedeps": "eps",
+        "eps": "eps",
+        "每股收益": "eps",
+        "稀释每股收益": "eps",
+        "operatingcashflowocf": "ocf",
+        "operatingcashflow": "ocf",
+        "ocf": "ocf",
+        "经营活动现金流净额": "ocf",
+        "capitalexpenditurecapex": "capex",
+        "capitalexpenditure": "capex",
+        "capex": "capex",
+        "资本开支": "capex",
+        "freecashflowfcf": "fcf",
+        "freecashflow": "fcf",
+        "fcf": "fcf",
+        "自由现金流": "fcf",
+        "grossmargin": "grossmargin",
+        "毛利率": "grossmargin",
+        "operatingprofit": "operatingprofit",
+        "营业利润": "operatingprofit",
+    }
+    canonical_metric = aliases.get(normalized_metric, normalized_metric)
+    if canonical_metric == "dilutedshares":
+        normalized_period = "current"
+    return normalized_period, canonical_metric
+
+
+def _numeric_line_map(payload: Mapping[str, Any]) -> dict[tuple[str, str], dict[str, Any]]:
+    result: dict[tuple[str, str], dict[str, Any]] = {}
+    for row in payload.get("canonical_model_snapshot", []) or []:
+        key = _handoff_metric_key(row.get("period"), row.get("metric"))
+        if row.get("value") is not None:
+            result[key] = dict(row)
+    return result
+
+
+def _underwriting_numeric_line_map(packet: Mapping[str, Any]) -> dict[tuple[str, str], dict[str, Any]]:
+    result: dict[tuple[str, str], dict[str, Any]] = {}
+    company = dict(packet.get("company_model", {}))
+    shares = company.get("diluted_share_count_mn")
+    if shares is not None:
+        result[_handoff_metric_key("current", "diluted shares")] = {
+            "line_id": "shares",
+            "period": company.get("share_count_period", "current"),
+            "metric": "diluted shares",
+            "value": shares,
+            "unit": "mn shares",
+        }
+    years = list(packet.get("forecast_years", []))
+    for row in packet.get("forecast_lines", []) or []:
+        if str(row.get("segment", "")).lower() not in {
+            "consolidated",
+            "group",
+            "合并",
+            "公司整体",
+        }:
+            continue
+        for index, value_key in enumerate(
+            ("year_1_value", "year_2_value", "year_3_value")
+        ):
+            if index >= len(years) or row.get(value_key) is None:
+                continue
+            result[_handoff_metric_key(years[index], row.get("metric"))] = {
+                "line_id": f"{years[index]}_{row.get('metric', '')}",
+                "period": years[index],
+                "metric": row.get("metric", ""),
+                "value": row.get(value_key),
+                "unit": row.get("unit", ""),
+            }
+    return result
+
+
+def _change_ids(payload: Mapping[str, Any], field: str) -> set[str]:
+    return {
+        str(row.get("line_id", "")).strip().lower()
+        for row in payload.get(field, []) or []
+        if str(row.get("line_id", "")).strip()
+        and str(row.get("disposition", "")).lower() == "accepted"
+    }
+
+
+def _line_changed(left: Mapping[str, Any], right: Mapping[str, Any]) -> bool:
+    try:
+        left_value = float(left.get("value"))
+        right_value = float(right.get("value"))
+    except (TypeError, ValueError):
+        return left.get("value") != right.get("value")
+    value_changed = abs(left_value - right_value) > max(
+        abs(left_value) * 0.02,
+        0.01,
+    )
+    left_unit = re.sub(r"\s+", "", str(left.get("unit", "")).lower())
+    right_unit = re.sub(r"\s+", "", str(right.get("unit", "")).lower())
+    return value_changed or (left_unit and right_unit and left_unit != right_unit)
+
+
+def audit_handoff_numeric_consistency(report_dir: str | Path) -> list[DecisionDepthIssue]:
+    """Compare underwriting -> Research Manager -> PM machine-readable values."""
+    report_path = Path(report_dir)
+    manager_path = report_path / "2_research" / "canonical_plan.json"
+    pm_path = report_path / "5_portfolio" / "canonical_decision.json"
+    if not manager_path.exists() and not pm_path.exists():
+        return []
+    issues: list[DecisionDepthIssue] = []
+    underwriting_path = report_path / "0_context" / "company_underwriting.json"
+    try:
+        packet = json.loads(read_text_fallback(underwriting_path))
+        manager = json.loads(read_text_fallback(manager_path))
+        pm = json.loads(read_text_fallback(pm_path))
+    except (OSError, TypeError, json.JSONDecodeError) as exc:
+        return [
+            DecisionDepthIssue(
+                "handoff_numeric_consistency",
+                "error",
+                f"canonical handoff artifact is missing or unreadable: {exc}",
+            )
+        ]
+    initial_map = _underwriting_numeric_line_map(packet)
+    manager_map = _numeric_line_map(manager)
+    pm_map = _numeric_line_map(pm)
+    manager_change_ids = _change_ids(manager, "model_change_rows")
+    pm_change_ids = _change_ids(pm, "handoff_change_rows")
+
+    for key, initial in initial_map.items():
+        accepted = manager_map.get(key)
+        if accepted is None:
+            issues.append(
+                DecisionDepthIssue(
+                    "handoff_numeric_consistency",
+                    "error",
+                    f"Research Manager canonical snapshot dropped {key[0]} {key[1]}",
+                )
+            )
+            continue
+        if _line_changed(initial, accepted) and str(
+            accepted.get("line_id", "")
+        ).lower() not in manager_change_ids:
+            issues.append(
+                DecisionDepthIssue(
+                    "handoff_numeric_consistency",
+                    "error",
+                    f"Research Manager silently changed {key[0]} {key[1]} from "
+                    f"{initial.get('value')} {initial.get('unit')} to "
+                    f"{accepted.get('value')} {accepted.get('unit')}",
+                )
+            )
+    for key, accepted in manager_map.items():
+        final = pm_map.get(key)
+        if final is None:
+            issues.append(
+                DecisionDepthIssue(
+                    "handoff_numeric_consistency",
+                    "error",
+                    f"Portfolio Manager canonical snapshot dropped {key[0]} {key[1]}",
+                )
+            )
+            continue
+        if _line_changed(accepted, final) and str(final.get("line_id", "")).lower() not in pm_change_ids:
+            issues.append(
+                DecisionDepthIssue(
+                    "handoff_numeric_consistency",
+                    "error",
+                    f"Portfolio Manager silently changed {key[0]} {key[1]} from "
+                    f"{accepted.get('value')} {accepted.get('unit')} to "
+                    f"{final.get('value')} {final.get('unit')}",
+                )
+            )
+    return issues
+
+PUBLICATION_BLOCKING_DEPTH_SECTIONS = frozenset()
+
+
 def _is_publication_blocker(section: str, severity: str) -> bool:
-    return severity == "error" and section in PUBLICATION_BLOCKING_SECTIONS
+    return (
+        severity == "error" and section in PUBLICATION_BLOCKING_SECTIONS
+    ) or (
+        severity == "warning" and section in PUBLICATION_BLOCKING_DEPTH_SECTIONS
+    )
 
 
 def _normalized_mention(text: object) -> str:
@@ -657,6 +859,39 @@ def _section_text(text: str, label: str) -> str:
     return match.group(1).strip() if match else ""
 
 
+def _heading_text(text: str, heading: str) -> str:
+    """Return a Markdown heading body without depending on report language."""
+    aliases = {
+        "Company Disaggregation": ("Company Disaggregation", "二、公司业务与利润池拆解"),
+        "Autonomous Three-Year Forecast Model": (
+            "Autonomous Three-Year Forecast Model",
+            "四、三年盈利及现金流预测",
+        ),
+        "Thesis-to-Financial Bridge": (
+            "Thesis-to-Financial Bridge",
+            "五、核心论点、护城河与财务传导",
+        ),
+        "Moat Evidence Scorecard": (
+            "Moat Evidence Scorecard",
+            "五、核心论点、护城河与财务传导",
+        ),
+        "Valuation Closure": ("Valuation Closure", "七、估值、情景与预期收益"),
+        "Handoff Integrity Audit": (
+            "Handoff Integrity Audit",
+            "附录A：模型变更与交接审计",
+        ),
+    }
+    heading_pattern = "(?:" + "|".join(
+        re.escape(value) for value in aliases.get(heading, (heading,))
+    ) + ")"
+    pattern = (
+        rf"^##\s+{heading_pattern}\s*$\n(.*?)"
+        rf"(?=^##\s+|\Z)"
+    )
+    match = re.search(pattern, text, flags=re.M | re.S | re.I)
+    return match.group(1).strip() if match else ""
+
+
 def _term_hits(text: str, terms: Iterable[str]) -> int:
     lowered = text.lower()
     return sum(1 for term in terms if term.lower() in lowered)
@@ -671,12 +906,203 @@ def audit_decision_depth(decision_text: str) -> list[DecisionDepthIssue]:
     """
     issues: list[DecisionDepthIssue] = []
 
+    company_map = _heading_text(decision_text, "Company Disaggregation")
+    if len(company_map) < 300 or not any(
+        token in company_map.lower()
+        for token in ("reported", "analytical", "missing", "disclosed", "披露", "缺失", "分析口径")
+    ):
+        issues.append(
+            DecisionDepthIssue(
+                "company_disaggregation",
+                "warning",
+                "company map does not separate reported segments from economic product/channel/geography/customer/project units with disclosure limits",
+            )
+        )
+
+    autonomous_model = _heading_text(
+        decision_text, "Autonomous Three-Year Forecast Model"
+    )
+    model_years = sorted(set(re.findall(r"20\d{2}E", autonomous_model, re.I)))
+    if len(autonomous_model) < 450 or len(model_years) < 3:
+        issues.append(
+            DecisionDepthIssue(
+                "autonomous_forecast_model",
+                "warning",
+                "independent operating-driver model does not preserve three explicit forward years",
+            )
+        )
+
+    thesis_bridge = _heading_text(decision_text, "Thesis-to-Financial Bridge")
+    bridge_hits = _term_hits(
+        thesis_bridge,
+        (
+            "formula",
+            "assumption",
+            "bull",
+            "base",
+            "bear",
+            "revenue",
+            "profit",
+            "EPS",
+            "FCF",
+            "capital",
+            "fair value",
+            "公允价值",
+            "财务传导",
+            "公式",
+            "假设",
+            "收入",
+            "利润",
+            "资本",
+            "估值",
+            "公式",
+            "假设",
+            "收入",
+            "利润",
+            "资本",
+            "估值",
+        ),
+    )
+    if len(thesis_bridge) < 220 or bridge_hits < 5:
+        issues.append(
+            DecisionDepthIssue(
+                "thesis_financial_bridge",
+                "warning",
+                "decisive claims are not translated through assumptions and formulas into earnings/cash-or-capital/fair-value effects",
+            )
+        )
+
+    moat_scorecard = _heading_text(decision_text, "Moat Evidence Scorecard")
+    moat_hits = _term_hits(
+        moat_scorecard,
+        (
+            "proven",
+            "partial",
+            "unproven",
+            "rejected",
+            "peer",
+            "history",
+            "counterevidence",
+            "margin",
+            "cash",
+            "ROIC",
+            "已验证",
+            "部分验证",
+            "未证实",
+            "反证",
+            "同行",
+            "财务传导",
+            "已证实",
+            "部分",
+            "未证实",
+            "反证",
+            "同业",
+        ),
+    )
+    if len(moat_scorecard) < 240 or moat_hits < 4:
+        issues.append(
+            DecisionDepthIssue(
+                "moat_evidence_scorecard",
+                "warning",
+                "moat claims lack observable history/true-peer tests, counterevidence and financial transmission",
+            )
+        )
+    unsupported_verified_moats = [
+        line.strip()
+        for line in moat_scorecard.splitlines()
+        if re.search(r"(?:已验证|(?<!un)\bproven\b)", line, re.I)
+        and not re.search(r"\b(?:EV|KPE|KF)\d+\b", line, re.I)
+    ]
+    if unsupported_verified_moats:
+        issues.append(
+            DecisionDepthIssue(
+                "moat_evidence_lineage",
+                "error",
+                "moat is labelled proven without an EV/KPE/KF evidence id: "
+                + unsupported_verified_moats[0][:180],
+            )
+        )
+
+    valuation_closure = _heading_text(decision_text, "Valuation Closure")
+    valuation_hits = _term_hits(
+        valuation_closure,
+        (
+            "core",
+            "scenario",
+            "optionality",
+            "excluded",
+            "share count",
+            "per share",
+            "probability",
+            "double count",
+            "current price",
+            "expected return",
+            "概率加权",
+            "公允价值",
+            "当前股价",
+            "预期收益",
+            "重复计算",
+            "核心",
+            "情景",
+            "期权",
+            "股本",
+            "每股",
+            "核心",
+            "情景",
+            "期权",
+            "股本",
+            "每股",
+            "概率",
+            "重复计价",
+            "现价",
+            "预期收益",
+        ),
+    )
+    if len(valuation_closure) < 350 or valuation_hits < 6:
+        issues.append(
+            DecisionDepthIssue(
+                "valuation_closure",
+                "warning",
+                "valuation does not close mutually exclusive buckets to probability-weighted per-share value, expected return and double-counting control",
+            )
+        )
+
+    handoff_audit = _heading_text(decision_text, "Handoff Integrity Audit")
+    if len(handoff_audit) < 220 or _term_hits(
+        handoff_audit,
+        (
+            "version",
+            "preserved",
+            "revised",
+            "unresolved",
+            "evidence",
+            "old",
+            "new",
+            "版本",
+            "保留",
+            "修改",
+            "未解决",
+            "证据",
+            "原值",
+            "新值",
+        ),
+    ) < 3:
+        issues.append(
+            DecisionDepthIssue(
+                "handoff_integrity_audit",
+                "warning",
+                "final memo does not prove that business units, all forecast years, thesis bridges and valuation buckets survived the agent handoff",
+            )
+        )
+
     segment = _section_text(decision_text, "Investment Thesis")
-    has_segment_section = "Business Segment Breakdown:" in segment or any(
+    has_segment_section = bool(company_map) or "Business Segment Breakdown:" in segment or any(
         marker in decision_text
         for marker in ("## 业务分部", "## 业务板块", "### 业务分部", "业务分部与估值")
     )
-    segment_scope = segment if "Business Segment Breakdown:" in segment else decision_text
+    segment_scope = company_map or (
+        segment if "Business Segment Breakdown:" in segment else decision_text
+    )
     if not has_segment_section:
         issues.append(
             DecisionDepthIssue(
@@ -685,7 +1111,7 @@ def audit_decision_depth(decision_text: str) -> list[DecisionDepthIssue]:
                 "missing explicit Business Segment Breakdown in the final thesis",
             )
         )
-    elif _term_hits(segment_scope, _SEGMENT_DEPTH_TERMS) < 5:
+    elif _term_hits(segment_scope, _SEGMENT_DEPTH_TERMS) < 4:
         issues.append(
             DecisionDepthIssue(
                 "business_segment_breakdown",
@@ -1096,6 +1522,18 @@ def _valuation_bridge_issues(decision_text: str) -> list[DecisionDepthIssue]:
                 )
                 break
 
+    global_share_count_bridge = bool(
+        re.search(
+            r"(?:diluted\s+share|share\s+count|总股本|稀释股本|股本数).{0,24}?\d+(?:\.\d+)?\s*(?:million|mn|亿股|百万股)",
+            decision_text,
+            re.I | re.S,
+        )
+        and re.search(
+            r"(?:EPS|每股收益|每股公允价值|每股价值).{0,120}?(?:股本|share)",
+            decision_text,
+            re.I | re.S,
+        )
+    )
     for line in decision_text.splitlines():
         lowered_line = line.lower()
         if not (
@@ -1104,7 +1542,10 @@ def _valuation_bridge_issues(decision_text: str) -> list[DecisionDepthIssue]:
             and re.search(r"(?:¥|￥)\s*\d|\d+\s*(?:元|cny)", line, re.I)
         ):
             continue
-        if not any(token in lowered_line for token in ("eps", "每股收益", "股本", "share count")):
+        if not global_share_count_bridge and not any(
+            token in lowered_line
+            for token in ("eps", "每股收益", "股本", "share count")
+        ):
             issues.append(
                 DecisionDepthIssue(
                     "profit_pe_per_share_bridge",
@@ -1221,6 +1662,159 @@ def _scenario_arithmetic_issues(decision_text: str) -> list[DecisionDepthIssue]:
     return issues
 
 
+def _forecast_and_valuation_range_issues(
+    decision_text: str,
+    *,
+    earnings_model_context: str = "",
+) -> list[DecisionDepthIssue]:
+    """Recalculate common range formulas instead of trusting LLM arithmetic."""
+    issues: list[DecisionDepthIssue] = []
+
+    annual_revenue_match = re.search(
+        r"\|\s*latest annual\s*\|\s*FY\s*\|\s*\d{8}\s*\|\s*([\d,]+(?:\.\d+)?)\s*\|",
+        earnings_model_context,
+        re.I,
+    )
+    forecast_revenue_match = re.search(
+        r"(?:营业收入|revenue).{0,30}?20\d{2}E\s*[:：]?\s*"
+        r"([\d,]+(?:\.\d+)?)\s*[-–—~至]\s*([\d,]+(?:\.\d+)?)\s*亿",
+        decision_text,
+        re.I | re.S,
+    )
+    stated_growth_match = re.search(
+        r"20\d{2}E.{0,20}?(?:收入增速|revenue growth).{0,12}?"
+        r"(?:约|about)?\s*(\d+(?:\.\d+)?)\s*[-–—~至]\s*(\d+(?:\.\d+)?)%",
+        decision_text,
+        re.I | re.S,
+    )
+    if annual_revenue_match and forecast_revenue_match and stated_growth_match:
+        annual_cny_100m = (
+            float(annual_revenue_match.group(1).replace(",", ""))
+            / 100_000_000.0
+        )
+        forecast_low, forecast_high = sorted(
+            (
+                float(forecast_revenue_match.group(1).replace(",", "")),
+                float(forecast_revenue_match.group(2).replace(",", "")),
+            )
+        )
+        calculated_low = (forecast_low / annual_cny_100m - 1.0) * 100.0
+        calculated_high = (forecast_high / annual_cny_100m - 1.0) * 100.0
+        stated_low, stated_high = sorted(
+            (float(stated_growth_match.group(1)), float(stated_growth_match.group(2)))
+        )
+        if (
+            abs(calculated_low - stated_low) > 1.0
+            or abs(calculated_high - stated_high) > 1.0
+        ):
+            issues.append(
+                DecisionDepthIssue(
+                    "forecast_growth_arithmetic",
+                    "error",
+                    f"stated revenue growth {stated_low:.1f}-{stated_high:.1f}% does not reconcile to latest annual revenue and forecast range; calculated {calculated_low:.1f}-{calculated_high:.1f}%",
+                )
+            )
+
+    for match in re.finditer(
+        r"(?:收入|revenue)\s*([\d,]+(?:\.\d+)?)\s*亿\s*[×x*]\s*"
+        r"(\d+(?:\.\d+)?)\s*(?:x|倍)?\s*PS\s*[×x*]\s*"
+        r"(\d+(?:\.\d+)?)%[^=→\n]{0,40}(?:=|→)\s*(?:约|about)?\s*"
+        r"([\d,]+(?:\.\d+)?)\s*[-–—~至]\s*([\d,]+(?:\.\d+)?)\s*亿",
+        decision_text,
+        re.I,
+    ):
+        revenue = float(match.group(1).replace(",", ""))
+        multiple = float(match.group(2))
+        probability = float(match.group(3)) / 100.0
+        stated_low, stated_high = sorted(
+            (
+                float(match.group(4).replace(",", "")),
+                float(match.group(5).replace(",", "")),
+            )
+        )
+        calculated = revenue * multiple * probability
+        if calculated < stated_low * 0.97 or calculated > stated_high * 1.03:
+            issues.append(
+                DecisionDepthIssue(
+                    "option_value_arithmetic",
+                    "error",
+                    f"option value formula implies {calculated:.1f} CNY 100m, outside the stated {stated_low:.1f}-{stated_high:.1f} range",
+                )
+            )
+            break
+
+    weighted_match = re.search(
+        r"(\d+(?:\.\d+)?)%\s*[×x*]\s*\((\d+(?:\.\d+)?)\s*[-–—~至]\s*(\d+(?:\.\d+)?)\)\s*\+\s*"
+        r"(\d+(?:\.\d+)?)%\s*[×x*]\s*\((\d+(?:\.\d+)?)\s*[-–—~至]\s*(\d+(?:\.\d+)?)\)\s*\+\s*"
+        r"(\d+(?:\.\d+)?)%\s*[×x*]\s*\((\d+(?:\.\d+)?)\s*[-–—~至]\s*(\d+(?:\.\d+)?)\)"
+        r".{0,30}?(?:→|=)\s*(?:约)?\s*(\d+(?:\.\d+)?)\s*[-–—~至]\s*(\d+(?:\.\d+)?)",
+        decision_text,
+        re.I | re.S,
+    )
+    if weighted_match:
+        values = [float(weighted_match.group(i)) for i in range(1, 12)]
+        calculated_low = (
+            values[0] * values[1] + values[3] * values[4] + values[6] * values[7]
+        ) / 100.0
+        calculated_high = (
+            values[0] * values[2] + values[3] * values[5] + values[6] * values[8]
+        ) / 100.0
+        stated_low, stated_high = sorted((values[9], values[10]))
+        if (
+            abs(calculated_low - stated_low) > 0.6
+            or abs(calculated_high - stated_high) > 0.6
+        ):
+            issues.append(
+                DecisionDepthIssue(
+                    "scenario_weighted_range_math",
+                    "error",
+                    f"probability-weighted range should be {calculated_low:.1f}-{calculated_high:.1f}, not {stated_low:.1f}-{stated_high:.1f}",
+                )
+            )
+
+    closure_text = _heading_text(decision_text, "Valuation Closure")
+    current_match = re.search(
+        r"(?:当前股价|current price)\s*(\d+(?:\.\d+)?)",
+        closure_text,
+        re.I,
+    )
+    fair_match = re.search(
+        r"(?:公允价值|fair value)\s*(\d+(?:\.\d+)?)\s*[-–—~至]\s*(\d+(?:\.\d+)?)",
+        closure_text,
+        re.I,
+    )
+    stated_return_match = re.search(
+        r"(?:存在|预期|expected).{0,20}?(?:约)?\s*(\d+(?:\.\d+)?)\s*[-–—~至]\s*(\d+(?:\.\d+)?)%",
+        closure_text,
+        re.I | re.S,
+    )
+    if current_match and fair_match and stated_return_match:
+        current = float(current_match.group(1))
+        fair_low, fair_high = sorted(
+            (float(fair_match.group(1)), float(fair_match.group(2)))
+        )
+        stated_low, stated_high = sorted(
+            (
+                float(stated_return_match.group(1)),
+                float(stated_return_match.group(2)),
+            )
+        )
+        calculated_low = (fair_low / current - 1.0) * 100.0
+        calculated_high = (fair_high / current - 1.0) * 100.0
+        if (
+            abs(calculated_low - stated_low) > 1.0
+            or abs(calculated_high - stated_high) > 1.0
+        ):
+            issues.append(
+                DecisionDepthIssue(
+                    "expected_return_range_math",
+                    "error",
+                    f"fair-value range implies {calculated_low:.1f}-{calculated_high:.1f}% return, not {stated_low:.1f}-{stated_high:.1f}%",
+                )
+            )
+    return issues
+
+
 def audit_decision_integrity(
     decision_text: str,
     *,
@@ -1232,6 +1826,12 @@ def audit_decision_integrity(
     the generated memo obeys the model and evidence contracts supplied to it.
     """
     issues = _scenario_arithmetic_issues(decision_text)
+    issues.extend(
+        _forecast_and_valuation_range_issues(
+            decision_text,
+            earnings_model_context=earnings_model_context,
+        )
+    )
     issues.extend(_eps_profit_consistency_issues(decision_text))
     issues.extend(_valuation_bridge_issues(decision_text))
     issues.extend(_period_semantic_issues(decision_text))
@@ -1406,6 +2006,22 @@ def audit_structured_research_usage(
         ]
 
     issues: list[DecisionDepthIssue] = []
+    invalid_eps_rows = [
+        row
+        for row in bundle.get("semantic_metrics", [])
+        if "eps_profit_share_count_conflict" in row.get("control_flags", [])
+    ]
+    if invalid_eps_rows:
+        row = invalid_eps_rows[0]
+        issues.append(
+            DecisionDepthIssue(
+                "eps_source_sanity",
+                "error",
+                "reported EPS was rejected as a likely PDF table-column shift: "
+                f"period={row.get('period')}, rejected={row.get('rejected_value')}, "
+                f"control={row.get('value_text')}",
+            )
+        )
     preprocessing_mode = str(bundle.get("preprocessing_mode", ""))
     preprocessing_notes = " ".join(
         str(note) for note in bundle.get("preprocessing_notes", [])
@@ -1433,6 +2049,27 @@ def audit_structured_research_usage(
         )
     else:
         readiness = str(underwriting_packet.get("research_readiness", "")).lower()
+        readiness_reasons = [
+            str(item) for item in underwriting_packet.get("readiness_reasons", [])
+        ]
+        share_conflict = next(
+            (
+                reason
+                for reason in readiness_reasons
+                if reason.startswith(
+                    "Reported total_share and market-cap/close share counts conflict"
+                )
+            ),
+            "",
+        )
+        if share_conflict:
+            issues.append(
+                DecisionDepthIssue(
+                    "share_count_source_conflict",
+                    "error",
+                    share_conflict,
+                )
+            )
         if readiness == "blocked":
             issues.append(
                 DecisionDepthIssue(
@@ -1460,6 +2097,85 @@ def audit_structured_research_usage(
                     "company_operating_model",
                     "error",
                     "company revenue/profit operating equations are absent from the shared underwriting packet",
+                )
+            )
+        business_units = list(underwriting_packet.get("business_unit_map", []))
+        if not business_units:
+            issues.append(
+                DecisionDepthIssue(
+                    "company_disaggregation",
+                    "warning",
+                    "shared underwriting packet has no economic business-unit map beyond narrative/accounting labels",
+                )
+            )
+        elif not any(
+            str(row.get("revenue_driver_equation", "")).strip()
+            or str(row.get("profit_driver_equation", "")).strip()
+            for row in business_units
+        ):
+            issues.append(
+                DecisionDepthIssue(
+                    "company_disaggregation",
+                    "warning",
+                    "business units exist but none carries a revenue or profit driver equation",
+                )
+            )
+
+        thesis_bridges = list(
+            underwriting_packet.get("thesis_financial_bridges", [])
+        )
+        if not thesis_bridges or not any(
+            str(row.get("quantification_status", ""))
+            in {"quantified", "partially_quantified"}
+            for row in thesis_bridges
+        ):
+            issues.append(
+                DecisionDepthIssue(
+                    "thesis_financial_bridge",
+                    "warning",
+                    "shared model has no decisive thesis translated into a quantified or partially quantified financial bridge",
+                )
+            )
+
+        moat_claims = list(company_model.get("moat_mechanisms", []))
+        moat_tests = list(underwriting_packet.get("moat_evidence_tests", []))
+        if moat_claims and (
+            not moat_tests
+            or not any(
+                str(row.get("status", "")) in {"proven", "partial"}
+                for row in moat_tests
+            )
+        ):
+            issues.append(
+                DecisionDepthIssue(
+                    "moat_evidence_scorecard",
+                    "warning",
+                    "claimed moat mechanisms remain narrative because no observable test is proven or partially proven",
+                )
+            )
+
+        valuation_buckets = list(underwriting_packet.get("valuation_buckets", []))
+        valuation_closure = dict(underwriting_packet.get("valuation_closure", {}))
+        if (
+            not valuation_buckets
+            or str(valuation_closure.get("status", "")) != "closed"
+            or valuation_closure.get("fair_value_per_share_cny") is None
+        ):
+            issues.append(
+                DecisionDepthIssue(
+                    "valuation_closure",
+                    "warning",
+                    "shared model does not close mutually exclusive valuation buckets to auditable per-share fair value",
+                )
+            )
+
+        handoff_manifest = dict(underwriting_packet.get("handoff_manifest", {}))
+        if not handoff_manifest.get("downstream_must_preserve"):
+            issues.append(
+                DecisionDepthIssue(
+                    "handoff_integrity_audit",
+                    "warning",
+                    "shared model lacks a loss-prevention manifest for downstream agents",
                 )
             )
         question_ids = [
@@ -1631,9 +2347,13 @@ def audit_report_depth(report_dir: str | Path) -> pd.DataFrame:
     if not decision_path.exists():
         raise FileNotFoundError(f"Missing portfolio decision: {decision_path}")
     decision_text = read_text_fallback(decision_path)
+    appendix_path = report_path / "5_portfolio" / "research_appendix.md"
+    depth_text = decision_text
+    if appendix_path.exists():
+        depth_text += "\n\n" + read_text_fallback(appendix_path)
     earnings_path = report_path / "0_context" / "earnings_model.md"
     earnings_context = read_text_fallback(earnings_path) if earnings_path.exists() else ""
-    issues = audit_decision_depth(decision_text)
+    issues = audit_decision_depth(depth_text)
     issues.extend(
         audit_decision_integrity(
             decision_text,
@@ -1642,6 +2362,75 @@ def audit_report_depth(report_dir: str | Path) -> pd.DataFrame:
     )
     issues.extend(audit_structured_research_usage(report_dir, decision_text))
     issues.extend(audit_context_alignment(report_dir))
+    issues.extend(audit_handoff_numeric_consistency(report_dir))
+    public_h2_count = sum(
+        1 for line in decision_text.splitlines() if line.startswith("## ")
+    )
+    if public_h2_count != 8:
+        issues.append(
+            DecisionDepthIssue(
+                "pm_format_contract",
+                "warning",
+                "public PM renderer should emit exactly eight fixed H2 sections; "
+                f"got sections={public_h2_count}. Re-render from the validated PM payload.",
+            )
+        )
+    generation_status_path = report_path / "5_portfolio" / "generation_status.json"
+    if generation_status_path.exists():
+        try:
+            generation_status = json.loads(
+                read_text_fallback(generation_status_path)
+            )
+            if str(generation_status.get("mode", "")).lower() not in {
+                "structured",
+                "schema_prompt_structured",
+                "schema_repaired_fallback",
+            }:
+                error = str(generation_status.get("structured_error", "")).strip()
+                detail = f"; structured error: {error[:240]}" if error else ""
+                issues.append(
+                    DecisionDepthIssue(
+                        "pm_structured_generation",
+                        "error",
+                        "Portfolio Manager used free-text fallback; formal publication requires schema-valid SellSidePMDecision output"
+                        + detail,
+                    )
+                )
+        except (json.JSONDecodeError, OSError, TypeError) as exc:
+            issues.append(
+                DecisionDepthIssue(
+                    "pm_structured_generation",
+                    "error",
+                    f"Portfolio Manager generation status is unreadable: {exc}",
+                )
+            )
+    research_manager_status_path = report_path / "2_research" / "generation_status.json"
+    if research_manager_status_path.exists():
+        try:
+            manager_status = json.loads(read_text_fallback(research_manager_status_path))
+            if str(manager_status.get("mode", "")).lower() not in {
+                "structured",
+                "schema_prompt_structured",
+                "schema_repaired_fallback",
+            }:
+                error = str(manager_status.get("structured_error", "")).strip()
+                detail = f"; structured error: {error[:240]}" if error else ""
+                issues.append(
+                    DecisionDepthIssue(
+                        "research_manager_structured_generation",
+                        "error",
+                        "Research Manager used free-text fallback; the canonical debated model handoff is not schema-valid"
+                        + detail,
+                    )
+                )
+        except (json.JSONDecodeError, OSError, TypeError) as exc:
+            issues.append(
+                DecisionDepthIssue(
+                    "research_manager_structured_generation",
+                    "error",
+                    f"Research Manager generation status is unreadable: {exc}",
+                )
+            )
     return pd.DataFrame(
         [
             {
@@ -1679,8 +2468,8 @@ def render_post_generation_audit(report_dir: str | Path) -> str:
             "## Verdict",
             "",
             f"- {verdict}: blocking_errors={blocking_errors}, research_errors={errors}, warnings={warnings}.",
-            "- Missing, partial or unavailable data is non-blocking and neutral for investment direction; it must be disclosed with a retrieval or verification task.",
-            "- Only deterministic arithmetic, period, classification or fact-consistency contradictions block formal publication.",
+            "- Missing, partial or unavailable source data is neutral for investment direction; disclose it with a retrieval or verification task.",
+            "- Deterministic contradictions, failed structured generation, blocked company underwriting, and missing mandatory deep-research sections block formal publication.",
             "",
             "## Findings",
             "",

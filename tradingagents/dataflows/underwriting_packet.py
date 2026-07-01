@@ -14,13 +14,39 @@ import re
 from datetime import datetime
 from typing import Any, Literal, Mapping
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 
 
 Readiness = Literal["ready", "partial", "blocked"]
 
 
-class CompanyOperatingModel(BaseModel):
+class NullDefaultModel(BaseModel):
+    """Accept provider-emitted ``null`` for fields that have safe defaults.
+
+    Structured-output providers commonly emit JSON ``null`` for optional
+    descriptive strings and arrays even when the schema advertises an empty
+    string/list default.  Treating that harmless shape difference as a fatal
+    company-model failure discarded otherwise complete underwriting packets.
+    Required fields and fields whose declared default is ``None`` remain
+    strict.
+    """
+
+    @model_validator(mode="before")
+    @classmethod
+    def _replace_null_with_declared_default(cls, value: Any) -> Any:
+        if not isinstance(value, Mapping):
+            return value
+        normalized = dict(value)
+        for name, field in cls.model_fields.items():
+            if normalized.get(name) is not None or field.is_required():
+                continue
+            default = field.get_default(call_default_factory=True)
+            if default is not None:
+                normalized[name] = default
+        return normalized
+
+
+class CompanyOperatingModel(NullDefaultModel):
     model_profile: Literal[
         "corporate",
         "bank",
@@ -29,6 +55,17 @@ class CompanyOperatingModel(BaseModel):
         "reit",
         "other",
     ] = "corporate"
+    operating_model_family: Literal[
+        "volume_price_cost",
+        "store_traffic_conversion_ticket",
+        "users_arpu_retention",
+        "project_backlog_delivery",
+        "commodity_volume_price_cost",
+        "financial_spread_credit",
+        "insurance_value",
+        "reit_occupancy_rent",
+        "other",
+    ] = "other"
     business_archetype: str = ""
     value_proposition_and_customers: str = ""
     revenue_equation: str = ""
@@ -38,6 +75,14 @@ class CompanyOperatingModel(BaseModel):
     diluted_share_count_mn: float | None = None
     share_count_period: str = ""
     share_count_evidence_id: str = ""
+    share_count_source_type: Literal[
+        "reported_total_share",
+        "market_cap_div_close",
+        "model_supplied",
+        "unresolved",
+    ] = "unresolved"
+    share_count_formula: str = ""
+    share_count_cross_checks: list[str] = Field(default_factory=list)
     moat_mechanisms: list[str] = Field(default_factory=list)
     moat_to_financial_transmission: list[str] = Field(default_factory=list)
     structural_risks: list[str] = Field(default_factory=list)
@@ -45,7 +90,7 @@ class CompanyOperatingModel(BaseModel):
     evidence_ids: list[str] = Field(default_factory=list)
 
 
-class SegmentUnderwritingModel(BaseModel):
+class SegmentUnderwritingModel(NullDefaultModel):
     segment: str
     products_or_services: str = ""
     customers_and_channel: str = ""
@@ -74,7 +119,34 @@ class SegmentUnderwritingModel(BaseModel):
     next_verification: str = ""
 
 
-class UnderwritingQuestion(BaseModel):
+class BusinessUnitMap(NullDefaultModel):
+    """Economic unit used to understand the company, not merely an accounting label."""
+
+    unit_id: str
+    unit_name: str
+    unit_type: Literal[
+        "reported_segment",
+        "product",
+        "channel",
+        "geography",
+        "customer_group",
+        "project_or_asset",
+        "financial_business",
+        "other",
+    ] = "reported_segment"
+    disclosure_basis: Literal["reported", "calculated", "analytical", "missing"] = "missing"
+    parent_unit: str = "company"
+    economic_role: str = ""
+    revenue_driver_equation: str = ""
+    profit_driver_equation: str = ""
+    cash_and_capital_equation: str = ""
+    reported_metrics: list[str] = Field(default_factory=list)
+    evidence_ids: list[str] = Field(default_factory=list)
+    missing_inputs: list[str] = Field(default_factory=list)
+    next_verification: str = ""
+
+
+class UnderwritingQuestion(NullDefaultModel):
     question_id: str
     question: str
     why_it_matters: str
@@ -88,7 +160,7 @@ class UnderwritingQuestion(BaseModel):
     next_verification: str = ""
 
 
-class ForecastLine(BaseModel):
+class ForecastLine(NullDefaultModel):
     segment: str = "consolidated"
     metric: str
     unit: str = ""
@@ -104,7 +176,7 @@ class ForecastLine(BaseModel):
     missing_inputs: list[str] = Field(default_factory=list)
 
 
-class ScenarioUnderwriting(BaseModel):
+class ScenarioUnderwriting(NullDefaultModel):
     scenario: Literal["bull", "base", "bear"]
     probability_pct: float | None = None
     operating_assumptions: list[str] = Field(default_factory=list)
@@ -119,7 +191,7 @@ class ScenarioUnderwriting(BaseModel):
     missing_inputs: list[str] = Field(default_factory=list)
 
 
-class ModelChangeRule(BaseModel):
+class ModelChangeRule(NullDefaultModel):
     evidence_id: str
     affected_segment: str = "consolidated"
     affected_variable: str = "unmapped"
@@ -131,18 +203,103 @@ class ModelChangeRule(BaseModel):
     verification_gate: str = ""
 
 
-class CompanyUnderwritingPacket(BaseModel):
-    schema_version: int = 1
+class ThesisFinancialBridge(NullDefaultModel):
+    """Translate one investment claim into auditable financial consequences."""
+
+    bridge_id: str
+    thesis_or_question: str
+    affected_unit: str = "consolidated"
+    operating_driver: str = ""
+    driver_formula: str = ""
+    base_assumption: str = "missing"
+    bull_assumption: str = "missing"
+    bear_assumption: str = "missing"
+    revenue_impact: str = "unquantified"
+    profit_impact: str = "unquantified"
+    eps_impact: str = "unquantified"
+    fcf_or_capital_impact: str = "unquantified"
+    valuation_impact: str = "unquantified"
+    quantification_status: Literal["quantified", "partially_quantified", "unquantified"] = "unquantified"
+    evidence_ids: list[str] = Field(default_factory=list)
+    missing_inputs: list[str] = Field(default_factory=list)
+
+
+class MoatEvidenceTest(NullDefaultModel):
+    """Require a claimed moat to pass an observable economic test."""
+
+    moat_mechanism: str
+    observable_test: str = ""
+    comparison_basis: str = ""
+    evidence_result: str = "missing"
+    financial_transmission: str = ""
+    strongest_counterevidence: str = ""
+    status: Literal["proven", "partial", "unproven", "rejected"] = "unproven"
+    evidence_ids: list[str] = Field(default_factory=list)
+    next_verification: str = ""
+
+
+class ValuationBucket(NullDefaultModel):
+    """One mutually exclusive value bucket with explicit overlap control."""
+
+    bucket: str
+    inclusion: Literal["core", "scenario", "optionality", "excluded"] = "excluded"
+    valuation_method: str = ""
+    metric_and_period: str = ""
+    metric_value: float | None = None
+    valuation_multiple: float | None = None
+    ownership_pct: float | None = None
+    haircut_pct: float | None = None
+    equity_value_cny_mn: float | None = None
+    per_share_value_cny: float | None = None
+    overlap_key: str = ""
+    double_counting_treatment: str = ""
+    evidence_ids: list[str] = Field(default_factory=list)
+    missing_inputs: list[str] = Field(default_factory=list)
+
+
+class ValuationClosure(NullDefaultModel):
+    current_price_cny: float | None = None
+    diluted_share_count_mn: float | None = None
+    core_value_per_share_cny: float | None = None
+    probability_weighted_fair_value_per_share_cny: float | None = None
+    option_value_per_share_cny: float | None = None
+    other_adjustments_per_share_cny: float | None = None
+    fair_value_per_share_cny: float | None = None
+    expected_return_pct: float | None = None
+    formula: str = ""
+    rating_consistency_check: str = ""
+    double_counting_checks: list[str] = Field(default_factory=list)
+    status: Literal["closed", "partial", "not_valued"] = "not_valued"
+    missing_inputs: list[str] = Field(default_factory=list)
+
+
+class ModelHandoffManifest(NullDefaultModel):
+    handoff_version: str = "underwriting-v2"
+    source_of_truth: str = "structured_research.underwriting_packet"
+    frozen_reported_facts: list[str] = Field(default_factory=list)
+    analyst_estimates: list[str] = Field(default_factory=list)
+    unresolved_model_cells: list[str] = Field(default_factory=list)
+    downstream_must_preserve: list[str] = Field(default_factory=list)
+
+
+class CompanyUnderwritingPacket(NullDefaultModel):
+    schema_version: int = 2
     symbol: str
     as_of_date: str
     forecast_years: list[str]
     research_readiness: Readiness = "partial"
     readiness_reasons: list[str] = Field(default_factory=list)
     company_model: CompanyOperatingModel = Field(default_factory=CompanyOperatingModel)
+    business_unit_map: list[BusinessUnitMap] = Field(default_factory=list)
     segment_models: list[SegmentUnderwritingModel] = Field(default_factory=list)
     underwriting_questions: list[UnderwritingQuestion] = Field(default_factory=list)
     forecast_lines: list[ForecastLine] = Field(default_factory=list)
     scenarios: list[ScenarioUnderwriting] = Field(default_factory=list)
+    thesis_financial_bridges: list[ThesisFinancialBridge] = Field(default_factory=list)
+    moat_evidence_tests: list[MoatEvidenceTest] = Field(default_factory=list)
+    valuation_buckets: list[ValuationBucket] = Field(default_factory=list)
+    valuation_closure: ValuationClosure = Field(default_factory=ValuationClosure)
+    handoff_manifest: ModelHandoffManifest = Field(default_factory=ModelHandoffManifest)
     evidence_change_rules: list[ModelChangeRule] = Field(default_factory=list)
     reconciliation_checks: list[str] = Field(default_factory=list)
     analyst_instructions: list[str] = Field(default_factory=list)
@@ -253,17 +410,24 @@ Build a rating-free company underwriting packet. This is the common analytical m
 
 Universal rules for all A-share industries:
 1. Infer the actual business archetype, `model_profile` and material segments dynamically from filings. Copy supplied filing-backed segment names exactly where available. Never force a battery, bank, software, commodity, consumer, or other fixed template onto an unrelated company.
+1a. Do not confuse accounting disclosure segments with the economic units needed to understand the company. Build `business_unit_map` across the dimensions that actually drive economics: product, channel, geography, customer group, project/asset or financial business. Mark every unit reported/calculated/analytical/missing. An analytical unit may organize questions and forecasts, but it may not receive invented revenue, margin or value.
+1b. Select exactly one `operating_model_family` from the real economics. Product/chemical/manufacturing companies normally require capacity -> utilization -> volume -> ASP -> input/unit cost -> spread/margin -> working capital -> capex/ROIC. Retail/consumer companies require traffic/store/customer count -> conversion -> ticket/ARPU -> mix -> margin. Software requires users -> paid penetration -> ARPU -> retention/churn -> delivery/cloud cost. Project companies require opening backlog + new orders - delivery = ending backlog -> acceptance -> receivables/collection. Resource companies require reserves/capacity -> output -> realized price -> cash cost/AISC -> sustaining capex. Banks, insurers and REITs use their native spread/credit, value/solvency, or occupancy/rent models. Do not call a forecast autonomous unless the selected family's decisive driver chain is represented or explicitly missing.
 2. Teach how the company works: who pays, what is delivered, the revenue equation, profit equation, cash-flow equation, reinvestment needs, moat mechanisms and structural risks.
 3. For every material segment complete the causal chain: demand/orders -> industry supply/capacity -> company volume/share/utilization -> price/ASP/take rate -> unit cost -> margin/operating leverage -> working capital/cash -> EPS/FCF -> valuation treatment.
 4. Generate 4-6 company-specific underwriting questions, ranked by expected EPS/FCF/fair-value sensitivity. The questions are the research agenda: every downstream module must either change a model variable, change a scenario probability, or document why it is irrelevant. Avoid generic questions that could apply to any stock.
 5. Build three explicit forward years with the correct model profile. For ordinary non-financial companies include material segment revenue drivers and consolidated revenue, gross/operating margin, operating profit, parent net profit, EPS, OCF, capex and FCF. For banks use earning assets, NIM/net interest income, fee income, operating cost, credit cost/provisions, parent profit, EPS, ROE, asset quality and CET1/capital; do not force manufacturing OCF/FCF. For insurers use premium/APE, NBV, EV/CSM where disclosed, investment spread, COR for P&C, OPAT/parent profit, EPS, solvency and payout; for securities firms use brokerage, investment banking, asset management, proprietary/trading income, parent profit, EPS, ROE and capital adequacy; for REITs use occupancy, rent/unit, NOI, distributable cash flow and payout. Put the unit on every numeric line. Use CNY mn for profit/cash-flow lines and million shares for diluted share count when source conversion supports it. Before using null, complete reproducible calculations from supplied facts: Tushare total_share is in 10,000 shares; share count can also be cross-checked from market cap/price or parent profit/EPS; capex can be derived from cash paid to acquire/construct long-term assets; FCF can be derived from OCF minus consistently defined capex. Label these values calculated with formula, period and evidence ids. Use null plus missing_inputs only when neither reported nor reproducibly calculated evidence supports a number; never invent precision.
+5a. Diluted shares are controlled downstream and cannot be chosen to make a reported EPS fit. Prefer Tushare total_share, cross-check market cap / close, and treat parent-profit / EPS only as a diagnostic. If a filing-text EPS conflicts with parent profit / deterministic shares, label it a suspected PDF column shift and do not use it.
 6. Create bull/base/bear cases only from the same model variables. Probabilities are underwriting judgments, not facts, and must sum to 100 when all are supplied. Fair value requires a reconciled EPS/share-count or asset-value bridge.
+6a. Build 3-6 `thesis_financial_bridges` for the claims that actually decide the recommendation. Each bridge must state the operating formula and bull/base/bear assumption, then quantify or explicitly leave missing the revenue, profit, EPS, FCF/capital and valuation effect. Narrative influence without a named financial line is incomplete.
+6b. Turn every claimed moat into a `moat_evidence_test`. Test scale, license, brand, switching cost, network effect, cost advantage or customer stickiness with an observable metric versus history or true peers. State counterevidence and the exact route from the moat to price/share/margin/turnover/cash/ROIC. A management claim alone is `unproven`.
+6c. Build mutually exclusive `valuation_buckets`, then one `valuation_closure`. State what is core, scenario, optionality or excluded; identify overlap keys; reconcile share count, scenario probabilities, per-share conversion and current-price expected return. `probability_weighted_fair_value_per_share_cny` is the total probability-weighted value, not an incremental bucket to add again to core value. A subsidiary, acquired business or second curve already inside consolidated earnings must not be added again in SOTP unless the consolidated earnings base explicitly excludes it.
 7. Use only supplied EV/KPE evidence ids. Decisive claims without a valid id must remain unverified or missing. Do not promote rows marked unverified_quote.
 8. Every KPE or alternative clue has one model outcome: numeric old->new, probability before->after, unchanged/watch, or rejected. Narrative influence without a model outcome is invalid.
 9. `research_readiness=ready` only when material segments, three-year consolidated model, scenario valuation, periods/units and decisive evidence are sufficiently complete. Use `partial` for unavailable sources or incomplete cells; those gaps are neutral and non-blocking. Use `blocked` only for a deterministic contradiction, invalid unit/period, or corrupted source that makes supplied facts unsafe—not merely because data is missing.
 10. Return exactly one JSON object conforming to the schema. No Markdown, rating, recommendation or commentary outside JSON.
 11. Use the LLM for business-model interpretation, causal chains, counterevidence, question selection and assumption design. Numeric historical facts remain controlled by supplied structured/filing evidence. Never overwrite a reported figure with an LLM estimate. A commodity or thematic proxy may enter a causal chain only when the payload proves its economic relevance to the target's revenue or cost structure.
 12. Distinguish a descriptive module from a decision-useful one. Do not promote a module into the packet unless verified evidence changes a named forecast line, scenario probability or valuation bucket, or unavailable evidence creates a dated retrieval/verification task.
+13. Populate `handoff_manifest` as the loss-prevention contract. Separate frozen reported facts from analyst estimates and unresolved cells. Downstream agents must preserve the full three-year model, all material business units, every accepted financial bridge and every valuation bucket; any change requires an evidence id, old/new assumption and recalculated EPS/FCF/value impact.
 
 JSON Schema:
 {schema}
@@ -314,38 +478,46 @@ def _invoke(llm: Any, prompt: str) -> CompanyUnderwritingPacket:
         structured_error = exc
     response = llm.invoke(prompt)
     content = _response_text(response)
-    if isinstance(content, Mapping):
-        return CompanyUnderwritingPacket.model_validate(content)
     if not str(content or "").strip():
         raise ValueError(
             "underwriting free-text fallback returned empty content; "
             f"structured_error={structured_error}"
         )
+    raw_content = (
+        json.dumps(content, ensure_ascii=False)
+        if isinstance(content, Mapping)
+        else str(content)
+    )
     try:
-        payload = _json_object(str(content))
-    except (json.JSONDecodeError, ValueError) as parse_error:
+        payload = _json_object(raw_content)
+        return CompanyUnderwritingPacket.model_validate(payload)
+    except Exception as initial_error:
         # Long company-underwriting objects occasionally contain a missing
-        # comma or an unescaped quote even when the underlying analysis is
-        # useful.  Give the LLM one constrained repair pass instead of losing
-        # the entire company model and falling back to a blank skeleton.
-        repair_prompt = f"""Repair the malformed JSON below.
+        # comma, an unescaped quote, or a provider-specific schema mismatch even
+        # when the underlying analysis is useful. Give the LLM one constrained
+        # repair pass for both JSON parsing and schema-validation failures
+        # instead of losing the entire company model.
+        repair_prompt = f"""Repair the malformed JSON below so it validates against the schema.
 
 Return exactly one valid JSON object and no Markdown or commentary. Preserve the supplied analysis and values. Do not add facts, estimates, ratings, or recommendations. The object must conform to this JSON Schema:
 {json.dumps(CompanyUnderwritingPacket.model_json_schema(), ensure_ascii=False, separators=(',', ':'))}
 
-Malformed JSON:
-{str(content)[:50000]}
+Initial validation error:
+{initial_error}
+
+JSON to repair:
+{raw_content[:50000]}
 """
         repaired = _response_text(llm.invoke(repair_prompt))
         try:
             payload = _json_object(str(repaired))
-        except (json.JSONDecodeError, ValueError) as repair_error:
+            return CompanyUnderwritingPacket.model_validate(payload)
+        except Exception as repair_error:
             raise ValueError(
-                "underwriting JSON parse and repair failed; "
-                f"initial={parse_error}; repair={repair_error}; "
+                "underwriting JSON validation and repair failed; "
+                f"initial={initial_error}; repair={repair_error}; "
                 f"structured={structured_error}"
             ) from repair_error
-    return CompanyUnderwritingPacket.model_validate(payload)
 
 
 def _valid_evidence_ids(structured: Mapping[str, Any]) -> set[str]:
@@ -379,6 +551,318 @@ def _dedup_material_segments(structured: Mapping[str, Any]) -> list[dict[str, An
 
 def _normalize_segment_name(value: str) -> str:
     return re.sub(r"[\W_]+", "", str(value or "")).lower()
+
+
+_METRIC_ALIASES: dict[str, tuple[str, ...]] = {
+    "revenue": ("revenue", "operating_revenue", "营业收入", "营收"),
+    "gross_margin": ("gross_margin", "grossprofit_margin", "毛利率", "综合毛利率"),
+    "operating_profit": ("operating_profit", "营业利润", "经营利润"),
+    "parent_net_profit": (
+        "parent_net_profit",
+        "net_profit_parent",
+        "归母净利润",
+        "归属于母公司股东的净利润",
+    ),
+    "eps": (
+        "eps",
+        "basic_eps",
+        "diluted_eps",
+        "diluted earnings per share",
+        "基本每股收益",
+        "稀释每股收益",
+        "每股收益",
+    ),
+    "ocf": (
+        "ocf",
+        "operating_cash_flow",
+        "经营活动现金流净额",
+        "经营现金流",
+    ),
+    "capex": ("capex", "capital_expenditure", "资本开支", "资本支出"),
+    "fcf": ("fcf", "free_cash_flow", "自由现金流"),
+    "earning_assets": ("earning_assets", "生息资产"),
+    "nim": ("nim", "净息差", "净利差"),
+    "net_interest_income": ("net_interest_income", "净利息收入"),
+    "fee_income": ("fee_income", "手续费及佣金净收入", "非息收入"),
+    "pre_provision_profit": ("pre_provision_profit", "拨备前利润"),
+    "credit_cost": ("credit_cost", "信用成本"),
+    "roe": ("roe", "净资产收益率"),
+    "cet1": ("cet1", "核心一级资本充足率"),
+    "premium_or_ape": ("premium_or_ape", "premium", "ape", "保费"),
+    "nbv": ("nbv", "新业务价值"),
+    "investment_spread": ("investment_spread", "投资利差"),
+    "opat": ("opat", "营运利润"),
+    "solvency": ("solvency", "偿付能力"),
+    "dividend_payout": ("dividend_payout", "分红率", "派息率"),
+    "brokerage_revenue": ("brokerage_revenue", "经纪业务收入"),
+    "investment_banking_revenue": ("investment_banking_revenue", "投行业务收入"),
+    "asset_management_revenue": ("asset_management_revenue", "资管业务收入"),
+    "trading_investment_income": ("trading_investment_income", "自营投资收益"),
+    "capital_adequacy": ("capital_adequacy", "资本充足率"),
+    "occupancy": ("occupancy", "出租率"),
+    "rent_per_unit": ("rent_per_unit", "单位租金"),
+    "noi": ("noi", "净营业收入"),
+    "distributable_cash_flow": ("distributable_cash_flow", "可供分配现金流"),
+    "payout": ("payout", "分派率"),
+}
+
+
+_OPERATING_MODEL_DRIVER_GROUPS: dict[
+    str, tuple[tuple[str, tuple[str, ...]], ...]
+] = {
+    "volume_price_cost": (
+        ("capacity", ("capacity", "产能")),
+        ("utilization", ("utilization", "operating rate", "开工率", "产能利用率")),
+        ("volume", ("volume", "shipment", "sales volume", "销量", "产量")),
+        ("price/ASP", ("asp", "price", "售价", "均价", "价格")),
+        ("unit/input cost", ("unit cost", "input cost", "raw material", "单位成本", "原料", "成本")),
+        ("spread/margin", ("spread", "margin", "价差", "毛利率", "利润率")),
+        ("capex/ROIC", ("capex", "roic", "capital expenditure", "资本开支", "投入资本回报")),
+    ),
+    "store_traffic_conversion_ticket": (
+        ("store/customer base", ("store", "customer count", "门店", "客户数")),
+        ("traffic", ("traffic", "passenger", "客流", "人流")),
+        ("conversion", ("conversion", "转化率", "购买率")),
+        ("ticket/ARPU", ("ticket", "arpu", "客单价", "单客收入")),
+        ("mix/margin", ("mix", "margin", "品类结构", "毛利率", "利润率")),
+    ),
+    "users_arpu_retention": (
+        ("users", ("user", "seat", "用户", "客户数")),
+        ("paid penetration", ("paid", "penetration", "付费", "渗透率")),
+        ("ARPU", ("arpu", "客单价", "单用户收入")),
+        ("retention/churn", ("retention", "churn", "续费率", "留存率", "流失率")),
+        ("delivery/cloud cost", ("delivery cost", "cloud cost", "交付成本", "云成本")),
+    ),
+    "project_backlog_delivery": (
+        ("opening backlog", ("opening backlog", "期初在手订单", "期初订单")),
+        ("new orders", ("new order", "新签订单")),
+        ("delivery/acceptance", ("delivery", "acceptance", "交付", "验收")),
+        ("ending backlog", ("ending backlog", "期末在手订单", "期末订单")),
+        ("receivable/collection", ("receivable", "collection", "应收", "回款")),
+    ),
+    "commodity_volume_price_cost": (
+        ("reserves/capacity", ("reserve", "capacity", "储量", "产能")),
+        ("output", ("output", "production", "产量")),
+        ("realized price", ("realized price", "selling price", "售价", "结算价")),
+        ("cash cost/AISC", ("cash cost", "aisc", "现金成本", "全维持成本")),
+        ("sustaining capex", ("sustaining capex", "维持性资本开支")),
+        ("margin/FCF", ("margin", "fcf", "利润率", "自由现金流")),
+    ),
+    "financial_spread_credit": (
+        ("earning assets", ("earning asset", "生息资产")),
+        ("NIM/spread", ("nim", "net interest margin", "净息差")),
+        ("fee income", ("fee income", "手续费", "中收")),
+        ("credit cost", ("credit cost", "信用成本")),
+        ("asset quality", ("npl", "non-performing", "不良率", "拨备覆盖率")),
+        ("capital", ("capital adequacy", "cet1", "资本充足率", "核心一级资本")),
+    ),
+    "insurance_value": (
+        ("premium/APE", ("premium", "ape", "保费", "新单保费")),
+        ("NBV", ("nbv", "new business value", "新业务价值")),
+        ("EV/CSM", ("embedded value", "csm", "内含价值", "合同服务边际")),
+        ("investment spread", ("investment yield", "spread", "投资收益率", "利差")),
+        ("claims/cost", ("claim", "combined ratio", "赔付率", "综合成本率")),
+        ("solvency", ("solvency", "偿付能力")),
+    ),
+    "reit_occupancy_rent": (
+        ("occupancy", ("occupancy", "出租率")),
+        ("rent", ("rent", "租金", "租约")),
+        ("NOI", ("noi", "net operating income", "净运营收入")),
+        ("distributable cash", ("distributable", "可供分配")),
+        ("payout/leverage", ("payout", "leverage", "分派率", "杠杆率")),
+    ),
+}
+
+
+def _operating_model_driver_coverage(
+    packet: CompanyUnderwritingPacket,
+) -> tuple[list[str], list[str]]:
+    """Return represented and missing driver groups for the selected model family."""
+    family = packet.company_model.operating_model_family
+    groups = _OPERATING_MODEL_DRIVER_GROUPS.get(family, ())
+    if not groups:
+        return [], []
+    corpus_parts = [
+        packet.company_model.revenue_equation,
+        packet.company_model.profit_equation,
+        packet.company_model.cash_flow_equation,
+        packet.company_model.capital_intensity_and_reinvestment,
+    ]
+    for row in packet.business_unit_map:
+        corpus_parts.extend(
+            (
+                row.revenue_driver_equation,
+                row.profit_driver_equation,
+                row.cash_and_capital_equation,
+                " ".join(row.reported_metrics),
+            )
+        )
+    for row in packet.segment_models:
+        corpus_parts.extend(
+            (
+                " ".join(row.demand_and_order_drivers),
+                row.industry_supply_and_capacity,
+                row.volume_share_utilization,
+                row.price_asp_take_rate,
+                row.unit_cost_and_input_prices,
+                row.margin_and_operating_leverage,
+                row.working_capital_and_cash_conversion,
+            )
+        )
+    for row in packet.forecast_lines:
+        if any(
+            value is not None
+            for value in (row.base_value, row.year_1_value, row.year_2_value, row.year_3_value)
+        ) or row.assumption_status.lower() not in {"", "missing"}:
+            corpus_parts.extend((row.metric, row.formula, row.key_sensitivity))
+    corpus = " ".join(str(value) for value in corpus_parts if value).lower()
+    represented = [
+        label
+        for label, terms in groups
+        if any(term.lower() in corpus for term in terms)
+    ]
+    missing = [label for label, _terms in groups if label not in represented]
+    return represented, missing
+
+
+def _canonical_metric_name(value: str) -> str:
+    normalized = re.sub(r"[\W_]+", "", str(value or "")).lower()
+    # Rates must not be mistaken for amount lines such as operating profit.
+    is_rate = any(token in str(value or "").lower() for token in ("率", "ratio", "margin"))
+    for canonical, aliases in _METRIC_ALIASES.items():
+        for alias in aliases:
+            alias_normalized = re.sub(r"[\W_]+", "", alias).lower()
+            if normalized == alias_normalized:
+                return canonical
+            if len(alias_normalized) >= 4 and alias_normalized in normalized:
+                if canonical == "operating_profit" and is_rate:
+                    continue
+                return canonical
+    return re.sub(r"\s+", "_", str(value or "").strip().lower())
+
+
+def _derive_market_snapshot(
+    contexts: Mapping[str, str] | None,
+) -> tuple[float | None, float | None, str]:
+    """Derive diluted shares (mn) from same-snapshot market cap and close."""
+    if not contexts:
+        return None, None, ""
+    preferred_keys = (
+        "forecast_model",
+        "price_earnings_decomposition",
+        "price_move_attribution",
+        "peer_comparison",
+        "management_capital_allocation",
+    )
+    text = "\n".join(
+        f"[{key}]\n{contexts.get(key, '')}"
+        for key in preferred_keys
+        if contexts.get(key)
+    )
+    market_cap_match = re.search(
+        r"market\s*cap\s*\(cny\)\s*[|/]\s*([\d,]+(?:\.\d+)?)",
+        text,
+        re.I,
+    )
+    close_match = re.search(
+        r"\|\s*(?:close|latest\s+close|current\s+price)\s*\|\s*"
+        r"([\d,]+(?:\.\d+)?)\s*\|",
+        text,
+        re.I,
+    )
+    if not market_cap_match or not close_match:
+        return None, None, ""
+    market_cap_cny = float(market_cap_match.group(1).replace(",", ""))
+    current_price_cny = float(close_match.group(1).replace(",", ""))
+    if market_cap_cny <= 0 or current_price_cny <= 0:
+        return None, None, ""
+    diluted_share_count_mn = market_cap_cny / current_price_cny / 1_000_000.0
+    if not 1.0 <= diluted_share_count_mn <= 10_000_000.0:
+        return None, None, ""
+    return (
+        diluted_share_count_mn,
+        current_price_cny,
+        "market cap / close, using forecast_model and price_earnings_decomposition",
+    )
+
+
+def _derive_reported_share_count(
+    contexts: Mapping[str, str] | None,
+) -> tuple[float | None, str, str]:
+    """Read the latest Tushare pledge table total_share (10,000 shares)."""
+    if not contexts:
+        return None, "", ""
+    text = str(contexts.get("shareholder_structure", "") or "")
+    lines = text.splitlines()
+    for index, line in enumerate(lines):
+        if "total_share" not in line.lower() or "|" not in line:
+            continue
+        headers = [cell.strip().lower() for cell in line.strip().strip("|").split("|")]
+        try:
+            total_share_index = headers.index("total_share")
+        except ValueError:
+            continue
+        period_index = headers.index("end_date") if "end_date" in headers else 0
+        for row in lines[index + 1 : index + 12]:
+            if re.search(r"\|\s*[-:]+", row):
+                continue
+            cells = [cell.strip() for cell in row.strip().strip("|").split("|")]
+            if len(cells) <= total_share_index:
+                continue
+            try:
+                total_share_10k = float(cells[total_share_index].replace(",", ""))
+            except ValueError:
+                continue
+            if total_share_10k <= 0:
+                continue
+            period = cells[period_index] if len(cells) > period_index else ""
+            return (
+                total_share_10k / 100.0,
+                period,
+                "Tushare pledge_stat.total_share (10,000 shares) / 100",
+            )
+    return None, "", ""
+
+
+def derive_share_count_control(
+    contexts: Mapping[str, str] | None,
+) -> dict[str, Any]:
+    """Return the canonical share count plus independent cross-checks."""
+    reported_mn, reported_period, reported_formula = _derive_reported_share_count(
+        contexts
+    )
+    market_mn, current_price, market_formula = _derive_market_snapshot(contexts)
+    conflict_pct: float | None = None
+    if reported_mn and market_mn:
+        conflict_pct = abs(reported_mn - market_mn) / reported_mn * 100.0
+    canonical_mn = reported_mn or market_mn
+    source_type = (
+        "reported_total_share"
+        if reported_mn is not None
+        else "market_cap_div_close"
+        if market_mn is not None
+        else "unresolved"
+    )
+    period = reported_period if reported_mn is not None else "market snapshot"
+    formula = reported_formula if reported_mn is not None else market_formula
+    cross_checks: list[str] = []
+    if reported_mn is not None:
+        cross_checks.append(f"reported total_share={reported_mn:.3f} mn")
+    if market_mn is not None:
+        cross_checks.append(f"market cap / close={market_mn:.3f} mn")
+    if conflict_pct is not None:
+        cross_checks.append(f"reported-vs-market difference={conflict_pct:.3f}%")
+    return {
+        "canonical_share_count_mn": canonical_mn,
+        "source_type": source_type,
+        "period": period,
+        "formula": formula,
+        "current_price_cny": current_price,
+        "reported_share_count_mn": reported_mn,
+        "market_implied_share_count_mn": market_mn,
+        "conflict_pct": conflict_pct,
+        "cross_checks": cross_checks,
+    }
 
 
 def _required_metrics_for_profile(profile: str) -> set[str]:
@@ -461,6 +945,26 @@ def _fallback_packet(symbol: str, as_of_date: str, structured: Mapping[str, Any]
         )
         for row in segments
     ]
+    business_units = [
+        BusinessUnitMap(
+            unit_id=f"BU{index:02d}",
+            unit_name=model.segment,
+            unit_type="reported_segment",
+            disclosure_basis="reported",
+            economic_role="Filing-reported segment; economic sub-unit decomposition still required.",
+            reported_metrics=[
+                metric
+                for metric, value in (
+                    ("revenue", model.base_revenue_value),
+                    ("revenue growth", model.base_revenue_growth_pct),
+                    ("margin", model.base_margin_pct),
+                )
+                if value is not None
+            ],
+            missing_inputs=["product/channel/geography/customer economics not deterministically available"],
+        )
+        for index, model in enumerate(segment_models, start=1)
+    ]
     required_lines = (
         ("consolidated", "revenue"),
         ("consolidated", "gross_margin"),
@@ -494,14 +998,35 @@ def _fallback_packet(symbol: str, as_of_date: str, structured: Mapping[str, Any]
         if row.get("evidence_id")
     ]
     return CompanyUnderwritingPacket(
+        schema_version=2,
         symbol=symbol,
         as_of_date=str(as_of_date),
         forecast_years=years,
         research_readiness="blocked",
         readiness_reasons=["LLM company underwriting failed; only deterministic skeleton is available."],
+        business_unit_map=business_units,
         segment_models=segment_models,
         forecast_lines=forecast_lines,
         scenarios=[ScenarioUnderwriting(scenario=name) for name in ("bull", "base", "bear")],
+        valuation_buckets=[
+            ValuationBucket(
+                bucket="consolidated business",
+                inclusion="excluded",
+                missing_inputs=["reconciled autonomous forecast and valuation basis unavailable"],
+            )
+        ],
+        valuation_closure=ValuationClosure(
+            status="not_valued",
+            missing_inputs=["LLM underwriting model unavailable"],
+        ),
+        handoff_manifest=ModelHandoffManifest(
+            unresolved_model_cells=["all company-specific driver and valuation cells"],
+            downstream_must_preserve=[
+                "filing-reported segments",
+                "three forward years",
+                "missing cells and retrieval tasks",
+            ],
+        ),
         evidence_change_rules=changes,
         reconciliation_checks=[
             "Material segment revenue must reconcile to consolidated revenue.",
@@ -517,7 +1042,11 @@ def _fallback_packet(symbol: str, as_of_date: str, structured: Mapping[str, Any]
     )
 
 
-def _validate_packet(packet: CompanyUnderwritingPacket, structured: Mapping[str, Any]) -> CompanyUnderwritingPacket:
+def _validate_packet(
+    packet: CompanyUnderwritingPacket,
+    structured: Mapping[str, Any],
+    contexts: Mapping[str, str] | None = None,
+) -> CompanyUnderwritingPacket:
     valid_ids = _valid_evidence_ids(structured)
     years = packet.forecast_years
     expected_years = _forecast_years(packet.as_of_date)
@@ -527,7 +1056,17 @@ def _validate_packet(packet: CompanyUnderwritingPacket, structured: Mapping[str,
         )
         packet.forecast_years = expected_years
 
-    for item in [packet.company_model, *packet.segment_models, *packet.underwriting_questions, *packet.forecast_lines, *packet.scenarios]:
+    for item in [
+        packet.company_model,
+        *packet.business_unit_map,
+        *packet.segment_models,
+        *packet.underwriting_questions,
+        *packet.forecast_lines,
+        *packet.scenarios,
+        *packet.thesis_financial_bridges,
+        *packet.moat_evidence_tests,
+        *packet.valuation_buckets,
+    ]:
         if not hasattr(item, "evidence_ids"):
             continue
         supplied = list(getattr(item, "evidence_ids", []))
@@ -541,6 +1080,55 @@ def _validate_packet(packet: CompanyUnderwritingPacket, structured: Mapping[str,
     ):
         packet.preprocessing_notes.append("unknown share-count evidence id removed")
         packet.company_model.share_count_evidence_id = ""
+
+    share_control = derive_share_count_control(contexts)
+    canonical_shares_mn = share_control["canonical_share_count_mn"]
+    supplied_shares_mn = packet.company_model.diluted_share_count_mn
+    share_count_materially_replaced = False
+    if canonical_shares_mn is not None:
+        if supplied_shares_mn is not None and supplied_shares_mn > 0:
+            supplied_difference_pct = (
+                abs(supplied_shares_mn - canonical_shares_mn)
+                / canonical_shares_mn
+                * 100.0
+            )
+            if supplied_difference_pct > 2.0:
+                share_count_materially_replaced = True
+                packet.preprocessing_notes.append(
+                    "LLM-supplied diluted shares rejected: "
+                    f"{supplied_shares_mn:.3f} mn vs deterministic "
+                    f"{canonical_shares_mn:.3f} mn ({supplied_difference_pct:.2f}% difference)."
+                )
+        packet.company_model.diluted_share_count_mn = canonical_shares_mn
+        packet.company_model.share_count_period = (
+            f"{packet.as_of_date}; {share_control['period']}; {share_control['formula']}"
+        )
+        packet.company_model.share_count_source_type = share_control["source_type"]
+        packet.company_model.share_count_formula = share_control["formula"]
+        packet.company_model.share_count_cross_checks = share_control["cross_checks"]
+        packet.preprocessing_notes.append(
+            "diluted shares set deterministically: "
+            f"{canonical_shares_mn:.3f} mn ({share_control['source_type']})"
+        )
+    elif supplied_shares_mn is not None and supplied_shares_mn > 0:
+        packet.company_model.share_count_source_type = "model_supplied"
+        packet.company_model.share_count_formula = (
+            packet.company_model.share_count_formula
+            or "model supplied; no deterministic cross-check available"
+        )
+    conflict_pct = share_control.get("conflict_pct")
+    if conflict_pct is not None and conflict_pct > 2.0:
+        packet.research_readiness = "blocked"
+        packet.readiness_reasons.append(
+            "Reported total_share and market-cap/close share counts conflict by "
+            f"{conflict_pct:.2f}% (>2%)."
+        )
+    derived_price_cny = share_control["current_price_cny"]
+    if derived_price_cny is not None:
+        packet.valuation_closure.current_price_cny = derived_price_cny
+        packet.preprocessing_notes.append(
+            f"valuation current price restored from market snapshot: CNY {derived_price_cny:.4f}"
+        )
 
     valid_changes: list[ModelChangeRule] = []
     seen_change_ids: set[str] = set()
@@ -577,6 +1165,90 @@ def _validate_packet(packet: CompanyUnderwritingPacket, structured: Mapping[str,
             )
         )
     packet.evidence_change_rules = valid_changes
+
+    if not packet.business_unit_map:
+        packet.business_unit_map = [
+            BusinessUnitMap(
+                unit_id=f"BU{index:02d}",
+                unit_name=row.segment,
+                unit_type="reported_segment",
+                disclosure_basis=(
+                    "reported" if row.base_revenue_value is not None else "missing"
+                ),
+                economic_role="Filing segment restored as the minimum company decomposition.",
+                revenue_driver_equation="missing; decompose with company-specific volume/price/channel drivers",
+                profit_driver_equation="missing; connect revenue to segment margin and operating cost",
+                cash_and_capital_equation="missing; connect working capital, capex and return on capital",
+                evidence_ids=list(row.evidence_ids),
+                missing_inputs=["economic unit decomposition omitted by underwriting model"],
+            )
+            for index, row in enumerate(packet.segment_models, start=1)
+        ]
+        packet.research_readiness = "partial"
+        packet.readiness_reasons.append(
+            "Economic business-unit map was omitted; filing segments were restored as a minimum decomposition."
+        )
+
+    if not packet.thesis_financial_bridges:
+        packet.thesis_financial_bridges = [
+            ThesisFinancialBridge(
+                bridge_id=f"TFB{index:02d}",
+                thesis_or_question=row.question,
+                affected_unit=(row.decisive_model_variables[0] if row.decisive_model_variables else "consolidated"),
+                operating_driver=", ".join(row.decisive_model_variables[:3]),
+                evidence_ids=list(row.evidence_ids),
+                missing_inputs=[
+                    "claim has not been translated into revenue/profit/EPS/FCF/value impact"
+                ],
+            )
+            for index, row in enumerate(packet.underwriting_questions[:6], start=1)
+        ]
+        if packet.underwriting_questions:
+            packet.research_readiness = "partial"
+            packet.readiness_reasons.append(
+                "Thesis questions lack explicit financial-transmission bridges."
+            )
+
+    if not packet.moat_evidence_tests and packet.company_model.moat_mechanisms:
+        packet.moat_evidence_tests = [
+            MoatEvidenceTest(
+                moat_mechanism=mechanism,
+                observable_test="missing; compare an operating or financial outcome with history and true peers",
+                financial_transmission=(
+                    packet.company_model.moat_to_financial_transmission[index]
+                    if index < len(packet.company_model.moat_to_financial_transmission)
+                    else "missing"
+                ),
+                status="unproven",
+                next_verification="retrieve reported KPI or true-peer evidence",
+            )
+            for index, mechanism in enumerate(packet.company_model.moat_mechanisms)
+        ]
+        packet.research_readiness = "partial"
+        packet.readiness_reasons.append(
+            "Claimed moat mechanisms lack observable evidence tests."
+        )
+
+    if not packet.valuation_buckets:
+        packet.valuation_buckets = [
+            ValuationBucket(
+                bucket="consolidated business",
+                inclusion="excluded",
+                missing_inputs=["mutually exclusive valuation buckets were not supplied"],
+            )
+        ]
+        packet.research_readiness = "partial"
+        packet.readiness_reasons.append("Valuation buckets are missing.")
+
+    packet.handoff_manifest.handoff_version = "underwriting-v2"
+    if not packet.handoff_manifest.downstream_must_preserve:
+        packet.handoff_manifest.downstream_must_preserve = [
+            "all material business units and disclosure limitations",
+            "three forward years and every industry-native consolidated line",
+            "thesis financial bridges and moat evidence status",
+            "mutually exclusive valuation buckets and double-counting checks",
+            "reported facts, estimates, unresolved cells and evidence ids",
+        ]
 
     material_name_map = {
         _normalize_segment_name(str(row.get("segment", "")).strip()): str(
@@ -616,11 +1288,69 @@ def _validate_packet(packet: CompanyUnderwritingPacket, structured: Mapping[str,
         packet.research_readiness = "partial"
         packet.readiness_reasons.append("One or more filing-reported segments required deterministic restoration.")
 
+    present_unit_names = {
+        _normalize_segment_name(row.unit_name) for row in packet.business_unit_map
+    }
+    for index, row in enumerate(packet.segment_models, start=1):
+        if _normalize_segment_name(row.segment) in present_unit_names:
+            continue
+        packet.business_unit_map.append(
+            BusinessUnitMap(
+                unit_id=f"BU{len(packet.business_unit_map) + index:02d}",
+                unit_name=row.segment,
+                unit_type="reported_segment",
+                disclosure_basis=(
+                    "reported" if row.base_revenue_value is not None else "missing"
+                ),
+                economic_role="Filing segment restored after structured evidence reconciliation.",
+                evidence_ids=list(row.evidence_ids),
+                missing_inputs=["economic sub-unit driver equations require analyst completion"],
+            )
+        )
+    if not packet.business_unit_map:
+        packet.research_readiness = "partial"
+        packet.readiness_reasons.append(
+            "No reported or analytical economic business unit could be identified."
+        )
+
     required_metrics = _required_metrics_for_profile(
         packet.company_model.model_profile
     )
+    consolidated_groups: dict[str, list[ForecastLine]] = {}
+    for row in packet.forecast_lines:
+        if row.segment.lower() not in {"consolidated", "group", "合并", "公司整体"}:
+            continue
+        consolidated_groups.setdefault(_canonical_metric_name(row.metric), []).append(row)
+    for canonical, rows in consolidated_groups.items():
+        if canonical not in required_metrics or len(rows) < 2:
+            continue
+        ranked = sorted(
+            rows,
+            key=lambda row: sum(
+                value is not None
+                for value in (
+                    row.base_value,
+                    row.year_1_value,
+                    row.year_2_value,
+                    row.year_3_value,
+                )
+            ),
+            reverse=True,
+        )
+        keeper = ranked[0]
+        for duplicate in ranked[1:]:
+            keeper.evidence_ids = list(
+                dict.fromkeys([*keeper.evidence_ids, *duplicate.evidence_ids])
+            )
+            keeper.missing_inputs = list(
+                dict.fromkeys([*keeper.missing_inputs, *duplicate.missing_inputs])
+            )
+            packet.forecast_lines.remove(duplicate)
+        packet.preprocessing_notes.append(
+            f"duplicate consolidated forecast aliases merged into {canonical}"
+        )
     present_metrics = {
-        re.sub(r"\s+", "_", row.metric.strip().lower())
+        _canonical_metric_name(row.metric)
         for row in packet.forecast_lines
         if row.segment.lower() in {"consolidated", "group", "合并", "公司整体"}
     }
@@ -641,22 +1371,8 @@ def _validate_packet(packet: CompanyUnderwritingPacket, structured: Mapping[str,
         row
         for row in packet.forecast_lines
         if row.segment.lower() in {"consolidated", "group", "合并", "公司整体"}
-        and re.sub(r"\s+", "_", row.metric.strip().lower()) in required_metrics
+        and _canonical_metric_name(row.metric) in required_metrics
     ]
-    incomplete_forward_rows = [
-        row.metric
-        for row in consolidated_rows
-        if any(
-            value is None
-            for value in (row.year_1_value, row.year_2_value, row.year_3_value)
-        )
-    ]
-    if incomplete_forward_rows:
-        packet.research_readiness = "partial"
-        packet.readiness_reasons.append(
-            "Three-year values remain missing for consolidated line(s): "
-            + ", ".join(incomplete_forward_rows[:8])
-        )
     numeric_rows_without_unit = [
         row.metric
         for row in packet.forecast_lines
@@ -709,7 +1425,7 @@ def _validate_packet(packet: CompanyUnderwritingPacket, structured: Mapping[str,
         packet.readiness_reasons.append("Bull/base/bear per-share valuation is incomplete.")
 
     consolidated_by_metric = {
-        re.sub(r"\s+", "_", row.metric.strip().lower()): row
+        _canonical_metric_name(row.metric): row
         for row in packet.forecast_lines
         if row.segment.lower() in {"consolidated", "group", "合并", "公司整体"}
     }
@@ -725,14 +1441,21 @@ def _validate_packet(packet: CompanyUnderwritingPacket, structured: Mapping[str,
         for attr in ("year_1_value", "year_2_value", "year_3_value"):
             profit = getattr(profit_row, attr)
             eps = getattr(eps_row, attr)
-            if profit is None or eps is None or eps == 0:
+            if profit is None:
                 continue
             implied = profit / share_count
-            if abs(implied - eps) / max(abs(eps), 0.01) > 0.05:
+            if eps is not None and abs(implied - eps) / max(abs(implied), 0.01) > 0.02:
                 packet.research_readiness = "partial"
                 packet.readiness_reasons.append(
-                    f"Parent-profit/EPS/share-count reconciliation fails for {attr}."
+                    f"Parent-profit/EPS/share-count conflict corrected for {attr}."
                 )
+                packet.preprocessing_notes.append(
+                    f"{attr} EPS replaced: {eps:.6g} -> {implied:.6g} CNY/share."
+                )
+            setattr(eps_row, attr, implied)
+            eps_row.unit = "CNY/share"
+            eps_row.assumption_status = "calculated"
+            eps_row.formula = "parent net profit (CNY mn) / diluted shares (mn)"
     elif eps_row and any(
         value is not None
         for value in (eps_row.year_1_value, eps_row.year_2_value, eps_row.year_3_value)
@@ -757,9 +1480,14 @@ def _validate_packet(packet: CompanyUnderwritingPacket, structured: Mapping[str,
             ocf = getattr(ocf_row, attr)
             capex = getattr(capex_row, attr)
             fcf = getattr(fcf_row, attr)
-            if ocf is None or capex is None or fcf is None:
+            if ocf is None or capex is None:
                 continue
             expected_fcf = ocf - abs(capex)
+            if fcf is None:
+                setattr(fcf_row, attr, expected_fcf)
+                fcf_row.assumption_status = "calculated"
+                fcf_row.formula = fcf_row.formula or "OCF - abs(capex)"
+                continue
             if abs(expected_fcf - fcf) > max(abs(expected_fcf) * 0.05, 1.0):
                 packet.research_readiness = "partial"
                 packet.readiness_reasons.append(
@@ -768,24 +1496,288 @@ def _validate_packet(packet: CompanyUnderwritingPacket, structured: Mapping[str,
 
     for scenario in packet.scenarios:
         if (
-            scenario.eps_cny is not None
-            and scenario.valuation_multiple is not None
-            and scenario.fair_value_per_share is not None
-            and any(token in scenario.valuation_method.lower() for token in ("pe", "p/e", "市盈率"))
+            scenario.parent_net_profit_cny_mn is not None
+            and share_count
+            and share_count > 0
         ):
-            expected_value = scenario.eps_cny * scenario.valuation_multiple
-            if abs(expected_value - scenario.fair_value_per_share) > max(
-                abs(expected_value) * 0.03,
-                1.0,
+            implied_scenario_eps = scenario.parent_net_profit_cny_mn / share_count
+            if (
+                scenario.eps_cny is not None
+                and abs(scenario.eps_cny - implied_scenario_eps)
+                / max(abs(implied_scenario_eps), 0.01)
+                > 0.02
             ):
+                packet.preprocessing_notes.append(
+                    f"{scenario.scenario} scenario EPS replaced: "
+                    f"{scenario.eps_cny:.6g} -> {implied_scenario_eps:.6g}."
+                )
+            scenario.eps_cny = implied_scenario_eps
+        pe_method = any(
+            token in scenario.valuation_method.lower()
+            for token in ("pe", "p/e", "市盈率")
+        )
+        if scenario.eps_cny is not None and scenario.valuation_multiple is not None and pe_method:
+            expected_value = scenario.eps_cny * scenario.valuation_multiple
+            if scenario.fair_value_per_share is None or abs(
+                expected_value - scenario.fair_value_per_share
+            ) > max(abs(expected_value) * 0.03, 1.0):
                 packet.research_readiness = "partial"
                 packet.readiness_reasons.append(
                     f"{scenario.scenario} scenario EPS x PE does not reconcile to fair value."
                 )
+                scenario.fair_value_per_share = expected_value
+                packet.preprocessing_notes.append(
+                    f"{scenario.scenario} fair value replaced by deterministic EPS x PE calculation."
+                )
+        elif share_count_materially_replaced and scenario.fair_value_per_share is not None:
+            packet.preprocessing_notes.append(
+                f"{scenario.scenario} fair value removed because its non-PE per-share bridge "
+                "used a rejected share-count basis."
+            )
+            scenario.fair_value_per_share = None
+            scenario.missing_inputs.append(
+                "rebuild PB/DCF per-share valuation after deterministic share-count correction"
+            )
+            packet.research_readiness = "partial"
+            packet.readiness_reasons.append(
+                f"{scenario.scenario} non-PE scenario valuation was invalidated by share-count correction."
+            )
+
+    quantified_bridges = [
+        row
+        for row in packet.thesis_financial_bridges
+        if row.quantification_status in {"quantified", "partially_quantified"}
+    ]
+    if packet.thesis_financial_bridges and not quantified_bridges:
+        packet.research_readiness = "partial"
+        packet.readiness_reasons.append(
+            "No decisive thesis has been translated into a quantified financial bridge."
+        )
+    for test in packet.moat_evidence_tests:
+        if test.status not in {"proven", "partial"} or test.evidence_ids:
+            continue
+        previous = test.status
+        test.status = "unproven"
+        test.evidence_result = (
+            f"Downgraded from {previous}: no valid EV/KPE evidence id supports the test."
+        )
+        packet.research_readiness = "partial"
+        packet.readiness_reasons.append(
+            f"Moat claim lacks traceable evidence ids: {test.moat_mechanism}."
+        )
+    if packet.company_model.moat_mechanisms and not any(
+        row.status in {"proven", "partial"} for row in packet.moat_evidence_tests
+    ):
+        packet.research_readiness = "partial"
+        packet.readiness_reasons.append(
+            "All claimed moat mechanisms remain unproven by observable evidence."
+        )
+
+    closure = packet.valuation_closure
+    if share_count_materially_replaced:
+        closure.core_value_per_share_cny = None
+        closure.probability_weighted_fair_value_per_share_cny = None
+        closure.option_value_per_share_cny = None
+        closure.other_adjustments_per_share_cny = None
+        closure.fair_value_per_share_cny = None
+        closure.expected_return_pct = None
+        closure.status = "partial"
+        closure.missing_inputs.append(
+            "valuation closure reset after deterministic share-count correction"
+        )
+    closure.diluted_share_count_mn = packet.company_model.diluted_share_count_mn
+    scenario_values = [
+        (row.probability_pct, row.fair_value_per_share)
+        for row in packet.scenarios
+        if row.probability_pct is not None and row.fair_value_per_share is not None
+    ]
+    if len(scenario_values) == 3:
+        closure.probability_weighted_fair_value_per_share_cny = sum(
+            float(probability) * float(value) / 100.0
+            for probability, value in scenario_values
+        )
+    if (
+        closure.fair_value_per_share_cny is None
+        and closure.probability_weighted_fair_value_per_share_cny is not None
+    ):
+        closure.fair_value_per_share_cny = (
+            closure.probability_weighted_fair_value_per_share_cny
+        )
+    if (
+        closure.current_price_cny is not None
+        and closure.current_price_cny > 0
+        and closure.fair_value_per_share_cny is not None
+    ):
+        calculated_return = (
+            closure.fair_value_per_share_cny / closure.current_price_cny - 1.0
+        ) * 100.0
+        if (
+            closure.expected_return_pct is not None
+            and abs(closure.expected_return_pct - calculated_return) > 0.6
+        ):
+            closure.status = "partial"
+            closure.missing_inputs.append(
+                "reported expected return does not reconcile to current price and fair value"
+            )
+            packet.research_readiness = "partial"
+            packet.readiness_reasons.append(
+                "Valuation expected-return arithmetic does not reconcile."
+            )
+        closure.expected_return_pct = calculated_return
+    if (
+        closure.probability_weighted_fair_value_per_share_cny is not None
+        and closure.fair_value_per_share_cny is not None
+        and abs(
+            closure.probability_weighted_fair_value_per_share_cny
+            - closure.fair_value_per_share_cny
+        )
+        > max(abs(closure.fair_value_per_share_cny) * 0.03, 0.5)
+    ):
+        closure.status = "partial"
+        closure.missing_inputs.append(
+            "fair value does not reconcile to the probability-weighted scenario value"
+        )
+        packet.research_readiness = "partial"
+        packet.readiness_reasons.append(
+            "Valuation closure conflicts with probability-weighted scenario value."
+        )
+    included_buckets = [
+        row for row in packet.valuation_buckets if row.inclusion != "excluded"
+    ]
+    if len(included_buckets) > 1 and not closure.double_counting_checks:
+        closure.status = "partial"
+        closure.missing_inputs.append(
+            "multiple included valuation buckets lack explicit double-counting checks"
+        )
+        packet.research_readiness = "partial"
+        packet.readiness_reasons.append(
+            "Multiple valuation buckets lack explicit double-counting checks."
+        )
+    if closure.diluted_share_count_mn and closure.diluted_share_count_mn > 0:
+        for bucket in included_buckets:
+            if bucket.equity_value_cny_mn is not None:
+                deterministic_per_share = (
+                    bucket.equity_value_cny_mn / closure.diluted_share_count_mn
+                )
+                if (
+                    bucket.per_share_value_cny is not None
+                    and abs(bucket.per_share_value_cny - deterministic_per_share)
+                    > max(abs(deterministic_per_share) * 0.02, 0.1)
+                ):
+                    packet.preprocessing_notes.append(
+                        f"valuation bucket per-share value replaced for {bucket.bucket}: "
+                        f"{bucket.per_share_value_cny:.6g} -> {deterministic_per_share:.6g}."
+                    )
+                bucket.per_share_value_cny = deterministic_per_share
+            if (
+                bucket.equity_value_cny_mn is None
+                or bucket.per_share_value_cny is None
+            ):
+                continue
+            implied_per_share = (
+                bucket.equity_value_cny_mn / closure.diluted_share_count_mn
+            )
+            if abs(implied_per_share - bucket.per_share_value_cny) > max(
+                abs(implied_per_share) * 0.03, 0.2
+            ):
+                closure.status = "partial"
+                closure.missing_inputs.append(
+                    f"{bucket.bucket} equity-value/per-share conversion does not reconcile"
+                )
+                packet.research_readiness = "partial"
+                packet.readiness_reasons.append(
+                    f"Valuation per-share conversion fails for bucket: {bucket.bucket}."
+                )
+    overlap_keys = [
+        row.overlap_key.strip().lower()
+        for row in packet.valuation_buckets
+        if row.inclusion != "excluded" and row.overlap_key.strip()
+    ]
+    duplicate_overlap_keys = sorted(
+        {key for key in overlap_keys if overlap_keys.count(key) > 1}
+    )
+    if duplicate_overlap_keys:
+        closure.status = "partial"
+        closure.missing_inputs.append(
+            "resolve duplicate valuation overlap keys: "
+            + ", ".join(duplicate_overlap_keys)
+        )
+        packet.research_readiness = "partial"
+        packet.readiness_reasons.append(
+            "Valuation buckets contain potential double counting."
+        )
+    if closure.status != "closed" or closure.fair_value_per_share_cny is None:
+        packet.research_readiness = "partial"
+        packet.readiness_reasons.append(
+            "Valuation has not closed from mutually exclusive buckets to per-share fair value."
+        )
+
+    profile_family = {
+        "bank": "financial_spread_credit",
+        "insurance": "insurance_value",
+        "reit": "reit_occupancy_rent",
+    }
+    if packet.company_model.operating_model_family == "other":
+        inferred_family = profile_family.get(packet.company_model.model_profile)
+        if inferred_family:
+            packet.company_model.operating_model_family = inferred_family
+            packet.preprocessing_notes.append(
+                f"operating model family inferred from profile: {inferred_family}"
+            )
+        elif packet.company_model.model_profile == "corporate":
+            packet.research_readiness = "partial"
+            packet.readiness_reasons.append(
+                "Industry-native operating model family was not selected."
+            )
+    represented_drivers, missing_drivers = _operating_model_driver_coverage(packet)
+    if missing_drivers:
+        packet.research_readiness = "partial"
+        packet.readiness_reasons.append(
+            f"{packet.company_model.operating_model_family} driver chain is incomplete; "
+            "missing: " + ", ".join(missing_drivers)
+        )
+    if represented_drivers:
+        packet.preprocessing_notes.append(
+            f"operating model driver coverage ({packet.company_model.operating_model_family}): "
+            + ", ".join(represented_drivers)
+        )
     if not packet.company_model.revenue_equation or not packet.company_model.profit_equation:
         packet.research_readiness = "blocked"
         packet.readiness_reasons.append("Company revenue/profit operating equations are missing.")
+    packet.readiness_reasons = [
+        reason
+        for reason in packet.readiness_reasons
+        if not reason.startswith("Three-year values remain missing for consolidated line(s):")
+    ]
+    final_incomplete_rows = [
+        row.metric
+        for row in packet.forecast_lines
+        if row.segment.lower() in {"consolidated", "group", "鍚堝苟", "鍏徃鏁翠綋"}
+        and _canonical_metric_name(row.metric) in required_metrics
+        and any(
+            value is None
+            for value in (row.year_1_value, row.year_2_value, row.year_3_value)
+        )
+    ]
+    if final_incomplete_rows:
+        if packet.research_readiness != "blocked":
+            packet.research_readiness = "partial"
+        packet.readiness_reasons.append(
+            "Three-year values remain missing for consolidated line(s): "
+            + ", ".join(final_incomplete_rows[:8])
+        )
     packet.readiness_reasons = list(dict.fromkeys(packet.readiness_reasons))
+    if any(
+        reason.startswith(
+            (
+                "Company revenue/profit operating equations are missing.",
+                "Reported total_share and market-cap/close share counts conflict",
+            )
+        )
+        for reason in packet.readiness_reasons
+    ):
+        packet.research_readiness = "blocked"
+    packet.schema_version = 2
     return packet
 
 
@@ -814,7 +1806,7 @@ def build_company_underwriting_packet(
         )
         packet.symbol = symbol
         packet.as_of_date = str(as_of_date)
-        return _validate_packet(packet, structured_research).model_dump()
+        return _validate_packet(packet, structured_research, contexts).model_dump()
     except Exception as exc:
         return _fallback_packet(
             symbol,
@@ -832,6 +1824,8 @@ def compact_underwriting_packet(packet: Mapping[str, Any] | None) -> dict[str, A
     def clip(value: Any, limit: int = 520) -> Any:
         if isinstance(value, str):
             return value if len(value) <= limit else value[: limit - 3] + "..."
+        if isinstance(value, Mapping):
+            return {key: clip(item, limit) for key, item in value.items()}
         if isinstance(value, list):
             return [clip(item, 300) for item in value[:8]]
         return value
@@ -882,6 +1876,25 @@ def compact_underwriting_packet(packet: Mapping[str, Any] | None) -> dict[str, A
         {key: clip(row.get(key)) for key in question_keys if key in row}
         for row in list(packet.get("underwriting_questions", []))[:8]
     ]
+    unit_keys = (
+        "unit_id",
+        "unit_name",
+        "unit_type",
+        "disclosure_basis",
+        "parent_unit",
+        "economic_role",
+        "revenue_driver_equation",
+        "profit_driver_equation",
+        "cash_and_capital_equation",
+        "reported_metrics",
+        "evidence_ids",
+        "missing_inputs",
+        "next_verification",
+    )
+    business_units = [
+        {key: clip(row.get(key)) for key in unit_keys if key in row}
+        for row in list(packet.get("business_unit_map", []))[:16]
+    ]
     return {
         "schema_version": packet.get("schema_version"),
         "symbol": packet.get("symbol"),
@@ -890,10 +1903,27 @@ def compact_underwriting_packet(packet: Mapping[str, Any] | None) -> dict[str, A
         "research_readiness": packet.get("research_readiness"),
         "readiness_reasons": clip(packet.get("readiness_reasons", [])),
         "company_model": company,
+        "business_unit_map": business_units,
         "segment_models": segments,
         "underwriting_questions": questions,
-        "forecast_lines": list(packet.get("forecast_lines", []))[:36],
-        "scenarios": list(packet.get("scenarios", []))[:3],
-        "evidence_change_rules": list(packet.get("evidence_change_rules", []))[:16],
+        "forecast_lines": [
+            clip(row) for row in list(packet.get("forecast_lines", []))[:36]
+        ],
+        "scenarios": [clip(row) for row in list(packet.get("scenarios", []))[:3]],
+        "thesis_financial_bridges": [
+            clip(row)
+            for row in list(packet.get("thesis_financial_bridges", []))[:8]
+        ],
+        "moat_evidence_tests": [
+            clip(row) for row in list(packet.get("moat_evidence_tests", []))[:10]
+        ],
+        "valuation_buckets": [
+            clip(row) for row in list(packet.get("valuation_buckets", []))[:12]
+        ],
+        "valuation_closure": clip(dict(packet.get("valuation_closure", {}))),
+        "handoff_manifest": clip(dict(packet.get("handoff_manifest", {}))),
+        "evidence_change_rules": [
+            clip(row) for row in list(packet.get("evidence_change_rules", []))[:16]
+        ],
         "reconciliation_checks": clip(packet.get("reconciliation_checks", [])),
     }

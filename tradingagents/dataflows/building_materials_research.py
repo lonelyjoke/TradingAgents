@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+import re
 
 import pandas as pd
 
@@ -149,6 +150,29 @@ def _contains_terms(terms: tuple[str, ...], *parts: object) -> bool:
     return any(term in text for term in terms)
 
 
+def _term_hit_count(terms: tuple[str, ...], text: str) -> int:
+    lowered = text.lower()
+    return sum(1 for term in terms if term.lower() in lowered)
+
+
+def _filing_has_building_material_business(text: str) -> bool:
+    """Require product-to-business economics, not downstream-use mentions."""
+    if any(
+        phrase in text
+        for phrase in ("并非建材", "不属于建材", "非建材业务", "not a building-material")
+    ):
+        return False
+    identity_prefix = r"(?:主营业务(?:为|包括|涵盖)|主要产品(?:为|包括)|核心产品(?:为|包括)|分产品)"
+    economic_suffix = r"(?:营业收入|销售收入|产销量|销量|产能|生产销售|毛利率)"
+    product_pattern = "(?:" + "|".join(
+        re.escape(term) for term in BUILDING_MATERIAL_PRODUCT_TERMS
+    ) + ")"
+    return bool(
+        re.search(identity_prefix + r".{0,80}" + product_pattern, text, re.I)
+        or re.search(product_pattern + r".{0,35}" + economic_suffix, text, re.I)
+    )
+
+
 def _detect_subsectors(*parts: object) -> tuple[str, ...]:
     text = " ".join(str(part or "") for part in parts)
     matches = [
@@ -174,8 +198,13 @@ def _company_profile(
 
     if symbol in BUILDING_MATERIAL_SYMBOLS:
         reason = "curated A-share building-materials ticker list"
-    elif _contains_terms(BUILDING_MATERIAL_PRODUCT_TERMS, company_name, industry, text_probe):
-        reason = "company name / Tushare industry / filing text contains building-material terms"
+    elif _contains_terms(BUILDING_MATERIAL_PRODUCT_TERMS, company_name, industry):
+        reason = "company name or Tushare industry identifies a building-material business"
+    elif (
+        _term_hit_count(BUILDING_MATERIAL_PRODUCT_TERMS, text_probe) >= 2
+        and _filing_has_building_material_business(text_probe)
+    ):
+        reason = "filing text contains repeated building-material products plus revenue/business evidence"
     else:
         return None
 

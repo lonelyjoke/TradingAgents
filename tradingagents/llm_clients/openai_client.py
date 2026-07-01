@@ -97,11 +97,14 @@ class DeepSeekChatOpenAI(NormalizedChatOpenAI):
         return chat_result
 
     def with_structured_output(self, schema, *, method=None, **kwargs):
-        if self.model_name == "deepseek-reasoner":
+        model_lower = str(self.model_name or "").lower()
+        if any(
+            token in model_lower
+            for token in ("reasoner", "thinking", "v4-pro")
+        ):
             raise NotImplementedError(
-                "deepseek-reasoner does not support tool_choice; structured "
-                "output is unavailable. Agent factories fall back to "
-                "free-text generation automatically."
+                f"{self.model_name} thinking mode does not support tool_choice; "
+                "agent factories must use schema-prompt JSON validation."
             )
         return super().with_structured_output(schema, method=method, **kwargs)
 

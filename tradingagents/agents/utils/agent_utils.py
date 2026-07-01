@@ -705,6 +705,35 @@ def get_buy_side_underwriting_modules_instruction() -> str:
     )
 
 
+def get_company_depth_contract_instruction() -> str:
+    """Return the universal six-part company-depth contract used across agents."""
+    return (
+        " Universal company-depth contract: this applies to every A-share company, but "
+        "the metrics must follow its model profile. (1) Company disaggregation: do not "
+        "treat accounting segment labels as sufficient. Map the economic units that drive "
+        "results across product, channel, geography, customer, project/asset or financial "
+        "business. Preserve reported units and mark analytical/missing allocations. "
+        "(2) Autonomous model: build three explicit forward years from company operating "
+        "drivers and reconcile material units to group earnings, cash/capital and per-share "
+        "lines. Consensus may be a cross-check, never the model itself. Use bank, insurance, "
+        "securities and REIT-native lines instead of forcing corporate revenue/FCF metrics. "
+        "(3) Thesis-to-financial bridge: each decisive claim needs a formula and bull/base/"
+        "bear assumptions plus revenue, profit, EPS, FCF/capital and valuation effects; keep "
+        "unsupported impacts missing. (4) Moat evidence: test every claimed advantage with "
+        "observable history or true-peer outcomes and counterevidence, then show transmission "
+        "to share, price, margin, turnover, cash conversion or ROIC. Management narrative "
+        "alone is unproven. A moat may be labelled proven or partial only when the same row "
+        "cites a valid EV/KPE/KF evidence id; otherwise keep it unproven. (5) Valuation closure: use mutually exclusive core, scenario, "
+        "optionality and excluded buckets; reconcile method, metric, multiple, ownership, "
+        "haircut, share count, scenario probability, per-share value, current-price return, "
+        "rating consistency and double counting. (6) Lossless handoff: preserve the canonical "
+        "business units, all three years, bridges and value buckets across Fundamental Analyst, "
+        "Bull/Bear, Research Manager and PM. Any revision needs old value, new value, evidence "
+        "id and recalculated financial/value impact. A polished paragraph does not satisfy a "
+        "missing model field."
+    )
+
+
 def get_focused_report_instruction() -> str:
     """Return rules for keeping reports concise and decision-relevant."""
     return (
