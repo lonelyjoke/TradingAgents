@@ -571,6 +571,11 @@ def _auto_sync_enabled() -> bool:
     return bool(get_config().get("knowledge_planet_auto_sync_enabled", True))
 
 
+def _text_only_enabled() -> bool:
+    """Whether Knowledge Planet is restricted to topic text and metadata."""
+    return bool(get_config().get("knowledge_planet_text_only", True))
+
+
 def _sync_state_dir() -> Path:
     return _db_path().parent / ".sync_state"
 
@@ -635,7 +640,13 @@ def _import_knowledge_planet_local_index() -> str:
     import_script = _REPO_ROOT / "scripts" / "import_knowledge_planet.py"
     if not import_script.exists():
         return "local_import_failed:missing_script"
-    args = [str(import_script), "--backfill-report-text"]
+    # In text-only mode the importer must not scan the PDF inbox or backfill
+    # historical report text.  The stream importer remains content-hash
+    # idempotent, so a re-fetched daily window is safe to import immediately.
+    args = [str(import_script), "--stream"] if _text_only_enabled() else [
+        str(import_script),
+        "--backfill-report-text",
+    ]
     if _db_path() != DEFAULT_KP_DB:
         args.extend(["--db", str(_db_path())])
     try:
@@ -718,6 +729,10 @@ def _sync_knowledge_planet_range(
         "--max-file-downloads",
         str(max(0, max_files)),
     ]
+    if _text_only_enabled():
+        sync_args.extend(
+            ["--no-download-images", "--no-ocr-images", "--no-download-files"]
+        )
     try:
         sync_code, sync_output = _run_project_script(sync_args, timeout=1800)
     except Exception as exc:
@@ -894,12 +909,26 @@ def ensure_knowledge_planet_upstream_synced_for_window(
             else:
                 refresh_dates.append(sync_date)
         if refresh_dates:
+            # ``knowledge_planet_context_sync_max_pages`` is a per-day budget.
+            # A missing multi-day gap needs a proportionally larger scan to
+            # reach the oldest unsynced date; already stamped dates are not
+            # included in ``refresh_dates``.
+            effective_max_pages = max_pages
+            if max_pages is not None:
+                configured_cap = int(
+                    get_config().get("knowledge_planet_auto_sync_max_pages", 600)
+                    or 600
+                )
+                effective_max_pages = min(
+                    configured_cap,
+                    max(1, int(max_pages)) * len(refresh_dates),
+                )
             batch_status = _sync_knowledge_planet_range(
                 min(refresh_dates),
                 max(refresh_dates),
                 refresh_dates,
                 progress=progress,
-                max_pages=max_pages,
+                max_pages=effective_max_pages,
                 max_image_downloads=max_image_downloads,
                 max_file_downloads=max_file_downloads,
             )
@@ -5508,14 +5537,17 @@ def preprocess_knowledge_planet_window(
             end_date,
         ),
     ).fetchone()
+    text_only = _text_only_enabled()
     source_fingerprint = hashlib.sha1(
         "|".join(
             "" if source_state[key] is None else str(source_state[key])
             for key in source_state.keys()
+            if not text_only or not str(key).startswith("report_")
         ).encode("utf-8")
     ).hexdigest()[:12]
     run_key = (
-        f"{start_date}:{end_date}:v{PREPROCESS_SCHEMA_VERSION}:{source_fingerprint}"
+        f"{start_date}:{end_date}:v{PREPROCESS_SCHEMA_VERSION}:"
+        f"{'text' if text_only else 'full'}:{source_fingerprint}"
     )
 
     if bool(get_config().get("knowledge_planet_preprocess_cache_enabled", True)):
@@ -5540,7 +5572,7 @@ def preprocess_knowledge_planet_window(
                 ).fetchone()["n"]
                 or 0
             )
-            report_count = int(
+            report_count = 0 if text_only else int(
                 conn.execute(
                     """
                     SELECT COUNT(*) AS n
@@ -5593,7 +5625,7 @@ def preprocess_knowledge_planet_window(
         """,
         (start_date, end_date),
     ).fetchall()
-    report_rows = conn.execute(
+    report_rows = [] if text_only else conn.execute(
         """
         SELECT *
         FROM kp_reports
@@ -6239,44 +6271,48 @@ def _preprocess_snapshot(
         ).fetchall()
     except sqlite3.OperationalError:
         snapshot["opportunities"] = []
-    try:
-        snapshot["assumptions"] = conn.execute(
-            f"""
-            SELECT *
-            FROM kp_report_assumptions
-            WHERE substr(COALESCE(NULLIF(published_at, ''), ?), 1, 10) >= ?
-              AND substr(COALESCE(NULLIF(published_at, ''), ?), 1, 10) <= ?
-              {assumption_filter}
-            ORDER BY published_at DESC, report_id DESC
-            LIMIT {int(limit)}
-            """,
-            [window_end, start_date, window_end, window_end, *assumption_params],
-        ).fetchall()
-    except sqlite3.OperationalError:
+    if _text_only_enabled():
         snapshot["assumptions"] = []
-    try:
-        snapshot["structures"] = conn.execute(
-            f"""
-            SELECT *
-            FROM kp_report_structures
-            WHERE substr(COALESCE(NULLIF(published_at, ''), ?), 1, 10) >= ?
-              AND substr(COALESCE(NULLIF(published_at, ''), ?), 1, 10) <= ?
-              {structure_filter}
-            ORDER BY published_at DESC, report_id DESC,
-                     CASE category
-                       WHEN 'model_conflict_check' THEN 0
-                       WHEN 'earnings_forecast' THEN 1
-                       WHEN 'valuation_method' THEN 2
-                       WHEN 'rating_target_change' THEN 3
-                       WHEN 'core_assumption' THEN 4
-                       ELSE 5
-                     END
-            LIMIT {int(limit)}
-            """,
-            [window_end, start_date, window_end, window_end, *structure_params],
-        ).fetchall()
-    except sqlite3.OperationalError:
         snapshot["structures"] = []
+    else:
+        try:
+            snapshot["assumptions"] = conn.execute(
+                f"""
+                SELECT *
+                FROM kp_report_assumptions
+                WHERE substr(COALESCE(NULLIF(published_at, ''), ?), 1, 10) >= ?
+                  AND substr(COALESCE(NULLIF(published_at, ''), ?), 1, 10) <= ?
+                  {assumption_filter}
+                ORDER BY published_at DESC, report_id DESC
+                LIMIT {int(limit)}
+                """,
+                [window_end, start_date, window_end, window_end, *assumption_params],
+            ).fetchall()
+        except sqlite3.OperationalError:
+            snapshot["assumptions"] = []
+        try:
+            snapshot["structures"] = conn.execute(
+                f"""
+                SELECT *
+                FROM kp_report_structures
+                WHERE substr(COALESCE(NULLIF(published_at, ''), ?), 1, 10) >= ?
+                  AND substr(COALESCE(NULLIF(published_at, ''), ?), 1, 10) <= ?
+                  {structure_filter}
+                ORDER BY published_at DESC, report_id DESC,
+                         CASE category
+                           WHEN 'model_conflict_check' THEN 0
+                           WHEN 'earnings_forecast' THEN 1
+                           WHEN 'valuation_method' THEN 2
+                           WHEN 'rating_target_change' THEN 3
+                           WHEN 'core_assumption' THEN 4
+                           ELSE 5
+                         END
+                LIMIT {int(limit)}
+                """,
+                [window_end, start_date, window_end, window_end, *structure_params],
+            ).fetchall()
+        except sqlite3.OperationalError:
+            snapshot["structures"] = []
     try:
         snapshot["quality"] = conn.execute(
             """
@@ -6523,12 +6559,23 @@ def _stock_fusion_pack_lines(
         or "情绪" in str(row["increment_level"] or "")
     ]
 
+    raw_match_summary = f"- Raw matches: stream={len(items)}"
+    if not _text_only_enabled():
+        raw_match_summary += (
+            f", pdf={len(reports)}; preprocessed matches: events={len(events)}, "
+            f"opportunities={len(opportunities)}, pdf_assumptions={len(assumptions)}"
+        )
+    else:
+        raw_match_summary += (
+            f"; preprocessed matches: events={len(events)}, "
+            f"opportunities={len(opportunities)}"
+        )
     lines = [
         "## Single-Stock Knowledge Fusion Pack",
         f"- Fusion target: {ticker}",
         f"- Direct terms: {', '.join(primary_terms) if primary_terms else '(none)'}",
         f"- Sector/KPI terms used for recall: {', '.join(expanded_terms[:18]) if expanded_terms else '(none)'}",
-        f"- Raw matches: stream={len(items)}, pdf={len(reports)}; preprocessed matches: events={len(events)}, opportunities={len(opportunities)}, pdf_assumptions={len(assumptions)}",
+        raw_match_summary,
     ]
     if quality:
         lines.append(
@@ -6588,7 +6635,7 @@ def _stock_fusion_pack_lines(
                 f"{_md_cell(_compact_text(_row_get(row, 'objective_anchor', row['verification']), 120))} |"
             )
     else:
-        lines.append("- No high-information preprocessed clue matched this stock/window. Treat Knowledge Planet as weak background unless raw stream/PDF matches below are company-specific.")
+        lines.append("- No high-information preprocessed clue matched this stock/window. Treat Knowledge Planet as weak background unless a raw text item is company-specific.")
 
     lines.extend(["", "### Sell-Side / Narrative Claims To Challenge"])
     if promotional_events:
@@ -6601,35 +6648,32 @@ def _stock_fusion_pack_lines(
     else:
         lines.append("- No obvious promotional preprocessed claim matched this stock/window.")
 
-    lines.extend(["", "### PDF / Research-Assumption Cross-Checks"])
-    if assumptions:
-        lines.extend(["| date | assumption type | research assumption | required cross-check |", "| --- | --- | --- | --- |"])
-        for row in assumptions[:5]:
-            lines.append(
-                f"| {str(row['published_at'])[:10]} | {_md_cell(row['assumption_type'])} | "
-                f"{_md_cell(_compact_text(row['key_assumption'], 150))} | "
-                "map to filings, Tushare financials/valuation, sector KPI, and price/volume confirmation |"
-            )
-    else:
-        lines.append("- No matched PDF assumption was found; do not infer sell-side research support from unrelated report lists.")
+    if not _text_only_enabled():
+        lines.extend(["", "### PDF / Research-Assumption Cross-Checks"])
+        if assumptions:
+            lines.extend(["| date | assumption type | research assumption | required cross-check |", "| --- | --- | --- | --- |"])
+            for row in assumptions[:5]:
+                lines.append(
+                    f"| {str(row['published_at'])[:10]} | {_md_cell(row['assumption_type'])} | "
+                    f"{_md_cell(_compact_text(row['key_assumption'], 150))} | "
+                    "map to filings, Tushare financials/valuation, sector KPI, and price/volume confirmation |"
+                )
 
-    lines.extend(["", "### PDF Report Structured Thesis Map"])
-    if structures:
-        lines.extend(
-            [
-                "| date | category | status | extracted value | model conflict / use check |",
-                "| --- | --- | --- | --- | --- |",
-            ]
-        )
-        for row in structures[:10]:
-            lines.append(
-                f"| {str(row['published_at'])[:10]} | {_md_cell(row['category'])} | "
-                f"{_md_cell(row['status'])} | "
-                f"{_md_cell(_compact_text(row['extracted_value'], 150))} | "
-                f"{_md_cell(_compact_text(row['model_check'], 130))} |"
+        lines.extend(["", "### PDF Report Structured Thesis Map"])
+        if structures:
+            lines.extend(
+                [
+                    "| date | category | status | extracted value | model conflict / use check |",
+                    "| --- | --- | --- | --- | --- |",
+                ]
             )
-    else:
-        lines.append("- No structured PDF thesis map was extracted. Treat matched PDFs as weak title/metadata clues until text extraction improves.")
+            for row in structures[:10]:
+                lines.append(
+                    f"| {str(row['published_at'])[:10]} | {_md_cell(row['category'])} | "
+                    f"{_md_cell(row['status'])} | "
+                    f"{_md_cell(_compact_text(row['extracted_value'], 150))} | "
+                    f"{_md_cell(_compact_text(row['model_check'], 130))} |"
+                )
 
     lines.extend(
         [
@@ -6637,7 +6681,6 @@ def _stock_fusion_pack_lines(
             "### Fusion Instructions For Agents",
             "- Use Knowledge Planet as an alternative-intelligence prior, then reconcile it with filings, Tushare financials, peer data, price/volume behavior, and official announcements.",
             "- Treat industry weekly data, channel checks, broker survey data, and company research feedback as thesis-grade private/proxy evidence when source type and content quality are high. These clues may change the bull/base/bear probabilities, but they must be mapped into KPI, forecast, valuation, catalyst, and falsification fields.",
-            "- Use `PDF Report Structured Thesis Map` as a sell-side hypothesis ledger: compare earnings forecasts, valuation methods, target/rating changes, and key chart numbers with the TradingAgents model before changing the PM conclusion.",
             "- Promote a clue into the main thesis only when it has a clear path: information -> business driver -> earnings/cash-flow or valuation assumption -> catalyst clock -> falsification signal.",
             "- For every high-information clue, downstream agents must assign one decision role: probability adjustment, valuation input, catalyst/verification item, sizing/timing adjustment, or rejected/noisy clue. Do not leave company-specific or industry-KPI-like clues as generic background.",
             "- If a clue is not used, state the exact rejection reason: stale, promotional, not company-specific / not ticker-specific, contradicted by filings/Tushare/price-volume data, already priced, or missing a product-to-profit bridge.",
@@ -6683,7 +6726,9 @@ def get_knowledge_planet_context(
         max_file_downloads=int(
             config.get("knowledge_planet_context_sync_max_file_downloads", 0) or 0
         ),
-        import_local=False,
+        # The report that triggered the sync must be able to use the newly
+        # fetched topics.  Stream import is idempotent and text-only by default.
+        import_local=True,
     )
     preprocess_status = "disabled"
     if bool(config.get("knowledge_planet_preprocess_enabled", True)):
@@ -6733,7 +6778,7 @@ def get_knowledge_planet_context(
         end_date=end_date,
         limit=item_limit,
     )
-    reports = _query_reports(
+    reports = [] if _text_only_enabled() else _query_reports(
         conn,
         terms=terms,
         primary_terms=primary_terms,
@@ -6758,16 +6803,18 @@ def get_knowledge_planet_context(
         f"- Upstream sync: {sync_status}",
         f"- Preprocess: {preprocess_status}",
         f"- Matched stream items: {len(items)}",
-        f"- Matched PDF reports: {len(reports)}",
+        f"- Knowledge Planet mode: {'text_only' if _text_only_enabled() else 'full'}",
         "- Evidence discipline: this is supplemental alternative/local research intelligence. Use it to enrich the objective TradingAgents chain, not to replace filings, announcements, financial statements, price/volume evidence, or reputable news. Industry weekly data, channel checks, broker survey data, and company research feedback are thesis-grade private/proxy evidence when content quality is high; they can change scenario probabilities after being mapped into KPI, forecast, valuation, catalyst, and falsification fields. Sell-side pushes and target-market-cap claims require story-to-profit validation and objective cross-checks.",
         "",
     ]
+    if not _text_only_enabled():
+        lines.insert(-2, f"- Matched PDF reports: {len(reports)}")
 
     if not items and not reports and not preprocessed_snapshot.get("events") and not preprocessed_snapshot.get("opportunities"):
         lines.extend(
             [
                 "## Status",
-                "No relevant Knowledge Planet stream items or PDF reports were found for this window.",
+                "No relevant Knowledge Planet text items were found for this window.",
             ]
         )
         return "\n".join(lines)
@@ -7078,7 +7125,9 @@ def build_knowledge_planet_daily_report(
         )
 
     items = _items_for_window(conn, report_date, look_back_days)
-    reports = _reports_for_window(conn, report_date, look_back_days)
+    reports = [] if _text_only_enabled() else _reports_for_window(
+        conn, report_date, look_back_days
+    )
     preprocessed_snapshot = _preprocess_snapshot(
         conn,
         report_date,
@@ -7673,14 +7722,12 @@ def build_knowledge_planet_daily_report(
     else:
         lines.append("- 关键词规则未识别到高吹票风险条目。")
 
-    lines.extend(["", "## PDF 研报研究视角"])
-    if reports:
+    if not _text_only_enabled():
+        lines.extend(["", "## PDF 研报研究视角"])
         for report in reports[:8]:
             lines.append(
                 f"- **{_compact_text(report.title, 120)}**（{report.broker or 'unknown'}，{report.published_at[:10]}）：用于提取业务/KPI框架、预测假设、可比公司和潜在乐观偏差。"
             )
-    else:
-        lines.append("- 本窗口未导入 PDF 研报。")
 
     lines.extend(
         [

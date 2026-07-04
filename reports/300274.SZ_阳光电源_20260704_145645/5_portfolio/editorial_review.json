@@ -1,0 +1,75 @@
+{
+  "review": {
+    "revision_required": true,
+    "company_understanding_score": 4,
+    "independent_model_score": 2,
+    "evidence_and_counterevidence_score": 4,
+    "valuation_closure_score": 4,
+    "readability_and_synthesis_score": 3,
+    "strongest_aspects": [
+      "将合同负债+预付款的组合明确为“核心赌注”，并围绕其构建了可证伪的论点",
+      "对Q1现金转换恶化（OCF/NI 0.53）的捕捉与强调贯穿始终，避免了对订单面的过度乐观",
+      "估值闭合结构清晰，互斥桶与概率加权公允价值的计算过程基本正确"
+    ],
+    "findings": [
+      {
+        "section": "thesis_moat_financial_bridge",
+        "priority": "must_revise",
+        "issue": "论点1的财务传导中对比了2026E FCF 62.5亿与‘2025年169亿’，但2025年FCF应为约139亿（OCF 169亿减capex 30亿），误将OCF当作FCF，造成对比失真，削弱了现金恶化论点的精确性。",
+        "evidence_or_logic_gap": "自主预测模型中2025A FCF列为~13918 mn（139亿），但传输桥段写成169亿。",
+        "revision_instruction": "将‘vs 2025年169亿’改为‘vs 2025年约139亿’，并同步核对其他引用该对比之处（如核心论点部分）。"
+      },
+      {
+        "section": "three_year_forecast",
+        "priority": "must_revise",
+        "issue": "forecast_assumptions中的敏感性计算存在严重数量级错误：营收1%变动对应的收入变化被写为‘~9 bn revenue’（应为~9亿，即~0.9 bn），净利润影响‘~1.1 bn’（应为~1.1亿）；毛利率1pp变动对应的毛利变化‘~9.5 bn gross profit’（应为~9.5亿，即~0.95 bn），净利润‘~6.7 bn’（应为~6.7亿）。这些错误将严重影响读者对杠杆的直观判断。",
+        "evidence_or_logic_gap": "基础收入94535 mn，1%为945 mn≈0.95 bn；1pp毛利率变动对毛利影响为945 mn≈0.95 bn。当前文本误用‘bn’或‘亿’且数值大幅膨胀。",
+        "revision_instruction": "全面修正forecast_assumptions和任何重复处的敏感性单位与数值，确保与基础数据一致：营收1%→收入变动~9.5亿 (≈0.95 bn)，净利润变动~1.2亿；毛利率1pp→毛利变动~9.5亿，净利润变动~6.7亿。并据此重新检查自动预测模型中的利润杠杆是否异常。"
+      },
+      {
+        "section": "three_year_forecast",
+        "priority": "should_revise",
+        "issue": "三年预测表中2025A的EPS标记为6.49元，但缺乏推导过程（2025年归母净利润13461 mn，股本2073.2 mn，EPS应为6.49元，符合），建议在表格脚注中直接给出计算公式增强可信度。",
+        "evidence_or_logic_gap": "当前仅注明‘*FY2025 EPS based on same share base 2073.2 mn’，未显式计算。",
+        "revision_instruction": "增加一行‘=13461/2073.2≈6.49’或等效表述，保证透明性。"
+      },
+      {
+        "section": "accounting_and_capital_allocation",
+        "priority": "should_revise",
+        "issue": "会计与资本分配部分提到‘信用减值损失同比+361%’和‘附有回购义务的投资款8.8亿’，但对这些项目的性质、持续性与经营现金流压力之间的关联未展开，读起来像孤立的负面标记。",
+        "evidence_or_logic_gap": "缺乏从‘信用减值损失大增’到‘应收质量下降-现金回收风险’的传导分析。",
+        "revision_instruction": "补一段简短的链式逻辑：信用减值损失↑→应收款回收周期拉长/坏账风险↑→营运资金占用↑→OCF压力↑，并说明8.8亿回购义务款是否在现金流量表中反映或可能成为表外负担，从而强化‘现金转换恶化’的主题。"
+      },
+      {
+        "section": "valuation_and_expectation_gap",
+        "priority": "optional",
+        "issue": "使用19x的基础PE时解释为‘较历史平均21.5x折让10%’，但未提供21.5x的来源或计算窗口，也未讨论该折让是否足以覆盖现金流恶化和政策风险。",
+        "evidence_or_logic_gap": "缺乏历史PE均值的具体数据或可信来源。",
+        "revision_instruction": "简要注明历史PE均值的计算区间（如3年/5年），并定性说明为何10%折让（而非更大）仍合理，从而让估值闭合更加稳固。"
+      },
+      {
+        "section": "cross_section_consistency",
+        "priority": "should_revise",
+        "issue": "核心论点1的falsification_gate设定为‘2026H1收入<450亿（隐含同比<5%）’，但report其他部分多次使用‘H1收入≥500亿’作为升级信号。两者缺乏桥接——450亿到500亿之间存在一个未判定的灰色地带，会使投资操作模糊。",
+        "evidence_or_logic_gap": "falsification_gate = <450亿；升级触发 = ≥500亿。中间情况（450-500亿）未定义行动，可能导致报告使用者困惑。",
+        "revision_instruction": "统一阈值，或明确区间内为‘维持观察’，并说明阈值差异的原因（如：证伪需更严，升级需更强信号）。"
+      }
+    ],
+    "overall_editorial_verdict": "备忘录的框架、核心赌注和估值闭合设计扎实，对现金转换风险的高度警惕是主要优势。然而，模型中出现了基本数量级错误（敏感度数据），可能导致读者误解盈利杠杆；此外，FCF对比错误削弱了一个关键论点的精确性。修正这些数字后，报告将具备足够的分析深度和可操作性，可支撑Hold/积极观察的评级。"
+  },
+  "review_status": {
+    "mode": "schema_prompt_structured",
+    "agent": "Sell-Side Research Editor",
+    "structured_error": ""
+  },
+  "revision_requested": true,
+  "revision_applied": true,
+  "revision_status": {
+    "mode": "schema_prompt_structured",
+    "agent": "Portfolio Manager Editorial Revision",
+    "structured_error": ""
+  },
+  "initial_handoff_issues": [],
+  "initial_analytical_issues": [],
+  "remaining_handoff_issues": []
+}

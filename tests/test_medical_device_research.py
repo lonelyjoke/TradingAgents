@@ -116,7 +116,8 @@ def test_medical_device_context_marks_thin_gates(monkeypatch):
 
     rendered = get_medical_device_context("300760.SZ", "2026-06-04")
 
-    assert "Evidence-Limited" in rendered
+    assert "## Depth Gate Verdict" in rendered
+    assert "neutral non-evidence" in rendered
     assert "missing" in rendered
 
 

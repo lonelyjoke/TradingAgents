@@ -124,10 +124,10 @@ trade instructions are suppressed from `decision.md` and `complete_report.md`.
 `5_portfolio/generation_status.json` records whether the PM response was native
 structured output, schema-repaired fallback, or unvalidated free text.
 
-The public `complete_report.md` contains the schema-valid company deep-dive and
-an artifact coverage table. Raw analyst/debate/risk transcripts are preserved
-separately in `research_archive.md` and the numbered subdirectories so modules
-remain auditable without turning the public memo into a concatenated transcript.
+The public `complete_report.md` contains only the schema-valid company deep-dive.
+Raw analyst/debate/risk records remain in the numbered internal subdirectories so
+modules stay auditable without generating a second reader-facing report or turning
+the public memo into a concatenated transcript.
 
 ## 6. Universal company-depth contract (schema v2)
 
@@ -184,11 +184,11 @@ Research Manager and PM free-text fallbacks are saved for diagnosis but block
 formal publication because the model handoff is not schema-valid.
 
 The public PM memo uses eight stable reader-facing sections, but length follows company
-complexity and analytical closure rather than a character quota. Duplicate PM summaries,
-debate retellings, repeated
-model/valuation sections, information-use audits, and generation self-checks move to
-`5_portfolio/research_appendix.md`; they remain auditable without making the
-decision memo read like an agent transcript.
+complexity and analytical closure rather than a character quota. It is the only
+reader-facing report: every decision-relevant fact, assumption, sensitivity,
+counterargument and model-change implication must be synthesized there. Duplicate
+summaries, raw debate retellings, generation self-checks and machine bookkeeping remain
+internal JSON/audit/archive artifacts instead of becoming a second PM report.
 
 ## 8. Share-count, handoff, and fixed-PM controls
 
@@ -213,6 +213,15 @@ and explicit accepted change rows. Saved artifacts are
 packet -> Research Manager -> PM values and units. A changed or dropped line
 without a matching accepted change row blocks publication.
 
+The Research Manager now runs this underwriting-to-manager comparison immediately
+after its first structured response. If a populated line was dropped or changed
+without an accepted change row, the selected deep model receives one compact,
+machine-actionable repair pass before Trader and PM execution. The repair must either
+restore the packet value or document the debated replacement and its financial impact;
+it cannot waive the inconsistency. Metric comparison lowercases before normalization
+and treats spaces versus underscores as equivalent unit formatting, preventing false
+handoff blockers such as `Revenue` -> `evenue` or `CNY mn` vs `CNY_mn`.
+
 DeepSeek thinking models that reject `tool_choice` use one schema-prompt JSON
 call followed by Pydantic validation. This is recorded as
 `schema_prompt_structured`, not an unvalidated free-text fallback.
@@ -227,3 +236,21 @@ deep model performs a senior sell-side editorial review and, when warranted, one
 revision. The review trace is saved as `5_portfolio/editorial_review.json`. Review failure
 keeps the first draft and does not stop the pipeline; only unrecoverable numeric, unit,
 period, structured-output, or canonical-handoff contradictions can block publication.
+
+## 9. Reader-facing forecast and thesis spine
+
+Research Manager and PM structured outputs carry four analytical objects across every
+A-share industry: `research_questions`, `forecast_takeaways`,
+`forecast_assumptions`, and `core_theses`. Forecast assumptions record a historical
+anchor, evidence status, bull/base/bear range, sensitivity, confidence, and verification
+gate. Missing shipment, ASP, utilization, renewal, NIM, credit-cost, commodity-spread,
+or other industry-native evidence forces an explicitly top-down or bounded assumption;
+it cannot be reverse-engineered and presented as verified bottom-up precision.
+
+The public fourth section renders forecast take-aways, a reader-oriented financial table,
+the assumption/sensitivity registry, and model limitations. The raw canonical snapshot
+is audit metadata and lives in Appendix A. The fifth section renders only two to four
+ranked thesis cards, each closing takeaway, evidence, strongest counterevidence,
+financial transmission, market pricing, and falsification. Raw thesis/moat ledgers remain
+in the appendix. Missing analytical objects trigger one advisory editorial revision but
+do not mechanically block the pipeline.

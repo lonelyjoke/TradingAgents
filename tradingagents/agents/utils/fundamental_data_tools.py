@@ -407,7 +407,7 @@ def get_knowledge_planet_context(
     max_reports: Annotated[int, "maximum PDF reports to return"] = 12,
 ) -> str:
     """
-    Retrieve locally imported Knowledge Planet stream/PDF intelligence for a
+    Retrieve locally imported Knowledge Planet topic-text intelligence for a
     ticker. This is alternative intelligence: useful for expectations,
     channel checks, industry data, and sell-side research lenses, but not
     filing-grade proof.

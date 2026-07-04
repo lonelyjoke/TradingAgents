@@ -19,6 +19,7 @@ so that:
 from __future__ import annotations
 
 from enum import Enum
+import re
 from typing import Literal, Optional
 
 from pydantic import BaseModel, Field
@@ -84,6 +85,96 @@ class ModelHandoffChange(BaseModel):
     disposition: Literal["accepted", "rejected", "unchanged", "unresolved"]
 
 
+class ForecastTakeaway(BaseModel):
+    """One reader-facing conclusion from the independent forecast."""
+
+    takeaway: str = Field(description="A decisive forecast conclusion, not a table recap.")
+    evidence_anchor: str = Field(
+        description="The reported history, current evidence, or explicit model fact supporting it."
+    )
+    financial_implication: str = Field(
+        description="Transmission to revenue, margin, earnings, cash/capital, or valuation."
+    )
+    confidence_and_risk: str = Field(
+        description="Confidence level and the assumption or evidence that could invalidate it."
+    )
+
+
+class ForecastAssumption(BaseModel):
+    """Auditable operating assumption; flexible across A-share business models."""
+
+    parameter: str
+    affected_business: str = Field(
+        description="Segment, product, geography, customer, project/asset, or group line affected."
+    )
+    historical_anchor: str = Field(
+        description="Reported historical level/range and period, or explicitly 'not disclosed'."
+    )
+    evidence_status: Literal[
+        "reported", "calculated", "proxy", "analyst_estimate", "missing"
+    ]
+    base_case: str = Field(description="Base value or bounded range with period and unit.")
+    bull_case: str = Field(description="Bull value/range and the condition required.")
+    bear_case: str = Field(description="Bear value/range and the condition required.")
+    rationale_and_evidence: str = Field(
+        description="Why this assumption is selected and the evidence ids or source period."
+    )
+    sensitivity: str = Field(
+        description="Auditable impact on revenue, profit/EPS, FCF/capital, or fair value."
+    )
+    confidence: Literal["high", "medium", "low"]
+    verification_gate: str = Field(
+        description="Dated disclosure or observable data that will confirm or falsify the assumption."
+    )
+
+
+class InvestmentThesisCard(BaseModel):
+    """One ranked investment conclusion with a complete evidence-to-value loop."""
+
+    rank: int = Field(ge=1, le=6)
+    takeaway: str = Field(description="One sentence stating the investment conclusion.")
+    decisive_question: str = Field(description="The company-specific question this thesis answers.")
+    evidence: str = Field(description="Dated reported/calculated evidence and evidence ids.")
+    strongest_counterevidence: str = Field(
+        description="The strongest observed contradiction, not a generic risk list."
+    )
+    financial_transmission: str = Field(
+        description="Driver/formula to revenue, margin, profit/EPS, cash/capital, and value."
+    )
+    market_pricing: str = Field(
+        description="What current price appears to imply and whether the thesis is already priced."
+    )
+    falsification_gate: str = Field(
+        description="Observable threshold and period that would reject or materially weaken the thesis."
+    )
+    verdict: Literal["proven", "partial", "unproven", "rejected"]
+
+
+class ResearchQuestionVerdict(BaseModel):
+    """Analyst-style answer to one question that can change the decision."""
+
+    question: str = Field(description="Company-specific underwriting question.")
+    why_decisive: str = Field(
+        description="Why this question can change earnings, cash/capital, valuation, or rating."
+    )
+    conclusion: str = Field(
+        description="Current evidence-weighted answer; avoid a generic module summary."
+    )
+    evidence_used: list[str] = Field(
+        description="Dated EV/KPE/KF evidence and the relevant result from each source."
+    )
+    strongest_counterevidence: str = Field(
+        description="Strongest observed contradiction or unresolved alternative explanation."
+    )
+    model_or_valuation_effect: str = Field(
+        description="Named forecast line, probability, fair value, or explicit unchanged result."
+    )
+    confidence: Literal["high", "medium", "low"]
+    next_verification: str = Field(
+        description="Dated disclosure or observable threshold that can confirm or reject the answer."
+    )
+
+
 class PMEditorialFinding(BaseModel):
     """One company-specific revision request from the sell-side editor."""
 
@@ -143,6 +234,35 @@ class UnderwritingResearchPlan(BaseModel):
     core_bet: str = Field(
         default="Not supplied; derive from the accepted underwriting model.",
         description="The few operating variables that decide the investment outcome."
+    )
+    research_questions: list[str] = Field(
+        default_factory=list,
+        description=(
+            "The 3-5 company-specific questions that decide earnings, cash/capital and valuation. "
+            "They organize the model and debate; do not list generic checklist topics."
+        ),
+    )
+    question_verdicts: list[ResearchQuestionVerdict] = Field(
+        default_factory=list,
+        description=(
+            "Evidence-weighted answers to the 3-5 decisive research questions. Each answer must "
+            "synthesize multiple relevant sources, the strongest conflict, and the exact model effect."
+        ),
+    )
+    forecast_takeaways: list[ForecastTakeaway] = Field(
+        default_factory=list,
+        description="Two or three post-debate forecast conclusions for the reader.",
+    )
+    forecast_assumptions: list[ForecastAssumption] = Field(
+        default_factory=list,
+        description=(
+            "The small set of assumptions responsible for most forecast variance. Missing industry-native "
+            "data must remain missing or use an explicitly top-down bounded assumption."
+        ),
+    )
+    core_theses: list[InvestmentThesisCard] = Field(
+        default_factory=list,
+        description="Two to four ranked theses that close evidence, counterevidence, finance and pricing.",
     )
     company_disaggregation: str = Field(
         description=(
@@ -596,6 +716,162 @@ def _render_model_change_table(rows_in: list[ModelHandoffChange]) -> str:
     return "\n".join(rows)
 
 
+def _demote_embedded_headings(text: str) -> str:
+    """Keep model-authored subheads from breaking the fixed public H2 contract."""
+    return re.sub(r"(?m)^#{1,6}\s+", "### ", str(text or "").strip())
+
+
+def _render_research_questions(questions: list[str]) -> str:
+    if not questions:
+        return ""
+    rows = ["### 本报告要回答的关键问题", ""]
+    rows.extend(f"{index}. {question}" for index, question in enumerate(questions[:5], 1))
+    return "\n".join(rows)
+
+
+def _render_question_verdicts(items: list[ResearchQuestionVerdict]) -> str:
+    if not items:
+        return ""
+    rows = ["### 核心问题裁决", ""]
+    for index, item in enumerate(items[:5], 1):
+        evidence = "；".join(item.evidence_used[:6]) or "未形成可用证据"
+        rows.extend(
+            [
+                f"**Q{index}：{item.question}**",
+                f"- **为何关键：** {item.why_decisive}",
+                f"- **当前结论：** {item.conclusion}",
+                f"- **采用证据：** {evidence}",
+                f"- **最强反证：** {item.strongest_counterevidence}",
+                f"- **模型/估值影响：** {item.model_or_valuation_effect}",
+                f"- **置信度与下次验证：** {item.confidence}；{item.next_verification}",
+                "",
+            ]
+        )
+    return "\n".join(rows).rstrip()
+
+
+def _render_forecast_takeaways(items: list[ForecastTakeaway]) -> str:
+    if not items:
+        return "### 预测结论\n\n- 暂无结构化take-away；以模型解释与风险披露为准。"
+    rows = ["### 预测take-aways", ""]
+    for index, item in enumerate(items[:3], 1):
+        rows.extend(
+            [
+                f"**{index}. {item.takeaway}**",
+                f"- 证据锚：{item.evidence_anchor}",
+                f"- 财务含义：{item.financial_implication}",
+                f"- 置信度与风险：{item.confidence_and_risk}",
+                "",
+            ]
+        )
+    return "\n".join(rows).rstrip()
+
+
+def _canonical_metric_name(metric: str) -> str:
+    raw = re.sub(r"[^a-z0-9\u4e00-\u9fff]+", "", str(metric or "").lower())
+    aliases = {
+        "consolidatedrevenue": "revenue", "revenue": "revenue", "营业收入": "revenue",
+        "consolidatedgrossmargin": "gross_margin", "grossmargin": "gross_margin", "毛利率": "gross_margin",
+        "grossprofit": "gross_profit", "consolidatedgrossprofit": "gross_profit", "毛利润": "gross_profit",
+        "operatingprofit": "operating_profit", "consolidatedoperatingprofit": "operating_profit", "营业利润": "operating_profit",
+        "parentnetprofit": "parent_profit", "consolidatedparentnetprofit": "parent_profit", "归母净利润": "parent_profit",
+        "eps": "eps", "epsbasic": "eps", "dilutedeps": "eps", "每股收益": "eps",
+        "operatingcashflow": "ocf", "ocf": "ocf", "经营活动现金流净额": "ocf",
+        "capitalexpenditure": "capex", "capex": "capex", "资本开支": "capex",
+        "freecashflow": "fcf", "fcf": "fcf", "自由现金流": "fcf",
+    }
+    return aliases.get(raw, raw)
+
+
+def _display_number(value: float | None) -> str:
+    if value is None:
+        return "—"
+    if abs(value) >= 1000:
+        return f"{value:,.0f}"
+    return f"{value:,.2f}".rstrip("0").rstrip(".")
+
+
+def _render_reader_forecast_table(lines: list[CanonicalModelLine]) -> str:
+    labels = {
+        "revenue": "营业收入", "gross_margin": "毛利率", "gross_profit": "毛利润",
+        "operating_profit": "营业利润", "parent_profit": "归母净利润", "eps": "EPS",
+        "ocf": "经营现金流", "capex": "资本开支", "fcf": "自由现金流",
+    }
+    order = list(labels)
+    data: dict[str, dict[str, CanonicalModelLine]] = {}
+    periods: list[str] = []
+    for line in lines:
+        metric = _canonical_metric_name(line.metric)
+        period = str(line.period)
+        if metric not in labels or not re.search(r"(?:A|E)$", period, re.I):
+            continue
+        data.setdefault(metric, {})[period] = line
+        if period not in periods:
+            periods.append(period)
+    periods.sort(key=lambda value: (re.sub(r"\D", "", value), value))
+    if not periods or not data:
+        return "### 三年财务预测\n\n暂无可可靠展示的标准化预测行。"
+    rows = [
+        "### 三年财务预测",
+        "",
+        "| 指标 | 单位 | " + " | ".join(periods) + " |",
+        "| --- | --- | " + " | ".join("---:" for _ in periods) + " |",
+    ]
+    for metric in order:
+        metric_rows = data.get(metric)
+        if not metric_rows:
+            continue
+        exemplar = next(iter(metric_rows.values()))
+        values = [
+            _display_number(metric_rows[period].value) if period in metric_rows else "—"
+            for period in periods
+        ]
+        rows.append(
+            f"| {labels[metric]} | {exemplar.unit} | " + " | ".join(values) + " |"
+        )
+    return "\n".join(rows)
+
+
+def _render_forecast_assumptions(items: list[ForecastAssumption]) -> str:
+    if not items:
+        return "### 核心假设与敏感性\n\n尚未形成结构化参数台账；不得将缺失参数表述为已验证。"
+    rows = [
+        "### 核心假设与敏感性",
+        "",
+        "| 参数/业务 | 历史锚与证据状态 | Bear / Base / Bull | 敏感度 | 置信度与验证门槛 |",
+        "| --- | --- | --- | --- | --- |",
+    ]
+    for item in items[:10]:
+        anchor = f"{item.historical_anchor}；{item.evidence_status}"
+        cases = f"{item.bear_case} / {item.base_case} / {item.bull_case}"
+        gate = f"{item.confidence}；{item.verification_gate}"
+        rows.append(
+            f"| {item.parameter}（{item.affected_business}） | {anchor} | {cases} | "
+            f"{item.sensitivity} | {gate} |"
+        )
+    return "\n".join(rows)
+
+
+def _render_thesis_cards(items: list[InvestmentThesisCard]) -> str:
+    rows: list[str] = []
+    for item in sorted(items, key=lambda value: value.rank)[:4]:
+        rows.extend(
+            [
+                f"### 论点{item.rank}：{item.takeaway}",
+                "",
+                f"- **关键问题：** {item.decisive_question}",
+                f"- **核心证据：** {item.evidence}",
+                f"- **最强反证：** {item.strongest_counterevidence}",
+                f"- **财务传导：** {item.financial_transmission}",
+                f"- **市场定价：** {item.market_pricing}",
+                f"- **证伪条件：** {item.falsification_gate}",
+                f"- **当前裁决：** {item.verdict}",
+                "",
+            ]
+        )
+    return "\n".join(rows).rstrip()
+
+
 def render_underwriting_research_plan(plan: UnderwritingResearchPlan) -> str:
     """Render one reconciled model-referee handoff without optional-field sprawl."""
     if isinstance(plan, ResearchPlan):
@@ -606,6 +882,15 @@ def render_underwriting_research_plan(plan: UnderwritingResearchPlan) -> str:
             f"**Rating**: {plan.recommendation.value}",
             f"**Research Readiness**: {plan.research_readiness}",
             f"**Core Bet**: {plan.core_bet}",
+            _render_research_questions(plan.research_questions),
+            _render_question_verdicts(plan.question_verdicts),
+            "## Forecast Takeaways\n\n" + _render_forecast_takeaways(plan.forecast_takeaways),
+            "## Forecast Assumption Registry\n\n" + _render_forecast_assumptions(plan.forecast_assumptions),
+            "## Ranked Core Theses\n\n" + (
+                _render_thesis_cards(plan.core_theses)
+                if plan.core_theses
+                else "No structured thesis cards supplied."
+            ),
             "## Company Disaggregation\n\n" + plan.company_disaggregation.strip(),
             "## Autonomous Three-Year Forecast Model\n\n"
             + plan.autonomous_forecast_model.strip(),
@@ -844,6 +1129,43 @@ class SellSidePMDecision(BaseModel):
             "valuation/payoff and principal caveat."
         )
     )
+    research_questions: list[str] = Field(
+        default_factory=list,
+        description=(
+            "Copy/refine the 3-5 company-specific questions that decide the rating. Every public section "
+            "must help answer one of them."
+        ),
+    )
+    question_verdicts: list[ResearchQuestionVerdict] = Field(
+        default_factory=list,
+        description=(
+            "Three to five evidence-weighted answers to the decisive questions. Cite the evidence "
+            "actually used, reconcile the strongest conflicting observation, and state the named "
+            "forecast/probability/valuation effect rather than summarizing source modules."
+        ),
+    )
+    forecast_takeaways: list[ForecastTakeaway] = Field(
+        default_factory=list,
+        description=(
+            "Two or three decisive forecast conclusions. Each must state evidence, financial implication, "
+            "confidence and invalidation risk rather than merely repeat table values."
+        ),
+    )
+    forecast_assumptions: list[ForecastAssumption] = Field(
+        default_factory=list,
+        description=(
+            "Auditable driver registry. Use historical anchors and bull/base/bear ranges. If shipment, ASP, "
+            "utilization or another industry-native input is unavailable, label the model top-down and low "
+            "confidence instead of inventing bottom-up precision."
+        ),
+    )
+    core_theses: list[InvestmentThesisCard] = Field(
+        default_factory=list,
+        description=(
+            "Two to four ranked investment conclusions. Each closes takeaway -> evidence -> strongest "
+            "counterevidence -> financial transmission -> market pricing -> falsification."
+        ),
+    )
     investment_conclusion_and_core_conflict: str = Field(
         description=(
             "Public opening section. State the final rating and posture, core bet, decisive "
@@ -939,8 +1261,8 @@ class SellSidePMDecision(BaseModel):
     report_markdown: str = Field(
         default="",
         description=(
-            "Legacy overflow only. Do not place public H2 sections here. Any supplied text is "
-            "moved to the research appendix and cannot replace the fixed eight-section memo."
+            "Legacy compatibility field. Keep empty. It is not rendered and cannot replace "
+            "the fixed eight-section memo."
         )
     )
     shared_model_change_audit: str = Field(
@@ -1721,10 +2043,9 @@ class PortfolioDecision(BaseModel):
 
 
 def render_sell_side_pm_decision(decision: SellSidePMDecision) -> str:
-    """Render one fixed Chinese eight-section PM memo plus internal appendices."""
+    """Render the single reader-facing Chinese eight-section PM memo."""
     if isinstance(decision, PortfolioDecision):
         return render_pm_decision(decision)
-    appendix_overflow = decision.report_markdown.strip()
     return "\n\n".join(
         [
             "# 公司深度研究与投资决策",
@@ -1734,36 +2055,37 @@ def render_sell_side_pm_decision(decision: SellSidePMDecision) -> str:
             f"{decision.research_readiness} |",
             f"> **一句话结论：** {decision.one_line_thesis}",
             "## 一、投资结论与核心矛盾\n\n"
-            + decision.investment_conclusion_and_core_conflict.strip(),
+            + _demote_embedded_headings(decision.investment_conclusion_and_core_conflict)
+            + ("\n\n" + _render_research_questions(decision.research_questions) if decision.research_questions else ""),
+            _render_question_verdicts(decision.question_verdicts),
             "## 二、公司业务与利润池拆解\n\n"
-            + decision.company_disaggregation.strip(),
+            + _demote_embedded_headings(decision.company_disaggregation),
             "## 三、行业周期与竞争格局\n\n"
-            + decision.industry_cycle_and_competition.strip(),
+            + _demote_embedded_headings(decision.industry_cycle_and_competition),
             "## 四、三年盈利及现金流预测\n\n"
-            + _render_canonical_model_table(decision.canonical_model_snapshot)
+            + _render_forecast_takeaways(decision.forecast_takeaways)
             + "\n\n"
-            + decision.autonomous_forecast_model.strip(),
+            + _render_reader_forecast_table(decision.canonical_model_snapshot)
+            + "\n\n"
+            + _render_forecast_assumptions(decision.forecast_assumptions)
+            + "\n\n### 模型解释与局限\n\n"
+            + _demote_embedded_headings(decision.autonomous_forecast_model),
             "## 五、核心论点、护城河与财务传导\n\n"
-            + decision.thesis_financial_bridge.strip()
-            + "\n\n### 护城河证据评分\n\n"
-            + decision.moat_evidence_scorecard.strip(),
+            + (
+                _render_thesis_cards(decision.core_theses)
+                if decision.core_theses
+                else _demote_embedded_headings(decision.thesis_financial_bridge)
+                + "\n\n### 护城河证据评分\n\n"
+                + _demote_embedded_headings(decision.moat_evidence_scorecard)
+            ),
             "## 六、会计质量与资本配置\n\n"
-            + decision.accounting_and_capital_allocation.strip(),
+            + _demote_embedded_headings(decision.accounting_and_capital_allocation),
             "## 七、估值、情景与预期收益\n\n"
-            + decision.expectation_gap_and_market_pricing.strip()
+            + _demote_embedded_headings(decision.expectation_gap_and_market_pricing)
             + "\n\n### 估值闭环\n\n"
-            + decision.valuation_closure.strip(),
+            + _demote_embedded_headings(decision.valuation_closure),
             "## 八、风险、催化剂与验证日历\n\n"
-            + decision.risks_catalysts_verification.strip(),
-            "## 附录A：模型变更与交接审计\n\n"
-            + _render_model_change_table(decision.handoff_change_rows)
-            + "\n\n### 共享模型变更审计\n\n"
-            + decision.shared_model_change_audit.strip()
-            + "\n\n### 交接完整性审计\n\n"
-            + decision.handoff_integrity_audit.strip(),
-            "## 附录B：质量自检\n\n"
-            + decision.report_quality_self_check.strip()
-            + ("\n\n### 兼容性溢出文本\n\n" + appendix_overflow if appendix_overflow else ""),
+            + _demote_embedded_headings(decision.risks_catalysts_verification),
         ]
     )
 

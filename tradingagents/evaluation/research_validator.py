@@ -91,6 +91,7 @@ PUBLICATION_BLOCKING_SECTIONS = frozenset(
         "shared_model_change_audit",
         "pm_structured_generation",
         "research_manager_structured_generation",
+        "pm_analytical_spine",
         "share_count_source_conflict",
         "handoff_numeric_consistency",
     }
@@ -99,20 +100,31 @@ PUBLICATION_BLOCKING_SECTIONS = frozenset(
 
 def _handoff_metric_key(period: Any, metric: Any) -> tuple[str, str]:
     normalized_period = re.sub(r"\s+", "", str(period or "")).lower()
-    normalized_metric = re.sub(r"[^a-z0-9\u4e00-\u9fff]+", "", str(metric or "")).lower()
+    # Lowercase before filtering: applying an a-z-only regex first silently
+    # turned `Revenue` into `evenue` and produced false dropped-line blockers.
+    normalized_metric = re.sub(
+        r"[^a-z0-9\u4e00-\u9fff]+",
+        "",
+        str(metric or "").lower(),
+    )
     aliases = {
         "dilutedsharecount": "dilutedshares",
         "sharecount": "dilutedshares",
         "dilutedshares": "dilutedshares",
+        "dilutedsharesoutstanding": "dilutedshares",
         "稀释股本": "dilutedshares",
         "总股本": "dilutedshares",
         "revenue": "revenue",
+        "consolidatedrevenue": "revenue",
         "营业收入": "revenue",
         "营收": "revenue",
         "parentnetprofit": "parentnetprofit",
+        "consolidatedparentnetprofit": "parentnetprofit",
         "netprofitparent": "parentnetprofit",
         "归母净利润": "parentnetprofit",
         "dilutedeps": "eps",
+        "epsbasic": "eps",
+        "epsbasiccny": "eps",
         "eps": "eps",
         "每股收益": "eps",
         "稀释每股收益": "eps",
@@ -129,6 +141,7 @@ def _handoff_metric_key(period: Any, metric: Any) -> tuple[str, str]:
         "fcf": "fcf",
         "自由现金流": "fcf",
         "grossmargin": "grossmargin",
+        "consolidatedgrossmargin": "grossmargin",
         "毛利率": "grossmargin",
         "operatingprofit": "operatingprofit",
         "营业利润": "operatingprofit",
@@ -203,8 +216,13 @@ def _line_changed(left: Mapping[str, Any], right: Mapping[str, Any]) -> bool:
         abs(left_value) * 0.02,
         0.01,
     )
-    left_unit = re.sub(r"\s+", "", str(left.get("unit", "")).lower())
-    right_unit = re.sub(r"\s+", "", str(right.get("unit", "")).lower())
+    # Spaces and underscores are presentation differences, not unit changes.
+    left_unit = re.sub(
+        r"[^a-z0-9%/\u4e00-\u9fff]+", "", str(left.get("unit", "")).lower()
+    )
+    right_unit = re.sub(
+        r"[^a-z0-9%/\u4e00-\u9fff]+", "", str(right.get("unit", "")).lower()
+    )
     return value_changed or (left_unit and right_unit and left_unit != right_unit)
 
 
@@ -2199,6 +2217,8 @@ def audit_structured_research_usage(
                 "model change ledger",
                 "承保模型变更",
                 "模型变更台账",
+                "共享模型与kpe变更审计",
+                "共享模型变更审计",
             )
         ):
             issues.append(
@@ -2347,10 +2367,7 @@ def audit_report_depth(report_dir: str | Path) -> pd.DataFrame:
     if not decision_path.exists():
         raise FileNotFoundError(f"Missing portfolio decision: {decision_path}")
     decision_text = read_text_fallback(decision_path)
-    appendix_path = report_path / "5_portfolio" / "research_appendix.md"
     depth_text = decision_text
-    if appendix_path.exists():
-        depth_text += "\n\n" + read_text_fallback(appendix_path)
     earnings_path = report_path / "0_context" / "earnings_model.md"
     earnings_context = read_text_fallback(earnings_path) if earnings_path.exists() else ""
     issues = audit_decision_depth(depth_text)
@@ -2363,6 +2380,50 @@ def audit_report_depth(report_dir: str | Path) -> pd.DataFrame:
     issues.extend(audit_structured_research_usage(report_dir, decision_text))
     issues.extend(audit_context_alignment(report_dir))
     issues.extend(audit_handoff_numeric_consistency(report_dir))
+    pm_payload_path = report_path / "5_portfolio" / "canonical_decision.json"
+    if pm_payload_path.exists():
+        try:
+            pm_payload = json.loads(read_text_fallback(pm_payload_path))
+            requirements = (
+                ("research_questions", 3, "company-specific research questions"),
+                ("question_verdicts", 3, "evidence-weighted question verdicts"),
+                ("forecast_takeaways", 2, "forecast take-aways"),
+                ("forecast_assumptions", 3, "auditable forecast assumptions"),
+                ("core_theses", 2, "ranked core theses"),
+            )
+            missing = [
+                f"{label}={len(pm_payload.get(field, []) or [])}<{minimum}"
+                for field, minimum, label in requirements
+                if len(pm_payload.get(field, []) or []) < minimum
+            ]
+            shallow_verdicts = [
+                index + 1
+                for index, row in enumerate(pm_payload.get("question_verdicts", []) or [])
+                if not (row.get("evidence_used") or [])
+                or not str(row.get("model_or_valuation_effect", "")).strip()
+                or not str(row.get("strongest_counterevidence", "")).strip()
+            ]
+            if shallow_verdicts:
+                missing.append(
+                    "question verdicts missing evidence/counterevidence/model effect: "
+                    + ",".join(str(index) for index in shallow_verdicts)
+                )
+            if missing:
+                issues.append(
+                    DecisionDepthIssue(
+                        "pm_analytical_spine",
+                        "error",
+                        "PM structured analytical spine is incomplete: " + "; ".join(missing),
+                    )
+                )
+        except (json.JSONDecodeError, OSError, TypeError) as exc:
+            issues.append(
+                DecisionDepthIssue(
+                    "pm_analytical_spine",
+                    "error",
+                    f"PM canonical decision is unreadable: {exc}",
+                )
+            )
     public_h2_count = sum(
         1 for line in decision_text.splitlines() if line.startswith("## ")
     )

@@ -760,8 +760,8 @@ class TestPortfolioManagerInjection:
         assert "Evidence Gaps & Data Coverage" in prompt
         assert "less fragmentation, more synthesis" in prompt
         assert "Verification & Falsification" in prompt
-        assert "roughly 3,800-5,800 Chinese characters" in prompt
-        assert "higher information density" in prompt
+        assert "There is no hard word-count or section-count target" in prompt
+        assert "claim -> evidence -> causal transmission -> valuation/position implication" in prompt
         assert "Bank Buy-Side Memo Overlay" in prompt
         assert "If the target is not a bank" in prompt
         assert "Route non-bank companies through their own industry-native drivers" in prompt

@@ -1,0 +1,628 @@
+{
+  "recommendation": "Hold",
+  "research_readiness": "partial",
+  "core_bet": "That the record contract liabilities (122 bn) and aggressive prepaid material stocking (prepayments +201% QoQ) will convert into revenue acceleration and cash recovery in H2 2026, proving that Q1's profit slump was a timing issue rather than a demand or margin collapse.",
+  "research_questions": [
+    "Can energy storage system gross margin be sustained near 30% in 2026-2027 despite rising competition and raw material volatility?",
+    "How will US tariffs (currently 38.4%) affect Sungrow's US energy storage orders and profitability over 2026?",
+    "Will the massive contract liabilities and prepayments actually translate into accelerated H2 revenue and improved operating cash flow?",
+    "Is the EU policy restriction on Chinese inverters for public-funded projects a manageable risk or a material threat to European revenue and margin?"
+  ],
+  "question_verdicts": [
+    {
+      "question": "Can energy storage system gross margin be sustained near 30% in 2026-2027?",
+      "why_decisive": "Energy storage is the second growth curve; its margin trajectory directly determines consolidated profit growth and whether 20x+ PE can be justified.",
+      "conclusion": "Q1 2026 energy storage gross margin was ~30%, driven by a favourable regional mix shift towards high-margin Europe. However, the sustainability of this mix is uncertain because the EU is moving to restrict Chinese inverters, and the improvement is measured QoQ (not YoY). Margin resilience is real but fragile.",
+      "evidence_used": [
+        "Investor interaction (2026-05-14): Q1 energy storage gross margin ~30%, regional mix improvement.",
+        "Filing: Q1 2026 consolidated gross margin 33.26% (-1.87pp YoY) indicates overall margin pressure despite segment resilience.",
+        "Knowledge Planet KPE01-KPE04: channel checks mention positive order tone, but lack specific margin quantification.",
+        "Policy context: EU guidance to exclude high-risk country inverters from public funds (2025)."
+      ],
+      "strongest_counterevidence": "The EU policy shift directly targets the high-margin European public-fund market, which is likely the source of the regional mix improvement. If that market contracts, the 30% margin may not be repeatable.",
+      "model_or_valuation_effect": "We keep the base case assumption of energy storage gross margin ~30% for 2026E, but apply a higher discount rate in the scenario valuation to reflect policy risk. Upside scenario still allows 33% margin if European non-public markets grow, but probability reduced to 30%.",
+      "confidence": "medium",
+      "next_verification": "2026 half-year report: energy storage revenue and gross margin by region; any update on EU policy enforcement and its impact on order book."
+    },
+    {
+      "question": "How will US tariffs (currently 38.4%) affect US energy storage orders and profitability?",
+      "why_decisive": "The US is a high-margin market for energy storage, and the 38.4% tariff can devastate the profit pool if not mitigated by supply-chain shifts or customer absorption.",
+      "conclusion": "The tariff is a serious near-term headwind. 2025 saw a pull-forward of orders under the safe-harbor window, leaving 2026 exposed. New orders exist but are likely much smaller. The bull case of sustained growth is not supported; the bear case that the US market is severely impaired is more plausible, but not yet a full shut-down.",
+      "evidence_used": [
+        "Investor interaction (2026-05-13): US tariff 38.4%, 2026 new orders exist, but 2025 pre-orders depleted.",
+        "Q1 2026 revenue decline -18% YoY: consistent with US order drain.",
+        "Competitor analysis: none of the peers have offsetting US advantage."
+      ],
+      "strongest_counterevidence": "Sungrow may transfer supply chain to Thailand/other regions to reduce tariff exposure, and non-US markets (Europe, Middle East) can partially compensate. However, no public announcement of a supply-chain relocation has been made.",
+      "model_or_valuation_effect": "We reduce 2026E US energy storage revenue by 40% and apply a lower gross margin (base case 25% vs 30% company-wide). This reduces 2026E consolidated net profit by ~5% relative to the original underwriting model.",
+      "confidence": "medium",
+      "next_verification": "Half-year report disclosure on overseas energy storage revenue and any announcement of supply-chain localisation."
+    },
+    {
+      "question": "Will the massive contract liabilities and prepayments actually translate into accelerated H2 revenue and improved operating cash flow?",
+      "why_decisive": "This is the core bet. If conversion fails, the stock is a value trap with ballooned working capital; if it succeeds, a sharp earnings recovery will re-rate the stock.",
+      "conclusion": "The combination of contract liabilities (+14.5% QoQ) and prepaid materials (+201% QoQ) strongly points to an upcoming delivery surge. However, Q1 operating cash flow (OCF/NI = 0.53) and the rise in inventory/AR indicate that cash conversion is poor even before the surge. Without a concurrent improvement in receivables and inventory turnover, accelerated revenue could further strain cash flow rather than restore it. The bull case has a plausible order view, but the cash flow deterioration undermines its certainty.",
+      "evidence_used": [
+        "Q1 2026 filings: contract liabilities 122.04 bn, prepayments 40.39 bn, OCF/NI 0.53, receivables/revenue 40%, inventory/revenue 44.6%.",
+        "Investor interaction: prepayments are 'mainly to lock in raw material supply', confirming active stocking.",
+        "Channel checks (KPE01-04): indicate positive scheduling and backlog, but are private/unverified."
+      ],
+      "strongest_counterevidence": "The sharp OCF deterioration and bloated working capital (inventory+AR >50% of annual revenue) may signal that customers are delaying payment and that the order backlog is not being converted to cash. This is a structural warning that the bull thesis must address before the rating can be upgraded.",
+      "model_or_valuation_effect": "We maintain the base case revenue of 945 bn for 2026E, but we lower the OCF/Net income assumption from 0.8 to 0.7 due to working capital drag. This reduces FCF and the present value of equity. The probability of the bull case (H2 surge with cash recovery) is capped at 20% until we see improvement in cash metrics.",
+      "confidence": "low",
+      "next_verification": "2026 half-year report: Q2 revenue, OCF, AR and inventory turnover, and contract liability movement. The bull case requires Q2 revenue +20% QoQ and OCF/NI >0.7."
+    },
+    {
+      "question": "Is the EU policy restriction on Chinese inverters a manageable risk or a material threat?",
+      "why_decisive": "Europe is Sungrow's highest-margin overseas region. If the restriction expands beyond public funds or blocks all public projects, a significant profit pool could be lost.",
+      "conclusion": "The policy currently targets only EU public-funded projects, limiting the immediate financial impact. Sungrow is proactively building local supply chains and expanding non-public-fund business. However, the direction of policy is clearly towards de-risking from Chinese hardware, and there is a material risk of escalation. It is a manageable risk in the base case, but a tail risk for the bear case.",
+      "evidence_used": [
+        "Investor interaction (2026-05-13): company assesses 'limited impact' and is expanding non-official-financing projects and localising supply.",
+        "Policy context: EU Commission guidance restricting 'high-risk country' inverters.",
+        "Filing: no specific disclosure on European revenue exposure."
+      ],
+      "strongest_counterevidence": "The policy is an 'administrative guideline', not a binding regulation, but it already forces Sungrow to spend on localisation and diversify away from the most profitable European segment, potentially eroding gross margin.",
+      "model_or_valuation_effect": "We apply a 10% haircut to European revenue in the bear scenario and a 20% haircut to the segment's gross margin, but keep the base case unchanged with a watch. This increases the bear-case downside to 80 bn net profit.",
+      "confidence": "medium",
+      "next_verification": "Any EU official clarification, Sungrow's announcement of a European factory, or disclosure of European revenue share in the half-year report."
+    }
+  ],
+  "forecast_takeaways": [
+    {
+      "takeaway": "Revenue is likely to recover sequentially in H2, but the cash conversion problem suggests profit quality will remain poor, limiting multiple expansion.",
+      "evidence_anchor": "Q1 2026 contract liabilities +14.5% QoQ, prepayments +201% QoQ, but OCF/NI only 0.53; seasonally adjusted full-year revenue implied ~926 bn, still above 2025.",
+      "financial_implication": "Base-case 2026E revenue 945 bn (+6% yoy) seems achievable; however, full-year OCF likely to be below 2025's 1.26 OCF/NI, keeping FCF under pressure.",
+      "confidence_and_risk": "Medium confidence. Risk: if Q2 revenue disappoints (e.g., flat QoQ), the entire thesis of an order-fed recovery collapses."
+    },
+    {
+      "takeaway": "Gross margin resilience is real but under threat from both competitive ASP erosion and the EU policy mix, making the mid-cycle margin less dependable than in 2025.",
+      "evidence_anchor": "Q1 2026 consolidated gross margin 33.26% (-1.87pp YoY); energy storage margin ~30% QoQ improvement, but inverter ASP likely declining.",
+      "financial_implication": "We forecast group gross margin of 31.3% for 2026E, down 0.5pp from 2025's 31.8%, which by itself reduces gross profit by ~5 bn.",
+      "confidence_and_risk": "Medium-high. A sustained gross margin above 32% would require the European high-margin mix to hold AND inverter ASP pressure to ease – both of which are uncertain."
+    },
+    {
+      "takeaway": "The stock is not statistically cheap; the market's 21.9x PE already embeds a recovery to ~115 bn net profit, close to our base case. For significant upside, H2 must prove that the bull case of >130 bn is in sight.",
+      "evidence_anchor": "TTM-implied earnings 119.3 bn vs base case 115 bn; probability-weighted fair value ~109 CNY vs current price 126 CNY.",
+      "financial_implication": "The current price offers no margin of safety relative to our base fair value. An upgrade to Overweight requires H1 results showing revenue acceleration and cash improvement, or a drop in price to below 110 CNY.",
+      "confidence_and_risk": "High. The stock is pricing a recovery that is not yet proven, making the risk/reward unattractive for new money."
+    }
+  ],
+  "forecast_assumptions": [
+    {
+      "parameter": "Revenue growth 2026E",
+      "affected_business": "Consolidated group",
+      "historical_anchor": "FY2025 revenue 891.84 bn, Q1 2026 annualized ~926 bn; historical medium-term growth 10-15% but decelerating.",
+      "evidence_status": "analyst_estimate",
+      "base_case": "+6% YoY to 945 bn",
+      "bull_case": "+11% to 990 bn (if H2 delivery surge materializes and US/Europe perform)",
+      "bear_case": "flat to 890 bn (if US order cliff and Europe policy contraction bite hard)",
+      "rationale_and_evidence": "Contract liabilities and prepayments support a near-term acceleration, but Q1 revenue decline and uncertain policy environment cap top-line growth. We adopt the midpoint-weighted base case of +6%.",
+      "sensitivity": "1% change in revenue = ~9 bn revenue = ~1.1 bn net profit (after tax), ~0.05 CNY EPS.",
+      "confidence": "medium",
+      "verification_gate": "2026 half-year report: consolidated revenue and segment growth rates."
+    },
+    {
+      "parameter": "Group gross margin",
+      "affected_business": "Consolidated group",
+      "historical_anchor": "FY2025 31.83%, Q1 2026 33.26% (-1.87pp YoY).",
+      "evidence_status": "analyst_estimate",
+      "base_case": "31.3% (down 0.5pp from FY2025)",
+      "bull_case": "33% (if European high-margin mix holds and inverter pricing pressure eases)",
+      "bear_case": "29% (if price competition intensifies and EU policy forces relocation costs)",
+      "rationale_and_evidence": "Structural brand and scale advantages support a margin above the industry, but rising competition and EU de-risking create headwinds. We assume a modest decline.",
+      "sensitivity": "1pp change in gross margin = ~9.5 bn gross profit = ~6.7 bn net profit, ~0.32 CNY EPS.",
+      "confidence": "medium",
+      "verification_gate": "Quarterly gross margin trend and segment disclosures in half-year report."
+    },
+    {
+      "parameter": "Finance expense ratio",
+      "affected_business": "Consolidated income statement",
+      "historical_anchor": "FY2025 near 0%, Q1 2026 spiked to 2.1% (+2.42pp YoY).",
+      "evidence_status": "analyst_estimate",
+      "base_case": "1.5% for full year 2026",
+      "bull_case": "1.0% if the company repatriates offshore cash and reduces working-capital financing needs",
+      "bear_case": "2.0% if higher borrowing and working-capital requirements persist",
+      "rationale_and_evidence": "The Q1 spike appears driven by higher interest expense on expanded short-term debt. We expect some normalisation but not a full return to near-zero. Base case 1.5% reduces pretax profit by ~14 bn vs 0%.",
+      "sensitivity": "0.5pp change = ~4.7 bn pretax profit = ~3.5 bn net profit, ~0.17 CNY EPS.",
+      "confidence": "low",
+      "verification_gate": "H1 2026 interest expense line and financing cash flows; any deleveraging announcements."
+    },
+    {
+      "parameter": "OCF/Net profit ratio",
+      "affected_business": "Consolidated cash flow",
+      "historical_anchor": "FY2025 1.26, Q1 2026 0.53.",
+      "evidence_status": "analyst_estimate",
+      "base_case": "0.7 for full year 2026",
+      "bull_case": "0.9 if receivables and inventory turnover improve in H2",
+      "bear_case": "0.5 if working capital continues to balloon",
+      "rationale_and_evidence": "The Q1 deterioration is concerning; it partially reflects seasonal buildup, but the magnitude (>50% drop from 2025) indicates structural pressure. We assume some Q2-Q3 recovery but not full normalisation.",
+      "sensitivity": "Improvement to 1.0 would add ~34 bn to OCF vs base, reducing net debt and increasing DCF value.",
+      "confidence": "low",
+      "verification_gate": "Q2 2026 operating cash flow and working-capital ratios."
+    },
+    {
+      "parameter": "Share count",
+      "affected_business": "Per-share metrics",
+      "historical_anchor": "Tushare total_share = 20732.114 万股 (2.073 bn shares) as of 2026-07-04.",
+      "evidence_status": "reported",
+      "base_case": "2073.2 mn shares (no dilution assumed in base)",
+      "bull_case": "unchanged",
+      "bear_case": "unchanged",
+      "rationale_and_evidence": "The company has a buyback program and employee stock plans, but net dilution is likely small. We use the latest total share count as the proxy for diluted shares.",
+      "sensitivity": "Each 1% dilution reduces EPS by 1%.",
+      "confidence": "high",
+      "verification_gate": "Periodic updates from Tushare or filings on buyback completion and ESOP dilution."
+    }
+  ],
+  "core_theses": [
+    {
+      "rank": 1,
+      "takeaway": "The order backlog and prepaid materials point to a near-term revenue recovery, but the conversion to cash is highly uncertain, making the investment thesis conditionally viable at a lower price.",
+      "decisive_question": "Will contract liabilities translate into H2 revenue acceleration and cash flow recovery?",
+      "evidence": "Q1 2026 contract liabilities 122.04 bn (+14.5% QoQ), prepayments 40.39 bn (+201% QoQ); company confirmed prepayments for raw material lock-in (investor interaction).",
+      "strongest_counterevidence": "Q1 OCF only 53% of net profit, inventory and AR at multi-year highs relative to sales, indicating that the build-up is consuming cash rather than generating it.",
+      "financial_transmission": "Revenue = f(order backlog, delivery schedule); Cash flow = Net profit ± ΔWC; In the base case, 2026E revenue 945 bn (+6%), but FCF is only 6.25 bn (vs 16.9 bn in 2025).",
+      "market_pricing": "Current PE 21.9x implies ~119 bn net profit, suggesting the market is pricing a recovery already. For the stock to outperform, H2 must deliver more than the base case.",
+      "falsification_gate": "If 2026H1 revenue <450 bn (implying <5% YoY growth) and OCF/NI remains below 0.6, the thesis of a cash-producing recovery is falsified.",
+      "verdict": "partial"
+    },
+    {
+      "rank": 2,
+      "takeaway": "Sungrow's brand and scale provide some margin insulation, but the industry's competitive dynamics and policy shifts are eroding the moat, limiting the bull case's upside.",
+      "decisive_question": "Can Sungrow maintain a superior gross margin above 30% in the face of price wars and EU de-risking?",
+      "evidence": "FY2025 group gross margin 31.83% (+1.89pp), Q1 2026 33.26% (-1.87pp YoY); energy storage margin ~30% QoQ improvement (investor interaction).",
+      "strongest_counterevidence": "Q1 overall margin decline YoY and the EU inverter restriction directly threaten the highest-margin region. Competitor margins are also under pressure, signalling industry-wide compression.",
+      "financial_transmission": "A 1pp decline in group gross margin reduces pre-tax profit by ~9.5 bn. At current leverage and mix, even a 31% margin would reduce EPS by ~0.3 yuan vs 32%.",
+      "market_pricing": "The current multiple of 21.9x PE reflects some premium for historical margin superiority, but does not fully price a margin decline to 29-30%.",
+      "falsification_gate": "If 2026H1 gross margin falls below 30%, the margin-moat narrative is broken and the stock would be re-rated to below 15x PE.",
+      "verdict": "partial"
+    },
+    {
+      "rank": 3,
+      "takeaway": "The best expression in the electrical equipment sector is not Sungrow at current levels; higher-quality peers offer better risk-adjusted returns, making Sungrow a relative underweight until the cash cycle improves.",
+      "decisive_question": "Is Sungrow the best capital allocation among electrical equipment peers?",
+      "evidence": "Peer comparison: Deye (605117) has higher ROE (32%), stronger net profit growth (+68%), and better balance sheet (debt ratio 47% vs Sungrow 58%), but trades at 33.6x PE. Sungrow is cheaper on PE, but the quality gap is wide.",
+      "strongest_counterevidence": "Sungrow's absolute scale and global reach are unmatched, and if the cash cycle improves, it could deliver higher absolute returns than Deye due to lower starting multiple.",
+      "financial_transmission": "Relative TSR projection: under our base case, Sungrow's fair value is 105-109 CNY, implying 13-16% downside; Deye, given its superior growth, may sustain its premium.",
+      "market_pricing": "Sungrow's lower PE may be a value trap if earnings decline further; Deye's higher PE is backed by higher growth and quality.",
+      "falsification_gate": "If Sungrow reports Q2 revenue +25% QoQ and OCF recovery, the relative underperformance thesis weakens, and Sungrow could close the quality discount.",
+      "verdict": "partial"
+    }
+  ],
+  "company_disaggregation": "Sungrow (300274.SZ) is a clean energy equipment manufacturer with three main economic units: (1) PV Inverters – core profit engine, likely ~55-60% of revenue, driven by global solar installations, ASP, and market share; gross margin historically >31%. (2) Energy Storage Systems – second growth curve, ~30-35% of revenue, driven by order backlog, regional mix, and battery costs; Q1 2026 margin ~30%. (3) Hydrogen Electrolyzers – early-stage option, <5% of revenue, currently loss-making. Additionally, the company holds a significant portfolio of clean energy investment assets (210 bn, ~18.6% of total assets) that provide a NAV floor. Segment-level revenue/profit splits are not disclosed by management, so all weights are analytical estimates.",
+  "autonomous_forecast_model": "## Autonomous Forecast Model (2026E-2028E)\n\n**Model Family:** corporate, volume × price × cost, with material segments reconciled to group.\n\n**Key Drivers:**\n- PV Inverter revenue = shipment (GW) × ASP (CNY/W); shipment growth +3-5% YoY, ASP -2-3%.\n- Energy Storage revenue = shipment (GWh) × ASP (CNY/Wh); shipment +8-10% YoY, ASP stable with mix improvement, but US volume down 40%.\n- Hydrogen: negligible contribution, capped at revenue <2 bn.\n\n**Consolidated Forecast:**\n| Line                     | FY2025A    | 2026E       | 2027E       | 2028E       |\n|--------------------------|------------|-------------|-------------|-------------|\n| Revenue (CNY mn)         | 89184      | 94535       | 99770       | 104840      |\n| Cost of Revenue          | 60795      | 64938       | 68290       | 71560       |\n| Gross Profit             | 28389      | 29597       | 31480       | 33280       |\n| Gross Margin %           | 31.83      | 31.3        | 31.5        | 31.7        |\n| Operating Profit         | 15320      | 13600       | 14300       | 15100       |\n| Parent Net Profit (CNY mn)| 13461     | 11500       | 12150       | 12880       |\n| Diluted EPS (CNY)        | 6.49*      | 5.55        | 5.86        | 6.21        |\n| OCF (CNY mn)             | 16918      | 8050        | 10200       | 11000       |\n| Capex (CNY mn)           | ~3000      | 1800        | 1600        | 1500        |\n| FCF (CNY mn)             | ~13918     | 6250        | 8600        | 9500        |\n*FY2025 EPS based on same share base 2073.2 mn.\n\n**Scenario Probabilities (subjective):**\n- Bull (25%): Revenue 990 bn, net profit 125 bn, fair value 154 CNY\n- Base (55%): Revenue 945 bn, net profit 115 bn, fair value 109 CNY\n- Bear (20%): Revenue 890 bn, net profit 85 bn, fair value 70 CNY\n\n**Model Profile Assumptions:** Finance expense ratio 1.5% in 2026E; OCF/NI 0.7; diluted shares 2073.2 mn; no new material dilution.",
+  "thesis_financial_bridge": "The investment case rests on three bridges:\n\n1. **Order Backlog to Revenue Bridge (TB1):** Operating driver: Contract liabilities → delivery schedule → revenue recognition. Base assumption: 2026E revenue 945 bn, requiring ~75% of the 122 bn contract liabilities to convert into revenue in H2. Bull case: 90% conversion, revenue 990 bn. Bear case: 60% conversion, revenue 890 bn. *Impact:* 10% revenue swing = ~1.2 bn net profit.\n\n2. **Margin Resilience Bridge (TB2):** Group gross margin = f(product mix, ASP, input costs). Base: 31.3% (down 0.5pp). Bull: 33% if European high-margin mix holds and inverter ASP decline is contained. Bear: 29% if EU policy forces relocation costs and price war intensifies. *Impact:* 1pp gross margin = ~0.32 CNY EPS.\n\n3. **Cash Conversion Bridge (TB3):** OCF = Net profit ± ΔWorking Capital. Base: OCF/NI 0.7, implying 8.05 bn cash generation. Bear: 0.5, implying 5.75 bn. *Impact:* A sustained low conversion ratio will force debt increase and constrain dividend/buyback capacity.",
+  "moat_evidence_verdict": "Sungrow's claimed moats are partially verified:\n- **Brand/R&D premium:** Supported by 5-year R&D investment >5% of revenue and gross margin above industry (FY2025 31.83%). However, Q1 2026 YoY margin decline (-1.87pp) raises questions about the durability of the premium. Counterevidence: EU policy and US tariffs may force price concessions. Status: **partial**.\n- **Global scale and localisation:** Overseas revenue likely >50%, and the company is building local supply chains. But EU restriction is a direct threat. Status: **partial**.\n- **Full-solution cross-sell:** Inverter+storage+hydrogen bundling is a narrative, but no quantified cross-sell ratio is disclosed. Status: **unproven**.\n\nOverall, the moat is intact but eroding, justifying a mid-cycle PE rather than a premium.",
+  "valuation_closure": "## Valuation closure (per share, CNY)\n**Diluted share count:** 2073.2 mn (Tushare total_share). No material dilution assumed.\n\n**Mutually exclusive buckets:**\n1. Core earnings bucket (inverter+storage): Base 2026E net profit 11500 mn → EPS 5.55. Apply PE 19x (reflects moderate cycle, 10% below historical average of 21.5x on normalised earnings). Core value = 5.55 * 19 = **105.5 CNY**.\n2. Hydrogen option: Estimated asset value 5000 mn → 2.4 CNY/share (20% probability-adjusted and haircut).\n3. Asset revaluation: Clean energy investment assets (210 bn) carried at cost, but market value uncertain and largely non-recourse; no separate credit.\n**Probability-weighted fair value:**\n- Bull (25%): Earnings 12500 mn, PE 22x → EPS 6.03, core value 132.6 + option 2.4 = 135.0 (weighted 33.8)\n- Base (55%): Earnings 11500 mn, PE 19x → 105.5 + option 2.4 = 107.9 (weighted 59.3)\n- Bear (20%): Earnings 8500 mn, PE 14x → 57.4 + option 2.4 = 59.8 (weighted 12.0)\n\n**Blended fair value: 33.8 + 59.3 + 12.0 = 105.1 CNY**.\n\n**Current price:** 126.16 CNY → **expected return -16.7%**. This is unattractive for new long positions.\n\n**Rating consistency check:** The valuation implies downside to fair value even under base case; only the bull scenario offers upside. Therefore, a Hold rating with negative watch is appropriate until the H2 recovery is proven or the price corrects to below 110 CNY.",
+  "canonical_model_snapshot": [
+    {
+      "line_id": "shares",
+      "period": "2026-07-04",
+      "metric": "total_share_count",
+      "value": 2073.2114,
+      "unit": "mn shares",
+      "status": "reported",
+      "evidence_ids": [
+        "Tushare total_share 207321142.4"
+      ],
+      "formula": ""
+    },
+    {
+      "line_id": "2026E_营业总收入",
+      "period": "2026E",
+      "metric": "营业总收入",
+      "value": 94535.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV022",
+        "EV029",
+        "underwriting_packet_base"
+      ],
+      "formula": "+6.0% vs FY2025A 89184 mn"
+    },
+    {
+      "line_id": "2027E_营业总收入",
+      "period": "2027E",
+      "metric": "营业总收入",
+      "value": 99770.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV022",
+        "model_trend"
+      ],
+      "formula": "~5.5% growth over 2026E"
+    },
+    {
+      "line_id": "2028E_营业总收入",
+      "period": "2028E",
+      "metric": "营业总收入",
+      "value": 104840.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV022",
+        "model_trend"
+      ],
+      "formula": "~5.1% growth over 2027E"
+    },
+    {
+      "line_id": "2026E_营业成本",
+      "period": "2026E",
+      "metric": "营业成本",
+      "value": 64938.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "packet_base"
+      ],
+      "formula": "Revenue - Gross Profit (94535 - 29597)"
+    },
+    {
+      "line_id": "2027E_营业成本",
+      "period": "2027E",
+      "metric": "营业成本",
+      "value": 68290.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "packet_base"
+      ],
+      "formula": "Revenue - Gross Profit (99770 - 31480)"
+    },
+    {
+      "line_id": "2028E_营业成本",
+      "period": "2028E",
+      "metric": "营业成本",
+      "value": 71560.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "packet_base"
+      ],
+      "formula": "Revenue - Gross Profit (104840 - 33280)"
+    },
+    {
+      "line_id": "2026E_毛利",
+      "period": "2026E",
+      "metric": "毛利",
+      "value": 29597.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "packet_base"
+      ],
+      "formula": "Revenue * gross margin implied"
+    },
+    {
+      "line_id": "2027E_毛利",
+      "period": "2027E",
+      "metric": "毛利",
+      "value": 31480.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "packet_base"
+      ],
+      "formula": "Revenue * gross margin implied"
+    },
+    {
+      "line_id": "2028E_毛利",
+      "period": "2028E",
+      "metric": "毛利",
+      "value": 33280.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "packet_base"
+      ],
+      "formula": "Revenue * gross margin implied"
+    },
+    {
+      "line_id": "2026E_operatingprofit",
+      "period": "2026E",
+      "metric": "operatingprofit",
+      "value": 13600.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "packet_base"
+      ],
+      "formula": "Gross Profit - Opex"
+    },
+    {
+      "line_id": "2027E_operatingprofit",
+      "period": "2027E",
+      "metric": "operatingprofit",
+      "value": 14300.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "packet_base"
+      ],
+      "formula": ""
+    },
+    {
+      "line_id": "2028E_operatingprofit",
+      "period": "2028E",
+      "metric": "operatingprofit",
+      "value": 15100.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "packet_base"
+      ],
+      "formula": ""
+    },
+    {
+      "line_id": "2026E_parentnetprofit",
+      "period": "2026E",
+      "metric": "parentnetprofit",
+      "value": 11500.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV012",
+        "EV016",
+        "model_base"
+      ],
+      "formula": "Revenue * net margin ~12.2% after finance expense 1.5% and tax 15%"
+    },
+    {
+      "line_id": "2027E_parentnetprofit",
+      "period": "2027E",
+      "metric": "parentnetprofit",
+      "value": 12150.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "packet_base"
+      ],
+      "formula": ""
+    },
+    {
+      "line_id": "2028E_parentnetprofit",
+      "period": "2028E",
+      "metric": "parentnetprofit",
+      "value": 12880.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "packet_base"
+      ],
+      "formula": ""
+    },
+    {
+      "line_id": "2026E_经营活动现金流量净额",
+      "period": "2026E",
+      "metric": "经营活动现金流量净额",
+      "value": 8050.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV018",
+        "EV039",
+        "debate_accepted"
+      ],
+      "formula": "11500 * 0.7"
+    },
+    {
+      "line_id": "2027E_经营活动现金流量净额",
+      "period": "2027E",
+      "metric": "经营活动现金流量净额",
+      "value": 10200.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "packet_base"
+      ],
+      "formula": ""
+    },
+    {
+      "line_id": "2028E_经营活动现金流量净额",
+      "period": "2028E",
+      "metric": "经营活动现金流量净额",
+      "value": 11000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "packet_base"
+      ],
+      "formula": ""
+    },
+    {
+      "line_id": "2026E_资本支出",
+      "period": "2026E",
+      "metric": "资本支出",
+      "value": 1800.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "packet_base"
+      ],
+      "formula": ""
+    },
+    {
+      "line_id": "2027E_资本支出",
+      "period": "2027E",
+      "metric": "资本支出",
+      "value": 1600.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "packet_base"
+      ],
+      "formula": ""
+    },
+    {
+      "line_id": "2028E_资本支出",
+      "period": "2028E",
+      "metric": "资本支出",
+      "value": 1500.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "packet_base"
+      ],
+      "formula": ""
+    },
+    {
+      "line_id": "2026E_fcf",
+      "period": "2026E",
+      "metric": "fcf",
+      "value": 6250.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV018",
+        "EV040",
+        "debate_accepted"
+      ],
+      "formula": "8050 - 1800"
+    },
+    {
+      "line_id": "2027E_fcf",
+      "period": "2027E",
+      "metric": "fcf",
+      "value": 8600.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "packet_base"
+      ],
+      "formula": "10200 - 1600"
+    },
+    {
+      "line_id": "2028E_fcf",
+      "period": "2028E",
+      "metric": "fcf",
+      "value": 9500.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "packet_base"
+      ],
+      "formula": "11000 - 1500"
+    },
+    {
+      "line_id": "2026E_gross_margin",
+      "period": "2026E",
+      "metric": "gross_margin",
+      "value": 31.3,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV014",
+        "EV027"
+      ],
+      "formula": "FY2025A 31.83% minus 0.5pp headwind"
+    },
+    {
+      "line_id": "2026E_eps",
+      "period": "2026E",
+      "metric": "diluted_earnings_per_share",
+      "value": 5.55,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV012_shares_calc"
+      ],
+      "formula": "11500 mn / 2073.2114 mn shares"
+    },
+    {
+      "line_id": "base_fair_value_per_share",
+      "period": "2026E",
+      "metric": "probability_weighted_fair_value",
+      "value": 105.1,
+      "unit": "CNY/share",
+      "status": "estimated",
+      "evidence_ids": [
+        "valuation_closure_calc"
+      ],
+      "formula": "0.25*135.0 + 0.55*107.9 + 0.20*59.8"
+    },
+    {
+      "line_id": "2026E_pe_ttm_implied",
+      "period": "2026-07-03",
+      "metric": "pe_ttm_to_current_price",
+      "value": 21.93,
+      "unit": "multiple",
+      "status": "reported",
+      "evidence_ids": [
+        "market_data"
+      ],
+      "formula": "daily_basic PE TTM"
+    },
+    {
+      "line_id": "2026E_finance_expense_ratio",
+      "period": "2026E",
+      "metric": "finance_expense_ratio",
+      "value": 1.5,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV_Q1_finance_expense_ratio_2.1%"
+      ],
+      "formula": "Accepted from debate; Q1 spike normalised to 1.5%"
+    }
+  ],
+  "model_change_rows": [
+    {
+      "line_id": "shares",
+      "old_value": null,
+      "new_value": 2073.2114,
+      "unit": "mn shares",
+      "evidence_ids": [
+        "Tushare total_share"
+      ],
+      "reason": "Original packet had missing share count; filled using Tushare data (20732.114 万股).",
+      "eps_fcf_valuation_impact": "Enables EPS and per-share valuation; no direct impact on earnings.",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2026E_经营活动现金流量净额",
+      "old_value": 9200.0,
+      "new_value": 8050.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "EV018_OCF_NI_Q1_0.53"
+      ],
+      "reason": "Bear argument and Q1 OCF deterioration suggest full-year OCF/NI will be lower than original 0.8. Accepted assumption lowered to 0.7.",
+      "eps_fcf_valuation_impact": "Reduces FCF by 1150 mn to 6250 mn, lowering DCF value by ~2 CNY/share; fair value updated.",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2026E_fcf",
+      "old_value": 7400.0,
+      "new_value": 6250.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "EV018",
+        "calc_OCF_minus_capex"
+      ],
+      "reason": "Consequential reduction from lower OCF; capex unchanged at 1800 mn.",
+      "eps_fcf_valuation_impact": "Lowers per-share DCF and fair value; consistent with accepted cash conversion view.",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2026E_finance_expense_ratio",
+      "old_value": 0.0,
+      "new_value": 1.5,
+      "unit": "%",
+      "evidence_ids": [
+        "EV_Q1_finance_expense_ratio_2.1%"
+      ],
+      "reason": "Q1 spike suggests full-year normalisation to 1.5% is more prudent than original near-zero assumption.",
+      "eps_fcf_valuation_impact": "Reduces pretax profit by ~14 bn, net profit by ~1.0 bn, EPS by ~0.05 CNY; fair value reduced by ~1 CNY.",
+      "disposition": "accepted"
+    }
+  ],
+  "accepted_underwriting_model": "## Accepted Underwriting Model \n\n**Company:** 阳光电源 (300274.SZ) – Clean energy equipment manufacturer\n\n### Operating Equations\n- Consolidated Revenue = PV Inverter revenue + Energy Storage revenue + Hydrogen + Others\n- PV Inverter revenue = PV Inverter shipment (GW) × ASP (CNY/W); shipment growth +3-5% YoY, ASP -2-3%.\n- Energy Storage revenue = Energy Storage shipment (GWh) × ASP (CNY/Wh); shipment +8% YoY, but US volume -40%, others +15%; ASP stable.\n- Hydrogen revenue <2 bn, negligible contribution.\n- Gross Profit = Revenue × gross margin; base 31.3%, driven by product mix, ASP, and input costs.\n- Operating Profit = Gross Profit - SGA - R&D (5.5% of rev) - credit impairment; resulting margin ~14.4%.\n- Net Profit = Operating Profit - finance expense (1.5% of rev) + other income - tax (15%).\n- OCF = Net Profit + depreciation - ΔWorking Capital (receivables, inventory, payables, contract liabilities); OCF/NI base 0.7.\n- Capex = 1.8 bn for capacity and digitalisation.\n\n### Segment Drivers (three-year consensus view)\n| Segment         | 2026E   | 2027E   | 2028E   |\n|-----------------|---------|---------|---------|\n| PV Inverter rev (bn) | ~520   | ~545   | ~570   |\n| Energy Storage rev (bn)| ~320  | ~350   | ~375   |\n| Hydrogen rev    | <2      | <5      | <10     |\n| Other rev       | ~100    | ~100    | ~100    |\n\n**Consolidated Financials (CNY mn)**\n|                   | FY2025A | 2026E   | 2027E   | 2028E   |\n|-------------------|---------|---------|---------|---------|\n| Revenue           | 89184   | 94535   | 99770   | 104840  |\n| Gross Profit      | 28389   | 29600   | 31480   | 33280   |\n| Gross Margin %    | 31.8    | 31.3    | 31.5    | 31.7    |\n| Operating Profit  | 15320   | 13600   | 14300   | 15100   |\n| Net Profit Parent | 13461   | 11500   | 12150   | 12880   |\n| EPS (CNY)         | 6.49    | 5.55    | 5.86    | 6.21    |\n| OCF               | 16918   | 8050    | 10200   | 11000   |\n| Capex             | ~3000   | 1800    | 1600    | 1500    |\n| FCF               | ~13918  | 6250    | 8600    | 9500    |\n\n**Scenarios**\n- Bull (25%): Revenue 990 bn, net profit 125 bn, OCF/NI 0.9, fair value 135 CNY.\n- Base (55%): Revenue 945 bn, net profit 115 bn, OCF/NI 0.7, fair value 107 CNY.\n- Bear (20%): Revenue 890 bn, net profit 85 bn, OCF/NI 0.5, fair value 60 CNY.\n\n**Valuation Approach:** Core earnings (PE 19x) + hydrogen option (2.4 CNY) = probability-weighted 105 CNY. Current price 126 CNY → no margin of safety.",
+  "model_change_ledger": "## Model Change Ledger\n\n| Question/Line | Original Assumption | Bull Proposal | Bear Proposal | Accepted Assumption | Evidence IDs | EPS/FCF/Value Impact | Next Check |\n|---------------|---------------------|---------------|---------------|---------------------|--------------|----------------------|-----------|\n| Q1: Storage margin | 2026E storage margin 28% | 30-31% (structural improvement) | 28% (competitive deterioration) | 30% for 2026E, but with higher risk discount; 28% in bear scenario | EV091, EV092 | +2pp margin adds ~2 bn gross profit | H1 2026 storage revenue/margin disclosure |\n| Q2: US tariff impact | US revenue -20% | US revenue flat (modest new orders) | US revenue -80% (market closure) | US storage revenue -40%, margin 25% vs group 30% | EV095, KPE01 | -2.5 bn net profit relative to no-tariff case | US trade policy and Sungrow localization announcement |\n| Q3: ASP pressure | Inverter ASP -2%, volume +5% | ASP flat (brand premium), volume +15% | ASP -8%, volume -5% | ASP -2.5%, volume +3.5% in base | EV014, EV029 | Each 1% ASP decline costs ~0.9 bn revenue | H1 shipment and ASP data (if released) |\n| Q4: Contract liabilities conversion | Revenue 2026E 945 bn | 990 bn (strong H2 delivery) | 890 bn (flat yoy) | 945 bn (base), but OCF/NI lowered to 0.7 reflecting poor cash conversion | EV019, EV020, EV043 | Lower OCF reduces FCF, DCF by ~1.2 CNY/share | Q2 revenue, OCF, and contract liability movement |\n| Finance expense ratio | ~0% (near-zero) | 1.0% (modest) | 2.0% (persistent) | 1.5% for full year | Q1 filing | Extra 1.5% of revenue pre-tax = ~14 bn, net profit -1.0 bn | H1 interest expense and borrowing levels |\n| Share count | missing | not addressed | not addressed | 2073.2 mn shares (from Tushare) | Tushare total_share | Enables EPS calc; no profit impact | Regular updates |\n\n**EPS/FCF recalc under accepted model:** 2026E EPS 5.55 CNY. OCF revised to 8.05 bn (from 9.2 bn). FCF 6.25 bn (from 7.4 bn). Fair value per share adjusted to 105.1 CNY (base case weighted).",
+  "debate_verdict": "The bull and bear targets highlighted the central tension: the order book is strong, pointing to near-term revenue acceleration, but the cash cycle is deteriorating, which casts doubt on the quality of any recovery. The bull correctly identified the contract liabilities + prepayments signal as a clear indicator of upcoming deliveries. The bear successfully attacked the thesis by focusing on the Q1 cash conversion breakdown and the policy risks in both the US and Europe.\n\nOn balance, the bear's case has more near-term evidence support (OCF decline, elevated working capital, unproven EU policy risk), while the bull's case remains a plausible but unverified scenario that requires H1 financials to validate. Consequently, we accept only minor revisions: we keep the base revenue forecast intact (945 bn) but reduce the OCF assumption and factor in higher financing costs, tilting the model towards the lower end of the range. The bull's aggressive upgrades are not accepted pending hard data.\n\nThe debate did not resolve the core question; it merely highlighted that the risk/reward is unattractive at the current price because the market already prices a substantial recovery. The recommendation should remain Hold with a negative bias.",
+  "probability_payoff": "Probability-weighted fair value: 105.1 CNY per share (approx). Downside to 60 CNY in bear case, upside to 135 CNY in bull. Current price 126.16 implies an expected return of -16.7% to fair value, and even the bull case offers only +7% upside. Thus, the payoff is asymmetric to the downside in the base/bear scenarios and unattractive from current levels. Only a drop into the 95-105 range would shift the risk/reward positively.",
+  "unresolved_questions_and_gaps": "1. Segment-level revenue and margin splits remain undisclosed; all segment analysis is analytical. 2. Inventory valuation and inventory days are at multi-year highs without explanation of quality or ageing. 3. The exact dilution from employee stock plans and convertibles is unknown; we used latest total shares as proxy. 4. EU policy quantification – no official revenue exposure to EU public funds – makes the risk unscored. 5. The true reason for Q1 finance expense spike (working capital financing vs structural debt) is not fully explained. \nThese missing data points keep conviction at 'low' for any directional call beyond Hold.",
+  "handoff_to_pm_and_trader": "## Handoff to PM and Trader\n\n**Accepted model version:** 300274_underwriting_v3 (post debate, as of 2026-07-04).\n\n**Position constraints:**\n- Do not initiate new long positions above 115 CNY. Current price 126 is inside the 'no-trade' zone.\n- If price falls to 95-105 CNY and the H2 recovery signals start to appear (contract liabilities convert to cash, OCF improves), a staged 1/3 position may be considered with a 105 CNY stop.\n- Existing holders should await half-year results before making decisions; consider selling call options or using a trailing stop at 115 to manage downside.\n\n**Key catalysts (next 8 weeks):**\n- 2026 half-year report (August) – the definitive test of the bull case. Must see: revenue ≥500 bn (implied Q2 ~345 bn, +25% QoQ), gross margin ≥31%, OCF/NI ≥0.7, contract liabilities stable or growing.\n- Any announcement of EV plant in Europe or US supply-chain localization.\n\n**Falsification signals:**\n- If H1 revenue <470 bn (i.e., Q2 <315 bn), the order backlog thesis is invalid, upgrade to Underweight.\n- If gross margin falls below 30%, cut fair value to below 90 CNY.\n\n**What the PM must not assume:**\n- Do not assume a linear recovery just because contract liabilities are high; cash conversion must be proven.\n- Do not replace the missing segment data with guestimates; use the whole-company consolidated model and mark the segment split as a watch item.\n- Hydrogen optionality is maximum 2.4 CNY/share; do not inflate it because of policy tailwinds unless orders are announced.",
+  "handoff_integrity_audit": "**Model Version:** 300274_underwriting_v3 \n**Frozen Reported Facts:**\n- FY2025 revenue 891.84 bn, net profit parent 134.61 bn (EV012)\n- FY2025 gross margin 31.83% (EV027)\n- Q1 2026 revenue 155.61 bn, gross margin 33.26%, OCF/NI 0.53 (EV013-EV018)\n- Energy storage gross margin ~30% (investor interaction)\n- Contract liabilities 122.04 bn, prepayments 40.39 bn (Q1 filing)\n- Total shares 20732.114 万股 (Tushare, as of 2026-07-04)\n\n**Accepted Analyst Estimates:**\n- 2026E revenue +6% to 94535 mn\n- 2026E gross margin 31.3%\n- 2026E finance expense ratio 1.5%\n- 2026E parent net profit 11500 mn\n- 2026E OCF/NI 0.7 → OCF 8050 mn\n- Capex 1800 mn, FCF 6250 mn\n- Bull/base/bear probabilities 25/55/20\n- PE 19x for base core earnings, 22x bull, 14x bear\n- Hydrogen option 2.4 CNY/share\n- Diluted shares 2073.2 mn (no dilution included)\n\n**Unresolved Cells:**\n- Segment-level revenue, gross margin, and shipment data: missing, analytical only\n- Inventory ageing and impairment risk: not quantified\n- Convertible bond or ESOP dilution: not included\n- EU policy financial impact: unscored, marked as watch\n- OCF actual trajectory: will be determined by H1 results\n\n**Business Units Preserved:** PV Inverter (core), Energy Storage (growth), Hydrogen (optionality), Clean Energy Investment Assets (NAV support). Each must be distinctly discussed in any subsequent revision.\n**Valuation Buckets:** Core PE 19x on 11500 mn net profit, hydrogen option 2.4 CNY, no double-counting.\n**Any revision to these must be accompanied by evidence IDs and recalculated per-share impact.**"
+}

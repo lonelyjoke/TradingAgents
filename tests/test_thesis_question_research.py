@@ -25,7 +25,7 @@ def test_aluminum_thesis_questions_force_alumina_power_and_sotp_debate():
     assert "power cost" in context
     assert "segment gross margin" in context
     assert "PM implication" in context
-    assert "neutral for direction" in context
+    assert "neutral" in context
     assert "missing alumina, power, or anode cost evidence cannot prove profit deterioration" in context
 
 

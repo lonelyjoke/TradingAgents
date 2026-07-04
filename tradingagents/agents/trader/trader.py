@@ -139,7 +139,7 @@ def create_trader(llm):
                     f"Official investor-interaction context: {investor_interaction_context}\n\n"
                     f"Official policy-planning context: {policy_planning_context}\n\n"
                     f"Web fact-check context: {web_fact_check_context}\n\n"
-                    f"Knowledge Planet stream/PDF intelligence: {knowledge_planet_context}\n\n"
+                    f"Knowledge Planet topic-text intelligence: {knowledge_planet_context}\n\n"
                     f"Gated baijiu verification context: {baijiu_context}\n\n"
                     f"Gated compute-leasing verification context: {compute_leasing_context}\n\n"
                     f"Gated AI optical-module verification context: {optical_module_context}\n\n"

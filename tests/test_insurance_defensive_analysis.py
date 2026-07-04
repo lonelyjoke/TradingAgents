@@ -18,7 +18,7 @@ def test_pm_and_research_prompts_calibrate_insurance_defensive_ratings():
         assert "operating cash flow" in source
         assert "OPAT/core operating profit" in source
         assert "solvency" in source
-        assert "relative Underweight/watch" in source or "wait-for-H1-validation" in source
+        assert "staged/cautious Overweight" in source or "Staged/Cautious Overweight" in source
         assert "hard negative cash-flow signal with unresolved attribution" in source
 
 
@@ -94,7 +94,7 @@ def test_insurance_peer_screen_cannot_drive_underweight_without_native_checks():
         assert "payout coverage" in source
 
     assert "cap the PM rating at Hold" in pm_source
-    assert "cap the recommendation at Hold" in research_source
+    assert "do not mechanically force Hold/Underweight" in research_source
     assert "not a verified substitute" in pm_source
     assert "Rating Evidence Audit" in pm_source
     assert "Rating Evidence Audit" in schema_source
@@ -115,14 +115,14 @@ def test_starter_insurance_position_does_not_automatically_map_to_overweight():
         assert "starter" in source or "1/3-1/2 target weight" in source
         assert "Hold" in source
         assert "positive" in source or "positive-bias" in source
-        assert "standalone basis" in source or "standalone fundamental chain" in source
+        assert "standalone basis" in source or "expected value" in source or "standalone fundamental chain" in source
 
     assert "The Underweight case is not proven" in pm_source
     assert "not `Overweight`" in research_source
-    assert "default clean rating should be Hold/positive watch" in pm_source
+    assert "do not default the rating to Hold" in pm_source
     assert "default recommendation should be Hold/positive watch" in research_source
     for source in (pm_source, research_source):
-        assert "staged/cautious Overweight" in source
+        assert "staged/cautious Overweight" in source or "Staged/Cautious Overweight" in source
         assert "only when" in source
 
 

@@ -139,6 +139,7 @@ def _insert_report(conn: sqlite3.Connection) -> None:
 
 
 def test_single_stock_context_retrieves_stream_and_pdf(tmp_path, monkeypatch):
+    monkeypatch.setattr(kp, "_text_only_enabled", lambda: False)
     db_path = tmp_path / "kp.sqlite"
     _make_db(db_path)
     conn = sqlite3.connect(db_path)
@@ -164,7 +165,8 @@ def test_single_stock_context_retrieves_stream_and_pdf(tmp_path, monkeypatch):
     assert "high_private_channel_hard_to_verify" in context
 
 
-def test_single_stock_pdf_recall_filters_sector_only_reports(tmp_path):
+def test_single_stock_pdf_recall_filters_sector_only_reports(tmp_path, monkeypatch):
+    monkeypatch.setattr(kp, "_text_only_enabled", lambda: False)
     db_path = tmp_path / "kp.sqlite"
     _make_db(db_path)
     conn = sqlite3.connect(db_path)
@@ -315,6 +317,7 @@ def test_hog_context_extracts_private_proxy_kpis(tmp_path, monkeypatch):
 
 
 def test_preprocess_extracts_pdf_report_structures(tmp_path, monkeypatch):
+    monkeypatch.setattr(kp, "_text_only_enabled", lambda: False)
     db_path = tmp_path / "kp.sqlite"
     _make_db(db_path)
     text_path = tmp_path / "catl_report.txt"
@@ -379,6 +382,7 @@ def test_preprocess_extracts_pdf_report_structures(tmp_path, monkeypatch):
 
 
 def test_preprocess_can_llm_enrich_pdf_report_structures(tmp_path, monkeypatch):
+    monkeypatch.setattr(kp, "_text_only_enabled", lambda: False)
     db_path = tmp_path / "kp.sqlite"
     _make_db(db_path)
     text_path = tmp_path / "sellside_report.txt"
@@ -458,7 +462,8 @@ def test_preprocess_can_llm_enrich_pdf_report_structures(tmp_path, monkeypatch):
 
 
 def test_single_stock_knowledge_defaults_use_lightweight_sync():
-    assert DEFAULT_CONFIG["knowledge_planet_auto_sync_context_lookback_days"] == 0
+    assert DEFAULT_CONFIG["knowledge_planet_text_only"] is True
+    assert DEFAULT_CONFIG["knowledge_planet_auto_sync_context_lookback_days"] == 30
     assert DEFAULT_CONFIG["knowledge_planet_context_sync_max_pages"] == 20
     assert DEFAULT_CONFIG["knowledge_planet_context_sync_max_image_downloads"] == 0
     assert DEFAULT_CONFIG["knowledge_planet_context_sync_max_file_downloads"] == 0
@@ -480,8 +485,8 @@ def test_preprocess_cache_check_returns_before_loading_details(tmp_path, monkeyp
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """,
         (
-                "2026-06-14:2026-06-20:v4:"
-                + hashlib.sha1("0||0||0".encode("utf-8")).hexdigest()[:12],
+                "2026-06-14:2026-06-20:v4:text:"
+                + hashlib.sha1("0|".encode("utf-8")).hexdigest()[:12],
             "2026-06-14",
             "2026-06-20",
                 4,
@@ -513,6 +518,7 @@ def test_preprocess_cache_check_returns_before_loading_details(tmp_path, monkeyp
 
 
 def test_daily_report_flags_information_and_pump_risk(tmp_path, monkeypatch):
+    monkeypatch.setattr(kp, "_text_only_enabled", lambda: False)
     db_path = tmp_path / "kp.sqlite"
     _make_db(db_path)
     conn = sqlite3.connect(db_path)
@@ -861,6 +867,65 @@ def test_window_sync_covers_each_date(monkeypatch):
     ]
     assert "2026-06-17=synced_window" in status
     assert "2026-06-19=synced_window" in status
+
+
+def test_text_only_import_uses_stream_mode(monkeypatch):
+    calls = []
+    monkeypatch.setattr(kp, "_text_only_enabled", lambda: True)
+    monkeypatch.setattr(
+        kp,
+        "_run_project_script",
+        lambda args, **kwargs: (calls.append((args, kwargs)) or (0, "ok")),
+    )
+
+    status = kp._import_knowledge_planet_local_index()
+
+    assert status.startswith("local_import_ok")
+    assert "--stream" in calls[0][0]
+    assert "--backfill-report-text" not in calls[0][0]
+
+
+def test_text_only_sync_disables_all_attachment_work(tmp_path, monkeypatch):
+    calls = []
+    monkeypatch.setattr(kp, "_text_only_enabled", lambda: True)
+    monkeypatch.setattr(kp, "_sync_state_dir", lambda: tmp_path)
+    monkeypatch.setattr(
+        kp,
+        "_run_project_script",
+        lambda args, **kwargs: (calls.append(args) or (0, "wrote 1 topic(s)")),
+    )
+
+    status = kp._sync_knowledge_planet_range(
+        "2026-06-19",
+        "2026-06-19",
+        ["2026-06-19"],
+        progress=None,
+        max_pages=20,
+        max_image_downloads=100,
+        max_file_downloads=50,
+    )
+
+    assert status.startswith("synced_window")
+    assert "--no-download-images" in calls[0]
+    assert "--no-ocr-images" in calls[0]
+    assert "--no-download-files" in calls[0]
+
+
+def test_context_sync_imports_before_reading(tmp_path, monkeypatch):
+    db_path = tmp_path / "kp.sqlite"
+    _make_db(db_path)
+    calls = []
+    monkeypatch.setattr(kp, "DEFAULT_KP_DB", db_path)
+    monkeypatch.setattr(kp, "_fetch_stock_basic", None)
+    monkeypatch.setattr(
+        kp,
+        "ensure_knowledge_planet_upstream_synced_for_window",
+        lambda *_args, **kwargs: (calls.append(kwargs) or "synced"),
+    )
+
+    kp.get_knowledge_planet_context("300750.SZ", "2026-06-19", look_back_days=0)
+
+    assert calls[0]["import_local"] is True
 
 
 def test_stock_terms_include_common_aliases_without_tushare(monkeypatch):

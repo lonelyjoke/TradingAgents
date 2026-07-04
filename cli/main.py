@@ -1085,17 +1085,7 @@ def save_report_to_disk(final_state, ticker: str, save_path: Path):
                     ),
                     encoding="utf-8",
                 )
-            pm_section = f"## Portfolio Manager Decision\n\n### Portfolio Manager\n{risk['judge_decision']}"
-            if final_state.get("pm_research_appendix"):
-                (portfolio_dir / "research_appendix.md").write_text(
-                    "# Portfolio Manager Research Appendix\n\n"
-                    + final_state["pm_research_appendix"],
-                    encoding="utf-8",
-                )
-                sections.append(
-                    "## V. Portfolio Manager Research Appendix\n\n"
-                    + final_state["pm_research_appendix"]
-                )
+            pm_section = risk["judge_decision"]
 
     # Run deterministic QA only after every context and the final PM memo have
     # been persisted. Coverage gaps never stop or downgrade report generation.
@@ -1143,10 +1133,7 @@ def save_report_to_disk(final_state, ticker: str, save_path: Path):
                 publication_banner + "\n",
                 encoding="utf-8",
             )
-            pm_section = (
-                "## Research Publication Status\n\n"
-                + published_decision
-            )
+            pm_section = published_decision
         elif research_error_count or warning_count:
             review_banner = (
                 "> **Publication status: REVIEW / 研究发布状态：可输出、待复核。** "
@@ -1159,77 +1146,18 @@ def save_report_to_disk(final_state, ticker: str, save_path: Path):
                 review_banner + "\n",
                 encoding="utf-8",
             )
-            pm_section = "## Research Publication Status\n\n" + reviewed_decision
+            pm_section = reviewed_decision
 
-    # Write consolidated report
-    header = f"# Trading Analysis Report: {ticker}\n\nGenerated: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n"
+    # The reader receives one self-contained PM report.  JSON model/evidence
+    # records, QA output and raw debates remain internal artifacts, but are not
+    # concatenated or indexed inside the public memo.
+    header = (
+        f"<!-- ticker: {ticker}; generated: "
+        f"{datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')} -->\n\n"
+    )
     complete_sections = []
     if pm_section:
         complete_sections.append(pm_section)
-    module_artifacts = [
-        ("Company underwriting model", "0_context/company_underwriting.json"),
-        ("Structured research bundle", "0_context/structured_research.json"),
-        ("Company business model", "0_context/company_business_model.md"),
-        ("Filing intelligence", "0_context/filing_intelligence.md"),
-        ("Industry cycle and KPI", "0_context/industry_kpi.md"),
-        ("Three-year forecast scaffold", "0_context/forecast_model.md"),
-        ("Peer comparison", "0_context/peer_comparison.md"),
-        ("Fundamental analyst", "1_analysts/fundamentals.md"),
-        ("Bull / bear research", "2_research/manager.md"),
-        ("Research Manager canonical model", "2_research/canonical_plan.json"),
-        ("Post-generation integrity audit", "5_portfolio/post_generation_audit.md"),
-        ("Portfolio Manager canonical model", "5_portfolio/canonical_decision.json"),
-        ("Portfolio Manager editorial review", "5_portfolio/editorial_review.json"),
-        ("Portfolio Manager research appendix", "5_portfolio/research_appendix.md"),
-    ]
-    available_artifacts = [
-        (label, relative_path)
-        for label, relative_path in module_artifacts
-        if (save_path / relative_path).exists()
-    ]
-    if available_artifacts:
-        artifact_rows = "\n".join(
-            f"| {label} | [{relative_path}]({relative_path}) |"
-            for label, relative_path in available_artifacts
-        )
-        complete_sections.append(
-            "## Research Module Coverage And Artifacts\n\n"
-            "Every material module remains auditable even though raw debate transcripts "
-            "are not concatenated into the public memo.\n\n"
-            "| module | artifact |\n"
-            "| --- | --- |\n"
-            + artifact_rows
-        )
-    if sections:
-        context_files = sorted(
-            path
-            for path in (save_path / "0_context").glob("*")
-            if path.is_file()
-        ) if (save_path / "0_context").exists() else []
-        context_index = "\n".join(
-            f"- [{path.name}](0_context/{path.name})"
-            for path in context_files
-        ) or "- No saved context modules."
-        archive_header = (
-            f"# Research Archive: {ticker}\n\n"
-            f"Generated: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n"
-            "This file preserves upstream analyst, debate, trading and risk work for audit. "
-            "It is not the public investment memo.\n\n"
-            "## Context Module Index\n\n"
-            + context_index
-            + "\n\n"
-        )
-        (save_path / "research_archive.md").write_text(
-            archive_header + "\n\n".join(sections),
-            encoding="utf-8",
-        )
-        complete_sections.append(
-            "## Appendix Index\n\n"
-            "Raw analyst, research-debate, trading and risk transcripts are saved "
-            "in `research_archive.md` and separately under `1_analysts/`, `2_research/`, "
-            "`3_trading/` and `4_risk/`. They are audit artifacts, not substitutes for "
-            "the publishable company deep-dive above."
-        )
     (save_path / "complete_report.md").write_text(header + "\n\n".join(complete_sections), encoding="utf-8")
     return save_path / "complete_report.md"
 

@@ -244,7 +244,7 @@ _A_SHARE_CONTEXT_SPECS = [
     (
         "knowledge_planet_context",
         "get_knowledge_planet_context",
-        "Knowledge Planet stream/PDF intelligence context",
+        "Knowledge Planet topic-text intelligence context",
     ),
     ("baijiu_context", "get_baijiu_context", "Baijiu verification context"),
     (

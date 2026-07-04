@@ -455,7 +455,7 @@ def test_handoff_numeric_audit_blocks_silent_pm_change(tmp_path):
                 "forecast_lines": [
                     {
                         "segment": "consolidated",
-                        "metric": "revenue",
+                        "metric": "Revenue",
                         "unit": "CNY mn",
                         "year_1_value": 100.0,
                     }
@@ -466,8 +466,8 @@ def test_handoff_numeric_audit_blocks_silent_pm_change(tmp_path):
     )
     manager = {
         "canonical_model_snapshot": [
-            {"line_id": "shares", "period": "current", "metric": "diluted shares", "value": 3130.0, "unit": "mn shares"},
-            {"line_id": "2026E_revenue", "period": "2026E", "metric": "revenue", "value": 100.0, "unit": "CNY mn"},
+            {"line_id": "shares", "period": "current", "metric": "diluted_shares_outstanding", "value": 3130.0, "unit": "mn_shares"},
+            {"line_id": "2026E_revenue", "period": "2026E", "metric": "consolidated_revenue", "value": 100.0, "unit": "CNY_mn"},
         ],
         "model_change_rows": [],
     }
@@ -488,6 +488,34 @@ def test_handoff_numeric_audit_blocks_silent_pm_change(tmp_path):
         and "silently changed" in issue.issue
         for issue in issues
     )
+
+
+def test_post_generation_audit_blocks_missing_pm_analytical_spine(tmp_path):
+    portfolio_dir = tmp_path / "5_portfolio"
+    portfolio_dir.mkdir()
+    (portfolio_dir / "decision.md").write_text(
+        "# PM\n\n" + "\n\n".join(f"## {index}\n\nbody" for index in range(1, 9)),
+        encoding="utf-8",
+    )
+    (portfolio_dir / "canonical_decision.json").write_text(
+        json.dumps(
+            {
+                "research_questions": [],
+                "question_verdicts": [],
+                "forecast_takeaways": [],
+                "forecast_assumptions": [],
+                "core_theses": [],
+                "canonical_model_snapshot": [],
+                "handoff_change_rows": [],
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    audit = render_post_generation_audit(tmp_path)
+
+    assert "pm_analytical_spine" in audit
+    assert "blocks formal publication" in audit
 
 
 def test_structured_segment_usage_accepts_aliases_and_does_not_treat_all_unknown_weights_as_material(tmp_path):

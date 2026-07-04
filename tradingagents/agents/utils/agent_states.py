@@ -73,7 +73,7 @@ class AgentState(MessagesState):
     investor_interaction_context: Annotated[str, "Precomputed official investor-interaction context"]
     policy_planning_context: Annotated[str, "Precomputed national/industry policy-planning context"]
     web_fact_check_context: Annotated[str, "Precomputed web fact-check context for high-frequency facts"]
-    knowledge_planet_context: Annotated[str, "Precomputed local Knowledge Planet stream/PDF alternative-intelligence context"]
+    knowledge_planet_context: Annotated[str, "Precomputed local Knowledge Planet topic-text alternative-intelligence context"]
     baijiu_context: Annotated[str, "Precomputed gated baijiu/liquor verification context for A-share names"]
     compute_leasing_context: Annotated[str, "Precomputed gated compute-leasing verification context for A-share names"]
     dividend_defensive_context: Annotated[str, "Precomputed gated defensive-dividend verification context for A-share names"]
@@ -126,9 +126,5 @@ class AgentState(MessagesState):
     pm_editorial_review: Annotated[
         dict,
         "Advisory sell-side editor review and bounded PM revision trace",
-    ]
-    pm_research_appendix: Annotated[
-        str,
-        "Internal PM sections moved out of the public memo to avoid duplication",
     ]
     past_context: Annotated[str, "Memory log context injected at run start (same-ticker decisions + cross-ticker lessons)"]

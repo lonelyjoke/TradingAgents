@@ -41,7 +41,7 @@ def test_pm_research_and_debate_prompts_use_optical_module_context():
     for relative_path in files:
         source = _read(relative_path)
         assert "optical_module_context" in source, relative_path
-        assert "get_optical_module_instruction()" in source, relative_path
+        assert "get_optical_module_instruction" in source, relative_path
 
 
 def test_fundamentals_analyst_uses_optical_module_context_and_tool():

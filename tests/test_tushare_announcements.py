@@ -33,7 +33,7 @@ def test_parse_cninfo_announcements_normalizes_pdf_rows():
     assert result.iloc[0]["ts_code"] == "688603.SH"
     assert result.iloc[0]["name"] == "天承科技"
     assert result.iloc[0]["title"] == "2025年年度报告"
-    assert result.iloc[0]["url"] == "http://static.cninfo.com.cn/finalpage/2026-04-28/123.PDF"
+    assert result.iloc[0]["url"] == "https://static.cninfo.com.cn/finalpage/2026-04-28/123.PDF"
 
 
 def test_fetch_announcements_uses_cninfo_when_tushare_errors(monkeypatch):

@@ -52,7 +52,8 @@ def test_single_stock_fusion_pack_is_the_first_reasoning_layer():
 
     assert "Single-Stock Knowledge Fusion Pack" in text
     assert "Hard / Proxy Clues To Fuse" in text
-    assert "PDF / Research-Assumption Cross-Checks" in text
+    assert "PDF / Research-Assumption Cross-Checks" not in text
+    assert "pdf_assumptions" not in text
     assert "downstream agents should use this fusion pack first" in text
 
 

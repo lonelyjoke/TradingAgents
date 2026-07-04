@@ -181,10 +181,15 @@ DEFAULT_CONFIG = {
     "web_fact_check_timeout_sec": 6,
     "web_fact_check_max_queries": 3,
     "web_fact_check_max_results_per_query": 4,
-    # Local Knowledge Planet alternative-intelligence layer. The importer
-    # builds the SQLite/PDF-text index ahead of time, so single-stock analysis
-    # only performs bounded local lookups in the recent window.
+    # Local Knowledge Planet alternative-intelligence layer.  The default
+    # production mode is text-only: official filing PDFs are still handled by
+    # the filing pipeline, but Knowledge Planet image/audio/file/PDF
+    # attachments are neither downloaded nor read.
     "knowledge_planet_enabled": True,
+    "knowledge_planet_text_only": _env_bool_or_default(
+        "KNOWLEDGE_PLANET_TEXT_ONLY",
+        True,
+    ),
     "knowledge_planet_db_path": _env_or_none("KNOWLEDGE_PLANET_DB_PATH"),
     "knowledge_planet_lookback_days": _env_int_or_default(
         "KNOWLEDGE_PLANET_LOOKBACK_DAYS",
@@ -226,12 +231,12 @@ DEFAULT_CONFIG = {
     ),
     "knowledge_planet_auto_sync_context_lookback_days": _env_int_or_default(
         "KNOWLEDGE_PLANET_AUTO_SYNC_CONTEXT_LOOKBACK_DAYS",
-        0,
+        30,
     ),
-    # Single-stock reports should not repeatedly perform the expensive daily
-    # ingestion job. They use a lightweight text-only sync for the end date,
-    # then read the local SQLite/preprocess cache. Run the standalone daily
-    # report or sync/import scripts for full image OCR and PDF downloads.
+    # Per-day API page allowance. Window sync multiplies this by the number of
+    # dates that do not yet have a successful sync stamp, while preserving the
+    # global auto-sync cap. This closes gaps between consecutive stock runs
+    # without re-fetching already cached dates.
     "knowledge_planet_context_sync_max_pages": _env_int_or_default(
         "KNOWLEDGE_PLANET_CONTEXT_SYNC_MAX_PAGES",
         20,

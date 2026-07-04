@@ -10,7 +10,11 @@ from tradingagents.agents.schemas import (
     SellSidePMDecision,
     render_sell_side_pm_decision,
 )
-from tradingagents.agents.managers.portfolio_manager import _canonical_handoff_issues
+from tradingagents.agents.managers.portfolio_manager import (
+    _analytical_structure_issues,
+    _canonical_handoff_issues,
+)
+from tradingagents.agents.managers.research_manager import _research_manager_handoff_issues
 from tradingagents.agents.utils.structured import (
     bind_structured,
     invoke_structured_or_freetext,
@@ -96,6 +100,55 @@ def test_sell_side_schema_renders_all_six_company_depth_contracts():
         rating_posture="Hold / Positive Watch",
         research_readiness="partial",
         one_line_thesis="Operating evidence is improving but valuation is balanced.",
+        research_questions=["Can volume growth offset price pressure?"],
+        question_verdicts=[
+            {
+                "question": "Can volume growth offset price pressure?",
+                "why_decisive": "It determines revenue growth and fixed-cost absorption.",
+                "conclusion": "Current evidence supports only a partial offset.",
+                "evidence_used": ["EV01: 2025A volume", "EV02: 2026Q1 margin"],
+                "strongest_counterevidence": "ASP and utilization are not disclosed.",
+                "model_or_valuation_effect": "Base revenue retained; probability unchanged.",
+                "confidence": "medium",
+                "next_verification": "2026H1 filing",
+            }
+        ],
+        forecast_takeaways=[
+            {
+                "takeaway": "Earnings growth depends on margin stability, not multiple expansion.",
+                "evidence_anchor": "2025A margin and 2026Q1 checkpoint.",
+                "financial_implication": "A 1ppt margin move changes EPS and fair value materially.",
+                "confidence_and_risk": "Medium; utilization is not disclosed.",
+            }
+        ],
+        forecast_assumptions=[
+            {
+                "parameter": "gross margin",
+                "affected_business": "group",
+                "historical_anchor": "2025A 25%",
+                "evidence_status": "reported",
+                "base_case": "25%",
+                "bull_case": "26%",
+                "bear_case": "23%",
+                "rationale_and_evidence": "Annual filing and Q1 checkpoint.",
+                "sensitivity": "1ppt changes parent profit and EPS through gross profit.",
+                "confidence": "medium",
+                "verification_gate": "2026H1 filing",
+            }
+        ],
+        core_theses=[
+            {
+                "rank": 1,
+                "takeaway": "The cost moat is investable only if margin remains stable.",
+                "decisive_question": "Does scale translate into durable unit economics?",
+                "evidence": "Reported margin and cash conversion.",
+                "strongest_counterevidence": "Price competition may absorb cost savings.",
+                "financial_transmission": "Utilization -> unit cost -> margin -> EPS -> PE.",
+                "market_pricing": "The current multiple assumes no material margin expansion.",
+                "falsification_gate": "Two reporting periods below the bear margin threshold.",
+                "verdict": "partial",
+            }
+        ],
         investment_conclusion_and_core_conflict=long_300,
         canonical_model_snapshot=[
             CanonicalModelLine(
@@ -141,8 +194,13 @@ def test_sell_side_schema_renders_all_six_company_depth_contracts():
     public, appendix, moved = split_pm_public_report(rendered)
     assert sum(1 for line in public.splitlines() if line.startswith("## ")) == 8
     assert "Company Disaggregation" not in public
-    assert "附录A" in appendix
-    assert moved == ["附录A：模型变更与交接审计", "附录B：质量自检"]
+    assert "2026E_revenue" not in public
+    assert "预测take-aways" in public
+    assert "核心问题裁决" in public
+    assert "核心假设与敏感性" in public
+    assert "论点1：The cost moat" in public
+    assert appendix == ""
+    assert moved == []
 
 
 def test_editorial_review_is_advisory_and_section_specific():
@@ -192,3 +250,80 @@ def test_handoff_check_detects_only_undocumented_material_changes():
         {"line_id": "2027e_eps", "disposition": "accepted"}
     ]
     assert _canonical_handoff_issues(manager, pm) == []
+
+
+def test_research_manager_handoff_requires_every_line_or_documented_change():
+    packet = {
+        "company_model": {"diluted_share_count_mn": 1000},
+        "forecast_years": ["2026E", "2027E", "2028E"],
+        "forecast_lines": [
+            {
+                "segment": "consolidated",
+                "metric": "Revenue",
+                "unit": "CNY mn",
+                "year_1_value": 100,
+                "year_2_value": 110,
+                "year_3_value": 120,
+            }
+        ],
+    }
+    payload = {
+        "canonical_model_snapshot": [
+            {
+                "line_id": "shares",
+                "period": "2026E-2028E",
+                "metric": "diluted_shares_outstanding",
+                "value": 1000,
+                "unit": "mn_shares",
+            },
+            {
+                "line_id": "2026E_revenue",
+                "period": "2026E",
+                "metric": "consolidated_revenue",
+                "value": 95,
+                "unit": "CNY_mn",
+            },
+        ],
+        "model_change_rows": [],
+    }
+
+    issues = _research_manager_handoff_issues(packet, payload)
+    assert any("undocumented change 2026E_revenue" in issue for issue in issues)
+    assert any("missing canonical line 2027E_revenue" in issue for issue in issues)
+    assert not any("shares" in issue for issue in issues)
+
+    payload["model_change_rows"] = [
+        {"line_id": "2026E_revenue", "disposition": "accepted"}
+    ]
+    payload["canonical_model_snapshot"].extend(
+        [
+            {
+                "line_id": "2027E_revenue", "period": "2027E",
+                "metric": "consolidated_revenue", "value": 110, "unit": "CNY_mn",
+            },
+            {
+                "line_id": "2028E_revenue", "period": "2028E",
+                "metric": "consolidated_revenue", "value": 120, "unit": "CNY_mn",
+            },
+        ]
+    )
+    assert _research_manager_handoff_issues(packet, payload) == []
+
+
+def test_pm_analytical_structure_gaps_trigger_advisory_revision():
+    assert _analytical_structure_issues({}) == [
+        "analytical structure: company-specific research questions count=0, expected at least 3",
+        "analytical structure: evidence-weighted question verdicts count=0, expected at least 3",
+        "analytical structure: forecast take-aways count=0, expected at least 2",
+        "analytical structure: auditable forecast assumptions count=0, expected at least 3",
+        "analytical structure: ranked core theses count=0, expected at least 2",
+    ]
+    assert _analytical_structure_issues(
+        {
+            "research_questions": ["q1", "q2", "q3"],
+            "question_verdicts": [{}, {}, {}],
+            "forecast_takeaways": [{}, {}],
+            "forecast_assumptions": [{}, {}, {}],
+            "core_theses": [{}, {}],
+        }
+    ) == []

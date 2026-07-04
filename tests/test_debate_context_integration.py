@@ -149,7 +149,7 @@ def test_portfolio_manager_prompt_includes_investor_interaction_context():
     }
 
     create_portfolio_manager(FakeLLM())(state)
-    prompt = captured["fallback_prompt"]
+    prompt = captured["prompt"]
     assert "official interaction signal" in prompt
     assert "official policy signal" in prompt
     assert "Investor Communication Verdict" in prompt
@@ -187,7 +187,7 @@ def test_research_manager_prompt_includes_investor_interaction_and_policy_contex
         "recent_decision_context": "",
     }
     create_research_manager(FakeLLM())(state)
-    prompt = captured["fallback_prompt"]
+    prompt = captured["prompt"]
     assert "official interaction signal" in prompt
     assert "official policy signal" in prompt
 

@@ -88,7 +88,7 @@ def create_news_analyst(llm):
                 else ""
             )
             + (
-                "\n\nPrecomputed Knowledge Planet stream/PDF intelligence:\n"
+                "\n\nPrecomputed Knowledge Planet topic-text intelligence:\n"
                 + knowledge_planet_context
                 if knowledge_planet_context
                 else ""

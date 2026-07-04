@@ -34,8 +34,7 @@ def test_pm_and_research_prompts_use_consumer_staples_context():
     ).read_text(encoding="utf-8")
 
     assert "consumer_staples_context = prompt_contexts" in pm_source
-    assert "Gated consumer-staples verification context" in pm_source
-    assert "get_consumer_staples_instruction()" in pm_source
+    assert '("Consumer staples", consumer_staples_context, get_consumer_staples_instruction)' in pm_source
     assert "Consumer Staples Verification Verdict" in research_source
     assert "get_consumer_staples_instruction()" in research_source
 

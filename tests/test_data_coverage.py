@@ -69,7 +69,7 @@ def test_build_data_coverage_instructs_manager_on_gaps():
         }
     )
     assert "filing_intelligence | failed" in audit
-    assert "Do not treat failed or missing modules as neutral evidence" in audit
+    assert "Treat failed, missing or partial modules as neutral non-evidence" in audit
 
 
 def test_quality_audit_none_detected_is_not_partial():
@@ -115,7 +115,7 @@ def test_build_data_coverage_adds_bank_core_variable_gates():
     assert "## Core Variable Gates" in audit
     assert "| bank | NIM / net interest spread | ready |" in audit
     assert "| bank | Asset quality | missing |" in audit
-    assert "Use Core Variable Gates as rating-strength guardrails" in audit
+    assert "Use Core Variable Gates as coverage and retrieval guardrails" in audit
 
 
 def test_build_data_coverage_prefers_explicit_battery_profile_over_incidental_noise():

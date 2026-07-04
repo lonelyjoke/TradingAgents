@@ -177,7 +177,7 @@ def test_chalco_mapping_fetches_alumina_and_marks_unavailable_costs_neutral(monk
     assert "AO.SHF" in context
     assert "Power cost" in context
     assert "Carbon anode cost" in context
-    assert "Missing; neutral for direction, confidence cap only." in context
+    assert "retrieval task; it cannot prove margin deterioration" in context.lower()
     assert "cannot prove margin deterioration" in context
 
 

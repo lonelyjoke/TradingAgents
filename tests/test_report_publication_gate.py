@@ -36,13 +36,13 @@ def test_blocked_audit_suppresses_trade_instructions_from_formal_report(tmp_path
     published_decision = (tmp_path / "5_portfolio" / "decision.md").read_text(encoding="utf-8")
     draft_decision = (tmp_path / "5_portfolio" / "decision_draft.md").read_text(encoding="utf-8")
     complete_report = report_path.read_text(encoding="utf-8")
-    research_archive = (tmp_path / "research_archive.md").read_text(encoding="utf-8")
 
     assert "Publication status: BLOCKED" in published_decision
     assert "评级、目标价、仓位、替代标的与交易指令已自动" in published_decision
     assert "Build a 5% position now" not in published_decision
     assert "Build a 5% position now" in draft_decision
     assert "Build a 5% position now" not in complete_report
+    assert not (tmp_path / "research_archive.md").exists()
 
 
 def test_nonblocking_coverage_gaps_do_not_block_or_downgrade_report(tmp_path, monkeypatch):
@@ -74,12 +74,13 @@ def test_nonblocking_coverage_gaps_do_not_block_or_downgrade_report(tmp_path, mo
     report_path = save_report_to_disk(state, "601689.SH", tmp_path)
     published_decision = (tmp_path / "5_portfolio" / "decision.md").read_text(encoding="utf-8")
     complete_report = report_path.read_text(encoding="utf-8")
-    research_archive = (tmp_path / "research_archive.md").read_text(encoding="utf-8")
 
     assert "Publication status: REVIEW" in published_decision
     assert "数据缺失本身不改变评级方向" in published_decision
     assert "**Rating**: Buy" in published_decision
     assert "Target price: 100" in complete_report
-    assert "Research Module Coverage And Artifacts" in complete_report
-    assert "Fundamental Deep Dive" in research_archive
+    assert "Research Module Coverage And Artifacts" not in complete_report
+    assert "Appendix Index" not in complete_report
+    assert "Fundamental Deep Dive" in (tmp_path / "1_analysts" / "fundamentals.md").read_text(encoding="utf-8")
+    assert not (tmp_path / "research_archive.md").exists()
     assert not (tmp_path / "5_portfolio" / "decision_draft.md").exists()

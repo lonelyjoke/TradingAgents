@@ -2,6 +2,10 @@
 
 from __future__ import annotations
 
+import json
+import re
+from typing import Any, Mapping
+
 from tradingagents.agents.schemas import (
     UnderwritingResearchPlan,
     render_underwriting_research_plan,
@@ -55,6 +59,175 @@ from tradingagents.dataflows.prompt_compaction import (
     compact_state_fields,
 )
 from tradingagents.dataflows.structured_research import compact_structured_research_for_prompt
+
+
+def _handoff_metric_key(period: Any, metric: Any) -> tuple[str, str]:
+    period_key = re.sub(r"\s+", "", str(period or "")).lower()
+    metric_key = re.sub(
+        r"[^a-z0-9\u4e00-\u9fff]+", "", str(metric or "").lower()
+    )
+    aliases = {
+        "dilutedsharecount": "dilutedshares",
+        "dilutedshares": "dilutedshares",
+        "dilutedsharesoutstanding": "dilutedshares",
+        "sharecount": "dilutedshares",
+        "revenue": "revenue",
+        "consolidatedrevenue": "revenue",
+        "grossprofit": "grossprofit",
+        "consolidatedgrossprofit": "grossprofit",
+        "grossmargin": "grossmargin",
+        "consolidatedgrossmargin": "grossmargin",
+        "operatingprofit": "operatingprofit",
+        "consolidatedoperatingprofit": "operatingprofit",
+        "netprofitparent": "parentnetprofit",
+        "parentnetprofit": "parentnetprofit",
+        "consolidatedparentnetprofit": "parentnetprofit",
+        "epsbasiccny": "eps",
+        "epsbasic": "eps",
+        "dilutedeps": "eps",
+        "eps": "eps",
+        "operatingcashflow": "ocf",
+        "ocf": "ocf",
+        "capitalexpenditure": "capex",
+        "capex": "capex",
+        "freecashflow": "fcf",
+        "fcf": "fcf",
+        "稀释股本": "dilutedshares",
+        "总股本": "dilutedshares",
+        "营业收入": "revenue",
+        "营收": "revenue",
+        "毛利润": "grossprofit",
+        "毛利率": "grossmargin",
+        "营业利润": "operatingprofit",
+        "归母净利润": "parentnetprofit",
+        "每股收益": "eps",
+        "经营活动现金流净额": "ocf",
+        "资本开支": "capex",
+        "自由现金流": "fcf",
+    }
+    canonical = aliases.get(metric_key, metric_key)
+    if canonical == "dilutedshares":
+        period_key = "current"
+    return period_key, canonical
+
+
+def _normalized_unit(value: Any) -> str:
+    return re.sub(r"[^a-z0-9%/\u4e00-\u9fff]+", "", str(value or "").lower())
+
+
+def _line_changed(left: Mapping[str, Any], right: Mapping[str, Any]) -> bool:
+    try:
+        left_value = float(left.get("value"))
+        right_value = float(right.get("value"))
+        value_changed = abs(left_value - right_value) > max(
+            abs(left_value) * 0.02, 0.01
+        )
+    except (TypeError, ValueError):
+        value_changed = left.get("value") != right.get("value")
+    return value_changed or (
+        _normalized_unit(left.get("unit"))
+        and _normalized_unit(right.get("unit"))
+        and _normalized_unit(left.get("unit"))
+        != _normalized_unit(right.get("unit"))
+    )
+
+
+def _underwriting_line_map(packet: Mapping[str, Any]) -> dict[tuple[str, str], dict]:
+    lines: dict[tuple[str, str], dict] = {}
+    company = dict(packet.get("company_model", {}))
+    shares = company.get("diluted_share_count_mn")
+    if shares is not None:
+        lines[("current", "dilutedshares")] = {
+            "line_id": "shares",
+            "period": company.get("share_count_period", "current"),
+            "metric": "diluted_shares",
+            "value": shares,
+            "unit": "mn shares",
+        }
+    years = list(packet.get("forecast_years", []))
+    for row in packet.get("forecast_lines", []) or []:
+        if str(row.get("segment", "")).strip().lower() not in {
+            "consolidated", "group", "合并", "公司整体"
+        }:
+            continue
+        for index, value_field in enumerate(
+            ("year_1_value", "year_2_value", "year_3_value")
+        ):
+            if index >= len(years) or row.get(value_field) is None:
+                continue
+            key = _handoff_metric_key(years[index], row.get("metric"))
+            lines[key] = {
+                "line_id": f"{years[index]}_{key[1]}",
+                "period": years[index],
+                "metric": key[1],
+                "value": row.get(value_field),
+                "unit": row.get("unit", ""),
+            }
+    return lines
+
+
+def _research_manager_handoff_issues(
+    packet: Mapping[str, Any], payload: Mapping[str, Any]
+) -> list[str]:
+    """Return machine-actionable underwriting -> Research Manager gaps."""
+
+    initial = _underwriting_line_map(packet)
+    accepted = {
+        _handoff_metric_key(row.get("period"), row.get("metric")): dict(row)
+        for row in payload.get("canonical_model_snapshot", []) or []
+        if row.get("value") is not None
+    }
+    change_ids = {
+        str(row.get("line_id", "")).strip().lower()
+        for row in payload.get("model_change_rows", []) or []
+        if str(row.get("line_id", "")).strip()
+        and str(row.get("disposition", "")).lower() == "accepted"
+    }
+    issues: list[str] = []
+    for key, original in initial.items():
+        final = accepted.get(key)
+        if final is None:
+            issues.append(
+                f"missing canonical line {original['line_id']}: "
+                f"{original['value']} {original['unit']}"
+            )
+            continue
+        if _line_changed(original, final) and str(
+            final.get("line_id", "")
+        ).lower() not in change_ids:
+            issues.append(
+                f"undocumented change {final.get('line_id')}: "
+                f"{original['value']} {original['unit']} -> "
+                f"{final.get('value')} {final.get('unit')}"
+            )
+    return issues
+
+
+def _handoff_repair_prompt(
+    *, packet: Mapping[str, Any], payload: Mapping[str, Any], issues: list[str]
+) -> str:
+    source_lines = list(_underwriting_line_map(packet).values())
+    return f"""CANONICAL UNDERWRITING HANDOFF REPAIR
+Your first Research Manager object is analytically usable but its machine-readable
+handoff is incomplete. Return one complete UnderwritingResearchPlan object.
+
+Do not change the recommendation merely to repair bookkeeping. Preserve the substantive
+debate ruling. For every populated consolidated underwriting line, do exactly one of:
+1. copy its value and unit into canonical_model_snapshot; or
+2. use the debated replacement value and add an accepted model_change_rows entry with the
+   same line_id, old value, new value, evidence ids, reason, and EPS/FCF/valuation impact.
+Never drop a populated line. Spaces versus underscores are the same unit and do not require
+a change row. Keep missing source cells missing rather than inventing precision.
+
+Detected issues:
+{json.dumps(issues, ensure_ascii=False)}
+
+Canonical populated lines from the original underwriting packet:
+{json.dumps(source_lines, ensure_ascii=False, separators=(',', ':'))}
+
+First Research Manager JSON:
+{json.dumps(payload, ensure_ascii=False, separators=(',', ':'))}
+"""
 
 
 def create_research_manager(llm):
@@ -229,6 +402,11 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 - If industry-specific filing context is available, keep an **Industry Driver Verdict** explicit enough to preserve the real sector-native variables that decide the thesis.
 - If the filing context contains **Growth Sustainability & Ramp Conditions**, keep a **Growth Sustainability Verdict** explicit enough to judge whether revenue/profit growth can continue or ramp further. Require the debate to separate verified drivers, inferred drivers, needed ramp conditions, and falsification signals before accepting any Buy/Underweight conclusion.
 - Fill the compact `UnderwritingResearchPlan` schema. Put the reconciled operating/forecast/scenario model in `accepted_underwriting_model`, all assumption changes in `model_change_ledger`, unresolved company-specific questions in `unresolved_questions_and_gaps`, and a concise constraint set in `handoff_to_pm_and_trader`. Do not recreate the legacy optional-field checklist.
+- Populate `research_questions` with only the 3-5 company-specific questions that can change earnings, cash/capital, valuation or rating. Use them as the organizing agenda rather than adding more generic modules.
+- Populate `question_verdicts` for those same questions. Do not summarize modules one by one. For each question select the strongest dated evidence already supplied, reconcile the strongest conflicting observation, state the exact forecast/probability/valuation effect or an explicit unchanged result, and name the next verification. Evidence that does not affect a question, model line, probability or verification task stays out of the decision spine.
+- Populate `forecast_takeaways` with 2-3 conclusions that interpret the forecast. Each needs a dated evidence anchor, financial implication, confidence and invalidation risk; never restate a row without explaining why it matters.
+- Populate `forecast_assumptions` with the few parameters responsible for most model variance. Every parameter needs a historical anchor, evidence status, bear/base/bull values, sensitivity and verification gate. A bull/bear midpoint is not an independent estimate. If shipment, ASP, utilization or another industry-native driver is missing, label the affected assumption top-down/low-confidence and use a range; do not reverse-engineer a precise value and present it as bottom-up evidence.
+- Populate `core_theses` with 2-4 ranked investment conclusions. Each must close takeaway -> evidence -> strongest counterevidence -> revenue/profit/EPS/FCF-or-capital/value transmission -> current market pricing -> falsification. Integrate moat evidence into the relevant thesis instead of creating an unprioritized moat list.
 - Fill `canonical_model_snapshot` with the deterministic diluted-share line and every populated consolidated forecast/scenario line from the underwriting packet. Use stable line ids such as `shares`, `2026E_revenue`, `2026E_parent_net_profit`, `2026E_eps`, `base_fair_value`. Copy unchanged values and units exactly. Every changed value or unit must have a matching accepted `model_change_rows` entry with old/new values, evidence ids and recalculated impact; otherwise keep the packet value or mark the line unresolved.
 - If the filing context or shared packet contains **Pre-Debate Underwriting Questions**, use them as the judging agenda. Reconcile initial assumption, bull evidence, bear attack, accepted model value, EPS/FCF/valuation impact and next verification inside `model_change_ledger`. Do not let the final plan ignore an unanswered question that is central to the recommendation.
 - If the filing context contains a Business Segment Valuation Map or Segment Economics Pack, keep a **Business Segment Valuation Verdict** explicit enough to split mature core businesses from emerging second curves, geographies, and channels. Do not allow the debate to collapse a multi-business company into one blended PE unless the filings do not support a meaningful split.
@@ -440,6 +618,53 @@ If a bull or bear argument contains an exact product price, inventory figure, pr
             {},
         )
         research_manager_generation_status["schema"] = "UnderwritingResearchPlan"
+
+        underwriting_packet = dict(
+            state.get("structured_research_context", {}).get(
+                "underwriting_packet", {}
+            )
+        )
+        initial_handoff_issues = _research_manager_handoff_issues(
+            underwriting_packet,
+            research_manager_plan_payload,
+        ) if underwriting_packet and research_manager_plan_payload else []
+        repair_status: dict = {"mode": "not_run"}
+        repair_applied = False
+        remaining_handoff_issues = list(initial_handoff_issues)
+        if initial_handoff_issues:
+            repaired_plan, repair_status = invoke_structured_or_freetext(
+                structured_llm,
+                llm,
+                _handoff_repair_prompt(
+                    packet=underwriting_packet,
+                    payload=research_manager_plan_payload,
+                    issues=initial_handoff_issues,
+                ),
+                render_underwriting_research_plan,
+                "Research Manager Handoff Repair",
+                return_metadata=True,
+                fallback_schema=UnderwritingResearchPlan,
+            )
+            repaired_payload = repair_status.pop("validated_payload", {})
+            if repaired_payload:
+                repaired_issues = _research_manager_handoff_issues(
+                    underwriting_packet,
+                    repaired_payload,
+                )
+                if not repaired_issues:
+                    investment_plan = repaired_plan
+                    research_manager_plan_payload = repaired_payload
+                    remaining_handoff_issues = []
+                    repair_applied = True
+        research_manager_generation_status.update(
+            {
+                "handoff_repair_requested": bool(initial_handoff_issues),
+                "handoff_repair_applied": repair_applied,
+                "handoff_repair_mode": repair_status.get("mode", "not_run"),
+                "initial_handoff_issues": initial_handoff_issues,
+                "remaining_handoff_issues": remaining_handoff_issues,
+            }
+        )
 
         new_investment_debate_state = {
             "judge_decision": investment_plan,
