@@ -1132,16 +1132,18 @@ class SellSidePMDecision(BaseModel):
     research_questions: list[str] = Field(
         default_factory=list,
         description=(
-            "Copy/refine the 3-5 company-specific questions that decide the rating. Every public section "
-            "must help answer one of them."
+            "Internal planning only: copy/refine the 3-5 company-specific questions that decide the rating. "
+            "Use them to direct research, but do not expose them as a public Q&A outline or repeat them in "
+            "the reader-facing report. Their conclusions must be synthesized into the relevant chapters."
         ),
     )
     question_verdicts: list[ResearchQuestionVerdict] = Field(
         default_factory=list,
         description=(
-            "Three to five evidence-weighted answers to the decisive questions. Cite the evidence "
-            "actually used, reconcile the strongest conflicting observation, and state the named "
-            "forecast/probability/valuation effect rather than summarizing source modules."
+            "Internal analytical ledger: three to five evidence-weighted answers to the decisive questions. "
+            "Cite the evidence actually used, reconcile the strongest conflicting observation, and state the "
+            "named forecast/probability/valuation effect. Do not render this ledger as a public Q&A section; "
+            "weave each accepted conclusion into company, industry, thesis, forecast or valuation prose."
         ),
     )
     forecast_takeaways: list[ForecastTakeaway] = Field(
@@ -1189,31 +1191,39 @@ class SellSidePMDecision(BaseModel):
     )
     company_disaggregation: str = Field(
         description=(
-            "Economic company map, not a company-introduction paragraph. Separate reported "
+            "Reader-facing company chapter. Begin with a clear economic judgment, then map the business rather "
+            "than writing a company-introduction paragraph. Separate reported "
             "segments from analytical product/channel/geography/customer/project/asset units; "
             "show what each unit sells, drivers, disclosed scale/margin/cash, valuation treatment "
-            "and missing disclosure without invented allocations."
+            "and missing disclosure without invented allocations. Explain the operating mechanism and end with "
+            "the boundary or unresolved disclosure that matters to the thesis."
         )
     )
     industry_cycle_and_competition: str = Field(
         description=(
-            "Industry cycle and competitive structure using sector-native supply, demand, "
+            "Reader-facing industry chapter with a core judgment, key evidence, causal mechanism and strongest "
+            "counter-case. Analyze cycle and competitive structure using sector-native supply, demand, "
             "capacity, utilization, price/spread and true-peer evidence. Separate verified "
             "facts from proxies and explain the financial transmission."
         ),
     )
     autonomous_forecast_model: str = Field(
         description=(
-            "Final accepted three-year independent forecast. Show material-unit drivers and "
-            "reconcile to model-profile-appropriate group earnings, cash/capital, per-share lines, "
+            "Narrative explanation of the final accepted three-year independent forecast. Explain material-unit "
+            "drivers, model type, reconciliation and the most fragile assumption, but do not reproduce another "
+            "consolidated forecast table because the renderer supplies the canonical table. Reconcile to "
+            "model-profile-appropriate group earnings, cash/capital, per-share lines, "
             "formulas, evidence status and share count. Do not substitute consensus narrative."
         )
     )
     thesis_financial_bridge: str = Field(
         description=(
-            "For each decisive thesis state driver formula, bull/base/bear assumptions and the "
+            "Integrated reader-facing investment-logic chapter. Do not write a question list or module recap. "
+            "For each decisive thesis state the conclusion first, then the strongest evidence, mechanism, "
+            "strongest counterevidence/boundary, driver formula, bull/base/bear assumptions and the "
             "resulting revenue, profit, EPS, FCF/capital and fair-value effect. Explicit missing "
-            "inputs are acceptable; qualitative claims posing as quantified effects are not."
+            "inputs are acceptable; qualitative claims posing as quantified effects are not. Close each thesis "
+            "with what current price implies and the falsification condition."
         )
     )
     moat_evidence_scorecard: str = Field(
@@ -2043,7 +2053,11 @@ class PortfolioDecision(BaseModel):
 
 
 def render_sell_side_pm_decision(decision: SellSidePMDecision) -> str:
-    """Render the single reader-facing Chinese eight-section PM memo."""
+    """Render one continuous reader-facing Chinese deep-dive report.
+
+    Research questions and their verdict ledger are intentionally internal.
+    They guide analysis but are not exposed as a repetitive public Q&A spine.
+    """
     if isinstance(decision, PortfolioDecision):
         return render_pm_decision(decision)
     return "\n\n".join(
@@ -2054,15 +2068,19 @@ def render_sell_side_pm_decision(decision: SellSidePMDecision) -> str:
             f"| {decision.rating.value} | {decision.rating_posture} | "
             f"{decision.research_readiness} |",
             f"> **一句话结论：** {decision.one_line_thesis}",
-            "## 一、投资结论与核心矛盾\n\n"
-            + _demote_embedded_headings(decision.investment_conclusion_and_core_conflict)
-            + ("\n\n" + _render_research_questions(decision.research_questions) if decision.research_questions else ""),
-            _render_question_verdicts(decision.question_verdicts),
-            "## 二、公司业务与利润池拆解\n\n"
+            "## 一、投资结论与估值速览\n\n"
+            + _demote_embedded_headings(decision.investment_conclusion_and_core_conflict),
+            "## 二、业务模式、分部经济与增长来源\n\n"
             + _demote_embedded_headings(decision.company_disaggregation),
-            "## 三、行业周期与竞争格局\n\n"
-            + _demote_embedded_headings(decision.industry_cycle_and_competition),
-            "## 四、三年盈利及现金流预测\n\n"
+            "## 三、行业结构、周期位置与竞争优势\n\n"
+            + _demote_embedded_headings(decision.industry_cycle_and_competition)
+            + "\n\n### 竞争优势的证据检验\n\n"
+            + _demote_embedded_headings(decision.moat_evidence_scorecard),
+            "## 四、经营质量：财务、会计与资本配置\n\n"
+            + _demote_embedded_headings(decision.accounting_and_capital_allocation),
+            "## 五、核心投资逻辑与反方检验\n\n"
+            + _demote_embedded_headings(decision.thesis_financial_bridge),
+            "## 六、盈利预测、关键假设与敏感性\n\n"
             + _render_forecast_takeaways(decision.forecast_takeaways)
             + "\n\n"
             + _render_reader_forecast_table(decision.canonical_model_snapshot)
@@ -2070,21 +2088,11 @@ def render_sell_side_pm_decision(decision: SellSidePMDecision) -> str:
             + _render_forecast_assumptions(decision.forecast_assumptions)
             + "\n\n### 模型解释与局限\n\n"
             + _demote_embedded_headings(decision.autonomous_forecast_model),
-            "## 五、核心论点、护城河与财务传导\n\n"
-            + (
-                _render_thesis_cards(decision.core_theses)
-                if decision.core_theses
-                else _demote_embedded_headings(decision.thesis_financial_bridge)
-                + "\n\n### 护城河证据评分\n\n"
-                + _demote_embedded_headings(decision.moat_evidence_scorecard)
-            ),
-            "## 六、会计质量与资本配置\n\n"
-            + _demote_embedded_headings(decision.accounting_and_capital_allocation),
-            "## 七、估值、情景与预期收益\n\n"
+            "## 七、市场预期、估值与情景回报\n\n"
             + _demote_embedded_headings(decision.expectation_gap_and_market_pricing)
             + "\n\n### 估值闭环\n\n"
             + _demote_embedded_headings(decision.valuation_closure),
-            "## 八、风险、催化剂与验证日历\n\n"
+            "## 八、风险、催化剂与跟踪框架\n\n"
             + _demote_embedded_headings(decision.risks_catalysts_verification),
         ]
     )

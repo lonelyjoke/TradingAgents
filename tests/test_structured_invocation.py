@@ -181,14 +181,14 @@ def test_sell_side_schema_renders_all_six_company_depth_contracts():
     rendered = render_sell_side_pm_decision(decision)
 
     for heading in (
-        "## 一、投资结论与核心矛盾",
-        "## 二、公司业务与利润池拆解",
-        "## 三、行业周期与竞争格局",
-        "## 四、三年盈利及现金流预测",
-        "## 五、核心论点、护城河与财务传导",
-        "## 六、会计质量与资本配置",
-        "## 七、估值、情景与预期收益",
-        "## 八、风险、催化剂与验证日历",
+        "## 一、投资结论与估值速览",
+        "## 二、业务模式、分部经济与增长来源",
+        "## 三、行业结构、周期位置与竞争优势",
+        "## 四、经营质量：财务、会计与资本配置",
+        "## 五、核心投资逻辑与反方检验",
+        "## 六、盈利预测、关键假设与敏感性",
+        "## 七、市场预期、估值与情景回报",
+        "## 八、风险、催化剂与跟踪框架",
     ):
         assert heading in rendered
     public, appendix, moved = split_pm_public_report(rendered)
@@ -196,9 +196,10 @@ def test_sell_side_schema_renders_all_six_company_depth_contracts():
     assert "Company Disaggregation" not in public
     assert "2026E_revenue" not in public
     assert "预测take-aways" in public
-    assert "核心问题裁决" in public
+    assert "本报告要回答的关键问题" not in public
+    assert "核心问题裁决" not in public
     assert "核心假设与敏感性" in public
-    assert "论点1：The cost moat" in public
+    assert "evidence mechanism financial impact" in public
     assert appendix == ""
     assert moved == []
 

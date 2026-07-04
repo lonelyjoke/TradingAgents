@@ -118,7 +118,7 @@ def _canonical_handoff_issues(
 
 
 def _analytical_structure_issues(pm_payload: dict) -> list[str]:
-    """Advisory repair triggers for the reader-facing analytical spine."""
+    """Advisory repair triggers for the internal analytical workbench."""
     requirements = (
         ("research_questions", 3, "company-specific research questions"),
         ("question_verdicts", 3, "evidence-weighted question verdicts"),
@@ -131,6 +131,16 @@ def _analytical_structure_issues(pm_payload: dict) -> list[str]:
         count = len(pm_payload.get(field, []) or [])
         if count < minimum:
             issues.append(f"analytical structure: {label} count={count}, expected at least {minimum}")
+    thesis_chapter = str(pm_payload.get("thesis_financial_bridge", "")).lower()
+    closure_markers = {
+        "strongest counterargument/boundary": ("反证", "反方", "边界", "counter"),
+        "market-pricing implication": ("市场定价", "当前价格", "预期差", "market pricing"),
+        "falsification condition": ("证伪", "验证条件", "下调信号", "falsification"),
+    }
+    if thesis_chapter:
+        for label, markers in closure_markers.items():
+            if not any(marker in thesis_chapter for marker in markers):
+                issues.append(f"public thesis chapter missing {label}")
     return issues
 
 
@@ -151,11 +161,15 @@ transmission is shallow, where counterevidence is missing, where valuation does 
 the expectation gap, where company economics are generic, or where sections contradict.
 
 Treat an empty or superficial question_verdicts, forecast_takeaways, forecast_assumptions, or core_theses array
-as a substantive defect. Check that assumptions have historical/evidence anchors rather than
+as a substantive defect in the internal workbench. The research questions and verdict ledger must not be
+rendered as a public Q&A chapter; verify instead that their accepted conclusions are synthesized once into
+the relevant company, industry, thesis, forecast or valuation narrative. Check that assumptions have historical/evidence anchors rather than
 being arbitrary bull/bear midpoints; that the three-year table reconciles earnings and cash;
 and that every ranked thesis has one clear takeaway, strongest counterevidence, auditable
 financial transmission, market-pricing implication and falsification gate. Recalculate any
 claimed sensitivity before accepting it. Do not reward a long machine table or a long moat list.
+The public `thesis_financial_bridge` chapter must preserve those same elements in connected analyst prose;
+the internal `core_theses` cards do not compensate for a thin public chapter.
 
 Do not change the rating and do not rewrite the report in this call. Return only the
 SellSideEditorialReview JSON object. Make revision instructions section-specific and
@@ -413,12 +427,13 @@ def create_portfolio_manager(llm):
 - The Research Manager's `Accepted Underwriting Model` and `Model Change Ledger` are the authoritative debated revisions to the initial packet. Apply those revisions line by line. When the accepted model conflicts with the initial packet, disclose the change and use the accepted value only when its evidence and arithmetic reconcile; otherwise keep the line unresolved rather than choosing whichever supports the desired rating.
 - The PM is a report synthesizer and final allocator, not the first analyst to understand the company. Do not summarize upstream prose sequentially. Reconstruct the investment case from the shared operating equations and accepted model changes, then use debate excerpts only to explain why an assumption changed or stayed unchanged.
 - Fill every required field in `SellSidePMDecision`. The renderer, not the model, owns all H1/H2 headings and produces exactly eight public Chinese sections. Do not put H2 headings in any field. `report_markdown` is ignored legacy compatibility state and must be empty.
-- Fill `research_questions`, `forecast_takeaways`, `forecast_assumptions`, and `core_theses` from the accepted model. Do not leave them empty when the source record supports analysis. These are the public analytical spine, not an internal checklist.
-- Fill `question_verdicts` with evidence-weighted answers to the same decisive questions. Integrate filing facts, structured financials, industry KPIs, peers, price/expectation evidence and Knowledge Planet clues only where they answer the question. Cite what was actually used, surface contradictions, and state the named model/probability/valuation effect. A sequential recap of available modules is not analysis.
+- Fill `research_questions`, `question_verdicts`, `forecast_takeaways`, `forecast_assumptions`, and `core_theses` from the accepted model. Do not leave them empty when the source record supports analysis. Questions, verdicts and thesis cards are the internal analytical workbench; they must improve the reasoning but must not appear as a public question list, Q&A ledger or repeated checklist.
+- Fill `question_verdicts` with evidence-weighted answers to the same decisive questions. Integrate filing facts, structured financials, industry KPIs, peers, price/expectation evidence and Knowledge Planet clues only where they answer the question. Cite what was actually used, surface contradictions, and state the named model/probability/valuation effect. Then synthesize each accepted conclusion exactly once into the relevant public chapter. A sequential recap of available modules is not analysis.
 - The forecast narrative must interpret rather than duplicate the renderer's table. State whether the model is bottom-up, top-down, or hybrid; explain the 2-3 largest earnings/cash drivers and the most fragile assumption. Do not write a precise volume, ASP, utilization, expense ratio, scenario probability or valuation multiple unless it has a historical/evidence anchor or is explicitly labeled an analyst range with sensitivity.
 - `core_theses` must contain only the 2-4 conclusions that decide the rating. Do not produce separate flat lists of thesis bullets and moat bullets. A moat is relevant only when observable evidence shows transmission into share/price, margin, turnover, cash conversion, ROIC or valuation, with the strongest counterevidence and a falsification gate.
 - Copy the machine-readable Research Manager `canonical_model_snapshot` line for line, including ids, periods, values and units. Any PM revision requires a matching accepted `handoff_change_rows` entry with old/new value, evidence ids and recalculated EPS/FCF/valuation impact. A prose claim of "no change" never overrides a numeric difference.
-- Single-report depth contract: let length follow company complexity and evidence density. The eight public sections must contain all evidence, assumptions, sensitivities, peer alternatives, accounting analysis and model-change implications needed for a PM or research head to audit the recommendation without opening a second report. Do not pad or repeat conclusions. Only raw agent transcripts, generation diagnostics and machine bookkeeping remain internal artifacts.
+- Single-report depth contract: let length follow company complexity and evidence density. The eight public sections follow a continuous research argument: conclusion and valuation snapshot -> business model and segment economics -> industry/cycle/competitive advantage -> operating and accounting quality -> core investment logic with counter-case -> forecast and sensitivities -> market expectations and valuation -> risks/catalysts/tracking. They must contain all evidence, assumptions, sensitivities, peer alternatives, accounting analysis and model-change implications needed for a PM or research head to audit the recommendation without opening a second report. Do not pad or repeat conclusions. Only raw agent transcripts, generation diagnostics, research-question ledgers and machine bookkeeping remain internal artifacts.
+- Within every substantive public chapter, use this reasoning loop when relevant: core judgment -> key evidence -> causal mechanism -> concrete company or peer case -> strongest counterargument and boundary -> financial/valuation implication -> transition to the next chapter. Questions are prompts for analyst thinking, never the reader-facing architecture.
 - Always generate the complete PM memo. It should attempt all five items below inside a small number of integrated sections: (1) material business-segment economics and a segment prosperity matrix, (2) three distinct forward years or four forward quarters reconciled to the packet's model-profile-appropriate consolidated earnings, cash/capital, asset-quality and per-share lines, (3) formula-auditable valuation and safety-price arithmetic, (4) period-consistent verification thresholds, and (5) an explicit KPE outcome ledger. If an item cannot be completed, state the exact missing input, leave unsupported cells null, and add a retrieval task; do not suppress or mechanically downgrade the report.
 - Read `preprocessing_mode` and `preprocessing_notes` in the Structured Research Bundle. If semantic preprocessing failed or the mode is deterministic-only, disclose that limitation. Use deterministic filing-row segments when present, but do not claim that semantic extraction or conflict resolution succeeded.
 - For every material segment, show the latest disclosed revenue, revenue weight, revenue growth, gross margin and margin change when available. Never call a segment the fastest-growing, highest-margin, or dominant profit pool without comparing it against every disclosed material segment for the same period and metric.

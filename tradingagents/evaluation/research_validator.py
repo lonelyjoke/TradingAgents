@@ -94,6 +94,7 @@ PUBLICATION_BLOCKING_SECTIONS = frozenset(
         "pm_analytical_spine",
         "share_count_source_conflict",
         "handoff_numeric_consistency",
+        "pm_unit_scale_arithmetic",
     }
 )
 
@@ -1577,35 +1578,37 @@ def _valuation_bridge_issues(decision_text: str) -> list[DecisionDepthIssue]:
 
 def _period_semantic_issues(decision_text: str) -> list[DecisionDepthIssue]:
     issues: list[DecisionDepthIssue] = []
-    q2_windows = re.findall(
-        r"(?:Q2|二季度|第二季度).{0,100}",
-        decision_text,
-        re.I | re.S,
-    )
-    h1_windows = re.findall(
-        r"(?:H1|上半年|半年报|中报).{0,100}",
-        decision_text,
-        re.I | re.S,
-    )
-
-    def _profit_thresholds(windows: list[str]) -> set[str]:
+    def _profit_thresholds(period_pattern: str) -> set[str]:
+        # Keep the period, profit metric and threshold in the same clause.  The
+        # old 100-character window crossed bullets and mistook a nearby revenue
+        # threshold plus an OCF/net-profit ratio for a profit threshold.
+        metric = r"(?:归母净利润|净利润|parent\s+profit|net\s+profit|profit)"
+        clause = r"[^。；;\n|]{0,80}"
+        metric_clause = r"[^，,。；;\n|]{0,24}"
+        windows = re.findall(
+            rf"(?:{period_pattern}){clause}{metric}{clause}",
+            decision_text,
+            re.I,
+        )
         values: set[str] = set()
         for window in windows:
-            if not any(token in window.lower() for token in ("profit", "净利润", "归母")):
-                continue
             for low, high in re.findall(
-                r"(\d+(?:\.\d+)?)\s*(?:-|–|—|至|~)\s*(\d+(?:\.\d+)?)\s*亿",
+                rf"{metric}{metric_clause}(\d+(?:\.\d+)?)\s*(?:-|–|—|至|~)\s*(\d+(?:\.\d+)?)\s*亿",
                 window,
+                re.I,
             ):
                 values.add(f"range:{low}-{high}")
             for value in re.findall(
-                r"(?:[<>≥≤]|低于|高于|超过|超|不低于|不高于)\s*(?:¥|￥)?\s*(\d+(?:\.\d+)?)\s*亿",
+                rf"{metric}{metric_clause}(?:[<>≥≤]|低于|高于|超过|超|不低于|不高于)\s*(?:¥|￥)?\s*(\d+(?:\.\d+)?)\s*亿",
                 window,
+                re.I,
             ):
                 values.add(f"threshold:{value}")
         return values
 
-    reused = _profit_thresholds(q2_windows) & _profit_thresholds(h1_windows)
+    reused = _profit_thresholds(r"Q2|二季度|第二季度") & _profit_thresholds(
+        r"H1|上半年|半年报|中报"
+    )
     if reused:
         issues.append(
             DecisionDepthIssue(
@@ -1632,6 +1635,143 @@ def _period_semantic_issues(decision_text: str) -> list[DecisionDepthIssue]:
             )
         )
     return issues
+
+
+def audit_pm_unit_scale_arithmetic(report_dir: str | Path) -> list[DecisionDepthIssue]:
+    """Catch order-of-magnitude errors in PM sensitivities and scenarios.
+
+    The canonical forecast is stored in CNY millions while Chinese prose is
+    commonly written in 亿元.  This boundary produced the exact 10x mistakes
+    seen in the Sungrow draft, so validate the prose against the canonical
+    revenue/profit scale before publication.
+    """
+    payload_path = Path(report_dir) / "5_portfolio" / "canonical_decision.json"
+    if not payload_path.exists():
+        return []
+    try:
+        payload = json.loads(read_text_fallback(payload_path))
+    except (json.JSONDecodeError, OSError, TypeError):
+        return []
+
+    def _canonical_yi(metric_tokens: tuple[str, ...]) -> float | None:
+        candidates: list[tuple[str, float]] = []
+        for row in payload.get("canonical_model_snapshot", []) or []:
+            metric = str(row.get("metric", "")).lower()
+            period = str(row.get("period", ""))
+            if not any(token in metric for token in metric_tokens) or not re.search(r"E$", period, re.I):
+                continue
+            value = _safe_float(row.get("value"))
+            unit = re.sub(r"[\s_]+", "", str(row.get("unit", "")).lower())
+            if value <= 0:
+                continue
+            if unit in {"cnymn", "rmbmn", "百万元"}:
+                value /= 100.0
+            elif unit in {"cnybn", "rmbbn", "十亿元"}:
+                value *= 10.0
+            elif "亿" not in unit:
+                continue
+            candidates.append((period, value))
+        return sorted(candidates, key=lambda item: item[0])[0][1] if candidates else None
+
+    revenue_yi = _canonical_yi(("revenue", "营业总收入", "营业收入", "营收"))
+    profit_yi = _canonical_yi(("parentnetprofit", "parent net profit", "归母净利润"))
+    if revenue_yi is None:
+        return []
+
+    prose_fields = (
+        "investment_conclusion_and_core_conflict",
+        "company_disaggregation",
+        "industry_cycle_and_competition",
+        "autonomous_forecast_model",
+        "thesis_financial_bridge",
+        "accounting_and_capital_allocation",
+        "expectation_gap_and_market_pricing",
+        "valuation_closure",
+        "risks_catalysts_verification",
+    )
+    text = "\n".join(str(payload.get(field, "")) for field in prose_fields)
+    text += "\n" + "\n".join(
+        str(row.get("sensitivity", ""))
+        for row in payload.get("forecast_assumptions", []) or []
+    )
+    text += "\n" + "\n".join(
+        str(row.get("financial_implication", ""))
+        for row in payload.get("forecast_takeaways", []) or []
+    )
+    text += "\n" + "\n".join(
+        " ".join(
+            str(row.get(field, ""))
+            for field in (
+                "takeaway",
+                "evidence",
+                "strongest_counterevidence",
+                "financial_transmission",
+                "market_pricing",
+                "falsification_gate",
+            )
+        )
+        for row in payload.get("core_theses", []) or []
+    )
+
+    findings: list[str] = []
+    seen: set[tuple[float, float]] = set()
+    # Inspect every small rate shock independently so a preceding margin level
+    # or scenario probability cannot consume the real 0.5pp/1pp sensitivity.
+    # Net-profit effects are deliberately excluded: tax and incremental margin
+    # can make those much smaller than the direct revenue/P&L-line effect.
+    for match in re.finditer(r"(\d+(?:\.\d+)?)\s*(?:%|pp|个百分点)", text, re.I):
+        rate = float(match.group(1))
+        if rate <= 0 or rate > 5:
+            continue
+        tail = text[match.end() : match.end() + 100]
+        tail = re.split(r"[。；;\n]", tail, maxsplit=1)[0]
+        amount_match = re.search(
+            r"(?:毛利(?:润)?|税前利润|财务费用|费用)[^，,。；;\n]{0,24}?(\d+(?:\.\d+)?)\s*亿",
+            tail,
+            re.I,
+        ) or re.search(
+            r"(\d+(?:\.\d+)?)\s*亿\s*(?:毛利(?:润)?|税前利润|财务费用|费用)",
+            tail,
+            re.I,
+        )
+        if not amount_match:
+            continue
+        amount = float(amount_match.group(1))
+        if (rate, amount) in seen:
+            continue
+        seen.add((rate, amount))
+        expected = revenue_yi * rate / 100.0
+        ratio = amount / expected if expected else 1.0
+        if ratio >= 5.0 or ratio <= 0.2:
+            findings.append(
+                f"{rate:g}pp/% of {revenue_yi:g}亿元 implies about {expected:g}亿元, not {amount:g}亿元"
+            )
+
+    scale_checks = (("收入|营收", revenue_yi),)
+    if profit_yi is not None:
+        scale_checks += (("归母净利润|净利润", profit_yi),)
+    for metric_pattern, base_value in scale_checks:
+        for scenario, amount_text in re.findall(
+            rf"(牛市情景|牛市|Bull|基础|基准|Base|熊市情景|熊市|Bear)[^。；;\n]{{0,80}}?(?:{metric_pattern})\s*(?:为|约|=|：|:)?\s*([0-9,.]+)\s*亿",
+            text,
+            re.I,
+        ):
+            amount = float(amount_text.replace(",", ""))
+            if amount >= base_value * 5.0 or amount <= base_value / 5.0:
+                findings.append(
+                    f"scenario {scenario}={amount:g}亿元 is inconsistent with canonical scale {base_value:g}亿元"
+                )
+
+    if not findings:
+        return []
+    return [
+        DecisionDepthIssue(
+            "pm_unit_scale_arithmetic",
+            "error",
+            "PM sensitivity/scenario arithmetic has unit-scale contradictions: "
+            + "; ".join(dict.fromkeys(findings)),
+        )
+    ]
 
 
 def _scenario_arithmetic_issues(decision_text: str) -> list[DecisionDepthIssue]:
@@ -2023,6 +2163,14 @@ def audit_structured_research_usage(
             )
         ]
 
+    pm_payload: dict[str, Any] = {}
+    pm_payload_path = Path(report_dir) / "5_portfolio" / "canonical_decision.json"
+    if pm_payload_path.exists():
+        try:
+            pm_payload = json.loads(read_text_fallback(pm_payload_path))
+        except (json.JSONDecodeError, OSError, TypeError):
+            pm_payload = {}
+
     issues: list[DecisionDepthIssue] = []
     invalid_eps_rows = [
         row
@@ -2201,31 +2349,25 @@ def audit_structured_research_usage(
             for row in underwriting_packet.get("underwriting_questions", [])
             if str(row.get("question_id", "")).strip()
         ]
-        if question_ids and not any(question_id in decision_text for question_id in question_ids):
+        # Research questions are an internal planning device.  Their conclusions
+        # should shape the report, but IDs and Q&A ledgers do not belong in the
+        # reader-facing architecture.
+        if question_ids and not (pm_payload.get("question_verdicts") or []):
             issues.append(
                 DecisionDepthIssue(
                     "underwriting_question_usage",
                     "warning",
-                    "PM memo does not visibly answer any company-specific question from the shared underwriting packet",
+                    "PM analytical ledger does not answer any company-specific question from the shared underwriting packet",
                 )
             )
-        if not any(
-            marker in decision_text.lower()
-            for marker in (
-                "shared underwriting model change audit",
-                "shared model change",
-                "model change ledger",
-                "承保模型变更",
-                "模型变更台账",
-                "共享模型与kpe变更审计",
-                "共享模型变更审计",
-            )
-        ):
+        # This is machine bookkeeping and is validated from canonical JSON;
+        # forcing the ledger into public prose created guaranteed false blocks.
+        if not str(pm_payload.get("shared_model_change_audit", "")).strip():
             issues.append(
                 DecisionDepthIssue(
                     "shared_model_change_audit",
                     "error",
-                    "PM memo does not reconcile the fundamental/bull/bear changes to the shared underwriting model",
+                    "PM canonical payload does not reconcile the fundamental/bull/bear changes to the shared underwriting model",
                 )
             )
 
@@ -2380,6 +2522,7 @@ def audit_report_depth(report_dir: str | Path) -> pd.DataFrame:
     issues.extend(audit_structured_research_usage(report_dir, decision_text))
     issues.extend(audit_context_alignment(report_dir))
     issues.extend(audit_handoff_numeric_consistency(report_dir))
+    issues.extend(audit_pm_unit_scale_arithmetic(report_dir))
     pm_payload_path = report_path / "5_portfolio" / "canonical_decision.json"
     if pm_payload_path.exists():
         try:
@@ -2407,6 +2550,21 @@ def audit_report_depth(report_dir: str | Path) -> pd.DataFrame:
                 missing.append(
                     "question verdicts missing evidence/counterevidence/model effect: "
                     + ",".join(str(index) for index in shallow_verdicts)
+                )
+            thesis_chapter = str(pm_payload.get("thesis_financial_bridge", "")).lower()
+            thesis_closure = {
+                "counterargument/boundary": ("反证", "反方", "边界", "counter"),
+                "market-pricing implication": ("市场定价", "当前价格", "预期差", "market pricing"),
+                "falsification condition": ("证伪", "验证条件", "下调信号", "falsification"),
+            }
+            missing_thesis_elements = [
+                label
+                for label, markers in thesis_closure.items()
+                if not any(marker in thesis_chapter for marker in markers)
+            ]
+            if missing_thesis_elements:
+                missing.append(
+                    "public thesis chapter missing " + ", ".join(missing_thesis_elements)
                 )
             if missing:
                 issues.append(

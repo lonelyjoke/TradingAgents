@@ -7,6 +7,7 @@ from tradingagents.evaluation.research_validator import (
     audit_decision_depth,
     audit_decision_integrity,
     audit_handoff_numeric_consistency,
+    audit_pm_unit_scale_arithmetic,
     audit_structured_research_usage,
     render_post_generation_audit,
     _extract_rating,
@@ -344,6 +345,62 @@ def test_post_generation_integrity_accepts_explicit_chinese_unchanged_kpe_outcom
     sections = {issue.section for issue in audit_decision_integrity(decision)}
 
     assert "alternative_intelligence_transmission" not in sections
+
+
+def test_period_semantics_does_not_confuse_revenue_threshold_with_profit_ratio():
+    decision = (
+        "升级信号：H1收入≥500亿元（Q2环比+25%），毛利率≥31%，OCF/净利润≥0.7。\n"
+        "下调信号：H1收入<450亿元，或OCF/净利润仍低于0.6。"
+    )
+
+    sections = {issue.section for issue in audit_decision_integrity(decision)}
+
+    assert "q2_h1_period_semantics" not in sections
+
+
+def test_period_semantics_blocks_reused_q2_and_h1_profit_threshold():
+    decision = "Q2单季归母净利润低于50亿元则下调；H1归母净利润低于50亿元则下调。"
+
+    sections = {issue.section for issue in audit_decision_integrity(decision)}
+
+    assert "q2_h1_period_semantics" in sections
+
+
+def test_pm_unit_scale_audit_blocks_tenfold_sensitivity_and_scenario(tmp_path):
+    portfolio_dir = tmp_path / "5_portfolio"
+    portfolio_dir.mkdir()
+    payload = {
+        "canonical_model_snapshot": [
+            {
+                "line_id": "2026E_revenue",
+                "period": "2026E",
+                "metric": "consolidated_revenue",
+                "value": 94535,
+                "unit": "CNY mn",
+            },
+            {
+                "line_id": "2026E_profit",
+                "period": "2026E",
+                "metric": "parent_net_profit",
+                "value": 11500,
+                "unit": "CNY mn",
+            },
+        ],
+        "thesis_financial_bridge": "1pp毛利率下降使税前利润减少约95亿。",
+        "autonomous_forecast_model": "牛市：收入9900亿，净利润1250亿。",
+        "forecast_assumptions": [
+            {"sensitivity": "0.5pp变化约47亿税前利润。"}
+        ],
+    }
+    (portfolio_dir / "canonical_decision.json").write_text(
+        json.dumps(payload, ensure_ascii=False), encoding="utf-8"
+    )
+
+    issues = audit_pm_unit_scale_arithmetic(tmp_path)
+
+    assert [issue.section for issue in issues] == ["pm_unit_scale_arithmetic"]
+    assert "95" in issues[0].issue
+    assert "9900" in issues[0].issue
 
 
 def test_integrity_audit_recalculates_forecast_and_valuation_ranges():

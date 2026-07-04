@@ -1,0 +1,23 @@
+{
+  "mode": "schema_prompt_structured",
+  "agent": "Research Manager",
+  "structured_error": "",
+  "schema": "UnderwritingResearchPlan",
+  "handoff_repair_requested": true,
+  "handoff_repair_applied": true,
+  "handoff_repair_mode": "schema_prompt_structured",
+  "initial_handoff_issues": [
+    "missing canonical line 2026E_revenue: 85500.0 CNY mn",
+    "missing canonical line 2027E_revenue: 89775.0 CNY mn",
+    "missing canonical line 2028E_revenue: 94264.0 CNY mn",
+    "missing canonical line 2026E_grossmargin: 31.5 %",
+    "missing canonical line 2027E_grossmargin: 31.8 %",
+    "missing canonical line 2028E_grossmargin: 32.0 %",
+    "undocumented change 2027E_parent_net_profit: 11250.0 CNY mn -> 11500.0 CNY mn",
+    "undocumented change 2028E_parent_net_profit: 11980.0 CNY mn -> 12500.0 CNY mn",
+    "missing canonical line 2026E_ocf: 9000.0 CNY mn",
+    "missing canonical line 2027E_ocf: 10000.0 CNY mn",
+    "missing canonical line 2028E_ocf: 10500.0 CNY mn"
+  ],
+  "remaining_handoff_issues": []
+}

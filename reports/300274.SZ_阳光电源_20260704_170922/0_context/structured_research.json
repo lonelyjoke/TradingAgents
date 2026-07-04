@@ -1,0 +1,3134 @@
+{
+  "schema_version": 3,
+  "symbol": "300274.SZ",
+  "as_of_date": "2026-07-04",
+  "preprocessing_mode": "llm_semantic_plus_deterministic_validation",
+  "company_summary": "阳光电源 (300274.SZ) 主要从事太阳能光伏逆变器、风能变流器、储能系统、氢能电解槽及其他电力电源的研发、生产、销售和服务。公司属于高研发技术产品型，2025年营业收入891.84亿元，同比增长14.55%，但净利润同比下滑40%，反映竞争加剧与成本压力。",
+  "segments": [
+    {
+      "segment": "consolidated",
+      "aliases": [
+        "阳光电源",
+        "Sungrow Power Supply"
+      ],
+      "products_or_services": "太阳能光伏逆变器、风能变流器、储能系统、氢能电解槽及其他电力电源的研发、生产、销售和服务",
+      "revenue_weight_pct": null,
+      "gross_profit_or_profit_weight_pct": null,
+      "business_model": "高研发技术产品型 / 平台生态 / 交易服务型",
+      "key_drivers": [
+        "全球可再生能源需求",
+        "政策支持",
+        "技术研发",
+        "规模效应",
+        "海外市场拓展"
+      ],
+      "prosperity_level": "decelerating",
+      "marginal_direction": "deteriorating",
+      "causal_chain": "Demand from global renewable energy deployment, supported by national policies (十四五规划, 绿色转型). Supply capacity expanded through R&D and new factories. Price/volume: volume growth continued but ASP faced competition pressure, leading to gross margin compression from 34.36% in H1 2025 to 31.83% FY2025 and 33.26% in Q1 2026 (-1.87pp YoY). Operating margin dropped further due to increased expenses and finance costs (finance-expense ratio +2.42pp YoY). Net margin declined -5.37pp YoY to 14.72%. Cash flow conversion poor (OCF/Net profit 0.53) as receivables and inventory built up (receivables/revenue +4.58pp, inventory/revenue +3.67pp). Overall, margin deterioration indicates competitive pressure and cost headwinds outweighing volume growth.",
+      "supporting_metric_refs": [
+        "EV014",
+        "EV015",
+        "EV016",
+        "EV017",
+        "EV018",
+        "EV019",
+        "EV020",
+        "EV031",
+        "EV061"
+      ],
+      "counterevidence": [
+        "EV021 mentions H1 2025 gross margin increase 1.94% which contradicts subsequent margin decline",
+        "Management claims brand and innovation driving margin but actual net profit decline -40% YoY"
+      ],
+      "confidence": "medium",
+      "missing_inputs": [
+        "Segment revenue breakdown",
+        "Segment-level margins for PV and wind",
+        "Order backlog by segment",
+        "Capacity utilization rates"
+      ],
+      "revenue_cny_mn": 15560.645,
+      "revenue_reported_value": 15560645284.03,
+      "revenue_reported_unit": "CNY",
+      "revenue_growth_pct": null,
+      "gross_margin_pct": 33.2629,
+      "gross_margin_change_pp": -1.87,
+      "period": "20260331",
+      "source_module": "earnings_model",
+      "evidence_quote": "| Gross margin | 33.2629% | -1.87pp | YoY: 20260331 vs 20250331 | main bridge from demand to gross profit |",
+      "extraction_mode": "llm_semantic"
+    },
+    {
+      "segment": "energy_storage",
+      "aliases": [
+        "储能系统",
+        "ESS"
+      ],
+      "products_or_services": "储能系统集成，包括电池储能系统、储能变流器等",
+      "revenue_weight_pct": null,
+      "gross_profit_or_profit_weight_pct": null,
+      "business_model": "项目型/系统集成",
+      "key_drivers": [
+        "储能市场需求",
+        "碳酸锂价格",
+        "区域结构",
+        "海外订单",
+        "关税政策"
+      ],
+      "prosperity_level": "stable",
+      "marginal_direction": "stable to slightly positive",
+      "causal_chain": "Demand from grid storage and renewable integration. Supply: battery procurement and system integration capacity. Price/volume: Q1 2026 shipments flat YoY, revenue impacted by ASP decline? Not given. Margin: gross margin ~30%, improved qoq due to mix shift to high-margin regions (Europe). Cash flow: not separately disclosed. Key risks: US tariff 38.4% and OBBBA act causing pre-ordering compression.",
+      "supporting_metric_refs": [
+        "EV091",
+        "EV092",
+        "EV095"
+      ],
+      "counterevidence": [
+        "Market concern about '面粉比面包贵' (input cost > output price) was denied by management"
+      ],
+      "confidence": "medium",
+      "missing_inputs": [
+        "Energy storage revenue",
+        "shipment GWh",
+        "segment operating margin",
+        "utilization rates"
+      ],
+      "revenue_cny_mn": null,
+      "revenue_reported_value": null,
+      "revenue_reported_unit": "",
+      "revenue_growth_pct": null,
+      "gross_margin_pct": 30.0,
+      "gross_margin_change_pp": null,
+      "period": "20260331",
+      "source_module": "investor_interaction",
+      "evidence_quote": "2026年一季度，公司储能业务毛利率约为30%，环比提升主要得益于收入确认的区域结构优化，高毛利区域（如欧洲市场）收入占比有所提升。",
+      "extraction_mode": "llm_semantic"
+    },
+    {
+      "segment": "hydrogen",
+      "aliases": [
+        "氢能",
+        "制氢电解槽"
+      ],
+      "products_or_services": "氢能制取设备（电解槽）及相关服务",
+      "revenue_weight_pct": null,
+      "gross_profit_or_profit_weight_pct": null,
+      "business_model": "设备销售/技术服务",
+      "key_drivers": [
+        "氢能政策",
+        "电解槽成本",
+        "订单获取",
+        "应用推广"
+      ],
+      "prosperity_level": "early growth",
+      "marginal_direction": "positive",
+      "causal_chain": "Demand from green hydrogen projects. Supply: company's electrolyzer production capacity. Price/volume: order flow good but scale still small relative to other segments. Margin: not disclosed. Cash flow: not disclosed.",
+      "supporting_metric_refs": [
+        "EV090"
+      ],
+      "counterevidence": [],
+      "confidence": "low",
+      "missing_inputs": [
+        "Hydrogen revenue",
+        "shipments",
+        "margin",
+        "capacity"
+      ],
+      "revenue_cny_mn": null,
+      "revenue_reported_value": null,
+      "revenue_reported_unit": "",
+      "revenue_growth_pct": null,
+      "gross_margin_pct": null,
+      "gross_margin_change_pp": null,
+      "period": "unspecified",
+      "source_module": "investor_interaction",
+      "evidence_quote": "氢能业务稳定拓展中，订单良好。",
+      "extraction_mode": "llm_semantic"
+    }
+  ],
+  "semantic_metrics": [
+    {
+      "segment": "consolidated",
+      "variable": "revenue",
+      "value": 15560645284.03,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "20260331",
+      "comparison_basis": "YoY: 20260331 vs 20250331",
+      "source_module": "earnings_model",
+      "source_quote": "| Revenue base | 15560645284.03 | N/A | YoY: 20260331 vs 20250331 | top-line starting point for volume × price × mix |",
+      "evidence_status": "reported",
+      "direction": "",
+      "materiality": "",
+      "model_role": "",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "segment_margin",
+      "value": 33.2629,
+      "value_text": "",
+      "unit": "%",
+      "period": "20260331",
+      "comparison_basis": "YoY change -1.87pp",
+      "source_module": "earnings_model",
+      "source_quote": "| Gross margin | 33.2629% | -1.87pp | YoY: 20260331 vs 20250331 | main bridge from demand to gross profit |",
+      "evidence_status": "reported",
+      "direction": "",
+      "materiality": "",
+      "model_role": "",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "segment_margin",
+      "value": 17.0953,
+      "value_text": "",
+      "unit": "%",
+      "period": "20260331",
+      "comparison_basis": "YoY change -6.94pp",
+      "source_module": "earnings_model",
+      "source_quote": "| Operating margin | 17.0953% | -6.94pp | YoY: 20260331 vs 20250331 | tests pricing, mix, and cost absorption |",
+      "evidence_status": "reported",
+      "direction": "",
+      "materiality": "",
+      "model_role": "",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "segment_margin",
+      "value": 14.7248,
+      "value_text": "",
+      "unit": "%",
+      "period": "20260331",
+      "comparison_basis": "YoY change -5.37pp",
+      "source_module": "earnings_model",
+      "source_quote": "| Net margin | 14.7248% | -5.37pp | YoY: 20260331 vs 20250331 | captures final earnings conversion |",
+      "evidence_status": "reported",
+      "direction": "",
+      "materiality": "",
+      "model_role": "",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "operating_expense",
+      "value": 2.1051,
+      "value_text": "",
+      "unit": "%",
+      "period": "20260331",
+      "comparison_basis": "YoY change +2.42pp",
+      "source_module": "earnings_model",
+      "source_quote": "| Finance-expense ratio | 2.1051% | +2.42pp | YoY: 20260331 vs 20250331 | captures leverage drag or relief |",
+      "evidence_status": "reported",
+      "direction": "",
+      "materiality": "",
+      "model_role": "",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "profit_or_eps",
+      "value": 0.5274,
+      "value_text": "",
+      "unit": "ratio",
+      "period": "20260331",
+      "comparison_basis": "YoY: 20260331 vs 20250331",
+      "source_module": "earnings_model",
+      "source_quote": "| OCF / net profit | 0.5274 | N/A | YoY: 20260331 vs 20250331 | tests earnings quality and cash realization |",
+      "evidence_status": "reported",
+      "direction": "",
+      "materiality": "",
+      "model_role": "",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "revenue",
+      "value": 40.0672,
+      "value_text": "",
+      "unit": "%",
+      "period": "20260331",
+      "comparison_basis": "YoY change +4.58pp",
+      "source_module": "earnings_model",
+      "source_quote": "| Receivables / revenue | 40.0672% | +4.58pp | YoY: 20260331 vs 20250331 | tests working-capital drag; interim periods use annualized revenue |",
+      "evidence_status": "calculated",
+      "direction": "",
+      "materiality": "",
+      "model_role": "",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "revenue",
+      "value": 44.5972,
+      "value_text": "",
+      "unit": "%",
+      "period": "20260331",
+      "comparison_basis": "YoY change +3.67pp",
+      "source_module": "earnings_model",
+      "source_quote": "| Inventory / revenue | 44.5972% | +3.67pp | YoY: 20260331 vs 20250331 | tests inventory build and demand quality; interim periods use annualized revenue |",
+      "evidence_status": "calculated",
+      "direction": "",
+      "materiality": "",
+      "model_role": "",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "asp_or_price",
+      "value": 3062.0,
+      "value_text": "",
+      "unit": "CNY/ton",
+      "period": "20260703",
+      "comparison_basis": "change -0.94% over 90-day window",
+      "source_module": "commodity",
+      "source_quote": "| Rebar | steel cost proxy | Tushare futures proxy | RB.SHF | 3062 | 20260703 | -0.94% | N/A | Verified by Tushare futures daily data. |",
+      "evidence_status": "reported",
+      "direction": "",
+      "materiality": "",
+      "model_role": "",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "valuation",
+      "value": 261556362840.0,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "20260703",
+      "comparison_basis": "",
+      "source_module": "market_expectation",
+      "source_quote": "/ Market cap (CNY) / 261556362840 / current equity value /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "",
+      "model_role": "",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "valuation",
+      "value": 21.9309,
+      "value_text": "",
+      "unit": "ratio",
+      "period": "TTM",
+      "comparison_basis": "",
+      "source_module": "market_expectation",
+      "source_quote": "/ PE TTM / 21.9309 / earnings multiple the market is paying now /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "",
+      "model_role": "",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "valuation",
+      "value": 46.0,
+      "value_text": "",
+      "unit": "percentile",
+      "period": "5-year",
+      "comparison_basis": "",
+      "source_module": "market_expectation",
+      "source_quote": "/ PE percentile / 46 / 5-year valuation position /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "",
+      "model_role": "",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "profit_or_eps",
+      "value": -40.1157,
+      "value_text": "",
+      "unit": "%",
+      "period": "unspecified",
+      "comparison_basis": "YoY",
+      "source_module": "peer_comparison",
+      "source_quote": "| 300274.SZ | 阳光电源 | 电气设备 | ... | netprofit_yoy | -40.1157 | ... |",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "",
+      "model_role": "",
+      "grounding_status": "unverified_quote",
+      "control_flags": [
+        "missing_period"
+      ]
+    },
+    {
+      "segment": "hydrogen",
+      "variable": "utilization_or_backlog",
+      "value": null,
+      "value_text": "氢能业务稳定拓展中，订单良好",
+      "unit": "",
+      "period": "20260513",
+      "comparison_basis": "",
+      "source_module": "investor_interaction",
+      "source_quote": "氢能业务稳定拓展中，订单良好。",
+      "evidence_status": "reported",
+      "direction": "positive",
+      "materiality": "",
+      "model_role": "",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "energy_storage",
+      "variable": "segment_margin",
+      "value": 30.0,
+      "value_text": "",
+      "unit": "%",
+      "period": "20260331",
+      "comparison_basis": "环比提升",
+      "source_module": "investor_interaction",
+      "source_quote": "2026年一季度，公司储能业务毛利率约为30%，环比提升主要得益于收入确认的区域结构优化，高毛利区域（如欧洲市场）收入占比有所提升。",
+      "evidence_status": "reported",
+      "direction": "positive",
+      "materiality": "",
+      "model_role": "",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "energy_storage",
+      "variable": "utilization_or_backlog",
+      "value": null,
+      "value_text": "2026年有新签订单，但受OBBBA法案政策调整影响，很多客户已于2025年提前下单",
+      "unit": "",
+      "period": "20260513",
+      "comparison_basis": "",
+      "source_module": "investor_interaction",
+      "source_quote": "目前美国对中国储能产品关税是38.4%。2026年有新签订单，但受OBBBA法案政策调整影响，为充分利用安全港条款窗口期推进项目落地，很多客户已于2025年提前下单。",
+      "evidence_status": "reported",
+      "direction": "negative (US orders may decline)",
+      "materiality": "",
+      "model_role": "",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "energy_storage",
+      "variable": "segment_volume",
+      "value": null,
+      "value_text": "2026年一季度储能出货量同比持平",
+      "unit": "",
+      "period": "20260331",
+      "comparison_basis": "YoY",
+      "source_module": "investor_interaction",
+      "source_quote": "2026年一季度储能出货量同比持平，谢谢！",
+      "evidence_status": "reported",
+      "direction": "flat",
+      "materiality": "",
+      "model_role": "",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    }
+  ],
+  "deterministic_evidence": [
+    {
+      "evidence_id": "EV001",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Financial-report look-back: 900 days"
+    },
+    {
+      "evidence_id": "EV002",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "Compacted 2025年年度报告: 586589 chars -> 157417 chars."
+    },
+    {
+      "evidence_id": "EV003",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 半年",
+      "text": "Compacted 2025年半年度报告: 497894 chars -> 152357 chars."
+    },
+    {
+      "evidence_id": "EV004",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260428, 2026, 季度",
+      "text": "20260428: 2026年一季度报告"
+    },
+    {
+      "evidence_id": "EV005",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260401, 2025, 年度",
+      "text": "20260401: 2025年年度报告"
+    },
+    {
+      "evidence_id": "EV006",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20251029, 2025, 季度",
+      "text": "20251029: 2025年三季度报告"
+    },
+    {
+      "evidence_id": "EV007",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20250826, 2025, 半年",
+      "text": "20250826: 2025年半年度报告"
+    },
+    {
+      "evidence_id": "EV008",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ announcement_lookup / ready / Found 4 candidate financial-report announcement(s) from primary and CNINFO sources. /"
+    },
+    {
+      "evidence_id": "EV009",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026, 季度",
+      "text": "/ pdf_text_extraction / ready / 2026年一季度报告: extracted 28924 characters of readable report text. /"
+    },
+    {
+      "evidence_id": "EV010",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "/ pdf_text_extraction / ready / 2025年年度报告: extracted 586589 characters of readable report text. /"
+    },
+    {
+      "evidence_id": "EV011",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "Q1, 20260331",
+      "text": "/ latest reported / Q1 / 20260331 / 15560645284.03 / 2291269562.74 / 62242581136.12 / 9165078250.96 / 92586902763.0758 / 13105551493.938 / historical median 0331 share 17.5% /"
+    },
+    {
+      "evidence_id": "EV012",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "FY, 20251231",
+      "text": "/ latest annual / FY / 20251231 / 89184357325.77 / 13461279955.37 / 89184357325.77 / 13461279955.37 / 89184357325.77 / 13461279955.37 / FY actual /"
+    },
+    {
+      "evidence_id": "EV013",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "revenue",
+      "period": "20260331, 20250331",
+      "text": "/ Revenue base / 15560645284.03 / N/A / YoY: 20260331 vs 20250331 / top-line starting point for volume × price × mix /"
+    },
+    {
+      "evidence_id": "EV014",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "20260331, 20250331",
+      "text": "/ Gross margin / 33.2629% / -1.87pp / YoY: 20260331 vs 20250331 / main bridge from demand to gross profit /"
+    },
+    {
+      "evidence_id": "EV015",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260331, 20250331",
+      "text": "/ Operating margin / 17.0953% / -6.94pp / YoY: 20260331 vs 20250331 / tests pricing, mix, and cost absorption /"
+    },
+    {
+      "evidence_id": "EV016",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "20260331, 20250331",
+      "text": "/ Net margin / 14.7248% / -5.37pp / YoY: 20260331 vs 20250331 / captures final earnings conversion /"
+    },
+    {
+      "evidence_id": "EV017",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "operating_expense",
+      "period": "20260331, 20250331",
+      "text": "/ Finance-expense ratio / 2.1051% / +2.42pp / YoY: 20260331 vs 20250331 / captures leverage drag or relief /"
+    },
+    {
+      "evidence_id": "EV018",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "profit_or_eps",
+      "period": "20260331, 20250331",
+      "text": "/ OCF / net profit / 0.5274 / N/A / YoY: 20260331 vs 20250331 / tests earnings quality and cash realization /"
+    },
+    {
+      "evidence_id": "EV019",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "revenue",
+      "period": "20260331, 20250331",
+      "text": "/ Receivables / revenue / 40.0672% / +4.58pp / YoY: 20260331 vs 20250331 / tests working-capital drag; interim periods use annualized revenue /"
+    },
+    {
+      "evidence_id": "EV020",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "revenue",
+      "period": "20260331, 20250331",
+      "text": "/ Inventory / revenue / 44.5972% / +3.67pp / YoY: 20260331 vs 20250331 / tests inventory build and demand quality; interim periods use annualized revenue /"
+    },
+    {
+      "evidence_id": "EV021",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "2025, 半年",
+      "text": "/ high_r_and_d_technology / 高研发技术产品型 / quantified disclosure / 2025年半年度报告: 三、主营业务分析 （一）主营业务分析概述 报告期内，公司实现营业收入 435.33 亿元，同比增加 40.34%；营业成本 285.76 亿元，同比增加 36.31%；公司营业收 入、营业成本增长主要系公司不断开拓市场，销售规模扩大，收入及成本随之增长所致。实现毛利率 34.36%，同比增加 1.94%，主要系公司品牌溢价、产品创新、规模效应等影响所致；实现归属..."
+    },
+    {
+      "evidence_id": "EV022",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "revenue",
+      "period": "2025, 年度",
+      "text": "/ platform_ecosystem / 平台生态 / 交易服务型 / quantified disclosure / 2025年年度报告: 四、主营业务分析 （1）主营业务分析概述 2025 年，面对行业激烈竞争和国际环境复杂变化，公司紧扣“创新提质 数智赋能 深耕全球 成就客户”指导思想，聚焦 清洁能源主业，加大研发创新力度，加速推进数字化项目落地见效，持续深耕全球，进一步扩大领先优势，实现业绩稳健 报告期内，公司实现营业收入 891.84 亿元，同比增加 14.55%；营业成本 607.95 亿元，..."
+    },
+    {
+      "evidence_id": "EV023",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "2025, 年度",
+      "text": "/ core_revenue_engine / annual / 2025年年度报告: 部的实际应用。全年上线了 55 个数字员工和 49 个 AI 应用，覆盖研发、生产、销售、服务和综合管理等各个业务环节，加 / Defines what actually drives the income statement. /"
+    },
+    {
+      "evidence_id": "EV024",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "/ customer_and_channel / annual / 2025年年度报告: 器示范运行。同时，各事业部组建独立的研发团队，贴近市场与客户。2025 年度，公司继续加大研发投入达 41.75 亿元， / Reveals demand source, concentration, and market validation. /"
+    },
+    {
+      "evidence_id": "EV025",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "/ geography / annual / 2025年年度报告: 基地 100MW 光伏项目、内蒙古鄂尔多斯达旗 500MW 风电制氢项目等多个地面项目；海外业务风光并举，稳步向前，新增 / Explains whether growth depends on a specific geography or expansion lane. /"
+    },
+    {
+      "evidence_id": "EV026",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "/ reinvestment_engine / annual / 2025年年度报告: 器示范运行。同时，各事业部组建独立的研发团队，贴近市场与客户。2025 年度，公司继续加大研发投入达 41.75 亿元， / Shows how today's cash is being converted into tomorrow's earnings power. /"
+    },
+    {
+      "evidence_id": "EV027",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "2025, 年度",
+      "text": "/ product / annual / 2025年年度报告: 四、主营业务分析 1、概述 （1）主营业务分析概述 2025 年，面对行业激烈竞争和国际环境复杂变化，公司紧扣“创新提质 数智赋能 深耕全球 成就客户”指导思想，聚焦 清洁能源主业，加大研发创新力度，加速推进数字化项目落地见效，持续深耕全球，进一步扩大领先优势，实现业绩稳健 增长。 报告期内，公司实现营业收入 891.84 亿元，同比增加 14.55%；营业成本 607.95 亿元，同比增加 11.46%；实现毛利率 31.83%，同比增加 1...."
+    },
+    {
+      "evidence_id": "EV028",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "2025, 半年",
+      "text": "/ product / semiannual / 2025年半年度报告: 三、主营业务分析 （一）主营业务分析概述 报告期内，公司实现营业收入 435.33 亿元，同比增加 40.34%；营业成本 285.76 亿元，同比增加 36.31%；公司营业收 入、营业成本增长主要系公司不断开拓市场，销售规模扩大，收入及成本随之增长所致。实现毛利率 34.36%，同比增加 1.94%，主要系公司品牌溢价、产品创新、规模效应等影响所致；实现归属于上市公司股东的净利润 77.35 亿元，同比增加 55.97%；管理费用 ..."
+    },
+    {
+      "evidence_id": "EV029",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "2025, 年度",
+      "text": "/ filing_segment / / product / annual / 2025年年度报告: 四、主营业务分析 1、概述 （1）主营业务分析概述 2025 年，面对行业激烈竞争和国际环境复杂变化，公司紧扣“创新提质 数智赋能 深耕全球 成就客户”指导思想，聚焦 清洁能源主业，加大研发创新力度，加速推进数字化项目落地见效，持续深耕全球，进一步扩大领先优势，实现业绩稳健 增长。 报告期内，公司实现营业收入 891.84 亿元，同比增加 14.55%；营业成本 607.95 亿元，同比增加 11.46%；实现毛利"
+    },
+    {
+      "evidence_id": "EV030",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "2025, 半年",
+      "text": "/ filing_segment / / product / semiannual / 2025年半年度报告: 三、主营业务分析 （一）主营业务分析概述 报告期内，公司实现营业收入 435.33 亿元，同比增加 40.34%；营业成本 285.76 亿元，同比增加 36.31%；公司营业收 入、营业成本增长主要系公司不断开拓市场，销售规模扩大，收入及成本随之增长所致。实现毛利率 34.36%，同比增加 1.94%，主要系公司品牌溢价、产品创新、规模效应等影响所致；实现归属于上市公司股东的净利润 77.35 亿元，同"
+    },
+    {
+      "evidence_id": "EV031",
+      "source_module": "industry_cycle",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "asp_or_price",
+      "period": "unspecified",
+      "text": "/ commodity/product price / range-bound / bottom-testing stage / Mapped product proxy moved -0.9% over the look-back window; price evidence alone does not prove a new upcycle. /"
+    },
+    {
+      "evidence_id": "EV032",
+      "source_module": "industry_cycle",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260703, 2089",
+      "text": "/ Rebar / steel cost proxy / Tushare futures proxy / RB.SHF / 3062 / 20260703 / -0.94% / N/A / Verified by Tushare futures daily data. / exchange=SHFE, query_exchange=SHF, prefix=RB, selected by open interest/volume; curve=RB2607.SHF close=3132, oi=13440, vol="
+    },
+    {
+      "evidence_id": "EV033",
+      "source_module": "industry_cycle",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "balance_sheet",
+      "period": "unspecified",
+      "text": "Do not state R32, R125, lithium, copper, gold, inventory, or spread changes as facts unless they appear in the evidence table."
+    },
+    {
+      "evidence_id": "EV034",
+      "source_module": "industry_cycle",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "gap",
+      "status": "missing",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "If cycle evidence says bottom-testing or evidence-limited, use language such as `bottom-right validation stage`, `右侧待验证`, or `needs confirmation`."
+    },
+    {
+      "evidence_id": "EV035",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "gap",
+      "status": "missing",
+      "model_variable": "segment_margin",
+      "period": "unspecified",
+      "text": "/ coverage_grade / report_types_seen / missing_report_types / answered_questions / core_pack_status / confidence_read /"
+    },
+    {
+      "evidence_id": "EV036",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "20251231, 20260331",
+      "text": "/ accounting_reconciliation / Check signs, units, periods, and cross-statement consistency before a number enters the PM memo. / gross_margin_not_reaching_operating_profit: 20251231->20260331: revenue growth -82.55%, gross margin change 1.43pp, operating ma..."
+    },
+    {
+      "evidence_id": "EV037",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "/ segment_economics_depth / Decide whether each business line has enough disclosed scale, growth, margin, cash quality, and valuation treatment. / 2025年年度报告: 四、主营业务分析 1、概述 （1）主营业务分析概述 2025 年，面对行业激烈竞争和国际环境复杂变化，公司紧扣“创新提质 数智赋能 深耕全球 成就客户”指导思想，聚焦 清洁能源主业，加大研发创新力度..."
+    },
+    {
+      "evidence_id": "EV038",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026, 季度, 本报告期",
+      "text": "/ footnote_radar / Surface decision-relevant notes that can hide risk or change confidence. / impairment_policy: 2026年一季度报告: 单位：元 项目 本报告期金额 说明 非流动性资产处置损益（包括已计提资产减值准备的冲销部分） 25,517,739.45 / impairment_policy: 2026年一季度报告: 项目 本报告期金额 说明 非流动性资产处置损益（包括已计提资产减值准备的冲销..."
+    },
+    {
+      "evidence_id": "EV039",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "profit_or_eps",
+      "period": "2026, 季度",
+      "text": "/ cash_flow_quality_decomposition / Separate accounting profit from cash conversion, working-capital drag, and demand visibility. / operating_cash_flow: 2026年一季度报告: 2,032,367,774.89 3,676,394,413.73 -44.72% 损益的净利润（元） 经营活动产生的现金流量净额（元） 1,208,404,186.03 1,790,..."
+    },
+    {
+      "evidence_id": "EV040",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "capex_or_roic",
+      "period": "2026, 季度",
+      "text": "/ capex_cip_return_bridge / Test whether capex, construction-in-progress, or investment assets are building returns or just absorbing capital. / long_term_equity_investments: 2026年一季度报告: 其他债权投资 189,029,030.12 187,855,030.13 长期应收款 259,500,000.00 269,000,000...."
+    },
+    {
+      "evidence_id": "EV041",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "/ mdna_text_change / Read management wording changes, proof-backed claims, risk-language upgrades, and abnormal silence across reports. / management_claim_with_evidence: 2025年年度报告: 阳光电动力已拥有 IATF 16949、ISO 14001、ISO 45001 等体系证书，已通过 ISO 26262 功能安全 ASIL-D、ISO/..."
+    },
+    {
+      "evidence_id": "EV042",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "2026, 季度",
+      "text": "/ non_recurring_profit_quality / Distinguish core operating profit from investment income, fair-value moves, subsidies, asset disposals, impairment, and other one-off items. / impairment: 2026年一季度报告: 80,128,206.97 36,832,829.23 43,295,377.74 117.55% 益 动所致； ..."
+    },
+    {
+      "evidence_id": "EV043",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "balance_sheet",
+      "period": "2026, 季度",
+      "text": "/ balance_sheet_forward_signals / Read balance-sheet leads before income-statement confirmation. / receivables: 2026年一季度报告: 7,129,735,973.85 致； 主要系收到的银行承兑汇票 应收票据 2,513,346,567.63 1,233,619,771.56 1,279,726,796.07 103.74% / receivables: 2026年一季度报告: 主要系收到的银行承..."
+    },
+    {
+      "evidence_id": "EV044",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "revenue",
+      "period": "2025, 年度",
+      "text": "/ shareholder_return_authenticity / Test whether dividends, buybacks, and capital returns are funded by durable profit and cash rather than leverage or asset sales. / generic_capital_allocation: 2025年年度报告: 公司设立中央研究院，做好前期高价值专利布局和技术难点攻关，为集团产品、技术开发提供高效的平台服务和创新..."
+    },
+    {
+      "evidence_id": "EV045",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-07-03",
+      "text": "Valuation trade date: 2026-07-03"
+    },
+    {
+      "evidence_id": "EV046",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ Market cap (CNY) / 261556362840 / current equity value /"
+    },
+    {
+      "evidence_id": "EV047",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "valuation",
+      "period": "TTM",
+      "text": "/ PE TTM / 21.9309 / earnings multiple the market is paying now /"
+    },
+    {
+      "evidence_id": "EV048",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "revenue",
+      "period": "TTM",
+      "text": "/ PS TTM / 3.0517 / sales multiple the market is paying now /"
+    },
+    {
+      "evidence_id": "EV049",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "valuation",
+      "period": "TTM",
+      "text": "/ Implied TTM earnings (CNY) / 11926385275.5701 / market cap divided by PE TTM /"
+    },
+    {
+      "evidence_id": "EV050",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "revenue",
+      "period": "TTM",
+      "text": "/ Implied TTM sales (CNY) / 85708412635.5802 / market cap divided by PS TTM /"
+    },
+    {
+      "evidence_id": "EV051",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "valuation",
+      "period": "unspecified",
+      "text": "/ PE percentile / 46 / 5-year valuation position /"
+    },
+    {
+      "evidence_id": "EV052",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "valuation",
+      "period": "unspecified",
+      "text": "/ PB percentile / 33 / 5-year valuation position /"
+    },
+    {
+      "evidence_id": "EV053",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "valuation",
+      "period": "unspecified",
+      "text": "/ PS percentile / 41.5 / 5-year valuation position /"
+    },
+    {
+      "evidence_id": "EV054",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ latest annual parent profit / 13461279955.37 / 19.4303 / 1.1287 /"
+    },
+    {
+      "evidence_id": "EV055",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-07-03",
+      "text": "Valuation trade date: 2026-07-03"
+    },
+    {
+      "evidence_id": "EV056",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Market-cap units: `total_mv` is ten-thousand CNY; `total_mv_cny_100m` is 亿元 and equals `total_mv / 10,000`."
+    },
+    {
+      "evidence_id": "EV057",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "unspecified",
+      "text": "/ ts_code / name / industry / total_mv / total_mv_cny_100m / pe_ttm / pb / ps_ttm / dv_ttm / roe_annual / roa_annual / roe / roa / netprofit_yoy / debt_to_assets / v4_score /"
+    },
+    {
+      "evidence_id": "EV058",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 605117.SH / 德业股份 / 电气设备 / 12279039.764 / 1227.904 / 33.6125 / 10.6191 / 8.6981 / 2.1504 / 32.0847 / 20.153 / 10.8612 / 6.4643 / 68.3658 / 47.1349 / 72 /"
+    },
+    {
+      "evidence_id": "EV059",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 600089.SH / 特变电工 / 电气设备 / 11121196.5126 / 1112.1197 / 18.0286 / 1.5456 / 1.1255 / 1.1285 / 8.3963 / 4.2916 / 2.4026 / 1.2267 / 13.3952 / 56.5765 / 61.3 /"
+    },
+    {
+      "evidence_id": "EV060",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 600875.SH / 东方电气 / 电气设备 / 9991202.9067 / 999.1203 / 23.4374 / 2.1311 / 1.2726 / 1.3949 / 9.1188 / 3.1104 / 3.4423 / 1.1117 / 37.4091 / 69.4679 / 61.3 /"
+    },
+    {
+      "evidence_id": "EV061",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 300274.SZ / 阳光电源 / 电气设备 / 26155636.284 / 2615.5636 / 21.9309 / 5.3751 / 3.0517 / 1.2887 / 32.2364 / 13.8731 / 4.81 / 2.1505 / -40.1157 / 57.5148 / 59.7 /"
+    },
+    {
+      "evidence_id": "EV062",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 300014.SZ / 亿纬锂能 / 电气设备 / 13291883.8404 / 1329.1884 / 29.6728 / 3.0435 / 1.9165 / 0.7581 / 10.3486 / 4.4618 / 3.3523 / 1.3373 / 31.3489 / 64.8881 / 56.5 /"
+    },
+    {
+      "evidence_id": "EV063",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 600406.SH / 国电南瑞 / 电气设备 / 18384689.9418 / 1838.469 / 22.0968 / 3.4368 / 2.7482 / 2.7022 / 15.7861 / 9.6754 / 1.3591 / 0.8753 / 6.0424 / 40.195 / 54.7 /"
+    },
+    {
+      "evidence_id": "EV064",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 002028.SZ / 思源电气 / 电气设备 / 13119841.3745 / 1311.9841 / 40.3241 / 8.1401 / 5.7339 / 0.2966 / 18.0029 / 11.2781 / 3.4795 / 2.1281 / 23.1699 / 45.8498 / 53.3 /"
+    },
+    {
+      "evidence_id": "EV065",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 300274.SZ / 曹仁贤 / 曹仁贤 / 陆阳 / 207321.1424 / 19971128 / 安徽 / 太阳能光伏逆变器、风能变流器及其它电力电源的研发、生产、销售和服务。 /"
+    },
+    {
+      "evidence_id": "EV066",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20251231",
+      "text": "/ 20251231 / 16917778579.11 / 3008018823.6 / 4448237949.52 / -3270574457.32 / 22830813801.4 / 296978138.56 / 118679392074.17 / 68907524405.28 /"
+    },
+    {
+      "evidence_id": "EV067",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20241231",
+      "text": "/ 20241231 / 12068326644.66 / 2785952760.93 / 1737973100.43 / -10853070052.26 / 19799445556.84 / 296978138.56 / 115073771122.86 / 74875023074.72 /"
+    },
+    {
+      "evidence_id": "EV068",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20231231",
+      "text": "/ 20231231 / 6981838977.28 / 2741238644 / 640318279.02 / -3821156871.07 / 18030617790.74 / N/A / 82876506727.57 / 53422010433.85 /"
+    },
+    {
+      "evidence_id": "EV069",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20221231",
+      "text": "/ 20221231 / 1210498485.89 / 1526766108.85 / 351615275.8 / 345555316.38 / 11666601491.42 / N/A / 61626211527.11 / 41889216326.37 /"
+    },
+    {
+      "evidence_id": "EV070",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20211231",
+      "text": "/ 20211231 / -1638632122.77 / 1665649098.4 / 319225674.3 / -3713209335.79 / 7790144016.01 / N/A / 42840130915.46 / 26136452866.7 /"
+    },
+    {
+      "evidence_id": "EV071",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260401, 20251231",
+      "text": "/ 20260401 / 20251231 / 预案 / 0.69 / 0 / N/A / N/A / N/A /"
+    },
+    {
+      "evidence_id": "EV072",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260401, 20251231, 20260511",
+      "text": "/ 20260401 / 20251231 / 实施 / 0.69 / 0 / 20260511 / 20260512 / 20260512 /"
+    },
+    {
+      "evidence_id": "EV073",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260401, 20251231",
+      "text": "/ 20260401 / 20251231 / 股东大会通过 / 0.69 / 0 / N/A / N/A / N/A /"
+    },
+    {
+      "evidence_id": "EV074",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20250826, 20250630, 20251017",
+      "text": "/ 20250826 / 20250630 / 实施 / 0.95 / 0 / 20251017 / 20251020 / 20251020 /"
+    },
+    {
+      "evidence_id": "EV075",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Look-back window for futures proxies: 90 days"
+    },
+    {
+      "evidence_id": "EV076",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_volume",
+      "period": "unspecified",
+      "text": "/ 1 - company hard evidence / official filings, production reports, and sales announcements / realized product mix, output, unit cost, and cash-flow conversion / usually delayed and may not include daily spot prices /"
+    },
+    {
+      "evidence_id": "EV077",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "model_estimate",
+      "status": "estimated",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 2 - exchange market proxy / Tushare futures daily data for mapped SHFE/DCE/CZCE/GFEX/INE contracts / timely product-price direction, curve shape, and scenario stress / proxy, not the company's realized selling price or mine cost curve /"
+    },
+    {
+      "evidence_id": "EV078",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260703, 2089",
+      "text": "/ Rebar / steel cost proxy / Tushare futures proxy / RB.SHF / 3062 / 20260703 / -0.94% / N/A / Verified by Tushare futures daily data. / exchange=SHFE, query_exchange=SHF, prefix=RB, selected by open interest/volume; curve=RB2607.SHF close=3132, oi=13440, vol="
+    },
+    {
+      "evidence_id": "EV079",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "balance_sheet",
+      "period": "unspecified",
+      "text": "Do not state R32, R125, lithium, copper, gold, inventory, or spread changes as facts unless they appear in the evidence table."
+    },
+    {
+      "evidence_id": "EV080",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "gap",
+      "status": "missing",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "If a thesis-critical input is marked missing, treat it as neutral non-evidence and a retrieval task; it cannot prove margin deterioration/resilience or mechanically change rating, conviction, or sizing."
+    },
+    {
+      "evidence_id": "EV081",
+      "source_module": "policy",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025-10-28, 2025",
+      "text": "/ 中共中央关于制定国民经济和社会发展第十五个五年规划的建议 / 中国政府网 / 2025-10-28 / national-plan / ok / https://www.gov.cn/gongbao/2025/issue_12386/202511/content_7047415.html /"
+    },
+    {
+      "evidence_id": "EV082",
+      "source_module": "policy",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2024-08-11",
+      "text": "/ 中共中央 国务院关于加快经济社会发展全面绿色转型的意见 / 中国政府网 / 2024-08-11 / national-direction / ok / https://www.gov.cn/zhengce/202408/content_6967663.htm /"
+    },
+    {
+      "evidence_id": "EV083",
+      "source_module": "policy",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2022-06-01, 20220601",
+      "text": "/ “十四五”可再生能源发展规划 / 国家发展改革委、国家能源局等 / 2022-06-01 / industry-plan / ok / https://www.ndrc.gov.cn/xxgk/zcfb/ghwb/202206/t20220601_1326719_ext.html /"
+    },
+    {
+      "evidence_id": "EV084",
+      "source_module": "policy",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2022-06-01, 20220601",
+      "text": "/ “十四五”可再生能源发展规划 / 国家发展改革委、国家能源局等 / 2022-06-01 / industry-plan / https://www.ndrc.gov.cn/xxgk/zcfb/ghwb/202206/t20220601_1326719_ext.html /"
+    },
+    {
+      "evidence_id": "EV085",
+      "source_module": "policy",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2024-08-11",
+      "text": "/ renewable-energy / 绿色转型 / 中共中央 国务院关于加快经济社会发展全面绿色转型的意见 / 中国政府网 / 2024-08-11 / national-direction / / supports multi-year demand visibility for clean-energy equipment and infrastructure / argue the company sits inside a policy-backed demand pool / test whether"
+    },
+    {
+      "evidence_id": "EV086",
+      "source_module": "policy",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2022-06-01",
+      "text": "/ renewable-energy / 可再生能源 / “十四五”可再生能源发展规划 / 国家发展改革委、国家能源局等 / 2022-06-01 / industry-plan / / supports multi-year demand visibility for clean-energy equipment and infrastructure / argue the company sits inside a policy-backed demand pool / test whether support"
+    },
+    {
+      "evidence_id": "EV087",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Canonical company route: https://irm.cninfo.com.cn/ircs/company/companyDetail?orgId=9900021300&stockcode=300274"
+    },
+    {
+      "evidence_id": "EV088",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ cninfo / reachable / application/json;charset=UTF-8 / {\"statusCode\":200,\"title\":\"\",\"code\":\"\",\"message\":\"success\",\"data\":[{\"stockCode\":\"300274\",\"shortName\":\"阳光电源\",\"pinyin\":\"YG /"
+    },
+    {
+      "evidence_id": "EV089",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-05-05, 2026-05-13, 2026",
+      "text": "/ 2026-05-05 / 2026-05-13 / 请提供截止到2026年4月30日的股东人数。 / 感谢您对公司的关注。公司股东户数详见披露在深交所指定信息披露网站的定期报告内容，或可致电0551-65325617具体咨询。谢谢！ / substantive /"
+    },
+    {
+      "evidence_id": "EV090",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "utilization_or_backlog",
+      "period": "2026-05-01, 2026-05-13",
+      "text": "/ 2026-05-01 / 2026-05-13 / 请问贵公司制氢电解槽目前的销售情况如何？ / 感谢您对公司的关注。氢能业务稳定拓展中，订单良好。谢谢！ / substantive /"
+    },
+    {
+      "evidence_id": "EV091",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "asp_or_price",
+      "period": "2026-04-28, 2026-05-14, 2026",
+      "text": "/ 2026-04-28 / 2026-05-14 / “市场传闻Q1储能业务出现了‘面粉比面包贵’的倒挂现象。请披露Q1储能系统的实际毛利率区间。对于碳酸锂等原材料涨价，公司是依靠牺牲毛利保份额，还是已通过新订单实现了成本传导？” / 感谢您对公司的关注。2026年一季度，公司储能业务毛利率约为30%，环比提升主要得益于收入确认的区域结构优化，高毛利区域（如欧洲市场）收入占比有所提升。针对碳酸锂价格波动带来的成本影响，不同区域市场的价格传导机制存在差异：在市场竞争格局相对稳定的区域，成本传导具备一定顺畅度；在市场"
+    },
+    {
+      "evidence_id": "EV092",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "utilization_or_backlog",
+      "period": "2026-04-28, 2026-05-13, 2026",
+      "text": "/ 2026-04-28 / 2026-05-13 / 现在美国对中国储能产品的关税是多少？2026年阳光电源还有美国的储能订单吗？如有的话，是增长还是减少？ / 感谢您对公司的关注。目前美国对中国储能产品关税是38.4%。2026年有新签订单，但受OBBBA法案政策调整影响，为充分利用安全港条款窗口期推进项目落地，很多客户已于2025年提前下单。谢谢！ / substantive /"
+    },
+    {
+      "evidence_id": "EV093",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-04-28, 2026-05-13, 季度",
+      "text": "/ 2026-04-28 / 2026-05-13 / 请问，我们小股东已经看到公司连续两个季度呈现下滑趋势，是否能给我们股东一个信心，公司在接下来的几个季度呈现如何变化，以及股票回购，提振信心 / 感谢您对公司的关注。经营数据请关注后续定期报告，谢谢！ / directional-but-unquantified /"
+    },
+    {
+      "evidence_id": "EV094",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "revenue",
+      "period": "2026-04-28, 2026-05-13",
+      "text": "/ 2026-04-28 / 2026-05-13 / 合同负债122亿和预付款40亿是否意味着Q2交付量将大幅回升？请给出Q2营收和净利润环比增长的具体指引区间，而非模糊的“稳中向好 / 感谢您对公司的关注。经营数据请关注后续定期报告，谢谢！ / directional-but-unquantified /"
+    },
+    {
+      "evidence_id": "EV095",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_volume",
+      "period": "2026-04-28, 2026-05-13, 2026",
+      "text": "/ 2026-04-28 / 2026-05-13 / 市场担心Q1营收下滑是需求问题。请问Q1储能出货量（GWh）是否同比正增长？若出货增长而营收下降，说明是价格问题；若出货也下降，则是需求问题。请明确Q2的排产计划是否环比提升？ / 感谢您对公司的关注。2026年一季度储能出货量同比持平，谢谢！ / directional-but-unquantified /"
+    },
+    {
+      "evidence_id": "EV096",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-04-28, 2026-05-13, 季度",
+      "text": "/ 2026-04-28 / 2026-05-13 / 请问，公司四季度业绩利润下滑，作为我们小股东，希望一季度变好，结果一季度数据更差。由此推断公司2026年二季度是否变差，无法恢复至以前的业绩增长？ / 感谢您对公司的关注。经营数据请关注后续定期报告，谢谢！ / directional-but-unquantified /"
+    },
+    {
+      "evidence_id": "EV097",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "2026-06-04, 2026-07-04",
+      "text": "Window: 2026-06-04 to 2026-07-04 (30 days)"
+    },
+    {
+      "evidence_id": "EV098",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Primary query terms: 300274.SZ, 300274SZ, 300274, 阳光电源, 电气设备"
+    },
+    {
+      "evidence_id": "EV099",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "2026-06-04, 2026-06-22",
+      "text": "Upstream sync: 2026-06-04=auto_sync_failed:sync_exit_1:28888112822211 前沿信息收录: failed - pagination limit reached before the requested window was fully covered: pages=200, oldest_date=2026-06-22, requested=2026-06-04..2026-07-04; increase --max-pages Sync failed"
+    },
+    {
+      "evidence_id": "EV100",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Preprocess: cached: events=6802, clusters=77, opportunities=180, ocr_low_quality=820"
+    },
+    {
+      "evidence_id": "EV101",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Matched stream items: 30"
+    },
+    {
+      "evidence_id": "EV102",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Fusion target: 300274.SZ"
+    },
+    {
+      "evidence_id": "EV103",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Direct terms: 300274.SZ, 300274SZ, 300274, 阳光电源, 电气设备"
+    },
+    {
+      "evidence_id": "EV104",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Raw matches: stream=30; preprocessed matches: events=10, opportunities=1"
+    },
+    {
+      "evidence_id": "EV105",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Raw quality mix: low_quality=820, ok=6621, usable_with_warnings=181"
+    },
+    {
+      "evidence_id": "EV106",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Source mix after preprocessing: channel_check=4, raw_note=4, strategy_view=2"
+    }
+  ],
+  "conflicts": [
+    {
+      "topic": "Gross margin trajectory",
+      "segment": "consolidated",
+      "claim_a": "FY2025 gross margin increased 1.87pp YoY to 31.83%",
+      "source_a": "2025年年度报告 (EV027)",
+      "claim_b": "Q1 2026 gross margin decreased 1.87pp YoY to 33.26%",
+      "source_b": "2026年一季度报告 (EV014)",
+      "conflict_type": "period difference shows reversal of margin trend",
+      "required_resolution": "Verify whether Q1 2026 margin decline is seasonal, mix shift, or structural. Compare with FY2025 quarterly breakdowns."
+    },
+    {
+      "topic": "Profit growth vs revenue growth",
+      "segment": "consolidated",
+      "claim_a": "FY2025 revenue growth 14.55% and management claims brand and innovation driving margin improvement",
+      "source_a": "2025年年度报告 (EV022, EV021)",
+      "claim_b": "Net profit YoY -40.1157% (peer comparison) and Q1 2026 net margin -5.37pp YoY",
+      "source_b": "peer_comparison (EV061) and earnings_model (EV016)",
+      "conflict_type": "revenue growth without profit translation",
+      "required_resolution": "Identify which costs are rising (operating expenses, finance costs, impairment) and whether net profit decline is one-off or structural."
+    }
+  ],
+  "kpe_impacts": [
+    {
+      "evidence_id": "KPE01",
+      "segment": "consolidated",
+      "variable": "utilization_or_backlog",
+      "direction": "unknown",
+      "horizon": "",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "订单/排产：阳光电源交流更新0701 ...",
+      "verification_gate": "订单公告、排产环比、产能利用率、合同负债/预收款、收入确认节奏",
+      "missing_inputs": [
+        "baseline utilization rate",
+        "baseline backlog",
+        "probability distributions"
+      ],
+      "known_kpe": {
+        "date": "2026-07-01T18:03",
+        "source": "preprocessed_event",
+        "source_type": "channel_check",
+        "credibility": "高",
+        "decision_role": "probability/verification proxy",
+        "evidence": "订单/排产：阳光电源交流更新0701 ...",
+        "verification": "订单公告、排产环比、产能利用率、合同负债/预收款、收入确认节奏",
+        "affected_variable": "utilization_or_backlog",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 订单公告、排产环比、产能利用率、合同负债/预收款、收入确认节奏",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE02",
+      "segment": "consolidated",
+      "variable": "utilization_or_backlog",
+      "direction": "unknown",
+      "horizon": "",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "订单/排产：【阳光电源】DSZ交流更新-2...",
+      "verification_gate": "订单公告、排产环比、产能利用率、合同负债/预收款、收入确认节奏",
+      "missing_inputs": [
+        "baseline utilization rate",
+        "baseline backlog",
+        "probability distributions"
+      ],
+      "known_kpe": {
+        "date": "2026-07-01T18:03",
+        "source": "preprocessed_event",
+        "source_type": "channel_check",
+        "credibility": "高",
+        "decision_role": "probability/verification proxy",
+        "evidence": "订单/排产：【阳光电源】DSZ交流更新-2...",
+        "verification": "订单公告、排产环比、产能利用率、合同负债/预收款、收入确认节奏",
+        "affected_variable": "utilization_or_backlog",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 订单公告、排产环比、产能利用率、合同负债/预收款、收入确认节奏",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE03",
+      "segment": "consolidated",
+      "variable": "utilization_or_backlog",
+      "direction": "unknown",
+      "horizon": "",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "订单/排产：⭕阳光电源大涨点评【中信建投电...",
+      "verification_gate": "订单公告、排产环比、产能利用率、合同负债/预收款、收入确认节奏",
+      "missing_inputs": [
+        "baseline utilization rate",
+        "baseline backlog",
+        "probability distributions"
+      ],
+      "known_kpe": {
+        "date": "2026-06-22T13:51",
+        "source": "preprocessed_event",
+        "source_type": "channel_check",
+        "credibility": "高",
+        "decision_role": "probability/verification proxy",
+        "evidence": "订单/排产：⭕阳光电源大涨点评【中信建投电...",
+        "verification": "订单公告、排产环比、产能利用率、合同负债/预收款、收入确认节奏",
+        "affected_variable": "utilization_or_backlog",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 订单公告、排产环比、产能利用率、合同负债/预收款、收入确认节奏",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE04",
+      "segment": "consolidated",
+      "variable": "utilization_or_backlog",
+      "direction": "unknown",
+      "horizon": "",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "订单/排产：阳光电源深度之五——如何看待阳...",
+      "verification_gate": "订单公告、排产环比、产能利用率、合同负债/预收款、收入确认节奏",
+      "missing_inputs": [
+        "baseline utilization rate",
+        "baseline backlog",
+        "probability distributions"
+      ],
+      "known_kpe": {
+        "date": "2026-06-15T08:46",
+        "source": "preprocessed_event",
+        "source_type": "channel_check",
+        "credibility": "高",
+        "decision_role": "probability/verification proxy",
+        "evidence": "订单/排产：阳光电源深度之五——如何看待阳...",
+        "verification": "订单公告、排产环比、产能利用率、合同负债/预收款、收入确认节奏",
+        "affected_variable": "utilization_or_backlog",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 订单公告、排产环比、产能利用率、合同负债/预收款、收入确认节奏",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE05",
+      "segment": "consolidated",
+      "variable": "unmapped",
+      "direction": "unknown",
+      "horizon": "",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "政策/监管：⭕阳光电源点评0701【中信建...",
+      "verification_gate": "政策原文、执行细则、受益范围、时间表、预算/补贴落地",
+      "missing_inputs": [
+        "policy details",
+        "impact quantification"
+      ],
+      "known_kpe": {
+        "date": "2026-07-01T11:12",
+        "source": "preprocessed_event",
+        "source_type": "strategy_view",
+        "credibility": "中",
+        "decision_role": "narrative challenge",
+        "evidence": "政策/监管：⭕阳光电源点评0701【中信建...",
+        "verification": "政策原文、执行细则、受益范围、时间表、预算/补贴落地",
+        "affected_variable": "unmapped",
+        "required_outcome": "model conflict result and accepted/rejected reason"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 政策原文、执行细则、受益范围、时间表、预算/补贴落地",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE06",
+      "segment": "consolidated",
+      "variable": "unmapped",
+      "direction": "unknown",
+      "horizon": "",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "政策/监管：阳光电源点评0701【中信建投...",
+      "verification_gate": "政策原文、执行细则、受益范围、时间表、预算/补贴落地",
+      "missing_inputs": [
+        "policy details",
+        "impact quantification"
+      ],
+      "known_kpe": {
+        "date": "2026-07-01T11:12",
+        "source": "preprocessed_event",
+        "source_type": "strategy_view",
+        "credibility": "中",
+        "decision_role": "narrative challenge",
+        "evidence": "政策/监管：阳光电源点评0701【中信建投...",
+        "verification": "政策原文、执行细则、受益范围、时间表、预算/补贴落地",
+        "affected_variable": "unmapped",
+        "required_outcome": "model conflict result and accepted/rejected reason"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 政策原文、执行细则、受益范围、时间表、预算/补贴落地",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE07",
+      "segment": "consolidated",
+      "variable": "unmapped",
+      "direction": "unknown",
+      "horizon": "",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "# #调研纪要 source: zsxq group_id: 28888112822211 group_name: 前沿信息收录 topic_id: 22255211828528151 author: 研报小能手 published_at: 2026-07-01T18:35:15.962+08...",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "missing_inputs": [
+        "specific content",
+        "quantified impact"
+      ],
+      "known_kpe": {
+        "date": "2026-07-01T18:35",
+        "source": "stream_item",
+        "source_type": "company_research_feedback",
+        "credibility": "research_feedback_hard_to_publicly_verify",
+        "decision_role": "probability/verification proxy",
+        "evidence": "# #调研纪要 source: zsxq group_id: 28888112822211 group_name: 前沿信息收录 topic_id: 22255211828528151 author: 研报小能手 published_at: 2026-07-01T18:35:15.962+08...",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "unmapped",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE08",
+      "segment": "consolidated",
+      "variable": "unmapped",
+      "direction": "unknown",
+      "horizon": "",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "# 【AIDC】持续推荐-0616... source: zsxq group_id: 28888112822211 group_name: 前沿信息收录 topic_id: 22255245221528511 author: 纪要小能手 published_at: 2026-06-17T08...",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "missing_inputs": [
+        "specific content",
+        "quantified impact"
+      ],
+      "known_kpe": {
+        "date": "2026-06-17T08:12",
+        "source": "stream_item",
+        "source_type": "channel_check",
+        "credibility": "high_private_channel_hard_to_verify",
+        "decision_role": "probability/verification proxy",
+        "evidence": "# 【AIDC】持续推荐-0616... source: zsxq group_id: 28888112822211 group_name: 前沿信息收录 topic_id: 22255245221528511 author: 纪要小能手 published_at: 2026-06-17T08...",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "unmapped",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "grounding_status": "grounded_quote"
+    }
+  ],
+  "known_kpe_ledger": {
+    "KPE01": {
+      "date": "2026-07-01T18:03",
+      "source": "preprocessed_event",
+      "source_type": "channel_check",
+      "credibility": "高",
+      "decision_role": "probability/verification proxy",
+      "evidence": "订单/排产：阳光电源交流更新0701 ...",
+      "verification": "订单公告、排产环比、产能利用率、合同负债/预收款、收入确认节奏",
+      "affected_variable": "utilization_or_backlog",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE02": {
+      "date": "2026-07-01T18:03",
+      "source": "preprocessed_event",
+      "source_type": "channel_check",
+      "credibility": "高",
+      "decision_role": "probability/verification proxy",
+      "evidence": "订单/排产：【阳光电源】DSZ交流更新-2...",
+      "verification": "订单公告、排产环比、产能利用率、合同负债/预收款、收入确认节奏",
+      "affected_variable": "utilization_or_backlog",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE03": {
+      "date": "2026-06-22T13:51",
+      "source": "preprocessed_event",
+      "source_type": "channel_check",
+      "credibility": "高",
+      "decision_role": "probability/verification proxy",
+      "evidence": "订单/排产：⭕阳光电源大涨点评【中信建投电...",
+      "verification": "订单公告、排产环比、产能利用率、合同负债/预收款、收入确认节奏",
+      "affected_variable": "utilization_or_backlog",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE04": {
+      "date": "2026-06-15T08:46",
+      "source": "preprocessed_event",
+      "source_type": "channel_check",
+      "credibility": "高",
+      "decision_role": "probability/verification proxy",
+      "evidence": "订单/排产：阳光电源深度之五——如何看待阳...",
+      "verification": "订单公告、排产环比、产能利用率、合同负债/预收款、收入确认节奏",
+      "affected_variable": "utilization_or_backlog",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE05": {
+      "date": "2026-07-01T11:12",
+      "source": "preprocessed_event",
+      "source_type": "strategy_view",
+      "credibility": "中",
+      "decision_role": "narrative challenge",
+      "evidence": "政策/监管：⭕阳光电源点评0701【中信建...",
+      "verification": "政策原文、执行细则、受益范围、时间表、预算/补贴落地",
+      "affected_variable": "unmapped",
+      "required_outcome": "model conflict result and accepted/rejected reason"
+    },
+    "KPE06": {
+      "date": "2026-07-01T11:12",
+      "source": "preprocessed_event",
+      "source_type": "strategy_view",
+      "credibility": "中",
+      "decision_role": "narrative challenge",
+      "evidence": "政策/监管：阳光电源点评0701【中信建投...",
+      "verification": "政策原文、执行细则、受益范围、时间表、预算/补贴落地",
+      "affected_variable": "unmapped",
+      "required_outcome": "model conflict result and accepted/rejected reason"
+    },
+    "KPE07": {
+      "date": "2026-07-01T18:35",
+      "source": "stream_item",
+      "source_type": "company_research_feedback",
+      "credibility": "research_feedback_hard_to_publicly_verify",
+      "decision_role": "probability/verification proxy",
+      "evidence": "# #调研纪要 source: zsxq group_id: 28888112822211 group_name: 前沿信息收录 topic_id: 22255211828528151 author: 研报小能手 published_at: 2026-07-01T18:35:15.962+08...",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "unmapped",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE08": {
+      "date": "2026-06-17T08:12",
+      "source": "stream_item",
+      "source_type": "channel_check",
+      "credibility": "high_private_channel_hard_to_verify",
+      "decision_role": "probability/verification proxy",
+      "evidence": "# 【AIDC】持续推荐-0616... source: zsxq group_id: 28888112822211 group_name: 前沿信息收录 topic_id: 22255245221528511 author: 纪要小能手 published_at: 2026-06-17T08...",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "unmapped",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    }
+  },
+  "preprocessing_notes": [
+    "No segment revenue breakdown available; consolidated figures used for overall profile.",
+    "Hydrogen segment lacks quantitative metrics beyond directional management comment.",
+    "KPE hypotheses are all set to 'watch' as no baseline probabilities or revised values were provided in the evidence.",
+    "Energy storage Q1 2026 shipments flat YoY, but revenue impact not isolated; margin improved qoq due to regional mix.",
+    "Contradictions identified between FY2025 margin increase and Q1 2026 margin decrease, and between revenue growth and net profit decline.",
+    "Steel cost proxy (rebar) shows slight decline (-0.94%) over window, may indicate mild input cost relief."
+  ],
+  "underwriting_packet": {
+    "schema_version": 2,
+    "symbol": "300274.SZ",
+    "as_of_date": "2026-07-04",
+    "forecast_years": [
+      "2026E",
+      "2027E",
+      "2028E"
+    ],
+    "research_readiness": "partial",
+    "readiness_reasons": [
+      "Segment revenue breakdown (PV/wind inverters, energy storage, hydrogen) not disclosed in filings; only consolidated revenue and margin available.",
+      "Diluted share count could not be determined from supplied evidence (no total_share, market price, or EPS with share count). Fair value per share and EPS cannot be calculated.",
+      "Key operating metrics missing: storage GWh shipments, utilization rates, order backlog by segment, capex for 2025/2026, working-capital detail by segment.",
+      "Hydrogen segment has qualitative direction only; no revenue, margin, or capacity data.",
+      "Net profit YoY decline of -40% (peer comparison) conflicts with management narrative of brand premium and scale advantage; resolution requires breakdown of cost/expense increases.",
+      "Material segment three-year driver lines are missing: energy_storage, hydrogen",
+      "Bull/base/bear per-share valuation is incomplete.",
+      "Valuation buckets contain potential double counting.",
+      "Valuation has not closed from mutually exclusive buckets to per-share fair value.",
+      "volume_price_cost driver chain is incomplete; missing: utilization",
+      "Three-year values remain missing for consolidated line(s): operating_profit, eps, capex, fcf"
+    ],
+    "company_model": {
+      "model_profile": "corporate",
+      "operating_model_family": "volume_price_cost",
+      "business_archetype": "High-R&D clean-energy equipment and system integrator: photovoltaic inverters, wind converters, battery energy storage systems, hydrogen electrolyzers.",
+      "value_proposition_and_customers": "Provides core power-electronics and system integration for renewable-energy projects globally. Customers are utility-scale developers, EPCs, and distributed generation owners. Revenue comes from equipment sales and turnkey system delivery.",
+      "revenue_equation": "Revenue = Σ (shipment volume × ASP) + system integration project revenue. Volume depends on global solar/wind/storage installations and market share. ASP is under pressure from competition and regional mix shifts.",
+      "profit_equation": "Gross profit = revenue - raw material & component costs. Operating profit = gross profit - R&D (41.75 bn in FY2025, ~4.7% of revenue) - selling expenses (48.32 bn, ~5.4%) - G&A. Net margin is further hit by finance expense and tax.",
+      "cash_flow_equation": "OCF = net profit + depreciation ± working capital. Receivables/revenue at 40.1% and inventory/revenue at 44.6% (Q1 2026 annualized) indicate heavy cash absorption. OCF/net profit = 0.53 in Q1 2026.",
+      "capital_intensity_and_reinvestment": "R&D dominates reinvestment (31.97% YoY growth in FY2025). Capex for manufacturing capacity expansion is ongoing but not separately quantified. ROIC is likely under pressure as margins decline and capital employed grows.",
+      "diluted_share_count_mn": null,
+      "share_count_period": "",
+      "share_count_evidence_id": "",
+      "share_count_source_type": "unresolved",
+      "share_count_formula": "No reliable share count source: Tushare total_share not supplied; market cap div close price not possible without price; EPS reconciliation not possible without EPS.",
+      "share_count_cross_checks": [
+        "Market cap 261,556 mn CNY / PE TTM 21.93 implies TTM earnings ~11,926 mn CNY vs FY2025 parent net profit 13,461 mn CNY; difference suggests possible share dilution or reporting period mismatch.",
+        "Cannot calibrate shares without explicit total_share or closing price."
+      ],
+      "moat_mechanisms": [
+        "Technology/R&D scale: 41.75 bn R&D spend in FY2025, covering inverters, storage, hydrogen, and AI.",
+        "Global brand and channel: installed base in 150+ countries, strong service network.",
+        "Integrated platform: offers full renewable-energy balance-of-system alongside inverters/storage, creating customer stickiness.",
+        "Manufacturing scale and cost advantage: automated lines with 3 million unit annual EV powertrain capacity."
+      ],
+      "moat_to_financial_transmission": [
+        "Technology → product performance premium → higher ASP or market share.",
+        "Brand/channel → repeat orders and lower customer acquisition cost → higher gross margin retention.",
+        "Integrated platform → cross-selling and system-level orders → larger wallet share.",
+        "Scale → lower unit cost → margin buffer during ASP decline."
+      ],
+      "structural_risks": [
+        "Trade barriers: US 38.4% tariff on storage products, EU restricting Chinese inverters in publicly funded projects.",
+        "Technology substitution: rapid innovation cycle may make current generation obsolete.",
+        "Commodity input cost volatility: lithium, steel, semi-conductors affect margins.",
+        "Customer concentration: large project-based sales may create lumpy revenue and receivables.",
+        "Working-capital intensity: receivables and inventory growth outpace revenue, straining cash flow."
+      ],
+      "key_unknowns": [
+        "True end-market demand by segment (GW deployment, order book).",
+        "Sustainable gross margin after mix normalization.",
+        "Cash conversion cycle normalization path.",
+        "Hydrogen and EV powertrain revenue inflection."
+      ],
+      "evidence_ids": [
+        "EV021",
+        "EV022",
+        "EV027",
+        "EV014",
+        "EV020",
+        "EV018"
+      ]
+    },
+    "business_unit_map": [
+      {
+        "unit_id": "consolidated",
+        "unit_name": "阳光电源整体",
+        "unit_type": "reported_segment",
+        "disclosure_basis": "reported",
+        "parent_unit": "company",
+        "economic_role": "Aggregation of all business lines: photovoltaic inverters, wind converters, energy storage, hydrogen, and others.",
+        "revenue_driver_equation": "Consolidated revenue = sum of segment revenues (PV/wind inverters, energy storage, hydrogen, others).",
+        "profit_driver_equation": "Consolidated profit = gross profit - op expenses (R&D, selling, admin) - finance costs + other income - tax.",
+        "cash_and_capital_equation": "Consolidated OCF = net profit + depreciation ± working capital (AR, inventory, prepayments, contract liabilities). FCF = OCF - capex.",
+        "reported_metrics": [
+          "revenue",
+          "gross margin",
+          "operating margin",
+          "net margin",
+          "OCF/net profit",
+          "receivables/revenue",
+          "inventory/revenue"
+        ],
+        "evidence_ids": [
+          "EV013",
+          "EV014",
+          "EV015",
+          "EV016",
+          "EV018",
+          "EV019",
+          "EV020"
+        ],
+        "missing_inputs": [
+          "Segment revenue breakdown",
+          "Segment-level margins for PV and wind",
+          "Capex by segment"
+        ],
+        "next_verification": "FY2026 interim report for segment revenue and margin disclosure."
+      },
+      {
+        "unit_id": "pv_wind",
+        "unit_name": "光伏逆变器及风电变流器",
+        "unit_type": "product",
+        "disclosure_basis": "analytical",
+        "parent_unit": "consolidated",
+        "economic_role": "Core historical business: solar inverters (string, central) and wind converters. Likely largest revenue contributor.",
+        "revenue_driver_equation": "Revenue = (inverter shipments in GW × ASP per GW) + (wind converter shipments × ASP). Volume tied to global PV/wind installations and market share.",
+        "profit_driver_equation": "Gross profit = revenue - raw materials (semiconductors, magnetics, enclosures) - direct labor. Operating profit further reduced by R&D and selling cost allocation.",
+        "cash_and_capital_equation": "Working-capital heavy due to project-based receivables and inventory of finished goods and components.",
+        "reported_metrics": [],
+        "evidence_ids": [
+          "EV022",
+          "EV025"
+        ],
+        "missing_inputs": [
+          "PV/wind inverter revenue",
+          "shipment GW",
+          "ASP trends",
+          "segment gross margin"
+        ],
+        "next_verification": "Check if filing provides any product-level breakdown in future annual reports."
+      },
+      {
+        "unit_id": "energy_storage",
+        "unit_name": "储能系统",
+        "unit_type": "reported_segment",
+        "disclosure_basis": "calculated",
+        "parent_unit": "consolidated",
+        "economic_role": "Battery energy storage system integration: cells, PCS, EMS, and turnkey delivery. Fast-growing segment.",
+        "revenue_driver_equation": "Revenue = shipments (GWh) × ASP. Q1 2026 shipments flat YoY; ASP decline from cell price decreases partially offset by regional mix improvement.",
+        "profit_driver_equation": "Gross margin ~30% in Q1 2026, improved QoQ due to higher European sales share. Profit impacted by lithium cost pass-through and competitive pricing in some regions.",
+        "cash_and_capital_equation": "High upfront costs: prepayments for battery cells (prepayments surged 201% to 4 bn CNY in Q1 2026), large contract liabilities, and long cash conversion cycle.",
+        "reported_metrics": [
+          "gross margin (~30%)",
+          "shipment direction (flat YoY)"
+        ],
+        "evidence_ids": [
+          "EV091",
+          "EV092",
+          "EV095",
+          "EV093"
+        ],
+        "missing_inputs": [
+          "Storage revenue",
+          "shipment GWh",
+          "segment operating margin",
+          "utilization rates"
+        ],
+        "next_verification": "Monitor Q2 2026 shipment and revenue disclosures; observe if tariff pre-ordering impact materializes."
+      },
+      {
+        "unit_id": "hydrogen",
+        "unit_name": "氢能",
+        "unit_type": "product",
+        "disclosure_basis": "analytical",
+        "parent_unit": "consolidated",
+        "economic_role": "Green hydrogen electrolyzer and system sales. Early-stage growth, good order flow, but negligible current revenue.",
+        "revenue_driver_equation": "Revenue = electrolyzer units × ASP; currently small.",
+        "profit_driver_equation": "Likely negative or breakeven given early-stage investment.",
+        "cash_and_capital_equation": "Capex for capacity build-out, working capital for project execution.",
+        "reported_metrics": [
+          "order pipeline (qualitative: 'good')"
+        ],
+        "evidence_ids": [
+          "EV090"
+        ],
+        "missing_inputs": [
+          "hydrogen revenue",
+          "shipments",
+          "margin",
+          "capacity"
+        ],
+        "next_verification": "Look for first material revenue disclosure or contract announcements in 2026/2027."
+      },
+      {
+        "unit_id": "BU05",
+        "unit_name": "consolidated",
+        "unit_type": "reported_segment",
+        "disclosure_basis": "reported",
+        "parent_unit": "company",
+        "economic_role": "Filing segment restored after structured evidence reconciliation.",
+        "revenue_driver_equation": "",
+        "profit_driver_equation": "",
+        "cash_and_capital_equation": "",
+        "reported_metrics": [],
+        "evidence_ids": [
+          "EV013",
+          "EV014",
+          "EV015",
+          "EV016",
+          "EV019",
+          "EV020",
+          "EV022",
+          "EV027"
+        ],
+        "missing_inputs": [
+          "economic sub-unit driver equations require analyst completion"
+        ],
+        "next_verification": ""
+      },
+      {
+        "unit_id": "BU07",
+        "unit_name": "energy_storage",
+        "unit_type": "reported_segment",
+        "disclosure_basis": "missing",
+        "parent_unit": "company",
+        "economic_role": "Filing segment restored after structured evidence reconciliation.",
+        "revenue_driver_equation": "",
+        "profit_driver_equation": "",
+        "cash_and_capital_equation": "",
+        "reported_metrics": [],
+        "evidence_ids": [
+          "EV091",
+          "EV092",
+          "EV093",
+          "EV095"
+        ],
+        "missing_inputs": [
+          "economic sub-unit driver equations require analyst completion"
+        ],
+        "next_verification": ""
+      },
+      {
+        "unit_id": "BU09",
+        "unit_name": "hydrogen",
+        "unit_type": "reported_segment",
+        "disclosure_basis": "missing",
+        "parent_unit": "company",
+        "economic_role": "Filing segment restored after structured evidence reconciliation.",
+        "revenue_driver_equation": "",
+        "profit_driver_equation": "",
+        "cash_and_capital_equation": "",
+        "reported_metrics": [],
+        "evidence_ids": [
+          "EV090"
+        ],
+        "missing_inputs": [
+          "economic sub-unit driver equations require analyst completion"
+        ],
+        "next_verification": ""
+      }
+    ],
+    "segment_models": [
+      {
+        "segment": "consolidated",
+        "products_or_services": "光伏逆变器、风能变流器、储能系统、氢能电解槽及其他电力电源",
+        "customers_and_channel": "全球电力开发商、EPC承包商、分销商；直接销售加本地服务网络；海外收入占比高",
+        "revenue_weight_pct": 100.0,
+        "profit_weight_pct": 100.0,
+        "base_period": "FY2025",
+        "base_revenue_value": 89184.357,
+        "base_revenue_unit": "CNY mn",
+        "base_revenue_growth_pct": 14.55,
+        "base_margin_pct": 31.83,
+        "base_margin_change_pp": 1.89,
+        "demand_and_order_drivers": [
+          "全球光伏/风电新增装机（GW）",
+          "各国可再生能源政策与补贴",
+          "储能系统渗透率及电网调频需求",
+          "氢能产业政策",
+          "客户提前下单行为（受关税政策影响）"
+        ],
+        "industry_supply_and_capacity": "竞争激烈，国内储能集成商产能大幅扩张；光伏逆变器市场中国厂商份额超80%，海外本地化压力增大；上游英飞凌等半导体供应有所缓解。",
+        "volume_share_utilization": "Q1 2026储能出货同比持平；汇总光伏加风电逆变器出货推测低速增长；市场份额未披露，估计为中国/全球双龙头。",
+        "price_asp_take_rate": "ASP趋势下行，但大功率及海外高端市场报价趋稳。近期商品（钢）成本下降提供有限缓冲。Q1 2026综合毛利率33.26%，同比下降1.87个百分点。",
+        "unit_cost_and_input_prices": "锂、铜、半导体、芯片成本仍敏感；规模与研发降本对冲部分原材料上涨。预付款项激增反映锁定供给量。",
+        "margin_and_operating_leverage": "毛利率压缩但尚在30%以上。销售、研发费用率上升侵蚀经营杠杆：财务费用率因利息和汇兑收益改善。Q1 2026营业利润率17.10%，同比下降6.94个百分点。",
+        "working_capital_and_cash_conversion": "应收/收入40.1%，存货/收入44.6%（年化），均同比增加。合同负债122亿和预付款40亿表明交付待释放。OCF/净利=0.53，现金转换偏低。",
+        "prosperity_level": "decelerating",
+        "marginal_direction": "deteriorating",
+        "causal_analysis": "需求端全球装机仍增长但增速放缓；供给端中国产能集中导致价格战；公司通过品牌和海外市场部分对冲，但费用上升和关税担忧抑制利润转化。",
+        "valuation_treatment": "核心价值来源为光伏逆变器和储能；氢能为期权；整体估值处于历史中位，但盈利下滑恐拖累PE扩张。",
+        "strongest_counterevidence": [
+          "管理层声称品牌和规模驱动毛利率提升，但Q1 2026实际毛利率同比下跌，净利润同比降40%（EV061）",
+          "美国关税和欧盟政策可能长期压制海外利润"
+        ],
+        "evidence_ids": [
+          "EV013",
+          "EV014",
+          "EV015",
+          "EV016",
+          "EV019",
+          "EV020",
+          "EV022",
+          "EV027"
+        ],
+        "missing_inputs": [
+          "光伏/风电逆变器细分收入与毛利率",
+          "储能系统及氢能收入",
+          "出货量（GW/GWh）",
+          "产能利用率及在手订单"
+        ],
+        "next_verification": "2026年中报及投资者交流会：收入细拆、毛利率驱动因素、订单与合同负债转化。"
+      },
+      {
+        "segment": "energy_storage",
+        "products_or_services": "电池储能系统集成（含电池簇、PCS、EMS、EPC）",
+        "customers_and_channel": "美国、欧洲及国内大型地面电站项目；客户提前于2025年下单以避免关税。",
+        "revenue_weight_pct": null,
+        "profit_weight_pct": null,
+        "base_period": "Q1 2026",
+        "base_revenue_value": null,
+        "base_revenue_unit": "",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": 30.0,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [
+          "可再生能源弃电率监管",
+          "峰谷电价套利",
+          "电网辅助服务市场",
+          "美国OBBBA法案影响预购节奏"
+        ],
+        "industry_supply_and_capacity": "产能快速扩张，中国企业低价出口；海外当地集成商与电芯厂直接竞争。",
+        "volume_share_utilization": "Q1 2026出货同比持平，受Q4赶装和关税压货后疲软。",
+        "price_asp_take_rate": "ASP承压，但高毛利率地区（欧洲）销售占比提高带来环比毛利率改善至30%。碳酸锂涨价成本传导存在区域差异。",
+        "unit_cost_and_input_prices": "锂电池电芯为主，碳酸锂价格中枢随产能供大于求下降，但波动仍存；另有关税成本。",
+        "margin_and_operating_leverage": "毛利率30%，环比提升，结构性改善；但净利润受全公司费用分摊影响，未知细分利润。",
+        "working_capital_and_cash_conversion": "大额合同负债、预付款和应收账款，长达数月的项目周期。",
+        "prosperity_level": "stable",
+        "marginal_direction": "stable to slightly positive",
+        "causal_analysis": "储能出货量持平，但高利润欧洲区销售增长抵消量下滑，盈利能力改善。后续关注美国订单削减影响及国内大储放量。",
+        "valuation_treatment": "核心增长引擎，当前估值主要锚定储能板块；应独立估值，但缺乏数据。",
+        "strongest_counterevidence": [
+          "Q1出货量持平，如全年无明显恢复则增长乏力",
+          "美国市场面临关税和立法不确定性"
+        ],
+        "evidence_ids": [
+          "EV091",
+          "EV092",
+          "EV093",
+          "EV095"
+        ],
+        "missing_inputs": [
+          "储能收入",
+          "储能营业利润",
+          "储能GWh出货",
+          "美国订单占比"
+        ],
+        "next_verification": "2026年中报储能系统分部报表及管理层对下半年订单指引。"
+      },
+      {
+        "segment": "hydrogen",
+        "products_or_services": "电解槽（碱性/PEM）及制氢系统",
+        "customers_and_channel": "国内大型绿氢项目（如煤化工、炼化）；探索海外。",
+        "revenue_weight_pct": null,
+        "profit_weight_pct": null,
+        "base_period": "unspecified",
+        "base_revenue_value": null,
+        "base_revenue_unit": "",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [
+          "国家级氢能规划与示范城市群",
+          "碳税与绿氢溢价",
+          "电解槽成本下降"
+        ],
+        "industry_supply_and_capacity": "多家央企及新能源企业布局，产能竞赛。",
+        "volume_share_utilization": "订单良好，但公司未披露数字，推测量小。",
+        "price_asp_take_rate": "电解槽价格随规模和技术进步逐渐下降。",
+        "unit_cost_and_input_prices": "钢结构、镍、膜等材料，成本有待规模化降低。",
+        "margin_and_operating_leverage": "初期负利润或微利，重在抢份额。",
+        "working_capital_and_cash_conversion": "长周期项目，大型电解槽需要预付款。",
+        "prosperity_level": "early growth",
+        "marginal_direction": "positive",
+        "causal_analysis": "政策暖风，订单萌芽，规模化拐点尚远。",
+        "valuation_treatment": "期权价值，在总体估值中可单独给出非流通价值。",
+        "strongest_counterevidence": [],
+        "evidence_ids": [
+          "EV090"
+        ],
+        "missing_inputs": [
+          "氢能收入",
+          "订单额",
+          "产能",
+          "毛利率"
+        ],
+        "next_verification": "重大合同公告或首次收入披露。"
+      }
+    ],
+    "underwriting_questions": [
+      {
+        "question_id": "Q1",
+        "question": "储能系统毛利率能否维持在30%以上？若碳酸锂涨价且竞争加剧，是否被迫牺牲价格抢份额？",
+        "why_it_matters": "储能是当前最重要的价值锚，毛利率决定了净利润和FCF的弹性。",
+        "current_answer": "Q1 2026毛利率约30%，环比改善因高毛利欧洲区占比提升。管理层称通过技术降本和增值服务维持利润空间。但缺乏份额与价格定量信息。",
+        "bull_evidence": [
+          "公司互动回复称毛利率环比上升且原因明确（区域结构优化）",
+          "欧洲市场品牌和服务壁垒相对高"
+        ],
+        "bear_evidence": [
+          "Q1出货量同比持平，量不增价难提",
+          "美国关税大幅提高且客户提前下单透支需求",
+          "国内市场竞争激烈，“面粉比面包贵”传闻（公司否认）"
+        ],
+        "decisive_model_variables": [
+          "energy_storage gross margin",
+          "energy_storage shipment volume growth",
+          "energy_storage ASP"
+        ],
+        "affected_financial_lines": [
+          "consolidated revenue",
+          "consolidated gross profit",
+          "consolidated net profit"
+        ],
+        "evidence_ids": [
+          "EV092",
+          "EV093"
+        ],
+        "missing_evidence": [
+          "储能板块季度价格与量级",
+          "特朗普关税下美国实际订单损失",
+          "碳酸锂价格预测"
+        ],
+        "next_verification": "2026年二季度及半年报将揭示毛利率趋势和出货量变化。"
+      },
+      {
+        "question_id": "Q2",
+        "question": "合同负债22bn及预付款4bn是否能在2026年顺利转化为收入，且毛利率如何？",
+        "why_it_matters": "预收款项代表已锁定需求，转化速度和质量直接影响2026-2027年营收和利润。",
+        "current_answer": "合同负债12.2亿，预付款项4亿；公司未给出指引。前期订单可能已在Q4或Q1交付，但Q1收入环比下滑，暗示转化节奏不及预期或需求前置。",
+        "bull_evidence": [
+          "合同负债常见于大型EPC和储能项目，表明手头订单充足"
+        ],
+        "bear_evidence": [
+          "2026年Q1收入环比大幅下滑，合同负债及预付款激增但收入未同比例增长",
+          "客户提前下单后订单漏斗可能收窄"
+        ],
+        "decisive_model_variables": [
+          "consolidated revenue",
+          "contract liabilities conversion"
+        ],
+        "affected_financial_lines": [
+          "consolidated revenue",
+          "consolidated OCF",
+          "consolidated net profit"
+        ],
+        "evidence_ids": [
+          "EV043",
+          "EV093"
+        ],
+        "missing_evidence": [
+          "合同负债所对应项目的毛利率和交付时间表"
+        ],
+        "next_verification": "2026年二季度和三季度报告将反映交付进度及收入确认；管理层交流会可能给出全年指引。"
+      },
+      {
+        "question_id": "Q3",
+        "question": "逆变器产品线是否能保持或提升市场份额，且毛利率止跌？",
+        "why_it_matters": "逆变器是公司的传统现金牛，如果这块业务收入和利润持续萎缩，整个公司估值基础会动摇。",
+        "current_answer": "逆变器收入与毛利率未单独披露；公司声称有品牌溢价和技术优势。但Q1综合毛利率同比下滑，暗示逆变器毛利率可能也在承压。",
+        "bull_evidence": [
+          "公司R&D投入41.75亿，发布多项新产品",
+          "全球装机需求仍增长"
+        ],
+        "bear_evidence": [
+          "中国竞争对手快速追赶，价格战可能在所难免",
+          "欧盟对中国逆变器限制可能影响份额"
+        ],
+        "decisive_model_variables": [
+          "pv_wind revenue",
+          "pv_wind gross margin",
+          "global PV installations"
+        ],
+        "affected_financial_lines": [
+          "consolidated revenue",
+          "consolidated gross profit"
+        ],
+        "evidence_ids": [
+          "EV022",
+          "EV025"
+        ],
+        "missing_evidence": [
+          "逆变器出货量及ASP",
+          "竞争对手定价"
+        ],
+        "next_verification": "2026年报披露分部收入或行业出货量数据。"
+      },
+      {
+        "question_id": "Q4",
+        "question": "氢能业务何时能产生实质性的收入贡献？需要多少前期投入？",
+        "why_it_matters": "市场给予公司氢能期权价值，但若长期无法实现规模化，这部分估值会消失。",
+        "current_answer": "公司表示氢能订单良好，但无任何定量数据。处于早期，收入占比极小。",
+        "bull_evidence": [
+          "国家规划支持，多地绿氢项目启动"
+        ],
+        "bear_evidence": [
+          "电解槽产能过剩隐忧",
+          "竞争对手已获得大额订单"
+        ],
+        "decisive_model_variables": [
+          "hydrogen revenue",
+          "hydrogen margin"
+        ],
+        "affected_financial_lines": [
+          "hydrogen revenue",
+          "consolidated capex"
+        ],
+        "evidence_ids": [
+          "EV090"
+        ],
+        "missing_evidence": [
+          "氢能项目合同额",
+          "产能规划"
+        ],
+        "next_verification": "重大合同公告或中报首次披露氢能收入。"
+      },
+      {
+        "question_id": "Q5",
+        "question": "营运资本（应收/存货/预付款）的高水位是否会触发减值或现金流危机？",
+        "why_it_matters": "应收和存货占年化收入比例高，若下游项目延迟或客户违约，可能面临坏账损失和流动性风险。",
+        "current_answer": "应收/收入40.1%，存货/收入44.6%，同比均升。预付款激增201%备料。现金转换率低至0.53。未出现明显的减值，但需监测。",
+        "bull_evidence": [
+          "客户为大型能源公司，信用较好",
+          "存货主要为电芯等有市价商品"
+        ],
+        "bear_evidence": [
+          "Q1 2026 OCF同比下降，现金流恶化信号",
+          "行业周期下行时往往出现逾期和减值"
+        ],
+        "decisive_model_variables": [
+          "receivables/revenue",
+          "inventory/revenue",
+          "OCF/net profit"
+        ],
+        "affected_financial_lines": [
+          "consolidated OCF",
+          "consolidated net profit (via impairment)"
+        ],
+        "evidence_ids": [
+          "EV019",
+          "EV020",
+          "EV018",
+          "EV043"
+        ],
+        "missing_evidence": [
+          "账龄分析",
+          "客户集中度"
+        ],
+        "next_verification": "2026年中报资产减值测试及经营活动现金流量表。"
+      }
+    ],
+    "forecast_lines": [
+      {
+        "segment": "consolidated",
+        "metric": "revenue",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 89184.357,
+        "year_1_value": 85500.0,
+        "year_2_value": 89775.0,
+        "year_3_value": 94264.0,
+        "formula": "Base year FY2025 revenue, 2026E ~ -4.1% (weighted by Q1 run-rate and tariff headwinds), 2027E +5%, 2028E +5%.",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [
+          "EV013",
+          "EV022"
+        ],
+        "key_sensitivity": "Assumes global installations remain supportive, no major market share loss, but US tariff and pre-ordering weigh on 2026.",
+        "missing_inputs": []
+      },
+      {
+        "segment": "consolidated",
+        "metric": "gross_margin",
+        "unit": "%",
+        "base_period": "FY2025",
+        "base_value": 31.83,
+        "year_1_value": 31.5,
+        "year_2_value": 31.8,
+        "year_3_value": 32.0,
+        "formula": "Reflects Q1 2026 margin of 33.26% annualizing but offset by expected further ASP pressure and mix normalization, stabilizing after.",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [
+          "EV014",
+          "EV027"
+        ],
+        "key_sensitivity": "Every 1pp change in gross margin impacts parent net profit by ~850 mn CNY.",
+        "missing_inputs": []
+      },
+      {
+        "segment": "consolidated",
+        "metric": "operating_profit",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": null,
+        "year_1_value": null,
+        "year_2_value": null,
+        "year_3_value": null,
+        "formula": "Operating profit = gross profit - operating expenses. Operating expenses not disclosed for FY2025; unable to estimate reliably.",
+        "assumption_status": "missing",
+        "evidence_ids": [],
+        "key_sensitivity": "",
+        "missing_inputs": [
+          "FY2025 operating expense split",
+          "Q1 2026 total operating expenses"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "parent_net_profit",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 13461.28,
+        "year_1_value": 10350.0,
+        "year_2_value": 11250.0,
+        "year_3_value": 11980.0,
+        "formula": "Assume 2026E net profit decline ~23% (mirroring H2 2025 + Q1 run-rate), followed by moderate recovery.",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [
+          "EV016",
+          "EV061"
+        ],
+        "key_sensitivity": "Driven by revenue, gross margin, and expense control; uncertain.",
+        "missing_inputs": []
+      },
+      {
+        "segment": "consolidated",
+        "metric": "eps",
+        "unit": "CNY",
+        "base_period": "FY2025",
+        "base_value": null,
+        "year_1_value": null,
+        "year_2_value": null,
+        "year_3_value": null,
+        "formula": "EPS = parent net profit / diluted shares. Share count unresolved.",
+        "assumption_status": "missing",
+        "evidence_ids": [],
+        "key_sensitivity": "",
+        "missing_inputs": [
+          "diluted_share_count_mn"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "ocf",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 16918.0,
+        "year_1_value": 9000.0,
+        "year_2_value": 10000.0,
+        "year_3_value": 10500.0,
+        "formula": "OCF/net profit ratio assumed gradually improving from 0.53 towards 0.8 as working capital normalizes. 2026E OCF ~0.55 × 10350 = 5692 mn, rounded up for cautious recovery.",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [
+          "EV018"
+        ],
+        "key_sensitivity": "Working-capital cycle is key; receivables/contract liabilities release could boost OCF.",
+        "missing_inputs": []
+      },
+      {
+        "segment": "consolidated",
+        "metric": "capex",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": null,
+        "year_1_value": null,
+        "year_2_value": null,
+        "year_3_value": null,
+        "formula": "No capex figure available (cash paid to acquire fixed assets not extracted).",
+        "assumption_status": "missing",
+        "evidence_ids": [],
+        "key_sensitivity": "",
+        "missing_inputs": [
+          "2025 capex",
+          "2026E capex guidance"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "fcf",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": null,
+        "year_1_value": null,
+        "year_2_value": null,
+        "year_3_value": null,
+        "formula": "FCF = OCF - capex; both inputs missing or incomplete.",
+        "assumption_status": "missing",
+        "evidence_ids": [],
+        "key_sensitivity": "",
+        "missing_inputs": [
+          "capex"
+        ]
+      }
+    ],
+    "scenarios": [
+      {
+        "scenario": "bull",
+        "probability_pct": 20.0,
+        "operating_assumptions": [
+          "Global PV/storage installations accelerate; policy tailwinds strong.",
+          "EU and US tariff impact mitigated by local manufacturing and demand shift to other regions.",
+          "Storage gross margin >33%, inverter margin stabilizes; new product cycles drive ASP premium.",
+          "Hydrogen revenue becomes material (1-2 bn CNY by 2028).",
+          "Working capital improves: receivables/revenue <35%, OCF/net profit >0.8.",
+          "2026E revenue growth +5%, 2027E +15%, 2028E +15%; parent net profit 12,500 / 16,500 / 20,000 mn CNY."
+        ],
+        "parent_net_profit_cny_mn": 16500.0,
+        "eps_cny": null,
+        "fcf_cny_mn": null,
+        "valuation_method": "PE on 2027E earnings, justified by growth recovery.",
+        "valuation_multiple": 25.0,
+        "fair_value_per_share": null,
+        "evidence_ids": [
+          "EV090",
+          "EV092"
+        ],
+        "falsification": "If 2027E parent profit falls below 12,000 mn CNY or gross margin remains below 30%.",
+        "missing_inputs": [
+          "share count for per-share value"
+        ]
+      },
+      {
+        "scenario": "base",
+        "probability_pct": 60.0,
+        "operating_assumptions": [
+          "Moderate demand growth in PV/storage, some tariff disruption.",
+          "Storage gross margin ~30% gradually improving to 31%; inverter margin stable but low single-digit decline p.a.",
+          "Revenue growth -5% in 2026, then recovering +5%/+5%.",
+          "Parent net profit 10,350 / 11,250 / 11,980 mn CNY.",
+          "OCF/net profit ratio recovers to 0.7 by 2028.",
+          "Hydrogen remains an option with negligible revenue.",
+          "Working capital normalizes slowly."
+        ],
+        "parent_net_profit_cny_mn": 11250.0,
+        "eps_cny": null,
+        "fcf_cny_mn": null,
+        "valuation_method": "PE on 2027E earnings, lower multiple reflecting cycle uncertainty.",
+        "valuation_multiple": 18.0,
+        "fair_value_per_share": null,
+        "evidence_ids": [
+          "EV013",
+          "EV014"
+        ],
+        "falsification": "If 2026 revenue shows steeper decline (>10%) or gross margin drops below 29%.",
+        "missing_inputs": [
+          "share count"
+        ]
+      },
+      {
+        "scenario": "bear",
+        "probability_pct": 20.0,
+        "operating_assumptions": [
+          "Severe trade barriers: universal high tariffs, EU effectively banning Chinese inverters.",
+          "Global recession slows renewable investment.",
+          "Storage ASP collapse, gross margin <25%.",
+          "Revenue decline -15% in 2026, -5% in 2027, flat in 2028.",
+          "Parent net profit 7,500 / 6,800 / 6,500 mn CNY.",
+          "Cash flow deteriorates; impairment on receivables/inventory."
+        ],
+        "parent_net_profit_cny_mn": 6800.0,
+        "eps_cny": null,
+        "fcf_cny_mn": null,
+        "valuation_method": "Liquidation/book value or trough PE.",
+        "valuation_multiple": 10.0,
+        "fair_value_per_share": null,
+        "evidence_ids": [
+          "EV091",
+          "EV093"
+        ],
+        "falsification": "If trade policy escalates beyond current known measures and company loses major customers.",
+        "missing_inputs": [
+          "share count"
+        ]
+      }
+    ],
+    "thesis_financial_bridges": [
+      {
+        "bridge_id": "B1",
+        "thesis_or_question": "储能毛利率韧性与区域结构优化是利润企稳的关键。",
+        "affected_unit": "consolidated",
+        "operating_driver": "energy storage gross margin (%)",
+        "driver_formula": "Storage gross profit = storage revenue × gross margin. Influences consolidated margin.",
+        "base_assumption": "30% in 2026, 31% in 2027.",
+        "bull_assumption": "33%+ sustained by premium mix.",
+        "bear_assumption": "25% or lower due to price war.",
+        "revenue_impact": "Storage revenue ~25-30% of total; margin swing directly impacts consolidated gross profit by ±2-3 bn.",
+        "profit_impact": "Each 5pp change in storage margin alters pre-tax profit ~1.25 bn (assuming storage 25% of revenue).",
+        "eps_impact": "unquantified (shares missing)",
+        "fcf_or_capital_impact": "Higher margin supports better cash conversion.",
+        "valuation_impact": "Base PE 20x vs Bull 25x; market assigns premium to margin stability.",
+        "quantification_status": "partially_quantified",
+        "evidence_ids": [
+          "EV092"
+        ],
+        "missing_inputs": [
+          "precise storage revenue",
+          "tax rate"
+        ]
+      },
+      {
+        "bridge_id": "B2",
+        "thesis_or_question": "合同负债与预付款的转化节奏将决定2026年收入能否触底反弹。",
+        "affected_unit": "consolidated",
+        "operating_driver": "contract liabilities and prepayments → revenue recognition",
+        "driver_formula": "Recognized revenue = f(contract liabilities, project milestones).",
+        "base_assumption": "About 60% of contract liabilities convert by end of 2026 with modest margin.",
+        "bull_assumption": "80% conversion at healthy margin, driving revenue +10% in H2 2026.",
+        "bear_assumption": "Conversion delayed or at fire-sale margins due to renegotiation.",
+        "revenue_impact": "Billions of CNY in potential revenue acceleration or shortfall.",
+        "profit_impact": "Margin on these projects uncertain; could trigger write-downs if customers walk away.",
+        "eps_impact": "unquantified",
+        "fcf_or_capital_impact": "Successful conversion generates large OCF inflow.",
+        "valuation_impact": "Positive conversion would reduce market's fear of working-capital trap.",
+        "quantification_status": "unquantified",
+        "evidence_ids": [
+          "EV043"
+        ],
+        "missing_inputs": [
+          "contract liabilities project details",
+          "customer-specific margin"
+        ]
+      },
+      {
+        "bridge_id": "B3",
+        "thesis_or_question": "费用控制：研发与销售费用率能否见顶并开始下滑？",
+        "affected_unit": "consolidated",
+        "operating_driver": "R&D and SG&A as % of revenue",
+        "driver_formula": "Operating profit = gross profit - R&D - SG&A - other.",
+        "base_assumption": "R&D/revenue ~5%, SG&A/revenue ~6% in 2026, stabilizing.",
+        "bull_assumption": "Revenue leverage reduces ratios to 4.5% and 5.5%.",
+        "bear_assumption": "Continued investment and price competition push ratios to 5.5% and 7%.",
+        "revenue_impact": "Influences net margin expansion/contraction.",
+        "profit_impact": "1pp reduction in expense ratio saves ~850 mn profit.",
+        "eps_impact": "unquantified",
+        "fcf_or_capital_impact": "Lower expenses support cash flow.",
+        "valuation_impact": "Margin of safety improves; P/E may re-rate.",
+        "quantification_status": "partially_quantified",
+        "evidence_ids": [
+          "EV017",
+          "EV022"
+        ],
+        "missing_inputs": [
+          "detailed expense breakdown forecasts"
+        ]
+      }
+    ],
+    "moat_evidence_tests": [
+      {
+        "moat_mechanism": "R&D scale and innovation",
+        "observable_test": "R&D spend/revenue vs peers and number of new product introductions.",
+        "comparison_basis": "vs 德业股份, 特变电工, 国电南瑞",
+        "evidence_result": "Company spent 41.75 bn CNY (4.7% of revenue) in FY2025, higher absolute amount than most Chinese peers. Numerous new products launched (inverters, storage systems).",
+        "financial_transmission": "Higher R&D may drive patent-protected premium pricing and long-term market share.",
+        "strongest_counterevidence": "Margins are declining despite R&D, suggesting pricing pressure outweighs innovation premium in short term.",
+        "status": "partial",
+        "evidence_ids": [
+          "EV022",
+          "EV026"
+        ],
+        "next_verification": "Check 2026 gross margin trajectory and peer R&D yields."
+      },
+      {
+        "moat_mechanism": "Global brand and channel reach",
+        "observable_test": "Revenue from outside China (% of total), number of countries served, repeat customer ratio.",
+        "comparison_basis": "Historical trend and vs peers.",
+        "evidence_result": "FY2025 annual report indicates overseas business growth; EU and US are key markets. No exact % disclosed but likely >50%.",
+        "financial_transmission": "Geographic diversification reduces country risk and supports ASP in less competitive markets.",
+        "strongest_counterevidence": "EU policy and US tariffs directly threaten the channel’s profitability.",
+        "status": "partial",
+        "evidence_ids": [
+          "EV025"
+        ],
+        "next_verification": "2025 annual report geographic segment disclosure (if any)."
+      },
+      {
+        "moat_mechanism": "Customer switching costs / installed base lock-in",
+        "observable_test": "Service revenue as % of total; aftermarket attachment rate; requirement for recertification when changing supplier.",
+        "comparison_basis": "Industry standard for utility-scale solar.",
+        "evidence_result": "Not quantified. Industry knowledge suggests inverters have long life and require service, but switching costs for new projects are moderate.",
+        "financial_transmission": "Recurring service revenue and parts sales may provide stable income, but evidence is insufficient.",
+        "strongest_counterevidence": "Price is the primary criterion for many developers, limiting lock-in.",
+        "status": "unproven",
+        "evidence_ids": [],
+        "next_verification": "Evidence of service/software revenue streams or contract renewal rates."
+      }
+    ],
+    "valuation_buckets": [
+      {
+        "bucket": "core_operations",
+        "inclusion": "core",
+        "valuation_method": "PE on 2027E parent net profit (base case)",
+        "metric_and_period": "parent_net_profit 2027E",
+        "metric_value": 11250.0,
+        "valuation_multiple": 18.0,
+        "ownership_pct": 100.0,
+        "haircut_pct": 0.0,
+        "equity_value_cny_mn": 202500.0,
+        "per_share_value_cny": null,
+        "overlap_key": "none",
+        "double_counting_treatment": "Sole valuation of consolidated operations; no other buckets overlap.",
+        "evidence_ids": [
+          "EV013",
+          "EV014"
+        ],
+        "missing_inputs": [
+          "share count"
+        ]
+      },
+      {
+        "bucket": "hydrogen_option",
+        "inclusion": "optionality",
+        "valuation_method": "risk-adjusted DCF or analog to start-up valuation",
+        "metric_and_period": "estimated future revenue 2030",
+        "metric_value": null,
+        "valuation_multiple": null,
+        "ownership_pct": 100.0,
+        "haircut_pct": 90.0,
+        "equity_value_cny_mn": 5000.0,
+        "per_share_value_cny": null,
+        "overlap_key": "none",
+        "double_counting_treatment": "Independent value not captured in core operations earnings.",
+        "evidence_ids": [
+          "EV090"
+        ],
+        "missing_inputs": [
+          "hydrogen revenue projections",
+          "discount rate"
+        ]
+      }
+    ],
+    "valuation_closure": {
+      "current_price_cny": null,
+      "diluted_share_count_mn": null,
+      "core_value_per_share_cny": null,
+      "probability_weighted_fair_value_per_share_cny": null,
+      "option_value_per_share_cny": null,
+      "other_adjustments_per_share_cny": null,
+      "fair_value_per_share_cny": null,
+      "expected_return_pct": null,
+      "formula": "Fair value = Σ scenario_probability × equity_value + optionality, then / shares. Share count missing, thus all per-share metrics null. Probability-weighted equity value = 0.2*25*16500 + 0.6*18*11250 + 0.2*10*6800 = 82500 + 121500 + 13600 = 217600 mn CNY (approx). Add hydrogen option of 5000 mn, total ~222600 mn CNY vs market cap 261556 mn CNY. This suggests current market cap is above fair value under these estimates, but highly dependent on share count and exact profit figures.",
+      "rating_consistency_check": "Cannot determine rating consistency without per-share value and price.",
+      "double_counting_checks": [
+        "Core operations PE includes all existing business segments including nascent hydrogen revenue (negligible); hydrogen option bucket applies a separate valuation for future exponential growth not in 2027E earnings, avoiding double count."
+      ],
+      "status": "partial",
+      "missing_inputs": [
+        "diluted_share_count_mn",
+        "current_price_cny",
+        "resolve duplicate valuation overlap keys: none"
+      ]
+    },
+    "handoff_manifest": {
+      "handoff_version": "underwriting-v2",
+      "source_of_truth": "structured_research.underwriting_packet",
+      "frozen_reported_facts": [
+        "FY2025 revenue 89,184.357 mn CNY, parent net profit 13,461.28 mn CNY (EV012)",
+        "Q1 2026 consolidated revenue 15,560.645 mn CNY (EV013)",
+        "Q1 2026 gross margin 33.26%, -1.87pp YoY (EV014)",
+        "Q1 2026 operating margin 17.10%, -6.94pp YoY (EV015)",
+        "Q1 2026 net margin 14.72%, -5.37pp YoY (EV016)",
+        "Q1 2026 OCF/net profit 0.5274 (EV018)",
+        "Q1 2026 receivables/revenue 40.07%, inventory/revenue 44.60% (EV019, EV020)",
+        "Energy storage Q1 2026 gross margin ~30% (EV092)",
+        "US tariff 38.4% on storage, 2026 new orders exist but pulled forward (EV093)",
+        "Hydrogen orders good, no numerical data (EV090)"
+      ],
+      "analyst_estimates": [
+        "Forward year revenue, gross margin, parent net profit, OCF are analyst estimates based on observed trends and assumptions.",
+        "Scenario probabilities (bull 20%, base 60%, bear 20%) are underwriting judgments.",
+        "Core operations PE multiple of 18x (base) is analyst choice.",
+        "Hydrogen optionality value of 5 bn CNY is a placeholder."
+      ],
+      "unresolved_model_cells": [
+        "Diluted share count",
+        "Segment revenue breakdowns (pv/wind, energy storage, hydrogen)",
+        "EPS for all periods",
+        "Capex and FCF",
+        "Operating profit (insufficient expense data)",
+        "Per-share fair value and expected return"
+      ],
+      "downstream_must_preserve": [
+        "All business units (pv_wind analytical, energy_storage, hydrogen)",
+        "Three-year forecast lines (retain structure, update with new evidence)",
+        "Scenario framework (bull/base/bear) and bridges B1-B3",
+        "Moat tests and their evidence status",
+        "No rating output"
+      ]
+    },
+    "evidence_change_rules": [
+      {
+        "evidence_id": "KPE01",
+        "affected_segment": "consolidated",
+        "affected_variable": "utilization_or_backlog",
+        "old_assumption": "missing",
+        "new_assumption": "unchanged",
+        "financial_transmission": "none until quantified",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "订单公告、排产环比、产能利用率、合同负债/预收款、收入确认节奏"
+      },
+      {
+        "evidence_id": "KPE02",
+        "affected_segment": "consolidated",
+        "affected_variable": "utilization_or_backlog",
+        "old_assumption": "missing",
+        "new_assumption": "unchanged",
+        "financial_transmission": "none until quantified",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "订单公告、排产环比、产能利用率、合同负债/预收款、收入确认节奏"
+      },
+      {
+        "evidence_id": "KPE03",
+        "affected_segment": "consolidated",
+        "affected_variable": "utilization_or_backlog",
+        "old_assumption": "missing",
+        "new_assumption": "unchanged",
+        "financial_transmission": "none until quantified",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "订单公告、排产环比、产能利用率、合同负债/预收款、收入确认节奏"
+      },
+      {
+        "evidence_id": "KPE04",
+        "affected_segment": "consolidated",
+        "affected_variable": "utilization_or_backlog",
+        "old_assumption": "missing",
+        "new_assumption": "unchanged",
+        "financial_transmission": "none until quantified",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "订单公告、排产环比、产能利用率、合同负债/预收款、收入确认节奏"
+      },
+      {
+        "evidence_id": "KPE05",
+        "affected_segment": "consolidated",
+        "affected_variable": "unmapped",
+        "old_assumption": "missing",
+        "new_assumption": "unchanged",
+        "financial_transmission": "none until quantified",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "政策原文、执行细则、受益范围、时间表、预算/补贴落地"
+      },
+      {
+        "evidence_id": "KPE06",
+        "affected_segment": "consolidated",
+        "affected_variable": "unmapped",
+        "old_assumption": "missing",
+        "new_assumption": "unchanged",
+        "financial_transmission": "none until quantified",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "政策原文、执行细则、受益范围、时间表、预算/补贴落地"
+      },
+      {
+        "evidence_id": "KPE07",
+        "affected_segment": "consolidated",
+        "affected_variable": "unmapped",
+        "old_assumption": "missing",
+        "new_assumption": "unchanged",
+        "financial_transmission": "none until quantified",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+      },
+      {
+        "evidence_id": "KPE08",
+        "affected_segment": "consolidated",
+        "affected_variable": "unmapped",
+        "old_assumption": "missing",
+        "new_assumption": "unchanged",
+        "financial_transmission": "none until quantified",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+      }
+    ],
+    "reconciliation_checks": [
+      "Base case parent net profit 2027E 11,250 mn CNY vs TTM implied earnings 11,926 mn CNY: base case profit is below current market implied, indicating negative outlook is partially priced but not fully.",
+      "Q1 2026 net margin 14.72% annualized suggests ~9,165 mn net profit run-rate, below base case 2026E 10,350 mn, implying H2 recovery assumed.",
+      "Probability-weighted equity value ~222.6 bn vs market cap 261.6 bn suggests ~15% overvaluation under base assumptions; needs share count to confirm per-share."
+    ],
+    "analyst_instructions": [
+      "Priority: obtain diluted share count from Tushare or latest filing (total_share in 10,000 shares) to compute EPS and per-share fair value.",
+      "Seek segment revenue disclosure (PV/wind inverters, energy storage, hydrogen, others) from FY2025 annual report or 2026 interim report.",
+      "Extract capex from cash flow statement (c_pay_acq_const_fiolta) to complete FCF model.",
+      "Validate gross margin improvement path by comparing Q2 2026 results and management guidance.",
+      "Monitor US OBBBA and EU inverter policy developments as potential bear-case triggers.",
+      "Refine scenario probabilities as contract liabilities convert and order book data emerges."
+    ],
+    "preprocessing_notes": [
+      "No segment revenue breakdown available; consolidated figures used for overall profile.",
+      "Hydrogen segment lacks quantitative metrics beyond directional management comment.",
+      "KPE hypotheses are all set to 'watch' as no baseline probabilities or revised values were provided in the evidence.",
+      "Energy storage Q1 2026 shipments flat YoY, but revenue impact not isolated; margin improved qoq due to regional mix.",
+      "Contradictions identified between FY2025 margin increase and Q1 2026 margin decrease, and between revenue growth and net profit decline.",
+      "Steel cost proxy (rebar) shows slight decline (-0.94%) over window, may indicate mild input cost relief.",
+      "operating model driver coverage (volume_price_cost): capacity, volume, price/ASP, unit/input cost, spread/margin, capex/ROIC"
+    ]
+  }
+}
