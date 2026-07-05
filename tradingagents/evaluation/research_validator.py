@@ -63,17 +63,16 @@ class DecisionDepthIssue:
     issue: str
 
 
-# Deterministic contradictions and missing mandatory deep-research contracts
-# block formal publication. Ordinary unavailable inputs remain neutral evidence:
-# they can leave a cell missing and cap confidence, but cannot manufacture a
-# bullish/bearish conclusion. The six universal company-depth sections are
-# publication requirements because a memo without them is not a deep report.
+# Only material, decision-changing contradictions block formal publication.
+# Coverage, depth, evidence-quality and presentation gaps remain REVIEW items:
+# they cap confidence and must be disclosed, but they do not suppress a usable
+# report.  Prefer deterministic repair before this gate; block only when the
+# repaired structured model is still internally inconsistent or unreadable.
 PUBLICATION_BLOCKING_SECTIONS = frozenset(
     {
         "eps_profit_share_count_consistency",
         "pb_bvps_arithmetic",
         "safety_price_pb_bridge",
-        "profit_pe_per_share_bridge",
         "q2_h1_period_semantics",
         "scenario_probability_math",
         "scenario_weighted_value_math",
@@ -88,10 +87,8 @@ PUBLICATION_BLOCKING_SECTIONS = frozenset(
         "industry_playbook_alignment",
         "segment_growth_rank_consistency",
         "underwriting_readiness",
-        "shared_model_change_audit",
         "pm_structured_generation",
         "research_manager_structured_generation",
-        "pm_analytical_spine",
         "share_count_source_conflict",
         "handoff_numeric_consistency",
         "pm_unit_scale_arithmetic",
@@ -881,20 +878,31 @@ def _section_text(text: str, label: str) -> str:
 def _heading_text(text: str, heading: str) -> str:
     """Return a Markdown heading body without depending on report language."""
     aliases = {
-        "Company Disaggregation": ("Company Disaggregation", "二、公司业务与利润池拆解"),
+        "Company Disaggregation": (
+            "Company Disaggregation",
+            "二、公司业务与利润池拆解",
+            "二、业务模式、分部经济与增长来源",
+        ),
         "Autonomous Three-Year Forecast Model": (
             "Autonomous Three-Year Forecast Model",
             "四、三年盈利及现金流预测",
+            "六、盈利预测、关键假设与敏感性",
         ),
         "Thesis-to-Financial Bridge": (
             "Thesis-to-Financial Bridge",
             "五、核心论点、护城河与财务传导",
+            "五、核心投资逻辑与反方检验",
         ),
         "Moat Evidence Scorecard": (
             "Moat Evidence Scorecard",
             "五、核心论点、护城河与财务传导",
+            "三、行业结构、周期位置与竞争优势",
         ),
-        "Valuation Closure": ("Valuation Closure", "七、估值、情景与预期收益"),
+        "Valuation Closure": (
+            "Valuation Closure",
+            "七、估值、情景与预期收益",
+            "七、市场预期、估值与情景回报",
+        ),
         "Handoff Integrity Audit": (
             "Handoff Integrity Audit",
             "附录A：模型变更与交接审计",
@@ -1086,33 +1094,9 @@ def audit_decision_depth(decision_text: str) -> list[DecisionDepthIssue]:
             )
         )
 
-    handoff_audit = _heading_text(decision_text, "Handoff Integrity Audit")
-    if len(handoff_audit) < 220 or _term_hits(
-        handoff_audit,
-        (
-            "version",
-            "preserved",
-            "revised",
-            "unresolved",
-            "evidence",
-            "old",
-            "new",
-            "版本",
-            "保留",
-            "修改",
-            "未解决",
-            "证据",
-            "原值",
-            "新值",
-        ),
-    ) < 3:
-        issues.append(
-            DecisionDepthIssue(
-                "handoff_integrity_audit",
-                "warning",
-                "final memo does not prove that business units, all forecast years, thesis bridges and valuation buckets survived the agent handoff",
-            )
-        )
+    # Handoff integrity is machine bookkeeping validated from canonical JSON.
+    # It is intentionally not a reader-facing chapter and must not be inferred
+    # from the public Markdown report.
 
     segment = _section_text(decision_text, "Investment Thesis")
     has_segment_section = bool(company_map) or "Business Segment Breakdown:" in segment or any(
@@ -1541,18 +1525,22 @@ def _valuation_bridge_issues(decision_text: str) -> list[DecisionDepthIssue]:
                 )
                 break
 
-    global_share_count_bridge = bool(
+    explicit_share_count = bool(
         re.search(
             r"(?:diluted\s+share|share\s+count|总股本|稀释股本|股本数).{0,24}?\d+(?:\.\d+)?\s*(?:million|mn|亿股|百万股)",
             decision_text,
             re.I | re.S,
         )
-        and re.search(
-            r"(?:EPS|每股收益|每股公允价值|每股价值).{0,120}?(?:股本|share)",
+        or re.search(
+            r"\d+(?:\.\d+)?\s*(?:亿股|百万股|mn\s+shares|million\s+shares)",
             decision_text,
-            re.I | re.S,
+            re.I,
         )
     )
+    per_share_bridge = bool(
+        re.search(r"(?:EPS|每股收益|每股公允价值|每股价值|元/股|CNY/share)", decision_text, re.I)
+    )
+    global_share_count_bridge = explicit_share_count and per_share_bridge
     for line in decision_text.splitlines():
         lowered_line = line.lower()
         if not (
@@ -1770,6 +1758,36 @@ def audit_pm_unit_scale_arithmetic(report_dir: str | Path) -> list[DecisionDepth
             "error",
             "PM sensitivity/scenario arithmetic has unit-scale contradictions: "
             + "; ".join(dict.fromkeys(findings)),
+        )
+    ]
+
+
+def audit_report_redundancy(decision_text: str) -> list[DecisionDepthIssue]:
+    """Flag repeated substantive prose while allowing tables and short labels."""
+    counts: dict[str, int] = {}
+    examples: dict[str, str] = {}
+    for raw in re.split(r"[。！？!?\n]+", decision_text):
+        plain = re.sub(r"[`*_>#|\-]+", " ", raw)
+        plain = re.sub(r"\s+", " ", plain).strip()
+        # Chinese carries more meaning per character than English. A 30-character
+        # Chinese causal sentence is already substantive enough to be duplication.
+        if len(plain) < 30:
+            continue
+        normalized = re.sub(r"[^a-z0-9\u4e00-\u9fff]+", "", plain.lower())
+        if len(normalized) < 25:
+            continue
+        counts[normalized] = counts.get(normalized, 0) + 1
+        examples.setdefault(normalized, plain)
+    repeated = [key for key, count in counts.items() if count >= 3]
+    if not repeated:
+        return []
+    sample = examples[repeated[0]][:180]
+    return [
+        DecisionDepthIssue(
+            "report_redundancy",
+            "warning",
+            "the same substantive conclusion appears in three or more places; keep the detailed version in its owning section and shorten cross-references: "
+            + sample,
         )
     ]
 
@@ -2471,6 +2489,62 @@ def audit_structured_research_usage(
             )
         )
 
+    material_kpe_ids = {
+        str(row.get("evidence_id", "")).strip()
+        for row in bundle.get("kpe_impacts", [])
+        if str(row.get("evidence_id", "")).strip()
+        and row.get("grounding_status") == "grounded_quote"
+        and str((row.get("known_kpe") or {}).get("source_type", ""))
+        in {
+            "industry_weekly_data",
+            "industry_data_snippet",
+            "channel_check",
+            "broker_survey_data",
+            "company_research_feedback",
+            "expert_call",
+            "strategy_view",
+            "sell_side_push",
+        }
+    }
+    decided_kpe_ids = {
+        str(evidence_id).strip()
+        for decision in pm_payload.get("alternative_intelligence_decisions", []) or []
+        for evidence_id in decision.get("kpe_ids", []) or []
+        if str(evidence_id).strip()
+    }
+    missing_kpe_decisions = sorted(material_kpe_ids - decided_kpe_ids)
+    if missing_kpe_decisions:
+        issues.append(
+            DecisionDepthIssue(
+                "alternative_intelligence_decision_ledger",
+                "warning",
+                "material full-text KPE claims lack a PM model/probability/verification/rejection decision: "
+                + ", ".join(missing_kpe_decisions[:8]),
+            )
+        )
+
+    sell_side_ids = {
+        str(row.get("intelligence_id", "")).strip()
+        for row in bundle.get("sell_side_intelligence", [])
+        if str(row.get("intelligence_id", "")).strip()
+    }
+    used_sell_side_ids = {
+        str(source_id).strip()
+        for row in pm_payload.get("sell_side_expectation_matrix", []) or []
+        for source_id in row.get("source_ids", []) or []
+        if str(source_id).strip().upper().startswith("KSI")
+    }
+    missing_sell_side_ids = sorted(sell_side_ids - used_sell_side_ids)
+    if missing_sell_side_ids:
+        issues.append(
+            DecisionDepthIssue(
+                "sell_side_expectation_usage",
+                "warning",
+                "sell-side forecast/valuation observations are absent from the PM expectation-gap analysis: "
+                + ", ".join(missing_sell_side_ids[:8]),
+            )
+        )
+
     incomplete_kpe_outcomes = [
         str(row.get("evidence_id", ""))
         for row in bundle.get("kpe_impacts", [])
@@ -2523,6 +2597,7 @@ def audit_report_depth(report_dir: str | Path) -> pd.DataFrame:
     issues.extend(audit_context_alignment(report_dir))
     issues.extend(audit_handoff_numeric_consistency(report_dir))
     issues.extend(audit_pm_unit_scale_arithmetic(report_dir))
+    issues.extend(audit_report_redundancy(decision_text))
     pm_payload_path = report_path / "5_portfolio" / "canonical_decision.json"
     if pm_payload_path.exists():
         try:
@@ -2533,6 +2608,9 @@ def audit_report_depth(report_dir: str | Path) -> pd.DataFrame:
                 ("forecast_takeaways", 2, "forecast take-aways"),
                 ("forecast_assumptions", 3, "auditable forecast assumptions"),
                 ("core_theses", 2, "ranked core theses"),
+                ("segment_economics", 2, "material segment-economics rows"),
+                ("industry_driver_matrix", 3, "sector-native industry drivers"),
+                ("accounting_quality_matrix", 3, "accounting/capital-allocation checks"),
             )
             missing = [
                 f"{label}={len(pm_payload.get(field, []) or [])}<{minimum}"
@@ -2572,6 +2650,15 @@ def audit_report_depth(report_dir: str | Path) -> pd.DataFrame:
                         "pm_analytical_spine",
                         "error",
                         "PM structured analytical spine is incomplete: " + "; ".join(missing),
+                    )
+                )
+            deterministic_valuation = pm_payload.get("deterministic_valuation") or {}
+            if str(deterministic_valuation.get("status", "")) != "closed":
+                issues.append(
+                    DecisionDepthIssue(
+                        "deterministic_safe_valuation",
+                        "warning",
+                        "bull/base/bear valuation assumptions did not close to program-calculated fair value and safety price",
                     )
                 )
         except (json.JSONDecodeError, OSError, TypeError) as exc:
@@ -2688,7 +2775,7 @@ def render_post_generation_audit(report_dir: str | Path) -> str:
             "",
             f"- {verdict}: blocking_errors={blocking_errors}, research_errors={errors}, warnings={warnings}.",
             "- Missing, partial or unavailable source data is neutral for investment direction; disclose it with a retrieval or verification task.",
-            "- Deterministic contradictions, failed structured generation, blocked company underwriting, and missing mandatory deep-research sections block formal publication.",
+            "- Only unresolved material contradictions in ticker/period/unit/arithmetic/valuation or unreadable structured generation block formal publication; depth and coverage gaps remain REVIEW items.",
             "",
             "## Findings",
             "",

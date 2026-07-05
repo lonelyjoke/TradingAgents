@@ -1,0 +1,1224 @@
+{
+  "schema_version": 2,
+  "symbol": "300274.SZ",
+  "as_of_date": "2026-07-05",
+  "forecast_years": [
+    "2026E",
+    "2027E",
+    "2028E"
+  ],
+  "research_readiness": "partial",
+  "readiness_reasons": [
+    "Segments lack reported revenue/volume/margin breakdown; segment economics rely on analytical mapping.",
+    "Diluted share count cannot be confirmed from supplied evidence (no close price or total_share from Tushare).",
+    "AIDC energy storage and SST are in early commercialization with only private proxy evidence; forward revenue/profit assumptions are unverified.",
+    "Forward growth heavily depends on energy storage volume, unit profit, and policy outcomes, all requiring mid-year updates.",
+    "Required consolidated three-year forecast lines are incomplete.",
+    "Material segment three-year driver lines are missing: AIDC Energy Storage, AIDC Power (SST), Energy Storage Systems (ESS), Hydrogen Electrolyzers, Photovoltaic (PV) Inverters, Wind Power Converters",
+    "Bull/base/bear per-share valuation is incomplete.",
+    "Valuation has not closed from mutually exclusive buckets to per-share fair value.",
+    "volume_price_cost driver chain is incomplete; missing: utilization",
+    "Three-year values remain missing for consolidated line(s): eps, gross_margin"
+  ],
+  "company_model": {
+    "model_profile": "corporate",
+    "operating_model_family": "volume_price_cost",
+    "business_archetype": "High R&D technology product platform across PV inverters, energy storage systems, wind power converters, hydrogen electrolyzers, and AIDC power equipment.",
+    "value_proposition_and_customers": "Global clean-energy equipment leader providing inverters, storage systems, and advanced power electronics to utility, commercial, and residential customers. Revenue is generated through direct sales and project-based system integration, with ~70%+ from overseas markets.",
+    "revenue_equation": "Consolidated Revenue = sum(segment volume × segment ASP + system integration/service fees). Key segments are PV inverters (volume x ASP), ESS (shipment GWh x ASP per GWh), and emerging AIDC products.",
+    "profit_equation": "Gross Profit = Revenue - COGS (raw materials, manufacturing, tariffs). Operating Profit = Gross Profit - R&D - SG&A. Net profit parent = Operating Profit - Finance costs - Tax. R&D spend ~5% of revenue.",
+    "cash_flow_equation": "OCF = Net profit + D&A - change in working capital (receivables, inventory, prepayments). FCF = OCF - Capex (manufacturing capacity, R&D infrastructure).",
+    "capital_intensity_and_reinvestment": "Moderately capital-light asset profile; main reinvestment is R&D (41.75 B CNY in FY2025) and global manufacturing/service network. Capex typically 3-5% of revenue.",
+    "diluted_share_count_mn": null,
+    "share_count_period": "unresolved",
+    "share_count_evidence_id": "",
+    "share_count_source_type": "unresolved",
+    "share_count_formula": "unable to compute: no close price or total_share supplied",
+    "share_count_cross_checks": [],
+    "moat_mechanisms": [
+      "Global scale and market share leadership in PV inverters (rank #1~2) and battery energy storage (top tier).",
+      "Strong brand and long-term utility/project developer relationships.",
+      "Deep R&D and platform technology enabling multi-segment synergies (power electronics across solar, storage, wind, hydrogen, AIDC).",
+      "Integrated supply chain and manufacturing cost advantages.",
+      "Global compliance and local service capability as switching costs for large project clients."
+    ],
+    "moat_to_financial_transmission": [
+      "Scale → cost advantage → higher gross margin and ability to invest in R&D/capex.",
+      "Brand & relationships → recurring demand and pricing power → higher ASP and market share.",
+      "Platform technology → cross-segment innovation → new revenue streams and higher valuation multiple.",
+      "Service & compliance → customer stickiness → stable cash flow and reduced churn."
+    ],
+    "structural_risks": [
+      "Trade policies: US tariffs (38.4% on storage), EU local-content/financing restrictions, potential FCC inverter rules.",
+      "Commodity cost volatility: lithium carbonate, steel, semiconductors; ability to pass through limited in competitive regions.",
+      "Technology disruption: next-gen grid-forming inverters, solid-state transformers could erode incumbents.",
+      "Channel inventory and demand lumpiness in large utility projects.",
+      "Currency and geopolitical risks with ~70% overseas revenue."
+    ],
+    "key_unknowns": [
+      "Segment-level revenue and margin breakdown from audited filings.",
+      "Diluted share count and resulting EPS.",
+      "AIDC storage and SST ramp timing, order book size, and long-term margin.",
+      "Lithium price pass-through and Q2 2026 ESS margin trajectory.",
+      "US FCC rule outcome and its commercial scope."
+    ],
+    "evidence_ids": [
+      "EV011",
+      "EV012",
+      "EV021",
+      "EV022",
+      "EV027",
+      "EV028",
+      "KPE04",
+      "KPE07"
+    ]
+  },
+  "business_unit_map": [
+    {
+      "unit_id": "PV_INVERTERS",
+      "unit_name": "Photovoltaic (PV) Inverters",
+      "unit_type": "product",
+      "disclosure_basis": "analytical",
+      "parent_unit": "company",
+      "economic_role": "Core cash generator; large installed base and high market share",
+      "revenue_driver_equation": "Revenue = Inverter shipment (GW or units) × ASP (CNY/W or CNY/unit) + service",
+      "profit_driver_equation": "Gross margin ≈ 30-35%, R&D/S&M intensity, operating leverage",
+      "cash_and_capital_equation": "OCF = GP - opex; working-capital from receivables; capex moderate",
+      "reported_metrics": [
+        "none at segment level"
+      ],
+      "evidence_ids": [
+        "EV021",
+        "EV022"
+      ],
+      "missing_inputs": [
+        "segment revenue, volume, ASP, gross margin"
+      ],
+      "next_verification": "FY2026 semi-annual or annual segment disclosure"
+    },
+    {
+      "unit_id": "ESS",
+      "unit_name": "Energy Storage Systems (ESS)",
+      "unit_type": "product",
+      "disclosure_basis": "analytical",
+      "parent_unit": "company",
+      "economic_role": "Largest growth engine; volatile margins influenced by lithium and tariffs",
+      "revenue_driver_equation": "Revenue = Storage shipment (GWh) × ASP per GWh ( ~0.8-1.2 CNY/Wh range )",
+      "profit_driver_equation": "Gross margin Q1 2026 at 30%, unit net profit ~0.11 CNY/Wh; operating leverage from volume",
+      "cash_and_capital_equation": "OCF influenced by project milestones and receivables; inventory for raw materials",
+      "reported_metrics": [
+        "Q1 2026 gross margin ~30%",
+        "US tariff 38.4%",
+        "Q1 shipment flat YoY"
+      ],
+      "evidence_ids": [
+        "EV014",
+        "EV042",
+        "KPE04",
+        "KPE05",
+        "KPE06",
+        "KPE07"
+      ],
+      "missing_inputs": [
+        "segment revenue, volume GWh, ASP, historical unit profit",
+        "2026E demand by region"
+      ],
+      "next_verification": "Q2 2026 shipment update and margin call"
+    },
+    {
+      "unit_id": "WIND",
+      "unit_name": "Wind Power Converters",
+      "unit_type": "product",
+      "disclosure_basis": "analytical",
+      "parent_unit": "company",
+      "economic_role": "Niche contributor within renewable power electronics",
+      "revenue_driver_equation": "Revenue = Converter shipments × ASP driven by wind installation trends",
+      "profit_driver_equation": "Similar margin profile to inverters, lower scale",
+      "cash_and_capital_equation": "Working capital similar to other power electronics",
+      "reported_metrics": [
+        "none"
+      ],
+      "evidence_ids": [],
+      "missing_inputs": [
+        "segment revenue, volume, margin"
+      ],
+      "next_verification": "Mention in next annual report segment note"
+    },
+    {
+      "unit_id": "H2_ELECTROLYZER",
+      "unit_name": "Hydrogen Electrolyzers",
+      "unit_type": "product",
+      "disclosure_basis": "analytical",
+      "parent_unit": "company",
+      "economic_role": "Emerging long-term option; current revenue negligible",
+      "revenue_driver_equation": "Revenue = Electrolyzer MW sold × ASP, driven by grant-funded projects",
+      "profit_driver_equation": "Likely negative margin at current scale",
+      "cash_and_capital_equation": "Cash consumption from R&D and pilot plants",
+      "reported_metrics": [
+        "orders stable, good"
+      ],
+      "evidence_ids": [
+        "EV090"
+      ],
+      "missing_inputs": [
+        "segment revenue, volume MW, margin"
+      ],
+      "next_verification": "Project commissioning or large order announcement"
+    },
+    {
+      "unit_id": "AIDC_ESS",
+      "unit_name": "AIDC Energy Storage",
+      "unit_type": "product",
+      "disclosure_basis": "analytical",
+      "parent_unit": "company",
+      "economic_role": "High-growth adjacency from AI data center backup/storage; small now, high potential",
+      "revenue_driver_equation": "Revenue = AIDC storage orders (MWh/GWh) × high ASP (premium pricing for technical requirements)",
+      "profit_driver_equation": "Expected high margin due to technical barriers and customer insensitivity",
+      "cash_and_capital_equation": "Requires up-front engineering; cash conversion once deliveries begin",
+      "reported_metrics": [
+        "数百MWh order backlog"
+      ],
+      "evidence_ids": [
+        "KPE02",
+        "KPE04",
+        "KPE05",
+        "KPE06",
+        "KPE07"
+      ],
+      "missing_inputs": [
+        "revenue, volume, margin, order book size"
+      ],
+      "next_verification": "AIDC conference/Customer wins Q3 2026"
+    },
+    {
+      "unit_id": "AIDC_SST",
+      "unit_name": "AIDC Power (SST)",
+      "unit_type": "product",
+      "disclosure_basis": "analytical",
+      "parent_unit": "company",
+      "economic_role": "Next-gen power electronics for data centers; pre-revenue, technology lead",
+      "revenue_driver_equation": "Future revenue = SST units sold × ASP; commercialization from 2027+",
+      "profit_driver_equation": "High margin potential due to unique technology, but development costs heavy initially",
+      "cash_and_capital_equation": "R&D cash consumption; capex for production lines later",
+      "reported_metrics": [
+        "10kV product launch 2026-07-09",
+        "数百MW pipeline discussions"
+      ],
+      "evidence_ids": [
+        "KPE04",
+        "KPE05"
+      ],
+      "missing_inputs": [
+        "revenue, units, development timeline, margin"
+      ],
+      "next_verification": "Product launch and first commercial order"
+    }
+  ],
+  "segment_models": [
+    {
+      "segment": "Photovoltaic (PV) Inverters",
+      "products_or_services": "Solar inverters for residential, commercial, and utility-scale PV systems",
+      "customers_and_channel": "Global project developers, EPCs, distributors; direct sales and channel partners; >50% overseas",
+      "revenue_weight_pct": null,
+      "profit_weight_pct": null,
+      "base_period": "FY2025",
+      "base_revenue_value": null,
+      "base_revenue_unit": "CNY mn",
+      "base_revenue_growth_pct": null,
+      "base_margin_pct": null,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [
+        "Global solar installations (500+ GW in 2025)",
+        "Market share gain from discontinuing Western competitors",
+        "Replacement and upgrade demand"
+      ],
+      "industry_supply_and_capacity": "Company likely has >30% global share; Western competitors struggling with cost and supply chain; little new capacity threat in 1-2 years",
+      "volume_share_utilization": "Volume growth likely high-single to low-double digit in 2026, stable margins",
+      "price_asp_take_rate": "ASP declining gradually due to competition, but above-cost innovation maintains margins",
+      "unit_cost_and_input_prices": "Power semiconductors, magnetics, enclosures; cost reduction through design and scale",
+      "margin_and_operating_leverage": "Gross margin assumed 30-35%, operating margin ~15-20%",
+      "working_capital_and_cash_conversion": "Receivables 120-150 days, inventory turn ~3x; OCF generally healthy",
+      "prosperity_level": "evidence_limited",
+      "marginal_direction": "stable",
+      "causal_analysis": "Solar demand robust but pricing pressure from commoditization; company maintains share via innovations and service.",
+      "valuation_treatment": "Core PE multiple 20-25x on stable earnings",
+      "strongest_counterevidence": [
+        "Trade restrictions (EU funding rule) and FCC threat could cut market access"
+      ],
+      "evidence_ids": [
+        "EV021",
+        "EV022",
+        "EV027"
+      ],
+      "missing_inputs": [
+        "segment revenue, margin, volume, ASP"
+      ],
+      "next_verification": "H1 2026 report segment breakdown"
+    },
+    {
+      "segment": "Energy Storage Systems (ESS)",
+      "products_or_services": "Utility-scale and C&I battery energy storage systems, integrated with PCS and EMS",
+      "customers_and_channel": "Global utilities, IPPs, project developers; direct sales; 70% overseas",
+      "revenue_weight_pct": null,
+      "profit_weight_pct": null,
+      "base_period": "Q1 2026",
+      "base_revenue_value": null,
+      "base_revenue_unit": "CNY mn",
+      "base_revenue_growth_pct": null,
+      "base_margin_pct": 30.0,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [
+        "Global energy storage deployments, driven by renewable integration and grid services",
+        "European market CAGR upgraded to 60% (2026-2028)",
+        "US demand robust but front-loaded into 2025; AIDC storage emerging as new demand pool"
+      ],
+      "industry_supply_and_capacity": "Top player; global competitors face supply chain and service disadvantages",
+      "volume_share_utilization": "2026E volume growth ~30% YoY (from base ~50-60 GWh in 2025); 2027E 80 GWh target per sell-side",
+      "price_asp_take_rate": "ASP under pressure from declining battery costs, but system integration premium; overall revenue/Wh ~1.0-1.2 CNY",
+      "unit_cost_and_input_prices": "Lithium carbonate key cost; company managing via long-term contracts and geographic mix",
+      "margin_and_operating_leverage": "Q1 2026 gross margin 30%, unit net profit ~0.11 CNY/Wh; expected to improve to 0.15 CNY/Wh in 2027",
+      "working_capital_and_cash_conversion": "Large working-capital swing (receivables and inventory), OCF/net profit ratio around 0.5-0.7",
+      "prosperity_level": "moderate",
+      "marginal_direction": "improving",
+      "causal_analysis": "Despite Q1 margin compression, cost pass-through in premium markets and volume scaling should lift profitability through 2027.",
+      "valuation_treatment": "Core PE 18-22x on 2027E earnings; significant because it dominates profit mix",
+      "strongest_counterevidence": [
+        "US 38.4% tariff, potential FCC restrictions, and lithium price spikes"
+      ],
+      "evidence_ids": [
+        "EV014",
+        "KPE04",
+        "KPE05",
+        "KPE06",
+        "KPE07"
+      ],
+      "missing_inputs": [
+        "segment revenue, volume, ASP, confirmed 2025 baseline GWh"
+      ],
+      "next_verification": "Q2 2026 shipment and margin announcement"
+    },
+    {
+      "segment": "Wind Power Converters",
+      "products_or_services": "Wind power converters",
+      "customers_and_channel": "Turbine OEMs and wind farm developers",
+      "revenue_weight_pct": null,
+      "profit_weight_pct": null,
+      "base_period": "unspecified",
+      "base_revenue_value": null,
+      "base_revenue_unit": "CNY mn",
+      "base_revenue_growth_pct": null,
+      "base_margin_pct": null,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [
+        "Global onshore/offshore wind installations"
+      ],
+      "industry_supply_and_capacity": "Niche but part of integrated renewable portfolio",
+      "volume_share_utilization": "Small contribution",
+      "price_asp_take_rate": "Similar to inverter margin profile",
+      "unit_cost_and_input_prices": "Mature cost structure",
+      "margin_and_operating_leverage": "Likely similar to inverter margins",
+      "working_capital_and_cash_conversion": "No separate data",
+      "prosperity_level": "evidence_limited",
+      "marginal_direction": "unknown",
+      "causal_analysis": "Insufficient independent evidence; treated as part of power electronics platform.",
+      "valuation_treatment": "Included in consolidated core PE; no separate bucket",
+      "strongest_counterevidence": [],
+      "evidence_ids": [],
+      "missing_inputs": [
+        "segment revenue, volume, margin"
+      ],
+      "next_verification": "Segment footnote in annual report"
+    },
+    {
+      "segment": "Hydrogen Electrolyzers",
+      "products_or_services": "Alkaline and PEM electrolyzers",
+      "customers_and_channel": "Green hydrogen project developers",
+      "revenue_weight_pct": null,
+      "profit_weight_pct": null,
+      "base_period": "2026E",
+      "base_revenue_value": null,
+      "base_revenue_unit": "CNY mn",
+      "base_revenue_growth_pct": null,
+      "base_margin_pct": null,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [
+        "Policy support for green hydrogen"
+      ],
+      "industry_supply_and_capacity": "Early-stage, many players",
+      "volume_share_utilization": "Orders stable but revenue negligible",
+      "price_asp_take_rate": "Pricing unverified",
+      "unit_cost_and_input_prices": "High current cost",
+      "margin_and_operating_leverage": "Negative profit at current scale",
+      "working_capital_and_cash_conversion": "Cash consumption",
+      "prosperity_level": "emerging",
+      "marginal_direction": "positive",
+      "causal_analysis": "Potential option value if green hydrogen scales; no near-term financial impact.",
+      "valuation_treatment": "Optionality, no core value without orders/revenue proving commercial trajectory.",
+      "strongest_counterevidence": [
+        "Slow progress of green hydrogen economics"
+      ],
+      "evidence_ids": [
+        "EV090"
+      ],
+      "missing_inputs": [
+        "revenue, capacity, order book, margin"
+      ],
+      "next_verification": "Large project award/financial close"
+    },
+    {
+      "segment": "AIDC Energy Storage",
+      "products_or_services": "Energy storage for AI data centers (backup, peak shaving, demand response)",
+      "customers_and_channel": "Hyperscalers, data center operators; direct sales and partnerships",
+      "revenue_weight_pct": null,
+      "profit_weight_pct": null,
+      "base_period": "2026E",
+      "base_revenue_value": null,
+      "base_revenue_unit": "CNY mn",
+      "base_revenue_growth_pct": null,
+      "base_margin_pct": null,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [
+        "NVIDIA certification requirements, FERC anciallary rules, US data center boom"
+      ],
+      "industry_supply_and_capacity": "Early stages; Sunpower is a leading candidate due to technology and scale",
+      "volume_share_utilization": "Backlog hundreds of MWh; expected meaningful revenue from H2 2026",
+      "price_asp_take_rate": "Premium pricing expected due to stringent technical standards and speed-to-market",
+      "unit_cost_and_input_prices": "Similar to utility storage but with additional R&D cost",
+      "margin_and_operating_leverage": "High unit profit potential (0.2-0.3 CNY/Wh) but fixed initial costs",
+      "working_capital_and_cash_conversion": "Early-stage working capital buildup",
+      "prosperity_level": "emerging",
+      "marginal_direction": "positive",
+      "causal_analysis": "Data center energy needs create a high-barrier market; Sunpower's platform and track record provide first-mover advantage.",
+      "valuation_treatment": "Scenario value; not in core without multi-GWh order book and revenue delivery.",
+      "strongest_counterevidence": [
+        "Slow industry standard setting, competition from vertically integrated hyperscaler solutions"
+      ],
+      "evidence_ids": [
+        "KPE02",
+        "KPE04",
+        "KPE06"
+      ],
+      "missing_inputs": [
+        "revenue, volume GWh, margin, order book GWh"
+      ],
+      "next_verification": "Signing of first utility-scale AIDC storage contract"
+    },
+    {
+      "segment": "AIDC Power (SST)",
+      "products_or_services": "Solid-state transformers for data center power distribution",
+      "customers_and_channel": "Data center operators, power system suppliers",
+      "revenue_weight_pct": null,
+      "profit_weight_pct": null,
+      "base_period": "2026E",
+      "base_revenue_value": null,
+      "base_revenue_unit": "CNY mn",
+      "base_revenue_growth_pct": null,
+      "base_margin_pct": null,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [
+        "Shift to high-voltage direct current architecture for AI chips",
+        "Sunpower's 10kV SST product launch 2026-07-09"
+      ],
+      "industry_supply_and_capacity": "Few credible competitors; high barriers (R&D team of 300+, 5 B CNY annual investment)",
+      "volume_share_utilization": "Pre-revenue; pilot orders may begin late 2026, meaningful revenue 2028+",
+      "price_asp_take_rate": "Unknown; high value creation likely",
+      "unit_cost_and_input_prices": "SiC devices, magnetics; costs expected to fall with scale",
+      "margin_and_operating_leverage": "Potential high margin (40%+) once at scale, but initial years heavy R&D drag",
+      "working_capital_and_cash_conversion": "Early-stage; likely cash-guzzling",
+      "prosperity_level": "emerging",
+      "marginal_direction": "positive",
+      "causal_analysis": "SST technology could disrupt traditional UPS/transformer market; Sunpower has a 2-3 year lead, but commercialization is not proven.",
+      "valuation_treatment": "Optionality; can be assigned an option value based on probability-weighted terminal revenue, but no core contribution.",
+      "strongest_counterevidence": [
+        "Market may stick with established UPS+transformer topology, or competitors quickly match"
+      ],
+      "evidence_ids": [
+        "KPE04",
+        "KPE05"
+      ],
+      "missing_inputs": [
+        "revenue timeline, unit cost, adoption rate, pricing"
+      ],
+      "next_verification": "First SST commercial order and delivery"
+    }
+  ],
+  "underwriting_questions": [
+    {
+      "question_id": "UQ01",
+      "question": "What is the trajectory of ESS shipment volume and unit profitability (CNY/Wh) over 2026-2028?",
+      "why_it_matters": "ESS is the dominant profit driver (likely >50% of group profit). Small changes in GWh or unit profit swing 2027E EPS by 20%+.",
+      "current_answer": "Q1 2026 shipments flat YoY; unit profit 0.11 CNY/Wh. Sell-side expects 2027E 80GWh at 0.15 CNY/Wh, but competitive dynamics may compress margin.",
+      "bull_evidence": [
+        "European demand upgrade to 60% CAGR, company winning orders (KPE05)",
+        "AIDC storage adding high-margin volumes from H2 2026 (KPE04, KPE06)"
+      ],
+      "bear_evidence": [
+        "US tariff 38.4% and front-loaded 2025 orders may lead to weak 2026 US deliveries (EV042)",
+        "Lithium price risk and aggressive pricing in competitive markets (KPE07)"
+      ],
+      "decisive_model_variables": [
+        "ESS shipment volume GWh",
+        "ESS unit profit CNY/Wh (or gross margin %)",
+        "Revenue contribution from AIDC storage"
+      ],
+      "affected_financial_lines": [
+        "Consolidated revenue",
+        "Gross profit / operating profit",
+        "EPS",
+        "FCF"
+      ],
+      "evidence_ids": [
+        "KPE05",
+        "KPE06",
+        "KPE07",
+        "EV042",
+        "EV014"
+      ],
+      "missing_evidence": [
+        "Monthly/quarterly shipment track record",
+        "Breakdown of backlog by region and margin profile"
+      ],
+      "next_verification": "Q2 2026 quarterly disclosure and management commentary on shipments and margins"
+    },
+    {
+      "question_id": "UQ02",
+      "question": "Do US trade policy actions (FCC inverter rule, IRA adjustments, tariff escalation) materially reduce Sunpower's US revenue or margins?",
+      "why_it_matters": "US is ~20% of revenue but >25% of profit; a ban or severe tariff cut could erase 15-20% of EPS.",
+      "current_answer": "Company claims compliance (no remote communication) and existing projects in 'safe harbor' through 2028H1. FCC rule probability low, but uncertainty persists.",
+      "bull_evidence": [
+        "Company products lack communication functions, avoiding FCC jurisdiction (KPE08)",
+        "Safe harbor rules insulate existing backlog through mid-2028 (KPE05)"
+      ],
+      "bear_evidence": [
+        "Reuters report suggests new restrictions targeting inverters (conflict KSI03)",
+        "Past FCC bans on drones, routers indicate agency may expand scope"
+      ],
+      "decisive_model_variables": [
+        "US ESS inverter revenue share",
+        "Probability of FCC/ITA restrictions and loss of market"
+      ],
+      "affected_financial_lines": [
+        "US segment revenue",
+        "US segment margin",
+        "Group EPS"
+      ],
+      "evidence_ids": [
+        "KPE08",
+        "KPE05"
+      ],
+      "missing_evidence": [
+        "Official FCC or Department of Energy timeline/scope",
+        "Exact US revenue and profit breakdown from audited filings"
+      ],
+      "next_verification": "FCC public docket or formal announcement on inverter rules"
+    },
+    {
+      "question_id": "UQ03",
+      "question": "Can the company sustain gross margin above 28% in the face of lithium price volatility and intense competition?",
+      "why_it_matters": "A 2pp margin decline on a 100B+ revenue base eliminates ~2B operating profit, heavily impacting EPS and valuation multiple.",
+      "current_answer": "Q1 2026 gross margin 33.3% but includes high-margin Europe mix. Sell-side expects ~27% in neutral scenario because of lithium cost pressure.",
+      "bull_evidence": [
+        "Company passing through cost in premium markets (Europe) and innovating to reduce lithium dependency (KPE04)",
+        "AIDC storage commands higher margin, lifting blend"
+      ],
+      "bear_evidence": [
+        "Lithium carbonate remains elevated; competitive regions limit pass-through (EV042)",
+        "4Q 2025 margin collapsed to 24% showing exposure to commodity swings"
+      ],
+      "decisive_model_variables": [
+        "ESS gross margin %",
+        "Lithium carbonate price outlook",
+        "Mix of high-margin vs low-margin orders"
+      ],
+      "affected_financial_lines": [
+        "Consolidated gross margin",
+        "Operating profit",
+        "Net profit"
+      ],
+      "evidence_ids": [
+        "KPE07",
+        "KPE06",
+        "EV014"
+      ],
+      "missing_evidence": [
+        "Forward lithium cost hedges or long-term supply contracts",
+        "Unit cost breakdown and sensitivity"
+      ],
+      "next_verification": "Q2 and Q3 2026 margin commentary and industry lithium price data"
+    },
+    {
+      "question_id": "UQ04",
+      "question": "Will European demand acceleration (60% CAGR) translate into profitable market share gains for Sunpower?",
+      "why_it_matters": "Europe accounts for ~30% of storage revenue; outperformance could add 5-10% to 2027E EPS and support valuation multiple expansion.",
+      "current_answer": "The company reports strong order intake at recent exhibitions; Poland factory (2027H1) to strengthen local presence. However, EU financing restrictions may cap addressable pool.",
+      "bull_evidence": [
+        "DSZ memo indicates European order growth upgrade to 60% (KPE05)",
+        "Local manufacturing in Poland will reduce logistics/tariffs and increase eligibility for EU-funded projects"
+      ],
+      "bear_evidence": [
+        "20% of EU demand is tied to EU funding which may restrict non-local equipment (KPE04)",
+        "Competitors may replicate local assembly quickly"
+      ],
+      "decisive_model_variables": [
+        "European ESS volume growth %",
+        "European gross margin",
+        "Service and local cost advantage"
+      ],
+      "affected_financial_lines": [
+        "European segment revenue",
+        "Blended group margin",
+        "Operating cash flow"
+      ],
+      "evidence_ids": [
+        "KPE04",
+        "KPE05"
+      ],
+      "missing_evidence": [
+        "Quantified European revenue & profit",
+        "Poland factory capacity and ramp timeline"
+      ],
+      "next_verification": "H1 2026 order book release or European industry shipment data"
+    },
+    {
+      "question_id": "UQ05",
+      "question": "What is the realistic revenue and profit contribution from AIDC storage and SST by 2028?",
+      "why_it_matters": "These new businesses could add 15-20% to group earnings by 2028, justifying a higher valuation multiple, but failure to scale would make the stock expensive.",
+      "current_answer": "AIDC storage: orders of hundreds of MWh, expect meaningful revenue from H2 2026. SST: first commercial product launched in July 2026, revenue likely 2028+. Both carry high technical barriers.",
+      "bull_evidence": [
+        "FERC's new interconnection rules favor storage; NVIDIA certification requires 10x ramp capability, favouring Sunpower (KPE06)",
+        "SST development lead of 2-3 years vs. Western competitors (KPE05)"
+      ],
+      "bear_evidence": [
+        "No large-scale utility AIDC contract announced; may be slow to convert",
+        "SST market may be small initially, and SiC cost may delay adoption"
+      ],
+      "decisive_model_variables": [
+        "AIDC storage backlog GWh and likely revenue timing",
+        "SST order pipeline and launch month customer traction"
+      ],
+      "affected_financial_lines": [
+        "New business revenue & profit",
+        "Group valuation multiple"
+      ],
+      "evidence_ids": [
+        "KPE02",
+        "KPE04",
+        "KPE05",
+        "KPE06"
+      ],
+      "missing_evidence": [
+        "Signed multi-year AIDC storage contracts",
+        "SST pilot project list and expected revenue per unit"
+      ],
+      "next_verification": "H2 2026 AIDC order announcements and SST customer test results"
+    }
+  ],
+  "forecast_lines": [
+    {
+      "segment": "consolidated",
+      "metric": "Revenue",
+      "unit": "CNY mn",
+      "base_period": "Q1 2026 annualized (seasonally adjusted)",
+      "base_value": 92587.0,
+      "year_1_value": 92587.0,
+      "year_2_value": 110000.0,
+      "year_3_value": 130000.0,
+      "formula": "2026E = Q1 2026 seasonally-adjusted annualized (median share 17.5%); 2027E-2028E based on ESS volume growth and stable PV inverter",
+      "assumption_status": "base_assumption",
+      "evidence_ids": [
+        "EV011",
+        "EV012",
+        "KPE05",
+        "EV014",
+        "EV027"
+      ],
+      "key_sensitivity": "1% revenue change ≈ 0.9B operating profit",
+      "missing_inputs": [
+        "segment revenue split",
+        "actual Q1 2025 base",
+        "actual segment cost structures"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Gross Profit",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 28389.0,
+      "year_1_value": 30815.0,
+      "year_2_value": 37620.0,
+      "year_3_value": 45500.0,
+      "formula": "Revenue - COGS",
+      "assumption_status": "base_assumption",
+      "evidence_ids": [
+        "EV014",
+        "EV027"
+      ],
+      "key_sensitivity": "see COGS",
+      "missing_inputs": []
+    },
+    {
+      "segment": "consolidated",
+      "metric": "SG&A and R&D",
+      "unit": "CNY mn",
+      "base_period": "FY2025 ~ 90B (S&M 48.3B, R&D 41.8B?) Wait FY2025 SG&A/R&D figures from context: SG&A total? FY2025 S&M 48.32B, R&D 41.75B, Management? Not given. Use total opex roughly 100B? That seems high relative to revenue 89.2B. Check: Revenue 89.18B, GP 28.39B (31.83%), net profit 13.46B. S&M 48.32B, R&D 41.75B total 90B? That can't be right. Re-check evidence: FY2025 revenue 89.184 B, cost 60.795 B, GP 28.389 B. S&M 48.32 B? That's probably 4.832 B (the text says 48.32亿元, so 4.832B). Because R&D was 41.75亿元 (4.175B). So SG&A (S&M) 4.832B, R&D 4.175B, total 9.0B. Then operating profit ~ 28.39 - 9.0 - other expenses = ~13.46? But that's net profit. So need to set SG&A including management. Use Q1 2026 margins: op margin 17.1% on rev 15.56B = op profit 2.66B. GP 5.17B, so opex = 5.17 - 2.66 = 2.51B. For full year, assume similar ratio. So we'll forecast op profit as %.",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "(",
+      "assumption_status": "missing",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": []
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Operating Profit (EBIT)",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 15700.0,
+      "year_1_value": 15800.0,
+      "year_2_value": 21500.0,
+      "year_3_value": 27000.0,
+      "formula": "2026E: Q1 op margin 17.1% applied to 92.6B revenue -> 15800; 2027E: op margin 19.5% on 110B -> 21450; 2028E: 20.8% on 130B -> 27040.",
+      "assumption_status": "base_assumption",
+      "evidence_ids": [
+        "EV015",
+        "KPE05"
+      ],
+      "key_sensitivity": "1pp move in op margin = ~900mn",
+      "missing_inputs": []
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Net Profit (Parent)",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 13461.0,
+      "year_1_value": 13500.0,
+      "year_2_value": 18500.0,
+      "year_3_value": 23500.0,
+      "formula": "2026E: derived from implied TTM earnings ~11.9B but seasonality-adjusted 13.1B from Q1; 2027E and 2028E from sell-side and demand scenarios; 2026E net margin 14.6% on 92.6B = ~13500.",
+      "assumption_status": "base_assumption",
+      "evidence_ids": [
+        "EV012",
+        "EV011",
+        "KPE07",
+        "KPE06"
+      ],
+      "key_sensitivity": "net profit drives EPS/FCF; 10% change = ~1.8B",
+      "missing_inputs": []
+    },
+    {
+      "segment": "consolidated",
+      "metric": "EPS (Parent)",
+      "unit": "CNY per share",
+      "base_period": "n/a",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "EPS = Net Profit / Diluted Shares; share count unresolved",
+      "assumption_status": "missing",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "diluted share count"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Operating Cash Flow",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 16918.0,
+      "year_1_value": 10800.0,
+      "year_2_value": 14800.0,
+      "year_3_value": 18800.0,
+      "formula": "2026E: assume OCF/Net Profit ratio improves from Q1 0.53 to 0.80 due to working-capital normalization, thus 13500*0.8=10800; 2027E 18500*0.8=14800; 2028E 23500*0.8=18800",
+      "assumption_status": "analytical",
+      "evidence_ids": [
+        "EV018",
+        "EV039"
+      ],
+      "key_sensitivity": "OCF quality impacts DCF and dividend capacity",
+      "missing_inputs": [
+        "historical OCF ratio"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Capex",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 0.0,
+      "year_1_value": 4000.0,
+      "year_2_value": 5000.0,
+      "year_3_value": 6000.0,
+      "formula": "assumed ~4-5% of revenue for manufacturing and R&D capex; FY2025 data missing",
+      "assumption_status": "analytical",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "FY2025 actual capex from cash flow statement"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Free Cash Flow",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": null,
+      "year_1_value": 6800.0,
+      "year_2_value": 9800.0,
+      "year_3_value": 12800.0,
+      "formula": "FCF = OCF - Capex",
+      "assumption_status": "analytical",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "FY2025 capex and OCF"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "eps",
+      "unit": "",
+      "base_period": "",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "missing; downstream analyst must complete",
+      "assumption_status": "missing",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "required consolidated forecast line omitted"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "gross_margin",
+      "unit": "",
+      "base_period": "",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "missing; downstream analyst must complete",
+      "assumption_status": "missing",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "required consolidated forecast line omitted"
+      ]
+    }
+  ],
+  "scenarios": [
+    {
+      "scenario": "bull",
+      "probability_pct": 30.0,
+      "operating_assumptions": [
+        "2027E ESS shipment 90 GWh, unit profit 0.18 CNY/Wh → ESS net profit 16.2B",
+        "PV inverter stable, contributing net 5.5B",
+        "AIDC storage & SST add 3B net profit by 2028",
+        "US policy benign, no new restrictions; Europe captures full 60% CAGR",
+        "Gross margin returns to 35%+ by 2027"
+      ],
+      "parent_net_profit_cny_mn": 22000.0,
+      "eps_cny": null,
+      "fcf_cny_mn": 15400.0,
+      "valuation_method": "PE multiple on 2027E bull net profit",
+      "valuation_multiple": 25.0,
+      "fair_value_per_share": null,
+      "evidence_ids": [
+        "KPE05",
+        "KPE06"
+      ],
+      "falsification": "Q2 2026 ESS margins below 28% or US policy escalation.",
+      "missing_inputs": [
+        "diluted share count"
+      ]
+    },
+    {
+      "scenario": "base",
+      "probability_pct": 60.0,
+      "operating_assumptions": [
+        "2027E ESS shipment 80 GWh, unit profit 0.15 CNY/Wh → ESS net profit 12B",
+        "PV inverter and wind contribute 6B",
+        "AIDC storage initial revenue, minimal profit in 2027",
+        "US tariff and EU financing limit some growth, but safe harbor protects through 2028",
+        "Gross margin 33-34%"
+      ],
+      "parent_net_profit_cny_mn": 18500.0,
+      "eps_cny": null,
+      "fcf_cny_mn": 9800.0,
+      "valuation_method": "PE on 2027E base net profit",
+      "valuation_multiple": 20.0,
+      "fair_value_per_share": null,
+      "evidence_ids": [
+        "KPE07",
+        "KPE05",
+        "EV014"
+      ],
+      "falsification": "Europe order growth below 30% or US 2027 orders cut by >20%.",
+      "missing_inputs": [
+        "diluted share count"
+      ]
+    },
+    {
+      "scenario": "bear",
+      "probability_pct": 10.0,
+      "operating_assumptions": [
+        "2027E ESS shipment flat at 60 GWh, unit profit 0.08 CNY/Wh → ESS net profit 4.8B",
+        "PV inverter volume declines due to market share loss and trade restrictions",
+        "AIDC storage fails to scale; SST remains pre-revenue",
+        "US FCC restricts inverter imports; EU financing applied to 50% of projects",
+        "Gross margin drops to 28%"
+      ],
+      "parent_net_profit_cny_mn": 9500.0,
+      "eps_cny": null,
+      "fcf_cny_mn": 4000.0,
+      "valuation_method": "PE on depressed earnings",
+      "valuation_multiple": 15.0,
+      "fair_value_per_share": null,
+      "evidence_ids": [
+        "KPE08",
+        "KPE07"
+      ],
+      "falsification": "US FCC rule enacted without grandfathering.",
+      "missing_inputs": [
+        "diluted share count"
+      ]
+    }
+  ],
+  "thesis_financial_bridges": [
+    {
+      "bridge_id": "TFB01",
+      "thesis_or_question": "Energy storage profit recovery will drive EPS to 18B+ in 2027",
+      "affected_unit": "Energy Storage Systems (ESS)",
+      "operating_driver": "Storage net profit = Shipment GWh × unit profit CNY/Wh",
+      "driver_formula": "Net Profit = GWh × 1e9 × unit profit / 1e8 (to CNY mn)",
+      "base_assumption": "80 GWh, 0.15 CNY/Wh → 12,000mn",
+      "bull_assumption": "90 GWh, 0.18 CNY/Wh → 16,200mn",
+      "bear_assumption": "60 GWh, 0.08 CNY/Wh → 4,800mn",
+      "revenue_impact": "Implied storage revenue ~80-100 B CNY in base case",
+      "profit_impact": "Varies directly with GWh and unit profit",
+      "eps_impact": "unquantified (share count missing)",
+      "fcf_or_capital_impact": "High OCF conversion expected",
+      "valuation_impact": "At 20x PE, base storage profit contributes 240B of equity value",
+      "quantification_status": "partially_quantified",
+      "evidence_ids": [
+        "KPE05",
+        "KPE06"
+      ],
+      "missing_inputs": [
+        "segment revenue split"
+      ]
+    },
+    {
+      "bridge_id": "TFB02",
+      "thesis_or_question": "US policy risk is contained due to safe harbor and compliance",
+      "affected_unit": "consolidated",
+      "operating_driver": "US profit exposure ≈ 25% of group",
+      "driver_formula": "If full US ban: lose ~4B profit; probability adjusted loss = probability × 4B",
+      "base_assumption": "No ban, safe harbor holds, US profit intact → ~4B profit",
+      "bull_assumption": "Better than base: no tension, AIDC storage adds US profit to 5B",
+      "bear_assumption": "FCC ban on new products, 50% of US lost → 2B profit",
+      "revenue_impact": "±10-20% of group revenue",
+      "profit_impact": "Base case profit loss avoided; impact embedded in scenario",
+      "eps_impact": "unquantified",
+      "fcf_or_capital_impact": "Working capital impacted by project cancellations",
+      "valuation_impact": "Tail risk removed adds optionality value",
+      "quantification_status": "partially_quantified",
+      "evidence_ids": [
+        "KPE08",
+        "KPE05"
+      ],
+      "missing_inputs": [
+        "exact US segment profit"
+      ]
+    },
+    {
+      "bridge_id": "TFB03",
+      "thesis_or_question": "AIDC storage and SST become new growth engines adding 2-5B profit by 2028",
+      "affected_unit": "AIDC Energy Storage + SST",
+      "operating_driver": "AIDC storage volume + SST revenue scale",
+      "driver_formula": "AIDC profit = GWh × 0.3 CNY/Wh; SST profit = Market size × share × net margin",
+      "base_assumption": "AIDC storage 10 GWh → 3B profit; SST negligible profit in 2028",
+      "bull_assumption": "AIDC storage 30 GWh → 9B profit; SST revenue 5B with 20% margin → 1B",
+      "bear_assumption": "Minimal revenue, no profit",
+      "revenue_impact": "Could add 5-15% to group revenue",
+      "profit_impact": "significantly accretive in bull",
+      "eps_impact": "unquantified",
+      "fcf_or_capital_impact": "Early cash consumption then positive",
+      "valuation_impact": "Could add 2-4x forward PE multiple if successful",
+      "quantification_status": "unquantified",
+      "evidence_ids": [
+        "KPE04",
+        "KPE06"
+      ],
+      "missing_inputs": [
+        "market size, share, unit price"
+      ]
+    }
+  ],
+  "moat_evidence_tests": [
+    {
+      "moat_mechanism": "Global scale and market share leadership",
+      "observable_test": "Compare cumulative installed GW of inverters and storage against major competitors (Huawei, Sungrow?) actually Sunpower is leading? Check: should be #1 in PV inverters, top in storage.",
+      "comparison_basis": "Global industry data (IHS, Wood Mackenzie)",
+      "evidence_result": "Indirect evidence: company claims leading position, filings mention '进一步扩大领先优势'; sell-side notes competitors lack supply chain.",
+      "financial_transmission": "Scale → lower unit cost and better service network → higher margins and market share.",
+      "strongest_counterevidence": "Huawei and other Chinese competitors also have scale; price competition intense.",
+      "status": "unproven",
+      "evidence_ids": [
+        "EV022",
+        "EV027"
+      ],
+      "next_verification": "Third-party market share report for 2025."
+    },
+    {
+      "moat_mechanism": "Deep R&D and technology platform",
+      "observable_test": "R&D spend as % of revenue and patent counts vs peers; number of new product introductions.",
+      "comparison_basis": "Annual reports, patent databases",
+      "evidence_result": "R&D spend 41.75B in FY2025 (high absolute amount but ~4.7% of revenue); evidence of platform reuse across segments.",
+      "financial_transmission": "Continuous innovation supports pricing power and new revenue streams.",
+      "strongest_counterevidence": "Other Chinese power electronics firms are also R&D intensive; technology gap may narrow.",
+      "status": "partial",
+      "evidence_ids": [
+        "EV026",
+        "EV027"
+      ],
+      "next_verification": "Patent filings and new product revenue contribution."
+    },
+    {
+      "moat_mechanism": "Customer switching costs and long-term relationships",
+      "observable_test": "Repeat order rate, average customer duration, contract liabilities.",
+      "comparison_basis": "Internal customer data",
+      "evidence_result": "No direct data; high contract liabilities (122B) suggest strong orders; long-term framework agreements with major developers.",
+      "financial_transmission": "Recurring revenue base and lower customer acquisition cost.",
+      "strongest_counterevidence": "Low switching costs for standard inverters; project-by-project bidding",
+      "status": "unproven",
+      "evidence_ids": [
+        "EV043",
+        "EV024"
+      ],
+      "next_verification": "Disclosure of top customer concentration and contract tenor."
+    }
+  ],
+  "valuation_buckets": [
+    {
+      "bucket": "Core operating earnings (PV inverters + ESS)",
+      "inclusion": "core",
+      "valuation_method": "PE multiple on 2027E base net profit",
+      "metric_and_period": "Base scenario 2027E Parent Net Profit",
+      "metric_value": 18500.0,
+      "valuation_multiple": 20.0,
+      "ownership_pct": 100.0,
+      "haircut_pct": 0.0,
+      "equity_value_cny_mn": 370000.0,
+      "per_share_value_cny": null,
+      "overlap_key": "consolidated_2027E_base",
+      "double_counting_treatment": "This bucket captures the enterprise value of the entire group excluding future option value from AIDC businesses. All scenario-derived profits in 'core' are already included; AIDC option value is separate.",
+      "evidence_ids": [
+        "KPE07",
+        "KPE05"
+      ],
+      "missing_inputs": [
+        "diluted share count"
+      ]
+    },
+    {
+      "bucket": "AIDC growth optionality (storage + SST)",
+      "inclusion": "optionality",
+      "valuation_method": "Probability-weighted incremental profit (2028E) capitalized at high multiple",
+      "metric_and_period": "Bull case incremental profit from AIDC over core forecast",
+      "metric_value": 5000.0,
+      "valuation_multiple": 25.0,
+      "ownership_pct": 100.0,
+      "haircut_pct": 50.0,
+      "equity_value_cny_mn": 62500.0,
+      "per_share_value_cny": null,
+      "overlap_key": "AIDC_incremental",
+      "double_counting_treatment": "Excluded from base case core earnings; added as a call option on successful commercialization, haircut reflects uncertainty.",
+      "evidence_ids": [
+        "KPE04",
+        "KPE06"
+      ],
+      "missing_inputs": [
+        "diluted share count"
+      ]
+    }
+  ],
+  "valuation_closure": {
+    "current_price_cny": null,
+    "diluted_share_count_mn": null,
+    "core_value_per_share_cny": null,
+    "probability_weighted_fair_value_per_share_cny": null,
+    "option_value_per_share_cny": null,
+    "other_adjustments_per_share_cny": null,
+    "fair_value_per_share_cny": null,
+    "expected_return_pct": null,
+    "formula": "Equity value = probability_weighted sum of scenario equity values + option value; per share value requires share count",
+    "rating_consistency_check": "Core equity value base case 370B; market cap 261.6B implies ~40% undervaluation if base case is correct, but share count missing for per-share comparison.",
+    "double_counting_checks": [
+      "Core bucket uses consolidated net profit, which includes current known AIDC profit (minimal); AIDC optionality bucket only captures incremental bull profit not in core, so no double-count."
+    ],
+    "status": "partial",
+    "missing_inputs": [
+      "diluted share count",
+      "current stock price"
+    ]
+  },
+  "handoff_manifest": {
+    "handoff_version": "underwriting-v2",
+    "source_of_truth": "structured_research.underwriting_packet",
+    "frozen_reported_facts": [
+      "FY2025 revenue 89,184mn, parent net profit 13,461mn (from earnings model EV012)",
+      "Q1 2026 revenue 15,560mn, gross margin 33.26%, op margin 17.10%, net margin 14.72%, OCF/net profit 0.53 (EV013-EV018)",
+      "ESS Q1 gross margin ~30% (EV042)",
+      "US tariff 38.4% (EV042)",
+      "ESS shipment Q1 flat YoY (EV042)",
+      "Market cap as of 2026-07-03: 261.6B CNY (market_expectation)"
+    ],
+    "analyst_estimates": [
+      "2027E base net profit 18,500mn (derived from KPE07, KPI05, KSI07)",
+      "2026E base revenue 92,587mn (seasonality adjusted from Q1)",
+      "AIDC storage and SST optionality value 62.5B CNY (analyst assumption, 50% haircut)"
+    ],
+    "unresolved_model_cells": [
+      "Diluted share count",
+      "EPS for all scenarios",
+      "Segment-level revenue, volume, margin",
+      "Capex actual FY2025",
+      "Current stock price"
+    ],
+    "downstream_must_preserve": [
+      "Full three-year consolidated forecast lines (revenue through FCF)",
+      "Material business units: ESS, PV inverters, AIDC segments",
+      "Three scenarios with probability weights (30/60/10)",
+      "Valuation buckets: core PE 20x on 18,500mn, AIDC optionality",
+      "Financial bridges: ESS profit trajectory, US policy risk, AIDC new growth",
+      "Model profile: corporate, volume_price_cost"
+    ]
+  },
+  "evidence_change_rules": [
+    {
+      "evidence_id": "KPE05",
+      "affected_segment": "Energy Storage Systems (ESS)",
+      "affected_variable": "segment_volume",
+      "old_assumption": "2027E shipment 80 GWh",
+      "new_assumption": "unchanged",
+      "financial_transmission": "directly changes ESS net profit",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements"
+    },
+    {
+      "evidence_id": "KPE08",
+      "affected_segment": "consolidated",
+      "affected_variable": "scenario_probability",
+      "old_assumption": "base US probability 60%",
+      "new_assumption": "unchanged",
+      "financial_transmission": "reduction of US profit if probability shifted",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "FCC official announcement"
+    },
+    {
+      "evidence_id": "KPE01",
+      "affected_segment": "consolidated",
+      "affected_variable": "scenario_probability",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "KPE02",
+      "affected_segment": "AIDC Power (SST)",
+      "affected_variable": "utilization_or_backlog",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "KPE03",
+      "affected_segment": "Energy Storage Systems (ESS)",
+      "affected_variable": "segment_margin",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "KPE04",
+      "affected_segment": "Energy Storage Systems (ESS)",
+      "affected_variable": "segment_volume",
+      "old_assumption": "None",
+      "new_assumption": "60.0",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "KPE06",
+      "affected_segment": "Energy Storage Systems (ESS)",
+      "affected_variable": "segment_margin",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "KPE07",
+      "affected_segment": "AIDC Energy Storage",
+      "affected_variable": "segment_volume",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    }
+  ],
+  "reconciliation_checks": [
+    "Q1 2026 revenue annualized via seasonality (17.5% share) yields 92.6B, consistent with company narrative of flat to slight growth.",
+    "Market cap implies TTM net profit of ~11.9B, below FY2025 13.46B and below base 2026E 13.5B, reflecting expectation of earnings dip before recovery.",
+    "PE TTM 21.9x is below 5-year median percentile 46% and below peer Deye (PE 33.6), suggesting market is discounting growth and policy risks.",
+    "No segment revenue data; consolidated forecast is not validated by independent segment build-up.",
+    "Share count missing prevents EPS reconciliation."
+  ],
+  "analyst_instructions": [
+    "Begin research by challenging ESS volume and unit profit assumptions with recent industry shipments and competitor commentary.",
+    "Monitor US FCC docket and company compliance messaging to update probability weights.",
+    "Request management for indicative segment revenue and margin, especially for ESS and PV inverters, to reduce forecast error.",
+    "Obtain diluted share count from latest filing or market data service before computing per-share valuation.",
+    "Track European demand indicators (e.g., SolarPower Europe, EASE) to validate 60% CAGR claim."
+  ],
+  "preprocessing_notes": [
+    "Segment revenue weights unavailable; all segment revenue and profit characteristics are derived from qualitative evidence and private proxy notes.",
+    "FY2025 SG&A and R&D figures were re-checked: the 48.32 and 41.75 figures are in hundred-million CNY (亿元), i.e., 4.832B and 4.175B respectively, making total opex ~9B, which matches operating margin evolution.",
+    "Q1 2026 OCF/NI of 0.53 is low, likely due to seasonal inventory build; normalized ratio assumed 0.8 for full year.",
+    "AIDC storage and SST only carry optionality value until confirmed revenue contracts.",
+    "unknown evidence ids removed from underwriting packet",
+    "unknown evidence ids removed from underwriting packet",
+    "unknown evidence ids removed from underwriting packet",
+    "unknown share-count evidence id removed",
+    "duplicate consolidated forecast aliases merged into revenue",
+    "operating model driver coverage (volume_price_cost): capacity, volume, price/ASP, unit/input cost, spread/margin, capex/ROIC"
+  ]
+}

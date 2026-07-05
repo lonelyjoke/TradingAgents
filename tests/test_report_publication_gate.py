@@ -76,7 +76,7 @@ def test_nonblocking_coverage_gaps_do_not_block_or_downgrade_report(tmp_path, mo
     complete_report = report_path.read_text(encoding="utf-8")
 
     assert "Publication status: REVIEW" in published_decision
-    assert "数据缺失本身不改变评级方向" in published_decision
+    assert "分析深度、数据覆盖、证据等级或格式问题不改变评级方向" in published_decision
     assert "**Rating**: Buy" in published_decision
     assert "Target price: 100" in complete_report
     assert "Research Module Coverage And Artifacts" not in complete_report

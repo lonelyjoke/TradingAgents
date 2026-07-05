@@ -15,6 +15,7 @@ import json
 from tradingagents.agents.schemas import (
     SellSideEditorialReview,
     SellSidePMDecision,
+    normalize_sell_side_pm_decision,
     render_sell_side_pm_decision,
 )
 from tradingagents.agents.utils.agent_utils import (
@@ -131,6 +132,23 @@ def _analytical_structure_issues(pm_payload: dict) -> list[str]:
         count = len(pm_payload.get(field, []) or [])
         if count < minimum:
             issues.append(f"analytical structure: {label} count={count}, expected at least {minimum}")
+    new_contracts = (
+        ("segment_economics", 2, "material segment-economics rows"),
+        ("industry_driver_matrix", 3, "sector-native driver rows"),
+        ("accounting_quality_matrix", 3, "accounting/capital-allocation rows"),
+    )
+    if any(field in pm_payload for field, _, _ in new_contracts):
+        for field, minimum, label in new_contracts:
+            count = len(pm_payload.get(field, []) or [])
+            if count < minimum:
+                issues.append(f"deep research matrix: {label} count={count}, expected at least {minimum}")
+        scenarios = (
+            (pm_payload.get("safe_valuation_assumptions") or {}).get("scenarios", [])
+        )
+        if len(scenarios) != 3:
+            issues.append(
+                f"deterministic valuation: bull/base/bear scenario inputs count={len(scenarios)}, expected 3"
+            )
     thesis_chapter = str(pm_payload.get("thesis_financial_bridge", "")).lower()
     closure_markers = {
         "strongest counterargument/boundary": ("反证", "反方", "边界", "counter"),
@@ -170,6 +188,17 @@ financial transmission, market-pricing implication and falsification gate. Recal
 claimed sensitivity before accepting it. Do not reward a long machine table or a long moat list.
 The public `thesis_financial_bridge` chapter must preserve those same elements in connected analyst prose;
 the internal `core_theses` cards do not compensate for a thin public chapter.
+Require `segment_economics`, `industry_driver_matrix`, and `accounting_quality_matrix` to carry the evidence and
+causal depth; prose cannot compensate for empty structured rows. Recalculate the deterministic valuation output
+from the supplied assumptions and reject any prose number that differs from it. If relevant KPE rows exist in the
+source bundle, require at least one `alternative_intelligence_decisions` row per deduplicated material claim, with
+an actual model/probability/verification change or an explicit rejection reason.
+If KSI sell-side rows exist, require `sell_side_expectation_matrix` to preserve institution, date, forecast period,
+valuation method/multiple/target, revision history and the exact difference versus the independent model. Never
+allow one institution, one repost or one industry note to be described as market consensus.
+Treat repeated substance as a revision defect: the same assumption, threshold, valuation conclusion or causal
+paragraph must not be fully restated across the executive summary, thesis, forecast, valuation and risk chapters.
+Keep detail in the owning chapter and use a short cross-reference elsewhere.
 
 Do not change the rating and do not rewrite the report in this call. Return only the
 SellSideEditorialReview JSON object. Make revision instructions section-specific and
@@ -428,12 +457,17 @@ def create_portfolio_manager(llm):
 - The PM is a report synthesizer and final allocator, not the first analyst to understand the company. Do not summarize upstream prose sequentially. Reconstruct the investment case from the shared operating equations and accepted model changes, then use debate excerpts only to explain why an assumption changed or stayed unchanged.
 - Fill every required field in `SellSidePMDecision`. The renderer, not the model, owns all H1/H2 headings and produces exactly eight public Chinese sections. Do not put H2 headings in any field. `report_markdown` is ignored legacy compatibility state and must be empty.
 - Fill `research_questions`, `question_verdicts`, `forecast_takeaways`, `forecast_assumptions`, and `core_theses` from the accepted model. Do not leave them empty when the source record supports analysis. Questions, verdicts and thesis cards are the internal analytical workbench; they must improve the reasoning but must not appear as a public question list, Q&A ledger or repeated checklist.
+- Fill `segment_economics` with every material economic unit, using reported/calculated/analyst-estimate/missing labels and explicit core/scenario/optionality/excluded valuation treatment. Fill `industry_driver_matrix` with dated demand, supply/capacity, price/cost and policy variables. Fill `accounting_quality_matrix` with working-capital, cash-conversion, capex/ROIC, leverage/impairment and shareholder-return checks. The adjacent prose interprets these tables and must not repeat every cell.
+- Fill `safe_valuation_assumptions` with exactly bull/base/bear inputs plus required return, holding period, margin of safety and maximum acceptable bear loss. Do not calculate scenario EPS, equity value, per-share value, probability-weighted value, optionality per share, expected return or safety price; application code owns those outputs. In `valuation_closure`, explain method choice, evidence limits, double counting and what would change the assumptions, without publishing competing hand-calculated values.
+- For each deduplicated material Knowledge Planet claim, fill `alternative_intelligence_decisions` from full topic text, not a title or ellipsis. Grade it A/B/C/D, state age and decision shelf life in `freshness_and_shelf_life`, and force one outcome: model change, scenario-probability change, verification-clock/gate change, or explicit rejection. Multiple reposts of the same original note are one claim, not independent corroboration. Integrate the result into the affected thesis; do not create a raw-message catalog. Recent does not mean true, while stale channel checks cannot alter the current model without revalidation.
+- Populate `sell_side_expectation_matrix` from KSI rows. Preserve institution and date, distinguish a single broker from a true multi-broker range, compare same-institution forecast/target revisions, and state the exact period/variable/magnitude difference versus the TradingAgents model. Missing method, base year or target price must remain missing; never reverse-engineer them from promotional language.
 - Fill `question_verdicts` with evidence-weighted answers to the same decisive questions. Integrate filing facts, structured financials, industry KPIs, peers, price/expectation evidence and Knowledge Planet clues only where they answer the question. Cite what was actually used, surface contradictions, and state the named model/probability/valuation effect. Then synthesize each accepted conclusion exactly once into the relevant public chapter. A sequential recap of available modules is not analysis.
 - The forecast narrative must interpret rather than duplicate the renderer's table. State whether the model is bottom-up, top-down, or hybrid; explain the 2-3 largest earnings/cash drivers and the most fragile assumption. Do not write a precise volume, ASP, utilization, expense ratio, scenario probability or valuation multiple unless it has a historical/evidence anchor or is explicitly labeled an analyst range with sensitivity.
 - `core_theses` must contain only the 2-4 conclusions that decide the rating. Do not produce separate flat lists of thesis bullets and moat bullets. A moat is relevant only when observable evidence shows transmission into share/price, margin, turnover, cash conversion, ROIC or valuation, with the strongest counterevidence and a falsification gate.
 - Copy the machine-readable Research Manager `canonical_model_snapshot` line for line, including ids, periods, values and units. Any PM revision requires a matching accepted `handoff_change_rows` entry with old/new value, evidence ids and recalculated EPS/FCF/valuation impact. A prose claim of "no change" never overrides a numeric difference.
 - Single-report depth contract: let length follow company complexity and evidence density. The eight public sections follow a continuous research argument: conclusion and valuation snapshot -> business model and segment economics -> industry/cycle/competitive advantage -> operating and accounting quality -> core investment logic with counter-case -> forecast and sensitivities -> market expectations and valuation -> risks/catalysts/tracking. They must contain all evidence, assumptions, sensitivities, peer alternatives, accounting analysis and model-change implications needed for a PM or research head to audit the recommendation without opening a second report. Do not pad or repeat conclusions. Only raw agent transcripts, generation diagnostics, research-question ledgers and machine bookkeeping remain internal artifacts.
 - Within every substantive public chapter, use this reasoning loop when relevant: core judgment -> key evidence -> causal mechanism -> concrete company or peer case -> strongest counterargument and boundary -> financial/valuation implication -> transition to the next chapter. Questions are prompts for analyst thinking, never the reader-facing architecture.
+- Public information ownership is strict: section 1 owns only the verdict and valuation/safety-price snapshot; sections 2-4 own company/industry/accounting evidence; section 5 owns full thesis reasoning and alternative-intelligence deltas; section 6 owns all forecast numbers; section 7 owns all valuation and safe-price arithmetic; section 8 owns catalysts, falsification and actions. Do not restate the same assumption or trigger in more than two sections.
 - Always generate the complete PM memo. It should attempt all five items below inside a small number of integrated sections: (1) material business-segment economics and a segment prosperity matrix, (2) three distinct forward years or four forward quarters reconciled to the packet's model-profile-appropriate consolidated earnings, cash/capital, asset-quality and per-share lines, (3) formula-auditable valuation and safety-price arithmetic, (4) period-consistent verification thresholds, and (5) an explicit KPE outcome ledger. If an item cannot be completed, state the exact missing input, leave unsupported cells null, and add a retrieval task; do not suppress or mechanically downgrade the report.
 - Read `preprocessing_mode` and `preprocessing_notes` in the Structured Research Bundle. If semantic preprocessing failed or the mode is deterministic-only, disclose that limitation. Use deterministic filing-row segments when present, but do not claim that semantic extraction or conflict resolution succeeded.
 - For every material segment, show the latest disclosed revenue, revenue weight, revenue growth, gross margin and margin change when available. Never call a segment the fastest-growing, highest-margin, or dominant profit pool without comparing it against every disclosed material segment for the same period and metric.
@@ -525,6 +559,7 @@ def create_portfolio_manager(llm):
 - Cite every promoted Knowledge Planet clue by KPE id. For each KPE id, record exactly one audited outcome: numeric old->new model assumption, bull/base/bear probability before->after, unchanged/watch with a dated verification gate, or rejected with reason. Probabilities must sum to 100% before and after. Never write only "raises bull probability".
 - Build the final forecast from the supplied Model-Ready Evidence Ledger, shared underwriting packet and Segment / Business-Bucket Three-Year Operating Matrix. Fill three forward years (or four forward quarters) for material business buckets, then reconcile the model-profile-appropriate consolidated earnings, cash/capital, asset-quality and per-share totals. Use ranges when precision is unsupported, but label every cell reported/calculated/estimated/proxy/missing; do not leave `to be estimated` placeholders in the final memo.
 - Separate four expectation layers: current-price implied assumptions, company-specific external consensus (only when actually supplied), one-broker or industry-report views, and the TradingAgents model. State the exact variable/period/magnitude disagreement and the disclosure that can resolve it. Do not call an industry report or a single broker note "consensus".
+- In the valuation chapter, synthesize KSI observations into a compact broker expectation map: same-institution revisions first, then cross-institution dispersion, then the independent-model difference. Do not average incompatible forecast years, valuation dates or methods.
 - After accepting any new assumption, recalculate the affected segment revenue/profit, consolidated EPS/FCF, scenario value, scenario probabilities, and probability-weighted value. The rating remains system-generated from the reconciled output; do not reverse-engineer assumptions to defend an upstream rating.
 - Price-volume and relative-strength evidence must not become a veto on fundamentals by itself. Use it to adjust entry timing, staged sizing, stop/verification discipline, or confidence; only let it change rating when it corroborates a verified fundamental deterioration or improvement.
 - Deep sell-side bridge standard: when the business is project/order/backlog driven, include an explicit order bridge (opening backlog + new orders - delivered/revenue-recognized orders = ending backlog) and reconcile contract liabilities, receivables, inventory/goods shipped, and cash collection. When valuation uses a safety price, target price, or downside anchor, show bull/base/bear or sensitivity assumptions rather than jumping from one profit number to a price. When peers are broad industry screens, split true operating peers from broad screens and name substitute expressions if the context supports them. When a second curve/new business/capacity/ship/mine/platform is mentioned, state whether it is core value, scenario value, or rejected optionality and what evidence would change that status. Include a compact evidence-grade table or paragraph for decisive numbers: reported, calculated, estimated, proxy, stale, missing, or unverified.
@@ -694,6 +729,23 @@ If an important investment claim depends on an unverified commodity price, produ
         )
         pm_decision_payload = pm_generation_status.pop("validated_payload", {})
         pm_generation_status["schema"] = "SellSidePMDecision"
+        deterministic_model_notes: list[str] = []
+        if pm_decision_payload:
+            try:
+                normalized_decision, deterministic_model_notes = normalize_sell_side_pm_decision(
+                    pm_decision_payload
+                )
+            except (TypeError, ValueError) as exc:
+                # Compatibility/fallback providers can return an older partial
+                # payload. Preserve their already-rendered report instead of
+                # crashing; deterministic valuation remains visibly unclosed.
+                deterministic_model_notes = [
+                    "deterministic normalization skipped for incomplete PM payload: "
+                    + str(exc).splitlines()[0]
+                ]
+            else:
+                pm_decision_payload = normalized_decision.model_dump(mode="json")
+                final_trade_decision = render_sell_side_pm_decision(normalized_decision)
 
         manager_payload = state.get("research_manager_plan_payload", {}) or {}
         initial_handoff_issues = _canonical_handoff_issues(
@@ -711,6 +763,7 @@ If an important investment claim depends on an unverified commodity price, produ
         revision_applied = False
         revision_status: dict = {"mode": "not_run"}
         remaining_handoff_issues = list(initial_handoff_issues)
+        remaining_analytical_issues = list(initial_analytical_issues)
 
         # The editor is advisory: a provider failure never fragments or blocks the
         # report. A valid review can request one bounded revision from the same
@@ -755,9 +808,21 @@ If an important investment claim depends on an unverified commodity price, produ
             )
             revised_payload = revision_status.pop("validated_payload", {})
             if revised_payload:
+                try:
+                    normalized_revision, revision_model_notes = normalize_sell_side_pm_decision(
+                        revised_payload
+                    )
+                except (TypeError, ValueError):
+                    normalized_revision = None
+                    revision_model_notes = []
+            if revised_payload and normalized_revision is not None:
+                revised_payload = normalized_revision.model_dump(mode="json")
                 revised_handoff_issues = _canonical_handoff_issues(
                     manager_payload,
                     revised_payload,
+                )
+                revised_analytical_issues = _analytical_structure_issues(
+                    revised_payload
                 )
                 rating_preserved = revised_payload.get("rating") == pm_decision_payload.get(
                     "rating"
@@ -765,10 +830,15 @@ If an important investment claim depends on an unverified commodity price, produ
                 handoff_not_worsened = len(revised_handoff_issues) <= len(
                     initial_handoff_issues
                 )
-                if rating_preserved and handoff_not_worsened:
-                    final_trade_decision = revised_decision
+                analytical_not_worsened = len(revised_analytical_issues) <= len(
+                    initial_analytical_issues
+                )
+                if rating_preserved and handoff_not_worsened and analytical_not_worsened:
+                    final_trade_decision = render_sell_side_pm_decision(normalized_revision)
                     pm_decision_payload = revised_payload
                     remaining_handoff_issues = revised_handoff_issues
+                    remaining_analytical_issues = revised_analytical_issues
+                    deterministic_model_notes = revision_model_notes
                     revision_applied = True
 
         initial_mode = pm_generation_status.get("mode", "unknown")
@@ -782,6 +852,8 @@ If an important investment claim depends on an unverified commodity price, produ
                 "editorial_revision_applied": revision_applied,
                 "editorial_revision_mode": revision_status.get("mode", "not_run"),
                 "remaining_handoff_issues": remaining_handoff_issues,
+                "remaining_analytical_issues": remaining_analytical_issues,
+                "deterministic_model_notes": deterministic_model_notes,
             }
         )
         pm_editorial_review = {
@@ -793,6 +865,7 @@ If an important investment claim depends on an unverified commodity price, produ
             "initial_handoff_issues": initial_handoff_issues,
             "initial_analytical_issues": initial_analytical_issues,
             "remaining_handoff_issues": remaining_handoff_issues,
+            "remaining_analytical_issues": remaining_analytical_issues,
         }
         full_pm_decision = final_trade_decision
         final_trade_decision, internal_overflow, removed_sections = (

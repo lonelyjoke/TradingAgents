@@ -8,6 +8,7 @@ from tradingagents.agents.schemas import (
     PortfolioRating,
     SellSideEditorialReview,
     SellSidePMDecision,
+    normalize_sell_side_pm_decision,
     render_sell_side_pm_decision,
 )
 from tradingagents.agents.managers.portfolio_manager import (
@@ -227,6 +228,68 @@ def test_editorial_review_is_advisory_and_section_specific():
 
     assert review.findings[0].section == "thesis_moat_financial_bridge"
     assert review.revision_required is True
+
+
+def test_deterministic_pm_engine_calculates_eps_fcf_scenarios_and_safe_price():
+    payload = {
+        "rating": "Hold", "rating_posture": "Hold / Positive Watch", "research_readiness": "partial",
+        "one_line_thesis": "Wait for evidence and a safer price.",
+        "investment_conclusion_and_core_conflict": "Conclusion.",
+        "canonical_model_snapshot": [
+            {"line_id": "shares", "period": "current", "metric": "diluted_share_count", "value": 2000, "unit": "mn shares", "status": "calculated"},
+            {"line_id": "2028E_profit", "period": "2028E", "metric": "parent_net_profit", "value": 12000, "unit": "CNY mn", "status": "estimated"},
+            {"line_id": "2028E_ocf", "period": "2028E", "metric": "ocf", "value": 13000, "unit": "CNY mn", "status": "estimated"},
+            {"line_id": "2028E_capex", "period": "2028E", "metric": "capex", "value": 3000, "unit": "CNY mn", "status": "estimated"},
+        ],
+        "company_disaggregation": "Company economics.", "industry_cycle_and_competition": "Industry cycle.",
+        "autonomous_forecast_model": "Forecast explanation.",
+        "thesis_financial_bridge": "Thesis bridge with counter and falsification.",
+        "moat_evidence_scorecard": "Moat evidence.", "valuation_closure": "Method limits.",
+        "accounting_and_capital_allocation": "Accounting quality.",
+        "expectation_gap_and_market_pricing": "Expectation gap.",
+        "risks_catalysts_verification": "Risk and verification.",
+        "handoff_integrity_audit": "Preserved.", "shared_model_change_audit": "No silent changes.",
+        "report_quality_self_check": "Checked.",
+        "sell_side_expectation_matrix": [
+            {
+                "source_ids": ["KSI01", "KPE01"],
+                "institution": "中信证券",
+                "published_at": "2026-07-01",
+                "observation_type": "single_broker",
+                "forecast_and_valuation": "2028E EPS 6.2元，给予22倍PE",
+                "revision_or_dispersion": "EPS较前次上调5%",
+                "comparison_with_our_model": "高于本模型2028E EPS 6.0元约3.3%",
+                "evidence_status": "private_text",
+                "decision_use": "仅作基准情景交叉验证",
+            }
+        ],
+        "safe_valuation_assumptions": {
+            "current_price_cny": 126.16, "required_annual_return_pct": 20,
+            "holding_period_years": 1, "margin_of_safety_pct": 20, "maximum_bear_loss_pct": 15,
+            "optionality_equity_value_cny_mn": 1000,
+            "scenarios": [
+                {"scenario": "bull", "probability_pct": 20, "valuation_method": "PE", "parent_net_profit_cny_mn": 12000, "valuation_multiple": 22, "assumption_summary": "bull"},
+                {"scenario": "base", "probability_pct": 60, "valuation_method": "PE", "parent_net_profit_cny_mn": 10000, "valuation_multiple": 20, "assumption_summary": "base"},
+                {"scenario": "bear", "probability_pct": 20, "valuation_method": "PE", "parent_net_profit_cny_mn": 8000, "valuation_multiple": 19.25, "assumption_summary": "bear"},
+            ],
+        },
+    }
+
+    decision, notes = normalize_sell_side_pm_decision(payload)
+    line_map = {(row.period, row.metric): row for row in decision.canonical_model_snapshot}
+
+    assert round(line_map[("2028E", "eps")].value, 2) == 6.00
+    assert line_map[("2028E", "fcf")].value == 10000
+    assert decision.deterministic_valuation.status == "closed"
+    assert round(decision.deterministic_valuation.optionality_per_share_cny, 2) == 0.50
+    assert round(decision.deterministic_valuation.safe_buy_price_ceiling_cny, 2) == 80.00
+    assert any("added deterministic 2028E EPS" in note for note in notes)
+    rendered = render_sell_side_pm_decision(decision)
+    assert "安全买入价上限：80元" in rendered
+    assert "期权价值：0.5元/股" in rendered
+    assert "卖方预测、估值与预期差" in rendered
+    assert "KSI01/KPE01" in rendered
+    assert "single_broker" in rendered
 
 
 def test_handoff_check_detects_only_undocumented_material_changes():

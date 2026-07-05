@@ -75,11 +75,11 @@ evidence grade, and next event capable of resolving the difference.
 
 ## 4. Knowledge Planet transmission
 
-Every promoted clue must cite its `KPE` id and end in exactly one audited outcome:
+Every selected clue is built from cleaned full topic text (text-only mode; PDF is not required), deduplicated by the original claim rather than repost count, and must cite its `KPE` id. It ends in exactly one audited outcome:
 
 - numeric old-to-new model assumption;
 - bull/base/bear probability before-to-after;
-- unchanged/watch with an objective verification gate;
+- a dated verification-clock/gate change;
 - rejected with reason.
 
 Accepted changes must be transmitted through segment revenue/profit, EPS/FCF,
@@ -94,6 +94,19 @@ profit, EPS, and FCF deltas. When a required input is absent, the row remains
 `unquantified` or `probability_only` and records the missing input instead of
 inventing a contribution.
 
+Text posts that contain sell-side forecasts, ratings or valuation logic also
+produce a separate `KSI` ledger. Each row preserves institution/author, date,
+freshness, rating language, period-specific forecast facts, valuation method/
+multiple/target, and the same-institution revision signal. KSI rows are single
+observations, never consensus by default. PM must compare them with the
+independent model by exact variable, period and magnitude; incompatible years,
+valuation dates and methods cannot be averaged.
+
+Window synchronization isolates contiguous missing-date ranges and fetches the
+newest range first. A deep historical pagination failure therefore cannot block
+today's new text. Successfully imported topics remain in the shared SQLite cache
+and later runs retrieve only missing or expired date windows.
+
 ## 5. Final-output QA
 
 After the PM memo is generated, the save pipeline writes
@@ -106,17 +119,18 @@ integrity, including:
 - YoY versus sequential/annual comparison lineage;
 - Q2/half-year versus Q3 reporting-calendar confusion;
 - KPE citation and before/after/rejection treatment;
+- KSI forecast/valuation observations omitted from the expectation-gap matrix;
 - unsupported price-move causal attribution;
 - industry/playbook context alignment.
 
-The audit never changes or independently assigns the investment rating. Any
-publication blocker must be reconciled before the report is treated as
-publication- or investment-committee-ready. Blockers include deterministic
-arithmetic/period/unit contradictions, a blocked shared company-underwriting
-packet, failed Portfolio Manager structured generation, omitted material
-segments, an unreconciled three-year model, and missing mandatory deep-research
-sections. Missing source availability remains neutral evidence, but it must be
-named with a retrieval task.
+The audit never changes or independently assigns the investment rating. It first
+uses program-calculated model outputs and attempts deterministic repair. Formal
+publication is blocked only when a decision-changing ticker, period, unit,
+share-count, arithmetic, valuation or canonical-handoff contradiction remains,
+or when structured Research Manager/PM generation is unreadable. Segment depth,
+peer coverage, evidence grades, unavailable data, KPE verification and formatting
+are REVIEW items: they cap confidence and trigger editorial revision, but the
+complete report remains visible.
 
 When blocked, the raw PM response is retained only as
 `5_portfolio/decision_draft.md`; ratings, target prices, sizing, substitutes, and
@@ -254,3 +268,25 @@ ranked thesis cards, each closing takeaway, evidence, strongest counterevidence,
 financial transmission, market pricing, and falsification. Raw thesis/moat ledgers remain
 in the appendix. Missing analytical objects trigger one advisory editorial revision but
 do not mechanically block the pipeline.
+
+## 10. Deterministic safety valuation and public research matrices
+
+The PM supplies only bull/base/bear assumptions and portfolio requirements.
+Application code calculates scenario EPS, PE equity value, per-share value,
+probability-weighted core value, optionality per share, expected return and the
+safety-price ceiling. The safety ceiling is:
+
+`min(base / (1 + required return)^years, base x (1 - margin of safety), bear / (1 - maximum acceptable bear loss))`.
+
+No safety price is published until all three scenarios, probabilities and a
+validated diluted share count close. A fundamental pressure value is not a
+technical stop-loss.
+
+The single public memo also carries typed `segment_economics`,
+`industry_driver_matrix`, `accounting_quality_matrix`, and
+`alternative_intelligence_decisions`. Prose interprets these rows instead of
+repeating them. Public information ownership is fixed: conclusion/valuation
+snapshot in section 1; company/industry/accounting evidence in sections 2-4;
+full thesis and KPE decision deltas in section 5; forecasts in section 6;
+program valuation and safety price in section 7; catalysts, falsification and
+actions in section 8.

@@ -162,6 +162,35 @@ def _known_kpe_rows(text: str) -> dict[str, dict[str, str]]:
     return rows
 
 
+def _known_sell_side_rows(text: str) -> list[dict[str, str]]:
+    """Read the deterministic KSI ledger without re-parsing narrative prose."""
+    rows: list[dict[str, str]] = []
+    for raw in (text or "").splitlines():
+        line = raw.strip()
+        if not re.match(r"^\|\s*KSI\d+\s*\|", line, re.I):
+            continue
+        cells = [cell.strip() for cell in line.strip("|").split("|")]
+        if len(cells) < 12:
+            continue
+        rows.append(
+            {
+                "intelligence_id": cells[0].upper(),
+                "kpe_ids": cells[1],
+                "published_at": cells[2],
+                "institution": cells[3],
+                "analyst_or_author": cells[4],
+                "freshness": cells[5],
+                "rating_signal": cells[6],
+                "forecast_facts": cells[7],
+                "valuation_facts": cells[8],
+                "normalized_points": cells[9],
+                "revision_signal": cells[10],
+                "source_quote": cells[11],
+            }
+        )
+    return rows
+
+
 def _compact_source_payload(
     contexts: Mapping[str, str],
     *,
@@ -216,7 +245,13 @@ def _compact_source_payload(
     return {"deterministic_evidence": evidence_rows, "source_snippets": snippets}
 
 
-def _semantic_prompt(symbol: str, as_of_date: str, payload: dict[str, Any], kpe_rows: dict[str, dict[str, str]]) -> str:
+def _semantic_prompt(
+    symbol: str,
+    as_of_date: str,
+    payload: dict[str, Any],
+    kpe_rows: dict[str, dict[str, str]],
+    sell_side_rows: list[dict[str, str]],
+) -> str:
     schema = json.dumps(
         SemanticResearchExtraction.model_json_schema(),
         ensure_ascii=False,
@@ -237,14 +272,18 @@ Rules:
 5. For each material segment, explain the demand -> supply/capacity -> price/volume -> utilization/mix -> margin -> cash-flow chain. Distinguish prosperity level from marginal direction.
 6. For Knowledge Planet, use only the supplied KPE ids. Map each clue to a segment and model variable. Quantify baseline/revised assumptions and financial bridge inputs only when supported. Never invent a baseline, unit, share count, or revenue base; list it in missing_inputs instead.
 7. A private clue may change scenario probability or verification timing before it changes a base-case forecast. Record before/after values only when you can state the reasoning.
-8. source_quote must be short and copied from the supplied material. A paraphrase without a quote will be downgraded by deterministic validation.
-9. Return exactly one JSON object conforming to the JSON Schema below. Do not return Markdown fences, analysis, commentary, or an empty answer. Use empty arrays and explicit preprocessing_notes when evidence is insufficient.
+8. Treat KSI sell-side rows as individual institution observations, never as consensus. Compare forecast periods, valuation methods and revision history; map only supported differences into KPE hypotheses or conflicts.
+9. source_quote must be short and copied from the supplied material. A paraphrase without a quote will be downgraded by deterministic validation.
+10. Return exactly one JSON object conforming to the JSON Schema below. Do not return Markdown fences, analysis, commentary, or an empty answer. Use empty arrays and explicit preprocessing_notes when evidence is insufficient.
 
 JSON Schema:
 {schema}
 
 Known KPE ledger:
 {json.dumps(kpe_rows, ensure_ascii=False)}
+
+Known sell-side forecast/valuation/revision ledger (individual observations, not consensus):
+{json.dumps(sell_side_rows, ensure_ascii=False)}
 
 Evidence payload:
 {json.dumps(payload, ensure_ascii=False)}
@@ -745,6 +784,7 @@ def build_structured_research_bundle(
 ) -> dict[str, Any]:
     payload = _compact_source_payload(contexts, max_chars=max_prompt_chars)
     kpe_rows = _known_kpe_rows(contexts.get("knowledge_planet", ""))
+    sell_side_rows = _known_sell_side_rows(contexts.get("knowledge_planet", ""))
     deterministic_segments = _deterministic_segment_profiles(contexts)
     semantic = SemanticResearchExtraction()
     mode = "deterministic_only"
@@ -753,7 +793,7 @@ def build_structured_research_bundle(
         try:
             semantic = _invoke_semantic_llm(
                 llm,
-                _semantic_prompt(symbol, as_of_date, payload, kpe_rows),
+                _semantic_prompt(symbol, as_of_date, payload, kpe_rows, sell_side_rows),
             )
             mode = "llm_semantic_plus_deterministic_validation"
         except Exception as exc:
@@ -908,6 +948,7 @@ def build_structured_research_bundle(
         "conflicts": [conflict.model_dump() for conflict in semantic.conflicts],
         "kpe_impacts": quantified_kpe,
         "known_kpe_ledger": kpe_rows,
+        "sell_side_intelligence": sell_side_rows,
         "preprocessing_notes": [*semantic.preprocessing_notes, *errors],
     }
     bundle["underwriting_packet"] = build_company_underwriting_packet(
@@ -940,6 +981,7 @@ def compact_structured_research_for_prompt(
         "deterministic_evidence": list(bundle.get("deterministic_evidence", []))[:35],
         "conflicts": list(bundle.get("conflicts", []))[:12],
         "kpe_impacts": list(bundle.get("kpe_impacts", []))[:12],
+        "sell_side_intelligence": list(bundle.get("sell_side_intelligence", []))[:12],
         "preprocessing_notes": list(bundle.get("preprocessing_notes", []))[:8],
         "underwriting_packet": compact_underwriting_packet(
             bundle.get("underwriting_packet", {})
@@ -948,7 +990,7 @@ def compact_structured_research_for_prompt(
     rendered = json.dumps(compact, ensure_ascii=False, separators=(",", ":"))
     if len(rendered) <= max_chars:
         return rendered
-    for key in ("deterministic_evidence", "semantic_metrics", "conflicts", "kpe_impacts", "segments"):
+    for key in ("deterministic_evidence", "semantic_metrics", "conflicts", "kpe_impacts", "sell_side_intelligence", "segments"):
         values = compact.get(key)
         if not isinstance(values, list):
             continue

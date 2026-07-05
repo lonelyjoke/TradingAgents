@@ -346,6 +346,22 @@ class KnowledgePlanetEvidence:
 
 
 @dataclass(frozen=True)
+class SellSideTextIntelligence:
+    intelligence_id: str
+    evidence_ids: tuple[str, ...]
+    published_at: str
+    institution: str
+    analyst_or_author: str
+    freshness: str
+    rating_signal: str
+    forecast_facts: str
+    valuation_facts: str
+    normalized_points: str
+    revision_signal: str
+    source_quote: str
+
+
+@dataclass(frozen=True)
 class CandidateMarketScore:
     candidate: str
     symbol: str
@@ -869,6 +885,31 @@ def _dates_for_window(curr_date: str, look_back_days: int) -> list[str]:
     return [(start + timedelta(days=offset)).strftime("%Y-%m-%d") for offset in range(days + 1)]
 
 
+def _contiguous_date_ranges(dates: list[str]) -> list[list[str]]:
+    """Split missing sync dates so an old backfill cannot block fresh topics."""
+    parsed = sorted(
+        {
+            parsed_date.strftime("%Y-%m-%d")
+            for value in dates
+            if (parsed_date := _parse_date(value)) is not None
+        }
+    )
+    ranges: list[list[str]] = []
+    for value in parsed:
+        if not ranges:
+            ranges.append([value])
+            continue
+        previous = _parse_date(ranges[-1][-1])
+        current = _parse_date(value)
+        if previous is not None and current is not None and (current.date() - previous.date()).days == 1:
+            ranges[-1].append(value)
+        else:
+            ranges.append([value])
+    # Fetch newest gaps first.  Even if a deep historical backfill hits the
+    # pagination cap, today's and yesterday's intelligence remains available.
+    return list(reversed(ranges))
+
+
 def ensure_knowledge_planet_upstream_synced_for_window(
     end_date: str,
     look_back_days: int,
@@ -909,31 +950,28 @@ def ensure_knowledge_planet_upstream_synced_for_window(
             else:
                 refresh_dates.append(sync_date)
         if refresh_dates:
-            # ``knowledge_planet_context_sync_max_pages`` is a per-day budget.
-            # A missing multi-day gap needs a proportionally larger scan to
-            # reach the oldest unsynced date; already stamped dates are not
-            # included in ``refresh_dates``.
-            effective_max_pages = max_pages
-            if max_pages is not None:
-                configured_cap = int(
-                    get_config().get("knowledge_planet_auto_sync_max_pages", 600)
-                    or 600
-                )
-                effective_max_pages = min(
-                    configured_cap,
-                    max(1, int(max_pages)) * len(refresh_dates),
-                )
-            batch_status = _sync_knowledge_planet_range(
-                min(refresh_dates),
-                max(refresh_dates),
-                refresh_dates,
-                progress=progress,
-                max_pages=effective_max_pages,
-                max_image_downloads=max_image_downloads,
-                max_file_downloads=max_file_downloads,
+            configured_cap = int(
+                get_config().get("knowledge_planet_auto_sync_max_pages", 600)
+                or 600
             )
-            for sync_date in refresh_dates:
-                statuses[sync_date] = batch_status
+            for date_range in _contiguous_date_ranges(refresh_dates):
+                effective_max_pages = max_pages
+                if max_pages is not None:
+                    effective_max_pages = min(
+                        configured_cap,
+                        max(1, int(max_pages)) * len(date_range),
+                    )
+                batch_status = _sync_knowledge_planet_range(
+                    date_range[0],
+                    date_range[-1],
+                    date_range,
+                    progress=progress,
+                    max_pages=effective_max_pages,
+                    max_image_downloads=max_image_downloads,
+                    max_file_downloads=max_file_downloads,
+                )
+                for sync_date in date_range:
+                    statuses[sync_date] = batch_status
 
     parts = [f"{sync_date}={statuses[sync_date]}" for sync_date in dates]
     if import_local and not os.getenv("PYTEST_CURRENT_TEST"):
@@ -1376,7 +1414,30 @@ def _compact_text(text: str, max_chars: int) -> str:
 
 def _strip_zsxq_metadata(text: str) -> str:
     cleaned = re.sub(r"<e\b[^>]*?/?>", " ", text or "", flags=re.IGNORECASE)
-    cleaned = re.sub(r"\b(?:source|group_id|group_name|topic_id|author|published_at):\s*[^\n\r]+", " ", cleaned)
+    # Metadata is often serialized inline before the actual topic body.  Never
+    # delete the rest of the line: doing so reduced useful full-text channel
+    # checks to a title plus ellipsis.
+    cleaned = re.sub(r"\bsource:\s*zsxq\b", " ", cleaned, flags=re.IGNORECASE)
+    cleaned = re.sub(r"\bgroup_id:\s*\d+", " ", cleaned, flags=re.IGNORECASE)
+    cleaned = re.sub(r"\btopic_id:\s*\d+", " ", cleaned, flags=re.IGNORECASE)
+    cleaned = re.sub(
+        r"\bgroup_name:\s*.*?(?=(?:topic_id|author|published_at):)",
+        " ",
+        cleaned,
+        flags=re.IGNORECASE,
+    )
+    cleaned = re.sub(
+        r"\bauthor:\s*.*?(?=published_at:)",
+        " ",
+        cleaned,
+        flags=re.IGNORECASE,
+    )
+    cleaned = re.sub(
+        r"\bpublished_at:\s*\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:?\d{2})?",
+        " ",
+        cleaned,
+        flags=re.IGNORECASE,
+    )
     cleaned = re.sub(r"\bfile_id=\d+\b", " ", cleaned)
     cleaned = re.sub(r"\bFiles:\s*", " ", cleaned, flags=re.IGNORECASE)
     cleaned = re.sub(r"\s+-\s+", "；", cleaned)
@@ -1386,8 +1447,6 @@ def _strip_zsxq_metadata(text: str) -> str:
 
 def _clean_report_snippet(text: str, max_chars: int = 120) -> str:
     cleaned = _strip_zsxq_metadata(text)
-    cleaned = re.sub(r"\s+source:\s*zsxq\b.*", "", cleaned, flags=re.IGNORECASE | re.DOTALL)
-    cleaned = re.sub(r"\b(?:group_id|group_name|topic_id|author|published_at):\s*\S+", "", cleaned)
     cleaned = cleaned.replace("#", "").strip(" -:：")
     return _compact_text(cleaned, max_chars)
 
@@ -6425,6 +6484,252 @@ def _kp_required_outcome(decision_role: str) -> str:
     return "verification-calendar item or rejection reason"
 
 
+_BROKER_ALIASES: tuple[tuple[str, tuple[str, ...]], ...] = (
+    ("高盛", ("高盛", "Goldman Sachs")),
+    ("花旗", ("花旗", "Citigroup", "Citi Research")),
+    ("摩根士丹利", ("摩根士丹利", "Morgan Stanley")),
+    ("摩根大通", ("摩根大通", "JPMorgan")),
+    ("瑞银", ("瑞银", "UBS")),
+    ("中信证券", ("中信证券",)),
+    ("中信建投", ("中信建投", "中信建投证券")),
+    ("国泰海通", ("国泰海通", "国泰君安", "海通证券")),
+    ("华泰证券", ("华泰证券", "华泰研究")),
+    ("中金公司", ("中金公司", "中金研究")),
+    ("招商证券", ("招商证券", "招商研究")),
+    ("广发证券", ("广发证券", "广发研究")),
+    ("申万宏源", ("申万宏源", "申万研究")),
+    ("国金证券", ("国金证券", "国金研究")),
+    ("天风证券", ("天风证券", "天风研究")),
+    ("中泰证券", ("中泰证券", "中泰研究")),
+    ("东吴证券", ("东吴证券", "东吴研究")),
+    ("民生证券", ("民生证券", "民生研究")),
+    ("浙商证券", ("浙商证券", "浙商研究")),
+    ("兴业证券", ("兴业证券", "兴证研究")),
+    ("长江证券", ("长江证券", "长江研究")),
+    ("东方证券", ("东方证券", "东方研究")),
+    ("方正证券", ("方正证券", "方正研究")),
+    ("光大证券", ("光大证券", "光大研究")),
+)
+
+
+def _infer_sell_side_institution(text: str) -> str:
+    for canonical, aliases in _BROKER_ALIASES:
+        if any(alias in text for alias in aliases):
+            return canonical
+    bracket = re.search(r"[【\[]([^】\]]{2,18})(?:研究|证券|团队|电新|机械|汽车|农业)?[】\]]", text)
+    if bracket and any(token in bracket.group(1) for token in ("证券", "研究", "中信", "国金", "天风", "中泰")):
+        return bracket.group(1)[:20]
+    return "机构未识别"
+
+
+def _sell_side_fact_sentences(
+    text: str,
+    *,
+    valuation: bool,
+    target_terms: tuple[str, ...] = (),
+    title_is_targeted: bool = False,
+) -> list[str]:
+    forecast_terms = ("预计", "预测", "盈利预测", "归母净利润", "EPS", "每股收益", "收入", "营收")
+    valuation_terms = ("目标价", "估值", "PE", "P/E", "PB", "P/B", "EV/EBITDA", "DCF", "SOTP", "市盈率", "市净率")
+    required = valuation_terms if valuation else forecast_terms
+    rows: list[str] = []
+    for sentence in re.split(r"[。；;\n]+", _strip_zsxq_metadata(text)):
+        compact = re.sub(r"\s+", " ", sentence).strip()
+        if len(compact) < 8:
+            continue
+        if not valuation and not re.search(r"\d", compact):
+            continue
+        if not any(term.lower() in compact.lower() for term in required):
+            continue
+        if target_terms and not title_is_targeted and not any(
+            _term_in_text(term, compact) for term in target_terms
+        ):
+            continue
+        rows.append(_compact_text(compact, 260))
+        if len(rows) >= 3:
+            break
+    return rows
+
+
+def _rating_signal(text: str) -> str:
+    matches = re.findall(
+        r"(?:评级|维持|上调至|下调至|首次覆盖.{0,6})[\s：:‘’“”\"']*"
+        r"(买入|增持|推荐|强烈推荐|中性|减持|卖出|优于大市|跑赢行业)",
+        text,
+    )
+    if matches:
+        return matches[-1]
+    if "重点推荐" in text or "持续推荐" in text:
+        return "推荐措辞（非标准评级）"
+    return "未披露"
+
+
+def _normalized_sell_side_points(
+    forecast_facts: str,
+    valuation_facts: str,
+    rating: str,
+) -> dict[str, str]:
+    text = f"{forecast_facts}；{valuation_facts}"
+    points: dict[str, str] = {}
+    metric_pattern = re.compile(
+        r"(?P<year>20\d{2})\s*E?.{0,12}?"
+        r"(?P<metric>EPS|每股收益|归母净利润|净利润|营业收入|营收|收入)"
+        r".{0,10}?(?P<value>-?\d+(?:\.\d+)?)\s*(?P<unit>亿元|亿|万元|元)?",
+        re.I,
+    )
+    for match in metric_pattern.finditer(text):
+        metric = match.group("metric").upper()
+        if metric == "每股收益":
+            metric = "EPS"
+        points[f"{match.group('year')}E_{metric}"] = (
+            f"{match.group('value')}{match.group('unit') or ''}"
+        )
+    multiple_pattern = re.compile(
+        r"(?P<year>20\d{2})\s*E?.{0,12}?"
+        r"(?P<method>PE|P/E|PB|P/B|EV/EBITDA)"
+        r".{0,8}?(?P<value>\d+(?:\.\d+)?)\s*(?:倍|x)?",
+        re.I,
+    )
+    for match in multiple_pattern.finditer(text):
+        method = match.group("method").upper().replace("/", "")
+        points[f"{match.group('year')}E_{method}"] = f"{match.group('value')}x"
+    target_match = re.search(
+        r"目标价.{0,10}?(\d+(?:\.\d+)?)\s*元", text, re.I
+    )
+    if target_match:
+        points["target_price"] = f"{target_match.group(1)}元"
+    if rating and rating != "未披露":
+        points["rating"] = rating
+    return points
+
+
+def _freshness_label(published_at: str, as_of_date: str) -> str:
+    published = _parse_date(published_at)
+    as_of = _parse_date(as_of_date)
+    if published is None or as_of is None:
+        return "日期不完整"
+    age = max(0, (as_of.date() - published.date()).days)
+    if age <= 7:
+        return f"高时效/{age}天"
+    if age <= 30:
+        return f"有效窗口/{age}天"
+    return f"陈旧/{age}天"
+
+
+def _build_sell_side_text_intelligence(
+    *,
+    items: list[KpItem],
+    evidence_rows: list[KnowledgePlanetEvidence],
+    as_of_date: str,
+    primary_terms: list[str],
+    max_rows: int = 10,
+) -> list[SellSideTextIntelligence]:
+    evidence_by_item: dict[int, list[str]] = defaultdict(list)
+    for row in evidence_rows:
+        match = re.fullmatch(r"stream_item:(\d+)", row.source)
+        if match:
+            evidence_by_item[int(match.group(1))].append(row.evidence_id)
+
+    candidates: list[tuple[KpItem, str, str, str, str]] = []
+    for item in items:
+        full_text = _clean_report_snippet(f"{item.title}\n{item.text or item.summary}", 5000)
+        source_type = infer_private_source_type(full_text, item.source_type)
+        title_is_targeted = any(_term_in_text(term, item.title) for term in primary_terms)
+        target_terms = tuple(primary_terms)
+        forecasts = _sell_side_fact_sentences(
+            full_text,
+            valuation=False,
+            target_terms=target_terms,
+            title_is_targeted=title_is_targeted,
+        )
+        valuations = _sell_side_fact_sentences(
+            full_text,
+            valuation=True,
+            target_terms=target_terms,
+            title_is_targeted=title_is_targeted,
+        )
+        rating = _rating_signal(full_text)
+        if not title_is_targeted and not forecasts and not valuations:
+            continue
+        if source_type == "report_list_post" and not forecasts and not valuations:
+            continue
+        if not forecasts and not valuations and rating == "未披露" and source_type not in SELL_SIDE_TYPES:
+            continue
+        institution = _infer_sell_side_institution(full_text)
+        candidates.append((item, institution, " / ".join(forecasts), " / ".join(valuations), rating))
+
+    # Oldest-to-newest comparison preserves the actual revision path for each
+    # institution instead of presenting every post as an independent opinion.
+    candidates.sort(key=lambda row: (row[0].published_at, row[0].row_id), reverse=True)
+    deduplicated: list[tuple[KpItem, str, str, str, str]] = []
+    seen_observations: set[tuple[str, str]] = set()
+    for candidate in candidates:
+        _item, institution, forecasts, valuations, rating = candidate
+        fingerprint = re.sub(
+            r"\s+",
+            "",
+            "|".join((forecasts, valuations, rating)),
+        ).lower()
+        key = (institution, fingerprint)
+        if fingerprint and key in seen_observations:
+            continue
+        if fingerprint:
+            seen_observations.add(key)
+        deduplicated.append(candidate)
+    candidates = sorted(
+        deduplicated,
+        key=lambda row: (row[0].published_at, row[0].row_id),
+    )
+    previous_by_institution: dict[str, str] = {}
+    previous_points_by_institution: dict[str, dict[str, str]] = {}
+    built: list[SellSideTextIntelligence] = []
+    for item, institution, forecasts, valuations, rating in candidates:
+        fingerprint = " | ".join(part for part in (forecasts, valuations, rating) if part and part != "未披露")
+        previous = previous_by_institution.get(institution)
+        points = _normalized_sell_side_points(forecasts, valuations, rating)
+        previous_points = previous_points_by_institution.get(institution, {})
+        point_changes = [
+            f"{key} {previous_points[key]}->{value}"
+            for key, value in points.items()
+            if key in previous_points and previous_points[key] != value
+        ]
+        if point_changes:
+            revision = "；".join(point_changes)
+        elif previous and fingerprint and fingerprint != previous:
+            revision = "较前次口径发生变化；尚无可同口径比较的标准化数值"
+        elif previous and fingerprint == previous:
+            revision = "与前次可识别口径一致/重复传播"
+        else:
+            revision = "窗口内首次识别，暂无同机构前序可比"
+        if fingerprint:
+            previous_by_institution[institution] = fingerprint
+        if points:
+            previous_points_by_institution[institution] = points
+        built.append(
+            SellSideTextIntelligence(
+                intelligence_id="",
+                evidence_ids=tuple(evidence_by_item.get(item.row_id, [])),
+                published_at=item.published_at[:16],
+                institution=institution,
+                analyst_or_author=item.author or "未识别",
+                freshness=_freshness_label(item.published_at, as_of_date),
+                rating_signal=rating,
+                forecast_facts=forecasts or "未提取到带期间的明确盈利预测",
+                valuation_facts=valuations or "未提取到目标价/估值方法与倍数",
+                normalized_points="；".join(f"{key}={value}" for key, value in points.items()) or "无可标准化数值",
+                revision_signal=revision,
+                source_quote=_clean_report_snippet(item.text or item.summary or item.title, 420),
+            )
+        )
+    built.sort(key=lambda row: row.published_at, reverse=True)
+    return [
+        SellSideTextIntelligence(
+            **{**row.__dict__, "intelligence_id": f"KSI{index:02d}"}
+        )
+        for index, row in enumerate(built[:max_rows], start=1)
+    ]
+
+
 def _build_kp_evidence_ledger(
     *,
     items: list[KpItem],
@@ -6434,13 +6739,50 @@ def _build_kp_evidence_ledger(
     rows: list[KnowledgePlanetEvidence] = []
     seen: set[str] = set()
 
+    def _dedup_key(text: str) -> str:
+        normalized = re.sub(r"[^a-z0-9\u4e00-\u9fff]+", "", text.lower())
+        return normalized[:320]
+
+    # Prefer complete matched topic text.  Preprocessed event summaries remain
+    # useful fallback records, but must not consume the evidence budget before
+    # the full company-specific channel note is available.
+    for item in items:
+        text = f"{item.title}\n{item.text or item.summary}"
+        source_type = infer_private_source_type(text, item.source_type)
+        if source_type not in INFORMATION_RICH_TYPES and source_type not in SELL_SIDE_TYPES:
+            continue
+        evidence = _clean_report_snippet(item.text or item.summary or item.title, 1200)
+        title = _clean_report_snippet(item.title, 140)
+        if title and title not in evidence:
+            evidence = f"{title}｜{evidence}"
+        key = _dedup_key(evidence)
+        if not evidence or not key or any(key.startswith(existing[:120]) or existing.startswith(key[:120]) for existing in seen):
+            continue
+        seen.add(key)
+        rows.append(
+            KnowledgePlanetEvidence(
+                evidence_id=f"KPE{len(rows) + 1:02d}",
+                published_at=item.published_at[:16],
+                source=f"stream_item:{item.row_id}",
+                source_type=source_type,
+                credibility=infer_credibility(source_type),
+                decision_role=(decision_role := _kp_decision_role(source_type, evidence)),
+                evidence=evidence,
+                verification="cross-check with filings/Tushare/price-volume/announcements before hard use",
+                model_variable=infer_model_variable(evidence),
+                required_outcome=_kp_required_outcome(decision_role),
+            )
+        )
+        if len(rows) >= max_rows:
+            return rows
+
     for row in preprocessed_snapshot.get("events", []):
         source_type = str(row["source_type"] or "")
         if source_type not in INFORMATION_RICH_TYPES and source_type not in SELL_SIDE_TYPES:
             continue
-        evidence = _compact_text(str(row["summary"] or row["title"] or ""), 150)
-        key = f"event:{source_type}:{evidence.lower()}"
-        if not evidence or key in seen:
+        evidence = _clean_report_snippet(str(row["summary"] or row["title"] or ""), 500)
+        key = _dedup_key(evidence)
+        if not evidence or not key or any(key.startswith(existing[:120]) or existing.startswith(key[:120]) for existing in seen):
             continue
         seen.add(key)
         rows.append(
@@ -6462,33 +6804,6 @@ def _build_kp_evidence_ledger(
         )
         if len(rows) >= max_rows:
             return rows
-
-    for item in items:
-        text = f"{item.title}\n{item.text}"
-        source_type = infer_private_source_type(text, item.source_type)
-        if source_type not in INFORMATION_RICH_TYPES and source_type not in SELL_SIDE_TYPES:
-            continue
-        evidence = _compact_text(item.summary or item.text or item.title, 150)
-        key = f"item:{item.row_id}:{evidence.lower()}"
-        if not evidence or key in seen:
-            continue
-        seen.add(key)
-        rows.append(
-            KnowledgePlanetEvidence(
-                evidence_id=f"KPE{len(rows) + 1:02d}",
-                published_at=item.published_at[:16],
-                source="stream_item",
-                source_type=source_type,
-                credibility=infer_credibility(source_type),
-                decision_role=(decision_role := _kp_decision_role(source_type, evidence)),
-                evidence=evidence,
-                verification="cross-check with filings/Tushare/price-volume/announcements before hard use",
-                model_variable=infer_model_variable(evidence),
-                required_outcome=_kp_required_outcome(decision_role),
-            )
-        )
-        if len(rows) >= max_rows:
-            break
 
     return rows
 
@@ -6531,6 +6846,7 @@ def _hog_kpi_evidence_lines(evidence_rows: list[KnowledgePlanetEvidence]) -> lis
 def _stock_fusion_pack_lines(
     *,
     ticker: str,
+    as_of_date: str = "",
     preprocessed_snapshot: dict[str, list[sqlite3.Row]],
     items: list[KpItem],
     reports: list[KpReport],
@@ -6620,6 +6936,38 @@ def _stock_fusion_pack_lines(
             )
     else:
         lines.append("- No company-specific high-information private/proxy evidence survived recall filtering.")
+
+    sell_side_rows = _build_sell_side_text_intelligence(
+        items=items,
+        evidence_rows=evidence_rows,
+        as_of_date=as_of_date,
+        primary_terms=primary_terms,
+    )
+    lines.extend(["", "### Sell-Side Forecast, Valuation And Revision Ledger"])
+    if sell_side_rows:
+        lines.extend(
+            [
+                "| intelligence_id | KPE ids | date | institution | analyst/author | freshness | rating | forecast facts | valuation facts | normalized points | revision signal | source quote |",
+                "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
+            ]
+        )
+        for row in sell_side_rows:
+            lines.append(
+                f"| {row.intelligence_id} | {_md_cell(', '.join(row.evidence_ids) or 'none')} | "
+                f"{_md_cell(row.published_at)} | {_md_cell(row.institution)} | "
+                f"{_md_cell(row.analyst_or_author)} | {_md_cell(row.freshness)} | "
+                f"{_md_cell(row.rating_signal)} | {_md_cell(row.forecast_facts)} | "
+                f"{_md_cell(row.valuation_facts)} | {_md_cell(row.normalized_points)} | "
+                f"{_md_cell(row.revision_signal)} | "
+                f"{_md_cell(row.source_quote)} |"
+            )
+        lines.append(
+            "- KSI rows are individual sell-side observations, not consensus. Compare institutions and revisions before changing the TradingAgents model."
+        )
+    else:
+        lines.append(
+            "- No company-specific text post exposed an identifiable forecast, rating, target price or valuation assumption."
+        )
 
     if is_hog_breeding_text(ticker, *primary_terms, *expanded_terms):
         lines.extend(_hog_kpi_evidence_lines(evidence_rows))
@@ -6822,6 +7170,7 @@ def get_knowledge_planet_context(
     lines.extend(
         _stock_fusion_pack_lines(
             ticker=ticker,
+            as_of_date=curr_date,
             preprocessed_snapshot=preprocessed_snapshot,
             items=items,
             reports=reports,
@@ -6877,7 +7226,7 @@ def get_knowledge_planet_context(
             source_type = infer_private_source_type(text, item.source_type)
             lines.extend(
                 [
-                    f"- **{_compact_text(item.title, 90)}** ({item.published_at[:16]}, {source_type}): {_compact_text(item.summary or item.text, 320)}",
+                    f"- **{_clean_report_snippet(item.title, 90)}** ({item.published_at[:16]}, {source_type}): {_clean_report_snippet(item.text or item.summary, 900)}",
                 ]
             )
         lines.append("")

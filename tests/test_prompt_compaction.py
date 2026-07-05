@@ -128,3 +128,43 @@ def test_compaction_preserves_growth_sustainability_section():
     assert "Growth Sustainability & Ramp Conditions" in compacted
     assert "core_revenue_and_profit_engine" in compacted
     assert "falsify if revenue decouples" in compacted
+
+
+def test_compaction_preserves_full_selected_kpe_claim_slice():
+    kpe_claim = (
+        "| KPE01 | channel_check | B_private_edge | "
+        + ("欧洲储能项目时长和订单结构发生变化，" * 18)
+        + "关键结论是八小时项目占比提升，需要用合同负债和回款交叉验证 |"
+    )
+    text = "\n".join(
+        ["# Knowledge Planet", *[f"noise {i} " + "x" * 100 for i in range(80)], kpe_claim]
+    )
+
+    compacted = compact_for_prompt(
+        text,
+        label="knowledge_planet_context",
+        profile="portfolio",
+        max_chars=1800,
+    )
+
+    assert "关键结论是八小时项目占比提升" in compacted
+    assert "合同负债和回款交叉验证" in compacted
+
+
+def test_compaction_preserves_ksi_forecast_valuation_and_revision_fields():
+    ksi_row = (
+        "| KSI01 | KPE01 | 2026-07-01 | Broker A | analyst | high freshness | Buy | "
+        + ("2026E EPS 3.20 and 2027E EPS 3.85; " * 18)
+        + "| 2026E PE 25x and target price 80 | EPS raised 5% versus prior | source quote |"
+    )
+    text = "\n".join(["# Knowledge Planet", *[f"noise {i} " + "x" * 100 for i in range(80)], ksi_row])
+
+    compacted = compact_for_prompt(
+        text,
+        label="knowledge_planet_context",
+        profile="portfolio",
+        max_chars=1800,
+    )
+
+    assert "target price 80" in compacted
+    assert "EPS raised 5% versus prior" in compacted

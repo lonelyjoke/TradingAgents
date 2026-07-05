@@ -8,6 +8,7 @@ from tradingagents.evaluation.research_validator import (
     audit_decision_integrity,
     audit_handoff_numeric_consistency,
     audit_pm_unit_scale_arithmetic,
+    audit_report_redundancy,
     audit_structured_research_usage,
     render_post_generation_audit,
     _extract_rating,
@@ -93,7 +94,6 @@ def test_audit_decision_depth_flags_missing_buy_side_sections():
     assert "thesis_financial_bridge" in sections
     assert "moat_evidence_scorecard" in sections
     assert "valuation_closure" in sections
-    assert "handoff_integrity_audit" in sections
 
 
 def test_audit_decision_depth_flags_shallow_medical_device_gate():
@@ -366,6 +366,20 @@ def test_period_semantics_blocks_reused_q2_and_h1_profit_threshold():
     assert "q2_h1_period_semantics" in sections
 
 
+def test_profit_pe_bridge_accepts_explicit_numeric_share_count_elsewhere():
+    decision = (
+        "| 指标 | 2026E | 2027E |\n"
+        "| --- | ---: | ---: |\n"
+        "| EPS | 4.58 | 5.55 |\n\n"
+        "基准情景：2027E归母净利润115亿×18倍PE=2070亿元，"
+        "约100元/股（20.73亿股）。"
+    )
+
+    sections = {issue.section for issue in audit_decision_integrity(decision)}
+
+    assert "profit_pe_per_share_bridge" not in sections
+
+
 def test_pm_unit_scale_audit_blocks_tenfold_sensitivity_and_scenario(tmp_path):
     portfolio_dir = tmp_path / "5_portfolio"
     portfolio_dir.mkdir()
@@ -401,6 +415,14 @@ def test_pm_unit_scale_audit_blocks_tenfold_sensitivity_and_scenario(tmp_path):
     assert [issue.section for issue in issues] == ["pm_unit_scale_arithmetic"]
     assert "95" in issues[0].issue
     assert "9900" in issues[0].issue
+
+
+def test_report_redundancy_flags_same_substantive_sentence_three_times():
+    sentence = "合同负债转化必须同时带来收入确认、毛利兑现和经营现金回收，否则不能证明订单质量改善"
+
+    issues = audit_report_redundancy("。".join([sentence, sentence, sentence]))
+
+    assert [issue.section for issue in issues] == ["report_redundancy"]
 
 
 def test_integrity_audit_recalculates_forecast_and_valuation_ranges():
@@ -547,7 +569,7 @@ def test_handoff_numeric_audit_blocks_silent_pm_change(tmp_path):
     )
 
 
-def test_post_generation_audit_blocks_missing_pm_analytical_spine(tmp_path):
+def test_post_generation_audit_marks_missing_pm_analytical_spine_review_only(tmp_path):
     portfolio_dir = tmp_path / "5_portfolio"
     portfolio_dir.mkdir()
     (portfolio_dir / "decision.md").write_text(
@@ -572,7 +594,7 @@ def test_post_generation_audit_blocks_missing_pm_analytical_spine(tmp_path):
     audit = render_post_generation_audit(tmp_path)
 
     assert "pm_analytical_spine" in audit
-    assert "blocks formal publication" in audit
+    assert "pm_analytical_spine | error | review only" in audit
 
 
 def test_structured_segment_usage_accepts_aliases_and_does_not_treat_all_unknown_weights_as_material(tmp_path):
@@ -612,6 +634,34 @@ def test_structured_segment_usage_accepts_aliases_and_does_not_treat_all_unknown
     sections = {issue.section for issue in issues}
 
     assert "structured_segment_usage" not in sections
+
+
+def test_structured_audit_flags_unused_sell_side_expectation_observation(tmp_path):
+    context_dir = tmp_path / "0_context"
+    portfolio_dir = tmp_path / "5_portfolio"
+    context_dir.mkdir()
+    portfolio_dir.mkdir()
+    bundle = {
+        "preprocessing_mode": "llm_semantic_plus_deterministic_validation",
+        "preprocessing_notes": [],
+        "deterministic_evidence": [],
+        "underwriting_packet": {},
+        "segments": [],
+        "kpe_impacts": [],
+        "sell_side_intelligence": [{"intelligence_id": "KSI01"}],
+        "conflicts": [],
+    }
+    (context_dir / "structured_research.json").write_text(
+        json.dumps(bundle, ensure_ascii=False), encoding="utf-8"
+    )
+    (portfolio_dir / "canonical_decision.json").write_text(
+        json.dumps({"sell_side_expectation_matrix": []}, ensure_ascii=False),
+        encoding="utf-8",
+    )
+
+    issues = audit_structured_research_usage(tmp_path, "decision")
+
+    assert "sell_side_expectation_usage" in {issue.section for issue in issues}
 
 
 def test_post_generation_integrity_recomputes_scenario_value():

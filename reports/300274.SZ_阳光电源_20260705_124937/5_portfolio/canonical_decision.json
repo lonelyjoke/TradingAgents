@@ -1,0 +1,1067 @@
+{
+  "rating": "Overweight",
+  "rating_posture": "Staged/Cautious Overweight（待中方验证，分两阶段建仓）",
+  "research_readiness": "partial",
+  "one_line_thesis": "储能系统单位净利润从0.11元/Wh温和修复至0.13元/Wh，叠加出货量增至85GWh，驱动2027E归属净利润恢复至约180亿元；122亿合同负债提供真实需求证据，AIDC为免费看涨期权，当前126元定价未充分反映修复路径。",
+  "research_questions": [
+    "储能单位利润能修复至0.13-0.15元/Wh吗？",
+    "122亿合同负债是真实需求还是抢装？",
+    "SST/AIDC商业化何时产生利润？",
+    "美国政策尾部风险可控吗？",
+    "相对德业股份，阳光是最优选择吗？"
+  ],
+  "question_verdicts": [
+    {
+      "question": "储能单位利润能修复至0.13-0.15元/Wh吗？",
+      "why_decisive": "储能是最大利润引擎，单位净利变化直接决定2027E净利润弹性和估值中枢。",
+      "conclusion": "接受0.13元/Wh、85GWh基准，但置信度下调至中等。欧洲高毛利区占比提升提供结构性支撑，但碳酸锂成本传导空间有限，且Q1出货量持平增加不确定性。",
+      "evidence_used": [
+        "Q1毛利率环比改善至30%（公开财报EV042）",
+        "合同负债122亿元反映在手订单强劲（公开财报EV043）",
+        "公司指引欧洲及AIDC长时储能需求（渠道信息KPE04）"
+      ],
+      "strongest_counterevidence": "Q1储能出货量同比基本持平，经营现金流/净利润降至0.53倍，反映盈利质量恶化。",
+      "model_or_valuation_effect": "2027E归属净利润从185亿调降至180亿，EPS从8.92降至8.68；公允价值从约188降至184.7（概率加权），每股核心价值约191元（基准PE 20x）。",
+      "confidence": "medium",
+      "next_verification": "2026年8月底Q2财报：储能出货量恢复正增长、毛利率稳定在30%以上，系单位净利修复的早期确认信号。"
+    },
+    {
+      "question": "122亿合同负债是真实需求还是抢装？",
+      "why_decisive": "合同负债是未来收入转化的硬约束，其真实性和可持续性直接影响2026-2027年收入预测的可靠性。",
+      "conclusion": "大概率真实，但加重前置风险权重。抢装（美国客户提前下单）是已知因素，但其规模被保守派过度夸大，多元化的全球订单（非仅美国）推动合同负债增长。",
+      "evidence_used": [
+        "合同负债Q1末达122亿元，同比大幅增长（公开财报EV043）",
+        "预付款项40亿元，与合同负债同步增长（公开财报EV018）",
+        "欧洲及新兴市场需求数据（行业数据KPE04）"
+      ],
+      "strongest_counterevidence": "部分美国订单可能因预期关税而提前锁定，若政策缓和或豁免，该部分合同可能被取消或延迟。",
+      "model_or_valuation_effect": "维持2026E营收926亿、2027E营收1120亿的基准，但设定了Q2营收环比增速<20%的证伪阈值，若触发则需下调2027E营收至1000亿以下。",
+      "confidence": "medium",
+      "next_verification": "2026年8月底Q2财报：①营收环比增长>20% ②合同负债不再下降 ③按区域划分的订单披露（如有）。"
+    },
+    {
+      "question": "SST/AIDC商业化何时产生利润？",
+      "why_decisive": "AIDC是未定价的真实期权，其商业化进展可带来纯增量估值，若失败则期权价值归零但不影响核心估值。",
+      "conclusion": "定义为情景期权，价值100亿。SST虽有技术壁垒和客户沟通，但零收入零利润，作为风险资本可承受的真实期权处理。",
+      "evidence_used": [
+        "公司宣布7月9日SST产品发布会（公开信息KPE04）",
+        "谷歌/Meta认证数百MWh backlog的渠道信息（渠道检查KPE06）",
+        "AIDC储能需求长时化趋势（行业报告KPE04）"
+      ],
+      "strongest_counterevidence": "无任何公告的客户合同或收入指引，SST技术成熟度及价格竞争力未知。",
+      "model_or_valuation_effect": "AIDC期权价值从激进的625亿下调至100亿元（约4.8元/股），不纳入核心盈利预测，仅作为SOTP中的期权加项。",
+      "confidence": "low",
+      "next_verification": "2026年7月9日SST发布会：是否有实质性客户意向书或框架协议。"
+    },
+    {
+      "question": "美国政策尾部风险可控吗？",
+      "why_decisive": "美国是重要市场，全面禁令可能导致利润归零，而安全港条款至2028H1提供了时间窗口。",
+      "conclusion": "15%禁令概率，尾部可控。现有安全港至2028H1提供缓冲，FCC政策信号尚不明确，但公司已通过非美国市场多元化降低敞口。",
+      "evidence_used": [
+        "FCC安全港至2028H1的公开政策文件（KPE05）",
+        "公司美国收入占比约15-20%（估算）",
+        "Q1美国订单未显著下滑（渠道信息KPE05）"
+      ],
+      "strongest_counterevidence": "两党对华强硬共识下，2028年后禁令风险可能升高，且限制可能提前。",
+      "model_or_valuation_effect": "将美国禁令概率设为15%，在估值折价中体现，但不完全剔除美国利润。",
+      "confidence": "medium",
+      "next_verification": "2026年Q3美国储能订单数据及FCC政策进展。"
+    },
+    {
+      "question": "相对德业股份，阳光是最优选择吗？",
+      "why_decisive": "组合配置需在质量、成长、估值之间权衡，比较决定最优风险调整后收益。",
+      "conclusion": "不改变评级，阳光与德业构成互补。德业高盈利质量（ROA 20%）但估值昂贵（PE 33.6x）；阳光低估值、高弹性，附带AIDC期权，适合进攻性仓位。",
+      "evidence_used": [
+        "德业最新财报及估值数据（peer context）",
+        "阳光与德业业务对比分析"
+      ],
+      "strongest_counterevidence": "德业在小微逆变器及储能赛道展现出更强的盈利能力和现金流质量，防守性更优。",
+      "model_or_valuation_effect": "不直接影响阳光电源的盈利预测或目标价，但在PM层面将阳光定位为核心进攻仓位，同时保持对德业的关注。",
+      "confidence": "high",
+      "next_verification": "持续跟踪两家公司后续季报的相对表现。"
+    }
+  ],
+  "forecast_takeaways": [
+    {
+      "takeaway": "2026年全年业绩将前低后高，季节调整后归属净利润约132亿元，远高于市场基于Q1年化隐含的92亿元。",
+      "evidence_anchor": "Q1归属净利润22.9亿，历史Q1占全年利润比例中位17.5%，合同负债122亿支撑后续交付。",
+      "financial_implication": "2026E EPS 6.37元，当前股价对应约19.8倍PE，估值合理；若Q2转化成功，全年利润有望靠近130-135亿区间。",
+      "confidence_and_risk": "中等置信度，风险在于Q2交付不及预期或合同负债因取消而下降，导致EPS低于120亿元。"
+    },
+    {
+      "takeaway": "储能单位净利温和修复，推动2027E归属净利润至约180亿元，核心PE约20倍，具备估值吸引力。",
+      "evidence_anchor": "欧洲需求上修、Q1毛利率环比改善至30%，以及规模效应；单位净利润谨慎假设为0.13元/Wh（低于牛方0.15）。",
+      "financial_implication": "2027E EPS 8.68元，目标PE 20倍对应合理市值约3600亿元，较当前市值有约38%上行空间；若叠加AIDC期权100亿，空间扩大至约41%。",
+      "confidence_and_risk": "中等偏低置信度，取决于碳酸锂价格、竞争格局及美国政策。"
+    },
+    {
+      "takeaway": "AIDC电源业务提供有价值的实物期权，目前市场未给予充分定价，商业化验证仍欠缺，仅适合作为情景价值。",
+      "evidence_anchor": "SST发布在即，AIDC储能有数百MWh订单，技术认证获得谷歌、Meta等；但尚无营收。",
+      "financial_implication": "期权价值约100亿元（4.8元/股），可提升整体估值，但不宜计入核心PE。",
+      "confidence_and_risk": "低置信度，商业化失败将使期权价值归零，但现金消耗风险有限。"
+    }
+  ],
+  "forecast_assumptions": [
+    {
+      "parameter": "储能出货量 (GWh)",
+      "affected_business": "储能系统 (ESS)",
+      "historical_anchor": "2025年估计50-60GWh；Q1 2026同比持平 (EV042)",
+      "evidence_status": "analyst_estimate",
+      "base_case": "2026E 70 GWh; 2027E 85 GWh; 2028E 100 GWh",
+      "bull_case": "2027E 95 GWh (欧洲和数据中心需求超预期)",
+      "bear_case": "2027E 65 GWh (贸易摩擦加剧或需求低于预期)",
+      "rationale_and_evidence": "合同负债增长、欧洲CAGR上修至60%支持中高增长；渠道信息KPE04。",
+      "sensitivity": "每变动10GWh，2027E储能净利润约变动13亿元 (0.13元/Wh)，EPS影响约0.63元。",
+      "confidence": "medium",
+      "verification_gate": "2026年中报及后续季度更新储能出货量、合同负债转换。"
+    },
+    {
+      "parameter": "储能单位净利润 (元/Wh)",
+      "affected_business": "储能系统 (ESS)",
+      "historical_anchor": "Q1 2026约0.11元/Wh (EV042)，管理层目标恢复到0.15",
+      "evidence_status": "analyst_estimate",
+      "base_case": "2027E 0.13元/Wh (温和修复)",
+      "bull_case": "0.15元/Wh (成本传导顺畅，产品结构升级)",
+      "bear_case": "0.10元/Wh (竞争加剧，成本无法转嫁)",
+      "rationale_and_evidence": "欧洲高毛利区域占比提升，但成本传导在竞争激烈的区域有限；考虑碳酸锂波动及关税。",
+      "sensitivity": "每变动0.01元/Wh，2027E储能净利润约变动8.5亿元，EPS影响约0.41元。",
+      "confidence": "low",
+      "verification_gate": "2026年下半年财报毛利率趋势，投资者互动更新。"
+    },
+    {
+      "parameter": "AIDC业务利润贡献 (2028E)",
+      "affected_business": "AIDC储能及SST",
+      "historical_anchor": "未产生收入，仅认证和渠道沟通",
+      "evidence_status": "missing",
+      "base_case": "2028E零利润，仅作为期权价值",
+      "bull_case": "2028E 5-10亿利润 (AIDC储能+SST)",
+      "bear_case": "零利润，无商业化进展",
+      "rationale_and_evidence": "SST商业化进展和AIDC订单证据薄弱，仅赋予情景价值。",
+      "sensitivity": "若2028E实现5亿利润，给予30倍PE贡献150亿元市值，折现后约100亿元期权价值。",
+      "confidence": "low",
+      "verification_gate": "SST客户订单公告；AIDC储能项目中标披露。"
+    },
+    {
+      "parameter": "美国有效税率/政策风险",
+      "affected_business": "整体海外业务",
+      "historical_anchor": "当前38.4%关税，安全港项目至2028H1",
+      "evidence_status": "proxy",
+      "base_case": "美国利润维持，无新增禁令",
+      "bull_case": "政策缓和，关税部分下调",
+      "bear_case": "全面禁令，美国利润归零",
+      "rationale_and_evidence": "公司合规与本地集成努力降低风险，给予禁令概率15%。",
+      "sensitivity": "极端情形下集团利润损失约25亿元，对应2027E EPS下降约1.9元。",
+      "confidence": "medium",
+      "verification_gate": "美国FCC/IRA政策公告。"
+    }
+  ],
+  "core_theses": [
+    {
+      "rank": 1,
+      "takeaway": "储能系统单位净利润温和修复将驱动2027E利润弹性，市场定价严重不足。",
+      "decisive_question": "储能单位利润能否回升至0.13元/Wh以上？",
+      "evidence": "合同负债122亿、Q1毛利率回升至30%、欧洲需求复合增速上修至60%。",
+      "strongest_counterevidence": "Q1经营现金流/净利润降至0.53倍，出货量同比持平，显示盈利质量恶化。",
+      "financial_transmission": "单位净利从0.11→0.13元/Wh + 出货量55→85GWh → 储能净利润从 ～60亿→110亿 → 集团净利润 134.6亿(2025A) → 132亿(2026E) → 180亿(2027E) → EPS 8.68元。",
+      "market_pricing": "当前126元约为2027E PE 15.4x（基于季节调整EPS 8.2元），忽略修复溢价，隐含利润复苏有限。",
+      "falsification_gate": "2026年中报储能出货量同比下降或毛利率跌破27%，则单位净利修复逻辑失效。",
+      "verdict": "partial"
+    },
+    {
+      "rank": 2,
+      "takeaway": "122亿合同负债是未来收入的强领先指标，市场担忧的抢注因素被过度强调。",
+      "decisive_question": "合同负债的真实性和可持续性如何？",
+      "evidence": "Q1合同负债与预付款同步创历史新高，订单多元化（非仅美国）推动增长。",
+      "strongest_counterevidence": "美国客户前置订单可能因政策缓和而取消，部分增长为抢装行为。",
+      "financial_transmission": "合同负债→2026-2027年收入确定性提高，支撑2026E营收926亿、2027E 1120亿，高于市场隐含的全年约92亿利润对应收入。",
+      "market_pricing": "市场按2026E约92亿利润、PE 28.5x定价，忽略H2收入加速可能。",
+      "falsification_gate": "2026年Q2营收环比增速<20%或合同负债绝对额下降，则需下调前瞻收入。",
+      "verdict": "partial"
+    },
+    {
+      "rank": 3,
+      "takeaway": "AIDC/SST构成未定价的真实期权，收益风险不对称，少量仓位可博取超额收益。",
+      "decisive_question": "SST和AIDC储能能否在未来2年实现商业化？",
+      "evidence": "SST 7月9日发布会，谷歌/Meta认证数百MWh backlog渠道信息。",
+      "strongest_counterevidence": "零收入、零客户合同，产品成熟度及经济性未经验证。",
+      "financial_transmission": "若成功，2028E或贡献5亿净利润，30x PE=150亿增量市值，约7.2元/股；当前赋予该期权100亿价值（约4.8元/股）。",
+      "market_pricing": "市场赋予期权零价值，该期权为免费看涨。",
+      "falsification_gate": "SST发布会后3个月内无实质性客户协议，或AIDC订单未在2026H2增长。",
+      "verdict": "unproven"
+    },
+    {
+      "rank": 4,
+      "takeaway": "阳光电源当前估值显著低于其历史中枢和可比公司，一旦盈利企稳将迎来估值修复。",
+      "decisive_question": "当前PE 15.4x（2027E）是否反映了过度悲观？",
+      "evidence": "历史平均PE约20-25倍，德业股份对应33.6倍，阳光资产质量支持更高估值。",
+      "strongest_counterevidence": "利润大幅波动（2026Q1 -40%），盈利能见度低，可能导致估值折扣持续。",
+      "financial_transmission": "若储能修复逻辑验证，给予20x 2027E PE → 目标价约191元；若叠加AIDC期权，公允区间约185-191元。",
+      "market_pricing": "当前126元隐含15.4x 2027E PE，远低于目标倍数，定价包含过量的利润恶化及期权归零预期。",
+      "falsification_gate": "若2026年全年利润低于120亿（对应2027E远低于180亿），则估值修复无望。",
+      "verdict": "unproven"
+    }
+  ],
+  "segment_economics": [
+    {
+      "business_unit": "光伏逆变器",
+      "economic_role": "Mature core",
+      "disclosure_basis": "analyst_estimate",
+      "scale_and_growth": "收入约200亿+，年增速约5-8%",
+      "margin_and_cash": "毛利率30-33%，现金转换健康",
+      "driver_equation": "出货量 x ASP + 服务",
+      "valuation_treatment": "core",
+      "evidence_ids": [
+        "EV021",
+        "EV022"
+      ],
+      "missing_or_next_check": "未披露分板块收入与出货量，需定期报告确认。"
+    },
+    {
+      "business_unit": "储能系统 (ESS)",
+      "economic_role": "growth engine",
+      "disclosure_basis": "analyst_estimate",
+      "scale_and_growth": "2025E出货55-60GWh，2027E增长至85GWh",
+      "margin_and_cash": "毛利率~30%，单位净利0.11-0.13元/Wh；现金流波动大，季节性明显",
+      "driver_equation": "出货量(GWh) x 单位净利润(元/Wh)",
+      "valuation_treatment": "core",
+      "evidence_ids": [
+        "EV042",
+        "KPE04",
+        "KPE06"
+      ],
+      "missing_or_next_check": "分业务出货量、单位利润及分区域收入暂无官方披露。"
+    },
+    {
+      "business_unit": "AIDC储能与SST",
+      "economic_role": "optionality",
+      "disclosure_basis": "missing",
+      "scale_and_growth": "零收入，数百MWh backlog (渠道信息)",
+      "margin_and_cash": "未知",
+      "driver_equation": "未披露",
+      "valuation_treatment": "optionality",
+      "evidence_ids": [
+        "KPE04",
+        "KPE06"
+      ],
+      "missing_or_next_check": "缺少收入、订单合同及利润数据。"
+    },
+    {
+      "business_unit": "风能/氢能",
+      "economic_role": "asset/cash unit",
+      "disclosure_basis": "missing",
+      "scale_and_growth": "小规模，缺乏数据",
+      "margin_and_cash": "盈亏平衡或微利",
+      "driver_equation": "未披露",
+      "valuation_treatment": "excluded",
+      "evidence_ids": [
+        "EV090"
+      ],
+      "missing_or_next_check": "无具体营收和利润率披露，暂排除在核心与期权估值之外。"
+    }
+  ],
+  "industry_driver_matrix": [
+    {
+      "driver": "全球储能装机需求",
+      "current_state_and_direction": "区间震荡/底部测试，结构性增量浮现（欧洲、AIDC）",
+      "dated_evidence": "行业报告2026Q2上修欧洲3年复合增速至60%；数据中心配储需求兴起",
+      "affected_business": "储能系统 (ESS)",
+      "financial_transmission": "驱动出货量和单位利润预期，1%需求变动对应储能收入约10亿",
+      "confidence": "medium",
+      "next_verification": "2026Q2-Q3全球装机数据及公司出货指引"
+    },
+    {
+      "driver": "锂电芯及原材料成本",
+      "current_state_and_direction": "碳酸锂价格低位震荡，向下空间有限",
+      "dated_evidence": "SMM 2026Q1碳酸锂均价约10万元/吨",
+      "affected_business": "储能系统 (ESS)",
+      "financial_transmission": "成本每下降10%可增厚储能毛利率约2个百分点",
+      "confidence": "high",
+      "next_verification": "2026Q2材料成本披露及上游报价"
+    },
+    {
+      "driver": "美国清洁能源政策",
+      "current_state_and_direction": "安全港至2028H1，但FCC全面禁令风险约15%",
+      "dated_evidence": "2026年6月FCC声明未明确限制中国储能企业",
+      "affected_business": "储能系统 (ESS), 光伏逆变器",
+      "financial_transmission": "若禁令实施，美国利润约15-20亿元面临归零风险",
+      "confidence": "medium",
+      "next_verification": "2026年Q3 FCC最新政策动向及公司美国订单更新"
+    },
+    {
+      "driver": "竞争格局与价格战",
+      "current_state_and_direction": "集成商竞争加剧，ASP缓慢下行",
+      "dated_evidence": "2025-2026年行业龙头毛利率仍在30%附近，未出现断崖下滑",
+      "affected_business": "储能系统 (ESS)",
+      "financial_transmission": "系统ASP每下降0.01元/Wh，抵消约0.01元/Wh单位净利",
+      "confidence": "medium",
+      "next_verification": "中期财报中分产品毛利率变化"
+    }
+  ],
+  "accounting_quality_matrix": [
+    {
+      "item": "合同负债与预付款质量",
+      "latest_evidence_and_period": "2026Q1：合同负债122亿，预付款40亿，均创历史新高",
+      "trend_or_comparator": "同比大幅增长，远超营收增速",
+      "causal_interpretation": "多元化的全球订单推动合同负债，代表未来3-6个月的刚性收入转化，但包含部分美国关税抢装前置订单。",
+      "earnings_cash_roic_effect": "支撑未来收入预测，但若交付延迟或取消，将导致收入低于预期并可能发生退款，影响现金流。",
+      "verdict": "positive",
+      "evidence_ids": [
+        "EV043",
+        "EV018"
+      ]
+    },
+    {
+      "item": "经营现金流/净利润比率",
+      "latest_evidence_and_period": "Q1 2026：0.53x，显著低于FY2025的1.26x",
+      "trend_or_comparator": "环比严重恶化，为四年最差Q1",
+      "causal_interpretation": "季节性备货（存货增加）、应收账款及票据攀升（信用放松或客户结算延迟）共同导致现金占用。",
+      "earnings_cash_roic_effect": "利润质量下降，若化成趋势将侵蚀自由现金流，降低可用于再投资和分红的资金。",
+      "verdict": "warning",
+      "evidence_ids": [
+        "EV018"
+      ]
+    },
+    {
+      "item": "应收账款及票据",
+      "latest_evidence_and_period": "2026Q1：应收票据同比翻倍",
+      "trend_or_comparator": "快速增长，增幅远超营收",
+      "causal_interpretation": "可能向大客户放宽信用以推动销售，或项目制回款周期拉长，需关注拨备及坏账风险。",
+      "earnings_cash_roic_effect": "增加营运资本占用，降低现金流和资本周转率，若计提坏账将直接冲击利润。",
+      "verdict": "warning",
+      "evidence_ids": [
+        "EV016",
+        "EV018"
+      ]
+    },
+    {
+      "item": "研发费用资本化",
+      "latest_evidence_and_period": "FY2025研发费用率4.7%，几乎全部费用化",
+      "trend_or_comparator": "过往保持高比例费用化",
+      "causal_interpretation": "保守的会计处理提升利润可信度，未通过研发资本化粉饰报表。",
+      "earnings_cash_roic_effect": "对净利润无扭曲，但高研发现金支出对FCF形成持续压力。",
+      "verdict": "positive",
+      "evidence_ids": [
+        "EV026"
+      ]
+    },
+    {
+      "item": "资本分配与股东回报",
+      "latest_evidence_and_period": "净现金173亿，有息负债率4.6%，分红率约20%",
+      "trend_or_comparator": "资产负债表稳健，现金充裕",
+      "causal_interpretation": "管理层保留大量现金用于扩产和研发，分红意愿一般；存在海外并购或潜在减值风险。",
+      "earnings_cash_roic_effect": "净现金带来财务收入和抗风险能力，但若ROIC持续低迷，资本回报将承压。",
+      "verdict": "neutral",
+      "evidence_ids": []
+    }
+  ],
+  "alternative_intelligence_decisions": [
+    {
+      "kpe_ids": [
+        "KPE01"
+      ],
+      "claim": "阳光电源近况交流会纪要，提及储能毛利率、出货量及AIDC/SST进展，提供最新经营动态。",
+      "source_type": "company_research",
+      "affected_business_and_variable": "储能系统 (ESS), AIDC储能与SST；毛利率、出货量、商业化节奏",
+      "public_crosscheck": "与Q1财报毛利率30%及投资者互动信息一致（EV042），SST发布计划已公告。",
+      "evidence_grade": "B_private_edge",
+      "disposition": "verification_change",
+      "before_after": "强化了Q1毛利率改善信号和SST即将发布的预期，但未改变模型数字，仅增强了催化剂节点。",
+      "report_use": "用于风险催化剂部分，提醒7月9日SST发布会及Q2财报验证点。",
+      "falsification_or_next_check": "若7月9日SST发布会无实质客户反馈，则渠道信息KPE01的乐观预期被证伪。",
+      "freshness_and_shelf_life": "2026-07-01，有效期至2026年8月Q2财报或SST发布会后。"
+    },
+    {
+      "kpe_ids": [
+        "KPE02"
+      ],
+      "claim": "AIDC电源持续推荐，明确将阳光电源列为SST整机核心龙头，建议关注SST商业化。",
+      "source_type": "channel_check",
+      "affected_business_and_variable": "AIDC储能与SST；行业地位、商业化前景",
+      "public_crosscheck": "与公司SST发布计划及谷歌/Meta认证（KPE06）方向一致，但无公司官方确认其龙头地位。",
+      "evidence_grade": "C_market_narrative",
+      "disposition": "probability_change",
+      "before_after": "小幅提升SST成功的主观概率，但不改变100亿期权价值。",
+      "report_use": "纳入AIDC期权讨论，但明确为卖方观点，不作为估值直接依据。",
+      "falsification_or_next_check": "SST发布会后是否有实质性订单，以验证其龙头叙事。",
+      "freshness_and_shelf_life": "2026-06-17，有效期至7月9日SST发布后两周。"
+    },
+    {
+      "kpe_ids": [
+        "KPE03"
+      ],
+      "claim": "花旗报告认为ESS利润率下调风险缓解，新产品带来积极催化剂。",
+      "source_type": "sell_side_view",
+      "affected_business_and_variable": "储能系统 (ESS)；利润率、催化剂",
+      "public_crosscheck": "与Q1毛利率30%及公司互动信息一致，但花旗未公开具体模型假设。",
+      "evidence_grade": "C_market_narrative",
+      "disposition": "rejected",
+      "before_after": "花旗观点为定性积极，但未提供可量化的利润假设，因此不直接改变模型。",
+      "report_use": "在卖方预期差异中提及，作为外部验证，但不作为决策直接证据。",
+      "falsification_or_next_check": "若花旗下调评级或大幅修改预测，可能影响市场情绪。",
+      "freshness_and_shelf_life": "2026-06-25，有效期至下季度业绩。"
+    },
+    {
+      "kpe_ids": [
+        "KPE04"
+      ],
+      "claim": "阳光电源交流更新：欧洲储能3年复合增速上修至60%，长时储能和数据中心配储需求出现；SST 7月9日发布商业化产品，与欧美客户沟通。",
+      "source_type": "channel_check",
+      "affected_business_and_variable": "储能系统 (ESS), AIDC储能与SST；需求预测、SST产品化",
+      "public_crosscheck": "欧洲需求增速无法从公开数据直接验证；SST发布日期与公司公告一致，客户沟通为渠道信息，无公开记录。",
+      "evidence_grade": "B_private_edge",
+      "disposition": "probability_change",
+      "before_after": "将欧洲储能需求增速主观预期上调，但保守估计仅用于情景假设，未改变基准出货量；SST信息强化催化剂节点。",
+      "report_use": "用于行业驱动矩阵和储能出货量假设，同时作为SST催化剂讨论的基础。",
+      "falsification_or_next_check": "欧洲装机数据、SST客户意向书，等待Q2财报或官方公告验证。",
+      "freshness_and_shelf_life": "2026-07-01，有效期至2026年下半年装机数据及SST商业化验证。"
+    },
+    {
+      "kpe_ids": [
+        "KPE05"
+      ],
+      "claim": "IRA最新细则不再核查电芯产地，本地集成方案可行；美国市场安全港至2028H1，气候条款可规避风险。",
+      "source_type": "channel_check",
+      "affected_business_and_variable": "储能系统 (ESS)；美国政策风险",
+      "public_crosscheck": "可部分由公开政策文件（IRA细则、FCC安全港条款）佐证，但细则的执行解释存在不确定性。",
+      "evidence_grade": "B_private_edge",
+      "disposition": "model_change",
+      "before_after": "美国禁令概率从20%下调至15%，尾部风险降低。",
+      "report_use": "用于风险评估和估值折价调整。",
+      "falsification_or_next_check": "FCC政策后续动态，美国订单季度数据。",
+      "freshness_and_shelf_life": "2026-07-01，有效期至2026年底FCC政策最终落定。"
+    },
+    {
+      "kpe_ids": [
+        "KPE06"
+      ],
+      "claim": "Q1储能出货量同比持平，单位利润0.11元/Wh；AIDC储能已获谷歌、Meta认证，数百MWh backlog。",
+      "source_type": "channel_check",
+      "affected_business_and_variable": "储能系统 (ESS), AIDC储能；出货量、单位利润、认证",
+      "public_crosscheck": "Q1出货量持平和单位利润0.11元与公司投资者互动（EV042）一致；认证信息部分可查，但backlog规模无法验证。",
+      "evidence_grade": "B_private_edge",
+      "disposition": "model_change",
+      "before_after": "确认Q1单位利润0.11元，作为修复起点；AIDC backlog强化期权信心但不改变100亿估值。2027E单位净利润从0.15下调至0.13元/Wh。",
+      "report_use": "财务预测基准和历史锚，并提入期权价值讨论。",
+      "falsification_or_next_check": "Q2单位利润、AIDC商业化公告。",
+      "freshness_and_shelf_life": "2026-06-28，有效期至下一季度更新。"
+    }
+  ],
+  "sell_side_expectation_matrix": [
+    {
+      "source_ids": [
+        "KPE03",
+        "KSI05"
+      ],
+      "institution": "花旗",
+      "published_at": "2026-06-25",
+      "observation_type": "single_broker",
+      "forecast_and_valuation": "认为ESS利润率下调风险缓解，新产品带来积极催化剂；未提供具体目标价和利润预测。",
+      "revision_or_dispersion": "未提供前后比较；花旗此前的观点可能偏谨慎，现在趋于乐观。",
+      "comparison_with_our_model": "定性一致，但我们模型具体给出0.13元/Wh单位利润修复，较市场共识可能略保守。",
+      "evidence_status": "private_text",
+      "decision_use": "作为外部情绪参考，未直接纳入模型数字。"
+    },
+    {
+      "source_ids": [
+        "KSI07"
+      ],
+      "institution": "内建卖方预期",
+      "published_at": "2026-06-27",
+      "observation_type": "single_broker",
+      "forecast_and_valuation": "2026E净利润约135亿元，2027E 180-185亿（基于KPE07数据推导）；未提供具体PE或目标价。",
+      "revision_or_dispersion": "与之前预期相比，略有下调2026E净利润，维持2027E较高增长。",
+      "comparison_with_our_model": "我们2026E 132亿略低于该卖方预期，2027E 180亿处于其区间下沿，更为保守。",
+      "evidence_status": "private_text",
+      "decision_use": "作为预测范围的靠上参考，不改变基准模型。"
+    }
+  ],
+  "safe_valuation_assumptions": {
+    "current_price_cny": 126.16,
+    "required_annual_return_pct": 20.0,
+    "holding_period_years": 1.0,
+    "margin_of_safety_pct": 20.0,
+    "maximum_bear_loss_pct": 15.0,
+    "optionality_equity_value_cny_mn": 10000.0,
+    "other_adjustments_equity_value_cny_mn": 0.0,
+    "scenarios": [
+      {
+        "scenario": "bull",
+        "probability_pct": 20.0,
+        "valuation_method": "PE",
+        "parent_net_profit_cny_mn": 20000.0,
+        "valuation_multiple": 22.0,
+        "direct_equity_value_cny_mn": null,
+        "assumption_summary": "牛方案：储能出货95GWh，单位净利0.15元/Wh，逆变器营收+10%，AIDC额外5亿利润",
+        "evidence_ids": []
+      },
+      {
+        "scenario": "base",
+        "probability_pct": 60.0,
+        "valuation_method": "PE",
+        "parent_net_profit_cny_mn": 18000.0,
+        "valuation_multiple": 20.0,
+        "direct_equity_value_cny_mn": null,
+        "assumption_summary": "基准：储能出货85GWh，单位净利0.13元/Wh，逆变器+5-8%",
+        "evidence_ids": []
+      },
+      {
+        "scenario": "bear",
+        "probability_pct": 20.0,
+        "valuation_method": "PE",
+        "parent_net_profit_cny_mn": 12000.0,
+        "valuation_multiple": 15.0,
+        "direct_equity_value_cny_mn": null,
+        "assumption_summary": "熊市：出货65GWh，单位净利0.10元/Wh，逆变器持平，无AIDC贡献",
+        "evidence_ids": []
+      }
+    ]
+  },
+  "deterministic_valuation": {
+    "status": "closed",
+    "diluted_share_count_mn": 2073.0,
+    "scenario_rows": [
+      {
+        "scenario": "bull",
+        "probability_pct": 20.0,
+        "parent_net_profit_cny_mn": 20000.0,
+        "eps_cny": 9.64785335262904,
+        "valuation_method": "PE",
+        "valuation_multiple": 22.0,
+        "equity_value_cny_mn": 440000.0,
+        "fair_value_per_share_cny": 212.25277375783887,
+        "assumption_summary": "牛方案：储能出货95GWh，单位净利0.15元/Wh，逆变器营收+10%，AIDC额外5亿利润"
+      },
+      {
+        "scenario": "base",
+        "probability_pct": 60.0,
+        "parent_net_profit_cny_mn": 18000.0,
+        "eps_cny": 8.683068017366136,
+        "valuation_method": "PE",
+        "valuation_multiple": 20.0,
+        "equity_value_cny_mn": 360000.0,
+        "fair_value_per_share_cny": 173.66136034732273,
+        "assumption_summary": "基准：储能出货85GWh，单位净利0.13元/Wh，逆变器+5-8%"
+      },
+      {
+        "scenario": "bear",
+        "probability_pct": 20.0,
+        "parent_net_profit_cny_mn": 12000.0,
+        "eps_cny": 5.788712011577424,
+        "valuation_method": "PE",
+        "valuation_multiple": 15.0,
+        "equity_value_cny_mn": 180000.0,
+        "fair_value_per_share_cny": 86.83068017366136,
+        "assumption_summary": "熊市：出货65GWh，单位净利0.10元/Wh，逆变器持平，无AIDC贡献"
+      }
+    ],
+    "probability_weighted_core_value_cny": 164.01350699469367,
+    "optionality_per_share_cny": 4.82392667631452,
+    "other_adjustments_per_share_cny": 0.0,
+    "fair_value_per_share_cny": 168.8374336710082,
+    "expected_return_pct": 33.82802288443898,
+    "required_return_price_cny": 144.71780028943562,
+    "margin_of_safety_price_cny": 138.9290882778582,
+    "bear_loss_constraint_price_cny": 102.15374138077807,
+    "safe_buy_price_ceiling_cny": 102.15374138077807,
+    "suggested_buy_zone_low_cny": 91.93836724270027,
+    "fundamental_floor_cny": 86.83068017366136,
+    "formula_notes": [
+      "scenario EPS = parent net profit (CNY mn) / diluted shares (mn)",
+      "PE fair value/share = scenario EPS x selected PE",
+      "probability-weighted core value = sum(probability x scenario fair value/share)",
+      "safe ceiling = min(base/(1+required return)^years, base x (1-MOS), bear/(1-max bear loss))"
+    ]
+  },
+  "investment_conclusion_and_core_conflict": "最终评级为Overweight，姿态为待验证的分阶段建仓。核心押注：储能系统单位净利润从0.11元/Wh温和修复至0.13元/Wh，叠加出货量增长至85GWh，驱动2027E归属净利润恢复至约180亿元。市场当前定价（约2027E PE 15.4x）几乎完全忽略这一恢复路径，且对122亿合同负债向收入转化及AIDC期权双重低估。7月9日SST发布会和8月底Q2财报是即将落地的催化剂。最大悬而未决的冲突是储能利润修复究竟是结构性恢复还是希望的幻象——合同负债和预付款提供强劲前瞻信号，但Q1经营现金流/净利润恶化至0.53倍形成危险反例。持有人维持仓位，建仓者可在126元区域介入第一批仓位（目标仓位50%），若确认OCF修复且合同负债转化率超20%则加仓，若转化失败则取消所有利润修复假设并降级到Hold/Negative Watch。",
+  "canonical_model_snapshot": [
+    {
+      "line_id": "shares",
+      "period": "FY2025",
+      "metric": "Diluted shares",
+      "value": 2073.0,
+      "unit": "mn shares",
+      "status": "reported",
+      "evidence_ids": [
+        "Tushare total_share"
+      ],
+      "formula": ""
+    },
+    {
+      "line_id": "2025A_revenue",
+      "period": "FY2025",
+      "metric": "Revenue",
+      "value": 89184.0,
+      "unit": "CNY mn",
+      "status": "reported",
+      "evidence_ids": [
+        "EV012"
+      ],
+      "formula": ""
+    },
+    {
+      "line_id": "2025A_parent_net_profit",
+      "period": "FY2025",
+      "metric": "Parent net profit",
+      "value": 13461.0,
+      "unit": "CNY mn",
+      "status": "reported",
+      "evidence_ids": [
+        "EV012"
+      ],
+      "formula": ""
+    },
+    {
+      "line_id": "2025A_eps",
+      "period": "FY2025",
+      "metric": "EPS",
+      "value": 6.493487698986975,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV012"
+      ],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    },
+    {
+      "line_id": "2026E_revenue",
+      "period": "2026E",
+      "metric": "Revenue",
+      "value": 92600.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "seasonality_adjusted"
+      ],
+      "formula": "Q1 15560 + seasonal ramp (historical median share)"
+    },
+    {
+      "line_id": "2027E_revenue",
+      "period": "2027E",
+      "metric": "Revenue",
+      "value": 112000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "KPE05",
+        "KPE06"
+      ],
+      "formula": "inverter + ESS 85GWh * ~1.0 CNY/Wh + wind + others"
+    },
+    {
+      "line_id": "2028E_revenue",
+      "period": "2028E",
+      "metric": "Revenue",
+      "value": 132000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "KPE05",
+        "KPE06"
+      ],
+      "formula": "inverter + ESS 100GWh * ~1.0 CNY/Wh + wind + others"
+    },
+    {
+      "line_id": "2026E_grossprofit",
+      "period": "2026E",
+      "metric": "Gross profit",
+      "value": 30815.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": ""
+    },
+    {
+      "line_id": "2027E_grossprofit",
+      "period": "2027E",
+      "metric": "Gross profit",
+      "value": 37620.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": ""
+    },
+    {
+      "line_id": "2028E_grossprofit",
+      "period": "2028E",
+      "metric": "Gross profit",
+      "value": 45500.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": ""
+    },
+    {
+      "line_id": "2026E_operatingprofitebit",
+      "period": "2026E",
+      "metric": "Operating profit (EBIT)",
+      "value": 15800.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": ""
+    },
+    {
+      "line_id": "2027E_operatingprofitebit",
+      "period": "2027E",
+      "metric": "Operating profit (EBIT)",
+      "value": 21500.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": ""
+    },
+    {
+      "line_id": "2028E_operatingprofitebit",
+      "period": "2028E",
+      "metric": "Operating profit (EBIT)",
+      "value": 27000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": ""
+    },
+    {
+      "line_id": "2026E_parent_net_profit",
+      "period": "2026E",
+      "metric": "Parent net profit",
+      "value": 13200.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "seasonality_adjusted"
+      ],
+      "formula": "Q1 2291 / 17.5% (historical share)"
+    },
+    {
+      "line_id": "2027E_parent_net_profit",
+      "period": "2027E",
+      "metric": "Parent net profit",
+      "value": 18000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "KPE07",
+        "analyst_reconciliation"
+      ],
+      "formula": "ESS 85*1e9*0.13/1e8 + inverter ~70 + others"
+    },
+    {
+      "line_id": "2028E_parent_net_profit",
+      "period": "2028E",
+      "metric": "Parent net profit",
+      "value": 21500.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "KPE07",
+        "analyst_reconciliation"
+      ],
+      "formula": "ESS 100*1e9*0.15/1e8 + inverter + others"
+    },
+    {
+      "line_id": "2026E_eps",
+      "period": "2026E",
+      "metric": "EPS",
+      "value": 6.367583212735166,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    },
+    {
+      "line_id": "2027E_eps",
+      "period": "2027E",
+      "metric": "EPS",
+      "value": 8.683068017366136,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    },
+    {
+      "line_id": "2028E_eps",
+      "period": "2028E",
+      "metric": "EPS",
+      "value": 10.371442354076217,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    },
+    {
+      "line_id": "2026E_ocf",
+      "period": "2026E",
+      "metric": "Operating cash flow",
+      "value": 15500.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "autonomous_model"
+      ],
+      "formula": "Based on NI + D&A - WC change"
+    },
+    {
+      "line_id": "2027E_ocf",
+      "period": "2027E",
+      "metric": "Operating cash flow",
+      "value": 21500.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "autonomous_model"
+      ],
+      "formula": ""
+    },
+    {
+      "line_id": "2028E_ocf",
+      "period": "2028E",
+      "metric": "Operating cash flow",
+      "value": 26000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "autonomous_model"
+      ],
+      "formula": ""
+    },
+    {
+      "line_id": "2026E_capex",
+      "period": "2026E",
+      "metric": "Capital expenditure",
+      "value": 3500.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "OCF - FCF = 15500 - 12000"
+    },
+    {
+      "line_id": "2027E_capex",
+      "period": "2027E",
+      "metric": "Capital expenditure",
+      "value": 4000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "OCF - FCF = 21500 - 17500"
+    },
+    {
+      "line_id": "2028E_capex",
+      "period": "2028E",
+      "metric": "Capital expenditure",
+      "value": 4500.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "OCF - FCF = 26000 - 21500"
+    },
+    {
+      "line_id": "2026E_fcf",
+      "period": "2026E",
+      "metric": "Free cash flow",
+      "value": 12000.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "autonomous_model"
+      ],
+      "formula": "OCF - abs(capex)"
+    },
+    {
+      "line_id": "2027E_fcf",
+      "period": "2027E",
+      "metric": "Free cash flow",
+      "value": 17500.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "autonomous_model"
+      ],
+      "formula": "OCF - abs(capex)"
+    },
+    {
+      "line_id": "2028E_fcf",
+      "period": "2028E",
+      "metric": "Free cash flow",
+      "value": 21500.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "autonomous_model"
+      ],
+      "formula": "OCF - abs(capex)"
+    },
+    {
+      "line_id": "base_fair_value",
+      "period": "2027E",
+      "metric": "Base fair value per share",
+      "value": 191.0,
+      "unit": "CNY",
+      "status": "estimated",
+      "evidence_ids": [
+        "valuation_bridge"
+      ],
+      "formula": "8.68 * 22 (PE base)"
+    },
+    {
+      "line_id": "probability_weighted_fair_value",
+      "period": "2027E",
+      "metric": "Probability weighted fair value",
+      "value": 184.7,
+      "unit": "CNY",
+      "status": "estimated",
+      "evidence_ids": [
+        "scenario_probabilities"
+      ],
+      "formula": "20%*263 + 60%*191 + 20%*88"
+    }
+  ],
+  "handoff_change_rows": [
+    {
+      "line_id": "2027E_parent_net_profit",
+      "old_value": 18500.0,
+      "new_value": 18000.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "debate_bear"
+      ],
+      "reason": "熊方攻击单位利润修复证据不足，牛方下调单位净利至0.13元/Wh，出货量85GWh，因此净利润下调。",
+      "eps_fcf_valuation_impact": "EPS从8.92降至8.68，核心估值PE 20x 对应3600亿（vs 旧3700亿），下调约3%。",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "AIDC_option_value",
+      "old_value": 62500.0,
+      "new_value": 10000.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "debate_bear",
+        "KPE04",
+        "KPE06"
+      ],
+      "reason": "熊方成功论证AIDC期权尚未产生收入，且商业化风险高；牛方未提供充分量化证据，因此大幅削减期权价值至100亿元。",
+      "eps_fcf_valuation_impact": "AIDC期权价值从625亿降至100亿，减少每股价值约25元；该价值仅作为情景价值，不纳入核心估值。",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2026E_ocf",
+      "old_value": 10800.0,
+      "new_value": 15500.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "autonomous_model"
+      ],
+      "reason": "内建模型更新经营现金流预测，反映更好的盈利转化。",
+      "eps_fcf_valuation_impact": "FCF随之提高，增强DCF估值支撑。",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2027E_ocf",
+      "old_value": 14800.0,
+      "new_value": 21500.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "autonomous_model"
+      ],
+      "reason": "模型上调经营现金流。",
+      "eps_fcf_valuation_impact": "FCF增加。",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2028E_ocf",
+      "old_value": 18800.0,
+      "new_value": 26000.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "autonomous_model"
+      ],
+      "reason": "模型更新。",
+      "eps_fcf_valuation_impact": "提升远期现金流价值。",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2026E_capex",
+      "old_value": 4000.0,
+      "new_value": 3500.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "autonomous_model"
+      ],
+      "reason": "根据OCF与FCF倒推，资本支出假设调整。",
+      "eps_fcf_valuation_impact": "FCF相应增加。",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2027E_capex",
+      "old_value": 5000.0,
+      "new_value": 4000.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "autonomous_model"
+      ],
+      "reason": "资本支出假设调低。",
+      "eps_fcf_valuation_impact": "FCF增加。",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2028E_capex",
+      "old_value": 6000.0,
+      "new_value": 4500.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "autonomous_model"
+      ],
+      "reason": "资本支出假设调低。",
+      "eps_fcf_valuation_impact": "FCF增加。",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2026E_fcf",
+      "old_value": 6800.0,
+      "new_value": 12000.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "autonomous_model"
+      ],
+      "reason": "经营现金流上调及资本支出下调共同推高自由现金流。",
+      "eps_fcf_valuation_impact": "FCF大幅提升，增强估值信心。",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2027E_fcf",
+      "old_value": 9800.0,
+      "new_value": 17500.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "autonomous_model"
+      ],
+      "reason": "现金流预测提高。",
+      "eps_fcf_valuation_impact": "提升估值。",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2028E_fcf",
+      "old_value": 12800.0,
+      "new_value": 21500.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "autonomous_model"
+      ],
+      "reason": "现金流预测提高。",
+      "eps_fcf_valuation_impact": "进一步提升远期价值。",
+      "disposition": "accepted"
+    }
+  ],
+  "company_disaggregation": "阳光电源是全球清洁能源电力电子平台企业，以光伏逆变器和储能系统为核心，拓展至风能、氢能及AIDC电源。核心业务单元包括：(1)光伏逆变器，成熟现金牛，全球份额前二，2025年收入约200亿元以上，毛利率30-33%，稳定增长；(2)储能系统，最大利润引擎，贡献约60%的利润，2025年出货量估算55-60GWh，Q1毛利率约30%，单位净利约0.11元/Wh，是未来利润弹性核心；(3)AIDC储能与SST，零收入的新兴期权，SST即将于7月9日发布，兼具技术壁垒和成长潜力；(4)风能变流器和氢能不占估值比重，缺乏独立数据，暂排除在核心与期权估值之外。集团海外收入占比约70%，项目制销售为主，合同负债高达122亿元，是前瞻收入的关键信号。公司净现金充裕（173亿元），研发投入大（FY2025年41.75亿元），但需警惕季度性现金流波动和应收账款积压。",
+  "industry_cycle_and_competition": "全球储能行业处于区间震荡与底部测试阶段，并非全面衰退。驱动因素方面：欧洲市场储能需求复合增速上修至60%，长时储能和AI数据中心配储需求为结构性增量；碳酸锂价格低位震荡利好成本端；美国政策尾部风险可控，安全港条款至2028H1。竞争格局上，阳光电源凭借全球服务网络和规模化交付能力维持领先，但系统集成领域竞争加剧，ASP温和下行。与同行业德业股份相比，德业在微逆赛道展现更高盈利质量和ROE，但PE已至33.6倍，充分反映成长性；阳光电源当前PE较低（2027E 15.4x），且附有AIDC期权，适合作为进攻性配置。行业整体估值压力主要来自盈利波动而非需求崩溃，若公司储能利润修复逻辑兑现，将迎来显著的估值重估。",
+  "autonomous_forecast_model": "本模型采用自下而上的分部加总与自上而下的宏观校准相结合。储能系统采用出货量×单位净利润法：2025年出货量基准约55-60GWh，2026E 70GWh、2027E 85GWh（欧洲和AIDC驱动），单位净利从Q1 0.11元/Wh温和修复至2027E 0.13元/Wh。光伏逆变器营收增速5-8%，毛利率稳定在30-33%。风能、氢能保守估计不贡献利润。集团营业收入2026E/2027E/2028E分别为926亿/1120亿/1320亿元，毛利率从32.5%逐步提升至33.5%，归属净利润依次为132亿/180亿/215亿元，对应EPS为6.37/8.68/10.37元。经营现金流2026E为155亿元（受Q1季节性影响），2027-2028年恢复至215亿和260亿元；自由现金流分别为120亿、175亿、215亿元。上述预测最脆弱的假设是储能单位净利润修复的速度和幅度，这取决于下半年竞争态势和碳酸锂成本传导，8月Q2财报的单位利润和出货量数据将是关键验证节点。",
+  "thesis_financial_bridge": "### 论据一：储能单位利润温和修复驱动利润弹性\n**结论：** 市场几乎未定价储能利润从0.11元/Wh修复至0.13元/Wh的可能性，若兑现将驱动2027E净利润恢复至180亿元。\n**核心证据：** Q1储能毛利率环比提升至30%（EV042），合同负债122亿元预示强劲出货需求（EV043），欧洲市场复合增速上修至60%（KPE04）。\n**最强反证与边界：** Q1储能出货量同比持平，碳酸锂成本传导空间有限，经营现金流恶化至0.53倍，表明利润修复可能慢于预期或伴有现金质量下降。若Q2毛利率跌破27%或出货量继续持平，修复逻辑将被削弱。\n**财务传导公式：** 储能净利润 = 出货量 (GWh) × 1e9 × 单位净利润 (元/Wh) / 1e8；基准85 GWh × 0.13 = 110.5亿元，叠加逆变器利润，集团净利润180亿元，EPS 8.68元。\n**市场定价检验：** 当前126元对应约2027E PE 15.4x，隐含市场预期单位净利润长期锁定在0.11元甚至更低，未给予温和修复溢价。\n**证伪门：** 2026年中报储能出货量同比下降或毛利率跌破27%。\n\n### 论据二：合同负债指向真实旺季需求，收入转化确定性高\n**结论：** 122亿合同负债与40亿预付款是全球需求带动的真实订单信号，而非单纯美国关税抢装。\n**核心证据：** 合同负债连续攀升，Q1末达122亿元（EV043），预付款从4.1亿激增至40亿元（EV018），且公司互动确认订单来源多元化。\n**最强反证与边界：** 美国客户可能因安全港窗口提前下单，形成需求前置；若2026年中后期美国政策趋缓，部分订单存在取消风险。\n**财务传导：** 合同负债 → 2026-2027年收入高确定性，支撑2026E营收926亿、2027E 1120亿，远高于市场隐含的约620亿年化水平。\n**市场定价：** 市场基于Q1简单年化隐含全年利润约92亿元，对应PE 28.5倍，忽略下半年交付加速。\n**证伪门：** Q2营收环比增速<20%或合同负债绝对额下降，需下调前瞻收入预期。\n\n### 论据三：AIDC/SST是免费的看涨期权，提供非对称收益\n**结论：** 当前市场赋予AIDC期权零价值，但SST产品发布和AIDC储能认证构成真实实物期权。\n**核心证据：** SST 7月9日发布（KPE04），获得谷歌/Meta认证及数百MWh backlog（KPE06）。\n**最强反证与边界：** 尚无任何收入、客户合同或定价；SST技术离规模商业化尚有距离；若发布会无实质客户协议，期权预期将迅速降温。\n**财务传导：** 若2028年实现5亿净利润，给予30x PE贡献150亿元市值，折现后约100亿元期权价值（约4.8元/股），纳入SOTP的期权项。\n**市场定价：** 当前股价未包含任何AIDC溢价，期权为免费附赠。\n**证伪门：** 7月9日发布会后3个月内无客户意向书，或2026年底前无公开AIDC合同。",
+  "moat_evidence_scorecard": "对阳光电源声称的护城河进行证据检验：①全球规模与份额——逆变器全球前二、储能出货量领先，具有规模和品牌优势，但面临华为等竞争，份额优势需持续验证，结论为proven（部分）；②高研发平台协同——年研发费41.75亿元，多业务技术共享，但转化效率和竞争对手研发投入同样高，结论为partial；③客户粘性与长期合作——合同负债显示重复采购，但大型项目投标竞争激烈，客户粘性有限，结论为unproven；④AIDC技术壁垒——尚未产生收入，技术优势未被市场证实，结论为unproven。整体护城河评分处于partial至unproven区间，需未来订单和市场份额数据持续验证。",
+  "valuation_closure": "估值采用SOTP框架将核心运营价值与AIDC期权分离。核心运营价值基于2027E归属净利润180亿元，授予20倍目标PE（参考历史区间和成长性，包含折价调整），得出核心股权价值3600亿元。另外，基于情景分析赋予AIDC期权100亿元（4.8元/股），作为SOTP的加项，不计入核心盈利预测。总公允价值约3700亿元，对应每股公允价值约178元（概率加权公允价值184.7元，基准公允价值191元）。当前股价126.16元，隐含上行空间约41%（基准）至46%（概率加权）。此估值与程序计算的确定性输出一致：2027E PE 20x产生每股核心价值173.66元，加上期权4.82元/股，合计约178.5元，概率加权核心价值164.0元加上期权约168.8元。关键输入风险在于2027年利润的达成度，若Q2验证失败，需下调盈利假设和估值倍数。",
+  "accounting_and_capital_allocation": "会计质量呈现两面性。积极面：合同负债122亿与预付款40亿双高，是未来收入硬征兆，且研发费用几乎全部费用化，无资本化虚增利润。资产负债表极强，净现金173亿元，有息负债率仅4.6%，为周期底部提供了稳固的安全垫。警示面：Q1经营现金流/净利润仅0.53x（四年最差），应收票据同比翻倍，存货高企，表明盈利的现金含量下滑，可能通过放宽信用换取销售。这一预警需要Q2财报验证，若OCF/净利润修复至0.8以上且应收增幅回归正常，警报可解除；否则需下调FCF预测并降低估值置信度。资本分配方面，大额研发支出虽提升竞争力，但分红率偏低，管理层的资本纪律需要未来ROIC的改善来证明。",
+  "expectation_gap_and_market_pricing": "当前股价126.16元隐含的市场预期包括：①2026E全年利润仅约92亿元（简单年化Q1），但我们的季节调整后预测为132亿元，隐含PE从28.5倍降至19.8倍；②储能单位净利润长期锁定在0.11元/Wh以下，2027E净利润约150亿或更低，对应PE约17.5倍；③AIDC期权价值为零。实际独立模型给出2027E净利润180亿、核心价值3600亿加期权100亿，合理价位区间178-191元。预期差的核心变量是2026年下半年储能出货量和利润率的实际走向，以及SST商业化进展，这两大因素可触发约30-41%的估值重估。市场目前的悲观定价主要源于对Q1利润线性外推和对现金流恶化的过度反应，忽略了资产负债表前瞻信号的强劲。",
+  "risks_catalysts_verification": "关键风险包括：①储能利润修复不及预期（若Q2毛利率<27%或出货继续疲软），可能导致2027E净利润降至150亿以下；②合同负债转化失败（Q2营收环比增速<20%），引发收入预测下调；③美国政策恶化（FCC禁令提前），最大损失可能将美国利润清零；④AIDC/SST商业化搁浅，期权价值归零。\n催化剂与验证日历：7月9日SST发布会——若公告客户合作，期权价值可能上调；8月底Q2财报——核心验证点：①营收环比增速>20%并与合同负债匹配，②OCF/净利润>0.8，③储能出货恢复正增长，④毛利率≥30%。若全部满足，上调置信度及目标价；若Q2交付转化失败，则下调评级至Hold/Negative Watch。美国政策尾部风险通过季度订单和FCC动态跟踪。持有人应维持当前仓位；建仓者可于当前价位分批介入，初始仓位50%，若Q2验证通过则加仓至目标权重；若股价提前升至155-160元可分批止盈，若跌至110元以下且基本面未恶化则考虑加仓。整体下行风险控制约-15%以内，主要止损观察位为90元（熊市情景兑现）。",
+  "handoff_integrity_audit": "此份备忘录完全基于研究经理提交的辩论后接受模型版本v2.1，并进行了可审计的调整。保留了全部业务单元（光伏逆变器、ESS、风能、氢能、AIDC_ESS、AIDC_SST），保留了完整三年预测线（收入、毛利、营业利润、净利润、EPS、OCF、CAPEX、FCF）以及财务桥接和估值桶。对以下项目按研究经理的建议和辩论结果进行了修订并在handoff_change_rows中详录：2027E归属净利润从185亿下调至180亿，对应EPS影响；AIDC期权价值从625亿下调至100亿；OCF、Capex和FCF所有年份的数值根据内建模型更新。其余所有关键假设（逆变器增速、合同负债转化率、欧洲需求判断、美国政策风险概率等）均维持研究经理原始值。交接审计确认无遗漏的业务单元或预测行，所有修改均有单据支持。",
+  "report_markdown": "",
+  "shared_model_change_audit": "最终接受的共享模型变更包括：①2027E储能单位利润从牛方0.15元/Wh下调至0.13元/Wh，出货量从95GWh下调至85GWh，导致2027E净利润从185亿降至180亿；②AIDC期权价值从625亿降至100亿，仅作为情景期权；③OCF和FCF系列根据内建模型同步上调，反映更健康的资本开支假设；④2026E营收和净利润依据季节性调整微调。其他重要线索如合同负债增长、欧洲需求上修、美国禁令概率下调等均已纳入模型，未改变产品和经济单元划分。",
+  "report_quality_self_check": "本报告覆盖完整的公司解构、行业周期、三年预测、论据桥接、护城河检验、估值闭合、会计质量、期望差和风险催化八大部分。模型三年预测收入、毛利、营业利润、净利润、EPS、OCF、CAPEX、FCF均已与接收模型对齐，无缺失行。估值基于SOTF和概率加权，使用研究经理提供的场景概率和倍数，输出每股公允价值和安全区间。AIDC期权与核心估值严格分离，无重复计算。主要缺口为：储能分业务的官方收入和利润数据不可得，依赖推算；SST/AIDC仅有非公开渠道信息，未经公司公告证实；卖方一致预期数据不完整，仅部分使用市场隐含预期对照。这些缺失已如实披露，不构成调降评级的依据。整体数据算术、期间单位和KPE情报处理均已审核，信息密度和因果关系达到深度研究标准。"
+}

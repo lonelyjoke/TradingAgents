@@ -1,0 +1,127 @@
+{
+  "review": {
+    "revision_required": true,
+    "company_understanding_score": 4,
+    "independent_model_score": 3,
+    "evidence_and_counterevidence_score": 3,
+    "valuation_closure_score": 2,
+    "readability_and_synthesis_score": 4,
+    "strongest_aspects": [
+      "合同负债与预付款的领先指标分析扎实，会计信号解读到位",
+      "对储能利润修复路径的拆解清晰，结合Q1毛利率和出货量数据",
+      "明确区分核心估值与AIDC期权，避免重复计算"
+    ],
+    "findings": [
+      {
+        "section": "three_year_forecast",
+        "priority": "must_revise",
+        "issue": "三年预测表格缺失规范行：未单独列出毛利润（Gross Profit）、营业利润（EBIT）、每股收益（EPS）精确值以及自由现金流等；部分行仅以区间范围出现，无法与内建模型严格对准。",
+        "evidence_or_logic_gap": "交接清单指明 dropped canonical line 包括 grossprofit, operatingprofitebit, eps, ocf, capex, fcf 等。当前表格仅含总收入、毛利率、归属净利润区间、EPS区间、OCF区间等，缺少必要的绝对数值行。",
+        "revision_instruction": "在“三年财务模型桥接”表格中，按年度完整补充 毛利润、营业利润、归属净利润（精确数）、EPS（精确数）、经营现金流、资本开支、自由现金流 各行，并使数值与内建 canonical_model_snapshot 完全一致（如 2026E gross profit 30815, EBIT 15800, net profit 13200, EPS 6.37, OCF 15500, capex 3500, FCF 12000 等）。已存在的区间可作为敏感性参考，但基准必须用点估计。"
+      },
+      {
+        "section": "thesis_moat_financial_bridge",
+        "priority": "must_revise",
+        "issue": "公开论据桥接章节缺少最强反证、证伪门和可审计的财务传导，且未将核心论据整合成连贯散文；当前主要依赖分章讨论，降低了可证伪性。",
+        "evidence_or_logic_gap": "编辑指明“public thesis chapter missing strongest counterargument/boundary”。备忘录在第二章陈述论据，在第三章单独列出证伪条件，但未为每条论据明确配对反证、传导公式和定价含义。",
+        "revision_instruction": "重构或新增“论据与财务传导”章节（可合并现有第二章与第三章要点），为每个核心论点（储能利润修复、合同负债转化、AIDC期权）分别给出：①一句话结论；②最强反证及边界条件；③显式财务传导公式（如储能净利润 = GWh × 1e9 × 单位净利 / 1e8 → 集团净利润 → EPS）；④当前市场在价格中未反映该论点的证据（隐含PE等）；⑤可操作的证伪门（如Q2毛利率<27%、出货同比下滑等）。确保这些元素以连贯分析散文形式呈现，而非简单重复内部 core_theses 卡片。"
+      },
+      {
+        "section": "valuation_and_expectation_gap",
+        "priority": "must_revise",
+        "issue": "缺少独立估值章节，未给出明确的公允价值、预期回报及预期差；当前仅在各处分散提及估值分位，未形成闭合的估值结论和期望差分析。",
+        "evidence_or_logic_gap": "编辑要求 valuation 必须回答 expectation gap。备忘录无独立估值段落，虽有比率参考但未输出基于内建模型的确定性公允价值，且未与市场隐含预期做定量对比。",
+        "revision_instruction": "新增“估值与期望差”章节，基于 already accepted 的确定性估值框架（probability weighted fair value ~184.7元，base fair value 191元，safe_buy 约102元等），简明列出：①SOTP/PE估值方法及关键倍数；②公允价值区间（含核心+期权）；③当前价格隐含的市场预期（如2026E净利润92亿、零AIDC价值等）及与实际预测的差异；④期望回报与安全边际。所有数字须与 canonical deterministic valuation 输出一致，不得另造数字。"
+      },
+      {
+        "section": "cross_section_consistency",
+        "priority": "must_revise",
+        "issue": "多处重复强调同一证据（如122亿合同负债、40亿预付款、Q1 OCF恶化）且论述几乎全文副本，违反“不得完全重述”的规则。",
+        "evidence_or_logic_gap": "合同负债/预付款在第一章、第二章、第三章、第四章、结论中均以几乎同样的详细程度出现；OCF恶化也在多处用相同数据重复。这导致篇幅膨胀且混淆核心线索。",
+        "revision_instruction": "每一关键证据仅在第一次出现时详述（建议在会计质量或经营模型章节），后续以短交引形式提及。例如：合同中负债首次在“公司如何运作”中详述，后续章节仅写“如前文所述，合同负债122亿（详见X章）”。删除重复的整段论述。"
+      },
+      {
+        "section": "three_year_forecast",
+        "priority": "should_revise",
+        "issue": "预测假设中储能单位净利和出货量敏感性的计算与手册声称可能有偏差，且未展示敏感性如何关联估值。",
+        "evidence_or_logic_gap": "备忘录提及“每变动0.01元/Wh，储能净利润约变动8.5亿元”，但与内部模型 85GWh*0.01=8.5 亿一致；但未进一步说明 EPS 影响及目标价敏感性。",
+        "revision_instruction": "在预测部分附一个简短的敏感性表格：单位净利 ±0.01元/Wh 且出货量 ±5GWh 对 2027E EPS 及公允价值的影响，可从已接受的 forecast_assumptions 中提取，并与估值节联动。"
+      },
+      {
+        "section": "industry_cycle_and_competition",
+        "priority": "should_revise",
+        "issue": "行业竞争和周期分析未充分引用结构化 industry_driver_matrix 和 segment_economics 的因果深度，内容仍较泛。",
+        "evidence_or_logic_gap": "备忘录提到了欧洲需求上修、锂价、竞争等，但未将驱动因素、现状方向、金融传导影响用一致的框架连接到业务单元。",
+        "revision_instruction": "在“行业周期与竞争”中，至少间接引用 industry_driver_matrix 的关键行（如欧洲储能需求驱动、锂价区间、美国政策），并用一两句点明其对具体业务单元（ESS、PV Inverter）的金融传导幅度。不必列举矩阵本身，但必须传递其结论。"
+      },
+      {
+        "section": "accounting_and_capital_allocation",
+        "priority": "should_revise",
+        "issue": "会计质量分析虽提及多信号，但未与 accounting_quality_matrix 的结构化判断对齐，且对 OCF 恶化的判断过于乐观。",
+        "evidence_or_logic_gap": "矩阵中对 OCF 比率和应收给出了 warning 判断，备忘录语气偏正面，未充分强调若恶化持续将构成结构性风险。",
+        "revision_instruction": "在会计质量部分明确引用预警项（OCF/净利润 0.53x、应收翻倍），并在风险章节说明若 Q2 无改善则需下调现金流假设与估值倍数的连锁机制。"
+      },
+      {
+        "section": "risks_catalysts_verification",
+        "priority": "should_revise",
+        "issue": "缺少对替代情报（alternative intelligence）的明确处理记录，也未列出卖方预期差异矩阵，导致外部观点的利用不透明。",
+        "evidence_or_logic_gap": "渠道信息 KPE04、KPE06 等被用于论点，但 memo 未声明如何使用 or 拒绝这些情报；若存在卖方目标价/盈利预测差异，也未见对比。",
+        "revision_instruction": "在风险/催化剂部分，新增一个简短小节“情报使用与预期差异”：至少为每一条去重的 KPE 材料声明一项 alternative_intelligence_decision（接受/拒绝/弱化，并说明对模型的影响）。若有卖方预期数据，以 sell_side_expectation_matrix 形式列出关键机构的预测差异。若确实无法获取卖方数据，则明确声明“无可用卖方一致预期，以市场隐含预期替代”。"
+      },
+      {
+        "section": "valuation_and_expectation_gap",
+        "priority": "should_revise",
+        "issue": "估值部分的 deterministic output 与 memo 中可能的口头数字存在矛盾（如概率加权公允价值 184.7 元 vs 178.5 元在其他处），需统一。",
+        "evidence_or_logic_gap": "交接手册中 accepted 估值 probability weighted fair value 184.7，但共享模型中曾出现 178.5，可能引起混淆。",
+        "revision_instruction": "统一使用已冻结接受模型中的数字：probability_weighted_fair_value 184.7 元，base fair value 191 元。在估值章节只呈现最终接受值，并注明计算依据。"
+      }
+    ],
+    "overall_editorial_verdict": "备忘录框架扎实，对储能修复和合同负债的核心逻辑把握准确，但缺乏完整的建模行、闭合的估值论述和反证整合。需按上述指令修订后，方可作为面向客户的 deep-dive 产品发布。"
+  },
+  "review_status": {
+    "mode": "schema_prompt_structured",
+    "agent": "Sell-Side Research Editor",
+    "structured_error": ""
+  },
+  "revision_requested": true,
+  "revision_applied": true,
+  "revision_status": {
+    "mode": "schema_prompt_structured",
+    "agent": "Portfolio Manager Editorial Revision",
+    "structured_error": ""
+  },
+  "initial_handoff_issues": [
+    "dropped canonical line: shares",
+    "dropped canonical line: 2025a_parent_net_profit",
+    "dropped canonical line: 2025a_eps",
+    "dropped canonical line: 2027e_revenue",
+    "dropped canonical line: 2028e_revenue",
+    "dropped canonical line: 2026e_grossprofit",
+    "dropped canonical line: 2027e_grossprofit",
+    "dropped canonical line: 2028e_grossprofit",
+    "dropped canonical line: 2026e_operatingprofitebit",
+    "dropped canonical line: 2027e_operatingprofitebit",
+    "dropped canonical line: 2028e_operatingprofitebit",
+    "dropped canonical line: 2026e_parent_net_profit",
+    "dropped canonical line: 2027e_parent_net_profit",
+    "dropped canonical line: 2028e_parent_net_profit",
+    "dropped canonical line: 2026e_eps",
+    "dropped canonical line: 2028e_eps",
+    "dropped canonical line: 2026e_ocf",
+    "dropped canonical line: 2027e_ocf",
+    "dropped canonical line: 2028e_ocf",
+    "dropped canonical line: 2026e_capex",
+    "dropped canonical line: 2027e_capex",
+    "dropped canonical line: 2028e_capex",
+    "dropped canonical line: 2026e_fcf",
+    "dropped canonical line: 2027e_fcf",
+    "dropped canonical line: 2028e_fcf",
+    "dropped canonical line: base_fair_value",
+    "dropped canonical line: probability_weighted_fair_value"
+  ],
+  "initial_analytical_issues": [
+    "public thesis chapter missing strongest counterargument/boundary"
+  ],
+  "remaining_handoff_issues": [],
+  "remaining_analytical_issues": []
+}

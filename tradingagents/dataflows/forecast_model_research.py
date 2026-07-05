@@ -163,6 +163,40 @@ def _structured_kpe_quantification_section(
     return lines
 
 
+def _structured_sell_side_expectation_section(
+    bundle: Mapping[str, Any] | None,
+) -> list[str]:
+    observations = list((bundle or {}).get("sell_side_intelligence", []))
+    if not observations:
+        return []
+    lines = [
+        "",
+        "## Sell-Side Forecast, Valuation And Revision Observations",
+        "| id | institution/date | freshness | rating | forecast facts | valuation facts | normalized points | revision signal | model treatment |",
+        "| --- | --- | --- | --- | --- | --- | --- | --- | --- |",
+    ]
+    for row in observations[:12]:
+        values = [
+            row.get("intelligence_id", ""),
+            f"{row.get('institution', '')}/{row.get('published_at', '')}",
+            row.get("freshness", ""),
+            row.get("rating_signal", ""),
+            row.get("forecast_facts", ""),
+            row.get("valuation_facts", ""),
+            row.get("normalized_points", ""),
+            row.get("revision_signal", ""),
+            "single observation; compare period/variable/magnitude with the independent model",
+        ]
+        lines.append("| " + " | ".join(str(value).replace("|", "/") for value in values) + " |")
+    lines.extend(
+        [
+            "- Do not average incompatible forecast years, valuation dates or methods.",
+            "- A range or median may be called consensus only when a named multi-broker sample and statistical basis are supplied.",
+        ]
+    )
+    return lines
+
+
 def _shared_underwriting_section(
     bundle: Mapping[str, Any] | None,
 ) -> list[str]:
@@ -667,6 +701,9 @@ def build_forecast_model_context(
     structured_kpe_section = _structured_kpe_quantification_section(
         structured_research_context
     )
+    sell_side_expectation_section = _structured_sell_side_expectation_section(
+        structured_research_context
+    )
     shared_underwriting_section = _shared_underwriting_section(
         structured_research_context
     )
@@ -742,6 +779,7 @@ def build_forecast_model_context(
             *assumption_change_section,
             *shared_underwriting_section,
             *structured_kpe_section,
+            *sell_side_expectation_section,
             "",
             "## Mandatory Three-Year Table",
             f"| item | {year_1} | {year_2} | {year_3} | evidence / assumption status |",

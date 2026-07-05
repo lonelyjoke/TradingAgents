@@ -49,6 +49,7 @@ _IMPORTANT_RE = re.compile(
             r"\b(shipping|freight|tanker|VLCC|TCE|TD3C|BDTI|BCTI|BDI|BCI|BPI|CTFI|Hormuz)\b",
             r"\b(compute|GPU|IDC|data center|lease|leasing|rack|power|PUE)\b",
             r"\b(wholesale|source|published|corroborated|conflicting)\b",
+            r"\b(KPE\d+|KSI\d+|Knowledge Planet|sell-side revision|target price|private proxy|channel check|decision role|required outcome)\b",
             r"\b(supply|demand|policy|peer|shareholder|pledge|repurchase)\b",
             r"(评级|建议|结论|摘要|核心|下注|预期差|赔率|估值|催化)",
             r"(证伪|风险|缺口|未验证|假设|审计|失败|缺失|不可用|部分)",
@@ -251,7 +252,12 @@ def compact_for_prompt(
     for line in lines:
         if not _line_is_important(line):
             continue
-        compact_line = _truncate_line(line)
+        # Selected KPE/KSI rows carry the cleaned claim or forecast/valuation
+        # observation itself. Preserve a
+        # materially larger slice than generic tables; otherwise the model sees
+        # only the title and cannot create a claim-to-model decision.
+        line_limit = 1200 if re.search(r"\b(?:KPE|KSI)\d+\b", line, re.I) else 360
+        compact_line = _truncate_line(line, line_limit)
         key = compact_line.strip()
         if key in seen:
             continue

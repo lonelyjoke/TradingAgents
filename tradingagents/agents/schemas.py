@@ -150,6 +150,123 @@ class InvestmentThesisCard(BaseModel):
     verdict: Literal["proven", "partial", "unproven", "rejected"]
 
 
+class SegmentEconomicsRow(BaseModel):
+    """One material economic unit in the public company map."""
+
+    business_unit: str
+    economic_role: str = Field(description="Mature core, growth engine, asset/cash unit, or optionality.")
+    disclosure_basis: Literal["reported", "calculated", "analyst_estimate", "missing"]
+    scale_and_growth: str = Field(description="Revenue/weight/growth with period, or explicitly not disclosed.")
+    margin_and_cash: str = Field(description="Margin, cash conversion and capital intensity with disclosure limits.")
+    driver_equation: str = Field(description="Industry-native volume/price/mix/cost or asset equation.")
+    valuation_treatment: Literal["core", "scenario", "optionality", "excluded"]
+    evidence_ids: list[str] = Field(default_factory=list)
+    missing_or_next_check: str = ""
+
+
+class IndustryDriverRow(BaseModel):
+    """Sector-native driver with an explicit financial transmission."""
+
+    driver: str
+    current_state_and_direction: str
+    dated_evidence: str
+    affected_business: str
+    financial_transmission: str
+    confidence: Literal["high", "medium", "low"]
+    next_verification: str
+
+
+class AccountingQualityRow(BaseModel):
+    """One accounting/capital-allocation issue tied to value creation."""
+
+    item: str
+    latest_evidence_and_period: str
+    trend_or_comparator: str
+    causal_interpretation: str
+    earnings_cash_roic_effect: str
+    verdict: Literal["positive", "neutral", "warning", "negative", "missing"]
+    evidence_ids: list[str] = Field(default_factory=list)
+
+
+class AlternativeIntelligenceDecision(BaseModel):
+    """Auditable use or rejection of one deduplicated Knowledge Planet claim."""
+
+    kpe_ids: list[str] = Field(description="One or more deduplicated KPE ids supporting the same claim.")
+    claim: str = Field(description="Concrete claim from full topic text, not a truncated title.")
+    source_type: Literal["channel_check", "company_research", "industry_data", "sell_side_view", "policy", "rumor", "other"]
+    affected_business_and_variable: str
+    public_crosscheck: str = Field(description="Official/public corroboration, contradiction, or not verified.")
+    evidence_grade: Literal["A_verified", "B_private_edge", "C_market_narrative", "D_reject"]
+    disposition: Literal["model_change", "probability_change", "verification_change", "rejected"]
+    before_after: str = Field(description="Numeric model/probability before->after, changed clock/gate, or rejection reason.")
+    report_use: str = Field(description="Exact public chapter and thesis affected.")
+    falsification_or_next_check: str
+    freshness_and_shelf_life: str = Field(
+        default="",
+        description="Age as of report date and how long the channel/industry/valuation clue remains decision-useful.",
+    )
+
+
+class SellSideExpectationRow(BaseModel):
+    """One broker observation reconciled against the independent model."""
+
+    source_ids: list[str] = Field(description="KSI ids and supporting KPE ids.")
+    institution: str
+    published_at: str
+    observation_type: Literal["single_broker", "multi_broker_range", "verified_consensus"] = "single_broker"
+    forecast_and_valuation: str = Field(description="Period-specific forecast, method, multiple and target price; mark missing fields.")
+    revision_or_dispersion: str = Field(description="Change versus the same institution's prior view or dispersion across institutions.")
+    comparison_with_our_model: str = Field(description="Exact variable, period and magnitude difference versus TradingAgents.")
+    evidence_status: Literal["public_verified", "private_text", "partial", "stale", "rejected"]
+    decision_use: str = Field(description="Forecast, valuation, scenario probability, verification, or rejection outcome.")
+
+
+class ValuationScenarioInput(BaseModel):
+    """LLM-selected assumptions; all valuation outputs are calculated in code."""
+
+    scenario: Literal["bull", "base", "bear"]
+    probability_pct: float = Field(ge=0, le=100)
+    valuation_method: Literal["PE", "direct_equity_value"] = "PE"
+    parent_net_profit_cny_mn: float | None = Field(default=None, ge=0)
+    valuation_multiple: float | None = Field(default=None, ge=0)
+    direct_equity_value_cny_mn: float | None = Field(default=None, ge=0)
+    assumption_summary: str
+    evidence_ids: list[str] = Field(default_factory=list)
+
+
+class SafeValuationAssumptions(BaseModel):
+    """PM risk/return requirements used by the deterministic safety-price engine."""
+
+    current_price_cny: float | None = Field(default=None, ge=0)
+    required_annual_return_pct: float = Field(default=20.0, ge=0, le=100)
+    holding_period_years: float = Field(default=1.0, gt=0, le=10)
+    margin_of_safety_pct: float = Field(default=20.0, ge=0, le=80)
+    maximum_bear_loss_pct: float = Field(default=15.0, ge=0, lt=100)
+    optionality_equity_value_cny_mn: float = Field(default=0.0, ge=0)
+    other_adjustments_equity_value_cny_mn: float = 0.0
+    scenarios: list[ValuationScenarioInput] = Field(default_factory=list)
+
+
+class DeterministicValuationOutput(BaseModel):
+    """Calculated output. The LLM must leave this object at defaults."""
+
+    status: Literal["closed", "partial", "unavailable"] = "unavailable"
+    diluted_share_count_mn: float | None = None
+    scenario_rows: list[dict] = Field(default_factory=list)
+    probability_weighted_core_value_cny: float | None = None
+    optionality_per_share_cny: float | None = None
+    other_adjustments_per_share_cny: float | None = None
+    fair_value_per_share_cny: float | None = None
+    expected_return_pct: float | None = None
+    required_return_price_cny: float | None = None
+    margin_of_safety_price_cny: float | None = None
+    bear_loss_constraint_price_cny: float | None = None
+    safe_buy_price_ceiling_cny: float | None = None
+    suggested_buy_zone_low_cny: float | None = None
+    fundamental_floor_cny: float | None = None
+    formula_notes: list[str] = Field(default_factory=list)
+
+
 class ResearchQuestionVerdict(BaseModel):
     """Analyst-style answer to one question that can change the decision."""
 
@@ -1168,6 +1285,37 @@ class SellSidePMDecision(BaseModel):
             "counterevidence -> financial transmission -> market pricing -> falsification."
         ),
     )
+    segment_economics: list[SegmentEconomicsRow] = Field(
+        default_factory=list,
+        description="Material economic units with disclosure basis, driver equation, cash/capital profile and valuation treatment.",
+    )
+    industry_driver_matrix: list[IndustryDriverRow] = Field(
+        default_factory=list,
+        description="Dated sector-native demand, supply/capacity, price/cost and policy drivers with financial transmission.",
+    )
+    accounting_quality_matrix: list[AccountingQualityRow] = Field(
+        default_factory=list,
+        description="Working-capital, cash-conversion, capex/ROIC, leverage/impairment and shareholder-return checks.",
+    )
+    alternative_intelligence_decisions: list[AlternativeIntelligenceDecision] = Field(
+        default_factory=list,
+        description="Deduplicated full-text KPE claims with a model, probability, verification or rejection outcome.",
+    )
+    sell_side_expectation_matrix: list[SellSideExpectationRow] = Field(
+        default_factory=list,
+        description=(
+            "KSI sell-side forecast, revision and valuation observations reconciled against the independent model. "
+            "A single broker or repost must never be labelled consensus."
+        ),
+    )
+    safe_valuation_assumptions: SafeValuationAssumptions = Field(
+        default_factory=SafeValuationAssumptions,
+        description="Bull/base/bear valuation inputs and PM safety requirements; application code calculates all outputs.",
+    )
+    deterministic_valuation: DeterministicValuationOutput = Field(
+        default_factory=DeterministicValuationOutput,
+        description="Leave at defaults; application code overwrites this field.",
+    )
     investment_conclusion_and_core_conflict: str = Field(
         description=(
             "Public opening section. State the final rating and posture, core bet, decisive "
@@ -1235,9 +1383,10 @@ class SellSidePMDecision(BaseModel):
     )
     valuation_closure: str = Field(
         description=(
-            "Close mutually exclusive core/scenario/optionality/excluded buckets to probability-"
-            "weighted per-share fair value. Reconcile current price, share count, method, metric, "
-            "multiple, ownership/haircut, double counting, expected return and rating consistency."
+            "Interpret the program-calculated valuation: justify method and assumption selection, identify "
+            "core/scenario/optionality/excluded buckets, double-counting controls, evidence limits and what "
+            "would change the inputs. Do not publish competing hand-calculated EPS, per-share values, "
+            "probability-weighted values or safety prices."
         )
     )
     accounting_and_capital_allocation: str = Field(
@@ -2052,6 +2201,337 @@ class PortfolioDecision(BaseModel):
     )
 
 
+def normalize_sell_side_pm_decision(
+    value: SellSidePMDecision | dict,
+) -> tuple[SellSidePMDecision, list[str]]:
+    """Freeze dependent PM outputs with deterministic arithmetic.
+
+    The model supplies assumptions.  This function owns EPS, FCF, scenario
+    per-share values, probability weighting, optionality conversion, expected
+    return and the safety-price ceiling.
+    """
+    decision = value if isinstance(value, SellSidePMDecision) else SellSidePMDecision.model_validate(value)
+    payload = decision.model_dump()
+    notes: list[str] = []
+    lines = list(payload.get("canonical_model_snapshot", []))
+
+    def _metric(row: dict) -> str:
+        return _canonical_metric_name(str(row.get("metric", "")))
+
+    share_row = next(
+        (
+            row
+            for row in lines
+            if any(
+                token in re.sub(r"[^a-z0-9一-鿿]+", "", str(row.get("metric", "")).lower())
+                for token in ("dilutedshare", "sharecount", "totalshare", "稀释股本", "总股本")
+            )
+            and row.get("value") is not None
+        ),
+        None,
+    )
+    shares = float(share_row["value"]) if share_row and float(share_row["value"]) > 0 else None
+
+    by_metric_period = {
+        (_metric(row), str(row.get("period", ""))): row for row in lines
+    }
+    profit_rows = [row for row in lines if _metric(row) == "parent_profit" and row.get("value") is not None]
+    if shares:
+        for profit in profit_rows:
+            period = str(profit.get("period", ""))
+            eps_value = float(profit["value"]) / shares
+            eps = by_metric_period.get(("eps", period))
+            if eps is None:
+                eps = {
+                    "line_id": f"{period}_eps",
+                    "period": period,
+                    "metric": "eps",
+                    "value": eps_value,
+                    "unit": "CNY/share",
+                    "status": "calculated",
+                    "evidence_ids": list(profit.get("evidence_ids", [])),
+                    "formula": "parent net profit (CNY mn) / diluted shares (mn)",
+                }
+                lines.append(eps)
+                by_metric_period[("eps", period)] = eps
+                notes.append(f"added deterministic {period} EPS={eps_value:.4f}")
+            else:
+                old = eps.get("value")
+                if old is None or abs(float(old) - eps_value) > max(abs(eps_value) * 0.005, 0.005):
+                    notes.append(f"replaced {period} EPS {old} -> {eps_value:.4f}")
+                eps.update(
+                    value=eps_value,
+                    unit="CNY/share",
+                    status="calculated",
+                    formula="parent net profit (CNY mn) / diluted shares (mn)",
+                )
+
+    periods = sorted({str(row.get("period", "")) for row in lines if re.search(r"20\d{2}E", str(row.get("period", "")), re.I)})
+    for period in periods:
+        ocf = by_metric_period.get(("ocf", period))
+        capex = by_metric_period.get(("capex", period))
+        if not ocf or not capex or ocf.get("value") is None or capex.get("value") is None:
+            continue
+        fcf_value = float(ocf["value"]) - abs(float(capex["value"]))
+        fcf = by_metric_period.get(("fcf", period))
+        if fcf is None:
+            fcf = {
+                "line_id": f"{period}_fcf",
+                "period": period,
+                "metric": "fcf",
+                "value": fcf_value,
+                "unit": str(ocf.get("unit", "CNY mn")),
+                "status": "calculated",
+                "evidence_ids": list(dict.fromkeys([*ocf.get("evidence_ids", []), *capex.get("evidence_ids", [])])),
+                "formula": "OCF - abs(capex)",
+            }
+            lines.append(fcf)
+            by_metric_period[("fcf", period)] = fcf
+            notes.append(f"added deterministic {period} FCF={fcf_value:.4f}")
+        else:
+            old = fcf.get("value")
+            if old is None or abs(float(old) - fcf_value) > max(abs(fcf_value) * 0.01, 1.0):
+                notes.append(f"replaced {period} FCF {old} -> {fcf_value:.4f}")
+            fcf.update(value=fcf_value, status="calculated", formula="OCF - abs(capex)")
+
+    assumptions = SafeValuationAssumptions.model_validate(payload.get("safe_valuation_assumptions") or {})
+    output = DeterministicValuationOutput(diluted_share_count_mn=shares)
+    scenario_rows: list[dict] = []
+    scenario_values: dict[str, float] = {}
+    probability_total = sum(row.probability_pct for row in assumptions.scenarios)
+    unique_scenarios = {row.scenario for row in assumptions.scenarios}
+    if shares and len(assumptions.scenarios) == 3 and unique_scenarios == {"bull", "base", "bear"}:
+        for row in assumptions.scenarios:
+            equity_value: float | None = None
+            eps: float | None = None
+            if row.valuation_method == "PE" and row.parent_net_profit_cny_mn is not None and row.valuation_multiple is not None:
+                eps = row.parent_net_profit_cny_mn / shares
+                equity_value = row.parent_net_profit_cny_mn * row.valuation_multiple
+            elif row.valuation_method == "direct_equity_value" and row.direct_equity_value_cny_mn is not None:
+                equity_value = row.direct_equity_value_cny_mn
+            fair_value = equity_value / shares if equity_value is not None else None
+            if fair_value is not None:
+                scenario_values[row.scenario] = fair_value
+            scenario_rows.append(
+                {
+                    "scenario": row.scenario,
+                    "probability_pct": row.probability_pct,
+                    "parent_net_profit_cny_mn": row.parent_net_profit_cny_mn,
+                    "eps_cny": eps,
+                    "valuation_method": row.valuation_method,
+                    "valuation_multiple": row.valuation_multiple,
+                    "equity_value_cny_mn": equity_value,
+                    "fair_value_per_share_cny": fair_value,
+                    "assumption_summary": row.assumption_summary,
+                }
+            )
+        output.scenario_rows = scenario_rows
+        if len(scenario_values) == 3 and abs(probability_total - 100.0) <= 0.6:
+            weighted = sum(
+                row.probability_pct * scenario_values[row.scenario] / 100.0
+                for row in assumptions.scenarios
+            )
+            option_per_share = assumptions.optionality_equity_value_cny_mn / shares
+            other_per_share = assumptions.other_adjustments_equity_value_cny_mn / shares
+            fair_value = weighted + option_per_share + other_per_share
+            output.probability_weighted_core_value_cny = weighted
+            output.optionality_per_share_cny = option_per_share
+            output.other_adjustments_per_share_cny = other_per_share
+            output.fair_value_per_share_cny = fair_value
+            if assumptions.current_price_cny and assumptions.current_price_cny > 0:
+                output.expected_return_pct = (fair_value / assumptions.current_price_cny - 1.0) * 100.0
+            base_value = scenario_values["base"]
+            bear_value = scenario_values["bear"]
+            required_price = base_value / ((1.0 + assumptions.required_annual_return_pct / 100.0) ** assumptions.holding_period_years)
+            mos_price = base_value * (1.0 - assumptions.margin_of_safety_pct / 100.0)
+            bear_constraint = bear_value / (1.0 - assumptions.maximum_bear_loss_pct / 100.0)
+            safe_price = min(required_price, mos_price, bear_constraint)
+            output.required_return_price_cny = required_price
+            output.margin_of_safety_price_cny = mos_price
+            output.bear_loss_constraint_price_cny = bear_constraint
+            output.safe_buy_price_ceiling_cny = safe_price
+            output.suggested_buy_zone_low_cny = safe_price * 0.9
+            output.fundamental_floor_cny = bear_value
+            output.status = "closed"
+            output.formula_notes = [
+                "scenario EPS = parent net profit (CNY mn) / diluted shares (mn)",
+                "PE fair value/share = scenario EPS x selected PE",
+                "probability-weighted core value = sum(probability x scenario fair value/share)",
+                "safe ceiling = min(base/(1+required return)^years, base x (1-MOS), bear/(1-max bear loss))",
+            ]
+        else:
+            output.status = "partial"
+            output.formula_notes = [f"scenario probabilities must sum to 100%; got {probability_total:.2f}%"]
+    elif assumptions.scenarios:
+        output.status = "partial"
+        output.formula_notes = ["valuation requires bull/base/bear inputs and a validated diluted share count"]
+
+    payload["canonical_model_snapshot"] = lines
+    payload["deterministic_valuation"] = output.model_dump()
+    return SellSidePMDecision.model_validate(payload), notes
+
+
+def _table_cell(value: object) -> str:
+    return str(value or "—").replace("|", "/").replace("\n", " ").strip()
+
+
+def _render_segment_economics(rows_in: list[SegmentEconomicsRow]) -> str:
+    if not rows_in:
+        return ""
+    rows = [
+        "### 分部经济与价值归属",
+        "",
+        "| 业务单元 | 经济角色/口径 | 规模与增长 | 利润与现金 | 驱动方程 | 估值处理 | 证据/缺口 |",
+        "| --- | --- | --- | --- | --- | --- | --- |",
+    ]
+    for row in rows_in[:8]:
+        evidence = ", ".join(row.evidence_ids) or "无编号"
+        rows.append(
+            f"| {_table_cell(row.business_unit)} | {_table_cell(row.economic_role)}；{row.disclosure_basis} | "
+            f"{_table_cell(row.scale_and_growth)} | {_table_cell(row.margin_and_cash)} | "
+            f"{_table_cell(row.driver_equation)} | {row.valuation_treatment} | "
+            f"{_table_cell(evidence)}；{_table_cell(row.missing_or_next_check)} |"
+        )
+    return "\n".join(rows)
+
+
+def _render_industry_drivers(rows_in: list[IndustryDriverRow]) -> str:
+    if not rows_in:
+        return ""
+    rows = [
+        "### 行业驱动与财务传导",
+        "",
+        "| 核心变量 | 状态与方向 | 日期化证据 | 影响业务 | 财务传导 | 置信度/验证 |",
+        "| --- | --- | --- | --- | --- | --- |",
+    ]
+    for row in rows_in[:8]:
+        rows.append(
+            f"| {_table_cell(row.driver)} | {_table_cell(row.current_state_and_direction)} | "
+            f"{_table_cell(row.dated_evidence)} | {_table_cell(row.affected_business)} | "
+            f"{_table_cell(row.financial_transmission)} | {row.confidence}；{_table_cell(row.next_verification)} |"
+        )
+    return "\n".join(rows)
+
+
+def _render_accounting_quality(rows_in: list[AccountingQualityRow]) -> str:
+    if not rows_in:
+        return ""
+    rows = [
+        "### 财务质量核查",
+        "",
+        "| 项目 | 最新证据 | 趋势/对照 | 原因判断 | 盈利/现金/ROIC影响 | 裁决 |",
+        "| --- | --- | --- | --- | --- | --- |",
+    ]
+    for row in rows_in[:8]:
+        rows.append(
+            f"| {_table_cell(row.item)} | {_table_cell(row.latest_evidence_and_period)} | "
+            f"{_table_cell(row.trend_or_comparator)} | {_table_cell(row.causal_interpretation)} | "
+            f"{_table_cell(row.earnings_cash_roic_effect)} | {row.verdict} |"
+        )
+    return "\n".join(rows)
+
+
+def _render_alternative_intelligence(rows_in: list[AlternativeIntelligenceDecision]) -> str:
+    if not rows_in:
+        return ""
+    rows = ["### 另类信息增量（知识星球）", ""]
+    for row in rows_in[:5]:
+        ids = "/".join(row.kpe_ids) or "KPE未编号"
+        rows.extend(
+            [
+                f"**{ids}｜{row.evidence_grade}｜{row.disposition}：{row.claim}**",
+                f"- 影响变量：{row.affected_business_and_variable}",
+                f"- 公共交叉验证：{row.public_crosscheck}",
+                f"- 决策变化：{row.before_after}",
+                f"- 时效与有效期：{row.freshness_and_shelf_life or '未明确；不得长期沿用'}",
+                f"- 报告用途与下次验证：{row.report_use}；{row.falsification_or_next_check}",
+                "",
+            ]
+        )
+    return "\n".join(rows).rstrip()
+
+
+def _render_deterministic_valuation(output: DeterministicValuationOutput) -> str:
+    if not output.scenario_rows:
+        return "### 程序化估值与安全价\n\n尚无完整牛/基/熊结构化输入；不得发布伪精确安全价。"
+    rows = [
+        "### 程序化情景估值",
+        "",
+        "| 情景 | 概率 | 归母净利润(CNY mn) | EPS | 方法/倍数 | 股权价值(CNY mn) | 每股价值 |",
+        "| --- | ---: | ---: | ---: | --- | ---: | ---: |",
+    ]
+    for row in output.scenario_rows:
+        multiple = row.get("valuation_multiple")
+        method = row.get("valuation_method") or "—"
+        method_text = f"{method}/{multiple:.2f}x" if multiple is not None else method
+        rows.append(
+            f"| {row.get('scenario')} | {row.get('probability_pct', 0):.1f}% | "
+            f"{_display_number(row.get('parent_net_profit_cny_mn'))} | {_display_number(row.get('eps_cny'))} | "
+            f"{method_text} | {_display_number(row.get('equity_value_cny_mn'))} | "
+            f"{_display_number(row.get('fair_value_per_share_cny'))} |"
+        )
+    if output.status == "closed":
+        rows.extend(
+            [
+                "",
+                "### 安全估值与建仓价格",
+                "",
+                f"- 概率加权核心价值：{_display_number(output.probability_weighted_core_value_cny)}元/股",
+                f"- 期权价值：{_display_number(output.optionality_per_share_cny)}元/股；其他调整：{_display_number(output.other_adjustments_per_share_cny)}元/股",
+                f"- 综合公允价值：{_display_number(output.fair_value_per_share_cny)}元/股；相对现价预期收益：{_display_number(output.expected_return_pct)}%",
+                f"- 收益率要求价格：{_display_number(output.required_return_price_cny)}元；安全边际价格：{_display_number(output.margin_of_safety_price_cny)}元；熊市约束价格：{_display_number(output.bear_loss_constraint_price_cny)}元",
+                f"- **安全买入价上限：{_display_number(output.safe_buy_price_ceiling_cny)}元；建议关注区间：{_display_number(output.suggested_buy_zone_low_cny)}-{_display_number(output.safe_buy_price_ceiling_cny)}元；基本面压力价值：{_display_number(output.fundamental_floor_cny)}元。**",
+            ]
+        )
+    else:
+        rows.extend(["", "- 估值输入不完整或概率未闭合，仅供REVIEW，不给出安全买入价。"])
+    return "\n".join(rows)
+
+
+def _render_sell_side_expectations(rows_in: list[SellSideExpectationRow]) -> str:
+    rows = [
+        "### 卖方预测、估值与预期差",
+        "",
+        "| 来源 | 机构/日期 | 预测与估值 | 修订或分歧 | 与本模型差异 | 证据状态 | 决策用途 |",
+        "| --- | --- | --- | --- | --- | --- | --- |",
+    ]
+    for row in rows_in:
+        source = "/".join(row.source_ids) or "未编号"
+        label = f"{row.institution}（{row.observation_type}）/{row.published_at}"
+        rows.append(
+            "| "
+            + " | ".join(
+                _table_cell(value)
+                for value in (
+                    source,
+                    label,
+                    row.forecast_and_valuation,
+                    row.revision_or_dispersion,
+                    row.comparison_with_our_model,
+                    row.evidence_status,
+                    row.decision_use,
+                )
+            )
+            + " |"
+        )
+    rows.append("- 单家机构观点仅代表单点观察；只有明确提供多机构样本和统计口径时才可称为一致预期。")
+    return "\n".join(rows)
+
+
+def _render_valuation_snapshot(output: DeterministicValuationOutput) -> str:
+    if output.status != "closed":
+        return ""
+    return (
+        "| 程序化公允价值 | 安全买入价上限 | 建议关注区间 | 熊市压力价值 |\n"
+        "| ---: | ---: | ---: | ---: |\n"
+        f"| {_display_number(output.fair_value_per_share_cny)}元 | "
+        f"{_display_number(output.safe_buy_price_ceiling_cny)}元 | "
+        f"{_display_number(output.suggested_buy_zone_low_cny)}-"
+        f"{_display_number(output.safe_buy_price_ceiling_cny)}元 | "
+        f"{_display_number(output.fundamental_floor_cny)}元 |"
+    )
+
+
 def render_sell_side_pm_decision(decision: SellSidePMDecision) -> str:
     """Render one continuous reader-facing Chinese deep-dive report.
 
@@ -2060,6 +2540,7 @@ def render_sell_side_pm_decision(decision: SellSidePMDecision) -> str:
     """
     if isinstance(decision, PortfolioDecision):
         return render_pm_decision(decision)
+    decision, _ = normalize_sell_side_pm_decision(decision)
     return "\n\n".join(
         [
             "# 公司深度研究与投资决策",
@@ -2068,18 +2549,23 @@ def render_sell_side_pm_decision(decision: SellSidePMDecision) -> str:
             f"| {decision.rating.value} | {decision.rating_posture} | "
             f"{decision.research_readiness} |",
             f"> **一句话结论：** {decision.one_line_thesis}",
+            _render_valuation_snapshot(decision.deterministic_valuation),
             "## 一、投资结论与估值速览\n\n"
             + _demote_embedded_headings(decision.investment_conclusion_and_core_conflict),
             "## 二、业务模式、分部经济与增长来源\n\n"
-            + _demote_embedded_headings(decision.company_disaggregation),
+            + _demote_embedded_headings(decision.company_disaggregation)
+            + ("\n\n" + _render_segment_economics(decision.segment_economics) if decision.segment_economics else ""),
             "## 三、行业结构、周期位置与竞争优势\n\n"
             + _demote_embedded_headings(decision.industry_cycle_and_competition)
+            + ("\n\n" + _render_industry_drivers(decision.industry_driver_matrix) if decision.industry_driver_matrix else "")
             + "\n\n### 竞争优势的证据检验\n\n"
             + _demote_embedded_headings(decision.moat_evidence_scorecard),
             "## 四、经营质量：财务、会计与资本配置\n\n"
-            + _demote_embedded_headings(decision.accounting_and_capital_allocation),
+            + _demote_embedded_headings(decision.accounting_and_capital_allocation)
+            + ("\n\n" + _render_accounting_quality(decision.accounting_quality_matrix) if decision.accounting_quality_matrix else ""),
             "## 五、核心投资逻辑与反方检验\n\n"
-            + _demote_embedded_headings(decision.thesis_financial_bridge),
+            + _demote_embedded_headings(decision.thesis_financial_bridge)
+            + ("\n\n" + _render_alternative_intelligence(decision.alternative_intelligence_decisions) if decision.alternative_intelligence_decisions else ""),
             "## 六、盈利预测、关键假设与敏感性\n\n"
             + _render_forecast_takeaways(decision.forecast_takeaways)
             + "\n\n"
@@ -2090,7 +2576,10 @@ def render_sell_side_pm_decision(decision: SellSidePMDecision) -> str:
             + _demote_embedded_headings(decision.autonomous_forecast_model),
             "## 七、市场预期、估值与情景回报\n\n"
             + _demote_embedded_headings(decision.expectation_gap_and_market_pricing)
-            + "\n\n### 估值闭环\n\n"
+            + ("\n\n" + _render_sell_side_expectations(decision.sell_side_expectation_matrix) if decision.sell_side_expectation_matrix else "")
+            + "\n\n"
+            + _render_deterministic_valuation(decision.deterministic_valuation)
+            + "\n\n### 估值解释与局限\n\n"
             + _demote_embedded_headings(decision.valuation_closure),
             "## 八、风险、催化剂与跟踪框架\n\n"
             + _demote_embedded_headings(decision.risks_catalysts_verification),

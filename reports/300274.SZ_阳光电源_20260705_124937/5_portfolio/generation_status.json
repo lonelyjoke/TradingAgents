@@ -1,0 +1,21 @@
+{
+  "mode": "schema_prompt_structured",
+  "agent": "Portfolio Manager",
+  "structured_error": "1 validation error for SellSidePMDecision\ncanonical_model_snapshot\n  Field required [type=missing, input_value={'rating': 'Overweight', ...决的数据缺口。'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing",
+  "schema": "SellSidePMDecision",
+  "initial_mode": "schema_repaired_fallback",
+  "editorial_review_mode": "schema_prompt_structured",
+  "editorial_revision_requested": true,
+  "editorial_revision_applied": true,
+  "editorial_revision_mode": "schema_prompt_structured",
+  "remaining_handoff_issues": [],
+  "remaining_analytical_issues": [],
+  "deterministic_model_notes": [
+    "replaced FY2025 EPS 6.55 -> 6.4935"
+  ],
+  "full_report_chars": "12092",
+  "public_report_chars": "12092",
+  "internal_overflow_chars": "0",
+  "internal_sections_removed_from_public_report": "",
+  "public_h2_count": "8"
+}

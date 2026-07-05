@@ -6,6 +6,7 @@ from types import SimpleNamespace
 
 from tradingagents.default_config import DEFAULT_CONFIG
 from tradingagents.dataflows import knowledge_planet_research as kp
+from tradingagents.dataflows import structured_research as sr
 
 
 def _make_db(path: Path) -> None:
@@ -286,6 +287,112 @@ def test_single_stock_context_includes_private_proxy_evidence_ledger(tmp_path, m
     assert "KPE01" in context
     assert "probability/verification proxy" in context
     assert "## PM Knowledge Planet Clue Verdict" in context
+
+
+def test_single_stock_context_builds_sell_side_forecast_valuation_ledger(tmp_path, monkeypatch):
+    db_path = tmp_path / "kp.sqlite"
+    _make_db(db_path)
+    conn = sqlite3.connect(db_path)
+    conn.row_factory = sqlite3.Row
+    _insert_item(
+        conn,
+        "Eastroc Beverage 605499.SH 中信证券盈利预测",
+        (
+            "中信证券维持买入评级。预计2026E EPS为3.20元，2027E EPS为3.85元。"
+            "采用2026E PE 25倍估值，对应目标价80元。"
+        ),
+        source_type="broker_report_summary",
+        ticker="605499.SH",
+    )
+    conn.commit()
+    conn.close()
+
+    monkeypatch.setattr(kp, "DEFAULT_KP_DB", db_path)
+    monkeypatch.setattr(kp, "_fetch_stock_basic", None)
+
+    context = kp.get_knowledge_planet_context("605499.SH", "2026-06-19")
+    rows = sr._known_sell_side_rows(context)
+
+    assert "### Sell-Side Forecast, Valuation And Revision Ledger" in context
+    assert "KSI01" in context
+    assert rows[0]["institution"] == "中信证券"
+    assert "3.20" in rows[0]["forecast_facts"]
+    assert "25倍" in rows[0]["valuation_facts"]
+    assert "2026E_EPS=3.20元" in rows[0]["normalized_points"]
+    assert "2026E_PE=25x" in rows[0]["normalized_points"]
+    assert "target_price=80元" in rows[0]["normalized_points"]
+    assert rows[0]["rating_signal"] == "买入"
+
+
+def test_sell_side_ledger_calculates_same_institution_numeric_revision(tmp_path, monkeypatch):
+    db_path = tmp_path / "kp.sqlite"
+    _make_db(db_path)
+    conn = sqlite3.connect(db_path)
+    conn.row_factory = sqlite3.Row
+    _insert_item(
+        conn,
+        "Eastroc Beverage 605499.SH 中信证券旧预测",
+        "中信证券维持买入。预计2026E EPS为3.20元，采用2026E PE 25倍估值，目标价80元。",
+        source_type="broker_report_summary",
+        ticker="605499.SH",
+        published_at="2026-06-10 09:00",
+    )
+    _insert_item(
+        conn,
+        "Eastroc Beverage 605499.SH 中信证券新预测",
+        "中信证券维持买入。预计2026E EPS为3.40元，采用2026E PE 26倍估值，目标价88元。",
+        source_type="broker_report_summary",
+        ticker="605499.SH",
+        published_at="2026-06-19 09:00",
+    )
+    conn.commit()
+    conn.close()
+
+    monkeypatch.setattr(kp, "DEFAULT_KP_DB", db_path)
+    monkeypatch.setattr(kp, "_fetch_stock_basic", None)
+
+    rows = sr._known_sell_side_rows(
+        kp.get_knowledge_planet_context("605499.SH", "2026-06-19")
+    )
+
+    assert rows[0]["intelligence_id"] == "KSI01"
+    assert "2026E_EPS 3.20元->3.40元" in rows[0]["revision_signal"]
+    assert "2026E_PE 25x->26x" in rows[0]["revision_signal"]
+    assert "target_price 80元->88元" in rows[0]["revision_signal"]
+
+
+def test_single_stock_kpe_preserves_full_text_after_inline_zsxq_metadata(tmp_path, monkeypatch):
+    db_path = tmp_path / "kp.sqlite"
+    _make_db(db_path)
+    conn = sqlite3.connect(db_path)
+    conn.row_factory = sqlite3.Row
+    body = (
+        "source: zsxq group_id: 28888112822211 group_name: 前沿信息收录 "
+        "topic_id: 45544511881485228 author: 纪要小能手 "
+        "published_at: 2026-07-01T18:03:53.330+0800 "
+        "阳光电源交流更新：欧洲长时储能由四小时向八小时迁移，"
+        "项目价值量和系统配置提升，但订单兑现仍需半年报合同负债与回款验证。"
+    )
+    _insert_item(
+        conn,
+        "阳光电源300274.SZ交流更新",
+        body,
+        source_type="channel_check",
+        ticker="300274.SZ",
+    )
+    conn.commit()
+    conn.close()
+
+    monkeypatch.setattr(kp, "DEFAULT_KP_DB", db_path)
+    monkeypatch.setattr(kp, "_fetch_stock_basic", None)
+
+    context = kp.get_knowledge_planet_context("300274.SZ", "2026-07-02")
+
+    assert "欧洲长时储能由四小时向八小时迁移" in context
+    assert "项目价值量和系统配置提升" in context
+    assert "group_id:" not in context
+    assert "group_name:" not in context
+    assert "topic_id:" not in context
 
 
 def test_hog_context_extracts_private_proxy_kpis(tmp_path, monkeypatch):
@@ -867,6 +974,34 @@ def test_window_sync_covers_each_date(monkeypatch):
     ]
     assert "2026-06-17=synced_window" in status
     assert "2026-06-19=synced_window" in status
+
+
+def test_window_sync_isolates_newest_gap_from_old_backfill_failure(monkeypatch):
+    calls = []
+
+    def fake_skip(sync_date, **_kwargs):
+        return "already_synced" if sync_date == "2026-06-18" else None
+
+    def fake_sync(start_date, end_date, stamp_dates, **_kwargs):
+        calls.append((start_date, end_date, stamp_dates))
+        return "latest_ok" if end_date == "2026-06-19" else "auto_sync_failed:pagination"
+
+    monkeypatch.delenv("PYTEST_CURRENT_TEST", raising=False)
+    monkeypatch.setattr(kp, "_enabled", lambda: True)
+    monkeypatch.setattr(kp, "_auto_sync_enabled", lambda: True)
+    monkeypatch.setattr(kp, "_sync_skip_status", fake_skip)
+    monkeypatch.setattr(kp, "_sync_knowledge_planet_range", fake_sync)
+
+    status = kp.ensure_knowledge_planet_upstream_synced_for_window(
+        "2026-06-19", 3, import_local=False
+    )
+
+    assert calls == [
+        ("2026-06-19", "2026-06-19", ["2026-06-19"]),
+        ("2026-06-16", "2026-06-17", ["2026-06-16", "2026-06-17"]),
+    ]
+    assert "2026-06-19=latest_ok" in status
+    assert "2026-06-16=auto_sync_failed:pagination" in status
 
 
 def test_text_only_import_uses_stream_mode(monkeypatch):

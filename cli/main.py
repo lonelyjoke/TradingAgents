@@ -1111,7 +1111,7 @@ def save_report_to_disk(final_state, ticker: str, save_path: Path):
         if blocker_count > 0:
             publication_banner = (
                 "> **Publication status: BLOCKED / 研究发布状态：阻断。** "
-                f"发布审计发现 {blocker_count} 个研究完整性、结构化生成、事实、算术、期间或分类阻断项；"
+                f"发布审计发现 {blocker_count} 个经自动校正后仍未解决的重大结构化生成、标的、期间、单位、算术或估值矛盾；"
                 "原始模型输出仅作为诊断草稿保存，在错误核对前不得作为正式投委会或对外报告。"
             )
             (save_path / "5_portfolio" / "decision_draft.md").write_text(
@@ -1138,7 +1138,7 @@ def save_report_to_disk(final_state, ticker: str, save_path: Path):
             review_banner = (
                 "> **Publication status: REVIEW / 研究发布状态：可输出、待复核。** "
                 f"审计记录 {research_error_count} 个研究完整性问题和 {warning_count} 个提示；"
-                "数据缺失本身不改变评级方向，也不阻止完整报告输出。"
+                "分析深度、数据覆盖、证据等级或格式问题不改变评级方向，也不阻止完整报告输出。"
             )
             reviewed_decision = review_banner + "\n\n" + raw_decision
             decision_path.write_text(reviewed_decision, encoding="utf-8")
