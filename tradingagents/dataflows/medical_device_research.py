@@ -150,6 +150,33 @@ MEDICAL_DEVICE_TERMS = (
     "MRI",
 )
 
+# Generic annual reports routinely contain words such as tender, overseas,
+# installation, FDA, CE, consumables and equipment renewal.  Those words alone
+# must not route an unrelated industrial company into a medical-device model.
+MEDICAL_DEVICE_STRONG_TERMS = (
+    "\u533b\u7597\u5668\u68b0",
+    "\u533b\u7597\u8bbe\u5907",
+    "\u533b\u7597\u4eea\u5668",
+    "\u533b\u7528\u8017\u6750",
+    "\u9ad8\u503c\u8017\u6750",
+    "\u4f53\u5916\u8bca\u65ad",
+    "\u8bca\u65ad\u8bd5\u5242",
+    "\u68c0\u9a8c\u8bbe\u5907",
+    "\u76d1\u62a4\u4eea",
+    "\u9ebb\u9189\u673a",
+    "\u547c\u5438\u673a",
+    "\u5185\u7aa5\u955c",
+    "IVD",
+)
+
+MEDICAL_DEVICE_INDUSTRY_TERMS = (
+    "\u533b\u7597\u5668\u68b0",
+    "\u533b\u7597\u8bbe\u5907",
+    "\u533b\u7597\u4fdd\u5065",
+    "\u4f53\u5916\u8bca\u65ad",
+    "\u533b\u7528\u8017\u6750",
+)
+
 MEDICAL_DEVICE_EVIDENCE_TERMS = (
     "\u88c5\u673a",
     "\u8bbe\u5907\u66f4\u65b0",
@@ -374,8 +401,10 @@ def _company_profile(symbol: str, curr_date: str, look_back_days: int) -> Medica
         return None
     if symbol in MEDICAL_DEVICE_COMPANIES:
         reason = "curated A-share medical-device ticker list"
-    elif _contains_terms(MEDICAL_DEVICE_TERMS, company_name, industry, text_probe):
-        reason = "company name / Tushare industry / filing text contains medical-device terms"
+    elif _contains_terms(MEDICAL_DEVICE_INDUSTRY_TERMS, company_name, industry):
+        reason = "company name / Tushare industry contains a medical-device identity"
+    elif _contains_terms(MEDICAL_DEVICE_STRONG_TERMS, text_probe):
+        reason = "filing text contains a medical-device-specific product or business identity"
     else:
         return None
 

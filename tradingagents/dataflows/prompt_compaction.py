@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import re
 from collections.abc import Mapping
+from collections.abc import Callable, Iterable
 
 from tradingagents.dataflows.config import get_config
 
@@ -313,3 +314,29 @@ def compact_debate_history(text: str, *, profile: str = "research") -> str:
 
 def compact_risk_history(text: str, *, profile: str = "portfolio") -> str:
     return compact_for_prompt(text, label="risk_history", profile=profile)
+
+
+def gated_prompt_sections(
+    entries: Iterable[tuple[str, str, Callable[[], str]]],
+) -> tuple[str, str]:
+    """Render only sector contexts whose deterministic router fired.
+
+    Generic company evidence remains outside this helper.  This prevents a
+    software, mining, insurance, medical-device, baijiu, or other sector
+    playbook from consuming prompt budget for an unrelated company.
+    """
+
+    active: list[tuple[str, str, Callable[[], str]]] = []
+    for label, context, instruction in entries:
+        if re.search(
+            r"(?im)^\s*-?\s*status\s*[:\uff1a]\s*triggered\b",
+            str(context or ""),
+        ):
+            active.append((label, context, instruction))
+    if not active:
+        return "- No sector-specific playbook was triggered for this company.", ""
+    contexts = "\n\n".join(
+        f"**{label} sector context:**\n{context}" for label, context, _ in active
+    )
+    instructions = "".join(instruction() for _, _, instruction in active)
+    return contexts, instructions

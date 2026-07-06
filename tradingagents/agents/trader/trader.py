@@ -10,6 +10,7 @@ from tradingagents.agents.schemas import TraderProposal, render_trader_proposal
 from tradingagents.agents.utils.agent_utils import (
     build_instrument_context,
     get_baijiu_instruction,
+    get_biopharma_instruction,
     get_buy_side_thesis_instruction,
     get_compute_leasing_instruction,
     get_dividend_defensive_instruction,
@@ -34,7 +35,11 @@ from tradingagents.agents.utils.structured import (
     bind_structured,
     invoke_structured_or_freetext,
 )
-from tradingagents.dataflows.prompt_compaction import compact_for_prompt, compact_state_fields
+from tradingagents.dataflows.prompt_compaction import (
+    compact_for_prompt,
+    compact_state_fields,
+    gated_prompt_sections,
+)
 
 
 def create_trader(llm):
@@ -88,6 +93,19 @@ def create_trader(llm):
         insurance_context = prompt_contexts["insurance_context"]
         medical_device_context = prompt_contexts["medical_device_context"]
         metals_mining_context = prompt_contexts["metals_mining_context"]
+        gated_sector_context, gated_sector_instructions = gated_prompt_sections(
+            [
+                ("Baijiu", baijiu_context, get_baijiu_instruction),
+                ("Compute leasing", compute_leasing_context, get_compute_leasing_instruction),
+                ("Optical module", optical_module_context, get_optical_module_instruction),
+                ("Defensive dividend", dividend_defensive_context, get_dividend_defensive_instruction),
+                ("Biopharma", biopharma_context, get_biopharma_instruction),
+                ("Software", software_context, get_software_instruction),
+                ("Insurance", insurance_context, get_insurance_instruction),
+                ("Medical device", medical_device_context, get_medical_device_instruction),
+                ("Metals/mining", metals_mining_context, get_metals_mining_instruction),
+            ]
+        )
 
         messages = [
             {
@@ -113,14 +131,7 @@ def create_trader(llm):
                     f"{get_policy_planning_instruction()}"
                     f"{get_web_fact_check_instruction()}"
                     f"{get_knowledge_planet_instruction()}"
-                    f"{get_baijiu_instruction()}"
-                    f"{get_compute_leasing_instruction()}"
-                    f"{get_optical_module_instruction()}"
-                    f"{get_dividend_defensive_instruction()}"
-                    f"{get_software_instruction()}"
-                    f"{get_insurance_instruction()}"
-                    f"{get_medical_device_instruction()}"
-                    f"{get_metals_mining_instruction()}"
+                    f"{gated_sector_instructions}"
                     f"{get_focused_report_instruction()}"
                 ),
             },
@@ -140,15 +151,7 @@ def create_trader(llm):
                     f"Official policy-planning context: {policy_planning_context}\n\n"
                     f"Web fact-check context: {web_fact_check_context}\n\n"
                     f"Knowledge Planet topic-text intelligence: {knowledge_planet_context}\n\n"
-                    f"Gated baijiu verification context: {baijiu_context}\n\n"
-                    f"Gated compute-leasing verification context: {compute_leasing_context}\n\n"
-                    f"Gated AI optical-module verification context: {optical_module_context}\n\n"
-                    f"Gated dividend defensive verification context: {dividend_defensive_context}\n\n"
-                    f"Gated biopharma verification context: {biopharma_context}\n\n"
-                    f"Gated software verification context: {software_context}\n\n"
-                    f"Gated insurance verification context: {insurance_context}\n\n"
-                    f"Gated medical-device verification context: {medical_device_context}\n\n"
-                    f"Gated metals/mining verification context: {metals_mining_context}\n\n"
+                    f"Triggered sector-specific research layers:\n{gated_sector_context}\n\n"
                     f"Leverage these insights to make an informed and strategic decision."
                 ),
             },

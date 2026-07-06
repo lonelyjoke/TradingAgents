@@ -23,6 +23,7 @@ import urllib.request
 from collections import Counter, defaultdict
 from dataclasses import dataclass
 from datetime import datetime, timedelta
+from difflib import SequenceMatcher
 from pathlib import Path
 from typing import Callable, Iterable
 
@@ -249,6 +250,7 @@ CANDIDATE_NOISE_SUBSTRINGS = (
 )
 
 COMMON_A_SHARE_ALIASES = {
+    "阳光电源": "300274.SZ",
     "中国平安": "601318.SH",
     "宁德时代": "300750.SZ",
     "寒武纪": "688256.SH",
@@ -957,9 +959,20 @@ def ensure_knowledge_planet_upstream_synced_for_window(
             for date_range in _contiguous_date_ranges(refresh_dates):
                 effective_max_pages = max_pages
                 if max_pages is not None:
+                    window_end = _parse_date(end_date) or datetime.now()
+                    gap_start = _parse_date(date_range[0]) or window_end
+                    gap_age_days = max(0, (window_end.date() - gap_start.date()).days)
+                    # The upstream API paginates newest-first.  A historical
+                    # hole needs enough pages to reach its date even when the
+                    # missing range itself is short.  This deep retry occurs
+                    # only for unstamped gaps; successful days are cached.
+                    age_aware_budget = max(1, gap_age_days + 3) * int(max_pages)
                     effective_max_pages = min(
                         configured_cap,
-                        max(1, int(max_pages)) * len(date_range),
+                        max(
+                            max(1, int(max_pages)) * len(date_range),
+                            age_aware_budget,
+                        ),
                     )
                 batch_status = _sync_knowledge_planet_range(
                     date_range[0],
@@ -980,6 +993,33 @@ def ensure_knowledge_planet_upstream_synced_for_window(
         if progress:
             progress(f"[knowledge planet import] {import_status}")
     return "; ".join(parts)
+
+
+def _summarize_sync_status(status: str) -> tuple[str, list[str]]:
+    """Render truthful, compact cache/sync coverage without prompt-flooding paths."""
+    counts: Counter[str] = Counter()
+    failed_dates: list[str] = []
+    for part in str(status or "").split("; "):
+        if part.startswith("local_index="):
+            counts["index_refreshed" if "local_import_ok" in part else "index_failed"] += 1
+            continue
+        match = re.match(r"(20\d{2}-\d{2}-\d{2})=(.*)", part)
+        if not match:
+            continue
+        date, result = match.groups()
+        if "auto_sync_failed" in result:
+            counts["failed"] += 1
+            failed_dates.append(date)
+        elif "synced_window" in result:
+            counts["synced"] += 1
+        elif "already_synced" in result or "recently_synced" in result:
+            counts["cached"] += 1
+        elif "disabled" in result or "skipped" in result:
+            counts["skipped"] += 1
+        else:
+            counts["other"] += 1
+    summary = ", ".join(f"{key}={value}" for key, value in counts.items()) or "no dated sync result"
+    return summary, failed_dates
 
 
 def _safe_like_term(term: str) -> str:
@@ -1050,6 +1090,19 @@ def infer_credibility(source_type: str) -> str:
     if source_type == "market_joke":
         return "sentiment_only"
     return "unclassified_needs_review"
+
+
+def _item_credibility(item: KpItem, source_type: str, evidence: str) -> str:
+    """Grade the actual claim, not merely its source-type label."""
+    if any(keyword.lower() in evidence.lower() for keyword in PUMP_KEYWORDS):
+        return "promotional_private_unverified"
+    if _infer_sell_side_institution(evidence) != "机构未识别":
+        return "identified_broker_private_text"
+    if source_type == "company_research_feedback":
+        return "company_research_private_hard_to_verify"
+    if source_type in {"industry_weekly_data", "industry_data_snippet", "broker_survey_data"}:
+        return "private_data_requires_methodology_check"
+    return infer_credibility(source_type)
 
 
 def _research_layer_for_signal(text: str, source_type: str, event_type: str = "") -> str:
@@ -1192,6 +1245,22 @@ HOG_KP_EXPANSION_TERMS = (
     "LH",
 )
 
+CLEAN_ENERGY_POWER_ELECTRONICS_TERMS = (
+    "光伏逆变器",
+    "储能系统",
+    "储能集成",
+    "PCS",
+    "BMS",
+    "EMS",
+    "构网型",
+    "海外储能",
+    "储能订单",
+    "储能出货",
+    "SST",
+    "固态变压器",
+    "AIDC电源",
+)
+
 
 def _stock_terms(ticker: str, *, include_industry_expansion: bool = True) -> list[str]:
     terms = []
@@ -1209,20 +1278,34 @@ def _stock_terms(ticker: str, *, include_industry_expansion: bool = True) -> lis
             if normalized == symbol or normalized == symbol.replace(".", ""):
                 terms.append(alias)
 
+    company_name = ""
+    industry = ""
     if _fetch_stock_basic and re.match(r"^\d{6}\.(SH|SZ|BJ)$", normalized):
         try:
             basic = _fetch_stock_basic(normalized)
             if basic is not None:
-                for field in ("name", "industry"):
-                    value = str(basic.get(field) or "").strip()
-                    if value:
-                        terms.append(value)
+                company_name = str(basic.get("name") or "").strip()
+                industry = str(basic.get("industry") or "").strip()
+                if company_name:
+                    terms.append(company_name)
+                # Vendor industry labels such as `电气设备` are not company
+                # identity.  They may expand KPI recall, but must never become
+                # a primary term that lets unrelated companies pass the
+                # single-stock evidence gate.
+                if include_industry_expansion and industry:
+                    terms.append(industry)
         except Exception:
             pass
 
     base_terms = list(terms)
     if include_industry_expansion and is_hog_breeding_text(normalized or raw, *base_terms):
         terms.extend(HOG_KP_EXPANSION_TERMS)
+    if include_industry_expansion and (
+        company_name == "阳光电源"
+        or normalized == "300274.SZ"
+        or any(token in company_name for token in ("逆变器", "储能"))
+    ):
+        terms.extend(CLEAN_ENERGY_POWER_ELECTRONICS_TERMS)
 
     unique = []
     for term in terms:
@@ -1230,6 +1313,78 @@ def _stock_terms(ticker: str, *, include_industry_expansion: bool = True) -> lis
         if len(term) >= 2 and term not in unique:
             unique.append(term)
     return unique
+
+
+def _is_company_specific_item(item: KpItem, primary_terms: list[str]) -> bool:
+    """Require an exact ticker/name hit before a clue enters company evidence."""
+    body = "\n".join(
+        [item.title, item.text, item.summary, " ".join(item.tickers), " ".join(item.companies)]
+    )
+    return any(_term_in_text(term, body) for term in primary_terms)
+
+
+def _is_file_inventory_only(text: str) -> bool:
+    """Identify posts that only announce PDF/audio filenames.
+
+    Text-only mode intentionally keeps these posts in the raw archive, but a
+    filename is not report content and therefore cannot become KPE/KSI proof.
+    """
+    body = _strip_zsxq_metadata(text)
+    file_count = len(re.findall(r"\.(?:pdf|mp3|docx?|xlsx?)\b", body, re.I))
+    if (
+        file_count >= 2
+        and re.search(r"外资研报|调研纪要|文件清单|附件列表", body)
+        and not re.search(r"正文|纪要内容|核心观点如下|电话会要点如下", body)
+    ):
+        return True
+    files_marker = re.search(r"(?im)^\s*files\s*[:：]\s*$", body)
+    if files_marker:
+        prefix = body[: files_marker.start()]
+        prefix = re.sub(r"<e\b[^>]*?/?>|#+\s*外资研报|source\s*:\s*zsxq", " ", prefix, flags=re.I)
+        if len(re.sub(r"\W+", "", prefix)) < 80:
+            return True
+    file_hits = re.findall(r"[^；;。\n]{2,180}\.(?:pdf|mp3|docx?|xlsx?)", body, re.I)
+    if not file_hits:
+        return False
+    residual = body
+    for hit in file_hits:
+        residual = residual.replace(hit, " ")
+    residual = re.sub(r"(?:外资研报|调研纪要|研报|附件|文件|author)\s*[:：]?", " ", residual, flags=re.I)
+    residual = re.sub(r"[\s；;、，,。|]+", "", residual)
+    return len(residual) < 80
+
+
+def _has_substantive_topic_text(item: KpItem) -> bool:
+    cleaned = _strip_zsxq_metadata(item.text or item.summary)
+    if not cleaned:
+        return False
+    if "笔记链接" in cleaned and not any(keyword.lower() in cleaned.lower() for keyword in HARD_INFO_KEYWORDS):
+        return False
+    normalized = re.sub(r"(?:annotation|笔记链接|链接)\s*[:：]?", "", cleaned, flags=re.I)
+    return len(re.sub(r"\W+", "", normalized)) >= 24
+
+
+def _near_duplicate_claim(left: str, right: str) -> bool:
+    left_body = left.rsplit("｜", 1)[-1]
+    right_body = right.rsplit("｜", 1)[-1]
+    left_body_norm = re.sub(r"[^a-z0-9\u4e00-\u9fff]+", "", left_body.lower())
+    right_body_norm = re.sub(r"[^a-z0-9\u4e00-\u9fff]+", "", right_body.lower())
+    if (
+        min(len(left_body_norm), len(right_body_norm)) >= 24
+        and SequenceMatcher(None, left_body_norm, right_body_norm).ratio() >= 0.9
+    ):
+        return True
+    left_norm = re.sub(r"[^a-z0-9\u4e00-\u9fff]+", "", left.lower())
+    right_norm = re.sub(r"[^a-z0-9\u4e00-\u9fff]+", "", right.lower())
+    if not left_norm or not right_norm:
+        return False
+    if left_norm[:160] == right_norm[:160]:
+        return True
+    shorter = min(len(left_norm), len(right_norm))
+    if shorter < 80:
+        return False
+    ratio = SequenceMatcher(None, left_norm[:1600], right_norm[:1600]).ratio()
+    return ratio >= (0.72 if shorter >= 300 else 0.82)
 
 
 def _term_in_text(term: str, text: str) -> bool:
@@ -1421,13 +1576,13 @@ def _strip_zsxq_metadata(text: str) -> str:
     cleaned = re.sub(r"\bgroup_id:\s*\d+", " ", cleaned, flags=re.IGNORECASE)
     cleaned = re.sub(r"\btopic_id:\s*\d+", " ", cleaned, flags=re.IGNORECASE)
     cleaned = re.sub(
-        r"\bgroup_name:\s*.*?(?=(?:topic_id|author|published_at):)",
+        r"\bgroup_name:\s*[\s\S]*?(?=(?:topic_id|author|published_at):)",
         " ",
         cleaned,
         flags=re.IGNORECASE,
     )
     cleaned = re.sub(
-        r"\bauthor:\s*.*?(?=published_at:)",
+        r"\bauthor:\s*[\s\S]*?(?=published_at:)",
         " ",
         cleaned,
         flags=re.IGNORECASE,
@@ -6633,6 +6788,12 @@ def _build_sell_side_text_intelligence(
     candidates: list[tuple[KpItem, str, str, str, str]] = []
     for item in items:
         full_text = _clean_report_snippet(f"{item.title}\n{item.text or item.summary}", 5000)
+        if not _is_company_specific_item(item, primary_terms):
+            continue
+        if not _has_substantive_topic_text(item):
+            continue
+        if _is_file_inventory_only(full_text):
+            continue
         source_type = infer_private_source_type(full_text, item.source_type)
         title_is_targeted = any(_term_in_text(term, item.title) for term in primary_terms)
         target_terms = tuple(primary_terms)
@@ -6734,10 +6895,11 @@ def _build_kp_evidence_ledger(
     *,
     items: list[KpItem],
     preprocessed_snapshot: dict[str, list[sqlite3.Row]],
-    max_rows: int = 8,
+    primary_terms: list[str],
+    max_rows: int = 12,
 ) -> list[KnowledgePlanetEvidence]:
     rows: list[KnowledgePlanetEvidence] = []
-    seen: set[str] = set()
+    seen: list[str] = []
 
     def _dedup_key(text: str) -> str:
         normalized = re.sub(r"[^a-z0-9\u4e00-\u9fff]+", "", text.lower())
@@ -6748,6 +6910,12 @@ def _build_kp_evidence_ledger(
     # the full company-specific channel note is available.
     for item in items:
         text = f"{item.title}\n{item.text or item.summary}"
+        if not _is_company_specific_item(item, primary_terms):
+            continue
+        if not _has_substantive_topic_text(item):
+            continue
+        if _is_file_inventory_only(text):
+            continue
         source_type = infer_private_source_type(text, item.source_type)
         if source_type not in INFORMATION_RICH_TYPES and source_type not in SELL_SIDE_TYPES:
             continue
@@ -6756,16 +6924,16 @@ def _build_kp_evidence_ledger(
         if title and title not in evidence:
             evidence = f"{title}｜{evidence}"
         key = _dedup_key(evidence)
-        if not evidence or not key or any(key.startswith(existing[:120]) or existing.startswith(key[:120]) for existing in seen):
+        if not evidence or not key or any(_near_duplicate_claim(evidence, existing) for existing in seen):
             continue
-        seen.add(key)
+        seen.append(evidence)
         rows.append(
             KnowledgePlanetEvidence(
                 evidence_id=f"KPE{len(rows) + 1:02d}",
                 published_at=item.published_at[:16],
                 source=f"stream_item:{item.row_id}",
                 source_type=source_type,
-                credibility=infer_credibility(source_type),
+                credibility=_item_credibility(item, source_type, evidence),
                 decision_role=(decision_role := _kp_decision_role(source_type, evidence)),
                 evidence=evidence,
                 verification="cross-check with filings/Tushare/price-volume/announcements before hard use",
@@ -6781,10 +6949,14 @@ def _build_kp_evidence_ledger(
         if source_type not in INFORMATION_RICH_TYPES and source_type not in SELL_SIDE_TYPES:
             continue
         evidence = _clean_report_snippet(str(row["summary"] or row["title"] or ""), 500)
-        key = _dedup_key(evidence)
-        if not evidence or not key or any(key.startswith(existing[:120]) or existing.startswith(key[:120]) for existing in seen):
+        if not any(_term_in_text(term, evidence) for term in primary_terms):
             continue
-        seen.add(key)
+        if _is_file_inventory_only(evidence):
+            continue
+        key = _dedup_key(evidence)
+        if not evidence or not key or any(_near_duplicate_claim(evidence, existing) for existing in seen):
+            continue
+        seen.append(evidence)
         rows.append(
             KnowledgePlanetEvidence(
                 evidence_id=f"KPE{len(rows) + 1:02d}",
@@ -6856,7 +7028,21 @@ def _stock_fusion_pack_lines(
     events = list(preprocessed_snapshot.get("events", []))
     assumptions = list(preprocessed_snapshot.get("assumptions", []))
     structures = list(preprocessed_snapshot.get("structures", []))
-    opportunities = list(preprocessed_snapshot.get("opportunities", []))
+    opportunities = [
+        row
+        for row in preprocessed_snapshot.get("opportunities", [])
+        if any(
+            _term_in_text(
+                term,
+                f"{_row_get(row, 'symbol_or_name')}\n{_row_get(row, 'reason')}\n{_row_get(row, 'verification')}",
+            )
+            for term in primary_terms
+        )
+        and any(
+            _term_in_text(term, f"{_row_get(row, 'reason')}\n{_row_get(row, 'verification')}")
+            for term in primary_terms
+        )
+    ]
     quality_rows = list(preprocessed_snapshot.get("quality", []))
     quality = {str(row["quality_status"]): int(row["n"]) for row in quality_rows}
     source_mix = _counter_from_rows(events, "source_type")
@@ -6865,14 +7051,26 @@ def _stock_fusion_pack_lines(
     hard_events = [
         row
         for row in events
-        if str(row["source_type"] or "") in INFORMATION_RICH_TYPES
-        or "增量" in str(row["increment_level"] or "")
+        if (
+            str(row["source_type"] or "") in INFORMATION_RICH_TYPES
+            or "增量" in str(row["increment_level"] or "")
+        )
+        and any(
+            _term_in_text(term, f"{row['title']}\n{row['summary']}")
+            for term in primary_terms
+        )
     ]
     promotional_events = [
         row
         for row in events
-        if str(row["source_type"] or "") in SELL_SIDE_TYPES
-        or "情绪" in str(row["increment_level"] or "")
+        if (
+            str(row["source_type"] or "") in SELL_SIDE_TYPES
+            or "情绪" in str(row["increment_level"] or "")
+        )
+        and any(
+            _term_in_text(term, f"{row['title']}\n{row['summary']}")
+            for term in primary_terms
+        )
     ]
 
     raw_match_summary = f"- Raw matches: stream={len(items)}"
@@ -6917,6 +7115,7 @@ def _stock_fusion_pack_lines(
     evidence_rows = _build_kp_evidence_ledger(
         items=items,
         preprocessed_snapshot=preprocessed_snapshot,
+        primary_terms=primary_terms,
     )
     lines.extend(["", "### Private / Proxy Evidence Ledger"])
     if evidence_rows:
@@ -7078,6 +7277,7 @@ def get_knowledge_planet_context(
         # fetched topics.  Stream import is idempotent and text-only by default.
         import_local=True,
     )
+    sync_summary, failed_sync_dates = _summarize_sync_status(sync_status)
     preprocess_status = "disabled"
     if bool(config.get("knowledge_planet_preprocess_enabled", True)):
         preprocess_stats = preprocess_knowledge_planet_window(curr_date, lookback)
@@ -7148,7 +7348,13 @@ def get_knowledge_planet_context(
         f"- Window: {start_date} to {end_date} ({lookback} days)",
         f"- Primary query terms: {', '.join(primary_terms) if primary_terms else '(none)'}",
         f"- Sector/KPI expansion terms: {', '.join(expanded_terms[:30]) if expanded_terms else '(none)'}",
-        f"- Upstream sync: {sync_status}",
+        f"- Upstream sync summary: {sync_summary}",
+        f"- Auto-sync refresh window: latest {sync_lookback} day(s); older dates use the persistent local cache.",
+        (
+            "- Sync coverage: partial; failed dates=" + ", ".join(failed_sync_dates[:12])
+            if failed_sync_dates
+            else "- Sync coverage: complete for the requested refresh window."
+        ),
         f"- Preprocess: {preprocess_status}",
         f"- Matched stream items: {len(items)}",
         f"- Knowledge Planet mode: {'text_only' if _text_only_enabled() else 'full'}",
@@ -7181,7 +7387,14 @@ def get_knowledge_planet_context(
 
     if preprocessed_snapshot.get("events") or preprocessed_snapshot.get("opportunities"):
         lines.extend(["## Preprocessed Research Assets", ""])
-        events = preprocessed_snapshot.get("events", [])
+        events = [
+            row
+            for row in preprocessed_snapshot.get("events", [])
+            if any(
+                _term_in_text(term, f"{_row_get(row, 'title')}\n{_row_get(row, 'summary')}")
+                for term in primary_terms
+            )
+        ]
         if events:
             lines.extend(
                 [
@@ -7197,7 +7410,14 @@ def get_knowledge_planet_context(
                     f"{_md_cell(_compact_text(_row_get(row, 'objective_anchor', row['verification']), 100))} |"
                 )
             lines.append("")
-        opportunities = preprocessed_snapshot.get("opportunities", [])
+        opportunities = [
+            row
+            for row in preprocessed_snapshot.get("opportunities", [])
+            if any(
+                _term_in_text(term, f"{_row_get(row, 'reason')}\n{_row_get(row, 'verification')}")
+                for term in primary_terms
+            )
+        ]
         if opportunities:
             lines.extend(["| opportunity | type | score | reason | verification |", "| --- | --- | ---: | --- | --- |"])
             for row in opportunities[:6]:

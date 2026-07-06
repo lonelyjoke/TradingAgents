@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import re
+from copy import deepcopy
 from typing import Any, Mapping
 
 from tradingagents.agents.schemas import (
@@ -57,6 +58,7 @@ from tradingagents.dataflows.prompt_compaction import (
     compact_debate_history,
     compact_for_prompt,
     compact_state_fields,
+    gated_prompt_sections,
 )
 from tradingagents.dataflows.structured_research import compact_structured_research_for_prompt
 
@@ -143,6 +145,15 @@ def _underwriting_line_map(packet: Mapping[str, Any]) -> dict[tuple[str, str], d
             "metric": "diluted_shares",
             "value": shares,
             "unit": "mn shares",
+            "status": (
+                "reported"
+                if company.get("share_count_source_type") == "reported"
+                else "calculated"
+            ),
+            "evidence_ids": [company.get("share_count_evidence_id")]
+            if company.get("share_count_evidence_id")
+            else [],
+            "formula": company.get("share_count_formula", ""),
         }
     years = list(packet.get("forecast_years", []))
     for row in packet.get("forecast_lines", []) or []:
@@ -162,8 +173,53 @@ def _underwriting_line_map(packet: Mapping[str, Any]) -> dict[tuple[str, str], d
                 "metric": key[1],
                 "value": row.get(value_field),
                 "unit": row.get("unit", ""),
+                "status": (
+                    "reported"
+                    if row.get("assumption_status") == "reported"
+                    else "calculated"
+                    if row.get("assumption_status") == "calculated"
+                    else "estimated"
+                ),
+                "evidence_ids": list(row.get("evidence_ids", []) or []),
+                "formula": row.get("formula", ""),
             }
     return lines
+
+
+def _complete_unchanged_handoff_lines(
+    packet: Mapping[str, Any], payload: Mapping[str, Any]
+) -> tuple[dict[str, Any], list[str]]:
+    """Copy omitted unchanged underwriting lines without another LLM call.
+
+    The Research Manager is allowed to revise a line only through an accepted
+    ``model_change_rows`` entry.  Therefore a source line that is absent from
+    the snapshot and has no accepted change is bookkeeping, not analysis.  It
+    can be restored deterministically while substantive changes remain routed
+    to the existing repair/audit path.
+    """
+
+    completed = deepcopy(dict(payload))
+    snapshot = [dict(row) for row in completed.get("canonical_model_snapshot", []) or []]
+    accepted_keys = {
+        _handoff_metric_key(row.get("period"), row.get("metric"))
+        for row in snapshot
+        if row.get("value") is not None
+    }
+    changed_ids = {
+        str(row.get("line_id", "")).strip().lower()
+        for row in completed.get("model_change_rows", []) or []
+        if str(row.get("disposition", "")).lower() == "accepted"
+    }
+    copied_ids: list[str] = []
+    for key, source in _underwriting_line_map(packet).items():
+        line_id = str(source.get("line_id", "")).strip()
+        if key in accepted_keys or line_id.lower() in changed_ids:
+            continue
+        snapshot.append(dict(source))
+        accepted_keys.add(key)
+        copied_ids.append(line_id)
+    completed["canonical_model_snapshot"] = snapshot
+    return completed, copied_ids
 
 
 def _research_manager_handoff_issues(
@@ -274,6 +330,25 @@ def create_research_manager(llm):
         insurance_context = prompt_contexts["insurance_context"]
         medical_device_context = prompt_contexts["medical_device_context"]
         metals_mining_context = prompt_contexts["metals_mining_context"]
+        gated_sector_context, gated_sector_instructions = gated_prompt_sections(
+            [
+                ("Baijiu", baijiu_context, get_baijiu_instruction),
+                ("Compute leasing", compute_leasing_context, get_compute_leasing_instruction),
+                ("Defensive dividend", dividend_defensive_context, get_dividend_defensive_instruction),
+                ("Building materials", building_materials_context, get_building_materials_instruction),
+                (
+                    "Consumer staples",
+                    consumer_staples_context,
+                    lambda: get_consumer_staples_instruction(),
+                ),
+                ("Optical module", optical_module_context, get_optical_module_instruction),
+                ("Biopharma", biopharma_context, get_biopharma_instruction),
+                ("Software", software_context, get_software_instruction),
+                ("Insurance", insurance_context, get_insurance_instruction),
+                ("Medical device", medical_device_context, get_medical_device_instruction),
+                ("Metals/mining", metals_mining_context, get_metals_mining_instruction),
+            ]
+        )
         industry_cycle_context = prompt_contexts["industry_cycle_context"]
         company_business_model_context = prompt_contexts["company_business_model_context"]
         industry_kpi_context = prompt_contexts["industry_kpi_context"]
@@ -408,6 +483,7 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 - Populate `forecast_assumptions` with the few parameters responsible for most model variance. Every parameter needs a historical anchor, evidence status, bear/base/bull values, sensitivity and verification gate. A bull/bear midpoint is not an independent estimate. If shipment, ASP, utilization or another industry-native driver is missing, label the affected assumption top-down/low-confidence and use a range; do not reverse-engineer a precise value and present it as bottom-up evidence.
 - Populate `core_theses` with 2-4 ranked investment conclusions. Each must close takeaway -> evidence -> strongest counterevidence -> revenue/profit/EPS/FCF-or-capital/value transmission -> current market pricing -> falsification. Integrate moat evidence into the relevant thesis instead of creating an unprioritized moat list.
 - Fill `canonical_model_snapshot` with the deterministic diluted-share line and every populated consolidated forecast/scenario line from the underwriting packet. Use stable line ids such as `shares`, `2026E_revenue`, `2026E_parent_net_profit`, `2026E_eps`, `base_fair_value`. Copy unchanged values and units exactly. Every changed value or unit must have a matching accepted `model_change_rows` entry with old/new values, evidence ids and recalculated impact; otherwise keep the packet value or mark the line unresolved.
+- For a standard operating company, the accepted three-year snapshot must carry enough lines to cross-foot the income statement and cash flow: revenue, gross margin, gross profit, operating profit, finance/other items (signed), income tax, minority interest, parent net profit, diluted shares, EPS, OCF, capex and FCF. Select driver assumptions; application code recalculates gross profit, parent profit, EPS and FCF. If a bridge input is unavailable, leave it null and mark the model partial instead of inserting a plug.
 - If the filing context or shared packet contains **Pre-Debate Underwriting Questions**, use them as the judging agenda. Reconcile initial assumption, bull evidence, bear attack, accepted model value, EPS/FCF/valuation impact and next verification inside `model_change_ledger`. Do not let the final plan ignore an unanswered question that is central to the recommendation.
 - If the filing context contains a Business Segment Valuation Map or Segment Economics Pack, keep a **Business Segment Valuation Verdict** explicit enough to split mature core businesses from emerging second curves, geographies, and channels. Do not allow the debate to collapse a multi-business company into one blended PE unless the filings do not support a meaningful split.
 - Keep a **Segment Prosperity Verdict** for multi-business companies. Judge each material segment on both current prosperity level and marginal direction using dated demand, supply/capacity, price/volume/share, utilization/mix, margin, working-capital and cash evidence. Require written causal analysis, strongest counterevidence, confidence, EPS/FCF transmission, and profit-weighted company aggregation; do not let one commodity proxy or a small fashionable segment determine the whole-company verdict.
@@ -417,11 +493,13 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 - If price-move attribution context is available, keep a **Sharp Move Attribution Verdict** explicit enough to say whether a recent move is market-led, same-metal sector-led, cross-metal residual, mapped-commodity-led, stock-specific, failed-rebound/trend continuation, or possible emotion kill. Do not call a drop mispriced until valuation/NAV support and event checks pass.
 - If relative-strength/index-linkage context is available, keep a **Relative Strength Verdict** explicit enough to decide whether the stock is stronger or weaker than its style index and same-industry basket, whether correlation/Beta suggest benchmark beta or company alpha, and how that changes timing, sizing, and thesis validation.
 - If Knowledge Planet context is available, keep a **Knowledge Planet Intelligence Verdict** explicit enough to use the Single-Stock Knowledge Fusion Pack first, separate information-rich industry data/channel checks/research feedback from sell-side promotion, and reconcile private/proxy clues with filings, Tushare data, peer evidence, price/volume behavior, and official announcements. Decide whether it upgrades the catalyst/expectation gap, only creates a watch item, or raises pump/crowding risk.
+- In text-only Knowledge Planet mode, a PDF/audio filename or report-list post proves only that a document exists. It cannot support an institution view, operating assumption, forecast, probability change or valuation input. Use only substantive topic text that survives the company-identity and deduplication gates.
 - Use the Structured Research Bundle as the machine-readable source of record for segment identities, grounded metrics, source conflicts, and KPE financial transmission. Do not promote semantic rows marked unverified or missing-period into decisive evidence. When KPE quantification lacks a revenue base, margin, share count, cash conversion, or valid probability triplet, make the missing input an explicit research task instead of filling it narratively.
 - Treat `underwriting_packet` inside that bundle as the single shared company model. Act as a model referee: reconcile the fundamental analyst's Shared Model Update Ledger with the Bull and Bear Model Change Ledgers question by question and forecast line by forecast line. Produce one **Accepted Underwriting Model** covering the company operating equations, all material segments, three forward years, the appropriate consolidated earnings/cash/capital/per-share model, and bull/base/bear probability/value. For each disputed line record old assumption, bull proposal, bear proposal, accepted assumption, evidence ids, financial impact, and next verification. Do not resolve disagreement by prose compromise or by choosing a rating first.
 - Apply source precedence when reconciling: deterministic filing/Tushare facts first; reproducible calculations from those facts second; clearly labeled analyst estimates third; channel/proxy evidence fourth. A pre-debate packet cell marked missing must be replaced when a later analyst supplies a reproducible formula and source. Never repeat `missing` after accepting a valid update, and never let an unsupported analyst narrative overwrite a filing fact.
 - The research plan handed to Trader and PM must state the packet's `research_readiness`, the accepted model changes, unresolved model cells and reconciliation failures. A missing model cell is neutral non-evidence: keep it explicit and unresolved, never convert it into either a convenient middle rating or a directional signal.
 - Read and disclose the bundle's `preprocessing_mode` and `preprocessing_notes`. If semantic preprocessing failed, use deterministic filing-row segments only as a controlled fallback and cap confidence in semantic conflict/KPE mapping. For each company-specific KPE item, preserve one explicit downstream outcome: numeric old->new, probability before->after, unchanged/watch with verification gate, or rejected with reason.
+- Do not call a forecast bottom-up unless numeric three-year rows exist for every material business unit and reconcile to consolidated revenue, profit and cash. When shipments, ASP or segment margin are missing, label the model hybrid/top-down and leave the unsupported segment cell unresolved.
 - Reject period or per-share bridges that do not reconcile. H1 equals Q1 plus Q2 single-quarter profit and cannot reuse Q2 labels; BVPS=current price/PB, EPS=parent profit/diluted shares, and safety/target price must equal the stated EPSxPE or BVPSxPB formula with consistent units. If a required denominator is missing, require `no reliable safety price can be assigned` rather than an approximate range.
 - Do not dismiss Knowledge Planet merely because it is unofficial. If a clue is company-specific, industry-KPI-like, channel-check-like, or broker research feedback, translate it into a thesis variable: driver, expected earnings/cash-flow effect, probability shift, catalyst clock, objective anchor, and falsification signal. If the clue is ignored, state the precise reason: stale, promotional, not company-specific, contradicted by objective data, already priced, or lacking a product-to-profit bridge.
 - Treat relative strength and technical weakness as market-confirmation/timing evidence, not as a standalone proof that the thesis is false. It can reduce sizing or require staged execution; it should not override verified fundamentals without a linked fundamental explanation.
@@ -527,38 +605,8 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 **Knowledge Planet Stream/PDF Intelligence:**
 {knowledge_planet_context}
 
-**Gated Baijiu Verification Context:**
-{baijiu_context}
-
-**Gated Compute-Leasing Verification Context:**
-{compute_leasing_context}
-
-**Gated Dividend Defensive Verification Context:**
-{dividend_defensive_context}
-
-**Gated Building-Materials Verification Context:**
-{building_materials_context}
-
-**Gated Consumer-Staples Verification Context:**
-{consumer_staples_context}
-
-**Gated AI Optical-Module Verification Context:**
-{optical_module_context}
-
-**Gated Biopharma Verification Context:**
-{biopharma_context}
-
-**Gated Software Verification Context:**
-{software_context}
-
-**Gated Insurance Verification Context:**
-{insurance_context}
-
-**Gated Medical-Device Verification Context:**
-{medical_device_context}
-
-**Gated Metals/Mining Verification Context:**
-{metals_mining_context}
+**Triggered Sector-Specific Research Layers:**
+{gated_sector_context}
 
 **Data Coverage Audit:**
 {data_coverage_context}
@@ -576,9 +624,6 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 {get_thematic_valuation_instruction()}
 {get_filing_intelligence_instruction()}
 {get_question_led_debate_instruction()}
-{get_insurance_instruction()}
-{get_medical_device_instruction()}
-{get_metals_mining_instruction()}
 {get_price_move_attribution_instruction()}
 {get_peer_selection_instruction()}
 {get_supply_chain_selection_instruction()}
@@ -592,14 +637,7 @@ Commit to a clear stance whenever the core bet has attractive probability/payoff
 {get_shareholder_structure_instruction()}
 {get_web_fact_check_instruction()}
 {get_knowledge_planet_instruction()}
-{get_baijiu_instruction()}
-{get_compute_leasing_instruction()}
-{get_dividend_defensive_instruction()}
-{get_building_materials_instruction()}
-{get_consumer_staples_instruction()}
-{get_optical_module_instruction()}
-{get_biopharma_instruction()}
-{get_software_instruction()}
+{gated_sector_instructions}
 {get_fair_cycle_valuation_instruction()}
 {get_focused_report_instruction()}
 If a bull or bear argument contains an exact product price, inventory figure, product spread, percentage change, or date-specific market claim that is not supported by the analyst reports or corroborated web fact-check context, downgrade that argument and list it as an unverified key assumption."""
@@ -628,17 +666,41 @@ If a bull or bear argument contains an exact product price, inventory figure, pr
             underwriting_packet,
             research_manager_plan_payload,
         ) if underwriting_packet and research_manager_plan_payload else []
+        deterministic_copied_lines: list[str] = []
+        if initial_handoff_issues:
+            completed_payload, deterministic_copied_lines = (
+                _complete_unchanged_handoff_lines(
+                    underwriting_packet,
+                    research_manager_plan_payload,
+                )
+            )
+            if deterministic_copied_lines:
+                try:
+                    completed_plan = UnderwritingResearchPlan.model_validate(
+                        completed_payload
+                    )
+                except (TypeError, ValueError):
+                    deterministic_copied_lines = []
+                else:
+                    research_manager_plan_payload = completed_plan.model_dump(
+                        mode="json"
+                    )
+                    investment_plan = render_underwriting_research_plan(completed_plan)
         repair_status: dict = {"mode": "not_run"}
         repair_applied = False
-        remaining_handoff_issues = list(initial_handoff_issues)
-        if initial_handoff_issues:
+        remaining_handoff_issues = _research_manager_handoff_issues(
+            underwriting_packet,
+            research_manager_plan_payload,
+        ) if underwriting_packet and research_manager_plan_payload else []
+        llm_repair_issues = list(remaining_handoff_issues)
+        if remaining_handoff_issues:
             repaired_plan, repair_status = invoke_structured_or_freetext(
                 structured_llm,
                 llm,
                 _handoff_repair_prompt(
                     packet=underwriting_packet,
                     payload=research_manager_plan_payload,
-                    issues=initial_handoff_issues,
+                    issues=remaining_handoff_issues,
                 ),
                 render_underwriting_research_plan,
                 "Research Manager Handoff Repair",
@@ -658,9 +720,13 @@ If a bull or bear argument contains an exact product price, inventory figure, pr
                     repair_applied = True
         research_manager_generation_status.update(
             {
-                "handoff_repair_requested": bool(initial_handoff_issues),
+                "handoff_repair_requested": bool(llm_repair_issues),
                 "handoff_repair_applied": repair_applied,
                 "handoff_repair_mode": repair_status.get("mode", "not_run"),
+                "handoff_deterministic_completion_applied": bool(
+                    deterministic_copied_lines
+                ),
+                "handoff_deterministic_copied_lines": deterministic_copied_lines,
                 "initial_handoff_issues": initial_handoff_issues,
                 "remaining_handoff_issues": remaining_handoff_issues,
             }

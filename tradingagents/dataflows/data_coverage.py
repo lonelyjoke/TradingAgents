@@ -175,6 +175,24 @@ KEY_FACT_TERMS = (
 
 PROFILE_RULES = (
     {
+        "profile": "clean-energy power electronics",
+        "triggers": (
+            "playbook: clean-energy power electronics / inverter and ess integration",
+            "pv inverter demand",
+            "orders to cash",
+            "pcs/bms/ems",
+        ),
+        "variables": (
+            ("PV inverter shipments / regional mix", ("inverter shipments", "pv inverter shipments", "inverter regional mix", "逆变器出货", "逆变器区域结构")),
+            ("ESS awarded orders / backlog", ("ess awarded", "awarded orders", "storage backlog", "储能订单", "合同负债")),
+            ("ESS ASP / battery-cost pass-through", ("project asp", "battery procurement", "price pass-through", "电芯", "成本传导")),
+            ("Segment gross margin / unit profit", ("segment gross margin", "unit profit", "毛利率", "单位盈利")),
+            ("Orders-to-cash conversion", ("opening backlog", "new orders", "delivered", "receivables", "inventory", "cash collection")),
+            ("Bankability / certification / service moat", ("bankability", "certification", "service network", "repeat orders", "可融资性", "认证")),
+            ("AIDC / SST commercialization", ("customer qualification", "commercial order", "first named customer", "首个商业", "商业合同", "客户认证")),
+        ),
+    },
+    {
         "profile": "automotive components",
         "triggers": (
             "playbook: automotive components / platform supplier",
@@ -337,7 +355,16 @@ def classify_context_coverage(name: str, text: str) -> ContextCoverage:
         return ContextCoverage(name, "missing", "context is empty")
 
     lower = _clean_failure_text(cleaned)
-    if any(pattern in lower for pattern in NOT_APPLICABLE_PATTERNS):
+    if "sync coverage: partial" in lower:
+        return ContextCoverage(name, "partial", _first_relevant_line(cleaned))
+    # A rich context can legitimately quote a downstream sub-module as not
+    # applicable (for example, a company primer saying that no supply-chain
+    # map exists).  Only classify the *whole* module as N/A when the routing
+    # marker appears near the beginning, or when it is an explicit status.
+    routing_scope = lower[:1200]
+    if "status: not_applicable" in routing_scope or any(
+        pattern in routing_scope for pattern in NOT_APPLICABLE_PATTERNS
+    ):
         return ContextCoverage(name, "not_applicable", _first_relevant_line(cleaned))
 
     has_failure = any(pattern in lower for pattern in FAILURE_PATTERNS)
@@ -478,6 +505,24 @@ def _matching_line(
         lower = line.lower()
         if not any(term in lower for term in lowered_terms):
             continue
+        if any(
+            marker in lower
+            for marker in (
+                "not disclosed",
+                "no revenue",
+                "no commercial",
+                "missing input",
+                "unquantified",
+                "尚未披露",
+                "未披露",
+                "无商业",
+                "尚无收入",
+                "未量化",
+            )
+        ):
+            if not first_gap:
+                first_gap = _truncate_cell(line)
+            continue
         _, status = classify_evidence_text(source_module, line)
         if status in {"reported", "calculated", "estimated", "private_proxy"}:
             return _truncate_cell(line), status
@@ -493,6 +538,7 @@ def _detect_profiles(contexts: dict[str, str]) -> list[dict[str, object]]:
         if "industry_kpi" in name or "forecast_model" in name
     ).lower()
     explicit_markers = (
+        ("clean-energy power electronics / inverter and ess integration", "clean-energy power electronics"),
         ("automotive components / platform supplier", "automotive components"),
         ("battery / energy-storage chain", "battery / energy storage"),
         ("telecom operator / high-dividend soe", "telecom operator"),

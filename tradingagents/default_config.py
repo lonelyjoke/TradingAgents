@@ -148,6 +148,13 @@ DEFAULT_CONFIG = {
         "STRUCTURED_RESEARCH_PROMPT_MAX_CHARS",
         42000,
     ),
+    # Reuse semantic extraction + underwriting only when the complete source
+    # payload, model identity, configuration and implementation fingerprint are
+    # identical. Any data or code change produces a new cache key.
+    "structured_research_cache_enabled": _env_bool_or_default(
+        "STRUCTURED_RESEARCH_CACHE_ENABLED",
+        True,
+    ),
     # Build one shared, rating-free company underwriting packet with the deep
     # model. Every downstream research agent consumes the same company model,
     # segment driver chains, underwriting questions and three-year forecast.

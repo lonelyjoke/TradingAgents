@@ -325,9 +325,12 @@ def _sync_files(
         if not isinstance(file_obj, dict):
             continue
         name = _file_name(file_obj)
-        url = _file_url(file_obj)
         file_id = file_obj.get("file_id") or file_obj.get("id")
-        if not url and file_id:
+        # Strict text-only means no attachment endpoint calls at all.  Asking
+        # for `/download_url` can consume the platform's daily file-download
+        # quota even when the returned bytes are never downloaded.
+        url = _file_url(file_obj) if download else ""
+        if download and not url and file_id:
             try:
                 url = _get_file_download_url(str(file_id))
             except Exception as exc:

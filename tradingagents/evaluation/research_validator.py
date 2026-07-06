@@ -91,6 +91,11 @@ PUBLICATION_BLOCKING_SECTIONS = frozenset(
         "share_count_source_conflict",
         "handoff_numeric_consistency",
         "pm_unit_scale_arithmetic",
+        "canonical_financial_reconciliation",
+        "public_key_number_consistency",
+        "position_valuation_consistency",
+        "sell_side_expectation_lineage",
+        "segment_forecast_reconciliation",
     }
 )
 
@@ -140,8 +145,20 @@ def _handoff_metric_key(period: Any, metric: Any) -> tuple[str, str]:
         "grossmargin": "grossmargin",
         "consolidatedgrossmargin": "grossmargin",
         "毛利率": "grossmargin",
+        "grossprofit": "grossprofit",
+        "consolidatedgrossprofit": "grossprofit",
+        "毛利润": "grossprofit",
         "operatingprofit": "operatingprofit",
         "营业利润": "operatingprofit",
+        "financeandotheritems": "financeother",
+        "financeotheritems": "financeother",
+        "财务及其他项目": "financeother",
+        "incometax": "incometax",
+        "incometaxexpense": "incometax",
+        "所得税": "incometax",
+        "minorityinterest": "minorityinterest",
+        "minorityinterests": "minorityinterest",
+        "少数股东损益": "minorityinterest",
     }
     canonical_metric = aliases.get(normalized_metric, normalized_metric)
     if canonical_metric == "dilutedshares":
@@ -223,6 +240,20 @@ def _line_changed(left: Mapping[str, Any], right: Mapping[str, Any]) -> bool:
     return value_changed or (left_unit and right_unit and left_unit != right_unit)
 
 
+def _deterministically_owned_line(row: Mapping[str, Any]) -> bool:
+    if str(row.get("status", "")).lower() != "calculated":
+        return False
+    formula = str(row.get("formula", "")).lower()
+    metric = _handoff_metric_key(row.get("period"), row.get("metric"))[1]
+    required_formula = {
+        "eps": "parent net profit (cny mn) / diluted shares",
+        "fcf": "ocf - abs(capex)",
+        "grossprofit": "revenue x gross margin",
+        "parentnetprofit": "operating profit + finance/other - tax - minority interest",
+    }.get(metric)
+    return bool(required_formula and required_formula in formula)
+
+
 def audit_handoff_numeric_consistency(report_dir: str | Path) -> list[DecisionDepthIssue]:
     """Compare underwriting -> Research Manager -> PM machine-readable values."""
     report_path = Path(report_dir)
@@ -284,7 +315,11 @@ def audit_handoff_numeric_consistency(report_dir: str | Path) -> list[DecisionDe
                 )
             )
             continue
-        if _line_changed(accepted, final) and str(final.get("line_id", "")).lower() not in pm_change_ids:
+        if (
+            _line_changed(accepted, final)
+            and str(final.get("line_id", "")).lower() not in pm_change_ids
+            and not _deterministically_owned_line(final)
+        ):
             issues.append(
                 DecisionDepthIssue(
                     "handoff_numeric_consistency",
@@ -1836,6 +1871,150 @@ def audit_public_process_leakage(decision_text: str) -> list[DecisionDepthIssue]
     return issues
 
 
+def audit_canonical_financial_reconciliation(report_dir: str | Path) -> list[DecisionDepthIssue]:
+    """Cross-foot the machine-readable forecast before prose can be published."""
+    report_path = Path(report_dir)
+    pm_path = report_path / "5_portfolio" / "canonical_decision.json"
+    if not pm_path.exists():
+        return []
+    try:
+        payload = json.loads(read_text_fallback(pm_path))
+    except (OSError, TypeError, json.JSONDecodeError):
+        return []
+    issues: list[DecisionDepthIssue] = []
+    line_map = _numeric_line_map(payload)
+    periods = sorted({period for period, _metric in line_map if re.search(r"20\d{2}E", period, re.I)})
+
+    def _value(period: str, metric: str) -> float | None:
+        row = line_map.get((period, metric))
+        if row is None or row.get("value") is None:
+            return None
+        try:
+            return float(row["value"])
+        except (TypeError, ValueError):
+            return None
+
+    for period in periods:
+        revenue = _value(period, "revenue")
+        gross_margin = _value(period, "grossmargin")
+        gross_profit = _value(period, "grossprofit")
+        if revenue is not None and gross_margin is not None and gross_profit is not None:
+            margin = gross_margin / 100.0 if gross_margin > 1.0 else gross_margin
+            expected = revenue * margin
+            if abs(gross_profit - expected) > max(abs(expected) * 0.01, 1.0):
+                issues.append(
+                    DecisionDepthIssue(
+                        "canonical_financial_reconciliation",
+                        "error",
+                        f"{period} gross profit {gross_profit:.2f} does not equal revenue {revenue:.2f} x gross margin {gross_margin:.4g}",
+                    )
+                )
+
+        operating = _value(period, "operatingprofit")
+        parent = _value(period, "parentnetprofit")
+        finance = _value(period, "financeother")
+        tax = _value(period, "incometax")
+        minority = _value(period, "minorityinterest")
+        if all(value is not None for value in (operating, finance, tax, minority, parent)):
+            expected_parent = operating + finance - abs(tax) - abs(minority)  # type: ignore[operator]
+            if abs(parent - expected_parent) > max(abs(expected_parent) * 0.01, 1.0):  # type: ignore[operator]
+                issues.append(
+                    DecisionDepthIssue(
+                        "canonical_financial_reconciliation",
+                        "error",
+                        f"{period} parent profit {parent:.2f} does not reconcile to operating profit + finance/other - tax - minority = {expected_parent:.2f}",
+                    )
+                )
+        elif operating is not None and parent is not None and abs(operating - parent) > max(abs(operating) * 0.12, 1.0):
+            issues.append(
+                DecisionDepthIssue(
+                    "income_statement_bridge_completion",
+                    "warning",
+                    f"{period} operating profit {operating:.2f} and parent profit {parent:.2f} lack complete finance/other, tax and minority bridge lines",
+                )
+            )
+
+    underwriting_path = report_path / "0_context" / "company_underwriting.json"
+    method_text = str(payload.get("autonomous_forecast_model", ""))
+    if re.search(r"自下而上|bottom[- ]up|业务单元加总|segment aggregation", method_text, re.I):
+        segment_numeric_rows = 0
+        if underwriting_path.exists():
+            try:
+                packet = json.loads(read_text_fallback(underwriting_path))
+                for row in packet.get("forecast_lines", []) or []:
+                    if str(row.get("segment", "")).lower() in {"consolidated", "group", "合并", "公司整体"}:
+                        continue
+                    if any(row.get(key) is not None for key in ("year_1_value", "year_2_value", "year_3_value")):
+                        segment_numeric_rows += 1
+            except (OSError, TypeError, json.JSONDecodeError):
+                segment_numeric_rows = 0
+        material_units = len(payload.get("segment_economics", []) or [])
+        if material_units >= 2 and segment_numeric_rows < material_units:
+            issues.append(
+                DecisionDepthIssue(
+                    "segment_forecast_reconciliation",
+                    "error",
+                    "memo calls the forecast bottom-up, but the shared packet lacks numeric three-year forecast rows for each material business unit",
+                )
+            )
+    return issues
+
+
+def audit_public_key_number_consistency(decision_text: str) -> list[DecisionDepthIssue]:
+    """Catch unreconciled repeated key numbers in reader-facing prose."""
+    issues: list[DecisionDepthIssue] = []
+    checks = (
+        ("net cash", r"(?:净现金|net cash)[^\d\n]{0,18}(\d+(?:\.\d+)?)\s*(?:亿|CNY\s*100m)", 0.05),
+        ("current price", r"(?:当前股价|当前价|现价)[^\d\n]{0,8}(\d+(?:\.\d+)?)\s*元", 0.02),
+    )
+    for label, pattern, tolerance in checks:
+        values = [float(value) for value in re.findall(pattern, decision_text, re.I)]
+        if len(values) >= 2 and min(values) > 0 and (max(values) - min(values)) / min(values) > tolerance:
+            issues.append(
+                DecisionDepthIssue(
+                    "public_key_number_consistency",
+                    "error",
+                    f"public memo uses conflicting {label} values {sorted(set(values))}; state one definition/period or reconcile the definitions explicitly",
+                )
+            )
+    return issues
+
+
+def audit_position_valuation_consistency(report_dir: str | Path, decision_text: str) -> list[DecisionDepthIssue]:
+    """Ensure executable buy instructions respect the program-calculated ceiling."""
+    pm_path = Path(report_dir) / "5_portfolio" / "canonical_decision.json"
+    if not pm_path.exists():
+        return []
+    try:
+        payload = json.loads(read_text_fallback(pm_path))
+    except (OSError, TypeError, json.JSONDecodeError):
+        return []
+    valuation = payload.get("deterministic_valuation") or {}
+    try:
+        safe_ceiling = float(valuation.get("safe_buy_price_ceiling_cny"))
+    except (TypeError, ValueError):
+        return []
+    if safe_ceiling <= 0:
+        return []
+    issues: list[DecisionDepthIssue] = []
+    for line in decision_text.splitlines():
+        if not re.search(r"买入|建仓|加仓|试探|build|add", line, re.I):
+            continue
+        ranges = re.findall(r"(\d+(?:\.\d+)?)\s*[-–—至]\s*(\d+(?:\.\d+)?)\s*元", line)
+        single = re.findall(r"(?:低于|不高于|上限|at or below)\s*(\d+(?:\.\d+)?)\s*元", line, re.I)
+        proposed = [max(float(left), float(right)) for left, right in ranges] + [float(value) for value in single]
+        if proposed and max(proposed) > safe_ceiling * 1.02:
+            issues.append(
+                DecisionDepthIssue(
+                    "position_valuation_consistency",
+                    "error",
+                    f"buy/build instruction reaches {max(proposed):.2f}, above deterministic safe-buy ceiling {safe_ceiling:.2f}: {line.strip()[:180]}",
+                )
+            )
+            break
+    return issues
+
+
 def _scenario_arithmetic_issues(decision_text: str) -> list[DecisionDepthIssue]:
     issues: list[DecisionDepthIssue] = []
     for header, rows in _markdown_tables(decision_text):
@@ -2599,6 +2778,29 @@ def audit_structured_research_usage(
             )
         )
 
+    expected_kpe_by_ksi = {
+        str(row.get("intelligence_id", "")).strip(): {
+            str(value).strip()
+            for value in row.get("evidence_ids", []) or []
+            if str(value).strip()
+        }
+        for row in bundle.get("sell_side_intelligence", []) or []
+        if str(row.get("intelligence_id", "")).strip()
+    }
+    for row in pm_payload.get("sell_side_expectation_matrix", []) or []:
+        source_ids = {str(value).strip() for value in row.get("source_ids", []) or []}
+        cited_kpe = {value for value in source_ids if value.upper().startswith("KPE")}
+        for ksi in (value for value in source_ids if value.upper().startswith("KSI")):
+            expected = expected_kpe_by_ksi.get(ksi, set())
+            if cited_kpe and not cited_kpe.issubset(expected):
+                issues.append(
+                    DecisionDepthIssue(
+                        "sell_side_expectation_lineage",
+                        "error",
+                        f"PM pairs {ksi} with {sorted(cited_kpe)}, but the deterministic ledger links it to {sorted(expected) or ['no KPE id']}",
+                    )
+                )
+
     incomplete_kpe_outcomes = [
         str(row.get("evidence_id", ""))
         for row in bundle.get("kpe_impacts", [])
@@ -2651,6 +2853,9 @@ def audit_report_depth(report_dir: str | Path) -> pd.DataFrame:
     issues.extend(audit_context_alignment(report_dir))
     issues.extend(audit_handoff_numeric_consistency(report_dir))
     issues.extend(audit_pm_unit_scale_arithmetic(report_dir))
+    issues.extend(audit_canonical_financial_reconciliation(report_dir))
+    issues.extend(audit_public_key_number_consistency(decision_text))
+    issues.extend(audit_position_valuation_consistency(report_dir, decision_text))
     issues.extend(audit_report_redundancy(decision_text))
     issues.extend(audit_public_process_leakage(decision_text))
     pm_payload_path = report_path / "5_portfolio" / "canonical_decision.json"

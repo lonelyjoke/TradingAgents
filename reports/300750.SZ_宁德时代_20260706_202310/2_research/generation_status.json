@@ -1,0 +1,25 @@
+{
+  "mode": "schema_prompt_structured",
+  "agent": "Research Manager",
+  "structured_error": "",
+  "schema": "UnderwritingResearchPlan",
+  "handoff_repair_requested": true,
+  "handoff_repair_applied": true,
+  "handoff_repair_mode": "schema_prompt_structured",
+  "initial_handoff_issues": [
+    "missing canonical line shares: 4626.63 mn shares",
+    "missing canonical line 2027E_revenue: 675000.0 CNY mn",
+    "missing canonical line 2028E_revenue: 810000.0 CNY mn",
+    "missing canonical line 2026E_operatingprofit: 110700.0 CNY mn",
+    "missing canonical line 2027E_operatingprofit: 141750.0 CNY mn",
+    "missing canonical line 2028E_operatingprofit: 174150.0 CNY mn",
+    "undocumented change 2027E_parent_net_profit: 113000.0 CNY mn -> 110300.0 CNY mn",
+    "undocumented change 2028E_parent_net_profit: 138000.0 CNY mn -> 131800.0 CNY mn",
+    "undocumented change 2027E_eps: 24.423824684489574 CNY/share -> 23.8381 CNY/share",
+    "undocumented change 2028E_eps: 29.827325720881074 CNY/share -> 28.4879 CNY/share",
+    "missing canonical line 2026E_经营现金流ocf: 123480.0 CNY mn",
+    "missing canonical line 2027E_经营现金流ocf: 158200.0 CNY mn",
+    "missing canonical line 2028E_经营现金流ocf: 193200.0 CNY mn"
+  ],
+  "remaining_handoff_issues": []
+}

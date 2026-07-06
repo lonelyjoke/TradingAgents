@@ -145,6 +145,38 @@ def test_medical_device_context_not_applicable_for_non_device(monkeypatch):
     assert "Do not force installed-base" in rendered
 
 
+def test_generic_industrial_filing_terms_do_not_trigger_medical_device(monkeypatch):
+    monkeypatch.setattr(
+        medical_device_research,
+        "_fetch_stock_basic",
+        lambda symbol: pd.Series(
+            {
+                "ts_code": symbol,
+                "name": "\u9633\u5149\u7535\u6e90",
+                "industry": "\u7535\u6c14\u8bbe\u5907",
+            }
+        ),
+    )
+    monkeypatch.setattr(
+        medical_device_research,
+        "_load_financial_report_texts",
+        lambda symbol, curr_date, look_back_days: (
+            [],
+            [
+                (
+                    "2025\u5e74\u5e74\u62a5",
+                    "\u516c\u53f8\u6301\u7eed\u63a8\u8fdb\u8bbe\u5907\u88c5\u673a\u3001\u62db\u6295\u6807\u3001\u56fd\u4ea7\u66ff\u4ee3\u548c\u51fa\u6d77\uff0c"
+                    "\u4ea7\u54c1\u901a\u8fc7FDA\u4e0eCE\u76f8\u5173\u8981\u6c42\uff0c\u4f46\u4e3b\u8425\u4e1a\u52a1\u4e3a\u5149\u4f0f\u9006\u53d8\u5668\u4e0e\u50a8\u80fd\u7cfb\u7edf\u3002",
+                )
+            ],
+        ),
+    )
+
+    rendered = get_medical_device_context("300274.SZ", "2026-07-05")
+
+    assert "- Status: not_applicable" in rendered
+
+
 def test_medical_device_profile_routes_mindray_filing_text():
     reports = [
         (

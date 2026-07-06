@@ -69,3 +69,47 @@ def test_fetch_window_scans_once_and_collects_requested_dates(monkeypatch):
     assert [topic["topic_id"] for topic in topics] == ["d19", "d18"]
     assert len(calls) == 2
     assert "--end-time" in calls[1]
+
+
+def test_text_only_attachment_sync_never_requests_file_download_url(tmp_path, monkeypatch):
+    calls = []
+
+    def forbidden_download_url(file_id: str) -> str:
+        calls.append(file_id)
+        raise AssertionError("text-only mode must not request a download URL")
+
+    monkeypatch.setattr(sync, "_get_file_download_url", forbidden_download_url)
+    topic = {
+        "topic_id": "topic-1",
+        "files": [
+            {"file_id": "file-1", "name": "研究报告.pdf"},
+            {
+                "file_id": "file-2",
+                "name": "会议纪要.mp3",
+                "download_url": "https://example.invalid/file-2",
+            },
+        ],
+    }
+
+    result = sync.sync_topic_attachments(
+        topic,
+        root=tmp_path,
+        target_date="2026-07-06",
+        download_images=False,
+        ocr_images=False,
+        ocr_language="zh-Hans-CN",
+        download_files=False,
+        max_image_downloads=0,
+        max_file_downloads=0,
+    )
+
+    assert calls == []
+    assert result.files_downloaded == 0
+    assert result.file_failures == 0
+    assert result.file_lines == [
+        "Files:",
+        "- 研究报告.pdf file_id=file-1",
+        "- 会议纪要.mp3 file_id=file-2",
+    ]
+    assert not list(tmp_path.rglob("*.pdf"))
+    assert not list(tmp_path.rglob("*.mp3"))

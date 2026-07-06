@@ -256,6 +256,20 @@ class ValuationScenarioInput(BaseModel):
     evidence_ids: list[str] = Field(default_factory=list)
 
 
+class OptionalityValuationInput(BaseModel):
+    """One explicitly modelled second-curve value bucket."""
+
+    name: str
+    metric_name: str = Field(description="Revenue, profit, asset value or direct equity value.")
+    metric_value_cny_mn: float = Field(ge=0)
+    valuation_multiple: float = Field(default=1.0, ge=0)
+    probability_pct: float = Field(default=100.0, ge=0, le=100)
+    ownership_pct: float = Field(default=100.0, ge=0, le=100)
+    execution_haircut_pct: float = Field(default=0.0, ge=0, le=100)
+    evidence_ids: list[str] = Field(default_factory=list)
+    assumption_summary: str = ""
+
+
 class SafeValuationAssumptions(BaseModel):
     """PM risk/return requirements used by the deterministic safety-price engine."""
 
@@ -265,6 +279,15 @@ class SafeValuationAssumptions(BaseModel):
     margin_of_safety_pct: float = Field(default=20.0, ge=0, le=80)
     maximum_bear_loss_pct: float = Field(default=15.0, ge=0, lt=100)
     optionality_equity_value_cny_mn: float = Field(default=0.0, ge=0)
+    optionality_inputs: list[OptionalityValuationInput] = Field(
+        default_factory=list,
+        description=(
+            "Structured optionality buckets. Application code calculates metric x multiple x probability x "
+            "ownership x (1-execution haircut). Probability and haircut must represent distinct risks; do not "
+            "apply a 75% haircut as a second copy of a 25% probability. When populated, these rows replace the "
+            "legacy aggregate optionality_equity_value_cny_mn input."
+        ),
+    )
     other_adjustments_equity_value_cny_mn: float = 0.0
     scenarios: list[ValuationScenarioInput] = Field(default_factory=list)
 
@@ -275,6 +298,7 @@ class DeterministicValuationOutput(BaseModel):
     status: Literal["closed", "partial", "unavailable"] = "unavailable"
     diluted_share_count_mn: float | None = None
     scenario_rows: list[dict] = Field(default_factory=list)
+    optionality_rows: list[dict] = Field(default_factory=list)
     probability_weighted_core_value_cny: float | None = None
     optionality_per_share_cny: float | None = None
     other_adjustments_per_share_cny: float | None = None
@@ -913,6 +937,10 @@ def _canonical_metric_name(metric: str) -> str:
         "consolidatedgrossmargin": "gross_margin", "grossmargin": "gross_margin", "毛利率": "gross_margin",
         "grossprofit": "gross_profit", "consolidatedgrossprofit": "gross_profit", "毛利润": "gross_profit",
         "operatingprofit": "operating_profit", "consolidatedoperatingprofit": "operating_profit", "营业利润": "operating_profit",
+        "financeandotheritems": "finance_other", "financeotheritems": "finance_other", "财务及其他项目": "finance_other",
+        "pretaxprofit": "pretax_profit", "profittotal": "pretax_profit", "利润总额": "pretax_profit",
+        "incometax": "income_tax", "incometaxexpense": "income_tax", "所得税": "income_tax",
+        "minorityinterest": "minority_interest", "minorityinterests": "minority_interest", "少数股东损益": "minority_interest",
         "parentnetprofit": "parent_profit", "consolidatedparentnetprofit": "parent_profit", "归母净利润": "parent_profit",
         "eps": "eps", "epsbasic": "eps", "dilutedeps": "eps", "每股收益": "eps",
         "operatingcashflow": "ocf", "ocf": "ocf", "经营活动现金流净额": "ocf",
@@ -2308,6 +2336,72 @@ def normalize_sell_side_pm_decision(
 
     periods = sorted({str(row.get("period", "")) for row in lines if re.search(r"20\d{2}E", str(row.get("period", "")), re.I)})
     for period in periods:
+        revenue = by_metric_period.get(("revenue", period))
+        gross_margin = by_metric_period.get(("gross_margin", period))
+        gross_profit = by_metric_period.get(("gross_profit", period))
+        if revenue and gross_margin and revenue.get("value") is not None and gross_margin.get("value") is not None:
+            margin_value = float(gross_margin["value"])
+            if margin_value > 1.0:
+                margin_value /= 100.0
+            calculated_gp = float(revenue["value"]) * margin_value
+            if gross_profit is None:
+                gross_profit = {
+                    "line_id": f"{period}_gross_profit",
+                    "period": period,
+                    "metric": "gross_profit",
+                    "value": calculated_gp,
+                    "unit": str(revenue.get("unit", "CNY mn")),
+                    "status": "calculated",
+                    "evidence_ids": list(dict.fromkeys([*revenue.get("evidence_ids", []), *gross_margin.get("evidence_ids", [])])),
+                    "formula": "revenue x gross margin",
+                }
+                lines.append(gross_profit)
+                by_metric_period[("gross_profit", period)] = gross_profit
+                notes.append(f"added deterministic {period} gross profit={calculated_gp:.4f}")
+            else:
+                old = gross_profit.get("value")
+                if old is None or abs(float(old) - calculated_gp) > max(abs(calculated_gp) * 0.005, 1.0):
+                    notes.append(f"replaced {period} gross profit {old} -> {calculated_gp:.4f}")
+                gross_profit.update(value=calculated_gp, status="calculated", formula="revenue x gross margin")
+
+        operating_profit = by_metric_period.get(("operating_profit", period))
+        finance_other = by_metric_period.get(("finance_other", period))
+        income_tax = by_metric_period.get(("income_tax", period))
+        minority = by_metric_period.get(("minority_interest", period))
+        parent_profit = by_metric_period.get(("parent_profit", period))
+        if all(
+            row is not None and row.get("value") is not None
+            for row in (operating_profit, finance_other, income_tax, minority)
+        ):
+            calculated_parent = (
+                float(operating_profit["value"])
+                + float(finance_other["value"])
+                - abs(float(income_tax["value"]))
+                - abs(float(minority["value"]))
+            )
+            if parent_profit is None:
+                parent_profit = {
+                    "line_id": f"{period}_parent_profit",
+                    "period": period,
+                    "metric": "parent_profit",
+                    "value": calculated_parent,
+                    "unit": str(operating_profit.get("unit", "CNY mn")),
+                    "status": "calculated",
+                    "evidence_ids": [],
+                    "formula": "operating profit + finance/other - tax - minority interest",
+                }
+                lines.append(parent_profit)
+                by_metric_period[("parent_profit", period)] = parent_profit
+            else:
+                old = parent_profit.get("value")
+                if old is None or abs(float(old) - calculated_parent) > max(abs(calculated_parent) * 0.005, 1.0):
+                    notes.append(f"replaced {period} parent profit {old} -> {calculated_parent:.4f}")
+                parent_profit.update(
+                    value=calculated_parent,
+                    status="calculated",
+                    formula="operating profit + finance/other - tax - minority interest",
+                )
+
         ocf = by_metric_period.get(("ocf", period))
         capex = by_metric_period.get(("capex", period))
         if not ocf or not capex or ocf.get("value") is None or capex.get("value") is None:
@@ -2333,6 +2427,23 @@ def normalize_sell_side_pm_decision(
             if old is None or abs(float(old) - fcf_value) > max(abs(fcf_value) * 0.01, 1.0):
                 notes.append(f"replaced {period} FCF {old} -> {fcf_value:.4f}")
             fcf.update(value=fcf_value, status="calculated", formula="OCF - abs(capex)")
+
+    # Income-statement reconciliation above may have replaced parent profit;
+    # make EPS the final dependent calculation, never an LLM-authored residue.
+    if shares:
+        for row in lines:
+            if _metric(row) != "parent_profit" or row.get("value") is None:
+                continue
+            period = str(row.get("period", ""))
+            eps = by_metric_period.get(("eps", period))
+            eps_value = float(row["value"]) / shares
+            if eps is not None:
+                eps.update(
+                    value=eps_value,
+                    unit="CNY/share",
+                    status="calculated",
+                    formula="parent net profit (CNY mn) / diluted shares (mn)",
+                )
 
     assumptions = SafeValuationAssumptions.model_validate(payload.get("safe_valuation_assumptions") or {})
     output = DeterministicValuationOutput(diluted_share_count_mn=shares)
@@ -2371,10 +2482,39 @@ def normalize_sell_side_pm_decision(
                 row.probability_pct * scenario_values[row.scenario] / 100.0
                 for row in assumptions.scenarios
             )
-            option_per_share = assumptions.optionality_equity_value_cny_mn / shares
+            option_equity_value = assumptions.optionality_equity_value_cny_mn
+            optionality_rows: list[dict] = []
+            if assumptions.optionality_inputs:
+                option_equity_value = 0.0
+                for item in assumptions.optionality_inputs:
+                    equity_value = (
+                        item.metric_value_cny_mn
+                        * item.valuation_multiple
+                        * item.probability_pct / 100.0
+                        * item.ownership_pct / 100.0
+                        * (1.0 - item.execution_haircut_pct / 100.0)
+                    )
+                    option_equity_value += equity_value
+                    optionality_rows.append(
+                        {
+                            "name": item.name,
+                            "metric_name": item.metric_name,
+                            "metric_value_cny_mn": item.metric_value_cny_mn,
+                            "valuation_multiple": item.valuation_multiple,
+                            "probability_pct": item.probability_pct,
+                            "ownership_pct": item.ownership_pct,
+                            "execution_haircut_pct": item.execution_haircut_pct,
+                            "equity_value_cny_mn": equity_value,
+                            "per_share_value_cny": equity_value / shares,
+                            "evidence_ids": item.evidence_ids,
+                            "assumption_summary": item.assumption_summary,
+                        }
+                    )
+            option_per_share = option_equity_value / shares
             other_per_share = assumptions.other_adjustments_equity_value_cny_mn / shares
             fair_value = weighted + option_per_share + other_per_share
             output.probability_weighted_core_value_cny = weighted
+            output.optionality_rows = optionality_rows
             output.optionality_per_share_cny = option_per_share
             output.other_adjustments_per_share_cny = other_per_share
             output.fair_value_per_share_cny = fair_value
@@ -2397,6 +2537,7 @@ def normalize_sell_side_pm_decision(
                 "scenario EPS = parent net profit (CNY mn) / diluted shares (mn)",
                 "PE fair value/share = scenario EPS x selected PE",
                 "probability-weighted core value = sum(probability x scenario fair value/share)",
+                "optionality equity value = metric x multiple x probability x ownership x (1-execution haircut)",
                 "safe ceiling = min(base/(1+required return)^years, base x (1-MOS), bear/(1-max bear loss))",
             ]
         else:
@@ -2528,23 +2669,23 @@ def _render_accounting_quality(rows_in: list[AccountingQualityRow]) -> str:
 
 
 def _render_alternative_intelligence(rows_in: list[AlternativeIntelligenceDecision]) -> str:
-    if not rows_in:
+    material = [row for row in rows_in if row.disposition != "rejected"][:4]
+    if not material:
         return ""
-    rows = ["### 另类信息增量（知识星球）", ""]
-    for row in rows_in[:5]:
-        ids = "/".join(row.kpe_ids) or "KPE未编号"
-        rows.extend(
-            [
-                f"**{ids}｜{row.evidence_grade}｜{row.disposition}：{row.claim}**",
-                f"- 影响变量：{row.affected_business_and_variable}",
-                f"- 公共交叉验证：{row.public_crosscheck}",
-                f"- 决策变化：{row.before_after}",
-                f"- 时效与有效期：{row.freshness_and_shelf_life or '未明确；不得长期沿用'}",
-                f"- 报告用途与下次验证：{row.report_use}；{row.falsification_or_next_check}",
-                "",
-            ]
+    rows = [
+        "### 私域信息对核心假设的影响",
+        "",
+        "| 来源/证据 | 有效增量 | 对模型或情景的影响 | 公共验证与下一节点 |",
+        "| --- | --- | --- | --- |",
+    ]
+    for row in material:
+        ids = "/".join(row.kpe_ids) or "未编号"
+        rows.append(
+            f"| {_table_cell(ids + ' / ' + row.evidence_grade)} | {_table_cell(row.claim)} | "
+            f"{_table_cell(row.before_after)} | {_table_cell(row.public_crosscheck + '；' + row.falsification_or_next_check)} |"
         )
-    return "\n".join(rows).rstrip()
+    rows.append("- 表中私域内容仅呈现已影响核心假设或验证时点的结论；拒绝项与处理日志保留在结构化审计文件中。")
+    return "\n".join(rows)
 
 
 def _render_deterministic_valuation(output: DeterministicValuationOutput) -> str:
@@ -2566,6 +2707,27 @@ def _render_deterministic_valuation(output: DeterministicValuationOutput) -> str
             f"{method_text} | {_display_number(row.get('equity_value_cny_mn'))} | "
             f"{_display_number(row.get('fair_value_per_share_cny'))} |"
         )
+    if output.optionality_rows:
+        rows.extend(
+            [
+                "",
+                "### 程序化期权价值",
+                "",
+                "| 期权 | 指标/规模(CNY mn) | 倍数 | 概率 | 权益 | 执行折价 | 股权价值(CNY mn) | 每股价值 |",
+                "| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |",
+            ]
+        )
+        for row in output.optionality_rows:
+            rows.append(
+                f"| {_table_cell(row.get('name'))} | {_table_cell(row.get('metric_name'))}/"
+                f"{_display_number(row.get('metric_value_cny_mn'))} | "
+                f"{_display_number(row.get('valuation_multiple'))}x | "
+                f"{_display_number(row.get('probability_pct'))}% | "
+                f"{_display_number(row.get('ownership_pct'))}% | "
+                f"{_display_number(row.get('execution_haircut_pct'))}% | "
+                f"{_display_number(row.get('equity_value_cny_mn'))} | "
+                f"{_display_number(row.get('per_share_value_cny'))} |"
+            )
     if output.status == "closed":
         rows.extend(
             [
@@ -2671,6 +2833,7 @@ def render_sell_side_pm_decision(decision: SellSidePMDecision) -> str:
             + _demote_embedded_headings(decision.autonomous_forecast_model),
             "## 七、市场预期差与估值\n\n"
             + _demote_embedded_headings(decision.expectation_gap_and_market_pricing)
+            + ("\n\n" + _render_alternative_intelligence(decision.alternative_intelligence_decisions) if decision.alternative_intelligence_decisions else "")
             + ("\n\n" + _render_sell_side_expectations(decision.sell_side_expectation_matrix) if decision.sell_side_expectation_matrix else "")
             + "\n\n"
             + _render_deterministic_valuation(decision.deterministic_valuation)

@@ -2,6 +2,24 @@ from cli.main import save_report_to_disk
 from tradingagents.evaluation import research_validator
 
 
+def test_save_report_persists_run_metrics(tmp_path):
+    metrics = {
+        "llm_calls": 12,
+        "tool_calls": 4,
+        "tokens_in": 1000,
+        "tokens_out": 200,
+        "elapsed_seconds": 30.5,
+    }
+
+    save_report_to_disk({"run_metrics": metrics}, "300274.SZ", tmp_path)
+
+    rendered = (tmp_path / "0_context" / "run_metrics.json").read_text(
+        encoding="utf-8"
+    )
+    assert '"llm_calls": 12' in rendered
+    assert '"elapsed_seconds": 30.5' in rendered
+
+
 def test_blocked_audit_suppresses_trade_instructions_from_formal_report(tmp_path, monkeypatch):
     monkeypatch.setattr(
         research_validator,

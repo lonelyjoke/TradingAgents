@@ -16,6 +16,8 @@ class StatsCallbackHandler(BaseCallbackHandler):
         self.tool_calls = 0
         self.tokens_in = 0
         self.tokens_out = 0
+        self.cached_tokens_in = 0
+        self.llm_errors = 0
 
     def on_llm_start(
         self,
@@ -54,6 +56,15 @@ class StatsCallbackHandler(BaseCallbackHandler):
             with self._lock:
                 self.tokens_in += usage_metadata.get("input_tokens", 0)
                 self.tokens_out += usage_metadata.get("output_tokens", 0)
+                input_details = usage_metadata.get("input_token_details", {}) or {}
+                self.cached_tokens_in += input_details.get(
+                    "cache_read", input_details.get("cached_tokens", 0)
+                )
+
+    def on_llm_error(self, error: BaseException, **kwargs: Any) -> None:
+        """Track provider failures/retries separately from successful calls."""
+        with self._lock:
+            self.llm_errors += 1
 
     def on_tool_start(
         self,
@@ -73,4 +84,6 @@ class StatsCallbackHandler(BaseCallbackHandler):
                 "tool_calls": self.tool_calls,
                 "tokens_in": self.tokens_in,
                 "tokens_out": self.tokens_out,
+                "cached_tokens_in": self.cached_tokens_in,
+                "llm_errors": self.llm_errors,
             }

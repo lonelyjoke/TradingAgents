@@ -53,6 +53,28 @@ BAIJIU_PEER_FALLBACK = {
     "600197.SH": "伊力特",
 }
 
+CURATED_OPERATING_PEERS: dict[str, tuple[str, ...]] = {
+    # Power-electronics / inverter and ESS-system comparables.  This avoids
+    # treating every broad `电气设备` constituent as an operating peer.
+    "300274.SZ": (
+        "300274.SZ",  # 阳光电源
+        "300827.SZ",  # 上能电气
+        "300763.SZ",  # 锦浪科技
+        "688390.SH",  # 固德威
+        "605117.SH",  # 德业股份
+        "002518.SZ",  # 科士达
+        "300693.SZ",  # 盛弘股份
+    ),
+}
+
+CURATED_STRATEGIC_PEER_NOTES: dict[str, tuple[str, ...]] = {
+    "300274.SZ": (
+        "Huawei Digital Power / 华为数字能源（非上市）：逆变器、构网型储能、全球渠道与认证的战略对标",
+        "Fluence / Tesla Energy（海外上市/业务分部）：大型储能集成、软件和项目交付的战略对标",
+        "CATL / BYD Energy Storage：电芯成本、系统集成和大项目竞争的相邻利润池对标",
+    ),
+}
+
 _STYLE_BENCHMARKS: dict[str, str] = {
     "000300.SH": "CSI 300 / 沪深300",
     "000905.SH": "CSI 500 / 中证500",
@@ -822,6 +844,18 @@ def _curated_peer_universe(symbol: str, basic: pd.Series | None) -> pd.DataFrame
     return pd.DataFrame(rows)
 
 
+def _apply_curated_operating_peers(universe: pd.DataFrame, symbol: str) -> pd.DataFrame:
+    codes = CURATED_OPERATING_PEERS.get(symbol)
+    if not codes or universe is None or universe.empty or "ts_code" not in universe.columns:
+        return pd.DataFrame()
+    selected = universe[universe["ts_code"].astype(str).isin(codes)].copy()
+    if selected.empty:
+        return selected
+    order = {code: index for index, code in enumerate(codes)}
+    selected["_curated_order"] = selected["ts_code"].map(order)
+    return selected.sort_values("_curated_order").drop(columns=["_curated_order"])
+
+
 def _row_numeric(row: pd.Series, columns: list[str]) -> float | None:
     for col in columns:
         if col not in row.index:
@@ -946,7 +980,13 @@ def get_peer_comparison(ticker: str, curr_date: str, peer_limit: int = 12) -> st
             f"Same-industry peer comparison unavailable for {symbol}: "
             f"Tushare stock_basic universe missing required columns {missing_cols or 'all'}."
         )
-    peers = universe[universe["industry"].fillna("").astype(str) == industry].copy()
+    curated_peers = _apply_curated_operating_peers(universe, symbol)
+    uses_curated_operating_peers = not curated_peers.empty
+    peers = (
+        curated_peers
+        if uses_curated_operating_peers
+        else universe[universe["industry"].fillna("").astype(str) == industry].copy()
+    )
     if peers.empty:
         return f"No same-industry peers found for {symbol} in Tushare stock_basic."
 
@@ -1043,7 +1083,11 @@ def get_peer_comparison(ticker: str, curr_date: str, peer_limit: int = 12) -> st
         f"- Target company: {_format_value(basic.get('name'))}",
         f"- Industry: {industry}",
         f"- Valuation trade date: {_format_yyyymmdd(trade_date)}",
-        f"- Peer sample: same Tushare stock_basic industry, closest by market value.",
+        (
+            "- Peer sample: curated listed operating comparables; broad-industry names are excluded from the core comparison."
+            if uses_curated_operating_peers
+            else "- Peer sample: same Tushare stock_basic industry, closest by market value."
+        ),
         "- Market-cap units: `total_mv` is ten-thousand CNY; `total_mv_cny_100m` is 亿元 and equals `total_mv / 10,000`.",
         *(f"- Data note: {note}" for note in data_notes),
         *(
@@ -1057,6 +1101,16 @@ def get_peer_comparison(ticker: str, curr_date: str, peer_limit: int = 12) -> st
         "",
         "## Peer Table",
         _markdown_table(display),
+        *(
+            [
+                "",
+                "## Strategic / Non-Table Comparables",
+                *[f"- {note}" for note in CURATED_STRATEGIC_PEER_NOTES.get(symbol, ())],
+                "- These names are strategic comparisons, not directly averaged valuation peers. Compare the matching business bucket and operating KPI instead.",
+            ]
+            if CURATED_STRATEGIC_PEER_NOTES.get(symbol)
+            else []
+        ),
         "",
         "## Peer Selection Verdict",
     ]

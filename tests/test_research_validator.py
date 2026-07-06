@@ -7,7 +7,10 @@ from tradingagents.evaluation.research_validator import (
     audit_decision_depth,
     audit_decision_integrity,
     audit_handoff_numeric_consistency,
+    audit_canonical_financial_reconciliation,
     audit_pm_unit_scale_arithmetic,
+    audit_position_valuation_consistency,
+    audit_public_key_number_consistency,
     audit_report_redundancy,
     audit_public_process_leakage,
     audit_structured_research_usage,
@@ -588,6 +591,29 @@ def test_handoff_numeric_audit_blocks_silent_pm_change(tmp_path):
         for issue in issues
     )
 
+    pm["canonical_model_snapshot"][1]["value"] = 100.0
+    manager["canonical_model_snapshot"].append(
+        {"line_id": "2026E_gross_profit", "period": "2026E", "metric": "gross_profit", "value": 50.0, "unit": "CNY mn"}
+    )
+    pm["canonical_model_snapshot"].append(
+        {
+            "line_id": "2026E_gross_profit",
+            "period": "2026E",
+            "metric": "gross_profit",
+            "value": 45.0,
+            "unit": "CNY mn",
+            "status": "calculated",
+            "formula": "revenue x gross margin",
+        }
+    )
+    (research_dir / "canonical_plan.json").write_text(json.dumps(manager), encoding="utf-8")
+    (portfolio_dir / "canonical_decision.json").write_text(json.dumps(pm), encoding="utf-8")
+
+    assert not any(
+        "silently changed 2026e grossprofit" in issue.issue.lower()
+        for issue in audit_handoff_numeric_consistency(tmp_path)
+    )
+
 
 def test_post_generation_audit_marks_missing_pm_analytical_spine_review_only(tmp_path):
     portfolio_dir = tmp_path / "5_portfolio"
@@ -688,6 +714,48 @@ def test_structured_audit_flags_unused_sell_side_expectation_observation(tmp_pat
     assert "sell_side_expectation_lineage" in {issue.section for issue in issues}
 
 
+def test_structured_audit_rejects_wrong_kpe_paired_with_ksi(tmp_path):
+    context_dir = tmp_path / "0_context"
+    portfolio_dir = tmp_path / "5_portfolio"
+    context_dir.mkdir()
+    portfolio_dir.mkdir()
+    bundle = {
+        "preprocessing_mode": "llm_semantic_plus_deterministic_validation",
+        "preprocessing_notes": [],
+        "deterministic_evidence": [],
+        "underwriting_packet": {},
+        "segments": [],
+        "kpe_impacts": [],
+        "sell_side_intelligence": [
+            {"intelligence_id": "KSI01", "evidence_ids": ["KPE02"]}
+        ],
+        "conflicts": [],
+    }
+    (context_dir / "structured_research.json").write_text(
+        json.dumps(bundle, ensure_ascii=False), encoding="utf-8"
+    )
+    (portfolio_dir / "canonical_decision.json").write_text(
+        json.dumps(
+            {
+                "sell_side_expectation_matrix": [
+                    {"source_ids": ["KSI01", "KPE01"]}
+                ]
+            },
+            ensure_ascii=False,
+        ),
+        encoding="utf-8",
+    )
+
+    issues = audit_structured_research_usage(tmp_path, "decision")
+
+    assert any(
+        issue.section == "sell_side_expectation_lineage"
+        and issue.severity == "error"
+        and "KPE01" in issue.issue
+        for issue in issues
+    )
+
+
 def test_post_generation_integrity_recomputes_scenario_value():
     decision = (
         "| 情景 | 目标价 | 概率 | 期望值贡献 |\n"
@@ -714,6 +782,59 @@ def test_post_generation_integrity_reconciles_profit_and_eps_share_count():
     sections = {issue.section for issue in audit_decision_integrity(decision)}
 
     assert "eps_profit_share_count_consistency" in sections
+
+
+def test_canonical_financial_reconciliation_catches_income_statement_gap(tmp_path):
+    portfolio_dir = tmp_path / "5_portfolio"
+    portfolio_dir.mkdir()
+    payload = {
+        "canonical_model_snapshot": [
+            {"period": "2026E", "metric": "revenue", "value": 95000, "unit": "CNY mn"},
+            {"period": "2026E", "metric": "gross_margin", "value": 33, "unit": "%"},
+            {"period": "2026E", "metric": "gross_profit", "value": 31350, "unit": "CNY mn"},
+            {"period": "2026E", "metric": "operating_profit", "value": 18450, "unit": "CNY mn"},
+            {"period": "2026E", "metric": "finance_and_other_items", "value": -1140, "unit": "CNY mn"},
+            {"period": "2026E", "metric": "income_tax", "value": 2080, "unit": "CNY mn"},
+            {"period": "2026E", "metric": "minority_interest", "value": 1210, "unit": "CNY mn"},
+            {"period": "2026E", "metric": "parent_net_profit", "value": 10500, "unit": "CNY mn"},
+        ]
+    }
+    (portfolio_dir / "canonical_decision.json").write_text(json.dumps(payload), encoding="utf-8")
+
+    issues = audit_canonical_financial_reconciliation(tmp_path)
+
+    assert "canonical_financial_reconciliation" in {issue.section for issue in issues}
+
+
+def test_public_key_number_consistency_catches_conflicting_net_cash():
+    issues = audit_public_key_number_consistency(
+        "Q1净现金166亿元，资产负债表稳健。随后测算Q1净现金246.8亿元。"
+    )
+
+    assert [issue.section for issue in issues] == ["public_key_number_consistency"]
+
+
+def test_position_instruction_cannot_exceed_deterministic_safe_ceiling(tmp_path):
+    portfolio_dir = tmp_path / "5_portfolio"
+    portfolio_dir.mkdir()
+    (portfolio_dir / "canonical_decision.json").write_text(
+        json.dumps(
+            {
+                "deterministic_valuation": {
+                    "status": "closed",
+                    "safe_buy_price_ceiling_cny": 102.14,
+                }
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    issues = audit_position_valuation_consistency(
+        tmp_path,
+        "计划建仓者可在120-130元区域试探性买入。",
+    )
+
+    assert [issue.section for issue in issues] == ["position_valuation_consistency"]
 
 
 def test_normalize_rating_handles_empty_label_value():

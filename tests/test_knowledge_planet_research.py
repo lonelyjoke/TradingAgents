@@ -395,6 +395,73 @@ def test_single_stock_kpe_preserves_full_text_after_inline_zsxq_metadata(tmp_pat
     assert "topic_id:" not in context
 
 
+def test_stock_primary_terms_exclude_generic_vendor_industry(monkeypatch):
+    monkeypatch.setattr(
+        kp,
+        "_fetch_stock_basic",
+        lambda _symbol: {"name": "阳光电源", "industry": "电气设备"},
+    )
+
+    primary = kp._stock_terms("300274.SZ", include_industry_expansion=False)
+    expanded = kp._stock_terms("300274.SZ", include_industry_expansion=True)
+
+    assert "阳光电源" in primary
+    assert "电气设备" not in primary
+    assert "电气设备" in expanded
+    assert "储能系统" in expanded
+
+
+def test_text_only_evidence_rejects_pdf_inventory_and_near_duplicate_reposts():
+    inventory = kp.KpItem(
+        row_id=1,
+        title="外资研报",
+        text="野村-阳光电源（300274.SZ）美国逆变器禁令速报.pdf；高盛-阳光电源电话会.pdf",
+        summary="",
+        source_type="report_list_post",
+        credibility="",
+        published_at="2026-07-02 09:00",
+        author="tester",
+        source_file="daily.md",
+        tickers=("300274.SZ",),
+        companies=("阳光电源",),
+        industries=("电气设备",),
+        themes=("储能",),
+    )
+    original = kp.KpItem(
+        row_id=2,
+        title="阳光电源300274.SZ交流",
+        text="欧洲储能订单增速上修，但仍需以半年报合同负债、出货和回款验证。",
+        summary="",
+        source_type="channel_check",
+        credibility="",
+        published_at="2026-07-02 10:00",
+        author="tester",
+        source_file="daily.md",
+        tickers=("300274.SZ",),
+        companies=("阳光电源",),
+        industries=("电气设备",),
+        themes=("储能",),
+    )
+    repost = kp.KpItem(
+        **{
+            **original.__dict__,
+            "row_id": 3,
+            "title": "📈阳光电源300274.SZ交流更新",
+            "text": "欧洲储能订单增速上修，但仍需以半年报合同负债、出货和回款验证！",
+        }
+    )
+
+    rows = kp._build_kp_evidence_ledger(
+        items=[inventory, original, repost],
+        preprocessed_snapshot={},
+        primary_terms=["300274.SZ", "300274", "阳光电源"],
+    )
+
+    assert len(rows) == 1
+    assert rows[0].source == "stream_item:2"
+    assert ".pdf" not in rows[0].evidence.lower()
+
+
 def test_hog_context_extracts_private_proxy_kpis(tmp_path, monkeypatch):
     db_path = tmp_path / "kp.sqlite"
     _make_db(db_path)

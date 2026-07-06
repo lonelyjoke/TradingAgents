@@ -40,6 +40,7 @@ from tradingagents.dataflows.prompt_compaction import (
     compact_debate_history,
     compact_for_prompt,
     compact_state_fields,
+    gated_prompt_sections,
 )
 from tradingagents.dataflows.structured_research import compact_structured_research_for_prompt
 
@@ -83,6 +84,21 @@ def create_bear_researcher(llm):
         insurance_context = prompt_contexts["insurance_context"]
         medical_device_context = prompt_contexts["medical_device_context"]
         metals_mining_context = prompt_contexts["metals_mining_context"]
+        gated_sector_context, gated_sector_instructions = gated_prompt_sections(
+            [
+                ("Baijiu", baijiu_context, get_baijiu_instruction),
+                ("Compute leasing", compute_leasing_context, get_compute_leasing_instruction),
+                ("Defensive dividend", dividend_defensive_context, get_dividend_defensive_instruction),
+                ("Building materials", building_materials_context, get_building_materials_instruction),
+                ("Consumer staples", consumer_staples_context, get_consumer_staples_instruction),
+                ("Optical module", optical_module_context, get_optical_module_instruction),
+                ("Biopharma", biopharma_context, get_biopharma_instruction),
+                ("Software", software_context, get_software_instruction),
+                ("Insurance", insurance_context, get_insurance_instruction),
+                ("Medical device", medical_device_context, get_medical_device_instruction),
+                ("Metals/mining", metals_mining_context, get_metals_mining_instruction),
+            ]
+        )
         industry_cycle_context = prompt_contexts["industry_cycle_context"]
         company_business_model_context = prompt_contexts["company_business_model_context"]
         industry_kpi_context = prompt_contexts["industry_kpi_context"]
@@ -190,17 +206,8 @@ Official investor-interaction context: {investor_interaction_context}
 Official policy-planning context: {policy_planning_context}
 Web fact-check context: {web_fact_check_context}
 Knowledge Planet topic-text intelligence: {knowledge_planet_context}
-Gated baijiu verification context: {baijiu_context}
-Gated compute-leasing verification context: {compute_leasing_context}
-Gated dividend defensive verification context: {dividend_defensive_context}
-Gated building-materials verification context: {building_materials_context}
-Gated consumer-staples verification context: {consumer_staples_context}
-Gated AI optical-module verification context: {optical_module_context}
-Gated biopharma verification context: {biopharma_context}
-Gated software verification context: {software_context}
-Gated insurance verification context: {insurance_context}
-Gated medical-device verification context: {medical_device_context}
-Gated metals/mining verification context: {metals_mining_context}
+Triggered sector-specific research layers:
+{gated_sector_context}
 Conversation history of the debate: {prompt_history}
 Last bull argument: {prompt_current_response}
 Use this information to deliver an evidence-backed bearish challenge to the shared underwriting model. Prioritize the few assumptions that change segment earnings, consolidated EPS/FCF, scenario probability or fair value; do not maximize rhetorical persuasiveness.
@@ -218,7 +225,6 @@ Use this information to deliver an evidence-backed bearish challenge to the shar
 {get_earnings_model_instruction()}
 {get_market_expectation_instruction()}
 {get_price_earnings_decomposition_instruction()}
-{get_consumer_staples_instruction()}
 {get_investor_interaction_instruction()}
 {get_policy_planning_instruction()}
 {get_three_layer_conclusion_instruction()}
@@ -226,16 +232,7 @@ Use this information to deliver an evidence-backed bearish challenge to the shar
 {get_shareholder_structure_instruction()}
 {get_web_fact_check_instruction()}
 {get_knowledge_planet_instruction()}
-{get_baijiu_instruction()}
-{get_compute_leasing_instruction()}
-{get_dividend_defensive_instruction()}
-{get_building_materials_instruction()}
-{get_optical_module_instruction()}
-{get_biopharma_instruction()}
-{get_software_instruction()}
-{get_insurance_instruction()}
-{get_medical_device_instruction()}
-{get_metals_mining_instruction()}
+{gated_sector_instructions}
 {get_focused_report_instruction()}
 """
 

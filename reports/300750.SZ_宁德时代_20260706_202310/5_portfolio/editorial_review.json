@@ -1,0 +1,122 @@
+{
+  "review": {
+    "revision_required": true,
+    "company_understanding_score": 3,
+    "independent_model_score": 2,
+    "evidence_and_counterevidence_score": 2,
+    "valuation_closure_score": 2,
+    "readability_and_synthesis_score": 3,
+    "strongest_aspects": [
+      "Q1毛利率24.82%作为核心验证点贯穿全篇，证据使用高效",
+      "储能出货量、毛利率与应收账款的三角风险分析框架清晰",
+      "合同负债环比回落被识别为黄色信号，体现了审慎态度"
+    ],
+    "findings": [
+      {
+        "section": "three_year_forecast",
+        "priority": "must_revise",
+        "issue": "储能出货量假设在报告中前后矛盾，导致收入与EPS导向不一致",
+        "evidence_or_logic_gap": "摘要及结论部分明确采用250 GWh基准，但三年财务模型的表中仍保留260 GWh及对应的1,310亿元储能收入（后附的更新账本也显示260→250）；forecast_takeaways和autonomous_forecast_model亦存在两个版本的数字，使EPS 19.06元与19.46元同时出现。",
+        "revision_instruction": "统一所有章节的储能基准出货量为250 GWh，修正储能收入为1,260亿元，删除所有260 GWh遗留数字。同步修正三年模型表格、盈利预测、财务桥接和估值部分中对储能收入的引用，确保2026E EPS 19.06元唯一且一致。"
+      },
+      {
+        "section": "thesis_moat_financial_bridge",
+        "priority": "must_revise",
+        "issue": "投资论点章节缺少最终空头反证、市场定价含义和证伪条件，这三项是核心论点的构成要件，而非仅存在于内部工作台",
+        "evidence_or_logic_gap": "当前‘投资论点’部分只阐述了多头逻辑证据，未列出针对储能翻番的最强反证（合同负债环比下降＋Q1年化仅200 GWh）、未说明当前PE 21.9x反映了市场对一次脉冲增长还是结构性扩张的定价，也未设定明确的证伪门（如H1储能<110 GWh则论点击穿）。内部工作台虽有这些要素，但公开报告未吸收。",
+        "revision_instruction": "在投资论点每一条后补充：① 最强的反向事实（要求引自身证据，如合同负债下降），② 当前市场定价对此的隐含解读，③ 可操作的证伪条件（含指标、时间点和阈值），且不得简单复制内部·证伪·标签。"
+      },
+      {
+        "section": "valuation_and_expectation_gap",
+        "priority": "must_revise",
+        "issue": "估值部分未引用自主模型的基准公允价值计算路径，且概率加权公允价值数字与自主模型输出存在偏差",
+        "evidence_or_logic_gap": "工作台中的valuation_closure计算概率加权公允价值为432.56元，而报告内文称‘约433元’，且部分地方出现437元（来自早期的概率加权计算），缺乏统一锚定。此外，报告中未展示22x PE → 419元/股这一核心估值路径的推导，导致读者无法验证。",
+        "revision_instruction": "固定使用单一概率加权公允价值（建议432.6元），并在估值章节明确分出：① 核心Base价值：2026E EPS 19.06元 × 22x = 419元，② 期权增量（储能、钠电、AIDC）的分项价值与概率，③ 三者之和。删除任何与自主canonical_model不一致的公允值数字。"
+      },
+      {
+        "section": "company_disaggregation",
+        "priority": "should_revise",
+        "issue": "公司经济单元分解过于简短，未呈现business_model_mechanisms所要求的因果链条，也未展示各业务的经济驱动方程",
+        "evidence_or_logic_gap": "目前仅给出动力电池、储能、回收的业务比重和毛利率，但缺少每个单元的出货量×ASP×毛利率的收入利润方程，也没有说明产能利用、成本结构如何影响毛利率。结果读者难以理解为什么储能毛利率26.7%、但综合毛利率仅24.5%。内部business_model_mechanisms中的五环节（客户需求→定价→采购→资本开支→回款）未在公开章节出现。",
+        "revision_instruction": "将‘公司如何运转’一节重构为业务模型机制表，按价值驱动要素（量、价、成本、产能利用率、营运资本）逐项说明动力电池与储能的经济逻辑，并给出简明方程和近期数字。避免使用纯定性描述，必须引用Q1和2025年真实数据。"
+      },
+      {
+        "section": "industry_cycle_and_competition",
+        "priority": "should_revise",
+        "issue": "行业驱动因素分析缺乏结构化矩阵，无法辨别哪些因子是主要价值杠杆以及如何映射到公司业绩",
+        "evidence_or_logic_gap": "报告仅用一段文字叙述全球储能需求和碳酸锂价格，但没有逐个列出驱动因素（如全球储能装机、政策、锂价、竞争强度）及其当前方向、置信度和对动力/储能的影响。缺少这种矩阵会使预测看起来缺乏系统性推导。",
+        "revision_instruction": "将‘行业周期与竞争’部分扩展为industry_driver_matrix表，至少包含：驱动因子、当前状态与方向、最新证据日期、影响的业务线、财务传导路径、置信度、下一次验证事件。这是正式买方备忘录的标准做法。"
+      },
+      {
+        "section": "accounting_and_capital_allocation",
+        "priority": "should_revise",
+        "issue": "应收账款风险虽被识别，但未按accounting_quality_matrix要求进行多维度评估，也缺少与历史标准的对比",
+        "evidence_or_logic_gap": "当前仅指出应收账款增速60%、应收/收入比下降和OCF/NI下调。未对合同负债质量、存货周转、应付账款占款进行同等审视，也未说明‘应收/收入比下降’是否纯粹因为分母（收入）放大。坏账假设缺少依据。",
+        "revision_instruction": "建立accounting_quality_matrix，逐项评估：应收账款账龄风险、合同负债可靠性、经营现金流/净利润持续性、存货与收入匹配、CAPEX合理性，每项给出趋势和结论。对于应收账款，至少需要说明‘应收/收入比下降但仍处高位，若扣除收入膨胀效应后实际回收周期如何变化’。"
+      },
+      {
+        "section": "valuation_and_expectation_gap",
+        "priority": "should_revise",
+        "issue": "未纳入唯一可使用的卖方预期（东吴证券目标价632元）形成预期差矩阵，不符合sell_side_expectation_matrix要求",
+        "evidence_or_logic_gap": "工作台中有东吴证券的KSI记录（目标价632元，2026E PE 25x，储能280 GWh），且独立模型已拒绝该激进假设。公开报告却未提及该机构预测，无法让读者了解我们的中性/保守愿景与最乐观卖方之间的距离，从而削弱预期差论点的说服力。",
+        "revision_instruction": "在估值或预期差部分增加一段简短卖方预期矩阵，列出东吴证券的日期、假设（280 GWh/25x PE）、目标价632元以及与我们独立模型（250 GWh/22x PE/419元）的差距来源，并说明为何我们的假设更审慎。"
+      },
+      {
+        "section": "risks_catalysts_verification",
+        "priority": "optional",
+        "issue": "风险章节未绑定具体的证伪条件到估值情景，导致下行保护缺乏可操作性",
+        "evidence_or_logic_gap": "目前列举的风险如储能出货下调、毛利率跌破23%等，没有明确对应至哪一种估值情景（Bear），也应没有将止损价与基本面触发点挂钩。例如，若H1储能低于110 GWh，应自动触发Bear情景（306元）估值，并可指导仓位管理。",
+        "revision_instruction": "在风险段落中直接引用估值情景：若H1储能<110 GWh将触发Bear情景（306元），并据此建议仓位调整。把‘需要下调评级’等空泛表述替换为‘触发Bear情景，将核心公允价值从419元下调至306元，与当前价格对比仍可能承受XX%下行’。"
+      }
+    ],
+    "overall_editorial_verdict": "报告的核心逻辑——储能驱动利润跃升叠加PE修复——方向正确且有Q1数据支撑，但多处在数字一致性、反面论证整合和估值推演上存在硬伤。储能出货量假设在章节间跳跃，估值数字有三个版本，公共投资论点缺少证伪机制，业务与行业分析停留在摘要层次，均影响了作为独立投资提案的可信度。重点修订上述挂红项后，报告有望达到合格的买方备忘录水平。"
+  },
+  "review_status": {
+    "mode": "schema_prompt_structured",
+    "agent": "Sell-Side Research Editor",
+    "structured_error": ""
+  },
+  "revision_requested": true,
+  "revision_applied": true,
+  "revision_status": {
+    "mode": "schema_prompt_structured",
+    "agent": "Portfolio Manager Editorial Revision",
+    "structured_error": ""
+  },
+  "initial_handoff_issues": [
+    "dropped canonical line: shares",
+    "dropped canonical line: 2026e_revenue",
+    "dropped canonical line: 2027e_revenue",
+    "dropped canonical line: 2028e_revenue",
+    "dropped canonical line: 2026e_operatingprofit",
+    "dropped canonical line: 2027e_operatingprofit",
+    "dropped canonical line: 2028e_operatingprofit",
+    "dropped canonical line: 2026e_parentnetprofit",
+    "dropped canonical line: 2027e_parentnetprofit",
+    "dropped canonical line: 2028e_parentnetprofit",
+    "dropped canonical line: 2026e_eps",
+    "dropped canonical line: 2027e_eps",
+    "dropped canonical line: 2028e_eps",
+    "dropped canonical line: 2026e_经营现金流ocf",
+    "dropped canonical line: 2027e_经营现金流ocf",
+    "dropped canonical line: 2028e_经营现金流ocf",
+    "dropped canonical line: 2026e_gross_margin",
+    "dropped canonical line: base_fair_value",
+    "dropped canonical line: probability_weighted_fair_value",
+    "dropped canonical line: 2025a_ocf",
+    "dropped canonical line: 2025a_capex"
+  ],
+  "initial_analytical_issues": [
+    "public thesis chapter missing strongest counterargument/boundary",
+    "public thesis chapter missing market-pricing implication",
+    "public thesis chapter missing falsification condition"
+  ],
+  "remaining_handoff_issues": [
+    "silent change 2027e_经营现金流ocf: 158200.0 cny mn -> 154420.0 cny mn",
+    "silent change 2028e_经营现金流ocf: 193200.0 cny mn -> 184520.0 cny mn"
+  ],
+  "remaining_analytical_issues": [
+    "public thesis chapter missing strongest counterargument/boundary",
+    "public thesis chapter missing market-pricing implication"
+  ]
+}

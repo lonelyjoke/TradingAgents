@@ -230,18 +230,22 @@ PM decision draft JSON:
 
 def _editorial_revision_prompt(
     *,
-    original_prompt: str,
     decision_payload: dict,
     review_payload: dict,
     handoff_issues: list[str],
+    manager_payload: dict,
+    structured_research_context: str,
+    fundamentals_context: str,
+    lessons_line: str,
+    recent_decision_line: str,
 ) -> str:
     """Ask the same selected deep model for one bounded, evidence-preserving revision."""
 
-    return f"""{original_prompt}
+    return f"""SENIOR SELL-SIDE EDITOR REVISION PASS
+The draft below was already generated under the complete Portfolio Manager mandate and
+validated as a SellSidePMDecision object. Revise that existing object; do not restart the
+research process and do not recreate unaffected sections from raw module dumps.
 
----
-
-SENIOR SELL-SIDE EDITOR REVISION PASS
 Revise the PM draft once using the editorial findings below. Return the complete
 SellSidePMDecision object, including fields that are unchanged.
 
@@ -255,6 +259,24 @@ Hard preservation rules:
 - Revise only sections named by the editor or needed for cross-section consistency.
 - Improve causal and financial transmission, counterevidence, and valuation closure using
   the supplied record. Depth is judged by analytical closure, not word count.
+- Treat the existing draft as the source for every unaffected field. The compact source
+  records below exist only to support the editor's named corrections.
+- Preserve the Portfolio Manager mandate: the output remains a self-contained public research note,
+  not a checklist of upstream modules or an internal analysis transcript.
+- Preserve the compact public-writing contract: begin with a short Company Snapshot; retain the
+  Business Model & Industry Chain Primer and its upstream-midstream-downstream chain; use the
+  required Debate & Decision Logic, Catalysts & Optionality, Evidence Gaps & Data Coverage, and
+  Verification & Falsification content in their owning chapters. Use this narrative order and
+  treat source modules as materiality gates, not a checklist. Avoid repeating the same fact;
+  prefer less fragmentation, more synthesis. There is no hard word-count or section-count target.
+  Close each decisive argument as claim -> evidence -> causal transmission -> valuation/position implication.
+  Preserve the Bank Buy-Side Memo Overlay rule, including: If the target is not a bank, do not
+  force bank-specific metrics. Route non-bank companies through their own industry-native drivers.
+  For banks, retain PB/ROE/COE and earning assets x NIM logic. Preserve the Decision-Continuity Rules
+  and Material-catalyst discipline. Do not invent A-share/H-share/U.S.-listed companies.
+
+Prior-decision context that must remain reflected when relevant:
+{lessons_line}{recent_decision_line}
 
 Original PM draft JSON:
 {json.dumps(decision_payload, ensure_ascii=False, separators=(',', ':'))}
@@ -264,6 +286,15 @@ Editorial review JSON:
 
 Deterministic handoff issues:
 {json.dumps(handoff_issues, ensure_ascii=False)}
+
+Research Manager canonical plan (compact):
+{json.dumps(manager_payload, ensure_ascii=False, separators=(',', ':'))[:30000]}
+
+Structured research source of record (compact):
+{structured_research_context}
+
+Fundamental reconciliation excerpt:
+{fundamentals_context}
 """
 
 
@@ -466,17 +497,19 @@ def create_portfolio_manager(llm):
 - Fill `research_questions`, `question_verdicts`, `forecast_takeaways`, `forecast_assumptions`, and `core_theses` from the accepted model. Do not leave them empty when the source record supports analysis. Questions, verdicts and thesis cards are the internal analytical workbench; they must improve the reasoning but must not appear as a public question list, Q&A ledger or repeated checklist.
 - Fill `segment_economics` with every material economic unit, using reported/calculated/analyst-estimate/missing labels and explicit core/scenario/optionality/excluded valuation treatment. Fill `industry_driver_matrix` with dated demand, supply/capacity, price/cost and policy variables. Fill `accounting_quality_matrix` with working-capital, cash-conversion, capex/ROIC, leverage/impairment and shareholder-return checks. The adjacent prose interprets these tables and must not repeat every cell.
 - Fill `business_model_mechanisms` with four to seven links covering customer/value proposition, purchase or tender decision, pricing, delivery/revenue recognition, cost stack/service, and cash collection/capital intensity. Fill `moat_mechanisms` with at least three mechanisms tested through observable share, win rate, ASP, margin, turnover, cash or ROIC outcomes. Awards, R&D spending and market-share labels are not moat proof by themselves.
-- Fill `safe_valuation_assumptions` with exactly bull/base/bear inputs plus required return, holding period, margin of safety and maximum acceptable bear loss. Do not calculate scenario EPS, equity value, per-share value, probability-weighted value, optionality per share, expected return or safety price; application code owns those outputs. In `valuation_closure`, explain method choice, evidence limits, double counting and what would change the assumptions, without publishing competing hand-calculated values.
+- Fill `safe_valuation_assumptions` with exactly bull/base/bear inputs plus required return, holding period, margin of safety and maximum acceptable bear loss. Put each second curve in `optionality_inputs` with one metric value, multiple, probability, ownership and a genuinely separate execution haircut. Never encode a 25% probability again as a 75% haircut. Do not calculate scenario EPS, equity value, per-share value, probability-weighted value, optionality per share, expected return or safety price; application code owns those outputs. In `valuation_closure`, explain method choice, evidence limits, double counting and what would change the assumptions, without publishing competing hand-calculated values or restating a manual option-value formula.
 - For each deduplicated material Knowledge Planet claim, fill `alternative_intelligence_decisions` from full topic text, not a title or ellipsis. Grade it A/B/C/D, state age and decision shelf life in `freshness_and_shelf_life`, and force one outcome: model change, scenario-probability change, verification-clock/gate change, or explicit rejection. Multiple reposts of the same original note are one claim, not independent corroboration. Integrate the result into the affected thesis; do not create a raw-message catalog. Recent does not mean true, while stale channel checks cannot alter the current model without revalidation.
-- Populate `sell_side_expectation_matrix` from KSI rows. Preserve institution and date, distinguish a single broker from a true multi-broker range, compare same-institution forecast/target revisions, and state the exact period/variable/magnitude difference versus the TradingAgents model. Missing method, base year or target price must remain missing; never reverse-engineer them from promotional language.
+- Populate `sell_side_expectation_matrix` from KSI rows. Copy only the KPE ids explicitly linked to that exact KSI row; never pair a KSI observation with a different KPE merely because the institution or topic sounds similar. Preserve institution and date, distinguish a single broker from a true multi-broker range, compare same-institution forecast/target revisions, and state the exact period/variable/magnitude difference versus the TradingAgents model. Missing method, base year or target price must remain missing; never reverse-engineer them from promotional language.
 - Fill `question_verdicts` with evidence-weighted answers to the same decisive questions. Integrate filing facts, structured financials, industry KPIs, peers, price/expectation evidence and Knowledge Planet clues only where they answer the question. Cite what was actually used, surface contradictions, and state the named model/probability/valuation effect. Then synthesize each accepted conclusion exactly once into the relevant public chapter. A sequential recap of available modules is not analysis.
 - The forecast narrative must interpret rather than duplicate the renderer's table. State whether the model is bottom-up, top-down, or hybrid; explain the 2-3 largest earnings/cash drivers and the most fragile assumption. Do not write a precise volume, ASP, utilization, expense ratio, scenario probability or valuation multiple unless it has a historical/evidence anchor or is explicitly labeled an analyst range with sensitivity.
 - `core_theses` must contain only the 2-4 conclusions that decide the rating. Do not produce separate flat lists of thesis bullets and moat bullets. A moat is relevant only when observable evidence shows transmission into share/price, margin, turnover, cash conversion, ROIC or valuation, with the strongest counterevidence and a falsification gate.
 - Copy the machine-readable Research Manager `canonical_model_snapshot` line for line, including ids, periods, values and units. Any PM revision requires a matching accepted `handoff_change_rows` entry with old/new value, evidence ids and recalculated EPS/FCF/valuation impact. A prose claim of "no change" never overrides a numeric difference.
+- A forecast may be called bottom-up only when every material business unit has three numeric forward-year rows and their revenue/profit totals reconcile to the consolidated lines. Otherwise label it top-down or hybrid and name the missing shipment/ASP/margin inputs.
 - Single-report depth contract: let length follow company complexity and evidence density. The eight public sections follow a continuous research argument: conclusion and valuation snapshot -> business model and segment economics -> industry/cycle/competitive advantage -> operating and accounting quality -> core investment logic with counter-case -> forecast and sensitivities -> market expectations and valuation -> risks/catalysts/tracking. They must contain all evidence, assumptions, sensitivities, peer alternatives, accounting analysis and model-change implications needed for a PM or research head to audit the recommendation without opening a second report. Do not pad or repeat conclusions. Only raw agent transcripts, generation diagnostics, research-question ledgers and machine bookkeeping remain internal artifacts.
 - Within every substantive public chapter, use this reasoning loop when relevant: core judgment -> key evidence -> causal mechanism -> concrete company or peer case -> strongest counterargument and boundary -> financial/valuation implication -> transition to the next chapter. Questions are prompts for analyst thinking, never the reader-facing architecture.
 - Public information ownership is strict: section 1 owns only the verdict and valuation/safety-price snapshot; sections 2-4 own company/industry/accounting evidence; section 5 owns full thesis reasoning and alternative-intelligence deltas; section 6 owns all forecast numbers; section 7 owns all valuation and safe-price arithmetic; section 8 owns catalysts, falsification and actions. Do not restate the same assumption or trigger in more than two sections.
 - Always generate the complete PM memo and its structured workbench. It should complete: (1) material business-segment economics, (2) three distinct forward years or four distinct forward quarters reconciled to group earnings and cash, (3) formula-auditable valuation and safety-price arithmetic, (4) period-consistent verification thresholds, and (5) an internal explicit KPE outcome ledger. If an item cannot be completed, state the exact missing input, leave unsupported cells null, and add a retrieval task; do not suppress or mechanically downgrade the report.
+- Execution language must follow the application-calculated valuation. Never recommend a new buy/build/add range above `deterministic_valuation.safe_buy_price_ceiling_cny`; if the current quote is above that ceiling, say wait/hold and identify the evidence that would justify changing valuation inputs.
 - The public memo presents conclusions and causal reasoning, not the research workflow. Keep research questions, KPE/KSI disposition logs, evidence-grade bookkeeping, handoff audits and model-change mechanics in structured fields; synthesize only their company-relevant conclusions into the owning public chapter. Do not expose a sequence of `结论/核心证据/最强反证/财务传导/市场定价/证伪门` labels for every thesis. Write connected analyst prose that makes the same logic clear.
 - Valuation has one public owner: section 7. Outside the one-line thesis and section 7, do not repeat target price, safe price, scenario fair values, PE-derived upside or the full valuation conclusion. Sections 2-4 explain the company; section 5 explains why earnings may differ from expectations; section 6 owns forecasts. Do not turn every section into another valuation argument.
 - Section 2 must let an unfamiliar reader reconstruct the business: who pays, what problem each product solves, how the buying/tender decision works, pricing and revenue recognition, delivery/service obligations, cost stack, working-capital cycle, capital intensity, segment interactions and where profit pools actually sit. Company-description slogans are insufficient.
@@ -808,10 +841,14 @@ If an important investment claim depends on an unverified commodity price, produ
                 structured_llm,
                 llm,
                 _editorial_revision_prompt(
-                    original_prompt=prompt,
                     decision_payload=pm_decision_payload,
                     review_payload=editorial_review_payload,
                     handoff_issues=[*initial_handoff_issues, *initial_analytical_issues],
+                    manager_payload=manager_payload,
+                    structured_research_context=structured_research_context,
+                    fundamentals_context=fundamentals_reconciliation_context,
+                    lessons_line=lessons_line,
+                    recent_decision_line=recent_decision_line,
                 ),
                 render_sell_side_pm_decision,
                 "Portfolio Manager Editorial Revision",

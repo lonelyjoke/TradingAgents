@@ -713,6 +713,19 @@ def save_report_to_disk(final_state, ticker: str, save_path: Path):
     sections = []
     pm_section = None
 
+    if final_state.get("run_metrics"):
+        context_dir = save_path / "0_context"
+        context_dir.mkdir(exist_ok=True)
+        (context_dir / "run_metrics.json").write_text(
+            json.dumps(
+                final_state["run_metrics"],
+                ensure_ascii=False,
+                indent=2,
+                default=str,
+            ),
+            encoding="utf-8",
+        )
+
     # 0. Precomputed context
     if final_state.get("data_coverage_context"):
         context_dir = save_path / "0_context"
@@ -1634,6 +1647,14 @@ def run_analysis(checkpoint: bool = False):
         # Get final state and decision
         final_state = trace[-1]
         decision = graph.process_signal(final_state["final_trade_decision"])
+        final_state["run_metrics"] = {
+            **stats_handler.get_stats(),
+            "elapsed_seconds": round(time.time() - start_time, 3),
+            "selected_analysts": selected_analyst_keys,
+            "quick_model": config.get("quick_think_llm"),
+            "deep_model": config.get("deep_think_llm"),
+            "provider": config.get("llm_provider"),
+        }
 
         # Update all agent statuses to completed
         for agent in message_buffer.agent_status:

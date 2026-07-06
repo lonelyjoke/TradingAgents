@@ -1,0 +1,25 @@
+{
+  "mode": "schema_prompt_structured",
+  "agent": "Portfolio Manager",
+  "structured_error": "2 validation errors for SellSidePMDecision\nalternative_intelligence_decisions.2.source_type\n  Input should be 'channel_check', 'company_research', 'industry_data', 'sell_side_view', 'policy', 'rumor' or 'other' [type=literal_error, input_value='industry_weekly_data', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nalternative_intelligence_decisions.3.source_type\n  Input should be 'channel_check', 'company_research', 'industry_data', 'sell_side_view', 'policy', 'rumor' or 'other' [type=literal_error, input_value='company_research_feedback', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error",
+  "schema": "SellSidePMDecision",
+  "initial_mode": "schema_repaired_fallback",
+  "editorial_review_mode": "schema_prompt_structured",
+  "editorial_revision_requested": true,
+  "editorial_revision_applied": true,
+  "editorial_revision_mode": "schema_prompt_structured",
+  "remaining_handoff_issues": [
+    "silent change 2027e_经营现金流ocf: 158200.0 cny mn -> 154420.0 cny mn",
+    "silent change 2028e_经营现金流ocf: 193200.0 cny mn -> 184520.0 cny mn"
+  ],
+  "remaining_analytical_issues": [
+    "public thesis chapter missing strongest counterargument/boundary",
+    "public thesis chapter missing market-pricing implication"
+  ],
+  "deterministic_model_notes": [],
+  "full_report_chars": "15037",
+  "public_report_chars": "15037",
+  "internal_overflow_chars": "0",
+  "internal_sections_removed_from_public_report": "",
+  "public_h2_count": "8"
+}

@@ -195,3 +195,38 @@ def test_classifies_telecom_commodity_context_as_not_applicable():
     coverage = classify_context_coverage("commodity_product_price", text)
 
     assert coverage.status == "not_applicable"
+
+
+def test_rich_company_primer_is_not_n_a_because_a_late_submodule_is_unmapped():
+    text = (
+        "# Company Business Model Primer\n\n"
+        "## How The Company Makes Money\n"
+        + ("verified business-model evidence and segment economics\n" * 40)
+        + "## External Cross-Checks\n"
+        "No curated or inferred supply-chain map is available for this ticker yet.\n"
+    )
+
+    coverage = classify_context_coverage("company_business_model", text)
+
+    assert coverage.status == "ready"
+
+
+def test_clean_energy_power_electronics_profile_does_not_leak_bank_gates():
+    audit = build_data_coverage_context(
+        {
+            "industry_kpi_checklist": (
+                "# Industry KPI Checklist\n"
+                "- Playbook: clean-energy power electronics / inverter and ESS integration\n"
+                "- PV inverter shipments and regional mix are required.\n"
+                "- ESS awarded backlog and contract liabilities are reported.\n"
+                "- Bankability and certification support customer wins.\n"
+            ),
+            "forecast_model_scaffold": (
+                "# Forecast\nOpening backlog + new orders - delivered = ending backlog.\n"
+                "Receivables, inventory and cash collection close the orders-to-cash bridge.\n"
+            ),
+        }
+    )
+
+    assert "| clean-energy power electronics |" in audit
+    assert "| bank |" not in audit

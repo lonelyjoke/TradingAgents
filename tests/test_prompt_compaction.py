@@ -1,6 +1,7 @@
 from tradingagents.dataflows.prompt_compaction import (
     compact_for_prompt,
     compact_state_fields,
+    gated_prompt_sections,
 )
 
 
@@ -50,6 +51,20 @@ def test_compact_state_fields_returns_compacted_copy_without_mutating_state():
     assert compacted["commodity_context"] == "short commodity context"
     assert len(compacted["thematic_catalyst_context"]) < len(long_context)
     assert state["thematic_catalyst_context"] == long_context
+
+
+def test_gated_prompt_sections_keeps_only_triggered_sector_layers():
+    contexts, instructions = gated_prompt_sections(
+        [
+            ("Insurance", "# Insurance\n- Status: not_applicable", lambda: "INSURANCE_RULES"),
+            ("Dividend", "# Dividend\nStatus: triggered\n- Rating: weak", lambda: "DIVIDEND_RULES"),
+        ]
+    )
+
+    assert "Dividend sector context" in contexts
+    assert "Rating: weak" in contexts
+    assert "Insurance" not in contexts
+    assert instructions == "DIVIDEND_RULES"
 
 
 def test_compaction_preserves_compute_leasing_diligence_gap():

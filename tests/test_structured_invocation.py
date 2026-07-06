@@ -14,8 +14,12 @@ from tradingagents.agents.schemas import (
 from tradingagents.agents.managers.portfolio_manager import (
     _analytical_structure_issues,
     _canonical_handoff_issues,
+    _editorial_revision_prompt,
 )
-from tradingagents.agents.managers.research_manager import _research_manager_handoff_issues
+from tradingagents.agents.managers.research_manager import (
+    _complete_unchanged_handoff_lines,
+    _research_manager_handoff_issues,
+)
 from tradingagents.agents.utils.structured import (
     bind_structured,
     invoke_structured_or_freetext,
@@ -230,6 +234,27 @@ def test_editorial_review_is_advisory_and_section_specific():
     assert review.revision_required is True
 
 
+def test_editorial_revision_reuses_draft_without_original_full_prompt():
+    prompt = _editorial_revision_prompt(
+        decision_payload={"rating": "Hold", "company_disaggregation": "existing depth"},
+        review_payload={"revision_required": True, "findings": []},
+        handoff_issues=[],
+        manager_payload={"canonical_model_snapshot": [{"line_id": "2026E_revenue"}]},
+        structured_research_context="STRUCTURED_SOURCE",
+        fundamentals_context="FUNDAMENTAL_SOURCE",
+        lessons_line="- Lessons from prior decisions and outcomes:\nPRIOR_LESSON\n",
+        recent_decision_line="- Most recent same-ticker decision:\nPRIOR_DECISION\n",
+    )
+
+    assert "Original PM draft JSON" in prompt
+    assert "existing depth" in prompt
+    assert "STRUCTURED_SOURCE" in prompt
+    assert "FUNDAMENTAL_SOURCE" in prompt
+    assert "PRIOR_LESSON" in prompt
+    assert "PRIOR_DECISION" in prompt
+    assert "recreate unaffected sections from raw module dumps" in prompt
+
+
 def test_deterministic_pm_engine_calculates_eps_fcf_scenarios_and_safe_price():
     payload = {
         "rating": "Hold", "rating_posture": "Hold / Positive Watch", "research_readiness": "partial",
@@ -286,7 +311,19 @@ def test_deterministic_pm_engine_calculates_eps_fcf_scenarios_and_safe_price():
         "safe_valuation_assumptions": {
             "current_price_cny": 126.16, "required_annual_return_pct": 20,
             "holding_period_years": 1, "margin_of_safety_pct": 20, "maximum_bear_loss_pct": 15,
-            "optionality_equity_value_cny_mn": 1000,
+            "optionality_inputs": [
+                {
+                    "name": "AIDC SST",
+                    "metric_name": "2029E revenue",
+                    "metric_value_cny_mn": 5000,
+                    "valuation_multiple": 1,
+                    "probability_pct": 20,
+                    "ownership_pct": 100,
+                    "execution_haircut_pct": 0,
+                    "assumption_summary": "first commercial order remains unverified",
+                    "evidence_ids": ["KPE01"],
+                }
+            ],
             "scenarios": [
                 {"scenario": "bull", "probability_pct": 20, "valuation_method": "PE", "parent_net_profit_cny_mn": 12000, "valuation_multiple": 22, "assumption_summary": "bull"},
                 {"scenario": "base", "probability_pct": 60, "valuation_method": "PE", "parent_net_profit_cny_mn": 10000, "valuation_multiple": 20, "assumption_summary": "base"},
@@ -302,11 +339,14 @@ def test_deterministic_pm_engine_calculates_eps_fcf_scenarios_and_safe_price():
     assert line_map[("2028E", "fcf")].value == 10000
     assert decision.deterministic_valuation.status == "closed"
     assert round(decision.deterministic_valuation.optionality_per_share_cny, 2) == 0.50
+    assert decision.deterministic_valuation.optionality_rows[0]["equity_value_cny_mn"] == 1000
     assert round(decision.deterministic_valuation.safe_buy_price_ceiling_cny, 2) == 80.00
     assert any("added deterministic 2028E EPS" in note for note in notes)
     rendered = render_sell_side_pm_decision(decision)
     assert "安全买入价上限：80元" in rendered
     assert "期权价值：0.5元/股" in rendered
+    assert "程序化期权价值" in rendered
+    assert "AIDC SST" in rendered
     assert "卖方预测、估值与预期差" in rendered
     assert "KSI01/KPE01" in rendered
     assert "single_broker" in rendered
@@ -396,6 +436,48 @@ def test_research_manager_handoff_requires_every_line_or_documented_change():
         ]
     )
     assert _research_manager_handoff_issues(packet, payload) == []
+
+
+def test_research_manager_deterministically_copies_omitted_unchanged_lines():
+    packet = {
+        "company_model": {
+            "diluted_share_count_mn": 1000,
+            "share_count_period": "2025A",
+            "share_count_source_type": "reported",
+            "share_count_evidence_id": "EV-SHARES",
+        },
+        "forecast_years": ["2026E", "2027E", "2028E"],
+        "forecast_lines": [
+            {
+                "segment": "consolidated",
+                "metric": "Revenue",
+                "unit": "CNY mn",
+                "year_1_value": 100,
+                "year_2_value": 110,
+                "year_3_value": 120,
+                "assumption_status": "analyst_estimate",
+                "evidence_ids": ["EV-REV"],
+                "formula": "volume x ASP",
+            }
+        ],
+    }
+    completed, copied = _complete_unchanged_handoff_lines(
+        packet,
+        {"canonical_model_snapshot": [], "model_change_rows": []},
+    )
+
+    assert copied == [
+        "shares",
+        "2026E_revenue",
+        "2027E_revenue",
+        "2028E_revenue",
+    ]
+    assert _research_manager_handoff_issues(packet, completed) == []
+    rows = {row["line_id"]: row for row in completed["canonical_model_snapshot"]}
+    assert rows["shares"]["status"] == "reported"
+    assert rows["2026E_revenue"]["status"] == "estimated"
+    assert rows["2026E_revenue"]["evidence_ids"] == ["EV-REV"]
+    assert rows["2026E_revenue"]["formula"] == "volume x ASP"
 
 
 def test_pm_analytical_structure_gaps_trigger_advisory_revision():

@@ -3,6 +3,21 @@ import pandas as pd
 from tradingagents.dataflows import tushare_research
 
 
+def test_sungrow_uses_curated_listed_operating_peer_universe():
+    universe = pd.DataFrame(
+        [
+            {"ts_code": "300274.SZ", "name": "阳光电源", "industry": "电气设备"},
+            {"ts_code": "300827.SZ", "name": "上能电气", "industry": "电气设备"},
+            {"ts_code": "600875.SH", "name": "东方电气", "industry": "电气设备"},
+        ]
+    )
+
+    selected = tushare_research._apply_curated_operating_peers(universe, "300274.SZ")
+
+    assert selected["ts_code"].tolist() == ["300274.SZ", "300827.SZ"]
+    assert "600875.SH" not in selected["ts_code"].tolist()
+
+
 def test_stock_basic_universe_falls_back_when_requested_fields_are_incomplete():
     class FakePro:
         def __init__(self):

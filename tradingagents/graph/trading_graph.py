@@ -4,6 +4,7 @@ import logging
 import os
 from pathlib import Path
 import json
+import hashlib
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from collections import defaultdict
@@ -706,7 +707,22 @@ class TradingAgentsGraph:
         """Build the typed evidence/segment/KPE bundle consumed by agents."""
         if not self.config.get("structured_research_preprocess_enabled", True):
             return {}
-        return build_structured_research_bundle(
+        cache_path: Path | None = None
+        if self.config.get("structured_research_cache_enabled", True):
+            cache_path = self._structured_research_cache_path(
+                company_name,
+                trade_date,
+                contexts,
+            )
+            try:
+                cached = json.loads(cache_path.read_text(encoding="utf-8"))
+            except (OSError, ValueError, TypeError):
+                cached = None
+            if isinstance(cached, dict) and cached.get("symbol") == company_name:
+                logger.info("Structured research cache hit: %s", cache_path.name)
+                return cached
+
+        bundle = build_structured_research_bundle(
             company_name,
             str(trade_date),
             contexts=contexts,
@@ -727,6 +743,88 @@ class TradingAgentsGraph:
                 or 60000
             ),
         )
+        if cache_path is not None and self._structured_research_cacheable(bundle):
+            try:
+                cache_path.parent.mkdir(parents=True, exist_ok=True)
+                temporary = cache_path.with_suffix(".tmp")
+                temporary.write_text(
+                    json.dumps(bundle, ensure_ascii=False, sort_keys=True),
+                    encoding="utf-8",
+                )
+                os.replace(temporary, cache_path)
+            except OSError as exc:
+                logger.warning("Could not write structured research cache: %s", exc)
+        return bundle
+
+    @staticmethod
+    def _llm_cache_identity(llm: Any) -> str:
+        parts = [f"{type(llm).__module__}.{type(llm).__qualname__}"]
+        for attribute in ("model_name", "model", "model_id", "deployment_name"):
+            value = getattr(llm, attribute, None)
+            if value:
+                parts.append(f"{attribute}={value}")
+        return "|".join(parts)
+
+    def _structured_research_cache_path(
+        self,
+        company_name: str,
+        trade_date: str,
+        contexts: Mapping[str, str],
+    ) -> Path:
+        implementation_files = [
+            Path(build_structured_research_bundle.__code__.co_filename),
+            Path(build_structured_research_bundle.__code__.co_filename).with_name(
+                "underwriting_packet.py"
+            ),
+        ]
+        implementation_hash = hashlib.sha256()
+        for path in implementation_files:
+            try:
+                implementation_hash.update(path.read_bytes())
+            except OSError:
+                implementation_hash.update(str(path).encode("utf-8"))
+        fingerprint_payload = {
+            "symbol": company_name,
+            "trade_date": str(trade_date),
+            "contexts": {key: str(value or "") for key, value in sorted(contexts.items())},
+            "semantic_llm": self._llm_cache_identity(self.quick_thinking_llm),
+            "underwriting_llm": self._llm_cache_identity(self.deep_thinking_llm),
+            "enable_semantic_llm": bool(
+                self.config.get("structured_research_llm_enabled", True)
+            ),
+            "enable_underwriting": bool(
+                self.config.get("company_underwriting_packet_enabled", True)
+            ),
+            "semantic_max_chars": int(
+                self.config.get("structured_research_prompt_max_chars", 42000) or 42000
+            ),
+            "underwriting_max_chars": int(
+                self.config.get("company_underwriting_prompt_max_chars", 60000) or 60000
+            ),
+            "implementation": implementation_hash.hexdigest(),
+        }
+        digest = hashlib.sha256(
+            json.dumps(
+                fingerprint_payload,
+                ensure_ascii=False,
+                sort_keys=True,
+                separators=(",", ":"),
+            ).encode("utf-8")
+        ).hexdigest()[:24]
+        cache_root = Path(self.config["data_cache_dir"]) / "structured_research"
+        safe_symbol = safe_ticker_component(company_name)
+        safe_date = str(trade_date).replace("/", "-")
+        return cache_root / f"{safe_symbol}_{safe_date}_{digest}.json"
+
+    @staticmethod
+    def _structured_research_cacheable(bundle: Mapping[str, Any]) -> bool:
+        if not bundle:
+            return False
+        notes = " ".join(str(note) for note in bundle.get("preprocessing_notes", []))
+        packet = dict(bundle.get("underwriting_packet", {}) or {})
+        readiness = " ".join(str(reason) for reason in packet.get("readiness_reasons", []))
+        transient_failure = "semantic LLM failed:" in notes or "LLM company underwriting failed" in readiness
+        return not transient_failure
 
     def create_initial_state_with_context(
         self,
