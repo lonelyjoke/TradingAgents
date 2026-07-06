@@ -1,0 +1,96 @@
+{
+  "review": {
+    "revision_required": true,
+    "company_understanding_score": 4,
+    "independent_model_score": 3,
+    "evidence_and_counterevidence_score": 4,
+    "valuation_closure_score": 2,
+    "readability_and_synthesis_score": 3,
+    "strongest_aspects": [
+      "优秀地识别了合同负债、预付款与季度收入之间的背离，并将其作为核心预期差的基础",
+      "三大情景估值框架完整，且场景与驱动因素明确对应",
+      "会计质量矩阵提供了对盈利质量和现金转化的细致观察"
+    ],
+    "findings": [
+      {
+        "section": "investment_conclusion",
+        "priority": "must_revise",
+        "issue": "投资结论章节缺少核心反证、市场定价含义及证伪条件，造成论点不完整",
+        "evidence_or_logic_gap": "Research Manager canconical plan 要求每个核心论点具备 strongest_counterevidence, market_pricing implication 和 falsification gate，但公开备忘录的\"核心投资论点与预期差\"部分缺失这三项；阅读者无法评估论点失败时的损失及市场是否已定价核心逻辑。",
+        "revision_instruction": "在\"核心投资论点与预期差\"（四）章节，为每一条投资主线（当前三条）补充：①最强的反向证据（例如合同负债质量、储能出货持平）；②当前市场定价隐含的假设（如隐含利润120亿元）；③明确的证伪条件（如Q2收入环比<20%）。使用 Research Manager 的 question_verdicts 中的 strongest_counterevidence 和 falsification_gate 字段。"
+      },
+      {
+        "section": "thesis_moat_financial_bridge",
+        "priority": "must_revise",
+        "issue": "公开的thesis_financial_bridge章节缺少对每条论点的最强反证、市场定价含义和证伪条件",
+        "evidence_or_logic_gap": "Research Manager 的结构化研究包要求 core_theses 中每一条都包含 strongest_counterevidence, market_pricing 和 falsification_gate，但公开备忘录的\"核心投资主线\"段落仅描述了正向逻辑。例如，主线1未说明Q1储能出货持平的证伪力量，主线2未说明市场如何为储能业务定价。",
+        "revision_instruction": "将 Research Manager core_theses 中的 counterevidence/market_pricing/falsification 内容合成到公开章节的每条主线中，不以表格或清单形式列举，而以分析性语言自然嵌入。保留一条主线的结构性元素即可，避免与 investment_conclusion 重复。"
+      },
+      {
+        "section": "company_disaggregation",
+        "priority": "must_revise",
+        "issue": "业务单元分析缺少结构化的经济机制表，无法证明因果深度",
+        "evidence_or_logic_gap": "系统指令要求 business_model_mechanisms 和 segment_economics 携带证据和因果深度，\"散文无法补偿空的结构化行\"。当前公开备忘录的公司描述提供了简要的经营闭环，但未将收入驱动公式、利润率、资本特征和证据逐条映射到每个业务单元。",
+        "revision_instruction": "为每个业务单元补充七列结构（如 business_unit, economic_role, scale_and_growth, margin_and_cash, driver_equation, key_evidence, next_verification），可在正文前以结构化表格呈现，不允许仅用散文叙事绕过。"
+      },
+      {
+        "section": "valuation_and_expectation_gap",
+        "priority": "must_revise",
+        "issue": "公允价值与概率加权计算不一致：公开报告声称151元合理价值，但计算本体实际为147.6元+4.0元=151.6元，且与早期上下文中的138-142元冲突",
+        "evidence_or_logic_gap": "Research Manager 接受的 canonical_model_snapshot 中 base_fair_value 为 151.0 元/股，valuation_closure 明确 probabilistic_weighted_core_value = 147.60 元，optionality = 3.99 元，fair_value_per_share = 151.59 元。公开备忘录第五章的概率加权描述为\"145-175元\"，第七章再次出现\"概率加权公允价值约151元\"，但没有展示核心价值与期权价值的拆分，可能掩盖方法不一致。同时，早期工作台版本公平值约为142元。",
+        "revision_instruction": "在估值章节明确展示：(核心概率加权价值147.6元/股)+(AIDC期权2.7+氢能1.3=4.0元/股)=151.6元/股。用同一计算公式替换所有出现的\"151元\"，避免与前期142元锚定混淆。若存在两处估值矛盾，需选择最终接受的151.6元并删除旧值。"
+      },
+      {
+        "section": "thesis_moat_financial_bridge",
+        "priority": "should_revise",
+        "issue": "护城河分析在公开备忘录中过于笼统，缺少对规模效应和服务网络的证伪测试",
+        "evidence_or_logic_gap": "Research Manager 的 moat_evidence_tests 对每个护城河机制设计了 observable_test，包括与同行的毛利率对比、SG&A趋势测试等。公开备忘录\"护城河证据\"仅列出正向陈述，缺失证伪证据和财务传导——例如SG&A增长快于收入暗示规模优势未转化为经营杠杆。",
+        "revision_instruction": "将 moat_evidence_tests 中关于规模效应和全球服务网络的证伪测试整理成两段分析，说明当前证据为何支持partial/unproven判定，以及需要的验证信号（如Q2 SG&A比率、服务收入披露）。"
+      },
+      {
+        "section": "accounting_and_capital_allocation",
+        "priority": "should_revise",
+        "issue": "缺失 sell_side_expectation_matrix，无法展示与市场的具体分歧",
+        "evidence_or_logic_gap": "Research Manager 要求当 KSI 卖方行存在时，需在 sell_side_expectation_matrix 中保留机构、日期、预测期、估值方法/倍数/目标价、历史修正和与独立模型的精确差异。公开备忘录仅提及野村和高盛的定性判断，未给出任何数值锚点。",
+        "revision_instruction": "在会计质量章节或独立小节中，补充 sell_side_expectation_matrix 的两个条目（野村、高盛），即使它们未公布目标价，也应指出缺失的定量分歧，并明确\"市场共识\"不能由单家报告代表。"
+      },
+      {
+        "section": "three_year_forecast",
+        "priority": "should_revise",
+        "issue": "三年预测表面收益与现金和好，但缺少对存货消化和应收回收的显式传导",
+        "evidence_or_logic_gap": "Research Manager 的 canonical_model_snapshot 对OCF的推导为 OCF/NI = 1.1x 乘以净利润，但未在公开章节解释为何 2026 年的 OCF 仅为净利润的1.14x（低于2025年的1.26x），以及存货与应收的具体变动路径。",
+        "revision_instruction": "在自主预测模型段落（五）中，增加一句话说明2026E营运资本仍占用现金流（存货277亿+应收高企），2027E后随交付消化逐步释放现金，使OCF/净利润倍数回升至1.2x以上。将这一动态与122亿合同负债的转化节奏直接联系起来。"
+      },
+      {
+        "section": "risks_catalysts_verification",
+        "priority": "must_revise",
+        "issue": "催化剂路径表与估值情景中的概率分布不一致",
+        "evidence_or_logic_gap": "催化剂路径表将AIDC SST首个商业合同标记为\"2026H2-2027\"且概率未量化，但估值中AIDC期权价值使用25%概率×5倍EV/Revenue×2029E收入500亿元，隐含极高商业化确定性时点与路径表中的时间线冲突。",
+        "revision_instruction": "将催化剂路径表中AIDC的时间范围调整为\"2027-2028（首个框架合同可能于2026H2签署，但收入贡献在2028年后）\"，并注明期权价值基于2029年乐观情景，非基准。"
+      }
+    ],
+    "overall_editorial_verdict": "备忘录对阳光电源的核心预期差——合同负债预示交付反弹而非需求崩塌——抓得精准，三大情景与概率加权估值方法正确。但公开论文章节缺失了Research Manager内部工作台中的关键反证、市场定价锚点和证伪条件，使投资论点单薄，读者无法判断逻辑失败时的损失。估值章节有明确的计算不一致（142元 vs 151元 vs 151.6元），需按确定的151.6元计算统一全部引用。业务单元分析和护城河评估仍以散文为主，缺少系统指令要求的因果结构表，须补足以获得可验证的深度。纠正这些缺陷后，备忘录可在不改变Hold评级的前提下实现研究质量闭环。"
+  },
+  "review_status": {
+    "mode": "schema_prompt_structured",
+    "agent": "Sell-Side Research Editor",
+    "structured_error": ""
+  },
+  "revision_requested": true,
+  "revision_applied": true,
+  "revision_status": {
+    "mode": "schema_prompt_structured",
+    "agent": "Portfolio Manager Editorial Revision",
+    "structured_error": ""
+  },
+  "initial_handoff_issues": [
+    "silent change base_fair_value: 142.0 cny/share -> 151.0 cny/share"
+  ],
+  "initial_analytical_issues": [
+    "public thesis chapter missing strongest counterargument/boundary",
+    "public thesis chapter missing market-pricing implication",
+    "public thesis chapter missing falsification condition"
+  ],
+  "remaining_handoff_issues": [],
+  "remaining_analytical_issues": []
+}

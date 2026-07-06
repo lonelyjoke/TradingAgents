@@ -18,6 +18,7 @@ from .industry_identity import (
     is_insurance_text,
     is_lithium_battery_text,
     is_telecom_operator_text,
+    is_clean_energy_power_electronics_text,
 )
 
 
@@ -194,12 +195,29 @@ def _battery_playbook() -> tuple[str, list[tuple[str, str, str]]]:
     )
 
 
+def _clean_energy_power_electronics_playbook() -> tuple[str, list[tuple[str, str, str]]]:
+    return (
+        "clean-energy power electronics / inverter and ESS integration",
+        [
+            ("PV Inverter Demand", "global PV additions, inverter shipments, replacement cycle, regional/customer mix", "inverter volume and mix"),
+            ("ESS System Demand", "storage tenders, awarded/backlog GWh, duration, delivery and revenue-recognition schedule", "ESS system revenue visibility"),
+            ("System Economics", "project ASP, battery procurement, PCS/BMS/EMS value, installation/warranty/service cost", "ESS gross margin and unit profit"),
+            ("Competitive Moat", "bankability, certifications, installed base, service network, customer repeat orders and true-peer share", "share, pricing and win rate"),
+            ("Geography / Policy", "Europe/US/China mix, tariffs, local-content rules, FX and project financing", "regional margin and risk premium"),
+            ("Orders To Cash", "opening backlog + new orders - delivered orders; contract liabilities, inventory, receivables and collection", "revenue, OCF and working capital"),
+            ("R&D / Optionality", "R&D conversion into product cycle, SST/AIDC customer qualification, signed orders and monetization", "ROIC and scenario value"),
+        ],
+    )
+
+
 def _detect_playbook(symbol: str, combined_text: str) -> tuple[str, list[tuple[str, str, str]]]:
     lower = f"{symbol}\n{combined_text}".lower()
     # Structured company identity outranks incidental keywords from generic
     # metals, software, telecom, or thematic contexts.
     if has_lithium_battery_symbol_hint(symbol):
         return _battery_playbook()
+    if is_clean_energy_power_electronics_text(symbol, combined_text):
+        return _clean_energy_power_electronics_playbook()
     if is_automotive_components_text(symbol, combined_text):
         return _automotive_components_playbook()
     if is_telecom_operator_text(symbol, combined_text):

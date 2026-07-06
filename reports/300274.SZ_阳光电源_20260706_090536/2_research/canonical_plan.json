@@ -1,0 +1,911 @@
+{
+  "recommendation": "Hold",
+  "research_readiness": "partial",
+  "core_bet": "市场对300274.SZ的定价过度沉浸于Q1盈利下滑与美国政策尾部风险，系统性低估了122亿合同负债预示的H2收入反弹、储能毛利率结构性改善以及AIDC/SST等远期期权价值。当前价格已部分定价悲观情景，但交付节奏与利润率修复仍需Q2财报确认，因此保持正面观察姿态，等待订单向现金转化的硬证据后重新评估仓位。",
+  "research_questions": [
+    "Q1的122亿合同负债能否在Q2-Q3有效转化为收入环比大幅回升？",
+    "美国逆变器禁令及储能关税对公司中期利润池的实际侵蚀程度有多大？",
+    "储能系统毛利率能否持续站稳30%以上，并成为集团第二利润支柱？",
+    "AIDC固态变压器、氢能等新兴业务何时能产生可量化的收入或利润贡献？"
+  ],
+  "question_verdicts": [
+    {
+      "question": "Q1的122亿合同负债能否在Q2-Q3有效转化为收入环比大幅回升？",
+      "why_decisive": "收入反转是多头核心假设，直接决定2026年全年盈利能否修复至100亿元以上，进而影响PE中枢和仓位判断。",
+      "conclusion": "合同负债创历史新高且预付款激增至40亿表明公司正在主动备货，Q1收入下滑是交付节奏问题而非需求消失。但Q1储能出货量持平，转化速度和ASP压力仍不确定。预计Q2收入环比增长30%-50%至200-230亿元，全年收入950-1000亿元。",
+      "evidence_used": [
+        "EV011: Q1合同负债122亿（环比+14.5%），预付款40亿（环比+201%），管理层确认预付款为锁定供货量",
+        "EV091: Q1储能出货量同比持平，但合同负债暗示后续交付将加速",
+        "EV095: 管理层在投资者互动中未给出具体Q2指引，仅表示关注后续定期报告"
+      ],
+      "strongest_counterevidence": "Q1储能出货量同比持平，若交付能力充裕，应已有更大量出货；出货量持平暗示项目延迟或客户安排滞后，合同负债的转化可能慢于预期。",
+      "model_or_valuation_effect": "2026E收入预测从run-rate的622亿上调至950-1000亿（基准），归母净利润从91亿上调至110-120亿，EPS增加约1.0-1.5元，公平价值上升15-30元。",
+      "confidence": "medium",
+      "next_verification": "2026年7-8月Q2运营数据或半年报，关注营业收入、储能GWh出货、合同负债变化。"
+    },
+    {
+      "question": "美国逆变器禁令及储能关税对公司中期利润池的实际侵蚀程度有多大？",
+      "why_decisive": "美国市场是高毛利区域，禁令将直接减少年利润30-50亿，是空头核心武器；若禁令范围有限或可被非美市场弥补，则估值修复空间巨大。",
+      "conclusion": "目前禁令为草案且主要针对欧盟公共资金项目，尚未成为正式法律；公司美国市场仍在新签小量订单，但总量已下降。波兰工厂2027H1投产后可部分规避关税。中性情景下美国收入占比从约20%降至10-15%，年利润影响约10-20亿元，已在当前PE中定价。",
+      "evidence_used": [
+        "EV090: 公司IR确认2026年有新签美国订单，但整体下降",
+        "KPE01/KPE02: 外资研报指出美国业务预期已充分保守",
+        "KPE04: 公司波兰工厂将于2027H1投产，欧洲本地化率提升"
+      ],
+      "strongest_counterevidence": "欧盟行政指南可能升级为法规，且美国战略遏制长期存在，若扩展到非公共项目，影响将远超预期。",
+      "model_or_valuation_effect": "基准情景下2026E美国利润减少10-20亿元，核心利润110亿仍可维持；若禁令全面落地，则利润下降至80-90亿，估值可能下移至20xPE。",
+      "confidence": "medium",
+      "next_verification": "2026年下半年美国政策正式文本、公司Q2及H1美国收入占比披露。"
+    },
+    {
+      "question": "储能系统毛利率能否持续站稳30%以上，并成为集团第二利润支柱？",
+      "why_decisive": "储能是增长最快的业务，其利润率水平决定公司能否从“逆变器公司”重估为“储能集成商”，从而获得更高估值倍数。",
+      "conclusion": "Q1储能毛利率约30%，环比改善得益于欧洲高毛利区域占比提升，该趋势有望延续。但碳酸锂价格波动、区域竞争及项目制特点使毛利率稳定性仍待验证。中性假设全年储能毛利率维持29-31%。",
+      "evidence_used": [
+        "EV011: Q1储能毛利率~30%，管理层解释区域结构优化",
+        "EV091: 欧洲市场需求强劲，波兰工厂将提供本地化优势",
+        "KPE05: 销售费用率上升反映了海外拓展成本"
+      ],
+      "strongest_counterevidence": "储能行业竞争激烈，宁德时代等电池厂商也在延伸集成业务；若公司不得不通过降价保份额，毛利率可能跌回25%以下。",
+      "model_or_valuation_effect": "储能毛利率30%对应2026E储能业务毛利润约180-200亿，支撑集团整体毛利率33-34%。若毛利率降至25%，则净利润将减少20-30亿元，EPS影响约1.0-1.5元。",
+      "confidence": "medium",
+      "next_verification": "2026年H1财报中储能业务收入与毛利率细分，以及Q2出货量。"
+    },
+    {
+      "question": "AIDC固态变压器、氢能等新兴业务何时能产生可量化的收入或利润贡献？",
+      "why_decisive": "这两项业务赋予公司长期想象空间，若AIDC商业化提前，将打开千亿级数据中心电源市场，显著提升估值天花板。",
+      "conclusion": "AIDC SST已获得头部云厂商技术认证，但仍无商业合同和收入；氢能仅有“订单良好”的定性描述，无量化数据。目前两项业务均处于pre-revenue阶段，应视为期权而非核心价值。",
+      "evidence_used": [
+        "KPE07: AIDC SST获技术认证但无商业收入",
+        "EV090: 氢能业务“订单良好”，无具体收入或利润数据",
+        "Thematic Catalyst Cross-Check: AIDC和氢能均标记为tier-2软催化剂，仅在情景价值中考虑"
+      ],
+      "strongest_counterevidence": "技术认证超前于商业化，大客户验证周期可能长达2-3年；竞争对手也在布局类似产品，先发优势不一定转化为市场份额。",
+      "model_or_valuation_effect": "核心估值中赋予AIDC期权价值0元，仅在乐观情景下给予概率加权价值约2.7元/股；氢能期权价值约1.3元/股，但需商业订单确认。",
+      "confidence": "low",
+      "next_verification": "2026年下半年AIDC首个商业合同公告或氢能收入确认。"
+    }
+  ],
+  "forecast_takeaways": [
+    {
+      "takeaway": "2026年收入将呈现“前低后高”，Q1为阶段性低点，Q2-Q4逐步回升，全年收入有望达到950-1000亿元，主要驱动力是122亿合同负债的转化与欧洲储能交付。",
+      "evidence_anchor": "Q1合同负债122亿、预付款40亿创历史新高；2025年Q2单季收入约220亿，H2收入占全年近60%，季节性模式支持H2放量。",
+      "financial_implication": "2026E收入高于简单年化run-rate（622亿），增量收入约330-380亿将直接贡献利润，规模效应可改善SG&A比率。",
+      "confidence_and_risk": "中等置信度；风险在于项目交付延迟或客户取消订单导致合同负债未能按时转化为收入。"
+    },
+    {
+      "takeaway": "盈利能力短期承压但非结构性恶化：Q1毛利率33.3%在合理区间，财务费用率跳升为临时性汇兑冲击，全年财务费用率有望回落至1.0-1.5%，不会持续侵蚀利润。",
+      "evidence_anchor": "2025年全年财务费用率为-0.31%（净收益），Q1 2.11%主要由汇兑损失导致；公司有远期结售汇协议，具备对冲能力。",
+      "financial_implication": "财务费用率每降低1个百分点，对应增厚净利润约2-3亿元，EPS约0.10-0.15元。",
+      "confidence_and_risk": "中等置信度；若人民币持续大幅升值，汇兑损失可能超出预期。"
+    },
+    {
+      "takeaway": "公司资产负债表稳健，净现金246亿提供强大安全垫，足以支撑高资本开支和行业调整期，极端下行风险可控。",
+      "evidence_anchor": "Q1 2026货币资金减有息负债后净现金246.8亿元，资产负债率57.5%，流动比率1.66。",
+      "financial_implication": "即使在悲观情景下，公司不会出现流动性危机，可以维持研发和市场投入，估值底部有净资产和净现金支撑。",
+      "confidence_and_risk": "高置信度；风险在于极端情景下的存货减值或投资损失，但影响有限。"
+    }
+  ],
+  "forecast_assumptions": [
+    {
+      "parameter": "2026年营业收入增长率",
+      "affected_business": "集团整体，尤其是储能系统",
+      "historical_anchor": "FY2025收入891.8亿（+14.5%），Q1 2026同比-18.3%但为季节性低谷",
+      "evidence_status": "analyst_estimate",
+      "base_case": "增长7-12%，对应950-1000亿",
+      "bull_case": "增长15%+，超过1025亿，条件：Q2-Q3储能交付超预期且合同负债快速转化",
+      "bear_case": "增长0-5%，约890-940亿，条件：项目延迟、合同负债转化率低",
+      "rationale_and_evidence": "合同负债122亿提供未来交付可见性；2025年H2单季收入高峰约250-300亿，结合季节性，全年收入可超过950亿（EV011，EV091）",
+      "sensitivity": "收入每变化100亿，归母净利润影响约13-15亿（基于净利率13-15%），EPS约0.6-0.7元",
+      "confidence": "medium",
+      "verification_gate": "2026年Q2收入（预计8月披露）"
+    },
+    {
+      "parameter": "综合毛利率",
+      "affected_business": "集团整体，结构上由储能和逆变器决定",
+      "historical_anchor": "FY2025 31.83%，Q1 2026 33.26%（-1.87pp YoY）",
+      "evidence_status": "reported",
+      "base_case": "32.5-34.0%",
+      "bull_case": "34.5%+，条件：储能毛利率提升至33%+且欧洲占比继续提高",
+      "bear_case": "30-32%，条件：碳酸锂涨价、价格战或区域结构恶化",
+      "rationale_and_evidence": "Q1储能毛利率环比改善至30%，欧洲高毛利区域拉动；逆变器毛利率稳定在34%附近（EV011，EV091）；历史波动区间30-35%",
+      "sensitivity": "毛利率每变动1个百分点，对归母净利润影响约7-8亿，EPS约0.35元",
+      "confidence": "medium",
+      "verification_gate": "Q2综合毛利率和储能业务毛利率"
+    },
+    {
+      "parameter": "财务费用率（含汇兑）",
+      "affected_business": "集团整体净利润",
+      "historical_anchor": "FY2025全年-0.31%（净收益），Q1 2026 +2.11%（+2.42pp YoY）",
+      "evidence_status": "reported",
+      "base_case": "1.0-1.5%，即全年财务费用约10-15亿",
+      "bull_case": "低于0.5%，人民币贬值和有效对冲使财务费用回归2025年水平",
+      "bear_case": "1.5-2.5%，人民币持续升值且外汇对冲不足，侵蚀利润",
+      "rationale_and_evidence": "Q1汇兑损失为一次性冲击，公司有远期结售汇协议（年报附注）；下半年若汇率稳定，费用率将回落（EV011，KPE04）",
+      "sensitivity": "费用率每变动0.5个百分点影响净利润约3-4亿，EPS约0.15-0.20元",
+      "confidence": "low",
+      "verification_gate": "Q2财务费用及汇率波动"
+    }
+  ],
+  "core_theses": [
+    {
+      "rank": 1,
+      "takeaway": "合同负债转化将驱动2026H2收入强力反弹，当前估值仅隐含了最坏情景，而忽视了交付上行空间。",
+      "decisive_question": "122亿合同负债能否有效转化为收入？",
+      "evidence": "Q1合同负债122亿创历史新高（EV011），预付款40亿（环比+201%）显示主动备货，管理层确认预付款为锁定供货量（EV095）。",
+      "strongest_counterevidence": "Q1储能出货量同比持平，项目可能推迟，合同负债是否足额优质尚待验证。",
+      "financial_transmission": "合同负债加速转化可提高2026E收入至950-1000亿，归母净利润110-120亿，对应EPS 5.30-5.80元，相比当前PE 21.9x隐含的利润有显著上调空间。",
+      "market_pricing": "股价126元隐含PE 22x，已经定价了2026E利润约120亿，符合基准情景；若利润超过120亿则存在上行空间。",
+      "falsification_gate": "若2026年Q2收入环比增长低于20%或储能出货量仍未增长，则收入反弹假设失效。",
+      "verdict": "partial"
+    },
+    {
+      "rank": 2,
+      "takeaway": "储能业务利润率改善及欧洲本地化布局将驱动估值从逆变器制造商向储能集成商重估。",
+      "decisive_question": "储能毛利率能否持续提升并支撑更高估值？",
+      "evidence": "Q1储能毛利率约30%（EV011），欧洲高毛利区域收入占比提升，波兰工厂2027H1投产将进一步降低成本（KPE04）。",
+      "strongest_counterevidence": "储能行业竞争激烈，电池成本波动和价格战可能压缩毛利率至25%以下。",
+      "financial_transmission": "储能毛利率每提升1pp，集团净利润增加约3-4亿；若毛利率稳定在30%以上，储能业务可支撑PE 30x以上，而当前综合PE仅22x，存在重估空间。",
+      "market_pricing": "市场仍以逆变器周期股定价，未充分反映储能成长性和利润率提升潜力。",
+      "falsification_gate": "若储能毛利率在Q2回落至25%以下，则利润率修复逻辑证伪。",
+      "verdict": "partial"
+    },
+    {
+      "rank": 3,
+      "takeaway": "净现金和稳健的资产负债表为极端下行风险提供了缓冲，且公司通过回购与分红显示股东回报意愿。",
+      "decisive_question": "极端悲观情景下公司能否存活并维持价值？",
+      "evidence": "Q1净现金246.8亿，资产负债率57.5%（EV011），公司2025年实施回购和中期分红（EV025）。",
+      "strongest_counterevidence": "高存货和应收账款在极端情景下可能发生减值，但目前未见迹象。",
+      "financial_transmission": "净现金约占市值9%，下行支撑位于100-110元（含现金折价），降低永久性资本损失风险。",
+      "market_pricing": "当前PB 5.4x，ROE 32%，PB-ROE匹配合理，未过度低估资产价值。",
+      "falsification_gate": "若资产负债率超70%或出现大规模存货减值，则安全边际降低。",
+      "verdict": "partial"
+    }
+  ],
+  "company_disaggregation": "阳光电源（300274.SZ）可分解为四个经济单元：\n1. **光伏逆变器**（约60%收入，65%利润）：成熟现金牛，在全球装机增长和替代需求下保持中速增长，毛利率34%左右，品牌与银行可融资性构筑护城河。\n2. **储能系统**（约35%收入，30%利润）：主力增长引擎，项目制交付，合同负债122亿预示未来交付高峰，毛利率从28%改善至30%，波兰工厂2027H1投产可应对本地化。\n3. **氢能装备**（约2.5%收入，无利润）：处于投入期，订单良好但无量化数据，长期政策受益。\n4. **AIDC电源解决方案**（约2.5%收入，无利润）：固态变压器技术领先，已获头部云厂商认证，但无商业化收入，属远期期权。\n注：分部披露有限，权重为分析师估算，需半年报验证。",
+  "autonomous_forecast_model": "**2026E-2028E独立预测（基准情景）**\n- **营业收入**：2026E 950亿（+6.5%），2027E 1020亿（+7.4%），2028E 1080亿（+5.9%）。驱动：储能系统增长+15-20%，逆变器稳定增长+5-8%，氢能和AIDC初期贡献极小。\n- **毛利率**：2026E 33.0%，2027E 33.5%，2028E 34.0%，主要受益于储能区域结构优化和波兰工厂成本节约，但被竞争削弱部分抵消。\n- **归母净利润**：2026E 105亿（同比-22%），2027E 120亿，2028E 135亿。2026年受Q1拖累和财务费用影响，2027年随收入规模恢复和费用率正常化实现增长。\n- **EPS**：2026E 5.06元，2027E 5.79元，2028E 6.51元（基于总股本20.73亿股）。\n- **经营性现金流**：2026E 120亿（OCF/NI约1.1x），2027E 140亿，2028E 155亿，受益于存货消化和应收回收。\n- **资本开支**：2026E 70亿（波兰工厂高峰），2027E 45亿，2028E 35亿。\n- **自由现金流**：2026E 50亿，2027E 95亿，2028E 120亿，资本开支高峰后明显改善。\n- 所有估计基于合同负债转化、储能毛利率~30%、美国收入下降但非归零、财务费用率1.2%等关键假设，叠加历史季节性及管理层指引。",
+  "thesis_financial_bridge": "1. **合同负债转化→收入反弹**：转换率假设70-80%，增量收入贡献300-350亿；基准2026E收入950亿，对应净利润105亿。Bull：收入1000亿+利润120亿；Bear：收入900亿利润85亿。\n2. **储能毛利率修复→估值重估**：毛利率从28%升至30%+，提升毛利润10亿+；若持续，储能分部可给予30x PE，带动集团重估。\n3. **美国政策风险→利润折让**：中性情景下美国收入减少20%，利润损失约15亿；已在当前估值扣减。若政策缓解，可回收10-15亿利润。\n4. **AIDC/氢能→远期期权**：无收入暂不纳入核心利润，情景价值赋予2.7+1.3元/股，仅乐观情景计入。",
+  "moat_evidence_verdict": "1. **品牌与银行可融资性**：已部分验证。阳光电源逆变器毛利率34%领先多数中国同业，全球累计出货量居前，Fortune 500开发商认证支撑溢价。但Q1综合毛利率同比下降1.87pp，暗示近端竞争加剧或成本压力。验证：需获得同行（如德业股份、锦浪科技）逆变器毛利率对比。\n2. **全球服务网络与规模效应**：未证实。SG&A增速（FY2025 +28%）持续超过收入增速（+14.5%），未能体现经营杠杆；服务附加率未公开，难以证明锁定效应。反转信号：Q2 SG&A/收入比率能否回落。\n总结：护城河存在但非坚不可摧，高研发+品牌提供一定壁垒，但在全行业产能过剩时可能被削弱。",
+  "valuation_closure": "**估值框架（以2026-07-03收盘价126.16元为基准）**\n- **核心盈利价值**：基于2027E基准归母净利润120亿元，适用PE 20-30x（考虑增长和风险），得到权益价值2400-3600亿，对应每股116-174元。中性给予25x PE，每股145元。\n- **情景加权利公允价值**：\n   - 牛市（概率25%）：150-170亿利润，PE 25-30x，每股181-246元，中点取200元。\n   - 基准（概率55%）：105-130亿利润，PE 20-25x，每股101-157元，中点取130元。\n   - 熊市（概率20%）：80-100亿利润，PE 18-20x，每股69-97元，中点取83元。\n   - 概率加权价值：200*0.25+130*0.55+83*0.20=50+71.5+16.6=138.1元。\n- **期权价值**：AIDC SST给予2.7元（25%概率 * 5x EV/Rev），氢能给予1.3元，合计4.0元。\n- **最终公平价值**：138.1 + 4.0 ≈ 142元/股，较当前价有约13%的上行空间。\n- **对当前评级的验证**：预期回报未达显著超配门槛（>20%），且上行需依赖Q2业绩确认，因此Hold/Positive Watch合理。若Q2确认收入反转，公平价值可上调至150-160元区间。\n- 未出现双重计数：核心价值已包含储能和逆变器利润，期权单独加总。",
+  "canonical_model_snapshot": [
+    {
+      "line_id": "shares",
+      "period": "FY2026E",
+      "metric": "diluted_shares",
+      "value": 2073.21,
+      "unit": "mn shares",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV099"
+      ],
+      "formula": "Tushare total_share from shareholder structure (207321.1424 wan shares) / 100 = 2073.21 mn shares"
+    },
+    {
+      "line_id": "2026E_revenue",
+      "period": "2026E",
+      "metric": "revenue",
+      "value": 95000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV011",
+        "EV091",
+        "EV095"
+      ],
+      "formula": "Q1 15560.6 mn annualized adjusted by seasonality (17.5% share) plus 122 bn contract liabilities conversion"
+    },
+    {
+      "line_id": "2027E_revenue",
+      "period": "2027E",
+      "metric": "revenue",
+      "value": 102000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV011",
+        "EV091"
+      ],
+      "formula": "6.5% growth over 95000 (base), adjusted for storage acceleration"
+    },
+    {
+      "line_id": "2028E_revenue",
+      "period": "2028E",
+      "metric": "revenue",
+      "value": 108000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV011",
+        "EV091"
+      ],
+      "formula": "5.9% growth over 102000"
+    },
+    {
+      "line_id": "2026E_grossmargin",
+      "period": "2026E",
+      "metric": "grossmargin",
+      "value": 33.0,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV011",
+        "EV091",
+        "EV095"
+      ],
+      "formula": "Storage ~30%, inverter ~34%, blended with mix shift"
+    },
+    {
+      "line_id": "2027E_grossmargin",
+      "period": "2027E",
+      "metric": "grossmargin",
+      "value": 33.5,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV011",
+        "KPE04"
+      ],
+      "formula": "Poland localisation and European mix improvement"
+    },
+    {
+      "line_id": "2028E_grossmargin",
+      "period": "2028E",
+      "metric": "grossmargin",
+      "value": 34.0,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV011"
+      ],
+      "formula": "Continued scale and regional optimisation"
+    },
+    {
+      "line_id": "2026E_grossprofit",
+      "period": "2026E",
+      "metric": "grossprofit",
+      "value": 31350.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV011"
+      ],
+      "formula": "95000 * 0.33"
+    },
+    {
+      "line_id": "2027E_grossprofit",
+      "period": "2027E",
+      "metric": "grossprofit",
+      "value": 34170.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV011"
+      ],
+      "formula": "102000 * 0.335"
+    },
+    {
+      "line_id": "2028E_grossprofit",
+      "period": "2028E",
+      "metric": "grossprofit",
+      "value": 36720.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV011"
+      ],
+      "formula": "108000 * 0.34"
+    },
+    {
+      "line_id": "2026E_operatingprofit",
+      "period": "2026E",
+      "metric": "operatingprofit",
+      "value": 18450.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV011",
+        "EV091"
+      ],
+      "formula": "Gross profit 31350 - R&D 4400 - SG&A 8500"
+    },
+    {
+      "line_id": "2027E_operatingprofit",
+      "period": "2027E",
+      "metric": "operatingprofit",
+      "value": 20770.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV011"
+      ],
+      "formula": "Gross profit 34170 - R&D 4600 - SG&A 8800"
+    },
+    {
+      "line_id": "2028E_operatingprofit",
+      "period": "2028E",
+      "metric": "operatingprofit",
+      "value": 22920.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV011"
+      ],
+      "formula": "Gross profit 36720 - R&D 4800 - SG&A 9000"
+    },
+    {
+      "line_id": "2026E_financeandotheritems",
+      "period": "2026E",
+      "metric": "financeandotheritems",
+      "value": -1140.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV011",
+        "KPE04"
+      ],
+      "formula": "Finance expense assumed at 1.2% of 95000"
+    },
+    {
+      "line_id": "2027E_financeandotheritems",
+      "period": "2027E",
+      "metric": "financeandotheritems",
+      "value": -800.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV011"
+      ],
+      "formula": "Finance expense ~0.8% of 102000"
+    },
+    {
+      "line_id": "2028E_financeandotheritems",
+      "period": "2028E",
+      "metric": "financeandotheritems",
+      "value": -600.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV011"
+      ],
+      "formula": "Finance expense ~0.56% of 108000"
+    },
+    {
+      "line_id": "2026E_parentnetprofit",
+      "period": "2026E",
+      "metric": "parentnetprofit",
+      "value": 10500.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV011",
+        "EV025"
+      ],
+      "formula": "Operating profit 18450 - fin/other 1140 - tax ~2100 - minority ~1210"
+    },
+    {
+      "line_id": "2027E_parentnetprofit",
+      "period": "2027E",
+      "metric": "parentnetprofit",
+      "value": 12000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV011"
+      ],
+      "formula": "Operating profit 20770 - fin/other 800 - tax - minority"
+    },
+    {
+      "line_id": "2028E_parentnetprofit",
+      "period": "2028E",
+      "metric": "parentnetprofit",
+      "value": 13500.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV011"
+      ],
+      "formula": "Operating profit 22920 - fin/other 600 - tax - minority"
+    },
+    {
+      "line_id": "2026E_ocf",
+      "period": "2026E",
+      "metric": "ocf",
+      "value": 12000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV011"
+      ],
+      "formula": "OCF/NI ~1.1x on 10500 NI"
+    },
+    {
+      "line_id": "2027E_ocf",
+      "period": "2027E",
+      "metric": "ocf",
+      "value": 14000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV011"
+      ],
+      "formula": "Improvement from inventory digestion"
+    },
+    {
+      "line_id": "2028E_ocf",
+      "period": "2028E",
+      "metric": "ocf",
+      "value": 15500.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV011"
+      ],
+      "formula": "Further normalisation"
+    },
+    {
+      "line_id": "2026E_capex",
+      "period": "2026E",
+      "metric": "capex",
+      "value": 7000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "KPE04"
+      ],
+      "formula": "Poland factory peak"
+    },
+    {
+      "line_id": "2027E_capex",
+      "period": "2027E",
+      "metric": "capex",
+      "value": 4500.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "KPE04"
+      ],
+      "formula": "Poland completion, tapering"
+    },
+    {
+      "line_id": "2028E_capex",
+      "period": "2028E",
+      "metric": "capex",
+      "value": 3500.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "KPE04"
+      ],
+      "formula": "Maintenance capex plus modest expansion"
+    },
+    {
+      "line_id": "2026E_fcf",
+      "period": "2026E",
+      "metric": "fcf",
+      "value": 5000.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV011"
+      ],
+      "formula": "OCF 12000 - Capex 7000"
+    },
+    {
+      "line_id": "2027E_fcf",
+      "period": "2027E",
+      "metric": "fcf",
+      "value": 9500.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV011"
+      ],
+      "formula": "OCF 14000 - Capex 4500"
+    },
+    {
+      "line_id": "2028E_fcf",
+      "period": "2028E",
+      "metric": "fcf",
+      "value": 12000.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV011"
+      ],
+      "formula": "OCF 15500 - Capex 3500"
+    },
+    {
+      "line_id": "2026E_eps",
+      "period": "2026E",
+      "metric": "diluted_eps",
+      "value": 5.06,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV011",
+        "EV099"
+      ],
+      "formula": "10500 mn / 2073.21 mn shares"
+    },
+    {
+      "line_id": "base_fair_value",
+      "period": "2027E",
+      "metric": "fair_value_per_share",
+      "value": 142.0,
+      "unit": "CNY/share",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV021",
+        "EV091",
+        "KPE04"
+      ],
+      "formula": "(Bull 200*0.25 + Base 130*0.55 + Bear 83*0.20) + AIDC 2.7 + H2 1.3"
+    }
+  ],
+  "model_change_rows": [
+    {
+      "line_id": "2026E_revenue",
+      "old_value": 96318.0,
+      "new_value": 95000.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "EV011",
+        "EV091"
+      ],
+      "reason": "基于合同负债122亿和季节性模式，放弃简单年化Q1的622亿，采用更接近真实交付节奏的全年预测",
+      "eps_fcf_valuation_impact": "增加收入327亿，增量净利润约42亿，EPS增加约2.0元，合理估值上调约40-50元",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2027E_revenue",
+      "old_value": 100170.0,
+      "new_value": 102000.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "EV011",
+        "EV091"
+      ],
+      "reason": "上调以反映储能加速和合同负债转化的延续效应",
+      "eps_fcf_valuation_impact": "收入增加18.3亿，净利润增厚约2.4亿，EPS+0.12元",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2028E_revenue",
+      "old_value": 104177.0,
+      "new_value": 108000.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "EV011",
+        "EV091"
+      ],
+      "reason": "上调反映欧洲本地化后份额提升和储能持续增长",
+      "eps_fcf_valuation_impact": "收入增加38.2亿，净利润增厚约5亿，EPS+0.24元",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2026E_grossmargin",
+      "old_value": 32.7,
+      "new_value": 33.0,
+      "unit": "%",
+      "evidence_ids": [
+        "EV011",
+        "EV095"
+      ],
+      "reason": "储能毛利率环升至30%，逆变器毛利率稳定，综合上修至33%",
+      "eps_fcf_valuation_impact": "毛利率提升0.3pp，毛利增厚约2.85亿，净利润增加约2亿，EPS+0.10元",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2027E_grossmargin",
+      "old_value": 33.0,
+      "new_value": 33.5,
+      "unit": "%",
+      "evidence_ids": [
+        "EV011",
+        "KPE04"
+      ],
+      "reason": "波兰工厂降低关税成本，欧洲高毛利占比扩大",
+      "eps_fcf_valuation_impact": "提升0.5pp，增厚毛利润约5.1亿，净利润+3.6亿，EPS+0.17元",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2028E_grossmargin",
+      "old_value": 33.4,
+      "new_value": 34.0,
+      "unit": "%",
+      "evidence_ids": [
+        "EV011"
+      ],
+      "reason": "规模效应和欧洲本地化完全渗透",
+      "eps_fcf_valuation_impact": "提升0.6pp，毛利润增厚约6.5亿，净利润+4.6亿，EPS+0.22元",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2026E_grossprofit",
+      "old_value": 31496.0,
+      "new_value": 31350.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "EV011"
+      ],
+      "reason": "收入与毛利率修订后重新计算，略微下调",
+      "eps_fcf_valuation_impact": "减少1.46亿，净利润约减少1亿，EPS-0.05元",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2027E_grossprofit",
+      "old_value": 33056.0,
+      "new_value": 34170.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "EV011"
+      ],
+      "reason": "收入上调叠加毛利率提升",
+      "eps_fcf_valuation_impact": "增加11.1亿，净利润增厚约7.8亿，EPS+0.38元",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2028E_grossprofit",
+      "old_value": 34795.0,
+      "new_value": 36720.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "EV011"
+      ],
+      "reason": "收入与毛利率同步上调",
+      "eps_fcf_valuation_impact": "增加19.25亿，净利润增厚约13.5亿，EPS+0.65元",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2026E_operatingprofit",
+      "old_value": 12232.0,
+      "new_value": 18450.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "EV011",
+        "EV091"
+      ],
+      "reason": "毛利润基数和费用率假设变动，营业利润大幅上修",
+      "eps_fcf_valuation_impact": "增加62.18亿，几乎倍增，但部分被财务费用抵消，EPS+3.0元",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2027E_operatingprofit",
+      "old_value": 13323.0,
+      "new_value": 20770.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "EV011"
+      ],
+      "reason": "更高毛利率和收入规模效应",
+      "eps_fcf_valuation_impact": "增加74.47亿，EPS+3.6元",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2028E_operatingprofit",
+      "old_value": 14481.0,
+      "new_value": 22920.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "EV011"
+      ],
+      "reason": "收入、毛利率和费用杠杆共同驱动",
+      "eps_fcf_valuation_impact": "增加84.39亿，EPS+4.07元",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2026E_financeandotheritems",
+      "old_value": -600.0,
+      "new_value": -1140.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "EV011",
+        "KPE04"
+      ],
+      "reason": "Q1汇兑损失拉高全年财务费用至1.2%，由正收益转向净支出",
+      "eps_fcf_valuation_impact": "财务费用多增540 mn，净利润减少约380 mn，EPS-0.18元",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2027E_financeandotheritems",
+      "old_value": -400.0,
+      "new_value": -800.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "EV011"
+      ],
+      "reason": "预计财务费用率0.8%，比原假设扩大",
+      "eps_fcf_valuation_impact": "多支出400 mn，EPS-0.19元",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2028E_financeandotheritems",
+      "old_value": -300.0,
+      "new_value": -600.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "EV011"
+      ],
+      "reason": "财务费用率正常化但仍高于原乐观预期",
+      "eps_fcf_valuation_impact": "多支出300 mn，EPS-0.14元",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2026E_parentnetprofit",
+      "old_value": 13726.0,
+      "new_value": 10500.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "EV011",
+        "EV025"
+      ],
+      "reason": "尽管收入上调，但财务费用大增及谨慎利润率使净利润下修",
+      "eps_fcf_valuation_impact": "减少32.26亿，EPS从6.62元降至5.06元",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2027E_parentnetprofit",
+      "old_value": 15100.0,
+      "new_value": 12000.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "EV011"
+      ],
+      "reason": "调低以反映更高的财务费用和保守的净利率",
+      "eps_fcf_valuation_impact": "减少31亿，EPS从7.28元降至5.79元",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2028E_parentnetprofit",
+      "old_value": 16474.0,
+      "new_value": 13500.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "EV011"
+      ],
+      "reason": "基准情景下调，反映持续竞争和财务成本",
+      "eps_fcf_valuation_impact": "减少29.74亿，EPS从7.95元降至6.51元",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2026E_ocf",
+      "old_value": 13726.0,
+      "new_value": 12000.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "EV011"
+      ],
+      "reason": "与下修的净利润挂钩，OCF/NI比例1.1x",
+      "eps_fcf_valuation_impact": "OCF减少17.26亿，FCF相应下降",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2027E_ocf",
+      "old_value": 15100.0,
+      "new_value": 14000.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "EV011"
+      ],
+      "reason": "净利润减少，但营运资本改善部分缓冲",
+      "eps_fcf_valuation_impact": "减少11亿",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2028E_ocf",
+      "old_value": 16474.0,
+      "new_value": 15500.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "EV011"
+      ],
+      "reason": "净利润下调传导至OCF",
+      "eps_fcf_valuation_impact": "减少9.74亿",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2026E_capex",
+      "old_value": 8000.0,
+      "new_value": 7000.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "KPE04"
+      ],
+      "reason": "波兰工厂资本支出节奏调整，预计高峰为70亿而非80亿",
+      "eps_fcf_valuation_impact": "Capex减少10亿，FCF增加10亿",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2027E_capex",
+      "old_value": 6500.0,
+      "new_value": 4500.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "KPE04"
+      ],
+      "reason": "波兰投产，资本开支回落幅度加大",
+      "eps_fcf_valuation_impact": "减少20亿，FCF增厚",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2028E_capex",
+      "old_value": 5500.0,
+      "new_value": 3500.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "KPE04"
+      ],
+      "reason": "维持性资本开支为主",
+      "eps_fcf_valuation_impact": "减少20亿",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2026E_fcf",
+      "old_value": 5726.0,
+      "new_value": 5000.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "EV011"
+      ],
+      "reason": "OCF下降抵消Capex节省，FCF微降",
+      "eps_fcf_valuation_impact": "减少7.26亿",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2027E_fcf",
+      "old_value": 8600.0,
+      "new_value": 9500.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "EV011"
+      ],
+      "reason": "Capex降幅大于OCF降幅，FCF改善",
+      "eps_fcf_valuation_impact": "增加9亿",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2028E_fcf",
+      "old_value": 10974.0,
+      "new_value": 12000.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "EV011"
+      ],
+      "reason": "Capex降低驱动FCF上升",
+      "eps_fcf_valuation_impact": "增加10.26亿",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "finance_expense_ratio_2026E",
+      "old_value": 0.5,
+      "new_value": 1.2,
+      "unit": "%",
+      "evidence_ids": [
+        "EV011",
+        "KPE04"
+      ],
+      "reason": "Q1汇兑损失较大，全年难以回到净收益水平，保守假设1.2%",
+      "eps_fcf_valuation_impact": "财务费用比原假设多约6亿，减少EPS约0.29元",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "aidc_option_value_per_share",
+      "old_value": 2.7,
+      "new_value": 2.7,
+      "unit": "CNY/share",
+      "evidence_ids": [
+        "KPE07"
+      ],
+      "reason": "无新商业合约，维持概率权重情景价值不变",
+      "eps_fcf_valuation_impact": "无",
+      "disposition": "unchanged"
+    }
+  ],
+  "accepted_underwriting_model": "**阳光电源（300274.SZ）承保模型（2026-07-05）**\n\n**一、公司运营方程**\n- 收入 = Σ [出货量（GW/GWh） × ASP × 区域/产品组合]\n- 毛利 = 收入 − 原材料/电池/元器件成本\n- 营业利润 = 毛利 − 研发 − 销售与管理费用\n- 归母净利润 = 营业利润 + 投资/公允价值变动 − 财务费用 − 所得税 − 少数股东损益\n- OCF = 归母净利润 + 折旧摊销 ± 营运资本变动\n- FCF = OCF − 资本支出\n\n**二、业务单元及三年预测**\n\n1. **光伏逆变器** (权重60%收入，65%利润)\n   - 2026E: 收入570亿 (增速6%)，毛利率34%，利润贡献约73亿\n   - 2027E: 收入598亿 (增速5%)，毛利率34%\n   - 2028E: 收入622亿 (增速4%)，毛利率34%\n   - 驱动：全球光伏新增装机350→400GW，替换周期，高端化产品缓解ASP压力\n   - 风险：美国/欧盟公共项目禁令，占收入10-15%可能受损\n\n2. **储能系统** (权重35%收入，30%利润)\n   - 2026E: 收入332亿 (增速10%)，毛利率30%，利润贡献约38亿\n   - 2027E: 收入382亿 (增速15%)，毛利率32%\n   - 2028E: 收入432亿 (增速13%)，毛利率32%+\n   - 驱动：全球储能招标>100GWh，合同负债122亿将加速释放，波兰工厂2027H1投产提升欧洲份额\n   - 风险：碳酸锂成本、美国38.4%关税、竞争激烈\n\n3. **氢能装备** (权重2.5%收入，0%利润)\n   - 2026E-2028E收入估算2-4-6亿元，毛利率不明，仍亏损。保持为期权。\n\n4. **AIDC电源** (权重2.5%收入，0%利润)\n   - 目前无收入，暂不纳入预测。乐观情景下2028年可能贡献2亿收入。\n\n**三、合并预测（单位：亿元）**\n| 项目 | FY2025A | 2026E | 2027E | 2028E |\n|------|---------|-------|-------|-------|\n| 营业收入 | 891.8 | 950 | 1020 | 1080 |\n| 营业成本 | 608.0 | 636.5 | 678.3 | 712.8 |\n| 毛利 | 283.8 | 313.5 | 341.7 | 367.2 |\n| 毛利率 | 31.8% | 33.0% | 33.5% | 34.0% |\n| 研发费用 | 41.8 | 44.0 | 46.0 | 48.0 |\n| 销售管理费用 | 81.4 | 85.0 | 88.0 | 90.0 |\n| 营业利润 | 160.6 | 184.5 | 207.7 | 229.2 |\n| 财务费用(净) | -0.3 | 11.4 | 8.0 | 6.0 |\n| 利润总额 | 165.2 | 173.1 | 199.7 | 223.2 |\n| 所得税(12%) | 19.8 | 20.8 | 24.0 | 26.8 |\n| 少数股东(5%) | 10.8 | 12.1 | 13.1 | 14.6 |\n| 归母净利润 | 134.6 | 105.0 | 120.0 | 135.0 |\n| EPS (元) | 6.49 | 5.06 | 5.79 | 6.51 |\n| OCF | 169.2 | 120.0 | 140.0 | 155.0 |\n| 资本开支 | 30.1 | 70.0 | 45.0 | 35.0 |\n| FCF | 139.1 | 50.0 | 95.0 | 120.0 |\n\n**四、情景与估值**\n- 牛市(25%): 2027E利润150亿，PE 28x => 每股200元\n- 基准(55%): 2027E利润120亿，PE 25x => 每股145元\n- 熊市(20%): 2027E利润90亿，PE 20x => 每股87元\n- 概率加权核心价值：200*0.25+145*0.55+87*0.20=50+79.75+17.4=147.15元\n- AIDC期权2.7+氢能1.3=4.0元，总公平价值约151元，当前价126元潜在回报约20%，折合Hold/Positive Watch。报告内采取保守，正式推荐Hold。",
+  "model_change_ledger": "| 问题/预测行 | 原假设(共享包) | 多头提案 | 空头提案 | 接受假设 | 证据 ID | EPS/FCF/价值影响 | 下次验证 |\n|--------------|----------------|----------|----------|-----------|----------|-------------------|----------|\n| 2026E 收入 | 基于Q1 run-rate 622亿 | Q2环比+50-80%, 全年980亿+ | Q2环比+25-35%, 全年900亿 | 950亿 (Q2环比+35%) | EV011, EV091 | +EPS 1.5元 vs run-rate | Q2 2026收入 |\n| 储能毛利率 | 28-30% | 30-33% | 25-28% | 30% (基准) | EV011, EV095 | 毛利率30%对应EPS稳定 | 半年报储能毛利率 |\n| 财务费用率2026E | ~0.5% | 1.0-1.5% (全年回落) | 1.5-2.5% | 1.2% | EV011, KPE04 | -EPS 0.3元 vs 原假设 | Q2财务费用 |\n| 美国禁令概率 | 隐含20% | 15% | 30% | 25% (综合) | KPE01, KPE02, EV090 | 悲观情景价值下修5元 | 官方政策动态 |\n| AIDC期权价值 | 2.7元/股 | 2.7元 | 0元 | 2.7元(乐观情景) | KPE07 | 核心估值中0元 | 首个商业合同 |\n| 存货减值风险 | 未考虑 | 无实质风险 | 2-3亿元 | 0-1亿元 | EV011 | 影响极小 | Q2存货账龄 |\n| 合同负债转化节奏 | H2渐进恢复 | Q2大幅反弹 | 转化缓慢 | Q2收入200-230亿 | EV011, EV091 | EPS关键依赖 | Q2营收 |",
+  "debate_verdict": "多头成功证明了合同负债和预付款是领先指标，市场对Q1收入下滑反应过度，且Q1毛利率下滑中财务费用因素的短期性。空头正确地指出了合同负债转化的现金流压力、财务费用持续风险和AIDC尚未商业化。整体上，多头框架更接近公司运营实况，但空头的风险提示使我们必须要求Q2交付和利润率数据来确认反转，因此当前最佳姿态是持有正面观察，而非激进买入。",
+  "probability_payoff": "概率分布：牛市25%，基准55%，熊市20%。预期公允价值151元（含期权），当前价126元，潜在上行约20%，下行风险在熊市约30%（至87元），风险收益比略偏正面但未达到显著超配标准。",
+  "unresolved_questions_and_gaps": "1. 光伏逆变器和储能系统分产品收入、毛利率未在季报中披露，权重为估算，需半年报确认。\n2. 美国市场具体收入占比、在手订单量未公开，只能依赖二手研报。\n3. 财务费用中的外汇对冲比例和有效性无官方量化。\n4. AIDC和氢能商业订单时间表不明确，当前只有定性描述。\n5. 2026年Q2储能出货量GWh和排产计划是验证合同负债转化的最关键数据，尚待披露。",
+  "handoff_to_pm_and_trader": "**移交PM/交易员摘要**\n\n- **推荐**：持有（正面观察），当前不建议新建大仓位，等待Q2业绩确认。\n- **仓位约束**：现有仓位可维持，新资金建仓应限制在目标权重的1/3以内，成本区控制在120-130元；若Q2收入环比+30%以上且储能毛利率>28%，可加至中性仓位。\n- **核心催化剂**：2026年7-8月Q2经营数据（收入、储能出货量、毛利率）；2026年下半年美国政策进展。\n- **核心风险**：Q2收入环比增长低于20%、储能毛利率跌破25%、美国禁令全面落地。\n- **止损/止盈**：若股价跌破110元（对应约20x PE 2026E悲观利润）且Q2数据未改善，应评估是否降级至Underweight；若股价升至150元以上且无基本面新催化剂，考虑部分止盈。\n- **模型不可假设**：PM不得将AIDC/氢能收入纳入近两年核心利润预测；不得假设美国政策立即缓解；不可忽略高资本开支对FCF的压力。",
+  "handoff_integrity_audit": "**交接完整性审计**\n- **模型版本**：2026-07-05-1，基于结构化研究包修订。\n- **冻结报告事实**：FY2025收入891.8亿，净利134.6亿；Q1 2026收入155.6亿，净利22.9亿，合同负债122亿，存货277.6亿，净现金246.8亿。\n- **接受的分析师估计**：2026E收入950亿，净利105亿，EPS 5.06元；2027E净利120亿；公允值151元。\n- **未解决单元格**：分部收入和毛利率（需半年报），美国业务实际敞口。\n- **业务单元**：光伏逆变器、储能系统、氢能、AIDC，权重按估算不变。\n- **预测行**：收入、毛利率、营业利润、归母净利润、OCF、CAPEX、FCF均已刷新。\n- **金融桥梁**：TFB01-04已整合至模型假设。\n- **估值桶**：核心盈利价值147元/股 + 期权价值4元 = 151元。"
+}

@@ -164,6 +164,28 @@ class SegmentEconomicsRow(BaseModel):
     missing_or_next_check: str = ""
 
 
+class BusinessModelMechanismRow(BaseModel):
+    """A reader-facing link in how the company creates and realizes value."""
+
+    link: str = Field(description="Customer/value proposition/order/pricing/delivery/service/cash link.")
+    how_it_works: str
+    economic_driver: str = Field(description="Volume, price, mix, cost, utilization, service or repeat-purchase mechanism.")
+    cash_and_capital_feature: str
+    evidence_or_gap: str
+    analyst_conclusion: str = Field(description="What this mechanism means for quality, growth or risk; no valuation multiple.")
+
+
+class MoatMechanismRow(BaseModel):
+    """One claimed moat tested through observable economic outcomes."""
+
+    moat_source: str
+    operating_mechanism: str = Field(description="Why a customer pays, stays, switches less, or accepts the company's product.")
+    observed_proof: str = Field(description="Dated history or true-peer evidence, not awards or slogans.")
+    economic_result: str = Field(description="Share, win rate, ASP, margin, turnover, cash conversion or ROIC consequence.")
+    durability_and_threat: str
+    verdict: Literal["proven", "partial", "unproven", "eroding"]
+
+
 class IndustryDriverRow(BaseModel):
     """Sector-native driver with an explicit financial transmission."""
 
@@ -1289,9 +1311,23 @@ class SellSidePMDecision(BaseModel):
         default_factory=list,
         description="Material economic units with disclosure basis, driver equation, cash/capital profile and valuation treatment.",
     )
+    business_model_mechanisms: list[BusinessModelMechanismRow] = Field(
+        default_factory=list,
+        description=(
+            "Four to seven links explaining who pays, why they buy, how orders become revenue/cash, "
+            "where gross profit is earned and what capital is required. Keep valuation out of this map."
+        ),
+    )
     industry_driver_matrix: list[IndustryDriverRow] = Field(
         default_factory=list,
         description="Dated sector-native demand, supply/capacity, price/cost and policy drivers with financial transmission.",
+    )
+    moat_mechanisms: list[MoatMechanismRow] = Field(
+        default_factory=list,
+        description=(
+            "Three to five economic moat mechanisms tested against history and true peers; awards, market-share "
+            "claims and R&D spend alone are not proof."
+        ),
     )
     accounting_quality_matrix: list[AccountingQualityRow] = Field(
         default_factory=list,
@@ -1318,9 +1354,9 @@ class SellSidePMDecision(BaseModel):
     )
     investment_conclusion_and_core_conflict: str = Field(
         description=(
-            "Public opening section. State the final rating and posture, core bet, decisive "
-            "unresolved conflict, probability/payoff, holder/builder action and the evidence "
-            "that upgrades or downgrades the view. Do not repeat later tables."
+            "Public opening section. State the rating, central operating conclusion, decisive evidence and "
+            "strongest unresolved counterpoint in two or three connected paragraphs. Keep execution mechanics "
+            "and detailed valuation out; do not repeat later tables."
         ),
     )
     canonical_model_snapshot: list[CanonicalModelLine] = Field(
@@ -1339,8 +1375,9 @@ class SellSidePMDecision(BaseModel):
     )
     company_disaggregation: str = Field(
         description=(
-            "Reader-facing company chapter. Begin with a clear economic judgment, then map the business rather "
-            "than writing a company-introduction paragraph. Separate reported "
+            "Reader-facing company chapter for someone unfamiliar with the company. Explain who pays, what each "
+            "product solves, purchase/tender and delivery cycles, pricing/revenue recognition, service obligations, "
+            "cost stack, working capital, capital intensity and profit pools. Separate reported "
             "segments from analytical product/channel/geography/customer/project/asset units; "
             "show what each unit sells, drivers, disclosed scale/margin/cash, valuation treatment "
             "and missing disclosure without invented allocations. Explain the operating mechanism and end with "
@@ -1366,17 +1403,20 @@ class SellSidePMDecision(BaseModel):
     )
     thesis_financial_bridge: str = Field(
         description=(
-            "Integrated reader-facing investment-logic chapter. Do not write a question list or module recap. "
-            "For each decisive thesis state the conclusion first, then the strongest evidence, mechanism, "
+            "Integrated reader-facing investment-logic chapter. Write two or three connected analyst subsections, "
+            "not a question list, module recap or visible checklist of conclusion/evidence/counterevidence labels. "
+            "For each decisive thesis make clear the conclusion, strongest evidence, mechanism, "
             "strongest counterevidence/boundary, driver formula, bull/base/bear assumptions and the "
             "resulting revenue, profit, EPS, FCF/capital and fair-value effect. Explicit missing "
             "inputs are acceptable; qualitative claims posing as quantified effects are not. Close each thesis "
-            "with what current price implies and the falsification condition."
+            "with the expectation difference and falsification condition. Exact target prices, multiples and "
+            "scenario fair values belong only in section 7."
         )
     )
     moat_evidence_scorecard: str = Field(
         description=(
-            "Score every claimed moat proven/partial/unproven/rejected using observable history "
+            "Synthesize the moat judgment in prose after the structured mechanism table. Test every claimed moat "
+            "using observable history "
             "or true-peer evidence, counterevidence and financial transmission to share, price, "
             "margin, turnover, cash conversion or ROIC."
         )
@@ -2381,7 +2421,7 @@ def _render_segment_economics(rows_in: list[SegmentEconomicsRow]) -> str:
     rows = [
         "### 分部经济与价值归属",
         "",
-        "| 业务单元 | 经济角色/口径 | 规模与增长 | 利润与现金 | 驱动方程 | 估值处理 | 证据/缺口 |",
+        "| 业务单元 | 经济角色/口径 | 规模与增长 | 利润与现金 | 驱动方程 | 价值归属 | 证据/缺口 |",
         "| --- | --- | --- | --- | --- | --- | --- |",
     ]
     for row in rows_in[:8]:
@@ -2391,6 +2431,34 @@ def _render_segment_economics(rows_in: list[SegmentEconomicsRow]) -> str:
             f"{_table_cell(row.scale_and_growth)} | {_table_cell(row.margin_and_cash)} | "
             f"{_table_cell(row.driver_equation)} | {row.valuation_treatment} | "
             f"{_table_cell(evidence)}；{_table_cell(row.missing_or_next_check)} |"
+        )
+    return "\n".join(rows)
+
+
+def _render_business_model_mechanisms(rows_in: list[BusinessModelMechanismRow]) -> str:
+    if not rows_in:
+        return ""
+    rows = [
+        "### 商业模式如何运转",
+        "",
+        "| 经营环节 | 运作方式 | 核心经济变量 | 现金与资本特征 | 证据或缺口 | 分析结论 |",
+        "| --- | --- | --- | --- | --- | --- |",
+    ]
+    for row in rows_in[:7]:
+        rows.append(
+            "| "
+            + " | ".join(
+                _table_cell(value)
+                for value in (
+                    row.link,
+                    row.how_it_works,
+                    row.economic_driver,
+                    row.cash_and_capital_feature,
+                    row.evidence_or_gap,
+                    row.analyst_conclusion,
+                )
+            )
+            + " |"
         )
     return "\n".join(rows)
 
@@ -2409,6 +2477,34 @@ def _render_industry_drivers(rows_in: list[IndustryDriverRow]) -> str:
             f"| {_table_cell(row.driver)} | {_table_cell(row.current_state_and_direction)} | "
             f"{_table_cell(row.dated_evidence)} | {_table_cell(row.affected_business)} | "
             f"{_table_cell(row.financial_transmission)} | {row.confidence}；{_table_cell(row.next_verification)} |"
+        )
+    return "\n".join(rows)
+
+
+def _render_moat_mechanisms(rows_in: list[MoatMechanismRow]) -> str:
+    if not rows_in:
+        return ""
+    rows = [
+        "### 护城河的形成机制与经济结果",
+        "",
+        "| 护城河来源 | 运作机制 | 可观察证据 | 经济结果 | 持续性与威胁 | 判断 |",
+        "| --- | --- | --- | --- | --- | --- |",
+    ]
+    for row in rows_in[:5]:
+        rows.append(
+            "| "
+            + " | ".join(
+                _table_cell(value)
+                for value in (
+                    row.moat_source,
+                    row.operating_mechanism,
+                    row.observed_proof,
+                    row.economic_result,
+                    row.durability_and_threat,
+                    row.verdict,
+                )
+            )
+            + " |"
         )
     return "\n".join(rows)
 
@@ -2544,29 +2640,28 @@ def render_sell_side_pm_decision(decision: SellSidePMDecision) -> str:
     return "\n\n".join(
         [
             "# 公司深度研究与投资决策",
-            "| 最终评级 | 仓位姿态 | 研究就绪度 |\n"
-            "| --- | --- | --- |\n"
-            f"| {decision.rating.value} | {decision.rating_posture} | "
-            f"{decision.research_readiness} |",
+            "| 最终评级 | 投资观点 |\n"
+            "| --- | --- |\n"
+            f"| {decision.rating.value} | {decision.rating_posture} |",
             f"> **一句话结论：** {decision.one_line_thesis}",
-            _render_valuation_snapshot(decision.deterministic_valuation),
-            "## 一、投资结论与估值速览\n\n"
+            "## 一、投资结论\n\n"
             + _demote_embedded_headings(decision.investment_conclusion_and_core_conflict),
-            "## 二、业务模式、分部经济与增长来源\n\n"
+            "## 二、公司画像、商业模式与利润池\n\n"
             + _demote_embedded_headings(decision.company_disaggregation)
+            + ("\n\n" + _render_business_model_mechanisms(decision.business_model_mechanisms) if decision.business_model_mechanisms else "")
             + ("\n\n" + _render_segment_economics(decision.segment_economics) if decision.segment_economics else ""),
-            "## 三、行业结构、周期位置与竞争优势\n\n"
+            "## 三、行业格局、竞争优势与护城河\n\n"
             + _demote_embedded_headings(decision.industry_cycle_and_competition)
             + ("\n\n" + _render_industry_drivers(decision.industry_driver_matrix) if decision.industry_driver_matrix else "")
-            + "\n\n### 竞争优势的证据检验\n\n"
+            + ("\n\n" + _render_moat_mechanisms(decision.moat_mechanisms) if decision.moat_mechanisms else "")
+            + "\n\n### 护城河判断\n\n"
             + _demote_embedded_headings(decision.moat_evidence_scorecard),
-            "## 四、经营质量：财务、会计与资本配置\n\n"
+            "## 四、经营质量、财务特征与资本配置\n\n"
             + _demote_embedded_headings(decision.accounting_and_capital_allocation)
             + ("\n\n" + _render_accounting_quality(decision.accounting_quality_matrix) if decision.accounting_quality_matrix else ""),
-            "## 五、核心投资逻辑与反方检验\n\n"
-            + _demote_embedded_headings(decision.thesis_financial_bridge)
-            + ("\n\n" + _render_alternative_intelligence(decision.alternative_intelligence_decisions) if decision.alternative_intelligence_decisions else ""),
-            "## 六、盈利预测、关键假设与敏感性\n\n"
+            "## 五、核心投资逻辑与关键分歧\n\n"
+            + _demote_embedded_headings(decision.thesis_financial_bridge),
+            "## 六、盈利预测与关键变量\n\n"
             + _render_forecast_takeaways(decision.forecast_takeaways)
             + "\n\n"
             + _render_reader_forecast_table(decision.canonical_model_snapshot)
@@ -2574,14 +2669,14 @@ def render_sell_side_pm_decision(decision: SellSidePMDecision) -> str:
             + _render_forecast_assumptions(decision.forecast_assumptions)
             + "\n\n### 模型解释与局限\n\n"
             + _demote_embedded_headings(decision.autonomous_forecast_model),
-            "## 七、市场预期、估值与情景回报\n\n"
+            "## 七、市场预期差与估值\n\n"
             + _demote_embedded_headings(decision.expectation_gap_and_market_pricing)
             + ("\n\n" + _render_sell_side_expectations(decision.sell_side_expectation_matrix) if decision.sell_side_expectation_matrix else "")
             + "\n\n"
             + _render_deterministic_valuation(decision.deterministic_valuation)
             + "\n\n### 估值解释与局限\n\n"
             + _demote_embedded_headings(decision.valuation_closure),
-            "## 八、风险、催化剂与跟踪框架\n\n"
+            "## 八、风险、催化剂与跟踪\n\n"
             + _demote_embedded_headings(decision.risks_catalysts_verification),
         ]
     )

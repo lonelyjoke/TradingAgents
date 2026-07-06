@@ -70,6 +70,39 @@ LITHIUM_BATTERY_TERMS = (
 )
 
 
+CLEAN_ENERGY_POWER_ELECTRONICS_SYMBOL_HINTS = frozenset(
+    {
+        "300274.SZ",  # Sungrow
+    }
+)
+
+CLEAN_ENERGY_POWER_ELECTRONICS_TERMS = (
+    "光伏逆变器",
+    "储能变流器",
+    "储能系统集成",
+    "储能系统",
+    "电力电子",
+    "新能源电源",
+    "inverter",
+    "power conversion system",
+    "energy storage system integrator",
+)
+
+
+def is_clean_energy_power_electronics_text(symbol: object = "", *parts: object) -> bool:
+    """Identify inverter/PCS/ESS integrators, not battery-cell/material makers."""
+    normalized_symbol = str(symbol or "").strip().upper()
+    if normalized_symbol in CLEAN_ENERGY_POWER_ELECTRONICS_SYMBOL_HINTS:
+        return True
+    text = " ".join([str(symbol or ""), *(str(part or "") for part in parts)])
+    lower = text.lower()
+    hits = sum(term.lower() in lower for term in CLEAN_ENERGY_POWER_ELECTRONICS_TERMS)
+    return hits >= 2 and any(
+        term in lower
+        for term in ("光伏逆变器", "储能变流器", "电力电子", "inverter", "power conversion system")
+    )
+
+
 def _standalone_ascii_term(text: str, term: str) -> bool:
     """Match short ASCII identity terms without leaking across numbers/units.
 
@@ -104,6 +137,8 @@ def is_telecom_operator_text(symbol: object = "", *parts: object) -> bool:
 def is_lithium_battery_text(symbol: object = "", *parts: object) -> bool:
     """Return True for battery-cell/system companies, not incidental demand mentions."""
     normalized_symbol = str(symbol or "").strip().upper()
+    if is_clean_energy_power_electronics_text(symbol, *parts):
+        return False
     if normalized_symbol in LITHIUM_BATTERY_SYMBOL_HINTS:
         return True
     text = " ".join([str(symbol or ""), *(str(part or "") for part in parts)])

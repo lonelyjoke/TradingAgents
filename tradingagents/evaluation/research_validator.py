@@ -84,7 +84,6 @@ PUBLICATION_BLOCKING_SECTIONS = frozenset(
         "financial_calendar_period",
         "period_comparator_lineage",
         "upside_discount_math",
-        "industry_playbook_alignment",
         "segment_growth_rank_consistency",
         "underwriting_readiness",
         "pm_structured_generation",
@@ -882,26 +881,31 @@ def _heading_text(text: str, heading: str) -> str:
             "Company Disaggregation",
             "二、公司业务与利润池拆解",
             "二、业务模式、分部经济与增长来源",
+            "二、公司画像、商业模式与利润池",
         ),
         "Autonomous Three-Year Forecast Model": (
             "Autonomous Three-Year Forecast Model",
             "四、三年盈利及现金流预测",
             "六、盈利预测、关键假设与敏感性",
+            "六、盈利预测与关键变量",
         ),
         "Thesis-to-Financial Bridge": (
             "Thesis-to-Financial Bridge",
             "五、核心论点、护城河与财务传导",
             "五、核心投资逻辑与反方检验",
+            "五、核心投资逻辑与关键分歧",
         ),
         "Moat Evidence Scorecard": (
             "Moat Evidence Scorecard",
             "五、核心论点、护城河与财务传导",
             "三、行业结构、周期位置与竞争优势",
+            "三、行业格局、竞争优势与护城河",
         ),
         "Valuation Closure": (
             "Valuation Closure",
             "七、估值、情景与预期收益",
             "七、市场预期、估值与情景回报",
+            "七、市场预期差与估值",
         ),
         "Handoff Integrity Audit": (
             "Handoff Integrity Audit",
@@ -1792,6 +1796,46 @@ def audit_report_redundancy(decision_text: str) -> list[DecisionDepthIssue]:
     ]
 
 
+def audit_public_process_leakage(decision_text: str) -> list[DecisionDepthIssue]:
+    """Keep internal research workflow out of the reader-facing deep dive."""
+    issues: list[DecisionDepthIssue] = []
+    workflow_labels = re.findall(
+        r"\*\*(?:结论|核心证据|最强反证(?:与边界)?|财务传导(?:公式)?|市场定价(?:检验)?|证伪门)[:：]\*\*",
+        decision_text,
+    )
+    if len(workflow_labels) >= 6:
+        issues.append(
+            DecisionDepthIssue(
+                "public_process_language",
+                "warning",
+                "public thesis reads like an internal research checklist; synthesize conclusions, evidence, countercase and transmission into connected analyst prose",
+            )
+        )
+    if re.search(r"^###\s+另类信息增量（?知识星球）?", decision_text, re.M):
+        issues.append(
+            DecisionDepthIssue(
+                "public_alternative_intelligence_ledger",
+                "warning",
+                "the public memo exposes the KPE disposition ledger; integrate accepted conclusions into business/thesis/risk chapters and keep the audit in canonical JSON",
+            )
+        )
+    section_bodies = re.split(r"(?m)^##\s+", decision_text)[1:]
+    valuation_heavy_sections = sum(
+        1
+        for section in section_bodies
+        if len(re.findall(r"(?:PE|P/E|目标价|安全买入价|公允价值|每股价值)", section, re.I)) >= 2
+    )
+    if valuation_heavy_sections >= 4:
+        issues.append(
+            DecisionDepthIssue(
+                "valuation_information_ownership",
+                "warning",
+                "detailed valuation is repeated across four or more public chapters; keep exact multiples, target/safe prices and scenario values in section 7",
+            )
+        )
+    return issues
+
+
 def _scenario_arithmetic_issues(decision_text: str) -> list[DecisionDepthIssue]:
     issues: list[DecisionDepthIssue] = []
     for header, rows in _markdown_tables(decision_text):
@@ -2544,6 +2588,16 @@ def audit_structured_research_usage(
                 + ", ".join(missing_sell_side_ids[:8]),
             )
         )
+    unknown_sell_side_ids = sorted(used_sell_side_ids - sell_side_ids)
+    if unknown_sell_side_ids:
+        issues.append(
+            DecisionDepthIssue(
+                "sell_side_expectation_lineage",
+                "warning",
+                "PM expectation matrix cites KSI ids absent from the deterministic sell-side ledger: "
+                + ", ".join(unknown_sell_side_ids[:8]),
+            )
+        )
 
     incomplete_kpe_outcomes = [
         str(row.get("evidence_id", ""))
@@ -2598,6 +2652,7 @@ def audit_report_depth(report_dir: str | Path) -> pd.DataFrame:
     issues.extend(audit_handoff_numeric_consistency(report_dir))
     issues.extend(audit_pm_unit_scale_arithmetic(report_dir))
     issues.extend(audit_report_redundancy(decision_text))
+    issues.extend(audit_public_process_leakage(decision_text))
     pm_payload_path = report_path / "5_portfolio" / "canonical_decision.json"
     if pm_payload_path.exists():
         try:
@@ -2608,8 +2663,10 @@ def audit_report_depth(report_dir: str | Path) -> pd.DataFrame:
                 ("forecast_takeaways", 2, "forecast take-aways"),
                 ("forecast_assumptions", 3, "auditable forecast assumptions"),
                 ("core_theses", 2, "ranked core theses"),
+                ("business_model_mechanisms", 4, "business-model mechanism rows"),
                 ("segment_economics", 2, "material segment-economics rows"),
                 ("industry_driver_matrix", 3, "sector-native industry drivers"),
+                ("moat_mechanisms", 3, "economic moat mechanism rows"),
                 ("accounting_quality_matrix", 3, "accounting/capital-allocation checks"),
             )
             missing = [

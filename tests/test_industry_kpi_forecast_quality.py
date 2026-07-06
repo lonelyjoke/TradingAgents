@@ -25,6 +25,34 @@ def test_battery_industry_kpi_checklist_uses_sector_native_drivers():
     assert "verified, partial, or missing" in context
 
 
+def test_sungrow_uses_power_electronics_and_ess_integrator_playbook():
+    company = (
+        "Sungrow manufactures PV inverters and integrates energy storage systems with PCS, BMS and EMS. "
+        "It procures battery cells but does not earn a cathode-material processing spread."
+    )
+
+    kpi = build_industry_kpi_context(
+        "300274.SZ",
+        "2026-07-05",
+        filing_intelligence_context=company,
+        company_business_model_context=company,
+    )
+    forecast = build_forecast_model_context(
+        "300274.SZ",
+        "2026-07-05",
+        filing_intelligence_context=company,
+        company_business_model_context=company,
+        industry_kpi_context=kpi,
+    )
+
+    assert "clean-energy power electronics / inverter and ESS integration" in kpi
+    assert "PV Inverter Demand" in kpi
+    assert "Orders To Cash" in kpi
+    assert "PV inverter revenue" in forecast
+    assert "ESS system revenue" in forecast
+    assert "Cathode / material revenue" not in forecast
+
+
 def test_battery_gwh_decimal_does_not_trigger_telecom_playbook():
     filing = (
         "宁德时代主营动力电池和储能电池。2025年新型储能新增装机规模达"

@@ -241,9 +241,9 @@ call followed by Pydantic validation. This is recorded as
 `schema_prompt_structured`, not an unvalidated free-text fallback.
 
 The PM renderer owns the normal report structure. The public memo has eight Chinese
-sections: conclusion/core conflict; company/profit pools; industry/competition;
-three-year forecast; thesis/moat/transmission; accounting/capital allocation;
-valuation/expected return; and risks/catalysts/verification. Their depth and length adapt
+sections: investment conclusion; company anatomy/business model/profit pools;
+industry/competition/moat; operating and accounting quality; core thesis/key disagreement;
+three-year forecast; expectation gap/valuation; and risks/catalysts/verification. Their depth and length adapt
 to the company and available evidence. Model-change, handoff, quality and legacy overflow
 text are moved to the research appendix. After the first schema-valid draft, the selected
 deep model performs a senior sell-side editorial review and, when warranted, one targeted
@@ -282,11 +282,19 @@ No safety price is published until all three scenarios, probabilities and a
 validated diluted share count close. A fundamental pressure value is not a
 technical stop-loss.
 
-The single public memo also carries typed `segment_economics`,
-`industry_driver_matrix`, `accounting_quality_matrix`, and
+The PM structured payload also carries typed `segment_economics`,
+`business_model_mechanisms`, `industry_driver_matrix`, `moat_mechanisms`,
+`accounting_quality_matrix`, and
 `alternative_intelligence_decisions`. Prose interprets these rows instead of
-repeating them. Public information ownership is fixed: conclusion/valuation
-snapshot in section 1; company/industry/accounting evidence in sections 2-4;
-full thesis and KPE decision deltas in section 5; forecasts in section 6;
+repeating them. `alternative_intelligence_decisions` is an internal audited
+workbench; the public memo receives only its synthesized conclusion. Public
+information ownership is fixed: conclusion in section 1; company/industry/accounting evidence in sections 2-4;
+full thesis in section 5; forecasts in section 6;
 program valuation and safety price in section 7; catalysts, falsification and
 actions in section 8.
+
+Detailed valuation has one public owner: section 7. Exact PE/target/safe-price
+and scenario values must not be repeated through the company, industry, thesis
+and forecast chapters. The public thesis must read as connected analyst prose;
+question logs, KPE/KSI disposition records, evidence-grade bookkeeping and
+repeated conclusion/evidence/countercase labels remain in canonical JSON.

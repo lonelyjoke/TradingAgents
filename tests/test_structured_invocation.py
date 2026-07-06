@@ -182,14 +182,14 @@ def test_sell_side_schema_renders_all_six_company_depth_contracts():
     rendered = render_sell_side_pm_decision(decision)
 
     for heading in (
-        "## 一、投资结论与估值速览",
-        "## 二、业务模式、分部经济与增长来源",
-        "## 三、行业结构、周期位置与竞争优势",
-        "## 四、经营质量：财务、会计与资本配置",
-        "## 五、核心投资逻辑与反方检验",
-        "## 六、盈利预测、关键假设与敏感性",
-        "## 七、市场预期、估值与情景回报",
-        "## 八、风险、催化剂与跟踪框架",
+        "## 一、投资结论",
+        "## 二、公司画像、商业模式与利润池",
+        "## 三、行业格局、竞争优势与护城河",
+        "## 四、经营质量、财务特征与资本配置",
+        "## 五、核心投资逻辑与关键分歧",
+        "## 六、盈利预测与关键变量",
+        "## 七、市场预期差与估值",
+        "## 八、风险、催化剂与跟踪",
     ):
         assert heading in rendered
     public, appendix, moved = split_pm_public_report(rendered)
@@ -250,6 +250,26 @@ def test_deterministic_pm_engine_calculates_eps_fcf_scenarios_and_safe_price():
         "risks_catalysts_verification": "Risk and verification.",
         "handoff_integrity_audit": "Preserved.", "shared_model_change_audit": "No silent changes.",
         "report_quality_self_check": "Checked.",
+        "business_model_mechanisms": [
+            {
+                "link": "customer purchase",
+                "how_it_works": "project owner selects a bankable system supplier",
+                "economic_driver": "tender win rate and project ASP",
+                "cash_and_capital_feature": "advance payment, delivery and collection cycle",
+                "evidence_or_gap": "reported contract liabilities; collection period missing",
+                "analyst_conclusion": "order quality depends on delivery and cash conversion",
+            }
+        ],
+        "moat_mechanisms": [
+            {
+                "moat_source": "bankability and service network",
+                "operating_mechanism": "reduces project financing and downtime risk",
+                "observed_proof": "repeat orders and true-peer win rate",
+                "economic_result": "share and margin resilience",
+                "durability_and_threat": "local competitors and price pressure",
+                "verdict": "partial",
+            }
+        ],
         "sell_side_expectation_matrix": [
             {
                 "source_ids": ["KSI01", "KPE01"],
@@ -290,6 +310,10 @@ def test_deterministic_pm_engine_calculates_eps_fcf_scenarios_and_safe_price():
     assert "卖方预测、估值与预期差" in rendered
     assert "KSI01/KPE01" in rendered
     assert "single_broker" in rendered
+    assert "商业模式如何运转" in rendered
+    assert "护城河的形成机制与经济结果" in rendered
+    assert "另类信息增量（知识星球）" not in rendered
+    assert "程序化公允价值" not in rendered.split("## 一、投资结论", 1)[0]
 
 
 def test_handoff_check_detects_only_undocumented_material_changes():

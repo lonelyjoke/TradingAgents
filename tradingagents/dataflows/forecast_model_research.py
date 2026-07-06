@@ -14,6 +14,7 @@ from .industry_identity import (
     is_insurance_text,
     is_lithium_battery_text,
     is_telecom_operator_text,
+    is_clean_energy_power_electronics_text,
 )
 from .research_evidence import extract_evidence_records, infer_model_variable
 from .underwriting_packet import compact_underwriting_packet
@@ -47,6 +48,17 @@ def _battery_forecast_drivers() -> list[tuple[str, str, str]]:
         ("Gross profit", "segment revenue x segment gross margin", "lithium/material cost, yield, depreciation, warranty"),
         ("Operating profit", "gross profit - R&D - SG&A", "R&D capitalization/expense, scale leverage"),
         ("net profit/EPS / FCF", "operating profit - tax/minority + working-capital/capex bridge", "cash conversion and capex cycle"),
+    ]
+
+
+def _clean_energy_power_electronics_forecast_drivers() -> list[tuple[str, str, str]]:
+    return [
+        ("PV inverter revenue", "inverter shipments x realized ASP by region/product", "global PV additions, share, string/central mix, FX and pricing"),
+        ("ESS system revenue", "delivered ESS GWh x realized system ASP", "opening backlog + new orders - delivered orders, duration and regional mix"),
+        ("ESS gross profit", "ESS revenue - battery procurement - PCS/BMS/EMS - installation/warranty cost", "cell cost, system value content, project mix and execution"),
+        ("Other/option businesses", "verified delivered projects or signed orders x unit economics", "wind conversion, hydrogen, charging and AIDC/SST evidence gates"),
+        ("Operating profit / parent profit", "segment gross profit - R&D - sales/admin - impairment - tax/minority", "global service investment, scale leverage, credit quality and FX"),
+        ("OCF / FCF", "profit + D&A - receivables/inventory/prepayments - capex", "contract-liability conversion, collection cycle and reinvestment"),
     ]
 
 
@@ -495,6 +507,9 @@ def build_forecast_model_context(
     )
     is_hog_breeder = is_hog_breeding_text(symbol, combined)
     is_battery_company = _is_battery_context(symbol, combined)
+    is_power_electronics_integrator = is_clean_energy_power_electronics_text(
+        symbol, combined
+    )
     evidence = _compact_lines(
         combined,
         (
@@ -525,6 +540,8 @@ def build_forecast_model_context(
         drivers = _hog_breeding_forecast_drivers()
     elif (consumer_drivers := _consumer_staples_forecast_drivers(symbol, combined)) is not None:
         drivers = consumer_drivers
+    elif is_power_electronics_integrator:
+        drivers = _clean_energy_power_electronics_forecast_drivers()
     elif _is_metals_mining_context(symbol, combined):
         drivers = _metals_forecast_drivers(symbol, combined)
     elif _is_wind_power_context(symbol, combined):

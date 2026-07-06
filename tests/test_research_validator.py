@@ -9,6 +9,7 @@ from tradingagents.evaluation.research_validator import (
     audit_handoff_numeric_consistency,
     audit_pm_unit_scale_arithmetic,
     audit_report_redundancy,
+    audit_public_process_leakage,
     audit_structured_research_usage,
     render_post_generation_audit,
     _extract_rating,
@@ -425,6 +426,25 @@ def test_report_redundancy_flags_same_substantive_sentence_three_times():
     assert [issue.section for issue in issues] == ["report_redundancy"]
 
 
+def test_public_process_leakage_flags_internal_checklist_and_kpe_dump():
+    labels = "\n".join(
+        [
+            "**结论：** 修复",
+            "**核心证据：** 订单",
+            "**最强反证与边界：** 现金差",
+            "**财务传导：** 利润",
+            "**市场定价：** 未反映",
+            "**证伪门：** 毛利率下降",
+        ]
+    )
+    text = labels + "\n### 另类信息增量（知识星球）\nKPE01"
+
+    sections = {issue.section for issue in audit_public_process_leakage(text)}
+
+    assert "public_process_language" in sections
+    assert "public_alternative_intelligence_ledger" in sections
+
+
 def test_integrity_audit_recalculates_forecast_and_valuation_ranges():
     decision = """
 营业收入 2026E 2,150-2,200亿；2026E收入增速 8-10%。
@@ -655,13 +675,17 @@ def test_structured_audit_flags_unused_sell_side_expectation_observation(tmp_pat
         json.dumps(bundle, ensure_ascii=False), encoding="utf-8"
     )
     (portfolio_dir / "canonical_decision.json").write_text(
-        json.dumps({"sell_side_expectation_matrix": []}, ensure_ascii=False),
+        json.dumps(
+            {"sell_side_expectation_matrix": [{"source_ids": ["KSI99"]}]},
+            ensure_ascii=False,
+        ),
         encoding="utf-8",
     )
 
     issues = audit_structured_research_usage(tmp_path, "decision")
 
     assert "sell_side_expectation_usage" in {issue.section for issue in issues}
+    assert "sell_side_expectation_lineage" in {issue.section for issue in issues}
 
 
 def test_post_generation_integrity_recomputes_scenario_value():
