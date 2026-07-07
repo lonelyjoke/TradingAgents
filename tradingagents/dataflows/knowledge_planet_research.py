@@ -1063,6 +1063,18 @@ def _row_to_report(row: sqlite3.Row) -> KpReport:
 def infer_private_source_type(text: str, current: str = "") -> str:
     """Upgrade coarse import labels into research-useful source classes."""
     body = f"{current}\n{text}"
+    # Explicit broker attribution outranks generic words such as 出货、验证、
+    # 调研 or 订单. A broker note remains a sell-side observation even when it
+    # contains channel-like data; otherwise the same post is counted once as
+    # private KPE evidence and again as a KSI forecast.
+    if re.search(
+        r"(?:【[^】]{0,40}(?:证券|电新|研究|策略)|"
+        r"(?:东吴|中信|中金|华泰|国君|国泰海通|招商|申万|广发|海通|天风|兴业|民生|浙商)(?:证券|电新|研究)|"
+        r"盈利预测与投资建议|目标价\s*\d|给予\s*\d+(?:\.\d+)?\s*x?\s*PE|继续强推|重点推荐)",
+        body,
+        re.I,
+    ):
+        return "sell_side_push"
     if re.search(r"(渠道|终端|经销商|客户|供应商|订单|验证|送样)", body):
         return "channel_check"
     if re.search(r"(周度|数据库|库存|价格|排产|出货|SMM|PPI|开工率|稼动率)", body):

@@ -11,6 +11,7 @@ back gracefully to free-text generation.
 from __future__ import annotations
 
 import json
+import re
 
 from tradingagents.agents.schemas import (
     SellSideEditorialReview,
@@ -72,6 +73,22 @@ from tradingagents.dataflows.pm_report_compaction import split_pm_public_report
 from tradingagents.dataflows.structured_research import compact_structured_research_for_prompt
 
 
+def _deterministically_owned_pm_line(row: dict) -> bool:
+    if str(row.get("status", "")).lower() != "calculated":
+        return False
+    formula = str(row.get("formula", "")).lower()
+    return any(
+        marker in formula
+        for marker in (
+            "parent net profit (cny mn) / diluted shares",
+            "ocf = parent net profit x accepted ocf/ni ratio",
+            "ocf - abs(capex)",
+            "revenue x gross margin",
+            "operating profit + finance/other - tax - minority interest",
+        )
+    )
+
+
 def _canonical_handoff_issues(
     manager_payload: dict,
     pm_payload: dict,
@@ -110,7 +127,11 @@ def _canonical_handoff_issues(
         manager_unit = str(manager_line.get("unit", "")).strip().lower()
         pm_unit = str(pm_line.get("unit", "")).strip().lower()
         unit_changed = bool(manager_unit and pm_unit and manager_unit != pm_unit)
-        if (value_changed or unit_changed) and line_id not in accepted_changes:
+        if (
+            (value_changed or unit_changed)
+            and line_id not in accepted_changes
+            and not _deterministically_owned_pm_line(pm_line)
+        ):
             issues.append(
                 f"silent change {line_id}: {manager_value} {manager_unit} -> "
                 f"{pm_value} {pm_unit}"
@@ -162,6 +183,152 @@ def _analytical_structure_issues(pm_payload: dict) -> list[str]:
             if not any(marker in thesis_chapter for marker in markers):
                 issues.append(f"public thesis chapter missing {label}")
     return issues
+
+
+def _enforce_forecast_methodology(
+    pm_payload: dict,
+    structured_research: dict,
+) -> tuple[dict, list[str]]:
+    """Prevent an un-reconciled segment model from being called bottom-up."""
+
+    payload = json.loads(json.dumps(pm_payload, ensure_ascii=False))
+    packet = dict((structured_research or {}).get("underwriting_packet", {}) or {})
+    material_units = {
+        str(row.get("business_unit", "")).strip().lower()
+        for row in payload.get("segment_economics", []) or []
+        if str(row.get("business_unit", "")).strip()
+        and str(row.get("valuation_treatment", "")).lower() in {"core", "scenario"}
+    }
+    forecast_rows = list(packet.get("forecast_lines", []) or [])
+    revenue_segments: set[str] = set()
+    profit_segments: set[str] = set()
+    for row in forecast_rows:
+        segment = str(row.get("segment", "")).strip().lower()
+        if segment in {"consolidated", "group", "合并", "公司整体"}:
+            continue
+        if not all(
+            row.get(field) is not None
+            for field in ("year_1_value", "year_2_value", "year_3_value")
+        ):
+            continue
+        metric = str(row.get("metric", "")).strip().lower()
+        if "revenue" in metric or "营业收入" in metric or metric == "收入":
+            revenue_segments.add(segment)
+        if (
+            "profit" in metric
+            or "利润" in metric
+            or "净利" in metric
+        ) and "margin" not in metric and "利润率" not in metric:
+            profit_segments.add(segment)
+    text = str(payload.get("autonomous_forecast_model", "") or "")
+    claims_bottom_up = bool(re.search(r"自下而上|bottom[- ]up", text, re.I))
+    complete = (
+        bool(material_units)
+        and len(revenue_segments) >= len(material_units)
+        and len(profit_segments) >= len(material_units)
+    )
+    if not claims_bottom_up or complete:
+        return payload, []
+    text = re.sub(r"自下而上", "混合", text)
+    text = re.sub(r"bottom[- ]up", "hybrid", text, flags=re.I)
+    disclosure = (
+        "**程序化模型口径判定：混合模型。** 结构化承保包尚未为每个核心业务单元提供"
+        "可与集团收入、利润和现金流逐年勾稽的三年数值行；现有分部驱动用于解释集团预测，"
+        "不得表述为已完成的全量分部加总模型。"
+    )
+    payload["autonomous_forecast_model"] = disclosure + "\n\n" + text
+    return payload, ["downgraded unsupported bottom-up label to hybrid model"]
+
+
+def _normalize_sell_side_lineage(
+    pm_payload: dict,
+    structured_research: dict,
+) -> tuple[dict, list[str]]:
+    """Replace invented broker aliases with exact KSI/KPE ledger ids."""
+
+    payload = json.loads(json.dumps(pm_payload, ensure_ascii=False))
+    ledger = list((structured_research or {}).get("sell_side_intelligence", []) or [])
+    valid = {
+        str(row.get("intelligence_id", "")).strip().upper(): row
+        for row in ledger
+        if str(row.get("intelligence_id", "")).strip()
+    }
+    notes: list[str] = []
+    for row in payload.get("sell_side_expectation_matrix", []) or []:
+        source_ids = [str(value).strip() for value in row.get("source_ids", []) or []]
+        exact = [value.upper() for value in source_ids if value.upper() in valid]
+        matched_id = exact[0] if exact else ""
+        if not matched_id and valid:
+            blob = " ".join(
+                str(row.get(field, ""))
+                for field in (
+                    "institution",
+                    "published_at",
+                    "forecast_and_valuation",
+                    "comparison_with_our_model",
+                )
+            ).lower()
+            blob_numbers = set(re.findall(r"\d+(?:\.\d+)?", blob))
+            scored: list[tuple[int, str]] = []
+            for ksi_id, candidate in valid.items():
+                candidate_blob = " ".join(str(value) for value in candidate.values()).lower()
+                candidate_numbers = set(re.findall(r"\d+(?:\.\d+)?", candidate_blob))
+                score = 4 * len(blob_numbers & candidate_numbers)
+                institution = str(row.get("institution", "")).strip().lower()
+                if institution and institution in candidate_blob:
+                    score += 8
+                if str(row.get("published_at", ""))[:10] in candidate_blob:
+                    score += 2
+                scored.append((score, ksi_id))
+            scored.sort(reverse=True)
+            if scored and scored[0][0] >= 6:
+                matched_id = scored[0][1]
+        if not matched_id:
+            row["source_ids"] = [value for value in source_ids if not value.upper().startswith("KSI")]
+            continue
+        candidate = valid[matched_id]
+        linked = candidate.get("kpe_ids", candidate.get("evidence_ids", [])) or []
+        if isinstance(linked, str):
+            linked = re.findall(r"KPE\d+", linked, re.I)
+        row["source_ids"] = list(
+            dict.fromkeys(
+                [matched_id]
+                + [str(value).upper() for value in linked if str(value).strip()]
+                + [value for value in source_ids if value.upper().startswith("KPE")]
+            )
+        )
+        if source_ids != row["source_ids"]:
+            notes.append(
+                f"normalized sell-side lineage {source_ids or ['missing']} -> {row['source_ids']}"
+            )
+
+    kpe_ledger = dict((structured_research or {}).get("known_kpe_ledger", {}) or {})
+    sell_side_linked_kpe_ids: set[str] = set()
+    for item in ledger:
+        linked = item.get("kpe_ids", item.get("evidence_ids", [])) or []
+        if isinstance(linked, str):
+            linked = re.findall(r"KPE\d+", linked, re.I)
+        sell_side_linked_kpe_ids.update(str(value).upper() for value in linked)
+    for decision in payload.get("alternative_intelligence_decisions", []) or []:
+        decision_kpe_ids = {
+            str(kpe_id).upper() for kpe_id in decision.get("kpe_ids", []) or []
+        }
+        types = {
+            str((kpe_ledger.get(str(kpe_id).upper()) or {}).get("source_type", "")).lower()
+            for kpe_id in decision.get("kpe_ids", []) or []
+        }
+        if (
+            types & {"sell_side_push", "strategy_view", "broker_report_summary"}
+            or decision_kpe_ids & sell_side_linked_kpe_ids
+        ):
+            decision["source_type"] = "sell_side_view"
+            if decision.get("evidence_grade") == "B_private_edge":
+                decision["evidence_grade"] = "C_market_narrative"
+            decision["public_crosscheck"] = (
+                str(decision.get("public_crosscheck", "")).rstrip("。")
+                + "；该KPE与对应KSI属于同一卖方原始帖子，不构成独立交叉验证。"
+            )
+    return payload, notes
 
 
 def _editorial_review_prompt(
@@ -497,9 +664,9 @@ def create_portfolio_manager(llm):
 - Fill `research_questions`, `question_verdicts`, `forecast_takeaways`, `forecast_assumptions`, and `core_theses` from the accepted model. Do not leave them empty when the source record supports analysis. Questions, verdicts and thesis cards are the internal analytical workbench; they must improve the reasoning but must not appear as a public question list, Q&A ledger or repeated checklist.
 - Fill `segment_economics` with every material economic unit, using reported/calculated/analyst-estimate/missing labels and explicit core/scenario/optionality/excluded valuation treatment. Fill `industry_driver_matrix` with dated demand, supply/capacity, price/cost and policy variables. Fill `accounting_quality_matrix` with working-capital, cash-conversion, capex/ROIC, leverage/impairment and shareholder-return checks. The adjacent prose interprets these tables and must not repeat every cell.
 - Fill `business_model_mechanisms` with four to seven links covering customer/value proposition, purchase or tender decision, pricing, delivery/revenue recognition, cost stack/service, and cash collection/capital intensity. Fill `moat_mechanisms` with at least three mechanisms tested through observable share, win rate, ASP, margin, turnover, cash or ROIC outcomes. Awards, R&D spending and market-share labels are not moat proof by themselves.
-- Fill `safe_valuation_assumptions` with exactly bull/base/bear inputs plus required return, holding period, margin of safety and maximum acceptable bear loss. Put each second curve in `optionality_inputs` with one metric value, multiple, probability, ownership and a genuinely separate execution haircut. Never encode a 25% probability again as a 75% haircut. Do not calculate scenario EPS, equity value, per-share value, probability-weighted value, optionality per share, expected return or safety price; application code owns those outputs. In `valuation_closure`, explain method choice, evidence limits, double counting and what would change the assumptions, without publishing competing hand-calculated values or restating a manual option-value formula.
+- Fill `safe_valuation_assumptions` with exactly bull/base/bear inputs plus required return, holding period, margin of safety and maximum acceptable bear loss. Put each genuinely independent second curve in `optionality_inputs` with one metric value, multiple, probability, ownership and a separate execution haircut. Never add a bull-versus-base incremental value as optionality when the same volume, margin, project or multiple already differs across bull/base/bear scenarios; application code will exclude it as double counting. Never encode a 25% probability again as a 75% haircut. Do not calculate scenario EPS, equity value, per-share value, probability-weighted value, optionality per share, expected return or safety price; application code owns those outputs. In `valuation_closure`, explain method choice, evidence limits, double counting and what would change the assumptions, without publishing competing hand-calculated values or restating a manual option-value formula.
 - For each deduplicated material Knowledge Planet claim, fill `alternative_intelligence_decisions` from full topic text, not a title or ellipsis. Grade it A/B/C/D, state age and decision shelf life in `freshness_and_shelf_life`, and force one outcome: model change, scenario-probability change, verification-clock/gate change, or explicit rejection. Multiple reposts of the same original note are one claim, not independent corroboration. Integrate the result into the affected thesis; do not create a raw-message catalog. Recent does not mean true, while stale channel checks cannot alter the current model without revalidation.
-- Populate `sell_side_expectation_matrix` from KSI rows. Copy only the KPE ids explicitly linked to that exact KSI row; never pair a KSI observation with a different KPE merely because the institution or topic sounds similar. Preserve institution and date, distinguish a single broker from a true multi-broker range, compare same-institution forecast/target revisions, and state the exact period/variable/magnitude difference versus the TradingAgents model. Missing method, base year or target price must remain missing; never reverse-engineer them from promotional language.
+- Populate `sell_side_expectation_matrix` from KSI rows. Copy the exact KSI id and only the KPE ids explicitly linked to that row; never invent aliases such as `KSI_brokername`. A KPE and KSI generated from the same original broker post are one source and never independent corroboration. Preserve institution and date, distinguish a single broker from a true multi-broker range, compare same-institution forecast/target revisions, and state the exact period/variable/magnitude difference versus the TradingAgents model. Missing method, base year or target price must remain missing; never reverse-engineer them from promotional language.
 - Fill `question_verdicts` with evidence-weighted answers to the same decisive questions. Integrate filing facts, structured financials, industry KPIs, peers, price/expectation evidence and Knowledge Planet clues only where they answer the question. Cite what was actually used, surface contradictions, and state the named model/probability/valuation effect. Then synthesize each accepted conclusion exactly once into the relevant public chapter. A sequential recap of available modules is not analysis.
 - The forecast narrative must interpret rather than duplicate the renderer's table. State whether the model is bottom-up, top-down, or hybrid; explain the 2-3 largest earnings/cash drivers and the most fragile assumption. Do not write a precise volume, ASP, utilization, expense ratio, scenario probability or valuation multiple unless it has a historical/evidence anchor or is explicitly labeled an analyst range with sensitivity.
 - `core_theses` must contain only the 2-4 conclusions that decide the rating. Do not produce separate flat lists of thesis bullets and moat bullets. A moat is relevant only when observable evidence shows transmission into share/price, margin, turnover, cash conversion, ROIC or valuation, with the strongest counterevidence and a falsification gate.
@@ -790,6 +957,19 @@ If an important investment claim depends on an unverified commodity price, produ
                 ]
             else:
                 pm_decision_payload = normalized_decision.model_dump(mode="json")
+                pm_decision_payload, lineage_notes = _normalize_sell_side_lineage(
+                    pm_decision_payload,
+                    state.get("structured_research_context", {}),
+                )
+                pm_decision_payload, methodology_notes = _enforce_forecast_methodology(
+                    pm_decision_payload,
+                    state.get("structured_research_context", {}),
+                )
+                deterministic_model_notes.extend(lineage_notes)
+                deterministic_model_notes.extend(methodology_notes)
+                normalized_decision = SellSidePMDecision.model_validate(
+                    pm_decision_payload
+                )
                 final_trade_decision = render_sell_side_pm_decision(normalized_decision)
 
         manager_payload = state.get("research_manager_plan_payload", {}) or {}
@@ -866,6 +1046,17 @@ If an important investment claim depends on an unverified commodity price, produ
                     revision_model_notes = []
             if revised_payload and normalized_revision is not None:
                 revised_payload = normalized_revision.model_dump(mode="json")
+                revised_payload, revision_lineage_notes = _normalize_sell_side_lineage(
+                    revised_payload,
+                    state.get("structured_research_context", {}),
+                )
+                revised_payload, revision_methodology_notes = _enforce_forecast_methodology(
+                    revised_payload,
+                    state.get("structured_research_context", {}),
+                )
+                revision_model_notes.extend(revision_lineage_notes)
+                revision_model_notes.extend(revision_methodology_notes)
+                normalized_revision = SellSidePMDecision.model_validate(revised_payload)
                 revised_handoff_issues = _canonical_handoff_issues(
                     manager_payload,
                     revised_payload,

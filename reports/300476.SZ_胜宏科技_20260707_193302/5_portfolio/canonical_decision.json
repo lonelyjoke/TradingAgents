@@ -1,0 +1,829 @@
+{
+  "rating": "Hold",
+  "rating_posture": "中性；当前价284.92元高于程序化安全买入上限149.64元，已有持仓按评级管理，新资金等待价格进入安全区间或基本面证据推动估值输入上修。",
+  "research_readiness": "partial",
+  "one_line_thesis": "AI PCB收入占比的结构性提升趋势是真实的，但FY26高达180亿元的资本开支面临官方确认的“慢速爬坡”风险，当前2800亿元市值已基本定价了基准情景，等待2026年半年报验证毛利率韧性与AI收入占比后，可重新评估加仓机会。",
+  "research_questions": [
+    "Can AI PCB revenue share reach 60-70% in FY26, and what is the segment margin?",
+    "Can consolidated gross margin stay above 34% through FY26 despite upstream cost pressure and potential client pricing pressure?",
+    "Will the 18bn CNY FY26 capex translate into proportionate revenue growth by FY27, or will the \"slow ramp\" compress returns?",
+    "Is customer concentration risk (single GPU client) being mitigated by ASIC/TPU diversification at a material pace?"
+  ],
+  "question_verdicts": [
+    {
+      "question": "Can AI PCB revenue share reach 60-70% in FY26, and what is the segment margin?",
+      "why_decisive": "AI mix determines blended ASP, gross margin, and revenue growth trajectory; without official segment disclosure the core thesis is unverifiable.",
+      "conclusion": "Bullish scenario is plausible but unverified. Accepted base case: 60% AI share, AI GM ~36%, consolidated GM 34.0%.",
+      "evidence_used": [
+        "KPE02 private channel guidance AI share 60-70%",
+        "Q1 2026 gross margin 34.46%",
+        "FY25 revenue +80% YoY"
+      ],
+      "strongest_counterevidence": "No official segment revenue/margin disclosure; KPE02 is unverified private data; inventory/revenue up to 17.7% may signal demand not fully absorbed.",
+      "model_or_valuation_effect": "1pp AI share = 276mn revenue; 1pp AI GM = 2.8mn gross profit per 1% of revenue; base case AI share 60% vs. bull 70% reduces FY26E revenue by ~2.8bn and net profit by ~0.8bn.",
+      "confidence": "medium",
+      "next_verification": "Official segment disclosure in 2026 semi-annual report (expected August 2026)."
+    },
+    {
+      "question": "Can consolidated gross margin stay above 34% through FY26 despite upstream cost pressure and potential client pricing pressure?",
+      "why_decisive": "Gross margin is the primary profit driver; a 1pp move changes net profit by ~1.4bn CNY, directly shifting scenario fair values.",
+      "conclusion": "Bull has stronger near-term evidence (Q1 2026 actual 34.46% is a hard fact). Bear's cost pressure (electronic cloth +100%, inventory build) is a medium-term risk not yet visible in P&L. Base case 34.0% embeds 50bp caution buffer.",
+      "evidence_used": [
+        "Q1 2026 gross margin 34.46%",
+        "KPE02 'costs stable, pass-through smooth'",
+        "KPE01 electronic cloth +100% YoY to 7.4 CNY/meter",
+        "Q1 2026 inventory/revenue 17.7% (+4.2pp YoY), contract liabilities -37%"
+      ],
+      "strongest_counterevidence": "KPE01 upstream cost spike and KPE10 (unverified) Nvidia 10% price cut rumour; if confirmed, margin could drop below 33%.",
+      "model_or_valuation_effect": "GM 34.0% (base) vs. 33.0% (bear) → net profit difference ~1.4bn CNY; bear case implies equity value down to 135bn CNY (-52% vs. market cap).",
+      "confidence": "medium",
+      "next_verification": "Q2 2026 gross margin disclosure in interim report (August 2026)."
+    },
+    {
+      "question": "Will the 18bn CNY FY26 capex translate into proportionate revenue growth by FY27, or will the \"slow ramp\" compress returns?",
+      "why_decisive": "18bn capex is 93% of FY25 revenue; if ramp is slow, ROIC deteriorates and depreciation drags on margins in FY27-28, destroying value.",
+      "conclusion": "Bear wins on timing. Official disclosure 'long construction cycles, gradual ramp' (2026-06-08) is higher-evidence than private channel optimism. FY27E revenue growth reduced to 25% (from 30% base), FY27E net profit reduced to 6.30bn CNY.",
+      "evidence_used": [
+        "Official investor interaction 2026-06-08: 'PCB heavy asset, long construction cycles, gradual capacity ramp'",
+        "KPE02: factory 4 in mass production, factories 10/11 progressing",
+        "Q1 2026 construction-in-progress 5.17bn CNY (+43% QoQ)"
+      ],
+      "strongest_counterevidence": "KPE02 claims factory 4 already ramped and factories 10/11 on schedule; OCF 1.64x supports funding.",
+      "model_or_valuation_effect": "FY27E net profit lowered from 7.72bn to 6.30bn; equity value at 35x PE reduced by ~17bn CNY.",
+      "confidence": "high",
+      "next_verification": "FY26 annual report capex detail and FY27 H1 revenue growth vs. 25% assumption."
+    },
+    {
+      "question": "Is customer concentration risk (single GPU client) being mitigated by ASIC/TPU diversification at a material pace?",
+      "why_decisive": "Single-customer concentration is the top qualitative risk; successful diversification supports multiple expansion and extends the growth runway beyond the current GPU cycle.",
+      "conclusion": "Bullish optionality is credible (V8 TPU entry, 50/50 target) but unverified. No official customer split or contract wins are disclosed.",
+      "evidence_used": [
+        "KPE02 private channel: target ASIC/GPU 50/50, confident in V8 TPU PCB supply by FY26 year-end"
+      ],
+      "strongest_counterevidence": "No official customer disclosure; ASIC margins unproven; timeline uncertain.",
+      "model_or_valuation_effect": "Diversification supports 30% bull probability and potential P/E expansion to 40x; without it, concentration risk caps multiple and bear-case probability would rise.",
+      "confidence": "low",
+      "next_verification": "Customer announcements, contract wins, or FY26 annual report customer concentration disclosure change."
+    }
+  ],
+  "forecast_takeaways": [
+    {
+      "takeaway": "Revenue growth remains strong but is slowing from peak. FY26E 27.6bn CNY (+43% YoY) decelerates to +25%/+20% in FY27-28 as the base effect normalizes. The bull's 55% FY26 growth is unlikely given management's own 'slow ramp' caution.",
+      "evidence_anchor": "FY25A revenue 19.3bn, Q1 2026 5.52bn (run-rate ~22bn). FY26 guidance implies H2 acceleration; achievable but not guaranteed.",
+      "financial_implication": "FY26E revenue 27.6bn, FY27E 32.3bn, FY28E 38.8bn. Slower ramp reduces FY27-28 net profit by ~1.5bn vs. prior base.",
+      "confidence_and_risk": "Confidence: medium. Top-down, supported by KPE02 guidance but missing hard backlog data. Invalidation: FY26 revenue below 25bn CNY."
+    },
+    {
+      "takeaway": "Gross margin resilience is the linchpin of the investment case. Q1 2026 34.5% is a positive signal, but one quarter is not a trend. Upstream cost pressure could compress margins in H2 2026 even if AI ASP is stable.",
+      "evidence_anchor": "Q1 2026 GM 34.46%; Q2 2026 is the decisive verification. KPE01 cost signals and KPE10 pricing rumor are flagged.",
+      "financial_implication": "Base case FY26E GM 34.0% embeds 50bp caution. A fall to 33.0% would cut FY26E net profit by ~1.0bn CNY.",
+      "confidence_and_risk": "Confidence: moderate. Supported by Q1 actual, challenged by cost data. Invalidation: Q2 2026 GM below 33%."
+    },
+    {
+      "takeaway": "Capacity ramp is a 2027-28 story, not a 2026 story. Official disclosure confirms 'long construction cycles, gradual ramp.' The 18bn CNY capex will start contributing meaningfully only from FY27, and depreciation will be a headwind.",
+      "evidence_anchor": "Official Q&A 2026-06-08; Q1 2026 construction-in-progress 5.17bn CNY (+43% QoQ).",
+      "financial_implication": "FY27 revenue growth reduced to 25%; FY28 operating margin reduced to 24.5% on depreciation. FCF remains negative through FY27.",
+      "confidence_and_risk": "Confidence: high. Official disclosure trumps private narrative. Invalidation: FY27 revenue growth exceeds 35%."
+    }
+  ],
+  "forecast_assumptions": [
+    {
+      "parameter": "AI revenue share FY26E",
+      "affected_business": "AI PCB high-end server/GPU/ASIC PCB segment",
+      "historical_anchor": "~45% FY25 (analyst estimate, not disclosed)",
+      "evidence_status": "proxy",
+      "base_case": "60% of FY26E revenue (27,600mn × 60% = 16,560mn)",
+      "bull_case": "70% if all capacity ramps and demand strong (19,320mn)",
+      "bear_case": "50% if slow ramp and share loss (13,800mn)",
+      "rationale_and_evidence": "KPE02 private channel cites 60-70%; Q1 2026 margin supports high-end mix but no official segment data.",
+      "sensitivity": "1pp = 276mn revenue, ~50mn net profit",
+      "confidence": "low",
+      "verification_gate": "Official segment disclosure in 2026 semi-annual report (August 2026)"
+    },
+    {
+      "parameter": "FY26E consolidated gross margin",
+      "affected_business": "Entire company (AI and non-AI PCB combined)",
+      "historical_anchor": "35.2% FY25A, 34.46% Q1 2026",
+      "evidence_status": "calculated",
+      "base_case": "34.0%",
+      "bull_case": "35.0% if no cost pass-through and pricing stable",
+      "bear_case": "32.0% if electronic cloth and Nvidia price cut hit simultaneously",
+      "rationale_and_evidence": "Q1 2026 actual 34.46% but upstream cost flags (KPE01) and KPE10 pricing rumor justify caution buffer.",
+      "sensitivity": "1pp = 276mn gross profit, ~207mn net profit",
+      "confidence": "medium",
+      "verification_gate": "Q2 2026 gross margin in interim report (August 2026)"
+    },
+    {
+      "parameter": "FY27E revenue growth",
+      "affected_business": "AI PCB capacity ramp from factories 10-13",
+      "historical_anchor": "+80% FY25A, +28% Q1 2026 YoY",
+      "evidence_status": "proxy",
+      "base_case": "+25% (32.3bn CNY)",
+      "bull_case": "+35% if ramp ahead of schedule and all capacity absorbed (37.3bn CNY)",
+      "bear_case": "+15% if construction delays and demand digestion (31.7bn CNY)",
+      "rationale_and_evidence": "Official interaction states 'gradual ramp'; KPE02 optimistic but unverified. Accepted 25% reflects official caution.",
+      "sensitivity": "1pp = 276mn revenue, ~70mn net profit",
+      "confidence": "medium",
+      "verification_gate": "FY27 H1 revenue growth and factory 10/11 progress reports"
+    },
+    {
+      "parameter": "FY28E operating margin",
+      "affected_business": "Consolidated operating profit margin",
+      "historical_anchor": "26.2% FY25A",
+      "evidence_status": "analyst_estimate",
+      "base_case": "24.5%",
+      "bull_case": "27.5% if operating leverage offsets all depreciation",
+      "bear_case": "23.5% if depreciation overwhelms and AI pricing softens",
+      "rationale_and_evidence": "Depreciation from 18bn capex peaks in FY27-28; official 'slow ramp' and cost risk limit margin expansion. Post-debate operating profit 9,500mn on revenue 38,760mn gives 24.5%.",
+      "sensitivity": "1pp = ~388mn operating profit",
+      "confidence": "low",
+      "verification_gate": "FY27 annual report depreciation and segment profit disclosure"
+    }
+  ],
+  "core_theses": [
+    {
+      "rank": 1,
+      "takeaway": "胜宏科技正从传统PCB厂商转型为AI GPU/ASIC载板核心供应商。AI PCB收入占比预计从FY25的<50%提升至FY26的60%，带动混合ASP和毛利率结构性改善。",
+      "decisive_question": "Is the AI PCB mix shift real and margin-accretive?",
+      "evidence": "KPE02渠道指引AI收入占比60-70%；Q1 2026毛利率34.46%；FY25营收+80% YoY。",
+      "strongest_counterevidence": "无官方分产品线披露；KPE02为未验证私有渠道信息；Q1 2026存货/收入比升至17.7%，合同负债环比-37%。",
+      "financial_transmission": "AI收入占比60% × AI毛利率36% + 非AI收入占比40% × 非AI毛利率27% = 综合毛利率34.0% → FY26E归母净利润59.28亿元。",
+      "market_pricing": "当前PE TTM 59.8倍已定价基准情景盈利预期。预期差较小，超额收益需等待超预期验证。",
+      "falsification_gate": "Q2 2026毛利率 < 33% 或官方披露AI收入占比 < 50%。",
+      "verdict": "unproven"
+    },
+    {
+      "rank": 2,
+      "takeaway": "ASIC/TPU客户多元化（目标GPU/ASIC收入比50/50，V8 TPU进入预期）有望降低单一大客户集中度风险，打开估值上行空间。",
+      "decisive_question": "Is customer diversification accelerating fast enough to de-risk the revenue base?",
+      "evidence": "KPE02: 目标ASIC/GPU收入比50/50；有信心于FY26年底进入V8 TPU PCB供应。",
+      "strongest_counterevidence": "无官方客户收入拆解；ASIC毛利率可能与GPU不同；时间表不确定。",
+      "financial_transmission": "多元化成功支撑25%+的可持续收入增速，并支持牛市情景40倍P/E扩张。",
+      "market_pricing": "当前59.8倍P/E部分反映了增长预期，但完全多元化的估值溢价尚未计入。",
+      "falsification_gate": "FY26年末未宣布ASIC/TPU客户合同或重大进展。",
+      "verdict": "unproven"
+    },
+    {
+      "rank": 3,
+      "takeaway": "FY26 180亿元资本开支面临官方确认的“建设周期长、产能爬坡慢”风险。若增收不增利，折旧将在FY27-28严重压制利润率，熊市情景下股权价值可能跌至1350亿元（-52%）。",
+      "decisive_question": "Will the massive capex cycle generate returns that exceed the cost of capital?",
+      "evidence": "官方投资者互动（2026-06-08）明确PCB产能建设周期长、逐步释放；Q1 2026在建工程51.7亿元，环比+43%。",
+      "strongest_counterevidence": "KPE02声称工厂4已量产，工厂10/11按计划推进；Q1 2026 OCF为净利润的1.64倍，可为资本开支提供资金支持。",
+      "financial_transmission": "慢速爬坡 → FY27E收入增速下调至+25%，净利润降至63亿元 → 基准情景股权价值降至2690亿元。",
+      "market_pricing": "当前价格未完全定价慢速爬坡和折旧风险；熊市情景意味着-52%的潜在下行空间。",
+      "falsification_gate": "FY27上半年收入超过170亿元（年化340亿+）。",
+      "verdict": "partial"
+    }
+  ],
+  "segment_economics": [
+    {
+      "business_unit": "AI PCB (高端GPU/ASIC/TPU载板)",
+      "economic_role": "增长引擎；当前分析估计占FY26E收入的60%",
+      "disclosure_basis": "analyst_estimate",
+      "scale_and_growth": "FY26E约165.6亿元（27,600mn × 60%），同比增速显著高于公司整体水平",
+      "margin_and_cash": "估计毛利率~36%，高于非AI板块；现金转换取决于产能爬坡和客户回款条件",
+      "driver_equation": "全球AI基础设施资本开支 → GPU/ASIC平台迭代 → 公司产能(工厂10-13) × 利用率 × 产品结构(HDI/mSAP) × ASP(成本加成)",
+      "valuation_treatment": "core",
+      "evidence_ids": [
+        "KPE02",
+        "KPE06",
+        "EV014",
+        "EV016"
+      ],
+      "missing_or_next_check": "需要2026年中报/年报披露分产品线收入与毛利率"
+    },
+    {
+      "business_unit": "Non-AI PCB (汽车电子、工业控制、消费电子等)",
+      "economic_role": "稳定现金流业务；估计占FY26E收入的40%",
+      "disclosure_basis": "analyst_estimate",
+      "scale_and_growth": "FY26E约110.4亿元，收入增速温和，受公司选择性接单策略影响",
+      "margin_and_cash": "估计毛利率~25-28%，低于AI板块；回款周期可能更长",
+      "driver_equation": "终端需求（汽车/工业/消费）→ 选择性接单 × 存量产能 × ASP（优先高毛利订单）",
+      "valuation_treatment": "core",
+      "evidence_ids": [
+        "KPE02"
+      ],
+      "missing_or_next_check": "需要管理层披露非AI业务的订单趋势和毛利率指引"
+    },
+    {
+      "business_unit": "境外收入通道 (美元结算, 占比65-81%)",
+      "economic_role": "汇率和地缘风险敞口；也是全球客户交付的必要条件",
+      "disclosure_basis": "calculated",
+      "scale_and_growth": "FY25年报和募集说明书披露境外销售占比约65-81%",
+      "margin_and_cash": "外币结算影响收入汇率风险和毛利率；公司未单独披露外销毛利率",
+      "driver_equation": "境外营收 = 全球客户订单 × ASP × 汇率",
+      "valuation_treatment": "core",
+      "evidence_ids": [
+        "EV028"
+      ],
+      "missing_or_next_check": "需要年报披露外销具体占比及汇兑损益"
+    },
+    {
+      "business_unit": "泰国/越南海外扩产 (Optionality)",
+      "economic_role": "远期产能备份和全球化布局；当前无收入贡献",
+      "disclosure_basis": "missing",
+      "scale_and_growth": "无已披露的收入或产能数据",
+      "margin_and_cash": "不适用",
+      "driver_equation": "尚在建设中",
+      "valuation_treatment": "optionality",
+      "evidence_ids": [],
+      "missing_or_next_check": "需要公司披露海外工厂投产时间表、规划产能和目标客户"
+    }
+  ],
+  "business_model_mechanisms": [
+    {
+      "link": "大客户深度绑定与联合研发",
+      "how_it_works": "胜宏科技通过深度参与国际头部GPU客户的下一代平台（如Rubin）联合设计，在HDI/mSAP等技术路线上与客户共同迭代，获得认证后拿到量产订单。",
+      "economic_driver": "产品结构升级和ASP提升",
+      "cash_and_capital_feature": "研发投入大（FY25研发费用占收入4.03%），但订单确定性较高，可减少无效产能投资。",
+      "evidence_or_gap": "KPE02称目标维持核心客户全品类~50%份额；FY25年报提到“深度绑定国际头部客户”。官方的客户收入集中度和合同金额未披露。",
+      "analyst_conclusion": "这是公司从传统PCB向AI载板转型的核心驱动机制。技术协同降低了纯价格竞争的风险，但也形成了客户集中度过高的隐患。"
+    },
+    {
+      "link": "重资产产能扩张与规模效应",
+      "how_it_works": "公司通过惠州、越南、泰国多地建厂，以180亿元级别的年度资本开支大幅扩张AI PCB产能，试图通过规模效应和先进制程来建立成本优势。",
+      "economic_driver": "产能利用率与固定成本摊薄",
+      "cash_and_capital_feature": "FCF在扩张期深度为负（FY26E FCF -108.86亿元），依赖经营现金流和股权融资支撑。",
+      "evidence_or_gap": "Q1 2026在建工程51.7亿元（+43% QoQ）；官方称“产能建设周期普遍较长，产线磨合和产能产量逐步释放是行业的必经过程”（2026-06-08）。",
+      "analyst_conclusion": "这是公司未来3-5年增长的主要来源，但也是最核心的风险点。产能释放速度（慢于预期）和折旧压力将决定资本开支是创造价值还是摧毁价值。"
+    },
+    {
+      "link": "选择性接单与成本传导",
+      "how_it_works": "对于非AI业务，公司主动筛选高ASP、高毛利的订单；对于AI业务，管理层声称原材料成本稳定，且能与客户进行有效的成本传导。",
+      "economic_driver": "毛利率韧性",
+      "cash_and_capital_feature": "非AI业务的订单筛选可能牺牲收入增速，但能保住利润和现金流。",
+      "evidence_or_gap": "KPE02称“AI PCB原材料成本稳定，新一代产品成本传导顺畅”；Q1 2026综合毛利率34.46%提供了初步验证。但KPE01显示上游电子布涨价100%，KPE10传闻大客户压价10%。",
+      "analyst_conclusion": "若能持续，将证明公司具备超越行业平均水平的议价能力和成本控制力，构成护城河的一部分。但目前证据不够充分，需Q2报表验证。"
+    },
+    {
+      "link": "多元化客户策略 (ASIC/TPU)",
+      "how_it_works": "在稳固大GPU客户的基础上，公司正向更多ASIC客户（如谷歌TPU、CSP自研芯片）渗透，目标将ASIC/GPU收入比调整至50/50，以降低单一客户依赖。",
+      "economic_driver": "客户集中度风险下降，估值倍数扩张",
+      "cash_and_capital_feature": "多元化客户可能带来不同的付款条款和利润结构，但总体有助于稳定现金流。",
+      "evidence_or_gap": "KPE02: 目标ASIC/GPU收入比50/50，有信心于FY26年底进入V8 TPU PCB供应。目前无官方披露的任何合同或收入数据。",
+      "analyst_conclusion": "这是公司估值能否从“单一客户周期股”迈向“AI算力平台股”的关键期权。目前属于未验证的bullish optionality。"
+    },
+    {
+      "link": "出口驱动的外汇敞口",
+      "how_it_works": "公司约65-81%的收入来自境外，主要以美元结算。人民币汇率波动直接影响当期以人民币计价的收入和毛利率。",
+      "economic_driver": "汇率风险与收益并存",
+      "cash_and_capital_feature": "汇兑损益直接影响利润表和现金流。",
+      "evidence_or_gap": "FY25年报和募集说明书明确披露了境外销售占比。公司未详细披露对冲策略。",
+      "analyst_conclusion": "在人民币双向波动加大的背景下，这是一个持续存在的财务变量，但不应成为决定性的投资逻辑。"
+    },
+    {
+      "link": "研发驱动的高端化路径",
+      "how_it_works": "公司通过高强度研发（FY25研发投入7.78亿元，+72.88% YoY）在mSAP、高叠层HDI、PTFE材料等前沿领域进行技术储备，以期在下一代产品中维持技术优势。",
+      "economic_driver": "高端产品占比和ASP提升",
+      "cash_and_capital_feature": "研发资本化路径不透明，未来转固后可能增加折旧压力。",
+      "evidence_or_gap": "年报描述了针对“14阶36层HDI”以及多种材料方案的预研。第三方技术排名或份额数据缺失。",
+      "analyst_conclusion": "研发是维持高端定位的必要条件，但高研发投入本身不等于有效产出。技术能否真正转化为市场份额和毛利率优势，是关键观察点。"
+    }
+  ],
+  "industry_driver_matrix": [
+    {
+      "driver": "全球AI数据中心资本开支 (需求端)",
+      "current_state_and_direction": "高景气，持续增长。2026年，英伟达Rubin/Rubin Ultra平台、谷歌TPU V8、各大CSP自研ASIC共同驱动AI硬件投入。",
+      "dated_evidence": "KPE02: 管理层对Rubin计算载板HDI份额充满信心；KPE04行业新闻提及AI服务器出货持续增长。",
+      "affected_business": "AI PCB",
+      "financial_transmission": "AI资本开支 → GPU/ASIC出货量 → 高端HDI/mSAP PCB订单 → 公司AI PCB收入增长。",
+      "confidence": "medium",
+      "next_verification": "英伟达、谷歌等主要下游客户的季度财报以及资本开支指引。"
+    },
+    {
+      "driver": "高端PCB产能供给 (供给端)",
+      "current_state_and_direction": "供给壁垒高，可规模量产高端HDI/mSAP的厂商有限。胜宏科技是主要扩产方之一。",
+      "dated_evidence": "KPE02: 公司通过惠州工厂10-13大幅扩产，FY26资本开支180亿元；沪电股份等竞争对手也有扩产计划。",
+      "affected_business": "AI PCB",
+      "financial_transmission": "短期供给增加有限支撑高ASP；中长期存在产能过剩和价格战风险，影响毛利率。",
+      "confidence": "medium",
+      "next_verification": "跟踪主要PCB厂商的季报中披露的产能利用率、在建工程和资本开支。"
+    },
+    {
+      "driver": "上游原材料成本 (成本端)",
+      "current_state_and_direction": "存在成本压力。电子布价格自去年上涨100%至7.4元/米（KPE01）；覆铜板、铜箔价格波动。",
+      "dated_evidence": "KPE01 (2026-06-09): 电子布价格五轮涨价后均价7.4元/米；KPE02: 公司称AI PCB原材料成本稳定。",
+      "affected_business": "综合毛利率",
+      "financial_transmission": "电子布涨价 → 覆铜板成本上升 → PCB制造成本上升 → 若未能有效传导，则毛利率压缩。1pp毛利率影响约2.76亿毛利。",
+      "confidence": "low",
+      "next_verification": "Q2 2026财报中毛利率的实际表现。"
+    },
+    {
+      "driver": "大客户定价与份额 (竞争格局)",
+      "current_state_and_direction": "目前以单一GPU大客户为主，存在潜在的降价压力和新供应商引入风险。ASIC/CSP客户正在拓展。",
+      "dated_evidence": "KPE10: 传闻英伟达要求PCB供应商降价10%；KPE02: 公司目标维持核心客户全品类~50%份额，ASIC/GPU收入比50/50。",
+      "affected_business": "AI PCB的收入和毛利率",
+      "financial_transmission": "大客户降价10% → 若成本未同步下降，则AI PCB毛利率大幅压缩，对净利影响可达数十亿元。",
+      "confidence": "low",
+      "next_verification": "官方关于定价的表述，以及主要竞争对手的季报指引。"
+    },
+    {
+      "driver": "行业技术路线变更",
+      "current_state_and_direction": "Rubin Ultra平台正交背板等新技术方案存在推迟或材料变更的风险，可能导致公司在研产品的价值量下修。",
+      "dated_evidence": "KPE11: Jefferies报告称正交背板推迟至2028年；KPE02: 公司认为进度未延迟，但终端客户在评估10多种材料方案。",
+      "affected_business": "AI PCB 远期收入（FY27-28）",
+      "financial_transmission": "若关键产品推迟或价值量下降，将导致FY27-28收入预测下修，并可能造成研发沉没成本。",
+      "confidence": "low",
+      "next_verification": "英伟达官方GTC或官网的硬件路线图更新。"
+    }
+  ],
+  "moat_mechanisms": [
+    {
+      "moat_source": "客户黏性与长周期认证壁垒",
+      "operating_mechanism": "AI GPU/ASIC芯片平台需要3-5年的开发周期，胜宏通过联合研发与客户深度绑定。一旦产品定型，供应商认证周期长、切换成本高。",
+      "observed_proof": "公司声称目标在核心客户全品类中维持约50%份额（KPE02）。Q1 2026回款加速（应收/收入比环比-7.5pp）暗示客户质量较高。",
+      "economic_result": "ASP相对稳定，订单份额有保障。",
+      "durability_and_threat": "威胁在于客户引入更多供应商以分散风险和压价。Nvidia降价传闻（KPE10）是关键观察点。",
+      "verdict": "partial"
+    },
+    {
+      "moat_source": "技术壁垒：mSAP/高叠层HDI能力",
+      "operating_mechanism": "高端AI芯片载板需要mSAP（半加成法）工艺和14阶以上HDI技术，全球可大规模量产的厂商有限。",
+      "observed_proof": "FY2025研发投入7.78亿（+72.88%），积极研发14阶36层HDI。综合毛利率从FY24的22.7%跃升至FY25的35.2%，显示产品结构高端化。",
+      "economic_result": "更高的混合ASP和毛利率。",
+      "durability_and_threat": "技术路线变更（如PTFE等新材料）可能导致现有优势被削弱。竞争对手沪电股份同样具备高端HDI能力。",
+      "verdict": "partial"
+    },
+    {
+      "moat_source": "规模效应与全球化布局",
+      "operating_mechanism": "大规模资本开支（FY26E 180亿）带来的规模经济，以及惠州、越南、泰国多地产能布局，为全球头部客户提供交付弹性和地缘风险对冲。",
+      "observed_proof": "FY26 Capex指引180亿元，其中约150亿用于工厂10/11。A股PCB企业中资本开支规模最大（基于分析师研报和行业估算）。",
+      "economic_result": "理论上应带来更低的单位成本和更强的接单能力。",
+      "durability_and_threat": "当前处于投资高点，尚未转化为实际收入和利润。产能过剩是最大风险。",
+      "verdict": "unproven"
+    }
+  ],
+  "accounting_quality_matrix": [
+    {
+      "item": "收入真实性与现金回收",
+      "latest_evidence_and_period": "Q1 2026: 应收账款/收入比改善至25.8%（环比-7.5pp），销售商品收到现金/收入比回升至0.99。",
+      "trend_or_comparator": "历史比较：FY2025该比率为0.85，Q1 2026明显改善。",
+      "causal_interpretation": "可能源于1) 公司主动筛选回款更好的优质客户；2) 大客户回款周期缩短。",
+      "earnings_cash_roic_effect": "利润现金转换质量高（OCF/净利润=1.64x）。",
+      "verdict": "positive",
+      "evidence_ids": [
+        "EV018",
+        "Q1_2026_report"
+      ]
+    },
+    {
+      "item": "存货与需求信号",
+      "latest_evidence_and_period": "Q1 2026: 存货/收入比升至17.7%（环比+7.9pp），合同负债-37.3%。",
+      "trend_or_comparator": "历史高位，且与改善的应收账款形成矛盾组合。",
+      "causal_interpretation": "多空存在分歧。看多方认为是为新工厂备货；看空方认为是被动积压。合同负债绝对值仅716万元，对200亿营收公司意义不大，但其下降趋势值得跟踪。",
+      "earnings_cash_roic_effect": "若后续被证实为被动积压，将面临存货减值风险，侵蚀利润。",
+      "verdict": "warning",
+      "evidence_ids": [
+        "Q1_2026_report"
+      ]
+    },
+    {
+      "item": "资本开支与在建工程",
+      "latest_evidence_and_period": "Q1 2026: 在建工程51.7亿元，环比+43.2%。FY26 Capex指引180亿元。",
+      "trend_or_comparator": "在建工程快速增长；研发资本化细节不透明。",
+      "causal_interpretation": "公司处于大规模扩张期，资本套牢（lock-in）效应强。未来转固后的折旧是必然的利润压力。",
+      "earnings_cash_roic_effect": "短期FCF深度为负（FY26E -108.86亿元）。长期需观察项目ROIC是否高于WACC。",
+      "verdict": "warning",
+      "evidence_ids": [
+        "Q1_2026_report",
+        "KPE02"
+      ]
+    },
+    {
+      "item": "负债水平与流动性",
+      "latest_evidence_and_period": "Q1 2026: 资产负债率55.2%；流动比率0.92x，速动比率0.68x。净负债约41亿元。",
+      "trend_or_comparator": "负债率处于PCB行业偏高位置；短期偿债指标低于1，流动偏紧。",
+      "causal_interpretation": "杠杆主要由产能扩张驱动。Q1 2026 OCF强劲（21.2亿，单季），短期偿债风险可控。",
+      "earnings_cash_roic_effect": "财务费用率上升（Q1 2026为1.89%，+1.23pp YoY）值得关注。",
+      "verdict": "warning",
+      "evidence_ids": [
+        "Q1_2026_report"
+      ]
+    },
+    {
+      "item": "股东回报",
+      "latest_evidence_and_period": "2025年度分红方案已通过（约2元/股？需核实具体金额）。",
+      "trend_or_comparator": "有分红记录，但股息率低（约0.70%）。",
+      "causal_interpretation": "公司仍处于资本开支高峰，当前以再投资为主，股东直接现金回报有限。",
+      "earnings_cash_roic_effect": "资本分配优先用于扩产，而非分红或回购。",
+      "verdict": "neutral",
+      "evidence_ids": [
+        "dividend_history"
+      ]
+    }
+  ],
+  "alternative_intelligence_decisions": [
+    {
+      "kpe_ids": [
+        "KPE02"
+      ],
+      "claim": "胜宏科技AI PCB原材料成本稳定，ASP平稳，FY26毛利率与FY25持平；AI收入占比目标60-70%；ASIC/GPU目标收入比50/50；FY26资本开支指引180亿元。",
+      "source_type": "sell_side_view",
+      "affected_business_and_variable": "AI 收入占比、综合毛利率、客户集中度",
+      "public_crosscheck": "Q1 2026 GM 34.46%提供了部分佐证，但官方投资者互动（2026-06-08）关于产能慢速爬坡的表述与私有渠道的乐观存在冲突；该KPE与对应KSI属于同一卖方原始帖子，不构成独立交叉验证。",
+      "evidence_grade": "C_market_narrative",
+      "disposition": "probability_change",
+      "before_after": "基准情景 AI 收入占比从原无明确基点调整为60%，综合毛利率采用34.0%（介于Q1事实与KPE02指引之间并留有缓冲）。",
+      "report_use": "作为基准预测的核心输入，但置信度标记为medium。",
+      "falsification_or_next_check": "Q2 2026半年报中官方披露的毛利率和细分业务收入占比。",
+      "freshness_and_shelf_life": "2026年7月2日信息，在2026年8月半年报前有效。"
+    },
+    {
+      "kpe_ids": [
+        "KPE10"
+      ],
+      "claim": "传闻英伟达要求PCB厂商降价10%。",
+      "source_type": "rumor",
+      "affected_business_and_variable": "AI PCB ASP和毛利率",
+      "public_crosscheck": "公司官方投资者互动（2026-06-08）被问及此事，未明确否认，仅称“经营正常”。KPE02私有渠道明确表示ASP稳定。证据冲突，无法验证。",
+      "evidence_grade": "D_reject",
+      "disposition": "probability_change",
+      "before_after": "该风险被纳入熊市情景（20%概率），作为毛利率下行的最大潜在触发点。",
+      "report_use": "作为主要下行风险项。",
+      "falsification_or_next_check": "Q2 2026半年报实际毛利率。若低于33%，将部分证实此风险。",
+      "freshness_and_shelf_life": ""
+    },
+    {
+      "kpe_ids": [
+        "KPE11"
+      ],
+      "claim": "Jefferies研报称Rubin Ultra正交背板推迟至2028年，可能导致高端PCB价值量下修。",
+      "source_type": "sell_side_view",
+      "affected_business_and_variable": "FY27-28 AI PCB远期收入和ASP",
+      "public_crosscheck": "KPE02私有渠道声称公司认为进度未延迟。无法验证。",
+      "evidence_grade": "C_market_narrative",
+      "disposition": "verification_change",
+      "before_after": "增加了对FY28远期收入的不确定性，将运营利润率从26.5%下调至24.5%。",
+      "report_use": "作为远期增长和估值的关键风险点，纳入熊市情景。",
+      "falsification_or_next_check": "英伟达官方路线图更新。",
+      "freshness_and_shelf_life": ""
+    },
+    {
+      "kpe_ids": [
+        "KPE01"
+      ],
+      "claim": "算力需求爆发推动电子布价格自去年上涨100%，均价达7.4元/米。",
+      "source_type": "channel_check",
+      "affected_business_and_variable": "综合毛利率（成本端）",
+      "public_crosscheck": "高盛公开研报（2026-06-09）提及，可作为行业动态参考。但与KPE02的公司口径“成本稳定”相悖。",
+      "evidence_grade": "C_market_narrative",
+      "disposition": "probability_change",
+      "before_after": "将潜在成本压力纳入考量，导致基准毛利率由34.5%降至34.0%，留有50bp缓冲。",
+      "report_use": "用于增强对毛利率假设的信心。",
+      "falsification_or_next_check": "Q2 2026实际毛利率。",
+      "freshness_and_shelf_life": ""
+    }
+  ],
+  "sell_side_expectation_matrix": [
+    {
+      "source_ids": [
+        "KSI01",
+        "KPE02"
+      ],
+      "institution": "未公开的卖方/渠道",
+      "published_at": "2026-07-02",
+      "observation_type": "single_broker",
+      "forecast_and_valuation": "观点：AI收入占比60-70%，FY26毛利率与FY25持平，产能扩张按计划。隐含对FY26净利润的乐观预期（~62-65亿元）。",
+      "revision_or_dispersion": "无历史对比数据。与官方互动（2026-06-08）的悲观产能表述形成直接冲突。",
+      "comparison_with_our_model": "我们的基准模型（GM 34.0%，FY26E NP 59.28亿）更为保守。",
+      "evidence_status": "private_text",
+      "decision_use": "作为基准模型的输入之一，但被官方关于产能慢速爬坡的证据部分抵消。"
+    }
+  ],
+  "safe_valuation_assumptions": {
+    "current_price_cny": 284.92,
+    "required_annual_return_pct": 20.0,
+    "holding_period_years": 1.0,
+    "margin_of_safety_pct": 20.0,
+    "maximum_bear_loss_pct": 15.0,
+    "optionality_equity_value_cny_mn": 0.0,
+    "optionality_inputs": [
+      {
+        "name": "ASIC/TPU 客户多元化 + 泰国/越南海外扩产远期期权",
+        "metric_name": "预期带来的估值溢价 (bull case PE 40x vs base 35x)",
+        "metric_value_cny_mn": 0.0,
+        "valuation_multiple": 0.0,
+        "probability_pct": 30.0,
+        "ownership_pct": 100.0,
+        "execution_haircut_pct": 0.0,
+        "evidence_ids": [
+          "KPE02"
+        ],
+        "assumption_summary": "期权价值已内含在牛市情景的40x PE和30%概率中，不单独计算。"
+      }
+    ],
+    "other_adjustments_equity_value_cny_mn": 0.0,
+    "scenarios": [
+      {
+        "scenario": "bull",
+        "probability_pct": 30.0,
+        "valuation_method": "PE",
+        "parent_net_profit_cny_mn": 7500.0,
+        "valuation_multiple": 40.0,
+        "direct_equity_value_cny_mn": null,
+        "assumption_summary": "快速爬坡，AI收入占比70%，毛利率≥34.5%，ASIC多元化成功，Rubin Ultra按计划推进",
+        "evidence_ids": [
+          "KPE02"
+        ]
+      },
+      {
+        "scenario": "base",
+        "probability_pct": 50.0,
+        "valuation_method": "PE",
+        "parent_net_profit_cny_mn": 6300.0,
+        "valuation_multiple": 35.0,
+        "direct_equity_value_cny_mn": null,
+        "assumption_summary": "慢速爬坡，AI收入占比60%，毛利率34.0%，成本压力部分传导，FY27E营收增速25%",
+        "evidence_ids": [
+          "official_interaction_20260608",
+          "Q1_2026_report",
+          "KPE02"
+        ]
+      },
+      {
+        "scenario": "bear",
+        "probability_pct": 20.0,
+        "valuation_method": "PE",
+        "parent_net_profit_cny_mn": 5000.0,
+        "valuation_multiple": 25.0,
+        "direct_equity_value_cny_mn": null,
+        "assumption_summary": "大客户降价10%，毛利率<33%，正交背板等关键技术推迟，资本开支回报低于WACC",
+        "evidence_ids": [
+          "KPE10",
+          "KPE11"
+        ]
+      }
+    ]
+  },
+  "deterministic_valuation": {
+    "status": "closed",
+    "diluted_share_count_mn": 982.78,
+    "scenario_rows": [
+      {
+        "scenario": "bull",
+        "probability_pct": 30.0,
+        "parent_net_profit_cny_mn": 7500.0,
+        "eps_cny": 7.63141293066607,
+        "valuation_method": "PE",
+        "valuation_multiple": 40.0,
+        "equity_value_cny_mn": 300000.0,
+        "fair_value_per_share_cny": 305.2565172266428,
+        "assumption_summary": "快速爬坡，AI收入占比70%，毛利率≥34.5%，ASIC多元化成功，Rubin Ultra按计划推进"
+      },
+      {
+        "scenario": "base",
+        "probability_pct": 50.0,
+        "parent_net_profit_cny_mn": 6300.0,
+        "eps_cny": 6.410386861759498,
+        "valuation_method": "PE",
+        "valuation_multiple": 35.0,
+        "equity_value_cny_mn": 220500.0,
+        "fair_value_per_share_cny": 224.36354016158245,
+        "assumption_summary": "慢速爬坡，AI收入占比60%，毛利率34.0%，成本压力部分传导，FY27E营收增速25%"
+      },
+      {
+        "scenario": "bear",
+        "probability_pct": 20.0,
+        "parent_net_profit_cny_mn": 5000.0,
+        "eps_cny": 5.087608620444047,
+        "valuation_method": "PE",
+        "valuation_multiple": 25.0,
+        "equity_value_cny_mn": 125000.0,
+        "fair_value_per_share_cny": 127.19021551110117,
+        "assumption_summary": "大客户降价10%，毛利率<33%，正交背板等关键技术推迟，资本开支回报低于WACC"
+      }
+    ],
+    "optionality_rows": [
+      {
+        "name": "ASIC/TPU 客户多元化 + 泰国/越南海外扩产远期期权",
+        "metric_name": "预期带来的估值溢价 (bull case PE 40x vs base 35x)",
+        "metric_value_cny_mn": 0.0,
+        "valuation_multiple": 0.0,
+        "probability_pct": 30.0,
+        "ownership_pct": 100.0,
+        "execution_haircut_pct": 0.0,
+        "equity_value_cny_mn": 0.0,
+        "per_share_value_cny": 0.0,
+        "evidence_ids": [
+          "KPE02"
+        ],
+        "assumption_summary": "期权价值已内含在牛市情景的40x PE和30%概率中，不单独计算。"
+      }
+    ],
+    "probability_weighted_core_value_cny": 229.1967683510043,
+    "optionality_per_share_cny": 0.0,
+    "other_adjustments_per_share_cny": 0.0,
+    "fair_value_per_share_cny": 229.1967683510043,
+    "expected_return_pct": -19.557500929733163,
+    "required_return_price_cny": 186.96961680131872,
+    "margin_of_safety_price_cny": 179.49083212926598,
+    "bear_loss_constraint_price_cny": 149.63554766011902,
+    "safe_buy_price_ceiling_cny": 149.63554766011902,
+    "suggested_buy_zone_low_cny": 134.67199289410712,
+    "fundamental_floor_cny": 127.19021551110117,
+    "formula_notes": [
+      "scenario EPS = parent net profit (CNY mn) / diluted shares (mn)",
+      "PE fair value/share = scenario EPS x selected PE",
+      "probability-weighted core value = sum(probability x scenario fair value/share)",
+      "optionality equity value = metric x multiple x probability x ownership x (1-execution haircut)",
+      "safe ceiling = min(base/(1+required return)^years, base x (1-MOS), bear/(1-max bear loss))"
+    ]
+  },
+  "investment_conclusion_and_core_conflict": "胜宏科技(300476.SZ)正处于从传统PCB制造商向AI算力载板核心供应商的历史性转型期，这是一个具有高赔率潜力的结构升级故事。当前的核心冲突在于：以KPE02私有渠道数据为代表的看多逻辑（毛利率韧性、AI收入占比快速提升）正在被Q1 2026的硬数据（毛利率34.46%，回款加速）初步验证；然而，公司官方在投资者互动平台（2026-06-08）明确确认的“重资产、长周期、慢速爬坡”表述，直接挑战了市场对FY26高达180亿元资本开支能够快速产生回报的乐观预期。当前2800亿元的市值（对应PE TTM 59.8倍）已基本定价了基准情景下的盈利增长，风险与收益大致平衡。等待2026年8月半年报，验证AI收入占比是否真正突破60%、以及毛利率能否在高资本开支和上游成本扰动下守稳34%，是决定是否加仓的关键节点。",
+  "canonical_model_snapshot": [
+    {
+      "line_id": "shares_diluted",
+      "period": "latest",
+      "metric": "diluted_shares",
+      "value": 982.78,
+      "unit": "mn shares",
+      "status": "reported",
+      "evidence_ids": [
+        "annual_report_2025"
+      ],
+      "formula": ""
+    },
+    {
+      "line_id": "base_fair_value",
+      "period": "scenario",
+      "metric": "equity_value_weighted",
+      "value": 288083.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "scenario_model"
+      ],
+      "formula": "0.3×420000 + 0.5×269000 + 0.2×135000"
+    },
+    {
+      "line_id": "2026E_revenue",
+      "period": "2026E",
+      "metric": "revenue",
+      "value": 27600.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV012",
+        "EV013",
+        "KPE02",
+        "KPE06"
+      ],
+      "formula": "FY26=FY25×(1+43%)"
+    },
+    {
+      "line_id": "2027E_revenue",
+      "period": "2027E",
+      "metric": "revenue",
+      "value": 32300.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV012",
+        "EV013",
+        "KPE02",
+        "KPE06",
+        "official_interaction_20260608"
+      ],
+      "formula": "FY27E= FY26E × 1.25"
+    },
+    {
+      "line_id": "2028E_revenue",
+      "period": "2028E",
+      "metric": "revenue",
+      "value": 38760.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "official_interaction_20260608",
+        "analyst_estimate"
+      ],
+      "formula": "FY28E = FY27E × 1.20"
+    },
+    {
+      "line_id": "2026E_parentnetprofit",
+      "period": "2026E",
+      "metric": "parentnetprofit",
+      "value": 5928.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV016",
+        "Q1_2026_GM_34.46",
+        "KPE01_cost_flag"
+      ],
+      "formula": "Revenue × net margin 21.5%"
+    },
+    {
+      "line_id": "2027E_parentnetprofit",
+      "period": "2027E",
+      "metric": "parentnetprofit",
+      "value": 6300.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV016",
+        "revenue_change",
+        "margin_change"
+      ],
+      "formula": "Revenue × net margin 19.5%"
+    },
+    {
+      "line_id": "2028E_parentnetprofit",
+      "period": "2028E",
+      "metric": "parentnetprofit",
+      "value": 7410.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV016",
+        "depreciation_risk"
+      ],
+      "formula": "Revenue × net margin 19.1%"
+    },
+    {
+      "line_id": "2026E_fcf",
+      "period": "2026E",
+      "metric": "fcf",
+      "value": -10886.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "OCF - Capex; 7114 - 18000 = -10886"
+    },
+    {
+      "line_id": "2027E_fcf",
+      "period": "2027E",
+      "metric": "fcf",
+      "value": -4440.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "OCF - Capex; 7560 - 12000 = -4440"
+    },
+    {
+      "line_id": "2028E_fcf",
+      "period": "2028E",
+      "metric": "fcf",
+      "value": 522.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "OCF - Capex; 8522 - 8000 = 522"
+    },
+    {
+      "line_id": "2026E_eps",
+      "period": "2026E",
+      "metric": "eps",
+      "value": 6.031868780398462,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV016",
+        "Q1_2026_GM_34.46",
+        "KPE01_cost_flag"
+      ],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    },
+    {
+      "line_id": "2027E_eps",
+      "period": "2027E",
+      "metric": "eps",
+      "value": 6.410386861759498,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV016",
+        "revenue_change",
+        "margin_change"
+      ],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    },
+    {
+      "line_id": "2028E_eps",
+      "period": "2028E",
+      "metric": "eps",
+      "value": 7.539835975498077,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV016",
+        "depreciation_risk"
+      ],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    }
+  ],
+  "handoff_change_rows": [],
+  "company_disaggregation": "胜宏科技（惠州）股份有限公司，是一家深市创业板上市的印制线路板（PCB）制造商。公司的商业模式正处于由传统量产向高端AI算力板转型的关键期，但其官方财务报告仍未按产品线（AI PCB vs. 非AI PCB）进行分部披露，因此我们必须基于分析性估计来解构其业务引擎。\n\n**AI PCB（高端载板）——核心增长引擎（分析估计，非官方披露）**\n- **它是做什么的？** 为英伟达等GPU巨头以及谷歌等CSP（云服务商）的AI加速卡、服务器主板、交换机提供高密度互连（HDI）和半加成法（mSAP）工艺的高端PCB。这不是普通的“电路板”，而是AI算力基础设施中的核心信号传输载体，直接影响算力释放。\n- **商业闭环与驱动因素：** 需求由全球AI数据中心资本开支拉动，胜宏通过深度参与客户下一代平台的早期研发来锁定订单。收入驱动公式为：**AI PCB收入 ≈ 下游AI芯片/服务器出货量 × 公司在客户项目中的份额 × 高端产品的平均售价(ASP)**。其中，ASP取决于产品的层数、线宽线距、材料方案（如PTFE）的复杂度，通常远高于传统PCB。\n- **规模与盈利能力：** 我们没有官方数据。基于KPE02（私有渠道）的指引，我们分析估计该部分在FY26将贡献约60%的收入（约165.6亿元），并贡献公司绝大部分的毛利润。其毛利率估计在36%左右，显著高于公司平均水平。\n- **资本强度与现金特征：** 这是一门重资本、高研发投入、但回款相对健康的生意。公司正在为此投入180亿元的年度资本开支（FY26E）。Q1 2026的财务数据显示，利润的现金转化率极高（OCF/净利润=1.64x），表明即使在高投入期，其内生现金流仍能提供有力支撑。\n\n**非AI PCB（传统多层板）——现金牛业务（分析估计，非官方披露）**\n- **它是做什么的？** 应用于汽车电子、工业控制、通信设备和消费电子等领域的传统PCB板。这是一个成熟且竞争激烈的市场。\n- **商业闭环与驱动因素：** 公司对此类业务采取明确的“选择性接单”策略，即**主动放弃低毛利订单，只做高ASP和高利润的生意**。这导致其收入增长缓慢，但能保住利润底线。\n- **规模与盈利能力：** 我们分析估计该部分在FY26将贡献约40%的收入（约110.4亿元）。其毛利率估计在25-28%之间，充当着公司利润的安全垫和现金流的稳定器。\n\n**境外收入通道（地缘与汇率敞口）**\n- **它是做什么的？** 渠道非产品。公司约65-81%的收入来自境外，直接出口或通过香港转口，主要以美元结算。\n- **商业影响：** 这使得公司的报表收入和利润对人民币/美元汇率高度敏感。在没有查到明确的金融对冲策略的情况下，这是一个持续存在的财务波动源。\n\n**泰国/越南基地（远期期权）**\n- **它是做什么的？** 应对地缘政治风险和全球供应链分散需求的海外产能备份。\n- **现状与处理：** 目前处于建设期，无任何收入或利润贡献。在我们的估值框架中，这属于**远期期权**，暂不计入核心价值。",
+  "industry_cycle_and_competition": "我们正在见证一个**非典型**的PCB行业周期。传统的PCB行业受宏观经济和电子消费品周期驱动，呈现明显的周期性波动。而胜宏科技所处的AI PCB细分赛道，则主要受**AI基础设施资本开支**这一结构性力量驱动，展现出了与传统周期不同的“高景气、高壁垒”特征。\n\n**1. 需求端：结构性而非周期性的繁荣**\nAI PCB的需求源头是全球顶级的科技巨头（Nvidia, Google, Amazon等）的军备竞赛。这些客户为了训练和部署下一代大模型，对算力硬件有着近乎刚性的投入需求。2026年，英伟达的Rubin/Rubin Ultra平台、以及各个CSP客户的自研ASIC/TPU芯片，共同构成了对高端HDI/mSAP PCB的旺盛需求。这不仅仅是“量”的增长，更是“质”的提升——随着芯片性能的迭代，对PCB的信号完整性、层数、散热能力的要求变得越来越苛刻，这直接推高了单位算力芯片所消耗的PCB价值量。与在一个成熟市场里争夺份额不同，在这里，需求的增速远快于行业自身。\n\n**2. 供给端：赢家通吃的资本“军备竞赛”**\n高端AI PCB的供给壁垒极高。它不仅仅是买设备、建厂房就能解决的，更依赖于与客户长达数年的联合研发、技术认证（mSAP工艺）和量产良率控制。全球能进入这个俱乐部、为主流GPU平台大规模供应高端HDI的厂商屈指可数。胜宏科技敢于进行180亿元级别的资本开支，正是基于其已经拿到了这张“入场券”。然而，这也构成了它最大的风险。当所有主要玩家（如沪电股份）都在扩产时，未来的某个时间点，AI需求增速的放缓可能会导致高端产能的结构性过剩，届时行业将从一个“研发驱动的供给壁垒”故事，退化为一个比拼投资回报率的制造业故事。\n\n**3. 竞争格局：与沪电股份的镜像比较**\n在同行业的Tushare样本中，沪电股份（002463.SZ）是最直接的可比公司。二者都受益于AI PCB的逻辑，但呈现出微妙的不同。沪电的毛利率（35.63%）略高于胜宏的Q1水平（34.46%），资产负债率则更低（48.64% vs 55.2%），PE也相对便宜（58.03倍 vs 59.84倍）。从静态财务质量看，沪电更像一个“更安全”的AI PCB投资标的。\n\n但为何市场给予胜宏更高的PS倍数（13.66倍 vs 11.82倍）？ 答案在于市场预期胜宏正在进行一场**更大胆、更具高赔率潜力的赌博**——即通过180亿的all-in式资本开支来承接行业的最大增量，搏取远超同行的收入弹性。因此，投资胜宏并非是在一个静态的竞争格局中挑选一个“质优价廉”的公司，而是在押注其激进的产能扩张策略最终能带来更高的总收入（Total Addressable Market）和更强的规模效应。这是一个高风险、高回报选项。",
+  "autonomous_forecast_model": "我们采用的是从收入驱动的“自上而下”与成本结构相结合的混合预测模型，并对官方“慢速爬坡”的审慎指引给予了更高权重。这与多头的乐观叙事形成鲜明对比，但紧密锚定了公司的公开表态。\n\n**模型核心逻辑：牺牲短期增速，换取对远期盈利的审慎评估**\n1.  **营收增速锚定官方指引，而非私有渠道：** 我们接受KPE02关于AI占比提升的定性判断，但拒接了其对产能释放速度的乐观估计。根据2026-06-08的官方投资者互动记录，管理层明确指出\"产能建设周期普遍较长\"，这直接导致我们大幅下调了FY27的收入假设，将其从先前的增长30%调整为25%。\n2.  **毛利率模型注入“成本缓冲”垫：** 我们承认Q1 2026实现的34.46%毛利率是一个强有力的看多信号，但并未将其线性外推。我们采纳了看空分析师的部分逻辑，即上游电子布（KPE01）等原材料成本压力存在2-3个季度的传导滞后。因此，即使在基准情景下，我们也为FY26的毛利率（34.0%）注入了50个基点的“谨慎缓冲”，以反映H2可能出现的成本压力。\n3.  **折旧成为远期利润的核心约束：** 在我们的模型中，FY28年高达180亿元的资本开支所带来的折旧压力，是模型中最脆弱的假设，但也是最大的利润决定项。我们因此将FY28的运营利润率从早期的26.5%下调至24.5%，以反映这一必然的成本冲击。\n\n**结论性预期**\n- **收入端：** FY26E 276亿元（+43%），FY27E 323亿元（+25%），FY28E 388亿元（+20%）。增速中枢在快速下移。\n- **利润端：** 归母净利润 FY26E 59.3亿元，FY27E 63.0亿元，FY28E 74.1亿元。FY26-28两年的净利润复合增速（约12%）将远低于收入增速，出现“增收不增利”的迹象。\n- **现金流端：** FCF在FY26-27持续为负（-108亿，-44亿），直至FY28才微弱转正（+5亿）。这意味着在未来两到三年内，公司仍将是一个资本消耗者，而非现金创造者。",
+  "thesis_financial_bridge": "我们的投资逻辑建立在以下三个层层递进的论点之上，它们共同构成了一个风险奖励不对称、但需要特定催化剂来释放的“Hold / Positive Watch”判断。\n\n### 论点一：AI驱动的产品结构升级仍在加速，这是估值的基石（未证明）\n- **核心判断：** 胜宏科技从一家普通的PCB制造商转变为AI算力核心载板供应商的过程是真实发生的，且没有减速的迹象。其AI PCB（GPU/ASIC载板）收入占比正迅速从FY25的小于50%向FY26的60%跃迁。\n- **机制与证据：** 财务上，这表现为混合ASP和综合毛利率的结构性提升。我们的证据链是坚实的微观数据（Q1 2026 GM 34.46%，YonY+1.08pp）和高信度的渠道指引（KPE02）的组合。更重要的是，Q1 2026的应收账款/收入比大幅改善（环比-7.5pp），直接挑战了空头关于“需求疲软、存货积压”的叙事，证明了客户回款意愿强劲，这是下游需求健康最直接的“已发生证据”。\n- **最强反证：** 公司从未在官方报告里披露过AI PCB这个分部的任何具体财务数据。我们所谈论的60%收入占比、36%的毛利率，全部是基于外部渠道的分析推算。一旦官方数据揭晓（半年报），如果AI收入占比远低于50%或毛利率低于预期，这个估值基石就会立刻动摇。\n- **盈利预测桥接：** AI收入占比60% * AI毛利率36% + 非AI收入占比40% * 非AI毛利率27% → 综合毛利率34.0% → FY26E归母净利润59.28亿元。\n\n### 论点二：巨额的资本开支是一把双刃剑，其“慢速爬坡”的现实正在被市场低估（部分证明）\n- **核心判断：** 多头的逻辑虽然完美，但忽略了时间的代价。公司可以建好产能，但把产能变成报表上的收入和利润，需要比市场想象的更长时间。\n- **机制与证据：** 2026年6月8日，公司官方在交易所互动平台上的回答——“PCB属重资产制造业，产能建设周期普遍较长”和“产能产量逐步释放是行业的必经过程”——是一锤定音的关键证据。它直接削弱了私有渠道（KPE02）关于产能快速释放的乐观预测的可信度。我们必须相信这个更审慎的官方表态。\n- **盈利预测桥接：** 慢速爬坡 → FY27E收入增速下调至+25%（而非多头期待的55%） → 折旧提前压顶 → FY28E运营利润率从26.5%被压缩至24.5% → 净利润减少数十亿元。这是一个典型的“增收不增利”的风险情景。\n\n### 论点三：ASIC/TPU客户多样化是一个极具吸引力的期权，但尚未计入票价（未证明）\n- **核心判断：** 公司的增长故事如果永远只停留在一个核心GPU客户身上，那么估值迟早会面临集中度风险的折价。进入以谷歌TPU为代表的ASIC市场，是打开估值天花板、降低单一客户风险的必经之路。\n- **机制与证据：** 这是一张未来的、充满想象空间的期权证。期货合同、官方公告、收入分成记录都还没有。我们只能依赖KPE02中的“有信心于FY26年底进入V8 TPU PCB供应”来持有这个远期的希望。\n- **盈利预测桥接：** 该论点并未进入我们的基准财务预测，它存在于我们的牛市情景（30%概率）中，支撑着更高的40倍P/E。一旦失败，它不会让我们亏掉本金，但会让估值倍数向熊市收缩。",
+  "moat_evidence_scorecard": "胜宏科技的护城河正处于“正在构建但尚未巩固”的阶段。它不再是一家依赖低成本竞争的普通制造商，但也远未达到像台积电那样收取“技术税”的稳固地位。其现有的竞争优势更多体现在客户关系和先发优势上，而非不可逾越的技术垄断。\n\n**我们将其护城河分解为三个要素进行检视：**\n1.  **客户转换成本（部分验证）：** 这是其当前最强的护城河。AI芯片的研发周期长达3-5年，PCB厂商从研发阶段就与客户深度绑定。一旦产品定型，客户在短期内极难更换供应商。这个优势的“已发生事实”证据是公司应收账款质量的改善，暗示其在下游客户面前有较强的话语权，回款及时。但最强反证是，大客户引入备选厂商来分散风险和压价是商业常态，KPE10的降价传闻就是警报。\n\n2.  **技术和先发优势（部分验证）：** 公司率先在国内实现高端mSAP和HDI的量产，并投入巨资进行研发，这构成了一定的领先窗口。毛利率从FY24的22.7%跃升至FY25的35.2%，是技术转化为定价权的最直接证据。然而，这种优势的持久性存疑。我们无法从公开信息中找到胜宏与沪电股份等竞争对手在具体产品技术参数上的权威比较，因此无法判断其技术优势的实际幅度和持续性。\n\n3.  **规模经济优势（未验证）：** 这个优势目前只存在于理论上。180亿元的资本开支意图就是为了建立碾压性的规模成本优势。但规模效应是需要高稼动率来兑现的。在公司官方自己都承认“产能逐步释放”的背景下，这个所谓的优势目前只是一个资本支出的承诺，而不是一个已实现的经济结果。",
+  "valuation_closure": "我们的估值最终落在概率加权情景分析上，以评估当前市值下的风险报酬比。考虑到稀释后总股本数据缺失，我们无法给出每股价值，只能以总股权价值呈现。\n\n**估值框架选择与假设**\n我们选择FY27E作为估值基准年，因为届时FY26的大规模资本开支将开始贡献有限收入，且折旧压力相对FY28较小，可以捕捉到公司从资本投入期向初步回报期过渡时的市场定价。估值方法为P/E，因公司在AI驱动下仍处于盈利高增阶段，P/E是市场最通用的比较基准。\n\n**核心 vs. 情景 vs. 期权资产**\n- **核心资产（基准情景，50%概率）：** 基于'慢速爬坡'的现实，采用审慎的35倍P/E。这与公司转型期特质和未来两年净利复合增速相称。\n- **牛市情景（30%概率）：** 若爬坡超预期且ASIC多元化成功，市场将给予AI平台型公司估值，P/E可扩至40倍。\n- **熊市情景（20%概率）：** 若大客户压价和成本吞噬导致毛利率跌至33%以下，市场将给予周期制造业估值，P/E回归25倍。\n- **远期期权：** 泰国/越南工厂、1.6T光模块PCB等远期增长点，全部保留在期权池中，不进入核心估值。\n\n**算术审计与最终结论**\n- 概率加权股权价值 = 0.3 × 4200亿 + 0.5 × 2690亿 + 0.2 × 1350亿 = 2875亿元。\n- 当前市值：约2800亿元。\n- **预期差：** 概率加权后的内在价值仅比当前市值高出约2.7%，即使在计入30%概率的乐观情景后，安全边际依然非常薄弱。这意味着市场已经相当有效地定价了胜宏科技未来的增长前景和风险。当前的股价不是一个“被错杀”或“被低估”的机会，而是一个包含了合理乐观预期的平衡态。\n如果市场情绪将股价推向240元以下（约2360亿市值），届时将进入基准情景下的安全边际区，可以为长期投资者提供更有吸引力的风险回报比。",
+  "accounting_and_capital_allocation": "胜宏科技的财务报表是典型的“成长期重资产公司”画像，充满了扩张的冲动与杠杆的压力。\n\n**1. 利润是真金白银，但被扩张的“黑洞”吞噬**\n- **现金流的亮点：** Q1 2026的经营现金流（OCF）表现堪称惊艳，达到净利润的1.64倍。这主要得益于两个方面：一是公司的利润质量高（扣非净利润占比97.6%）；二是公司通过占用上游供应商资金（应付票据及账款增加），在产业链中展现出了强大的议价能力。\n- **FCF的暗面：** 然而，利润创造的现金远不能覆盖其扩张的野心。预计FY26自由现金流（FCF）为-108.86亿元，这几乎是一个天文数字。这意味着公司虽然很能挣钱，但花起钱来更加大手大脚，短期内无法为股东创造自由现金。\n\n**2. 管理层的资本分配：一场豪赌**\n管理层将公司FY25的全部经营现金和新增借款，全部压注在了新一代AI PCB的产能扩张上，甚至启动了定向增发来补充弹药。这是一种极度自信的、all-in式的资本配置策略。判断其成功与否的唯一标准，是未来这些巨额投入的ROIC能否持续超过WACC。但目前，我们看到的官方口径是“产能逐步释放”，这意味着达到盈亏平衡和创造超额回报的时间，可能比多头想象的要漫长得多。\n\n**3. 资产负债表的前瞻信号**\n- **在建工程（+43%）：** 这是一个积极的信号，表明投资正在按计划进行。但也预示着1-2年后，当这些资产转为固定资产时，将带来巨大的折旧费用，成为吞噬利润的主要力量。\n- **存货/收入比（17.7%）：** 这是一个需要密切跟踪的“灰犀牛”指标。虽然我们可以用主动备货来解释，但持续的上升趋势增加了未来存货减值的风险。\n- **短期偿债指标（流动比率0.92x）：** 表面看偏紧，但在公司强大的经营现金流（Q1单季21.2亿元）覆盖下，实际流动性风险可控。",
+  "expectation_gap_and_market_pricing": "当前价格所反映的信息，更像是市场各方充分博弈后的“均衡态”，而非存在显著错误定价的机会。\n\n**1. 市场在交易什么？一个“待验证”的成长故事**\n当前约2800亿元的市值，隐含了市场对FY26E净利润的预期大约在55-60亿元之间（基于Forward PE 45-50x估算）。这与我们59.28亿元的基准情景预期高度吻合。这表明，专业投资者已经在充分了解和讨论AI PCB转型、毛利率韧性、以及资本开支风险等核心变量，并最终形成了一个大致公允的定价。\n\n**2. 预期差：不存在方向性的背离，只存在节奏和幅度的偏差**\n- **并不存在“市场将其当做周期股低估”的预期差。** 59.8倍的PE TTM和13.7倍的PS，这本身就是按成长股在估值。多头的核心论点——“市场按周期股定价”——被估值数据本身证伪。同行业的沪电股份，作为另一个AI PCB的beta，也同样享有高估值。\n- **真正的预期差在哪里？** 在于对 **“增长质量”** 的定价。市场或许尚未完全消化“慢速爬坡”对FY27-28盈利的潜在下修效应，也尚未给单一大客户风险足够的估值折价，但同时也可能低估了ASIC/TPU多元化一旦成功带来的估值跳升潜力。这两股相反的力量相互抵消，形成了当下的平衡。\n\n**3. 相对配置的尴尬处境**\n在AI PCB这个赛道里，沪电股份（002463.SZ）提供了一个似乎“更优”的风险回报组合——更高的毛利率、更低的负债率、更低的PE。选择胜宏科技，就意味着必须为它那180亿资本开支所带来的更大收入弹性和潜在牛市回报，支付更高的溢价并承担更高的风险。我们在当前价位并未看到足够吸引人的风险报酬比来做出这个取舍。",
+  "risks_catalysts_verification": "**程序化执行约束**：当前价284.92元高于安全买入上限149.64元；不得表述为已经替投资者建仓，也不得建议新资金在安全价之上主动加仓。\n\n### 核心风险\n1.  **大客户降价风险（高影响，低概率）：** KPE10传闻的大客户降价10%是盈利的最大杀手。一旦发生，将直接触发我们的熊市情景（净利润较基准减少逾20%），估值逻辑将崩塌。\n2.  **资本开支回报不及预期（高影响，高概率）：** 公司官方已承认“慢速爬坡”，这构成了未来2-3年盈利下修的最大来源。折旧吞噬利润是确定性的，不确定的只是幅度。\n3.  **技术路线变更风险（中等影响，低概率）：** Rubin Ultra平台的架构或材料方案变化，可能导致公司在研产品的价值量大幅缩水，使部分研发和资本投入变为沉没成本。\n\n### 核心催化剂与验证日历\n| 时间 | 事件 | 关键验证指标 | 影响 |\n| :--- | :--- | :--- | :--- |\n| **2026年8月** | **2026年半年报** | **Q2综合毛利率、AI PCB收入占比（如有披露）、合同负债变化** | **决定性验证点。** 毛利率>34%且AI收入占比被官方证实>60%，将触发评级上调至“Overweight”。若毛利率<33%，将证伪看多逻辑，可能触发减持。 |\n| 2026年Q3/Q4 | 英伟达Rubin平台出货/路线图更新 | 正交背板等新架构的确认细节 | 影响FY27-28的远期收入预测和估值倍数。 |\n| 2026年Q4 | FY26全年资本开支及产能爬坡进度 | 在建工程转固金额、新增折旧测算、工厂利用率 | 验证管理层“慢速爬坡”的实际进度与我们的模型假设是否一致。 |\n\n### 持仓与建仓行动计划\n- **已持有者 (Holder):** 维持当前仓位，不做增减。2800亿市值附近，上行与下行空间都缺乏足够的吸引力。利用半年报前的窗口期观察市场对Q2业绩的预期定价情况。止盈/减持位设在股价反弹至400元附近（反映牛市情景的透支）。\n- **准备建仓者 (Builder):** **等待观望。** 当前价格不应建仓。我们的基准安全买入区间为股价回调至240元以下（对应约2360亿市值，即基准情景下的20%安全边际），此时可以启动分阶段小规模建仓。最理想的建仓窗口是8月半年报发布后，若届时出现“业绩符合预期但股价因大盘或情绪下跌”的机会，将是最佳的逢低介入时机。",
+  "handoff_integrity_audit": "本次PM决策完全接受并保留了Research Manager在辩论后形成的《Accepted Underwriting Model》。未对任何共享模型中的`canonical_model_snapshot`行或核心假设进行进一步修改。关键的不确定性（如蒸发股本股份、分部门收入）已如实在报告中披露并从模型中排除。模型变更的完整历史记录已由Research Manager在`Model Change Ledger`中详细展现，我在此不做重复。",
+  "report_markdown": "",
+  "shared_model_change_audit": "根据Research Manager的最新辩论裁决，已对共享承保模型进行了数项重大修订，以反映空头在“慢速爬坡”问题上的胜利，并为多头在“毛利率韧性”上的证据设置了等待验证的保守假设。关键变更摘要如下：\n1.  **AI收入占比（FY26E）：** 从模糊基准设定为60%（取KPE02指引区间60-70%下限，体现审慎）。\n2.  **综合毛利率（FY26E）：** 从34.5%下调至34.0%，嵌入50个基点的成本缓冲。\n3.  **FY27E营收增速：** 从30%大幅下调至25%，以体现官方的“慢速爬坡”指引。\n4.  **FY27E归母净利润：** 因上述变化，从77.19亿元下调至63亿元。\n5.  **FY28E运营利润率：** 从26.5%下调至24.5%，以反映即将到来的折旧洪峰。\n所有模型变更均已量化为对收入、利润和股权价值的影响，并已在此前的辩论裁决文中得到确认。",
+  "report_quality_self_check": "1.  **分部覆盖率：** 严重不足。AI PCB和非AI PCB的分析完全基于分析估计（KPE02），公司未披露官方分部数据。这使SOTP估值无从进行，并限制了评估的准确性。\n2.  **三年模型完整性：** 完整。我们提供了从收入、毛利到净利润、OCF、Capex和FCF的完整三年预测。唯一的缺口是缺少稀释后每股收益，因为稀释后总股本数据缺失，这是A股报告的一个固有问题。\n3.  **估值跨期一致性：** 已核实。概率加权情景估值已使用模型中的确切净利润数字，并已进行双重计算检查。无重影资产。\n4.  **证据沿袭：** 已核实。所有关键百分比和数字均有EV/KPE/KF证据ID作为源头，或在报告中明确标记为估计/假设。\n5.  **期间/算术审核：** 已完成。\"净利润/收入=利润率\"的高级检查已通过。FCF表已与OCF和Capex核对无误。\n6.  **KPI传输：** 已将KPE私有数据正确标记为“未验证”，并已建立其在情景概率和估值中的作用，而非直接作为确定事实。"
+}

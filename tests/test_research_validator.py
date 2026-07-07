@@ -694,7 +694,13 @@ def test_structured_audit_flags_unused_sell_side_expectation_observation(tmp_pat
         "underwriting_packet": {},
         "segments": [],
         "kpe_impacts": [],
-        "sell_side_intelligence": [{"intelligence_id": "KSI01"}],
+        "sell_side_intelligence": [
+            {
+                "intelligence_id": "KSI01",
+                "valuation_facts": "target_price=100",
+                "forecast_facts": "2027E EPS 5.0",
+            }
+        ],
         "conflicts": [],
     }
     (context_dir / "structured_research.json").write_text(
@@ -832,6 +838,30 @@ def test_position_instruction_cannot_exceed_deterministic_safe_ceiling(tmp_path)
     issues = audit_position_valuation_consistency(
         tmp_path,
         "计划建仓者可在120-130元区域试探性买入。",
+    )
+
+    assert [issue.section for issue in issues] == ["position_valuation_consistency"]
+
+
+def test_initial_position_claim_is_rejected_when_current_price_exceeds_safe_ceiling(tmp_path):
+    portfolio_dir = tmp_path / "5_portfolio"
+    portfolio_dir.mkdir()
+    (portfolio_dir / "canonical_decision.json").write_text(
+        json.dumps(
+            {
+                "safe_valuation_assumptions": {"current_price_cny": 374.51},
+                "deterministic_valuation": {
+                    "status": "closed",
+                    "safe_buy_price_ceiling_cny": 336.07,
+                },
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    issues = audit_position_valuation_consistency(
+        tmp_path,
+        "首仓40%已于374.51元附近建立。",
     )
 
     assert [issue.section for issue in issues] == ["position_valuation_consistency"]

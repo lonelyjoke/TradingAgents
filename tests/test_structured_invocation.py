@@ -15,6 +15,8 @@ from tradingagents.agents.managers.portfolio_manager import (
     _analytical_structure_issues,
     _canonical_handoff_issues,
     _editorial_revision_prompt,
+    _enforce_forecast_methodology,
+    _normalize_sell_side_lineage,
 )
 from tradingagents.agents.managers.research_manager import (
     _complete_unchanged_handoff_lines,
@@ -184,6 +186,7 @@ def test_sell_side_schema_renders_all_six_company_depth_contracts():
     )
 
     rendered = render_sell_side_pm_decision(decision)
+    assert "中性（Hold）" in rendered
 
     for heading in (
         "## 一、投资结论",
@@ -255,6 +258,80 @@ def test_editorial_revision_reuses_draft_without_original_full_prompt():
     assert "recreate unaffected sections from raw module dumps" in prompt
 
 
+def test_forecast_methodology_is_downgraded_when_segment_rows_do_not_reconcile():
+    payload, notes = _enforce_forecast_methodology(
+        {
+            "autonomous_forecast_model": "本报告采用自下而上的分部三年预测模型。",
+            "segment_economics": [
+                {"business_unit": "动力电池", "valuation_treatment": "core"},
+                {"business_unit": "储能电池", "valuation_treatment": "core"},
+            ],
+        },
+        {
+            "underwriting_packet": {
+                "forecast_lines": [
+                    {
+                        "segment": "consolidated",
+                        "year_1_value": 1,
+                        "year_2_value": 2,
+                        "year_3_value": 3,
+                    }
+                ]
+            }
+        },
+    )
+
+    assert "混合模型" in payload["autonomous_forecast_model"]
+    assert "自下而上" not in payload["autonomous_forecast_model"]
+    assert notes
+
+
+def test_sell_side_lineage_replaces_invented_alias_with_exact_ksi_id():
+    payload, notes = _normalize_sell_side_lineage(
+        {
+            "sell_side_expectation_matrix": [
+                {
+                    "source_ids": ["KSI_dongwu"],
+                    "institution": "东吴证券",
+                    "published_at": "2026-07-01",
+                    "forecast_and_valuation": "目标价632元，2026E净利润962亿元",
+                    "comparison_with_our_model": "本模型882亿元",
+                }
+            ],
+            "alternative_intelligence_decisions": [
+                {
+                    "kpe_ids": ["KPE01"],
+                    "source_type": "channel_check",
+                    "evidence_grade": "B_private_edge",
+                    "public_crosscheck": "待核验。",
+                }
+            ],
+        },
+        {
+            "sell_side_intelligence": [
+                {
+                    "intelligence_id": "KSI02",
+                    "kpe_ids": "KPE01",
+                    "institution": "东吴电新",
+                    "valuation_facts": "target_price=632元",
+                    "forecast_facts": "2026E净利润962亿元",
+                }
+            ],
+            "known_kpe_ledger": {"KPE01": {"source_type": "sell_side_push"}},
+        },
+    )
+
+    assert payload["sell_side_expectation_matrix"][0]["source_ids"] == [
+        "KSI02",
+        "KPE01",
+    ]
+    alt = payload["alternative_intelligence_decisions"][0]
+    assert alt["source_type"] == "sell_side_view"
+    assert alt["evidence_grade"] == "C_market_narrative"
+    assert "不构成独立交叉验证" in alt["public_crosscheck"]
+    assert notes
+
+
 def test_deterministic_pm_engine_calculates_eps_fcf_scenarios_and_safe_price():
     payload = {
         "rating": "Hold", "rating_posture": "Hold / Positive Watch", "research_readiness": "partial",
@@ -272,7 +349,19 @@ def test_deterministic_pm_engine_calculates_eps_fcf_scenarios_and_safe_price():
         "moat_evidence_scorecard": "Moat evidence.", "valuation_closure": "Method limits.",
         "accounting_and_capital_allocation": "Accounting quality.",
         "expectation_gap_and_market_pricing": "Expectation gap.",
-        "risks_catalysts_verification": "Risk and verification.",
+        "risks_catalysts_verification": "首仓40%已于126元附近建立。Risk and verification.",
+        "handoff_change_rows": [
+            {
+                "line_id": "2028E_ocf_to_ni_ratio",
+                "old_value": 1.6,
+                "new_value": 1.4,
+                "unit": "ratio",
+                "evidence_ids": ["EV-CASH"],
+                "reason": "working-capital risk",
+                "eps_fcf_valuation_impact": "recalculate OCF and FCF",
+                "disposition": "accepted",
+            }
+        ],
         "handoff_integrity_audit": "Preserved.", "shared_model_change_audit": "No silent changes.",
         "report_quality_self_check": "Checked.",
         "business_model_mechanisms": [
@@ -322,6 +411,17 @@ def test_deterministic_pm_engine_calculates_eps_fcf_scenarios_and_safe_price():
                     "execution_haircut_pct": 0,
                     "assumption_summary": "first commercial order remains unverified",
                     "evidence_ids": ["KPE01"],
+                },
+                {
+                    "name": "Bull volume increment",
+                    "metric_name": "incremental_equity_value",
+                    "metric_value_cny_mn": 3000,
+                    "valuation_multiple": 1,
+                    "probability_pct": 50,
+                    "ownership_pct": 100,
+                    "execution_haircut_pct": 0,
+                    "assumption_summary": "Bull versus Base volume increment already in scenarios",
+                    "evidence_ids": ["KPE02"],
                 }
             ],
             "scenarios": [
@@ -336,20 +436,30 @@ def test_deterministic_pm_engine_calculates_eps_fcf_scenarios_and_safe_price():
     line_map = {(row.period, row.metric): row for row in decision.canonical_model_snapshot}
 
     assert round(line_map[("2028E", "eps")].value, 2) == 6.00
-    assert line_map[("2028E", "fcf")].value == 10000
+    assert line_map[("2028E", "ocf")].value == 16800
+    assert line_map[("2028E", "ocf")].status == "calculated"
+    assert line_map[("2028E", "fcf")].value == 13800
     assert decision.deterministic_valuation.status == "closed"
     assert round(decision.deterministic_valuation.optionality_per_share_cny, 2) == 0.50
     assert decision.deterministic_valuation.optionality_rows[0]["equity_value_cny_mn"] == 1000
+    assert len(decision.deterministic_valuation.optionality_rows) == 1
     assert round(decision.deterministic_valuation.safe_buy_price_ceiling_cny, 2) == 80.00
     assert any("added deterministic 2028E EPS" in note for note in notes)
+    assert any("excluded overlapping optionality" in note for note in notes)
+    assert "高于程序化安全买入上限" in decision.rating_posture
+    assert "首仓40%" not in decision.risks_catalysts_verification
     rendered = render_sell_side_pm_decision(decision)
+    assert "| 基准 |" in rendered
+    assert "incremental_equity_value" not in rendered
     assert "安全买入价上限：80元" in rendered
     assert "期权价值：0.5元/股" in rendered
     assert "程序化期权价值" in rendered
     assert "AIDC SST" in rendered
     assert "卖方预测、估值与预期差" in rendered
     assert "KSI01/KPE01" in rendered
-    assert "single_broker" in rendered
+    assert "单家机构" in rendered
+    assert "私域文字信息" in rendered
+    assert "single_broker" not in rendered
     assert "商业模式如何运转" in rendered
     assert "护城河的形成机制与经济结果" in rendered
     assert "另类信息增量（知识星球）" not in rendered
@@ -377,6 +487,28 @@ def test_handoff_check_detects_only_undocumented_material_changes():
     pm["handoff_change_rows"] = [
         {"line_id": "2027e_eps", "disposition": "accepted"}
     ]
+    assert _canonical_handoff_issues(manager, pm) == []
+
+
+def test_handoff_check_allows_program_recalculated_ocf():
+    manager = {
+        "canonical_model_snapshot": [
+            {"line_id": "2027e_ocf", "value": 158200, "unit": "CNY mn"},
+        ]
+    }
+    pm = {
+        "canonical_model_snapshot": [
+            {
+                "line_id": "2027e_ocf",
+                "value": 154420,
+                "unit": "CNY mn",
+                "status": "calculated",
+                "formula": "OCF = parent net profit x accepted OCF/NI ratio (1.4x)",
+            },
+        ],
+        "handoff_change_rows": [],
+    }
+
     assert _canonical_handoff_issues(manager, pm) == []
 
 

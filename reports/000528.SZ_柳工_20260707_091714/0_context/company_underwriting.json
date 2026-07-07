@@ -1,0 +1,1219 @@
+{
+  "schema_version": 2,
+  "symbol": "000528.SZ",
+  "as_of_date": "2026-07-07",
+  "forecast_years": [
+    "2026E",
+    "2027E",
+    "2028E"
+  ],
+  "research_readiness": "partial",
+  "readiness_reasons": [
+    "diluted share count not reported and cannot be deterministically derived from provided evidence; EPS, FCF per share, and valuation per share depend on downstream share-count resolution",
+    "segment-level gross profit, operating profit, and detailed volume/ASP/mix data not disclosed; profitability assumptions are estimated from consolidated drivers",
+    "commodity and input-cost evidence is not mapped; margin sensitivity to steel, components, and energy remains unverified",
+    "industry cycle evidence is labelled as insufficient; cycle stage classification relies on external KPE sentiment rather than hard supply/demand/price data",
+    "One or more filing-reported segments required deterministic restoration.",
+    "Material segment three-year driver lines are missing: 工程机械",
+    "Bull/base/bear per-share valuation is incomplete.",
+    "Valuation has not closed from mutually exclusive buckets to per-share fair value.",
+    "Three-year values remain missing for consolidated line(s): EPS"
+  ],
+  "company_model": {
+    "model_profile": "corporate",
+    "operating_model_family": "volume_price_cost",
+    "business_archetype": "Product manufacturer: designs, produces, and sells a broad range of construction and mining machinery, prestressing systems, and rental services. Revenue is driven by unit shipments, average selling prices, and product mix across domestic and export markets.",
+    "value_proposition_and_customers": "Sells branded excavators, loaders, bulldozers, cranes, aerial work platforms, and components to infrastructure, mining, and construction end-users through dealerships and direct sales. Overseas sales (47.6% of 2025 revenue) are growing faster than domestic, driven by emerging-market infrastructure demand and electric-machinery adoption.",
+    "revenue_equation": "Revenue = Σ (Equipment shipments_i × ASP_i) + Parts & service + Prestress product sales + Rental income",
+    "profit_equation": "Gross profit = Revenue - Raw materials - Direct labor - Manufacturing overhead - Equipment depreciation; Operating profit = Gross profit - Selling expenses - G&A - R&D; Net profit = Operating profit - Net finance costs - Tax - Minority interests",
+    "cash_flow_equation": "OCF = Net profit + Depreciation ± Working capital (receivables, inventory, payables, contract liabilities); FCF = OCF - Capex. The company carries significant receivables from dealer floor and credit sales, and inventory cycles are long for large machinery.",
+    "capital_intensity_and_reinvestment": "Asset-heavy manufacturing with capacity expansion, overseas production bases, and R&D for electrification. Capex tends to be 3-5% of revenue but can increase during new plant construction. Working capital absorbs cash during upcycles when receivables and inventory build.",
+    "diluted_share_count_mn": null,
+    "share_count_period": "need verified total share count from 2025 annual report or Tushare daily basic",
+    "share_count_evidence_id": "",
+    "share_count_source_type": "unresolved",
+    "share_count_formula": "Total share count (10,000 shares) from Tushare total_share; cross-check with market cap / closing price, or parent net profit / EPS from filing",
+    "share_count_cross_checks": [
+      "If Tushare total_share is unavailable, use market cap (EV044) divided by closing price on 2026-07-06, but closing price not supplied.",
+      "Parent net profit 1,609 mn (EV012) divided by filing-text EPS would give share count, but filing EPS not extracted."
+    ],
+    "moat_mechanisms": [
+      "Scale and product breadth: one of China's oldest and largest full-line construction machinery makers, offering a wide range of equipment that creates dealer and fleet customer stickiness.",
+      "Brand and distribution: 67-year history, recognized brand in China and growing presence in 23+ overseas markets with local manufacturing or assembly.",
+      "R&D and technology: dedicated electrification and smart machinery development (e.g., electric loaders, autonomous mining trucks)."
+    ],
+    "moat_to_financial_transmission": [
+      "Brand and breadth → higher ASP and repeat orders → gross margin premium over smaller peers.",
+      "Scale → lower unit fixed-cost absorption → operating margin stability through cycles.",
+      "Distribution network → share gains in overseas markets → volume growth and geographic diversification."
+    ],
+    "structural_risks": [
+      "Domestic construction machinery demand is tied to infrastructure spending, real estate, and commodity cycles; a slowdown can sharply reduce sales and increase receivables risk.",
+      "Significant foreign-currency exposure: ~48% revenue from overseas with raw material and production costs largely in CNY; forex volatility impacts margins (Q1 2026 finance-expense ratio spiked 2.15pp).",
+      "Intense competition from Sany, XCMG, Zoomlion, and global players pressures ASP and market share, especially during downturns."
+    ],
+    "key_unknowns": [
+      "What is the exact diluted share count?",
+      "How much of the Q1 margin compression is one-off forex vs sustainable cost pressure?",
+      "What is the realized price increase effect from the announced 2026 price hikes?",
+      "What are the separate gross margins for the core construction machinery segment vs. prestress and rental?"
+    ],
+    "evidence_ids": [
+      "EV021",
+      "EV022",
+      "EV023",
+      "EV025",
+      "EV026",
+      "EV029",
+      "EV030",
+      "EV012",
+      "EV011",
+      "EV014",
+      "EV017",
+      "EV044",
+      "KPE02",
+      "KPE03"
+    ]
+  },
+  "business_unit_map": [
+    {
+      "unit_id": "constr_machinery",
+      "unit_name": "工程机械行业",
+      "unit_type": "reported_segment",
+      "disclosure_basis": "reported",
+      "parent_unit": "company",
+      "economic_role": "Core equipment manufacturing: earthmoving, mining, concrete, aerial work platforms, and parts. Dominates revenue and profit.",
+      "revenue_driver_equation": "Revenue = Shipments (units) × ASP, driven by domestic replacement cycle, overseas penetration, and electrification adoption.",
+      "profit_driver_equation": "Segment gross profit = Revenue - steel/components - direct labor - manufacturing overhead; margin benefits from scale, localization, and price realization.",
+      "cash_and_capital_equation": "Working capital intensive: significant receivables from dealer floor plans and installment sales; inventory cycles tied to production lead times. Capex supports new product lines and overseas factories.",
+      "reported_metrics": [
+        "Revenue",
+        "Revenue growth rate",
+        "Share of total revenue"
+      ],
+      "evidence_ids": [
+        "EV029",
+        "EV030",
+        "KPE01",
+        "KPE02",
+        "KPE03"
+      ],
+      "missing_inputs": [
+        "Segment gross margin",
+        "Segment operating profit",
+        "Product-level shipment volumes and ASPs",
+        "Order backlog"
+      ],
+      "next_verification": "Check H1 2026 interim report for segment revenue, gross margin, and management commentary on price and volume trends."
+    },
+    {
+      "unit_id": "prestress",
+      "unit_name": "预应力业务",
+      "unit_type": "reported_segment",
+      "disclosure_basis": "reported",
+      "parent_unit": "company",
+      "economic_role": "Prestressing anchorages, strand, and construction equipment for bridges, tunnels, and infrastructure. Stable, low-growth niche.",
+      "revenue_driver_equation": "Revenue ≈ Project deliveries × contract size; driven by domestic infrastructure investment.",
+      "profit_driver_equation": "Likely project-based margin sensitive to raw material prices (steel wire).",
+      "cash_and_capital_equation": "Project receivables typical; lower capex intensity than core machinery.",
+      "reported_metrics": [
+        "Revenue",
+        "Revenue growth rate"
+      ],
+      "evidence_ids": [
+        "EV029"
+      ],
+      "missing_inputs": [
+        "Segment gross margin",
+        "Segment operating profit",
+        "Order book or pipeline"
+      ],
+      "next_verification": "Review 2025 annual report notes for prestress segment profitability."
+    },
+    {
+      "unit_id": "rental",
+      "unit_name": "租赁业务",
+      "unit_type": "reported_segment",
+      "disclosure_basis": "reported",
+      "parent_unit": "company",
+      "economic_role": "Rental of construction machinery; provides recurring revenue and supports used-equipment lifecycle.",
+      "revenue_driver_equation": "Revenue = Fleet size × Utilization × Rental rate per unit/time.",
+      "profit_driver_equation": "Gross profit = Rental revenue - Fleet depreciation - Maintenance; margin declining (36.96% in 2025, -2.29pp YoY).",
+      "cash_and_capital_equation": "Capital-intensive fleet acquisition; depreciation is significant; cash flows from rental collections.",
+      "reported_metrics": [
+        "Revenue",
+        "Gross margin",
+        "Gross margin change"
+      ],
+      "evidence_ids": [
+        "EV030"
+      ],
+      "missing_inputs": [
+        "Revenue growth rate",
+        "Fleet size and utilization",
+        "Capex vs. depreciation"
+      ],
+      "next_verification": "Compare rental revenue growth with industry peers and check any impairment or fleet write-downs."
+    },
+    {
+      "unit_id": "geo_domestic",
+      "unit_name": "中国境内",
+      "unit_type": "geography",
+      "disclosure_basis": "analytical",
+      "parent_unit": "company",
+      "economic_role": "Domestic China market for all segments. Growth from equipment replacement cycle and policy support.",
+      "revenue_driver_equation": "Reporting split only; revenue attached to underlying product segments.",
+      "profit_driver_equation": "Margins likely lower than overseas due to competitive intensity; reported gross margin 15.75% (2025), -1.63pp YoY.",
+      "cash_and_capital_equation": "Receivables concentrated in domestic dealers; longer collection cycles.",
+      "reported_metrics": [
+        "Consolidated domestic revenue",
+        "Domestic gross margin"
+      ],
+      "evidence_ids": [
+        "EV030"
+      ],
+      "missing_inputs": [
+        "Segment profit contribution by geography",
+        "Working capital split"
+      ],
+      "next_verification": ""
+    },
+    {
+      "unit_id": "geo_overseas",
+      "unit_name": "中国境外",
+      "unit_type": "geography",
+      "disclosure_basis": "analytical",
+      "parent_unit": "company",
+      "economic_role": "Export and overseas subsidiaries covering 23+ countries. High growth (14.78% YoY in 2025) and higher gross margin (29.73%, +1.16pp).",
+      "revenue_driver_equation": "Reporting split only.",
+      "profit_driver_equation": "Gross margin premium driven by stronger pricing power and higher parts content.",
+      "cash_and_capital_equation": "Currency risk on receivables and cash; working capital may include longer transit times but often better payment terms.",
+      "reported_metrics": [
+        "Consolidated overseas revenue",
+        "Overseas gross margin"
+      ],
+      "evidence_ids": [
+        "EV030"
+      ],
+      "missing_inputs": [
+        "Net profit contribution of overseas operations",
+        "Forex sensitivity details"
+      ],
+      "next_verification": ""
+    },
+    {
+      "unit_id": "BU09",
+      "unit_name": "工程机械",
+      "unit_type": "reported_segment",
+      "disclosure_basis": "reported",
+      "parent_unit": "company",
+      "economic_role": "Filing segment restored after structured evidence reconciliation.",
+      "revenue_driver_equation": "",
+      "profit_driver_equation": "",
+      "cash_and_capital_equation": "",
+      "reported_metrics": [],
+      "evidence_ids": [],
+      "missing_inputs": [
+        "economic sub-unit driver equations require analyst completion"
+      ],
+      "next_verification": ""
+    }
+  ],
+  "segment_models": [
+    {
+      "segment": "工程机械行业",
+      "products_or_services": "Excavators, loaders, bulldozers, mining trucks, concrete machinery, aerial work platforms, electric equipment, and aftermarket parts.",
+      "customers_and_channel": "Infrastructure contractors, mining companies, equipment rental firms, government projects; sold through dealer networks and direct sales, both domestic and international.",
+      "revenue_weight_pct": 90.7,
+      "profit_weight_pct": null,
+      "base_period": "2025年度",
+      "base_revenue_value": 30060.54,
+      "base_revenue_unit": "CNY mn",
+      "base_revenue_growth_pct": 11.25,
+      "base_margin_pct": null,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [
+        "Domestic equipment replacement cycle (machinery aged 8-10 years)",
+        "Overseas emerging-market infrastructure investment",
+        "Global mining capex",
+        "Electrification adoption driving fleet refresh",
+        "Export competitiveness of Chinese brands"
+      ],
+      "industry_supply_and_capacity": "Chinese construction machinery industry is consolidated among top 4-5 players; capacity generally sufficient but high-end and overseas capacity being selectively expanded. Global supply chains for components (engines, hydraulics) are stable but subject to trade tensions.",
+      "volume_share_utilization": "Volume growth 11.25% in 2025; 5M 2026 excavator domestic sales +39% YoY (KPE01, KPE02). Utilization tied to end-demand; no direct utilization data. Market share likely gaining in overseas due to value pricing and distribution expansion.",
+      "price_asp_take_rate": "ASP: management announced price hikes across excavators, cranes, and electric loaders in Q2 2026; full effect expected in H2 2026 (KPE03). Parts and service revenue provide incremental stable margins.",
+      "unit_cost_and_input_prices": "Key inputs: steel, engines, hydraulics, tires. Steel prices stable to declining in 2026; hedge through long-term contracts. Labor costs rising modestly. Forex impacts cost of imported components.",
+      "margin_and_operating_leverage": "Q1 2026 gross margin 21.31% (-0.7pp YoY) shows temporary FX and input cost pressure. Operating leverage should improve as volume grows and price hikes flow through; management guides for improving profitability.",
+      "working_capital_and_cash_conversion": "Receivables/revenue 35.8% (Q1 2026), inventory/revenue 24.8%, both decreased slightly YoY. OCF/net profit -0.90 in Q1 indicates seasonal working-capital build, typical for the industry. Full-year cash conversion expected to be positive.",
+      "prosperity_level": "recovery_upcycle",
+      "marginal_direction": "improving",
+      "causal_analysis": "Domestic replacement demand and strong exports drive volume growth; price hikes provide ASP tailwind; SG&A leverage amplifies earnings. Main risk is forex volatility and potential slowdown in overseas large-project approvals.",
+      "valuation_treatment": "Core earnings engine; traded at PE 10.8x TTM, low within 5-year range (14.8th percentile). Re-rating potential if margin recovery materialises.",
+      "strongest_counterevidence": [
+        "Q1 2026 gross margin and operating margin both contracted YoY despite revenue growth, suggesting cost pressures are not yet offset by price.",
+        "Finance expense ratio surged 2.15pp YoY, indicating significant forex headwind.",
+        "Industry cycle evidence is insufficient to confirm a sustainable upturn."
+      ],
+      "evidence_ids": [
+        "EV029",
+        "EV030",
+        "EV014",
+        "EV015",
+        "EV017",
+        "KPE01",
+        "KPE02",
+        "KPE03"
+      ],
+      "missing_inputs": [
+        "Segment gross margin trajectory",
+        "Product-wise shipment and ASP data",
+        "FX exposure quantification"
+      ],
+      "next_verification": "H1 2026 report: gross margin, operating margin, revenue composition, management commentary on price hikes and forex impact."
+    },
+    {
+      "segment": "预应力业务",
+      "products_or_services": "Prestressing anchors, strand, jacks, and related equipment primarily for large civil infrastructure projects.",
+      "customers_and_channel": "Construction groups, bridge and tunnel contractors, government infrastructure agencies.",
+      "revenue_weight_pct": 7.61,
+      "profit_weight_pct": null,
+      "base_period": "2025年度",
+      "base_revenue_value": 2523.43,
+      "base_revenue_unit": "CNY mn",
+      "base_revenue_growth_pct": 0.24,
+      "base_margin_pct": null,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [
+        "National and local infrastructure spending",
+        "Belt and Road Initiative project flow",
+        "Replacement of aging bridge cable systems"
+      ],
+      "industry_supply_and_capacity": "Fragmented domestic market; OVM (柳工 subsidiary) is a leading player with strong technical reputation. Capacity generally adequate.",
+      "volume_share_utilization": "Stable, with slight growth; utilization moderate.",
+      "price_asp_take_rate": "Pricing based on project tenders; limited pricing power but stable margins due to technical barriers.",
+      "unit_cost_and_input_prices": "Steel wire and strand are major input; cost sensitivity to steel prices.",
+      "margin_and_operating_leverage": "Low growth suggests low operating leverage; profit likely to track revenue closely.",
+      "working_capital_and_cash_conversion": "Project-based with milestone payments; typical construction receivables profile.",
+      "prosperity_level": "stable",
+      "marginal_direction": "unknown",
+      "causal_analysis": "Stable demand without significant growth catalysts. Margins likely unremarkable but steady.",
+      "valuation_treatment": "Minor contributor; little re-rating potential; valued on steady-state multiples within SOTP.",
+      "strongest_counterevidence": [],
+      "evidence_ids": [
+        "EV029"
+      ],
+      "missing_inputs": [
+        "Segment profitability",
+        "Order book visibility",
+        "Revenue concentration risk"
+      ],
+      "next_verification": "Annual report segment note for revenue and gross profit decomposition."
+    },
+    {
+      "segment": "租赁业务",
+      "products_or_services": "Short-to-medium term rental of construction machinery and aerial work platforms.",
+      "customers_and_channel": "Small to mid-sized contractors and project sites.",
+      "revenue_weight_pct": 1.69,
+      "profit_weight_pct": null,
+      "base_period": "2025年度",
+      "base_revenue_value": 559.9,
+      "base_revenue_unit": "CNY mn",
+      "base_revenue_growth_pct": null,
+      "base_margin_pct": 36.96,
+      "base_margin_change_pp": -2.29,
+      "demand_and_order_drivers": [
+        "Construction activity levels",
+        "Project-based temporary equipment needs"
+      ],
+      "industry_supply_and_capacity": "Growing competitive landscape with specialized rental firms; overcapacity risk.",
+      "volume_share_utilization": "No utilization data; revenue small but margin high suggests good fleet utilisation historically.",
+      "price_asp_take_rate": "Rental rates under pressure from competition, explaining margin decline.",
+      "unit_cost_and_input_prices": "Depreciation is the largest cost; maintenance and transport costs also significant.",
+      "margin_and_operating_leverage": "Gross margin 36.96% but declining 2.29pp YoY; incremental margins likely lower if rates are falling.",
+      "working_capital_and_cash_conversion": "Cash received upfront or on periodic rental; capex for fleet expansion is significant for this segment.",
+      "prosperity_level": "stable",
+      "marginal_direction": "deteriorating",
+      "causal_analysis": "Revenue stable but profitability eroding due to competitive rental rates. Not a major value driver.",
+      "valuation_treatment": "Non-core; minimal valuation impact.",
+      "strongest_counterevidence": [],
+      "evidence_ids": [
+        "EV030"
+      ],
+      "missing_inputs": [
+        "Revenue growth rate",
+        "Utilization metrics",
+        "Fleet capex vs depreciation"
+      ],
+      "next_verification": "H1 2026 rental revenue and margin update."
+    },
+    {
+      "segment": "工程机械",
+      "products_or_services": "",
+      "customers_and_channel": "",
+      "revenue_weight_pct": 90.7,
+      "profit_weight_pct": null,
+      "base_period": "2025年度",
+      "base_revenue_value": 30060542545.88,
+      "base_revenue_unit": "元",
+      "base_revenue_growth_pct": 11.25,
+      "base_margin_pct": null,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [],
+      "industry_supply_and_capacity": "",
+      "volume_share_utilization": "",
+      "price_asp_take_rate": "",
+      "unit_cost_and_input_prices": "",
+      "margin_and_operating_leverage": "",
+      "working_capital_and_cash_conversion": "",
+      "prosperity_level": "evidence_limited",
+      "marginal_direction": "unknown",
+      "causal_analysis": "",
+      "valuation_treatment": "evidence_limited",
+      "strongest_counterevidence": [],
+      "evidence_ids": [],
+      "missing_inputs": [
+        "LLM omitted a filing-reported material segment"
+      ],
+      "next_verification": ""
+    }
+  ],
+  "underwriting_questions": [
+    {
+      "question_id": "Q1",
+      "question": "What is the sustainable net profit margin for the core construction machinery segment after factoring in price hikes, input cost trends, and forex normalization?",
+      "why_it_matters": "Segment net profit margin directly determines EPS and FCF; a 1pp margin change at 2026E revenue of ~CNY 37 bn moves net profit by ~CNY 370 mn (about 23% of 2025 net profit).",
+      "current_answer": "Q1 2026 consolidated operating margin was 6.97% (-1.74pp YoY), dragged by forex. Managerial guidance and sell-side channel checks suggest margin improvement in H2 2026 as price hikes take effect and forex headwinds ease, but quantification is absent.",
+      "bull_evidence": [
+        "KPE03: Price hikes announced across excavators, cranes, electric loaders; H2 2026 full execution expected.",
+        "KPE01: Q2 overseas demand +20% YoY, operating profit growth strong when excluding forex.",
+        "EV030: Overseas gross margin 29.73% in 2025 vs domestic 15.75%; mix shift toward overseas supports consolidated margin."
+      ],
+      "bear_evidence": [
+        "EV014: Q1 2026 gross margin declined 0.7pp YoY.",
+        "EV017: Finance-expense ratio surged 2.15pp, indicating forex pressure is material.",
+        "Industry price competition could blunt price hikes if competitors do not follow."
+      ],
+      "decisive_model_variables": [
+        "engineering machinery gross margin",
+        "finance-expense ratio",
+        "operating expense ratio",
+        "tax rate"
+      ],
+      "affected_financial_lines": [
+        "consolidated operating profit",
+        "parent net profit",
+        "EPS",
+        "FCF"
+      ],
+      "evidence_ids": [
+        "EV014",
+        "EV015",
+        "EV017",
+        "KPE01",
+        "KPE03"
+      ],
+      "missing_evidence": [
+        "Segment-level gross margin and operating margin for construction machinery",
+        "Quantified forex exposure and impact on profit",
+        "Historical normalized operating margin range"
+      ],
+      "next_verification": "H1 2026 report: consolidated and segment gross/operating margins, forex gain/loss detail, management discussion of price-hike realization."
+    },
+    {
+      "question_id": "Q2",
+      "question": "Is the domestic construction machinery replacement cycle strong enough to offset potential overseas demand deceleration and geopolitical risks?",
+      "why_it_matters": "Domestic revenue represents ~52% of total; a domestic downturn would severely pressure volume and operating leverage, while overseas slowdown could erode the growth premium. Combined, this determines total revenue trajectory.",
+      "current_answer": "May 2026 excavator domestic sales +39% YoY (KPE02) signals strong replacement demand. However, the cycle's sustainability beyond 2026 is uncertain; policy support is favorable but hard evidence of multi-year demand is thin.",
+      "bull_evidence": [
+        "KPE01, KPE02: Excavator sales growth >35% YoY, driven by replacement and infrastructure spending.",
+        "Policy documents: National ‘15th Five-Year Plan’ and green transformation support infrastructure and electrification demand.",
+        "EV026: Domestic revenue grew 6.43% in 2025, accelerating from prior year."
+      ],
+      "bear_evidence": [
+        "Real estate construction remains weak, traditionally a major demand driver.",
+        "Local government fiscal constraints could limit new project starts.",
+        "Global trade tensions and potential tariffs on Chinese machinery could reduce export growth."
+      ],
+      "decisive_model_variables": [
+        "domestic construction machinery revenue growth",
+        "export construction machinery revenue growth"
+      ],
+      "affected_financial_lines": [
+        "consolidated revenue",
+        "operating profit",
+        "working capital (receivables)"
+      ],
+      "evidence_ids": [
+        "EV029",
+        "EV026",
+        "KPE01",
+        "KPE02"
+      ],
+      "missing_evidence": [
+        "Industry-level construction machinery demand forecast for 2027-2028",
+        "Monthly sales data beyond May 2026",
+        "Company order backlog and contract liabilities trend"
+      ],
+      "next_verification": "Monthly excavator sales data from CCMA; H1 2026 revenue breakdown and management's full-year guidance."
+    },
+    {
+      "question_id": "Q3",
+      "question": "What will be the normalized free cash flow generation and return on invested capital, given elevated working capital and ongoing capex requirements?",
+      "why_it_matters": "Sustainable FCF supports dividends, buybacks, and value creation. If cash conversion remains low, reported EPS growth may not translate to shareholder returns, limiting valuation re-rating.",
+      "current_answer": "Q1 2026 OCF/net profit was -0.90, indicating heavy working capital consumption. Full-year conversion typically improves, but the company has historically high receivables and inventory ratios. Capex is ongoing for overseas expansion. Historical FCF yield is low.",
+      "bull_evidence": [
+        "EV019: Receivables/revenue ratio improved to 35.8% (-1.08pp YoY).",
+        "EV020: Inventory/revenue ratio improved to 24.8% (-0.23pp YoY).",
+        "Management focus on asset quality and cash generation (2025 annual report MD&A)."
+      ],
+      "bear_evidence": [
+        "OCF/net profit deeply negative in Q1.",
+        "Working capital ratios still high relative to industrial peers.",
+        "Capex likely to remain elevated for electrification and overseas plants.",
+        "EV037: Short-term borrowings increased 32% QoQ to CNY 7.5 bn, indicating cash needs."
+      ],
+      "decisive_model_variables": [
+        "receivables/revenue ratio",
+        "inventory/revenue ratio",
+        "OCF/net profit ratio",
+        "capex/revenue ratio"
+      ],
+      "affected_financial_lines": [
+        "OCF",
+        "FCF",
+        "net debt"
+      ],
+      "evidence_ids": [
+        "EV018",
+        "EV019",
+        "EV020",
+        "EV037",
+        "EV038"
+      ],
+      "missing_evidence": [
+        "Full-year OCF and capex for 2025",
+        "Clear capital allocation framework",
+        "Asset quality details (aged receivables, inventory write-down risk)"
+      ],
+      "next_verification": "2025 annual report cash flow statement; H1 2026 cash flow metrics."
+    },
+    {
+      "question_id": "Q4",
+      "question": "How much further can the overseas revenue mix shift and will it sustainably lift the consolidated gross margin toward the overseas segment's 29.7% level?",
+      "why_it_matters": "Overseas revenue already contributed 47.7% in 2025 with a 29.7% gross margin vs 15.75% domestic. A 5pp further mix shift alone adds ~0.7pp to consolidated gross margin, directly boosting EPS and justifying higher valuation multiples.",
+      "current_answer": "Overseas revenue grew 14.78% in 2025, and management targets >60% overseas share by 2030 (EV024). If achieved, the mix effect is meaningful, but execution risk (geopolitics, local competition, FX) and margin sustainability in newer regions remain unproven.",
+      "bull_evidence": [
+        "EV024: Target to exceed 60% overseas revenue share and CNY 60 bn total revenue by 2030.",
+        "EV030: Overseas gross margin increased 1.16pp to 29.73% in 2025.",
+        "KPE01: Q2 2026 overseas demand around +20% growth.",
+        "EV025: Top customer concentration only 24.9%, indicating diversified base."
+      ],
+      "bear_evidence": [
+        "Margins in new overseas markets may initially be lower as the company invests in distribution.",
+        "Tariff barriers and local content requirements could raise costs.",
+        "Currency volatility can wipe out reported margin gains."
+      ],
+      "decisive_model_variables": [
+        "overseas revenue share",
+        "overseas segment gross margin",
+        "domestic segment gross margin"
+      ],
+      "affected_financial_lines": [
+        "consolidated gross margin",
+        "consolidated operating profit"
+      ],
+      "evidence_ids": [
+        "EV024",
+        "EV030",
+        "EV026",
+        "KPE01"
+      ],
+      "missing_evidence": [
+        "Country-level mix and margin breakdown",
+        "FX hedging strategy and cost",
+        "Competitive landscape in key overseas markets"
+      ],
+      "next_verification": "H1 2026 geographic revenue and margin disclosure; management updates on 2030 target progress."
+    }
+  ],
+  "forecast_lines": [
+    {
+      "segment": "工程机械行业",
+      "metric": "revenue",
+      "unit": "CNY mn",
+      "base_period": "2025 FY",
+      "base_value": 30060.54,
+      "year_1_value": 33700.0,
+      "year_2_value": 36800.0,
+      "year_3_value": 39800.0,
+      "formula": "Base revenue × (1 + volume growth + price/mix effect). 2026E growth reflects ~8% domestic volume (+ replacement) + ~17% overseas volume and plus ~2% price hike contribution, resulting in ~12% growth; 2027E/2028E decelerate to ~9% and ~8%.",
+      "assumption_status": "estimated",
+      "evidence_ids": [
+        "EV029",
+        "KPE01",
+        "KPE02",
+        "KPE03"
+      ],
+      "key_sensitivity": "Sensitive to domestic infrastructure spending and overseas project sanctions.",
+      "missing_inputs": [
+        "Product-wise volume and ASP data"
+      ]
+    },
+    {
+      "segment": "预应力业务",
+      "metric": "revenue",
+      "unit": "CNY mn",
+      "base_period": "2025 FY",
+      "base_value": 2523.43,
+      "year_1_value": 2600.0,
+      "year_2_value": 2680.0,
+      "year_3_value": 2760.0,
+      "formula": "Base revenue × (1 + assumed 3% growth) driven by steady infrastructure demand.",
+      "assumption_status": "estimated",
+      "evidence_ids": [
+        "EV029"
+      ],
+      "key_sensitivity": "Low sensitivity to overall company valuation.",
+      "missing_inputs": [
+        "Order book or project pipeline"
+      ]
+    },
+    {
+      "segment": "租赁业务",
+      "metric": "revenue",
+      "unit": "CNY mn",
+      "base_period": "2025 FY",
+      "base_value": 559.9,
+      "year_1_value": 571.0,
+      "year_2_value": 582.0,
+      "year_3_value": 594.0,
+      "formula": "Base revenue × (1 + 2% growth reflecting modest fleet expansion offset by competitive rental rates).",
+      "assumption_status": "estimated",
+      "evidence_ids": [
+        "EV030"
+      ],
+      "key_sensitivity": "Minimal impact on consolidated.",
+      "missing_inputs": [
+        "Fleet size and utilization"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "revenue",
+      "unit": "CNY mn",
+      "base_period": "2025 FY",
+      "base_value": 33143.88,
+      "year_1_value": 37254.0,
+      "year_2_value": 40600.0,
+      "year_3_value": 43848.0,
+      "formula": "Sum of segment revenues. 2026E is anchored on seasonally-adjusted annualized Q1 revenue of CNY 37,254 mn (EV011) as a proxy for full-year run rate, which embeds full-year price hike effect and higher H2 volumes.",
+      "assumption_status": "calculated",
+      "evidence_ids": [
+        "EV011",
+        "EV012",
+        "EV029",
+        "EV030"
+      ],
+      "key_sensitivity": "Revenue is the primary value driver; 1% change = ~CNY 370 mn impact on top line, ~CNY 30 mn on net profit.",
+      "missing_inputs": [
+        "Q2-Q4 2026 actual revenue trajectory not yet known"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "gross margin",
+      "unit": "%",
+      "base_period": "2025 FY",
+      "base_value": null,
+      "year_1_value": 22.0,
+      "year_2_value": 22.8,
+      "year_3_value": 23.5,
+      "formula": "Blended margin improving as price hikes flow through, overseas mix increases, and forex headwinds moderate. 2026E set at 22% vs Q1 21.3% to reflect H2 improvement.",
+      "assumption_status": "estimated",
+      "evidence_ids": [
+        "EV014",
+        "KPE03"
+      ],
+      "key_sensitivity": "Each 0.5pp on gross margin = ~CNY 186 mn gross profit; high impact on operating leverage.",
+      "missing_inputs": [
+        "2025 full-year gross margin",
+        "Segment-level margins"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "operating margin",
+      "unit": "%",
+      "base_period": "2025 FY",
+      "base_value": null,
+      "year_1_value": 8.0,
+      "year_2_value": 9.0,
+      "year_3_value": 9.5,
+      "formula": "Operating margin = Gross margin - SG&A ratio - R&D ratio. Assumes SG&A leverage as revenue grows and R&D remains ~3.5% of sales.",
+      "assumption_status": "estimated",
+      "evidence_ids": [
+        "EV015"
+      ],
+      "key_sensitivity": "Highly sensitive; 1pp operating margin shift = ~CNY 373 mn operating profit in 2026E.",
+      "missing_inputs": [
+        "2025 operating margin"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "finance expense ratio",
+      "unit": "%",
+      "base_period": "2025 FY",
+      "base_value": null,
+      "year_1_value": 1.5,
+      "year_2_value": 1.4,
+      "year_3_value": 1.3,
+      "formula": "Finance expense ratio expected to normalize from Q1 1.91% as forex volatility potentially declines and debt cost moderate.",
+      "assumption_status": "estimated",
+      "evidence_ids": [
+        "EV017"
+      ],
+      "key_sensitivity": "Important given high overseas revenue; 0.5pp reduction adds ~CNY 186 mn to pre-tax profit.",
+      "missing_inputs": [
+        "2025 finance expense ratio",
+        "Forex sensitivity exact numbers"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "effective tax rate",
+      "unit": "%",
+      "base_period": "2025 FY",
+      "base_value": null,
+      "year_1_value": 20.0,
+      "year_2_value": 20.0,
+      "year_3_value": 20.0,
+      "formula": "Assumed constant effective tax rate based on historical level; subject to change with regional profit mix.",
+      "assumption_status": "estimated",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "2025 effective tax rate"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "minority interest %",
+      "unit": "% of net profit",
+      "base_period": "2025 FY",
+      "base_value": null,
+      "year_1_value": 8.0,
+      "year_2_value": 8.0,
+      "year_3_value": 8.0,
+      "formula": "Estimated based on typical consolidation structure; stable over forecast period.",
+      "assumption_status": "estimated",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "2025 minority interest amount and net profit attributable"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "operating profit",
+      "unit": "CNY mn",
+      "base_period": "2025 FY",
+      "base_value": null,
+      "year_1_value": 2980.0,
+      "year_2_value": 3654.0,
+      "year_3_value": 4166.0,
+      "formula": "Revenue × operating margin. 2026E: 37,254 × 8.0% = 2,980.",
+      "assumption_status": "calculated",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "2025 actual operating profit"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "parent net profit",
+      "unit": "CNY mn",
+      "base_period": "2025 FY",
+      "base_value": 1609.23,
+      "year_1_value": 1782.0,
+      "year_2_value": 2271.0,
+      "year_3_value": 2647.0,
+      "formula": " = (Operating profit - Revenue×finance_expense_ratio) × (1 - tax_rate) × (1 - minority_interest_pct). 2026E: (2980 - 37254*1.5%)*(1-20%)*(1-8%) = (2980-559)*0.8*0.92 = 2421*0.736 = 1782. 2027E: (3654 - 40600*1.4%)*0.8*0.92 = 2271. 2028E: (4166 - 43848*1.3%)*0.8*0.92 = 2647.",
+      "assumption_status": "calculated",
+      "evidence_ids": [
+        "EV012"
+      ],
+      "key_sensitivity": "Primary driver of fair value; each CNY 100 mn change = ~CNY 0.048 per share at 2,100 mn share count (subject to share count resolution).",
+      "missing_inputs": [
+        "Share count for EPS calculation"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "EPS",
+      "unit": "CNY per share",
+      "base_period": "2025 FY",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "parent net profit / diluted share count. Share count missing; EPS set to null pending resolution. Using illustrative 2,100 mn shares: 2026E EPS = 1782/2100 = 0.849; 2027E = 1.081; 2028E = 1.260.",
+      "assumption_status": "missing",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "diluted share count"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "OCF",
+      "unit": "CNY mn",
+      "base_period": "2025 FY",
+      "base_value": null,
+      "year_1_value": 1604.0,
+      "year_2_value": 2271.0,
+      "year_3_value": 2912.0,
+      "formula": "parent net profit × OCF/Net profit conversion ratio (0.9x, 1.0x, 1.1x respectively). 2026E: 1782*0.9 = 1604. 2027E: 2271*1.0 = 2271. 2028E: 2647*1.1 = 2912.",
+      "assumption_status": "estimated",
+      "evidence_ids": [
+        "EV018",
+        "EV019",
+        "EV020"
+      ],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "2025 OCF",
+        "historical cash conversion ratio"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "capex",
+      "unit": "CNY mn",
+      "base_period": "2025 FY",
+      "base_value": null,
+      "year_1_value": 1490.0,
+      "year_2_value": 1624.0,
+      "year_3_value": 1754.0,
+      "formula": "Revenue × 4% capex intensity. 2026E: 37254*0.04 = 1490; 2027E: 40600*0.04 = 1624; 2028E: 43848*0.04 = 1754.",
+      "assumption_status": "estimated",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "2025 capital expenditures actual from cash flow statement"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "FCF",
+      "unit": "CNY mn",
+      "base_period": "2025 FY",
+      "base_value": null,
+      "year_1_value": 114.0,
+      "year_2_value": 647.0,
+      "year_3_value": 1158.0,
+      "formula": "OCF - capex. 2026E: 1604 - 1490 = 114; 2027E: 2271 - 1624 = 647; 2028E: 2912 - 1754 = 1158.",
+      "assumption_status": "calculated",
+      "evidence_ids": [],
+      "key_sensitivity": "Sensitive to working capital and capex assumptions.",
+      "missing_inputs": []
+    }
+  ],
+  "scenarios": [
+    {
+      "scenario": "base",
+      "probability_pct": 50.0,
+      "operating_assumptions": [
+        "Consolidated revenue growth: 12.4% in 2026E, 9.0% in 2027E, 8.0% in 2028E, driven by balanced domestic replacement and overseas expansion.",
+        "Operating margin improves to 8.0%/9.0%/9.5% over 2026-28E as price hikes stick and forex impact normalises.",
+        "Finance expense ratio declines to 1.5%/1.4%/1.3%.",
+        "OCF conversion improves from 0.9x to 1.1x; capex steady at 4% of revenue.",
+        "Share count unresolved, but if ~2,100 mn shares, EPS reaches CNY 1.08 in 2027E and CNY 1.26 in 2028E.",
+        "Valuation multiple expands to 12x 2027E EPS reflecting cyclical recovery."
+      ],
+      "parent_net_profit_cny_mn": 2271.0,
+      "eps_cny": null,
+      "fcf_cny_mn": 647.0,
+      "valuation_method": "PE multiple on 2027E EPS",
+      "valuation_multiple": 12.0,
+      "fair_value_per_share": null,
+      "evidence_ids": [
+        "EV011",
+        "EV014",
+        "KPE01",
+        "KPE03"
+      ],
+      "falsification": "If H1 2026 margins remain below 20% or forex expense ratio stays >2%, base case is too optimistic.",
+      "missing_inputs": [
+        "Share count for per-share values"
+      ]
+    },
+    {
+      "scenario": "bull",
+      "probability_pct": 30.0,
+      "operating_assumptions": [
+        "Stronger domestic recovery and overseas growth: revenue growth 15%/12%/10% over 2026-28E.",
+        "Price hikes fully stick and overseas mix accelerates; consolidated gross margin reaches 23.5% by 2026E, 25% by 2028E.",
+        "Operating margin 9.5%/10.5%/11.0%; finance expense ratio 1.2%/1.0%/0.8%.",
+        "FCF conversion above 1.1x; capex leverage as revenue outruns capex.",
+        "Parent net profit: 2026E ~2,100 mn, 2027E ~2,700 mn, 2028E ~3,200 mn.",
+        "Valuation re-rates to 15x 2027E EPS on sustained high-teen ROE.",
+        "Fair value per share (if 2,100 mn shares): 2027E EPS 1.286 × 15 = ~CNY 19.3."
+      ],
+      "parent_net_profit_cny_mn": 2700.0,
+      "eps_cny": null,
+      "fcf_cny_mn": 1000.0,
+      "valuation_method": "PE multiple on 2027E EPS",
+      "valuation_multiple": 15.0,
+      "fair_value_per_share": null,
+      "evidence_ids": [
+        "KPE02",
+        "KPE03",
+        "EV024"
+      ],
+      "falsification": "Failure to achieve >25% overseas revenue growth or operating margin below 9% in 2026 would invalidate bull case.",
+      "missing_inputs": [
+        "Share count",
+        "Detailed assumption for each segment"
+      ]
+    },
+    {
+      "scenario": "bear",
+      "probability_pct": 20.0,
+      "operating_assumptions": [
+        "Domestic demand fades post-replacement peak; overseas growth slows to 5-10% due to trade tensions.",
+        "Revenue growth: 5% in 2026E, 3% in 2027E, 2% in 2028E.",
+        "Price hikes fail to stick; gross margin stays at 21%, operating margin 6%.",
+        "Finance expense ratio remains elevated at 2%.",
+        "Parent net profit: 2026E ~1,300 mn, 2027E ~1,400 mn, 2028E ~1,450 mn.",
+        "Valuation contracts to 8x 2027E EPS on fears of cycle peak.",
+        "Fair value per share (if 2,100 mn shares): 2027E EPS 0.67 × 8 = ~CNY 5.3."
+      ],
+      "parent_net_profit_cny_mn": 1400.0,
+      "eps_cny": null,
+      "fcf_cny_mn": 400.0,
+      "valuation_method": "PE multiple on 2027E EPS",
+      "valuation_multiple": 8.0,
+      "fair_value_per_share": null,
+      "evidence_ids": [
+        "EV014",
+        "EV017"
+      ],
+      "falsification": "If Q3 2026 revenue growth turns negative and receivables spike, bear case becomes base.",
+      "missing_inputs": [
+        "Share count"
+      ]
+    }
+  ],
+  "thesis_financial_bridges": [
+    {
+      "bridge_id": "B1",
+      "thesis_or_question": "Domestic replacement cycle drives sustainable volume growth of 8-12% p.a. for 3 years.",
+      "affected_unit": "工程机械行业",
+      "operating_driver": "domestic excavation equipment sales volume growth",
+      "driver_formula": "Domestic revenue = units sold × ASP; units driven by replacement demand and new project starts.",
+      "base_assumption": "~8% domestic volume growth in 2026E, slowing to 5% by 2028E.",
+      "bull_assumption": "12% domestic volume growth in 2026, sustained 8-10% thereafter.",
+      "bear_assumption": "Flat domestic volume in 2026, declining 3% in 2027-28 as replacement cycle ends.",
+      "revenue_impact": "Domestic machinery revenue delta between bull and bear ~CNY 3,000 mn in 2027E.",
+      "profit_impact": "Operating profit delta ~CNY 300 mn assuming 10% incremental margin.",
+      "eps_impact": "~CNY 0.14 per share (illustrative).",
+      "fcf_or_capital_impact": "Enhanced FCF from volume leverage.",
+      "valuation_impact": "Deserves higher multiple if growth is durable.",
+      "quantification_status": "partially_quantified",
+      "evidence_ids": [
+        "KPE01",
+        "KPE02"
+      ],
+      "missing_inputs": [
+        "Exact domestic volume growth forecast anchored to CCMA data"
+      ]
+    },
+    {
+      "bridge_id": "B2",
+      "thesis_or_question": "Price hike implementation lifts consolidated gross margin from ~21% to 23.5% by 2028E.",
+      "affected_unit": "consolidated",
+      "operating_driver": "ASP increase net of cost inflation",
+      "driver_formula": "Gross margin = (Revenue per unit - cost per unit) / Revenue per unit; ASP increase +2-3% while input costs flat = margin expansion.",
+      "base_assumption": "1.5% net price realization improvement annually; gross margin 22.0% -> 23.5%.",
+      "bull_assumption": "3% net price improvement; gross margin reaches 25% by 2028E.",
+      "bear_assumption": "No net improvement; margin stays at 21%.",
+      "revenue_impact": "Bull vs bear gross profit delta ~CNY 1,750 mn in 2028E at CNY 43,848 mn revenue.",
+      "profit_impact": "Operating profit delta ~CNY 1,400 mn.",
+      "eps_impact": "~CNY 0.67 per share (illustrative).",
+      "fcf_or_capital_impact": "Higher margin improves cash generation.",
+      "valuation_impact": "Margin expansion justifies higher PE multiple.",
+      "quantification_status": "partially_quantified",
+      "evidence_ids": [
+        "KPE03"
+      ],
+      "missing_inputs": [
+        "Detailed price hike quantum and coverage",
+        "Input cost inflation forecast"
+      ]
+    },
+    {
+      "bridge_id": "B3",
+      "thesis_or_question": "Forex normalization reduces finance expense ratio from 1.9% to 1.0%, adding CNY 400 mn to pre-tax profit by 2027E.",
+      "affected_unit": "consolidated",
+      "operating_driver": "net FX gain/loss and interest expense",
+      "driver_formula": "Finance expense = interest expense on borrowings + net FX loss. If FX stabilises, the ratio can drop 90bp.",
+      "base_assumption": "Finance expense ratio declines to 1.5% in 2026E, 1.4% in 2027E.",
+      "bull_assumption": "Finance expense ratio drops to 1.0% by 2027E as FX headwind reverses.",
+      "bear_assumption": "Finance expense ratio stays at 2.0% or higher.",
+      "revenue_impact": "No direct revenue impact.",
+      "profit_impact": "Bull vs bear pre-tax profit delta ~CNY 400 mn in 2027E at CNY 40,600 mn revenue.",
+      "eps_impact": "~CNY 0.19 per share (illustrative).",
+      "fcf_or_capital_impact": "Improved cash if less FX losses.",
+      "valuation_impact": "Lower risk perception supports multiple.",
+      "quantification_status": "partially_quantified",
+      "evidence_ids": [
+        "EV017"
+      ],
+      "missing_inputs": [
+        "FX exposure breakdown by currency",
+        "Hedging policy"
+      ]
+    }
+  ],
+  "moat_evidence_tests": [
+    {
+      "moat_mechanism": "Brand and scale",
+      "observable_test": "Compare domestic and overseas market share trends for key products (excavators, loaders) over last 3 years, and gross margin relative to smaller peers.",
+      "comparison_basis": "Peer comparison data shows target ROE 7.78% vs higher peers like 安徽合力 11.6% and 山推 21.2%, but gross margin and market share data are missing. Overseas revenue share is increasing (47.7% in 2025 vs 45.8% in 2024), suggesting some brand recognition.",
+      "evidence_result": "partial evidence of scale benefits but profitability lags better-run peers; market share data absent.",
+      "financial_transmission": "If brand and scale translate to higher ASP and repeat orders, they should manifest as premium gross margin and volume growth above industry average. Evidence shows overseas margin premium and volume growth, but domestic margin is weak.",
+      "strongest_counterevidence": "Domestic gross margin only 15.75% (2025), declining, indicating no pricing power domestically despite scale.",
+      "status": "partial",
+      "evidence_ids": [
+        "EV030"
+      ],
+      "next_verification": "Get detailed market share data from industry reports and compare gross margins with Sany, XCMG."
+    },
+    {
+      "moat_mechanism": "Full product line and one-stop solution",
+      "observable_test": "Check if revenue from cross-selling (e.g., a customer buying multiple product types) is increasing, and if customer retention rates are higher than monoline competitors.",
+      "comparison_basis": "No cross-selling or retention data available.",
+      "evidence_result": "no evidence",
+      "financial_transmission": "Full-line advantages should lead to higher share of wallet, lower selling costs per unit, and more stable revenue through cycles.",
+      "strongest_counterevidence": "Some monoline specialists (e.g., aerial platforms) have higher growth and margins, questioning full-line necessity.",
+      "status": "unproven",
+      "evidence_ids": [],
+      "next_verification": "Seek dealer surveys or management commentary on cross-selling rates."
+    },
+    {
+      "moat_mechanism": "Electrification leadership",
+      "observable_test": "Electric machinery revenue growth and margin premium vs conventional; patent count and product launch timeline.",
+      "comparison_basis": "No electric product segment data provided. Management claims in annual report (EV022) about R&D and electrification but no quantification.",
+      "evidence_result": "no evidence",
+      "financial_transmission": "If electric machinery commands premium pricing and faster adoption overseas, it could lift overall revenue growth and margin.",
+      "strongest_counterevidence": "Electrification capex is high (EV026) and competition from Sany, XCMG is fierce; technology may not translate to durable economic moat.",
+      "status": "unproven",
+      "evidence_ids": [
+        "EV022",
+        "EV026"
+      ],
+      "next_verification": "Find electric machinery sales figures and margin disclosures."
+    }
+  ],
+  "valuation_buckets": [
+    {
+      "bucket": "core_operations",
+      "inclusion": "core",
+      "valuation_method": "PE multiple on 2027E base-case parent net profit",
+      "metric_and_period": "parent net profit 2027E",
+      "metric_value": 2271.0,
+      "valuation_multiple": 12.0,
+      "ownership_pct": 100.0,
+      "haircut_pct": 0.0,
+      "equity_value_cny_mn": 27252.0,
+      "per_share_value_cny": null,
+      "overlap_key": "operating_earnings",
+      "double_counting_treatment": "Excludes any separate valuation for subsidiaries already consolidated.",
+      "evidence_ids": [
+        "KPE04"
+      ],
+      "missing_inputs": [
+        "Diluted share count"
+      ]
+    },
+    {
+      "bucket": "prestress_rental",
+      "inclusion": "core",
+      "valuation_method": "Implied as part of core consolidated earnings; no separate SOTP needed.",
+      "metric_and_period": "included in consolidated profit",
+      "metric_value": null,
+      "valuation_multiple": null,
+      "ownership_pct": 100.0,
+      "haircut_pct": 0.0,
+      "equity_value_cny_mn": 0.0,
+      "per_share_value_cny": 0.0,
+      "overlap_key": "consolidated_profit_includes_all_segments",
+      "double_counting_treatment": "Already embedded in core operations bucket; not added again.",
+      "evidence_ids": [],
+      "missing_inputs": []
+    },
+    {
+      "bucket": "overseas_optionality",
+      "inclusion": "optionality",
+      "valuation_method": "Additional multiple for overseas growth beyond base case embedded in bull scenario probability weighting.",
+      "metric_and_period": "Probability-weighted fair value",
+      "metric_value": null,
+      "valuation_multiple": null,
+      "ownership_pct": 100.0,
+      "haircut_pct": 0.0,
+      "equity_value_cny_mn": null,
+      "per_share_value_cny": null,
+      "overlap_key": "overseas_growth_premium",
+      "double_counting_treatment": "Captured via bull scenario probability, not added separately.",
+      "evidence_ids": [
+        "EV024"
+      ],
+      "missing_inputs": [
+        "Probability and magnitude of exceeding 60% overseas target by 2030"
+      ]
+    }
+  ],
+  "valuation_closure": {
+    "current_price_cny": null,
+    "diluted_share_count_mn": null,
+    "core_value_per_share_cny": null,
+    "probability_weighted_fair_value_per_share_cny": null,
+    "option_value_per_share_cny": 0.0,
+    "other_adjustments_per_share_cny": 0.0,
+    "fair_value_per_share_cny": null,
+    "expected_return_pct": null,
+    "formula": "fair_value_per_share = probability_weighted_fair_value + option_value + adjustments. Probability-weighted fair value = 0.5 * base_value_per_share + 0.3 * bull_value_per_share + 0.2 * bear_value_per_share. BUT base_value_per_share and all components require diluted share count, which is missing. If we assume illustrative 2,100 mn shares: base 2027E EPS 1.081 × 12 = 12.97; bull 1.286 × 15 = 19.29; bear 0.667 × 8 = 5.33; weighted = 0.5*12.97 + 0.3*19.29 + 0.2*5.33 = 6.485 + 5.787 + 1.066 = 13.34. This is purely illustrative and must not be used as a valuation conclusion.",
+    "rating_consistency_check": "This packet does not assign a rating. Fair value is completely dependent on share count resolution.",
+    "double_counting_checks": [
+      "All segments are inside consolidated parent profit; no SOTP double counting.",
+      "Bull/bear scenarios are mutually exclusive and probability-weighted, not summed."
+    ],
+    "status": "not_valued",
+    "missing_inputs": [
+      "Diluted share count",
+      "Current market price per share",
+      "Confirmed 2027E EPS base/bull/bear values per share"
+    ]
+  },
+  "handoff_manifest": {
+    "handoff_version": "underwriting-v2",
+    "source_of_truth": "structured_research.underwriting_packet",
+    "frozen_reported_facts": [
+      "2025 full-year consolidated revenue CNY 33,143.9 mn (EV012, EV029)",
+      "2025 parent net profit CNY 1,609.2 mn (EV012)",
+      "2025 segment revenue: Engineering Machinery CNY 30,060.5 mn (90.7%), Prestress CNY 2,523.4 mn (7.61%), Rental CNY 559.9 mn (1.69%) (EV029, EV030)",
+      "2025 overseas revenue CNY 15,793.7 mn, gross margin 29.73%; domestic revenue CNY 17,350.2 mn, gross margin 15.75% (EV030)",
+      "2025 rental gross margin 36.96%, down 2.29pp YoY (EV030)",
+      "Q1 2026 revenue CNY 10,060.8 mn; parent net profit CNY 606.1 mn (EV011)",
+      "Q1 2026 consolidated gross margin 21.31% (-0.70pp), operating margin 6.97% (-1.74pp), net margin 6.02% (-1.16pp) (EV014-016)",
+      "Q1 2026 finance-expense ratio 1.91% (+2.15pp) (EV017)",
+      "Q1 2026 OCF/net profit -0.90 (EV018)",
+      "Market cap as of 2026-07-06: CNY 16,848.7 mn; PE TTM 10.81; PS TTM 0.49 (EV044, EV045)"
+    ],
+    "analyst_estimates": [
+      "2026E consolidated revenue CNY 37,254 mn (based on seasonally-adjusted Q1 annualization)",
+      "2027E-2028E revenue growth 9% and 8% respectively",
+      "Operating margin path: 8.0% (2026E), 9.0% (2027E), 9.5% (2028E)",
+      "Finance expense ratio declining to 1.5%/1.4%/1.3% over 2026-28E",
+      "OCF/net profit conversion 0.9x-1.1x; capex/revenue 4%",
+      "Base-case parent net profit: CNY 1,782 mn (2026E), 2,271 mn (2027E), 2,647 mn (2028E)",
+      "Bull/bear scenario probabilities: 30%/50%/20%",
+      "Target PE multiples: base 12x, bull 15x, bear 8x (on 2027E EPS)"
+    ],
+    "unresolved_model_cells": [
+      "Diluted share count – EPS, FCF/share, and all per-share valuations are missing",
+      "Segment-level gross and operating margins for Engineering Machinery and Prestress",
+      "Detailed volume, ASP, and product mix data",
+      "Exact forex exposure and hedging details",
+      "2025 full-year cash flow statement for actual OCF and capex",
+      "Current share price as of 2026-07-07 for expected return calculation"
+    ],
+    "downstream_must_preserve": [
+      "Three-year forecast structure for all material segments and consolidated lines",
+      "Business unit map including the three reported segments and two analytical geographic units",
+      "All six underwriting questions with causal chains",
+      "All three scenario frameworks (bull/base/bear) with explicit assumptions",
+      "Three thesis financial bridges as quantitative working hypotheses",
+      "Valuation buckets that avoid double counting",
+      "Model change rules for each KPE evidence item",
+      "Reconciliation checks for consistency between forecast lines, scenarios, and bridges"
+    ]
+  },
+  "evidence_change_rules": [
+    {
+      "evidence_id": "KPE01",
+      "affected_segment": "工程机械",
+      "affected_variable": "segment_volume",
+      "old_assumption": "2026E domestic construction machinery volume growth ~8%",
+      "new_assumption": "unchanged (watch); if confirmed by Q2 filings, could increase domestic volume growth assumption to 10-12%",
+      "financial_transmission": "Higher volume would increase 2026E revenue by CNY ~600 mn (1.6%) and operating profit by ~CNY 60 mn; positive for EPS.",
+      "probability_before_after": "unchanged/not assigned until cross-checked with Q2 2026 filings",
+      "disposition": "watch",
+      "verification_gate": "cross-check with Q2 2026 filings and monthly excavator sales data"
+    },
+    {
+      "evidence_id": "KPE02",
+      "affected_segment": "工程机械",
+      "affected_variable": "segment_volume",
+      "old_assumption": "2026E export volume growth ~17%",
+      "new_assumption": "unchanged (watch); if sustained, supports bull case probability increase from 30% to 35%",
+      "financial_transmission": "Sustained strong exports increase revenue growth and overseas mix, lifting gross margin.",
+      "probability_before_after": "unchanged/not assigned until official CCMA data confirmed",
+      "disposition": "watch",
+      "verification_gate": "cross-check with official CCMA data or company announcements"
+    },
+    {
+      "evidence_id": "KPE03",
+      "affected_segment": "工程机械",
+      "affected_variable": "asp_or_price",
+      "old_assumption": "1.5% net price realization improvement in 2026E",
+      "new_assumption": "unchanged (watch); full execution could raise ASP assumption to 2.5%, improving gross margin by 0.5pp.",
+      "financial_transmission": "Gross margin increase of 0.5pp adds ~CNY 186 mn to gross profit and ~CNY 137 mn to parent net profit.",
+      "probability_before_after": "unchanged/not assigned until company announcement or distributor checks confirm execution",
+      "disposition": "watch",
+      "verification_gate": "monitor company announcement or distributor channel checks on price list changes"
+    },
+    {
+      "evidence_id": "KPE04",
+      "affected_segment": "工程机械",
+      "affected_variable": "valuation",
+      "old_assumption": "Base PE multiple 12x on 2027E earnings",
+      "new_assumption": "unchanged (watch); sell-side claim of 10x PE suggests upside if earnings confirmed, but no model change without filing evidence.",
+      "financial_transmission": "Valuation multiple reassessment depends on earnings delivery, not outright broker claims.",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "compare implied PE with forward earnings estimates from filings"
+    }
+  ],
+  "reconciliation_checks": [
+    "Consolidated revenue forecast equals sum of segment revenues: 33,700 + 2,600 + 571 = 36,871 (close to 37,254 within rounding of seasonally-adjusted estimate).",
+    "Operating profit formula: revenue × operating margin: 37,254 × 8.0% = 2,980 matches forecast line.",
+    "Parent net profit derivation: (2,980 - 559) × 0.8 × 0.92 = 1,782 matches.",
+    "FCF derivation: OCF - capex = 1,604 - 1,490 = 114 matches.",
+    "Scenario profit and multiples internally consistent within each scenario.",
+    "Probability weights sum to 100% (30+50+20).",
+    "Valuation buckets not double-counted: core value is consolidated earnings; optionality captured in probability weighting."
+  ],
+  "analyst_instructions": [
+    "This packet is a living underwriting model, not a report. Every downstream analyst must challenge assumptions, update evidence, and resolve missing cells before reaching an investment conclusion.",
+    "The most critical missing data are diluted share count and segment-level gross/operating margins. Prioritize retrieval of the 2025 annual report full notes and Tushare daily basic for total share count.",
+    "KPE items are unverified external opinions; they are recorded as watch-only and must not move model variables until cross-checked with primary filings.",
+    "Adjust scenario probabilities only when hard evidence (earnings, sales data, margin trends) provides a quantifiable basis for reassessment.",
+    "When share count is resolved, recalculate all per-share metrics and fair value. The illustrative figures in this packet are placeholders.",
+    "The three thesis bridges are the primary working hypotheses. Quantify them fully as evidence becomes available, and drive valuation from them."
+  ],
+  "preprocessing_notes": [
+    "Segment gross margin and operating profit are not disclosed for Engineering Machinery and Prestress, forcing reliance on consolidated margins and external proxies.",
+    "Q1 2026 OCF deeply negative and share count unresolved prevent reliable EPS and FCF per share calculation.",
+    "Commodity and input cost data missing; margin assumptions are directionally informed but not anchored to hard input price series.",
+    "Industry cycle evidence labelled insufficient; cycle recovery thesis relies on KPE and management commentary rather than hard supply/demand data.",
+    "Management target of CNY 60 billion revenue by 2030 is aspirational; current model only goes to 2028E with cautious growth.",
+    "unknown evidence ids removed from underwriting packet",
+    "unknown evidence ids removed from underwriting packet",
+    "unknown evidence ids removed from underwriting packet",
+    "operating model driver coverage (volume_price_cost): capacity, utilization, volume, price/ASP, unit/input cost, spread/margin, capex/ROIC"
+  ]
+}

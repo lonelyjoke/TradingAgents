@@ -1,0 +1,3208 @@
+{
+  "schema_version": 3,
+  "symbol": "300476.SZ",
+  "as_of_date": "2026-07-07",
+  "preprocessing_mode": "llm_semantic_plus_deterministic_validation",
+  "company_summary": "胜宏科技 (300476.SZ) is a printed circuit board (PCB) manufacturer classified under 'Computer, Communication and Other Electronic Equipment Manufacturing'. The company is transitioning from traditional PCB to high-end AI PCB (for GPUs, ASICs, data centers) and expects AI revenue share to rise from <50% currently to 60–70% in FY26. Consolidated revenue for FY2025 was 19.29bn CNY; Q1 2026 revenue was 5.52bn CNY with gross margin 34.46% (+1.08pp YoY). The company is investing heavily in new factories (10–13) and targets 2030 output value of ~1,000bn CNY. Key risks include potential pricing pressure from Nvidia, architecture delays, and raw material cost volatility.",
+  "segments": [
+    {
+      "segment": "AI PCB",
+      "aliases": [
+        "AI server PCB",
+        "GPU/ASIC PCB",
+        "High-end HDI"
+      ],
+      "products_or_services": "High-layer count HDI, mSAP, and high-speed PCBs for AI accelerators (Nvidia, ASIC), servers, and data center networking.",
+      "revenue_weight_pct": null,
+      "gross_profit_or_profit_weight_pct": null,
+      "business_model": "产能出货型 (capacity-driven); customer-specific engineering and qualification cycles.",
+      "key_drivers": [
+        "Nvidia GPU platform cycles (Rubin, Rubin Ultra)",
+        "ASIC adoption (CSP V8 TPU)",
+        "HDI/mSAP technology migration",
+        "Capacity expansion (factories 10–13)",
+        "AI infrastructure capex cycle"
+      ],
+      "prosperity_level": "high",
+      "marginal_direction": "improving",
+      "causal_chain": "AI-driven end-demand -> capacity buildout (factories 10–13, 越南/泰国) -> product mix shift to HDI/mSAP -> stable ASP (cost pass-through) + mix improvement -> gross margin resilience (~flat FY26 vs FY25).",
+      "supporting_metric_refs": [
+        "EV014",
+        "EV015",
+        "EV016",
+        "KPE02"
+      ],
+      "counterevidence": [
+        "KPE10: rumor of 10% price cut by Nvidia",
+        "KPE11: potential delay of Rubin Ultra reducing near-term volume"
+      ],
+      "confidence": "medium",
+      "missing_inputs": [
+        "Exact current AI revenue share",
+        "Segment gross margin",
+        "Segment-specific capacity utilization",
+        "Customer concentration details"
+      ],
+      "revenue_cny_mn": null,
+      "revenue_reported_value": null,
+      "revenue_reported_unit": "",
+      "revenue_growth_pct": null,
+      "gross_margin_pct": null,
+      "gross_margin_change_pp": null,
+      "period": "FY26E",
+      "source_module": "knowledge_planet",
+      "evidence_quote": "公司预计FY26毛利率与FY25大致持平，而AI收入占比应从低于50%提升至60-70%",
+      "extraction_mode": "llm_semantic"
+    },
+    {
+      "segment": "Non-AI PCB",
+      "aliases": [
+        "Conventional PCB",
+        "Traditional PCB",
+        "Automotive/Industrial PCB"
+      ],
+      "products_or_services": "Standard multilayer PCB for automotive electronics, industrial controls, consumer electronics, and communications.",
+      "revenue_weight_pct": null,
+      "gross_profit_or_profit_weight_pct": null,
+      "business_model": "产能出货型; selective order taking to optimize ASP and margin.",
+      "key_drivers": [
+        "Automotive electronics demand",
+        "Industrial and 5G infrastructure",
+        "Raw material cost (CCL, copper foil)",
+        "Order selectivity"
+      ],
+      "prosperity_level": "moderate",
+      "marginal_direction": "stable",
+      "causal_chain": "Broad-based end-demand -> selective order acceptance (focus on high-ASP/ high-GPM orders) -> stable margin contribution; raw material cost inflation may compress margin if not passed through.",
+      "supporting_metric_refs": [
+        "KPE02"
+      ],
+      "counterevidence": [],
+      "confidence": "low",
+      "missing_inputs": [
+        "Revenue share breakdown",
+        "Segment growth rate",
+        "Segment margin data"
+      ],
+      "revenue_cny_mn": null,
+      "revenue_reported_value": null,
+      "revenue_reported_unit": "",
+      "revenue_growth_pct": null,
+      "gross_margin_pct": null,
+      "gross_margin_change_pp": null,
+      "period": "FY26E",
+      "source_module": "knowledge_planet",
+      "evidence_quote": "对于非AI产品，VGT将优先考虑ASP和GPM最佳的订单",
+      "extraction_mode": "llm_semantic"
+    }
+  ],
+  "semantic_metrics": [
+    {
+      "segment": "consolidated",
+      "variable": "revenue",
+      "value": 5519485066.85,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "Q1 20260331",
+      "comparison_basis": "reported",
+      "source_module": "earnings_model",
+      "source_quote": "/ latest reported / Q1 / 20260331 / 5519485066.85 / 1288427592.46 / 22077940267.4 / 5153710369.84 / 24729881740.7027 / 6447499562.463",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "top-line starting point",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "revenue",
+      "value": 19292313457.36,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "FY 20251231",
+      "comparison_basis": "reported annual",
+      "source_module": "earnings_model",
+      "source_quote": "/ latest annual / FY / 20251231 / 19292313457.36 / 4311988274.4",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "reported annual revenue",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "gross_margin",
+      "value": 34.4585,
+      "value_text": "",
+      "unit": "%",
+      "period": "Q1 20260331",
+      "comparison_basis": "YoY +1.08pp",
+      "source_module": "earnings_model",
+      "source_quote": "/ Gross margin / 34.4585% / +1.08pp / YoY: 20260331 vs 20250331",
+      "evidence_status": "unverified",
+      "direction": "up",
+      "materiality": "high",
+      "model_role": "main bridge from demand to gross profit",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "operating_margin",
+      "value": 27.2223,
+      "value_text": "",
+      "unit": "%",
+      "period": "Q1 20260331",
+      "comparison_basis": "YoY +1.91pp",
+      "source_module": "earnings_model",
+      "source_quote": "/ Operating margin / 27.2223% / +1.91pp / YoY: 20260331 vs 20250331",
+      "evidence_status": "unverified",
+      "direction": "up",
+      "materiality": "high",
+      "model_role": "tests pricing, mix, and cost absorption",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "net_margin",
+      "value": 23.3433,
+      "value_text": "",
+      "unit": "%",
+      "period": "Q1 20260331",
+      "comparison_basis": "YoY +1.99pp",
+      "source_module": "earnings_model",
+      "source_quote": "/ Net margin / 23.3433% / +1.99pp / YoY: 20260331 vs 20250331",
+      "evidence_status": "unverified",
+      "direction": "up",
+      "materiality": "high",
+      "model_role": "captures final earnings conversion",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "ocf_to_net_profit",
+      "value": 1.6428,
+      "value_text": "",
+      "unit": "ratio",
+      "period": "Q1 20260331",
+      "comparison_basis": "YoY: N/A",
+      "source_module": "earnings_model",
+      "source_quote": "/ OCF / net profit / 1.6428 / N/A / YoY: 20260331 vs 20250331",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "medium",
+      "model_role": "tests earnings quality and cash realization",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "receivables_to_revenue",
+      "value": 25.7759,
+      "value_text": "",
+      "unit": "%",
+      "period": "Q1 20260331",
+      "comparison_basis": "YoY -3.07pp",
+      "source_module": "earnings_model",
+      "source_quote": "/ Receivables / revenue / 25.7759% / -3.07pp / YoY: 20260331 vs 20250331",
+      "evidence_status": "unverified",
+      "direction": "down",
+      "materiality": "medium",
+      "model_role": "working-capital drag indicator",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "inventory_to_revenue",
+      "value": 17.6884,
+      "value_text": "",
+      "unit": "%",
+      "period": "Q1 20260331",
+      "comparison_basis": "YoY +4.18pp",
+      "source_module": "earnings_model",
+      "source_quote": "/ Inventory / revenue / 17.6884% / +4.18pp / YoY: 20260331 vs 20250331",
+      "evidence_status": "unverified",
+      "direction": "up",
+      "materiality": "medium",
+      "model_role": "inventory build indicator",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "pe_ttm",
+      "value": 59.8352,
+      "value_text": "",
+      "unit": "x",
+      "period": "as of 2026-07-07",
+      "comparison_basis": "TTM",
+      "source_module": "market_expectation",
+      "source_quote": "/ PE TTM / 59.8352 / earnings multiple the market is paying now",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "valuation multiple",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "ps_ttm",
+      "value": 13.6596,
+      "value_text": "",
+      "unit": "x",
+      "period": "as of 2026-07-07",
+      "comparison_basis": "TTM",
+      "source_module": "market_expectation",
+      "source_quote": "/ PS TTM / 13.6596 / sales multiple the market is paying now",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "valuation multiple",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "market_cap",
+      "value": 280015045216.0,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "as of 2026-07-07",
+      "comparison_basis": "",
+      "source_module": "market_expectation",
+      "source_quote": "/ Market cap (CNY) / 280015045216 / current equity value",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "current equity value",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "shareholder_count",
+      "value": 281424.0,
+      "value_text": "",
+      "unit": "persons",
+      "period": "2026-06-10",
+      "comparison_basis": "",
+      "source_module": "investor_interaction",
+      "source_quote": "截至2026年6月10日，公司A股股东人数为281,424名",
+      "evidence_status": "reported",
+      "direction": "",
+      "materiality": "low",
+      "model_role": "retail participation proxy",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "AI PCB",
+      "variable": "revenue_share_target",
+      "value": null,
+      "value_text": "60-70%",
+      "unit": "%",
+      "period": "FY26E",
+      "comparison_basis": "up from <50% currently",
+      "source_module": "knowledge_planet",
+      "source_quote": "AI收入占比应从低于50%提升至60-70%",
+      "evidence_status": "estimated",
+      "direction": "up",
+      "materiality": "high",
+      "model_role": "segment mix assumption",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "capex_guidance",
+      "value": 180000000000.0,
+      "value_text": "180亿元人民币",
+      "unit": "CNY",
+      "period": "FY26E",
+      "comparison_basis": "",
+      "source_module": "knowledge_planet",
+      "source_quote": "FY26资本支出（capex）指引约为180亿元人民币",
+      "evidence_status": "estimated",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "reinvestment engine",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "output_value_target_2030",
+      "value": null,
+      "value_text": "超过1000亿元人民币",
+      "unit": "CNY",
+      "period": "2030E",
+      "comparison_basis": "",
+      "source_module": "knowledge_planet",
+      "source_quote": "管理层指引到2030年产出超过1000亿元人民币",
+      "evidence_status": "estimated",
+      "direction": "",
+      "materiality": "medium",
+      "model_role": "long-term growth proxy",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    }
+  ],
+  "deterministic_evidence": [
+    {
+      "evidence_id": "EV001",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Financial-report look-back: 900 days"
+    },
+    {
+      "evidence_id": "EV002",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "Compacted 2025年年度报告: 477750 chars -> 134646 chars."
+    },
+    {
+      "evidence_id": "EV003",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 半年",
+      "text": "Compacted 2025年半年度报告: 316142 chars -> 59961 chars."
+    },
+    {
+      "evidence_id": "EV004",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260429, 2026, 季度",
+      "text": "20260429: 2026年一季度报告"
+    },
+    {
+      "evidence_id": "EV005",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260313, 2025, 年度",
+      "text": "20260313: 2025年年度报告"
+    },
+    {
+      "evidence_id": "EV006",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20251028, 2025, 季度",
+      "text": "20251028: 2025年三季度报告"
+    },
+    {
+      "evidence_id": "EV007",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20250829, 2025, 半年",
+      "text": "20250829: 向特定对象发行股票募集说明书（注册稿）（2025年半年报更新稿）"
+    },
+    {
+      "evidence_id": "EV008",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20250827, 2025, 半年",
+      "text": "20250827: 2025年半年度报告"
+    },
+    {
+      "evidence_id": "EV009",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ announcement_lookup / ready / Found 5 candidate financial-report announcement(s) from primary and CNINFO sources. /"
+    },
+    {
+      "evidence_id": "EV010",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026, 季度",
+      "text": "/ pdf_text_extraction / ready / 2026年一季度报告: extracted 27401 characters of readable report text. /"
+    },
+    {
+      "evidence_id": "EV011",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "Q1, 20260331",
+      "text": "/ latest reported / Q1 / 20260331 / 5519485066.85 / 1288427592.46 / 22077940267.4 / 5153710369.84 / 24729881740.7027 / 6447499562.463 / historical median 0331 share 20.0% /"
+    },
+    {
+      "evidence_id": "EV012",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "FY, 20251231",
+      "text": "/ latest annual / FY / 20251231 / 19292313457.36 / 4311988274.4 / 19292313457.36 / 4311988274.4 / 19292313457.36 / 4311988274.4 / FY actual /"
+    },
+    {
+      "evidence_id": "EV013",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "revenue",
+      "period": "20260331, 20250331",
+      "text": "/ Revenue base / 5519485066.85 / N/A / YoY: 20260331 vs 20250331 / top-line starting point for volume × price × mix /"
+    },
+    {
+      "evidence_id": "EV014",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "20260331, 20250331",
+      "text": "/ Gross margin / 34.4585% / +1.08pp / YoY: 20260331 vs 20250331 / main bridge from demand to gross profit /"
+    },
+    {
+      "evidence_id": "EV015",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260331, 20250331",
+      "text": "/ Operating margin / 27.2223% / +1.91pp / YoY: 20260331 vs 20250331 / tests pricing, mix, and cost absorption /"
+    },
+    {
+      "evidence_id": "EV016",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "20260331, 20250331",
+      "text": "/ Net margin / 23.3433% / +1.99pp / YoY: 20260331 vs 20250331 / captures final earnings conversion /"
+    },
+    {
+      "evidence_id": "EV017",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "operating_expense",
+      "period": "20260331, 20250331",
+      "text": "/ Finance-expense ratio / 1.8924% / +1.23pp / YoY: 20260331 vs 20250331 / captures leverage drag or relief /"
+    },
+    {
+      "evidence_id": "EV018",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "profit_or_eps",
+      "period": "20260331, 20250331",
+      "text": "/ OCF / net profit / 1.6428 / N/A / YoY: 20260331 vs 20250331 / tests earnings quality and cash realization /"
+    },
+    {
+      "evidence_id": "EV019",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "revenue",
+      "period": "20260331, 20250331",
+      "text": "/ Receivables / revenue / 25.7759% / -3.07pp / YoY: 20260331 vs 20250331 / tests working-capital drag; interim periods use annualized revenue /"
+    },
+    {
+      "evidence_id": "EV020",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "revenue",
+      "period": "20260331, 20250331",
+      "text": "/ Inventory / revenue / 17.6884% / +4.18pp / YoY: 20260331 vs 20250331 / tests inventory build and demand quality; interim periods use annualized revenue /"
+    },
+    {
+      "evidence_id": "EV021",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "segment_volume",
+      "period": "2025, 半年, 2012",
+      "text": "/ product_manufacturer / 产品制造 / 产能出货型 / quantified disclosure / 2025年半年度报告: 指引》（2012 年修订），公司主营业务归属于“计算机、通信和其他电子设备制造业”，行 业代码为 C39。 2、行业的发展状况 PCB，又称印制线路板、印刷电路板、印刷线路板，是指采用电子印刷术制作的、在 通用基材上按预定设计形成点间连接及印制组件的印制板，广泛应用于大数据中心、人工 智能、新一代通信技术、工业互联、新能源、汽车电子（新能源）、医疗仪器、计算机..."
+    },
+    {
+      "evidence_id": "EV022",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "utilization_or_backlog",
+      "period": "2025, 年度",
+      "text": "/ project_delivery / 项目订单 / 交付回款型 / quantified disclosure / 2025年年度报告: 营管理高效安全规范，将“执行力”发挥到极致；基于研发、工程双轮模式，集合 AI 大模 力，并积极推进下一代 14 阶 36 层 HDI 的研发认证；公司的 AI 算力卡、AI Data Center 随着公司业务的快速增长，为提升客户服务质量，公司在多个国家和地区设立了办事 / 验证订单质量、交付节奏、验收确认、毛利率、应收/合同资产和现金回款。 /"
+    },
+    {
+      "evidence_id": "EV023",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "2025, 年度",
+      "text": "/ core_revenue_engine / annual / 2025年年度报告: 1、宏观经济波动的风险公司的主营业务为印制线路板的研发、生产和销售，产品包 / Defines what actually drives the income statement. /"
+    },
+    {
+      "evidence_id": "EV024",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "balance_sheet",
+      "period": "2025, 年度",
+      "text": "/ customer_and_channel / annual / 2025年年度报告: 到收入是胜宏科技的关键业绩指标之一，且公司 4、针对资产负债表日前后确认的销售收入核对至客户 / Reveals demand source, concentration, and market validation. /"
+    },
+    {
+      "evidence_id": "EV025",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "/ geography / annual / 2025年年度报告: 胜宏科技销售模式包括直接出口和国内销售两部 3、对报告期记录的收入交易选取样本，检查与收入确 / Explains whether growth depends on a specific geography or expansion lane. /"
+    },
+    {
+      "evidence_id": "EV026",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "/ reinvestment_engine / annual / 2025年年度报告: 2025 年度，公司累计研发投入 7.78 亿元，同比增长 72.88%。公司聚焦 AI 算力、自 / Shows how today's cash is being converted into tomorrow's earnings power. /"
+    },
+    {
+      "evidence_id": "EV027",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "unmapped",
+      "period": "2025, 年度, 2012",
+      "text": "/ product / annual / 2025年年度报告: 指引》（2012 年修订），公司主营业务归属于“计算机、通信和其他电子设备制造业”，行 业代码为 C39。 2、行业的发展状况 12 胜宏科技（惠州）股份有限公司 2025 年年度报告全文 PCB，又称印制线路板、印刷电路板、印刷线路板，是指采用电子印刷术制作的、在 通用基材上按预定设计形成点间连接及印制组件的印制板，广泛应用于大数据中心、人工 智能、新一代通信技术、工业互联、新能源、汽车电子（新能源）、医疗仪器、计算机、 航空航天等领域，在整个..."
+    },
+    {
+      "evidence_id": "EV028",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 半年",
+      "text": "/ geography / semiannual / 向特定对象发行股票募集说明书（注册稿）（2025年半年报更新稿）: 653,282.61 万元和 693,376.50 万元，占同期主营业务收入的比重分别为 65.49%、 65.38%、65.00%和 81.00%，占比较高，境外销售是公司收入的重要来源，境外 收入的波动会给公司整体收入水平带来较大的影响。公司境外销售收入可能面临 国际贸易摩擦、市场竞争激烈、相关国家或地区政策法规变动、汇率波动等因素 影响，导致境外销售收入波动进而对公司业绩产生不利影响..."
+    },
+    {
+      "evidence_id": "EV029",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 半年",
+      "text": "/ product / semiannual / 2025年半年度报告: 指引》"
+    },
+    {
+      "evidence_id": "EV030",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "unmapped",
+      "period": "2025, 年度, 2012",
+      "text": "/ filing_segment / / product / annual / 2025年年度报告: 指引》（2012 年修订），公司主营业务归属于“计算机、通信和其他电子设备制造业”，行 业代码为 C39。 2、行业的发展状况 12 胜宏科技（惠州）股份有限公司 2025 年年度报告全文 PCB，又称印制线路板、印刷电路板、印刷线路板，是指采用电子印刷术制作的、在 通用基材上按预定设计形成点间连接及印制组件的印制板，广泛应用于大数据中心、人工 智能、新一代通信技术、工业互联、新能源、汽车电子（新能源）、医疗仪器、"
+    },
+    {
+      "evidence_id": "EV031",
+      "source_module": "industry_cycle",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "balance_sheet",
+      "period": "unspecified",
+      "text": "Do not state R32, R125, lithium, copper, gold, inventory, or spread changes as facts unless they appear in the evidence table."
+    },
+    {
+      "evidence_id": "EV032",
+      "source_module": "industry_cycle",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "gap",
+      "status": "missing",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "If cycle evidence says bottom-testing or evidence-limited, use language such as `bottom-right validation stage`, `右侧待验证`, or `needs confirmation`."
+    },
+    {
+      "evidence_id": "EV033",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "revenue",
+      "period": "unspecified",
+      "text": "/ Mobile / mobile subscribers, 5G penetration, mobile ARPU, DOU, churn, package mix / service revenue and margin durability /"
+    },
+    {
+      "evidence_id": "EV034",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "utilization_or_backlog",
+      "period": "unspecified",
+      "text": "/ Capex / 5G/cloud/AI capex, depreciation, network utilization, capex-to-revenue / FCF and ROIC /"
+    },
+    {
+      "evidence_id": "EV035",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "gap",
+      "status": "missing",
+      "model_variable": "segment_margin",
+      "period": "unspecified",
+      "text": "/ coverage_grade / report_types_seen / missing_report_types / answered_questions / core_pack_status / confidence_read /"
+    },
+    {
+      "evidence_id": "EV036",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "20251231, 20260331",
+      "text": "/ accounting_reconciliation / Check signs, units, periods, and cross-statement consistency before a number enters the PM memo. / leverage_funding_growth: 20251231->20260331: revenue growth -71.39%, gross margin change -0.77pp, operating margin change 1.01pp..."
+    },
+    {
+      "evidence_id": "EV037",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "unmapped",
+      "period": "2025, 年度, 2012",
+      "text": "/ segment_economics_depth / Decide whether each business line has enough disclosed scale, growth, margin, cash quality, and valuation treatment. / 2025年年度报告: 指引》（2012 年修订），公司主营业务归属于“计算机、通信和其他电子设备制造业”，行 业代码为 C39。 2、行业的发展状况 12 胜宏科技（惠州）股份有限公司 2025 年年度报告全文 PCB，..."
+    },
+    {
+      "evidence_id": "EV038",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "balance_sheet",
+      "period": "2026, 季度",
+      "text": "/ cash_flow_quality_decomposition / Separate accounting profit from cash conversion, working-capital drag, and demand visibility. / contract_liabilities: 2026年一季度报告: 加所致。 报告期内，主要系预收货款减 合同负债 7,164,590.26 11,422,898.80 -37.28% / contract_liabilities: 2026年一季度..."
+    },
+    {
+      "evidence_id": "EV039",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "utilization_or_backlog",
+      "period": "2026, 季度",
+      "text": "/ capex_cip_return_bridge / Test whether capex, construction-in-progress, or investment assets are building returns or just absorbing capital. / construction_in_progress: 2026年一季度报告: 增加所致。 报告期内，主要系扩大产能资 在建工程 5,169,689,299.24 3,609,874,903.28 43.21% / constr..."
+    },
+    {
+      "evidence_id": "EV040",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "2026, 季度",
+      "text": "/ non_recurring_profit_quality / Distinguish core operating profit from investment income, fair-value moves, subsidies, asset disposals, impairment, and other one-off items. / impairment: 2026年一季度报告: 45,872,271.81 0.00 100.00% 失以“-”号填列） 票的公允价值增加所致。 信用减值损失（损..."
+    },
+    {
+      "evidence_id": "EV041",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "utilization_or_backlog",
+      "period": "2026, 季度",
+      "text": "/ balance_sheet_forward_signals / Read balance-sheet leads before income-statement confirmation. / construction_in_progress: 2026年一季度报告: 增加所致。 报告期内，主要系扩大产能资 在建工程 5,169,689,299.24 3,609,874,903.28 43.21% / construction_in_progress: 2026年一季度报告: 报告期内，主要系扩大产能资 ..."
+    },
+    {
+      "evidence_id": "EV042",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "revenue",
+      "period": "2025, 年度",
+      "text": "/ shareholder_return_authenticity / Test whether dividends, buybacks, and capital returns are funded by durable profit and cash rather than leverage or asset sales. / generic_capital_allocation: 2025年年度报告: PCB 厂商第 3 名。 （3）“中国+N”全球化布局，保障供应交付能力 2025 年度，公司坚定实施..."
+    },
+    {
+      "evidence_id": "EV043",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-07-07",
+      "text": "Valuation trade date: 2026-07-07"
+    },
+    {
+      "evidence_id": "EV044",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ Market cap (CNY) / 280015045216 / current equity value /"
+    },
+    {
+      "evidence_id": "EV045",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "valuation",
+      "period": "TTM",
+      "text": "/ PE TTM / 59.8352 / earnings multiple the market is paying now /"
+    },
+    {
+      "evidence_id": "EV046",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "revenue",
+      "period": "TTM",
+      "text": "/ PS TTM / 13.6596 / sales multiple the market is paying now /"
+    },
+    {
+      "evidence_id": "EV047",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "valuation",
+      "period": "TTM",
+      "text": "/ Implied TTM earnings (CNY) / 4679771191.8068 / market cap divided by PE TTM /"
+    },
+    {
+      "evidence_id": "EV048",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "revenue",
+      "period": "TTM",
+      "text": "/ Implied TTM sales (CNY) / 20499505491.8153 / market cap divided by PS TTM /"
+    },
+    {
+      "evidence_id": "EV049",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "valuation",
+      "period": "unspecified",
+      "text": "/ PE percentile / 79.9 / 5-year valuation position /"
+    },
+    {
+      "evidence_id": "EV050",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "valuation",
+      "period": "unspecified",
+      "text": "/ PB percentile / 89.1 / 5-year valuation position /"
+    },
+    {
+      "evidence_id": "EV051",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "valuation",
+      "period": "unspecified",
+      "text": "/ PS percentile / 85.8 / 5-year valuation position /"
+    },
+    {
+      "evidence_id": "EV052",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ latest annual parent profit / 4311988274.4 / 64.9387 / 0.9214 /"
+    },
+    {
+      "evidence_id": "EV053",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-07-07",
+      "text": "Valuation trade date: 2026-07-07"
+    },
+    {
+      "evidence_id": "EV054",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Market-cap units: `total_mv` is ten-thousand CNY; `total_mv_cny_100m` is 亿元 and equals `total_mv / 10,000`."
+    },
+    {
+      "evidence_id": "EV055",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "unspecified",
+      "text": "/ ts_code / name / industry / total_mv / total_mv_cny_100m / pe_ttm / pb / ps_ttm / dv_ttm / roe_annual / roa_annual / roe / roa / netprofit_yoy / debt_to_assets / v4_score /"
+    },
+    {
+      "evidence_id": "EV056",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 002463.SZ / 沪电股份 / 元器件 / 24962844.6192 / 2496.2845 / 58.0272 / 14.8678 / 11.8185 / 0.3854 / 28.3622 / 17.4822 / 7.7867 / 4.5412 / 62.9033 / 48.6431 / 63.7 /"
+    },
+    {
+      "evidence_id": "EV057",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2009",
+      "text": "/ 600183.SH / 生益科技 / 元器件 / 36623830.1784 / 3662.383 / 93.2273 / 20.4286 / 11.8289 / 0.7959 / 12.0372 / 8.2009 / 6.6845 / 4.5231 / 105.4724 / 44.0312 / 60.7 /"
+    },
+    {
+      "evidence_id": "EV058",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 300476.SZ / 胜宏科技 / 元器件 / 28001504.5216 / 2800.1505 / 59.8352 / 16.089 / 13.6596 / 0.7 / 33.7592 / 18.8717 / 7.5741 / 4.1198 / 39.948 / 55.2339 / 55.9 /"
+    },
+    {
+      "evidence_id": "EV059",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 002916.SZ / 深南电路 / 元器件 / 28070875.586 / 2807.0876 / 77.234 / 15.517 / 11.0256 / 0.5824 / 20.6239 / 13.1896 / 4.8254 / 2.9538 / 73.0052 / 47.2425 / 55 /"
+    },
+    {
+      "evidence_id": "EV060",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 300475.SZ / 香农芯创 / 元器件 / 11472314.7994 / 1147.2315 / 61.836 / 23.6081 / 2.2446 / 0.0141 / 9.4905 / 8.9209 / 31.4763 / 11.4333 / 7835.0639 / 75.4006 / 54.7 /"
+    },
+    {
+      "evidence_id": "EV061",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2067",
+      "text": "/ 002938.SZ / 鹏鼎控股 / 元器件 / 21420991.7181 / 2142.0992 / 57.7008 / 6.1821 / 5.4861 / 1.0819 / 11.2846 / 8.5102 / 1.3454 / 1.2579 / -5.2067 / 30.3587 / 53.3 /"
+    },
+    {
+      "evidence_id": "EV062",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 300408.SZ / 三环集团 / 元器件 / 26830962.2 / 2683.0962 / 93.2721 / 11.9798 / 27.2257 / 0.3206 / 12.6112 / 11.232 / 3.5905 / 3.2367 / 48.4835 / 17.1361 / 50.7 /"
+    },
+    {
+      "evidence_id": "EV063",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20060728",
+      "text": "/ 300476.SZ / 陈涛 / 赵启祥 / 朱溪瑶 / 98278.4813 / 20060728 / 广东 / 高密度印制线路板的研发、生产和销售。 /"
+    },
+    {
+      "evidence_id": "EV064",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20251231",
+      "text": "/ 20251231 / 4602652783.97 / 6616818528.87 / 380297852.2 / -6734969595.11 / 3279646655.67 / 1193532035.03 / 35244486987.89 / 18626878544.32 /"
+    },
+    {
+      "evidence_id": "EV065",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20241231",
+      "text": "/ 20241231 / 1358305753.83 / 833820204.25 / 260364567.51 / -1040829836.89 / 1662025966.52 / 1217339034.72 / 19175313194.03 / 10247379783.92 /"
+    },
+    {
+      "evidence_id": "EV066",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20231231",
+      "text": "/ 20231231 / 1279776351.25 / 644557970.03 / 230368406.72 / -1999674313.19 / 2141296497.43 / 1156330851.48 / 17383616487.62 / 9757886591.14 /"
+    },
+    {
+      "evidence_id": "EV067",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20221231",
+      "text": "/ 20221231 / 1240274753.73 / 1060605116.6 / 235543585.75 / -1465983654.34 / 1095251552.84 / N/A / 14303773931.6 / 7366911193.87 /"
+    },
+    {
+      "evidence_id": "EV068",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20211231",
+      "text": "/ 20211231 / 792544304.82 / 1537498321.89 / 223547873.1 / -2710314400.89 / 579391209.19 / N/A / 13461210038.72 / 7191502583.43 /"
+    },
+    {
+      "evidence_id": "EV069",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260313, 20251231, 20260414",
+      "text": "/ 20260313 / 20251231 / 实施 / 1.9949 / 0 / 20260414 / 20260415 / 20260415 /"
+    },
+    {
+      "evidence_id": "EV070",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260313, 20251231",
+      "text": "/ 20260313 / 20251231 / 股东大会通过 / 2 / 0 / N/A / N/A / N/A /"
+    },
+    {
+      "evidence_id": "EV071",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260313, 20251231",
+      "text": "/ 20260313 / 20251231 / 预案 / 2 / 0 / N/A / N/A / N/A /"
+    },
+    {
+      "evidence_id": "EV072",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20250827, 20250630",
+      "text": "/ 20250827 / 20250630 / 预案 / 0 / 0 / N/A / N/A / N/A /"
+    },
+    {
+      "evidence_id": "EV073",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Look-back window for futures proxies: 90 days"
+    },
+    {
+      "evidence_id": "EV074",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_volume",
+      "period": "unspecified",
+      "text": "/ 1 - company hard evidence / official filings, production reports, and sales announcements / realized product mix, output, unit cost, and cash-flow conversion / usually delayed and may not include daily spot prices /"
+    },
+    {
+      "evidence_id": "EV075",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "balance_sheet",
+      "period": "unspecified",
+      "text": "Do not state R32, R125, lithium, copper, gold, inventory, or spread changes as facts unless they appear in the evidence table."
+    },
+    {
+      "evidence_id": "EV076",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "gap",
+      "status": "missing",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "If a thesis-critical input is marked missing, treat it as neutral non-evidence and a retrieval task; it cannot prove margin deterioration/resilience or mechanically change rating, conviction, or sizing."
+    },
+    {
+      "evidence_id": "EV077",
+      "source_module": "policy",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025-10-28, 2025",
+      "text": "/ 中共中央关于制定国民经济和社会发展第十五个五年规划的建议 / 中国政府网 / 2025-10-28 / national-plan / ok / https://www.gov.cn/gongbao/2025/issue_12386/202511/content_7047415.html /"
+    },
+    {
+      "evidence_id": "EV078",
+      "source_module": "policy",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2024-08-11",
+      "text": "/ 中共中央 国务院关于加快经济社会发展全面绿色转型的意见 / 中国政府网 / 2024-08-11 / national-direction / ok / https://www.gov.cn/zhengce/202408/content_6967663.htm /"
+    },
+    {
+      "evidence_id": "EV079",
+      "source_module": "policy",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2024-08-11",
+      "text": "/ renewable-energy / 绿色转型 / 中共中央 国务院关于加快经济社会发展全面绿色转型的意见 / 中国政府网 / 2024-08-11 / national-direction / / supports multi-year demand visibility for clean-energy equipment and infrastructure / argue the company sits inside a policy-backed demand pool / test whether"
+    },
+    {
+      "evidence_id": "EV080",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Canonical company route: https://irm.cninfo.com.cn/ircs/company/companyDetail?orgId=9900024582&stockcode=300476"
+    },
+    {
+      "evidence_id": "EV081",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ cninfo / reachable / application/json;charset=UTF-8 / {\"statusCode\":200,\"title\":\"\",\"code\":\"\",\"message\":\"success\",\"data\":[{\"stockCode\":\"300476\",\"shortName\":\"胜宏科技\",\"pinyin\":\"SH /"
+    },
+    {
+      "evidence_id": "EV082",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-06-11, 2026-06-17, 2026",
+      "text": "/ 2026-06-11 / 2026-06-17 / 董秘您好！我想查询截至2026年6月10日公司最新股东人数？谢谢 / 尊敬的投资者，您好！根据中国证券登记结算有限公司提供的数据，截至2026年6月10日，公司A股股东人数为281,424名，谢谢关注！ / substantive /"
+    },
+    {
+      "evidence_id": "EV083",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-06-11, 2026-06-17, 2026",
+      "text": "/ 2026-06-11 / 2026-06-17 / 请问截止2026年6月11日，胜宏科技的股东人数是多少？ / 尊敬的投资者，您好！根据中国证券登记结算有限公司提供的数据，截至2026年6月10日，公司A股股东人数为281,424名，谢谢关注！ / substantive /"
+    },
+    {
+      "evidence_id": "EV084",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "utilization_or_backlog",
+      "period": "2026-06-10, 2026-06-17",
+      "text": "/ 2026-06-10 / 2026-06-17 / 董秘您好！央视财经报道全球70%PPE树脂供应中断，是否会影响公司后期产品交付？有市场分析报道，公司与圣泉集团签订了树脂包销长期协议，因而全球PPE树脂紧张不会影响公司交付，是否属实？ / 尊敬的投资者，您好！公司生产所需主要原材料为覆铜板、半固化片、铜球、铜箔等，公司与主要原材料供应商已建立了稳定的合作关系，将结合下游需求与公司订单情况动态调整备货策略，保障订单及时交付，谢谢关注！ / substantive /"
+    },
+    {
+      "evidence_id": "EV085",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "scenario_probability",
+      "period": "2026-06-09, 2026-06-17, 2026",
+      "text": "/ 2026-06-09 / 2026-06-17 / 高管您好：公司2026年Q2、Q3、Q4业绩逐季增长的概率大吗？贵公司股价横盘这么久的原因是什么？ / 尊敬的投资者，您好！股价波动受多种因素综合影响，敬请广大投资者理性研判市场波动，审慎决策，注意投资风险。公司将严格按照监管相关规定履行信息披露义务，业绩经营情况请持续关注公司后续披露的定期报告。谢谢关注！ / substantive /"
+    },
+    {
+      "evidence_id": "EV086",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-06-08, 2026-06-17, 2026",
+      "text": "/ 2026-06-08 / 2026-06-17 / 董秘您好，请问截止2026年6月10号胜宏科技股东人数，谢谢！ / 尊敬的投资者，您好！根据中国证券登记结算有限公司提供的数据，截至2026年6月10日，公司A股股东人数为281,424名，谢谢关注！ / substantive /"
+    },
+    {
+      "evidence_id": "EV087",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "utilization_or_backlog",
+      "period": "2026-06-08, 2026-06-17, 2024",
+      "text": "/ 2026-06-08 / 2026-06-17 / 2024年末固定资产71.72亿，在建工程2.57亿，2025年末固定资产就变成91.64亿。差额是25年新建并转固吗？是否意味着一年就能扩产能？ / 尊敬的投资者，您好！公司 2025 年固定资产增加主要来自购置的机器设备，在建房屋及建筑物转固占比相对较小，具体情况请见公司披露的《2025年年度报告》“第八节 财务报告”之“七、合并财务报表项目注释”中有关内容。"
+    },
+    {
+      "evidence_id": "EV088",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "utilization_or_backlog",
+      "period": "2026-06-08, 2026-06-17, 2026",
+      "text": "/ 2026-06-08 / 2026-06-17 / 高管您好：公司走势太糟糕啦；让持仓胜宏科技的投资者非常 失望。能否根据公司经营订单情况承诺2026年Q2、Q3、Q4净利润均大概率环比增长？中继旭创、新易盛均做了该承诺，贵公司有这个信心吗？ / 尊敬的投资者，您好！股价波动受多种因素综合影响，敬请广大投资者理性研判市场波动，审慎决策，注意投资风险。公司将严格按照监管相关规定履行信息披露义务，业绩经营情况请持续关注公司后续披露的定期报告。谢谢关注！ / substantive /"
+    },
+    {
+      "evidence_id": "EV089",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_volume",
+      "period": "2026-06-06, 2026-06-17",
+      "text": "/ 2026-06-06 / 2026-06-17 / 尊敬的董秘，您好！能否介绍下今年贵公司新建产能及存量产能释放情况？ / 尊敬的投资者，您好！公司新建产能按计划推进落地，惠州厂房四项目现已分阶段逐步投产，目前处于爬坡与量产阶段。厂房十、十一项目以及泰国和越南工厂建设正按计划快速有序推进中，新建厂房需经历厂房建设装修、设备安装调试、客户审厂、送样测试、订单下达及量增等阶段，初期的产线磨合和产能产量逐步释放是行业的必经过程。PCB属重资产制造业，产能建设周期普遍较长，目前公司正加速推进产能建设。谢谢关注！ / s"
+    },
+    {
+      "evidence_id": "EV090",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "2026-06-07, 2026-07-07",
+      "text": "Window: 2026-06-07 to 2026-07-07 (30 days)"
+    },
+    {
+      "evidence_id": "EV091",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Primary query terms: 300476.SZ, 300476SZ, 300476, 胜宏科技"
+    },
+    {
+      "evidence_id": "EV092",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Upstream sync summary: synced=5, cached=26, index_refreshed=1"
+    },
+    {
+      "evidence_id": "EV093",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "valuation",
+      "period": "unspecified",
+      "text": "Auto-sync refresh window: latest 30 day(s); older dates use the persistent local cache."
+    },
+    {
+      "evidence_id": "EV094",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Preprocess: ok: events=10868, clusters=77, opportunities=238, ocr_low_quality=820"
+    },
+    {
+      "evidence_id": "EV095",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Matched stream items: 19"
+    },
+    {
+      "evidence_id": "EV096",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Fusion target: 300476.SZ"
+    },
+    {
+      "evidence_id": "EV097",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Direct terms: 300476.SZ, 300476SZ, 300476, 胜宏科技"
+    },
+    {
+      "evidence_id": "EV098",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Raw matches: stream=19; preprocessed matches: events=10, opportunities=0"
+    },
+    {
+      "evidence_id": "EV099",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Raw quality mix: low_quality=820, ok=10616, usable_with_warnings=252"
+    }
+  ],
+  "conflicts": [
+    {
+      "topic": "PCB pricing pressure from Nvidia",
+      "segment": "AI PCB",
+      "claim_a": "英伟达要求PCB厂商降价10%",
+      "source_a": "KPE10 (market rumor via 上海证券报, 2026-06-23)",
+      "claim_b": "公司经营一切正常，基本面没有变化；ASP调整平稳，成本传导顺畅",
+      "source_b": "KPE10 (company response) and KPE02 (company roadshow)",
+      "conflict_type": "market rumor vs company denial",
+      "required_resolution": "Verify with official Nvidia procurement terms or confirmed customer contract pricing; check Q2 2026 margin results."
+    },
+    {
+      "topic": "Rubin Ultra architecture delay",
+      "segment": "AI PCB",
+      "claim_a": "正交背板进度推迟，2027年Kyber出货概率极低，2027年Rubin Ultra将沿用传统架构",
+      "source_a": "KPE11 (Jefferies research, 2026-06-24)",
+      "claim_b": "VGT认为正交背板在Rubin Ultra中被采用的进度没有延迟",
+      "source_b": "KPE02 (company roadshow, 2026-07-02)",
+      "conflict_type": "sell-side research vs company guidance",
+      "required_resolution": "Monitor Nvidia official hardware roadmap announcements and supply chain confirmations."
+    }
+  ],
+  "kpe_impacts": [
+    {
+      "evidence_id": "KPE01",
+      "segment": "consolidated",
+      "variable": "capital_allocation",
+      "direction": "positive",
+      "horizon": "short-term",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "胜利精密（300476.SZ）计划推出总额不超过7亿元的员工持股计划，股份将通过二级市场购买A股股票实施",
+      "verification_gate": "Verify actual repurchase progress and dilution impact in subsequent filings.",
+      "missing_inputs": [
+        "Share count base",
+        "Employee plan details (price, duration)"
+      ],
+      "known_kpe": {
+        "date": "2026-06-09T09:12",
+        "source": "stream_item:10380",
+        "source_type": "channel_check",
+        "credibility": "identified_broker_private_text",
+        "decision_role": "probability/verification proxy",
+        "evidence": "📰GS CHINA OPEN（... 📰GS CHINA OPEN（高盛中国开盘观察） 📊市场情绪（Sentiment） 📉昨日亚洲市场出现大幅抛售，科技股领跌全区域。 📈A 股市场的日内反弹似乎失去动能，缺乏明确支撑，投资者情绪趋于谨慎。 💡谷歌与英特尔的 TPU 订单相关新消息，可能为 AI 硬件股带来提振，尤其是 PCB 相关个股。 ⚠️彭博报道称，美国国防部更新了被认为与中国军方有关联的中国公司名单，比亚迪、药明康德被新增至该名单。尽管基本面影响尚不明确，但这可能在短期内压制相关个股的市场情绪。 📅今日市场重点关注 5 月贸易数据，高盛预测 5 月出口同比增速将从 4 月的 14.1% 进一步升至 15%，进口同比增速将从 4 月的 25.3% 升至 30%。 📰市场要闻（Market News） 1. 经济数据（Economic Data） 📈高盛预计 5 月出口 / 进口同比增速为 + 15%/30%，市场预期为 + 15%/25.2%，4 月数据为 + 14.1%/25.3%。 2. 地缘政治（Geopolitics） ⚠️美国国防部指控阿里巴巴、百度为中国军方提供支持。 🌍中国商务部副部长凌吉将于 6 月 9 日至 14 日访问欧盟总部，与欧洲官员讨论中欧贸易与投资磋商机制建立的相关安排。 🕊️在美国特朗普总统表示双方有望达成立即停火协议后，伊朗表示将结束对以色列的当前军事行动。 3. TMT 板块 🤝消息称，谷歌已向英特尔下单采购超过 300 万颗芯片。 📈国内媒体报道，算力需求爆发推动电子布价格自去年以来上涨 100%，今年经历 5 轮涨价后均价达 7.4 元 / 米，供需紧张局面可能持续。 📈胜利精密（300476.SZ）计划推出总额不超过 7 亿元的员工持股计划，股份将通过二级市场购买 A 股股票实施。 4. 汽车板块 📉中国 5 月汽车销量同比下滑 22.1%，中汽协因此大幅下调全年销量预期。 5. 建筑 / 基建板块 🏗️中国已开工建设投资 772 亿元的三峡水运新通道项目，这是 “十五五” 时期首个重大标志性工程，旨在提升长江航运能力。 6. 医疗健康板块 ⚠️美国国防部将生物科技公司药明康德列入涉军名单。 7. 高盛观点（GIR Read） 📉三七互娱（002555.SZ）：受旗舰游戏不确定性及新游戏生命周期影响，短期增长低迷，高盛下调评级至 “卖出”。",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "segment_volume",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until Verify actual repurchase progress and dilution impact in subsequent filings.",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE02",
+      "segment": "AI PCB",
+      "variable": "asp_or_price",
+      "direction": "positive",
+      "horizon": "FY26",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "胜宏科技(VGT)表示AI PCB的原材料成本稳定，新一代产品的成本传导顺畅",
+      "verification_gate": "Check quarterly margin reports for sustained gross margin stability.",
+      "missing_inputs": [
+        "Quantified ASP change",
+        "Exact gross margin delta per product line"
+      ],
+      "known_kpe": {
+        "date": "2026-07-02T08:11",
+        "source": "stream_item:8788",
+        "source_type": "channel_check",
+        "credibility": "high_private_channel_hard_to_verify",
+        "decision_role": "probability/verification proxy",
+        "evidence": "📢 胜宏科技(2476.HK)... 📢 胜宏科技(2476.HK)：产能扩张按计划进行，ASP调整平稳，GPM因AI产品结构而保持韧性 💡 与一些投资者担心的那样，公司通过主要客户降低成本不同，胜宏科技(VGT)表示AI PCB的原材料成本稳定，新一代产品的成本传导顺畅；对于非AI产品，VGT将优先考虑ASP（平均售价）和GPM（毛利率）最佳的订单。 📊 因此，它预计FY26（2026财年）毛利率与FY25（2025财年）大致持平，而AI收入占比应从低于50%提升至60-70%，产出价值从2025年的350亿元人民币增长到2030年的约3-4倍。 🎯 对于Rubin（英伟达下一代GPU），公司对在计算托盘HDI（与GB300一致）中占据大部分份额充满信心，并目标是维持关键客户所有产品中约50%的份额。 👀 VGT认为正交背板在Rubin Ultra中被采用的进度没有延迟，但确实指出终端客户正在考虑10多种材料/供应商组合，包括不同的层数以及Q-glass和PTFE。 🌐 除了关键GPU客户外，VGT正在向更多ASIC（专用集成电路）客户多元化拓展，并目标是ASIC/GPU收入占比达到50/50，因为ASIC设计也正从HLC（高密度互连板）转向HDI。 💻 公司目前为一家美国主要CSP（云服务提供商）客户的V7代CPU供应PCB，并有信心在2026财年末（YE26）进入V8 TPU的PCB供应。 💰 FY26资本支出（capex）指引约为180亿元人民币，其中约150亿元用于惠州的工厂10和11。 🔮 工厂12和13（每个产出超过100亿元）专注于1.6T光模块PCB，未来可能拓展至CoWoP（Chip on Wafer on Package），因为它从关键GPU客户获得了强劲的需求指引。 📈 从长远来看，管理层指引到2030年产出超过1000亿元人民币。",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "asp_or_price",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until Check quarterly margin reports for sustained gross margin stability.",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE03",
+      "segment": "consolidated",
+      "variable": "utilization_or_backlog",
+      "direction": "positive",
+      "horizon": "short-term",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "当前公司生产经营活动一切正常、订单充沛，各项工作均在有序推进中",
+      "verification_gate": "Monitor capacity utilization disclosures and order backlog comments in next earnings call.",
+      "missing_inputs": [
+        "Quantified utilization rate",
+        "Order backlog value"
+      ],
+      "known_kpe": {
+        "date": "2026-06-08T11:42",
+        "source": "stream_item:10768",
+        "source_type": "channel_check",
+        "credibility": "high_private_channel_hard_to_verify",
+        "decision_role": "probability/verification proxy",
+        "evidence": "【胜宏科技回应传闻：网传视频及... 【胜宏科技回应传闻：网传视频及相关信息所反映的内容与公司的生产经营活动无关】近日，网上出现了涉及胜宏科技高管的传闻。6月8日上午，胜宏科技方面向记者表示，公司已关注到相关信息，但网传视频及相关信息所反映的内容与公司的生产经营活动无关，亦不涉及公司治理、内部控制或任何应披露的重大信息。该等事项不会对公司的日常经营造成任何影响。胜宏科技称，当前公司生产经营活动一切正常、订单充沛，各项工作均在有序推进中。（每日经济新闻）",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "utilization_or_backlog",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until Monitor capacity utilization disclosures and order backlog comments in next earnings call.",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE04",
+      "segment": "AI PCB",
+      "variable": "segment_volume",
+      "direction": "positive",
+      "horizon": "medium-term",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "高端PCB/AI服务器材料：弹性不及存储，确定性更强，容易走趋势",
+      "verification_gate": "Track AI server shipment data and associated PCB orders.",
+      "missing_inputs": [
+        "Market share data",
+        "Demand growth rate"
+      ],
+      "known_kpe": {
+        "date": "2026-07-04T20:23",
+        "source": "stream_item:7679",
+        "source_type": "channel_check",
+        "credibility": "high_private_channel_hard_to_verify",
+        "decision_role": "probability/verification proxy",
+        "evidence": "‼️【中报预告+AI硬件景气：... ‼️【中报预告+AI硬件景气：谁是下一个江波龙？】——山西证券 江波龙打出高度后，市场要问的不再是能不能追，而是扩散方向在哪。我们的判断——AI产业真正缺的不只是GPU，而是一整套硬件系统：存储决定吞吐、光模块决定通信、高端PCB决定互联、先进封装决定集成、上游材料决定成本边界。订单、价格、稼动率同步改善的环节，中报预告就是新催化！ 1）存储：涨价周期叠加AI终端与服务器需求，利润弹性最容易被预告验证。重点看德明利、佰维存储、香农芯创、兆易创新、北京君正、普冉股份； 2）先进封装/Chiplet：华为韬定律V2强化后摩尔时代系统级优化，A股映射最清晰的是晶圆级封装、TSV、多层堆叠、封测与封装材料。重点看长电科技、通富微电、华天科技、晶方科技、甬矽电子、华海诚科、深科技。 3）光模块：集群越大，瓶颈越从单卡性能转向网络通信，800G/1.6T/CPO/硅光是业绩兑现方向。重点看新易盛、中际旭创、天孚通信、光迅科技、华工科技、太辰光、剑桥科技、东山精密、联特科技。 4）高端PCB/AI服务器材料：弹性不及存储，确定性更强，容易走趋势。重点看沪电股份、胜宏科技、深南电路、生益科技、生益电子、景旺电子。 5）液冷：Rubin平台单GPU功耗2300W、单机柜200kW、强制全液冷——渗透率30%→60%的核心催化剂，平台出货节奏直接决定26H2液冷链订单可见度。重点看英维克、高澜股份、申菱环境、中石科技、思泉新材。 ☎️ 下周不要被低位轮动带偏，真正的主线只有一条：中报预告+AI硬件景气度！",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "segment_volume",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until Track AI server shipment data and associated PCB orders.",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE05",
+      "segment": "AI PCB",
+      "variable": "utilization_or_backlog",
+      "direction": "positive",
+      "horizon": "long-term",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "英伟达从'卖卡'走向'算力分成'，AI工厂商业模式迎来重估...胜宏科技",
+      "verification_gate": "Monitor industry shift to AI factory model and company's involvement.",
+      "missing_inputs": [
+        "Quantified utilization improvement",
+        "Revenue exposure to AI factory model"
+      ],
+      "known_kpe": {
+        "date": "2026-07-02T13:32",
+        "source": "stream_item:8467",
+        "source_type": "channel_check",
+        "credibility": "high_private_channel_hard_to_verify",
+        "decision_role": "probability/verification proxy",
+        "evidence": "【英伟达从“卖卡”走向“算力分... 【英伟达从“卖卡”走向“算力分成”，AI工厂商业模式迎来重估】--0702 英伟达AI基础设施合作模式正在从传统GPU销售、升级为“硬件销售+信用支持+算力云收入分成”。我们认为，这可能是全球AI Infra商业模式的重要拐点。 不同于过去市场只交易GPU、服务器、光模块等硬件链条，本次Sharon AI与英伟达合作建设72MW AI工厂、最多部署4万块GB300 GPU，并采用收入分成与信用支持机制，意味着AI算力正在从“一次性设备采购”变成“长期现金流资产”。 实际落地看，需求侧，初创企业、模型开发者、企业客户对高性能算力需求持续提升，但自建GPU集群门槛高，租赁AI云算力成为现实路径；供给侧，AI工厂正在成为新型基础设施，算力利用率、集群调度、能源指标、液冷能力、客户绑定能力，将成为核心竞争力。 国内映射来看，英伟达模式强化全球“算力运营商业化”趋势，也会加快国产AI工厂、昇腾智算中心、算力服务平台建设。未来市场交易重点，可能从“谁有GPU”进一步切换到“谁能运营算力、谁能提高利用率、谁能把算力变成持续现金流”。 1）AI服务器整机：工业富联、浪潮信息、中科曙光、紫光股份、神州数码； 2）国产服务器 / 算力一体机：拓维信息、恒为科技、烽火通信、中国长城； 3）算力运营 / AI云：首都在线、优刻得、青云科技、中贝通信、奥飞数据、润泽科技； 4）IDC、液冷、电源、网络：光环新网、数据港、英维克、科华数据、锐捷网络、沪电股份、胜宏科技、新易盛、中际旭创。 后续重点关注国产AI工厂从“硬件部署”走向“算力运营”的拐点，尤其是昇腾集群组网调优、模型迁移部署、智算运维服务等方向。恒为科技的核心预期差，正是在“国产算力不是只卖设备，而是开始卖服务、卖效率、卖持续现金流”。",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "utilization_or_backlog",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unverified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until Monitor industry shift to AI factory model and company's involvement.",
+      "grounding_status": "unverified_quote"
+    },
+    {
+      "evidence_id": "KPE06",
+      "segment": "AI PCB",
+      "variable": "market_share",
+      "direction": "positive",
+      "horizon": "FY26-30",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "公司有信心在GB300配套计算载板HDI领域维持多数份额，并目标在核心客户全品类产品中保持约50%市占率",
+      "verification_gate": "Track Nvidia supplier lists and quarterly share disclosures from customer reports.",
+      "missing_inputs": [
+        "Current market share %",
+        "Revenue base for share calculation"
+      ],
+      "known_kpe": {
+        "date": "2026-07-01T20:10",
+        "source": "stream_item:7561",
+        "source_type": "channel_check",
+        "credibility": "high_private_channel_hard_to_verify",
+        "decision_role": "probability/verification proxy",
+        "evidence": "胜宏香港路演： “部分投资者... 胜宏香港路演： “部分投资者此前担忧大厂客户会持续压价，但胜宏科技表示：AI印制电路板（PCB）原材料成本保持稳定，新一代产品成本传导落地顺畅；针对非AI类产品，公司将优先承接平均售价（ASP）、毛利率（GPM）表现最优的订单。 据此公司预计，26财年毛利率较25财年基本持平；AI业务营收占比将从当前不足50%提升至60%–70%；2025年公司产值为350亿元人民币，预计2030年产值将增至当前约3–4倍。 针对Rubin平台相关业务：公司有信心在GB300配套计算载板高密度互联板（HDI）领域维持多数份额，并目标在核心客户全品类产品中保持约50%市占率。胜宏判断Rubin Ultra平台导入正交背板的进度不会延期，但终端客户目前正在评估十余种材料与供应商组合方案，涵盖不同层数板材、石英玻璃（Q-glass）及聚四氟乙烯（PTFE）基材。 除头部GPU客户外，公司正拓展更多专用集成电路（ASIC）客户。当前ASIC设计方案正从高阶线路板（HLC）转向高密度互联板（HDI），公司目标远期ASIC与GPU业务营收占比达到1:1。 公司现已为美国头部云服务商（CSP）第七代产品供应CPU印制电路板，同时有信心在2026年末切入其第八代TPU印制电路板供应链。 26财年资本开支（capex）指引约180亿元人民币，其中约150亿元将投建惠州十厂、十一厂。十二厂、十三厂规划单厂产值超100亿元，专门生产1.6T光模块PCB，远期还有望覆盖CoWoS封装基板；头部GPU客户给出的需求指引十分旺盛。 管理层长期展望：2030年整体产值有望突破1000亿元人民币。”",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "market_share",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unverified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until Track Nvidia supplier lists and quarterly share disclosures from customer reports.",
+      "grounding_status": "unverified_quote"
+    },
+    {
+      "evidence_id": "KPE07",
+      "segment": "consolidated",
+      "variable": "segment_volume",
+      "direction": "positive",
+      "horizon": "short-term",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "其他强势股：胜宏科技（涨停板列表中）",
+      "verification_gate": "Not a fundamental catalyst; noise.",
+      "missing_inputs": [],
+      "known_kpe": {
+        "date": "2026-06-30T18:57",
+        "source": "stream_item:6674",
+        "source_type": "channel_check",
+        "credibility": "identified_broker_private_text",
+        "decision_role": "probability/verification proxy",
+        "evidence": "6月30日复盘笔记：芯片产业链... 6月30日复盘笔记：芯片产业链/存储芯片/机器人/光通信/算力租赁/商业航天/玻璃基板等 一、重磅财经信息 6月份制造业采购经理指数为50.3%，重返扩张区间。 二、大盘表现 沪指涨0.50%，深证成指涨2.48%，创业板指涨2.99%，科创50指数涨3.85%。 沪深京三市成交额接近3.3万亿，较昨日缩量逾2000亿。 三、强势板块和个股分析 备注：只列举部分涨停板 芯片产业链 ①SEMI最新报告预测，全球300mm存储器晶圆厂设备投资预计将在2026年首次突破500亿美元关口，达到520亿美元，同比增长29%。 ②全球近20家模拟及功率半导体企业即将于7月1日启动新一轮涨价。据了解，AI服务器、数据中心专用电源管理芯片及高压信号链模拟芯片涨幅为15%至25%，工业自动化、储能隔离芯片涨幅为10%至15%。 涨停板：富满微、晶方科技、禾盛新材、斯达半导、江化微、多氟多、新洁能、昊华科技、力合微、格科微、先导基电、海晨股份、康强电子、三美股份、敏芯股份、深科达、翱捷科技、联得装备、金海通、华亚智能、兴业股份、国风新材、肯特催化、康欣新材 其他强势股：正帆科技、屹唐股份、安凯微、灿芯股份 存储芯片 摩根大通研报显示，本轮存储超级周期将“更高、更长”，全球存储TAM从2025年2140亿美元飙升至2028年1.68万亿美元，DRAM收入2028年料达1.23万亿美元；CPU已成新一轮存储上涨核心催化剂。 涨停板：天山电子、盈新发展、合肥城建、万润科技、迪生力 其他强势股：恒烁股份、深科技、聚辰股份、中电港 机器人 ①6月30日，在优必选2026年度全球发布会上，董事会主席兼CEO周剑表示，超仿生人形机器人“优世界U1”系列全渠道订单已突破1万台，力争今年交付。 ②机构：人形机器人的落地应用是市场关注的重点，Figure03进入宝马工厂，头部厂商积极推进人形机器人在工业投研资料等场景下的应用；随着机器人泛化水平提高，预计其落地场景将进一步扩大，2026年有望成为人形机器人垂类应用大年。 涨停板：昊志机电、天奇股份、领益智造、中坚科技、柯力传感、埃斯顿、晋拓股份、宇环数控、中科三环、宝武镁业、鸣志电器、长华集团、双环传动、春光科技、锋龙股份、长源东谷、嵘泰股份、和而泰、天禄科技、祥源新材、弘亚数控、胜通能源 其他强势股：绿的谐波、埃夫特、银轮股份、创世纪 光通信 ①据IDC最新数据，英伟达在2026财年第一季度（Q1 2026）首次成为全球数据中心以太网交换机市场的营收冠军。这是一个传统上由博通、思科等网络巨头主导的领域。 ②今年以来，和算力有关的相关产品加速出海。在武汉，光模块的生产线同样24小时不停机。随着全球算力基础设施建设加速推进，今年以来，这家企业800G以上光模块出口同比增长超过100倍。 涨停板：锐捷网络、星...",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "utilization_or_backlog",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unverified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until Not a fundamental catalyst; noise.",
+      "grounding_status": "unverified_quote"
+    },
+    {
+      "evidence_id": "KPE08",
+      "segment": "AI PCB",
+      "variable": "utilization_or_backlog",
+      "direction": "positive",
+      "horizon": "medium-term",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "多浦乐...正加速切入胜宏科技等核心客户主导的高叠层PCB缺陷检测市场",
+      "verification_gate": "Check for adoption of third-party inspection equipment; low materiality for core thesis.",
+      "missing_inputs": [
+        "Volume or value of detection contracts"
+      ],
+      "known_kpe": {
+        "date": "2026-06-30T10:12",
+        "source": "stream_item:6896",
+        "source_type": "channel_check",
+        "credibility": "high_private_channel_hard_to_verify",
+        "decision_role": "probability/verification proxy",
+        "evidence": "🍁🍁🍁hcdx 多浦乐：冷板超... 🍁🍁🍁hcdx 多浦乐：冷板超声检测龙头，布局mlcc和pcb检测 公司在无损检测底层技术上厚积薄发，掌握高端相控阵超声技术，并前瞻布局稀缺的冷阴极CT射线技术。凭借技术的通用性，产品已从传统的核电、轨交，成功延伸至半导体靶材、高叠层PCB及算力液冷等高壁垒赛道。在严苛的工业质检验证壁垒下，公司毛利率高达70%左右。 在算力液冷赛道，公司是国内 液冷检测绝对龙头，覆盖国内几乎所有液冷相关企业。以GB300液冷板需求为基准，考虑到大冷板检测耗时更长，全球需求可近似折算为 4000万块冷板 的检测体量。按单机20分钟/块的效率计算，单台设备年产能约2万块，对应行业设备总需求达 2000台。按单价100万元测算，该细分领域将催生约 20亿元 的设备增量市场，假设公司获取40%份额，40%净利率，对应约3亿利润。 高容MLCC正带来超声检测爆发式的增量空间。随着MLCC向薄层化、多叠层迭代，极易产生致命的内部分层缺陷，而超声正是检测此类面积型缺陷的最佳方案，此前该领域的高频超声显微镜被德国PVA与美国诺信等巨头垄断。公司针对薄层化缺陷研发的 MLCC超声检测设备，已向风华高科、三环集团送样验证数月，有望迎来实质性订单。 公司自主研发的高速 冷阴极CT设备 正全面打开新能源与PCB蓝海。首要应用场景瞄准高速电芯检测，目前已在对接宁德时代等头部客户；同时正加速切入胜宏科技等核心客户主导的高叠层PCB缺陷检测市场。在靶材自动化检测端，设备已长期稳定配套江丰电子等龙头。未来，公司计划横向延申，通过合资合作等方式深度布局 晶圆与半导体 等先进检测环节。 随着下游多赛道订单共振，公司业绩将步入集中释放期。在中性假设下，预计未来 AI液冷业务 贡献利润约 3亿元；轨交与核电等 传统主业 贡献利润约 1亿元；MLCC、CT及半导体等 新兴增量业务 贡献利润约 1亿元，总利润体量预计达 5亿元",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "utilization_or_backlog",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unverified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until Check for adoption of third-party inspection equipment; low materiality for core thesis.",
+      "grounding_status": "unverified_quote"
+    },
+    {
+      "evidence_id": "KPE09",
+      "segment": "consolidated",
+      "variable": "asp_or_price",
+      "direction": "up",
+      "horizon": "short-term",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "PCB发函确认涨价，上游材料涨价传导开启...由于原材料价格已经翻倍涨价，PCB价格也会同步上涨",
+      "verification_gate": "Confirm company-specific price increase announcements and customer acceptance.",
+      "missing_inputs": [
+        "Company-specific price change",
+        "Impact on volume/mix"
+      ],
+      "known_kpe": {
+        "date": "2026-06-28T12:24",
+        "source": "stream_item:6176",
+        "source_type": "channel_check",
+        "credibility": "promotional_private_unverified",
+        "decision_role": "probability/verification proxy",
+        "evidence": "PCB发函确认涨价，上游材料涨... annotation: PCB发函确认涨价，上游材料涨价传导开启【东北计算机】 🌟据相关板厂《》（2026.6.24）显示，当前PCB核心材料出现严重缺货。目前建滔、生益、南亚等大厂订单排满，交期拉长至2-3个月，并已实行限购。尤其是多层PCB材料缺货和交期影响特别严重。函件明确指出：“由于原材料价格已经翻倍涨价，PCB价格也会同步上涨”，且预判“紧张情况预计要到2027年下半年才会逐步缓解”。 太阳传导逻辑闭环，上游材料迎来超级卖方市场 从覆铜板涨价到PCB涨价，AI算力需求对产业链的通胀传导已经完成了全链路的闭环证实。 下游板厂被迫接受2-3个月的交期并承受原材料翻倍的成本压力，印证了我们此前的核心判断：在算力机架30L、40L+的物理层数堆叠下，高端电子材料的消耗呈指数级暴增。 CCL大厂订单爆满，将导致处于更上游的材料环节拥有极强的成本转嫁能力与绝对的议价能力。 🔥相关公司 庆祝电子布：宏和科技、中材科技、中国巨石、国际复材、菲利华、聚杰微纤 庆祝铜箔：德福科技 庆祝CCL：华正新材 庆祝树脂：圣泉集团、东材科技、同宇新材、呈和科技、宏昌电子 庆祝添加剂：凌玮科技、联瑞新材 庆祝PCB：胜宏科技、深南电路、生益电子、鹏鼎控股 （以上公司不作为推荐标的） 🔥风险提示：下游需求不及预期，相关政策监管与法律风险。 ☎️东北计算机：赵宇阳（SAC:S0550525050001）/廖岚琪 告知函",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "asp_or_price",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unverified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until Confirm company-specific price increase announcements and customer acceptance.",
+      "grounding_status": "unverified_quote"
+    },
+    {
+      "evidence_id": "KPE10",
+      "segment": "AI PCB",
+      "variable": "asp_or_price",
+      "direction": "down",
+      "horizon": "short-term",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "英伟达压PCB降价10%？胜宏科技：公司经营一切正常，客户方案调整是正常现象",
+      "verification_gate": "Monitor Q2 2026 ASP and margin; check for any contract renegotiations.",
+      "missing_inputs": [
+        "Quantified ASP change if true",
+        "Company's cost pass-through ability"
+      ],
+      "known_kpe": {
+        "date": "2026-06-24T14:42",
+        "source": "stream_item:4595",
+        "source_type": "channel_check",
+        "credibility": "high_private_channel_hard_to_verify",
+        "decision_role": "probability/verification proxy",
+        "evidence": "【英伟达压PCB降价10%？胜... 【英伟达压PCB降价10%？胜宏科技：公司经营一切正常，客户方案调整是正常现象】6月23日，算力链的PCB（印刷电路板）板块大跌，该板块概念龙头胜宏科技单日重挫逾7%。据上海证券报报道，PCB整体大跌与两个市场传闻有关，一个市场流传是英伟达要求PCB厂商降价10%，另外一则是胜宏科技扩产拖累英伟达Rubin平台出货等。6月24日，胜宏科技接线人士表示，市场传闻很多，公司没有办法就每个传闻都做出回应。但这位人士强调，公司经营一切正常，基本面没有变化。上述胜宏科技相关人士表示，客户对采用什么方案都不是一成不变，在生产过程中会有一些调整或者改进，这些都是正常现象。胜宏也有一些先发优势。投资者要甄别一下这些传闻，以公司公开披露信息为准。（澎湃）",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "segment_volume",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until Monitor Q2 2026 ASP and margin; check for any contract renegotiations.",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE11",
+      "segment": "AI PCB",
+      "variable": "segment_volume",
+      "direction": "down",
+      "horizon": "2027-2028",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "正交背板进度推迟，2027年Kyber出货概率极低...PCB市场规模面临下修风险",
+      "verification_gate": "Track Nvidia Rubin Ultra official timeline and company-specific exposure.",
+      "missing_inputs": [
+        "Company-specific revenue at risk",
+        "Mitigation through other products"
+      ],
+      "known_kpe": {
+        "date": "2026-06-24T09:00",
+        "source": "stream_item:4851",
+        "source_type": "channel_check",
+        "credibility": "high_private_channel_hard_to_verify",
+        "decision_role": "probability/verification proxy",
+        "evidence": "Rubin Ultra架构调整... Rubin Ultra架构调整与mSAP工艺全景深度拆解：AI服务器PCB的高壁垒与顺价逻辑一、 核心行业事件：正交背板进度推迟，技术路径的权衡与演变国际投行 Jefferies 近期发布了关于 Rubin Ultra 背板进度推迟的研报，验证了此前市场关于“正交背板项目落地不及预期”的担忧。正交背板在机柜内实现高速连接的技术复杂度极高，这一架构变动将对未来两年的 AI 产业链市场规模及技术路线产生深远影响。1. 市场规模预测修正研报指出，受 PCB 项目潜在延迟的影响，全球 AI 领域的 PCB 与 CCL（覆铜板）市场规模将面临下修风险：2027年预测：较原始预期下修 5%；8%。2028年预测：若项目进一步延迟或取消，市场规模面临 11%；16% 的下行空间（其中 PCB 环节面临 11% 下修，CCL 环节面临 16% 下修）。2. 架构切换与替代方案短期架构回归：Jefferies 调研显示，原计划于 2027 年在 Rubin Ultra 中采用的、用于替代线缆的正交背板 PCB 大概率推迟至 2028 年，2027 年 Kyber 出货概率极低。这意味着 2027 年 Rubin Ultra 将大概率沿用 Obrum 结构（即 NVLink 72 对应的传统机柜结构）。最坏情况预案：若 Kyber 最终被取消，交换板、中板等相关产品在 2027 年可能需要被迫切换至 M9、M10 等级的高端 PTFE 材料方案。目前 M9、M10、CoWoP 的研发仍在持续推进，但 PTFE 材料的量产工艺难题尚未完全攻克，短期贡献有限。产业链景气分化：在上游原材料持续涨价的驱动下，产业链上游环节表现将持续优于下游，即 CCL 环节的景气度与价格坚挺度将显著高于 PCB 环节。3. 云厂商及芯片巨头的技术路线博弈正交背板的落地受阻，导致 NPO（近端光学封装） 技术路线的落地概率进一步提升：亚马逊 (Amazon)：在其技术文档中展现了明确的指引，在所有行业参与者中，亚马逊是 OCS（光交叉连接）技术落地概率最大的企业。谷歌 (Google)：其 OCS 技术目前仅处于研发合作阶段，行业内尚无明确的商用时间表。这类软性指引缺乏明确的落地约束。英伟达 (NVIDIA)：同时推进 OCS 和 NPO 技术的研发。但基于其自身利益与产业定位，英伟达的核心发展方向必然是 CPO（共封装光学）相关业务，因为重点推进 NPO 会削弱其 CPO 的核心地位。英伟达对 NPO 的定位是“备选项”，只有当其 CPO 业务发展不及预期时，才会释放更强的商用化动力。二、 行业利空澄清：光模块与 PCB 的真实供需主线针对近期市场流传的“光模块和 PCB 环节价格下调 10%”的传闻，通过产业链深度跟踪可以明确判定：该传闻属于缺乏行业常识的...",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "segment_volume",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unverified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until Track Nvidia Rubin Ultra official timeline and company-specific exposure.",
+      "grounding_status": "unverified_quote"
+    },
+    {
+      "evidence_id": "KPE12",
+      "segment": "consolidated",
+      "variable": "revenue",
+      "direction": "positive",
+      "horizon": "medium-term",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "天承科技在胜宏拥有十几条生产线",
+      "verification_gate": "Low materiality; indicates supply chain depth but not revenue driver.",
+      "missing_inputs": [],
+      "known_kpe": {
+        "date": "2026-06-18T08:38",
+        "source": "stream_item:1480",
+        "source_type": "channel_check",
+        "credibility": "high_private_channel_hard_to_verify",
+        "decision_role": "probability/verification proxy",
+        "evidence": "pcb化学药水调研：各环节价值... pcb化学药水调研：各环节价值量分布，hdi-msap工艺对药水性能和价值量的提升，供应商竞争格局 PCB制造过程中主要使用哪些类型的化学药水，它们分别应用于哪些环节？不同类型的PCB(如普通多层板、HDI板、mSAP工艺板及AI板)对化学药水的具体需求有何差异？ PCB制造中使用的化学药水种类繁多，可大致分为三类。第一类是前处理及图形转移相关化学品，例如基材铜箔前处理的微蚀药水,以及图形制作过程中的显影、去膜药水。第二类是电镀相关化学品，包括化学沉铜和酸性电镀药水。第三类是表面处理化学品,如化学沉金、化学镍钯金、镀锡、OSP等。具体到制造环节，流程如下：首先在基材铜箔处理和图形制作环节，会用到前处理微蚀、显影和去膜药水。在多层板压合环节，会使用棕化药水。压合钻孔后，为实现孔内导通，需要经过除胶渣和PTH(化学沉铜)处理。导通后进行图形电镀，使用酸性电镀药水。对于多层板或HDI板，可能需要重复增层，即循环执行从基板制作到电镀的流程。线路制作完成后，在防焊(Solder Mask)工序中，会使用前处理药水和显影药水。最后是表面处理环节，根据需求选择化金、镀锡、镍钯金或OSP等工艺。 不同类型的PCB对化学药水的侧重点有所不同： 普通多层板：更关注成本效益，对药水的要求相对基础。 HDI板：由于涉及盲孔，工艺上要求将盲孔填平，因此对填孔性能特别关注。 采用mSAP工艺的载板或HDI板：mSAP(改良型半加成法)是一种图形电镀填孔工艺，其基铜层很薄(约3微米，常规为12微米),旨在实现更精细的线宽线距。因此，该工艺对图形填孔药水和闪蚀药水有较高要求。此外，载板通常使用ABF材料，对化学沉铜药水也特别关注。 AI板其基材铜箔特殊，为追求高频高速信号传输效率，对铜箔粗糙度、介电常数(低损耗)以及阻抗管控有严格要求。因此，AI板对用于控制粗糙度的键合剂、化学沉铜药水以及表面处理药水的性能要求更高。 PCB化学药水行业的市场竞争格局如何？天承科技的市场地位、核心技术优势及其近期业绩增长的原因是什么？ PCB化学药水市场参与者众多。国际厂商主要有安美特、罗门哈斯、JCU、麦德美特，这四家是市场上的主要供应商。国内厂商则包括光华科技、天承科技、博泉、贝加尔等。天承科技2025年的营收规模约为4-5亿元。其核心优势在于水平沉铜(即水平式PTH)技术。在PTH领域，国内市场此前主要由安美特和超特主导，尤其是在高端应用中，水平线是主流选择。近年来，得益于中美贸易摩擦引发的国产替代趋势，天承科技凭借其技术优势获得了发展机遇。同时，水平沉铜线相比传统的龙门线在操作性和稳定性上更具优势，成为新建PTH产线的主流选择。天承科技在AI板领域也取得了突破，例如在胜宏拥有十几条生产线,这是其近两年业绩快速增长的重要原因。综合来看，天承科技在电镀环节的P...",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "revenue",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unverified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until Low materiality; indicates supply chain depth but not revenue driver.",
+      "grounding_status": "unverified_quote"
+    }
+  ],
+  "known_kpe_ledger": {
+    "KPE01": {
+      "date": "2026-06-09T09:12",
+      "source": "stream_item:10380",
+      "source_type": "channel_check",
+      "credibility": "identified_broker_private_text",
+      "decision_role": "probability/verification proxy",
+      "evidence": "📰GS CHINA OPEN（... 📰GS CHINA OPEN（高盛中国开盘观察） 📊市场情绪（Sentiment） 📉昨日亚洲市场出现大幅抛售，科技股领跌全区域。 📈A 股市场的日内反弹似乎失去动能，缺乏明确支撑，投资者情绪趋于谨慎。 💡谷歌与英特尔的 TPU 订单相关新消息，可能为 AI 硬件股带来提振，尤其是 PCB 相关个股。 ⚠️彭博报道称，美国国防部更新了被认为与中国军方有关联的中国公司名单，比亚迪、药明康德被新增至该名单。尽管基本面影响尚不明确，但这可能在短期内压制相关个股的市场情绪。 📅今日市场重点关注 5 月贸易数据，高盛预测 5 月出口同比增速将从 4 月的 14.1% 进一步升至 15%，进口同比增速将从 4 月的 25.3% 升至 30%。 📰市场要闻（Market News） 1. 经济数据（Economic Data） 📈高盛预计 5 月出口 / 进口同比增速为 + 15%/30%，市场预期为 + 15%/25.2%，4 月数据为 + 14.1%/25.3%。 2. 地缘政治（Geopolitics） ⚠️美国国防部指控阿里巴巴、百度为中国军方提供支持。 🌍中国商务部副部长凌吉将于 6 月 9 日至 14 日访问欧盟总部，与欧洲官员讨论中欧贸易与投资磋商机制建立的相关安排。 🕊️在美国特朗普总统表示双方有望达成立即停火协议后，伊朗表示将结束对以色列的当前军事行动。 3. TMT 板块 🤝消息称，谷歌已向英特尔下单采购超过 300 万颗芯片。 📈国内媒体报道，算力需求爆发推动电子布价格自去年以来上涨 100%，今年经历 5 轮涨价后均价达 7.4 元 / 米，供需紧张局面可能持续。 📈胜利精密（300476.SZ）计划推出总额不超过 7 亿元的员工持股计划，股份将通过二级市场购买 A 股股票实施。 4. 汽车板块 📉中国 5 月汽车销量同比下滑 22.1%，中汽协因此大幅下调全年销量预期。 5. 建筑 / 基建板块 🏗️中国已开工建设投资 772 亿元的三峡水运新通道项目，这是 “十五五” 时期首个重大标志性工程，旨在提升长江航运能力。 6. 医疗健康板块 ⚠️美国国防部将生物科技公司药明康德列入涉军名单。 7. 高盛观点（GIR Read） 📉三七互娱（002555.SZ）：受旗舰游戏不确定性及新游戏生命周期影响，短期增长低迷，高盛下调评级至 “卖出”。",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "segment_volume",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE02": {
+      "date": "2026-07-02T08:11",
+      "source": "stream_item:8788",
+      "source_type": "channel_check",
+      "credibility": "high_private_channel_hard_to_verify",
+      "decision_role": "probability/verification proxy",
+      "evidence": "📢 胜宏科技(2476.HK)... 📢 胜宏科技(2476.HK)：产能扩张按计划进行，ASP调整平稳，GPM因AI产品结构而保持韧性 💡 与一些投资者担心的那样，公司通过主要客户降低成本不同，胜宏科技(VGT)表示AI PCB的原材料成本稳定，新一代产品的成本传导顺畅；对于非AI产品，VGT将优先考虑ASP（平均售价）和GPM（毛利率）最佳的订单。 📊 因此，它预计FY26（2026财年）毛利率与FY25（2025财年）大致持平，而AI收入占比应从低于50%提升至60-70%，产出价值从2025年的350亿元人民币增长到2030年的约3-4倍。 🎯 对于Rubin（英伟达下一代GPU），公司对在计算托盘HDI（与GB300一致）中占据大部分份额充满信心，并目标是维持关键客户所有产品中约50%的份额。 👀 VGT认为正交背板在Rubin Ultra中被采用的进度没有延迟，但确实指出终端客户正在考虑10多种材料/供应商组合，包括不同的层数以及Q-glass和PTFE。 🌐 除了关键GPU客户外，VGT正在向更多ASIC（专用集成电路）客户多元化拓展，并目标是ASIC/GPU收入占比达到50/50，因为ASIC设计也正从HLC（高密度互连板）转向HDI。 💻 公司目前为一家美国主要CSP（云服务提供商）客户的V7代CPU供应PCB，并有信心在2026财年末（YE26）进入V8 TPU的PCB供应。 💰 FY26资本支出（capex）指引约为180亿元人民币，其中约150亿元用于惠州的工厂10和11。 🔮 工厂12和13（每个产出超过100亿元）专注于1.6T光模块PCB，未来可能拓展至CoWoP（Chip on Wafer on Package），因为它从关键GPU客户获得了强劲的需求指引。 📈 从长远来看，管理层指引到2030年产出超过1000亿元人民币。",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "asp_or_price",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE03": {
+      "date": "2026-06-08T11:42",
+      "source": "stream_item:10768",
+      "source_type": "channel_check",
+      "credibility": "high_private_channel_hard_to_verify",
+      "decision_role": "probability/verification proxy",
+      "evidence": "【胜宏科技回应传闻：网传视频及... 【胜宏科技回应传闻：网传视频及相关信息所反映的内容与公司的生产经营活动无关】近日，网上出现了涉及胜宏科技高管的传闻。6月8日上午，胜宏科技方面向记者表示，公司已关注到相关信息，但网传视频及相关信息所反映的内容与公司的生产经营活动无关，亦不涉及公司治理、内部控制或任何应披露的重大信息。该等事项不会对公司的日常经营造成任何影响。胜宏科技称，当前公司生产经营活动一切正常、订单充沛，各项工作均在有序推进中。（每日经济新闻）",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "utilization_or_backlog",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE04": {
+      "date": "2026-07-04T20:23",
+      "source": "stream_item:7679",
+      "source_type": "channel_check",
+      "credibility": "high_private_channel_hard_to_verify",
+      "decision_role": "probability/verification proxy",
+      "evidence": "‼️【中报预告+AI硬件景气：... ‼️【中报预告+AI硬件景气：谁是下一个江波龙？】——山西证券 江波龙打出高度后，市场要问的不再是能不能追，而是扩散方向在哪。我们的判断——AI产业真正缺的不只是GPU，而是一整套硬件系统：存储决定吞吐、光模块决定通信、高端PCB决定互联、先进封装决定集成、上游材料决定成本边界。订单、价格、稼动率同步改善的环节，中报预告就是新催化！ 1）存储：涨价周期叠加AI终端与服务器需求，利润弹性最容易被预告验证。重点看德明利、佰维存储、香农芯创、兆易创新、北京君正、普冉股份； 2）先进封装/Chiplet：华为韬定律V2强化后摩尔时代系统级优化，A股映射最清晰的是晶圆级封装、TSV、多层堆叠、封测与封装材料。重点看长电科技、通富微电、华天科技、晶方科技、甬矽电子、华海诚科、深科技。 3）光模块：集群越大，瓶颈越从单卡性能转向网络通信，800G/1.6T/CPO/硅光是业绩兑现方向。重点看新易盛、中际旭创、天孚通信、光迅科技、华工科技、太辰光、剑桥科技、东山精密、联特科技。 4）高端PCB/AI服务器材料：弹性不及存储，确定性更强，容易走趋势。重点看沪电股份、胜宏科技、深南电路、生益科技、生益电子、景旺电子。 5）液冷：Rubin平台单GPU功耗2300W、单机柜200kW、强制全液冷——渗透率30%→60%的核心催化剂，平台出货节奏直接决定26H2液冷链订单可见度。重点看英维克、高澜股份、申菱环境、中石科技、思泉新材。 ☎️ 下周不要被低位轮动带偏，真正的主线只有一条：中报预告+AI硬件景气度！",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "segment_volume",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE05": {
+      "date": "2026-07-02T13:32",
+      "source": "stream_item:8467",
+      "source_type": "channel_check",
+      "credibility": "high_private_channel_hard_to_verify",
+      "decision_role": "probability/verification proxy",
+      "evidence": "【英伟达从“卖卡”走向“算力分... 【英伟达从“卖卡”走向“算力分成”，AI工厂商业模式迎来重估】--0702 英伟达AI基础设施合作模式正在从传统GPU销售、升级为“硬件销售+信用支持+算力云收入分成”。我们认为，这可能是全球AI Infra商业模式的重要拐点。 不同于过去市场只交易GPU、服务器、光模块等硬件链条，本次Sharon AI与英伟达合作建设72MW AI工厂、最多部署4万块GB300 GPU，并采用收入分成与信用支持机制，意味着AI算力正在从“一次性设备采购”变成“长期现金流资产”。 实际落地看，需求侧，初创企业、模型开发者、企业客户对高性能算力需求持续提升，但自建GPU集群门槛高，租赁AI云算力成为现实路径；供给侧，AI工厂正在成为新型基础设施，算力利用率、集群调度、能源指标、液冷能力、客户绑定能力，将成为核心竞争力。 国内映射来看，英伟达模式强化全球“算力运营商业化”趋势，也会加快国产AI工厂、昇腾智算中心、算力服务平台建设。未来市场交易重点，可能从“谁有GPU”进一步切换到“谁能运营算力、谁能提高利用率、谁能把算力变成持续现金流”。 1）AI服务器整机：工业富联、浪潮信息、中科曙光、紫光股份、神州数码； 2）国产服务器 / 算力一体机：拓维信息、恒为科技、烽火通信、中国长城； 3）算力运营 / AI云：首都在线、优刻得、青云科技、中贝通信、奥飞数据、润泽科技； 4）IDC、液冷、电源、网络：光环新网、数据港、英维克、科华数据、锐捷网络、沪电股份、胜宏科技、新易盛、中际旭创。 后续重点关注国产AI工厂从“硬件部署”走向“算力运营”的拐点，尤其是昇腾集群组网调优、模型迁移部署、智算运维服务等方向。恒为科技的核心预期差，正是在“国产算力不是只卖设备，而是开始卖服务、卖效率、卖持续现金流”。",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "utilization_or_backlog",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE06": {
+      "date": "2026-07-01T20:10",
+      "source": "stream_item:7561",
+      "source_type": "channel_check",
+      "credibility": "high_private_channel_hard_to_verify",
+      "decision_role": "probability/verification proxy",
+      "evidence": "胜宏香港路演： “部分投资者... 胜宏香港路演： “部分投资者此前担忧大厂客户会持续压价，但胜宏科技表示：AI印制电路板（PCB）原材料成本保持稳定，新一代产品成本传导落地顺畅；针对非AI类产品，公司将优先承接平均售价（ASP）、毛利率（GPM）表现最优的订单。 据此公司预计，26财年毛利率较25财年基本持平；AI业务营收占比将从当前不足50%提升至60%–70%；2025年公司产值为350亿元人民币，预计2030年产值将增至当前约3–4倍。 针对Rubin平台相关业务：公司有信心在GB300配套计算载板高密度互联板（HDI）领域维持多数份额，并目标在核心客户全品类产品中保持约50%市占率。胜宏判断Rubin Ultra平台导入正交背板的进度不会延期，但终端客户目前正在评估十余种材料与供应商组合方案，涵盖不同层数板材、石英玻璃（Q-glass）及聚四氟乙烯（PTFE）基材。 除头部GPU客户外，公司正拓展更多专用集成电路（ASIC）客户。当前ASIC设计方案正从高阶线路板（HLC）转向高密度互联板（HDI），公司目标远期ASIC与GPU业务营收占比达到1:1。 公司现已为美国头部云服务商（CSP）第七代产品供应CPU印制电路板，同时有信心在2026年末切入其第八代TPU印制电路板供应链。 26财年资本开支（capex）指引约180亿元人民币，其中约150亿元将投建惠州十厂、十一厂。十二厂、十三厂规划单厂产值超100亿元，专门生产1.6T光模块PCB，远期还有望覆盖CoWoS封装基板；头部GPU客户给出的需求指引十分旺盛。 管理层长期展望：2030年整体产值有望突破1000亿元人民币。”",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "market_share",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE07": {
+      "date": "2026-06-30T18:57",
+      "source": "stream_item:6674",
+      "source_type": "channel_check",
+      "credibility": "identified_broker_private_text",
+      "decision_role": "probability/verification proxy",
+      "evidence": "6月30日复盘笔记：芯片产业链... 6月30日复盘笔记：芯片产业链/存储芯片/机器人/光通信/算力租赁/商业航天/玻璃基板等 一、重磅财经信息 6月份制造业采购经理指数为50.3%，重返扩张区间。 二、大盘表现 沪指涨0.50%，深证成指涨2.48%，创业板指涨2.99%，科创50指数涨3.85%。 沪深京三市成交额接近3.3万亿，较昨日缩量逾2000亿。 三、强势板块和个股分析 备注：只列举部分涨停板 芯片产业链 ①SEMI最新报告预测，全球300mm存储器晶圆厂设备投资预计将在2026年首次突破500亿美元关口，达到520亿美元，同比增长29%。 ②全球近20家模拟及功率半导体企业即将于7月1日启动新一轮涨价。据了解，AI服务器、数据中心专用电源管理芯片及高压信号链模拟芯片涨幅为15%至25%，工业自动化、储能隔离芯片涨幅为10%至15%。 涨停板：富满微、晶方科技、禾盛新材、斯达半导、江化微、多氟多、新洁能、昊华科技、力合微、格科微、先导基电、海晨股份、康强电子、三美股份、敏芯股份、深科达、翱捷科技、联得装备、金海通、华亚智能、兴业股份、国风新材、肯特催化、康欣新材 其他强势股：正帆科技、屹唐股份、安凯微、灿芯股份 存储芯片 摩根大通研报显示，本轮存储超级周期将“更高、更长”，全球存储TAM从2025年2140亿美元飙升至2028年1.68万亿美元，DRAM收入2028年料达1.23万亿美元；CPU已成新一轮存储上涨核心催化剂。 涨停板：天山电子、盈新发展、合肥城建、万润科技、迪生力 其他强势股：恒烁股份、深科技、聚辰股份、中电港 机器人 ①6月30日，在优必选2026年度全球发布会上，董事会主席兼CEO周剑表示，超仿生人形机器人“优世界U1”系列全渠道订单已突破1万台，力争今年交付。 ②机构：人形机器人的落地应用是市场关注的重点，Figure03进入宝马工厂，头部厂商积极推进人形机器人在工业投研资料等场景下的应用；随着机器人泛化水平提高，预计其落地场景将进一步扩大，2026年有望成为人形机器人垂类应用大年。 涨停板：昊志机电、天奇股份、领益智造、中坚科技、柯力传感、埃斯顿、晋拓股份、宇环数控、中科三环、宝武镁业、鸣志电器、长华集团、双环传动、春光科技、锋龙股份、长源东谷、嵘泰股份、和而泰、天禄科技、祥源新材、弘亚数控、胜通能源 其他强势股：绿的谐波、埃夫特、银轮股份、创世纪 光通信 ①据IDC最新数据，英伟达在2026财年第一季度（Q1 2026）首次成为全球数据中心以太网交换机市场的营收冠军。这是一个传统上由博通、思科等网络巨头主导的领域。 ②今年以来，和算力有关的相关产品加速出海。在武汉，光模块的生产线同样24小时不停机。随着全球算力基础设施建设加速推进，今年以来，这家企业800G以上光模块出口同比增长超过100倍。 涨停板：锐捷网络、星...",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "utilization_or_backlog",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE08": {
+      "date": "2026-06-30T10:12",
+      "source": "stream_item:6896",
+      "source_type": "channel_check",
+      "credibility": "high_private_channel_hard_to_verify",
+      "decision_role": "probability/verification proxy",
+      "evidence": "🍁🍁🍁hcdx 多浦乐：冷板超... 🍁🍁🍁hcdx 多浦乐：冷板超声检测龙头，布局mlcc和pcb检测 公司在无损检测底层技术上厚积薄发，掌握高端相控阵超声技术，并前瞻布局稀缺的冷阴极CT射线技术。凭借技术的通用性，产品已从传统的核电、轨交，成功延伸至半导体靶材、高叠层PCB及算力液冷等高壁垒赛道。在严苛的工业质检验证壁垒下，公司毛利率高达70%左右。 在算力液冷赛道，公司是国内 液冷检测绝对龙头，覆盖国内几乎所有液冷相关企业。以GB300液冷板需求为基准，考虑到大冷板检测耗时更长，全球需求可近似折算为 4000万块冷板 的检测体量。按单机20分钟/块的效率计算，单台设备年产能约2万块，对应行业设备总需求达 2000台。按单价100万元测算，该细分领域将催生约 20亿元 的设备增量市场，假设公司获取40%份额，40%净利率，对应约3亿利润。 高容MLCC正带来超声检测爆发式的增量空间。随着MLCC向薄层化、多叠层迭代，极易产生致命的内部分层缺陷，而超声正是检测此类面积型缺陷的最佳方案，此前该领域的高频超声显微镜被德国PVA与美国诺信等巨头垄断。公司针对薄层化缺陷研发的 MLCC超声检测设备，已向风华高科、三环集团送样验证数月，有望迎来实质性订单。 公司自主研发的高速 冷阴极CT设备 正全面打开新能源与PCB蓝海。首要应用场景瞄准高速电芯检测，目前已在对接宁德时代等头部客户；同时正加速切入胜宏科技等核心客户主导的高叠层PCB缺陷检测市场。在靶材自动化检测端，设备已长期稳定配套江丰电子等龙头。未来，公司计划横向延申，通过合资合作等方式深度布局 晶圆与半导体 等先进检测环节。 随着下游多赛道订单共振，公司业绩将步入集中释放期。在中性假设下，预计未来 AI液冷业务 贡献利润约 3亿元；轨交与核电等 传统主业 贡献利润约 1亿元；MLCC、CT及半导体等 新兴增量业务 贡献利润约 1亿元，总利润体量预计达 5亿元",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "utilization_or_backlog",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE09": {
+      "date": "2026-06-28T12:24",
+      "source": "stream_item:6176",
+      "source_type": "channel_check",
+      "credibility": "promotional_private_unverified",
+      "decision_role": "probability/verification proxy",
+      "evidence": "PCB发函确认涨价，上游材料涨... annotation: PCB发函确认涨价，上游材料涨价传导开启【东北计算机】 🌟据相关板厂《》（2026.6.24）显示，当前PCB核心材料出现严重缺货。目前建滔、生益、南亚等大厂订单排满，交期拉长至2-3个月，并已实行限购。尤其是多层PCB材料缺货和交期影响特别严重。函件明确指出：“由于原材料价格已经翻倍涨价，PCB价格也会同步上涨”，且预判“紧张情况预计要到2027年下半年才会逐步缓解”。 太阳传导逻辑闭环，上游材料迎来超级卖方市场 从覆铜板涨价到PCB涨价，AI算力需求对产业链的通胀传导已经完成了全链路的闭环证实。 下游板厂被迫接受2-3个月的交期并承受原材料翻倍的成本压力，印证了我们此前的核心判断：在算力机架30L、40L+的物理层数堆叠下，高端电子材料的消耗呈指数级暴增。 CCL大厂订单爆满，将导致处于更上游的材料环节拥有极强的成本转嫁能力与绝对的议价能力。 🔥相关公司 庆祝电子布：宏和科技、中材科技、中国巨石、国际复材、菲利华、聚杰微纤 庆祝铜箔：德福科技 庆祝CCL：华正新材 庆祝树脂：圣泉集团、东材科技、同宇新材、呈和科技、宏昌电子 庆祝添加剂：凌玮科技、联瑞新材 庆祝PCB：胜宏科技、深南电路、生益电子、鹏鼎控股 （以上公司不作为推荐标的） 🔥风险提示：下游需求不及预期，相关政策监管与法律风险。 ☎️东北计算机：赵宇阳（SAC:S0550525050001）/廖岚琪 告知函",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "asp_or_price",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE10": {
+      "date": "2026-06-24T14:42",
+      "source": "stream_item:4595",
+      "source_type": "channel_check",
+      "credibility": "high_private_channel_hard_to_verify",
+      "decision_role": "probability/verification proxy",
+      "evidence": "【英伟达压PCB降价10%？胜... 【英伟达压PCB降价10%？胜宏科技：公司经营一切正常，客户方案调整是正常现象】6月23日，算力链的PCB（印刷电路板）板块大跌，该板块概念龙头胜宏科技单日重挫逾7%。据上海证券报报道，PCB整体大跌与两个市场传闻有关，一个市场流传是英伟达要求PCB厂商降价10%，另外一则是胜宏科技扩产拖累英伟达Rubin平台出货等。6月24日，胜宏科技接线人士表示，市场传闻很多，公司没有办法就每个传闻都做出回应。但这位人士强调，公司经营一切正常，基本面没有变化。上述胜宏科技相关人士表示，客户对采用什么方案都不是一成不变，在生产过程中会有一些调整或者改进，这些都是正常现象。胜宏也有一些先发优势。投资者要甄别一下这些传闻，以公司公开披露信息为准。（澎湃）",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "segment_volume",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE11": {
+      "date": "2026-06-24T09:00",
+      "source": "stream_item:4851",
+      "source_type": "channel_check",
+      "credibility": "high_private_channel_hard_to_verify",
+      "decision_role": "probability/verification proxy",
+      "evidence": "Rubin Ultra架构调整... Rubin Ultra架构调整与mSAP工艺全景深度拆解：AI服务器PCB的高壁垒与顺价逻辑一、 核心行业事件：正交背板进度推迟，技术路径的权衡与演变国际投行 Jefferies 近期发布了关于 Rubin Ultra 背板进度推迟的研报，验证了此前市场关于“正交背板项目落地不及预期”的担忧。正交背板在机柜内实现高速连接的技术复杂度极高，这一架构变动将对未来两年的 AI 产业链市场规模及技术路线产生深远影响。1. 市场规模预测修正研报指出，受 PCB 项目潜在延迟的影响，全球 AI 领域的 PCB 与 CCL（覆铜板）市场规模将面临下修风险：2027年预测：较原始预期下修 5%；8%。2028年预测：若项目进一步延迟或取消，市场规模面临 11%；16% 的下行空间（其中 PCB 环节面临 11% 下修，CCL 环节面临 16% 下修）。2. 架构切换与替代方案短期架构回归：Jefferies 调研显示，原计划于 2027 年在 Rubin Ultra 中采用的、用于替代线缆的正交背板 PCB 大概率推迟至 2028 年，2027 年 Kyber 出货概率极低。这意味着 2027 年 Rubin Ultra 将大概率沿用 Obrum 结构（即 NVLink 72 对应的传统机柜结构）。最坏情况预案：若 Kyber 最终被取消，交换板、中板等相关产品在 2027 年可能需要被迫切换至 M9、M10 等级的高端 PTFE 材料方案。目前 M9、M10、CoWoP 的研发仍在持续推进，但 PTFE 材料的量产工艺难题尚未完全攻克，短期贡献有限。产业链景气分化：在上游原材料持续涨价的驱动下，产业链上游环节表现将持续优于下游，即 CCL 环节的景气度与价格坚挺度将显著高于 PCB 环节。3. 云厂商及芯片巨头的技术路线博弈正交背板的落地受阻，导致 NPO（近端光学封装） 技术路线的落地概率进一步提升：亚马逊 (Amazon)：在其技术文档中展现了明确的指引，在所有行业参与者中，亚马逊是 OCS（光交叉连接）技术落地概率最大的企业。谷歌 (Google)：其 OCS 技术目前仅处于研发合作阶段，行业内尚无明确的商用时间表。这类软性指引缺乏明确的落地约束。英伟达 (NVIDIA)：同时推进 OCS 和 NPO 技术的研发。但基于其自身利益与产业定位，英伟达的核心发展方向必然是 CPO（共封装光学）相关业务，因为重点推进 NPO 会削弱其 CPO 的核心地位。英伟达对 NPO 的定位是“备选项”，只有当其 CPO 业务发展不及预期时，才会释放更强的商用化动力。二、 行业利空澄清：光模块与 PCB 的真实供需主线针对近期市场流传的“光模块和 PCB 环节价格下调 10%”的传闻，通过产业链深度跟踪可以明确判定：该传闻属于缺乏行业常识的...",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "segment_volume",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE12": {
+      "date": "2026-06-18T08:38",
+      "source": "stream_item:1480",
+      "source_type": "channel_check",
+      "credibility": "high_private_channel_hard_to_verify",
+      "decision_role": "probability/verification proxy",
+      "evidence": "pcb化学药水调研：各环节价值... pcb化学药水调研：各环节价值量分布，hdi-msap工艺对药水性能和价值量的提升，供应商竞争格局 PCB制造过程中主要使用哪些类型的化学药水，它们分别应用于哪些环节？不同类型的PCB(如普通多层板、HDI板、mSAP工艺板及AI板)对化学药水的具体需求有何差异？ PCB制造中使用的化学药水种类繁多，可大致分为三类。第一类是前处理及图形转移相关化学品，例如基材铜箔前处理的微蚀药水,以及图形制作过程中的显影、去膜药水。第二类是电镀相关化学品，包括化学沉铜和酸性电镀药水。第三类是表面处理化学品,如化学沉金、化学镍钯金、镀锡、OSP等。具体到制造环节，流程如下：首先在基材铜箔处理和图形制作环节，会用到前处理微蚀、显影和去膜药水。在多层板压合环节，会使用棕化药水。压合钻孔后，为实现孔内导通，需要经过除胶渣和PTH(化学沉铜)处理。导通后进行图形电镀，使用酸性电镀药水。对于多层板或HDI板，可能需要重复增层，即循环执行从基板制作到电镀的流程。线路制作完成后，在防焊(Solder Mask)工序中，会使用前处理药水和显影药水。最后是表面处理环节，根据需求选择化金、镀锡、镍钯金或OSP等工艺。 不同类型的PCB对化学药水的侧重点有所不同： 普通多层板：更关注成本效益，对药水的要求相对基础。 HDI板：由于涉及盲孔，工艺上要求将盲孔填平，因此对填孔性能特别关注。 采用mSAP工艺的载板或HDI板：mSAP(改良型半加成法)是一种图形电镀填孔工艺，其基铜层很薄(约3微米，常规为12微米),旨在实现更精细的线宽线距。因此，该工艺对图形填孔药水和闪蚀药水有较高要求。此外，载板通常使用ABF材料，对化学沉铜药水也特别关注。 AI板其基材铜箔特殊，为追求高频高速信号传输效率，对铜箔粗糙度、介电常数(低损耗)以及阻抗管控有严格要求。因此，AI板对用于控制粗糙度的键合剂、化学沉铜药水以及表面处理药水的性能要求更高。 PCB化学药水行业的市场竞争格局如何？天承科技的市场地位、核心技术优势及其近期业绩增长的原因是什么？ PCB化学药水市场参与者众多。国际厂商主要有安美特、罗门哈斯、JCU、麦德美特，这四家是市场上的主要供应商。国内厂商则包括光华科技、天承科技、博泉、贝加尔等。天承科技2025年的营收规模约为4-5亿元。其核心优势在于水平沉铜(即水平式PTH)技术。在PTH领域，国内市场此前主要由安美特和超特主导，尤其是在高端应用中，水平线是主流选择。近年来，得益于中美贸易摩擦引发的国产替代趋势，天承科技凭借其技术优势获得了发展机遇。同时，水平沉铜线相比传统的龙门线在操作性和稳定性上更具优势，成为新建PTH产线的主流选择。天承科技在AI板领域也取得了突破，例如在胜宏拥有十几条生产线,这是其近两年业绩快速增长的重要原因。综合来看，天承科技在电镀环节的P...",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "revenue",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    }
+  },
+  "sell_side_intelligence": [
+    {
+      "intelligence_id": "KSI01",
+      "kpe_ids": "KPE02",
+      "published_at": "2026-07-02T08:11",
+      "institution": "机构未识别",
+      "analyst_or_author": "纪要小能手",
+      "freshness": "高时效/5天",
+      "rating_signal": "未披露",
+      "forecast_facts": "📊 因此，它预计FY26（2026财年）毛利率与FY25（2025财年）大致持平，而AI收入占比应从低于50%提升至60-70%，产出价值从2025年的350亿元人民币增长到2030年的约3-4倍 / 🌐 除了关键GPU客户外，VGT正在向更多ASIC（专用集成电路）客户多元化拓展，并目标是ASIC/GPU收入占比达到50/50，因为ASIC设计也正从HLC（高密度互连板）转向HDI",
+      "valuation_facts": "💰 FY26资本支出（capex）指引约为180亿元人民币，其中约150亿元用于惠州的工厂10和11",
+      "normalized_points": "2025E_收入=50",
+      "revision_signal": "窗口内首次识别，暂无同机构前序可比",
+      "source_quote": "📢 胜宏科技(2476.HK)... 📢 胜宏科技(2476.HK)：产能扩张按计划进行，ASP调整平稳，GPM因AI产品结构而保持韧性 💡 与一些投资者担心的那样，公司通过主要客户降低成本不同，胜宏科技(VGT)表示AI PCB的原材料成本稳定，新一代产品的成本传导顺畅；对于非AI产品，VGT将优先考虑ASP（平均售价）和GPM（毛利率）最佳的订单。 📊 因此，它预计FY26（2026财年）毛利率与FY25（2025财年）大致持平，而AI收入占比应从低于50%提升至60-70%，产出价值从2025年的350亿元人民币增长到2030年的约3-4倍。 🎯 对于Rubin（英伟达下一代GPU），公司对在计算托盘HDI（与GB300一致）中占据大部分份额充满信心，并目标是维持关键客户所有产品中约50%的份额。 👀 VGT认为正交背板在Rubin Ultra中被采用的进度没有延迟，但确实指出终端客户正在考虑10多种材料/供应商组合..."
+    },
+    {
+      "intelligence_id": "KSI02",
+      "kpe_ids": "KPE07",
+      "published_at": "2026-06-30T18:57",
+      "institution": "摩根大通",
+      "analyst_or_author": "纪要小能手",
+      "freshness": "高时效/7天",
+      "rating_signal": "未披露",
+      "forecast_facts": "涨停板：锐捷网络、星网锐捷、长光华芯、铭普光磁、紫光股份、联创电子、共进股份、光电股份、 其他强势股：胜宏科技、太辰光、源杰科技、菲菱科思、瑞斯康达 算力租赁 ①DeepSeek官宣正式版V4将于7月中旬正式上线，并宣布API服务引入峰谷定价策略，其中高峰价格为平时价格两倍(12元/百万tokens),而平时价格与先行V4API定价一致",
+      "valuation_facts": "未提取到目标价/估值方法与倍数",
+      "normalized_points": "无可标准化数值",
+      "revision_signal": "窗口内首次识别，暂无同机构前序可比",
+      "source_quote": "6月30日复盘笔记：芯片产业链... 6月30日复盘笔记：芯片产业链/存储芯片/机器人/光通信/算力租赁/商业航天/玻璃基板等 一、重磅财经信息 6月份制造业采购经理指数为50.3%，重返扩张区间。 二、大盘表现 沪指涨0.50%，深证成指涨2.48%，创业板指涨2.99%，科创50指数涨3.85%。 沪深京三市成交额接近3.3万亿，较昨日缩量逾2000亿。 三、强势板块和个股分析 备注：只列举部分涨停板 芯片产业链 ①SEMI最新报告预测，全球300mm存储器晶圆厂设备投资预计将在2026年首次突破500亿美元关口，达到520亿美元，同比增长29%。 ②全球近20家模拟及功率半导体企业即将于7月1日启动新一轮涨价。据了解，AI服务器、数据中心专用电源管理芯片及高压信号链模拟芯片涨幅为15%至25%，工业自动化、储能隔离芯片涨幅为10%至15%。 涨停板：富满微、晶方科技、禾盛新材、斯达半导、江化微、多氟多、新洁能、昊华科..."
+    },
+    {
+      "intelligence_id": "KSI03",
+      "kpe_ids": "none",
+      "published_at": "2026-06-17T21:12",
+      "institution": "中信电子",
+      "analyst_or_author": "纪要小能手",
+      "freshness": "有效窗口/20天",
+      "rating_signal": "推荐措辞（非标准评级）",
+      "forecast_facts": "礼物由此我们判断26Q3 PCB厂商有望释放更强的业绩增长动能，27/28年业绩能见度有望进一步强化，盈利预测及估值水平仍有进一步提升空间，重点推荐：沪电股份、胜宏科技、深南电路、生益科技、兴森科技",
+      "valuation_facts": "礼物由此我们判断26Q3 PCB厂商有望释放更强的业绩增长动能，27/28年业绩能见度有望进一步强化，盈利预测及估值水平仍有进一步提升空间，重点推荐：沪电股份、胜宏科技、深南电路、生益科技、兴森科技",
+      "normalized_points": "rating=推荐措辞（非标准评级）",
+      "revision_signal": "窗口内首次识别，暂无同机构前序可比",
+      "source_quote": "烟花【中信电子】持续看到AI ... 烟花【中信电子】持续看到AI PCB产业趋势，产需共振下Q3业绩有望高增 礼物我们继续强调建议关注AI PCB行业当前产能和需求端的两大变化，即高端PCB新产能加速释放、算力客户产品换代带来PCB价值量的显著提升，均在加速落地，分别来看： 1）产能端：自26Q2起头部PCB厂商新产能加速释放，产能天花板进一步打开，具体来看：胜宏惠州厂房4稼动率持续提升，深南南通四期加速爬产，沪电Q2内部挖潜产能释放、同时H2昆山HDI新工厂将开始释放产出，生益电子增城智算中心高多层项目2期产能持续释放，同时吉安算力项目、泰国工厂将自H2起开始陆续爬产，鹏鼎则有10座工厂在建，年内将新增2-3座工厂新产能 2）需求端：rubin、T3、V8换代驱动PCB单开价值量显著提升，同时中板、LPU板等增量应用落地进一步强化下游需求，Q3起下游需求亦有望迎来爆发，具体来看：NV Rubin CCL有望于Q3迎来集..."
+    }
+  ],
+  "preprocessing_notes": [
+    "Segment split (AI PCB vs Non-AI PCB) is inferred from private channel evidence (KPE02, KPE06); no official segment disclosure found in filings. Revenue weights and margins unavailable.",
+    "All KPE hypotheses derived from private channels (knowledge_planet, broker notes) are treated as unverified or estimated; no baseline or revised values assigned without explicit quantification.",
+    "Contradiction between KPE10 (rumor of 10% price cut) and KPE02/KPE06 (stable ASP, cost pass-through) is flagged as a conflict; no reconciliation attempted.",
+    "Market implied earnings (PE TTM 59.8) are at elevated percentile (79.9% 5-year), indicating high growth expectations already priced in. Validate against margin and volume trajectory.",
+    "Company investor interaction responses (EV084-EV089) confirm operations normal and capacity expansion on track but provide no quantified forward guidance.",
+    "No commodity mapping found for PCB-specific inputs; raw material cost trends from industry reports (KPE09) are unverified at company level.",
+    "KSI observations (KSI01-KSI03) are captured via KPE hypotheses (KPE02, KPE07, KPE09); KSI03 (CITIC recommendation) is not separately codified due to lack of specific numbers.",
+    "All missing_inputs fields list critical parameters not available from supplied evidence."
+  ],
+  "underwriting_packet": {
+    "schema_version": 2,
+    "symbol": "300476.SZ",
+    "as_of_date": "2026-07-07",
+    "forecast_years": [
+      "2026E",
+      "2027E",
+      "2028E"
+    ],
+    "research_readiness": "partial",
+    "readiness_reasons": [
+      "Diluted share count not available from supplied evidence; EPS and per-share metrics cannot be populated. Total equity value used for scenario valuation.",
+      "Segment revenue, margin and profit weights are analytical estimates derived from private channel evidence (KPE02, KPE06) because official segment disclosures are missing.",
+      "Capital expenditure beyond FY26 is estimated; only FY26 guidance of ~RMB 18 bn is supplied.",
+      "Working capital and cash conversion assumptions rely on a single quarter OCF/net profit ratio (Q1 2026).",
+      "Conflicts between market rumours (KPE10, KPE11) and company guidance are unresolved; scenario probabilities reflect underwriting judgement.",
+      "Material segment three-year driver lines are missing: AI PCB, Non-AI PCB",
+      "Bull/base/bear per-share valuation is incomplete.",
+      "Valuation has not closed from mutually exclusive buckets to per-share fair value.",
+      "volume_price_cost driver chain is incomplete; missing: utilization",
+      "Three-year values remain missing for consolidated line(s): eps"
+    ],
+    "company_model": {
+      "model_profile": "corporate",
+      "operating_model_family": "volume_price_cost",
+      "business_archetype": "产能出货型PCB制造商，产品以高多层/HDI印制线路板为主，面向AI算力、数据通信、汽车电子等领域",
+      "value_proposition_and_customers": "为GPU/ASIC加速卡、服务器、交换机和光模块提供高密度互联（HDI）与高速PCB；核心客户包括国际GPU龙头、CSP和工业客户。价值源于高复杂度、高可靠性、快速量产及与客户平台共同迭代的能力。",
+      "revenue_equation": "收入 = Σ (各工厂产能 × 利用率) × 产品结构ASP × (1-退换率); 总ASP受产品组合（高端AI vs 普通）和成本传导机制影响",
+      "profit_equation": "营业利润 = 收入 - 原材料成本(覆铜板、铜箔等) - 人工及制造费用 - 研发/销售/管理费用; 核心毛利率由产品结构、良率和原材料成本决定，运营杠杆来自规模效应和产能爬坡",
+      "cash_flow_equation": "OCF = 净利润 + 折旧摊销 ± 营运资本变动; FCF = OCF - 资本支出; 典型成长期资本支出巨大，FCF可能为负，但产能释放后现金回收加快",
+      "capital_intensity_and_reinvestment": "重资产制造，单位收入需持续投入产能建设与设备；FY26资本支出指引约人民币180亿元，主要用于惠州工厂10/11及后续项目；折旧压力随产能转固逐步上升",
+      "diluted_share_count_mn": null,
+      "share_count_period": "",
+      "share_count_evidence_id": "",
+      "share_count_source_type": "unresolved",
+      "share_count_formula": "",
+      "share_count_cross_checks": [],
+      "moat_mechanisms": [
+        "客户黏性与平台认证：深度绑定国际GPU龙头，需通过长周期认证且配套ASIC路线图",
+        "技术壁垒：mSAP、高叠层HDI、大尺寸高多层板工艺，新进入者追赶周期长",
+        "规模优势与全球布局：惠州、越南、泰国多地产能，能满足头部客户大批量与地缘分散需求"
+      ],
+      "moat_to_financial_transmission": [
+        "客户黏性 → 份额稳定/ASP相对坚挺 → 收入确定性",
+        "技术壁垒 → 高端产品占比提升 → 混合ASP与毛利率韧性",
+        "规模与全球布局 → 快速接单能力与关税优化 → 运营利润和收入增长"
+      ],
+      "structural_risks": [
+        "大客户集中风险（尤以GPU龙头为主）",
+        "产能爬坡与折旧高峰期对利润的压制",
+        "PCB行业原材料价格波动（覆铜板、铜箔）及地缘政治导致的供应中断",
+        "AI硬件路线变动（如正交背板推迟、材料方案变更）可能使公司在研产品失去适销性",
+        "贸易摩擦和境外收入（占比约65-81%）面临的关税与合规风险"
+      ],
+      "key_unknowns": [
+        "AI PCB的具体收入、毛利率和产能利用率",
+        "Rubin Ultra平台最终架构及其对公司正交背板/高端材料需求的影响",
+        "ASIC/GPU客户占比及后续向TPU等CSP客户的真实渗透速度",
+        "FY27-28资本支出与新一轮产能转固后的折旧规模",
+        "股份稀释（定向增发及员工持股计划）时长与幅度"
+      ],
+      "evidence_ids": [
+        "EV021",
+        "EV022",
+        "EV023",
+        "KPE02",
+        "KPE06",
+        "KPE11"
+      ]
+    },
+    "business_unit_map": [
+      {
+        "unit_id": "ai_pcb",
+        "unit_name": "AI PCB",
+        "unit_type": "product",
+        "disclosure_basis": "analytical",
+        "parent_unit": "company",
+        "economic_role": "面向GPU/ASIC加速卡、服务器主板和数通设备的高端PCB，驱动当前及未来增长",
+        "revenue_driver_equation": "AI基础设施资本开支 → GPU/ASIC平台迭代 → 公司产能(工厂10-13) × 利用率 × 产品结构(HDI/mSAP) × ASP(成本加成)",
+        "profit_driver_equation": "收入 - 原材料(覆铜板/铜箔) - 制造费用 - 研发摊销; 毛利率取决于良率、产品层数和成本传导效率",
+        "cash_and_capital_equation": "营收增长强劲但前期建厂和产能爬坡需大量现金消耗；稳定后营运资本周转改善，OCF转换为正值",
+        "reported_metrics": [],
+        "evidence_ids": [
+          "KPE02",
+          "KPE06",
+          "EV014",
+          "EV016"
+        ],
+        "missing_inputs": [
+          "AI PCB exact revenue and gross margin",
+          "AI PCB capacity utilization and volume",
+          "Customer concentration split"
+        ],
+        "next_verification": "公司中报或全年报告披露分产品线营收/利润，或管理层电话会议给出更详细分拆"
+      },
+      {
+        "unit_id": "non_ai_pcb",
+        "unit_name": "Non-AI PCB",
+        "unit_type": "product",
+        "disclosure_basis": "analytical",
+        "parent_unit": "company",
+        "economic_role": "汽车电子、工业控制、消费电子等领域的传统多层板，选择性接单以优化ASP和毛利",
+        "revenue_driver_equation": "终端需求（汽车/工业/通信）→ 公司选择性接单 × 存量产能 × ASP",
+        "profit_driver_equation": "收入 - 原材料 - 制造费用 - 少量研发; 毛利率依赖成本控制和订单结构",
+        "cash_and_capital_equation": "现金产出稳定，但无大规模扩张性投入；营运资本波动取决于下游客户账期",
+        "reported_metrics": [],
+        "evidence_ids": [
+          "KPE02"
+        ],
+        "missing_inputs": [
+          "Non-AI PCB revenue split and growth rate",
+          "Segment gross margin",
+          "Order selectivity impact on revenue"
+        ],
+        "next_verification": "管理报告讨论非AI业务订单趋势或下游领域景气度"
+      },
+      {
+        "unit_id": "export_channel",
+        "unit_name": "Export Channel",
+        "unit_type": "geography",
+        "disclosure_basis": "calculated",
+        "parent_unit": "company",
+        "economic_role": "境外销售占总营收约65-81%，以美元/其他外币结算，直接影响收入汇率风险和地缘敞口",
+        "revenue_driver_equation": "境外营收 = 全球客户订单 × ASP × 汇率",
+        "profit_driver_equation": "毛利率受汇率波动和潜在的关税转嫁影响",
+        "cash_and_capital_equation": "回款以外币为主，汇率变动影响应收和现金转换",
+        "reported_metrics": [
+          "境外销售占比约65-81% (EV028)"
+        ],
+        "evidence_ids": [
+          "EV028"
+        ],
+        "missing_inputs": [
+          "Exact export share in FY25 and FY26 guidance",
+          "Currency hedging details"
+        ],
+        "next_verification": "年报中披露外销收入占比及汇兑损益"
+      }
+    ],
+    "segment_models": [
+      {
+        "segment": "AI PCB",
+        "products_or_services": "高多层、HDI、mSAP高速PCB，用于AI加速器(GPU/ASIC)、服务器、数据网络",
+        "customers_and_channel": "全球GPU/ASIC龙头、CSP、数据中心设备商；以直接销售和ODM模组形式交付",
+        "revenue_weight_pct": null,
+        "profit_weight_pct": null,
+        "base_period": "FY26E",
+        "base_revenue_value": null,
+        "base_revenue_unit": "",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [
+          "GPU平台迭代周期 (Rubin/Rubin Ultra)",
+          "ASIC采用加速 (CSP V8 TPU等)",
+          "全球AI数据中心资本开支"
+        ],
+        "industry_supply_and_capacity": "高端PCB供应壁垒高，可规模量产HDI/mSAP的厂商有限；公司通过工厂10-13大幅扩张产能，同时越南/泰国布局",
+        "volume_share_utilization": "目标在核心客户全品类中保持约50%份额；公司对GPU计算载板HDI多数份额有信心",
+        "price_asp_take_rate": "ASP以成本加成模式为主，公司表示原材料成本稳定且成本传导顺畅，降价压力存在但可控 (KPE02 vs KPE10)",
+        "unit_cost_and_input_prices": "覆铜板、铜箔等主要原材料；公司称成本稳定，新一代产品传导顺畅",
+        "margin_and_operating_leverage": "Q1 2026整体毛利率34.5%，随着产品组合向高端倾斜，毛利率有望持平或微升；运营杠杆在产能爬升后于FY27-28逐渐显现",
+        "working_capital_and_cash_conversion": "Q1 2026 OCF/净利润1.64倍，现金转换较强；存货/收入比17.7%，随产能增加阶段性攀升",
+        "prosperity_level": "high",
+        "marginal_direction": "improving",
+        "causal_analysis": "AI算力需求持续扩张推动订单，公司通过工厂10-13大幅增加HDI/mSAP产能，产品结构升级，ASP平稳，毛利率有望维持34-35%，产能利用率爬升后利润增速将快于收入",
+        "valuation_treatment": "核心增长引擎，给予较高估值乘数",
+        "strongest_counterevidence": [
+          "英伟达可能压价10%传闻（KPE10）",
+          "Rubin Ultra正交背板推迟，导致大规模PCB价值下修风险（KPE11）"
+        ],
+        "evidence_ids": [
+          "EV014",
+          "EV016",
+          "KPE02",
+          "KPE06",
+          "KPE11"
+        ],
+        "missing_inputs": [
+          "AI PCB具体收入及占比",
+          "AI PCB毛利率",
+          "产能利用率及爬坡节奏"
+        ],
+        "next_verification": "公司2026中报/全年报分部披露，或关键客户平台计划更新"
+      },
+      {
+        "segment": "Non-AI PCB",
+        "products_or_services": "传统多层PCB，涵盖汽车电子、工业控制、消费电子、通信等领域",
+        "customers_and_channel": "多元化客户群，通过直销和分销商；公司选择性承接高ASP/GPM订单",
+        "revenue_weight_pct": null,
+        "profit_weight_pct": null,
+        "base_period": "FY26E",
+        "base_revenue_value": null,
+        "base_revenue_unit": "",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [
+          "汽车电子智能化渗透",
+          "工业自动化与5G基础设施",
+          "消费电子换机周期"
+        ],
+        "industry_supply_and_capacity": "行业供给充足，价格竞争激烈；公司通过选择性接单和成本控制维持盈利",
+        "volume_share_utilization": "随AI业务扩张，非AI产能可能部分被重新部署或维持选择性策略，收入占比逐渐下降",
+        "price_asp_take_rate": "ASP和毛利成为选择订单的首要标准，管理层明确优先高利润订单",
+        "unit_cost_and_input_prices": "原材料成本与AI板块共享，公司声称稳定且无额外压力",
+        "margin_and_operating_leverage": "毛利率低于AI板块，但通过订单筛选可维持在健康水平；经营杠杆不显著",
+        "working_capital_and_cash_conversion": "回款周期可能长于AI，但总体稳定",
+        "prosperity_level": "moderate",
+        "marginal_direction": "stable",
+        "causal_analysis": "需求温和增长，公司主动筛选高利润订单，使该板块贡献稳定但增长缓慢的收入和利润，预计毛利率维持在25-30%",
+        "valuation_treatment": "稳定现金流业务，估值相对保守",
+        "strongest_counterevidence": [
+          "全球宏观经济疲软可能导致汽车/工业需求下滑",
+          "原材料成本如果大幅上涨而未能及时转嫁"
+        ],
+        "evidence_ids": [
+          "KPE02"
+        ],
+        "missing_inputs": [
+          "非AI收入及利润率",
+          "具体下游领域占比"
+        ],
+        "next_verification": "管理层指引或季度订单趋势"
+      }
+    ],
+    "underwriting_questions": [
+      {
+        "question_id": "UQ01",
+        "question": "AI PCB部门的ASIC/GPU收入组合及V8 TPU渗透速度如何？",
+        "why_it_matters": "ASIC/GPU平衡直接影响收入增长基础和大客户集中度；快速切入V8 TPU可显著提升2027-2028年收入且提升估值确定性。",
+        "current_answer": "公司目标ASIC/GPU收入各占50%，并预计2026年底前进入V8 TPU供应；当前证据来自管理层路演，未披露含具体数字的合同。",
+        "bull_evidence": [
+          "KPE02: 公司为美国主要CSP V7 CPU供PCB，有信心FY26末进入V8 TPU供应链",
+          "KPE06: ASIC设计从HLC转向HDI，胜宏有望受益"
+        ],
+        "bear_evidence": [
+          "KPE11: TPU路线也可能面临类似GPU的架构延迟风险",
+          "ASIC市场可能被其他PCB供应商瓜分"
+        ],
+        "decisive_model_variables": [
+          "segment_volume (AI PCB)",
+          "ASP/mix (AI PCB)"
+        ],
+        "affected_financial_lines": [
+          "consolidated revenue",
+          "parent net profit",
+          "EPS"
+        ],
+        "evidence_ids": [
+          "KPE02",
+          "KPE06",
+          "KPE11"
+        ],
+        "missing_evidence": [
+          "正式订单公告",
+          "V8 TPU的PCB价值量测算"
+        ],
+        "next_verification": "CSP的TPU路线图更新或胜宏的供应商资质确认公告"
+      },
+      {
+        "question_id": "UQ02",
+        "question": "Rubin Ultra平台正交背板是否真的延迟，延迟对胜宏的远期收入冲击有多大？",
+        "why_it_matters": "正交背板曾被视为2027年以后的重要收入催化剂；若取消，远期AI收入预测可能需要下调10-16%（根据Jefferies估计），显著影响估值。",
+        "current_answer": "Jefferies称正交背板推迟至2028年，2027年Kyber出货概率极低；胜宏认为进度未延迟，正在评估多种材料方案。冲突未解决。",
+        "bull_evidence": [
+          "KPE02: 胜宏认为正交背板在Rubin Ultra中被采用的进度没有延迟",
+          "KPE06: 公司正在评估10多种材料/供应商组合"
+        ],
+        "bear_evidence": [
+          "KPE11: Jefferies详细研究报告提出推迟，2027/2028年PCB市场规模面临下修",
+          "NVIDIA尚无官方路线图confirm"
+        ],
+        "decisive_model_variables": [
+          "segment_volume (AI PCB) in 2027E/2028E"
+        ],
+        "affected_financial_lines": [
+          "consolidated revenue 2027E-2028E",
+          "parent net profit",
+          "FCF"
+        ],
+        "evidence_ids": [
+          "KPE02",
+          "KPE11"
+        ],
+        "missing_evidence": [
+          "NVIDIA Rubin Ultra官方硬件路线图",
+          "胜宏在正交背板上的预估订单值"
+        ],
+        "next_verification": "NVIDIA GTC或官网架构发布，Q2 FY27供应链核实"
+      },
+      {
+        "question_id": "UQ03",
+        "question": "FY26资本支出180亿元能否在FY27-FY28实现产能转化为收入，回报（ROIC）何时能达到可接受水平？",
+        "why_it_matters": "大规模资本支出是公司中长期成长的核心，但也带来折旧飙升和自由现金流承压；若产能爬坡慢于预期，ROIC将长期低迷，拖低估值。",
+        "current_answer": "管理层指引工厂10/11主要2026年建设，工厂12/13后续；产能爬坡通常需要数季度，大规模贡献可能从FY27开始。",
+        "bull_evidence": [
+          "EV039: 在建工程余额增至51.7亿元，同比增长43%",
+          "KPE02: 公司表示产能扩张按计划进行，惠州厂房十/十一有序推进"
+        ],
+        "bear_evidence": [
+          "PCB重资产行业，产能爬坡和良率提升历来慢于预期",
+          "如果AI需求低于预期，新增产能可能变成闲置成本"
+        ],
+        "decisive_model_variables": [
+          "capacity / utilization",
+          "revenue growth FY27-28",
+          "capex / depreciation",
+          "FCF"
+        ],
+        "affected_financial_lines": [
+          "fixed asset depreciation",
+          "operating margin",
+          "OCF/FCF",
+          "ROIC"
+        ],
+        "evidence_ids": [
+          "EV039",
+          "KPE02"
+        ],
+        "missing_evidence": [
+          "工厂级产能、投资回收期测算",
+          "折旧政策明细"
+        ],
+        "next_verification": "2026中报或全年折旧新增额，管理层对爬坡节奏的更新"
+      },
+      {
+        "question_id": "UQ04",
+        "question": "英伟达是否真正实施PCB降价10%，公司能否通过成本传导和产品组合维持毛利率？",
+        "why_it_matters": "直接决定AI PCB ASP和毛利率趋势；如果降价成真且无法完全传导，毛利率将下滑，EPS遭受双重挤压。",
+        "current_answer": "市场传闻叠加公司否认；管理层表示原材料成本稳定且新一代产品成本传导顺畅，FY26毛利率与FY25大致持平。",
+        "bull_evidence": [
+          "KPE02: 成本传导顺畅，FY26毛利率预计与FY25持平",
+          "Q1 2026毛利率34.46%，同比+1.08pp"
+        ],
+        "bear_evidence": [
+          "KPE10: 市场传闻英伟达要求PCB降价10%",
+          "PCB竞争加剧背景，历史上存在年降压力"
+        ],
+        "decisive_model_variables": [
+          "ASP / price (AI PCB)",
+          "gross margin"
+        ],
+        "affected_financial_lines": [
+          "consolidated gross margin",
+          "operating profit",
+          "EPS"
+        ],
+        "evidence_ids": [
+          "KPE02",
+          "KPE10",
+          "EV014"
+        ],
+        "missing_evidence": [
+          "与英伟达的实际合同条款",
+          "Q2 2026毛利率趋势"
+        ],
+        "next_verification": "Q2 2026季度报告毛利率以及与客户的季度议价结果"
+      },
+      {
+        "question_id": "UQ05",
+        "question": "在股份稀释风险（员工持股计划、股权激励）下，EPS增长能否跟上净利润增长？",
+        "why_it_matters": "员工持股计划上限7亿元且采用二级市场购买，可能增加总股本；未来定向增发也可能稀释；EPS是高估值股票的核心指标。",
+        "current_answer": "已公布员工持股计划框架，具体股本影响未知；过往存在定向增发计划（2025年注册稿）。",
+        "bull_evidence": [],
+        "bear_evidence": [
+          "KPE01: 员工持股计划总额不超过7亿元，通过二级市场购买",
+          "EV007: 2025年向特定对象发行股票募集说明书（注册稿）"
+        ],
+        "decisive_model_variables": [
+          "diluted share count"
+        ],
+        "affected_financial_lines": [
+          "EPS",
+          "per-share valuation"
+        ],
+        "evidence_ids": [
+          "KPE01",
+          "EV007"
+        ],
+        "missing_evidence": [
+          "员工持股计划的具体执行时间、价格及股份数量",
+          "定向增发最新进展"
+        ],
+        "next_verification": "公司公告员工持股计划实施结果或定向增发发行结果"
+      }
+    ],
+    "forecast_lines": [
+      {
+        "segment": "consolidated",
+        "metric": "revenue",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 19292.31,
+        "year_1_value": 27600.0,
+        "year_2_value": 35900.0,
+        "year_3_value": 44900.0,
+        "formula": "FY26=FY25×(1+43%) driven by AI ramp; FY27+30%, FY28+25%; incorporates KPE02 revenue share targets and capacity expansion",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [
+          "EV012",
+          "EV013",
+          "KPE02",
+          "KPE06"
+        ],
+        "key_sensitivity": "AI PCB volume and ASP",
+        "missing_inputs": []
+      },
+      {
+        "segment": "consolidated",
+        "metric": "cost_of_sales",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 12848.0,
+        "year_1_value": 18080.0,
+        "year_2_value": 23520.0,
+        "year_3_value": 29634.0,
+        "formula": "Revenue × (1 - gross margin); FY25 GM ~33.4% (implied from Q1 YoY), FY26E 34.5%, FY27E 34.5%, FY28E 34.0%",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [
+          "EV014",
+          "KPE02"
+        ],
+        "key_sensitivity": "Gross margin",
+        "missing_inputs": []
+      },
+      {
+        "segment": "consolidated",
+        "metric": "gross_profit",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 6444.31,
+        "year_1_value": 9520.0,
+        "year_2_value": 12380.0,
+        "year_3_value": 15266.0,
+        "formula": "Revenue - COS",
+        "assumption_status": "calculated",
+        "evidence_ids": [],
+        "key_sensitivity": "",
+        "missing_inputs": []
+      },
+      {
+        "segment": "consolidated",
+        "metric": "gross_margin",
+        "unit": "%",
+        "base_period": "FY2025",
+        "base_value": 33.4,
+        "year_1_value": 34.5,
+        "year_2_value": 34.5,
+        "year_3_value": 34.0,
+        "formula": "Gross profit / revenue; FY25 estimated from Q1 2025 implied 33.38%; FY26 guided flat, FY27 stable, FY28 slight compression from depreciation",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [
+          "EV014",
+          "KPE02"
+        ],
+        "key_sensitivity": "ASP vs input cost",
+        "missing_inputs": []
+      },
+      {
+        "segment": "consolidated",
+        "metric": "operating_profit",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 4919.0,
+        "year_1_value": 7590.0,
+        "year_2_value": 9693.0,
+        "year_3_value": 11899.0,
+        "formula": "Revenue × operating margin; FY25 ~25.5% (implied Q1 2025), FY26 27.5%, FY27 27.0%, FY28 26.5%",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [
+          "EV015"
+        ],
+        "key_sensitivity": "Operating leverage and depreciation",
+        "missing_inputs": []
+      },
+      {
+        "segment": "consolidated",
+        "metric": "operating_margin",
+        "unit": "%",
+        "base_period": "FY2025",
+        "base_value": 25.5,
+        "year_1_value": 27.5,
+        "year_2_value": 27.0,
+        "year_3_value": 26.5,
+        "formula": "Operating profit / revenue; FY25 estimated from Q1 2025 (25.31% + 1.91pp gives 27.22% Q1 2026); FY26 slightly above Q1 on scale, then gradual normalisation",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [
+          "EV015"
+        ],
+        "key_sensitivity": "SG&A and R&D efficiency",
+        "missing_inputs": []
+      },
+      {
+        "segment": "consolidated",
+        "metric": "parent_net_profit",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 4312.0,
+        "year_1_value": 6210.0,
+        "year_2_value": 7719.0,
+        "year_3_value": 9205.0,
+        "formula": "Revenue × net margin; FY25 ~21.5% (implied), FY26 22.5%, FY27 21.5%, FY28 20.5%",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [
+          "EV016"
+        ],
+        "key_sensitivity": "Finance cost, tax rate, non-recurring items",
+        "missing_inputs": []
+      },
+      {
+        "segment": "consolidated",
+        "metric": "net_margin",
+        "unit": "%",
+        "base_period": "FY2025",
+        "base_value": 21.5,
+        "year_1_value": 22.5,
+        "year_2_value": 21.5,
+        "year_3_value": 20.5,
+        "formula": "Parent net profit / revenue; FY25 estimated from Q1 2025 21.35%; FY26 improved by mix, then gradually mean-reverting",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [
+          "EV016"
+        ],
+        "key_sensitivity": "Interest expense and effective tax rate",
+        "missing_inputs": []
+      },
+      {
+        "segment": "consolidated",
+        "metric": "eps",
+        "unit": "CNY per share",
+        "base_period": "FY2025",
+        "base_value": null,
+        "year_1_value": null,
+        "year_2_value": null,
+        "year_3_value": null,
+        "formula": "Parent net profit / diluted shares; diluted shares unavailable",
+        "assumption_status": "missing",
+        "evidence_ids": [],
+        "key_sensitivity": "share count",
+        "missing_inputs": [
+          "diluted share count"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "ocf",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 5174.0,
+        "year_1_value": 7452.0,
+        "year_2_value": 8800.0,
+        "year_3_value": 10200.0,
+        "formula": "Parent net profit × OCF/NI ratio; FY25 ~1.20x, FY26-28 gradually moderating to 1.15x",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [
+          "EV018"
+        ],
+        "key_sensitivity": "working capital management",
+        "missing_inputs": []
+      },
+      {
+        "segment": "consolidated",
+        "metric": "capex",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 8000.0,
+        "year_1_value": 18000.0,
+        "year_2_value": 12000.0,
+        "year_3_value": 8000.0,
+        "formula": "FY26 = management guidance ~RMB 18 bn (KPE02); FY27-28 assumed step-down as major factories complete",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [
+          "KPE02",
+          "EV041"
+        ],
+        "key_sensitivity": "Company capacity expansion roadmap",
+        "missing_inputs": [
+          "FY27 and FY28 exact capex plans"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "fcf",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": -2826.0,
+        "year_1_value": -10548.0,
+        "year_2_value": -3200.0,
+        "year_3_value": 2200.0,
+        "formula": "OCF - Capex; heavy investment period turns FCF-negative until FY28",
+        "assumption_status": "calculated",
+        "evidence_ids": [],
+        "key_sensitivity": "capex and OCF conversion",
+        "missing_inputs": []
+      }
+    ],
+    "scenarios": [
+      {
+        "scenario": "bull",
+        "probability_pct": 30.0,
+        "operating_assumptions": [
+          "FY26 revenue CNY 30,000 mn (+55%), FY27 42,000 mn, FY28 55,000 mn",
+          "Gross margin remains 35.0% throughout",
+          "Operating margin rises to 29% by FY28 on strong operating leverage",
+          "Parent net profit: FY26 7,500 mn, FY27 10,500 mn, FY28 14,300 mn",
+          "Capex FY26 18,000 mn, then 10,000 mn, 6,000 mn",
+          "Rubin Ultra architecture proceeds as scheduled; no price cut materialises"
+        ],
+        "parent_net_profit_cny_mn": 7500.0,
+        "eps_cny": null,
+        "fcf_cny_mn": -10500.0,
+        "valuation_method": "P/E on FY27E net profit",
+        "valuation_multiple": 40.0,
+        "fair_value_per_share": null,
+        "evidence_ids": [
+          "KPE02",
+          "KPE06"
+        ],
+        "falsification": "Nvidia 10% price cut confirmed; Rubin Ultra officially delayed; FY26 revenue tracks below CNY 26,000 mn",
+        "missing_inputs": [
+          "share count"
+        ]
+      },
+      {
+        "scenario": "base",
+        "probability_pct": 50.0,
+        "operating_assumptions": [
+          "FY26 revenue CNY 27,600 mn, FY27 35,900 mn, FY28 44,900 mn",
+          "Gross margin ~34.5% FY26-27, 34.0% FY28",
+          "Operating margin 27.5% -> 27.0% -> 26.5%",
+          "Parent net profit: FY26 6,210 mn, FY27 7,719 mn, FY28 9,205 mn",
+          "Capex FY26 18,000 mn, then 12,000 mn, 8,000 mn",
+          "AI revenue share reaches 65%/70%/75%; ASP stable with cost pass-through"
+        ],
+        "parent_net_profit_cny_mn": 6210.0,
+        "eps_cny": null,
+        "fcf_cny_mn": -10548.0,
+        "valuation_method": "P/E on FY27E net profit",
+        "valuation_multiple": 35.0,
+        "fair_value_per_share": null,
+        "evidence_ids": [
+          "KPE02",
+          "EV014",
+          "EV015"
+        ],
+        "falsification": "FY26 revenue below CNY 25,000 mn; gross margin below 33%",
+        "missing_inputs": [
+          "share count"
+        ]
+      },
+      {
+        "scenario": "bear",
+        "probability_pct": 20.0,
+        "operating_assumptions": [
+          "FY26 revenue CNY 24,000 mn (+24%), FY27 28,800 mn, FY28 33,000 mn",
+          "Gross margin declines to 32.0% in FY26 due to price cut and mix",
+          "Operating margin drops to 24%",
+          "Parent net profit: FY26 4,800 mn, FY27 5,400 mn, FY28 6,000 mn",
+          "Capex maintained at high level; FCF deeply negative",
+          "Nvidia price cut and delayed Rubin Ultra materially reduce volume"
+        ],
+        "parent_net_profit_cny_mn": 4800.0,
+        "eps_cny": null,
+        "fcf_cny_mn": -13200.0,
+        "valuation_method": "P/E on FY27E net profit",
+        "valuation_multiple": 25.0,
+        "fair_value_per_share": null,
+        "evidence_ids": [
+          "KPE10",
+          "KPE11"
+        ],
+        "falsification": "Q2 2026 gross margin recovers above 33%; Nvidia roadmap confirms original timeline",
+        "missing_inputs": [
+          "share count"
+        ]
+      }
+    ],
+    "thesis_financial_bridges": [
+      {
+        "bridge_id": "bridge_01",
+        "thesis_or_question": "AI PCB收入占比提升驱动营收高增长并推升混合毛利率",
+        "affected_unit": "consolidated",
+        "operating_driver": "AI revenue share",
+        "driver_formula": "Consolidated revenue = AI revenue + Non-AI revenue; AI revenue = % mix × total revenue",
+        "base_assumption": "AI revenue share rises from ~45% in FY25 to 65%/70%/75% in FY26/27/28",
+        "bull_assumption": "AI share 70%/80%/85%; AI PCB ASP higher",
+        "bear_assumption": "AI share stuck at 55% due to delays/share loss; price cuts",
+        "revenue_impact": "base: FY26 revenue CNY 27,600 mn; bull: 30,000 mn; bear: 24,000 mn",
+        "profit_impact": "base: parent NP 6,210 mn; bull: 7,500 mn; bear: 4,800 mn",
+        "eps_impact": "unquantified",
+        "fcf_or_capital_impact": "Higher revenue improves OCF but capex heavy",
+        "valuation_impact": "Higher growth and margin support higher P/E multiple",
+        "quantification_status": "partially_quantified",
+        "evidence_ids": [
+          "KPE02",
+          "KPE06"
+        ],
+        "missing_inputs": [
+          "diluted share count for EPS"
+        ]
+      },
+      {
+        "bridge_id": "bridge_02",
+        "thesis_or_question": "毛利率持平或上升，得益于产品结构升级和成本传导",
+        "affected_unit": "consolidated",
+        "operating_driver": "gross margin",
+        "driver_formula": "Gross margin = (AI GM% × AI weight) + (Non-AI GM% × Non-AI weight)",
+        "base_assumption": "AI GM ~36%, Non-AI GM ~28%, blended GM 34.5% in FY26",
+        "bull_assumption": "AI GM 37%, Non-AI 30%, blended 35.0%",
+        "bear_assumption": "AI GM 33%, Non-AI 26%, blended 32.0%",
+        "revenue_impact": "Same revenue base, gross profit varies",
+        "profit_impact": "1 pp GM change = ~CNY 276 mn on FY26 base revenue -> NP impact ~207 mn (assuming 25% tax)",
+        "eps_impact": "unquantified",
+        "fcf_or_capital_impact": "Minor, through net profit",
+        "valuation_impact": "Higher margin commands premium multiple",
+        "quantification_status": "partially_quantified",
+        "evidence_ids": [
+          "EV014",
+          "KPE02"
+        ],
+        "missing_inputs": [
+          "segment-specific gross margin"
+        ]
+      },
+      {
+        "bridge_id": "bridge_03",
+        "thesis_or_question": "大规模CAPEX带来产能翻倍，驱动2027-2028年收入跃升，但也带来折旧和FCF压力",
+        "affected_unit": "consolidated",
+        "operating_driver": "capex / capacity",
+        "driver_formula": "New revenue = new capacity × utilization × ASP; incremental depreciation = capex / useful life",
+        "base_assumption": "FY26 capex 18,000 mn, factories 10/11 complete by FY27; FY27-28 revenue add ~20-30% p.a.",
+        "bull_assumption": "Faster ramp, revenue grows 40% p.a.; depreciation spread over 15 yrs",
+        "bear_assumption": "Ramp delayed, revenue grows 15% p.a.; depreciation hits sooner",
+        "revenue_impact": "base: FY28 revenue 44,900 mn; bull: 55,000 mn; bear: 33,000 mn",
+        "profit_impact": "Bull higher profit; bear margin contraction from fixed costs",
+        "eps_impact": "unquantified",
+        "fcf_or_capital_impact": "FCF deeply negative in FY26-27, turn positive in FY28 base case",
+        "valuation_impact": "Market may reward capacity build if demand visible; higher risk if uncertain",
+        "quantification_status": "partially_quantified",
+        "evidence_ids": [
+          "KPE02",
+          "EV039",
+          "EV041"
+        ],
+        "missing_inputs": [
+          "Detailed capex schedule per factory, useful lives"
+        ]
+      },
+      {
+        "bridge_id": "bridge_04",
+        "thesis_or_question": "客户多元化（ASIC/TPU）降低对单一GPU客户的依赖，提升收入稳定性",
+        "affected_unit": "AI PCB",
+        "operating_driver": "customer concentration",
+        "driver_formula": "Revenue stability = f(GPU customer share, ASIC/CSP share)",
+        "base_assumption": "GPU:ASIC revenue ratio moves to 50:50 over time",
+        "bull_assumption": "ASIC accelerates, gains 60% by FY28; wins major CSP TPU",
+        "bear_assumption": "GPU remains 70%+; limited ASIC traction",
+        "revenue_impact": "Indirect: reduces downside risk; bull case supports higher revenue multiple",
+        "profit_impact": "ASIC may have different margin profile, but overall diversification premium",
+        "eps_impact": "unquantified",
+        "fcf_or_capital_impact": "More diversified cash flow",
+        "valuation_impact": "Lower concentration risk can justify higher P/E",
+        "quantification_status": "unquantified",
+        "evidence_ids": [
+          "KPE02",
+          "KPE06"
+        ],
+        "missing_inputs": [
+          "exact customer revenue splits"
+        ]
+      }
+    ],
+    "moat_evidence_tests": [
+      {
+        "moat_mechanism": "客户黏性与长周期认证壁垒",
+        "observable_test": "对比公司与PCB同行的前五大客户集中度及客户更换率；胜宏科技是否在Nvidia的GB300计算载板HDI中保持多数份额",
+        "comparison_basis": "行业：鹏鼎控股、沪电股份、深南电路等同类PCB供应商",
+        "evidence_result": "公司声称目标保持核心客户全品类50%份额，暂无公开份额数据；Nvidia供应链无公开份额报告",
+        "financial_transmission": "稳定ASP与高产能利用率 → 毛利率韧性 → 可预测的EPS",
+        "strongest_counterevidence": "Nvidia引入更多PCB供应商以分散风险，可能降低胜宏份额",
+        "status": "partial",
+        "evidence_ids": [
+          "KPE02",
+          "KPE06"
+        ],
+        "next_verification": "从第三方拆解或客户报告中获取份额数据"
+      },
+      {
+        "moat_mechanism": "技术壁垒：mSAP/HDI高叠层能力",
+        "observable_test": "比较公司量产的最高层数、线宽/线距与行业领先水平；研发费用率与资本支出是否持续领先同行",
+        "comparison_basis": "鹏鼎控股、沪电股份、深南电路的资本支出/收入比及研发占比",
+        "evidence_result": "胜宏2025年研发投入7.78亿，同比增长72.88%，积极投入14阶36层HDI研发；资本支出规模A股PCB企业中最大",
+        "financial_transmission": "高端技术 → 高附加值订单 → 高端产品占比提升 → 综合毛利率高于行业均值",
+        "strongest_counterevidence": "如果技术路线变化导致现有mSAP优势被替代，则壁垒可能失效",
+        "status": "proven",
+        "evidence_ids": [
+          "EV026",
+          "KPE02"
+        ],
+        "next_verification": "跟踪下一代技术（如正交背板/PTFE）的认证进度"
+      }
+    ],
+    "valuation_buckets": [
+      {
+        "bucket": "core_operating_business",
+        "inclusion": "core",
+        "valuation_method": "Scenario-weighted P/E on FY27E parent net profit",
+        "metric_and_period": "Parent net profit FY27E",
+        "metric_value": 7719.0,
+        "valuation_multiple": 35.0,
+        "ownership_pct": 100.0,
+        "haircut_pct": 0.0,
+        "equity_value_cny_mn": 270165.0,
+        "per_share_value_cny": null,
+        "overlap_key": "parent net profit FY27E",
+        "double_counting_treatment": "none",
+        "evidence_ids": [
+          "EV012",
+          "EV015"
+        ],
+        "missing_inputs": [
+          "diluted shares"
+        ]
+      },
+      {
+        "bucket": "surplus_cash_and_investments",
+        "inclusion": "optionality",
+        "valuation_method": "book value",
+        "metric_and_period": "net cash (estimate)",
+        "metric_value": null,
+        "valuation_multiple": null,
+        "ownership_pct": 100.0,
+        "haircut_pct": 0.0,
+        "equity_value_cny_mn": null,
+        "per_share_value_cny": null,
+        "overlap_key": "",
+        "double_counting_treatment": "excluded as not separately material",
+        "evidence_ids": [],
+        "missing_inputs": [
+          "latest net cash/debt"
+        ]
+      }
+    ],
+    "valuation_closure": {
+      "current_price_cny": null,
+      "diluted_share_count_mn": null,
+      "core_value_per_share_cny": null,
+      "probability_weighted_fair_value_per_share_cny": null,
+      "option_value_per_share_cny": null,
+      "other_adjustments_per_share_cny": null,
+      "fair_value_per_share_cny": null,
+      "expected_return_pct": null,
+      "formula": "Probability-weighted total equity value = 0.30×bull_value + 0.50×base_value + 0.20×bear_value; bull value = 10,500×40=420,000 mn; base = 7,719×35=270,165 mn; bear = 5,400×25=135,000 mn; weighted equity = 0.3×420k + 0.5×270.2k + 0.2×135k = 126,000 + 135,083 + 27,000 = 288,083 mn CNY. Current market cap 280,015 mn implies ~2.9% expected return before per-share conversion.",
+      "rating_consistency_check": "",
+      "double_counting_checks": [
+        "core_operating_business already captures consolidated parent profit; no additional SOTP added for AI PCB because it is inside consolidation"
+      ],
+      "status": "partial",
+      "missing_inputs": [
+        "current share price and diluted share count",
+        "net cash for surplus adjustment"
+      ]
+    },
+    "handoff_manifest": {
+      "handoff_version": "underwriting-v2",
+      "source_of_truth": "structured_research.underwriting_packet",
+      "frozen_reported_facts": [
+        "FY2025 revenue CNY 19,292.31 mn, parent net profit CNY 4,312.0 mn (EV012)",
+        "Q1 2026 revenue CNY 5,519.49 mn, parent net profit CNY 1,288.43 mn (EV011)",
+        "Q1 2026 gross margin 34.46%, operating margin 27.22%, net margin 23.34% (EV014-EV016)",
+        "Market cap CNY 280,015 mn, PE TTM 59.84x as of 2026-07-07 (EV044, EV045)",
+        "FY26 capex guidance ~CNY 180 bn (KPE02), later corrected to 180亿 = CNY 18,000 mn",
+        "Shareholder count 281,424 as of 2026-06-10 (investor_interaction)"
+      ],
+      "analyst_estimates": [
+        "FY26 revenue CNY 27,600 mn, parent NP CNY 6,210 mn",
+        "FY27 revenue CNY 35,900 mn, parent NP CNY 7,719 mn",
+        "FY28 revenue CNY 44,900 mn, parent NP CNY 9,205 mn",
+        "Scenario probabilities: bull 30%, base 50%, bear 20%",
+        "Valuation multiples: bull 40x, base 35x, bear 25x on FY27E"
+      ],
+      "unresolved_model_cells": [
+        "Diluted share count and all per-share metrics",
+        "Segment-level revenue and margin breakdown",
+        "FY27-28 capex",
+        "Detailed capacity/utilization data",
+        "Net cash position"
+      ],
+      "downstream_must_preserve": [
+        "Three-year consolidated forecast lines (revenue, gross profit/margin, operating profit, parent NP, OCF, capex, FCF)",
+        "Two material business units (AI PCB, Non-AI PCB) with causal chains",
+        "Four thesis financial bridges (AI mix, gross margin, CAPEX, diversification)",
+        "Two moat evidence tests (customer stickiness, technology)",
+        "Valuation buckets using scenario-weighted P/E",
+        "All unfrozen cells marked as analyst estimates"
+      ]
+    },
+    "evidence_change_rules": [
+      {
+        "evidence_id": "KPE02",
+        "affected_segment": "AI PCB",
+        "affected_variable": "ASP / margin / revenue share",
+        "old_assumption": "AI revenue share 65% FY26, margin 34.5%",
+        "new_assumption": "unchanged; watch for Q2 2026 actuals",
+        "financial_transmission": "If confirmed, supports base case; if reversed, shift to bear",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "Q2 2026 gross margin and management commentary"
+      },
+      {
+        "evidence_id": "KPE10",
+        "affected_segment": "AI PCB",
+        "affected_variable": "ASP / gross margin",
+        "old_assumption": "no material price cut",
+        "new_assumption": "unchanged; rumor unverified",
+        "financial_transmission": "10% price cut would reduce FY26 revenue by ~CNY 1,800 mn and NP by ~1,350 mn if not offset by cost",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "Verify with official Nvidia procurement terms or Q2 2026 margin results"
+      },
+      {
+        "evidence_id": "KPE11",
+        "affected_segment": "AI PCB",
+        "affected_variable": "segment_volume FY27-28",
+        "old_assumption": "Rubin Ultra includes ortho backplane on schedule",
+        "new_assumption": "watch; potential delay could reduce FY28 revenue by ~10-15%",
+        "financial_transmission": "Delay shifts high-value PCB orders from FY27 to FY28 or eliminates them",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "NVIDIA official roadmap announcement"
+      },
+      {
+        "evidence_id": "KPE01",
+        "affected_segment": "consolidated",
+        "affected_variable": "capital allocation / share count",
+        "old_assumption": "no dilution from employee plan",
+        "new_assumption": "potential dilution up to 2-3% over time",
+        "financial_transmission": "Small dilution impact on EPS",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "Employee share purchase execution details"
+      },
+      {
+        "evidence_id": "KPE03",
+        "affected_segment": "consolidated",
+        "affected_variable": "utilization_or_backlog",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until Monitor capacity utilization disclosures and order backlog comments in next earnings call.",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "Monitor capacity utilization disclosures and order backlog comments in next earnings call."
+      },
+      {
+        "evidence_id": "KPE04",
+        "affected_segment": "AI PCB",
+        "affected_variable": "segment_volume",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until Track AI server shipment data and associated PCB orders.",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "Track AI server shipment data and associated PCB orders."
+      },
+      {
+        "evidence_id": "KPE05",
+        "affected_segment": "AI PCB",
+        "affected_variable": "utilization_or_backlog",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until Monitor industry shift to AI factory model and company's involvement.",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "Monitor industry shift to AI factory model and company's involvement."
+      },
+      {
+        "evidence_id": "KPE06",
+        "affected_segment": "AI PCB",
+        "affected_variable": "market_share",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until Track Nvidia supplier lists and quarterly share disclosures from customer reports.",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "Track Nvidia supplier lists and quarterly share disclosures from customer reports."
+      },
+      {
+        "evidence_id": "KPE07",
+        "affected_segment": "consolidated",
+        "affected_variable": "segment_volume",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until Not a fundamental catalyst; noise.",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "Not a fundamental catalyst; noise."
+      },
+      {
+        "evidence_id": "KPE08",
+        "affected_segment": "AI PCB",
+        "affected_variable": "utilization_or_backlog",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until Check for adoption of third-party inspection equipment; low materiality for core thesis.",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "Check for adoption of third-party inspection equipment; low materiality for core thesis."
+      },
+      {
+        "evidence_id": "KPE09",
+        "affected_segment": "consolidated",
+        "affected_variable": "asp_or_price",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until Confirm company-specific price increase announcements and customer acceptance.",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "Confirm company-specific price increase announcements and customer acceptance."
+      },
+      {
+        "evidence_id": "KPE12",
+        "affected_segment": "consolidated",
+        "affected_variable": "revenue",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until Low materiality; indicates supply chain depth but not revenue driver.",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "Low materiality; indicates supply chain depth but not revenue driver."
+      }
+    ],
+    "reconciliation_checks": [
+      "FY2025 revenue and net profit consistent with EV012",
+      "Q1 2026 margins consistent with EV014-EV016",
+      "FY26 capex guidance interpreted as 180亿 = CNY 18,000 mn (original payload had 180,000,000,000 likely a magnitude error)",
+      "OCF estimates based on Q1 2026 OCF/NI ratio of 1.64, conservatively moderated"
+    ],
+    "analyst_instructions": [
+      "Resolve dilute share count and current share price as highest priority; without them, per-share metrics remain blocked.",
+      "Track quarterly gross margins and Nvidia-related order news for evidence change rules.",
+      "Updatecapex beyond FY26 as formal guidance emerges.",
+      "If segment-level data becomes available, refine AI/Non-AI revenue splits and margin assumptions.",
+      "Re-evaluate scenario probabilities as Rubin Ultra architecture and TPU qualification firmed.",
+      "Validate the 180亿 capex figure against cash flow statements when 2026 annual report released."
+    ],
+    "preprocessing_notes": [
+      "AI PCB and Non-AI PCB segments are analytical, inferred from KPE02/KPE06; no official filing segments.",
+      "Diluted shares unavailable; all per-share metrics withheld and valuation closure restricted to total equity value.",
+      "KPE evidence from private channels treated as unverified; conflicts with rumours flagged but not resolved.",
+      "Capex figure corrected to CNY 18,000 mn from evident payload error.",
+      "Commodity price mapping for PCB inputs is missing; raw material cost trends not quantified.",
+      "operating model driver coverage (volume_price_cost): capacity, volume, price/ASP, unit/input cost, spread/margin, capex/ROIC"
+    ]
+  }
+}

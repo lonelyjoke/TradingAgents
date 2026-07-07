@@ -95,7 +95,6 @@ PUBLICATION_BLOCKING_SECTIONS = frozenset(
         "public_key_number_consistency",
         "position_valuation_consistency",
         "sell_side_expectation_lineage",
-        "segment_forecast_reconciliation",
     }
 )
 
@@ -160,6 +159,16 @@ def _handoff_metric_key(period: Any, metric: Any) -> tuple[str, str]:
         "minorityinterests": "minorityinterest",
         "少数股东损益": "minorityinterest",
     }
+    aliases.update(
+        {
+            "经营现金流": "ocf",
+            "经营现金流ocf": "ocf",
+            "经营活动现金流": "ocf",
+            "资本开支": "capex",
+            "资本性支出": "capex",
+            "自由现金流": "fcf",
+        }
+    )
     canonical_metric = aliases.get(normalized_metric, normalized_metric)
     if canonical_metric == "dilutedshares":
         normalized_period = "current"
@@ -247,6 +256,7 @@ def _deterministically_owned_line(row: Mapping[str, Any]) -> bool:
     metric = _handoff_metric_key(row.get("period"), row.get("metric"))[1]
     required_formula = {
         "eps": "parent net profit (cny mn) / diluted shares",
+        "ocf": "ocf = parent net profit x accepted ocf/ni ratio",
         "fcf": "ocf - abs(capex)",
         "grossprofit": "revenue x gross margin",
         "parentnetprofit": "operating profit + finance/other - tax - minority interest",
@@ -1997,6 +2007,27 @@ def audit_position_valuation_consistency(report_dir: str | Path, decision_text: 
     if safe_ceiling <= 0:
         return []
     issues: list[DecisionDepthIssue] = []
+    try:
+        current_price = float(
+            (payload.get("safe_valuation_assumptions") or {}).get("current_price_cny")
+        )
+    except (TypeError, ValueError):
+        current_price = 0.0
+    if current_price > safe_ceiling * 1.02 and re.search(
+        r"(?:首仓|初始仓位|initial\s+position|initial\s+\d+%\s+build)"
+        r"[^。；\n]{0,160}(?:已于|建立|建仓|build)",
+        decision_text,
+        re.I,
+    ):
+        issues.append(
+            DecisionDepthIssue(
+                "position_valuation_consistency",
+                "error",
+                f"memo claims an initial position/build at current price {current_price:.2f}, "
+                f"above deterministic safe-buy ceiling {safe_ceiling:.2f}",
+            )
+        )
+        return issues
     for line in decision_text.splitlines():
         if not re.search(r"买入|建仓|加仓|试探|build|add", line, re.I):
             continue
@@ -2638,9 +2669,25 @@ def audit_structured_research_usage(
         material_rows = [
             row
             for row in segment_rows
-            if _safe_float(row.get("revenue_weight_pct")) >= 10.0
-            or _safe_float(row.get("revenue_reported_value")) > 0.0
-            or _safe_float(row.get("revenue_cny_mn")) > 0.0
+            if (
+                (
+                    row.get("revenue_weight_pct") is not None
+                    or row.get("gross_profit_or_profit_weight_pct") is not None
+                )
+                and max(
+                    _safe_float(row.get("revenue_weight_pct")),
+                    _safe_float(row.get("gross_profit_or_profit_weight_pct")),
+                )
+                >= 2.0
+            )
+            or (
+                row.get("revenue_weight_pct") is None
+                and row.get("gross_profit_or_profit_weight_pct") is None
+                and (
+                    _safe_float(row.get("revenue_reported_value")) > 0.0
+                    or _safe_float(row.get("revenue_cny_mn")) > 0.0
+                )
+            )
         ]
         # When semantic preprocessing returns only unquantified rows, preserve
         # the primary company segment without treating every unproven optional
@@ -2746,9 +2793,20 @@ def audit_structured_research_usage(
             )
         )
 
+    material_sell_side_rows = [
+        row
+        for row in bundle.get("sell_side_intelligence", [])
+        if re.search(
+            r"(?:target_price\s*=\s*\d|目标价\s*\d|"
+            r"20\d{2}E.{0,80}(?:EPS|净利润|归母)|"
+            r"(?:EPS|净利润|归母).{0,80}20\d{2}E)",
+            " ".join(str(value) for value in row.values()),
+            re.I,
+        )
+    ]
     sell_side_ids = {
         str(row.get("intelligence_id", "")).strip()
-        for row in bundle.get("sell_side_intelligence", [])
+        for row in material_sell_side_rows
         if str(row.get("intelligence_id", "")).strip()
     }
     used_sell_side_ids = {

@@ -1,0 +1,147 @@
+{
+  "review": {
+    "revision_required": true,
+    "company_understanding_score": 4,
+    "independent_model_score": 3,
+    "evidence_and_counterevidence_score": 3,
+    "valuation_closure_score": 2,
+    "readability_and_synthesis_score": 3,
+    "strongest_aspects": [
+      "Business model mechanisms table is well-structured with causal links from customer co-design, heavy-asset expansion, selective order-taking, diversification optionality, and FX exposure—each with evidence-or-gap and analyst conclusion.",
+      "Accounting quality matrix correctly flags the inventory/receivables divergence as a warning signal and identifies depreciation as the forward earnings constraint, anchored to specific Q1 2026 data points.",
+      "Industry driver matrix maps five distinct drivers (AI capex, PCB supply, raw material cost, customer pricing, technology roadmap) to affected business units with dated evidence and next-verification gates.",
+      "Moat evidence scorecard correctly grades all three moat sources as partial or unproven, avoiding the common error of over-claiming competitive advantages from private-channel narratives alone."
+    ],
+    "findings": [
+      {
+        "section": "valuation_and_expectation_gap",
+        "priority": "must_revise",
+        "issue": "Valuation prose uses superseded net profit figures that contradict the deterministic model. The valuation_closure section states bull=4200亿 (10500×40), base=2690亿 (7719×35), bear=1350亿 (5400×25), but the canonical model and deterministic valuation use updated NPs: bull=7500mn, base=6300mn, bear=5000mn. This means the prose probability-weighted equity value of 2875亿元 is stale and does not match the deterministic output of approximately 2253亿元 (0.3×3000+0.5×2205+0.2×1250).",
+        "evidence_or_logic_gap": "The canonical_model_snapshot and safe_valuation_assumptions both use the post-debate revised NPs (6300/7500/5000). The valuation_closure prose was not updated to match, creating a ~620亿元 discrepancy in probability-weighted equity value that materially affects the 'expected return ~2.9%' conclusion.",
+        "revision_instruction": "Re-derive the prose valuation_closure from the deterministic valuation output. Use the exact equity values from safe_valuation_assumptions: bull=300,000mn (7500×40), base=220,500mn (6300×35), bear=125,000mn (5000×25). Probability-weighted: 0.3×3000+0.5×2205+0.2×1250=2252.5亿元. Recalculate expected return vs. 2800亿 market cap. If the implied return changes materially, revise the investment conclusion and expectation_gap narrative accordingly."
+      },
+      {
+        "section": "thesis_moat_financial_bridge",
+        "priority": "must_revise",
+        "issue": "The public thesis_financial_bridge chapter omits market-pricing implication and falsification condition for each of the three ranked theses. The internal core_theses cards contain these fields (market_pricing and falsification_gate), but the public narrative does not synthesize them. The handoff manifest explicitly flags: 'public thesis chapter missing market-pricing implication' and 'public thesis chapter missing falsification condition'.",
+        "evidence_or_logic_gap": "For Thesis 1 (AI mix shift), the internal card states: market_pricing 'Current PE 59.8x already prices base-case earnings', falsification_gate 'Q2 2026 GM <33%; AI revenue share <50% in official disclosure'. Neither appears in the public bridge prose. Similarly for Theses 2 and 3.",
+        "revision_instruction": "For each of the three thesis paragraphs in thesis_financial_bridge, append one sentence on market pricing (what the current price implies about this thesis) and one sentence on the falsification gate (what observable event would cause you to abandon it). Use the exact text from the core_theses internal cards, edited into connected prose. Do not add a separate sub-section; integrate into each thesis paragraph."
+      },
+      {
+        "section": "cross_section_consistency",
+        "priority": "must_revise",
+        "issue": "The same assumptions, thresholds, and valuation conclusions are fully restated across four sections: the executive summary paragraph (first section), the three-year forecast model chapter, the thesis financial bridge chapter, and the valuation_closure chapter. The 60% AI share, 34.0% GM, FY27E 25% growth, FY28E 24.5% op margin, and scenario probability weights appear verbatim in all four locations.",
+        "evidence_or_logic_gap": "The research manager canonical plan requires: 'Treat repeated substance as a revision defect: the same assumption, threshold, valuation conclusion or causal paragraph must not be fully restated across the executive summary, thesis, forecast, valuation and risk chapters. Keep detail in the owning chapter and use a short cross-reference elsewhere.'",
+        "revision_instruction": "Designate the three-year forecast chapter as the owner of all forecast numbers (revenue, GM, op margin, NP, OCF, capex, FCF). In the thesis_financial_bridge, replace restated numbers with a one-line cross-reference: e.g., 'See Section 3 three-year model for the complete forecast table.' In the valuation_closure, reference the forecast chapter for NP inputs and scenario chapter for probability weights; keep only the P/E multiple rationale, the multiplication, and the weighted result. In the opening section, cut all forecast numbers and replace with a qualitative one-line thesis plus a cross-reference to the forecast and valuation chapters."
+      },
+      {
+        "section": "thesis_moat_financial_bridge",
+        "priority": "should_revise",
+        "issue": "Thesis financial bridge paragraphs lack auditable financial transmission arithmetic. Thesis 1 states 'AI收入占比60% × AI毛利率36% + 非AI收入占比40% × 非AI毛利率27% = 综合毛利率34.0% → FY26E归母净利润59.28亿元' without showing the intermediate revenue-to-gross-profit-to-net-profit steps. Thesis 3 states '净利润减少数十亿元' without quantifying the depreciation-to-operating-profit cascade.",
+        "evidence_or_logic_gap": "The internal core_theses cards specify: 'auditable financial transmission' as a required element. The public bridge should preserve this in connected prose, not just state the conclusion.",
+        "revision_instruction": "For Thesis 1, expand the transmission to: AI share 60% × 27,600mn = 16,560mn AI revenue × 36% GM = 5,962mn AI gross profit + Non-AI 40% × 27,600mn = 11,040mn × 27% GM = 2,981mn → total gross profit 8,943mn → deduct estimated opex → operating profit → parent NP 5,928mn. Reconcile why 8,943mn gross profit leads to 5,928mn NP (use the operating margin and net margin from the three-year model). For Thesis 3, quantify the depreciation: 180bn capex @ ~6-7% depreciation rate = ~11-13bn annual depreciation by FY28, showing how this compresses operating margin from 27.5% to 24.5%."
+      },
+      {
+        "section": "accounting_and_capital_allocation",
+        "priority": "should_revise",
+        "issue": "The section repeats the Q1 2026 OCF/NI ratio (1.64x), inventory/revenue (17.7%), AR/revenue (25.8%), and construction-in-progress (5.17bn +43%) already presented in the accounting_quality_matrix (Section 3 of the structured workbench). The prose adds narrative color but no new analytical insight beyond what the matrix rows already contain.",
+        "evidence_or_logic_gap": "The canonical plan requires: 'prose cannot compensate for empty structured rows' and 'keep detail in the owning chapter.' The accounting_quality_matrix is the owning location for these signal interpretations. The public narrative should synthesize the top 1-2 signals that directly affect the investment verdict, not re-explain all five rows.",
+        "revision_instruction": "Collapse the accounting section into a focused discussion of the two signals that matter most for the Hold rating: (1) the inventory/receivables divergence and what it implies about demand health, and (2) the forward depreciation burden from construction-in-progress. Cross-reference the full matrix in an appendix or footnote. Cut the restated OCF ratio, AR trend, and liquidity ratio paragraphs."
+      },
+      {
+        "section": "valuation_and_expectation_gap",
+        "priority": "should_revise",
+        "issue": "The expectation_gap narrative claims '市场或许尚未完全消化慢速爬坡对FY27-28盈利的潜在下修效应' but this contradicts the memo's own conclusion that the current 2800亿 market cap implies ~55-60亿 FY26E NP, which aligns with the base case 59.28亿. If the market is pricing base case, it has already priced the slow ramp. The statement is self-contradictory.",
+        "evidence_or_logic_gap": "The memo's own PE analysis shows: TTM PE 59.8x, Forward PE ~45x on FY26E 62.1亿 (old base) or ~47x on 59.28亿 (new base). The probability-weighted fair value of 2253-2875亿 vs. 2800亿 market cap suggests the market is pricing base-to-bull, not ignoring slow-ramp risk. The expectation gap section should reconcile this rather than asserting an unabsorbed risk.",
+        "revision_instruction": "Revise the expectation_gap section to explicitly state: (a) if probability-weighted fair value = 2253亿, the market at 2800亿 is pricing above base case and the slow-ramp risk is under-priced (bearish implication); (b) if probability-weighted fair value = 2875亿, the market is pricing base case and the gap is trivial (Hold implication). Resolve this ambiguity using the corrected deterministic valuation before drawing conclusions about what the market has or hasn't priced."
+      },
+      {
+        "section": "industry_cycle_and_competition",
+        "priority": "optional",
+        "issue": "The comparison with 沪电股份 (002463.SZ) uses a single data snapshot (PE 58.03x vs 59.84x, GM 35.63% vs 34.46%, PS 11.82x vs 13.66x) without dates, forecast periods, or revision history. The sell_side_expectation_matrix requirement—'preserve institution, date, forecast period, valuation method/multiple/target, revision history'—is not met for this competitor reference.",
+        "evidence_or_logic_gap": "The competitive comparison is qualitative and static. Without dated multiples and forecast context (e.g., 沪电's FY26E consensus NP vs. its PE), the comparison doesn't support the conclusion that 沪电 is a 'more secure' AI PCB investment.",
+        "revision_instruction": "Add a one-row table with: institution/consensus, date, FY26E/FY27E consensus NP for 沪电股份, current PE on FY26E, and the date of the comparison. Source from the same KSI data used for sell_side_expectation_matrix if available, or mark as Wind/Choice consensus. Show that the relative valuation conclusion holds on a forward basis, not just TTM."
+      },
+      {
+        "section": "risks_catalysts_verification",
+        "priority": "must_revise",
+        "issue": "The risk section includes a 'position management action plan' with specific buy/sell price triggers (240元 entry, 400元 stop-profit) and a 'builder' vs. 'holder' action matrix. This is portfolio-advice language that the deterministic handoff explicitly constrains: '不得表述为已经替投资者建仓，也不得建议新资金在安全价之上主动加仓.' The safe buy price ceiling is 149.64 CNY, yet the prose suggests 240 CNY as an entry zone—a 60% premium to the computed safe ceiling.",
+        "evidence_or_logic_gap": "The deterministic valuation output shows: safe_buy_price_ceiling = 149.64 CNY, required_return_price = 186.97 CNY, fair_value_per_share = 229.20 CNY. The current price is 284.92 CNY. Any suggestion of entry at 240 CNY violates the margin-of-safety constraint and contradicts the Hold rating.",
+        "revision_instruction": "Remove the 240元 entry suggestion and 400元 stop-profit trigger. Replace with: '当前价284.92元高于程序化安全买入上限149.64元，不满足新资金建仓的安全边际条件。等待价格回调至安全区间或基本面证据（8月半年报）推动估值输入上修后重新评估。' Keep the verification calendar but cut all price-level action recommendations that contradict the deterministic safe-price output."
+      }
+    ],
+    "overall_editorial_verdict": "The memo correctly identifies the core tension—bullish AI mix shift vs. official slow-ramp guidance—and the accounting quality signals are well-chosen. However, the report is not publication-ready because: (1) the valuation prose uses superseded net profit figures that produce a ~620亿元 discrepancy versus the deterministic model; (2) the thesis financial bridge omits market-pricing implication and falsification gates that exist in the internal workbench; (3) the same forecast numbers are restated across four sections, violating the non-repetition requirement; and (4) the risk section recommends a 240元 entry zone that flatly contradicts the computed 149.64元 safe-buy ceiling. Fix the valuation arithmetic first, then cut repeated substance and resolve the entry-price contradiction. The company understanding is strong; the synthesis and cross-section discipline need work."
+  },
+  "review_status": {
+    "mode": "schema_prompt_structured",
+    "agent": "Sell-Side Research Editor",
+    "structured_error": ""
+  },
+  "revision_requested": true,
+  "revision_applied": false,
+  "revision_status": {
+    "mode": "schema_prompt_structured",
+    "agent": "Portfolio Manager Editorial Revision",
+    "structured_error": ""
+  },
+  "initial_handoff_issues": [
+    "dropped canonical line: 2026e_costofsales",
+    "dropped canonical line: 2027e_costofsales",
+    "dropped canonical line: 2028e_costofsales",
+    "dropped canonical line: 2026e_grossprofit",
+    "dropped canonical line: 2027e_grossprofit",
+    "dropped canonical line: 2028e_grossprofit",
+    "dropped canonical line: 2026e_grossmargin",
+    "dropped canonical line: 2027e_grossmargin",
+    "dropped canonical line: 2028e_grossmargin",
+    "dropped canonical line: 2026e_operatingprofit",
+    "dropped canonical line: 2027e_operatingprofit",
+    "dropped canonical line: 2028e_operatingprofit",
+    "dropped canonical line: 2026e_operatingmargin",
+    "dropped canonical line: 2027e_operatingmargin",
+    "dropped canonical line: 2028e_operatingmargin",
+    "dropped canonical line: 2026e_netmargin",
+    "dropped canonical line: 2027e_netmargin",
+    "dropped canonical line: 2028e_netmargin",
+    "dropped canonical line: 2026e_ocf",
+    "dropped canonical line: 2027e_ocf",
+    "dropped canonical line: 2028e_ocf",
+    "dropped canonical line: 2026e_capex",
+    "dropped canonical line: 2027e_capex",
+    "dropped canonical line: 2028e_capex"
+  ],
+  "initial_analytical_issues": [
+    "public thesis chapter missing market-pricing implication",
+    "public thesis chapter missing falsification condition"
+  ],
+  "remaining_handoff_issues": [
+    "dropped canonical line: 2026e_costofsales",
+    "dropped canonical line: 2027e_costofsales",
+    "dropped canonical line: 2028e_costofsales",
+    "dropped canonical line: 2026e_grossprofit",
+    "dropped canonical line: 2027e_grossprofit",
+    "dropped canonical line: 2028e_grossprofit",
+    "dropped canonical line: 2026e_grossmargin",
+    "dropped canonical line: 2027e_grossmargin",
+    "dropped canonical line: 2028e_grossmargin",
+    "dropped canonical line: 2026e_operatingprofit",
+    "dropped canonical line: 2027e_operatingprofit",
+    "dropped canonical line: 2028e_operatingprofit",
+    "dropped canonical line: 2026e_operatingmargin",
+    "dropped canonical line: 2027e_operatingmargin",
+    "dropped canonical line: 2028e_operatingmargin",
+    "dropped canonical line: 2026e_netmargin",
+    "dropped canonical line: 2027e_netmargin",
+    "dropped canonical line: 2028e_netmargin",
+    "dropped canonical line: 2026e_ocf",
+    "dropped canonical line: 2027e_ocf",
+    "dropped canonical line: 2028e_ocf",
+    "dropped canonical line: 2026e_capex",
+    "dropped canonical line: 2027e_capex",
+    "dropped canonical line: 2028e_capex"
+  ],
+  "remaining_analytical_issues": [
+    "public thesis chapter missing market-pricing implication",
+    "public thesis chapter missing falsification condition"
+  ]
+}

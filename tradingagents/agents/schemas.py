@@ -22,7 +22,7 @@ from enum import Enum
 import re
 from typing import Literal, Optional
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 
 # ---------------------------------------------------------------------------
@@ -227,6 +227,25 @@ class AlternativeIntelligenceDecision(BaseModel):
         default="",
         description="Age as of report date and how long the channel/industry/valuation clue remains decision-useful.",
     )
+
+    @field_validator("source_type", mode="before")
+    @classmethod
+    def normalize_source_type(cls, value: object) -> str:
+        """Map upstream Knowledge Planet classes into the public PM taxonomy."""
+        normalized = str(value or "other").strip().lower()
+        aliases = {
+            "industry_weekly_data": "industry_data",
+            "industry_data_snippet": "industry_data",
+            "broker_survey_data": "industry_data",
+            "company_research_feedback": "company_research",
+            "expert_call": "company_research",
+            "sell_side_push": "sell_side_view",
+            "strategy_view": "sell_side_view",
+            "broker_report_summary": "sell_side_view",
+            "unverified_rumor": "rumor",
+            "raw_note": "other",
+        }
+        return aliases.get(normalized, normalized)
 
 
 class SellSideExpectationRow(BaseModel):
@@ -947,6 +966,16 @@ def _canonical_metric_name(metric: str) -> str:
         "capitalexpenditure": "capex", "capex": "capex", "资本开支": "capex",
         "freecashflow": "fcf", "fcf": "fcf", "自由现金流": "fcf",
     }
+    aliases.update(
+        {
+            "经营现金流": "ocf",
+            "经营现金流ocf": "ocf",
+            "经营活动现金流": "ocf",
+            "资本开支": "capex",
+            "资本性支出": "capex",
+            "自由现金流": "fcf",
+        }
+    )
     return aliases.get(raw, raw)
 
 
@@ -2303,6 +2332,20 @@ def normalize_sell_side_pm_decision(
     by_metric_period = {
         (_metric(row), str(row.get("period", ""))): row for row in lines
     }
+    accepted_ocf_ratio: float | None = None
+    for change in payload.get("handoff_change_rows", []) or []:
+        line_id = re.sub(r"[^a-z0-9]+", "", str(change.get("line_id", "")).lower())
+        if (
+            "ocf" in line_id
+            and ("ni" in line_id or "netincome" in line_id or "profit" in line_id)
+            and str(change.get("disposition", "")).lower() == "accepted"
+        ):
+            try:
+                candidate_ratio = float(change.get("new_value"))
+            except (TypeError, ValueError):
+                continue
+            if candidate_ratio > 0:
+                accepted_ocf_ratio = candidate_ratio
     profit_rows = [row for row in lines if _metric(row) == "parent_profit" and row.get("value") is not None]
     if shares:
         for profit in profit_rows:
@@ -2403,6 +2446,44 @@ def normalize_sell_side_pm_decision(
                 )
 
         ocf = by_metric_period.get(("ocf", period))
+        if (
+            accepted_ocf_ratio is not None
+            and parent_profit is not None
+            and parent_profit.get("value") is not None
+        ):
+            calculated_ocf = float(parent_profit["value"]) * accepted_ocf_ratio
+            formula = (
+                "OCF = parent net profit x accepted OCF/NI ratio "
+                f"({accepted_ocf_ratio:.6g}x)"
+            )
+            if ocf is None:
+                ocf = {
+                    "line_id": f"{period}_ocf",
+                    "period": period,
+                    "metric": "ocf",
+                    "value": calculated_ocf,
+                    "unit": str(parent_profit.get("unit", "CNY mn")),
+                    "status": "calculated",
+                    "evidence_ids": list(parent_profit.get("evidence_ids", [])),
+                    "formula": formula,
+                }
+                lines.append(ocf)
+                by_metric_period[("ocf", period)] = ocf
+                notes.append(f"added deterministic {period} OCF={calculated_ocf:.4f}")
+            else:
+                old = ocf.get("value")
+                if old is None or abs(float(old) - calculated_ocf) > max(
+                    abs(calculated_ocf) * 0.005, 1.0
+                ):
+                    notes.append(
+                        f"replaced {period} OCF {old} -> {calculated_ocf:.4f}"
+                    )
+                ocf.update(
+                    value=calculated_ocf,
+                    unit=str(parent_profit.get("unit", "CNY mn")),
+                    status="calculated",
+                    formula=formula,
+                )
         capex = by_metric_period.get(("capex", period))
         if not ocf or not capex or ocf.get("value") is None or capex.get("value") is None:
             continue
@@ -2487,6 +2568,20 @@ def normalize_sell_side_pm_decision(
             if assumptions.optionality_inputs:
                 option_equity_value = 0.0
                 for item in assumptions.optionality_inputs:
+                    metric_key = re.sub(
+                        r"[^a-z0-9]+", "", str(item.metric_name or "").lower()
+                    )
+                    # An incremental bull-vs-base value is already represented
+                    # by the probability-weighted scenario distribution. Adding
+                    # it again as optionality double counts the same operating
+                    # outcome. Independent direct-equity-value second curves
+                    # remain eligible.
+                    if metric_key == "incrementalequityvalue":
+                        notes.append(
+                            f"excluded overlapping optionality '{item.name}': "
+                            "incremental scenario value is already probability-weighted"
+                        )
+                        continue
                     equity_value = (
                         item.metric_value_cny_mn
                         * item.valuation_multiple
@@ -2540,12 +2635,63 @@ def normalize_sell_side_pm_decision(
                 "optionality equity value = metric x multiple x probability x ownership x (1-execution haircut)",
                 "safe ceiling = min(base/(1+required return)^years, base x (1-MOS), bear/(1-max bear loss))",
             ]
+            if any("excluded overlapping optionality" in note for note in notes):
+                output.formula_notes.append(
+                    "incremental bull-vs-base optionality excluded because it overlaps scenario value"
+                )
         else:
             output.status = "partial"
             output.formula_notes = [f"scenario probabilities must sum to 100%; got {probability_total:.2f}%"]
     elif assumptions.scenarios:
         output.status = "partial"
         output.formula_notes = ["valuation requires bull/base/bear inputs and a validated diluted share count"]
+
+    if (
+        output.status == "closed"
+        and assumptions.current_price_cny is not None
+        and output.safe_buy_price_ceiling_cny is not None
+        and assumptions.current_price_cny > output.safe_buy_price_ceiling_cny * 1.02
+    ):
+        rating_zh = {
+            "Buy": "买入",
+            "Overweight": "增持",
+            "Hold": "中性",
+            "Underweight": "减持",
+            "Sell": "卖出",
+        }[decision.rating.value]
+        payload["rating_posture"] = (
+            f"{rating_zh}；当前价{assumptions.current_price_cny:.2f}元高于程序化安全买入上限"
+            f"{output.safe_buy_price_ceiling_cny:.2f}元，已有持仓按评级管理，"
+            "新资金等待价格进入安全区间或基本面证据推动估值输入上修。"
+        )
+        execution_field = str(payload.get("risks_catalysts_verification", "") or "")
+        execution_field = re.sub(
+            r"(?:首仓|初始仓位)[^。；\n]{0,160}(?:建立|建仓)[^。；\n]*[。；]?",
+            "",
+            execution_field,
+            flags=re.I,
+        )
+        deterministic_constraint = (
+            f"**程序化执行约束**：当前价{assumptions.current_price_cny:.2f}元高于安全买入上限"
+            f"{output.safe_buy_price_ceiling_cny:.2f}元；不得表述为已经替投资者建仓，也不得建议新资金在安全价之上主动加仓。"
+        )
+        payload["risks_catalysts_verification"] = (
+            deterministic_constraint + "\n\n" + execution_field.strip()
+        ).strip()
+        notes.append("enforced safe-price execution constraint above the buy ceiling")
+
+    posture = str(payload.get("rating_posture", "") or "")
+    latin_chars = len(re.findall(r"[A-Za-z]", posture))
+    cjk_chars = len(re.findall(r"[\u4e00-\u9fff]", posture))
+    if latin_chars >= 12 and latin_chars > cjk_chars * 1.2:
+        payload["rating_posture"] = {
+            "Buy": "买入；基本面与估值同时满足要求，按风险预算分阶段执行。",
+            "Overweight": "增持；维持积极但审慎的持仓姿态，后续加仓取决于估值与关键证据验证。",
+            "Hold": "中性；当前风险收益较均衡，等待盈利、现金流或估值出现更明确的偏离。",
+            "Underweight": "减持；降低相对配置，等待下行风险收敛或估值补偿改善。",
+            "Sell": "卖出；基本面下行与估值补偿不足，优先控制绝对风险。",
+        }[decision.rating.value]
+        notes.append("localized English-heavy rating posture into Chinese")
 
     payload["canonical_model_snapshot"] = lines
     payload["deterministic_valuation"] = output.model_dump()
@@ -2701,8 +2847,13 @@ def _render_deterministic_valuation(output: DeterministicValuationOutput) -> str
         multiple = row.get("valuation_multiple")
         method = row.get("valuation_method") or "—"
         method_text = f"{method}/{multiple:.2f}x" if multiple is not None else method
+        scenario_label = {
+            "bull": "乐观",
+            "base": "基准",
+            "bear": "悲观",
+        }.get(str(row.get("scenario", "")).lower(), str(row.get("scenario", "")))
         rows.append(
-            f"| {row.get('scenario')} | {row.get('probability_pct', 0):.1f}% | "
+            f"| {scenario_label} | {row.get('probability_pct', 0):.1f}% | "
             f"{_display_number(row.get('parent_net_profit_cny_mn'))} | {_display_number(row.get('eps_cny'))} | "
             f"{method_text} | {_display_number(row.get('equity_value_cny_mn'))} | "
             f"{_display_number(row.get('fair_value_per_share_cny'))} |"
@@ -2718,8 +2869,14 @@ def _render_deterministic_valuation(output: DeterministicValuationOutput) -> str
             ]
         )
         for row in output.optionality_rows:
+            metric_label = {
+                "direct_equity_value": "直接权益价值",
+                "revenue": "收入",
+                "profit": "利润",
+                "asset_value": "资产价值",
+            }.get(str(row.get("metric_name", "")).lower(), row.get("metric_name"))
             rows.append(
-                f"| {_table_cell(row.get('name'))} | {_table_cell(row.get('metric_name'))}/"
+                f"| {_table_cell(row.get('name'))} | {_table_cell(metric_label)}/"
                 f"{_display_number(row.get('metric_value_cny_mn'))} | "
                 f"{_display_number(row.get('valuation_multiple'))}x | "
                 f"{_display_number(row.get('probability_pct'))}% | "
@@ -2747,6 +2904,18 @@ def _render_deterministic_valuation(output: DeterministicValuationOutput) -> str
 
 
 def _render_sell_side_expectations(rows_in: list[SellSideExpectationRow]) -> str:
+    observation_labels = {
+        "single_broker": "单家机构",
+        "multi_broker_range": "多机构区间",
+        "verified_consensus": "已核验一致预期",
+    }
+    evidence_labels = {
+        "public_verified": "公开信息已核验",
+        "private_text": "私域文字信息",
+        "partial": "部分核验",
+        "stale": "信息过期",
+        "rejected": "未采纳",
+    }
     rows = [
         "### 卖方预测、估值与预期差",
         "",
@@ -2755,7 +2924,9 @@ def _render_sell_side_expectations(rows_in: list[SellSideExpectationRow]) -> str
     ]
     for row in rows_in:
         source = "/".join(row.source_ids) or "未编号"
-        label = f"{row.institution}（{row.observation_type}）/{row.published_at}"
+        observation = observation_labels.get(row.observation_type, row.observation_type)
+        evidence = evidence_labels.get(row.evidence_status, row.evidence_status)
+        label = f"{row.institution}（{observation}）/{row.published_at}"
         rows.append(
             "| "
             + " | ".join(
@@ -2766,7 +2937,7 @@ def _render_sell_side_expectations(rows_in: list[SellSideExpectationRow]) -> str
                     row.forecast_and_valuation,
                     row.revision_or_dispersion,
                     row.comparison_with_our_model,
-                    row.evidence_status,
+                    evidence,
                     row.decision_use,
                 )
             )
@@ -2799,12 +2970,19 @@ def render_sell_side_pm_decision(decision: SellSidePMDecision) -> str:
     if isinstance(decision, PortfolioDecision):
         return render_pm_decision(decision)
     decision, _ = normalize_sell_side_pm_decision(decision)
+    rating_label = {
+        "Buy": "买入",
+        "Overweight": "增持",
+        "Hold": "中性",
+        "Underweight": "减持",
+        "Sell": "卖出",
+    }[decision.rating.value]
     return "\n\n".join(
         [
             "# 公司深度研究与投资决策",
             "| 最终评级 | 投资观点 |\n"
             "| --- | --- |\n"
-            f"| {decision.rating.value} | {decision.rating_posture} |",
+            f"| {rating_label}（{decision.rating.value}） | {decision.rating_posture} |",
             f"> **一句话结论：** {decision.one_line_thesis}",
             "## 一、投资结论\n\n"
             + _demote_embedded_headings(decision.investment_conclusion_and_core_conflict),

@@ -9,6 +9,16 @@ from tradingagents.dataflows import knowledge_planet_research as kp
 from tradingagents.dataflows import structured_research as sr
 
 
+def test_explicit_broker_note_is_not_upgraded_to_private_channel_check():
+    text = (
+        "【东吴电新】宁德时代：继续强推。盈利预测与投资建议："
+        "预计2026E净利润962亿元，给予30x PE，对应目标价632元。"
+        "渠道验证Q1储能出货约50GWh。"
+    )
+
+    assert kp.infer_private_source_type(text, "raw_note") == "sell_side_push"
+
+
 def _make_db(path: Path) -> None:
     conn = sqlite3.connect(path)
     conn.executescript(

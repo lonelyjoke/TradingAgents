@@ -776,6 +776,9 @@ class TradingAgentsGraph:
             Path(build_structured_research_bundle.__code__.co_filename).with_name(
                 "underwriting_packet.py"
             ),
+            Path(build_structured_research_bundle.__code__.co_filename).with_name(
+                "knowledge_planet_research.py"
+            ),
         ]
         implementation_hash = hashlib.sha256()
         for path in implementation_files:

@@ -1,0 +1,52 @@
+{
+  "mode": "schema_prompt_structured",
+  "agent": "Portfolio Manager",
+  "structured_error": "",
+  "schema": "SellSidePMDecision",
+  "initial_mode": "schema_prompt_structured",
+  "editorial_review_mode": "schema_prompt_structured",
+  "editorial_revision_requested": true,
+  "editorial_revision_applied": false,
+  "editorial_revision_mode": "schema_prompt_structured",
+  "remaining_handoff_issues": [
+    "dropped canonical line: 2026e_costofsales",
+    "dropped canonical line: 2027e_costofsales",
+    "dropped canonical line: 2028e_costofsales",
+    "dropped canonical line: 2026e_grossprofit",
+    "dropped canonical line: 2027e_grossprofit",
+    "dropped canonical line: 2028e_grossprofit",
+    "dropped canonical line: 2026e_grossmargin",
+    "dropped canonical line: 2027e_grossmargin",
+    "dropped canonical line: 2028e_grossmargin",
+    "dropped canonical line: 2026e_operatingprofit",
+    "dropped canonical line: 2027e_operatingprofit",
+    "dropped canonical line: 2028e_operatingprofit",
+    "dropped canonical line: 2026e_operatingmargin",
+    "dropped canonical line: 2027e_operatingmargin",
+    "dropped canonical line: 2028e_operatingmargin",
+    "dropped canonical line: 2026e_netmargin",
+    "dropped canonical line: 2027e_netmargin",
+    "dropped canonical line: 2028e_netmargin",
+    "dropped canonical line: 2026e_ocf",
+    "dropped canonical line: 2027e_ocf",
+    "dropped canonical line: 2028e_ocf",
+    "dropped canonical line: 2026e_capex",
+    "dropped canonical line: 2027e_capex",
+    "dropped canonical line: 2028e_capex"
+  ],
+  "remaining_analytical_issues": [
+    "public thesis chapter missing market-pricing implication",
+    "public thesis chapter missing falsification condition"
+  ],
+  "deterministic_model_notes": [
+    "added deterministic 2026E EPS=6.0319",
+    "added deterministic 2027E EPS=6.4104",
+    "added deterministic 2028E EPS=7.5398",
+    "enforced safe-price execution constraint above the buy ceiling"
+  ],
+  "full_report_chars": "21037",
+  "public_report_chars": "21037",
+  "internal_overflow_chars": "0",
+  "internal_sections_removed_from_public_report": "",
+  "public_h2_count": "8"
+}

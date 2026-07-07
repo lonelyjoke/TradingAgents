@@ -1,0 +1,987 @@
+{
+  "recommendation": "Hold",
+  "research_readiness": "partial",
+  "core_bet": "AI PCB revenue mix shift to 60-70% and consolidated gross margin durability above 34%.",
+  "research_questions": [
+    "Can AI PCB revenue share reach 60-70% in FY26, and what is the segment margin?",
+    "Can consolidated gross margin stay above 34% through FY26 despite upstream cost pressure and potential client pricing pressure?",
+    "Will the 18bn CNY FY26 capex translate into proportionate revenue growth by FY27, or will the \"slow ramp\" compress returns?",
+    "Is customer concentration risk (single GPU client) being mitigated by ASIC/TPU diversification at a material pace?"
+  ],
+  "question_verdicts": [
+    {
+      "question": "Can AI PCB revenue share reach 60-70% in FY26, and what is the segment margin?",
+      "why_decisive": "AI mix determines blended ASP, gross margin, and revenue growth trajectory; without official segment disclosure the core thesis is unverifiable.",
+      "conclusion": "Bullish scenario is plausible but unverified. Accepted base case: 60% AI share, AI GM ~36%, consolidated GM 34.0%.",
+      "evidence_used": [
+        "KPE02 private channel guidance AI share 60-70%",
+        "Q1 2026 gross margin 34.46%",
+        "FY25 revenue +80% YoY"
+      ],
+      "strongest_counterevidence": "No official segment revenue/margin disclosure; KPE02 is unverified private data; inventory/revenue up to 17.7% may signal demand not fully absorbed.",
+      "model_or_valuation_effect": "1pp AI share = 276mn revenue; 1pp AI GM = 2.8mn gross profit per 1% of revenue; base case AI share 60% vs. bull 70% reduces FY26E revenue by ~2.8bn and net profit by ~0.8bn.",
+      "confidence": "medium",
+      "next_verification": "Official segment disclosure in 2026 semi-annual report (expected August 2026)."
+    },
+    {
+      "question": "Can consolidated gross margin stay above 34% through FY26 despite upstream cost pressure and potential client pricing pressure?",
+      "why_decisive": "Gross margin is the primary profit driver; a 1pp move changes net profit by ~1.4bn CNY, directly shifting scenario fair values.",
+      "conclusion": "Bull has stronger near-term evidence (Q1 2026 actual 34.46% is a hard fact). Bear's cost pressure (electronic cloth +100%, inventory build) is a medium-term risk not yet visible in P&L. Base case 34.0% embeds 50bp caution buffer.",
+      "evidence_used": [
+        "Q1 2026 gross margin 34.46%",
+        "KPE02 'costs stable, pass-through smooth'",
+        "KPE01 electronic cloth +100% YoY to 7.4 CNY/meter",
+        "Q1 2026 inventory/revenue 17.7% (+4.2pp YoY), contract liabilities -37%"
+      ],
+      "strongest_counterevidence": "KPE01 upstream cost spike and KPE10 (unverified) Nvidia 10% price cut rumour; if confirmed, margin could drop below 33%.",
+      "model_or_valuation_effect": "GM 34.0% (base) vs. 33.0% (bear) → net profit difference ~1.4bn CNY; bear case implies equity value down to 135bn CNY (-52% vs. market cap).",
+      "confidence": "medium",
+      "next_verification": "Q2 2026 gross margin disclosure in interim report (August 2026)."
+    },
+    {
+      "question": "Will the 18bn CNY FY26 capex translate into proportionate revenue growth by FY27, or will the \"slow ramp\" compress returns?",
+      "why_decisive": "18bn capex is 93% of FY25 revenue; if ramp is slow, ROIC deteriorates and depreciation drags on margins in FY27-28, destroying value.",
+      "conclusion": "Bear wins on timing. Official disclosure 'long construction cycles, gradual ramp' (2026-06-08) is higher-evidence than private channel optimism. FY27E revenue growth reduced to 25% (from 30% base), FY27E net profit reduced to 6.30bn CNY.",
+      "evidence_used": [
+        "Official investor interaction 2026-06-08: 'PCB heavy asset, long construction cycles, gradual capacity ramp'",
+        "KPE02: factory 4 in mass production, factories 10/11 progressing",
+        "Q1 2026 construction-in-progress 5.17bn CNY (+43% QoQ)"
+      ],
+      "strongest_counterevidence": "KPE02 claims factory 4 already ramped and factories 10/11 on schedule; OCF 1.64x supports funding.",
+      "model_or_valuation_effect": "FY27E net profit lowered from 7.72bn to 6.30bn; equity value at 35x PE reduced by ~17bn CNY.",
+      "confidence": "high",
+      "next_verification": "FY26 annual report capex detail and FY27 H1 revenue growth vs. 25% assumption."
+    },
+    {
+      "question": "Is customer concentration risk (single GPU client) being mitigated by ASIC/TPU diversification at a material pace?",
+      "why_decisive": "Single-customer concentration is the top qualitative risk; successful diversification supports multiple expansion and extends the growth runway beyond the current GPU cycle.",
+      "conclusion": "Bullish optionality is credible (V8 TPU entry, 50/50 target) but unverified. No official customer split or contract wins are disclosed.",
+      "evidence_used": [
+        "KPE02 private channel: target ASIC/GPU 50/50, confident in V8 TPU PCB supply by FY26 year-end"
+      ],
+      "strongest_counterevidence": "No official customer disclosure; ASIC margins unproven; timeline uncertain.",
+      "model_or_valuation_effect": "Diversification supports 30% bull probability and potential P/E expansion to 40x; without it, concentration risk caps multiple and bear-case probability would rise.",
+      "confidence": "low",
+      "next_verification": "Customer announcements, contract wins, or FY26 annual report customer concentration disclosure change."
+    }
+  ],
+  "forecast_takeaways": [
+    {
+      "takeaway": "Revenue growth remains strong but is slowing from peak. FY26E 27.6bn CNY (+43% YoY) decelerates to +25%/+20% in FY27-28 as the base effect normalizes. The bull's 55% FY26 growth is unlikely given management's own 'slow ramp' caution.",
+      "evidence_anchor": "FY25A revenue 19.3bn, Q1 2026 5.52bn (run-rate ~22bn). FY26 guidance implies H2 acceleration; achievable but not guaranteed.",
+      "financial_implication": "FY26E revenue 27.6bn, FY27E 32.3bn, FY28E 38.8bn. Slower ramp reduces FY27-28 net profit by ~1.5bn vs. prior base.",
+      "confidence_and_risk": "Confidence: medium. Top-down, supported by KPE02 guidance but missing hard backlog data. Invalidation: FY26 revenue below 25bn CNY."
+    },
+    {
+      "takeaway": "Gross margin resilience is the linchpin of the investment case. Q1 2026 34.5% is a positive signal, but one quarter is not a trend. Upstream cost pressure could compress margins in H2 2026 even if AI ASP is stable.",
+      "evidence_anchor": "Q1 2026 GM 34.46%; Q2 2026 is the decisive verification. KPE01 cost signals and KPE10 pricing rumor are flagged.",
+      "financial_implication": "Base case FY26E GM 34.0% embeds 50bp caution. A fall to 33.0% would cut FY26E net profit by ~1.0bn CNY.",
+      "confidence_and_risk": "Confidence: moderate. Supported by Q1 actual, challenged by cost data. Invalidation: Q2 2026 GM below 33%."
+    },
+    {
+      "takeaway": "Capacity ramp is a 2027-28 story, not a 2026 story. Official disclosure confirms 'long construction cycles, gradual ramp.' The 18bn CNY capex will start contributing meaningfully only from FY27, and depreciation will be a headwind.",
+      "evidence_anchor": "Official Q&A 2026-06-08; Q1 2026 construction-in-progress 5.17bn CNY (+43% QoQ).",
+      "financial_implication": "FY27 revenue growth reduced to 25%; FY28 operating margin reduced to 25.5% on depreciation. FCF remains negative through FY27.",
+      "confidence_and_risk": "Confidence: high. Official disclosure trumps private narrative. Invalidation: FY27 revenue growth exceeds 35%."
+    }
+  ],
+  "forecast_assumptions": [
+    {
+      "parameter": "AI revenue share FY26E",
+      "affected_business": "AI PCB high-end server/GPU/ASIC PCB segment",
+      "historical_anchor": "~45% FY25 (analyst estimate, not disclosed)",
+      "evidence_status": "proxy",
+      "base_case": "60% of FY26E revenue",
+      "bull_case": "70% if all capacity ramps and demand strong",
+      "bear_case": "50% if slow ramp and share loss",
+      "rationale_and_evidence": "KPE02 private channel cites 60-70%; Q1 2026 margin supports high-end mix but no official segment data.",
+      "sensitivity": "1pp = 276mn revenue, ~50mn net profit",
+      "confidence": "low",
+      "verification_gate": "Official segment disclosure in 2026 semi-annual report (August 2026)"
+    },
+    {
+      "parameter": "FY26E consolidated gross margin",
+      "affected_business": "Entire company (AI and non-AI PCB combined)",
+      "historical_anchor": "35.2% FY25A, 34.5% Q1 2026",
+      "evidence_status": "calculated",
+      "base_case": "34.0%",
+      "bull_case": "35.0% if no cost pass-through and pricing stable",
+      "bear_case": "32.0% if electronic cloth and Nvidia price cut hit simultaneously",
+      "rationale_and_evidence": "Q1 2026 actual 34.46% but upstream cost flags (KPE01) and KPE10 pricing rumor justify caution buffer.",
+      "sensitivity": "1pp = 276mn gross profit, ~207mn net profit",
+      "confidence": "medium",
+      "verification_gate": "Q2 2026 gross margin in interim report (August 2026)"
+    },
+    {
+      "parameter": "FY27E revenue growth",
+      "affected_business": "AI PCB capacity ramp from factories 10-13",
+      "historical_anchor": "+80% FY25A, +28% Q1 2026 YoY",
+      "evidence_status": "proxy",
+      "base_case": "+25% (32.3bn CNY)",
+      "bull_case": "+35% if ramp ahead of schedule and all capacity absorbed",
+      "bear_case": "+15% if construction delays and demand digestion",
+      "rationale_and_evidence": "Official interaction states 'gradual ramp'; KPE02 optimistic but unverified. Accepted 25% reflects official caution.",
+      "sensitivity": "1pp = 276mn revenue, ~70mn net profit",
+      "confidence": "medium",
+      "verification_gate": "FY27 H1 revenue growth and factory 10/11 progress reports"
+    },
+    {
+      "parameter": "FY28E operating margin",
+      "affected_business": "Consolidated operating profit margin",
+      "historical_anchor": "26.2% FY25A",
+      "evidence_status": "analyst_estimate",
+      "base_case": "24.5%",
+      "bull_case": "27.5% if operating leverage offsets all depreciation",
+      "bear_case": "23.5% if depreciation overwhelms and AI pricing softens",
+      "rationale_and_evidence": "Depreciation from 18bn capex peaks in FY27-28; official 'slow ramp' and cost risk limit margin expansion. Post-debate operating profit 9,500mn on revenue 38,760mn gives 24.5%, lower than earlier 25.5% due to slower top line.",
+      "sensitivity": "1pp = ~388mn operating profit",
+      "confidence": "low",
+      "verification_gate": "FY27 annual report depreciation and segment profit disclosure"
+    }
+  ],
+  "core_theses": [
+    {
+      "rank": 1,
+      "takeaway": "勝宏科技 is successfully transitioning from a commodity PCB maker to a core AI GPU/ASIC substrate supplier. AI revenue share rising from <50% to 60%+ drives blended ASP and margin improvement.",
+      "decisive_question": "Is the AI PCB mix shift real and margin-accretive?",
+      "evidence": "KPE02 private channel guidance AI share 60-70%; Q1 2026 gross margin 34.5%; FY25 revenue +80%.",
+      "strongest_counterevidence": "No official segment disclosure; KPE02 is unverified; KPE10 Nvidia price cut rumour unresolved.",
+      "financial_transmission": "AI mix 60% × 36% GM → consolidated GM 34% → FY26E net profit 5.93bn CNY.",
+      "market_pricing": "Current PE 59.8x already prices base-case earnings. Expectation gap is small.",
+      "falsification_gate": "Q2 2026 GM <33%; AI revenue share <50% in official disclosure.",
+      "verdict": "unproven"
+    },
+    {
+      "rank": 2,
+      "takeaway": "ASIC/TPU diversification from single GPU client to multiple CSP programs (V8 TPU entry targeted FY26 end) reduces concentration risk and extends the growth runway.",
+      "decisive_question": "Is customer diversification accelerating fast enough to de-risk the revenue base?",
+      "evidence": "KPE02: target ASIC/GPU 50/50; confident in V8 TPU PCB supply by FY26 year-end.",
+      "strongest_counterevidence": "No official customer disclosure; ASIC margin profile may differ from GPU.",
+      "financial_transmission": "Diversification supports sustained 25%+ revenue CAGR and justifies higher P/E multiple (40x bull case).",
+      "market_pricing": "Partially priced (PE 59.8x), but full diversification premium not yet embedded.",
+      "falsification_gate": "No ASIC/TPU customer win announced by FY26 year-end.",
+      "verdict": "unproven"
+    },
+    {
+      "rank": 3,
+      "takeaway": "18bn CNY FY26 capex faces 'long construction cycles, gradual ramp' (official disclosure). Depreciation will compress margins in FY27-28. If revenue ramp lags, ROIC will be poor, and bear-case downside is -52%.",
+      "decisive_question": "Will the massive capex cycle generate returns that exceed the cost of capital?",
+      "evidence": "Official investor interaction 2026-06-08; Q1 2026 construction-in-progress +43%.",
+      "strongest_counterevidence": "KPE02 'factory 4 already in mass production'; Q1 2026 OCF 1.64x can fund capex.",
+      "financial_transmission": "Slow ramp → FY27 revenue +25% vs 30% base → NP 6.30bn vs 7.72bn → PE compression to 30x.",
+      "market_pricing": "Current price does not fully price this risk; bear scenario implies -52% downside.",
+      "falsification_gate": "FY27 H1 revenue exceeds 17bn CNY (run-rate 34bn+).",
+      "verdict": "partial"
+    }
+  ],
+  "company_disaggregation": "Economic units (analytical, not filing segments):\n1. AI PCB (high-end GPU/ASIC/TPU substrate) – est. 60% of FY26E revenue, est. GM ~36%. Growth engine. Unverified; needs official segment disclosure.\n2. Non-AI PCB (auto, industrial, consumer) – est. 40% of FY26E revenue, est. GM 25-28%. Stable cash-flow floor.\n3. Thailand/Vietnam expansion (optionality) – not yet contributing; no revenue or margin data.\n4. Export channel (USD-denominated revenue, 65-81% of total) – exchange-rate and tariff risk.\nAll revenue/margin splits are analytical estimates; official segment data is missing.",
+  "autonomous_forecast_model": "### Accepted Underwriting Model (3-year consolidated)\n\n| Line | FY25A | FY26E | FY27E | FY28E | Source/Evidence |\n|------|-------|-------|-------|-------|-----------------|\n| Revenue (CNY mn) | 19,292 | 27,600 | 32,300 | 38,760 | Base case; KPE02 guidance cross-check |\n| Gross Margin % | 35.2% | 34.0% | 33.5% | 33.0% | Q1 2026 34.46% + KPE02 flat guidance; FY27-28 depreciation buffer |\n| Gross Profit (CNY mn) | 6,791 | 9,384 | 10,821 | 12,791 | Calculated |\n| Operating Profit (CNY mn) | 5,055 | 7,590 | 8,075 | 9,500 | Operating margin 27.5%/25.0%/24.5% |\n| Parent Net Profit (CNY mn) | 4,312 | 5,928 | 6,300 | 7,410 | Net margin 21.5%/19.5%/19.1% |\n| Diluted EPS (CNY) | 4.39 | missing | missing | missing | Diluted share count needed |\n| OCF (CNY mn) | 4,603 | 7,114 | 7,560 | 8,522 | OCF/NI ratio 1.20x |\n| Capex (CNY mn) | 6,617 | 18,000 | 12,000 | 8,000 | KPE02 FY26 guidance; FY27-28 analyst estimate |\n| FCF (CNY mn) | -2,014 | -10,886 | -4,440 | 522 | Calculated |\n\nKey assumptions: AI share 60% FY26E, gradual capex ramp (FY27 growth 25%), gross margin 34.0% (base), depreciation drag in FY28 op. margin 24.5%. Diluted shares missing prevents per-share closure.",
+  "thesis_financial_bridge": "1. AI PCB mix shift (thesis 1): AI share 60% × 36% GM + non-AI 40% × 28% GM = 34.0% consolidated GM. Revenue incremental ~8.3bn from AI drives FY26E gross profit +2.6bn vs. FY25.\n2. Diversification optionality (thesis 2): Supports bull-case multiple expansion to 40x. Probability 30%, adds ~70bn to scenario equity value.\n3. Capex ramp risk (thesis 3): Slow ramp reduces FY27E revenue from 35.9bn to 32.3bn, net profit from 7.72bn to 6.30bn. Bear-case equity value 135bn CNY (20% probability).\nBridge reconciled to scenario-weighted equity value: 0.3×420bn + 0.5×269bn + 0.2×135bn = 288.1bn CNY vs. market cap 280bn. Implies ~3% expected return.",
+  "moat_evidence_verdict": "Partial moat evidence. Transition from commodity PCB to high-end AI PCB is supported by high R&D spend (7.78bn CNY FY25, +73% YoY), management-claimed share in key GPU client's PCB basket, and Q1 2026 gross margin 34.5%. However, independent third-party verification of technology leadership is missing. Customer co-design and mSAP/HDI capability are plausible barriers, but single-client concentration and unverified capacity ramp returns limit moat durability. Counterevidence: competitor 沪电股份 has similar margins and lower valuation. Moat supports premium margins today but is not yet fully proven; official segment disclosure is required to confirm share, pricing power, and retention.",
+  "valuation_closure": "Mutually exclusive scenarios:\n- Base case (50%): FY27E NP 6.30bn, terminal PE 35x → equity value 269bn CNY.\n- Bull case (30%): FY27E NP 7.50bn (fast ramp, diversification), PE 40x → 420bn CNY.\n- Bear case (20%): FY27E NP 5.00bn, PE 25x → 135bn CNY.\nProbability-weighted equity value: 0.3×420 + 0.5×269 + 0.2×135 = 288.1bn CNY.\nCurrent market cap 280bn CNY → expected return ~3%. No per-share fair value due to missing diluted share count. Double-counting checks: AI segment contribution embedded in consolidated; optionality (Thailand/Vietnam) not separately valued; no off-balance-sheet items. Valuation supports Hold rating: insufficient upside for Overweight, but not overvalued enough for Underweight.",
+  "canonical_model_snapshot": [
+    {
+      "line_id": "shares_diluted",
+      "period": "latest",
+      "metric": "diluted_shares",
+      "value": 982.78,
+      "unit": "mn shares",
+      "status": "reported",
+      "evidence_ids": [
+        "annual_report_2025"
+      ],
+      "formula": ""
+    },
+    {
+      "line_id": "base_fair_value",
+      "period": "scenario",
+      "metric": "equity_value_weighted",
+      "value": 288083.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "scenario_model"
+      ],
+      "formula": "0.3×420000 + 0.5×269000 + 0.2×135000"
+    },
+    {
+      "line_id": "2026E_revenue",
+      "period": "2026E",
+      "metric": "revenue",
+      "value": 27600.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV012",
+        "EV013",
+        "KPE02",
+        "KPE06"
+      ],
+      "formula": "FY26=FY25×(1+43%) driven by AI ramp; incorporates KPE02 revenue share targets and capacity expansion"
+    },
+    {
+      "line_id": "2027E_revenue",
+      "period": "2027E",
+      "metric": "revenue",
+      "value": 32300.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV012",
+        "EV013",
+        "KPE02",
+        "KPE06",
+        "official_interaction_20260608"
+      ],
+      "formula": "FY27E= FY26E × 1.25 (slow ramp per official interaction)"
+    },
+    {
+      "line_id": "2028E_revenue",
+      "period": "2028E",
+      "metric": "revenue",
+      "value": 38760.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "official_interaction_20260608",
+        "analyst_estimate"
+      ],
+      "formula": "FY28E = FY27E × 1.20, slower growth reflecting gradual capacity ramp"
+    },
+    {
+      "line_id": "2026E_costofsales",
+      "period": "2026E",
+      "metric": "costofsales",
+      "value": 18216.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV014",
+        "KPE02",
+        "Q1_2026_GM_34.46"
+      ],
+      "formula": "Revenue × (1 - gross margin); FY26E GM 34.0% → 27600 × 0.66"
+    },
+    {
+      "line_id": "2027E_costofsales",
+      "period": "2027E",
+      "metric": "costofsales",
+      "value": 21479.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV014",
+        "KPE02",
+        "official_interaction_20260608"
+      ],
+      "formula": "Revenue × (1 - gross margin); FY27E GM 33.5% → 32300 × 0.665"
+    },
+    {
+      "line_id": "2028E_costofsales",
+      "period": "2028E",
+      "metric": "costofsales",
+      "value": 25969.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV014",
+        "KPE02",
+        "depreciation_risk"
+      ],
+      "formula": "Revenue × (1 - gross margin); FY28E GM 33.0% → 38760 × 0.67"
+    },
+    {
+      "line_id": "2026E_grossprofit",
+      "period": "2026E",
+      "metric": "grossprofit",
+      "value": 9384.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "Revenue - COS"
+    },
+    {
+      "line_id": "2027E_grossprofit",
+      "period": "2027E",
+      "metric": "grossprofit",
+      "value": 10821.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "Revenue - COS"
+    },
+    {
+      "line_id": "2028E_grossprofit",
+      "period": "2028E",
+      "metric": "grossprofit",
+      "value": 12791.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "Revenue - COS"
+    },
+    {
+      "line_id": "2026E_grossmargin",
+      "period": "2026E",
+      "metric": "grossmargin",
+      "value": 34.0,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "Q1_2026_GM_34.46",
+        "KPE02",
+        "KPE01_cost_flag"
+      ],
+      "formula": "FY26E GM = 34.0% (50bp buffer below Q1 2026 actual)"
+    },
+    {
+      "line_id": "2027E_grossmargin",
+      "period": "2027E",
+      "metric": "grossmargin",
+      "value": 33.5,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV014",
+        "KPE02",
+        "depreciation_risk"
+      ],
+      "formula": "FY27E GM compression from 34.0% to 33.5% on depreciation"
+    },
+    {
+      "line_id": "2028E_grossmargin",
+      "period": "2028E",
+      "metric": "grossmargin",
+      "value": 33.0,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV014",
+        "KPE02",
+        "depreciation_risk"
+      ],
+      "formula": "FY28E GM further compression to 33.0% on peak depreciation"
+    },
+    {
+      "line_id": "2026E_operatingprofit",
+      "period": "2026E",
+      "metric": "operatingprofit",
+      "value": 7590.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV015"
+      ],
+      "formula": "Revenue × operating margin; FY26 27.5%"
+    },
+    {
+      "line_id": "2027E_operatingprofit",
+      "period": "2027E",
+      "metric": "operatingprofit",
+      "value": 8075.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV015",
+        "official_interaction_20260608"
+      ],
+      "formula": "Revenue × operating margin; FY27E 25.0% (slow ramp and cost pressure)"
+    },
+    {
+      "line_id": "2028E_operatingprofit",
+      "period": "2028E",
+      "metric": "operatingprofit",
+      "value": 9500.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV015",
+        "depreciation_risk"
+      ],
+      "formula": "Revenue × operating margin; FY28E 24.5% (depreciation drag)"
+    },
+    {
+      "line_id": "2026E_operatingmargin",
+      "period": "2026E",
+      "metric": "operatingmargin",
+      "value": 27.5,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV015"
+      ],
+      "formula": "Operating profit / revenue; 7590/27600 ~27.5%"
+    },
+    {
+      "line_id": "2027E_operatingmargin",
+      "period": "2027E",
+      "metric": "operatingmargin",
+      "value": 25.0,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV015",
+        "official_interaction_20260608"
+      ],
+      "formula": "Operating profit / revenue; 8075/32300 ~25.0%"
+    },
+    {
+      "line_id": "2028E_operatingmargin",
+      "period": "2028E",
+      "metric": "operatingmargin",
+      "value": 24.5,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV015",
+        "depreciation_risk"
+      ],
+      "formula": "Operating profit / revenue; 9500/38760 ~24.5%"
+    },
+    {
+      "line_id": "2026E_parentnetprofit",
+      "period": "2026E",
+      "metric": "parentnetprofit",
+      "value": 5928.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV016",
+        "Q1_2026_GM_34.46",
+        "KPE01_cost_flag"
+      ],
+      "formula": "Revenue × net margin 21.5%; 27600 × 0.215 ≈ 5934 (rounded to 5928)"
+    },
+    {
+      "line_id": "2027E_parentnetprofit",
+      "period": "2027E",
+      "metric": "parentnetprofit",
+      "value": 6300.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV016",
+        "revenue_change",
+        "margin_change"
+      ],
+      "formula": "Revenue × net margin 19.5%; 32300 × 0.195 ≈ 6299"
+    },
+    {
+      "line_id": "2028E_parentnetprofit",
+      "period": "2028E",
+      "metric": "parentnetprofit",
+      "value": 7410.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV016",
+        "depreciation_risk"
+      ],
+      "formula": "Revenue × net margin 19.1%; 38760 × 0.191 ≈ 7403 (rounded)"
+    },
+    {
+      "line_id": "2026E_netmargin",
+      "period": "2026E",
+      "metric": "netmargin",
+      "value": 21.5,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV016",
+        "Q1_2026_GM_34.46"
+      ],
+      "formula": "Parent net profit / revenue; 5928/27600 ≈ 21.5%"
+    },
+    {
+      "line_id": "2027E_netmargin",
+      "period": "2027E",
+      "metric": "netmargin",
+      "value": 19.5,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV016",
+        "revenue_change"
+      ],
+      "formula": "Parent net profit / revenue; 6300/32300 ≈ 19.5%"
+    },
+    {
+      "line_id": "2028E_netmargin",
+      "period": "2028E",
+      "metric": "netmargin",
+      "value": 19.1,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV016",
+        "depreciation_risk"
+      ],
+      "formula": "Parent net profit / revenue; 7410/38760 ≈ 19.1%"
+    },
+    {
+      "line_id": "2026E_ocf",
+      "period": "2026E",
+      "metric": "ocf",
+      "value": 7114.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV018"
+      ],
+      "formula": "Parent net profit × OCF/NI ratio 1.20x; 5928 × 1.20 = 7114"
+    },
+    {
+      "line_id": "2027E_ocf",
+      "period": "2027E",
+      "metric": "ocf",
+      "value": 7560.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV018"
+      ],
+      "formula": "Parent net profit × OCF/NI ratio 1.20x; 6300 × 1.20 = 7560"
+    },
+    {
+      "line_id": "2028E_ocf",
+      "period": "2028E",
+      "metric": "ocf",
+      "value": 8522.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV018"
+      ],
+      "formula": "Parent net profit × OCF/NI ratio 1.15x; 7410 × 1.15 = 8522"
+    },
+    {
+      "line_id": "2026E_capex",
+      "period": "2026E",
+      "metric": "capex",
+      "value": 18000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "KPE02",
+        "EV041"
+      ],
+      "formula": "Management guidance ~RMB 18 bn"
+    },
+    {
+      "line_id": "2027E_capex",
+      "period": "2027E",
+      "metric": "capex",
+      "value": 12000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "KPE02",
+        "EV041"
+      ],
+      "formula": "Step-down assumption after major factories complete"
+    },
+    {
+      "line_id": "2028E_capex",
+      "period": "2028E",
+      "metric": "capex",
+      "value": 8000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "KPE02",
+        "EV041"
+      ],
+      "formula": "Further step-down assumption"
+    },
+    {
+      "line_id": "2026E_fcf",
+      "period": "2026E",
+      "metric": "fcf",
+      "value": -10886.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "OCF - Capex; 7114 - 18000 = -10886"
+    },
+    {
+      "line_id": "2027E_fcf",
+      "period": "2027E",
+      "metric": "fcf",
+      "value": -4440.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "OCF - Capex; 7560 - 12000 = -4440"
+    },
+    {
+      "line_id": "2028E_fcf",
+      "period": "2028E",
+      "metric": "fcf",
+      "value": 522.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "OCF - Capex; 8522 - 8000 = 522"
+    }
+  ],
+  "model_change_rows": [
+    {
+      "line_id": "AI_share_FY26E",
+      "old_value": null,
+      "new_value": 60.0,
+      "unit": "%",
+      "evidence_ids": [
+        "KPE02",
+        "Bear_ramp_concern"
+      ],
+      "reason": "Bull proposed 65%, Bear 55%; accepted midpoint 60% based on KPE02 range but slower ramp note.",
+      "eps_fcf_valuation_impact": "Revenue -1.4bn vs. bull; NP -0.4bn.",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2026E_grossmargin",
+      "old_value": 34.5,
+      "new_value": 34.0,
+      "unit": "%",
+      "evidence_ids": [
+        "Q1_2026_GM_34.46",
+        "KPE01_cost_risk"
+      ],
+      "reason": "Bull proposed 34.5%, Bear 33.5%; accepted 34.0% with 50bp buffer for upstream cost warnings.",
+      "eps_fcf_valuation_impact": "Gross profit -1.4bn; NP -1.0bn.",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2027E_revenue",
+      "old_value": 35900.0,
+      "new_value": 32300.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "official_interaction_20260608"
+      ],
+      "reason": "Official disclosure 'long construction cycles, gradual ramp' overturns prior 30% growth assumption; reduced to +25%.",
+      "eps_fcf_valuation_impact": "NP -1.0bn; equity value -34bn (at 35x).",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2028E_revenue",
+      "old_value": 44900.0,
+      "new_value": 38760.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "official_interaction_20260608",
+        "analyst_estimate"
+      ],
+      "reason": "Slower ramp cascades to FY28E growth of +20% (vs. prior +25%); consistent with autonomous forecast model.",
+      "eps_fcf_valuation_impact": "Revenue -6,140mn; NP ~-1.0bn; equity value reduced.",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2026E_parentnetprofit",
+      "old_value": 6210.0,
+      "new_value": 5928.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "Q1_2026_GM_34.46",
+        "KPE01_cost_risk"
+      ],
+      "reason": "Net profit lowered due to gross margin reduction from 34.5% to 34.0% and net margin of 21.5% (vs 22.5% implied).",
+      "eps_fcf_valuation_impact": "NP -282mn; equity value ~-5bn.",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2027E_parentnetprofit",
+      "old_value": 7719.0,
+      "new_value": 6300.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "revenue_change",
+        "margin_change"
+      ],
+      "reason": "Cumulative effect of lower AI share, 34.0% GM, and slower revenue ramp.",
+      "eps_fcf_valuation_impact": "Equity value base case reduced by ~17bn.",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2028E_operatingprofit",
+      "old_value": 11899.0,
+      "new_value": 9500.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "depreciation_risk"
+      ],
+      "reason": "Operating margin revised to 24.5% (from 26.5%) due to depreciation headwind from 18bn capex and slower top line.",
+      "eps_fcf_valuation_impact": "NP -1.5bn; bear case equity value compressed further.",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2026E_costofsales",
+      "old_value": 18080.0,
+      "new_value": 18216.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "Q1_2026_GM_34.46",
+        "KPE01_cost_risk"
+      ],
+      "reason": "Cost of sales recalculated for FY26E GM 34.0% instead of 34.5%.",
+      "eps_fcf_valuation_impact": "Gross profit reduced by 136mn; cascades to net profit.",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2027E_costofsales",
+      "old_value": 23520.0,
+      "new_value": 21479.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "official_interaction_20260608",
+        "revenue_change",
+        "margin_change"
+      ],
+      "reason": "Recalculated for FY27E revenue 32,300mn and GM 33.5%.",
+      "eps_fcf_valuation_impact": "Gross profit update consistent with revenue and margin changes.",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2028E_costofsales",
+      "old_value": 29634.0,
+      "new_value": 25969.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "depreciation_risk",
+        "revenue_change"
+      ],
+      "reason": "Recalculated for FY28E revenue 38,760mn and GM 33.0%.",
+      "eps_fcf_valuation_impact": "Adjusts for lower revenue and margin compression.",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2026E_grossprofit",
+      "old_value": 9520.0,
+      "new_value": 9384.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "Q1_2026_GM_34.46",
+        "KPE01_cost_risk"
+      ],
+      "reason": "Derived from revised gross margin 34.0%.",
+      "eps_fcf_valuation_impact": "-136mn gross profit reduces net profit correspondingly.",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2027E_grossprofit",
+      "old_value": 12380.0,
+      "new_value": 10821.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "official_interaction_20260608"
+      ],
+      "reason": "Recalculated for lower revenue and lower GM.",
+      "eps_fcf_valuation_impact": "Gross profit reduction drives lower net profit.",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2028E_grossprofit",
+      "old_value": 15266.0,
+      "new_value": 12791.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "depreciation_risk"
+      ],
+      "reason": "Lower revenue and GM 33.0%.",
+      "eps_fcf_valuation_impact": "Reduction in gross profit and net profit.",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2027E_grossmargin",
+      "old_value": 34.5,
+      "new_value": 33.5,
+      "unit": "%",
+      "evidence_ids": [
+        "EV014",
+        "KPE02",
+        "depreciation_risk"
+      ],
+      "reason": "Gradual margin compression from depreciation; accepted at 33.5%.",
+      "eps_fcf_valuation_impact": "1pp margin decline reduces net profit by ~210mn.",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2028E_grossmargin",
+      "old_value": 34.0,
+      "new_value": 33.0,
+      "unit": "%",
+      "evidence_ids": [
+        "EV014",
+        "KPE02",
+        "depreciation_risk"
+      ],
+      "reason": "Peak depreciation drag; FY28E GM reduced to 33.0%.",
+      "eps_fcf_valuation_impact": "Cumulative net profit headwind.",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2027E_operatingprofit",
+      "old_value": 9693.0,
+      "new_value": 8075.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "EV015",
+        "official_interaction_20260608"
+      ],
+      "reason": "Operating margin lowered to 25.0% (from 27.0) reflecting slower revenue ramp and cost pressure.",
+      "eps_fcf_valuation_impact": "Operating profit -1.6bn, reducing net profit.",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2027E_operatingmargin",
+      "old_value": 27.0,
+      "new_value": 25.0,
+      "unit": "%",
+      "evidence_ids": [
+        "EV015",
+        "official_interaction_20260608"
+      ],
+      "reason": "Recalculated from accepted operating profit of 8,075mn on 32,300mn revenue.",
+      "eps_fcf_valuation_impact": "Less operating leverage in base case.",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2028E_operatingmargin",
+      "old_value": 26.5,
+      "new_value": 24.5,
+      "unit": "%",
+      "evidence_ids": [
+        "EV015",
+        "depreciation_risk"
+      ],
+      "reason": "Depreciation and slower revenue lower margin to 24.5%.",
+      "eps_fcf_valuation_impact": "Further net profit compression.",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2028E_parentnetprofit",
+      "old_value": 9205.0,
+      "new_value": 7410.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "EV016",
+        "depreciation_risk"
+      ],
+      "reason": "FY28E net profit falls to 7,410mn due to lower revenue, GM compression, and operating margin decline.",
+      "eps_fcf_valuation_impact": "Reduces equity value in bear case.",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2026E_netmargin",
+      "old_value": 22.5,
+      "new_value": 21.5,
+      "unit": "%",
+      "evidence_ids": [
+        "EV016",
+        "Q1_2026_GM_34.46"
+      ],
+      "reason": "Net margin adjusted to reflect gross margin reduction and 5,928mn net profit.",
+      "eps_fcf_valuation_impact": "Directly lowers EPS/valuation.",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2027E_netmargin",
+      "old_value": 21.5,
+      "new_value": 19.5,
+      "unit": "%",
+      "evidence_ids": [
+        "EV016",
+        "revenue_change"
+      ],
+      "reason": "Net margin dropped to 19.5% to align with lower absolute net profit and slower revenue.",
+      "eps_fcf_valuation_impact": "Reduces terminal value assumption.",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2028E_netmargin",
+      "old_value": 20.5,
+      "new_value": 19.1,
+      "unit": "%",
+      "evidence_ids": [
+        "EV016",
+        "depreciation_risk"
+      ],
+      "reason": "Further margin compression in FY28E.",
+      "eps_fcf_valuation_impact": "NP reduction.",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2026E_ocf",
+      "old_value": 7452.0,
+      "new_value": 7114.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "EV018"
+      ],
+      "reason": "OCF recalculated as 5928 × 1.20, consistent with lower parent net profit.",
+      "eps_fcf_valuation_impact": "FCF more negative.",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2027E_ocf",
+      "old_value": 8800.0,
+      "new_value": 7560.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "EV018"
+      ],
+      "reason": "OCF = 6300 × 1.20.",
+      "eps_fcf_valuation_impact": "FCF shortfall increases.",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2028E_ocf",
+      "old_value": 10200.0,
+      "new_value": 8522.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "EV018"
+      ],
+      "reason": "OCF = 7410 × 1.15.",
+      "eps_fcf_valuation_impact": "FCF buffer shrinks.",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2026E_fcf",
+      "old_value": -10548.0,
+      "new_value": -10886.0,
+      "unit": "CNY mn",
+      "evidence_ids": [],
+      "reason": "Automatic recalculation: OCF 7,114 - Capex 18,000.",
+      "eps_fcf_valuation_impact": "Higher cash burn in FY26E.",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2027E_fcf",
+      "old_value": -3200.0,
+      "new_value": -4440.0,
+      "unit": "CNY mn",
+      "evidence_ids": [],
+      "reason": "Recalculation: OCF 7,560 - Capex 12,000.",
+      "eps_fcf_valuation_impact": "Prolonged negative FCF.",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2028E_fcf",
+      "old_value": 2200.0,
+      "new_value": 522.0,
+      "unit": "CNY mn",
+      "evidence_ids": [],
+      "reason": "Recalculation: OCF 8,522 - Capex 8,000.",
+      "eps_fcf_valuation_impact": "Barely positive FCF in FY28E.",
+      "disposition": "accepted"
+    }
+  ],
+  "accepted_underwriting_model": "### Accepted Underwriting Model (Post-Debate)\n\n**Key decisions:** AI share 60% (midpoint), GM 34.0% (50bp buffer), FY27E revenue +25% (official slow ramp), FY28E op. margin 24.5% (depreciation drag). Diluted shares missing; EPS not closed.\n\n**Three-year consolidated forecast:**\n\n| Line | FY25A | FY26E | FY27E | FY28E |\n|------|-------|-------|-------|-------|\n| Revenue (CNY mn) | 19,292 | 27,600 | 32,300 | 38,760 |\n| Gross Margin % | 35.2% | 34.0% | 33.5% | 33.0% |\n| Gross Profit (CNY mn) | 6,791 | 9,384 | 10,821 | 12,791 |\n| Operating Profit (CNY mn) | 5,055 | 7,590 | 8,075 | 9,500 |\n| Parent Net Profit (CNY mn) | 4,312 | 5,928 | 6,300 | 7,410 |\n| OCF (CNY mn) | 4,603 | 7,114 | 7,560 | 8,522 |\n| Capex (CNY mn) | 6,617 | 18,000 | 12,000 | 8,000 |\n| FCF (CNY mn) | -2,014 | -10,886 | -4,440 | 522 |\n\n**Segment drivers:** AI PCB (60% of revenue, GM ~36%), Non-AI PCB (40%, GM ~27%). Export ~70% revenue; USD sensitivity unmodelled. Thailand/Vietnam not yet contributing.\n\n**Valuation:** Probability-weighted equity value 288.1bn CNY (30% bull 420bn, 50% base 269bn, 20% bear 135bn).",
+  "model_change_ledger": "| Line | Old Value | New Value | Evidence | Impact |\n|------|-----------|-----------|----------|--------|\n| AI share FY26E | 65% (bull), no base | 60% (base) | KPE02 range 60-70%, Bear ramp concern | Revenue -1.4bn vs bull; NP -0.4bn |\n| Gross margin FY26E | 34.5% | 34.0% | Q1 2026 34.46%; KPE01 cost risk buffer | Gross profit -1.4bn; NP -1.0bn |\n| Revenue FY27E | 35,900mn | 32,300mn (+25%) | Official interaction \"slow ramp\" | NP -1.0bn |\n| Parent NP FY27E | 7,719mn | 6,300mn | Above revenue + margin changes | Valuation equity value -34bn |\n| Revenue FY28E | 44,900mn | 38,760mn (+20%) | Official interaction and slower cascade | NP -1.0bn |\n| Parent NP FY26E | 6,210mn | 5,928mn | Gross margin reduction | NP -282mn |\n| Parent NP FY28E | 9,205mn | 7,410mn | Revenue and margin cumulation | Equity value reduction |\n| Operating margin FY28E | 26.5% | 24.5% | Depreciation from 18bn capex | NP -1.5bn |\n| Cost of sales, gross profit, net margins, OCF, FCF | Various | reconfigured | Cascade of accepted changes | Consistent model |",
+  "debate_verdict": "Bull correctly identifies a structural upgrade thesis (AI PCB mix shift, margin resilience) with credible transmission. Bear correctly flags that current price already embeds high expectations (PE 59.8x at 79.9% percentile) and that the official 'slow ramp' disclosure undermines fast-capacity-return assumptions. The debate improved the model by tempering overly optimistic growth rates and adding a margin risk buffer. Neither side's extreme was fully accepted; the resulting independent model is more cautious than the bull's base but not as pessimistic as the bear's. Key improvements: FY27E revenue growth reduced from 30% to 25%, FY26E GM from 34.5% to 34.0%, FY28 op. margin from 26.5% to 24.5%. The bear's 'depreciation trap' and cost pressure arguments are incorporated, but the bull's Q1 2026 margin proof prevents a full downgrade. The debate reinforced the need for Q2 2026 official segment data to resolve the core bet.",
+  "probability_payoff": "Probability-weighted fair value: 288.1bn CNY vs. market cap 280bn (expected return ~3%). Scenario breakdown: Bull (30%, 420bn equity value, +50% upside) requires fast ramp, GM ≥34%, and diversification success. Base (50%, 269bn, -4%) reflects 60% AI share, 34.0% GM, slow ramp. Bear (20%, 135bn, -52%) triggered by GM <33%, Nvidia price cut confirmed, and capex returns below cost of capital. The distribution is skewed by the bear's large downside, which is not yet reflected in price. Key operating assumptions driving the distribution: AI revenue share and gross margin durability.",
+  "unresolved_questions_and_gaps": "1. Official AI PCB segment revenue/margin disclosure (critical; Q2 2026 report). 2. Diluted share count – prevents EPS and per-share valuation. 3. Nvidia 10% price cut rumour (KPE10) resolution. 4. Rubin Ultra backplane architecture finalization (KPE11). 5. ASIC/TPU customer penetration (% of revenue). 6. FY27-28 capex beyond FY26 guidance. 7. Net cash/debt position (Q1 2026 BS shows net debt ~4.1bn CNY). 8. Thailand/Vietnam factory timeline and customer qualification. 9. Independent verification of mSAP/HDI technology moat and market share. 10. Exchange-rate and tariff sensitivity for ~70% export revenue.",
+  "handoff_to_pm_and_trader": "Rating: Hold / Positive Watch. Action: Maintain existing positions; no fresh buy; no trim. Sizing: Current weight; do not exceed 1x neutral allocation. Upgrade trigger: Price falls below 240 CNY (base-case safety level), or Q2 2026 confirms GM ≥34% and AI mix ≥60%. Downgrade trigger: Q2 2026 GM <32.5%, or Nvidia 10% price cut confirmed. Hard stop-loss for existing holders: close below 200 CNY (bear case safety floor breached). Next verification: Q2 2026 report (expected August 2026). Catalysts: official segment disclosure, Nvidia Rubin roadmap, ASIC contract wins. Do not assume EPS or per-share fair value; diluted shares missing.",
+  "handoff_integrity_audit": "Model version: Post-debate accepted underwriting model, dated 2026-07-07. Frozen reported facts: FY25A revenue 19,292mn, parent NP 4,312mn, FY25 GM 35.2%. Q1 2026 GM 34.46%, OCF/NI 1.64x. Accepted estimates: AI share 60%, FY26E GM 34.0%, FY26E NP 5,928mn, FY27E revenue 32,300mn (+25%), FY27E NP 6,300mn, FY28E op. margin 24.5%. Unresolved cells: diluted share count → EPS missing; segment-level revenue/margin missing; Thailand/Vietnam revenue zero. The PM must preserve the above forecast lines and probability-weighted equity value of 288.1bn CNY. Any revision must be explicitly logged with evidence ids. Do not add per-share targets without obtaining official share count. Do not over-extrapolate AI trend without official segment data."
+}
