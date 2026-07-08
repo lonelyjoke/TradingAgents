@@ -1,0 +1,218 @@
+# Thematic catalyst cross-check for 300274.SZ as of 2026-07-08
+
+- Company: 阳光电源
+- Financial-report look-back: 900 days
+- News look-back: 180 days
+- Investee news terms: 业投资, 仁洁智能科技有限公司, 伊顿（中国）投资有限公司, 公司控股股东及实际控制人曹仁贤先生持有合肥汇卓股权投资合伙企业（有限合伙, 关于阳光电源股份有限公司, 创业板交易型开放式指数证券投资基, 合伙企业, 合伙企业（有限合伙, 合肥仁创二期股权投资合伙企业（有限合伙, 合肥仁创四期创业投资合伙企业（有限合伙, 合肥仁创投资管理中心（有限合伙, 合肥汇卓股权投资合伙企业（有限合伙, 子公司少数股东减资支付少数股东投资款, 存在的问题, 安徽众启新能源有限公司, 山特电子（深圳）有限公司, 常德凌阳新能源有限公司, 广东穗开恒阳新能源有限公司, 广西恭城华电阳光新能源有限公司, 意阳光电源股份有限公司, 截至, 支付股权投资款, 收回股权投资款, 新能源投资开发, 明阳新能源投资控股集团有限公司, 泰禾智能股权购买义务, 浙江上峰阳光新能源有限公司, 深圳康达炜电子技术有限公司, 结构化主体少数股东应有权益, 远期结售汇, 阳光电源股份有限公司, 附有回购义务的投资款, 附有回购条款的投资款, 预收储能租赁款, （1）债务工具投资, （含
+- Extraction status: Financial-report text extraction succeeded.
+
+## Financial Reports Considered
+- 20260428: 2026年一季度报告
+- 20260401: 2025年年度报告
+- 20251029: 2025年三季度报告
+- 20250826: 2025年半年度报告
+
+## Financial Report Text Acquisition Audit
+| stage | status | detail |
+| --- | --- | --- |
+| runtime_dependency | ready | pdftotext is available for PDF text extraction. |
+| announcement_lookup | ready | Found 4 candidate financial-report announcement(s) from primary and CNINFO sources. |
+| pdf_text_extraction | ready | 2026年一季度报告: extracted 28924 characters of readable report text. |
+| pdf_text_extraction | ready | 2025年年度报告: extracted 586589 characters of readable report text. |
+| pdf_text_extraction | ready | 2025年三季度报告: extracted 29957 characters of readable report text. |
+| pdf_text_extraction | ready | 2025年半年度报告: extracted 497894 characters of readable report text. |
+| final_text_bundle | ready | Prepared 4 readable report text(s) for filing intelligence. |
+
+## Filing-Origin Candidates -> News Catalyst Check
+| candidate | kind | financial_report_evidence | recent_news_match | catalyst_signal |
+| --- | --- | --- | --- | --- |
+| 氢能 | business-realization | 2025年年度报告: 阳光氢能 指 公司控股子公司阳光氢能科技有限公司 | no | no |
+| 半导体 | business-realization | 2025年年度报告: 太阳能光伏效应，又称为光生伏特效应，是指光照使不均匀半导体或半导体与金属 | no | no |
+| 储能 | business-realization | 2025年年度报告: 连接于储能电池和交流电网之间的电力转换设备，具有对电池充电和放电功能，可 | no | no |
+| 数据中心 | business-realization | 2025年年度报告: 控及电源系统、充电设备、氢能装备等新能源电源设备的研产销服和新能源投资开发，并布局 AIDC 电源业务，提供固态 | no | no |
+| 新能源投资开发 | asset-revaluation | 2025年年度报告: 新能源投资开发 16,559,405,664.57 18.57% 21,003,004,297.89 26.98% -21.16% | no | no |
+| 明阳新能源投资控股集团有限公司 | asset-revaluation | 2025年年度报告: 2 明阳新能源投资控股集团有限公司 1,343,123,078.47 2.83% | no | no |
+| （含 | asset-revaluation | 2025年年度报告: 投资（含 190,319,47 8,294,196.7 198,613,66 | no | no |
+| 深圳康达炜电子技术有限公司 | asset-revaluation | 2025年年度报告: 集团）、深圳康达炜电子技术有限公司、山特电子（深圳）有限公司、伊顿（中国）投资有限公司等。2015 年 9 月加入阳 | no | no |
+| 山特电子（深圳）有限公司 | asset-revaluation | 2025年年度报告: 集团）、深圳康达炜电子技术有限公司、山特电子（深圳）有限公司、伊顿（中国）投资有限公司等。2015 年 9 月加入阳 | no | no |
+| 伊顿（中国）投资有限公司 | asset-revaluation | 2025年年度报告: 集团）、深圳康达炜电子技术有限公司、山特电子（深圳）有限公司、伊顿（中国）投资有限公司等。2015 年 9 月加入阳 | no | no |
+| 机器人 | business-realization | 2025年年度报告: 国际化实力。在数字化赋能方面，持续发力，引入并优化智能问答机器人与 AI 学习助手，上线 AI 学堂丰富学习资源，开 | no | no |
+| 阳光电源股份有限公司 | asset-revaluation | 2025年年度报告: 阳光电源股份有限公司向特定对象发行股票注册的批复》（证监许可[2021]2734 号）核准，公司向特定投资者发行人民币 | no | no |
+| 截至 | asset-revaluation | 2025年年度报告: 截至 2021 年 10 月 11 日，公司以自筹资金预先投入募集资金投资项目的实际投资总额为 24,314.16 万元， | no | no |
+| 关于阳光电源股份有限公司 | asset-revaluation | 2025年半年度报告: 证，并于 2021 年 10 月 12 日出具了《关于阳光电源股份有限公司以自筹资金预先投入募集资金投资项目 | no | no |
+| 附有回购条款的投资款 | asset-revaluation | 2025年年度报告: 附有回购条款的投资款 881,720,218.99 867,399,753.43 | no | no |
+| 预收储能租赁款 | asset-revaluation | 2025年年度报告: 预收储能租赁款 394,701,756.65 382,163,548.72 | no | no |
+| 结构化主体少数股东应有权益 | asset-revaluation | 2025年年度报告: 结构化主体少数股东应有权益 40,665,101.99 41,845,668.45 | no | no |
+| 泰禾智能股权购买义务 | asset-revaluation | 2025年年度报告: 泰禾智能股权购买义务 408,604,570.00 | no | no |
+| 远期结售汇 | asset-revaluation | 2025年年度报告: 远期结售汇 254,670,924.32 269,481,492.85 | no | no |
+| 收回股权投资款 | asset-revaluation | 2025年年度报告: 收回股权投资款 195,856,117.51 14,143,510.15 | no | no |
+| 支付股权投资款 | asset-revaluation | 2025年年度报告: 支付股权投资款 318,039,591.01 384,161,266.33 | no | no |
+| 子公司少数股东减资支付少数股东投资款 | asset-revaluation | 2025年年度报告: 子公司少数股东减资支付少数股东投资款 75,715,811.69 | no | no |
+| 合肥仁创二期股权投资合伙企业（有限合伙 | asset-revaluation | 2025年半年度报告: 合肥仁创二期股权投资合伙企业（有限合伙） | no | no |
+| 合肥仁创四期创业投资合伙企业（有限合伙 | asset-revaluation | 2025年年度报告: 合肥仁创四期创业投资合伙企业（有限合伙） | no | no |
+| 合肥仁创投资管理中心（有限合伙 | asset-revaluation | 2025年半年度报告: 仁洁智能科技有限公司 合肥仁创投资管理中心（有限合伙）之子公司 | no | no |
+| 广东穗开恒阳新能源有限公司 | asset-revaluation | 2025年半年度报告: 广东穗开恒阳新能源有限公司 新能源投资开发及运维 23,016.20 6,022.02 | no | no |
+| 常德凌阳新能源有限公司 | asset-revaluation | 2025年半年度报告: 常德凌阳新能源有限公司 新能源投资开发 5,687.63 14,638.38 | no | no |
+| 广西恭城华电阳光新能源有限公司 | asset-revaluation | 2025年年度报告: 广西恭城华电阳光新能源有限公司 新能源投资开发 7,628.85 | no | no |
+| 安徽众启新能源有限公司 | asset-revaluation | 2025年半年度报告: 安徽众启新能源有限公司 新能源投资开发及运维等 5,396.50 3,814.78 | no | no |
+| 浙江上峰阳光新能源有限公司 | asset-revaluation | 2025年半年度报告: 浙江上峰阳光新能源有限公司 新能源投资开发 100.72 | no | no |
+| 业投资 | asset-revaluation | 2025年年度报告: 业投资 15,073 2,919, | no | no |
+| 创业板交易型开放式指数证券投资基 | asset-revaluation | 2025年三季度报告: 创业板交易型开放式指数证券投资基 31,174,193 人民币普通股 31,174,193 | no | no |
+| 存在的问题 | asset-revaluation | 2025年半年度报告: 存在的问题 日，公司累计使用 53,496.47 万元银行承兑汇票支付募集资金投资项目款项，且该 53,496.47 万元已通过 | no | no |
+| 合伙企业 | asset-revaluation | 2025年半年度报告: 投资合伙企业 1.11% 22,953,342 -200,000 22,953,342 | no | no |
+| 公司控股股东及实际控制人曹仁贤先生持有合肥汇卓股权投资合伙企业（有限合伙 | asset-revaluation | 2025年半年度报告: 公司控股股东及实际控制人曹仁贤先生持有合肥汇卓股权投资合伙企业（有限合伙）10.44%股 | no | no |
+| 意阳光电源股份有限公司 | asset-revaluation | 2025年半年度报告: 意阳光电源股份有限公司向特定对象发行股票注册的批复》（证监许可[2021]2734 号）核准，公司向特定投资者发行人民 | no | no |
+| 附有回购义务的投资款 | asset-revaluation | 2025年半年度报告: 附有回购义务的投资款 847,000,000.00 | no | no |
+| （1）债务工具投资 | asset-revaluation | 2025年半年度报告: （1）债务工具投资 7,510,932,933.56 7,510,932,933.56 | no | no |
+| 合伙企业（有限合伙 | asset-revaluation | 2025年半年度报告: 合伙企业（有限合伙）10.44%的股权，合肥汇卓股权投资合伙企业（有限合伙）持有本公司 1.11%的股权，另通过其配 | no | no |
+| 合肥汇卓股权投资合伙企业（有限合伙 | asset-revaluation | 2025年半年度报告: 合伙企业（有限合伙）10.44%的股权，合肥汇卓股权投资合伙企业（有限合伙）持有本公司 1.11%的股权，另通过其配 | no | no |
+| 仁洁智能科技有限公司 | asset-revaluation | 2025年半年度报告: 仁洁智能科技有限公司 合肥仁创投资管理中心（有限合伙）之子公司 | no | no |
+| order-ramp | business-realization | 2026年一季度报告: 合同负债 12,204,269,402.38 10,655,117,674.16 | no | no |
+| new-product-commercialization | business-realization | 2025年年度报告: UL 指 权威认证机构，全球应用安全科学专家，服务全球 100 多个国家和地区的客户 | no | no |
+| capacity-release | business-realization | 2025年年度报告: 级，自动化产线年产能达 300 万台，高效匹配全球客户的规模化交付需求。凭借专业的技术实力、可靠的产品品质和稳定 | no | no |
+| overseas-expansion | business-realization | 2025年年度报告: 项目收益下滑，出口退税逐步退坡。公司以“深耕厚植，全力创新，数智经营，成就客户”为年度指导思想，积极把握市场 | no | no |
+
+## Reliable Filing-Origin Bull Themes
+| candidate | kind | financial_report_evidence | reliability_gate | story_read | proof_needed |
+| --- | --- | --- | --- | --- | --- |
+| order-ramp | business-realization | 2026年一季度报告: 合同负债 12,204,269,402.38 10,655,117,674.16 | filing-backed + monetization evidence | demand visibility is improving | watch conversion into delivery, revenue, and cash collection |
+| new-product-commercialization | business-realization | 2025年年度报告: UL 指 权威认证机构，全球应用安全科学专家，服务全球 100 多个国家和地区的客户 | filing-backed + monetization evidence | new product may be moving from R&D into monetization | watch customer adoption, orders, and gross margin |
+| capacity-release | business-realization | 2025年年度报告: 级，自动化产线年产能达 300 万台，高效匹配全球客户的规模化交付需求。凭借专业的技术实力、可靠的产品品质和稳定 | filing-backed + monetization evidence | supply capability may be unlocking future revenue | watch utilization, sell-through, and return on capital |
+| overseas-expansion | business-realization | 2025年年度报告: 项目收益下滑，出口退税逐步退坡。公司以“深耕厚植，全力创新，数智经营，成就客户”为年度指导思想，积极把握市场 | filing-backed + monetization evidence | geographic expansion can widen the earnings runway | watch order quality, localization, and profitability |
+
+## News-Origin Candidates -> Filing Validation
+No candidates found.
+
+## Thematic Valuation Bridge
+| candidate | kind | catalyst_tier | valuation_weight | reported_value | vs_listed_mkt_cap | valuation_treatment | primary_investment_nav_ladder | bull_angle | bear_check |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 氢能 | business-realization | tier-2 soft catalyst | scenario support only | not separately disclosed | N/A | real theme, not yet separately quantifiable | N/A | Shows strategic direction and may deserve qualitative optionality. | Keep it out of core valuation until revenue, profit, orders, or cash-flow contribution is separately evidenced. |
+| 半导体 | business-realization | tier-2 soft catalyst | scenario support only | not separately disclosed | N/A | real theme, not yet separately quantifiable | N/A | Shows strategic direction and may deserve qualitative optionality. | Keep it out of core valuation until revenue, profit, orders, or cash-flow contribution is separately evidenced. |
+| 储能 | business-realization | tier-2 soft catalyst | scenario support only | not separately disclosed | N/A | real theme, not yet separately quantifiable | N/A | Shows strategic direction and may deserve qualitative optionality. | Keep it out of core valuation until revenue, profit, orders, or cash-flow contribution is separately evidenced. |
+| 数据中心 | business-realization | tier-2 soft catalyst | scenario support only | not separately disclosed | N/A | real theme, not yet separately quantifiable | N/A | Shows strategic direction and may deserve qualitative optionality. | Keep it out of core valuation until revenue, profit, orders, or cash-flow contribution is separately evidenced. |
+| 新能源投资开发 | asset-revaluation | tier-2 soft catalyst | scenario valuation / watchlist | 210.03 亿元 | 8.1% | material asset; include in SOTP/NAV watchlist with carrying-value, haircut, and upside scenarios | required: conservative=carrying value haircut, base=carrying value, upside=repricing only after a visible exit/IPO catalyst | Material verified ownership may become an upside lever if a catalyst emerges. | Without a catalyst, current carrying value may already be the cleanest anchor. |
+| 明阳新能源投资控股集团有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | 13.43 亿元 | 0.5% | verified but immaterial to core valuation | immaterial NAV item: note only unless multiple assets form a portfolio pattern | Useful as optionality, not as the spine of the thesis. | Argue that even full revaluation would not move listed-company value enough to matter. |
+| （含 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | 829.42 万元 | 0.0% | verified but immaterial to core valuation | immaterial NAV item: note only unless multiple assets form a portfolio pattern | Useful as optionality, not as the spine of the thesis. | Argue that even full revaluation would not move listed-company value enough to matter. |
+| 深圳康达炜电子技术有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 山特电子（深圳）有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 伊顿（中国）投资有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 机器人 | business-realization | tier-2 soft catalyst | scenario support only | not separately disclosed | N/A | real theme, not yet separately quantifiable | N/A | Shows strategic direction and may deserve qualitative optionality. | Keep it out of core valuation until revenue, profit, orders, or cash-flow contribution is separately evidenced. |
+| 阳光电源股份有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 截至 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | 2.43 亿元 | 0.1% | verified but immaterial to core valuation | immaterial NAV item: note only unless multiple assets form a portfolio pattern | Useful as optionality, not as the spine of the thesis. | Argue that even full revaluation would not move listed-company value enough to matter. |
+| 关于阳光电源股份有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 附有回购条款的投资款 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | 8.82 亿元 | 0.3% | verified but immaterial to core valuation | immaterial NAV item: note only unless multiple assets form a portfolio pattern | Useful as optionality, not as the spine of the thesis. | Argue that even full revaluation would not move listed-company value enough to matter. |
+| 预收储能租赁款 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | 3.95 亿元 | 0.2% | verified but immaterial to core valuation | immaterial NAV item: note only unless multiple assets form a portfolio pattern | Useful as optionality, not as the spine of the thesis. | Argue that even full revaluation would not move listed-company value enough to matter. |
+| 结构化主体少数股东应有权益 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | 4184.57 万元 | 0.0% | verified but immaterial to core valuation | immaterial NAV item: note only unless multiple assets form a portfolio pattern | Useful as optionality, not as the spine of the thesis. | Argue that even full revaluation would not move listed-company value enough to matter. |
+| 泰禾智能股权购买义务 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | 4.09 亿元 | 0.2% | verified but immaterial to core valuation | immaterial NAV item: note only unless multiple assets form a portfolio pattern | Useful as optionality, not as the spine of the thesis. | Argue that even full revaluation would not move listed-company value enough to matter. |
+| 远期结售汇 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | 2.69 亿元 | 0.1% | verified but immaterial to core valuation | immaterial NAV item: note only unless multiple assets form a portfolio pattern | Useful as optionality, not as the spine of the thesis. | Argue that even full revaluation would not move listed-company value enough to matter. |
+| 收回股权投资款 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | 1.96 亿元 | 0.1% | verified but immaterial to core valuation | immaterial NAV item: note only unless multiple assets form a portfolio pattern | Useful as optionality, not as the spine of the thesis. | Argue that even full revaluation would not move listed-company value enough to matter. |
+| 支付股权投资款 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | 3.84 亿元 | 0.1% | verified but immaterial to core valuation | immaterial NAV item: note only unless multiple assets form a portfolio pattern | Useful as optionality, not as the spine of the thesis. | Argue that even full revaluation would not move listed-company value enough to matter. |
+| 子公司少数股东减资支付少数股东投资款 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | 7571.58 万元 | 0.0% | verified but immaterial to core valuation | immaterial NAV item: note only unless multiple assets form a portfolio pattern | Useful as optionality, not as the spine of the thesis. | Argue that even full revaluation would not move listed-company value enough to matter. |
+| 合肥仁创二期股权投资合伙企业（有限合伙 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 合肥仁创四期创业投资合伙企业（有限合伙 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 合肥仁创投资管理中心（有限合伙 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 广东穗开恒阳新能源有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | 2.30 万元 | 0.0% | verified but immaterial to core valuation | immaterial NAV item: note only unless multiple assets form a portfolio pattern | Useful as optionality, not as the spine of the thesis. | Argue that even full revaluation would not move listed-company value enough to matter. |
+| 常德凌阳新能源有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | 1.46 万元 | 0.0% | verified but immaterial to core valuation | immaterial NAV item: note only unless multiple assets form a portfolio pattern | Useful as optionality, not as the spine of the thesis. | Argue that even full revaluation would not move listed-company value enough to matter. |
+| 广西恭城华电阳光新能源有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | 7629 元 | 0.0% | verified but immaterial to core valuation | immaterial NAV item: note only unless multiple assets form a portfolio pattern | Useful as optionality, not as the spine of the thesis. | Argue that even full revaluation would not move listed-company value enough to matter. |
+| 安徽众启新能源有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | 5396 元 | 0.0% | verified but immaterial to core valuation | immaterial NAV item: note only unless multiple assets form a portfolio pattern | Useful as optionality, not as the spine of the thesis. | Argue that even full revaluation would not move listed-company value enough to matter. |
+| 浙江上峰阳光新能源有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 业投资 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | 1.51 万元 | 0.0% | verified but immaterial to core valuation | immaterial NAV item: note only unless multiple assets form a portfolio pattern | Useful as optionality, not as the spine of the thesis. | Argue that even full revaluation would not move listed-company value enough to matter. |
+| 创业板交易型开放式指数证券投资基 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | 3117.42 万元 | 0.0% | verified but immaterial to core valuation | immaterial NAV item: note only unless multiple assets form a portfolio pattern | Useful as optionality, not as the spine of the thesis. | Argue that even full revaluation would not move listed-company value enough to matter. |
+| 存在的问题 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | 5.35 亿元 | 0.2% | verified but immaterial to core valuation | immaterial NAV item: note only unless multiple assets form a portfolio pattern | Useful as optionality, not as the spine of the thesis. | Argue that even full revaluation would not move listed-company value enough to matter. |
+| 合伙企业 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | 2295.33 万元 | 0.0% | verified but immaterial to core valuation | immaterial NAV item: note only unless multiple assets form a portfolio pattern | Useful as optionality, not as the spine of the thesis. | Argue that even full revaluation would not move listed-company value enough to matter. |
+| 公司控股股东及实际控制人曹仁贤先生持有合肥汇卓股权投资合伙企业（有限合伙 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 意阳光电源股份有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 附有回购义务的投资款 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | 8.47 亿元 | 0.3% | verified but immaterial to core valuation | immaterial NAV item: note only unless multiple assets form a portfolio pattern | Useful as optionality, not as the spine of the thesis. | Argue that even full revaluation would not move listed-company value enough to matter. |
+| （1）债务工具投资 | asset-revaluation | tier-2 soft catalyst | scenario valuation / watchlist | 75.11 亿元 | 2.9% | material asset; include in SOTP/NAV watchlist with carrying-value, haircut, and upside scenarios | required: conservative=carrying value haircut, base=carrying value, upside=repricing only after a visible exit/IPO catalyst | Material verified ownership may become an upside lever if a catalyst emerges. | Without a catalyst, current carrying value may already be the cleanest anchor. |
+| 合伙企业（有限合伙 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 合肥汇卓股权投资合伙企业（有限合伙 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| 仁洁智能科技有限公司 | asset-revaluation | tier-2 soft catalyst | qualitative optionality only | not separately disclosed | N/A | verified asset; do not quantify until holding value is disclosed | research gap: ownership/carrying value undisclosed; do not quantify | Could add optionality once a realizable asset value becomes observable. | Challenge ownership value, liquidity, dilution, lock-up, and whether any uplift is actually realizable. |
+| order-ramp | business-realization | tier-1 hard catalyst | scenario-to-core bridge eligible | 122.04 亿元 | 4.7% | eligible for scenario valuation, not automatic core valuation | N/A | Verified commercialization evidence can justify upside scenarios if revenue/profit contribution scales. | Test whether disclosed contribution is recurring, profitable, and large enough versus the existing business. |
+| new-product-commercialization | business-realization | tier-1 hard catalyst | scenario-to-core bridge eligible | not separately disclosed | N/A | eligible for scenario valuation, not automatic core valuation | N/A | Verified commercialization evidence can justify upside scenarios if revenue/profit contribution scales. | Test whether disclosed contribution is recurring, profitable, and large enough versus the existing business. |
+| capacity-release | business-realization | tier-1 hard catalyst | scenario-to-core bridge eligible | not separately disclosed | N/A | eligible for scenario valuation, not automatic core valuation | N/A | Verified commercialization evidence can justify upside scenarios if revenue/profit contribution scales. | Test whether disclosed contribution is recurring, profitable, and large enough versus the existing business. |
+| overseas-expansion | business-realization | tier-1 hard catalyst | scenario-to-core bridge eligible | not separately disclosed | N/A | eligible for scenario valuation, not automatic core valuation | N/A | Verified commercialization evidence can justify upside scenarios if revenue/profit contribution scales. | Test whether disclosed contribution is recurring, profitable, and large enough versus the existing business. |
+
+## Narrative Optionality Watchlist
+| candidate | kind | catalyst_tier | valuation_weight | source | evidence | story_read | proof_needed | credibility |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 云计算 | concept-membership | tier-3 narrative option | small imagination premium only | tushare concept_detail | concept_id=TS785; in_date=N/A | N/A | N/A | N/A |
+| 储能 | concept-membership | tier-3 narrative option | small imagination premium only | tushare concept_detail | concept_id=TS737; in_date=N/A | N/A | N/A | N/A |
+| 充电桩 | concept-membership | tier-3 narrative option | small imagination premium only | tushare concept_detail | concept_id=TS733; in_date=N/A | N/A | N/A | N/A |
+| 光伏概念 | concept-membership | tier-3 narrative option | small imagination premium only | tushare concept_detail | concept_id=TS732; in_date=N/A | N/A | N/A | N/A |
+| 同花顺漂亮100 | concept-membership | tier-3 narrative option | small imagination premium only | tushare concept_detail | concept_id=TS639; in_date=N/A | N/A | N/A | N/A |
+| 多晶硅 | concept-membership | tier-3 narrative option | small imagination premium only | tushare concept_detail | concept_id=TS591; in_date=N/A | N/A | N/A | N/A |
+| 太阳能 | concept-membership | tier-3 narrative option | small imagination premium only | tushare concept_detail | concept_id=TS575; in_date=N/A | N/A | N/A | N/A |
+| 年报预增 | concept-membership | tier-3 narrative option | small imagination premium only | tushare concept_detail | concept_id=TS537; in_date=N/A | N/A | N/A | N/A |
+| 新能源 | concept-membership | tier-3 narrative option | small imagination premium only | tushare concept_detail | concept_id=TS475; in_date=N/A | N/A | N/A | N/A |
+| 氢能源 | concept-membership | tier-3 narrative option | small imagination premium only | tushare concept_detail | concept_id=TS410; in_date=N/A | N/A | N/A | N/A |
+| 深股通 | concept-membership | tier-3 narrative option | small imagination premium only | tushare concept_detail | concept_id=TS354; in_date=N/A | N/A | N/A | N/A |
+| 能源互联网 | concept-membership | tier-3 narrative option | small imagination premium only | tushare concept_detail | concept_id=TS182; in_date=N/A | N/A | N/A | N/A |
+| 融券标的股 | concept-membership | tier-3 narrative option | small imagination premium only | tushare concept_detail | concept_id=TS147; in_date=N/A | N/A | N/A | N/A |
+| 融资标的股 | concept-membership | tier-3 narrative option | small imagination premium only | tushare concept_detail | concept_id=TS145; in_date=N/A | N/A | N/A | N/A |
+| 融资融券 | concept-membership | tier-3 narrative option | small imagination premium only | tushare concept_detail | concept_id=TS143; in_date=N/A | N/A | N/A | N/A |
+| 转融券标的 | concept-membership | tier-3 narrative option | small imagination premium only | tushare concept_detail | concept_id=TS108; in_date=N/A | N/A | N/A | N/A |
+| 阿里巴巴概念 | concept-membership | tier-3 narrative option | small imagination premium only | tushare concept_detail | concept_id=TS48; in_date=N/A | N/A | N/A | N/A |
+| 风电 | concept-membership | tier-3 narrative option | small imagination premium only | tushare concept_detail | concept_id=TS25; in_date=N/A | N/A | N/A | N/A |
+| unclassified | investor-interaction | tier-3 narrative option | small imagination premium only | cninfo_irm | Q: 请提供截止到2026年4月30日的股东人数。 / A: 感谢您对公司的关注。公司股东户数详见披露在深交所指定信息披露网站的定期报告内容，或可致电0551-65325617具体咨询。谢谢！ | official interaction without a mapped investable theme | manual review required | higher-official-signal |
+| unclassified | investor-interaction | tier-3 narrative option | small imagination premium only | cninfo_irm | Q: 请问贵公司制氢电解槽目前的销售情况如何？ / A: 感谢您对公司的关注。氢能业务稳定拓展中，订单良好。谢谢！ | official interaction without a mapped investable theme | manual review required | higher-official-signal |
+| unclassified | investor-interaction | tier-3 narrative option | small imagination premium only | cninfo_irm | Q: “市场传闻Q1储能业务出现了‘面粉比面包贵’的倒挂现象。请披露Q1储能系统的实际毛利率区间。对于碳酸锂等原材料涨价，公司是依靠牺牲毛利保份额，还是已通过新订单实现了成本传导？” / A: 感谢您对公司的关注。2026年一季度，公司储能业务毛利率约为30%，环比提升主要得益于收入确认的区域结构优化，高毛利区域（如欧洲市场）收入占比有所提升。针对碳酸锂价格波动带来的成本影响，不同区域市场的价格传导机制存在差异：在市场竞争格局相对稳定的... | official interaction without a mapped investable theme | manual review required | higher-official-signal |
+| unclassified | investor-interaction | tier-3 narrative option | small imagination premium only | cninfo_irm | Q: 现在美国对中国储能产品的关税是多少？2026年阳光电源还有美国的储能订单吗？如有的话，是增长还是减少？ / A: 感谢您对公司的关注。目前美国对中国储能产品关税是38.4%。2026年有新签订单，但受OBBBA法案政策调整影响，为充分利用安全港条款窗口期推进项目落地，很多客户已于2025年提前下单。谢谢！ | official interaction without a mapped investable theme | manual review required | higher-official-signal |
+| buyback-shareholder-return | investor-interaction | tier-3 narrative option | small imagination premium only | cninfo_irm | Q: 请问，我们小股东已经看到公司连续两个季度呈现下滑趋势，是否能给我们股东一个信心，公司在接下来的几个季度呈现如何变化，以及股票回购，提振信心 / A: 感谢您对公司的关注。经营数据请关注后续定期报告，谢谢！ | shareholder-return / valuation-support narrative | needs board approval, execution, and funding visibility | medium-official-signal |
+| unclassified | investor-interaction | tier-3 narrative option | small imagination premium only | cninfo_irm | Q: 合同负债122亿和预付款40亿是否意味着Q2交付量将大幅回升？请给出Q2营收和净利润环比增长的具体指引区间，而非模糊的“稳中向好 / A: 感谢您对公司的关注。经营数据请关注后续定期报告，谢谢！ | official interaction without a mapped investable theme | manual review required | medium-official-signal |
+| unclassified | investor-interaction | tier-3 narrative option | small imagination premium only | cninfo_irm | Q: 市场担心Q1营收下滑是需求问题。请问Q1储能出货量（GWh）是否同比正增长？若出货增长而营收下降，说明是价格问题；若出货也下降，则是需求问题。请明确Q2的排产计划是否环比提升？ / A: 感谢您对公司的关注。2026年一季度储能出货量同比持平，谢谢！ | official interaction without a mapped investable theme | manual review required | medium-official-signal |
+| unclassified | investor-interaction | tier-3 narrative option | small imagination premium only | cninfo_irm | Q: 请问，公司四季度业绩利润下滑，作为我们小股东，希望一季度变好，结果一季度数据更差。由此推断公司2026年二季度是否变差，无法恢复至以前的业绩增长？ / A: 感谢您对公司的关注。经营数据请关注后续定期报告，谢谢！ | official interaction without a mapped investable theme | manual review required | medium-official-signal |
+| unclassified | investor-interaction | tier-3 narrative option | small imagination premium only | cninfo_irm | Q: 请问，预付款项激增201%至40亿元，主要为预付材料款，主要是备货，提前锁定价格么？ / A: 感谢您对公司的关注。预付款项主要是预付的原材料采购款，主要为了锁定供货量。谢谢！ | official interaction without a mapped investable theme | manual review required | medium-official-signal |
+| unclassified | investor-interaction | tier-3 narrative option | small imagination premium only | cninfo_irm | Q: 董秘您好， 近日欧盟委员会已决定，欧盟资金（包括欧洲投资银行EIB等）将不再投向使用“高风险国家”逆变器的能源项目。考虑到欧洲是我司重要的海外市场，且ESMC声称西方厂商已有替代产能，特向您询问以下问题： 市场准入影响： 公司是否已评估该禁令对我司逆变器产品在欧洲市场（特别是依赖欧盟融资的大型地面电站项目）出货的具体影响？ 应对策略： 请问阳光电源具体的应对策略是什么。 非常感谢并期待您的回复。 / A: 感谢您对公司的关注。公司... | official interaction without a mapped investable theme | manual review required | higher-official-signal |
+| unclassified | investor-interaction | tier-3 narrative option | small imagination premium only | cninfo_irm | Q: 请公示截止到2月底的股东人数 / A: 感谢您对公司的关注。公司股东户数详见披露在深交所指定信息披露网站的定期报告内容，或可致电0551-65325617具体咨询。谢谢！ | official interaction without a mapped investable theme | manual review required | higher-official-signal |
+| unclassified | investor-interaction | tier-3 narrative option | small imagination premium only | cninfo_irm | Q: 请问贵司为啥把最近的一期业绩说明会的播放链接删除了啊？官方文字实录也删除了？ / A: 感谢您对公司的关注。公司于2026年4月1日在巨潮资讯网发布了《阳光电源投资者关系活动记录表20260331》，请予以关注。谢谢！ | official interaction without a mapped investable theme | manual review required | medium-official-signal |
+| unclassified | investor-interaction | tier-3 narrative option | small imagination premium only | cninfo_irm | Q: 你好，请问截止2026年4月6号股东人数是多少 / A: 感谢您对公司的关注。公司股东户数详见披露在深交所指定信息披露网站的定期报告内容，或可致电0551-65325617具体咨询。谢谢！ | official interaction without a mapped investable theme | manual review required | higher-official-signal |
+| unclassified | investor-interaction | tier-3 narrative option | small imagination premium only | cninfo_irm | Q: 请问，四季度业绩差是突发因素还是正常，接下来一季度是否延续四季度的突发因素？ / A: 感谢您对公司的关注。公司于2026年4月1日在巨潮资讯网发布了《阳光电源投资者关系活动记录表20260331》，对公司报告期经营情况做了相关说明，请予以关注。公司一季度经营情况请关注后续一季度报告，谢谢！ | official interaction without a mapped investable theme | manual review required | medium-official-signal |
+| buyback-shareholder-return | investor-interaction | tier-3 narrative option | small imagination premium only | cninfo_irm | Q: 贵司股价连续跌太多了，建议公司加大回购力度或者董事高管增持公司股票，做好市值管理 / A: 感谢您对公司的关注，我们会将建议转达至公司管理层。谢谢！ | shareholder-return / valuation-support narrative | needs board approval, execution, and funding visibility | medium-official-signal |
+| unclassified | investor-interaction | tier-3 narrative option | small imagination premium only | cninfo_irm | Q: 公司2026年一季度业绩预告，打算什么时候发出？ / A: 感谢您对公司的关注。公司一季度报告将于2026年4月27日晚披露，谢谢！ | official interaction without a mapped investable theme | manual review required | medium-official-signal |
+| 算力/数据中心 | investor-interaction | tier-3 narrative option | small imagination premium only | cninfo_irm | Q: 公司如何看待AI算力成为储能、光伏业务第二增长曲线，公司如何把握这一历史机遇？ / A: 感谢您对公司的关注。公司致力于为下一代AI数据中心提供高可靠、高效率、高功率密度的全栈式电源解决方案，产品线全面覆盖AIDC场景下的系统级电源、机架式电源及板载电源，尤其侧重在高压直流架构相关的系列产品。凭借多年沉淀的SST（固态变压器）技术、全功率段电力电子转换技术、电池管理技术等，公司将积极携手头部互联网企业及数据中心运营商，共同推动AI... | new-demand adjacency around power + computing infrastructure | needs revenue, order, or project economics before valuation uplift | medium-official-signal |
+| 算力/数据中心 | investor-interaction | tier-3 narrative option | small imagination premium only | cninfo_irm | Q: 算力行业对供电可靠性要求极高，公司的光储解决方案如何保障AI数据中心零断电、零故障，相关产品是否通过行业权威认证？ / A: 感谢您对公司的关注。公司的“三电融合”技术，通过电力电子、电化学、电网支撑的深度融合，可完美适配AIDC场景的需求。产品系统方案具备高功率密度、高可靠性、高经济性的差异化优势。未来，公司将持续深化与生态伙伴的合作，推动AIDC业务的规模化落地，为全球AI算力提供“稳定、高效、绿色”的能源支撑。谢谢！ | new-demand adjacency around power + computing infrastructure | needs revenue, order, or project economics before valuation uplift | medium-official-signal |
+
+## Cross-Source Theme Validation
+| theme | source_families | source_count | hard_evidence | cross_source_read | suggested_tier | upgrade_path |
+| --- | --- | --- | --- | --- | --- | --- |
+| buyback-shareholder-return | interaction | 1 | no | single-source narrative | tier-3 narrative option | collect independent corroboration |
+| capacity-release | filing | 1 | yes | latent hard catalyst; economic bridge exists but fetched corroboration is thin | tier-1 pending diligence | seek a second independent source or direct milestone |
+| compute-power | concept, interaction | 2 | no | corroborated narrative; multiple sources agree but economics remain unproven | tier-2 corroborated narrative | seek filing monetization evidence before core valuation |
+| new-product-commercialization | filing | 1 | yes | latent hard catalyst; economic bridge exists but fetched corroboration is thin | tier-1 pending diligence | seek a second independent source or direct milestone |
+| order-ramp | filing | 1 | yes | latent hard catalyst; economic bridge exists but fetched corroboration is thin | tier-1 pending diligence | seek a second independent source or direct milestone |
+| overseas-expansion | filing | 1 | yes | latent hard catalyst; economic bridge exists but fetched corroboration is thin | tier-1 pending diligence | seek a second independent source or direct milestone |
+| 云计算 | concept | 1 | no | single-source narrative | tier-3 narrative option | collect independent corroboration |
+| 储能 | concept | 1 | no | single-source narrative | tier-3 narrative option | collect independent corroboration |
+| 充电桩 | concept | 1 | no | single-source narrative | tier-3 narrative option | collect independent corroboration |
+| 光伏概念 | concept | 1 | no | single-source narrative | tier-3 narrative option | collect independent corroboration |
+| 同花顺漂亮100 | concept | 1 | no | single-source narrative | tier-3 narrative option | collect independent corroboration |
+| 多晶硅 | concept | 1 | no | single-source narrative | tier-3 narrative option | collect independent corroboration |
+| 太阳能 | concept | 1 | no | single-source narrative | tier-3 narrative option | collect independent corroboration |
+| 年报预增 | concept | 1 | no | single-source narrative | tier-3 narrative option | collect independent corroboration |
+| 新能源 | concept | 1 | no | single-source narrative | tier-3 narrative option | collect independent corroboration |
+| 氢能源 | concept | 1 | no | single-source narrative | tier-3 narrative option | collect independent corroboration |
+| 深股通 | concept | 1 | no | single-source narrative | tier-3 narrative option | collect independent corroboration |
+| 融券标的股 | concept | 1 | no | single-source narrative | tier-3 narrative option | collect independent corroboration |
+| 融资标的股 | concept | 1 | no | single-source narrative | tier-3 narrative option | collect independent corroboration |
+| 融资融券 | concept | 1 | no | single-source narrative | tier-3 narrative option | collect independent corroboration |
+| 转融券标的 | concept | 1 | no | single-source narrative | tier-3 narrative option | collect independent corroboration |
+| 阿里巴巴概念 | concept | 1 | no | single-source narrative | tier-3 narrative option | collect independent corroboration |
+| 风电 | concept | 1 | no | single-source narrative | tier-3 narrative option | collect independent corroboration |
+
+## Portfolio Pattern Check
+| verified_investee_count | realized_investment_signal | pattern_read |
+| --- | --- | --- |
+| 36 | yes | repeat-investor pattern worth explicit review: filings show multiple verified investees plus realized-investment language |
+
+## Analyst Instructions
+- Treat filing-origin candidates as the first-pass candidate pool for investee IPOs, asset listings, and verified new-business lines.
+- Treat filing-origin operating themes as bull support only when the filing itself contains a believable economic bridge such as orders, revenue, delivery, customers, commercialization, or capacity release; reject bare buzzwords without monetization evidence.
+- Treat news-origin candidates as unverified until annual or half-year report text supports the same investee, asset, or business line.
+- A candidate may influence valuation only after filing verification plus a clear economic transmission path, timetable, and materiality check.
+- Use a three-tier ladder: tier-1 hard catalysts can enter core/SOTP valuation; tier-2 soft catalysts can support scenario upside or probability; tier-3 narrative options from news, interaction, concept linkage, or media association may justify only a small imagination premium until filings verify them.
+- Keep economic hardness separate from evidence completeness. If a filing-backed theme has a real monetization bridge but the fetched corroboration is thin, mark it as tier-1 pending diligence / latent hard catalyst instead of demoting it to pure narrative or pretending proof is complete.
+- Asset-revaluation themes may enter SOTP/NAV only when ownership value is disclosed, material versus listed-company market cap, and realizability is discussed.
+- For material primary investments, build a NAV ladder instead of using a vague imagination premium: conservative value = carrying value with liquidity/exit haircut; base value = carrying value or latest financing/IPO reference with an explicit discount; upside value = exit/IPO repricing multiplied by probability and lock-up/liquidity haircuts. Keep this separate from operating earnings so the report does not confuse market theme value with recurring business profit.
+- After reviewing single investees, ask a second-level question: is there a repeatable capital-allocation pattern? If filings show multiple verified investees plus realized exits, investment income, or fair-value gains over time, discuss whether management's first-level investing capability itself is a durable bull factor rather than treating each asset as an isolated anecdote.
+- Business-realization themes may enter core valuation only when filings disclose monetization evidence such as revenue, profit, orders, or cash-flow contribution; otherwise keep them as qualitative optionality.
+- If report text extraction is unavailable, say so explicitly and do not pretend that news-only themes were verified.

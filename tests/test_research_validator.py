@@ -10,10 +10,13 @@ from tradingagents.evaluation.research_validator import (
     audit_canonical_financial_reconciliation,
     audit_pm_unit_scale_arithmetic,
     audit_position_valuation_consistency,
+    audit_public_forecast_growth_consistency,
     audit_public_key_number_consistency,
+    audit_rating_valuation_consistency,
     audit_report_redundancy,
     audit_public_process_leakage,
     audit_structured_research_usage,
+    audit_weighted_margin_arithmetic,
     render_post_generation_audit,
     _extract_rating,
     _extract_section,
@@ -606,11 +609,35 @@ def test_handoff_numeric_audit_blocks_silent_pm_change(tmp_path):
             "formula": "revenue x gross margin",
         }
     )
+    manager["canonical_model_snapshot"].append(
+        {
+            "line_id": "base_fair_value",
+            "period": "scenario",
+            "metric": "equity_value_weighted",
+            "value": 288083.0,
+            "unit": "CNY mn",
+        }
+    )
+    pm["canonical_model_snapshot"].append(
+        {
+            "line_id": "base_fair_value",
+            "period": "scenario",
+            "metric": "equity_value_weighted",
+            "value": 225250.0,
+            "unit": "CNY mn",
+            "status": "calculated",
+            "formula": "deterministic probability-weighted scenario equity value",
+        }
+    )
     (research_dir / "canonical_plan.json").write_text(json.dumps(manager), encoding="utf-8")
     (portfolio_dir / "canonical_decision.json").write_text(json.dumps(pm), encoding="utf-8")
 
     assert not any(
         "silently changed 2026e grossprofit" in issue.issue.lower()
+        for issue in audit_handoff_numeric_consistency(tmp_path)
+    )
+    assert not any(
+        "silently changed scenario equityvalueweighted" in issue.issue.lower()
         for issue in audit_handoff_numeric_consistency(tmp_path)
     )
 
@@ -762,6 +789,51 @@ def test_structured_audit_rejects_wrong_kpe_paired_with_ksi(tmp_path):
     )
 
 
+def test_structured_audit_accepts_string_kpe_ids_linked_to_ksi(tmp_path):
+    context_dir = tmp_path / "0_context"
+    portfolio_dir = tmp_path / "5_portfolio"
+    context_dir.mkdir()
+    portfolio_dir.mkdir()
+    bundle = {
+        "preprocessing_mode": "llm_semantic_plus_deterministic_validation",
+        "preprocessing_notes": [],
+        "deterministic_evidence": [],
+        "underwriting_packet": {},
+        "segments": [],
+        "kpe_impacts": [],
+        "sell_side_intelligence": [
+            {
+                "intelligence_id": "KSI01",
+                "kpe_ids": "KPE02",
+                "forecast_facts": "2027E EPS 5.0",
+            }
+        ],
+        "conflicts": [],
+    }
+    (context_dir / "structured_research.json").write_text(
+        json.dumps(bundle, ensure_ascii=False), encoding="utf-8"
+    )
+    (portfolio_dir / "canonical_decision.json").write_text(
+        json.dumps(
+            {
+                "sell_side_expectation_matrix": [
+                    {"source_ids": ["KSI01", "KPE02"]}
+                ]
+            },
+            ensure_ascii=False,
+        ),
+        encoding="utf-8",
+    )
+
+    issues = audit_structured_research_usage(tmp_path, "decision")
+
+    assert not any(
+        issue.section == "sell_side_expectation_lineage"
+        and issue.severity == "error"
+        for issue in issues
+    )
+
+
 def test_post_generation_integrity_recomputes_scenario_value():
     decision = (
         "| 情景 | 目标价 | 概率 | 期望值贡献 |\n"
@@ -818,6 +890,63 @@ def test_public_key_number_consistency_catches_conflicting_net_cash():
     )
 
     assert [issue.section for issue in issues] == ["public_key_number_consistency"]
+
+
+def test_public_forecast_growth_must_match_canonical_revenue(tmp_path):
+    portfolio_dir = tmp_path / "5_portfolio"
+    portfolio_dir.mkdir()
+    (portfolio_dir / "canonical_decision.json").write_text(
+        json.dumps(
+            {
+                "canonical_model_snapshot": [
+                    {"period": "2026E", "metric": "revenue", "value": 27600},
+                    {"period": "2027E", "metric": "revenue", "value": 32300},
+                ]
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    issues = audit_public_forecast_growth_consistency(
+        tmp_path,
+        "FY27E收入增速下调至+25%，反映产能慢速爬坡。",
+    )
+
+    assert [issue.section for issue in issues] == [
+        "public_forecast_growth_consistency"
+    ]
+    assert "17.0%" in issues[0].issue
+
+
+def test_weighted_margin_equation_is_recalculated():
+    issues = audit_weighted_margin_arithmetic(
+        "AI收入占比60% × AI毛利率36% + 非AI收入占比40% × 非AI毛利率27% → 综合毛利率34.0%。"
+    )
+
+    assert [issue.section for issue in issues] == ["weighted_margin_arithmetic"]
+    assert "32.40%" in issues[0].issue
+
+
+def test_positive_rating_cannot_have_negative_deterministic_return(tmp_path):
+    portfolio_dir = tmp_path / "5_portfolio"
+    portfolio_dir.mkdir()
+    (portfolio_dir / "canonical_decision.json").write_text(
+        json.dumps(
+            {
+                "rating": "Buy",
+                "deterministic_valuation": {
+                    "status": "closed",
+                    "expected_return_pct": -12.0,
+                },
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    issues = audit_rating_valuation_consistency(tmp_path)
+
+    assert [issue.section for issue in issues] == ["rating_valuation_consistency"]
+    assert issues[0].severity == "error"
 
 
 def test_position_instruction_cannot_exceed_deterministic_safe_ceiling(tmp_path):

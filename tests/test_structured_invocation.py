@@ -16,6 +16,7 @@ from tradingagents.agents.managers.portfolio_manager import (
     _canonical_handoff_issues,
     _editorial_revision_prompt,
     _enforce_forecast_methodology,
+    _merge_manager_canonical_snapshot,
     _normalize_sell_side_lineage,
 )
 from tradingagents.agents.managers.research_manager import (
@@ -332,6 +333,34 @@ def test_sell_side_lineage_replaces_invented_alias_with_exact_ksi_id():
     assert notes
 
 
+def test_sell_side_lineage_drops_unlinked_kpe_claim():
+    payload, notes = _normalize_sell_side_lineage(
+        {
+            "sell_side_expectation_matrix": [
+                {
+                    "source_ids": ["KSI01", "KPE02"],
+                    "institution": "未公开渠道",
+                    "published_at": "2026-07-02",
+                    "forecast_and_valuation": "FY26利润预测",
+                    "comparison_with_our_model": "低于本模型",
+                }
+            ]
+        },
+        {
+            "sell_side_intelligence": [
+                {
+                    "intelligence_id": "KSI01",
+                    "kpe_ids": [],
+                    "institution": "未公开渠道",
+                }
+            ]
+        },
+    )
+
+    assert payload["sell_side_expectation_matrix"][0]["source_ids"] == ["KSI01"]
+    assert notes
+
+
 def test_deterministic_pm_engine_calculates_eps_fcf_scenarios_and_safe_price():
     payload = {
         "rating": "Hold", "rating_posture": "Hold / Positive Watch", "research_readiness": "partial",
@@ -339,17 +368,47 @@ def test_deterministic_pm_engine_calculates_eps_fcf_scenarios_and_safe_price():
         "investment_conclusion_and_core_conflict": "Conclusion.",
         "canonical_model_snapshot": [
             {"line_id": "shares", "period": "current", "metric": "diluted_share_count", "value": 2000, "unit": "mn shares", "status": "calculated"},
+            {"line_id": "base_fair_value", "period": "scenario", "metric": "equity_value_weighted", "value": 999, "unit": "CNY mn", "status": "calculated"},
+            {"line_id": "2027E_revenue", "period": "2027E", "metric": "revenue", "value": 20000, "unit": "CNY mn", "status": "estimated"},
+            {"line_id": "2028E_revenue", "period": "2028E", "metric": "revenue", "value": 30000, "unit": "CNY mn", "status": "estimated"},
+            {"line_id": "2028E_gross_margin", "period": "2028E", "metric": "gross_margin", "value": 40, "unit": "%", "status": "estimated"},
+            {"line_id": "2028E_cost", "period": "2028E", "metric": "costofsales", "value": 1, "unit": "CNY mn", "status": "estimated"},
+            {"line_id": "2028E_operating_profit", "period": "2028E", "metric": "operatingprofit", "value": 15000, "unit": "CNY mn", "status": "estimated"},
+            {"line_id": "2028E_operating_margin", "period": "2028E", "metric": "operatingmargin", "value": 1, "unit": "%", "status": "estimated"},
+            {"line_id": "2028E_net_margin", "period": "2028E", "metric": "netmargin", "value": 1, "unit": "%", "status": "estimated"},
             {"line_id": "2028E_profit", "period": "2028E", "metric": "parent_net_profit", "value": 12000, "unit": "CNY mn", "status": "estimated"},
             {"line_id": "2028E_ocf", "period": "2028E", "metric": "ocf", "value": 13000, "unit": "CNY mn", "status": "estimated"},
             {"line_id": "2028E_capex", "period": "2028E", "metric": "capex", "value": 3000, "unit": "CNY mn", "status": "estimated"},
         ],
         "company_disaggregation": "Company economics.", "industry_cycle_and_competition": "Industry cycle.",
-        "autonomous_forecast_model": "Forecast explanation.",
-        "thesis_financial_bridge": "Thesis bridge with counter and falsification.",
-        "moat_evidence_scorecard": "Moat evidence.", "valuation_closure": "Method limits.",
+        "forecast_assumptions": [
+            {
+                "parameter": "FY28E revenue growth",
+                "affected_business": "group",
+                "historical_anchor": "FY27E canonical revenue",
+                "evidence_status": "analyst_estimate",
+                "base_case": "+20%",
+                "bull_case": "+60%",
+                "bear_case": "+10%",
+                "rationale_and_evidence": "capacity ramp",
+                "sensitivity": "1pp",
+                "confidence": "medium",
+                "verification_gate": "FY28 filing",
+            }
+        ],
+        "autonomous_forecast_model": "FY28E revenue growth is +20% on capacity ramp.",
+        "thesis_financial_bridge": (
+            "AI收入占比60% × AI毛利率36% + 非AI收入占比40% × 非AI毛利率27% "
+            "→ 综合毛利率34.0% → FY26E净利润。"
+        ),
+        "moat_evidence_scorecard": "Moat evidence.",
+        "valuation_closure": "Method limits.\n- 概率加权股权价值 = 999亿元，预期收益2.7%。",
         "accounting_and_capital_allocation": "Accounting quality.",
         "expectation_gap_and_market_pricing": "Expectation gap.",
-        "risks_catalysts_verification": "首仓40%已于126元附近建立。Risk and verification.",
+        "risks_catalysts_verification": (
+            "首仓40%已于126元附近建立。Risk and verification.\n"
+            "- 股价低于240元可以启动分批建仓。"
+        ),
         "handoff_change_rows": [
             {
                 "line_id": "2028E_ocf_to_ni_ratio",
@@ -436,6 +495,9 @@ def test_deterministic_pm_engine_calculates_eps_fcf_scenarios_and_safe_price():
     line_map = {(row.period, row.metric): row for row in decision.canonical_model_snapshot}
 
     assert round(line_map[("2028E", "eps")].value, 2) == 6.00
+    assert line_map[("2028E", "costofsales")].value == 18000
+    assert line_map[("2028E", "operatingmargin")].value == 50
+    assert line_map[("2028E", "netmargin")].value == 40
     assert line_map[("2028E", "ocf")].value == 16800
     assert line_map[("2028E", "ocf")].status == "calculated"
     assert line_map[("2028E", "fcf")].value == 13800
@@ -446,8 +508,28 @@ def test_deterministic_pm_engine_calculates_eps_fcf_scenarios_and_safe_price():
     assert round(decision.deterministic_valuation.safe_buy_price_ceiling_cny, 2) == 80.00
     assert any("added deterministic 2028E EPS" in note for note in notes)
     assert any("excluded overlapping optionality" in note for note in notes)
+    assert any("reconciled 2028E revenue growth assumption to +50.0%" in note for note in notes)
+    assert any("public revenue growth claim" in note for note in notes)
+    assert any("unreconciled segment margin bridge" in note for note in notes)
+    assert any("synchronized weighted equity value" in note for note in notes)
+    assert any("manual deterministic valuation" in note for note in notes)
+    assert any("unsafe buy/build" in note for note in notes)
+    weighted_line = next(
+        row for row in decision.canonical_model_snapshot
+        if row.line_id == "base_fair_value"
+    )
+    assert weighted_line.value == 203600
+    assert decision.forecast_assumptions[0].base_case.startswith("+50.0%")
+    assert "+50.0%" in decision.autonomous_forecast_model
+    assert "+20%" not in decision.autonomous_forecast_model
+    assert "分部毛利率桥已撤销" in decision.thesis_financial_bridge
+    assert "综合毛利率34.0% →" not in decision.thesis_financial_bridge
     assert "高于程序化安全买入上限" in decision.rating_posture
     assert "首仓40%" not in decision.risks_catalysts_verification
+    assert "240元" not in decision.risks_catalysts_verification
+    assert "999亿元" not in decision.valuation_closure
+    normalized_twice, _ = normalize_sell_side_pm_decision(decision)
+    assert normalized_twice.risks_catalysts_verification.count("程序化执行约束") == 1
     rendered = render_sell_side_pm_decision(decision)
     assert "| 基准 |" in rendered
     assert "incremental_equity_value" not in rendered
@@ -490,6 +572,53 @@ def test_handoff_check_detects_only_undocumented_material_changes():
     assert _canonical_handoff_issues(manager, pm) == []
 
 
+def test_pm_deterministically_restores_omitted_canonical_lines_and_changes():
+    manager = {
+        "canonical_model_snapshot": [
+            {"line_id": "2027E_revenue", "value": 32300, "unit": "CNY mn"},
+            {"line_id": "2027E_grossmargin", "value": 33.5, "unit": "%"},
+        ]
+    }
+    pm = {
+        "canonical_model_snapshot": [
+            {"line_id": "2027E_revenue", "value": 40000, "unit": "CNY mn"},
+            {"line_id": "2027E_eps", "value": 6.4, "unit": "CNY/share"},
+        ],
+        "handoff_change_rows": [],
+    }
+
+    merged, notes = _merge_manager_canonical_snapshot(manager, pm)
+    rows = {row["line_id"]: row for row in merged["canonical_model_snapshot"]}
+
+    assert rows["2027E_revenue"]["value"] == 32300
+    assert rows["2027E_grossmargin"]["value"] == 33.5
+    assert rows["2027E_eps"]["value"] == 6.4
+    assert "restored undocumented canonical change 2027e_revenue" in notes
+    assert "restored omitted canonical line 2027e_grossmargin" in notes
+    assert _canonical_handoff_issues(manager, merged) == []
+
+
+def test_pm_merge_keeps_explicitly_accepted_canonical_change():
+    manager = {
+        "canonical_model_snapshot": [
+            {"line_id": "2027E_revenue", "value": 32300, "unit": "CNY mn"},
+        ]
+    }
+    pm = {
+        "canonical_model_snapshot": [
+            {"line_id": "2027E_revenue", "value": 34500, "unit": "CNY mn"},
+        ],
+        "handoff_change_rows": [
+            {"line_id": "2027E_revenue", "disposition": "accepted"},
+        ],
+    }
+
+    merged, notes = _merge_manager_canonical_snapshot(manager, pm)
+
+    assert merged["canonical_model_snapshot"][0]["value"] == 34500
+    assert notes == []
+
+
 def test_handoff_check_allows_program_recalculated_ocf():
     manager = {
         "canonical_model_snapshot": [
@@ -504,6 +633,28 @@ def test_handoff_check_allows_program_recalculated_ocf():
                 "unit": "CNY mn",
                 "status": "calculated",
                 "formula": "OCF = parent net profit x accepted OCF/NI ratio (1.4x)",
+            },
+        ],
+        "handoff_change_rows": [],
+    }
+
+    assert _canonical_handoff_issues(manager, pm) == []
+
+
+def test_handoff_check_allows_program_recalculated_weighted_valuation():
+    manager = {
+        "canonical_model_snapshot": [
+            {"line_id": "base_fair_value", "value": 288083, "unit": "CNY mn"},
+        ]
+    }
+    pm = {
+        "canonical_model_snapshot": [
+            {
+                "line_id": "base_fair_value",
+                "value": 225250,
+                "unit": "CNY mn",
+                "status": "calculated",
+                "formula": "deterministic probability-weighted scenario equity value",
             },
         ],
         "handoff_change_rows": [],

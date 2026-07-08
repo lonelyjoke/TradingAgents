@@ -953,14 +953,17 @@ def _canonical_metric_name(metric: str) -> str:
     raw = re.sub(r"[^a-z0-9\u4e00-\u9fff]+", "", str(metric or "").lower())
     aliases = {
         "consolidatedrevenue": "revenue", "revenue": "revenue", "营业收入": "revenue",
+        "costofsales": "cost_of_sales", "consolidatedcostofsales": "cost_of_sales", "营业成本": "cost_of_sales",
         "consolidatedgrossmargin": "gross_margin", "grossmargin": "gross_margin", "毛利率": "gross_margin",
         "grossprofit": "gross_profit", "consolidatedgrossprofit": "gross_profit", "毛利润": "gross_profit",
         "operatingprofit": "operating_profit", "consolidatedoperatingprofit": "operating_profit", "营业利润": "operating_profit",
+        "operatingmargin": "operating_margin", "consolidatedoperatingmargin": "operating_margin", "营业利润率": "operating_margin",
         "financeandotheritems": "finance_other", "financeotheritems": "finance_other", "财务及其他项目": "finance_other",
         "pretaxprofit": "pretax_profit", "profittotal": "pretax_profit", "利润总额": "pretax_profit",
         "incometax": "income_tax", "incometaxexpense": "income_tax", "所得税": "income_tax",
         "minorityinterest": "minority_interest", "minorityinterests": "minority_interest", "少数股东损益": "minority_interest",
         "parentnetprofit": "parent_profit", "consolidatedparentnetprofit": "parent_profit", "归母净利润": "parent_profit",
+        "netmargin": "net_margin", "consolidatednetmargin": "net_margin", "净利率": "net_margin",
         "eps": "eps", "epsbasic": "eps", "dilutedeps": "eps", "每股收益": "eps",
         "operatingcashflow": "ocf", "ocf": "ocf", "经营活动现金流净额": "ocf",
         "capitalexpenditure": "capex", "capex": "capex", "资本开支": "capex",
@@ -989,8 +992,9 @@ def _display_number(value: float | None) -> str:
 
 def _render_reader_forecast_table(lines: list[CanonicalModelLine]) -> str:
     labels = {
-        "revenue": "营业收入", "gross_margin": "毛利率", "gross_profit": "毛利润",
-        "operating_profit": "营业利润", "parent_profit": "归母净利润", "eps": "EPS",
+        "revenue": "营业收入", "cost_of_sales": "营业成本", "gross_margin": "毛利率", "gross_profit": "毛利润",
+        "operating_profit": "营业利润", "operating_margin": "营业利润率",
+        "parent_profit": "归母净利润", "net_margin": "净利率", "eps": "EPS",
         "ocf": "经营现金流", "capex": "资本开支", "fcf": "自由现金流",
     }
     order = list(labels)
@@ -2406,12 +2410,46 @@ def normalize_sell_side_pm_decision(
                 if old is None or abs(float(old) - calculated_gp) > max(abs(calculated_gp) * 0.005, 1.0):
                     notes.append(f"replaced {period} gross profit {old} -> {calculated_gp:.4f}")
                 gross_profit.update(value=calculated_gp, status="calculated", formula="revenue x gross margin")
+            cost_of_sales = by_metric_period.get(("cost_of_sales", period))
+            calculated_cost = float(revenue["value"]) - calculated_gp
+            if cost_of_sales is None:
+                cost_of_sales = {
+                    "line_id": f"{period}_cost_of_sales",
+                    "period": period,
+                    "metric": "cost_ofsales",
+                    "value": calculated_cost,
+                    "unit": str(revenue.get("unit", "CNY mn")),
+                    "status": "calculated",
+                    "evidence_ids": list(gross_profit.get("evidence_ids", [])),
+                    "formula": "revenue - gross profit",
+                }
+                lines.append(cost_of_sales)
+                by_metric_period[("cost_of_sales", period)] = cost_of_sales
+            else:
+                old = cost_of_sales.get("value")
+                if old is None or abs(float(old) - calculated_cost) > max(abs(calculated_cost) * 0.005, 1.0):
+                    notes.append(f"replaced {period} cost of sales {old} -> {calculated_cost:.4f}")
+                cost_of_sales.update(
+                    value=calculated_cost,
+                    status="calculated",
+                    formula="revenue - gross profit",
+                )
 
         operating_profit = by_metric_period.get(("operating_profit", period))
         finance_other = by_metric_period.get(("finance_other", period))
         income_tax = by_metric_period.get(("income_tax", period))
         minority = by_metric_period.get(("minority_interest", period))
         parent_profit = by_metric_period.get(("parent_profit", period))
+        if revenue and revenue.get("value") not in (None, 0) and operating_profit and operating_profit.get("value") is not None:
+            calculated_margin = float(operating_profit["value"]) / float(revenue["value"]) * 100.0
+            operating_margin = by_metric_period.get(("operating_margin", period))
+            if operating_margin is not None:
+                operating_margin.update(
+                    value=calculated_margin,
+                    unit="%",
+                    status="calculated",
+                    formula="operating profit / revenue",
+                )
         if all(
             row is not None and row.get("value") is not None
             for row in (operating_profit, finance_other, income_tax, minority)
@@ -2443,6 +2481,17 @@ def normalize_sell_side_pm_decision(
                     value=calculated_parent,
                     status="calculated",
                     formula="operating profit + finance/other - tax - minority interest",
+                )
+
+        if revenue and revenue.get("value") not in (None, 0) and parent_profit and parent_profit.get("value") is not None:
+            calculated_margin = float(parent_profit["value"]) / float(revenue["value"]) * 100.0
+            net_margin = by_metric_period.get(("net_margin", period))
+            if net_margin is not None:
+                net_margin.update(
+                    value=calculated_margin,
+                    unit="%",
+                    status="calculated",
+                    formula="parent net profit / revenue",
                 )
 
         ocf = by_metric_period.get(("ocf", period))
@@ -2508,6 +2557,201 @@ def normalize_sell_side_pm_decision(
             if old is None or abs(float(old) - fcf_value) > max(abs(fcf_value) * 0.01, 1.0):
                 notes.append(f"replaced {period} FCF {old} -> {fcf_value:.4f}")
             fcf.update(value=fcf_value, status="calculated", formula="OCF - abs(capex)")
+
+    # A growth assumption must reconcile to the canonical revenue series.  The
+    # model can explain the driver, but application code owns the arithmetic.
+    revenue_by_period = {
+        str(row.get("period", "")): float(row["value"])
+        for row in lines
+        if _metric(row) == "revenue" and row.get("value") is not None
+    }
+    growth_by_period: dict[str, float] = {}
+    for period, current in revenue_by_period.items():
+        match = re.fullmatch(r"(20\d{2})E", period, re.I)
+        if not match:
+            continue
+        prior_period = f"{int(match.group(1)) - 1}E"
+        prior = revenue_by_period.get(prior_period)
+        if prior not in (None, 0):
+            growth_by_period[period] = (current / prior - 1.0) * 100.0
+
+    def _reconcile_public_revenue_growth(text: object) -> tuple[str, int]:
+        rendered = str(text or "")
+        replacements = 0
+        for period, growth in growth_by_period.items():
+            year = period[:4]
+            period_pattern = rf"(?:FY)?{year[-2:]}E|{year}E"
+            lines_out: list[str] = []
+            for line in rendered.splitlines():
+                if (
+                    re.search(period_pattern, line, re.I)
+                    and not re.search(r"牛市|熊市|bull|bear|敏感", line, re.I)
+                ):
+                    pattern = re.compile(
+                        rf"((?:(?:FY)?(?:{year[-2:]}|{year})E).{{0,8}}?"
+                        r"(?:收入|营收|revenue).{0,24}?(?:增速|增长|growth)"
+                        r"[^\d+\-]{0,16})([+\-]?\d+(?:\.\d+)?)(\s*%)",
+                        re.I,
+                    )
+                    line, count = pattern.subn(
+                        lambda match: match.group(1) + f"{growth:+.1f}" + match.group(3),
+                        line,
+                        count=1,
+                    )
+                    replacements += count
+                    compact_pattern = re.compile(
+                        rf"((?:FY)?(?:{year[-2:]}|{year})E\s*"
+                        r"[\d,.]+\s*(?:亿元|CNY\s*(?:mn|bn))\s*[（(])"
+                        r"([+\-]?\d+(?:\.\d+)?)(\s*%[）)])",
+                        re.I,
+                    )
+                    line, count = compact_pattern.subn(
+                        lambda match: match.group(1) + f"{growth:+.1f}" + match.group(3),
+                        line,
+                        count=1,
+                    )
+                    replacements += count
+                lines_out.append(line)
+            rendered = "\n".join(lines_out)
+        return rendered, replacements
+
+    public_growth_fields = (
+        "investment_conclusion_and_core_conflict",
+        "company_disaggregation",
+        "industry_cycle_and_competition",
+        "autonomous_forecast_model",
+        "thesis_financial_bridge",
+        "accounting_and_capital_allocation",
+        "expectation_gap_and_market_pricing",
+        "valuation_closure",
+        "risks_catalysts_verification",
+    )
+    growth_replacements = 0
+    for field in public_growth_fields:
+        reconciled, count = _reconcile_public_revenue_growth(payload.get(field, ""))
+        payload[field] = reconciled
+        growth_replacements += count
+    for row in payload.get("forecast_takeaways", []) or []:
+        for field in ("takeaway", "evidence_anchor", "financial_implication", "confidence_and_risk"):
+            reconciled, count = _reconcile_public_revenue_growth(row.get(field, ""))
+            row[field] = reconciled
+            growth_replacements += count
+    for row in payload.get("core_theses", []) or []:
+        for field in ("takeaway", "financial_transmission", "market_pricing", "falsification_gate"):
+            reconciled, count = _reconcile_public_revenue_growth(row.get(field, ""))
+            row[field] = reconciled
+            growth_replacements += count
+    if growth_replacements:
+        notes.append(
+            f"reconciled {growth_replacements} public revenue growth claim(s) to canonical series"
+        )
+
+    for assumption in payload.get("forecast_assumptions", []) or []:
+        parameter = str(assumption.get("parameter", ""))
+        if not re.search(r"revenue\s*growth|收入增速", parameter, re.I):
+            continue
+        match = re.search(r"(?:FY)?(20\d{2}|\d{2})E", parameter, re.I)
+        if not match:
+            continue
+        year = int(match.group(1))
+        if year < 100:
+            year += 2000
+        period = f"{year}E"
+        prior_period = f"{year - 1}E"
+        current = revenue_by_period.get(period)
+        prior = revenue_by_period.get(prior_period)
+        if current is None or prior in (None, 0):
+            continue
+        growth = (current / prior - 1.0) * 100.0
+        old = str(assumption.get("base_case", ""))
+        assumption["base_case"] = (
+            f"{growth:+.1f}% ({current:,.0f} CNY mn; calculated from "
+            f"canonical {prior_period}/{period} revenue)"
+        )
+        if old != assumption["base_case"]:
+            notes.append(
+                f"reconciled {period} revenue growth assumption to {growth:+.1f}%"
+            )
+
+    # Segment mix/margin figures are often analytical estimates while the
+    # consolidated margin is anchored to reported accounts.  If an LLM writes
+    # an explicit weighted equation that does not add up, withdraw that bridge
+    # instead of silently plugging one segment to force the consolidated line.
+    weighted_margin_pattern = re.compile(
+        r"(\d+(?:\.\d+)?)\s*%\s*[×x*]\s*[^+\n]{0,80}?"
+        r"(\d+(?:\.\d+)?)\s*%\s*\+\s*[^%\n]{0,40}?"
+        r"(\d+(?:\.\d+)?)\s*%\s*[×x*]\s*[^=→\n]{0,80}?"
+        r"(\d+(?:\.\d+)?)\s*%\s*(?:=|→)\s*[^\d\n]{0,24}"
+        r"(\d+(?:\.\d+)?)\s*%",
+        re.I,
+    )
+    fy26_gm = by_metric_period.get(("gross_margin", "2026E"))
+    canonical_gm = (
+        float(fy26_gm["value"])
+        if fy26_gm is not None and fy26_gm.get("value") is not None
+        else None
+    )
+
+    def _withdraw_bad_segment_margin_bridge(text: object) -> tuple[str, int]:
+        output_lines: list[str] = []
+        withdrawals = 0
+        for line in str(text or "").splitlines():
+            match = weighted_margin_pattern.search(line)
+            if not match:
+                output_lines.append(line)
+                continue
+            weight_a, margin_a, weight_b, margin_b, stated = map(float, match.groups())
+            total_weight = weight_a + weight_b
+            if total_weight <= 0 or abs(total_weight - 100.0) > 2.0:
+                output_lines.append(line)
+                continue
+            calculated = (weight_a * margin_a + weight_b * margin_b) / total_weight
+            if abs(calculated - stated) <= 0.2:
+                output_lines.append(line)
+                continue
+            canonical_note = (
+                f"FY26E合并毛利率{canonical_gm:.1f}%仅作为基于合并报表历史锚的情景假设，"
+                if canonical_gm is not None
+                else "合并毛利率仅保留为独立情景假设，"
+            )
+            output_lines.append(
+                "分部毛利率桥已撤销：现有分部估计机械加权为"
+                f"{calculated:.1f}%，与原文{stated:.1f}%不一致，且公司未披露相关分部毛利率。"
+                + canonical_note
+                + "不得由该分部拆分证明；待正式分部披露后重建。"
+            )
+            withdrawals += 1
+        return "\n".join(output_lines), withdrawals
+
+    margin_bridge_fields = (
+        "investment_conclusion_and_core_conflict",
+        "company_disaggregation",
+        "autonomous_forecast_model",
+        "thesis_financial_bridge",
+        "expectation_gap_and_market_pricing",
+        "valuation_closure",
+    )
+    margin_withdrawals = 0
+    for field in margin_bridge_fields:
+        reconciled, count = _withdraw_bad_segment_margin_bridge(payload.get(field, ""))
+        payload[field] = reconciled
+        margin_withdrawals += count
+    for row in payload.get("core_theses", []) or []:
+        reconciled, count = _withdraw_bad_segment_margin_bridge(
+            row.get("financial_transmission", "")
+        )
+        row["financial_transmission"] = reconciled
+        margin_withdrawals += count
+    for row in payload.get("question_verdicts", []) or []:
+        reconciled, count = _withdraw_bad_segment_margin_bridge(
+            row.get("model_or_valuation_effect", "")
+        )
+        row["model_or_valuation_effect"] = reconciled
+        margin_withdrawals += count
+    if margin_withdrawals:
+        notes.append(
+            f"withdrew {margin_withdrawals} unreconciled segment margin bridge(s)"
+        )
 
     # Income-statement reconciliation above may have replaced parent profit;
     # make EPS the final dependent calculation, never an LLM-authored residue.
@@ -2639,12 +2883,67 @@ def normalize_sell_side_pm_decision(
                 output.formula_notes.append(
                     "incremental bull-vs-base optionality excluded because it overlaps scenario value"
                 )
+
+            # Keep any inherited weighted-equity-value snapshot synchronized
+            # with the deterministic scenario engine.  This prevents stale
+            # pre-debate valuation rows from surviving beside the final table.
+            weighted_equity_value = weighted * shares
+            for line in lines:
+                raw_metric = re.sub(
+                    r"[^a-z0-9]+", "", str(line.get("metric", "")).lower()
+                )
+                raw_id = re.sub(
+                    r"[^a-z0-9]+", "", str(line.get("line_id", "")).lower()
+                )
+                if raw_metric == "equityvalueweighted" or raw_id == "basefairvalue":
+                    old = line.get("value")
+                    line.update(
+                        value=weighted_equity_value,
+                        unit="CNY mn",
+                        status="calculated",
+                        formula="deterministic probability-weighted scenario equity value",
+                    )
+                    if old != weighted_equity_value:
+                        notes.append(
+                            "synchronized weighted equity value "
+                            f"{old} -> {weighted_equity_value:.4f}"
+                        )
         else:
             output.status = "partial"
             output.formula_notes = [f"scenario probabilities must sum to 100%; got {probability_total:.2f}%"]
     elif assumptions.scenarios:
         output.status = "partial"
         output.formula_notes = ["valuation requires bull/base/bear inputs and a validated diluted share count"]
+
+    if output.status == "closed":
+        # The application-owned table is the sole source for scenario values,
+        # weighted fair value, expected return and safety prices.  Remove stale
+        # hand calculations from LLM prose while preserving method rationale.
+        valuation_lines = str(payload.get("valuation_closure", "") or "").splitlines()
+        deterministic_terms = re.compile(
+            r"概率加权|加权股权价值|加权内在价值|每股价值|公允价值|目标价|"
+            r"安全买入价|预期收益|expected\s+return|weighted\s+(?:value|equity)",
+            re.I,
+        )
+        kept_lines: list[str] = []
+        removed_manual_values = 0
+        for line in valuation_lines:
+            has_number = bool(re.search(r"\d", line))
+            has_manual_math = bool(re.search(r"[=×*]|\bx\b", line, re.I))
+            if deterministic_terms.search(line) and (has_number or has_manual_math):
+                removed_manual_values += 1
+                continue
+            kept_lines.append(line)
+        if removed_manual_values:
+            kept_text = "\n".join(kept_lines).strip()
+            payload["valuation_closure"] = (
+                kept_text
+                + ("\n\n" if kept_text else "")
+                + "情景价值、概率加权结果、预期收益与安全价格以本节程序化估值表为唯一数值口径。"
+            )
+            notes.append(
+                f"removed {removed_manual_values} manual deterministic valuation line(s) from prose"
+            )
 
     if (
         output.status == "closed"
@@ -2665,12 +2964,45 @@ def normalize_sell_side_pm_decision(
             "新资金等待价格进入安全区间或基本面证据推动估值输入上修。"
         )
         execution_field = str(payload.get("risks_catalysts_verification", "") or "")
+        # Normalization may run more than once (generation, revision, render).
+        # Remove the previous application-owned constraint before inserting the
+        # current one so the public report never duplicates it.
+        execution_field = re.sub(
+            r"\*\*程序化执行约束\*\*：[^\n]*(?:\n\n)?",
+            "",
+            execution_field,
+        )
         execution_field = re.sub(
             r"(?:首仓|初始仓位)[^。；\n]{0,160}(?:建立|建仓)[^。；\n]*[。；]?",
             "",
             execution_field,
             flags=re.I,
         )
+        safe_lines: list[str] = []
+        removed_unsafe_lines = 0
+        affirmative_build = re.compile(
+            r"(?:建议|可以|可考虑|启动|分批|逐步|择机).{0,24}(?:买入|建仓|加仓)|"
+            r"(?:买入|建仓|加仓).{0,24}(?:建议|可以|可考虑|启动|分批|逐步|择机)",
+            re.I,
+        )
+        for line in execution_field.splitlines():
+            prices = [
+                float(value)
+                for value in re.findall(r"(\d+(?:\.\d+)?)\s*元", line)
+            ]
+            if (
+                prices
+                and max(prices) > output.safe_buy_price_ceiling_cny * 1.02
+                and affirmative_build.search(line)
+            ):
+                removed_unsafe_lines += 1
+                continue
+            safe_lines.append(line)
+        execution_field = "\n".join(safe_lines).strip()
+        if removed_unsafe_lines:
+            notes.append(
+                f"removed {removed_unsafe_lines} unsafe buy/build line(s) above deterministic ceiling"
+            )
         deterministic_constraint = (
             f"**程序化执行约束**：当前价{assumptions.current_price_cny:.2f}元高于安全买入上限"
             f"{output.safe_buy_price_ceiling_cny:.2f}元；不得表述为已经替投资者建仓，也不得建议新资金在安全价之上主动加仓。"

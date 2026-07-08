@@ -1,0 +1,41 @@
+{
+  "mode": "schema_prompt_structured",
+  "agent": "Research Manager",
+  "structured_error": "",
+  "schema": "UnderwritingResearchPlan",
+  "handoff_repair_requested": false,
+  "handoff_repair_applied": false,
+  "handoff_repair_mode": "not_run",
+  "handoff_deterministic_completion_applied": true,
+  "handoff_deterministic_copied_lines": [
+    "2026E_grossmargin",
+    "2027E_grossmargin",
+    "2028E_grossmargin",
+    "2026E_operatingmargin",
+    "2027E_operatingmargin",
+    "2028E_operatingmargin",
+    "2027E_ocf",
+    "2028E_ocf",
+    "2026E_capex",
+    "2027E_capex",
+    "2028E_capex",
+    "2027E_fcf",
+    "2028E_fcf"
+  ],
+  "initial_handoff_issues": [
+    "missing canonical line 2026E_grossmargin: 31.5 %",
+    "missing canonical line 2027E_grossmargin: 32.0 %",
+    "missing canonical line 2028E_grossmargin: 32.5 %",
+    "missing canonical line 2026E_operatingmargin: 14.0 %",
+    "missing canonical line 2027E_operatingmargin: 16.0 %",
+    "missing canonical line 2028E_operatingmargin: 18.0 %",
+    "missing canonical line 2027E_ocf: 12000.0 CNY mn",
+    "missing canonical line 2028E_ocf: 15000.0 CNY mn",
+    "missing canonical line 2026E_capex: 4000.0 CNY mn",
+    "missing canonical line 2027E_capex: 4500.0 CNY mn",
+    "missing canonical line 2028E_capex: 4500.0 CNY mn",
+    "missing canonical line 2027E_fcf: 7500.0 CNY mn",
+    "missing canonical line 2028E_fcf: 10500.0 CNY mn"
+  ],
+  "remaining_handoff_issues": []
+}

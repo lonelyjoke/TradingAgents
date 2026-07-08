@@ -85,8 +85,75 @@ def _deterministically_owned_pm_line(row: dict) -> bool:
             "ocf - abs(capex)",
             "revenue x gross margin",
             "operating profit + finance/other - tax - minority interest",
+            "deterministic probability-weighted scenario equity value",
         )
     )
+
+
+def _merge_manager_canonical_snapshot(
+    manager_payload: dict,
+    pm_payload: dict,
+) -> tuple[dict, list[str]]:
+    """Deterministically preserve the Research Manager numeric handoff.
+
+    Copying a long canonical snapshot is a data-movement task, not a reasoning
+    task.  Providers regularly omit unchanged rows even when prompted to copy
+    them.  Restore missing rows here and reject undocumented value/unit changes
+    before deterministic PM calculations run.
+    """
+
+    payload = json.loads(json.dumps(pm_payload or {}, ensure_ascii=False))
+    manager_rows = [
+        dict(row) for row in manager_payload.get("canonical_model_snapshot", []) or []
+        if str(row.get("line_id", "")).strip()
+    ]
+    pm_rows = [
+        dict(row) for row in payload.get("canonical_model_snapshot", []) or []
+        if str(row.get("line_id", "")).strip()
+    ]
+    if not manager_rows:
+        return payload, []
+
+    accepted_changes = {
+        str(row.get("line_id", "")).strip().lower()
+        for row in payload.get("handoff_change_rows", []) or []
+        if str(row.get("disposition", "")).lower() == "accepted"
+    }
+    pm_by_id = {
+        str(row.get("line_id", "")).strip().lower(): row for row in pm_rows
+    }
+    manager_ids = {
+        str(row.get("line_id", "")).strip().lower() for row in manager_rows
+    }
+    merged: list[dict] = []
+    notes: list[str] = []
+    for manager_row in manager_rows:
+        line_id = str(manager_row.get("line_id", "")).strip().lower()
+        pm_row = pm_by_id.get(line_id)
+        if pm_row is None:
+            merged.append(manager_row)
+            notes.append(f"restored omitted canonical line {line_id}")
+            continue
+        if line_id in accepted_changes:
+            merged.append(pm_row)
+            continue
+        if (
+            pm_row.get("value") != manager_row.get("value")
+            or str(pm_row.get("unit", "")).strip().lower()
+            != str(manager_row.get("unit", "")).strip().lower()
+        ):
+            notes.append(f"restored undocumented canonical change {line_id}")
+        merged.append(manager_row)
+
+    # Retain PM-only dependent lines such as deterministic EPS.  They will be
+    # recalculated by normalize_sell_side_pm_decision below.
+    merged.extend(
+        row
+        for row in pm_rows
+        if str(row.get("line_id", "")).strip().lower() not in manager_ids
+    )
+    payload["canonical_model_snapshot"] = merged
+    return payload, notes
 
 
 def _canonical_handoff_issues(
@@ -294,7 +361,11 @@ def _normalize_sell_side_lineage(
             dict.fromkeys(
                 [matched_id]
                 + [str(value).upper() for value in linked if str(value).strip()]
-                + [value for value in source_ids if value.upper().startswith("KPE")]
+                + [
+                    value
+                    for value in source_ids
+                    if not value.upper().startswith(("KSI", "KPE"))
+                ]
             )
         )
         if source_ids != row["source_ids"]:
@@ -941,10 +1012,18 @@ If an important investment claim depends on an unverified commodity price, produ
         )
         pm_decision_payload = pm_generation_status.pop("validated_payload", {})
         pm_generation_status["schema"] = "SellSidePMDecision"
+        manager_payload = state.get("research_manager_plan_payload", {}) or {}
         deterministic_model_notes: list[str] = []
         if pm_decision_payload:
+            pm_decision_payload, restored_handoff_notes = (
+                _merge_manager_canonical_snapshot(
+                    manager_payload,
+                    pm_decision_payload,
+                )
+            )
+            deterministic_model_notes.extend(restored_handoff_notes)
             try:
-                normalized_decision, deterministic_model_notes = normalize_sell_side_pm_decision(
+                normalized_decision, normalization_notes = normalize_sell_side_pm_decision(
                     pm_decision_payload
                 )
             except (TypeError, ValueError) as exc:
@@ -956,6 +1035,7 @@ If an important investment claim depends on an unverified commodity price, produ
                     + str(exc).splitlines()[0]
                 ]
             else:
+                deterministic_model_notes.extend(normalization_notes)
                 pm_decision_payload = normalized_decision.model_dump(mode="json")
                 pm_decision_payload, lineage_notes = _normalize_sell_side_lineage(
                     pm_decision_payload,
@@ -972,7 +1052,6 @@ If an important investment claim depends on an unverified commodity price, produ
                 )
                 final_trade_decision = render_sell_side_pm_decision(normalized_decision)
 
-        manager_payload = state.get("research_manager_plan_payload", {}) or {}
         initial_handoff_issues = _canonical_handoff_issues(
             manager_payload,
             pm_decision_payload,
@@ -986,6 +1065,7 @@ If an important investment claim depends on an unverified commodity price, produ
         }
         revision_requested = False
         revision_applied = False
+        revision_rejection_reasons: list[str] = []
         revision_status: dict = {"mode": "not_run"}
         remaining_handoff_issues = list(initial_handoff_issues)
         remaining_analytical_issues = list(initial_analytical_issues)
@@ -1037,13 +1117,26 @@ If an important investment claim depends on an unverified commodity price, produ
             )
             revised_payload = revision_status.pop("validated_payload", {})
             if revised_payload:
+                revised_payload, restored_revision_notes = (
+                    _merge_manager_canonical_snapshot(
+                        manager_payload,
+                        revised_payload,
+                    )
+                )
                 try:
                     normalized_revision, revision_model_notes = normalize_sell_side_pm_decision(
                         revised_payload
                     )
-                except (TypeError, ValueError):
+                    revision_model_notes = [
+                        *restored_revision_notes,
+                        *revision_model_notes,
+                    ]
+                except (TypeError, ValueError) as exc:
                     normalized_revision = None
                     revision_model_notes = []
+                    revision_rejection_reasons.append(
+                        "revision normalization failed: " + str(exc).splitlines()[0]
+                    )
             if revised_payload and normalized_revision is not None:
                 revised_payload = normalized_revision.model_dump(mode="json")
                 revised_payload, revision_lineage_notes = _normalize_sell_side_lineage(
@@ -1080,6 +1173,19 @@ If an important investment claim depends on an unverified commodity price, produ
                     remaining_analytical_issues = revised_analytical_issues
                     deterministic_model_notes = revision_model_notes
                     revision_applied = True
+                else:
+                    if not rating_preserved:
+                        revision_rejection_reasons.append("revision changed the protected rating")
+                    if not handoff_not_worsened:
+                        revision_rejection_reasons.append(
+                            "revision increased canonical handoff issues "
+                            f"from {len(initial_handoff_issues)} to {len(revised_handoff_issues)}"
+                        )
+                    if not analytical_not_worsened:
+                        revision_rejection_reasons.append(
+                            "revision increased analytical structure issues "
+                            f"from {len(initial_analytical_issues)} to {len(revised_analytical_issues)}"
+                        )
 
         initial_mode = pm_generation_status.get("mode", "unknown")
         if revision_applied:
@@ -1093,6 +1199,7 @@ If an important investment claim depends on an unverified commodity price, produ
                 "editorial_revision_mode": revision_status.get("mode", "not_run"),
                 "remaining_handoff_issues": remaining_handoff_issues,
                 "remaining_analytical_issues": remaining_analytical_issues,
+                "editorial_revision_rejection_reasons": revision_rejection_reasons,
                 "deterministic_model_notes": deterministic_model_notes,
             }
         )
@@ -1106,6 +1213,7 @@ If an important investment claim depends on an unverified commodity price, produ
             "initial_analytical_issues": initial_analytical_issues,
             "remaining_handoff_issues": remaining_handoff_issues,
             "remaining_analytical_issues": remaining_analytical_issues,
+            "revision_rejection_reasons": revision_rejection_reasons,
         }
         full_pm_decision = final_trade_decision
         final_trade_decision, internal_overflow, removed_sections = (

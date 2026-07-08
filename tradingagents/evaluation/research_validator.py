@@ -93,6 +93,9 @@ PUBLICATION_BLOCKING_SECTIONS = frozenset(
         "pm_unit_scale_arithmetic",
         "canonical_financial_reconciliation",
         "public_key_number_consistency",
+        "public_forecast_growth_consistency",
+        "weighted_margin_arithmetic",
+        "rating_valuation_consistency",
         "position_valuation_consistency",
         "sell_side_expectation_lineage",
     }
@@ -260,6 +263,7 @@ def _deterministically_owned_line(row: Mapping[str, Any]) -> bool:
         "fcf": "ocf - abs(capex)",
         "grossprofit": "revenue x gross margin",
         "parentnetprofit": "operating profit + finance/other - tax - minority interest",
+        "equityvalueweighted": "deterministic probability-weighted scenario equity value",
     }.get(metric)
     return bool(required_formula and required_formula in formula)
 
@@ -1990,6 +1994,128 @@ def audit_public_key_number_consistency(decision_text: str) -> list[DecisionDept
     return issues
 
 
+def audit_public_forecast_growth_consistency(
+    report_dir: str | Path,
+    decision_text: str,
+) -> list[DecisionDepthIssue]:
+    """Reconcile stated base revenue growth to the canonical revenue series."""
+
+    pm_path = Path(report_dir) / "5_portfolio" / "canonical_decision.json"
+    if not pm_path.exists():
+        return []
+    try:
+        payload = json.loads(read_text_fallback(pm_path))
+    except (OSError, TypeError, json.JSONDecodeError):
+        return []
+    revenues: dict[int, float] = {}
+    for row in payload.get("canonical_model_snapshot", []) or []:
+        period_match = re.fullmatch(r"(20\d{2})E", str(row.get("period", "")), re.I)
+        metric = _handoff_metric_key(row.get("period"), row.get("metric"))[1]
+        value = _safe_float(row.get("value"))
+        if period_match and metric == "revenue" and value > 0:
+            revenues[int(period_match.group(1))] = value
+    issues: list[DecisionDepthIssue] = []
+    for year in sorted(revenues):
+        if year - 1 not in revenues:
+            continue
+        expected = (revenues[year] / revenues[year - 1] - 1.0) * 100.0
+        for line in decision_text.splitlines():
+            if not re.search(rf"(?:FY)?{str(year)[-2:]}E|{year}E", line, re.I):
+                continue
+            if re.search(r"牛市|熊市|bull|bear|敏感", line, re.I):
+                continue
+            match = re.search(
+                rf"(?:(?:FY)?(?:{str(year)[-2:]}|{year})E).{{0,8}}?"
+                r"(?:收入|营收|revenue).{0,24}?(?:增速|增长|growth)"
+                r"[^\d+\-]{0,16}([+\-]?\d+(?:\.\d+)?)\s*%",
+                line,
+                re.I,
+            )
+            if not match:
+                continue
+            stated = float(match.group(1))
+            if abs(stated - expected) > 1.0:
+                issues.append(
+                    DecisionDepthIssue(
+                        "public_forecast_growth_consistency",
+                        "error",
+                        f"{year}E stated revenue growth {stated:.1f}% does not reconcile to canonical revenue {revenues[year - 1]:.2f} -> {revenues[year]:.2f}; calculated {expected:.1f}%",
+                    )
+                )
+                break
+    return issues
+
+
+def audit_weighted_margin_arithmetic(decision_text: str) -> list[DecisionDepthIssue]:
+    """Check explicit two-bucket mix/margin equations in public prose."""
+
+    pattern = re.compile(
+        r"(\d+(?:\.\d+)?)\s*%\s*[×x*]\s*[^+\n]{0,80}?"
+        r"(\d+(?:\.\d+)?)\s*%\s*\+\s*[^%\n]{0,40}?"
+        r"(\d+(?:\.\d+)?)\s*%\s*[×x*]\s*[^=→\n]{0,80}?"
+        r"(\d+(?:\.\d+)?)\s*%\s*(?:=|→)\s*[^\d\n]{0,24}"
+        r"(\d+(?:\.\d+)?)\s*%",
+        re.I,
+    )
+    for match in pattern.finditer(decision_text):
+        weight_a, margin_a, weight_b, margin_b, stated = map(float, match.groups())
+        total_weight = weight_a + weight_b
+        if total_weight <= 0 or abs(total_weight - 100.0) > 2.0:
+            continue
+        expected = (weight_a * margin_a + weight_b * margin_b) / total_weight
+        if abs(stated - expected) > 0.2:
+            return [
+                DecisionDepthIssue(
+                    "weighted_margin_arithmetic",
+                    "error",
+                    f"weighted margin equation states {stated:.2f}% but {weight_a:g}% x {margin_a:g}% + {weight_b:g}% x {margin_b:g}% equals {expected:.2f}%",
+                )
+            ]
+    return []
+
+
+def audit_rating_valuation_consistency(report_dir: str | Path) -> list[DecisionDepthIssue]:
+    """Flag a rating direction that contradicts application-owned fair value."""
+
+    pm_path = Path(report_dir) / "5_portfolio" / "canonical_decision.json"
+    if not pm_path.exists():
+        return []
+    try:
+        payload = json.loads(read_text_fallback(pm_path))
+    except (OSError, TypeError, json.JSONDecodeError):
+        return []
+    rating = str(payload.get("rating", ""))
+    valuation = payload.get("deterministic_valuation") or {}
+    expected_return = _safe_float(valuation.get("expected_return_pct"))
+    if str(valuation.get("status", "")) != "closed":
+        return []
+    if rating in POSITIVE_RATINGS and expected_return < -2.0:
+        return [
+            DecisionDepthIssue(
+                "rating_valuation_consistency",
+                "error",
+                f"{rating} rating conflicts with deterministic expected return {expected_return:.1f}%; revise assumptions, horizon, or rating",
+            )
+        ]
+    if rating in NEGATIVE_RATINGS and expected_return > 20.0:
+        return [
+            DecisionDepthIssue(
+                "rating_valuation_consistency",
+                "error",
+                f"{rating} rating conflicts with deterministic expected return {expected_return:.1f}%; revise assumptions, horizon, or rating",
+            )
+        ]
+    if rating == "Hold" and (expected_return < -15.0 or expected_return > 25.0):
+        return [
+            DecisionDepthIssue(
+                "rating_valuation_consistency",
+                "warning",
+                f"Hold rating sits beside deterministic expected return {expected_return:.1f}%; explain the rating band/horizon or revise the rating",
+            )
+        ]
+    return []
+
+
 def audit_position_valuation_consistency(report_dir: str | Path, decision_text: str) -> list[DecisionDepthIssue]:
     """Ensure executable buy instructions respect the program-calculated ceiling."""
     pm_path = Path(report_dir) / "5_portfolio" / "canonical_decision.json"
@@ -2836,12 +2962,14 @@ def audit_structured_research_usage(
             )
         )
 
+    def _linked_kpe_ids(row: dict) -> set[str]:
+        linked = row.get("kpe_ids", row.get("evidence_ids", [])) or []
+        if isinstance(linked, str):
+            linked = re.findall(r"KPE\d+", linked, re.I)
+        return {str(value).strip() for value in linked if str(value).strip()}
+
     expected_kpe_by_ksi = {
-        str(row.get("intelligence_id", "")).strip(): {
-            str(value).strip()
-            for value in row.get("evidence_ids", []) or []
-            if str(value).strip()
-        }
+        str(row.get("intelligence_id", "")).strip(): _linked_kpe_ids(row)
         for row in bundle.get("sell_side_intelligence", []) or []
         if str(row.get("intelligence_id", "")).strip()
     }
@@ -2913,6 +3041,9 @@ def audit_report_depth(report_dir: str | Path) -> pd.DataFrame:
     issues.extend(audit_pm_unit_scale_arithmetic(report_dir))
     issues.extend(audit_canonical_financial_reconciliation(report_dir))
     issues.extend(audit_public_key_number_consistency(decision_text))
+    issues.extend(audit_public_forecast_growth_consistency(report_dir, decision_text))
+    issues.extend(audit_weighted_margin_arithmetic(decision_text))
+    issues.extend(audit_rating_valuation_consistency(report_dir))
     issues.extend(audit_position_valuation_consistency(report_dir, decision_text))
     issues.extend(audit_report_redundancy(decision_text))
     issues.extend(audit_public_process_leakage(decision_text))

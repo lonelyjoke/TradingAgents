@@ -1,0 +1,28 @@
+{
+  "mode": "schema_prompt_structured",
+  "agent": "Portfolio Manager",
+  "structured_error": "",
+  "schema": "SellSidePMDecision",
+  "initial_mode": "schema_prompt_structured",
+  "editorial_review_mode": "schema_prompt_structured",
+  "editorial_revision_requested": true,
+  "editorial_revision_applied": true,
+  "editorial_revision_mode": "schema_prompt_structured",
+  "remaining_handoff_issues": [],
+  "remaining_analytical_issues": [],
+  "editorial_revision_rejection_reasons": [],
+  "deterministic_model_notes": [
+    "restored undocumented canonical change 2026e_eps",
+    "restored undocumented canonical change 2027e_eps",
+    "restored undocumented canonical change 2028e_eps",
+    "restored undocumented canonical change base_fair_value",
+    "synchronized weighted equity value 261000.0 -> 275550.0000",
+    "removed 1 manual deterministic valuation line(s) from prose",
+    "enforced safe-price execution constraint above the buy ceiling"
+  ],
+  "full_report_chars": "17733",
+  "public_report_chars": "17733",
+  "internal_overflow_chars": "0",
+  "internal_sections_removed_from_public_report": "",
+  "public_h2_count": "8"
+}
