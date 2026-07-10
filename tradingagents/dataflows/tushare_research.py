@@ -3,6 +3,9 @@ from __future__ import annotations
 from datetime import datetime, timedelta
 import html
 import re
+import shutil
+import subprocess
+import tempfile
 from typing import Iterable
 
 import pandas as pd
@@ -34,6 +37,38 @@ CNINFO_FINANCIAL_REPORT_CATEGORIES = (
     "category_bndbg_szsh",
     "category_yjdbg_szsh",
     "category_sjdbg_szsh",
+)
+_EARNINGS_GUIDANCE_TITLE_RE = re.compile(
+    "|".join(
+        [
+            "\u4e1a\u7ee9\u9884\u544a",
+            "\u4e1a\u7ee9\u5feb\u62a5",
+            "\u76c8\u5229\u9884\u544a",
+            "\u4e1a\u7ee9\u4fee\u6b63",
+            "\u9884\u589e",
+            "\u9884\u51cf",
+            "\u626d\u4e8f",
+            "\u9996\u4e8f",
+            "\u7eed\u76c8",
+        ]
+    )
+)
+_GUIDANCE_LINE_RE = re.compile(
+    "|".join(
+        [
+            "\u4e1a\u7ee9\u9884\u544a\u671f\u95f4",
+            "\u5f52\u5c5e\u4e8e\u4e0a\u5e02\u516c\u53f8\u80a1\u4e1c\u7684\u51c0\u5229\u6da6",
+            "\u6263\u9664\u975e\u7ecf\u5e38\u6027\u635f\u76ca",
+            "\u57fa\u672c\u6bcf\u80a1\u6536\u76ca",
+            "\u540c\u6bd4",
+            "\u589e\u957f",
+            "\u4e0a\u5e74\u540c\u671f",
+            "\u4e1a\u7ee9\u53d8\u52a8\u539f\u56e0",
+            "\u672a\u7ecf\u4f1a\u8ba1\u5e08",
+            "\u672a\u7ecf\u5ba1\u8ba1",
+        ]
+    ),
+    re.I,
 )
 
 BAIJIU_PEER_FALLBACK = {
@@ -350,9 +385,57 @@ def _fetch_cninfo_announcements(
     return _sort_by_existing_date(data, ["ann_date", "rec_time"])
 
 
+def _is_live_or_prior_analysis_date(curr_date: str) -> bool:
+    """Allow after-hours official rows only for live reports, not old backtests."""
+    try:
+        analysis_date = datetime.strptime(str(curr_date)[:10], "%Y-%m-%d").date()
+    except Exception:
+        return False
+    today = datetime.now().date()
+    return 0 <= (today - analysis_date).days <= 1
+
+
+def _fetch_after_hours_next_day_cninfo(
+    symbol: str,
+    curr_date: str,
+) -> pd.DataFrame | TushareDataError:
+    if not _is_live_or_prior_analysis_date(curr_date):
+        return pd.DataFrame(columns=["ann_date", "ts_code", "name", "title", "url", "rec_time"])
+    try:
+        next_dt = datetime.strptime(str(curr_date)[:10], "%Y-%m-%d") + timedelta(days=1)
+    except Exception:
+        return pd.DataFrame(columns=["ann_date", "ts_code", "name", "title", "url", "rec_time"])
+    result = _fetch_cninfo_announcements(
+        symbol,
+        next_dt.strftime("%Y-%m-%d"),
+        1,
+    )
+    if isinstance(result, TushareDataError) or result.empty:
+        return result
+    next_ann_date = next_dt.strftime("%Y%m%d")
+    if "ann_date" not in result.columns:
+        return pd.DataFrame(columns=["ann_date", "ts_code", "name", "title", "url", "rec_time"])
+    filtered = result[result["ann_date"].astype(str) == next_ann_date].copy()
+    if filtered.empty:
+        return filtered
+    filtered["source_note"] = "cninfo_after_hours_next_day_official"
+    return filtered
+
+
+def _merge_announcement_frames(*frames: pd.DataFrame | None) -> pd.DataFrame:
+    usable = [frame for frame in frames if frame is not None and not frame.empty]
+    if not usable:
+        return pd.DataFrame(columns=["ann_date", "ts_code", "name", "title", "url", "rec_time"])
+    merged = pd.concat(usable, ignore_index=True, sort=False)
+    if "title" in merged.columns:
+        merged = merged.drop_duplicates(subset=["ann_date", "title", "url"], keep="first")
+    return _sort_by_existing_date(merged, ["ann_date", "rec_time"])
+
+
 def _fetch_announcements(symbol: str, curr_date: str, look_back_days: int) -> pd.DataFrame | TushareDataError:
     _, _, start, end = _date_window(curr_date, look_back_days)
     fields = "ann_date,ts_code,name,title,url,rec_time"
+    after_hours = _fetch_after_hours_next_day_cninfo(symbol, curr_date)
     result = _safe_optional_query(
         "anns_d",
         ts_code=symbol,
@@ -367,15 +450,21 @@ def _fetch_announcements(symbol: str, curr_date: str, look_back_days: int) -> pd
             start_date=start,
             end_date=end,
             fields=fields,
-        )
+    )
     if isinstance(result, TushareDataError) or result is None or result.empty:
         fallback = _fetch_cninfo_announcements(symbol, curr_date, look_back_days)
         if not isinstance(fallback, TushareDataError):
-            return fallback
+            if isinstance(after_hours, TushareDataError):
+                return fallback
+            return _merge_announcement_frames(fallback, after_hours)
         if isinstance(result, TushareDataError):
+            if not isinstance(after_hours, TushareDataError) and not after_hours.empty:
+                return after_hours
             return TushareDataError(f"{result}; {fallback}")
         return fallback
-    return _sort_by_existing_date(result, ["ann_date", "rec_time"])
+    if isinstance(after_hours, TushareDataError):
+        return _sort_by_existing_date(result, ["ann_date", "rec_time"])
+    return _merge_announcement_frames(result, after_hours)
 
 
 def _fetch_major_news(terms: list[str], curr_date: str, look_back_days: int, limit: int = 20) -> pd.DataFrame | TushareDataError:
@@ -471,8 +560,116 @@ def _format_event_table(data: pd.DataFrame, columns: list[str], limit: int) -> s
     return _markdown_table(selected)
 
 
+def _download_announcement_text(url: str) -> str:
+    if not str(url or "").strip():
+        return ""
+    try:
+        response = requests.get(
+            str(url),
+            timeout=25,
+            headers={"User-Agent": "Mozilla/5.0 TradingAgents earnings-guidance"},
+        )
+        response.raise_for_status()
+    except Exception:
+        return ""
+    content_type = response.headers.get("Content-Type", "").lower()
+    if str(url).lower().endswith(".pdf") or "pdf" in content_type:
+        pdftotext = shutil.which("pdftotext")
+        if not pdftotext:
+            return ""
+        try:
+            with tempfile.TemporaryDirectory() as tmp_dir:
+                pdf_path = f"{tmp_dir}/announcement.pdf"
+                text_path = f"{tmp_dir}/announcement.txt"
+                with open(pdf_path, "wb") as handle:
+                    handle.write(response.content)
+                subprocess.run(
+                    [pdftotext, "-layout", pdf_path, text_path],
+                    check=True,
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL,
+                    timeout=25,
+                )
+                with open(text_path, "r", encoding="utf-8", errors="ignore") as handle:
+                    return handle.read()
+        except Exception:
+            return ""
+    response.encoding = response.encoding or "utf-8"
+    return response.text
+
+
+def _guidance_excerpt(text: str, *, limit: int = 12) -> str:
+    cleaned_lines = [
+        re.sub(r"\s+", " ", raw.strip())
+        for raw in (text or "").splitlines()
+        if re.sub(r"\s+", " ", raw.strip())
+    ]
+    rows: list[str] = []
+    seen: set[int] = set()
+    for idx, line in enumerate(cleaned_lines):
+        if not _GUIDANCE_LINE_RE.search(line):
+            continue
+        for neighbor_idx in range(max(0, idx - 1), min(len(cleaned_lines), idx + 2)):
+            if neighbor_idx in seen:
+                continue
+            rows.append(cleaned_lines[neighbor_idx].replace("|", "/")[:360])
+            seen.add(neighbor_idx)
+            if len(rows) >= limit:
+                break
+        if len(rows) >= limit:
+            break
+    if rows:
+        return "\n".join(f"- {row}" for row in rows)
+    compact = re.sub(r"\s+", " ", text or "").strip()
+    if not compact:
+        return "Disclosure text could not be extracted; use the title/link as a retrieval task."
+    return compact[:1800]
+
+
+def _earnings_guidance_section(announcements: pd.DataFrame) -> str:
+    if announcements is None or announcements.empty or "title" not in announcements.columns:
+        return ""
+    mask = announcements["title"].fillna("").astype(str).map(
+        lambda title: bool(_EARNINGS_GUIDANCE_TITLE_RE.search(title))
+    )
+    guidance = announcements[mask].copy()
+    if guidance.empty:
+        return ""
+    lines = [
+        "### Official Earnings Guidance / Performance Preannouncements",
+        _format_event_table(
+            guidance,
+            ["ann_date", "ts_code", "name", "title", "url", "source_note"],
+            5,
+        ),
+        "",
+        "### Extracted Guidance Evidence",
+    ]
+    for _, row in guidance.head(3).iterrows():
+        title = str(row.get("title") or "").strip()
+        ann_date = str(row.get("ann_date") or "").strip()
+        url = str(row.get("url") or "").strip()
+        source_note = str(row.get("source_note") or "").strip()
+        text = _download_announcement_text(url)
+        lines.extend(
+            [
+                f"#### {ann_date} {title}",
+                f"- Source: {url or 'missing URL'}",
+                *([f"- Retrieval note: {source_note}"] if source_note else []),
+                _guidance_excerpt(text),
+                "",
+            ]
+        )
+    lines.append(
+        "- Analyst rule: official earnings guidance, performance previews and quick reports are hard public evidence for the covered period. Reconcile them against Q1, implied Q2, H1, H2 and full-year forecasts before changing rating or valuation."
+    )
+    return "\n".join(lines).strip()
+
+
 def _classify_announcement(title: str) -> str:
     text = str(title or "")
+    if _EARNINGS_GUIDANCE_TITLE_RE.search(text):
+        return "earnings guidance / performance preview"
     rules = [
         ("业绩/财报", ["业绩", "年报", "季报", "半年报", "财务报表", "利润分配"]),
         ("分红/权益", ["分红", "派息", "权益分派", "股息"]),
@@ -548,6 +745,9 @@ def get_company_events(ticker: str, curr_date: str, look_back_days: int = 30) ->
                 ),
             ]
         )
+        guidance_section = _earnings_guidance_section(announcements)
+        if guidance_section:
+            lines.extend(["", guidance_section])
 
     lines.extend(["", "## Company And Industry News"])
     news_terms = terms
@@ -591,6 +791,7 @@ def get_company_events(ticker: str, curr_date: str, look_back_days: int = 30) ->
             "",
             "## Analyst Instructions",
             "- Treat announcements as harder evidence than market rumors or general news.",
+            "- Treat official earnings guidance, performance previews, and quick reports as harder evidence than run-rate extrapolation; reconcile stated H1/Q1/Q2/EPS ranges before writing forecast, valuation, rating, or next-verification language.",
             "- Separate company-specific events, industry events, and macro policy events.",
             "- For every material conclusion, cite the event date and title.",
             "- If a section is unavailable because of data permission, state that limitation explicitly.",

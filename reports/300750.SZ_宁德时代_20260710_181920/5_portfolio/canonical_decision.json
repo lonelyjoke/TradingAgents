@@ -1,0 +1,1249 @@
+{
+  "rating": "Overweight",
+  "rating_posture": "增持；当前价348.76元高于程序化安全买入上限271.40元，已有持仓按评级管理，新资金等待价格进入安全区间或基本面证据推动估值输入上修。",
+  "research_readiness": "partial",
+  "one_line_thesis": "市场将宁德时代错判为周期见顶的“价值陷阱”，给予其16-18倍的前瞻市盈率。公司凭借结构性成本优势与储能业务爆发，持续创造超额盈利，当前估值隐含的盈利衰退与已证实的增长现实构成决定性预期差。",
+  "research_questions": [
+    "在碳酸锂价格持续下跌的环境下，公司综合毛利率能否维持甚至提升？",
+    "储能电池出货量能否实现接近翻倍的增长并保持较高的利润率？",
+    "当前市场对宁德时代的估值是否已充分反映其盈利韧性和增长潜力？",
+    "合同负债环比下降是否是需求转弱的先行信号？",
+    "技术面弱势是否构成对基本面逻辑的否定？"
+  ],
+  "question_verdicts": [
+    {
+      "question": "在碳酸锂价格持续下跌的环境下，公司综合毛利率能否维持甚至提升？",
+      "why_decisive": "毛利率直接决定 EPS 和 ROIC，是多空双方核心分歧点。",
+      "conclusion": "Q1 综合毛利率 24.82% 同比提升 0.41pct，成本下降速度覆盖 ASP 降幅，已展现结构性韧性；但需半年报确认其持续性。",
+      "evidence_used": [
+        "EV001: 2026年Q1财报，综合毛利率24.82%",
+        "EV002: 碳酸锂价格90天下跌7.35%"
+      ],
+      "strongest_counterevidence": "Q1 毛利率可能受益于前期低成本库存，存货/营收比上升暗示后续成本压力。",
+      "model_or_valuation_effect": "若毛利率≥24%成为全年趋势，2026E EPS 将稳固于20元以上，支持基准估值；跌破23%则下调 EPS 至17.5元。",
+      "confidence": "medium",
+      "next_verification": "2026年8月半年报，核心验证综合毛利率是否≥24%。"
+    },
+    {
+      "question": "储能电池出货量能否实现接近翻倍的增长并保持较高的利润率？",
+      "why_decisive": "储能是第二增长曲线，其增速和利润率决定整体盈利增速以及 PE 能否获得成长溢价。",
+      "conclusion": "采纳审慎出货量 250GWh，依然可实现翻倍以上增长；储能毛利率 26.7% 表明产品附加值高，但仍需跟踪订单前瞻指标。",
+      "evidence_used": [
+        "EV003: 2025全年及2026年Q1财报显示储能毛利率26.71%",
+        "EV004: 卖方预测及内部假设，基准出货量250GWh"
+      ],
+      "strongest_counterevidence": "合同负债环比下降，可能预示在手订单二阶导数放缓；行业扩产可能拉低售价。",
+      "model_or_valuation_effect": "250GWh 已作为基准输入，降低出货至200GWh将压缩经营利润约15%，PE可能进一步收缩。",
+      "confidence": "medium",
+      "next_verification": "半年报公告储能出货量和毛利率，以及管理层全年指引。"
+    },
+    {
+      "question": "当前市场对宁德时代的估值是否已充分反映其盈利韧性和增长潜力？",
+      "why_decisive": "估值是预期差的核心表达，决定上行空间。",
+      "conclusion": "前瞻 PE 17.4 倍处于历史底部，隐含盈利衰退；基于基准情景，合理估值应修复至 18-20 倍。",
+      "evidence_used": [
+        "EV005: 当前股价348.76元，对应2026E EPS 20.00元，PE 17.4x",
+        "EV006: 近5年 PE 分位数处于21.7%"
+      ],
+      "strongest_counterevidence": "技术面空头排列和宏观流动性收缩可能导致估值陷阱持续较长时间。",
+      "model_or_valuation_effect": "若修复至18x，公允股价360元；牛市情景22x对应523元。",
+      "confidence": "medium",
+      "next_verification": "股价对半年报的反应以及成交量变化。"
+    }
+  ],
+  "forecast_takeaways": [
+    {
+      "takeaway": "2026年公司综合毛利率有望保持在24%附近，成本红利与规模效应抵消ASP下降。",
+      "evidence_anchor": "2026年Q1综合毛利率24.82%，碳酸锂价格同比下降。",
+      "financial_implication": "稳固的毛利率支撑 EPS 20.00元，并可能带来ROIC改善。",
+      "confidence_and_risk": "中等信心；风险在于下半年材料成本上涨或价格战加剧，若H1毛利率<23%则结论失效。"
+    },
+    {
+      "takeaway": "储能电池出货量将实现翻倍增长且利润率维持高位，成为最大收入增量。",
+      "evidence_anchor": "2025年储能毛利率26.71%，2026年审慎目标250GWh。",
+      "financial_implication": "储能营收占比将从15%提升至25%以上，拉动整体盈利增长超30%。",
+      "confidence_and_risk": "中等信心；最大风险是订单交付延后或合同负债下滑预示需求放缓。"
+    },
+    {
+      "takeaway": "当前估值处于极端悲观水平，一旦季度验证通过，将驱动估值修复。",
+      "evidence_anchor": "前瞻PE 17.4倍，近5年分位21.7%。",
+      "financial_implication": "即使维持18倍PE，股价可回升至360元；若盈利超预期和情绪修复，弹性显著。",
+      "confidence_and_risk": "中等至较高；时间成本和趋势交易者的抛压是主要负面因素。"
+    }
+  ],
+  "forecast_assumptions": [
+    {
+      "parameter": "总电池出货量（GWh）",
+      "affected_business": "动力电池系统、储能电池系统、电池材料",
+      "historical_anchor": "2025年出货约600GWh（估算）",
+      "evidence_status": "analyst_estimate",
+      "base_case": "950 GWh（2026E）",
+      "bull_case": "1,100 GWh，需全球NEV渗透率超预期以及储能大项目集中交付",
+      "bear_case": "850 GWh，条件为下游需求疲软、竞争加剧或合同负债持续下降",
+      "rationale_and_evidence": "结合全球新能源车销量预期和储能招投标数据；市场普遍预期在900-1000GWh之间，采用中位偏保守",
+      "sensitivity": "每变动50GWh，收入约变5%，EPS影响约10%。",
+      "confidence": "medium",
+      "verification_gate": "2026年7月出货数据跟踪及8月半年报公告。"
+    },
+    {
+      "parameter": "综合毛利率",
+      "affected_business": "集团整体",
+      "historical_anchor": "2025年综合毛利率24.41%，2026年Q1 24.82%",
+      "evidence_status": "reported",
+      "base_case": "24.5%（2026全年）",
+      "bull_case": "26.5%，要求碳酸锂持续下行且公司溢价能力超预期",
+      "bear_case": "22.5%，若价格战升级或原料成本反弹",
+      "rationale_and_evidence": "基于Q1表现好于预期，但考虑下半年成本回升可能，给予中等偏乐观的全年预测",
+      "sensitivity": "毛利率每下修1pct，净利润减少约5%，EPS下降约1元。",
+      "confidence": "medium",
+      "verification_gate": "2026年8月半年报毛利率。"
+    },
+    {
+      "parameter": "资本支出（Capex）与自由现金流",
+      "affected_business": "集团整体现金流与估值",
+      "historical_anchor": "FY2025 OCF约为1,332亿元，资本开支高位运行",
+      "evidence_status": "analyst_estimate",
+      "base_case": "2026E Capex 750亿元，FCF 830亿元",
+      "bull_case": "Capex <650亿元，FCF >1,150亿元",
+      "bear_case": "Capex >850亿元，FCF <550亿元",
+      "rationale_and_evidence": "预计随着在建产能投产，资本开支强度将有所缓和，FCF拐点将至。FCF扩张是吸引价值型投资者的核心催化剂。",
+      "sensitivity": "FCF每增加100亿元，对整体估值支撑和潜在分红能力均有显著正面影响。",
+      "confidence": "medium",
+      "verification_gate": "2026年半年报资本开支进度及全年指引。"
+    }
+  ],
+  "core_theses": [
+    {
+      "rank": 1,
+      "takeaway": "公司盈利展现结构性韧性，在原材料价格下跌中毛利率逆势提升，证伪“盈利见顶”论断。",
+      "decisive_question": "综合毛利率能否在成本通缩环境中保持甚至提高？",
+      "evidence": "2026年Q1综合毛利率24.82%，同比+0.41pct，同期碳酸锂价格-7.35%。",
+      "strongest_counterevidence": "存货/营收比上升，可能受益于前期低成本库存，后续利润率有压缩风险。",
+      "financial_transmission": "毛利率韧性 → EPS>20元 → ROIC维持高位 → 支持估值修复。",
+      "market_pricing": "市场赋予17-18倍PE，隐含毛利率大幅下滑，定价与基本面背离。",
+      "falsification_gate": "2026年H1毛利率<23%，且公司解释非季节性因素。",
+      "verdict": "partial"
+    },
+    {
+      "rank": 2,
+      "takeaway": "储能电池业务成为高成长第二曲线，出货量倍增且利润率领先，将驱动整体盈利增长。",
+      "decisive_question": "储能出货量能否实现翻倍增长并维持较高利润率？",
+      "evidence": "2025年储能毛利率26.71%，2026年审慎目标250GWh（vs 2025年约120GWh）。",
+      "strongest_counterevidence": "合同负债环比下降，可能预示在手订单增长放缓；行业新进入者拉低ASP。",
+      "financial_transmission": "储能收入占比提升至25%+ → 整体盈利增速超30% → 支撑PE扩张。",
+      "market_pricing": "空方质疑储能泡沫，定价未充分反映其盈利贡献和持续性。",
+      "falsification_gate": "2026年储能全年出货<200GWh或毛利率降至<22%。",
+      "verdict": "partial"
+    },
+    {
+      "rank": 3,
+      "takeaway": "当前极低的历史估值分位与强劲的盈利增长构成深度预期差，提供不对称风险收益。",
+      "decisive_question": "当前股价是否已过度悲观？",
+      "evidence": "前瞻PE 17.4x，处于近5年最低21.7%分位，对应2026E EPS 20.00元。",
+      "strongest_counterevidence": "股价技术面空头排列，趋势向下，市场情绪未转向。",
+      "financial_transmission": "若估值修复至18-20x，股价有15%-30%上行空间；熊市情景下仍提供一定安全边际。",
+      "market_pricing": "价格已反映周期性衰退，忽略了结构性增长。",
+      "falsification_gate": "若半年报后股价未修复且PE继续收缩至15x以下，需重新审视。",
+      "verdict": "unproven"
+    }
+  ],
+  "segment_economics": [
+    {
+      "business_unit": "动力电池系统",
+      "economic_role": "核心利润引擎",
+      "disclosure_basis": "reported",
+      "scale_and_growth": "2025年营收占74.7%，同比+25.1%",
+      "margin_and_cash": "毛利率23.84%，贡献76.5%利润",
+      "driver_equation": "营收=出货量(GWh) x ASP(元/Wh)",
+      "valuation_treatment": "core",
+      "evidence_ids": [
+        "SEG001"
+      ],
+      "missing_or_next_check": "需跟踪全球NEV销量与公司装机市占率月度数据"
+    },
+    {
+      "business_unit": "储能电池系统",
+      "economic_role": "高成长第二引擎",
+      "disclosure_basis": "reported",
+      "scale_and_growth": "2025年营收占14.7%，同比+9.0%（增速受基数影响，2026E预计翻倍以上）",
+      "margin_and_cash": "毛利率26.71%，利润占比16.9%",
+      "driver_equation": "营收=出货量(GWh) x ASP，受国内外大储项目交付节奏影响",
+      "valuation_treatment": "core",
+      "evidence_ids": [
+        "SEG002"
+      ],
+      "missing_or_next_check": "半年报披露储能出货量和毛利率，验证250GWh路径"
+    },
+    {
+      "business_unit": "电池材料及回收",
+      "economic_role": "垂直整合/循环经济",
+      "disclosure_basis": "reported",
+      "scale_and_growth": "营收占比5.2%，同比-23.8%",
+      "margin_and_cash": "毛利率27.27%（含非经常性损益），利润贡献6%",
+      "driver_equation": "营收受金属价格和回收规模驱动，波动大",
+      "valuation_treatment": "excluded",
+      "evidence_ids": [
+        "SEG003"
+      ],
+      "missing_or_next_check": "扣除一次性收益后的持续盈利水平"
+    },
+    {
+      "business_unit": "采选冶炼行业",
+      "economic_role": "小型非核心业务",
+      "disclosure_basis": "reported",
+      "scale_and_growth": "营收占比1.5%，同比+8.8%",
+      "margin_and_cash": "毛利率11.25%，利润贡献0.7%",
+      "driver_equation": "矿山运营",
+      "valuation_treatment": "excluded",
+      "evidence_ids": [
+        "SEG004"
+      ],
+      "missing_or_next_check": "无需重点跟踪"
+    }
+  ],
+  "business_model_mechanisms": [
+    {
+      "link": "客户需求驱动：新能源整车厂和储能系统集成商对高安全、低成本电池的采购",
+      "how_it_works": "通过大客户战略协议和长期供货框架锁定订单，以规模定制化生产满足下游需求。",
+      "economic_driver": "出货量（GWh）为核心驱动力，ASP受材料成本和竞争影响。",
+      "cash_and_capital_feature": "大项目预付款（合同负债）+ 营运资金占用高，固定资产投入重。",
+      "evidence_or_gap": "2025年营收增速>25%，合同负债环比下降需关注。",
+      "analyst_conclusion": "商业模式具有显著的规模效应和客户转换成本，但资本开支和营运资金需求是潜在风险。"
+    },
+    {
+      "link": "成本管控：垂直整合与规模效应降低单位成本",
+      "how_it_works": "自供前驱体、电池材料及回收，摊薄固定成本；大量采购获得原材料价格优势。",
+      "economic_driver": "单位成本（元/Wh）持续下降，毛利率逆周期提升。",
+      "cash_and_capital_feature": "较高的存货和应付账款撬动现金流，但资本开支维持高位。",
+      "evidence_or_gap": "Q1毛利率提升至24.82%，即使在碳酸锂跌价中。",
+      "analyst_conclusion": "结构性成本优势构成宽护城河，是毛利率韧性的根源。"
+    },
+    {
+      "link": "技术溢价与产品升级：高附加值产品（如神行电池、钠电、固态电池）",
+      "how_it_works": "通过研发领先维持产品代差，获取更高ASP和利润率。",
+      "economic_driver": "产品结构升级提升综合均价和毛利率。",
+      "cash_and_capital_feature": "研发费用率约5%，资本化比例较低，利润质量高。",
+      "evidence_or_gap": "储能系统毛利率26.7%高于动力电池，证明产品结构升级有效。",
+      "analyst_conclusion": "技术优势转化为产品溢价，是未来抵御价格战的关键。"
+    },
+    {
+      "link": "循环经济：电池回收业务提供上游原材料并减少环境风险",
+      "how_it_works": "通过回收电池获取锂、钴等，补充自身材料需求，形成闭环。",
+      "economic_driver": "降低上游依赖，平滑金属价格波动，但现阶段利润贡献有限。",
+      "cash_and_capital_feature": "初期投资大，回收量尚未形成规模。",
+      "evidence_or_gap": "电池材料及回收板块营收下降23.8%，但毛利率高。",
+      "analyst_conclusion": "长期战略价值，短期估值中不予体现。"
+    },
+    {
+      "link": "营运资金与现金流：预收款+应付账款管理",
+      "how_it_works": "客户预付款（合同负债）和供应商信用占款，支撑部分营运资金需求。",
+      "economic_driver": "运营资金效率影响自由现金流，合同负债下降预警。",
+      "cash_and_capital_feature": "经营现金流良好，但Capex高，自由现金流可能有限。",
+      "evidence_or_gap": "合同负债环比下降，存货增加，需关注现金转化周期。",
+      "analyst_conclusion": "现金流状况尚可，但若订单减速，将面临现金收紧压力。"
+    }
+  ],
+  "industry_driver_matrix": [
+    {
+      "driver": "全球新能源汽车渗透率提升",
+      "current_state_and_direction": "2026年渗透率预计超20%，仍在加速，但增速放缓",
+      "dated_evidence": "IEA全球EV展望2026年5月，中国新能源车渗透率已超40%",
+      "affected_business": "动力电池系统",
+      "financial_transmission": "渗透率每提升1pct，带动电池需求增长约15-20GWh，影响营收约2%",
+      "confidence": "high",
+      "next_verification": "月度装机数据及车企排产计划"
+    },
+    {
+      "driver": "碳酸锂及正极材料价格走势",
+      "current_state_and_direction": "2026年Q1延续下跌趋势，但下半年有企稳可能",
+      "dated_evidence": "2026年6月碳酸锂期货价格较年初-7.35%，产业链库存中位",
+      "affected_business": "动力电池、储能电池（成本端）和材料回收（营收端）",
+      "financial_transmission": "锂价下跌降低直接材料成本，但ASP随之调降；价差变化决定毛利率方向",
+      "confidence": "medium",
+      "next_verification": "每周碳酸锂现货和期货价格，以及主要锂盐企业公告"
+    },
+    {
+      "driver": "全球储能装机需求（尤其大储和AI数据中心备电）",
+      "current_state_and_direction": "爆发式增长，中美欧多区域同时放量",
+      "dated_evidence": "Wood Mackenzie 2026Q1全球储能报告，预计全球新增储能装机300GWh以上",
+      "affected_business": "储能电池系统",
+      "financial_transmission": "直接决定储能出货量，每10GWh影响营收约10亿人民币，利润约2.5亿",
+      "confidence": "medium",
+      "next_verification": "公司季度储能出货量及重大合同公告"
+    },
+    {
+      "driver": "锂电池行业竞争格局与价格战",
+      "current_state_and_direction": "二线企业加速出清，头部集中度提升，但价格战仍在局部发生",
+      "dated_evidence": "宁德时代国内市占率39.2%，比亚迪等对手有追赶",
+      "affected_business": "动力电池系统、储能电池系统",
+      "financial_transmission": "ASP持续下降，若无法通过成本同步对冲，则毛利率受损",
+      "confidence": "medium",
+      "next_verification": "季度财报对比同行毛利率和市占率变化"
+    }
+  ],
+  "moat_mechanisms": [
+    {
+      "moat_source": "规模经济与成本优势",
+      "operating_mechanism": "全球最大的锂电池产能，能够摊薄研发、采购和制造成本，提供最具性价比的产品。",
+      "observed_proof": "2025年总出货量远超竞争对手，毛利率领先二线厂商5个百分点以上。",
+      "economic_result": "在ASP下跌周期中仍能守住毛利率，二三线厂商普遍亏损。",
+      "durability_and_threat": "护城河宽阔，但需警惕技术替代（固态电池）和新进入者如整车厂自研电池。",
+      "verdict": "proven"
+    },
+    {
+      "moat_source": "客户转换成本与生态锁定",
+      "operating_mechanism": "电池包与整车平台深度匹配，通常需要2-3年的验证和定制开发，主机厂替换意愿低。",
+      "observed_proof": "与特斯拉、宝马等签署长期战略协议，配套车型生命周期较长。",
+      "economic_result": "高客户留存率，订单持续性高，能够提前预收款项。",
+      "durability_and_threat": "粘性较强；但主机厂出于供应链安全可能培养二供、三供，构成潜在分散风险。",
+      "verdict": "partial"
+    },
+    {
+      "moat_source": "技术与知识产权壁垒",
+      "operating_mechanism": "拥有大量电池材料、结构和生产工艺专利，形成专利墙；率先布局钠电、固态等下一代技术。",
+      "observed_proof": "全球专利申请数万件，神行超充电池、麒麟电池等产品性能业界领先。",
+      "economic_result": "产品溢价和技术授权收入（如与福特），支撑高毛利。",
+      "durability_and_threat": "较强，但面临韩国LG、三星SDI及国内比亚迪的竞争，技术优势可能被追赶。",
+      "verdict": "partial"
+    },
+    {
+      "moat_source": "垂直整合与闭环回收",
+      "operating_mechanism": "从上游锂矿、前驱体到电池回收的全产业链布局，减少关键矿产依赖。",
+      "observed_proof": "旗下邦普循环是国内最大电池回收企业，回收能力逐步释放。",
+      "economic_result": "部分对冲原材料价格波动，并可能在政策加强时获得额外收益。",
+      "durability_and_threat": "尚在建设期，盈利贡献尚小，且回收体系需要规模效应。",
+      "verdict": "partial"
+    }
+  ],
+  "accounting_quality_matrix": [
+    {
+      "item": "毛利率与成本匹配",
+      "latest_evidence_and_period": "2026年Q1综合毛利率24.82%，相比去年同期提升0.41pct",
+      "trend_or_comparator": "毛利率连续两个季度改善，优于市场预期",
+      "causal_interpretation": "原材料成本下降被ASP下降部分抵消，但净优势来自规模效应和产品结构升级",
+      "earnings_cash_roic_effect": "正面：真实盈利能力提升，ROIC上行",
+      "verdict": "positive",
+      "evidence_ids": [
+        "AQ001"
+      ]
+    },
+    {
+      "item": "存货与营运资金",
+      "latest_evidence_and_period": "2026年Q1存货/营收比上升，合同负债环比下降",
+      "trend_or_comparator": "存货周转天数有所增加，合同负债连续两个季度下滑",
+      "causal_interpretation": "可能主动备货迎接下半年旺季，但也可能反映下游订单增长放缓",
+      "earnings_cash_roic_effect": "中性偏警戒：若存货积压需计提跌价损失，合同负债下降预示未来现金流入减弱",
+      "verdict": "warning",
+      "evidence_ids": [
+        "AQ002"
+      ]
+    },
+    {
+      "item": "资本支出与折旧",
+      "latest_evidence_and_period": "2025年报及2026年Q1在建工程和固定资产快速增长",
+      "trend_or_comparator": "资本开支仍处于高位，主要用于国内外产能扩张",
+      "causal_interpretation": "高Capex为未来成长奠定基础，但短期内折旧压力上升，影响净利润和FCF",
+      "earnings_cash_roic_effect": "负面：高资本支出拖累自由现金流，ROIC承受压力",
+      "verdict": "warning",
+      "evidence_ids": [
+        "AQ003"
+      ]
+    },
+    {
+      "item": "研发费用资本化",
+      "latest_evidence_and_period": "2025全年及2026Q1，研发费用率约5%，资本化比例低",
+      "trend_or_comparator": "资本化比例低于部分同行，会计处理较为保守",
+      "causal_interpretation": "反映出公司倾向于当期费用化，利润含金量较高",
+      "earnings_cash_roic_effect": "正面：利润更真实，可持续",
+      "verdict": "positive",
+      "evidence_ids": [
+        "AQ004"
+      ]
+    }
+  ],
+  "alternative_intelligence_decisions": [
+    {
+      "kpe_ids": [
+        "KPE01"
+      ],
+      "claim": "花旗分析锂矿复产对碳酸锂价格和电池成本的影响，认为锂价下行延续但下半年或有企稳",
+      "source_type": "sell_side_view",
+      "affected_business_and_variable": "碳酸锂价格 / 动力电池 & 储能电池成本端",
+      "public_crosscheck": "与碳酸锂现货走势一致，未获公司确认；该KPE与对应KSI属于同一卖方原始帖子，不构成独立交叉验证。",
+      "evidence_grade": "C_market_narrative",
+      "disposition": "verification_change",
+      "before_after": "未改变预测数据，但强化了毛利率韧性观点",
+      "report_use": "行业驱动分析 & 财务预期毛利率支撑",
+      "falsification_or_next_check": "跟踪锂矿复产实际公告及青海盐湖产量",
+      "freshness_and_shelf_life": "定性框架可使用至2026年底"
+    },
+    {
+      "kpe_ids": [
+        "KPE02"
+      ],
+      "claim": "天恒钠电储能系统发布，规划产能200GWh，提升公司储能的长期竞争力",
+      "source_type": "sell_side_view",
+      "affected_business_and_variable": "储能电池出货量 & 毛利率",
+      "public_crosscheck": "公司公告已确认钠电储能系统；该KPE与对应KSI属于同一卖方原始帖子，不构成独立交叉验证。",
+      "evidence_grade": "C_market_narrative",
+      "disposition": "verification_change",
+      "before_after": "未量化修改出货预估，但增强牛市场景信心",
+      "report_use": "储能业务 & 期权估值",
+      "falsification_or_next_check": "首批钠电储能项目交付公告",
+      "freshness_and_shelf_life": "中长期技术储备，当前效用有限"
+    },
+    {
+      "kpe_ids": [
+        "KPE03"
+      ],
+      "claim": "公司新增AIDC/新能源服务社招，显示新业务战略落地",
+      "source_type": "channel_check",
+      "affected_business_and_variable": "AIDC/新能源服务收入 / 期权价值",
+      "public_crosscheck": "招聘信息与企查查等公开，部分验证",
+      "evidence_grade": "B_private_edge",
+      "disposition": "model_change",
+      "before_after": "新增期权估值5元/股（高度打折），不影响核心盈利预测",
+      "report_use": "期权估值模块",
+      "falsification_or_next_check": "首批客户签约公告或收入确认",
+      "freshness_and_shelf_life": "早期信号，需12-18个月兑现"
+    },
+    {
+      "kpe_ids": [
+        "KPE04"
+      ],
+      "claim": "固态电池新增专利及2027年小批量量产指引，显示技术领先",
+      "source_type": "company_research",
+      "affected_business_and_variable": "技术壁垒 / 远期成长性",
+      "public_crosscheck": "知识产权局专利可查，量产时间表为管理层指引",
+      "evidence_grade": "C_market_narrative",
+      "disposition": "verification_change",
+      "before_after": "未改变盈利预测，但强化了技术护城河判断",
+      "report_use": "护城河评估 & 远期期权",
+      "falsification_or_next_check": "2027年固态电池小批量生产证明",
+      "freshness_and_shelf_life": "远期验证，当前不影响估值"
+    },
+    {
+      "kpe_ids": [
+        "KPE05"
+      ],
+      "claim": "东吴电新预测Q1储能出货约50GWh，全年预期250-300GWh",
+      "source_type": "sell_side_view",
+      "affected_business_and_variable": "储能电池出货量 / 营业收入与净利润",
+      "public_crosscheck": "与公司不直接披露，属第三方估算；该KPE与对应KSI属于同一卖方原始帖子，不构成独立交叉验证。",
+      "evidence_grade": "C_market_narrative",
+      "disposition": "model_change",
+      "before_after": "将基准出货量由300GWh下调至250GWh以反映审慎，净利润影响约-5%",
+      "report_use": "储能出货量基础假设",
+      "falsification_or_next_check": "半年报公告储能出货量",
+      "freshness_and_shelf_life": "至半年报前有效"
+    },
+    {
+      "kpe_ids": [
+        "KPE06"
+      ],
+      "claim": "永太科技VC长单公告涉及宁德时代成本，显示采购锁定",
+      "source_type": "sell_side_view",
+      "affected_business_and_variable": "电解液添加剂成本 / 动力电池毛利率",
+      "public_crosscheck": "永太科技公告可查；该KPE与对应KSI属于同一卖方原始帖子，不构成独立交叉验证。",
+      "evidence_grade": "C_market_narrative",
+      "disposition": "verification_change",
+      "before_after": "量化影响未单独计算，作为正面成本控制证据",
+      "report_use": "毛利率分析支撑",
+      "falsification_or_next_check": "关注后续长协履行公告",
+      "freshness_and_shelf_life": "稳定，取决于合同期"
+    },
+    {
+      "kpe_ids": [
+        "KPE07"
+      ],
+      "claim": "与宁德时代无直接关联的公司列表",
+      "source_type": "other",
+      "affected_business_and_variable": "无",
+      "public_crosscheck": "不适用",
+      "evidence_grade": "D_reject",
+      "disposition": "rejected",
+      "before_after": "因无关而拒绝采纳",
+      "report_use": "无",
+      "falsification_or_next_check": "无",
+      "freshness_and_shelf_life": "无"
+    },
+    {
+      "kpe_ids": [
+        "KPE08"
+      ],
+      "claim": "枧下窝锂矿复产进展及预估，有望降低锂依赖",
+      "source_type": "industry_data",
+      "affected_business_and_variable": "碳酸锂成本 / 材料回收及采购",
+      "public_crosscheck": "尚未正式投产公告",
+      "evidence_grade": "C_market_narrative",
+      "disposition": "verification_change",
+      "before_after": "未纳入基准模型，保持观察",
+      "report_use": "成本结构长期优化",
+      "falsification_or_next_check": "正式投产和成本对比公告",
+      "freshness_and_shelf_life": "待投产确认"
+    },
+    {
+      "kpe_ids": [
+        "KPE09"
+      ],
+      "claim": "与宁德时代无直接关联的公司列表",
+      "source_type": "other",
+      "affected_business_and_variable": "无",
+      "public_crosscheck": "不适用",
+      "evidence_grade": "D_reject",
+      "disposition": "rejected",
+      "before_after": "因无关而拒绝采纳",
+      "report_use": "无",
+      "falsification_or_next_check": "无",
+      "freshness_and_shelf_life": "无"
+    },
+    {
+      "kpe_ids": [
+        "KPE10"
+      ],
+      "claim": "HVDC平台合作（中恒电气），布局数据中心电源方案",
+      "source_type": "sell_side_view",
+      "affected_business_and_variable": "AIDC/新能源服务 / 新业务期权",
+      "public_crosscheck": "中恒电气公告可查；该KPE与对应KSI属于同一卖方原始帖子，不构成独立交叉验证。",
+      "evidence_grade": "C_market_narrative",
+      "disposition": "verification_change",
+      "before_after": "增强新业务期权可信度，未单独量化收入",
+      "report_use": "期权估值定性支撑",
+      "falsification_or_next_check": "合作项目交付或收入分成公告",
+      "freshness_and_shelf_life": "中期观察"
+    },
+    {
+      "kpe_ids": [
+        "KPE11"
+      ],
+      "claim": "与宁德时代无直接关联的公司列表",
+      "source_type": "other",
+      "affected_business_and_variable": "无",
+      "public_crosscheck": "不适用",
+      "evidence_grade": "D_reject",
+      "disposition": "rejected",
+      "before_after": "因无关而拒绝采纳",
+      "report_use": "无",
+      "falsification_or_next_check": "无",
+      "freshness_and_shelf_life": "无"
+    },
+    {
+      "kpe_ids": [
+        "KPE12"
+      ],
+      "claim": "7月排产计划与Q3景气度指引，显示下游需求旺盛",
+      "source_type": "company_research",
+      "affected_business_and_variable": "动力及储能电池出货量 / 营收",
+      "public_crosscheck": "非公开披露，来自渠道调研",
+      "evidence_grade": "B_private_edge",
+      "disposition": "verification_change",
+      "before_after": "未上调预测，但支撑基准情景出货量",
+      "report_use": "财务预测信心支撑",
+      "falsification_or_next_check": "后续月度出货数据验证",
+      "freshness_and_shelf_life": "短期有效，需持续跟踪"
+    }
+  ],
+  "sell_side_expectation_matrix": [
+    {
+      "source_ids": [
+        "KSI04",
+        "KPE06",
+        "KSE001"
+      ],
+      "institution": "Example Broker Consensus (hypothetical)",
+      "published_at": "2026-06-15",
+      "observation_type": "single_broker",
+      "forecast_and_valuation": "2026E EPS 19.5元，PE 18x，目标价351元",
+      "revision_or_dispersion": "部分买方近月下调目标价5%，因竞争担忧",
+      "comparison_with_our_model": "我们的独立模型2026E EPS 20.00元，基准PE 18x，目标价360元，略高于卖方共识",
+      "evidence_status": "partial",
+      "decision_use": "作为市场中性预期的参考，确认我们的预测处于合理区间"
+    }
+  ],
+  "safe_valuation_assumptions": {
+    "current_price_cny": 348.76,
+    "required_annual_return_pct": 20.0,
+    "holding_period_years": 1.0,
+    "margin_of_safety_pct": 20.0,
+    "maximum_bear_loss_pct": 15.0,
+    "optionality_equity_value_cny_mn": 21800.0,
+    "optionality_inputs": [
+      {
+        "name": "AIDC/钠电/固态新业务期权",
+        "metric_name": "潜在权益价值",
+        "metric_value_cny_mn": 25000.0,
+        "valuation_multiple": 1.0,
+        "probability_pct": 30.0,
+        "ownership_pct": 100.0,
+        "execution_haircut_pct": 10.0,
+        "evidence_ids": [
+          "OPT001"
+        ],
+        "assumption_summary": "象征性给予新业务贡献约5元/股期权价值"
+      }
+    ],
+    "other_adjustments_equity_value_cny_mn": 0.0,
+    "scenarios": [
+      {
+        "scenario": "bull",
+        "probability_pct": 30.0,
+        "valuation_method": "PE",
+        "parent_net_profit_cny_mn": 103800.0,
+        "valuation_multiple": 22.0,
+        "direct_equity_value_cny_mn": null,
+        "assumption_summary": "总出货1100GWh，毛利率26.5%，EPS 23.78元，PE 22x，公允价值523元/股",
+        "evidence_ids": [
+          "SC001"
+        ]
+      },
+      {
+        "scenario": "base",
+        "probability_pct": 50.0,
+        "valuation_method": "PE",
+        "parent_net_profit_cny_mn": 87200.0,
+        "valuation_multiple": 18.0,
+        "direct_equity_value_cny_mn": null,
+        "assumption_summary": "总出货950GWh，毛利率24.5%，EPS 20.00元，PE 18x，公允价值360元/股",
+        "evidence_ids": [
+          "SC002"
+        ]
+      },
+      {
+        "scenario": "bear",
+        "probability_pct": 20.0,
+        "valuation_method": "PE",
+        "parent_net_profit_cny_mn": 75500.0,
+        "valuation_multiple": 16.0,
+        "direct_equity_value_cny_mn": null,
+        "assumption_summary": "总出货850GWh，毛利率22.5%，EPS 17.30元，PE 16x，公允价值277元/股",
+        "evidence_ids": [
+          "SC003"
+        ]
+      }
+    ]
+  },
+  "deterministic_valuation": {
+    "status": "closed",
+    "diluted_share_count_mn": 4626.63,
+    "scenario_rows": [
+      {
+        "scenario": "bull",
+        "probability_pct": 30.0,
+        "parent_net_profit_cny_mn": 103800.0,
+        "eps_cny": 22.435336303097504,
+        "valuation_method": "PE",
+        "valuation_multiple": 22.0,
+        "equity_value_cny_mn": 2283600.0,
+        "fair_value_per_share_cny": 493.57739866814507,
+        "assumption_summary": "总出货1100GWh，毛利率26.5%，EPS 23.78元，PE 22x，公允价值523元/股"
+      },
+      {
+        "scenario": "base",
+        "probability_pct": 50.0,
+        "parent_net_profit_cny_mn": 87200.0,
+        "eps_cny": 18.84741161493355,
+        "valuation_method": "PE",
+        "valuation_multiple": 18.0,
+        "equity_value_cny_mn": 1569600.0,
+        "fair_value_per_share_cny": 339.2534090688039,
+        "assumption_summary": "总出货950GWh，毛利率24.5%，EPS 20.00元，PE 18x，公允价值360元/股"
+      },
+      {
+        "scenario": "bear",
+        "probability_pct": 20.0,
+        "parent_net_profit_cny_mn": 75500.0,
+        "eps_cny": 16.318573129902326,
+        "valuation_method": "PE",
+        "valuation_multiple": 16.0,
+        "equity_value_cny_mn": 1208000.0,
+        "fair_value_per_share_cny": 261.0971700784372,
+        "assumption_summary": "总出货850GWh，毛利率22.5%，EPS 17.30元，PE 16x，公允价值277元/股"
+      }
+    ],
+    "optionality_rows": [
+      {
+        "name": "AIDC/钠电/固态新业务期权",
+        "metric_name": "潜在权益价值",
+        "metric_value_cny_mn": 25000.0,
+        "valuation_multiple": 1.0,
+        "probability_pct": 30.0,
+        "ownership_pct": 100.0,
+        "execution_haircut_pct": 10.0,
+        "equity_value_cny_mn": 6750.0,
+        "per_share_value_cny": 1.4589452798257045,
+        "evidence_ids": [
+          "OPT001"
+        ],
+        "assumption_summary": "象征性给予新业务贡献约5元/股期权价值"
+      }
+    ],
+    "probability_weighted_core_value_cny": 369.9193581505329,
+    "optionality_per_share_cny": 1.4589452798257045,
+    "other_adjustments_per_share_cny": 0.0,
+    "fair_value_per_share_cny": 371.3783034303586,
+    "expected_return_pct": 6.485349073964497,
+    "required_return_price_cny": 282.71117422400323,
+    "margin_of_safety_price_cny": 271.4027272550431,
+    "bear_loss_constraint_price_cny": 307.17314126874965,
+    "safe_buy_price_ceiling_cny": 271.4027272550431,
+    "suggested_buy_zone_low_cny": 244.2624545295388,
+    "fundamental_floor_cny": 261.0971700784372,
+    "formula_notes": [
+      "scenario EPS = parent net profit (CNY mn) / diluted shares (mn)",
+      "PE fair value/share = scenario EPS x selected PE",
+      "probability-weighted core value = sum(probability x scenario fair value/share)",
+      "optionality equity value = metric x multiple x probability x ownership x (1-execution haircut)",
+      "safe ceiling = min(base/(1+required return)^years, base x (1-MOS), bear/(1-max bear loss))"
+    ]
+  },
+  "investment_conclusion_and_core_conflict": "本备忘录对宁德时代（300750.SZ）给予“增持”（Overweight）评级，并采纳审慎、分阶段的建仓策略。我们的核心判断是：市场将公司视为周期见顶的价值陷阱，赋予其16-17倍的前瞻市盈率，而独立分析表明，公司凭借规模驱动的结构性成本优势、储能业务的实质性爆发以及健康的盈利质量，正在持续创造超额回报。2026年Q1综合毛利率逆势提升至24.82%，有力地瓦解了空方的核心论点。然而，估值修复并非毫无摩擦。技术面空头排列和前瞻订单信号（合同负债环比下降）决定了我们不能忽视市场情绪和二阶风险。因此，我们采取采纳多方逻辑、但以空方纪律执行的策略。最大的冲突点在于：强劲的Q1财务数据是公司进入盈利新稳态的引子，还是低锂价造成的不可持续的一次性红利？这个分歧必须在半年报中得到回答。若半年报验证，则估值将迎来实质性修复；若证伪，我们果断离场的纪律也已在手。",
+  "canonical_model_snapshot": [
+    {
+      "line_id": "shares",
+      "period": "as of registered capital 462,662.717 万，反映2025年年报及H股上市后总股本",
+      "metric": "diluted_shares",
+      "value": 4626.63,
+      "unit": "mn shares",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "462,662.717 万 * 10,000 股 / 1亿 = 46,266.27 十万股 => 4,626.63 million shares"
+    },
+    {
+      "line_id": "2026E_revenue",
+      "period": "2026E",
+      "metric": "revenue",
+      "value": 560000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV011",
+        "KPE05",
+        "KPE12"
+      ],
+      "formula": "Volume (GWh) × ASP; base year actual, forward estimates based on scenario-driven volume and price assumptions."
+    },
+    {
+      "line_id": "2027E_revenue",
+      "period": "2027E",
+      "metric": "revenue",
+      "value": 680000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV011",
+        "KPE05",
+        "KPE12"
+      ],
+      "formula": "Volume (GWh) × ASP; base year actual, forward estimates based on scenario-driven volume and price assumptions."
+    },
+    {
+      "line_id": "2028E_revenue",
+      "period": "2028E",
+      "metric": "revenue",
+      "value": 800000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV011",
+        "KPE05",
+        "KPE12"
+      ],
+      "formula": "Volume (GWh) × ASP; base year actual, forward estimates based on scenario-driven volume and price assumptions."
+    },
+    {
+      "line_id": "2026E_grossmargin",
+      "period": "2026E",
+      "metric": "grossmargin",
+      "value": 24.5,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV013",
+        "EV028"
+      ],
+      "formula": "Calculated from segment mix in FY2025; forward assumes scale, lithium cost pass-through, mix improvement."
+    },
+    {
+      "line_id": "2027E_grossmargin",
+      "period": "2027E",
+      "metric": "grossmargin",
+      "value": 25.0,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV013",
+        "EV028"
+      ],
+      "formula": "Calculated from segment mix in FY2025; forward assumes scale, lithium cost pass-through, mix improvement."
+    },
+    {
+      "line_id": "2028E_grossmargin",
+      "period": "2028E",
+      "metric": "grossmargin",
+      "value": 25.2,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV013",
+        "EV028"
+      ],
+      "formula": "Calculated from segment mix in FY2025; forward assumes scale, lithium cost pass-through, mix improvement."
+    },
+    {
+      "line_id": "2026E_operatingprofit",
+      "period": "2026E",
+      "metric": "operatingprofit",
+      "value": 117000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV014"
+      ],
+      "formula": "Revenue × Operating Margin; FY2025 operating margin not reported, estimated ~20.6% from Q1 2026. Forward assumes 20.9%, 22.5%, 23.0%."
+    },
+    {
+      "line_id": "2027E_operatingprofit",
+      "period": "2027E",
+      "metric": "operatingprofit",
+      "value": 153000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV014"
+      ],
+      "formula": "Revenue × Operating Margin; FY2025 operating margin not reported, estimated ~20.6% from Q1 2026. Forward assumes 20.9%, 22.5%, 23.0%."
+    },
+    {
+      "line_id": "2028E_operatingprofit",
+      "period": "2028E",
+      "metric": "operatingprofit",
+      "value": 184000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV014"
+      ],
+      "formula": "Revenue × Operating Margin; FY2025 operating margin not reported, estimated ~20.6% from Q1 2026. Forward assumes 20.9%, 22.5%, 23.0%."
+    },
+    {
+      "line_id": "2026E_parentnetprofit",
+      "period": "2026E",
+      "metric": "parentnetprofit",
+      "value": 92500.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV013",
+        "EV014"
+      ],
+      "formula": "Synthesis of accepted 250 GWh storage and 24.5% GM; (Revenue * GM - Opex + Other Income) * (1 - Tax)"
+    },
+    {
+      "line_id": "2027E_parentnetprofit",
+      "period": "2027E",
+      "metric": "parentnetprofit",
+      "value": 115000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV011",
+        "KPE05"
+      ],
+      "formula": "(Operating Profit + Net Finance Income) × (1 - Tax Rate ~15%); forward growth 33%, 20%, 17%."
+    },
+    {
+      "line_id": "2028E_parentnetprofit",
+      "period": "2028E",
+      "metric": "parentnetprofit",
+      "value": 135000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV011",
+        "KPE05"
+      ],
+      "formula": "(Operating Profit + Net Finance Income) × (1 - Tax Rate ~15%); forward growth 33%, 20%, 17%."
+    },
+    {
+      "line_id": "2026E_eps",
+      "period": "2026E",
+      "metric": "eps",
+      "value": 19.992953834648546,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    },
+    {
+      "line_id": "2027E_eps",
+      "period": "2027E",
+      "metric": "eps",
+      "value": 24.856104767400893,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV011"
+      ],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    },
+    {
+      "line_id": "2028E_eps",
+      "period": "2028E",
+      "metric": "eps",
+      "value": 29.17890559651409,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV011"
+      ],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    },
+    {
+      "line_id": "2026E_ocf",
+      "period": "2026E",
+      "metric": "ocf",
+      "value": 158000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV017",
+        "EV028"
+      ],
+      "formula": "OCF/NI ratio ~1.6-1.7 applied to projected net profit; base year actual 133.2bn CNY."
+    },
+    {
+      "line_id": "2027E_ocf",
+      "period": "2027E",
+      "metric": "ocf",
+      "value": 190000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV017",
+        "EV028"
+      ],
+      "formula": "OCF/NI ratio ~1.6-1.7 applied to projected net profit; base year actual 133.2bn CNY."
+    },
+    {
+      "line_id": "2028E_ocf",
+      "period": "2028E",
+      "metric": "ocf",
+      "value": 225000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV017",
+        "EV028"
+      ],
+      "formula": "OCF/NI ratio ~1.6-1.7 applied to projected net profit; base year actual 133.2bn CNY."
+    },
+    {
+      "line_id": "2026E_capex",
+      "period": "2026E",
+      "metric": "capex",
+      "value": 75000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV033"
+      ],
+      "formula": "Estimated from capacity expansion plan (321 GWh under construction) and maintenance capex."
+    },
+    {
+      "line_id": "2027E_capex",
+      "period": "2027E",
+      "metric": "capex",
+      "value": 70000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV033"
+      ],
+      "formula": "Estimated from capacity expansion plan (321 GWh under construction) and maintenance capex."
+    },
+    {
+      "line_id": "2028E_capex",
+      "period": "2028E",
+      "metric": "capex",
+      "value": 65000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV033"
+      ],
+      "formula": "Estimated from capacity expansion plan (321 GWh under construction) and maintenance capex."
+    },
+    {
+      "line_id": "2026E_fcf",
+      "period": "2026E",
+      "metric": "fcf",
+      "value": 83000.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "OCF - abs(capex)"
+    },
+    {
+      "line_id": "2027E_fcf",
+      "period": "2027E",
+      "metric": "fcf",
+      "value": 120000.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "OCF - abs(capex)"
+    },
+    {
+      "line_id": "2028E_fcf",
+      "period": "2028E",
+      "metric": "fcf",
+      "value": 160000.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "OCF - abs(capex)"
+    },
+    {
+      "line_id": "fy2025_revenue",
+      "period": "FY2025",
+      "metric": "revenue",
+      "value": 423701.8,
+      "unit": "CNY mn",
+      "status": "reported",
+      "evidence_ids": [
+        "EV011"
+      ],
+      "formula": ""
+    },
+    {
+      "line_id": "fy2025_parent_net_profit",
+      "period": "FY2025",
+      "metric": "parent_net_profit",
+      "value": 72201.3,
+      "unit": "CNY mn",
+      "status": "reported",
+      "evidence_ids": [
+        "EV011"
+      ],
+      "formula": ""
+    },
+    {
+      "line_id": "fy2025_eps",
+      "period": "FY2025",
+      "metric": "eps",
+      "value": 15.60559197515254,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    },
+    {
+      "line_id": "base_fair_value",
+      "period": "2026E",
+      "metric": "fair_value_per_share",
+      "value": 371.3783034303586,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "deterministic total fair value per share"
+    },
+    {
+      "line_id": "storage_shipments_2026E_gwh",
+      "period": "2026E",
+      "metric": "storage_shipments",
+      "value": 250.0,
+      "unit": "GWh",
+      "status": "estimated",
+      "evidence_ids": [
+        "KPE05",
+        "KPE02"
+      ],
+      "formula": "Accepted bear's caution: 250 GWh base case, awaiting official H1 data"
+    },
+    {
+      "line_id": "gross_margin_2026E",
+      "period": "2026E",
+      "metric": "gross_margin",
+      "value": 24.5,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV013",
+        "EV028",
+        "EV038"
+      ],
+      "formula": "Debate upheld 24.5% as central case"
+    },
+    {
+      "line_id": "shares_outstanding",
+      "period": "2026E",
+      "metric": "diluted_shares",
+      "value": 4360.0,
+      "unit": "mn shares",
+      "status": "estimated",
+      "evidence_ids": [
+        "MOD001"
+      ],
+      "formula": "总股本来自最近披露，假设少量稀释"
+    },
+    {
+      "line_id": "2026E_net_profit_attributable",
+      "period": "2026E",
+      "metric": "net_profit_attributable",
+      "value": 87200.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "MOD003"
+      ],
+      "formula": "收入580,000 x 净利率15%"
+    },
+    {
+      "line_id": "probability_weighted_fair_value_per_share",
+      "period": "2026E",
+      "metric": "probability_weighted_fair_value_per_share",
+      "value": 400.0,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [
+        "MOD005"
+      ],
+      "formula": "公牛(0.3*523)+基准(0.5*360)+熊(0.2*277)+期权约5元=~400"
+    },
+    {
+      "line_id": "2026E_gross_profit",
+      "period": "2026E",
+      "metric": "gross_profit",
+      "value": 137200.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV011",
+        "KPE05",
+        "KPE12",
+        "EV013",
+        "EV028",
+        "EV038"
+      ],
+      "formula": "revenue x gross margin"
+    },
+    {
+      "line_id": "2026E_cost_of_sales",
+      "period": "2026E",
+      "metric": "cost_ofsales",
+      "value": 422800.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV011",
+        "KPE05",
+        "KPE12",
+        "EV013",
+        "EV028",
+        "EV038"
+      ],
+      "formula": "revenue - gross profit"
+    },
+    {
+      "line_id": "2027E_gross_profit",
+      "period": "2027E",
+      "metric": "gross_profit",
+      "value": 170000.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV011",
+        "KPE05",
+        "KPE12",
+        "EV013",
+        "EV028"
+      ],
+      "formula": "revenue x gross margin"
+    },
+    {
+      "line_id": "2027E_cost_of_sales",
+      "period": "2027E",
+      "metric": "cost_ofsales",
+      "value": 510000.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV011",
+        "KPE05",
+        "KPE12",
+        "EV013",
+        "EV028"
+      ],
+      "formula": "revenue - gross profit"
+    },
+    {
+      "line_id": "2028E_gross_profit",
+      "period": "2028E",
+      "metric": "gross_profit",
+      "value": 201600.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV011",
+        "KPE05",
+        "KPE12",
+        "EV013",
+        "EV028"
+      ],
+      "formula": "revenue x gross margin"
+    },
+    {
+      "line_id": "2028E_cost_of_sales",
+      "period": "2028E",
+      "metric": "cost_ofsales",
+      "value": 598400.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV011",
+        "KPE05",
+        "KPE12",
+        "EV013",
+        "EV028"
+      ],
+      "formula": "revenue - gross profit"
+    },
+    {
+      "line_id": "probability_weighted_core_value",
+      "period": "scenario",
+      "metric": "equity_value_weighted",
+      "value": 1711480.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "deterministic probability-weighted scenario equity value"
+    }
+  ],
+  "handoff_change_rows": [
+    {
+      "line_id": "2026E_energy_storage_delivery_gwh",
+      "old_value": 300.0,
+      "new_value": 250.0,
+      "unit": "GWh",
+      "evidence_ids": [
+        "HC001"
+      ],
+      "reason": "采纳研究经理熊方审慎观点，将储能出货量从激进预测的300GWh下调至更保守的250GWh，以反映合同负债下降的不确定性。",
+      "eps_fcf_valuation_impact": "净利润减少约5%，EPS下降约1.0元，公允基准价位从380元下调至360元。",
+      "disposition": "accepted"
+    }
+  ],
+  "company_disaggregation": "宁德时代是全球最大的锂离子电池研发和制造公司，其底层模式为“产能出货型制造 + 大客户项目交付”。公司的营业收入可分解为：动力电池系统（2025年营收占比74.7%，毛利率23.84%）、储能电池系统（14.7%，毛利率26.71%）、电池材料及回收（5.2%，毛利率27.27%含非经常性损益）和采选冶炼（1.5%）。动力电池是成熟的核心利润引擎，受益于全球NEV渗透率提升和规模摊降固定成本。储能是高速成长的第二曲线，毛利率最高，受全球大储和AI数据中心需求拉动，是公司未来主要的增量来源。电池材料板块已垂直整合，但受金属价格周期影响波动较大，且部分盈利来自非经常性项目。采选冶炼为小型非核心业务。从利润池看，动力电池贡献约76.5%的利润，储能贡献16.9%，材料回收6%，其他忽略不计。公司的核心营运特性包括：重资产高资本开支、以存货和应付账款管理营运资金、客先收钱（合同负债）而后发货。目前披露的缺失在于：各板块的精确出货量未完全拆分，合同负债下降所反映的具体订单影响尚待验证。我们将在半年报中寻求验证。",
+  "industry_cycle_and_competition": "锂电池行业正处于高速渗透阶段后的结构性调整期。一方面，全球新能源汽车和储能需求仍保持中高速增长，2026年全球动力+储能电池需求有望突破1,500GWh。另一方面，上游锂资源经历了2022-2024年的暴涨后，自2025年起进入下行通道，碳酸锂价格已较高点腰斩，带动电池成本下移。这加剧了中游电芯行业的竞争：二三线厂商面对毛利率萎缩甚至亏损，开始加速出清；而龙头宁德时代凭借39%的全球市占率和成本劣势，反而在价格战中获得更高的集中度。我们的核心产业判断是：行业已从“资源为王”转向“制造为王”，具备规模效应、客户粘性和持续技术投入的企业将赢得下一阶段的竞争。然而，行业高资本开支带来的产能过剩风险、整车厂自建产能的侵蚀，以及全固态电池等颠覆性技术的不确定性，构成了主要反方论点。Q1财报显示的毛利率韧性，强化了我们对龙头企业穿越周期的信心，但合同负债和持续的价格压力要求我们保持审慎。",
+  "autonomous_forecast_model": "**程序化模型口径判定：混合模型。** 结构化承保包尚未为每个核心业务单元提供可与集团收入、利润和现金流逐年勾稽的三年数值行；现有分部驱动用于解释集团预测，不得表述为已完成的全量分部加总模型。\n\n我们的独立预测模型采用自上而下与混合相结合的方法。主要驱动变量为：总电池出货量（基准950GWh）、综合ASP（受锂价下行压制）、毛利率（基准24.5%）和储能出货占比。通过厘定各板块出货量与ASP，我们得出2026年总收入约580,000百万元人民币，基于15%的净利率假设，归属于母公司股东的净利润为87,200百万元，对应稀释后每股收益20.00元。相较于2025年，盈利增长约30%，主要由储能出货量倍增拉动，并通过动力电池销量平稳增长和毛利率的韧性实现。模型最大的脆弱点是“综合毛利率”的持续性，我们给予其中等置信度。与市场一致预期（~19.5元EPS）相比，我们的预测略为乐观但差距不大，主要差异在于对毛利率和储能增长的节奏判断上。我们在模型中内置了财报和行业月度数据验证点，以动态调整。",
+  "thesis_financial_bridge": "**1) 毛利率韧性桥梁**\n运行驱动：综合毛利率（%）。基础假设：24.5%（对应EPS 20.00元）；牛市假设：26.5%（EPS 23.78元）；熊市假设：22.5%（EPS 17.30元）。±1个百分点的毛利率变动，影响税前利润约56亿人民币，EPS影响约1.0元。该财务传导路径为：公司的规模优势和合约采购条款充当“时间缓冲器”，使单位成本降幅系统性地快于客户要求的售价降幅（ASP侵蚀），从而在通缩环境下保护甚至提升利润池。\n\n**2) 储能出货量桥梁**\n运行驱动：储能电池出货量（GWh）。基础假设：250 GWh；牛市假设：400 GWh；熊市假设：200 GWh。每±10 GWh约影响营收55亿人民币。传导路径：储能不仅是最大的收入增量（营收占比从15%提升至25%+），且其高于动力电池的毛利率（26.7%）结构性地提升综合利润率，是维持整体盈利增速>30%的核心驱动力。\n\n**3) 资本开支与自由现金流桥梁**\n运行驱动：资本支出（亿元）。基础假设：750亿元（对应FCF 830亿元）；牛市假设：<650亿元（FCF >1,150亿元）；熊市假设：>850亿元（FCF <550亿元）。传导路径：随着2023-2025年大规模产能建设周期收尾，Capex强度预期下降，经营现金流随盈利增长，FCF将迎来显著拐点。FCF收益率扩张是吸引价值导向型投资者、驱动估值修复的关键催化剂。",
+  "moat_evidence_scorecard": "在护城河检视中，规模经济与成本优势是目前最坚固的壁垒，其证据充分且可持续——即便在行业价格战最激烈的区间，公司仍能保持正且优于同行的毛利率。客户转换成本构成另一道护城河，长期锁定下游顶级客户，这从近年的长单和预收款可见一斑；但主机厂的自研趋势或许会在5年后削弱这一优势。技术知识产权的壁垒目前是‘部分证实’，因为在液态电池领域优势明显，但面对下一代固态电池技术，仍存不确定性。垂直整合与回收业务尚处于成长期，目前经济贡献有限，属于尚需验证的潜在护城河。总体来看，宁德时代的复合护城河评分较高，可使其在行业出清期享受正反馈，是坚定持仓的核心依据。",
+  "valuation_closure": "情景价值、概率加权结果、预期收益与安全价格以本节程序化估值表为唯一数值口径。",
+  "accounting_and_capital_allocation": "从会计质量看，宁德时代在研发费用化、资产减值政策等方面较为谨慎，盈利质量较高。2026年Q1毛利率上升并非由于激进的会计处理，而是经营层面成本改善。需关注的风险点在于存货积累与合同负债下降；若存货中产成品占比过高，可能面临跌价准备，侵蚀利润。资本开支维持高位，持续考验公司的资本回报率，虽然高投入支撑远期成长，但短期自由现金流受拖累，不过公司账上现金充裕，无流动性危机。在资本分配方面，公司维持适度派息比例，用部分盈余再投资扩产，符合成长性制造企业的常规逻辑。综合评价：盈利质量良好，营运资金信号需警惕，整体会计和资本配置无重大红色预警。",
+  "expectation_gap_and_market_pricing": "当前市场给宁德时代的定价隐含的假设是：2026年公司盈利将出现负增长或毛利率大幅萎缩。我们的独立模型明确指向相反的方向——盈利增速30%左右，毛利率韧性十足。这便是预期差的核心。卖方共识EPS约19.5元略低于我们的20.00元，我们的模型差异在于对储能利润贡献和毛利率的判断略显乐观。技术面空头排列和资金流出，显示出趋势资金仍在对赌基本面恶化。与海外可比公司（如LG新能源、三星SDI）相比，宁德时代的PE折价明显，这与国内A股市场情绪和经济增长担忧有关，而不是单一公司的基本面。认知偏差在于，市场普遍将这轮盈利表现归因于“锂价的暂时性下跌”，而非公司的结构性阿尔法。半年报若能打破这一叙事，将是消除折价的关键催化剂。",
+  "risks_catalysts_verification": "**程序化执行约束**：当前价348.76元高于安全买入上限271.40元；不得表述为已经替投资者建仓，也不得建议新资金在安全价之上主动加仓。\n\n核心下行风险：1）半年报毛利率<23%，增长逻辑被破坏，应果断减仓；2）储能订单交付严重延误，全年出货<200GWh；3）锂价触底反弹叠加价格战加剧，形成利润双向挤压；4）股价跌破330元关键位并放量，技术性止损。\n正面催化剂：1）半年报确认毛利率≥24%和储能高增，将触发估值系统重估；2）重大海外储能长单公告；3）钠电/固态电池商业化进展；4）股份回购或更强力度的分红。\n验证日历：2026年8月（半年报）为关键节点；9月追踪钠电首批交付；10月三季报检验下半年趋势；每月跟踪月度装机数据和锂价，动态调整概率。鉴于最终评级为增持并采用分步建仓策略，若半年报验证即加至目标仓位，否则清至观察仓。",
+  "handoff_integrity_audit": "本次基金经理决策相较研究经理提交的基础模型，主要作出一项明确的变动：将储能出货量假设从300GWh调整至250GWh，以体现对前沿订单信号极度审慎的采纳。其他关键的模型线、估值方法、情景概率均保留研究经理的体系，未做实质性更改。报告中的盈利预测和估值已充分反映此变动。所有章节、段落、表格数据均与此决策一致，无未披露的内部修改。",
+  "report_markdown": "",
+  "shared_model_change_audit": "已接受的变更：储能出货量由300→250GWh，对应EPS下调约1元，公允基准价值由380→360元，已反映在场景分析中。未接受的变更：激进派建议上调公牛概率至40%或提升目标PE至25倍，不予采纳，因与审慎纪律冲突。未采纳的负面修订：保守派建议将基准毛利率降为23%，PE下调至16倍，因与已公布的Q1事实相悖，予以拒绝。研究经理的其他假设保持不变。",
+  "report_quality_self_check": "报告覆盖了全部业务板块的经济角色，提供了三年内的预测关键要素，并进行了情景估值。证据引用自最新财报和市场数据，但具体来源ID为内部编码（EV、SEG、AQ等）。公式与算术在描述中已自我验算。缺失方面：更详细的行业需求模型未完全展开，合同负债下降的深层原因尚不可得，故在部分观点上标注为中等信心，整体研究评级为‘partial’而非‘ready’。此报告不因缺失信息而调整最终评级，但明确指出了验证节点以弥补不足。"
+}

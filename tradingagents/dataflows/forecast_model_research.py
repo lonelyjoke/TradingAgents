@@ -142,6 +142,33 @@ def _sell_side_expectation_excerpt(text: str) -> str:
     return "missing; no company-specific external forecast supplied"
 
 
+def _official_guidance_section(company_events_context: str) -> list[str]:
+    rows = _compact_lines(
+        company_events_context,
+        (
+            r"Official Earnings Guidance|Performance Preannouncements|earnings guidance|performance preview",
+            "\u4e1a\u7ee9\u9884\u544a|\u4e1a\u7ee9\u5feb\u62a5|\u9884\u589e|\u9884\u51cf|\u626d\u4e8f",
+            "\u5f52\u5c5e\u4e8e\u4e0a\u5e02\u516c\u53f8\u80a1\u4e1c\u7684\u51c0\u5229\u6da6|\u6263\u9664\u975e\u7ecf\u5e38\u6027\u635f\u76ca|\u57fa\u672c\u6bcf\u80a1\u6536\u76ca",
+            r"H1|half-year|Q1|Q2|EPS|YoY|unaudited",
+        ),
+        limit=14,
+    )
+    if not rows:
+        return []
+    return [
+        "",
+        "## Official Earnings Guidance Override",
+        "| supplied official evidence | required model treatment |",
+        "| --- | --- |",
+        *[
+            f"| {row} | hard public evidence for the covered period; reconcile Q1, implied Q2, H1, H2, full-year parent profit/EPS, and mark unaudited/preliminary status where applicable |"
+            for row in rows
+        ],
+        "- If official guidance conflicts with the prior run-rate or sell-side/proxy assumption, update the forecast or state the exact reason it cannot be used. Do not ignore the guidance.",
+        "- After guidance is available, the next verification point is the formal report's segment mix, cost bridge, cash conversion and balance-sheet quality, not whether the guided profit strength exists.",
+    ]
+
+
 def _structured_kpe_quantification_section(
     bundle: Mapping[str, Any] | None,
 ) -> list[str]:
@@ -485,6 +512,7 @@ def build_forecast_model_context(
     industry_kpi_context: str = "",
     metals_mining_context: str = "",
     insurance_context: str = "",
+    company_events_context: str = "",
     knowledge_planet_context: str = "",
     market_expectation_context: str = "",
     structured_research_context: Mapping[str, Any] | None = None,
@@ -501,6 +529,7 @@ def build_forecast_model_context(
             gated_insurance_context,
             industry_kpi_context,
             metals_mining_context,
+            company_events_context,
             knowledge_planet_context,
             market_expectation_context,
         ]
@@ -629,6 +658,7 @@ def build_forecast_model_context(
                 "earnings_model": earnings_model_context,
                 "financial_report_intelligence": filing_intelligence_context,
                 "industry_kpi": industry_kpi_context,
+                "company_events": company_events_context,
                 "market_expectation": market_expectation_context,
                 "knowledge_planet": knowledge_planet_context,
             },
@@ -724,6 +754,7 @@ def build_forecast_model_context(
     shared_underwriting_section = _shared_underwriting_section(
         structured_research_context
     )
+    official_guidance_section = _official_guidance_section(company_events_context)
     underwriting_packet = (structured_research_context or {}).get(
         "underwriting_packet", {}
     )
@@ -793,6 +824,7 @@ def build_forecast_model_context(
             *evidence_ledger_section,
             *segment_matrix_section,
             *expectation_section,
+            *official_guidance_section,
             *assumption_change_section,
             *shared_underwriting_section,
             *structured_kpe_section,
@@ -810,6 +842,7 @@ def build_forecast_model_context(
             "- A Buy/Overweight call should identify which two or three assumptions drive most of the upside.",
             "- Do not cite target price, safety price, or re-rating multiple without showing the earnings/cash-flow bridge behind it.",
             "- If only a run-rate quarter is available, label it as run-rate or stress/base scenario, not as a full forecast.",
+            "- If an official earnings preview, guidance or quick report is available, it overrides run-rate extrapolation for the covered period until the formal report supplies segment, cash-flow and balance-sheet detail.",
             "- Knowledge Planet can supply private/proxy assumptions, but each assumption must be tagged and reconciled with filings, public prices, Tushare data, or a verification calendar before it changes valuation.",
             "- Never copy an external sell-side target or rating. Compare its operating assumptions with this model, record conflicts, and let the system-generated rating follow from the reconciled model.",
         ]
@@ -832,6 +865,7 @@ def get_forecast_model_context(
         industry_kpi_context=supplied.get("industry_kpi_context", ""),
         metals_mining_context=supplied.get("metals_mining_context", ""),
         insurance_context=supplied.get("insurance_context", ""),
+        company_events_context=supplied.get("company_events_context", ""),
         knowledge_planet_context=supplied.get("knowledge_planet_context", ""),
         market_expectation_context=supplied.get("market_expectation_context", ""),
         structured_research_context=supplied.get("structured_research_context", {}),

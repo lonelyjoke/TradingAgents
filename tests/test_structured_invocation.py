@@ -5,6 +5,8 @@ from pydantic import BaseModel
 
 from tradingagents.agents.schemas import (
     CanonicalModelLine,
+    ForecastAssumption,
+    ModelHandoffChange,
     PortfolioRating,
     SellSideEditorialReview,
     SellSidePMDecision,
@@ -33,6 +35,39 @@ from tradingagents.dataflows.pm_report_compaction import split_pm_public_report
 class TinyDecision(BaseModel):
     rating: str
     report: str
+
+
+def test_common_pm_schema_aliases_do_not_trigger_free_text_fallback():
+    assumption = ForecastAssumption.model_validate(
+        {
+            "parameter": "volume growth",
+            "affected_business": "group",
+            "historical_anchor": "FY25",
+            "evidence_status": "estimated",
+            "base_case": "10%",
+            "bull_case": "15%",
+            "bear_case": "0%",
+            "rationale_and_evidence": "analyst model",
+            "sensitivity": "1pp volume changes profit",
+            "confidence": "medium",
+            "verification_gate": "FY26 results",
+        }
+    )
+    change = ModelHandoffChange.model_validate(
+        {
+            "line_id": "rating",
+            "old_value": "Overweight",
+            "new_value": "Hold",
+            "unit": "rating",
+            "reason": "risk changed",
+            "eps_fcf_valuation_impact": "none",
+            "disposition": "accepted",
+        }
+    )
+
+    assert assumption.evidence_status == "analyst_estimate"
+    assert change.old_value is None
+    assert change.new_value is None
 
 
 class FailingStructured:
@@ -172,6 +207,29 @@ def test_sell_side_schema_renders_all_six_company_depth_contracts():
             CanonicalModelLine(line_id="2027E_revenue", period="2027E", metric="revenue", value=110, unit="CNY mn", status="estimated"),
             CanonicalModelLine(line_id="2028E_revenue", period="2028E", metric="revenue", value=120, unit="CNY mn", status="estimated"),
         ],
+        business_model_mechanisms=[
+            {
+                "link": "order to delivery",
+                "how_it_works": "customers place project orders before delivery",
+                "economic_driver": "volume and delivery cycle",
+                "cash_and_capital_feature": "contract liabilities and working capital",
+                "evidence_or_gap": "reported order indicators",
+                "analyst_conclusion": "cash timing matters for earnings quality",
+            }
+        ],
+        segment_economics=[
+            {
+                "business_unit": "core product",
+                "economic_role": "mature core",
+                "disclosure_basis": "analyst_estimate",
+                "scale_and_growth": "reported revenue direction, exact split unavailable",
+                "margin_and_cash": "margin proxy with disclosed limits",
+                "driver_equation": "volume x ASP x margin",
+                "valuation_treatment": "core",
+                "evidence_ids": ["EV01"],
+                "missing_or_next_check": "next filing segment table",
+            }
+        ],
         company_disaggregation=long_600,
         industry_cycle_and_competition=long_500,
         autonomous_forecast_model=long_800,
@@ -209,8 +267,11 @@ def test_sell_side_schema_renders_all_six_company_depth_contracts():
     assert "核心问题裁决" not in public
     assert "核心假设与敏感性" in public
     assert "evidence mechanism financial impact" in public
-    assert appendix == ""
-    assert moved == []
+    assert "### 商业模式如何运转" not in public
+    assert "### 分部经济与价值归属" not in public
+    assert "### 商业模式如何运转" in appendix
+    assert "### 交接完整性审计" in appendix
+    assert moved == ["内部附录A：业务机制与分部经济", "内部附录E：模型交接与报告质量审计"]
 
 
 def test_editorial_review_is_advisory_and_section_specific():
@@ -368,7 +429,8 @@ def test_deterministic_pm_engine_calculates_eps_fcf_scenarios_and_safe_price():
         "investment_conclusion_and_core_conflict": "Conclusion.",
         "canonical_model_snapshot": [
             {"line_id": "shares", "period": "current", "metric": "diluted_share_count", "value": 2000, "unit": "mn shares", "status": "calculated"},
-            {"line_id": "base_fair_value", "period": "scenario", "metric": "equity_value_weighted", "value": 999, "unit": "CNY mn", "status": "calculated"},
+            {"line_id": "base_fair_value", "period": "scenario", "metric": "Fair Value (Base)", "value": 200000, "unit": "CNY mn", "status": "estimated"},
+            {"line_id": "fair_value_per_share", "period": "consolidated", "metric": "Fair Value / Share", "value": 999, "unit": "CNY/share", "status": "estimated"},
             {"line_id": "2027E_revenue", "period": "2027E", "metric": "revenue", "value": 20000, "unit": "CNY mn", "status": "estimated"},
             {"line_id": "2028E_revenue", "period": "2028E", "metric": "revenue", "value": 30000, "unit": "CNY mn", "status": "estimated"},
             {"line_id": "2028E_gross_margin", "period": "2028E", "metric": "gross_margin", "value": 40, "unit": "%", "status": "estimated"},
@@ -511,14 +573,25 @@ def test_deterministic_pm_engine_calculates_eps_fcf_scenarios_and_safe_price():
     assert any("reconciled 2028E revenue growth assumption to +50.0%" in note for note in notes)
     assert any("public revenue growth claim" in note for note in notes)
     assert any("unreconciled segment margin bridge" in note for note in notes)
-    assert any("synchronized weighted equity value" in note for note in notes)
+    assert any("added deterministic probability-weighted core equity value" in note for note in notes)
+    assert any("synchronized total fair value per share" in note for note in notes)
     assert any("manual deterministic valuation" in note for note in notes)
     assert any("unsafe buy/build" in note for note in notes)
     weighted_line = next(
         row for row in decision.canonical_model_snapshot
-        if row.line_id == "base_fair_value"
+        if row.line_id == "probability_weighted_core_value"
     )
     assert weighted_line.value == 203600
+    base_line = next(
+        row for row in decision.canonical_model_snapshot
+        if row.line_id == "base_fair_value"
+    )
+    assert base_line.value == 200000
+    fair_value_line = next(
+        row for row in decision.canonical_model_snapshot
+        if row.line_id == "fair_value_per_share"
+    )
+    assert round(fair_value_line.value, 2) == 102.30
     assert decision.forecast_assumptions[0].base_case.startswith("+50.0%")
     assert "+50.0%" in decision.autonomous_forecast_model
     assert "+20%" not in decision.autonomous_forecast_model
@@ -641,20 +714,20 @@ def test_handoff_check_allows_program_recalculated_ocf():
     assert _canonical_handoff_issues(manager, pm) == []
 
 
-def test_handoff_check_allows_program_recalculated_weighted_valuation():
+def test_handoff_check_allows_program_recalculated_total_fair_value():
     manager = {
         "canonical_model_snapshot": [
-            {"line_id": "base_fair_value", "value": 288083, "unit": "CNY mn"},
+            {"line_id": "fair_value_per_share", "value": 134, "unit": "CNY/share"},
         ]
     }
     pm = {
         "canonical_model_snapshot": [
             {
-                "line_id": "base_fair_value",
-                "value": 225250,
-                "unit": "CNY mn",
+                "line_id": "fair_value_per_share",
+                "value": 159.5,
+                "unit": "CNY/share",
                 "status": "calculated",
-                "formula": "deterministic probability-weighted scenario equity value",
+                "formula": "deterministic total fair value per share",
             },
         ],
         "handoff_change_rows": [],

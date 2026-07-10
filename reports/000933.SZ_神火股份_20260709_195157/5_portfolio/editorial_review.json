@@ -1,0 +1,100 @@
+{
+  "review": {
+    "revision_required": true,
+    "company_understanding_score": 3,
+    "independent_model_score": 2,
+    "evidence_and_counterevidence_score": 2,
+    "valuation_closure_score": 2,
+    "readability_and_synthesis_score": 3,
+    "strongest_aspects": [
+      "财务质量分析详尽，毛利率正常化推理逻辑清晰",
+      "行业驱动力描述有一定深度"
+    ],
+    "findings": [
+      {
+        "section": "three_year_forecast",
+        "priority": "must_revise",
+        "issue": "估值模型与内部接受模型脱节：报告中2026E归母净利润仍使用90亿元、EPS 4.00元，目标价32元，但研究平台已裁决下调至80亿元、EPS 3.56元，公平价值31.53元/股。这导致定价、预期收益和安全区间全部错误。",
+        "evidence_or_logic_gap": "模型未使用平台唯一核定口径，所有估值数字均基于错误利润，报告不可信。",
+        "revision_instruction": "以研究平台的确定性估值输出为唯一数值口径。将2026E归母净利润修正为80亿元、EPS 3.56元，更新三年预测表及估值桶一（核心铝+煤）为640亿元（80亿×8 PE），桶二铝箔期权价值4亿元（0.18元/股），最终呈现概率加权公平价值31.53元/股和安全买入上限18.31元。删除“隐含2026E PE 5.3x”等基于旧利润的语句。在估值闭合中补充安全价格推导并与当前价对比。"
+      },
+      {
+        "section": "thesis_moat_financial_bridge",
+        "priority": "must_revise",
+        "issue": "公开论点缺少系统性的“最强反证”和“证伪条件”，触发了手递手缺陷标记（public thesis chapter missing strongest counterargument/boundary）。",
+        "evidence_or_logic_gap": "每条论点均未配对被观测到的最致命对立事实和可量化证伪阈值，逻辑边界不封闭。",
+        "revision_instruction": "为每一项核心论点（成本护城河、周期位置、估值保护等）明确补充“最强反证”和“证伪条件（Falsification Gate）”。反证须为该论点最致命、已经观测到的对立事实；证伪条件须是未来可验证的量化或事件阈值，一旦触发则该论点失效。这些内容应紧接在论点陈述之后。"
+      },
+      {
+        "section": "three_year_forecast",
+        "priority": "must_revise",
+        "issue": "预测假设缺乏历史锚点和证据引用，违反“不可能成为武断的牛/熊中点”准则。",
+        "evidence_or_logic_gap": "表中仅列出数值，未与历史实际数据或市场可观测数据建立联系，假设显得武断。",
+        "revision_instruction": "为每个关键假设（SHFE铝价、综合毛利率、焦煤价格、铝箔加工费等）增加一列“历史锚点/证据”并引用具体数据来源（如FY2025实际、Q1 2026实际、期货价格等）。说明基准假设如何由历史数据调整而来。"
+      },
+      {
+        "section": "thesis_moat_financial_bridge",
+        "priority": "must_revise",
+        "issue": "缺少独立的thesis_financial_bridge章节，导致论点与财务传导脱节。现有多处片段但未形成清晰桥接。",
+        "evidence_or_logic_gap": "报告仅有片段化的桥梁描述，未能系统性地将每个核心论点转化为具体的利润和每股价值影响。",
+        "revision_instruction": "在估值闭合前新增一节（可编号为七），将三个核心论点提炼为财务桥接：每个论点列出驱动公式、基准/牛/熊关键假设、利润与每股价值影响，并引用对应的Bridge ID（B1铝利润、B2煤炭、B3铝箔、B4资本配置）。保持散文形式但保留必要的数字链接，避免简单复制内部桥接表。"
+      },
+      {
+        "section": "valuation_and_expectation_gap",
+        "priority": "must_revise",
+        "issue": "估值未回答市场预期差，也未集中呈现情景值、安全价格等关键数字，违反“估值应回答预期差”和集中呈现准则。",
+        "evidence_or_logic_gap": "估值章节未能阐明当前市场定价的隐含假设及其与独立模型的差异，且关键数字分散，无法一站式判断投资决策。",
+        "revision_instruction": "在估值闭合章节整合预期差论述：列出卖方一致预期及隐含假设，与我们独立模型的差异（EPS、目标价），说明当前市场定价反映了哪些乐观假设，我们为何更低，并给出预期差收窄的催化剂。将PE、目标价、安全价格、概率加权公平价值、熊市保护价集中于本节，其他章节仅作简要引用。"
+      },
+      {
+        "section": "cross_section_consistency",
+        "priority": "must_revise",
+        "issue": "毛利率正常化论据在行业周期定位、财务质量、核心论点、模型假设中多次完整复述，造成重复。",
+        "evidence_or_logic_gap": "违反“相同假设、阈值、估值结论不得完全重述”准则，使报告冗长且逻辑链条模糊。",
+        "revision_instruction": "保留首次详细分析在“三、财务质量”节；在“一、行业周期定位”中仅提结论不再解释原因；在“四、核心论点”中仅引用“如第三章分析，Q1毛利率不可持续”；在“五、模型假设”中仅注明“基于第三章正常化分析设26%”。删除多余的重复解释。"
+      },
+      {
+        "section": "accounting_and_capital_allocation",
+        "priority": "must_revise",
+        "issue": "虽然会计质量分析较详，但未提供accounting_quality_matrix的结构化总结，也未将各项发现归纳为清晰的正面/警告/中性判断。",
+        "evidence_or_logic_gap": "缺少快速参考矩阵，会计师分析成果未能转化为可操作的评级，降低报告实用性。",
+        "revision_instruction": "在本节末尾添加一个简短的会计质量矩阵表格，包含行：经营现金流/净利润、应收账款增速、负债率、股息覆盖、资本开支/折旧。每行列明最新值、趋势、因果解释和评级（正面/警告/中性），并附证据ID。与正文散文不重复，作为快速参照。"
+      },
+      {
+        "section": "valuation_and_expectation_gap",
+        "priority": "must_revise",
+        "issue": "结构化工作台存在卖方情报，但公开报告未体现卖方预期矩阵，违反准则要求。",
+        "evidence_or_logic_gap": "缺失对可比市场定价参照系的系统呈现，无法定位自身预期在行业中的位置。",
+        "revision_instruction": "在估值或预期差章节插入一个卖方预期矩阵，列出至少一家机构（或范围）、预测期、估值方法/目标、与我们的差异。若确实无具体机构可合并表述行业共识范围。不得使用一句“市场共识”敷衍。"
+      },
+      {
+        "section": "cross_section_consistency",
+        "priority": "must_revise",
+        "issue": "公司质量与赔率节重复了估值数字和部分结论，且未突出安全价格和头寸建议，未清晰呼应投资行动决策。",
+        "evidence_or_logic_gap": "该节沦为重复内容，未能提供增量决策价值，质量与赔率的匹配度判断不突出。",
+        "revision_instruction": "精简本节，删除已在估值闭合列示的数字（目标价、回报率等），改为讨论质量与赔率匹配度、相对配置意义的定性分析。引用估值节的安全买入上限说明当前无买入信号，强调顺应持有评级的立场。可将安全价格与当前价对比置于此处突出。"
+      }
+    ],
+    "overall_editorial_verdict": "报告概念框架存在多处重大缺陷：核心模型与内部平台口径脱节，所有估值输出无效；公开论点缺少系统性反证与证伪边界；论点到财务的桥梁缺失；估值未回应市场预期差且关键数字分散。报告需依据平台唯一核定数据全面修订财务模型、补充桥梁与反证矩阵、消除重复论述，方可作为可用研究备忘录。"
+  },
+  "review_status": {
+    "mode": "schema_repaired_fallback",
+    "agent": "Sell-Side Research Editor",
+    "structured_error": "1 validation error for SellSideEditorialReview\nfindings.3.section\n  Input should be 'investment_conclusion', 'company_disaggregation', 'industry_cycle_and_competition', 'three_year_forecast', 'thesis_moat_financial_bridge', 'accounting_and_capital_allocation', 'valuation_and_expectation_gap', 'risks_catalysts_verification' or 'cross_section_consistency' [type=literal_error, input_value='business_model_mechanisms', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error"
+  },
+  "revision_requested": true,
+  "revision_applied": true,
+  "revision_status": {
+    "mode": "schema_prompt_structured",
+    "agent": "Portfolio Manager Editorial Revision",
+    "structured_error": ""
+  },
+  "initial_handoff_issues": [],
+  "initial_analytical_issues": [
+    "public thesis chapter missing strongest counterargument/boundary",
+    "public thesis chapter missing falsification condition"
+  ],
+  "remaining_handoff_issues": [],
+  "remaining_analytical_issues": [],
+  "revision_rejection_reasons": []
+}

@@ -84,6 +84,19 @@ class ModelHandoffChange(BaseModel):
     eps_fcf_valuation_impact: str
     disposition: Literal["accepted", "rejected", "unchanged", "unresolved"]
 
+    @field_validator("old_value", "new_value", mode="before")
+    @classmethod
+    def normalize_unresolved_non_numeric_value(cls, value):
+        """Keep rating/unknown labels from invalidating a numeric ledger."""
+        if isinstance(value, str):
+            cleaned = value.strip().lower()
+            if cleaned in {
+                "buy", "overweight", "hold", "underweight", "sell",
+                "n/a", "na", "none", "null", "unknown", "unresolved", "-", "--",
+            }:
+                return None
+        return value
+
 
 class ForecastTakeaway(BaseModel):
     """One reader-facing conclusion from the independent forecast."""
@@ -126,6 +139,21 @@ class ForecastAssumption(BaseModel):
     verification_gate: str = Field(
         description="Dated disclosure or observable data that will confirm or falsify the assumption."
     )
+
+    @field_validator("evidence_status", mode="before")
+    @classmethod
+    def normalize_evidence_status(cls, value):
+        aliases = {
+            "estimated": "analyst_estimate",
+            "estimate": "analyst_estimate",
+            "analyst estimate": "analyst_estimate",
+            "analyst-estimate": "analyst_estimate",
+            "not disclosed": "missing",
+            "unavailable": "missing",
+            "unverified": "proxy",
+        }
+        key = str(value or "").strip().lower()
+        return aliases.get(key, value)
 
 
 class InvestmentThesisCard(BaseModel):
@@ -2884,10 +2912,11 @@ def normalize_sell_side_pm_decision(
                     "incremental bull-vs-base optionality excluded because it overlaps scenario value"
                 )
 
-            # Keep any inherited weighted-equity-value snapshot synchronized
-            # with the deterministic scenario engine.  This prevents stale
-            # pre-debate valuation rows from surviving beside the final table.
+            # Publish the deterministic probability-weighted core value as its
+            # own canonical row.  A base-scenario value is not the same metric
+            # and must never be overwritten by the weighted result.
             weighted_equity_value = weighted * shares
+            weighted_line = None
             for line in lines:
                 raw_metric = re.sub(
                     r"[^a-z0-9]+", "", str(line.get("metric", "")).lower()
@@ -2895,9 +2924,16 @@ def normalize_sell_side_pm_decision(
                 raw_id = re.sub(
                     r"[^a-z0-9]+", "", str(line.get("line_id", "")).lower()
                 )
-                if raw_metric == "equityvalueweighted" or raw_id == "basefairvalue":
+                if raw_metric == "equityvalueweighted" or raw_id in {
+                    "probabilityweightedcorevalue",
+                    "weightedfairvalue",
+                }:
+                    weighted_line = line
                     old = line.get("value")
                     line.update(
+                        line_id="probability_weighted_core_value",
+                        period="scenario",
+                        metric="equity_value_weighted",
                         value=weighted_equity_value,
                         unit="CNY mn",
                         status="calculated",
@@ -2908,6 +2944,49 @@ def normalize_sell_side_pm_decision(
                             "synchronized weighted equity value "
                             f"{old} -> {weighted_equity_value:.4f}"
                         )
+                    break
+            if weighted_line is None:
+                lines.append(
+                    {
+                        "line_id": "probability_weighted_core_value",
+                        "period": "scenario",
+                        "metric": "equity_value_weighted",
+                        "value": weighted_equity_value,
+                        "unit": "CNY mn",
+                        "status": "calculated",
+                        "formula": "deterministic probability-weighted scenario equity value",
+                    }
+                )
+                notes.append(
+                    "added deterministic probability-weighted core equity value "
+                    f"{weighted_equity_value:.4f}"
+                )
+
+            # The consolidated per-share fair value is also application-owned
+            # once the deterministic closure succeeds.  Synchronize only the
+            # exact total-fair-value metric; legacy option/base rows remain
+            # untouched and retain their distinct meanings.
+            for line in lines:
+                raw_metric = re.sub(
+                    r"[^a-z0-9]+", "", str(line.get("metric", "")).lower()
+                )
+                raw_id = re.sub(
+                    r"[^a-z0-9]+", "", str(line.get("line_id", "")).lower()
+                )
+                if raw_metric in {"fairvalueshare", "fairvaluepershare"} or raw_id == "fairvaluepershare":
+                    old = line.get("value")
+                    line.update(
+                        value=fair_value,
+                        unit="CNY/share",
+                        status="calculated",
+                        formula="deterministic total fair value per share",
+                    )
+                    if old != fair_value:
+                        notes.append(
+                            "synchronized total fair value per share "
+                            f"{old} -> {fair_value:.4f}"
+                        )
+                    break
         else:
             output.status = "partial"
             output.formula_notes = [f"scenario probabilities must sum to 100%; got {probability_total:.2f}%"]
@@ -3293,6 +3372,60 @@ def _render_valuation_snapshot(output: DeterministicValuationOutput) -> str:
     )
 
 
+def _render_sell_side_internal_appendix(decision: SellSidePMDecision) -> str:
+    """Render detailed workbench material that should not crowd the public memo."""
+    sections: list[str] = []
+    business_detail = "\n\n".join(
+        part
+        for part in (
+            _render_business_model_mechanisms(decision.business_model_mechanisms),
+            _render_segment_economics(decision.segment_economics),
+        )
+        if part
+    ).strip()
+    if business_detail:
+        sections.append("## 内部附录A：业务机制与分部经济\n\n" + business_detail)
+
+    industry_detail = "\n\n".join(
+        part
+        for part in (
+            _render_industry_drivers(decision.industry_driver_matrix),
+            _render_moat_mechanisms(decision.moat_mechanisms),
+        )
+        if part
+    ).strip()
+    if industry_detail:
+        sections.append("## 内部附录B：行业驱动与护城河机制\n\n" + industry_detail)
+
+    accounting_detail = _render_accounting_quality(decision.accounting_quality_matrix)
+    if accounting_detail:
+        sections.append("## 内部附录C：财务质量核查明细\n\n" + accounting_detail)
+
+    expectation_detail = "\n\n".join(
+        part
+        for part in (
+            _render_alternative_intelligence(decision.alternative_intelligence_decisions),
+            _render_sell_side_expectations(decision.sell_side_expectation_matrix)
+            if decision.sell_side_expectation_matrix
+            else "",
+        )
+        if part
+    ).strip()
+    if expectation_detail:
+        sections.append("## 内部附录D：替代信息与卖方预期审计\n\n" + expectation_detail)
+
+    audit_parts = [
+        "### 交接完整性审计\n\n" + decision.handoff_integrity_audit.strip(),
+        "### 共享模型变更审计\n\n" + decision.shared_model_change_audit.strip(),
+        "### 报告质量自检\n\n" + decision.report_quality_self_check.strip(),
+    ]
+    sections.append(
+        "## 内部附录E：模型交接与报告质量审计\n\n"
+        + "\n\n".join(part for part in audit_parts if part.strip())
+    )
+    return "\n\n".join(sections)
+
+
 def render_sell_side_pm_decision(decision: SellSidePMDecision) -> str:
     """Render one continuous reader-facing Chinese deep-dive report.
 
@@ -3319,18 +3452,13 @@ def render_sell_side_pm_decision(decision: SellSidePMDecision) -> str:
             "## 一、投资结论\n\n"
             + _demote_embedded_headings(decision.investment_conclusion_and_core_conflict),
             "## 二、公司画像、商业模式与利润池\n\n"
-            + _demote_embedded_headings(decision.company_disaggregation)
-            + ("\n\n" + _render_business_model_mechanisms(decision.business_model_mechanisms) if decision.business_model_mechanisms else "")
-            + ("\n\n" + _render_segment_economics(decision.segment_economics) if decision.segment_economics else ""),
+            + _demote_embedded_headings(decision.company_disaggregation),
             "## 三、行业格局、竞争优势与护城河\n\n"
             + _demote_embedded_headings(decision.industry_cycle_and_competition)
-            + ("\n\n" + _render_industry_drivers(decision.industry_driver_matrix) if decision.industry_driver_matrix else "")
-            + ("\n\n" + _render_moat_mechanisms(decision.moat_mechanisms) if decision.moat_mechanisms else "")
             + "\n\n### 护城河判断\n\n"
             + _demote_embedded_headings(decision.moat_evidence_scorecard),
             "## 四、经营质量、财务特征与资本配置\n\n"
-            + _demote_embedded_headings(decision.accounting_and_capital_allocation)
-            + ("\n\n" + _render_accounting_quality(decision.accounting_quality_matrix) if decision.accounting_quality_matrix else ""),
+            + _demote_embedded_headings(decision.accounting_and_capital_allocation),
             "## 五、核心投资逻辑与关键分歧\n\n"
             + _demote_embedded_headings(decision.thesis_financial_bridge),
             "## 六、盈利预测与关键变量\n\n"
@@ -3343,14 +3471,13 @@ def render_sell_side_pm_decision(decision: SellSidePMDecision) -> str:
             + _demote_embedded_headings(decision.autonomous_forecast_model),
             "## 七、市场预期差与估值\n\n"
             + _demote_embedded_headings(decision.expectation_gap_and_market_pricing)
-            + ("\n\n" + _render_alternative_intelligence(decision.alternative_intelligence_decisions) if decision.alternative_intelligence_decisions else "")
-            + ("\n\n" + _render_sell_side_expectations(decision.sell_side_expectation_matrix) if decision.sell_side_expectation_matrix else "")
             + "\n\n"
             + _render_deterministic_valuation(decision.deterministic_valuation)
             + "\n\n### 估值解释与局限\n\n"
             + _demote_embedded_headings(decision.valuation_closure),
             "## 八、风险、催化剂与跟踪\n\n"
             + _demote_embedded_headings(decision.risks_catalysts_verification),
+            _render_sell_side_internal_appendix(decision),
         ]
     )
 

@@ -102,3 +102,45 @@ def test_nonblocking_coverage_gaps_do_not_block_or_downgrade_report(tmp_path, mo
     assert "Fundamental Deep Dive" in (tmp_path / "1_analysts" / "fundamentals.md").read_text(encoding="utf-8")
     assert not (tmp_path / "research_archive.md").exists()
     assert not (tmp_path / "5_portfolio" / "decision_draft.md").exists()
+
+
+def test_save_report_persists_pm_internal_appendix_without_public_concatenation(tmp_path, monkeypatch):
+    monkeypatch.setattr(
+        research_validator,
+        "render_post_generation_audit",
+        lambda _report_dir: (
+            "# Post-Generation Audit\n\n"
+            "- PASS: blocking_errors=0, research_errors=0, warnings=0."
+        ),
+    )
+    state = {
+        "risk_debate_state": {
+            "history": "",
+            "aggressive_history": "",
+            "conservative_history": "",
+            "neutral_history": "",
+            "latest_speaker": "Judge",
+            "current_aggressive_response": "",
+            "current_conservative_response": "",
+            "current_neutral_response": "",
+            "judge_decision": "# Public PM\n\n## 一、投资结论\n\nReadable public decision.",
+            "count": 1,
+        },
+        "pm_internal_overflow": "## 内部附录A：业务机制与分部经济\n\nDetailed matrix rows.",
+        "pm_full_decision": "# Public PM\n\nReadable public decision.\n\n## 内部附录A：业务机制与分部经济\n\nDetailed matrix rows.",
+    }
+
+    report_path = save_report_to_disk(state, "300274.SZ", tmp_path)
+
+    complete_report = report_path.read_text(encoding="utf-8")
+    internal_appendix = (tmp_path / "5_portfolio" / "internal_appendix.md").read_text(
+        encoding="utf-8"
+    )
+    full_decision = (tmp_path / "5_portfolio" / "decision_full.md").read_text(
+        encoding="utf-8"
+    )
+
+    assert "Readable public decision" in complete_report
+    assert "Detailed matrix rows" not in complete_report
+    assert "Detailed matrix rows" in internal_appendix
+    assert "Detailed matrix rows" in full_decision

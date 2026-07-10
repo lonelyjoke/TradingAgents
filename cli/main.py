@@ -1088,6 +1088,16 @@ def save_report_to_disk(final_state, ticker: str, save_path: Path):
                     ),
                     encoding="utf-8",
                 )
+            if final_state.get("pm_internal_overflow"):
+                (portfolio_dir / "internal_appendix.md").write_text(
+                    final_state["pm_internal_overflow"],
+                    encoding="utf-8",
+                )
+            if final_state.get("pm_full_decision"):
+                (portfolio_dir / "decision_full.md").write_text(
+                    final_state["pm_full_decision"],
+                    encoding="utf-8",
+                )
             if final_state.get("pm_editorial_review"):
                 (portfolio_dir / "editorial_review.json").write_text(
                     json.dumps(

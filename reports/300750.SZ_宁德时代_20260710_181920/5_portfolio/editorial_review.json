@@ -1,0 +1,100 @@
+{
+  "review": {
+    "revision_required": true,
+    "company_understanding_score": 4,
+    "independent_model_score": 4,
+    "evidence_and_counterevidence_score": 3,
+    "valuation_closure_score": 3,
+    "readability_and_synthesis_score": 4,
+    "strongest_aspects": [
+      "毛利率韧性分析有力，引用Q1实际数据瓦解悲观论调，逻辑严密。",
+      "预期差分析清晰，将市场定价隐含的盈利衰退与公司实际增长数据对比，抓住了核心矛盾。",
+      "对储能业务作为第二曲线的描述翔实，包括钠电产能、交付时间表和验证路径。",
+      "会计质量关注点（存货、合同负债）被正确识别为前瞻风险信号。"
+    ],
+    "findings": [
+      {
+        "section": "industry_cycle_and_competition",
+        "priority": "must_revise",
+        "issue": "行业驱动矩阵缺失。",
+        "evidence_or_logic_gap": "报告仅以叙述方式描述行业因素，未提供结构化的 `industry_driver_matrix`（如全球新能源车渗透率、碳酸锂价格、储能装机需求、竞争格局等驱动因子与其方向、证据、影响量化及验证节点），不符合研究备忘要求。",
+        "revision_instruction": "在 2.3 碳酸锂成本传导之后，插入一个 `industry_driver_matrix` 表格，包含至少四个驱动因子：全球新能源车渗透率、碳酸锂价格、全球储能装机需求、电池行业竞争格局。每个因子必须列出：当前状态与方向、引用证据（带日期）、影响的业务单元、财务传导（量化大致影响）、置信度和下次验证。"
+      },
+      {
+        "section": "company_disaggregation",
+        "priority": "must_revise",
+        "issue": "业务架构机制（business_model_mechanisms）缺失。",
+        "evidence_or_logic_gap": "报告描述了各板块，但未以结构化方式解释每一关键运营环节（客户需求驱动、成本管控、技术溢价、循环经济、营运资金）如何运作并映射到财务。缺乏 `business_model_mechanisms` 行。",
+        "revision_instruction": "在第一部分末尾，添加 `business_model_mechanisms` 表格，每个机制一行：包括客户需求驱动、成本管控与规模效应、技术溢价与产品升级、循环经济回收、营运资金与现金流管理。每行必须填 `how_it_works`、`economic_driver`、`cash_and_capital_feature`、`evidence_or_gap` 和 `analyst_conclusion`。"
+      },
+      {
+        "section": "thesis_moat_financial_bridge",
+        "priority": "must_revise",
+        "issue": "缺少 thesis financial bridge（论点财务桥梁表）。",
+        "evidence_or_logic_gap": "虽然文字讨论了毛利率、储能出货和估值修复，但没有以结构化的桥梁表格将这些论点直接映射到收入、利润、EPS和估值的影响范围和幅度。研究计划中的 B1、B2、B3 桥梁未被呈现。",
+        "revision_instruction": "在第四部分核心假设之后，添加 `thesis_financial_bridge` 表格，至少包含三条桥梁：毛利率韧性桥梁（从毛利率假设到税前利润变化）、储能出货量桥梁（从出货量到营收和利润）、资本开支与自由现金流桥梁（从 capex 到 FCF 产生估值影响）。每条桥梁必须给出基础/牛/熊假设下的数值范围及 EPS 影响。"
+      },
+      {
+        "section": "accounting_and_capital_allocation",
+        "priority": "must_revise",
+        "issue": "会计质量矩阵（accounting_quality_matrix）缺失。",
+        "evidence_or_logic_gap": "报告只简单提到存货和合同负债风险，未以结构化矩阵系统评估毛利率、存货、资本开支、研发资本化等重要会计科目的质量、趋势及其对盈利和现金的影响。",
+        "revision_instruction": "在第五部分护城河检验之后，插入 `accounting_quality_matrix` 表格，覆盖：毛利率与成本匹配、存货与营运资金、资本支出与折旧、研发费用资本化。每项需提供最新证据、趋势、因果解释、对盈利/现金/ROIC的影响和综合判断（positive/warning/negative）。"
+      },
+      {
+        "section": "valuation_and_expectation_gap",
+        "priority": "must_revise",
+        "issue": "估值信息分散，未集中在估值章节；概率加权估值表未显式呈现。",
+        "evidence_or_logic_gap": "PE 倍数、目标价、情景估值出现在第三部分表格、预期差分析和投资建议中，违反了“精确的PE/目标/安全价格/情景数值应集中在第7节”的规则。同时未给出明确的概率加权核心价值和期权价值分解。",
+        "revision_instruction": "将估值相关内容整合到一个独立的估值章节。提供一个明确的估值表格，包含情景概率、EPS、PE倍数、情景公允价值，并计算出概率加权核心价值。单独列出期权价值（AIDC/钠电等），给出每股价值，最后合计公平价值。安全买入价格也应在此节计算并说明，其他章节仅简短交叉引用。"
+      },
+      {
+        "section": "cross_section_consistency",
+        "priority": "should_revise",
+        "issue": "缺少卖方预期矩阵（sell_side_expectation_matrix）。",
+        "evidence_or_logic_gap": "报告在预期差分析中提到了卖方共识，但没有以规范化矩阵形式记录具体的机构、日期、预测期、估值方法/倍数/目标价、修订历史以及与我们独立模型的差异。这在有 KSI 行数据时是必需的结构化要求。",
+        "revision_instruction": "在估值章节之后，添加 `sell_side_expectation_matrix`，至少包含一个代表性卖方（如引用 KSI04 的机构），列出观察类型、预测/估值细节、修订情况、与独立模型的对比，并说明如何用于校准预期差。"
+      },
+      {
+        "section": "cross_section_consistency",
+        "priority": "must_revise",
+        "issue": "缺少替代情报决策矩阵（alternative_intelligence_decisions）。",
+        "evidence_or_logic_gap": "源数据中包含多条 KPE 知识星球情报，报告正文或其附录未按规则对每条去重材料声明提供采纳/拒绝/观察的决策行，这会导致模型变动的透明度不足。",
+        "revision_instruction": "在报告的附录或共享模型更新账本后，添加 `alternative_intelligence_decisions` 行，每一条相关 KPE（如 KPE01 至 KPE12 中未拒绝的）需有采纳状态、理由及对模型/概率是否有变动。已被拒绝的简短说明原因。"
+      },
+      {
+        "section": "thesis_moat_financial_bridge",
+        "priority": "should_revise",
+        "issue": "核心论点的证伪条件未显式与论点捆绑。",
+        "evidence_or_logic_gap": "在‘核心投资假设’部分，未明确为每个关键假设（毛利率韧性、储能出货高增、估值修复）设定量化的证伪条件，只在后文笼统提及半年报验证。这削弱了纪律性。",
+        "revision_instruction": "在核心判断之后，为每一条主要论点（毛利率≥24%、储能出货≥250GWh、估值修复的逻辑）明确列出具体的‘证伪门槛’（例如毛利率H1<23%，储能年出货<200GWh，PE持续<15x），而非仅笼统的验证节点。"
+      }
+    ],
+    "overall_editorial_verdict": "备忘录对宁德时代的业务核心、毛利率韧性和预期差有深刻洞察，但仍存在多处结构性缺失。必须补充业务机制、行业驱动、论点桥梁、会计质量及估值集中等结构化矩阵，以符合深度研究的标准。同时需透明化替代情报决策和卖方预期对比。修订后，报告的分析深度和可验证性将显著提升。"
+  },
+  "review_status": {
+    "mode": "schema_prompt_structured",
+    "agent": "Sell-Side Research Editor",
+    "structured_error": ""
+  },
+  "revision_requested": true,
+  "revision_applied": true,
+  "revision_status": {
+    "mode": "schema_repaired_fallback",
+    "agent": "Portfolio Manager Editorial Revision",
+    "structured_error": "7 validation errors for SellSidePMDecision\nalternative_intelligence_decisions.0.disposition\n  Input should be 'model_change', 'probability_change', 'verification_change' or 'rejected' [type=literal_error, input_value='watch', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nalternative_intelligence_decisions.1.disposition\n  Input should be 'model_change', 'probability_change', 'verification_change' or 'rejected' [type=literal_error, input_value='watch', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nalternative_intelligence_decisions.3.disposition\n  Input should be 'model_change', 'probability_change', 'verification_change' or 'rejected' [type=literal_error, input_value='watch', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nalternative_intelligence_decisions.5.disposition\n  Input should be 'model_change', 'probability_change', 'verification_change' or 'rejected' [type=literal_error, input_value='watch', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nalternative_intelligence_decisions.7.disposition\n  Input should be 'model_change', 'probability_change', 'verification_change' or 'rejected' [type=literal_error, input_value='watch', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nalternative_intelligence_decisions.9.disposition\n  Input should be 'model_change', 'probability_change', 'verification_change' or 'rejected' [type=literal_error, input_value='watch', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nalternative_intelligence_decisions.11.disposition\n  Input should be 'model_change', 'probability_change', 'verification_change' or 'rejected' [type=literal_error, input_value='watch', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error"
+  },
+  "initial_handoff_issues": [],
+  "initial_analytical_issues": [
+    "analytical structure: auditable forecast assumptions count=2, expected at least 3",
+    "public thesis chapter missing strongest counterargument/boundary",
+    "public thesis chapter missing market-pricing implication"
+  ],
+  "remaining_handoff_issues": [],
+  "remaining_analytical_issues": [
+    "public thesis chapter missing strongest counterargument/boundary",
+    "public thesis chapter missing market-pricing implication",
+    "public thesis chapter missing falsification condition"
+  ],
+  "revision_rejection_reasons": []
+}

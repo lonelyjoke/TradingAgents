@@ -66,6 +66,7 @@ class AgentState(MessagesState):
     peer_comparison_context: Annotated[str, "Precomputed same-industry peer context"]
     supply_chain_comparison_context: Annotated[str, "Precomputed cross-position chain context"]
     earnings_model_context: Annotated[str, "Precomputed earnings-model bridge context"]
+    company_events_context: Annotated[str, "Precomputed company announcement/event context"]
     market_expectation_context: Annotated[str, "Precomputed market-implied expectation context"]
     price_earnings_decomposition_context: Annotated[str, "Precomputed historical price/EPS/PE decomposition context"]
     management_capital_allocation_context: Annotated[str, "Precomputed management/capital-allocation context"]

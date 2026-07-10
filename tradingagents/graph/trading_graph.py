@@ -113,6 +113,7 @@ def _build_precomputed_data_coverage(
     peer_comparison_context: str,
     supply_chain_comparison_context: str,
     earnings_model_context: str,
+    company_events_context: str,
     market_expectation_context: str,
     price_earnings_decomposition_context: str,
     management_capital_allocation_context: str,
@@ -157,6 +158,7 @@ def _build_precomputed_data_coverage(
             "peer_comparison": peer_comparison_context,
             "supply_chain_comparison": supply_chain_comparison_context,
             "earnings_model": earnings_model_context,
+            "company_events": company_events_context,
             "market_expectation": market_expectation_context,
             "price_eps_pe_decomposition": price_earnings_decomposition_context,
             "management_capital_allocation": management_capital_allocation_context,
@@ -215,6 +217,7 @@ _A_SHARE_CONTEXT_SPECS = [
         "Supply-chain position comparison",
     ),
     ("earnings_model_context", "get_earnings_model_context", "Earnings-model context"),
+    ("company_events_context", "get_company_events", "Company announcement/event context"),
     (
         "market_expectation_context",
         "get_market_expectation_context",
@@ -858,6 +861,7 @@ class TradingAgentsGraph:
         peer_comparison_context = contexts["peer_comparison_context"]
         supply_chain_comparison_context = contexts["supply_chain_comparison_context"]
         earnings_model_context = contexts["earnings_model_context"]
+        company_events_context = contexts["company_events_context"]
         market_expectation_context = contexts["market_expectation_context"]
         price_earnings_decomposition_context = contexts["price_earnings_decomposition_context"]
         management_capital_allocation_context = contexts["management_capital_allocation_context"]
@@ -925,6 +929,7 @@ class TradingAgentsGraph:
             {
                 "filing_intelligence": filing_intelligence_context,
                 "earnings_model": earnings_model_context,
+                "company_events": company_events_context,
                 "company_business_model": company_business_model_context,
                 "industry_cycle": industry_cycle_context,
                 "industry_kpi": industry_kpi_context,
@@ -945,6 +950,7 @@ class TradingAgentsGraph:
             filing_intelligence_context=filing_intelligence_context,
             peer_comparison_context=peer_comparison_context,
             insurance_context=insurance_context,
+            company_events_context=company_events_context,
             industry_kpi_context=industry_kpi_context,
             metals_mining_context=metals_mining_context,
             knowledge_planet_context=knowledge_planet_context,
@@ -1012,6 +1018,7 @@ class TradingAgentsGraph:
             peer_comparison_context=peer_comparison_context,
             supply_chain_comparison_context=supply_chain_comparison_context,
             earnings_model_context=earnings_model_context,
+            company_events_context=company_events_context,
             market_expectation_context=market_expectation_context,
             price_earnings_decomposition_context=price_earnings_decomposition_context,
             management_capital_allocation_context=management_capital_allocation_context,
@@ -1111,6 +1118,7 @@ class TradingAgentsGraph:
         peer_comparison_context = contexts["peer_comparison_context"]
         supply_chain_comparison_context = contexts["supply_chain_comparison_context"]
         earnings_model_context = contexts["earnings_model_context"]
+        company_events_context = contexts["company_events_context"]
         market_expectation_context = contexts["market_expectation_context"]
         price_earnings_decomposition_context = contexts["price_earnings_decomposition_context"]
         management_capital_allocation_context = contexts["management_capital_allocation_context"]
@@ -1178,6 +1186,7 @@ class TradingAgentsGraph:
             {
                 "filing_intelligence": filing_intelligence_context,
                 "earnings_model": earnings_model_context,
+                "company_events": company_events_context,
                 "company_business_model": company_business_model_context,
                 "industry_cycle": industry_cycle_context,
                 "industry_kpi": industry_kpi_context,
@@ -1200,6 +1209,7 @@ class TradingAgentsGraph:
             filing_intelligence_context=filing_intelligence_context,
             peer_comparison_context=peer_comparison_context,
             insurance_context=insurance_context,
+            company_events_context=company_events_context,
             industry_kpi_context=industry_kpi_context,
             metals_mining_context=metals_mining_context,
             knowledge_planet_context=knowledge_planet_context,
@@ -1267,6 +1277,7 @@ class TradingAgentsGraph:
             peer_comparison_context=peer_comparison_context,
             supply_chain_comparison_context=supply_chain_comparison_context,
             earnings_model_context=earnings_model_context,
+            company_events_context=company_events_context,
             market_expectation_context=market_expectation_context,
             price_earnings_decomposition_context=price_earnings_decomposition_context,
             management_capital_allocation_context=management_capital_allocation_context,

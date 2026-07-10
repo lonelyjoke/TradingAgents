@@ -1,0 +1,516 @@
+{
+  "recommendation": "Hold",
+  "research_readiness": "partial",
+  "core_bet": "神火股份的核心投资假设是：新疆/云南的低电力成本构成结构性优势，使公司在铝价下行周期中保持正利差，同时铝箔满产与商丘三期提供成长期权。多头赌注是市场将重新定价这一低成本利润池，而空头赌注是Q1高利润率不可持续、煤炭业务结构性疲弱、成本优势未经验证。两者的争议收敛于毛利率正常化水平与估值合理性。",
+  "research_questions": [
+    "AL-1: 神火是成本优势利润池还是铝价Beta？",
+    "AL-4: 铝价下行风险有多大？公司资产负债表和现金流韧性如何？",
+    "Q1-2026: 33.48%的毛利率是否可持续？有多少是源于一次性因素？",
+    "COAL: 焦煤价格反弹22%能否转化为煤炭分部实际盈利改善，还是会被销量下滑和结构性宽松抵消？"
+  ],
+  "question_verdicts": [
+    {
+      "question": "AL-1: 神火是成本优势利润池还是铝价Beta？",
+      "why_decisive": "决定估值应给予结构性的成本优势溢价，还是按普通周期股定价。",
+      "conclusion": "成本优势逻辑合理，新疆自备电和云南水电确实提供较低的电力成本（推测0.25-0.30元/度），但每吨2000-3000元的现金成本优势尚未经第三方独立验证。Q1 2026毛利率跃升更多体现一次性库存和季节性因素，而非结构性优势的充分证明。因此，目前称其为牢固的护城河为时过早，但公司具备相对成本竞争力。",
+      "evidence_used": [
+        "EV014: Q1 2026 毛利率 33.48% vs 14.93% (Q1 2025)",
+        "EV015: 管理层在年报中提及竞争优势但未量化",
+        "2026-06-30投资者互动: 公司回避成本细节，指引关注半年报",
+        "承销包B1桥接: 假设单位现金成本18,000元/吨"
+      ],
+      "strongest_counterevidence": "空头指出毛利率跃升18.56pp中，开曼铝业分红等投资收益仅贡献不到5pp，剩余13pp+无法用结构性成本优势解释，更符合一次性成本反转（低价氧化铝库存消耗、季节性电力折扣）。",
+      "model_or_valuation_effect": "将2026E毛利率假设从分析师的32%下调至26%（正常化），归母净利润从90亿下调至80亿，公允价值降至640亿左右，对应PE 8x。",
+      "confidence": "medium",
+      "next_verification": "2026年半年报（7月28日）披露的电解铝单位成本、毛利率轨迹和氧化铝采购价格，以及第三方成本曲线数据（SMM/Antaike）。"
+    },
+    {
+      "question": "AL-4: 铝价下行风险有多大？",
+      "why_decisive": "界定公司能承受的价格底部，以及市场当前定价是否过度悲观。",
+      "conclusion": "即使铝价跌至20,000元/吨（SHFE当前23,060），公司仍能维持正利差，资产负债表（负债率40.9%）和强劲的经营现金流（OCF/净利润1.76x）提供缓冲。3.72%的股息率和45%的派息率构成下行保护。铝价需跌破18,000元/吨并伴随经营现金流转负，才会真正威胁到公司生存。",
+      "evidence_used": [
+        "EV018: Q1 2026 OCF/净利润 1.76x",
+        "2025年年度报告: 资产负债率 40.88%",
+        "2025年利润分配预案: 0.80元/股，派息率45%",
+        "SHFE AL价格: 23,060元/吨"
+      ],
+      "strongest_counterevidence": "应收账款Q1同比+36.7%，若经济下行可能恶化；流动比率0.90，短期依赖持续经营现金流；若铝价急跌，存货可能面临减值。",
+      "model_or_valuation_effect": "在悲观情景（铝价20,000元/吨，毛利率22%）下，2026E归母净利润可能降至45-50亿，对应PE 10-11倍（当前市值480亿），下行空间约-20%至-30%。估值下行风险可控，不属于毁灭性打击。",
+      "confidence": "medium",
+      "next_verification": "SHFE铝价走势、社会库存数据、半年报中的现金流和应收账款质量。"
+    },
+    {
+      "question": "Q1-2026: 毛利率33.48%的可持续性？",
+      "why_decisive": "多头5.2倍市盈率（年化Q1利润）和空头12倍市盈率（基于2025年全年）的巨大分歧源头。",
+      "conclusion": "不可持续。Q1毛利率异常高，包含大量一次性因素：低价氧化铝库存消化、云南丰水期低电价、铝价在季度内相对坚挺。正常化后全年毛利率预估在25-27%之间，显著低于Q1。多头年化Q1利润的估值方法基本错误。",
+      "evidence_used": [
+        "EV014: Q1 2026 毛利率 33.48% vs Q1 2025 14.93%",
+        "EV013: Q1 2026 营收124亿，归母净利润22.9亿",
+        "2025年年度报告: 全年毛利率23.4%"
+      ],
+      "strongest_counterevidence": "多头强调OCF/NI高达1.76倍，显示利润质量高，部分成本优化（如碳素原料降价）可能持续。",
+      "model_or_valuation_effect": "将全年毛利率假设从32%下调至26%；2026E归母净利润从90亿下调至80亿；EPS从4.00元降至3.56元；基于8x PE的目标价由35元下调至28.5元。",
+      "confidence": "high",
+      "next_verification": "2026年半年报（7月28日）的毛利率，如果回落至25%以下，将进一步确认；若维持在28%以上，需重新评估。"
+    },
+    {
+      "question": "COAL: 煤炭分部能否改善？",
+      "why_decisive": "煤炭占收入约14%，但对利润弹性影响大，是周期右侧验证的重要变量。",
+      "conclusion": "焦煤期货反弹22%是积极信号，但管理层在年报中定性“供需总体宽松”，且H1 2025煤炭收入同比-19%，显示销量逆风。煤炭定价100%现货，价格弹性大，但销量受到结构性去碳化和高产量政策压制。短期很难出现利润大幅逆转。",
+      "evidence_used": [
+        "EV031: 2025年年度报告MD&A：煤炭市场供需总体呈现宽松格局",
+        "EV029: H1 2025煤炭收入同比-18.99%",
+        "JM.DCE期货价格: 1,290元/吨，+22.2%",
+        "投资者互动: 煤炭销售签量不签价"
+      ],
+      "strongest_counterevidence": "焦煤价格已反弹，如果后续能传导至公司实际售价，且下半年需求回暖，煤炭分部盈利可能边际改善。",
+      "model_or_valuation_effect": "维持煤炭分部收入约55亿、利润贡献约12亿的谨慎假设，无上行惊喜。忽略多头的弹性恢复预期。",
+      "confidence": "medium",
+      "next_verification": "半年报中的煤炭销量和单位售价数据，以及焦煤价格是否能维持在1200元以上。"
+    }
+  ],
+  "forecast_takeaways": [
+    {
+      "takeaway": "2026年盈利将正常化至80亿元左右，远低于Q1年化的91亿元，但高于2025年的40亿元，体现铝价中枢上移和成本优化部分留存。",
+      "evidence_anchor": "Q1 2026 归母净利润22.9亿，但毛利率畸高；2025年全年归母净利润40亿，毛利率23.4%。",
+      "financial_implication": "2026E EPS约3.56元，当前21.35元对应PE 6.0x；给予8x目标估值则目标价28.5元，存在约33%上行空间。但其实现依赖于毛利率稳定在26%以上。",
+      "confidence_and_risk": "中等信心。若下半年铝价加速下跌或成本反弹，归母净利润可能降至50-60亿，EPS挫至2.2-2.7元。"
+    },
+    {
+      "takeaway": "公司资产负债表健康，现金流强劲，具备渡过周期低谷的能力，股息率提供安全垫。",
+      "evidence_anchor": "负债率40.9%，OCF/净利润1.76x，2025年派息预案0.80元/股，股息率3.72%。",
+      "financial_implication": "即使在悲观情景下，公司应能维持分红，从而支撑PB和股价，下行空间可能小于纯商品价格跌幅。",
+      "confidence_and_risk": "高信心。主要风险是极端铝价下跌和应收账款恶化。"
+    }
+  ],
+  "forecast_assumptions": [
+    {
+      "parameter": "SHFE铝均价",
+      "affected_business": "有色金属分部（电解铝）",
+      "historical_anchor": "2025年全年均价约23,500-24,000？当前23,060，近90天跌6.3%。",
+      "evidence_status": "proxy",
+      "base_case": "22,000-23,000元/吨",
+      "bull_case": "24,000元/吨以上",
+      "bear_case": "20,000元/吨以下",
+      "rationale_and_evidence": "当前期价23,060，但呈下行趋势。供给端有产能天花版，需求端受新能源和建筑拖累。选择偏保守。",
+      "sensitivity": "铝价每变动1,000元/吨，影响净利润约10亿元（按140万吨销量计）。",
+      "confidence": "medium",
+      "verification_gate": "LME和SHFE库存数据，中国房地产和汽车产销数据，半年报中的实现售价。"
+    },
+    {
+      "parameter": "综合毛利率",
+      "affected_business": "集团合并",
+      "historical_anchor": "2025全年23.4%，Q1 2025为14.9%，Q1 2026为33.5%。",
+      "evidence_status": "analyst_estimate",
+      "base_case": "25-27%",
+      "bull_case": "28-30%",
+      "bear_case": "22-24%",
+      "rationale_and_evidence": "剔除Q1的一次性因素后，认为全年可维持25-27%，略高于2025年，因铝价中枢尚未大幅崩塌，且少量成本优化留存。",
+      "sensitivity": "毛利率每变动1pp，影响毛利约5亿元，净利润约3.75亿元。",
+      "confidence": "low",
+      "verification_gate": "2026年半年报（7月28日）毛利率。若低于25%，假设下调；高于28%，则上调。"
+    }
+  ],
+  "core_theses": [
+    {
+      "rank": 1,
+      "takeaway": "神火股份当前并非明显的被低估资产，但过度的悲观情绪提供了左侧观察的价值。毛利率正常化的不确定性阻碍了立即买入。",
+      "decisive_question": "Q1毛利率可持续性",
+      "evidence": "Q1 2026 毛利率33.48% vs 2025全年23.4%",
+      "strongest_counterevidence": "多头强调的5.2倍市盈率是基于错误的利润年化。",
+      "financial_transmission": "2026E 归母净利润 80亿，EPS 3.56元",
+      "market_pricing": "当前480亿市值对应正常化利润 PE 6倍（按80亿），或TTM PE 12倍（按40亿）。市场已部分反映盈利下滑，但未给予明确溢价。",
+      "falsification_gate": "半年报毛利率低于25%，则看多逻辑失效，盈利需再下调。",
+      "verdict": "partial"
+    },
+    {
+      "rank": 2,
+      "takeaway": "公司具备度过行业低潮的财务韧性，股息提供下行缓冲，但相对强度和煤炭业务拖累形成持续的alpha弱势，短期内不宜重仓。",
+      "decisive_question": "AL-4: 下行风险",
+      "evidence": "负债率40.9%，OCF/NI 1.76x，股息率3.72%",
+      "strongest_counterevidence": "60日跑输板块19.93%，250日跑输25.64%，市场投票看空。",
+      "financial_transmission": "下行风险控制在20-30%，不是因为估值保护，而是因为现金流和分红。",
+      "market_pricing": "PB 1.79倍处于5年最低8.6%分位，提供了所谓的'价值锚'，但低PB也可能源于ROE下降或资产质量担忧。",
+      "falsification_gate": "若铝价跌破18,000元/吨且经营现金流季度为负，安全垫消失。",
+      "verdict": "partial"
+    }
+  ],
+  "company_disaggregation": "1. 有色金属分部（收入占比约69%）：包含电解铝（液铝、铝锭）和铝箔。电解铝是核心利润引擎，成本优势来源于新疆自备电和云南水电。铝箔现有5万吨满产，商丘三期5万吨在建，贡献成长期权。\n2. 采掘业分部（收入占比约14%）：煤炭（无烟煤、贫瘦煤），100%现货销售，面临结构性需求下滑。\n3. 其他：贸易、能源等，体量较小。",
+  "autonomous_forecast_model": "单位：百万元。\n2025A 收入 41241，归母净利润 4005。\n2026E 收入 50000，毛利率 26.0%，归母净利润 8000，EPS 3.56元。\n关键驱动：电解铝销量140万吨，ASP 22500元/吨；煤炭收入5500；铝箔收入3500。\n2027E 收入 52000，归母净利润 7500。\n2028E 收入 55000，归母净利润 7200。\n现金流：OCF/净利润维持在1.3-1.5倍，资本开支30-40亿/年，FCF充裕。",
+  "thesis_financial_bridge": "B1 (铝利润): ASP 22500 - 成本 17500 = 利润5000元/吨 * 140万吨 = 7000亿（单位修正：应为70亿元）。\nB2 (煤炭): 焦煤价1200，成本800，销量500万吨，贡献约20亿营收，利润6亿。\nB3 (铝箔): 加工费利润1亿+。\nB4 (分红): 派息率40%+，对应股息约3.5%。",
+  "moat_evidence_verdict": "成本优势：逻辑存在，但具体每吨低于行业2000-3000元的数据未经验证，缺乏第三方成本曲线对标，状态为'部分验证'。煤炭品质溢价：同样未验证。目前无法给出'宽护城河'结论。",
+  "valuation_closure": "桶1（核心铝+煤）：2026E 归母净利润80亿 x 8倍PE = 640亿。\n桶2（铝箔期权）：价值6亿（成功概率50%，8x PE）。\n合计公允价值：646亿，对应每股28.7元（基于22.49亿总股本）。\n当前市值480亿，目标价有34%上行空间。但由于盈利尚未确认，且相对强度弱势，不适合立即采取行动，评级暂为Hold/Positive Watch，待半年报验证毛利率后再决定是否升级为Overweight。若毛利率如空头预期低于25%，则目标价下调至23元以下，转为Underweight。",
+  "canonical_model_snapshot": [
+    {
+      "line_id": "shares",
+      "period": "latest",
+      "metric": "diluted_share_count_mn",
+      "value": 2249.0,
+      "unit": "mn shares",
+      "status": "estimated",
+      "evidence_ids": [
+        "calc_from_market_cap_and_close"
+      ],
+      "formula": "market_cap / close_price: 48016243940 / 21.35"
+    },
+    {
+      "line_id": "2026E_revenue",
+      "period": "2026E",
+      "metric": "revenue",
+      "value": 50000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV011",
+        "EV012"
+      ],
+      "formula": "sum of segment revenue estimates"
+    },
+    {
+      "line_id": "2026E_gross_margin",
+      "period": "2026E",
+      "metric": "gross_margin",
+      "value": 26.0,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV014",
+        "debate_reconciliation"
+      ],
+      "formula": "normalized from Q1 33.5% spike"
+    },
+    {
+      "line_id": "2026E_parent_net_profit",
+      "period": "2026E",
+      "metric": "parent_net_profit",
+      "value": 8000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV011",
+        "EV012"
+      ],
+      "formula": "revenue * gross_margin - opex - tax"
+    },
+    {
+      "line_id": "2026E_eps",
+      "period": "2026E",
+      "metric": "eps",
+      "value": 3.56,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "2026E_parent_net_profit / shares"
+    },
+    {
+      "line_id": "base_fair_value",
+      "period": "2026E",
+      "metric": "fair_value_per_share",
+      "value": 28.5,
+      "unit": "CNY/share",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "2026E_eps * 8.0 (target PE)"
+    },
+    {
+      "line_id": "2027E_revenue",
+      "period": "2027E",
+      "metric": "revenue",
+      "value": 52500.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV012",
+        "EV011"
+      ],
+      "formula": "Coal revenue + Aluminum revenue (包铝箔) + other minor adjustments. Derived from segment assumptions and Q1 2026 seasonality indication."
+    },
+    {
+      "line_id": "2028E_revenue",
+      "period": "2028E",
+      "metric": "revenue",
+      "value": 55000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV012",
+        "EV011"
+      ],
+      "formula": "Coal revenue + Aluminum revenue (包铝箔) + other minor adjustments. Derived from segment assumptions and Q1 2026 seasonality indication."
+    },
+    {
+      "line_id": "2027E_grossmargin",
+      "period": "2027E",
+      "metric": "grossmargin",
+      "value": 29.0,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV014"
+      ],
+      "formula": "(Revenue - COGS) / Revenue. Q1 2026: 33.48%, assumed gradually declining as commodity prices normalize."
+    },
+    {
+      "line_id": "2028E_grossmargin",
+      "period": "2028E",
+      "metric": "grossmargin",
+      "value": 27.0,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV014"
+      ],
+      "formula": "(Revenue - COGS) / Revenue. Q1 2026: 33.48%, assumed gradually declining as commodity prices normalize."
+    },
+    {
+      "line_id": "2026E_operatingmargin",
+      "period": "2026E",
+      "metric": "operatingmargin",
+      "value": 27.0,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV015"
+      ],
+      "formula": "Operating profit / revenue. Q1 2026: 29.18%; assuming higher SG&A as foil ramps."
+    },
+    {
+      "line_id": "2027E_operatingmargin",
+      "period": "2027E",
+      "metric": "operatingmargin",
+      "value": 24.0,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV015"
+      ],
+      "formula": "Operating profit / revenue. Q1 2026: 29.18%; assuming higher SG&A as foil ramps."
+    },
+    {
+      "line_id": "2028E_operatingmargin",
+      "period": "2028E",
+      "metric": "operatingmargin",
+      "value": 22.0,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV015"
+      ],
+      "formula": "Operating profit / revenue. Q1 2026: 29.18%; assuming higher SG&A as foil ramps."
+    },
+    {
+      "line_id": "2026E_operatingprofit",
+      "period": "2026E",
+      "metric": "operatingprofit",
+      "value": 13500.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV015"
+      ],
+      "formula": "Revenue × Operating margin"
+    },
+    {
+      "line_id": "2027E_operatingprofit",
+      "period": "2027E",
+      "metric": "operatingprofit",
+      "value": 12600.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV015"
+      ],
+      "formula": "Revenue × Operating margin"
+    },
+    {
+      "line_id": "2028E_operatingprofit",
+      "period": "2028E",
+      "metric": "operatingprofit",
+      "value": 12100.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV015"
+      ],
+      "formula": "Revenue × Operating margin"
+    },
+    {
+      "line_id": "2027E_parentnetprofit",
+      "period": "2027E",
+      "metric": "parentnetprofit",
+      "value": 8500.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV012",
+        "EV016"
+      ],
+      "formula": "Operating profit - finance costs + investment income - tax. Effective tax rate ~25%. Q1 net margin 18.45% suggests 2026E 18%."
+    },
+    {
+      "line_id": "2028E_parentnetprofit",
+      "period": "2028E",
+      "metric": "parentnetprofit",
+      "value": 8000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV012",
+        "EV016"
+      ],
+      "formula": "Operating profit - finance costs + investment income - tax. Effective tax rate ~25%. Q1 net margin 18.45% suggests 2026E 18%."
+    },
+    {
+      "line_id": "2026E_ocf",
+      "period": "2026E",
+      "metric": "ocf",
+      "value": 13500.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV018",
+        "EV037"
+      ],
+      "formula": "Net profit × OCF/NI ratio (assumed 1.5x). Q1 2026 ratio was 1.76x, normalized."
+    },
+    {
+      "line_id": "2027E_ocf",
+      "period": "2027E",
+      "metric": "ocf",
+      "value": 12750.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV018",
+        "EV037"
+      ],
+      "formula": "Net profit × OCF/NI ratio (assumed 1.5x). Q1 2026 ratio was 1.76x, normalized."
+    },
+    {
+      "line_id": "2028E_ocf",
+      "period": "2028E",
+      "metric": "ocf",
+      "value": 12000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV018",
+        "EV037"
+      ],
+      "formula": "Net profit × OCF/NI ratio (assumed 1.5x). Q1 2026 ratio was 1.76x, normalized."
+    },
+    {
+      "line_id": "2026E_capex",
+      "period": "2026E",
+      "metric": "capex",
+      "value": 3000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV041",
+        "EV043"
+      ],
+      "formula": "Maintenance + expansion capex. Expansion for Shangqiu Phase 3 assumed to ramp; maintenance ~2,000 mn/year."
+    },
+    {
+      "line_id": "2027E_capex",
+      "period": "2027E",
+      "metric": "capex",
+      "value": 3500.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV041",
+        "EV043"
+      ],
+      "formula": "Maintenance + expansion capex. Expansion for Shangqiu Phase 3 assumed to ramp; maintenance ~2,000 mn/year."
+    },
+    {
+      "line_id": "2028E_capex",
+      "period": "2028E",
+      "metric": "capex",
+      "value": 4000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV041",
+        "EV043"
+      ],
+      "formula": "Maintenance + expansion capex. Expansion for Shangqiu Phase 3 assumed to ramp; maintenance ~2,000 mn/year."
+    },
+    {
+      "line_id": "2026E_fcf",
+      "period": "2026E",
+      "metric": "fcf",
+      "value": 10500.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV018",
+        "EV041"
+      ],
+      "formula": "OCF - Capex"
+    },
+    {
+      "line_id": "2027E_fcf",
+      "period": "2027E",
+      "metric": "fcf",
+      "value": 9250.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV018",
+        "EV041"
+      ],
+      "formula": "OCF - Capex"
+    },
+    {
+      "line_id": "2028E_fcf",
+      "period": "2028E",
+      "metric": "fcf",
+      "value": 8000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV018",
+        "EV041"
+      ],
+      "formula": "OCF - Capex"
+    }
+  ],
+  "model_change_rows": [
+    {
+      "line_id": "2026E_gross_margin",
+      "old_value": 32.0,
+      "new_value": 26.0,
+      "unit": "%",
+      "evidence_ids": [
+        "EV014",
+        "bear_attack"
+      ],
+      "reason": "接受空头关于Q1毛利率不可持续的论点，下调至正常化水平。",
+      "eps_fcf_valuation_impact": "2026E EPS从4.00降至3.56，目标价从35降至28.5。",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2026E_parent_net_profit",
+      "old_value": 9000.0,
+      "new_value": 8000.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "EV011",
+        "model_recalc"
+      ],
+      "reason": "随毛利率下调。",
+      "eps_fcf_valuation_impact": "同毛利率变化。",
+      "disposition": "accepted"
+    }
+  ],
+  "accepted_underwriting_model": "详细模型见autonomous_forecast_model。核心改动：将2026E毛利率从32%调整为26%，归母净利润从90亿调整为80亿，EPS从4.00元调整为3.56元。煤炭分部假设维持谨慎，铝箔期权价值小幅计入。整体公允价值由800亿下调至646亿。",
+  "model_change_ledger": "问题1 (Q1毛利率): 原假设Q1高毛利率可持续，熊方攻击其一次性，接受熊方论点，将2026E毛利率下调至26%，影响EPS -0.44元。\n问题2 (煤炭): 原假设煤价反弹带来利润弹性，熊方指出销量承压，接受保守假设，煤炭利润维持低位。",
+  "debate_verdict": "空头在毛利率可持续性、市盈率合理性、相对强弱解读上更胜一筹。多头对成本优势的核心信仰缺乏可验证证据。因此，模型向空头倾斜，下调盈利预测和目标价。但多头对公司财务韧性和下行保护的论述成立，避免了直接降级为Underweight。最终评级为Hold，等待7月28日半年报的最终裁决。",
+  "probability_payoff": "基准情景（概率55%）：2026E EPS 3.56，目标价28.5，上行33%。乐观情景（25%）：毛利率28%，EPS 4.20，目标价33.6，上行57%。悲观情景（20%）：毛利率22%，EPS 2.40，目标价16.8，下行21%。概率加权目标价27.0，预期收益约26%。但考虑到盈利不确定性高和相对强度弱势，当前赔率仅支持观察仓，不支持积极买入。",
+  "unresolved_questions_and_gaps": "1. 新疆和云南电解铝真实的单位现金成本（需SMM/Antaike数据）。\n2. 神火新材分拆上市的具体进度和估值。\n3. 商丘三期铝箔投产后的加工费和客户合同。\n4. 2026Q2的实际毛利率（7月28日半年报）。\n5. 煤炭全年销量和售价的实际数据。",
+  "handoff_to_pm_and_trader": "评级：Hold / Positive Watch。\n当前不宜追高，若价格进一步回落至19-20元且半年报毛利率在25%左右，可考虑建立试探性仓位（不超过目标仓位的1/3）。\n关键验证：7月28日半年报毛利率>26%则升级至Overweight；毛利率<24%且铝价跌破20000则降级至Underweight。\n仓位管理：建议观察，总仓位控制在0.5%以内。技术面空头趋势未逆转，等待缩量止跌和基本面共振。",
+  "handoff_integrity_audit": "模型版本：post-debate-v1\n冻结事实：2025年营收412.4亿，归母净利润40.05亿；Q1 2026营收124.1亿，归母净利润22.9亿；总股本22.49亿股；当前价21.35元。\n已接受估计：2026E 营收500亿，毛利率26%，归母净利润80亿。\n未解决单元格：电解铝实际单位成本、煤炭分部销量、铝箔加工费。\n必须保留的业务板块：电解铝、煤炭、铝箔。\n三年预测结构和公允价值桶1/桶2框架保持不变。"
+}

@@ -1,0 +1,31 @@
+{
+  "mode": "schema_repaired_fallback",
+  "agent": "Portfolio Manager",
+  "structured_error": "6 validation errors for SellSidePMDecision\nsegment_economics.4.disclosure_basis\n  Input should be 'reported', 'calculated', 'analyst_estimate' or 'missing' [type=literal_error, input_value='analytical', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nalternative_intelligence_decisions.3.disposition\n  Input should be 'model_change', 'probability_change', 'verification_change' or 'rejected' [type=literal_error, input_value='watch', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nalternative_intelligence_decisions.5.disposition\n  Input should be 'model_change', 'probability_change', 'verification_change' or 'rejected' [type=literal_error, input_value='watch', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nalternative_intelligence_decisions.7.disposition\n  Input should be 'model_change', 'probability_change', 'verification_change' or 'rejected' [type=literal_error, input_value='watch', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nalternative_intelligence_decisions.9.disposition\n  Input should be 'model_change', 'probability_change', 'verification_change' or 'rejected' [type=literal_error, input_value='watch', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\nalternative_intelligence_decisions.11.disposition\n  Input should be 'model_change', 'probability_change', 'verification_change' or 'rejected' [type=literal_error, input_value='watch', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error",
+  "schema": "SellSidePMDecision",
+  "initial_mode": "schema_repaired_fallback",
+  "editorial_review_mode": "schema_prompt_structured",
+  "editorial_revision_requested": true,
+  "editorial_revision_applied": true,
+  "editorial_revision_mode": "schema_repaired_fallback",
+  "remaining_handoff_issues": [],
+  "remaining_analytical_issues": [
+    "public thesis chapter missing strongest counterargument/boundary",
+    "public thesis chapter missing market-pricing implication",
+    "public thesis chapter missing falsification condition"
+  ],
+  "editorial_revision_rejection_reasons": [],
+  "deterministic_model_notes": [
+    "restored undocumented canonical change 2026e_eps",
+    "restored undocumented canonical change fy2025_eps",
+    "restored undocumented canonical change base_fair_value",
+    "synchronized total fair value per share 397.0 -> 371.3783",
+    "removed 1 manual deterministic valuation line(s) from prose",
+    "enforced safe-price execution constraint above the buy ceiling"
+  ],
+  "full_report_chars": "12068",
+  "public_report_chars": "6507",
+  "internal_overflow_chars": "5559",
+  "internal_sections_removed_from_public_report": "内部附录A：业务机制与分部经济, 内部附录B：行业驱动与护城河机制, 内部附录C：财务质量核查明细, 内部附录D：替代信息与卖方预期审计, 内部附录E：模型交接与报告质量审计",
+  "public_h2_count": "8"
+}

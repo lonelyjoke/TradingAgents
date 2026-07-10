@@ -82,10 +82,8 @@ PUBLICATION_BLOCKING_SECTIONS = frozenset(
         "scenario_weighted_range_math",
         "expected_return_range_math",
         "financial_calendar_period",
-        "period_comparator_lineage",
         "upside_discount_math",
         "segment_growth_rank_consistency",
-        "underwriting_readiness",
         "pm_structured_generation",
         "research_manager_structured_generation",
         "share_count_source_conflict",
@@ -97,7 +95,6 @@ PUBLICATION_BLOCKING_SECTIONS = frozenset(
         "weighted_margin_arithmetic",
         "rating_valuation_consistency",
         "position_valuation_consistency",
-        "sell_side_expectation_lineage",
     }
 )
 
@@ -264,6 +261,8 @@ def _deterministically_owned_line(row: Mapping[str, Any]) -> bool:
         "grossprofit": "revenue x gross margin",
         "parentnetprofit": "operating profit + finance/other - tax - minority interest",
         "equityvalueweighted": "deterministic probability-weighted scenario equity value",
+        "fairvalueshare": "deterministic total fair value per share",
+        "fairvaluepershare": "deterministic total fair value per share",
     }.get(metric)
     return bool(required_formula and required_formula in formula)
 

@@ -20,6 +20,7 @@ from tradingagents.evaluation.research_validator import (
     render_post_generation_audit,
     _extract_rating,
     _extract_section,
+    _is_publication_blocker,
     _normalize_rating,
 )
 
@@ -76,6 +77,18 @@ bridges and valuation buckets were preserved. Any revised old value and new valu
 evidence id and recalculated impact. Unresolved cells remain explicit in the final handoff.
 
 """
+
+
+def test_missing_inputs_and_lineage_gaps_are_review_only():
+    for section in (
+        "underwriting_readiness",
+        "period_comparator_lineage",
+        "sell_side_expectation_lineage",
+    ):
+        assert not _is_publication_blocker(section, "error")
+
+    assert _is_publication_blocker("handoff_numeric_consistency", "error")
+    assert _is_publication_blocker("scenario_probability_math", "error")
 
 
 def test_audit_decision_depth_flags_missing_buy_side_sections():
@@ -611,7 +624,7 @@ def test_handoff_numeric_audit_blocks_silent_pm_change(tmp_path):
     )
     manager["canonical_model_snapshot"].append(
         {
-            "line_id": "base_fair_value",
+            "line_id": "probability_weighted_core_value",
             "period": "scenario",
             "metric": "equity_value_weighted",
             "value": 288083.0,
@@ -620,7 +633,7 @@ def test_handoff_numeric_audit_blocks_silent_pm_change(tmp_path):
     )
     pm["canonical_model_snapshot"].append(
         {
-            "line_id": "base_fair_value",
+            "line_id": "probability_weighted_core_value",
             "period": "scenario",
             "metric": "equity_value_weighted",
             "value": 225250.0,

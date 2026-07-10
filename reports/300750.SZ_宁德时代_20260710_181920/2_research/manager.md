@@ -1,0 +1,191 @@
+# Research Manager Accepted Underwriting Model
+
+**Rating**: Overweight
+
+**Research Readiness**: partial
+
+**Core Bet**: The market is pricing CATL as a cyclical stock with peak earnings, giving a forward PE of ~16.8x on 2026E earnings. The core bet is that the company's structural advantages (scale, technology, customer stickiness) and the explosive growth of the energy storage business will drive continued strong earnings growth, proving the pessimism wrong and triggering a PE re-rating from cycle-low towards a growth-appropriate level over the next 6-12 months.
+
+### 本报告要回答的关键问题
+
+1. Is the gross margin structurally resilient around 24-25% or set to decline toward 22% as bears argue?
+2. Is the energy storage shipment guidance (250-300 GWh for 2026E) achievable and at what margin?
+3. Is the current PE of ~20.4x TTM a value trap reflecting peak cycle earnings, or a depressed multiple on sustainable above-normal profits?
+4. Is the recent severe underperformance a warning signal of deteriorating fundamentals or a technical/positioning dislocation creating a contrarian entry?
+
+### 核心问题裁决
+
+**Q1：Is the gross margin structurally resilient around 24-25% or set to decline toward 22% as bears argue?**
+- **为何关键：** A 2-3pp gross margin shift on a revenue base >500bn CNY moves pre-tax profit by 100-180bn CNY, drastically changing EPS and the fair value anchor.
+- **当前结论：** The bear case for sub-22% margins is not supported by current evidence. Q1 2026 reported gross margin improved to 24.82% (+0.41pp YoY) despite a falling lithium price, proving cost reduction outpaces ASP decline in the current environment. The bear's argument extrapolates a price-war scenario not yet visible and ignores the margin-mix benefit from higher-margin storage. Q1 inventory build is a warning sign but not yet proof of demand destruction. The central case for ~24.5% is maintained.
+- **采用证据：** EV013: Q1 2026 gross margin 24.82%, +0.41pp YoY.；EV038: Lithium carbonate GFEX price 151,600 CNY/ton, -7.35% over 90 days.；KPE01: Citigroup framework on lithium impact and weekly inventory decline.；Earnings-model context: Inventory/revenue ratio +1.72pp YoY.
+- **最强反证：** Inventory/revenue ratio increased 1.72pp YoY, which could signal weakening demand or aggressive pre-production stockpiling. If this stockpiling leads to future ASP cuts to clear inventory, margins could compress later in 2026.
+- **模型/估值影响：** Accepting the bull's margin view (base case 24.5%) vs. the bear's (22.5%) keeps 2026E EPS near 20.0 CNY vs. a bearish 18.0 CNY. This is the single largest swing factor for fair value, supporting a base fair value of ~360 CNY.
+- **置信度与下次验证：** medium；2026 H1 report in August 2026. Watch for gross margin <23% or inventory/revenue ratio >22% as bearish signals.
+
+**Q2：Is the energy storage shipment guidance (250-300 GWh for 2026E) achievable and at what margin?**
+- **为何关键：** Storage is the primary growth engine. A miss to 250 GWh or margin compression to the low-20s would remove a key pillar of the bull case, reducing 2026E revenue and profit growth.
+- **当前结论：** The 300 GWh base case is ambitious given that Q1 'about 50 GWh' channel checks annualize to only 200 GWh. A more prudent base case is 250 GWh, as argued by the bear, due to data uncertainty and industry price competition. The storage margin is also likely to compress modestly from 26.7% towards 25% as competition intensifies, but a crash to 22% is unsubstantiated.
+- **采用证据：** KPE05: Q1 storage shipment 'about 50 GWh', YoY doubling.；KPE02: Sodium-ion storage system launch, 200 GWh capacity plan.；Segment model: 2025 storage margin 26.71%, -0.13pp.
+- **最强反证：** The 50 GWh Q1 figure is from an unverifiable industry note, not a company filing. Real official data could disappoint. The massive announced capacity (200+ GWh) risks flooding the market and accelerating price wars.
+- **模型/估值影响：** The accepted base case shifts from the bull's 300 GWh to the bear's 250 GWh, reducing storage segment revenue. The combined effect with a 24.5% GM base case is a 2026E EPS of approximately 20.0 CNY, a slight downward revision from the pre-debate model's 20.75 CNY.
+- **置信度与下次验证：** low；2026 H1 report in August 2026. Official disclosure of segment sales volume and revenue is the only way to validate this. Subsequent quarters must show a ramp >75 GWh to meet the 250 GWh annual target.
+
+**Q3：Is the current PE of ~20.4x TTM a value trap reflecting peak cycle earnings, or a depressed multiple on sustainable above-normal profits?**
+- **为何关键：** This determines whether the current price is cheap or a value trap. If earnings are peaking, a low PE is justified; if they are growing, it's a significant opportunity.
+- **当前结论：** The market is pricing CATL as a cyclical stock near peak earnings. The PE of 20.4x TTM (21.7% historical percentile) and a forward PE of ~16.8x on 2026E earnings are pricing in a high probability of earnings decline or stagnation. Given that earnings grew 42% in FY2025 and 49% in Q1 2026, this extreme pessimism is the core of the mispricing opportunity.
+- **采用证据：** Market-expectation context: PE TTM 20.43, 21.7% percentile.；Historical price-EPS-PE decomposition: Price largely earnings-led, PE has been compressing for 5 years.；Forecast model: 2026E EPS ~20 CNY.
+- **最强反证：** The price-EPS-PE decomposition shows a 5-year derating (PE down 89.5%). The market has been right for years. The bear's argument that 'this time is not different' and that the market is correctly anticipating a downturn is the biggest risk.
+- **模型/估值影响：** This justifies maintaining a 18x PE multiple on 2026E EPS for the base-case valuation, which is a slight premium to the current derated TTM multiple but still assumes no return to historical median levels. This yields a base-case fair value of ~360 CNY.
+- **置信度与下次验证：** medium；Any significant negative earnings revision or a reported quarter of negative YoY profit growth would confirm the value trap thesis. Conversely, if the PE stabilizes or expands after the H1 2026 report, the contrarian view gains traction.
+
+**Q4：Is the recent severe underperformance a warning signal of deteriorating fundamentals or a technical/positioning dislocation creating a contrarian entry?**
+- **为何关键：** The stock has underperformed the ChiNext index by 40%+ over 250 days and recently dropped 7% in a day. Entering without understanding this is reckless, regardless of fundamental view.
+- **当前结论：** The underperformance is a mix of sector rotation out of EVs, realization that near-term growth is slowing, and a broad derating of growth/large-cap A-shares. The July 10 sell-off was a trend continuation, not a single event. This technical weakness demands a staggered, patient entry strategy rather than a full immediate position. It does not invalidate the fundamental thesis but confirms high execution risk.
+- **采用证据：** Relative-strength context: -40% vs ChiNext over 250d.；Price-move attribution: commodity_equity_divergence + trend continuance.；Technical analysis memo: Trend is bearish, RSI 33.8, no divergence.
+- **最强反证：** The market is voting with its feet. Persistent, broad-based selling by more informed or larger actors could be pricing in a negative fundamental catalyst not yet in our evidence set (e.g., a major customer loss, an adverse policy shift).
+- **模型/估值影响：** This does not change the fundamental fair value but forces a lower initial position size and a strict schedule for adding exposure contingent on price stabilization (e.g., holding above a moving average or building a base). The rating is Overweight, but execution is staged.
+- **置信度与下次验证：** high；Monitor for a 'higher low' on the daily chart, RSI bullish divergence, or a successful reclaiming of a key moving average (e.g., 10-day EMA) as signals to begin or add to a position.
+
+## Forecast Takeaways
+
+### 预测take-aways
+
+**1. CATL's earnings are demonstrably resilient and growing, not peaking as the market fears. The combination of scale, technology, and customer stickiness is translating cost deflation into maintained margins.**
+- 证据锚：Q1 2026 gross margin of 24.82% (+0.41pp YoY) is reported official data, occuring alongside a -7.35% drop in lithium carbonate price.
+- 财务含义：Validates a base-case 2026E gross margin of ~24.5%, supporting EPS in the 20-21 CNY range, a ~30% increase from FY2025.
+- 置信度与风险：Medium confidence. The risk is that the Q1 margin was aided by transient factors. H1 2026 report is the critical validation point.
+
+**2. The energy storage growth story is real but the '300 GWh in 2026' expectation is a stretch not yet supported by audited data. A more data-driven expectation of ~250 GWh is prudent, which still represents over 100% growth.**
+- 证据锚：The 'Q1 ~50 GWh' channel check, when annualized, is 200 GWh. The ramp to 250-300 GWh requires Q2-Q4 quarterly average of 67-83 GWh, which is a significant step-up.
+- 财务含义：Under a 250 GWh storage assumption, the segment remains a powerful growth driver but will not provide the same level of EPS upside as the 300+ GWh bull case. It supports but does not supercharge the central thesis.
+- 置信度与风险：Low confidence due to reliance on unverified channel checks. The primary risk is a disappointed ramp that leads to both lower revenue and margin compression.
+
+## Forecast Assumption Registry
+
+### 核心假设与敏感性
+
+| 参数/业务 | 历史锚与证据状态 | Bear / Base / Bull | 敏感度 | 置信度与验证门槛 |
+| --- | --- | --- | --- | --- |
+| Total battery shipments (GWh)（Consolidated revenue） | FY2025: 661 GWh total.；analyst_estimate | 850 GWh if global recession or severe market share loss occurs. / 950 GWh (Power: 650, Storage: 250, Others: 50). / 1,100 GWh if global NEV/storage demand exceeds expectations. | Each 5 GWh of volume changes revenue by approx. 2.5-3.0 B CNY. | medium；Official H1 2026 total sales volume disclosure in August 2026 report. |
+| Consolidated Gross Margin (%)（Consolidated gross profit） | FY2025: 23.31%. Q1 2026: 24.82%.；calculated | 22.0% if price war intensifies and cost reductions fail to keep pace with ASP declines. / 24.5% for FY2026E. / 26.5% if lithium price remains low and mix improves toward premium products. | A 1pp change in gross margin changes pre-tax profit by ~56 B CNY. | medium；Q2/Q3 2026 financial reports to confirm Q1 margin was not a seasonal high. |
+| Capital Expenditure (CNY mn) and FCF（Cash flow and balance sheet） | FY2025 capex (acq. fixed assets) was ~423 B CNY. OCF was 1,332 B CNY.；analyst_estimate | Capex >85 B to defend market share, FCF <55 B. / 2026E capex of 75 B CNY, FCF of 83 B CNY. / Capex <65 B as new projects are deferred, FCF >115 B. | FCF yield expansion is a key re-rating catalyst for value-oriented investors. | medium；FY2026 annual report cash flow statement. |
+
+## Ranked Core Theses
+
+### 论点1：CATL's low valuation is pricing in a cyclical earnings peak; the company is instead demonstrating structural earnings growth driven by volume, mix, and scale, creating a powerful expectation gap.
+
+- **关键问题：** Is the current PE of ~20.4x TTM a value trap reflecting peak cycle earnings, or a depressed multiple on sustainable above-normal profits?
+- **核心证据：** PE TTM of 20.4x is at the 21.7th historical percentile (Market-expectation context), while Q1 2026 net profit grew 48.5% YoY (Earnings-model context).
+- **最强反证：** The 5-year PE derating (-89.5%) and 250-day 40% relative underperformance versus the ChiNext index (Relative-strength context) are powerful signals that the market has been consistently correct in reducing expectations.
+- **财务传导：** If the market re-rates the stock from a forward implied PE of ~16.8x to a growth-appropriate 20-22x on 2026E earnings of ~20 CNY, fair value moves from the current ~350 CNY to a range of 400-440 CNY.
+- **市场定价：** The market is pricing a high probability of an imminent earnings decline. Consensus TTM implied earnings are ~79bn CNY vs. our 2026E of ~92.5bn CNY, indicating a disconnect in growth expectations.
+- **证伪条件：** A reported YoY decline in quarterly net profit or a significant (e.g., >3pp) gross margin compression in H1 2026 would strongly suggest the market's pessimistic pricing is correct.
+- **当前裁决：** unproven
+
+### 论点2：The company's core moat—scale-cost leadership—is directly observable and actively protecting margins in a challenging deflationary input price environment.
+
+- **关键问题：** Is the gross margin structurally resilient around 24-25% or set to decline toward 22% as bears argue?
+- **核心证据：** Global market share increased to 39.2% in 2025 (EV028). Q1 2026 gross margin improved to 24.82% while lithium carbonate fell 7.35% (EV013, EV038), proving cost savings outpace ASP declines.
+- **最强反证：** The battery industry is massively expanding capacity, with even CATL having 321 GWh under construction. This supply glut is the textbook condition for margin-destroying price wars, and Q1's resilience might not survive the year.
+- **财务传导：** A stable ~24% gross margin on >550bn revenue guarantees a massive profit pool, validates the scale-cost moat, and supports a base-case 2026E EPS of ~20 CNY.
+- **市场定价：** The low PE suggests the market assigns a high probability to the bear case of margin collapse, as seen historically in other Chinese manufacturing industries that over-expanded capacity.
+- **证伪条件：** A drop in the company's global market share below 35% or a quarterly gross margin break below 22% would invalidate the scale-cost moat thesis.
+- **当前裁决：** partial
+
+## Company Disaggregation
+
+The company operates and reports in four core business units, consistent with the underwriting packet: **1) Power Battery Systems (~74.7% of FY2025 revenue, 23.84% gross margin):** The mature core profit pool. The moat is scale-cost leadership and deep customer partnerships. Growth is linked to global NEV penetration, a mature but still-growing megatrend. **2) Energy Storage Battery Systems (~14.7% of revenue, 26.71% gross margin):** The high-growth second curve. Prosperity is high and direction is positive. The primary valuation debate is about whether its rapid growth can offset industry competition and maintain a quality premium. **3) Battery Materials and Recycling (~5.2% of revenue, 27.27% gross margin):** A volatile vertical integration play. Profit is heavily influenced by metal prices and non-recurring items. It is treated as non-core. **4) Mining and Smelting (~1.5% of revenue, 11.25% gross margin):** An upstream, non-core, low-margin business. The key unmapped analytical unit is **Overseas Geography** (~30.6% of revenue), a crucial driver of future growth and geopolitical risk, but detailed segment profitability is not disclosed.
+
+## Autonomous Three-Year Forecast Model
+
+The accepted model is a hybrid of corporate-level estimates and unverified segment-level assumptions due to missing disclosures. The model profile is 'volume_price_cost'. The core driver is total shipments (GWh) x blended ASP (CNY/GWh). **Base Case (50% Probability):** FY2026E shipments of 950 GWh; blended ASP under moderate pressure; consolidated gross margin of 24.5%. This yields revenue of ~560,000 mn CNY and parent net profit of ~92,500 mn CNY. **Bull Case (30%):** 1,100 GWh shipments, higher margin of 26.5% due to mix and scale. Parent profit ~110,000 mn CNY. **Bear Case (20%):** 850 GWh shipments, gross margin compression to 22.5% from severe price war. Parent profit ~80,000 mn CNY. The company's massive operating cash flow (FY2025 OCF/NI of 1.85x) and net cash position provide strong downside protection. A key unknown is the JXW lithium mine, which could increase the company’s control over its cost curve, but no specific production/cost data is available, so this remains an un-modeled upside scenario.
+
+## Thesis-to-Financial Bridge
+
+**1) Margin Stability Bridge:** Operating Driver = Consolidated Gross Margin (%). Base: 24.5%, Bull: 26.5%, Bear: 22.5%. Pre-tax profit impact of ±1pp change ≈ 56bn CNY, EPS impact ≈ 1.0 CNY. Transmission: The company's scale and negotiated purchase contracts act as a 'time buffer,' allowing cost reductions to outpace customer price concessions (ASP erosion). **2) Volume Growth Bridge:** Operating Driver = Total Shipments (GWh). Base: 950 GWh, Bull: 1100 GWh, Bear: 850 GWh. Revenue impact of ±10 GWh ≈ ±5.5bn CNY. Transmission: Shipment growth is the primary top-line driver and is supported by the global energy transition and the expansion of the energy storage market. **3) FCF Inflection Bridge:** Operating Driver = Capex (CNY mn). Base: 75,000 mn. Transmission: As the major expansion cycle of 2023-2025 matures, capex is expected to decline while OCF grows, leading to a significant increase in FCF. A higher FCF yield directly supports a higher valuation multiple.
+
+## Moat Evidence Verdict
+
+Three moat mechanisms were examined. **1) Scale and Cost Leadership:** **Proven.** Global market share gain (+1.2pp to 39.2%) and resilient margins in a falling input price environment are strong, observable evidence. The financial transmission is clear: high utilization spreads fixed costs, leading to superior margins versus smaller peers. The strongest counterevidence is the risk of industry-wide overcapacity that could trigger a profit-destroying price war regardless of cost leadership. **2) Customer Stickiness & Switching Costs:** **Partial.** Evidence includes deep co-development partnerships with Tesla and Ford (LRS model) and a strong brand. This translates to high revenue visibility. The counterevidence is the potential for large automakers like BYD to vertically integrate battery production, reducing the addressable market, though this threat has existed for years. **3) Technology Leadership:** **Partial.** Supported by a high R&D spend (22.1 bn CNY), a dense patent portfolio, and a visible pipeline (sodium-ion, solid-state). Financial transmission is through product premium in ASP. The counterevidence is that technological leaps (like solid-state) by competitors could make current investments obsolete, though CATL is a leader, not a laggard, in these areas.
+
+## Valuation Closure
+
+Valuation uses a probability-weighted PE method on 2026E EPS, consistent with the underwriting packet. The fair value is calculated as: (Bull 30% * 23.78 EPS * 22x PE) + (Base 50% * 20.0 EPS * 18x PE) + (Bear 20% * 17.3 EPS * 16x PE) = 156.9 + 180.0 + 55.4 = 392.3 CNY/share. An additional 5 CNY/share is added for AIDC/New Energy Service/Sodium optionality, resulting in a final fair value of **397 CNY/share**. The current price of 348.76 CNY yields a total expected return of **+13.8%**. The core business is valued as a single entity since segment-level PE is impractical without verifiable, stable segment earnings. The optionality bucket is a small, highly haircut (90%) placeholder for non-core, unverified new business initiatives reported by Knowledge Planet (KPE03). The valuation does not double-count. The 18x base-case PE multiple is a forward multiple on 2026E earnings, a premium to the current TTM multiple but a discount to historical norms, justified by continued robust growth and best-in-class quality.
+
+## Canonical Model Snapshot
+
+| line_id | period | metric | value | unit | status | evidence/formula |
+| --- | --- | --- | ---: | --- | --- | --- |
+| shares | as of registered capital 462,662.717 万，反映2025年年报及H股上市后总股本 | diluted_shares | 4626.63 | mn shares | calculated | 462,662.717 万 * 10,000 股 / 1亿 = 46,266.27 十万股 => 4,626.63 million shares |
+| 2026E_revenue | 2026E | revenue | 560000 | CNY mn | estimated | EV011, KPE05, KPE12 |
+| 2027E_revenue | 2027E | revenue | 680000 | CNY mn | estimated | EV011, KPE05, KPE12 |
+| 2028E_revenue | 2028E | revenue | 800000 | CNY mn | estimated | EV011, KPE05, KPE12 |
+| 2026E_grossmargin | 2026E | grossmargin | 24.5 | % | estimated | EV013, EV028 |
+| 2027E_grossmargin | 2027E | grossmargin | 25 | % | estimated | EV013, EV028 |
+| 2028E_grossmargin | 2028E | grossmargin | 25.2 | % | estimated | EV013, EV028 |
+| 2026E_operatingprofit | 2026E | operatingprofit | 117000 | CNY mn | estimated | EV014 |
+| 2027E_operatingprofit | 2027E | operatingprofit | 153000 | CNY mn | estimated | EV014 |
+| 2028E_operatingprofit | 2028E | operatingprofit | 184000 | CNY mn | estimated | EV014 |
+| 2026E_parentnetprofit | 2026E | parentnetprofit | 92500 | CNY mn | estimated | EV013, EV014 |
+| 2027E_parentnetprofit | 2027E | parentnetprofit | 115000 | CNY mn | estimated | EV011, KPE05 |
+| 2028E_parentnetprofit | 2028E | parentnetprofit | 135000 | CNY mn | estimated | EV011, KPE05 |
+| 2026E_eps | 2026E | eps | 19.993 | CNY/share | estimated | parent net profit 92,500 mn / 4,626.63 mn shares |
+| 2027E_eps | 2027E | eps | 24.856105 | CNY/share | calculated | EV011 |
+| 2028E_eps | 2028E | eps | 29.178906 | CNY/share | calculated | EV011 |
+| 2026E_ocf | 2026E | ocf | 158000 | CNY mn | estimated | EV017, EV028 |
+| 2027E_ocf | 2027E | ocf | 190000 | CNY mn | estimated | EV017, EV028 |
+| 2028E_ocf | 2028E | ocf | 225000 | CNY mn | estimated | EV017, EV028 |
+| 2026E_capex | 2026E | capex | 75000 | CNY mn | estimated | EV033 |
+| 2027E_capex | 2027E | capex | 70000 | CNY mn | estimated | EV033 |
+| 2028E_capex | 2028E | capex | 65000 | CNY mn | estimated | EV033 |
+| 2026E_fcf | 2026E | fcf | 83000 | CNY mn | calculated | OCF - Capex; forward years show improving FCF as capex moderates. |
+| 2027E_fcf | 2027E | fcf | 120000 | CNY mn | calculated | OCF - Capex; forward years show improving FCF as capex moderates. |
+| 2028E_fcf | 2028E | fcf | 160000 | CNY mn | calculated | OCF - Capex; forward years show improving FCF as capex moderates. |
+| fy2025_revenue | FY2025 | revenue | 423701.8 | CNY mn | reported | EV011 |
+| fy2025_parent_net_profit | FY2025 | parent_net_profit | 72201.3 | CNY mn | reported | EV011 |
+| fy2025_eps | FY2025 | eps | 15.61 | CNY/share | calculated | 72201.3 mn / 4626.63 mn shares |
+| base_fair_value | 2026E | fair_value_per_share | 397 | CNY/share | calculated | Prob-weighted EPS x PE + optionality |
+| storage_shipments_2026E_gwh | 2026E | storage_shipments | 250 | GWh | estimated | KPE05, KPE02 |
+| gross_margin_2026E | 2026E | gross_margin | 24.5 | % | estimated | EV013, EV028, EV038 |
+
+## Accepted Underwriting Model
+
+Following the debate, the accepted underwriting model is the **Post-Analyst Fundamental Reconciliation Pack**, with three critical adjustments as recorded in the `Model Change Ledger`: 1) **2026E Parent Net Profit lowered from 96,000 mn CNY to 92,500 mn CNY**, reflecting a more cautious energy storage shipment ramp (250 GWh vs. 300 GWh) while maintaining the 24.5% gross margin assumption. 2) **The core valuation anchor is now a probability-weighted 2026E EPS.** Base Case EPS is 20.0 CNY (vs. previous 20.75). The corresponding base-case fair value is ~360 CNY/share. 3) **The overall fair value is adjusted to 397 CNY by adding optionality**, incorporating a 5 CNY/share value for unverified but filed-backed new business initiatives (AIDC, Sodium-ion services) as a real option. The model remains partial because segment-level volume and ASP data for forward years are still not available from official filings, relying on channel checks and sell-side estimates. The model is falsifiable; if the H1 2026 report shows gross margin <23% or total shipments significantly below annualized 950 GWh, the base and bull cases are invalidated.
+
+## Model Change Ledger
+
+| line_id | old | new | unit | evidence | reason | impact | disposition |
+| --- | ---: | ---: | --- | --- | --- | --- | --- |
+| 2026E_revenue | 560000 | 560000 | CNY mn | none | No change to headline figure of 560,000 mn CNY. Model internally rebalanced towards a more conservative split between storage (lowered to 250 GWh) and other segments to reflect debate's evidence. | Neutral at top-line level; profit and EPS revision captured in other lines. | unchanged |
+| 2026E_parentnetprofit | 96000 | 92500 | CNY mn | none | Accepted the bear's argument for a more conservative storage volume assumption (250 GWh vs 300 GWh), which slightly reduces expected profit despite maintained base-case gross margin of 24.5%. This is a synthesis of the debate's valid points. | Reduces 2026E EPS by approx. 0.756 CNY/share, lowering base-case fair value anchor from ~374 to ~360 CNY before adding higher optionality value. | accepted |
+| storage_shipments_2026E_gwh | 300 | 250 | GWh | KPE05, KPE02 | The bear successfully argued that the 300 GWh bull base case was overly reliant on an unverified Q1 channel check. A more prudent and data-verified base case is 250 GWh, awaiting H1 official data. | Directly reduces storage segment revenue and profit, contributing to the parent net profit reduction above. | accepted |
+| gross_margin_2026E | 24.5 | 24.5 | % | EV013, EV028, EV038 | The bull's defense of the 24.5% gross margin, centered on the reported Q1 2026 figure of 24.82% and the cost-down vs. ASP-down logic, was more evidence-based than the bear's 22.5% thesis, which lacked verified proof of a price war. The bear's warning about inventory build is valid, but insufficient to change the base case now. | Maintaining a higher margin compared to the bear's 22.5% is the primary reason the final fair value remains constructive and above the current share price. This is the most impactful accepted view. | unchanged |
+| 2026E_eps | 20.749444 | 19.993 | CNY/share | none | Recalculated from revised parent net profit (92,500 mn CNY / 4,626.63 mn shares). This aligns EPS with the accepted 92.5bn parent net profit. | Reduces 2026E EPS by ~0.756 CNY/share, shifting the base-case fair value anchor downward commensurately. | accepted |
+
+| ### Model Change Ledger ###
+| **Question/Line** | **Pre-Debate Assumption** | **Bull Proposal** | **Bear Proposal** | **Accepted Assumption** | **Evidence IDs & Logic** | **EPS/FCF/Value Impact** | **Next Verification** |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| **Energy Storage Shipments 2026E (GWh)** | 300 GWh (analyst est.) | 300 GWh (maintained) | 250 GWh (audited data gap + price war) | **250 GWh** | KPE05, KPE02. Bear's point about lack of official verification and the Q1 annualized rate of 200 GWh is more prudent for a base case. | Reduced 2026E Revenue & Net Profit. EPS impact ~ -0.75 CNY. | Official H1 2026 report segment sales GWh disclosure. |
+| **Consolidated Gross Margin 2026E (%)** | 24.5% (analyst est.) | 24.5% (Q1 evidence of cost > ASP decline) | 22.5% (historical ASP-linked compression) | **24.5%** | EV013 (Q1 2026 GM=24.82%), EV038 (Lithium price -7.35%). Bull's evidence of current cost-down dynamics outweighs bear's price-war scenario, which has no current quantitative proof. | Maintained higher EPS base. A 2pp difference vs bear case impacts EPS by ~2.5 CNY. This is the most critical modeled decision. | Q2 and H1 2026 reported Gross Margin. |
+| **2026E Parent Net Profit (CNY mn)** | 96,000 | 96,000 (implied) | ~80,000 (implied) | **92,500** | Synthesis of accepted 250 GWh storage and 24.5% GM. Reconciles to the more cautious volume view. | Base-case fair value anchor shifts from ~374 CNY to ~360 CNY on EPS alone. | Full-year 2026 guidance or annual report. |
+
+## Debate Verdict
+
+The debate efficiently isolated the two variables that truly matter for the 2026E model: gross margin durability and energy storage shipment ramp. The **Bull** successfully defended the gross margin thesis with hard, reported Q1 2026 evidence. The claim that cost savings outpace ASP erosion is currently validated by the data, making the bear's margin-crash scenario an unsubstantiated extrapolation. However, the **Bear** landed a critical, valid blow on the energy storage volume assumption, demonstrating the 300 GWh figure was derived from a single, unverified channel check. The Research Manager's accepted model incorporates this prudence, reducing the storage base case to 250 GWh, which trims EPS expectations without breaking the investment thesis. The final recommendation remains constructive, as the durable margin and growth story are more supported than the cyclical peak-earnings narrative priced by the market.
+
+## Probability and Payoff
+
+**Reconciled Scenarios:** 1) **Bull (30% Prob.):** 2026E EPS of 23.78 CNY, 22x PE = 523 CNY/share. Driven by 1,100 GWh shipments, 26.5% gross margin, and market re-rating. 2) **Base (50% Prob.):** 2026E EPS of 20.00 CNY, 18x PE = 360 CNY/share. Driven by 950 GWh shipments, 24.5% gross margin, and a modest PE re-rating from current depressed levels. 3) **Bear (20% Prob.):** 2026E EPS of 17.30 CNY, 16x PE = 277 CNY/share. Driven by 850 GWh shipments, 22.5% gross margin, confirming the 'value trap' thesis. **Probability-Weighted Fair Value:** (523 x 0.3) + (360 x 0.5) + (277 x 0.2) + 5 (Optionality) = 156.9 + 180.0 + 55.4 + 5.0 = **397.3 CNY/share**. This represents a **+13.9% expected return** from the current price of 348.76 CNY. The distribution is skewed positively, with a weighted upside to 523 providing a strong risk/reward profile.
+
+## Unresolved Questions and Evidence Gaps
+
+1. **Segment-Level Margins and Shipments:** Official, audited 2026E quarterly data for power vs. storage battery revenue, volume, and gross margin are missing. This gap forces the model to rely on industry proxies and was the basis for capping confidence in the storage ramp. 2. **Actual FY2025 Capex & FCF:** The exact FY2025 Capex from the Cash Flow Statement is not discretely reported in the provided data (only 'cash paid to acquire/construct fixed assets' as a strong proxy). This impacts the precision of historical FCF and capital efficiency calculations. 3. **JXW Lithium Mine Economics:** Information on the scale, production cost, and commissioning timeline for the JXW mine restart is absent. This is a crucial swing factor for future margin tailwinds, and its absence forces it to be categorized as pure unrealized upside optionality. 4. **AIDC Revenue Model:** The new AI Data Center energy solutions business has no reported revenue, orders, or economic model. It is assigned a token 5 CNY/share option value, but cannot be included in core valuation.
+
+## Handoff to PM and Trader
+
+**Recommendation: OVERWEIGHT with staged execution.** The fundamental probability-weighted fair value is ~397 CNY, offering a ~14% expected return. The core thesis is that market pricing is too pessimistic on gross margin and earnings growth. **Do not chase a 'V'-shaped recovery.** The stock is in a technical downtrend with severe relative weakness. Use limit orders and scale into a target position over multiple sessions. A prudent start is 1/3 of target position at current levels, adding another 1/3 if the price reclaims and holds above the 10-day EMA (~373 CNY), signaling short-term trend change. The final 1/3 should be added only after the H1 2026 report confirms the gross margin and shipment thesis, even if the price is higher by then. The primary risk is a general market risk-off shift hitting large-cap A-shares and persistent sector rotation out of New Energy, which can overwhelm good fundamentals in the short term. A break below the psychological 330 CNY support level with increased volume negates the base-case valuation anchor and requires a defensive reassessment.
+
+## Handoff Integrity Audit
+
+**Model Version:** Post-Debate v1.0, 2026-07-10. **Frozen Reported Facts:** 1) FY2025 Consolidated Revenue: 423,701.8 mn CNY. 2) FY2025 NI Parent: 72,201.3 mn CNY. 3) Q1 2026 Gross Margin: 24.82%. 4) Diluted Share Count: 4,626.63 mn shares. **Accepted Estimates & Revisions:** 1) 2026E Parent NI revised from 96,000 mn to 92,500 mn. 2) 2026E Energy Storage Shipments revised from 300 GWh to 250 GWh. 3) 2026E Gross Margin maintained at 24.5%. **Unresolved Cells Must Preserve:** Gaps for official segment-level 2026 data, JXW mine economics, and AIDC business model remain marked as `missing/not disclosed`. They must not be backfilled without hard evidence. **PM Must Preserve:** The core 'volume x price x margin' model structure, the discrete bull/base/bear scenario table with explicit operating assumptions, the 397 CNY/share probability-weighted fair value target, and the strict next-verification gates (H1 2026 Report, price reclaiming 10-day EMA) that drive the 'staged Overweight' execution strategy.
