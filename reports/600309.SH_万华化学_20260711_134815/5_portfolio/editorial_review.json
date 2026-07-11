@@ -1,0 +1,77 @@
+{
+  "review": {
+    "revision_required": true,
+    "company_understanding_score": 4,
+    "independent_model_score": 3,
+    "evidence_and_counterevidence_score": 3,
+    "valuation_closure_score": 3,
+    "readability_and_synthesis_score": 4,
+    "strongest_aspects": [
+      "三层利润引擎和地理增长引擎的拆解清晰，使读者快速理解核心赢利驱动",
+      "利用PB历史分位、Forward PE与隐含TTM PE的交叉验证量化预期差，逻辑链条可审计",
+      "财务报表质量雷达（五维）覆盖了收入、利润、前瞻信号、负债和股东回报，增强了可信度",
+      "情景分析的概率与赔率结构完整，验证了非对称收益的判断"
+    ],
+    "findings": [
+      {
+        "section": "three_year_forecast",
+        "priority": "must_revise",
+        "issue": "三年预测表未协和盈利与现金流，公开章节 forecast_assumptions 参数仅两行（行业计划要求至少三行）",
+        "evidence_or_logic_gap": "当前表格只列出营收、归母净利润和EPS；OCF、CAPEX、FCF 等现金流关键指标缺失，无法评估盈利向现金的转换和再投资风险。同时 forecast_assumptions 数组只有 MDI 价差和新材料营收两个假设，未包含导致盈利到达 187 亿的石化板块量/价、国内需求、资本开支强度等核心驱动。内部 workbench 的审计也已标记“auditable forecast assumptions count=2, expected at least 3”。",
+        "revision_instruction": "在三年表中加入：经营现金流 (OCF)、资本开支 (CAPEX)、自由现金流 (FCF)（可基于 OCF/NI 比率和已知 CAPEX 外推），并简要说明现金/收益调节逻辑。将 forecast_assumptions 扩展至至少三个：保留现有 MDI 价差、新材料营收，加入第三个参数（例如“2026E 石化板块乙烯-乙烷平均价差”或“2026E CAPEX 强度”），每个参数仍附带历史锚点、证据状态、三情景和敏感性。"
+      },
+      {
+        "section": "thesis_moat_financial_bridge",
+        "priority": "must_revise",
+        "issue": "公开 thesis_financial_bridge 章节缺少每一条论点的最强反证陈述和市场定价含义",
+        "evidence_or_logic_gap": "论点一和论点二只描述了正面的财务传导和证伪条件，但没有明确给出与内部 workbench 中 core_theses 卡对应的最强 counterevidence（例如据点一：地缘政治缓和后出口脉冲可能快速消退至低个位数增长）和 market-pricing implication（市场通过 PB 6.9%分位定价全面均值回归，忽略了结构性升级）。这导致读者无法感知论点的脆弱点和定价错误的具体形态。",
+        "revision_instruction": "针对每个论点，在已给出的财务传导段落末尾增加两个小标题句：‘最强反证：……’ 和 ‘当前定价隐含的错判：……’。内容直接从 core_theses 卡中的 strongest_counterevidence 和 market_pricing 字段提炼，改写成连贯的卖方编辑语体，字数各控制在 60-100 字。不可重复内部卡片标签。"
+      },
+      {
+        "section": "valuation_and_expectation_gap",
+        "priority": "should_revise",
+        "issue": "估值细节与目标价分散在多个章节，部分内容与第四部分重复，没有集中到第7部分",
+        "evidence_or_logic_gap": "第四部分“三年盈利模型与估值桥”已给出基础目标价 71.7 元及情景值，第七部分“核心判断”再次完全重复情景概率表，第八部分“公司质量 vs 当前赔率”又出现了 PE 估值论述。确定性程序化估值表已规定安全价、安全区等，但公开文案中的概率加权值和风险约束分散在风险章节及结论中，未按指令集中在估值部分。",
+        "revision_instruction": "将估值目标、情景概率加权、安全价格、概率/赔率图表和新材料期权价值全部移到‘估值与预期差’一章。其他章节（如投资结论、风险）仅用一段交叉引用汇总而不重复数字。删除第七部分中完整的概率/回报表，改为‘详见表X 估值综合摘要’。确保 valuation_closure 是该章的单一准确数值来源。"
+      },
+      {
+        "section": "three_year_forecast",
+        "priority": "should_revise",
+        "issue": "sell_side_expectation_matrix 只有一家机构且缺失修订历史与精确偏差",
+        "evidence_or_logic_gap": "当前 matrix 仅引用国海证券一家，未包含其他可用的 KSI 卖方观点（若有），且未提供该机构历史预测值、实际修订方向以及与独立基准模型在净利润、PE、目标价上的精确数值差异。这违反了“sell-side_expectation_matrix 需保留机构、日期、预测期、估值方法/倍数/目标、修订历史及与独立模型的确切差异”的要求。",
+        "revision_instruction": "如有其他 KSI 记录，补充第二家机构；对每一个机构增加‘前期预测（若有）’、‘修订方向（+/-）’和‘与内在价值差异（元/股）’列，并用简单数值填写。若确实仅有一家可获取的卖方记录，则在 matrix 下加注说明原因，并声明不得将其描述为市场共识。"
+      },
+      {
+        "section": "risks_catalysts_verification",
+        "priority": "optional",
+        "issue": "安全买入执行约束与部分内容与估值章脱节",
+        "evidence_or_logic_gap": "风险章节中出现了“当前价 68.71 元高于安全买入上限 57.35 元”的程序化执行约束，但该安全价的计算逻辑在风险章未作解释，读者需跳转至估值章才能理解。",
+        "revision_instruction": "将安全价格计算逻辑及其依赖的假设从估值章交叉引用到此处一句带过，或在本节添加脚注“安全价 57.35 元来源见估值章表X Deterministic Valuation”。"
+      }
+    ],
+    "overall_editorial_verdict": "Memo 在业务拆解、盈利周期定位和估值分位分析上达到了可发表深度，但公开论点章节未落实内部 workbench 要求的反证与市场定价呈现，三年预测表缺少现金流调节且假设参数不足，使独立模型的可审计性受损。估值数字散布多章，削弱了投资结论的说服力。需按发现清单修订后重新提交，重点补齐现金流、反证和估值整合。"
+  },
+  "review_status": {
+    "mode": "schema_prompt_structured",
+    "agent": "Sell-Side Research Editor",
+    "structured_error": ""
+  },
+  "revision_requested": true,
+  "revision_applied": true,
+  "revision_status": {
+    "mode": "schema_prompt_structured",
+    "agent": "Portfolio Manager Editorial Revision",
+    "structured_error": ""
+  },
+  "initial_handoff_issues": [],
+  "initial_analytical_issues": [
+    "analytical structure: auditable forecast assumptions count=2, expected at least 3",
+    "public thesis chapter missing strongest counterargument/boundary",
+    "public thesis chapter missing market-pricing implication"
+  ],
+  "remaining_handoff_issues": [],
+  "remaining_analytical_issues": [
+    "public thesis chapter missing market-pricing implication"
+  ],
+  "revision_rejection_reasons": []
+}

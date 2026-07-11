@@ -153,6 +153,11 @@ def _official_guidance_section(company_events_context: str) -> list[str]:
         ),
         limit=14,
     )
+    rows = [
+        row
+        for row in rows
+        if not re.search(r"analyst rule|required model treatment", row, re.I)
+    ]
     if not rows:
         return []
     return [
@@ -167,6 +172,197 @@ def _official_guidance_section(company_events_context: str) -> list[str]:
         "- If official guidance conflicts with the prior run-rate or sell-side/proxy assumption, update the forecast or state the exact reason it cannot be used. Do not ignore the guidance.",
         "- After guidance is available, the next verification point is the formal report's segment mix, cost bridge, cash conversion and balance-sheet quality, not whether the guided profit strength exists.",
     ]
+
+
+def _business_line_underwriting_agenda(
+    *,
+    drivers: list[tuple[str, str, str]],
+    structured_research_context: Mapping[str, Any] | None,
+) -> list[str]:
+    """Force filing-segment-led qualitative analysis before quantified cells exist."""
+    lines = [
+        "",
+        "## Business-Line Qualitative And Quantitative Underwriting Agenda",
+        "- Start with the company's financial-report revenue composition. Prioritize high-revenue-weight or thesis-critical segments; do not impose a fixed industry checklist when the filing discloses different economics.",
+        "- For each selected segment, use the LLM to form company-specific questions from that segment's product, customer, procurement decision, substitutes, true peers, pricing mechanism, cost stack, delivery cycle and cash-collection pattern.",
+        "| business line selected from filing revenue mix | disclosed financial anchor | qualitative baseline required even when data are missing | quantitative upgrade when evidence exists |",
+        "| --- | --- | --- | --- |",
+    ]
+    raw_segments = [
+        segment
+        for segment in (structured_research_context or {}).get("segments", [])
+        if segment.get("segment")
+    ]
+    sorted_segments = sorted(
+        raw_segments,
+        key=lambda segment: (
+            segment.get("revenue_weight_pct") is None,
+            -float(segment.get("revenue_weight_pct") or 0),
+        ),
+    )
+    if sorted_segments:
+        for segment in sorted_segments[:6]:
+            name = str(segment.get("segment", "")).strip()
+            anchor_parts = [
+                f"period={segment.get('period', 'unspecified')}",
+                f"revenue={segment.get('revenue_reported_value')} {segment.get('revenue_reported_unit', '')}".strip(),
+                f"revenue_weight={segment.get('revenue_weight_pct')}%",
+                f"growth={segment.get('revenue_growth_pct')}%",
+                f"gross_margin={segment.get('gross_margin_pct')}%",
+            ]
+            anchor = "; ".join(part.replace("|", "/") for part in anchor_parts)
+            lines.append(
+                "| "
+                + name.replace("|", "/")
+                + " | "
+                + anchor
+                + " | Ask what this business sells, who buys, why customers choose/switch, who the true substitutes and peers are, how pricing and delivery work, where the cost and cash-cycle risks sit, and what segment-specific question decides the investment case. | Use reported/calculated revenue, volume, ASP/price, margin, profit, backlog/utilization, market share, cash conversion and valuation contribution where available; otherwise label the missing metric and keep the answer qualitative. |"
+            )
+    else:
+        for name, formula, _ in drivers[:5]:
+            lines.append(
+                f"| {name} | no structured filing segment extracted; industry-driver fallback | Ask the LLM to infer the relevant business-specific questions from the available company description, industry context and peer evidence, then state that the revenue-mix source is missing. | Quantify with {formula} plus margin/profit/cash/valuation contribution only when evidence exists; otherwise keep the answer qualitative and add a retrieval task for filing segment revenue mix. |"
+            )
+    lines.extend(
+        [
+            "- Every material segment selected from the filing revenue mix must receive a qualitative answer even when source data do not disclose the ideal volume, ASP, margin or share series.",
+            "- Quantitative claims require reported, calculated or verified evidence, or an explicit analyst_estimate label with sensitivity and verification gate.",
+            "- The public PM report must synthesize these answers as investor-facing sell-side analysis; keep the agenda itself, missing-data ledger and raw checks in internal workbench fields.",
+        ]
+    )
+    return lines
+
+
+def _sell_side_depth_chain_section(
+    *,
+    drivers: list[tuple[str, str, str]],
+    structured_research_context: Mapping[str, Any] | None,
+) -> list[str]:
+    lines = [
+        "",
+        "## Sell-Side Depth Chain: Revenue Mix To Falsification",
+        "- Required analytical chain: financial-report revenue mix -> profit-pool priority -> segment question tree -> qualitative/quantitative answer -> expectation gap -> valuation transmission -> falsification gate.",
+        "- Revenue weight is only the starting point. Prioritize segments by revenue weight, gross margin, growth, cash conversion, capex intensity, competitive erosion risk and valuation sensitivity.",
+        "| segment / business line | profit-pool priority basis | segment-specific question tree | expectation gap / valuation / falsification linkage |",
+        "| --- | --- | --- | --- |",
+    ]
+    raw_segments = [
+        segment
+        for segment in (structured_research_context or {}).get("segments", [])
+        if segment.get("segment")
+    ]
+    sorted_segments = sorted(
+        raw_segments,
+        key=lambda segment: (
+            segment.get("revenue_weight_pct") is None,
+            -float(segment.get("revenue_weight_pct") or 0),
+        ),
+    )
+    if sorted_segments:
+        for segment in sorted_segments[:6]:
+            name = str(segment.get("segment", "")).strip().replace("|", "/")
+            priority = (
+                f"revenue_weight={segment.get('revenue_weight_pct')}%; "
+                f"growth={segment.get('revenue_growth_pct')}%; "
+                f"gross_margin={segment.get('gross_margin_pct')}%; "
+                "add cash conversion, capex intensity and valuation sensitivity if disclosed"
+            )
+            question_tree = (
+                "Demand: volume, penetration, customer budget or cycle driver; "
+                "Competition: true peers, substitutes, customer switching or self-supply; "
+                "Profitability: ASP/price, cost curve, utilization, mix and operating leverage; "
+                "Cash flow: inventory, receivables, prepayments, capex and collection cycle"
+            )
+            linkage = (
+                "State what the market appears to price for this segment, which assumption differs in the model, "
+                "how the delta changes revenue/profit/FCF/multiple, and which future KPI would confirm or falsify it"
+            )
+            lines.append(f"| {name} | {priority} | {question_tree} | {linkage} |")
+    else:
+        for name, formula, assumption in drivers[:5]:
+            lines.append(
+                f"| {name} | filing segment mix missing; use as fallback driver only | "
+                f"Demand/competition/profitability/cash-flow questions must be generated from company and peer context; driver formula={formula}; required assumptions={assumption} | "
+                "Do not claim a profit-pool ranking until segment revenue/margin/cash evidence is retrieved; use expectation gap and valuation transmission only as bounded scenarios |"
+            )
+    lines.extend(
+        [
+            "- A public thesis is incomplete unless it names the one or two segment assumptions that matter most for market expectation and valuation.",
+            "- A positive thesis must include the strongest bear mechanism; a negative thesis must include the strongest upside mechanism. Tie each to a dated KPI or disclosure gate.",
+            "- The final PM memo should not reproduce this table. It should convert the chain into connected sell-side prose in the business, thesis, forecast, valuation and catalyst/risk sections.",
+        ]
+    )
+    return lines
+
+
+def _llm_analysis_intervention_section(
+    structured_research_context: Mapping[str, Any] | None,
+) -> list[str]:
+    underwriting_packet = (structured_research_context or {}).get(
+        "underwriting_packet", {}
+    )
+    llm_layer = dict(underwriting_packet.get("llm_analysis_layer", {}) or {})
+    rows = [
+        (
+            "1. Business question tree",
+            "Use LLM judgment to turn filing segments into company-specific demand, competition, profitability and cash-flow questions.",
+            llm_layer.get("business_question_tree") or "missing; generate from revenue mix and business attributes",
+        ),
+        (
+            "2. Profit-pool priority",
+            "Use LLM judgment to decide which units matter beyond revenue weight, considering margin, growth, cash, capex, erosion risk and valuation sensitivity.",
+            llm_layer.get("profit_pool_priority") or "missing; infer and label evidence limits",
+        ),
+        (
+            "3. Competition and substitution",
+            "Use LLM judgment to reason about true peers, customer switching, supplier diversification, self-supply, substitutes and technology/regulatory change.",
+            llm_layer.get("competition_and_substitution_analysis") or "missing; answer qualitatively with evidence boundaries",
+        ),
+        (
+            "4. Qualitative-to-quantitative bridge",
+            "Use LLM judgment to keep analysis alive when ideal data are absent, while clearly stating what can and cannot be quantified.",
+            llm_layer.get("qualitative_to_quantitative_bridge") or "missing; state qualitative view and retrieval task",
+        ),
+        (
+            "5. Expectation gap",
+            "Use LLM judgment to infer what the market or consensus appears to price and whether the model differs by variable, magnitude or timing.",
+            llm_layer.get("expectation_gap_analysis") or "missing; compare against valuation and market-expectation context",
+        ),
+        (
+            "6. Red-team counterargument",
+            "Use LLM judgment as a skeptical analyst to challenge the core thesis and define falsification signals.",
+            llm_layer.get("red_team_counterarguments") or "missing; produce strongest bear/upside mechanism",
+        ),
+        (
+            "7. Valuation explanation",
+            "Use LLM judgment to explain valuation method, multiple/risk-premium logic and business-variable sensitivity; code owns arithmetic.",
+            llm_layer.get("valuation_explanation") or "missing; explain operating-variable transmission",
+        ),
+        (
+            "8. Final editorial synthesis",
+            "Use LLM judgment to convert the workbench into readable investor-facing sell-side prose without exposing raw ledgers.",
+            llm_layer.get("final_editorial_synthesis") or "missing; PM must synthesize and compress",
+        ),
+    ]
+    lines = [
+        "",
+        "## LLM Analysis Intervention Map",
+        "| LLM node | required contribution | current packet output / fallback task |",
+        "| --- | --- | --- |",
+    ]
+    for node, contribution, output in rows:
+        if isinstance(output, list):
+            output = "; ".join(str(item) for item in output[:4])
+        lines.append(
+            f"| {node} | {str(contribution).replace('|', '/')} | {str(output).replace('|', '/')[:700]} |"
+        )
+    lines.extend(
+        [
+            "- These are analysis-layer judgments, not permission to invent facts. Numeric claims still require reported/calculated/verified evidence or explicitly labeled analyst estimates.",
+            "- The final PM memo should absorb these judgments into the owning sections and not publish this intervention map as a reader-facing table.",
+        ]
+    )
+    return lines
 
 
 def _structured_kpe_quantification_section(
@@ -600,6 +796,33 @@ def build_forecast_model_context(
             ("Free cash flow", "net profit + D&A - working capital - capex", "cash conversion and reinvestment"),
         ]
 
+    structured_segments = sorted(
+        [
+            segment
+            for segment in (structured_research_context or {}).get("segments", [])
+            if segment.get("segment")
+        ],
+        key=lambda segment: (
+            segment.get("revenue_weight_pct") is None,
+            -float(segment.get("revenue_weight_pct") or 0),
+        ),
+    )
+    if structured_segments:
+        segment_drivers = [
+            (
+                f"{str(segment.get('segment', '')).strip()} revenue",
+                "segment revenue = volume/units x ASP/price/mix or reported segment run-rate",
+                "start from filing revenue weight, growth, margin and segment-specific demand/pricing evidence",
+            )
+            for segment in structured_segments[:6]
+        ]
+        drivers = [
+            *segment_drivers,
+            ("Gross profit", "sum(segment revenue x segment gross margin)", "segment margin, mix, cost curve, utilization and pass-through"),
+            ("Operating profit", "gross profit - R&D - SG&A - finance/impairment", "scale leverage, investment phase and credit quality"),
+            ("net profit/EPS / FCF", "operating profit - tax/minority + working-capital/capex bridge", "cash conversion, reinvestment cycle and share count"),
+        ]
+
     hog_sensitivity_section = []
     if is_hog_breeder:
         hog_sensitivity_section = [
@@ -625,7 +848,7 @@ def build_forecast_model_context(
             "## Battery Forecast And Valuation Controls",
             "| control | Mandatory treatment |",
             "| --- | --- |",
-            "| Segment model | model power battery, energy storage, materials/recycling, and other businesses separately |",
+            "| Segment model | start from filing-disclosed revenue mix; model high-weight or thesis-critical segments separately and do not add an undisclosed business bucket unless it is explicitly material to the thesis |",
             "| Revenue bridge | GWh shipments x realized ASP by segment; reconcile mix and consolidation eliminations |",
             "| Margin bridge | ASP/pass-through - lithium/material cost - manufacturing/depreciation/warranty; show utilization sensitivity |",
             "| Earnings bridge | segment gross profit - R&D/SG&A/finance - tax/minority/non-recurring = parent net profit/EPS |",
@@ -694,7 +917,6 @@ def build_forecast_model_context(
         )
 
     year_1, year_2, year_3 = _forecast_years(curr_date)
-    structured_segments = list((structured_research_context or {}).get("segments", []))
     structured_segment_rows = [
         (
             f"| {segment.get('segment', 'unmapped')} | segment revenue = volume/units x ASP/mix | "
@@ -755,6 +977,17 @@ def build_forecast_model_context(
         structured_research_context
     )
     official_guidance_section = _official_guidance_section(company_events_context)
+    business_line_agenda_section = _business_line_underwriting_agenda(
+        drivers=drivers,
+        structured_research_context=structured_research_context,
+    )
+    sell_side_depth_chain_section = _sell_side_depth_chain_section(
+        drivers=drivers,
+        structured_research_context=structured_research_context,
+    )
+    llm_analysis_intervention_section = _llm_analysis_intervention_section(
+        structured_research_context
+    )
     underwriting_packet = (structured_research_context or {}).get(
         "underwriting_packet", {}
     )
@@ -820,6 +1053,9 @@ def build_forecast_model_context(
             *[f"| {name} | {formula} | {assumption} |" for name, formula, assumption in drivers],
             *hog_sensitivity_section,
             *battery_model_section,
+            *business_line_agenda_section,
+            *sell_side_depth_chain_section,
+            *llm_analysis_intervention_section,
             *kp_assumption_section,
             *evidence_ledger_section,
             *segment_matrix_section,

@@ -210,6 +210,13 @@ def test_company_depth_contract_survives_downstream_prompt_compaction():
             {"bucket": "bank", "inclusion": "core", "valuation_method": "PB-ROE"}
         ],
         "valuation_closure": {"status": "partial"},
+        "llm_analysis_layer": {
+            "business_question_tree": ["Can NIM stabilize?"],
+            "profit_pool_priority": "retail deposits drive funding cost",
+            "expectation_gap_analysis": "market prices weak ROE recovery",
+            "red_team_counterarguments": ["credit cost could rise"],
+            "final_editorial_synthesis": "synthesize as a bank spread/credit note",
+        },
         "handoff_manifest": {"downstream_must_preserve": ["2026E-2028E"]},
     }
 
@@ -219,6 +226,10 @@ def test_company_depth_contract_survives_downstream_prompt_compaction():
     assert compact["thesis_financial_bridges"][0]["bridge_id"] == "TFB01"
     assert compact["moat_evidence_tests"][0]["status"] == "partial"
     assert compact["valuation_buckets"][0]["valuation_method"] == "PB-ROE"
+    assert compact["llm_analysis_layer"]["business_question_tree"] == [
+        "Can NIM stabilize?"
+    ]
+    assert "weak ROE" in compact["llm_analysis_layer"]["expectation_gap_analysis"]
     assert compact["handoff_manifest"]["downstream_must_preserve"] == ["2026E-2028E"]
 
 

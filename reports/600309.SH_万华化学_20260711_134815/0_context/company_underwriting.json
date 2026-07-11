@@ -1,0 +1,1259 @@
+{
+  "schema_version": 2,
+  "symbol": "600309.SH",
+  "as_of_date": "2026-07-11",
+  "forecast_years": [
+    "2026E",
+    "2027E",
+    "2028E"
+  ],
+  "research_readiness": "partial",
+  "readiness_reasons": [
+    "Diluted share count not available from supplied evidence; EPS and per-share valuations cannot be calculated.",
+    "Segment-level revenue, profit weights, and precise unit costs are missing; only partial proxy data from KPE and filings exist.",
+    "CAPEX and FCF data not provided in evidence; OCF for FY2025 is available but forward estimates cannot be fully grounded.",
+    "Several sell-side estimates are unverified and conflict with each other; scenario probabilities are analyst estimates, not facts.",
+    "One or more filing-reported segments required deterministic restoration.",
+    "Required consolidated three-year forecast lines are incomplete.",
+    "Material segment three-year driver lines are missing: 化工行业, 新材料 (New Materials), 石化 (Petrochemicals), 聚氨酯 (Polyurethane)",
+    "Bull/base/bear per-share valuation is incomplete.",
+    "Valuation has not closed from mutually exclusive buckets to per-share fair value.",
+    "Three-year values remain missing for consolidated line(s): Operating Cash Flow, CAPEX, Free Cash Flow, eps"
+  ],
+  "company_model": {
+    "model_profile": "corporate",
+    "operating_model_family": "volume_price_cost",
+    "business_archetype": "Integrated polyurethane/petrochemical/new-materials manufacturer with global scale and cost leadership. Operates as a 'capacity-driven' industrial chemical business: capacity → utilization → volume → ASP/input costs → spread → margin → working capital → capex/reinvestment → ROIC.",
+    "value_proposition_and_customers": "Supplies MDI, TDI, polyurethanes, ethylene derivatives, polycarbonate, battery materials and specialty chemicals to downstream construction, appliance, automotive, electronics, coatings, energy storage and industrial customers. Competitive advantage rests on lowest global cost position due to integrated production, feedstock flexibility, economies of scale and continuous innovation.",
+    "revenue_equation": "Revenue = Σ (product_volume × ASP) + trading/other revenue. Key drivers: MDI/TDI export volumes and spreads, ethylene/ethane spread, new materials volume growth.",
+    "profit_equation": "Gross profit = Revenue − raw material cost (benzene, coal, propane/ethane etc). Operating profit = Gross profit − selling & admin − R&D (40-50 bn CNY/year) − finance cost. Net profit = Operating profit + other income − income tax − minority interest.",
+    "cash_flow_equation": "OCF = Net profit + D&A ± working capital change. FCF = OCF − CAPEX. High capex needed for capacity build-out and maintenance. R&D expensed but future-oriented.",
+    "capital_intensity_and_reinvestment": "Very high. R&D ~48.65 bn in 2025; ongoing projects: Fujian MDI maintenance, ethylene flexibility upgrade, battery materials capacity expansion. Balance-sheet leverage moderate but substantial absolute debt; ROCE under pressure during heavy investment phase.",
+    "diluted_share_count_mn": null,
+    "share_count_period": "",
+    "share_count_evidence_id": "",
+    "share_count_source_type": "unresolved",
+    "share_count_formula": "",
+    "share_count_cross_checks": [],
+    "moat_mechanisms": [
+      "Scale-driven cost advantage: global lowest MDI production cost (~3000+ CNY/ton below competitors per KPE04).",
+      "Integrated production chain and feedstock flexibility (coal-to-chemical, ethane cracking).",
+      "R&D-driven product differentiation and process innovation (new materials pipeline).",
+      "High customer switching costs through technical service and formulation lock-in.",
+      "Regulatory barriers: difficult to obtain new MDI project approvals in China (per KPE04)."
+    ],
+    "moat_to_financial_transmission": [
+      "Cost advantage → sustainably higher gross margin and spread resilience.",
+      "Scale → superior ROIC during normal cycles.",
+      "Approval barriers → limited capacity additions → support pricing and utilization.",
+      "Technical lock-in → stickier volumes, lower churn."
+    ],
+    "structural_risks": [
+      "Capacity expansion by competitors (Covestro 660kt MDI by 2030; potential Middle East project).",
+      "Commodity price cyclicality (MDI, TDI, ethylene) depresses profitability during downturns.",
+      "Geopolitical risk (Strait of Hormuz disruptions, Middle East conflicts) affects exports and input costs.",
+      "Regulatory risk: carbon emission rules could raise costs or cap expansion.",
+      "Technology substitution risk: alternative materials may reduce demand growth in certain applications.",
+      "High financial leverage and heavy capex burden stress FCF during low-earnings periods."
+    ],
+    "key_unknowns": [
+      "Sustainability of current MDI/TDI export surge and price spreads.",
+      "Speed and profitability scaling of battery materials segment.",
+      "Quantitative cost savings from AI and digitalization (KPE06).",
+      "Actual future capex levels and their returns.",
+      "Mid-term competitive dynamics if Covestro and others add capacity."
+    ],
+    "evidence_ids": [
+      "EV028",
+      "EV029",
+      "EV035",
+      "EV036",
+      "KPE04",
+      "KPE06"
+    ]
+  },
+  "business_unit_map": [
+    {
+      "unit_id": "PU",
+      "unit_name": "聚氨酯 (Polyurethane)",
+      "unit_type": "product",
+      "disclosure_basis": "analytical",
+      "parent_unit": "company",
+      "economic_role": "Core profit engine; MDI & TDI business with ~60%+ of gross profit (analyst estimate).",
+      "revenue_driver_equation": "Volume (capacity × utilization) × ASP (USD/ton for exports, CNY/ton domestic); spread = ASP - unit input cost.",
+      "profit_driver_equation": "Gross profit = volume × (ASP - unit cost); unit cost includes raw materials (benzene, coal), energy, depressants.",
+      "cash_and_capital_equation": "Heavy maintenance and debottlenecking capex; capacity expansions require large outlays; working capital tied to price cycles.",
+      "reported_metrics": [
+        "MDI export volume 10.08 10k tons in May 2026",
+        "Q2 MDI spread 1.31w/ton QoQ +2100 CNY",
+        "TDI spread 1.25w/ton QoQ +706 CNY"
+      ],
+      "evidence_ids": [
+        "KPE01",
+        "KPE04",
+        "KPE05",
+        "KPE07",
+        "EV028"
+      ],
+      "missing_inputs": [
+        "Exact segment revenue",
+        "Profit contribution",
+        "Unit costs",
+        "Utilization rates"
+      ],
+      "next_verification": "H1 2026 semi-annual report for segment revenue and profitability breakdown."
+    },
+    {
+      "unit_id": "PETRO",
+      "unit_name": "石化 (Petrochemicals)",
+      "unit_type": "product",
+      "disclosure_basis": "analytical",
+      "parent_unit": "company",
+      "economic_role": "Integrated cracker with feedstock flexibility; provides raw material for PU and sells ethylene derivatives.",
+      "revenue_driver_equation": "Volume × (ASP - feedstock cost); spread = ethylene-ethane or naphtha-ethylene.",
+      "profit_driver_equation": "Gross margin driven by spread (Q2 2026 ethylene-ethane spread of 1003 USD/ton, QoQ +362), plus cost savings from feedstock upgrade.",
+      "cash_and_capital_equation": "Large initial capex, now focusing on optimization; modest maintenance capex.",
+      "reported_metrics": [
+        "Q2 2026 ethylene-ethane spread 1003 USD/ton QoQ +362 USD/ton",
+        "Ethylene phase-1 diversification completed early 2026"
+      ],
+      "evidence_ids": [
+        "KPE01",
+        "KPE03",
+        "KPE07"
+      ],
+      "missing_inputs": [
+        "Segment revenue and profit",
+        "Volume data",
+        "Other spreads (propylene, butadiene)"
+      ],
+      "next_verification": "H1 2026 semi-annual report."
+    },
+    {
+      "unit_id": "NEWMAT",
+      "unit_name": "新材料 (New Materials)",
+      "unit_type": "product",
+      "disclosure_basis": "analytical",
+      "parent_unit": "company",
+      "economic_role": "R&D-intensive growth engine; PC, battery materials, specialty chemicals. Currently loss-making or low-margin but improving.",
+      "revenue_driver_equation": "Volume growth through new capacity and customer certifications; pricing depends on product differentiation.",
+      "profit_driver_equation": "High R&D spending weighs on current profitability; margin improvement as scale increases and product mix upgrades.",
+      "cash_and_capital_equation": "High capital intensity: new plants for LFP, graphite anodes; likely negative FCF for near term.",
+      "reported_metrics": [
+        "R&D ~40-50 bn CNY/year",
+        "Battery materials: LFP, graphite anode, NMP, PAA"
+      ],
+      "evidence_ids": [
+        "EV029",
+        "EV034",
+        "KPE01"
+      ],
+      "missing_inputs": [
+        "Segment revenue and profit",
+        "Product-level volumes and prices",
+        "Customer names"
+      ],
+      "next_verification": "Product-specific disclosures in semi-annual report; customer-of-sale acceptance."
+    },
+    {
+      "unit_id": "DOMESTIC",
+      "unit_name": "境内 (Domestic China)",
+      "unit_type": "geography",
+      "disclosure_basis": "reported",
+      "parent_unit": "company",
+      "economic_role": "Mature domestic demand base; more stable growth.",
+      "revenue_driver_equation": "Revenue = domestic sales volume × CNY ASP; driven by downstream construction, appliance, automotive.",
+      "profit_driver_equation": "Same product margin but different pricing and competitive intensity.",
+      "cash_and_capital_equation": "Receivables and payment cycles comparable to domestic norms.",
+      "reported_metrics": [
+        "FY2025: domestic revenue 106,061 mn, gross margin 15.45% (filing EV036)"
+      ],
+      "evidence_ids": [
+        "EV036"
+      ],
+      "missing_inputs": [],
+      "next_verification": "Monitor domestic PMI and real estate indicators."
+    },
+    {
+      "unit_id": "EXPORT",
+      "unit_name": "境外 (Export/International)",
+      "unit_type": "geography",
+      "disclosure_basis": "reported",
+      "parent_unit": "company",
+      "economic_role": "Key growth area; export surge due to overseas capacity issues and Chinese cost advantage.",
+      "revenue_driver_equation": "Revenue = export volume × USD ASP × exchange rate; volumes driven by overseas supply disruption.",
+      "profit_driver_equation": "Higher export spreads currently, but subject to tariff and geopolitical risk.",
+      "cash_and_capital_equation": "Cross-border working capital and forex exposure.",
+      "reported_metrics": [
+        "FY2025: overseas revenue 96,321 mn, gross margin 11.50% (EV036)",
+        "May 2026 aggregated MDI export volume 10.08 10k tons, yoy+49% (KPE01)"
+      ],
+      "evidence_ids": [
+        "EV036",
+        "KPE01"
+      ],
+      "missing_inputs": [],
+      "next_verification": "Monthly MDI export data; shipping and freight indices."
+    },
+    {
+      "unit_id": "BU09",
+      "unit_name": "化工行业",
+      "unit_type": "reported_segment",
+      "disclosure_basis": "reported",
+      "parent_unit": "company",
+      "economic_role": "Filing segment restored after structured evidence reconciliation.",
+      "revenue_driver_equation": "",
+      "profit_driver_equation": "",
+      "cash_and_capital_equation": "",
+      "reported_metrics": [],
+      "evidence_ids": [],
+      "missing_inputs": [
+        "economic sub-unit driver equations require analyst completion"
+      ],
+      "next_verification": ""
+    }
+  ],
+  "segment_models": [
+    {
+      "segment": "聚氨酯 (Polyurethane)",
+      "products_or_services": "MDI (polymeric and pure MDI), TDI, related polyurethane systems",
+      "customers_and_channel": "Construction, appliance, automotive, coatings, footwear; direct sales and distributors; significant export channel.",
+      "revenue_weight_pct": null,
+      "profit_weight_pct": null,
+      "base_period": "2026Q2 (YTD trends)",
+      "base_revenue_value": null,
+      "base_revenue_unit": "CNY mn",
+      "base_revenue_growth_pct": null,
+      "base_margin_pct": null,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [
+        "Export surge due to overseas (Europe, Japan, Korea, Middle East) capacity outages and high energy costs",
+        "MDI export volume May 2026 YoY +49%; cumulative +16%",
+        "Stimulus for domestic construction and appliance replacement",
+        "Seasonal peak demand in Q3"
+      ],
+      "industry_supply_and_capacity": "Global MDI capacity concentrated among Wanhua, Covestro, BASF, Huntsman. Wanhua is largest with ~3100kt capacity (company estimate based on KPE04). Covestro announced 660kt in Shanghai by 2030, not impacting near-term supply.",
+      "volume_share_utilization": "Wanhua likely operating at high utilization. Fujian MDI maintenance announced (EV025) may temporarily reduce volumes.",
+      "price_asp_take_rate": "Q2 2026 polymeric MDI price 1.79w/ton, pure MDI price 2.26w/ton, MDI spread 1.31w/ton (QoQ +2100 CNY). TDI price 1.68w/ton, spread 1.25w/ton (+706 QoQ). Strong pricing power.",
+      "unit_cost_and_input_prices": "Benzene, coal, and electricity costs. Imported raw material costs moderate with lower oil prices. Wanhua has ~3000+ CNY/ton cost advantage vs overseas peers (per KPE04).",
+      "margin_and_operating_leverage": "Significant positive operating leverage from higher spreads; gross margin improvement likely in Q2 vs Q1.",
+      "working_capital_and_cash_conversion": "Receivables/revenue ratio down 1.27pp YoY (Q1), indicating better cash conversion; inventory/revenue ratio also down.",
+      "prosperity_level": "high",
+      "marginal_direction": "improving",
+      "causal_analysis": "Strong export demand due to overseas supply disruptions and cost advantage → volume up; pricing firm; spreads widened → margin expansion. Cash flow healthy. Risk: overseas capacity may restart if energy prices normalize.",
+      "valuation_treatment": "Core earnings engine; valued with base/bull/bear scenarios for spread and volume.",
+      "strongest_counterevidence": [
+        "Covestro's planned 660kt capacity (2030) long-term threat, but near-term limited.",
+        "If Strait of Hormuz fully reopens and Middle East capacity restarts, export advantage may narrow (KPE07)."
+      ],
+      "evidence_ids": [
+        "KPE01",
+        "KPE04",
+        "KPE05",
+        "KPE07",
+        "EV025",
+        "EV013",
+        "EV018"
+      ],
+      "missing_inputs": [
+        "Segment revenue and profit weight",
+        "Exact utilization",
+        "Unit cost structure"
+      ],
+      "next_verification": "H1 2026 semi-annual report; monthly export data; price/spread trends."
+    },
+    {
+      "segment": "石化 (Petrochemicals)",
+      "products_or_services": "Ethylene, ethylene derivatives (polyethylene, styrene, etc.), other olefins and aromatics",
+      "customers_and_channel": "Downstream plastics, packaging, construction, and trading companies; domestic and export.",
+      "revenue_weight_pct": null,
+      "profit_weight_pct": null,
+      "base_period": "2026Q2",
+      "base_revenue_value": null,
+      "base_revenue_unit": "CNY mn",
+      "base_revenue_growth_pct": null,
+      "base_margin_pct": null,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [
+        "Steady domestic demand; pre-stocking ahead of holidays.",
+        "Improved spreads from cost savings after ethane flexibility upgrade."
+      ],
+      "industry_supply_and_capacity": "Domestic refinery utilization low (Shandong 46.92%) but Wanhua's ethylene cracker is flexible and integrated, not directly comparable to refineries.",
+      "volume_share_utilization": "Phase-1 1200kt diversified upgrade completed early 2026; running well.",
+      "price_asp_take_rate": "Ethylene-ethane spread of 1003 USD/ton in Q2 (QoQ +362). Implies solid margin relative to naphtha-based peers.",
+      "unit_cost_and_input_prices": "Ethane feedstock cost advantage; coal-based methanol and other inputs relatively stable.",
+      "margin_and_operating_leverage": "Improving margin from advanced feedstock; will reflect in segment results.",
+      "working_capital_and_cash_conversion": "Inventory and receivables ratios improving per Q1.",
+      "prosperity_level": "mitigated recovery",
+      "marginal_direction": "improving",
+      "causal_analysis": "Upgrade to ethane feedstock reduced costs, combined with wider ethylene-ethane spread leads to margin recovery. Still subject to ethylene market oversupply risk.",
+      "valuation_treatment": "Valued as a cyclical business with cost advantage; moderate multiple.",
+      "strongest_counterevidence": [
+        "Domestic olefin overcapacity may cap margin improvement.",
+        "Global recession risk could dampen ethylene demand."
+      ],
+      "evidence_ids": [
+        "KPE01",
+        "KPE03",
+        "KPE07",
+        "EV013"
+      ],
+      "missing_inputs": [
+        "Segment revenue and profit",
+        "Exact volume and price data"
+      ],
+      "next_verification": "H1 2026 semi-annual report."
+    },
+    {
+      "segment": "新材料 (New Materials)",
+      "products_or_services": "Polycarbonate (PC), battery materials (LFP, graphite anode, NMP, PAA), nylon 12, specialty engineering plastics",
+      "customers_and_channel": "Automotive, electronics, battery manufacturers, healthcare; requires long customer certification.",
+      "revenue_weight_pct": null,
+      "profit_weight_pct": null,
+      "base_period": "2025 (annual)",
+      "base_revenue_value": null,
+      "base_revenue_unit": "CNY mn",
+      "base_revenue_growth_pct": null,
+      "base_margin_pct": null,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [
+        "Electric vehicle and energy storage growth drives battery material demand.",
+        "R&D pipeline yields new products with higher margins.",
+        "Government support for new materials and AI."
+      ],
+      "industry_supply_and_capacity": "Highly competitive battery materials market; Wanhua expanding capacity but lacks established market share.",
+      "volume_share_utilization": "Ramping up; new lines under construction.",
+      "price_asp_take_rate": "Commodity-type battery materials (LFP) have low margins initially; specialty chemicals have higher ASP.",
+      "unit_cost_and_input_prices": "Economies of scale not yet achieved; unit cost high during ramp-up.",
+      "margin_and_operating_leverage": "Currently dilutive to group margin but expected to improve as scale builds.",
+      "working_capital_and_cash_conversion": "Likely negative FCF from heavy capex.",
+      "prosperity_level": "improving",
+      "marginal_direction": "improving",
+      "causal_analysis": "Innovation and capex create future optionality but near-term margins low. Improvement expected from PC profitability and battery material scale.",
+      "valuation_treatment": "Scenario/optionality value; not core to base case but upside from successful commercialization.",
+      "strongest_counterevidence": [
+        "Intense competition in battery materials; may not achieve target margins.",
+        "Technology risk and certification delays."
+      ],
+      "evidence_ids": [
+        "EV029",
+        "EV034",
+        "KPE01"
+      ],
+      "missing_inputs": [
+        "Segment revenue/profit",
+        "Product-level economics",
+        "Capex allocation"
+      ],
+      "next_verification": "Semi-annual report segment data and capex update."
+    },
+    {
+      "segment": "化工行业",
+      "products_or_services": "",
+      "customers_and_channel": "",
+      "revenue_weight_pct": 100.0,
+      "profit_weight_pct": 100.0,
+      "base_period": "annual filing",
+      "base_revenue_value": 201109817784.79,
+      "base_revenue_unit": "filing table unit not explicit in extracted row",
+      "base_revenue_growth_pct": 11.88,
+      "base_margin_pct": 13.48,
+      "base_margin_change_pp": -2.61,
+      "demand_and_order_drivers": [],
+      "industry_supply_and_capacity": "",
+      "volume_share_utilization": "",
+      "price_asp_take_rate": "",
+      "unit_cost_and_input_prices": "",
+      "margin_and_operating_leverage": "",
+      "working_capital_and_cash_conversion": "",
+      "prosperity_level": "evidence_limited",
+      "marginal_direction": "unknown",
+      "causal_analysis": "",
+      "valuation_treatment": "evidence_limited",
+      "strongest_counterevidence": [],
+      "evidence_ids": [],
+      "missing_inputs": [
+        "LLM omitted a filing-reported material segment"
+      ],
+      "next_verification": ""
+    }
+  ],
+  "underwriting_questions": [
+    {
+      "question_id": "Q1",
+      "question": "How sustainable is the Q2 2026 MDI export surge (volume +49% YoY) and the expanded MDI spread (+2100 CNY/ton) given the potential reopening of the Strait of Hormuz and the restart of overseas capacity?",
+      "why_it_matters": "Polyurethane is the dominant profit engine; a reversal in export volume or spread would immediately compress 2026-2028 EPS by 15-25%.",
+      "current_answer": "Current signals are bullish (KPE01, KPE07), but the situation is dynamic. Evidence is split: KPE07 suggests easing of supply chain tension could reduce the cost advantage, while KPE01 emphasizes structural Chinese competitiveness.",
+      "bull_evidence": [
+        "MDI export volume in May +49% YoY; cumulative +16% (KPE01).",
+        "MDI spread expanded 2100 CNY QoQ; TDI spread +706 (KPE01).",
+        "Overseas energy costs remain high, and capacity is unreliable (KPE01).",
+        "Wanhua's cost advantage of >3000 CNY/ton over overseas peers is structural (KPE04)."
+      ],
+      "bear_evidence": [
+        "Strait of Hormuz reopening could normalize Middle East production and lower costs for competitors (KPE07).",
+        "Exports may decline as overseas capacity restarts.",
+        "Product prices may fall if demand weakens."
+      ],
+      "decisive_model_variables": [
+        "PU export volume",
+        "MDI/TDI ASP spread",
+        "PU segment revenue and gross margin"
+      ],
+      "affected_financial_lines": [
+        "Polyurethane segment revenue",
+        "Consolidated gross margin",
+        "Parent net profit",
+        "EPS"
+      ],
+      "evidence_ids": [
+        "KPE01",
+        "KPE04",
+        "KPE07",
+        "KPE09",
+        "EV025"
+      ],
+      "missing_evidence": [
+        "Monthly MDI export data for Q3 2026 (pre-announcement).",
+        "Overseas competitor production updates (Covestro, BASF).",
+        "Realized realized price vs spot spread data."
+      ],
+      "next_verification": "Monitor monthly MDI exports, chemical price agencies (ICIS, Platts), and company H1 commentary on export trends."
+    },
+    {
+      "question_id": "Q2",
+      "question": "What is the incremental net profit contribution from the ethylene Phase-1 feedstock flexibility upgrade, and will the improved ethylene-ethane spread survive into 2027-2028 given global ethylene overcapacity?",
+      "why_it_matters": "Petrochemical segment is the second-largest profit pool; understanding the exact cost savings and their sustainability determines whether the 2026 earnings beat can recur or is a one-off.",
+      "current_answer": "The upgrade began in early 2026 and has already widened the ethylene-ethane spread (Q2 +362 USD/ton). However, the absolute spread was low in 2025, so some improvement is cyclical.",
+      "bull_evidence": [
+        "Ethylene-ethane spread Q2 2026 1003 USD/ton, QoQ +362 (KPE01).",
+        "120kt ethylene flexible upgrade completed early 2026 (KPE01).",
+        "Domestic refineries under pressure; Wanhua's integrated cost advantage endures."
+      ],
+      "bear_evidence": [
+        "Olefin overcapacity in China may compress ethylene margins long-term.",
+        "Ethane availability and price could rise if many crackers switch.",
+        "Petrochemical cycle is historically volatile."
+      ],
+      "decisive_model_variables": [
+        "Petrochemical segment volume",
+        "Ethylene-ethane spread",
+        "Segment margin"
+      ],
+      "affected_financial_lines": [
+        "Petrochemical segment revenue",
+        "Consolidated gross margin",
+        "Parent net profit"
+      ],
+      "evidence_ids": [
+        "KPE01",
+        "KPE03",
+        "KPE07"
+      ],
+      "missing_evidence": [
+        "Quantified cost savings from upgrade (management guidance).",
+        "Output volume of ethylene after upgrade.",
+        "Long-term ethane supply contract details."
+      ],
+      "next_verification": "Company H1 2026 results call; monitor ethane and naphtha prices, polyethylene/naphtha spreads."
+    },
+    {
+      "question_id": "Q3",
+      "question": "When will the New Materials segment (especially battery materials) turn profitable, and what is the path to ROIC exceeding WACC?",
+      "why_it_matters": "This segment absorbs huge R&D and capex (40-50 bn/year). If it fails to generate adequate returns, it will drag consolidated ROE and FCF, diminishing terminal value. A positive inflection could, conversely, add significant value.",
+      "current_answer": "Currently unprofitable or low-margin, but PC profitability is improving; battery materials are still in the early ramp-up stage.",
+      "bull_evidence": [
+        "R&D spending of 40-50 bn CNY/year drives a pipeline of innovative products (EV034).",
+        "PC product profitability improving (EV029).",
+        "LFP capacity expanding, profitability improving (KPE01).",
+        "Potential for high-value specialty chemicals."
+      ],
+      "bear_evidence": [
+        "Intense competition in battery materials: oversupply likely.",
+        "Long customer certification cycles may delay revenue.",
+        "Heavy capex could result in stranded assets if demand fails."
+      ],
+      "decisive_model_variables": [
+        "New Materials segment revenue",
+        "New Materials segment margin",
+        "Capex allocated to New Materials",
+        "ROIC for New Materials"
+      ],
+      "affected_financial_lines": [
+        "New Materials revenue",
+        "Consolidated gross margin",
+        "Capex",
+        "FCF",
+        "ROE"
+      ],
+      "evidence_ids": [
+        "EV029",
+        "EV034",
+        "KPE01",
+        "KPE06"
+      ],
+      "missing_evidence": [
+        "Segment profitability (gross margin, operating margin).",
+        "Product-level volumes and ASPs.",
+        "Capex budget for new materials."
+      ],
+      "next_verification": "Potential segment disclosure in H1 2026 report; management comments on battery materials progress."
+    },
+    {
+      "question_id": "Q4",
+      "question": "Will the double-carbon policy and anti-involution ('anti-rollover') regulation genuinely slow domestic chemical capacity expansion and boost industry returns, or will it simply accelerate consolidation favoring Wanhua?",
+      "why_it_matters": "If supply discipline is sustained, Wanhua's competitive moat widens and mid-cycle returns could be structurally higher, supporting an expanded valuation multiple (PE >12x).",
+      "current_answer": "Evidence from KPE08 and KPE10 suggests a policy shift, but the real impact on capacity additions and pricing is still an unproven hypothesis.",
+      "bull_evidence": [
+        "Carbon peak/carbon neutrality assessment method enacted, limiting new coal and high-emission projects (KPE10).",
+        "Industry 'anti-rollover' consensus strengthens; new project approvals tightly controlled (KPE08).",
+        "Wanhua's compliance costs are relatively low due to integrated and efficient processes."
+      ],
+      "bear_evidence": [
+        "Local governments may still approve projects under economic pressure.",
+        "If policy fails to contain capacity, oversupply will re-emerge.",
+        "Overcapacity in building materials may still drag domestic demand."
+      ],
+      "decisive_model_variables": [
+        "Industry capacity growth rate",
+        "Product price normalization",
+        "Valuation multiple"
+      ],
+      "affected_financial_lines": [
+        "Long-term ASP and margin assumptions",
+        "FCF (capex moderation)",
+        "PE multiple"
+      ],
+      "evidence_ids": [
+        "KPE08",
+        "KPE10"
+      ],
+      "missing_evidence": [
+        "Quantitative reduction in industry expansion permits.",
+        "Detailed analysis of Wanhua's carbon compliance cost versus peers."
+      ],
+      "next_verification": "Monitor official policy implementation rules and capacity addition announcements for MDI/propylene/ethylene."
+    },
+    {
+      "question_id": "Q5",
+      "question": "How will Covestro's 660kt Shanghai MDI project (2030 target) and potential Middle East expansion affect Wanhua's long-term market share and pricing power, and is the market pricing this competitive threat correctly?",
+      "why_it_matters": "MDI global capacity structure defines Wanhua's terminal value. If Covestro successfully adds significant capacity, Wanhua's long-term ROIC could be diluted, reducing its fair PE multiple from ~12x to ~10x.",
+      "current_answer": "The announced project is far into the future and subject to approval uncertainty (KPE04). The market seems to assign low probability. However, if it proceeds, it will be a negative catalyst.",
+      "bull_evidence": [
+        "Project target 2030, unlikely to impact medium-term supply (KPE04).",
+        "Chinese 'Fifteenth Five-Year Plan' may restrict MDI approvals, creating uncertainty (KPE04).",
+        "Wanhua's own capacity will reach >4800kt by 2030, maintaining scale lead."
+      ],
+      "bear_evidence": [
+        "Covestro's announcement signals ambition to compete in China.",
+        "A Middle East project could have even lower feedstock costs.",
+        "Technology diffusion could reduce barriers over time."
+      ],
+      "decisive_model_variables": [
+        "Global MDI capacity additions",
+        "Long-term MDI price and spread",
+        "Terminal growth rate"
+      ],
+      "affected_financial_lines": [
+        "PU segment long-term revenue growth",
+        "Valuation multiple (PE/EV)",
+        "Terminal value"
+      ],
+      "evidence_ids": [
+        "KPE04",
+        "KPE05"
+      ],
+      "missing_evidence": [
+        "Status of Covestro project approval (NDRC).",
+        "Wanhua's own 2030 capacity target detail.",
+        "Feasibility of Middle East project."
+      ],
+      "next_verification": "Track NDRC approvals and company announcements regarding any MDI capacity addition in China."
+    }
+  ],
+  "forecast_lines": [
+    {
+      "segment": "consolidated",
+      "metric": "Revenue",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 203234.57,
+      "year_1_value": 220000.0,
+      "year_2_value": 240000.0,
+      "year_3_value": 260000.0,
+      "formula": "Base case: moderate volume growth from MDI exports + new materials ramp; ASP assumption flat to slightly up. 2026E driven by Q1 annualization and H1 guidance implied run-rate.",
+      "assumption_status": "analyst estimate",
+      "evidence_ids": [
+        "EV011",
+        "EV012"
+      ],
+      "key_sensitivity": "2% revenue change ~4.4 bn CNY moves net profit ~830 mn (assuming 19% tax).",
+      "missing_inputs": []
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Gross Margin",
+      "unit": "%",
+      "base_period": "FY2025",
+      "base_value": 13.48,
+      "year_1_value": 16.2,
+      "year_2_value": 17.0,
+      "year_3_value": 17.5,
+      "formula": "Reflects higher spreads in PU (MDI +2100 CNY QoQ) and cost savings in petrochemical, partially offset by new materials drag.",
+      "assumption_status": "analyst estimate",
+      "evidence_ids": [
+        "EV013",
+        "KPE01"
+      ],
+      "key_sensitivity": "Each 1pp gross margin change alters gross profit ~2.2 bn (2026E).",
+      "missing_inputs": []
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Operating Profit",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 14679.0,
+      "year_1_value": 23100.0,
+      "year_2_value": 26400.0,
+      "year_3_value": 31200.0,
+      "formula": "Operating profit = Revenue × (Gross margin - SG&A ratio - R&D ratio). Assumes SG&A ratio stable at ~3.5%, R&D ~2.3% of revenue.",
+      "assumption_status": "analyst estimate",
+      "evidence_ids": [
+        "EV014",
+        "KPE01"
+      ],
+      "key_sensitivity": "10% change in operating profit changes net profit ~7.5% (after tax).",
+      "missing_inputs": [
+        "Detailed SG&A/R&D breakdown for forward years"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Parent Net Profit",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 12527.2,
+      "year_1_value": 18700.0,
+      "year_2_value": 20500.0,
+      "year_3_value": 22900.0,
+      "formula": "Based on broker consensus (KPE01) as approximate midpoint of estimates; confirmed by H1 guidance (98-104 bn H1, implying >60 bn Q2 and annualising 200-220 bn). Base case uses 187 bn as realistic beat.",
+      "assumption_status": "analyst estimate (consensus midpoint)",
+      "evidence_ids": [
+        "EV011",
+        "EV015",
+        "KPE01",
+        "EV023"
+      ],
+      "key_sensitivity": "Every 5% change in net profit ~935 mn, EPS effect depends on share count.",
+      "missing_inputs": [
+        "Non-operating items forecast",
+        "Minority interest estimate"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "EPS (diluted)",
+      "unit": "CNY",
+      "base_period": "FY2025",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "EPS = Parent Net Profit / Diluted Share Count. Share count unavailable, so EPS null.",
+      "assumption_status": "missing_inputs",
+      "evidence_ids": [
+        "EV011"
+      ],
+      "key_sensitivity": "N/A",
+      "missing_inputs": [
+        "Diluted share count"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Operating Cash Flow",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 16083.61,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "Q1 OCF/Net Profit ratio 1.84; assuming similar quality, 2026E OCF could be ~1.5-1.8x net profit. No forward capex data, so left null.",
+      "assumption_status": "analyst estimate, partial",
+      "evidence_ids": [
+        "EV017",
+        "EV040"
+      ],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "Forecast capex",
+        "Working capital assumptions"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "CAPEX",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "Not available in evidence.",
+      "assumption_status": "missing",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "Historical and projected capex"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Free Cash Flow",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "FCF = OCF - CAPEX. Both components unavailable for forecast.",
+      "assumption_status": "missing",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "OCF forecast",
+        "CAPEX forecast"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "eps",
+      "unit": "",
+      "base_period": "",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "missing; downstream analyst must complete",
+      "assumption_status": "missing",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "required consolidated forecast line omitted"
+      ]
+    }
+  ],
+  "scenarios": [
+    {
+      "scenario": "base",
+      "probability_pct": 50.0,
+      "operating_assumptions": [
+        "MDI export volume growth ~15% in 2026E, ~5% thereafter; MDI spread gradually normalizes from Q2 2026 peak but remains above 2025 average.",
+        "Ethylene-ethane spread normalizes to ~800 USD/ton in 2027-28.",
+        "New Materials segment revenue grows 30% p.a. with margins gradually improving to ~15% gross by 2028.",
+        "CAPEX remains at elevated levels (~20 bn/year) to fund expansion.",
+        "No major geopolitical or policy disruption."
+      ],
+      "parent_net_profit_cny_mn": 18700.0,
+      "eps_cny": null,
+      "fcf_cny_mn": null,
+      "valuation_method": "PE multiple on 2026E net profit",
+      "valuation_multiple": 12.0,
+      "fair_value_per_share": null,
+      "evidence_ids": [
+        "KPE01"
+      ],
+      "falsification": "If H2 2026 net profit annualizes below 170 bn, downgrade to bear.",
+      "missing_inputs": [
+        "Share count for EPS",
+        "CAPEX for FCF"
+      ]
+    },
+    {
+      "scenario": "bull",
+      "probability_pct": 30.0,
+      "operating_assumptions": [
+        "MDI exports stay elevated (+20% in 2026E, +10% in 2027E) as overseas capacity remains unreliable; MDI spread widens further through 2027.",
+        "Ethylene-ethane spread stays >1000 USD/ton as ethane advantage persists.",
+        "New Materials profitability accelerates: PC and battery materials reach >20% gross margin by 2027.",
+        "Policy curbs on new capacity; Wanhua's moat widens.",
+        "CAPEX becomes more efficient, FCF turns positive by 2028."
+      ],
+      "parent_net_profit_cny_mn": 21000.0,
+      "eps_cny": null,
+      "fcf_cny_mn": null,
+      "valuation_method": "PE multiple on 2026E net profit, expanded multiple",
+      "valuation_multiple": 14.0,
+      "fair_value_per_share": null,
+      "evidence_ids": [
+        "KPE01",
+        "KPE04",
+        "KPE10"
+      ],
+      "falsification": "Monthly MDI export data declines >10% MoM for two consecutive months; Covestro project obtains approval.",
+      "missing_inputs": [
+        "Share count",
+        "CAPEX"
+      ]
+    },
+    {
+      "scenario": "bear",
+      "probability_pct": 20.0,
+      "operating_assumptions": [
+        "Strait of Hormuz fully reopens; Middle East and Europe capacity restart, eroding export advantage. MDI export volume growth flat in 2027.",
+        "MDI spread drops back to 2025 levels (~1.0w/ton) by end-2026.",
+        "Ethylene-ethane spread falls to 600 USD/ton due to olefin overcapacity.",
+        "New Materials losses persist; battery materials face price war.",
+        "Global recession risk depresses demand."
+      ],
+      "parent_net_profit_cny_mn": 15000.0,
+      "eps_cny": null,
+      "fcf_cny_mn": null,
+      "valuation_method": "PE multiple on depressed earnings (no growth premium)",
+      "valuation_multiple": 10.0,
+      "fair_value_per_share": null,
+      "evidence_ids": [
+        "KPE07",
+        "KPE09"
+      ],
+      "falsification": "If Q3 2026 net profit exceeds 5 bn, bear case disproven.",
+      "missing_inputs": [
+        "Share count"
+      ]
+    }
+  ],
+  "thesis_financial_bridges": [
+    {
+      "bridge_id": "FULL_DEMAND_EXPORT",
+      "thesis_or_question": "Sustainable MDI export surge translates to higher PU revenue and margins.",
+      "affected_unit": "聚氨酯 (Polyurethane)",
+      "operating_driver": "Export volume and price spread",
+      "driver_formula": "PU revenue = export volume × ASP; PU profit = volume × (ASP - unit cost)",
+      "base_assumption": "2026E export volume +15%, spread 1.31w/ton expands to 1.35w/ton average for year.",
+      "bull_assumption": "Export volume +20%, spread 1.40w/ton.",
+      "bear_assumption": "Volume growth 0%, spread falls to 1.1w/ton.",
+      "revenue_impact": "Base: incremental ~15 bn CNY; Bull: +25 bn; Bear: -10 bn vs base.",
+      "profit_impact": "Each 100 CNY/ton spread change ~800 mn net profit (assuming 8 mn ton MDI volume).",
+      "eps_impact": "unquantified due to missing share count",
+      "fcf_or_capital_impact": "Higher profit improves OCF but likely absorbed by working capital.",
+      "valuation_impact": "1x PE multiple re-rating possible in bull; de-rating in bear.",
+      "quantification_status": "partially_quantified",
+      "evidence_ids": [
+        "KPE01",
+        "KPE04",
+        "KPE07"
+      ],
+      "missing_inputs": [
+        "Exact PU sales volume",
+        "Share count for per-share impact"
+      ]
+    },
+    {
+      "bridge_id": "PETRO_COST_SAVE",
+      "thesis_or_question": "Ethylene feedstock flexibility permanently reduces cost base and improves petrochemical margins.",
+      "affected_unit": "石化 (Petrochemicals)",
+      "operating_driver": "Ethylene-ethane spread",
+      "driver_formula": "Petrochemical profit = volume × (ethylene_sales_price - ethane_cost) + other products margin",
+      "base_assumption": "Spread at 1000 USD/ton in 2026, moderating to 800 USD/ton by 2028.",
+      "bull_assumption": "Spread >1100 USD/ton sustained due to high naphtha prices.",
+      "bear_assumption": "Spread collapses to 600 USD/ton as ethane price rises or ethlyene demand falls.",
+      "revenue_impact": "Typical volume ~5 mn tons ethylene? spread change of $100/ton ~ 350 mn USD revenue swing.",
+      "profit_impact": "Pre-tax profit impact ~ 2-3 bn CNY for $100/ton spread movement.",
+      "eps_impact": "unquantified",
+      "fcf_or_capital_impact": "Indirect via profit.",
+      "valuation_impact": "Can stabilize segment multiple.",
+      "quantification_status": "partially_quantified",
+      "evidence_ids": [
+        "KPE01",
+        "KPE03"
+      ],
+      "missing_inputs": [
+        "Ethylene sales volume",
+        "Exact cost structure"
+      ]
+    },
+    {
+      "bridge_id": "NEWMAT_OPTIONALITY",
+      "thesis_or_question": "New Materials (battery materials) can become a significant profit center by 2028, creating new equity value independent of cyclical PU.",
+      "affected_unit": "新材料 (New Materials)",
+      "operating_driver": "Revenue growth and margin inflection",
+      "driver_formula": "Segment profit = revenue × net margin; requires scale and customer wins.",
+      "base_assumption": "Revenue 20 bn in 2026E, net margin -5% (loss); turning positive by 2028.",
+      "bull_assumption": "Revenue 30 bn in 2026E, positive margin in 2027.",
+      "bear_assumption": "Remains sub-scale and loss-making, consuming cash.",
+      "revenue_impact": "Bull adds ~10 bn revenue vs base.",
+      "profit_impact": "Difference between 5% loss and 10% margin could swing ~3 bn net profit.",
+      "eps_impact": "unquantified",
+      "fcf_or_capital_impact": "Bull case reduces cash burn; bear case worsens.",
+      "valuation_impact": "Can be valued separately as option (10-20% of market cap).",
+      "quantification_status": "unquantified",
+      "evidence_ids": [
+        "EV029",
+        "EV034",
+        "KPE01"
+      ],
+      "missing_inputs": [
+        "Segment revenue and margin forecast",
+        "Capex requirements"
+      ]
+    },
+    {
+      "bridge_id": "POLICY_SUPPLY",
+      "thesis_or_question": "Double-carbon and anti-involution policies structurally reduce Chinese chemical capacity expansion, improving long-term supply discipline.",
+      "affected_unit": "consolidated",
+      "operating_driver": "Industry ROE re-rating",
+      "driver_formula": "Valuation multiple (PE) expansion from 12x to 14x as cyclicality decreases.",
+      "base_assumption": "Policy partially effective; capacity growth moderates to 3% CAGR.",
+      "bull_assumption": "Strict policy caps new capacity <1% CAGR; Wanhua gains pricing power.",
+      "bear_assumption": "Policy fails; overcapacity re-emerges.",
+      "revenue_impact": "No direct revenue impact, but supports ASP.",
+      "profit_impact": "Higher terminal value from higher mid-cycle earnings.",
+      "eps_impact": "Not immediate; benefits long-term EPS.",
+      "fcf_or_capital_impact": "Reduced capex competition improves industry FCF.",
+      "valuation_impact": "PE multiple expansion of 2x could add ~30% to market cap.",
+      "quantification_status": "unquantified",
+      "evidence_ids": [
+        "KPE10",
+        "KPE08"
+      ],
+      "missing_inputs": [
+        "Quantified impact on capacity and pricing"
+      ]
+    }
+  ],
+  "moat_evidence_tests": [
+    {
+      "moat_mechanism": "Cost advantage: Wanhua has lowest global MDI production cost.",
+      "observable_test": "Compare Wanhua's MDI cash cost per ton versus Covestro, BASF, Huntsman. Evidence: KPE04 claims >3000 CNY/ton advantage.",
+      "comparison_basis": "vs global competitors in 2025-2026",
+      "evidence_result": "Claims from KPE04 suggest advantage based on integrated production and scale. However, no audited public cost data available. Status: unproven.",
+      "financial_transmission": "Higher margins during low-price cycles and ability to gain share.",
+      "strongest_counterevidence": "If Middle East capacities with ethane advantage (subsidized feedstock) restart, they could undercut Wanhua's cost.",
+      "status": "partial",
+      "evidence_ids": [
+        "KPE04",
+        "KPE01"
+      ],
+      "next_verification": "Obtain and compare actual cash costs from industry surveys; management may disclose unit production cost trend."
+    },
+    {
+      "moat_mechanism": "Regulatory moat: difficulty in obtaining new MDI project approvals in China.",
+      "observable_test": "Number of new MDI project permits issued by NDRC in past 5 years; Covestro project approval status.",
+      "comparison_basis": "Historical permit frequency",
+      "evidence_result": "KPE04 states 'domestic 15-5 plan tightens MDI approval'; no new permits granted to domestic competitors recently. However, Covestro's announcement suggests foreign firms may still apply. Status: partial.",
+      "financial_transmission": "Limits supply growth, supports pricing and utilization.",
+      "strongest_counterevidence": "Covestro announced new 660kt capacity, and if approved, would break the barrier.",
+      "status": "partial",
+      "evidence_ids": [
+        "KPE04",
+        "KPE05"
+      ],
+      "next_verification": "Monitor NDRC announcements and press releases on new chemical projects."
+    },
+    {
+      "moat_mechanism": "Scale and integration: largest global MDI producer with integrated value chain.",
+      "observable_test": "Annual MDI capacity (3100kt+) and share of global market.",
+      "comparison_basis": "vs peers: Covestro ~1600kt, BASF ~1800kt.",
+      "evidence_result": "KPE04 implies Wanhua's capacity will exceed 4800kt by 2030. Market share data not in evidence. Status: partial.",
+      "financial_transmission": "Bargaining power with suppliers, lower per-unit fixed costs.",
+      "strongest_counterevidence": "If demand growth slows, overcapacity can hurt even scale players.",
+      "status": "partial",
+      "evidence_ids": [
+        "KPE04"
+      ],
+      "next_verification": "Obtain independent capacity and market share data."
+    },
+    {
+      "moat_mechanism": "R&D and innovation pipeline leading to high-value new materials.",
+      "observable_test": "Revenue and gross margin from new materials versus R&D spend; number of new product launches.",
+      "comparison_basis": "Internal historical trend and vs peers",
+      "evidence_result": "R&D spending is high but returns are yet to be proven; PC profitability improving but battery materials still loss-making. Status: unproven.",
+      "financial_transmission": "If new materials achieve >15% margin, they add a growth layer to valuation.",
+      "strongest_counterevidence": "Majority of new chemical products fail to achieve adequate returns; commoditization risk.",
+      "status": "unproven",
+      "evidence_ids": [
+        "EV029",
+        "EV034"
+      ],
+      "next_verification": "Segment disclosure of new materials revenue and margin. Monitor customer announcements."
+    }
+  ],
+  "valuation_buckets": [
+    {
+      "bucket": "Core PU + Petrochemical Operations",
+      "inclusion": "core",
+      "valuation_method": "PE multiple on 2026E base-case parent net profit",
+      "metric_and_period": "2026E Parent Net Profit = 18,700 mn CNY",
+      "metric_value": 18700.0,
+      "valuation_multiple": 12.0,
+      "ownership_pct": 100.0,
+      "haircut_pct": 0.0,
+      "equity_value_cny_mn": 224400.0,
+      "per_share_value_cny": null,
+      "overlap_key": "",
+      "double_counting_treatment": "N/A",
+      "evidence_ids": [
+        "KPE01",
+        "KPE02"
+      ],
+      "missing_inputs": [
+        "Share count to derive per share value"
+      ]
+    },
+    {
+      "bucket": "New Materials Option Value",
+      "inclusion": "optionality",
+      "valuation_method": "Revenue multiple or probability-weighted PV of future profits",
+      "metric_and_period": "Probabilistic: 30% chance of becoming 10 bn net profit business by 2030.",
+      "metric_value": null,
+      "valuation_multiple": null,
+      "ownership_pct": 100.0,
+      "haircut_pct": 70.0,
+      "equity_value_cny_mn": null,
+      "per_share_value_cny": null,
+      "overlap_key": "",
+      "double_counting_treatment": "New Materials are already included in core consolidated earnings (currently loss-making). We add option value only for success scenario that is not captured in base PE multiple. No double counting as base multiple reflects current low-margin operations.",
+      "evidence_ids": [
+        "EV029",
+        "KPE01"
+      ],
+      "missing_inputs": [
+        "Separate valuation of new materials segment",
+        "Probability and timeline"
+      ]
+    }
+  ],
+  "valuation_closure": {
+    "current_price_cny": null,
+    "diluted_share_count_mn": null,
+    "core_value_per_share_cny": null,
+    "probability_weighted_fair_value_per_share_cny": null,
+    "option_value_per_share_cny": null,
+    "other_adjustments_per_share_cny": null,
+    "fair_value_per_share_cny": null,
+    "expected_return_pct": null,
+    "formula": "Total equity value = Core equity value + Option value. Without share count, per-share values cannot be computed.",
+    "rating_consistency_check": "No rating provided.",
+    "double_counting_checks": [
+      "New Materials losses already reflected in base earnings; only unexpected positive success is added as option.",
+      "No subsidiary re-addition."
+    ],
+    "status": "not_valued",
+    "missing_inputs": [
+      "Diluted share count",
+      "Current stock price"
+    ]
+  },
+  "llm_analysis_layer": {
+    "business_question_tree": [
+      "Polyurethane: Can MDI export volumes exceed 1.5mn tons in 2026? Will spreads persist above 1.3w/ton through H2?",
+      "Petrochemical: What is the normalized ethylene-ethane spread after the upgrade? Will domestic olefin overcapacity offset gains?",
+      "New Materials: Which specific battery material products will reach >1 bn CNY revenue first? What are the gross margins for LFP and PC?",
+      "Competitive: Will Covestro's MDI project clear regulatory hurdles? What is the realistic timeline for Middle East capacity?",
+      "Policy: How much will the anti-involution policy reduce effective capacity growth rates? Can Wanhua maintain ROCE >12% through the cycle?",
+      "Capital allocation: Will FCF turn positive by 2028? What is the path to reducing net debt/EBITDA to <2x?"
+    ],
+    "profit_pool_priority": "Polyurethane accounts for an estimated 70-80% of gross profit, driven by high spreads and scale. This segment is the primary driver of near-term EPS beats and valuation re-rating. Petrochemicals contribute 10-15% and are benefiting from a structural cost shift; its improved margin is a secondary, but consistent, profit lever. New Materials currently absorbs profits (negative contribution) but contains the highest option value if successful. Therefore, near-term research should focus on PU export sustainability and spread trajectory, while medium-term work should size the profit potential of New Materials once it achieves scale.",
+    "competition_and_substitution_analysis": "True peers include Covestro, BASF, Huntsman (MDI), and domestic competitors such as Shenghong Refining & Chemical, Hongbaoli, and Cangzhou Dahua for TDI. Key substitution threats: alternative insulation materials could pressure MDI demand in construction; cheaper ethylene production from coal-based MTO may challenge ethane advantage. Switching costs for customers are moderate, but Wanhua's technical service and integrated supply chain provide stickiness. Supplier diversification is high for basic feedstocks (benzene, coal), but specialized catalysts and technology may be proprietary. New entrants face high capital and regulatory barriers. However, Covestro's announcement shows that foreign incumbents can still attempt to break the barrier. The geopolitical risk involving the Strait of Hormuz adds an unpredictable temporary supply disruption that benefits Wanhua but could reverse abruptly.",
+    "qualitative_to_quantitative_bridge": "Qualitative thesis: export competitiveness is structural. Partial quantification: MDI export volume +49% in May, spread expanded 2100 CNY. Unquantified: the exact percentage of volume that is incremental 'new demand' versus temporary replacement of disrupted supply. This split determines the stickiness of volumes post-crisis. We cannot confirm the proportion without customer-level data and competitor production status updates. Therefore, we must retrieve monthly customs data by destination and competitor capacity utilization reports. For the anti-involution policy: the qualitative consensus is strong, but no quantitative capacity reduction target has been published. We need official NDRC capacity guidance for 2026-2030 to convert this into a hard forecast.",
+    "expectation_gap_analysis": "The market's PE TTM of 16.3x (based on trailing earnings of 12.5 bn) implies a modest recovery expectation, as consensus forward earnings are ~18.7 bn (forward PE ~11.5x on current price if price were known). Sell-side reports claim PE is ~12x, which suggests a forward basis. Thus, the stock appears reasonably priced for a base-case recovery, but not overly optimistic. Our base case of 18.7 bn net profit, if achieved, would put forward PE at about 11.4x (assuming current market cap 215 bn). The gap exists if the bull case (21 bn) materializes, where forward PE drops to ~10.2x. The market may be underestimating the sustainability of the export tailwind and new materials optionality. The key variable is not the magnitude of 2026 earnings, but the duration of elevated spreads.",
+    "red_team_counterarguments": [
+      "Positive thesis (bull case): If MDI exports and spreads prove structural due to permanent European de-industrialization, 2027E EPS could exceed 8 CNY (if share count ~3.1 bn), and the stock could re-rate to 14x PE, offering significant upside. Falsification signal: any month when MDI exports drop below 80kt and spread falls below 1.1w/ton.",
+      "Negative thesis (bear case): The current earnings spike is entirely due to an artificial supply crisis. Once the Strait reopens and Middle East capacity restarts, Wanhua's export volume will collapse by 30% and spreads will halve, leading to 2027E profit of <14 bn and a PE of 9x. Falsification signal: if monthly export volumes hold above 100kt for three consecutive months after the Strait reopens, this thesis is invalid."
+    ],
+    "valuation_explanation": "We value the core business using a PE multiple on 2026E net profit. The base multiple of 12x is consistent with Wanhua's historical mid-cycle multiple (10-14x range) and reflects modest growth and a cost moat. The option value for New Materials is not quantified but could add 10-15% if positive developments occur. The fair value per share cannot be computed without the diluted share count, but if the share count is ~3.14 billion, the core equity value of 224.4 bn implies a per-share value of ~71.5 CNY. This would represent a potential upside from the unknown current price. The model's sensitivity to MDI spreads is high: a 500 CNY/ton increase in annual average spread adds about 4 bn to net profit, increasing per-share value by ~1.3 CNY (illustratively).",
+    "final_editorial_synthesis": "Wanhua Chemical's investment case hinges on the sustainability of its polyurethane export earnings and the transition to higher-value materials. The company is capitalizing on a rare supply-constrained market for MDI, generating record profits. The key debate is whether this is a one-off windfall or a new normal of Chinese cost dominance. Our underwriting model captures this via scenario-based spread assumptions. For a portfolio manager, the core narrative is: 'Buy Wanhua for its unmatched cost advantage and the option on new materials, but protect against a sharp normalization in MDI spreads. The valuation is undemanding on forward numbers, but the timing of the exit is critical.' The research agenda should now focus on verifying export stickiness and policy-driven supply discipline.",
+    "evidence_boundaries": []
+  },
+  "handoff_manifest": {
+    "handoff_version": "underwriting-v2",
+    "source_of_truth": "structured_research.underwriting_packet",
+    "frozen_reported_facts": [
+      "FY2025 consolidated revenue 203,234.57 mn CNY (EV011).",
+      "FY2025 parent net profit 12,527.20 mn CNY (EV011).",
+      "Q1 2026 revenue 54,052.17 mn CNY (EV012).",
+      "Q1 2026 parent net profit 3,717.71 mn CNY (EV010).",
+      "H1 2026 net profit guidance: 9,800 - 10,400 mn CNY (EV023).",
+      "MDI export volume May 2026: 10.08 10k tons, yoy+49% (KPE01).",
+      "Q2 MDI spread 1.31w/ton vs QoQ +2,100 CNY (KPE01).",
+      "Ethylene-ethane spread Q2 2026: 1,003 USD/ton QoQ +362 (KPE01)."
+    ],
+    "analyst_estimates": [
+      "2026E parent net profit: 18,700 mn (base case, analyst consensus range 18,500-20,000 mn).",
+      "Scenario probabilities: bull 30%, base 50%, bear 20%.",
+      "Core valuation multiple: 12x PE on 2026E.",
+      "Revenue forecasts: 220 bn (2026E), 240 bn (2027E), 260 bn (2028E).",
+      "Margin assumptions: see forecast_lines."
+    ],
+    "unresolved_model_cells": [
+      "Diluted share count (null).",
+      "EPS for all years (null).",
+      "Forward OCF, CAPEX, FCF (null).",
+      "Segment-level revenue and profit weights (null).",
+      "New Materials option value (unquantified).",
+      "Per-share fair value (null)."
+    ],
+    "downstream_must_preserve": [
+      "Complete three-year forecast lines with stated assumptions and missing inputs.",
+      "All business unit maps (PU, Petro, New Materials, Domestic, Export).",
+      "Scenario definitions with probabilities and economic assumptions.",
+      "All thesis financial bridges with formulas.",
+      "Moat evidence tests and current status."
+    ]
+  },
+  "evidence_change_rules": [
+    {
+      "evidence_id": "KPE01",
+      "affected_segment": "consolidated",
+      "affected_variable": "parent_net_profit_2026",
+      "old_assumption": "missing prior forecast",
+      "new_assumption": "18700 mn net profit base case used; watch for actual semi-annual report.",
+      "financial_transmission": "If semi-annual report differs significantly, adjust 2026E and scenario probabilities.",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "Cross-check with upcoming semi-annual report and quarterly filings."
+    },
+    {
+      "evidence_id": "KPE04",
+      "affected_segment": "聚氨酯 (Polyurethane)",
+      "affected_variable": "long_term_capacity",
+      "old_assumption": "unchanged industry structure",
+      "new_assumption": "watch Covestro project approval; if approved, increase terminal capacity assumption and lower long-term spread.",
+      "financial_transmission": "Reduces terminal value; may lower PE multiple in base case from 12x to 10x.",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "Monitor MDI project approvals and Wanhua's capacity expansion timeline."
+    },
+    {
+      "evidence_id": "KPE07",
+      "affected_segment": "consolidated",
+      "affected_variable": "spread_and_volume",
+      "old_assumption": "sustainable export growth",
+      "new_assumption": "potential normalization if Strait reopens; monitor.",
+      "financial_transmission": "Could shift scenario from base to bear.",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "Monitor actual shipping recovery and chemical price movements."
+    },
+    {
+      "evidence_id": "KPE02",
+      "affected_segment": "consolidated",
+      "affected_variable": "valuation",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until Verify PE basis (TTM vs forward); reconcile with market data EV050",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "Verify PE basis (TTM vs forward); reconcile with market data EV050"
+    },
+    {
+      "evidence_id": "KPE03",
+      "affected_segment": "consolidated",
+      "affected_variable": "segment_volume",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until Monitor inventory data and polyester chain operating rates",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "Monitor inventory data and polyester chain operating rates"
+    },
+    {
+      "evidence_id": "KPE05",
+      "affected_segment": "聚氨酯 (Polyurethane)",
+      "affected_variable": "utilization_or_backlog",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until Assess regulatory approval and feasibility; same as KPE04",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "Assess regulatory approval and feasibility; same as KPE04"
+    },
+    {
+      "evidence_id": "KPE06",
+      "affected_segment": "consolidated",
+      "affected_variable": "market_share",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until Track AI adoption rate in Wanhua's plants; correlate with cost savings",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "Track AI adoption rate in Wanhua's plants; correlate with cost savings"
+    },
+    {
+      "evidence_id": "KPE08",
+      "affected_segment": "consolidated",
+      "affected_variable": "asp_or_price",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until Track inventory levels and price spreads in key chemicals",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "Track inventory levels and price spreads in key chemicals"
+    },
+    {
+      "evidence_id": "KPE09",
+      "affected_segment": "consolidated",
+      "affected_variable": "asp_or_price",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until Compare Wanhua price trajectory with industry average",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "Compare Wanhua price trajectory with industry average"
+    },
+    {
+      "evidence_id": "KPE10",
+      "affected_segment": "consolidated",
+      "affected_variable": "asp_or_price",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until Evolve regulation; monitor Wanhua's capex and free cash flow",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "Evolve regulation; monitor Wanhua's capex and free cash flow"
+    },
+    {
+      "evidence_id": "KPE11",
+      "affected_segment": "consolidated",
+      "affected_variable": "valuation",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until Confirm demand recovery in Q3 2026",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "Confirm demand recovery in Q3 2026"
+    },
+    {
+      "evidence_id": "KPE12",
+      "affected_segment": "consolidated",
+      "affected_variable": "segment_volume",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until Monitor polyester chain operating rates and inventory levels",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "Monitor polyester chain operating rates and inventory levels"
+    }
+  ],
+  "reconciliation_checks": [
+    "No EPS provided; avoid using EPS from sell-side notes that assume unknown share count.",
+    "Revenue bridge from 2025 actual to 2026E uses Q1 annualized but adjusted for H1 guidance implied run-rate.",
+    "H1 2026 implied Q2 net profit ~6,300 mn (midpoint) aligns with KPE01 Q2 estimate of 6,100-6,700 mn."
+  ],
+  "analyst_instructions": [
+    "Do not use a fixed share count without filing evidence; preferred source is Tushare total_share or cross-check from market cap/price.",
+    "Update forecast lines once semi-annual report provides segment revenue, operating profit, and OCF.",
+    "Revise scenario probabilities when new industry data (MDI exports, spreads) arrives.",
+    "Quantify New Materials option value only after segment-level profitability data is disclosed."
+  ],
+  "preprocessing_notes": [
+    "Segment-level revenue and profit breakdowns are not directly provided; weights are unknown.",
+    "Several sell-side estimates (KSI01, KSI03) conflict; need to reconcile with company guidance.",
+    "Market data shows PE TTM 16.34 vs sell-side claim of ~12; likely due to different earnings base.",
+    "Many KPE hypotheses lack baseline values because prior forecasts were not supplied.",
+    "Knowledge Planet evidence is labeled private_proxy and requires methodology verification before use in hard forecasts.",
+    "Commodity price mapping not available; no direct commodity-to-company price link in evidence.",
+    "operating model driver coverage (volume_price_cost): capacity, utilization, volume, price/ASP, unit/input cost, spread/margin, capex/ROIC"
+  ]
+}

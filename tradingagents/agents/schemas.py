@@ -449,7 +449,8 @@ class UnderwritingResearchPlan(BaseModel):
         default_factory=list,
         description=(
             "The 3-5 company-specific questions that decide earnings, cash/capital and valuation. "
-            "They organize the model and debate; do not list generic checklist topics."
+            "They organize the model and debate; do not list generic checklist topics. Use the "
+            "LLM analysis layer's business-question tree when supplied."
         ),
     )
     question_verdicts: list[ResearchQuestionVerdict] = Field(
@@ -478,21 +479,33 @@ class UnderwritingResearchPlan(BaseModel):
         description=(
             "Post-debate economic unit map. Separate filing segments from the product, "
             "channel, geography, customer, project/asset or financial-business units that "
-            "actually drive economics. Carry reported scale/margin/cash metrics and mark "
-            "analytical or missing cells explicitly."
+            "actually drive economics. Start from financial-report revenue composition, "
+            "prioritize high-revenue-weight or thesis-critical units, carry reported scale/margin/cash metrics and mark "
+            "analytical or missing cells explicitly. Every material unit still needs a "
+            "qualitative customer, pricing, competition and cash-cycle judgment when the "
+            "ideal quantitative data are unavailable; quantify only where evidence or a "
+            "clearly labeled analyst estimate supports it. Rank business importance by revenue weight, "
+            "gross margin, growth, cash conversion, capex intensity, competitive erosion risk and valuation sensitivity. "
+            "Use the LLM analysis layer for question selection, profit-pool priority, competition/substitution, "
+            "qualitative-to-quantitative bridge, expectation gap, red-team critique, valuation explanation and final synthesis."
         )
     )
     autonomous_forecast_model: str = Field(
         description=(
             "The accepted independent three-year model, built from operating drivers rather "
             "than copied consensus. Reconcile every material unit to industry-native group "
-            "earnings, cash/capital, per-share lines and sources."
+            "earnings, cash/capital, per-share lines and sources. If a material segment lacks "
+            "volume, ASP, margin or share data, keep the forecast hybrid/top-down for that "
+            "unit, state the qualitative driver and add the verification gate instead of "
+            "omitting the segment."
         )
     )
     thesis_financial_bridge: str = Field(
         description=(
             "Ledger for the 3-6 decisive claims: operating formula, bull/base/bear assumptions, "
-            "and revenue/profit/EPS/FCF-or-capital/fair-value impact. Leave unsupported effects missing."
+            "and revenue/profit/EPS/FCF-or-capital/fair-value impact. Leave unsupported effects missing. "
+            "Decisive business-line questions must be answered in the public memo as synthesized "
+            "sell-side analysis, not as a raw Q&A list or research checklist."
         )
     )
     moat_evidence_verdict: str = Field(
@@ -1445,7 +1458,8 @@ class SellSidePMDecision(BaseModel):
         description=(
             "Public opening section. State the rating, central operating conclusion, decisive evidence and "
             "strongest unresolved counterpoint in two or three connected paragraphs. Keep execution mechanics "
-            "and detailed valuation out; do not repeat later tables."
+            "and detailed valuation out; do not repeat later tables. It should read like the final editor's "
+            "synthesis of the LLM analysis layer, not a module-by-module workflow summary."
         ),
     )
     canonical_model_snapshot: list[CanonicalModelLine] = Field(
@@ -1469,7 +1483,10 @@ class SellSidePMDecision(BaseModel):
             "cost stack, working capital, capital intensity and profit pools. Separate reported "
             "segments from analytical product/channel/geography/customer/project/asset units; "
             "show what each unit sells, drivers, disclosed scale/margin/cash, valuation treatment "
-            "and missing disclosure without invented allocations. Explain the operating mechanism and end with "
+            "and missing disclosure without invented allocations. When quantitative inputs are unavailable, "
+            "still make the qualitative segment judgment, state the missing input and show how it affects "
+            "confidence or scenario width. Segment-specific research questions should be generated from the "
+            "actual revenue mix and business economics, not from a fixed industry template. Explain the operating mechanism and end with "
             "the boundary or unresolved disclosure that matters to the thesis."
         )
     )
@@ -1478,7 +1495,9 @@ class SellSidePMDecision(BaseModel):
             "Reader-facing industry chapter with a core judgment, key evidence, causal mechanism and strongest "
             "counter-case. Analyze cycle and competitive structure using sector-native supply, demand, "
             "capacity, utilization, price/spread and true-peer evidence. Separate verified "
-            "facts from proxies and explain the financial transmission."
+            "facts from proxies and explain the financial transmission. For each material business line, "
+            "test customer substitution, supplier diversification, self-supply, new entrants and true-peer "
+            "pricing or technology threats before claiming durable advantage."
         ),
     )
     autonomous_forecast_model: str = Field(
@@ -1487,7 +1506,9 @@ class SellSidePMDecision(BaseModel):
             "drivers, model type, reconciliation and the most fragile assumption, but do not reproduce another "
             "consolidated forecast table because the renderer supplies the canonical table. Reconcile to "
             "model-profile-appropriate group earnings, cash/capital, per-share lines, "
-            "formulas, evidence status and share count. Do not substitute consensus narrative."
+            "formulas, evidence status and share count. Do not substitute consensus narrative. Use a "
+            "qualitative baseline for every material business line and upgrade to quantitative analysis only "
+            "where reported/calculated/verified evidence or an explicit analyst-estimate range exists."
         )
     )
     thesis_financial_bridge: str = Field(
@@ -1498,7 +1519,11 @@ class SellSidePMDecision(BaseModel):
             "strongest counterevidence/boundary, driver formula, bull/base/bear assumptions and the "
             "resulting revenue, profit, EPS, FCF/capital and fair-value effect. Explicit missing "
             "inputs are acceptable; qualitative claims posing as quantified effects are not. Close each thesis "
-            "with the expectation difference and falsification condition. Exact target prices, multiples and "
+            "with the expectation difference and falsification condition. The public text should synthesize "
+            "the decisive business-line questions into investor-facing sell-side prose, not reproduce a "
+            "research agenda. The logic should run from profit-pool priority to question tree, answered evidence, "
+            "market expectation gap, valuation transmission and falsification. Absorb LLM red-team critique and "
+            "qualitative-to-quantitative bridging into readable prose rather than exposing workbench artifacts. Exact target prices, multiples and "
             "scenario fair values belong only in section 7."
         )
     )
@@ -1514,7 +1539,9 @@ class SellSidePMDecision(BaseModel):
         description=(
             "Interpret the program-calculated valuation: justify method and assumption selection, identify "
             "core/scenario/optionality/excluded buckets, double-counting controls, evidence limits and what "
-            "would change the inputs. Do not publish competing hand-calculated EPS, per-share values, "
+            "would change the inputs. Treat valuation as a function of operating assumptions: name the "
+            "business-line variable that would move revenue, profit, FCF, required return or the selected multiple, "
+            "and explain which market-implied assumption the report accepts or disputes. Do not publish competing hand-calculated EPS, per-share values, "
             "probability-weighted values or safety prices."
         )
     )

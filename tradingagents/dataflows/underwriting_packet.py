@@ -273,6 +273,20 @@ class ValuationClosure(NullDefaultModel):
     missing_inputs: list[str] = Field(default_factory=list)
 
 
+class LLMAnalysisLayer(NullDefaultModel):
+    """Where LLM judgment should improve depth beyond deterministic extraction."""
+
+    business_question_tree: list[str] = Field(default_factory=list)
+    profit_pool_priority: str = ""
+    competition_and_substitution_analysis: str = ""
+    qualitative_to_quantitative_bridge: str = ""
+    expectation_gap_analysis: str = ""
+    red_team_counterarguments: list[str] = Field(default_factory=list)
+    valuation_explanation: str = ""
+    final_editorial_synthesis: str = ""
+    evidence_boundaries: list[str] = Field(default_factory=list)
+
+
 class ModelHandoffManifest(NullDefaultModel):
     handoff_version: str = "underwriting-v2"
     source_of_truth: str = "structured_research.underwriting_packet"
@@ -299,6 +313,7 @@ class CompanyUnderwritingPacket(NullDefaultModel):
     moat_evidence_tests: list[MoatEvidenceTest] = Field(default_factory=list)
     valuation_buckets: list[ValuationBucket] = Field(default_factory=list)
     valuation_closure: ValuationClosure = Field(default_factory=ValuationClosure)
+    llm_analysis_layer: LLMAnalysisLayer = Field(default_factory=LLMAnalysisLayer)
     handoff_manifest: ModelHandoffManifest = Field(default_factory=ModelHandoffManifest)
     evidence_change_rules: list[ModelChangeRule] = Field(default_factory=list)
     reconciliation_checks: list[str] = Field(default_factory=list)
@@ -425,7 +440,16 @@ Universal rules for all A-share industries:
 8. Every KPE or alternative clue has one model outcome: numeric old->new, probability before->after, unchanged/watch, or rejected. Narrative influence without a model outcome is invalid.
 9. `research_readiness=ready` only when material segments, three-year consolidated model, scenario valuation, periods/units and decisive evidence are sufficiently complete. Use `partial` for unavailable sources or incomplete cells; those gaps are neutral and non-blocking. Use `blocked` only for a deterministic contradiction, invalid unit/period, or corrupted source that makes supplied facts unsafe—not merely because data is missing.
 10. Return exactly one JSON object conforming to the schema. No Markdown, rating, recommendation or commentary outside JSON.
-11. Use the LLM for business-model interpretation, causal chains, counterevidence, question selection and assumption design. Numeric historical facts remain controlled by supplied structured/filing evidence. Never overwrite a reported figure with an LLM estimate. A commodity or thematic proxy may enter a causal chain only when the payload proves its economic relevance to the target's revenue or cost structure.
+11. Populate `llm_analysis_layer` as the explicit LLM analysis intervention map. The LLM must improve quality in all eight places while respecting numeric evidence boundaries:
+   - `business_question_tree`: after reading filing revenue mix, generate segment-specific questions that decide demand, competition, profitability, cash flow, valuation or rating.
+   - `profit_pool_priority`: explain which businesses matter most after considering revenue weight, margin, growth, cash conversion, capex intensity, competitive erosion and valuation sensitivity.
+   - `competition_and_substitution_analysis`: reason about true peers, customer switching, supplier diversification, self-supply, substitutes, new entrants and technology/regulatory change.
+   - `qualitative_to_quantitative_bridge`: when ideal data are missing, state the qualitative conclusion, what partial data support or limit it, what cannot be quantified, and what must be retrieved.
+   - `expectation_gap_analysis`: infer what the market or consensus may be pricing, where the model differs, and whether the gap is variable, magnitude or timing.
+   - `red_team_counterarguments`: act as a skeptical analyst and list the strongest bear case for a positive thesis and strongest upside case for a negative thesis, each with a falsification signal.
+   - `valuation_explanation`: explain valuation as a function of operating assumptions; code controls arithmetic, while the LLM explains method, multiple, risk premium and business-variable sensitivity.
+   - `final_editorial_synthesis`: state how a PM should synthesize the above into investor-facing prose without exposing raw questions, evidence ledgers or workbench tables.
+11a. Use the LLM for business-model interpretation, causal chains, counterevidence, question selection and assumption design. Numeric historical facts remain controlled by supplied structured/filing evidence. Never overwrite a reported figure with an LLM estimate. A commodity or thematic proxy may enter a causal chain only when the payload proves its economic relevance to the target's revenue or cost structure.
 12. Distinguish a descriptive module from a decision-useful one. Do not promote a module into the packet unless verified evidence changes a named forecast line, scenario probability or valuation bucket, or unavailable evidence creates a dated retrieval/verification task.
 13. Populate `handoff_manifest` as the loss-prevention contract. Separate frozen reported facts from analyst estimates and unresolved cells. Downstream agents must preserve the full three-year model, all material business units, every accepted financial bridge and every valuation bucket; any change requires an evidence id, old/new assumption and recalculated EPS/FCF/value impact.
 
@@ -1018,6 +1042,22 @@ def _fallback_packet(symbol: str, as_of_date: str, structured: Mapping[str, Any]
         valuation_closure=ValuationClosure(
             status="not_valued",
             missing_inputs=["LLM underwriting model unavailable"],
+        ),
+        llm_analysis_layer=LLMAnalysisLayer(
+            qualitative_to_quantitative_bridge=(
+                "LLM analysis layer unavailable; deterministic facts may be used, but "
+                "business questions, expectation gap, red-team critique and editorial synthesis "
+                "must be regenerated before publishing a high-conviction PM report."
+            ),
+            evidence_boundaries=[
+                "No LLM business-question tree was produced.",
+                "No LLM profit-pool prioritization was produced.",
+                "No LLM competition/substitution analysis was produced.",
+                "No LLM expectation-gap analysis was produced.",
+                "No LLM red-team critique was produced.",
+                "No LLM valuation explanation was produced.",
+                "No LLM final editorial synthesis was produced.",
+            ],
         ),
         handoff_manifest=ModelHandoffManifest(
             unresolved_model_cells=["all company-specific driver and valuation cells"],
@@ -1921,6 +1961,7 @@ def compact_underwriting_packet(packet: Mapping[str, Any] | None) -> dict[str, A
             clip(row) for row in list(packet.get("valuation_buckets", []))[:12]
         ],
         "valuation_closure": clip(dict(packet.get("valuation_closure", {}))),
+        "llm_analysis_layer": clip(dict(packet.get("llm_analysis_layer", {}))),
         "handoff_manifest": clip(dict(packet.get("handoff_manifest", {}))),
         "evidence_change_rules": [
             clip(row) for row in list(packet.get("evidence_change_rules", []))[:16]

@@ -1,0 +1,3531 @@
+{
+  "schema_version": 3,
+  "symbol": "600309.SH",
+  "as_of_date": "2026-07-11",
+  "preprocessing_mode": "llm_semantic_plus_deterministic_validation",
+  "company_summary": "万华化学 is a global leader in polyurethanes (MDI, TDI), with integrated petrochemical and new materials segments, focusing on R&D, cost leadership, and expanding into battery materials. The company benefits from overseas supply constraints and domestic cost optimization.",
+  "segments": [
+    {
+      "segment": "聚氨酯 (Polyurethane)",
+      "aliases": [
+        "MDI",
+        "TDI",
+        "Polyurethane"
+      ],
+      "products_or_services": "MDI (聚合MDI, 纯MDI), TDI, related polyurethane products",
+      "revenue_weight_pct": null,
+      "gross_profit_or_profit_weight_pct": null,
+      "business_model": "产能出货型; commodity chemical manufacturing with scale and cost advantage",
+      "key_drivers": [
+        "Global supply constraints (Europe, Japan, Korea, Middle East)",
+        "Export demand (China polyurethane export competitiveness)",
+        "MDI/TDI price and spread (Q2 MDI spread 1.31w/ton, QoQ +2100 CNY)",
+        "Utilization rate and maintenance shutdowns"
+      ],
+      "prosperity_level": "high",
+      "marginal_direction": "improving",
+      "causal_chain": "Demand (export surge due to overseas capacity issues) -> Supply (constrained overseas, China competitive) -> Price/volume (Q2 MDI price 1.79w/ton, poly MDI export +49% YoY) -> Utilization (operating) -> Spread (MDI spread expanded 2100 CNY QoQ) -> Margin (implied improvement in polyurethane segment profitability)",
+      "supporting_metric_refs": [
+        "KPE01_polyurethane",
+        "EV002_filing_context"
+      ],
+      "counterevidence": [
+        "科思创 announced 66万吨 MDI capacity in Shanghai by 2030, but impact is limited for short term (KPE04)"
+      ],
+      "confidence": "medium",
+      "missing_inputs": [
+        "Segmented revenue and profit weight",
+        "Exact utilization rates",
+        "Unit costs"
+      ],
+      "revenue_cny_mn": null,
+      "revenue_reported_value": null,
+      "revenue_reported_unit": "",
+      "revenue_growth_pct": null,
+      "gross_margin_pct": null,
+      "gross_margin_change_pp": null,
+      "period": "2026Q2",
+      "source_module": "knowledge_planet",
+      "evidence_quote": "海外聚氨酯供需格局变化，价格上涨；乙烯一期原材料改造降本显著。",
+      "extraction_mode": "llm_semantic"
+    },
+    {
+      "segment": "石化 (Petrochemicals)",
+      "aliases": [
+        "Ethylene",
+        "Petrochemical",
+        "乙烯"
+      ],
+      "products_or_services": "Ethylene, ethylene derivatives, propane dehydrogenation etc.",
+      "revenue_weight_pct": null,
+      "gross_profit_or_profit_weight_pct": null,
+      "business_model": "产能出货型; integrated cracker with feedstock flexibility",
+      "key_drivers": [
+        "Ethylene-ethane spread (Q2 2026: 1003 USD/ton, QoQ +362 USD/ton)",
+        "Ethylene一期多元化改造 completion in early 2026",
+        "Feedstock cost optimization",
+        "Domestic and export demand"
+      ],
+      "prosperity_level": "mitigated recovery",
+      "marginal_direction": "improving",
+      "causal_chain": "Demand (steady) -> Supply (cost advantage after feedstock upgrade) -> Spread (ethylene-ethane spread widened) -> Utilization (operating) -> Margin (improvement from cost reduction and spread expansion)",
+      "supporting_metric_refs": [
+        "KPE01_petrochemical"
+      ],
+      "counterevidence": [
+        "Domestic refinery utilization low (46.92% Shandong) may constrain derivatives"
+      ],
+      "confidence": "medium",
+      "missing_inputs": [
+        "Segment revenue",
+        "Volume data",
+        "C2/C3 spreads"
+      ],
+      "revenue_cny_mn": null,
+      "revenue_reported_value": null,
+      "revenue_reported_unit": "",
+      "revenue_growth_pct": null,
+      "gross_margin_pct": null,
+      "gross_margin_change_pp": null,
+      "period": "2026Q2",
+      "source_module": "knowledge_planet",
+      "evidence_quote": "乙烯一期原材料改造完成带来成本优化，Q2受益于乙烷裂解制乙烯价差扩大",
+      "extraction_mode": "llm_semantic"
+    },
+    {
+      "segment": "新材料 (New Materials)",
+      "aliases": [
+        "PC",
+        "Battery Materials",
+        "磷酸铁锂",
+        "NMP"
+      ],
+      "products_or_services": "Polycarbonate (PC), battery materials (LFP, graphite anode, NMP, PAA), specialty chemicals",
+      "revenue_weight_pct": null,
+      "gross_profit_or_profit_weight_pct": null,
+      "business_model": "高研发技术产品型; innovation-driven with high R&D spend (40-50亿/year)",
+      "key_drivers": [
+        "R&D innovation (每年40-50亿)",
+        "Product profitability recovery (PC, battery materials)",
+        "Capacity expansion (LFP, battery materials)",
+        "Customer adoption and certification"
+      ],
+      "prosperity_level": "improving",
+      "marginal_direction": "improving",
+      "causal_chain": "R&D -> New product development -> Volume growth (battery materials capacity expansion) -> Mix (higher value products) -> Margin (profitability improvement as scale increases)",
+      "supporting_metric_refs": [
+        "KPE01_new_materials",
+        "EV029_battery_materials"
+      ],
+      "counterevidence": [],
+      "confidence": "low",
+      "missing_inputs": [
+        "Segment revenue contribution",
+        "Profit contribution",
+        "Volume and pricing for key products"
+      ],
+      "revenue_cny_mn": null,
+      "revenue_reported_value": null,
+      "revenue_reported_unit": "",
+      "revenue_growth_pct": null,
+      "gross_margin_pct": null,
+      "gross_margin_change_pp": null,
+      "period": "2026H1",
+      "source_module": "knowledge_planet",
+      "evidence_quote": "新材料：研发创新驱动成长，新材料盈利持续修复 ... 电池材料如磷酸铁锂产能持续扩张、盈利改善。",
+      "extraction_mode": "llm_semantic"
+    },
+    {
+      "segment": "化工行业",
+      "aliases": [],
+      "products_or_services": "",
+      "revenue_weight_pct": 100.0,
+      "gross_profit_or_profit_weight_pct": 100.0,
+      "business_model": "filing-reported business segment",
+      "key_drivers": [],
+      "prosperity_level": "medium-high",
+      "marginal_direction": "deteriorating",
+      "causal_chain": "Reported segment revenue growth and gross-margin movement are available; demand, supply/capacity, ASP, utilization, working-capital and cash links still require semantic and source cross-checking.",
+      "supporting_metric_refs": [],
+      "counterevidence": [
+        "A filing growth rate alone cannot establish full segment prosperity."
+      ],
+      "confidence": "medium",
+      "missing_inputs": [
+        "dated demand/order evidence",
+        "capacity/utilization evidence",
+        "ASP/price evidence",
+        "segment cash-conversion evidence"
+      ],
+      "revenue_cny_mn": null,
+      "revenue_reported_value": 201109817784.79,
+      "revenue_reported_unit": "filing table unit not explicit in extracted row",
+      "revenue_growth_pct": 11.88,
+      "gross_margin_pct": 13.48,
+      "gross_margin_change_pp": -2.61,
+      "period": "annual filing",
+      "source_module": "filing_intelligence",
+      "evidence_quote": "| product | annual | 万华化学2025年年度报告: 化工行业 201,109,817,784.79 174,007,645,172.17 13.48 11.88 15.36 减少 2.61 个百分点 其他 1,272,694,217.12 917,777,090.13 27.89 -19.87 -24.63 增加 4.56 个百分点 主营业务分产品情况 营业收入比 营业成本比 | Use this to explain revenue mix, profit-pool quality, gross-margin dilution/accretion, and whether bull/bear claims depend on a specific product, geography, or channel. |",
+      "extraction_mode": "deterministic_filing_row"
+    }
+  ],
+  "semantic_metrics": [
+    {
+      "segment": "consolidated",
+      "variable": "revenue",
+      "value": 54052165361.36,
+      "value_text": "54,052,165,361.36",
+      "unit": "CNY",
+      "period": "2026Q1",
+      "comparison_basis": "Q1 standalone",
+      "source_module": "earnings_model",
+      "source_quote": "/ latest reported / Q1 / 20260331 / 54052165361.36 / 3717707873.93 / ...",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "top-line base",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "net_profit_parent",
+      "value": 3717707873.93,
+      "value_text": "3,717,707,873.93",
+      "unit": "CNY",
+      "period": "2026Q1",
+      "comparison_basis": "Q1 standalone",
+      "source_module": "earnings_model",
+      "source_quote": "/ latest reported / Q1 / 20260331 / 54052165361.36 / 3717707873.93 / ...",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "net profit base",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "gross_margin_pct",
+      "value": 14.728,
+      "value_text": "14.728%",
+      "unit": "%",
+      "period": "2026Q1",
+      "comparison_basis": "YoY vs 2025Q1",
+      "source_module": "earnings_model",
+      "source_quote": "/ Gross margin / 14.728% / -0.98pp / YoY: 20260331 vs 20250331",
+      "evidence_status": "unverified",
+      "direction": "down",
+      "materiality": "medium",
+      "model_role": "margin bridge",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "operating_margin_pct",
+      "value": 9.8142,
+      "value_text": "9.8142%",
+      "unit": "%",
+      "period": "2026Q1",
+      "comparison_basis": "YoY vs 2025Q1",
+      "source_module": "earnings_model",
+      "source_quote": "/ Operating margin / 9.8142% / +0.49pp / YoY: 20260331 vs 20250331",
+      "evidence_status": "unverified",
+      "direction": "up",
+      "materiality": "medium",
+      "model_role": "profitability driver",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "net_margin_pct",
+      "value": 6.878,
+      "value_text": "6.878%",
+      "unit": "%",
+      "period": "2026Q1",
+      "comparison_basis": "YoY vs 2025Q1",
+      "source_module": "earnings_model",
+      "source_quote": "/ Net margin / 6.878% / -0.28pp / YoY: 20260331 vs 20250331",
+      "evidence_status": "unverified",
+      "direction": "down",
+      "materiality": "medium",
+      "model_role": "earnings conversion",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "revenue",
+      "value": 203234573814.42,
+      "value_text": "203,234,573,814.42",
+      "unit": "CNY",
+      "period": "2025FY",
+      "comparison_basis": "FY actual",
+      "source_module": "earnings_model",
+      "source_quote": "/ latest annual / FY / 20251231 / 203234573814.42 / 12527201094.15 / ...",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "annual base",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "net_profit_parent",
+      "value": 12527201094.15,
+      "value_text": "12,527,201,094.15",
+      "unit": "CNY",
+      "period": "2025FY",
+      "comparison_basis": "FY actual",
+      "source_module": "earnings_model",
+      "source_quote": "/ latest annual / FY / 20251231 / 203234573814.42 / 12527201094.15 / ...",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "annual net profit",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "ocf_to_net_profit",
+      "value": 1.8444,
+      "value_text": "1.8444",
+      "unit": "ratio",
+      "period": "2026Q1",
+      "comparison_basis": "YoY vs 2025Q1",
+      "source_module": "earnings_model",
+      "source_quote": "/ OCF / net profit / 1.8444 / N/A / YoY: 20260331 vs 20250331",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "medium",
+      "model_role": "cash quality",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "market_cap_cny",
+      "value": 215094703636.0,
+      "value_text": "215,094,703,636",
+      "unit": "CNY",
+      "period": "2026-07-10",
+      "comparison_basis": "current",
+      "source_module": "market_expectation",
+      "source_quote": "/ Market cap (CNY) / 215094703636 / current equity value /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "valuation input",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "pe_ttm",
+      "value": 16.3411,
+      "value_text": "16.3411",
+      "unit": "x",
+      "period": "TTM",
+      "comparison_basis": "current",
+      "source_module": "market_expectation",
+      "source_quote": "/ PE TTM / 16.3411 / earnings multiple",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "valuation metric",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "ps_ttm",
+      "value": 1.0041,
+      "value_text": "1.0041",
+      "unit": "x",
+      "period": "TTM",
+      "comparison_basis": "current",
+      "source_module": "market_expectation",
+      "source_quote": "/ PS TTM / 1.0041 / sales multiple",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "medium",
+      "model_role": "valuation metric",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "guidance_net_profit_H1_2026_low",
+      "value": 9800000000.0,
+      "value_text": "98亿",
+      "unit": "CNY",
+      "period": "2026H1",
+      "comparison_basis": "guidance",
+      "source_module": "company_events",
+      "source_quote": "利润为98亿元到104亿元，与上年同期相比增加60.05%到69.85%。",
+      "evidence_status": "reported",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "earnings signal",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "guidance_net_profit_H1_2026_high",
+      "value": 10400000000.0,
+      "value_text": "104亿",
+      "unit": "CNY",
+      "period": "2026H1",
+      "comparison_basis": "guidance",
+      "source_module": "company_events",
+      "source_quote": "利润为98亿元到104亿元，与上年同期相比增加60.05%到69.85%。",
+      "evidence_status": "reported",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "earnings signal",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "pe_percentile_5y",
+      "value": 59.0,
+      "value_text": "59%",
+      "unit": "%",
+      "period": "5-year",
+      "comparison_basis": "historical percentile",
+      "source_module": "market_expectation",
+      "source_quote": "/ PE percentile / 59 / 5-year valuation position",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "medium",
+      "model_role": "valuation context",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "pb_percentile_5y",
+      "value": 6.9,
+      "value_text": "6.9%",
+      "unit": "%",
+      "period": "5-year",
+      "comparison_basis": "historical percentile",
+      "source_module": "market_expectation",
+      "source_quote": "/ PB percentile / 6.9 / 5-year valuation position",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "medium",
+      "model_role": "valuation context",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "ps_percentile_5y",
+      "value": 5.5,
+      "value_text": "5.5%",
+      "unit": "%",
+      "period": "5-year",
+      "comparison_basis": "historical percentile",
+      "source_module": "market_expectation",
+      "source_quote": "/ PS percentile / 5.5 / 5-year valuation position",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "medium",
+      "model_role": "valuation context",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "聚氨酯 (Polyurethane)",
+      "variable": "aggregated_MDI_export_volume_May_2026",
+      "value": 10.08,
+      "value_text": "10.08万吨",
+      "unit": "10,000 tons",
+      "period": "2026-05",
+      "comparison_basis": "YoY +49%",
+      "source_module": "knowledge_planet",
+      "source_quote": "据Wind，5月聚合MDI出口量10.08万吨，yoy+49%",
+      "evidence_status": "private_proxy",
+      "direction": "up",
+      "materiality": "high",
+      "model_role": "demand proxy",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "聚氨酯 (Polyurethane)",
+      "variable": "Q2_2026_MDI_spread",
+      "value": 13100.0,
+      "value_text": "1.31万元/吨",
+      "unit": "CNY per ton",
+      "period": "2026Q2 (as of 6/30)",
+      "comparison_basis": "QoQ +2100元/吨",
+      "source_module": "knowledge_planet",
+      "source_quote": "截至6月30日，Q2聚合MDI价格1.79w/吨，纯MDI价格2.26w/吨，MDI价差1.31w/吨，环比扩大2100元/吨",
+      "evidence_status": "private_proxy",
+      "direction": "up",
+      "materiality": "high",
+      "model_role": "profitability driver",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "石化 (Petrochemicals)",
+      "variable": "ethylene_ethane_spread_Q2_2026",
+      "value": 1003.0,
+      "value_text": "1003美元/吨",
+      "unit": "USD per ton",
+      "period": "2026Q2 (as of 6/10)",
+      "comparison_basis": "QoQ +362美元/吨",
+      "source_module": "knowledge_planet",
+      "source_quote": "截至6月10日，26Q2乙烯-乙烷价差为1003美元/吨，环比提升362美元/吨。",
+      "evidence_status": "private_proxy",
+      "direction": "up",
+      "materiality": "high",
+      "model_role": "profitability driver",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    }
+  ],
+  "deterministic_evidence": [
+    {
+      "evidence_id": "EV001",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Financial-report look-back: 900 days"
+    },
+    {
+      "evidence_id": "EV002",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "Compacted 万华化学2025年年度报告: 449930 chars -> 143339 chars."
+    },
+    {
+      "evidence_id": "EV003",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 半年",
+      "text": "Compacted 万华化学2025年半年度报告: 341347 chars -> 131782 chars."
+    },
+    {
+      "evidence_id": "EV004",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260421, 2025, 年度",
+      "text": "20260421: 万华化学2025年年度报告"
+    },
+    {
+      "evidence_id": "EV005",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260421, 2026, 季度",
+      "text": "20260421: 万华化学2026年一季度报告"
+    },
+    {
+      "evidence_id": "EV006",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20251025, 2025, 季度",
+      "text": "20251025: 万华化学2025年三季度报告"
+    },
+    {
+      "evidence_id": "EV007",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20250812, 2025, 半年",
+      "text": "20250812: 万华化学2025年半年度报告"
+    },
+    {
+      "evidence_id": "EV008",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ announcement_lookup / ready / Found 4 candidate financial-report announcement(s) from primary and CNINFO sources. /"
+    },
+    {
+      "evidence_id": "EV009",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "/ pdf_text_extraction / ready / 万华化学2025年年度报告: extracted 449930 characters of readable report text. /"
+    },
+    {
+      "evidence_id": "EV010",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "Q1, 20260331",
+      "text": "/ latest reported / Q1 / 20260331 / 54052165361.36 / 3717707873.93 / 216208661445.44 / 14870831495.72 / 219932545767.7701 / 13159633283.9537 / historical median 0331 share 28.3% /"
+    },
+    {
+      "evidence_id": "EV011",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "FY, 20251231",
+      "text": "/ latest annual / FY / 20251231 / 203234573814.42 / 12527201094.15 / 203234573814.42 / 12527201094.15 / 203234573814.42 / 12527201094.15 / FY actual /"
+    },
+    {
+      "evidence_id": "EV012",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "revenue",
+      "period": "20260331, 20250331",
+      "text": "/ Revenue base / 54052165361.36 / N/A / YoY: 20260331 vs 20250331 / top-line starting point for volume × price × mix /"
+    },
+    {
+      "evidence_id": "EV013",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "20260331, 20250331",
+      "text": "/ Gross margin / 14.728% / -0.98pp / YoY: 20260331 vs 20250331 / main bridge from demand to gross profit /"
+    },
+    {
+      "evidence_id": "EV014",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260331, 20250331",
+      "text": "/ Operating margin / 9.8142% / +0.49pp / YoY: 20260331 vs 20250331 / tests pricing, mix, and cost absorption /"
+    },
+    {
+      "evidence_id": "EV015",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "20260331, 20250331",
+      "text": "/ Net margin / 6.878% / -0.28pp / YoY: 20260331 vs 20250331 / captures final earnings conversion /"
+    },
+    {
+      "evidence_id": "EV016",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "operating_expense",
+      "period": "20260331, 20250331",
+      "text": "/ Finance-expense ratio / 1.3776% / +0.04pp / YoY: 20260331 vs 20250331 / captures leverage drag or relief /"
+    },
+    {
+      "evidence_id": "EV017",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "profit_or_eps",
+      "period": "20260331, 20250331",
+      "text": "/ OCF / net profit / 1.8444 / N/A / YoY: 20260331 vs 20250331 / tests earnings quality and cash realization /"
+    },
+    {
+      "evidence_id": "EV018",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "revenue",
+      "period": "20260331, 20250331",
+      "text": "/ Receivables / revenue / 6.9575% / -1.27pp / YoY: 20260331 vs 20250331 / tests working-capital drag; interim periods use annualized revenue /"
+    },
+    {
+      "evidence_id": "EV019",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Look-back window: 30 days"
+    },
+    {
+      "evidence_id": "EV020",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 一般公告 / 7 /"
+    },
+    {
+      "evidence_id": "EV021",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "valuation",
+      "period": "unspecified",
+      "text": "/ earnings guidance / performance preview / 1 /"
+    },
+    {
+      "evidence_id": "EV022",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 治理/人事 / 1 /"
+    },
+    {
+      "evidence_id": "EV023",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "valuation",
+      "period": "20260707, 2026, 半年",
+      "text": "/ 20260707 / earnings guidance / performance preview / 600309.SH / 万华化学 / 万华化学2026年半年度业绩预增公告 / https://static.cninfo.com.cn/finalpage/2026-07-07/1225411166.PDF /"
+    },
+    {
+      "evidence_id": "EV024",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260624, 2026-06-24",
+      "text": "/ 20260624 / 一般公告 / 600309.SH / 万华化学 / 万华化学关于持股5%以上股东部分股份解除质押公告 / https://static.cninfo.com.cn/finalpage/2026-06-24/1225382851.PDF /"
+    },
+    {
+      "evidence_id": "EV025",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260623, 2026-06-23",
+      "text": "/ 20260623 / 一般公告 / 600309.SH / 万华化学 / 万华化学福建工业园MDI装置停产检修公告 / https://static.cninfo.com.cn/finalpage/2026-06-23/1225381604.PDF /"
+    },
+    {
+      "evidence_id": "EV026",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260623, 2026, 2026-06-23",
+      "text": "/ 20260623 / 一般公告 / 600309.SH / 万华化学 / 万华化学2026年第一次临时股东会决议公告 / https://static.cninfo.com.cn/finalpage/2026-06-23/1225381601.PDF /"
+    },
+    {
+      "evidence_id": "EV027",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260623, 2026, 2026-06-23",
+      "text": "/ 20260623 / 一般公告 / 600309.SH / 万华化学 / 万华化学2026年第一次临时股东会的法律意见 / https://static.cninfo.com.cn/finalpage/2026-06-23/1225381596.PDF /"
+    },
+    {
+      "evidence_id": "EV028",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_volume",
+      "period": "2025, 年度",
+      "text": "/ product_manufacturer / 产品制造 / 产能出货型 / quantified disclosure / 万华化学2025年年度报告: 报告期内公司新增重要非主营业务的说明 □适用 √不适用 二、报告期内公司所处行业情况 2025 年，国际环境错综复杂，地缘政治冲突多发频发，单边主义、保护主义逆流 涌动，对国际经贸秩序造成严重冲击，全球经济增速继续放缓。受市场需求疲软、贸 易阻碍增多、关税壁垒升级等因素的影响，石化化工行业供过于求的结构性矛盾更加 凸显，市场竞争加剧。 尽管外部环境变化带..."
+    },
+    {
+      "evidence_id": "EV029",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "asp_or_price",
+      "period": "2025, 年度",
+      "text": "/ high_r_and_d_technology / 高研发技术产品型 / quantified disclosure / 万华化学2025年年度报告: 电池科技有限公司专注于电池材料及相关化学品领域，产品涵盖磷酸铁锂、石墨 负极、电池级硫酸盐、N-甲基吡咯烷酮（NMP）、聚丙烯酸（PAA）等，广泛应用于新 能源汽车、储能、消费电子等领域。通过持续技术创新、产品迭代和产业链整合，为 / 重点验证产品代际、客户认证、研发转化率、ASP/毛利率、供应链瓶颈、资本开支和库存风险。 /"
+    },
+    {
+      "evidence_id": "EV030",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "2025, 年度",
+      "text": "/ core_revenue_engine / annual / 万华化学2025年年度报告: 贸易业务占营业收入比例超过 10%前五名销售客户 / Defines what actually drives the income statement. /"
+    },
+    {
+      "evidence_id": "EV031",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "2025, 年度",
+      "text": "/ segment_mix / annual / 万华化学2025年年度报告: 分产品 营业收入 营业成本 毛利率（%） 上年增减 上年增减 / Shows whether different profit pools are being mixed together. /"
+    },
+    {
+      "evidence_id": "EV032",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "/ customer_and_channel / annual / 万华化学2025年年度报告: B.报告期内向单个客户的销售比例超过总额的 50%、前 5 名客户中存在新增客户的 / Reveals demand source, concentration, and market validation. /"
+    },
+    {
+      "evidence_id": "EV033",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "/ geography / annual / 万华化学2025年年度报告: 场开拓步伐，通过持续打造行业标杆级的海外业务平台，稳步扩张全球销售网络，旨 / Explains whether growth depends on a specific geography or expansion lane. /"
+    },
+    {
+      "evidence_id": "EV034",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "/ reinvestment_engine / annual / 万华化学2025年年度报告: 2025 年,公司全年研发投入 48.65 亿元,研发工作主要围绕装置迭代与产业链优 / Shows how today's cash is being converted into tomorrow's earnings power. /"
+    },
+    {
+      "evidence_id": "EV035",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "/ product / annual / 万华化学2025年年度报告: 报告期内公司新增重要非主营业务的说明 □适用 √不适用 二、报告期内公司所处行业情况 2025 年，国际环境错综复杂，地缘政治冲突多发频发，单边主义、保护主义逆流 涌动，对国际经贸秩序造成严重冲击，全球经济增速继续放缓。受市场需求疲软、贸 易阻碍增多、关税壁垒升级等因素的影响，石化化工行业供过于求的结构性矛盾更加 凸显，市场竞争加剧。 尽管外部环境变化带来的不利影响增多，中国经济仍呈现稳健向好态势，发展基 础牢、增长潜能大。中国石化化工行..."
+    },
+    {
+      "evidence_id": "EV036",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "/ business / annual / 万华化学2025年年度报告: 主营业务 61,304,750,493.20 51,722,460,531.65 54,594,571,207.87 45,430,726,939.19 其他业务 5,984,216,542.80 4,015,391,669.04 8,166,148,251.18 4,461,587,817.70 合计 67,288,967,036.00 55,737,852,200.69 62,760,719,459.05 49,892,314,75..."
+    },
+    {
+      "evidence_id": "EV037",
+      "source_module": "industry_cycle",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "balance_sheet",
+      "period": "unspecified",
+      "text": "Do not state R32, R125, lithium, copper, gold, inventory, or spread changes as facts unless they appear in the evidence table."
+    },
+    {
+      "evidence_id": "EV038",
+      "source_module": "industry_cycle",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "gap",
+      "status": "missing",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "If cycle evidence says bottom-testing or evidence-limited, use language such as `bottom-right validation stage`, `右侧待验证`, or `needs confirmation`."
+    },
+    {
+      "evidence_id": "EV039",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "gap",
+      "status": "missing",
+      "model_variable": "segment_margin",
+      "period": "unspecified",
+      "text": "/ coverage_grade / report_types_seen / missing_report_types / answered_questions / core_pack_status / confidence_read /"
+    },
+    {
+      "evidence_id": "EV040",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "profit_or_eps",
+      "period": "2025, 年度",
+      "text": "/ accounting_reconciliation / Check signs, units, periods, and cross-statement consistency before a number enters the PM memo. / operating_cash_flow: 万华化学2025年年度报告: 3,040,424,946.53 3,204,044,734.83 2,856,277,954.14 3,042,928,129.50 经常性损益后的净利润 经营活动产生的现金流量净额..."
+    },
+    {
+      "evidence_id": "EV041",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "/ segment_economics_depth / Decide whether each business line has enough disclosed scale, growth, margin, cash quality, and valuation treatment. / 万华化学2025年年度报告: 报告期内公司新增重要非主营业务的说明 □适用 √不适用 二、报告期内公司所处行业情况 2025 年，国际环境错综复杂，地缘政治冲突多发频发，单边主义、保护主义逆流 涌动，对国际经贸秩序造成严..."
+    },
+    {
+      "evidence_id": "EV042",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "/ footnote_radar / Surface decision-relevant notes that can hide risk or change confidence. / impairment_policy: 万华化学2025年年度报告: 非经常性损益项目 2025年金额 2024年金额 2023年金额 用） 非流动性资产处置损益，包括已计提资产减值准备 / impairment_policy: 万华化学2025年年度报告: 用） 非流动性资产处置损益，包括已计提资产减值准备 / Use fo..."
+    },
+    {
+      "evidence_id": "EV043",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "profit_or_eps",
+      "period": "2025, 年度",
+      "text": "/ cash_flow_quality_decomposition / Separate accounting profit from cash conversion, working-capital drag, and demand visibility. / operating_cash_flow: 万华化学2025年年度报告: 3,040,424,946.53 3,204,044,734.83 2,856,277,954.14 3,042,928,129.50 经常性损益后的净利润 经营活动产生的现金流..."
+    },
+    {
+      "evidence_id": "EV044",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "capex_or_roic",
+      "period": "2025, 年度",
+      "text": "/ capex_cip_return_bridge / Test whether capex, construction-in-progress, or investment assets are building returns or just absorbing capital. / long_term_equity_investments: 万华化学2025年年度报告: 衍生金融资产 77,892,526.87 215,765,494.47 137,872,967.60 应收款项融资 1,298,979..."
+    },
+    {
+      "evidence_id": "EV045",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "2025, 年度",
+      "text": "/ non_recurring_profit_quality / Distinguish core operating profit from investment income, fair-value moves, subsidies, asset disposals, impairment, and other one-off items. / impairment: 万华化学2025年年度报告: 筹资活动产生的现金流量净额 2,143,880,788.98 6,186,159,622.30 -65.34..."
+    },
+    {
+      "evidence_id": "EV046",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "balance_sheet",
+      "period": "2025, 年度",
+      "text": "/ balance_sheet_forward_signals / Read balance-sheet leads before income-statement confirmation. / prepayments: 万华化学2025年年度报告: 应收款项融资 2,777,227,576.55 0.86 1,298,979,936.80 0.44 113.80 所致。 预付款项 2,842,326,958.00 0.88 2,123,562,230.57 0.72 33.85 主要为预付的原料款增加所致..."
+    },
+    {
+      "evidence_id": "EV047",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "revenue",
+      "period": "2025, 年度",
+      "text": "/ shareholder_return_authenticity / Test whether dividends, buybacks, and capital returns are funded by durable profit and cash rather than leverage or asset sales. / generic_capital_allocation: 万华化学2025年年度报告: 以此计算合计拟派发现金红利 3,913,089,532.50 元（含税），剩余未分配利 润 5..."
+    },
+    {
+      "evidence_id": "EV048",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-07-10",
+      "text": "Valuation trade date: 2026-07-10"
+    },
+    {
+      "evidence_id": "EV049",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ Market cap (CNY) / 215094703636 / current equity value /"
+    },
+    {
+      "evidence_id": "EV050",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "valuation",
+      "period": "TTM",
+      "text": "/ PE TTM / 16.3411 / earnings multiple the market is paying now /"
+    },
+    {
+      "evidence_id": "EV051",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "revenue",
+      "period": "TTM",
+      "text": "/ PS TTM / 1.0041 / sales multiple the market is paying now /"
+    },
+    {
+      "evidence_id": "EV052",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "valuation",
+      "period": "TTM",
+      "text": "/ Implied TTM earnings (CNY) / 13162804440.0928 / market cap divided by PE TTM /"
+    },
+    {
+      "evidence_id": "EV053",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "revenue",
+      "period": "TTM",
+      "text": "/ Implied TTM sales (CNY) / 214216416329.0509 / market cap divided by PS TTM /"
+    },
+    {
+      "evidence_id": "EV054",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "valuation",
+      "period": "unspecified",
+      "text": "/ PE percentile / 59 / 5-year valuation position /"
+    },
+    {
+      "evidence_id": "EV055",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "valuation",
+      "period": "unspecified",
+      "text": "/ PB percentile / 6.9 / 5-year valuation position /"
+    },
+    {
+      "evidence_id": "EV056",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "valuation",
+      "period": "unspecified",
+      "text": "/ PS percentile / 5.5 / 5-year valuation position /"
+    },
+    {
+      "evidence_id": "EV057",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-07-10",
+      "text": "Valuation trade date: 2026-07-10"
+    },
+    {
+      "evidence_id": "EV058",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Market-cap units: `total_mv` is ten-thousand CNY; `total_mv_cny_100m` is 亿元 and equals `total_mv / 10,000`."
+    },
+    {
+      "evidence_id": "EV059",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "unspecified",
+      "text": "/ ts_code / name / industry / total_mv / total_mv_cny_100m / pe_ttm / pb / ps_ttm / dv_ttm / roe_annual / roa_annual / roe / roa / netprofit_yoy / debt_to_assets / v4_score /"
+    },
+    {
+      "evidence_id": "EV060",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 002709.SZ / 天赐材料 / 化工原料 / 8166478.1702 / 816.6478 / 28.4873 / 4.2798 / 4.1173 / 0.8698 / 8.7993 / 6.6808 / 8.9589 / 7.1376 / 1005.751 / 35.5639 / 78.5 /"
+    },
+    {
+      "evidence_id": "EV061",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 600989.SH / 宝丰能源 / 化工原料 / 14901387.52 / 1490.1388 / 11.8507 / 2.8592 / 2.9506 / 3.4164 / 24.8376 / 15.4385 / 7.2844 / 4.8239 / 50.2298 / 44.8554 / 74.1 /"
+    },
+    {
+      "evidence_id": "EV062",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 600160.SH / 巨化股份 / 化工原料 / 11722297.5662 / 1172.2298 / 28.2302 / 5.4236 / 4.3084 / 1.2897 / 11.5721 / 10.0041 / 5.5796 / 3.9181 / 45.9262 / 38.4052 / 61.3 /"
+    },
+    {
+      "evidence_id": "EV063",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2006",
+      "text": "/ 002648.SZ / 卫星化学 / 化工原料 / 7640088.4476 / 764.0088 / 13.0394 / 2.155 / 1.646 / 2.2006 / 16.6375 / 9.8675 / 6.1356 / 3.6912 / 34.9726 / 52.4788 / 60.5 /"
+    },
+    {
+      "evidence_id": "EV064",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 300037.SZ / 新宙邦 / 化工原料 / 5471707.4912 / 547.1707 / 40.594 / 4.9891 / 4.9752 / 0.6847 / 10.6811 / 7.0921 / 4.3653 / 2.8032 / 109.0212 / 46.7276 / 51.7 /"
+    },
+    {
+      "evidence_id": "EV065",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 300054.SZ / 鼎龙股份 / 化工原料 / 7921579.797 / 792.158 / 95.4215 / 14.5039 / 20.5428 / 0.1203 / 14.8368 / 11.5897 / 4.6984 / 3.298 / 77.9914 / 40.1705 / 49.5 /"
+    },
+    {
+      "evidence_id": "EV066",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 600309.SH / 廖增太 / 寇光武 / 李立民 / 313047.1626 / 19981216 / 山东 / 聚氨酯及助剂、异氰酸酯及衍生产品的开发、生产、销售铁路专线运输、货物装卸、仓储和仓库租赁。 /"
+    },
+    {
+      "evidence_id": "EV067",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20251231",
+      "text": "/ 20251231 / 33105189455.82 / 30711201211.89 / 6737836925.98 / -32782705274.57 / 27662042570.54 / 2293156182.4 / 323009018441.98 / 202880274334.07 /"
+    },
+    {
+      "evidence_id": "EV068",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20241231",
+      "text": "/ 20241231 / 30053435178.33 / 35830124773.82 / 11311953510.64 / -37077680248.74 / 24533221345.8 / 2196124305.24 / 293333349744.25 / 189833199877.59 /"
+    },
+    {
+      "evidence_id": "EV069",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20231231",
+      "text": "/ 20231231 / 26796752552.51 / 43098415319.53 / 9001793158.27 / -44830095860.93 / 23709958225.37 / 2157538296.26 / 253040390845.31 / 158586175111.51 /"
+    },
+    {
+      "evidence_id": "EV070",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20221231",
+      "text": "/ 20221231 / 36336824920.33 / 32656552625.92 / 10489947082.1 / -34324606636.65 / 18988842959.88 / 1292252201.89 / 200843198875.15 / 119506211213.71 /"
+    },
+    {
+      "evidence_id": "EV071",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20211231",
+      "text": "/ 20211231 / 27922292184.74 / 26999582886.59 / 6673634212.28 / -28758048220.1 / 34216298291.79 / 1264474127.17 / 190309582268.84 / 118613915236.74 /"
+    },
+    {
+      "evidence_id": "EV072",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260421, 20251231",
+      "text": "/ 20260421 / 20251231 / 预案 / 1.25 / 0 / N/A / N/A / N/A /"
+    },
+    {
+      "evidence_id": "EV073",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260421, 20251231, 20260526",
+      "text": "/ 20260421 / 20251231 / 实施 / 1.25 / 0 / 20260526 / 20260527 / 20260527 /"
+    },
+    {
+      "evidence_id": "EV074",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260421, 20251231",
+      "text": "/ 20260421 / 20251231 / 股东大会通过 / 1.25 / 0 / N/A / N/A / N/A /"
+    },
+    {
+      "evidence_id": "EV075",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Look-back window for futures proxies: 90 days"
+    },
+    {
+      "evidence_id": "EV076",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_volume",
+      "period": "unspecified",
+      "text": "/ 1 - company hard evidence / official filings, production reports, and sales announcements / realized product mix, output, unit cost, and cash-flow conversion / usually delayed and may not include daily spot prices /"
+    },
+    {
+      "evidence_id": "EV077",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "balance_sheet",
+      "period": "unspecified",
+      "text": "Do not state R32, R125, lithium, copper, gold, inventory, or spread changes as facts unless they appear in the evidence table."
+    },
+    {
+      "evidence_id": "EV078",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "gap",
+      "status": "missing",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "If a thesis-critical input is marked missing, treat it as neutral non-evidence and a retrieval task; it cannot prove margin deterioration/resilience or mechanically change rating, conviction, or sizing."
+    },
+    {
+      "evidence_id": "EV079",
+      "source_module": "policy",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025-10-28, 2025",
+      "text": "/ 中共中央关于制定国民经济和社会发展第十五个五年规划的建议 / 中国政府网 / 2025-10-28 / national-plan / ok / https://www.gov.cn/gongbao/2025/issue_12386/202511/content_7047415.html /"
+    },
+    {
+      "evidence_id": "EV080",
+      "source_module": "policy",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2024-08-11",
+      "text": "/ 中共中央 国务院关于加快经济社会发展全面绿色转型的意见 / 中国政府网 / 2024-08-11 / national-direction / ok / https://www.gov.cn/zhengce/202408/content_6967663.htm /"
+    },
+    {
+      "evidence_id": "EV081",
+      "source_module": "policy",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2024-08-11",
+      "text": "/ renewable-energy / 绿色转型 / 中共中央 国务院关于加快经济社会发展全面绿色转型的意见 / 中国政府网 / 2024-08-11 / national-direction / / supports multi-year demand visibility for clean-energy equipment and infrastructure / argue the company sits inside a policy-backed demand pool / test whether"
+    },
+    {
+      "evidence_id": "EV082",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Canonical company route: https://sns.sseinfo.com/company.do?stockcode=600309"
+    },
+    {
+      "evidence_id": "EV083",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ sse / reachable / {'title': '上证e互动', 'has_company_page': True, 'has_qa_section': True} / 309 / {'is_empty_recent_reply': True, 'text_preview': '近1个月暂无回复'} /"
+    },
+    {
+      "evidence_id": "EV084",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Use substantive interaction answers as tier-3 narrative options unless filings or announcements independently verify the same claim."
+    },
+    {
+      "evidence_id": "EV085",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "2026-06-11, 2026-07-11",
+      "text": "Window: 2026-06-11 to 2026-07-11 (30 days)"
+    },
+    {
+      "evidence_id": "EV086",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Primary query terms: 600309.SH, 600309SH, 600309, 万华化学"
+    },
+    {
+      "evidence_id": "EV087",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Upstream sync summary: cached=30, synced=1, index_refreshed=1"
+    },
+    {
+      "evidence_id": "EV088",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "valuation",
+      "period": "unspecified",
+      "text": "Auto-sync refresh window: latest 30 day(s); older dates use the persistent local cache."
+    },
+    {
+      "evidence_id": "EV089",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Preprocess: ok: events=10411, clusters=77, opportunities=240, ocr_low_quality=820"
+    },
+    {
+      "evidence_id": "EV090",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Matched stream items: 17"
+    },
+    {
+      "evidence_id": "EV091",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Fusion target: 600309.SH"
+    },
+    {
+      "evidence_id": "EV092",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Direct terms: 600309.SH, 600309SH, 600309, 万华化学"
+    },
+    {
+      "evidence_id": "EV093",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Raw matches: stream=17; preprocessed matches: events=5, opportunities=0"
+    }
+  ],
+  "conflicts": [
+    {
+      "topic": "2026E net profit forecast",
+      "segment": "consolidated",
+      "claim_a": "2026E net profit 187亿 (国海化工)",
+      "source_a": "KSI01 / KPE01",
+      "claim_b": "2026E net profit >200亿 (中邮化工)",
+      "source_b": "KSI03 / KPE04",
+      "conflict_type": "sell_side_estimate_discrepancy",
+      "required_resolution": "Compare build assumptions: volume/price/cost; assess probability-weighted scenario"
+    },
+    {
+      "topic": "Current PE TTM",
+      "segment": "consolidated",
+      "claim_a": "PE TTM is 16.34 (market data 2026-07-10)",
+      "source_a": "EV050",
+      "claim_b": "PE is around 12 (机构未识别 2026-07-07)",
+      "source_b": "KSI02",
+      "conflict_type": "metric_number_discrepancy",
+      "required_resolution": "Verify if KSI02 uses forward PE or a different earnings base; adjust for comparability"
+    }
+  ],
+  "kpe_impacts": [
+    {
+      "evidence_id": "KPE01",
+      "segment": "consolidated",
+      "variable": "profit_or_eps",
+      "direction": "bullish",
+      "horizon": "FY2026",
+      "baseline_value": null,
+      "revised_value": 18700000000.0,
+      "unit": "CNY",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "【国海化工】万华化学：Q2业绩超预期 ... 预计26/27/28年，归母净利润分别为187/205/229亿元",
+      "verification_gate": "Cross-check with upcoming semi-annual report and quarterly filings",
+      "missing_inputs": [
+        "Baseline value (previous forecast)",
+        "Share count",
+        "Revenue base for segment"
+      ],
+      "known_kpe": {
+        "date": "2026-07-07T09:41",
+        "source": "stream_item:11525",
+        "source_type": "industry_weekly_data",
+        "credibility": "private_data_requires_methodology_check",
+        "decision_role": "KPI/forecast proxy",
+        "evidence": "【国海化工】万华化学：Q2业绩... 【国海化工】万华化学：Q2业绩超预期，看好聚氨酯出口旺盛及石化降本增效 [烟花]26Q2预计61-67亿元，超市场预期 1）7月6日，公司发布业绩预告，预计26H1归母净利润98-104亿元，yoy+60%~70%；26Q2预计61-67亿元，yoy+90%~108%。 2）业绩超市场预期：海外聚氨酯供需格局变化，价格上涨；乙烯一期原材料改造降本显著。 [烟花]聚氨酯：海外能源成本高企，聚氨酯出口有望超预期 1）欧洲+日韩+中东的MDI产能占比27%。原本欧洲MDI、TDI产能不可抗力频发，中东冲突进一步加剧欧洲、日韩成本上行，海外聚氨酯供应偏紧，中国聚氨酯出口具备显著竞争优势。 2）据Wind，5月聚合MDI出口量10.08万吨，yoy+49%（累计出口39.62万吨，yoy+16%）；5月TDI出口量4.62万吨，yoy-10%（累计出口27.55万吨，yoy+27%）。 3）截至6月30日，Q2聚合MDI价格1.79w/吨，纯MDI价格2.26w/吨，MDI价差1.31w/吨，环比扩大2100元/吨；TDI价格1.68w/吨，价差1.25w/吨，环比扩大706元/吨。 [烟花]石化：乙烯一期原材料改造完成带来成本优化 乙烯一期120万吨多元化改造26年初已投产，Q2受益于乙烷裂解制乙烯价差扩大，截至6月10日，26Q2乙烯-乙烷价差为1003美元/吨，环比提升362美元/吨。 [烟花]新材料：研发创新驱动成长，新材料盈利持续修复 近3年，公司每年研发费用在40-50亿，高额研发支出驱动成长。已有新材料产品PC等产品盈利改善；电池材料如磷酸铁锂产能持续扩张、盈利改善。 [玫瑰]盈利预测：预计26/27/28年，归母净利润分别为187/205/229亿元，对应PE分别为12/11/10，维持“买入”评级。 ⚡风险提示：项目建设不及预期；市场大幅度波动；新产品不及预期；同行业竞争加剧等 🤝【国海化工团队】 董伯骏/杨丽蓉/李娟廷/仲逸涵/李振方/于畅/王鹏/王雨寒",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "asp_or_price",
+        "required_outcome": "numeric assumption delta or explicit rejection"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unverified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until Cross-check with upcoming semi-annual report and quarterly filings",
+      "grounding_status": "unverified_quote"
+    },
+    {
+      "evidence_id": "KPE02",
+      "segment": "consolidated",
+      "variable": "valuation",
+      "direction": "bullish",
+      "horizon": "current",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "目前龙头万华化学PE约为12倍，PB仅有2.1倍，PB位于2020年以来10%的分位数",
+      "verification_gate": "Verify PE basis (TTM vs forward); reconcile with market data EV050",
+      "missing_inputs": [
+        "Exact earnings used for PE calculation"
+      ],
+      "known_kpe": {
+        "date": "2026-07-07T08:15",
+        "source": "stream_item:11641",
+        "source_type": "channel_check",
+        "credibility": "high_private_channel_hard_to_verify",
+        "decision_role": "probability/verification proxy",
+        "evidence": "化工观点更新20260706 ... 化工观点更新20260706 上半年化工利润高增，头部企业业绩大增。统计局数据显示，1-5月，在涨价带动下规模以上化工行业利润同比增长71.6%。基础化工头部企业集中发布半年报业绩预增：东岳硅材（+905%~+952%）、盐湖股份（+131%~+143%）、华峰化学（+71%~+112%）、东方铁塔（+82%~+106%），新凤鸣（+95%~+112%），覆盖有机硅、氨纶、钾肥、涤纶长丝等传统化工领域，龙头企业呈现强者更强的态势。 龙头企业估值处于低位。目前龙头万华化学和华鲁恒升的PE约为12倍，PB仅有2.1倍和1.6倍，PB位于2020年以来10%和13%的分位数（按照7月6日收盘价测算）。而部分周期成长股（例如赛轮、瑞丰等PE回归12倍），配置价值凸显，化工整体进入配置区间。 中长期供给端强基本面支撑。中期看，国内双碳政策持续推进，海外因中东战争造成欧洲、日韩化工企业成本高企或加速海外产能退出。 投资建议： 1、细分龙头白马： 华鲁恒升、万华化学、卫星化学、宝丰能源、新和成、鲁西化工等。 2、需求刚性行业： 钾肥 盐湖股份、东方铁塔、亚钾国际；草铵膦 订单超预期，3月涨价恰逢中美旺季，7月南美采购旺季到来，扬农化工、润丰股份、利尔化学。蛋氨酸，价格持续高企，核心公司估值仅11倍，新和成、安迪苏。 3、库存低位， 需求修复的弹性品种。涤纶、氨纶、锦纶、染料等，企业+经销商的库存均处于底部，待需求反弹+下游开工回升提振价格，桐昆股份、新凤鸣、华峰化学、新乡化纤、浙江龙盛、闰土股份等。 4、股价调整到位的周期成长股。民爆龙头广东宏大和润滑油添加剂瑞丰新材。 风险提示：原油价格波动、下游需求不及预期、双碳收紧企业停产风险",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "asp_or_price",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unverified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until Verify PE basis (TTM vs forward); reconcile with market data EV050",
+      "grounding_status": "unverified_quote"
+    },
+    {
+      "evidence_id": "KPE03",
+      "segment": "consolidated",
+      "variable": "segment_volume",
+      "direction": "unknown",
+      "horizon": "Q3 2026",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "下游聚酯产业链面临从'供需双弱'主动去库转变为'供需同升'主动累库的时间节点",
+      "verification_gate": "Monitor inventory data and polyester chain operating rates",
+      "missing_inputs": [
+        "Correlation to Wanhua's specific volumes",
+        "Quantitative volume forecast"
+      ],
+      "known_kpe": {
+        "date": "2026-07-06T08:42",
+        "source": "stream_item:9264",
+        "source_type": "industry_weekly_data",
+        "credibility": "private_data_requires_methodology_check",
+        "decision_role": "KPI/forecast proxy",
+        "evidence": "[烟花]石化行业观点 1️⃣本... [烟花]石化行业观点 1️⃣本周国际油价延续此前震荡下行的走势，截至7月3日，布伦特原油报收71.94美元、WTI报收68.78美元；近一周海峡通行量恢复至战前的60%左右，但实际恢复更多来自前期积压船货释放，而非中东供给体系已完全正常化；此外海湾国家在海峡解封后，因想抓住60天时间窗口+封闭期间财政收入大幅减少，疯狂出货，导致国际原油供应短期爆发式增长。后市来看，美伊谈判反复，海峡仍未自由通行，油价下行空间有限，预计未来一段时间内国际油价仍将延续震荡。 2️⃣国内炼厂开工继续处于低位，山东地炼最新开工率仅46.92%，创2020年以来的新低，7-8月主流炼厂也多有检修计划。成品油价格三连降，柴油价格进入“6元时代”；PX/PTA/长丝/短纤/瓶片开工分别为73.0%/60.7%/73.5%/75.3%/70.5%，下游聚酯产业链面临从“供需双弱”主动去库转变为“供需同升”主动累库的时间节点；聚酯下游需求被严重压缩后存在较高的复苏预期，其需求弹性明显高于供应弹性。进入三季度，传统需求旺季即将到来，建议持续关注下游采购和补库情况。长期来看，石化核心资产的稀缺性将持续强化；海外传统炼厂集中区（欧美和日韩）炼能呈不断收缩趋势，国内炼化产业在国际上的竞争优势不断增强。建议关注恒力石化、荣盛石化、桐昆股份、新凤鸣、卫星化学、万华化学、万凯新材、恒逸石化、东方盛虹等。",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "segment_volume",
+        "required_outcome": "numeric assumption delta or explicit rejection"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unverified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until Monitor inventory data and polyester chain operating rates",
+      "grounding_status": "unverified_quote"
+    },
+    {
+      "evidence_id": "KPE04",
+      "segment": "聚氨酯 (Polyurethane)",
+      "variable": "utilization_or_backlog",
+      "direction": "neutral",
+      "horizon": "2030",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "科思创宣布新建MDI产能对市场影响有限 ... 项目预期投产时间较晚，不会对中短期MDI市场格局产生影响",
+      "verification_gate": "Monitor MDI project approvals and Wanhua's capacity expansion timeline",
+      "missing_inputs": [
+        "Wanhua's 2030 capacity target (480万吨)"
+      ],
+      "known_kpe": {
+        "date": "2026-07-01T12:42",
+        "source": "stream_item:7230",
+        "source_type": "company_research_feedback",
+        "credibility": "promotional_private_unverified",
+        "decision_role": "probability/verification proxy",
+        "evidence": "【科思创宣布新建MDI产能对市... 【科思创宣布新建MDI产能对市场影响有限，持续看好万华化学】中邮化工刘海荣团队 [礼物]6月30日，科思创宣布关于MDI的投资计划，计划在科思创上海一体化基地筹备新建一套年产能66万吨的MDI生产装置，目标于2030年前后建成投产。同时，科思创正就在阿联酋新建同等规模装置开展可行性研究。 [礼物]我们判断此次事件对万华化学影响有限：（1）项目预期投产时间较晚，不会对中短期MDI市场格局产生影响；（2）国内十五五期间对MDI项目审批收紧，项目报批仍存在较大不确定性；（3）万华化学MDI在2030年总产能预期超过480万吨，规模仍稳居全球首位，（4）万华化学成本和效率优势保持领先，保持海外对手3000+元/吨成本优势。 [礼物]我们持续看好万华化学，2026年预期盈利超过200亿元，现价仅10倍PE。 欢迎联系中邮化工团队交流：费晨洪/刘海荣",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "utilization_or_backlog",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unverified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until Monitor MDI project approvals and Wanhua's capacity expansion timeline",
+      "grounding_status": "unverified_quote"
+    },
+    {
+      "evidence_id": "KPE05",
+      "segment": "聚氨酯 (Polyurethane)",
+      "variable": "utilization_or_backlog",
+      "direction": "neutral",
+      "horizon": "2030",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "科思创宣布扩产规划 ... 计划在科思创上海一体化基地筹备新建一套年产能66万吨的MDI生产装置",
+      "verification_gate": "Assess regulatory approval and feasibility; same as KPE04",
+      "missing_inputs": [
+        "Market share impact quantification"
+      ],
+      "known_kpe": {
+        "date": "2026-07-01T08:08",
+        "source": "stream_item:7540",
+        "source_type": "industry_weekly_data",
+        "credibility": "identified_broker_private_text",
+        "decision_role": "KPI/forecast proxy",
+        "evidence": "【国泰海通基础化工】聚氨酯行业... annotation: 【国泰海通基础化工】聚氨酯行业：科思创宣布扩产规划 根据中国化工报，6月30日，德国化工企业科思创宣布一项MDI(二苯基甲烷二异氰酸酯)战略投资计划。该计划包括在科思创上海一体化基地筹备新建一套年产能66万吨的MDI生产装置，目标于2030年前后建成投产。同时，科思创正就在阿联酋新建同等规模装置开展可行性研究。科思创计划扩建上海一体化基地，新建一套MDI生产装置。除MDI主装置外，本次投资还涵盖上游工厂及配套基础设施，通过在厂区内生产关键中间体，构建一体化生产布局。 我们从事化工行业研究19年，多次成功把握了行业的机会和风险。近期工作： 《万华化学近期交流》 《》 《》 《万华化学深度&底部利润分析》 《万华化学盈利拆分&MDI历史盈利回顾》 《乙烷制乙烯盈利拆分》 《》 行业数据库 行业数据库 电池材料&磷酸铁锂梳理",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "utilization_or_backlog",
+        "required_outcome": "numeric assumption delta or explicit rejection"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unverified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until Assess regulatory approval and feasibility; same as KPE04",
+      "grounding_status": "unverified_quote"
+    },
+    {
+      "evidence_id": "KPE06",
+      "segment": "consolidated",
+      "variable": "market_share",
+      "direction": "bullish",
+      "horizon": "2026-2028",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "内TPT产品已在中国石油、中国石化、万华化学、大唐多伦煤化工等企业的百余套装置应用",
+      "verification_gate": "Track AI adoption rate in Wanhua's plants; correlate with cost savings",
+      "missing_inputs": [
+        "Wanhua's specific use case and ROI from AI"
+      ],
+      "known_kpe": {
+        "date": "2026-06-18T15:51",
+        "source": "stream_item:1028",
+        "source_type": "channel_check",
+        "credibility": "promotional_private_unverified",
+        "decision_role": "probability/verification proxy",
+        "evidence": "【国金计算机&科技】中控技术：... 【国金计算机&科技】中控技术：物理 AI 首推标的，数据构筑“工业+AI”最强壁垒 工业垂类大模型大规模推广、千亿下游空间、数据和Know-how壁垒极高、股权激励加持 1-1Q2026AI收入1.84亿元，2Q有望进一步环比加速 公司公告披露1Q2026 工业AI业务规模放量，实现1.84亿收入，超预期；一季度往往为行业淡季，且考虑到分摊至季度确认的收入，实际订单口径更大，Q2有望进一步环比加速，全年有望完成股权激励AI收入目标10亿元。 2-核心价值在数据 公司手上关于石油化工等行业的时序经营数据极其稀缺，这类数据均为真实运营数据且自带时间戳，数据质量高，是训练TPT时间序列大模型（工业领域的DeepSeek，工业AI大脑）的基础。中控在化工、石化领域DCS（控制系统，侧重数据和操控归集）市占率达 63.2%、56.2%，覆盖设备广，收集数据多，模型迭代好。 3-know-how壁垒深_大厂难直接竞争 公司深耕数十载积累的know-how、工业AI人才和能力，构建起极强竞争壁垒，既能持续训练优化TPT大模型，还能助力客户个性化微调快速落地应用。公司与华为（提供算力）合作，提供矿山/油气/化工/钢铁/有色等行业AI方案，基于TPT模型，可将人力投入减少30%-50%，并实现1%-3%的收益提升。 4-在现有DCS客户基础上增加TPT功能_可触达AI市场空间2800亿+ 公司DCS控制系统基础上，增加TPT控制“大脑”功能，提供风险预警、状态监控、智能决策等增量Agent功能，采用订阅制模式，单设备订阅金额100+万元/年。全国有28万套生产设备，若部署TPT大模型，则可直接触达客户潜在工业AI增收市场空间2800+亿/年，公司可从DCS系统已覆盖11万套设备快速推广。 5-公司发激励信心足_28年收入目标200亿（AI收入50亿） 公司TPT产品已在中国石油、中国石化、万华化学、大唐多伦煤化工等企业的百余套装置应用，效果显著。公司近期发布股权激励，2026-2028整体收入105/145/200e，增速~28%/38%/38%；2026-2028的工业AI收入10/25/50e，占比8%/14%/22%，彰显出极强的工业AI推广信心。 6-国家重点鼓励工业AI加速推广 2026年1月30日，工信部联合8部委发布《“人工智能%20制造”专项行动实施意见》，要求到2027年推动3-5个通用大模型在制造业深度应用，推出1000个高水平工业智能体，打造100个工业领域高质量数据集，推广500个典型应用场景，培育2－3家具有全球影响力的生态主导型企业。公司TPT产品完美契合国家要求，快速推广正当其时。 风险提示：AI落地不及预期、行业竞争加剧、宏观经济波动 联系人：郑元昊/孙恺祈/刘高畅",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "market_share",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unverified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until Track AI adoption rate in Wanhua's plants; correlate with cost savings",
+      "grounding_status": "unverified_quote"
+    },
+    {
+      "evidence_id": "KPE07",
+      "segment": "consolidated",
+      "variable": "asp_or_price",
+      "direction": "bearish",
+      "horizon": "short term",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "随着霍尔木兹海峡开放，中东地区石化原料供应链紧张有望缓解，下游化工企业的成本压力和开工压力有望缓和",
+      "verification_gate": "Monitor actual shipping recovery and chemical price movements",
+      "missing_inputs": [
+        "Quantitative cost reduction estimate for Wanhua"
+      ],
+      "known_kpe": {
+        "date": "2026-06-16T20:12",
+        "source": "stream_item:2304",
+        "source_type": "industry_weekly_data",
+        "credibility": "private_data_requires_methodology_check",
+        "decision_role": "KPI/forecast proxy",
+        "evidence": "拳头地缘冲突缓和，石化化工板块... 拳头地缘冲突缓和，石化化工板块有望迎来修复【光大能源化工与新材料团队】 🌟6月15日，美国与伊朗达成和平协议。考虑到：（1）美伊双方对和平协议条款解读存在显著分歧，（2）中东地区油气基础设施受到破坏，（3）原油市场仍面临低库存风险，我们预计26年油价仍有望中高位运行，上游企业有望受益于高油价。“三桶油”自有资源是我国保障自身能源安全的底气所在，地缘政治风险强化全球能源安全诉求，“三桶油”战略价值凸显。 🌟据Rystad Energy估计，中东冲突造成的能源相关基础设施的维修和重建成本可能高达580亿美元，其中石油和天然气设施的维修和重建成本可能高达500亿美元。我们认为国内工程企业凭借成熟的技术体系、完善的服务网络及高性价比优势，有望在海外重建项目中实现突破，提升海外业务比重，驱动业绩持续增长。 🌟地缘冲突期间，甲醇、LPG、聚乙烯、乙二醇、PX、苯乙烯等产品的供应受到霍尔木兹海峡关闭和中东地区石化产能关停的严重影响。随着霍尔木兹海峡开放，中东地区石化原料供应链紧张有望缓解，下游化工企业的成本压力和开工压力有望缓和，龙头企业的原料端压力大幅缓解，开工率与产能有望回升至正常水平，盈利能力将逐步修复，看好龙头企业估值迎来修复。 🌟随着海峡通航与航运逐步恢复，自波斯湾沿岸国家的硫磺进口量有望得到一定修复，国内硫磺供需偏紧格局或边际改善，缓解磷肥企业的原料成本压力，磷酸一铵、磷酸二铵盈利有望随之修复。另一方面，多家磷肥及磷化工企业已陆续启动磷石膏副产硫酸项目建设，有助于相关企业降低对进口硫磺的依赖、平滑硫磺价格波动带来的成本扰动，对板块构成一定利好。 庆祝投资建议：（1）上游板块的中国石油、中国海油、中国石化；油服板块的中海油服、海油工程、海油发展、石化油服、中油工程、博迈科；煤化工板块的华鲁恒升、宝丰能源、鲁西化工、诚志股份、中国旭阳集团。（2）油服工程板块的中石化炼化工程、中油工程、海油工程、石化油服、中国化学。（3）化工龙头白马万华化学、华鲁恒升、扬农化工；大炼化板块的恒力石化、荣盛石化、东方盛虹、恒逸石化、桐昆股份、新凤鸣；轻烃裂解板块的卫星化学；磷化工板块的湖北宜化、兴发集团、川恒股份、云天化、云图控股、川发龙蟒、川金诺、新洋丰、芭田股份等。 礼物风险提示：地缘政治风险，原油价格大幅波动风险，下游需求修复不及预期。 🎉欢迎交流 王礼沫13262750709/赵乃迪18618495784/蔡嘉豪13361654532/周家诺13162921087",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "asp_or_price",
+        "required_outcome": "numeric assumption delta or explicit rejection"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until Monitor actual shipping recovery and chemical price movements",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE08",
+      "segment": "consolidated",
+      "variable": "asp_or_price",
+      "direction": "bullish",
+      "horizon": "medium term (H2 2026)",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "临近传统消费旺季 ... 当前中下游库存处于低位，有望开启新一轮补库周期，化工品价差有望持续修复",
+      "verification_gate": "Track inventory levels and price spreads in key chemicals",
+      "missing_inputs": [
+        "Exposure to specific chemicals mentioned"
+      ],
+      "known_kpe": {
+        "date": "2026-06-15T09:53",
+        "source": "stream_item:2002",
+        "source_type": "industry_weekly_data",
+        "credibility": "private_data_requires_methodology_check",
+        "decision_role": "KPI/forecast proxy",
+        "evidence": "5 月国内出口金额同比、环比双... 5 月国内出口金额同比、环比双增长，伊朗公布伊美谅解备忘录，建议加配化工板块📈 1️⃣本周核心观点 2026 年 5 月中国出口金额同比、环比持续增长，国内 5 月 PMI 维持在荣枯线以上的扩张区间。 根据海关总署数据：2026 年 5 月中国出口总金额 3769 亿美元，同比 + 19.4%，环比 + 4.8%；贸易顺差 1054 亿美元，同比 + 2.63%，环比 + 24.3%。其中，国内服装及衣着附件出口金额 130.17 亿美元，环比 + 14.71%。 据财联社 6 月 12 日报道，伊朗与美国 14 点谅解备忘录草案细节公布，核心内容包括：美国承诺解除对伊制裁、从伊朗周边撤军、解除海上封锁、开放霍尔木兹海峡、取消石油制裁、解冻伊朗被冻结资产等。 6 月以来，布伦特、WTI 原油价格始终维持在 100 美元 / 桶以下，原油价格及交易波动率均较前期显著回落。随着伊美谅解事项持续推进，霍尔木兹海峡通航有望进一步顺畅，油价波动或将持续趋稳。 同时临近传统消费旺季：后续国内中秋国庆双节、双 11，以及海外圣诞节、黑色星期五（黑五）等消费节点临近，当前中下游库存处于低位，有望开启新一轮补库周期，化工品价差有望持续修复，建议加配化工板块。 2️⃣推荐标的 1. 化纤：新凤鸣、桐昆股份；华峰化学、新乡化纤；三友化工 2. 染料：闰土股份、浙江龙盛等 3. 硅产业链：合盛硅业、新安股份等 4. 制冷剂：巨化股份、三美股份、昊华科技等 5. 磷化工：云图控股、川恒股份、兴发集团等 3️⃣本周调研反馈共性总结 1. 严控新增产能背景下，行业控产保价共识增强，反内卷持续性优于以往，企业协同性提升； 2. 当前新增项目审批普遍卡在发改委环节，新增产能落地进度大幅慢于预期； 3. 企业普遍反馈中下游库存处于低位，补库需求待释放。 本周调研上市公司：鲁西化工、万华化学、华鲁恒升、三友化工，具体调研纪要欢迎私信索取，详细交流可联系开源化工团队。",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "asp_or_price",
+        "required_outcome": "numeric assumption delta or explicit rejection"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unverified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until Track inventory levels and price spreads in key chemicals",
+      "grounding_status": "unverified_quote"
+    },
+    {
+      "evidence_id": "KPE09",
+      "segment": "consolidated",
+      "variable": "asp_or_price",
+      "direction": "neutral",
+      "horizon": "short term",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "大多数化工品并没有因为地缘冲突形成持续涨价，反而已经在需求偏弱和下游谨慎采购中提前调整",
+      "verification_gate": "Compare Wanhua price trajectory with industry average",
+      "missing_inputs": [
+        "Wanhua's specific product price data"
+      ],
+      "known_kpe": {
+        "date": "2026-06-15T09:34",
+        "source": "stream_item:2038",
+        "source_type": "industry_weekly_data",
+        "credibility": "identified_broker_private_text",
+        "decision_role": "KPI/forecast proxy",
+        "evidence": "【天风化工｜唐婕团队】海峡扰动... 【天风化工｜唐婕团队】海峡扰动退潮，化工底部反攻 美伊冲突前期带来的影响，阶段性抬高了部分化工品成本，也放大了市场对价格波动的关注。但从我们跟踪数据看，大多数化工品并没有因为地缘冲突形成持续涨价，反而已经在需求偏弱和下游谨慎采购中提前调整，甚至有半数品种已接近或回到冲突前水平，这意味着海峡开放后即使成本回落，也不必然带来产品价格系统性补跌。对于多数已充分回调的品种，成本下降可能先体现为利润改善。 美伊冲突对国内化工行业并不是对原有逻辑的破坏，而是一次阶段性扰动，并在扰动退潮后反而加速市场重新回到化工本轮周期最核心的主线：十四五产能释放后的供给再平衡，盈利自底部修复。（短期体现为地缘成本扰动退潮、部分品种进入刚性补库临界点；中期体现为供给端压力边际减轻、反内卷及碳达峰等相关政策可能改善竞争秩序）。 我们建议先围绕三条主线进行布局：一是【超跌龙头】，在供给再平衡和竞争秩序改善中率先体现盈利修复和估值回补（万华化学、新和成、华鲁恒升、扬农化工 ）；二是【化纤】，涤纶长丝、氨纶均具备供给优化、库存低位、成本回落后价差扩张的逻辑（桐昆股份、新凤鸣、华峰化学、新乡化纤）； 三是炼化，海峡开放预期下油价极端上行风险下降，但若维持在80-90美元/桶的友好区间，成本改善和化工品价格支撑并存（荣盛石化、恒力石化）。 天风化工团队：唐婕 18621669062",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "asp_or_price",
+        "required_outcome": "numeric assumption delta or explicit rejection"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until Compare Wanhua price trajectory with industry average",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE10",
+      "segment": "consolidated",
+      "variable": "asp_or_price",
+      "direction": "bullish",
+      "horizon": "medium term",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "碳排放管控下的反内卷有望重估中国化工行业，有望使全球以及中国化工行业产能扩张大幅放缓",
+      "verification_gate": "Evolve regulation; monitor Wanhua's capex and free cash flow",
+      "missing_inputs": [
+        "Sector-specific impact on Wanhua's segments"
+      ],
+      "known_kpe": {
+        "date": "2026-06-15T09:32",
+        "source": "stream_item:2048",
+        "source_type": "industry_weekly_data",
+        "credibility": "private_data_requires_methodology_check",
+        "decision_role": "KPI/forecast proxy",
+        "evidence": "【国海化工】周观点：甲醇、烧碱... 【国海化工】周观点：甲醇、烧碱价格上涨，看好全球化工反内卷大周期+AI需求大周期 2026年6月11日，国海化工景气指数为110.88，较2026年6月4日下降0.81。 据新华社，4月中共中央办公厅、国务院办公厅印发《碳达峰碳中和综合评价考核办法》，我国正式进入双碳考核。控制指标涵盖碳排放总量与强度、煤炭及石油消费、非化石能源占比等。“十五五”将确保2030年碳排放强度较2005年下降65%以上，非化石能源占比达25%，推动煤炭、石油消费达峰。 从全球范围看，中国化工优势企业的成本和效率优势已经非常稳固，龙头企业已经进入了业绩长周期向上的阶段。同时，对于部分供给端受限的行业，随着需求的回升，这部分行业的景气度有望持续提升，值得重点关注。碳排放管控下的反内卷有望重估中国化工行业，有望使全球以及中国化工行业产能扩张大幅放缓，并对部分高碳排放行业实现管控。中国化工行业原本具有充沛的经营活动现金流量净额，一旦扩张放缓，有望大幅提升企业自由现金流，带动企业潜在股息率大幅提升，化工企业有望实现从吞金兽到摇钱树的转变；同时，供给端的改变将带来景气度的止跌回升，化工标的有望兼具高弹性和高股息的优势。 因此，我们认为，化工进入击球区，看好全球供给反内卷大周期，看好全球AI需求大周期，在化工旺季到来之际，需求的向上将成为重点的边际变量，提升化工企业的盈利能力。此时，应重点关注需求、价值、供给三管齐下的投资机会： 2月28日，美国和以色列对伊朗发动了袭击，导致中东地区冲突急剧升级。 1）中东局势升级显著抬升地缘溢价，油价有望上行，利好中国石油、中国海油、中国石化；另一方面，油头聚烯烃成本有望抬升，油煤/油气价差有望扩大，煤制烯烃与轻烃裂解的相对成本优势增强，盈利有望扩大，关注：宝丰能源，卫星化学等。 2）据金联创，伊朗是全球甲醇核心生产国，产能约1716万吨/年，占全球总产能的10%，是全球第二大生产国，约90%用于出口。中国是伊朗最大的进口国，据海关数据，2025年，我国进口甲醇约1440.54万吨，其中，自伊朗甲醇占我国进口甲醇总量的50%。若伊朗甲醇出现断供，全球甲醇将出现较大供应缺口，价格有望大幅上行，关注：宝丰能源（甲醇产能1332万吨/年）、华鲁恒升（甲醇产能250万吨/年）、华谊集团（甲醇产能100万吨/年）、鲁西化工（甲醇产能95万吨/年）等。 据金联创，伊朗尿素产能大约1300万吨，占全球尿素产能的5.42%，年度出口量约900-1000万吨，是全球第二大尿素出口国。若伊朗尿素出现断供，全球尿素将出现较大供应缺口，价格有望上行。关注：华鲁恒升（尿素产能307万吨/年）、云天化（尿素产能260万吨/年）、湖北宜化（尿素产能216万吨/年）、博源化工（尿素在产产能154万吨/年）等。 3）伊朗及中东地区是全球MDI/TD...",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "asp_or_price",
+        "required_outcome": "numeric assumption delta or explicit rejection"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until Evolve regulation; monitor Wanhua's capex and free cash flow",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE11",
+      "segment": "consolidated",
+      "variable": "valuation",
+      "direction": "bullish",
+      "horizon": "current",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "化工龙头，受海霞及油价影响，二季度需求普遍承压，但估值及股价位置处于历史偏低位置，后续有修复空间",
+      "verification_gate": "Confirm demand recovery in Q3 2026",
+      "missing_inputs": [
+        "Exact valuation percentile used by analyst"
+      ],
+      "known_kpe": {
+        "date": "2026-06-30T08:49",
+        "source": "stream_item:7018",
+        "source_type": "sell_side_push",
+        "credibility": "promotional_private_unverified",
+        "decision_role": "narrative challenge",
+        "evidence": "【华安化工】化工板块观点更新及... 【华安化工】化工板块观点更新及重点推荐方向 化工板块整体仍呈现超跌状态，整体龙头公司跌幅普遍在25%~40%之间，叠加海峡冲突逐步趋缓，市场扰动减弱，近期中报催化密集。化工短期业绩确定性强，中期补库趋势明显，长期格局改善及国产替代方向仍有空间。 重点推荐三大方向： 1️⃣AI材料相关主线 氟磷硅等材料受益于AI拉动，半导体化学品、磷化铟等带动需求空间大幅提升。 氟-【巨化股份】【新宙邦】 磷-【兴发集团】【宿迁联盛】 硅-【宏柏新材】【合盛硅业】 2️⃣中报业绩线 二季度库存收益有望爆发，三季度仍有补库预期。重点关注长丝、轻烃、煤化工。关注【新凤鸣】【卫星化学】【宝丰能源】【新和成】 3️⃣超跌化工龙头 化工龙头，受海霞及油价影响，二季度需求普遍承压，但估值及股价位置处于历史偏低位置，后续有修复空间。重点关注【万华化学】【龙佰集团】【华鲁恒升】【华峰化学】等 近期更新联系华安化工王强峰团队或对口销售。",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "valuation",
+        "required_outcome": "model conflict result and accepted/rejected reason"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until Confirm demand recovery in Q3 2026",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE12",
+      "segment": "consolidated",
+      "variable": "segment_volume",
+      "direction": "bullish",
+      "horizon": "H2 2026",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "金三银四期间下游产业链补库弱的聚酯产业链（长丝、PTA、PX、聚酯瓶片）有望开启补库周期",
+      "verification_gate": "Monitor polyester chain operating rates and inventory levels",
+      "missing_inputs": [
+        "Wanhua's exposure to these specific chains"
+      ],
+      "known_kpe": {
+        "date": "2026-06-22T09:53",
+        "source": "stream_item:3971",
+        "source_type": "sell_side_push",
+        "credibility": "promotional_private_unverified",
+        "decision_role": "narrative challenge",
+        "evidence": "【化工】周观点&短期策略 美... 【化工】周观点&短期策略 美伊瑞士谈判，消息层面霍尔木兹海峡封锁、通航切换。美伊高层已抵达瑞士谈判，强化协议达成预期，宏观风险缓解。科威特拟快速提高原油产量至200万桶/日（海峡封锁前日产量约为250万桶），油价承压，但考虑到即将到来的北半球夏季出行旺季，油价亦有支撑。本周美联储议息维持利率不变，但偏鹰预期造成短期扰动，情绪消化后，商品有望回归正常淡旺季供需。 短中期 需求修复、供应扰动双重加持，化工基本面可期。原油作为成本端，在海湾部分油气设施被袭/胀库被迫关停后，生产瞬时恢复能力弱，我们仍然倾向于海峡解封预期下快速一次性计价、且跌幅有限。需求端，金三银四期间下游产业链补库弱的聚酯产业链（长丝、PTA、PX、聚酯瓶片）有望开启补库周期。供给端，美伊冲突造成海湾国家部分装置实质性受损，重点关注停产力度较大的LNG、乙二醇、甲醇、聚烯烃等。重点关注：桐昆股份、新凤鸣、恒力石化、荣盛石化、万凯新材、宝丰能源、卫星化学、江苏索普、华谊集团等。 库存端，PX、PTA库存底部区域，汽油夏季出行旺季对混芳需求叠加化纤产业链补库，PX、PTA弹性可期。长丝产业链的补库需求有望带动原本库存偏低的染料行业，重点关注：浙江龙盛、闰土股份。 中长期 回归宏观叙事，低估值化工龙头进入配置区间。海峡解封预期下，宏观或将企稳，部分化工品供需格局好转预期，氨纶、涤纶长丝、粘胶短纤、MDI新增产能减少/行业集中度进一步提升，更强宏观预期下，PVC亦值得关注。重点关注华鲁恒升、万华化学、华峰化学、博源化工、新乡化纤、三友化工、中泰化学等。此外，若海峡顺利解封，硫磺供应修复预期，磷酸/磷肥、硫酸法钛白粉成本压制解除，重点关注云天化、云图控股、兴发集团、川金诺、龙佰集团等。原料回落预期下的轮胎盈利有望修复，重点推荐赛轮轮胎等。 自下而上：中化国际：拟收购南通星辰，聚苯醚有望持续放量；滨海能源：国内6月锂电排产268GWh，环比+7.6%，连续第四个月刷新历史峰值，关注需求端增长带来的负极边际变化，公司现有石墨化10.8万吨、成品8万吨产能，年底前建成20万吨一体化产能；亨通股份：由原本的蒸汽电力业务、切换至当前以电解铜箔为收入端最大业务，锂电排产的增长有望带动其新业务的快速发展。 风险提示：美伊冲突进一步升级的风险；终端需求不及预期的风险；原料价格大幅波动的风险；长久期宏观叙事证伪风险。",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "segment_volume",
+        "required_outcome": "model conflict result and accepted/rejected reason"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until Monitor polyester chain operating rates and inventory levels",
+      "grounding_status": "grounded_quote"
+    }
+  ],
+  "known_kpe_ledger": {
+    "KPE01": {
+      "date": "2026-07-07T09:41",
+      "source": "stream_item:11525",
+      "source_type": "industry_weekly_data",
+      "credibility": "private_data_requires_methodology_check",
+      "decision_role": "KPI/forecast proxy",
+      "evidence": "【国海化工】万华化学：Q2业绩... 【国海化工】万华化学：Q2业绩超预期，看好聚氨酯出口旺盛及石化降本增效 [烟花]26Q2预计61-67亿元，超市场预期 1）7月6日，公司发布业绩预告，预计26H1归母净利润98-104亿元，yoy+60%~70%；26Q2预计61-67亿元，yoy+90%~108%。 2）业绩超市场预期：海外聚氨酯供需格局变化，价格上涨；乙烯一期原材料改造降本显著。 [烟花]聚氨酯：海外能源成本高企，聚氨酯出口有望超预期 1）欧洲+日韩+中东的MDI产能占比27%。原本欧洲MDI、TDI产能不可抗力频发，中东冲突进一步加剧欧洲、日韩成本上行，海外聚氨酯供应偏紧，中国聚氨酯出口具备显著竞争优势。 2）据Wind，5月聚合MDI出口量10.08万吨，yoy+49%（累计出口39.62万吨，yoy+16%）；5月TDI出口量4.62万吨，yoy-10%（累计出口27.55万吨，yoy+27%）。 3）截至6月30日，Q2聚合MDI价格1.79w/吨，纯MDI价格2.26w/吨，MDI价差1.31w/吨，环比扩大2100元/吨；TDI价格1.68w/吨，价差1.25w/吨，环比扩大706元/吨。 [烟花]石化：乙烯一期原材料改造完成带来成本优化 乙烯一期120万吨多元化改造26年初已投产，Q2受益于乙烷裂解制乙烯价差扩大，截至6月10日，26Q2乙烯-乙烷价差为1003美元/吨，环比提升362美元/吨。 [烟花]新材料：研发创新驱动成长，新材料盈利持续修复 近3年，公司每年研发费用在40-50亿，高额研发支出驱动成长。已有新材料产品PC等产品盈利改善；电池材料如磷酸铁锂产能持续扩张、盈利改善。 [玫瑰]盈利预测：预计26/27/28年，归母净利润分别为187/205/229亿元，对应PE分别为12/11/10，维持“买入”评级。 ⚡风险提示：项目建设不及预期；市场大幅度波动；新产品不及预期；同行业竞争加剧等 🤝【国海化工团队】 董伯骏/杨丽蓉/李娟廷/仲逸涵/李振方/于畅/王鹏/王雨寒",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "asp_or_price",
+      "required_outcome": "numeric assumption delta or explicit rejection"
+    },
+    "KPE02": {
+      "date": "2026-07-07T08:15",
+      "source": "stream_item:11641",
+      "source_type": "channel_check",
+      "credibility": "high_private_channel_hard_to_verify",
+      "decision_role": "probability/verification proxy",
+      "evidence": "化工观点更新20260706 ... 化工观点更新20260706 上半年化工利润高增，头部企业业绩大增。统计局数据显示，1-5月，在涨价带动下规模以上化工行业利润同比增长71.6%。基础化工头部企业集中发布半年报业绩预增：东岳硅材（+905%~+952%）、盐湖股份（+131%~+143%）、华峰化学（+71%~+112%）、东方铁塔（+82%~+106%），新凤鸣（+95%~+112%），覆盖有机硅、氨纶、钾肥、涤纶长丝等传统化工领域，龙头企业呈现强者更强的态势。 龙头企业估值处于低位。目前龙头万华化学和华鲁恒升的PE约为12倍，PB仅有2.1倍和1.6倍，PB位于2020年以来10%和13%的分位数（按照7月6日收盘价测算）。而部分周期成长股（例如赛轮、瑞丰等PE回归12倍），配置价值凸显，化工整体进入配置区间。 中长期供给端强基本面支撑。中期看，国内双碳政策持续推进，海外因中东战争造成欧洲、日韩化工企业成本高企或加速海外产能退出。 投资建议： 1、细分龙头白马： 华鲁恒升、万华化学、卫星化学、宝丰能源、新和成、鲁西化工等。 2、需求刚性行业： 钾肥 盐湖股份、东方铁塔、亚钾国际；草铵膦 订单超预期，3月涨价恰逢中美旺季，7月南美采购旺季到来，扬农化工、润丰股份、利尔化学。蛋氨酸，价格持续高企，核心公司估值仅11倍，新和成、安迪苏。 3、库存低位， 需求修复的弹性品种。涤纶、氨纶、锦纶、染料等，企业+经销商的库存均处于底部，待需求反弹+下游开工回升提振价格，桐昆股份、新凤鸣、华峰化学、新乡化纤、浙江龙盛、闰土股份等。 4、股价调整到位的周期成长股。民爆龙头广东宏大和润滑油添加剂瑞丰新材。 风险提示：原油价格波动、下游需求不及预期、双碳收紧企业停产风险",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "asp_or_price",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE03": {
+      "date": "2026-07-06T08:42",
+      "source": "stream_item:9264",
+      "source_type": "industry_weekly_data",
+      "credibility": "private_data_requires_methodology_check",
+      "decision_role": "KPI/forecast proxy",
+      "evidence": "[烟花]石化行业观点 1️⃣本... [烟花]石化行业观点 1️⃣本周国际油价延续此前震荡下行的走势，截至7月3日，布伦特原油报收71.94美元、WTI报收68.78美元；近一周海峡通行量恢复至战前的60%左右，但实际恢复更多来自前期积压船货释放，而非中东供给体系已完全正常化；此外海湾国家在海峡解封后，因想抓住60天时间窗口+封闭期间财政收入大幅减少，疯狂出货，导致国际原油供应短期爆发式增长。后市来看，美伊谈判反复，海峡仍未自由通行，油价下行空间有限，预计未来一段时间内国际油价仍将延续震荡。 2️⃣国内炼厂开工继续处于低位，山东地炼最新开工率仅46.92%，创2020年以来的新低，7-8月主流炼厂也多有检修计划。成品油价格三连降，柴油价格进入“6元时代”；PX/PTA/长丝/短纤/瓶片开工分别为73.0%/60.7%/73.5%/75.3%/70.5%，下游聚酯产业链面临从“供需双弱”主动去库转变为“供需同升”主动累库的时间节点；聚酯下游需求被严重压缩后存在较高的复苏预期，其需求弹性明显高于供应弹性。进入三季度，传统需求旺季即将到来，建议持续关注下游采购和补库情况。长期来看，石化核心资产的稀缺性将持续强化；海外传统炼厂集中区（欧美和日韩）炼能呈不断收缩趋势，国内炼化产业在国际上的竞争优势不断增强。建议关注恒力石化、荣盛石化、桐昆股份、新凤鸣、卫星化学、万华化学、万凯新材、恒逸石化、东方盛虹等。",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "segment_volume",
+      "required_outcome": "numeric assumption delta or explicit rejection"
+    },
+    "KPE04": {
+      "date": "2026-07-01T12:42",
+      "source": "stream_item:7230",
+      "source_type": "company_research_feedback",
+      "credibility": "promotional_private_unverified",
+      "decision_role": "probability/verification proxy",
+      "evidence": "【科思创宣布新建MDI产能对市... 【科思创宣布新建MDI产能对市场影响有限，持续看好万华化学】中邮化工刘海荣团队 [礼物]6月30日，科思创宣布关于MDI的投资计划，计划在科思创上海一体化基地筹备新建一套年产能66万吨的MDI生产装置，目标于2030年前后建成投产。同时，科思创正就在阿联酋新建同等规模装置开展可行性研究。 [礼物]我们判断此次事件对万华化学影响有限：（1）项目预期投产时间较晚，不会对中短期MDI市场格局产生影响；（2）国内十五五期间对MDI项目审批收紧，项目报批仍存在较大不确定性；（3）万华化学MDI在2030年总产能预期超过480万吨，规模仍稳居全球首位，（4）万华化学成本和效率优势保持领先，保持海外对手3000+元/吨成本优势。 [礼物]我们持续看好万华化学，2026年预期盈利超过200亿元，现价仅10倍PE。 欢迎联系中邮化工团队交流：费晨洪/刘海荣",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "utilization_or_backlog",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE05": {
+      "date": "2026-07-01T08:08",
+      "source": "stream_item:7540",
+      "source_type": "industry_weekly_data",
+      "credibility": "identified_broker_private_text",
+      "decision_role": "KPI/forecast proxy",
+      "evidence": "【国泰海通基础化工】聚氨酯行业... annotation: 【国泰海通基础化工】聚氨酯行业：科思创宣布扩产规划 根据中国化工报，6月30日，德国化工企业科思创宣布一项MDI(二苯基甲烷二异氰酸酯)战略投资计划。该计划包括在科思创上海一体化基地筹备新建一套年产能66万吨的MDI生产装置，目标于2030年前后建成投产。同时，科思创正就在阿联酋新建同等规模装置开展可行性研究。科思创计划扩建上海一体化基地，新建一套MDI生产装置。除MDI主装置外，本次投资还涵盖上游工厂及配套基础设施，通过在厂区内生产关键中间体，构建一体化生产布局。 我们从事化工行业研究19年，多次成功把握了行业的机会和风险。近期工作： 《万华化学近期交流》 《》 《》 《万华化学深度&底部利润分析》 《万华化学盈利拆分&MDI历史盈利回顾》 《乙烷制乙烯盈利拆分》 《》 行业数据库 行业数据库 电池材料&磷酸铁锂梳理",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "utilization_or_backlog",
+      "required_outcome": "numeric assumption delta or explicit rejection"
+    },
+    "KPE06": {
+      "date": "2026-06-18T15:51",
+      "source": "stream_item:1028",
+      "source_type": "channel_check",
+      "credibility": "promotional_private_unverified",
+      "decision_role": "probability/verification proxy",
+      "evidence": "【国金计算机&科技】中控技术：... 【国金计算机&科技】中控技术：物理 AI 首推标的，数据构筑“工业+AI”最强壁垒 工业垂类大模型大规模推广、千亿下游空间、数据和Know-how壁垒极高、股权激励加持 1-1Q2026AI收入1.84亿元，2Q有望进一步环比加速 公司公告披露1Q2026 工业AI业务规模放量，实现1.84亿收入，超预期；一季度往往为行业淡季，且考虑到分摊至季度确认的收入，实际订单口径更大，Q2有望进一步环比加速，全年有望完成股权激励AI收入目标10亿元。 2-核心价值在数据 公司手上关于石油化工等行业的时序经营数据极其稀缺，这类数据均为真实运营数据且自带时间戳，数据质量高，是训练TPT时间序列大模型（工业领域的DeepSeek，工业AI大脑）的基础。中控在化工、石化领域DCS（控制系统，侧重数据和操控归集）市占率达 63.2%、56.2%，覆盖设备广，收集数据多，模型迭代好。 3-know-how壁垒深_大厂难直接竞争 公司深耕数十载积累的know-how、工业AI人才和能力，构建起极强竞争壁垒，既能持续训练优化TPT大模型，还能助力客户个性化微调快速落地应用。公司与华为（提供算力）合作，提供矿山/油气/化工/钢铁/有色等行业AI方案，基于TPT模型，可将人力投入减少30%-50%，并实现1%-3%的收益提升。 4-在现有DCS客户基础上增加TPT功能_可触达AI市场空间2800亿+ 公司DCS控制系统基础上，增加TPT控制“大脑”功能，提供风险预警、状态监控、智能决策等增量Agent功能，采用订阅制模式，单设备订阅金额100+万元/年。全国有28万套生产设备，若部署TPT大模型，则可直接触达客户潜在工业AI增收市场空间2800+亿/年，公司可从DCS系统已覆盖11万套设备快速推广。 5-公司发激励信心足_28年收入目标200亿（AI收入50亿） 公司TPT产品已在中国石油、中国石化、万华化学、大唐多伦煤化工等企业的百余套装置应用，效果显著。公司近期发布股权激励，2026-2028整体收入105/145/200e，增速~28%/38%/38%；2026-2028的工业AI收入10/25/50e，占比8%/14%/22%，彰显出极强的工业AI推广信心。 6-国家重点鼓励工业AI加速推广 2026年1月30日，工信部联合8部委发布《“人工智能%20制造”专项行动实施意见》，要求到2027年推动3-5个通用大模型在制造业深度应用，推出1000个高水平工业智能体，打造100个工业领域高质量数据集，推广500个典型应用场景，培育2－3家具有全球影响力的生态主导型企业。公司TPT产品完美契合国家要求，快速推广正当其时。 风险提示：AI落地不及预期、行业竞争加剧、宏观经济波动 联系人：郑元昊/孙恺祈/刘高畅",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "market_share",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE07": {
+      "date": "2026-06-16T20:12",
+      "source": "stream_item:2304",
+      "source_type": "industry_weekly_data",
+      "credibility": "private_data_requires_methodology_check",
+      "decision_role": "KPI/forecast proxy",
+      "evidence": "拳头地缘冲突缓和，石化化工板块... 拳头地缘冲突缓和，石化化工板块有望迎来修复【光大能源化工与新材料团队】 🌟6月15日，美国与伊朗达成和平协议。考虑到：（1）美伊双方对和平协议条款解读存在显著分歧，（2）中东地区油气基础设施受到破坏，（3）原油市场仍面临低库存风险，我们预计26年油价仍有望中高位运行，上游企业有望受益于高油价。“三桶油”自有资源是我国保障自身能源安全的底气所在，地缘政治风险强化全球能源安全诉求，“三桶油”战略价值凸显。 🌟据Rystad Energy估计，中东冲突造成的能源相关基础设施的维修和重建成本可能高达580亿美元，其中石油和天然气设施的维修和重建成本可能高达500亿美元。我们认为国内工程企业凭借成熟的技术体系、完善的服务网络及高性价比优势，有望在海外重建项目中实现突破，提升海外业务比重，驱动业绩持续增长。 🌟地缘冲突期间，甲醇、LPG、聚乙烯、乙二醇、PX、苯乙烯等产品的供应受到霍尔木兹海峡关闭和中东地区石化产能关停的严重影响。随着霍尔木兹海峡开放，中东地区石化原料供应链紧张有望缓解，下游化工企业的成本压力和开工压力有望缓和，龙头企业的原料端压力大幅缓解，开工率与产能有望回升至正常水平，盈利能力将逐步修复，看好龙头企业估值迎来修复。 🌟随着海峡通航与航运逐步恢复，自波斯湾沿岸国家的硫磺进口量有望得到一定修复，国内硫磺供需偏紧格局或边际改善，缓解磷肥企业的原料成本压力，磷酸一铵、磷酸二铵盈利有望随之修复。另一方面，多家磷肥及磷化工企业已陆续启动磷石膏副产硫酸项目建设，有助于相关企业降低对进口硫磺的依赖、平滑硫磺价格波动带来的成本扰动，对板块构成一定利好。 庆祝投资建议：（1）上游板块的中国石油、中国海油、中国石化；油服板块的中海油服、海油工程、海油发展、石化油服、中油工程、博迈科；煤化工板块的华鲁恒升、宝丰能源、鲁西化工、诚志股份、中国旭阳集团。（2）油服工程板块的中石化炼化工程、中油工程、海油工程、石化油服、中国化学。（3）化工龙头白马万华化学、华鲁恒升、扬农化工；大炼化板块的恒力石化、荣盛石化、东方盛虹、恒逸石化、桐昆股份、新凤鸣；轻烃裂解板块的卫星化学；磷化工板块的湖北宜化、兴发集团、川恒股份、云天化、云图控股、川发龙蟒、川金诺、新洋丰、芭田股份等。 礼物风险提示：地缘政治风险，原油价格大幅波动风险，下游需求修复不及预期。 🎉欢迎交流 王礼沫13262750709/赵乃迪18618495784/蔡嘉豪13361654532/周家诺13162921087",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "asp_or_price",
+      "required_outcome": "numeric assumption delta or explicit rejection"
+    },
+    "KPE08": {
+      "date": "2026-06-15T09:53",
+      "source": "stream_item:2002",
+      "source_type": "industry_weekly_data",
+      "credibility": "private_data_requires_methodology_check",
+      "decision_role": "KPI/forecast proxy",
+      "evidence": "5 月国内出口金额同比、环比双... 5 月国内出口金额同比、环比双增长，伊朗公布伊美谅解备忘录，建议加配化工板块📈 1️⃣本周核心观点 2026 年 5 月中国出口金额同比、环比持续增长，国内 5 月 PMI 维持在荣枯线以上的扩张区间。 根据海关总署数据：2026 年 5 月中国出口总金额 3769 亿美元，同比 + 19.4%，环比 + 4.8%；贸易顺差 1054 亿美元，同比 + 2.63%，环比 + 24.3%。其中，国内服装及衣着附件出口金额 130.17 亿美元，环比 + 14.71%。 据财联社 6 月 12 日报道，伊朗与美国 14 点谅解备忘录草案细节公布，核心内容包括：美国承诺解除对伊制裁、从伊朗周边撤军、解除海上封锁、开放霍尔木兹海峡、取消石油制裁、解冻伊朗被冻结资产等。 6 月以来，布伦特、WTI 原油价格始终维持在 100 美元 / 桶以下，原油价格及交易波动率均较前期显著回落。随着伊美谅解事项持续推进，霍尔木兹海峡通航有望进一步顺畅，油价波动或将持续趋稳。 同时临近传统消费旺季：后续国内中秋国庆双节、双 11，以及海外圣诞节、黑色星期五（黑五）等消费节点临近，当前中下游库存处于低位，有望开启新一轮补库周期，化工品价差有望持续修复，建议加配化工板块。 2️⃣推荐标的 1. 化纤：新凤鸣、桐昆股份；华峰化学、新乡化纤；三友化工 2. 染料：闰土股份、浙江龙盛等 3. 硅产业链：合盛硅业、新安股份等 4. 制冷剂：巨化股份、三美股份、昊华科技等 5. 磷化工：云图控股、川恒股份、兴发集团等 3️⃣本周调研反馈共性总结 1. 严控新增产能背景下，行业控产保价共识增强，反内卷持续性优于以往，企业协同性提升； 2. 当前新增项目审批普遍卡在发改委环节，新增产能落地进度大幅慢于预期； 3. 企业普遍反馈中下游库存处于低位，补库需求待释放。 本周调研上市公司：鲁西化工、万华化学、华鲁恒升、三友化工，具体调研纪要欢迎私信索取，详细交流可联系开源化工团队。",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "asp_or_price",
+      "required_outcome": "numeric assumption delta or explicit rejection"
+    },
+    "KPE09": {
+      "date": "2026-06-15T09:34",
+      "source": "stream_item:2038",
+      "source_type": "industry_weekly_data",
+      "credibility": "identified_broker_private_text",
+      "decision_role": "KPI/forecast proxy",
+      "evidence": "【天风化工｜唐婕团队】海峡扰动... 【天风化工｜唐婕团队】海峡扰动退潮，化工底部反攻 美伊冲突前期带来的影响，阶段性抬高了部分化工品成本，也放大了市场对价格波动的关注。但从我们跟踪数据看，大多数化工品并没有因为地缘冲突形成持续涨价，反而已经在需求偏弱和下游谨慎采购中提前调整，甚至有半数品种已接近或回到冲突前水平，这意味着海峡开放后即使成本回落，也不必然带来产品价格系统性补跌。对于多数已充分回调的品种，成本下降可能先体现为利润改善。 美伊冲突对国内化工行业并不是对原有逻辑的破坏，而是一次阶段性扰动，并在扰动退潮后反而加速市场重新回到化工本轮周期最核心的主线：十四五产能释放后的供给再平衡，盈利自底部修复。（短期体现为地缘成本扰动退潮、部分品种进入刚性补库临界点；中期体现为供给端压力边际减轻、反内卷及碳达峰等相关政策可能改善竞争秩序）。 我们建议先围绕三条主线进行布局：一是【超跌龙头】，在供给再平衡和竞争秩序改善中率先体现盈利修复和估值回补（万华化学、新和成、华鲁恒升、扬农化工 ）；二是【化纤】，涤纶长丝、氨纶均具备供给优化、库存低位、成本回落后价差扩张的逻辑（桐昆股份、新凤鸣、华峰化学、新乡化纤）； 三是炼化，海峡开放预期下油价极端上行风险下降，但若维持在80-90美元/桶的友好区间，成本改善和化工品价格支撑并存（荣盛石化、恒力石化）。 天风化工团队：唐婕 18621669062",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "asp_or_price",
+      "required_outcome": "numeric assumption delta or explicit rejection"
+    },
+    "KPE10": {
+      "date": "2026-06-15T09:32",
+      "source": "stream_item:2048",
+      "source_type": "industry_weekly_data",
+      "credibility": "private_data_requires_methodology_check",
+      "decision_role": "KPI/forecast proxy",
+      "evidence": "【国海化工】周观点：甲醇、烧碱... 【国海化工】周观点：甲醇、烧碱价格上涨，看好全球化工反内卷大周期+AI需求大周期 2026年6月11日，国海化工景气指数为110.88，较2026年6月4日下降0.81。 据新华社，4月中共中央办公厅、国务院办公厅印发《碳达峰碳中和综合评价考核办法》，我国正式进入双碳考核。控制指标涵盖碳排放总量与强度、煤炭及石油消费、非化石能源占比等。“十五五”将确保2030年碳排放强度较2005年下降65%以上，非化石能源占比达25%，推动煤炭、石油消费达峰。 从全球范围看，中国化工优势企业的成本和效率优势已经非常稳固，龙头企业已经进入了业绩长周期向上的阶段。同时，对于部分供给端受限的行业，随着需求的回升，这部分行业的景气度有望持续提升，值得重点关注。碳排放管控下的反内卷有望重估中国化工行业，有望使全球以及中国化工行业产能扩张大幅放缓，并对部分高碳排放行业实现管控。中国化工行业原本具有充沛的经营活动现金流量净额，一旦扩张放缓，有望大幅提升企业自由现金流，带动企业潜在股息率大幅提升，化工企业有望实现从吞金兽到摇钱树的转变；同时，供给端的改变将带来景气度的止跌回升，化工标的有望兼具高弹性和高股息的优势。 因此，我们认为，化工进入击球区，看好全球供给反内卷大周期，看好全球AI需求大周期，在化工旺季到来之际，需求的向上将成为重点的边际变量，提升化工企业的盈利能力。此时，应重点关注需求、价值、供给三管齐下的投资机会： 2月28日，美国和以色列对伊朗发动了袭击，导致中东地区冲突急剧升级。 1）中东局势升级显著抬升地缘溢价，油价有望上行，利好中国石油、中国海油、中国石化；另一方面，油头聚烯烃成本有望抬升，油煤/油气价差有望扩大，煤制烯烃与轻烃裂解的相对成本优势增强，盈利有望扩大，关注：宝丰能源，卫星化学等。 2）据金联创，伊朗是全球甲醇核心生产国，产能约1716万吨/年，占全球总产能的10%，是全球第二大生产国，约90%用于出口。中国是伊朗最大的进口国，据海关数据，2025年，我国进口甲醇约1440.54万吨，其中，自伊朗甲醇占我国进口甲醇总量的50%。若伊朗甲醇出现断供，全球甲醇将出现较大供应缺口，价格有望大幅上行，关注：宝丰能源（甲醇产能1332万吨/年）、华鲁恒升（甲醇产能250万吨/年）、华谊集团（甲醇产能100万吨/年）、鲁西化工（甲醇产能95万吨/年）等。 据金联创，伊朗尿素产能大约1300万吨，占全球尿素产能的5.42%，年度出口量约900-1000万吨，是全球第二大尿素出口国。若伊朗尿素出现断供，全球尿素将出现较大供应缺口，价格有望上行。关注：华鲁恒升（尿素产能307万吨/年）、云天化（尿素产能260万吨/年）、湖北宜化（尿素产能216万吨/年）、博源化工（尿素在产产能154万吨/年）等。 3）伊朗及中东地区是全球MDI/TD...",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "asp_or_price",
+      "required_outcome": "numeric assumption delta or explicit rejection"
+    },
+    "KPE11": {
+      "date": "2026-06-30T08:49",
+      "source": "stream_item:7018",
+      "source_type": "sell_side_push",
+      "credibility": "promotional_private_unverified",
+      "decision_role": "narrative challenge",
+      "evidence": "【华安化工】化工板块观点更新及... 【华安化工】化工板块观点更新及重点推荐方向 化工板块整体仍呈现超跌状态，整体龙头公司跌幅普遍在25%~40%之间，叠加海峡冲突逐步趋缓，市场扰动减弱，近期中报催化密集。化工短期业绩确定性强，中期补库趋势明显，长期格局改善及国产替代方向仍有空间。 重点推荐三大方向： 1️⃣AI材料相关主线 氟磷硅等材料受益于AI拉动，半导体化学品、磷化铟等带动需求空间大幅提升。 氟-【巨化股份】【新宙邦】 磷-【兴发集团】【宿迁联盛】 硅-【宏柏新材】【合盛硅业】 2️⃣中报业绩线 二季度库存收益有望爆发，三季度仍有补库预期。重点关注长丝、轻烃、煤化工。关注【新凤鸣】【卫星化学】【宝丰能源】【新和成】 3️⃣超跌化工龙头 化工龙头，受海霞及油价影响，二季度需求普遍承压，但估值及股价位置处于历史偏低位置，后续有修复空间。重点关注【万华化学】【龙佰集团】【华鲁恒升】【华峰化学】等 近期更新联系华安化工王强峰团队或对口销售。",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "valuation",
+      "required_outcome": "model conflict result and accepted/rejected reason"
+    },
+    "KPE12": {
+      "date": "2026-06-22T09:53",
+      "source": "stream_item:3971",
+      "source_type": "sell_side_push",
+      "credibility": "promotional_private_unverified",
+      "decision_role": "narrative challenge",
+      "evidence": "【化工】周观点&短期策略 美... 【化工】周观点&短期策略 美伊瑞士谈判，消息层面霍尔木兹海峡封锁、通航切换。美伊高层已抵达瑞士谈判，强化协议达成预期，宏观风险缓解。科威特拟快速提高原油产量至200万桶/日（海峡封锁前日产量约为250万桶），油价承压，但考虑到即将到来的北半球夏季出行旺季，油价亦有支撑。本周美联储议息维持利率不变，但偏鹰预期造成短期扰动，情绪消化后，商品有望回归正常淡旺季供需。 短中期 需求修复、供应扰动双重加持，化工基本面可期。原油作为成本端，在海湾部分油气设施被袭/胀库被迫关停后，生产瞬时恢复能力弱，我们仍然倾向于海峡解封预期下快速一次性计价、且跌幅有限。需求端，金三银四期间下游产业链补库弱的聚酯产业链（长丝、PTA、PX、聚酯瓶片）有望开启补库周期。供给端，美伊冲突造成海湾国家部分装置实质性受损，重点关注停产力度较大的LNG、乙二醇、甲醇、聚烯烃等。重点关注：桐昆股份、新凤鸣、恒力石化、荣盛石化、万凯新材、宝丰能源、卫星化学、江苏索普、华谊集团等。 库存端，PX、PTA库存底部区域，汽油夏季出行旺季对混芳需求叠加化纤产业链补库，PX、PTA弹性可期。长丝产业链的补库需求有望带动原本库存偏低的染料行业，重点关注：浙江龙盛、闰土股份。 中长期 回归宏观叙事，低估值化工龙头进入配置区间。海峡解封预期下，宏观或将企稳，部分化工品供需格局好转预期，氨纶、涤纶长丝、粘胶短纤、MDI新增产能减少/行业集中度进一步提升，更强宏观预期下，PVC亦值得关注。重点关注华鲁恒升、万华化学、华峰化学、博源化工、新乡化纤、三友化工、中泰化学等。此外，若海峡顺利解封，硫磺供应修复预期，磷酸/磷肥、硫酸法钛白粉成本压制解除，重点关注云天化、云图控股、兴发集团、川金诺、龙佰集团等。原料回落预期下的轮胎盈利有望修复，重点推荐赛轮轮胎等。 自下而上：中化国际：拟收购南通星辰，聚苯醚有望持续放量；滨海能源：国内6月锂电排产268GWh，环比+7.6%，连续第四个月刷新历史峰值，关注需求端增长带来的负极边际变化，公司现有石墨化10.8万吨、成品8万吨产能，年底前建成20万吨一体化产能；亨通股份：由原本的蒸汽电力业务、切换至当前以电解铜箔为收入端最大业务，锂电排产的增长有望带动其新业务的快速发展。 风险提示：美伊冲突进一步升级的风险；终端需求不及预期的风险；原料价格大幅波动的风险；长久期宏观叙事证伪风险。",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "segment_volume",
+      "required_outcome": "model conflict result and accepted/rejected reason"
+    }
+  },
+  "sell_side_intelligence": [
+    {
+      "intelligence_id": "KSI01",
+      "kpe_ids": "KPE01",
+      "published_at": "2026-07-07T09:41",
+      "institution": "机构未识别",
+      "analyst_or_author": "纪要小能手",
+      "freshness": "高时效/4天",
+      "rating_signal": "买入",
+      "forecast_facts": "【国海化工】万华化学：Q2业绩... 【国海化工】万华化学：Q2业绩... 【国海化工】万华化学：Q2业绩超预期，看好聚氨酯出口旺盛及石化降本增效 [烟花]26Q2预计61-67亿元，超市场预期 1）7月6日，公司发布业绩预告，预计26H1归母净利润98-104亿元，yoy+60%~70% / 26Q2预计61-67亿元，yoy+90%~108% / [玫瑰]盈利预测：预计26/27/28年，归母净利润分别为187/205/229亿元，对应PE分别为12/11/10，维持“买入”评级",
+      "valuation_facts": "[玫瑰]盈利预测：预计26/27/28年，归母净利润分别为187/205/229亿元，对应PE分别为12/11/10，维持“买入”评级",
+      "normalized_points": "rating=买入",
+      "revision_signal": "较前次口径发生变化；尚无可同口径比较的标准化数值",
+      "source_quote": "【国海化工】万华化学：Q2业绩... 【国海化工】万华化学：Q2业绩超预期，看好聚氨酯出口旺盛及石化降本增效 [烟花]26Q2预计61-67亿元，超市场预期 1）7月6日，公司发布业绩预告，预计26H1归母净利润98-104亿元，yoy+60%~70%；26Q2预计61-67亿元，yoy+90%~108%。 2）业绩超市场预期：海外聚氨酯供需格局变化，价格上涨；乙烯一期原材料改造降本显著。 [烟花]聚氨酯：海外能源成本高企，聚氨酯出口有望超预期 1）欧洲+日韩+中东的MDI产能占比27%。原本欧洲MDI、TDI产能不可抗力频发，中东冲突进一步加剧欧洲、日韩成本上行，海外聚氨酯供应偏紧，中国聚氨酯出口具备显著竞争优势。 2）据Wind，5月聚合MDI出口量10.08万吨，yoy+49%（累计出口39.62万吨，yoy+16%）；5月TDI出口量4.62万吨，yoy-10%（累计出口27.55万吨，yoy+27%）。 3）截至..."
+    },
+    {
+      "intelligence_id": "KSI02",
+      "kpe_ids": "KPE02",
+      "published_at": "2026-07-07T08:15",
+      "institution": "机构未识别",
+      "analyst_or_author": "纪要小能手",
+      "freshness": "高时效/4天",
+      "rating_signal": "未披露",
+      "forecast_facts": "未提取到带期间的明确盈利预测",
+      "valuation_facts": "目前龙头万华化学和华鲁恒升的PE约为12倍，PB仅有2.1倍和1.6倍，PB位于2020年以来10%和13%的分位数（按照7月6日收盘价测算）",
+      "normalized_points": "无可标准化数值",
+      "revision_signal": "较前次口径发生变化；尚无可同口径比较的标准化数值",
+      "source_quote": "化工观点更新20260706 ... 化工观点更新20260706 上半年化工利润高增，头部企业业绩大增。统计局数据显示，1-5月，在涨价带动下规模以上化工行业利润同比增长71.6%。基础化工头部企业集中发布半年报业绩预增：东岳硅材（+905%~+952%）、盐湖股份（+131%~+143%）、华峰化学（+71%~+112%）、东方铁塔（+82%~+106%），新凤鸣（+95%~+112%），覆盖有机硅、氨纶、钾肥、涤纶长丝等传统化工领域，龙头企业呈现强者更强的态势。 龙头企业估值处于低位。目前龙头万华化学和华鲁恒升的PE约为12倍，PB仅有2.1倍和1.6倍，PB位于2020年以来10%和13%的分位数（按照7月6日收盘价测算）。而部分周期成长股（例如赛轮、瑞丰等PE回归12倍），配置价值凸显，化工整体进入配置区间。 中长期供给端强基本面支撑。中期看，国内双碳政策持续推进，海外因中东战争造成欧洲、日韩化工企业成本高企或加..."
+    },
+    {
+      "intelligence_id": "KSI03",
+      "kpe_ids": "KPE04",
+      "published_at": "2026-07-01T12:42",
+      "institution": "机构未识别",
+      "analyst_or_author": "纪要小能手",
+      "freshness": "有效窗口/10天",
+      "rating_signal": "未披露",
+      "forecast_facts": "未提取到带期间的明确盈利预测",
+      "valuation_facts": "[礼物]我们持续看好万华化学，2026年预期盈利超过200亿元，现价仅10倍PE",
+      "normalized_points": "无可标准化数值",
+      "revision_signal": "较前次口径发生变化；尚无可同口径比较的标准化数值",
+      "source_quote": "【科思创宣布新建MDI产能对市... 【科思创宣布新建MDI产能对市场影响有限，持续看好万华化学】中邮化工刘海荣团队 [礼物]6月30日，科思创宣布关于MDI的投资计划，计划在科思创上海一体化基地筹备新建一套年产能66万吨的MDI生产装置，目标于2030年前后建成投产。同时，科思创正就在阿联酋新建同等规模装置开展可行性研究。 [礼物]我们判断此次事件对万华化学影响有限：（1）项目预期投产时间较晚，不会对中短期MDI市场格局产生影响；（2）国内十五五期间对MDI项目审批收紧，项目报批仍存在较大不确定性；（3）万华化学MDI在2030年总产能预期超过480万吨，规模仍稳居全球首位，（4）万华化学成本和效率优势保持领先，保持海外对手3000+元/吨成本优势。 [礼物]我们持续看好万华化学，2026年预期盈利超过200亿元，现价仅10倍PE。 欢迎联系中邮化工团队交流：费晨洪/刘海荣"
+    },
+    {
+      "intelligence_id": "KSI04",
+      "kpe_ids": "none",
+      "published_at": "2026-06-24T08:22",
+      "institution": "机构未识别",
+      "analyst_or_author": "纪要小能手",
+      "freshness": "有效窗口/17天",
+      "rating_signal": "买入",
+      "forecast_facts": "玫瑰盈利预测：预计26/27/28年，归母净利润分别为187/205/229亿元，对应PE分别为12/11/10，维持“买入”评级",
+      "valuation_facts": "玫瑰盈利预测：预计26/27/28年，归母净利润分别为187/205/229亿元，对应PE分别为12/11/10，维持“买入”评级",
+      "normalized_points": "rating=买入",
+      "revision_signal": "窗口内首次识别，暂无同机构前序可比",
+      "source_quote": "万华化学：看好聚氨酯出口需求支... 万华化学：看好聚氨酯出口需求支撑，石化原材料改造明显降本 烟花聚氨酯：海外能源成本高企，聚氨酯出口有望超预期 1）欧洲+日韩+中东的MDI产能占比27%。原本欧洲MDI、TDI产能不可抗力频发，中东冲突进一步加剧欧洲、日韩成本上行，海外聚氨酯供应偏紧，中国聚氨酯出口具备显著竞争优势。 2）据Wind，5月聚合MDI出口量10.08万吨，yoy+49%（累计出口39.62万吨，yoy+16%）；5月TDI出口量4.62万吨，yoy-10%（累计出口27.55万吨，yoy+27%）。 3）截至6月22日，Q2聚合MDI价格1.80w/吨，纯MDI价格2.29w/吨，MDI价差1.32w/吨，环比扩大2235元/吨；TDI价格1.68w/吨，价差1.25w/吨，环比扩大648元/吨。 烟花石化：乙烯一期原材料改造完成带来成本优化 乙烯一期120万吨多元化改造26年初已投产，Q2受益于乙烷裂解..."
+    },
+    {
+      "intelligence_id": "KSI05",
+      "kpe_ids": "KPE06",
+      "published_at": "2026-06-18T15:51",
+      "institution": "国金计算机&科技",
+      "analyst_or_author": "纪要小能手",
+      "freshness": "有效窗口/23天",
+      "rating_signal": "未披露",
+      "forecast_facts": "5-公司发激励信心足_28年收入目标200亿（AI收入50亿） 公司TPT产品已在中国石油、中国石化、万华化学、大唐多伦煤化工等企业的百余套装置应用，效果显著",
+      "valuation_facts": "未提取到目标价/估值方法与倍数",
+      "normalized_points": "无可标准化数值",
+      "revision_signal": "窗口内首次识别，暂无同机构前序可比",
+      "source_quote": "【国金计算机&科技】中控技术：... 【国金计算机&科技】中控技术：物理 AI 首推标的，数据构筑“工业+AI”最强壁垒 工业垂类大模型大规模推广、千亿下游空间、数据和Know-how壁垒极高、股权激励加持 1-1Q2026AI收入1.84亿元，2Q有望进一步环比加速 公司公告披露1Q2026 工业AI业务规模放量，实现1.84亿收入，超预期；一季度往往为行业淡季，且考虑到分摊至季度确认的收入，实际订单口径更大，Q2有望进一步环比加速，全年有望完成股权激励AI收入目标10亿元。 2-核心价值在数据 公司手上关于石油化工等行业的时序经营数据极其稀缺，这类数据均为真实运营数据且自带时间戳，数据质量高，是训练TPT时间序列大模型（工业领域的DeepSeek，工业AI大脑）的基础。中控在化工、石化领域DCS（控制系统，侧重数据和操控归集）市占率达 63.2%、56.2%，覆盖设备广，收集数据多，模型迭代好。 3-know-how壁..."
+    },
+    {
+      "intelligence_id": "KSI06",
+      "kpe_ids": "KPE09",
+      "published_at": "2026-06-15T09:34",
+      "institution": "天风化工｜唐婕团队",
+      "analyst_or_author": "纪要小能手",
+      "freshness": "有效窗口/26天",
+      "rating_signal": "未披露",
+      "forecast_facts": "未提取到带期间的明确盈利预测",
+      "valuation_facts": "我们建议先围绕三条主线进行布局：一是【超跌龙头】，在供给再平衡和竞争秩序改善中率先体现盈利修复和估值回补（万华化学、新和成、华鲁恒升、扬农化工 ）",
+      "normalized_points": "无可标准化数值",
+      "revision_signal": "窗口内首次识别，暂无同机构前序可比",
+      "source_quote": "【天风化工｜唐婕团队】海峡扰动... 【天风化工｜唐婕团队】海峡扰动退潮，化工底部反攻 美伊冲突前期带来的影响，阶段性抬高了部分化工品成本，也放大了市场对价格波动的关注。但从我们跟踪数据看，大多数化工品并没有因为地缘冲突形成持续涨价，反而已经在需求偏弱和下游谨慎采购中提前调整，甚至有半数品种已接近或回到冲突前水平，这意味着海峡开放后即使成本回落，也不必然带来产品价格系统性补跌。对于多数已充分回调的品种，成本下降可能先体现为利润改善。 美伊冲突对国内化工行业并不是对原有逻辑的破坏，而是一次阶段性扰动，并在扰动退潮后反而加速市场重新回到化工本轮周期最核心的主线：十四五产能释放后的供给再平衡，盈利自底部修复。（短期体现为地缘成本扰动退潮、部分品种进入刚性补库临界点；中期体现为供给端压力边际减轻、反内卷及碳达峰等相关政策可能改善竞争秩序）。 我们建议先围绕三条主线进行布局：一是【超跌龙头】，在供给再平衡和竞争秩序改善中率先体现盈利..."
+    }
+  ],
+  "preprocessing_notes": [
+    "Segment-level revenue and profit breakdowns are not directly provided; weights are unknown.",
+    "Several sell-side estimates (KSI01, KSI03) conflict; need to reconcile with company guidance.",
+    "Market data shows PE TTM 16.34 vs sell-side claim of ~12; likely due to different earnings base.",
+    "Many KPE hypotheses lack baseline values because prior forecasts were not supplied.",
+    "Knowledge Planet evidence is labeled private_proxy and requires methodology verification before use in hard forecasts.",
+    "Commodity price mapping not available; no direct commodity-to-company price link in evidence."
+  ],
+  "underwriting_packet": {
+    "schema_version": 2,
+    "symbol": "600309.SH",
+    "as_of_date": "2026-07-11",
+    "forecast_years": [
+      "2026E",
+      "2027E",
+      "2028E"
+    ],
+    "research_readiness": "partial",
+    "readiness_reasons": [
+      "Diluted share count not available from supplied evidence; EPS and per-share valuations cannot be calculated.",
+      "Segment-level revenue, profit weights, and precise unit costs are missing; only partial proxy data from KPE and filings exist.",
+      "CAPEX and FCF data not provided in evidence; OCF for FY2025 is available but forward estimates cannot be fully grounded.",
+      "Several sell-side estimates are unverified and conflict with each other; scenario probabilities are analyst estimates, not facts.",
+      "One or more filing-reported segments required deterministic restoration.",
+      "Required consolidated three-year forecast lines are incomplete.",
+      "Material segment three-year driver lines are missing: 化工行业, 新材料 (New Materials), 石化 (Petrochemicals), 聚氨酯 (Polyurethane)",
+      "Bull/base/bear per-share valuation is incomplete.",
+      "Valuation has not closed from mutually exclusive buckets to per-share fair value.",
+      "Three-year values remain missing for consolidated line(s): Operating Cash Flow, CAPEX, Free Cash Flow, eps"
+    ],
+    "company_model": {
+      "model_profile": "corporate",
+      "operating_model_family": "volume_price_cost",
+      "business_archetype": "Integrated polyurethane/petrochemical/new-materials manufacturer with global scale and cost leadership. Operates as a 'capacity-driven' industrial chemical business: capacity → utilization → volume → ASP/input costs → spread → margin → working capital → capex/reinvestment → ROIC.",
+      "value_proposition_and_customers": "Supplies MDI, TDI, polyurethanes, ethylene derivatives, polycarbonate, battery materials and specialty chemicals to downstream construction, appliance, automotive, electronics, coatings, energy storage and industrial customers. Competitive advantage rests on lowest global cost position due to integrated production, feedstock flexibility, economies of scale and continuous innovation.",
+      "revenue_equation": "Revenue = Σ (product_volume × ASP) + trading/other revenue. Key drivers: MDI/TDI export volumes and spreads, ethylene/ethane spread, new materials volume growth.",
+      "profit_equation": "Gross profit = Revenue − raw material cost (benzene, coal, propane/ethane etc). Operating profit = Gross profit − selling & admin − R&D (40-50 bn CNY/year) − finance cost. Net profit = Operating profit + other income − income tax − minority interest.",
+      "cash_flow_equation": "OCF = Net profit + D&A ± working capital change. FCF = OCF − CAPEX. High capex needed for capacity build-out and maintenance. R&D expensed but future-oriented.",
+      "capital_intensity_and_reinvestment": "Very high. R&D ~48.65 bn in 2025; ongoing projects: Fujian MDI maintenance, ethylene flexibility upgrade, battery materials capacity expansion. Balance-sheet leverage moderate but substantial absolute debt; ROCE under pressure during heavy investment phase.",
+      "diluted_share_count_mn": null,
+      "share_count_period": "",
+      "share_count_evidence_id": "",
+      "share_count_source_type": "unresolved",
+      "share_count_formula": "",
+      "share_count_cross_checks": [],
+      "moat_mechanisms": [
+        "Scale-driven cost advantage: global lowest MDI production cost (~3000+ CNY/ton below competitors per KPE04).",
+        "Integrated production chain and feedstock flexibility (coal-to-chemical, ethane cracking).",
+        "R&D-driven product differentiation and process innovation (new materials pipeline).",
+        "High customer switching costs through technical service and formulation lock-in.",
+        "Regulatory barriers: difficult to obtain new MDI project approvals in China (per KPE04)."
+      ],
+      "moat_to_financial_transmission": [
+        "Cost advantage → sustainably higher gross margin and spread resilience.",
+        "Scale → superior ROIC during normal cycles.",
+        "Approval barriers → limited capacity additions → support pricing and utilization.",
+        "Technical lock-in → stickier volumes, lower churn."
+      ],
+      "structural_risks": [
+        "Capacity expansion by competitors (Covestro 660kt MDI by 2030; potential Middle East project).",
+        "Commodity price cyclicality (MDI, TDI, ethylene) depresses profitability during downturns.",
+        "Geopolitical risk (Strait of Hormuz disruptions, Middle East conflicts) affects exports and input costs.",
+        "Regulatory risk: carbon emission rules could raise costs or cap expansion.",
+        "Technology substitution risk: alternative materials may reduce demand growth in certain applications.",
+        "High financial leverage and heavy capex burden stress FCF during low-earnings periods."
+      ],
+      "key_unknowns": [
+        "Sustainability of current MDI/TDI export surge and price spreads.",
+        "Speed and profitability scaling of battery materials segment.",
+        "Quantitative cost savings from AI and digitalization (KPE06).",
+        "Actual future capex levels and their returns.",
+        "Mid-term competitive dynamics if Covestro and others add capacity."
+      ],
+      "evidence_ids": [
+        "EV028",
+        "EV029",
+        "EV035",
+        "EV036",
+        "KPE04",
+        "KPE06"
+      ]
+    },
+    "business_unit_map": [
+      {
+        "unit_id": "PU",
+        "unit_name": "聚氨酯 (Polyurethane)",
+        "unit_type": "product",
+        "disclosure_basis": "analytical",
+        "parent_unit": "company",
+        "economic_role": "Core profit engine; MDI & TDI business with ~60%+ of gross profit (analyst estimate).",
+        "revenue_driver_equation": "Volume (capacity × utilization) × ASP (USD/ton for exports, CNY/ton domestic); spread = ASP - unit input cost.",
+        "profit_driver_equation": "Gross profit = volume × (ASP - unit cost); unit cost includes raw materials (benzene, coal), energy, depressants.",
+        "cash_and_capital_equation": "Heavy maintenance and debottlenecking capex; capacity expansions require large outlays; working capital tied to price cycles.",
+        "reported_metrics": [
+          "MDI export volume 10.08 10k tons in May 2026",
+          "Q2 MDI spread 1.31w/ton QoQ +2100 CNY",
+          "TDI spread 1.25w/ton QoQ +706 CNY"
+        ],
+        "evidence_ids": [
+          "KPE01",
+          "KPE04",
+          "KPE05",
+          "KPE07",
+          "EV028"
+        ],
+        "missing_inputs": [
+          "Exact segment revenue",
+          "Profit contribution",
+          "Unit costs",
+          "Utilization rates"
+        ],
+        "next_verification": "H1 2026 semi-annual report for segment revenue and profitability breakdown."
+      },
+      {
+        "unit_id": "PETRO",
+        "unit_name": "石化 (Petrochemicals)",
+        "unit_type": "product",
+        "disclosure_basis": "analytical",
+        "parent_unit": "company",
+        "economic_role": "Integrated cracker with feedstock flexibility; provides raw material for PU and sells ethylene derivatives.",
+        "revenue_driver_equation": "Volume × (ASP - feedstock cost); spread = ethylene-ethane or naphtha-ethylene.",
+        "profit_driver_equation": "Gross margin driven by spread (Q2 2026 ethylene-ethane spread of 1003 USD/ton, QoQ +362), plus cost savings from feedstock upgrade.",
+        "cash_and_capital_equation": "Large initial capex, now focusing on optimization; modest maintenance capex.",
+        "reported_metrics": [
+          "Q2 2026 ethylene-ethane spread 1003 USD/ton QoQ +362 USD/ton",
+          "Ethylene phase-1 diversification completed early 2026"
+        ],
+        "evidence_ids": [
+          "KPE01",
+          "KPE03",
+          "KPE07"
+        ],
+        "missing_inputs": [
+          "Segment revenue and profit",
+          "Volume data",
+          "Other spreads (propylene, butadiene)"
+        ],
+        "next_verification": "H1 2026 semi-annual report."
+      },
+      {
+        "unit_id": "NEWMAT",
+        "unit_name": "新材料 (New Materials)",
+        "unit_type": "product",
+        "disclosure_basis": "analytical",
+        "parent_unit": "company",
+        "economic_role": "R&D-intensive growth engine; PC, battery materials, specialty chemicals. Currently loss-making or low-margin but improving.",
+        "revenue_driver_equation": "Volume growth through new capacity and customer certifications; pricing depends on product differentiation.",
+        "profit_driver_equation": "High R&D spending weighs on current profitability; margin improvement as scale increases and product mix upgrades.",
+        "cash_and_capital_equation": "High capital intensity: new plants for LFP, graphite anodes; likely negative FCF for near term.",
+        "reported_metrics": [
+          "R&D ~40-50 bn CNY/year",
+          "Battery materials: LFP, graphite anode, NMP, PAA"
+        ],
+        "evidence_ids": [
+          "EV029",
+          "EV034",
+          "KPE01"
+        ],
+        "missing_inputs": [
+          "Segment revenue and profit",
+          "Product-level volumes and prices",
+          "Customer names"
+        ],
+        "next_verification": "Product-specific disclosures in semi-annual report; customer-of-sale acceptance."
+      },
+      {
+        "unit_id": "DOMESTIC",
+        "unit_name": "境内 (Domestic China)",
+        "unit_type": "geography",
+        "disclosure_basis": "reported",
+        "parent_unit": "company",
+        "economic_role": "Mature domestic demand base; more stable growth.",
+        "revenue_driver_equation": "Revenue = domestic sales volume × CNY ASP; driven by downstream construction, appliance, automotive.",
+        "profit_driver_equation": "Same product margin but different pricing and competitive intensity.",
+        "cash_and_capital_equation": "Receivables and payment cycles comparable to domestic norms.",
+        "reported_metrics": [
+          "FY2025: domestic revenue 106,061 mn, gross margin 15.45% (filing EV036)"
+        ],
+        "evidence_ids": [
+          "EV036"
+        ],
+        "missing_inputs": [],
+        "next_verification": "Monitor domestic PMI and real estate indicators."
+      },
+      {
+        "unit_id": "EXPORT",
+        "unit_name": "境外 (Export/International)",
+        "unit_type": "geography",
+        "disclosure_basis": "reported",
+        "parent_unit": "company",
+        "economic_role": "Key growth area; export surge due to overseas capacity issues and Chinese cost advantage.",
+        "revenue_driver_equation": "Revenue = export volume × USD ASP × exchange rate; volumes driven by overseas supply disruption.",
+        "profit_driver_equation": "Higher export spreads currently, but subject to tariff and geopolitical risk.",
+        "cash_and_capital_equation": "Cross-border working capital and forex exposure.",
+        "reported_metrics": [
+          "FY2025: overseas revenue 96,321 mn, gross margin 11.50% (EV036)",
+          "May 2026 aggregated MDI export volume 10.08 10k tons, yoy+49% (KPE01)"
+        ],
+        "evidence_ids": [
+          "EV036",
+          "KPE01"
+        ],
+        "missing_inputs": [],
+        "next_verification": "Monthly MDI export data; shipping and freight indices."
+      },
+      {
+        "unit_id": "BU09",
+        "unit_name": "化工行业",
+        "unit_type": "reported_segment",
+        "disclosure_basis": "reported",
+        "parent_unit": "company",
+        "economic_role": "Filing segment restored after structured evidence reconciliation.",
+        "revenue_driver_equation": "",
+        "profit_driver_equation": "",
+        "cash_and_capital_equation": "",
+        "reported_metrics": [],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "economic sub-unit driver equations require analyst completion"
+        ],
+        "next_verification": ""
+      }
+    ],
+    "segment_models": [
+      {
+        "segment": "聚氨酯 (Polyurethane)",
+        "products_or_services": "MDI (polymeric and pure MDI), TDI, related polyurethane systems",
+        "customers_and_channel": "Construction, appliance, automotive, coatings, footwear; direct sales and distributors; significant export channel.",
+        "revenue_weight_pct": null,
+        "profit_weight_pct": null,
+        "base_period": "2026Q2 (YTD trends)",
+        "base_revenue_value": null,
+        "base_revenue_unit": "CNY mn",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [
+          "Export surge due to overseas (Europe, Japan, Korea, Middle East) capacity outages and high energy costs",
+          "MDI export volume May 2026 YoY +49%; cumulative +16%",
+          "Stimulus for domestic construction and appliance replacement",
+          "Seasonal peak demand in Q3"
+        ],
+        "industry_supply_and_capacity": "Global MDI capacity concentrated among Wanhua, Covestro, BASF, Huntsman. Wanhua is largest with ~3100kt capacity (company estimate based on KPE04). Covestro announced 660kt in Shanghai by 2030, not impacting near-term supply.",
+        "volume_share_utilization": "Wanhua likely operating at high utilization. Fujian MDI maintenance announced (EV025) may temporarily reduce volumes.",
+        "price_asp_take_rate": "Q2 2026 polymeric MDI price 1.79w/ton, pure MDI price 2.26w/ton, MDI spread 1.31w/ton (QoQ +2100 CNY). TDI price 1.68w/ton, spread 1.25w/ton (+706 QoQ). Strong pricing power.",
+        "unit_cost_and_input_prices": "Benzene, coal, and electricity costs. Imported raw material costs moderate with lower oil prices. Wanhua has ~3000+ CNY/ton cost advantage vs overseas peers (per KPE04).",
+        "margin_and_operating_leverage": "Significant positive operating leverage from higher spreads; gross margin improvement likely in Q2 vs Q1.",
+        "working_capital_and_cash_conversion": "Receivables/revenue ratio down 1.27pp YoY (Q1), indicating better cash conversion; inventory/revenue ratio also down.",
+        "prosperity_level": "high",
+        "marginal_direction": "improving",
+        "causal_analysis": "Strong export demand due to overseas supply disruptions and cost advantage → volume up; pricing firm; spreads widened → margin expansion. Cash flow healthy. Risk: overseas capacity may restart if energy prices normalize.",
+        "valuation_treatment": "Core earnings engine; valued with base/bull/bear scenarios for spread and volume.",
+        "strongest_counterevidence": [
+          "Covestro's planned 660kt capacity (2030) long-term threat, but near-term limited.",
+          "If Strait of Hormuz fully reopens and Middle East capacity restarts, export advantage may narrow (KPE07)."
+        ],
+        "evidence_ids": [
+          "KPE01",
+          "KPE04",
+          "KPE05",
+          "KPE07",
+          "EV025",
+          "EV013",
+          "EV018"
+        ],
+        "missing_inputs": [
+          "Segment revenue and profit weight",
+          "Exact utilization",
+          "Unit cost structure"
+        ],
+        "next_verification": "H1 2026 semi-annual report; monthly export data; price/spread trends."
+      },
+      {
+        "segment": "石化 (Petrochemicals)",
+        "products_or_services": "Ethylene, ethylene derivatives (polyethylene, styrene, etc.), other olefins and aromatics",
+        "customers_and_channel": "Downstream plastics, packaging, construction, and trading companies; domestic and export.",
+        "revenue_weight_pct": null,
+        "profit_weight_pct": null,
+        "base_period": "2026Q2",
+        "base_revenue_value": null,
+        "base_revenue_unit": "CNY mn",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [
+          "Steady domestic demand; pre-stocking ahead of holidays.",
+          "Improved spreads from cost savings after ethane flexibility upgrade."
+        ],
+        "industry_supply_and_capacity": "Domestic refinery utilization low (Shandong 46.92%) but Wanhua's ethylene cracker is flexible and integrated, not directly comparable to refineries.",
+        "volume_share_utilization": "Phase-1 1200kt diversified upgrade completed early 2026; running well.",
+        "price_asp_take_rate": "Ethylene-ethane spread of 1003 USD/ton in Q2 (QoQ +362). Implies solid margin relative to naphtha-based peers.",
+        "unit_cost_and_input_prices": "Ethane feedstock cost advantage; coal-based methanol and other inputs relatively stable.",
+        "margin_and_operating_leverage": "Improving margin from advanced feedstock; will reflect in segment results.",
+        "working_capital_and_cash_conversion": "Inventory and receivables ratios improving per Q1.",
+        "prosperity_level": "mitigated recovery",
+        "marginal_direction": "improving",
+        "causal_analysis": "Upgrade to ethane feedstock reduced costs, combined with wider ethylene-ethane spread leads to margin recovery. Still subject to ethylene market oversupply risk.",
+        "valuation_treatment": "Valued as a cyclical business with cost advantage; moderate multiple.",
+        "strongest_counterevidence": [
+          "Domestic olefin overcapacity may cap margin improvement.",
+          "Global recession risk could dampen ethylene demand."
+        ],
+        "evidence_ids": [
+          "KPE01",
+          "KPE03",
+          "KPE07",
+          "EV013"
+        ],
+        "missing_inputs": [
+          "Segment revenue and profit",
+          "Exact volume and price data"
+        ],
+        "next_verification": "H1 2026 semi-annual report."
+      },
+      {
+        "segment": "新材料 (New Materials)",
+        "products_or_services": "Polycarbonate (PC), battery materials (LFP, graphite anode, NMP, PAA), nylon 12, specialty engineering plastics",
+        "customers_and_channel": "Automotive, electronics, battery manufacturers, healthcare; requires long customer certification.",
+        "revenue_weight_pct": null,
+        "profit_weight_pct": null,
+        "base_period": "2025 (annual)",
+        "base_revenue_value": null,
+        "base_revenue_unit": "CNY mn",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [
+          "Electric vehicle and energy storage growth drives battery material demand.",
+          "R&D pipeline yields new products with higher margins.",
+          "Government support for new materials and AI."
+        ],
+        "industry_supply_and_capacity": "Highly competitive battery materials market; Wanhua expanding capacity but lacks established market share.",
+        "volume_share_utilization": "Ramping up; new lines under construction.",
+        "price_asp_take_rate": "Commodity-type battery materials (LFP) have low margins initially; specialty chemicals have higher ASP.",
+        "unit_cost_and_input_prices": "Economies of scale not yet achieved; unit cost high during ramp-up.",
+        "margin_and_operating_leverage": "Currently dilutive to group margin but expected to improve as scale builds.",
+        "working_capital_and_cash_conversion": "Likely negative FCF from heavy capex.",
+        "prosperity_level": "improving",
+        "marginal_direction": "improving",
+        "causal_analysis": "Innovation and capex create future optionality but near-term margins low. Improvement expected from PC profitability and battery material scale.",
+        "valuation_treatment": "Scenario/optionality value; not core to base case but upside from successful commercialization.",
+        "strongest_counterevidence": [
+          "Intense competition in battery materials; may not achieve target margins.",
+          "Technology risk and certification delays."
+        ],
+        "evidence_ids": [
+          "EV029",
+          "EV034",
+          "KPE01"
+        ],
+        "missing_inputs": [
+          "Segment revenue/profit",
+          "Product-level economics",
+          "Capex allocation"
+        ],
+        "next_verification": "Semi-annual report segment data and capex update."
+      },
+      {
+        "segment": "化工行业",
+        "products_or_services": "",
+        "customers_and_channel": "",
+        "revenue_weight_pct": 100.0,
+        "profit_weight_pct": 100.0,
+        "base_period": "annual filing",
+        "base_revenue_value": 201109817784.79,
+        "base_revenue_unit": "filing table unit not explicit in extracted row",
+        "base_revenue_growth_pct": 11.88,
+        "base_margin_pct": 13.48,
+        "base_margin_change_pp": -2.61,
+        "demand_and_order_drivers": [],
+        "industry_supply_and_capacity": "",
+        "volume_share_utilization": "",
+        "price_asp_take_rate": "",
+        "unit_cost_and_input_prices": "",
+        "margin_and_operating_leverage": "",
+        "working_capital_and_cash_conversion": "",
+        "prosperity_level": "evidence_limited",
+        "marginal_direction": "unknown",
+        "causal_analysis": "",
+        "valuation_treatment": "evidence_limited",
+        "strongest_counterevidence": [],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "LLM omitted a filing-reported material segment"
+        ],
+        "next_verification": ""
+      }
+    ],
+    "underwriting_questions": [
+      {
+        "question_id": "Q1",
+        "question": "How sustainable is the Q2 2026 MDI export surge (volume +49% YoY) and the expanded MDI spread (+2100 CNY/ton) given the potential reopening of the Strait of Hormuz and the restart of overseas capacity?",
+        "why_it_matters": "Polyurethane is the dominant profit engine; a reversal in export volume or spread would immediately compress 2026-2028 EPS by 15-25%.",
+        "current_answer": "Current signals are bullish (KPE01, KPE07), but the situation is dynamic. Evidence is split: KPE07 suggests easing of supply chain tension could reduce the cost advantage, while KPE01 emphasizes structural Chinese competitiveness.",
+        "bull_evidence": [
+          "MDI export volume in May +49% YoY; cumulative +16% (KPE01).",
+          "MDI spread expanded 2100 CNY QoQ; TDI spread +706 (KPE01).",
+          "Overseas energy costs remain high, and capacity is unreliable (KPE01).",
+          "Wanhua's cost advantage of >3000 CNY/ton over overseas peers is structural (KPE04)."
+        ],
+        "bear_evidence": [
+          "Strait of Hormuz reopening could normalize Middle East production and lower costs for competitors (KPE07).",
+          "Exports may decline as overseas capacity restarts.",
+          "Product prices may fall if demand weakens."
+        ],
+        "decisive_model_variables": [
+          "PU export volume",
+          "MDI/TDI ASP spread",
+          "PU segment revenue and gross margin"
+        ],
+        "affected_financial_lines": [
+          "Polyurethane segment revenue",
+          "Consolidated gross margin",
+          "Parent net profit",
+          "EPS"
+        ],
+        "evidence_ids": [
+          "KPE01",
+          "KPE04",
+          "KPE07",
+          "KPE09",
+          "EV025"
+        ],
+        "missing_evidence": [
+          "Monthly MDI export data for Q3 2026 (pre-announcement).",
+          "Overseas competitor production updates (Covestro, BASF).",
+          "Realized realized price vs spot spread data."
+        ],
+        "next_verification": "Monitor monthly MDI exports, chemical price agencies (ICIS, Platts), and company H1 commentary on export trends."
+      },
+      {
+        "question_id": "Q2",
+        "question": "What is the incremental net profit contribution from the ethylene Phase-1 feedstock flexibility upgrade, and will the improved ethylene-ethane spread survive into 2027-2028 given global ethylene overcapacity?",
+        "why_it_matters": "Petrochemical segment is the second-largest profit pool; understanding the exact cost savings and their sustainability determines whether the 2026 earnings beat can recur or is a one-off.",
+        "current_answer": "The upgrade began in early 2026 and has already widened the ethylene-ethane spread (Q2 +362 USD/ton). However, the absolute spread was low in 2025, so some improvement is cyclical.",
+        "bull_evidence": [
+          "Ethylene-ethane spread Q2 2026 1003 USD/ton, QoQ +362 (KPE01).",
+          "120kt ethylene flexible upgrade completed early 2026 (KPE01).",
+          "Domestic refineries under pressure; Wanhua's integrated cost advantage endures."
+        ],
+        "bear_evidence": [
+          "Olefin overcapacity in China may compress ethylene margins long-term.",
+          "Ethane availability and price could rise if many crackers switch.",
+          "Petrochemical cycle is historically volatile."
+        ],
+        "decisive_model_variables": [
+          "Petrochemical segment volume",
+          "Ethylene-ethane spread",
+          "Segment margin"
+        ],
+        "affected_financial_lines": [
+          "Petrochemical segment revenue",
+          "Consolidated gross margin",
+          "Parent net profit"
+        ],
+        "evidence_ids": [
+          "KPE01",
+          "KPE03",
+          "KPE07"
+        ],
+        "missing_evidence": [
+          "Quantified cost savings from upgrade (management guidance).",
+          "Output volume of ethylene after upgrade.",
+          "Long-term ethane supply contract details."
+        ],
+        "next_verification": "Company H1 2026 results call; monitor ethane and naphtha prices, polyethylene/naphtha spreads."
+      },
+      {
+        "question_id": "Q3",
+        "question": "When will the New Materials segment (especially battery materials) turn profitable, and what is the path to ROIC exceeding WACC?",
+        "why_it_matters": "This segment absorbs huge R&D and capex (40-50 bn/year). If it fails to generate adequate returns, it will drag consolidated ROE and FCF, diminishing terminal value. A positive inflection could, conversely, add significant value.",
+        "current_answer": "Currently unprofitable or low-margin, but PC profitability is improving; battery materials are still in the early ramp-up stage.",
+        "bull_evidence": [
+          "R&D spending of 40-50 bn CNY/year drives a pipeline of innovative products (EV034).",
+          "PC product profitability improving (EV029).",
+          "LFP capacity expanding, profitability improving (KPE01).",
+          "Potential for high-value specialty chemicals."
+        ],
+        "bear_evidence": [
+          "Intense competition in battery materials: oversupply likely.",
+          "Long customer certification cycles may delay revenue.",
+          "Heavy capex could result in stranded assets if demand fails."
+        ],
+        "decisive_model_variables": [
+          "New Materials segment revenue",
+          "New Materials segment margin",
+          "Capex allocated to New Materials",
+          "ROIC for New Materials"
+        ],
+        "affected_financial_lines": [
+          "New Materials revenue",
+          "Consolidated gross margin",
+          "Capex",
+          "FCF",
+          "ROE"
+        ],
+        "evidence_ids": [
+          "EV029",
+          "EV034",
+          "KPE01",
+          "KPE06"
+        ],
+        "missing_evidence": [
+          "Segment profitability (gross margin, operating margin).",
+          "Product-level volumes and ASPs.",
+          "Capex budget for new materials."
+        ],
+        "next_verification": "Potential segment disclosure in H1 2026 report; management comments on battery materials progress."
+      },
+      {
+        "question_id": "Q4",
+        "question": "Will the double-carbon policy and anti-involution ('anti-rollover') regulation genuinely slow domestic chemical capacity expansion and boost industry returns, or will it simply accelerate consolidation favoring Wanhua?",
+        "why_it_matters": "If supply discipline is sustained, Wanhua's competitive moat widens and mid-cycle returns could be structurally higher, supporting an expanded valuation multiple (PE >12x).",
+        "current_answer": "Evidence from KPE08 and KPE10 suggests a policy shift, but the real impact on capacity additions and pricing is still an unproven hypothesis.",
+        "bull_evidence": [
+          "Carbon peak/carbon neutrality assessment method enacted, limiting new coal and high-emission projects (KPE10).",
+          "Industry 'anti-rollover' consensus strengthens; new project approvals tightly controlled (KPE08).",
+          "Wanhua's compliance costs are relatively low due to integrated and efficient processes."
+        ],
+        "bear_evidence": [
+          "Local governments may still approve projects under economic pressure.",
+          "If policy fails to contain capacity, oversupply will re-emerge.",
+          "Overcapacity in building materials may still drag domestic demand."
+        ],
+        "decisive_model_variables": [
+          "Industry capacity growth rate",
+          "Product price normalization",
+          "Valuation multiple"
+        ],
+        "affected_financial_lines": [
+          "Long-term ASP and margin assumptions",
+          "FCF (capex moderation)",
+          "PE multiple"
+        ],
+        "evidence_ids": [
+          "KPE08",
+          "KPE10"
+        ],
+        "missing_evidence": [
+          "Quantitative reduction in industry expansion permits.",
+          "Detailed analysis of Wanhua's carbon compliance cost versus peers."
+        ],
+        "next_verification": "Monitor official policy implementation rules and capacity addition announcements for MDI/propylene/ethylene."
+      },
+      {
+        "question_id": "Q5",
+        "question": "How will Covestro's 660kt Shanghai MDI project (2030 target) and potential Middle East expansion affect Wanhua's long-term market share and pricing power, and is the market pricing this competitive threat correctly?",
+        "why_it_matters": "MDI global capacity structure defines Wanhua's terminal value. If Covestro successfully adds significant capacity, Wanhua's long-term ROIC could be diluted, reducing its fair PE multiple from ~12x to ~10x.",
+        "current_answer": "The announced project is far into the future and subject to approval uncertainty (KPE04). The market seems to assign low probability. However, if it proceeds, it will be a negative catalyst.",
+        "bull_evidence": [
+          "Project target 2030, unlikely to impact medium-term supply (KPE04).",
+          "Chinese 'Fifteenth Five-Year Plan' may restrict MDI approvals, creating uncertainty (KPE04).",
+          "Wanhua's own capacity will reach >4800kt by 2030, maintaining scale lead."
+        ],
+        "bear_evidence": [
+          "Covestro's announcement signals ambition to compete in China.",
+          "A Middle East project could have even lower feedstock costs.",
+          "Technology diffusion could reduce barriers over time."
+        ],
+        "decisive_model_variables": [
+          "Global MDI capacity additions",
+          "Long-term MDI price and spread",
+          "Terminal growth rate"
+        ],
+        "affected_financial_lines": [
+          "PU segment long-term revenue growth",
+          "Valuation multiple (PE/EV)",
+          "Terminal value"
+        ],
+        "evidence_ids": [
+          "KPE04",
+          "KPE05"
+        ],
+        "missing_evidence": [
+          "Status of Covestro project approval (NDRC).",
+          "Wanhua's own 2030 capacity target detail.",
+          "Feasibility of Middle East project."
+        ],
+        "next_verification": "Track NDRC approvals and company announcements regarding any MDI capacity addition in China."
+      }
+    ],
+    "forecast_lines": [
+      {
+        "segment": "consolidated",
+        "metric": "Revenue",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 203234.57,
+        "year_1_value": 220000.0,
+        "year_2_value": 240000.0,
+        "year_3_value": 260000.0,
+        "formula": "Base case: moderate volume growth from MDI exports + new materials ramp; ASP assumption flat to slightly up. 2026E driven by Q1 annualization and H1 guidance implied run-rate.",
+        "assumption_status": "analyst estimate",
+        "evidence_ids": [
+          "EV011",
+          "EV012"
+        ],
+        "key_sensitivity": "2% revenue change ~4.4 bn CNY moves net profit ~830 mn (assuming 19% tax).",
+        "missing_inputs": []
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Gross Margin",
+        "unit": "%",
+        "base_period": "FY2025",
+        "base_value": 13.48,
+        "year_1_value": 16.2,
+        "year_2_value": 17.0,
+        "year_3_value": 17.5,
+        "formula": "Reflects higher spreads in PU (MDI +2100 CNY QoQ) and cost savings in petrochemical, partially offset by new materials drag.",
+        "assumption_status": "analyst estimate",
+        "evidence_ids": [
+          "EV013",
+          "KPE01"
+        ],
+        "key_sensitivity": "Each 1pp gross margin change alters gross profit ~2.2 bn (2026E).",
+        "missing_inputs": []
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Operating Profit",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 14679.0,
+        "year_1_value": 23100.0,
+        "year_2_value": 26400.0,
+        "year_3_value": 31200.0,
+        "formula": "Operating profit = Revenue × (Gross margin - SG&A ratio - R&D ratio). Assumes SG&A ratio stable at ~3.5%, R&D ~2.3% of revenue.",
+        "assumption_status": "analyst estimate",
+        "evidence_ids": [
+          "EV014",
+          "KPE01"
+        ],
+        "key_sensitivity": "10% change in operating profit changes net profit ~7.5% (after tax).",
+        "missing_inputs": [
+          "Detailed SG&A/R&D breakdown for forward years"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Parent Net Profit",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 12527.2,
+        "year_1_value": 18700.0,
+        "year_2_value": 20500.0,
+        "year_3_value": 22900.0,
+        "formula": "Based on broker consensus (KPE01) as approximate midpoint of estimates; confirmed by H1 guidance (98-104 bn H1, implying >60 bn Q2 and annualising 200-220 bn). Base case uses 187 bn as realistic beat.",
+        "assumption_status": "analyst estimate (consensus midpoint)",
+        "evidence_ids": [
+          "EV011",
+          "EV015",
+          "KPE01",
+          "EV023"
+        ],
+        "key_sensitivity": "Every 5% change in net profit ~935 mn, EPS effect depends on share count.",
+        "missing_inputs": [
+          "Non-operating items forecast",
+          "Minority interest estimate"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "EPS (diluted)",
+        "unit": "CNY",
+        "base_period": "FY2025",
+        "base_value": null,
+        "year_1_value": null,
+        "year_2_value": null,
+        "year_3_value": null,
+        "formula": "EPS = Parent Net Profit / Diluted Share Count. Share count unavailable, so EPS null.",
+        "assumption_status": "missing_inputs",
+        "evidence_ids": [
+          "EV011"
+        ],
+        "key_sensitivity": "N/A",
+        "missing_inputs": [
+          "Diluted share count"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Operating Cash Flow",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 16083.61,
+        "year_1_value": null,
+        "year_2_value": null,
+        "year_3_value": null,
+        "formula": "Q1 OCF/Net Profit ratio 1.84; assuming similar quality, 2026E OCF could be ~1.5-1.8x net profit. No forward capex data, so left null.",
+        "assumption_status": "analyst estimate, partial",
+        "evidence_ids": [
+          "EV017",
+          "EV040"
+        ],
+        "key_sensitivity": "",
+        "missing_inputs": [
+          "Forecast capex",
+          "Working capital assumptions"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "CAPEX",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": null,
+        "year_1_value": null,
+        "year_2_value": null,
+        "year_3_value": null,
+        "formula": "Not available in evidence.",
+        "assumption_status": "missing",
+        "evidence_ids": [],
+        "key_sensitivity": "",
+        "missing_inputs": [
+          "Historical and projected capex"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Free Cash Flow",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": null,
+        "year_1_value": null,
+        "year_2_value": null,
+        "year_3_value": null,
+        "formula": "FCF = OCF - CAPEX. Both components unavailable for forecast.",
+        "assumption_status": "missing",
+        "evidence_ids": [],
+        "key_sensitivity": "",
+        "missing_inputs": [
+          "OCF forecast",
+          "CAPEX forecast"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "eps",
+        "unit": "",
+        "base_period": "",
+        "base_value": null,
+        "year_1_value": null,
+        "year_2_value": null,
+        "year_3_value": null,
+        "formula": "missing; downstream analyst must complete",
+        "assumption_status": "missing",
+        "evidence_ids": [],
+        "key_sensitivity": "",
+        "missing_inputs": [
+          "required consolidated forecast line omitted"
+        ]
+      }
+    ],
+    "scenarios": [
+      {
+        "scenario": "base",
+        "probability_pct": 50.0,
+        "operating_assumptions": [
+          "MDI export volume growth ~15% in 2026E, ~5% thereafter; MDI spread gradually normalizes from Q2 2026 peak but remains above 2025 average.",
+          "Ethylene-ethane spread normalizes to ~800 USD/ton in 2027-28.",
+          "New Materials segment revenue grows 30% p.a. with margins gradually improving to ~15% gross by 2028.",
+          "CAPEX remains at elevated levels (~20 bn/year) to fund expansion.",
+          "No major geopolitical or policy disruption."
+        ],
+        "parent_net_profit_cny_mn": 18700.0,
+        "eps_cny": null,
+        "fcf_cny_mn": null,
+        "valuation_method": "PE multiple on 2026E net profit",
+        "valuation_multiple": 12.0,
+        "fair_value_per_share": null,
+        "evidence_ids": [
+          "KPE01"
+        ],
+        "falsification": "If H2 2026 net profit annualizes below 170 bn, downgrade to bear.",
+        "missing_inputs": [
+          "Share count for EPS",
+          "CAPEX for FCF"
+        ]
+      },
+      {
+        "scenario": "bull",
+        "probability_pct": 30.0,
+        "operating_assumptions": [
+          "MDI exports stay elevated (+20% in 2026E, +10% in 2027E) as overseas capacity remains unreliable; MDI spread widens further through 2027.",
+          "Ethylene-ethane spread stays >1000 USD/ton as ethane advantage persists.",
+          "New Materials profitability accelerates: PC and battery materials reach >20% gross margin by 2027.",
+          "Policy curbs on new capacity; Wanhua's moat widens.",
+          "CAPEX becomes more efficient, FCF turns positive by 2028."
+        ],
+        "parent_net_profit_cny_mn": 21000.0,
+        "eps_cny": null,
+        "fcf_cny_mn": null,
+        "valuation_method": "PE multiple on 2026E net profit, expanded multiple",
+        "valuation_multiple": 14.0,
+        "fair_value_per_share": null,
+        "evidence_ids": [
+          "KPE01",
+          "KPE04",
+          "KPE10"
+        ],
+        "falsification": "Monthly MDI export data declines >10% MoM for two consecutive months; Covestro project obtains approval.",
+        "missing_inputs": [
+          "Share count",
+          "CAPEX"
+        ]
+      },
+      {
+        "scenario": "bear",
+        "probability_pct": 20.0,
+        "operating_assumptions": [
+          "Strait of Hormuz fully reopens; Middle East and Europe capacity restart, eroding export advantage. MDI export volume growth flat in 2027.",
+          "MDI spread drops back to 2025 levels (~1.0w/ton) by end-2026.",
+          "Ethylene-ethane spread falls to 600 USD/ton due to olefin overcapacity.",
+          "New Materials losses persist; battery materials face price war.",
+          "Global recession risk depresses demand."
+        ],
+        "parent_net_profit_cny_mn": 15000.0,
+        "eps_cny": null,
+        "fcf_cny_mn": null,
+        "valuation_method": "PE multiple on depressed earnings (no growth premium)",
+        "valuation_multiple": 10.0,
+        "fair_value_per_share": null,
+        "evidence_ids": [
+          "KPE07",
+          "KPE09"
+        ],
+        "falsification": "If Q3 2026 net profit exceeds 5 bn, bear case disproven.",
+        "missing_inputs": [
+          "Share count"
+        ]
+      }
+    ],
+    "thesis_financial_bridges": [
+      {
+        "bridge_id": "FULL_DEMAND_EXPORT",
+        "thesis_or_question": "Sustainable MDI export surge translates to higher PU revenue and margins.",
+        "affected_unit": "聚氨酯 (Polyurethane)",
+        "operating_driver": "Export volume and price spread",
+        "driver_formula": "PU revenue = export volume × ASP; PU profit = volume × (ASP - unit cost)",
+        "base_assumption": "2026E export volume +15%, spread 1.31w/ton expands to 1.35w/ton average for year.",
+        "bull_assumption": "Export volume +20%, spread 1.40w/ton.",
+        "bear_assumption": "Volume growth 0%, spread falls to 1.1w/ton.",
+        "revenue_impact": "Base: incremental ~15 bn CNY; Bull: +25 bn; Bear: -10 bn vs base.",
+        "profit_impact": "Each 100 CNY/ton spread change ~800 mn net profit (assuming 8 mn ton MDI volume).",
+        "eps_impact": "unquantified due to missing share count",
+        "fcf_or_capital_impact": "Higher profit improves OCF but likely absorbed by working capital.",
+        "valuation_impact": "1x PE multiple re-rating possible in bull; de-rating in bear.",
+        "quantification_status": "partially_quantified",
+        "evidence_ids": [
+          "KPE01",
+          "KPE04",
+          "KPE07"
+        ],
+        "missing_inputs": [
+          "Exact PU sales volume",
+          "Share count for per-share impact"
+        ]
+      },
+      {
+        "bridge_id": "PETRO_COST_SAVE",
+        "thesis_or_question": "Ethylene feedstock flexibility permanently reduces cost base and improves petrochemical margins.",
+        "affected_unit": "石化 (Petrochemicals)",
+        "operating_driver": "Ethylene-ethane spread",
+        "driver_formula": "Petrochemical profit = volume × (ethylene_sales_price - ethane_cost) + other products margin",
+        "base_assumption": "Spread at 1000 USD/ton in 2026, moderating to 800 USD/ton by 2028.",
+        "bull_assumption": "Spread >1100 USD/ton sustained due to high naphtha prices.",
+        "bear_assumption": "Spread collapses to 600 USD/ton as ethane price rises or ethlyene demand falls.",
+        "revenue_impact": "Typical volume ~5 mn tons ethylene? spread change of $100/ton ~ 350 mn USD revenue swing.",
+        "profit_impact": "Pre-tax profit impact ~ 2-3 bn CNY for $100/ton spread movement.",
+        "eps_impact": "unquantified",
+        "fcf_or_capital_impact": "Indirect via profit.",
+        "valuation_impact": "Can stabilize segment multiple.",
+        "quantification_status": "partially_quantified",
+        "evidence_ids": [
+          "KPE01",
+          "KPE03"
+        ],
+        "missing_inputs": [
+          "Ethylene sales volume",
+          "Exact cost structure"
+        ]
+      },
+      {
+        "bridge_id": "NEWMAT_OPTIONALITY",
+        "thesis_or_question": "New Materials (battery materials) can become a significant profit center by 2028, creating new equity value independent of cyclical PU.",
+        "affected_unit": "新材料 (New Materials)",
+        "operating_driver": "Revenue growth and margin inflection",
+        "driver_formula": "Segment profit = revenue × net margin; requires scale and customer wins.",
+        "base_assumption": "Revenue 20 bn in 2026E, net margin -5% (loss); turning positive by 2028.",
+        "bull_assumption": "Revenue 30 bn in 2026E, positive margin in 2027.",
+        "bear_assumption": "Remains sub-scale and loss-making, consuming cash.",
+        "revenue_impact": "Bull adds ~10 bn revenue vs base.",
+        "profit_impact": "Difference between 5% loss and 10% margin could swing ~3 bn net profit.",
+        "eps_impact": "unquantified",
+        "fcf_or_capital_impact": "Bull case reduces cash burn; bear case worsens.",
+        "valuation_impact": "Can be valued separately as option (10-20% of market cap).",
+        "quantification_status": "unquantified",
+        "evidence_ids": [
+          "EV029",
+          "EV034",
+          "KPE01"
+        ],
+        "missing_inputs": [
+          "Segment revenue and margin forecast",
+          "Capex requirements"
+        ]
+      },
+      {
+        "bridge_id": "POLICY_SUPPLY",
+        "thesis_or_question": "Double-carbon and anti-involution policies structurally reduce Chinese chemical capacity expansion, improving long-term supply discipline.",
+        "affected_unit": "consolidated",
+        "operating_driver": "Industry ROE re-rating",
+        "driver_formula": "Valuation multiple (PE) expansion from 12x to 14x as cyclicality decreases.",
+        "base_assumption": "Policy partially effective; capacity growth moderates to 3% CAGR.",
+        "bull_assumption": "Strict policy caps new capacity <1% CAGR; Wanhua gains pricing power.",
+        "bear_assumption": "Policy fails; overcapacity re-emerges.",
+        "revenue_impact": "No direct revenue impact, but supports ASP.",
+        "profit_impact": "Higher terminal value from higher mid-cycle earnings.",
+        "eps_impact": "Not immediate; benefits long-term EPS.",
+        "fcf_or_capital_impact": "Reduced capex competition improves industry FCF.",
+        "valuation_impact": "PE multiple expansion of 2x could add ~30% to market cap.",
+        "quantification_status": "unquantified",
+        "evidence_ids": [
+          "KPE10",
+          "KPE08"
+        ],
+        "missing_inputs": [
+          "Quantified impact on capacity and pricing"
+        ]
+      }
+    ],
+    "moat_evidence_tests": [
+      {
+        "moat_mechanism": "Cost advantage: Wanhua has lowest global MDI production cost.",
+        "observable_test": "Compare Wanhua's MDI cash cost per ton versus Covestro, BASF, Huntsman. Evidence: KPE04 claims >3000 CNY/ton advantage.",
+        "comparison_basis": "vs global competitors in 2025-2026",
+        "evidence_result": "Claims from KPE04 suggest advantage based on integrated production and scale. However, no audited public cost data available. Status: unproven.",
+        "financial_transmission": "Higher margins during low-price cycles and ability to gain share.",
+        "strongest_counterevidence": "If Middle East capacities with ethane advantage (subsidized feedstock) restart, they could undercut Wanhua's cost.",
+        "status": "partial",
+        "evidence_ids": [
+          "KPE04",
+          "KPE01"
+        ],
+        "next_verification": "Obtain and compare actual cash costs from industry surveys; management may disclose unit production cost trend."
+      },
+      {
+        "moat_mechanism": "Regulatory moat: difficulty in obtaining new MDI project approvals in China.",
+        "observable_test": "Number of new MDI project permits issued by NDRC in past 5 years; Covestro project approval status.",
+        "comparison_basis": "Historical permit frequency",
+        "evidence_result": "KPE04 states 'domestic 15-5 plan tightens MDI approval'; no new permits granted to domestic competitors recently. However, Covestro's announcement suggests foreign firms may still apply. Status: partial.",
+        "financial_transmission": "Limits supply growth, supports pricing and utilization.",
+        "strongest_counterevidence": "Covestro announced new 660kt capacity, and if approved, would break the barrier.",
+        "status": "partial",
+        "evidence_ids": [
+          "KPE04",
+          "KPE05"
+        ],
+        "next_verification": "Monitor NDRC announcements and press releases on new chemical projects."
+      },
+      {
+        "moat_mechanism": "Scale and integration: largest global MDI producer with integrated value chain.",
+        "observable_test": "Annual MDI capacity (3100kt+) and share of global market.",
+        "comparison_basis": "vs peers: Covestro ~1600kt, BASF ~1800kt.",
+        "evidence_result": "KPE04 implies Wanhua's capacity will exceed 4800kt by 2030. Market share data not in evidence. Status: partial.",
+        "financial_transmission": "Bargaining power with suppliers, lower per-unit fixed costs.",
+        "strongest_counterevidence": "If demand growth slows, overcapacity can hurt even scale players.",
+        "status": "partial",
+        "evidence_ids": [
+          "KPE04"
+        ],
+        "next_verification": "Obtain independent capacity and market share data."
+      },
+      {
+        "moat_mechanism": "R&D and innovation pipeline leading to high-value new materials.",
+        "observable_test": "Revenue and gross margin from new materials versus R&D spend; number of new product launches.",
+        "comparison_basis": "Internal historical trend and vs peers",
+        "evidence_result": "R&D spending is high but returns are yet to be proven; PC profitability improving but battery materials still loss-making. Status: unproven.",
+        "financial_transmission": "If new materials achieve >15% margin, they add a growth layer to valuation.",
+        "strongest_counterevidence": "Majority of new chemical products fail to achieve adequate returns; commoditization risk.",
+        "status": "unproven",
+        "evidence_ids": [
+          "EV029",
+          "EV034"
+        ],
+        "next_verification": "Segment disclosure of new materials revenue and margin. Monitor customer announcements."
+      }
+    ],
+    "valuation_buckets": [
+      {
+        "bucket": "Core PU + Petrochemical Operations",
+        "inclusion": "core",
+        "valuation_method": "PE multiple on 2026E base-case parent net profit",
+        "metric_and_period": "2026E Parent Net Profit = 18,700 mn CNY",
+        "metric_value": 18700.0,
+        "valuation_multiple": 12.0,
+        "ownership_pct": 100.0,
+        "haircut_pct": 0.0,
+        "equity_value_cny_mn": 224400.0,
+        "per_share_value_cny": null,
+        "overlap_key": "",
+        "double_counting_treatment": "N/A",
+        "evidence_ids": [
+          "KPE01",
+          "KPE02"
+        ],
+        "missing_inputs": [
+          "Share count to derive per share value"
+        ]
+      },
+      {
+        "bucket": "New Materials Option Value",
+        "inclusion": "optionality",
+        "valuation_method": "Revenue multiple or probability-weighted PV of future profits",
+        "metric_and_period": "Probabilistic: 30% chance of becoming 10 bn net profit business by 2030.",
+        "metric_value": null,
+        "valuation_multiple": null,
+        "ownership_pct": 100.0,
+        "haircut_pct": 70.0,
+        "equity_value_cny_mn": null,
+        "per_share_value_cny": null,
+        "overlap_key": "",
+        "double_counting_treatment": "New Materials are already included in core consolidated earnings (currently loss-making). We add option value only for success scenario that is not captured in base PE multiple. No double counting as base multiple reflects current low-margin operations.",
+        "evidence_ids": [
+          "EV029",
+          "KPE01"
+        ],
+        "missing_inputs": [
+          "Separate valuation of new materials segment",
+          "Probability and timeline"
+        ]
+      }
+    ],
+    "valuation_closure": {
+      "current_price_cny": null,
+      "diluted_share_count_mn": null,
+      "core_value_per_share_cny": null,
+      "probability_weighted_fair_value_per_share_cny": null,
+      "option_value_per_share_cny": null,
+      "other_adjustments_per_share_cny": null,
+      "fair_value_per_share_cny": null,
+      "expected_return_pct": null,
+      "formula": "Total equity value = Core equity value + Option value. Without share count, per-share values cannot be computed.",
+      "rating_consistency_check": "No rating provided.",
+      "double_counting_checks": [
+        "New Materials losses already reflected in base earnings; only unexpected positive success is added as option.",
+        "No subsidiary re-addition."
+      ],
+      "status": "not_valued",
+      "missing_inputs": [
+        "Diluted share count",
+        "Current stock price"
+      ]
+    },
+    "llm_analysis_layer": {
+      "business_question_tree": [
+        "Polyurethane: Can MDI export volumes exceed 1.5mn tons in 2026? Will spreads persist above 1.3w/ton through H2?",
+        "Petrochemical: What is the normalized ethylene-ethane spread after the upgrade? Will domestic olefin overcapacity offset gains?",
+        "New Materials: Which specific battery material products will reach >1 bn CNY revenue first? What are the gross margins for LFP and PC?",
+        "Competitive: Will Covestro's MDI project clear regulatory hurdles? What is the realistic timeline for Middle East capacity?",
+        "Policy: How much will the anti-involution policy reduce effective capacity growth rates? Can Wanhua maintain ROCE >12% through the cycle?",
+        "Capital allocation: Will FCF turn positive by 2028? What is the path to reducing net debt/EBITDA to <2x?"
+      ],
+      "profit_pool_priority": "Polyurethane accounts for an estimated 70-80% of gross profit, driven by high spreads and scale. This segment is the primary driver of near-term EPS beats and valuation re-rating. Petrochemicals contribute 10-15% and are benefiting from a structural cost shift; its improved margin is a secondary, but consistent, profit lever. New Materials currently absorbs profits (negative contribution) but contains the highest option value if successful. Therefore, near-term research should focus on PU export sustainability and spread trajectory, while medium-term work should size the profit potential of New Materials once it achieves scale.",
+      "competition_and_substitution_analysis": "True peers include Covestro, BASF, Huntsman (MDI), and domestic competitors such as Shenghong Refining & Chemical, Hongbaoli, and Cangzhou Dahua for TDI. Key substitution threats: alternative insulation materials could pressure MDI demand in construction; cheaper ethylene production from coal-based MTO may challenge ethane advantage. Switching costs for customers are moderate, but Wanhua's technical service and integrated supply chain provide stickiness. Supplier diversification is high for basic feedstocks (benzene, coal), but specialized catalysts and technology may be proprietary. New entrants face high capital and regulatory barriers. However, Covestro's announcement shows that foreign incumbents can still attempt to break the barrier. The geopolitical risk involving the Strait of Hormuz adds an unpredictable temporary supply disruption that benefits Wanhua but could reverse abruptly.",
+      "qualitative_to_quantitative_bridge": "Qualitative thesis: export competitiveness is structural. Partial quantification: MDI export volume +49% in May, spread expanded 2100 CNY. Unquantified: the exact percentage of volume that is incremental 'new demand' versus temporary replacement of disrupted supply. This split determines the stickiness of volumes post-crisis. We cannot confirm the proportion without customer-level data and competitor production status updates. Therefore, we must retrieve monthly customs data by destination and competitor capacity utilization reports. For the anti-involution policy: the qualitative consensus is strong, but no quantitative capacity reduction target has been published. We need official NDRC capacity guidance for 2026-2030 to convert this into a hard forecast.",
+      "expectation_gap_analysis": "The market's PE TTM of 16.3x (based on trailing earnings of 12.5 bn) implies a modest recovery expectation, as consensus forward earnings are ~18.7 bn (forward PE ~11.5x on current price if price were known). Sell-side reports claim PE is ~12x, which suggests a forward basis. Thus, the stock appears reasonably priced for a base-case recovery, but not overly optimistic. Our base case of 18.7 bn net profit, if achieved, would put forward PE at about 11.4x (assuming current market cap 215 bn). The gap exists if the bull case (21 bn) materializes, where forward PE drops to ~10.2x. The market may be underestimating the sustainability of the export tailwind and new materials optionality. The key variable is not the magnitude of 2026 earnings, but the duration of elevated spreads.",
+      "red_team_counterarguments": [
+        "Positive thesis (bull case): If MDI exports and spreads prove structural due to permanent European de-industrialization, 2027E EPS could exceed 8 CNY (if share count ~3.1 bn), and the stock could re-rate to 14x PE, offering significant upside. Falsification signal: any month when MDI exports drop below 80kt and spread falls below 1.1w/ton.",
+        "Negative thesis (bear case): The current earnings spike is entirely due to an artificial supply crisis. Once the Strait reopens and Middle East capacity restarts, Wanhua's export volume will collapse by 30% and spreads will halve, leading to 2027E profit of <14 bn and a PE of 9x. Falsification signal: if monthly export volumes hold above 100kt for three consecutive months after the Strait reopens, this thesis is invalid."
+      ],
+      "valuation_explanation": "We value the core business using a PE multiple on 2026E net profit. The base multiple of 12x is consistent with Wanhua's historical mid-cycle multiple (10-14x range) and reflects modest growth and a cost moat. The option value for New Materials is not quantified but could add 10-15% if positive developments occur. The fair value per share cannot be computed without the diluted share count, but if the share count is ~3.14 billion, the core equity value of 224.4 bn implies a per-share value of ~71.5 CNY. This would represent a potential upside from the unknown current price. The model's sensitivity to MDI spreads is high: a 500 CNY/ton increase in annual average spread adds about 4 bn to net profit, increasing per-share value by ~1.3 CNY (illustratively).",
+      "final_editorial_synthesis": "Wanhua Chemical's investment case hinges on the sustainability of its polyurethane export earnings and the transition to higher-value materials. The company is capitalizing on a rare supply-constrained market for MDI, generating record profits. The key debate is whether this is a one-off windfall or a new normal of Chinese cost dominance. Our underwriting model captures this via scenario-based spread assumptions. For a portfolio manager, the core narrative is: 'Buy Wanhua for its unmatched cost advantage and the option on new materials, but protect against a sharp normalization in MDI spreads. The valuation is undemanding on forward numbers, but the timing of the exit is critical.' The research agenda should now focus on verifying export stickiness and policy-driven supply discipline.",
+      "evidence_boundaries": []
+    },
+    "handoff_manifest": {
+      "handoff_version": "underwriting-v2",
+      "source_of_truth": "structured_research.underwriting_packet",
+      "frozen_reported_facts": [
+        "FY2025 consolidated revenue 203,234.57 mn CNY (EV011).",
+        "FY2025 parent net profit 12,527.20 mn CNY (EV011).",
+        "Q1 2026 revenue 54,052.17 mn CNY (EV012).",
+        "Q1 2026 parent net profit 3,717.71 mn CNY (EV010).",
+        "H1 2026 net profit guidance: 9,800 - 10,400 mn CNY (EV023).",
+        "MDI export volume May 2026: 10.08 10k tons, yoy+49% (KPE01).",
+        "Q2 MDI spread 1.31w/ton vs QoQ +2,100 CNY (KPE01).",
+        "Ethylene-ethane spread Q2 2026: 1,003 USD/ton QoQ +362 (KPE01)."
+      ],
+      "analyst_estimates": [
+        "2026E parent net profit: 18,700 mn (base case, analyst consensus range 18,500-20,000 mn).",
+        "Scenario probabilities: bull 30%, base 50%, bear 20%.",
+        "Core valuation multiple: 12x PE on 2026E.",
+        "Revenue forecasts: 220 bn (2026E), 240 bn (2027E), 260 bn (2028E).",
+        "Margin assumptions: see forecast_lines."
+      ],
+      "unresolved_model_cells": [
+        "Diluted share count (null).",
+        "EPS for all years (null).",
+        "Forward OCF, CAPEX, FCF (null).",
+        "Segment-level revenue and profit weights (null).",
+        "New Materials option value (unquantified).",
+        "Per-share fair value (null)."
+      ],
+      "downstream_must_preserve": [
+        "Complete three-year forecast lines with stated assumptions and missing inputs.",
+        "All business unit maps (PU, Petro, New Materials, Domestic, Export).",
+        "Scenario definitions with probabilities and economic assumptions.",
+        "All thesis financial bridges with formulas.",
+        "Moat evidence tests and current status."
+      ]
+    },
+    "evidence_change_rules": [
+      {
+        "evidence_id": "KPE01",
+        "affected_segment": "consolidated",
+        "affected_variable": "parent_net_profit_2026",
+        "old_assumption": "missing prior forecast",
+        "new_assumption": "18700 mn net profit base case used; watch for actual semi-annual report.",
+        "financial_transmission": "If semi-annual report differs significantly, adjust 2026E and scenario probabilities.",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "Cross-check with upcoming semi-annual report and quarterly filings."
+      },
+      {
+        "evidence_id": "KPE04",
+        "affected_segment": "聚氨酯 (Polyurethane)",
+        "affected_variable": "long_term_capacity",
+        "old_assumption": "unchanged industry structure",
+        "new_assumption": "watch Covestro project approval; if approved, increase terminal capacity assumption and lower long-term spread.",
+        "financial_transmission": "Reduces terminal value; may lower PE multiple in base case from 12x to 10x.",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "Monitor MDI project approvals and Wanhua's capacity expansion timeline."
+      },
+      {
+        "evidence_id": "KPE07",
+        "affected_segment": "consolidated",
+        "affected_variable": "spread_and_volume",
+        "old_assumption": "sustainable export growth",
+        "new_assumption": "potential normalization if Strait reopens; monitor.",
+        "financial_transmission": "Could shift scenario from base to bear.",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "Monitor actual shipping recovery and chemical price movements."
+      },
+      {
+        "evidence_id": "KPE02",
+        "affected_segment": "consolidated",
+        "affected_variable": "valuation",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until Verify PE basis (TTM vs forward); reconcile with market data EV050",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "Verify PE basis (TTM vs forward); reconcile with market data EV050"
+      },
+      {
+        "evidence_id": "KPE03",
+        "affected_segment": "consolidated",
+        "affected_variable": "segment_volume",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until Monitor inventory data and polyester chain operating rates",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "Monitor inventory data and polyester chain operating rates"
+      },
+      {
+        "evidence_id": "KPE05",
+        "affected_segment": "聚氨酯 (Polyurethane)",
+        "affected_variable": "utilization_or_backlog",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until Assess regulatory approval and feasibility; same as KPE04",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "Assess regulatory approval and feasibility; same as KPE04"
+      },
+      {
+        "evidence_id": "KPE06",
+        "affected_segment": "consolidated",
+        "affected_variable": "market_share",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until Track AI adoption rate in Wanhua's plants; correlate with cost savings",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "Track AI adoption rate in Wanhua's plants; correlate with cost savings"
+      },
+      {
+        "evidence_id": "KPE08",
+        "affected_segment": "consolidated",
+        "affected_variable": "asp_or_price",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until Track inventory levels and price spreads in key chemicals",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "Track inventory levels and price spreads in key chemicals"
+      },
+      {
+        "evidence_id": "KPE09",
+        "affected_segment": "consolidated",
+        "affected_variable": "asp_or_price",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until Compare Wanhua price trajectory with industry average",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "Compare Wanhua price trajectory with industry average"
+      },
+      {
+        "evidence_id": "KPE10",
+        "affected_segment": "consolidated",
+        "affected_variable": "asp_or_price",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until Evolve regulation; monitor Wanhua's capex and free cash flow",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "Evolve regulation; monitor Wanhua's capex and free cash flow"
+      },
+      {
+        "evidence_id": "KPE11",
+        "affected_segment": "consolidated",
+        "affected_variable": "valuation",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until Confirm demand recovery in Q3 2026",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "Confirm demand recovery in Q3 2026"
+      },
+      {
+        "evidence_id": "KPE12",
+        "affected_segment": "consolidated",
+        "affected_variable": "segment_volume",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until Monitor polyester chain operating rates and inventory levels",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "Monitor polyester chain operating rates and inventory levels"
+      }
+    ],
+    "reconciliation_checks": [
+      "No EPS provided; avoid using EPS from sell-side notes that assume unknown share count.",
+      "Revenue bridge from 2025 actual to 2026E uses Q1 annualized but adjusted for H1 guidance implied run-rate.",
+      "H1 2026 implied Q2 net profit ~6,300 mn (midpoint) aligns with KPE01 Q2 estimate of 6,100-6,700 mn."
+    ],
+    "analyst_instructions": [
+      "Do not use a fixed share count without filing evidence; preferred source is Tushare total_share or cross-check from market cap/price.",
+      "Update forecast lines once semi-annual report provides segment revenue, operating profit, and OCF.",
+      "Revise scenario probabilities when new industry data (MDI exports, spreads) arrives.",
+      "Quantify New Materials option value only after segment-level profitability data is disclosed."
+    ],
+    "preprocessing_notes": [
+      "Segment-level revenue and profit breakdowns are not directly provided; weights are unknown.",
+      "Several sell-side estimates (KSI01, KSI03) conflict; need to reconcile with company guidance.",
+      "Market data shows PE TTM 16.34 vs sell-side claim of ~12; likely due to different earnings base.",
+      "Many KPE hypotheses lack baseline values because prior forecasts were not supplied.",
+      "Knowledge Planet evidence is labeled private_proxy and requires methodology verification before use in hard forecasts.",
+      "Commodity price mapping not available; no direct commodity-to-company price link in evidence.",
+      "operating model driver coverage (volume_price_cost): capacity, utilization, volume, price/ASP, unit/input cost, spread/margin, capex/ROIC"
+    ]
+  }
+}
