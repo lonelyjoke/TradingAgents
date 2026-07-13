@@ -607,6 +607,9 @@ def test_deterministic_pm_engine_calculates_eps_fcf_scenarios_and_safe_price():
     assert "| 基准 |" in rendered
     assert "incremental_equity_value" not in rendered
     assert "安全买入价上限：80元" in rendered
+    assert "安全买入价上限的计算公式为" in rendered
+    assert "min(83.33元，80元，90.59元) = 80元" in rendered
+    assert "不等同于目标价、综合公允价值或评级锚" in rendered
     assert "期权价值：0.5元/股" in rendered
     assert "程序化期权价值" in rendered
     assert "AIDC SST" in rendered

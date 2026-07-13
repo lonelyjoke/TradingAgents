@@ -1,0 +1,13 @@
+{
+  "mode": "schema_prompt_structured",
+  "agent": "Research Manager",
+  "structured_error": "",
+  "schema": "UnderwritingResearchPlan",
+  "handoff_repair_requested": false,
+  "handoff_repair_applied": false,
+  "handoff_repair_mode": "not_run",
+  "handoff_deterministic_completion_applied": false,
+  "handoff_deterministic_copied_lines": [],
+  "initial_handoff_issues": [],
+  "remaining_handoff_issues": []
+}

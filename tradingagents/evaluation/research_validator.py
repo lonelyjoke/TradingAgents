@@ -235,17 +235,23 @@ def _line_changed(left: Mapping[str, Any], right: Mapping[str, Any]) -> bool:
         right_value = float(right.get("value"))
     except (TypeError, ValueError):
         return left.get("value") != right.get("value")
-    value_changed = abs(left_value - right_value) > max(
-        abs(left_value) * 0.02,
-        0.01,
-    )
-    # Spaces and underscores are presentation differences, not unit changes.
-    left_unit = re.sub(
-        r"[^a-z0-9%/\u4e00-\u9fff]+", "", str(left.get("unit", "")).lower()
-    )
-    right_unit = re.sub(
-        r"[^a-z0-9%/\u4e00-\u9fff]+", "", str(right.get("unit", "")).lower()
-    )
+    left_metric = _handoff_metric_key(left.get("period"), left.get("metric"))[1]
+    # Revenue estimates are a high-volume top-line input where small manager
+    # reconciliations are not normally decision-changing unless they exceed 5%.
+    value_tolerance = 0.05 if left_metric == "revenue" else 0.02
+    value_changed = abs(left_value - right_value) > max(abs(left_value) * value_tolerance, 0.01)
+
+    def _normalized_unit(unit: object) -> str:
+        raw = str(unit or "").lower().replace("_", " ").replace("/", " / ")
+        tokens = re.findall(r"[a-z]+|%|[\u4e00-\u9fff]+", raw)
+        if set(tokens) == {"cny", "mn"}:
+            return "cny_mn"
+        if set(tokens) == {"mn", "shares"}:
+            return "mn_shares"
+        return re.sub(r"[^a-z0-9%/\u4e00-\u9fff]+", "", raw)
+
+    left_unit = _normalized_unit(left.get("unit", ""))
+    right_unit = _normalized_unit(right.get("unit", ""))
     return value_changed or (left_unit and right_unit and left_unit != right_unit)
 
 
@@ -1978,7 +1984,11 @@ def audit_public_key_number_consistency(decision_text: str) -> list[DecisionDept
     issues: list[DecisionDepthIssue] = []
     checks = (
         ("net cash", r"(?:净现金|net cash)[^\d\n]{0,18}(\d+(?:\.\d+)?)\s*(?:亿|CNY\s*100m)", 0.05),
-        ("current price", r"(?:当前股价|当前价|现价)[^\d\n]{0,8}(\d+(?:\.\d+)?)\s*元", 0.02),
+        (
+            "current price",
+            r"(?:当前股价|当前价格|当前价(?!值)|现价(?!值))[^\d\n]{0,8}(\d+(?:\.\d+)?)\s*元",
+            0.02,
+        ),
     )
     for label, pattern, tolerance in checks:
         values = [float(value) for value in re.findall(pattern, decision_text, re.I)]

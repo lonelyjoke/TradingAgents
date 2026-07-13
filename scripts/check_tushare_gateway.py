@@ -49,8 +49,9 @@ def gateway_client(token: str, gateway: str | None):
         ) from exc
 
     pro = ts.pro_api(token)
+    pro._DataApi__token = token
     if gateway:
-        pro._DataApi__http_url = gateway.rstrip("/") + "/"
+        pro._DataApi__http_url = gateway.rstrip("/")
     return pro
 
 

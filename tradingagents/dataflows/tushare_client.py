@@ -134,10 +134,12 @@ def get_tushare_pro_client():
             "python -m pip install tushare"
         ) from exc
 
-    pro = ts.pro_api(get_tushare_token())
+    token = get_tushare_token()
+    pro = ts.pro_api(token)
+    pro._DataApi__token = token
     http_url = os.getenv("TUSHARE_HTTP_URL")
     if http_url and not _is_probable_local_proxy_url(http_url):
-        pro._DataApi__http_url = http_url.rstrip("/") + "/"
+        pro._DataApi__http_url = http_url.rstrip("/")
     return pro
 
 
@@ -182,9 +184,10 @@ def get_tushare_pro_clients() -> Iterable[tuple[str, object]]:
     clients: list[tuple[str, object]] = []
 
     configured = ts.pro_api(token)
+    configured._DataApi__token = token
     use_configured_gateway = bool(http_url) and not _is_probable_local_proxy_url(http_url)
     if use_configured_gateway:
-        configured._DataApi__http_url = http_url.rstrip("/") + "/"
+        configured._DataApi__http_url = http_url.rstrip("/")
         clients.append(("configured_http_url", configured))
     else:
         clients.append(("official", configured))

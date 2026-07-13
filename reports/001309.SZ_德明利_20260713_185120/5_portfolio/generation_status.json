@@ -1,0 +1,24 @@
+{
+  "mode": "schema_prompt_structured",
+  "agent": "Portfolio Manager",
+  "structured_error": "",
+  "schema": "SellSidePMDecision",
+  "initial_mode": "schema_prompt_structured",
+  "editorial_review_mode": "schema_prompt_structured",
+  "editorial_revision_requested": true,
+  "editorial_revision_applied": true,
+  "editorial_revision_mode": "schema_prompt_structured",
+  "remaining_handoff_issues": [],
+  "remaining_analytical_issues": [],
+  "editorial_revision_rejection_reasons": [],
+  "deterministic_model_notes": [
+    "synchronized weighted equity value 153600.0 -> 153600.0000",
+    "synchronized total fair value per share 635.0 -> 677.1113",
+    "enforced safe-price execution constraint above the buy ceiling"
+  ],
+  "full_report_chars": "13283",
+  "public_report_chars": "7530",
+  "internal_overflow_chars": "5751",
+  "internal_sections_removed_from_public_report": "内部附录A：业务机制与分部经济, 内部附录B：行业驱动与护城河机制, 内部附录C：财务质量核查明细, 内部附录D：替代信息与卖方预期审计, 内部附录E：模型交接与报告质量审计",
+  "public_h2_count": "8"
+}

@@ -351,6 +351,10 @@ class DeterministicValuationOutput(BaseModel):
     other_adjustments_per_share_cny: float | None = None
     fair_value_per_share_cny: float | None = None
     expected_return_pct: float | None = None
+    required_annual_return_pct: float | None = None
+    holding_period_years: float | None = None
+    margin_of_safety_pct: float | None = None
+    maximum_bear_loss_pct: float | None = None
     required_return_price_cny: float | None = None
     margin_of_safety_price_cny: float | None = None
     bear_loss_constraint_price_cny: float | None = None
@@ -2914,6 +2918,10 @@ def normalize_sell_side_pm_decision(
             output.fair_value_per_share_cny = fair_value
             if assumptions.current_price_cny and assumptions.current_price_cny > 0:
                 output.expected_return_pct = (fair_value / assumptions.current_price_cny - 1.0) * 100.0
+            output.required_annual_return_pct = assumptions.required_annual_return_pct
+            output.holding_period_years = assumptions.holding_period_years
+            output.margin_of_safety_pct = assumptions.margin_of_safety_pct
+            output.maximum_bear_loss_pct = assumptions.maximum_bear_loss_pct
             base_value = scenario_values["base"]
             bear_value = scenario_values["bear"]
             required_price = base_value / ((1.0 + assumptions.required_annual_return_pct / 100.0) ** assumptions.holding_period_years)
@@ -3332,8 +3340,12 @@ def _render_deterministic_valuation(output: DeterministicValuationOutput) -> str
                 f"- 概率加权核心价值：{_display_number(output.probability_weighted_core_value_cny)}元/股",
                 f"- 期权价值：{_display_number(output.optionality_per_share_cny)}元/股；其他调整：{_display_number(output.other_adjustments_per_share_cny)}元/股",
                 f"- 综合公允价值：{_display_number(output.fair_value_per_share_cny)}元/股；相对现价预期收益：{_display_number(output.expected_return_pct)}%",
+                f"- 本次安全价参数：要求年化收益率{_display_number(output.required_annual_return_pct)}%；持有年限{_display_number(output.holding_period_years)}年；安全边际{_display_number(output.margin_of_safety_pct)}%；最大可承受亏损{_display_number(output.maximum_bear_loss_pct)}%",
                 f"- 收益率要求价格：{_display_number(output.required_return_price_cny)}元；安全边际价格：{_display_number(output.margin_of_safety_price_cny)}元；熊市约束价格：{_display_number(output.bear_loss_constraint_price_cny)}元",
                 f"- **安全买入价上限：{_display_number(output.safe_buy_price_ceiling_cny)}元；建议关注区间：{_display_number(output.suggested_buy_zone_low_cny)}-{_display_number(output.safe_buy_price_ceiling_cny)}元；基本面压力价值：{_display_number(output.fundamental_floor_cny)}元。**",
+                "",
+                f"安全买入价上限的计算公式为：min(基准情景每股价值 / (1 + 要求年化收益率) ^ 持有年限，基准情景每股价值 x (1 - 安全边际比例)，悲观情景每股价值 / (1 - 最大可承受亏损比例)) = min({_display_number(output.required_return_price_cny)}元，{_display_number(output.margin_of_safety_price_cny)}元，{_display_number(output.bear_loss_constraint_price_cny)}元) = {_display_number(output.safe_buy_price_ceiling_cny)}元。",
+                "这一定价是新资金的防御性建仓上限，不等同于目标价、综合公允价值或评级锚；当现价高于安全买入价但仍接近或低于综合公允价值时，评级可以偏正面，但执行上应等待回落或等待新的基本面证据上修估值输入。",
             ]
         )
     else:

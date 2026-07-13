@@ -655,6 +655,60 @@ def test_handoff_numeric_audit_blocks_silent_pm_change(tmp_path):
     )
 
 
+def test_handoff_numeric_audit_accepts_unit_order_and_small_revenue_reconciliation(tmp_path):
+    context_dir = tmp_path / "0_context"
+    research_dir = tmp_path / "2_research"
+    portfolio_dir = tmp_path / "5_portfolio"
+    context_dir.mkdir()
+    research_dir.mkdir()
+    portfolio_dir.mkdir()
+    (context_dir / "company_underwriting.json").write_text(
+        json.dumps(
+            {
+                "forecast_years": ["2026E"],
+                "forecast_lines": [
+                    {
+                        "segment": "consolidated",
+                        "metric": "Revenue",
+                        "unit": "CNY mn",
+                        "year_1_value": 220000.0,
+                    },
+                    {
+                        "segment": "consolidated",
+                        "metric": "Parent Net Profit",
+                        "unit": "CNY mn",
+                        "year_1_value": 18700.0,
+                    },
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+    manager = {
+        "canonical_model_snapshot": [
+            {
+                "line_id": "2026E_revenue",
+                "period": "2026E",
+                "metric": "Revenue",
+                "value": 225000.0,
+                "unit": "mn CNY",
+            },
+            {
+                "line_id": "2026E_parent_net_profit",
+                "period": "2026E",
+                "metric": "Parent Net Profit",
+                "value": 18700.0,
+                "unit": "mn CNY",
+            },
+        ],
+        "model_change_rows": [],
+    }
+    (research_dir / "canonical_plan.json").write_text(json.dumps(manager), encoding="utf-8")
+    (portfolio_dir / "canonical_decision.json").write_text(json.dumps(manager), encoding="utf-8")
+
+    assert audit_handoff_numeric_consistency(tmp_path) == []
+
+
 def test_post_generation_audit_marks_missing_pm_analytical_spine_review_only(tmp_path):
     portfolio_dir = tmp_path / "5_portfolio"
     portfolio_dir.mkdir()
@@ -903,6 +957,14 @@ def test_public_key_number_consistency_catches_conflicting_net_cash():
     )
 
     assert [issue.section for issue in issues] == ["public_key_number_consistency"]
+
+
+def test_public_key_number_consistency_does_not_treat_current_value_as_current_price():
+    issues = audit_public_key_number_consistency(
+        "当前价68.71元。新材料期权的当前价值约为每股0.3元。"
+    )
+
+    assert issues == []
 
 
 def test_public_forecast_growth_must_match_canonical_revenue(tmp_path):

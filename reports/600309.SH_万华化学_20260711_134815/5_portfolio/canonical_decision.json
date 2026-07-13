@@ -482,10 +482,10 @@
   ],
   "safe_valuation_assumptions": {
     "current_price_cny": 68.71,
-    "required_annual_return_pct": 25.0,
+    "required_annual_return_pct": 20.0,
     "holding_period_years": 1.0,
     "margin_of_safety_pct": 20.0,
-    "maximum_bear_loss_pct": 25.0,
+    "maximum_bear_loss_pct": 20.0,
     "optionality_equity_value_cny_mn": 0.0,
     "optionality_inputs": [
       {
@@ -600,9 +600,13 @@
     "other_adjustments_per_share_cny": 0.0,
     "fair_value_per_share_cny": 70.3089312467457,
     "expected_return_pct": 2.3270721099486247,
-    "required_return_price_cny": 57.34602152392453,
+    "required_annual_return_pct": 20.0,
+    "holding_period_years": 1.0,
+    "margin_of_safety_pct": 20.0,
+    "maximum_bear_loss_pct": 20.0,
+    "required_return_price_cny": 59.73543908742138,
     "margin_of_safety_price_cny": 57.34602152392453,
-    "bear_loss_constraint_price_cny": 66.01777581854056,
+    "bear_loss_constraint_price_cny": 61.891664829881776,
     "safe_buy_price_ceiling_cny": 57.34602152392453,
     "suggested_buy_zone_low_cny": 51.61141937153207,
     "fundamental_floor_cny": 49.51333186390542,

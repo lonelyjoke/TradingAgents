@@ -42,7 +42,8 @@ def test_custom_gateway_still_uses_configured_http_url(monkeypatch):
 
     assert len(clients) == 1
     assert clients[0][0] == "configured_http_url"
-    assert clients[0][1]._DataApi__http_url == "http://example.com/tushare/"
+    assert clients[0][1]._DataApi__token == "x" * 64
+    assert clients[0][1]._DataApi__http_url == "http://example.com/tushare"
 
 
 def test_pro_bar_uses_shared_configured_client(monkeypatch):
@@ -64,7 +65,8 @@ def test_pro_bar_uses_shared_configured_client(monkeypatch):
 
     assert result["ts_code"] == "000001.SZ"
     assert result["limit"] == 3
-    assert result["api"]._DataApi__http_url == "https://tt.dailyfetch.top/"
+    assert result["api"]._DataApi__token == "x" * 64
+    assert result["api"]._DataApi__http_url == "https://tt.dailyfetch.top"
 
 
 def test_custom_gateway_does_not_try_official_fallback_by_default(monkeypatch):

@@ -1,0 +1,100 @@
+{
+  "review": {
+    "revision_required": true,
+    "company_understanding_score": 4,
+    "independent_model_score": 3,
+    "evidence_and_counterevidence_score": 4,
+    "valuation_closure_score": 2,
+    "readability_and_synthesis_score": 3,
+    "strongest_aspects": [
+      "对Q1爆发式盈利的驱动因素分解详实，区分了库存增值、产品升级与经营杠杆，避免了将毛利率异常简单归因于周期。",
+      "情景分析覆盖了乐观、基准、悲观三种路径，并给出了概率权重，透明度高于多数仅给单一路径的报告。",
+      "合同负债、OCF/净利润比、存货/收入比等先行指标的跟踪，为业绩桥梁提供了可验证的代理变量。"
+    ],
+    "findings": [
+      {
+        "section": "valuation_and_expectation_gap",
+        "priority": "must_revise",
+        "issue": "确定性估值快照使用了错误的总股本基数，导致公允价值每股数字与报告其他部分完全断裂。",
+        "evidence_or_logic_gap": "报告正文多处明确总股本为22,684.57万股（约2.268亿股），但canonical_model_snapshot中total_shares_outstanding为2268.4566 mn shares，将22,684.57万股误读为22.68亿股并以此计算EPS和公允价值，使EPS和每股价值比正确值低一个数量级，与正文中的35元EPS、635-1058元情景价值完全矛盾。",
+        "revision_instruction": "将canonical_model_snapshot中的shares值修正为226.846 mn shares（或2.26846亿股），重新计算所有EPS和情景每股公允价值，并确保与正文引用的EPS和估值数字一致。同步修正deterministic_valuation中的所有scenario_rows及safe_buy_price等衍生指标。该错误导致整个第7节估值输出无效，必须先修复。"
+      },
+      {
+        "section": "company_disaggregation",
+        "priority": "must_revise",
+        "issue": "缺少结构化的segment_economics表格，无法满足“证据和因果深度不能仅靠散文弥补”的要求。",
+        "evidence_or_logic_gap": "Prompt要求segment_economics携带业务单元的经济学细节（规模、增长、利润率、现金转换、驱动方程、估值处理等），而当前报告仅在文字中概括了企业级和消费级存储，未以结构化字段提供这些关键信息，使得未来模型修正或分部估值缺乏刚性输入。",
+        "revision_instruction": "在第二节按业务单元（至少区分存储模组整体、企业级存储、消费级存储）插入segment_economics表格，填入已知定量信息（如整体收入、毛利率），对缺失部分（如企业级收入占比）标注为unresolved并链接到半年报验证点。每个单元必须包含经济角色、披露基础、规模与增长、利润率与现金流、驱动方程、估值处理（core/scenario/option）等字段。"
+      },
+      {
+        "section": "company_disaggregation",
+        "priority": "must_revise",
+        "issue": "缺少business_model_mechanisms矩阵，对“公司如何赚钱”的因果链拆解停留在叙事层面。",
+        "evidence_or_logic_gap": "Prompt要求每个业务环节（自研主控、采购NAND、制造模组、协议锁定、企业级销售）以结构化方式描述工作原理、经济驱动因素、现金与资本特征、证据缺口和分析师结论。当前报告虽然用文字描述了这些环节，但没有形成可审计、可复用的结构化记录。",
+        "revision_instruction": "在business_model_mechanisms表格中建立至少4-5条记录，对应自研主控、NAND采购与模组制造、LTA与合同负债、企业级SSD客户导入、消费级基础盘。每条填入how_it_works、economic_driver、cash_and_capital_feature、evidence_or_gap、analyst_conclusion。"
+      },
+      {
+        "section": "industry_cycle_and_competition",
+        "priority": "must_revise",
+        "issue": "缺少industry_driver_matrix，行业驱动力与财务传导的链接不够清晰、可追踪。",
+        "evidence_or_logic_gap": "Prompt要求列出影响公司的5个以上行业驱动因素，说明当前状态、最新证据、影响的业务单元、财务传导路径、置信度和验证点。报告第2节虽描述了AI需求、供给紧张，但未形成规范的驱动因素矩阵，导致假设变更时难以快速评估影响。",
+        "revision_instruction": "新增industry_driver_matrix，至少包含AI/云计算资本开支、NAND供给/产能、原厂LTA锁量、利基存储需求回暖、中美贸易摩擦等5个驱动因素，为每一行填写current_state_and_direction、dated_evidence、affected_business、financial_transmission、confidence、next_verification。"
+      },
+      {
+        "section": "thesis_moat_financial_bridge",
+        "priority": "must_revise",
+        "issue": "缺少结构化的moat_mechanisms表，护城河论证未从叙事转化为可量化评分。",
+        "evidence_or_logic_gap": "Prompt要求moat_mechanisms对每个护城河来源（自研主控、LTA锁定、快速响应等）提供操作机制、观察证明、经济结果、持久性和威胁的明确判断。当前报告虽在正文中评价护城河“较浅”，但没有结构化记录，使得未来修订或比较缺乏基准。",
+        "revision_instruction": "在第三节（或护城河专门小节）插入moat_mechanisms表格，至少列出自研主控H3361及客户认证、LTA与预收款锁定、本地化服务响应三条，每条注明moat_source、operating_mechanism、observed_proof、economic_result、durability_and_threat和verdict (partial/unproven)。"
+      },
+      {
+        "section": "accounting_and_capital_allocation",
+        "priority": "must_revise",
+        "issue": "缺少accounting_quality_matrix，现金流和资产负债表分析缺少结构化关键比率和因果解释。",
+        "evidence_or_logic_gap": "Prompt要求对经营性现金流/净利润、存货/收入、应收账款周转、资本开支、负债水平等进行逐项矩阵化分析，给出趋势、因果解释和影响判断。当前第4节虽用表格列示了部分数据，但没有形成标准化的会计质量矩阵，编辑和未来复核的成本增加。",
+        "revision_instruction": "在第4节末尾或单独章节插入accounting_quality_matrix，包含至少5项指标（OCF/净利润、存货/收入及余额、应收账款周转、资本开支与在建工程、负债与利息覆盖），每项填入latest_evidence_and_period、trend_or_comparator、causal_interpretation、earnings_cash_roic_effect和verdict。"
+      },
+      {
+        "section": "three_year_forecast",
+        "priority": "should_revise",
+        "issue": "三年预测表中缺少对盈利与现金流的明确协调计算，且部分假设未充分验证历史季节性。",
+        "evidence_or_logic_gap": "报告以Q1年化收入301.5亿并做季节性调整后得到全年320亿，但未给出具体季节性因子来源，也未说明2026年之后的增长减速是基于什么产能或需求天花板。同时，2027年FCF转正的推算未细化营运资本各分项的变化。",
+        "revision_instruction": "补充季节性调整的计算明细（历史Q1占全年比重的数据来源或估算逻辑），并在三年表中增加收入→毛利→营业利润→净利润→OCF→FCF的逐项公式连接，对营运资本各科目（存货、应收、应付、合同负债）给出至少一个年度的变动假设，以使现金流预测可追溯。"
+      },
+      {
+        "section": "thesis_moat_financial_bridge",
+        "priority": "should_revise",
+        "issue": "三条投资主线的前两条缺少可量化证伪阈值，目前的证伪表述较为定性。",
+        "evidence_or_logic_gap": "Prompt明确要求thesis_financial_bridge的每一条都要有falsification_gate。第一条“毛利率降至30%以下”虽有条件，但未结合收入结构给出具体定量门槛（如企业级收入占比低于10%且毛利率<30%），第二条仅提及“NAND现货价格连续两个月下跌”，未明确具体价格指数和跌幅。",
+        "revision_instruction": "针对主线1，增设量化证伪条件：2026H1企业级收入占比<15% AND H1综合毛利率<30%。针对主线2，将证伪信号细化为：CFM闪存市场NAND Flash综合价格指数较2026年6月高点下跌15%以上，并持续4周。"
+      },
+      {
+        "section": "cross_section_consistency",
+        "priority": "should_revise",
+        "issue": "合同负债、“企业级业务加速扩张”等描述在摘要、行业节、业绩节和催化剂节反复出现，增加了长度但未增加信息。",
+        "evidence_or_logic_gap": "同一组数据（合同负债13.34亿、投资者互动表述）至少出现在第二节、第三节、第五节和第八节中，虽然角度稍有不同，但实质信息重叠明显，不利于读者聚焦关键增量证据。",
+        "revision_instruction": "保留合同负债在业绩桥梁节的详细分析，在其他章节仅以脚注方式引用，不得再重复数值和完整的投资者互动原文；企业级定性描述只在公司拆解、护城河和催化剂中保留一次。"
+      }
+    ],
+    "overall_editorial_verdict": "备忘录对德明利的短期盈利弹性和风险点具有敏锐的洞察，合同负债、OCF改善、存货周转等先行指标的使用值得肯定。但报告在结构化和估值输出方面存在两大致命缺陷：（1）确定性估值因股本基数错误导致全部每股价值无效，与正文数字完全脱节，必须立即修正；（2）缺失business_model_mechanisms、segment_economics、industry_driver_matrix、moat_mechanisms和accounting_quality_matrix五个关键结构化矩阵，使分析停留在叙事层面，削弱了可审计性和未来更新效率。此外，三年预测的现金流协调和季节性因子需要补充，部分章节存在重复叙事。修正上述问题后，报告可从目前的partial readiness提升至高可信度的买方备忘录。"
+  },
+  "review_status": {
+    "mode": "schema_prompt_structured",
+    "agent": "Sell-Side Research Editor",
+    "structured_error": ""
+  },
+  "revision_requested": true,
+  "revision_applied": true,
+  "revision_status": {
+    "mode": "schema_prompt_structured",
+    "agent": "Portfolio Manager Editorial Revision",
+    "structured_error": ""
+  },
+  "initial_handoff_issues": [],
+  "initial_analytical_issues": [
+    "public thesis chapter missing falsification condition"
+  ],
+  "remaining_handoff_issues": [],
+  "remaining_analytical_issues": [],
+  "revision_rejection_reasons": []
+}
