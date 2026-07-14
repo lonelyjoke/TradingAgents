@@ -95,6 +95,8 @@ PUBLICATION_BLOCKING_SECTIONS = frozenset(
         "weighted_margin_arithmetic",
         "rating_valuation_consistency",
         "position_valuation_consistency",
+        "underwriting_readiness",
+        "company_operating_model",
     }
 )
 
@@ -3235,7 +3237,7 @@ def render_post_generation_audit(report_dir: str | Path) -> str:
             "",
             f"- {verdict}: blocking_errors={blocking_errors}, research_errors={errors}, warnings={warnings}.",
             "- Missing, partial or unavailable source data is neutral for investment direction; disclose it with a retrieval or verification task.",
-            "- Only unresolved material contradictions in ticker/period/unit/arithmetic/valuation or unreadable structured generation block formal publication; depth and coverage gaps remain REVIEW items.",
+            "- Only unresolved material contradictions in ticker/period/unit/arithmetic/valuation, unreadable structured generation, or a blocked/missing shared underwriting model block formal publication; depth and coverage gaps remain REVIEW items.",
             "",
             "## Findings",
             "",

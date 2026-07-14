@@ -1,0 +1,1230 @@
+{
+  "schema_version": 2,
+  "symbol": "600809.SH",
+  "as_of_date": "2026-07-14",
+  "forecast_years": [
+    "2026E",
+    "2027E",
+    "2028E"
+  ],
+  "research_readiness": "partial",
+  "readiness_reasons": [
+    "Diluted share count not available from Tushare or market price; EPS and per-share valuation cannot be calculated.",
+    "Detailed capex and FCF data not supplied; cannot complete cash-flow forecast.",
+    "Product-level revenue and margin only from channel checks (回款口径) and not from filings.",
+    "Forecast still functional for revenue, gross/operating margin, and parent profit; bull/base/bear scenarios can be built on these variables.",
+    "One or more filing-reported segments required deterministic restoration.",
+    "Required consolidated three-year forecast lines are incomplete.",
+    "Material segment three-year driver lines are missing: 玻汾系列, 老白汾系列, 青花系列",
+    "Bull/base/bear per-share valuation is incomplete.",
+    "Moat claim lacks traceable evidence ids: Scale and vertical integration in grain sourcing..",
+    "Valuation has not closed from mutually exclusive buckets to per-share fair value.",
+    "volume_price_cost driver chain is incomplete; missing: unit/input cost",
+    "Three-year values remain missing for consolidated line(s): Capex, FCF, eps"
+  ],
+  "company_model": {
+    "model_profile": "corporate",
+    "operating_model_family": "volume_price_cost",
+    "business_archetype": "Branded baijiu (light-flavour) producer and distributor, selling through a multi-tier dealer network supplemented by direct e-commerce and experiential marketing. Core products: Qinghua series (mid-to-ultra-premium), Laobaifen (mid-tier), Bofen (value/budget), plus Zhuyeqing (health liqueur) and other baijiu brands.",
+    "value_proposition_and_customers": "Provides light-aroma baijiu to Chinese consumers across all price tiers.  Drinkers range from mass-market/self-consumers (Bofen) through banquet/hosting (Laobaifen) to business gifting and special occasions (Qinghua 20/30/40/50).  Brand heritage ('the soul of Chinese liquor') and national distribution are key.",
+    "revenue_equation": "Revenue = Sum over products (Sales volume × ex-factory ASP) + other sales.  Volume is mainly a function of brand acceptance, channel inventory dynamics, and promotional intensity.  ASP reflects product mix (premiumisation) and pricing power.",
+    "profit_equation": "Gross profit = Revenue – cost of goods (mainly grain, packaging, labour, depreciation).  Operating profit = Gross profit – selling (incl. channel incentives, advertising, C-terminal red-packet scanning) – administrative expenses – R&D.  Net profit parent = Operating profit + net financial income (low leverage) – income tax (~25%).  Working capital is very light (receivables ≈ 0).",
+    "cash_flow_equation": "OCF ≈ Net profit + depreciation – change in working capital (mostly inventory).  Since receivables are negligible and payables are moderate, pre-payments to suppliers grow with capacity build.  Inventory build can be a cash drag.  Investing cash outflow = capex for capacity expansion (e.g., 2030 project) and maintenance.  Financing outflow = dividend payments.",
+    "capital_intensity_and_reinvestment": "Light-asset nature but requiring long-ageing storage and brand-building.  Major capex underway (2030 technical upgrade project) to expand base-liquor capacity.  Maintenance capex is modest relative to operating cash flow.",
+    "diluted_share_count_mn": null,
+    "share_count_period": "missing",
+    "share_count_evidence_id": "",
+    "share_count_source_type": "unresolved",
+    "share_count_formula": "Total share count not found in Tushare or market price data; cannot derive from earnings model alone.",
+    "share_count_cross_checks": [
+      "Market cap (133,659 mn) and PE TTM (12.17) imply TTM net profit ~10,981 mn, but this does not give share count without an EPS figure.",
+      "Parent profit (12,246 mn, FY2025) and any filing EPS would give count, but EPS not available."
+    ],
+    "moat_mechanisms": [
+      "Strong brand heritage and cultural positioning as the origin of Chinese light-aroma liquor.",
+      "Deep distribution network with tight channel control, low dealer inventory (2–3 months), and growing C-terminal engagement (scan-code red packets).",
+      "Scaled production and procurement of grain from owned bases, providing cost stability and quality control.",
+      "High consumer loyalty in Shanxi base, with expanding out-of-province presence achieving 'third brand' status in many markets."
+    ],
+    "moat_to_financial_transmission": [
+      "Brand allows premiumisation and ASP growth (Qinghua 20/30) which lifts gross margin.",
+      "Channel discipline reduces price disruption and receivables, keeping OCF high.",
+      "Scale in procurement and production supports unit cost advantages, stabilising margins.",
+      "Customer stickiness drives repeat consumption and reduces sensitivity to competition."
+    ],
+    "structural_risks": [
+      "Exposure to general consumer demand and banquet/hosting cycle; declining marriage numbers and per-event consumption pressure.",
+      "Intense competition from other national brands (Moutai, Wuliangye, etc.) and strong regional players.",
+      "Product mix shift toward lower-price-tier items (Qinghua 20/Bofen) may compress blended ASP and margin.",
+      "Rising material/labour costs partly offset by scale but can erode profitability in a weak pricing environment.",
+      "Capacity expansion risks over-supply if demand growth disappoints."
+    ],
+    "key_unknowns": [
+      "Final diluted share count and per-share metrics.",
+      "Detailed capex and depreciation schedule for 2030 project and maintenance.",
+      "Real sell-through volumes vs. channel inventory changes by product.",
+      "Exact gross margin per product line (only channel-check estimates exist).",
+      "Impact of 'Five-code integration' and C-terminal red packets on sell-in vs. sell-out dynamics."
+    ],
+    "evidence_ids": [
+      "EV006",
+      "EV010",
+      "EV013",
+      "EV014",
+      "EV015",
+      "KPE03",
+      "KPE04",
+      "KPE09",
+      "KPE11"
+    ]
+  },
+  "business_unit_map": [
+    {
+      "unit_id": "BU_report_fenjiu",
+      "unit_name": "汾酒",
+      "unit_type": "reported_segment",
+      "disclosure_basis": "reported",
+      "parent_unit": "company",
+      "economic_role": "Core revenue and profit pool; covers all baijiu products (Qinghua, Laobaifen, Bofen, etc.)",
+      "revenue_driver_equation": "Volume (tons) × ex-factory ASP per ton, influenced by product mix, channel stocking/de-stocking, and geographical expansion.",
+      "profit_driver_equation": "Gross margin driven by product mix (higher Qinghua share lifts margin; Bofen dilutes) and cost of grain/packaging/labour; operating leverage from fixed selling and administrative costs.",
+      "cash_and_capital_equation": "OCF closely tracks net profit (OCF/NI ~1.5 in Q1); capex for capacity expansion; moderate dividend payout.",
+      "reported_metrics": [
+        "Revenue 37,441 mn CNY (FY2025), gross margin 75.67%",
+        "Revenue growth 7.72% YoY (FY2025)",
+        "Gross margin change -1.40 pp YoY"
+      ],
+      "evidence_ids": [
+        "EV006",
+        "EV029"
+      ],
+      "missing_inputs": [
+        "Product-level volume breakdown not in filings",
+        "Reported segment profit/margin detail limited to revenue and cost"
+      ],
+      "next_verification": "H1 2026 interim report for updated segment revenue, cost, and margin."
+    },
+    {
+      "unit_id": "BU_report_other_liquor",
+      "unit_name": "其他酒类",
+      "unit_type": "reported_segment",
+      "disclosure_basis": "reported",
+      "parent_unit": "company",
+      "economic_role": "Minor segment; mainly Zhuyeqing (health liqueur) and possibly other branded products.",
+      "revenue_driver_equation": "Volume × ASP, with less influence on consolidated margins due to low weight.",
+      "profit_driver_equation": "Gross margin around 51.62% in FY2025, lower than core baijiu.",
+      "cash_and_capital_equation": "Part of consolidated cash flows; not separately material.",
+      "reported_metrics": [
+        "Revenue 1,151 mn CNY (FY2025), gross margin 51.62%",
+        "Revenue growth 3.09% YoY",
+        "Gross margin change -0.57 pp YoY"
+      ],
+      "evidence_ids": [
+        "EV006"
+      ],
+      "missing_inputs": [
+        "Sub-product breakdown inside other liquor",
+        "Profit contribution"
+      ],
+      "next_verification": "H1 2026 report"
+    },
+    {
+      "unit_id": "BU_analytic_qinghua",
+      "unit_name": "青花系列",
+      "unit_type": "product",
+      "disclosure_basis": "analytical",
+      "parent_unit": "BU_report_fenjiu",
+      "economic_role": "Flagship premium series; core profit engine (~47% of total revenue based on channel-check 380 bn pool). Includes Qinghua 20 (120 bn 回款), Qinghua 30 (50 bn 回款), and super-premium Qinghua 40/50.",
+      "revenue_driver_equation": "Qinghua 20 volume tied to private business consumption and tier-down from ultra-premium; ASP stable around 350–360 CNY/bottle wholesale. Qinghua 30 facing demand pressure with inventory destocking; ASP ~670 CNY/bottle.",
+      "profit_driver_equation": "High gross margin (likely above corporate average) but under pressure from mix shift to Qinghua 20 and high promotion spending on C-terminal red packets. Qinghua 30 requires rebates to maintain pricing.",
+      "cash_and_capital_equation": "Not separately disclosed; cash conversion is driven by trade receivables (very low) and inventory of aged liquor.",
+      "reported_metrics": [
+        "Qinghua 20 wholesale price 350–360 CNY (Jul 2026)",
+        "Qinghua 30 wholesale price 670 CNY (Jul 2026)",
+        "Qinghua 20 sell-through positive, social inventory low"
+      ],
+      "evidence_ids": [
+        "KPE03",
+        "KPE04",
+        "KPE08",
+        "KPE11"
+      ],
+      "missing_inputs": [
+        "Filing-based revenue and margin for Qinghua series",
+        "Actual sell-out volumes vs. channel stock changes"
+      ],
+      "next_verification": "Obtain quarterly product-level sales data from company filings or IR."
+    },
+    {
+      "unit_id": "BU_analytic_laobaifen",
+      "unit_name": "老白汾系列",
+      "unit_type": "product",
+      "disclosure_basis": "analytical",
+      "parent_unit": "BU_report_fenjiu",
+      "economic_role": "Mid-tier product line (~13% of total revenue pool). Transitioning to new NFC-based traceability system in 2026, leading to short-term headwinds. Future launch of Fen 10/15 sub-lines and banquet-specific SKUs.",
+      "revenue_driver_equation": "Volume currently disrupted by packaging change and team reorganisation; once stabilised, demand from banquet and self-consumption in Shanxi and outer provinces. ASP ~115 CNY/bottle wholesale.",
+      "profit_driver_equation": "Margin likely moderate; product upgrade may improve pricing and profitability once established.",
+      "cash_and_capital_equation": "Not separately disclosed.",
+      "reported_metrics": [
+        "Laobaifen 10 wholesale price 115 CNY (Jul 2026)",
+        "Q1 2026 performance slightly below expectation due to five-code replacement"
+      ],
+      "evidence_ids": [
+        "KPE04",
+        "KPE08",
+        "KPE11"
+      ],
+      "missing_inputs": [
+        "Filing revenue and margin",
+        "New product acceptance and launch schedule"
+      ],
+      "next_verification": "Check launch of Fen 10/15 and banquet SKU sales data."
+    },
+    {
+      "unit_id": "BU_analytic_bofen",
+      "unit_name": "玻汾系列",
+      "unit_type": "product",
+      "disclosure_basis": "analytical",
+      "parent_unit": "BU_report_fenjiu",
+      "economic_role": "Mass-market light-aroma baijiu (~26% of revenue pool). Very high turnover, low social inventory, and tight supply-demand. Acts as volume anchor but with lower margin than premium lines.",
+      "revenue_driver_equation": "Supply-constrained; H1 shipment full, H2 expected to tighten (possible stock-out). ASP ~41 CNY/bottle. Demand resilient from mass consumption.",
+      "profit_driver_equation": "Low absolute margin per bottle but high asset turnover; contribution to profit mainly through volume and absorption of fixed costs.",
+      "cash_and_capital_equation": "Not separately disclosed.",
+      "reported_metrics": [
+        "Bofen wholesale price 41 CNY (Jul 2026)",
+        "Supply-demand tight, inventory low",
+        "Dynamic sales positive, H1 shipments high"
+      ],
+      "evidence_ids": [
+        "KPE04",
+        "KPE08",
+        "KPE11"
+      ],
+      "missing_inputs": [
+        "Filing revenue and margin",
+        "Detailed H2 shipment plan"
+      ],
+      "next_verification": "Monitor H2 shipment volume and channel inventory."
+    }
+  ],
+  "segment_models": [
+    {
+      "segment": "汾酒",
+      "products_or_services": "Core baijiu range including Qinghua, Laobaifen, Bofen, and other aromatic liquor.",
+      "customers_and_channel": "Multi-tier distribution (dealers → sub-dealers → retail/banquet); supplemented by direct e-commerce, dedicated stores, and new retail.  Major channel to HORECA, banquets, gifting, self-consumption.",
+      "revenue_weight_pct": 96.7,
+      "profit_weight_pct": 98.0,
+      "base_period": "FY2025",
+      "base_revenue_value": 37441.36,
+      "base_revenue_unit": "CNY mn",
+      "base_revenue_growth_pct": 7.72,
+      "base_margin_pct": 75.67,
+      "base_margin_change_pp": -1.4,
+      "demand_and_order_drivers": [
+        "Private business consumption recovery (supports Qinghua 20)",
+        "Banquet and hosting demand (marriage numbers declining)",
+        "Regional expansion out-of-province (targeting #3 brand status)",
+        "In-province consumer upgrade to Qinghua 20/25"
+      ],
+      "industry_supply_and_capacity": "Industry overcapacity for mid-to-low tier, but premium baijiu remains resource-constrained by old pits and storage.  Capacity expansion ongoing at Fenjiu (2030 project).",
+      "volume_share_utilization": "Channel checks indicate tight supply for Bofen, demand-driven for Qinghua 20, and over-supplied for Qinghua 30.  Overall inventory near 2-3 months, reasonable.  Utilization of ageing capacity high.",
+      "price_asp_take_rate": "Stable wholesale prices for Qinghua 20 (350-360 CNY), Bofen (41 CNY).  Qinghua 30 at 670 CNY may face downward pressure.  ASP mix shifting toward mid-tier due to consumer downgrading.",
+      "unit_cost_and_input_prices": "Grain and packaging costs largely controlled through long-term contracts and vertical integration (140万亩 grain bases).  Labor and energy costs moderate.",
+      "margin_and_operating_leverage": "Gross margin fell 1.4pp in FY2025; Q1 2026 down 3.75pp YoY to 75.05%.  Operating margin down 5.29pp YoY to 48.58%.  Further pressure if high-priced Qinghua 30 share declines.",
+      "working_capital_and_cash_conversion": "Negative cash conversion cycle due to very low receivables (0.0002% of revenue) and pre-payments from distributors.  Inventory to annualized revenue 22.9% (Q1 2026), up 3.99pp YoY, but still healthy for aged liquor.",
+      "prosperity_level": "weakening",
+      "marginal_direction": "deteriorating",
+      "causal_analysis": "Demand softening in banquet and premium segments, combined with product transition effects, is compressing gross and operating margins.  However, cash generation remains excellent and balance sheet is robust.",
+      "valuation_treatment": "Core value driver; assigned P/E based on normalised earnings power.",
+      "strongest_counterevidence": [
+        "If out-of-province expansion slows and Shanxi market saturates, growth may stall.",
+        "Premiumisation reversal (Qinghua 30 underperformance) could permanently cap margins."
+      ],
+      "evidence_ids": [
+        "EV006",
+        "EV013",
+        "EV014",
+        "EV015",
+        "KPE03",
+        "KPE04",
+        "KPE09",
+        "KPE11"
+      ],
+      "missing_inputs": [
+        "Product-level revenue and margin from filings",
+        "Precise volume breakdown by SKU"
+      ],
+      "next_verification": "2026 semi-annual report for updated segment revenue, cost, and gross margin."
+    },
+    {
+      "segment": "其他酒类",
+      "products_or_services": "Zhuyeqing health liqueur and possibly Xinghuacun village brand wines.",
+      "customers_and_channel": "Similar distribution networks as core baijiu, but with niche focus.",
+      "revenue_weight_pct": 3.3,
+      "profit_weight_pct": 2.0,
+      "base_period": "FY2025",
+      "base_revenue_value": 1151.37,
+      "base_revenue_unit": "CNY mn",
+      "base_revenue_growth_pct": 3.09,
+      "base_margin_pct": 51.62,
+      "base_margin_change_pp": -0.57,
+      "demand_and_order_drivers": [
+        "Health-conscious consumption trend",
+        "Niche gifting and self-consumption"
+      ],
+      "industry_supply_and_capacity": "Similar to baijiu but less scale-sensitive.",
+      "volume_share_utilization": "Minor; not a material swing factor.",
+      "price_asp_take_rate": "Unknown.",
+      "unit_cost_and_input_prices": "Similar grain/packaging cost structure but with additional herbs for Zhuyeqing.",
+      "margin_and_operating_leverage": "Low gross margin relative to baijiu; minor impact on consolidated margins.",
+      "working_capital_and_cash_conversion": "Part of consolidated cash flows.",
+      "prosperity_level": "neutral",
+      "marginal_direction": "stable",
+      "causal_analysis": "Not material for valuation.",
+      "valuation_treatment": "Included in consolidated P/E; no separate valuation needed.",
+      "strongest_counterevidence": [
+        "None"
+      ],
+      "evidence_ids": [
+        "EV006"
+      ],
+      "missing_inputs": [
+        "Detailed sub-product breakdown"
+      ],
+      "next_verification": "None urgent."
+    },
+    {
+      "segment": "青花系列",
+      "products_or_services": "",
+      "customers_and_channel": "",
+      "revenue_weight_pct": 47.4,
+      "profit_weight_pct": null,
+      "base_period": "unspecified",
+      "base_revenue_value": null,
+      "base_revenue_unit": "亿元（回款口径）",
+      "base_revenue_growth_pct": null,
+      "base_margin_pct": null,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [],
+      "industry_supply_and_capacity": "",
+      "volume_share_utilization": "",
+      "price_asp_take_rate": "",
+      "unit_cost_and_input_prices": "",
+      "margin_and_operating_leverage": "",
+      "working_capital_and_cash_conversion": "",
+      "prosperity_level": "evidence_limited",
+      "marginal_direction": "unknown",
+      "causal_analysis": "",
+      "valuation_treatment": "evidence_limited",
+      "strongest_counterevidence": [],
+      "evidence_ids": [],
+      "missing_inputs": [
+        "LLM omitted a filing-reported material segment"
+      ],
+      "next_verification": ""
+    },
+    {
+      "segment": "老白汾系列",
+      "products_or_services": "",
+      "customers_and_channel": "",
+      "revenue_weight_pct": 13.2,
+      "profit_weight_pct": null,
+      "base_period": "unspecified",
+      "base_revenue_value": null,
+      "base_revenue_unit": "亿元（回款口径）",
+      "base_revenue_growth_pct": null,
+      "base_margin_pct": null,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [],
+      "industry_supply_and_capacity": "",
+      "volume_share_utilization": "",
+      "price_asp_take_rate": "",
+      "unit_cost_and_input_prices": "",
+      "margin_and_operating_leverage": "",
+      "working_capital_and_cash_conversion": "",
+      "prosperity_level": "evidence_limited",
+      "marginal_direction": "unknown",
+      "causal_analysis": "",
+      "valuation_treatment": "evidence_limited",
+      "strongest_counterevidence": [],
+      "evidence_ids": [],
+      "missing_inputs": [
+        "LLM omitted a filing-reported material segment"
+      ],
+      "next_verification": ""
+    },
+    {
+      "segment": "玻汾系列",
+      "products_or_services": "",
+      "customers_and_channel": "",
+      "revenue_weight_pct": 26.3,
+      "profit_weight_pct": null,
+      "base_period": "unspecified",
+      "base_revenue_value": null,
+      "base_revenue_unit": "亿元（回款口径）",
+      "base_revenue_growth_pct": null,
+      "base_margin_pct": null,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [],
+      "industry_supply_and_capacity": "",
+      "volume_share_utilization": "",
+      "price_asp_take_rate": "",
+      "unit_cost_and_input_prices": "",
+      "margin_and_operating_leverage": "",
+      "working_capital_and_cash_conversion": "",
+      "prosperity_level": "evidence_limited",
+      "marginal_direction": "unknown",
+      "causal_analysis": "",
+      "valuation_treatment": "evidence_limited",
+      "strongest_counterevidence": [],
+      "evidence_ids": [],
+      "missing_inputs": [
+        "LLM omitted a filing-reported material segment"
+      ],
+      "next_verification": ""
+    }
+  ],
+  "underwriting_questions": [
+    {
+      "question_id": "Q1",
+      "question": "Can out-of-province growth accelerate in 2027-2028, offsetting Shanxi saturation and driving a return to >5% revenue growth?",
+      "why_it_matters": "Shanxi province (~130e sales) is close to saturation; out-of-province expansion is the main growth lever for volume and Qinghua premiumisation.",
+      "current_answer": "Out-of-province growth slightly positive in 2026H1, with company targeting 'third brand' status. Momentum moderate.",
+      "bull_evidence": [
+        "Fenjiu brand is gaining recognition outside Shanxi as a premium light-aroma alternative.",
+        "Distributor model is replicable, and C-terminal marketing (red packets) is improving sell-out."
+      ],
+      "bear_evidence": [
+        "National brands (Moutai, Wuliangye, Luzhou) dominate out-of-province premium consumption; regional players also strong.",
+        "Shanxi sales decline (-10%) suggests even home market is challenged."
+      ],
+      "decisive_model_variables": [
+        "Consolidated revenue growth rate",
+        "Revenue share from out-of-province regions"
+      ],
+      "affected_financial_lines": [
+        "Consolidated revenue",
+        "Gross margin (if Qinghua mix improves)"
+      ],
+      "evidence_ids": [
+        "KPE04",
+        "KPE09"
+      ],
+      "missing_evidence": [
+        "Out-of-province sales data by region from company",
+        "Channel inventory and sell-through data beyond Shanxi"
+      ],
+      "next_verification": "Obtain company revenue split by province/region in 2026 annual report."
+    },
+    {
+      "question_id": "Q2",
+      "question": "Will the product mix shift towards mid-price Qinghua 20 and Laobaifen permanently lower the blended gross margin, or can margin recovery occur with scale and premiumisation re-acceleration?",
+      "why_it_matters": "Gross margin is the key profitability lever; a 1pp change impacts net profit by ~290 mn CNY.",
+      "current_answer": "Q1 2026 gross margin fell 3.75pp YoY to 75%, driven by higher share of Qinghua 20 and Bofen, and lower Qinghua 30 volume.",
+      "bull_evidence": [
+        "Qinghua 20 itself has good margin; volume growth can compensate via operating leverage.",
+        "Cost control (grain bases, scale) may limit downside."
+      ],
+      "bear_evidence": [
+        "Qinghua 30 decline may be structural if ultra-premium demand does not recover.",
+        "Increasing weight of Bofen (low margin) creates a drag."
+      ],
+      "decisive_model_variables": [
+        "Blended gross margin",
+        "Product mix (share of Qinghua 20/30, Bofen)"
+      ],
+      "affected_financial_lines": [
+        "Gross profit",
+        "Operating profit",
+        "EPS"
+      ],
+      "evidence_ids": [
+        "EV013",
+        "KPE03",
+        "KPE04"
+      ],
+      "missing_evidence": [
+        "Product-level gross margin from filings",
+        "Volumes by SKU"
+      ],
+      "next_verification": "Request segmented gross margin data from company IR."
+    },
+    {
+      "question_id": "Q3",
+      "question": "Is the current channel inventory level (2-3 months) truly healthy, or are we seeing hidden inventory accumulation that will delay a return to sell-in growth?",
+      "why_it_matters": "If reported sales (sell-in) outpace real sell-out for an extended period, future quarters face a de-stocking hit.",
+      "current_answer": "Channel checks report 2-3 months inventory (Jul 2026), Q2 destocking is underway. Management aims for benign market development.",
+      "bull_evidence": [
+        "Low social inventory for Bofen and Qinghua 20; destocking in Q2 would normalise.",
+        "Company aims for conservative sell-in to protect pricing."
+      ],
+      "bear_evidence": [
+        "Q1 inventory-to-revenue ratio up 3.99pp YoY, indicating some buildup.",
+        "Challenging banquet demand may slow genuine consumption."
+      ],
+      "decisive_model_variables": [
+        "Channel inventory months",
+        "Revenue growth (sell-in) vs. sell-through growth"
+      ],
+      "affected_financial_lines": [
+        "Revenue",
+        "Working capital"
+      ],
+      "evidence_ids": [
+        "EV018",
+        "KPE03",
+        "KPE04",
+        "KPE09"
+      ],
+      "missing_evidence": [
+        "Actual sell-through volumes from company",
+        "Detailed distributor inventory by region"
+      ],
+      "next_verification": "Track sell-through data and company commentary on inventory at H1 2026 results."
+    },
+    {
+      "question_id": "Q4",
+      "question": "What is the future trajectory of selling expenses and the 'cost-to-sales ratio', given the shift towards C-terminal red packets and brand-building?",
+      "why_it_matters": "Selling expense ratio directly impacts operating margin; management indicates a slow decline in cost-to-sales, but absolute spending may remain elevated to support brands.",
+      "current_answer": "Management claims a slow decreasing trend in cost-to-sales ratio (费销比), focusing more on C-end incentives. Q1 operating margin fell sharply due to lower gross margin, not necessarily higher SG&A.",
+      "bull_evidence": [
+        "Reduction in direct channel subsidies could lower total selling costs.",
+        "Improved efficiency from five-code in FMCG management."
+      ],
+      "bear_evidence": [
+        "C-terminal red packets are still promotional spending and may be sticky.",
+        "Competition may force higher marketing spend."
+      ],
+      "decisive_model_variables": [
+        "SG&A ratio",
+        "Operating margin"
+      ],
+      "affected_financial_lines": [
+        "Operating profit",
+        "Net profit"
+      ],
+      "evidence_ids": [
+        "KPE03",
+        "EV014"
+      ],
+      "missing_evidence": [
+        "Exact selling expense ratio history and forecast",
+        "Breakdown between C-end and channel spending"
+      ],
+      "next_verification": "Analyse H1 2026 income statement for selling expense trends."
+    },
+    {
+      "question_id": "Q5",
+      "question": "Will capex for the 2030 technical upgrade project cause a significant drag on free cash flow and returns in 2026-2028, or will it be well-covered by operating cash flow?",
+      "why_it_matters": "Large capex can reduce distributable cash, lower ROIC temporarily, and if demand doesn't materialise, create excess capacity.",
+      "current_answer": "Evidence shows 2030 project is ongoing; prepayments for capacity projects increased significantly in 2025. No recent capex numbers available.",
+      "bull_evidence": [
+        "Company has strong OCF (1.5x net profit in Q1) that comfortably covers capex.",
+        "Expansion is for long-ageing storage, which builds quality and future pricing power."
+      ],
+      "bear_evidence": [
+        "If demand does not recover, new capacity may become idle, depressing returns.",
+        "Increased depreciation may pressure margins."
+      ],
+      "decisive_model_variables": [
+        "Capex",
+        "FCF",
+        "ROIC"
+      ],
+      "affected_financial_lines": [
+        "FCF",
+        "DPS",
+        "ROIC"
+      ],
+      "evidence_ids": [
+        "EV034"
+      ],
+      "missing_evidence": [
+        "Detailed capex schedule and budget for 2030 project",
+        "Current capitalised assets and depreciation"
+      ],
+      "next_verification": "Review 2025 annual report cash flow statement for capex and CIP details."
+    }
+  ],
+  "forecast_lines": [
+    {
+      "segment": "consolidated",
+      "metric": "Revenue",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 38718.3,
+      "year_1_value": 36062.3,
+      "year_2_value": 37144.2,
+      "year_3_value": 38629.9,
+      "formula": "Year 1 = seasonality-adjusted Q1 2026 (Q1 rev / 48.7% median share).  Year 2 +3%, Year 3 +4% as destocking ends and out-of-province expansion resumes.",
+      "assumption_status": "calculated",
+      "evidence_ids": [
+        "EV011",
+        "EV012",
+        "KPE09"
+      ],
+      "key_sensitivity": "+1% revenue = ~387 mn CNY",
+      "missing_inputs": []
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Gross margin",
+      "unit": "%",
+      "base_period": "FY2025",
+      "base_value": 75.0,
+      "year_1_value": 74.5,
+      "year_2_value": 74.8,
+      "year_3_value": 75.0,
+      "formula": "Year 1 reflects mix shift and margin pressure from product transition.  Gradual recovery as premiumisation resumes.",
+      "assumption_status": "analytical",
+      "evidence_ids": [
+        "EV013",
+        "KPE03",
+        "KPE04"
+      ],
+      "key_sensitivity": "1pp gross margin = ~387 mn gross profit",
+      "missing_inputs": [
+        "Product-level gross margin"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Operating margin",
+      "unit": "%",
+      "base_period": "FY2025 (est.)",
+      "base_value": 45.0,
+      "year_1_value": 41.0,
+      "year_2_value": 42.5,
+      "year_3_value": 43.5,
+      "formula": "Operating margin = gross margin – SG&A ratio – R&D ratio.  SG&A ratio assumed ~33% in 2026E, gradually declining.",
+      "assumption_status": "analytical",
+      "evidence_ids": [
+        "EV014",
+        "KPE03"
+      ],
+      "key_sensitivity": "1pp operating margin = ~360 mn operating profit on 2026E revenue",
+      "missing_inputs": [
+        "Detailed SG&A breakdown",
+        "Management's cost-to-sales target"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Operating profit",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 17423.2,
+      "year_1_value": 14785.5,
+      "year_2_value": 15786.3,
+      "year_3_value": 16804.0,
+      "formula": "Revenue × operating margin",
+      "assumption_status": "calculated",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": []
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Net profit parent",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 12246.3,
+      "year_1_value": 11061.7,
+      "year_2_value": 11355.8,
+      "year_3_value": 11820.4,
+      "formula": "Operating profit + net financial income (immaterial) – tax ~25%",
+      "assumption_status": "calculated",
+      "evidence_ids": [
+        "EV011",
+        "EV015"
+      ],
+      "key_sensitivity": "1% revenue change = ~110 mn net profit impact in 2026E",
+      "missing_inputs": []
+    },
+    {
+      "segment": "consolidated",
+      "metric": "EPS (diluted)",
+      "unit": "CNY",
+      "base_period": "FY2025",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "Not calculable; diluted share count missing.",
+      "assumption_status": "missing",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "Total diluted share count"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "OCF",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 16995.0,
+      "year_1_value": 16592.5,
+      "year_2_value": 17033.7,
+      "year_3_value": 17730.6,
+      "formula": "Assumes OCF/NI ratio ~1.5 (Q1 2026 observed).  Applied to net profit parent.  Base year assumed 1.5 ratio.",
+      "assumption_status": "analytical",
+      "evidence_ids": [
+        "EV017"
+      ],
+      "key_sensitivity": "10% change in ratio swings OCF by ~1.6 bn",
+      "missing_inputs": [
+        "Cash flow statement details"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Capex",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "Missing; major 2030 project expenditure unknown.",
+      "assumption_status": "missing",
+      "evidence_ids": [],
+      "key_sensitivity": "If capex = 3,000 mn p.a., FCF would be 13,592 mn in 2026E",
+      "missing_inputs": [
+        "Capital expenditure schedule",
+        "Cash paid for construction/fixed assets"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "FCF",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "OCF - capex",
+      "assumption_status": "missing",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "Capex"
+      ]
+    },
+    {
+      "segment": "汾酒",
+      "metric": "Revenue",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 37441.4,
+      "year_1_value": 34800.0,
+      "year_2_value": 35844.0,
+      "year_3_value": 37277.8,
+      "formula": "Proportional to consolidated revenue (segment weight ~96.7%).  Year 1 reduction mirrors total revenue drop.",
+      "assumption_status": "analytical",
+      "evidence_ids": [
+        "EV006"
+      ],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "Segment-level official forecast"
+      ]
+    },
+    {
+      "segment": "其他酒类",
+      "metric": "Revenue",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 1151.4,
+      "year_1_value": 1262.3,
+      "year_2_value": 1300.2,
+      "year_3_value": 1352.1,
+      "formula": "Slight growth as health liqueur gains traction; assumes ~10% growth in 2026E, slowing.",
+      "assumption_status": "analytical",
+      "evidence_ids": [
+        "EV006"
+      ],
+      "key_sensitivity": "",
+      "missing_inputs": []
+    },
+    {
+      "segment": "consolidated",
+      "metric": "eps",
+      "unit": "",
+      "base_period": "",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "missing; downstream analyst must complete",
+      "assumption_status": "missing",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "required consolidated forecast line omitted"
+      ]
+    }
+  ],
+  "scenarios": [
+    {
+      "scenario": "bull",
+      "probability_pct": 25.0,
+      "operating_assumptions": [
+        "Out-of-province expansion accelerates; revenue returns to +8% growth by 2028E.",
+        "Qinghua 30 demand recovers; blended gross margin stabilises at 76% by 2028E.",
+        "Selling expenses decline as C-channel efficiency improves.",
+        "Early industry cycle bottom in H2 2026, leading to quick destocking."
+      ],
+      "parent_net_profit_cny_mn": 12920.0,
+      "eps_cny": null,
+      "fcf_cny_mn": null,
+      "valuation_method": "P/E on normalised earnings",
+      "valuation_multiple": 15.0,
+      "fair_value_per_share": null,
+      "evidence_ids": [],
+      "falsification": "If out-of-province growth remains below 3% through 2027, bull case invalid.",
+      "missing_inputs": [
+        "Share count"
+      ]
+    },
+    {
+      "scenario": "base",
+      "probability_pct": 55.0,
+      "operating_assumptions": [
+        "Revenue modestly down in 2026E, flattish in 2027E, +4% by 2028E as destocking ends and Shanxi stabilises.",
+        "Gross margin 74.5% -> 75.0%; operating margin slowly recovers to 43.5%.",
+        "Industry bottoming in 2027.",
+        "Capex covered by OCF; FCF remains positive but unquantified."
+      ],
+      "parent_net_profit_cny_mn": 11062.0,
+      "eps_cny": null,
+      "fcf_cny_mn": null,
+      "valuation_method": "P/E on sustainable earnings",
+      "valuation_multiple": 12.0,
+      "fair_value_per_share": null,
+      "evidence_ids": [
+        "EV010",
+        "KPE09"
+      ],
+      "falsification": "If full-year 2026 revenue falls below 34,000 mn or margin drops below 40%, base case too optimistic.",
+      "missing_inputs": [
+        "Share count"
+      ]
+    },
+    {
+      "scenario": "bear",
+      "probability_pct": 20.0,
+      "operating_assumptions": [
+        "Consumer downturn deepens; out-of-province expansion fails; Shanxi declines further.",
+        "Revenue falls to 33,000 mn in 2026E, only +2% thereafter.",
+        "Blended gross margin drops to 73%, operating margin to 38%.",
+        "Capex unchanged, FCF barely positive.",
+        "Dividend reduced."
+      ],
+      "parent_net_profit_cny_mn": 8500.0,
+      "eps_cny": null,
+      "fcf_cny_mn": null,
+      "valuation_method": "P/E on depressed earnings",
+      "valuation_multiple": 10.0,
+      "fair_value_per_share": null,
+      "evidence_ids": [],
+      "falsification": "If industry recovery signs by early 2027 (e.g., Wuliangye positive outlook), bear case invalid.",
+      "missing_inputs": [
+        "Share count"
+      ]
+    }
+  ],
+  "thesis_financial_bridges": [
+    {
+      "bridge_id": "T1",
+      "thesis_or_question": "Out-of-province expansion becomes the dominant growth driver, compensating for saturated Shanxi market.",
+      "affected_unit": "consolidated",
+      "operating_driver": "Revenue growth share from beyond-Shanxi regions",
+      "driver_formula": "Revenue growth = Shanxi rev growth × 40% + out-of-province rev growth × 60%",
+      "base_assumption": "Out-of-province rev growth +3% in 2026E, +5% in 2027E",
+      "bull_assumption": "+8% growth from 2027E",
+      "bear_assumption": "flat in 2027E",
+      "revenue_impact": "Bull adds ~1,400 mn to consolidated revenue vs base by 2028E",
+      "profit_impact": "Additional ~350 mn net profit (at 25% net margin)",
+      "eps_impact": "not quantified (missing shares)",
+      "fcf_or_capital_impact": "likely positive but FCF unknown",
+      "valuation_impact": "Bull could support 15x P/E, base is 12x; value difference substantial",
+      "quantification_status": "partially_quantified",
+      "evidence_ids": [
+        "KPE04",
+        "KPE09"
+      ],
+      "missing_inputs": [
+        "Precise revenue split by province",
+        "Out-of-province margins"
+      ]
+    },
+    {
+      "bridge_id": "T2",
+      "thesis_or_question": "Product mix improvement (Qinghua 30 recovery) will restore gross margin and operating leverage.",
+      "affected_unit": "consolidated",
+      "operating_driver": "Blended gross margin",
+      "driver_formula": "Gross margin = sum (product share × product gross margin).  Qinghua 30 recovery lifts mix.",
+      "base_assumption": "Qinghua 30 share declines further in 2026, stabilises 2027",
+      "bull_assumption": "Qinghua 30 share returns to 2024 levels by 2028",
+      "bear_assumption": "Qinghua 30 share continues to decline",
+      "revenue_impact": "Bull case total revenue may slightly increase as premium volumes grow.",
+      "profit_impact": "+0.5pp to 1.0pp gross margin by 2028E = ~+380-770 mn gross profit",
+      "eps_impact": "not quantified",
+      "fcf_or_capital_impact": "higher margin improves OCF",
+      "valuation_impact": "Multiple expansion possible (quality premium).",
+      "quantification_status": "partially_quantified",
+      "evidence_ids": [
+        "KPE03",
+        "KPE04"
+      ],
+      "missing_inputs": [
+        "Product gross margins",
+        "Qinghua volume path"
+      ]
+    },
+    {
+      "bridge_id": "T3",
+      "thesis_or_question": "Cost-to-sales ratio will decline as C-end red packets replace channel subsidies, boosting operating profit.",
+      "affected_unit": "consolidated",
+      "operating_driver": "SG&A as % of revenue",
+      "driver_formula": "Operating margin = gross margin – SG&A% – R&D%",
+      "base_assumption": "SG&A ratio declines 0.3pp per year from 2026E",
+      "bull_assumption": "Decline 0.5pp/year due to successful digital transformation",
+      "bear_assumption": "Stable or slight increase due to competitive pressure",
+      "revenue_impact": "none directly",
+      "profit_impact": "Bull saves ~180 mn in selling costs by 2028E vs base",
+      "eps_impact": "not quantified",
+      "fcf_or_capital_impact": "higher operating cash generation",
+      "valuation_impact": "Better margins support higher P/E multiple.",
+      "quantification_status": "unquantified",
+      "evidence_ids": [
+        "KPE03"
+      ],
+      "missing_inputs": [
+        "Detailed SG&A budget and trend"
+      ]
+    }
+  ],
+  "moat_evidence_tests": [
+    {
+      "moat_mechanism": "Strong brand heritage (cultural moat) allowing premium pricing.",
+      "observable_test": "Price premium of Qinghua 30 vs similar-tier competitors (e.g., Guojiao 1573).",
+      "comparison_basis": "Wholesale price of 670 CNY vs Luzhou Guojiao 1573 at 830-850 CNY (KPE08). Fenjiu trades at a discount but still premium.",
+      "evidence_result": "partial; Fenjiu offers a strong value-for-money proposition but does not command absolute price leadership.",
+      "financial_transmission": "ASP and gross margin.",
+      "strongest_counterevidence": "The discount to Luzhou suggests Fenjiu's brand isn't yet at the highest tier; competition can erode the premium.",
+      "status": "partial",
+      "evidence_ids": [
+        "KPE08"
+      ],
+      "next_verification": "Track Qinghua 30 wholesale price relative to peers over multiple quarters."
+    },
+    {
+      "moat_mechanism": "Distribution network and channel control enabling high cash conversion.",
+      "observable_test": "Receivables/revenue ratio vs peers.",
+      "comparison_basis": "0.0002% for Fenjiu (Q1 2026) vs typical distributors in baijiu (often <1%).",
+      "evidence_result": "proven; extremely low receivables confirm strong channel control and cash conversion.",
+      "financial_transmission": "OCF and working capital efficiency.",
+      "strongest_counterevidence": "If the channel destocks aggressively, revenue recognition may lag; but that doesn't harm cash from customers.",
+      "status": "proven",
+      "evidence_ids": [
+        "EV018",
+        "EV017"
+      ],
+      "next_verification": "Monitor receivables in H1 2026."
+    },
+    {
+      "moat_mechanism": "Scale and vertical integration in grain sourcing.",
+      "observable_test": "Cost of goods sold as % of revenue vs standalone distillery.",
+      "comparison_basis": "Not available for peers; however, 140万亩 grain bases indicate supply security.",
+      "evidence_result": "Downgraded from partial: no valid EV/KPE evidence id supports the test.",
+      "financial_transmission": "Gross margin stability.",
+      "strongest_counterevidence": "Other major brands also have long-term contracts; cost advantage may be small.",
+      "status": "unproven",
+      "evidence_ids": [],
+      "next_verification": "Compare grain cost index to realised COGS over time."
+    }
+  ],
+  "valuation_buckets": [
+    {
+      "bucket": "Core operating business",
+      "inclusion": "core",
+      "valuation_method": "P/E multiple on base-case 2026E parent net profit",
+      "metric_and_period": "2026E parent net profit 11,062 mn CNY",
+      "metric_value": 11062.0,
+      "valuation_multiple": 12.0,
+      "ownership_pct": 100.0,
+      "haircut_pct": 0.0,
+      "equity_value_cny_mn": 132744.0,
+      "per_share_value_cny": null,
+      "overlap_key": "core_pe",
+      "double_counting_treatment": "None",
+      "evidence_ids": [],
+      "missing_inputs": [
+        "Diluted share count for per-share value"
+      ]
+    },
+    {
+      "bucket": "Optionality: Brand recovery / premiumisation cycle",
+      "inclusion": "scenario",
+      "valuation_method": "P/E expansion to 15x on bull-case profit 12,920 mn",
+      "metric_and_period": "Bull-case 2028E or normalised profit",
+      "metric_value": 12920.0,
+      "valuation_multiple": 15.0,
+      "ownership_pct": 100.0,
+      "haircut_pct": 0.0,
+      "equity_value_cny_mn": 193800.0,
+      "per_share_value_cny": null,
+      "overlap_key": "bull_pe",
+      "double_counting_treatment": "Only realised under bull scenario, not added to core.",
+      "evidence_ids": [],
+      "missing_inputs": [
+        "Share count"
+      ]
+    }
+  ],
+  "valuation_closure": {
+    "current_price_cny": null,
+    "diluted_share_count_mn": null,
+    "core_value_per_share_cny": null,
+    "probability_weighted_fair_value_per_share_cny": null,
+    "option_value_per_share_cny": null,
+    "other_adjustments_per_share_cny": null,
+    "fair_value_per_share_cny": null,
+    "expected_return_pct": null,
+    "formula": "Cannot close without diluted share count.",
+    "rating_consistency_check": "Not applicable",
+    "double_counting_checks": [
+      "Core PE and bull PE are mutually exclusive scenarios; no double count."
+    ],
+    "status": "not_valued",
+    "missing_inputs": [
+      "Diluted share count",
+      "Current share price"
+    ]
+  },
+  "llm_analysis_layer": {
+    "business_question_tree": [
+      "What is the realistic pace of out-of-province market penetration for Qinghua 20 and Laobaifen?",
+      "How will the channel inventory cycle play out over the next 3 quarters given the management's destocking pledge?",
+      "Can the operating margin recover to 45%+ levels if gross margin stabilises and selling expenses decline as promised?",
+      "What is the exact effect of C-terminal red-packet incentives on sell-through volumes?",
+      "How much of the 2030 capex will be growth capex vs maintenance, and when will returns materialise?"
+    ],
+    "profit_pool_priority": "The core Fenjiu segment (97% of revenue) is the overwhelming profit engine. Within it, Qinghua series (especially Qinghua 20) contributes the highest absolute gross profit given its weight and superior margin. Bofen provides volume and cash conversion but dilutes margins. Laobaifen is a transition story. Priority for analysis: Qinghua volume/mix, consolidated gross margin, selling expense control.",
+    "competition_and_substitution_analysis": "Direct competitors: national brands (Moutai, Wuliangye, Luzhou Laojiao) and strong regional players (Yingjia, Gujing, Jinshiyuan). Fenjiu competes mainly in the light-aroma niche, which faces less direct taste substitution but still competes for consumer wallet share. The rise of health-conscious alternatives and imported spirits could be a long-term threat. Customer switching is low due to brand loyalty in Shanxi but higher outside.",
+    "qualitative_to_quantitative_bridge": "Qualitative claims around out-of-province growth and C-end red-packet efficiency are partially supported by channel checks showing H1 out-of-province slight growth and scan-rate data (30% opening rate for Qinghua 20). However, precise revenue elasticity cannot be quantified without regional sales data. The qualitative narrative needs to be bridged with regional revenue splits and C-end conversion-to-sales metrics, which are currently missing.",
+    "expectation_gap_analysis": "Market capitalisation of 133.7 bn CNY implies a TTM P/E of 12.2x. This suggests the market is already pricing a decrease in earnings (TTM implied profit 10,981 mn vs FY2025 12,246 mn). The base-case 2026E profit of 11,062 mn is very close to implied TTM profit, meaning the market is already pricing flat/down earnings. If the bear case (8,500 mn) materialises, further downside remains. Bull case (12,920 mn) would likely cause a re-rating, but share count missing prevents per-share target. The expectation gap is therefore on timing of recovery and out-of-province success, not on the existence of a profit decline.",
+    "red_team_counterarguments": [
+      "Even if out-of-province expansion succeeds, Fenjiu's low brand awareness outside Shanxi could limit premiumisation and keep margins in check.",
+      "The real destocking may take longer than 2 quarters; CFO's 'market benign' language may be optimistic, and a second wave of price cuts could follow.",
+      "If the industry downturn extends to 2028, the stock could de-rate to 8x P/E (bear case profit) giving market cap ~68 bn CNY, a substantial downside from current levels."
+    ],
+    "valuation_explanation": "Without a share count, we can only value the firm at equity level. Base case uses P/E 12.0x, near current market P/E, reflecting no re-rating. Bull case applies 15x, consistent with historical mid-cycle valuations. The method does not require DCF as there is insufficient capex data and the baijiu business is asset-light and cash-generative. Risk premium is embedded in the low multiple, justified by industry headwinds. Sensitivity: a 1% permanent shift in net margin could move equity value by ~7-8%. Recovery or further decline of the baijiu cycle is the key variable.",
+    "final_editorial_synthesis": "As of mid-July 2026, Fenjiu is navigating a baijiu industry correction with product transition. Q1 results showed margin compression but very strong cash generation. The market appears to be pricing a flat to slightly down profit year. The investment case hinges on two turnarounds: out-of-province growth recovery and gross margin stabilization. Given the lack of share count data, we cannot give a per-share valuation, but the equity value (132.7 bn in base) offers limited premium to current market cap (133.7 bn), suggesting full pricing. Downside protection is provided by the current low P/E and strong balance sheet, but catalysts are still developing. The underwriting packet should be updated when the H1 2026 report provides detailed revenue by region, capex, and cash flow, and when the share count is resolved.",
+    "evidence_boundaries": [
+      "Consolidated revenue Q1 2026 and FY2025 are from earnings model (unverified).",
+      "Product-level channel checks are private/proxy and not filing-verified.",
+      "Capex and FCF are missing entirely; any capital return analysis must await H1 report.",
+      "Gross margin and SG&A assumptions are analytical, based on Q1 trends and management commentary."
+    ]
+  },
+  "handoff_manifest": {
+    "handoff_version": "underwriting-v2",
+    "source_of_truth": "structured_research.underwriting_packet",
+    "frozen_reported_facts": [
+      "FY2025 revenue: 38,718,325,657.74 CNY, net profit parent: 12,246,329,337.25 CNY (EV011).",
+      "Q1 2026 revenue: 14,923,228,703.48 CNY, net profit parent: 5,382,557,651.00 CNY (EV010).",
+      "Q1 2026 gross margin 75.05%, operating margin 48.58%, net margin 36.07% (EV013-EV015).",
+      "汾酒 segment FY2025 revenue 37,441 mn, gross margin 75.67% (EV006).",
+      "其他酒类 segment FY2025 revenue 1,151 mn, gross margin 51.62% (EV006).",
+      "Market cap 133,659,277,752 CNY (market_expectation).",
+      "PE TTM 12.17x, PS TTM 3.60x."
+    ],
+    "analyst_estimates": [
+      "2026E consolidated revenue: 36,062 mn (seasonality-adjusted from Q1).",
+      "2026E gross margin 74.5%, operating margin 41.0% (analytical).",
+      "Bull/base/bear profit and P/E multiples are analyst assumptions."
+    ],
+    "unresolved_model_cells": [
+      "diluted_share_count_mn (null)",
+      "EPS (null)",
+      "Capex (null)",
+      "FCF (null)",
+      "Current share price and fair_value_per_share (null)"
+    ],
+    "downstream_must_preserve": [
+      "Full three-year forecast for revenue, margins, net profit parent.",
+      "All business_unit_map entries and segment_models.",
+      "Thesis financial bridges T1, T2, T3.",
+      "Scenario probabilities and profit assumptions.",
+      "Valuation buckets as equity-level values; per-share conversion to be added once share count is obtained.",
+      "Underwriting questions Q1-Q5 as the research agenda."
+    ]
+  },
+  "evidence_change_rules": [
+    {
+      "evidence_id": "KPE09",
+      "affected_segment": "consolidated",
+      "affected_variable": "revenue_growth",
+      "old_assumption": "2026E revenue 36,062 mn (seasonally-adjusted Q1)",
+      "new_assumption": "unchanged",
+      "financial_transmission": "Any material change in Q2 sell-through or full-year guidance would alter revenue, profit, and scenarios.",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "Wait for H1 2026 results; if revenue significantly below 36,000 mn run-rate, downward revision needed."
+    },
+    {
+      "evidence_id": "KPE03",
+      "affected_segment": "consolidated",
+      "affected_variable": "sg&a_ratio",
+      "old_assumption": "SG&A ratio to decline slowly",
+      "new_assumption": "unchanged",
+      "financial_transmission": "Operating margin assumption directly depends on SG&A ratio.",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "H1 2026 income statement; if SG&A is not declining, revisit margin forecast."
+    },
+    {
+      "evidence_id": "KPE01",
+      "affected_segment": "consolidated",
+      "affected_variable": "valuation",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "KPE02",
+      "affected_segment": "consolidated",
+      "affected_variable": "valuation",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "KPE04",
+      "affected_segment": "consolidated",
+      "affected_variable": "revenue_growth",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "KPE04",
+      "affected_segment": "consolidated",
+      "affected_variable": "market_share",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "KPE05",
+      "affected_segment": "consolidated",
+      "affected_variable": "asp_or_price",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "KPE06",
+      "affected_segment": "consolidated",
+      "affected_variable": "asp_or_price",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "KPE07",
+      "affected_segment": "consolidated",
+      "affected_variable": "asp_or_price",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "KPE08",
+      "affected_segment": "青花系列",
+      "affected_variable": "wholesale_price",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "KPE10",
+      "affected_segment": "consolidated",
+      "affected_variable": "valuation",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "KPE11",
+      "affected_segment": "青花系列",
+      "affected_variable": "revenue_base",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "KPE12",
+      "affected_segment": "consolidated",
+      "affected_variable": "unmapped",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    }
+  ],
+  "reconciliation_checks": [
+    "FY2025 segment revenue (汾酒 37,441 + other 1,151) = 38,592 mn, close to consolidated 38,718 mn (difference likely intra-segment adjustments).",
+    "Q1 2026 annualized revenue (59,693 mn) is aggressive and inconsistent with channel guidance; seasonality-adjusted is preferred.",
+    "Implied TTM earnings 10,981 mn vs base-case 2026E 11,062 mn are consistent."
+  ],
+  "analyst_instructions": [
+    "Use seasonality-adjusted 2026 estimates as base, not simple annualised.",
+    "Acquire diluted share count from Tushare or market data before publishing any per-share value.",
+    "Validate capex and FCF from H1 2026 cash flow statement to complete the model.",
+    "Track out-of-province revenue split and C-end scan data to update throughput bridges."
+  ],
+  "preprocessing_notes": [
+    "青花/老白汾/玻汾 revenue figures from channel checks (回款口径) used analytically only.",
+    "Gross margin assumption for FY2025 is estimated at 75% based on product mix evidence.",
+    "Share count missing; per-share metrics and valuation closure deferred.",
+    "All KPE items marked as watch unless explicitly quantified.",
+    "operating model driver coverage (volume_price_cost): capacity, utilization, volume, price/ASP, spread/margin, capex/ROIC"
+  ]
+}

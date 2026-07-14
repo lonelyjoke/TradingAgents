@@ -9,6 +9,8 @@ from tradingagents.dataflows.underwriting_packet import (
     ScenarioUnderwriting,
     ValuationBucket,
     ValuationClosure,
+    _prompt,
+    _schema_prompt,
     _validate_packet,
     build_company_underwriting_packet,
     compact_underwriting_packet,
@@ -81,6 +83,74 @@ class NullOptionalFieldLLM:
             "preprocessing_notes": [],
         }
         return SimpleNamespace(content=json.dumps(payload, ensure_ascii=False))
+
+
+class ToolChoiceUnsupportedLLM:
+    def __init__(self):
+        self.prompts = []
+
+    def with_structured_output(self, _schema):
+        raise ValueError("deepseek-v4-pro thinking mode does not support tool_choice")
+
+    def invoke(self, prompt):
+        self.prompts.append(str(prompt))
+        payload = {
+            "schema_version": 1,
+            "symbol": "001309.SZ",
+            "as_of_date": "2026-07-13",
+            "forecast_years": ["2026E", "2027E", "2028E"],
+            "research_readiness": "partial",
+            "readiness_reasons": ["Enterprise SSD revenue remains undisclosed."],
+            "company_model": {
+                "model_profile": "corporate",
+                "business_archetype": "semiconductor storage controller and SSD module company",
+                "revenue_equation": "SSD shipments x ASP + controller volume x ASP",
+                "profit_equation": "revenue x gross margin - operating expenses",
+                "cash_flow_equation": "net profit + non-cash items - working capital - capex",
+            },
+            "segment_models": [],
+            "underwriting_questions": [],
+            "forecast_lines": [],
+            "scenarios": [],
+            "evidence_change_rules": [],
+            "reconciliation_checks": [],
+            "analyst_instructions": [],
+            "preprocessing_notes": [],
+        }
+        return SimpleNamespace(content=json.dumps(payload, ensure_ascii=False))
+
+
+def test_schema_prompt_fallback_handles_tool_choice_unsupported_models():
+    llm = ToolChoiceUnsupportedLLM()
+
+    packet = build_company_underwriting_packet(
+        "001309.SZ",
+        "2026-07-13",
+        contexts={"filing_intelligence": "Semiconductor storage controller company."},
+        structured_research={
+            "segments": [],
+            "semantic_metrics": [],
+            "deterministic_evidence": [],
+            "conflicts": [],
+            "kpe_impacts": [],
+        },
+        llm=llm,
+        enable_llm=True,
+    )
+
+    assert packet["company_model"]["business_archetype"].startswith("semiconductor")
+    assert "Provider compatibility constraints" in llm.prompts[0]
+    assert "Do not use tools or function calls" in llm.prompts[0]
+    assert "LLM company underwriting failed" not in " ".join(packet["readiness_reasons"])
+
+
+def test_underwriting_prompt_guards_against_double_annualizing_seasonality():
+    prompt = _prompt("001309.SZ", "2026-07-13", ["2026E"], {})
+
+    assert "annual run-rate = quarterly value x 4" in prompt
+    assert "quarterly value / quarterly_share" in prompt
+    assert "never divide an already annualized run-rate by the seasonal share" in prompt
+    assert "strict RFC 8259 JSON only" in _schema_prompt(prompt)
 
 
 def test_deterministic_preprocessing_recovers_all_filing_product_rows():

@@ -1,0 +1,3651 @@
+{
+  "schema_version": 3,
+  "symbol": "600809.SH",
+  "as_of_date": "2026-07-14",
+  "preprocessing_mode": "llm_semantic_plus_deterministic_validation",
+  "company_summary": "山西汾酒（600809.SH）是清香型白酒龙头企业，主营业务为汾酒、竹叶青酒、杏花村酒的生产与销售。产品覆盖高中低端，核心产品包括青花系列（青花20/25/30/40/50）、老白汾系列、玻汾系列等。当前行业处于深度调整期，公司通过产品结构升级、渠道精细化管理、C端投入等方式应对，Q2预计延续Q1表现，省内动销承压而省外略增。",
+  "segments": [
+    {
+      "segment": "青花系列",
+      "aliases": [
+        "青花"
+      ],
+      "products_or_services": "青花系列白酒，覆盖次高端（青花20/25）到超高端（青花30/40/50），以青花20为核心大单品",
+      "revenue_weight_pct": 47.4,
+      "gross_profit_or_profit_weight_pct": null,
+      "business_model": "品牌消费+渠道动销型，通过经销商网络和终端推广，重点投入C端扫码激励，五码合一控盘分利",
+      "key_drivers": [
+        "民间商务消费复苏支撑青花20动销",
+        "青花30去库存节奏与返利政策",
+        "省内消费升级引导至青花20/25",
+        "省外市场突破与品牌第三目标"
+      ],
+      "prosperity_level": "mixed",
+      "marginal_direction": "upward for qinghua20/25, downward for qinghua30+",
+      "causal_chain": "民间商务消费复苏→青花20需求稳健，供给充足，批价稳定350-360元，量增；青花30面临高端消费疲软，需加大返利保价盘，量承压；整体毛利率受产品结构向青花20偏移影响略有压力。",
+      "supporting_metric_refs": [
+        "EV013",
+        "EV014",
+        "EV015",
+        "KPE03",
+        "KPE04",
+        "KPE09",
+        "KPE11"
+      ],
+      "counterevidence": [],
+      "confidence": "medium",
+      "missing_inputs": [
+        "青花系列分产品线的收入确认数据",
+        "青花30实际动销率",
+        "青花系列毛利率"
+      ],
+      "revenue_cny_mn": 18000.0,
+      "revenue_reported_value": null,
+      "revenue_reported_unit": "亿元（回款口径）",
+      "revenue_growth_pct": null,
+      "gross_margin_pct": null,
+      "gross_margin_change_pp": null,
+      "period": "unspecified",
+      "source_module": "knowledge_planet",
+      "evidence_quote": "汾酒380亿里面，玻汾刚过百亿，青花20大概130亿，青花30大概50个亿，老白汾50个亿",
+      "extraction_mode": "llm_semantic"
+    },
+    {
+      "segment": "老白汾系列",
+      "aliases": [
+        "老白汾"
+      ],
+      "products_or_services": "老白汾系列白酒，定位中端，含老白汾10、即将推出的汾10/15等分线产品",
+      "revenue_weight_pct": 13.2,
+      "gross_profit_or_profit_weight_pct": null,
+      "business_model": "品牌消费+渠道动销型，2026年为产品升级期，推进NFC控盘分利，进行营销组织变革",
+      "key_drivers": [
+        "五码更换影响短期动销",
+        "省外消费者认知偏低",
+        "团队调整与组织变革",
+        "宴席渠道专属产品拓展"
+      ],
+      "prosperity_level": "transition",
+      "marginal_direction": "downward_in_short_term",
+      "causal_chain": "产品升级期（五码更换）→短期动销略不及预期，老品尾货清理；后续NFC上线及宴席专属产品推出有望改善表现；毛利率受新品导入期成本等因素影响暂时承压。",
+      "supporting_metric_refs": [
+        "KPE04",
+        "KPE11"
+      ],
+      "counterevidence": [],
+      "confidence": "medium",
+      "missing_inputs": [
+        "老白汾系列实际收入数据",
+        "老白汾毛利率",
+        "老品库存清理进度"
+      ],
+      "revenue_cny_mn": 5000.0,
+      "revenue_reported_value": null,
+      "revenue_reported_unit": "亿元（回款口径）",
+      "revenue_growth_pct": null,
+      "gross_margin_pct": null,
+      "gross_margin_change_pp": null,
+      "period": "unspecified",
+      "source_module": "knowledge_planet",
+      "evidence_quote": "汾酒380亿里面，玻汾刚过百亿，青花20大概130亿，青花30大概50个亿，老白汾50个亿",
+      "extraction_mode": "llm_semantic"
+    },
+    {
+      "segment": "玻汾系列",
+      "aliases": [
+        "玻汾",
+        "低端光瓶酒"
+      ],
+      "products_or_services": "玻汾（光瓶酒），定位低端大众消费，经典口粮酒",
+      "revenue_weight_pct": 26.3,
+      "gross_profit_or_profit_weight_pct": null,
+      "business_model": "品牌消费+渠道动销型，供需紧平衡，高周转，库存低",
+      "key_drivers": [
+        "大众消费需求韧性",
+        "供需缺口（可能断货）",
+        "H1发货较足，H2量收窄",
+        "社会库存低"
+      ],
+      "prosperity_level": "strong",
+      "marginal_direction": "positive_but_tightening_supply",
+      "causal_chain": "供需紧平衡→动销持续正增，社会库存低；H1发货充足，但预计H2量收窄可能断货；毛利率较稳定，但量增受限，利润贡献主要靠周转。",
+      "supporting_metric_refs": [
+        "KPE04",
+        "KPE09",
+        "KPE11"
+      ],
+      "counterevidence": [],
+      "confidence": "high",
+      "missing_inputs": [
+        "玻汾实际收入数据",
+        "玻汾毛利率",
+        "H2具体发货计划"
+      ],
+      "revenue_cny_mn": 10000.0,
+      "revenue_reported_value": null,
+      "revenue_reported_unit": "亿元（回款口径）",
+      "revenue_growth_pct": null,
+      "gross_margin_pct": null,
+      "gross_margin_change_pp": null,
+      "period": "unspecified",
+      "source_module": "knowledge_planet",
+      "evidence_quote": "汾酒380亿里面，玻汾刚过百亿，青花20大概130亿，青花30大概50个亿，老白汾50个亿",
+      "extraction_mode": "llm_semantic"
+    },
+    {
+      "segment": "汾酒",
+      "aliases": [],
+      "products_or_services": "",
+      "revenue_weight_pct": 100.0,
+      "gross_profit_or_profit_weight_pct": 100.0,
+      "business_model": "filing-reported business segment",
+      "key_drivers": [],
+      "prosperity_level": "neutral",
+      "marginal_direction": "stable",
+      "causal_chain": "Reported segment revenue growth and gross-margin movement are available; demand, supply/capacity, ASP, utilization, working-capital and cash links still require semantic and source cross-checking.",
+      "supporting_metric_refs": [],
+      "counterevidence": [
+        "A filing growth rate alone cannot establish full segment prosperity."
+      ],
+      "confidence": "medium",
+      "missing_inputs": [
+        "dated demand/order evidence",
+        "capacity/utilization evidence",
+        "ASP/price evidence",
+        "segment cash-conversion evidence"
+      ],
+      "revenue_cny_mn": null,
+      "revenue_reported_value": 37441361212.24,
+      "revenue_reported_unit": "filing table unit not explicit in extracted row",
+      "revenue_growth_pct": 7.72,
+      "gross_margin_pct": 75.67,
+      "gross_margin_change_pp": -1.4,
+      "period": "annual filing",
+      "source_module": "filing_intelligence",
+      "evidence_quote": "| product | annual | 2025年年度报告: 分产品 营业收入 营业成本 （%） 上年增减（%）上年增减（%） （%） 汾酒 37,441,361,212.24 9,109,621,768.16 75.67 7.72 14.31 减少 1.40 个百分点 其他酒类 1,151,373,260.88 556,994,824.86 51.62 3.09 4.32 减少 0.57 个百分点 | Use this to explain revenue mix, profit-pool quality, gross-margin dilution/accretion, and whether bull/bear claims depend on a specific product, geography, or channel. |",
+      "extraction_mode": "deterministic_filing_row"
+    }
+  ],
+  "semantic_metrics": [
+    {
+      "segment": "consolidated",
+      "variable": "revenue",
+      "value": 14923228703.48,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "Q1 2026 (20260331)",
+      "comparison_basis": "absolute",
+      "source_module": "earnings_model",
+      "source_quote": "/ latest reported / Q1 / 20260331 / 14923228703.48 / 5382557651 / 59692914813.92 / 21530230604 / 36062310372.498 / 11061671960.5096 / historical median 0331 share 48.7% /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "top_line_starting_point",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "net_profit_parent",
+      "value": 5382557651.0,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "Q1 2026 (20260331)",
+      "comparison_basis": "absolute",
+      "source_module": "earnings_model",
+      "source_quote": "/ latest reported / Q1 / 20260331 / 14923228703.48 / 5382557651 / 59692914813.92 / 21530230604 / 36062310372.498 / 11061671960.5096 / historical median 0331 share 48.7% /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "profit_reference",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "gross_margin",
+      "value": 75.0468,
+      "value_text": "",
+      "unit": "%",
+      "period": "Q1 2026 (20260331)",
+      "comparison_basis": "YoY change -3.75pp",
+      "source_module": "earnings_model",
+      "source_quote": "/ Gross margin / 75.0468% / -3.75pp / YoY: 20260331 vs 20250331 / main bridge from demand to gross profit /",
+      "evidence_status": "unverified",
+      "direction": "down",
+      "materiality": "high",
+      "model_role": "pricing_mix_cost_absorption",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "operating_margin",
+      "value": 48.581,
+      "value_text": "",
+      "unit": "%",
+      "period": "Q1 2026 (20260331)",
+      "comparison_basis": "YoY change -5.29pp",
+      "source_module": "earnings_model",
+      "source_quote": "/ Operating margin / 48.581% / -5.29pp / YoY: 20260331 vs 20250331 / tests pricing, mix, and cost absorption /",
+      "evidence_status": "unverified",
+      "direction": "down",
+      "materiality": "high",
+      "model_role": "operating_efficiency",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "net_margin",
+      "value": 36.0683,
+      "value_text": "",
+      "unit": "%",
+      "period": "Q1 2026 (20260331)",
+      "comparison_basis": "YoY change -4.16pp",
+      "source_module": "earnings_model",
+      "source_quote": "/ Net margin / 36.0683% / -4.16pp / YoY: 20260331 vs 20250331 / captures final earnings conversion /",
+      "evidence_status": "unverified",
+      "direction": "down",
+      "materiality": "high",
+      "model_role": "final_earnings_conversion",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "ocf_to_net_profit",
+      "value": 1.5334,
+      "value_text": "",
+      "unit": "ratio",
+      "period": "Q1 2026 (20260331)",
+      "comparison_basis": "YoY",
+      "source_module": "earnings_model",
+      "source_quote": "/ OCF / net profit / 1.5334 / N/A / YoY: 20260331 vs 20250331 / tests earnings quality and cash realization /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "medium",
+      "model_role": "earnings_quality",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "pe_ttm",
+      "value": 12.1715,
+      "value_text": "",
+      "unit": "x",
+      "period": "TTM as of 2026-07-13",
+      "comparison_basis": "market_implied",
+      "source_module": "market_expectation",
+      "source_quote": "/ PE TTM / 12.1715 / earnings multiple the market is paying now /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "valuation_level",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "ps_ttm",
+      "value": 3.6008,
+      "value_text": "",
+      "unit": "x",
+      "period": "TTM as of 2026-07-13",
+      "comparison_basis": "market_implied",
+      "source_module": "market_expectation",
+      "source_quote": "/ PS TTM / 3.6008 / sales multiple the market is paying now /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "valuation_level",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "market_cap_cny",
+      "value": 133659277752.0,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "2026-07-13",
+      "comparison_basis": "absolute",
+      "source_module": "market_expectation",
+      "source_quote": "/ Market cap (CNY) / 133659277752 / current equity value /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "equity_value",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "inventory_to_revenue",
+      "value": 22.8675,
+      "value_text": "",
+      "unit": "%",
+      "period": "Q1 2026 (20260331)",
+      "comparison_basis": "YoY change +3.99pp",
+      "source_module": "earnings_model",
+      "source_quote": "/ Inventory / revenue / 22.8675% / +3.99pp / YoY: 20260331 vs 20250331 / tests inventory build and demand quality; interim periods use annualized revenue /",
+      "evidence_status": "unverified",
+      "direction": "up",
+      "materiality": "medium",
+      "model_role": "demand_quality_indicator",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "revenue_annual_fy2025",
+      "value": 38718257657.74,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "FY 2025 (20251231)",
+      "comparison_basis": "absolute",
+      "source_module": "earnings_model",
+      "source_quote": "/ latest annual / FY / 20251231 / 38718257657.74 / 12246329337.25 / 38718257657.74 / 12246329337.25 / 38718257657.74 / 12246329337.25 / FY actual /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "annual_reference",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "net_profit_annual_fy2025",
+      "value": 12246329337.25,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "FY 2025 (20251231)",
+      "comparison_basis": "absolute",
+      "source_module": "earnings_model",
+      "source_quote": "/ latest annual / FY / 20251231 / 38718257657.74 / 12246329337.25 / 38718257657.74 / 12246329337.25 / 38718257657.74 / 12246329337.25 / FY actual /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "annual_profit",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "total_domestic_market_sell_through_change",
+      "value": null,
+      "value_text": "2026年1-5月省内动销同比下滑约10%，省外略有增长",
+      "unit": "",
+      "period": "2026年1-5月",
+      "comparison_basis": "YoY",
+      "source_module": "knowledge_planet",
+      "source_quote": "26年1-5月省内动销 -10%左右（省外略增）",
+      "evidence_status": "private_proxy",
+      "direction": "down",
+      "materiality": "high",
+      "model_role": "demand_proxy",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "青花系列",
+      "variable": "wholesale_price_qinghua20",
+      "value": 355.0,
+      "value_text": "350-360",
+      "unit": "CNY/bottle",
+      "period": "2026-07-12",
+      "comparison_basis": "absolute",
+      "source_module": "knowledge_planet",
+      "source_quote": "青花30/青花20/老白汾10/玻汾批价670/350-360/115/41元",
+      "evidence_status": "private_proxy",
+      "direction": "",
+      "materiality": "medium",
+      "model_role": "price_tracker",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "青花系列",
+      "variable": "wholesale_price_qinghua30",
+      "value": 670.0,
+      "value_text": "",
+      "unit": "CNY/bottle",
+      "period": "2026-07-12",
+      "comparison_basis": "absolute",
+      "source_module": "knowledge_planet",
+      "source_quote": "青花30/青花20/老白汾10/玻汾批价670/350-360/115/41元",
+      "evidence_status": "private_proxy",
+      "direction": "",
+      "materiality": "medium",
+      "model_role": "price_tracker",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "老白汾系列",
+      "variable": "wholesale_price_laobaifen10",
+      "value": 115.0,
+      "value_text": "",
+      "unit": "CNY/bottle",
+      "period": "2026-07-12",
+      "comparison_basis": "absolute",
+      "source_module": "knowledge_planet",
+      "source_quote": "青花30/青花20/老白汾10/玻汾批价670/350-360/115/41元",
+      "evidence_status": "private_proxy",
+      "direction": "",
+      "materiality": "medium",
+      "model_role": "price_tracker",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "玻汾系列",
+      "variable": "wholesale_price_bofen",
+      "value": 41.0,
+      "value_text": "",
+      "unit": "CNY/bottle",
+      "period": "2026-07-12",
+      "comparison_basis": "absolute",
+      "source_module": "knowledge_planet",
+      "source_quote": "青花30/青花20/老白汾10/玻汾批价670/350-360/115/41元",
+      "evidence_status": "private_proxy",
+      "direction": "",
+      "materiality": "medium",
+      "model_role": "price_tracker",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "channel_inventory_months",
+      "value": null,
+      "value_text": "库存约2-3个月",
+      "unit": "months",
+      "period": "2026-07-12",
+      "comparison_basis": "absolute",
+      "source_module": "knowledge_planet",
+      "source_quote": "回款约50%+，市场需求企稳、开发品新增条码较多，库存约2-3个月",
+      "evidence_status": "private_proxy",
+      "direction": "",
+      "materiality": "medium",
+      "model_role": "channel_health",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "receivables_ratio",
+      "value": 0.0002,
+      "value_text": "",
+      "unit": "%",
+      "period": "Q1 2026 (20260331)",
+      "comparison_basis": "YoY change -0.00pp",
+      "source_module": "earnings_model",
+      "source_quote": "/ Receivables / revenue / 0.0002% / -0.00pp / YoY: 20260331 vs 20250331 / tests working-capital drag; interim periods use annualized revenue /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "low",
+      "model_role": "working_capital",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "finance_expense_ratio",
+      "value": -0.0283,
+      "value_text": "",
+      "unit": "%",
+      "period": "Q1 2026 (20260331)",
+      "comparison_basis": "YoY change +0.00pp",
+      "source_module": "earnings_model",
+      "source_quote": "/ Finance-expense ratio / -0.0283% / +0.00pp / YoY: 20260331 vs 20250331 / captures leverage drag or relief /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "low",
+      "model_role": "leverage",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "青花系列",
+      "variable": "revenue_qinghua20_25_hui_kuan",
+      "value": 12000.0,
+      "value_text": "",
+      "unit": "百万元（回款口径）",
+      "period": "2025年",
+      "comparison_basis": "absolute",
+      "source_module": "knowledge_planet",
+      "source_quote": "青花20 25年回款口径120e",
+      "evidence_status": "private_proxy",
+      "direction": "",
+      "materiality": "medium",
+      "model_role": "reference_value",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    }
+  ],
+  "deterministic_evidence": [
+    {
+      "evidence_id": "EV001",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Financial-report look-back: 900 days"
+    },
+    {
+      "evidence_id": "EV002",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "Compacted 2025年年度报告: 270788 chars -> 116776 chars."
+    },
+    {
+      "evidence_id": "EV003",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 半年",
+      "text": "Compacted 2025年半年度报告: 208718 chars -> 109237 chars."
+    },
+    {
+      "evidence_id": "EV004",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260516, 2026",
+      "text": "20260516: 关于参加山西辖区上市公司2026年投资者网上集体接待日暨年报业绩说明会的公告"
+    },
+    {
+      "evidence_id": "EV005",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260430, 2026, 季度",
+      "text": "20260430: 2026年第一季度报告"
+    },
+    {
+      "evidence_id": "EV006",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260423, 2025, 年度",
+      "text": "20260423: 2025年年度报告"
+    },
+    {
+      "evidence_id": "EV007",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20251031, 2025, 季度",
+      "text": "20251031: 2025年第三季度报告"
+    },
+    {
+      "evidence_id": "EV008",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20250829, 2025, 半年",
+      "text": "20250829: 2025年半年度报告"
+    },
+    {
+      "evidence_id": "EV009",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ announcement_lookup / ready / Found 5 candidate financial-report announcement(s) from primary and CNINFO sources. /"
+    },
+    {
+      "evidence_id": "EV010",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "Q1, 20260331",
+      "text": "/ latest reported / Q1 / 20260331 / 14923228703.48 / 5382557651 / 59692914813.92 / 21530230604 / 36062310372.498 / 11061671960.5096 / historical median 0331 share 48.7% /"
+    },
+    {
+      "evidence_id": "EV011",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "FY, 20251231",
+      "text": "/ latest annual / FY / 20251231 / 38718257657.74 / 12246329337.25 / 38718257657.74 / 12246329337.25 / 38718257657.74 / 12246329337.25 / FY actual /"
+    },
+    {
+      "evidence_id": "EV012",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "revenue",
+      "period": "20260331, 20250331",
+      "text": "/ Revenue base / 14923228703.48 / N/A / YoY: 20260331 vs 20250331 / top-line starting point for volume × price × mix /"
+    },
+    {
+      "evidence_id": "EV013",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "20260331, 20250331",
+      "text": "/ Gross margin / 75.0468% / -3.75pp / YoY: 20260331 vs 20250331 / main bridge from demand to gross profit /"
+    },
+    {
+      "evidence_id": "EV014",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260331, 20250331",
+      "text": "/ Operating margin / 48.581% / -5.29pp / YoY: 20260331 vs 20250331 / tests pricing, mix, and cost absorption /"
+    },
+    {
+      "evidence_id": "EV015",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "20260331, 20250331",
+      "text": "/ Net margin / 36.0683% / -4.16pp / YoY: 20260331 vs 20250331 / captures final earnings conversion /"
+    },
+    {
+      "evidence_id": "EV016",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "operating_expense",
+      "period": "20260331, 20250331",
+      "text": "/ Finance-expense ratio / -0.0283% / +0.00pp / YoY: 20260331 vs 20250331 / captures leverage drag or relief /"
+    },
+    {
+      "evidence_id": "EV017",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "profit_or_eps",
+      "period": "20260331, 20250331",
+      "text": "/ OCF / net profit / 1.5334 / N/A / YoY: 20260331 vs 20250331 / tests earnings quality and cash realization /"
+    },
+    {
+      "evidence_id": "EV018",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "revenue",
+      "period": "20260331, 20250331",
+      "text": "/ Receivables / revenue / 0.0002% / -0.00pp / YoY: 20260331 vs 20250331 / tests working-capital drag; interim periods use annualized revenue /"
+    },
+    {
+      "evidence_id": "EV019",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Look-back window: 30 days"
+    },
+    {
+      "evidence_id": "EV020",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 一般公告 / 1 /"
+    },
+    {
+      "evidence_id": "EV021",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 治理/人事 / 1 /"
+    },
+    {
+      "evidence_id": "EV022",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 监管/法律 / 1 /"
+    },
+    {
+      "evidence_id": "EV023",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260617, 2025, 年度",
+      "text": "/ 20260617 / 一般公告 / 600809.SH / 山西汾酒 / 2025年度股东会决议公告 / https://static.cninfo.com.cn/finalpage/2026-06-17/1225374611.PDF /"
+    },
+    {
+      "evidence_id": "EV024",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260617, 2026-06-17",
+      "text": "/ 20260617 / 治理/人事 / 600809.SH / 山西汾酒 / 第九届董事会第十三次会议决议公告 / https://static.cninfo.com.cn/finalpage/2026-06-17/1225374605.PDF /"
+    },
+    {
+      "evidence_id": "EV025",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260617, 2025, 年度",
+      "text": "/ 20260617 / 监管/法律 / 600809.SH / 山西汾酒 / 2025年度股东会法律意见书 / https://static.cninfo.com.cn/finalpage/2026-06-17/1225374602.PDF /"
+    },
+    {
+      "evidence_id": "EV026",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-07-12, 半年",
+      "text": "/ 2026-07-12 20:08:00 / 新浪财经 / 大降超60%！白酒业首份半年度业绩预告来了，舍得酒业预计上半年业绩同比下降超60% / N/A /"
+    },
+    {
+      "evidence_id": "EV027",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260626, 2025, 年度",
+      "text": "/ 20260626 / sina / N/A / N/A / 【五粮液集团董事长邓敏：两大点始终没有改变 对五粮液发展充满信心】6月26日，在五粮液(000858)2025年度股东大会上，五粮液集团党委书记、董事长邓敏表示，当前，白酒行业仍处于深度调整阶段，我们需要对此做出理性分析和判断，在穿越周期中抓住战略发展的机会。概括起来就是两个始终：一是，白酒消费底层逻辑和价值属性始终没有改变，对优势产区、优势企业、优势品牌而言，面临的结构性战略机会始终是大于挑战；二是，五粮液长期价值成长的根基始终没有改变，作为中国白酒"
+    },
+    {
+      "evidence_id": "EV028",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "segment_volume",
+      "period": "2025, 年度",
+      "text": "/ product_manufacturer / 产品制造 / 产能出货型 / quantified disclosure / 2025年年度报告: 详见本节之五、（一）主营业务分析之 1、利润表及现金流量表相关科目变动分析表 (二) 非主营业务导致利润重大变化的说明 预付款项 182,037,851.50 0.32 98,581,925.12 0.18 84.66 产能项目”投入增加所 2、 产能状况 现有产能 主要工厂名称 设计产能 实际产能 在建产能 产能计算标准 现有产能是根据车间现有固定资产配备情况..."
+    },
+    {
+      "evidence_id": "EV029",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "utilization_or_backlog",
+      "period": "2025, 年度",
+      "text": "/ brand_channel_consumer / 品牌消费 / 渠道动销型 / quantified disclosure / 2025年年度报告: 详见本节之五、（一）主营业务分析之 1、利润表及现金流量表相关科目变动分析表 (二) 非主营业务导致利润重大变化的说明 预付款项 182,037,851.50 0.32 98,581,925.12 0.18 84.66 产能项目”投入增加所 2、 产能状况 现有产能 主要工厂名称 设计产能 实际产能 在建产能 产能计算标准 现有产能是根据车间现有固定资产配备..."
+    },
+    {
+      "evidence_id": "EV030",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "2025, 年度",
+      "text": "/ core_revenue_engine / annual / 2025年年度报告: （4）执行细节测试，对本期记录的主营业务收入交易选取样本，检查发票、销售合同、出库 / Defines what actually drives the income statement. /"
+    },
+    {
+      "evidence_id": "EV031",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "/ segment_mix / annual / 2025年年度报告: （2）执行分析性复核程序，分产品类型对主营业务收入以及毛利情况进行比较分析； / Shows whether different profit pools are being mixed together. /"
+    },
+    {
+      "evidence_id": "EV032",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "/ customer_and_channel / annual / 2025年年度报告: B.报告期内向单个客户的销售比例超过总额的 50%、前 5 名客户中存在新增客户的或严重依赖于 / Reveals demand source, concentration, and market validation. /"
+    },
+    {
+      "evidence_id": "EV033",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "balance_sheet",
+      "period": "2025, 年度",
+      "text": "/ geography / annual / 2025年年度报告: 应收出口退税 34,093,898.24 30,480,779.34 / Explains whether growth depends on a specific geography or expansion lane. /"
+    },
+    {
+      "evidence_id": "EV034",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "utilization_or_backlog",
+      "period": "2025, 年度, 2022",
+      "text": "/ reinvestment_engine / annual / 2025年年度报告: 根据公司 2022 年第二次临时股东大会决议，为提升原酒产能和储能，公司投资建设汾酒 2030 技改原酒产储能扩建项目（一期），预算投资额合计 / Shows how today's cash is being converted into tomorrow's earnings power. /"
+    },
+    {
+      "evidence_id": "EV035",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 半年, 本报告期",
+      "text": "/ product / semiannual / 2025年半年度报告: 一、报告期内公司所属行业及主营业务情况说明 本报告期内，公司主要业务未发生变化。经营范围主要是汾酒、竹叶青酒、杏花村酒的生产、 销售。公司是清香型白酒国家标准的制订者之一，主要产品汾酒是我国清香型白酒的典型代表， 竹叶青酒是著名的保健养生酒，在国内外享誉盛名。汾酒文化源远流长，酿造历史悠久，清香品 质卓越，被誉为“中国白酒产业的奠基者、传承中国白酒文化的火炬手、中国白酒酿造技艺的教 科书、见证中国白酒发展历史的活化石”，是“国酒之源，清..."
+    },
+    {
+      "evidence_id": "EV036",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "revenue",
+      "period": "2025, 年度",
+      "text": "/ business / annual / 2025年年度报告: 主营业务 25,678,910,744.65 9,656,908,728.55 22,858,807,881.84 8,287,638,130.90 其他业务 168,491,348.31 99,087,969.02 158,614,499.63 108,791,347.69 合计 25,847,402,092.96 9,755,996,697.57 23,017,422,381.47 8,396,429,478.59 (2). 营业收入、营业..."
+    },
+    {
+      "evidence_id": "EV037",
+      "source_module": "industry_cycle",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "balance_sheet",
+      "period": "unspecified",
+      "text": "Do not state R32, R125, lithium, copper, gold, inventory, or spread changes as facts unless they appear in the evidence table."
+    },
+    {
+      "evidence_id": "EV038",
+      "source_module": "industry_cycle",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "gap",
+      "status": "missing",
+      "model_variable": "balance_sheet",
+      "period": "unspecified",
+      "text": "Treat wholesale price, channel inventory, and dealer payment evidence as thesis-critical. If unavailable, keep them as neutral retrieval tasks; do not substitute generic PE/technicals or mechanically alter the rating."
+    },
+    {
+      "evidence_id": "EV039",
+      "source_module": "industry_cycle",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "gap",
+      "status": "missing",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "If cycle evidence says bottom-testing or evidence-limited, use language such as `bottom-right validation stage`, `右侧待验证`, or `needs confirmation`."
+    },
+    {
+      "evidence_id": "EV040",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "gap",
+      "status": "missing",
+      "model_variable": "segment_margin",
+      "period": "unspecified",
+      "text": "/ coverage_grade / report_types_seen / missing_report_types / answered_questions / core_pack_status / confidence_read /"
+    },
+    {
+      "evidence_id": "EV041",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "balance_sheet",
+      "period": "2026, 季度",
+      "text": "/ accounting_reconciliation / Check signs, units, periods, and cross-statement consistency before a number enters the PM memo. / receivables: 2026年第一季度报告: 衍生金融资产 应收票据 应收账款 93,685.45 96,807.50 / receivables: 2026年第一季度报告: 应收票据 应收账款 93,685.45 96,807.50 / Use a..."
+    },
+    {
+      "evidence_id": "EV042",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 半年, 本报告期",
+      "text": "/ segment_economics_depth / Decide whether each business line has enough disclosed scale, growth, margin, cash quality, and valuation treatment. / 2025年半年度报告: 一、报告期内公司所属行业及主营业务情况说明 本报告期内，公司主要业务未发生变化。经营范围主要是汾酒、竹叶青酒、杏花村酒的生产、 销售。公司是清香型白酒国家标准的制订者之一，主要产品汾酒是我国清香型..."
+    },
+    {
+      "evidence_id": "EV043",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026, 季度",
+      "text": "/ footnote_radar / Surface decision-relevant notes that can hide risk or change confidence. / impairment_policy: 2026年第一季度报告: 单位:元 币种:人民币 非经常性损益项目 本期金额 非流动性资产处置损益，包括已计提资产减值准备的冲销部分 2,034.24 / impairment_policy: 2026年第一季度报告: 非经常性损益项目 本期金额 非流动性资产处置损益，包括已计提资产减值..."
+    },
+    {
+      "evidence_id": "EV044",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "balance_sheet",
+      "period": "2026, 季度",
+      "text": "/ cash_flow_quality_decomposition / Separate accounting profit from cash conversion, working-capital drag, and demand visibility. / receivables: 2026年第一季度报告: 衍生金融资产 应收票据 应收账款 93,685.45 96,807.50 / receivables: 2026年第一季度报告: 应收票据 应收账款 93,685.45 96,807.50 / Up..."
+    },
+    {
+      "evidence_id": "EV045",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "capex_or_roic",
+      "period": "2026, 季度",
+      "text": "/ capex_cip_return_bridge / Test whether capex, construction-in-progress, or investment assets are building returns or just absorbing capital. / long_term_equity_investments: 2026年第一季度报告: 其他债权投资 长期应收款 长期股权投资 121,799,888.28 118,769,623.60 / long_term_equity_..."
+    },
+    {
+      "evidence_id": "EV046",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "utilization_or_backlog",
+      "period": "2025, 年度, 2030",
+      "text": "/ mdna_text_change / Read management wording changes, proof-backed claims, risk-language upgrades, and abnormal silence across reports. / risk_language_upgrade: 2025年年度报告: 艺全方位提升。产能建设全速推进，2030 技改项目、汾青基地项目稳步实施。品质标准全面升级， 科技成果通过鉴定，获 4 项科技奖励、6 项授权专利、2 项软件著作权，成功..."
+    },
+    {
+      "evidence_id": "EV047",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "2026, 季度",
+      "text": "/ non_recurring_profit_quality / Distinguish core operating profit from investment income, fair-value moves, subsidies, asset disposals, impairment, and other one-off items. / impairment: 2026年第一季度报告: 公允价值变动收益（损失以“-”号 填列） 信用减值损失（损失以“-”号填列） -160,825.96 -4,02..."
+    },
+    {
+      "evidence_id": "EV048",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "balance_sheet",
+      "period": "2026, 季度",
+      "text": "/ balance_sheet_forward_signals / Read balance-sheet leads before income-statement confirmation. / receivables: 2026年第一季度报告: 衍生金融资产 应收票据 应收账款 93,685.45 96,807.50 / receivables: 2026年第一季度报告: 应收票据 应收账款 93,685.45 96,807.50 / Contract liabilities and payables c..."
+    },
+    {
+      "evidence_id": "EV049",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-07-13",
+      "text": "Valuation trade date: 2026-07-13"
+    },
+    {
+      "evidence_id": "EV050",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ Market cap (CNY) / 133659277752 / current equity value /"
+    },
+    {
+      "evidence_id": "EV051",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "valuation",
+      "period": "TTM",
+      "text": "/ PE TTM / 12.1715 / earnings multiple the market is paying now /"
+    },
+    {
+      "evidence_id": "EV052",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "revenue",
+      "period": "TTM",
+      "text": "/ PS TTM / 3.6008 / sales multiple the market is paying now /"
+    },
+    {
+      "evidence_id": "EV053",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "valuation",
+      "period": "TTM",
+      "text": "/ Implied TTM earnings (CNY) / 10981331615.0023 / market cap divided by PE TTM /"
+    },
+    {
+      "evidence_id": "EV054",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "revenue",
+      "period": "TTM",
+      "text": "/ Implied TTM sales (CNY) / 37119328413.6858 / market cap divided by PS TTM /"
+    },
+    {
+      "evidence_id": "EV055",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "valuation",
+      "period": "unspecified",
+      "text": "/ PE percentile / 0.9 / 5-year valuation position /"
+    },
+    {
+      "evidence_id": "EV056",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "valuation",
+      "period": "unspecified",
+      "text": "/ PB percentile / 0.9 / 5-year valuation position /"
+    },
+    {
+      "evidence_id": "EV057",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "valuation",
+      "period": "unspecified",
+      "text": "/ PS percentile / 0.9 / 5-year valuation position /"
+    },
+    {
+      "evidence_id": "EV058",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-07-13",
+      "text": "Valuation trade date: 2026-07-13"
+    },
+    {
+      "evidence_id": "EV059",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Market-cap units: `total_mv` is ten-thousand CNY; `total_mv_cny_100m` is 亿元 and equals `total_mv / 10,000`."
+    },
+    {
+      "evidence_id": "EV060",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "unspecified",
+      "text": "/ ts_code / name / industry / total_mv / total_mv_cny_100m / pe_ttm / pb / ps_ttm / dv_ttm / roe_annual / roa_annual / roe / roa / netprofit_yoy / debt_to_assets / v4_score /"
+    },
+    {
+      "evidence_id": "EV061",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 603198.SH / 迎驾贡酒 / 白酒 / 2584000 / 258.4 / 12.9738 / 2.2529 / 4.167 / 4.644 / 19.3918 / 18.858 / 7.551 / 7.7452 / 0.7314 / 21.4057 / 72.7 /"
+    },
+    {
+      "evidence_id": "EV062",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 000568.SZ / 泸州老窖 / 白酒 / 11296843.245 / 1129.6843 / 11.3577 / 2.1894 / 4.6291 / 7.7527 / 22.2926 / 21.2319 / 7.316 / 7.4383 / -19.2548 / 21.8137 / 70.2 /"
+    },
+    {
+      "evidence_id": "EV063",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 603369.SH / 今世缘 / 白酒 / 3042192 / 304.2192 / 12.9755 / 1.695 / 3.2349 / 4.918 / 16.2648 / 13.461 / 8.0262 / 6.8452 / -15.7615 / 34.7358 / 67.6 /"
+    },
+    {
+      "evidence_id": "EV064",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 600809.SH / 山西汾酒 / 白酒 / 13365927.7752 / 1336.5928 / 12.1715 / 2.9687 / 3.6008 / N/A / 32.926 / 30.283 / 12.7163 / 12.0063 / -19.0299 / 29.2569 / 67 /"
+    },
+    {
+      "evidence_id": "EV065",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 002304.SZ / 洋河股份 / 白酒 / 5739555.831 / 573.9556 / 56.5189 / 1.1656 / 3.5146 / 3.8583 / 4.4845 / 5.034 / 5.0949 / 5.4901 / -32.7335 / 18.1694 / 53.9 /"
+    },
+    {
+      "evidence_id": "EV066",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 000596.SZ / 古井贡酒 / 白酒 / 4174354.2 / 417.4354 / 14.7705 / 1.5979 / 2.4366 / 1.2663 / 14.28 / 11.577 / 6.28 / 5.3163 / -31.0309 / 32.9709 / 50.3 /"
+    },
+    {
+      "evidence_id": "EV067",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 600809.SH / 袁清茂 / N/A / 许志峰 / 121996.4222 / 19851225 / 山西 / 汾酒、竹叶青酒及其系列酒的生产、销售;酒类高新技术及产品研究、开发、生产、应用;投资办企业及相关咨询服务。 /"
+    },
+    {
+      "evidence_id": "EV068",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260423, 20251231",
+      "text": "/ 20260423 / 20251231 / 许志峰 / 董事会秘书 / 790000 / 0 /"
+    },
+    {
+      "evidence_id": "EV069",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260423, 20251231",
+      "text": "/ 20260423 / 20251231 / 陈鹰 / 原副董事长 / 0 / 0 /"
+    },
+    {
+      "evidence_id": "EV070",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260423, 20251231",
+      "text": "/ 20260423 / 20251231 / 余忠良 / 原董事 / 0 / 0 /"
+    },
+    {
+      "evidence_id": "EV071",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260423, 20251231",
+      "text": "/ 20260423 / 20251231 / 支喆 / 原董事 / 0 / 0 /"
+    },
+    {
+      "evidence_id": "EV072",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260423, 20251231",
+      "text": "/ 20260423 / 20251231 / 袁清茂 / 董事长 / 0 / 0 /"
+    },
+    {
+      "evidence_id": "EV073",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260423, 20251231",
+      "text": "/ 20260423 / 20251231 / 武跃飞 / 副董事长 / 0 / 0 /"
+    },
+    {
+      "evidence_id": "EV074",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260423, 20251231",
+      "text": "/ 20260423 / 20251231 / 李振寰 / 副董事长 / 0 / 0 /"
+    },
+    {
+      "evidence_id": "EV075",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260423, 20251231",
+      "text": "/ 20260423 / 20251231 / 刘卫华 / 副董事长 / 0 / 1400 /"
+    },
+    {
+      "evidence_id": "EV076",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Look-back window for futures proxies: 90 days"
+    },
+    {
+      "evidence_id": "EV077",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_volume",
+      "period": "unspecified",
+      "text": "/ 1 - company hard evidence / official filings, production reports, and sales announcements / realized product mix, output, unit cost, and cash-flow conversion / usually delayed and may not include daily spot prices /"
+    },
+    {
+      "evidence_id": "EV078",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "balance_sheet",
+      "period": "unspecified",
+      "text": "Do not state R32, R125, lithium, copper, gold, inventory, or spread changes as facts unless they appear in the evidence table."
+    },
+    {
+      "evidence_id": "EV079",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "gap",
+      "status": "missing",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "If a thesis-critical input is marked missing, treat it as neutral non-evidence and a retrieval task; it cannot prove margin deterioration/resilience or mechanically change rating, conviction, or sizing."
+    },
+    {
+      "evidence_id": "EV080",
+      "source_module": "policy",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025-10-28, 2025",
+      "text": "/ 中共中央关于制定国民经济和社会发展第十五个五年规划的建议 / 中国政府网 / 2025-10-28 / national-plan / ok / https://www.gov.cn/gongbao/2025/issue_12386/202511/content_7047415.html /"
+    },
+    {
+      "evidence_id": "EV081",
+      "source_module": "policy",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2024-08-11",
+      "text": "/ 中共中央 国务院关于加快经济社会发展全面绿色转型的意见 / 中国政府网 / 2024-08-11 / national-direction / ok / https://www.gov.cn/zhengce/202408/content_6967663.htm /"
+    },
+    {
+      "evidence_id": "EV082",
+      "source_module": "policy",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2024-08-11",
+      "text": "/ renewable-energy / 绿色转型 / 中共中央 国务院关于加快经济社会发展全面绿色转型的意见 / 中国政府网 / 2024-08-11 / national-direction / / supports multi-year demand visibility for clean-energy equipment and infrastructure / argue the company sits inside a policy-backed demand pool / test whether"
+    },
+    {
+      "evidence_id": "EV083",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Canonical company route: https://sns.sseinfo.com/company.do?stockcode=600809"
+    },
+    {
+      "evidence_id": "EV084",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026",
+      "text": "/ sse / reachable / {'title': '上证e互动', 'has_company_page': True, 'has_qa_section': True} / 809 / {'is_empty_recent_reply': False, 'text_preview': '投资者_1778644894190 :山西汾酒(600809) 你好，请问贵公司有考虑出一款混合果汁低度酒吗？比如主打纯果汁无添加，度数低好入口等理念，来迎合年轻消费群体。 2026年06月15日 09:28 来自 Andro"
+    },
+    {
+      "evidence_id": "EV085",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-06-24, 2026-06-26",
+      "text": "/ 2026-06-24 / 2026-06-26 / 你好 我是一个爱好喝酒的 也是汾酒的拥护者 小股东 希望汾酒做大做强 汾酒复兴 但是感觉汾酒产品还没有完全下沉市场 既然竹叶青是保健酒那应该对标劲酒那样 小型大型便利店 都应该有对标产品 杏花村也是 做不了高端 做好中低端 汾酒做好 中高低端 高端对标茅台飞天 甚至做到更好 我觉得汾酒做的市场还不够极致 细致 不够大 希望能够超越五粮液 优于五粮液 比肩茅台 产品 做到极致 / 感谢您的建议！ / non-committal /"
+    },
+    {
+      "evidence_id": "EV086",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-06-15, 2026-06-26",
+      "text": "/ 2026-06-15 / 2026-06-26 / 你好，请问贵公司有考虑出一款混合果汁低度酒吗？比如主打纯果汁无添加，度数低好入口等理念，来迎合年轻消费群体。 / 感谢您关于果汁低度酒的建议。顺应低度化、天然悦己消费趋势，公司已落地陈皮汾酒，作为 “汾酒 +” 露酒单品，精准覆盖年轻微醺场景,挖掘年轻消费增长空间。 / substantive /"
+    },
+    {
+      "evidence_id": "EV087",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Use substantive interaction answers as tier-3 narrative options unless filings or announcements independently verify the same claim."
+    },
+    {
+      "evidence_id": "EV088",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "2026-06-14, 2026-07-14",
+      "text": "Window: 2026-06-14 to 2026-07-14 (30 days)"
+    },
+    {
+      "evidence_id": "EV089",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Primary query terms: 600809.SH, 600809SH, 600809, 山西汾酒"
+    },
+    {
+      "evidence_id": "EV090",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Upstream sync summary: cached=30, synced=1, index_refreshed=1"
+    },
+    {
+      "evidence_id": "EV091",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "valuation",
+      "period": "unspecified",
+      "text": "Auto-sync refresh window: latest 30 day(s); older dates use the persistent local cache."
+    },
+    {
+      "evidence_id": "EV092",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Preprocess: ok: events=10732, clusters=76, opportunities=234, ocr_low_quality=704"
+    },
+    {
+      "evidence_id": "EV093",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Matched stream items: 16"
+    },
+    {
+      "evidence_id": "EV094",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Fusion target: 600809.SH"
+    },
+    {
+      "evidence_id": "EV095",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Direct terms: 600809.SH, 600809SH, 600809, 山西汾酒"
+    },
+    {
+      "evidence_id": "EV096",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Raw matches: stream=16; preprocessed matches: events=10, opportunities=0"
+    }
+  ],
+  "conflicts": [],
+  "kpe_impacts": [
+    {
+      "evidence_id": "KPE01",
+      "segment": "consolidated",
+      "variable": "valuation",
+      "direction": "unknown",
+      "horizon": "",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "国内研报；20260618_光大证券_2026年6月FOMC会议点评...（无直接汾酒内容）",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "missing_inputs": [
+        "无直接关联于汾酒的具体假设"
+      ],
+      "known_kpe": {
+        "date": "2026-06-19T11:25",
+        "source": "stream_item:1597",
+        "source_type": "sell_side_push",
+        "credibility": "identified_broker_private_text",
+        "decision_role": "narrative challenge",
+        "evidence": "国内研报；20260618_光大证券_2026年6月FOMC会议点评或许是今年最“鹰”的点阵.pdf url=https://files.zsxq.com/Fo7j-DUSS1aGRPprWuhauB3zk-lo?e=1781888873&token=q6iZ0sQtf9U7s1qz0r4yMawNq3-u2w6lbnai6y2J:2ppgiWv7f57t6p_a7lu5z_wL9cQ=；20260618_光大证券_量化策略研究系列报告之六高风险偏好资金或出现更紧密抱团.pdf url=https://files.zsxq.com/FtxfDAp-Hlqr_5ii66Tq815RT8YT?e=1781888873&token=q6iZ0sQtf9U7s1qz0r4yMawNq3-u2w6lbnai6y2J:Wk4QoF5gTfzueNQC-x_49Ns0v-Y=；20260618_光大证券_游戏行业跟踪研究报告游戏板块处估值底部，关注新产品线催化.pdf url=https://files.zsxq.com/FoBZy_Taex-GAPJ-Lq-yDLzqiHum?e=1781888874&token=q6iZ0sQtf9U7s1qz0r4yMawNq3-u2w6lbnai6y2J:SCiFiuHGeb4boGHPQaaKVIl9zao=；20260618_国海证券_山西汾酒（600809）公司点评.pdf url=https://files.zsxq.com/FqMrNPJoelfHH8CK8UVup7Ly2bBq?e=1781888874&token=q6iZ0sQtf9U7s1qz0r4yMawNq3-u2w6lbnai6y2J:ev2iby5pwsWTQcBSR_ULXMA0Vkw=；20260618_国金证券_锂电新周期系列深度（一）把握锂电周期反转，优选优势格局赛道.pdf url=https://files.zsxq.com/Fv0ue6vnr0GVxaf_ka7dGqKjXz_o?e=1781888874&token=q6iZ0sQtf9U7s1qz0r4yMawNq3-u2w6lbnai6y2J:6Ba8lYetu1jNpriilcEKqtv6NO4=；20260618_国金证券-宏观经济点评沃什的正确政绩观-2026-06-18.pdf url=https://files.zsxq.com/FlW0T2XfmLTnAfaDS34_zrcSFRkA?e=1781888875&token=q6iZ0sQtf9U7s1qz0r4yMawNq3-u2w6lbnai6y2J:rjrdqKq4l9ROay81bwcO6UMD_Ec=；20260618_国金证券-证券行业研究深化双创改革，促进互联互通-2026-06-18.pdf url=htt...",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "valuation",
+        "required_outcome": "model conflict result and accepted/rejected reason"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unverified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "grounding_status": "unverified_quote"
+    },
+    {
+      "evidence_id": "KPE02",
+      "segment": "consolidated",
+      "variable": "valuation",
+      "direction": "unknown",
+      "horizon": "",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "国内研报；20260618_光大证券_2026年6月FOMC会议点评...（无直接汾酒内容）",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "missing_inputs": [
+        "无直接关联于汾酒的具体假设"
+      ],
+      "known_kpe": {
+        "date": "2026-06-19T11:25",
+        "source": "stream_item:162",
+        "source_type": "sell_side_push",
+        "credibility": "identified_broker_private_text",
+        "decision_role": "narrative challenge",
+        "evidence": "国内研报；20260618_光大证券_2026年6月FOMC会议点评或许是今年最“鹰”的点阵.pdf url=https://files.zsxq.com/Fo7j-DUSS1aGRPprWuhauB3zk-lo?e=1781875394&token=q6iZ0sQtf9U7s1qz0r4yMawNq3-u2w6lbnai6y2J:dCFdsTTLiLbhrtpfA-Np8pZDckU=；20260618_光大证券_量化策略研究系列报告之六高风险偏好资金或出现更紧密抱团.pdf url=https://files.zsxq.com/FtxfDAp-Hlqr_5ii66Tq815RT8YT?e=1781875395&token=q6iZ0sQtf9U7s1qz0r4yMawNq3-u2w6lbnai6y2J:CC9rMnKCzpNSiKIcHIZd_pM2UKc=；20260618_光大证券_游戏行业跟踪研究报告游戏板块处估值底部，关注新产品线催化.pdf url=https://files.zsxq.com/FoBZy_Taex-GAPJ-Lq-yDLzqiHum?e=1781875396&token=q6iZ0sQtf9U7s1qz0r4yMawNq3-u2w6lbnai6y2J:0U6ieTL1ozW5TUg1uQQTMpaMd3Q=；20260618_国海证券_山西汾酒（600809）公司点评.pdf url=https://files.zsxq.com/FqMrNPJoelfHH8CK8UVup7Ly2bBq?e=1781875397&token=q6iZ0sQtf9U7s1qz0r4yMawNq3-u2w6lbnai6y2J:Vt4rFpgQ33Xz39cqRu8tJ5fTYMU=；20260618_国金证券_锂电新周期系列深度（一）把握锂电周期反转，优选优势格局赛道.pdf url=https://files.zsxq.com/Fv0ue6vnr0GVxaf_ka7dGqKjXz_o?e=1781875398&token=q6iZ0sQtf9U7s1qz0r4yMawNq3-u2w6lbnai6y2J:j8LHUuRMt2Ic5hotNqhDF61dLBU=；20260618_国金证券-宏观经济点评沃什的正确政绩观-2026-06-18.pdf url=https://files.zsxq.com/FlW0T2XfmLTnAfaDS34_zrcSFRkA?e=1781875399&token=q6iZ0sQtf9U7s1qz0r4yMawNq3-u2w6lbnai6y2J:Bit2WVDH9LYYOJbsb9_Lidw0re8=；20260618_国金证券-证券行业研究深化双创改革，促进互联互通-2026-06-18.pdf url=htt...",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "valuation",
+        "required_outcome": "model conflict result and accepted/rejected reason"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unverified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "grounding_status": "unverified_quote"
+    },
+    {
+      "evidence_id": "KPE03",
+      "segment": "青花系列",
+      "variable": "revenue_growth",
+      "direction": "up",
+      "horizon": "2026 H1",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "动销：青花20、25增长态势良好；青花30、超高端青花40、50表现略承压",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "missing_inputs": [
+        "基数"
+      ],
+      "known_kpe": {
+        "date": "2026-06-17T08:16",
+        "source": "stream_item:787",
+        "source_type": "channel_check",
+        "credibility": "identified_broker_private_text",
+        "decision_role": "probability/verification proxy",
+        "evidence": "【国泰海通食饮】山西汾酒股东大... 【国泰海通食饮】山西汾酒股东大会要点20260616 1.动销：青花20、25增长态势良好；青花30、超高端青花40、50表现略承压；玻汾当前动销稳定；老白汾处于新老包装交替期，老产品尾货仍在清理。 2.库存：26年Q1末为全年库存最高点，二季度处于正常去库存阶段，核心目标为市场良性发展，为渠道抒压。 3.消费场景：民间商务消费复苏态势良好，支撑青花20动销；宴席场景受结婚人口减少、单场用酒量下降影响相对承压。 4.费用：投放重点向C端倾斜，核心投入开瓶扫码激励，与动销直接挂钩，减少直接给渠道的费用投放，避免过度刺激导致价格体系混乱，优先保证价格稳定，费销比整体呈缓慢下降趋势。 5.区域端：推动省内产品结构升级，引导消费向老白汾、青花20、青花25升级，当前省内300-400元价格带的青花20、25增长态势良好。省外市场增长空间充足，争当各地白酒品牌第三。 6.开瓶：当前完成五码合一覆盖的青花20开瓶率约30%。",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "asp_or_price",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE03",
+      "segment": "consolidated",
+      "variable": "channel_inventory",
+      "direction": "down",
+      "horizon": "2026 Q2",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "库存：26年Q1末为全年库存最高点，二季度处于正常去库存阶段",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "missing_inputs": [
+        "绝对库存水平"
+      ],
+      "known_kpe": {
+        "date": "2026-06-17T08:16",
+        "source": "stream_item:787",
+        "source_type": "channel_check",
+        "credibility": "identified_broker_private_text",
+        "decision_role": "probability/verification proxy",
+        "evidence": "【国泰海通食饮】山西汾酒股东大... 【国泰海通食饮】山西汾酒股东大会要点20260616 1.动销：青花20、25增长态势良好；青花30、超高端青花40、50表现略承压；玻汾当前动销稳定；老白汾处于新老包装交替期，老产品尾货仍在清理。 2.库存：26年Q1末为全年库存最高点，二季度处于正常去库存阶段，核心目标为市场良性发展，为渠道抒压。 3.消费场景：民间商务消费复苏态势良好，支撑青花20动销；宴席场景受结婚人口减少、单场用酒量下降影响相对承压。 4.费用：投放重点向C端倾斜，核心投入开瓶扫码激励，与动销直接挂钩，减少直接给渠道的费用投放，避免过度刺激导致价格体系混乱，优先保证价格稳定，费销比整体呈缓慢下降趋势。 5.区域端：推动省内产品结构升级，引导消费向老白汾、青花20、青花25升级，当前省内300-400元价格带的青花20、25增长态势良好。省外市场增长空间充足，争当各地白酒品牌第三。 6.开瓶：当前完成五码合一覆盖的青花20开瓶率约30%。",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "asp_or_price",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE03",
+      "segment": "consolidated",
+      "variable": "sg&a_ratio",
+      "direction": "down",
+      "horizon": "2026",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "费用：投放重点向C端倾斜，核心投入开瓶扫码激励...费销比整体呈缓慢下降趋势",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "missing_inputs": [
+        "费销比数值"
+      ],
+      "known_kpe": {
+        "date": "2026-06-17T08:16",
+        "source": "stream_item:787",
+        "source_type": "channel_check",
+        "credibility": "identified_broker_private_text",
+        "decision_role": "probability/verification proxy",
+        "evidence": "【国泰海通食饮】山西汾酒股东大... 【国泰海通食饮】山西汾酒股东大会要点20260616 1.动销：青花20、25增长态势良好；青花30、超高端青花40、50表现略承压；玻汾当前动销稳定；老白汾处于新老包装交替期，老产品尾货仍在清理。 2.库存：26年Q1末为全年库存最高点，二季度处于正常去库存阶段，核心目标为市场良性发展，为渠道抒压。 3.消费场景：民间商务消费复苏态势良好，支撑青花20动销；宴席场景受结婚人口减少、单场用酒量下降影响相对承压。 4.费用：投放重点向C端倾斜，核心投入开瓶扫码激励，与动销直接挂钩，减少直接给渠道的费用投放，避免过度刺激导致价格体系混乱，优先保证价格稳定，费销比整体呈缓慢下降趋势。 5.区域端：推动省内产品结构升级，引导消费向老白汾、青花20、青花25升级，当前省内300-400元价格带的青花20、25增长态势良好。省外市场增长空间充足，争当各地白酒品牌第三。 6.开瓶：当前完成五码合一覆盖的青花20开瓶率约30%。",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "asp_or_price",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unverified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "grounding_status": "unverified_quote"
+    },
+    {
+      "evidence_id": "KPE04",
+      "segment": "consolidated",
+      "variable": "revenue_growth",
+      "direction": "stable",
+      "horizon": "2026 Q2",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "预计Q2业绩表现或与Q1接近，仍处调整出清阶段；全年不追求硬性高增，追求稳健",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "missing_inputs": [
+        "Q1实际值"
+      ],
+      "known_kpe": {
+        "date": "2026-06-16T18:12",
+        "source": "stream_item:2352",
+        "source_type": "industry_weekly_data",
+        "credibility": "private_data_requires_methodology_check",
+        "decision_role": "KPI/forecast proxy",
+        "evidence": "山西汾酒股东大会调研更新：青2... 山西汾酒股东大会调研更新：青20&玻汾动销优异，预计Q2业绩延续Q1表现（20260616） 业绩展望：预计Q2业绩表现或与Q1接近，仍处调整出清阶段；全年不追求硬性高增，追求稳健。 周期展望：预计26-27年行业见底。 动销情况：26年1-5月省内动销 -10%左右（省外略增），春节稳健，3-5月淡季动销降幅扩大；25H2省内动销同比-20%，低基数下全年动销有望正增。产品方面，青花20/25+玻汾动销正增，社会库存低。 库存情况：Q2继续去库存&当前库存相对合理，预计报表增速慢于实际动销。 产品情况： ① 青花系列：青花20 25年回款口径120e，26年动销实现增长；青花30 后面会加快返利保证价盘。 ② 老白汾：Q1整体还行略不及预期，主受五码更换&省外认知偏低&团队内部等影响，26年是老白汾产品升级期，要做nfc产品（控盘分利），后续会推出“汾10/15”分线产品&宴席专属产品等运作（突出汾酒），做进行营销组织变革。 ③ 玻汾：供需紧平衡下，H1发货较足/预计26H2量收窄（可能会断货）。 区域情况：山西营销公司销售口径约130e，市占率提升空间有限；省外空间仍大，继续突破。 欢迎和我们沟通详细情况玫瑰",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "market_share",
+        "required_outcome": "numeric assumption delta or explicit rejection"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE04",
+      "segment": "consolidated",
+      "variable": "market_share",
+      "direction": "stable_to_down_domestic",
+      "horizon": "2026",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "26年1-5月省内动销 -10%左右（省外略增）...山西营销公司销售口径约130e，市占率提升空间有限",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "missing_inputs": [
+        "省外增速绝对值"
+      ],
+      "known_kpe": {
+        "date": "2026-06-16T18:12",
+        "source": "stream_item:2352",
+        "source_type": "industry_weekly_data",
+        "credibility": "private_data_requires_methodology_check",
+        "decision_role": "KPI/forecast proxy",
+        "evidence": "山西汾酒股东大会调研更新：青2... 山西汾酒股东大会调研更新：青20&玻汾动销优异，预计Q2业绩延续Q1表现（20260616） 业绩展望：预计Q2业绩表现或与Q1接近，仍处调整出清阶段；全年不追求硬性高增，追求稳健。 周期展望：预计26-27年行业见底。 动销情况：26年1-5月省内动销 -10%左右（省外略增），春节稳健，3-5月淡季动销降幅扩大；25H2省内动销同比-20%，低基数下全年动销有望正增。产品方面，青花20/25+玻汾动销正增，社会库存低。 库存情况：Q2继续去库存&当前库存相对合理，预计报表增速慢于实际动销。 产品情况： ① 青花系列：青花20 25年回款口径120e，26年动销实现增长；青花30 后面会加快返利保证价盘。 ② 老白汾：Q1整体还行略不及预期，主受五码更换&省外认知偏低&团队内部等影响，26年是老白汾产品升级期，要做nfc产品（控盘分利），后续会推出“汾10/15”分线产品&宴席专属产品等运作（突出汾酒），做进行营销组织变革。 ③ 玻汾：供需紧平衡下，H1发货较足/预计26H2量收窄（可能会断货）。 区域情况：山西营销公司销售口径约130e，市占率提升空间有限；省外空间仍大，继续突破。 欢迎和我们沟通详细情况玫瑰",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "market_share",
+        "required_outcome": "numeric assumption delta or explicit rejection"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unverified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "grounding_status": "unverified_quote"
+    },
+    {
+      "evidence_id": "KPE05",
+      "segment": "consolidated",
+      "variable": "asp_or_price",
+      "direction": "bottom_forming",
+      "horizon": "2026 H2",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "白酒基本面加速探底，布局率先出清标的...山西汾酒（价格弹性标的）",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "missing_inputs": [],
+      "known_kpe": {
+        "date": "2026-07-13T08:14",
+        "source": "stream_item:13553",
+        "source_type": "channel_check",
+        "credibility": "identified_broker_private_text",
+        "decision_role": "probability/verification proxy",
+        "evidence": "【国泰海通食饮】周报第23期：... 【国泰海通食饮】周报第23期：底部显现，大众品复苏可期 [太阳]投资建议：大众品改善趋势确定，白酒加速出清，布局成长及超跌标的。1）白酒基本面加速探底，布局率先出清标的：迎驾贡酒、今世缘、金徽酒、古井贡酒、珍酒李渡、舍得酒业及价格弹性标的：贵州茅台、五粮液、泸州老窖、山西汾酒；2）调味品、餐饮供应链具备量价回升弹性，推荐海天味业、安井食品、千禾味业、安琪酵母、宝立食品、巴比食品；3）推荐产业上行周期健康食品及部分零食：百龙创园、西麦食品、盐津铺子、洽洽食品、卫龙美味（港股）、劲仔食品；4）啤酒期待旺季动销提速，推荐百润股份、青岛啤酒、珠江啤酒，华润啤酒（港股）；5）饮料成长推荐东鹏饮料、农夫山泉（港股），高股息推荐中国食品（港股）、康师傅控股（港股）、统一企业中国（港股）；6）乳制品推荐蒙牛乳业、伊利股份、新乳业、三元股份、优然牧业（港股）、现代牧业（港股）。 [太阳]白酒：预计二季度继续出清。白酒五一和端午小旺季表现一般，预计部分场景仍然受阻，叠加消费力仍未恢复，使得行业修复时间拉长。7月10日舍得酒业发布白酒26H1首份业绩，据公司业绩预告测算，26Q2收入预计同比-30%、归母净利润和扣非净利润同比转亏。结合5-6月股东大会调研情况及中酒协发布的行业中期报，我们预计白酒行业26Q2报表层面将延续出清状态，仅部分个股有望实现同比持平或正增长；与此同时酒厂愈发理性，厂商关系较为和谐，库存的绝对量稳中有降。本周白酒板块延续震荡行情，考虑到中国证券报方面7月2日曾有“扩大消费十五五规划将于近期发布”的消息传出，我们认为不排除消费政策刺激的可能性，届时有望驱动相关行业流动性回暖，带动白酒估值修复。 [太阳]大众品：低基数效应+成本回落+出行回暖共振，边际改善可期。大众品复苏的态势明确，短期看4-5月消费高频数据回落叠加交易层面冲击已经得到较充分反应。短期波动不改复苏趋势，考虑到6月及之后低基数+需求端弱复苏，边际回升可期。健康食品渗透提升、成长持续，餐饮供应链受益于供需两端改善、我们预计龙头Q2淡季依然保持稳健增长，仍是贯穿全年主线。零食量贩连锁两强Q2保持较快拓店速度，当前量贩渠道增长仍具较强确定性和弹性，劲仔食品、有友食品等现阶段量贩份额提升相对较快的公司在销售端亦有望受益。饮料、啤酒部分龙头公司受Q2雨水偏多及竞争等因素影响，在下半年预期气候改善带动出行链复苏驱动下，业绩有望环比改善。同时随着油价的下降，PET及棕榈油等原材料价格已经出现明显的边际下降趋势。大众品板块较多优质公司估值已回落至较低区间，底部价值日益凸显。",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "asp_or_price",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unverified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "grounding_status": "unverified_quote"
+    },
+    {
+      "evidence_id": "KPE06",
+      "segment": "consolidated",
+      "variable": "asp_or_price",
+      "direction": "bottom_forming",
+      "horizon": "long_term",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "（6）白酒基本面及估值探底，推荐率先出清标的...及价格弹性标的：贵州茅台、五粮液、泸州老窖、山西汾酒",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "missing_inputs": [],
+      "known_kpe": {
+        "date": "2026-06-30T18:58",
+        "source": "stream_item:6671",
+        "source_type": "channel_check",
+        "credibility": "identified_broker_private_text",
+        "decision_role": "probability/verification proxy",
+        "evidence": "【国泰海通食饮｜深度】以美国、... 【国泰海通食饮｜深度】以美国、日本为例：滞涨期的大众品表现 投资建议：输入型通胀下关注具备需求刚性、真实提价权、渠道掌控力的龙头。（1）调味品、餐饮供应链具备量价回升弹性，推荐海天味业、安井食品、千禾味业、安琪酵母、宝立食品、巴比食品；（2）啤酒期待旺季场景修复，推荐百润股份、青岛啤酒、珠江啤酒，华润啤酒（港股）；（3）饮料成长推荐东鹏饮料、农夫山泉（港股），高股息推荐中国食品（港股）、康师傅控股（港股）、统一企业中国（港股）；4）推荐产业上行周期健康食品及部分零食：百龙创园、西麦食品、盐津铺子、洽洽食品、卫龙美味（港股）、劲仔食品；（5）乳制品推荐蒙牛乳业、伊利股份、新乳业、三元股份、优然牧业（港股）、现代牧业（港股）；（6）白酒基本面及估值探底，推荐率先出清标的：迎驾贡酒、今世缘、金徽酒、古井贡酒、珍酒李渡、舍得酒业及价格弹性标的：贵州茅台、五粮液、泸州老窖、山西汾酒。 复盘海外：能源价格跳升，成本链条向价格体系传导，70年代两次滞胀形成。受能源依赖度、政策应对和产业结构差异影响，美国、日本、韩国、英国的通胀峰值明显分化，在1973-1975年、1979-1982年形成两轮典型滞胀。滞胀阶段价格因素与刚性需求共同支撑名义消费扩张，1971-1985年美国居民名义消费支出仍持续上行，消费者信心在1974年触底后逐步修复。 必选消费具备较强收入韧性，龙头公司通过提价、推新、效率改善穿越成本冲击。美国1975年必选消费前十大龙头收入增速约24%，高于可选消费约6%的增速。日本市场亦呈现类似特征，滞胀阶段必需消费价格指数跑赢日经。以可口可乐和花王为例，必选消费龙头凭借高频刚需、品牌溢价、渠道掌控和产品矩阵扩张，收入端维持增长，利润端实现修复。1970-1982年收入由16.06亿美元增至62.49亿美元，CAGR约12%；毛利率从1974年的约39.7%修复至1982年的约44.7%，龙头企业经历先承压、后顺价、再修复路径。 消费启示：重点把握“温和通胀、成本扰动、估值+持仓低位”下的结构性机会。借鉴海外滞胀经验，输入型成本扰动为部分大众品提供顺价窗口，当前应关注具备顺价能力、渠道掌控力、产品升级能力和现金流稳定性的细分龙头。目前板块处于“低估值、盈利分化、低持仓”阶段，经历2021年以来深度调整，估值、持仓、情绪均已回落至历史偏低区域；在当前温和通胀、成本传导、经济修复的宏观假设下基本面磨底，板块具备一轮估值修复行情基础。",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "asp_or_price",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unverified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "grounding_status": "unverified_quote"
+    },
+    {
+      "evidence_id": "KPE07",
+      "segment": "consolidated",
+      "variable": "asp_or_price",
+      "direction": "bottom_forming",
+      "horizon": "2026 H2",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "白酒基本面加速探底，布局率先出清标的：迎驾贡酒、今世缘、金徽酒、古井贡酒、珍酒李渡、舍得酒业及价格弹性标的：贵州茅台、五粮液、泸州老窖、山西汾酒",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "missing_inputs": [],
+      "known_kpe": {
+        "date": "2026-06-14T20:13",
+        "source": "stream_item:2911",
+        "source_type": "channel_check",
+        "credibility": "identified_broker_private_text",
+        "decision_role": "probability/verification proxy",
+        "evidence": "【国泰海通食饮】周报第19期：... 【国泰海通食饮】周报第19期：底部特征显现 太阳投资建议：大众品改善趋势确定，白酒加速出清。1）白酒基本面加速探底，布局率先出清标的：迎驾贡酒、今世缘、 金徽酒、古井贡酒、珍酒李渡、舍得酒业及价格弹性标的：贵州茅台、五粮液、泸州老窖、山西汾酒；2）调味品、餐饮供应链具备量价回升弹性，推荐海天味业、安井食品、千禾味业、安琪酵母、宝立食品、巴比食品；3）推荐产业上行周期健康食品及部分零食：百龙创园、西麦食品、盐津铺子、洽洽食品、卫龙美味（港股）、劲仔食品；4）啤酒期待旺季场景修复，推荐百润股份、青岛啤酒、珠江啤酒，华润啤酒（港股）；5）饮料成长推荐东鹏饮料、农夫山泉（港股），高股息推荐中国食品（港股）、康师傅控股（港股）、统一企业中国（港股）；6）乳制品推荐蒙牛乳业、伊利股份、新乳业、三元股份、优然牧业（港股）、现代牧业（港股）。 太阳白酒：流动性回暖，茅五释放积极信号。本周消费板块流动性回暖，白酒估值小幅修复。茅台召开年度股东会，对市场化转型的多个事项进行回应，肯定改革效果，截至5月31日i茅台2026年新增注册用户数约1667万人、累计注册用户9615万人，成交订单约713万人次，持续提升线上触达能力。五粮液发布人事调整落地，邓敏拟任五粮液集团董事长、股份公司董事，股份公司增补邓敏为第七届董事会非独立董事候选人，经股东会审议通过后董事会将审议选举其担任公司董事长的议案，公司管理延续稳定。近期消费相关的宏观数据表现一般，白酒动销尚需1-2个旺季进行验证，但微观交易结构已进一步改善，股息率和估值具备一定吸引力；基本面加速探底叠加筹码冲击，建议布局率先出清标的。 太阳大众品：结构分化，复苏趋势不变。大众品全年维度复苏态势明确，短期来看，春节及26Q1的景气交易结束后，板块交易层面情绪边际回落，但大众消费景气度改善势头仍较为确定，虽有波动但增速中枢仍有所抬升，且考虑到6月及之后餐饮场景低基数+需求端弱复苏，大众品复苏趋势有望延续甚至加强。我们认为其中健康食品、餐饮供应链相关标的受益于健康消费趋势以及餐饮场景修复，依然是确定性较强的主线；同时啤酒、饮料龙头处于低预期状态，随着旺季来临动销逐步加速，边际改善值得期待；此外，东鹏2026年6月12号推出高端新品“东方大鹏”，聚焦注重健康及抗疲劳功能属性的年轻人，。在生活节奏加快驱动消费者对于提神抗疲劳诉求的提升的背景下，我们看好公司逐步引导能量饮料消费群体扩容，从而实现长期超额收益。",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "asp_or_price",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE08",
+      "segment": "青花系列",
+      "variable": "wholesale_price",
+      "direction": "stable",
+      "horizon": "current",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "青花30/青花20/老白汾10/玻汾批价670/350-360/115/41元",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "missing_inputs": [
+        "批价变动趋势"
+      ],
+      "known_kpe": {
+        "date": "2026-06-14T20:11",
+        "source": "stream_item:2913",
+        "source_type": "channel_check",
+        "credibility": "high_private_channel_hard_to_verify",
+        "decision_role": "probability/verification proxy",
+        "evidence": "🐴【建投食饮｜｜杨骥】周度高端... annotation: 🐴【建投食饮｜｜杨骥】周度高端酒+区域酒数据跟踪更新（20260614） 太阳【我们认为】贵州茅台股东会交流积极，i茅台1-5月累计成交订单713万，我们测算i茅台同比增量预计在125亿以上（对应非标+普飞增量），我们预计公司Q2收入端或仍有望增长。我们预计今世缘、金徽、舍得、酒鬼26Q2收入业绩有望正增，目前7家酒企股息率高于4%。当前推荐白酒龙头&业绩率先出清反转且股息率较高的标的，推荐贵州茅台，关注今世缘、迎驾贡酒、泸州老窖、金徽酒等。 玫瑰贵州茅台：公司召开股东会，市场化改革顺利推进，截止5月底i茅台平台累计注册用户9643万人，今年以来新增用户1696万人，平均月活约956万人，累计成交订单713万。普飞6月配额已打款发货，目前回款到货比例约55-57%，预计6月配额约6-7%，Q2普飞经销渠道配额同比相近（不考虑i茅台增量），经销商代售非标较去年分销的量略有下滑，飞天及非标均接近零库存。飞天散装/原箱/精品批价1625/1665/2350元。 玫瑰五粮液：邓敏任五粮液集团（股份）有限公司党委书记，拟担任股份公司董事长；五粮液一见倾心×《》动画定制款在B站开售。26年全年收入目标双位数增长，利润增长显著高于收入增速。目前回款约60%-70%，发货约50-60%，库存1个月。普五批价750-760元，临近618略有回落。 玫瑰泸州老窖：泸州老窖联名龙门石窟，500ml新品尝鲜价为159元。52度锚定高端核心市场，38度加快全国化，高低度收入占比接近、低度占比稳步提升。回款约35%，预计高度国窖双位数以上下滑，价格策略仍坚定挺价，库存2个月。国窖/特曲60批价830-850/410元。 玫瑰洋河股份：省内六代海之蓝去库存基本完成，今年整体市场呈现出动销开瓶＞经销商出库＞厂方回款；公司压缩品牌事业部与线下办事处数量，设立14大战区统一运营海天梦、双沟全系产品，优化营销费用、稳固产品价盘，助力端午终端备货提速。回款约40%，库存2-2.5个月。M6+/水晶梦/天之蓝/海之蓝省内批价为570/370-380/270/115元。 玫瑰今世缘：26年希望稳住百亿大盘，二季度有望回正，目前阶段性体量淡雅>对开>四开，山东、安徽销售口径已破3亿。回款约50%-55%，库存约3个月。淡雅/对开/四开/V3批价110/245-255/410/480-500元。 玫瑰古井贡酒：截止5月底回款约55%，略慢于去年同期，古8、古16表现相对较优，库存3-4个月。古20/古16/古8/古5批价470-510/300-320/ 195-210 /100-110元。 玫瑰口子窖：二季度回款较慢，库存3-4个月。口子20年/10年/新6年批价320-330/215-235/115-120元。 玫瑰迎驾贡酒：公司已走出...",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "asp_or_price",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unverified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "grounding_status": "unverified_quote"
+    },
+    {
+      "evidence_id": "KPE09",
+      "segment": "consolidated",
+      "variable": "revenue_growth",
+      "direction": "stable",
+      "horizon": "2026 Q2",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "预计Q2业绩表现或与Q1接近，全年不追求硬性高增，26年1-5月省内动销同比下滑约10%，省外略有增长",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "missing_inputs": [
+        "Q1绝对数值"
+      ],
+      "known_kpe": {
+        "date": "2026-07-13T08:13",
+        "source": "stream_item:13554",
+        "source_type": "channel_check",
+        "credibility": "high_private_channel_hard_to_verify",
+        "decision_role": "probability/verification proxy",
+        "evidence": "🐴【建投食饮｜｜杨骥】周度高端... 🐴【建投食饮｜｜杨骥】周度高端酒+区域酒数据跟踪更新（20260712） [玫瑰]古井贡酒：Q2仍在去库中，费用率同比保持，当前古16规模已超过古20，目标将古5做到百亿规模。截止6月底回款约63%，略慢于去年同期，古8、古16表现相对较优，库存3-4个月。古20/古16/古8/古5批价470-510/300-320/ 195-210 /100-110元。 [玫瑰]口子窖：二季度回款较慢，库存3-4个月。口子20年/10年/新6年批价320-330/215-235/115-120元。 [玫瑰]迎驾贡酒：上半年洞6、洞9、洞16动销仍有增长，洞20略有承压，目前库存水平良性较低，我们预计Q2报表端仍有增长。合同年回款约60%，库存2个月。洞6/9/16批价110/185/285元。 [玫瑰]山西汾酒：预计Q2业绩表现或与Q1接近，全年不追求硬性高增，26年1-5月省内动销同比下滑约10%，省外略有增长。回款约50%+，市场需求企稳、开发品新增条码较多，库存约2-3个月。青花30/青花20/老白汾10/玻汾批价670/350-360/115/41元。 [玫瑰]酒鬼酒：预计26Q2收入有望双位数增长、利润有望转正，26年收入可达12-13亿、利润可转正至小几千万，其中预计自由爱可贡献3-4亿（25年贡献2亿），未来三年收入体量或可向20亿修复、未来利润率有望回升至15%-20%。回款推进中，春节自由爱回款较好，省内库存约3个月。内参/红坛批价680-750/240-280元。 [玫瑰]水井坊：26Q1公司门店动销同比增长5%，半数省份实现双位数增长，宴席场次同比增长1.9%，公司注重社会库存消化、终端价格体系逐步修复。回款较慢，动销承压，库存约3.5个月。典藏/井台/臻酿8号批价560/430/280-310元。 [玫瑰]舍得酒业：26Q2预计实现收入7.88亿元（同比-30%），预计实现归母净利润-0.97至-0.57亿元（25Q2为0.97亿元）。26年目标小个位数增长，预计正常净利率中枢为10-15%。回款约40%，Q2动销仍有下滑，库存约2个月。舍之道/品味舍得/智慧舍得批价约135/310-320/450元。 [玫瑰]珍酒李渡：“吴金东-珍酒李渡”视频号累计播放量破11亿。万商联盟回款突破11亿元；2026年收入增长率自+10%上调至+15%，2026上半年收入增长率自-15%缩窄至-5%，2026年全年经调整净利润自6亿元上调至8亿元，2026上半年经调整净利润约5亿元+。大珍约550元，珍30/珍15/珍8/珍5/老珍酒批价约580/270/175/125/70元。 [玫瑰]金徽酒：1-4月省内销售进度30%+，陕西完成全年60%、新疆进度约50%、宁夏和青海进度40%+、华东在调整，年份和柔和系列进度30...",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "asp_or_price",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE10",
+      "segment": "consolidated",
+      "variable": "valuation",
+      "direction": "bottom_forming",
+      "horizon": "medium_term",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "中长期推荐竞争力强标的，如贵州茅台、山西汾酒、泸州老窖等",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "missing_inputs": [],
+      "known_kpe": {
+        "date": "2026-06-28T20:10",
+        "source": "stream_item:6082",
+        "source_type": "industry_weekly_data",
+        "credibility": "private_data_requires_methodology_check",
+        "decision_role": "KPI/forecast proxy",
+        "evidence": "太阳【东财食饮&农业】周观点更... 太阳【东财食饮&农业】周观点更新及研究回顾 🌹研究员观点更新： 回购、增持、激励，底部时产业动作频出；正视事实稳健经营，股东会传递企业理性信号 端午期间消费情况较为平淡，更多原因还是在于居民资产负债表修复略慢、消费力和消费预期都弱。近期企业频繁召开股东大会，管理层均传递出较为理性信号，正视当下需求环境、积极应对竞争、努力寻找增长点，同时资本市场也推出回购、增持、激励等措施以期稳定股价。流动性方面，市场波动加大，资金的虹吸效应在有所缓解，板块资金面压力有所降低。 酒类：淡季需求平淡。推荐格局清晰、率先改善且估值&筹码结构有优势的地产酒板块，推荐今世缘、迎驾贡酒、金徽酒、古井贡酒，中长期推荐竞争力强标的，如贵州茅台、山西汾酒、泸州老窖等，弹性品种关注珍酒李渡、酒鬼酒等。黄酒热点多、逻辑顺，推荐会稽山，关注积极梳理调整的古越龙山。啤酒逐渐进入旺季，建议关注燕京啤酒、青岛啤酒、重庆啤酒。 大众品： 虽进入淡季，但是不少大众品公司Q2依然实现了较为亮眼的增长，例如鸣鸣很忙、万辰集团Q2开店加速，单店在运营优化背景下仍实现正增，当前皆回落至对应26年13x左右；西麦食品Q2主业仍延续Q1的高增势头，利润在成本红利下加速改善；有友食品预计Q2能实现20%+的收入增速，山姆新品也将在Q3贡献更多增量；新乳业回调较多主要系市场担心鲜奶补税影响，但实际影响非常有限，预计公司Q2利润端依然有望录得双位数增长，当前估值回落至26年14x。我们推荐关注绩优公司受板块情绪影响下“捡便宜”的机会，推荐重点关注鸣鸣很忙、万辰集团、新乳业、安井食品。 农业： 农业-生猪：今年3月至5月能繁存栏去化持续加速，6月肥仔双亏，产能去化有望继续；当前处于周期底部左侧，现金流稳健、成本控制优异的养殖主体有望受益推荐关注牧原、温氏、德康。 农业-白羽肉鸡：海外祖代1-5月引种中断，6月正式实现从法国引种，恢复不改H2景气，上半年引种短缺将在H2逐步兑现，看好父母代鸡苗价格，推荐关注白羽种鸡龙头益生股份。 🌹本周调研： 五粮液、青岛啤酒、海南橡胶",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "asp_or_price",
+        "required_outcome": "numeric assumption delta or explicit rejection"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE11",
+      "segment": "青花系列",
+      "variable": "revenue_base",
+      "direction": "",
+      "horizon": "2025",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "汾酒380亿里面，玻汾刚过百亿，青花20大概130亿，青花30大概50个亿，老白汾50个亿",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "missing_inputs": [
+        "实际收入确认数据"
+      ],
+      "known_kpe": {
+        "date": "2026-06-14T21:32",
+        "source": "stream_item:2891",
+        "source_type": "industry_weekly_data",
+        "credibility": "private_data_requires_methodology_check",
+        "decision_role": "KPI/forecast proxy",
+        "evidence": "【建投食饮｜｜杨骥】周度高端酒... 【建投食饮｜｜杨骥】周度高端酒+区域酒数据跟踪更新（二）（20260614） 古井贡酒：截止5月底回款约55%，略慢于去年同期，古8、古16表现相对较优，库存3-4个月。古20/古16/古8/古5批价470-510/300-320/ 195-210 /100-110元。 口子窖：二季度回款较慢，库存3-4个月。口子20年/10年/新6年批价320-330/215-235/115-120元。 迎驾贡酒：公司已走出调整期，省内恢复增长，省外仍在调整，全年有望正增。回款约40-45%，促销拉动下Q1动销正增，洞6/9表现较优，合肥、六安优于其他区域，库存3个月。洞6/9/16批价110/185/285元。 山西汾酒：26Q1青花30有所恢复，总体比去年同期有下降，下降比较均衡；汾酒380亿里面，玻汾刚过百亿，青花20大概130亿，青花30大概50个亿，老白汾50个亿。回款约40%+，库存约50天。青花30/青花20/老白汾10/玻汾批价670/350-360/115/41元。 酒鬼酒：酒鬼酒70周年纪念酒正式发售；酒鬼酒46度内品福常德首发。预计26Q2收入有望正增、利润有望转正，26年收入可达12-13亿、利润可转正，其中预计自由爱可贡献3-4亿（25年贡献2亿）。回款推进中，春节自由爱回款较好，省内库存约3个月。内参/红坛批价680-750/240-280元。 水井坊：干晓峰出任水井坊总经理。回款较慢，四川1-2月下滑7-8%，库存约3.5个月。典藏/井台/臻酿8号批价560/430/280-310元。 舍得酒业：Q2业绩有望实现正向表现，26年目标小个位数增长，预计当前正常净利率中枢为10-15%。回款约25%，四川下滑7-8%，库存约2个月。舍之道/品味舍得/智慧舍得批价约135/310-320/450元。 珍酒李渡：“大珍·珍酒”回款突破10亿元；公司全年业绩预期上修，预计26年收入增长15%、利润可达8亿元左右，主要系大珍&第五代珍十五招商顺利+主品降幅收窄+利润率修复。大珍约550元，珍30/珍15/珍8/珍5/老珍酒批价约580/270/175/125/70元。 金徽酒：1-4月省内销售进度30%+，陕西完成全年60%、新疆进度约50%、宁夏和青海进度40%+、华东在调整，年份和柔和系列进度30%+、星级系列进度接近30%，目前能量系列2亿+、增长超30%。预计上半年收入可同比持平，全年收入可实现个位数增长。",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "segment_margin",
+        "required_outcome": "numeric assumption delta or explicit rejection"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE12",
+      "segment": "consolidated",
+      "variable": "unmapped",
+      "direction": "unknown",
+      "horizon": "",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "国内研报；20260618_国泰海通证券_油运图鉴2.0版...（无直接汾酒内容）",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "missing_inputs": [
+        "无直接关联于汾酒的具体假设"
+      ],
+      "known_kpe": {
+        "date": "2026-06-19T11:26",
+        "source": "stream_item:1596",
+        "source_type": "sell_side_push",
+        "credibility": "identified_broker_private_text",
+        "decision_role": "narrative challenge",
+        "evidence": "国内研报；20260618_国泰海通证券_油运图鉴2.0版（第十六期�.pdf url=https://files.zsxq.com/ltcanjGPZkQVwY0k8ZoOlXOFaHZQ?e=1781888866&token=q6iZ0sQtf9U7s1qz0r4yMawNq3-u2w6lbnai6y2J:_gHLOe30yTuwyFsytiBHv8kOmLs=；20260618_国信证券_金融工程日报沪深两市再度分化，沪指失守4100点、创业板指创历史新高.pdf url=https://files.zsxq.com/Flqc4V_ed_o6BLzKlyP0qxsZduqK?e=1781888867&token=q6iZ0sQtf9U7s1qz0r4yMawNq3-u2w6lbnai6y2J:G-97JdNJUOIJ7RsG1XqKiLK16cc=；20260618_国信证券_热点追踪周报由创新高个股看市场投资热点（第248期�.pdf url=https://files.zsxq.com/Fnn15HZgcJ_CXh0kA_U_d6rUeI-Z?e=1781888867&token=q6iZ0sQtf9U7s1qz0r4yMawNq3-u2w6lbnai6y2J:GFNP86wPfE7FZ7e_e9N6VnroAZ8=；20260618_国元证券_全球市场周报能源通胀或已见顶，谈判利好带动反弹.pdf url=https://files.zsxq.com/FqoCHinylJOpmxsoN9SiRliYrKT_?e=1781888868&token=q6iZ0sQtf9U7s1qz0r4yMawNq3-u2w6lbnai6y2J:F4wfFF0KNcvJxBpzY92LkaSNxIs=；20260618_华创证券_美联储6月议息会议点评沃什首秀，释放全面改革新信号.pdf url=https://files.zsxq.com/Frhb6KBbowogd9mYIN5kifjHh37J?e=1781888869&token=q6iZ0sQtf9U7s1qz0r4yMawNq3-u2w6lbnai6y2J:hSbLPjNSLtREoMSGd-1aMcrCz_g=；20260618_华创证券_山西汾酒2025年度股东大会点评包袱逐步卸下，经营仍属良性.pdf url=https://files.zsxq.com/Fp-8a_M-sVnWQjPrSZrMkG2crl4j?e=1781888870&token=q6iZ0sQtf9U7s1qz0r4yMawNq3-u2w6lbnai6y2J:lYP9cJ6zWgsxfnmvPWDezgbKilA=；20260618_华福国际_全球AI与工业制造周报(1406-1806)美联储鹰派扰动市场，AI板块.pdf...",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "unmapped",
+        "required_outcome": "model conflict result and accepted/rejected reason"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unverified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "grounding_status": "unverified_quote"
+    }
+  ],
+  "known_kpe_ledger": {
+    "KPE01": {
+      "date": "2026-06-19T11:25",
+      "source": "stream_item:1597",
+      "source_type": "sell_side_push",
+      "credibility": "identified_broker_private_text",
+      "decision_role": "narrative challenge",
+      "evidence": "国内研报；20260618_光大证券_2026年6月FOMC会议点评或许是今年最“鹰”的点阵.pdf url=https://files.zsxq.com/Fo7j-DUSS1aGRPprWuhauB3zk-lo?e=1781888873&token=q6iZ0sQtf9U7s1qz0r4yMawNq3-u2w6lbnai6y2J:2ppgiWv7f57t6p_a7lu5z_wL9cQ=；20260618_光大证券_量化策略研究系列报告之六高风险偏好资金或出现更紧密抱团.pdf url=https://files.zsxq.com/FtxfDAp-Hlqr_5ii66Tq815RT8YT?e=1781888873&token=q6iZ0sQtf9U7s1qz0r4yMawNq3-u2w6lbnai6y2J:Wk4QoF5gTfzueNQC-x_49Ns0v-Y=；20260618_光大证券_游戏行业跟踪研究报告游戏板块处估值底部，关注新产品线催化.pdf url=https://files.zsxq.com/FoBZy_Taex-GAPJ-Lq-yDLzqiHum?e=1781888874&token=q6iZ0sQtf9U7s1qz0r4yMawNq3-u2w6lbnai6y2J:SCiFiuHGeb4boGHPQaaKVIl9zao=；20260618_国海证券_山西汾酒（600809）公司点评.pdf url=https://files.zsxq.com/FqMrNPJoelfHH8CK8UVup7Ly2bBq?e=1781888874&token=q6iZ0sQtf9U7s1qz0r4yMawNq3-u2w6lbnai6y2J:ev2iby5pwsWTQcBSR_ULXMA0Vkw=；20260618_国金证券_锂电新周期系列深度（一）把握锂电周期反转，优选优势格局赛道.pdf url=https://files.zsxq.com/Fv0ue6vnr0GVxaf_ka7dGqKjXz_o?e=1781888874&token=q6iZ0sQtf9U7s1qz0r4yMawNq3-u2w6lbnai6y2J:6Ba8lYetu1jNpriilcEKqtv6NO4=；20260618_国金证券-宏观经济点评沃什的正确政绩观-2026-06-18.pdf url=https://files.zsxq.com/FlW0T2XfmLTnAfaDS34_zrcSFRkA?e=1781888875&token=q6iZ0sQtf9U7s1qz0r4yMawNq3-u2w6lbnai6y2J:rjrdqKq4l9ROay81bwcO6UMD_Ec=；20260618_国金证券-证券行业研究深化双创改革，促进互联互通-2026-06-18.pdf url=htt...",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "valuation",
+      "required_outcome": "model conflict result and accepted/rejected reason"
+    },
+    "KPE02": {
+      "date": "2026-06-19T11:25",
+      "source": "stream_item:162",
+      "source_type": "sell_side_push",
+      "credibility": "identified_broker_private_text",
+      "decision_role": "narrative challenge",
+      "evidence": "国内研报；20260618_光大证券_2026年6月FOMC会议点评或许是今年最“鹰”的点阵.pdf url=https://files.zsxq.com/Fo7j-DUSS1aGRPprWuhauB3zk-lo?e=1781875394&token=q6iZ0sQtf9U7s1qz0r4yMawNq3-u2w6lbnai6y2J:dCFdsTTLiLbhrtpfA-Np8pZDckU=；20260618_光大证券_量化策略研究系列报告之六高风险偏好资金或出现更紧密抱团.pdf url=https://files.zsxq.com/FtxfDAp-Hlqr_5ii66Tq815RT8YT?e=1781875395&token=q6iZ0sQtf9U7s1qz0r4yMawNq3-u2w6lbnai6y2J:CC9rMnKCzpNSiKIcHIZd_pM2UKc=；20260618_光大证券_游戏行业跟踪研究报告游戏板块处估值底部，关注新产品线催化.pdf url=https://files.zsxq.com/FoBZy_Taex-GAPJ-Lq-yDLzqiHum?e=1781875396&token=q6iZ0sQtf9U7s1qz0r4yMawNq3-u2w6lbnai6y2J:0U6ieTL1ozW5TUg1uQQTMpaMd3Q=；20260618_国海证券_山西汾酒（600809）公司点评.pdf url=https://files.zsxq.com/FqMrNPJoelfHH8CK8UVup7Ly2bBq?e=1781875397&token=q6iZ0sQtf9U7s1qz0r4yMawNq3-u2w6lbnai6y2J:Vt4rFpgQ33Xz39cqRu8tJ5fTYMU=；20260618_国金证券_锂电新周期系列深度（一）把握锂电周期反转，优选优势格局赛道.pdf url=https://files.zsxq.com/Fv0ue6vnr0GVxaf_ka7dGqKjXz_o?e=1781875398&token=q6iZ0sQtf9U7s1qz0r4yMawNq3-u2w6lbnai6y2J:j8LHUuRMt2Ic5hotNqhDF61dLBU=；20260618_国金证券-宏观经济点评沃什的正确政绩观-2026-06-18.pdf url=https://files.zsxq.com/FlW0T2XfmLTnAfaDS34_zrcSFRkA?e=1781875399&token=q6iZ0sQtf9U7s1qz0r4yMawNq3-u2w6lbnai6y2J:Bit2WVDH9LYYOJbsb9_Lidw0re8=；20260618_国金证券-证券行业研究深化双创改革，促进互联互通-2026-06-18.pdf url=htt...",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "valuation",
+      "required_outcome": "model conflict result and accepted/rejected reason"
+    },
+    "KPE03": {
+      "date": "2026-06-17T08:16",
+      "source": "stream_item:787",
+      "source_type": "channel_check",
+      "credibility": "identified_broker_private_text",
+      "decision_role": "probability/verification proxy",
+      "evidence": "【国泰海通食饮】山西汾酒股东大... 【国泰海通食饮】山西汾酒股东大会要点20260616 1.动销：青花20、25增长态势良好；青花30、超高端青花40、50表现略承压；玻汾当前动销稳定；老白汾处于新老包装交替期，老产品尾货仍在清理。 2.库存：26年Q1末为全年库存最高点，二季度处于正常去库存阶段，核心目标为市场良性发展，为渠道抒压。 3.消费场景：民间商务消费复苏态势良好，支撑青花20动销；宴席场景受结婚人口减少、单场用酒量下降影响相对承压。 4.费用：投放重点向C端倾斜，核心投入开瓶扫码激励，与动销直接挂钩，减少直接给渠道的费用投放，避免过度刺激导致价格体系混乱，优先保证价格稳定，费销比整体呈缓慢下降趋势。 5.区域端：推动省内产品结构升级，引导消费向老白汾、青花20、青花25升级，当前省内300-400元价格带的青花20、25增长态势良好。省外市场增长空间充足，争当各地白酒品牌第三。 6.开瓶：当前完成五码合一覆盖的青花20开瓶率约30%。",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "asp_or_price",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE04": {
+      "date": "2026-06-16T18:12",
+      "source": "stream_item:2352",
+      "source_type": "industry_weekly_data",
+      "credibility": "private_data_requires_methodology_check",
+      "decision_role": "KPI/forecast proxy",
+      "evidence": "山西汾酒股东大会调研更新：青2... 山西汾酒股东大会调研更新：青20&玻汾动销优异，预计Q2业绩延续Q1表现（20260616） 业绩展望：预计Q2业绩表现或与Q1接近，仍处调整出清阶段；全年不追求硬性高增，追求稳健。 周期展望：预计26-27年行业见底。 动销情况：26年1-5月省内动销 -10%左右（省外略增），春节稳健，3-5月淡季动销降幅扩大；25H2省内动销同比-20%，低基数下全年动销有望正增。产品方面，青花20/25+玻汾动销正增，社会库存低。 库存情况：Q2继续去库存&当前库存相对合理，预计报表增速慢于实际动销。 产品情况： ① 青花系列：青花20 25年回款口径120e，26年动销实现增长；青花30 后面会加快返利保证价盘。 ② 老白汾：Q1整体还行略不及预期，主受五码更换&省外认知偏低&团队内部等影响，26年是老白汾产品升级期，要做nfc产品（控盘分利），后续会推出“汾10/15”分线产品&宴席专属产品等运作（突出汾酒），做进行营销组织变革。 ③ 玻汾：供需紧平衡下，H1发货较足/预计26H2量收窄（可能会断货）。 区域情况：山西营销公司销售口径约130e，市占率提升空间有限；省外空间仍大，继续突破。 欢迎和我们沟通详细情况玫瑰",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "market_share",
+      "required_outcome": "numeric assumption delta or explicit rejection"
+    },
+    "KPE05": {
+      "date": "2026-07-13T08:14",
+      "source": "stream_item:13553",
+      "source_type": "channel_check",
+      "credibility": "identified_broker_private_text",
+      "decision_role": "probability/verification proxy",
+      "evidence": "【国泰海通食饮】周报第23期：... 【国泰海通食饮】周报第23期：底部显现，大众品复苏可期 [太阳]投资建议：大众品改善趋势确定，白酒加速出清，布局成长及超跌标的。1）白酒基本面加速探底，布局率先出清标的：迎驾贡酒、今世缘、金徽酒、古井贡酒、珍酒李渡、舍得酒业及价格弹性标的：贵州茅台、五粮液、泸州老窖、山西汾酒；2）调味品、餐饮供应链具备量价回升弹性，推荐海天味业、安井食品、千禾味业、安琪酵母、宝立食品、巴比食品；3）推荐产业上行周期健康食品及部分零食：百龙创园、西麦食品、盐津铺子、洽洽食品、卫龙美味（港股）、劲仔食品；4）啤酒期待旺季动销提速，推荐百润股份、青岛啤酒、珠江啤酒，华润啤酒（港股）；5）饮料成长推荐东鹏饮料、农夫山泉（港股），高股息推荐中国食品（港股）、康师傅控股（港股）、统一企业中国（港股）；6）乳制品推荐蒙牛乳业、伊利股份、新乳业、三元股份、优然牧业（港股）、现代牧业（港股）。 [太阳]白酒：预计二季度继续出清。白酒五一和端午小旺季表现一般，预计部分场景仍然受阻，叠加消费力仍未恢复，使得行业修复时间拉长。7月10日舍得酒业发布白酒26H1首份业绩，据公司业绩预告测算，26Q2收入预计同比-30%、归母净利润和扣非净利润同比转亏。结合5-6月股东大会调研情况及中酒协发布的行业中期报，我们预计白酒行业26Q2报表层面将延续出清状态，仅部分个股有望实现同比持平或正增长；与此同时酒厂愈发理性，厂商关系较为和谐，库存的绝对量稳中有降。本周白酒板块延续震荡行情，考虑到中国证券报方面7月2日曾有“扩大消费十五五规划将于近期发布”的消息传出，我们认为不排除消费政策刺激的可能性，届时有望驱动相关行业流动性回暖，带动白酒估值修复。 [太阳]大众品：低基数效应+成本回落+出行回暖共振，边际改善可期。大众品复苏的态势明确，短期看4-5月消费高频数据回落叠加交易层面冲击已经得到较充分反应。短期波动不改复苏趋势，考虑到6月及之后低基数+需求端弱复苏，边际回升可期。健康食品渗透提升、成长持续，餐饮供应链受益于供需两端改善、我们预计龙头Q2淡季依然保持稳健增长，仍是贯穿全年主线。零食量贩连锁两强Q2保持较快拓店速度，当前量贩渠道增长仍具较强确定性和弹性，劲仔食品、有友食品等现阶段量贩份额提升相对较快的公司在销售端亦有望受益。饮料、啤酒部分龙头公司受Q2雨水偏多及竞争等因素影响，在下半年预期气候改善带动出行链复苏驱动下，业绩有望环比改善。同时随着油价的下降，PET及棕榈油等原材料价格已经出现明显的边际下降趋势。大众品板块较多优质公司估值已回落至较低区间，底部价值日益凸显。",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "asp_or_price",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE06": {
+      "date": "2026-06-30T18:58",
+      "source": "stream_item:6671",
+      "source_type": "channel_check",
+      "credibility": "identified_broker_private_text",
+      "decision_role": "probability/verification proxy",
+      "evidence": "【国泰海通食饮｜深度】以美国、... 【国泰海通食饮｜深度】以美国、日本为例：滞涨期的大众品表现 投资建议：输入型通胀下关注具备需求刚性、真实提价权、渠道掌控力的龙头。（1）调味品、餐饮供应链具备量价回升弹性，推荐海天味业、安井食品、千禾味业、安琪酵母、宝立食品、巴比食品；（2）啤酒期待旺季场景修复，推荐百润股份、青岛啤酒、珠江啤酒，华润啤酒（港股）；（3）饮料成长推荐东鹏饮料、农夫山泉（港股），高股息推荐中国食品（港股）、康师傅控股（港股）、统一企业中国（港股）；4）推荐产业上行周期健康食品及部分零食：百龙创园、西麦食品、盐津铺子、洽洽食品、卫龙美味（港股）、劲仔食品；（5）乳制品推荐蒙牛乳业、伊利股份、新乳业、三元股份、优然牧业（港股）、现代牧业（港股）；（6）白酒基本面及估值探底，推荐率先出清标的：迎驾贡酒、今世缘、金徽酒、古井贡酒、珍酒李渡、舍得酒业及价格弹性标的：贵州茅台、五粮液、泸州老窖、山西汾酒。 复盘海外：能源价格跳升，成本链条向价格体系传导，70年代两次滞胀形成。受能源依赖度、政策应对和产业结构差异影响，美国、日本、韩国、英国的通胀峰值明显分化，在1973-1975年、1979-1982年形成两轮典型滞胀。滞胀阶段价格因素与刚性需求共同支撑名义消费扩张，1971-1985年美国居民名义消费支出仍持续上行，消费者信心在1974年触底后逐步修复。 必选消费具备较强收入韧性，龙头公司通过提价、推新、效率改善穿越成本冲击。美国1975年必选消费前十大龙头收入增速约24%，高于可选消费约6%的增速。日本市场亦呈现类似特征，滞胀阶段必需消费价格指数跑赢日经。以可口可乐和花王为例，必选消费龙头凭借高频刚需、品牌溢价、渠道掌控和产品矩阵扩张，收入端维持增长，利润端实现修复。1970-1982年收入由16.06亿美元增至62.49亿美元，CAGR约12%；毛利率从1974年的约39.7%修复至1982年的约44.7%，龙头企业经历先承压、后顺价、再修复路径。 消费启示：重点把握“温和通胀、成本扰动、估值+持仓低位”下的结构性机会。借鉴海外滞胀经验，输入型成本扰动为部分大众品提供顺价窗口，当前应关注具备顺价能力、渠道掌控力、产品升级能力和现金流稳定性的细分龙头。目前板块处于“低估值、盈利分化、低持仓”阶段，经历2021年以来深度调整，估值、持仓、情绪均已回落至历史偏低区域；在当前温和通胀、成本传导、经济修复的宏观假设下基本面磨底，板块具备一轮估值修复行情基础。",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "asp_or_price",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE07": {
+      "date": "2026-06-14T20:13",
+      "source": "stream_item:2911",
+      "source_type": "channel_check",
+      "credibility": "identified_broker_private_text",
+      "decision_role": "probability/verification proxy",
+      "evidence": "【国泰海通食饮】周报第19期：... 【国泰海通食饮】周报第19期：底部特征显现 太阳投资建议：大众品改善趋势确定，白酒加速出清。1）白酒基本面加速探底，布局率先出清标的：迎驾贡酒、今世缘、 金徽酒、古井贡酒、珍酒李渡、舍得酒业及价格弹性标的：贵州茅台、五粮液、泸州老窖、山西汾酒；2）调味品、餐饮供应链具备量价回升弹性，推荐海天味业、安井食品、千禾味业、安琪酵母、宝立食品、巴比食品；3）推荐产业上行周期健康食品及部分零食：百龙创园、西麦食品、盐津铺子、洽洽食品、卫龙美味（港股）、劲仔食品；4）啤酒期待旺季场景修复，推荐百润股份、青岛啤酒、珠江啤酒，华润啤酒（港股）；5）饮料成长推荐东鹏饮料、农夫山泉（港股），高股息推荐中国食品（港股）、康师傅控股（港股）、统一企业中国（港股）；6）乳制品推荐蒙牛乳业、伊利股份、新乳业、三元股份、优然牧业（港股）、现代牧业（港股）。 太阳白酒：流动性回暖，茅五释放积极信号。本周消费板块流动性回暖，白酒估值小幅修复。茅台召开年度股东会，对市场化转型的多个事项进行回应，肯定改革效果，截至5月31日i茅台2026年新增注册用户数约1667万人、累计注册用户9615万人，成交订单约713万人次，持续提升线上触达能力。五粮液发布人事调整落地，邓敏拟任五粮液集团董事长、股份公司董事，股份公司增补邓敏为第七届董事会非独立董事候选人，经股东会审议通过后董事会将审议选举其担任公司董事长的议案，公司管理延续稳定。近期消费相关的宏观数据表现一般，白酒动销尚需1-2个旺季进行验证，但微观交易结构已进一步改善，股息率和估值具备一定吸引力；基本面加速探底叠加筹码冲击，建议布局率先出清标的。 太阳大众品：结构分化，复苏趋势不变。大众品全年维度复苏态势明确，短期来看，春节及26Q1的景气交易结束后，板块交易层面情绪边际回落，但大众消费景气度改善势头仍较为确定，虽有波动但增速中枢仍有所抬升，且考虑到6月及之后餐饮场景低基数+需求端弱复苏，大众品复苏趋势有望延续甚至加强。我们认为其中健康食品、餐饮供应链相关标的受益于健康消费趋势以及餐饮场景修复，依然是确定性较强的主线；同时啤酒、饮料龙头处于低预期状态，随着旺季来临动销逐步加速，边际改善值得期待；此外，东鹏2026年6月12号推出高端新品“东方大鹏”，聚焦注重健康及抗疲劳功能属性的年轻人，。在生活节奏加快驱动消费者对于提神抗疲劳诉求的提升的背景下，我们看好公司逐步引导能量饮料消费群体扩容，从而实现长期超额收益。",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "asp_or_price",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE08": {
+      "date": "2026-06-14T20:11",
+      "source": "stream_item:2913",
+      "source_type": "channel_check",
+      "credibility": "high_private_channel_hard_to_verify",
+      "decision_role": "probability/verification proxy",
+      "evidence": "🐴【建投食饮｜｜杨骥】周度高端... annotation: 🐴【建投食饮｜｜杨骥】周度高端酒+区域酒数据跟踪更新（20260614） 太阳【我们认为】贵州茅台股东会交流积极，i茅台1-5月累计成交订单713万，我们测算i茅台同比增量预计在125亿以上（对应非标+普飞增量），我们预计公司Q2收入端或仍有望增长。我们预计今世缘、金徽、舍得、酒鬼26Q2收入业绩有望正增，目前7家酒企股息率高于4%。当前推荐白酒龙头&业绩率先出清反转且股息率较高的标的，推荐贵州茅台，关注今世缘、迎驾贡酒、泸州老窖、金徽酒等。 玫瑰贵州茅台：公司召开股东会，市场化改革顺利推进，截止5月底i茅台平台累计注册用户9643万人，今年以来新增用户1696万人，平均月活约956万人，累计成交订单713万。普飞6月配额已打款发货，目前回款到货比例约55-57%，预计6月配额约6-7%，Q2普飞经销渠道配额同比相近（不考虑i茅台增量），经销商代售非标较去年分销的量略有下滑，飞天及非标均接近零库存。飞天散装/原箱/精品批价1625/1665/2350元。 玫瑰五粮液：邓敏任五粮液集团（股份）有限公司党委书记，拟担任股份公司董事长；五粮液一见倾心×《》动画定制款在B站开售。26年全年收入目标双位数增长，利润增长显著高于收入增速。目前回款约60%-70%，发货约50-60%，库存1个月。普五批价750-760元，临近618略有回落。 玫瑰泸州老窖：泸州老窖联名龙门石窟，500ml新品尝鲜价为159元。52度锚定高端核心市场，38度加快全国化，高低度收入占比接近、低度占比稳步提升。回款约35%，预计高度国窖双位数以上下滑，价格策略仍坚定挺价，库存2个月。国窖/特曲60批价830-850/410元。 玫瑰洋河股份：省内六代海之蓝去库存基本完成，今年整体市场呈现出动销开瓶＞经销商出库＞厂方回款；公司压缩品牌事业部与线下办事处数量，设立14大战区统一运营海天梦、双沟全系产品，优化营销费用、稳固产品价盘，助力端午终端备货提速。回款约40%，库存2-2.5个月。M6+/水晶梦/天之蓝/海之蓝省内批价为570/370-380/270/115元。 玫瑰今世缘：26年希望稳住百亿大盘，二季度有望回正，目前阶段性体量淡雅>对开>四开，山东、安徽销售口径已破3亿。回款约50%-55%，库存约3个月。淡雅/对开/四开/V3批价110/245-255/410/480-500元。 玫瑰古井贡酒：截止5月底回款约55%，略慢于去年同期，古8、古16表现相对较优，库存3-4个月。古20/古16/古8/古5批价470-510/300-320/ 195-210 /100-110元。 玫瑰口子窖：二季度回款较慢，库存3-4个月。口子20年/10年/新6年批价320-330/215-235/115-120元。 玫瑰迎驾贡酒：公司已走出...",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "asp_or_price",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE09": {
+      "date": "2026-07-13T08:13",
+      "source": "stream_item:13554",
+      "source_type": "channel_check",
+      "credibility": "high_private_channel_hard_to_verify",
+      "decision_role": "probability/verification proxy",
+      "evidence": "🐴【建投食饮｜｜杨骥】周度高端... 🐴【建投食饮｜｜杨骥】周度高端酒+区域酒数据跟踪更新（20260712） [玫瑰]古井贡酒：Q2仍在去库中，费用率同比保持，当前古16规模已超过古20，目标将古5做到百亿规模。截止6月底回款约63%，略慢于去年同期，古8、古16表现相对较优，库存3-4个月。古20/古16/古8/古5批价470-510/300-320/ 195-210 /100-110元。 [玫瑰]口子窖：二季度回款较慢，库存3-4个月。口子20年/10年/新6年批价320-330/215-235/115-120元。 [玫瑰]迎驾贡酒：上半年洞6、洞9、洞16动销仍有增长，洞20略有承压，目前库存水平良性较低，我们预计Q2报表端仍有增长。合同年回款约60%，库存2个月。洞6/9/16批价110/185/285元。 [玫瑰]山西汾酒：预计Q2业绩表现或与Q1接近，全年不追求硬性高增，26年1-5月省内动销同比下滑约10%，省外略有增长。回款约50%+，市场需求企稳、开发品新增条码较多，库存约2-3个月。青花30/青花20/老白汾10/玻汾批价670/350-360/115/41元。 [玫瑰]酒鬼酒：预计26Q2收入有望双位数增长、利润有望转正，26年收入可达12-13亿、利润可转正至小几千万，其中预计自由爱可贡献3-4亿（25年贡献2亿），未来三年收入体量或可向20亿修复、未来利润率有望回升至15%-20%。回款推进中，春节自由爱回款较好，省内库存约3个月。内参/红坛批价680-750/240-280元。 [玫瑰]水井坊：26Q1公司门店动销同比增长5%，半数省份实现双位数增长，宴席场次同比增长1.9%，公司注重社会库存消化、终端价格体系逐步修复。回款较慢，动销承压，库存约3.5个月。典藏/井台/臻酿8号批价560/430/280-310元。 [玫瑰]舍得酒业：26Q2预计实现收入7.88亿元（同比-30%），预计实现归母净利润-0.97至-0.57亿元（25Q2为0.97亿元）。26年目标小个位数增长，预计正常净利率中枢为10-15%。回款约40%，Q2动销仍有下滑，库存约2个月。舍之道/品味舍得/智慧舍得批价约135/310-320/450元。 [玫瑰]珍酒李渡：“吴金东-珍酒李渡”视频号累计播放量破11亿。万商联盟回款突破11亿元；2026年收入增长率自+10%上调至+15%，2026上半年收入增长率自-15%缩窄至-5%，2026年全年经调整净利润自6亿元上调至8亿元，2026上半年经调整净利润约5亿元+。大珍约550元，珍30/珍15/珍8/珍5/老珍酒批价约580/270/175/125/70元。 [玫瑰]金徽酒：1-4月省内销售进度30%+，陕西完成全年60%、新疆进度约50%、宁夏和青海进度40%+、华东在调整，年份和柔和系列进度30...",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "asp_or_price",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE10": {
+      "date": "2026-06-28T20:10",
+      "source": "stream_item:6082",
+      "source_type": "industry_weekly_data",
+      "credibility": "private_data_requires_methodology_check",
+      "decision_role": "KPI/forecast proxy",
+      "evidence": "太阳【东财食饮&农业】周观点更... 太阳【东财食饮&农业】周观点更新及研究回顾 🌹研究员观点更新： 回购、增持、激励，底部时产业动作频出；正视事实稳健经营，股东会传递企业理性信号 端午期间消费情况较为平淡，更多原因还是在于居民资产负债表修复略慢、消费力和消费预期都弱。近期企业频繁召开股东大会，管理层均传递出较为理性信号，正视当下需求环境、积极应对竞争、努力寻找增长点，同时资本市场也推出回购、增持、激励等措施以期稳定股价。流动性方面，市场波动加大，资金的虹吸效应在有所缓解，板块资金面压力有所降低。 酒类：淡季需求平淡。推荐格局清晰、率先改善且估值&筹码结构有优势的地产酒板块，推荐今世缘、迎驾贡酒、金徽酒、古井贡酒，中长期推荐竞争力强标的，如贵州茅台、山西汾酒、泸州老窖等，弹性品种关注珍酒李渡、酒鬼酒等。黄酒热点多、逻辑顺，推荐会稽山，关注积极梳理调整的古越龙山。啤酒逐渐进入旺季，建议关注燕京啤酒、青岛啤酒、重庆啤酒。 大众品： 虽进入淡季，但是不少大众品公司Q2依然实现了较为亮眼的增长，例如鸣鸣很忙、万辰集团Q2开店加速，单店在运营优化背景下仍实现正增，当前皆回落至对应26年13x左右；西麦食品Q2主业仍延续Q1的高增势头，利润在成本红利下加速改善；有友食品预计Q2能实现20%+的收入增速，山姆新品也将在Q3贡献更多增量；新乳业回调较多主要系市场担心鲜奶补税影响，但实际影响非常有限，预计公司Q2利润端依然有望录得双位数增长，当前估值回落至26年14x。我们推荐关注绩优公司受板块情绪影响下“捡便宜”的机会，推荐重点关注鸣鸣很忙、万辰集团、新乳业、安井食品。 农业： 农业-生猪：今年3月至5月能繁存栏去化持续加速，6月肥仔双亏，产能去化有望继续；当前处于周期底部左侧，现金流稳健、成本控制优异的养殖主体有望受益推荐关注牧原、温氏、德康。 农业-白羽肉鸡：海外祖代1-5月引种中断，6月正式实现从法国引种，恢复不改H2景气，上半年引种短缺将在H2逐步兑现，看好父母代鸡苗价格，推荐关注白羽种鸡龙头益生股份。 🌹本周调研： 五粮液、青岛啤酒、海南橡胶",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "asp_or_price",
+      "required_outcome": "numeric assumption delta or explicit rejection"
+    },
+    "KPE11": {
+      "date": "2026-06-14T21:32",
+      "source": "stream_item:2891",
+      "source_type": "industry_weekly_data",
+      "credibility": "private_data_requires_methodology_check",
+      "decision_role": "KPI/forecast proxy",
+      "evidence": "【建投食饮｜｜杨骥】周度高端酒... 【建投食饮｜｜杨骥】周度高端酒+区域酒数据跟踪更新（二）（20260614） 古井贡酒：截止5月底回款约55%，略慢于去年同期，古8、古16表现相对较优，库存3-4个月。古20/古16/古8/古5批价470-510/300-320/ 195-210 /100-110元。 口子窖：二季度回款较慢，库存3-4个月。口子20年/10年/新6年批价320-330/215-235/115-120元。 迎驾贡酒：公司已走出调整期，省内恢复增长，省外仍在调整，全年有望正增。回款约40-45%，促销拉动下Q1动销正增，洞6/9表现较优，合肥、六安优于其他区域，库存3个月。洞6/9/16批价110/185/285元。 山西汾酒：26Q1青花30有所恢复，总体比去年同期有下降，下降比较均衡；汾酒380亿里面，玻汾刚过百亿，青花20大概130亿，青花30大概50个亿，老白汾50个亿。回款约40%+，库存约50天。青花30/青花20/老白汾10/玻汾批价670/350-360/115/41元。 酒鬼酒：酒鬼酒70周年纪念酒正式发售；酒鬼酒46度内品福常德首发。预计26Q2收入有望正增、利润有望转正，26年收入可达12-13亿、利润可转正，其中预计自由爱可贡献3-4亿（25年贡献2亿）。回款推进中，春节自由爱回款较好，省内库存约3个月。内参/红坛批价680-750/240-280元。 水井坊：干晓峰出任水井坊总经理。回款较慢，四川1-2月下滑7-8%，库存约3.5个月。典藏/井台/臻酿8号批价560/430/280-310元。 舍得酒业：Q2业绩有望实现正向表现，26年目标小个位数增长，预计当前正常净利率中枢为10-15%。回款约25%，四川下滑7-8%，库存约2个月。舍之道/品味舍得/智慧舍得批价约135/310-320/450元。 珍酒李渡：“大珍·珍酒”回款突破10亿元；公司全年业绩预期上修，预计26年收入增长15%、利润可达8亿元左右，主要系大珍&第五代珍十五招商顺利+主品降幅收窄+利润率修复。大珍约550元，珍30/珍15/珍8/珍5/老珍酒批价约580/270/175/125/70元。 金徽酒：1-4月省内销售进度30%+，陕西完成全年60%、新疆进度约50%、宁夏和青海进度40%+、华东在调整，年份和柔和系列进度30%+、星级系列进度接近30%，目前能量系列2亿+、增长超30%。预计上半年收入可同比持平，全年收入可实现个位数增长。",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "segment_margin",
+      "required_outcome": "numeric assumption delta or explicit rejection"
+    },
+    "KPE12": {
+      "date": "2026-06-19T11:26",
+      "source": "stream_item:1596",
+      "source_type": "sell_side_push",
+      "credibility": "identified_broker_private_text",
+      "decision_role": "narrative challenge",
+      "evidence": "国内研报；20260618_国泰海通证券_油运图鉴2.0版（第十六期�.pdf url=https://files.zsxq.com/ltcanjGPZkQVwY0k8ZoOlXOFaHZQ?e=1781888866&token=q6iZ0sQtf9U7s1qz0r4yMawNq3-u2w6lbnai6y2J:_gHLOe30yTuwyFsytiBHv8kOmLs=；20260618_国信证券_金融工程日报沪深两市再度分化，沪指失守4100点、创业板指创历史新高.pdf url=https://files.zsxq.com/Flqc4V_ed_o6BLzKlyP0qxsZduqK?e=1781888867&token=q6iZ0sQtf9U7s1qz0r4yMawNq3-u2w6lbnai6y2J:G-97JdNJUOIJ7RsG1XqKiLK16cc=；20260618_国信证券_热点追踪周报由创新高个股看市场投资热点（第248期�.pdf url=https://files.zsxq.com/Fnn15HZgcJ_CXh0kA_U_d6rUeI-Z?e=1781888867&token=q6iZ0sQtf9U7s1qz0r4yMawNq3-u2w6lbnai6y2J:GFNP86wPfE7FZ7e_e9N6VnroAZ8=；20260618_国元证券_全球市场周报能源通胀或已见顶，谈判利好带动反弹.pdf url=https://files.zsxq.com/FqoCHinylJOpmxsoN9SiRliYrKT_?e=1781888868&token=q6iZ0sQtf9U7s1qz0r4yMawNq3-u2w6lbnai6y2J:F4wfFF0KNcvJxBpzY92LkaSNxIs=；20260618_华创证券_美联储6月议息会议点评沃什首秀，释放全面改革新信号.pdf url=https://files.zsxq.com/Frhb6KBbowogd9mYIN5kifjHh37J?e=1781888869&token=q6iZ0sQtf9U7s1qz0r4yMawNq3-u2w6lbnai6y2J:hSbLPjNSLtREoMSGd-1aMcrCz_g=；20260618_华创证券_山西汾酒2025年度股东大会点评包袱逐步卸下，经营仍属良性.pdf url=https://files.zsxq.com/Fp-8a_M-sVnWQjPrSZrMkG2crl4j?e=1781888870&token=q6iZ0sQtf9U7s1qz0r4yMawNq3-u2w6lbnai6y2J:lYP9cJ6zWgsxfnmvPWDezgbKilA=；20260618_华福国际_全球AI与工业制造周报(1406-1806)美联储鹰派扰动市场，AI板块.pdf...",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "unmapped",
+      "required_outcome": "model conflict result and accepted/rejected reason"
+    }
+  },
+  "sell_side_intelligence": [
+    {
+      "intelligence_id": "KSI01",
+      "kpe_ids": "KPE09",
+      "published_at": "2026-07-13T08:13",
+      "institution": "机构未识别",
+      "analyst_or_author": "纪要小能手",
+      "freshness": "高时效/1天",
+      "rating_signal": "未披露",
+      "forecast_facts": "[玫瑰]山西汾酒：预计Q2业绩表现或与Q1接近，全年不追求硬性高增，26年1-5月省内动销同比下滑约10%，省外略有增长",
+      "valuation_facts": "未提取到目标价/估值方法与倍数",
+      "normalized_points": "无可标准化数值",
+      "revision_signal": "较前次口径发生变化；尚无可同口径比较的标准化数值",
+      "source_quote": "🐴【建投食饮｜｜杨骥】周度高端... 🐴【建投食饮｜｜杨骥】周度高端酒+区域酒数据跟踪更新（20260712） [玫瑰]古井贡酒：Q2仍在去库中，费用率同比保持，当前古16规模已超过古20，目标将古5做到百亿规模。截止6月底回款约63%，略慢于去年同期，古8、古16表现相对较优，库存3-4个月。古20/古16/古8/古5批价470-510/300-320/ 195-210 /100-110元。 [玫瑰]口子窖：二季度回款较慢，库存3-4个月。口子20年/10年/新6年批价320-330/215-235/115-120元。 [玫瑰]迎驾贡酒：上半年洞6、洞9、洞16动销仍有增长，洞20略有承压，目前库存水平良性较低，我们预计Q2报表端仍有增长。合同年回款约60%，库存2个月。洞6/9/16批价110/185/285元。 [玫瑰]山西汾酒：预计Q2业绩表现或与Q1接近，全年不追求硬性高增，26年1-5月省内动销同比下滑约10%..."
+    },
+    {
+      "intelligence_id": "KSI02",
+      "kpe_ids": "KPE06",
+      "published_at": "2026-06-30T18:58",
+      "institution": "国泰海通",
+      "analyst_or_author": "纪要小能手",
+      "freshness": "有效窗口/14天",
+      "rating_signal": "未披露",
+      "forecast_facts": "未提取到带期间的明确盈利预测",
+      "valuation_facts": "（6）白酒基本面及估值探底，推荐率先出清标的：迎驾贡酒、今世缘、金徽酒、古井贡酒、珍酒李渡、舍得酒业及价格弹性标的：贵州茅台、五粮液、泸州老窖、山西汾酒",
+      "normalized_points": "无可标准化数值",
+      "revision_signal": "窗口内首次识别，暂无同机构前序可比",
+      "source_quote": "【国泰海通食饮｜深度】以美国、... 【国泰海通食饮｜深度】以美国、日本为例：滞涨期的大众品表现 投资建议：输入型通胀下关注具备需求刚性、真实提价权、渠道掌控力的龙头。（1）调味品、餐饮供应链具备量价回升弹性，推荐海天味业、安井食品、千禾味业、安琪酵母、宝立食品、巴比食品；（2）啤酒期待旺季场景修复，推荐百润股份、青岛啤酒、珠江啤酒，华润啤酒（港股）；（3）饮料成长推荐东鹏饮料、农夫山泉（港股），高股息推荐中国食品（港股）、康师傅控股（港股）、统一企业中国（港股）；4）推荐产业上行周期健康食品及部分零食：百龙创园、西麦食品、盐津铺子、洽洽食品、卫龙美味（港股）、劲仔食品；（5）乳制品推荐蒙牛乳业、伊利股份、新乳业、三元股份、优然牧业（港股）、现代牧业（港股）；（6）白酒基本面及估值探底，推荐率先出清标的：迎驾贡酒、今世缘、金徽酒、古井贡酒、珍酒李渡、舍得酒业及价格弹性标的：贵州茅台、五粮液、泸州老窖、山西汾酒。 复盘海外：..."
+    },
+    {
+      "intelligence_id": "KSI03",
+      "kpe_ids": "KPE10",
+      "published_at": "2026-06-28T20:10",
+      "institution": "机构未识别",
+      "analyst_or_author": "纪要小能手",
+      "freshness": "有效窗口/16天",
+      "rating_signal": "未披露",
+      "forecast_facts": "未提取到带期间的明确盈利预测",
+      "valuation_facts": "推荐格局清晰、率先改善且估值&筹码结构有优势的地产酒板块，推荐今世缘、迎驾贡酒、金徽酒、古井贡酒，中长期推荐竞争力强标的，如贵州茅台、山西汾酒、泸州老窖等，弹性品种关注珍酒李渡、酒鬼酒等",
+      "normalized_points": "无可标准化数值",
+      "revision_signal": "较前次口径发生变化；尚无可同口径比较的标准化数值",
+      "source_quote": "太阳【东财食饮&农业】周观点更... 太阳【东财食饮&农业】周观点更新及研究回顾 🌹研究员观点更新： 回购、增持、激励，底部时产业动作频出；正视事实稳健经营，股东会传递企业理性信号 端午期间消费情况较为平淡，更多原因还是在于居民资产负债表修复略慢、消费力和消费预期都弱。近期企业频繁召开股东大会，管理层均传递出较为理性信号，正视当下需求环境、积极应对竞争、努力寻找增长点，同时资本市场也推出回购、增持、激励等措施以期稳定股价。流动性方面，市场波动加大，资金的虹吸效应在有所缓解，板块资金面压力有所降低。 酒类：淡季需求平淡。推荐格局清晰、率先改善且估值&筹码结构有优势的地产酒板块，推荐今世缘、迎驾贡酒、金徽酒、古井贡酒，中长期推荐竞争力强标的，如贵州茅台、山西汾酒、泸州老窖等，弹性品种关注珍酒李渡、酒鬼酒等。黄酒热点多、逻辑顺，推荐会稽山，关注积极梳理调整的古越龙山。啤酒逐渐进入旺季，建议关注燕京啤酒、青岛啤酒、重庆啤酒。 大众..."
+    },
+    {
+      "intelligence_id": "KSI04",
+      "kpe_ids": "KPE04",
+      "published_at": "2026-06-16T18:12",
+      "institution": "机构未识别",
+      "analyst_or_author": "纪要小能手",
+      "freshness": "有效窗口/28天",
+      "rating_signal": "未披露",
+      "forecast_facts": "山西汾酒股东大会调研更新：青2... 山西汾酒股东大会调研更新：青2... 山西汾酒股东大会调研更新：青20&玻汾动销优异，预计Q2业绩延续Q1表现（20260616） 业绩展望：预计Q2业绩表现或与Q1接近，仍处调整出清阶段 / 周期展望：预计26-27年行业见底 / 库存情况：Q2继续去库存&当前库存相对合理，预计报表增速慢于实际动销",
+      "valuation_facts": "未提取到目标价/估值方法与倍数",
+      "normalized_points": "无可标准化数值",
+      "revision_signal": "窗口内首次识别，暂无同机构前序可比",
+      "source_quote": "山西汾酒股东大会调研更新：青2... 山西汾酒股东大会调研更新：青20&玻汾动销优异，预计Q2业绩延续Q1表现（20260616） 业绩展望：预计Q2业绩表现或与Q1接近，仍处调整出清阶段；全年不追求硬性高增，追求稳健。 周期展望：预计26-27年行业见底。 动销情况：26年1-5月省内动销 -10%左右（省外略增），春节稳健，3-5月淡季动销降幅扩大；25H2省内动销同比-20%，低基数下全年动销有望正增。产品方面，青花20/25+玻汾动销正增，社会库存低。 库存情况：Q2继续去库存&当前库存相对合理，预计报表增速慢于实际动销。 产品情况： ① 青花系列：青花20 25年回款口径120e，26年动销实现增长；青花30 后面会加快返利保证价盘。 ② 老白汾：Q1整体还行略不及预期，主受五码更换&省外认知偏低&团队内部等影响，26年是老白汾产品升级期，要做nfc产品（控盘分利），后续会推出“汾10/15”分线产品&宴席专属产..."
+    }
+  ],
+  "preprocessing_notes": [
+    "青花系列、老白汾系列、玻汾系列的revenue_cny_mn数据来自KPE11的回款口径（亿元），非报表收入，估计存在偏差，仅供方向参考。",
+    "省内动销-10%为渠道调研数据，属private_proxy，需与正式报表交叉验证。",
+    "无产品线级别的毛利率或净利率数据，未填充相关字段。",
+    "KPE01、KPE02、KPE12为宏观或行业报告，与山西汾酒无直接关联，假设标记为watch且变量设为valuation或unmapped。",
+    "未发现证据间的明显矛盾，故conflicts数组为空。",
+    "缺失输入包括各产品线的精准收入、毛利率、库存绝对量等，已记录在对应segment的missing_inputs和hypothesis的missing_inputs中。",
+    "PE、PS百分位等估值数据来自市场数据，已计算但未作为metric直接输出（EV055-EV057），因无具体数值文本，手动省略。"
+  ],
+  "underwriting_packet": {
+    "schema_version": 2,
+    "symbol": "600809.SH",
+    "as_of_date": "2026-07-14",
+    "forecast_years": [
+      "2026E",
+      "2027E",
+      "2028E"
+    ],
+    "research_readiness": "partial",
+    "readiness_reasons": [
+      "Diluted share count not available from Tushare or market price; EPS and per-share valuation cannot be calculated.",
+      "Detailed capex and FCF data not supplied; cannot complete cash-flow forecast.",
+      "Product-level revenue and margin only from channel checks (回款口径) and not from filings.",
+      "Forecast still functional for revenue, gross/operating margin, and parent profit; bull/base/bear scenarios can be built on these variables.",
+      "One or more filing-reported segments required deterministic restoration.",
+      "Required consolidated three-year forecast lines are incomplete.",
+      "Material segment three-year driver lines are missing: 玻汾系列, 老白汾系列, 青花系列",
+      "Bull/base/bear per-share valuation is incomplete.",
+      "Moat claim lacks traceable evidence ids: Scale and vertical integration in grain sourcing..",
+      "Valuation has not closed from mutually exclusive buckets to per-share fair value.",
+      "volume_price_cost driver chain is incomplete; missing: unit/input cost",
+      "Three-year values remain missing for consolidated line(s): Capex, FCF, eps"
+    ],
+    "company_model": {
+      "model_profile": "corporate",
+      "operating_model_family": "volume_price_cost",
+      "business_archetype": "Branded baijiu (light-flavour) producer and distributor, selling through a multi-tier dealer network supplemented by direct e-commerce and experiential marketing. Core products: Qinghua series (mid-to-ultra-premium), Laobaifen (mid-tier), Bofen (value/budget), plus Zhuyeqing (health liqueur) and other baijiu brands.",
+      "value_proposition_and_customers": "Provides light-aroma baijiu to Chinese consumers across all price tiers.  Drinkers range from mass-market/self-consumers (Bofen) through banquet/hosting (Laobaifen) to business gifting and special occasions (Qinghua 20/30/40/50).  Brand heritage ('the soul of Chinese liquor') and national distribution are key.",
+      "revenue_equation": "Revenue = Sum over products (Sales volume × ex-factory ASP) + other sales.  Volume is mainly a function of brand acceptance, channel inventory dynamics, and promotional intensity.  ASP reflects product mix (premiumisation) and pricing power.",
+      "profit_equation": "Gross profit = Revenue – cost of goods (mainly grain, packaging, labour, depreciation).  Operating profit = Gross profit – selling (incl. channel incentives, advertising, C-terminal red-packet scanning) – administrative expenses – R&D.  Net profit parent = Operating profit + net financial income (low leverage) – income tax (~25%).  Working capital is very light (receivables ≈ 0).",
+      "cash_flow_equation": "OCF ≈ Net profit + depreciation – change in working capital (mostly inventory).  Since receivables are negligible and payables are moderate, pre-payments to suppliers grow with capacity build.  Inventory build can be a cash drag.  Investing cash outflow = capex for capacity expansion (e.g., 2030 project) and maintenance.  Financing outflow = dividend payments.",
+      "capital_intensity_and_reinvestment": "Light-asset nature but requiring long-ageing storage and brand-building.  Major capex underway (2030 technical upgrade project) to expand base-liquor capacity.  Maintenance capex is modest relative to operating cash flow.",
+      "diluted_share_count_mn": null,
+      "share_count_period": "missing",
+      "share_count_evidence_id": "",
+      "share_count_source_type": "unresolved",
+      "share_count_formula": "Total share count not found in Tushare or market price data; cannot derive from earnings model alone.",
+      "share_count_cross_checks": [
+        "Market cap (133,659 mn) and PE TTM (12.17) imply TTM net profit ~10,981 mn, but this does not give share count without an EPS figure.",
+        "Parent profit (12,246 mn, FY2025) and any filing EPS would give count, but EPS not available."
+      ],
+      "moat_mechanisms": [
+        "Strong brand heritage and cultural positioning as the origin of Chinese light-aroma liquor.",
+        "Deep distribution network with tight channel control, low dealer inventory (2–3 months), and growing C-terminal engagement (scan-code red packets).",
+        "Scaled production and procurement of grain from owned bases, providing cost stability and quality control.",
+        "High consumer loyalty in Shanxi base, with expanding out-of-province presence achieving 'third brand' status in many markets."
+      ],
+      "moat_to_financial_transmission": [
+        "Brand allows premiumisation and ASP growth (Qinghua 20/30) which lifts gross margin.",
+        "Channel discipline reduces price disruption and receivables, keeping OCF high.",
+        "Scale in procurement and production supports unit cost advantages, stabilising margins.",
+        "Customer stickiness drives repeat consumption and reduces sensitivity to competition."
+      ],
+      "structural_risks": [
+        "Exposure to general consumer demand and banquet/hosting cycle; declining marriage numbers and per-event consumption pressure.",
+        "Intense competition from other national brands (Moutai, Wuliangye, etc.) and strong regional players.",
+        "Product mix shift toward lower-price-tier items (Qinghua 20/Bofen) may compress blended ASP and margin.",
+        "Rising material/labour costs partly offset by scale but can erode profitability in a weak pricing environment.",
+        "Capacity expansion risks over-supply if demand growth disappoints."
+      ],
+      "key_unknowns": [
+        "Final diluted share count and per-share metrics.",
+        "Detailed capex and depreciation schedule for 2030 project and maintenance.",
+        "Real sell-through volumes vs. channel inventory changes by product.",
+        "Exact gross margin per product line (only channel-check estimates exist).",
+        "Impact of 'Five-code integration' and C-terminal red packets on sell-in vs. sell-out dynamics."
+      ],
+      "evidence_ids": [
+        "EV006",
+        "EV010",
+        "EV013",
+        "EV014",
+        "EV015",
+        "KPE03",
+        "KPE04",
+        "KPE09",
+        "KPE11"
+      ]
+    },
+    "business_unit_map": [
+      {
+        "unit_id": "BU_report_fenjiu",
+        "unit_name": "汾酒",
+        "unit_type": "reported_segment",
+        "disclosure_basis": "reported",
+        "parent_unit": "company",
+        "economic_role": "Core revenue and profit pool; covers all baijiu products (Qinghua, Laobaifen, Bofen, etc.)",
+        "revenue_driver_equation": "Volume (tons) × ex-factory ASP per ton, influenced by product mix, channel stocking/de-stocking, and geographical expansion.",
+        "profit_driver_equation": "Gross margin driven by product mix (higher Qinghua share lifts margin; Bofen dilutes) and cost of grain/packaging/labour; operating leverage from fixed selling and administrative costs.",
+        "cash_and_capital_equation": "OCF closely tracks net profit (OCF/NI ~1.5 in Q1); capex for capacity expansion; moderate dividend payout.",
+        "reported_metrics": [
+          "Revenue 37,441 mn CNY (FY2025), gross margin 75.67%",
+          "Revenue growth 7.72% YoY (FY2025)",
+          "Gross margin change -1.40 pp YoY"
+        ],
+        "evidence_ids": [
+          "EV006",
+          "EV029"
+        ],
+        "missing_inputs": [
+          "Product-level volume breakdown not in filings",
+          "Reported segment profit/margin detail limited to revenue and cost"
+        ],
+        "next_verification": "H1 2026 interim report for updated segment revenue, cost, and margin."
+      },
+      {
+        "unit_id": "BU_report_other_liquor",
+        "unit_name": "其他酒类",
+        "unit_type": "reported_segment",
+        "disclosure_basis": "reported",
+        "parent_unit": "company",
+        "economic_role": "Minor segment; mainly Zhuyeqing (health liqueur) and possibly other branded products.",
+        "revenue_driver_equation": "Volume × ASP, with less influence on consolidated margins due to low weight.",
+        "profit_driver_equation": "Gross margin around 51.62% in FY2025, lower than core baijiu.",
+        "cash_and_capital_equation": "Part of consolidated cash flows; not separately material.",
+        "reported_metrics": [
+          "Revenue 1,151 mn CNY (FY2025), gross margin 51.62%",
+          "Revenue growth 3.09% YoY",
+          "Gross margin change -0.57 pp YoY"
+        ],
+        "evidence_ids": [
+          "EV006"
+        ],
+        "missing_inputs": [
+          "Sub-product breakdown inside other liquor",
+          "Profit contribution"
+        ],
+        "next_verification": "H1 2026 report"
+      },
+      {
+        "unit_id": "BU_analytic_qinghua",
+        "unit_name": "青花系列",
+        "unit_type": "product",
+        "disclosure_basis": "analytical",
+        "parent_unit": "BU_report_fenjiu",
+        "economic_role": "Flagship premium series; core profit engine (~47% of total revenue based on channel-check 380 bn pool). Includes Qinghua 20 (120 bn 回款), Qinghua 30 (50 bn 回款), and super-premium Qinghua 40/50.",
+        "revenue_driver_equation": "Qinghua 20 volume tied to private business consumption and tier-down from ultra-premium; ASP stable around 350–360 CNY/bottle wholesale. Qinghua 30 facing demand pressure with inventory destocking; ASP ~670 CNY/bottle.",
+        "profit_driver_equation": "High gross margin (likely above corporate average) but under pressure from mix shift to Qinghua 20 and high promotion spending on C-terminal red packets. Qinghua 30 requires rebates to maintain pricing.",
+        "cash_and_capital_equation": "Not separately disclosed; cash conversion is driven by trade receivables (very low) and inventory of aged liquor.",
+        "reported_metrics": [
+          "Qinghua 20 wholesale price 350–360 CNY (Jul 2026)",
+          "Qinghua 30 wholesale price 670 CNY (Jul 2026)",
+          "Qinghua 20 sell-through positive, social inventory low"
+        ],
+        "evidence_ids": [
+          "KPE03",
+          "KPE04",
+          "KPE08",
+          "KPE11"
+        ],
+        "missing_inputs": [
+          "Filing-based revenue and margin for Qinghua series",
+          "Actual sell-out volumes vs. channel stock changes"
+        ],
+        "next_verification": "Obtain quarterly product-level sales data from company filings or IR."
+      },
+      {
+        "unit_id": "BU_analytic_laobaifen",
+        "unit_name": "老白汾系列",
+        "unit_type": "product",
+        "disclosure_basis": "analytical",
+        "parent_unit": "BU_report_fenjiu",
+        "economic_role": "Mid-tier product line (~13% of total revenue pool). Transitioning to new NFC-based traceability system in 2026, leading to short-term headwinds. Future launch of Fen 10/15 sub-lines and banquet-specific SKUs.",
+        "revenue_driver_equation": "Volume currently disrupted by packaging change and team reorganisation; once stabilised, demand from banquet and self-consumption in Shanxi and outer provinces. ASP ~115 CNY/bottle wholesale.",
+        "profit_driver_equation": "Margin likely moderate; product upgrade may improve pricing and profitability once established.",
+        "cash_and_capital_equation": "Not separately disclosed.",
+        "reported_metrics": [
+          "Laobaifen 10 wholesale price 115 CNY (Jul 2026)",
+          "Q1 2026 performance slightly below expectation due to five-code replacement"
+        ],
+        "evidence_ids": [
+          "KPE04",
+          "KPE08",
+          "KPE11"
+        ],
+        "missing_inputs": [
+          "Filing revenue and margin",
+          "New product acceptance and launch schedule"
+        ],
+        "next_verification": "Check launch of Fen 10/15 and banquet SKU sales data."
+      },
+      {
+        "unit_id": "BU_analytic_bofen",
+        "unit_name": "玻汾系列",
+        "unit_type": "product",
+        "disclosure_basis": "analytical",
+        "parent_unit": "BU_report_fenjiu",
+        "economic_role": "Mass-market light-aroma baijiu (~26% of revenue pool). Very high turnover, low social inventory, and tight supply-demand. Acts as volume anchor but with lower margin than premium lines.",
+        "revenue_driver_equation": "Supply-constrained; H1 shipment full, H2 expected to tighten (possible stock-out). ASP ~41 CNY/bottle. Demand resilient from mass consumption.",
+        "profit_driver_equation": "Low absolute margin per bottle but high asset turnover; contribution to profit mainly through volume and absorption of fixed costs.",
+        "cash_and_capital_equation": "Not separately disclosed.",
+        "reported_metrics": [
+          "Bofen wholesale price 41 CNY (Jul 2026)",
+          "Supply-demand tight, inventory low",
+          "Dynamic sales positive, H1 shipments high"
+        ],
+        "evidence_ids": [
+          "KPE04",
+          "KPE08",
+          "KPE11"
+        ],
+        "missing_inputs": [
+          "Filing revenue and margin",
+          "Detailed H2 shipment plan"
+        ],
+        "next_verification": "Monitor H2 shipment volume and channel inventory."
+      }
+    ],
+    "segment_models": [
+      {
+        "segment": "汾酒",
+        "products_or_services": "Core baijiu range including Qinghua, Laobaifen, Bofen, and other aromatic liquor.",
+        "customers_and_channel": "Multi-tier distribution (dealers → sub-dealers → retail/banquet); supplemented by direct e-commerce, dedicated stores, and new retail.  Major channel to HORECA, banquets, gifting, self-consumption.",
+        "revenue_weight_pct": 96.7,
+        "profit_weight_pct": 98.0,
+        "base_period": "FY2025",
+        "base_revenue_value": 37441.36,
+        "base_revenue_unit": "CNY mn",
+        "base_revenue_growth_pct": 7.72,
+        "base_margin_pct": 75.67,
+        "base_margin_change_pp": -1.4,
+        "demand_and_order_drivers": [
+          "Private business consumption recovery (supports Qinghua 20)",
+          "Banquet and hosting demand (marriage numbers declining)",
+          "Regional expansion out-of-province (targeting #3 brand status)",
+          "In-province consumer upgrade to Qinghua 20/25"
+        ],
+        "industry_supply_and_capacity": "Industry overcapacity for mid-to-low tier, but premium baijiu remains resource-constrained by old pits and storage.  Capacity expansion ongoing at Fenjiu (2030 project).",
+        "volume_share_utilization": "Channel checks indicate tight supply for Bofen, demand-driven for Qinghua 20, and over-supplied for Qinghua 30.  Overall inventory near 2-3 months, reasonable.  Utilization of ageing capacity high.",
+        "price_asp_take_rate": "Stable wholesale prices for Qinghua 20 (350-360 CNY), Bofen (41 CNY).  Qinghua 30 at 670 CNY may face downward pressure.  ASP mix shifting toward mid-tier due to consumer downgrading.",
+        "unit_cost_and_input_prices": "Grain and packaging costs largely controlled through long-term contracts and vertical integration (140万亩 grain bases).  Labor and energy costs moderate.",
+        "margin_and_operating_leverage": "Gross margin fell 1.4pp in FY2025; Q1 2026 down 3.75pp YoY to 75.05%.  Operating margin down 5.29pp YoY to 48.58%.  Further pressure if high-priced Qinghua 30 share declines.",
+        "working_capital_and_cash_conversion": "Negative cash conversion cycle due to very low receivables (0.0002% of revenue) and pre-payments from distributors.  Inventory to annualized revenue 22.9% (Q1 2026), up 3.99pp YoY, but still healthy for aged liquor.",
+        "prosperity_level": "weakening",
+        "marginal_direction": "deteriorating",
+        "causal_analysis": "Demand softening in banquet and premium segments, combined with product transition effects, is compressing gross and operating margins.  However, cash generation remains excellent and balance sheet is robust.",
+        "valuation_treatment": "Core value driver; assigned P/E based on normalised earnings power.",
+        "strongest_counterevidence": [
+          "If out-of-province expansion slows and Shanxi market saturates, growth may stall.",
+          "Premiumisation reversal (Qinghua 30 underperformance) could permanently cap margins."
+        ],
+        "evidence_ids": [
+          "EV006",
+          "EV013",
+          "EV014",
+          "EV015",
+          "KPE03",
+          "KPE04",
+          "KPE09",
+          "KPE11"
+        ],
+        "missing_inputs": [
+          "Product-level revenue and margin from filings",
+          "Precise volume breakdown by SKU"
+        ],
+        "next_verification": "2026 semi-annual report for updated segment revenue, cost, and gross margin."
+      },
+      {
+        "segment": "其他酒类",
+        "products_or_services": "Zhuyeqing health liqueur and possibly Xinghuacun village brand wines.",
+        "customers_and_channel": "Similar distribution networks as core baijiu, but with niche focus.",
+        "revenue_weight_pct": 3.3,
+        "profit_weight_pct": 2.0,
+        "base_period": "FY2025",
+        "base_revenue_value": 1151.37,
+        "base_revenue_unit": "CNY mn",
+        "base_revenue_growth_pct": 3.09,
+        "base_margin_pct": 51.62,
+        "base_margin_change_pp": -0.57,
+        "demand_and_order_drivers": [
+          "Health-conscious consumption trend",
+          "Niche gifting and self-consumption"
+        ],
+        "industry_supply_and_capacity": "Similar to baijiu but less scale-sensitive.",
+        "volume_share_utilization": "Minor; not a material swing factor.",
+        "price_asp_take_rate": "Unknown.",
+        "unit_cost_and_input_prices": "Similar grain/packaging cost structure but with additional herbs for Zhuyeqing.",
+        "margin_and_operating_leverage": "Low gross margin relative to baijiu; minor impact on consolidated margins.",
+        "working_capital_and_cash_conversion": "Part of consolidated cash flows.",
+        "prosperity_level": "neutral",
+        "marginal_direction": "stable",
+        "causal_analysis": "Not material for valuation.",
+        "valuation_treatment": "Included in consolidated P/E; no separate valuation needed.",
+        "strongest_counterevidence": [
+          "None"
+        ],
+        "evidence_ids": [
+          "EV006"
+        ],
+        "missing_inputs": [
+          "Detailed sub-product breakdown"
+        ],
+        "next_verification": "None urgent."
+      },
+      {
+        "segment": "青花系列",
+        "products_or_services": "",
+        "customers_and_channel": "",
+        "revenue_weight_pct": 47.4,
+        "profit_weight_pct": null,
+        "base_period": "unspecified",
+        "base_revenue_value": null,
+        "base_revenue_unit": "亿元（回款口径）",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [],
+        "industry_supply_and_capacity": "",
+        "volume_share_utilization": "",
+        "price_asp_take_rate": "",
+        "unit_cost_and_input_prices": "",
+        "margin_and_operating_leverage": "",
+        "working_capital_and_cash_conversion": "",
+        "prosperity_level": "evidence_limited",
+        "marginal_direction": "unknown",
+        "causal_analysis": "",
+        "valuation_treatment": "evidence_limited",
+        "strongest_counterevidence": [],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "LLM omitted a filing-reported material segment"
+        ],
+        "next_verification": ""
+      },
+      {
+        "segment": "老白汾系列",
+        "products_or_services": "",
+        "customers_and_channel": "",
+        "revenue_weight_pct": 13.2,
+        "profit_weight_pct": null,
+        "base_period": "unspecified",
+        "base_revenue_value": null,
+        "base_revenue_unit": "亿元（回款口径）",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [],
+        "industry_supply_and_capacity": "",
+        "volume_share_utilization": "",
+        "price_asp_take_rate": "",
+        "unit_cost_and_input_prices": "",
+        "margin_and_operating_leverage": "",
+        "working_capital_and_cash_conversion": "",
+        "prosperity_level": "evidence_limited",
+        "marginal_direction": "unknown",
+        "causal_analysis": "",
+        "valuation_treatment": "evidence_limited",
+        "strongest_counterevidence": [],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "LLM omitted a filing-reported material segment"
+        ],
+        "next_verification": ""
+      },
+      {
+        "segment": "玻汾系列",
+        "products_or_services": "",
+        "customers_and_channel": "",
+        "revenue_weight_pct": 26.3,
+        "profit_weight_pct": null,
+        "base_period": "unspecified",
+        "base_revenue_value": null,
+        "base_revenue_unit": "亿元（回款口径）",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [],
+        "industry_supply_and_capacity": "",
+        "volume_share_utilization": "",
+        "price_asp_take_rate": "",
+        "unit_cost_and_input_prices": "",
+        "margin_and_operating_leverage": "",
+        "working_capital_and_cash_conversion": "",
+        "prosperity_level": "evidence_limited",
+        "marginal_direction": "unknown",
+        "causal_analysis": "",
+        "valuation_treatment": "evidence_limited",
+        "strongest_counterevidence": [],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "LLM omitted a filing-reported material segment"
+        ],
+        "next_verification": ""
+      }
+    ],
+    "underwriting_questions": [
+      {
+        "question_id": "Q1",
+        "question": "Can out-of-province growth accelerate in 2027-2028, offsetting Shanxi saturation and driving a return to >5% revenue growth?",
+        "why_it_matters": "Shanxi province (~130e sales) is close to saturation; out-of-province expansion is the main growth lever for volume and Qinghua premiumisation.",
+        "current_answer": "Out-of-province growth slightly positive in 2026H1, with company targeting 'third brand' status. Momentum moderate.",
+        "bull_evidence": [
+          "Fenjiu brand is gaining recognition outside Shanxi as a premium light-aroma alternative.",
+          "Distributor model is replicable, and C-terminal marketing (red packets) is improving sell-out."
+        ],
+        "bear_evidence": [
+          "National brands (Moutai, Wuliangye, Luzhou) dominate out-of-province premium consumption; regional players also strong.",
+          "Shanxi sales decline (-10%) suggests even home market is challenged."
+        ],
+        "decisive_model_variables": [
+          "Consolidated revenue growth rate",
+          "Revenue share from out-of-province regions"
+        ],
+        "affected_financial_lines": [
+          "Consolidated revenue",
+          "Gross margin (if Qinghua mix improves)"
+        ],
+        "evidence_ids": [
+          "KPE04",
+          "KPE09"
+        ],
+        "missing_evidence": [
+          "Out-of-province sales data by region from company",
+          "Channel inventory and sell-through data beyond Shanxi"
+        ],
+        "next_verification": "Obtain company revenue split by province/region in 2026 annual report."
+      },
+      {
+        "question_id": "Q2",
+        "question": "Will the product mix shift towards mid-price Qinghua 20 and Laobaifen permanently lower the blended gross margin, or can margin recovery occur with scale and premiumisation re-acceleration?",
+        "why_it_matters": "Gross margin is the key profitability lever; a 1pp change impacts net profit by ~290 mn CNY.",
+        "current_answer": "Q1 2026 gross margin fell 3.75pp YoY to 75%, driven by higher share of Qinghua 20 and Bofen, and lower Qinghua 30 volume.",
+        "bull_evidence": [
+          "Qinghua 20 itself has good margin; volume growth can compensate via operating leverage.",
+          "Cost control (grain bases, scale) may limit downside."
+        ],
+        "bear_evidence": [
+          "Qinghua 30 decline may be structural if ultra-premium demand does not recover.",
+          "Increasing weight of Bofen (low margin) creates a drag."
+        ],
+        "decisive_model_variables": [
+          "Blended gross margin",
+          "Product mix (share of Qinghua 20/30, Bofen)"
+        ],
+        "affected_financial_lines": [
+          "Gross profit",
+          "Operating profit",
+          "EPS"
+        ],
+        "evidence_ids": [
+          "EV013",
+          "KPE03",
+          "KPE04"
+        ],
+        "missing_evidence": [
+          "Product-level gross margin from filings",
+          "Volumes by SKU"
+        ],
+        "next_verification": "Request segmented gross margin data from company IR."
+      },
+      {
+        "question_id": "Q3",
+        "question": "Is the current channel inventory level (2-3 months) truly healthy, or are we seeing hidden inventory accumulation that will delay a return to sell-in growth?",
+        "why_it_matters": "If reported sales (sell-in) outpace real sell-out for an extended period, future quarters face a de-stocking hit.",
+        "current_answer": "Channel checks report 2-3 months inventory (Jul 2026), Q2 destocking is underway. Management aims for benign market development.",
+        "bull_evidence": [
+          "Low social inventory for Bofen and Qinghua 20; destocking in Q2 would normalise.",
+          "Company aims for conservative sell-in to protect pricing."
+        ],
+        "bear_evidence": [
+          "Q1 inventory-to-revenue ratio up 3.99pp YoY, indicating some buildup.",
+          "Challenging banquet demand may slow genuine consumption."
+        ],
+        "decisive_model_variables": [
+          "Channel inventory months",
+          "Revenue growth (sell-in) vs. sell-through growth"
+        ],
+        "affected_financial_lines": [
+          "Revenue",
+          "Working capital"
+        ],
+        "evidence_ids": [
+          "EV018",
+          "KPE03",
+          "KPE04",
+          "KPE09"
+        ],
+        "missing_evidence": [
+          "Actual sell-through volumes from company",
+          "Detailed distributor inventory by region"
+        ],
+        "next_verification": "Track sell-through data and company commentary on inventory at H1 2026 results."
+      },
+      {
+        "question_id": "Q4",
+        "question": "What is the future trajectory of selling expenses and the 'cost-to-sales ratio', given the shift towards C-terminal red packets and brand-building?",
+        "why_it_matters": "Selling expense ratio directly impacts operating margin; management indicates a slow decline in cost-to-sales, but absolute spending may remain elevated to support brands.",
+        "current_answer": "Management claims a slow decreasing trend in cost-to-sales ratio (费销比), focusing more on C-end incentives. Q1 operating margin fell sharply due to lower gross margin, not necessarily higher SG&A.",
+        "bull_evidence": [
+          "Reduction in direct channel subsidies could lower total selling costs.",
+          "Improved efficiency from five-code in FMCG management."
+        ],
+        "bear_evidence": [
+          "C-terminal red packets are still promotional spending and may be sticky.",
+          "Competition may force higher marketing spend."
+        ],
+        "decisive_model_variables": [
+          "SG&A ratio",
+          "Operating margin"
+        ],
+        "affected_financial_lines": [
+          "Operating profit",
+          "Net profit"
+        ],
+        "evidence_ids": [
+          "KPE03",
+          "EV014"
+        ],
+        "missing_evidence": [
+          "Exact selling expense ratio history and forecast",
+          "Breakdown between C-end and channel spending"
+        ],
+        "next_verification": "Analyse H1 2026 income statement for selling expense trends."
+      },
+      {
+        "question_id": "Q5",
+        "question": "Will capex for the 2030 technical upgrade project cause a significant drag on free cash flow and returns in 2026-2028, or will it be well-covered by operating cash flow?",
+        "why_it_matters": "Large capex can reduce distributable cash, lower ROIC temporarily, and if demand doesn't materialise, create excess capacity.",
+        "current_answer": "Evidence shows 2030 project is ongoing; prepayments for capacity projects increased significantly in 2025. No recent capex numbers available.",
+        "bull_evidence": [
+          "Company has strong OCF (1.5x net profit in Q1) that comfortably covers capex.",
+          "Expansion is for long-ageing storage, which builds quality and future pricing power."
+        ],
+        "bear_evidence": [
+          "If demand does not recover, new capacity may become idle, depressing returns.",
+          "Increased depreciation may pressure margins."
+        ],
+        "decisive_model_variables": [
+          "Capex",
+          "FCF",
+          "ROIC"
+        ],
+        "affected_financial_lines": [
+          "FCF",
+          "DPS",
+          "ROIC"
+        ],
+        "evidence_ids": [
+          "EV034"
+        ],
+        "missing_evidence": [
+          "Detailed capex schedule and budget for 2030 project",
+          "Current capitalised assets and depreciation"
+        ],
+        "next_verification": "Review 2025 annual report cash flow statement for capex and CIP details."
+      }
+    ],
+    "forecast_lines": [
+      {
+        "segment": "consolidated",
+        "metric": "Revenue",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 38718.3,
+        "year_1_value": 36062.3,
+        "year_2_value": 37144.2,
+        "year_3_value": 38629.9,
+        "formula": "Year 1 = seasonality-adjusted Q1 2026 (Q1 rev / 48.7% median share).  Year 2 +3%, Year 3 +4% as destocking ends and out-of-province expansion resumes.",
+        "assumption_status": "calculated",
+        "evidence_ids": [
+          "EV011",
+          "EV012",
+          "KPE09"
+        ],
+        "key_sensitivity": "+1% revenue = ~387 mn CNY",
+        "missing_inputs": []
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Gross margin",
+        "unit": "%",
+        "base_period": "FY2025",
+        "base_value": 75.0,
+        "year_1_value": 74.5,
+        "year_2_value": 74.8,
+        "year_3_value": 75.0,
+        "formula": "Year 1 reflects mix shift and margin pressure from product transition.  Gradual recovery as premiumisation resumes.",
+        "assumption_status": "analytical",
+        "evidence_ids": [
+          "EV013",
+          "KPE03",
+          "KPE04"
+        ],
+        "key_sensitivity": "1pp gross margin = ~387 mn gross profit",
+        "missing_inputs": [
+          "Product-level gross margin"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Operating margin",
+        "unit": "%",
+        "base_period": "FY2025 (est.)",
+        "base_value": 45.0,
+        "year_1_value": 41.0,
+        "year_2_value": 42.5,
+        "year_3_value": 43.5,
+        "formula": "Operating margin = gross margin – SG&A ratio – R&D ratio.  SG&A ratio assumed ~33% in 2026E, gradually declining.",
+        "assumption_status": "analytical",
+        "evidence_ids": [
+          "EV014",
+          "KPE03"
+        ],
+        "key_sensitivity": "1pp operating margin = ~360 mn operating profit on 2026E revenue",
+        "missing_inputs": [
+          "Detailed SG&A breakdown",
+          "Management's cost-to-sales target"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Operating profit",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 17423.2,
+        "year_1_value": 14785.5,
+        "year_2_value": 15786.3,
+        "year_3_value": 16804.0,
+        "formula": "Revenue × operating margin",
+        "assumption_status": "calculated",
+        "evidence_ids": [],
+        "key_sensitivity": "",
+        "missing_inputs": []
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Net profit parent",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 12246.3,
+        "year_1_value": 11061.7,
+        "year_2_value": 11355.8,
+        "year_3_value": 11820.4,
+        "formula": "Operating profit + net financial income (immaterial) – tax ~25%",
+        "assumption_status": "calculated",
+        "evidence_ids": [
+          "EV011",
+          "EV015"
+        ],
+        "key_sensitivity": "1% revenue change = ~110 mn net profit impact in 2026E",
+        "missing_inputs": []
+      },
+      {
+        "segment": "consolidated",
+        "metric": "EPS (diluted)",
+        "unit": "CNY",
+        "base_period": "FY2025",
+        "base_value": null,
+        "year_1_value": null,
+        "year_2_value": null,
+        "year_3_value": null,
+        "formula": "Not calculable; diluted share count missing.",
+        "assumption_status": "missing",
+        "evidence_ids": [],
+        "key_sensitivity": "",
+        "missing_inputs": [
+          "Total diluted share count"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "OCF",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 16995.0,
+        "year_1_value": 16592.5,
+        "year_2_value": 17033.7,
+        "year_3_value": 17730.6,
+        "formula": "Assumes OCF/NI ratio ~1.5 (Q1 2026 observed).  Applied to net profit parent.  Base year assumed 1.5 ratio.",
+        "assumption_status": "analytical",
+        "evidence_ids": [
+          "EV017"
+        ],
+        "key_sensitivity": "10% change in ratio swings OCF by ~1.6 bn",
+        "missing_inputs": [
+          "Cash flow statement details"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Capex",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": null,
+        "year_1_value": null,
+        "year_2_value": null,
+        "year_3_value": null,
+        "formula": "Missing; major 2030 project expenditure unknown.",
+        "assumption_status": "missing",
+        "evidence_ids": [],
+        "key_sensitivity": "If capex = 3,000 mn p.a., FCF would be 13,592 mn in 2026E",
+        "missing_inputs": [
+          "Capital expenditure schedule",
+          "Cash paid for construction/fixed assets"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "FCF",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": null,
+        "year_1_value": null,
+        "year_2_value": null,
+        "year_3_value": null,
+        "formula": "OCF - capex",
+        "assumption_status": "missing",
+        "evidence_ids": [],
+        "key_sensitivity": "",
+        "missing_inputs": [
+          "Capex"
+        ]
+      },
+      {
+        "segment": "汾酒",
+        "metric": "Revenue",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 37441.4,
+        "year_1_value": 34800.0,
+        "year_2_value": 35844.0,
+        "year_3_value": 37277.8,
+        "formula": "Proportional to consolidated revenue (segment weight ~96.7%).  Year 1 reduction mirrors total revenue drop.",
+        "assumption_status": "analytical",
+        "evidence_ids": [
+          "EV006"
+        ],
+        "key_sensitivity": "",
+        "missing_inputs": [
+          "Segment-level official forecast"
+        ]
+      },
+      {
+        "segment": "其他酒类",
+        "metric": "Revenue",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 1151.4,
+        "year_1_value": 1262.3,
+        "year_2_value": 1300.2,
+        "year_3_value": 1352.1,
+        "formula": "Slight growth as health liqueur gains traction; assumes ~10% growth in 2026E, slowing.",
+        "assumption_status": "analytical",
+        "evidence_ids": [
+          "EV006"
+        ],
+        "key_sensitivity": "",
+        "missing_inputs": []
+      },
+      {
+        "segment": "consolidated",
+        "metric": "eps",
+        "unit": "",
+        "base_period": "",
+        "base_value": null,
+        "year_1_value": null,
+        "year_2_value": null,
+        "year_3_value": null,
+        "formula": "missing; downstream analyst must complete",
+        "assumption_status": "missing",
+        "evidence_ids": [],
+        "key_sensitivity": "",
+        "missing_inputs": [
+          "required consolidated forecast line omitted"
+        ]
+      }
+    ],
+    "scenarios": [
+      {
+        "scenario": "bull",
+        "probability_pct": 25.0,
+        "operating_assumptions": [
+          "Out-of-province expansion accelerates; revenue returns to +8% growth by 2028E.",
+          "Qinghua 30 demand recovers; blended gross margin stabilises at 76% by 2028E.",
+          "Selling expenses decline as C-channel efficiency improves.",
+          "Early industry cycle bottom in H2 2026, leading to quick destocking."
+        ],
+        "parent_net_profit_cny_mn": 12920.0,
+        "eps_cny": null,
+        "fcf_cny_mn": null,
+        "valuation_method": "P/E on normalised earnings",
+        "valuation_multiple": 15.0,
+        "fair_value_per_share": null,
+        "evidence_ids": [],
+        "falsification": "If out-of-province growth remains below 3% through 2027, bull case invalid.",
+        "missing_inputs": [
+          "Share count"
+        ]
+      },
+      {
+        "scenario": "base",
+        "probability_pct": 55.0,
+        "operating_assumptions": [
+          "Revenue modestly down in 2026E, flattish in 2027E, +4% by 2028E as destocking ends and Shanxi stabilises.",
+          "Gross margin 74.5% -> 75.0%; operating margin slowly recovers to 43.5%.",
+          "Industry bottoming in 2027.",
+          "Capex covered by OCF; FCF remains positive but unquantified."
+        ],
+        "parent_net_profit_cny_mn": 11062.0,
+        "eps_cny": null,
+        "fcf_cny_mn": null,
+        "valuation_method": "P/E on sustainable earnings",
+        "valuation_multiple": 12.0,
+        "fair_value_per_share": null,
+        "evidence_ids": [
+          "EV010",
+          "KPE09"
+        ],
+        "falsification": "If full-year 2026 revenue falls below 34,000 mn or margin drops below 40%, base case too optimistic.",
+        "missing_inputs": [
+          "Share count"
+        ]
+      },
+      {
+        "scenario": "bear",
+        "probability_pct": 20.0,
+        "operating_assumptions": [
+          "Consumer downturn deepens; out-of-province expansion fails; Shanxi declines further.",
+          "Revenue falls to 33,000 mn in 2026E, only +2% thereafter.",
+          "Blended gross margin drops to 73%, operating margin to 38%.",
+          "Capex unchanged, FCF barely positive.",
+          "Dividend reduced."
+        ],
+        "parent_net_profit_cny_mn": 8500.0,
+        "eps_cny": null,
+        "fcf_cny_mn": null,
+        "valuation_method": "P/E on depressed earnings",
+        "valuation_multiple": 10.0,
+        "fair_value_per_share": null,
+        "evidence_ids": [],
+        "falsification": "If industry recovery signs by early 2027 (e.g., Wuliangye positive outlook), bear case invalid.",
+        "missing_inputs": [
+          "Share count"
+        ]
+      }
+    ],
+    "thesis_financial_bridges": [
+      {
+        "bridge_id": "T1",
+        "thesis_or_question": "Out-of-province expansion becomes the dominant growth driver, compensating for saturated Shanxi market.",
+        "affected_unit": "consolidated",
+        "operating_driver": "Revenue growth share from beyond-Shanxi regions",
+        "driver_formula": "Revenue growth = Shanxi rev growth × 40% + out-of-province rev growth × 60%",
+        "base_assumption": "Out-of-province rev growth +3% in 2026E, +5% in 2027E",
+        "bull_assumption": "+8% growth from 2027E",
+        "bear_assumption": "flat in 2027E",
+        "revenue_impact": "Bull adds ~1,400 mn to consolidated revenue vs base by 2028E",
+        "profit_impact": "Additional ~350 mn net profit (at 25% net margin)",
+        "eps_impact": "not quantified (missing shares)",
+        "fcf_or_capital_impact": "likely positive but FCF unknown",
+        "valuation_impact": "Bull could support 15x P/E, base is 12x; value difference substantial",
+        "quantification_status": "partially_quantified",
+        "evidence_ids": [
+          "KPE04",
+          "KPE09"
+        ],
+        "missing_inputs": [
+          "Precise revenue split by province",
+          "Out-of-province margins"
+        ]
+      },
+      {
+        "bridge_id": "T2",
+        "thesis_or_question": "Product mix improvement (Qinghua 30 recovery) will restore gross margin and operating leverage.",
+        "affected_unit": "consolidated",
+        "operating_driver": "Blended gross margin",
+        "driver_formula": "Gross margin = sum (product share × product gross margin).  Qinghua 30 recovery lifts mix.",
+        "base_assumption": "Qinghua 30 share declines further in 2026, stabilises 2027",
+        "bull_assumption": "Qinghua 30 share returns to 2024 levels by 2028",
+        "bear_assumption": "Qinghua 30 share continues to decline",
+        "revenue_impact": "Bull case total revenue may slightly increase as premium volumes grow.",
+        "profit_impact": "+0.5pp to 1.0pp gross margin by 2028E = ~+380-770 mn gross profit",
+        "eps_impact": "not quantified",
+        "fcf_or_capital_impact": "higher margin improves OCF",
+        "valuation_impact": "Multiple expansion possible (quality premium).",
+        "quantification_status": "partially_quantified",
+        "evidence_ids": [
+          "KPE03",
+          "KPE04"
+        ],
+        "missing_inputs": [
+          "Product gross margins",
+          "Qinghua volume path"
+        ]
+      },
+      {
+        "bridge_id": "T3",
+        "thesis_or_question": "Cost-to-sales ratio will decline as C-end red packets replace channel subsidies, boosting operating profit.",
+        "affected_unit": "consolidated",
+        "operating_driver": "SG&A as % of revenue",
+        "driver_formula": "Operating margin = gross margin – SG&A% – R&D%",
+        "base_assumption": "SG&A ratio declines 0.3pp per year from 2026E",
+        "bull_assumption": "Decline 0.5pp/year due to successful digital transformation",
+        "bear_assumption": "Stable or slight increase due to competitive pressure",
+        "revenue_impact": "none directly",
+        "profit_impact": "Bull saves ~180 mn in selling costs by 2028E vs base",
+        "eps_impact": "not quantified",
+        "fcf_or_capital_impact": "higher operating cash generation",
+        "valuation_impact": "Better margins support higher P/E multiple.",
+        "quantification_status": "unquantified",
+        "evidence_ids": [
+          "KPE03"
+        ],
+        "missing_inputs": [
+          "Detailed SG&A budget and trend"
+        ]
+      }
+    ],
+    "moat_evidence_tests": [
+      {
+        "moat_mechanism": "Strong brand heritage (cultural moat) allowing premium pricing.",
+        "observable_test": "Price premium of Qinghua 30 vs similar-tier competitors (e.g., Guojiao 1573).",
+        "comparison_basis": "Wholesale price of 670 CNY vs Luzhou Guojiao 1573 at 830-850 CNY (KPE08). Fenjiu trades at a discount but still premium.",
+        "evidence_result": "partial; Fenjiu offers a strong value-for-money proposition but does not command absolute price leadership.",
+        "financial_transmission": "ASP and gross margin.",
+        "strongest_counterevidence": "The discount to Luzhou suggests Fenjiu's brand isn't yet at the highest tier; competition can erode the premium.",
+        "status": "partial",
+        "evidence_ids": [
+          "KPE08"
+        ],
+        "next_verification": "Track Qinghua 30 wholesale price relative to peers over multiple quarters."
+      },
+      {
+        "moat_mechanism": "Distribution network and channel control enabling high cash conversion.",
+        "observable_test": "Receivables/revenue ratio vs peers.",
+        "comparison_basis": "0.0002% for Fenjiu (Q1 2026) vs typical distributors in baijiu (often <1%).",
+        "evidence_result": "proven; extremely low receivables confirm strong channel control and cash conversion.",
+        "financial_transmission": "OCF and working capital efficiency.",
+        "strongest_counterevidence": "If the channel destocks aggressively, revenue recognition may lag; but that doesn't harm cash from customers.",
+        "status": "proven",
+        "evidence_ids": [
+          "EV018",
+          "EV017"
+        ],
+        "next_verification": "Monitor receivables in H1 2026."
+      },
+      {
+        "moat_mechanism": "Scale and vertical integration in grain sourcing.",
+        "observable_test": "Cost of goods sold as % of revenue vs standalone distillery.",
+        "comparison_basis": "Not available for peers; however, 140万亩 grain bases indicate supply security.",
+        "evidence_result": "Downgraded from partial: no valid EV/KPE evidence id supports the test.",
+        "financial_transmission": "Gross margin stability.",
+        "strongest_counterevidence": "Other major brands also have long-term contracts; cost advantage may be small.",
+        "status": "unproven",
+        "evidence_ids": [],
+        "next_verification": "Compare grain cost index to realised COGS over time."
+      }
+    ],
+    "valuation_buckets": [
+      {
+        "bucket": "Core operating business",
+        "inclusion": "core",
+        "valuation_method": "P/E multiple on base-case 2026E parent net profit",
+        "metric_and_period": "2026E parent net profit 11,062 mn CNY",
+        "metric_value": 11062.0,
+        "valuation_multiple": 12.0,
+        "ownership_pct": 100.0,
+        "haircut_pct": 0.0,
+        "equity_value_cny_mn": 132744.0,
+        "per_share_value_cny": null,
+        "overlap_key": "core_pe",
+        "double_counting_treatment": "None",
+        "evidence_ids": [],
+        "missing_inputs": [
+          "Diluted share count for per-share value"
+        ]
+      },
+      {
+        "bucket": "Optionality: Brand recovery / premiumisation cycle",
+        "inclusion": "scenario",
+        "valuation_method": "P/E expansion to 15x on bull-case profit 12,920 mn",
+        "metric_and_period": "Bull-case 2028E or normalised profit",
+        "metric_value": 12920.0,
+        "valuation_multiple": 15.0,
+        "ownership_pct": 100.0,
+        "haircut_pct": 0.0,
+        "equity_value_cny_mn": 193800.0,
+        "per_share_value_cny": null,
+        "overlap_key": "bull_pe",
+        "double_counting_treatment": "Only realised under bull scenario, not added to core.",
+        "evidence_ids": [],
+        "missing_inputs": [
+          "Share count"
+        ]
+      }
+    ],
+    "valuation_closure": {
+      "current_price_cny": null,
+      "diluted_share_count_mn": null,
+      "core_value_per_share_cny": null,
+      "probability_weighted_fair_value_per_share_cny": null,
+      "option_value_per_share_cny": null,
+      "other_adjustments_per_share_cny": null,
+      "fair_value_per_share_cny": null,
+      "expected_return_pct": null,
+      "formula": "Cannot close without diluted share count.",
+      "rating_consistency_check": "Not applicable",
+      "double_counting_checks": [
+        "Core PE and bull PE are mutually exclusive scenarios; no double count."
+      ],
+      "status": "not_valued",
+      "missing_inputs": [
+        "Diluted share count",
+        "Current share price"
+      ]
+    },
+    "llm_analysis_layer": {
+      "business_question_tree": [
+        "What is the realistic pace of out-of-province market penetration for Qinghua 20 and Laobaifen?",
+        "How will the channel inventory cycle play out over the next 3 quarters given the management's destocking pledge?",
+        "Can the operating margin recover to 45%+ levels if gross margin stabilises and selling expenses decline as promised?",
+        "What is the exact effect of C-terminal red-packet incentives on sell-through volumes?",
+        "How much of the 2030 capex will be growth capex vs maintenance, and when will returns materialise?"
+      ],
+      "profit_pool_priority": "The core Fenjiu segment (97% of revenue) is the overwhelming profit engine. Within it, Qinghua series (especially Qinghua 20) contributes the highest absolute gross profit given its weight and superior margin. Bofen provides volume and cash conversion but dilutes margins. Laobaifen is a transition story. Priority for analysis: Qinghua volume/mix, consolidated gross margin, selling expense control.",
+      "competition_and_substitution_analysis": "Direct competitors: national brands (Moutai, Wuliangye, Luzhou Laojiao) and strong regional players (Yingjia, Gujing, Jinshiyuan). Fenjiu competes mainly in the light-aroma niche, which faces less direct taste substitution but still competes for consumer wallet share. The rise of health-conscious alternatives and imported spirits could be a long-term threat. Customer switching is low due to brand loyalty in Shanxi but higher outside.",
+      "qualitative_to_quantitative_bridge": "Qualitative claims around out-of-province growth and C-end red-packet efficiency are partially supported by channel checks showing H1 out-of-province slight growth and scan-rate data (30% opening rate for Qinghua 20). However, precise revenue elasticity cannot be quantified without regional sales data. The qualitative narrative needs to be bridged with regional revenue splits and C-end conversion-to-sales metrics, which are currently missing.",
+      "expectation_gap_analysis": "Market capitalisation of 133.7 bn CNY implies a TTM P/E of 12.2x. This suggests the market is already pricing a decrease in earnings (TTM implied profit 10,981 mn vs FY2025 12,246 mn). The base-case 2026E profit of 11,062 mn is very close to implied TTM profit, meaning the market is already pricing flat/down earnings. If the bear case (8,500 mn) materialises, further downside remains. Bull case (12,920 mn) would likely cause a re-rating, but share count missing prevents per-share target. The expectation gap is therefore on timing of recovery and out-of-province success, not on the existence of a profit decline.",
+      "red_team_counterarguments": [
+        "Even if out-of-province expansion succeeds, Fenjiu's low brand awareness outside Shanxi could limit premiumisation and keep margins in check.",
+        "The real destocking may take longer than 2 quarters; CFO's 'market benign' language may be optimistic, and a second wave of price cuts could follow.",
+        "If the industry downturn extends to 2028, the stock could de-rate to 8x P/E (bear case profit) giving market cap ~68 bn CNY, a substantial downside from current levels."
+      ],
+      "valuation_explanation": "Without a share count, we can only value the firm at equity level. Base case uses P/E 12.0x, near current market P/E, reflecting no re-rating. Bull case applies 15x, consistent with historical mid-cycle valuations. The method does not require DCF as there is insufficient capex data and the baijiu business is asset-light and cash-generative. Risk premium is embedded in the low multiple, justified by industry headwinds. Sensitivity: a 1% permanent shift in net margin could move equity value by ~7-8%. Recovery or further decline of the baijiu cycle is the key variable.",
+      "final_editorial_synthesis": "As of mid-July 2026, Fenjiu is navigating a baijiu industry correction with product transition. Q1 results showed margin compression but very strong cash generation. The market appears to be pricing a flat to slightly down profit year. The investment case hinges on two turnarounds: out-of-province growth recovery and gross margin stabilization. Given the lack of share count data, we cannot give a per-share valuation, but the equity value (132.7 bn in base) offers limited premium to current market cap (133.7 bn), suggesting full pricing. Downside protection is provided by the current low P/E and strong balance sheet, but catalysts are still developing. The underwriting packet should be updated when the H1 2026 report provides detailed revenue by region, capex, and cash flow, and when the share count is resolved.",
+      "evidence_boundaries": [
+        "Consolidated revenue Q1 2026 and FY2025 are from earnings model (unverified).",
+        "Product-level channel checks are private/proxy and not filing-verified.",
+        "Capex and FCF are missing entirely; any capital return analysis must await H1 report.",
+        "Gross margin and SG&A assumptions are analytical, based on Q1 trends and management commentary."
+      ]
+    },
+    "handoff_manifest": {
+      "handoff_version": "underwriting-v2",
+      "source_of_truth": "structured_research.underwriting_packet",
+      "frozen_reported_facts": [
+        "FY2025 revenue: 38,718,325,657.74 CNY, net profit parent: 12,246,329,337.25 CNY (EV011).",
+        "Q1 2026 revenue: 14,923,228,703.48 CNY, net profit parent: 5,382,557,651.00 CNY (EV010).",
+        "Q1 2026 gross margin 75.05%, operating margin 48.58%, net margin 36.07% (EV013-EV015).",
+        "汾酒 segment FY2025 revenue 37,441 mn, gross margin 75.67% (EV006).",
+        "其他酒类 segment FY2025 revenue 1,151 mn, gross margin 51.62% (EV006).",
+        "Market cap 133,659,277,752 CNY (market_expectation).",
+        "PE TTM 12.17x, PS TTM 3.60x."
+      ],
+      "analyst_estimates": [
+        "2026E consolidated revenue: 36,062 mn (seasonality-adjusted from Q1).",
+        "2026E gross margin 74.5%, operating margin 41.0% (analytical).",
+        "Bull/base/bear profit and P/E multiples are analyst assumptions."
+      ],
+      "unresolved_model_cells": [
+        "diluted_share_count_mn (null)",
+        "EPS (null)",
+        "Capex (null)",
+        "FCF (null)",
+        "Current share price and fair_value_per_share (null)"
+      ],
+      "downstream_must_preserve": [
+        "Full three-year forecast for revenue, margins, net profit parent.",
+        "All business_unit_map entries and segment_models.",
+        "Thesis financial bridges T1, T2, T3.",
+        "Scenario probabilities and profit assumptions.",
+        "Valuation buckets as equity-level values; per-share conversion to be added once share count is obtained.",
+        "Underwriting questions Q1-Q5 as the research agenda."
+      ]
+    },
+    "evidence_change_rules": [
+      {
+        "evidence_id": "KPE09",
+        "affected_segment": "consolidated",
+        "affected_variable": "revenue_growth",
+        "old_assumption": "2026E revenue 36,062 mn (seasonally-adjusted Q1)",
+        "new_assumption": "unchanged",
+        "financial_transmission": "Any material change in Q2 sell-through or full-year guidance would alter revenue, profit, and scenarios.",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "Wait for H1 2026 results; if revenue significantly below 36,000 mn run-rate, downward revision needed."
+      },
+      {
+        "evidence_id": "KPE03",
+        "affected_segment": "consolidated",
+        "affected_variable": "sg&a_ratio",
+        "old_assumption": "SG&A ratio to decline slowly",
+        "new_assumption": "unchanged",
+        "financial_transmission": "Operating margin assumption directly depends on SG&A ratio.",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "H1 2026 income statement; if SG&A is not declining, revisit margin forecast."
+      },
+      {
+        "evidence_id": "KPE01",
+        "affected_segment": "consolidated",
+        "affected_variable": "valuation",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+      },
+      {
+        "evidence_id": "KPE02",
+        "affected_segment": "consolidated",
+        "affected_variable": "valuation",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+      },
+      {
+        "evidence_id": "KPE04",
+        "affected_segment": "consolidated",
+        "affected_variable": "revenue_growth",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+      },
+      {
+        "evidence_id": "KPE04",
+        "affected_segment": "consolidated",
+        "affected_variable": "market_share",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+      },
+      {
+        "evidence_id": "KPE05",
+        "affected_segment": "consolidated",
+        "affected_variable": "asp_or_price",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+      },
+      {
+        "evidence_id": "KPE06",
+        "affected_segment": "consolidated",
+        "affected_variable": "asp_or_price",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+      },
+      {
+        "evidence_id": "KPE07",
+        "affected_segment": "consolidated",
+        "affected_variable": "asp_or_price",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+      },
+      {
+        "evidence_id": "KPE08",
+        "affected_segment": "青花系列",
+        "affected_variable": "wholesale_price",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+      },
+      {
+        "evidence_id": "KPE10",
+        "affected_segment": "consolidated",
+        "affected_variable": "valuation",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+      },
+      {
+        "evidence_id": "KPE11",
+        "affected_segment": "青花系列",
+        "affected_variable": "revenue_base",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+      },
+      {
+        "evidence_id": "KPE12",
+        "affected_segment": "consolidated",
+        "affected_variable": "unmapped",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+      }
+    ],
+    "reconciliation_checks": [
+      "FY2025 segment revenue (汾酒 37,441 + other 1,151) = 38,592 mn, close to consolidated 38,718 mn (difference likely intra-segment adjustments).",
+      "Q1 2026 annualized revenue (59,693 mn) is aggressive and inconsistent with channel guidance; seasonality-adjusted is preferred.",
+      "Implied TTM earnings 10,981 mn vs base-case 2026E 11,062 mn are consistent."
+    ],
+    "analyst_instructions": [
+      "Use seasonality-adjusted 2026 estimates as base, not simple annualised.",
+      "Acquire diluted share count from Tushare or market data before publishing any per-share value.",
+      "Validate capex and FCF from H1 2026 cash flow statement to complete the model.",
+      "Track out-of-province revenue split and C-end scan data to update throughput bridges."
+    ],
+    "preprocessing_notes": [
+      "青花/老白汾/玻汾 revenue figures from channel checks (回款口径) used analytically only.",
+      "Gross margin assumption for FY2025 is estimated at 75% based on product mix evidence.",
+      "Share count missing; per-share metrics and valuation closure deferred.",
+      "All KPE items marked as watch unless explicitly quantified.",
+      "operating model driver coverage (volume_price_cost): capacity, utilization, volume, price/ASP, spread/margin, capex/ROIC"
+    ]
+  }
+}

@@ -230,3 +230,45 @@ def test_clean_energy_power_electronics_profile_does_not_leak_bank_gates():
 
     assert "| clean-energy power electronics |" in audit
     assert "| bank |" not in audit
+
+
+def test_semiconductor_channel_terms_do_not_trigger_consumer_staples_gates():
+    audit = build_data_coverage_context(
+        {
+            "industry_kpi_checklist": (
+                "# Industry KPI Checklist\n"
+                "- Playbook: semiconductor storage controller / enterprise SSD\n"
+                "- NAND price, controller qualification and enterprise SSD revenue are decisive.\n"
+            ),
+            "forecast_model_scaffold": (
+                "# Forecast Model\n"
+                "- Revenue depends on customer qualification, SSD shipments and NAND cost pass-through.\n"
+                "- Channel inventory and distributor checks are verification items, not consumer-staples evidence.\n"
+            ),
+            "consumer_staples_context": (
+                "# Consumer-staples verification context\n"
+                "- Status: not_applicable\n"
+                "- No curated consumer-staples mapping applies to this ticker.\n"
+            ),
+        }
+    )
+
+    assert "## Core Variable Gates" not in audit
+    assert "| consumer staples |" not in audit
+
+
+def test_applicable_consumer_staples_context_can_still_trigger_gates():
+    audit = build_data_coverage_context(
+        {
+            "consumer_staples_context": (
+                "# Consumer-staples verification context\n"
+                "- Status: triggered\n"
+                "- Sell-through is slowing and channel inventory is elevated at distributors.\n"
+                "- Food safety / quality risk remains a watch item.\n"
+            ),
+            "forecast_model_scaffold": "# Forecast Model\nContract liabilities and ASP drive revenue visibility.",
+        }
+    )
+
+    assert "## Core Variable Gates" in audit
+    assert "| consumer staples | Sell-through / channel inventory |" in audit

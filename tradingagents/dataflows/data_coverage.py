@@ -325,6 +325,31 @@ PROFILE_RULES = (
     },
 )
 
+PROFILE_CONTEXT_MODULES: dict[str, tuple[str, ...]] = {
+    "clean-energy power electronics": ("clean_energy", "power_electronics"),
+    "automotive components": ("automotive",),
+    "battery / energy storage": ("battery", "energy_storage"),
+    "bank": ("bank",),
+    "insurance": ("insurance",),
+    "hog breeding": ("hog", "breeding", "knowledge_planet"),
+    "consumer staples": ("consumer_staples", "baijiu"),
+    "metals/mining": ("metals_mining", "commodity_product_price"),
+}
+
+GENERAL_PROFILE_CONTEXT_NAMES = (
+    "industry_kpi",
+    "forecast_model",
+    "company_business_model",
+)
+
+SAFE_FALLBACK_TRIGGERS: dict[str, tuple[str, ...]] = {
+    # Channel inventory, sell-through and distributor are also decisive for
+    # semis, hardware and other channel businesses.  They only identify a
+    # consumer-staples profile when an applicable consumer module is present
+    # or an explicit consumer playbook is supplied.
+    "consumer staples": ("beverage", "food"),
+}
+
 
 def _first_relevant_line(text: str) -> str:
     for raw in text.splitlines():
@@ -531,7 +556,43 @@ def _matching_line(
     return first_gap, "missing"
 
 
-def _detect_profiles(contexts: dict[str, str]) -> list[dict[str, object]]:
+def _profile_context_text(
+    contexts: dict[str, str],
+    coverage_by_name: dict[str, ContextCoverage],
+    profile: str,
+) -> str:
+    module_hints = PROFILE_CONTEXT_MODULES.get(profile, ())
+    chunks: list[str] = []
+    for name, value in contexts.items():
+        lower_name = name.lower()
+        coverage = coverage_by_name.get(name)
+        if coverage and coverage.status in {"missing", "failed", "not_applicable"}:
+            continue
+        if any(hint in lower_name for hint in module_hints):
+            chunks.append(value)
+    return "\n".join(chunks).lower()
+
+
+def _general_profile_text(
+    contexts: dict[str, str],
+    coverage_by_name: dict[str, ContextCoverage],
+) -> str:
+    chunks: list[str] = []
+    for name, value in contexts.items():
+        lower_name = name.lower()
+        if not any(marker in lower_name for marker in GENERAL_PROFILE_CONTEXT_NAMES):
+            continue
+        coverage = coverage_by_name.get(name)
+        if coverage and coverage.status in {"missing", "failed", "not_applicable"}:
+            continue
+        chunks.append(value)
+    return "\n".join(chunks).lower()
+
+
+def _detect_profiles(
+    contexts: dict[str, str],
+    coverage_by_name: dict[str, ContextCoverage],
+) -> list[dict[str, object]]:
     kpi_text = "\n".join(
         value
         for name, value in contexts.items()
@@ -554,11 +615,22 @@ def _detect_profiles(contexts: dict[str, str]) -> list[dict[str, object]]:
             if matched:
                 return matched
 
-    blob = "\n".join(contexts.values())
-    lower = blob.lower()
-    profiles = [
-        rule for rule in PROFILE_RULES if any(term in lower for term in rule["triggers"])
-    ]
+    profiles: list[dict[str, object]] = []
+    for rule in PROFILE_RULES:
+        profile = str(rule["profile"])
+        profile_text = _profile_context_text(contexts, coverage_by_name, profile)
+        if profile_text and any(term in profile_text for term in rule["triggers"]):
+            profiles.append(rule)
+    if profiles:
+        return profiles[:2]
+
+    general_text = _general_profile_text(contexts, coverage_by_name)
+    profiles = []
+    for rule in PROFILE_RULES:
+        profile = str(rule["profile"])
+        triggers = SAFE_FALLBACK_TRIGGERS.get(profile, rule["triggers"])
+        if any(term in general_text for term in triggers):
+            profiles.append(rule)
     if not profiles:
         return []
     return profiles[:2]
@@ -569,7 +641,7 @@ def _build_core_variable_gates(
     coverage_by_name: dict[str, ContextCoverage],
 ) -> list[CoreVariableGate]:
     gates: list[CoreVariableGate] = []
-    for rule in _detect_profiles(contexts):
+    for rule in _detect_profiles(contexts, coverage_by_name):
         profile = str(rule["profile"])
         for variable, terms in rule["variables"]:  # type: ignore[index]
             evidence = ""

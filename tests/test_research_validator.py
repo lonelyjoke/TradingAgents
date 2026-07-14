@@ -81,12 +81,13 @@ evidence id and recalculated impact. Unresolved cells remain explicit in the fin
 
 def test_missing_inputs_and_lineage_gaps_are_review_only():
     for section in (
-        "underwriting_readiness",
         "period_comparator_lineage",
         "sell_side_expectation_lineage",
     ):
         assert not _is_publication_blocker(section, "error")
 
+    assert _is_publication_blocker("underwriting_readiness", "error")
+    assert _is_publication_blocker("company_operating_model", "error")
     assert _is_publication_blocker("handoff_numeric_consistency", "error")
     assert _is_publication_blocker("scenario_probability_math", "error")
 

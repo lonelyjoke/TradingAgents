@@ -430,7 +430,7 @@ Universal rules for all A-share industries:
 2. Teach how the company works: who pays, what is delivered, the revenue equation, profit equation, cash-flow equation, reinvestment needs, moat mechanisms and structural risks.
 3. For every material segment complete the causal chain: demand/orders -> industry supply/capacity -> company volume/share/utilization -> price/ASP/take rate -> unit cost -> margin/operating leverage -> working capital/cash -> EPS/FCF -> valuation treatment.
 4. Generate 4-6 company-specific underwriting questions, ranked by expected EPS/FCF/fair-value sensitivity. The questions are the research agenda: every downstream module must either change a model variable, change a scenario probability, or document why it is irrelevant. Avoid generic questions that could apply to any stock.
-5. Build three explicit forward years with the correct model profile. For ordinary non-financial companies include material segment revenue drivers and consolidated revenue, gross/operating margin, operating profit, parent net profit, EPS, OCF, capex and FCF. For banks use earning assets, NIM/net interest income, fee income, operating cost, credit cost/provisions, parent profit, EPS, ROE, asset quality and CET1/capital; do not force manufacturing OCF/FCF. For insurers use premium/APE, NBV, EV/CSM where disclosed, investment spread, COR for P&C, OPAT/parent profit, EPS, solvency and payout; for securities firms use brokerage, investment banking, asset management, proprietary/trading income, parent profit, EPS, ROE and capital adequacy; for REITs use occupancy, rent/unit, NOI, distributable cash flow and payout. Put the unit on every numeric line. Use CNY mn for profit/cash-flow lines and million shares for diluted share count when source conversion supports it. Before using null, complete reproducible calculations from supplied facts: Tushare total_share is in 10,000 shares; share count can also be cross-checked from market cap/price or parent profit/EPS; capex can be derived from cash paid to acquire/construct long-term assets; FCF can be derived from OCF minus consistently defined capex. Label these values calculated with formula, period and evidence ids. Use null plus missing_inputs only when neither reported nor reproducibly calculated evidence supports a number; never invent precision.
+5. Build three explicit forward years with the correct model profile. For ordinary non-financial companies include material segment revenue drivers and consolidated revenue, gross/operating margin, operating profit, parent net profit, EPS, OCF, capex and FCF. For banks use earning assets, NIM/net interest income, fee income, operating cost, credit cost/provisions, parent profit, EPS, ROE, asset quality and CET1/capital; do not force manufacturing OCF/FCF. For insurers use premium/APE, NBV, EV/CSM where disclosed, investment spread, COR for P&C, OPAT/parent profit, EPS, solvency and payout; for securities firms use brokerage, investment banking, asset management, proprietary/trading income, parent profit, EPS, ROE and capital adequacy; for REITs use occupancy, rent/unit, NOI, distributable cash flow and payout. Put the unit on every numeric line. Use CNY mn for profit/cash-flow lines and million shares for diluted share count when source conversion supports it. Before using null, complete reproducible calculations from supplied facts: Tushare total_share is in 10,000 shares; share count can also be cross-checked from market cap/price or parent profit/EPS; capex can be derived from cash paid to acquire/construct long-term assets; FCF can be derived from OCF minus consistently defined capex. Seasonal annualization must be arithmetically consistent: annual run-rate = quarterly value x 4, while seasonal-share full-year estimate = quarterly value / quarterly_share; never divide an already annualized run-rate by the seasonal share. Label these values calculated with formula, period and evidence ids. Use null plus missing_inputs only when neither reported nor reproducibly calculated evidence supports a number; never invent precision.
 5a. Diluted shares are controlled downstream and cannot be chosen to make a reported EPS fit. Prefer Tushare total_share, cross-check market cap / close, and treat parent-profit / EPS only as a diagnostic. If a filing-text EPS conflicts with parent profit / deterministic shares, label it a suspected PDF column shift and do not use it.
 6. Create bull/base/bear cases only from the same model variables. Probabilities are underwriting judgments, not facts, and must sum to 100 when all are supplied. Fair value requires a reconciled EPS/share-count or asset-value bridge.
 6a. Build 3-6 `thesis_financial_bridges` for the claims that actually decide the recommendation. Each bridge must state the operating formula and bull/base/bear assumption, then quantify or explicitly leave missing the revenue, profit, EPS, FCF/capital and valuation effect. Narrative influence without a named financial line is incomplete.
@@ -488,6 +488,31 @@ def _response_text(response: Any) -> Any:
     return content
 
 
+def _schema_prompt(prompt: str) -> str:
+    return f"""{prompt}
+
+Provider compatibility constraints:
+- Do not use tools or function calls for this response.
+- Return strict RFC 8259 JSON only: one object, double-quoted keys/strings, no Markdown, no comments, no trailing commas, no NaN/Infinity.
+- If the full analysis risks exceeding the output budget, prefer a compact schema-valid object with explicit missing_inputs/readiness_reasons over malformed or truncated JSON.
+- Close every array and object before ending the response.
+"""
+
+
+def _repair_prompt(raw_content: str, initial_error: Exception) -> str:
+    return f"""Repair the malformed JSON below so it validates against the schema.
+
+Return exactly one valid JSON object and no Markdown or commentary. Preserve the supplied analysis and values. Do not add facts, estimates, ratings, or recommendations. If a long field prevents valid JSON, shorten that field rather than dropping required structure. Use empty arrays or nulls for unsupported optional fields. The object must conform to this JSON Schema:
+{json.dumps(CompanyUnderwritingPacket.model_json_schema(), ensure_ascii=False, separators=(',', ':'))}
+
+Initial validation error:
+{initial_error}
+
+JSON to repair:
+{raw_content[:50000]}
+"""
+
+
 def _invoke(llm: Any, prompt: str) -> CompanyUnderwritingPacket:
     structured_error: Exception | None = None
     try:
@@ -500,7 +525,7 @@ def _invoke(llm: Any, prompt: str) -> CompanyUnderwritingPacket:
         return CompanyUnderwritingPacket.model_validate(result)
     except Exception as exc:
         structured_error = exc
-    response = llm.invoke(prompt)
+    response = llm.invoke(_schema_prompt(prompt))
     content = _response_text(response)
     if not str(content or "").strip():
         raise ValueError(
@@ -521,18 +546,7 @@ def _invoke(llm: Any, prompt: str) -> CompanyUnderwritingPacket:
         # when the underlying analysis is useful. Give the LLM one constrained
         # repair pass for both JSON parsing and schema-validation failures
         # instead of losing the entire company model.
-        repair_prompt = f"""Repair the malformed JSON below so it validates against the schema.
-
-Return exactly one valid JSON object and no Markdown or commentary. Preserve the supplied analysis and values. Do not add facts, estimates, ratings, or recommendations. The object must conform to this JSON Schema:
-{json.dumps(CompanyUnderwritingPacket.model_json_schema(), ensure_ascii=False, separators=(',', ':'))}
-
-Initial validation error:
-{initial_error}
-
-JSON to repair:
-{raw_content[:50000]}
-"""
-        repaired = _response_text(llm.invoke(repair_prompt))
+        repaired = _response_text(llm.invoke(_repair_prompt(raw_content, initial_error)))
         try:
             payload = _json_object(str(repaired))
             return CompanyUnderwritingPacket.model_validate(payload)
