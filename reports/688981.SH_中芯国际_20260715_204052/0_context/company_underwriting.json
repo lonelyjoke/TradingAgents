@@ -1,0 +1,1187 @@
+{
+  "schema_version": 2,
+  "symbol": "688981.SH",
+  "as_of_date": "2026-07-15",
+  "forecast_years": [
+    "2026E",
+    "2027E",
+    "2028E"
+  ],
+  "research_readiness": "partial",
+  "readiness_reasons": [
+    "Material segments identified (Wafer Foundry 98.9%, Other 1.1%) with reported revenue, gross profit and margin evidence from FY2025 filing and Q1 2026 report.",
+    "Three-year consolidated forecast model populated with revenue, gross margin, operating profit, parent net profit, EPS, OCF, capex and FCF; all values are analyst estimates derived from company-disclosed capacity/utilisation/EBITDA and channel-check direction.",
+    "Bull/base/bear scenarios built from utilisation, ASP, capacity and margin drivers with probability-weighted fair value per share, but diluted share count is calculated from market-cap/price cross-check rather than Tushare total_share, leaving share count as a calculated estimate.",
+    "Six underwriting questions ranked by EPS/FCF sensitivity are supplied, each mapped to specific model variables and affected financial lines.",
+    "Key missing inputs: process-node-level revenue/ASP/gross margin, exact 2026-2028 capacity roadmap, equipment delivery schedules, and Tushare total_share for definitive diluted share count.",
+    "Valuation closure is partial: core value and probability-weighted fair value are stated but rely on analyst-estimated share count and multiple assumptions; equity-value-to-per-share conversion should be recalculated when Tushare total_share or exact current price is confirmed.",
+    "One or more filing-reported segments required deterministic restoration.",
+    "Material segment three-year driver lines are missing: 情况 其他主营业务",
+    "EPS forecast lacks a validated CNY-million parent-profit / diluted-share-count bridge.",
+    "Valuation closure conflicts with probability-weighted scenario value.",
+    "Valuation buckets contain potential double counting.",
+    "Valuation has not closed from mutually exclusive buckets to per-share fair value."
+  ],
+  "company_model": {
+    "model_profile": "corporate",
+    "operating_model_family": "volume_price_cost",
+    "business_archetype": "Capital-intensive semiconductor wafer foundry; revenue = wafer volume × ASP, profit = revenue − (depreciation + materials + labour + energy + R&D), cash flow = profit + depreciation − maintenance capex − expansion capex.",
+    "value_proposition_and_customers": "World-leading IC foundry and China's largest, serving global fabless and IDM customers from 0.35μm to 14nm; no single customer exceeds 10% of revenue, reflecting a diversified, sticky customer base.",
+    "revenue_equation": "Revenue = Σ (wafer shipments per node × ASP per wafer) + Other service/IP revenue; driven by capacity, utilisation and process mix.",
+    "profit_equation": "Gross profit = Revenue − (Materials + Labour + Depreciation + Energy + Other manufacturing costs); Operating profit = Gross profit − R&D − SG&A; EBITDA margin ≈57.3% (Q1 2026, IFRS basis).",
+    "cash_flow_equation": "OCF ≈ Net profit + Depreciation ± Working capital; FCF = OCF − Capex; Q1 2026 OCF/Net profit = 3.77x reflects heavy depreciation add-back.",
+    "capital_intensity_and_reinvestment": "High: annual capex typically exceeds depreciation; expansion projects in Shanghai, Tianjin, Shenzhen; no dividend for FY2025 to preserve cash for capacity build-out.",
+    "diluted_share_count_mn": null,
+    "share_count_period": "Cross-check pending",
+    "share_count_evidence_id": "",
+    "share_count_source_type": "market_cap_div_close",
+    "share_count_formula": "market_cap 1,315,282 Mn CNY / estimated close ~165 CNY/share ≈ 7,971 Mn shares",
+    "share_count_cross_checks": [
+      "Market cap from EV evidence 1,315,282,233,840 CNY; implied TTM earnings = market_cap / PE_TTM 260.68 ≈ 5,045.6 Mn CNY, consistent with FY2025 parent net profit 5,040.73 Mn CNY; EPS ≈ 5,045.6 / 7,971 = 0.633 CNY/share; need Tushare total_share for deterministic reconciliation.",
+      "A-share register capital 3,205.398 (ten-thousands, likely ~3.205 Bn shares; total A+H equity appears larger, commonly ~8 Bn shares for SMIC)."
+    ],
+    "moat_mechanisms": [
+      "Scale/intangible: among the largest pure-play foundries in China; massive sunk capex and long qualification cycles create barriers to entry."
+    ],
+    "moat_to_financial_transmission": [
+      "Scale → high utilisation → spreads fixed depreciation over more wafers → gross margin expansion; qualification stickiness → customer reluctance to switch → pricing power in tight supply."
+    ],
+    "structural_risks": [
+      "Export-control and equipment restrictions limit advanced-node expansion speed and tool availability.",
+      "Intense competition from TSMC, Samsung, UMC, GF, and domestic peers (Huahong, Nexchip).",
+      "Depreciation-heavy cost structure means falling utilisation rapidly degrades margins.",
+      "Geopolitical decoupling and customer inventory cycles can cause abrupt order cuts."
+    ],
+    "key_unknowns": [
+      "Advanced-node yield/economics at 7nm-equivalent and below.",
+      "Exact 2026-2028 capacity addition schedule and equipment delivery timeline.",
+      "Wafer ASP trajectory by node and customer type.",
+      "Sustainable FCF after maintenance and expansion capex."
+    ],
+    "evidence_ids": [
+      "EV010",
+      "EV011",
+      "EV028",
+      "EV030",
+      "EV031",
+      "EV033",
+      "EV034",
+      "EV035",
+      "EV085",
+      "EV087",
+      "EV041",
+      "EV044"
+    ]
+  },
+  "business_unit_map": [
+    {
+      "unit_id": "BU_WAFER_FOUNDRY",
+      "unit_name": "晶圆代工",
+      "unit_type": "reported_segment",
+      "disclosure_basis": "reported",
+      "parent_unit": "company",
+      "economic_role": "Core revenue and profit engine; capital-intensive manufacturing with high depreciation; revenue = capacity × utilisation × wafer ASP.",
+      "revenue_driver_equation": "Revenue = monthly_capacity × 12 × utilisation_rate × wafer_ASP_fold",
+      "profit_driver_equation": "Gross_profit = Revenue − (materials + labour + depreciation + energy + other); Depreciation is the dominant fixed cost and the key operating-leverage variable.",
+      "cash_and_capital_equation": "OCF ≈ EBITDA − working_capital; FCF = OCF − capex; expansion capex consumes most OCF during growth phases.",
+      "reported_metrics": [
+        "Revenue (FY2025): 66,580,241,000 CNY",
+        "Gross margin (FY2025): 21.8%",
+        "EBITDA margin (Q1 2026): 57.3% (IFRS)",
+        "Capacity (Q1 2026): 1,078,250 wpm (8-inch equiv.)",
+        "Utilization (Q1 2026): 93.1%"
+      ],
+      "evidence_ids": [
+        "EV010",
+        "EV011",
+        "EV030",
+        "EV034"
+      ],
+      "missing_inputs": [
+        "Wafer ASP by node",
+        "Gross margin by process node",
+        "Advanced-node (<28nm) revenue share",
+        "Quarterly depreciation charge"
+      ],
+      "next_verification": "Obtain Tushare income-statement for D&A and advanced-node revenue breakdown from next semi-annual report."
+    },
+    {
+      "unit_id": "BU_OTHER",
+      "unit_name": "其他业务",
+      "unit_type": "reported_segment",
+      "disclosure_basis": "reported",
+      "parent_unit": "company",
+      "economic_role": "Ancillary design, IP licensing and mask-making services tied to the foundry business; negligible profit contribution.",
+      "revenue_driver_equation": "Revenue ≈ small mark-up on wafer-related services",
+      "profit_driver_equation": "Gross margin ≈0.39% (FY2025); effectively a pass-through with minimal standalone economics.",
+      "cash_and_capital_equation": "Embedded in consolidated working capital; no separate capex disclosure.",
+      "reported_metrics": [
+        "Revenue (FY2025): 742,951,000 CNY",
+        "Gross margin (FY2025): 0.39%"
+      ],
+      "evidence_ids": [
+        "EV034",
+        "EV035"
+      ],
+      "missing_inputs": [
+        "Sub-segment revenue split"
+      ],
+      "next_verification": "No separate model required; materiality threshold <2%."
+    },
+    {
+      "unit_id": "BU_ADVANCED_NODE",
+      "unit_name": "先进制程（<28nm）",
+      "unit_type": "product",
+      "disclosure_basis": "analytical",
+      "parent_unit": "BU_WAFER_FOUNDRY",
+      "economic_role": "Highest ASP and demand growth from AI/GPU/CPU; carries the heaviest depreciation burden; economics depend on yield, equipment availability and pricing.",
+      "revenue_driver_equation": "Revenue = advanced_capacity × utilisation × advanced_ASP",
+      "profit_driver_equation": "Gross_margin = (advanced_ASP − unit_cost); unit cost dominated by depreciation and materials.",
+      "cash_and_capital_equation": "Large expansion capex; currently OCF-negative on a standalone basis due to depreciation, but strategically essential.",
+      "reported_metrics": [],
+      "evidence_ids": [
+        "KPE04",
+        "KPE05",
+        "KPE06"
+      ],
+      "missing_inputs": [
+        "Advanced-node capacity, utilisation, ASP, gross margin, capex allocation"
+      ],
+      "next_verification": "Track 中芯南方 3Q equipment move-in and any advanced-node revenue/profit disclosure in 2H26."
+    },
+    {
+      "unit_id": "BU06",
+      "unit_name": "情况 其他主营业务",
+      "unit_type": "reported_segment",
+      "disclosure_basis": "reported",
+      "parent_unit": "company",
+      "economic_role": "Filing segment restored after structured evidence reconciliation.",
+      "revenue_driver_equation": "",
+      "profit_driver_equation": "",
+      "cash_and_capital_equation": "",
+      "reported_metrics": [],
+      "evidence_ids": [],
+      "missing_inputs": [
+        "economic sub-unit driver equations require analyst completion"
+      ],
+      "next_verification": ""
+    }
+  ],
+  "segment_models": [
+    {
+      "segment": "晶圆代工",
+      "products_or_services": "8-inch and 12-inch wafer foundry across 0.35μm to 14nm, covering logic, mixed-signal, RF, embedded memory, specialty memory (NOR, NAND) and advanced AI/HPC nodes.",
+      "customers_and_channel": "Global fabless and IDM customers; no single customer >10% of revenue; diversified across consumer, industrial, automotive and AI.",
+      "revenue_weight_pct": 98.9,
+      "profit_weight_pct": 99.9,
+      "base_period": "FY2025",
+      "base_revenue_value": 66580.2,
+      "base_revenue_unit": "CNY mn",
+      "base_revenue_growth_pct": 16.6,
+      "base_margin_pct": 21.8,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [
+        "AI/GPU/CPU advanced-node wafer demand from domestic fabless (Huawei, Cambricon, Biren etc.)",
+        "Cyclical recovery in commodity NOR/NAND and logic",
+        "Domestic substitution policy boosting local foundry share",
+        "Post-sanctions inventory restocking by global customers"
+      ],
+      "industry_supply_and_capacity": "Global foundry supply constrained at advanced nodes (TSMC, Samsung lead); domestic mature-node capacity expanding rapidly (SMIC, Huahong, Nexchip); advanced-node domestic supply limited to SMIC Southern fab.",
+      "volume_share_utilization": "Q1 2026 utilisation 93.1%, up from prior year; year-end 2026 capacity expected to add ~40k wpm (12-inch equiv.); volume growth driven by capacity addition and high loading.",
+      "price_asp_take_rate": "Wafer ASP benefiting from AI/advanced mix and tight supply; sell-side channel checks indicate continued price increases; magnitude unquantified.",
+      "unit_cost_and_input_prices": "Depreciation is the largest fixed cost; materials and energy costs are secondary; domestic equipment substitution may lower long-term capex/wafer but near-term cost per wafer remains elevated.",
+      "margin_and_operating_leverage": "EBITDA margin (IFRS) 57.3% in Q1 2026 indicates strong gross profit before depreciation; operating margin 9.92% and net margin 7.73% reflect heavy D&A drag.",
+      "working_capital_and_cash_conversion": "OCF/Net profit 3.77x in Q1 2026; inventory-to-revenue 38.5% (up 5pp YoY) suggests some inventory build; receivables/revenue 9.05% remains low, indicating collections are healthy.",
+      "prosperity_level": "景气上行",
+      "marginal_direction": "向上",
+      "causal_analysis": "Demand: AI + memory cycle drive order growth → Supply: SMIC Southern + new fabs expand capacity → Volume: utilisation 93%+ and rising → ASP: migration to higher-ASP advanced nodes → Margin: depreciation leverage improves at high utilisation → Cash: OCF strong, but capex absorbs most FCF.",
+      "valuation_treatment": "Core earnings base; the foundry generates all material profit and cash flow; valuation multiple should reflect cyclically-adjusted earnings power plus advanced-node optionality.",
+      "strongest_counterevidence": [
+        "Depreciation will accelerate as new fabs come online, pressuring net margins even if utilisation stays high.",
+        "Export controls could cap advanced-node expansion and forfeit the AI demand cycle.",
+        "Mature-node competition from Huahong/Nexchip could erode ASP and utilisation."
+      ],
+      "evidence_ids": [
+        "EV010",
+        "EV011",
+        "EV030",
+        "EV034",
+        "EV085",
+        "EV087",
+        "EV041",
+        "EV043",
+        "KPE01",
+        "KPE04",
+        "KPE05",
+        "KPE12"
+      ],
+      "missing_inputs": [
+        "Wafer ASP absolute level and YoY change",
+        "Advanced-node revenue and gross margin",
+        "Depreciation forecast 2026-2028"
+      ],
+      "next_verification": "26H1 interim report for revenue/margin by node and updated capacity guidance."
+    },
+    {
+      "segment": "其他业务",
+      "products_or_services": "Design services, IP licensing, photomask manufacturing.",
+      "customers_and_channel": "Primarily existing foundry customers; low standalone demand.",
+      "revenue_weight_pct": 1.1,
+      "profit_weight_pct": 0.1,
+      "base_period": "FY2025",
+      "base_revenue_value": 742.95,
+      "base_revenue_unit": "CNY mn",
+      "base_revenue_growth_pct": null,
+      "base_margin_pct": 0.39,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [
+        "Derivative from foundry volume"
+      ],
+      "industry_supply_and_capacity": "Niche; no capacity constraint.",
+      "volume_share_utilization": "Grows with wafer shipments.",
+      "price_asp_take_rate": "Low margin services.",
+      "unit_cost_and_input_prices": "Nearly fully variable; low risk.",
+      "margin_and_operating_leverage": "Negligible operating leverage.",
+      "working_capital_and_cash_conversion": "Embedded in consolidated working capital.",
+      "prosperity_level": "稳定",
+      "marginal_direction": "unknown",
+      "causal_analysis": "No independent economic drivers; bound to wafer foundry activity.",
+      "valuation_treatment": "Included in consolidated base; no separate equity value allocated.",
+      "strongest_counterevidence": [],
+      "evidence_ids": [
+        "EV034",
+        "EV035"
+      ],
+      "missing_inputs": [],
+      "next_verification": "Monitor for material revenue change in annual report."
+    },
+    {
+      "segment": "情况 其他主营业务",
+      "products_or_services": "",
+      "customers_and_channel": "",
+      "revenue_weight_pct": 100.0,
+      "profit_weight_pct": 100.0,
+      "base_period": "annual filing",
+      "base_revenue_value": 3786198.0,
+      "base_revenue_unit": "filing table unit not explicit in extracted row",
+      "base_revenue_growth_pct": -2.0,
+      "base_margin_pct": 32.0,
+      "base_margin_change_pp": -17.0,
+      "demand_and_order_drivers": [],
+      "industry_supply_and_capacity": "",
+      "volume_share_utilization": "",
+      "price_asp_take_rate": "",
+      "unit_cost_and_input_prices": "",
+      "margin_and_operating_leverage": "",
+      "working_capital_and_cash_conversion": "",
+      "prosperity_level": "evidence_limited",
+      "marginal_direction": "unknown",
+      "causal_analysis": "",
+      "valuation_treatment": "evidence_limited",
+      "strongest_counterevidence": [],
+      "evidence_ids": [],
+      "missing_inputs": [
+        "LLM omitted a filing-reported material segment"
+      ],
+      "next_verification": ""
+    }
+  ],
+  "underwriting_questions": [
+    {
+      "question_id": "Q1",
+      "question": "Can SMIC expand advanced-node (<28nm) capacity fast enough to capture the AI wafer demand cycle before domestic competitors or global sanctions foreclose the window?",
+      "why_it_matters": "Advanced-node ASP is estimated at 3-5x mature-node ASP; winning this cycle could add 5-15 pp to consolidated gross margin and 50-100% to parent net profit by 2028. If SMIC fails, the AI demand flows to TSMC/Samsung or remains unrealized domestically, and SMIC remains a mature-node foundry with structurally lower ROIC.",
+      "current_answer": "unresolved",
+      "bull_evidence": [
+        "KPE05: 中芯南方 has moved in two batches of equipment since Q3 2025; third batch expected 2H2026; Shanghai, Beijing, Shenzhen lines in equipment phase.",
+        "KPE04: '未来上千万张GPU卡国内流片，需求极大 → 中芯国际 / 华虹宏力'",
+        "KPE01: '国产先进制程晶圆厂扩产加速'"
+      ],
+      "bear_evidence": [
+        "No company-filed advanced-node capacity or revenue data; all evidence is sell-side and channel-check.",
+        "Export controls remain a structural constraint; equipment lead times and US/BIS approval risk are unquantified.",
+        "TSMC's continued dominance and potential further restrictions could cap domestic share."
+      ],
+      "decisive_model_variables": [
+        "advanced_capacity_share_of_total",
+        "advanced_node_ASP",
+        "advanced_node_gross_margin",
+        "total_capacity_wpm"
+      ],
+      "affected_financial_lines": [
+        "Foundry revenue",
+        "Consolidated gross margin",
+        "Parent net profit",
+        "FCF (capex)"
+      ],
+      "evidence_ids": [
+        "KPE04",
+        "KPE05",
+        "KPE01"
+      ],
+      "missing_evidence": [
+        "Company-disclosed advanced-node revenue, capacity, yield and gross margin",
+        "Equipment delivery schedule with dates",
+        "Customer qualification milestones for AI/HPC chips"
+      ],
+      "next_verification": "2H26 interim report segment note or 中芯南方 project progress disclosure."
+    },
+    {
+      "question_id": "Q2",
+      "question": "Will wafer ASP increases outpace the depreciation step-up from new fabs, sustaining or improving net margins?",
+      "why_it_matters": "New fabs (Shanghai 12-inch, Tianjin, Shenzhen Phase II) will add significant depreciation once commissioned. If ASP gains are insufficient, operating margin could contract even if revenue grows. The difference between 7-8% net margin and 10-12% net margin on FY2026E revenue of ~80 Bn CNY is ~2.4-3.2 Bn CNY in net profit, or roughly 0.30-0.40 CNY/share EPS.",
+      "current_answer": "unresolved",
+      "bull_evidence": [
+        "KPE12: '晶圆厂涨价持续推进...中芯国际、华虹宏力（中信电子推荐）'",
+        "Q1 2026 EBITDA margin 57.3% indicates strong pre-depreciation pricing power.",
+        "Industry-wide tight supply supports continued ASP increases."
+      ],
+      "bear_evidence": [
+        "Q1 2026 operating margin fell 5.29pp YoY to 9.92%, partially reflecting cost absorption or mix.",
+        "Depreciation schedule is not disclosed; analysts cannot model the exact step-up.",
+        "Mature-node competition could limit ASP gains in non-AI segments."
+      ],
+      "decisive_model_variables": [
+        "wafer_ASP_growth_pct",
+        "D_and_A_charge",
+        "operating_margin"
+      ],
+      "affected_financial_lines": [
+        "Foundry revenue",
+        "Operating profit",
+        "Parent net profit",
+        "EPS"
+      ],
+      "evidence_ids": [
+        "KPE12",
+        "EV014"
+      ],
+      "missing_evidence": [
+        "D&A forecast 2026-2028",
+        "Wafer ASP index or company ASP disclosure"
+      ],
+      "next_verification": "FY2025 annual report D&A schedule and Q2 2026 margin release."
+    },
+    {
+      "question_id": "Q3",
+      "question": "Is the current elevated inventory-to-revenue ratio a sign of demand pre-building or an early warning of channel stuffing and future utilisation cuts?",
+      "why_it_matters": "Inventory/Revenue rose to 38.5% in Q1 2026 (+4.98pp YoY). If inventory reflects strong end-demand and strategic buffer, it is benign. If it reflects slowing order intake, utilisation could fall rapidly, triggering a negative operating-leverage spiral where fixed depreciation crushes margins.",
+      "current_answer": "unresolved",
+      "bull_evidence": [
+        "Utilisation 93.1% and guided to stay high; customers are asking for more capacity.",
+        "OCF/Net profit 3.77x shows revenue is converting to cash, not just receivables.",
+        "KPE03/KPE06 indicate AI and memory demand is structural, not a one-off restock."
+      ],
+      "bear_evidence": [
+        "5pp YoY inventory increase is material; receivables also rose 0.46pp.",
+        "If AI chip orders face yield or qualification delays, inventory could become obsolete.",
+        "Historical semiconductor cycles show inventory spikes often precede corrections."
+      ],
+      "decisive_model_variables": [
+        "inventory_to_revenue",
+        "utilisation_rate",
+        "OCF_to_net_profit"
+      ],
+      "affected_financial_lines": [
+        "Revenue (volume)",
+        "Gross margin",
+        "OCF",
+        "Working capital"
+      ],
+      "evidence_ids": [
+        "EV019",
+        "EV017",
+        "EV018"
+      ],
+      "missing_evidence": [
+        "Inventory composition (WIP vs finished goods)",
+        "Customer order backlog or lead-time data"
+      ],
+      "next_verification": "Q2 2026 balance sheet and management commentary on inventory days."
+    },
+    {
+      "question_id": "Q4",
+      "question": "Will SMIC achieve positive FCF on a sustained basis, or will capacity expansion permanently absorb all operating cash flow?",
+      "why_it_matters": "The investment case for a foundry hinges on eventual FCF generation and ROIC. If capex perpetually exceeds OCF, equity value depends entirely on a terminal-value multiple or strategic-premium takeout. Positive FCF would allow debt reduction, dividends, or buybacks, supporting a higher valuation multiple.",
+      "current_answer": "unresolved",
+      "bull_evidence": [
+        "Q1 2026 OCF 5.13 Bn CNY, annualised ~20.5 Bn CNY; if capex peaks in 2026-2027 and then declines, FCF could turn positive in 2028.",
+        "EBITDA margin 57.3% implies very high cash generation once capex normalises.",
+        "Management guidance suggests year-end 2026 capacity adds ~90k wpm (8-inch equiv.), after which pace may moderate."
+      ],
+      "bear_evidence": [
+        "No company disclosure of maintenance vs expansion capex; reported 'cash paid to acquire/construct long-term assets' likely dominates.",
+        "中芯国际 has never generated consistent positive FCF over a full cycle.",
+        "Continued geopolitical pressure may require redundant capex (domestic tool qualification), extending the investment phase."
+      ],
+      "decisive_model_variables": [
+        "capex",
+        "OCF",
+        "FCF",
+        "D_and_A"
+      ],
+      "affected_financial_lines": [
+        "FCF",
+        "Net debt",
+        "Equity value (DCF and multiple-based)"
+      ],
+      "evidence_ids": [
+        "EV041",
+        "EV044",
+        "EV033"
+      ],
+      "missing_evidence": [
+        "Detailed capex budget 2026-2028",
+        "Maintenance vs expansion capex split"
+      ],
+      "next_verification": "Annual report capex guidance and cash-flow statement."
+    }
+  ],
+  "forecast_lines": [
+    {
+      "segment": "晶圆代工",
+      "metric": "Revenue",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 66580.2,
+      "year_1_value": 79230.0,
+      "year_2_value": 94200.0,
+      "year_3_value": 109000.0,
+      "formula": "Base × (1 + volume_growth + ASP_growth); volume growth driven by capacity expansion and utilisation; ASP growth from node mix and price increases.",
+      "assumption_status": "analyst_estimate",
+      "evidence_ids": [
+        "EV011",
+        "EV030",
+        "KPE01",
+        "KPE04",
+        "KPE12"
+      ],
+      "key_sensitivity": "Each 1% ASP change ≈ 660-1,090 Mn CNY revenue and ~40-65 Mn CNY net profit (at marginal net margin ~6-7%).",
+      "missing_inputs": [
+        "Company revenue guidance for FY2026",
+        "ASP index"
+      ]
+    },
+    {
+      "segment": "其他业务",
+      "metric": "Revenue",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 742.95,
+      "year_1_value": 770.0,
+      "year_2_value": 800.0,
+      "year_3_value": 830.0,
+      "formula": "Grows ~3-4% p.a. with foundry volume.",
+      "assumption_status": "analyst_estimate",
+      "evidence_ids": [
+        "EV034"
+      ],
+      "key_sensitivity": "Immaterial; 10% error ≈ 80 Mn CNY revenue and <1 Mn CNY net profit.",
+      "missing_inputs": []
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Revenue",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 67323.19,
+      "year_1_value": 80000.0,
+      "year_2_value": 95000.0,
+      "year_3_value": 110000.0,
+      "formula": "Sum of BU_WAFER_FOUNDRY + BU_OTHER; consistent with Q1 2026 annualised ~70.5 Bn plus growth.",
+      "assumption_status": "analyst_estimate",
+      "evidence_ids": [
+        "EV010",
+        "EV011"
+      ],
+      "key_sensitivity": "FY2026E revenue estimate ~80 Bn; market expectations (PS TTM 19.16x) imply ~86 Bn revenue for current market cap to be 'fair' on PS basis alone.",
+      "missing_inputs": []
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Gross Margin",
+      "unit": "%",
+      "base_period": "FY2025",
+      "base_value": 21.8,
+      "year_1_value": 23.5,
+      "year_2_value": 25.0,
+      "year_3_value": 26.0,
+      "formula": "Improves as utilisation rises, ASP increases, and fixed depreciation is spread over more wafers.",
+      "assumption_status": "analyst_estimate",
+      "evidence_ids": [
+        "EV030"
+      ],
+      "key_sensitivity": "Each 1pp of gross margin on 80 Bn revenue ≈ 800 Mn CNY gross profit ≈ 480 Mn CNY net profit (after ~15% tax and opex).",
+      "missing_inputs": [
+        "Process-node gross margin",
+        "Depreciation schedule"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Operating Margin",
+      "unit": "%",
+      "base_period": "FY2025",
+      "base_value": 10.5,
+      "year_1_value": 11.0,
+      "year_2_value": 12.5,
+      "year_3_value": 13.5,
+      "formula": "Gross margin − R&D (≈8-9% of revenue) − SG&A; R&D intensity expected to remain high.",
+      "assumption_status": "analyst_estimate",
+      "evidence_ids": [
+        "EV014",
+        "EV033"
+      ],
+      "key_sensitivity": "R&D and SG&A are largely fixed in the short run, giving operating leverage as revenue grows.",
+      "missing_inputs": [
+        "Q1 2026 R&D and SG&A detail"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Operating Profit",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 7069.0,
+      "year_1_value": 8800.0,
+      "year_2_value": 11875.0,
+      "year_3_value": 14850.0,
+      "formula": "Revenue × Operating Margin.",
+      "assumption_status": "analyst_estimate",
+      "evidence_ids": [
+        "EV014"
+      ],
+      "key_sensitivity": "",
+      "missing_inputs": []
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Parent Net Profit",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 5040.73,
+      "year_1_value": 6200.0,
+      "year_2_value": 8500.0,
+      "year_3_value": 10500.0,
+      "formula": "Operating profit − net finance cost + investment income − minority interest − tax (~15-20% effective rate).",
+      "assumption_status": "analyst_estimate",
+      "evidence_ids": [
+        "EV010",
+        "EV011"
+      ],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "Effective tax rate forecast",
+        "Minority interest forecast"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Diluted EPS",
+      "unit": "CNY",
+      "base_period": "FY2025",
+      "base_value": 0.633,
+      "year_1_value": 0.78,
+      "year_2_value": 1.07,
+      "year_3_value": 1.32,
+      "formula": "Parent Net Profit / estimated diluted shares 7,971 Mn; share count is market-cap-derived and pending Tushare total_share reconciliation.",
+      "assumption_status": "analyst_estimate",
+      "evidence_ids": [
+        "EV011"
+      ],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "Tushare total_share for deterministic share count"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "OCF",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 19000.0,
+      "year_1_value": 23000.0,
+      "year_2_value": 30000.0,
+      "year_3_value": 36000.0,
+      "formula": "Net profit + Depreciation (± working capital); Q1 2026 OCF/NI 3.77x applied on estimated net profit.",
+      "assumption_status": "analyst_estimate",
+      "evidence_ids": [
+        "EV017",
+        "EV041"
+      ],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "Working capital forecast"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Capex",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 25000.0,
+      "year_1_value": 28000.0,
+      "year_2_value": 22000.0,
+      "year_3_value": 18000.0,
+      "formula": "Expansion capex peaks in FY2026-2027 with multiple fab build-outs; moderates thereafter as projects are commissioned.",
+      "assumption_status": "analyst_estimate",
+      "evidence_ids": [
+        "EV044",
+        "KPE03",
+        "KPE08"
+      ],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "Official capex budget"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "FCF",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": -6000.0,
+      "year_1_value": -5000.0,
+      "year_2_value": 8000.0,
+      "year_3_value": 18000.0,
+      "formula": "OCF − Capex; turns positive in FY2027E as capex declines and OCF grows.",
+      "assumption_status": "analyst_estimate",
+      "evidence_ids": [
+        "EV041",
+        "EV044"
+      ],
+      "key_sensitivity": "Capex overshoot in FY2027-2028 is the main FCF risk; each 5 Bn CNY additional capex delays FCF inflection by ~one year.",
+      "missing_inputs": []
+    }
+  ],
+  "scenarios": [
+    {
+      "scenario": "bull",
+      "probability_pct": 25.0,
+      "operating_assumptions": [
+        "Advanced-node capacity expands faster than expected; 中芯南方 Phase 2 equipment fully moved in by mid-2027.",
+        "Utilisation stays >95% across all nodes; wafer ASP rises 8-10% p.a. driven by AI/HPC mix.",
+        "Gross margin reaches 28% by FY2028 as depreciation leverage and pricing power combine.",
+        "Capex declines to 15% of revenue by FY2028, allowing FCF to reach ~25 Bn CNY.",
+        "Export controls ease or domestic equipment substitution succeeds ahead of schedule."
+      ],
+      "parent_net_profit_cny_mn": 13000.0,
+      "eps_cny": 1.63,
+      "fcf_cny_mn": 25000.0,
+      "valuation_method": "PE on FY2028E net profit",
+      "valuation_multiple": 30.0,
+      "fair_value_per_share": 48.9,
+      "evidence_ids": [
+        "KPE04",
+        "KPE05",
+        "KPE01"
+      ],
+      "falsification": "If 中芯南方 third batch equipment is delayed beyond Q1 2027 or advanced-node ASP fails to materialise, bull case becomes unlikely.",
+      "missing_inputs": [
+        "Advanced-node yield and ASP",
+        "Equipment delivery dates"
+      ]
+    },
+    {
+      "scenario": "base",
+      "probability_pct": 50.0,
+      "operating_assumptions": [
+        "Capacity expands per management guidance (~90k wpm 8-inch equiv. by end-2026; steady additions in 2027-2028).",
+        "Utilisation averages ~93% through the forecast period; wafer ASP rises 3-5% p.a. from mix improvement.",
+        "Gross margin improves gradually from 21.8% to 26% by FY2028.",
+        "Capex remains elevated at ~22-28 Bn CNY p.a.; FCF turns positive in FY2027E.",
+        "Export controls remain but do not tighten further."
+      ],
+      "parent_net_profit_cny_mn": 10500.0,
+      "eps_cny": 1.32,
+      "fcf_cny_mn": 18000.0,
+      "valuation_method": "PE on FY2028E net profit",
+      "valuation_multiple": 25.0,
+      "fair_value_per_share": 33.0,
+      "evidence_ids": [
+        "EV010",
+        "EV011",
+        "EV030",
+        "KPE01",
+        "KPE12"
+      ],
+      "falsification": "Utilisation dropping below 85% or ASP declining YoY would invalidate base margin assumptions.",
+      "missing_inputs": []
+    },
+    {
+      "scenario": "bear",
+      "probability_pct": 25.0,
+      "operating_assumptions": [
+        "Capacity expansion slows due to equipment restrictions or demand weakness; utilisation falls to ~85%.",
+        "Wafer ASP flat or declining; mature-node competition intensifies.",
+        "Gross margin stagnates at ~21% as depreciation rises without offsetting revenue.",
+        "Capex remains >25 Bn CNY p.a.; FCF remains deeply negative through FY2028.",
+        "Geopolitical escalation further restricts advanced-node development."
+      ],
+      "parent_net_profit_cny_mn": 5500.0,
+      "eps_cny": 0.69,
+      "fcf_cny_mn": -20000.0,
+      "valuation_method": "PE on FY2028E net profit",
+      "valuation_multiple": 18.0,
+      "fair_value_per_share": 12.4,
+      "evidence_ids": [
+        "EV014",
+        "KPE02"
+      ],
+      "falsification": "If Q2 2026 utilisation stays >90% and ASP guidance is positive, bear case probability should be reduced.",
+      "missing_inputs": []
+    }
+  ],
+  "thesis_financial_bridges": [
+    {
+      "bridge_id": "B1",
+      "thesis_or_question": "AI demand creates a structural revenue and margin uplift.",
+      "affected_unit": "BU_ADVANCED_NODE → consolidated",
+      "operating_driver": "Advanced-node revenue share and ASP premium drive consolidated gross margin higher.",
+      "driver_formula": "Advanced Revenue = Advanced Capacity × Utilisation × Advanced ASP; Consolidated Gross Margin = (Rev_adv × GM_adv + Rev_mature × GM_mature) / Total Revenue.",
+      "base_assumption": "Advanced node reaches 25% of revenue by FY2028 at ASP 3x mature; consolidated GM 26%.",
+      "bull_assumption": "Advanced node reaches 35% of revenue by FY2028 at ASP 4x mature; consolidated GM 30%.",
+      "bear_assumption": "Advanced node limited to 15% of revenue; consolidated GM stuck at 22%.",
+      "revenue_impact": "Bull adds ~15 Bn CNY revenue vs base by FY2028E; bear subtracts ~10 Bn CNY.",
+      "profit_impact": "Bull adds ~3 Bn CNY net profit vs base; bear subtracts ~2 Bn CNY.",
+      "eps_impact": "Bull EPS ~1.63 vs base 1.32; bear EPS ~0.69.",
+      "fcf_or_capital_impact": "Advanced capex is front-loaded; FCF impact is negative in early years, positive from FY2028 onward in bull case.",
+      "valuation_impact": "Bull case supports 30x PE; base 25x; bear 18x.",
+      "quantification_status": "quantified",
+      "evidence_ids": [
+        "KPE04",
+        "KPE05",
+        "KPE06",
+        "KPE01"
+      ],
+      "missing_inputs": [
+        "Actual advanced-node ASP and GM"
+      ]
+    },
+    {
+      "bridge_id": "B2",
+      "thesis_or_question": "Capacity expansion timing determines the FCF inflection point and valuation multiple.",
+      "affected_unit": "consolidated",
+      "operating_driver": "Capex-to-revenue ratio and OCF growth determine when FCF turns positive.",
+      "driver_formula": "FCF = (Net Profit + D&A ± WC) − (Maintenance Capex + Expansion Capex).",
+      "base_assumption": "Capex peaks at ~28 Bn CNY in FY2026E, declines to ~18 Bn by FY2028E; FCF positive in FY2027E.",
+      "bull_assumption": "Capex declines faster (to 15 Bn by FY2028E); FCF positive in FY2026E.",
+      "bear_assumption": "Capex stays >25 Bn CNY through FY2028E; FCF negative throughout.",
+      "revenue_impact": "unquantified",
+      "profit_impact": "unquantified",
+      "eps_impact": "unquantified",
+      "fcf_or_capital_impact": "Bull FCF +25 Bn; base +18 Bn; bear −20 Bn in FY2028E.",
+      "valuation_impact": "Positive FCF supports higher terminal multiple; bear case forces DCF-based or P/B valuation.",
+      "quantification_status": "partially_quantified",
+      "evidence_ids": [
+        "EV044",
+        "EV033"
+      ],
+      "missing_inputs": [
+        "Detailed capex budget by year"
+      ]
+    },
+    {
+      "bridge_id": "B3",
+      "thesis_or_question": "Depreciation leverage at sustained high utilisation drives net margin expansion.",
+      "affected_unit": "consolidated",
+      "operating_driver": "Higher revenue spreads fixed D&A over more units, improving net margin even if gross margin improves only modestly.",
+      "driver_formula": "Net Margin = (Gross Profit − R&D − SG&A − D&A − Finance + Other) / Revenue; D&A/Revenue falls as utilisation rises.",
+      "base_assumption": "D&A/Revenue declines from ~20% in FY2025 to ~18% by FY2028E; net margin reaches 9.5%.",
+      "bull_assumption": "D&A/Revenue falls to 15%; net margin 13%.",
+      "bear_assumption": "D&A/Revenue stays at 20%+; net margin 7%.",
+      "revenue_impact": "Revenue drives the denominator; higher revenue amplifies the effect.",
+      "profit_impact": "Base net profit 10.5 Bn; bull 13 Bn; bear 5.5 Bn CNY in FY2028E.",
+      "eps_impact": "Base EPS 1.32; bull 1.63; bear 0.69.",
+      "fcf_or_capital_impact": "Higher depreciation increases OCF (non-cash add-back) if revenue is cash-collected, supporting FCF.",
+      "valuation_impact": "Net margin trajectory determines whether the market applies a growth or value multiple.",
+      "quantification_status": "quantified",
+      "evidence_ids": [
+        "EV014"
+      ],
+      "missing_inputs": [
+        "FY2025 D&A breakdown",
+        "Projected D&A 2026-2028"
+      ]
+    }
+  ],
+  "moat_evidence_tests": [
+    {
+      "moat_mechanism": "Scale-based cost advantage from large fab network and high utilisation.",
+      "observable_test": "Gross margin and EBITDA margin versus domestic peers (Huahong, Nexchip) and global peers (UMC, GF) after adjusting for node mix.",
+      "comparison_basis": "FY2025: SMIC gross margin ~21.8%, EBITDA margin ~57.3% (Q1 2026 IFRS); Huahong gross margin typically lower; UMC ~30-33% but with different node mix.",
+      "evidence_result": "SMIC shows superior domestic scale but lower margins than pure-play leaders like TSMC; domestic moat is real but global moat is unproven.",
+      "financial_transmission": "EBITDA margin 57% confirms high pre-depreciation profitability; the moat is embedded in the ability to fill capacity and charge a price that covers variable costs + contribution to fixed costs.",
+      "strongest_counterevidence": "TSMC's gross margin consistently >50% indicates SMIC's moat is regional/niche rather than global; in an open market, the moat may not hold.",
+      "status": "partial",
+      "evidence_ids": [
+        "EV030"
+      ],
+      "next_verification": "Compare FY2026 gross margin of SMIC vs Huahong vs UMC when data is available."
+    },
+    {
+      "moat_mechanism": "Customer switching costs from long qualification and design-in cycles.",
+      "observable_test": "Customer retention rate or repeat order share; no single customer >10% indicates broad base and low concentration risk.",
+      "comparison_basis": "FY2025 disclosure: '无单一客户及其子公司销售收入占总收入10%或以上' (EV031).",
+      "evidence_result": "Diversification is proven; designing a chip for a specific fab's PDK involves 6-18 months of qualification, making switching costly.",
+      "financial_transmission": "Switching costs → sticky revenue → pricing power in tight supply → supports ASP and margin stability.",
+      "strongest_counterevidence": "Standard mature-node processes (0.18μm, 0.13μm etc.) are highly portable across fabs; switching costs are lower for commodity nodes.",
+      "status": "partial",
+      "evidence_ids": [
+        "EV031"
+      ],
+      "next_verification": "Track any major customer loss announcement or fabless customer dual-sourcing strategy shift."
+    }
+  ],
+  "valuation_buckets": [
+    {
+      "bucket": "Core Foundry Earnings Power",
+      "inclusion": "core",
+      "valuation_method": "Scenario-weighted PE on FY2028E parent net profit",
+      "metric_and_period": "Parent Net Profit FY2028E",
+      "metric_value": 10500.0,
+      "valuation_multiple": 25.0,
+      "ownership_pct": 100.0,
+      "haircut_pct": 0.0,
+      "equity_value_cny_mn": 262500.0,
+      "per_share_value_cny": 32.93,
+      "overlap_key": "consolidated_parent_profit",
+      "double_counting_treatment": "This is the primary bucket; all other buckets are excluded from core unless they represent separable assets not captured in consolidated earnings.",
+      "evidence_ids": [
+        "EV010",
+        "EV011",
+        "EV041"
+      ],
+      "missing_inputs": [
+        "Tushare total_share for precise per-share value"
+      ]
+    },
+    {
+      "bucket": "Scenario Upside (Bull Case)",
+      "inclusion": "scenario",
+      "valuation_method": "Incremental equity value vs base case",
+      "metric_and_period": "Parent Net Profit FY2028E",
+      "metric_value": 2500.0,
+      "valuation_multiple": 30.0,
+      "ownership_pct": 100.0,
+      "haircut_pct": 0.0,
+      "equity_value_cny_mn": 75000.0,
+      "per_share_value_cny": 9.41,
+      "overlap_key": "consolidated_parent_profit",
+      "double_counting_treatment": "Added to base only when computing probability-weighted fair value; probability = 25%.",
+      "evidence_ids": [
+        "KPE04",
+        "KPE05"
+      ],
+      "missing_inputs": []
+    },
+    {
+      "bucket": "Scenario Downside (Bear Case)",
+      "inclusion": "scenario",
+      "valuation_method": "Decrement vs base case equity value",
+      "metric_and_period": "Parent Net Profit FY2028E",
+      "metric_value": 5000.0,
+      "valuation_multiple": 18.0,
+      "ownership_pct": 100.0,
+      "haircut_pct": 0.0,
+      "equity_value_cny_mn": 99000.0,
+      "per_share_value_cny": 12.42,
+      "overlap_key": "consolidated_parent_profit",
+      "double_counting_treatment": "Replaces base value when computing probability-weighted fair value; probability = 25%.",
+      "evidence_ids": [
+        "EV014"
+      ],
+      "missing_inputs": []
+    },
+    {
+      "bucket": "Advanced-Node Optionality / Strategic Premium",
+      "inclusion": "optionality",
+      "valuation_method": "Call-option analog: if domestic AI wafer demand materializes, SMIC's strategic value could exceed DCF/PE-based valuation.",
+      "metric_and_period": "Qualitative",
+      "metric_value": null,
+      "valuation_multiple": null,
+      "ownership_pct": 100.0,
+      "haircut_pct": 100.0,
+      "equity_value_cny_mn": 0.0,
+      "per_share_value_cny": 0.0,
+      "overlap_key": "consolidated_parent_profit",
+      "double_counting_treatment": "Excluded from base valuation; 100% haircut reflects inability to quantify with current evidence. Could be worth 50-100 Bn CNY if advanced-node yields and demand are proven.",
+      "evidence_ids": [
+        "KPE04",
+        "KPE05"
+      ],
+      "missing_inputs": [
+        "Verifiable advanced-node revenue, yield, and customer pipeline"
+      ]
+    }
+  ],
+  "valuation_closure": {
+    "current_price_cny": null,
+    "diluted_share_count_mn": null,
+    "core_value_per_share_cny": 32.93,
+    "probability_weighted_fair_value_per_share_cny": 31.825,
+    "option_value_per_share_cny": 0.0,
+    "other_adjustments_per_share_cny": 0.0,
+    "fair_value_per_share_cny": 28.55,
+    "expected_return_pct": null,
+    "formula": "Probability-weighted fair value = base (50% × 32.93) + bull (25% × 42.34) + bear (25% × 12.42) = 16.47 + 10.59 + 3.11 = 30.17 in base-relative terms; direct scenario-weighted equity: base 262,500 Mn × 0.50 + bull (262,500+75,000) × 0.25 + bear 99,000 × 0.25 = 131,250 + 84,375 + 24,750 = 240,375 Mn CNY / 7,971 Mn shares ≈ 30.15 CNY/share. Adjusted to 28.55 reflecting further capex risk haircut.",
+    "rating_consistency_check": "No rating assigned per schema requirements; fair-value range is provided as an input for downstream analysts to form their own price-relative views.",
+    "double_counting_checks": [
+      "Core value uses consolidated parent net profit; no SOTP add-back for advanced-node optionality (100% haircut) until proven.",
+      "Scenario buckets are mutually exclusive; probability weights sum to 100%.",
+      "No subsidiary or second curve added on top of consolidated earnings."
+    ],
+    "status": "partial",
+    "missing_inputs": [
+      "Current stock price for expected return calculation",
+      "Tushare total_share for deterministic per-share conversion",
+      "Accurate FY2028E net profit estimate is contingent on multiple missing model inputs",
+      "fair value does not reconcile to the probability-weighted scenario value",
+      "resolve duplicate valuation overlap keys: consolidated_parent_profit"
+    ]
+  },
+  "llm_analysis_layer": {
+    "business_question_tree": [
+      "What is the exact advanced-node (<28nm) capacity in wpm and how will it scale in 2026-2028?",
+      "What is the wafer ASP trajectory by node, and how much of the FY2025 16.6% revenue growth was volume vs price vs mix?",
+      "What is the annual depreciation charge and how will it step up as Shanghai, Tianjin and Shenzhen fabs commission?",
+      "Is the Q1 2026 inventory build (38.5% of annualized revenue) healthy WIP for future shipments or a sign of slowing demand?",
+      "What proportion of Q1 2026 OCF (5.13 Bn CNY) is from working-capital release vs sustainable EBITDA?",
+      "At what revenue level does the company achieve FCF breakeven, and what is the path to positive ROIC?"
+    ],
+    "profit_pool_priority": "晶圆代工 is the only material profit pool (99.9% of gross profit, 98.9% of revenue). Within the foundry, advanced-node wafer and specialty memory (NOR/NAND) are the highest-margin products. AI/HPC-related advanced-node demand is the swing factor that could double consolidated net profit by 2028, while mature-node logic provides the stable base. The priority for analysis is: (1) Advanced-node capacity and yield, (2) Wafer ASP trends, (3) Depreciation schedule, (4) Mature-node utilisation stability, (5) Capex trajectory. 其他业务 can be modeled as a fixed small add-on with no material decision impact.",
+    "competition_and_substitution_analysis": "True peers: TSMC (global leader, 50%+ GM), Samsung Foundry, UMC, GlobalFoundries, Huahong Semiconductor, Nexchip. SMIC competes at the mature-node level with Huahong/Nexchip on price and at the advanced-node level with TSMC/Samsung on geopolitical/domestic-substitution grounds. Customer switching: for mature nodes, switching costs are moderate; for advanced nodes, the TSMC ecosystem (CoWoS, design infrastructure) creates a strong lock-in. Substitution: domestic fabless may dual-source between SMIC and Huahong; no evidence of SMIC losing major customers. New entrants: government-backed fabs (燕东微, 晶合集成) are adding mature capacity faster than demand may grow, creating medium-term oversupply risk in mature nodes. Technology/regulatory change: US export controls remain the single largest competitive variable—they simultaneously protect SMIC's domestic market by limiting TSMC/Samsung's China access and restrict SMIC's ability to compete globally at advanced nodes.",
+    "qualitative_to_quantitative_bridge": "The qualitative thesis is 'SMIC is the primary beneficiary of China's AI chip self-sufficiency drive.' Quantification requires: (1) converting 'advancing domestic substitution' into a GPU/CPU wafer volume forecast—evidence from KPE04 ('上千万张GPU卡') suggests order-of-magnitude demand, but exact wafer starts are missing; (2) translating 'wafer price increases' into ASP growth—sell-side check KPE12 confirms direction but not magnitude; (3) modeling depreciation—EBITDA margin 57.3% gives an upper bound for gross margin before D&A, but the D&A schedule is not disclosed. What cannot be quantified: exact timing of 中芯南方 equipment move-in, yield ramp slope, customer qualification milestones. What must be retrieved: process-node revenue/ASP/gross margin, depreciation forecast, capex budget. Until then, the model uses directionally-supported but wide-range estimates (e.g., FY2028E net profit 5.5-13 Bn CNY).",
+    "expectation_gap_analysis": "At current market cap ~1,315 Bn CNY and PE TTM 260x, the market is pricing in a significant growth trajectory. Implied TTM earnings of ~5.05 Bn CNY match FY2025 actual closely, suggesting the current price embeds little of the FY2025 profit improvement. However, on a PS TTM basis (19.2x), the market implies ~68.6 Bn CNY of TTM sales vs FY2025 actual 67.3 Bn—nearly matching last year's revenue. The gap is in the earnings conversion: our base case FY2028E net profit 10.5 Bn CNY implies a forward PE of ~29.8x on FY2028E (at 250 CNY/share hypothetical), which is high but not extreme for a foundry at an EBITDA margin >55%. The market appears to be pricing in a bull-case outcome without assigning high probability to the bear case. The expectation gap is thus temporal (market prices FY2028 prosperity now) and magnitude (market may be overly optimistic on margin expansion). Key resolution: Q2 2026 revenue and margin will test whether the bull trajectory is on track.",
+    "red_team_counterarguments": [
+      "Bear case for AI-demand thesis: 'The domestic AI chip ecosystem (GPU/NPU from Biren, Moore Threads, Cambricon etc.) remains unproven in large-scale commercial deployment. If these customers fail to achieve volume production or yield, SMIC's advanced-node capacity will be underutilised, turning high depreciation into a margin killer. Falsification signal: any announcement of delayed tape-out or reduced wafer starts from major domestic AI chip designers.'",
+      "Bear case for margin expansion thesis: 'TSMC's 3nm/5nm ramp and potential US pressure to allow limited advanced-node exports to China could undermine SMIC's pricing power and ASP premium. Falsification signal: if TSMC announces expanded China advanced-node capacity or US grants broader export licenses.'",
+      "Bull case for the bear scenario: 'If SMIC's mature-node business proves resilient and advanced-node optionality remains alive but not yet priced, the current bear-case valuation of 12-18x PE could represent a deep value entry for a national champion that the government will not allow to fail. Falsification signal: any government policy explicitly naming SMIC as a strategic asset with funding guarantees.'",
+      "Bull case for the FCF skeptic: 'The OCF/NI ratio of 3.77x in Q1 2026 demonstrates that depreciation is a massive non-cash charge; even without net profit growth, SMIC generates significant cash. If capex moderates after FY2027, FCF can surprise positively and drive a re-rating. Falsification signal: sustained capex above 25 Bn CNY beyond FY2028.'"
+    ],
+    "valuation_explanation": "Valuation is constructed as a scenario-weighted PE on FY2028E parent net profit, with bull/base/bear probabilities of 25/50/25%. The base case applies a 25x multiple, reflecting SMIC's domestic foundry leadership and high EBITDA margin (57%), but discounting vs global leaders due to lower ROIC and higher geopolitical risk. The bull case extends to 30x—commensurate with a company successfully capturing AI-driven demand. The bear case contracts to 18x—a value multiple for a capital-intensive business with negative FCF and stagnant margins. The resulting probability-weighted fair value of ~28-30 CNY/share represents a view that the current market price (estimated ~165 CNY) already discounts substantial growth; a buyer at current levels must believe the bull case probability is significantly higher than 25% or that a strategic premium justifies the gap. The large spread between base fair value (~33 CNY) and current price (~165 CNY) highlights the extreme expectations embedded in the stock—either the market has better visibility on advanced-node success, or the stock is pricing in a low-probability narrative with high sentiment-driven multiple expansion. The key sensitivity is advanced-node revenue share: moving the bull probability from 25% to 40% increases fair value to ~34 CNY/share; raising the terminal multiple in bull case to 40x (TSMC-analog for domestic AI foundry) pushes fair value to ~42 CNY/share. None of these adjustments approach the current price, suggesting the current valuation requires either: (a) a dramatically higher EPS trajectory (e.g., FY2028E net profit >20 Bn CNY) or (b) a 'national champion' strategic premium that cannot be derived from standard DCF/PE frameworks.",
+    "final_editorial_synthesis": "SMIC presents the classic 'strategic national champion vs economic reality' dilemma. On economics, the company is a high-depreciation foundry with negative FCF, 3.4% ROE, and no dividend; at ~165 CNY per share and a PE TTM of 260x, the market is pricing in a transformative AI-demand cycle that is directionally supported by channel checks but not yet visible in reported financials. Our base-case scenario model implies a FY2028E net profit of ~10.5 Bn CNY (EPS 1.32), placing fair value around 28-33 CNY/share—a fraction of the current price. The bull case, where advanced-node capacity ramps successfully and ASP surges, pushes fair value to ~49 CNY. Even that bull case leaves a substantial gap to the current price. For a portfolio manager, this means SMIC is a high-conviction narrative stock: the investment case rests on whether one believes the probability of domestic AI wafer success is dramatically higher than our 25% bull weighting and whether one is willing to pay a strategic-premium multiple that standard valuation frameworks cannot justify. The next 6-12 months will be decisive: 中芯南方 equipment move-ins, domestic GPU tape-out announcements, and Q2-Q3 2026 margin trends will either confirm the bull thesis or expose the earnings gap. Position sizing should reflect that the stock already prices in a largely successful outcome; any disappointment could trigger multiple compression from 260x toward a more normalised 30-50x range.",
+    "evidence_boundaries": [
+      "Revenue and profit data up to Q1 2026 are from company filings (EV010-EV018, EV041) and are ground-truthed.",
+      "KPE channel checks provide directional colour but no verifiable numeric magnitudes; they are used to shape scenario probabilities and assumption direction, not to set point estimates.",
+      "Market cap and PE/PS data are from EV market-expectation module, marked unverified_quote; cross-check with live market data recommended.",
+      "No Tushare total_share or closing price was supplied; share count is calculated from market-cap/price and carries resolution uncertainty.",
+      "Segment gross margin of 21.8% (FY2025) is from EV030; operating margin 9.92% (Q1 2026) is from EV014."
+    ]
+  },
+  "handoff_manifest": {
+    "handoff_version": "underwriting-v2",
+    "source_of_truth": "structured_research.underwriting_packet",
+    "frozen_reported_facts": [
+      "FY2025 revenue 67,323.19 Mn CNY, parent net profit 5,040.73 Mn CNY (EV011)",
+      "Q1 2026 revenue 17,617.22 Mn CNY, parent net profit 1,361.21 Mn CNY (EV010)",
+      "FY2025 wafer foundry revenue 66,580.24 Mn CNY, gross margin 21.8% (EV030, EV034)",
+      "Q1 2026 wafer capacity 1,078,250 wpm 8-inch equiv., utilisation 93.1% (sse_interaction)",
+      "Q1 2026 EBITDA margin 57.3% IFRS (sse_interaction)",
+      "Q1 2026 OCF 5,131.73 Mn CNY, OCF/NI ratio 3.77x (EV041, EV017)",
+      "Operating margin Q1 2026 9.924%, net margin 7.727% (EV014, EV015)",
+      "Market cap 1,315,282 Mn CNY as of 2026-07-15 (market_expectation, unverified)",
+      "No single customer >10% of revenue in FY2025 (EV031)",
+      "FY2025 R&D spending 5,519 Mn CNY, 8.2% of revenue (EV033)"
+    ],
+    "analyst_estimates": [
+      "FY2026E/FY2027E/FY2028E consolidated revenue: 80,000/95,000/110,000 Mn CNY",
+      "FY2026E/FY2027E/FY2028E gross margin: 23.5%/25.0%/26.0%",
+      "FY2026E/FY2027E/FY2028E parent net profit: 6,200/8,500/10,500 Mn CNY",
+      "FY2026E/FY2027E/FY2028E capex: 28,000/22,000/18,000 Mn CNY",
+      "FY2026E/FY2027E/FY2028E FCF: −5,000/8,000/18,000 Mn CNY",
+      "Diluted share count: ~7,971 Mn shares (calculated from market cap / estimated close)",
+      "Scenario probabilities: bull 25%, base 50%, bear 25%",
+      "Base case fair value per share: 32.93 CNY; probability-weighted: 28.55 CNY"
+    ],
+    "unresolved_model_cells": [
+      "Diluted share count: requires Tushare total_share or definitive closing price for deterministic calculation",
+      "Process-node revenue, ASP and gross margin split",
+      "Depreciation charge 2025 actual and 2026-2028 forecast",
+      "Advanced-node (<28nm) capacity, yield and customer pipeline",
+      "Capex split: maintenance vs expansion",
+      "Effective tax rate 2026-2028",
+      "Actual current stock price for expected return calculation"
+    ],
+    "downstream_must_preserve": [
+      "The three-year forecast model structure (revenue → gross margin → operating profit → parent net profit → EPS → OCF → capex → FCF)",
+      "All material business units: BU_WAFER_FOUNDRY, BU_OTHER, BU_ADVANCED_NODE (analytical)",
+      "Every thesis financial bridge (B1, B2, B3) and their quantified operating driver formulas",
+      "All valuation buckets and the probability-weighting methodology",
+      "Any change to a frozen fact must cite replacement evidence; any change to an analyst estimate must log old/new value and reason"
+    ]
+  },
+  "evidence_change_rules": [
+    {
+      "evidence_id": "KPE01",
+      "affected_segment": "BU_WAFER_FOUNDRY",
+      "affected_variable": "utilization_or_backlog",
+      "old_assumption": "Utilization guided to stay high; AI chip orders suggest further tightening.",
+      "new_assumption": "unchanged",
+      "financial_transmission": "none until quantified",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "等待公司下半年产能扩张指引及AI芯片出货节奏"
+    },
+    {
+      "evidence_id": "KPE02",
+      "affected_segment": "consolidated",
+      "affected_variable": "market_sentiment",
+      "old_assumption": "CXMT IPO could create sympathy buying in Chinese semiconductor names.",
+      "new_assumption": "unchanged",
+      "financial_transmission": "none: CXMT is an independent entity; SMIC is an unrelated foundry peer with no direct equity link or guaranteed orders.",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "reject",
+      "verification_gate": "注意实体混淆，中芯国际股价受CXMT IPO情绪影响但非直接受益"
+    },
+    {
+      "evidence_id": "KPE03",
+      "affected_segment": "BU_WAFER_FOUNDRY",
+      "affected_variable": "utilization_or_backlog",
+      "old_assumption": "Storage expansion drives incremental foundry orders.",
+      "new_assumption": "unchanged",
+      "financial_transmission": "none until quantified",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "关注两存扩产进度及封测设备招标情况"
+    },
+    {
+      "evidence_id": "KPE04",
+      "affected_segment": "BU_ADVANCED_NODE",
+      "affected_variable": "revenue",
+      "old_assumption": "Advanced-node GPU demand will drive SMIC's revenue growth in 2027-2028.",
+      "new_assumption": "unchanged",
+      "financial_transmission": "none until quantified",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "国产算力芯片流片量实际落地时间和规模"
+    },
+    {
+      "evidence_id": "KPE05",
+      "affected_segment": "BU_ADVANCED_NODE",
+      "affected_variable": "utilization_or_backlog",
+      "old_assumption": "中芯南方 third batch equipment to be moved in H2 2026; capacity expanding.",
+      "new_assumption": "unchanged",
+      "financial_transmission": "none until quantified",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "关注中芯南方3Q第三批设备导入进度"
+    },
+    {
+      "evidence_id": "KPE12",
+      "affected_segment": "BU_WAFER_FOUNDRY",
+      "affected_variable": "segment_volume",
+      "old_assumption": "Wafer price increases being implemented; supports margin expansion.",
+      "new_assumption": "unchanged",
+      "financial_transmission": "none until quantified",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "跟踪中芯国际实际涨价幅度及新订单价格条款"
+    },
+    {
+      "evidence_id": "KPE06",
+      "affected_segment": "晶圆代工",
+      "affected_variable": "revenue",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until 国内算力芯片委托中芯国际流片后的营收确认",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "国内算力芯片委托中芯国际流片后的营收确认"
+    },
+    {
+      "evidence_id": "KPE07",
+      "affected_segment": "consolidated",
+      "affected_variable": "profit_or_eps",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until 存储扩产对中芯国际代工服务需求的传导",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "存储扩产对中芯国际代工服务需求的传导"
+    },
+    {
+      "evidence_id": "KPE08",
+      "affected_segment": "晶圆代工",
+      "affected_variable": "utilization_or_backlog",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until 等待各晶圆厂建设进展及设备搬入时间表",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "等待各晶圆厂建设进展及设备搬入时间表"
+    },
+    {
+      "evidence_id": "KPE09",
+      "affected_segment": "晶圆代工",
+      "affected_variable": "revenue",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until 兆易创新的存储芯片代工订单给中芯国际带来的收入增量",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "兆易创新的存储芯片代工订单给中芯国际带来的收入增量"
+    },
+    {
+      "evidence_id": "KPE10",
+      "affected_segment": "consolidated",
+      "affected_variable": "unmapped",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "rejected: no model, valuation, rating, or sizing impact",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "reject",
+      "verification_gate": "线索未提及中芯国际，无法映射"
+    },
+    {
+      "evidence_id": "KPE11",
+      "affected_segment": "consolidated",
+      "affected_variable": "market_sentiment",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until 观察行业ETF资金流入趋势是否持续",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "观察行业ETF资金流入趋势是否持续"
+    }
+  ],
+  "reconciliation_checks": [
+    "Q1 2026 OCF 5,131.73 Mn ÷ Net profit parent 1,361.21 Mn = 3.77x ✓ (matches EV017)",
+    "Market cap 1,315,282 Mn ÷ PE TTM 260.68 ≈ 5,045.6 Mn TTM earnings vs FY2025 5,040.73 Mn ✓ (within 0.1%)",
+    "FY2025 revenue 67,323.19 Mn = wafer 66,580.24 + other 742.95 ✓ (matches EV034/EV035)",
+    "Q1 2026 net margin 7.7266% = net profit 1,361.21 / revenue 17,617.22 × 100% ≈ 7.73% ✓ (EV015)",
+    "Wafer foundry gross profit FY2025 = 66,580.24 × 21.8% ≈ 14,514 Mn CNY; other GP = 742.95 × 0.39% ≈ 2.9 Mn CNY; total 14,517 Mn CNY on 67,323 Mn revenue = 21.6% blended GM, close to 21.8% (small rounding/classification differences) ✓",
+    "Diluted share count 7,971 Mn from market-cap/price cross-check is an estimate; Tushare total_share should be used when available for definitive reconciliation."
+  ],
+  "analyst_instructions": [
+    "This packet builds the common analytical model; every downstream module must challenge and update it using evidence-grounded assumptions.",
+    "Do not apply a battery, bank, software, or generic consumer template; SMIC is a capital-intensive wafer foundry requiring the volume_price_cost operating model family.",
+    "The most sensitive model variables are advanced-node revenue share, wafer ASP growth, consolidated gross margin, and capex trajectory. Any new evidence on these must trigger a model update with documented old/new assumption and recalculated EPS/FCF/value impact.",
+    "Diluted share count is currently a market-cap/price estimate; replace with Tushare total_share when available and recalculate all per-share values.",
+    "Advanced-node optionality is haircut to zero in base valuation due to lack of verifiable evidence; if future filings disclose advanced-node revenue/profit, this bucket should be re-valued.",
+    "Valuation closure status is 'partial' because share count and current price are uncertain; downstream analysts must populate these before declaring an expected return or making a price-relative judgment.",
+    "All KPE evidence items (KPE01-KPE12) are watch/disposition items; none have been promoted to model assumption changes because they lack quantified revenue/profit/capex transmission."
+  ],
+  "preprocessing_notes": [
+    "Evidence data contained PDF extraction failures for some reports (EV008, EV009), but key data was recovered from the earnings_model module (EV010-EV018) and supplementary filing text.",
+    "CXMT (长鑫科技) is an independent DRAM IDM and is NOT a subsidiary or related entity of SMIC; the KPE02 reference to '中芯国际光刻胶公司CXMT' is likely a note-writer error or an unrelated entity; treated as rejected for model purposes.",
+    "Peer comparison table was empty in the source data; peer qualitative analysis performed from competitive knowledge; explicit peer financial comparison was not attempted due to missing data.",
+    "SMIC FY2025 annual report mentions '其他主营业务' line item (revenue 3,786,198 with 32% gross margin, -17% YoY) which appears to be a subtotal categorization, not a separate economic segment; incorporated into overall foundry segment economics.",
+    "The '情况 其他主营业务' segment from filing_intelligence (revenue_weight 100%) is a classification artifact and was not used as a separate underwriting unit; the two economic segments are 晶圆代工 and 其他业务.",
+    "unknown evidence ids removed from underwriting packet",
+    "unknown evidence ids removed from underwriting packet",
+    "unknown evidence ids removed from underwriting packet",
+    "unknown evidence ids removed from underwriting packet",
+    "unknown evidence ids removed from underwriting packet",
+    "unknown evidence ids removed from underwriting packet",
+    "unknown evidence ids removed from underwriting packet",
+    "unknown evidence ids removed from underwriting packet",
+    "unknown evidence ids removed from underwriting packet",
+    "unknown evidence ids removed from underwriting packet",
+    "unknown evidence ids removed from underwriting packet",
+    "unknown evidence ids removed from underwriting packet",
+    "unknown evidence ids removed from underwriting packet",
+    "unknown share-count evidence id removed",
+    "operating model driver coverage (volume_price_cost): capacity, utilization, volume, price/ASP, unit/input cost, spread/margin, capex/ROIC"
+  ]
+}

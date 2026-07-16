@@ -51,6 +51,7 @@ from tradingagents.agents.utils.agent_utils import (
     get_price_earnings_decomposition_instruction,
     get_question_led_debate_instruction,
     get_research_gap_instruction,
+    get_semiconductor_instruction,
     get_supply_demand_fallback_instruction,
     get_supply_chain_selection_instruction,
     get_shareholder_structure_instruction,
@@ -635,6 +636,7 @@ def create_portfolio_manager(llm):
         gated_sector_instructions = "".join(
             instruction for _, _, instruction in active_playbooks
         )
+        gated_sector_instructions += get_semiconductor_instruction()
         structured_research_context = compact_structured_research_for_prompt(
             state.get("structured_research_context", {}),
             max_chars=32000,

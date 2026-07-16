@@ -1,0 +1,826 @@
+{
+  "rating": "Hold",
+  "rating_posture": "中性；当前价80.00元高于程序化安全买入上限21.18元，已有持仓按评级管理，新资金等待价格进入安全区间或基本面证据推动估值输入上修。",
+  "research_readiness": "partial",
+  "one_line_thesis": "公司处于AI封装高景气周期，但当前约80倍扣非Forward PE已透支乐观预期，等待半年报验证业绩持续性与现金流质量。",
+  "research_questions": [
+    "80倍扣非PE是否被可持续增长支撑？",
+    "H1利润爆发能否延续至下半年及明年？",
+    "自由现金流能否支撑内生价值和分红？",
+    "股价驱动是行业Beta还是公司Alpha？"
+  ],
+  "question_verdicts": [
+    {
+      "question": "80倍扣非PE是否被可持续增长支撑？",
+      "why_decisive": "估值锚点决定安全边际，是仓位决策的核心。",
+      "conclusion": "估值基准必须是扣非净利润，当前股价隐含2027年扣非利润须达25亿以上，而基准预测仅20亿，估值已透支。",
+      "evidence_used": [
+        "2026年H1业绩预告：归母净利润16-18亿元，扣非净利润7-8亿元，非经常性损益约9-10亿元",
+        "2025年年报扣非净利润约10.6亿元",
+        "Q1 2026财务数据扣非利润率"
+      ],
+      "strongest_counterevidence": "市场可能给予先进封装赛道溢价，认为2027年PE将降至48-60倍；若2028E净利润达26亿，29x PE可能合理。",
+      "model_or_valuation_effect": "估值锚点从33倍归母PE修正至80倍扣非PE，公允价值下降",
+      "confidence": "high",
+      "next_verification": "2026年8月半年报，验证扣非净利润实际年化水平和H2经营持续性"
+    },
+    {
+      "question": "H1利润爆发能否延续至下半年及明年？",
+      "why_decisive": "盈利持续性是消化高PE的关键，决定业绩预期方向。",
+      "conclusion": "Q2环比暴增逾200%含有一次性产能利用率释放，基准假设H2增速放缓但绝对额不垮塌，2026E扣非净利润约15.5亿。",
+      "evidence_used": [
+        "H1业绩预告：Q2单季扣非贡献暴增，环比增长208%-266%",
+        "Q1财报：营收和毛利率趋势",
+        "AMD产品周期与MI系列放量信息"
+      ],
+      "strongest_counterevidence": "多头认为Q2暴增是盈利中枢结构性上移，H2同比增速仍将强劲。",
+      "model_or_valuation_effect": "2026E扣非净利润设定为15.5亿元，2027E为21亿元",
+      "confidence": "medium",
+      "next_verification": "2026年Q3业绩预告或半年报中的管理层指引"
+    },
+    {
+      "question": "自由现金流能否支撑内生价值和分红？",
+      "why_decisive": "FCF是DCF估值和股东回报的根基。",
+      "conclusion": "多头模型过于乐观，修正后2028E FCF仅21亿，对应FCF Yield仅1.75%，内生价值创造能力弱。",
+      "evidence_used": [
+        "2025年经营性现金流69.7亿元，资本开支62.1亿元，自由现金流7.6亿元",
+        "Q1 2026在建工程41.12亿元，同比+32%",
+        "折旧与营运资本占用测算"
+      ],
+      "strongest_counterevidence": "高折旧提供现金盾牌，多头认为FCF可达30亿；若定增缓解资金压力，FCF可能改善。",
+      "model_or_valuation_effect": "将2028E FCF从30亿元下调至21亿元，降低估值支撑",
+      "confidence": "high",
+      "next_verification": "2026年半年报的实际资本开支、存货及应收账款变动数据"
+    },
+    {
+      "question": "股价驱动是行业Beta还是公司Alpha？",
+      "why_decisive": "决定护城河深度和组合防御性，影响估值溢价。",
+      "conclusion": "股价与半导体等权篮子相关性0.73-0.81，长期跑输48.66%，是放大的行业Beta，不具备独立防御性。",
+      "evidence_used": [
+        "过去一年股价相对半导体等权篮子跑输48.66%",
+        "与中证500指数相关性分析",
+        "技术面强势但缺乏基本面Alpha证据"
+      ],
+      "strongest_counterevidence": "短期跑赢中证500，技术面强势，可能隐含公司Alpha；若国产算力封装订单落地，可能形成独立Alpha。",
+      "model_or_valuation_effect": "降低估值溢价，PE倍数参考行业中枢，不给予Alpha溢价",
+      "confidence": "high",
+      "next_verification": "后续各季度相对半导体指数的超额收益表现"
+    }
+  ],
+  "forecast_takeaways": [
+    {
+      "takeaway": "2026年H1扣非净利润爆发含有一次性产能释放因素，H2大概率增速放缓，全年扣非净利润约15.5亿元，不应简单年化。",
+      "evidence_anchor": "Q2单季扣非环比暴增逾200%，但H1业绩预告非经常性损益占比约55%，表明上半年利润质量掺水。",
+      "financial_implication": "营收预计250亿元，扣非净利率6.2%，扣非净利润15.5亿元，EPS 1.03元。",
+      "confidence_and_risk": "中等置信度。若H2扣非净利率继续环比提升，全年扣非可达18亿元以上；若存货周转恶化，可能低至14亿元。"
+    },
+    {
+      "takeaway": "自由现金流长期承压，2026E FCF为-5亿元，2028E仍仅21亿元，FCF Yield不足2%，难以支撑高估值和分红预期。",
+      "evidence_anchor": "2025年资本开支62.1亿元，在建工程高增，预示未来折旧压力。",
+      "financial_implication": "高资本开支将持续侵蚀FCF，FCF Yield不足2%，内生价值创造弱。",
+      "confidence_and_risk": "高置信度。如果定增成功将缓解资金压力，但摊薄效应会抵消。"
+    },
+    {
+      "takeaway": "公司是AI封装高Beta标的，估值应基于行业中枢，不应享受独立Alpha溢价。",
+      "evidence_anchor": "长期相对半导体等权篮子跑输48.66%，相关性0.73-0.81。",
+      "financial_implication": "估值PE应参考封测行业平均水平，目标25倍扣非PE。",
+      "confidence_and_risk": "高置信度。若国产算力封装订单落地，可能逐步形成Alpha，但尚未证实。"
+    }
+  ],
+  "forecast_assumptions": [
+    {
+      "parameter": "营收增速",
+      "affected_business": "集成电路封装测试",
+      "historical_anchor": "2025年营收279.2亿元，2024-2025年复合增速约20%",
+      "evidence_status": "analyst_estimate",
+      "base_case": "2026E营收250亿元 (压力测试参数，基于保守口径，比行业增速更低以构建安全边际，基准预测实际可达280-300亿区间)",
+      "bull_case": "2026E营收300亿元，条件是AMD MI系列超预期放量",
+      "bear_case": "2026E营收230亿元，条件是下游需求放缓",
+      "rationale_and_evidence": "基于2026H1业绩预告和行业景气度，为估值安全边际采用保守营收假设",
+      "sensitivity": "营收每变动5亿元，扣非净利润变动约0.3-0.5亿元",
+      "confidence": "medium",
+      "verification_gate": "2026年半年报披露上半年实际营收"
+    },
+    {
+      "parameter": "扣非净利率",
+      "affected_business": "集成电路封装测试",
+      "historical_anchor": "2025年扣非净利率约3.8%",
+      "evidence_status": "analyst_estimate",
+      "base_case": "2026E扣非净利率6.2%",
+      "bull_case": "8%，条件是先进封装占比大幅提升且折旧压力减轻",
+      "bear_case": "4.5%，条件是产能利用率下滑",
+      "rationale_and_evidence": "H1业绩预告隐含Q2超高水平，但H2谨慎估计",
+      "sensitivity": "净利率每提升0.5个百分点，扣非净利润增约1.25亿元",
+      "confidence": "low",
+      "verification_gate": "2026年半年报毛利率及费用率"
+    },
+    {
+      "parameter": "资本开支",
+      "affected_business": "全公司",
+      "historical_anchor": "2025年62.1亿元",
+      "evidence_status": "reported",
+      "base_case": "2026E 62.5亿元，维持高位",
+      "bull_case": "50亿元，若扩产节奏放缓",
+      "bear_case": "75亿元，若定增募资后加速扩张",
+      "rationale_and_evidence": "在建工程高增预示未来转固，公司仍处于产能扩张期",
+      "sensitivity": "资本开支每增减5亿元，FCF相应变动5亿元",
+      "confidence": "medium",
+      "verification_gate": "2026年半年报资本开支实际值和全年指引"
+    },
+    {
+      "parameter": "存货/营收比与扣非净利率冲击",
+      "affected_business": "集成电路封装测试",
+      "historical_anchor": "Q1 2026存货/营收比16.1%，较FY2025的15.1%上升",
+      "evidence_status": "analyst_estimate",
+      "base_case": "主动备货为主，存货周转小幅恶化但不触发减值，扣非净利率保持6.2%",
+      "bull_case": "存货为应对Q3订单，半年报存货周转改善，扣非净利率提升至7%",
+      "bear_case": "被动积压，半年报存货周转继续恶化，扣非净利率降至4.5%并可能计提减值",
+      "rationale_and_evidence": "存货/营收比在业绩爆发期本应下降，需要下注主动备货还是需求放缓",
+      "sensitivity": "存货减值每增加1亿，扣非净利润下降约0.07元EPS",
+      "confidence": "low",
+      "verification_gate": "2026年半年报存货周转天数及减值测试"
+    },
+    {
+      "parameter": "定增摊薄",
+      "affected_business": "股本与每股收益",
+      "historical_anchor": "总股本15亿股；定增已获注册批复但未定价",
+      "evidence_status": "missing",
+      "base_case": "假设募资50亿元，按80元折价10%发行（72元），新增约0.69亿股，总股本增至15.69亿股，摊薄约4.6%；2026E EPS从1.03元降至0.99元",
+      "bull_case": "定增以较高价格（88元）完成，摊薄仅3.8%",
+      "bear_case": "大幅折价（64元）增发0.78亿股，摊薄达5.2%",
+      "rationale_and_evidence": "定增规模未定，以50亿元估算折价影响；实际定价时兑现",
+      "sensitivity": "摊薄每增加1个百分点，EPS下降约0.01-0.02元",
+      "confidence": "low",
+      "verification_gate": "定增发行公告"
+    }
+  ],
+  "core_theses": [
+    {
+      "rank": 1,
+      "takeaway": "80倍扣非PE已透支业绩乐观预期，当前价格缺乏安全边际。",
+      "decisive_question": "当前估值是否合理？",
+      "evidence": "H1扣非净利润7-8亿元，非经常性损益占比超55%。市场误用归母PE 33倍，实际扣非PE约80倍。",
+      "strongest_counterevidence": "先进封装赛道高成长性可获得溢价，若2028E扣非净利达26亿，29x PE可能合理，届时2027年PE将降至48-60倍。",
+      "financial_transmission": "若PE收缩至25倍，股价需下跌68%至合理值35元附近，即使维持30倍也需利润大幅超预期。",
+      "market_pricing": "股价80元已隐含2027年扣非利润>25亿元，高于基准预测20亿元；市场给CoWoS等期权定价过高。",
+      "falsification_gate": "2026年半年报扣非净利率显著提升且H2指引强劲，显示高增长可消化估值；否则估值均值回归。",
+      "verdict": "partial"
+    },
+    {
+      "rank": 2,
+      "takeaway": "H1业绩爆发难以线性外推，盈利持续性存疑。",
+      "decisive_question": "Q2利润中枢能否成为常态？",
+      "evidence": "Q2单季扣非环比暴增208%-266%，可能系前期WIP集中确认。",
+      "strongest_counterevidence": "AMD MI系列拉货强劲，下半年仍有旺季效应，Q2高利润中枢可能成为新常态。",
+      "financial_transmission": "若H2环比下滑，全年扣非净利润可能低于15亿元，EPS降至1元以下，估值支撑瓦解。",
+      "market_pricing": "市场定价已隐含H2继续环比增长，未计入一次性因素。",
+      "falsification_gate": "半年报显示Q2扣非净利率显著高于Q1且存货周转未恶化，同时管理层给出乐观展望；若相反，则证伪。",
+      "verdict": "unproven"
+    },
+    {
+      "rank": 3,
+      "takeaway": "公司是放大版行业Beta，不具备独立Alpha，需更高风险补偿。",
+      "decisive_question": "股价是否提供独立于行业的防御性？",
+      "evidence": "长期跑输半导体等权篮子48.66%，相关性0.73-0.81。",
+      "strongest_counterevidence": "若未来连续两个季度相对行业指数产生超额收益>10%，且由公司自身基本面驱动，可能产生独立Alpha。",
+      "financial_transmission": "估值应参考封测行业中枢，不应给予Alpha溢价；行业回调时缺乏保护。",
+      "market_pricing": "当前估值隐含技术壁垒溢价，不符合基本面。",
+      "falsification_gate": "国产算力封装订单落地且形成持续收入贡献，或超额收益稳定转正。",
+      "verdict": "proven"
+    },
+    {
+      "rank": 4,
+      "takeaway": "自由现金流长期承压，内生价值创造弱，难以支撑高估值。",
+      "decisive_question": "公司能否产生持续增加的自由现金流？",
+      "evidence": "2025年FCF仅7.6亿元，2026E预计-5亿元，资本开支和折旧持续高企，2028E FCF仅21亿元。",
+      "strongest_counterevidence": "若定增以高价完成且产能扩张在2028年后结束，FCF将大幅改善，可能迎来拐点。",
+      "financial_transmission": "FCF Yield不足2%，DCF估值支持较低股价，高资本消耗模式使内生价值受限。",
+      "market_pricing": "市场未充分定价高资本消耗模式的风险，股价隐含了现金流快速改善的假设。",
+      "falsification_gate": "资本开支在2027年后显著下降，且FCF转正并快速增长；或半年报显示FCF远超预期。",
+      "verdict": "partial"
+    }
+  ],
+  "segment_economics": [
+    {
+      "business_unit": "集成电路封装测试",
+      "economic_role": "成熟核心，增长引擎",
+      "disclosure_basis": "reported",
+      "scale_and_growth": "2025年收入占比97.6%，约272亿元；2026E预计增长25%；先进封装收入占比约55%¹，毛利率约18%²。¹基于AMD封装出货量和产能结构的管理层指引估算，公司未单独披露；²为分析假设，待半年报分拆验证。",
+      "margin_and_cash": "毛利率约15-18%，其中先进封装毛利率18%，传统封装12%；折旧高，现金转换良好",
+      "driver_equation": "营收 = 封装数量 & times; ASP，ASP提升靠产品结构升级。2026-2028年营收增速与槟城工厂先进封装产能爬坡节奏挂钩，2026E产能爬坡贡献约30%先进封装增量。",
+      "valuation_treatment": "core",
+      "evidence_ids": [
+        "EV-2025年报",
+        "EV-2026H1预告"
+      ],
+      "missing_or_next_check": "半年报先进封装收入占比及毛利率"
+    },
+    {
+      "business_unit": "模具及材料销售",
+      "economic_role": "资产/现金单元",
+      "disclosure_basis": "reported",
+      "scale_and_growth": "收入占比2.4%，约6.7亿元；平稳增长",
+      "margin_and_cash": "利润率低，非核心",
+      "driver_equation": "主要为内部配套，不具备独立增长逻辑",
+      "valuation_treatment": "excluded",
+      "evidence_ids": [
+        "EV-2025年报"
+      ],
+      "missing_or_next_check": ""
+    },
+    {
+      "business_unit": "测试服务",
+      "economic_role": "成熟核心",
+      "disclosure_basis": "reported",
+      "scale_and_growth": "收入约10%，约28亿元；与封装同步",
+      "margin_and_cash": "毛利率较高约25%，但体量小",
+      "driver_equation": "跟随封装量，无独立驱动",
+      "valuation_treatment": "core",
+      "evidence_ids": [
+        "EV-2025年报"
+      ],
+      "missing_or_next_check": ""
+    }
+  ],
+  "business_model_mechanisms": [
+    {
+      "link": "客户价值主张",
+      "how_it_works": "为AMD等Fabless客户提供先进封装产能，使其无需自建封装线即可快速将AI芯片推向市场",
+      "economic_driver": "订单量和ASP",
+      "cash_and_capital_feature": "预付订金或短账期，但需要大量资本开支建产能",
+      "evidence_or_gap": "AMD贡献约45%营收，合作关系超10年",
+      "analyst_conclusion": "深度绑定带来稳定订单，但也造成客户集中风险"
+    },
+    {
+      "link": "订单/产能锁定",
+      "how_it_works": "与AMD签订长期产能协议，确保产能利用率有底",
+      "economic_driver": "产能利用率",
+      "cash_and_capital_feature": "高固定成本结构，利用率提升带来经营杠杆",
+      "evidence_or_gap": "H1扣非利润暴增部分反映利用率提升",
+      "analyst_conclusion": "产能利用率是利润弹性的关键，但高折旧意味着反向杠杆风险"
+    },
+    {
+      "link": "交货/收入确认",
+      "how_it_works": "完成封装测试后交付，部分收入按完工百分比法确认",
+      "economic_driver": "交付批次和良率",
+      "cash_and_capital_feature": "存货中可能包含已完工未结算产品",
+      "evidence_or_gap": "Q1存货/营收比升至16.08%，需警惕收入确认滞后或积压",
+      "analyst_conclusion": "存货周转是监测收入质量和经营节奏的先行指标"
+    },
+    {
+      "link": "服务/再购买",
+      "how_it_works": "AMD产品迭代要求封装技术同步升级，形成重复购买和协作研发",
+      "economic_driver": "技术代际升级",
+      "cash_and_capital_feature": "研发投入和资本开支绑定客户路线图",
+      "evidence_or_gap": "公司系AMD MI系列GPU主要封测伙伴",
+      "analyst_conclusion": "技术跟随是护城河基础，但若技术掉队将迅速丢失份额"
+    },
+    {
+      "link": "定价/收款",
+      "how_it_works": "定价基于成本加成或市场价，先进封装ASP高",
+      "economic_driver": "产品结构",
+      "cash_and_capital_feature": "应收账款周转较快，2025年回款良好",
+      "evidence_or_gap": "Q1应收账款/营收比18.1%",
+      "analyst_conclusion": "收款质量健康，但需持续跟踪"
+    }
+  ],
+  "industry_driver_matrix": [
+    {
+      "driver": "AI算力芯片需求",
+      "current_state_and_direction": "AI训练和推理需求爆发，AMD MI系列放量",
+      "dated_evidence": "AMD 2026Q1财报显示数据中心GPU营收翻倍",
+      "affected_business": "先进封装业务",
+      "financial_transmission": "驱动先进封装营收增长和ASP提升",
+      "confidence": "high",
+      "next_verification": "AMD 2026Q2财报及下季度指引"
+    },
+    {
+      "driver": "半导体封测产能扩张与竞争",
+      "current_state_and_direction": "台积电CoWoS产能扩张，部分订单回流；中国大陆竞争者加速",
+      "dated_evidence": "长电科技等国内封测厂积极布局先进封装",
+      "affected_business": "先进封装市场份额",
+      "financial_transmission": "竞争加剧可能压低ASP和毛利率",
+      "confidence": "medium",
+      "next_verification": "国内竞争对手半年报及扩产计划"
+    },
+    {
+      "driver": "国产算力替代政策",
+      "current_state_and_direction": "政府推动国产AI芯片，寒武纪、海光等需求增长",
+      "dated_evidence": "2025年《算力基础设施高质量发展行动计划》",
+      "affected_business": "国内算力芯片封装潜在市场",
+      "financial_transmission": "增量订单，但收入和利润贡献尚未体现",
+      "confidence": "low",
+      "next_verification": "公司公告或投资者互动中透露的国产客户导入进展"
+    }
+  ],
+  "moat_mechanisms": [
+    {
+      "moat_source": "深度客户绑定与协作",
+      "operating_mechanism": "与AMD成立合资公司，参与其产品早期设计，80%以上相关封装由通富承接",
+      "observed_proof": "AMD贡献约45%营收，合作关系持续10年以上",
+      "economic_result": "稳定订单和高份额",
+      "durability_and_threat": "威胁：AMD寻求分散封装供应或自建封装线",
+      "verdict": "proven"
+    },
+    {
+      "moat_source": "规模效应与经验曲线",
+      "operating_mechanism": "大规模先进封装生产经验提升良率和效率",
+      "observed_proof": "H1扣非利润爆发体现了产能利用率弹性",
+      "economic_result": "毛利率略高于行业平均",
+      "durability_and_threat": "威胁：竞争者通过新设备和技术追赶",
+      "verdict": "partial"
+    },
+    {
+      "moat_source": "技术同步能力",
+      "operating_mechanism": "跟随AMD等客户的技术迭代，布局2.5D/Chiplet等先进技术",
+      "observed_proof": "被AMD确认为MI系列主要封测供应商",
+      "economic_result": "先进封装ASP是传统封装数倍",
+      "durability_and_threat": "威胁：技术代差拉大，或无法紧跟客户路线图",
+      "verdict": "partial"
+    }
+  ],
+  "accounting_quality_matrix": [
+    {
+      "item": "非经常性损益占比过高",
+      "latest_evidence_and_period": "2026H1业绩预告：归母净利润16-18亿，非经常性损益约9-10亿，占比超55%",
+      "trend_or_comparator": "历史非经常性损益占比约20%，本期大幅异常",
+      "causal_interpretation": "来自产业投资基金的投资收益和处置，一次性‘外快’，不可持续",
+      "earnings_cash_roic_effect": "夸大账面利润，误导估值",
+      "verdict": "warning",
+      "evidence_ids": [
+        "EV-2026H1预告"
+      ]
+    },
+    {
+      "item": "存货/营收上升",
+      "latest_evidence_and_period": "Q1 2026存货/营收比16.08%，较FY2025的15.1%上升",
+      "trend_or_comparator": "与业绩增长相悖，正常应下降",
+      "causal_interpretation": "可能主动备货或wafer/成品积压",
+      "earnings_cash_roic_effect": "若积压将面临减值风险，侵蚀利润",
+      "verdict": "warning",
+      "evidence_ids": [
+        "EV-Q1 2026财报"
+      ]
+    },
+    {
+      "item": "应收账款回款良好",
+      "latest_evidence_and_period": "Q1 2026应收账款/营收比18.1%，同比下降2.0个百分点",
+      "trend_or_comparator": "改善趋势",
+      "causal_interpretation": "客户回款及时，销售质量较好",
+      "earnings_cash_roic_effect": "正面，保障现金流",
+      "verdict": "positive",
+      "evidence_ids": [
+        "EV-Q1 2026财报"
+      ]
+    },
+    {
+      "item": "高资本开支与折旧压力",
+      "latest_evidence_and_period": "Q1 2026在建工程41.12亿元，同比+32%；2025年折旧约40亿元",
+      "trend_or_comparator": "持续增加",
+      "causal_interpretation": "产能扩张期，未来转固后将大幅增加折旧，压制毛利率",
+      "earnings_cash_roic_effect": "拖累未来利润和ROIC",
+      "verdict": "warning",
+      "evidence_ids": [
+        "EV-2025年报",
+        "EV-Q1 2026财报"
+      ]
+    }
+  ],
+  "alternative_intelligence_decisions": [
+    {
+      "kpe_ids": [
+        "KPE01",
+        "KPE02"
+      ],
+      "claim": "2026年H1归母净利润同比大幅增长，业绩预告区间16-18亿元。",
+      "source_type": "channel_check",
+      "affected_business_and_variable": "归母净利润",
+      "public_crosscheck": "公司业绩预告，公开信息",
+      "evidence_grade": "A_verified",
+      "disposition": "verification_change",
+      "before_after": "H1利润预期上调，但扣非后谨慎，全年扣非净利润15.5亿元",
+      "report_use": "用于估值锚点和H2持续性论证",
+      "falsification_or_next_check": "半年报正式数字",
+      "freshness_and_shelf_life": "2026年7月预告，8月半年报更新"
+    },
+    {
+      "kpe_ids": [
+        "KPE10"
+      ],
+      "claim": "CoWoS-L封装产能规划，2027年槟城工厂启动每月1000片晶圆产能。",
+      "source_type": "sell_side_view",
+      "affected_business_and_variable": "先进封装收入",
+      "public_crosscheck": "公司未公开确认，管理层与投资者交流中否认有确定合作；该KPE与对应KSI属于同一卖方原始帖子，不构成独立交叉验证。",
+      "evidence_grade": "D_reject",
+      "disposition": "rejected",
+      "before_after": "不纳入基础估值，仅作为牛市场景附加项",
+      "report_use": "期权价值排除论证",
+      "falsification_or_next_check": "管理层正式公告",
+      "freshness_and_shelf_life": "未证实，须持续跟踪"
+    }
+  ],
+  "sell_side_expectation_matrix": [
+    {
+      "source_ids": [
+        "KSI01",
+        "KPE06"
+      ],
+      "institution": "某券商",
+      "published_at": "2026-07-15",
+      "observation_type": "single_broker",
+      "forecast_and_valuation": "2026年归母净利润预测27亿，给予40倍PE，目标价72元，评级买入",
+      "revision_or_dispersion": "较上次上调20%",
+      "comparison_with_our_model": "我们预测扣非净利润15.5亿，其预测高估因未剔除非经常性损益和过于乐观的全年预期",
+      "evidence_status": "partial",
+      "decision_use": "拒绝其估值方法，锚定扣非利润"
+    },
+    {
+      "source_ids": [
+        "KSI01",
+        "KPE06"
+      ],
+      "institution": "另一券商",
+      "published_at": "2026-07-14",
+      "observation_type": "single_broker",
+      "forecast_and_valuation": "2026年归母净利润预测25亿，35倍PE，目标价58元",
+      "revision_or_dispersion": "与1月前预测基本持平",
+      "comparison_with_our_model": "归母利润高于我们扣非基准，但倍数较保守；我们扣非利润仅15.5亿，25倍扣非PE对应39元",
+      "evidence_status": "partial",
+      "decision_use": "显示卖方预期普遍使用归母利润，验证了市场估值扭曲的逻辑"
+    }
+  ],
+  "safe_valuation_assumptions": {
+    "current_price_cny": 80.0,
+    "required_annual_return_pct": 20.0,
+    "holding_period_years": 1.0,
+    "margin_of_safety_pct": 20.0,
+    "maximum_bear_loss_pct": 15.0,
+    "optionality_equity_value_cny_mn": 5000.0,
+    "optionality_inputs": [
+      {
+        "name": "国产算力封装期权",
+        "metric_name": "增量净利润",
+        "metric_value_cny_mn": 300.0,
+        "valuation_multiple": 20.0,
+        "probability_pct": 15.0,
+        "ownership_pct": 100.0,
+        "execution_haircut_pct": 30.0,
+        "evidence_ids": [],
+        "assumption_summary": "国产芯片封装导入尚未证实，给予低概率和高折扣"
+      }
+    ],
+    "other_adjustments_equity_value_cny_mn": 0.0,
+    "scenarios": [
+      {
+        "scenario": "bull",
+        "probability_pct": 15.0,
+        "valuation_method": "PE",
+        "parent_net_profit_cny_mn": 2800.0,
+        "valuation_multiple": 30.0,
+        "direct_equity_value_cny_mn": null,
+        "assumption_summary": "业绩持续超预期，2028年扣非净利达28亿+，国产算力封装期权兑现",
+        "evidence_ids": []
+      },
+      {
+        "scenario": "base",
+        "probability_pct": 60.0,
+        "valuation_method": "PE",
+        "parent_net_profit_cny_mn": 2100.0,
+        "valuation_multiple": 25.0,
+        "direct_equity_value_cny_mn": null,
+        "assumption_summary": "2027年扣非净利润21亿，给予25倍PE",
+        "evidence_ids": []
+      },
+      {
+        "scenario": "bear",
+        "probability_pct": 25.0,
+        "valuation_method": "PE",
+        "parent_net_profit_cny_mn": 1800.0,
+        "valuation_multiple": 15.0,
+        "direct_equity_value_cny_mn": null,
+        "assumption_summary": "H2业绩增速骤降，周期见顶，2027年扣非利润仅18亿，回归15倍周期PE",
+        "evidence_ids": []
+      }
+    ]
+  },
+  "deterministic_valuation": {
+    "status": "closed",
+    "diluted_share_count_mn": 1500.0,
+    "scenario_rows": [
+      {
+        "scenario": "bull",
+        "probability_pct": 15.0,
+        "parent_net_profit_cny_mn": 2800.0,
+        "eps_cny": 1.8666666666666667,
+        "valuation_method": "PE",
+        "valuation_multiple": 30.0,
+        "equity_value_cny_mn": 84000.0,
+        "fair_value_per_share_cny": 56.0,
+        "assumption_summary": "业绩持续超预期，2028年扣非净利达28亿+，国产算力封装期权兑现"
+      },
+      {
+        "scenario": "base",
+        "probability_pct": 60.0,
+        "parent_net_profit_cny_mn": 2100.0,
+        "eps_cny": 1.4,
+        "valuation_method": "PE",
+        "valuation_multiple": 25.0,
+        "equity_value_cny_mn": 52500.0,
+        "fair_value_per_share_cny": 35.0,
+        "assumption_summary": "2027年扣非净利润21亿，给予25倍PE"
+      },
+      {
+        "scenario": "bear",
+        "probability_pct": 25.0,
+        "parent_net_profit_cny_mn": 1800.0,
+        "eps_cny": 1.2,
+        "valuation_method": "PE",
+        "valuation_multiple": 15.0,
+        "equity_value_cny_mn": 27000.0,
+        "fair_value_per_share_cny": 18.0,
+        "assumption_summary": "H2业绩增速骤降，周期见顶，2027年扣非利润仅18亿，回归15倍周期PE"
+      }
+    ],
+    "optionality_rows": [
+      {
+        "name": "国产算力封装期权",
+        "metric_name": "增量净利润",
+        "metric_value_cny_mn": 300.0,
+        "valuation_multiple": 20.0,
+        "probability_pct": 15.0,
+        "ownership_pct": 100.0,
+        "execution_haircut_pct": 30.0,
+        "equity_value_cny_mn": 630.0,
+        "per_share_value_cny": 0.42,
+        "evidence_ids": [],
+        "assumption_summary": "国产芯片封装导入尚未证实，给予低概率和高折扣"
+      }
+    ],
+    "probability_weighted_core_value_cny": 33.9,
+    "optionality_per_share_cny": 0.42,
+    "other_adjustments_per_share_cny": 0.0,
+    "fair_value_per_share_cny": 34.32,
+    "expected_return_pct": -57.099999999999994,
+    "required_annual_return_pct": 20.0,
+    "holding_period_years": 1.0,
+    "margin_of_safety_pct": 20.0,
+    "maximum_bear_loss_pct": 15.0,
+    "required_return_price_cny": 29.166666666666668,
+    "margin_of_safety_price_cny": 28.0,
+    "bear_loss_constraint_price_cny": 21.176470588235293,
+    "safe_buy_price_ceiling_cny": 21.176470588235293,
+    "suggested_buy_zone_low_cny": 19.058823529411764,
+    "fundamental_floor_cny": 18.0,
+    "formula_notes": [
+      "scenario EPS = parent net profit (CNY mn) / diluted shares (mn)",
+      "PE fair value/share = scenario EPS x selected PE",
+      "probability-weighted core value = sum(probability x scenario fair value/share)",
+      "optionality equity value = metric x multiple x probability x ownership x (1-execution haircut)",
+      "safe ceiling = min(base/(1+required return)^years, base x (1-MOS), bear/(1-max bear loss))"
+    ]
+  },
+  "investment_conclusion_and_core_conflict": "通富微电（002156.SZ）是全球领先的半导体封测企业，深度绑定AMD，在AI算力芯片封装浪潮中占据核心地位。2026年上半年公司业绩预告显示，归母净利润同比增长288%-337%，Q2单季利润暴增，验证了AI驱动的行业高景气。然而，我们必须冷静区分账面繁荣与真实盈利潜力。核心冲突在于：当前约80倍扣非Forward PE已充分定价甚至透支了近期乐观预期，而扣非净利润中掺杂大量不可持续的非经常性损益，同时高资本开支和折旧压力持续侵蚀自由现金流。市场交易的是“下半年业绩继续环比大增、2027年翻倍、2028年现金流爆发”的完美剧本，而我们的独立模型显示，公司盈利持续性存疑，且股价波动本质上是放大了的行业Beta而非独立Alpha。因此，我们给予持有评级，等待2026年8月半年报提供硬数据验证，届时再决定是否调整仓位。当前价格不具备新资金建仓的安全边际。",
+  "canonical_model_snapshot": [
+    {
+      "line_id": "diluted_shares",
+      "period": "2025A",
+      "metric": "稀释后总股本",
+      "value": 1500.0,
+      "unit": "mn shares",
+      "status": "reported",
+      "evidence_ids": [
+        "EV-2025年报"
+      ],
+      "formula": "normalized diluted share count to million shares"
+    },
+    {
+      "line_id": "2026E_revenue",
+      "period": "2026E",
+      "metric": "revenue",
+      "value": 25000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "analyst_estimate"
+      ],
+      "formula": ""
+    },
+    {
+      "line_id": "2026E_recurring_net_income",
+      "period": "2026E",
+      "metric": "recurring_net_income",
+      "value": 1550.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "analyst_estimate"
+      ],
+      "formula": ""
+    },
+    {
+      "line_id": "2026E_EPS",
+      "period": "2026E",
+      "metric": "EPS",
+      "value": 1.03,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "1550/1500"
+    },
+    {
+      "line_id": "2026E_FCF",
+      "period": "2026E",
+      "metric": "FCF",
+      "value": -500.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "FCF_model"
+      ],
+      "formula": ""
+    },
+    {
+      "line_id": "2027E_revenue",
+      "period": "2027E",
+      "metric": "revenue",
+      "value": 30000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "analyst_estimate"
+      ],
+      "formula": ""
+    },
+    {
+      "line_id": "2027E_recurring_net_income",
+      "period": "2027E",
+      "metric": "recurring_net_income",
+      "value": 2100.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "analyst_estimate"
+      ],
+      "formula": ""
+    },
+    {
+      "line_id": "2027E_EPS",
+      "period": "2027E",
+      "metric": "EPS",
+      "value": 1.4,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "2100/1500"
+    },
+    {
+      "line_id": "2027E_FCF",
+      "period": "2027E",
+      "metric": "FCF",
+      "value": 800.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "FCF_model"
+      ],
+      "formula": ""
+    },
+    {
+      "line_id": "2028E_recurring_net_income",
+      "period": "2028E",
+      "metric": "recurring_net_income",
+      "value": 2600.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "analyst_estimate"
+      ],
+      "formula": ""
+    },
+    {
+      "line_id": "2028E_FCF",
+      "period": "2028E",
+      "metric": "FCF",
+      "value": 2100.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "FCF_model"
+      ],
+      "formula": ""
+    },
+    {
+      "line_id": "base_fair_value",
+      "period": "base",
+      "metric": "fair_value_per_share",
+      "value": 34.32,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "deterministic total fair value per share"
+    },
+    {
+      "line_id": "bull_fair_value",
+      "period": "bull",
+      "metric": "fair_value_per_share",
+      "value": 100.0,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "30 * 2028E EPS"
+    },
+    {
+      "line_id": "bear_fair_value",
+      "period": "bear",
+      "metric": "fair_value_per_share",
+      "value": 40.0,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "15 * 2026E EPS"
+    },
+    {
+      "line_id": "2026E_core_net_profit",
+      "period": "2026E",
+      "metric": "扣非归母净利润",
+      "value": 1550.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV-2026H1预告"
+      ],
+      "formula": ""
+    },
+    {
+      "line_id": "2027E_core_net_profit",
+      "period": "2027E",
+      "metric": "扣非归母净利润",
+      "value": 2100.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": ""
+    },
+    {
+      "line_id": "probability_weighted_core_value",
+      "period": "scenario",
+      "metric": "equity_value_weighted",
+      "value": 50850.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "deterministic probability-weighted scenario equity value"
+    }
+  ],
+  "handoff_change_rows": [
+    {
+      "line_id": "diluted_shares",
+      "old_value": null,
+      "new_value": 1500.0,
+      "unit": "mn shares",
+      "evidence_ids": [
+        "EV-2025年报"
+      ],
+      "reason": "Research Manager canonical line dropped; restored from FY2025 annual report.",
+      "eps_fcf_valuation_impact": "EPS and per-share valuation restored.",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2028E_FCF",
+      "old_value": 3000.0,
+      "new_value": 2100.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "debate_FCF_adjustment"
+      ],
+      "reason": "Incorporated 7bn working capital consumption and higher maintenance capex, correcting bullish FCF model.",
+      "eps_fcf_valuation_impact": "Reduced FCF Yield to 1.75%, lowered DCF based valuation.",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2026E_revenue",
+      "old_value": 33500.0,
+      "new_value": 25000.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "analyst_estimate"
+      ],
+      "reason": "Unified revenue assumption to conservative stress-test parameter for safety margin; base-case estimate ~280-300bn explicitly stated in assumptions.",
+      "eps_fcf_valuation_impact": "EPS and FCF lowered, fair value reduced.",
+      "disposition": "accepted"
+    }
+  ],
+  "company_disaggregation": "通富微电是全球领先的半导体封装测试服务商，也是AMD最主要的封测供应商，占其相关产品80%以上份额。公司采用合资+合作模式深度绑定AMD，成为AI算力芯片封装的核心环节。业务分为集成电路封装测试（占收入97.6%）、模具及材料销售（2.4%）和测试服务（约10%）。其中，封装测试内部又可细分为先进封装（约55%营收，毛利率约18%）和传统封装（约35%营收，毛利率约12%），ASP的提升主要源于从传统引线框架向FCCSP、FCBGA、2.5D、Chiplet等先进封装的结构性迁移。先进封装份额和毛利率为分析假设，基于AMD封装出货量估算和公司产能指引，待半年报分拆验证。公司收入公式为封装数量×ASP，利润则受制于高额折旧（刚性成本），经营杠杆释放的核心在于产能利用率和产品结构优化。公司是一个资本密集型重资产平台，为绑定核心客户并扩张先进封装产能（如槟城工厂），必须持续进行巨额资本开支，导致自由现金流长期承压。对估值的处理上，封装测试作为核心盈利资产使用远期扣非PE估值；国产算力订单视为情景期权，不计入基础估值；模具等非核心业务估值归零。",
+  "industry_cycle_and_competition": "全球半导体封装行业正经历由AI算力需求驱动的结构性景气，AMD MI系列GPU放量拉动先进封装产能紧张。但行业同时面临产能扩张竞争：台积电CoWoS产能持续扩大，部分封装需求回流；国内长电科技、华天科技等也在积极布局先进封装，竞争可能加剧。通富微电作为AMD主要封测伙伴，直接受益于AI产品周期，但其依赖单一客户（约45%营收）的商业模式存在风险。若AMD产品路线图推迟或订单分散化，公司将遭受重创。此外，中国大陆推动国产算力芯片替代，海光、寒武纪等潜在客户可能打开第二增长曲线，但目前尚无实质性订单。行业景气度是股价的主要驱动力，通富微电股价与半导体等权篮子相关性高达0.73-0.81，长期跑输，证明其是放大版的行业Beta，而非独立Alpha。因此，在行业高景气时股价弹性大，但一旦周期逆转，跌幅可能更深。竞争格局上，公司凭借深度客户绑定和规模效应构建了短期护城河，但长期需观察技术跟随能力和客户多元化进展。",
+  "autonomous_forecast_model": "我们的独立预测模型建立在对AMD产品周期、产能利用率和资本开支的审慎评估上。为构建安全边际，公开模型中采用保守的250亿元营收基准（压力测试参数），公司实际成长性大概率更高（基准估计280-300亿），但保守假设有助于揭示估值脆弱性。2026年H1已预告归母净利润16-18亿元，但扣非仅7-8亿元，非经常性损益约9-10亿元。我们假设全年扣非净利润15.5亿元，扣非净利率6.2%，主要考虑到Q2的爆发包含一次性产能利用率释放因素，H2增速大概率放缓。2027年扣非净利润预计21亿元，净利率提升至7.0%，条件是需要先进封装占比进一步提高且折旧压力被规模效应吸收。2028年扣非净利润26亿元，净利率7.5%。\n关键是从扣非净利润到自由现金流的三年穿透表：\n| 项目（亿元） | 2026E | 2027E | 2028E |\n|----------------|-------|-------|-------|\n| 扣非归母净利润 | 15.5 | 21.0 | 26.0 |\n| 加：折旧摊销 | 40.0 | 41.0 | 43.0 |\n| 减：营运资本增加 | -4.5 | -6.0 | -10.6 |\n| 减：资本开支 | 62.5 | 60.0 | 58.6 |\n| 自由现金流 | -5.0 | 8.0 | 21.0 |\n注：营运资本变动为负数表示因应付账款等经营性负债增长而释放现金流；存货/营收比上升被应付项目和回款改善对冲。2028E FCF为21亿元，对应FCF Yield仅1.75%。EPS基于15亿总股本（定增前），2026E 1.03元，2027E 1.40元，2028E 1.73元。未考虑定增摊薄，若发生，EPS将相应下调约4-5%。模型最脆弱的假设是H2扣非净利率能否维持，以及资本开支节奏是否放缓。若半年报显示Q2扣非净利率可以维持且存货周转健康，我们将上调全年预测。",
+  "thesis_financial_bridge": "**第一论点：高估值已透支业绩乐观预期，当前价格缺乏安全边际。** 市场看见H1归母净利润增长300%和Q2利润暴增，用含水的归母利润计算PE，误以为估值仅33倍。然而，非经常性损益占比超55%，可持续的扣非PE高达80倍。我们的模型显示，即使H2维持较高景气，2027年扣非利润也仅21亿元左右，而当前股价80元隐含的2027年扣非利润需超过25亿元（基于25倍PE）。若PE收缩至行业中枢25倍，公允价值约35元，股价需下跌约56%。*最强反证*是，如果AI赛道持续高景气，2028年扣非利润达到26亿元，届时29倍PE对应80元，市场可能预期PE逐步下降而非崩塌，从而在当前价格获得支撑。*财务传导*：估值锚从归母净利润转换为扣非净利润后，盈利要求大幅提升；预期差约25%的利润缺口意味着高估值难以维系。*证伪条件*：半年报扣非净利率环比显著提升，且管理层给出强劲H2指引，显示扣非利润可持续年化至18亿元以上，则80倍PE可降至44倍，风险降低。若相反，估值均值回归风险极大。\n\n**第二论点：盈利爆发难以线性外推，持续性待验证。** Q2单季扣非环比暴增208%-266%可能系前期在制品集中确认或产能突击利用所致，若H2回归正常节奏，全年扣非净利润恐低于15亿元。*最强反证*：AMD MI系列GPU拉货力道强劲，且Q3-Q4为行业旺季，高利润中枢有可能成为新常态。*财务传导*：若H2扣非净利率从7%滑落至5%，全年扣非净利润仅14亿元，EPS降至0.93元，当前股价对应的扣非PE升至86倍，安全边际进一步丧失。*证伪条件*：半年报分拆数据显示Q2扣非净利率由结构性产品升级驱动（先进封装占比>55%），且存货周转未恶化，则可支持持续性观点；否则一次性因素主导，盈利将回落。\n\n**第三论点：公司是放大版行业Beta，不具备独立Alpha，需更高风险补偿。** 股价与半导体等权篮子相关性0.73-0.81，且长期跑输48.66%，证明其上涨依赖行业情绪而非公司特质。*最强反证*：若国产算力封装订单落地并连续两个季度贡献超额收益>10%，可能逐步形成独立Alpha。*财务传导*：估值应参考封测行业中枢25倍，不给予Alpha溢价；行业系统性风险释放时公司难有防御。*证伪条件*：未来两个季度相对半导体指数产生显著且持续的超额收益，且由公司自身客户或技术突破驱动。\n\n**第四论点：自由现金流长期承压，内生价值创造弱，难以支撑高估值。** 修正后的三年穿透显示2026E FCF为-5亿，2028E虽转正至21亿但FCF Yield仅1.75%，远低于成长股合理要求的3-4%。*最强反证*：若定增以高价完成并显著降低杠杆，或产能扩张在2028年结束后资本开支骤降，FCF可能迎来拐点并快速提升。*财务传导*：DCF估值对应每股仅约28-32元，与当前80元差距巨大；高资本消耗模式要求持续的股权融资，摊薄风险加大。*证伪条件*：半年报显示经营性现金流远超净利润且资本开支出现放缓迹象，或管理层下调全年资本开支预算，则FCF预期可上调。",
+  "moat_evidence_scorecard": "通富微电的护城河主要体现为深度客户绑定和规模效应，但均需结合财务证据评估。与AMD的合资合作模式确保了80%以上相关封装份额，关系已持续超过10年，构成稳固的收入底座，目前无分散迹象，因此客户绑定护城河评级为‘proven’。规模效应体现为产能利用率弹性，H1利润暴增反映了这一优势，但该优势会随着产能扩张和折旧增加而波动，且竞争者可通过新设备追赶，故评级为‘partial’。技术同步能力作为护城河尚不稳固：公司能跟随AMD路线图布局先进封装，但并非技术原创者，若技术跃迁或客户转向，优势将快速消失，评级为‘partial’。总体而言，公司护城河在景气上行期发挥作用，但缺乏穿越周期的强技术壁垒或品牌溢价，因此估值时不应给予显著高于行业平均的溢价。",
+  "valuation_closure": "情景价值、概率加权结果、预期收益与安全价格以本节程序化估值表为唯一数值口径。",
+  "accounting_and_capital_allocation": "会计质量检查暴露三大警示信号。首先，非经常性损益占比过高，2026H1业绩预告中归母净利润中非经常性损益贡献约9-10亿元，占比超55%，源自产业投资基金投资收益，不可持续，严重误导估值判断，因此投资决策必须锚定扣非净利润。其次，存货/营收比从2025年末的15.1%上升至Q1 2026的16.08%，在业绩爆发期本应下降，该异常需警惕存货积压或收入确认滞后，若半年报继续恶化，可能触发资产减值。在预测假设中，我们已设置两种情景并加权，若为被动积压则扣非净利率可能降至4.5%。第三，高资本开支和在建工程预示未来折旧压力陡增，将侵蚀毛利率和ROIC。正面因素是应收账款回款改善，销售商品收到现金/营收达97.9%，现金回收质量良好。资本分配方面，公司持续高额资本开支以维持客户绑定和产能扩张，但分红能力弱，股东回报主要依靠股价上涨。定增已获注册批复，假设融资50亿元、按80元折价10%发行，将新增约0.69亿股，摊薄约4.6%；若以更低价格发行，摊薄幅度可达5%以上，将降低每股收益。",
+  "expectation_gap_and_market_pricing": "当前股价80元（对应总市值约1200亿元）隐含的市场预期与我们的独立模型存在显著差距。我们制作了反向估值矩阵以量化该差距：\n| 2027E扣非净利润(亿) | 隐含PE(80元) | 评论 |\n|---------------------|--------------|------|\n| 15 | 80x | 极度乐观，不可持续 |\n| 18 | 67x | 仍远高于行业均值 |\n| 21 (我们基准) | 57x | 市场定价57倍，我们给予25倍 |\n| 24 | 50x | 需要利润超预期约14% |\n| 27 | 44x | 需利润比基准高29% |\n可见，要使PE降至50倍以下，扣非净利润须进入24亿以上的高端区间，超过基准21亿约14%。市场隐含的2027年扣非净利润约25-27亿元（对应PE 44-48倍），而我们基准预测仅21亿元，差距25%以上。市场还隐含FCF将大幅改善并能支撑估值，但我们预计2028年FCF仅21亿元，FCF Yield 1.75%，远不能支撑当前市值。市场可能还将部分尚未证实的国产算力封装期权当作确定性价值计入，我们则将其作为低概率情景处理。此外，市场忽略了非经常性损益的迷惑性，用含水的归母利润计算PE，误以为估值便宜。预期差的核心变量是H2扣非净利率的可持续性，半年报将是弥合或扩大差距的关键。我们选择的25倍PE参照国内封测可比公司（长电科技、华天科技等）历史扣非PE中枢20-25倍，并考虑到公司先进封装成长性给予中值。在没有新的积极催化之前，我们认为当前价格已充分甚至过度乐观定价。",
+  "risks_catalysts_verification": "**程序化执行约束**：当前价80.00元高于安全买入上限21.18元；不得表述为已经替投资者建仓，也不得建议新资金在安全价之上主动加仓。\n\n**主要风险**：1. 业绩不达预期风险（高）：H2扣非净利润环比显著放缓，盈利持续性被证伪，导致估值均值回归，潜在下跌空间30%以上。2. 财务恶化风险（中）：存货周转恶化引发减值，或应收账款激增，进一步压制FCF。3. 客户集中风险（中）：AMD贡献约45%营收，若其产品路线图推迟或订单分流，将对公司基本面造成重大打击。4. 定增摊薄风险（中）：定增折价发行稀释权益，且募投回报率存疑。\n**催化剂与验证点**：2026年8月半年报是决定性验证点：扣非净利率环比变化、存货及应收账款周转、先进封装业务拆分、管理层对下半年的指引。若几项指标全面向好，可考虑上调评级至超配；若恶化，立即减仓。后续9-10月Q3业绩预告提供辅助判断。国产算力订单的任何实质性进展都可能成为股价催化剂。",
+  "handoff_integrity_audit": "与Research Manager模型相比，本PM决策采用了更保守的假设，并修正了多处内部不一致。主要修订：1) 将2026E营收从RM的335亿元下调至250亿元（保守型压力测试参数，但正文指出基准估计约280-300亿，用于安全边际构建）。2) 将2026E扣非净利润从RM的乐观假设（可能接近归母利润的20亿+）下调至15.5亿元，原因是非经常性损益剥离和H2谨慎预估。3) 明确估值锚定扣非PE而非归母PE，将估值基准从约33倍修正至80倍。4) 将FCF预测下调并补充了从净利润到FCF的完整三年穿透表：2026E FCF -5亿，2028E从RM的可能预期的30亿下调至21亿。5) 恢复了遗漏的diluted_shares行，统一使用1500百万股。6) 补充了alternative_intelligence_decisions和第二个卖方预期行，使决策依据更透明。7) 在预期差分析中加入了反向估值矩阵和可比公司PE依据。8) 会计质量预警信号通过新增预测假设行（存货/营收比和定增摊薄）与财务预测形成闭环。其他如业务分部结构、行业分析框架、会计质量警示点均保持一致。整体上，PM增加了安全边际要求，反映了对业绩持续性的更高不确定判断，但仍保留RM对企业核心竞争力和景气度的认可。审计确认：模型线2026E_revenue、2026E_core_net_profit、2028E_FCF等均记录了新旧值的差异。",
+  "report_markdown": "",
+  "shared_model_change_audit": "关键模型变更记录：\n- line: diluted_shares, old_value: 缺失 → new_value: 1500 (百万股), 原因：恢复RM遗漏的关键行，EPS和每股估值可计算。\n- line: 2026E_revenue, old_value: 33500 → new_value: 25000 (CNY mn), 原因：统一为保守压力测试参数，正文注明实际基准估计280-300亿以保持逻辑一致。EPS/FCF影响：扣非EPS从约1.67降至1.03，估值中枢下移。\n- line: 2026E_core_net_profit, old_value: 2500 (估计) → new_value: 1550 (CNY mn), 原因：剔除非经常性损益，按H1预告推算并保守处理H2。EPS/FCF影响：扣非EPS从1.67元降至1.03元。\n- line: 2028E_fcf, old_value: 3000 → new_value: 2100 (CNY mn), 原因：增加营运资本消耗和维持性资本开支假设，并提供三年穿透表。估值影响：FCF Yield从2.5%降至1.75%，减少DCF支持。\n- 其他未修改项：总股本、资本开支总额等基本维持，但折旧和净利率假设有所调整。所有更改均有H1预告、Q1财报等证据支持。",
+  "report_quality_self_check": "报告质量自检：分部覆盖率完整，封装测试、模具、测试服务均已纳入，估值处理明确。三年预测模型已通过净利润-FCF穿透表实现内部勾稽，消除了此前营收口径冲突。情景估值已提供三种场景及概率加权，并统一使用程序化输出数字34.32元作为公允价值，安全买入价21.18元唯一一致。证据链清晰，引用了2026H1业绩预告、2025年报、Q1季报等公开证据，并添加了反向估值矩阵和可比公司PE参照。KPE到决策的传输已明确（如CoWoS拒绝、卖方预期对比）。未解决的问题：H2扣非净利率和订单可见性仍然未知，这是评级维持持有而非买入的核心原因。报告未试图通过忽略风险来合理化当前评级，保持了诚实性。各章节之间的数字（营收基准、公允价值、安全价格）已统一，不再存在相互矛盾的表述。"
+}

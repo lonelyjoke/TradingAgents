@@ -13,6 +13,9 @@ from .industry_identity import (
     is_hog_breeding_text,
     is_insurance_text,
     is_lithium_battery_text,
+    is_semiconductor_design_text,
+    is_semiconductor_equipment_text,
+    is_semiconductor_foundry_text,
     is_telecom_operator_text,
     is_clean_energy_power_electronics_text,
 )
@@ -59,6 +62,39 @@ def _clean_energy_power_electronics_forecast_drivers() -> list[tuple[str, str, s
         ("Other/option businesses", "verified delivered projects or signed orders x unit economics", "wind conversion, hydrogen, charging and AIDC/SST evidence gates"),
         ("Operating profit / parent profit", "segment gross profit - R&D - sales/admin - impairment - tax/minority", "global service investment, scale leverage, credit quality and FX"),
         ("OCF / FCF", "profit + D&A - receivables/inventory/prepayments - capex", "contract-liability conversion, collection cycle and reinvestment"),
+    ]
+
+
+def _semiconductor_foundry_forecast_drivers() -> list[tuple[str, str, str]]:
+    return [
+        ("Wafer revenue", "wafer shipments or wafer starts x realized wafer ASP by process platform", "8-inch/12-inch capacity, utilization, node mix, specialty platform mix and customer demand"),
+        ("Gross profit", "wafer revenue - depreciation - materials - energy - labor - maintenance", "utilization, yield, depreciation-to-revenue, wafer ASP and cost pass-through"),
+        ("Operating profit", "gross profit - R&D - SG&A - impairment", "R&D intensity, ramp costs, mature-node pricing and platform scale leverage"),
+        ("Parent net profit / EPS", "operating profit +/- finance/investment/subsidy - tax - minority; divided by diluted shares", "minority interest, non-recurring subsidies, tax rate and normalized share count"),
+        ("OCF / capex / FCF", "net profit + D&A - working capital - capex", "capex cycle, construction-in-progress transfer, equipment access, inventory and receivables"),
+        ("Valuation bridge", "scenario EPS/FCF or normalized capacity earnings x semiconductor-cycle multiple", "utilization cycle, export-control risk, ROIC and peer foundry valuation bands"),
+    ]
+
+
+def _semiconductor_design_forecast_drivers() -> list[tuple[str, str, str]]:
+    return [
+        ("Core chip revenue", "chip shipments x realized ASP by product / end market", "design wins, customer qualification, channel sell-through, product cycle and SKU mix"),
+        ("Gross profit", "chip revenue - foundry wafer cost - packaging/test - royalties/NRE amortization", "foundry node cost, yield, packaging/test cost, high-end mix and price pressure"),
+        ("Operating profit", "gross profit - R&D - selling/admin - impairment", "R&D roadmap, software ecosystem spend, product launch cost and inventory write-down"),
+        ("Parent net profit / EPS", "operating profit +/- investment/finance/non-recurring - tax - minority; divided by diluted shares", "tax, subsidies, share count, inventory provisions and one-offs"),
+        ("OCF / FCF", "net profit + D&A/impairment - inventory/receivables - capex/NRE", "channel inventory, receivables, prepayments to foundries, mask/NRE and capex"),
+        ("Valuation bridge", "core product-cycle EPS/FCF + verified AI/auto/server optionality in SOTP", "cycle position, design-win durability, customer concentration, ROIC and market-implied revenue gap"),
+    ]
+
+
+def _semiconductor_equipment_forecast_drivers() -> list[tuple[str, str, str]]:
+    return [
+        ("Equipment revenue", "opening backlog + new orders - undelivered backlog; recognized on shipment/acceptance by tool category", "customer fab capex, tool demand, installation and acceptance cycle"),
+        ("Service / spare-parts revenue", "installed base x service attach rate x service ASP", "installed base, warranty period, consumables/spares and customer utilization"),
+        ("Gross profit", "equipment revenue x tool gross margin + service revenue x service margin", "product mix, localization, BOM cost, warranty, yield and learning curve"),
+        ("Operating profit", "gross profit - R&D - selling/admin - credit impairment", "R&D platform investment, demo tools, customer support and scale leverage"),
+        ("Parent net profit / EPS / FCF", "operating profit - tax/minority + working-capital/capex bridge", "advances, inventory, receivables, acceptance timing, capex and share count"),
+        ("Valuation bridge", "order-backed DCF/EV-EBITDA + SOTP for tool categories, cross-checked with PE only after backlog conversion", "backlog quality, domestic substitution rate, customer capex cycle and ROIC"),
     ]
 
 
@@ -732,6 +768,9 @@ def build_forecast_model_context(
     )
     is_hog_breeder = is_hog_breeding_text(symbol, combined)
     is_battery_company = _is_battery_context(symbol, combined)
+    is_semiconductor_equipment_company = is_semiconductor_equipment_text(symbol, combined)
+    is_semiconductor_design_company = is_semiconductor_design_text(symbol, combined)
+    is_semiconductor_foundry_company = is_semiconductor_foundry_text(symbol, combined)
     is_power_electronics_integrator = is_clean_energy_power_electronics_text(
         symbol, combined
     )
@@ -740,6 +779,7 @@ def build_forecast_model_context(
         (
             r"revenue|gross margin|net profit|EPS|OCF|FCF|capex|ROE",
             r"segment|business model|profit pool|valuation",
+            r"wafer|foundry|fabless|chip|semiconductor|tape[- ]?out|design win|backlog|acceptance|deposition|etch|metrology|inventory|ASP",
             r"NBV|embedded value|P/EV|solvency|COR|loss ratio|expense ratio|investment yield|bancassurance|agent productivity|CSM|NCSM|OPAT",
             r"hog|pig|piglet|sow|live hog|slaughter|complete cost|breeding sow|pork|DCE|LH\d+|ASP",
             r"\u751f\u732a|\u5546\u54c1\u732a|\u4ed4\u732a|\u80fd\u7e41\u6bcd\u732a|\u6bcd\u732a\u5b58\u680f|\u732a\u4ef7|\u732a\u5468\u671f|\u51fa\u680f|\u5b8c\u5168\u6210\u672c|\u732a\u8089",
@@ -749,6 +789,12 @@ def build_forecast_model_context(
     )
     if has_lithium_battery_symbol_hint(symbol):
         drivers = _battery_forecast_drivers()
+    elif is_semiconductor_equipment_company:
+        drivers = _semiconductor_equipment_forecast_drivers()
+    elif is_semiconductor_design_company:
+        drivers = _semiconductor_design_forecast_drivers()
+    elif is_semiconductor_foundry_company:
+        drivers = _semiconductor_foundry_forecast_drivers()
     elif is_automotive_components_text(symbol, combined):
         drivers = _automotive_components_forecast_drivers()
     elif is_telecom_operator_text(symbol, combined):
@@ -857,6 +903,34 @@ def build_forecast_model_context(
             "| Valuation monotonicity | a deterioration case must not receive a higher multiple than base without an explicit, evidence-backed reason |",
             "| Probability audit | record scenario probabilities before and after each private/proxy clue; unexplained probability changes are invalid |",
             "- Missing shipment, ASP, utilization, or segment-margin evidence must remain a neutral explicit model gap; narrative strength cannot fill a numeric cell, and the gap must not mechanically alter the rating.",
+        ]
+
+    semiconductor_model_section = []
+    if (
+        is_semiconductor_foundry_company
+        or is_semiconductor_design_company
+        or is_semiconductor_equipment_company
+    ):
+        profile = "foundry / wafer manufacturing"
+        if is_semiconductor_design_company:
+            profile = "fabless / chip design"
+        if is_semiconductor_equipment_company:
+            profile = "semiconductor equipment / wafer-fab tools"
+        semiconductor_model_section = [
+            "",
+            "## Semiconductor Forecast And Valuation Controls",
+            f"- Semiconductor profile: {profile}. Use this profile before consumer, generic technology, telecom, metals, or battery templates.",
+            "| control | Mandatory treatment |",
+            "| --- | --- |",
+            "| Business buckets | split mature/core products from product-cycle, technology-node, customer, or tool-category optionality; do not bury optionality inside the base multiple |",
+            "| Operating bridge | start from sector-native volume x ASP x mix, then explicitly bridge gross margin, R&D, working capital, capex and share count |",
+            "| Foundry / manufacturing | use wafer capacity, utilization, wafer ASP, node mix, yield, depreciation, capex, construction-in-progress transfer, and equipment access |",
+            "| Chip design | use shipments, ASP, design wins, tape-out/mass-production milestones, customer concentration, foundry/package cost, inventory and R&D/IP moat |",
+            "| Semiconductor equipment | use new orders, backlog, delivery/acceptance, tool-category mix, localization rate, installed base/service, inventory, advances and receivables |",
+            "| Valuation triangulation | PE is only one cross-check. Also show EV/EBITDA, DCF/FCF, ROIC/PB or SOTP/NAV depending on asset intensity and disclosure |",
+            "| Optionality discipline | AI, advanced node, localization or strategic-scarcity value must have explicit probability, payoff, verification gate and overlap key; unverified optionality cannot enter base value |",
+            "| Market-implied check | reverse current market cap into required revenue, gross margin, net profit, ROIC, backlog conversion or node/product contribution; compare with the model |",
+            "- A semiconductor Buy/Underweight call is incomplete if it relies only on static PE/PB or valuation percentiles without the operating bridge above.",
         ]
 
     kp_assumption_rows = _knowledge_planet_assumption_rows(knowledge_planet_context)
@@ -1053,6 +1127,7 @@ def build_forecast_model_context(
             *[f"| {name} | {formula} | {assumption} |" for name, formula, assumption in drivers],
             *hog_sensitivity_section,
             *battery_model_section,
+            *semiconductor_model_section,
             *business_line_agenda_section,
             *sell_side_depth_chain_section,
             *llm_analysis_intervention_section,

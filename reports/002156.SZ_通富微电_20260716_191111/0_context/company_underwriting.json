@@ -1,0 +1,1041 @@
+{
+  "schema_version": 2,
+  "symbol": "002156.SZ",
+  "as_of_date": "2026-07-16",
+  "forecast_years": [
+    "2026E",
+    "2027E",
+    "2028E"
+  ],
+  "research_readiness": "partial",
+  "readiness_reasons": [
+    "Diluted share count not reported or derivable from supplied evidence; EPS and per-share valuation remain unresolved.",
+    "No segment-level revenue or margin disclosure for advanced packaging vs. legacy packaging; product mix assumptions are analytical only.",
+    "Cash flow statements not included in evidence; OCF, capex, and FCF derived from indirect indicators (OCF/net profit ratio, CIP growth) remain provisional.",
+    "KPE evidence (H1 2026 profit guidance) is unverified private proxy; baseline consensus missing, so model uses midpoint 17 bn CNY.",
+    "CoWoS capacity plan (KPE10) is unconfirmed by the company; placed in optionality bucket, not base case.",
+    "One or more filing-reported segments required deterministic restoration.",
+    "Material segment three-year driver lines are missing: 半导体封测",
+    "Bull/base/bear per-share valuation is incomplete.",
+    "Valuation has not closed from mutually exclusive buckets to per-share fair value.",
+    "Three-year values remain missing for consolidated line(s): Revenue, Gross Margin, Operating Profit, Parent Net Profit, EPS, Operating Cash Flow, CapEx, Free Cash Flow"
+  ],
+  "company_model": {
+    "model_profile": "corporate",
+    "operating_model_family": "volume_price_cost",
+    "business_archetype": "Semiconductor assembly and test service provider combining high-R&D technology (advanced packaging) and high-volume manufacturing; core economics driven by capacity, utilization, volume, ASP, input costs, product mix, and capex/ROIC.",
+    "value_proposition_and_customers": "Provides integrated circuit packaging and testing services, primarily for global fabless semiconductor companies. AMD is the anchor customer (>80% share of AMD's related products), supplemented by domestic analog, automotive, and IoT chip designers. Advanced packaging (Chiplet, 2.5D/3D, fan-out, Cu pillar bump) captures AI and HPC demand.",
+    "revenue_equation": "Revenue = Σ (Packaging volume_k x ASP_k) + testing service revenue + minor mold/material sales. ASP increases with higher-end packaging (advanced vs. traditional), and volume is gated by capacity and utilization.",
+    "profit_equation": "Gross profit = Revenue - (direct materials, labor, depreciation, electricity, subcontracting). Operating profit = Gross profit - R&D - SG&A. Recent operating leverage driven by utilization improvement, mix shift to advanced packaging, and cost control. Net profit includes investment income, government grants, and forex gains/losses.",
+    "cash_flow_equation": "OCF = Net income + depreciation/amortization ± working capital changes. Historically OCF/Net profit >2.5x, indicating strong depreciation add-back and moderate working-capital management. FCF = OCF - capex (primarily facility expansion in Penang and domestic advanced lines).",
+    "capital_intensity_and_reinvestment": "Capex intensive: requires continuous investment in cleanrooms, equipment (bumping, wafer-level, flip-chip, testers). Construction in progress rose 31.95% YoY in Q1 2026 to CNY 4.1 bn, signaling major capacity expansion. ROIC will improve if new capacity ramps with high utilization.",
+    "diluted_share_count_mn": null,
+    "share_count_period": "",
+    "share_count_evidence_id": "",
+    "share_count_source_type": "unresolved",
+    "share_count_formula": "Cannot derive: market cap / price unknown, total_share from Tushare not provided, parent profit / EPS unreliable.",
+    "share_count_cross_checks": [
+      "Market cap / closing price (price missing)",
+      "Tushare total_share (not in evidence)",
+      "Parent profit / reported EPS (EPS not supplied)"
+    ],
+    "moat_mechanisms": [
+      "Deep customer lock-in with AMD through joint-venture and co-located facilities (Penang), high switching costs and qualification barriers.",
+      "Scale and technology leadership in advanced packaging (Chiplet, fan-out, 2.5D) creating a cost and performance advantage over smaller OSATs.",
+      "Dual supply chain (China + Malaysia) provides geopolitical diversification and tariff resilience."
+    ],
+    "moat_to_financial_transmission": [
+      "AMD lock-in → stable volume commitments and share of wallet → high capacity utilization → fixed-cost absorption → margin expansion.",
+      "Advanced packaging premium → higher ASP and gross margin → incremental EBITDA drop-through.",
+      "Scale and learning curve → lower unit cost → ability to invest in next-gen while peers fall behind."
+    ],
+    "structural_risks": [
+      "Single-customer concentration (>80% of certain products from AMD); any shift in AMD's sourcing strategy or product cycle miss would severely impact revenue.",
+      "Geopolitical risk: export controls could limit equipment/technology access, especially for advanced nodes used by AMD.",
+      "Foreign exchange exposure: ~66.6% export sales, mostly USD-denominated; rapid RMB appreciation would compress CNY revenues.",
+      "Capex-heavy model produces high fixed costs; underutilization during a downturn would hurt margins and ROIC.",
+      "Intense competition from TSMC (in-house CoWoS), ASE, JCET in advanced packaging, and potential entry by Chinese state-backed players."
+    ],
+    "key_unknowns": [
+      "Revenue and margin split by packaging type (traditional vs. advanced) not disclosed.",
+      "CoWoS-L capacity plan and AMD allocation not confirmed by company.",
+      "Effective tax rate for 2026-2028 (varies with subsidiary mix, government incentives).",
+      "Diluted share count after potential private placement approved in July 2026.",
+      "Normalized OCF and capex trajectory absent full cash flow statements."
+    ],
+    "evidence_ids": [
+      "EV013",
+      "EV014",
+      "EV017",
+      "EV030",
+      "EV031",
+      "EV034",
+      "KPE01",
+      "KPE02",
+      "EV085"
+    ]
+  },
+  "business_unit_map": [
+    {
+      "unit_id": "IC_OSAT",
+      "unit_name": "集成电路封装测试",
+      "unit_type": "reported_segment",
+      "disclosure_basis": "reported",
+      "parent_unit": "company",
+      "economic_role": "Core revenue and profit engine; provides packaging and testing services to semiconductor companies.",
+      "revenue_driver_equation": "Volume (wafers or units) × ASP × (mix toward advanced packaging) + testing service revenue.",
+      "profit_driver_equation": "Gross margin = (ASP - unit cost)/ASP; unit cost = materials + labor + depreciation + energy; operating profit = gross profit - R&D - SG&A.",
+      "cash_and_capital_equation": "OCF = EBITDA ± working capital; capex mainly for cleanroom and equipment; FCF supports dividends and debt reduction.",
+      "reported_metrics": [
+        "revenue",
+        "gross margin",
+        "operating margin",
+        "net margin"
+      ],
+      "evidence_ids": [
+        "EV013",
+        "EV014",
+        "EV015",
+        "EV030",
+        "EV036"
+      ],
+      "missing_inputs": [
+        "Packaging vs. testing revenue split",
+        "Advanced packaging revenue share and ASP trend",
+        "Capacity utilization percentage"
+      ],
+      "next_verification": "2026 semi-annual report for segment mix and capacity utilization commentary."
+    },
+    {
+      "unit_id": "MOLD_MATERIAL_SALES",
+      "unit_name": "模具及材料销售等",
+      "unit_type": "reported_segment",
+      "disclosure_basis": "reported",
+      "parent_unit": "company",
+      "economic_role": "Ancillary revenue from mold and material sales, likely minor and linked to internal tooling; not a primary profit driver.",
+      "revenue_driver_equation": "Negligible; tied to internal needs.",
+      "profit_driver_equation": "Negligible margin contribution.",
+      "cash_and_capital_equation": "N/A",
+      "reported_metrics": [
+        "revenue"
+      ],
+      "evidence_ids": [
+        "EV036",
+        "EV037"
+      ],
+      "missing_inputs": [
+        "Gross margin for mold/material sales"
+      ],
+      "next_verification": ""
+    },
+    {
+      "unit_id": "BU05",
+      "unit_name": "半导体封测",
+      "unit_type": "reported_segment",
+      "disclosure_basis": "reported",
+      "parent_unit": "company",
+      "economic_role": "Filing segment restored after structured evidence reconciliation.",
+      "revenue_driver_equation": "",
+      "profit_driver_equation": "",
+      "cash_and_capital_equation": "",
+      "reported_metrics": [],
+      "evidence_ids": [],
+      "missing_inputs": [
+        "economic sub-unit driver equations require analyst completion"
+      ],
+      "next_verification": ""
+    }
+  ],
+  "segment_models": [
+    {
+      "segment": "集成电路封装测试",
+      "products_or_services": "Full range of IC packaging (DIP, SOP, QFP, advanced: Chiplet, 2.5D/3D, fan-out, flip-chip, CPO) and testing (wafer probing, final test).",
+      "customers_and_channel": "Primarily global fabless IDM/design houses; AMD largest customer (>80% share for related products), followed by domestic analog, power, and IoT chip makers. Direct sales, joint-venture model with AMD in Penang.",
+      "revenue_weight_pct": 97.6,
+      "profit_weight_pct": 100.0,
+      "base_period": "FY2025",
+      "base_revenue_value": 27248.0,
+      "base_revenue_unit": "CNY mn",
+      "base_revenue_growth_pct": 18.89,
+      "base_margin_pct": null,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [
+        "AI training/inference driving advanced packaging demand for GPU/CPU.",
+        "AMD product cycle: Venice CPU, MI300/MI350/MI455 GPU ramps.",
+        "Domestic substitution in analog, automotive, and IoT driving legacy packaging volumes.",
+        "Hyperscaler capex into data center infrastructure."
+      ],
+      "industry_supply_and_capacity": "TSMC dominates CoWoS supply; OSATs (ASE, JCET, TFMC) compete for overflow and lower-tier advanced packaging. Domestic advanced packaging capacity expanding rapidly with government support. Supply still tight for high-end advanced packaging.",
+      "volume_share_utilization": "Company claims leading position as AMD's top OSAT, likely >50% share of AMD CPU/GPU packaging. Penang facility expansion (bumping, wafer test) will increase capacity. Utilization improving as demand outstrips capacity.",
+      "price_asp_take_rate": "ASP rising due to mix shift toward advanced packaging (Chiplet, 2.5D). Company indicates periodic price adjustments based on market supply/demand and input cost inflation.",
+      "unit_cost_and_input_prices": "Key inputs: substrates, leadframes, gold wire, molding compound, equipment depreciation. Gold price affects wire bonding cost; substrate supply constrained. Depreciation cost rising with new capacity.",
+      "margin_and_operating_leverage": "Gross margin Q1 2026 13.32%, +0.13pp YoY; operating margin 6.28%, +2.90pp YoY, showing strong fixed-cost absorption and mix benefit. Further margin expansion expected with advanced packaging ramp, but limited by depreciation step-up.",
+      "working_capital_and_cash_conversion": "OCF/Net profit 2.86x in Q1 2026, driven by high depreciation and moderate working capital. Inventory/revenue +2.69pp YoY, possibly reflecting pre-build for new orders; receivables/revenue -2.0pp, showing improved collections.",
+      "prosperity_level": "high",
+      "marginal_direction": "up",
+      "causal_analysis": "Demand exceeding supply for advanced packaging, driven by AI and domestic substitution. TFMC benefits from AMD's 2027 CoWoS demand surge and domestic customer ramp. Capacity expansion is on track, and margin improvement likely through 2027 as new facilities reach scale.",
+      "valuation_treatment": "Core earnings: value on forward P/E or EV/EBITDA, adjusting for capacity build cycle. CoWoS optionality: separate bucket pending company confirmation.",
+      "strongest_counterevidence": [
+        "KPE10: CoWoS plan unconfirmed by company.",
+        "EV085: Company explicitly states no business with NVIDIA, limiting AI-related packaging breadth.",
+        "Q1 2026 inventory/revenue ratio up 2.69pp YoY, possible demand-signal weakness if orders do not materialize.",
+        "Export share 66.6% creates forex and geopolitical risks."
+      ],
+      "evidence_ids": [
+        "EV013",
+        "EV014",
+        "EV017",
+        "EV030",
+        "KPE01",
+        "KPE02",
+        "EV085"
+      ],
+      "missing_inputs": [
+        "Advanced packaging revenue and margin split",
+        "CapEx and FCF historical series",
+        "Exact capacity and utilization data",
+        "Product-level ASP trend"
+      ],
+      "next_verification": "2026 semi-annual report for segment disclosure and guidance; AMD quarterly earnings call for Venice/MI ramp."
+    },
+    {
+      "segment": "模具及材料销售等",
+      "products_or_services": "Molds and materials sold externally, likely related to packaging tooling.",
+      "customers_and_channel": "Other OSATs or PCB assembly.",
+      "revenue_weight_pct": 2.4,
+      "profit_weight_pct": 0.0,
+      "base_period": "FY2025",
+      "base_revenue_value": 674.0,
+      "base_revenue_unit": "CNY mn",
+      "base_revenue_growth_pct": -30.04,
+      "base_margin_pct": null,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [
+        "Dependent on industry capex and TFMC's own expansion."
+      ],
+      "industry_supply_and_capacity": "Niche.",
+      "volume_share_utilization": "Small scale, not material.",
+      "price_asp_take_rate": "Commodity-like.",
+      "unit_cost_and_input_prices": "Steel, plastics.",
+      "margin_and_operating_leverage": "Break-even contributor.",
+      "working_capital_and_cash_conversion": "Negligible.",
+      "prosperity_level": "neutral",
+      "marginal_direction": "stable",
+      "causal_analysis": "Non-core; follow overall industry capex.",
+      "valuation_treatment": "Excluded from core valuation as immaterial.",
+      "strongest_counterevidence": [],
+      "evidence_ids": [],
+      "missing_inputs": [
+        "Gross margin, cash contribution"
+      ],
+      "next_verification": ""
+    },
+    {
+      "segment": "半导体封测",
+      "products_or_services": "",
+      "customers_and_channel": "",
+      "revenue_weight_pct": 100.0,
+      "profit_weight_pct": null,
+      "base_period": "2025年度/2026Q1",
+      "base_revenue_value": 27921424656.15,
+      "base_revenue_unit": "CNY",
+      "base_revenue_growth_pct": 16.92,
+      "base_margin_pct": 13.3247,
+      "base_margin_change_pp": 0.13,
+      "demand_and_order_drivers": [],
+      "industry_supply_and_capacity": "",
+      "volume_share_utilization": "",
+      "price_asp_take_rate": "",
+      "unit_cost_and_input_prices": "",
+      "margin_and_operating_leverage": "",
+      "working_capital_and_cash_conversion": "",
+      "prosperity_level": "evidence_limited",
+      "marginal_direction": "unknown",
+      "causal_analysis": "",
+      "valuation_treatment": "evidence_limited",
+      "strongest_counterevidence": [],
+      "evidence_ids": [],
+      "missing_inputs": [
+        "LLM omitted a filing-reported material segment"
+      ],
+      "next_verification": ""
+    }
+  ],
+  "underwriting_questions": [
+    {
+      "question_id": "Q1",
+      "question": "What is the exact advanced packaging revenue contribution and margin profile vs. legacy packaging?",
+      "why_it_matters": "The bull case heavily depends on mix shift to high-ASP, high-margin advanced packaging (Chiplet, 2.5D). Without segment data, EPS sensitivity to product mix cannot be validated.",
+      "current_answer": "Unresolved; company does not disclose packaging type split.",
+      "bull_evidence": [
+        "Q1 2026 operating margin up 2.9pp suggests mix improvement.",
+        "Investor interaction confirms focus on fan-out, 2.5D packaging."
+      ],
+      "bear_evidence": [
+        "Gross margin only 13.32%, still low, might indicate legacy packaging dominates.",
+        "Semi-annual report might not break out advanced packaging share."
+      ],
+      "decisive_model_variables": [
+        "segment_volume",
+        "asp_or_price",
+        "segment_margin"
+      ],
+      "affected_financial_lines": [
+        "Revenue mix",
+        "Gross margin",
+        "Operating profit",
+        "EPS"
+      ],
+      "evidence_ids": [
+        "EV013",
+        "EV014",
+        "EV085"
+      ],
+      "missing_evidence": [
+        "Advanced packaging revenue % and gross margin",
+        "Traditional packaging margin"
+      ],
+      "next_verification": "2026 semi-annual report; direct inquiry with IR."
+    },
+    {
+      "question_id": "Q2",
+      "question": "Will AMD allocate CoWoS-L volume to TFMC, and at what scale?",
+      "why_it_matters": "KPE10 claims 1k wpm CoWoS-L capacity in 2027, potentially adding CNY 100 bn market cap. Without company confirmation, this is speculative.",
+      "current_answer": "Unconfirmed; company declined to comment on specific CoWoS plans.",
+      "bull_evidence": [
+        "KPE10 cites industry checks suggesting AMD intent.",
+        "TFMC's Penang JV is natural candidate for outsourced CoWoS."
+      ],
+      "bear_evidence": [
+        "Company Q&A states no specific CoWoS-L announcement; KPE10 is sell-side narrative.",
+        "TSMC would likely resist giving away CoWoS share."
+      ],
+      "decisive_model_variables": [
+        "utilization_or_backlog"
+      ],
+      "affected_financial_lines": [
+        "Revenue (new line item)",
+        "CapEx",
+        "FCF",
+        "EPS"
+      ],
+      "evidence_ids": [
+        "KPE10",
+        "EV085",
+        "EV086"
+      ],
+      "missing_evidence": [
+        "Official company statement or signed customer agreement.",
+        "Equipment order data."
+      ],
+      "next_verification": "AMD upcoming product launch (July 22); TFMC announcements or analyst day."
+    },
+    {
+      "question_id": "Q3",
+      "question": "What is the post-2026 normalized operating margin run-rate, and how much of the H1 2026 margin surge is sustainable?",
+      "why_it_matters": "H1 2026 guidance implies operating margin ~8.5-9% (midpoint), up from 6.3% in Q1. If this is start of structural margin expansion, PT justified; if one-off due to low base or one-time items, overpriced.",
+      "current_answer": "Partially resolved: Q1 margin improvement is partly mix/shift and cost control, not purely one-off. But sustainability depends on advanced packaging ramp.",
+      "bull_evidence": [
+        "Q1 OPM +2.9pp, net margin +2.73pp, OCF strong.",
+        "KPE01/02 indicate Q2 even stronger revenues."
+      ],
+      "bear_evidence": [
+        "Gross margin still only 13.3%, implying low absolute pricing power.",
+        "Depreciation will increase sharply as new capacity comes online, pressuring margins."
+      ],
+      "decisive_model_variables": [
+        "segment_margin",
+        "operating_margin_pct"
+      ],
+      "affected_financial_lines": [
+        "Gross margin",
+        "Operating margin",
+        "Net margin",
+        "EPS"
+      ],
+      "evidence_ids": [
+        "EV013",
+        "EV014",
+        "EV015",
+        "KPE01"
+      ],
+      "missing_evidence": [
+        "Normalized depreciation schedule",
+        "Mix-adjusted margin sensitivity"
+      ],
+      "next_verification": "2026 semi-annual report; management commentary on margin outlook."
+    },
+    {
+      "question_id": "Q4",
+      "question": "Can the company maintain cash conversion above 2x OCF/Net profit while capex is still accelerating?",
+      "why_it_matters": "FCF might be negative if capex exceeds OCF, requiring external financing (private placement announced). Dilution may offset earnings growth.",
+      "current_answer": "Uncertain: Q1 OCF/NP 2.86x but capex likely high. Private placement approval suggests capital needs.",
+      "bull_evidence": [
+        "High depreciation automatically boosts OCF.",
+        "Improving receivables turnover (-2pp) helps cash."
+      ],
+      "bear_evidence": [
+        "Inventory build +2.69pp may consume cash.",
+        "CIP up 32%, indicating large pending capex outflows."
+      ],
+      "decisive_model_variables": [
+        "capex_or_roic",
+        "cash_conversion_ratio"
+      ],
+      "affected_financial_lines": [
+        "Operating cash flow",
+        "Capex",
+        "Free cash flow",
+        "EPS (dilution)"
+      ],
+      "evidence_ids": [
+        "EV017",
+        "EV018",
+        "EV043"
+      ],
+      "missing_evidence": [
+        "Statement of cash flows",
+        "Capital expenditure 2025 actual and 2026 plan"
+      ],
+      "next_verification": "2026 semi-annual report cash flow statements; company capex guidance."
+    },
+    {
+      "question_id": "Q5",
+      "question": "What is the impact of the private placement on share count and EPS?",
+      "why_it_matters": "The board approved a private placement in July 2026; if executed, diluted share count could rise 10-20%, reducing EPS growth.",
+      "current_answer": "Unresolved: size and pricing not disclosed.",
+      "bull_evidence": [
+        "Placement could fund high-return projects, raising total earnings.",
+        "Regulatory approval suggests near-term execution."
+      ],
+      "bear_evidence": [
+        "Dilution is a certainty if share count increases.",
+        "Market may price in dilution before fundamentals improve."
+      ],
+      "decisive_model_variables": [
+        "diluted_share_count_mn"
+      ],
+      "affected_financial_lines": [
+        "EPS",
+        "FCF per share",
+        "Valuation"
+      ],
+      "evidence_ids": [
+        "EV025",
+        "EV026"
+      ],
+      "missing_evidence": [
+        "Placement size, number of shares, issue price"
+      ],
+      "next_verification": "Announcement of placement details."
+    }
+  ],
+  "forecast_lines": [
+    {
+      "segment": "consolidated",
+      "metric": "Revenue",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 27921.4,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "Base 2025 revenue × (1 + growth rate); growth driven by capacity expansion and mix.",
+      "assumption_status": "missing",
+      "evidence_ids": [],
+      "key_sensitivity": "Varies with advanced packaging ramp, CoWoS optionality, and forex.",
+      "missing_inputs": [
+        "Assumed growth percentages for 2026E-2028E"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Gross Margin",
+      "unit": "%",
+      "base_period": "Q1 2026",
+      "base_value": 13.3247,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "Blended margin improves if advanced packaging share rises; partially offset by depreciation.",
+      "assumption_status": "missing",
+      "evidence_ids": [
+        "EV013"
+      ],
+      "key_sensitivity": "Advanced packaging penetration, pricing power, gold/substrate costs.",
+      "missing_inputs": [
+        "Gross margin by product type"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Operating Margin",
+      "unit": "%",
+      "base_period": "Q1 2026",
+      "base_value": 6.2765,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "GM - (SG&A+R&D)/Rev. Leverage effect from revenue growth.",
+      "assumption_status": "missing",
+      "evidence_ids": [
+        "EV014"
+      ],
+      "key_sensitivity": "Revenue scale, cost control, R&D intensity.",
+      "missing_inputs": [
+        "Fixed vs variable SG&A structure"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Operating Profit",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "Revenue × Operating Margin",
+      "assumption_status": "missing",
+      "evidence_ids": [],
+      "key_sensitivity": "Tied to revenue and margin assumptions.",
+      "missing_inputs": [
+        "Revenue and margin forecasts"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Parent Net Profit",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 1218.7,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "(Operating Profit + non-operating items - tax - minority) ≈ Operating Profit × (1 - tax) adjusted for non-recurring items.",
+      "assumption_status": "missing",
+      "evidence_ids": [
+        "EV011"
+      ],
+      "key_sensitivity": "Operating margin, tax rate, non-recurring items (investment income, government grants).",
+      "missing_inputs": [
+        "Effective tax rate",
+        "Non-operating income projection"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "EPS",
+      "unit": "CNY",
+      "base_period": "FY2025",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "Parent Net Profit / Diluted Share Count",
+      "assumption_status": "missing",
+      "evidence_ids": [],
+      "key_sensitivity": "Profit and share count both uncertain.",
+      "missing_inputs": [
+        "Parent net profit forecast",
+        "Diluted share count"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Operating Cash Flow",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "Parent Net Profit × OCF/NI ratio (historical ~2.5-2.9x), but depends on working capital.",
+      "assumption_status": "missing",
+      "evidence_ids": [
+        "EV017"
+      ],
+      "key_sensitivity": "Net profit, working capital movements.",
+      "missing_inputs": [
+        "Full cash flow projection"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "CapEx",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "Capex/revenue ratio historically ~15-20%, potentially rising with Penang expansion.",
+      "assumption_status": "missing",
+      "evidence_ids": [
+        "EV043"
+      ],
+      "key_sensitivity": "CoWoS or advanced packaging capacity plans.",
+      "missing_inputs": [
+        "Actual capex outflows"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Free Cash Flow",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "OCF - CapEx",
+      "assumption_status": "missing",
+      "evidence_ids": [],
+      "key_sensitivity": "OCF and CapEx paths.",
+      "missing_inputs": [
+        "OCF and CapEx forecasts"
+      ]
+    }
+  ],
+  "scenarios": [
+    {
+      "scenario": "bull",
+      "probability_pct": 25.0,
+      "operating_assumptions": [
+        "2026E revenue CAGR 25%, reaching CNY 43,600 mn by 2028, driven by CoWoS-L come online in 2027 at 1k wpm.",
+        "Gross margin expands to 16% by 2028 as advanced packaging share >40%.",
+        "Operating margin reaches 9.5% by 2028.",
+        "Parent net profit CNY 3,200 mn in 2026E, CNY 5,400 mn in 2028E (incl. investment income).",
+        "FCF turns positive by 2028 after heavy capex; share count dilution of 10%.",
+        "Fair value: 30x 2027E net profit, adding CoWoS option value."
+      ],
+      "parent_net_profit_cny_mn": null,
+      "eps_cny": null,
+      "fcf_cny_mn": null,
+      "valuation_method": "SOTP: core PE + CoWoS optionality",
+      "valuation_multiple": null,
+      "fair_value_per_share": null,
+      "evidence_ids": [
+        "KPE10",
+        "KPE01",
+        "EV013"
+      ],
+      "falsification": "No AMD CoWoS allocation confirmed by end of 2026, or gross margin fails to exceed 14%.",
+      "missing_inputs": [
+        "CoWoS revenue and margin per wafer",
+        "Placement terms"
+      ]
+    },
+    {
+      "scenario": "base",
+      "probability_pct": 55.0,
+      "operating_assumptions": [
+        "2026E revenue +21% (from H1 run-rate and AMD ramp), 2027E +18%, 2028E +15%.",
+        "Gross margin gradually improving to 14.3% by 2028.",
+        "Operating margin 8.0% by 2028.",
+        "Parent net profit CNY 2,800 mn in 2026E, CNY 4,200 mn in 2028E.",
+        "CapEx keeps FCF slightly negative through 2027; share dilution 12%.",
+        "Core PE 25x 2027E net profit; CoWoS value zero."
+      ],
+      "parent_net_profit_cny_mn": null,
+      "eps_cny": null,
+      "fcf_cny_mn": null,
+      "valuation_method": "PE multiple",
+      "valuation_multiple": null,
+      "fair_value_per_share": null,
+      "evidence_ids": [
+        "EV013",
+        "EV014",
+        "KPE01"
+      ],
+      "falsification": "Revenue growth below 15% in 2026, or operating margin fails to reach 7%.",
+      "missing_inputs": [
+        "Share count",
+        "CapEx schedule"
+      ]
+    },
+    {
+      "scenario": "bear",
+      "probability_pct": 20.0,
+      "operating_assumptions": [
+        "AMD demand disappoints due to competitive pressure or product delay; revenue +12% in 2026, then +8% annually.",
+        "Gross margin stagnates at 13-13.5%.",
+        "Operating margin ~5% as depreciation and overhead outpace revenue.",
+        "Parent net profit CNY 2,000 mn in 2026E, CNY 2,400 mn in 2028E.",
+        "Capex extended, FCF deeply negative; large placement dilutes by 20%.",
+        "Market applies 15x PE on trough earnings."
+      ],
+      "parent_net_profit_cny_mn": null,
+      "eps_cny": null,
+      "fcf_cny_mn": null,
+      "valuation_method": "PE multiple",
+      "valuation_multiple": null,
+      "fair_value_per_share": null,
+      "evidence_ids": [
+        "EV085",
+        "EV018"
+      ],
+      "falsification": "AMD cuts orders, or company reports gross margin <13%.",
+      "missing_inputs": [
+        "Worst-case AMD demand scenario"
+      ]
+    }
+  ],
+  "thesis_financial_bridges": [
+    {
+      "bridge_id": "B1",
+      "thesis_or_question": "Advanced packaging mix shift drives margin expansion and re-rating.",
+      "affected_unit": "集成电路封装测试",
+      "operating_driver": "Advanced packaging revenue share and associated gross margin premium.",
+      "driver_formula": "Blended GM = (Adv_% * Adv_GM) + (Legacy_% * Legacy_GM)",
+      "base_assumption": "Adv_% rises from ~20% in 2025 to 30% by 2028; Adv_GM ~22%, Legacy_GM ~10%.",
+      "bull_assumption": "Adv_% reaches 40% by 2028, Adv_GM 25%.",
+      "bear_assumption": "Adv_% stays at 20%, no GM improvement.",
+      "revenue_impact": "Bull: +~CNY 2-3 bn additional revenue from higher ASPs; Base: in line with overall growth.",
+      "profit_impact": "Bull: incremental gross profit +CNY 1 bn by 2028; Bear: flat gross profit.",
+      "eps_impact": "Unquantified (share count unknown).",
+      "fcf_or_capital_impact": "Higher margin improves FCF generation.",
+      "valuation_impact": "Higher margins justify higher PE multiple (25-30x vs 20x).",
+      "quantification_status": "partially_quantified",
+      "evidence_ids": [
+        "EV013",
+        "EV014",
+        "EV085"
+      ],
+      "missing_inputs": [
+        "Exact advanced packaging GM and weight",
+        "Share count"
+      ]
+    },
+    {
+      "bridge_id": "B2",
+      "thesis_or_question": "CoWoS-L capacity for AMD adds a new, high-margin revenue stream.",
+      "affected_unit": "集成电路封装测试",
+      "operating_driver": "CoWoS volume (wpm) × ASP per wafer × net margin.",
+      "driver_formula": "Revenue_add = 1,000 wpm × 12 months × CNY 80,000/wafer = CNY 960 mn; Profit_add = Revenue × 30% net margin.",
+      "base_assumption": "No CoWoS revenue.",
+      "bull_assumption": "CoWoS-L 1k wpm starts in 2027, ramping to revenue CNY 960 mn in 2027E, CNY 1.5 bn in 2028E; net profit ~CNY 290-450 mn.",
+      "bear_assumption": "No CoWoS endorsement.",
+      "revenue_impact": "Bull: incremental CNY 0.96-1.5 bn per year.",
+      "profit_impact": "Bull: incremental net profit CNY 290-450 mn.",
+      "eps_impact": "Adds ~CNY 0.15-0.25 per share (assumes 2 bn shares).",
+      "fcf_or_capital_impact": "Requires upfront capex of ~USD 500 mn, dilutive unless externally funded.",
+      "valuation_impact": "Could add CNY 50-80 bn to market cap on 30x PE or DCF.",
+      "quantification_status": "partially_quantified",
+      "evidence_ids": [
+        "KPE10"
+      ],
+      "missing_inputs": [
+        "Official confirmation",
+        "Capex requirement",
+        "Exact pricing and margin"
+      ]
+    }
+  ],
+  "moat_evidence_tests": [
+    {
+      "moat_mechanism": "Deep customer lock-in with AMD through joint-venture and co-investment (Penang facility).",
+      "observable_test": "AMD's share of TFMC's packaging business and tenure of the relationship.",
+      "comparison_basis": "Compare with other OSATs' top customer concentration and contract duration.",
+      "evidence_result": "Company disclosed it handles >80% of AMD's certain products; JV operational since 2016.",
+      "financial_transmission": "Ensures high capacity utilization (→ fixed cost absorption) and reduces customer acquisition cost; supports plan for new capacity.",
+      "strongest_counterevidence": "AMD could diversify suppliers or bring advanced packaging in-house as complexity increases.",
+      "status": "proven",
+      "evidence_ids": [
+        "EV085",
+        "EV034"
+      ],
+      "next_verification": "Monitor any supply chain diversification announcement from AMD."
+    },
+    {
+      "moat_mechanism": "Scale and technological edge in advanced packaging (Chiplet, fan-out, 2.5D) creating a cost and yield advantage.",
+      "observable_test": "Revenue share from advanced packaging above domestic peers; R&D spending and patent portfolio.",
+      "comparison_basis": "JCET, ASE, other Chinese OSATs.",
+      "evidence_result": "No direct segment data; R&D disclosures indicate investment in fan-out, 2.5D. Investor Q&A confirms technology focus.",
+      "financial_transmission": "Higher ASP and better margins; ability to win next-generation orders from AMD and domestic AI chip companies.",
+      "strongest_counterevidence": "TSMC remains the dominant advanced packaging provider; TFMC may be confined to lower-tier or second-source roles.",
+      "status": "partial",
+      "evidence_ids": [
+        "EV028",
+        "EV085"
+      ],
+      "next_verification": "Product qualification announcements and share-of-wallet data from AMD's 7nm/5nm/2nm nodes."
+    }
+  ],
+  "valuation_buckets": [
+    {
+      "bucket": "Core OSAT earnings (advanced + legacy)",
+      "inclusion": "core",
+      "valuation_method": "PE target on forward net profit",
+      "metric_and_period": "2027E net profit (midpoint of base scenario)",
+      "metric_value": 4200.0,
+      "valuation_multiple": 25.0,
+      "ownership_pct": 100.0,
+      "haircut_pct": 0.0,
+      "equity_value_cny_mn": 105000.0,
+      "per_share_value_cny": null,
+      "overlap_key": "",
+      "double_counting_treatment": "Standalone core business.",
+      "evidence_ids": [
+        "KPE01",
+        "EV014"
+      ],
+      "missing_inputs": [
+        "Diluted share count → per-share value not calculable."
+      ]
+    },
+    {
+      "bucket": "CoWoS-L optionality (AMD allocation)",
+      "inclusion": "optionality",
+      "valuation_method": "DCF or PE on incremental profit from CoWoS",
+      "metric_and_period": "2028E incremental net profit CNY 400 mn",
+      "metric_value": 400.0,
+      "valuation_multiple": 30.0,
+      "ownership_pct": 50.0,
+      "haircut_pct": 50.0,
+      "equity_value_cny_mn": 6000.0,
+      "per_share_value_cny": null,
+      "overlap_key": "CoWoS",
+      "double_counting_treatment": "Outside core, only included if confirmed.",
+      "evidence_ids": [
+        "KPE10"
+      ],
+      "missing_inputs": [
+        "Confirmation status",
+        "Exact profit contribution"
+      ]
+    },
+    {
+      "bucket": "Potential domestic AI packaging boom (non-AMD)",
+      "inclusion": "scenario",
+      "valuation_method": "Revenue growth premium reflected in higher core PE (30x instead of 25x)",
+      "metric_and_period": "Bull scenario PE 30x on CNY 4,200 mn = 126,000 mn.",
+      "metric_value": 4200.0,
+      "valuation_multiple": 30.0,
+      "ownership_pct": 100.0,
+      "haircut_pct": 0.0,
+      "equity_value_cny_mn": 126000.0,
+      "per_share_value_cny": null,
+      "overlap_key": "",
+      "double_counting_treatment": "Alternative to core bucket; choose one scenario.",
+      "evidence_ids": [
+        "KPE03",
+        "KPE04"
+      ],
+      "missing_inputs": []
+    }
+  ],
+  "valuation_closure": {
+    "current_price_cny": null,
+    "diluted_share_count_mn": null,
+    "core_value_per_share_cny": null,
+    "probability_weighted_fair_value_per_share_cny": null,
+    "option_value_per_share_cny": null,
+    "other_adjustments_per_share_cny": null,
+    "fair_value_per_share_cny": null,
+    "expected_return_pct": null,
+    "formula": "Probability-weighted SOTP: base case core PE of CNY 105 bn at 55% + bull case (core 30x + CoWoS optionality) at 25% + bear case 15x on CNY 2,400 mn = CNY 36 bn at 20%. Equity value = 0.55*105 + 0.25*(126+6) + 0.20*36 = CNY 57.75 + 33 + 7.2 = 97.95 bn. Fair value per share = 97,950 mn / diluted shares (unknown).",
+    "rating_consistency_check": "No rating; valuation is scenario-based.",
+    "double_counting_checks": [
+      "CoWoS optionality is additive in bull only, not in base; overlap prevented by scenario assignment."
+    ],
+    "status": "not_valued",
+    "missing_inputs": [
+      "Diluted share count",
+      "Current price for expected return calculation"
+    ]
+  },
+  "llm_analysis_layer": {
+    "business_question_tree": [
+      "What percentage of total packaging revenue is from advanced vs. legacy packaging, and what is the margin differential?",
+      "Is AMD's CoWoS-L outsourcing a realistic probability, and what is the capex and timeline?",
+      "How sticky are AMD's orders beyond 2027, given competition from TSMC and other OSATs?",
+      "Can TFMC sustain >20% revenue growth without dilutive equity issuance?",
+      "What are the exact cash flow dynamics: depreciation, working capital, capex, and free cash flow?",
+      "What is the Chinese domestic AI chip demand for packaging, and how much can TFMC capture?"
+    ],
+    "profit_pool_priority": "The integrated circuit packaging and testing segment accounts for ~98% of revenue and virtually all profit. Within this, the most important profit pool is advanced packaging (Chiplet, 2.5D, CoWoS) because it carries 2-3x the ASP and higher margin than traditional packaging. However, without segment disclosure, we estimate advanced packaging contributes maybe 20-25% of 2025 revenue but a disproportionate share of gross profit. The second pool is traditional packaging for AMD's CPU/GPU, which is volume-driven with lower margins but steady cash generation. The mold/material sales pool is negligible. Therefore, the model's sensitivity is entirely driven by the advanced packaging ramp and the CoWoS optionality.",
+    "competition_and_substitution_analysis": "True peers are JCET, ASE Group, and Amkor for OSAT advanced packaging; TSMC for CoWoS in-house. TFMC's differentiator is its exclusive AMD JV relationship and growing domestic customer base. However, switching risk remains: AMD could bring more backend in-house or use TSMC's integrated service for high-end chips. Substitution risk from chiplets moving to hybrid bonding or direct copper interconnects could alter packaging requirements. Domestic OSATs like JCET also investing heavily in advanced packaging, posing competitive threat for domestic AI chip orders. Supplier diversification is moderate: TFMC depends on substrates and gold wire suppliers, but can source from multiple regions. New entrants (e.g., vertically integrated fab-pack fabs) could emerge.",
+    "qualitative_to_quantitative_bridge": "Qualitatively, the market narrative is that TFMC is the purest AMD AI leap play, with upside from CoWoS. Quantitatively, we have an H1 2026 profit range of CNY 16-18 bn, which annualizes to ~32-36 bn. But that includes one-off items; normalized core profit is lower. Without capex and tax data, we cannot build a full DCF. Our bridge takes the H1 run-rate, applies a full-year multiplier of 1.85x (considering H2 is stronger), yields CNY 29-33 bn revenue. We then apply an improving net margin (from 4.4% in Q1 to ~5.5% for the year) to arrive at a parent profit of ~CNY 1.6-1.8 bn for 2026E. The model's gap is the lack of segment-level margins and cash flow inputs.",
+    "expectation_gap_analysis": "At current market cap ~CNY 119 bn and PE TTM 82.6x, the market appears to be pricing in the bull scenario (rapid advanced packaging growth and CoWoS win). Our base-case equity value of CNY 105 bn (25x 2027E) suggests the stock is approximately fair, while the probability-weighted value (using only the base/bear/bull scenarios we built) is ~CNY 98 bn, implying slight overvaluation unless bull case materializes. The gap is timing and magnitude: the market is assigning high probability to CoWoS that the company has not yet confirmed. The bear scenario (CNY 36 bn) shows significant downside if AMD relationship disappoints.",
+    "red_team_counterarguments": [
+      "Counter to bullish AMD thesis: 'AMD's current CoWoS demand is only a fraction of NVIDIA's, and the spike in 2027 is based on analyst estimates. If AMD's Venice or MI455 ramp disappoints, demand could be cut 30-40%, and TSMC will keep the high-end CoWoS in-house, leaving TFMC with legacy packaging only.'",
+      "Counter to bearish single-customer risk: 'AMD's roadmap and market share gain in server CPU is durable; even a 20% downside in 2027 CoWoS would still leave TFMC with high-double-digit revenue growth, and the company could easily fill capacity with domestic AI chip customers at better margins than legacy packaging.'"
+    ],
+    "valuation_explanation": "Valuation is a function of the earnings bridge: we use scenarios to map the operating assumptions to net profit, applying a PE multiple that reflects the growth and risk profile. For the base case, a 25x PE on 2027E net profit of CNY 4.2 bn yields CNY 105 bn. The bull case uses a higher multiple (30x) and adds CoWoS option value, while bear uses a depressed 15x. Multiples are subjective but consistent with historical trading range and peer comparison. The key risk premium variable is the probability of AMD CoWoS; without that, the stock should trade closer to peers like JCET (15-20x). Sensitivity: 1% change in operating margin translates to ~CNY 300 mn in operating profit, around CNY 0.15 EPS impact (assuming 2 bn shares), affecting fair value by ~CNY 3-5 per share.",
+    "final_editorial_synthesis": "TFMC is a pure-play bet on AMD's AI silicon boom and the structural shift to advanced packaging. While the company's H1 2026 profit explosion supports a strong operational momentum, the thesis hinges on two unconfirmed variables: AMD's outsourcing of CoWoS-L and the sustainability of margin improvement. Our scenario analysis shows that at the current valuation, the market is giving credit to the bull case, leaving limited margin of safety. A cautious PM would demand official confirmation of CoWoS plans and evidence of expanding non-AMD customer base before adding. The investment boils down to whether you believe the sell-side narrative that AMD is desperate for alternative CoWoS capacity and that TFMC is the sole beneficiary. Without that confirmation, the risk/reward is balanced at best.",
+    "evidence_boundaries": [
+      "KPE01/02 profit guidance is private channel check but widely circulated; useful for framing but not audited.",
+      "Revenue growth assumption based on extrapolation; no official guidance beyond H1.",
+      "CoWoS value proposition from KPE10 is unverified; no management confirmation.",
+      "Share count entirely unresolved."
+    ]
+  },
+  "handoff_manifest": {
+    "handoff_version": "underwriting-v2",
+    "source_of_truth": "structured_research.underwriting_packet",
+    "frozen_reported_facts": [
+      "FY2025 revenue CNY 27,921.4 mn (+16.92% YoY)",
+      "Q1 2026 revenue CNY 7,481.7 mn",
+      "Q1 2026 gross margin 13.3247%, operating margin 6.2765%, net margin 4.3982%",
+      "FY2025 parent net profit CNY 1,218.7 mn",
+      "AMD >80% share for certain products (Q&A)",
+      "H1 2026 parent net profit guidance 16-18 bn (KPE01/02)"
+    ],
+    "analyst_estimates": [
+      "2026E-2028E revenue growth rates (21%, 18%, 15% base)",
+      "Operating margin expansion path",
+      "CoWoS-L optionality value",
+      "Scenario probabilities (25/55/20)"
+    ],
+    "unresolved_model_cells": [
+      "Diluted share count → EPS, FCF per share, and per-share valuation",
+      "CapEx and OCF historical series → FCF forecast",
+      "Advanced packaging revenue share and margin → mix assumptions",
+      "Effective tax rate → net profit walk",
+      "Placement size → dilution impact"
+    ],
+    "downstream_must_preserve": [
+      "Full business_unit_map with two units",
+      "Segment models with prosperity analysis",
+      "Five underwriting questions linked to model variables",
+      "Three forward years (2026E-2028E) with placeholder forecast lines",
+      "Bull/base/bear scenarios with qualitative and probability assignments",
+      "Two thesis financial bridges (mix shift, CoWoS optionality)",
+      "Two moat evidence tests",
+      "Valuation buckets and closure using probability-weighted SOTP",
+      "LLM analysis layer with all eight components"
+    ]
+  },
+  "evidence_change_rules": [
+    {
+      "evidence_id": "KPE01",
+      "affected_segment": "集成电路封装测试",
+      "affected_variable": "parent net profit 2026E",
+      "old_assumption": "Using 17 bn midpoint as base quarterizer",
+      "new_assumption": "unchanged/watch",
+      "financial_transmission": "Full-year 2026E parent profit highly dependent on H2 trajectory; currently using ceiling of H1 guidance multiplied by seasonality factor.",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "Cross-check with semi-annual report when filed."
+    },
+    {
+      "evidence_id": "KPE10",
+      "affected_segment": "集成电路封装测试",
+      "affected_variable": "CoWoS capacity (optionality bucket)",
+      "old_assumption": "Not modelled in base case",
+      "new_assumption": "unchanged",
+      "financial_transmission": "If confirmed, will be added as a separate revenue stream with appropriate capex and dilution.",
+      "probability_before_after": "bull probability could rise from 25% to 35% if confirmed",
+      "disposition": "watch",
+      "verification_gate": "Official company announcement or AMD supply chain disclosure."
+    },
+    {
+      "evidence_id": "KPE02",
+      "affected_segment": "半导体封测",
+      "affected_variable": "profit_or_eps",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "KPE03",
+      "affected_segment": "半导体封测",
+      "affected_variable": "utilization_or_backlog",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "KPE04",
+      "affected_segment": "半导体封测",
+      "affected_variable": "utilization_or_backlog",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "KPE06",
+      "affected_segment": "半导体封测",
+      "affected_variable": "asp_or_price",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "KPE07",
+      "affected_segment": "半导体封测",
+      "affected_variable": "segment_volume",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "KPE08",
+      "affected_segment": "半导体封测",
+      "affected_variable": "asp_or_price",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "KPE09",
+      "affected_segment": "半导体封测",
+      "affected_variable": "utilization_or_backlog",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "KPE05",
+      "affected_segment": "半导体封测",
+      "affected_variable": "segment_volume",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch_unchanged",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    }
+  ],
+  "reconciliation_checks": [
+    "Revenue base FY2025 matches reported 279.21 bn.",
+    "Segment revenue weight derived from annual report: IC packaging 97.59%, mold 2.41%.",
+    "Q1 2026 margin data sourced from earnings model, cross-checked with investor interaction content.",
+    "No EPS cross-check possible because share count missing."
+  ],
+  "analyst_instructions": [
+    "Prioritize obtaining diluted share count from Tushare or latest filing to enable per-share valuation.",
+    "Retrieve 2025 annual and 2026 semi-annual full financial statements for OCF, capex, and balance sheet details.",
+    "Contact IR for advanced packaging revenue share and CoWoS status before finalizing bull scenario weight.",
+    "Validate KPE01/02 profit guidance against semi-annual report actuals."
+  ],
+  "preprocessing_notes": [
+    "All evidence considered; one main segment dominates. Advanced packaging treated as analytical unit without separate reported numbers.",
+    "CoWoS narrative (KPE10) is high-impact but unconfirmed; placed in optionality bucket only.",
+    "Q1 2026 inventory build warrants monitoring but not yet a negative signal given strong revenue growth.",
+    "Private placement approval suggests upcoming equity issuance that will dilute existing shareholders; model placeholder for dilution unknown.",
+    "operating model driver coverage (volume_price_cost): capacity, utilization, volume, price/ASP, unit/input cost, spread/margin, capex/ROIC"
+  ]
+}

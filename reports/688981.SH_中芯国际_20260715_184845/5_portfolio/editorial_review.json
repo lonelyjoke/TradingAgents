@@ -1,0 +1,98 @@
+{
+  "review": {
+    "revision_required": true,
+    "company_understanding_score": 4,
+    "independent_model_score": 3,
+    "evidence_and_counterevidence_score": 3,
+    "valuation_closure_score": 2,
+    "readability_and_synthesis_score": 4,
+    "strongest_aspects": [
+      "公司解构清晰地区分了成熟制程（经济核心）与先进制程（战略期权）的本质差异，避免了混为一谈的常见错误",
+      "EBITDA利润率与营业利润率的剪刀差分析精准抓住了'折旧深渊'这一核心矛盾，定量证据链完整",
+      "存货/营收比的周期对比（与2022年峰值类比）构建了强有力的熊方预警逻辑",
+      "valuation_closure中的场景加权方法框架正确，且明确将先进制程置于场景估值而非核心估值"
+    ],
+    "findings": [
+      {
+        "section": "thesis_moat_financial_bridge",
+        "priority": "must_revise",
+        "issue": "公开论文章节缺失最强反证、市场定价含义和证伪条件，违反研究经理交接清单要求",
+        "evidence_or_logic_gap": "研究经理在core_theses中为每条论点指定了strongest_counterevidence、market_pricing和falsification_gate，但thesis_financial_bridge章节仅呈现了多头/熊方的运营公式和收益影响，缺少：1）每条逻辑的明确反方论点（如逻辑一的反证是'折旧终将过去，EBITDA弹性巨大'）；2）当前市场定价如何体现或忽视该矛盾（如'PE TTM 274x完全未price in折旧长期压制'）；3）该逻辑被推翻的客观条件（如'连续两季毛利率回升至25%+且公司下调CapEx指引'）。",
+        "revision_instruction": "在thesis_financial_bridge的每条逻辑后增补三要素：a）最强反证，一句话概括对立观点（可引自core_theses的strongest_counterevidence）；b）市场定价含义，指出当前估值是否及如何反映该风险（如'市场将管理层乐观指引计入了定价，而忽视库存数据的客观警示'）；c）证伪条件，明确什么具体数据何时出现可推翻该逻辑（如'Q2存货/营收比回落至35%以下且营收增速>15%'）。三者各一句即可，无需复述workbench的结构化标签。"
+      },
+      {
+        "section": "valuation_and_expectation_gap",
+        "priority": "must_revise",
+        "issue": "估值闭合中的手写价值数字与程序化估值表的确定性输出矛盾，公众章节引用了未经验证的自算数值",
+        "evidence_or_logic_gap": "研究经理交接中明确要求'public chapters must accept the deterministic valuation output and reject any prose number that differs from it'。但当前thesis_financial_bridge称基准情景2028E价值2850亿（每股33.4元），而canonical_model_snapshot中base_fair_value行为33.4元/股（对应2856亿元=9520×30）。此差异虽小（6亿元），但valuation_and_expectation_gap章节的反推计算（'维持30倍P/E不降需净利润460亿'）和隐含增长检验（'138亿=100倍PE'）未与确定性估值表中的场景数据精确对齐——应直接引用程序的概率加权结果而非独立手算。",
+        "revision_instruction": "执行以下精确对齐：a）所有手写估值数字（核心价值、期权价值、每股价值、概率加权结果、预期回报、安全价格）必须与程序化输出单向一致；如有差异，以程序输出为准并修散文；b）valuation_and_expectation_gap中的隐含增长反推检验保留其叙事价值，但须附注说明主要估值输出以程序计算结果表为唯一数字口径；c）在valuation_closure或其附近显式引用确定性的每股公允价值、预期回报和安全价格（当前程序输出为约4.17e-05元/股，预期回报约-99.99%），避免章节间出现互相矛盾的'合理估值区间'。"
+      },
+      {
+        "section": "valuation_and_expectation_gap",
+        "priority": "must_revise",
+        "issue": "程序化估值数值输出疑为技术性错误，单位或精度导致每股价值仅约0.00004元，远低于章节中手写的33-67元区间",
+        "evidence_or_logic_gap": "deterministic_valuation输出中，base场景fair_value_per_share_cny为3.34e-05（即0.0000334元），概率加权核心价值3.28e-05，期权价值8.93e-06，最终公平价值4.17e-05。该值与章节正文所述'33元'相差约100万倍。结合diluted_share_count_mn为8,561,000,000（约85.61亿），推测程序在处理'净利（亿元）÷股份（百万股）'的分子分母单位转换时存在一致性的缩放错误：净利以'CNY mn'输入（9520），股份以'股'输入（8,561,000,000），而EPS公式应为净利（元）÷股份（股），即9520×1e6÷8,561,000,000≈1.11元/股，再乘以PE得约33.4元/股。程序当前输出却呈现出除以1e6的效应，导致每股价值低于1分钱。",
+        "revision_instruction": "在与quant/system所有者确认前，以下两种处置择一：a）若确认程序输出有误，则明确标注'程序估值输出存在单位缩放异常，已上报，本章节估值论述按标准PE公式手工计算，待修复后对齐'；b）若确认程序逻辑正确而我们理解有误，则重新解读输出含义并据此改写所有估值段落。无论哪一种，在修复前，任何公众估值章节都不得继续使用与程序输出显著矛盾的散文数字。"
+      },
+      {
+        "section": "three_year_forecast",
+        "priority": "should_revise",
+        "issue": "三年预测表中营收、毛利、营业利润的隐含毛利率和费用假设存在多版本不一致",
+        "evidence_or_logic_gap": "analyst_report正文引用'综合毛利率21.5%/22.0%/23.0%'，而canonical_model_snapshot中grossprofit行注明formula为'Gross margin 21.5%/22.0%/23.0% of revenue'，但计算验证：2026E毛利16,645.7÷营收77,421.7=21.5%（一致）；2028E毛利21,915.2÷营收95,283.5=23.0%（一致）。然而，研究经理的forecast_assumptions中引用的营收值为773亿、865亿、952亿，但underwriting_packet的forecast_lines中2026E营收为77,421.7（即774.2亿），与此处的773亿存在约1.1亿的偏差。营业利润行亦如此：2026E 7,742.2÷77,421.7=10.0%，与正文'10.0%'一致，但研究经理autonomous_forecast_model中营业收入行标注为77,300（773亿），毛利率又标注为21.0%。三个来源对2026E的收入/毛利率假设存在三个不同版本。",
+        "revision_instruction": "统一为单一版本：a）以canonical_model_snapshot为唯一事实来源，将public_report、autonomous_forecast_model和forecast_lines中的不一致数字修正为完全一致的数值；b）在三年预测表格或附注中注明该表数字与canonical_model_snapshot行精确对应；c）毛利率假设若存在基期/预测期口径差异（如21.6%→21.5%的下滑），需给出明确的解释，并非简单罗列。"
+      },
+      {
+        "section": "thesis_moat_financial_bridge",
+        "priority": "should_revise",
+        "issue": "护城河证据评分与moat_evidence_verdict的结论存在矛盾——正文称'政府保护是唯一被证实护城河'，但研究经理裁决中规模优势为partial、客户粘性为unproven、政府保护为proven",
+        "evidence_or_logic_gap": "研究经理moat_evidence_verdict明确判定：规模与产能成本优势status='未经证实-只是一种潜力'，客户转换成本status='未经证实'，政府战略保护status='存在且强有力，但外部风险巨大'。而public_report的moat_evidence_scorecard中，虽然部分承认了规模成本优势和客户粘性的不足，但将政府保护描述为'提供了生存韧性和逆周期扩张的资金基础'，未同时强调其外部风险（出口管制可直接抵消），与研究经理的'反证：政策保护不能消除技术差距，且出口管制可直接抵消该优势'形成单向削弱。",
+        "revision_instruction": "在moat_evidence_scorecard的政府保护段落中，增加一句明确的边界说明，例如：'但正如研究裁决所指，政策保护无法消除技术代差，且美国出口管制的持续收紧可直接抵消政府对先进产能扩张的扶持效果。因此该护城河更多体现为下行保护而非商业竞争优势。'"
+      },
+      {
+        "section": "cross_section_consistency",
+        "priority": "should_revise",
+        "issue": "手记清单中的三个确定性交接问题（最强反证缺失、市场定价含义缺失、证伪条件缺失）在当前public chapters中确实缺乏对应内容，已在本审查的thesis_moat_financial_bridge修订要求中覆盖",
+        "evidence_or_logic_gap": "该问题已被must_revise的thesis_moat_financial_bridge章节修订指令覆盖，本finding为交叉确认标记。当前thesis_financial_bridge的三条逻辑均以'公式-假设-影响'的线性技术推演呈现，未引入对立观点、未评述市场价格是否错误定价该矛盾、未设定可观测的证伪触发条件。这与研究经理在core_theses卡片中为每条论点精心准备的反证/定价/证伪框架形成脱节。",
+        "revision_instruction": "参见thesis_moat_financial_bridge的must_revise条目。无需额外操作，本条用于确认缺陷定位一致。"
+      },
+      {
+        "section": "industry_cycle_and_competition",
+        "priority": "optional",
+        "issue": "行业竞争分析缺少对华虹、晶合集成等国内对手在成熟制程上的具体产能威胁的量化或对比",
+        "evidence_or_logic_gap": "industry_cycle_and_competition章节提到'国内华虹、晶合集成等对手新建产能集中释放，价格竞争趋于白热化'，但缺乏任何具体数据支撑（对手产能规模、价格降幅、中芯份额变化）。同时，该章节约50%的篇幅重述了company_disaggregation中已详述的成熟/先进制程二元结构，属于实质性重复。",
+        "revision_instruction": "a）将行业竞争分析中与公司解构重复的经济单元描述压缩为一两句简要引用（参考company_disaggregation的交叉引用），腾出篇幅用于：b）补充至少一个可量化的竞争威胁信号（如华虹12英寸产能扩张规模、成熟制程ASP的同比变化幅度、或中芯在成熟节点的国内份额趋势），即使数据来自行业估算也注明来源和置信度。若确实无法获取量化数据，则应显式声明数据缺口及推理的局限性。"
+      },
+      {
+        "section": "valuation_and_expectation_gap",
+        "priority": "optional",
+        "issue": "安全价格区间的输出异常——程序输出安全买入上限为0.000018元，与章节中建议的30-60元区间差距约330万倍",
+        "evidence_or_logic_gap": "该异常与估值输出的单位缩放错误同源（参见valuation_and_expectation_gap的第二个must_revise），此处为下游效应。risks_catalysts_verification章节中引用的'30-60元安全价格区间'是基于手工计算的场景分析（基准33元、熊市15元），与程序输出的safe_buy_price_ceiling（1.84e-05元）和fundamental_floor（1.47e-05元）完全不在同一数量级。",
+        "revision_instruction": "a）此条目与估值程序异常修复联动；修复后重新生成安全价格；b）在修复前，risks_catalysts_verification中的安全价格区间和建仓建议应附脚注说明'安全价格基于手工场景计算，待程序估值精度修复后复核'；c）严禁在任何面向投资者的输出中同时出现两个相差数百万倍的安全价格。"
+      }
+    ],
+    "overall_editorial_verdict": "报告的公司解构、矛盾识别和叙事框架质量较高，折旧剪刀差和库存预警的分析是有力的看跌论证。但估值闭合存在两个关键技术性缺陷——手写价值与程序输出未对齐、程序输出本身疑有单位缩放错误——这使整份报告的'卖出'结论虽方向正确，却不能在数字上自证。此外，论文章节缺失反证、市场定价含义和证伪条件，削弱了研究经理工作台辛苦构建的逻辑严密性，属于前置交接要求未完成的实质缺陷。修复上述三类问题后，报告可达高质量卖方深度水准。"
+  },
+  "review_status": {
+    "mode": "schema_prompt_structured",
+    "agent": "Sell-Side Research Editor",
+    "structured_error": ""
+  },
+  "revision_requested": true,
+  "revision_applied": true,
+  "revision_status": {
+    "mode": "schema_prompt_structured",
+    "agent": "Portfolio Manager Editorial Revision",
+    "structured_error": ""
+  },
+  "initial_handoff_issues": [],
+  "initial_analytical_issues": [
+    "public thesis chapter missing strongest counterargument/boundary",
+    "public thesis chapter missing market-pricing implication",
+    "public thesis chapter missing falsification condition"
+  ],
+  "remaining_handoff_issues": [],
+  "remaining_analytical_issues": [
+    "public thesis chapter missing market-pricing implication"
+  ],
+  "revision_rejection_reasons": []
+}

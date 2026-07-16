@@ -70,6 +70,250 @@ LITHIUM_BATTERY_TERMS = (
 )
 
 
+SEMICONDUCTOR_FOUNDRY_SYMBOL_HINTS = frozenset(
+    {
+        "688981.SH",  # SMIC A
+        "00981.HK",  # SMIC H
+        "01347.HK",  # Hua Hong Semiconductor
+        "688347.SH",  # Hua Hong Semiconductor A
+    }
+)
+
+SEMICONDUCTOR_FOUNDRY_TERMS = (
+    "\u6676\u5706\u4ee3\u5de5",
+    "\u6676\u5706\u5236\u9020",
+    "\u96c6\u6210\u7535\u8def\u5236\u9020",
+    "\u534a\u5bfc\u4f53\u5236\u9020",
+    "\u6676\u5706",
+    "\u5236\u7a0b",
+    "\u4ea7\u80fd\u5229\u7528\u7387",
+    "\u5149\u523b",
+    "\u4e2d\u82af\u56fd\u9645",
+    "\u534e\u8679\u534a\u5bfc\u4f53",
+    "semiconductor foundry",
+    "wafer foundry",
+    "pure-play foundry",
+    "integrated circuit manufacturing",
+    "wafer manufacturing",
+    "process node",
+    "node mix",
+    "fab utilization",
+    "wafer starts",
+    "smic",
+)
+
+SEMICONDUCTOR_FOUNDRY_STRONG_TERMS = (
+    "\u6676\u5706\u4ee3\u5de5",
+    "\u6676\u5706\u5236\u9020",
+    "\u96c6\u6210\u7535\u8def\u5236\u9020",
+    "\u534a\u5bfc\u4f53\u5236\u9020",
+    "\u4e2d\u82af\u56fd\u9645",
+    "\u534e\u8679\u534a\u5bfc\u4f53",
+    "semiconductor foundry",
+    "wafer foundry",
+    "pure-play foundry",
+    "integrated circuit manufacturing",
+    "wafer manufacturing",
+    "smic",
+)
+
+
+SEMICONDUCTOR_DESIGN_SYMBOL_HINTS = frozenset(
+    {
+        "603501.SH",  # Will Semiconductor
+        "603986.SH",  # GigaDevice
+        "688008.SH",  # Montage Technology
+        "688018.SH",  # Espressif
+        "688041.SH",  # Hygon Information
+        "688099.SH",  # Amlogic
+        "688256.SH",  # Cambricon
+        "688385.SH",  # Fudan Microelectronics
+        "603893.SH",  # Rockchip
+        "002049.SZ",  # Unigroup Guoxin
+    }
+)
+
+SEMICONDUCTOR_DESIGN_TERMS = (
+    "\u82af\u7247\u8bbe\u8ba1",
+    "\u96c6\u6210\u7535\u8def\u8bbe\u8ba1",
+    "\u65e0\u6676\u5706\u5382",
+    "\u65e0\u5382\u534a\u5bfc\u4f53",
+    "\u82af\u7247",
+    "\u5904\u7406\u5668",
+    "\u5b58\u50a8\u82af\u7247",
+    "\u6a21\u62df\u82af\u7247",
+    "\u5c04\u9891\u82af\u7247",
+    "\u7535\u6e90\u7ba1\u7406\u82af\u7247",
+    "\u82af\u7247\u4ea7\u54c1",
+    "\u82af\u7247\u5e73\u53f0",
+    "\u6d41\u7247",
+    "fabless",
+    "chip design",
+    "ic design",
+    "semiconductor design",
+    "processor",
+    "gpu",
+    "cpu",
+    "soc",
+    "asic",
+    "fpga",
+    "mcu",
+    "pmic",
+    "rf chip",
+)
+
+SEMICONDUCTOR_DESIGN_STRONG_TERMS = (
+    "\u82af\u7247\u8bbe\u8ba1",
+    "\u96c6\u6210\u7535\u8def\u8bbe\u8ba1",
+    "\u65e0\u6676\u5706\u5382",
+    "\u65e0\u5382\u534a\u5bfc\u4f53",
+    "fabless",
+    "chip design",
+    "ic design",
+    "semiconductor design",
+)
+
+SEMICONDUCTOR_EQUIPMENT_SYMBOL_HINTS = frozenset(
+    {
+        "002371.SZ",  # NAURA
+        "603690.SH",  # PNCS
+        "688012.SH",  # AMEC
+        "688037.SH",  # Kingsemi
+        "688072.SH",  # Piotech
+        "688082.SH",  # ACM Research Shanghai
+        "688120.SH",  # Hwatsing
+    }
+)
+
+SEMICONDUCTOR_EQUIPMENT_TERMS = (
+    "\u534a\u5bfc\u4f53\u8bbe\u5907",
+    "\u6676\u5706\u5236\u9020\u8bbe\u5907",
+    "\u523b\u8680\u8bbe\u5907",
+    "\u8584\u819c\u6c89\u79ef",
+    "\u6c89\u79ef\u8bbe\u5907",
+    "\u6e05\u6d17\u8bbe\u5907",
+    "\u6d82\u80f6\u663e\u5f71",
+    "\u53bb\u80f6",
+    "\u79bb\u5b50\u6ce8\u5165",
+    "\u91cf\u6d4b\u8bbe\u5907",
+    "\u68c0\u6d4b\u8bbe\u5907",
+    "\u5316\u5b66\u673a\u68b0\u62cb\u5149",
+    "\u5149\u523b\u673a",
+    "\u5149\u523b\u8bbe\u5907",
+    "semiconductor equipment",
+    "wafer fabrication equipment",
+    "wafer fab equipment",
+    "etch equipment",
+    "deposition equipment",
+    "cleaning equipment",
+    "cmp equipment",
+    "metrology",
+    "inspection equipment",
+    "lithography equipment",
+    "photoresist coating",
+)
+
+SEMICONDUCTOR_EQUIPMENT_STRONG_TERMS = (
+    "\u534a\u5bfc\u4f53\u8bbe\u5907",
+    "\u6676\u5706\u5236\u9020\u8bbe\u5907",
+    "\u523b\u8680\u8bbe\u5907",
+    "\u6e05\u6d17\u8bbe\u5907",
+    "\u91cf\u6d4b\u8bbe\u5907",
+    "\u68c0\u6d4b\u8bbe\u5907",
+    "semiconductor equipment",
+    "wafer fabrication equipment",
+    "wafer fab equipment",
+)
+
+
+def is_semiconductor_foundry_text(symbol: object = "", *parts: object) -> bool:
+    """Return True for wafer foundries before generic tech/cycle routing."""
+    normalized_symbol = str(symbol or "").strip().upper()
+    if normalized_symbol in SEMICONDUCTOR_FOUNDRY_SYMBOL_HINTS:
+        return True
+    text = " ".join([str(symbol or ""), *(str(part or "") for part in parts)])
+    lower = text.lower()
+    if any(term.lower() in lower for term in SEMICONDUCTOR_FOUNDRY_STRONG_TERMS):
+        return True
+    hits = sum(term.lower() in lower for term in SEMICONDUCTOR_FOUNDRY_TERMS)
+    return hits >= 3 and any(
+        term in lower
+        for term in (
+            "\u534a\u5bfc\u4f53",
+            "\u6676\u5706",
+            "\u96c6\u6210\u7535\u8def",
+            "semiconductor",
+            "foundry",
+            "wafer",
+            "fab",
+        )
+    )
+
+
+def is_semiconductor_design_text(symbol: object = "", *parts: object) -> bool:
+    """Return True for fabless/chip-design companies."""
+    normalized_symbol = str(symbol or "").strip().upper()
+    if normalized_symbol in SEMICONDUCTOR_DESIGN_SYMBOL_HINTS:
+        return True
+    if (
+        normalized_symbol in SEMICONDUCTOR_FOUNDRY_SYMBOL_HINTS
+        or normalized_symbol in SEMICONDUCTOR_EQUIPMENT_SYMBOL_HINTS
+    ):
+        return False
+    text = " ".join([str(symbol or ""), *(str(part or "") for part in parts)])
+    lower = text.lower()
+    if any(term.lower() in lower for term in SEMICONDUCTOR_DESIGN_STRONG_TERMS):
+        return True
+    hits = sum(term.lower() in lower for term in SEMICONDUCTOR_DESIGN_TERMS)
+    return hits >= 3 and any(
+        term in lower
+        for term in (
+            "\u82af\u7247",
+            "\u96c6\u6210\u7535\u8def",
+            "chip",
+            "ic",
+            "semiconductor",
+            "processor",
+        )
+    )
+
+
+def is_semiconductor_equipment_text(symbol: object = "", *parts: object) -> bool:
+    """Return True for wafer-fab semiconductor equipment suppliers."""
+    normalized_symbol = str(symbol or "").strip().upper()
+    if normalized_symbol in SEMICONDUCTOR_EQUIPMENT_SYMBOL_HINTS:
+        return True
+    if normalized_symbol in SEMICONDUCTOR_FOUNDRY_SYMBOL_HINTS:
+        return False
+    text = " ".join([str(symbol or ""), *(str(part or "") for part in parts)])
+    lower = text.lower()
+    if any(term.lower() in lower for term in SEMICONDUCTOR_EQUIPMENT_STRONG_TERMS):
+        return True
+    hits = sum(term.lower() in lower for term in SEMICONDUCTOR_EQUIPMENT_TERMS)
+    return hits >= 2 and any(
+        term in lower
+        for term in (
+            "\u8bbe\u5907",
+            "\u523b\u8680",
+            "\u6c89\u79ef",
+            "\u6e05\u6d17",
+            "equipment",
+            "etch",
+            "deposition",
+            "metrology",
+        )
+    )
+
+
+def is_semiconductor_text(symbol: object = "", *parts: object) -> bool:
+    """Return True for the currently supported semiconductor sub-frameworks."""
+    return (
+        is_semiconductor_foundry_text(symbol, *parts)
+        or is_semiconductor_design_text(symbol, *parts)
+        or is_semiconductor_equipment_text(symbol, *parts)
+    )
+
+
 CLEAN_ENERGY_POWER_ELECTRONICS_SYMBOL_HINTS = frozenset(
     {
         "300274.SZ",  # Sungrow

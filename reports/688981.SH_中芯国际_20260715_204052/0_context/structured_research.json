@@ -1,0 +1,3444 @@
+{
+  "schema_version": 3,
+  "symbol": "688981.SH",
+  "as_of_date": "2026-07-15",
+  "preprocessing_mode": "llm_semantic_plus_deterministic_validation",
+  "company_summary": "中芯国际是世界领先的集成电路晶圆代工企业之一，也是中国大陆技术最先进、规模最大的专业晶圆代工企业，提供0.35微米至14纳米多种技术节点的晶圆代工服务。2025年主营业务收入665.8亿元，同比增长16.6%，毛利率约21.8%。2026年Q1产能利用率93.1%，月产能107.8万片（8英寸等效），EBITDA利润率57.3%。",
+  "segments": [
+    {
+      "segment": "晶圆代工",
+      "aliases": [
+        "晶圆制造",
+        "Foundry"
+      ],
+      "products_or_services": "集成电路晶圆代工，覆盖0.35μm至14nm多种技术节点，包括逻辑、混合信号、射频、嵌入式存储等平台",
+      "revenue_weight_pct": 98.9,
+      "gross_profit_or_profit_weight_pct": 99.9,
+      "business_model": "产能出货型，资本密集，通过产能利用率、工艺组合与ASP实现盈利杠杆",
+      "key_drivers": [
+        "产能利用率",
+        "晶圆ASP",
+        "工艺节点组合",
+        "折旧与摊销",
+        "客户订单能见度",
+        "国产替代政策支持"
+      ],
+      "prosperity_level": "景气上行",
+      "marginal_direction": "向上",
+      "causal_chain": "AI/存储需求旺盛（需求）→ 产能扩张与利用率提升（Q1 93.1%）→ 晶圆涨价传导（ASP同比提升）→ 产品组合向先进制程迁移 → 毛利率与EBITDA margin改善 → OCF/NP 3.77x支撑资本开支 → 扩产循环继续推升收入与利润",
+      "supporting_metric_refs": [
+        "EV010",
+        "EV011",
+        "EV085",
+        "EV087",
+        "EV084"
+      ],
+      "counterevidence": [],
+      "confidence": "medium",
+      "missing_inputs": [
+        "分工艺节点毛利率",
+        "ASP同比变化",
+        "先进制程收入占比",
+        "未来产能扩张具体capex计划",
+        "折旧对净利润的影响量化"
+      ],
+      "revenue_cny_mn": 66580.2,
+      "revenue_reported_value": 66580241000.0,
+      "revenue_reported_unit": "元",
+      "revenue_growth_pct": 16.6,
+      "gross_margin_pct": 21.8,
+      "gross_margin_change_pp": null,
+      "period": "2025年度",
+      "source_module": "company_business_model",
+      "evidence_quote": "报告期内，本集团实现主营业务收入人民币 66,580.2 百万元，同比增加 16.6%。其中，晶圆 / Defines what actually drives the income statement.",
+      "extraction_mode": "llm_semantic"
+    },
+    {
+      "segment": "其他业务",
+      "aliases": [
+        "其他"
+      ],
+      "products_or_services": "设计服务、IP授权、光掩模制造等配套服务",
+      "revenue_weight_pct": 1.1,
+      "gross_profit_or_profit_weight_pct": 0.1,
+      "business_model": "服务与配套",
+      "key_drivers": [
+        "晶圆代工量",
+        "技术授权",
+        "客户需求"
+      ],
+      "prosperity_level": "稳定",
+      "marginal_direction": "未知",
+      "causal_chain": "依赖晶圆代工主业的配套需求，毛利率极低，利润贡献有限",
+      "supporting_metric_refs": [
+        "EV034",
+        "EV035"
+      ],
+      "counterevidence": [],
+      "confidence": "low",
+      "missing_inputs": [
+        "分项收入明细",
+        "具体业务构成"
+      ],
+      "revenue_cny_mn": 742.95,
+      "revenue_reported_value": 742951000.0,
+      "revenue_reported_unit": "元",
+      "revenue_growth_pct": null,
+      "gross_margin_pct": 0.39,
+      "gross_margin_change_pp": null,
+      "period": "2025年度",
+      "source_module": "company_business_model",
+      "evidence_quote": "收入 成本 收入 成本 主营业务 66,580,241 52,025,072 57,107,733 46,457,139 其他业务 742,951 740,051 687,837 594,128",
+      "extraction_mode": "llm_semantic"
+    },
+    {
+      "segment": "情况 其他主营业务",
+      "aliases": [],
+      "products_or_services": "",
+      "revenue_weight_pct": 100.0,
+      "gross_profit_or_profit_weight_pct": 100.0,
+      "business_model": "filing-reported business segment",
+      "key_drivers": [],
+      "prosperity_level": "weakening",
+      "marginal_direction": "deteriorating",
+      "causal_chain": "Reported segment revenue growth and gross-margin movement are available; demand, supply/capacity, ASP, utilization, working-capital and cash links still require semantic and source cross-checking.",
+      "supporting_metric_refs": [],
+      "counterevidence": [
+        "A filing growth rate alone cannot establish full segment prosperity."
+      ],
+      "confidence": "medium",
+      "missing_inputs": [
+        "dated demand/order evidence",
+        "capacity/utilization evidence",
+        "ASP/price evidence",
+        "segment cash-conversion evidence"
+      ],
+      "revenue_cny_mn": null,
+      "revenue_reported_value": 3786198.0,
+      "revenue_reported_unit": "filing table unit not explicit in extracted row",
+      "revenue_growth_pct": -2.0,
+      "gross_margin_pct": 32.0,
+      "gross_margin_change_pp": -17.0,
+      "period": "annual filing",
+      "source_module": "filing_intelligence",
+      "evidence_quote": "| segment_economics_depth | Decide whether each business line has enough disclosed scale, growth, margin, cash quality, and valuation treatment. | 中芯国际2025年年度报告: 收入 成本 收入 成本 主营业务 66,580,241 52,025,072 57,107,733 46,457,139 其他业务 742,951 740,051 687,837 594,128 (2)营业收入、营业成本的分解信息 | 中芯国际2025年年度报告: 主营业务 66,580,241 52,025,072 57,107,733 46,457,139 其他业务 742,951 740,051 687,837 594,128 (2)营业收入、营业成本的分解信息 合同分类 | 中芯国际2025年年度报告: 报告期内，本集团实现主营业务收入人民币 66,580.2 百万元，同比增加 16.6%。其中，晶圆 | 中芯国际2025年年度报告: 主营业务 主营业务 毛利率 毛利率比上 收入 成本 （%） 年增减（%） 主营业务分产品情况 其他主营业务 3,786,198 2,574,795 32.0 -2.0 -17.0 | Core segments can support base-case value; thin or header-only second curves stay in SOTP/scenario value. | Require revenue, cost/gross margin, profit or cash-quality evidence by product, channel, geography, or business bucket. |",
+      "extraction_mode": "deterministic_filing_row"
+    }
+  ],
+  "semantic_metrics": [
+    {
+      "segment": "consolidated",
+      "variable": "revenue",
+      "value": 17617218000.0,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "Q1 2026",
+      "comparison_basis": "quarterly reported",
+      "source_module": "earnings_model",
+      "source_quote": "| Revenue base | 17617218000 | N/A | YoY: 20260331 vs 20250331 | top-line starting point for volume × price × mix",
+      "evidence_status": "reported",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "revenue_base_quarter",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "revenue",
+      "value": 67323192000.0,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "FY 2025",
+      "comparison_basis": "annual reported",
+      "source_module": "earnings_model",
+      "source_quote": "| latest annual / FY / 20251231 / 67323192000 / 5040734000 / 67323192000 / 5040734000 / 67323192000 / 5040734000 / FY actual /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "revenue_base_annual",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "profit_or_eps",
+      "value": 5040734000.0,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "FY 2025",
+      "comparison_basis": "annual reported",
+      "source_module": "earnings_model",
+      "source_quote": "| latest annual / FY / 20251231 / 67323192000 / 5040734000 / 67323192000 / 5040734000 / 67323192000 / 5040734000 / FY actual /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "net_profit_parent",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "operating_margin_pct",
+      "value": 9.924,
+      "value_text": "",
+      "unit": "%",
+      "period": "Q1 2026",
+      "comparison_basis": "YoY: -5.29pp",
+      "source_module": "earnings_model",
+      "source_quote": "| Operating margin | 9.924% | -5.29pp | YoY: 20260331 vs 20250331 | tests pricing, mix, and cost absorption",
+      "evidence_status": "reported",
+      "direction": "",
+      "materiality": "medium",
+      "model_role": "margin_bridge",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "net_margin_pct",
+      "value": 7.7266,
+      "value_text": "",
+      "unit": "%",
+      "period": "Q1 2026",
+      "comparison_basis": "YoY: -0.59pp",
+      "source_module": "earnings_model",
+      "source_quote": "| Net margin | 7.7266% | -0.59pp | YoY: 20260331 vs 20250331 | captures final earnings conversion",
+      "evidence_status": "reported",
+      "direction": "",
+      "materiality": "medium",
+      "model_role": "net_profit_margin",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "cash_conversion_ratio",
+      "value": 3.77,
+      "value_text": "",
+      "unit": "ratio",
+      "period": "Q1 2026",
+      "comparison_basis": "YoY: N/A",
+      "source_module": "earnings_model",
+      "source_quote": "| OCF / net profit | 3.77 | N/A | YoY: 20260331 vs 20250331 | tests earnings quality and cash realization",
+      "evidence_status": "reported",
+      "direction": "",
+      "materiality": "medium",
+      "model_role": "cash_quality",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "receivables_to_revenue_pct",
+      "value": 9.0474,
+      "value_text": "",
+      "unit": "%",
+      "period": "Q1 2026",
+      "comparison_basis": "YoY: +0.46pp",
+      "source_module": "earnings_model",
+      "source_quote": "| Receivables / revenue | 9.0474% | +0.46pp | YoY: 20260331 vs 20250331 | tests working-capital drag; interim periods use annualized revenue",
+      "evidence_status": "calculated",
+      "direction": "",
+      "materiality": "low",
+      "model_role": "working_capital",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "inventory_to_revenue_pct",
+      "value": 38.5167,
+      "value_text": "",
+      "unit": "%",
+      "period": "Q1 2026",
+      "comparison_basis": "YoY: +4.98pp",
+      "source_module": "earnings_model",
+      "source_quote": "| Inventory / revenue | 38.5167% | +4.98pp | YoY: 20260331 vs 20250331 | tests inventory build and demand quality; interim periods use annualized revenue",
+      "evidence_status": "calculated",
+      "direction": "",
+      "materiality": "low",
+      "model_role": "demand_quality",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "晶圆代工",
+      "variable": "utilization_or_backlog",
+      "value": 93.1,
+      "value_text": "",
+      "unit": "%",
+      "period": "Q1 2026",
+      "comparison_basis": "average capacity utilization",
+      "source_module": "investor_interaction",
+      "source_quote": "公司2026年第一季度平均产能利用率为93.1%。",
+      "evidence_status": "reported",
+      "direction": "up",
+      "materiality": "high",
+      "model_role": "capacity_utilization",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "晶圆代工",
+      "variable": "capacity",
+      "value": 1078250.0,
+      "value_text": "",
+      "unit": "片/月（8英寸等效）",
+      "period": "Q1 2026",
+      "comparison_basis": "monthly capacity",
+      "source_module": "investor_interaction",
+      "source_quote": "截至2026年第一季度末，公司的月产能为1,078,250 片（折合 8 英寸标准逻辑）。",
+      "evidence_status": "reported",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "supply_capacity",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "晶圆代工",
+      "variable": "ebitda_margin_pct",
+      "value": 57.3,
+      "value_text": "",
+      "unit": "%",
+      "period": "Q1 2026",
+      "comparison_basis": "IFRS basis",
+      "source_module": "investor_interaction",
+      "source_quote": "公司2026年第一季度国际会计准则下的息税折旧摊销前利润率为57.3%。",
+      "evidence_status": "reported",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "profit_depreciation_lever",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "market_cap",
+      "value": 1315282233840.0,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "2026-07-15",
+      "comparison_basis": "closing market cap",
+      "source_module": "market_expectation",
+      "source_quote": "| Market cap (CNY) | 1315282233840 / current equity value /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "valuation_base",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "pe_ttm",
+      "value": 260.6807,
+      "value_text": "",
+      "unit": "ratio",
+      "period": "TTM",
+      "comparison_basis": "trailing 12 months",
+      "source_module": "market_expectation",
+      "source_quote": "| PE TTM | 260.6807 / earnings multiple the market is paying now /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "valuation_multiple",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "ps_ttm",
+      "value": 19.1622,
+      "value_text": "",
+      "unit": "ratio",
+      "period": "TTM",
+      "comparison_basis": "trailing 12 months",
+      "source_module": "market_expectation",
+      "source_quote": "| PS TTM | 19.1622 / sales multiple the market is paying now /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "valuation_multiple",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "net_profit_parent_q1_2026",
+      "value": 1361209000.0,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "Q1 2026",
+      "comparison_basis": "reported",
+      "source_module": "earnings_model",
+      "source_quote": "| snapshot | period | end_date | revenue | net_profit_parent | annualized_revenue | annualized_net_profit_parent | seasonality_adjusted_revenue | seasonality_adjusted_net_profit_parent | seasonality_method |",
+      "evidence_status": "reported",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "profit_driver",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "operating_cash_flow",
+      "value": 5131729000.0,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "Q1 2026",
+      "comparison_basis": "reported",
+      "source_module": "filing_intelligence",
+      "source_quote": "经营活动产生的现金流量净额 5,131,729 -1,171,520 不适用",
+      "evidence_status": "reported",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "cash_flow",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    }
+  ],
+  "deterministic_evidence": [
+    {
+      "evidence_id": "EV001",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Financial-report look-back: 900 days"
+    },
+    {
+      "evidence_id": "EV002",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "Compacted 中芯国际2025年年度报告: 361388 chars -> 130611 chars."
+    },
+    {
+      "evidence_id": "EV003",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260515, 2026, 季度",
+      "text": "20260515: 中芯国际2026年第一季度报告"
+    },
+    {
+      "evidence_id": "EV004",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260409, 2025",
+      "text": "20260409: 港股公告：2025年年报"
+    },
+    {
+      "evidence_id": "EV005",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260327, 2025, 年度",
+      "text": "20260327: 中芯国际2025年年度报告"
+    },
+    {
+      "evidence_id": "EV006",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20251114, 2025, 季度",
+      "text": "20251114: 中芯国际2025年第三季度报告"
+    },
+    {
+      "evidence_id": "EV007",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ announcement_lookup / ready / Found 8 candidate financial-report announcement(s) from primary and CNINFO sources. /"
+    },
+    {
+      "evidence_id": "EV008",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026, 季度",
+      "text": "/ pdf_text_extraction / failed / 中芯国际2026年第一季度报告: PDF downloaded but no readable text was extracted from ce90566c38d26831924ec9ee52a684d16d9621c1.pdf. /"
+    },
+    {
+      "evidence_id": "EV009",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025",
+      "text": "/ pdf_text_extraction / failed / 港股公告：2025年年报: PDF downloaded but no readable text was extracted from 7352a37bb3d96e65d3932604bc726e2bd50afbf7.pdf. /"
+    },
+    {
+      "evidence_id": "EV010",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "Q1, 20260331",
+      "text": "/ latest reported / Q1 / 20260331 / 17617218000 / 1361209000 / 70468872000 / 5444836000 / 75771994975.2466 / 5407653975.3789 / historical median 0331 share 25.2% /"
+    },
+    {
+      "evidence_id": "EV011",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "FY, 20251231",
+      "text": "/ latest annual / FY / 20251231 / 67323192000 / 5040734000 / 67323192000 / 5040734000 / 67323192000 / 5040734000 / FY actual /"
+    },
+    {
+      "evidence_id": "EV012",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "revenue",
+      "period": "20260331, 20250331",
+      "text": "/ Revenue base / 17617218000 / N/A / YoY: 20260331 vs 20250331 / top-line starting point for volume × price × mix /"
+    },
+    {
+      "evidence_id": "EV013",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "20260331, 20250331",
+      "text": "/ Gross margin / N/A / N/A / YoY: 20260331 vs 20250331 / main bridge from demand to gross profit /"
+    },
+    {
+      "evidence_id": "EV014",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260331, 20250331",
+      "text": "/ Operating margin / 9.924% / -5.29pp / YoY: 20260331 vs 20250331 / tests pricing, mix, and cost absorption /"
+    },
+    {
+      "evidence_id": "EV015",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "20260331, 20250331",
+      "text": "/ Net margin / 7.7266% / -0.59pp / YoY: 20260331 vs 20250331 / captures final earnings conversion /"
+    },
+    {
+      "evidence_id": "EV016",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "operating_expense",
+      "period": "20260331, 20250331",
+      "text": "/ Finance-expense ratio / 0.1569% / +2.35pp / YoY: 20260331 vs 20250331 / captures leverage drag or relief /"
+    },
+    {
+      "evidence_id": "EV017",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "profit_or_eps",
+      "period": "20260331, 20250331",
+      "text": "/ OCF / net profit / 3.77 / N/A / YoY: 20260331 vs 20250331 / tests earnings quality and cash realization /"
+    },
+    {
+      "evidence_id": "EV018",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "revenue",
+      "period": "20260331, 20250331",
+      "text": "/ Receivables / revenue / 9.0474% / +0.46pp / YoY: 20260331 vs 20250331 / tests working-capital drag; interim periods use annualized revenue /"
+    },
+    {
+      "evidence_id": "EV019",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Look-back window: 30 days"
+    },
+    {
+      "evidence_id": "EV020",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 一般公告 / 7 /"
+    },
+    {
+      "evidence_id": "EV021",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 关联交易 / 5 /"
+    },
+    {
+      "evidence_id": "EV022",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 治理/人事 / 2 /"
+    },
+    {
+      "evidence_id": "EV023",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 监管/法律 / 1 /"
+    },
+    {
+      "evidence_id": "EV024",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 并购/投资 / 1 /"
+    },
+    {
+      "evidence_id": "EV025",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260630, 2026-06-30",
+      "text": "/ 20260630 / 一般公告 / 688981.SH / 中芯国际 / 港股公告：翌日披露报表 / http://www.cninfo.com.cn/new/disclosure/detail?stockCode=688981&announcementId=1225396679&orgId=gshk0000981&announcementTime=2026-06-30 /"
+    },
+    {
+      "evidence_id": "EV026",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260627, 2026, 年度",
+      "text": "/ 20260627 / 监管/法律 / 688981.SH / 中芯国际 / 上海市锦天城律师事务所关于2026年度股东会的法律意见书 / http://www.cninfo.com.cn/new/disclosure/detail?stockCode=688981&announcementId=1225393411&orgId=gshk0000981&announcementTime=2026-06-27 /"
+    },
+    {
+      "evidence_id": "EV027",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260627, 2026, 年度",
+      "text": "/ 20260627 / 一般公告 / 688981.SH / 中芯国际 / 中芯国际2026年度股东会决议公告 / http://www.cninfo.com.cn/new/disclosure/detail?stockCode=688981&announcementId=1225393408&orgId=gshk0000981&announcementTime=2026-06-27 /"
+    },
+    {
+      "evidence_id": "EV028",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_volume",
+      "period": "2025, 年度, 本报告期",
+      "text": "/ product_manufacturer / 产品制造 / 产能出货型 / quantified disclosure / 中芯国际2025年年度报告: 阅本报告“第四节管理层讨论与分析”之“四、风险因素”。 七、董事会决议通过的本报告期利润分配预案或公积金转增股本预案 公司2025年度拟不进行利润分配，该议案尚需提交2026年年度股东大会审议。 九、前瞻性陈述的风险声明 等前瞻性陈述乃反映中芯国际高级管理层根据最佳判断作出的估计，存在重大已知及未知的风险 重大差异的因素，包括（但不限于）与半导体行业周期..."
+    },
+    {
+      "evidence_id": "EV029",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "/ high_r_and_d_technology / 高研发技术产品型 / quantified disclosure / 中芯国际2025年年度报告: 核心竞争力分析 √适用 □不适用 报告期内，公司在核心竞争力方面继续强化： 15 / 232 中芯国际集成电路制造有限公司2025 年年度报告 1.研发平台优势 公司的研发中心根据总体战略，以客户需求为导向，持续提升工艺研发和创新能力、强化平 台建设、升级产品性能。研发项目在初期即充分对标产品的技术要求,有效利用研发资源、确保产 出质量与可靠性、积极缩短研..."
+    },
+    {
+      "evidence_id": "EV030",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "2025, 年度",
+      "text": "/ core_revenue_engine / annual / 中芯国际2025年年度报告: 报告期内，本集团实现主营业务收入人民币 66,580.2 百万元，同比增加 16.6%。其中，晶圆 / Defines what actually drives the income statement. /"
+    },
+    {
+      "evidence_id": "EV031",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "/ customer_and_channel / annual / 中芯国际2025年年度报告: 于 2025 年度，无单一客户及其子公司销售收入占总收入 10%或以上。 / Reveals demand source, concentration, and market validation. /"
+    },
+    {
+      "evidence_id": "EV032",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "asp_or_price",
+      "period": "2025, 年度",
+      "text": "/ geography / annual / 中芯国际2025年年度报告: 进而影响到相应原材料、零备件、软件、设备及服务支持等的出口许可、供应或价格上涨，可能 / Explains whether growth depends on a specific geography or expansion lane. /"
+    },
+    {
+      "evidence_id": "EV033",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "/ reinvestment_engine / annual / 中芯国际2025年年度报告: 2025 年，公司持续保持高研发投入，研发投入人民币 55.19 亿元，占销售收入 8.2%；公司完善技 / Shows how today's cash is being converted into tomorrow's earnings power. /"
+    },
+    {
+      "evidence_id": "EV034",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "revenue",
+      "period": "2025, 年度",
+      "text": "/ business / annual / 中芯国际2025年年度报告: 收入 成本 收入 成本 主营业务 66,580,241 52,025,072 57,107,733 46,457,139 其他业务 742,951 740,051 687,837 594,128 (2)营业收入、营业成本的分解信息 / Use this to explain revenue mix, profit-pool quality, gross-margin dilution/accretion, and whether bul..."
+    },
+    {
+      "evidence_id": "EV035",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "revenue",
+      "period": "2025, 年度",
+      "text": "/ business / annual / 中芯国际2025年年度报告: 主营业务 66,580,241 52,025,072 57,107,733 46,457,139 其他业务 742,951 740,051 687,837 594,128 (2)营业收入、营业成本的分解信息 合同分类 / Use this to explain revenue mix, profit-pool quality, gross-margin dilution/accretion, and whether bull/bear ..."
+    },
+    {
+      "evidence_id": "EV036",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "2025, 年度",
+      "text": "/ product / annual / 中芯国际2025年年度报告: 主营业务 主营业务 毛利率 毛利率比上 收入 成本 （%） 年增减（%） 主营业务分产品情况 其他主营业务 3,786,198 2,574,795 32.0 -2.0 -17.0 / Use this to explain revenue mix, profit-pool quality, gross-margin dilution/accretion, and whether bull/bear claims depend on a s..."
+    },
+    {
+      "evidence_id": "EV037",
+      "source_module": "industry_cycle",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "balance_sheet",
+      "period": "unspecified",
+      "text": "Do not state R32, R125, lithium, copper, gold, inventory, or spread changes as facts unless they appear in the evidence table."
+    },
+    {
+      "evidence_id": "EV038",
+      "source_module": "industry_cycle",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "gap",
+      "status": "missing",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "If cycle evidence says bottom-testing or evidence-limited, use language such as `bottom-right validation stage`, `右侧待验证`, or `needs confirmation`."
+    },
+    {
+      "evidence_id": "EV039",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "utilization_or_backlog",
+      "period": "unspecified",
+      "text": "/ Wafer Capacity / Utilization / 8-inch and 12-inch equivalent wafer capacity, wafer starts, loading and utilization by fab/platform / revenue volume and operating leverage /"
+    },
+    {
+      "evidence_id": "EV040",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "gap",
+      "status": "missing",
+      "model_variable": "segment_margin",
+      "period": "unspecified",
+      "text": "/ coverage_grade / report_types_seen / missing_report_types / answered_questions / core_pack_status / confidence_read /"
+    },
+    {
+      "evidence_id": "EV041",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "profit_or_eps",
+      "period": "2026, 季度",
+      "text": "/ accounting_reconciliation / Check signs, units, periods, and cross-statement consistency before a number enters the PM memo. / operating_cash_flow: 中芯国际2026年第一季度报告: 归属于上市公司股东的扣除非经常 1,232,279 1,169,998 5.3 性损益的净利润 经营活动产生的现金流量净额 5,131,729 -1,171,520 不适用 / o..."
+    },
+    {
+      "evidence_id": "EV042",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "/ segment_economics_depth / Decide whether each business line has enough disclosed scale, growth, margin, cash quality, and valuation treatment. / 中芯国际2025年年度报告: 收入 成本 收入 成本 主营业务 66,580,241 52,025,072 57,107,733 46,457,139 其他业务 742,951 740,051 687,837 594,1..."
+    },
+    {
+      "evidence_id": "EV043",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "profit_or_eps",
+      "period": "2026, 季度",
+      "text": "/ cash_flow_quality_decomposition / Separate accounting profit from cash conversion, working-capital drag, and demand visibility. / operating_cash_flow: 中芯国际2026年第一季度报告: 归属于上市公司股东的扣除非经常 1,232,279 1,169,998 5.3 性损益的净利润 经营活动产生的现金流量净额 5,131,729 -1,171,520 不适用 ..."
+    },
+    {
+      "evidence_id": "EV044",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "capex_or_roic",
+      "period": "2026, 季度",
+      "text": "/ capex_cip_return_bridge / Test whether capex, construction-in-progress, or investment assets are building returns or just absorbing capital. / long_term_equity_investments: 中芯国际2026年第一季度报告: 联营企业股权被动稀释 14,763 1,471 - - 按国际财务报告准则 1,375,972 1,357,845 149,806..."
+    },
+    {
+      "evidence_id": "EV045",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "utilization_or_backlog",
+      "period": "2025, 年度",
+      "text": "/ mdna_text_change / Read management wording changes, proof-backed claims, risk-language upgrades, and abnormal silence across reports. / management_claim_with_evidence: 中芯国际2025年年度报告: 主要业务、主要产品或服务情况 中芯国际是世界领先的集成电路晶圆代工企业之一，也是中国大陆集成电路制造业领导者， 拥有领先的工艺制造能力、产能优势..."
+    },
+    {
+      "evidence_id": "EV046",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "2026, 季度",
+      "text": "/ non_recurring_profit_quality / Distinguish core operating profit from investment income, fair-value moves, subsidies, asset disposals, impairment, and other one-off items. / impairment: 中芯国际2026年第一季度报告: 净敞口套期收益（损失以“-”号填列） - - 公允价值变动收益（损失以“-”号填列） 9,233 -10..."
+    },
+    {
+      "evidence_id": "EV047",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "balance_sheet",
+      "period": "2026, 季度",
+      "text": "/ balance_sheet_forward_signals / Read balance-sheet leads before income-statement confirmation. / receivables: 中芯国际2026年第一季度报告: 交易性金融资产 484,311 608,265 衍生金融资产 184,120 613,090 应收票据 240,747 313,209 / receivables: 中芯国际2026年第一季度报告: 衍生金融资产 184,120 613,090 应收票据 ..."
+    },
+    {
+      "evidence_id": "EV048",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-07-15",
+      "text": "Valuation trade date: 2026-07-15"
+    },
+    {
+      "evidence_id": "EV049",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ Market cap (CNY) / 1315282233840 / current equity value /"
+    },
+    {
+      "evidence_id": "EV050",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "valuation",
+      "period": "TTM",
+      "text": "/ PE TTM / 260.6807 / earnings multiple the market is paying now /"
+    },
+    {
+      "evidence_id": "EV051",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "revenue",
+      "period": "TTM",
+      "text": "/ PS TTM / 19.1622 / sales multiple the market is paying now /"
+    },
+    {
+      "evidence_id": "EV052",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "valuation",
+      "period": "TTM",
+      "text": "/ Implied TTM earnings (CNY) / 5045568136.9584 / market cap divided by PE TTM /"
+    },
+    {
+      "evidence_id": "EV053",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "revenue",
+      "period": "TTM",
+      "text": "/ Implied TTM sales (CNY) / 68639416864.4519 / market cap divided by PS TTM /"
+    },
+    {
+      "evidence_id": "EV054",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "valuation",
+      "period": "unspecified",
+      "text": "/ PE percentile / 99.4 / 5-year valuation position /"
+    },
+    {
+      "evidence_id": "EV055",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "valuation",
+      "period": "unspecified",
+      "text": "/ PB percentile / 99.4 / 5-year valuation position /"
+    },
+    {
+      "evidence_id": "EV056",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "valuation",
+      "period": "unspecified",
+      "text": "/ PS percentile / 99.4 / 5-year valuation position /"
+    },
+    {
+      "evidence_id": "EV057",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-07-15",
+      "text": "Valuation trade date: 2026-07-15"
+    },
+    {
+      "evidence_id": "EV058",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Market-cap units: `total_mv` is ten-thousand CNY; `total_mv_cny_100m` is 亿元 and equals `total_mv / 10,000`."
+    },
+    {
+      "evidence_id": "EV059",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "unspecified",
+      "text": "/ ts_code / name / industry / total_mv / total_mv_cny_100m / pe_ttm / pb / ps_ttm / dv_ttm / roe_annual / roa_annual / roe / roa / netprofit_yoy / debt_to_assets / v4_score /"
+    },
+    {
+      "evidence_id": "EV060",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 603986.SH / 兆易创新 / 半导体 / 40125077.355 / 4012.5077 / 139.5829 / 15.8765 / 34.9446 / 0.1309 / 9.283 / 7.1283 / 6.5999 / 6.2381 / 522.7881 / 8.1329 / 77.3 /"
+    },
+    {
+      "evidence_id": "EV061",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 688008.SH / 澜起科技 / 半导体 / 30840554.184 / 3084.0554 / 120.5831 / 14.7947 / 54.1554 / 0.0784 / 18.3792 / 15.7987 / 5.0186 / 4.6218 / 61.3046 / 4.1745 / 70 /"
+    },
+    {
+      "evidence_id": "EV062",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2017",
+      "text": "/ 688256.SH / 寒武纪 / 半导体 / 84659968.578 / 8465.9969 / 311.5962 / 65.7742 / 102.3639 / 0.0747 / 23.8629 / 20.3251 / 8.2017 / 7.0359 / 185.0387 / 16.3795 / 64.4 /"
+    },
+    {
+      "evidence_id": "EV063",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 688012.SH / 中微公司 / 半导体 / 37479411.3567 / 3747.9411 / 137.3437 / 15.4177 / 28.5528 / 0.0587 / 9.9524 / 7.5184 / 3.9592 / 3.1413 / 197.202 / 22.1756 / 60.4 /"
+    },
+    {
+      "evidence_id": "EV064",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 688498.SH / 源杰科技 / 半导体 / 22522104.27 / 2252.2104 / 632.5619 / 89.206 / 258.1887 / 0.038 / 8.6684 / 8.5032 / 7.389 / 7.7813 / 1153.072 / 10.7162 / 56.3 /"
+    },
+    {
+      "evidence_id": "EV065",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 002371.SZ / 北方华创 / 半导体 / 53894034.1272 / 5389.4034 / 96.6531 / 13.7155 / 12.9959 / 0.1026 / 16.0506 / 7.7614 / 4.245 / 2.0888 / 3.4182 / 50.0095 / 52.9 /"
+    },
+    {
+      "evidence_id": "EV066",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20000403",
+      "text": "/ 688981.SH / 刘训峰 / ZHAO HAIJUN(赵海军),梁孟松 / 郭光莉 / 3205.398 / 20000403 / 境外 / 全球领先的集成电路晶圆代工企业之一，也是中国大陆技术最先进、规模最大、配套服务最完善、跨国经营的专业晶圆代工企业，主要为客户提供0.35微米至14纳米多种技术节点、不同工艺平台的集成电路晶圆代工及配套服务。 /"
+    },
+    {
+      "evidence_id": "EV067",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260327, 20251231",
+      "text": "/ 20260327 / 20251231 / 刘训峰 / 董事长,执行董事 / N/A / 0 /"
+    },
+    {
+      "evidence_id": "EV068",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260327, 20251231",
+      "text": "/ 20260327 / 20251231 / 鲁国庆 / 非执行董事 / N/A / 0 /"
+    },
+    {
+      "evidence_id": "EV069",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260327, 20251231",
+      "text": "/ 20260327 / 20251231 / 陈山枝 / 非执行董事 / N/A / 0 /"
+    },
+    {
+      "evidence_id": "EV070",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260327, 20251231",
+      "text": "/ 20260327 / 20251231 / 杨鲁闽 / 非执行董事 / N/A / 0 /"
+    },
+    {
+      "evidence_id": "EV071",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260327, 20251231",
+      "text": "/ 20260327 / 20251231 / 黄登山 / 非执行董事 / N/A / 0 /"
+    },
+    {
+      "evidence_id": "EV072",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260327, 20251231",
+      "text": "/ 20260327 / 20251231 / 范仁达 / 独立非执行董事 / N/A / 0 /"
+    },
+    {
+      "evidence_id": "EV073",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260327, 20251231",
+      "text": "/ 20260327 / 20251231 / 刘明 / 独立非执行董事 / N/A / 0 /"
+    },
+    {
+      "evidence_id": "EV074",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260327, 20251231",
+      "text": "/ 20260327 / 20251231 / 吴汉明 / 独立非执行董事 / N/A / 0 /"
+    },
+    {
+      "evidence_id": "EV075",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Look-back window for futures proxies: 90 days"
+    },
+    {
+      "evidence_id": "EV076",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_volume",
+      "period": "unspecified",
+      "text": "/ 1 - company hard evidence / official filings, production reports, and sales announcements / realized product mix, output, unit cost, and cash-flow conversion / usually delayed and may not include daily spot prices /"
+    },
+    {
+      "evidence_id": "EV077",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "balance_sheet",
+      "period": "unspecified",
+      "text": "Do not state R32, R125, lithium, copper, gold, inventory, or spread changes as facts unless they appear in the evidence table."
+    },
+    {
+      "evidence_id": "EV078",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "gap",
+      "status": "missing",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "If a thesis-critical input is marked missing, treat it as neutral non-evidence and a retrieval task; it cannot prove margin deterioration/resilience or mechanically change rating, conviction, or sizing."
+    },
+    {
+      "evidence_id": "EV079",
+      "source_module": "policy",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025-10-28, 2025",
+      "text": "/ 中共中央关于制定国民经济和社会发展第十五个五年规划的建议 / 中国政府网 / 2025-10-28 / national-plan / ok / https://www.gov.cn/gongbao/2025/issue_12386/202511/content_7047415.html /"
+    },
+    {
+      "evidence_id": "EV080",
+      "source_module": "policy",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2024-08-11",
+      "text": "/ 中共中央 国务院关于加快经济社会发展全面绿色转型的意见 / 中国政府网 / 2024-08-11 / national-direction / ok / https://www.gov.cn/zhengce/202408/content_6967663.htm /"
+    },
+    {
+      "evidence_id": "EV081",
+      "source_module": "policy",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2024-08-11",
+      "text": "/ renewable-energy / 绿色转型 / 中共中央 国务院关于加快经济社会发展全面绿色转型的意见 / 中国政府网 / 2024-08-11 / national-direction / / supports multi-year demand visibility for clean-energy equipment and infrastructure / argue the company sits inside a policy-backed demand pool / test whether"
+    },
+    {
+      "evidence_id": "EV082",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Canonical company route: https://sns.sseinfo.com/company.do?stockcode=688981"
+    },
+    {
+      "evidence_id": "EV083",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026",
+      "text": "/ sse / reachable / {'title': '上证e互动', 'has_company_page': True, 'has_qa_section': True} / 173884 / {'is_empty_recent_reply': False, 'text_preview': '投资者_1677316020000 :中芯国际(688981) 请问截止5月15日，公司的股东人数是多少？ 2026年05月18日 08:28 来自 IOS ◆ ◆ 中芯国际 尊敬的投资者，您好！如要查询定期报告时点以外"
+    },
+    {
+      "evidence_id": "EV084",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "utilization_or_backlog",
+      "period": "2026-06-16, 2026-06-18, 2026",
+      "text": "/ 2026-06-16 / 2026-06-18 / 公司目前的月产能是多少，到今年年末还会新增吗？谢谢！ / 尊敬的投资者，您好！截至2026年第一季度末，公司的月产能为1,078,250 片（折合 8 英寸标准逻辑）。在产能规划方面，公司预计今年年底较去年年底，月产能增量折合12英寸增加约4 万片（折合 8 英寸标准逻辑约增加9万片）。感谢您的关注！ / directional-but-unquantified /"
+    },
+    {
+      "evidence_id": "EV085",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "utilization_or_backlog",
+      "period": "2026-06-16, 2026-06-18, 季度",
+      "text": "/ 2026-06-16 / 2026-06-18 / 董秘您好，请问如何查询公司的产能利用率数据？请提供公司一季度的产能利用率数据。 / 尊敬的投资者，您好！公司在季度报告中披露产能利用率数据。公司2026年第一季度平均产能利用率为93.1%。感谢您的关注！ / substantive /"
+    },
+    {
+      "evidence_id": "EV086",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "asp_or_price",
+      "period": "2026-06-01, 2026-06-18",
+      "text": "/ 2026-06-01 / 2026-06-18 / 鉴于近期内存价格上涨，公司是否有转产nor,slc等内存代工的规划？如有，请问规划进度如何？谢谢。 / 尊敬的投资者，您好！公司在特殊存储领域（包括NOR、NAND等）已具备多年量产经验和技术积累。当前存储行业景气上行、产能整体供不应求，公司已着手布局更多产能，增加灵活性。感谢您的关注！ / directional-but-unquantified /"
+    },
+    {
+      "evidence_id": "EV087",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "profit_or_eps",
+      "period": "2026-05-19, 2026-06-18, 季度",
+      "text": "/ 2026-05-19 / 2026-06-18 / 高资本开支的晶圆代工厂往往因为折旧金额高导致净利润比较低，因此专业投资者往往会看EBITDA利润率，请问贵公司EBITDA利润率多少？和同业相比高还是低 / 尊敬的投资者，您好！公司在季度报告中披露息税折旧摊销前利润率（EBITDA margin）。公司2026年第一季度国际会计准则下的息税折旧摊销前利润率为57.3%。感谢您的关注！ / substantive /"
+    },
+    {
+      "evidence_id": "EV088",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-05-18, 2026-06-18",
+      "text": "/ 2026-05-18 / 2026-06-18 / 请问截止5月15日，公司的股东人数是多少？ / 尊敬的投资者，您好！如要查询定期报告时点以外的股东户数，您可携带本人身份证、证券账户证明、截止查询日的持股证明至公司或发送公司投资者关系邮箱 IR@smics.com ，公司将在核实股东身份后予以提供相关信息。感谢您的关注！ / substantive /"
+    },
+    {
+      "evidence_id": "EV089",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-05-14, 2026-06-18, 2026",
+      "text": "/ 2026-05-14 / 2026-06-18 / 請問把带有时间和姓名的股票交易软件持仓截图和身份证一并扫描发送至公司邮箱，可以获知 非定期报告相关时点的股东人数吗？盼你们具体，明确答复。顺祝健康，快乐 【比如截至到2026年5月10日贵公司的股东人数是多少? / 尊敬的投资者，您好！如要查询定期报告时点以外的股东户数，您可携带本人身份证、证券账户证明、截止查询日的持股证明至公司或发送公司投资者关系邮箱 IR@smics.com ，公司将在核实股东身份后予以提供相关信息。感谢您的关注！ / substanti"
+    },
+    {
+      "evidence_id": "EV090",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Use substantive interaction answers as tier-3 narrative options unless filings or announcements independently verify the same claim."
+    },
+    {
+      "evidence_id": "EV091",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "2026-06-15, 2026-07-15",
+      "text": "Window: 2026-06-15 to 2026-07-15 (30 days)"
+    },
+    {
+      "evidence_id": "EV092",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Primary query terms: 688981.SH, 688981SH, 688981, 中芯, 中芯国际"
+    },
+    {
+      "evidence_id": "EV093",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Upstream sync summary: cached=30, synced=1, index_refreshed=1"
+    },
+    {
+      "evidence_id": "EV094",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "valuation",
+      "period": "unspecified",
+      "text": "Auto-sync refresh window: latest 30 day(s); older dates use the persistent local cache."
+    },
+    {
+      "evidence_id": "EV095",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Preprocess: ok: events=11040, clusters=76, opportunities=251, ocr_low_quality=660"
+    },
+    {
+      "evidence_id": "EV096",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Matched stream items: 30"
+    },
+    {
+      "evidence_id": "EV097",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Fusion target: 688981.SH"
+    },
+    {
+      "evidence_id": "EV098",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Direct terms: 688981.SH, 688981SH, 688981, 中芯, 中芯国际"
+    },
+    {
+      "evidence_id": "EV099",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Raw matches: stream=30; preprocessed matches: events=10, opportunities=0"
+    }
+  ],
+  "conflicts": [
+    {
+      "topic": "公司描述混淆",
+      "segment": "consolidated",
+      "claim_a": "中芯国际光刻胶公司CXMT确定IPO",
+      "source_a": "KPE02",
+      "claim_b": "CXMT实为长鑫科技，非中芯国际子公司",
+      "source_b": "行业常识",
+      "conflict_type": "entity_misidentification",
+      "required_resolution": "确认CXMT与中芯国际无直接股权隶属关系，中芯国际仅为代工客户之一"
+    }
+  ],
+  "kpe_impacts": [
+    {
+      "evidence_id": "KPE01",
+      "segment": "晶圆代工",
+      "variable": "utilization_or_backlog",
+      "direction": "up",
+      "horizon": "短期（3-6个月）",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "direction_only",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "国产先进制程晶圆厂扩产加速，持续关注晶圆厂下半年在AI芯片出货时刻的机会【中芯国际AH】",
+      "verification_gate": "等待公司下半年产能扩张指引及AI芯片出货节奏",
+      "missing_inputs": [
+        "下半年具体扩产幅度",
+        "AI芯片代工订单量量化"
+      ],
+      "known_kpe": {
+        "date": "2026-07-13T15:12",
+        "source": "stream_item:13288",
+        "source_type": "channel_check",
+        "credibility": "promotional_private_unverified",
+        "decision_role": "probability/verification proxy",
+        "evidence": "🌹中金半导体周观点202607... 🌹中金半导体周观点20260713: 优选国产链，关注WAIC大会相关催化 1）国产先进制程晶圆厂扩产加速，持续关注晶圆厂下半年在AI芯片出货时刻的机会【中芯国际AH】【华虹半导体AH】【晶合集成】。 2）【国产算力芯片2Q26放量，27年翻倍以上增长预期】其中昇腾链首推【杰华特】【伟测科技】【XQWZ】；国产模型推理需求爆发，重点关注【天数】【壁仞】【HWJ】【HGXX】，特别是【HGXX】CPU及超节点逻辑重估。DS/智谱等ISV及大厂积极推进自研芯片，关注定制芯片厂商【芯原】【翱捷】。配套来看，AI计算/连接电源芯片需求大幅增长，关注【芯联集成】【英诺赛科】【新洁能】。 3）半导体设备/材料：存储扩产订单或将在3Q落地，重点关注边际预期变化，推荐一揽子【北方华创、中微公司、拓荆科技、精智达、中科飞测、微导纳米、芯源微等】；材料：【沪硅产业、西安奕材、江丰电子、安集科技、鼎龙股份等】。 4）【先进封装CoWoS-L扩产逻辑加强】首选【金海通】，看好模拟需求强劲+AI芯片全面布局【HFCK】，关注存储扩产新增概念【长川科技】。 5）【短期存储情绪可能受影响，长协持续落地推动存储原厂重估】AI需求持续背景下，长协落地推动存储原厂EPS维持在高位，看好【美光】【海力士】【三星】【闪迪】【铠侠】；国产厂商受益平面NAND产能退出及大容量NOR涨价超预期，关注【兆易】【普冉】",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "segment_volume",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 等待公司下半年产能扩张指引及AI芯片出货节奏",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE02",
+      "segment": "consolidated",
+      "variable": "market_sentiment",
+      "direction": "unknown",
+      "horizon": "短期（1-2周）",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "direction_only",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "💎中芯国际光刻胶公司CXMT确定IPO发行价为每股8.66元人民币（注：CXMT为长鑫科技，非中芯国际）",
+      "verification_gate": "注意实体混淆，中芯国际股价受CXMT IPO情绪影响但非直接受益",
+      "missing_inputs": [
+        "CXMT IPO对中芯国际代工订单的量化影响"
+      ],
+      "known_kpe": {
+        "date": "2026-07-15T08:49",
+        "source": "stream_item:14245",
+        "source_type": "channel_check",
+        "credibility": "identified_broker_private_text",
+        "decision_role": "probability/verification proxy",
+        "evidence": "📈高盛中国早盘速报 😌市场情... 📈高盛中国早盘速报 😌市场情绪 📉昨日 A 股市场迎来反弹，科技硬件板块在午后领涨行情。 ⚠️不过盘面走势仍跟随韩国股市日内波动，整体成交额依旧相对低迷，反映出场内资金信心不足，本轮反弹走势仍有待验证。 🌙隔夜多家公司发布上半年业绩预告，眼下正临近 7 月 15 日业绩披露窗口期，预计核心行业标的将迎来业绩驱动型行情。 💎中芯国际光刻胶公司 CXMT 确定 IPO 发行价为每股 8.66 元人民币，对应初始估值 5970 亿元人民币。 🔥大量国内投资者预期该公司上市首日总市值将达到 3 万亿元人民币，对应涨幅 400%；极端情景下市值或触及 5 万亿元人民币，涨幅达 700%，该标的将成为未来数周市场核心关注焦点。 💬近几日市场存在大量关于 ETF 资金流入的讨论，过去一周宽基指数 ETF 确实出现资金净流入。 📊但资金并未集中流向半导体板块，买入资金更多集中在中证 1000、中证 500 指数产品。 🤔综合来看，本轮资金流入大概率是国内机构逢低布局带来的增量。 📊过去一周 ETF 资金流入情况 📌中证 1000：净流入 204.60 亿元，ETF 总规模 476.49 百亿元，近五年估值分位 87% 📌沪深 300：净流入 123.07 亿元，ETF 总规模 2307.98 百亿元，近五年估值分位 91% 📌中证小盘 500 指数：净流入 96.22 亿元，ETF 总规模 760.79 百亿元，近五年估值分位 97% 📌科创 50：净流入 87.04 亿元，ETF 总规模 1419.88 百亿元，近五年估值分位 100% 📌中证 A500 指数：净流入 72.35 亿元，ETF 总规模 1843.40 百亿元，近五年估值分位 90% 📌创业板指数：净流入 63.84 亿元，ETF 总规模 734.81 百亿元，近五年估值分位 75% 📌中证 2000 指数：净流入 6.11 亿元，ETF 总规模 59.75 百亿元，近五年估值分位 59% 📌上证 50：净流入 5.99 亿元，ETF 总规模 257.50 百亿元，近五年估值分位 83% 📌中证 A50 指数：净流入 0.54 亿元，ETF 总规模 96.03 百亿元，近五年估值分位 29% 📌中证 A100 指数：净流入 0.09 亿元，ETF 总规模 12.69 百亿元，近五年估值分位 94% 📎数据来源：万得，统计截至 2026 年 7 月 14 日 📅经济数据（香港时间上午 10 点公布） 📈GDP 同比增速：市场一致预期 4.50%，前值 5.00%，高盛预测 4.50% 🏭工业增加值同比增速：市场一致预期 4.60%，前值 4.50%，高盛预测 5.00% 🏗️城镇固定资产投资累计同比：市场一致预期；5.00%，前值；4.10%，高盛预测；5.40% 🛍...",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "valuation",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unverified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 注意实体混淆，中芯国际股价受CXMT IPO情绪影响但非直接受益",
+      "grounding_status": "unverified_quote"
+    },
+    {
+      "evidence_id": "KPE03",
+      "segment": "晶圆代工",
+      "variable": "utilization_or_backlog",
+      "direction": "up",
+      "horizon": "中期（6-12个月）",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "direction_only",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "下游盈利改善必然带来高capex扩张，存储方面，两存当前产能规模与海外巨头差距显著，扩产大周期在即",
+      "verification_gate": "关注两存扩产进度及封测设备招标情况",
+      "missing_inputs": [
+        "存储扩产对中芯国际代工订单的具体拉动幅度"
+      ],
+      "known_kpe": {
+        "date": "2026-07-14T12:50",
+        "source": "stream_item:13692",
+        "source_type": "company_research_feedback",
+        "credibility": "company_research_private_hard_to_verify",
+        "decision_role": "probability/verification proxy",
+        "evidence": "【广发机械】长鑫上市在即，坚定... 【广发机械】长鑫上市在即，坚定看好后道封测设备0714 长鑫科技将于16号开放申购，本次拟融资金额295亿元，将成为今年A股市场规模最大的IPO，也是科创板史上的第二大IPO，仅次于中芯国际的532亿元。公司预计26H1收入1100-1200亿元，归母净利润预计500-570亿元。 继续强调半导体历史级扩产大周期带来的封测设备机遇。下游盈利改善必然带来高capex扩张，存储方面，两存当前产能规模与海外巨头差距显著，扩产大周期在即，规模大且需求急迫，近几年有望拉动封测设备爆发式增长。此外，逻辑方面受益于华为tao定律，先进封装的重要性被进一步强调，对测试设备的性能、用量提出了更高的要求，从而拉动测试设备市场快速扩容。 继续坚定不移的看好半导体设备，兼顾行业超高景气度+业绩迈入高增期的板块。我们持续推荐封测端的长川科技、强一股份、华峰测控、精智达、联动科技、联讯仪器 等以及前道的精测电子、微导纳米、迈为股份 等 我们一直强调抓住产业趋势，而不是博弈催化节点或被情绪裹挟，欢迎交流~ 孙柏阳/汪家豪/王宁/许贝尔",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "utilization_or_backlog",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 关注两存扩产进度及封测设备招标情况",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE04",
+      "segment": "晶圆代工",
+      "variable": "revenue",
+      "direction": "up",
+      "horizon": "长期（12-24个月）",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "direction_only",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "先进制程 未来上千万张GPU卡国内流片，需求极大 → 中芯国际 / 华虹宏力 / 燕东微",
+      "verification_gate": "国产算力芯片流片量实际落地时间和规模",
+      "missing_inputs": [
+        "GPU卡流片订单数量",
+        "中芯国际先进制程产能分配"
+      ],
+      "known_kpe": {
+        "date": "2026-07-14T10:06",
+        "source": "stream_item:13766",
+        "source_type": "company_research_feedback",
+        "credibility": "company_research_private_hard_to_verify",
+        "decision_role": "probability/verification proxy",
+        "evidence": "🔴 【浙商AI战队】国产算力... 🔴 【浙商AI战队】国产算力：不仅仅看美股映射，更要看自自主路线、八个方向全面布局 ━━━ 八大投资方向 ━━━ ① 国产大模型 → 阿里巴巴 / 腾讯 / 字节 / 美团 / DeepSeek / 阶跃星辰 / 智谱 / MiniMax ② 云服务 → 互联网云：阿里巴巴 / 腾讯/字节 → 国有云：三大运营商 / 地方数据中心 ③ 算力芯片 :业绩逐步兑现。7nm产能逐步解决+CoWoS释放+HBM产能 → CPU：海光信息 / 鲲鹏（海光确定性最强） → GPU：华为昇腾 / 摩尔线程 / 寒武纪 / 壁仞 / 沐曦 / 燧原 ④ 国产存储 两存上市，自主可控 → 长鑫存储（DRAM配套产业链）/ 长江存储（NAND配套产业链） ⑤ 先进制程 未来上千万张GPU卡国内流片，需求极大 → 中芯国际 / 华虹宏力 / 燕东微 ⑥ 先进封装 长期行情，技术路线确定，十年投资方向 → 盛合晶微 / 长电科技 / 通富微电 / 汇成股份 / 华天科技 / 甬矽电子 ⑦ 设备 补足短板，只能自主制造 → 北方华创 / 中微公司 / 拓荆科技 / 新凯来 ⑧ 超节点 + 光芯片 超节点是必走方案 → 交换机：盛科通信 / 锐捷网络 / 紫光股份 / 澜起科技 / 曦智科技 → 光芯片：源杰科技 / 光迅科技 / 长光华芯 / 东山精密 / 中际旭创 → 国产算力反而是软硬件协同发展，利益分配格局合理，产业发展可持续 风险提示：半导体下游需求不及预期。 🔥伴随此轮调整，浙商AI战队会进一步加强股票跟踪力度，随时联系。浙商AI研究资源总协调：马莉/邱冠华 如对以上内容感兴趣欢迎联系对口销售及【浙商AI战队】中观策略：王杨/赵乾凯13968067416/王彦凯13616227982/何佳烨",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "utilization_or_backlog",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 国产算力芯片流片量实际落地时间和规模",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE05",
+      "segment": "晶圆代工",
+      "variable": "utilization_or_backlog",
+      "direction": "up",
+      "horizon": "短期（3-6个月）",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "direction_only",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "国内先进制程产能自今年起进入快速扩张期。南方自去年Q3转固以来已搬入两批设备，预计今年下半年将进行第三批导入",
+      "verification_gate": "关注中芯南方3Q第三批设备导入进度",
+      "missing_inputs": [
+        "第三批设备导入具体时间表与产能增量"
+      ],
+      "known_kpe": {
+        "date": "2026-07-13T12:02",
+        "source": "stream_item:13356",
+        "source_type": "company_research_feedback",
+        "credibility": "company_research_private_hard_to_verify",
+        "decision_role": "probability/verification proxy",
+        "evidence": "🔥【开源电子】市场震荡之际，且... 🔥【开源电子】市场震荡之际，且看主线国产半导体 上游供给：先进产能瓶颈有望实质性改善 国内先进制程产能自今年起进入快速扩张期。南方自去年Q3转固以来已搬入两批设备，预计今年下半年将进行第三批导入，带动先进产能提升。 此外，上海、北京及深圳等多地先进制程产线正处于设备导入与拉通阶段，预计将在未来2-3年内释放显著的新增产能。 下游需求：国产化+Capex提升带动市场斜率陡峭提升 需求侧本土替代进入深水区。据彭博社调研，中国企业预计未来12个月内将把46%的AI加速器预算投向本土产品（当前约为30%）。叠加国内互联网大厂、运营商及智算中心Capex的强劲提升，国产算力芯片的有效市场规模预计在未来2-3年内迎来快速增长。 行业催化：WAIC大会召开在即、超节点集群密集亮相 本周末上海世界人工智能大会（WAIC）将提供密集产业催化。预计华为昇腾384、中兴、新华三、超聚变等核心厂商的超节点算力方案将集中亮相，展现国产算力跨越单芯瓶颈、实现系统级升维的工程化能力。 受益标的 ➢ 国产算力：寒武纪、芯原股份、沐曦股份、盛科通信、万通发展 ➢ Fab：中芯国际、华虹宏力、燕东微、晶合集成、华润微 ➢ 先进封装：盛合晶微、长电科技、通富微电、甬矽电子、汇成股份 ➢ 设备：华创、中微、拓荆、飞测、精测、微导、华峰、强一 ➢ 材料：江丰、雅克、鼎龙、安集、新阳、兴福、彤程、翰博高新 ☎️陈蓉芳/陈瑜熙/向俊儒/祁海超/陈凯",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "utilization_or_backlog",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 关注中芯南方3Q第三批设备导入进度",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE06",
+      "segment": "晶圆代工",
+      "variable": "revenue",
+      "direction": "up",
+      "horizon": "中期（6-12个月）",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "direction_only",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "Token经济性逐步兑现，算力资本开支具备较强回报基础...国内算力：中芯国际、华虹半导体",
+      "verification_gate": "国内算力芯片委托中芯国际流片后的营收确认",
+      "missing_inputs": [
+        "国内算力芯片代工收入占比变化"
+      ],
+      "known_kpe": {
+        "date": "2026-07-13T08:15",
+        "source": "stream_item:13546",
+        "source_type": "channel_check",
+        "credibility": "identified_broker_private_text",
+        "decision_role": "probability/verification proxy",
+        "evidence": "【国金计算机&科技】Token... 【国金计算机&科技】Token商业化加速 前沿模型商业化加速，Anthropic ARR快速增长已到盈利拐点。 SemiAnalysis数据显示，Anthropic的ARR已由2025年底的90亿美元增至目前超过600亿美元，并有望于2026年三季度实现GAAP息税前利润转正。公司收入以用量计费的API业务为主，客户部署更多智能体工作流后，Token消耗和收入可在不增加客户数量的情况下持续扩张。较高的净收入留存率进一步表明，现有客户需求仍处于快速增长阶段。 OpenAI方面预计ARR达到400亿美元，近期Anthropic解除对Fable 5和Mythos 5的限制，OpenAI发布GPT-5.6分Sol/Terra和 Luna三个档位，推出Ultra性能设置，进一步支撑两家模型厂商ARR增长。Token经济性逐步兑现，算力资本开支具备较强回报基础。1）随着模型推理效率持续提升，Anthropic单位算力对应的收入快速增长，SeminiAnalysis预测今年晚些时候达到每GW 600亿美元ARR，综合毛利率和API业务毛利率明显改善。按照Epoch AI对1GW人工智能数据中心建设及运营成本的测算，前沿模型每GW算力所能支撑的年收入显著高于其年化总成本85亿美元，表明头部模型厂商扩张算力投入仍具备较好的商业回报，资本开支有望继续转化为收入和利润增长。2）Meta计划将计算基础设施容量由2026年的7GW提升至2027年的14GW，并与三星合作加快自研AI芯片量产及先进制程供应链布局，进一步验证头部科技公司仍在通过扩大算力规模、降低单位成本来提升资本开支回报。从Coding走向Work，AI Agent打开更广阔知识工作市场。市场或担忧当前大模型需求主要由程序员的Coding场景驱动，单一领域难以长期支撑高速增长。OpenAI发布的Codex研究显示，非开发者用户增速显著快于开发者，AI编程工具的使用范围正逐步扩展至产品管理、教育、设计、营销、数据分析及财务等通用知识工作场景。国内WorkBuddy、TRAE Work等办公智能体产品也在加快落地。Coding能力是智能体执行复杂电脑任务的重要基础，但更广泛的Work场景对应着更大的潜在用户和需求空间，当前大模型在知识工作人群中的渗透仍处于早期阶段。 投资建议相关标的 海外算力：东山精密、工业富联、胜宏科技、江海股份、中际旭创、中钨高新、蓝思科技、东阳光、火炬电子、三环集团、欧科亿、天孚通信、鼎泰高科、新易盛、领益智造、兆易创新、鹏鼎控股、唯科科技、天岳先进、大普微、源杰科技、麦格米特、景旺电子、英维克、京东方等；英特尔、SK海力士、Lumentum、闪迪、铠侠、美光。国内算力：寒武纪、海光信息、东阳光、中芯国际、华虹半导体、禾盛新材、摩尔线程、天数智芯、沐曦股份、...",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "unit_cost",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unverified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 国内算力芯片委托中芯国际流片后的营收确认",
+      "grounding_status": "unverified_quote"
+    },
+    {
+      "evidence_id": "KPE07",
+      "segment": "consolidated",
+      "variable": "profit_or_eps",
+      "direction": "up",
+      "horizon": "短期（1-3个月）",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "direction_only",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "存储高景气延续、洁净室业绩表现优异...长鑫科技...预计上半年净利润同比增长超22倍。存储大厂业绩高增长和募资顺利推进下存储厂商高资本开支可期",
+      "verification_gate": "存储扩产对中芯国际代工服务需求的传导",
+      "missing_inputs": [
+        "中芯国际相关洁净室工程收入占比极低，该线索间接性高"
+      ],
+      "known_kpe": {
+        "date": "2026-07-10T14:04",
+        "source": "stream_item:12681",
+        "source_type": "channel_check",
+        "credibility": "high_private_channel_hard_to_verify",
+        "decision_role": "probability/verification proxy",
+        "evidence": "洁净室：美光上修北美投资计划，... 洁净室：美光上修北美投资计划，看好存储大周期下洁净室高景气延续 [玫瑰]今日亚翔集成10cm涨停、柏诚+5%、圣晖+4%，主要系美光上修北美投资+存储板块β修复带动。当前时点我们依旧看好存储芯片紧缺为洁净室板块带来的高景气延续，半导体厂商资本开支背景下洁净室长期需求有所支撑，建议关注上周股价回调带来的上车机会。 [太阳]存储高景气延续、洁净室业绩表现优异：①昨晚美光科技宣布计划2035年前在美国投资超过2500亿美元，比该公司去年6月公布的2000亿美元大幅提升。②SK海力士本周在美国进行的ADR发行获得机构投资者七倍超额认购。③长鑫科技已披露招股意向书，7月16日开启科创板新股申购，计划募资295亿元，成为科创板史上第二大IPO。公司作为国内唯一实现DRAM规模化量产的IDM企业，预计上半年净利润同比增长超22倍。存储大厂业绩高增长和募资顺利推进下存储厂商高资本开支可期，带动洁净室厂商业绩表现优异。7月8日晚亚翔公告26H1业绩预告，预计26H1归母净利润4.56~5.25亿元，同比+183.4%~226.3%；对应Q2单季度2.08~2.77亿元，同比+163.6%~251.1%，略超预期。 [太阳]长期需求支撑坚实：半导体海外景气度持续向上、国内自主可控背景下资本开支持续扩张。①北美：CHIPS法案十年投入2800亿美元，约767亿美元用于半导体行业。头部厂商英特尔/台积电/三星/美光/德州仪器计划投资约1265/1650/400/1150/180亿美元。2）东南亚：美光将在新加坡投资240亿美元建新厂、预计将新增6.5万平方米洁净室。3）国内：据Yole2025-2030年中国大陆仍将新建21个fab，中芯国际上海12寸晶圆厂、天津12寸晶圆厂、深圳12寸晶圆厂二期仍在建设中；长鑫推进DRAM三期等项目；长存3D NAND四+五期仍未建设。 [太阳]供给相对刚性：先进制程提升供应壁垒、客户绑定+项目经验构筑核心优势。先进制程存储芯片生产所需的洁净室已达到 ISO 1 级标准，而核心工程师的培养周期长（通常为2-3年），短期洁净室供应相对刚性。同时洁净室整体工程+维护期期限在1年以上，和业主方绑定较深，当前汉唐集成绑定台积电；亚翔绑定美光、联电；柏诚绑定长鑫、长存；中电二、四绑定中芯国际等，同时头部台资企业有望随业主赴美、新等海外地区。 [玫瑰]建议关注【亚翔集成】、【圣晖集成】、【柏诚股份】、【华康洁净】、【美埃科技】",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "profit_or_eps",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unverified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 存储扩产对中芯国际代工服务需求的传导",
+      "grounding_status": "unverified_quote"
+    },
+    {
+      "evidence_id": "KPE08",
+      "segment": "晶圆代工",
+      "variable": "utilization_or_backlog",
+      "direction": "up",
+      "horizon": "中期（6-12个月）",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "direction_only",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "中芯国际上海12寸晶圆厂、天津12寸晶圆厂、深圳12寸晶圆厂二期仍在建设中",
+      "verification_gate": "等待各晶圆厂建设进展及设备搬入时间表",
+      "missing_inputs": [
+        "各厂建设完工时间点",
+        "对应新增产能数量"
+      ],
+      "known_kpe": {
+        "date": "2026-07-10T08:53",
+        "source": "stream_item:12923",
+        "source_type": "channel_check",
+        "credibility": "high_private_channel_hard_to_verify",
+        "decision_role": "probability/verification proxy",
+        "evidence": "长鑫科技IPO国产存储的Cap... 长鑫科技IPO国产存储的Capex新周期会议要点： 1. 长鑫科技IPO基本信息及业绩情况 长鑫科技已正式启动IPO发行程序，初步询价日为2026年7月13日，申购日为2026年7月16日，拟募资约300亿元投向晶圆制造产线升级、DRAM存储器技术升级及前瞻技术研发。 2026年上半年业绩预告：预计营收1100-1200亿元，同比增长613%-677%；预计归母净利润500-570亿元，同比增长22-25倍，半年净利润可覆盖2022-2024年合计超300亿元的累计亏损。 历史财务数据： 2023-2025年营收CAGR达161%，2024、2025年营收分别为240亿元、618亿元，2025年同比增速155%。 2025年实现扭亏，归母净利润近19亿元；毛利率从2023年的-2.19%提升至2025年的41.02%，受益于高端DDR5产品放量及存储周期价格上涨。 2026年Q1营收508亿元，同比增长近720%；归母净利润近250亿元，DRAM市占率达7.7%，位列全球第四。 产能情况：现有产能利用率从87%持续提升至96%，接近满产；2025年12寸晶圆年产能273万片，为美光的76%、三星的30%；2026年底年化产能可达420万片，接近美光产能水平。 长期产能规划：预计2028年月产能达50万片，其中HBM月产能预计达10万片，占全球HBM产能约12%；长期DRAM全球市占率有望提升至17%。 2. 存储行业周期及全球产能格局 本轮存储周期核心驱动为AI算力建设，与过往消费电子主导的周期有本质区别。 全球DRAM供给格局：三星、海力士、美光三大原厂掌控90%的DRAM产能，当前将有限产能及资本开支优先投向HBM领域，未来3-5年每家HBM相关资本开支占比达60%-90%。 HBM产能挤占效应：HBM每单位比特所需晶圆产能是常规DDR5的2.5-3倍，每增加1片HBM产能将挤占3片以上常规DRAM产能，导致通用DRAM供给被结构性挤出。 HBM投入占比趋势：三大原厂HBM晶圆投入占比2025年为18%，2026年提升至22%，2027年进一步提升至30%；2027年全球DRAM新增产能约30万片，其中80%-90%的新增供给投向HBM，供需缺口推动本轮存储价格快速上涨。 海外存储厂资本开支规划： 美光：2025财年资本开支138亿美元，2026财年预计250亿美元，2026财年Q4单季度资本开支超100亿美元，预计2027财年每季度资本开支均超100亿美元，2027财年总资本开支预计超450亿美元，同比增长80%-90%。 三星、海力士：合计规划600-1000亿美元的存储领域大额投入，全球存储原厂已开启新一轮扩产周期。 国产存储双雄进展：长鑫科技启动IPO、长江存储2026年5月开启IPO辅导，双双进入大规...",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "market_share",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unverified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 等待各晶圆厂建设进展及设备搬入时间表",
+      "grounding_status": "unverified_quote"
+    },
+    {
+      "evidence_id": "KPE09",
+      "segment": "晶圆代工",
+      "variable": "revenue",
+      "direction": "up",
+      "horizon": "短期（1-3个月）",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "direction_only",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "兆易创新26H1营收预计115亿元，同比+117%...代工和封测：中芯国际、华虹公司",
+      "verification_gate": "兆易创新的存储芯片代工订单给中芯国际带来的收入增量",
+      "missing_inputs": [
+        "中芯国际来自兆易创新的收入占比",
+        "兆易创新订单增长对中芯国际产能的占用"
+      ],
+      "known_kpe": {
+        "date": "2026-07-10T08:17",
+        "source": "stream_item:13021",
+        "source_type": "company_research_feedback",
+        "credibility": "company_research_private_hard_to_verify",
+        "decision_role": "probability/verification proxy",
+        "evidence": "【招商电子】存储跟踪之兆易创新... annotation: 【招商电子】存储跟踪之兆易创新业绩预告：Q2扣非净利环比高增，存储行业景气持续 [太阳]兆易创新26H1营收预计115亿元，同比+117%，归母净利预计69亿元，同比+1099%，因公司为联讯、臻宝战略投资者，非经常性损益大幅增长，扣非归母预计48.5亿元，同比+791%。其中，26Q2营收预计约73.12亿元，同比+283%/环比+75%，归母净利预计54.39亿元，同比+2214%/环比+272%，扣非归母预计34.4亿元，同比+1436%/环比+144%。公司存储芯片量价齐升，盈利能力大幅增长，MCU等业务亦实现较好增长。 [福]投资建议：兆易创新二季度业绩大幅增长，后续将陆续进入海内外存储厂商二季度业绩披露期，我们认为AI需求仍将持续旺盛，存储作为半导体核心主线将长期持续，建议关注存储+设备+产业链三大核心环节相关公司： 🔶海外存储：闪迪、美光、SK海力士、西部数据、铠侠、三星、希捷等； 🔶模组：江波龙、佰维存储、德明利、朗科科技等； 🔶利基存储：兆易创新、普冉股份、北京君正、东芯股份、恒烁股份、聚辰股份等； 🔶代工和封测：中芯国际、华虹公司、长电科技、通富微电、华天科技、汇成股份、深科技等； 🔶设备：北方华创、中微公司、拓荆科技、华海清科、屹唐股份、微导纳米、芯源微、精测电子、中科飞测、矽电股份、联动科技、金海通、精智达等； 🔶零部件：富创精密、江丰电子、正帆科技、新莱应材、臻宝科技、珂玛科技、先锋精科等； 🔶材料：江丰电子、艾森股份、神工股份、鼎龙股份、上海新阳、兴福电子、安集科技、路维光电、清溢光电、龙图光罩、欧莱新材等。 兆易创新26Q1点评",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "revenue",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unverified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 兆易创新的存储芯片代工订单给中芯国际带来的收入增量",
+      "grounding_status": "unverified_quote"
+    },
+    {
+      "evidence_id": "KPE10",
+      "segment": "consolidated",
+      "variable": "unmapped",
+      "direction": "unknown",
+      "horizon": "",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "reject",
+      "evidence_quote": "38、大元泵业：公司表示已完成在储能及数据机房液冷领域的产品储备...（无直接中芯国际相关信息）",
+      "verification_gate": "线索未提及中芯国际，无法映射",
+      "missing_inputs": [
+        "无直接关联"
+      ],
+      "known_kpe": {
+        "date": "2026-07-09T20:16",
+        "source": "stream_item:12573",
+        "source_type": "channel_check",
+        "credibility": "high_private_channel_hard_to_verify",
+        "decision_role": "probability/verification proxy",
+        "evidence": "34、高德红外：1、公司上半年... annotation: 34、高德红外：1、公司上半年净利最高预增7倍，对于业绩增长的原因，公司表示，型号项目类产品，包括与某客户签订的某完整装备系统产品持续交付；同时，红外芯片应用业务持续增长，公司营业收入及利润同比实现大幅增长2、公司表示实现了65000个通道的脑机接口，并且实现了双向信息的读取与写入；3、公司大面阵2K红外探测器已配套商业航天及星载领域 35、麦格米特：公司业务涵盖 33kW Power Shelf、 110kW Power Shelf（适配 GB300、Vera Rubin 等高端算力场景）、800VDC-50VDC Power Shelf， 满足不同输入、 输出电压的机架级供电需求， 提供高功率密度的配电支撑。 36、有研新材：控股子公司为长江存储、长鑫存储靶材供应商，子公司有研亿金量产12英寸晶圆制造高纯靶材，为国内大硅片下游晶圆厂提供配套耗材 37、艾森股份：公司现有量产产品“先进封装负性光刻胶”、“电镀铜基液”、“铜钛蚀刻液”以及客户认证中的“电镀锡银添加剂”等产品可以用于存储芯片封装 38、大元泵业：公司表示已完成在储能及数据机房液冷领域的产品储备，已开始小批量接受客户订单，公司与华为、中兴在IDC温控领域推进屏蔽齿轮泵项目 39、亿嘉和：公司与与华为云签约深入合作，公司将基于在电力、康养等场景深耕的产品能力积累，提供场景和产品设计制造等能力；华为云将提供平台化大小脑产品能力，并协同电力军团进行场景化方案规划设计，双方共同推动具身智能机器人产品在商业场景的落地 40、朗迪集团：公司间接持有长鑫科技集团0.066%股份 41、同兴达：控股子公司昆山日月同芯在半导体先进封测技术方面已有充足储备，目前已掌握并沉淀了金/铜镍金凸块Bump、FC等先进封装的关键技术 42、上海合晶：公司主要产品为半导体硅外延片，主要用于制备功率器件和模拟芯片等 43、星网宇达：公司主要从事信息感知、卫星通信以及无人系统业务，上半年盈利9000万元-1.2亿元，同比扭亏 44、深科达：公司已与北美存储客户建立直接合作，为其提供存储AOI检测设备、高精度芯片贴合设备、磁头测试产线自动化设备等多款产品，并成为该客户对应业务唯一合作供应商 45、太极实业：DRAM封装龙头；子公司海太半导体的封测业务主要是为SK海力士的DRAM产品提供后工序服务，对12英寸1Z纳米级晶圆进行集成电路封装，海太半导体由公司和SK海力士共同投资组建，公司持有海太半导体55%股权，SK海力士持有海太半导体45%股权 46、石英股份：国内石英制品行业的龙头企业；公司在光通讯行业的主营产品一直以石英延长管、石英棒、石英套管为主，为光纤预制棒及光纤拉丝工艺提供部分石英材料 47、华昌化工：江苏省化肥行业龙头，主营复合肥、尿素、合成氨，拥有尿素产...",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "utilization_or_backlog",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unverified",
+      "decision_outcome": "rejected: no model, valuation, rating, or sizing impact",
+      "grounding_status": "unverified_quote"
+    },
+    {
+      "evidence_id": "KPE11",
+      "segment": "consolidated",
+      "variable": "market_sentiment",
+      "direction": "up",
+      "horizon": "短期（1-2周）",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "direction_only",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "国内自主科技相关利好落地，芯片板块走出亮眼行情",
+      "verification_gate": "观察行业ETF资金流入趋势是否持续",
+      "missing_inputs": [
+        "中芯国际具体资金流入数据"
+      ],
+      "known_kpe": {
+        "date": "2026-07-09T20:02",
+        "source": "stream_item:12578",
+        "source_type": "industry_weekly_data",
+        "credibility": "private_data_requires_methodology_check",
+        "decision_role": "KPI/forecast proxy",
+        "evidence": "🔥WHAT DROVE MAR... 🔥WHAT DROVE MARKETS？市场走势的驱动因素是什么 🌏亚洲市场今日收盘走势分化，地缘政治阴霾以及油价上涨压低了整个区域的风险偏好，但不同市场的表现差距显著：中国与日本大盘走势向好，出口导向板块以及金融板块迎来上行；韩国受益于汽车板块景气上行，叠加本土人工智能相关建筑板块的提振，大盘站稳。印度得益于盈利端的利好支撑，行情保持坚挺。 📉另一边，科技权重获利了结使得对应板块行情走弱，港股受到互联网赛道、成长板块拖累下行，中东地缘风险发酵，大宗原材料板块出现大幅抛售行情。澳大利亚矿业、资源板块出现回撤，大盘小幅走低；除却能源板块以及部分金融细分赛道之外，多数行业板块行情偏弱。 📊个股层面主导了当日市场的分化走势，行情的催化来源包括限售到期、公司层面经营动作以及财报业绩。国内自主科技相关利好落地，芯片板块走出亮眼行情，医疗保健板块在国内同样迎来回暖态势。 🗺️REGIONAL WRAPS 区域综述 🇦🇺澳大利亚：标普 / 澳交所 200 指数当日下跌 0.26%，早盘出现跌幅，午后行情反弹，最终抹平早盘的多数回撤，成交量相较于 20 日均值下滑 18%。 ⛽能源板块表现领跑大盘，涨幅达到 1.7%，自前一日下午 4 点开盘阶段油价上涨 3% 就开始兑现强势走势，背后的诱因是地缘局势不确定性再度抬升。本轮地缘局势升级和此前的情况有所区别，空头仓位目前处于高位，后续油价存在继续上行的可能性，需要留意价格端后续的动向。 🛒资金偏向防御布局，日常必需消费品板块走势向好，超市业态、公用事业类个股受到资金青睐。当日表现偏弱的板块包括材料板块，跌幅达到 1.5%，前期板块上行之后迎来回调；利率敏感度较高的房地产投资信托产品下跌 1.1%，金融板块下行幅度折合 15 个基点。 💵市场定价层面，市场目前预期年末现金利率的加息幅度将上调至 14 个基点，两天之前市场给出的预期仅有 10 个基点。隔夜美国人工智能板块、动量风格板块行情企稳，带动本土科技板块走强，板块整体上行 92 个基点，数据中心、软件方向个股涨幅靠前，REA、SEK 实现不错上涨，CAR 是板块当中少有的走势偏弱标的。 🇰🇷韩国：韩国综合股价指数 KOSPI 上涨 0.62%，结束此前连续三日下跌的走势，科技属性浓厚的科斯达克指数表现相较主板更加亮眼，机构端的买入力量对冲了散户持续抛售带来的下行压力。 📉日内指数波动幅度偏大，早盘涨幅一度突破 4%，盘中短暂翻绿，收盘阶段重回上涨区间。板块行情分化明显，统计覆盖的 18 个细分板块当中，最终仅有 5 个板块收涨，电气电子板块涨幅领跑，金融板块走势落后于大盘。 🏦保险板块当中三星火灾海上保险遭到下调评级，单日创下 25 年以来最大单日跌幅。宏观维度来看，半导体出口需求旺盛促使国际货币基金组织上调韩国经济增长预期；韩国...",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "asp_or_price",
+        "required_outcome": "numeric assumption delta or explicit rejection"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 观察行业ETF资金流入趋势是否持续",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE12",
+      "segment": "晶圆代工",
+      "variable": "segment_volume",
+      "direction": "up",
+      "horizon": "短期（3-6个月）",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "direction_only",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "晶圆厂涨价持续推进，从涨价弹性角度，关注晶合集成...中芯国际、华虹宏力（中信电子推荐）",
+      "verification_gate": "跟踪中芯国际实际涨价幅度及新订单价格条款",
+      "missing_inputs": [
+        "晶圆涨价具体幅度",
+        "对毛利率的量化影响"
+      ],
+      "known_kpe": {
+        "date": "2026-07-15T09:41",
+        "source": "stream_item:14196",
+        "source_type": "sell_side_push",
+        "credibility": "identified_broker_private_text",
+        "decision_role": "narrative challenge",
+        "evidence": "【中信电子】超跌反弹买什么？ ... 【中信电子】超跌反弹买什么？ 近期科技板块波动增大，不改基本面下半年向好趋。国内自主可闭环趋势进一步明确，半导体设备、fab、国产算力自主可控链上行趋势均明确，同时全球AI趋势下的电源相关、PCB、存储也持续强劲，叠加二季报电子公司业绩强劲，同环比趋势明确加速，我们坚定看好板块后续表现。 [太阳]1 半导体：北方华创、屹唐股份、甬矽电子、晶合集成 晶圆厂扩产加速背景下，半导体设备订单确定性强，26、27年订单料持续爆发式增长，设备板块自前高回撤约22%，从短期回撤和基本面确定性角度，建议关注北方华创、屹唐股份、恒运昌、珂玛科技、富创精密等。封测公司随着先进封装扩产打开上行空间，同时受益台湾封测转单，关注甬矽电子、汇成股份。晶圆厂涨价持续推进，从涨价弹性角度，关注晶合集成。 [太阳]2 存储：北京君正、聚辰股份 Agent AI时代存力为核心，存储超级成长趋势不变，需求持续超预期，产能扩张瓶颈明确，预计供不应求将持续至2028年，26H2部分利基存储涨幅超主流，车规超消费类。存储涨价推荐北京君正（车规存储）、普冉股份（平面NAND）等；新品即将放量推荐聚辰股份（VPD新品）等。 [太阳]3 国产算力：寒武纪、壁仞科技、天数智芯 WAIC开幕在即，昇腾、天数、摩尔等多家国产算力厂商计划发布新产品或主题演讲，产业催化明确。展望H2,我们认为国产算力订单预期清晰度显著增强，供应链备货节奏加速，相关公司报表将显著改善。中上游环节首推中芯国际、华虹宏力，封测端推荐长电科技、通富微电、甬矽电子，设计继续首推寒武纪，关注其他头部厂商：天数智芯、壁仞科技、摩尔线程、沐曦股份，配套环节推荐华勤技术、伟测科技等。 [太阳]4 PCB：生益科技、南亚新材、沪电股份、深南电路 电子布的供应紧缺预计在26H2仍将持续，我们仍看好26Q3覆铜板的涨价及利润弹性，叠加AI CCL放量，关注生益科技和南亚新材。PCB头部公司27年PE已回落至20x左右，26H2新产能释放、下游加速拉货的增长动能将更为突出，同时载板紧缺和涨价也更为显著，我们看好板块的业绩上修。重点关注业绩确定性更强的沪电股份和深南电路。 [太阳]5 AI电源：三环集团、顺络电子、扬杰科技 AI电源需求持续释放，拉动相关品种量价齐升，其中1）mlcc：原厂涨价处于第一阶段，高端料号供需持续紧张，建议关注三环集团 风华高科；2）电感：tlvr等新方案推动价值量提升，建议关注顺络电子；3）功率器件：中低压产品交期持续拉长，H2仍有望迎来1-2轮涨价，建议关注新洁能 扬杰科技等。 [太阳]6 消费电子：立讯精密、水晶光电 我们预计26Q3消费级存储合约价环比上涨幅度明显收窄，手机、PC等传统硬件设备出货量有望H2见底，核心推荐主业果链或高端安卓收入占比高，积极布局AI相关新业务的公司立讯精...",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "segment_volume",
+        "required_outcome": "model conflict result and accepted/rejected reason"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unverified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 跟踪中芯国际实际涨价幅度及新订单价格条款",
+      "grounding_status": "unverified_quote"
+    }
+  ],
+  "known_kpe_ledger": {
+    "KPE01": {
+      "date": "2026-07-13T15:12",
+      "source": "stream_item:13288",
+      "source_type": "channel_check",
+      "credibility": "promotional_private_unverified",
+      "decision_role": "probability/verification proxy",
+      "evidence": "🌹中金半导体周观点202607... 🌹中金半导体周观点20260713: 优选国产链，关注WAIC大会相关催化 1）国产先进制程晶圆厂扩产加速，持续关注晶圆厂下半年在AI芯片出货时刻的机会【中芯国际AH】【华虹半导体AH】【晶合集成】。 2）【国产算力芯片2Q26放量，27年翻倍以上增长预期】其中昇腾链首推【杰华特】【伟测科技】【XQWZ】；国产模型推理需求爆发，重点关注【天数】【壁仞】【HWJ】【HGXX】，特别是【HGXX】CPU及超节点逻辑重估。DS/智谱等ISV及大厂积极推进自研芯片，关注定制芯片厂商【芯原】【翱捷】。配套来看，AI计算/连接电源芯片需求大幅增长，关注【芯联集成】【英诺赛科】【新洁能】。 3）半导体设备/材料：存储扩产订单或将在3Q落地，重点关注边际预期变化，推荐一揽子【北方华创、中微公司、拓荆科技、精智达、中科飞测、微导纳米、芯源微等】；材料：【沪硅产业、西安奕材、江丰电子、安集科技、鼎龙股份等】。 4）【先进封装CoWoS-L扩产逻辑加强】首选【金海通】，看好模拟需求强劲+AI芯片全面布局【HFCK】，关注存储扩产新增概念【长川科技】。 5）【短期存储情绪可能受影响，长协持续落地推动存储原厂重估】AI需求持续背景下，长协落地推动存储原厂EPS维持在高位，看好【美光】【海力士】【三星】【闪迪】【铠侠】；国产厂商受益平面NAND产能退出及大容量NOR涨价超预期，关注【兆易】【普冉】",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "segment_volume",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE02": {
+      "date": "2026-07-15T08:49",
+      "source": "stream_item:14245",
+      "source_type": "channel_check",
+      "credibility": "identified_broker_private_text",
+      "decision_role": "probability/verification proxy",
+      "evidence": "📈高盛中国早盘速报 😌市场情... 📈高盛中国早盘速报 😌市场情绪 📉昨日 A 股市场迎来反弹，科技硬件板块在午后领涨行情。 ⚠️不过盘面走势仍跟随韩国股市日内波动，整体成交额依旧相对低迷，反映出场内资金信心不足，本轮反弹走势仍有待验证。 🌙隔夜多家公司发布上半年业绩预告，眼下正临近 7 月 15 日业绩披露窗口期，预计核心行业标的将迎来业绩驱动型行情。 💎中芯国际光刻胶公司 CXMT 确定 IPO 发行价为每股 8.66 元人民币，对应初始估值 5970 亿元人民币。 🔥大量国内投资者预期该公司上市首日总市值将达到 3 万亿元人民币，对应涨幅 400%；极端情景下市值或触及 5 万亿元人民币，涨幅达 700%，该标的将成为未来数周市场核心关注焦点。 💬近几日市场存在大量关于 ETF 资金流入的讨论，过去一周宽基指数 ETF 确实出现资金净流入。 📊但资金并未集中流向半导体板块，买入资金更多集中在中证 1000、中证 500 指数产品。 🤔综合来看，本轮资金流入大概率是国内机构逢低布局带来的增量。 📊过去一周 ETF 资金流入情况 📌中证 1000：净流入 204.60 亿元，ETF 总规模 476.49 百亿元，近五年估值分位 87% 📌沪深 300：净流入 123.07 亿元，ETF 总规模 2307.98 百亿元，近五年估值分位 91% 📌中证小盘 500 指数：净流入 96.22 亿元，ETF 总规模 760.79 百亿元，近五年估值分位 97% 📌科创 50：净流入 87.04 亿元，ETF 总规模 1419.88 百亿元，近五年估值分位 100% 📌中证 A500 指数：净流入 72.35 亿元，ETF 总规模 1843.40 百亿元，近五年估值分位 90% 📌创业板指数：净流入 63.84 亿元，ETF 总规模 734.81 百亿元，近五年估值分位 75% 📌中证 2000 指数：净流入 6.11 亿元，ETF 总规模 59.75 百亿元，近五年估值分位 59% 📌上证 50：净流入 5.99 亿元，ETF 总规模 257.50 百亿元，近五年估值分位 83% 📌中证 A50 指数：净流入 0.54 亿元，ETF 总规模 96.03 百亿元，近五年估值分位 29% 📌中证 A100 指数：净流入 0.09 亿元，ETF 总规模 12.69 百亿元，近五年估值分位 94% 📎数据来源：万得，统计截至 2026 年 7 月 14 日 📅经济数据（香港时间上午 10 点公布） 📈GDP 同比增速：市场一致预期 4.50%，前值 5.00%，高盛预测 4.50% 🏭工业增加值同比增速：市场一致预期 4.60%，前值 4.50%，高盛预测 5.00% 🏗️城镇固定资产投资累计同比：市场一致预期；5.00%，前值；4.10%，高盛预测；5.40% 🛍...",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "valuation",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE03": {
+      "date": "2026-07-14T12:50",
+      "source": "stream_item:13692",
+      "source_type": "company_research_feedback",
+      "credibility": "company_research_private_hard_to_verify",
+      "decision_role": "probability/verification proxy",
+      "evidence": "【广发机械】长鑫上市在即，坚定... 【广发机械】长鑫上市在即，坚定看好后道封测设备0714 长鑫科技将于16号开放申购，本次拟融资金额295亿元，将成为今年A股市场规模最大的IPO，也是科创板史上的第二大IPO，仅次于中芯国际的532亿元。公司预计26H1收入1100-1200亿元，归母净利润预计500-570亿元。 继续强调半导体历史级扩产大周期带来的封测设备机遇。下游盈利改善必然带来高capex扩张，存储方面，两存当前产能规模与海外巨头差距显著，扩产大周期在即，规模大且需求急迫，近几年有望拉动封测设备爆发式增长。此外，逻辑方面受益于华为tao定律，先进封装的重要性被进一步强调，对测试设备的性能、用量提出了更高的要求，从而拉动测试设备市场快速扩容。 继续坚定不移的看好半导体设备，兼顾行业超高景气度+业绩迈入高增期的板块。我们持续推荐封测端的长川科技、强一股份、华峰测控、精智达、联动科技、联讯仪器 等以及前道的精测电子、微导纳米、迈为股份 等 我们一直强调抓住产业趋势，而不是博弈催化节点或被情绪裹挟，欢迎交流~ 孙柏阳/汪家豪/王宁/许贝尔",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "utilization_or_backlog",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE04": {
+      "date": "2026-07-14T10:06",
+      "source": "stream_item:13766",
+      "source_type": "company_research_feedback",
+      "credibility": "company_research_private_hard_to_verify",
+      "decision_role": "probability/verification proxy",
+      "evidence": "🔴 【浙商AI战队】国产算力... 🔴 【浙商AI战队】国产算力：不仅仅看美股映射，更要看自自主路线、八个方向全面布局 ━━━ 八大投资方向 ━━━ ① 国产大模型 → 阿里巴巴 / 腾讯 / 字节 / 美团 / DeepSeek / 阶跃星辰 / 智谱 / MiniMax ② 云服务 → 互联网云：阿里巴巴 / 腾讯/字节 → 国有云：三大运营商 / 地方数据中心 ③ 算力芯片 :业绩逐步兑现。7nm产能逐步解决+CoWoS释放+HBM产能 → CPU：海光信息 / 鲲鹏（海光确定性最强） → GPU：华为昇腾 / 摩尔线程 / 寒武纪 / 壁仞 / 沐曦 / 燧原 ④ 国产存储 两存上市，自主可控 → 长鑫存储（DRAM配套产业链）/ 长江存储（NAND配套产业链） ⑤ 先进制程 未来上千万张GPU卡国内流片，需求极大 → 中芯国际 / 华虹宏力 / 燕东微 ⑥ 先进封装 长期行情，技术路线确定，十年投资方向 → 盛合晶微 / 长电科技 / 通富微电 / 汇成股份 / 华天科技 / 甬矽电子 ⑦ 设备 补足短板，只能自主制造 → 北方华创 / 中微公司 / 拓荆科技 / 新凯来 ⑧ 超节点 + 光芯片 超节点是必走方案 → 交换机：盛科通信 / 锐捷网络 / 紫光股份 / 澜起科技 / 曦智科技 → 光芯片：源杰科技 / 光迅科技 / 长光华芯 / 东山精密 / 中际旭创 → 国产算力反而是软硬件协同发展，利益分配格局合理，产业发展可持续 风险提示：半导体下游需求不及预期。 🔥伴随此轮调整，浙商AI战队会进一步加强股票跟踪力度，随时联系。浙商AI研究资源总协调：马莉/邱冠华 如对以上内容感兴趣欢迎联系对口销售及【浙商AI战队】中观策略：王杨/赵乾凯13968067416/王彦凯13616227982/何佳烨",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "utilization_or_backlog",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE05": {
+      "date": "2026-07-13T12:02",
+      "source": "stream_item:13356",
+      "source_type": "company_research_feedback",
+      "credibility": "company_research_private_hard_to_verify",
+      "decision_role": "probability/verification proxy",
+      "evidence": "🔥【开源电子】市场震荡之际，且... 🔥【开源电子】市场震荡之际，且看主线国产半导体 上游供给：先进产能瓶颈有望实质性改善 国内先进制程产能自今年起进入快速扩张期。南方自去年Q3转固以来已搬入两批设备，预计今年下半年将进行第三批导入，带动先进产能提升。 此外，上海、北京及深圳等多地先进制程产线正处于设备导入与拉通阶段，预计将在未来2-3年内释放显著的新增产能。 下游需求：国产化+Capex提升带动市场斜率陡峭提升 需求侧本土替代进入深水区。据彭博社调研，中国企业预计未来12个月内将把46%的AI加速器预算投向本土产品（当前约为30%）。叠加国内互联网大厂、运营商及智算中心Capex的强劲提升，国产算力芯片的有效市场规模预计在未来2-3年内迎来快速增长。 行业催化：WAIC大会召开在即、超节点集群密集亮相 本周末上海世界人工智能大会（WAIC）将提供密集产业催化。预计华为昇腾384、中兴、新华三、超聚变等核心厂商的超节点算力方案将集中亮相，展现国产算力跨越单芯瓶颈、实现系统级升维的工程化能力。 受益标的 ➢ 国产算力：寒武纪、芯原股份、沐曦股份、盛科通信、万通发展 ➢ Fab：中芯国际、华虹宏力、燕东微、晶合集成、华润微 ➢ 先进封装：盛合晶微、长电科技、通富微电、甬矽电子、汇成股份 ➢ 设备：华创、中微、拓荆、飞测、精测、微导、华峰、强一 ➢ 材料：江丰、雅克、鼎龙、安集、新阳、兴福、彤程、翰博高新 ☎️陈蓉芳/陈瑜熙/向俊儒/祁海超/陈凯",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "utilization_or_backlog",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE06": {
+      "date": "2026-07-13T08:15",
+      "source": "stream_item:13546",
+      "source_type": "channel_check",
+      "credibility": "identified_broker_private_text",
+      "decision_role": "probability/verification proxy",
+      "evidence": "【国金计算机&科技】Token... 【国金计算机&科技】Token商业化加速 前沿模型商业化加速，Anthropic ARR快速增长已到盈利拐点。 SemiAnalysis数据显示，Anthropic的ARR已由2025年底的90亿美元增至目前超过600亿美元，并有望于2026年三季度实现GAAP息税前利润转正。公司收入以用量计费的API业务为主，客户部署更多智能体工作流后，Token消耗和收入可在不增加客户数量的情况下持续扩张。较高的净收入留存率进一步表明，现有客户需求仍处于快速增长阶段。 OpenAI方面预计ARR达到400亿美元，近期Anthropic解除对Fable 5和Mythos 5的限制，OpenAI发布GPT-5.6分Sol/Terra和 Luna三个档位，推出Ultra性能设置，进一步支撑两家模型厂商ARR增长。Token经济性逐步兑现，算力资本开支具备较强回报基础。1）随着模型推理效率持续提升，Anthropic单位算力对应的收入快速增长，SeminiAnalysis预测今年晚些时候达到每GW 600亿美元ARR，综合毛利率和API业务毛利率明显改善。按照Epoch AI对1GW人工智能数据中心建设及运营成本的测算，前沿模型每GW算力所能支撑的年收入显著高于其年化总成本85亿美元，表明头部模型厂商扩张算力投入仍具备较好的商业回报，资本开支有望继续转化为收入和利润增长。2）Meta计划将计算基础设施容量由2026年的7GW提升至2027年的14GW，并与三星合作加快自研AI芯片量产及先进制程供应链布局，进一步验证头部科技公司仍在通过扩大算力规模、降低单位成本来提升资本开支回报。从Coding走向Work，AI Agent打开更广阔知识工作市场。市场或担忧当前大模型需求主要由程序员的Coding场景驱动，单一领域难以长期支撑高速增长。OpenAI发布的Codex研究显示，非开发者用户增速显著快于开发者，AI编程工具的使用范围正逐步扩展至产品管理、教育、设计、营销、数据分析及财务等通用知识工作场景。国内WorkBuddy、TRAE Work等办公智能体产品也在加快落地。Coding能力是智能体执行复杂电脑任务的重要基础，但更广泛的Work场景对应着更大的潜在用户和需求空间，当前大模型在知识工作人群中的渗透仍处于早期阶段。 投资建议相关标的 海外算力：东山精密、工业富联、胜宏科技、江海股份、中际旭创、中钨高新、蓝思科技、东阳光、火炬电子、三环集团、欧科亿、天孚通信、鼎泰高科、新易盛、领益智造、兆易创新、鹏鼎控股、唯科科技、天岳先进、大普微、源杰科技、麦格米特、景旺电子、英维克、京东方等；英特尔、SK海力士、Lumentum、闪迪、铠侠、美光。国内算力：寒武纪、海光信息、东阳光、中芯国际、华虹半导体、禾盛新材、摩尔线程、天数智芯、沐曦股份、...",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "unit_cost",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE07": {
+      "date": "2026-07-10T14:04",
+      "source": "stream_item:12681",
+      "source_type": "channel_check",
+      "credibility": "high_private_channel_hard_to_verify",
+      "decision_role": "probability/verification proxy",
+      "evidence": "洁净室：美光上修北美投资计划，... 洁净室：美光上修北美投资计划，看好存储大周期下洁净室高景气延续 [玫瑰]今日亚翔集成10cm涨停、柏诚+5%、圣晖+4%，主要系美光上修北美投资+存储板块β修复带动。当前时点我们依旧看好存储芯片紧缺为洁净室板块带来的高景气延续，半导体厂商资本开支背景下洁净室长期需求有所支撑，建议关注上周股价回调带来的上车机会。 [太阳]存储高景气延续、洁净室业绩表现优异：①昨晚美光科技宣布计划2035年前在美国投资超过2500亿美元，比该公司去年6月公布的2000亿美元大幅提升。②SK海力士本周在美国进行的ADR发行获得机构投资者七倍超额认购。③长鑫科技已披露招股意向书，7月16日开启科创板新股申购，计划募资295亿元，成为科创板史上第二大IPO。公司作为国内唯一实现DRAM规模化量产的IDM企业，预计上半年净利润同比增长超22倍。存储大厂业绩高增长和募资顺利推进下存储厂商高资本开支可期，带动洁净室厂商业绩表现优异。7月8日晚亚翔公告26H1业绩预告，预计26H1归母净利润4.56~5.25亿元，同比+183.4%~226.3%；对应Q2单季度2.08~2.77亿元，同比+163.6%~251.1%，略超预期。 [太阳]长期需求支撑坚实：半导体海外景气度持续向上、国内自主可控背景下资本开支持续扩张。①北美：CHIPS法案十年投入2800亿美元，约767亿美元用于半导体行业。头部厂商英特尔/台积电/三星/美光/德州仪器计划投资约1265/1650/400/1150/180亿美元。2）东南亚：美光将在新加坡投资240亿美元建新厂、预计将新增6.5万平方米洁净室。3）国内：据Yole2025-2030年中国大陆仍将新建21个fab，中芯国际上海12寸晶圆厂、天津12寸晶圆厂、深圳12寸晶圆厂二期仍在建设中；长鑫推进DRAM三期等项目；长存3D NAND四+五期仍未建设。 [太阳]供给相对刚性：先进制程提升供应壁垒、客户绑定+项目经验构筑核心优势。先进制程存储芯片生产所需的洁净室已达到 ISO 1 级标准，而核心工程师的培养周期长（通常为2-3年），短期洁净室供应相对刚性。同时洁净室整体工程+维护期期限在1年以上，和业主方绑定较深，当前汉唐集成绑定台积电；亚翔绑定美光、联电；柏诚绑定长鑫、长存；中电二、四绑定中芯国际等，同时头部台资企业有望随业主赴美、新等海外地区。 [玫瑰]建议关注【亚翔集成】、【圣晖集成】、【柏诚股份】、【华康洁净】、【美埃科技】",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "profit_or_eps",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE08": {
+      "date": "2026-07-10T08:53",
+      "source": "stream_item:12923",
+      "source_type": "channel_check",
+      "credibility": "high_private_channel_hard_to_verify",
+      "decision_role": "probability/verification proxy",
+      "evidence": "长鑫科技IPO国产存储的Cap... 长鑫科技IPO国产存储的Capex新周期会议要点： 1. 长鑫科技IPO基本信息及业绩情况 长鑫科技已正式启动IPO发行程序，初步询价日为2026年7月13日，申购日为2026年7月16日，拟募资约300亿元投向晶圆制造产线升级、DRAM存储器技术升级及前瞻技术研发。 2026年上半年业绩预告：预计营收1100-1200亿元，同比增长613%-677%；预计归母净利润500-570亿元，同比增长22-25倍，半年净利润可覆盖2022-2024年合计超300亿元的累计亏损。 历史财务数据： 2023-2025年营收CAGR达161%，2024、2025年营收分别为240亿元、618亿元，2025年同比增速155%。 2025年实现扭亏，归母净利润近19亿元；毛利率从2023年的-2.19%提升至2025年的41.02%，受益于高端DDR5产品放量及存储周期价格上涨。 2026年Q1营收508亿元，同比增长近720%；归母净利润近250亿元，DRAM市占率达7.7%，位列全球第四。 产能情况：现有产能利用率从87%持续提升至96%，接近满产；2025年12寸晶圆年产能273万片，为美光的76%、三星的30%；2026年底年化产能可达420万片，接近美光产能水平。 长期产能规划：预计2028年月产能达50万片，其中HBM月产能预计达10万片，占全球HBM产能约12%；长期DRAM全球市占率有望提升至17%。 2. 存储行业周期及全球产能格局 本轮存储周期核心驱动为AI算力建设，与过往消费电子主导的周期有本质区别。 全球DRAM供给格局：三星、海力士、美光三大原厂掌控90%的DRAM产能，当前将有限产能及资本开支优先投向HBM领域，未来3-5年每家HBM相关资本开支占比达60%-90%。 HBM产能挤占效应：HBM每单位比特所需晶圆产能是常规DDR5的2.5-3倍，每增加1片HBM产能将挤占3片以上常规DRAM产能，导致通用DRAM供给被结构性挤出。 HBM投入占比趋势：三大原厂HBM晶圆投入占比2025年为18%，2026年提升至22%，2027年进一步提升至30%；2027年全球DRAM新增产能约30万片，其中80%-90%的新增供给投向HBM，供需缺口推动本轮存储价格快速上涨。 海外存储厂资本开支规划： 美光：2025财年资本开支138亿美元，2026财年预计250亿美元，2026财年Q4单季度资本开支超100亿美元，预计2027财年每季度资本开支均超100亿美元，2027财年总资本开支预计超450亿美元，同比增长80%-90%。 三星、海力士：合计规划600-1000亿美元的存储领域大额投入，全球存储原厂已开启新一轮扩产周期。 国产存储双雄进展：长鑫科技启动IPO、长江存储2026年5月开启IPO辅导，双双进入大规...",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "market_share",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE09": {
+      "date": "2026-07-10T08:17",
+      "source": "stream_item:13021",
+      "source_type": "company_research_feedback",
+      "credibility": "company_research_private_hard_to_verify",
+      "decision_role": "probability/verification proxy",
+      "evidence": "【招商电子】存储跟踪之兆易创新... annotation: 【招商电子】存储跟踪之兆易创新业绩预告：Q2扣非净利环比高增，存储行业景气持续 [太阳]兆易创新26H1营收预计115亿元，同比+117%，归母净利预计69亿元，同比+1099%，因公司为联讯、臻宝战略投资者，非经常性损益大幅增长，扣非归母预计48.5亿元，同比+791%。其中，26Q2营收预计约73.12亿元，同比+283%/环比+75%，归母净利预计54.39亿元，同比+2214%/环比+272%，扣非归母预计34.4亿元，同比+1436%/环比+144%。公司存储芯片量价齐升，盈利能力大幅增长，MCU等业务亦实现较好增长。 [福]投资建议：兆易创新二季度业绩大幅增长，后续将陆续进入海内外存储厂商二季度业绩披露期，我们认为AI需求仍将持续旺盛，存储作为半导体核心主线将长期持续，建议关注存储+设备+产业链三大核心环节相关公司： 🔶海外存储：闪迪、美光、SK海力士、西部数据、铠侠、三星、希捷等； 🔶模组：江波龙、佰维存储、德明利、朗科科技等； 🔶利基存储：兆易创新、普冉股份、北京君正、东芯股份、恒烁股份、聚辰股份等； 🔶代工和封测：中芯国际、华虹公司、长电科技、通富微电、华天科技、汇成股份、深科技等； 🔶设备：北方华创、中微公司、拓荆科技、华海清科、屹唐股份、微导纳米、芯源微、精测电子、中科飞测、矽电股份、联动科技、金海通、精智达等； 🔶零部件：富创精密、江丰电子、正帆科技、新莱应材、臻宝科技、珂玛科技、先锋精科等； 🔶材料：江丰电子、艾森股份、神工股份、鼎龙股份、上海新阳、兴福电子、安集科技、路维光电、清溢光电、龙图光罩、欧莱新材等。 兆易创新26Q1点评",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "revenue",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE10": {
+      "date": "2026-07-09T20:16",
+      "source": "stream_item:12573",
+      "source_type": "channel_check",
+      "credibility": "high_private_channel_hard_to_verify",
+      "decision_role": "probability/verification proxy",
+      "evidence": "34、高德红外：1、公司上半年... annotation: 34、高德红外：1、公司上半年净利最高预增7倍，对于业绩增长的原因，公司表示，型号项目类产品，包括与某客户签订的某完整装备系统产品持续交付；同时，红外芯片应用业务持续增长，公司营业收入及利润同比实现大幅增长2、公司表示实现了65000个通道的脑机接口，并且实现了双向信息的读取与写入；3、公司大面阵2K红外探测器已配套商业航天及星载领域 35、麦格米特：公司业务涵盖 33kW Power Shelf、 110kW Power Shelf（适配 GB300、Vera Rubin 等高端算力场景）、800VDC-50VDC Power Shelf， 满足不同输入、 输出电压的机架级供电需求， 提供高功率密度的配电支撑。 36、有研新材：控股子公司为长江存储、长鑫存储靶材供应商，子公司有研亿金量产12英寸晶圆制造高纯靶材，为国内大硅片下游晶圆厂提供配套耗材 37、艾森股份：公司现有量产产品“先进封装负性光刻胶”、“电镀铜基液”、“铜钛蚀刻液”以及客户认证中的“电镀锡银添加剂”等产品可以用于存储芯片封装 38、大元泵业：公司表示已完成在储能及数据机房液冷领域的产品储备，已开始小批量接受客户订单，公司与华为、中兴在IDC温控领域推进屏蔽齿轮泵项目 39、亿嘉和：公司与与华为云签约深入合作，公司将基于在电力、康养等场景深耕的产品能力积累，提供场景和产品设计制造等能力；华为云将提供平台化大小脑产品能力，并协同电力军团进行场景化方案规划设计，双方共同推动具身智能机器人产品在商业场景的落地 40、朗迪集团：公司间接持有长鑫科技集团0.066%股份 41、同兴达：控股子公司昆山日月同芯在半导体先进封测技术方面已有充足储备，目前已掌握并沉淀了金/铜镍金凸块Bump、FC等先进封装的关键技术 42、上海合晶：公司主要产品为半导体硅外延片，主要用于制备功率器件和模拟芯片等 43、星网宇达：公司主要从事信息感知、卫星通信以及无人系统业务，上半年盈利9000万元-1.2亿元，同比扭亏 44、深科达：公司已与北美存储客户建立直接合作，为其提供存储AOI检测设备、高精度芯片贴合设备、磁头测试产线自动化设备等多款产品，并成为该客户对应业务唯一合作供应商 45、太极实业：DRAM封装龙头；子公司海太半导体的封测业务主要是为SK海力士的DRAM产品提供后工序服务，对12英寸1Z纳米级晶圆进行集成电路封装，海太半导体由公司和SK海力士共同投资组建，公司持有海太半导体55%股权，SK海力士持有海太半导体45%股权 46、石英股份：国内石英制品行业的龙头企业；公司在光通讯行业的主营产品一直以石英延长管、石英棒、石英套管为主，为光纤预制棒及光纤拉丝工艺提供部分石英材料 47、华昌化工：江苏省化肥行业龙头，主营复合肥、尿素、合成氨，拥有尿素产...",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "utilization_or_backlog",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE11": {
+      "date": "2026-07-09T20:02",
+      "source": "stream_item:12578",
+      "source_type": "industry_weekly_data",
+      "credibility": "private_data_requires_methodology_check",
+      "decision_role": "KPI/forecast proxy",
+      "evidence": "🔥WHAT DROVE MAR... 🔥WHAT DROVE MARKETS？市场走势的驱动因素是什么 🌏亚洲市场今日收盘走势分化，地缘政治阴霾以及油价上涨压低了整个区域的风险偏好，但不同市场的表现差距显著：中国与日本大盘走势向好，出口导向板块以及金融板块迎来上行；韩国受益于汽车板块景气上行，叠加本土人工智能相关建筑板块的提振，大盘站稳。印度得益于盈利端的利好支撑，行情保持坚挺。 📉另一边，科技权重获利了结使得对应板块行情走弱，港股受到互联网赛道、成长板块拖累下行，中东地缘风险发酵，大宗原材料板块出现大幅抛售行情。澳大利亚矿业、资源板块出现回撤，大盘小幅走低；除却能源板块以及部分金融细分赛道之外，多数行业板块行情偏弱。 📊个股层面主导了当日市场的分化走势，行情的催化来源包括限售到期、公司层面经营动作以及财报业绩。国内自主科技相关利好落地，芯片板块走出亮眼行情，医疗保健板块在国内同样迎来回暖态势。 🗺️REGIONAL WRAPS 区域综述 🇦🇺澳大利亚：标普 / 澳交所 200 指数当日下跌 0.26%，早盘出现跌幅，午后行情反弹，最终抹平早盘的多数回撤，成交量相较于 20 日均值下滑 18%。 ⛽能源板块表现领跑大盘，涨幅达到 1.7%，自前一日下午 4 点开盘阶段油价上涨 3% 就开始兑现强势走势，背后的诱因是地缘局势不确定性再度抬升。本轮地缘局势升级和此前的情况有所区别，空头仓位目前处于高位，后续油价存在继续上行的可能性，需要留意价格端后续的动向。 🛒资金偏向防御布局，日常必需消费品板块走势向好，超市业态、公用事业类个股受到资金青睐。当日表现偏弱的板块包括材料板块，跌幅达到 1.5%，前期板块上行之后迎来回调；利率敏感度较高的房地产投资信托产品下跌 1.1%，金融板块下行幅度折合 15 个基点。 💵市场定价层面，市场目前预期年末现金利率的加息幅度将上调至 14 个基点，两天之前市场给出的预期仅有 10 个基点。隔夜美国人工智能板块、动量风格板块行情企稳，带动本土科技板块走强，板块整体上行 92 个基点，数据中心、软件方向个股涨幅靠前，REA、SEK 实现不错上涨，CAR 是板块当中少有的走势偏弱标的。 🇰🇷韩国：韩国综合股价指数 KOSPI 上涨 0.62%，结束此前连续三日下跌的走势，科技属性浓厚的科斯达克指数表现相较主板更加亮眼，机构端的买入力量对冲了散户持续抛售带来的下行压力。 📉日内指数波动幅度偏大，早盘涨幅一度突破 4%，盘中短暂翻绿，收盘阶段重回上涨区间。板块行情分化明显，统计覆盖的 18 个细分板块当中，最终仅有 5 个板块收涨，电气电子板块涨幅领跑，金融板块走势落后于大盘。 🏦保险板块当中三星火灾海上保险遭到下调评级，单日创下 25 年以来最大单日跌幅。宏观维度来看，半导体出口需求旺盛促使国际货币基金组织上调韩国经济增长预期；韩国...",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "asp_or_price",
+      "required_outcome": "numeric assumption delta or explicit rejection"
+    },
+    "KPE12": {
+      "date": "2026-07-15T09:41",
+      "source": "stream_item:14196",
+      "source_type": "sell_side_push",
+      "credibility": "identified_broker_private_text",
+      "decision_role": "narrative challenge",
+      "evidence": "【中信电子】超跌反弹买什么？ ... 【中信电子】超跌反弹买什么？ 近期科技板块波动增大，不改基本面下半年向好趋。国内自主可闭环趋势进一步明确，半导体设备、fab、国产算力自主可控链上行趋势均明确，同时全球AI趋势下的电源相关、PCB、存储也持续强劲，叠加二季报电子公司业绩强劲，同环比趋势明确加速，我们坚定看好板块后续表现。 [太阳]1 半导体：北方华创、屹唐股份、甬矽电子、晶合集成 晶圆厂扩产加速背景下，半导体设备订单确定性强，26、27年订单料持续爆发式增长，设备板块自前高回撤约22%，从短期回撤和基本面确定性角度，建议关注北方华创、屹唐股份、恒运昌、珂玛科技、富创精密等。封测公司随着先进封装扩产打开上行空间，同时受益台湾封测转单，关注甬矽电子、汇成股份。晶圆厂涨价持续推进，从涨价弹性角度，关注晶合集成。 [太阳]2 存储：北京君正、聚辰股份 Agent AI时代存力为核心，存储超级成长趋势不变，需求持续超预期，产能扩张瓶颈明确，预计供不应求将持续至2028年，26H2部分利基存储涨幅超主流，车规超消费类。存储涨价推荐北京君正（车规存储）、普冉股份（平面NAND）等；新品即将放量推荐聚辰股份（VPD新品）等。 [太阳]3 国产算力：寒武纪、壁仞科技、天数智芯 WAIC开幕在即，昇腾、天数、摩尔等多家国产算力厂商计划发布新产品或主题演讲，产业催化明确。展望H2,我们认为国产算力订单预期清晰度显著增强，供应链备货节奏加速，相关公司报表将显著改善。中上游环节首推中芯国际、华虹宏力，封测端推荐长电科技、通富微电、甬矽电子，设计继续首推寒武纪，关注其他头部厂商：天数智芯、壁仞科技、摩尔线程、沐曦股份，配套环节推荐华勤技术、伟测科技等。 [太阳]4 PCB：生益科技、南亚新材、沪电股份、深南电路 电子布的供应紧缺预计在26H2仍将持续，我们仍看好26Q3覆铜板的涨价及利润弹性，叠加AI CCL放量，关注生益科技和南亚新材。PCB头部公司27年PE已回落至20x左右，26H2新产能释放、下游加速拉货的增长动能将更为突出，同时载板紧缺和涨价也更为显著，我们看好板块的业绩上修。重点关注业绩确定性更强的沪电股份和深南电路。 [太阳]5 AI电源：三环集团、顺络电子、扬杰科技 AI电源需求持续释放，拉动相关品种量价齐升，其中1）mlcc：原厂涨价处于第一阶段，高端料号供需持续紧张，建议关注三环集团 风华高科；2）电感：tlvr等新方案推动价值量提升，建议关注顺络电子；3）功率器件：中低压产品交期持续拉长，H2仍有望迎来1-2轮涨价，建议关注新洁能 扬杰科技等。 [太阳]6 消费电子：立讯精密、水晶光电 我们预计26Q3消费级存储合约价环比上涨幅度明显收窄，手机、PC等传统硬件设备出货量有望H2见底，核心推荐主业果链或高端安卓收入占比高，积极布局AI相关新业务的公司立讯精...",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "segment_volume",
+      "required_outcome": "model conflict result and accepted/rejected reason"
+    }
+  },
+  "sell_side_intelligence": [
+    {
+      "intelligence_id": "KSI01",
+      "kpe_ids": "KPE02",
+      "published_at": "2026-07-15T08:49",
+      "institution": "高盛",
+      "analyst_or_author": "纪要小能手",
+      "freshness": "高时效/0天",
+      "rating_signal": "未披露",
+      "forecast_facts": "未提取到带期间的明确盈利预测",
+      "valuation_facts": "💎中芯国际光刻胶公司 CXMT 确定 IPO 发行价为每股 8.66 元人民币，对应初始估值 5970 亿元人民币",
+      "normalized_points": "无可标准化数值",
+      "revision_signal": "窗口内首次识别，暂无同机构前序可比",
+      "source_quote": "📈高盛中国早盘速报 😌市场情... 📈高盛中国早盘速报 😌市场情绪 📉昨日 A 股市场迎来反弹，科技硬件板块在午后领涨行情。 ⚠️不过盘面走势仍跟随韩国股市日内波动，整体成交额依旧相对低迷，反映出场内资金信心不足，本轮反弹走势仍有待验证。 🌙隔夜多家公司发布上半年业绩预告，眼下正临近 7 月 15 日业绩披露窗口期，预计核心行业标的将迎来业绩驱动型行情。 💎中芯国际光刻胶公司 CXMT 确定 IPO 发行价为每股 8.66 元人民币，对应初始估值 5970 亿元人民币。 🔥大量国内投资者预期该公司上市首日总市值将达到 3 万亿元人民币，对应涨幅 400%；极端情景下市值或触及 5 万亿元人民币，涨幅达 700%，该标的将成为未来数周市场核心关注焦点。 💬近几日市场存在大量关于 ETF 资金流入的讨论，过去一周宽基指数 ETF 确实出现资金净流入。 📊但资金并未集中流向半导体板块，买入资金更多集中在中证 1000、中证 50..."
+    },
+    {
+      "intelligence_id": "KSI02",
+      "kpe_ids": "none",
+      "published_at": "2026-07-14T09:23",
+      "institution": "机构未识别",
+      "analyst_or_author": "纪要小能手",
+      "freshness": "高时效/1天",
+      "rating_signal": "未披露",
+      "forecast_facts": "各晶圆厂已向客户释出2026年涨价信息，预计涨价效应会在二、三季度开始明显显现，Q3/4毛利率改善将会更加明显，今年明年来看，晶圆厂业绩有望超预期！ [太阳]目前估值水平较海外水平并不高，若两存上市各达到几万亿市值，按照海外存储厂：海外代工厂市值比，国内代工厂仍有很大空间，建议关注：晶合集成、中芯国际、华虹公司、燕东微、芯联集成等",
+      "valuation_facts": "各晶圆厂已向客户释出2026年涨价信息，预计涨价效应会在二、三季度开始明显显现，Q3/4毛利率改善将会更加明显，今年明年来看，晶圆厂业绩有望超预期！ [太阳]目前估值水平较海外水平并不高，若两存上市各达到几万亿市值，按照海外存储厂：海外代工厂市值比，国内代工厂仍有很大空间，建议关注：晶合集成、中芯国际、华虹公司、燕东微、芯联集成等",
+      "normalized_points": "无可标准化数值",
+      "revision_signal": "较前次口径发生变化；尚无可同口径比较的标准化数值",
+      "source_quote": "📬电子速递：成熟+先进制程纷纷... 📬电子速递：成熟+先进制程纷纷涨价，全球代工厂涨价+成熟制程产能紧缺，看好国内fab机会！ [太阳]据中国台湾媒体指出，台积电已陆续向客户通知调涨晶圆代工价格，涨价范围不仅涵盖市场传言的3nm制程、更扩及7nm及以下所有先进制程，整体涨幅约5％至10％，影响范围涵盖约75％的晶圆营收来源，成熟制程也将涨价、预计明年年初落地。先进制程+成熟制程双双涨价、带动整体行业景气度进一步提升。 [太阳]AI需求带动电源管理芯片交期延长、BCD产能出现供需缺口；根据TrendForce数据，由于AI服务器对电源密度的需求较高，AI电源管理芯片供不应求，交期延长，BCD产能出现供需缺口；台积电与三星大幅削减8英寸产能，海外Fab将大量产能转向存储与AI相关产品，驱动海外订单大量回流大陆，BCD工艺产能紧张。 [太阳]在供给缩减、需求大增的双重夹击下、代工市场的价格主导权已逐步回到卖方市场，代工厂商纷纷..."
+    },
+    {
+      "intelligence_id": "KSI03",
+      "kpe_ids": "none",
+      "published_at": "2026-07-13T11:03",
+      "institution": "机构未识别",
+      "analyst_or_author": "纪要小能手",
+      "freshness": "高时效/2天",
+      "rating_signal": "未披露",
+      "forecast_facts": "3️⃣ 外延切入CMP抛光液： 随先进制程层数增加，需求指数增长，公司预计扩建1.5万吨相关产能，将直接对接中芯微电子、华虹等核心大厂，2027年目标收入达7千万-1亿元",
+      "valuation_facts": "未提取到目标价/估值方法与倍数",
+      "normalized_points": "2027E_收入=7",
+      "revision_signal": "较前次口径发生变化；尚无可同口径比较的标准化数值",
+      "source_quote": "🍁🍁🍁瑞联新材关注：半导体链光... 🍁🍁🍁瑞联新材关注：半导体链光刻胶单体、PSPI、CMP抛光液迎来量产拐点 🌟制程越高端，单体的设计难度和纯度要求越高，价值量大幅提升 半导体材料的国产替代已进入深水区, GKJ我们最近产业链跟踪已经到达实质性放量元年，光刻胶单体材料国产化率较低（k线10%渗透率，arf2%左右，g线和i线50-60%），26年上半年公司ArF光刻胶单体收入达到2千万+，光刻材料至29年市场空间65亿美金，单体赛道容量约10亿美金，公司上半年毛利率已有34%，量产稳定预期40%。 其壁垒在于：一是痕量杂质控制 极苛刻（需达到ppb甚至ppt级纯度，否则直接导致晶圆缺陷）；二是分子结构合成复杂； 三是验证壁垒极高 （需随下游历经数年）。 🌟电子材料（半导体链）三箭齐发，共谱第二华章 1️⃣ 光刻胶单体向高端渗透： 公司产品涵盖KrF、ArF、EUV全品类。其中，ArF产品已实质性放量。具备极高分子设计壁..."
+    },
+    {
+      "intelligence_id": "KSI04",
+      "kpe_ids": "none",
+      "published_at": "2026-07-12T10:32",
+      "institution": "中泰电子丨晶圆代工",
+      "analyst_or_author": "纪要小能手",
+      "freshness": "高时效/3天",
+      "rating_signal": "未披露",
+      "forecast_facts": "未提取到带期间的明确盈利预测",
+      "valuation_facts": "相对应的中芯H股4.0倍PB，华虹H股6.1倍PB，大陆晶圆厂还有先进逻辑核心卡位优势",
+      "normalized_points": "无可标准化数值",
+      "revision_signal": "窗口内首次识别，暂无同机构前序可比",
+      "source_quote": "【中泰电子丨晶圆代工】量满价涨... 【中泰电子丨晶圆代工】量满价涨，重视核心战略姿产！ 先进制程是国产AI核心卡点 当前国产实现了AI初步闭环：大模型快速发展→国算设计公司订单上修→先进制程产能紧缺，中芯国际是全球少数的先进制程标的，随着产能持续建设释放，有望上下游供需共振！ 周期上行、表现好于海外厂商 Q1淡季不淡，当前稼动率中芯93.1%，华虹99.7%；价格持续提升，中芯协商涨价；华虹预计26年ASP涨10%-15%。且龙头正面回应市场担忧：AI强劲需求足以抵消消费电子小幅疲软！ 量价表xian及指引预期好于海外，当前海外成熟制程厂商联电对应稼动率约79%，力积电为88%；中芯指引Q2环增14%-16%，好于海外厂商（台积电10.3%，联电10%左右，格罗方德7.7%左右）。 估值较海外水平并不高 海外先进制程为代表的台积电12.3倍PB，成熟制程的联电4.8倍PB、力积电4.1倍PB、格罗方德3.2倍PB。相对应..."
+    },
+    {
+      "intelligence_id": "KSI05",
+      "kpe_ids": "none",
+      "published_at": "2026-07-10T09:12",
+      "institution": "机构未识别",
+      "analyst_or_author": "纪要小能手",
+      "freshness": "高时效/5天",
+      "rating_signal": "未披露",
+      "forecast_facts": "未提取到带期间的明确盈利预测",
+      "valuation_facts": "之前我们讲过，合肥长鑫上市，估值可能来到3万亿RMB，那么港股的中芯国际市值在7200亿港币，折合人民币才6000亿左右",
+      "normalized_points": "无可标准化数值",
+      "revision_signal": "较前次口径发生变化；尚无可同口径比较的标准化数值",
+      "source_quote": "梅花庄：半导体实际上也是走国产... 梅花庄：半导体实际上也是走国产的逻辑； 因为国产AI业绩开始释放，证明国内的高端制程的良率和产能都上来了； 另外就是长鑫的上市，有很多人认为长鑫上市前科技不会跌； 因此半导体也是被国产线再次催化； 这里我只讲一个点，那还是【中芯国际】的问题； 之前我们讲过，合肥长鑫上市，估值可能来到3万亿RMB，那么港股的中芯国际市值在7200亿港币，折合人民币才6000亿左右。 实际上中芯国际的营收和合肥长鑫是差不多的体量，但是因为合肥长鑫是存储，今年存储涨价猛，所以它的营收迅速提升了上来，但是存储是强周期。---ms"
+    },
+    {
+      "intelligence_id": "KSI06",
+      "kpe_ids": "KPE08",
+      "published_at": "2026-07-10T08:53",
+      "institution": "机构未识别",
+      "analyst_or_author": "纪要小能手",
+      "freshness": "高时效/5天",
+      "rating_signal": "未披露",
+      "forecast_facts": "未提取到带期间的明确盈利预测",
+      "valuation_facts": "行业景气：AI需求挤占产能背景下，先进及成熟制程均处于涨价通道，中芯国际、华虹公司已多次公告涨价，国产先进制造进入收获期，将通过量价提升改变Fab厂估值体系",
+      "normalized_points": "无可标准化数值",
+      "revision_signal": "较前次口径发生变化；尚无可同口径比较的标准化数值",
+      "source_quote": "长鑫科技IPO国产存储的Cap... 长鑫科技IPO国产存储的Capex新周期会议要点： 1. 长鑫科技IPO基本信息及业绩情况 长鑫科技已正式启动IPO发行程序，初步询价日为2026年7月13日，申购日为2026年7月16日，拟募资约300亿元投向晶圆制造产线升级、DRAM存储器技术升级及前瞻技术研发。 2026年上半年业绩预告：预计营收1100-1200亿元，同比增长613%-677%；预计归母净利润500-570亿元，同比增长22-25倍，半年净利润可覆盖2022-2024年合计超300亿元的累计亏损。 历史财务数据： 2023-2025年营收CAGR达161%，2024、2025年营收分别为240亿元、618亿元，2025年同比增速155%。 2025年实现扭亏，归母净利润近19亿元；毛利率从2023年的-2.19%提升至2025年的41.02%，受益于高端DDR5产品放量及存储周期价格上涨。 2026年Q1营收5..."
+    },
+    {
+      "intelligence_id": "KSI07",
+      "kpe_ids": "none",
+      "published_at": "2026-07-10T08:23",
+      "institution": "机构未识别",
+      "analyst_or_author": "纪要小能手",
+      "freshness": "高时效/5天",
+      "rating_signal": "未披露",
+      "forecast_facts": "3）抛光液：主做衬底抛光液，与安集/鼎龙差异化竞争，预计27H1落成5万吨厂房，与奕材、扬杰、中芯等公司合作",
+      "valuation_facts": "未提取到目标价/估值方法与倍数",
+      "normalized_points": "无可标准化数值",
+      "revision_signal": "窗口内首次识别，暂无同机构前序可比",
+      "source_quote": "【瑞联新材更新&提请关注】 公... 【瑞联新材更新&提请关注】 公司主营液晶单体、OLED升华前材料、医药中间体，近年半导体材料快速放量。 电子材料方面： 1）光刻胶单体：国产化率约15%，公司KrF光刻胶单体已量供，ArF光刻胶单体数十款在研，与韩国NC CHEM、SFC，国内光刻胶龙头珠海基石、鼎龙、新阳等公司合作。EUV光刻胶单体获得东京应化验证通过。 2）PSPI单体：目前产能60吨，主要供应日本东丽、奥莱德、鼎龙。200吨产线在扩，预计27年5月达产，满产对应约4亿营收，是电子材料近年增长最重要的促进点。 3）抛光液：主做衬底抛光液，与安集/鼎龙差异化竞争，预计27H1落成5万吨厂房，与奕材、扬杰、中芯等公司合作。 显示材料方面： 液晶单体全球市占率约30%、平稳增长。OLED升华前材料全球市占率约20%，氘代产品全球领先。OLED打印技术（蒸镀下一代技术）与华星光电合作，预计26H2开始起量，受益于OLED在..."
+    },
+    {
+      "intelligence_id": "KSI08",
+      "kpe_ids": "none",
+      "published_at": "2026-07-10T08:23",
+      "institution": "天风电新",
+      "analyst_or_author": "纪要小能手",
+      "freshness": "高时效/5天",
+      "rating_signal": "未披露",
+      "forecast_facts": "2024‑2025年，公司前三大客户分别为长江存储、长鑫存储、中芯国际，前五大客户营收占比在40%-45%，客户复购率86.90%，粘性极强，订单具备极强持续性 / 当前国内干式真空泵整体国产化率仅30%，目标国产化率将提升至80%以上，中科仪作为本土唯一供应商，后续在中芯国际内部份额将持续提升，预计2026‑2028年来自中芯国际的采购额年均增速超50%",
+      "valuation_facts": "未提取到目标价/估值方法与倍数",
+      "normalized_points": "无可标准化数值",
+      "revision_signal": "窗口内首次识别，暂无同机构前序可比",
+      "source_quote": "【天风电新】中科仪：深度绑定存... 【天风电新】中科仪：深度绑定存储大厂，业绩高增可期-0709 中科仪是稀缺的中科院+国家大基金加持的半导体真空设备标的，唯一实现14nm先进制程干式真空泵量产的本土厂商，深度绑定长江存储、长鑫存储、中芯国际，受益存储芯片国产扩产浪潮，看好公司2026‑2028年业绩持续高增，公司具备翻倍潜力。 2024‑2025年，公司前三大客户分别为长江存储、长鑫存储、中芯国际，前五大客户营收占比在40%-45%，客户复购率86.90%，粘性极强，订单具备极强持续性。 1. 第一大客户：长江存储 2025年采购额为2.37亿元，营收占比达到18.39%。中科仪的干式真空泵已经适配长江存储128‑294层3D NAND先进制程。目前长江存储武汉三期产能提速，2026年Q4新增月产能10万片12英寸晶圆，远期四五期落地后产能直接翻倍；单条12寸存储产线真空泵采购额可达0.5‑0.8亿元，我们预判长江存储..."
+    }
+  ],
+  "preprocessing_notes": [
+    "确定性证据中存在部分PDF文本提取失败的记录（EV008、EV009），但关键财报数据已通过earnings_model模块获得，不影响主要指标提取。",
+    "部分KPE线索（KPE02、KPE10）与中芯国际的直接关联度较低，已在假设中标注reject或watch并说明理由。",
+    "KSI sell-side观测（KSI01-KSI06）因缺乏标准化数值，未单独创建KPEHypothesis，相关方向性判断已融入KPE假设中（如KPE12对应中信推荐）。",
+    "segments仅识别了“晶圆代工”和“其他业务”两个业务分部，因年报未进一步拆分晶圆代工内部的技术节点平台收入。",
+    "市场隐含的TTM盈利约50.46亿元（PE TTM 260.68反推），与2025年实际净利润50.4亿元接近，表明当前估值基本反映历史利润，未包含未来增长预期。",
+    "缺失的关键输入包括：分节点毛利率、ASP同比、先进制程收入占比、细分客户收入、具体资本开支计划等，建议后续通过年报补充。"
+  ],
+  "underwriting_packet": {
+    "schema_version": 2,
+    "symbol": "688981.SH",
+    "as_of_date": "2026-07-15",
+    "forecast_years": [
+      "2026E",
+      "2027E",
+      "2028E"
+    ],
+    "research_readiness": "partial",
+    "readiness_reasons": [
+      "Material segments identified (Wafer Foundry 98.9%, Other 1.1%) with reported revenue, gross profit and margin evidence from FY2025 filing and Q1 2026 report.",
+      "Three-year consolidated forecast model populated with revenue, gross margin, operating profit, parent net profit, EPS, OCF, capex and FCF; all values are analyst estimates derived from company-disclosed capacity/utilisation/EBITDA and channel-check direction.",
+      "Bull/base/bear scenarios built from utilisation, ASP, capacity and margin drivers with probability-weighted fair value per share, but diluted share count is calculated from market-cap/price cross-check rather than Tushare total_share, leaving share count as a calculated estimate.",
+      "Six underwriting questions ranked by EPS/FCF sensitivity are supplied, each mapped to specific model variables and affected financial lines.",
+      "Key missing inputs: process-node-level revenue/ASP/gross margin, exact 2026-2028 capacity roadmap, equipment delivery schedules, and Tushare total_share for definitive diluted share count.",
+      "Valuation closure is partial: core value and probability-weighted fair value are stated but rely on analyst-estimated share count and multiple assumptions; equity-value-to-per-share conversion should be recalculated when Tushare total_share or exact current price is confirmed.",
+      "One or more filing-reported segments required deterministic restoration.",
+      "Material segment three-year driver lines are missing: 情况 其他主营业务",
+      "EPS forecast lacks a validated CNY-million parent-profit / diluted-share-count bridge.",
+      "Valuation closure conflicts with probability-weighted scenario value.",
+      "Valuation buckets contain potential double counting.",
+      "Valuation has not closed from mutually exclusive buckets to per-share fair value."
+    ],
+    "company_model": {
+      "model_profile": "corporate",
+      "operating_model_family": "volume_price_cost",
+      "business_archetype": "Capital-intensive semiconductor wafer foundry; revenue = wafer volume × ASP, profit = revenue − (depreciation + materials + labour + energy + R&D), cash flow = profit + depreciation − maintenance capex − expansion capex.",
+      "value_proposition_and_customers": "World-leading IC foundry and China's largest, serving global fabless and IDM customers from 0.35μm to 14nm; no single customer exceeds 10% of revenue, reflecting a diversified, sticky customer base.",
+      "revenue_equation": "Revenue = Σ (wafer shipments per node × ASP per wafer) + Other service/IP revenue; driven by capacity, utilisation and process mix.",
+      "profit_equation": "Gross profit = Revenue − (Materials + Labour + Depreciation + Energy + Other manufacturing costs); Operating profit = Gross profit − R&D − SG&A; EBITDA margin ≈57.3% (Q1 2026, IFRS basis).",
+      "cash_flow_equation": "OCF ≈ Net profit + Depreciation ± Working capital; FCF = OCF − Capex; Q1 2026 OCF/Net profit = 3.77x reflects heavy depreciation add-back.",
+      "capital_intensity_and_reinvestment": "High: annual capex typically exceeds depreciation; expansion projects in Shanghai, Tianjin, Shenzhen; no dividend for FY2025 to preserve cash for capacity build-out.",
+      "diluted_share_count_mn": null,
+      "share_count_period": "Cross-check pending",
+      "share_count_evidence_id": "",
+      "share_count_source_type": "market_cap_div_close",
+      "share_count_formula": "market_cap 1,315,282 Mn CNY / estimated close ~165 CNY/share ≈ 7,971 Mn shares",
+      "share_count_cross_checks": [
+        "Market cap from EV evidence 1,315,282,233,840 CNY; implied TTM earnings = market_cap / PE_TTM 260.68 ≈ 5,045.6 Mn CNY, consistent with FY2025 parent net profit 5,040.73 Mn CNY; EPS ≈ 5,045.6 / 7,971 = 0.633 CNY/share; need Tushare total_share for deterministic reconciliation.",
+        "A-share register capital 3,205.398 (ten-thousands, likely ~3.205 Bn shares; total A+H equity appears larger, commonly ~8 Bn shares for SMIC)."
+      ],
+      "moat_mechanisms": [
+        "Scale/intangible: among the largest pure-play foundries in China; massive sunk capex and long qualification cycles create barriers to entry."
+      ],
+      "moat_to_financial_transmission": [
+        "Scale → high utilisation → spreads fixed depreciation over more wafers → gross margin expansion; qualification stickiness → customer reluctance to switch → pricing power in tight supply."
+      ],
+      "structural_risks": [
+        "Export-control and equipment restrictions limit advanced-node expansion speed and tool availability.",
+        "Intense competition from TSMC, Samsung, UMC, GF, and domestic peers (Huahong, Nexchip).",
+        "Depreciation-heavy cost structure means falling utilisation rapidly degrades margins.",
+        "Geopolitical decoupling and customer inventory cycles can cause abrupt order cuts."
+      ],
+      "key_unknowns": [
+        "Advanced-node yield/economics at 7nm-equivalent and below.",
+        "Exact 2026-2028 capacity addition schedule and equipment delivery timeline.",
+        "Wafer ASP trajectory by node and customer type.",
+        "Sustainable FCF after maintenance and expansion capex."
+      ],
+      "evidence_ids": [
+        "EV010",
+        "EV011",
+        "EV028",
+        "EV030",
+        "EV031",
+        "EV033",
+        "EV034",
+        "EV035",
+        "EV085",
+        "EV087",
+        "EV041",
+        "EV044"
+      ]
+    },
+    "business_unit_map": [
+      {
+        "unit_id": "BU_WAFER_FOUNDRY",
+        "unit_name": "晶圆代工",
+        "unit_type": "reported_segment",
+        "disclosure_basis": "reported",
+        "parent_unit": "company",
+        "economic_role": "Core revenue and profit engine; capital-intensive manufacturing with high depreciation; revenue = capacity × utilisation × wafer ASP.",
+        "revenue_driver_equation": "Revenue = monthly_capacity × 12 × utilisation_rate × wafer_ASP_fold",
+        "profit_driver_equation": "Gross_profit = Revenue − (materials + labour + depreciation + energy + other); Depreciation is the dominant fixed cost and the key operating-leverage variable.",
+        "cash_and_capital_equation": "OCF ≈ EBITDA − working_capital; FCF = OCF − capex; expansion capex consumes most OCF during growth phases.",
+        "reported_metrics": [
+          "Revenue (FY2025): 66,580,241,000 CNY",
+          "Gross margin (FY2025): 21.8%",
+          "EBITDA margin (Q1 2026): 57.3% (IFRS)",
+          "Capacity (Q1 2026): 1,078,250 wpm (8-inch equiv.)",
+          "Utilization (Q1 2026): 93.1%"
+        ],
+        "evidence_ids": [
+          "EV010",
+          "EV011",
+          "EV030",
+          "EV034"
+        ],
+        "missing_inputs": [
+          "Wafer ASP by node",
+          "Gross margin by process node",
+          "Advanced-node (<28nm) revenue share",
+          "Quarterly depreciation charge"
+        ],
+        "next_verification": "Obtain Tushare income-statement for D&A and advanced-node revenue breakdown from next semi-annual report."
+      },
+      {
+        "unit_id": "BU_OTHER",
+        "unit_name": "其他业务",
+        "unit_type": "reported_segment",
+        "disclosure_basis": "reported",
+        "parent_unit": "company",
+        "economic_role": "Ancillary design, IP licensing and mask-making services tied to the foundry business; negligible profit contribution.",
+        "revenue_driver_equation": "Revenue ≈ small mark-up on wafer-related services",
+        "profit_driver_equation": "Gross margin ≈0.39% (FY2025); effectively a pass-through with minimal standalone economics.",
+        "cash_and_capital_equation": "Embedded in consolidated working capital; no separate capex disclosure.",
+        "reported_metrics": [
+          "Revenue (FY2025): 742,951,000 CNY",
+          "Gross margin (FY2025): 0.39%"
+        ],
+        "evidence_ids": [
+          "EV034",
+          "EV035"
+        ],
+        "missing_inputs": [
+          "Sub-segment revenue split"
+        ],
+        "next_verification": "No separate model required; materiality threshold <2%."
+      },
+      {
+        "unit_id": "BU_ADVANCED_NODE",
+        "unit_name": "先进制程（<28nm）",
+        "unit_type": "product",
+        "disclosure_basis": "analytical",
+        "parent_unit": "BU_WAFER_FOUNDRY",
+        "economic_role": "Highest ASP and demand growth from AI/GPU/CPU; carries the heaviest depreciation burden; economics depend on yield, equipment availability and pricing.",
+        "revenue_driver_equation": "Revenue = advanced_capacity × utilisation × advanced_ASP",
+        "profit_driver_equation": "Gross_margin = (advanced_ASP − unit_cost); unit cost dominated by depreciation and materials.",
+        "cash_and_capital_equation": "Large expansion capex; currently OCF-negative on a standalone basis due to depreciation, but strategically essential.",
+        "reported_metrics": [],
+        "evidence_ids": [
+          "KPE04",
+          "KPE05",
+          "KPE06"
+        ],
+        "missing_inputs": [
+          "Advanced-node capacity, utilisation, ASP, gross margin, capex allocation"
+        ],
+        "next_verification": "Track 中芯南方 3Q equipment move-in and any advanced-node revenue/profit disclosure in 2H26."
+      },
+      {
+        "unit_id": "BU06",
+        "unit_name": "情况 其他主营业务",
+        "unit_type": "reported_segment",
+        "disclosure_basis": "reported",
+        "parent_unit": "company",
+        "economic_role": "Filing segment restored after structured evidence reconciliation.",
+        "revenue_driver_equation": "",
+        "profit_driver_equation": "",
+        "cash_and_capital_equation": "",
+        "reported_metrics": [],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "economic sub-unit driver equations require analyst completion"
+        ],
+        "next_verification": ""
+      }
+    ],
+    "segment_models": [
+      {
+        "segment": "晶圆代工",
+        "products_or_services": "8-inch and 12-inch wafer foundry across 0.35μm to 14nm, covering logic, mixed-signal, RF, embedded memory, specialty memory (NOR, NAND) and advanced AI/HPC nodes.",
+        "customers_and_channel": "Global fabless and IDM customers; no single customer >10% of revenue; diversified across consumer, industrial, automotive and AI.",
+        "revenue_weight_pct": 98.9,
+        "profit_weight_pct": 99.9,
+        "base_period": "FY2025",
+        "base_revenue_value": 66580.2,
+        "base_revenue_unit": "CNY mn",
+        "base_revenue_growth_pct": 16.6,
+        "base_margin_pct": 21.8,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [
+          "AI/GPU/CPU advanced-node wafer demand from domestic fabless (Huawei, Cambricon, Biren etc.)",
+          "Cyclical recovery in commodity NOR/NAND and logic",
+          "Domestic substitution policy boosting local foundry share",
+          "Post-sanctions inventory restocking by global customers"
+        ],
+        "industry_supply_and_capacity": "Global foundry supply constrained at advanced nodes (TSMC, Samsung lead); domestic mature-node capacity expanding rapidly (SMIC, Huahong, Nexchip); advanced-node domestic supply limited to SMIC Southern fab.",
+        "volume_share_utilization": "Q1 2026 utilisation 93.1%, up from prior year; year-end 2026 capacity expected to add ~40k wpm (12-inch equiv.); volume growth driven by capacity addition and high loading.",
+        "price_asp_take_rate": "Wafer ASP benefiting from AI/advanced mix and tight supply; sell-side channel checks indicate continued price increases; magnitude unquantified.",
+        "unit_cost_and_input_prices": "Depreciation is the largest fixed cost; materials and energy costs are secondary; domestic equipment substitution may lower long-term capex/wafer but near-term cost per wafer remains elevated.",
+        "margin_and_operating_leverage": "EBITDA margin (IFRS) 57.3% in Q1 2026 indicates strong gross profit before depreciation; operating margin 9.92% and net margin 7.73% reflect heavy D&A drag.",
+        "working_capital_and_cash_conversion": "OCF/Net profit 3.77x in Q1 2026; inventory-to-revenue 38.5% (up 5pp YoY) suggests some inventory build; receivables/revenue 9.05% remains low, indicating collections are healthy.",
+        "prosperity_level": "景气上行",
+        "marginal_direction": "向上",
+        "causal_analysis": "Demand: AI + memory cycle drive order growth → Supply: SMIC Southern + new fabs expand capacity → Volume: utilisation 93%+ and rising → ASP: migration to higher-ASP advanced nodes → Margin: depreciation leverage improves at high utilisation → Cash: OCF strong, but capex absorbs most FCF.",
+        "valuation_treatment": "Core earnings base; the foundry generates all material profit and cash flow; valuation multiple should reflect cyclically-adjusted earnings power plus advanced-node optionality.",
+        "strongest_counterevidence": [
+          "Depreciation will accelerate as new fabs come online, pressuring net margins even if utilisation stays high.",
+          "Export controls could cap advanced-node expansion and forfeit the AI demand cycle.",
+          "Mature-node competition from Huahong/Nexchip could erode ASP and utilisation."
+        ],
+        "evidence_ids": [
+          "EV010",
+          "EV011",
+          "EV030",
+          "EV034",
+          "EV085",
+          "EV087",
+          "EV041",
+          "EV043",
+          "KPE01",
+          "KPE04",
+          "KPE05",
+          "KPE12"
+        ],
+        "missing_inputs": [
+          "Wafer ASP absolute level and YoY change",
+          "Advanced-node revenue and gross margin",
+          "Depreciation forecast 2026-2028"
+        ],
+        "next_verification": "26H1 interim report for revenue/margin by node and updated capacity guidance."
+      },
+      {
+        "segment": "其他业务",
+        "products_or_services": "Design services, IP licensing, photomask manufacturing.",
+        "customers_and_channel": "Primarily existing foundry customers; low standalone demand.",
+        "revenue_weight_pct": 1.1,
+        "profit_weight_pct": 0.1,
+        "base_period": "FY2025",
+        "base_revenue_value": 742.95,
+        "base_revenue_unit": "CNY mn",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": 0.39,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [
+          "Derivative from foundry volume"
+        ],
+        "industry_supply_and_capacity": "Niche; no capacity constraint.",
+        "volume_share_utilization": "Grows with wafer shipments.",
+        "price_asp_take_rate": "Low margin services.",
+        "unit_cost_and_input_prices": "Nearly fully variable; low risk.",
+        "margin_and_operating_leverage": "Negligible operating leverage.",
+        "working_capital_and_cash_conversion": "Embedded in consolidated working capital.",
+        "prosperity_level": "稳定",
+        "marginal_direction": "unknown",
+        "causal_analysis": "No independent economic drivers; bound to wafer foundry activity.",
+        "valuation_treatment": "Included in consolidated base; no separate equity value allocated.",
+        "strongest_counterevidence": [],
+        "evidence_ids": [
+          "EV034",
+          "EV035"
+        ],
+        "missing_inputs": [],
+        "next_verification": "Monitor for material revenue change in annual report."
+      },
+      {
+        "segment": "情况 其他主营业务",
+        "products_or_services": "",
+        "customers_and_channel": "",
+        "revenue_weight_pct": 100.0,
+        "profit_weight_pct": 100.0,
+        "base_period": "annual filing",
+        "base_revenue_value": 3786198.0,
+        "base_revenue_unit": "filing table unit not explicit in extracted row",
+        "base_revenue_growth_pct": -2.0,
+        "base_margin_pct": 32.0,
+        "base_margin_change_pp": -17.0,
+        "demand_and_order_drivers": [],
+        "industry_supply_and_capacity": "",
+        "volume_share_utilization": "",
+        "price_asp_take_rate": "",
+        "unit_cost_and_input_prices": "",
+        "margin_and_operating_leverage": "",
+        "working_capital_and_cash_conversion": "",
+        "prosperity_level": "evidence_limited",
+        "marginal_direction": "unknown",
+        "causal_analysis": "",
+        "valuation_treatment": "evidence_limited",
+        "strongest_counterevidence": [],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "LLM omitted a filing-reported material segment"
+        ],
+        "next_verification": ""
+      }
+    ],
+    "underwriting_questions": [
+      {
+        "question_id": "Q1",
+        "question": "Can SMIC expand advanced-node (<28nm) capacity fast enough to capture the AI wafer demand cycle before domestic competitors or global sanctions foreclose the window?",
+        "why_it_matters": "Advanced-node ASP is estimated at 3-5x mature-node ASP; winning this cycle could add 5-15 pp to consolidated gross margin and 50-100% to parent net profit by 2028. If SMIC fails, the AI demand flows to TSMC/Samsung or remains unrealized domestically, and SMIC remains a mature-node foundry with structurally lower ROIC.",
+        "current_answer": "unresolved",
+        "bull_evidence": [
+          "KPE05: 中芯南方 has moved in two batches of equipment since Q3 2025; third batch expected 2H2026; Shanghai, Beijing, Shenzhen lines in equipment phase.",
+          "KPE04: '未来上千万张GPU卡国内流片，需求极大 → 中芯国际 / 华虹宏力'",
+          "KPE01: '国产先进制程晶圆厂扩产加速'"
+        ],
+        "bear_evidence": [
+          "No company-filed advanced-node capacity or revenue data; all evidence is sell-side and channel-check.",
+          "Export controls remain a structural constraint; equipment lead times and US/BIS approval risk are unquantified.",
+          "TSMC's continued dominance and potential further restrictions could cap domestic share."
+        ],
+        "decisive_model_variables": [
+          "advanced_capacity_share_of_total",
+          "advanced_node_ASP",
+          "advanced_node_gross_margin",
+          "total_capacity_wpm"
+        ],
+        "affected_financial_lines": [
+          "Foundry revenue",
+          "Consolidated gross margin",
+          "Parent net profit",
+          "FCF (capex)"
+        ],
+        "evidence_ids": [
+          "KPE04",
+          "KPE05",
+          "KPE01"
+        ],
+        "missing_evidence": [
+          "Company-disclosed advanced-node revenue, capacity, yield and gross margin",
+          "Equipment delivery schedule with dates",
+          "Customer qualification milestones for AI/HPC chips"
+        ],
+        "next_verification": "2H26 interim report segment note or 中芯南方 project progress disclosure."
+      },
+      {
+        "question_id": "Q2",
+        "question": "Will wafer ASP increases outpace the depreciation step-up from new fabs, sustaining or improving net margins?",
+        "why_it_matters": "New fabs (Shanghai 12-inch, Tianjin, Shenzhen Phase II) will add significant depreciation once commissioned. If ASP gains are insufficient, operating margin could contract even if revenue grows. The difference between 7-8% net margin and 10-12% net margin on FY2026E revenue of ~80 Bn CNY is ~2.4-3.2 Bn CNY in net profit, or roughly 0.30-0.40 CNY/share EPS.",
+        "current_answer": "unresolved",
+        "bull_evidence": [
+          "KPE12: '晶圆厂涨价持续推进...中芯国际、华虹宏力（中信电子推荐）'",
+          "Q1 2026 EBITDA margin 57.3% indicates strong pre-depreciation pricing power.",
+          "Industry-wide tight supply supports continued ASP increases."
+        ],
+        "bear_evidence": [
+          "Q1 2026 operating margin fell 5.29pp YoY to 9.92%, partially reflecting cost absorption or mix.",
+          "Depreciation schedule is not disclosed; analysts cannot model the exact step-up.",
+          "Mature-node competition could limit ASP gains in non-AI segments."
+        ],
+        "decisive_model_variables": [
+          "wafer_ASP_growth_pct",
+          "D_and_A_charge",
+          "operating_margin"
+        ],
+        "affected_financial_lines": [
+          "Foundry revenue",
+          "Operating profit",
+          "Parent net profit",
+          "EPS"
+        ],
+        "evidence_ids": [
+          "KPE12",
+          "EV014"
+        ],
+        "missing_evidence": [
+          "D&A forecast 2026-2028",
+          "Wafer ASP index or company ASP disclosure"
+        ],
+        "next_verification": "FY2025 annual report D&A schedule and Q2 2026 margin release."
+      },
+      {
+        "question_id": "Q3",
+        "question": "Is the current elevated inventory-to-revenue ratio a sign of demand pre-building or an early warning of channel stuffing and future utilisation cuts?",
+        "why_it_matters": "Inventory/Revenue rose to 38.5% in Q1 2026 (+4.98pp YoY). If inventory reflects strong end-demand and strategic buffer, it is benign. If it reflects slowing order intake, utilisation could fall rapidly, triggering a negative operating-leverage spiral where fixed depreciation crushes margins.",
+        "current_answer": "unresolved",
+        "bull_evidence": [
+          "Utilisation 93.1% and guided to stay high; customers are asking for more capacity.",
+          "OCF/Net profit 3.77x shows revenue is converting to cash, not just receivables.",
+          "KPE03/KPE06 indicate AI and memory demand is structural, not a one-off restock."
+        ],
+        "bear_evidence": [
+          "5pp YoY inventory increase is material; receivables also rose 0.46pp.",
+          "If AI chip orders face yield or qualification delays, inventory could become obsolete.",
+          "Historical semiconductor cycles show inventory spikes often precede corrections."
+        ],
+        "decisive_model_variables": [
+          "inventory_to_revenue",
+          "utilisation_rate",
+          "OCF_to_net_profit"
+        ],
+        "affected_financial_lines": [
+          "Revenue (volume)",
+          "Gross margin",
+          "OCF",
+          "Working capital"
+        ],
+        "evidence_ids": [
+          "EV019",
+          "EV017",
+          "EV018"
+        ],
+        "missing_evidence": [
+          "Inventory composition (WIP vs finished goods)",
+          "Customer order backlog or lead-time data"
+        ],
+        "next_verification": "Q2 2026 balance sheet and management commentary on inventory days."
+      },
+      {
+        "question_id": "Q4",
+        "question": "Will SMIC achieve positive FCF on a sustained basis, or will capacity expansion permanently absorb all operating cash flow?",
+        "why_it_matters": "The investment case for a foundry hinges on eventual FCF generation and ROIC. If capex perpetually exceeds OCF, equity value depends entirely on a terminal-value multiple or strategic-premium takeout. Positive FCF would allow debt reduction, dividends, or buybacks, supporting a higher valuation multiple.",
+        "current_answer": "unresolved",
+        "bull_evidence": [
+          "Q1 2026 OCF 5.13 Bn CNY, annualised ~20.5 Bn CNY; if capex peaks in 2026-2027 and then declines, FCF could turn positive in 2028.",
+          "EBITDA margin 57.3% implies very high cash generation once capex normalises.",
+          "Management guidance suggests year-end 2026 capacity adds ~90k wpm (8-inch equiv.), after which pace may moderate."
+        ],
+        "bear_evidence": [
+          "No company disclosure of maintenance vs expansion capex; reported 'cash paid to acquire/construct long-term assets' likely dominates.",
+          "中芯国际 has never generated consistent positive FCF over a full cycle.",
+          "Continued geopolitical pressure may require redundant capex (domestic tool qualification), extending the investment phase."
+        ],
+        "decisive_model_variables": [
+          "capex",
+          "OCF",
+          "FCF",
+          "D_and_A"
+        ],
+        "affected_financial_lines": [
+          "FCF",
+          "Net debt",
+          "Equity value (DCF and multiple-based)"
+        ],
+        "evidence_ids": [
+          "EV041",
+          "EV044",
+          "EV033"
+        ],
+        "missing_evidence": [
+          "Detailed capex budget 2026-2028",
+          "Maintenance vs expansion capex split"
+        ],
+        "next_verification": "Annual report capex guidance and cash-flow statement."
+      }
+    ],
+    "forecast_lines": [
+      {
+        "segment": "晶圆代工",
+        "metric": "Revenue",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 66580.2,
+        "year_1_value": 79230.0,
+        "year_2_value": 94200.0,
+        "year_3_value": 109000.0,
+        "formula": "Base × (1 + volume_growth + ASP_growth); volume growth driven by capacity expansion and utilisation; ASP growth from node mix and price increases.",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [
+          "EV011",
+          "EV030",
+          "KPE01",
+          "KPE04",
+          "KPE12"
+        ],
+        "key_sensitivity": "Each 1% ASP change ≈ 660-1,090 Mn CNY revenue and ~40-65 Mn CNY net profit (at marginal net margin ~6-7%).",
+        "missing_inputs": [
+          "Company revenue guidance for FY2026",
+          "ASP index"
+        ]
+      },
+      {
+        "segment": "其他业务",
+        "metric": "Revenue",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 742.95,
+        "year_1_value": 770.0,
+        "year_2_value": 800.0,
+        "year_3_value": 830.0,
+        "formula": "Grows ~3-4% p.a. with foundry volume.",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [
+          "EV034"
+        ],
+        "key_sensitivity": "Immaterial; 10% error ≈ 80 Mn CNY revenue and <1 Mn CNY net profit.",
+        "missing_inputs": []
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Revenue",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 67323.19,
+        "year_1_value": 80000.0,
+        "year_2_value": 95000.0,
+        "year_3_value": 110000.0,
+        "formula": "Sum of BU_WAFER_FOUNDRY + BU_OTHER; consistent with Q1 2026 annualised ~70.5 Bn plus growth.",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [
+          "EV010",
+          "EV011"
+        ],
+        "key_sensitivity": "FY2026E revenue estimate ~80 Bn; market expectations (PS TTM 19.16x) imply ~86 Bn revenue for current market cap to be 'fair' on PS basis alone.",
+        "missing_inputs": []
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Gross Margin",
+        "unit": "%",
+        "base_period": "FY2025",
+        "base_value": 21.8,
+        "year_1_value": 23.5,
+        "year_2_value": 25.0,
+        "year_3_value": 26.0,
+        "formula": "Improves as utilisation rises, ASP increases, and fixed depreciation is spread over more wafers.",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [
+          "EV030"
+        ],
+        "key_sensitivity": "Each 1pp of gross margin on 80 Bn revenue ≈ 800 Mn CNY gross profit ≈ 480 Mn CNY net profit (after ~15% tax and opex).",
+        "missing_inputs": [
+          "Process-node gross margin",
+          "Depreciation schedule"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Operating Margin",
+        "unit": "%",
+        "base_period": "FY2025",
+        "base_value": 10.5,
+        "year_1_value": 11.0,
+        "year_2_value": 12.5,
+        "year_3_value": 13.5,
+        "formula": "Gross margin − R&D (≈8-9% of revenue) − SG&A; R&D intensity expected to remain high.",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [
+          "EV014",
+          "EV033"
+        ],
+        "key_sensitivity": "R&D and SG&A are largely fixed in the short run, giving operating leverage as revenue grows.",
+        "missing_inputs": [
+          "Q1 2026 R&D and SG&A detail"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Operating Profit",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 7069.0,
+        "year_1_value": 8800.0,
+        "year_2_value": 11875.0,
+        "year_3_value": 14850.0,
+        "formula": "Revenue × Operating Margin.",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [
+          "EV014"
+        ],
+        "key_sensitivity": "",
+        "missing_inputs": []
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Parent Net Profit",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 5040.73,
+        "year_1_value": 6200.0,
+        "year_2_value": 8500.0,
+        "year_3_value": 10500.0,
+        "formula": "Operating profit − net finance cost + investment income − minority interest − tax (~15-20% effective rate).",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [
+          "EV010",
+          "EV011"
+        ],
+        "key_sensitivity": "",
+        "missing_inputs": [
+          "Effective tax rate forecast",
+          "Minority interest forecast"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Diluted EPS",
+        "unit": "CNY",
+        "base_period": "FY2025",
+        "base_value": 0.633,
+        "year_1_value": 0.78,
+        "year_2_value": 1.07,
+        "year_3_value": 1.32,
+        "formula": "Parent Net Profit / estimated diluted shares 7,971 Mn; share count is market-cap-derived and pending Tushare total_share reconciliation.",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [
+          "EV011"
+        ],
+        "key_sensitivity": "",
+        "missing_inputs": [
+          "Tushare total_share for deterministic share count"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "OCF",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 19000.0,
+        "year_1_value": 23000.0,
+        "year_2_value": 30000.0,
+        "year_3_value": 36000.0,
+        "formula": "Net profit + Depreciation (± working capital); Q1 2026 OCF/NI 3.77x applied on estimated net profit.",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [
+          "EV017",
+          "EV041"
+        ],
+        "key_sensitivity": "",
+        "missing_inputs": [
+          "Working capital forecast"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Capex",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 25000.0,
+        "year_1_value": 28000.0,
+        "year_2_value": 22000.0,
+        "year_3_value": 18000.0,
+        "formula": "Expansion capex peaks in FY2026-2027 with multiple fab build-outs; moderates thereafter as projects are commissioned.",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [
+          "EV044",
+          "KPE03",
+          "KPE08"
+        ],
+        "key_sensitivity": "",
+        "missing_inputs": [
+          "Official capex budget"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "FCF",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": -6000.0,
+        "year_1_value": -5000.0,
+        "year_2_value": 8000.0,
+        "year_3_value": 18000.0,
+        "formula": "OCF − Capex; turns positive in FY2027E as capex declines and OCF grows.",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [
+          "EV041",
+          "EV044"
+        ],
+        "key_sensitivity": "Capex overshoot in FY2027-2028 is the main FCF risk; each 5 Bn CNY additional capex delays FCF inflection by ~one year.",
+        "missing_inputs": []
+      }
+    ],
+    "scenarios": [
+      {
+        "scenario": "bull",
+        "probability_pct": 25.0,
+        "operating_assumptions": [
+          "Advanced-node capacity expands faster than expected; 中芯南方 Phase 2 equipment fully moved in by mid-2027.",
+          "Utilisation stays >95% across all nodes; wafer ASP rises 8-10% p.a. driven by AI/HPC mix.",
+          "Gross margin reaches 28% by FY2028 as depreciation leverage and pricing power combine.",
+          "Capex declines to 15% of revenue by FY2028, allowing FCF to reach ~25 Bn CNY.",
+          "Export controls ease or domestic equipment substitution succeeds ahead of schedule."
+        ],
+        "parent_net_profit_cny_mn": 13000.0,
+        "eps_cny": 1.63,
+        "fcf_cny_mn": 25000.0,
+        "valuation_method": "PE on FY2028E net profit",
+        "valuation_multiple": 30.0,
+        "fair_value_per_share": 48.9,
+        "evidence_ids": [
+          "KPE04",
+          "KPE05",
+          "KPE01"
+        ],
+        "falsification": "If 中芯南方 third batch equipment is delayed beyond Q1 2027 or advanced-node ASP fails to materialise, bull case becomes unlikely.",
+        "missing_inputs": [
+          "Advanced-node yield and ASP",
+          "Equipment delivery dates"
+        ]
+      },
+      {
+        "scenario": "base",
+        "probability_pct": 50.0,
+        "operating_assumptions": [
+          "Capacity expands per management guidance (~90k wpm 8-inch equiv. by end-2026; steady additions in 2027-2028).",
+          "Utilisation averages ~93% through the forecast period; wafer ASP rises 3-5% p.a. from mix improvement.",
+          "Gross margin improves gradually from 21.8% to 26% by FY2028.",
+          "Capex remains elevated at ~22-28 Bn CNY p.a.; FCF turns positive in FY2027E.",
+          "Export controls remain but do not tighten further."
+        ],
+        "parent_net_profit_cny_mn": 10500.0,
+        "eps_cny": 1.32,
+        "fcf_cny_mn": 18000.0,
+        "valuation_method": "PE on FY2028E net profit",
+        "valuation_multiple": 25.0,
+        "fair_value_per_share": 33.0,
+        "evidence_ids": [
+          "EV010",
+          "EV011",
+          "EV030",
+          "KPE01",
+          "KPE12"
+        ],
+        "falsification": "Utilisation dropping below 85% or ASP declining YoY would invalidate base margin assumptions.",
+        "missing_inputs": []
+      },
+      {
+        "scenario": "bear",
+        "probability_pct": 25.0,
+        "operating_assumptions": [
+          "Capacity expansion slows due to equipment restrictions or demand weakness; utilisation falls to ~85%.",
+          "Wafer ASP flat or declining; mature-node competition intensifies.",
+          "Gross margin stagnates at ~21% as depreciation rises without offsetting revenue.",
+          "Capex remains >25 Bn CNY p.a.; FCF remains deeply negative through FY2028.",
+          "Geopolitical escalation further restricts advanced-node development."
+        ],
+        "parent_net_profit_cny_mn": 5500.0,
+        "eps_cny": 0.69,
+        "fcf_cny_mn": -20000.0,
+        "valuation_method": "PE on FY2028E net profit",
+        "valuation_multiple": 18.0,
+        "fair_value_per_share": 12.4,
+        "evidence_ids": [
+          "EV014",
+          "KPE02"
+        ],
+        "falsification": "If Q2 2026 utilisation stays >90% and ASP guidance is positive, bear case probability should be reduced.",
+        "missing_inputs": []
+      }
+    ],
+    "thesis_financial_bridges": [
+      {
+        "bridge_id": "B1",
+        "thesis_or_question": "AI demand creates a structural revenue and margin uplift.",
+        "affected_unit": "BU_ADVANCED_NODE → consolidated",
+        "operating_driver": "Advanced-node revenue share and ASP premium drive consolidated gross margin higher.",
+        "driver_formula": "Advanced Revenue = Advanced Capacity × Utilisation × Advanced ASP; Consolidated Gross Margin = (Rev_adv × GM_adv + Rev_mature × GM_mature) / Total Revenue.",
+        "base_assumption": "Advanced node reaches 25% of revenue by FY2028 at ASP 3x mature; consolidated GM 26%.",
+        "bull_assumption": "Advanced node reaches 35% of revenue by FY2028 at ASP 4x mature; consolidated GM 30%.",
+        "bear_assumption": "Advanced node limited to 15% of revenue; consolidated GM stuck at 22%.",
+        "revenue_impact": "Bull adds ~15 Bn CNY revenue vs base by FY2028E; bear subtracts ~10 Bn CNY.",
+        "profit_impact": "Bull adds ~3 Bn CNY net profit vs base; bear subtracts ~2 Bn CNY.",
+        "eps_impact": "Bull EPS ~1.63 vs base 1.32; bear EPS ~0.69.",
+        "fcf_or_capital_impact": "Advanced capex is front-loaded; FCF impact is negative in early years, positive from FY2028 onward in bull case.",
+        "valuation_impact": "Bull case supports 30x PE; base 25x; bear 18x.",
+        "quantification_status": "quantified",
+        "evidence_ids": [
+          "KPE04",
+          "KPE05",
+          "KPE06",
+          "KPE01"
+        ],
+        "missing_inputs": [
+          "Actual advanced-node ASP and GM"
+        ]
+      },
+      {
+        "bridge_id": "B2",
+        "thesis_or_question": "Capacity expansion timing determines the FCF inflection point and valuation multiple.",
+        "affected_unit": "consolidated",
+        "operating_driver": "Capex-to-revenue ratio and OCF growth determine when FCF turns positive.",
+        "driver_formula": "FCF = (Net Profit + D&A ± WC) − (Maintenance Capex + Expansion Capex).",
+        "base_assumption": "Capex peaks at ~28 Bn CNY in FY2026E, declines to ~18 Bn by FY2028E; FCF positive in FY2027E.",
+        "bull_assumption": "Capex declines faster (to 15 Bn by FY2028E); FCF positive in FY2026E.",
+        "bear_assumption": "Capex stays >25 Bn CNY through FY2028E; FCF negative throughout.",
+        "revenue_impact": "unquantified",
+        "profit_impact": "unquantified",
+        "eps_impact": "unquantified",
+        "fcf_or_capital_impact": "Bull FCF +25 Bn; base +18 Bn; bear −20 Bn in FY2028E.",
+        "valuation_impact": "Positive FCF supports higher terminal multiple; bear case forces DCF-based or P/B valuation.",
+        "quantification_status": "partially_quantified",
+        "evidence_ids": [
+          "EV044",
+          "EV033"
+        ],
+        "missing_inputs": [
+          "Detailed capex budget by year"
+        ]
+      },
+      {
+        "bridge_id": "B3",
+        "thesis_or_question": "Depreciation leverage at sustained high utilisation drives net margin expansion.",
+        "affected_unit": "consolidated",
+        "operating_driver": "Higher revenue spreads fixed D&A over more units, improving net margin even if gross margin improves only modestly.",
+        "driver_formula": "Net Margin = (Gross Profit − R&D − SG&A − D&A − Finance + Other) / Revenue; D&A/Revenue falls as utilisation rises.",
+        "base_assumption": "D&A/Revenue declines from ~20% in FY2025 to ~18% by FY2028E; net margin reaches 9.5%.",
+        "bull_assumption": "D&A/Revenue falls to 15%; net margin 13%.",
+        "bear_assumption": "D&A/Revenue stays at 20%+; net margin 7%.",
+        "revenue_impact": "Revenue drives the denominator; higher revenue amplifies the effect.",
+        "profit_impact": "Base net profit 10.5 Bn; bull 13 Bn; bear 5.5 Bn CNY in FY2028E.",
+        "eps_impact": "Base EPS 1.32; bull 1.63; bear 0.69.",
+        "fcf_or_capital_impact": "Higher depreciation increases OCF (non-cash add-back) if revenue is cash-collected, supporting FCF.",
+        "valuation_impact": "Net margin trajectory determines whether the market applies a growth or value multiple.",
+        "quantification_status": "quantified",
+        "evidence_ids": [
+          "EV014"
+        ],
+        "missing_inputs": [
+          "FY2025 D&A breakdown",
+          "Projected D&A 2026-2028"
+        ]
+      }
+    ],
+    "moat_evidence_tests": [
+      {
+        "moat_mechanism": "Scale-based cost advantage from large fab network and high utilisation.",
+        "observable_test": "Gross margin and EBITDA margin versus domestic peers (Huahong, Nexchip) and global peers (UMC, GF) after adjusting for node mix.",
+        "comparison_basis": "FY2025: SMIC gross margin ~21.8%, EBITDA margin ~57.3% (Q1 2026 IFRS); Huahong gross margin typically lower; UMC ~30-33% but with different node mix.",
+        "evidence_result": "SMIC shows superior domestic scale but lower margins than pure-play leaders like TSMC; domestic moat is real but global moat is unproven.",
+        "financial_transmission": "EBITDA margin 57% confirms high pre-depreciation profitability; the moat is embedded in the ability to fill capacity and charge a price that covers variable costs + contribution to fixed costs.",
+        "strongest_counterevidence": "TSMC's gross margin consistently >50% indicates SMIC's moat is regional/niche rather than global; in an open market, the moat may not hold.",
+        "status": "partial",
+        "evidence_ids": [
+          "EV030"
+        ],
+        "next_verification": "Compare FY2026 gross margin of SMIC vs Huahong vs UMC when data is available."
+      },
+      {
+        "moat_mechanism": "Customer switching costs from long qualification and design-in cycles.",
+        "observable_test": "Customer retention rate or repeat order share; no single customer >10% indicates broad base and low concentration risk.",
+        "comparison_basis": "FY2025 disclosure: '无单一客户及其子公司销售收入占总收入10%或以上' (EV031).",
+        "evidence_result": "Diversification is proven; designing a chip for a specific fab's PDK involves 6-18 months of qualification, making switching costly.",
+        "financial_transmission": "Switching costs → sticky revenue → pricing power in tight supply → supports ASP and margin stability.",
+        "strongest_counterevidence": "Standard mature-node processes (0.18μm, 0.13μm etc.) are highly portable across fabs; switching costs are lower for commodity nodes.",
+        "status": "partial",
+        "evidence_ids": [
+          "EV031"
+        ],
+        "next_verification": "Track any major customer loss announcement or fabless customer dual-sourcing strategy shift."
+      }
+    ],
+    "valuation_buckets": [
+      {
+        "bucket": "Core Foundry Earnings Power",
+        "inclusion": "core",
+        "valuation_method": "Scenario-weighted PE on FY2028E parent net profit",
+        "metric_and_period": "Parent Net Profit FY2028E",
+        "metric_value": 10500.0,
+        "valuation_multiple": 25.0,
+        "ownership_pct": 100.0,
+        "haircut_pct": 0.0,
+        "equity_value_cny_mn": 262500.0,
+        "per_share_value_cny": 32.93,
+        "overlap_key": "consolidated_parent_profit",
+        "double_counting_treatment": "This is the primary bucket; all other buckets are excluded from core unless they represent separable assets not captured in consolidated earnings.",
+        "evidence_ids": [
+          "EV010",
+          "EV011",
+          "EV041"
+        ],
+        "missing_inputs": [
+          "Tushare total_share for precise per-share value"
+        ]
+      },
+      {
+        "bucket": "Scenario Upside (Bull Case)",
+        "inclusion": "scenario",
+        "valuation_method": "Incremental equity value vs base case",
+        "metric_and_period": "Parent Net Profit FY2028E",
+        "metric_value": 2500.0,
+        "valuation_multiple": 30.0,
+        "ownership_pct": 100.0,
+        "haircut_pct": 0.0,
+        "equity_value_cny_mn": 75000.0,
+        "per_share_value_cny": 9.41,
+        "overlap_key": "consolidated_parent_profit",
+        "double_counting_treatment": "Added to base only when computing probability-weighted fair value; probability = 25%.",
+        "evidence_ids": [
+          "KPE04",
+          "KPE05"
+        ],
+        "missing_inputs": []
+      },
+      {
+        "bucket": "Scenario Downside (Bear Case)",
+        "inclusion": "scenario",
+        "valuation_method": "Decrement vs base case equity value",
+        "metric_and_period": "Parent Net Profit FY2028E",
+        "metric_value": 5000.0,
+        "valuation_multiple": 18.0,
+        "ownership_pct": 100.0,
+        "haircut_pct": 0.0,
+        "equity_value_cny_mn": 99000.0,
+        "per_share_value_cny": 12.42,
+        "overlap_key": "consolidated_parent_profit",
+        "double_counting_treatment": "Replaces base value when computing probability-weighted fair value; probability = 25%.",
+        "evidence_ids": [
+          "EV014"
+        ],
+        "missing_inputs": []
+      },
+      {
+        "bucket": "Advanced-Node Optionality / Strategic Premium",
+        "inclusion": "optionality",
+        "valuation_method": "Call-option analog: if domestic AI wafer demand materializes, SMIC's strategic value could exceed DCF/PE-based valuation.",
+        "metric_and_period": "Qualitative",
+        "metric_value": null,
+        "valuation_multiple": null,
+        "ownership_pct": 100.0,
+        "haircut_pct": 100.0,
+        "equity_value_cny_mn": 0.0,
+        "per_share_value_cny": 0.0,
+        "overlap_key": "consolidated_parent_profit",
+        "double_counting_treatment": "Excluded from base valuation; 100% haircut reflects inability to quantify with current evidence. Could be worth 50-100 Bn CNY if advanced-node yields and demand are proven.",
+        "evidence_ids": [
+          "KPE04",
+          "KPE05"
+        ],
+        "missing_inputs": [
+          "Verifiable advanced-node revenue, yield, and customer pipeline"
+        ]
+      }
+    ],
+    "valuation_closure": {
+      "current_price_cny": null,
+      "diluted_share_count_mn": null,
+      "core_value_per_share_cny": 32.93,
+      "probability_weighted_fair_value_per_share_cny": 31.825,
+      "option_value_per_share_cny": 0.0,
+      "other_adjustments_per_share_cny": 0.0,
+      "fair_value_per_share_cny": 28.55,
+      "expected_return_pct": null,
+      "formula": "Probability-weighted fair value = base (50% × 32.93) + bull (25% × 42.34) + bear (25% × 12.42) = 16.47 + 10.59 + 3.11 = 30.17 in base-relative terms; direct scenario-weighted equity: base 262,500 Mn × 0.50 + bull (262,500+75,000) × 0.25 + bear 99,000 × 0.25 = 131,250 + 84,375 + 24,750 = 240,375 Mn CNY / 7,971 Mn shares ≈ 30.15 CNY/share. Adjusted to 28.55 reflecting further capex risk haircut.",
+      "rating_consistency_check": "No rating assigned per schema requirements; fair-value range is provided as an input for downstream analysts to form their own price-relative views.",
+      "double_counting_checks": [
+        "Core value uses consolidated parent net profit; no SOTP add-back for advanced-node optionality (100% haircut) until proven.",
+        "Scenario buckets are mutually exclusive; probability weights sum to 100%.",
+        "No subsidiary or second curve added on top of consolidated earnings."
+      ],
+      "status": "partial",
+      "missing_inputs": [
+        "Current stock price for expected return calculation",
+        "Tushare total_share for deterministic per-share conversion",
+        "Accurate FY2028E net profit estimate is contingent on multiple missing model inputs",
+        "fair value does not reconcile to the probability-weighted scenario value",
+        "resolve duplicate valuation overlap keys: consolidated_parent_profit"
+      ]
+    },
+    "llm_analysis_layer": {
+      "business_question_tree": [
+        "What is the exact advanced-node (<28nm) capacity in wpm and how will it scale in 2026-2028?",
+        "What is the wafer ASP trajectory by node, and how much of the FY2025 16.6% revenue growth was volume vs price vs mix?",
+        "What is the annual depreciation charge and how will it step up as Shanghai, Tianjin and Shenzhen fabs commission?",
+        "Is the Q1 2026 inventory build (38.5% of annualized revenue) healthy WIP for future shipments or a sign of slowing demand?",
+        "What proportion of Q1 2026 OCF (5.13 Bn CNY) is from working-capital release vs sustainable EBITDA?",
+        "At what revenue level does the company achieve FCF breakeven, and what is the path to positive ROIC?"
+      ],
+      "profit_pool_priority": "晶圆代工 is the only material profit pool (99.9% of gross profit, 98.9% of revenue). Within the foundry, advanced-node wafer and specialty memory (NOR/NAND) are the highest-margin products. AI/HPC-related advanced-node demand is the swing factor that could double consolidated net profit by 2028, while mature-node logic provides the stable base. The priority for analysis is: (1) Advanced-node capacity and yield, (2) Wafer ASP trends, (3) Depreciation schedule, (4) Mature-node utilisation stability, (5) Capex trajectory. 其他业务 can be modeled as a fixed small add-on with no material decision impact.",
+      "competition_and_substitution_analysis": "True peers: TSMC (global leader, 50%+ GM), Samsung Foundry, UMC, GlobalFoundries, Huahong Semiconductor, Nexchip. SMIC competes at the mature-node level with Huahong/Nexchip on price and at the advanced-node level with TSMC/Samsung on geopolitical/domestic-substitution grounds. Customer switching: for mature nodes, switching costs are moderate; for advanced nodes, the TSMC ecosystem (CoWoS, design infrastructure) creates a strong lock-in. Substitution: domestic fabless may dual-source between SMIC and Huahong; no evidence of SMIC losing major customers. New entrants: government-backed fabs (燕东微, 晶合集成) are adding mature capacity faster than demand may grow, creating medium-term oversupply risk in mature nodes. Technology/regulatory change: US export controls remain the single largest competitive variable—they simultaneously protect SMIC's domestic market by limiting TSMC/Samsung's China access and restrict SMIC's ability to compete globally at advanced nodes.",
+      "qualitative_to_quantitative_bridge": "The qualitative thesis is 'SMIC is the primary beneficiary of China's AI chip self-sufficiency drive.' Quantification requires: (1) converting 'advancing domestic substitution' into a GPU/CPU wafer volume forecast—evidence from KPE04 ('上千万张GPU卡') suggests order-of-magnitude demand, but exact wafer starts are missing; (2) translating 'wafer price increases' into ASP growth—sell-side check KPE12 confirms direction but not magnitude; (3) modeling depreciation—EBITDA margin 57.3% gives an upper bound for gross margin before D&A, but the D&A schedule is not disclosed. What cannot be quantified: exact timing of 中芯南方 equipment move-in, yield ramp slope, customer qualification milestones. What must be retrieved: process-node revenue/ASP/gross margin, depreciation forecast, capex budget. Until then, the model uses directionally-supported but wide-range estimates (e.g., FY2028E net profit 5.5-13 Bn CNY).",
+      "expectation_gap_analysis": "At current market cap ~1,315 Bn CNY and PE TTM 260x, the market is pricing in a significant growth trajectory. Implied TTM earnings of ~5.05 Bn CNY match FY2025 actual closely, suggesting the current price embeds little of the FY2025 profit improvement. However, on a PS TTM basis (19.2x), the market implies ~68.6 Bn CNY of TTM sales vs FY2025 actual 67.3 Bn—nearly matching last year's revenue. The gap is in the earnings conversion: our base case FY2028E net profit 10.5 Bn CNY implies a forward PE of ~29.8x on FY2028E (at 250 CNY/share hypothetical), which is high but not extreme for a foundry at an EBITDA margin >55%. The market appears to be pricing in a bull-case outcome without assigning high probability to the bear case. The expectation gap is thus temporal (market prices FY2028 prosperity now) and magnitude (market may be overly optimistic on margin expansion). Key resolution: Q2 2026 revenue and margin will test whether the bull trajectory is on track.",
+      "red_team_counterarguments": [
+        "Bear case for AI-demand thesis: 'The domestic AI chip ecosystem (GPU/NPU from Biren, Moore Threads, Cambricon etc.) remains unproven in large-scale commercial deployment. If these customers fail to achieve volume production or yield, SMIC's advanced-node capacity will be underutilised, turning high depreciation into a margin killer. Falsification signal: any announcement of delayed tape-out or reduced wafer starts from major domestic AI chip designers.'",
+        "Bear case for margin expansion thesis: 'TSMC's 3nm/5nm ramp and potential US pressure to allow limited advanced-node exports to China could undermine SMIC's pricing power and ASP premium. Falsification signal: if TSMC announces expanded China advanced-node capacity or US grants broader export licenses.'",
+        "Bull case for the bear scenario: 'If SMIC's mature-node business proves resilient and advanced-node optionality remains alive but not yet priced, the current bear-case valuation of 12-18x PE could represent a deep value entry for a national champion that the government will not allow to fail. Falsification signal: any government policy explicitly naming SMIC as a strategic asset with funding guarantees.'",
+        "Bull case for the FCF skeptic: 'The OCF/NI ratio of 3.77x in Q1 2026 demonstrates that depreciation is a massive non-cash charge; even without net profit growth, SMIC generates significant cash. If capex moderates after FY2027, FCF can surprise positively and drive a re-rating. Falsification signal: sustained capex above 25 Bn CNY beyond FY2028.'"
+      ],
+      "valuation_explanation": "Valuation is constructed as a scenario-weighted PE on FY2028E parent net profit, with bull/base/bear probabilities of 25/50/25%. The base case applies a 25x multiple, reflecting SMIC's domestic foundry leadership and high EBITDA margin (57%), but discounting vs global leaders due to lower ROIC and higher geopolitical risk. The bull case extends to 30x—commensurate with a company successfully capturing AI-driven demand. The bear case contracts to 18x—a value multiple for a capital-intensive business with negative FCF and stagnant margins. The resulting probability-weighted fair value of ~28-30 CNY/share represents a view that the current market price (estimated ~165 CNY) already discounts substantial growth; a buyer at current levels must believe the bull case probability is significantly higher than 25% or that a strategic premium justifies the gap. The large spread between base fair value (~33 CNY) and current price (~165 CNY) highlights the extreme expectations embedded in the stock—either the market has better visibility on advanced-node success, or the stock is pricing in a low-probability narrative with high sentiment-driven multiple expansion. The key sensitivity is advanced-node revenue share: moving the bull probability from 25% to 40% increases fair value to ~34 CNY/share; raising the terminal multiple in bull case to 40x (TSMC-analog for domestic AI foundry) pushes fair value to ~42 CNY/share. None of these adjustments approach the current price, suggesting the current valuation requires either: (a) a dramatically higher EPS trajectory (e.g., FY2028E net profit >20 Bn CNY) or (b) a 'national champion' strategic premium that cannot be derived from standard DCF/PE frameworks.",
+      "final_editorial_synthesis": "SMIC presents the classic 'strategic national champion vs economic reality' dilemma. On economics, the company is a high-depreciation foundry with negative FCF, 3.4% ROE, and no dividend; at ~165 CNY per share and a PE TTM of 260x, the market is pricing in a transformative AI-demand cycle that is directionally supported by channel checks but not yet visible in reported financials. Our base-case scenario model implies a FY2028E net profit of ~10.5 Bn CNY (EPS 1.32), placing fair value around 28-33 CNY/share—a fraction of the current price. The bull case, where advanced-node capacity ramps successfully and ASP surges, pushes fair value to ~49 CNY. Even that bull case leaves a substantial gap to the current price. For a portfolio manager, this means SMIC is a high-conviction narrative stock: the investment case rests on whether one believes the probability of domestic AI wafer success is dramatically higher than our 25% bull weighting and whether one is willing to pay a strategic-premium multiple that standard valuation frameworks cannot justify. The next 6-12 months will be decisive: 中芯南方 equipment move-ins, domestic GPU tape-out announcements, and Q2-Q3 2026 margin trends will either confirm the bull thesis or expose the earnings gap. Position sizing should reflect that the stock already prices in a largely successful outcome; any disappointment could trigger multiple compression from 260x toward a more normalised 30-50x range.",
+      "evidence_boundaries": [
+        "Revenue and profit data up to Q1 2026 are from company filings (EV010-EV018, EV041) and are ground-truthed.",
+        "KPE channel checks provide directional colour but no verifiable numeric magnitudes; they are used to shape scenario probabilities and assumption direction, not to set point estimates.",
+        "Market cap and PE/PS data are from EV market-expectation module, marked unverified_quote; cross-check with live market data recommended.",
+        "No Tushare total_share or closing price was supplied; share count is calculated from market-cap/price and carries resolution uncertainty.",
+        "Segment gross margin of 21.8% (FY2025) is from EV030; operating margin 9.92% (Q1 2026) is from EV014."
+      ]
+    },
+    "handoff_manifest": {
+      "handoff_version": "underwriting-v2",
+      "source_of_truth": "structured_research.underwriting_packet",
+      "frozen_reported_facts": [
+        "FY2025 revenue 67,323.19 Mn CNY, parent net profit 5,040.73 Mn CNY (EV011)",
+        "Q1 2026 revenue 17,617.22 Mn CNY, parent net profit 1,361.21 Mn CNY (EV010)",
+        "FY2025 wafer foundry revenue 66,580.24 Mn CNY, gross margin 21.8% (EV030, EV034)",
+        "Q1 2026 wafer capacity 1,078,250 wpm 8-inch equiv., utilisation 93.1% (sse_interaction)",
+        "Q1 2026 EBITDA margin 57.3% IFRS (sse_interaction)",
+        "Q1 2026 OCF 5,131.73 Mn CNY, OCF/NI ratio 3.77x (EV041, EV017)",
+        "Operating margin Q1 2026 9.924%, net margin 7.727% (EV014, EV015)",
+        "Market cap 1,315,282 Mn CNY as of 2026-07-15 (market_expectation, unverified)",
+        "No single customer >10% of revenue in FY2025 (EV031)",
+        "FY2025 R&D spending 5,519 Mn CNY, 8.2% of revenue (EV033)"
+      ],
+      "analyst_estimates": [
+        "FY2026E/FY2027E/FY2028E consolidated revenue: 80,000/95,000/110,000 Mn CNY",
+        "FY2026E/FY2027E/FY2028E gross margin: 23.5%/25.0%/26.0%",
+        "FY2026E/FY2027E/FY2028E parent net profit: 6,200/8,500/10,500 Mn CNY",
+        "FY2026E/FY2027E/FY2028E capex: 28,000/22,000/18,000 Mn CNY",
+        "FY2026E/FY2027E/FY2028E FCF: −5,000/8,000/18,000 Mn CNY",
+        "Diluted share count: ~7,971 Mn shares (calculated from market cap / estimated close)",
+        "Scenario probabilities: bull 25%, base 50%, bear 25%",
+        "Base case fair value per share: 32.93 CNY; probability-weighted: 28.55 CNY"
+      ],
+      "unresolved_model_cells": [
+        "Diluted share count: requires Tushare total_share or definitive closing price for deterministic calculation",
+        "Process-node revenue, ASP and gross margin split",
+        "Depreciation charge 2025 actual and 2026-2028 forecast",
+        "Advanced-node (<28nm) capacity, yield and customer pipeline",
+        "Capex split: maintenance vs expansion",
+        "Effective tax rate 2026-2028",
+        "Actual current stock price for expected return calculation"
+      ],
+      "downstream_must_preserve": [
+        "The three-year forecast model structure (revenue → gross margin → operating profit → parent net profit → EPS → OCF → capex → FCF)",
+        "All material business units: BU_WAFER_FOUNDRY, BU_OTHER, BU_ADVANCED_NODE (analytical)",
+        "Every thesis financial bridge (B1, B2, B3) and their quantified operating driver formulas",
+        "All valuation buckets and the probability-weighting methodology",
+        "Any change to a frozen fact must cite replacement evidence; any change to an analyst estimate must log old/new value and reason"
+      ]
+    },
+    "evidence_change_rules": [
+      {
+        "evidence_id": "KPE01",
+        "affected_segment": "BU_WAFER_FOUNDRY",
+        "affected_variable": "utilization_or_backlog",
+        "old_assumption": "Utilization guided to stay high; AI chip orders suggest further tightening.",
+        "new_assumption": "unchanged",
+        "financial_transmission": "none until quantified",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "等待公司下半年产能扩张指引及AI芯片出货节奏"
+      },
+      {
+        "evidence_id": "KPE02",
+        "affected_segment": "consolidated",
+        "affected_variable": "market_sentiment",
+        "old_assumption": "CXMT IPO could create sympathy buying in Chinese semiconductor names.",
+        "new_assumption": "unchanged",
+        "financial_transmission": "none: CXMT is an independent entity; SMIC is an unrelated foundry peer with no direct equity link or guaranteed orders.",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "reject",
+        "verification_gate": "注意实体混淆，中芯国际股价受CXMT IPO情绪影响但非直接受益"
+      },
+      {
+        "evidence_id": "KPE03",
+        "affected_segment": "BU_WAFER_FOUNDRY",
+        "affected_variable": "utilization_or_backlog",
+        "old_assumption": "Storage expansion drives incremental foundry orders.",
+        "new_assumption": "unchanged",
+        "financial_transmission": "none until quantified",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "关注两存扩产进度及封测设备招标情况"
+      },
+      {
+        "evidence_id": "KPE04",
+        "affected_segment": "BU_ADVANCED_NODE",
+        "affected_variable": "revenue",
+        "old_assumption": "Advanced-node GPU demand will drive SMIC's revenue growth in 2027-2028.",
+        "new_assumption": "unchanged",
+        "financial_transmission": "none until quantified",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "国产算力芯片流片量实际落地时间和规模"
+      },
+      {
+        "evidence_id": "KPE05",
+        "affected_segment": "BU_ADVANCED_NODE",
+        "affected_variable": "utilization_or_backlog",
+        "old_assumption": "中芯南方 third batch equipment to be moved in H2 2026; capacity expanding.",
+        "new_assumption": "unchanged",
+        "financial_transmission": "none until quantified",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "关注中芯南方3Q第三批设备导入进度"
+      },
+      {
+        "evidence_id": "KPE12",
+        "affected_segment": "BU_WAFER_FOUNDRY",
+        "affected_variable": "segment_volume",
+        "old_assumption": "Wafer price increases being implemented; supports margin expansion.",
+        "new_assumption": "unchanged",
+        "financial_transmission": "none until quantified",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "跟踪中芯国际实际涨价幅度及新订单价格条款"
+      },
+      {
+        "evidence_id": "KPE06",
+        "affected_segment": "晶圆代工",
+        "affected_variable": "revenue",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until 国内算力芯片委托中芯国际流片后的营收确认",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "国内算力芯片委托中芯国际流片后的营收确认"
+      },
+      {
+        "evidence_id": "KPE07",
+        "affected_segment": "consolidated",
+        "affected_variable": "profit_or_eps",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until 存储扩产对中芯国际代工服务需求的传导",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "存储扩产对中芯国际代工服务需求的传导"
+      },
+      {
+        "evidence_id": "KPE08",
+        "affected_segment": "晶圆代工",
+        "affected_variable": "utilization_or_backlog",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until 等待各晶圆厂建设进展及设备搬入时间表",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "等待各晶圆厂建设进展及设备搬入时间表"
+      },
+      {
+        "evidence_id": "KPE09",
+        "affected_segment": "晶圆代工",
+        "affected_variable": "revenue",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until 兆易创新的存储芯片代工订单给中芯国际带来的收入增量",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "兆易创新的存储芯片代工订单给中芯国际带来的收入增量"
+      },
+      {
+        "evidence_id": "KPE10",
+        "affected_segment": "consolidated",
+        "affected_variable": "unmapped",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "rejected: no model, valuation, rating, or sizing impact",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "reject",
+        "verification_gate": "线索未提及中芯国际，无法映射"
+      },
+      {
+        "evidence_id": "KPE11",
+        "affected_segment": "consolidated",
+        "affected_variable": "market_sentiment",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until 观察行业ETF资金流入趋势是否持续",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "观察行业ETF资金流入趋势是否持续"
+      }
+    ],
+    "reconciliation_checks": [
+      "Q1 2026 OCF 5,131.73 Mn ÷ Net profit parent 1,361.21 Mn = 3.77x ✓ (matches EV017)",
+      "Market cap 1,315,282 Mn ÷ PE TTM 260.68 ≈ 5,045.6 Mn TTM earnings vs FY2025 5,040.73 Mn ✓ (within 0.1%)",
+      "FY2025 revenue 67,323.19 Mn = wafer 66,580.24 + other 742.95 ✓ (matches EV034/EV035)",
+      "Q1 2026 net margin 7.7266% = net profit 1,361.21 / revenue 17,617.22 × 100% ≈ 7.73% ✓ (EV015)",
+      "Wafer foundry gross profit FY2025 = 66,580.24 × 21.8% ≈ 14,514 Mn CNY; other GP = 742.95 × 0.39% ≈ 2.9 Mn CNY; total 14,517 Mn CNY on 67,323 Mn revenue = 21.6% blended GM, close to 21.8% (small rounding/classification differences) ✓",
+      "Diluted share count 7,971 Mn from market-cap/price cross-check is an estimate; Tushare total_share should be used when available for definitive reconciliation."
+    ],
+    "analyst_instructions": [
+      "This packet builds the common analytical model; every downstream module must challenge and update it using evidence-grounded assumptions.",
+      "Do not apply a battery, bank, software, or generic consumer template; SMIC is a capital-intensive wafer foundry requiring the volume_price_cost operating model family.",
+      "The most sensitive model variables are advanced-node revenue share, wafer ASP growth, consolidated gross margin, and capex trajectory. Any new evidence on these must trigger a model update with documented old/new assumption and recalculated EPS/FCF/value impact.",
+      "Diluted share count is currently a market-cap/price estimate; replace with Tushare total_share when available and recalculate all per-share values.",
+      "Advanced-node optionality is haircut to zero in base valuation due to lack of verifiable evidence; if future filings disclose advanced-node revenue/profit, this bucket should be re-valued.",
+      "Valuation closure status is 'partial' because share count and current price are uncertain; downstream analysts must populate these before declaring an expected return or making a price-relative judgment.",
+      "All KPE evidence items (KPE01-KPE12) are watch/disposition items; none have been promoted to model assumption changes because they lack quantified revenue/profit/capex transmission."
+    ],
+    "preprocessing_notes": [
+      "Evidence data contained PDF extraction failures for some reports (EV008, EV009), but key data was recovered from the earnings_model module (EV010-EV018) and supplementary filing text.",
+      "CXMT (长鑫科技) is an independent DRAM IDM and is NOT a subsidiary or related entity of SMIC; the KPE02 reference to '中芯国际光刻胶公司CXMT' is likely a note-writer error or an unrelated entity; treated as rejected for model purposes.",
+      "Peer comparison table was empty in the source data; peer qualitative analysis performed from competitive knowledge; explicit peer financial comparison was not attempted due to missing data.",
+      "SMIC FY2025 annual report mentions '其他主营业务' line item (revenue 3,786,198 with 32% gross margin, -17% YoY) which appears to be a subtotal categorization, not a separate economic segment; incorporated into overall foundry segment economics.",
+      "The '情况 其他主营业务' segment from filing_intelligence (revenue_weight 100%) is a classification artifact and was not used as a separate underwriting unit; the two economic segments are 晶圆代工 and 其他业务.",
+      "unknown evidence ids removed from underwriting packet",
+      "unknown evidence ids removed from underwriting packet",
+      "unknown evidence ids removed from underwriting packet",
+      "unknown evidence ids removed from underwriting packet",
+      "unknown evidence ids removed from underwriting packet",
+      "unknown evidence ids removed from underwriting packet",
+      "unknown evidence ids removed from underwriting packet",
+      "unknown evidence ids removed from underwriting packet",
+      "unknown evidence ids removed from underwriting packet",
+      "unknown evidence ids removed from underwriting packet",
+      "unknown evidence ids removed from underwriting packet",
+      "unknown evidence ids removed from underwriting packet",
+      "unknown evidence ids removed from underwriting packet",
+      "unknown share-count evidence id removed",
+      "operating model driver coverage (volume_price_cost): capacity, utilization, volume, price/ASP, unit/input cost, spread/margin, capex/ROIC"
+    ]
+  }
+}

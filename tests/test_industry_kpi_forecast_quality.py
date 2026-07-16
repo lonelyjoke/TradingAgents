@@ -53,6 +53,115 @@ def test_sungrow_uses_power_electronics_and_ess_integrator_playbook():
     assert "Cathode / material revenue" not in forecast
 
 
+def test_smic_uses_semiconductor_foundry_playbook_despite_cross_industry_noise():
+    company = (
+        "SMIC is a pure-play semiconductor foundry. Its thesis-critical variables are "
+        "8-inch and 12-inch wafer capacity, fab utilization, wafer ASP, process-node mix, "
+        "capex, depreciation and export-control equipment access. Generic references to "
+        "5G, cloud, copper, aluminum, lithium carbonate and battery demand are only end-market noise."
+    )
+
+    kpi = build_industry_kpi_context(
+        "688981.SH",
+        "2026-07-15",
+        filing_intelligence_context=company,
+        company_business_model_context=company,
+        metals_mining_context="# Metals-mining verification context\n\n- Status: triggered\n- Metals covered: Copper",
+    )
+    forecast = build_forecast_model_context(
+        "688981.SH",
+        "2026-07-15",
+        filing_intelligence_context=company,
+        company_business_model_context=company,
+        industry_kpi_context=kpi,
+        metals_mining_context="# Metals-mining verification context\n\n- Status: triggered\n- Metals covered: Copper",
+    )
+
+    assert "semiconductor foundry / wafer manufacturing" in kpi
+    assert "Wafer Capacity / Utilization" in kpi
+    assert "Wafer ASP / Process Mix" in kpi
+    assert "Capex / Tool Access" in kpi
+    assert "telecom operator" not in kpi
+    assert "nonferrous metals" not in kpi
+    assert "battery / energy-storage chain" not in kpi
+    assert "Wafer revenue" in forecast
+    assert "wafer shipments or wafer starts x realized wafer ASP" in forecast
+    assert "depreciation-to-revenue" in forecast
+    assert "Mobile service revenue" not in forecast
+    assert "Mining revenue" not in forecast
+    assert "Lithium revenue" not in forecast
+
+
+def test_fabless_chip_design_uses_semiconductor_design_framework_not_consumer_or_software():
+    company = (
+        "The company is a fabless chip design company with SoC and AI accelerator products. "
+        "Its key variables are tape-out, sampling, mass-production timing, design wins, "
+        "chip shipments, ASP, foundry wafer cost, packaging/test cost, customer qualification, "
+        "inventory and R&D/IP moat. It mentions consumer electronics and AI software only as end markets."
+    )
+
+    kpi = build_industry_kpi_context(
+        "688256.SH",
+        "2026-07-15",
+        filing_intelligence_context=company,
+        company_business_model_context=company,
+    )
+    forecast = build_forecast_model_context(
+        "688256.SH",
+        "2026-07-15",
+        filing_intelligence_context=company,
+        company_business_model_context=company,
+        industry_kpi_context=kpi,
+    )
+
+    assert "semiconductor design / fabless chip company" in kpi
+    assert "Product Cycle / Design Wins" in kpi
+    assert "Foundry / Packaging Cost" in kpi
+    assert "Valuation / Optionality" in kpi
+    assert "Core chip revenue" in forecast
+    assert "chip shipments x realized ASP" in forecast
+    assert "foundry wafer cost" in forecast
+    assert "Semiconductor Forecast And Valuation Controls" in forecast
+    assert "consumer staples" not in kpi
+    assert "Core energy-drink revenue" not in forecast
+
+
+def test_semiconductor_equipment_uses_order_acceptance_and_tool_category_framework():
+    company = (
+        "The company supplies semiconductor equipment for wafer fabrication, including etch equipment, "
+        "deposition equipment and metrology tools. Revenue depends on new orders, backlog, delivery, "
+        "installation, customer acceptance, localization rate, installed-base service and customer fab capex. "
+        "Battery and metals terms are only supply-chain noise."
+    )
+
+    kpi = build_industry_kpi_context(
+        "002371.SZ",
+        "2026-07-15",
+        filing_intelligence_context=company,
+        company_business_model_context=company,
+        metals_mining_context="# Metals-mining verification context\n\n- Status: triggered\n- Metals covered: Aluminum",
+    )
+    forecast = build_forecast_model_context(
+        "002371.SZ",
+        "2026-07-15",
+        filing_intelligence_context=company,
+        company_business_model_context=company,
+        industry_kpi_context=kpi,
+        metals_mining_context="# Metals-mining verification context\n\n- Status: triggered\n- Metals covered: Aluminum",
+    )
+
+    assert "semiconductor equipment / wafer-fab tools" in kpi
+    assert "Order / Backlog" in kpi
+    assert "Delivery / Acceptance" in kpi
+    assert "Product Mix / Localization" in kpi
+    assert "Equipment revenue" in forecast
+    assert "opening backlog + new orders - undelivered backlog" in forecast
+    assert "order-backed DCF/EV-EBITDA" in forecast
+    assert "nonferrous metals" not in kpi
+    assert "Primary aluminum revenue" not in forecast
+    assert "Cathode / material revenue" not in forecast
+
+
 def test_battery_gwh_decimal_does_not_trigger_telecom_playbook():
     filing = (
         "宁德时代主营动力电池和储能电池。2025年新型储能新增装机规模达"
@@ -682,6 +791,19 @@ def test_global_instructions_force_hog_breeding_valuation_bridge():
     assert "reverse-engineer the hog-price center" in agent_utils_source
     assert "current" in agent_utils_source
     assert "market cap" in agent_utils_source
+
+
+def test_global_instructions_force_semiconductor_native_valuation_bridge():
+    agent_utils_source = Path("tradingagents/agents/utils/agent_utils.py").read_text(encoding="utf-8")
+
+    assert "Semiconductor / technology-hardware gate" in agent_utils_source
+    assert "foundry / wafer manufacturing" in agent_utils_source
+    assert "fabless chip design" in agent_utils_source
+    assert "semiconductor equipment supplier" in agent_utils_source
+    assert "EV/EBITDA" in agent_utils_source
+    assert "ROIC/PB" in agent_utils_source
+    assert "SOTP/NAV" in agent_utils_source
+    assert "reverse the current market cap" in agent_utils_source
 
 
 def test_new_contexts_are_compacted_and_covered():

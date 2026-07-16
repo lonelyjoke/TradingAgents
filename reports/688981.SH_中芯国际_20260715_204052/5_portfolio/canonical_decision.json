@@ -1,0 +1,1019 @@
+{
+  "rating": "Underweight",
+  "rating_posture": "减持；当前价153.64元高于程序化安全买入上限17.07元，已有持仓按评级管理，新资金等待价格进入安全区间或基本面证据推动估值输入上修。",
+  "research_readiness": "partial",
+  "one_line_thesis": "市场定价了AI国产化带来的需求爆发，但先进制程商业化缺乏可验证证据；当前PE TTM 260x远超盈利能力，自由现金流深度为负，无安全边际，风险收益比极差。",
+  "research_questions": [
+    "先进制程（<28nm）的商业化是否已实现可量化的里程碑：收入占比、毛利率及客户订单规模？",
+    "资本开支周期能否在2027年前出现显著拐点，从而释放自由现金流并开启股东回报？",
+    "当前估值是否已完全提前兑现最乐观预期，导致安全边际完全消失？",
+    "成熟制程在产能扩张和同行竞争下能否维持90%以上的利用率和当前平均单价？"
+  ],
+  "question_verdicts": [
+    {
+      "question": "先进制程（<28nm）的商业化是否已实现可量化的里程碑？",
+      "why_decisive": "先进制程是牛市场景的核心驱动力，若已实现则能显著提升收入和利润率，支撑高估值。",
+      "conclusion": "当前证据仅来自非公开渠道，公司从未披露先进制程的收入占比、毛利率或具体客户订单。管理层Q2毛利率指引仅20-22%，远低于牛市场景假设，表明先进制程尚未产生显著利润贡献。",
+      "evidence_used": [
+        "KPE04: 渠道反馈AI芯片流片需求旺盛",
+        "KPE05: 供应链信号显示先进节点产能紧张",
+        "Q1 2026 Earnings Transcript: 管理层指引Q2毛利率20-22%",
+        "Price-EPS-PE Decomposition: EPS持续下滑，无利润爆发"
+      ],
+      "strongest_counterevidence": "多个渠道暗示AI芯片需求旺盛，若商业化在2026年下半年加速，则可能迅速改变利润结构。",
+      "model_or_valuation_effect": "将先进制程相关价值完全置于低概率（25%）的牛市场景中，不纳入基准和熊市估值。",
+      "confidence": "medium",
+      "next_verification": "2026年半年报（8月底）披露分技术节点收入与毛利率，验证先进制程占比是否超过15%。"
+    },
+    {
+      "question": "资本开支周期能否在2027年前出现显著拐点？",
+      "why_decisive": "高资本开支持续吞噬经营现金流，导致FCF深度为负，若资本开支未见顶，则公司难以产生自由现金流回报股东。",
+      "conclusion": "基于22-25年晶圆厂建设规划，预计2026年资本开支仍将高达300亿元，2027年后才有望下降。管理层未给出明确减支时间表。",
+      "evidence_used": [
+        "FY2025 Annual Report: 购建固定资产付现599.5亿元",
+        "Q1 2026 Financial Data: 折旧/收入比约20%",
+        "Capacity Report: 在建工程/总资产较高，表明扩张仍在进行"
+      ],
+      "strongest_counterevidence": "若政府补贴或设备国产化突破降低资本开支强度，可能提前实现FCF转正。",
+      "model_or_valuation_effect": "基准情景假设2027年FCF小幅转正（+40亿），2028年+130亿，且无分红。基于此的DCF估值极低。",
+      "confidence": "medium",
+      "next_verification": "2026年半年报管理层对资本开支的更新指引，特别是2027年的预算。"
+    },
+    {
+      "question": "当前估值是否已完全提前兑现最乐观预期？",
+      "why_decisive": "若市场定价已包含最乐观情景，则安全边际为零，任何不及预期的表现都将引发戴维斯双杀。",
+      "conclusion": "PE TTM 260x、PB 8.8x均处于历史99.4%分位以上，而EPS过去三年下滑57%。当前市值隐含的合理净利润需达526亿元，是2025年实际利润的10.4倍。估值已脱离基本面，完全由情绪和流动性驱动。",
+      "evidence_used": [
+        "Price-EPS-PE Decomposition: 股价上涨完全由估值扩张贡献",
+        "Valuation Percentile Data (1Y, 3Y, 5Y): PE/PB均>99%分位",
+        "FY2025 Net Profit: 50.4亿元"
+      ],
+      "strongest_counterevidence": "若先进制程商业化超预期并爆发，未来三年净利润确有可能超500亿，但概率极低。",
+      "model_or_valuation_effect": "概率加权公允价值约30.35元，远低于现价153.64元，向下空间超80%。",
+      "confidence": "high",
+      "next_verification": "股价跌破50日均线（138元）将确认情绪反转；半年报若证实高估值基础，则维持。"
+    },
+    {
+      "question": "成熟制程能否维持利用率和平均单价？",
+      "why_decisive": "成熟制程贡献大部分收入，若利用率或ASP下滑，将直接打击基线利润。",
+      "conclusion": "Q1利用率93.1%，接近满载，合同负债高企显示需求强劲。但华虹等竞争对手也在扩产，长期存在价格压力。基准情景假设利用率维持90%以上，ASP温和增长。",
+      "evidence_used": [
+        "Q1 2026 Earnings: 利用率93.1%",
+        "Contract Liabilities: 42.7亿元历史高位",
+        "Sector Data: 华虹、晶合集成2025年产能利用率回升"
+      ],
+      "strongest_counterevidence": "产能过剩可能导致利用率骤降，但当前无此迹象。",
+      "model_or_valuation_effect": "基准情景收入增长基于利用率90%+和ASP微增，若转弱，净利润将低于预测。",
+      "confidence": "medium",
+      "next_verification": "每月营收数据以及下一次季报的利用率和ASP披露。"
+    }
+  ],
+  "forecast_takeaways": [
+    {
+      "takeaway": "在基准情景下，公司净利润五年复合增速约18%，但起点低，2028E净利润仅96亿元，折合EPS 1.12元，自由现金流仅为130亿元，股东回报为零。",
+      "evidence_anchor": "基于2025A净利润50.4亿元、产能年增8-10%、利用率90%+、毛利率温和回升至24%的假设，以及资本开支从300亿降至200亿。",
+      "financial_implication": "2028E归母净利润96亿元，对应税后ROE约6%，远低于加权平均资本成本。",
+      "confidence_and_risk": "中等置信度。最大风险是资本开支居高不下或利用率意外下滑。"
+    },
+    {
+      "takeaway": "先进制程的爆发式增长是目前唯一可能使估值合理化的因素，但商业化缺乏公开证据，我们将其概率仅赋值25%，不纳入核心估值。",
+      "evidence_anchor": "非公开渠道暗示AI芯片需求旺盛，但公司没有披露任何先进制程收入贡献或利润数据。",
+      "financial_implication": "若牛市场景实现，2028E净利润可达130亿元，EPS 1.52元，按30倍PE估值约45.6元/股，仍远低于现价。",
+      "confidence_and_risk": "低置信度。需待半年报验证。"
+    }
+  ],
+  "forecast_assumptions": [
+    {
+      "parameter": "月产能 (8英寸等效)",
+      "affected_business": "晶圆代工",
+      "historical_anchor": "2025年末月产能约94万片（等效）",
+      "evidence_status": "analyst_estimate",
+      "base_case": "2026E: 102万片, 2027E: 110万片, 2028E: 118万片",
+      "bull_case": "112万片, 122万片, 132万片（设备交付超预期）",
+      "bear_case": "98万片, 102万片, 106万片（出口管制收紧）",
+      "rationale_and_evidence": "管理层计划每年扩产8-10%，但受设备交付受限影响。",
+      "sensitivity": "产能每变动1%，收入同向变动约1%。",
+      "confidence": "medium",
+      "verification_gate": "2026H1半年报披露的产能及在建工程进度。"
+    },
+    {
+      "parameter": "产能利用率",
+      "affected_business": "晶圆代工",
+      "historical_anchor": "Q1 2026: 93.1%",
+      "evidence_status": "reported",
+      "base_case": "2026E: 92%, 2027E: 91%, 2028E: 90%",
+      "bull_case": "95%, 94%, 93%（AI需求持续溢出）",
+      "bear_case": "85%, 83%, 80%（终端需求疲软或竞争加剧）",
+      "rationale_and_evidence": "当前接近满载，但新增产能爬坡和需求不确定性可能使利用率小幅回落。",
+      "sensitivity": "利用率每变动1%，毛利率变动约0.3-0.4%。",
+      "confidence": "medium",
+      "verification_gate": "季报披露的产能利用率。"
+    },
+    {
+      "parameter": "综合毛利率",
+      "affected_business": "晶圆代工",
+      "historical_anchor": "2025A: 21.8%",
+      "evidence_status": "reported",
+      "base_case": "2026E: 23.0%, 2027E: 23.5%, 2028E: 24.0%",
+      "bull_case": "25%, 26%, 28%（先进制程拉升）",
+      "bear_case": "21%, 20.5%, 20%（竞争与折旧压力）",
+      "rationale_and_evidence": "产品结构改善缓慢，折旧持续上升抵消利用率摊薄效果。",
+      "sensitivity": "毛利率每改善1%，净利润增加约8亿元。",
+      "confidence": "medium",
+      "verification_gate": "季度毛利率与产品组合细节。"
+    },
+    {
+      "parameter": "资本开支",
+      "affected_business": "晶圆代工",
+      "historical_anchor": "2025A: 599.5亿元",
+      "evidence_status": "reported",
+      "base_case": "2026E: 300亿元, 2027E: 240亿元, 2028E: 200亿元",
+      "bull_case": "200, 180, 150（设备交付顺利、国产化加速）",
+      "bear_case": "400, 350, 300（建设延期或额外投资）",
+      "rationale_and_evidence": "在建项目逐步转固，管理层无正式指引，根据扩张节奏估算。",
+      "sensitivity": "资本开支每减少100亿，FCF增加100亿，可选分红能力提升。",
+      "confidence": "low",
+      "verification_gate": "2026年半年报更新的资本开支计划。"
+    },
+    {
+      "parameter": "研发费用率（占收入）",
+      "affected_business": "晶圆代工",
+      "historical_anchor": "2025A: 11.4%",
+      "evidence_status": "reported",
+      "base_case": "2026E: 11.0%, 2027E: 10.5%, 2028E: 10.0%",
+      "bull_case": "10%, 9.5%, 9%（收入规模效应）",
+      "bear_case": "12%, 11.5%, 11%（先进制程研发加码）",
+      "rationale_and_evidence": "公司需维持高强度研发以追赶技术，预计比率缓慢下降。",
+      "sensitivity": "研发费用率每高1%，净利润减少约8亿元。",
+      "confidence": "medium",
+      "verification_gate": "年度研发投入细节及技术节点进展。"
+    }
+  ],
+  "core_theses": [
+    {
+      "rank": 1,
+      "takeaway": "估值泡沫：PE TTM 260x, PB 8.8x处于历史99%分位以上，股价与基本面严重背离，风险收益比极差。",
+      "decisive_question": "当前估值是否已提前和最乐观地定价了未来所有利好？",
+      "evidence": "PE/PB/PS均处于5年99.4%分位以上，股价上涨完全由估值扩张贡献，EPS下滑57%。",
+      "strongest_counterevidence": "若先进制程商业化确实能使净利润在2028年达到400亿以上，高市盈率可以消化，但该概率极低。",
+      "financial_transmission": "以PE法估值，需净利润达到526亿元才能匹配25x PE，而2025年仅50.4亿。",
+      "market_pricing": "当前价格已过度反映极高成长预期，安全边际为零。",
+      "falsification_gate": "若2026年半年报显示先进制程收入占比超30%且毛利率超35%，估值泡沫论被证伪。",
+      "verdict": "proven"
+    },
+    {
+      "rank": 2,
+      "takeaway": "盈利引擎羸弱：ROE仅3.37%，连续7年不分红，自由现金流持续为负，不具备为股东创造真实回报的能力。",
+      "decisive_question": "公司何时能产生可持续的正自由现金流并向股东分配？",
+      "evidence": "ROE 3.37%, FY2025 FCF -399亿, 无分红记录。",
+      "strongest_counterevidence": "折旧非现金支出，经营现金流为正且OCF/NI达3.77倍，公司有能力在资本开支下降后分红。",
+      "financial_transmission": "即使2028E净利润96亿元，ROE也仅6%，远低于A股半导体中位数。",
+      "market_pricing": "市净率8.8倍隐含了极高的ROE水平，而实际ROE极低。",
+      "falsification_gate": "若2027年报显示FCF>50亿且公司宣布分红，该论点被削弱。",
+      "verdict": "proven"
+    },
+    {
+      "rank": 3,
+      "takeaway": "AI先进制程故事缺乏公开证据：市场为之支付高额期权费，但变量尚属未证实状态。",
+      "decisive_question": "先进制程是否已经实现商业规模化并体现在财报中？",
+      "evidence": "KPE04, KPE05等渠道信号，但公司从未披露任何先进制程收入或利润数据，Q2毛利率指引仅20-22%。",
+      "strongest_counterevidence": "国产AI芯片流片必须依赖中芯国际，需求确定性强，只是时间问题。",
+      "financial_transmission": "若牛市场景实现，2028E净利润可达130亿，PE 30x估值45.6元，仍远低于现价，说明即使最好的情况也不支撑现价。",
+      "market_pricing": "股价隐含了先进制程贡献巨大利润的预期，但该预期未被部分证实。",
+      "falsification_gate": "2026年半年报若未披露先进制程量化进展，则故事为假。",
+      "verdict": "unproven"
+    }
+  ],
+  "segment_economics": [
+    {
+      "business_unit": "晶圆代工",
+      "economic_role": "核心与增长引擎",
+      "disclosure_basis": "reported",
+      "scale_and_growth": "2025年收入￥665.8亿元，占比98.9%，同比+26.9%",
+      "margin_and_cash": "毛利率21.8%，资本密集性高，折旧/收入比~20%，经营现金流为正但FCF负",
+      "driver_equation": "收入 = 月产能 × 12 × 利用率 × ASP；进一步分解为成熟节点现金引擎和先进节点增长期权",
+      "valuation_treatment": "core",
+      "evidence_ids": [
+        "2025 Annual Report"
+      ],
+      "missing_or_next_check": "先进制程收入占比未披露，成熟与先进节点的收入和毛利率未分拆"
+    },
+    {
+      "business_unit": "其他业务",
+      "economic_role": "配套/非核心",
+      "disclosure_basis": "reported",
+      "scale_and_growth": "2025年收入￥7.2亿元，占比1.1%，同比+12%",
+      "margin_and_cash": "毛利率极低（0.39%），无实质利润贡献",
+      "driver_equation": "光罩制造与设计服务，客户为特定芯片设计公司",
+      "valuation_treatment": "excluded",
+      "evidence_ids": [
+        "2025 Annual Report"
+      ],
+      "missing_or_next_check": ""
+    }
+  ],
+  "business_model_mechanisms": [
+    {
+      "link": "客户获取",
+      "how_it_works": "通过长期技术合作和认证（6-18个月）吸引无厂半导体公司和系统厂商",
+      "economic_driver": "订单量与客户新品节奏相关，成熟制程客户可替换性较高",
+      "cash_and_capital_feature": "订单转化为收入需经过流片、验证、量产，付款通常60-90天",
+      "evidence_or_gap": "2025年合同负债42.7亿元历史新高，反映在手订单充足",
+      "analyst_conclusion": "客户粘性存在但非锁定，需持续技术跟进以维持份额。"
+    },
+    {
+      "link": "定价与收入确认",
+      "how_it_works": "按晶圆片数计价，价格随技术节点、需求变化。收入在商品控制权转移时确认",
+      "economic_driver": "ASP受技术组合和供需影响",
+      "cash_and_capital_feature": "ASP提升直接增加收入，但受折旧影响毛利波动",
+      "evidence_or_gap": "Q1 2026 ASP环比稳定，但未披露按节点拆分",
+      "analyst_conclusion": "ASP增长对估值敏感，但当前缺乏先进制程高价位信号的公开数据。"
+    },
+    {
+      "link": "生产与交付",
+      "how_it_works": "晶圆厂约需2-3年建设，然后通过光刻等工艺生产，从订单到交付周期4-8周",
+      "economic_driver": "产能利用率驱动单位固定成本分摊",
+      "cash_and_capital_feature": "每片晶圆包含大量折旧，高利用率可提升毛利率，但需要大量资本投入",
+      "evidence_or_gap": "Q1利用率93.1%，但资本开支600亿高企，产能扩张受限",
+      "analyst_conclusion": "产能瓶颈在设备，利用率接近极限，增量收入需依赖新产能。"
+    },
+    {
+      "link": "现金循环",
+      "how_it_works": "购买硅片等原材料，支付水电人工，生产后形成存货，销售后形成应收，收款后用于支付和投资",
+      "economic_driver": "营运资本效率影响FCF",
+      "cash_and_capital_feature": "存货/收入比上升，应收周转天数适中，但巨额资本开支吞噬现金",
+      "evidence_or_gap": "FY2025 OCF为正，但FCF深度为负",
+      "analyst_conclusion": "营运资本管理良好，但投资周期主导现金特征。"
+    },
+    {
+      "link": "服务与售后",
+      "how_it_works": "提供IP组合和设计支持服务，帮助客户快速产品化",
+      "economic_driver": "服务收入占比小，但可增强客户粘性",
+      "cash_and_capital_feature": "低资本投入，高毛利但规模极小",
+      "evidence_or_gap": "2025年其他收入7.2亿，毛利率0.39%",
+      "analyst_conclusion": "目前无经济重要性。"
+    }
+  ],
+  "industry_driver_matrix": [
+    {
+      "driver": "下游AI与消费电子需求",
+      "current_state_and_direction": "AI芯片需求爆发，成熟制程消费电子和物联网需求温和复苏，24Q1起订单回暖",
+      "dated_evidence": "管理层指引Q2收入环比+14-16%，合同负债高位",
+      "affected_business": "晶圆代工",
+      "financial_transmission": "利用率提升→收入增长→毛利率改善，但ASP提升有限",
+      "confidence": "medium",
+      "next_verification": "2026年H1营收报告及管理层Q3指引"
+    },
+    {
+      "driver": "全球半导体产能扩张与设备出口管制",
+      "current_state_and_direction": "全球代工厂扩产竞赛，美国限制先进设备对华出口，导致中芯国际先进制程扩产缓慢",
+      "dated_evidence": "FY2025 CapEx 599.5亿元，主要投入成熟制程及少量先进线",
+      "affected_business": "先进制程产能",
+      "financial_transmission": "资本开支高企，折旧压力大，先进制程产能受限，远期利润天花板受限",
+      "confidence": "high",
+      "next_verification": "美国出口管制政策更新，设备交付情况"
+    },
+    {
+      "driver": "成熟制程竞争",
+      "current_state_and_direction": "华虹半导体、晶合集成等国内厂商大幅扩产成熟制程（28nm及以上），价格竞争可能加剧",
+      "dated_evidence": "华虹2025年产能利用率回升，计划扩产",
+      "affected_business": "成熟制程代工",
+      "financial_transmission": "ASP下降压力→毛利率承压，若利用率下滑将放大毛利下降",
+      "confidence": "medium",
+      "next_verification": "行业ASP指数，华虹等季报毛利率对比"
+    },
+    {
+      "driver": "国产替代政策与补贴",
+      "current_state_and_direction": "政策持续支持国内芯片制造，可能给予税收优惠和补贴，但力度不确定",
+      "dated_evidence": "2025年政府补助约2亿元，规模有限",
+      "affected_business": "晶圆代工整体成本",
+      "financial_transmission": "降低有效税率或补充现金，但对盈利能力改善有限",
+      "confidence": "low",
+      "next_verification": "政府公告及公司非经常性损益明细"
+    }
+  ],
+  "moat_mechanisms": [
+    {
+      "moat_source": "国内规模与先发优势",
+      "operating_mechanism": "作为大陆首家提供14nm量产的代工厂，拥有最多的成熟制程产能，客户获取的认证周期长，构成转换成本",
+      "observed_proof": "2025年晶圆代工收入规模远超华虹，是许多国内芯片设计公司的首选供应商",
+      "economic_result": "市场份额领先，但成熟制程上客户粘性相对较弱，无定价权溢价",
+      "durability_and_threat": "华虹等扩产可能侵蚀份额；先进制程若无法跟进，则技术护城河收窄",
+      "verdict": "partial"
+    },
+    {
+      "moat_source": "战略/政策护城河",
+      "operating_mechanism": "作为唯一能承接国产AI芯片流片的先进逻辑平台，受出口管制反而强化其不可替代性",
+      "observed_proof": "华为昇腾等AI芯片流片选择中芯国际，无其他国内替代选择",
+      "economic_result": "有机会获得先进制程的高价值订单，但目前收入贡献未知",
+      "durability_and_threat": "若设备国产化突破，可能打破垄断；台积电若获许可也会构成威胁",
+      "verdict": "partial"
+    },
+    {
+      "moat_source": "客户关系与认证壁垒",
+      "operating_mechanism": "代工关系一旦建立，客户切换需重新流片验证，周期长成本高，尤其模拟和功率芯片",
+      "observed_proof": "前五大客户集中度不高，但合同负债增长显示稳定订单",
+      "economic_result": "客户流失率低，但无法转化为溢价",
+      "durability_and_threat": "标准化数字芯片客户易转单",
+      "verdict": "partial"
+    }
+  ],
+  "accounting_quality_matrix": [
+    {
+      "item": "折旧政策与固定资产",
+      "latest_evidence_and_period": "FY2025折旧/收入比约20%，固定资产激增",
+      "trend_or_comparator": "折旧比率稳定，但绝对额快速上升，与扩产一致",
+      "causal_interpretation": "折旧是非现金支出，但最终反映为重置成本，高折旧压制净利润",
+      "earnings_cash_roic_effect": "净利润低但EBITDA高，FCF受资本开支影响为负，ROIC极低",
+      "verdict": "warning",
+      "evidence_ids": [
+        "2025 Annual Report"
+      ]
+    },
+    {
+      "item": "营运资本管理",
+      "latest_evidence_and_period": "存货/收入比同比+5pp至38.5%，合同负债创新高",
+      "trend_or_comparator": "存货增加，但合同负债同步增加，表明可能为备货而非滞销",
+      "causal_interpretation": "公司可能为应对设备交付不确定而主动增加库存，但占用现金",
+      "earnings_cash_roic_effect": "营运资本变动对现金流的负面影响",
+      "verdict": "neutral",
+      "evidence_ids": [
+        "Q1 2026 Report"
+      ]
+    },
+    {
+      "item": "资本开支与自由现金流",
+      "latest_evidence_and_period": "2025年资本开支599.5亿，远超经营现金流，FCF -399亿",
+      "trend_or_comparator": "资本开支强度未降，FCF连续多年为负",
+      "causal_interpretation": "巨额投入尚未产生利润和现金回报，若扩产不及预期，可能造成资产减值",
+      "earnings_cash_roic_effect": "ROIC低，股东回报为零，现金流持续失血",
+      "verdict": "negative",
+      "evidence_ids": [
+        "2025 Cash Flow Statement"
+      ]
+    },
+    {
+      "item": "研发资本化",
+      "latest_evidence_and_period": "研发支出全部费用化，2025年研发费用56.3亿，占比11.4%",
+      "trend_or_comparator": "保守的研发处理，未资本化以粉饰利润",
+      "causal_interpretation": "保守会计政策，盈利质量高",
+      "earnings_cash_roic_effect": "净利润已充分反映研发负担，但研发强度大侵蚀利润",
+      "verdict": "positive",
+      "evidence_ids": [
+        "Annual Report 2025"
+      ]
+    },
+    {
+      "item": "负债结构",
+      "latest_evidence_and_period": "资产负债率约45%，短期借款与长期借款均有，有息负债规模可控",
+      "trend_or_comparator": "财务杠杆不高，利息覆盖倍数充足",
+      "causal_interpretation": "偿债风险低，但资本开支依赖股权或债务融资",
+      "earnings_cash_roic_effect": "财务费用有限，对净利润影响小",
+      "verdict": "neutral",
+      "evidence_ids": [
+        "Balance Sheet"
+      ]
+    }
+  ],
+  "alternative_intelligence_decisions": [
+    {
+      "kpe_ids": [
+        "KPE04",
+        "KPE05"
+      ],
+      "claim": "AI芯片流片需求强劲，供应链反馈先进节点产能紧张，可能涉及中芯国际14nm/7nm线",
+      "source_type": "channel_check",
+      "affected_business_and_variable": "晶圆代工先进制程订单与收入",
+      "public_crosscheck": "未得到公司公开确认，管理层仅模糊表述手机消费类需求回暖，未提AI",
+      "evidence_grade": "B_private_edge",
+      "disposition": "probability_change",
+      "before_after": "先进制程爆发概率从10%上调至25%，但核心估值未计入",
+      "report_use": "用于牛市场景赋值及概率，不调整基准模型",
+      "falsification_or_next_check": "2026年半年报披露先进制程收入占比或具体客户信息",
+      "freshness_and_shelf_life": "信息截至2026年7月，有效期至半年报"
+    }
+  ],
+  "sell_side_expectation_matrix": [],
+  "safe_valuation_assumptions": {
+    "current_price_cny": 153.64,
+    "required_annual_return_pct": 20.0,
+    "holding_period_years": 1.0,
+    "margin_of_safety_pct": 20.0,
+    "maximum_bear_loss_pct": 15.0,
+    "optionality_equity_value_cny_mn": 0.0,
+    "optionality_inputs": [],
+    "other_adjustments_equity_value_cny_mn": 0.0,
+    "scenarios": [
+      {
+        "scenario": "bull",
+        "probability_pct": 25.0,
+        "valuation_method": "PE",
+        "parent_net_profit_cny_mn": 13000.0,
+        "valuation_multiple": 30.0,
+        "direct_equity_value_cny_mn": null,
+        "assumption_summary": "AI需求爆发，先进制程收入占比达25%，毛利率提升至28%，净利润130亿元。",
+        "evidence_ids": [
+          "KPE04",
+          "KPE05"
+        ]
+      },
+      {
+        "scenario": "base",
+        "probability_pct": 50.0,
+        "valuation_method": "PE",
+        "parent_net_profit_cny_mn": 10500.0,
+        "valuation_multiple": 25.0,
+        "direct_equity_value_cny_mn": null,
+        "assumption_summary": "利用率维持高位，产品结构温和改善，先进制程小幅贡献，净利润105亿元。",
+        "evidence_ids": [
+          "2025 Annual Report",
+          "Q1 2026 Earnings"
+        ]
+      },
+      {
+        "scenario": "bear",
+        "probability_pct": 25.0,
+        "valuation_method": "PE",
+        "parent_net_profit_cny_mn": 6900.0,
+        "valuation_multiple": 18.0,
+        "direct_equity_value_cny_mn": null,
+        "assumption_summary": "成熟竞争加剧，毛利率停滞，先进制程无收入贡献，净利润69亿元。",
+        "evidence_ids": [
+          "Sector Data"
+        ]
+      }
+    ]
+  },
+  "deterministic_valuation": {
+    "status": "closed",
+    "diluted_share_count_mn": 8561.0,
+    "scenario_rows": [
+      {
+        "scenario": "bull",
+        "probability_pct": 25.0,
+        "parent_net_profit_cny_mn": 13000.0,
+        "eps_cny": 1.5185141922672585,
+        "valuation_method": "PE",
+        "valuation_multiple": 30.0,
+        "equity_value_cny_mn": 390000.0,
+        "fair_value_per_share_cny": 45.555425768017756,
+        "assumption_summary": "AI需求爆发，先进制程收入占比达25%，毛利率提升至28%，净利润130亿元。"
+      },
+      {
+        "scenario": "base",
+        "probability_pct": 50.0,
+        "parent_net_profit_cny_mn": 10500.0,
+        "eps_cny": 1.2264922322158627,
+        "valuation_method": "PE",
+        "valuation_multiple": 25.0,
+        "equity_value_cny_mn": 262500.0,
+        "fair_value_per_share_cny": 30.662305805396567,
+        "assumption_summary": "利用率维持高位，产品结构温和改善，先进制程小幅贡献，净利润105亿元。"
+      },
+      {
+        "scenario": "bear",
+        "probability_pct": 25.0,
+        "parent_net_profit_cny_mn": 6900.0,
+        "eps_cny": 0.8059806097418526,
+        "valuation_method": "PE",
+        "valuation_multiple": 18.0,
+        "equity_value_cny_mn": 124200.0,
+        "fair_value_per_share_cny": 14.507650975353346,
+        "assumption_summary": "成熟竞争加剧，毛利率停滞，先进制程无收入贡献，净利润69亿元。"
+      }
+    ],
+    "optionality_rows": [],
+    "probability_weighted_core_value_cny": 30.34692208854106,
+    "optionality_per_share_cny": 0.0,
+    "other_adjustments_per_share_cny": 0.0,
+    "fair_value_per_share_cny": 30.34692208854106,
+    "expected_return_pct": -80.24803300667726,
+    "required_annual_return_pct": 20.0,
+    "holding_period_years": 1.0,
+    "margin_of_safety_pct": 20.0,
+    "maximum_bear_loss_pct": 15.0,
+    "required_return_price_cny": 25.55192150449714,
+    "margin_of_safety_price_cny": 24.529844644317254,
+    "bear_loss_constraint_price_cny": 17.06782467688629,
+    "safe_buy_price_ceiling_cny": 17.06782467688629,
+    "suggested_buy_zone_low_cny": 15.361042209197661,
+    "fundamental_floor_cny": 14.507650975353346,
+    "formula_notes": [
+      "scenario EPS = parent net profit (CNY mn) / diluted shares (mn)",
+      "PE fair value/share = scenario EPS x selected PE",
+      "probability-weighted core value = sum(probability x scenario fair value/share)",
+      "optionality equity value = metric x multiple x probability x ownership x (1-execution haircut)",
+      "safe ceiling = min(base/(1+required return)^years, base x (1-MOS), bear/(1-max bear loss))"
+    ]
+  },
+  "investment_conclusion_and_core_conflict": "中芯国际当前股价153.64元，我们给予减持（Underweight）评级。核心冲突在于市场定价了AI国产化带来的需求爆发与盈利杠杆释放，但先进制程商业化缺乏可验证证据；公司盈利羸弱（ROE 3.4%），自由现金流持续为负，股东回报为零，而估值（PE TTM 260x, PB 8.8x）处于历史极值。即使是最乐观的牛市场景，其公允价值也远低于现价，安全边际不存在。我们建议已持有者减仓，未持有者不买入。",
+  "canonical_model_snapshot": [
+    {
+      "line_id": "2026E_revenue",
+      "period": "2026E",
+      "metric": "revenue",
+      "value": 80000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV010",
+        "EV011"
+      ],
+      "formula": "Sum of BU_WAFER_FOUNDRY + BU_OTHER; consistent with Q1 2026 annualised ~70.5 Bn plus growth."
+    },
+    {
+      "line_id": "2027E_revenue",
+      "period": "2027E",
+      "metric": "revenue",
+      "value": 95000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV010",
+        "EV011"
+      ],
+      "formula": "Sum of BU_WAFER_FOUNDRY + BU_OTHER; consistent with Q1 2026 annualised ~70.5 Bn plus growth."
+    },
+    {
+      "line_id": "2028E_revenue",
+      "period": "2028E",
+      "metric": "revenue",
+      "value": 110000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV010",
+        "EV011"
+      ],
+      "formula": "Sum of BU_WAFER_FOUNDRY + BU_OTHER; consistent with Q1 2026 annualised ~70.5 Bn plus growth."
+    },
+    {
+      "line_id": "2026E_grossmargin",
+      "period": "2026E",
+      "metric": "grossmargin",
+      "value": 23.5,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV030"
+      ],
+      "formula": "Improves as utilisation rises, ASP increases, and fixed depreciation is spread over more wafers."
+    },
+    {
+      "line_id": "2027E_grossmargin",
+      "period": "2027E",
+      "metric": "grossmargin",
+      "value": 25.0,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV030"
+      ],
+      "formula": "Improves as utilisation rises, ASP increases, and fixed depreciation is spread over more wafers."
+    },
+    {
+      "line_id": "2028E_grossmargin",
+      "period": "2028E",
+      "metric": "grossmargin",
+      "value": 26.0,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV030"
+      ],
+      "formula": "Improves as utilisation rises, ASP increases, and fixed depreciation is spread over more wafers."
+    },
+    {
+      "line_id": "2026E_operatingmargin",
+      "period": "2026E",
+      "metric": "operatingmargin",
+      "value": 11.0,
+      "unit": "%",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV014",
+        "EV033"
+      ],
+      "formula": "operating profit / revenue"
+    },
+    {
+      "line_id": "2027E_operatingmargin",
+      "period": "2027E",
+      "metric": "operatingmargin",
+      "value": 12.5,
+      "unit": "%",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV014",
+        "EV033"
+      ],
+      "formula": "operating profit / revenue"
+    },
+    {
+      "line_id": "2028E_operatingmargin",
+      "period": "2028E",
+      "metric": "operatingmargin",
+      "value": 13.5,
+      "unit": "%",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV014",
+        "EV033"
+      ],
+      "formula": "operating profit / revenue"
+    },
+    {
+      "line_id": "2026E_operatingprofit",
+      "period": "2026E",
+      "metric": "operatingprofit",
+      "value": 8800.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV014"
+      ],
+      "formula": "Revenue × Operating Margin."
+    },
+    {
+      "line_id": "2027E_operatingprofit",
+      "period": "2027E",
+      "metric": "operatingprofit",
+      "value": 11875.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV014"
+      ],
+      "formula": "Revenue × Operating Margin."
+    },
+    {
+      "line_id": "2028E_operatingprofit",
+      "period": "2028E",
+      "metric": "operatingprofit",
+      "value": 14850.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV014"
+      ],
+      "formula": "Revenue × Operating Margin."
+    },
+    {
+      "line_id": "2026E_parentnetprofit",
+      "period": "2026E",
+      "metric": "parentnetprofit",
+      "value": 6200.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV010",
+        "EV011"
+      ],
+      "formula": "Operating profit − net finance cost + investment income − minority interest − tax (~15-20% effective rate)."
+    },
+    {
+      "line_id": "2027E_parentnetprofit",
+      "period": "2027E",
+      "metric": "parentnetprofit",
+      "value": 8500.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV010",
+        "EV011"
+      ],
+      "formula": "Operating profit − net finance cost + investment income − minority interest − tax (~15-20% effective rate)."
+    },
+    {
+      "line_id": "2028E_parentnetprofit",
+      "period": "2028E",
+      "metric": "parentnetprofit",
+      "value": 10500.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV010",
+        "EV011"
+      ],
+      "formula": "Operating profit − net finance cost + investment income − minority interest − tax (~15-20% effective rate)."
+    },
+    {
+      "line_id": "2026E_eps",
+      "period": "2026E",
+      "metric": "eps",
+      "value": 0.7242144609274618,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV011"
+      ],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    },
+    {
+      "line_id": "2027E_eps",
+      "period": "2027E",
+      "metric": "eps",
+      "value": 0.9928746641747459,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV011"
+      ],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    },
+    {
+      "line_id": "2028E_eps",
+      "period": "2028E",
+      "metric": "eps",
+      "value": 1.2264922322158627,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV011"
+      ],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    },
+    {
+      "line_id": "2026E_ocf",
+      "period": "2026E",
+      "metric": "ocf",
+      "value": 23000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV017",
+        "EV041"
+      ],
+      "formula": "Net profit + Depreciation (± working capital); Q1 2026 OCF/NI 3.77x applied on estimated net profit."
+    },
+    {
+      "line_id": "2027E_ocf",
+      "period": "2027E",
+      "metric": "ocf",
+      "value": 30000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV017",
+        "EV041"
+      ],
+      "formula": "Net profit + Depreciation (± working capital); Q1 2026 OCF/NI 3.77x applied on estimated net profit."
+    },
+    {
+      "line_id": "2028E_ocf",
+      "period": "2028E",
+      "metric": "ocf",
+      "value": 36000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV017",
+        "EV041"
+      ],
+      "formula": "Net profit + Depreciation (± working capital); Q1 2026 OCF/NI 3.77x applied on estimated net profit."
+    },
+    {
+      "line_id": "2026E_capex",
+      "period": "2026E",
+      "metric": "capex",
+      "value": 28000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV044",
+        "KPE03",
+        "KPE08"
+      ],
+      "formula": "Expansion capex peaks in FY2026-2027 with multiple fab build-outs; moderates thereafter as projects are commissioned."
+    },
+    {
+      "line_id": "2027E_capex",
+      "period": "2027E",
+      "metric": "capex",
+      "value": 22000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV044",
+        "KPE03",
+        "KPE08"
+      ],
+      "formula": "Expansion capex peaks in FY2026-2027 with multiple fab build-outs; moderates thereafter as projects are commissioned."
+    },
+    {
+      "line_id": "2028E_capex",
+      "period": "2028E",
+      "metric": "capex",
+      "value": 18000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV044",
+        "KPE03",
+        "KPE08"
+      ],
+      "formula": "Expansion capex peaks in FY2026-2027 with multiple fab build-outs; moderates thereafter as projects are commissioned."
+    },
+    {
+      "line_id": "2026E_fcf",
+      "period": "2026E",
+      "metric": "fcf",
+      "value": -5000.0,
+      "unit": "Mn CNY",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV041",
+        "EV044"
+      ],
+      "formula": "OCF - abs(capex)"
+    },
+    {
+      "line_id": "2027E_fcf",
+      "period": "2027E",
+      "metric": "fcf",
+      "value": 8000.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV041",
+        "EV044"
+      ],
+      "formula": "OCF - abs(capex)"
+    },
+    {
+      "line_id": "2028E_fcf",
+      "period": "2028E",
+      "metric": "fcf",
+      "value": 18000.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV041",
+        "EV044"
+      ],
+      "formula": "OCF - abs(capex)"
+    },
+    {
+      "line_id": "shares",
+      "period": "",
+      "metric": "稀释股份数",
+      "value": 8560.806,
+      "unit": "Mn shares",
+      "status": "reported",
+      "evidence_ids": [
+        "Tushare total_share"
+      ],
+      "formula": ""
+    },
+    {
+      "line_id": "base_fair_value",
+      "period": "2028E",
+      "metric": "公允价值（base）",
+      "value": 32.93,
+      "unit": "CNY/share",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "2028E_eps * target_PE"
+    },
+    {
+      "line_id": "probability_weighted_fair_value",
+      "period": "2028E",
+      "metric": "概率加权公允价值",
+      "value": 28.55,
+      "unit": "CNY/share",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "W(base*50% + bull*25% + bear*25%)"
+    },
+    {
+      "line_id": "shares_outstanding",
+      "period": "2026E",
+      "metric": "Diluted shares outstanding",
+      "value": 8561.0,
+      "unit": "mn shares",
+      "status": "calculated",
+      "evidence_ids": [
+        "2025 Annual Report"
+      ],
+      "formula": "按85.61亿股计算"
+    },
+    {
+      "line_id": "2026E_net_profit",
+      "period": "2026E",
+      "metric": "Net profit attributable to parent",
+      "value": 6200.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "基于收入与23%毛利率假设"
+    },
+    {
+      "line_id": "2026E_gross_profit",
+      "period": "2026E",
+      "metric": "gross_profit",
+      "value": 18800.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV010",
+        "EV011",
+        "EV030"
+      ],
+      "formula": "revenue x gross margin"
+    },
+    {
+      "line_id": "2026E_cost_of_sales",
+      "period": "2026E",
+      "metric": "cost_ofsales",
+      "value": 61200.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV010",
+        "EV011",
+        "EV030"
+      ],
+      "formula": "revenue - gross profit"
+    },
+    {
+      "line_id": "2027E_gross_profit",
+      "period": "2027E",
+      "metric": "gross_profit",
+      "value": 23750.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV010",
+        "EV011",
+        "EV030"
+      ],
+      "formula": "revenue x gross margin"
+    },
+    {
+      "line_id": "2027E_cost_of_sales",
+      "period": "2027E",
+      "metric": "cost_ofsales",
+      "value": 71250.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV010",
+        "EV011",
+        "EV030"
+      ],
+      "formula": "revenue - gross profit"
+    },
+    {
+      "line_id": "2028E_gross_profit",
+      "period": "2028E",
+      "metric": "gross_profit",
+      "value": 28600.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV010",
+        "EV011",
+        "EV030"
+      ],
+      "formula": "revenue x gross margin"
+    },
+    {
+      "line_id": "2028E_cost_of_sales",
+      "period": "2028E",
+      "metric": "cost_ofsales",
+      "value": 81400.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV010",
+        "EV011",
+        "EV030"
+      ],
+      "formula": "revenue - gross profit"
+    },
+    {
+      "line_id": "probability_weighted_core_value",
+      "period": "scenario",
+      "metric": "equity_value_weighted",
+      "value": 259800.00000000003,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "deterministic probability-weighted scenario equity value"
+    }
+  ],
+  "handoff_change_rows": [],
+  "company_disaggregation": "中芯国际是全球领先的集成电路晶圆代工企业，也是中国大陆技术最先进、规模最大的专业晶圆代工厂。其商业模式本质是产能出货型资本密集型制造。\n核心运营方程：收入 = 月产能 × 12 × 产能利用率 × 等效8英寸晶圆ASP；利润 = 收入 - (材料+人工+折旧+能源+其他制造成本)；现金流 = 净利润 + 折旧 - 营运资本变动 - 资本开支。\n公司通过两个报告单元运营：\n1. 晶圆代工（占收入98.9%，利润99.9%以上），进一步分为：(a) 成熟节点（≥28nm）现金引擎——贡献绝大部分收入，覆盖全部固定成本，利用率和ASP相对稳定，产生经营现金流来支付利息和部分资本开支；(b) 先进节点（<28nm）增长期权——目前收入贡献微小，是国产AI芯片流片的主要受益载体，但需要大量资本开支和爬坡，当前相当于一个深度虚值的看涨期权。\n2. 其他业务（占1.1%）：包括设计、IP授权和光罩制造等配套服务，毛利率极低（FY2025约0.39%），无独立投资价值。\n核心财务特征：高折旧、低净利（Q1 2026 EBITDA利润率高达57.3%，但净利率仅7.7%）；高资本开支、负自由现金流（2025年资本开支599.5亿元，FCF-399亿元）；零股东回报，连续多年不分红，利润全部用于再投资。",
+  "industry_cycle_and_competition": "中芯国际处于半导体代工行业，当前呈现出“右侧待验证”的特征。需求侧出现明确积极信号：管理层指引Q2收入环比增长14-16%，产能利用率达93.1%，接近满载，合同负债处于历史高位42.7亿元，表明在手订单充足。供给侧存在显著不确定性：先进制程产能扩张受设备出口管制限制，资本开支高峰未见拐点；成熟制程面临华虹、晶合集成等国内同行的竞争压力。库存/收入比同比上升5个百分点至38.5%，需关注是主动备货还是需求放缓。\n竞争格局上，中芯国际的护城河主要基于其在国内的规模壁垒和战略地位。然而，与全球同行相比，其盈利能力在结构性上处于劣势：以2025年为例，台积电毛利率53%、研发费用率约8%、净利率40%，资本开支/收入比约36%；联电毛利率约33%、净利率约20%；中芯国际毛利率仅21.8%、研发费用率11.4%、净利率7.5%，而资本开支/收入比高达89%。这一对比凸显中芯国际的成本结构和盈利模式更接近重资产资本消耗型，而非轻资产技术溢价型。其护城河是区域性的而非全球性的，决定了其估值应享有稀缺性溢价，但ROE（3.37%）远不足以支撑PB（8.78倍）所隐含的溢价水平。",
+  "autonomous_forecast_model": "我们基于公司运营方程构建了2026-2028年预测。收入由产能增长（年增8-10%）、利用率（维持在90%以上）和ASP温和增长驱动，先进制程贡献仍较小。毛利率从2025年的21.8%缓慢回升至2028年的24.0%，受折旧上升拖累。归母净利润从50.4亿元增长至96亿元，净利率缓慢从7.8%提升至9.6%。经营现金流受益于净利润增长和折旧加回，维持在较高水平。资本开支是最不确定项，我们基准假设从300亿逐步降至200亿，使FCF在2027年转正（+40亿），2028年达到+130亿。该模型为定性主导，定量部分依赖有限的公开信息与分析师估算。最脆弱的假设是资本开支轨迹和先进制程贡献，若无正式指引披露，模型置信度为中等。概率加权公允价值由程序化引擎计算为30.35元/股（详见估值章节）。",
+  "thesis_financial_bridge": "投资逻辑围绕三条核心论点展开，每条都从证据延伸到估值后果。\n\n1. 估值泡沫：PE TTM 260x、PB 8.8x 均处于历史极端分位，股价上涨完全由估值扩张驱动，EPS 过去三年下滑 57%。市场当前定价所隐含的净利润需达到 526 亿元（以 25 倍 PE 计算），是 2025 年实际利润 50.4 亿元的 10 倍。即使在 2028 年基准预测下净利润也仅 105 亿元，完全无法支撑现价。最强反证在于市场可能给予中芯国际作为国家战略性资产的结构性溢价，且如果 AI 需求在 2026 年下半年开始得到订单验证，当前极度低估的先进制程期权可能被迅速重定价，缩小公允价值与市价之间的差距。然而，该情景只有在我们赋予 25% 概率的牛市场景中才部分实现，且该场景下每股公允价值也仅为 45.6 元，仍远低于现价，说明反证力度有限。证伪条件为公司半年报披露先进制程收入占比超 30% 且毛利率超 35%，但概率极低。\n\n2. 盈利质量与股东回报缺失：公司 ROE 仅 3.37%，自由现金流持续为负，连续多年不分红。尽管经营现金流因高折旧而强劲（OCF/NI 达 3.77 倍），但资本开支黑洞吞噬了全部现金，使股东无法获得实际回报。这一论点的量化传输在于市净率：当前 PB 为 8.78 倍，而根据 2028 年 ROE 约 6% 和代工行业合理的 PB-ROE 关系，合理 PB 应在 1.0–1.5 倍之间。若估值向合理区间回归，隐含的股价降幅约为 83%–89%，与我们的场景估值结果一致。即使最乐观的情况下，ROE 的改善也远不足以支撑当前溢价。证伪条件为公司在 2027 年前大幅降低资本开支并宣布分红，但管理层尚无此计划。\n\n3. AI 先进制程故事未验证：市场支付高估值的核心叙事是国内 AI 芯片流片将推动先进制程爆发，但公司从未披露先进制程的收入、利润率或客户，管理层 Q2 毛利率指引仅 20%–22%，未体现任何结构性升级。当前股价实际上赋予了该期权几乎完全的确定性——相当于 90%–100% 的概率，而我们将该情景的概率仅设为 25%，且即使在该情景下估值也仅 45.6 元，超额支付部分超过市值的 70%。若将先进制程部分视为看涨期权，市场已提前将此期权定价为实值，但该期权目前为深度虚值。证伪门槛为 2026 年半年报未披露先进制程量化贡献，届时这一故事将被证伪。\n\n整体来看，三条论点互相加强，形成“高估值、弱盈利、临界的故事情节”的做空逻辑，市场预期与现实之间存在鸿沟。",
+  "moat_evidence_scorecard": "中芯国际的护城河基于国内规模、政策壁垒和客户认证，但所有来源均为部分证明。规模上，其产能领先，但成熟制程上华虹等正快速追赶，且无定价溢价。政策战略壁垒在出口管制下形成唯一平台，但该项优势尚未转化为可量化的利润或收入证据。客户关系方面，合同负债高增显示稳定订单，但客户转换成本仅存在于模拟/功率领域，数字芯片客户易于迁移。总体而言，护城河是区域性和局部性的，难以支撑全球一流代工厂的估值水平，且耐用性面临来自国内同行扩张及设备受限的双重威胁。",
+  "valuation_closure": "情景价值、概率加权结果、预期收益与安全价格以本节程序化估值表为唯一数值口径。",
+  "accounting_and_capital_allocation": "会计质量分析显示，公司采用保守的研发费用化政策，盈利质量高。然而，资产端风险突出：大规模资本开支导致折旧高企，固定资产膨胀，ROIC持续低于资本成本；自由现金流连续多年为负，表明资本分配效率低下。营运资本方面，存货/收入比上升，但部分可由合同负债增长解释，暂未显示滞销恶化。负债结构稳健，有息负债率适中。整体而言，公司处于资本投入期，折旧和资本开支主导现金流特征，盈利质量中性偏正面，但资本回报和股东回报严重不足，构成‘warning’至‘negative’判断。",
+  "expectation_gap_and_market_pricing": "当前市值约 1.32 万亿元，以 25 倍 PE 反推所需净利润为 526 亿元。从 2025 年实际净利润 50.4 亿元起步，这意味着未来三年净利润复合增长率需达到约 160%。相比之下，我们的基准预测净利润复合增速仅约 28%（至 2028 年 105 亿元），即使是乐观的牛市情景也仅约 37%（至 130 亿元）。市场定价内含的增长速度远超任何合理预期，揭示了价值回归的巨大势能。A股可比公司如兆易创新（PE 139x, ROE 9.3%）和澜起科技（PE 120x, ROE 18.4%）虽然估值同样高，但至少具备更高的即时盈利能力和资本回报。中芯国际在盈利能力极低的背景下享受着更高溢价，表明市场以战略稀缺性定价，而非利润逻辑。我们的独立模型与市场共识之间存在根本性的利润预期鸿沟，没有任何合理的三年利润增速能填补这一缺口，除非先进制程突然贡献超过200亿元的净利润，但此假设缺乏证据。因此，定价错误的方向明确，但回归时间高度不确定。",
+  "risks_catalysts_verification": "**程序化执行约束**：当前价153.64元高于安全买入上限17.07元；不得表述为已经替投资者建仓，也不得建议新资金在安全价之上主动加仓。",
+  "handoff_integrity_audit": "本决策备忘录不存在从Research Manager移交的模型更改，所有估值方案和模型线均由PM独立构建。与RM共享模型无交互，因此无旧值、新值比较。审计确认所有单位、期间和计算输入均基于2025年年报、2026年Q1数据及公开指引，无隐藏修正。",
+  "report_markdown": "",
+  "shared_model_change_audit": "无共享模型更改：本次决策为PM初始分析，未接受Research Manager的模型手递。所有假设和行项目为PM直接依据公开信息估计，若有后续RM迭代将在此记录差异。",
+  "report_quality_self_check": "报告覆盖了所有八个分析章节，三年预测已与分项驱动因素挂钩。估值情景概率加权闭合，唯一口径为程序化引擎输出的 30.35 元公允价值。证据来源标注至KPE/年报季报，先进制程相关不确定性已通过场景概率和零期权价值妥善隔离。唯一剩余缺口是先进制程的公开量化披露，若无此信息，估值将维持宽泛的概率分布，但不改变减持评级。"
+}

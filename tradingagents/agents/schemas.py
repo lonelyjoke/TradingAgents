@@ -1009,7 +1009,10 @@ def _canonical_metric_name(metric: str) -> str:
         "minorityinterest": "minority_interest", "minorityinterests": "minority_interest", "少数股东损益": "minority_interest",
         "parentnetprofit": "parent_profit", "consolidatedparentnetprofit": "parent_profit", "归母净利润": "parent_profit",
         "netmargin": "net_margin", "consolidatednetmargin": "net_margin", "净利率": "net_margin",
-        "eps": "eps", "epsbasic": "eps", "dilutedeps": "eps", "每股收益": "eps",
+        "eps": "eps", "epsbasic": "eps", "dilutedeps": "eps", "epsdiluted": "eps", "每股收益": "eps",
+        "dilutedshares": "diluted_shares", "totaldilutedshares": "diluted_shares",
+        "sharecount": "diluted_shares", "totalshare": "diluted_shares",
+        "总股本": "diluted_shares", "稀释股本": "diluted_shares",
         "operatingcashflow": "ocf", "ocf": "ocf", "经营活动现金流净额": "ocf",
         "capitalexpenditure": "capex", "capex": "capex", "资本开支": "capex",
         "freecashflow": "fcf", "fcf": "fcf", "自由现金流": "fcf",
@@ -1032,6 +1035,8 @@ def _display_number(value: float | None) -> str:
         return "—"
     if abs(value) >= 1000:
         return f"{value:,.0f}"
+    if 0 < abs(value) < 0.005:
+        return f"{value:.4g}"
     return f"{value:,.2f}".rstrip("0").rstrip(".")
 
 
@@ -2378,6 +2383,34 @@ def normalize_sell_side_pm_decision(
     def _metric(row: dict) -> str:
         return _canonical_metric_name(str(row.get("metric", "")))
 
+    def _share_count_mn(row: dict | None) -> float | None:
+        if not row or row.get("value") is None:
+            return None
+        try:
+            value = float(row.get("value"))
+        except (TypeError, ValueError):
+            return None
+        if value <= 0:
+            return None
+        raw_unit = str(row.get("unit", "") or "").lower()
+        raw_metric = str(row.get("metric", "") or "").lower()
+        raw_formula = str(row.get("formula", "") or "").lower()
+        unit_key = re.sub(r"[^a-z0-9\u4e00-\u9fff]+", "", raw_unit)
+        context_key = re.sub(
+            r"[^a-z0-9\u4e00-\u9fff]+",
+            "",
+            " ".join((raw_unit, raw_metric, raw_formula)),
+        )
+        if any(token in context_key for token in ("万股", "10000shares", "10kshares")):
+            return value / 100.0
+        if any(token in context_key for token in ("百万股", "millionshares", "mnshares", "mshares")):
+            return value
+        if unit_key in {"shares", "share", "股"} or "shares" in unit_key:
+            return value / 1_000_000.0
+        if value > 100_000_000:
+            return value / 1_000_000.0
+        return value
+
     share_row = next(
         (
             row
@@ -2390,7 +2423,20 @@ def normalize_sell_side_pm_decision(
         ),
         None,
     )
-    shares = float(share_row["value"]) if share_row and float(share_row["value"]) > 0 else None
+    shares = _share_count_mn(share_row)
+    if share_row is not None and shares is not None:
+        old_value = share_row.get("value")
+        old_unit = share_row.get("unit")
+        share_row.update(
+            value=shares,
+            unit="mn shares",
+            status="calculated" if str(share_row.get("status", "")).lower() != "reported" else share_row.get("status"),
+            formula=share_row.get("formula") or "normalized diluted share count to million shares",
+        )
+        if old_value != shares or str(old_unit).lower() not in {"mn shares", "million shares"}:
+            notes.append(
+                f"normalized diluted share count {old_value} {old_unit or ''} -> {shares:.4f} mn shares"
+            )
 
     by_metric_period = {
         (_metric(row), str(row.get("period", ""))): row for row in lines
@@ -2871,6 +2917,7 @@ def normalize_sell_side_pm_decision(
             if assumptions.optionality_inputs:
                 option_equity_value = 0.0
                 for item in assumptions.optionality_inputs:
+                    raw_metric_name = str(item.metric_name or "")
                     metric_key = re.sub(
                         r"[^a-z0-9]+", "", str(item.metric_name or "").lower()
                     )
@@ -2879,7 +2926,13 @@ def normalize_sell_side_pm_decision(
                     # it again as optionality double counts the same operating
                     # outcome. Independent direct-equity-value second curves
                     # remain eligible.
-                    if metric_key == "incrementalequityvalue":
+                    is_incremental = "incremental" in metric_key or "增量" in raw_metric_name
+                    is_equity_value = (
+                        "equityvalue" in metric_key
+                        or "权益价值" in raw_metric_name
+                        or "股权价值" in raw_metric_name
+                    )
+                    if is_incremental and is_equity_value:
                         notes.append(
                             f"excluded overlapping optionality '{item.name}': "
                             "incremental scenario value is already probability-weighted"
@@ -3139,6 +3192,23 @@ def normalize_sell_side_pm_decision(
         }[decision.rating.value]
         notes.append("localized English-heavy rating posture into Chinese")
 
+    deduped_lines: list[dict] = []
+    line_index: dict[tuple[str, str], int] = {}
+    duplicate_count = 0
+    for row in lines:
+        metric = _metric(row)
+        period = "current" if metric == "diluted_shares" else str(row.get("period", ""))
+        key = (period, metric)
+        if key in line_index and row.get("value") is not None:
+            deduped_lines[line_index[key]] = row
+            duplicate_count += 1
+            continue
+        line_index[key] = len(deduped_lines)
+        deduped_lines.append(row)
+    if duplicate_count:
+        notes.append(f"deduplicated {duplicate_count} canonical model line(s)")
+
+    lines = deduped_lines
     payload["canonical_model_snapshot"] = lines
     payload["deterministic_valuation"] = output.model_dump()
     return SellSidePMDecision.model_validate(payload), notes

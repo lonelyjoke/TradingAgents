@@ -6,6 +6,7 @@ from tradingagents.evaluation.research_validator import (
     audit_context_alignment,
     audit_decision_depth,
     audit_decision_integrity,
+    audit_deterministic_valuation_scale,
     audit_handoff_numeric_consistency,
     audit_canonical_financial_reconciliation,
     audit_pm_unit_scale_arithmetic,
@@ -90,6 +91,34 @@ def test_missing_inputs_and_lineage_gaps_are_review_only():
     assert _is_publication_blocker("company_operating_model", "error")
     assert _is_publication_blocker("handoff_numeric_consistency", "error")
     assert _is_publication_blocker("scenario_probability_math", "error")
+
+
+def test_deterministic_valuation_scale_flags_raw_shares_in_mn_field(tmp_path):
+    pm_dir = tmp_path / "5_portfolio"
+    pm_dir.mkdir()
+    payload = {
+        "deterministic_valuation": {
+            "status": "closed",
+            "diluted_share_count_mn": 8_561_000_000,
+            "scenario_rows": [
+                {
+                    "scenario": "base",
+                    "parent_net_profit_cny_mn": 9520.0,
+                    "eps_cny": 0.000001112,
+                    "fair_value_per_share_cny": 0.00003336,
+                }
+            ],
+        }
+    }
+    (pm_dir / "canonical_decision.json").write_text(
+        json.dumps(payload),
+        encoding="utf-8",
+    )
+
+    issues = audit_deterministic_valuation_scale(tmp_path)
+
+    assert [issue.section for issue in issues] == ["deterministic_valuation_scale"]
+    assert "raw shares" in issues[0].issue
 
 
 def test_audit_decision_depth_flags_missing_buy_side_sections():

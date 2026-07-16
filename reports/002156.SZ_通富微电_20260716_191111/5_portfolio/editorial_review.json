@@ -1,0 +1,88 @@
+{
+  "review": {
+    "revision_required": true,
+    "company_understanding_score": 3,
+    "independent_model_score": 2,
+    "evidence_and_counterevidence_score": 3,
+    "valuation_closure_score": 3,
+    "readability_and_synthesis_score": 3,
+    "strongest_aspects": [
+      "公司业务机制和行业周期判断清晰，对2026H1业绩预告的扣非/非经常性拆解准确",
+      "估值锚定从归母净利润转向扣非净利润的论证具有决定性，修正了市场普遍的估值误区",
+      "会计质量矩阵和前瞻信号（库存、应收账款）提供了实用的风险监控清单"
+    ],
+    "findings": [
+      {
+        "section": "three_year_forecast",
+        "priority": "must_revise",
+        "issue": "三年营收预测存在内部冲突，而损益表与现金流量表之间未做实质性勾稽。",
+        "evidence_or_logic_gap": "第六章三年预测表显示2026E营收335–350亿元，但定量的确定性估值模型却使用250亿元的营收（由此推导扣非净利润、FCF和EPS），这是同一份备忘录在两个不同位置给出的互相矛盾的假设。PM决策草案已经承认该250亿元为“保守假设”的正确方式，但公开备忘录不能容纳两个矛盾的营收基准。另外，从扣非净利润推导经营现金流、资本开支和自由现金流的过程只用了几条口头法则，没有展示折旧、营运资本和资本开支明细的三年转换，读者无法验证2028E FCF 21亿元的计算。",
+        "revision_instruction": "将第六章的营收区间与估值模型中的营收假设统一。如果模型假设为250亿元，则应解释为什么比H1年化营收和行业增速低这么多，说明其为压力测试参数，而非基准预测。补充一张从扣非净利润到FCF的三年穿透表，至少展示折旧、营运资本变动、资本开支和FCF的逐年数字，使2028E FCF可追溯。"
+      },
+      {
+        "section": "thesis_moat_financial_bridge",
+        "priority": "must_revise",
+        "issue": "公开核心论点章节未能完整呈现最强反证、市场定价含义和证伪门，且缺乏‘论点—财务桥接’的连贯叙事。",
+        "evidence_or_logic_gap": "结构化工作台中的 core_theses 数组为每个论点记录了 strongest_counterevidence、market_pricing 和 falsification_gate，但第七章的公开叙述仅以熊市风险和催化剂形式分散出现，读者无法逐一对照。例如“80倍扣非PE已透支”的最强反证是“29x 2028E PE可能合理”，公开章节未触及；证伪门也未与具体论点绑定。这使投资者无法独立测试每个论点是否仍然有效。",
+        "revision_instruction": "将第七章重写为‘核心论点与财务桥接’，至少包含三个排序后的论点段落。每个段落须阐述：① 论点及证据；② 市场当前如何定价（隐含假设）；③ 若论点正确，财务状况如何传导（E / FCF / 估值路径）；④ 投资者需对照的最强反证；⑤ 该论点被证伪的具体数据条件。可适当压缩章节八的催化剂与证伪信号，将证明和证伪逻辑归入论点叙事。"
+      },
+      {
+        "section": "cross_section_consistency",
+        "priority": "must_revise",
+        "issue": "公允价值、安全买入价和评级等决策数字在多处表述不一致，且部分数值缺乏确定性计算支持。",
+        "evidence_or_logic_gap": "第八章结尾称公允价值35元，而程序化确定性估值表给出34.32元；安全买入价21.18元仅出现在程序化部分，正文未解释；摘要和结论部分反复出现‘80倍扣非PE’、‘潜在下跌空间’等表述，但未与35元公允价值做逻辑连接。此外，确定性估值中的牛市情景每股56元（30倍2028年EPS 1.87元），但文本提及其他章节曾引用100元（属于另一套假设），未做协调。",
+        "revision_instruction": "以确定性估值程序输出为唯一数字来源，统一整份备忘录的公允价值（34.32元）、概率加权核心价值、安全买入价格上限和预期回报。若正文需引用‘80倍扣非PE’、‘隐含下跌幅度’等，必须在同一节内对照34.32元并说明计算过程。删除未使用或与程序化结果矛盾的估值数字（如28元、100元），或在保留时明确标注不属于基准概率加权估值。"
+      },
+      {
+        "section": "accounting_and_capital_allocation",
+        "priority": "should_revise",
+        "issue": "会计质量矩阵中的预警信号未在财务预测中充分反映，且对定增摊薄的影响缺乏量化传导。",
+        "evidence_or_logic_gap": "会计雷达已指出存货/营收比升高和非经常性损益占比过高两个‘warning’，但此后三年预测中的净利率和营运资本假设并未明确拆解出这些风险参数，似乎是对理想情景的线性外推。定增摊薄影响被描述为‘摊薄4–5%，待定价公告’，但实际上已获注册的定增规模若按当前股价计算会带来明显稀释，模型中三年EPS仍使用固定15亿股，未来摊薄风险未形成向下调整。",
+        "revision_instruction": "在预测假设表中增加两行：① 存货/营收比基于‘主动备货’和‘被动积压’两种情形的概率权重及其对扣非净利率的冲击；② 定增摊薄情景（假设融资金额和折价后股本增加），并与基准股本并列呈现 EPS 敏感性。在 FCF 路径中明确假设存货和应收账款的营运资本增量，使库存预警与盈利预测形成闭环。"
+      },
+      {
+        "section": "valuation_and_expectation_gap",
+        "priority": "should_revise",
+        "issue": "预期差分析未能量化市场隐含的扣非利润路径，也未验证估值倍数选择的依据，导致35元公允价值的说服力不足。",
+        "evidence_or_logic_gap": "本章仅定性指出市场隐含2027年扣非净利润需超过25亿元，但没有给出在当前80元股价下，以不同PE和利润组合进行反向求解的表格。此外，采用25倍扣非PE的理由仅提及‘行业中枢’，未横向比较长电、华天等可比公司当前和历史的扣非PE，也未讨论为何AI封测结构性成长应获得溢价或折价，因此估值倍数看起来像是主观锚定。",
+        "revision_instruction": "增加一张反向估值矩阵，列示80元股价下，对应2027年扣非净利润（15、18、21、24、27亿元）所需的隐含PE，并用颜色标注合理的交叉区域。补充可比公司扣非PE图表及当前分位，或说明无法获取时的替代推导逻辑（如隐含增长率检查），使25倍不是凭空设定。"
+      },
+      {
+        "section": "company_disaggregation",
+        "priority": "optional",
+        "issue": "分部经济描述未与预测表形成定量链接，先进封装份额假设缺乏可验证锚点。",
+        "evidence_or_logic_gap": "第二章将先进封装收入占比描述为约55%、毛利率约18%，但这是来自工作台假设的翻译，公开叙述中未引用任何公开披露（如公司调研纪要或产能数据）来支持该比例。三年预测中营收增长30%→25%→20%的下降假设也未说明与产能计划和AMD roadmap的关系。读者无法判断这属于保守还是激进。",
+        "revision_instruction": "在分部经济学部分，将‘证据或缺口’列中的内容嵌入正文，明确说明55%份额和18%毛利率是基于AMD封装出货量估算、公司指引还是分析师共识；标注其为‘分析假设’，并提示投资者注意半年报分拆验证。同时，在三年预测表中以脚注形式将营收增速假设与先进封装产能扩张节点（如槟城工厂爬坡计划）挂钩。"
+      },
+      {
+        "section": "cross_section_consistency",
+        "priority": "should_revise",
+        "issue": "空头的替代情报决策和卖方预期矩阵缺失或公示不全，使其他分析师共识与独立模型差异不可见。",
+        "evidence_or_logic_gap": "工作台要求对每项去重的 KPE 材料主张添加 alternative_intelligence_decisions 行（模型、概率或验证变更或明确拒绝原因），但提交的备忘录该数组为空。同时 sell_side_expectation_matrix 只包含一个来源，但基础证据包中指明有 KSI01 和 KPE06 等，应完整列出所有相关卖方预期，并说明与独立模型的差异和如何处理（采纳或拒绝），以便读者评估市场共识偏差。",
+        "revision_instruction": "在适当位置（或新增附录）填充 alternative_intelligence_decisions 表，对每个 KPE 项目记录其主张内容、采纳还是拒绝及其对模型的影响。扩展 sell_side_expectation_matrix，至少包含两个机构的关键预测（盈利、目标价、倍数），更新其修订历史，并在每一行后注明‘高于/低于我们的预测 xx%，原因’列，使投资者能够评估一致预期与独立模型的差距。"
+      }
+    ],
+    "overall_editorial_verdict": "备忘录展现了分析师对盈利质量瑕疵和估值锚错误的有力识别，但公开报告的形式中存在内部数据不一致、论点与证伪纽带的缺口以及预期差论证的量化不足，这削弱了评级决定的严肃性。修正关键数字的矛盾和补齐论点证伪框架后，可提升至可发布状态。当前评级 Hold 不改变，但需通过这些修订使风险敞口和操作约束更透明。"
+  },
+  "review_status": {
+    "mode": "schema_prompt_structured",
+    "agent": "Sell-Side Research Editor",
+    "structured_error": ""
+  },
+  "revision_requested": true,
+  "revision_applied": true,
+  "revision_status": {
+    "mode": "schema_prompt_structured",
+    "agent": "Portfolio Manager Editorial Revision",
+    "structured_error": ""
+  },
+  "initial_handoff_issues": [
+    "dropped canonical line: diluted_shares"
+  ],
+  "initial_analytical_issues": [
+    "public thesis chapter missing strongest counterargument/boundary"
+  ],
+  "remaining_handoff_issues": [],
+  "remaining_analytical_issues": [],
+  "revision_rejection_reasons": []
+}

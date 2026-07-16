@@ -1,0 +1,2985 @@
+{
+  "schema_version": 3,
+  "symbol": "002156.SZ",
+  "as_of_date": "2026-07-16",
+  "preprocessing_mode": "llm_semantic_plus_deterministic_validation",
+  "company_summary": "通富微电（002156.SZ）是全球领先的半导体封测企业之一，专注于集成电路封装与测试，尤其在先进封装（Chiplet、2.5D/3D、扇出型封装等）领域具备领先技术。公司是AMD最主要的封测供应商，占据其相关产品80%以上份额。2025年营收279.21亿元，同比增长16.92%；2026年Q1营收74.82亿元，毛利率13.32%。2026年H1业绩预告显示归母净利润16-18亿元，同比大幅增长，显示AI算力驱动的行业高景气与公司产品结构升级成效。",
+  "segments": [
+    {
+      "segment": "半导体封测",
+      "aliases": [
+        "封测",
+        "集成电路封装测试",
+        "Advanced Packaging and Testing"
+      ],
+      "products_or_services": "提供集成电路封装与测试服务，包括传统封装（DIP、SOP、QFP等）和先进封装（Chiplet、2.5D/3D堆叠、扇出型封装、倒装焊、CPO光电合封等）",
+      "revenue_weight_pct": 100.0,
+      "gross_profit_or_profit_weight_pct": null,
+      "business_model": "高研发技术产品型与产能出货型结合，客户主要为全球半导体设计公司，以AMD为核心大客户，通过合资+合作模式绑定，依靠产能规模和技术领先获取订单",
+      "key_drivers": [
+        "AI算力需求",
+        "AMD产品周期（Venice CPU, MI系列GPU）",
+        "先进封装技术迭代（Chiplet, CoWoS, CPO）",
+        "国产化替代加速",
+        "产能利用率提升",
+        "产品结构高端化"
+      ],
+      "prosperity_level": "high",
+      "marginal_direction": "up",
+      "causal_chain": "需求端：AI大模型训练与推理推动算力芯片需求爆发，带动先进封装需求；供给端：公司积极扩充先进封装产能（扇出型、圆片级、倒装焊、Chiplet等），槟城工厂战略扩产；量价：产能利用率提升，产品结构向高附加值先进封装倾斜，ASP上升；利润率：毛利率改善（Q1 YoY +0.13pp），运营利润率提升（+2.9pp），规模效应与费用管控；现金流：经营现金流/净利润达2.86，盈利质量高",
+      "supporting_metric_refs": [
+        "EV013",
+        "EV014",
+        "EV015",
+        "EV017",
+        "KPE01",
+        "KPE06",
+        "EV085"
+      ],
+      "counterevidence": [
+        "公司明确表示与英伟达无业务合作，可能影响市场对AI算力封测全产业链受益预期"
+      ],
+      "confidence": "medium",
+      "missing_inputs": [
+        "按封装类型分拆的收入与毛利",
+        "CoWoS产能规划具体细节",
+        "非经常性损益构成",
+        "AMD订单能见度披露"
+      ],
+      "revenue_cny_mn": 27921.42465615,
+      "revenue_reported_value": 27921424656.15,
+      "revenue_reported_unit": "CNY",
+      "revenue_growth_pct": 16.92,
+      "gross_margin_pct": 13.3247,
+      "gross_margin_change_pp": 0.13,
+      "period": "2025年度/2026Q1",
+      "source_module": "filing_intelligence",
+      "evidence_quote": "2025 年，公司实现营业收入 279.21 亿元，同比增长 16.92%",
+      "extraction_mode": "llm_semantic"
+    }
+  ],
+  "semantic_metrics": [
+    {
+      "segment": "半导体封测",
+      "variable": "revenue",
+      "value": 27921424656.15,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "2025年年度",
+      "comparison_basis": "同比",
+      "source_module": "filing_intelligence",
+      "source_quote": "2025 年，公司实现营业收入 279.21 亿元，同比增长 16.92%",
+      "evidence_status": "reported",
+      "direction": "up",
+      "materiality": "high",
+      "model_role": "topline_input",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "半导体封测",
+      "variable": "revenue",
+      "value": 7481674677.05,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "2026年第一季度",
+      "comparison_basis": "同比",
+      "source_module": "earnings_model",
+      "source_quote": "| Revenue base | 7481674677.05 | N/A | YoY: 20260331 vs 20250331 | top-line starting point for volume × price × mix |",
+      "evidence_status": "reported",
+      "direction": "up",
+      "materiality": "high",
+      "model_role": "quarterly_trend",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "半导体封测",
+      "variable": "net_profit_parent",
+      "value": 1218708143.38,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "2025年年度",
+      "comparison_basis": "同比",
+      "source_module": "earnings_model",
+      "source_quote": "| latest annual parent profit | 1218708143.38 |",
+      "evidence_status": "unverified",
+      "direction": "up",
+      "materiality": "high",
+      "model_role": "profit_baseline",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "半导体封测",
+      "variable": "profit_or_eps",
+      "value": 329057400.55,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "2026年第一季度",
+      "comparison_basis": "同比",
+      "source_module": "earnings_model",
+      "source_quote": "| snapshot | period | end_date | revenue | net_profit_parent | ... | 329057400.55 |",
+      "evidence_status": "unverified",
+      "direction": "up",
+      "materiality": "high",
+      "model_role": "quarterly_earnings",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "半导体封测",
+      "variable": "gross_margin_pct",
+      "value": 13.3247,
+      "value_text": "",
+      "unit": "%",
+      "period": "2026年第一季度",
+      "comparison_basis": "同比变化 +0.13pp",
+      "source_module": "earnings_model",
+      "source_quote": "| Gross margin | 13.3247% | +0.13pp | YoY: 20260331 vs 20250331 | main bridge from demand to gross profit |",
+      "evidence_status": "reported",
+      "direction": "up",
+      "materiality": "medium",
+      "model_role": "margin_driver",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "半导体封测",
+      "variable": "operating_margin_pct",
+      "value": 6.2765,
+      "value_text": "",
+      "unit": "%",
+      "period": "2026年第一季度",
+      "comparison_basis": "同比变化 +2.90pp",
+      "source_module": "earnings_model",
+      "source_quote": "| Operating margin | 6.2765% | +2.90pp | YoY: 20260331 vs 20250331 | tests pricing, mix, and cost absorption |",
+      "evidence_status": "reported",
+      "direction": "up",
+      "materiality": "medium",
+      "model_role": "operating_leverage",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "半导体封测",
+      "variable": "net_margin_pct",
+      "value": 4.3982,
+      "value_text": "",
+      "unit": "%",
+      "period": "2026年第一季度",
+      "comparison_basis": "同比变化 +2.73pp",
+      "source_module": "earnings_model",
+      "source_quote": "| Net margin | 4.3982% | +2.73pp | YoY: 20260331 vs 20250331 | captures final earnings conversion |",
+      "evidence_status": "reported",
+      "direction": "up",
+      "materiality": "medium",
+      "model_role": "bottom_line_conversion",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "半导体封测",
+      "variable": "cash_conversion_ratio",
+      "value": 2.8615,
+      "value_text": "",
+      "unit": "ratio",
+      "period": "2026年第一季度",
+      "comparison_basis": "同比",
+      "source_module": "earnings_model",
+      "source_quote": "| OCF / net profit | 2.8615 | N/A | YoY: 20260331 vs 20250331 | tests earnings quality and cash realization |",
+      "evidence_status": "reported",
+      "direction": "positive",
+      "materiality": "medium",
+      "model_role": "earnings_quality",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "半导体封测",
+      "variable": "profit_or_eps",
+      "value": null,
+      "value_text": "16-18亿元",
+      "unit": "CNY 亿",
+      "period": "2026年半年度",
+      "comparison_basis": "同比 +288%-337%",
+      "source_module": "knowledge_planet",
+      "source_quote": "通富微电（大幅超预期）中报净利16-18亿元，同比288.26%-336.80%",
+      "evidence_status": "private_proxy",
+      "direction": "up",
+      "materiality": "high",
+      "model_role": "forward_guidance",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "半导体封测",
+      "variable": "customer_concentration",
+      "value": null,
+      "value_text": "80%以上",
+      "unit": "%",
+      "period": "2025年年度",
+      "comparison_basis": "公司自称",
+      "source_module": "investor_interaction",
+      "source_quote": "公司是AMD最主要的封测供应商，占其相关产品的80%以上",
+      "evidence_status": "reported",
+      "direction": "N/A",
+      "materiality": "high",
+      "model_role": "demand_visibility",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "半导体封测",
+      "variable": "market_cap",
+      "value": 119450051999.0,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "2026-07-15",
+      "comparison_basis": "现价",
+      "source_module": "market_expectation",
+      "source_quote": "/ Market cap (CNY) / 119450051999 / current equity value /",
+      "evidence_status": "unverified",
+      "direction": "N/A",
+      "materiality": "high",
+      "model_role": "valuation_input",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "半导体封测",
+      "variable": "pe_ttm",
+      "value": 82.5857,
+      "value_text": "",
+      "unit": "times",
+      "period": "TTM",
+      "comparison_basis": "当前估值",
+      "source_module": "market_expectation",
+      "source_quote": "/ PE TTM / 82.5857 / earnings multiple the market is paying now /",
+      "evidence_status": "unverified",
+      "direction": "N/A",
+      "materiality": "medium",
+      "model_role": "valuation_multiple",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "半导体封测",
+      "variable": "ps_ttm",
+      "value": 4.0753,
+      "value_text": "",
+      "unit": "times",
+      "period": "TTM",
+      "comparison_basis": "当前估值",
+      "source_module": "market_expectation",
+      "source_quote": "/ PS TTM / 4.0753 / sales multiple the market is paying now /",
+      "evidence_status": "unverified",
+      "direction": "N/A",
+      "materiality": "medium",
+      "model_role": "valuation_multiple",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "半导体封测",
+      "variable": "revenue_growth_pct",
+      "value": 16.92,
+      "value_text": "",
+      "unit": "%",
+      "period": "2025年年度",
+      "comparison_basis": "同比",
+      "source_module": "filing_intelligence",
+      "source_quote": "2025 年，公司实现营业收入 279.21 亿元，同比增长 16.92%",
+      "evidence_status": "reported",
+      "direction": "up",
+      "materiality": "medium",
+      "model_role": "growth_trend",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "半导体封测",
+      "variable": "geographic_mix",
+      "value": 66.59,
+      "value_text": "",
+      "unit": "%",
+      "period": "2025年年度",
+      "comparison_basis": "出口占比",
+      "source_module": "filing_intelligence",
+      "source_quote": "2023 年、2024 年及 2025 年，公司出口销售收入占比分别为 74.36%、66.01%、66.59%",
+      "evidence_status": "reported",
+      "direction": "stable",
+      "materiality": "medium",
+      "model_role": "currency_exposure",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    }
+  ],
+  "deterministic_evidence": [
+    {
+      "evidence_id": "EV001",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Financial-report look-back: 900 days"
+    },
+    {
+      "evidence_id": "EV002",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "Compacted 2025年年度报告: 453168 chars -> 136089 chars."
+    },
+    {
+      "evidence_id": "EV003",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 半年",
+      "text": "Compacted 2025年半年度报告: 384975 chars -> 126866 chars."
+    },
+    {
+      "evidence_id": "EV004",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260430, 2026, 季度",
+      "text": "20260430: 2026年一季度报告"
+    },
+    {
+      "evidence_id": "EV005",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260417, 2025, 年度",
+      "text": "20260417: 2025年年度报告"
+    },
+    {
+      "evidence_id": "EV006",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260417, 2025, 年度",
+      "text": "20260417: 关于举行2025年度报告网上说明会的公告"
+    },
+    {
+      "evidence_id": "EV007",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20251028, 2025, 季度",
+      "text": "20251028: 2025年三季度报告"
+    },
+    {
+      "evidence_id": "EV008",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20250829, 2025, 半年",
+      "text": "20250829: 2025年半年度报告"
+    },
+    {
+      "evidence_id": "EV009",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ announcement_lookup / ready / Found 8 candidate financial-report announcement(s) from primary and CNINFO sources. /"
+    },
+    {
+      "evidence_id": "EV010",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "Q1, 20260331",
+      "text": "/ latest reported / Q1 / 20260331 / 7481674677.05 / 329057400.55 / 29926698708.2 / 1316229602.2 / 34938210866.8019 / 2879505918.6377 / historical median 0331 share 11.4% /"
+    },
+    {
+      "evidence_id": "EV011",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "FY, 20251231",
+      "text": "/ latest annual / FY / 20251231 / 27921424656.15 / 1218708143.38 / 27921424656.15 / 1218708143.38 / 27921424656.15 / 1218708143.38 / FY actual /"
+    },
+    {
+      "evidence_id": "EV012",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "revenue",
+      "period": "20260331, 20250331",
+      "text": "/ Revenue base / 7481674677.05 / N/A / YoY: 20260331 vs 20250331 / top-line starting point for volume × price × mix /"
+    },
+    {
+      "evidence_id": "EV013",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "20260331, 20250331",
+      "text": "/ Gross margin / 13.3247% / +0.13pp / YoY: 20260331 vs 20250331 / main bridge from demand to gross profit /"
+    },
+    {
+      "evidence_id": "EV014",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260331, 20250331",
+      "text": "/ Operating margin / 6.2765% / +2.90pp / YoY: 20260331 vs 20250331 / tests pricing, mix, and cost absorption /"
+    },
+    {
+      "evidence_id": "EV015",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "20260331, 20250331",
+      "text": "/ Net margin / 4.3982% / +2.73pp / YoY: 20260331 vs 20250331 / captures final earnings conversion /"
+    },
+    {
+      "evidence_id": "EV016",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "operating_expense",
+      "period": "20260331, 20250331",
+      "text": "/ Finance-expense ratio / 2.2446% / +0.23pp / YoY: 20260331 vs 20250331 / captures leverage drag or relief /"
+    },
+    {
+      "evidence_id": "EV017",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "profit_or_eps",
+      "period": "20260331, 20250331",
+      "text": "/ OCF / net profit / 2.8615 / N/A / YoY: 20260331 vs 20250331 / tests earnings quality and cash realization /"
+    },
+    {
+      "evidence_id": "EV018",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "revenue",
+      "period": "20260331, 20250331",
+      "text": "/ Receivables / revenue / 18.1068% / -2.00pp / YoY: 20260331 vs 20250331 / tests working-capital drag; interim periods use annualized revenue /"
+    },
+    {
+      "evidence_id": "EV019",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Look-back window: 30 days"
+    },
+    {
+      "evidence_id": "EV020",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 一般公告 / 4 /"
+    },
+    {
+      "evidence_id": "EV021",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 并购/投资 / 2 /"
+    },
+    {
+      "evidence_id": "EV022",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "valuation",
+      "period": "unspecified",
+      "text": "/ earnings guidance / performance preview / 1 /"
+    },
+    {
+      "evidence_id": "EV023",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "valuation",
+      "period": "20260715, 2026, 半年",
+      "text": "/ 20260715 / earnings guidance / performance preview / 002156.SZ / 通富微电 / 2026年半年度业绩预告 / http://www.cninfo.com.cn/new/disclosure/detail?stockCode=002156&announcementId=1225423192&orgId=9900003427&announcementTime=2026-07-15 /"
+    },
+    {
+      "evidence_id": "EV024",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260707, 2026-07-07",
+      "text": "/ 20260707 / 并购/投资 / 002156.SZ / 通富微电 / 002156通富微电投资者关系管理信息20260707 / http://www.cninfo.com.cn/new/disclosure/detail?stockCode=002156&announcementId=1225413518&orgId=9900003427&announcementTime=2026-07-07 /"
+    },
+    {
+      "evidence_id": "EV025",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260704, 2026-07-04",
+      "text": "/ 20260704 / 一般公告 / 002156.SZ / 通富微电 / 关于向特定对象发行股票申请获得中国证券监督管理委员会同意注册批复的公告 / http://www.cninfo.com.cn/new/disclosure/detail?stockCode=002156&announcementId=1225408714&orgId=9900003427&announcementTime=2026-07-04 /"
+    },
+    {
+      "evidence_id": "EV026",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260704, 2026, 年度",
+      "text": "/ 20260704 / 一般公告 / 002156.SZ / 通富微电 / 通富微电子股份有限公司2026年度向特定对象发行A股股票募集说明书（注册稿） / http://www.cninfo.com.cn/new/disclosure/detail?stockCode=002156&announcementId=1225408715&orgId=9900003427&announcementTime=2026-07-04 /"
+    },
+    {
+      "evidence_id": "EV027",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260626, 2026-06-26",
+      "text": "/ 20260626 / 一般公告 / 002156.SZ / 通富微电 / 关于持股5%以上股东股份变动比例触及5%整数倍暨披露权益变动报告书的提示性公告 / http://www.cninfo.com.cn/new/disclosure/detail?stockCode=002156&announcementId=1225388684&orgId=9900003427&announcementTime=2026-06-26 /"
+    },
+    {
+      "evidence_id": "EV028",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "asp_or_price",
+      "period": "2025, 年度",
+      "text": "/ high_r_and_d_technology / 高研发技术产品型 / quantified disclosure / 2025年年度报告: 率电源管理模块封装 程开发，使之成为一 已完成 管理器件的研发水平 同时也能极大地缩短 技术研发及产业化 颗多芯片的系统级封 和竞争力。 国内储能及逆变功率 台，为国内外客户混 / 重点验证产品代际、客户认证、研发转化率、ASP/毛利率、供应链瓶颈、资本开支和库存风险。 /"
+    },
+    {
+      "evidence_id": "EV029",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_volume",
+      "period": "2025, 年度",
+      "text": "/ product_manufacturer / 产品制造 / 产能出货型 / quantified disclosure / 2025年年度报告: 四、主营业务分析 1）抓住市场机遇，实现业务多元化增长 2025 年，全球半导体市场在 AI 算力、汽车电子、消费电子、新能源等多重结构性需求的强劲驱动下，迎来了一轮增 2025 年，公司精准把握国内模拟芯片国产化窗口，与客户形成产能与技术的战略互补，国内营收提升 20%以上，产能 利用率同步优化；在电源管理芯片领域，深化与电源管理芯片头部客户合作，市场份额显著..."
+    },
+    {
+      "evidence_id": "EV030",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "2025, 年度",
+      "text": "/ core_revenue_engine / annual / 2025年年度报告: 转，资产运营效率不断提升。2025 年，公司实现营业收入 279.21 亿元，同比增长 16.92%。根据芯思想研究院发布的 2025 / Defines what actually drives the income statement. /"
+    },
+    {
+      "evidence_id": "EV031",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度, 2023",
+      "text": "/ segment_mix / annual / 2025年年度报告: 2023 年、2024 年及 2025 年，公司出口销售收入占比分别为 74.36%、66.01%、66.59%，以外币结算收入占比较高。如 / Shows whether different profit pools are being mixed together. /"
+    },
+    {
+      "evidence_id": "EV032",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "/ customer_and_channel / annual / 2025年年度报告: 华特、纳芯微、汇顶科技、思瑞浦、杰理科技等近 40 家客户的嘉奖。此外，客户还针对产品线、销售、工程、质量、交付 / Reveals demand source, concentration, and market validation. /"
+    },
+    {
+      "evidence_id": "EV033",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度, 2023",
+      "text": "/ geography / annual / 2025年年度报告: 2023 年、2024 年及 2025 年，公司出口销售收入占比分别为 74.36%、66.01%、66.59%，以外币结算收入占比较高。如 / Explains whether growth depends on a specific geography or expansion lane. /"
+    },
+    {
+      "evidence_id": "EV034",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "/ reinvestment_engine / annual / 2025年年度报告: 产品封装通过验证，bumping 和晶圆测试 10 月顺利投产，良率远超客户预期，助力了槟城工厂向先进封装领域的战略扩 / Shows how today's cash is being converted into tomorrow's earnings power. /"
+    },
+    {
+      "evidence_id": "EV035",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "/ product / annual / 2025年年度报告: 公司上市以来主营业务的变化情况（如有） 无变更 历次控股股东的变更情况（如有） 无变更 7 通富微电子股份有限公司 2025 年年度报告全文 五、其他有关资料 公司聘请的会计师事务所 会计师事务所名称 致同会计师事务所（特殊普通合伙） 会计师事务所办公地址 北京市建国门外大街 22 号，赛特广场 5 层 签字会计师姓名 陈晶晶、杨东晓 公司聘请的报告期内履行持续督导职责的保荐机构 适用 □不适用 保荐机构名称 保荐机构办公地址 保荐代表人姓名 ..."
+    },
+    {
+      "evidence_id": "EV036",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "revenue",
+      "period": "2025, 半年, 本报告期",
+      "text": "/ business / semiannual / 2025年半年度报告: 三、主营业务分析 概述 参见“一、报告期内公司从事的主要业务”相关内容。 主要财务数据同比变动情况 单位：元 本报告期 上年同期 同比增减 变动原因 营业收入 13,038,246,156.27 11,080,086,982.96 17.67% 未发生重大变化 营业成本 11,114,729,132.73 9,511,471,649.21 16.86% 未发生重大变化 销售费用 36,204,862.20 34,288,717.47 ..."
+    },
+    {
+      "evidence_id": "EV037",
+      "source_module": "industry_cycle",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "balance_sheet",
+      "period": "unspecified",
+      "text": "Do not state R32, R125, lithium, copper, gold, inventory, or spread changes as facts unless they appear in the evidence table."
+    },
+    {
+      "evidence_id": "EV038",
+      "source_module": "industry_cycle",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "gap",
+      "status": "missing",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "If cycle evidence says bottom-testing or evidence-limited, use language such as `bottom-right validation stage`, `右侧待验证`, or `needs confirmation`."
+    },
+    {
+      "evidence_id": "EV039",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "gap",
+      "status": "missing",
+      "model_variable": "segment_margin",
+      "period": "unspecified",
+      "text": "/ coverage_grade / report_types_seen / missing_report_types / answered_questions / core_pack_status / confidence_read /"
+    },
+    {
+      "evidence_id": "EV040",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "valuation",
+      "period": "2026, 季度",
+      "text": "/ accounting_reconciliation / Check signs, units, periods, and cross-statement consistency before a number enters the PM memo. / prepayments: 2026年一季度报告: 交易性金融资产 92,633,474.32 0.00 不适用 融资产所致。 预付款项 92,589,379.46 69,942,264.47 32.38% 主要系预付材料款余额增加所致。 / prepaym..."
+    },
+    {
+      "evidence_id": "EV041",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "/ segment_economics_depth / Decide whether each business line has enough disclosed scale, growth, margin, cash quality, and valuation treatment. / 2025年年度报告: 公司上市以来主营业务的变化情况（如有） 无变更 历次控股股东的变更情况（如有） 无变更 7 通富微电子股份有限公司 2025 年年度报告全文 五、其他有关资料 公司聘请的会计师事务所 会计师事务所名..."
+    },
+    {
+      "evidence_id": "EV042",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026, 季度",
+      "text": "/ cash_flow_quality_decomposition / Separate accounting profit from cash conversion, working-capital drag, and demand visibility. / prepayments: 2026年一季度报告: 交易性金融资产 92,633,474.32 0.00 不适用 融资产所致。 预付款项 92,589,379.46 69,942,264.47 32.38% 主要系预付材料款余额增加所致。 / prep..."
+    },
+    {
+      "evidence_id": "EV043",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "capex_or_roic",
+      "period": "2026, 季度",
+      "text": "/ capex_cip_return_bridge / Test whether capex, construction-in-progress, or investment assets are building returns or just absorbing capital. / construction_in_progress: 2026年一季度报告: 预付款项 92,589,379.46 69,942,264.47 32.38% 主要系预付材料款余额增加所致。 主要系公司业务量增长，增加中高 在建..."
+    },
+    {
+      "evidence_id": "EV044",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "asp_or_price",
+      "period": "2025, 年度",
+      "text": "/ mdna_text_change / Read management wording changes, proof-backed claims, risk-language upgrades, and abnormal silence across reports. / risk_language_upgrade: 2025年年度报告: 术、新工艺、新产品无法如期产业化风险，主要原材料供应及价格变动风险， 汇率风险，国际贸易风险，敬请广大投资者注意投资风险。 公司经本次董事会审议通过的利润分配预案为：以公..."
+    },
+    {
+      "evidence_id": "EV045",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "2026, 季度",
+      "text": "/ non_recurring_profit_quality / Distinguish core operating profit from investment income, fair-value moves, subsidies, asset disposals, impairment, and other one-off items. / impairment: 2026年一季度报告: 通富微电子股份有限公司 2026 年第一季度报告 主要系本期计提坏账准备，而去年同 信用减值损失 -4,375,6..."
+    },
+    {
+      "evidence_id": "EV046",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026, 季度",
+      "text": "/ balance_sheet_forward_signals / Read balance-sheet leads before income-statement confirmation. / prepayments: 2026年一季度报告: 交易性金融资产 92,633,474.32 0.00 不适用 融资产所致。 预付款项 92,589,379.46 69,942,264.47 32.38% 主要系预付材料款余额增加所致。 / prepayments: 2026年一季度报告: 融资产所致。 预付款项 ..."
+    },
+    {
+      "evidence_id": "EV047",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "revenue",
+      "period": "2025, 年度",
+      "text": "/ shareholder_return_authenticity / Test whether dividends, buybacks, and capital returns are funded by durable profit and cash rather than leverage or asset sales. / generic_capital_allocation: 2025年年度报告: 华特、纳芯微、汇顶科技、思瑞浦、杰理科技等近 40 家客户的嘉奖。此外，客户还针对产品线、销售、工程、..."
+    },
+    {
+      "evidence_id": "EV048",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-07-15",
+      "text": "Valuation trade date: 2026-07-15"
+    },
+    {
+      "evidence_id": "EV049",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ Market cap (CNY) / 119450051999 / current equity value /"
+    },
+    {
+      "evidence_id": "EV050",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "valuation",
+      "period": "TTM",
+      "text": "/ PE TTM / 82.5857 / earnings multiple the market is paying now /"
+    },
+    {
+      "evidence_id": "EV051",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "revenue",
+      "period": "TTM",
+      "text": "/ PS TTM / 4.0753 / sales multiple the market is paying now /"
+    },
+    {
+      "evidence_id": "EV052",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "valuation",
+      "period": "TTM",
+      "text": "/ Implied TTM earnings (CNY) / 1446376939.337 / market cap divided by PE TTM /"
+    },
+    {
+      "evidence_id": "EV053",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "revenue",
+      "period": "TTM",
+      "text": "/ Implied TTM sales (CNY) / 29310738350.3055 / market cap divided by PS TTM /"
+    },
+    {
+      "evidence_id": "EV054",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "valuation",
+      "period": "unspecified",
+      "text": "/ PE percentile / 83.1 / 5-year valuation position /"
+    },
+    {
+      "evidence_id": "EV055",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "valuation",
+      "period": "unspecified",
+      "text": "/ PB percentile / 100 / 5-year valuation position /"
+    },
+    {
+      "evidence_id": "EV056",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "valuation",
+      "period": "unspecified",
+      "text": "/ PS percentile / 100 / 5-year valuation position /"
+    },
+    {
+      "evidence_id": "EV057",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-07-15",
+      "text": "Valuation trade date: 2026-07-15"
+    },
+    {
+      "evidence_id": "EV058",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Market-cap units: `total_mv` is ten-thousand CNY; `total_mv_cny_100m` is 亿元 and equals `total_mv / 10,000`."
+    },
+    {
+      "evidence_id": "EV059",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "unspecified",
+      "text": "/ ts_code / name / industry / total_mv / total_mv_cny_100m / pe_ttm / pb / ps_ttm / dv_ttm / roe_annual / roa_annual / roe / roa / netprofit_yoy / debt_to_assets / v4_score /"
+    },
+    {
+      "evidence_id": "EV060",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 688525.SH / 佰维存储 / 半导体 / 14354490.348 / 1435.449 / 36.345 / 16.8636 / 8.6612 / 0.0703 / 21.7275 / 9.2303 / 41.5554 / 17.1788 / 1567.8539 / 64.9551 / 68.5 /"
+    },
+    {
+      "evidence_id": "EV061",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 002156.SZ / 通富微电 / 半导体 / 11945005.1999 / 1194.5005 / 82.5857 / 7.6285 / 4.0753 / 0.1029 / 8.075 / 5.0297 / 2.1126 / 1.1927 / 224.5487 / 64.922 / 66 /"
+    },
+    {
+      "evidence_id": "EV062",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2032",
+      "text": "/ 603501.SH / 豪威集团 / 半导体 / 13973373.336 / 1397.3373 / 37.9464 / 4.2539 / 4.8524 / 0.4494 / 15.4484 / 10.922 / 1.6422 / 1.2032 / -41.9207 / 33.1322 / 65.8 /"
+    },
+    {
+      "evidence_id": "EV063",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2056",
+      "text": "/ 688120.SH / 华海清科 / 半导体 / 14346212.4378 / 1434.6212 / 130.7038 / 18.5811 / 29.0577 / 0.0983 / 15.5578 / 9.5585 / 3.2584 / 2.2056 / 5.9497 / 42.9795 / 64.6 /"
+    },
+    {
+      "evidence_id": "EV064",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2086",
+      "text": "/ 688729.SH / 屹唐股份 / 半导体 / 10010481.72 / 1001.0482 / 163.4203 / 11.0955 / 20.2086 / 0.0806 / 9.0456 / 6.4439 / 1.7766 / 1.4125 / -26.7592 / 17.1772 / 57.7 /"
+    },
+    {
+      "evidence_id": "EV065",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 688702.SH / 盛科通信 / 半导体 / 14452500 / 1445.25 / N/A / 64.7559 / 122.9003 / N/A / -6.5697 / -5.9637 / -0.7631 / -0.7035 / -12.0538 / 9.1827 / 55 /"
+    },
+    {
+      "evidence_id": "EV066",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 002156.SZ / 石磊 / 石磊 / 蒋澍 / 151759.6912 / 19940204 / 江苏 / 集成电路的封装和测试。 /"
+    },
+    {
+      "evidence_id": "EV067",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260417, 20251231",
+      "text": "/ 20260417 / 20251231 / 石磊 / 董事长,总裁 / 5180400 / 78000 /"
+    },
+    {
+      "evidence_id": "EV068",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260417, 20251231",
+      "text": "/ 20260417 / 20251231 / 胡文龙 / 原副总裁 / 1694900 / 0 /"
+    },
+    {
+      "evidence_id": "EV069",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260417, 20251231",
+      "text": "/ 20260417 / 20251231 / 杨卓 / 原董事 / 0 / 0 /"
+    },
+    {
+      "evidence_id": "EV070",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260417, 20251231",
+      "text": "/ 20260417 / 20251231 / 袁训 / 董事 / 0 / 0 /"
+    },
+    {
+      "evidence_id": "EV071",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260417, 20251231",
+      "text": "/ 20260417 / 20251231 / 时龙兴 / 独立董事 / 100000 / 0 /"
+    },
+    {
+      "evidence_id": "EV072",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260417, 20251231",
+      "text": "/ 20260417 / 20251231 / 王建文 / 独立董事 / 100000 / 0 /"
+    },
+    {
+      "evidence_id": "EV073",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260417, 20251231",
+      "text": "/ 20260417 / 20251231 / 沈小燕 / 独立董事 / 100000 / 0 /"
+    },
+    {
+      "evidence_id": "EV074",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260417, 20251231",
+      "text": "/ 20260417 / 20251231 / 杨柳 / 原董事 / 0 / 0 /"
+    },
+    {
+      "evidence_id": "EV075",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Look-back window for futures proxies: 90 days"
+    },
+    {
+      "evidence_id": "EV076",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_volume",
+      "period": "unspecified",
+      "text": "/ 1 - company hard evidence / official filings, production reports, and sales announcements / realized product mix, output, unit cost, and cash-flow conversion / usually delayed and may not include daily spot prices /"
+    },
+    {
+      "evidence_id": "EV077",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "balance_sheet",
+      "period": "unspecified",
+      "text": "Do not state R32, R125, lithium, copper, gold, inventory, or spread changes as facts unless they appear in the evidence table."
+    },
+    {
+      "evidence_id": "EV078",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "gap",
+      "status": "missing",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "If a thesis-critical input is marked missing, treat it as neutral non-evidence and a retrieval task; it cannot prove margin deterioration/resilience or mechanically change rating, conviction, or sizing."
+    },
+    {
+      "evidence_id": "EV079",
+      "source_module": "policy",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025-10-28, 2025",
+      "text": "/ 中共中央关于制定国民经济和社会发展第十五个五年规划的建议 / 中国政府网 / 2025-10-28 / national-plan / ok / https://www.gov.cn/gongbao/2025/issue_12386/202511/content_7047415.html /"
+    },
+    {
+      "evidence_id": "EV080",
+      "source_module": "policy",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2024-08-11",
+      "text": "/ 中共中央 国务院关于加快经济社会发展全面绿色转型的意见 / 中国政府网 / 2024-08-11 / national-direction / ok / https://www.gov.cn/zhengce/202408/content_6967663.htm /"
+    },
+    {
+      "evidence_id": "EV081",
+      "source_module": "policy",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2024-08-11",
+      "text": "/ renewable-energy / 绿色转型 / 中共中央 国务院关于加快经济社会发展全面绿色转型的意见 / 中国政府网 / 2024-08-11 / national-direction / / supports multi-year demand visibility for clean-energy equipment and infrastructure / argue the company sits inside a policy-backed demand pool / test whether"
+    },
+    {
+      "evidence_id": "EV082",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Canonical company route: https://irm.cninfo.com.cn/ircs/company/companyDetail?orgId=9900003427&stockcode=002156"
+    },
+    {
+      "evidence_id": "EV083",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ cninfo / reachable / application/json;charset=UTF-8 / {\"statusCode\":200,\"title\":\"\",\"code\":\"\",\"message\":\"success\",\"data\":[{\"stockCode\":\"002156\",\"shortName\":\"通富微电\",\"pinyin\":\"TF /"
+    },
+    {
+      "evidence_id": "EV084",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "utilization_or_backlog",
+      "period": "2026-06-24, 2026-07-02",
+      "text": "/ 2026-06-24 / 2026-07-02 / 董秘你好：请问贵公司和英伟达合作了多少年了？英伟达订单占比多少？ / 尊敬的投资者，您好！公司与英伟达暂无相关业务合作。谢谢！ / substantive /"
+    },
+    {
+      "evidence_id": "EV085",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "utilization_or_backlog",
+      "period": "2026-06-24, 2026-07-02, 2025",
+      "text": "/ 2026-06-24 / 2026-07-02 / 董秘你好：贵公司和AMD超微半导体和合作伙伴关系，AMD已经是万亿市值公司，请问AMD在贵公司的订单数量有多少？ / 尊敬的投资者，您好！通过并购，公司与AMD形成了“合资+合作”的强强联合模式，建立了紧密的战略合作伙伴关系。公司是AMD最主要的封测供应商，占其相关产品的80%以上，未来随着大客户业务的成长，上述战略合作将使双方持续受益。详情可参阅公司《2025年年度报告》。谢谢！ / substantive /"
+    },
+    {
+      "evidence_id": "EV086",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "utilization_or_backlog",
+      "period": "2026-06-24, 2026-07-01, 2025",
+      "text": "/ 2026-06-24 / 2026-07-01 / 董秘您好，公司作为国内高端算力封测龙头，当前AI、Chiplet、高速互连是行业核心发展主线，请问公司除现有成熟工艺外，今年重点推进哪些全新一代自主封装技术研发？在晶圆级扇出、3D堆叠、超大尺寸FCBGA等方向有无迭代突破？ / 尊敬的投资者，您好！公司紧紧抓住市场发展机遇，面向未来高附加值产品以及市场热点方向，立足长远，大力开发扇出型、圆片级、倒装焊等封装技术并扩充其产能；此外，积极布局Chiplet、2D+等顶尖封装技术，形成了差异化竞争优势。详情可参阅公"
+    },
+    {
+      "evidence_id": "EV087",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "utilization_or_backlog",
+      "period": "2026-06-24, 2026-07-01, 2025",
+      "text": "/ 2026-06-24 / 2026-07-01 / 董秘您好，公司作为国内高端封测领域头部企业，紧跟AI算力、芯粒异构集成、高速光互连等行业主流发展趋势，想咨询下公司近期在新一代先进封装技术上有哪些重点研发项目推进？包含Chiplet、2.5D/3D、HBM堆叠、CPO光电合封等方向，目前研发、客户送样、工艺验证进度如何？ / 尊敬的投资者，您好！公司紧紧抓住市场发展机遇，面向未来高附加值产品以及市场热点方向，立足长远，大力开发扇出型、圆片级、倒装焊等封装技术并扩充其产能；此外，积极布局Chiplet、2D+等"
+    },
+    {
+      "evidence_id": "EV088",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "utilization_or_backlog",
+      "period": "2026-06-24, 2026-07-01, 2025",
+      "text": "/ 2026-06-24 / 2026-07-01 / 董秘您好，在后摩尔时代先进封装成为核心赛道背景下，公司长期深耕高端算力封测，请问今年针对AI大模型、高带宽存储、光电共封装等行业趋势，是否持续加码全新封装工艺研发？相关自研技术、专利布局以及产线配套规划有无新进展，能否进一步打开国产高端芯片封测替代空间？ / 尊敬的投资者，您好！公司紧紧抓住市场发展机遇，面向未来高附加值产品以及市场热点方向，立足长远，大力开发扇出型、圆片级、倒装焊等封装技术并扩充其产能；此外，积极布局Chiplet、2D+等顶尖封装技术，形成"
+    },
+    {
+      "evidence_id": "EV089",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "utilization_or_backlog",
+      "period": "2026-06-24, 2026-07-01, 2025",
+      "text": "/ 2026-06-24 / 2026-07-01 / 董秘您好，当前算力芯片、HBM存储、CPO光模块、车规异构集成是行业核心发展方向，公司国内顶尖高端封测技术储备充足，想了解公司近期在CoWoS、多层HBM堆叠、光电合封、超大尺寸FCBGA、晶圆级扇出封装等新技术上的研发迭代节奏，有无完成验证、进入客户定点的新技术方案？ / 尊敬的投资者，您好！公司紧紧抓住市场发展机遇，面向未来高附加值产品以及市场热点方向，立足长远，大力开发扇出型、圆片级、倒装焊等封装技术并扩充其产能；此外，积极布局Chiplet、2D+等顶"
+    },
+    {
+      "evidence_id": "EV090",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-06-24, 2026-07-01, 2026",
+      "text": "/ 2026-06-24 / 2026-07-01 / 董秘你好：贵公司和在2026年是否在光模块芯片封装业务有突破? / 尊敬的投资者，您好！公司在光电合封（CPO）领域的技术研发取得阶段性进展，研发产品已通过可靠性测试。谢谢！ / substantive /"
+    },
+    {
+      "evidence_id": "EV091",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "2026-06-16, 2026-07-16",
+      "text": "Window: 2026-06-16 to 2026-07-16 (30 days)"
+    },
+    {
+      "evidence_id": "EV092",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Primary query terms: 002156.SZ, 002156SZ, 002156, 通富微电"
+    },
+    {
+      "evidence_id": "EV093",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Upstream sync summary: cached=30, synced=1, index_refreshed=1"
+    },
+    {
+      "evidence_id": "EV094",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "valuation",
+      "period": "unspecified",
+      "text": "Auto-sync refresh window: latest 30 day(s); older dates use the persistent local cache."
+    },
+    {
+      "evidence_id": "EV095",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Preprocess: ok: events=10930, clusters=76, opportunities=255, ocr_low_quality=570"
+    },
+    {
+      "evidence_id": "EV096",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Matched stream items: 10"
+    },
+    {
+      "evidence_id": "EV097",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Fusion target: 002156.SZ"
+    },
+    {
+      "evidence_id": "EV098",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Direct terms: 002156.SZ, 002156SZ, 002156, 通富微电"
+    },
+    {
+      "evidence_id": "EV099",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Raw matches: stream=10; preprocessed matches: events=10, opportunities=0"
+    }
+  ],
+  "conflicts": [
+    {
+      "topic": "CoWoS海外产能规划真实性",
+      "segment": "半导体封测",
+      "claim_a": "AMD有意让通富为其在海外建设CoWoS-L产能，产能规划或有望达1万片/月",
+      "source_a": "KPE10 (sell-side push)",
+      "claim_b": "公司官方未披露相关CoWoS-L产能规划，仅提及一般性先进封装技术研发",
+      "source_b": "公司年报与投资者互动（EV086-EV089）",
+      "conflict_type": "unverified narrative vs company disclosure gap",
+      "required_resolution": "公司需在公告或投资者交流中明确CoWoS产能规划安排，或提供可靠的第三方验证（如设备订单、客户协议）"
+    }
+  ],
+  "kpe_impacts": [
+    {
+      "evidence_id": "KPE01",
+      "segment": "半导体封测",
+      "variable": "profit_or_eps",
+      "direction": "up",
+      "horizon": "1H2026",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "CNY 亿",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "通富微电（大幅超预期）中报净利16-18亿元，同比288.26%-336.80%，Q2环比286%-347%。",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "missing_inputs": [
+        "市场对该股2026H1净利润的一致预期",
+        "Q1实际净利润作为基数"
+      ],
+      "known_kpe": {
+        "date": "2026-07-15T08:10",
+        "source": "stream_item:14399",
+        "source_type": "channel_check",
+        "credibility": "high_private_channel_hard_to_verify",
+        "decision_role": "probability/verification proxy",
+        "evidence": "7月14日晚间算力光通、半导体... 7月14日晚间算力光通、半导体封测、电子材料板块中报预告普遍超出市场预期，产业维持高景气度。 板块结构性分化明确：光纤、先进封测、高端电子材料标的业绩爆发大幅超预期；光模块龙头稳健兑现；综合通信、传统材料标的增长平稳。Q2普遍环比提速，验证行业需求持续上行 长飞光纤（大幅超预期） 中报归母净利24.00-30.00亿元，同比711%-914%，扣非净利20.00-26.00亿元，同比1349%-1784%。Q1净利4.95亿元，Q2单季19.05-25.05亿元，环比284%-405%。算力数据中心建设加速，海内外新型光纤需求高增，公司优化产品结构、拓展算力业务，扣非增速远超表观增速，业绩质量极佳，大幅超预期。 东山精密（小幅超预期） 中报净利29-30亿元，同比283%-296%，Q2环比61%-70%。消费电子、汽车零部件筑牢基本盘，光模块产能爬坡、新客户导入顺利，业务整合效应显现，数据中心投资收益增厚利润，整体小幅超预期。 剑桥科技（小幅超预期） 中报净利3.10-3.59亿元（已扣除汇兑损益2.02亿元，经营性净利5.12-5.61亿元），同比157%-197%，Q2环比62%-103%。高速光模块市场需求旺盛，订单及出货大幅增长，产品结构高端化带动毛利率显著上行，主业成长兑现，贴合预期上沿。 光迅科技（符合预期） 中报净利5.59-6.15亿元，同比50%-65.15%，Q2环比32%-56%。全球AI算力投资、国内云厂商数据中心建设拉动数通光模块需求，公司全场景产品体系充分受益，业绩稳健贴合预期。 山东玻纤（小幅超预期） 中报净利2338-3507万元，同比168%-302%，Q2环比31%-147%。玻纤纱量价齐升，叠加产品结构优化与精细化成本管控，盈利修复明显，小市值标的弹性充足，区间上沿超预期。 通富微电（大幅超预期） 中报净利16-18亿元，同比288.26%-336.80%，Q2环比286%-347%。AI算力+存储行业高景气，国产化提速，产能利用率上行，中高端产品占比提升，叠加费用管控与产业投资收益，Q2业绩爆发，大幅超预期。 宏和科技（显著超预期） 中报净利3.32-4.05亿元，同比280%-364%，Q2环比36%-89%。终端算力需求带动电子玻纤布涨价，公司聚焦稀缺高端超薄/极薄特种玻纤产品，产品结构优化驱动净利高增，显著超预期。 利通电子（大幅超预期） 中报净利6.50-7.50亿元，同比1173%-1368%，Q2环比39%-76%。算力经销业务高速增长，精密结构件业务亏损收窄，叠加股权投资公允变动及处置收益、低基数效应，业绩爆发，大幅超预期。 中天科技（符合预期） 中报净利23.52-25.08亿元，同比50%-60%，Q2环比55%-72%。AI新基建落地优化光纤光缆供需格局...",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "segment_volume",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE02",
+      "segment": "半导体封测",
+      "variable": "profit_or_eps",
+      "direction": "up",
+      "horizon": "1H2026",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "CNY 亿",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "通富微电。2026年上半年实现归母净利润16.0~18.0亿元，同比+288.26%~+336.80%，同期实现扣非归母7.0~8.0亿元，同比+66.49%~+90.28%",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "missing_inputs": [
+        "市场一致预期基数",
+        "扣非净利拆分"
+      ],
+      "known_kpe": {
+        "date": "2026-07-15T08:08",
+        "source": "stream_item:14403",
+        "source_type": "company_research_feedback",
+        "credibility": "company_research_private_hard_to_verify",
+        "decision_role": "probability/verification proxy",
+        "evidence": "【广发机械】半导体设备跟踪：封... 【广发机械】半导体设备跟踪：封测厂业绩大增&CX上市在即，继续推荐半导体封测设备 长电&通富业绩大增，显示下游高景气度，受益于人工智能，继续强调半导体设备。 长电科技。2026年上半年实现归母净利润7.7~9.5亿元，同比+63.48%~+101.70%，同期实现扣非归母7.4~9.1亿元，同比+68.95%~+107.76%； 单看Q2，实现归母净利润4.8~6.6亿元，同比+79.4%~+146.7%，环比+65.3%~+127.3%，同期实现扣非归母4.8~6.5亿元，同比+94.4%~+164.0%，环比+79.7%~+144.0%。 通富微电。2026年上半年实现归母净利润16.0~18.0亿元，同比+288.26%~+336.80%，同期实现扣非归母7.0~8.0亿元，同比+66.49%~+90.28%； 单看Q2，实现归母净利润12.7~14.7亿元，同比+309.1%~+373.4%，环比+286.2~+347.0%，同期实现扣非归母5.3~6.3亿元，同比+67.1%~+98.7%，环比+207.9%~+266.1%。 继续强调半导体封测设备。长川科技、强一股份、华峰测控、精智达、联动科技、金海通以及精测电子、微导纳米、迈为股份等。 欢迎交流。 孙柏阳/汪家豪/王宁/许贝尔",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "profit_or_eps",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE03",
+      "segment": "半导体封测",
+      "variable": "utilization_or_backlog",
+      "direction": "up",
+      "horizon": "长期",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "⑥ 先进封装 长期行情，技术路线确定，十年投资方向 → 盛合晶微 / 长电科技 / 通富微电 / 汇成股份 / 华天科技 / 甬矽电子",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "missing_inputs": [
+        "先进封装收入占比",
+        "产能利用率具体数据"
+      ],
+      "known_kpe": {
+        "date": "2026-07-14T10:06",
+        "source": "stream_item:13766",
+        "source_type": "company_research_feedback",
+        "credibility": "company_research_private_hard_to_verify",
+        "decision_role": "probability/verification proxy",
+        "evidence": "🔴 【浙商AI战队】国产算力... 🔴 【浙商AI战队】国产算力：不仅仅看美股映射，更要看自自主路线、八个方向全面布局 ━━━ 八大投资方向 ━━━ ① 国产大模型 → 阿里巴巴 / 腾讯 / 字节 / 美团 / DeepSeek / 阶跃星辰 / 智谱 / MiniMax ② 云服务 → 互联网云：阿里巴巴 / 腾讯/字节 → 国有云：三大运营商 / 地方数据中心 ③ 算力芯片 :业绩逐步兑现。7nm产能逐步解决+CoWoS释放+HBM产能 → CPU：海光信息 / 鲲鹏（海光确定性最强） → GPU：华为昇腾 / 摩尔线程 / 寒武纪 / 壁仞 / 沐曦 / 燧原 ④ 国产存储 两存上市，自主可控 → 长鑫存储（DRAM配套产业链）/ 长江存储（NAND配套产业链） ⑤ 先进制程 未来上千万张GPU卡国内流片，需求极大 → 中芯国际 / 华虹宏力 / 燕东微 ⑥ 先进封装 长期行情，技术路线确定，十年投资方向 → 盛合晶微 / 长电科技 / 通富微电 / 汇成股份 / 华天科技 / 甬矽电子 ⑦ 设备 补足短板，只能自主制造 → 北方华创 / 中微公司 / 拓荆科技 / 新凯来 ⑧ 超节点 + 光芯片 超节点是必走方案 → 交换机：盛科通信 / 锐捷网络 / 紫光股份 / 澜起科技 / 曦智科技 → 光芯片：源杰科技 / 光迅科技 / 长光华芯 / 东山精密 / 中际旭创 → 国产算力反而是软硬件协同发展，利益分配格局合理，产业发展可持续 风险提示：半导体下游需求不及预期。 🔥伴随此轮调整，浙商AI战队会进一步加强股票跟踪力度，随时联系。浙商AI研究资源总协调：马莉/邱冠华 如对以上内容感兴趣欢迎联系对口销售及【浙商AI战队】中观策略：王杨/赵乾凯13968067416/王彦凯13616227982/何佳烨",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "utilization_or_backlog",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE04",
+      "segment": "半导体封测",
+      "variable": "utilization_or_backlog",
+      "direction": "up",
+      "horizon": "未来2-3年",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "先进封装：盛合晶微、长电科技、通富微电、甬矽电子、汇成股份",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "missing_inputs": [
+        "国产算力对先进封装的需求弹性",
+        "通富微电在先进封装市场的份额"
+      ],
+      "known_kpe": {
+        "date": "2026-07-13T12:02",
+        "source": "stream_item:13356",
+        "source_type": "company_research_feedback",
+        "credibility": "company_research_private_hard_to_verify",
+        "decision_role": "probability/verification proxy",
+        "evidence": "🔥【开源电子】市场震荡之际，且... 🔥【开源电子】市场震荡之际，且看主线国产半导体 上游供给：先进产能瓶颈有望实质性改善 国内先进制程产能自今年起进入快速扩张期。南方自去年Q3转固以来已搬入两批设备，预计今年下半年将进行第三批导入，带动先进产能提升。 此外，上海、北京及深圳等多地先进制程产线正处于设备导入与拉通阶段，预计将在未来2-3年内释放显著的新增产能。 下游需求：国产化+Capex提升带动市场斜率陡峭提升 需求侧本土替代进入深水区。据彭博社调研，中国企业预计未来12个月内将把46%的AI加速器预算投向本土产品（当前约为30%）。叠加国内互联网大厂、运营商及智算中心Capex的强劲提升，国产算力芯片的有效市场规模预计在未来2-3年内迎来快速增长。 行业催化：WAIC大会召开在即、超节点集群密集亮相 本周末上海世界人工智能大会（WAIC）将提供密集产业催化。预计华为昇腾384、中兴、新华三、超聚变等核心厂商的超节点算力方案将集中亮相，展现国产算力跨越单芯瓶颈、实现系统级升维的工程化能力。 受益标的 ➢ 国产算力：寒武纪、芯原股份、沐曦股份、盛科通信、万通发展 ➢ Fab：中芯国际、华虹宏力、燕东微、晶合集成、华润微 ➢ 先进封装：盛合晶微、长电科技、通富微电、甬矽电子、汇成股份 ➢ 设备：华创、中微、拓荆、飞测、精测、微导、华峰、强一 ➢ 材料：江丰、雅克、鼎龙、安集、新阳、兴福、彤程、翰博高新 ☎️陈蓉芳/陈瑜熙/向俊儒/祁海超/陈凯",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "utilization_or_backlog",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE06",
+      "segment": "半导体封测",
+      "variable": "asp_or_price",
+      "direction": "up",
+      "horizon": "2H2026",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "先进封装：算力Chiplet、2.5D/3D先进封装需求维持高景气，行业企业扩产规划积极，板块上半年量利同步向好",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "missing_inputs": [
+        "先进封装ASP趋势",
+        "毛利率与ASP相关性"
+      ],
+      "known_kpe": {
+        "date": "2026-07-15T08:09",
+        "source": "stream_item:14402",
+        "source_type": "channel_check",
+        "credibility": "high_private_channel_hard_to_verify",
+        "decision_role": "probability/verification proxy",
+        "evidence": "【DW电子】每日观点：Q2预告... 【DW电子】每日观点：Q2预告小结 🔥PCB：AI驱动量价齐升，PCB产业链中报业绩全面高增 📌PCB板块中，沪电、深南、生益电子净利润同增约73%、62%、110%，Q2环增约35%、59%、49%；CCL板块生益科技、金安、南亚同增约125%、1000%、427%，Q2环增约76%、184%、107%。上游电子布宏和预告同增322%，产业链景气度传导顺畅。 📍展望下半年，PCB1.6T模块、Rubin、ASIC起量，新增产能陆续释放，业绩有望加速成长，建议特别关注PCB载板化方向上的深南电路。CCL板块建议聚焦关注M8/M9材料放量，同时关注上游电子布、铜箔等原材料环节在高端产品占比提升及加工费上涨背景下的盈利弹性。 🔥国产算力：Q2目前市场预期仍存在一定方差，但普遍环比Q1有一定改善。 📍国产算力板块没有发预告，但市场交易的点也不是在Q2业绩，我们看好国产链条26H2随着晶圆代工、封测等环节逐步拉通，有望逐季释放业绩，尤其是纯国产代工侧的业绩。我们看好26H2国产算力业绩主升浪。近期密集参加展会，产业普遍乐观，而且产业链的沟通交流以及上下游的耦合程度很高，下半年尤其要重视H链公司！ 🔥存储：利基存储涨价开始显现在业绩端，是“此前已涨价，涨价完整放映至Q2业绩”的 📌兆易创新Q2营收约73亿，归母净利润约54亿，扣非归母约35亿。扣非归母净利率达47%。江波龙Q2归母净利润53.38亿元至71.38亿元，环比增长38.22%至84.83%。德明利Q2利润环比略有下降。利基存储价格持续上涨，紧缺程度与涨价幅度MLC＞SLC＞利基DDR＞nor 📍海外原厂持续收缩利基存储产能，供给紧缺态势有望持续至27年。涨价&供给紧缺态势有望持续至27年底。Q2业绩披露后，利基存储明年利润逐渐清晰，考虑量不减/价增。至少可以按Q4利润×4线性外推 🔥模拟：工业/通信需求持续复苏，AI需求贡献增量；8英寸成熟产能满产。 📍海外TI已完成4轮涨价，覆盖面从中小客户扩大至所有客户，英飞凌、MPS大举跟进。模拟公司虽未披露预告，但Q2国内成熟代工端也同步涨价，景气程度仅次于存储。模拟料号中，我们核心看好Drmos大单品后续涨价趋势。Drmos龙头认准杰华特！目标1500e！ 🔥功率：工业需求好转叠加EV去库尾声，板块Q2业绩呈现边际改善 📌士兰微Q2归母净利润约3.10亿元，环比增长48.6%；斯达半导Q2营收约10.63亿元，环比增长23% 📍成本上涨正逐步向产品价格传导，随着调价落地，叠加800VDC方案加速渗透，看好相关公司后续业绩弹性。 🔥端侧：端侧板块二季度整体业绩表现亮眼，存储涨价对AIoT业务影响可控 📌瑞芯微26H1营收28.70-29.10亿元，yoy+40.28%-42.24%，归母净利润8.50-9.10亿元，yo...",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "asp_or_price",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unverified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "grounding_status": "unverified_quote"
+    },
+    {
+      "evidence_id": "KPE07",
+      "segment": "半导体封测",
+      "variable": "segment_volume",
+      "direction": "up",
+      "horizon": "2026H2",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "先进封装/Chiplet：华为韬定律V2强化后摩尔时代系统级优化，A股映射最清晰的是晶圆级封装、TSV、多层堆叠、封测与封装材料。重点看长电科技、通富微电、华天科技、晶方科技、甬矽电子、华海诚科、深科技。",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "missing_inputs": [
+        "先进封装业务量增长数据"
+      ],
+      "known_kpe": {
+        "date": "2026-07-14T14:11",
+        "source": "stream_item:13650",
+        "source_type": "channel_check",
+        "credibility": "high_private_channel_hard_to_verify",
+        "decision_role": "probability/verification proxy",
+        "evidence": "‼️【中报预告+AI硬件景气：... ‼️【中报预告+AI硬件景气：谁是下一个江波龙？】——山西证券 江波龙打出高度后，市场要问的不再是能不能追，而是扩散方向在哪。我们的判断——AI产业真正缺的不只是GPU，而是一整套硬件系统：存储决定吞吐、光模块决定通信、高端PCB决定互联、先进封装决定集成、上游材料决定成本边界。订单、价格、稼动率同步改善的环节，中报预告就是新催化！ 1）存储：涨价周期叠加AI终端与服务器需求，利润弹性最容易被预告验证。重点看德明利、佰维存储、香农芯创、兆易创新、北京君正、普冉股份； 2）先进封装/Chiplet：华为韬定律V2强化后摩尔时代系统级优化，A股映射最清晰的是晶圆级封装、TSV、多层堆叠、封测与封装材料。重点看长电科技、通富微电、华天科技、晶方科技、甬矽电子、华海诚科、深科技。 3）光模块：集群越大，瓶颈越从单卡性能转向网络通信，800G/1.6T/CPO/硅光是业绩兑现方向。重点看新易盛、中际旭创、天孚通信、光迅科技、华工科技、太辰光、剑桥科技、东山精密、联特科技。 4）高端PCB/AI服务器材料：弹性不及存储，确定性更强，容易走趋势。重点看沪电股份、胜宏科技、深南电路、生益科技、生益电子、景旺电子。 5）液冷：Rubin平台单GPU功耗2300W、单机柜200kW、强制全液冷——渗透率30%→60%的核心催化剂，平台出货节奏直接决定26H2液冷链订单可见度。重点看英维克、高澜股份、申菱环境、中石科技、思泉新材。 ☎️ 下周不要被低位轮动带偏，真正的主线只有一条：中报预告+AI硬件景气度！",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "segment_volume",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE08",
+      "segment": "半导体封测",
+      "variable": "asp_or_price",
+      "direction": "up",
+      "horizon": "长期",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "先进封装 长期行情... → 长电科技 / 通富微电 / 汇成股份 / 华天科技 / 甬矽电子",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "missing_inputs": [
+        "行业供需平衡表"
+      ],
+      "known_kpe": {
+        "date": "2026-07-14T08:46",
+        "source": "stream_item:13858",
+        "source_type": "sell_side_push",
+        "credibility": "promotional_private_unverified",
+        "decision_role": "narrative challenge",
+        "evidence": "长江科技｜AI势不可挡：从国产... 长江科技｜AI势不可挡：从国产大模型积极看好国产AI全面重估会议纪要 会议要点 1. 国产大模型行业发展趋势 • 核心发展阶段判断：当前国产大模型已跨过需求拐点，进入ROI逐步跑通、推理成本开始大于训练成本的阶段，后续将进入AI重塑场景的时代。 • 头部厂商战略方向：智谱发布内部信启动摸高计划，明确四大攻坚方向：长程任务、自治智能体系统、完全自我训练、极致安全治理，标志着国内大模型厂商从追赶海外转向自主探索模型技术高度，向AGI方向布局。 • 行业整体发展信心：包括智谱在内的国内大模型厂商对AI领域投入的信心和决心充足，行业发展趋势已明确且不可逆转。 • 头部厂商商业化进展： · 智谱已在港股完成约314亿港币的配售融资，资金投入算力后至少可对应10个以上B300万卡集群。 · 2025年智谱净亏损基本等同于研发费用，AI业务已贡献正向现金流，投入可通过推理收入覆盖并支撑后续增长。 · 智谱2026年3月末ARR已达2.5亿美金，年初时不足1亿美金，年初至今模型价格上涨接近一倍，当前量价齐升，年底10亿美金的ARR预期将被远超。 • 应用端渗透趋势： · 海外博通数据显示，资深工程师使用AI一周完成的芯片设计，传统模式需10名年薪30万美元的工程师耗时3个月，AI生产力提升ROI显著，企业端AI应用仍处于发展早期，工具价值随使用熟练度提升呈指数级增长。 · 国内企业已启动适配AI的组织架构改革：中控技术更换6位业务副总裁，新提拔3位核心高管以适配AI时代组织需求；税友股份也完成了AI核心业务、管理人员的更迭，标志着AI落地已进入企业组织调整的深层阶段。 2. 国产算力行业发展与投资机会 • 行业整体供需逻辑：头部大模型厂商ROI跑通带动算力投入意愿提升，叠加近期国产大模型、算力厂商港股配售融资补充资金，算力供给端投入有充足支撑，行业景气度拐点刚启动。 • 算力芯片板块： · 2026年算力芯片需求高斜率增长，供不应求状态加剧，更多国产算力芯片厂商进入AI核心环节实现规模化放量，订单规模达到历史新高，支撑营收和利润逐步释放。 · 2026年7月WAIC大会将迎来国产下一代算力芯片密集发布、送测周期；2027年将进入芯模共建阶段，模型需求反向促进芯片方案研发，国产算力芯片将从“可用”向“可用范围扩大、单位算力成本性价比拐点”跨越。 · 重点推荐标的： · 龙头标的：寒武纪（已拿到大量确定性订单）、海光（2026年实现大厂客户突破，郑州落地10万台算力集群已开始支撑AI核心公司，CPU业务存在预期差，复杂长任务占比提升将带动CPU需求增长）。 · 弹性标的：天数智芯、壁仞科技。 • 算力租赁板块： · 行业需求总量扩容：2026年除阿里、字节原有投入持续加大外，智谱、MiniMax、小红书、美团等新玩家进入，行业潜在TA...",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "asp_or_price",
+        "required_outcome": "model conflict result and accepted/rejected reason"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unverified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "grounding_status": "unverified_quote"
+    },
+    {
+      "evidence_id": "KPE09",
+      "segment": "半导体封测",
+      "variable": "utilization_or_backlog",
+      "direction": "up",
+      "horizon": "长期",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "配套封测：长电XDFOI、通富...",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "missing_inputs": [
+        "超节点对封测订单的具体拉动量"
+      ],
+      "known_kpe": {
+        "date": "2026-07-14T08:33",
+        "source": "stream_item:13870",
+        "source_type": "company_research_feedback",
+        "credibility": "company_research_private_hard_to_verify",
+        "decision_role": "probability/verification proxy",
+        "evidence": "国产超节点技术全解析 一、基... 国产超节点技术全解析 一、基础定义与核心价值 1.什么是超节点（SuperPoD） 超节点是整机柜级一体化高密度算力单元，区别于传统服务器简单堆叠：将32张及以上国产NPU/GPU/DCU加速卡，通过自研柜内高速互联、统一全局内存、原生液冷、集群调度软件深度耦合，逻辑上合并为一台“巨型超级计算芯片”。 2.国产超节点的核心解决三大算力瓶颈 1.通信墙：传统8卡服务器依赖PCIe/以太网，跨卡时延微秒级；国产自研互联总线达百纳秒级，带宽TB/s级别，是PCIe的10~50倍，MoE大模型All-to-All通信损耗下降60%+，集群算力利用率从30%提升至70%以上。 2.内存墙：全局统一显存编址，多卡显存池化为共享内存，解决大模型长序列KVCache内存不足痛点，无需频繁落盘交换数据。 3.功耗墙：单机柜功耗50~120kW，放弃风冷，冷板式液冷原生集成，支撑单卡2kW以上高功耗AI芯片稳定运行。 3.国产路线核心战略意义 在单芯片先进制程受限背景下，走出“系统级弯道超车”路径：单颗国产算力芯片性能与海外高端产品存在差距，但通过超节点集群架构、自研互联、整机协同优化，整套系统综合算力、训练效率可对标甚至超越英伟达NVL集群，是国内智算中心自主替代核心方案。 二、国产超节点五大核心底层技术栈 1.自研芯片直连互联总线（最核心壁垒） 各家推出替代NVLink的国产高速互联协议： 华为：HC（昇腾互联总线），昇腾910C/950DT全对等Mesh互联，单机柜384卡，集群最大扩展8192卡，全光互联总带宽16.3PB/s； 海光+曙光：HSL互联总线+scaleFabric柜内正交互联，支持DCU多卡无阻塞直连； 沐曦：MTLink，曦云GPU专用高速互联； 通用互联芯粒（奇异摩尔）：KiwiG2GIOD芯粒，基于UCIe标准，兼容所有国产XPU，单芯粒互联带宽2TBbps，开放通用互联底座，解决多厂商芯片兼容难题。 2.无线缆/正交高密度物理架构（曙光差异化路线） 中科曙光scaleX系列独创正交对插无线缆架构：计算节点与交换背板直接物理对接，取消柜内光纤、高速线缆，硬件部署简化80%，运维从小时级降至分钟级，单向通信时延＜100ns； 代表机型scaleX640单机柜集成640张AI卡，为全球商用机柜最高算力密度方案；轻量化scaleX40（40卡）面向中小企业普惠算力市场。 3.Chiplet芯粒异构集成支撑 国产超节点普遍结合芯粒技术分层突破： 1.计算芯粒：昇腾、海光、沐曦、清微可重构RPU； 2.互联芯粒：奇异摩尔KiwiIOD、昇腾Nimbus互联芯粒，将互联功能与计算解耦； 3.存储芯粒：3.5D堆叠近存计算（东方算芯DF1000），计算+DRAM垂直堆叠，访存带宽大幅提升； 配套封测：长电XDFOI、通富...",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "utilization_or_backlog",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE10",
+      "segment": "半导体封测",
+      "variable": "utilization_or_backlog",
+      "direction": "up",
+      "horizon": "2027+",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "AMD有意让通富为其在海外建设CoWoS-L产能，产能规划或有望达1万片/月。此计划市场无预期，按照每片8万、净利率30%计算，此计划有望为公司带来1000亿元市值增量。",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "missing_inputs": [
+        "CoWoS-L产能规划官方确认",
+        "海外产能建设资本开支计划",
+        "AMD CoWoS需求分配细节"
+      ],
+      "known_kpe": {
+        "date": "2026-07-14T14:15",
+        "source": "stream_item:13634",
+        "source_type": "sell_side_push",
+        "credibility": "promotional_private_unverified",
+        "decision_role": "narrative challenge",
+        "evidence": "各位领导，我们当前重点推荐通... 各位领导，我们当前重点推荐通富微电：AMD成为全球CoWos需求最大黑马，通富微电是全A最直接受益方。 1️⃣2027年，全球头部厂商的CoWoS需求如何分布？——AMD是最亮眼的黑马。 NV：122.2 万片（+57%） AMD：53.0万片（+308%） 博通：48.4 万片（+61%） 联发科：18.0 万片（+350%） AWS／Annapurna：9.0 万片（+45%） Marvell：6.4 万片（+276%） 创意：6.0 万片（+329%） AWS / 世芯：3.6 万片（+38%） 显然，AMD是所有CoWos需求方中最亮眼的黑马，其爆发式增长来自Venice服务器CPU+MI系列AI GPU持续放量。 一方面，Venice是AMD首款2nm Zen6服务器CPU，2026年仅小规模试产，2027年产能全面爬坡。另一方面，GPU条线，2026年AMD主力为MI300/MI350，产能有限；2027年旗舰MI455大规模量产，同样提升CoWoS需求。 2️⃣通富是AMD CoWoS需求最直接受益方，海外有望为AMD新增1万片/月CoWoS-L产能，大超预期 在AMD的CPU封测，公司已拿80%以上的份额；在MI系列的GPU领域，目前公司主要做OS环节，COW主要是台积电做，但AMD有意向将COWOS-L交由公司做。我们从产业了解到，目前AMD有意让通富为其在海外建设CoWoS-L产能，产能规划或有望达1万片/月。此计划市场无预期，按照每片8万、净利率30%计算，此计划有望为公司带来1000亿元市值增量。 3️⃣市值空间：翻倍以上 一方面，先考虑公司业绩（26年15-20亿元，27年20-25亿元），给27年30倍对应700亿元市值。 另一方面，再考虑海内外CoWoS产能规划（各1万片/月，对应合计1800亿元市值）。 综上，我们认为通富微电合理市值有望达2500亿元，当前有翻倍空间。 💐后续催化：二季度业绩强势，有望形成催化；下半年封测有望进一步涨价；7月22日AMD新品发布会",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "utilization_or_backlog",
+        "required_outcome": "model conflict result and accepted/rejected reason"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE05",
+      "segment": "半导体封测",
+      "variable": "segment_volume",
+      "direction": "unknown",
+      "horizon": "",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "quantification_status": "watch_no_model_change",
+      "grounding_status": "ledger_only",
+      "known_kpe": {
+        "date": "2026-07-15T09:41",
+        "source": "stream_item:14196",
+        "source_type": "sell_side_push",
+        "credibility": "identified_broker_private_text",
+        "decision_role": "narrative challenge",
+        "evidence": "【中信电子】超跌反弹买什么？ ... 【中信电子】超跌反弹买什么？ 近期科技板块波动增大，不改基本面下半年向好趋。国内自主可闭环趋势进一步明确，半导体设备、fab、国产算力自主可控链上行趋势均明确，同时全球AI趋势下的电源相关、PCB、存储也持续强劲，叠加二季报电子公司业绩强劲，同环比趋势明确加速，我们坚定看好板块后续表现。 [太阳]1 半导体：北方华创、屹唐股份、甬矽电子、晶合集成 晶圆厂扩产加速背景下，半导体设备订单确定性强，26、27年订单料持续爆发式增长，设备板块自前高回撤约22%，从短期回撤和基本面确定性角度，建议关注北方华创、屹唐股份、恒运昌、珂玛科技、富创精密等。封测公司随着先进封装扩产打开上行空间，同时受益台湾封测转单，关注甬矽电子、汇成股份。晶圆厂涨价持续推进，从涨价弹性角度，关注晶合集成。 [太阳]2 存储：北京君正、聚辰股份 Agent AI时代存力为核心，存储超级成长趋势不变，需求持续超预期，产能扩张瓶颈明确，预计供不应求将持续至2028年，26H2部分利基存储涨幅超主流，车规超消费类。存储涨价推荐北京君正（车规存储）、普冉股份（平面NAND）等；新品即将放量推荐聚辰股份（VPD新品）等。 [太阳]3 国产算力：寒武纪、壁仞科技、天数智芯 WAIC开幕在即，昇腾、天数、摩尔等多家国产算力厂商计划发布新产品或主题演讲，产业催化明确。展望H2,我们认为国产算力订单预期清晰度显著增强，供应链备货节奏加速，相关公司报表将显著改善。中上游环节首推中芯国际、华虹宏力，封测端推荐长电科技、通富微电、甬矽电子，设计继续首推寒武纪，关注其他头部厂商：天数智芯、壁仞科技、摩尔线程、沐曦股份，配套环节推荐华勤技术、伟测科技等。 [太阳]4 PCB：生益科技、南亚新材、沪电股份、深南电路 电子布的供应紧缺预计在26H2仍将持续，我们仍看好26Q3覆铜板的涨价及利润弹性，叠加AI CCL放量，关注生益科技和南亚新材。PCB头部公司27年PE已回落至20x左右，26H2新产能释放、下游加速拉货的增长动能将更为突出，同时载板紧缺和涨价也更为显著，我们看好板块的业绩上修。重点关注业绩确定性更强的沪电股份和深南电路。 [太阳]5 AI电源：三环集团、顺络电子、扬杰科技 AI电源需求持续释放，拉动相关品种量价齐升，其中1）mlcc：原厂涨价处于第一阶段，高端料号供需持续紧张，建议关注三环集团 风华高科；2）电感：tlvr等新方案推动价值量提升，建议关注顺络电子；3）功率器件：中低压产品交期持续拉长，H2仍有望迎来1-2轮涨价，建议关注新洁能 扬杰科技等。 [太阳]6 消费电子：立讯精密、水晶光电 我们预计26Q3消费级存储合约价环比上涨幅度明显收窄，手机、PC等传统硬件设备出货量有望H2见底，核心推荐主业果链或高端安卓收入占比高，积极布局AI相关新业务的公司立讯精...",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "segment_volume",
+        "required_outcome": "model conflict result and accepted/rejected reason"
+      },
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "disposition": "watch_unchanged",
+      "decision_outcome": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "missing_inputs": [
+        "baseline and revised operating assumption",
+        "unit and financial transmission inputs"
+      ]
+    }
+  ],
+  "known_kpe_ledger": {
+    "KPE01": {
+      "date": "2026-07-15T08:10",
+      "source": "stream_item:14399",
+      "source_type": "channel_check",
+      "credibility": "high_private_channel_hard_to_verify",
+      "decision_role": "probability/verification proxy",
+      "evidence": "7月14日晚间算力光通、半导体... 7月14日晚间算力光通、半导体封测、电子材料板块中报预告普遍超出市场预期，产业维持高景气度。 板块结构性分化明确：光纤、先进封测、高端电子材料标的业绩爆发大幅超预期；光模块龙头稳健兑现；综合通信、传统材料标的增长平稳。Q2普遍环比提速，验证行业需求持续上行 长飞光纤（大幅超预期） 中报归母净利24.00-30.00亿元，同比711%-914%，扣非净利20.00-26.00亿元，同比1349%-1784%。Q1净利4.95亿元，Q2单季19.05-25.05亿元，环比284%-405%。算力数据中心建设加速，海内外新型光纤需求高增，公司优化产品结构、拓展算力业务，扣非增速远超表观增速，业绩质量极佳，大幅超预期。 东山精密（小幅超预期） 中报净利29-30亿元，同比283%-296%，Q2环比61%-70%。消费电子、汽车零部件筑牢基本盘，光模块产能爬坡、新客户导入顺利，业务整合效应显现，数据中心投资收益增厚利润，整体小幅超预期。 剑桥科技（小幅超预期） 中报净利3.10-3.59亿元（已扣除汇兑损益2.02亿元，经营性净利5.12-5.61亿元），同比157%-197%，Q2环比62%-103%。高速光模块市场需求旺盛，订单及出货大幅增长，产品结构高端化带动毛利率显著上行，主业成长兑现，贴合预期上沿。 光迅科技（符合预期） 中报净利5.59-6.15亿元，同比50%-65.15%，Q2环比32%-56%。全球AI算力投资、国内云厂商数据中心建设拉动数通光模块需求，公司全场景产品体系充分受益，业绩稳健贴合预期。 山东玻纤（小幅超预期） 中报净利2338-3507万元，同比168%-302%，Q2环比31%-147%。玻纤纱量价齐升，叠加产品结构优化与精细化成本管控，盈利修复明显，小市值标的弹性充足，区间上沿超预期。 通富微电（大幅超预期） 中报净利16-18亿元，同比288.26%-336.80%，Q2环比286%-347%。AI算力+存储行业高景气，国产化提速，产能利用率上行，中高端产品占比提升，叠加费用管控与产业投资收益，Q2业绩爆发，大幅超预期。 宏和科技（显著超预期） 中报净利3.32-4.05亿元，同比280%-364%，Q2环比36%-89%。终端算力需求带动电子玻纤布涨价，公司聚焦稀缺高端超薄/极薄特种玻纤产品，产品结构优化驱动净利高增，显著超预期。 利通电子（大幅超预期） 中报净利6.50-7.50亿元，同比1173%-1368%，Q2环比39%-76%。算力经销业务高速增长，精密结构件业务亏损收窄，叠加股权投资公允变动及处置收益、低基数效应，业绩爆发，大幅超预期。 中天科技（符合预期） 中报净利23.52-25.08亿元，同比50%-60%，Q2环比55%-72%。AI新基建落地优化光纤光缆供需格局...",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "segment_volume",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE02": {
+      "date": "2026-07-15T08:08",
+      "source": "stream_item:14403",
+      "source_type": "company_research_feedback",
+      "credibility": "company_research_private_hard_to_verify",
+      "decision_role": "probability/verification proxy",
+      "evidence": "【广发机械】半导体设备跟踪：封... 【广发机械】半导体设备跟踪：封测厂业绩大增&CX上市在即，继续推荐半导体封测设备 长电&通富业绩大增，显示下游高景气度，受益于人工智能，继续强调半导体设备。 长电科技。2026年上半年实现归母净利润7.7~9.5亿元，同比+63.48%~+101.70%，同期实现扣非归母7.4~9.1亿元，同比+68.95%~+107.76%； 单看Q2，实现归母净利润4.8~6.6亿元，同比+79.4%~+146.7%，环比+65.3%~+127.3%，同期实现扣非归母4.8~6.5亿元，同比+94.4%~+164.0%，环比+79.7%~+144.0%。 通富微电。2026年上半年实现归母净利润16.0~18.0亿元，同比+288.26%~+336.80%，同期实现扣非归母7.0~8.0亿元，同比+66.49%~+90.28%； 单看Q2，实现归母净利润12.7~14.7亿元，同比+309.1%~+373.4%，环比+286.2~+347.0%，同期实现扣非归母5.3~6.3亿元，同比+67.1%~+98.7%，环比+207.9%~+266.1%。 继续强调半导体封测设备。长川科技、强一股份、华峰测控、精智达、联动科技、金海通以及精测电子、微导纳米、迈为股份等。 欢迎交流。 孙柏阳/汪家豪/王宁/许贝尔",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "profit_or_eps",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE03": {
+      "date": "2026-07-14T10:06",
+      "source": "stream_item:13766",
+      "source_type": "company_research_feedback",
+      "credibility": "company_research_private_hard_to_verify",
+      "decision_role": "probability/verification proxy",
+      "evidence": "🔴 【浙商AI战队】国产算力... 🔴 【浙商AI战队】国产算力：不仅仅看美股映射，更要看自自主路线、八个方向全面布局 ━━━ 八大投资方向 ━━━ ① 国产大模型 → 阿里巴巴 / 腾讯 / 字节 / 美团 / DeepSeek / 阶跃星辰 / 智谱 / MiniMax ② 云服务 → 互联网云：阿里巴巴 / 腾讯/字节 → 国有云：三大运营商 / 地方数据中心 ③ 算力芯片 :业绩逐步兑现。7nm产能逐步解决+CoWoS释放+HBM产能 → CPU：海光信息 / 鲲鹏（海光确定性最强） → GPU：华为昇腾 / 摩尔线程 / 寒武纪 / 壁仞 / 沐曦 / 燧原 ④ 国产存储 两存上市，自主可控 → 长鑫存储（DRAM配套产业链）/ 长江存储（NAND配套产业链） ⑤ 先进制程 未来上千万张GPU卡国内流片，需求极大 → 中芯国际 / 华虹宏力 / 燕东微 ⑥ 先进封装 长期行情，技术路线确定，十年投资方向 → 盛合晶微 / 长电科技 / 通富微电 / 汇成股份 / 华天科技 / 甬矽电子 ⑦ 设备 补足短板，只能自主制造 → 北方华创 / 中微公司 / 拓荆科技 / 新凯来 ⑧ 超节点 + 光芯片 超节点是必走方案 → 交换机：盛科通信 / 锐捷网络 / 紫光股份 / 澜起科技 / 曦智科技 → 光芯片：源杰科技 / 光迅科技 / 长光华芯 / 东山精密 / 中际旭创 → 国产算力反而是软硬件协同发展，利益分配格局合理，产业发展可持续 风险提示：半导体下游需求不及预期。 🔥伴随此轮调整，浙商AI战队会进一步加强股票跟踪力度，随时联系。浙商AI研究资源总协调：马莉/邱冠华 如对以上内容感兴趣欢迎联系对口销售及【浙商AI战队】中观策略：王杨/赵乾凯13968067416/王彦凯13616227982/何佳烨",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "utilization_or_backlog",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE04": {
+      "date": "2026-07-13T12:02",
+      "source": "stream_item:13356",
+      "source_type": "company_research_feedback",
+      "credibility": "company_research_private_hard_to_verify",
+      "decision_role": "probability/verification proxy",
+      "evidence": "🔥【开源电子】市场震荡之际，且... 🔥【开源电子】市场震荡之际，且看主线国产半导体 上游供给：先进产能瓶颈有望实质性改善 国内先进制程产能自今年起进入快速扩张期。南方自去年Q3转固以来已搬入两批设备，预计今年下半年将进行第三批导入，带动先进产能提升。 此外，上海、北京及深圳等多地先进制程产线正处于设备导入与拉通阶段，预计将在未来2-3年内释放显著的新增产能。 下游需求：国产化+Capex提升带动市场斜率陡峭提升 需求侧本土替代进入深水区。据彭博社调研，中国企业预计未来12个月内将把46%的AI加速器预算投向本土产品（当前约为30%）。叠加国内互联网大厂、运营商及智算中心Capex的强劲提升，国产算力芯片的有效市场规模预计在未来2-3年内迎来快速增长。 行业催化：WAIC大会召开在即、超节点集群密集亮相 本周末上海世界人工智能大会（WAIC）将提供密集产业催化。预计华为昇腾384、中兴、新华三、超聚变等核心厂商的超节点算力方案将集中亮相，展现国产算力跨越单芯瓶颈、实现系统级升维的工程化能力。 受益标的 ➢ 国产算力：寒武纪、芯原股份、沐曦股份、盛科通信、万通发展 ➢ Fab：中芯国际、华虹宏力、燕东微、晶合集成、华润微 ➢ 先进封装：盛合晶微、长电科技、通富微电、甬矽电子、汇成股份 ➢ 设备：华创、中微、拓荆、飞测、精测、微导、华峰、强一 ➢ 材料：江丰、雅克、鼎龙、安集、新阳、兴福、彤程、翰博高新 ☎️陈蓉芳/陈瑜熙/向俊儒/祁海超/陈凯",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "utilization_or_backlog",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE05": {
+      "date": "2026-07-15T09:41",
+      "source": "stream_item:14196",
+      "source_type": "sell_side_push",
+      "credibility": "identified_broker_private_text",
+      "decision_role": "narrative challenge",
+      "evidence": "【中信电子】超跌反弹买什么？ ... 【中信电子】超跌反弹买什么？ 近期科技板块波动增大，不改基本面下半年向好趋。国内自主可闭环趋势进一步明确，半导体设备、fab、国产算力自主可控链上行趋势均明确，同时全球AI趋势下的电源相关、PCB、存储也持续强劲，叠加二季报电子公司业绩强劲，同环比趋势明确加速，我们坚定看好板块后续表现。 [太阳]1 半导体：北方华创、屹唐股份、甬矽电子、晶合集成 晶圆厂扩产加速背景下，半导体设备订单确定性强，26、27年订单料持续爆发式增长，设备板块自前高回撤约22%，从短期回撤和基本面确定性角度，建议关注北方华创、屹唐股份、恒运昌、珂玛科技、富创精密等。封测公司随着先进封装扩产打开上行空间，同时受益台湾封测转单，关注甬矽电子、汇成股份。晶圆厂涨价持续推进，从涨价弹性角度，关注晶合集成。 [太阳]2 存储：北京君正、聚辰股份 Agent AI时代存力为核心，存储超级成长趋势不变，需求持续超预期，产能扩张瓶颈明确，预计供不应求将持续至2028年，26H2部分利基存储涨幅超主流，车规超消费类。存储涨价推荐北京君正（车规存储）、普冉股份（平面NAND）等；新品即将放量推荐聚辰股份（VPD新品）等。 [太阳]3 国产算力：寒武纪、壁仞科技、天数智芯 WAIC开幕在即，昇腾、天数、摩尔等多家国产算力厂商计划发布新产品或主题演讲，产业催化明确。展望H2,我们认为国产算力订单预期清晰度显著增强，供应链备货节奏加速，相关公司报表将显著改善。中上游环节首推中芯国际、华虹宏力，封测端推荐长电科技、通富微电、甬矽电子，设计继续首推寒武纪，关注其他头部厂商：天数智芯、壁仞科技、摩尔线程、沐曦股份，配套环节推荐华勤技术、伟测科技等。 [太阳]4 PCB：生益科技、南亚新材、沪电股份、深南电路 电子布的供应紧缺预计在26H2仍将持续，我们仍看好26Q3覆铜板的涨价及利润弹性，叠加AI CCL放量，关注生益科技和南亚新材。PCB头部公司27年PE已回落至20x左右，26H2新产能释放、下游加速拉货的增长动能将更为突出，同时载板紧缺和涨价也更为显著，我们看好板块的业绩上修。重点关注业绩确定性更强的沪电股份和深南电路。 [太阳]5 AI电源：三环集团、顺络电子、扬杰科技 AI电源需求持续释放，拉动相关品种量价齐升，其中1）mlcc：原厂涨价处于第一阶段，高端料号供需持续紧张，建议关注三环集团 风华高科；2）电感：tlvr等新方案推动价值量提升，建议关注顺络电子；3）功率器件：中低压产品交期持续拉长，H2仍有望迎来1-2轮涨价，建议关注新洁能 扬杰科技等。 [太阳]6 消费电子：立讯精密、水晶光电 我们预计26Q3消费级存储合约价环比上涨幅度明显收窄，手机、PC等传统硬件设备出货量有望H2见底，核心推荐主业果链或高端安卓收入占比高，积极布局AI相关新业务的公司立讯精...",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "segment_volume",
+      "required_outcome": "model conflict result and accepted/rejected reason"
+    },
+    "KPE06": {
+      "date": "2026-07-15T08:09",
+      "source": "stream_item:14402",
+      "source_type": "channel_check",
+      "credibility": "high_private_channel_hard_to_verify",
+      "decision_role": "probability/verification proxy",
+      "evidence": "【DW电子】每日观点：Q2预告... 【DW电子】每日观点：Q2预告小结 🔥PCB：AI驱动量价齐升，PCB产业链中报业绩全面高增 📌PCB板块中，沪电、深南、生益电子净利润同增约73%、62%、110%，Q2环增约35%、59%、49%；CCL板块生益科技、金安、南亚同增约125%、1000%、427%，Q2环增约76%、184%、107%。上游电子布宏和预告同增322%，产业链景气度传导顺畅。 📍展望下半年，PCB1.6T模块、Rubin、ASIC起量，新增产能陆续释放，业绩有望加速成长，建议特别关注PCB载板化方向上的深南电路。CCL板块建议聚焦关注M8/M9材料放量，同时关注上游电子布、铜箔等原材料环节在高端产品占比提升及加工费上涨背景下的盈利弹性。 🔥国产算力：Q2目前市场预期仍存在一定方差，但普遍环比Q1有一定改善。 📍国产算力板块没有发预告，但市场交易的点也不是在Q2业绩，我们看好国产链条26H2随着晶圆代工、封测等环节逐步拉通，有望逐季释放业绩，尤其是纯国产代工侧的业绩。我们看好26H2国产算力业绩主升浪。近期密集参加展会，产业普遍乐观，而且产业链的沟通交流以及上下游的耦合程度很高，下半年尤其要重视H链公司！ 🔥存储：利基存储涨价开始显现在业绩端，是“此前已涨价，涨价完整放映至Q2业绩”的 📌兆易创新Q2营收约73亿，归母净利润约54亿，扣非归母约35亿。扣非归母净利率达47%。江波龙Q2归母净利润53.38亿元至71.38亿元，环比增长38.22%至84.83%。德明利Q2利润环比略有下降。利基存储价格持续上涨，紧缺程度与涨价幅度MLC＞SLC＞利基DDR＞nor 📍海外原厂持续收缩利基存储产能，供给紧缺态势有望持续至27年。涨价&供给紧缺态势有望持续至27年底。Q2业绩披露后，利基存储明年利润逐渐清晰，考虑量不减/价增。至少可以按Q4利润×4线性外推 🔥模拟：工业/通信需求持续复苏，AI需求贡献增量；8英寸成熟产能满产。 📍海外TI已完成4轮涨价，覆盖面从中小客户扩大至所有客户，英飞凌、MPS大举跟进。模拟公司虽未披露预告，但Q2国内成熟代工端也同步涨价，景气程度仅次于存储。模拟料号中，我们核心看好Drmos大单品后续涨价趋势。Drmos龙头认准杰华特！目标1500e！ 🔥功率：工业需求好转叠加EV去库尾声，板块Q2业绩呈现边际改善 📌士兰微Q2归母净利润约3.10亿元，环比增长48.6%；斯达半导Q2营收约10.63亿元，环比增长23% 📍成本上涨正逐步向产品价格传导，随着调价落地，叠加800VDC方案加速渗透，看好相关公司后续业绩弹性。 🔥端侧：端侧板块二季度整体业绩表现亮眼，存储涨价对AIoT业务影响可控 📌瑞芯微26H1营收28.70-29.10亿元，yoy+40.28%-42.24%，归母净利润8.50-9.10亿元，yo...",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "asp_or_price",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE07": {
+      "date": "2026-07-14T14:11",
+      "source": "stream_item:13650",
+      "source_type": "channel_check",
+      "credibility": "high_private_channel_hard_to_verify",
+      "decision_role": "probability/verification proxy",
+      "evidence": "‼️【中报预告+AI硬件景气：... ‼️【中报预告+AI硬件景气：谁是下一个江波龙？】——山西证券 江波龙打出高度后，市场要问的不再是能不能追，而是扩散方向在哪。我们的判断——AI产业真正缺的不只是GPU，而是一整套硬件系统：存储决定吞吐、光模块决定通信、高端PCB决定互联、先进封装决定集成、上游材料决定成本边界。订单、价格、稼动率同步改善的环节，中报预告就是新催化！ 1）存储：涨价周期叠加AI终端与服务器需求，利润弹性最容易被预告验证。重点看德明利、佰维存储、香农芯创、兆易创新、北京君正、普冉股份； 2）先进封装/Chiplet：华为韬定律V2强化后摩尔时代系统级优化，A股映射最清晰的是晶圆级封装、TSV、多层堆叠、封测与封装材料。重点看长电科技、通富微电、华天科技、晶方科技、甬矽电子、华海诚科、深科技。 3）光模块：集群越大，瓶颈越从单卡性能转向网络通信，800G/1.6T/CPO/硅光是业绩兑现方向。重点看新易盛、中际旭创、天孚通信、光迅科技、华工科技、太辰光、剑桥科技、东山精密、联特科技。 4）高端PCB/AI服务器材料：弹性不及存储，确定性更强，容易走趋势。重点看沪电股份、胜宏科技、深南电路、生益科技、生益电子、景旺电子。 5）液冷：Rubin平台单GPU功耗2300W、单机柜200kW、强制全液冷——渗透率30%→60%的核心催化剂，平台出货节奏直接决定26H2液冷链订单可见度。重点看英维克、高澜股份、申菱环境、中石科技、思泉新材。 ☎️ 下周不要被低位轮动带偏，真正的主线只有一条：中报预告+AI硬件景气度！",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "segment_volume",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE08": {
+      "date": "2026-07-14T08:46",
+      "source": "stream_item:13858",
+      "source_type": "sell_side_push",
+      "credibility": "promotional_private_unverified",
+      "decision_role": "narrative challenge",
+      "evidence": "长江科技｜AI势不可挡：从国产... 长江科技｜AI势不可挡：从国产大模型积极看好国产AI全面重估会议纪要 会议要点 1. 国产大模型行业发展趋势 • 核心发展阶段判断：当前国产大模型已跨过需求拐点，进入ROI逐步跑通、推理成本开始大于训练成本的阶段，后续将进入AI重塑场景的时代。 • 头部厂商战略方向：智谱发布内部信启动摸高计划，明确四大攻坚方向：长程任务、自治智能体系统、完全自我训练、极致安全治理，标志着国内大模型厂商从追赶海外转向自主探索模型技术高度，向AGI方向布局。 • 行业整体发展信心：包括智谱在内的国内大模型厂商对AI领域投入的信心和决心充足，行业发展趋势已明确且不可逆转。 • 头部厂商商业化进展： · 智谱已在港股完成约314亿港币的配售融资，资金投入算力后至少可对应10个以上B300万卡集群。 · 2025年智谱净亏损基本等同于研发费用，AI业务已贡献正向现金流，投入可通过推理收入覆盖并支撑后续增长。 · 智谱2026年3月末ARR已达2.5亿美金，年初时不足1亿美金，年初至今模型价格上涨接近一倍，当前量价齐升，年底10亿美金的ARR预期将被远超。 • 应用端渗透趋势： · 海外博通数据显示，资深工程师使用AI一周完成的芯片设计，传统模式需10名年薪30万美元的工程师耗时3个月，AI生产力提升ROI显著，企业端AI应用仍处于发展早期，工具价值随使用熟练度提升呈指数级增长。 · 国内企业已启动适配AI的组织架构改革：中控技术更换6位业务副总裁，新提拔3位核心高管以适配AI时代组织需求；税友股份也完成了AI核心业务、管理人员的更迭，标志着AI落地已进入企业组织调整的深层阶段。 2. 国产算力行业发展与投资机会 • 行业整体供需逻辑：头部大模型厂商ROI跑通带动算力投入意愿提升，叠加近期国产大模型、算力厂商港股配售融资补充资金，算力供给端投入有充足支撑，行业景气度拐点刚启动。 • 算力芯片板块： · 2026年算力芯片需求高斜率增长，供不应求状态加剧，更多国产算力芯片厂商进入AI核心环节实现规模化放量，订单规模达到历史新高，支撑营收和利润逐步释放。 · 2026年7月WAIC大会将迎来国产下一代算力芯片密集发布、送测周期；2027年将进入芯模共建阶段，模型需求反向促进芯片方案研发，国产算力芯片将从“可用”向“可用范围扩大、单位算力成本性价比拐点”跨越。 · 重点推荐标的： · 龙头标的：寒武纪（已拿到大量确定性订单）、海光（2026年实现大厂客户突破，郑州落地10万台算力集群已开始支撑AI核心公司，CPU业务存在预期差，复杂长任务占比提升将带动CPU需求增长）。 · 弹性标的：天数智芯、壁仞科技。 • 算力租赁板块： · 行业需求总量扩容：2026年除阿里、字节原有投入持续加大外，智谱、MiniMax、小红书、美团等新玩家进入，行业潜在TA...",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "asp_or_price",
+      "required_outcome": "model conflict result and accepted/rejected reason"
+    },
+    "KPE09": {
+      "date": "2026-07-14T08:33",
+      "source": "stream_item:13870",
+      "source_type": "company_research_feedback",
+      "credibility": "company_research_private_hard_to_verify",
+      "decision_role": "probability/verification proxy",
+      "evidence": "国产超节点技术全解析 一、基... 国产超节点技术全解析 一、基础定义与核心价值 1.什么是超节点（SuperPoD） 超节点是整机柜级一体化高密度算力单元，区别于传统服务器简单堆叠：将32张及以上国产NPU/GPU/DCU加速卡，通过自研柜内高速互联、统一全局内存、原生液冷、集群调度软件深度耦合，逻辑上合并为一台“巨型超级计算芯片”。 2.国产超节点的核心解决三大算力瓶颈 1.通信墙：传统8卡服务器依赖PCIe/以太网，跨卡时延微秒级；国产自研互联总线达百纳秒级，带宽TB/s级别，是PCIe的10~50倍，MoE大模型All-to-All通信损耗下降60%+，集群算力利用率从30%提升至70%以上。 2.内存墙：全局统一显存编址，多卡显存池化为共享内存，解决大模型长序列KVCache内存不足痛点，无需频繁落盘交换数据。 3.功耗墙：单机柜功耗50~120kW，放弃风冷，冷板式液冷原生集成，支撑单卡2kW以上高功耗AI芯片稳定运行。 3.国产路线核心战略意义 在单芯片先进制程受限背景下，走出“系统级弯道超车”路径：单颗国产算力芯片性能与海外高端产品存在差距，但通过超节点集群架构、自研互联、整机协同优化，整套系统综合算力、训练效率可对标甚至超越英伟达NVL集群，是国内智算中心自主替代核心方案。 二、国产超节点五大核心底层技术栈 1.自研芯片直连互联总线（最核心壁垒） 各家推出替代NVLink的国产高速互联协议： 华为：HC（昇腾互联总线），昇腾910C/950DT全对等Mesh互联，单机柜384卡，集群最大扩展8192卡，全光互联总带宽16.3PB/s； 海光+曙光：HSL互联总线+scaleFabric柜内正交互联，支持DCU多卡无阻塞直连； 沐曦：MTLink，曦云GPU专用高速互联； 通用互联芯粒（奇异摩尔）：KiwiG2GIOD芯粒，基于UCIe标准，兼容所有国产XPU，单芯粒互联带宽2TBbps，开放通用互联底座，解决多厂商芯片兼容难题。 2.无线缆/正交高密度物理架构（曙光差异化路线） 中科曙光scaleX系列独创正交对插无线缆架构：计算节点与交换背板直接物理对接，取消柜内光纤、高速线缆，硬件部署简化80%，运维从小时级降至分钟级，单向通信时延＜100ns； 代表机型scaleX640单机柜集成640张AI卡，为全球商用机柜最高算力密度方案；轻量化scaleX40（40卡）面向中小企业普惠算力市场。 3.Chiplet芯粒异构集成支撑 国产超节点普遍结合芯粒技术分层突破： 1.计算芯粒：昇腾、海光、沐曦、清微可重构RPU； 2.互联芯粒：奇异摩尔KiwiIOD、昇腾Nimbus互联芯粒，将互联功能与计算解耦； 3.存储芯粒：3.5D堆叠近存计算（东方算芯DF1000），计算+DRAM垂直堆叠，访存带宽大幅提升； 配套封测：长电XDFOI、通富...",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "utilization_or_backlog",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE10": {
+      "date": "2026-07-14T14:15",
+      "source": "stream_item:13634",
+      "source_type": "sell_side_push",
+      "credibility": "promotional_private_unverified",
+      "decision_role": "narrative challenge",
+      "evidence": "各位领导，我们当前重点推荐通... 各位领导，我们当前重点推荐通富微电：AMD成为全球CoWos需求最大黑马，通富微电是全A最直接受益方。 1️⃣2027年，全球头部厂商的CoWoS需求如何分布？——AMD是最亮眼的黑马。 NV：122.2 万片（+57%） AMD：53.0万片（+308%） 博通：48.4 万片（+61%） 联发科：18.0 万片（+350%） AWS／Annapurna：9.0 万片（+45%） Marvell：6.4 万片（+276%） 创意：6.0 万片（+329%） AWS / 世芯：3.6 万片（+38%） 显然，AMD是所有CoWos需求方中最亮眼的黑马，其爆发式增长来自Venice服务器CPU+MI系列AI GPU持续放量。 一方面，Venice是AMD首款2nm Zen6服务器CPU，2026年仅小规模试产，2027年产能全面爬坡。另一方面，GPU条线，2026年AMD主力为MI300/MI350，产能有限；2027年旗舰MI455大规模量产，同样提升CoWoS需求。 2️⃣通富是AMD CoWoS需求最直接受益方，海外有望为AMD新增1万片/月CoWoS-L产能，大超预期 在AMD的CPU封测，公司已拿80%以上的份额；在MI系列的GPU领域，目前公司主要做OS环节，COW主要是台积电做，但AMD有意向将COWOS-L交由公司做。我们从产业了解到，目前AMD有意让通富为其在海外建设CoWoS-L产能，产能规划或有望达1万片/月。此计划市场无预期，按照每片8万、净利率30%计算，此计划有望为公司带来1000亿元市值增量。 3️⃣市值空间：翻倍以上 一方面，先考虑公司业绩（26年15-20亿元，27年20-25亿元），给27年30倍对应700亿元市值。 另一方面，再考虑海内外CoWoS产能规划（各1万片/月，对应合计1800亿元市值）。 综上，我们认为通富微电合理市值有望达2500亿元，当前有翻倍空间。 💐后续催化：二季度业绩强势，有望形成催化；下半年封测有望进一步涨价；7月22日AMD新品发布会",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "utilization_or_backlog",
+      "required_outcome": "model conflict result and accepted/rejected reason"
+    }
+  },
+  "sell_side_intelligence": [
+    {
+      "intelligence_id": "KSI01",
+      "kpe_ids": "KPE06",
+      "published_at": "2026-07-15T08:09",
+      "institution": "机构未识别",
+      "analyst_or_author": "纪要小能手",
+      "freshness": "高时效/1天",
+      "rating_signal": "未披露",
+      "forecast_facts": "全志科技披露半年预告，扣非净利4.35-4.65亿元，yoy+222.46%-244.70%，公司通过产品调价对冲上游原材料成本压力，AI硬件、平板产品线持续放量 📍板块内AIoT与传统消费电子业务景气度分化，下半年端侧芯片企业有望延续高增态势，重点跟踪终端爆款落地节奏，板块或存在整体性行情机会 🔥先进封装：算力Chiplet、2.5D/3D先进封装需求维持高景气，行业企业扩产规划积极，板块上半年量利同步向好 📌通富微电26H1归母净利润16-18亿元，yoy+288.26%-336.8%，业绩落地符合前期乐观预判",
+      "valuation_facts": "未提取到目标价/估值方法与倍数",
+      "normalized_points": "无可标准化数值",
+      "revision_signal": "窗口内首次识别，暂无同机构前序可比",
+      "source_quote": "【DW电子】每日观点：Q2预告... 【DW电子】每日观点：Q2预告小结 🔥PCB：AI驱动量价齐升，PCB产业链中报业绩全面高增 📌PCB板块中，沪电、深南、生益电子净利润同增约73%、62%、110%，Q2环增约35%、59%、49%；CCL板块生益科技、金安、南亚同增约125%、1000%、427%，Q2环增约76%、184%、107%。上游电子布宏和预告同增322%，产业链景气度传导顺畅。 📍展望下半年，PCB1.6T模块、Rubin、ASIC起量，新增产能陆续释放，业绩有望加速成长，建议特别关注PCB载板化方向上的深南电路。CCL板块建议聚焦关注M8/M9材料放量，同时关注上游电子布、铜箔等原材料环节在高端产品占比提升及加工费上涨背景下的盈利弹性。 🔥国产算力：Q2目前市场预期仍存在一定方差，但普遍环比Q1有一定改善。 📍国产算力板块没有发预告，但市场交易的点也不是在Q2业绩，我们看好国产链条26H2随着晶圆代工..."
+    }
+  ],
+  "preprocessing_notes": [
+    "No segment revenue breakdown available; all evidence treats the company as a single operating segment. Advanced packaging prospects are inferred from industry trends and company R&D disclosures, not from reported segment data.",
+    "Private proxy KPE01 and KPE02 provide H1 2026 net profit guidance range; baseline expectations are not provided in supplied evidence, so baseline_value left null.",
+    "KPE10 contains an unverified CoWoS capacity plan that could materially impact long-term valuation but lacks company confirmation; flagged as a narrative challenge.",
+    "Peer comparison shows target has high PE TTM (82.6) vs peers, but forward earnings using H1 guidance would normalize; no conflict filed as market may be pricing in growth.",
+    "No commodity price exposure found for this equity; not a raw material price-sensitive thesis.",
+    "KSI01 (DW电子 daily view) confirms H1 guidance consistency with KPE01/02; no separate hypothesis created as it adds no new numerical inputs.",
+    "Inventory-to-revenue ratio increased 2.69pp YoY in Q1 2026 (16.08%), suggesting possible inventory build; monitor for demand sustainability."
+  ],
+  "underwriting_packet": {
+    "schema_version": 2,
+    "symbol": "002156.SZ",
+    "as_of_date": "2026-07-16",
+    "forecast_years": [
+      "2026E",
+      "2027E",
+      "2028E"
+    ],
+    "research_readiness": "partial",
+    "readiness_reasons": [
+      "Diluted share count not reported or derivable from supplied evidence; EPS and per-share valuation remain unresolved.",
+      "No segment-level revenue or margin disclosure for advanced packaging vs. legacy packaging; product mix assumptions are analytical only.",
+      "Cash flow statements not included in evidence; OCF, capex, and FCF derived from indirect indicators (OCF/net profit ratio, CIP growth) remain provisional.",
+      "KPE evidence (H1 2026 profit guidance) is unverified private proxy; baseline consensus missing, so model uses midpoint 17 bn CNY.",
+      "CoWoS capacity plan (KPE10) is unconfirmed by the company; placed in optionality bucket, not base case.",
+      "One or more filing-reported segments required deterministic restoration.",
+      "Material segment three-year driver lines are missing: 半导体封测",
+      "Bull/base/bear per-share valuation is incomplete.",
+      "Valuation has not closed from mutually exclusive buckets to per-share fair value.",
+      "Three-year values remain missing for consolidated line(s): Revenue, Gross Margin, Operating Profit, Parent Net Profit, EPS, Operating Cash Flow, CapEx, Free Cash Flow"
+    ],
+    "company_model": {
+      "model_profile": "corporate",
+      "operating_model_family": "volume_price_cost",
+      "business_archetype": "Semiconductor assembly and test service provider combining high-R&D technology (advanced packaging) and high-volume manufacturing; core economics driven by capacity, utilization, volume, ASP, input costs, product mix, and capex/ROIC.",
+      "value_proposition_and_customers": "Provides integrated circuit packaging and testing services, primarily for global fabless semiconductor companies. AMD is the anchor customer (>80% share of AMD's related products), supplemented by domestic analog, automotive, and IoT chip designers. Advanced packaging (Chiplet, 2.5D/3D, fan-out, Cu pillar bump) captures AI and HPC demand.",
+      "revenue_equation": "Revenue = Σ (Packaging volume_k x ASP_k) + testing service revenue + minor mold/material sales. ASP increases with higher-end packaging (advanced vs. traditional), and volume is gated by capacity and utilization.",
+      "profit_equation": "Gross profit = Revenue - (direct materials, labor, depreciation, electricity, subcontracting). Operating profit = Gross profit - R&D - SG&A. Recent operating leverage driven by utilization improvement, mix shift to advanced packaging, and cost control. Net profit includes investment income, government grants, and forex gains/losses.",
+      "cash_flow_equation": "OCF = Net income + depreciation/amortization ± working capital changes. Historically OCF/Net profit >2.5x, indicating strong depreciation add-back and moderate working-capital management. FCF = OCF - capex (primarily facility expansion in Penang and domestic advanced lines).",
+      "capital_intensity_and_reinvestment": "Capex intensive: requires continuous investment in cleanrooms, equipment (bumping, wafer-level, flip-chip, testers). Construction in progress rose 31.95% YoY in Q1 2026 to CNY 4.1 bn, signaling major capacity expansion. ROIC will improve if new capacity ramps with high utilization.",
+      "diluted_share_count_mn": null,
+      "share_count_period": "",
+      "share_count_evidence_id": "",
+      "share_count_source_type": "unresolved",
+      "share_count_formula": "Cannot derive: market cap / price unknown, total_share from Tushare not provided, parent profit / EPS unreliable.",
+      "share_count_cross_checks": [
+        "Market cap / closing price (price missing)",
+        "Tushare total_share (not in evidence)",
+        "Parent profit / reported EPS (EPS not supplied)"
+      ],
+      "moat_mechanisms": [
+        "Deep customer lock-in with AMD through joint-venture and co-located facilities (Penang), high switching costs and qualification barriers.",
+        "Scale and technology leadership in advanced packaging (Chiplet, fan-out, 2.5D) creating a cost and performance advantage over smaller OSATs.",
+        "Dual supply chain (China + Malaysia) provides geopolitical diversification and tariff resilience."
+      ],
+      "moat_to_financial_transmission": [
+        "AMD lock-in → stable volume commitments and share of wallet → high capacity utilization → fixed-cost absorption → margin expansion.",
+        "Advanced packaging premium → higher ASP and gross margin → incremental EBITDA drop-through.",
+        "Scale and learning curve → lower unit cost → ability to invest in next-gen while peers fall behind."
+      ],
+      "structural_risks": [
+        "Single-customer concentration (>80% of certain products from AMD); any shift in AMD's sourcing strategy or product cycle miss would severely impact revenue.",
+        "Geopolitical risk: export controls could limit equipment/technology access, especially for advanced nodes used by AMD.",
+        "Foreign exchange exposure: ~66.6% export sales, mostly USD-denominated; rapid RMB appreciation would compress CNY revenues.",
+        "Capex-heavy model produces high fixed costs; underutilization during a downturn would hurt margins and ROIC.",
+        "Intense competition from TSMC (in-house CoWoS), ASE, JCET in advanced packaging, and potential entry by Chinese state-backed players."
+      ],
+      "key_unknowns": [
+        "Revenue and margin split by packaging type (traditional vs. advanced) not disclosed.",
+        "CoWoS-L capacity plan and AMD allocation not confirmed by company.",
+        "Effective tax rate for 2026-2028 (varies with subsidiary mix, government incentives).",
+        "Diluted share count after potential private placement approved in July 2026.",
+        "Normalized OCF and capex trajectory absent full cash flow statements."
+      ],
+      "evidence_ids": [
+        "EV013",
+        "EV014",
+        "EV017",
+        "EV030",
+        "EV031",
+        "EV034",
+        "KPE01",
+        "KPE02",
+        "EV085"
+      ]
+    },
+    "business_unit_map": [
+      {
+        "unit_id": "IC_OSAT",
+        "unit_name": "集成电路封装测试",
+        "unit_type": "reported_segment",
+        "disclosure_basis": "reported",
+        "parent_unit": "company",
+        "economic_role": "Core revenue and profit engine; provides packaging and testing services to semiconductor companies.",
+        "revenue_driver_equation": "Volume (wafers or units) × ASP × (mix toward advanced packaging) + testing service revenue.",
+        "profit_driver_equation": "Gross margin = (ASP - unit cost)/ASP; unit cost = materials + labor + depreciation + energy; operating profit = gross profit - R&D - SG&A.",
+        "cash_and_capital_equation": "OCF = EBITDA ± working capital; capex mainly for cleanroom and equipment; FCF supports dividends and debt reduction.",
+        "reported_metrics": [
+          "revenue",
+          "gross margin",
+          "operating margin",
+          "net margin"
+        ],
+        "evidence_ids": [
+          "EV013",
+          "EV014",
+          "EV015",
+          "EV030",
+          "EV036"
+        ],
+        "missing_inputs": [
+          "Packaging vs. testing revenue split",
+          "Advanced packaging revenue share and ASP trend",
+          "Capacity utilization percentage"
+        ],
+        "next_verification": "2026 semi-annual report for segment mix and capacity utilization commentary."
+      },
+      {
+        "unit_id": "MOLD_MATERIAL_SALES",
+        "unit_name": "模具及材料销售等",
+        "unit_type": "reported_segment",
+        "disclosure_basis": "reported",
+        "parent_unit": "company",
+        "economic_role": "Ancillary revenue from mold and material sales, likely minor and linked to internal tooling; not a primary profit driver.",
+        "revenue_driver_equation": "Negligible; tied to internal needs.",
+        "profit_driver_equation": "Negligible margin contribution.",
+        "cash_and_capital_equation": "N/A",
+        "reported_metrics": [
+          "revenue"
+        ],
+        "evidence_ids": [
+          "EV036",
+          "EV037"
+        ],
+        "missing_inputs": [
+          "Gross margin for mold/material sales"
+        ],
+        "next_verification": ""
+      },
+      {
+        "unit_id": "BU05",
+        "unit_name": "半导体封测",
+        "unit_type": "reported_segment",
+        "disclosure_basis": "reported",
+        "parent_unit": "company",
+        "economic_role": "Filing segment restored after structured evidence reconciliation.",
+        "revenue_driver_equation": "",
+        "profit_driver_equation": "",
+        "cash_and_capital_equation": "",
+        "reported_metrics": [],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "economic sub-unit driver equations require analyst completion"
+        ],
+        "next_verification": ""
+      }
+    ],
+    "segment_models": [
+      {
+        "segment": "集成电路封装测试",
+        "products_or_services": "Full range of IC packaging (DIP, SOP, QFP, advanced: Chiplet, 2.5D/3D, fan-out, flip-chip, CPO) and testing (wafer probing, final test).",
+        "customers_and_channel": "Primarily global fabless IDM/design houses; AMD largest customer (>80% share for related products), followed by domestic analog, power, and IoT chip makers. Direct sales, joint-venture model with AMD in Penang.",
+        "revenue_weight_pct": 97.6,
+        "profit_weight_pct": 100.0,
+        "base_period": "FY2025",
+        "base_revenue_value": 27248.0,
+        "base_revenue_unit": "CNY mn",
+        "base_revenue_growth_pct": 18.89,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [
+          "AI training/inference driving advanced packaging demand for GPU/CPU.",
+          "AMD product cycle: Venice CPU, MI300/MI350/MI455 GPU ramps.",
+          "Domestic substitution in analog, automotive, and IoT driving legacy packaging volumes.",
+          "Hyperscaler capex into data center infrastructure."
+        ],
+        "industry_supply_and_capacity": "TSMC dominates CoWoS supply; OSATs (ASE, JCET, TFMC) compete for overflow and lower-tier advanced packaging. Domestic advanced packaging capacity expanding rapidly with government support. Supply still tight for high-end advanced packaging.",
+        "volume_share_utilization": "Company claims leading position as AMD's top OSAT, likely >50% share of AMD CPU/GPU packaging. Penang facility expansion (bumping, wafer test) will increase capacity. Utilization improving as demand outstrips capacity.",
+        "price_asp_take_rate": "ASP rising due to mix shift toward advanced packaging (Chiplet, 2.5D). Company indicates periodic price adjustments based on market supply/demand and input cost inflation.",
+        "unit_cost_and_input_prices": "Key inputs: substrates, leadframes, gold wire, molding compound, equipment depreciation. Gold price affects wire bonding cost; substrate supply constrained. Depreciation cost rising with new capacity.",
+        "margin_and_operating_leverage": "Gross margin Q1 2026 13.32%, +0.13pp YoY; operating margin 6.28%, +2.90pp YoY, showing strong fixed-cost absorption and mix benefit. Further margin expansion expected with advanced packaging ramp, but limited by depreciation step-up.",
+        "working_capital_and_cash_conversion": "OCF/Net profit 2.86x in Q1 2026, driven by high depreciation and moderate working capital. Inventory/revenue +2.69pp YoY, possibly reflecting pre-build for new orders; receivables/revenue -2.0pp, showing improved collections.",
+        "prosperity_level": "high",
+        "marginal_direction": "up",
+        "causal_analysis": "Demand exceeding supply for advanced packaging, driven by AI and domestic substitution. TFMC benefits from AMD's 2027 CoWoS demand surge and domestic customer ramp. Capacity expansion is on track, and margin improvement likely through 2027 as new facilities reach scale.",
+        "valuation_treatment": "Core earnings: value on forward P/E or EV/EBITDA, adjusting for capacity build cycle. CoWoS optionality: separate bucket pending company confirmation.",
+        "strongest_counterevidence": [
+          "KPE10: CoWoS plan unconfirmed by company.",
+          "EV085: Company explicitly states no business with NVIDIA, limiting AI-related packaging breadth.",
+          "Q1 2026 inventory/revenue ratio up 2.69pp YoY, possible demand-signal weakness if orders do not materialize.",
+          "Export share 66.6% creates forex and geopolitical risks."
+        ],
+        "evidence_ids": [
+          "EV013",
+          "EV014",
+          "EV017",
+          "EV030",
+          "KPE01",
+          "KPE02",
+          "EV085"
+        ],
+        "missing_inputs": [
+          "Advanced packaging revenue and margin split",
+          "CapEx and FCF historical series",
+          "Exact capacity and utilization data",
+          "Product-level ASP trend"
+        ],
+        "next_verification": "2026 semi-annual report for segment disclosure and guidance; AMD quarterly earnings call for Venice/MI ramp."
+      },
+      {
+        "segment": "模具及材料销售等",
+        "products_or_services": "Molds and materials sold externally, likely related to packaging tooling.",
+        "customers_and_channel": "Other OSATs or PCB assembly.",
+        "revenue_weight_pct": 2.4,
+        "profit_weight_pct": 0.0,
+        "base_period": "FY2025",
+        "base_revenue_value": 674.0,
+        "base_revenue_unit": "CNY mn",
+        "base_revenue_growth_pct": -30.04,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [
+          "Dependent on industry capex and TFMC's own expansion."
+        ],
+        "industry_supply_and_capacity": "Niche.",
+        "volume_share_utilization": "Small scale, not material.",
+        "price_asp_take_rate": "Commodity-like.",
+        "unit_cost_and_input_prices": "Steel, plastics.",
+        "margin_and_operating_leverage": "Break-even contributor.",
+        "working_capital_and_cash_conversion": "Negligible.",
+        "prosperity_level": "neutral",
+        "marginal_direction": "stable",
+        "causal_analysis": "Non-core; follow overall industry capex.",
+        "valuation_treatment": "Excluded from core valuation as immaterial.",
+        "strongest_counterevidence": [],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "Gross margin, cash contribution"
+        ],
+        "next_verification": ""
+      },
+      {
+        "segment": "半导体封测",
+        "products_or_services": "",
+        "customers_and_channel": "",
+        "revenue_weight_pct": 100.0,
+        "profit_weight_pct": null,
+        "base_period": "2025年度/2026Q1",
+        "base_revenue_value": 27921424656.15,
+        "base_revenue_unit": "CNY",
+        "base_revenue_growth_pct": 16.92,
+        "base_margin_pct": 13.3247,
+        "base_margin_change_pp": 0.13,
+        "demand_and_order_drivers": [],
+        "industry_supply_and_capacity": "",
+        "volume_share_utilization": "",
+        "price_asp_take_rate": "",
+        "unit_cost_and_input_prices": "",
+        "margin_and_operating_leverage": "",
+        "working_capital_and_cash_conversion": "",
+        "prosperity_level": "evidence_limited",
+        "marginal_direction": "unknown",
+        "causal_analysis": "",
+        "valuation_treatment": "evidence_limited",
+        "strongest_counterevidence": [],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "LLM omitted a filing-reported material segment"
+        ],
+        "next_verification": ""
+      }
+    ],
+    "underwriting_questions": [
+      {
+        "question_id": "Q1",
+        "question": "What is the exact advanced packaging revenue contribution and margin profile vs. legacy packaging?",
+        "why_it_matters": "The bull case heavily depends on mix shift to high-ASP, high-margin advanced packaging (Chiplet, 2.5D). Without segment data, EPS sensitivity to product mix cannot be validated.",
+        "current_answer": "Unresolved; company does not disclose packaging type split.",
+        "bull_evidence": [
+          "Q1 2026 operating margin up 2.9pp suggests mix improvement.",
+          "Investor interaction confirms focus on fan-out, 2.5D packaging."
+        ],
+        "bear_evidence": [
+          "Gross margin only 13.32%, still low, might indicate legacy packaging dominates.",
+          "Semi-annual report might not break out advanced packaging share."
+        ],
+        "decisive_model_variables": [
+          "segment_volume",
+          "asp_or_price",
+          "segment_margin"
+        ],
+        "affected_financial_lines": [
+          "Revenue mix",
+          "Gross margin",
+          "Operating profit",
+          "EPS"
+        ],
+        "evidence_ids": [
+          "EV013",
+          "EV014",
+          "EV085"
+        ],
+        "missing_evidence": [
+          "Advanced packaging revenue % and gross margin",
+          "Traditional packaging margin"
+        ],
+        "next_verification": "2026 semi-annual report; direct inquiry with IR."
+      },
+      {
+        "question_id": "Q2",
+        "question": "Will AMD allocate CoWoS-L volume to TFMC, and at what scale?",
+        "why_it_matters": "KPE10 claims 1k wpm CoWoS-L capacity in 2027, potentially adding CNY 100 bn market cap. Without company confirmation, this is speculative.",
+        "current_answer": "Unconfirmed; company declined to comment on specific CoWoS plans.",
+        "bull_evidence": [
+          "KPE10 cites industry checks suggesting AMD intent.",
+          "TFMC's Penang JV is natural candidate for outsourced CoWoS."
+        ],
+        "bear_evidence": [
+          "Company Q&A states no specific CoWoS-L announcement; KPE10 is sell-side narrative.",
+          "TSMC would likely resist giving away CoWoS share."
+        ],
+        "decisive_model_variables": [
+          "utilization_or_backlog"
+        ],
+        "affected_financial_lines": [
+          "Revenue (new line item)",
+          "CapEx",
+          "FCF",
+          "EPS"
+        ],
+        "evidence_ids": [
+          "KPE10",
+          "EV085",
+          "EV086"
+        ],
+        "missing_evidence": [
+          "Official company statement or signed customer agreement.",
+          "Equipment order data."
+        ],
+        "next_verification": "AMD upcoming product launch (July 22); TFMC announcements or analyst day."
+      },
+      {
+        "question_id": "Q3",
+        "question": "What is the post-2026 normalized operating margin run-rate, and how much of the H1 2026 margin surge is sustainable?",
+        "why_it_matters": "H1 2026 guidance implies operating margin ~8.5-9% (midpoint), up from 6.3% in Q1. If this is start of structural margin expansion, PT justified; if one-off due to low base or one-time items, overpriced.",
+        "current_answer": "Partially resolved: Q1 margin improvement is partly mix/shift and cost control, not purely one-off. But sustainability depends on advanced packaging ramp.",
+        "bull_evidence": [
+          "Q1 OPM +2.9pp, net margin +2.73pp, OCF strong.",
+          "KPE01/02 indicate Q2 even stronger revenues."
+        ],
+        "bear_evidence": [
+          "Gross margin still only 13.3%, implying low absolute pricing power.",
+          "Depreciation will increase sharply as new capacity comes online, pressuring margins."
+        ],
+        "decisive_model_variables": [
+          "segment_margin",
+          "operating_margin_pct"
+        ],
+        "affected_financial_lines": [
+          "Gross margin",
+          "Operating margin",
+          "Net margin",
+          "EPS"
+        ],
+        "evidence_ids": [
+          "EV013",
+          "EV014",
+          "EV015",
+          "KPE01"
+        ],
+        "missing_evidence": [
+          "Normalized depreciation schedule",
+          "Mix-adjusted margin sensitivity"
+        ],
+        "next_verification": "2026 semi-annual report; management commentary on margin outlook."
+      },
+      {
+        "question_id": "Q4",
+        "question": "Can the company maintain cash conversion above 2x OCF/Net profit while capex is still accelerating?",
+        "why_it_matters": "FCF might be negative if capex exceeds OCF, requiring external financing (private placement announced). Dilution may offset earnings growth.",
+        "current_answer": "Uncertain: Q1 OCF/NP 2.86x but capex likely high. Private placement approval suggests capital needs.",
+        "bull_evidence": [
+          "High depreciation automatically boosts OCF.",
+          "Improving receivables turnover (-2pp) helps cash."
+        ],
+        "bear_evidence": [
+          "Inventory build +2.69pp may consume cash.",
+          "CIP up 32%, indicating large pending capex outflows."
+        ],
+        "decisive_model_variables": [
+          "capex_or_roic",
+          "cash_conversion_ratio"
+        ],
+        "affected_financial_lines": [
+          "Operating cash flow",
+          "Capex",
+          "Free cash flow",
+          "EPS (dilution)"
+        ],
+        "evidence_ids": [
+          "EV017",
+          "EV018",
+          "EV043"
+        ],
+        "missing_evidence": [
+          "Statement of cash flows",
+          "Capital expenditure 2025 actual and 2026 plan"
+        ],
+        "next_verification": "2026 semi-annual report cash flow statements; company capex guidance."
+      },
+      {
+        "question_id": "Q5",
+        "question": "What is the impact of the private placement on share count and EPS?",
+        "why_it_matters": "The board approved a private placement in July 2026; if executed, diluted share count could rise 10-20%, reducing EPS growth.",
+        "current_answer": "Unresolved: size and pricing not disclosed.",
+        "bull_evidence": [
+          "Placement could fund high-return projects, raising total earnings.",
+          "Regulatory approval suggests near-term execution."
+        ],
+        "bear_evidence": [
+          "Dilution is a certainty if share count increases.",
+          "Market may price in dilution before fundamentals improve."
+        ],
+        "decisive_model_variables": [
+          "diluted_share_count_mn"
+        ],
+        "affected_financial_lines": [
+          "EPS",
+          "FCF per share",
+          "Valuation"
+        ],
+        "evidence_ids": [
+          "EV025",
+          "EV026"
+        ],
+        "missing_evidence": [
+          "Placement size, number of shares, issue price"
+        ],
+        "next_verification": "Announcement of placement details."
+      }
+    ],
+    "forecast_lines": [
+      {
+        "segment": "consolidated",
+        "metric": "Revenue",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 27921.4,
+        "year_1_value": null,
+        "year_2_value": null,
+        "year_3_value": null,
+        "formula": "Base 2025 revenue × (1 + growth rate); growth driven by capacity expansion and mix.",
+        "assumption_status": "missing",
+        "evidence_ids": [],
+        "key_sensitivity": "Varies with advanced packaging ramp, CoWoS optionality, and forex.",
+        "missing_inputs": [
+          "Assumed growth percentages for 2026E-2028E"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Gross Margin",
+        "unit": "%",
+        "base_period": "Q1 2026",
+        "base_value": 13.3247,
+        "year_1_value": null,
+        "year_2_value": null,
+        "year_3_value": null,
+        "formula": "Blended margin improves if advanced packaging share rises; partially offset by depreciation.",
+        "assumption_status": "missing",
+        "evidence_ids": [
+          "EV013"
+        ],
+        "key_sensitivity": "Advanced packaging penetration, pricing power, gold/substrate costs.",
+        "missing_inputs": [
+          "Gross margin by product type"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Operating Margin",
+        "unit": "%",
+        "base_period": "Q1 2026",
+        "base_value": 6.2765,
+        "year_1_value": null,
+        "year_2_value": null,
+        "year_3_value": null,
+        "formula": "GM - (SG&A+R&D)/Rev. Leverage effect from revenue growth.",
+        "assumption_status": "missing",
+        "evidence_ids": [
+          "EV014"
+        ],
+        "key_sensitivity": "Revenue scale, cost control, R&D intensity.",
+        "missing_inputs": [
+          "Fixed vs variable SG&A structure"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Operating Profit",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": null,
+        "year_1_value": null,
+        "year_2_value": null,
+        "year_3_value": null,
+        "formula": "Revenue × Operating Margin",
+        "assumption_status": "missing",
+        "evidence_ids": [],
+        "key_sensitivity": "Tied to revenue and margin assumptions.",
+        "missing_inputs": [
+          "Revenue and margin forecasts"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Parent Net Profit",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 1218.7,
+        "year_1_value": null,
+        "year_2_value": null,
+        "year_3_value": null,
+        "formula": "(Operating Profit + non-operating items - tax - minority) ≈ Operating Profit × (1 - tax) adjusted for non-recurring items.",
+        "assumption_status": "missing",
+        "evidence_ids": [
+          "EV011"
+        ],
+        "key_sensitivity": "Operating margin, tax rate, non-recurring items (investment income, government grants).",
+        "missing_inputs": [
+          "Effective tax rate",
+          "Non-operating income projection"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "EPS",
+        "unit": "CNY",
+        "base_period": "FY2025",
+        "base_value": null,
+        "year_1_value": null,
+        "year_2_value": null,
+        "year_3_value": null,
+        "formula": "Parent Net Profit / Diluted Share Count",
+        "assumption_status": "missing",
+        "evidence_ids": [],
+        "key_sensitivity": "Profit and share count both uncertain.",
+        "missing_inputs": [
+          "Parent net profit forecast",
+          "Diluted share count"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Operating Cash Flow",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": null,
+        "year_1_value": null,
+        "year_2_value": null,
+        "year_3_value": null,
+        "formula": "Parent Net Profit × OCF/NI ratio (historical ~2.5-2.9x), but depends on working capital.",
+        "assumption_status": "missing",
+        "evidence_ids": [
+          "EV017"
+        ],
+        "key_sensitivity": "Net profit, working capital movements.",
+        "missing_inputs": [
+          "Full cash flow projection"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "CapEx",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": null,
+        "year_1_value": null,
+        "year_2_value": null,
+        "year_3_value": null,
+        "formula": "Capex/revenue ratio historically ~15-20%, potentially rising with Penang expansion.",
+        "assumption_status": "missing",
+        "evidence_ids": [
+          "EV043"
+        ],
+        "key_sensitivity": "CoWoS or advanced packaging capacity plans.",
+        "missing_inputs": [
+          "Actual capex outflows"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Free Cash Flow",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": null,
+        "year_1_value": null,
+        "year_2_value": null,
+        "year_3_value": null,
+        "formula": "OCF - CapEx",
+        "assumption_status": "missing",
+        "evidence_ids": [],
+        "key_sensitivity": "OCF and CapEx paths.",
+        "missing_inputs": [
+          "OCF and CapEx forecasts"
+        ]
+      }
+    ],
+    "scenarios": [
+      {
+        "scenario": "bull",
+        "probability_pct": 25.0,
+        "operating_assumptions": [
+          "2026E revenue CAGR 25%, reaching CNY 43,600 mn by 2028, driven by CoWoS-L come online in 2027 at 1k wpm.",
+          "Gross margin expands to 16% by 2028 as advanced packaging share >40%.",
+          "Operating margin reaches 9.5% by 2028.",
+          "Parent net profit CNY 3,200 mn in 2026E, CNY 5,400 mn in 2028E (incl. investment income).",
+          "FCF turns positive by 2028 after heavy capex; share count dilution of 10%.",
+          "Fair value: 30x 2027E net profit, adding CoWoS option value."
+        ],
+        "parent_net_profit_cny_mn": null,
+        "eps_cny": null,
+        "fcf_cny_mn": null,
+        "valuation_method": "SOTP: core PE + CoWoS optionality",
+        "valuation_multiple": null,
+        "fair_value_per_share": null,
+        "evidence_ids": [
+          "KPE10",
+          "KPE01",
+          "EV013"
+        ],
+        "falsification": "No AMD CoWoS allocation confirmed by end of 2026, or gross margin fails to exceed 14%.",
+        "missing_inputs": [
+          "CoWoS revenue and margin per wafer",
+          "Placement terms"
+        ]
+      },
+      {
+        "scenario": "base",
+        "probability_pct": 55.0,
+        "operating_assumptions": [
+          "2026E revenue +21% (from H1 run-rate and AMD ramp), 2027E +18%, 2028E +15%.",
+          "Gross margin gradually improving to 14.3% by 2028.",
+          "Operating margin 8.0% by 2028.",
+          "Parent net profit CNY 2,800 mn in 2026E, CNY 4,200 mn in 2028E.",
+          "CapEx keeps FCF slightly negative through 2027; share dilution 12%.",
+          "Core PE 25x 2027E net profit; CoWoS value zero."
+        ],
+        "parent_net_profit_cny_mn": null,
+        "eps_cny": null,
+        "fcf_cny_mn": null,
+        "valuation_method": "PE multiple",
+        "valuation_multiple": null,
+        "fair_value_per_share": null,
+        "evidence_ids": [
+          "EV013",
+          "EV014",
+          "KPE01"
+        ],
+        "falsification": "Revenue growth below 15% in 2026, or operating margin fails to reach 7%.",
+        "missing_inputs": [
+          "Share count",
+          "CapEx schedule"
+        ]
+      },
+      {
+        "scenario": "bear",
+        "probability_pct": 20.0,
+        "operating_assumptions": [
+          "AMD demand disappoints due to competitive pressure or product delay; revenue +12% in 2026, then +8% annually.",
+          "Gross margin stagnates at 13-13.5%.",
+          "Operating margin ~5% as depreciation and overhead outpace revenue.",
+          "Parent net profit CNY 2,000 mn in 2026E, CNY 2,400 mn in 2028E.",
+          "Capex extended, FCF deeply negative; large placement dilutes by 20%.",
+          "Market applies 15x PE on trough earnings."
+        ],
+        "parent_net_profit_cny_mn": null,
+        "eps_cny": null,
+        "fcf_cny_mn": null,
+        "valuation_method": "PE multiple",
+        "valuation_multiple": null,
+        "fair_value_per_share": null,
+        "evidence_ids": [
+          "EV085",
+          "EV018"
+        ],
+        "falsification": "AMD cuts orders, or company reports gross margin <13%.",
+        "missing_inputs": [
+          "Worst-case AMD demand scenario"
+        ]
+      }
+    ],
+    "thesis_financial_bridges": [
+      {
+        "bridge_id": "B1",
+        "thesis_or_question": "Advanced packaging mix shift drives margin expansion and re-rating.",
+        "affected_unit": "集成电路封装测试",
+        "operating_driver": "Advanced packaging revenue share and associated gross margin premium.",
+        "driver_formula": "Blended GM = (Adv_% * Adv_GM) + (Legacy_% * Legacy_GM)",
+        "base_assumption": "Adv_% rises from ~20% in 2025 to 30% by 2028; Adv_GM ~22%, Legacy_GM ~10%.",
+        "bull_assumption": "Adv_% reaches 40% by 2028, Adv_GM 25%.",
+        "bear_assumption": "Adv_% stays at 20%, no GM improvement.",
+        "revenue_impact": "Bull: +~CNY 2-3 bn additional revenue from higher ASPs; Base: in line with overall growth.",
+        "profit_impact": "Bull: incremental gross profit +CNY 1 bn by 2028; Bear: flat gross profit.",
+        "eps_impact": "Unquantified (share count unknown).",
+        "fcf_or_capital_impact": "Higher margin improves FCF generation.",
+        "valuation_impact": "Higher margins justify higher PE multiple (25-30x vs 20x).",
+        "quantification_status": "partially_quantified",
+        "evidence_ids": [
+          "EV013",
+          "EV014",
+          "EV085"
+        ],
+        "missing_inputs": [
+          "Exact advanced packaging GM and weight",
+          "Share count"
+        ]
+      },
+      {
+        "bridge_id": "B2",
+        "thesis_or_question": "CoWoS-L capacity for AMD adds a new, high-margin revenue stream.",
+        "affected_unit": "集成电路封装测试",
+        "operating_driver": "CoWoS volume (wpm) × ASP per wafer × net margin.",
+        "driver_formula": "Revenue_add = 1,000 wpm × 12 months × CNY 80,000/wafer = CNY 960 mn; Profit_add = Revenue × 30% net margin.",
+        "base_assumption": "No CoWoS revenue.",
+        "bull_assumption": "CoWoS-L 1k wpm starts in 2027, ramping to revenue CNY 960 mn in 2027E, CNY 1.5 bn in 2028E; net profit ~CNY 290-450 mn.",
+        "bear_assumption": "No CoWoS endorsement.",
+        "revenue_impact": "Bull: incremental CNY 0.96-1.5 bn per year.",
+        "profit_impact": "Bull: incremental net profit CNY 290-450 mn.",
+        "eps_impact": "Adds ~CNY 0.15-0.25 per share (assumes 2 bn shares).",
+        "fcf_or_capital_impact": "Requires upfront capex of ~USD 500 mn, dilutive unless externally funded.",
+        "valuation_impact": "Could add CNY 50-80 bn to market cap on 30x PE or DCF.",
+        "quantification_status": "partially_quantified",
+        "evidence_ids": [
+          "KPE10"
+        ],
+        "missing_inputs": [
+          "Official confirmation",
+          "Capex requirement",
+          "Exact pricing and margin"
+        ]
+      }
+    ],
+    "moat_evidence_tests": [
+      {
+        "moat_mechanism": "Deep customer lock-in with AMD through joint-venture and co-investment (Penang facility).",
+        "observable_test": "AMD's share of TFMC's packaging business and tenure of the relationship.",
+        "comparison_basis": "Compare with other OSATs' top customer concentration and contract duration.",
+        "evidence_result": "Company disclosed it handles >80% of AMD's certain products; JV operational since 2016.",
+        "financial_transmission": "Ensures high capacity utilization (→ fixed cost absorption) and reduces customer acquisition cost; supports plan for new capacity.",
+        "strongest_counterevidence": "AMD could diversify suppliers or bring advanced packaging in-house as complexity increases.",
+        "status": "proven",
+        "evidence_ids": [
+          "EV085",
+          "EV034"
+        ],
+        "next_verification": "Monitor any supply chain diversification announcement from AMD."
+      },
+      {
+        "moat_mechanism": "Scale and technological edge in advanced packaging (Chiplet, fan-out, 2.5D) creating a cost and yield advantage.",
+        "observable_test": "Revenue share from advanced packaging above domestic peers; R&D spending and patent portfolio.",
+        "comparison_basis": "JCET, ASE, other Chinese OSATs.",
+        "evidence_result": "No direct segment data; R&D disclosures indicate investment in fan-out, 2.5D. Investor Q&A confirms technology focus.",
+        "financial_transmission": "Higher ASP and better margins; ability to win next-generation orders from AMD and domestic AI chip companies.",
+        "strongest_counterevidence": "TSMC remains the dominant advanced packaging provider; TFMC may be confined to lower-tier or second-source roles.",
+        "status": "partial",
+        "evidence_ids": [
+          "EV028",
+          "EV085"
+        ],
+        "next_verification": "Product qualification announcements and share-of-wallet data from AMD's 7nm/5nm/2nm nodes."
+      }
+    ],
+    "valuation_buckets": [
+      {
+        "bucket": "Core OSAT earnings (advanced + legacy)",
+        "inclusion": "core",
+        "valuation_method": "PE target on forward net profit",
+        "metric_and_period": "2027E net profit (midpoint of base scenario)",
+        "metric_value": 4200.0,
+        "valuation_multiple": 25.0,
+        "ownership_pct": 100.0,
+        "haircut_pct": 0.0,
+        "equity_value_cny_mn": 105000.0,
+        "per_share_value_cny": null,
+        "overlap_key": "",
+        "double_counting_treatment": "Standalone core business.",
+        "evidence_ids": [
+          "KPE01",
+          "EV014"
+        ],
+        "missing_inputs": [
+          "Diluted share count → per-share value not calculable."
+        ]
+      },
+      {
+        "bucket": "CoWoS-L optionality (AMD allocation)",
+        "inclusion": "optionality",
+        "valuation_method": "DCF or PE on incremental profit from CoWoS",
+        "metric_and_period": "2028E incremental net profit CNY 400 mn",
+        "metric_value": 400.0,
+        "valuation_multiple": 30.0,
+        "ownership_pct": 50.0,
+        "haircut_pct": 50.0,
+        "equity_value_cny_mn": 6000.0,
+        "per_share_value_cny": null,
+        "overlap_key": "CoWoS",
+        "double_counting_treatment": "Outside core, only included if confirmed.",
+        "evidence_ids": [
+          "KPE10"
+        ],
+        "missing_inputs": [
+          "Confirmation status",
+          "Exact profit contribution"
+        ]
+      },
+      {
+        "bucket": "Potential domestic AI packaging boom (non-AMD)",
+        "inclusion": "scenario",
+        "valuation_method": "Revenue growth premium reflected in higher core PE (30x instead of 25x)",
+        "metric_and_period": "Bull scenario PE 30x on CNY 4,200 mn = 126,000 mn.",
+        "metric_value": 4200.0,
+        "valuation_multiple": 30.0,
+        "ownership_pct": 100.0,
+        "haircut_pct": 0.0,
+        "equity_value_cny_mn": 126000.0,
+        "per_share_value_cny": null,
+        "overlap_key": "",
+        "double_counting_treatment": "Alternative to core bucket; choose one scenario.",
+        "evidence_ids": [
+          "KPE03",
+          "KPE04"
+        ],
+        "missing_inputs": []
+      }
+    ],
+    "valuation_closure": {
+      "current_price_cny": null,
+      "diluted_share_count_mn": null,
+      "core_value_per_share_cny": null,
+      "probability_weighted_fair_value_per_share_cny": null,
+      "option_value_per_share_cny": null,
+      "other_adjustments_per_share_cny": null,
+      "fair_value_per_share_cny": null,
+      "expected_return_pct": null,
+      "formula": "Probability-weighted SOTP: base case core PE of CNY 105 bn at 55% + bull case (core 30x + CoWoS optionality) at 25% + bear case 15x on CNY 2,400 mn = CNY 36 bn at 20%. Equity value = 0.55*105 + 0.25*(126+6) + 0.20*36 = CNY 57.75 + 33 + 7.2 = 97.95 bn. Fair value per share = 97,950 mn / diluted shares (unknown).",
+      "rating_consistency_check": "No rating; valuation is scenario-based.",
+      "double_counting_checks": [
+        "CoWoS optionality is additive in bull only, not in base; overlap prevented by scenario assignment."
+      ],
+      "status": "not_valued",
+      "missing_inputs": [
+        "Diluted share count",
+        "Current price for expected return calculation"
+      ]
+    },
+    "llm_analysis_layer": {
+      "business_question_tree": [
+        "What percentage of total packaging revenue is from advanced vs. legacy packaging, and what is the margin differential?",
+        "Is AMD's CoWoS-L outsourcing a realistic probability, and what is the capex and timeline?",
+        "How sticky are AMD's orders beyond 2027, given competition from TSMC and other OSATs?",
+        "Can TFMC sustain >20% revenue growth without dilutive equity issuance?",
+        "What are the exact cash flow dynamics: depreciation, working capital, capex, and free cash flow?",
+        "What is the Chinese domestic AI chip demand for packaging, and how much can TFMC capture?"
+      ],
+      "profit_pool_priority": "The integrated circuit packaging and testing segment accounts for ~98% of revenue and virtually all profit. Within this, the most important profit pool is advanced packaging (Chiplet, 2.5D, CoWoS) because it carries 2-3x the ASP and higher margin than traditional packaging. However, without segment disclosure, we estimate advanced packaging contributes maybe 20-25% of 2025 revenue but a disproportionate share of gross profit. The second pool is traditional packaging for AMD's CPU/GPU, which is volume-driven with lower margins but steady cash generation. The mold/material sales pool is negligible. Therefore, the model's sensitivity is entirely driven by the advanced packaging ramp and the CoWoS optionality.",
+      "competition_and_substitution_analysis": "True peers are JCET, ASE Group, and Amkor for OSAT advanced packaging; TSMC for CoWoS in-house. TFMC's differentiator is its exclusive AMD JV relationship and growing domestic customer base. However, switching risk remains: AMD could bring more backend in-house or use TSMC's integrated service for high-end chips. Substitution risk from chiplets moving to hybrid bonding or direct copper interconnects could alter packaging requirements. Domestic OSATs like JCET also investing heavily in advanced packaging, posing competitive threat for domestic AI chip orders. Supplier diversification is moderate: TFMC depends on substrates and gold wire suppliers, but can source from multiple regions. New entrants (e.g., vertically integrated fab-pack fabs) could emerge.",
+      "qualitative_to_quantitative_bridge": "Qualitatively, the market narrative is that TFMC is the purest AMD AI leap play, with upside from CoWoS. Quantitatively, we have an H1 2026 profit range of CNY 16-18 bn, which annualizes to ~32-36 bn. But that includes one-off items; normalized core profit is lower. Without capex and tax data, we cannot build a full DCF. Our bridge takes the H1 run-rate, applies a full-year multiplier of 1.85x (considering H2 is stronger), yields CNY 29-33 bn revenue. We then apply an improving net margin (from 4.4% in Q1 to ~5.5% for the year) to arrive at a parent profit of ~CNY 1.6-1.8 bn for 2026E. The model's gap is the lack of segment-level margins and cash flow inputs.",
+      "expectation_gap_analysis": "At current market cap ~CNY 119 bn and PE TTM 82.6x, the market appears to be pricing in the bull scenario (rapid advanced packaging growth and CoWoS win). Our base-case equity value of CNY 105 bn (25x 2027E) suggests the stock is approximately fair, while the probability-weighted value (using only the base/bear/bull scenarios we built) is ~CNY 98 bn, implying slight overvaluation unless bull case materializes. The gap is timing and magnitude: the market is assigning high probability to CoWoS that the company has not yet confirmed. The bear scenario (CNY 36 bn) shows significant downside if AMD relationship disappoints.",
+      "red_team_counterarguments": [
+        "Counter to bullish AMD thesis: 'AMD's current CoWoS demand is only a fraction of NVIDIA's, and the spike in 2027 is based on analyst estimates. If AMD's Venice or MI455 ramp disappoints, demand could be cut 30-40%, and TSMC will keep the high-end CoWoS in-house, leaving TFMC with legacy packaging only.'",
+        "Counter to bearish single-customer risk: 'AMD's roadmap and market share gain in server CPU is durable; even a 20% downside in 2027 CoWoS would still leave TFMC with high-double-digit revenue growth, and the company could easily fill capacity with domestic AI chip customers at better margins than legacy packaging.'"
+      ],
+      "valuation_explanation": "Valuation is a function of the earnings bridge: we use scenarios to map the operating assumptions to net profit, applying a PE multiple that reflects the growth and risk profile. For the base case, a 25x PE on 2027E net profit of CNY 4.2 bn yields CNY 105 bn. The bull case uses a higher multiple (30x) and adds CoWoS option value, while bear uses a depressed 15x. Multiples are subjective but consistent with historical trading range and peer comparison. The key risk premium variable is the probability of AMD CoWoS; without that, the stock should trade closer to peers like JCET (15-20x). Sensitivity: 1% change in operating margin translates to ~CNY 300 mn in operating profit, around CNY 0.15 EPS impact (assuming 2 bn shares), affecting fair value by ~CNY 3-5 per share.",
+      "final_editorial_synthesis": "TFMC is a pure-play bet on AMD's AI silicon boom and the structural shift to advanced packaging. While the company's H1 2026 profit explosion supports a strong operational momentum, the thesis hinges on two unconfirmed variables: AMD's outsourcing of CoWoS-L and the sustainability of margin improvement. Our scenario analysis shows that at the current valuation, the market is giving credit to the bull case, leaving limited margin of safety. A cautious PM would demand official confirmation of CoWoS plans and evidence of expanding non-AMD customer base before adding. The investment boils down to whether you believe the sell-side narrative that AMD is desperate for alternative CoWoS capacity and that TFMC is the sole beneficiary. Without that confirmation, the risk/reward is balanced at best.",
+      "evidence_boundaries": [
+        "KPE01/02 profit guidance is private channel check but widely circulated; useful for framing but not audited.",
+        "Revenue growth assumption based on extrapolation; no official guidance beyond H1.",
+        "CoWoS value proposition from KPE10 is unverified; no management confirmation.",
+        "Share count entirely unresolved."
+      ]
+    },
+    "handoff_manifest": {
+      "handoff_version": "underwriting-v2",
+      "source_of_truth": "structured_research.underwriting_packet",
+      "frozen_reported_facts": [
+        "FY2025 revenue CNY 27,921.4 mn (+16.92% YoY)",
+        "Q1 2026 revenue CNY 7,481.7 mn",
+        "Q1 2026 gross margin 13.3247%, operating margin 6.2765%, net margin 4.3982%",
+        "FY2025 parent net profit CNY 1,218.7 mn",
+        "AMD >80% share for certain products (Q&A)",
+        "H1 2026 parent net profit guidance 16-18 bn (KPE01/02)"
+      ],
+      "analyst_estimates": [
+        "2026E-2028E revenue growth rates (21%, 18%, 15% base)",
+        "Operating margin expansion path",
+        "CoWoS-L optionality value",
+        "Scenario probabilities (25/55/20)"
+      ],
+      "unresolved_model_cells": [
+        "Diluted share count → EPS, FCF per share, and per-share valuation",
+        "CapEx and OCF historical series → FCF forecast",
+        "Advanced packaging revenue share and margin → mix assumptions",
+        "Effective tax rate → net profit walk",
+        "Placement size → dilution impact"
+      ],
+      "downstream_must_preserve": [
+        "Full business_unit_map with two units",
+        "Segment models with prosperity analysis",
+        "Five underwriting questions linked to model variables",
+        "Three forward years (2026E-2028E) with placeholder forecast lines",
+        "Bull/base/bear scenarios with qualitative and probability assignments",
+        "Two thesis financial bridges (mix shift, CoWoS optionality)",
+        "Two moat evidence tests",
+        "Valuation buckets and closure using probability-weighted SOTP",
+        "LLM analysis layer with all eight components"
+      ]
+    },
+    "evidence_change_rules": [
+      {
+        "evidence_id": "KPE01",
+        "affected_segment": "集成电路封装测试",
+        "affected_variable": "parent net profit 2026E",
+        "old_assumption": "Using 17 bn midpoint as base quarterizer",
+        "new_assumption": "unchanged/watch",
+        "financial_transmission": "Full-year 2026E parent profit highly dependent on H2 trajectory; currently using ceiling of H1 guidance multiplied by seasonality factor.",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "Cross-check with semi-annual report when filed."
+      },
+      {
+        "evidence_id": "KPE10",
+        "affected_segment": "集成电路封装测试",
+        "affected_variable": "CoWoS capacity (optionality bucket)",
+        "old_assumption": "Not modelled in base case",
+        "new_assumption": "unchanged",
+        "financial_transmission": "If confirmed, will be added as a separate revenue stream with appropriate capex and dilution.",
+        "probability_before_after": "bull probability could rise from 25% to 35% if confirmed",
+        "disposition": "watch",
+        "verification_gate": "Official company announcement or AMD supply chain disclosure."
+      },
+      {
+        "evidence_id": "KPE02",
+        "affected_segment": "半导体封测",
+        "affected_variable": "profit_or_eps",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+      },
+      {
+        "evidence_id": "KPE03",
+        "affected_segment": "半导体封测",
+        "affected_variable": "utilization_or_backlog",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+      },
+      {
+        "evidence_id": "KPE04",
+        "affected_segment": "半导体封测",
+        "affected_variable": "utilization_or_backlog",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+      },
+      {
+        "evidence_id": "KPE06",
+        "affected_segment": "半导体封测",
+        "affected_variable": "asp_or_price",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+      },
+      {
+        "evidence_id": "KPE07",
+        "affected_segment": "半导体封测",
+        "affected_variable": "segment_volume",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+      },
+      {
+        "evidence_id": "KPE08",
+        "affected_segment": "半导体封测",
+        "affected_variable": "asp_or_price",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+      },
+      {
+        "evidence_id": "KPE09",
+        "affected_segment": "半导体封测",
+        "affected_variable": "utilization_or_backlog",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+      },
+      {
+        "evidence_id": "KPE05",
+        "affected_segment": "半导体封测",
+        "affected_variable": "segment_volume",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch_unchanged",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+      }
+    ],
+    "reconciliation_checks": [
+      "Revenue base FY2025 matches reported 279.21 bn.",
+      "Segment revenue weight derived from annual report: IC packaging 97.59%, mold 2.41%.",
+      "Q1 2026 margin data sourced from earnings model, cross-checked with investor interaction content.",
+      "No EPS cross-check possible because share count missing."
+    ],
+    "analyst_instructions": [
+      "Prioritize obtaining diluted share count from Tushare or latest filing to enable per-share valuation.",
+      "Retrieve 2025 annual and 2026 semi-annual full financial statements for OCF, capex, and balance sheet details.",
+      "Contact IR for advanced packaging revenue share and CoWoS status before finalizing bull scenario weight.",
+      "Validate KPE01/02 profit guidance against semi-annual report actuals."
+    ],
+    "preprocessing_notes": [
+      "All evidence considered; one main segment dominates. Advanced packaging treated as analytical unit without separate reported numbers.",
+      "CoWoS narrative (KPE10) is high-impact but unconfirmed; placed in optionality bucket only.",
+      "Q1 2026 inventory build warrants monitoring but not yet a negative signal given strong revenue growth.",
+      "Private placement approval suggests upcoming equity issuance that will dilute existing shareholders; model placeholder for dilution unknown.",
+      "operating model driver coverage (volume_price_cost): capacity, utilization, volume, price/ASP, unit/input cost, spread/margin, capex/ROIC"
+    ]
+  }
+}

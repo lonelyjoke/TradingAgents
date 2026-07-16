@@ -42,6 +42,7 @@ from tradingagents.agents.utils.agent_utils import (
     get_price_earnings_decomposition_instruction,
     get_question_led_debate_instruction,
     get_research_gap_instruction,
+    get_semiconductor_instruction,
     get_supply_demand_fallback_instruction,
     get_supply_chain_selection_instruction,
     get_shareholder_structure_instruction,
@@ -349,6 +350,7 @@ def create_research_manager(llm):
                 ("Metals/mining", metals_mining_context, get_metals_mining_instruction),
             ]
         )
+        gated_sector_instructions += get_semiconductor_instruction()
         industry_cycle_context = prompt_contexts["industry_cycle_context"]
         company_business_model_context = prompt_contexts["company_business_model_context"]
         industry_kpi_context = prompt_contexts["industry_kpi_context"]

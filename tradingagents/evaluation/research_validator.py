@@ -2127,6 +2127,50 @@ def audit_rating_valuation_consistency(report_dir: str | Path) -> list[DecisionD
     return []
 
 
+def audit_deterministic_valuation_scale(report_dir: str | Path) -> list[DecisionDepthIssue]:
+    """Flag per-share valuation outputs that use raw shares as million shares."""
+
+    pm_path = Path(report_dir) / "5_portfolio" / "canonical_decision.json"
+    if not pm_path.exists():
+        return []
+    try:
+        payload = json.loads(read_text_fallback(pm_path))
+    except (OSError, TypeError, json.JSONDecodeError):
+        return []
+    valuation = payload.get("deterministic_valuation") or {}
+    if str(valuation.get("status", "")) != "closed":
+        return []
+    shares_mn = _safe_float(valuation.get("diluted_share_count_mn"))
+    findings: list[str] = []
+    if shares_mn > 100_000_000:
+        findings.append(
+            f"diluted_share_count_mn={shares_mn:g} looks like raw shares, not million shares"
+        )
+    for row in valuation.get("scenario_rows", []) or []:
+        profit = _safe_float(row.get("parent_net_profit_cny_mn"))
+        eps = _safe_float(row.get("eps_cny"))
+        per_share = _safe_float(row.get("fair_value_per_share_cny"))
+        if profit >= 1000 and 0 < eps < 0.01:
+            findings.append(
+                f"{row.get('scenario', 'scenario')} EPS={eps:g} is implausibly small for "
+                f"{profit:g} CNY mn profit"
+            )
+        if profit >= 1000 and 0 < per_share < 0.01:
+            findings.append(
+                f"{row.get('scenario', 'scenario')} per-share value={per_share:g} is implausibly small"
+            )
+    if not findings:
+        return []
+    return [
+        DecisionDepthIssue(
+            "deterministic_valuation_scale",
+            "error",
+            "deterministic valuation has unit-scale contradictions: "
+            + "; ".join(dict.fromkeys(findings)),
+        )
+    ]
+
+
 def audit_position_valuation_consistency(report_dir: str | Path, decision_text: str) -> list[DecisionDepthIssue]:
     """Ensure executable buy instructions respect the program-calculated ceiling."""
     pm_path = Path(report_dir) / "5_portfolio" / "canonical_decision.json"
@@ -3054,6 +3098,7 @@ def audit_report_depth(report_dir: str | Path) -> pd.DataFrame:
     issues.extend(audit_public_key_number_consistency(decision_text))
     issues.extend(audit_public_forecast_growth_consistency(report_dir, decision_text))
     issues.extend(audit_weighted_margin_arithmetic(decision_text))
+    issues.extend(audit_deterministic_valuation_scale(report_dir))
     issues.extend(audit_rating_valuation_consistency(report_dir))
     issues.extend(audit_position_valuation_consistency(report_dir, decision_text))
     issues.extend(audit_report_redundancy(decision_text))

@@ -17,6 +17,9 @@ from .industry_identity import (
     is_hog_breeding_text,
     is_insurance_text,
     is_lithium_battery_text,
+    is_semiconductor_design_text,
+    is_semiconductor_equipment_text,
+    is_semiconductor_foundry_text,
     is_telecom_operator_text,
     is_clean_energy_power_electronics_text,
 )
@@ -210,10 +213,62 @@ def _clean_energy_power_electronics_playbook() -> tuple[str, list[tuple[str, str
     )
 
 
+def _semiconductor_foundry_playbook() -> tuple[str, list[tuple[str, str, str]]]:
+    return (
+        "semiconductor foundry / wafer manufacturing",
+        [
+            ("Wafer Capacity / Utilization", "8-inch and 12-inch equivalent wafer capacity, wafer starts, loading and utilization by fab/platform", "revenue volume and operating leverage"),
+            ("Wafer ASP / Process Mix", "wafer ASP, mature versus advanced node mix, specialty platform mix and customer/product mix", "revenue quality and gross margin"),
+            ("Cost / Depreciation", "depreciation-to-revenue, D&A, materials, energy, labor, yield and repair/maintenance cost", "gross-margin bridge and downside"),
+            ("Capex / Tool Access", "capex, construction-in-progress transfer, equipment delivery, export-control limits and domestic-tool substitution", "capacity runway, depreciation burden and risk premium"),
+            ("Inventory / Cycle", "customer inventory, foundry order visibility, lead times, utilization trend and end-market cycle by application", "cycle stage and earnings durability"),
+            ("Customer / Qualification", "fabless customer mix, design-in/qualification progress, platform stickiness and concentration", "share, pricing power and demand visibility"),
+            ("Cash / ROIC", "OCF/NI, capex, FCF, net cash/debt, subsidies and incremental ROIC by capacity addition", "valuation support and reinvestment quality"),
+        ],
+    )
+
+
+def _semiconductor_design_playbook() -> tuple[str, list[tuple[str, str, str]]]:
+    return (
+        "semiconductor design / fabless chip company",
+        [
+            ("Product Cycle / Design Wins", "new chip tape-out, sampling, mass-production timing, design wins, customer qualification and socket share", "revenue visibility and growth duration"),
+            ("Shipment / ASP / Mix", "chip shipments, ASP, product mix, high-end versus legacy SKU share, end-market exposure", "revenue and gross margin"),
+            ("Customer / End Market", "top-customer concentration, handset/auto/AI/server/industrial demand, channel inventory and sell-through", "cycle stage and demand risk"),
+            ("Foundry / Packaging Cost", "wafer foundry allocation, node cost, packaging/test cost, yield, NRE and mask cost", "gross-margin bridge and supply constraint"),
+            ("Inventory / Orders", "inventory days, distributor inventory, backlog, contract liabilities/prepayments and cancellation risk", "turning point and revenue quality"),
+            ("R&D / IP Moat", "R&D intensity, IP blocks, software ecosystem, architecture stickiness and replacement risk", "moat durability and multiple support"),
+            ("Valuation / Optionality", "core EPS/FCF, product-cycle SOTP, verified AI/auto/server optionality and market-implied revenue/profit gap", "fair value, probability and double-counting control"),
+        ],
+    )
+
+
+def _semiconductor_equipment_playbook() -> tuple[str, list[tuple[str, str, str]]]:
+    return (
+        "semiconductor equipment / wafer-fab tools",
+        [
+            ("Order / Backlog", "new orders, backlog, contract liabilities, customer capex plans and tool-category demand", "revenue visibility and cycle position"),
+            ("Delivery / Acceptance", "shipment, installation, acceptance cycle, revenue recognition timing and customer fab ramp schedule", "revenue conversion and quarterly volatility"),
+            ("Product Mix / Localization", "etch/deposition/clean/CMP/metrology category mix, domestic substitution rate and advanced-node penetration", "ASP, margin and multiple support"),
+            ("Gross Margin / Cost", "tool ASP, BOM/localization cost, warranty, service mix, yield and learning-curve effects", "gross-margin durability"),
+            ("Customer Concentration", "top customer/fab exposure, repeat orders, import substitution qualification and export-control constraints", "order quality and bargaining power"),
+            ("R&D / Platform Moat", "R&D intensity, installed base, process recipe stickiness, patents and service network", "competitive moat and reinvestment need"),
+            ("Cash / Working Capital", "inventory, advances, receivables, OCF/NI, capex and service cash collection", "earnings quality and balance-sheet risk"),
+            ("Valuation", "core earnings/EV-EBITDA, order-backed DCF, SOTP for tool categories, and market-implied order/profit assumptions", "fair value and expectation gap"),
+        ],
+    )
+
+
 def _detect_playbook(symbol: str, combined_text: str) -> tuple[str, list[tuple[str, str, str]]]:
     lower = f"{symbol}\n{combined_text}".lower()
     # Structured company identity outranks incidental keywords from generic
     # metals, software, telecom, or thematic contexts.
+    if is_semiconductor_equipment_text(symbol, combined_text):
+        return _semiconductor_equipment_playbook()
+    if is_semiconductor_design_text(symbol, combined_text):
+        return _semiconductor_design_playbook()
+    if is_semiconductor_foundry_text(symbol, combined_text):
+        return _semiconductor_foundry_playbook()
     if has_lithium_battery_symbol_hint(symbol):
         return _battery_playbook()
     if is_clean_energy_power_electronics_text(symbol, combined_text):
@@ -449,6 +504,7 @@ def build_industry_kpi_context(
             r"revenue|profit|gross margin|ASP|price|latest_price|change_over_window",
             r"capacity|utilization|shipment|installation|GWh|market share|share",
             r"contract liabilit|backlog|order|inventory|cash flow|capex",
+            r"wafer|foundry|fabless|chip|semiconductor|tape[- ]?out|design win|backlog|acceptance|deposition|etch|metrology",
             r"NBV|embedded value|P/EV|solvency|COR|loss ratio|expense ratio|investment yield|bancassurance|agent productivity|CSM|NCSM",
             r"hog|pig|piglet|sow|live hog|slaughter|complete cost|breeding sow|pork|DCE|LH\d+|ASP",
             r"\u751f\u732a|\u5546\u54c1\u732a|\u4ed4\u732a|\u79cd\u732a|\u80fd\u7e41\u6bcd\u732a|\u6bcd\u732a\u5b58\u680f|\u732a\u4ef7|\u732a\u5468\u671f|\u51fa\u680f|\u5c60\u5bb0|\u5b8c\u5168\u6210\u672c|\u81ea\u7e41\u81ea\u517b|\u732a\u8089",
@@ -471,6 +527,11 @@ def build_industry_kpi_context(
         analyst_instructions.insert(
             2,
             "- For insurers, PE is only a cross-check. Force the thesis through NBV, EV/P-EV, solvency, investment-yield spread, P&C COR, dividend capacity, and SOTP/subsidiary separation.",
+        )
+    if playbook.startswith("semiconductor "):
+        analyst_instructions.insert(
+            2,
+            "- For semiconductor companies, do not use consumer-style PE shortcuts. Split core value, cycle value, and verified product/technology optionality; triangulate PE with EV/EBITDA, DCF/FCF, ROIC/PB or SOTP as appropriate.",
         )
     missing_rows = [
         f"- {name}: verify {metric}; explain impact on {driver}."

@@ -54,6 +54,7 @@ from tradingagents.agents.utils.agent_utils import (
     get_biopharma_instruction,
     get_building_materials_context,
     get_building_materials_instruction,
+    get_semiconductor_instruction,
     get_software_context,
     get_software_instruction,
     get_policy_planning_context,
@@ -288,6 +289,7 @@ def create_fundamentals_analyst(llm):
             + get_insurance_instruction()
             + get_medical_device_instruction()
             + get_metals_mining_instruction()
+            + get_semiconductor_instruction()
             + get_price_move_attribution_instruction()
             + (
                 "\n\nPrecomputed industry-cycle scan:\n"

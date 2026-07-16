@@ -1,0 +1,96 @@
+{
+  "review": {
+    "revision_required": true,
+    "company_understanding_score": 3,
+    "independent_model_score": 2,
+    "evidence_and_counterevidence_score": 2,
+    "valuation_closure_score": 1,
+    "readability_and_synthesis_score": 2,
+    "strongest_aspects": [
+      "Accounting quality analysis correctly identifies key risks and positive signals.",
+      "Core theses are logically differentiated and rooted in research manager cards.",
+      "Expectation gap framing is clear and effective."
+    ],
+    "findings": [
+      {
+        "section": "thesis_moat_financial_bridge",
+        "priority": "must_revise",
+        "issue": "The public thesis chapter lists three investment theses but omits required elements for each: missing strongest counterevidence for Thesis 1 and missing market-pricing implication for Thesis 3.",
+        "evidence_or_logic_gap": "Research Manager core_theses cards already contain these elements; they have not been synthesized into the public narrative.",
+        "revision_instruction": "For Thesis 1 (valuation bubble), add a paragraph explaining strongest counterevidence: the market may afford a structural premium to a nationally strategic asset, and the low-probability bull scenario could be repriced if nascent AI demand is validated. For Thesis 3 (unproven AI story), explicitly state that the current share price ascribes full certainty (~90-100% probability) to this option, versus our assigned 25%, and quantify the overpayment as a percentage of market cap. Provide integrated prose, not a repeat of internal labels."
+      },
+      {
+        "section": "thesis_moat_financial_bridge",
+        "priority": "should_revise",
+        "issue": "The bridge for Thesis 2 (weak engine) correctly links low ROE to valuation but fails to size the transmission.",
+        "evidence_or_logic_gap": "Reported PB 8.78x, 2028E ROE of ~6% implies a warranted PB in the range of 1.0–1.5x.",
+        "revision_instruction": "Add a quantitative transmission statement: for the PB to contract from 8.78x to the 1.0–1.5x level justified by a 6% ROE, the implied share‑price reduction is approximately 83–89%, reinforcing the bear case."
+      },
+      {
+        "section": "valuation_and_expectation_gap",
+        "priority": "must_revise",
+        "issue": "Fair value is internally inconsistent: prose references 28.55 CNY, 30.7 CNY, and 29.5 CNY, but the deterministic model yields 30.35 CNY/share.",
+        "evidence_or_logic_gap": "The safe_valuation_assumptions and deterministic_valuation JSON produce a fair value of 30.3469 CNY/share. Current price is 153.64 CNY.",
+        "revision_instruction": "Replace all vestigial fair-value figures (28.55, 30.7, 29.5) with the single reconciled deterministic output of 30.35 CNY/share. Recalculate the expected return of -80.2% against the current price of 153.64 CNY using this reconciled figure."
+      },
+      {
+        "section": "valuation_and_expectation_gap",
+        "priority": "should_revise",
+        "issue": "Expectation gap analysis is clear but could be made more incisive by reframing the market-implied profit as a CAGR requirement.",
+        "evidence_or_logic_gap": "FY2025 net profit 50.4 Bn CNY, Market Cap 1,315 Bn CNY, 25x target PE. Market-implied profit is 526 Bn CNY.",
+        "revision_instruction": "Reframe the 526 Bn CNY not just as '10x current profit' but as requiring a net profit CAGR of approximately 160% over three years from the base of 50.4 Bn. Contrast this with the forecast base-case CAGR of ~28% to sharpen the absurdity of the market's embedded expectation."
+      },
+      {
+        "section": "company_disaggregation",
+        "priority": "should_revise",
+        "issue": "Business description lacks a crucial analytical decomposition of the core foundry unit.",
+        "evidence_or_logic_gap": "Research Manager defines BU_WAFER_FOUNDRY and BU_ADVANCED_NODE. Splitting the unit into 'Mature Node Cash Engine' and 'Advanced Node Growth Option' is the analytical backbone of the thesis.",
+        "revision_instruction": "Explicitly split the foundry unit into two sub-layers: 'Mature Node (>=28nm) Cash Engine' and 'Advanced Node (<28nm) Growth Option'. For the mature node, state its baseline revenue contribution and its ability to cover fixed costs; for the advanced node, frame it as a deep out-of-the-money call option on domestic AI demand. This distinction must appear in the public company section."
+      },
+      {
+        "section": "industry_cycle_and_competition",
+        "priority": "should_revise",
+        "issue": "Competitive analysis mentions TSMC's gross margin but lacks a direct comparative financial statement to substantiate the regional moat argument.",
+        "evidence_or_logic_gap": "TSMC and UMC margins are publicly available; SMIC margins from EV030. The statement '护城河是区域性的而非全球性的' needs a quantified backbone.",
+        "revision_instruction": "Add a direct comparative statement or table contrasting SMIC's gross/R&D/net margin and Capex/Revenue profile with TSMC and UMC. This will quantify the structural profitability disadvantage before technological gaps."
+      },
+      {
+        "section": "cross_section_consistency",
+        "priority": "should_revise",
+        "issue": "Key numeric conclusions (downside risk >80%, PE TTM 260x, fair value 30.35) are repeated verbatim across multiple sections.",
+        "evidence_or_logic_gap": "The primary and most detailed instance of each numeric conclusion belongs in the valuation section. Repetition elsewhere creates redundancy.",
+        "revision_instruction": "Remove all but the definitive instance in the valuation_closure section. Other sections must cross-reference with a phrase such as 'As detailed in the Valuation section, the probability-weighted fair value of 30.35 CNY implies…' without restating the calculation."
+      },
+      {
+        "section": "cross_section_consistency",
+        "priority": "should_revise",
+        "issue": "Internal workbench language appears in the public-facing memo.",
+        "evidence_or_logic_gap": "Examples include the '共享模型更新记录' table (a PM handoff log), the explicit bullet checklist of '证伪条件', and the semi-structured '核心周期信号解读'.",
+        "revision_instruction": "Remove the model change ledger entirely, integrate falsification conditions seamlessly into the narrative, and convert signal interpretation into fluent prose. No internal workflow artifacts should remain."
+      }
+    ],
+    "overall_editorial_verdict": "Memo requires substantive revision to reconcile valuation figures and integrate missing thesis components. While the underlying analytical framework and core theses are differentiated and grounded, execution exhibits critical defects in fair-value consistency, incomplete thesis exposition, and pervasive public-facing language issues. These must be corrected before publication."
+  },
+  "review_status": {
+    "mode": "schema_repaired_fallback",
+    "agent": "Sell-Side Research Editor",
+    "structured_error": "1 validation error for SellSideEditorialReview\nfindings.5.section\n  Input should be 'investment_conclusion', 'company_disaggregation', 'industry_cycle_and_competition', 'three_year_forecast', 'thesis_moat_financial_bridge', 'accounting_and_capital_allocation', 'valuation_and_expectation_gap', 'risks_catalysts_verification' or 'cross_section_consistency' [type=literal_error, input_value='evidence_and_counterevidence_score', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error"
+  },
+  "revision_requested": true,
+  "revision_applied": true,
+  "revision_status": {
+    "mode": "schema_prompt_structured",
+    "agent": "Portfolio Manager Editorial Revision",
+    "structured_error": ""
+  },
+  "initial_handoff_issues": [],
+  "initial_analytical_issues": [
+    "public thesis chapter missing strongest counterargument/boundary",
+    "public thesis chapter missing market-pricing implication"
+  ],
+  "remaining_handoff_issues": [],
+  "remaining_analytical_issues": [
+    "public thesis chapter missing market-pricing implication"
+  ],
+  "revision_rejection_reasons": []
+}

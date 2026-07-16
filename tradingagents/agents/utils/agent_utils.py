@@ -390,6 +390,38 @@ def get_software_instruction() -> str:
     )
 
 
+def get_semiconductor_instruction() -> str:
+    """Return rules for semiconductor and technology-hardware analysis."""
+    return (
+        " Semiconductor / technology-hardware gate: when official filings, the "
+        "Industry KPI Checklist, company business model, or peer context identify "
+        "the target as a semiconductor foundry / wafer manufacturing company, fabless chip-design company, "
+        "semiconductor equipment supplier, or closely related technology-hardware "
+        "business, do not use consumer-style PE shortcuts or generic technology "
+        "narratives. First classify the business model: foundry / wafer "
+        "manufacturing, fabless chip design, semiconductor equipment, or mixed. "
+        "For foundries, model wafer capacity, utilization, wafer ASP, process-node "
+        "mix, yield, depreciation, capex, construction-in-progress transfer, "
+        "equipment access, OCF and FCF. For chip designers, model product cycle, "
+        "tape-out / sampling / mass-production milestones, design wins, shipments, "
+        "ASP, customer and end-market concentration, foundry/package cost, "
+        "inventory, R&D/IP moat and product-cycle optionality. For semiconductor "
+        "equipment suppliers, model new orders, backlog, delivery/acceptance, "
+        "tool-category mix, localization rate, customer fab capex, installed-base "
+        "service revenue, inventory, advances, receivables and R&D platform moat. "
+        "Valuation must triangulate across the business model: PE only after a "
+        "real earnings bridge, plus EV/EBITDA, DCF/FCF, ROIC/PB, order-backed "
+        "valuation, or SOTP/NAV as appropriate. Separate core mature value, "
+        "cycle value and verified technology/localization/AI optionality with "
+        "explicit probability, payoff, verification gate and overlap control. "
+        "Always reverse the current market cap into the required revenue, gross "
+        "margin, net profit, ROIC, backlog conversion, wafer-node contribution or "
+        "product-cycle success, and compare that implied expectation with the "
+        "evidence. Missing node/product/order data is a research gap and caps "
+        "valuation confidence; it is not by itself a Buy or Sell signal."
+    )
+
+
 def get_insurance_instruction() -> str:
     """Return rules for gated A-share insurance analysis."""
     return (
