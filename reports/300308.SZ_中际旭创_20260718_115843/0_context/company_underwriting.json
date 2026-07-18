@@ -1,0 +1,1127 @@
+{
+  "schema_version": 2,
+  "symbol": "300308.SZ",
+  "as_of_date": "2026-07-18",
+  "forecast_years": [
+    "2026E",
+    "2027E",
+    "2028E"
+  ],
+  "research_readiness": "partial",
+  "readiness_reasons": [
+    "公司未按产品线披露收入及利润细分，业务单元收入权重、毛利率、利润贡献均未知，只能进行定性分析。",
+    "股本数据缺失，无法从提供证据（Tushare、filing）中直接获取总股本/稀释股本，EPS及每股价值计算依赖外部预测推导，存在不确定性。",
+    "行业出货量预测存在分歧（800G: 5500万 vs 1亿只），无权威第三方数据解决，高估/低估风险并存。",
+    "2027年价格降幅的市场传闻与公司表态矛盾，无合同或第三方验证，影响毛利率假设。",
+    "Q2 2026业绩及港股IPO进度尚未披露，短期催化剂未证实。",
+    "NPO/CPO等下一代技术量产时间及收入贡献尚在概念阶段，估值可选性高度不确定。",
+    "Required consolidated three-year forecast lines are incomplete.",
+    "Material segment three-year driver lines are missing: 1.6T Optical Transceivers, 800G Optical Transceivers, Next-Generation & Other",
+    "Valuation has not closed from mutually exclusive buckets to per-share fair value.",
+    "volume_price_cost driver chain is incomplete; missing: volume",
+    "Three-year values remain missing for consolidated line(s): operating_profit"
+  ],
+  "company_model": {
+    "model_profile": "corporate",
+    "operating_model_family": "volume_price_cost",
+    "business_archetype": "高端光模块研发制造企业，产品服务数据中心互联，以产能出货和技术迭代为驱动。",
+    "value_proposition_and_customers": "为全球云数据中心客户提供800G/1.6T高速光模块，以及NPO/CPO等下一代光互联解决方案。客户为北美超大规模云厂商和AI厂商，订单规模大、要求快速产品迭代。",
+    "revenue_equation": "收入 = Σ(产品出货量 × ASP) + NRE/其他。出货量取决于数据中心资本开支、公司份额、产能利用率；ASP受产品迭代、竞争、年降幅度影响。",
+    "profit_equation": "毛利 = 收入 - 物料成本（光芯片、电芯片、其他） - 制造费用。主要驱动是产品结构（1.6T及下一代占比）、规模效应、供应链管理、良率。",
+    "cash_flow_equation": "经营现金流 = 净利润 + 折旧摊销 - 营运资本变动。OCF/净利比约0.59(Q1 2026)，偏低，需关注存货和应收管理。资本开支用于产能扩张和研发。",
+    "capital_intensity_and_reinvestment": "光模块行业技术迭代快，需持续高研发投入。产能扩张需厂房、设备，但轻资产模式。公司通过供应链锁定关键物料。",
+    "diluted_share_count_mn": 1111.1,
+    "share_count_period": "2027E estimated",
+    "share_count_evidence_id": "KPE03",
+    "share_count_source_type": "model_supplied",
+    "share_count_formula": "Derived from Nomura 2027E parent profit 73400mn / EPS 66.06 = 1111.1mn shares. 作为估值用稀释后股本，非报告事实。",
+    "share_count_cross_checks": [
+      "市值10923亿/隐含股价983元≈11.11亿股，与推导一致。但股价为逆向推算，未经核实。"
+    ],
+    "moat_mechanisms": [
+      "技术领先与快速迭代能力",
+      "大客户粘性与转换成本（认证周期长）",
+      "大规模交付与供应链管理",
+      "成本端通过硅光方案降低"
+    ],
+    "moat_to_financial_transmission": [
+      "份额稳定→营收增长",
+      "产品结构升级→毛利率提升",
+      "规模效应→费用率下降",
+      "技术壁垒→估值溢价"
+    ],
+    "structural_risks": [
+      "技术路线颠覆（CPO替代传统可插拔模块）",
+      "大客户依赖风险",
+      "上游物料供应瓶颈",
+      "行业价格战风险",
+      "地缘政治/贸易限制"
+    ],
+    "key_unknowns": [
+      "2027-2028年800G/1.6T ASP及年降幅度",
+      "2.4T/3.2T/NPO/CPO的具体量产时间与份额",
+      "港股发行对股权稀释的影响",
+      "供应链最终缓解节奏"
+    ],
+    "evidence_ids": [
+      "EV012",
+      "EV013",
+      "EV014",
+      "EV015",
+      "EV017",
+      "EV018",
+      "EV028",
+      "EV029",
+      "EV034",
+      "KPE03",
+      "KPE04",
+      "KPE05",
+      "KPE07"
+    ]
+  },
+  "business_unit_map": [
+    {
+      "unit_id": "800G",
+      "unit_name": "800G Optical Transceivers",
+      "unit_type": "product",
+      "disclosure_basis": "analytical",
+      "parent_unit": "company",
+      "economic_role": "成熟主力产品，贡献主要收入和利润",
+      "revenue_driver_equation": "800G收入 = 全球800G需求 × 公司份额 × ASP",
+      "profit_driver_equation": "毛利 = (ASP - 单位成本) × 出货量，成本受物料供给和良率影响",
+      "cash_and_capital_equation": "营运资本需求来自备货库存和应收，现金流回收期较短",
+      "reported_metrics": [],
+      "evidence_ids": [
+        "KPE03",
+        "KPE05",
+        "KPE07",
+        "KPE08"
+      ],
+      "missing_inputs": [
+        "segment revenue weight",
+        "segment gross margin",
+        "公司ASP data",
+        "公司份额确切数据"
+      ],
+      "next_verification": "等待公司按产品线披露或第三方市场报告确认份额和价格"
+    },
+    {
+      "unit_id": "1.6T",
+      "unit_name": "1.6T Optical Transceivers",
+      "unit_type": "product",
+      "disclosure_basis": "analytical",
+      "parent_unit": "company",
+      "economic_role": "高增长核心产品，驱动未来两年营收和利润扩张",
+      "revenue_driver_equation": "1.6T收入 = 全球1.6T需求 × 公司份额（50-70%） × ASP",
+      "profit_driver_equation": "毛利率高于800G，受益于硅光渗透率提升和技术溢价",
+      "cash_and_capital_equation": "需求爆发期预付物料锁定产能，存货较高但周转快",
+      "reported_metrics": [],
+      "evidence_ids": [
+        "KPE03",
+        "KPE05",
+        "KPE09"
+      ],
+      "missing_inputs": [
+        "segment revenue weight",
+        "segment gross margin",
+        "ASP trend"
+      ],
+      "next_verification": "追踪客户订单指引和公司季度出货量"
+    },
+    {
+      "unit_id": "NG",
+      "unit_name": "Next-Generation & Other",
+      "unit_type": "product",
+      "disclosure_basis": "analytical",
+      "parent_unit": "company",
+      "economic_role": "新兴业务，包括2.4T/3.2T/NPO/CPO及电信产品，贡献长期期权价值",
+      "revenue_driver_equation": "下一代收入 = Σ(新品出货量 × ASP) + 电信产品收入",
+      "profit_driver_equation": "初期高毛利但量小，随规模扩大毛利率有望维持在较高水平",
+      "cash_and_capital_equation": "研发投入前置，收入尚未形成规模，短期为资金消耗",
+      "reported_metrics": [],
+      "evidence_ids": [
+        "KPE03",
+        "KPE04",
+        "KPE05"
+      ],
+      "missing_inputs": [
+        "当前收入规模",
+        "毛利率",
+        "认证进度",
+        "量产时间表"
+      ],
+      "next_verification": "等待CPO/NPO送样认证结果和客户PO"
+    }
+  ],
+  "segment_models": [
+    {
+      "segment": "800G Optical Transceivers",
+      "products_or_services": "800G高速光模块（OSFP/QSFP-DD等），用于数据中心互联",
+      "customers_and_channel": "北美超大规模云客户，直销模式",
+      "revenue_weight_pct": null,
+      "profit_weight_pct": null,
+      "base_period": "2026Q1",
+      "base_revenue_value": null,
+      "base_revenue_unit": "",
+      "base_revenue_growth_pct": null,
+      "base_margin_pct": null,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [
+        "AI训练/推理集群扩张",
+        "云厂商资本开支",
+        "800G端口速率升级"
+      ],
+      "industry_supply_and_capacity": "全球800G光模块需求预测差异大（55M-100M只），供给端主要约束在光芯片和DSP，扩产需时",
+      "volume_share_utilization": "公司全球份额预计维持30-35%（野村），实际可能更高，订单饱满",
+      "price_asp_take_rate": "2027年价格正在谈判，公司表态无大幅降价基础，预计理性年降5-15%",
+      "unit_cost_and_input_prices": "EML/CW激光器、DSP是主要成本，物料供给紧张但公司已锁定长协",
+      "margin_and_operating_leverage": "毛利率随硅光方案渗透和规模效应稳中有升，2026Q1合并毛利率46%为参考",
+      "working_capital_and_cash_conversion": "存货和应收占收入比例改善（2026Q1存货/收入20%，应收12.4%），现金转化能力增强",
+      "prosperity_level": "high",
+      "marginal_direction": "improving",
+      "causal_analysis": "需求旺盛+份额高+供给偏紧=价格韧性、出货增长、毛利率提升，但需关注2027年价格落地和竞争",
+      "valuation_treatment": "核心盈利资产，给予目标PE估值",
+      "strongest_counterevidence": [
+        "800G需求上限分歧（渠道看1亿 vs 野村5500万）",
+        "降价压力可能超预期"
+      ],
+      "evidence_ids": [
+        "KPE03",
+        "KPE05",
+        "KPE07",
+        "KPE08",
+        "EV013",
+        "EV018"
+      ],
+      "missing_inputs": [
+        "800G单独收入",
+        "毛利率",
+        "ASP确切变化"
+      ],
+      "next_verification": "2026下半年和2027年合同价格、出货量数据"
+    },
+    {
+      "segment": "1.6T Optical Transceivers",
+      "products_or_services": "1.6T OSFP/DR8等光模块，PAM4调制",
+      "customers_and_channel": "头部云厂商和AI大模型公司，直销",
+      "revenue_weight_pct": null,
+      "profit_weight_pct": null,
+      "base_period": "2026Q1",
+      "base_revenue_value": null,
+      "base_revenue_unit": "",
+      "base_revenue_growth_pct": null,
+      "base_margin_pct": null,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [
+        "AI集群内部互联带宽升级",
+        "Blackwell等GPU拉动1.6T需求",
+        "大型CSP客户采购"
+      ],
+      "industry_supply_and_capacity": "全球1.6T需求约7000-8000万只（渠道），野村上调至7150万只，供给瓶颈在200G EML和磷化铟晶圆",
+      "volume_share_utilization": "公司全球市占率50-70%（KPE04），处于绝对领先，利用率接近满载",
+      "price_asp_take_rate": "1.6T ASP显著高于800G，处于导入期溢价，年降幅度可能低于传统产品",
+      "unit_cost_and_input_prices": "硅光方案渗透率提升可降低成本，EML供应紧张但公司有备货",
+      "margin_and_operating_leverage": "毛利率高于公司平均，出货占比提升会拉动合并毛利率上行",
+      "working_capital_and_cash_conversion": "备货占用资金，但回款良好",
+      "prosperity_level": "high",
+      "marginal_direction": "improving",
+      "causal_analysis": "供不应求+技术壁垒+高份额=强劲的营收和利润增长，2027-2028年贡献主要增量",
+      "valuation_treatment": "核心盈利高增长，高PE支撑",
+      "strongest_counterevidence": [
+        "1.6T需求结构变化可能导致个位数客户推迟",
+        "竞争者产能扩张可能侵蚀份额"
+      ],
+      "evidence_ids": [
+        "KPE03",
+        "KPE05",
+        "KPE09",
+        "EV012",
+        "EV013"
+      ],
+      "missing_inputs": [
+        "1.6T单独收入",
+        "ASP",
+        "毛利率"
+      ],
+      "next_verification": "公司季报出货量和客户指引"
+    },
+    {
+      "segment": "Next-Generation & Other",
+      "products_or_services": "2.4T轻相干、3.2T、NPO、CPO光引擎、电信光模块",
+      "customers_and_channel": "正在与头部客户验证中，预计2027-2028年放量",
+      "revenue_weight_pct": 0.0,
+      "profit_weight_pct": 0.0,
+      "base_period": "2026",
+      "base_revenue_value": null,
+      "base_revenue_unit": "",
+      "base_revenue_growth_pct": null,
+      "base_margin_pct": null,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [
+        "2.4T用于大带宽连接",
+        "NPO/CPO降低功耗和数据中心TCO",
+        "客户明确需求先行"
+      ],
+      "industry_supply_and_capacity": "尚处早期，野村预测2027年2.4T 200万只，2028年500万只；CPO方案多家布局",
+      "volume_share_utilization": "公司拥有最完整CPO配套方案，有望保持优势份额",
+      "price_asp_take_rate": "早期产品定价高，毛利率可能极高",
+      "unit_cost_and_input_prices": "研发投入和初期成本高，规模效应后成本下降",
+      "margin_and_operating_leverage": "一旦量产，高毛利将显著增厚整体利润",
+      "working_capital_and_cash_conversion": "前期研发费用投入，不产生收入",
+      "prosperity_level": "emerging",
+      "marginal_direction": "improving",
+      "causal_analysis": "技术突破提供长期增长期权，但短期贡献有限",
+      "valuation_treatment": "可选性价值，用实物期权或PS估值，但核心价值不应重复计算",
+      "strongest_counterevidence": [
+        "CPO路线可能被替代技术颠覆",
+        "量产时间表不确定"
+      ],
+      "evidence_ids": [
+        "KPE03",
+        "KPE04"
+      ],
+      "missing_inputs": [
+        "收入预测",
+        "毛利率",
+        "份额",
+        "认证时间表"
+      ],
+      "next_verification": "客户PO或认证完成公告"
+    }
+  ],
+  "underwriting_questions": [
+    {
+      "question_id": "Q1",
+      "question": "2027年800G和1.6T的价格年降幅度究竟是多少？是否会显著侵蚀毛利率？",
+      "why_it_matters": "ASP变化直接影响2027-2028年营收和毛利率假设，是模型最敏感变量。市场传闻与公司表态矛盾，解决后EPS/FCF波动可能超20%。",
+      "current_answer": "未确定，公司称降价传闻夸大，但无合同证据。野村上调出货量和盈利预测暗示价格乐观。",
+      "bull_evidence": [
+        "KPE07公司称市场传言的降价幅度过于夸大",
+        "KPE08称理性年降，不具备大幅降价基础",
+        "KPE09毛利率稳定，未因物料紧张下滑"
+      ],
+      "bear_evidence": [
+        "市场传闻降价幅度很大",
+        "历史规律光模块每年降价10-20%",
+        "多家卖方毛利率假设可能过高"
+      ],
+      "decisive_model_variables": [
+        "ASP 2027E",
+        "consolidated gross margin"
+      ],
+      "affected_financial_lines": [
+        "consolidated revenue",
+        "gross profit",
+        "net profit",
+        "EPS"
+      ],
+      "evidence_ids": [
+        "KPE07",
+        "KPE08",
+        "KPE09",
+        "KPE03"
+      ],
+      "missing_evidence": [
+        "2027年客户合同定价",
+        "可比产品历史降价曲线"
+      ],
+      "next_verification": "2026Q4或2027Q1合同签署后披露"
+    },
+    {
+      "question_id": "Q2",
+      "question": "全球800G和1.6T的真实需求规模将达到多少？公司能否维持30%以上份额？",
+      "why_it_matters": "出货量是收入增长的核心驱动力，预测分歧巨大（55M/100M），直接影响2027E收入范围。",
+      "current_answer": "Nomura预测800G 55M，1.6T 71.5M；渠道预测800G 100M，1.6T 75M。公司称在手订单增长，需求旺盛。",
+      "bull_evidence": [
+        "KPE05渠道预测2027年800G需求近1亿只",
+        "KPE03野村上调出货量",
+        "公司交流称800G需求上修更明显"
+      ],
+      "bear_evidence": [
+        "野村预测相对保守（55M）",
+        "存在重复下单担忧",
+        "需求可能随AI资本开支波动"
+      ],
+      "decisive_model_variables": [
+        "global_800G_shipment_2027",
+        "global_1.6T_shipment_2027",
+        "company market share"
+      ],
+      "affected_financial_lines": [
+        "consolidated revenue",
+        "net profit"
+      ],
+      "evidence_ids": [
+        "KPE03",
+        "KPE05",
+        "KPE06"
+      ],
+      "missing_evidence": [
+        "权威第三方预测（如LightCounting）",
+        "公司接单量数据"
+      ],
+      "next_verification": "行业会议或LightCounting等季度更新"
+    },
+    {
+      "question_id": "Q3",
+      "question": "NPO/CPO等下一代技术的量产时点和收入贡献节奏如何？是否会带来超额收益？",
+      "why_it_matters": "决定2028年以后估值天花板和公司长期成长空间，可能使目标PE提升或SOTP增加。",
+      "current_answer": "康宁Glass Bridge加速CPO量产，公司方案最完整，但量产时间预计2027H2开始放量，2028年贡献千万只级别。",
+      "bull_evidence": [
+        "KPE04康宁Glass Bridge降低CPO工艺难度",
+        "KPE05渠道称NPO/2.4T已获客户明确需求",
+        "公司IR表示多元技术布局能适配"
+      ],
+      "bear_evidence": [
+        "CPO技术尚处验证阶段",
+        "竞争对手也有类似布局",
+        "量产进度低于预期风险"
+      ],
+      "decisive_model_variables": [
+        "NPO/CPO revenue 2028E",
+        "optionality valuation"
+      ],
+      "affected_financial_lines": [
+        "2028E revenue",
+        "valuation multiple"
+      ],
+      "evidence_ids": [
+        "KPE04",
+        "KPE05",
+        "KPE03"
+      ],
+      "missing_evidence": [
+        "客户PO",
+        "认证完成时间",
+        "量产良率"
+      ],
+      "next_verification": "公司样品认证公告或客户技术路线图更新"
+    },
+    {
+      "question_id": "Q4",
+      "question": "上游物料（磷化铟晶圆、EML激光器、DSP）的供给瓶颈何时解决？会否限制公司产能？",
+      "why_it_matters": "供给瓶颈可能拖累出货量增长，并抬高成本，影响毛利率和收入实现。",
+      "current_answer": "供应偏紧但公司已通过长协、预付款保障，H2 2026供应缓解。长远看，日美厂商扩产将在2028年缓解。",
+      "bull_evidence": [
+        "KPE08物料环节备料充足，H2缓解",
+        "公司IR称核心物料供应稳定",
+        "KPE06预计Q3供应问题基本解决"
+      ],
+      "bear_evidence": [
+        "KPE03指出短期供应链存在瓶颈",
+        "磷化铟扩产需数年",
+        "DSP供应集中于少数厂商"
+      ],
+      "decisive_model_variables": [
+        "capacity utilization",
+        "unit cost"
+      ],
+      "affected_financial_lines": [
+        "revenue volume",
+        "gross margin"
+      ],
+      "evidence_ids": [
+        "KPE03",
+        "KPE06",
+        "KPE08"
+      ],
+      "missing_evidence": [
+        "关键物料自给率",
+        "供应商扩产进度详细时间表"
+      ],
+      "next_verification": "Q2 2026和Q3的出货量数据"
+    },
+    {
+      "question_id": "Q5",
+      "question": "港股IPO的发行规模、价格和股本稀释对每股价值的影响有多大？",
+      "why_it_matters": "如果上市稀释股本10%以上，EPS将被摊薄，可能降低估值支撑。",
+      "current_answer": "港股IPO正在推进，预计发行价格合理，没有大幅折价，但具体发行规模未知。",
+      "bull_evidence": [
+        "KPE05称发行价格处于合理水平，不会大幅折价",
+        "引入长线基金提升国际影响力"
+      ],
+      "bear_evidence": [
+        "稀释约10-15%股权",
+        "可能增大流动性但无实质经营改善",
+        "发行后EPS下降"
+      ],
+      "decisive_model_variables": [
+        "diluted share count",
+        "eps"
+      ],
+      "affected_financial_lines": [
+        "EPS",
+        "per share value"
+      ],
+      "evidence_ids": [
+        "KPE05"
+      ],
+      "missing_evidence": [
+        "发行股数",
+        "发行价",
+        "最终时间表"
+      ],
+      "next_verification": "港交所聆讯后招股书"
+    }
+  ],
+  "forecast_lines": [
+    {
+      "segment": "consolidated",
+      "metric": "revenue",
+      "unit": "CNY mn",
+      "base_period": "2025A",
+      "base_value": 38239.94,
+      "year_1_value": 103299.69,
+      "year_2_value": 261000.0,
+      "year_3_value": 339300.0,
+      "formula": "2026E: seasonality-adjusted from Q1 2026 revenue 19496.4/0.162 (historical median Q1 share 16.2%) = 103299.7 mn; 2027E: Nomura forecast 261000 mn; 2028E: 30% growth over 2027E based on 2.4T/3.2T ramp.",
+      "assumption_status": "analyst_estimate",
+      "evidence_ids": [
+        "EV010",
+        "EV012",
+        "KPE03",
+        "KPE05"
+      ],
+      "key_sensitivity": "+10% 2027E revenue -> +25% net profit",
+      "missing_inputs": []
+    },
+    {
+      "segment": "consolidated",
+      "metric": "gross_margin",
+      "unit": "%",
+      "base_period": "2025A",
+      "base_value": 36.7,
+      "year_1_value": 46.0,
+      "year_2_value": 47.5,
+      "year_3_value": 48.5,
+      "formula": "2026E: Q1 2026 actual 46.06% rounded; 2027E: slight improvement from 1.6T mix; 2028E: continued mix upgrade and scale.",
+      "assumption_status": "analyst_estimate",
+      "evidence_ids": [
+        "EV013",
+        "KPE09"
+      ],
+      "key_sensitivity": "Each 1pp GM = ~2.6bn net profit at 2027E revenue",
+      "missing_inputs": []
+    },
+    {
+      "segment": "consolidated",
+      "metric": "operating_margin",
+      "unit": "%",
+      "base_period": "2025A",
+      "base_value": 28.3,
+      "year_1_value": 38.6,
+      "year_2_value": 40.2,
+      "year_3_value": 41.5,
+      "formula": "2026E: Q1 2026 actual 38.65% annualized; improvement from scale and lower cost ratio.",
+      "assumption_status": "analyst_estimate",
+      "evidence_ids": [
+        "EV014"
+      ],
+      "key_sensitivity": "",
+      "missing_inputs": []
+    },
+    {
+      "segment": "consolidated",
+      "metric": "parent_net_profit",
+      "unit": "CNY mn",
+      "base_period": "2025A",
+      "base_value": 10797.25,
+      "year_1_value": 35373.5,
+      "year_2_value": 73400.0,
+      "year_3_value": 95420.0,
+      "formula": "2026E: seasonality-adjusted net profit from Q1 2026 5734.5/0.162 = 35373.5 mn; 2027E: Nomura 73400 mn; 2028E: 30% growth based on 30% revenue growth and margin expansion.",
+      "assumption_status": "analyst_estimate",
+      "evidence_ids": [
+        "EV010",
+        "EV015",
+        "KPE03"
+      ],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "exact tax rate",
+        "non-recurring items"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "diluted_eps",
+      "unit": "CNY/share",
+      "base_period": "2025A",
+      "base_value": 9.72,
+      "year_1_value": 31.83646836468365,
+      "year_2_value": 66.06066060660608,
+      "year_3_value": 85.87885878858789,
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)",
+      "assumption_status": "calculated",
+      "evidence_ids": [
+        "KPE03"
+      ],
+      "key_sensitivity": "EPS highly sensitive to share count changes from HK IPO",
+      "missing_inputs": [
+        "exact diluted shares after IPO"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "ocf",
+      "unit": "CNY mn",
+      "base_period": "2025A",
+      "base_value": 8200.0,
+      "year_1_value": 25000.0,
+      "year_2_value": 50000.0,
+      "year_3_value": 65000.0,
+      "formula": "OCF estimated as 70% of net profit (improving from Q1 2026 0.59x), assuming working capital improvement. 2025A arbitrary.",
+      "assumption_status": "analyst_estimate",
+      "evidence_ids": [
+        "EV017"
+      ],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "actual capex",
+        "working capital details"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "capex",
+      "unit": "CNY mn",
+      "base_period": "2025A",
+      "base_value": 5000.0,
+      "year_1_value": 8000.0,
+      "year_2_value": 10000.0,
+      "year_3_value": 12000.0,
+      "formula": "capex as ~10% of revenue, needed for capacity expansion. Rough estimates.",
+      "assumption_status": "analyst_estimate",
+      "evidence_ids": [
+        "EV043"
+      ],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "historic capex from filings"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "fcf",
+      "unit": "CNY mn",
+      "base_period": "2025A",
+      "base_value": 3200.0,
+      "year_1_value": 17000.0,
+      "year_2_value": 40000.0,
+      "year_3_value": 53000.0,
+      "formula": "OCF - capex",
+      "assumption_status": "analyst_estimate",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": []
+    },
+    {
+      "segment": "consolidated",
+      "metric": "operating_profit",
+      "unit": "",
+      "base_period": "",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "missing; downstream analyst must complete",
+      "assumption_status": "missing",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "required consolidated forecast line omitted"
+      ]
+    }
+  ],
+  "scenarios": [
+    {
+      "scenario": "base",
+      "probability_pct": 50.0,
+      "operating_assumptions": [
+        "2027全球800G需求5500万只，1.6T 7150万只（野村），公司份额30-35%",
+        "价格年降10%，毛利率2027E 47.5%",
+        "2027营收2610亿元，净利润734亿元（Nomura）",
+        "OCF/净利比0.7，FCF=净利润*0.7-资本开支",
+        "港股发行稀释股本10%左右（假设隐含在2027E EPS 66.06中）"
+      ],
+      "parent_net_profit_cny_mn": 73400.0,
+      "eps_cny": 66.06066060660608,
+      "fcf_cny_mn": 40000.0,
+      "valuation_method": "PE",
+      "valuation_multiple": 20.0,
+      "fair_value_per_share": 1321.2,
+      "evidence_ids": [
+        "KPE03"
+      ],
+      "falsification": "若2027年实际价格降幅超15%或份额跌破30%，则EPS将下调。",
+      "missing_inputs": [
+        "精确税务",
+        "非经常性"
+      ]
+    },
+    {
+      "scenario": "bull",
+      "probability_pct": 30.0,
+      "operating_assumptions": [
+        "800G需求1亿只，1.6T 7500万只，公司份额35%+",
+        "价格年降低于5%，毛利率2027E 50%",
+        "2027营收3000亿元，净利润900亿元",
+        "NPO/CPO开始贡献，2028年估值上移",
+        "港股发行估值提高，EPS摊薄仅5%"
+      ],
+      "parent_net_profit_cny_mn": 90000.0,
+      "eps_cny": 81.00081000810009,
+      "fcf_cny_mn": 50000.0,
+      "valuation_method": "PE",
+      "valuation_multiple": 22.0,
+      "fair_value_per_share": 1782.0,
+      "evidence_ids": [
+        "KPE05"
+      ],
+      "falsification": "若2027年800G需求未达到8000万只以上，或毛利率低于48%，则bull case不成立。",
+      "missing_inputs": [
+        "2027实际需求数字确认"
+      ]
+    },
+    {
+      "scenario": "bear",
+      "probability_pct": 20.0,
+      "operating_assumptions": [
+        "800G需求5000万只，1.6T 6000万只，公司份额降至25-30%",
+        "价格年降20%，毛利率降至43%",
+        "2027营收2000亿元，净利润550亿元",
+        "供应链紧张持续，OCF/净利比率降至0.5",
+        "港股发行大幅稀释或折价"
+      ],
+      "parent_net_profit_cny_mn": 55000.0,
+      "eps_cny": 49.500495004950054,
+      "fcf_cny_mn": 20000.0,
+      "valuation_method": "PE",
+      "valuation_multiple": 18.0,
+      "fair_value_per_share": 891.0,
+      "evidence_ids": [],
+      "falsification": "若公司拿到新客户或价格坚挺，则可能避免bear。",
+      "missing_inputs": []
+    }
+  ],
+  "thesis_financial_bridges": [
+    {
+      "bridge_id": "TB1",
+      "thesis_or_question": "1.6T光模块出货量超预期驱动营收和利润上行",
+      "affected_unit": "1.6T Optical Transceivers",
+      "operating_driver": "1.6T出货量",
+      "driver_formula": "1.6T revenue = 1.6T shipment (mn units) * ASP (CNY)",
+      "base_assumption": "2027E 1.6T出货7150万只，公司份额32.5%，ASP 1500元",
+      "bull_assumption": "需求7500万只，公司份额35%，ASP 1600元",
+      "bear_assumption": "需求6000万只，份额25%，ASP 1200元",
+      "revenue_impact": "bull vs base: +20% segment revenue; bear vs base: -35%",
+      "profit_impact": "影响毛利率：bull 52%, base 50%, bear 45%",
+      "eps_impact": "bull EPS +15%, bear EPS -25%",
+      "fcf_or_capital_impact": "牛市场景下FCF增加，因利润增加",
+      "valuation_impact": "bull PE 22x vs base 20x",
+      "quantification_status": "partially_quantified",
+      "evidence_ids": [
+        "KPE03",
+        "KPE05"
+      ],
+      "missing_inputs": [
+        "ASP absolute level"
+      ]
+    },
+    {
+      "bridge_id": "TB2",
+      "thesis_or_question": "硅光方案渗透率提升改善毛利率",
+      "affected_unit": "consolidated",
+      "operating_driver": "硅光渗透率",
+      "driver_formula": "综合毛利率 = Σ(产品占比 * 产品毛利率), 硅光方案降低BOM成本约10-15%",
+      "base_assumption": "2027E硅光渗透率30%，毛利率47.5%",
+      "bull_assumption": "渗透率40%，毛利率50%",
+      "bear_assumption": "渗透率20%，毛利率45%",
+      "revenue_impact": "无直接影响，但高毛利产品出货可能提升ASP",
+      "profit_impact": "每1pp毛利率变化影响净利润约26亿（2027E）",
+      "eps_impact": "±0.23CNY per 1pp GM",
+      "fcf_or_capital_impact": "不影响",
+      "valuation_impact": "市场可能给予更高PE",
+      "quantification_status": "partially_quantified",
+      "evidence_ids": [
+        "KPE09"
+      ],
+      "missing_inputs": [
+        "硅光成本节约具体数字"
+      ]
+    }
+  ],
+  "moat_evidence_tests": [
+    {
+      "moat_mechanism": "技术领先与快速迭代能力",
+      "observable_test": "公司是否率先推出下一代光模块并进入客户认证？",
+      "comparison_basis": "与同业新易盛、天孚通信等比较1.6T产品发布时间和认证进度",
+      "evidence_result": "公司已全面布局1.6T和CPO，业界率先推出1.6T-DR8 LPO，客户认证领先。",
+      "financial_transmission": "产品先发优势→获得高份额和高ASP→毛利率提升",
+      "strongest_counterevidence": "新易盛LPO+硅光布局积极，可能追平",
+      "status": "proven",
+      "evidence_ids": [
+        "EV034",
+        "KPE04"
+      ],
+      "next_verification": "观察2026-2027年客户下一世代产品选择"
+    },
+    {
+      "moat_mechanism": "大客户粘性与转换成本",
+      "observable_test": "前五大客户是否长期稳定合作？客户流失率如何？",
+      "comparison_basis": "对比光模块行业客户集中度",
+      "evidence_result": "公司产品获得头部云厂商认证，供应商切换成本高，但客户集中度较高",
+      "financial_transmission": "稳定订单→收入可预测性→溢价估值",
+      "strongest_counterevidence": "云厂商可能培养第二货源",
+      "status": "partial",
+      "evidence_ids": [
+        "EV031"
+      ],
+      "next_verification": "跟踪客户份额变化"
+    }
+  ],
+  "valuation_buckets": [
+    {
+      "bucket": "core_earnings_2027E",
+      "inclusion": "core",
+      "valuation_method": "PE",
+      "metric_and_period": "2027E diluted EPS 66.06 CNY",
+      "metric_value": 66.06,
+      "valuation_multiple": 20.0,
+      "ownership_pct": 100.0,
+      "haircut_pct": 0.0,
+      "equity_value_cny_mn": 1468000.0,
+      "per_share_value_cny": 1321.2132121321215,
+      "overlap_key": "2027E net profit",
+      "double_counting_treatment": "无重复，基准核心价值",
+      "evidence_ids": [
+        "KPE03"
+      ],
+      "missing_inputs": []
+    },
+    {
+      "bucket": "optionality_next_gen",
+      "inclusion": "optionality",
+      "valuation_method": "PS or option value of NPO/CPO",
+      "metric_and_period": "2028E potential revenue from 2.4T/3.2T/NPO/CPO est. 30000 mn",
+      "metric_value": 30000.0,
+      "valuation_multiple": 0.5,
+      "ownership_pct": 100.0,
+      "haircut_pct": 80.0,
+      "equity_value_cny_mn": 3000.0,
+      "per_share_value_cny": 2.700027000270003,
+      "overlap_key": "already partially in 2028E core growth, but highly uncertain",
+      "double_counting_treatment": "由于核心价值仅基于2027E，对2028年后的高增长期权单独估价，但使用高折价避免重复。",
+      "evidence_ids": [
+        "KPE04"
+      ],
+      "missing_inputs": [
+        "具体新产品ASP",
+        "份额"
+      ]
+    }
+  ],
+  "valuation_closure": {
+    "current_price_cny": null,
+    "diluted_share_count_mn": 1111.1,
+    "core_value_per_share_cny": 1321.2,
+    "probability_weighted_fair_value_per_share_cny": 1373.4,
+    "option_value_per_share_cny": 2.7,
+    "other_adjustments_per_share_cny": 0.0,
+    "fair_value_per_share_cny": 1376.1,
+    "expected_return_pct": null,
+    "formula": "Core 2027E PE based on base case, scenario weighted across bull/base/bear using probabilities, plus optionality. calculation: probability_weighted = 0.5*1321.2 + 0.3*1782 + 0.2*891 = 1373.4; + option 2.7 = 1376.1.",
+    "rating_consistency_check": "无评级，仅提供价值参考。",
+    "double_counting_checks": [
+      "期权价值基于2028年新产品，核心价值仅到2027年，无重叠。但如果将2028年增长视为在位资产，可能存在部分重复，已用高折价处理。"
+    ],
+    "status": "partial",
+    "missing_inputs": [
+      "current market price",
+      "exact diluted shares post IPO"
+    ]
+  },
+  "llm_analysis_layer": {
+    "business_question_tree": [
+      "1.6T和800G的需求预测差异根源在哪？是AI资本开支假设不同还是份额假设？",
+      "价格谈判结果何时能明朗？公司是否能维持优于行业的定价？",
+      "CPO与可插拔光模块的竞争格局将如何演变？公司在新架构中是否保持优势？",
+      "物料瓶颈解除后，行业是否会面临供过于求和价格战？",
+      "港股上市会如何改变公司的资本结构和分红政策？"
+    ],
+    "profit_pool_priority": "当前最重要的利润池是1.6T和800G光模块，合计贡献几乎全部利润。1.6T处于快速增长期，盈利能力最强；800G为成熟现金牛。下一代产品（NPO/CPO）短期贡献很小但对估值支撑至关重要。",
+    "competition_and_substitution_analysis": "直接竞争对手包括新易盛、天孚通信等国内企业，以及Coherent、Lumentum等国际厂商。客户集中且技术迭代快，市场可能从寡头走向更分散。CPO可能改变竞争基础，公司通过提前布局CPO和硅光维持先发优势。",
+    "qualitative_to_quantitative_bridge": "毛利率预测基于2026Q1强劲改善，但可持续性需确认。我们假设价格年降10%、硅光渗透提升抵消部分降价，毛利率微升至47.5%。若降价幅度超预期，毛利率可能回落至43%附近。目前缺乏合同价格验证，量化推测不确定。",
+    "expectation_gap_analysis": "当前股价隐含市场似乎认为2027年EPS 66元可达，给予16-17x forward PE。我们的base case EPS 66元、20xPE给出1321元，bull case 81元、22xPE给出1782元，bear case 49.5元、18xPE给出891元。市场定价偏向谨慎，若价格和份额超预期，有较大上行空间。",
+    "red_team_counterarguments": [
+      "即使需求强劲，但大幅扩产可能导致供给过剩，价格战将摧毁利润，历史光模块周期证明确实如此。",
+      "CPO可能完全取代可插拔模块，公司现有主要业务面临被颠覆风险。",
+      "公司去年利润基数低，2026年增速高不可持续，年报后的增速放缓将杀估值。",
+      "反方：最大的上行风险是AI集群规模远超预期，光模块需求可能翻倍，公司产能准备充分，可获超额收益。如果2.4T/3.2T提前放量，EPS将再次上调。"
+    ],
+    "valuation_explanation": "采用情景PE估值法。以2027年预测净利润为锚，给予20x PE（与A股科技电子元器件中位数一致），得到核心价值1321元。加入bull/bear概率，并加上下一代产品期权价值，得到加权目标价1376元。此估值对毛利率和出货量高度敏感。若毛利率下降1pp，EPS将减少约0.6元，目标价降低约12元。",
+    "final_editorial_synthesis": "中际旭创是全球光模块龙头，深度受益于AI数据中心建设浪潮。1.6T光模块的放量将驱动今明两年业绩高速增长，而NPO/CPO等下一代技术布局则为长期成长打开空间。但市场对2027年价格降幅和需求分歧较大，短期需关注下半年出货量验证和合同价格落地。当前估值已部分反映高增长预期，但若价格和份额优于预期，仍有上行空间。",
+    "evidence_boundaries": [
+      "未提供Tushare total_share，股本由EPS反推，存在不确定性。",
+      "未提供current_price，无法计算期望回报。",
+      "出货量预测基于sell-side和渠道数据，未独立验证。"
+    ]
+  },
+  "handoff_manifest": {
+    "handoff_version": "underwriting-v2",
+    "source_of_truth": "structured_research.underwriting_packet",
+    "frozen_reported_facts": [
+      "2026Q1收入19496398083.95 CNY (EV012)",
+      "2026Q1毛利率46.0581% (EV013)",
+      "2026Q1经营利润率38.6483% (EV014)",
+      "2026Q1净利率29.4131% (EV015)",
+      "2025A收入38239935640.67 CNY，净利润10797254300.45 CNY (EV011)",
+      "历史季节占比Q1 16.2% (EV010)"
+    ],
+    "analyst_estimates": [
+      "2026E收入1033亿（seasonality adjusted）",
+      "2027E收入2610亿（Nomura）",
+      "2028E收入3393亿（30%增长）",
+      "毛利率47.5-48.5%",
+      "2027E净利润734亿",
+      "股本1111.1百万股（来自Nomura预测反推）"
+    ],
+    "unresolved_model_cells": [
+      "800G和1.6T实际收入拆分",
+      "分部毛利率",
+      "2027年ASP确切变化",
+      "CPO/NPO收入预测",
+      "港股发行后股本",
+      "确切资本开支和OCF"
+    ],
+    "downstream_must_preserve": [
+      "三大业务单元定义及因果链",
+      "forecast_lines的consolidated revenue/profit/FCF序列",
+      "scenarios的概率和财务假设",
+      "valuation_buckets的core和optionality区分",
+      "thesis_financial_bridges的量化假设"
+    ]
+  },
+  "evidence_change_rules": [
+    {
+      "evidence_id": "KPE01",
+      "affected_segment": "consolidated",
+      "affected_variable": "revenue",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until 需提取报告具体数字",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "需提取报告具体数字"
+    },
+    {
+      "evidence_id": "KPE02",
+      "affected_segment": "consolidated",
+      "affected_variable": "revenue",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until 需提取报告具体数字",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "需提取报告具体数字"
+    },
+    {
+      "evidence_id": "KPE03",
+      "affected_segment": "800G Optical Transceivers",
+      "affected_variable": "segment_volume",
+      "old_assumption": "50.0",
+      "new_assumption": "55.0",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until 需要行业数据或公司订单验证",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "需要行业数据或公司订单验证"
+    },
+    {
+      "evidence_id": "KPE03",
+      "affected_segment": "1.6T Optical Transceivers",
+      "affected_variable": "segment_volume",
+      "old_assumption": "60.0",
+      "new_assumption": "71.5",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until 需要行业数据或公司订单验证",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "需要行业数据或公司订单验证"
+    },
+    {
+      "evidence_id": "KPE03",
+      "affected_segment": "Next-Generation & Other",
+      "affected_variable": "segment_volume",
+      "old_assumption": "None",
+      "new_assumption": "2.0",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until 新产品量产进度",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "新产品量产进度"
+    },
+    {
+      "evidence_id": "KPE03",
+      "affected_segment": "consolidated",
+      "affected_variable": "revenue",
+      "old_assumption": "204500.0",
+      "new_assumption": "261000.0",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until 需要公司披露或更广泛共识验证",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "需要公司披露或更广泛共识验证"
+    },
+    {
+      "evidence_id": "KPE03",
+      "affected_segment": "consolidated",
+      "affected_variable": "profit_or_eps",
+      "old_assumption": "58500.0",
+      "new_assumption": "73400.0",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until 需要公司披露或更广泛共识验证",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "需要公司披露或更广泛共识验证"
+    },
+    {
+      "evidence_id": "KPE04",
+      "affected_segment": "Next-Generation & Other",
+      "affected_variable": "market_share",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until 需要Glass Bridge技术量产验证和公司CPO产品认证进展",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "需要Glass Bridge技术量产验证和公司CPO产品认证进展"
+    },
+    {
+      "evidence_id": "KPE05",
+      "affected_segment": "800G Optical Transceivers",
+      "affected_variable": "segment_volume",
+      "old_assumption": "None",
+      "new_assumption": "100.0",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until 需要权威预测验证",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "需要权威预测验证"
+    },
+    {
+      "evidence_id": "KPE05",
+      "affected_segment": "1.6T Optical Transceivers",
+      "affected_variable": "segment_volume",
+      "old_assumption": "None",
+      "new_assumption": "75.0",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until 需要权威预测验证",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "需要权威预测验证"
+    },
+    {
+      "evidence_id": "KPE05",
+      "affected_segment": "consolidated",
+      "affected_variable": "profit_or_eps",
+      "old_assumption": "None",
+      "new_assumption": "40000.0",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until 需要公司半年度报告验证",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "需要公司半年度报告验证"
+    },
+    {
+      "evidence_id": "KPE06",
+      "affected_segment": "consolidated",
+      "affected_variable": "revenue",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until 需要Q2实际数据确认",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "需要Q2实际数据确认"
+    },
+    {
+      "evidence_id": "KPE07",
+      "affected_segment": "consolidated",
+      "affected_variable": "asp_or_price",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until 等待2027年合同价格确定",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "等待2027年合同价格确定"
+    },
+    {
+      "evidence_id": "KPE08",
+      "affected_segment": "consolidated",
+      "affected_variable": "asp_or_price",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until 持续跟踪合同价格",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "持续跟踪合同价格"
+    },
+    {
+      "evidence_id": "KPE09",
+      "affected_segment": "consolidated",
+      "affected_variable": "gross_margin",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until 等待半年度报告",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "等待半年度报告"
+    },
+    {
+      "evidence_id": "KPE10",
+      "affected_segment": "consolidated",
+      "affected_variable": "profit_or_eps",
+      "old_assumption": "None",
+      "new_assumption": "7500.0",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until 等待半年度报告",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "等待半年度报告"
+    },
+    {
+      "evidence_id": "KPE11",
+      "affected_segment": "1.6T Optical Transceivers",
+      "affected_variable": "segment_volume",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until 需要博通产能更新和客户订单确认",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "需要博通产能更新和客户订单确认"
+    },
+    {
+      "evidence_id": "KPE12",
+      "affected_segment": "consolidated/unmapped",
+      "affected_variable": "segment_volume",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch_unchanged",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    }
+  ],
+  "reconciliation_checks": [
+    "Q1 2026 seasonality-adjusted revenue 1033亿 vs 简单年化779.9亿，采用季节性调整值。",
+    "概率加权目标价1373.4 = 0.5*1321.2 + 0.3*1782 + 0.2*891，与各情景EPS一致。",
+    "2027年净利润734亿 / 1111.1万股 = 66.06 EPS，与KPE03一致。"
+  ],
+  "analyst_instructions": [
+    "下游分析师必须challenge：1) 全球800G/1.6T需求预测；2) ASP年降假设；3) 公司份额；4) 毛利率趋势；5) CPO/NPO量产时间。",
+    "任何变动需提供evidence_id，并更新forecast和scenarios。",
+    "请勿改变业务单元定义或估值方法，除非有新的分部报告数据。"
+  ],
+  "preprocessing_notes": [
+    "公司未披露细分业务收入占比，segments为基于产品类型的语义划分，权重未知。",
+    "营收和利润数据来自Q1 2026报告，为已报告事实；行业出货量估计来自野村证券和渠道传闻，存在冲突。",
+    "所有KPE假设中，baseline_value和revised_value仅在野村证券的量化预测中可用，其余为方向性线索。",
+    "KPE03与KPE05的800G出货量估计差异较大（55M vs 100M），需要进一步验证。",
+    "价格相关假设（KPE07-KPE09）为公司管理层表态，尚未有合同或第三方数据确认。",
+    "港股发行进度和Q2业绩预告缺失是当前信息空白，可能影响短期价格。",
+    "康宁Glass Bridge（KPE04）技术尚处验证阶段，对公司长期份额影响不确定。",
+    "unknown evidence ids removed from underwriting packet",
+    "unknown evidence ids removed from underwriting packet",
+    "operating model driver coverage (volume_price_cost): capacity, utilization, price/ASP, unit/input cost, spread/margin, capex/ROIC"
+  ]
+}

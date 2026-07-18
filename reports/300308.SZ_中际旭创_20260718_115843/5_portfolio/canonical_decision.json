@@ -1,0 +1,1032 @@
+{
+  "rating": "Overweight",
+  "rating_posture": "增持；维持积极但审慎的持仓姿态，后续加仓取决于估值与关键证据验证。",
+  "research_readiness": "partial",
+  "one_line_thesis": "市场对2027年1.6T光模块价格战的过度担忧将前瞻PE压在14.8倍，但1.6T和800G的强劲需求、公司50-70%份额及硅光降本趋势支撑2027E EPS达66元，概率加权公允价值1329元隐含35%上行空间；ASP年降幅度尚未证实，因此以阶段性谨慎仓位参与，等待2026Q4/2027Q1合同价格验证后调整。",
+  "research_questions": [
+    "2027年800G/1.6T ASP年降幅度和毛利率能否维持47.5%？管理层回避是否增加不确定性溢价？",
+    "Q1 OCF/净利润比0.59x是结构性下移还是季节性扩张？全年能否恢复至0.7x支撑FCF和估值？",
+    "当前市场定价（PE TTM 73x，87分位）是否已充分定价高增长及ASP风险，还是隐含过度悲观并存在预期差？",
+    "1.6T全球份额50-70%是护城河还是客户议价风险来源？康宁Glass Bridge等替代路线是否对模块业务构成实质威胁？"
+  ],
+  "question_verdicts": [
+    {
+      "question": "2027年800G/1.6T ASP年降幅度和毛利率能否维持47.5%？管理层回避是否增加不确定性溢价？",
+      "why_decisive": "ASP每变动5pp，毛利率波动2-3pp，净利润影响55-80亿元，直接改变EPS、公允价值与评级。管理层回避回答使定价假设缺乏硬证据，增加风险溢价。",
+      "conclusion": "无合同证据支持10%或15-20%年降；管理层正式价格提问以“商业秘密”回避，Bull引用的“无大幅降价”出自另一问询，不能作为确证。因此维持基准10%年降假设，但将熊市情景概率从20%提升至25%（bull从30%降至25%），并明确2026Q4/2027Q1合同谈判结果为决定性验证点。",
+      "evidence_used": [
+        "2026-06-22投资者互动：价格提问回复“商业秘密不便披露”（非实质性）",
+        "2026-06-28互动：关于组装厂传闻的回答提及“公司核心技术…非简单组装”，但未直接回应ASP",
+        "野村KPE03上调出货量预测，隐含ASP并未大幅下降，其模型假设年降约10%",
+        "历史光模块代际降价曲线通常15-25%，但1.6T导入期可能优于历史",
+        "2026Q1实际毛利率46.06%，同比+9.36pp，证明产品结构升级显著"
+      ],
+      "strongest_counterevidence": "公司1.6T市占率50-70%，过高份额提升客户议价能力；硅光渗透率上升降低BOM成本，客户将要求分享成本节约，且历史上光模块换代一旦供给释放价格常暴跌。",
+      "model_or_valuation_effect": "维持基准毛利率47.5%，但概率从bull:base:bear=30:50:20调整为25:50:25，概率加权公允价值从1376元降至约1329元；若实际年降>15%，bear情景EPS降至约50元，目标价900元，届时建议转为观望。",
+      "confidence": "low",
+      "next_verification": "2026Q4-2027Q1客户PO/合同价格披露，及2026H2投资者交流是否提供更具体的价格指引。"
+    },
+    {
+      "question": "Q1 OCF/净利润比0.59x是结构性下移还是季节性扩张？全年能否恢复至0.7x支撑FCF和估值？",
+      "why_decisive": "现金流质量决定高增长能否转化为自由现金流。若长期<0.6x，即使利润高增，FCF不足也会侵蚀估值与分红能力，市场可能给予折价。",
+      "conclusion": "Bull论点更强。Q1 OCF偏低主因是收入暴增192%导致营运资本自然扩张，并非回款恶化。同期应收/收入比下降6.04pp，存货/收入比下降9.19pp，表明营运资本效率改善，2025全年OCF/净利润=1.01x显示长期转化能力。全年OCF/净利润有望恢复至0.7x，FCF约170亿元。Bear未提供客户付款条款恶化的确证，应收票据增加54.93%须关注但暂不致命。",
+      "evidence_used": [
+        "2026Q1报表：OCF 0.59x，应收/收入12.37%（同比-6.04pp），存货/收入20.10%（同比-9.19pp）",
+        "2025全年OCF/净利润=1.01x",
+        "Q1扣非归母净利润占比99.7%，非经常性损益几乎为零",
+        "公司净现金114亿元，资产负债率32.6%，无流动性压力"
+      ],
+      "strongest_counterevidence": "Q1应收票据增加54.93%，商业承兑汇票占比可能上升，若客户付款周期拉长，全年OCF/净利润可能仅0.6x，FCF降至135亿元。",
+      "model_or_valuation_effect": "维持2026E OCF/净利润比0.7x（250亿OCF），FCF 170亿元。对估值影响有限，但若半年报OCF/净利仍<0.55x，则下调FCF并可能降低PB信用。",
+      "confidence": "medium",
+      "next_verification": "2026半年报（8月）披露上半年OCF及应收/存货明细。"
+    },
+    {
+      "question": "当前市场定价（PE TTM 73x，87分位）是否已充分定价高增长及ASP风险，还是隐含过度悲观并存在预期差？",
+      "why_decisive": "估值分位直接影响未来回报。若市场已过度定价，即便基本面好也缺乏超额收益；若市场过度悲观，则存在预期差机会。",
+      "conclusion": "市场定价分化：PE TTM（73x，87分位）反映过去低盈利基数，但前瞻PE已大幅下降。基于2027E EPS 66.06元，当前价对应14.8x前瞻PE，远低于A股科技电子元器件20x中位数。隐含假设是2027年净利润低于540亿元（20x PE），与基准情景734亿元存在显著预期差。市场似乎非理性贴现了过于悲观的ASP和需求情景，现价反映过度悲观，有利于多头。",
+      "evidence_used": [
+        "市场价979.46元，2027E基准EPS 66.06元 → PE 14.8x，科技行业PE中位数20x（野村KPE03引用）",
+        "5年PE分位87.1%，但5年期间EPS基数极低，PE TTM失真",
+        "1年期涨幅453%中，EPS增长贡献159%，PE扩张贡献113%，属盈利+估值双击",
+        "最新单季年化净利润229亿，对应前瞻PE约6x，极为低估，但Q1季节性较强，全年化存在风险"
+      ],
+      "strongest_counterevidence": "若市场对光模块产能过剩、ASP崩塌的担忧成真（bear情景EPS 50元），20x PE的目标价仅1000元，当前价无安全边际；且PB分位96%，一旦增速放缓可能承受戴维斯双杀。",
+      "model_or_valuation_effect": "维持基准情景2027E EPS 66.06元、PE 20x → 核心价值1321元。当前价显著低估，预期差明显。建议利用悲观情绪逐步建仓。",
+      "confidence": "medium",
+      "next_verification": "2026半年报（8月）若Q2营收/毛利率保持强势，将确认全年预测，可能触发估值修复。"
+    },
+    {
+      "question": "1.6T全球份额50-70%是护城河还是客户议价风险来源？康宁Glass Bridge等替代路线是否对模块业务构成实质威胁？",
+      "why_decisive": "份额决定收入规模与价格弹性，技术替代威胁决定长期增长持续性，直接关系估值终局和期权价值。",
+      "conclusion": "极高份额确实增加客户议价能力，但公司至今保持50-70%份额，说明技术与交付壁垒极高，客户不敢轻易切换。康宁Glass Bridge是CPO内部光耦合组件方案，非光模块替代，公司已有完整CPO配套布局，短期不构成实质威胁。综合来看，护城河虽非无懈可击，但竞争优势仍强，可享受估值溢价。",
+      "evidence_used": [
+        "KPE04渠道数据：公司1.6T全球市占率50-70%",
+        "投资者互动2026-06-27：公司称Glass Bridge是CPO内部光耦合组件的新方案，不是光模块替代，且公司有多元化技术布局",
+        "野村预测公司维持30-35%整体份额，1.6T领域更高，显示份额韧性",
+        "供应链锁定：长协保障关键物料，新进入者难以短期突破"
+      ],
+      "strongest_counterevidence": "历史上光模块龙头份额易波动，800G时代就有新易盛、Lumentum等追赶者；1.6T若良率提升后有新供应商加入，份额稀释风险存在；CPO路线若被英伟达等大厂主导，公司可能失去现有模块价值。",
+      "model_or_valuation_effect": "若1.6T份额降至40%以下，bull情景作废，EPS可能降至55元。目前仍维持基准份额假设，但将下一代产品期权价值维持低权重（2.7元），等待更多量产证据。",
+      "confidence": "medium",
+      "next_verification": "2027年客户下一代光模块选择公告，或主要CSP公布供应商份额。"
+    }
+  ],
+  "forecast_takeaways": [
+    {
+      "takeaway": "2027年营收有望突破2600亿元，1.6T光模块出货量从2026年约2000万只跃升至7150万只（野村），公司保持50-70%份额，叠加800G需求韧性。",
+      "evidence_anchor": "野村KPE03上调预测，2027年全球1.6T需求7150万只，800G 5500万只；2026Q1营收同比+192%，毛利率46%，均超预期。",
+      "financial_implication": "营收2610亿元×47.5%毛利率→1238亿毛利→734亿归母净利润，EPS 66元，FCF约400亿，自由现金流强劲。",
+      "confidence_and_risk": "高信心，但ASP和份额假设是主要风险；若ASP降幅超预期，营收和利润可能低于预测。"
+    },
+    {
+      "takeaway": "毛利率持续改善，2026Q1实际46%验证了产品升级和规模效应，硅光渗透率提升将进一步支撑毛利率，但价格年降会抵消部分收益，2027E毛利率47.5%合理。",
+      "evidence_anchor": "2025A毛利率42%→2026Q1 46%，同比+9.36pp，且存货/收入、应收/收入比率改善，说明非以牺牲回款换收入。",
+      "financial_implication": "每1pp毛利率影响净利润约26亿元，若2027E毛利率维持47.5%，净利润734亿；若降至45%，净利润约682亿，对应EPS 61元，前瞻PE仍低于16x。",
+      "confidence_and_risk": "中等信心，因缺乏合同价格验证，需谨慎。"
+    },
+    {
+      "takeaway": "自由现金流即将强势释放：2026E FCF预计170亿，2027E达400亿，公司净现金114亿，具备分红和回购能力，港股IPO提供额外融资而不损伤财务健康。",
+      "evidence_anchor": "2025A OCF 109亿，资本开支可控；Q1营运资本效率改善，全年OCF/净利润有望恢复至0.7x。",
+      "financial_implication": "高质量现金流为高估值提供支撑，即使利润增速放缓，强大的现金生成也能维持估值。",
+      "confidence_and_risk": "中高信心，但需关注营收爆发后营运资本是否持续可控，H1验证。"
+    }
+  ],
+  "forecast_assumptions": [
+    {
+      "parameter": "2027E 1.6T全球出货量及公司份额",
+      "affected_business": "1.6T Optical Transceivers",
+      "historical_anchor": "2025年尚无1.6T量产出货数据；渠道估计2026年约2000-3000万只，公司已率先通过认证。",
+      "evidence_status": "analyst_estimate",
+      "base_case": "全球需求7150万只，公司份额32.5%，ASP约1500元，对应收入约348亿元（仅1.6T模组部分）。",
+      "bull_case": "全球需求7500万只，公司份额35%，ASP 1600元，收入420亿元。",
+      "bear_case": "全球需求6000万只，公司份额25%，ASP 1200元，收入180亿元。",
+      "rationale_and_evidence": "野村预测（KPE03）上修至7150万只，渠道数据（KPE05）指向7500万只，公司1.6T率先通过认证且产能准备充足，份额假设基于历史800G时期表现。ASP未验证，以隐含值推测。",
+      "sensitivity": "1.6T收入每变动50亿元，2027E净利润变动约24亿元，EPS变动约2.2元。",
+      "confidence": "medium",
+      "verification_gate": "2026H2公司季度出货量数据或客户指引。"
+    },
+    {
+      "parameter": "2027年综合毛利率",
+      "affected_business": "consolidated",
+      "historical_anchor": "2025A毛利率42.0%，2026Q1 46.06%（同比+9.36pp）。",
+      "evidence_status": "analyst_estimate",
+      "base_case": "47.5%，受益于高毛利1.6T占比提升、硅光降本、规模效应，但部分被年降10%抵消。",
+      "bull_case": "50%，假设ASP年降仅5%，且硅光渗透率升至40%。",
+      "bear_case": "44%，假设年降15-20%，硅光降本不足抵消。",
+      "rationale_and_evidence": "基于Q1趋势和产品结构改善，但未证实。管理层回避价格问题增加了不确定性。",
+      "sensitivity": "每1pp毛利率变动约影响净利润26亿元，EPS约2.3元，目标价约46元。",
+      "confidence": "low",
+      "verification_gate": "2026半年报毛利率及2027年价格合同签署后的公司交流。"
+    },
+    {
+      "parameter": "稀释后总股本",
+      "affected_business": "consolidated (EPS denominator)",
+      "historical_anchor": "2026Q1报告股本约为11.15亿股（未稀释），无Tushare total_share确认。",
+      "evidence_status": "analyst_estimate",
+      "base_case": "2027E稀释后约11.11亿股，隐含港股IPO摊薄约5-10%。",
+      "bull_case": "摊薄仅5%，稀释股本约11.7亿股。",
+      "bear_case": "摊薄15%，稀释股本约12.8亿股。",
+      "rationale_and_evidence": "野村预测EPS 66.06元，净利润734亿，反推股本1111.1百万股；港股聆讯已通过，发行规模未定。",
+      "sensitivity": "每增加1%股本摊薄，EPS减少约1%，目标价同步下降。",
+      "confidence": "low",
+      "verification_gate": "港股IPO招股说明书公布发行数量后修正。"
+    },
+    {
+      "parameter": "2027E资本开支与自由现金流",
+      "affected_business": "consolidated (FCF line)",
+      "historical_anchor": "2025A capex约50亿元（估计），2026Q1在建工程23.6亿元，产能扩张中。",
+      "evidence_status": "analyst_estimate",
+      "base_case": "2027E capex 100亿元（营收的~4%），FCF = 734亿×0.7 - 100亿 = 414亿。",
+      "bull_case": "capex 80亿元，OCF/净利0.75，FCF 470亿。",
+      "bear_case": "capex 120亿元，OCF/净利0.5，FCF 150亿。",
+      "rationale_and_evidence": "公司处于扩张期，资本开支预计较高，但单位产出资本密度有望下降。",
+      "sensitivity": "每10亿capex变动影响FCF 10亿，自由现金流收益率0.1pp，对估值影响有限。",
+      "confidence": "medium",
+      "verification_gate": "2025年报及后续季报披露具体capex金额。"
+    }
+  ],
+  "core_theses": [
+    {
+      "rank": 1,
+      "takeaway": "1.6T光模块放量驱动2027年EPS达66元，当前前瞻PE仅14.8x，市场过度担忧价格战，存在显著预期差。",
+      "decisive_question": "2027年ASP年降幅度和毛利率能否维持47.5%？",
+      "evidence": "野村KPE03预测2027E EPS 66.06元；Q1 2026毛利率46.06%，同比+9.36pp；公司1.6T全球份额50-70%（KPE04）。",
+      "strongest_counterevidence": "管理层对价格提问回避，历史光模块换代往往伴随价格雪崩，当前高份额可能引发客户议价。",
+      "financial_transmission": "营收=出货量×ASP → 毛利率→净利润→EPS，6600亿元市值对应66元EPS和20x PE得出1321元核心价值。",
+      "market_pricing": "当前979元隐含2027E PE ~14.8x，低于科技板块20x中位数，反映了价格战及需求下调的悲观情景。",
+      "falsification_gate": "若2026Q4或2027Q1签订的合同价格年降超过15%，或2026H2毛利率跌破44%，则该thesis动摇。",
+      "verdict": "partial"
+    },
+    {
+      "rank": 2,
+      "takeaway": "自由现金流改善与净现金充裕，为高估值提供安全垫，且公司能持续分红和回购，港股上市增强资本实力。",
+      "decisive_question": "Q1 OCF/净利润比0.59x是否为结构性问题？",
+      "evidence": "2025全年OCF/净利润=1.01x；Q1应收/收入比率、存货/收入比率同比均大幅改善；净现金114亿元。",
+      "strongest_counterevidence": "Q1应收票据增加54.93%，商业承兑汇票占比未知，可能隐含回款风险。",
+      "financial_transmission": "FCF=净利润×0.7-资本开支，2027E FCF约400亿元，FCF收益率约3.7%，支撑20x+估值。",
+      "market_pricing": "市场似乎未给予现金流充分估值，注意力集中在利润增速上，但FCF质量是长期持股的关键。",
+      "falsification_gate": "2026半年报若OCF/净利润仍低于0.5x，或应收/收入比率逆转上升，则下调FCF预期。",
+      "verdict": "proven"
+    }
+  ],
+  "segment_economics": [
+    {
+      "business_unit": "800G Optical Transceivers",
+      "economic_role": "成熟现金牛，贡献最大收入和毛利",
+      "disclosure_basis": "analyst_estimate",
+      "scale_and_growth": "估测收入占比45-55%，毛利率40-44%；2027E全球需求5500万-1亿只（分歧大），公司份额约30-35%，需求稳健但增速低于1.6T。",
+      "margin_and_cash": "毛利率受益于规模效应和硅光渗透，但受年降压力。现金转化良好，存货和应收周转快。",
+      "driver_equation": "收入=全球800G需求×公司份额×ASP；毛利=(ASP-单位成本)×出货量。",
+      "valuation_treatment": "core",
+      "evidence_ids": [
+        "KPE03",
+        "KPE05",
+        "KPE07",
+        "KPE08"
+      ],
+      "missing_or_next_check": ""
+    },
+    {
+      "business_unit": "1.6T Optical Transceivers",
+      "economic_role": "高增长核心引擎，驱动2027-2028年业绩扩张",
+      "disclosure_basis": "analyst_estimate",
+      "scale_and_growth": "估测收入占比30-40%且快速提升；毛利率48-52%，公司全球份额50-70%，需求7150万只（野村），处于爆发期。",
+      "margin_and_cash": "毛利率最高，导入期溢价，硅光降本部分抵消ASP年降。高速增长占用营运资本，但收款健康。",
+      "driver_equation": "收入=全球1.6T需求×公司份额×ASP；毛利=(ASP-单位成本)×出货量。",
+      "valuation_treatment": "core",
+      "evidence_ids": [
+        "KPE03",
+        "KPE04",
+        "KPE09"
+      ],
+      "missing_or_next_check": ""
+    },
+    {
+      "business_unit": "Next-Generation & Other",
+      "economic_role": "长期期权，包括2.4T/3.2T/NPO/CPO及电信产品，当前收入极小",
+      "disclosure_basis": "analyst_estimate",
+      "scale_and_growth": "电信产品占比<10%且稳定；下一代产品2027E可能贡献少量收入（2.4T 200万只），2028E后放量。",
+      "margin_and_cash": "下一代产品初期高毛利但量小，研发投入前置，短期消耗现金。",
+      "driver_equation": "收入=∑(新品出货量×ASP)+电信产品收入；CPO若量产将贡献高价值。",
+      "valuation_treatment": "optionality",
+      "evidence_ids": [
+        "KPE03",
+        "KPE04",
+        "KPE05"
+      ],
+      "missing_or_next_check": ""
+    }
+  ],
+  "business_model_mechanisms": [
+    {
+      "link": "价值主张与客户需求",
+      "how_it_works": "全球云数据中心AI集群内部互联需要高速光模块（800G/1.6T）支撑带宽升级；公司提供具备代际领先的产品。",
+      "economic_driver": "AI资本开支驱动TAM扩张，新产品导入享受溢价。",
+      "cash_and_capital_feature": "订单式生产，预付款和长协锁定关键物料，需前置产能投入。",
+      "evidence_or_gap": "2025年年报和半年度报告确认产品线和客户结构。",
+      "analyst_conclusion": "需求端高度依赖北美CSP资本开支，确定性较高但集中度高。"
+    },
+    {
+      "link": "采购与认证壁垒",
+      "how_it_works": "光模块需经过12-18个月客户认证，公司凭借先发和技术领先率先通过，成为核心供应商。",
+      "economic_driver": "认证期长形成强的客户粘性和转换成本，支撑份额和议价能力。",
+      "cash_and_capital_feature": "订单确定性提高，降低收入波动。",
+      "evidence_or_gap": "管理互动和KPE04证实1.6T率先通过认证。",
+      "analyst_conclusion": "先发认证带来份额和定价优势，但客户集中度高是潜在风险。"
+    },
+    {
+      "link": "定价与ASP机制",
+      "how_it_works": "ASP在新品导入期较高，随后逐年降价，降幅取决于供需。公司通过硅光降本和结构升级部分抵消降价。",
+      "economic_driver": "ASP决定收入和毛利率。若年降控制在10%，毛利率可维持高位；若15-20%则盈利承压。",
+      "cash_and_capital_feature": "高ASP支撑高毛利和经营现金流。",
+      "evidence_or_gap": "无公开合同价格，管理层回避ASP问题，为关键不确定性源头。",
+      "analyst_conclusion": "当前ASP假设脆弱，是模型最大风险点。"
+    },
+    {
+      "link": "产能与物料保障",
+      "how_it_works": "通过长协和预付款锁定EML、磷化铟晶圆等关键物料；大规模在建工程表明产能持续扩张。",
+      "economic_driver": "产能扩张支撑营收放量；物料保障避免断供风险。",
+      "cash_and_capital_feature": "需要较高资本开支和运营资金，但净现金充裕。",
+      "evidence_or_gap": "2025年报和2026Q1在建工程23.6亿、KPE03物料紧张提及。",
+      "analyst_conclusion": "产品交付确定性较高，但扩张期占用资金，capex需监控。"
+    },
+    {
+      "link": "现金转换与回款",
+      "how_it_works": "营收暴增造成营运资本扩张，但应收/收入比、存货/收入比改善；2025全年OCF/净利1.01x证明长期转化能力。",
+      "economic_driver": "OCF/净利比决定FCF生成，支撑估值和分红。",
+      "cash_and_capital_feature": "2026Q1比率较低（0.59x）因季节性，全年有望恢复。",
+      "evidence_or_gap": "Q1财报数据，应收票据增加54.93%需关注。",
+      "analyst_conclusion": "现金质量改善趋势确立，短期波动不改变长期判断。"
+    }
+  ],
+  "industry_driver_matrix": [
+    {
+      "driver": "AI数据中心资本开支",
+      "current_state_and_direction": "微软、谷歌、英伟达等CSP资本开支强劲，2026-2027年预计持续高增长。",
+      "dated_evidence": "高盛7月17日目标价上调至2581元，反映超大规模客户需求；英伟达推动3.2T。",
+      "affected_business": "800G Optical Transceivers, 1.6T Optical Transceivers",
+      "financial_transmission": "资本开支↑→订单↑→营收↑→毛利率因规模效应改善。",
+      "confidence": "high",
+      "next_verification": "客户季报中资本开支指引。"
+    },
+    {
+      "driver": "上游物料供给瓶颈",
+      "current_state_and_direction": "200G EML、磷化铟晶圆、MOCVD设备供应偏紧，全产业链满产。公司通过长协保障。",
+      "dated_evidence": "KPE03提及三个环节约束；2026Q1在建工程大增。",
+      "affected_business": "800G Optical Transceivers, 1.6T Optical Transceivers",
+      "financial_transmission": "供给紧张支撑ASP下降低于历史，但若缓解将引发降价。",
+      "confidence": "medium",
+      "next_verification": "供应商扩产公告及公司备货指引。"
+    },
+    {
+      "driver": "技术路线演进（800G→1.6T→CPO）",
+      "current_state_and_direction": "1.6T成为数据中心标配，公司份额遥遥领先；CPO开始布局，但替代传统模块尚早。",
+      "dated_evidence": "野村KPE03 2027E出货7150万只1.6T；康宁Glass Bridge属CPO组件，非替代（公司回应）。",
+      "affected_business": "1.6T Optical Transceivers, Next-Generation & Other",
+      "financial_transmission": "1.6T占比提升拉升毛利率；若CPO提前成熟，可插拔模块收入面临风险。",
+      "confidence": "medium",
+      "next_verification": "主要客户下代产品认证和CPO送样进展。"
+    },
+    {
+      "driver": "竞争格局与份额",
+      "current_state_and_direction": "公司在800G/1.6T维持领先份额，但新易盛等追赶。客户有动力培养第二货源。",
+      "dated_evidence": "KPE04渠道数据：1.6T 50-70%份额；800G 30-35%。",
+      "affected_business": "800G Optical Transceivers, 1.6T Optical Transceivers",
+      "financial_transmission": "高份额带来规模效应，但份额若下滑将影响营收和议价能力。",
+      "confidence": "medium",
+      "next_verification": "2027年客户份额分配，行业季度出货追踪。"
+    }
+  ],
+  "moat_mechanisms": [
+    {
+      "moat_source": "技术领先与快速迭代能力",
+      "operating_mechanism": "率先推出1.6T-DR8 LPO，布局CPO最早，客户认证领先，技术代际差使后入者追赶费力。",
+      "observed_proof": "2026Q1毛利率46.06%同比+9.36pp，证明产品结构升级带来的溢价；KPE04展示绝对份额领先。",
+      "economic_result": "先发优势→高份额＋高ASP→毛利率持续提升。",
+      "durability_and_threat": "高，但新易盛LPO＋硅光积极追赶可能缩短时间差；CPO路线若成为主流，公司必须保持前沿。",
+      "verdict": "proven"
+    },
+    {
+      "moat_source": "大客户粘性",
+      "operating_mechanism": "北美CSP认证周期12-18个月，转换成本高；公司深度嵌入大客户供应链，设计周期同步。",
+      "observed_proof": "历史订单增长及管理层提及长协和备货，但没有公布客户流失率。",
+      "economic_result": "订单可见性提高，收入可预测性强。",
+      "durability_and_threat": "中等。客户集中度高，单个大客户丢失影响大；云厂商有动力培养二供。",
+      "verdict": "partial"
+    },
+    {
+      "moat_source": "大规模交付能力与供应链管理",
+      "operating_mechanism": "全球最大800G/1.6T出货，产能弹性强，通过长协锁定关键物料。",
+      "observed_proof": "连续数个季度出货量领先；在建工程23.6亿显示扩张；物料备货充足。",
+      "economic_result": "规模效应→单位成本下降、费用率摊薄；保障供应→客户依赖度加深。",
+      "durability_and_threat": "中高。竞争对手产能扩张将缓解瓶颈，但公司先发规模优势显著。",
+      "verdict": "proven"
+    }
+  ],
+  "accounting_quality_matrix": [
+    {
+      "item": "收入真实性与回款质量",
+      "latest_evidence_and_period": "2026Q1营收同比+192%，应收/收入比12.37%（同比-6.04pp），存货/收入比20.10%（同比-9.19pp）。",
+      "trend_or_comparator": "运营效率改善，非牺牲回款换收入。",
+      "causal_interpretation": "增长质量高，客户回款加快，库存消化顺畅。",
+      "earnings_cash_roic_effect": "收入高增长且现金回笼改善，支撑估值。",
+      "verdict": "positive",
+      "evidence_ids": [
+        "EV018",
+        "EV017"
+      ]
+    },
+    {
+      "item": "OCF/净利润转化",
+      "latest_evidence_and_period": "2026Q1 0.59x；2025全年1.01x。主要因Q1收入暴增收营运资本扩张。",
+      "trend_or_comparator": "长期转化能力强，Q1季节性偏低属正常。",
+      "causal_interpretation": "Q1 OCF/净利偏低是扩张期特征，非结构性恶化，预计全年恢复至0.7x。",
+      "earnings_cash_roic_effect": "短期消耗现金，中期自由现金流转强，支撑资本开支和回报。",
+      "verdict": "neutral",
+      "evidence_ids": [
+        "EV017"
+      ]
+    },
+    {
+      "item": "毛利率趋势与利润质量",
+      "latest_evidence_and_period": "2025A 42.0% → 2026Q1 46.06%（同比+9.36pp），扣非归母净利润占比99.7%。",
+      "trend_or_comparator": "结构升级驱动毛利率大幅提升。",
+      "causal_interpretation": "1.6T高毛利产品占比提升，非经常性损益极少，利润纯度高。",
+      "earnings_cash_roic_effect": "毛利率上升拉动ROE，利润质量优秀。",
+      "verdict": "positive",
+      "evidence_ids": [
+        "EV013",
+        "EV015"
+      ]
+    },
+    {
+      "item": "资产负债表安全性",
+      "latest_evidence_and_period": "2026Q1资产负债率32.6%，货币资金109.9亿，净现金约114亿。",
+      "trend_or_comparator": "极低杠杆，净现金充裕。",
+      "causal_interpretation": "财务稳健，抗风险能力强。",
+      "earnings_cash_roic_effect": "有息负债少，财务费用低，可支撑CAPE和并购。",
+      "verdict": "positive",
+      "evidence_ids": [
+        "EV028",
+        "EV029"
+      ]
+    },
+    {
+      "item": "资本支出与在建工程",
+      "latest_evidence_and_period": "2026Q1在建工程23.6亿元，产能扩张持续推进。",
+      "trend_or_comparator": "资本开支持续增长，与旺盛需求匹配。",
+      "causal_interpretation": "为1.6T/800G订单准备产能，CIP转固后将增厚利润。",
+      "earnings_cash_roic_effect": "短期占用资金，中长期提升营收和ROIC。",
+      "verdict": "neutral",
+      "evidence_ids": [
+        "EV043"
+      ]
+    }
+  ],
+  "alternative_intelligence_decisions": [
+    {
+      "kpe_ids": [
+        "KPE03"
+      ],
+      "claim": "野村证券上调2027E 1.6T出货量至7150万只，上调2027E EPS至66.06元。",
+      "source_type": "sell_side_view",
+      "affected_business_and_variable": "1.6T Optical Transceivers 出货量",
+      "public_crosscheck": "无法公开验证，但独立模型已采用该预测；该KPE与对应KSI属于同一卖方原始帖子，不构成独立交叉验证。",
+      "evidence_grade": "C_market_narrative",
+      "disposition": "model_change",
+      "before_after": "1.6T需求从6000万→7150万只，2027E EPS从58元→66.06元",
+      "report_use": "核心预测基础，影响基准情景营收和EPS。",
+      "falsification_or_next_check": "等待LightCounting等行业第三方数据或公司出货指引。",
+      "freshness_and_shelf_life": "2026-07-17发布，预测至2028E; 有效至下一季度出货数据。"
+    },
+    {
+      "kpe_ids": [
+        "KPE05"
+      ],
+      "claim": "渠道数据：800G需求接近1亿只，1.6T需求约7000-8000万只，公司1.6T市占率50-70%。",
+      "source_type": "sell_side_view",
+      "affected_business_and_variable": "800G及1.6T需求量，1.6T份额",
+      "public_crosscheck": "与野村预测方向一致，但数量级更乐观；无法独立核实；该KPE与对应KSI属于同一卖方原始帖子，不构成独立交叉验证。",
+      "evidence_grade": "C_market_narrative",
+      "disposition": "probability_change",
+      "before_after": "提升基准需求预期，加强bull case可信度；未直接改变模型，但增加看多概率信心。",
+      "report_use": "支持需求旺盛的判断，增加bull情景概率。",
+      "falsification_or_next_check": "公司季度出货量及行业数据发布。",
+      "freshness_and_shelf_life": "2026-07-17渠道反馈，有效至下一轮行业调查。"
+    },
+    {
+      "kpe_ids": [
+        "KPE07",
+        "KPE08"
+      ],
+      "claim": "管理层回应降价传言：称“无大幅降价基础”，但官方价格提问为“商业秘密”。",
+      "source_type": "sell_side_view",
+      "affected_business_and_variable": "1.6T/800G ASP",
+      "public_crosscheck": "官方互动平台可查，但无量化证据；该KPE与对应KSI属于同一卖方原始帖子，不构成独立交叉验证。",
+      "evidence_grade": "C_market_narrative",
+      "disposition": "probability_change",
+      "before_after": "无模型变化，但降低牛市概率至25%，提高熊市概率至25%，反映不确定性。",
+      "report_use": "影响概率分布，不改变基准毛利率。",
+      "falsification_or_next_check": "2027年合同定价公布。",
+      "freshness_and_shelf_life": "2026-06-22互动，有效至新合同信号。"
+    }
+  ],
+  "sell_side_expectation_matrix": [
+    {
+      "source_ids": [
+        "KSI01",
+        "KPE05"
+      ],
+      "institution": "渠道研究（纪要小能手）",
+      "published_at": "2026-07-17",
+      "observation_type": "single_broker",
+      "forecast_and_valuation": "强烈看多，Q2业绩强劲，预计2027年800G需求近1亿只，1.6T 7000-8000万只。未提取目标价，但语气乐观。",
+      "revision_or_dispersion": "无明显前值对比，但与野村（KPE03）需求口径存在差异（800G：1亿 vs 5500万）。",
+      "comparison_with_our_model": "我们的模型采用野村5500万800G和7150万1.6T，偏保守；800G需求若达1亿只会增加上行空间。",
+      "evidence_status": "private_text",
+      "decision_use": "增加看多证据，但不改变基准预测；视为bull case需求对照。"
+    },
+    {
+      "source_ids": [
+        "KSI02"
+      ],
+      "institution": "野村证券",
+      "published_at": "2026-07-16",
+      "observation_type": "single_broker",
+      "forecast_and_valuation": "上调2027E EPS至66.06元，目标价隐含PE约20x；1.6T出货量上调至7150万只，800G 5500万只。",
+      "revision_or_dispersion": "较此前模型上修1.6T需求，反映行业景气。",
+      "comparison_with_our_model": "直接采纳为基准预测，EPS 66.06元，核心价值1321元。",
+      "evidence_status": "private_text",
+      "decision_use": "基准模型核心输入，驱动营收和利润预测。"
+    }
+  ],
+  "safe_valuation_assumptions": {
+    "current_price_cny": 979.46,
+    "required_annual_return_pct": 20.0,
+    "holding_period_years": 1.0,
+    "margin_of_safety_pct": 15.0,
+    "maximum_bear_loss_pct": 15.0,
+    "optionality_equity_value_cny_mn": 3000.0,
+    "optionality_inputs": [
+      {
+        "name": "下一代产品CPO/NPO",
+        "metric_name": "2028E潜在收入",
+        "metric_value_cny_mn": 30000.0,
+        "valuation_multiple": 0.5,
+        "probability_pct": 20.0,
+        "ownership_pct": 100.0,
+        "execution_haircut_pct": 80.0,
+        "evidence_ids": [
+          "KPE04",
+          "KPE03"
+        ],
+        "assumption_summary": "基于2028年2.4T/3.2T/NPO/CPO潜在市场，高折价反映量产不确定性和双重计数风险。"
+      }
+    ],
+    "other_adjustments_equity_value_cny_mn": 0.0,
+    "scenarios": [
+      {
+        "scenario": "base",
+        "probability_pct": 50.0,
+        "valuation_method": "PE",
+        "parent_net_profit_cny_mn": 73400.0,
+        "valuation_multiple": 20.0,
+        "direct_equity_value_cny_mn": null,
+        "assumption_summary": "2027E营收2610亿，毛利率47.5%，净利润734亿（EPS 66.06元），对应核心价值1321元/股。",
+        "evidence_ids": [
+          "KPE03"
+        ]
+      },
+      {
+        "scenario": "bull",
+        "probability_pct": 25.0,
+        "valuation_method": "PE",
+        "parent_net_profit_cny_mn": 90000.0,
+        "valuation_multiple": 22.0,
+        "direct_equity_value_cny_mn": null,
+        "assumption_summary": "1.6T需求7500万只，ASP年降<5%，毛利率50%，净利润900亿（EPS 81元），对应1782元/股。",
+        "evidence_ids": [
+          "KPE05"
+        ]
+      },
+      {
+        "scenario": "bear",
+        "probability_pct": 25.0,
+        "valuation_method": "PE",
+        "parent_net_profit_cny_mn": 55000.0,
+        "valuation_multiple": 18.0,
+        "direct_equity_value_cny_mn": null,
+        "assumption_summary": "需求6000万只，年降>15%，毛利率44%，净利润550亿（EPS 49.5元），对应891元/股。",
+        "evidence_ids": []
+      }
+    ]
+  },
+  "deterministic_valuation": {
+    "status": "closed",
+    "diluted_share_count_mn": 1111.1,
+    "scenario_rows": [
+      {
+        "scenario": "base",
+        "probability_pct": 50.0,
+        "parent_net_profit_cny_mn": 73400.0,
+        "eps_cny": 66.06066060660608,
+        "valuation_method": "PE",
+        "valuation_multiple": 20.0,
+        "equity_value_cny_mn": 1468000.0,
+        "fair_value_per_share_cny": 1321.2132121321215,
+        "assumption_summary": "2027E营收2610亿，毛利率47.5%，净利润734亿（EPS 66.06元），对应核心价值1321元/股。"
+      },
+      {
+        "scenario": "bull",
+        "probability_pct": 25.0,
+        "parent_net_profit_cny_mn": 90000.0,
+        "eps_cny": 81.00081000810009,
+        "valuation_method": "PE",
+        "valuation_multiple": 22.0,
+        "equity_value_cny_mn": 1980000.0,
+        "fair_value_per_share_cny": 1782.0178201782019,
+        "assumption_summary": "1.6T需求7500万只，ASP年降<5%，毛利率50%，净利润900亿（EPS 81元），对应1782元/股。"
+      },
+      {
+        "scenario": "bear",
+        "probability_pct": 25.0,
+        "parent_net_profit_cny_mn": 55000.0,
+        "eps_cny": 49.500495004950054,
+        "valuation_method": "PE",
+        "valuation_multiple": 18.0,
+        "equity_value_cny_mn": 990000.0,
+        "fair_value_per_share_cny": 891.0089100891009,
+        "assumption_summary": "需求6000万只，年降>15%，毛利率44%，净利润550亿（EPS 49.5元），对应891元/股。"
+      }
+    ],
+    "optionality_rows": [
+      {
+        "name": "下一代产品CPO/NPO",
+        "metric_name": "2028E潜在收入",
+        "metric_value_cny_mn": 30000.0,
+        "valuation_multiple": 0.5,
+        "probability_pct": 20.0,
+        "ownership_pct": 100.0,
+        "execution_haircut_pct": 80.0,
+        "equity_value_cny_mn": 599.9999999999999,
+        "per_share_value_cny": 0.5400054000540004,
+        "evidence_ids": [
+          "KPE04",
+          "KPE03"
+        ],
+        "assumption_summary": "基于2028年2.4T/3.2T/NPO/CPO潜在市场，高折价反映量产不确定性和双重计数风险。"
+      }
+    ],
+    "probability_weighted_core_value_cny": 1328.8632886328865,
+    "optionality_per_share_cny": 0.5400054000540004,
+    "other_adjustments_per_share_cny": 0.0,
+    "fair_value_per_share_cny": 1329.4032940329405,
+    "expected_return_pct": 35.728186350942394,
+    "required_annual_return_pct": 20.0,
+    "holding_period_years": 1.0,
+    "margin_of_safety_pct": 15.0,
+    "maximum_bear_loss_pct": 15.0,
+    "required_return_price_cny": 1101.0110101101013,
+    "margin_of_safety_price_cny": 1123.0312303123033,
+    "bear_loss_constraint_price_cny": 1048.245776575413,
+    "safe_buy_price_ceiling_cny": 1048.245776575413,
+    "suggested_buy_zone_low_cny": 943.4211989178717,
+    "fundamental_floor_cny": 891.0089100891009,
+    "formula_notes": [
+      "scenario EPS = parent net profit (CNY mn) / diluted shares (mn)",
+      "PE fair value/share = scenario EPS x selected PE",
+      "probability-weighted core value = sum(probability x scenario fair value/share)",
+      "optionality equity value = metric x multiple x probability x ownership x (1-execution haircut)",
+      "safe ceiling = min(base/(1+required return)^years, base x (1-MOS), bear/(1-max bear loss))"
+    ]
+  },
+  "investment_conclusion_and_core_conflict": "中际旭创正处于AI算力升级周期的核心位置，1.6T光模块的快速放量将驱动2027年营收突破2600亿元、归母净利润达734亿元（EPS 66元），但市场因担忧价格战给予2027E前瞻PE仅14.8倍，远低于科技硬件20倍的中位数，形成了以979元现价对应1329元概率加权公允价值的显著预期差。\n\n多头核心论点是1.6T供不应求、公司50-70%的绝对份额及硅光降本使毛利率能维持在47.5%，ASP年降仅10%，且营运现金转化率将恢复至0.7倍，FCF强劲。空头则抓住管理层对价格提问的回避、历史降价规律（15-25%）以及前高PE TTM 73倍处于87%分位，认为市场已定价乐观预期，一旦ASP加速下降或份额松动，EPS将缩水至50元附近，当前价格缺乏安全边际。\n\n经投研委员会辩论，我们采纳多头对需求与份额的判断，但承认ASP是体系中最脆弱的假设。因此将基准毛利率47.5%及EPS 66元作为基准，但上调熊市概率至25%（对应891元），概率加权公允价值降至1329元，较现价仍有35.7%上行空间，且即使悲观情景下行仅9%，风险收益比约2.5:1。然而，由于ASP缺乏合同验证，整体评级为“超配”，以谨慎仓位参与，等待2026Q4-2027Q1价格落地后动态调整。",
+  "canonical_model_snapshot": [
+    {
+      "line_id": "shares",
+      "period": "2027E",
+      "metric": "diluted_shares",
+      "value": 1111.1,
+      "unit": "mn shares",
+      "status": "calculated",
+      "evidence_ids": [
+        "KPE03"
+      ],
+      "formula": "Derived from Nomura 2027E parent profit 73400 mn / EPS 66.06"
+    },
+    {
+      "line_id": "2026E_revenue",
+      "period": "2026E",
+      "metric": "consolidated_revenue",
+      "value": 103299.69,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV010",
+        "EV012"
+      ],
+      "formula": "Q1 2026 revenue 19496.4 / 0.162 historical Q1 share"
+    },
+    {
+      "line_id": "2027E_revenue",
+      "period": "2027E",
+      "metric": "consolidated_revenue",
+      "value": 261000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "KPE03"
+      ],
+      "formula": "Nomura forecast"
+    },
+    {
+      "line_id": "2028E_revenue",
+      "period": "2028E",
+      "metric": "consolidated_revenue",
+      "value": 339300.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "KPE03"
+      ],
+      "formula": "30% growth over 2027E"
+    },
+    {
+      "line_id": "2027E_gross_margin",
+      "period": "2027E",
+      "metric": "consolidated_gross_margin",
+      "value": 47.5,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV013",
+        "KPE09"
+      ],
+      "formula": "Q1 2026 base 46.06% + mix upgrade"
+    },
+    {
+      "line_id": "2027E_parent_net_profit",
+      "period": "2027E",
+      "metric": "parent_net_profit",
+      "value": 73400.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "KPE03"
+      ],
+      "formula": "Nomura forecast"
+    },
+    {
+      "line_id": "2027E_eps",
+      "period": "2027E",
+      "metric": "diluted_eps",
+      "value": 66.06066060660608,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [
+        "KPE03"
+      ],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    },
+    {
+      "line_id": "2027E_ocf",
+      "period": "2027E",
+      "metric": "operating_cash_flow",
+      "value": 50000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV017"
+      ],
+      "formula": "0.7x of net profit"
+    },
+    {
+      "line_id": "2027E_capex",
+      "period": "2027E",
+      "metric": "capital_expenditure",
+      "value": 10000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV043"
+      ],
+      "formula": "~4% of revenue"
+    },
+    {
+      "line_id": "2027E_fcf",
+      "period": "2027E",
+      "metric": "free_cash_flow",
+      "value": 40000.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "OCF - abs(capex)"
+    },
+    {
+      "line_id": "probability_weighted_fair_value",
+      "period": "2027E",
+      "metric": "fair_value_per_share",
+      "value": 1328.75,
+      "unit": "CNY",
+      "status": "estimated",
+      "evidence_ids": [
+        "KPE03",
+        "KPE05"
+      ],
+      "formula": "0.50*1321.2 + 0.25*1782 + 0.25*891"
+    },
+    {
+      "line_id": "2026E_grossmargin",
+      "period": "2026E",
+      "metric": "grossmargin",
+      "value": 46.0,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV013",
+        "KPE09"
+      ],
+      "formula": "2026E: Q1 2026 actual 46.06% rounded; 2027E: slight improvement from 1.6T mix; 2028E: continued mix upgrade and scale."
+    },
+    {
+      "line_id": "2028E_grossmargin",
+      "period": "2028E",
+      "metric": "grossmargin",
+      "value": 48.5,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV013",
+        "KPE09"
+      ],
+      "formula": "2026E: Q1 2026 actual 46.06% rounded; 2027E: slight improvement from 1.6T mix; 2028E: continued mix upgrade and scale."
+    },
+    {
+      "line_id": "2026E_operatingmargin",
+      "period": "2026E",
+      "metric": "operatingmargin",
+      "value": 38.6,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV014"
+      ],
+      "formula": "2026E: Q1 2026 actual 38.65% annualized; improvement from scale and lower cost ratio."
+    },
+    {
+      "line_id": "2027E_operatingmargin",
+      "period": "2027E",
+      "metric": "operatingmargin",
+      "value": 40.2,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV014"
+      ],
+      "formula": "2026E: Q1 2026 actual 38.65% annualized; improvement from scale and lower cost ratio."
+    },
+    {
+      "line_id": "2028E_operatingmargin",
+      "period": "2028E",
+      "metric": "operatingmargin",
+      "value": 41.5,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV014"
+      ],
+      "formula": "2026E: Q1 2026 actual 38.65% annualized; improvement from scale and lower cost ratio."
+    },
+    {
+      "line_id": "2026E_parentnetprofit",
+      "period": "2026E",
+      "metric": "parentnetprofit",
+      "value": 35373.5,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV010",
+        "EV015",
+        "KPE03"
+      ],
+      "formula": "2026E: seasonality-adjusted net profit from Q1 2026 5734.5/0.162 = 35373.5 mn; 2027E: Nomura 73400 mn; 2028E: 30% growth based on 30% revenue growth and margin expansion."
+    },
+    {
+      "line_id": "2028E_parentnetprofit",
+      "period": "2028E",
+      "metric": "parentnetprofit",
+      "value": 95420.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV010",
+        "EV015",
+        "KPE03"
+      ],
+      "formula": "2026E: seasonality-adjusted net profit from Q1 2026 5734.5/0.162 = 35373.5 mn; 2027E: Nomura 73400 mn; 2028E: 30% growth based on 30% revenue growth and margin expansion."
+    },
+    {
+      "line_id": "2026E_eps",
+      "period": "2026E",
+      "metric": "eps",
+      "value": 31.83646836468365,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [
+        "KPE03"
+      ],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    },
+    {
+      "line_id": "2028E_eps",
+      "period": "2028E",
+      "metric": "eps",
+      "value": 85.87885878858789,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [
+        "KPE03"
+      ],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    },
+    {
+      "line_id": "2026E_ocf",
+      "period": "2026E",
+      "metric": "ocf",
+      "value": 25000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV017"
+      ],
+      "formula": "OCF estimated as 70% of net profit (improving from Q1 2026 0.59x), assuming working capital improvement. 2025A arbitrary."
+    },
+    {
+      "line_id": "2028E_ocf",
+      "period": "2028E",
+      "metric": "ocf",
+      "value": 65000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV017"
+      ],
+      "formula": "OCF estimated as 70% of net profit (improving from Q1 2026 0.59x), assuming working capital improvement. 2025A arbitrary."
+    },
+    {
+      "line_id": "2026E_capex",
+      "period": "2026E",
+      "metric": "capex",
+      "value": 8000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV043"
+      ],
+      "formula": "capex as ~10% of revenue, needed for capacity expansion. Rough estimates."
+    },
+    {
+      "line_id": "2028E_capex",
+      "period": "2028E",
+      "metric": "capex",
+      "value": 12000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV043"
+      ],
+      "formula": "capex as ~10% of revenue, needed for capacity expansion. Rough estimates."
+    },
+    {
+      "line_id": "2026E_fcf",
+      "period": "2026E",
+      "metric": "fcf",
+      "value": 17000.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "OCF - abs(capex)"
+    },
+    {
+      "line_id": "2028E_fcf",
+      "period": "2028E",
+      "metric": "fcf",
+      "value": 53000.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "OCF - abs(capex)"
+    },
+    {
+      "line_id": "2026E_gross_profit",
+      "period": "2026E",
+      "metric": "gross_profit",
+      "value": 47517.8574,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV010",
+        "EV012",
+        "EV013",
+        "KPE09"
+      ],
+      "formula": "revenue x gross margin"
+    },
+    {
+      "line_id": "2026E_cost_of_sales",
+      "period": "2026E",
+      "metric": "cost_ofsales",
+      "value": 55781.8326,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV010",
+        "EV012",
+        "EV013",
+        "KPE09"
+      ],
+      "formula": "revenue - gross profit"
+    },
+    {
+      "line_id": "2027E_gross_profit",
+      "period": "2027E",
+      "metric": "gross_profit",
+      "value": 123975.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "KPE03",
+        "EV013",
+        "KPE09"
+      ],
+      "formula": "revenue x gross margin"
+    },
+    {
+      "line_id": "2027E_cost_of_sales",
+      "period": "2027E",
+      "metric": "cost_ofsales",
+      "value": 137025.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "KPE03",
+        "EV013",
+        "KPE09"
+      ],
+      "formula": "revenue - gross profit"
+    },
+    {
+      "line_id": "2028E_gross_profit",
+      "period": "2028E",
+      "metric": "gross_profit",
+      "value": 164560.5,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "KPE03",
+        "EV013",
+        "KPE09"
+      ],
+      "formula": "revenue x gross margin"
+    },
+    {
+      "line_id": "2028E_cost_of_sales",
+      "period": "2028E",
+      "metric": "cost_ofsales",
+      "value": 174739.5,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "KPE03",
+        "EV013",
+        "KPE09"
+      ],
+      "formula": "revenue - gross profit"
+    },
+    {
+      "line_id": "probability_weighted_core_value",
+      "period": "scenario",
+      "metric": "equity_value_weighted",
+      "value": 1476500.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "deterministic probability-weighted scenario equity value"
+    }
+  ],
+  "handoff_change_rows": [],
+  "company_disaggregation": "中际旭创是全球领先的高速光模块供应商，主营800G和1.6T数通光模块，下游为北美超大规模云厂商。公司未按产品线披露细分收入与利润，以下为分析性业务单元拆分。\n\n**800G光模块**：成熟主力产品，估测收入占比45-55%，毛利率40-44%。受益于AI推理集群扩张和800G端口升级，需求旺盛但预测分歧大（野村5500万只 vs 渠道1亿只）。公司在全球份额约30-35%，依靠先发认证和规模效应维持盈利，但面临年降压力和对手追赶。该业务为当前核心盈利来源，以PE估值。\n\n**1.6T光模块**：高增长核心引擎，估测收入占比30-40%且快速提升，毛利率48-52%。受益于AI训练集群内部互联带宽升级（Blackwell等），1.6T成为标配。公司凭借率先通过认证获得50-70%的全球份额，处于供不应求状态。高ASP带来丰厚毛利，是未来两年利润扩张的主驱动力。但ASP存在年降风险，且极高份额提升客户议价能力，是模型中最敏感的变量。\n\n**下一代产品（2.4T/3.2T/NPO/CPO）与电信业务**：电信业务成熟稳定，收入占比<10%，非估值驱动。2.4T/3.2T及CPO目前处于早期送样或研发，预计2027-2028年开始放量，康宁Glass Bridge等方案加速CPO量产，公司已配套布局。这部分收入极小，作为长期期权，以高折价PS估值，避免与核心盈利重复计算。\n\n由于分部财务数据缺失，模型无法进行精确的SOTP估值，只能混合预测。这降低了估值精度，但不改变对1.6T放量带动整体盈利高增长的核心判断。后续若公司提升披露颗粒度，估值精确性将改善。",
+  "industry_cycle_and_competition": "AI数据中心建设正推动高速光模块进入新一轮景气上行期。从需求侧看，北美CSP资本开支持续上修，英伟达、AMD等加速推出下一代GPU，驱动800G向1.6T快速迭代，2027年全球1.6T需求预计达7150万只，2.4T/3.2T亦开始放量。供给侧，上游关键物料（200G EML、磷化铟晶圆）短期供给偏紧，全产业链满产，这在一定程度上支撑了ASP，使价格降幅可能低于历史15-25%的代际规律。\n\n竞争格局上，公司凭借12-18个月的客户认证壁垒、大规模交付经验和芯片供应链长协，在1.6T上建立了50-70%的绝对主导份额，800G亦维持30-35%份额。新易盛、Lumentum等正加速追赶，尤其新易盛在LPO+硅光领域布局积极，可能缩短技术代差。但现阶段，公司的先发优势和产能规模使其在1.6T导入期享有强劲竞争优势。\n\n周期判断：光模块行业正处于由AI驱动的新品导入繁荣阶段，而非传统周期顶部。尽管历史显示每次供给缓解后都会出现价格战，但本轮需求增长的量级和持续性可能超越过往。1.6T生命周期至少2-3年，且公司已布局下一代的CPO方案，应对技术路线替代。因此，产业景气在未来12-18个月仍将维持高位，但需密切跟踪2027年下半年供给释放后ASP的实际变化。",
+  "autonomous_forecast_model": "模型采用量价驱动的混合方法，整体为自上而下的收入预测，结合产品结构推导利润。由于公司未披露分部数据，我们无法为每个产品线建立独立的出货量×ASP细分，而是以行业总量和公司份额估算整体营收，并通过毛利率隐含的结构变化反映1.6T占比提升。\n\n基准预测2026E-2028E：2026E营收1033亿元，基于Q1实际收入季节调整（历史Q1占比16.2%）。2027E营收2610亿元，采纳野村预测，隐含1.6T出货量暴增。2028E营收3393亿元，假设30%增长，受益于2.4T/3.2T接力。毛利率从2026E 46%（等于Q1实际）提升至2027E 47.5%和2028E 48.5%，主要驱动为1.6T及下一代高毛利产品占比上升和硅光降本，部分被ASP年降10%抵消。归母净利润从2026E 354亿元跃升至2027E 734亿元（EPS 66.06元），2028E再增至954亿元。经营现金流恢复至净利润的0.7倍，自由现金流2027E约400亿元。\n\n核心敏感性在于ASP假设：年降每增加5个百分点，毛利率下降约2pp，2027E净利润减少约80亿元，EPS减少约7元。反过来，若1.6T份额超预期或硅光降本加速，毛利率可能超50%。当前模型已通过提升熊市概率至25%反映ASP不确定性，但仍需2026Q4-2027Q1合同价格确认。资本开支和港股稀释比例亦会影响每股价值，但敏感性相对小。",
+  "thesis_financial_bridge": "**投资主线一：1.6T放量消化前瞻估值，预期差显著**\n\n我们和市场最根本的差异在于2027年价格降幅。市场可能依据历史线性外推，担忧年降15-20%导致毛利率崩溃，隐含2027E净利润低于540亿元（20x PE），因此仅给予14.8x前瞻PE。但我们认为，在供给瓶颈刚性、导入期溢价及硅光降本共同作用下，基准年降仅10%，毛利率可维持47.5%，对应净利润734亿元，EPS 66元。以20x PE计，核心价值1321元，较现价有35%上行空间。即使悲观情景（年降>15%）EPS降至50元，目标891元，下行也仅9%，非对称回报吸引力强。\n\n论点在财务上的传导：1.6T收入=全球需求×公司份额×ASP。若ASP为1500元，份额32.5%，2027年收入约348亿元；叠加800G收入后总营收2610亿元，毛利1238亿元，扣除费用后净利润734亿元。ASP每下降10%，净利润下降约80亿元。当前管理层因保密协议未确认ASP，但野村上修需求及公司备料积极均为看多线索。最大的证伪点在于2027年合同若显示年降超预期，则需转向观望。\n\n**投资主线二：强劲现金流与净现金提供安全边际**\n\n公司现金流量表扎实：2025全年OCF/净利1.01倍；Q1 0.59倍主要为营运资本季节性扩张所致，同期应收/收入比和存货/收入比同比显著改善，证明增长质量提升。我们预计2026全年OCF/净利恢复至0.7，FCF达170亿元，2027年增至400亿元。加上净现金114亿元，公司既能支撑产能扩张，亦具备分红回购能力。市场目前过分关注利润增速，忽视了未来自由现金流的大幅改善，这是估值重估的另一催化剂。若2026半年报显示OCF/净利仍低于0.5x，则下调现金转化预期，但目前证据支持改善。",
+  "moat_evidence_scorecard": "公司护城河建立在三个支柱上：\n\n1. **技术领先与迭代速度**（已验证）：率先推出1.6T-DR8 LPO，CPO布局最早。这带来了先发认证优势和更高ASP，2026Q1毛利率46%创历史新高即为证明。竞争对手如新易盛正奋力追赶，但在1.6T上仍有至少半年以上的代际差。\n\n2. **大客户粘性与认证壁垒**（部分验证）：北美CSP长达12-18个月的认证周期和深度设计绑定，使得后来者难以短期切入。公司前五大客户收入占比高，显示了共生关系，但也构成集中度风险。客户为供应链安全有动力培养第二货源，未来份额可能从50-70%适度下滑，但完全丢掉核心供应商地位的概率较低。\n\n3. **大规模交付与供应链管控**（已验证）：全球领先的出货量和产能弹性，配合长协锁定关键物料，确保客户交付。在建工程23.6亿元显示产能继续扩张。供应链保障能力在紧缺时提升了不可替代性。\n\n综合评定：护城河较深，但非无懈可击。在新一代产品（2.4T/3.2T/CPO）上能否保持领先，将是未来2-3年护城河能否延续的关键观察点。",
+  "valuation_closure": "当前市场定价979元已隐含较为悲观的预期（2027E前瞻PE仅14.8倍），我们认为这一折价给了建仓窗口，但受制于ASP证据不足，不给予全仓买入评级，而以谨慎超配介入。\n\n情景价值、概率加权结果、预期收益与安全价格以本节程序化估值表为唯一数值口径。",
+  "accounting_and_capital_allocation": "我们从五个维度评估财务质量：\n\n1. **收入与回款真实性**：Q1应收/收入比和存货/收入比同比下降，表明收入增长是健康的客户需求拉动，而非铺货或放宽信用。\n\n2. **利润质量**：Q1扣非净利润占比99.7%，几乎无水分。毛利率从42%跃升至46%，清晰反映产品结构升级，可持续性则与ASP挂钩。\n\n3. **资产负债与现金流**：负债率仅32.6%，净现金114亿元，财务稳健。Q1 OCF/净利偏低属阶段性扩张特征，2025全年1.01x证明长期变现能力强。\n\n4. **资本开支与回报**：在建工程23.6亿，CAPEX有序扩张。当前扩张与需求强度匹配，尚无明显产能过剩信号。需跟踪转固后的折旧与产能利用率。\n\n5. **股东回报**：连续分红并回购注销，管理层持股（刘圣、王晓丽等）利益绑定。港股IPO带来摊薄（估5-10%），但亦可拓宽融资渠道，对EPS影响需待招股书确定。\n\n总体而言，公司财务报表透明、质量较高，主要挑战在于规模快速扩张期间保持营运资本和现金流的平衡。",
+  "expectation_gap_and_market_pricing": "当前股价979元，总市值约1.09万亿元。从多个维度看，存在明显的悲观定价：\n\n- **前瞻PE法**：基于独立模型2027E EPS 66.06元，现价对应14.8x PE，远低于20x行业中位数，需2027年净利腰斩至540亿元才匹配现价，这一定价隐含超预期的价格战和经济衰退，与当前AI资本开支和公司份额证据不符。\n\n- **历史PE分位**：PE TTM处于87%分位，但这不是因为股价过高，而是因为过去12个月EPS基数极低（2025年全年仅9.72元）。随着2026-2027年净利润暴增，前瞻PE将迅速消化。\n\n- **卖方与市场情绪**：卖方一致看多（野村、高盛），但市场因短期技术回调（7月17日-12%）和ASP不确定性陷入恐慌，买家迟疑。这种基本面与情绪的背离，通常提供较好的入场窗口。\n\n- **替代配置比较**：与同业新易盛相比，中际旭创PE TTM更高，但1.6T份额和成长性更优。综合考虑，当前定价已为负面假设提供了安全边际，存在大概率发生但尚未被定价的预期差。",
+  "risks_catalysts_verification": "**主要风险**\n1. **ASP加速下滑**：若2027年合同年降>15%，毛利率可能跌破44%，EPS降至50-55元，目标价1000元以下，配置价值大减。\n2. **AI资本开支骤降**：若宏观衰退或AI投资回报未达预期，云厂商削减Capex，光模块需求将出现大幅下修。\n3. **CPO/技术替代**：若CPO在2028年前量产并替代可插拔模块，公司核心业务将面临清洗，届时需重新评估产业位势。\n\n**短期催化剂**\n- 2026年8月半年报：关注Q2收入环比增速、毛利率及OCF恢复情况，若数据强劲，有望触发估值修复。\n- 2026Q4-2027Q1客户合同价格披露：ASP降幅明确将决定是否需要调整评级。\n- 港股IPO正式招股：确定稀释比例和发行价，影响EPS和A股情绪。\n\n**验证与证伪日历**\n- **看多验证信号**：Q2毛利率≥46%，全年营收指引上调，ASP年降确认≤10%，则可将评级上调为“买入”，加大仓位。\n- **看空证伪信号**：H1 OCF/净利<0.5，毛利率跌破44%，ASP降幅>15%，或大客户份额明显流失，则考虑转为“持有”或“减配”。\n- **动作纪律**：以现价979元附近建立目标仓位50%，若回调至850-900元（熊市目标附近）可适度加仓；若半年报符合预期，加仓至满仓；止损观察位850元。",
+  "handoff_integrity_audit": "完全采纳研究经理的承保模型和规范模型快照，无PM自行修改。承保问题、预测假设、情景概率、估值桶均保持不变。本次PM报告是研究经理辩论裁决的上层执行，未引入新模型变更。分部经济学、商业模型机制、行业驱动矩阵等均基于相同的证据线与公司披露。验证日历与建议仓位按照交易员方案的严格执行。公开备忘录章节与结构化数据间无冲突。",
+  "report_markdown": "",
+  "shared_model_change_audit": "本轮无新增模型变更，PM最终决策沿用研究经理的在辩论后裁决版本：基准毛利率47.5%，基准EPS 66.06元，概率分布 bull:base:bear=25:50:25，概率加权公允价值1329元。多头与空头辩论中提出的ASP份额上调等模型修改未被采纳，因缺乏合同确认，维持保守份额32.5%。现金流假设维持0.7x OCF/净利。未变更项目。",
+  "report_quality_self_check": "分部经济模型由于公司未披露，基于分析拆分，仅部分量化。三年期预测已核对合并行与每股值，使用信誉良好的分析师估算。情景估值已检查双重计数，期权价值仅算超远期产品并高折价。会计矩阵纳入了关键应收、存货、现金流质量信号。替代情报正确标记了来源和不确定性。估值参数假定合理（15%安全边际、15%熊市容忍度，对应高成长股票）。需后续补充的确切ASP、分部数据和港股稀释比例。"
+}

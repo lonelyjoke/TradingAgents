@@ -1,0 +1,38 @@
+{
+  "mode": "schema_prompt_structured",
+  "agent": "Portfolio Manager",
+  "structured_error": "",
+  "schema": "SellSidePMDecision",
+  "initial_mode": "schema_prompt_structured",
+  "editorial_review_mode": "schema_prompt_structured",
+  "editorial_revision_requested": true,
+  "editorial_revision_applied": false,
+  "editorial_revision_mode": "schema_prompt_structured",
+  "remaining_handoff_issues": [
+    "dropped canonical line: base_fair_value",
+    "dropped canonical line: bull_fair_value",
+    "dropped canonical line: bear_fair_value"
+  ],
+  "remaining_analytical_issues": [
+    "public thesis chapter missing strongest counterargument/boundary"
+  ],
+  "editorial_revision_rejection_reasons": [
+    "revision increased canonical handoff issues from 3 to 4"
+  ],
+  "deterministic_model_notes": [
+    "added deterministic 2026E gross profit=47517.8574",
+    "added deterministic 2027E gross profit=123975.0000",
+    "added deterministic 2028E gross profit=164560.5000",
+    "added deterministic probability-weighted core equity value 1476500.0000",
+    "synchronized total fair value per share 1321.2 -> 1329.4033",
+    "removed 2 manual deterministic valuation line(s) from prose",
+    "localized English-heavy rating posture into Chinese",
+    "deduplicated 3 canonical model line(s)",
+    "normalized sell-side lineage ['KSI02', 'KPE03'] -> ['KSI02']"
+  ],
+  "full_report_chars": "15479",
+  "public_report_chars": "9214",
+  "internal_overflow_chars": "6263",
+  "internal_sections_removed_from_public_report": "内部附录A：业务机制与分部经济, 内部附录B：行业驱动与护城河机制, 内部附录C：财务质量核查明细, 内部附录D：替代信息与卖方预期审计, 内部附录E：模型交接与报告质量审计",
+  "public_h2_count": "8"
+}

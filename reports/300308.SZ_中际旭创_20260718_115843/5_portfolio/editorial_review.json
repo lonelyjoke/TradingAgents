@@ -1,0 +1,91 @@
+{
+  "review": {
+    "revision_required": true,
+    "company_understanding_score": 4,
+    "independent_model_score": 3,
+    "evidence_and_counterevidence_score": 3,
+    "valuation_closure_score": 2,
+    "readability_and_synthesis_score": 3,
+    "strongest_aspects": [
+      "对光模块产业周期、技术迭代和客户结构的刻画有逻辑层次，非表面描述。",
+      "会计分析部分从应收/存货周转、现金流转化率等细节切入，非泛泛的质量判断。",
+      "情景概率调整有辩论过程支撑，并明确将 ASP 作为关键不确定性的来源。"
+    ],
+    "findings": [
+      {
+        "section": "valuation_and_expectation_gap",
+        "priority": "must_revise",
+        "issue": "概率加权公允价值与决定性模型输出不一致，且缺失基准/牛市/熊市单点价值行。",
+        "evidence_or_logic_gap": "决定性模型输出概率加权核心价值为 1328.86 元，期权价值 0.54 元，合计 1329.40 元；但备忘录多处使用 1376 元或 1329 元，关键决策汇总表中仍为“~1,376 元”。同时，规范快照中的 base_fair_value、bull_fair_value、bear_fair_value 行未在公开报告中完整呈现（仅见基准情景 1,321 元的起始行）。",
+        "revision_instruction": "将公开报告中所有概率加权公允价值统一替换为决定性模型输出的 1329.40 元（1328.86 + 0.54），并完整列出三情景每股价值：基准 1,321.21 元、牛市 1,782.02 元、熊市 891.01 元，括号内注明对应 EPS 和 PE 假设。删除旧值 1,376 元，避免读者混淆。"
+      },
+      {
+        "section": "thesis_moat_financial_bridge",
+        "priority": "must_revise",
+        "issue": "公开论点章节缺少每一条核心论点对应的最强行反证及清晰的市场定价含义，且未形成独立可审计的财务桥接段。",
+        "evidence_or_logic_gap": "研究经理工作台为每条核心论点指定了 strongest_counterevidence 和 market_pricing 字段，并要求公开的 thesis_financial_bridge 章节保存这些元素。当前备忘录在业务单元分解中虽提到了反方证据，但没有按照“论点→证据→反证→财务传导→市场定价→证伪门槛”的链条明确集中呈现，使得买方无法迅速评估核心压注的风险收益边界。",
+        "revision_instruction": "在第四部分“三年期财务模型”之前或之后，独立新增一小节（可命名为“核心论点与财务桥接”），逐个列出两条排名论点（1.6T 放量消化前瞻估值预期差、强劲现金流提供安全边际），每条用紧凑段落表述：①提炼一句总领语；②引用关键证据；③明确最强反证及其可能影响；④展示“营收→毛利→净利→EPS”或“净利→OCF→FCF→估值”的传导链；⑤点出当前市场定价如何反映或未反映该论点；⑥给定一个可观察的证伪门槛。该节禁止纯表格形式，但可附一个概要表。"
+      },
+      {
+        "section": "risks_catalysts_verification",
+        "priority": "should_revise",
+        "issue": "风险部分对下行触发点的量化衔接不足，未直接引用熊市情景的 EPS 和目标价进行压力测试。",
+        "evidence_or_logic_gap": "备忘录风险部分提到“若 ASP 加速下滑……目标价 1000 元以下”，但决定性模型熊市情景 EPS 49.50 元、目标价 891.01 元，两者未对齐；且未说明在何种 EPS 或毛利率阈值下应转为观望或减仓。",
+        "revision_instruction": "在“风险与催化剂”一节中，利用已确定的熊市情景参数进行明确的风险量化：例如，“若 2027 年合同 ASP 年降超过 15%，导致合并毛利率跌破 44%，全年 EPS 降至 49.50 元，按 18 倍 PE 计算每股价值约 891 元，较现价存在 9% 下跌空间，届时建议转为持有/观望。”这样与估值部分完全对齐，提高交易纪律的可执行性。"
+      },
+      {
+        "section": "investment_conclusion",
+        "priority": "should_revise",
+        "issue": "投资结论段存在与前面章节重复的假设叙述和估值数字，削弱了备忘录的层次感。",
+        "evidence_or_logic_gap": "结论部分重新讲述了 1.6T 出货量、ASP、毛利率、FCF 等细节，大多已在第二部分（业务单元）和第四部分（财务模型）中完整展开。根据编辑要求，不应将同一阈值或结论全文复述于多个章节。",
+        "revision_instruction": "将投资结论精简为一页以内的执行摘要：仅保留（1）核心判断与评级，（2）情景价值与安全边际的最终结论，（3）两个关键验证点，（4）仓位和止损纪律。删除对假设、业务描述和估值过程的详细重复，改为引用前文章节（如“详见第四部分情景估值”）。"
+      },
+      {
+        "section": "cross_section_consistency",
+        "priority": "must_revise",
+        "issue": "概率加权公允价值 1,376 元在关键决策汇总表中仍然存在，与正文其他位置出现矛盾。",
+        "evidence_or_logic_gap": "同一份备忘录中，关键决策汇总表写“概率加权公允价值 ~1,376元”，而四、4.3 若补全应为 1,329 元；这是研报中严重的数字不一致错误，会直接引发买方信任危机。",
+        "revision_instruction": "全文搜索“1376”及“1,376”，替换为决定性的 1,329.40 元，并确保仅在估值章节集中展示该数值，其他章节需要引用时只写简短参考。"
+      },
+      {
+        "section": "company_disaggregation",
+        "priority": "should_revise",
+        "issue": "业务单元模型虽已拆分，但缺少收入驱动公式与毛利传递的明确因果链展示。",
+        "evidence_or_logic_gap": "研究经理结构中的 segment_economics 和 business_model_mechanisms 提供了详细的收入和利润驱动公式，但公开报告中 2.1-2.3 节主要以定性描述为主，经济学机制不够透明。",
+        "revision_instruction": "在第二部分的每个业务单元开头或末尾，增加一句简洁的驱动方程（如“800G 收入 = 全球需求 × 公司份额 × ASP；毛利 =（ASP - 单位成本）× 出货量”），并说明当前主要输入变量的基准值和置信度，使读者能直观看到量价成本如何耦合。"
+      }
+    ],
+    "overall_editorial_verdict": "备忘录基础扎实，产业逻辑和会计分析有深度，但估值闭合不严、关键数字前后矛盾、核心论点缺少最强行反证和市场定价披露，是不可接受的提交缺陷。修订重点在于：（1）统一估值数字至决定性模型输出；（2）补全三情景单点价值行；（3）嵌入论点-反证-定价-证伪的链条；（4）消除重复叙述。上述调整不会改变 Overweight 评级，但将显著提升报告在买方眼中的严谨性和可用性。"
+  },
+  "review_status": {
+    "mode": "schema_prompt_structured",
+    "agent": "Sell-Side Research Editor",
+    "structured_error": ""
+  },
+  "revision_requested": true,
+  "revision_applied": false,
+  "revision_status": {
+    "mode": "schema_prompt_structured",
+    "agent": "Portfolio Manager Editorial Revision",
+    "structured_error": ""
+  },
+  "initial_handoff_issues": [
+    "dropped canonical line: base_fair_value",
+    "dropped canonical line: bull_fair_value",
+    "dropped canonical line: bear_fair_value"
+  ],
+  "initial_analytical_issues": [
+    "public thesis chapter missing strongest counterargument/boundary"
+  ],
+  "remaining_handoff_issues": [
+    "dropped canonical line: base_fair_value",
+    "dropped canonical line: bull_fair_value",
+    "dropped canonical line: bear_fair_value"
+  ],
+  "remaining_analytical_issues": [
+    "public thesis chapter missing strongest counterargument/boundary"
+  ],
+  "revision_rejection_reasons": [
+    "revision increased canonical handoff issues from 3 to 4"
+  ]
+}
