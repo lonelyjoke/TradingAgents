@@ -276,16 +276,172 @@ class AlternativeIntelligenceDecision(BaseModel):
         return aliases.get(normalized, normalized)
 
 
+FOREIGN_SELL_SIDE_INSTITUTION_TOKENS = (
+    "nomura",
+    "野村",
+    "goldman sachs",
+    "高盛",
+    "morgan stanley",
+    "摩根士丹利",
+    "jpmorgan",
+    "jp morgan",
+    "摩根大通",
+    "ubs",
+    "瑞银",
+    "citigroup",
+    "citi",
+    "花旗",
+    "macquarie",
+    "麦格理",
+    "daiwa",
+    "大和",
+    "clsa",
+    "里昂",
+    "jefferies",
+    "杰富瑞",
+    "bank of america",
+    "bofa",
+    "美银",
+    "deutsche bank",
+    "德银",
+    "hsbc",
+    "汇丰",
+    "barclays",
+    "巴克莱",
+    "bnp paribas",
+    "法巴",
+    "mizuho",
+    "瑞穗",
+    "credit suisse",
+    "瑞信",
+)
+
+DOMESTIC_SELL_SIDE_INSTITUTION_TOKENS = (
+    "中信证券",
+    "中金公司",
+    "华泰证券",
+    "国泰君安",
+    "海通证券",
+    "申万宏源",
+    "招商证券",
+    "广发证券",
+    "天风证券",
+    "兴业证券",
+    "国信证券",
+    "长江证券",
+    "东方证券",
+    "浙商证券",
+    "国联证券",
+)
+
+
+def infer_sell_side_institution_origin(institution: object) -> str:
+    """Classify a broker conservatively for forecast-lineage disclosure."""
+    normalized = str(institution or "").strip().lower()
+    if any(token in normalized for token in FOREIGN_SELL_SIDE_INSTITUTION_TOKENS):
+        return "foreign_sell_side"
+    if any(token in normalized for token in DOMESTIC_SELL_SIDE_INSTITUTION_TOKENS):
+        return "domestic_sell_side"
+    return "unknown"
+
+
+def infer_sell_side_adoption_level(row: dict) -> str:
+    """Infer how a broker forecast entered the model when the LLM omitted the tag."""
+    declared = str(row.get("adoption_level", "unknown") or "unknown")
+    if declared != "unknown":
+        return declared
+    text = " ".join(
+        str(row.get(field, "") or "")
+        for field in ("decision_use", "comparison_with_our_model", "revision_or_dispersion")
+    ).lower()
+    if any(token in text for token in ("不采纳", "未采纳", "拒绝", "rejected", "not adopted")):
+        return "rejected"
+    if any(
+        token in text
+        for token in ("不改变基准预测", "未改变基准预测", "仅作对照", "需求对照", "cross-check", "watch")
+    ):
+        return "cross_check_only"
+    if any(token in text for token in ("直接采纳", "基准预测", "核心输入", "directly adopted", "base forecast")):
+        return "direct_base_input"
+    if any(token in text for token in ("部分采纳", "部分进入", "partially adopted")):
+        return "partial_model_input"
+    if any(token in text for token in ("概率", "牛市情景", "熊市情景", "scenario probability", "bull case", "bear case")):
+        return "scenario_probability_only"
+    if any(token in text for token in ("对照", "交叉验证", "观察", "未改变", "cross-check", "watch")):
+        return "cross_check_only"
+    return "unknown"
+
+
+def infer_sell_side_forecast_posture(row: dict) -> str:
+    """Infer whether a broker forecast leans optimistic or conservative."""
+    declared = str(row.get("forecast_posture", "unknown") or "unknown")
+    if declared != "unknown":
+        return declared
+    text = " ".join(
+        str(row.get(field, "") or "")
+        for field in (
+            "forecast_and_valuation",
+            "revision_or_dispersion",
+            "comparison_with_our_model",
+            "key_assumptions_and_scenario",
+        )
+    ).lower()
+    optimistic = any(
+        token in text
+        for token in ("上调", "强烈看多", "积极", "乐观", "超预期", "buy", "bullish", "raised")
+    )
+    conservative = any(
+        token in text
+        for token in ("下调", "保守", "悲观", "谨慎", "sell", "underweight", "cut")
+    )
+    if optimistic and conservative:
+        return "mixed"
+    if optimistic:
+        return "optimistic"
+    if conservative:
+        return "conservative"
+    return "unknown"
+
+
 class SellSideExpectationRow(BaseModel):
     """One broker observation reconciled against the independent model."""
 
     source_ids: list[str] = Field(description="KSI ids and supporting KPE ids.")
     institution: str
+    institution_origin: Literal["foreign_sell_side", "domestic_sell_side", "unknown"] = Field(
+        default="unknown",
+        description="Mark whether this is foreign sell-side, domestic sell-side, or still unidentified.",
+    )
     published_at: str
     observation_type: Literal["single_broker", "multi_broker_range", "verified_consensus"] = "single_broker"
     forecast_and_valuation: str = Field(description="Period-specific forecast, method, multiple and target price; mark missing fields.")
     revision_or_dispersion: str = Field(description="Change versus the same institution's prior view or dispersion across institutions.")
     comparison_with_our_model: str = Field(description="Exact variable, period and magnitude difference versus TradingAgents.")
+    forecast_posture: Literal["optimistic", "balanced", "conservative", "mixed", "unknown"] = Field(
+        default="unknown",
+        description=(
+            "Characterize the forecast as optimistic, balanced, conservative, mixed, or unknown relative to "
+            "company guidance, public evidence, other brokers, and TradingAgents; do not infer it from the rating alone."
+        ),
+    )
+    key_assumptions_and_scenario: str = Field(
+        default="",
+        description=(
+            "Explain the demand/volume, ASP/price, share, margin, cash-flow and valuation assumptions that make "
+            "the broker forecast optimistic or conservative; explicitly mark unavailable assumptions."
+        ),
+    )
+    adoption_level: Literal[
+        "direct_base_input",
+        "partial_model_input",
+        "scenario_probability_only",
+        "cross_check_only",
+        "rejected",
+        "unknown",
+    ] = Field(
+        default="unknown",
+        description="State exactly whether and where this forecast entered the TradingAgents model.",
+    )
     evidence_status: Literal["public_verified", "private_text", "partial", "stale", "rejected"]
     decision_use: str = Field(description="Forecast, valuation, scenario probability, verification, or rejection outcome.")
 
@@ -2378,6 +2534,25 @@ def normalize_sell_side_pm_decision(
     decision = value if isinstance(value, SellSidePMDecision) else SellSidePMDecision.model_validate(value)
     payload = decision.model_dump()
     notes: list[str] = []
+    for row in payload.get("sell_side_expectation_matrix", []) or []:
+        inferred_origin = infer_sell_side_institution_origin(row.get("institution"))
+        if str(row.get("institution_origin", "unknown")) == "unknown" and inferred_origin != "unknown":
+            row["institution_origin"] = inferred_origin
+            notes.append(
+                f"classified {row.get('institution', 'unknown institution')} as {inferred_origin}"
+            )
+        inferred_adoption = infer_sell_side_adoption_level(row)
+        if str(row.get("adoption_level", "unknown")) == "unknown" and inferred_adoption != "unknown":
+            row["adoption_level"] = inferred_adoption
+            notes.append(
+                f"classified {row.get('institution', 'unknown institution')} adoption as {inferred_adoption}"
+            )
+        inferred_posture = infer_sell_side_forecast_posture(row)
+        if str(row.get("forecast_posture", "unknown")) == "unknown" and inferred_posture != "unknown":
+            row["forecast_posture"] = inferred_posture
+            notes.append(
+                f"classified {row.get('institution', 'unknown institution')} forecast posture as {inferred_posture}"
+            )
     lines = list(payload.get("canonical_model_snapshot", []))
 
     def _metric(row: dict) -> str:
@@ -3423,6 +3598,67 @@ def _render_deterministic_valuation(output: DeterministicValuationOutput) -> str
     return "\n".join(rows)
 
 
+def _render_foreign_sell_side_disclosure(rows_in: list[SellSideExpectationRow]) -> str:
+    """Render reader-facing lineage when foreign broker forecasts affect the model."""
+    active_levels = {
+        "direct_base_input",
+        "partial_model_input",
+        "scenario_probability_only",
+    }
+    rows = [
+        row
+        for row in rows_in
+        if (
+            row.institution_origin == "foreign_sell_side"
+            or infer_sell_side_institution_origin(row.institution) == "foreign_sell_side"
+        )
+        and infer_sell_side_adoption_level(row.model_dump()) in active_levels
+    ]
+    if not rows:
+        return ""
+    adoption_labels = {
+        "direct_base_input": "直接进入基准预测",
+        "partial_model_input": "部分进入盈利模型",
+        "scenario_probability_only": "仅调整情景概率",
+    }
+    posture_labels = {
+        "optimistic": "偏积极",
+        "balanced": "中性/基准",
+        "conservative": "偏保守",
+        "mixed": "多空假设混合",
+        "unknown": "尚未判定",
+    }
+    output = [
+        "### 外资卖方预测引用与情景假设",
+        "",
+        "> 下列远期预测来自外资卖方，不等同于公司指引、公开一致预期或TradingAgents独立预测。情景倾向依据其需求、价格、份额、利润率和估值假设相对公开证据及本模型的差异判断。",
+        "",
+        "| 机构/日期 | 采用方式 | 情景倾向 | 卖方预测及关键假设 | 与本模型的差异及影响 | 证据状态 |",
+        "| --- | --- | --- | --- | --- | --- |",
+    ]
+    for row in rows:
+        adoption = infer_sell_side_adoption_level(row.model_dump())
+        posture = infer_sell_side_forecast_posture(row.model_dump())
+        assumptions = row.key_assumptions_and_scenario.strip() or "关键假设未完整披露，需核验"
+        forecast = row.forecast_and_valuation.strip()
+        output.append(
+            "| "
+            + " | ".join(
+                _table_cell(value)
+                for value in (
+                    f"{row.institution} / {row.published_at}",
+                    adoption_labels.get(adoption, adoption),
+                    posture_labels.get(posture, posture),
+                    f"{forecast}；{assumptions}",
+                    f"{row.comparison_with_our_model}；{row.decision_use}",
+                    row.evidence_status,
+                )
+            )
+            + " |"
+        )
+    return "\n".join(output)
+
+
 def _render_sell_side_expectations(rows_in: list[SellSideExpectationRow]) -> str:
     observation_labels = {
         "single_broker": "单家机构",
@@ -3580,6 +3816,8 @@ def render_sell_side_pm_decision(decision: SellSidePMDecision) -> str:
             + _demote_embedded_headings(decision.autonomous_forecast_model),
             "## 七、市场预期差与估值\n\n"
             + _demote_embedded_headings(decision.expectation_gap_and_market_pricing)
+            + "\n\n"
+            + _render_foreign_sell_side_disclosure(decision.sell_side_expectation_matrix)
             + "\n\n"
             + _render_deterministic_valuation(decision.deterministic_valuation)
             + "\n\n### 估值解释与局限\n\n"

@@ -11,6 +11,7 @@ from tradingagents.evaluation.research_validator import (
     audit_canonical_financial_reconciliation,
     audit_pm_unit_scale_arithmetic,
     audit_position_valuation_consistency,
+    audit_foreign_sell_side_forecast_disclosure,
     audit_public_forecast_growth_consistency,
     audit_public_key_number_consistency,
     audit_rating_valuation_consistency,
@@ -84,6 +85,7 @@ def test_missing_inputs_and_lineage_gaps_are_review_only():
     for section in (
         "period_comparator_lineage",
         "sell_side_expectation_lineage",
+        "foreign_sell_side_forecast_disclosure",
     ):
         assert not _is_publication_blocker(section, "error")
 
@@ -91,6 +93,45 @@ def test_missing_inputs_and_lineage_gaps_are_review_only():
     assert _is_publication_blocker("company_operating_model", "error")
     assert _is_publication_blocker("handoff_numeric_consistency", "error")
     assert _is_publication_blocker("scenario_probability_math", "error")
+
+
+def test_foreign_sell_side_forecast_disclosure_requires_posture_assumptions_and_public_label(tmp_path):
+    pm_dir = tmp_path / "5_portfolio"
+    pm_dir.mkdir()
+    row = {
+        "source_ids": ["KSI01"],
+        "institution": "野村证券",
+        "published_at": "2026-07-16",
+        "forecast_and_valuation": "2027E EPS 66.06元。",
+        "revision_or_dispersion": "无可比前值。",
+        "comparison_with_our_model": "作为模型锚。",
+        "evidence_status": "private_text",
+        "decision_use": "直接采纳为基准预测。",
+    }
+    (pm_dir / "canonical_decision.json").write_text(
+        json.dumps({"sell_side_expectation_matrix": [row]}, ensure_ascii=False),
+        encoding="utf-8",
+    )
+
+    issues = audit_foreign_sell_side_forecast_disclosure(tmp_path, "普通估值正文")
+
+    assert {issue.section for issue in issues} == {"foreign_sell_side_forecast_disclosure"}
+    assert any("posture" in issue.issue for issue in issues)
+    assert any("reader-facing" in issue.issue for issue in issues)
+
+    row.update(
+        institution_origin="foreign_sell_side",
+        adoption_level="direct_base_input",
+        forecast_posture="optimistic",
+        key_assumptions_and_scenario="1.6T需求7150万只、ASP年降10%、毛利率47.5%，高于原模型需求。",
+    )
+    (pm_dir / "canonical_decision.json").write_text(
+        json.dumps({"sell_side_expectation_matrix": [row]}, ensure_ascii=False),
+        encoding="utf-8",
+    )
+    public_text = "### 外资卖方预测引用与情景假设\n\n野村证券的偏积极假设已披露。"
+
+    assert audit_foreign_sell_side_forecast_disclosure(tmp_path, public_text) == []
 
 
 def test_deterministic_valuation_scale_flags_raw_shares_in_mn_field(tmp_path):
@@ -995,6 +1036,22 @@ def test_public_key_number_consistency_does_not_treat_current_value_as_current_p
     )
 
     assert issues == []
+
+
+def test_public_key_number_consistency_does_not_treat_fair_value_after_current_price_as_price():
+    issues = audit_public_key_number_consistency(
+        "当前股价979元，形成了以979元现价对应1329元概率加权公允价值的预期差。"
+    )
+
+    assert issues == []
+
+
+def test_public_key_number_consistency_catches_conflicting_prefix_and_suffix_current_prices():
+    issues = audit_public_key_number_consistency(
+        "当前股价979元，但调整后采用900元现价。"
+    )
+
+    assert [issue.section for issue in issues] == ["public_key_number_consistency"]
 
 
 def test_public_forecast_growth_must_match_canonical_revenue(tmp_path):

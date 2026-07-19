@@ -23,6 +23,77 @@ from tradingagents.dataflows.tushare_client import (
 )
 
 
+_FOREIGN_SELL_SIDE_TOKENS = (
+    "nomura", "野村", "goldman sachs", "高盛", "morgan stanley", "摩根士丹利",
+    "jpmorgan", "jp morgan", "摩根大通", "ubs", "瑞银", "citigroup", "citi", "花旗",
+    "macquarie", "麦格理", "daiwa", "大和", "clsa", "里昂", "jefferies", "杰富瑞",
+    "bank of america", "bofa", "美银", "deutsche bank", "德银", "hsbc", "汇丰",
+    "barclays", "巴克莱", "bnp paribas", "法巴", "mizuho", "瑞穗",
+    "credit suisse", "瑞信",
+)
+
+
+def infer_sell_side_institution_origin(institution: object) -> str:
+    normalized = str(institution or "").strip().lower()
+    return (
+        "foreign_sell_side"
+        if any(token in normalized for token in _FOREIGN_SELL_SIDE_TOKENS)
+        else "unknown"
+    )
+
+
+def infer_sell_side_adoption_level(row: Mapping[str, Any]) -> str:
+    declared = str(row.get("adoption_level", "unknown") or "unknown")
+    if declared != "unknown":
+        return declared
+    text = " ".join(
+        str(row.get(field, "") or "")
+        for field in ("decision_use", "comparison_with_our_model", "revision_or_dispersion")
+    ).lower()
+    checks = (
+        ("rejected", ("不采纳", "未采纳", "拒绝", "rejected", "not adopted")),
+        ("cross_check_only", ("不改变基准预测", "未改变基准预测", "仅作对照", "需求对照", "cross-check", "watch")),
+        ("direct_base_input", ("直接采纳", "基准预测", "核心输入", "directly adopted", "base forecast")),
+        ("partial_model_input", ("部分采纳", "部分进入", "partially adopted")),
+        ("scenario_probability_only", ("概率", "牛市情景", "熊市情景", "scenario probability", "bull case", "bear case")),
+        ("cross_check_only", ("对照", "交叉验证", "观察", "未改变", "cross-check", "watch")),
+    )
+    for level, tokens in checks:
+        if any(token in text for token in tokens):
+            return level
+    return "unknown"
+
+
+def infer_sell_side_forecast_posture(row: Mapping[str, Any]) -> str:
+    declared = str(row.get("forecast_posture", "unknown") or "unknown")
+    if declared != "unknown":
+        return declared
+    text = " ".join(
+        str(row.get(field, "") or "")
+        for field in (
+            "forecast_and_valuation",
+            "revision_or_dispersion",
+            "comparison_with_our_model",
+            "key_assumptions_and_scenario",
+        )
+    ).lower()
+    optimistic = any(
+        token in text
+        for token in ("上调", "强烈看多", "积极", "乐观", "超预期", "buy", "bullish", "raised")
+    )
+    conservative = any(
+        token in text
+        for token in ("下调", "保守", "悲观", "谨慎", "sell", "underweight", "cut")
+    )
+    if optimistic and conservative:
+        return "mixed"
+    if optimistic:
+        return "optimistic"
+    if conservative:
+        return "conservative"
+    return "unknown"
+
+
 RATING_MAP = {
     "buy": "Buy",
     "overweight": "Overweight",
@@ -1985,21 +2056,88 @@ def audit_public_key_number_consistency(decision_text: str) -> list[DecisionDept
     """Catch unreconciled repeated key numbers in reader-facing prose."""
     issues: list[DecisionDepthIssue] = []
     checks = (
-        ("net cash", r"(?:净现金|net cash)[^\d\n]{0,18}(\d+(?:\.\d+)?)\s*(?:亿|CNY\s*100m)", 0.05),
+        (
+            "net cash",
+            (r"(?:净现金|net cash)[^\d\n]{0,18}(\d+(?:\.\d+)?)\s*(?:亿|CNY\s*100m)",),
+            0.05,
+        ),
         (
             "current price",
-            r"(?:当前股价|当前价格|当前价(?!值)|现价(?!值))[^\d\n]{0,8}(\d+(?:\.\d+)?)\s*元",
+            (
+                r"(?:当前股价|当前价格|当前价(?!值)|现价(?!值))"
+                r"\s*(?:约(?:为)?|为|是|报|[:：=])?\s*(?:人民币\s*)?"
+                r"(\d+(?:\.\d+)?)\s*元",
+                r"(?:人民币\s*)?(\d+(?:\.\d+)?)\s*元\s*(?:的)?\s*"
+                r"(?:当前股价|当前价格|当前价(?!值)|现价(?!值))",
+            ),
             0.02,
         ),
     )
-    for label, pattern, tolerance in checks:
-        values = [float(value) for value in re.findall(pattern, decision_text, re.I)]
+    for label, patterns, tolerance in checks:
+        values = [
+            float(value)
+            for pattern in patterns
+            for value in re.findall(pattern, decision_text, re.I)
+        ]
         if len(values) >= 2 and min(values) > 0 and (max(values) - min(values)) / min(values) > tolerance:
             issues.append(
                 DecisionDepthIssue(
                     "public_key_number_consistency",
                     "error",
                     f"public memo uses conflicting {label} values {sorted(set(values))}; state one definition/period or reconcile the definitions explicitly",
+                )
+            )
+    return issues
+
+
+def audit_foreign_sell_side_forecast_disclosure(
+    report_dir: str | Path,
+    decision_text: str,
+) -> list[DecisionDepthIssue]:
+    """Require explicit public lineage when foreign broker forecasts affect valuation."""
+    payload_path = Path(report_dir) / "5_portfolio" / "canonical_decision.json"
+    if not payload_path.exists():
+        return []
+    try:
+        payload = json.loads(read_text_fallback(payload_path))
+    except (OSError, TypeError, json.JSONDecodeError):
+        return []
+
+    active_levels = {
+        "direct_base_input",
+        "partial_model_input",
+        "scenario_probability_only",
+    }
+    issues: list[DecisionDepthIssue] = []
+    for row in payload.get("sell_side_expectation_matrix", []) or []:
+        origin = str(row.get("institution_origin", "unknown") or "unknown")
+        if origin != "foreign_sell_side" and infer_sell_side_institution_origin(row.get("institution")) != "foreign_sell_side":
+            continue
+        adoption = infer_sell_side_adoption_level(row)
+        if adoption not in active_levels:
+            continue
+        institution = str(row.get("institution", "foreign broker") or "foreign broker").strip()
+        missing: list[str] = []
+        if infer_sell_side_forecast_posture(row) == "unknown":
+            missing.append("optimistic/balanced/conservative posture")
+        assumptions = str(row.get("key_assumptions_and_scenario", "") or "").strip()
+        if len(assumptions) < 12:
+            missing.append("demand/ASP/share/margin/valuation assumptions")
+        if missing:
+            issues.append(
+                DecisionDepthIssue(
+                    "foreign_sell_side_forecast_disclosure",
+                    "error",
+                    f"{institution} is used as {adoption}, but the structured forecast lineage is missing "
+                    + " and ".join(missing),
+                )
+            )
+        if "外资卖方预测引用与情景假设" not in decision_text or institution not in decision_text:
+            issues.append(
+                DecisionDepthIssue(
+                    "foreign_sell_side_forecast_disclosure",
+                    "error",
+                    f"public memo uses {institution} as {adoption} without a reader-facing foreign sell-side forecast disclosure",
                 )
             )
     return issues
@@ -3096,6 +3234,7 @@ def audit_report_depth(report_dir: str | Path) -> pd.DataFrame:
     issues.extend(audit_pm_unit_scale_arithmetic(report_dir))
     issues.extend(audit_canonical_financial_reconciliation(report_dir))
     issues.extend(audit_public_key_number_consistency(decision_text))
+    issues.extend(audit_foreign_sell_side_forecast_disclosure(report_dir, decision_text))
     issues.extend(audit_public_forecast_growth_consistency(report_dir, decision_text))
     issues.extend(audit_weighted_margin_arithmetic(decision_text))
     issues.extend(audit_deterministic_valuation_scale(report_dir))

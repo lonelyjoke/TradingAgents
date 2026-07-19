@@ -9,6 +9,7 @@ assert _SPEC and _SPEC.loader
 _SCHEMAS = importlib.util.module_from_spec(_SPEC)
 _SPEC.loader.exec_module(_SCHEMAS)
 normalize_sell_side_pm_decision = _SCHEMAS.normalize_sell_side_pm_decision
+render_sell_side_pm_decision = _SCHEMAS.render_sell_side_pm_decision
 
 
 def _minimal_pm_payload() -> dict:
@@ -160,3 +161,37 @@ def test_pm_deterministic_valuation_normalizes_raw_share_count_units():
     ]
     assert len(eps_rows) == 1
     assert eps_rows[0].value == pytest.approx(1.1120, rel=1e-4)
+
+
+def test_foreign_sell_side_forecast_is_classified_and_disclosed_publicly():
+    assert _SCHEMAS.infer_sell_side_adoption_level(
+        {"decision_use": "增加看多证据，但不改变基准预测；仅作需求对照。"}
+    ) == "cross_check_only"
+    payload = _minimal_pm_payload()
+    payload["sell_side_expectation_matrix"] = [
+        {
+            "source_ids": ["KSI01", "KPE01"],
+            "institution": "野村证券",
+            "published_at": "2026-07-16",
+            "observation_type": "single_broker",
+            "forecast_and_valuation": "上调2027E EPS至66.06元，按20倍PE估值。",
+            "revision_or_dispersion": "较前次上调1.6T需求。",
+            "comparison_with_our_model": "2027E EPS由58元上调至66.06元。",
+            "key_assumptions_and_scenario": "1.6T需求7150万只、ASP年降约10%、毛利率47.5%，属于偏积极需求情景。",
+            "evidence_status": "private_text",
+            "decision_use": "直接采纳为基准预测和核心估值输入。",
+        }
+    ]
+
+    decision, notes = normalize_sell_side_pm_decision(payload)
+    row = decision.sell_side_expectation_matrix[0]
+
+    assert row.institution_origin == "foreign_sell_side"
+    assert row.adoption_level == "direct_base_input"
+    assert row.forecast_posture == "optimistic"
+    assert any("classified 野村证券" in note for note in notes)
+    rendered = render_sell_side_pm_decision(decision)
+    assert "外资卖方预测引用与情景假设" in rendered
+    assert "不等同于公司指引" in rendered
+    assert "直接进入基准预测" in rendered
+    assert "1.6T需求7150万只" in rendered

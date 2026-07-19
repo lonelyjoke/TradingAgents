@@ -10,6 +10,11 @@ Breaking changes within the 0.x line are called out explicitly.
 
 ### Added
 
+- Foreign sell-side forecast lineage for A-share reports, including institution
+  origin, adoption level, optimistic/balanced/conservative posture, decisive
+  demand/ASP/share/margin/valuation assumptions, a reader-facing disclosure
+  table, and review-only audit findings when a model-driving forecast is not
+  explained clearly.
 - A-share current research system documentation: module map, data-to-debate chain,
   PM report structure, and debugging workflow.
 - A-share sell-side depth gap note documenting the newly added derived research

@@ -1,0 +1,102 @@
+{
+  "review": {
+    "revision_required": true,
+    "company_understanding_score": 4,
+    "independent_model_score": 3,
+    "evidence_and_counterevidence_score": 3,
+    "valuation_closure_score": 2,
+    "readability_and_synthesis_score": 3,
+    "strongest_aspects": [
+      "会计前瞻信号分析（第三节）质量高，结合合同负债、应收、存货等指标识别出库存加速消化和订单改善的信号，因果解读有深度。",
+      "行业供给侧分析（第四节、行业驱动矩阵）将寡头资本开支纪律与其他周期进行区分，论证了本轮周期可能与众不同的供给侧逻辑。",
+      "资产负债表质量的证据传导链完整，从净现金、债务比率到穿越周期能力的论证有说服力。"
+    ],
+    "findings": [
+      {
+        "section": "valuation_and_expectation_gap",
+        "priority": "must_revise",
+        "issue": "安全估值结论与PM风险判断自相矛盾。确定性估值输出显示概率加权公允价值为150.64元（预期回报-67.47%），但风险章节声称“预期差在于估值收缩的速度和幅度……真正的预期差在于……市场预计PE将从113倍急剧收缩至50-60倍，而我们则认为随着盈利下调，最终会在30倍左右企稳，对应目标价150元左右，下行空间仍然显著”。这段话将150元左右定义为30倍PE对应的目标价，但这与确定性估值表中基础情形PE为20倍、公允价值为119.27元的设定自相矛盾。",
+        "evidence_or_logic_gap": "确定性估值输出显示：基础情形PE=20x，EPS 5.96，公允价值119.27元；概率加权核心值149.41元。风险章节却声称30倍PE对应150元左右目标价，混淆了估值倍数假设，造成读者对公允价值逻辑链的误解。",
+        "revision_instruction": "统一引用确定性估值表中的概率加权公允价值150.64元和基础情形119.27元作为核心数值。明确说明当前股价463元对基础情形仍有约74%的下行空间，即使在概率加权情景下也有约67%的预期负回报率；不另辟估值倍数叙事。删除“30倍PE目标价150元”之类的自创估值口径，所有估值结论以第7节确定性计算表为唯一数值来源。"
+      },
+      {
+        "section": "thesis_moat_financial_bridge",
+        "priority": "must_revise",
+        "issue": "公开论点章节缺少研究经理计划要求的最强反证和证伪门。计划明确指出：“public thesis chapter missing strongest counterargument/boundary”和“public thesis chapter missing falsification condition”。当前论点金融桥梁仅呈现了熊市情景的量化影响，但未给出使论点失效的具体观测条件和时间窗口。",
+        "evidence_or_logic_gap": "论点一的‘预期差’部分提到市场可能过于乐观，但未明确给出“存储超级周期延展性”论点被证伪的具体条件。计划内核心论点卡片有清晰的证伪门（如Q2毛利率<55%且合同负债收缩），但这些未被合成到公开章节的叙事中。",
+        "revision_instruction": "在论点一的金融传导分析中，直接加入证伪条件声明：“若2026年中报显示Q2毛利率低于55%且合同负债环比下降，则存储ASP超级周期延展性论点视为证伪，应立即下调2027E净利润至35亿元以下，并重新评估估值。”同样为论点三（利润率可持续性）加入证伪门。确保这些条件源自计划中已提供的核心论点卡片，不需要额外发明。"
+      },
+      {
+        "section": "three_year_forecast",
+        "priority": "must_revise",
+        "issue": "三年预测表中利润与现金流之间存在未调和矛盾。2027E OCF为51.9亿元，但根据已采纳模型的一阶近似（净利润47.23亿元 x OCF/NI 1.22倍），应约为57.6亿元。当前51.9亿元隐含OCF/NI倍数仅约1.10倍，与研究计划中明确采纳的1.22倍现金转化率不一致。",
+        "evidence_or_logic_gap": "研究计划明确指定OCF = 母公司净利润 x 1.22（基于Q1 2026报告比率），且所有采纳的确定性快照行均采用此公式。备忘录中的预测数字偏离了已批准公式。",
+        "revision_instruction": "修正三年预测表中所有年度的OCF值，统一采用OCF = Parent Net Profit x 1.22公式计算。2026E OCF应修正为5106亿元（4185×1.22），2027E OCF修正为5760亿元（4723×1.22），2028E OCF修正为5824亿元（4774×1.22）。相应调整FCF=OCF–Capex。附注说明OCF公式来源。"
+      },
+      {
+        "section": "industry_cycle_and_competition",
+        "priority": "should_revise",
+        "issue": "行业驱动矩阵和竞争分析以定性叙述为主，缺少可用于模型校准的行业结构数据。计划要求industry_driver_matrix应“携带证据和因果深度”，当前缺少具体的产能数据、市场份额变化、价格指数时间序列的引用。",
+        "evidence_or_logic_gap": "ASP预测依赖TrendForce和KeyBanc的代理来源，但行业内缺乏对NOR Flash/SLC NAND具体产能扩张的量化追踪（如各主要厂商的产能扩张计划、稼动率数据、竞争格局变化）。这削弱了行业周期阶段判断的可验证性。",
+        "revision_instruction": "在行业驱动矩阵中补充以下可观测指标：①兆易创新在NOR Flash/SLC NAND中的市场份额（基于公开行业报告估算）；②主要竞争者的产能扩张公告时间线（普冉股份、华邦电子、旺宏电子）；③TrendForce SLC NAND价格指数的具体数值和更新频率。若有缺口，明确标注为“尚待验证”，不凭空填补。"
+      },
+      {
+        "section": "company_disaggregation",
+        "priority": "should_revise",
+        "issue": "分部经济学的结构性证据不足。计划要求business_model_mechanisms、segment_economics等结构化表携带因果深度，但当前分部矩阵中的毛利率、权重均标为“估算”，缺少可追溯的证据链条或代理指标。",
+        "evidence_or_logic_gap": "分部收入权重（存储器75-80%等）未披露来源或推算方法，也未引证行业报告、产业链交叉验证、或可比公司数据。这使得分部层面的利润敏感性分析和SOTP估值缺乏锚点。",
+        "revision_instruction": "在分部景气度矩阵中补充权重的推算逻辑和证据来源。例如：“存储器权重基于2026Q1合同负债增长集中于存储产品线的判断，以及TrendForce价格报告中GigaDevice在NOR市场出货量份额的估算”。若缺乏直接证据，明确标注推算方法和局限性：“以下权重为基于行业结构比例的合理假设，非公司披露数值”。"
+      },
+      {
+        "section": "accounting_and_capital_allocation",
+        "priority": "optional",
+        "issue": "会计质量评分表缺少对研发费用会计处理（资本化或费用化）的讨论，且对半固定成本刚性的分析停留在概念层面，未用量化的研发费用/收入比率敏感性矩阵进行强化。",
+        "evidence_or_logic_gap": "计划中accounting_quality_matrix已识别出高R&D强度的风险，备忘录已在叙事中提及，但未以结构化行记录资本化政策及其对利润/FCF的影响。",
+        "revision_instruction": "在会计质量矩阵中新增一行：“R&D capitalization policy and impact”，填入信息：①研发支出是否资本化及比例（基于年报披露）；②若完全费用化，在熊市情景下，研发费用/收入比率可能从8.6%飙升至15-18%，对利润的影响计算。这将强化“半固定成本刚性”的财务传导论证。"
+      },
+      {
+        "section": "cross_section_consistency",
+        "priority": "must_revise",
+        "issue": "计划中bull/bear/base三情形PE倍数在章节间不一致。估值闭口中基础情形PE=20x、牛市PE=25x、熊市PE=15x，但确定性估值输出和早期论点金融桥梁部分位置引用的PE倍数不同。估值闭口自身在概率加权叙事和“30倍PE目标价”风险叙事间也存在矛盾（见第一条finding）。",
+        "evidence_or_logic_gap": "多章节间PE倍数的自由浮动导致180亿元 vs 119亿元等估值结论不一致，削弱了模型的权威性。",
+        "revision_instruction": "将整份报告中所有场景的PE倍数统一为以下一组：基础情形20x PE、牛市情形25x PE、熊市情形15x PE。仅在第7节估值闭口中详细解释PE选择逻辑（基于周期阶段、可比公司和当前市场环境）。其他章节引用估值时间仅引用第7节的数值结果，不重复讨论PE倍数选择。"
+      },
+      {
+        "section": "risks_catalysts_verification",
+        "priority": "must_revise",
+        "issue": "风险章节的定价叙事与估值结论存在逻辑脱节。声称“预期差在于估值收缩的速度和幅度……市场预计PE从113倍急剧收缩至50-60倍，而我们则认为随着盈利下调，最终会在30倍左右企稳”，但这与采纳的20x PE基础情形价值（119元）和概率加权公允价值（150元）都不一致。此外，该叙事暗示“估值收缩过度”的差异化观点，与实际计算出的-67%预期回报率不相容。",
+        "evidence_or_logic_gap": "确定性计算显示当前股价隐含极高预期回报率（-67%），不应引导读者认为市场对估值收缩的定价可能过高或存在向上的预期差。这误解了模型自身的悲观结论。",
+        "revision_instruction": "重写该段落，明确表述为：“我们的估值模型显示，即使在概率加权基础上，公允价值也仅为150.64元，对应-67.47%预期回报率。当前463元价格意味着市场定价的EPS中长期预期远超我们的基本情形——三情景加权EPS需达到约23元（463÷20x PE）才能支撑现价，这是基础情形EPS（5.96元）的3.9倍。即使最乐观的牛市情形EPS（9.98元）也无法为当前估值提供安全边际。”"
+      }
+    ],
+    "overall_editorial_verdict": "备忘录在公司业务机制和行业逻辑上展示出不错的理解力，会计质量分析是亮点。但安全估值闭口与PM风险结论存在内部矛盾，核心论点章节缺少最有力的反证和证伪条件，模型假设与理论论据之间的定量一致性不足。需重点修订估值闭口、论点金融桥梁和分部经济学，使其在逻辑上自洽并在数值上与PM采纳的模型对齐。"
+  },
+  "review_status": {
+    "mode": "schema_prompt_structured",
+    "agent": "Sell-Side Research Editor",
+    "structured_error": ""
+  },
+  "revision_requested": true,
+  "revision_applied": true,
+  "revision_status": {
+    "mode": "schema_repaired_fallback",
+    "agent": "Portfolio Manager Editorial Revision",
+    "structured_error": "4 validation errors for SellSidePMDecision\nhandoff_change_rows.1.eps_fcf_valuation_impact\n  Field required [type=missing, input_value={'line_id': '2027E_ocf', ...isposition': 'accepted'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nhandoff_change_rows.2.eps_fcf_valuation_impact\n  Field required [type=missing, input_value={'line_id': '2028E_ocf', ...isposition': 'accepted'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nhandoff_change_rows.3.eps_fcf_valuation_impact\n  Field required [type=missing, input_value={'line_id': '2027E_fcf', ...isposition': 'accepted'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nhandoff_change_rows.4.eps_fcf_valuation_impact\n  Field required [type=missing, input_value={'line_id': '2028E_fcf', ...isposition': 'accepted'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing"
+  },
+  "initial_handoff_issues": [
+    "silent change diluted_shares: 701745100.0 shares -> 701.7451 mn shares"
+  ],
+  "initial_analytical_issues": [
+    "analytical structure: auditable forecast assumptions count=2, expected at least 3",
+    "public thesis chapter missing strongest counterargument/boundary",
+    "public thesis chapter missing falsification condition"
+  ],
+  "remaining_handoff_issues": [
+    "silent change diluted_shares: 701745100.0 shares -> 701.7451 mn shares"
+  ],
+  "remaining_analytical_issues": [
+    "analytical structure: auditable forecast assumptions count=2, expected at least 3",
+    "public thesis chapter missing falsification condition"
+  ],
+  "revision_rejection_reasons": []
+}

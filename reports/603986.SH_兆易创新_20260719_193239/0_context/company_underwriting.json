@@ -1,0 +1,1452 @@
+{
+  "schema_version": 2,
+  "symbol": "603986.SH",
+  "as_of_date": "2026-07-19",
+  "forecast_years": [
+    "2026E",
+    "2027E",
+    "2028E"
+  ],
+  "research_readiness": "partial",
+  "readiness_reasons": [
+    "Segment revenue/gross profit breakdown not disclosed – only consolidated quarterly metrics available; product-level economics estimated analytically.",
+    "Diluted share count not available from Tushare, market-cap/price cross-check, or filing EPS reconciliation; EPS and per-share valuations remain missing.",
+    "Q2 2026 official financials not yet reported; channel-check estimates (KPE08) imply unreasonable net margin of ~74% vs reported Q1 34.9% and are treated as unverified.",
+    "No baseline/revised price values supplied for KPE items; all ASP/volume bridges remain qualitative until pricing data is retrieved.",
+    "Key company-specific disclosures (e.g., 2025 annual report segment breakdown) are referenced but numeric tables are missing from the evidence payload.",
+    "One or more filing-reported segments required deterministic restoration.",
+    "Material segment three-year driver lines are missing: Analog, Memory, Microcontroller, Sensor",
+    "Bull/base/bear per-share valuation is incomplete.",
+    "Valuation buckets contain potential double counting.",
+    "Valuation has not closed from mutually exclusive buckets to per-share fair value.",
+    "volume_price_cost driver chain is incomplete; missing: utilization",
+    "Three-year values remain missing for consolidated line(s): Diluted EPS"
+  ],
+  "company_model": {
+    "model_profile": "corporate",
+    "operating_model_family": "volume_price_cost",
+    "business_archetype": "Fabless semiconductor design and sales (high R&D intensity, foundry-dependent manufacturing)",
+    "value_proposition_and_customers": "Designs and sells NOR Flash, SLC/MLC NAND, DRAM, MCUs, sensors and analog chips into industrial, automotive, consumer, IoT, and networking markets. Customers are OEMs, ODMs and distributors; revenue is driven by unit volumes × ASP, with memory segment benefiting from AI-driven demand and cyclical pricing.",
+    "revenue_equation": "Revenue = sum over products (Unit shipments × ASP). Memory dominates volume; NAND/NOR flash prices and bit growth are the largest drivers.",
+    "profit_equation": "Gross profit = Revenue – Wafer cost – Packaging/testing cost – Royalties. Operating profit = Gross profit – R&D expense (~17% of sales) – SG&A. Net profit = Operating profit – Finance expense + investment income – Tax (~10–15%).",
+    "cash_flow_equation": "OCF ≈ Net profit + Depreciation ± Working-capital changes (receivables, inventory, payables); historically OCF/NI ~1.2x. FCF = OCF – Capex (mainly R&D equipment, SW, IP).",
+    "capital_intensity_and_reinvestment": "Asset-light fabless model; primary reinvestment is R&D (17% of revenue). Capex is modest; foundry capacity expansion is outsourced. Returns on tangible capital are high.",
+    "diluted_share_count_mn": null,
+    "share_count_period": "",
+    "share_count_evidence_id": "",
+    "share_count_source_type": "unresolved",
+    "share_count_formula": "Not available from Tushare total_share, market-cap/price, or parent-profit/EPS reconciliation.",
+    "share_count_cross_checks": [
+      "Missing Tushare total_share; market cap 325,013,196,750 CNY as of 2026-07-17 but no close price supplied; Q1 parent profit 1,461 mn and FY2025 profit 1,648 mn could imply shares if EPS were known."
+    ],
+    "moat_mechanisms": [
+      "Broad product portfolio (NOR Flash, SLC/MLC NAND, MCU, sensor, analog) creates cross-selling and customer stickiness.",
+      "Leading market share in niche NOR Flash (especially high-reliability automotive/industrial).",
+      "High R&D investment (17% of sales) and deep firmware/software ecosystem around MCUs.",
+      "First-mover advantage in customized memory for AI edge devices (as disclosed in investor interactions)."
+    ],
+    "moat_to_financial_transmission": [
+      "Sticky demand supports higher ASP/volume, leading to above-industry gross margins (57.1% Q1 2026 vs peers).",
+      "R&D intensity creates product differentiation that slows commoditization, sustaining unit margins.",
+      "Custom memory projects (AIPC, AI phone, automotive) could lift revenue mix and ASP."
+    ],
+    "structural_risks": [
+      "Memory prices are cyclical; NOR/SLC NAND ASP collapse would sharply compress gross margin and profit.",
+      "Fabless model depends on foundry allocation; capacity shortages or geopolitical foundry restrictions could constrain volumes.",
+      "Competition from larger integrated memory makers (Winbond, Macronix, GigaDevice) and Chinese peers (Puya, etc.) in niche memory.",
+      "Revenue concentration risk if any single memory product line (e.g., NOR) faces demand shock or substitution (e.g., MRAM).",
+      "Changxin stake (1.8% pre-IPO) value is volatile and doesn't contribute to operating earnings; IPO lock-up may affect liquidity."
+    ],
+    "key_unknowns": [
+      "Segment-level revenue and gross profit split (Memory vs MCU vs Sensor vs Analog).",
+      "ASP trajectory for NOR Flash, SLC NAND, and potential MLC NAND in H2 2026–2028.",
+      "Official Q2 2026 results and full-year guidance vs channel-check hype.",
+      "Impact of Changxin IPO on equity value and any dilution or accounting treatment.",
+      "Capacity allocation from foundries (e.g., SMIC, Hua Hong) amid rising demand."
+    ],
+    "evidence_ids": [
+      "EV028",
+      "EV029",
+      "EV030",
+      "EV031",
+      "EV036",
+      "EV005",
+      "EV010",
+      "EV012",
+      "EV013",
+      "KPE01",
+      "KPE05"
+    ]
+  },
+  "business_unit_map": [
+    {
+      "unit_id": "MEM",
+      "unit_name": "Memory",
+      "unit_type": "reported_segment",
+      "disclosure_basis": "analytical",
+      "parent_unit": "company",
+      "economic_role": "Dominant revenue and profit driver; includes NOR Flash, SLC NAND, MLC NAND and some DRAM. Leverages industry price upcycle and AI demand.",
+      "revenue_driver_equation": "Revenue = bit shipments × ASP (USD->CNY). Shipments driven by design wins, customer inventory restocking, and AI-edge demand. ASP driven by industry supply/demand and technology mix.",
+      "profit_driver_equation": "Gross profit = Revenue – wafer/packaging cost (mostly USD). Gross margin benefits from ASP increases while costs rise more slowly. Operating profit = Gross profit – allocated R&D (heavy) – SG&A.",
+      "cash_and_capital_equation": "OCF = Net profit + depreciation ± working capital (receivables ~2% of sales, inventory ~20% of sales); FCF = OCF – R&D capex/IP.",
+      "reported_metrics": [
+        "Not separately disclosed in evidence; annual report (EV031) has 分产品 营业收入 营业成本 columns but values are missing."
+      ],
+      "evidence_ids": [
+        "EV028",
+        "EV029",
+        "EV030",
+        "EV031",
+        "EV035",
+        "EV036"
+      ],
+      "missing_inputs": [
+        "Segment revenue (CNY mn)",
+        "Segment gross margin (%)",
+        "Unit shipments and ASP",
+        "Product mix (NOR, NAND, DRAM) split"
+      ],
+      "next_verification": "Obtain 2025 annual report product-segment data (filing text extraction) and Q2 2026 revenue breakdown."
+    },
+    {
+      "unit_id": "MCU",
+      "unit_name": "Microcontroller",
+      "unit_type": "reported_segment",
+      "disclosure_basis": "analytical",
+      "parent_unit": "company",
+      "economic_role": "Moderate revenue contributor; MCU demand tied to industrial/auto/IoT cycles. Likely margin accretive but less cyclical than memory.",
+      "revenue_driver_equation": "Revenue = chip unit shipments × ASP. Growth driven by MCU content expansion in smart devices and industrial automation.",
+      "profit_driver_equation": "Similar fabless cost structure; gross margins likely 40-55% historically. Benefit from domestic substitution trends.",
+      "cash_and_capital_equation": "Cash conversion similar to company average; working capital needs moderate.",
+      "reported_metrics": [
+        "Not separately disclosed"
+      ],
+      "evidence_ids": [
+        "EV028",
+        "EV036"
+      ],
+      "missing_inputs": [
+        "Segment revenue, gross margin, growth rate"
+      ],
+      "next_verification": "Obtain annual report segment data and MCU unit shipment data if available."
+    },
+    {
+      "unit_id": "SEN",
+      "unit_name": "Sensor",
+      "unit_type": "reported_segment",
+      "disclosure_basis": "analytical",
+      "parent_unit": "company",
+      "economic_role": "Small revenue contributor; primarily image sensors and related products for consumer/IoT. Margin profile likely moderate, benefiting from fabless model.",
+      "revenue_driver_equation": "Sensor unit volume × ASP; demand driven by mobile, wearable, and smart-home applications.",
+      "profit_driver_equation": "Gross margins probably 30-45%; R&D allocation pressure from new pixel technologies.",
+      "cash_and_capital_equation": "Working capital needs relatively low.",
+      "reported_metrics": [],
+      "evidence_ids": [
+        "EV028",
+        "EV036"
+      ],
+      "missing_inputs": [
+        "Segment revenue, gross margin, growth rate"
+      ],
+      "next_verification": "Obtain product-level revenue split."
+    },
+    {
+      "unit_id": "ANA",
+      "unit_name": "Analog",
+      "unit_type": "reported_segment",
+      "disclosure_basis": "analytical",
+      "parent_unit": "company",
+      "economic_role": "Nascent segment; analog chips for power management, signal chain etc. Very small revenue, high growth potential but unproven scale.",
+      "revenue_driver_equation": "Analog chip shipments × ASP; growth tied to industrial/communication recovery and AI infrastructure.",
+      "profit_driver_equation": "Margins likely lower initially due to R&D investment; can improve with scale.",
+      "cash_and_capital_equation": "Negligible standalone cash impact.",
+      "reported_metrics": [],
+      "evidence_ids": [
+        "EV036"
+      ],
+      "missing_inputs": [
+        "Segment revenue, gross margin, growth rate"
+      ],
+      "next_verification": "Monitor filing updates for analog revenue disclosure."
+    },
+    {
+      "unit_id": "BU05",
+      "unit_name": "Memory (analytical)",
+      "unit_type": "reported_segment",
+      "disclosure_basis": "reported",
+      "parent_unit": "company",
+      "economic_role": "Filing segment restored after structured evidence reconciliation.",
+      "revenue_driver_equation": "",
+      "profit_driver_equation": "",
+      "cash_and_capital_equation": "",
+      "reported_metrics": [],
+      "evidence_ids": [
+        "EV012",
+        "EV013",
+        "KPE01",
+        "KPE03",
+        "KPE05",
+        "EV018",
+        "EV019"
+      ],
+      "missing_inputs": [
+        "economic sub-unit driver equations require analyst completion"
+      ],
+      "next_verification": ""
+    },
+    {
+      "unit_id": "BU07",
+      "unit_name": "MCU (analytical)",
+      "unit_type": "reported_segment",
+      "disclosure_basis": "missing",
+      "parent_unit": "company",
+      "economic_role": "Filing segment restored after structured evidence reconciliation.",
+      "revenue_driver_equation": "",
+      "profit_driver_equation": "",
+      "cash_and_capital_equation": "",
+      "reported_metrics": [],
+      "evidence_ids": [
+        "EV028",
+        "EV036"
+      ],
+      "missing_inputs": [
+        "economic sub-unit driver equations require analyst completion"
+      ],
+      "next_verification": ""
+    },
+    {
+      "unit_id": "BU09",
+      "unit_name": "Sensor (analytical)",
+      "unit_type": "reported_segment",
+      "disclosure_basis": "missing",
+      "parent_unit": "company",
+      "economic_role": "Filing segment restored after structured evidence reconciliation.",
+      "revenue_driver_equation": "",
+      "profit_driver_equation": "",
+      "cash_and_capital_equation": "",
+      "reported_metrics": [],
+      "evidence_ids": [
+        "EV028",
+        "EV036"
+      ],
+      "missing_inputs": [
+        "economic sub-unit driver equations require analyst completion"
+      ],
+      "next_verification": ""
+    },
+    {
+      "unit_id": "BU11",
+      "unit_name": "Analog (analytical)",
+      "unit_type": "reported_segment",
+      "disclosure_basis": "missing",
+      "parent_unit": "company",
+      "economic_role": "Filing segment restored after structured evidence reconciliation.",
+      "revenue_driver_equation": "",
+      "profit_driver_equation": "",
+      "cash_and_capital_equation": "",
+      "reported_metrics": [],
+      "evidence_ids": [
+        "EV036"
+      ],
+      "missing_inputs": [
+        "economic sub-unit driver equations require analyst completion"
+      ],
+      "next_verification": ""
+    }
+  ],
+  "segment_models": [
+    {
+      "segment": "Memory (analytical)",
+      "products_or_services": "NOR Flash, SLC NAND, MLC NAND, niche DRAM – design and sale",
+      "customers_and_channel": "Industrial, automotive, consumer, IoT, networking OEMs/ODMs via direct sales and distributors",
+      "revenue_weight_pct": 70.0,
+      "profit_weight_pct": 80.0,
+      "base_period": "2026Q1 (annualized seasonally)",
+      "base_revenue_value": 12913.6,
+      "base_revenue_unit": "CNY mn",
+      "base_revenue_growth_pct": 40.0,
+      "base_margin_pct": 60.0,
+      "base_margin_change_pp": 20.0,
+      "demand_and_order_drivers": [
+        "AI-driven edge and data-center demand for high-capacity NOR and SLC NAND",
+        "Industrial/automotive recovery",
+        "Customer inventory restocking after 2023 destocking",
+        "Custom memory projects (AIPC, AI phone, auto cabin)"
+      ],
+      "industry_supply_and_capacity": "Global niche memory supply disciplined; major players (Winbond, Macronix, etc.) have shifted capacity to specialty DRAM/NOR, reducing SLC NAND output. Foundry allocation tight.",
+      "volume_share_utilization": "Company is gaining share in NOR Flash (especially high-density) and SLC NAND. Fabless model relies on foundry capacity allocation; no internal fab constraint.",
+      "price_asp_take_rate": "NOR Flash ASP up ~20-30% YoY (Q1 2026); SLC NAND ASP projected up 120-170% in H2 2026 (TrendForce). Strong pricing power due to supply shortage.",
+      "unit_cost_and_input_prices": "Wafer costs rising moderately (mature nodes); packaging/testing cost stable. USD-based costs partially hedged by RMB depreciation.",
+      "margin_and_operating_leverage": "Gross margin expanded 19.6 pp YoY to 57.1% in Q1 2026; further expansion possible if ASP continues to outpace cost increases. Operating margin 38.7% supported by scale benefits on R&D/SG&A.",
+      "working_capital_and_cash_conversion": "Inventory/revenue ratio fell 11.9 pp to 20.3% in Q1; receivables/revenue at 1.7%. OCF/NI 1.22x signals strong cash conversion. Working capital will rise with revenue but is well managed.",
+      "prosperity_level": "strong",
+      "marginal_direction": "improving",
+      "causal_analysis": "AI-driven demand surge + disciplined global supply → tight market → sharp ASP increases → gross margin expansion (from ~37% to 57% YoY) → record profit. Sustainability hinges on demand durability and no rapid capacity addition by competitors.",
+      "valuation_treatment": "Core earnings stream; valued using PE multiple of 25x on 2027E operating profit, reflecting mid-cycle earnings power with growth prospects.",
+      "strongest_counterevidence": [
+        "Channel check implying Q2 net margin ~74% (KPE08) conflicts with reported Q1 margin of 34.9%; if real, suggests extreme one-off items or model error.",
+        "If NOR/SLC NAND prices correct rapidly due to new supply (e.g., Puya expanding), gross margin could revert towards 35-40%."
+      ],
+      "evidence_ids": [
+        "EV012",
+        "EV013",
+        "KPE01",
+        "KPE03",
+        "KPE05",
+        "EV018",
+        "EV019"
+      ],
+      "missing_inputs": [
+        "Exact revenue mix between NOR/NAND/DRAM",
+        "Quantified ASP and unit shipments",
+        "Foundry capacity allocation contracts",
+        "Official Q2 2026 segment revenue and margin"
+      ],
+      "next_verification": "Official Q2 2026 report; Segment data from 2025 annual report; Pricing indices (TrendForce) updates."
+    },
+    {
+      "segment": "MCU (analytical)",
+      "products_or_services": "Microcontroller chips design and sales",
+      "customers_and_channel": "Industrial, automotive, consumer electronics, IoT",
+      "revenue_weight_pct": 15.0,
+      "profit_weight_pct": 10.0,
+      "base_period": "unspecified",
+      "base_revenue_value": null,
+      "base_revenue_unit": "CNY mn",
+      "base_revenue_growth_pct": null,
+      "base_margin_pct": null,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [
+        "Industrial automation recovery",
+        "Automotive digitization",
+        "IoT device proliferation"
+      ],
+      "industry_supply_and_capacity": "Global MCU supply tight on mature nodes but modestly improving.",
+      "volume_share_utilization": "Limited data; company claims market share gain in domestic MCU for auto and industrial.",
+      "price_asp_take_rate": "MCU ASP relatively stable, with some upward pressure from feature-rich chips.",
+      "unit_cost_and_input_prices": "Fabless cost model; wafer cost increases can be partly passed on.",
+      "margin_and_operating_leverage": "Historical gross margins estimated 45-50%, lower than memory currently.",
+      "working_capital_and_cash_conversion": "Likely similar working capital profile to corporate average.",
+      "prosperity_level": "evidence_limited",
+      "marginal_direction": "unknown",
+      "causal_analysis": "Recovery depends on industrial/auto end-market improvement and domestic substitution. No strong evidence in Q1 2026 results.",
+      "valuation_treatment": "Part of core operations; not separately valued due to data scarcity.",
+      "strongest_counterevidence": [
+        "No segment disclosure prevents verification of growth or margin trends."
+      ],
+      "evidence_ids": [
+        "EV028",
+        "EV036"
+      ],
+      "missing_inputs": [
+        "Segment revenue, gross margin, growth rates"
+      ],
+      "next_verification": "Annual report segment data extraction."
+    },
+    {
+      "segment": "Sensor (analytical)",
+      "products_or_services": "Sensor chips design and sales",
+      "customers_and_channel": "Consumer electronics, IoT",
+      "revenue_weight_pct": 10.0,
+      "profit_weight_pct": 5.0,
+      "base_period": "unspecified",
+      "base_revenue_value": null,
+      "base_revenue_unit": "CNY mn",
+      "base_revenue_growth_pct": null,
+      "base_margin_pct": null,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [
+        "Mobile and wearable device upgrades",
+        "Smart home sensor adoption"
+      ],
+      "industry_supply_and_capacity": "Competitive landscape; many Chinese sensor design firms.",
+      "volume_share_utilization": "Unclear; likely modest share in image sensors.",
+      "price_asp_take_rate": "Sensor ASP under pressure due to commoditization, except for specialized high-pixel sensors.",
+      "unit_cost_and_input_prices": "Fabless; wafer cost sensitivity.",
+      "margin_and_operating_leverage": "Gross margins likely 30-40%; R&D burden high.",
+      "working_capital_and_cash_conversion": "Standard.",
+      "prosperity_level": "evidence_limited",
+      "marginal_direction": "unknown",
+      "causal_analysis": "No clear catalyst; sensor segment may be a drag on margins but small in weight.",
+      "valuation_treatment": "Part of core; no separate valuation.",
+      "strongest_counterevidence": [
+        "Open competition and commoditization risk."
+      ],
+      "evidence_ids": [
+        "EV028",
+        "EV036"
+      ],
+      "missing_inputs": [
+        "Segment revenue, margin"
+      ],
+      "next_verification": "Annual report."
+    },
+    {
+      "segment": "Analog (analytical)",
+      "products_or_services": "Analog chips (power management, signal chain) design and sales",
+      "customers_and_channel": "Industrial, communication infrastructure",
+      "revenue_weight_pct": 5.0,
+      "profit_weight_pct": 5.0,
+      "base_period": "unspecified",
+      "base_revenue_value": null,
+      "base_revenue_unit": "CNY mn",
+      "base_revenue_growth_pct": null,
+      "base_margin_pct": null,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [
+        "Industrial recovery",
+        "AI infrastructure power management"
+      ],
+      "industry_supply_and_capacity": "Mature analog market; domestic substitution opportunity.",
+      "volume_share_utilization": "Nascent; likely low share.",
+      "price_asp_take_rate": "Analog ASP can be stable but design cycles long.",
+      "unit_cost_and_input_prices": "Standard.",
+      "margin_and_operating_leverage": "Probably low margin initially due to R&D investment.",
+      "working_capital_and_cash_conversion": "Insignificant.",
+      "prosperity_level": "evidence_limited",
+      "marginal_direction": "unknown",
+      "causal_analysis": "Analog has long qualification cycles; near-term impact minimal.",
+      "valuation_treatment": "Part of core; not valued separately.",
+      "strongest_counterevidence": [
+        "Long gestation and intense competition from global analog giants."
+      ],
+      "evidence_ids": [
+        "EV036"
+      ],
+      "missing_inputs": [
+        "Revenue and margin"
+      ],
+      "next_verification": "Periodic filing updates."
+    },
+    {
+      "segment": "Memory",
+      "products_or_services": "",
+      "customers_and_channel": "",
+      "revenue_weight_pct": null,
+      "profit_weight_pct": null,
+      "base_period": "2026Q1",
+      "base_revenue_value": null,
+      "base_revenue_unit": "",
+      "base_revenue_growth_pct": null,
+      "base_margin_pct": null,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [],
+      "industry_supply_and_capacity": "",
+      "volume_share_utilization": "",
+      "price_asp_take_rate": "",
+      "unit_cost_and_input_prices": "",
+      "margin_and_operating_leverage": "",
+      "working_capital_and_cash_conversion": "",
+      "prosperity_level": "evidence_limited",
+      "marginal_direction": "unknown",
+      "causal_analysis": "",
+      "valuation_treatment": "evidence_limited",
+      "strongest_counterevidence": [],
+      "evidence_ids": [],
+      "missing_inputs": [
+        "LLM omitted a filing-reported material segment"
+      ],
+      "next_verification": ""
+    },
+    {
+      "segment": "Microcontroller",
+      "products_or_services": "",
+      "customers_and_channel": "",
+      "revenue_weight_pct": null,
+      "profit_weight_pct": null,
+      "base_period": "unspecified",
+      "base_revenue_value": null,
+      "base_revenue_unit": "",
+      "base_revenue_growth_pct": null,
+      "base_margin_pct": null,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [],
+      "industry_supply_and_capacity": "",
+      "volume_share_utilization": "",
+      "price_asp_take_rate": "",
+      "unit_cost_and_input_prices": "",
+      "margin_and_operating_leverage": "",
+      "working_capital_and_cash_conversion": "",
+      "prosperity_level": "evidence_limited",
+      "marginal_direction": "unknown",
+      "causal_analysis": "",
+      "valuation_treatment": "evidence_limited",
+      "strongest_counterevidence": [],
+      "evidence_ids": [],
+      "missing_inputs": [
+        "LLM omitted a filing-reported material segment"
+      ],
+      "next_verification": ""
+    },
+    {
+      "segment": "Sensor",
+      "products_or_services": "",
+      "customers_and_channel": "",
+      "revenue_weight_pct": null,
+      "profit_weight_pct": null,
+      "base_period": "unspecified",
+      "base_revenue_value": null,
+      "base_revenue_unit": "",
+      "base_revenue_growth_pct": null,
+      "base_margin_pct": null,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [],
+      "industry_supply_and_capacity": "",
+      "volume_share_utilization": "",
+      "price_asp_take_rate": "",
+      "unit_cost_and_input_prices": "",
+      "margin_and_operating_leverage": "",
+      "working_capital_and_cash_conversion": "",
+      "prosperity_level": "evidence_limited",
+      "marginal_direction": "unknown",
+      "causal_analysis": "",
+      "valuation_treatment": "evidence_limited",
+      "strongest_counterevidence": [],
+      "evidence_ids": [],
+      "missing_inputs": [
+        "LLM omitted a filing-reported material segment"
+      ],
+      "next_verification": ""
+    },
+    {
+      "segment": "Analog",
+      "products_or_services": "",
+      "customers_and_channel": "",
+      "revenue_weight_pct": null,
+      "profit_weight_pct": null,
+      "base_period": "unspecified",
+      "base_revenue_value": null,
+      "base_revenue_unit": "",
+      "base_revenue_growth_pct": null,
+      "base_margin_pct": null,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [],
+      "industry_supply_and_capacity": "",
+      "volume_share_utilization": "",
+      "price_asp_take_rate": "",
+      "unit_cost_and_input_prices": "",
+      "margin_and_operating_leverage": "",
+      "working_capital_and_cash_conversion": "",
+      "prosperity_level": "evidence_limited",
+      "marginal_direction": "unknown",
+      "causal_analysis": "",
+      "valuation_treatment": "evidence_limited",
+      "strongest_counterevidence": [],
+      "evidence_ids": [],
+      "missing_inputs": [
+        "LLM omitted a filing-reported material segment"
+      ],
+      "next_verification": ""
+    }
+  ],
+  "underwriting_questions": [
+    {
+      "question_id": "UQ01",
+      "question": "What is the sustainability of current NOR Flash and SLC NAND ASP levels through 2027–2028?",
+      "why_it_matters": "Memory ASP is the single largest driver of consolidated revenue and gross margin. A reversion to pre-2023 levels would collapse profit.",
+      "current_answer": "ASP up significantly YoY; Q1 2026 gross margin expanded to 57.1%. Channel checks suggest further rises in H2 2026 (SLC NAND +120-170% according to TrendForce). No official pricing data yet.",
+      "bull_evidence": [
+        "KPE01: KeyBanc expects DRAM/NAND supply tightness into 2027",
+        "KPE03: TrendForce predicts SLC NAND price up 120-170% H2 2026",
+        "KPE09: storage price cycle validated by Q2 earnings beats"
+      ],
+      "bear_evidence": [
+        "Historical NOR Flash price cycles; high profitability may attract new capacity from competitors like Puya.",
+        "Q1 2026 net margin 34.9% not extreme, but Q2 channel numbers (KPE08) imply 74% net margin – either one-off or unsustainable."
+      ],
+      "decisive_model_variables": [
+        "consolidated.ASP_assumption",
+        "segment_memory.MEM_gross_margin"
+      ],
+      "affected_financial_lines": [
+        "Revenue",
+        "Gross Profit",
+        "Parent Net Profit",
+        "EPS",
+        "FCF"
+      ],
+      "evidence_ids": [
+        "EV013",
+        "KPE01",
+        "KPE03",
+        "KPE08",
+        "KPE09"
+      ],
+      "missing_evidence": [
+        "Official H2 2026 ASP forecast or realized Q2 ASP",
+        "Supplier capacity expansion plans for NOR/SLC NAND",
+        "Long-term supply agreements with foundries"
+      ],
+      "next_verification": "Company Q2 2026 report and conference call; TrendForce/HIS pricing updates; foundry capex announcements."
+    },
+    {
+      "question_id": "UQ02",
+      "question": "How much of Q1 2026 revenue growth is volume-driven vs ASP-driven, and is volume sustainable?",
+      "why_it_matters": "If revenue growth is entirely ASP, a price correction would erase all gains. Underlying volume growth from design wins and new products (e.g., custom memory) would provide a more durable base.",
+      "current_answer": "Evidence does not separate volume and price in Q1 2026. Inventory ratio falling suggests strong sell-through, but quarterly shipment data missing.",
+      "bull_evidence": [
+        "Inventory/revenue ratio dropped -11.89pp YoY, indicating demand exceeding supply (EV018).",
+        "Investor interaction confirms custom memory projects progressing in AI phone, AIPC, auto (EV025)."
+      ],
+      "bear_evidence": [
+        "If ASP accounts for >70% of revenue growth, then shipment growth modest; post-cycle revenue could contract significantly."
+      ],
+      "decisive_model_variables": [
+        "segment_memory.volume_growth",
+        "consolidated.revenue_growth"
+      ],
+      "affected_financial_lines": [
+        "Revenue",
+        "Gross Profit",
+        "Operating Cash Flow"
+      ],
+      "evidence_ids": [
+        "EV018",
+        "EV029",
+        "KPE02",
+        "KPE09"
+      ],
+      "missing_evidence": [
+        "Unit shipment data for NOR/NAND",
+        "Bit growth rate"
+      ],
+      "next_verification": "Company may provide bit-shipment growth in Q2 conference; monitor customer design-win announcements."
+    },
+    {
+      "question_id": "UQ03",
+      "question": "Will foundry capacity constraints limit 兆易创新’s ability to meet rising demand and capture ASP upside?",
+      "why_it_matters": "Fabless model means volume is determined by wafer allocation from foundries. If mature-node capacity is tight, revenue may be capped even if demand strong.",
+      "current_answer": "No public information on foundry allocation. Industry-wide mature nodes are tight, but 兆易创新 may have preferential agreements.",
+      "bull_evidence": [
+        "Long-term relationships with SMIC, Hua Hong, etc.",
+        "KPE05: Domestic compute demand may incentivize priority for local firms."
+      ],
+      "bear_evidence": [
+        "Tight capacity could force allocation trade-offs; if foundries favor larger logic customers, memory wafer starts may suffer.",
+        "EV043 shows some CIP, but no expansion plans."
+      ],
+      "decisive_model_variables": [
+        "segment_memory.volume_capacity_constraint",
+        "consolidated.capex_allocation"
+      ],
+      "affected_financial_lines": [
+        "Revenue",
+        "Gross Profit",
+        "Capex"
+      ],
+      "evidence_ids": [
+        "EV043",
+        "KPE05"
+      ],
+      "missing_evidence": [
+        "Foundry wafer purchase agreements or annual spending",
+        "Management commentary on supply security"
+      ],
+      "next_verification": "Q2 earnings call; management Q&A on capacity; monitoring SMIC/Hua Hong financials for capacity utilization."
+    },
+    {
+      "question_id": "UQ04",
+      "question": "What is the true diluted share count, and will it dilute EPS significantly post-option exercise or convertible instruments?",
+      "why_it_matters": "Current EPS and per-share valuation are not calculable without reliable share count. Stock options could increase count by 2-3%.",
+      "current_answer": "Share count unresolved. Company has stock option plans (EV024), but current outstanding unknown. Market cap / PE-TTM suggests 2873 mn shares (325013 mn / 113.06 / EPS? Wait, that gives TTM earnings, not share count. Actually TTM net profit = 2874 mn; if EPS were known we could derive shares. No EPS given.)",
+      "bull_evidence": [],
+      "bear_evidence": [
+        "Potential dilution from past option grants could be material."
+      ],
+      "decisive_model_variables": [
+        "diluted_share_count"
+      ],
+      "affected_financial_lines": [
+        "EPS",
+        "Per-share valuation"
+      ],
+      "evidence_ids": [
+        "EV024",
+        "EV010"
+      ],
+      "missing_evidence": [
+        "Tushare total_share",
+        "End-of-quarter share count",
+        "Option exercise status"
+      ],
+      "next_verification": "Retrieve total_share from Tushare or latest filing; cross-check market cap and closing price."
+    },
+    {
+      "question_id": "UQ05",
+      "question": "What is the fair economic value of the 1.8% pre-IPO stake in Changxin and how much should it contribute to equity value?",
+      "why_it_matters": "Changxin IPO could add meaningful optionality value (potentially several billion CNY based on IPO valuation). However, it is classified as other equity instrument and does not flow through net profit; the market may misprice it.",
+      "current_answer": "Company disclosed 1.8% pre-IPO stake in Changxin, IPO price 8.66 yuan/share (KPE04). Total equity value depends on Changxin's total shares and post-IPO valuation, not yet known. Unverified accounts suggest significant value.",
+      "bull_evidence": [
+        "KPE04 mentions Changxin IPO launched, price 8.66 per share.",
+        "If Changxin market cap reaches >100 bn CNY, stake worth >1.8 bn CNY."
+      ],
+      "bear_evidence": [
+        "Stake may be locked up post-IPO; discount required.",
+        "If Changxin IPO disappoints, value could be lower."
+      ],
+      "decisive_model_variables": [
+        "Changxin_stake_value"
+      ],
+      "affected_financial_lines": [
+        "Valuation (SOTP)"
+      ],
+      "evidence_ids": [
+        "EV020",
+        "KPE04",
+        "KPE02"
+      ],
+      "missing_evidence": [
+        "Changxin total shares outstanding",
+        "Post-IPO market cap estimate",
+        "Lock-up period and discount"
+      ],
+      "next_verification": "Monitor Changxin IPO listing date and first trading day price; compute stake value."
+    }
+  ],
+  "forecast_lines": [
+    {
+      "segment": "consolidated",
+      "metric": "Revenue",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 9203.46,
+      "year_1_value": 18448.0,
+      "year_2_value": 21300.0,
+      "year_3_value": 23600.0,
+      "formula": "2026E = Q1 2026 seasonality-adjusted revenue (Q1 4188/22.7% = 18448); growth 2027 E +15.5%, 2028 E +10.8% driven by volume and slight ASP moderation",
+      "assumption_status": "analytical_estimate",
+      "evidence_ids": [
+        "EV010",
+        "EV012",
+        "KPE03",
+        "KPE01",
+        "EV013"
+      ],
+      "key_sensitivity": "Every 10% revenue change alters parent profit by ~30% given operating leverage.",
+      "missing_inputs": [
+        "Segment revenue split",
+        "Official full-year guidance",
+        "Commodity/wafer cost trend"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Gross Profit",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 1327.96,
+      "year_1_value": 10538.0,
+      "year_2_value": 11715.0,
+      "year_3_value": 12336.0,
+      "formula": "Revenue - Cost of Revenue",
+      "assumption_status": "calculated",
+      "evidence_ids": [
+        "EV013"
+      ],
+      "key_sensitivity": "",
+      "missing_inputs": []
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Gross Margin",
+      "unit": "%",
+      "base_period": "FY2025",
+      "base_value": 14.43,
+      "year_1_value": 57.1,
+      "year_2_value": 55.0,
+      "year_3_value": 52.3,
+      "formula": "2026E = Q1 2026 reported 57.1% held flat; slight decay to 55% in 2027 and 52.3% in 2028 as competition normalizes",
+      "assumption_status": "analytical_estimate",
+      "evidence_ids": [
+        "EV013",
+        "KPE03"
+      ],
+      "key_sensitivity": "Each 1pp gross margin change alters parent profit by ~184 mn CNY.",
+      "missing_inputs": [
+        "Segment margin details"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "R&D Expense",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 1570.0,
+      "year_1_value": 3315.0,
+      "year_2_value": 3728.0,
+      "year_3_value": 4160.0,
+      "formula": "~18% of revenue (slightly higher than historical 17% to support custom memory and analog)",
+      "assumption_status": "analytical_estimate",
+      "evidence_ids": [
+        "EV030"
+      ],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "Official R&D budget"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "SG&A Expense",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 880.0,
+      "year_1_value": 1900.0,
+      "year_2_value": 2130.0,
+      "year_3_value": 2360.0,
+      "formula": "~10.3% of revenue, scaling with top line",
+      "assumption_status": "analytical_estimate",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "Detailed SG&A split"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Operating Profit",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": -1122.04,
+      "year_1_value": 5323.0,
+      "year_2_value": 5857.0,
+      "year_3_value": 5816.0,
+      "formula": "Gross Profit - R&D - SG&A; FY2025 operating loss due to low margin; 2026E operating margin ~28.9% (vs Q1 38.7%, conservatively lower for full year to reflect H2 cost pressures)",
+      "assumption_status": "analytical_estimate",
+      "evidence_ids": [
+        "EV014"
+      ],
+      "key_sensitivity": "",
+      "missing_inputs": []
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Operating Margin",
+      "unit": "%",
+      "base_period": "FY2025",
+      "base_value": -12.19,
+      "year_1_value": 28.86,
+      "year_2_value": 27.5,
+      "year_3_value": 24.65,
+      "formula": "Operating Profit / Revenue",
+      "assumption_status": "calculated",
+      "evidence_ids": [
+        "EV014"
+      ],
+      "key_sensitivity": "",
+      "missing_inputs": []
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Finance & Other Income (net)",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 250.0,
+      "year_1_value": -400.0,
+      "year_2_value": -300.0,
+      "year_3_value": -200.0,
+      "formula": "Net interest expense roughly -2.5% of revenue; some investment income from Changxin (no P&L impact, but expectation of dividend/valuation) not included.",
+      "assumption_status": "analytical_estimate",
+      "evidence_ids": [
+        "EV016"
+      ],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "Detailed finance costs"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Pre-Tax Profit",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": -872.04,
+      "year_1_value": 4923.0,
+      "year_2_value": 5557.0,
+      "year_3_value": 5616.0,
+      "formula": "Operating Profit + Finance & Other Income",
+      "assumption_status": "calculated",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": []
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Income Tax",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": -2520.24,
+      "year_1_value": 738.0,
+      "year_2_value": 834.0,
+      "year_3_value": 842.0,
+      "formula": "Effective tax rate ~15% (high-tech enterprise status)",
+      "assumption_status": "analytical_estimate",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": []
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Parent Net Profit",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 1648.02,
+      "year_1_value": 4185.0,
+      "year_2_value": 4723.0,
+      "year_3_value": 4774.0,
+      "formula": "Pre-Tax Profit - Tax; 2026E = 4923 * 0.85 = 4185, slightly lower than seasonality-adjusted Q1 run-rate (5621) to be conservative and reflect potentially higher H2 tax adjustments.",
+      "assumption_status": "analytical_estimate",
+      "evidence_ids": [
+        "EV010",
+        "EV015"
+      ],
+      "key_sensitivity": "±10% profit change = ±419 mn",
+      "missing_inputs": [
+        "Tax rate certainty",
+        "Non-recurring items"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Diluted EPS",
+      "unit": "CNY/share",
+      "base_period": "FY2025",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "Parent Net Profit / Diluted Share Count; share count missing",
+      "assumption_status": "missing",
+      "evidence_ids": [
+        "EV010"
+      ],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "Diluted share count"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Operating Cash Flow",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 1820.0,
+      "year_1_value": 5106.0,
+      "year_2_value": 5670.0,
+      "year_3_value": 5680.0,
+      "formula": "OCF = Parent Net Profit × 1.22 (cash conversion ratio from Q1 2026). FY2025 used actual ratio not available, assumed ~1.1.",
+      "assumption_status": "analytical_estimate",
+      "evidence_ids": [
+        "EV017"
+      ],
+      "key_sensitivity": "",
+      "missing_inputs": []
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Capex",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 400.0,
+      "year_1_value": 800.0,
+      "year_2_value": 1000.0,
+      "year_3_value": 1200.0,
+      "formula": "Increasing capex for R&D equipment and software; fabless capex typically <5% of revenue; here ~4.3-5.1% of revenue.",
+      "assumption_status": "analytical_estimate",
+      "evidence_ids": [
+        "EV043"
+      ],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "Exact capex breakdown"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Free Cash Flow",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 1420.0,
+      "year_1_value": 4306.0,
+      "year_2_value": 4670.0,
+      "year_3_value": 4480.0,
+      "formula": "OCF – Capex",
+      "assumption_status": "calculated",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": []
+    }
+  ],
+  "scenarios": [
+    {
+      "scenario": "bull",
+      "probability_pct": 30.0,
+      "operating_assumptions": [
+        "Memory ASP continues to surge through 2027 (SLC NAND +150%, NOR +40%), supply disciplined, no new large-scale capacity.",
+        "Volume growth >20% driven by custom memory wins and AI edge demand.",
+        "Gross margin reaches 62% in 2026 and stays >58% in 2027-28.",
+        "Revenue 2026E 22,000 mn, 2027E 28,600 mn, 2028E 34,300 mn.",
+        "Parent net profit 2026E 8,000 mn, 2027E 9,500 mn, 2028E 10,800 mn."
+      ],
+      "parent_net_profit_cny_mn": 8000.0,
+      "eps_cny": null,
+      "fcf_cny_mn": 6880.0,
+      "valuation_method": "PE multiple",
+      "valuation_multiple": 22.0,
+      "fair_value_per_share": null,
+      "evidence_ids": [
+        "KPE01",
+        "KPE03",
+        "KPE08",
+        "KPE05"
+      ],
+      "falsification": "If official Q2 2026 gross margin <50% or management guides for slowing ASP.",
+      "missing_inputs": [
+        "Share count for EPS"
+      ]
+    },
+    {
+      "scenario": "base",
+      "probability_pct": 50.0,
+      "operating_assumptions": [
+        "Memory ASPs moderate after H2 2026, reflecting supply response; ASP up ~30% for full year 2026, flat in 2027–28.",
+        "Volume growth stable at 10-12%.",
+        "Gross margin 57% in 2026, 55% in 2027, 52% in 2028 as competition normalizes.",
+        "Revenue 2026E 18,448 mn, 2027E 21,300 mn, 2028E 23,600 mn.",
+        "Parent net profit 2026E 4,185 mn, 2027E 4,723 mn, 2028E 4,774 mn."
+      ],
+      "parent_net_profit_cny_mn": 4185.0,
+      "eps_cny": null,
+      "fcf_cny_mn": 4306.0,
+      "valuation_method": "PE multiple",
+      "valuation_multiple": 25.0,
+      "fair_value_per_share": null,
+      "evidence_ids": [
+        "EV013",
+        "EV015",
+        "EV010"
+      ],
+      "falsification": "If Q2 2026 revenue <7 bn or gross margin <50%, then base case too optimistic.",
+      "missing_inputs": [
+        "Share count for EPS"
+      ]
+    },
+    {
+      "scenario": "bear",
+      "probability_pct": 20.0,
+      "operating_assumptions": [
+        "Memory ASP correction starts H2 2026 due to rapid capacity addition; prices decline 20% from H2 peak.",
+        "Volume growth only 5% as customers double-order and cancel.",
+        "Gross margin falls to 45% in 2026, 40% in 2027, 38% in 2028.",
+        "Revenue 2026E 14,000 mn, 2027E 15,400 mn, 2028E 16,500 mn.",
+        "Parent net profit 2026E 3,500 mn, 2027E 2,800 mn, 2028E 2,500 mn."
+      ],
+      "parent_net_profit_cny_mn": 3500.0,
+      "eps_cny": null,
+      "fcf_cny_mn": 2800.0,
+      "valuation_method": "PE multiple",
+      "valuation_multiple": 18.0,
+      "fair_value_per_share": null,
+      "evidence_ids": [
+        "EV012",
+        "KPE06"
+      ],
+      "falsification": "If company reports declining Q2 revenue or margins, and TrendForce revises price forecasts downwards.",
+      "missing_inputs": [
+        "Share count for EPS"
+      ]
+    }
+  ],
+  "thesis_financial_bridges": [
+    {
+      "bridge_id": "BR01",
+      "thesis_or_question": "Memory ASP super-cycle will drive revenue and profit far above consensus",
+      "affected_unit": "consolidated",
+      "operating_driver": "ASP",
+      "driver_formula": "Revenue = Bit shipments × ASP",
+      "base_assumption": "2026E revenue 18,448 mn, gross margin 57%, parent net profit 4,185 mn",
+      "bull_assumption": "ASP +50% vs base → revenue 22,000 mn, gross margin 62%, parent net profit 8,000 mn",
+      "bear_assumption": "ASP -25% vs base → revenue 14,000 mn, gross margin 45%, profit 3,500 mn",
+      "revenue_impact": "bull +3,552 mn vs base",
+      "profit_impact": "bull +3,815 mn",
+      "eps_impact": "unquantified (share count missing)",
+      "fcf_or_capital_impact": "bull FCF +2,580 mn vs base",
+      "valuation_impact": "At PE 22x, bull equity value 176,000 mn vs base 104,625 mn at 25x, reflecting scenario-specific multiples.",
+      "quantification_status": "partially_quantified",
+      "evidence_ids": [
+        "KPE01",
+        "KPE03",
+        "EV013"
+      ],
+      "missing_inputs": [
+        "Exact ASP deltas",
+        "Share count for EPS"
+      ]
+    },
+    {
+      "bridge_id": "BR02",
+      "thesis_or_question": "Gross margin expansion from operating leverage will persist even if ASP stabilizes",
+      "affected_unit": "consolidated",
+      "operating_driver": "Gross Margin",
+      "driver_formula": "Gross Margin = (Revenue – Wafer/Packaging Cost) / Revenue",
+      "base_assumption": "Gross margin 57% in 2026, declining to 52% by 2028",
+      "bull_assumption": "R&D efficiency + scale keeps margin >58% through 2028",
+      "bear_assumption": "Cost increases outpace ASP, margin falls to 40% by 2027",
+      "revenue_impact": "unchanged volume, margin change",
+      "profit_impact": "1pp margin change = ~184 mn profit",
+      "eps_impact": "unquantified",
+      "fcf_or_capital_impact": "same direction as profit",
+      "valuation_impact": "Higher margin supports higher PE multiple.",
+      "quantification_status": "partially_quantified",
+      "evidence_ids": [
+        "EV013",
+        "EV014"
+      ],
+      "missing_inputs": [
+        "Wafer cost trend"
+      ]
+    },
+    {
+      "bridge_id": "BR03",
+      "thesis_or_question": "Customized memory for AI edge devices will become a new growth driver, diversifying from cyclical NOR",
+      "affected_unit": "Memory segment",
+      "operating_driver": "New product revenue",
+      "driver_formula": "Incremental revenue = new design wins × ASP × ramp volume",
+      "base_assumption": "Custom memory revenue ~1,500 mn by 2027 (6% of total)",
+      "bull_assumption": "Custom memory revenue reaches 3,000 mn by 2027 with premium margins",
+      "bear_assumption": "Design wins fail to convert; revenue <500 mn",
+      "revenue_impact": "bull +1,500 mn vs base",
+      "profit_impact": "bull +400 mn net profit",
+      "eps_impact": "unquantified",
+      "fcf_or_capital_impact": "positive",
+      "valuation_impact": "Could add 10% to equity value if successful.",
+      "quantification_status": "unquantified",
+      "evidence_ids": [
+        "KPE05"
+      ],
+      "missing_inputs": [
+        "Number of design wins, customer names, revenue ramp specifics"
+      ]
+    }
+  ],
+  "moat_evidence_tests": [
+    {
+      "moat_mechanism": "Brand & Customer Stickiness in NOR Flash",
+      "observable_test": "Gross margin premium vs closest competitor (Winbond, Macronix) in NOR Flash segment",
+      "comparison_basis": "Competitor gross margins; 兆易创新 reported consolidated gross margin 57.1% Q1 2026 vs peer median ~40%",
+      "evidence_result": "Partial – Q1 2026 gross margin significantly higher, but not segment-specific; could be due entirely to memory ASP cycle rather than brand moat.",
+      "financial_transmission": "Higher gross margin allows higher R&D reinvestment, reinforcing product breadth.",
+      "strongest_counterevidence": "Gross margin is highly cyclical; in downturn 2025 gross margin was only 14.4%. The moat may not be structural but cyclical.",
+      "status": "partial",
+      "evidence_ids": [
+        "EV013",
+        "EV015"
+      ],
+      "next_verification": "Compare NOR Flash gross margin specifically in annual report when available; compare with Winbond/Macronix NOR segment metrics."
+    },
+    {
+      "moat_mechanism": "Switch-ing costs from MCU ecosystem",
+      "observable_test": "Repeat order rate or MCU design-in longevity vs peers like Nuvoton, STM",
+      "comparison_basis": "Customer retention and average product life cycle; not directly measured.",
+      "evidence_result": "Missing – no disclosed customer-retention data or design-win longevity.",
+      "financial_transmission": "Higher switching costs → stable MCU revenue and margin over cycle.",
+      "strongest_counterevidence": "Open standard ARM cores and open-source tools reduce lock-in; MCU gross margins have been under pressure historically.",
+      "status": "unproven",
+      "evidence_ids": [
+        "EV028"
+      ],
+      "next_verification": "Survey channel or company for design-win conversion and churn rates."
+    },
+    {
+      "moat_mechanism": "R&D scale advantage (17% of sales) creates product depth",
+      "observable_test": "Number of active product SKUs (NOR Flash >1000 types) vs nearest domestic competitor (Puya ~600).",
+      "comparison_basis": "Industry reports or company disclosure.",
+      "evidence_result": "Partial – filing mentions comprehensive product line but no exact SKU vs peer.",
+      "financial_transmission": "Wider product line increases cross-sell and customer captivity.",
+      "strongest_counterevidence": "SKU proliferation can also increase R&D burden without corresponding revenue.",
+      "status": "partial",
+      "evidence_ids": [
+        "EV028",
+        "EV030"
+      ],
+      "next_verification": "Obtain product catalog and compare with Puya."
+    }
+  ],
+  "valuation_buckets": [
+    {
+      "bucket": "Core operating earnings (2027E base-case)",
+      "inclusion": "core",
+      "valuation_method": "P/E multiple",
+      "metric_and_period": "Parent Net Profit 2027E",
+      "metric_value": 4723.0,
+      "valuation_multiple": 25.0,
+      "ownership_pct": 100.0,
+      "haircut_pct": 0.0,
+      "equity_value_cny_mn": 118075.0,
+      "per_share_value_cny": null,
+      "overlap_key": "consolidated_earnings",
+      "double_counting_treatment": "Excludes Changxin stake value and scenario probability weighting.",
+      "evidence_ids": [
+        "EV010",
+        "EV015"
+      ],
+      "missing_inputs": [
+        "Share count for per-share value"
+      ]
+    },
+    {
+      "bucket": "Scenario adjustment (probability-weighted SOTP)",
+      "inclusion": "scenario",
+      "valuation_method": "Probability-weighted scenario equity values",
+      "metric_and_period": "bull/base/bear parent profit 2027E",
+      "metric_value": null,
+      "valuation_multiple": null,
+      "ownership_pct": 100.0,
+      "haircut_pct": 0.0,
+      "equity_value_cny_mn": 118075.0,
+      "per_share_value_cny": null,
+      "overlap_key": "consolidated_earnings",
+      "double_counting_treatment": "Replaced by probability-weighted fair value in closure; this bucket is informational.",
+      "evidence_ids": [],
+      "missing_inputs": []
+    },
+    {
+      "bucket": "Changxin stake (1.8% pre-IPO)",
+      "inclusion": "optionality",
+      "valuation_method": "Market-based value",
+      "metric_and_period": "Post-IPO market value of Changxin 1.8% stake",
+      "metric_value": null,
+      "valuation_multiple": null,
+      "ownership_pct": 1.8,
+      "haircut_pct": 20.0,
+      "equity_value_cny_mn": null,
+      "per_share_value_cny": null,
+      "overlap_key": "investment",
+      "double_counting_treatment": "Not included in core earnings; additive optionality",
+      "evidence_ids": [
+        "EV020",
+        "KPE04"
+      ],
+      "missing_inputs": [
+        "Changxin total shares and post-IPO share price"
+      ]
+    }
+  ],
+  "valuation_closure": {
+    "current_price_cny": null,
+    "diluted_share_count_mn": null,
+    "core_value_per_share_cny": null,
+    "probability_weighted_fair_value_per_share_cny": null,
+    "option_value_per_share_cny": null,
+    "other_adjustments_per_share_cny": null,
+    "fair_value_per_share_cny": null,
+    "expected_return_pct": null,
+    "formula": "Probability-weighted total equity value = (bull equity value * 0.30 + base equity value * 0.50 + bear equity value * 0.20). Bull equity value = 8,000 mn * 22 PE = 176,000 mn; base = 4,185 mn * 25 PE = 104,625 mn; bear = 3,500 mn * 18 PE = 63,000 mn. Weighted = 176k*0.3 + 104.6k*0.5 + 63k*0.2 = 52,800 + 52,312.5 + 12,600 = 117,712.5 mn. Add optionality (Changxin) estimated ~2,000 mn (if listing gives ~125 bn mkt cap, 1.8% = 2,250 mn, haircut 20% → 1,800 mn). Total equity value ≈ 119,512 mn. Per share value absent share count.",
+    "rating_consistency_check": "No rating assigned; underwriting packet only.",
+    "double_counting_checks": [
+      "Changxin stake excluded from core earnings (accounted as other equity instrument, not P&L).",
+      "Scenario value replaced by probability-weighted calculation; no double-count of base case."
+    ],
+    "status": "partial",
+    "missing_inputs": [
+      "Diluted share count to compute per-share value and expected return",
+      "Changxin post-IPO price and total shares for exact optionality value",
+      "resolve duplicate valuation overlap keys: consolidated_earnings"
+    ]
+  },
+  "llm_analysis_layer": {
+    "business_question_tree": [
+      "Memory: What will be the realized ASP trend for NOR Flash and SLC NAND in H2 2026 and 2027 – will the 120-170% SLC NAND price hike materialize as forecast by TrendForce?",
+      "Memory: Is the company able to increase unit volumes in line with demand or is foundry capacity a binding constraint?",
+      "MCU & Analog: Are MCU and analog segments transitioning from early-stage investment to profit contribution, and will they provide a buffer when memory profit normalizes?",
+      "Custom Memory: How many design wins have been secured for AIPC, AI phone, and automotive customized memory, and what is the revenue recognition timeline?",
+      "Capital Allocation: How will generated FCF be deployed – R&D, dividends, buybacks, or new minority stakes? Any dilution from outstanding stock options?",
+      "Competitive Dynamics: Will Puya or other domestic NOR Flash competitors add significant capacity, eroding the current ASP advantage?"
+    ],
+    "profit_pool_priority": "Memory segment likely accounts for >80% of profit at current margins, given Q1 consolidated gross margin of 57% and the fact that memory ASP surge is the primary driver of margin expansion. MCU and sensor revenues are probably slower-growing and lower-margin; analog is nascent. Therefore, memory profitability is the sole profit pool of consequence for the next 12-24 months. Model sensitivity should focus on NOR Flash and SLC NAND pricing and bit growth; secondarily, custom memory could become a higher-value-add profit pool if design wins convert.",
+    "competition_and_substitution_analysis": "兆易创新’s main competitors in niche memory are Winbond, Macronix, and domestic players like Puya. In MCU, it competes with Nuvoton, STMicroelectronics, and GigaDevice. The structural risk is that global memory giants (Samsung, SK Hynix) could shift more capacity to NOR/niche NAND to capture high margins, increasing supply. Domestically, Puya is expanding both NOR and NAND production. On the demand side, substitution risk is low because NOR Flash remains essential for automotive and industrial code storage, but emerging technologies like MRAM or X Point could eventually displace NOR in some applications. Customer switching costs are moderate; MCU ecosystem lock-in is stronger than NOR memory because of firmware investment. No direct evidence of supplier diversification pressure; the firm uses standard foundries, which also limits unique cost advantage.",
+    "qualitative_to_quantitative_bridge": "Qualitatively, the market narrative is that memory ASP will stay elevated due to AI-driven demand. Partial data: Q1 2026 gross margin improvement of 19.6pp YoY confirms pricing power; channel checks hint at extreme Q2 ASP increases but are unverified. No quantitative ASP index or volume data for 兆易创新’s specific products is available. The gap between narrative and model is large: without official ASP data and shipment numbers, the high bull-case revenue projections (22-24 bn) rely on unverified extrapolations. The key retrieval is a reliable NOR Flash and SLC NAND price series (e.g., from TrendForce or in-house surveys) that can be tied to 兆易创新’s product mix. Until then, the model must be conservative.",
+    "expectation_gap_analysis": "The current market cap of 325 bn CNY and PE TTM of 113x implies that the market expects TTM earnings of ~2.87 bn, which is well above reported FY2025 net profit of 1.65 bn but far below the base-case 2026 estimate of 4.19 bn. This suggests the market already discounts significant profit growth but perhaps not the full extent of our base case. However, the high PB/PS percentiles indicate the stock is expensive on asset and sales measures. A gap exists in timing and magnitude: the market may be reluctant to price in >4 bn profit for 2026 until official Q2 data confirms the trend. If Q2 results validate ASP strength, the stock could re-rate; if not, a de-rating is possible. Our base-case equity value of 117.7 bn (probability-weighted) is significantly below current market cap, implying overvaluation, but this conclusion is heavily dependent on share count, which would normalize per-share comparison.",
+    "red_team_counterarguments": [
+      "Bear-case counter to bull thesis: If memory ASP correction begins in H2 2026 due to rapid competitor capacity additions, and 兆易创新’s custom memory projects fail to ramp, revenue could fall to 14,000 mn with gross margin back to 40%, slashing profit to 3,500 mn. At 18x PE, equity value would be 63,000 mn, about half the base-case valuation. Falsification signal: TrendForce reports NOR Flash spot price decline >10% monthly in Q3 2026.",
+      "Bull-case counter to bear thesis: Even in a moderate downturn, AI edge demand for NOR and SLC NAND is structural; 兆易创新’s leading share and custom memory pipeline could sustain revenue above 16,000 mn with gross margins >50%, delivering >4,000 mn profit and maintaining a 20x+ PE. Falsification signal: In a downturn scenario, if quarterly revenue stays above 3,500 mn and gross margin above 50%, the bear thesis is invalid."
+    ],
+    "valuation_explanation": "The valuation approach uses a probability-weighted SOTP: core earnings-based PE multiples for each scenario, reflecting different risk premiums. Base case applies 25x P/E on 2027E profit, consistent with a high-growth semiconductor design company with cyclical earnings but strong uptrend. Bull case 22x P/E reflects a lower multiple despite higher earnings because the boom may be seen as transitory. Bear case 18x P/E on depressed earnings reflects cyclical trough. The weighted fair equity value of ~117.7 bn CNY does not include the Changxin optionality (~1.8 bn). The wide range underscores the high sensitivity to ASP assumptions. A move from base to bull case doubles equity value, while bear case halves it. Without a share count, per-share value is indeterminate, but the gap vs current market cap suggests the market may be pricing closer to bull case, leaving limited upside in base scenario.",
+    "final_editorial_synthesis": "兆易创新’s fate hinges on memory pricing: Q1 2026 margin expansion proves the cycle is booming, but the market already prices in significant earnings recovery. The core underwriting challenge is whether the ASP super-cycle extends through 2027 or collapses as capacity catches up. Custom memory and MCU diversification provide long-term optionality but cannot offset a memory price crash. Investors must monitor quarterly ASP, bit shipment data, and foundry allocation. The research agenda should prioritize verifying Q2 2026 results, retrieving reliable price series for NOR and SLC NAND, and determining a confirmed diluted share count to gauge downside protection. Only when those inputs are hard evidence can the wide bull-bear gap be narrowed.",
+    "evidence_boundaries": [
+      "No segment revenue/profit figures available; all model assumptions are top-down cost margin projections.",
+      "No share count; EPS and per-share valuation remain missing.",
+      "KPE items are unverified channel checks and broker reports; none have been converted into official numeric assumptions.",
+      "Q2 2026 official results not included; date-sensitive follow-up required."
+    ]
+  },
+  "handoff_manifest": {
+    "handoff_version": "underwriting-v2",
+    "source_of_truth": "structured_research.underwriting_packet",
+    "frozen_reported_facts": [
+      "Q1 2026 revenue: 4,188.08 mn CNY (EV012)",
+      "Q1 2026 parent net profit: 1,461.25 mn CNY (EV010)",
+      "Q1 2026 gross margin: 57.08% (EV013)",
+      "Q1 2026 operating margin: 38.72% (EV014)",
+      "Q1 2026 net margin: 34.89% (EV015)",
+      "FY2025 revenue: 9,203.46 mn CNY (EV011)",
+      "FY2025 parent net profit: 1,648.02 mn CNY (EV011)",
+      "Market cap as of 2026-07-17: 325,013.20 mn CNY (peer_comparison)",
+      "Company holds 1.8% pre-IPO stake in Changxin (investor_interaction, EV020)",
+      "OCF/net profit ratio Q1 2026: 1.22 (EV017)",
+      "Inventory/revenue ratio Q1 2026: 20.30%, down 11.89pp YoY (EV018)",
+      "Receivables/revenue Q1 2026: 1.75%, down 1.83pp YoY (EV018)"
+    ],
+    "analyst_estimates": [
+      "2026E revenue 18,448 mn CNY (derived from seasonality-adjusted Q1 data, not official guidance)",
+      "2026E parent net profit 4,185 mn CNY (base case assumption)",
+      "Gross margin estimates for 2027E, 2028E (55%, 52.3% respectively)",
+      "Revenue growth rates beyond 2026E",
+      "Capex and FCF projections",
+      "Scenario probabilities (30/50/20) and equity value calculations",
+      "Segment revenue weights (Memory 70%, MCU 15%, Sensor 10%, Analog 5%)"
+    ],
+    "unresolved_model_cells": [
+      "Diluted share count (EPS uncomputable)",
+      "Segment revenue and gross profit breakdown",
+      "Changxin stake fair value post-IPO",
+      "Official Q2 2026 revenue and profit",
+      "Long-term ASP and volume assumptions"
+    ],
+    "downstream_must_preserve": [
+      "All business units (Memory, MCU, Sensor, Analog) and their analytical weights",
+      "Three-year consolidated forecast model (revenue through FCF)",
+      "Three scenario assumptions (bull/base/bear) and probability weights (30/50/20)",
+      "Thesis financial bridges (BR01, BR02, BR03)",
+      "Valuation buckets (Core operating earnings, Scenario adjustment, Changxin optionality)",
+      "Probability-weighted fair equity value methodology"
+    ]
+  },
+  "evidence_change_rules": [
+    {
+      "evidence_id": "KPE01",
+      "affected_segment": "Memory",
+      "affected_variable": "asp_or_price",
+      "old_assumption": "ASP increase not quantified in model",
+      "new_assumption": "unchanged",
+      "financial_transmission": "If a reliable price index for NOR/SLC NAND is provided, update base-case ASP assumption and recompute revenue/profit.",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "Cross-check with company filings and product price data"
+    },
+    {
+      "evidence_id": "KPE03",
+      "affected_segment": "Memory",
+      "affected_variable": "asp_or_price",
+      "old_assumption": "SLC NAND price trajectory unknown",
+      "new_assumption": "unchanged",
+      "financial_transmission": "SLC NAND revenue share, if obtained, can be multiplied by the forecasted 120-170% price increase to estimate revenue bump.",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "Confirm SLC NAND revenue share and actual price realization"
+    },
+    {
+      "evidence_id": "KPE08",
+      "affected_segment": "Memory",
+      "affected_variable": "profit_or_eps",
+      "old_assumption": "Q2 net profit unknown",
+      "new_assumption": "unchanged",
+      "financial_transmission": "If confirmed by official filing, would drastically raise 2026E profit and trigger reassessment of all scenarios.",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "Wait for official Q2 report"
+    },
+    {
+      "evidence_id": "KPE02",
+      "affected_segment": "Memory",
+      "affected_variable": "segment_volume",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until Check if 兆易创新 supplies related components or benefits indirectly",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "Check if 兆易创新 supplies related components or benefits indirectly"
+    },
+    {
+      "evidence_id": "KPE04",
+      "affected_segment": "Memory",
+      "affected_variable": "profit_or_eps",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "rejected: no model, valuation, rating, or sizing impact",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "reject",
+      "verification_gate": "Stated stock code 300475 does not match target 603986; likely a data error"
+    },
+    {
+      "evidence_id": "KPE05",
+      "affected_segment": "consolidated",
+      "affected_variable": "demand_signal",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until Assess indirect revenue path through AI data center memory demand",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "Assess indirect revenue path through AI data center memory demand"
+    },
+    {
+      "evidence_id": "KPE06",
+      "affected_segment": "consolidated",
+      "affected_variable": "asp_or_price",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until Determine if helium shortage affects memory manufacturing costs",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "Determine if helium shortage affects memory manufacturing costs"
+    },
+    {
+      "evidence_id": "KPE07",
+      "affected_segment": "consolidated",
+      "affected_variable": "unmapped",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until No specific fundamental catalyst identified",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "No specific fundamental catalyst identified"
+    },
+    {
+      "evidence_id": "KPE09",
+      "affected_segment": "Memory",
+      "affected_variable": "segment_volume",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until Cross-check with industry pricing data and company guidance",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "Cross-check with industry pricing data and company guidance"
+    }
+  ],
+  "reconciliation_checks": [
+    "Scenario probabilities sum to 100% (30+50+20).",
+    "Base case 2026E parent net profit (4,185 mn) is lower than seasonality-adjusted Q1 run-rate (5,621 mn), reflecting conservatism.",
+    "Total probability-weighted equity value (117,712 mn) does not double-count core earnings nor Changxin stake.",
+    "EPS fields left null due to missing share count; no fabricated EPS."
+  ],
+  "analyst_instructions": [
+    "Retrieve diluted share count from Tushare or latest filing to unlock per-share analysis.",
+    "Extract product-segment data from 2025 annual report (EV031) to refine revenue weights and margin estimates.",
+    "Obtain official Q2 2026 financials as soon as published; reassess scenario probabilities and model assumptions.",
+    "Monitor TrendForce or similar for NOR Flash and SLC NAND price indices to convert qualitative KPE into model inputs.",
+    "Update Changxin optionality value upon listing day and lock-up expiry."
+  ],
+  "preprocessing_notes": [
+    "Segment revenue breakdown not disclosed in evidence; all metrics reported at consolidated level.",
+    "Channel check estimate for Q2 2026 (KPE08) implies net margin of ~74%, which severely diverges from reported Q1 net margin of 34.89%. This warrants caution and official confirmation.",
+    "KPE04 uses stock code 300475 which does not match target 603986; hypothesis rejected.",
+    "No baseline or revised values provided for any KPE; all financial bridge inputs are missing.",
+    "Sell-side observation KSI01 (same as KPE08) provides an unverified estimate; no valuation facts extracted.",
+    "Company exposure to downstream AI demand (e.g., HBM) is indirect; specific revenue linkage missing.",
+    "Inventory ratio improved significantly YoY, consistent with demand strength and price upcycle.",
+    "unknown evidence ids removed from underwriting packet",
+    "unknown evidence ids removed from underwriting packet",
+    "duplicate consolidated forecast aliases merged into revenue",
+    "operating model driver coverage (volume_price_cost): capacity, volume, price/ASP, unit/input cost, spread/margin, capex/ROIC"
+  ]
+}

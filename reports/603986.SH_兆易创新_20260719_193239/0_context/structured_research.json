@@ -1,0 +1,3544 @@
+{
+  "schema_version": 3,
+  "symbol": "603986.SH",
+  "as_of_date": "2026-07-19",
+  "preprocessing_mode": "llm_semantic_plus_deterministic_validation",
+  "company_summary": "兆易创新（603986.SH）是一家集成电路设计公司，主要业务为存储器、微控制器、传感器和模拟芯片的研发、技术支持和销售。",
+  "segments": [
+    {
+      "segment": "Memory",
+      "aliases": [
+        "存储芯片",
+        "利基存储",
+        "NOR Flash",
+        "SLC NAND"
+      ],
+      "products_or_services": "NOR Flash, SLC NAND, MLC NAND 等利基存储芯片的设计与销售",
+      "revenue_weight_pct": null,
+      "gross_profit_or_profit_weight_pct": null,
+      "business_model": "高研发技术产品型",
+      "key_drivers": [
+        "利基存储价格（NOR/SLC/MLC）",
+        "供给端原厂产能收缩",
+        "AI驱动存储需求",
+        "资本开支纪律"
+      ],
+      "prosperity_level": "strong",
+      "marginal_direction": "improving",
+      "causal_chain": "AI驱动存储需求高速增长，叠加供给侧寡头格局与资本开支纪律，存储供不应求，价格持续上涨，带动毛利率提升，利润释放。",
+      "supporting_metric_refs": [
+        "gross_margin_Q1_2026",
+        "net_margin_Q1_2026",
+        "revenue_growth_Q1_2026"
+      ],
+      "counterevidence": [
+        "Q2 2026 channel check implied net margin >70% conflicts with reported Q1 net margin 34.9%"
+      ],
+      "confidence": "medium",
+      "missing_inputs": [
+        "segment revenue breakdown",
+        "segment gross margin",
+        "segment operating profit"
+      ],
+      "revenue_cny_mn": null,
+      "revenue_reported_value": null,
+      "revenue_reported_unit": "",
+      "revenue_growth_pct": null,
+      "gross_margin_pct": null,
+      "gross_margin_change_pp": null,
+      "period": "2026Q1",
+      "source_module": "company_business_model",
+      "evidence_quote": "公司主要业务为存储器、微控制器、传感器和模拟芯片的研发、技术支持和销售。",
+      "extraction_mode": "llm_semantic"
+    },
+    {
+      "segment": "Microcontroller",
+      "aliases": [
+        "MCU"
+      ],
+      "products_or_services": "微控制器芯片的设计与销售",
+      "revenue_weight_pct": null,
+      "gross_profit_or_profit_weight_pct": null,
+      "business_model": "高研发技术产品型",
+      "key_drivers": [
+        "工业/汽车/消费电子需求"
+      ],
+      "prosperity_level": "evidence_limited",
+      "marginal_direction": "unknown",
+      "causal_chain": "",
+      "supporting_metric_refs": [],
+      "counterevidence": [],
+      "confidence": "low",
+      "missing_inputs": [
+        "segment revenue",
+        "segment gross margin",
+        "growth trends"
+      ],
+      "revenue_cny_mn": null,
+      "revenue_reported_value": null,
+      "revenue_reported_unit": "",
+      "revenue_growth_pct": null,
+      "gross_margin_pct": null,
+      "gross_margin_change_pp": null,
+      "period": "unspecified",
+      "source_module": "company_business_model",
+      "evidence_quote": "公司主要业务为存储器、微控制器、传感器和模拟芯片的研发、技术支持和销售。",
+      "extraction_mode": "llm_semantic"
+    },
+    {
+      "segment": "Sensor",
+      "aliases": [
+        "传感器"
+      ],
+      "products_or_services": "传感器芯片的设计与销售",
+      "revenue_weight_pct": null,
+      "gross_profit_or_profit_weight_pct": null,
+      "business_model": "高研发技术产品型",
+      "key_drivers": [
+        "消费电子",
+        "IoT"
+      ],
+      "prosperity_level": "evidence_limited",
+      "marginal_direction": "unknown",
+      "causal_chain": "",
+      "supporting_metric_refs": [],
+      "counterevidence": [],
+      "confidence": "low",
+      "missing_inputs": [
+        "segment revenue",
+        "segment gross margin",
+        "growth trends"
+      ],
+      "revenue_cny_mn": null,
+      "revenue_reported_value": null,
+      "revenue_reported_unit": "",
+      "revenue_growth_pct": null,
+      "gross_margin_pct": null,
+      "gross_margin_change_pp": null,
+      "period": "unspecified",
+      "source_module": "company_business_model",
+      "evidence_quote": "公司主要业务为存储器、微控制器、传感器和模拟芯片的研发、技术支持和销售。",
+      "extraction_mode": "llm_semantic"
+    },
+    {
+      "segment": "Analog",
+      "aliases": [
+        "模拟芯片"
+      ],
+      "products_or_services": "模拟芯片的设计与销售",
+      "revenue_weight_pct": null,
+      "gross_profit_or_profit_weight_pct": null,
+      "business_model": "高研发技术产品型",
+      "key_drivers": [
+        "工业/通信需求复苏",
+        "AI增量"
+      ],
+      "prosperity_level": "evidence_limited",
+      "marginal_direction": "unknown",
+      "causal_chain": "",
+      "supporting_metric_refs": [],
+      "counterevidence": [],
+      "confidence": "low",
+      "missing_inputs": [
+        "segment revenue",
+        "segment gross margin",
+        "growth trends"
+      ],
+      "revenue_cny_mn": null,
+      "revenue_reported_value": null,
+      "revenue_reported_unit": "",
+      "revenue_growth_pct": null,
+      "gross_margin_pct": null,
+      "gross_margin_change_pp": null,
+      "period": "unspecified",
+      "source_module": "company_business_model",
+      "evidence_quote": "公司主要业务为存储器、微控制器、传感器和模拟芯片的研发、技术支持和销售。",
+      "extraction_mode": "llm_semantic"
+    }
+  ],
+  "semantic_metrics": [
+    {
+      "segment": "consolidated",
+      "variable": "revenue",
+      "value": 4188075574.04,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "2026Q1",
+      "comparison_basis": "absolute",
+      "source_module": "earnings_model",
+      "source_quote": "/ latest reported / Q1 / 20260331 / 4188075574.04 / ...",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "top-line start",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "net_profit_parent",
+      "value": 1461248353.08,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "2026Q1",
+      "comparison_basis": "absolute",
+      "source_module": "earnings_model",
+      "source_quote": "/ latest reported / Q1 / ... / 1461248353.08 / ...",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "profit anchor",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "gross_margin_pct",
+      "value": 57.0767,
+      "value_text": "",
+      "unit": "%",
+      "period": "2026Q1",
+      "comparison_basis": "YoY +19.64pp",
+      "source_module": "earnings_model",
+      "source_quote": "/ Gross margin / 57.0767% / +19.64pp / YoY: 20260331 vs 20250331 / ...",
+      "evidence_status": "unverified",
+      "direction": "improving",
+      "materiality": "high",
+      "model_role": "profitability bridge",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "operating_margin_pct",
+      "value": 38.716,
+      "value_text": "",
+      "unit": "%",
+      "period": "2026Q1",
+      "comparison_basis": "YoY +26.46pp",
+      "source_module": "earnings_model",
+      "source_quote": "/ Operating margin / 38.716% / +26.46pp / ...",
+      "evidence_status": "unverified",
+      "direction": "improving",
+      "materiality": "high",
+      "model_role": "cost absorption",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "net_margin_pct",
+      "value": 34.8907,
+      "value_text": "",
+      "unit": "%",
+      "period": "2026Q1",
+      "comparison_basis": "YoY +22.60pp",
+      "source_module": "earnings_model",
+      "source_quote": "/ Net margin / 34.8907% / +22.60pp / ...",
+      "evidence_status": "unverified",
+      "direction": "improving",
+      "materiality": "high",
+      "model_role": "final conversion",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "ocf_to_net_profit_ratio",
+      "value": 1.2202,
+      "value_text": "",
+      "unit": "x",
+      "period": "2026Q1",
+      "comparison_basis": "YoY",
+      "source_module": "earnings_model",
+      "source_quote": "/ OCF / net profit / 1.2202 / N/A / ...",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "medium",
+      "model_role": "cash quality",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "receivables_to_revenue_pct",
+      "value": 1.7479,
+      "value_text": "",
+      "unit": "%",
+      "period": "2026Q1",
+      "comparison_basis": "YoY -1.83pp",
+      "source_module": "earnings_model",
+      "source_quote": "/ Receivables / revenue / 1.7479% / -1.83pp / ...",
+      "evidence_status": "unverified",
+      "direction": "improving",
+      "materiality": "low",
+      "model_role": "working capital",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "inventory_to_revenue_pct",
+      "value": 20.3043,
+      "value_text": "",
+      "unit": "%",
+      "period": "2026Q1",
+      "comparison_basis": "YoY -11.89pp",
+      "source_module": "earnings_model",
+      "source_quote": "/ Inventory / revenue / 20.3043% / -11.89pp / ...",
+      "evidence_status": "unverified",
+      "direction": "improving",
+      "materiality": "medium",
+      "model_role": "demand quality",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "revenue",
+      "value": 9203463124.58,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "FY2025",
+      "comparison_basis": "absolute",
+      "source_module": "earnings_model",
+      "source_quote": "/ latest annual / FY / 20251231 / 9203463124.58 / ...",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "annual baseline",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "net_profit_parent",
+      "value": 1648022651.7,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "FY2025",
+      "comparison_basis": "absolute",
+      "source_module": "earnings_model",
+      "source_quote": "/ latest annual / FY / ... / 1648022651.7 / ...",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "annual baseline",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "market_cap",
+      "value": 325013196750.0,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "2026-07-17",
+      "comparison_basis": "spot",
+      "source_module": "market_expectation",
+      "source_quote": "/ Market cap (CNY) / 325013196750 / current equity value /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "valuation input",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "pe_ttm",
+      "value": 113.0622,
+      "value_text": "",
+      "unit": "x",
+      "period": "TTM",
+      "comparison_basis": "spot",
+      "source_module": "market_expectation",
+      "source_quote": "/ PE TTM / 113.0622 / earnings multiple the market is paying now /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "valuation metric",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "ps_ttm",
+      "value": 28.3051,
+      "value_text": "",
+      "unit": "x",
+      "period": "TTM",
+      "comparison_basis": "spot",
+      "source_module": "market_expectation",
+      "source_quote": "/ PS TTM / 28.3051 / sales multiple the market is paying now /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "valuation metric",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "implied_ttm_earnings",
+      "value": 2874640655.7629,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "TTM",
+      "comparison_basis": "derived",
+      "source_module": "market_expectation",
+      "source_quote": "/ Implied TTM earnings (CNY) / 2874640655.7629 / market cap divided by PE TTM /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "medium",
+      "model_role": "valuation implied",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "implied_ttm_sales",
+      "value": 11482495972.4573,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "TTM",
+      "comparison_basis": "derived",
+      "source_module": "market_expectation",
+      "source_quote": "/ Implied TTM sales (CNY) / 11482495972.4573 / market cap divided by PS TTM /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "medium",
+      "model_role": "valuation implied",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "pe_percentile",
+      "value": 61.0,
+      "value_text": "",
+      "unit": "%",
+      "period": "5-year window",
+      "comparison_basis": "historical",
+      "source_module": "market_expectation",
+      "source_quote": "/ PE percentile / 61 / 5-year valuation position /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "low",
+      "model_role": "valuation context",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "pb_percentile",
+      "value": 96.5,
+      "value_text": "",
+      "unit": "%",
+      "period": "5-year window",
+      "comparison_basis": "historical",
+      "source_module": "market_expectation",
+      "source_quote": "/ PB percentile / 96.5 / 5-year valuation position /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "low",
+      "model_role": "valuation context",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "ps_percentile",
+      "value": 96.7,
+      "value_text": "",
+      "unit": "%",
+      "period": "5-year window",
+      "comparison_basis": "historical",
+      "source_module": "market_expectation",
+      "source_quote": "/ PS percentile / 96.7 / 5-year valuation position /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "low",
+      "model_role": "valuation context",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "netprofit_yoy",
+      "value": 522.7881,
+      "value_text": "",
+      "unit": "%",
+      "period": "TTM over prior TTM",
+      "comparison_basis": "YoY",
+      "source_module": "peer_comparison",
+      "source_quote": "/ netprofit_yoy / 522.7881 / from peer comparison table",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "growth proxy",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "shareholding_in_changxin",
+      "value": 1.8,
+      "value_text": "1.8% pre-IPO",
+      "unit": "%",
+      "period": "2026-07-14",
+      "comparison_basis": "absolute",
+      "source_module": "investor_interaction",
+      "source_quote": "目前公司于长鑫科技集团公司持股比例为1.8%（发行前）",
+      "evidence_status": "reported",
+      "direction": "",
+      "materiality": "medium",
+      "model_role": "balance sheet item",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    }
+  ],
+  "deterministic_evidence": [
+    {
+      "evidence_id": "EV001",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Financial-report look-back: 900 days"
+    },
+    {
+      "evidence_id": "EV002",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2024, 半年",
+      "text": "Compacted 兆易创新2024年半年度报告: 276163 chars -> 120735 chars."
+    },
+    {
+      "evidence_id": "EV003",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "Compacted 兆易创新2025年年度报告: 395177 chars -> 135996 chars."
+    },
+    {
+      "evidence_id": "EV004",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 半年",
+      "text": "Compacted 兆易创新2025年半年度报告: 300436 chars -> 100161 chars."
+    },
+    {
+      "evidence_id": "EV005",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260430, 2026, 季度",
+      "text": "20260430: 兆易创新2026年第一季度报告"
+    },
+    {
+      "evidence_id": "EV006",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20240821, 2024, 半年",
+      "text": "20240821: 兆易创新2024年半年度报告"
+    },
+    {
+      "evidence_id": "EV007",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260331, 2025, 年度",
+      "text": "20260331: 兆易创新2025年年度报告"
+    },
+    {
+      "evidence_id": "EV008",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20251029, 2025, 季度",
+      "text": "20251029: 兆易创新2025年第三季度报告"
+    },
+    {
+      "evidence_id": "EV009",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20250823, 2025, 半年",
+      "text": "20250823: 兆易创新2025年半年度报告"
+    },
+    {
+      "evidence_id": "EV010",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "Q1, 20260331",
+      "text": "/ latest reported / Q1 / 20260331 / 4188075574.04 / 1461248353.08 / 16752302296.16 / 5844993412.32 / 18447615600.0261 / 5621189064.3226 / historical median 0331 share 26.0% /"
+    },
+    {
+      "evidence_id": "EV011",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "FY, 20251231",
+      "text": "/ latest annual / FY / 20251231 / 9203463124.58 / 1648022651.7 / 9203463124.58 / 1648022651.7 / 9203463124.58 / 1648022651.7 / FY actual /"
+    },
+    {
+      "evidence_id": "EV012",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "revenue",
+      "period": "20260331, 20250331",
+      "text": "/ Revenue base / 4188075574.04 / N/A / YoY: 20260331 vs 20250331 / top-line starting point for volume × price × mix /"
+    },
+    {
+      "evidence_id": "EV013",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "20260331, 20250331",
+      "text": "/ Gross margin / 57.0767% / +19.64pp / YoY: 20260331 vs 20250331 / main bridge from demand to gross profit /"
+    },
+    {
+      "evidence_id": "EV014",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260331, 20250331",
+      "text": "/ Operating margin / 38.716% / +26.46pp / YoY: 20260331 vs 20250331 / tests pricing, mix, and cost absorption /"
+    },
+    {
+      "evidence_id": "EV015",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "20260331, 20250331",
+      "text": "/ Net margin / 34.8907% / +22.60pp / YoY: 20260331 vs 20250331 / captures final earnings conversion /"
+    },
+    {
+      "evidence_id": "EV016",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "operating_expense",
+      "period": "20260331, 20250331",
+      "text": "/ Finance-expense ratio / 2.3047% / +6.54pp / YoY: 20260331 vs 20250331 / captures leverage drag or relief /"
+    },
+    {
+      "evidence_id": "EV017",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "profit_or_eps",
+      "period": "20260331, 20250331",
+      "text": "/ OCF / net profit / 1.2202 / N/A / YoY: 20260331 vs 20250331 / tests earnings quality and cash realization /"
+    },
+    {
+      "evidence_id": "EV018",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "revenue",
+      "period": "20260331, 20250331",
+      "text": "/ Receivables / revenue / 1.7479% / -1.83pp / YoY: 20260331 vs 20250331 / tests working-capital drag; interim periods use annualized revenue /"
+    },
+    {
+      "evidence_id": "EV019",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Look-back window: 30 days"
+    },
+    {
+      "evidence_id": "EV020",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 一般公告 / 4 /"
+    },
+    {
+      "evidence_id": "EV021",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "valuation",
+      "period": "unspecified",
+      "text": "/ earnings guidance / performance preview / 1 /"
+    },
+    {
+      "evidence_id": "EV022",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "valuation",
+      "period": "20260710, 2026, 半年",
+      "text": "/ 20260710 / earnings guidance / performance preview / 603986.SH / 兆易创新 / 兆易创新2026年半年度业绩预增公告 / http://www.cninfo.com.cn/new/disclosure/detail?stockCode=603986&announcementId=1225417171&orgId=9900026561&announcementTime=2026-07-10 /"
+    },
+    {
+      "evidence_id": "EV023",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260630, 2026-06-30",
+      "text": "/ 20260630 / 一般公告 / 603986.SH / 兆易创新 / 兆易创新关于股票交易风险提示的公告 / http://www.cninfo.com.cn/new/disclosure/detail?stockCode=603986&announcementId=1225398003&orgId=9900026561&announcementTime=2026-06-30 /"
+    },
+    {
+      "evidence_id": "EV024",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260627, 2026-06-27",
+      "text": "/ 20260627 / 一般公告 / 603986.SH / 兆易创新 / 兆易创新关于部分股票期权注销完成的公告 / http://www.cninfo.com.cn/new/disclosure/detail?stockCode=603986&announcementId=1225390033&orgId=9900026561&announcementTime=2026-06-27 /"
+    },
+    {
+      "evidence_id": "EV025",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260626, 2026-06-26",
+      "text": "/ 20260626 / 一般公告 / 603986.SH / 兆易创新 / 兆易创新关于股票交易异常波动的公告 / http://www.cninfo.com.cn/new/disclosure/detail?stockCode=603986&announcementId=1225388654&orgId=9900026561&announcementTime=2026-06-26 /"
+    },
+    {
+      "evidence_id": "EV026",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260619, 2026-06-19",
+      "text": "/ 20260619 / 一般公告 / 603986.SH / 兆易创新 / 兆易创新关于股票交易异常波动的公告 / http://www.cninfo.com.cn/new/disclosure/detail?stockCode=603986&announcementId=1225379297&orgId=9900026561&announcementTime=2026-06-19 /"
+    },
+    {
+      "evidence_id": "EV027",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260710, 2026, 半年",
+      "text": "/ 20260710 / 603986.SH / 兆易创新 / 兆易创新2026年半年度业绩预增公告 / http://www.cninfo.com.cn/new/disclosure/detail?stockCode=603986&announcementId=1225417171&orgId=9900026561&announcementTime=2026-07-10 /"
+    },
+    {
+      "evidence_id": "EV028",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2024, 半年, 2017",
+      "text": "/ high_r_and_d_technology / 高研发技术产品型 / quantified disclosure / 兆易创新2024年半年度报告: 一、报告期内公司所属行业及主营业务情况说明 （一）主要业务、主要产品及其用途 1. 主要业务 公司主要业务为存储器、微控制器和传感器的研发、技术支持和销售。按照《国民经济行业 分类》（GB/T 4754-2017），公司所处行业属于“软件和信息技术服务业”中的“集成电路设计” （代码：6520）。公司产品广泛应用于工业、汽车、消费电子（如可穿戴产品、智能..."
+    },
+    {
+      "evidence_id": "EV029",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_volume",
+      "period": "2024, 半年, 上年同期",
+      "text": "/ product_manufacturer / 产品制造 / 产能出货型 / quantified disclosure / 兆易创新2024年半年度报告: (一) 主营业务分析 1. 财务报表相关科目变动分析表 单位：元 币种：人民币 科目 本期数 上年同期数 变动比例（%） 营业收入 3,609,037,320.17 2,965,812,063.82 21.69 营业成本 2,231,971,107.10 1,974,256,254.31 13.05 销售费用 170,495,787.83 128,68..."
+    },
+    {
+      "evidence_id": "EV030",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "2024, 半年",
+      "text": "/ core_revenue_engine / semiannual / 兆易创新2024年半年度报告: 景，提升和满足客户使用体验。报告期内，公司研发投入达到 6.37 亿元，约占营业收入 17.65%。 / Defines what actually drives the income statement. /"
+    },
+    {
+      "evidence_id": "EV031",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "revenue",
+      "period": "2025, 年度",
+      "text": "/ segment_mix / annual / 兆易创新2025年年度报告: 分产品 营业收入 营业成本 上年增减 / Shows whether different profit pools are being mixed together. /"
+    },
+    {
+      "evidence_id": "EV032",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "revenue",
+      "period": "2024, 半年",
+      "text": "/ customer_and_channel / semiannual / 兆易创新2024年半年度报告: 景，提升和满足客户使用体验。报告期内，公司研发投入达到 6.37 亿元，约占营业收入 17.65%。 / Reveals demand source, concentration, and market validation. /"
+    },
+    {
+      "evidence_id": "EV033",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2024, 半年",
+      "text": "/ geography / semiannual / 兆易创新2024年半年度报告: 照实际采用的汇率折算为记账本位币金额；以及②本公司对外出口销售收入，按当月月初的即期 / Explains whether growth depends on a specific geography or expansion lane. /"
+    },
+    {
+      "evidence_id": "EV034",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "revenue",
+      "period": "2024, 半年",
+      "text": "/ reinvestment_engine / semiannual / 兆易创新2024年半年度报告: 景，提升和满足客户使用体验。报告期内，公司研发投入达到 6.37 亿元，约占营业收入 17.65%。 / Shows how today's cash is being converted into tomorrow's earnings power. /"
+    },
+    {
+      "evidence_id": "EV035",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2024, 半年, 2017",
+      "text": "/ product / semiannual / 兆易创新2024年半年度报告: 一、报告期内公司所属行业及主营业务情况说明 （一）主要业务、主要产品及其用途 1. 主要业务 公司主要业务为存储器、微控制器和传感器的研发、技术支持和销售。按照《国民经济行业 分类》（GB/T 4754-2017），公司所处行业属于“软件和信息技术服务业”中的“集成电路设计” （代码：6520）。公司产品广泛应用于工业、汽车、消费电子（如可穿戴产品、智能手表、TWS 耳机、移动手机、家用电器等）、PC 及周边、网络通信（如无线路..."
+    },
+    {
+      "evidence_id": "EV036",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 半年, 2017",
+      "text": "/ product / semiannual / 兆易创新2025年半年度报告: 一、报告期内公司所属行业及主营业务情况说明 （一）主要业务、主要产品及其用途 1. 主要业务 公司主要业务为存储器、微控制器、传感器和模拟芯片的研发、技术支持和销售。按照《国 民经济行业分类》（GB/T 4754-2017），公司所处行业属于“软件和信息技术服务业”中的“集 成电路设计”（代码：6520）。公司产品应用广泛，为消费电子、汽车、工业应用、PC 及服务器、 物联网、网络通讯等领域的客户提供全面的“感、存、算、控、连”..."
+    },
+    {
+      "evidence_id": "EV037",
+      "source_module": "industry_cycle",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "balance_sheet",
+      "period": "unspecified",
+      "text": "Do not state R32, R125, lithium, copper, gold, inventory, or spread changes as facts unless they appear in the evidence table."
+    },
+    {
+      "evidence_id": "EV038",
+      "source_module": "industry_cycle",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "gap",
+      "status": "missing",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "If cycle evidence says bottom-testing or evidence-limited, use language such as `bottom-right validation stage`, `右侧待验证`, or `needs confirmation`."
+    },
+    {
+      "evidence_id": "EV039",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "gap",
+      "status": "missing",
+      "model_variable": "segment_margin",
+      "period": "unspecified",
+      "text": "/ coverage_grade / report_types_seen / missing_report_types / answered_questions / core_pack_status / confidence_read /"
+    },
+    {
+      "evidence_id": "EV040",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "profit_or_eps",
+      "period": "2024, 半年",
+      "text": "/ accounting_reconciliation / Check signs, units, periods, and cross-statement consistency before a number enters the PM memo. / operating_cash_flow: 兆易创新2024年半年度报告: 473,449,975.70 275,474,715.87 71.87 性损益的净利润 经营活动产生的现金流量净额 1,248,715,713.30 644,561,466.59 9..."
+    },
+    {
+      "evidence_id": "EV041",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2024, 半年",
+      "text": "/ segment_economics_depth / Decide whether each business line has enough disclosed scale, growth, margin, cash quality, and valuation treatment. / 兆易创新2024年半年度报告: 一、报告期内公司所属行业及主营业务情况说明 （一）主要业务、主要产品及其用途 1. 主要业务 公司主要业务为存储器、微控制器和传感器的研发、技术支持和销售。按照《国民经济行业 分类》（GB..."
+    },
+    {
+      "evidence_id": "EV042",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "profit_or_eps",
+      "period": "2024, 半年",
+      "text": "/ cash_flow_quality_decomposition / Separate accounting profit from cash conversion, working-capital drag, and demand visibility. / operating_cash_flow: 兆易创新2024年半年度报告: 473,449,975.70 275,474,715.87 71.87 性损益的净利润 经营活动产生的现金流量净额 1,248,715,713.30 644,561,466.5..."
+    },
+    {
+      "evidence_id": "EV043",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "capex_or_roic",
+      "period": "2024, 半年",
+      "text": "/ capex_cip_return_bridge / Test whether capex, construction-in-progress, or investment assets are building returns or just absorbing capital. / construction_in_progress: 兆易创新2024年半年度报告: 或与设计或合同要求基本相符。 在建工程的减值测试方法和减值准备计提方法详见本节五、27 “长期资产减值”。 23. 借款费用 / const..."
+    },
+    {
+      "evidence_id": "EV044",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "2024, 半年",
+      "text": "/ non_recurring_profit_quality / Distinguish core operating profit from investment income, fair-value moves, subsidies, asset disposals, impairment, and other one-off items. / impairment: 兆易创新2024年半年度报告: 投资活动产生的现金流量净额 94,865,632.53 -576,960,897.12 不适用 筹资活动产..."
+    },
+    {
+      "evidence_id": "EV045",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "balance_sheet",
+      "period": "2024, 半年",
+      "text": "/ balance_sheet_forward_signals / Read balance-sheet leads before income-statement confirmation. / inventory: 兆易创新2024年半年度报告: 筹资活动产生的现金流量净额变动原因说明：主要是①2024 年上半年取得银行短期借款 4 亿元， 回购限制性股票及二级市场股票共支出约 1.55 亿元；②2023 年上半年支付现金股利 4.14 亿元。 资产减值损失变动原因说明：主要是存货减值 0.77 亿元，比..."
+    },
+    {
+      "evidence_id": "EV046",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "revenue",
+      "period": "2024, 半年, 2023",
+      "text": "/ shareholder_return_authenticity / Test whether dividends, buybacks, and capital returns are funded by durable profit and cash rather than leverage or asset sales. / generic_capital_allocation: 兆易创新2024年半年度报告: 报告期内，营业收入同比增加 21.69%，主要原因是：经历 2023 年市场需求低迷和库存逐..."
+    },
+    {
+      "evidence_id": "EV047",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "unspecified",
+      "text": "/ disclosure_quality_score / Grade whether filing disclosure is rich enough for a buy-side thesis or only a watchlist view. / Coverage grade strong; reports seen annual/quarterly/semiannual; answered 9/9; core pack ready. Annual base text and quarterly chec..."
+    },
+    {
+      "evidence_id": "EV048",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-07-17",
+      "text": "Valuation trade date: 2026-07-17"
+    },
+    {
+      "evidence_id": "EV049",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ Market cap (CNY) / 325013196750 / current equity value /"
+    },
+    {
+      "evidence_id": "EV050",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "valuation",
+      "period": "TTM",
+      "text": "/ PE TTM / 113.0622 / earnings multiple the market is paying now /"
+    },
+    {
+      "evidence_id": "EV051",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "revenue",
+      "period": "TTM",
+      "text": "/ PS TTM / 28.3051 / sales multiple the market is paying now /"
+    },
+    {
+      "evidence_id": "EV052",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "valuation",
+      "period": "TTM",
+      "text": "/ Implied TTM earnings (CNY) / 2874640655.7629 / market cap divided by PE TTM /"
+    },
+    {
+      "evidence_id": "EV053",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "revenue",
+      "period": "TTM",
+      "text": "/ Implied TTM sales (CNY) / 11482495972.4573 / market cap divided by PS TTM /"
+    },
+    {
+      "evidence_id": "EV054",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "valuation",
+      "period": "unspecified",
+      "text": "/ PE percentile / 61 / 5-year valuation position /"
+    },
+    {
+      "evidence_id": "EV055",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "valuation",
+      "period": "unspecified",
+      "text": "/ PB percentile / 96.5 / 5-year valuation position /"
+    },
+    {
+      "evidence_id": "EV056",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "valuation",
+      "period": "unspecified",
+      "text": "/ PS percentile / 96.7 / 5-year valuation position /"
+    },
+    {
+      "evidence_id": "EV057",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-07-17",
+      "text": "Valuation trade date: 2026-07-17"
+    },
+    {
+      "evidence_id": "EV058",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Market-cap units: `total_mv` is ten-thousand CNY; `total_mv_cny_100m` is 亿元 and equals `total_mv / 10,000`."
+    },
+    {
+      "evidence_id": "EV059",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "unspecified",
+      "text": "/ ts_code / name / industry / total_mv / total_mv_cny_100m / pe_ttm / pb / ps_ttm / dv_ttm / roe_annual / roa_annual / roe / roa / netprofit_yoy / debt_to_assets / v4_score /"
+    },
+    {
+      "evidence_id": "EV060",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 301308.SZ / 江波龙 / 半导体 / 16753215.6 / 1675.3216 / 30.8114 / 13.7498 / 5.8952 / 0.2502 / 19.876 / 9.8683 / 38.548 / 16.4742 / 2644.0497 / 65.5502 / 75 /"
+    },
+    {
+      "evidence_id": "EV061",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 603986.SH / 兆易创新 / 半导体 / 32501319.675 / 3250.132 / 113.0622 / 12.8599 / 28.3051 / 0.1616 / 9.283 / 7.1283 / 6.5999 / 6.2381 / 522.7881 / 8.1329 / 70.8 /"
+    },
+    {
+      "evidence_id": "EV062",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 688008.SH / 澜起科技 / 半导体 / 22409077.68 / 2240.9078 / 87.6169 / 10.75 / 39.3499 / 0.1079 / 18.3792 / 15.7987 / 5.0186 / 4.6218 / 61.3046 / 4.1745 / 65 /"
+    },
+    {
+      "evidence_id": "EV063",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20617249, 2061",
+      "text": "/ 688498.SH / 源杰科技 / 半导体 / 20617249.68 / 2061.725 / 579.0617 / 81.6612 / 236.3518 / 0.0415 / 8.6684 / 8.5032 / 7.389 / 7.7813 / 1153.072 / 10.7162 / 53.8 /"
+    },
+    {
+      "evidence_id": "EV064",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 688012.SH / 中微公司 / 半导体 / 33590571.6187 / 3359.0572 / 123.093 / 13.818 / 25.5902 / 0.0655 / 9.9524 / 7.5184 / 3.9592 / 3.1413 / 197.202 / 22.1756 / 50.4 /"
+    },
+    {
+      "evidence_id": "EV065",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20320787, 2032",
+      "text": "/ 688072.SH / 拓荆科技 / 半导体 / 20320787.532 / 2032.0788 / 123.5864 / 28.0394 / 29.3533 / 0.0457 / 15.5878 / 5.3565 / 8.2355 / 3.0331 / 488.2918 / 60.9918 / 49.6 /"
+    },
+    {
+      "evidence_id": "EV066",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20050406",
+      "text": "/ 603986.SH / 何卫 / 何卫 / 董灵燕 / 70110.2451 / 20050406 / 北京 / 存储器、微控制器、传感器和模拟芯片的研发、技术支持和销售。 /"
+    },
+    {
+      "evidence_id": "EV067",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260331, 20251231",
+      "text": "/ 20260331 / 20251231 / 周海涛 / 独立董事 / 240000 / 0 /"
+    },
+    {
+      "evidence_id": "EV068",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260331, 20251231",
+      "text": "/ 20260331 / 20251231 / 朱一明 / 董事长 / 7532600 / 45758013 /"
+    },
+    {
+      "evidence_id": "EV069",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260331, 20251231",
+      "text": "/ 20260331 / 20251231 / 孙桂静 / 副总经理,财务负责人 / 2807600 / 193140 /"
+    },
+    {
+      "evidence_id": "EV070",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260331, 20251231",
+      "text": "/ 20260331 / 20251231 / 何卫 / 副董事长,董事,总经理 / 1592500 / 255207 /"
+    },
+    {
+      "evidence_id": "EV071",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260331, 20251231",
+      "text": "/ 20260331 / 20251231 / 胡洪 / 董事,副总经理 / 9270000 / 425845 /"
+    },
+    {
+      "evidence_id": "EV072",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260331, 20251231",
+      "text": "/ 20260331 / 20251231 / 文恬 / 职工代表董事,原监事会主席,原职工监事 / 320300 / 0 /"
+    },
+    {
+      "evidence_id": "EV073",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260331, 20251231",
+      "text": "/ 20260331 / 20251231 / 钱鹤 / 独立董事 / 240000 / 0 /"
+    },
+    {
+      "evidence_id": "EV074",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260331, 20251231",
+      "text": "/ 20260331 / 20251231 / 杨小雯 / 独立董事 / 240000 / 0 /"
+    },
+    {
+      "evidence_id": "EV075",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Look-back window for futures proxies: 90 days"
+    },
+    {
+      "evidence_id": "EV076",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_volume",
+      "period": "unspecified",
+      "text": "/ 1 - company hard evidence / official filings, production reports, and sales announcements / realized product mix, output, unit cost, and cash-flow conversion / usually delayed and may not include daily spot prices /"
+    },
+    {
+      "evidence_id": "EV077",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "balance_sheet",
+      "period": "unspecified",
+      "text": "Do not state R32, R125, lithium, copper, gold, inventory, or spread changes as facts unless they appear in the evidence table."
+    },
+    {
+      "evidence_id": "EV078",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "gap",
+      "status": "missing",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "If a thesis-critical input is marked missing, treat it as neutral non-evidence and a retrieval task; it cannot prove margin deterioration/resilience or mechanically change rating, conviction, or sizing."
+    },
+    {
+      "evidence_id": "EV079",
+      "source_module": "policy",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025-10-28, 2025",
+      "text": "/ 中共中央关于制定国民经济和社会发展第十五个五年规划的建议 / 中国政府网 / 2025-10-28 / national-plan / ok / https://www.gov.cn/gongbao/2025/issue_12386/202511/content_7047415.html /"
+    },
+    {
+      "evidence_id": "EV080",
+      "source_module": "policy",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2024-08-11",
+      "text": "/ 中共中央 国务院关于加快经济社会发展全面绿色转型的意见 / 中国政府网 / 2024-08-11 / national-direction / ok / https://www.gov.cn/zhengce/202408/content_6967663.htm /"
+    },
+    {
+      "evidence_id": "EV081",
+      "source_module": "policy",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2024-08-11",
+      "text": "/ renewable-energy / 绿色转型 / 中共中央 国务院关于加快经济社会发展全面绿色转型的意见 / 中国政府网 / 2024-08-11 / national-direction / / supports multi-year demand visibility for clean-energy equipment and infrastructure / argue the company sits inside a policy-backed demand pool / test whether"
+    },
+    {
+      "evidence_id": "EV082",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Canonical company route: https://sns.sseinfo.com/company.do?stockcode=603986"
+    },
+    {
+      "evidence_id": "EV083",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026, 半年",
+      "text": "/ sse / reachable / {'title': '上证e互动', 'has_company_page': True, 'has_qa_section': True} / 76578 / {'is_empty_recent_reply': False, 'text_preview': '投资者_1781498345141 :兆易创新(603986) 股东人数是多少 2026年06月15日 12:41 来自 IOS ◆ ◆ 兆易创新 感谢您的关注！公司将在2026年半年报中披露截至报告期末股东总数。 / 收"
+    },
+    {
+      "evidence_id": "EV084",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-07-08, 2026-07-14, 2026",
+      "text": "/ 2026-07-08 / 2026-07-14 / 贵公司自6月29日发布风险提示报告之后，股价连续大跌，并拖累A股整个存储板块，请公司尽快澄清是否有潜在重大利空？是否有做好市值管理的措施？作为上市公司，请多关注二级市场动态，维护股价稳定也是公司的必要责任。 / 感谢您的关注。公司经营情况良好，已于7月10日披露2026年半年度业绩预增公告，具体内容请见《兆易创新科技集团股份有限公司2026年半年度业绩预增公告》（公告编号：2026-054），公司不存在应披未披事项。公司制定了市值管理制度，在市值管理的主要方式"
+    },
+    {
+      "evidence_id": "EV085",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-07-08, 2026-07-14, 2026",
+      "text": "/ 2026-07-08 / 2026-07-14 / 还不准备发点利好，比如业绩预告来提振与稳定一下股价吗 / 感谢您的关注！公司已发布2026年半年度业绩预增公告，具体内容请见《兆易创新科技集团股份有限公司2026年半年度业绩预增公告》（公告编号：2026-054）。 / substantive /"
+    },
+    {
+      "evidence_id": "EV086",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-07-06, 2026-07-14, 半年",
+      "text": "/ 2026-07-06 / 2026-07-14 / 你好，请问目前半年报预期增加多少，能否提前披露下？ / 感谢您的关注！公司已发布2026年半年度业绩预增公告，具体内容请见《兆易创新科技集团股份有限公司2026年半年度业绩预增公告》（公告编号：2026-054）。 / substantive /"
+    },
+    {
+      "evidence_id": "EV087",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-07-06, 2026-07-14, 半年",
+      "text": "/ 2026-07-06 / 2026-07-14 / 董秘，您好！根据相关规定，上市公司半年度业绩预告需在7月15日前有条件披露。请问贵公司预计何时披露2026年半年度业绩预告？以便投资者更好了解公司经营情况。感谢您的耐心解答！ / 感谢您的关注！公司已发布2026年半年度业绩预增公告，具体内容请见《兆易创新科技集团股份有限公司2026年半年度业绩预增公告》（公告编号：2026-054）。 / substantive /"
+    },
+    {
+      "evidence_id": "EV088",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-06-26, 2026-07-14, 2026",
+      "text": "/ 2026-06-26 / 2026-07-14 / 十大流通股东是谁？ / 感谢您的关注！公司将在2026年半年报中披露截至报告期末前十大流通股东持股情况。 / substantive /"
+    },
+    {
+      "evidence_id": "EV089",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "profit_or_eps",
+      "period": "2026-06-25, 2026-07-14, 年度",
+      "text": "/ 2026-06-25 / 2026-07-14 / 请问公司持有长鑫储存 多少股份 / 感谢您的关注！目前公司于长鑫科技集团公司持股比例为1.8%（发行前）。公司对长鑫科技的相关投资计入“其他权益工具投资”科目核算，长鑫科技首次公开发行股票并上市所产生的公允价值变动对公司当期及以后年度的净利润无直接影响。 / substantive /"
+    },
+    {
+      "evidence_id": "EV090",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "model_estimate",
+      "status": "estimated",
+      "model_variable": "revenue",
+      "period": "2026-06-25, 2026-07-14, 季度",
+      "text": "/ 2026-06-25 / 2026-07-14 / 今天很多论坛出现关于公司二季度的利润预测，为避免二级市场剧烈波动，请贵公司尽快对此做出澄清，谢谢 / 感谢您的关注！公司已发布2026年半年度业绩预增公告，具体内容请见《兆易创新科技集团股份有限公司2026年半年度业绩预增公告》（公告编号：2026-054）。公司营收、利润等情况请以公司披露信息为准。 / non-committal /"
+    },
+    {
+      "evidence_id": "EV091",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "2026-06-19, 2026-07-19",
+      "text": "Window: 2026-06-19 to 2026-07-19 (30 days)"
+    },
+    {
+      "evidence_id": "EV092",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Primary query terms: 603986.SH, 603986SH, 603986, 兆易创新"
+    },
+    {
+      "evidence_id": "EV093",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Upstream sync summary: cached=30, synced=1, index_refreshed=1"
+    },
+    {
+      "evidence_id": "EV094",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "valuation",
+      "period": "unspecified",
+      "text": "Auto-sync refresh window: latest 30 day(s); older dates use the persistent local cache."
+    },
+    {
+      "evidence_id": "EV095",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Preprocess: ok: events=9778, clusters=76, opportunities=241, ocr_low_quality=298"
+    },
+    {
+      "evidence_id": "EV096",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Matched stream items: 10"
+    },
+    {
+      "evidence_id": "EV097",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Fusion target: 603986.SH"
+    },
+    {
+      "evidence_id": "EV098",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Direct terms: 603986.SH, 603986SH, 603986, 兆易创新"
+    },
+    {
+      "evidence_id": "EV099",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Raw matches: stream=10; preprocessed matches: events=10, opportunities=0"
+    }
+  ],
+  "conflicts": [
+    {
+      "topic": "Q2 2026 net margin implied by channel check vs reported Q1 margin",
+      "segment": "Memory",
+      "claim_a": "Reported Q1 2026 net margin is 34.89%",
+      "source_a": "earnings_model",
+      "claim_b": "Channel check estimates Q2 2026 net profit ~5.4bn on revenue ~7.3bn, implying net margin ~74%",
+      "source_b": "KPE08 (DW电子 channel check)",
+      "conflict_type": "numerical inconsistency",
+      "required_resolution": "Obtain official Q2 2026 results from filing; check if one-time items or model error"
+    }
+  ],
+  "kpe_impacts": [
+    {
+      "evidence_id": "KPE01",
+      "segment": "Memory",
+      "variable": "asp_or_price",
+      "direction": "up",
+      "horizon": "2026-2027",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "KeyBanc在亚洲供应链调研后大幅上调DRAM、NAND价格及美光盈利预期，进一步强化了市场对存储供给紧张延续至2027年的判断",
+      "verification_gate": "Cross-check with company filings and product price data",
+      "missing_inputs": [
+        "baseline price",
+        "revised price",
+        "revenue exposure"
+      ],
+      "known_kpe": {
+        "date": "2026-07-15T13:51",
+        "source": "stream_item:14005",
+        "source_type": "industry_weekly_data",
+        "credibility": "private_data_requires_methodology_check",
+        "decision_role": "KPI/forecast proxy",
+        "evidence": "【东吴传媒海外 张良卫团队】存... 【东吴传媒海外 张良卫团队】存储涨价预期再强化，重视板块回调机会！ 事件：7月14日，美股存储板块整体反弹，其中美光、闪迪涨幅约5%，海力士ADR收涨27%，资金重新回流存储芯片主线。本轮上涨主要催化为KeyBanc在亚洲供应链调研后大幅上调DRAM、NAND价格及美光盈利预期，进一步强化了市场对存储供给紧张延续至2027年的判断。SK海力士ADR的大涨则叠加了流通盘稀缺和杠杆ETF产品的因素。 观点重申：看懂供需，穿越周期。AI驱动存储需求高速增长，叠加供给侧寡头格局与资本开支纪律，本轮供需紧缺的持续性与价格涨幅远超市场对\"传统周期\"的定价。我们认为海外存储龙头正处于\"周期股→成长股\"的估值范式切换起点，据我们测算AI拉动下存储供不应求格局有望延续数年，存储价格有望持续维持高位。存储厂利润释放确定性强，坚定看好存储投资机会！ [礼物] 相关标的： 1）SK Hynix (SK海力士) 2）Micron (美光科技) 3）Samsung Electronics (三星电子) 4）Sandisk (闪迪) 5） 两倍做多海力士（7709.HK） 6） 两倍做多闪迪（SNXX） 7） 两倍做多三星电子（7747.HK） 8） Western Digital（西部数据） 9） Seagate（希捷科技） 10）兆易创新（603986.SH） 11）普冉股份（688766.SH） 风险提示：上游 DRAM 及 HBM 产能释放超预期风险；云厂商 AI 资本开支节奏放缓风险。",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "asp_or_price",
+        "required_outcome": "numeric assumption delta or explicit rejection"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until Cross-check with company filings and product price data",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE02",
+      "segment": "Memory",
+      "variable": "segment_volume",
+      "direction": "up",
+      "horizon": "2026H2",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "SK海力士据悉已正式启动面向英伟达下一代“Vera Rubin”AI平台的12层HBM4量产出货",
+      "verification_gate": "Check if 兆易创新 supplies related components or benefits indirectly",
+      "missing_inputs": [
+        "direct revenue linkage"
+      ],
+      "known_kpe": {
+        "date": "2026-07-15T07:31",
+        "source": "stream_item:14421",
+        "source_type": "channel_check",
+        "credibility": "high_private_channel_hard_to_verify",
+        "decision_role": "probability/verification proxy",
+        "evidence": "盘前热点事件 一、昨日热点 ... 盘前热点事件 一、昨日热点 股权变更：神州高铁、艾艾精工 中报业绩：江苏索普、世茂能源 创新药：哈药股份 石油：泰山石油 PCB：贤丰控股、广合科技 电容：江海股份、艾华集团 二、Tower半导体30亿扩产日本 以色列芯片制造商Tower Semiconductor宣布，将投资30亿美元在日本扩充芯片产能，其中10亿美元来自日本政府补助。此次投资重点布局硅光子技术和硅锗技术，前者能用光信号更快传输AI芯片间数据，后者可提升半导体器件的速度并降低能耗，直接受益于AI和数据中心市场的强劲增长。Tower半导体股价上涨11.24%。 设备：罗博特科 NPO：光迅科技、华工科技、长光华芯、中际旭创、新易盛 三、SK海力士股价上涨27% 创上市以来新高 SK海力士股价持续走高上涨27%，现报193美元/股，创上市以来新高，总市值报1.41万亿美元。SK海力士据悉已正式启动面向英伟达下一代“Vera Rubin”AI平台的12层HBM4量产出货，产品进入产能爬坡阶段。（美股） 存储芯片：太极实业、兆易创新、普冉股份、佰维存储 四、DeepSeek筹备IPO 据媒体报道，DeepSeek 已开始筹备首次公开募股（IPO），最快可能在今年年底或 2027 年初正式递交上市申请。同时，有消息称DeepSeek正在考虑开启新一轮融资。公司估值预计约为710亿美元。 DeepSeek：每日互动、杭钢股份、浙江东方、华金资本 五、7月14日全国用电负荷达15.51亿千瓦 再创新高 继7月10日全国用电负荷15.18亿千瓦首创新高后，7月14日全国用电负荷再创新高，达到15.51亿千瓦。国家发展改革委、国家能源局充分发挥全国统一电力市场体系作用，加强电力互济，7月10日跨省跨区跨网最大输送电力合计2.63亿千瓦，7月14日合计2.78亿千瓦，有力支撑全国用电保障。 电力：华电辽能、豫能控股、大唐发电、粤电力A、京能电力 六、行业要闻 1、中航光电：子公司翔通光科技订单非常饱满 部分已排到27年。（互动平台） 2、OpenAI计划推出家用智能音箱，作为其首款硬件产品。（国光电器、佳禾智能） 3、特斯拉Optimus量产进度更新，9月量产时点，年底达到周产2.5k。（拓普集团、三花智控） 4、长鑫科技：发行价格为8.66元/股 7月16日进行网上和网下申购。 5、特朗普：将用与海湾各国贸易投资协议取代霍尔木兹海峡货运费。",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "segment_volume",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until Check if 兆易创新 supplies related components or benefits indirectly",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE03",
+      "segment": "Memory",
+      "variable": "asp_or_price",
+      "direction": "up",
+      "horizon": "2026H2",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "%",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "TrendForce集邦咨询：预估2026年下半年SLC NAND价格将上涨120-170%",
+      "verification_gate": "Confirm 兆易创新's exposure to SLC NAND and price realization",
+      "missing_inputs": [
+        "SLC NAND revenue share",
+        "baseline price"
+      ],
+      "known_kpe": {
+        "date": "2026-07-13T16:23",
+        "source": "stream_item:13275",
+        "source_type": "channel_check",
+        "credibility": "high_private_channel_hard_to_verify",
+        "decision_role": "probability/verification proxy",
+        "evidence": "7月13日复盘笔记：中医药/创... annotation: 7月13日复盘笔记：中医药/创新药/芯片产业/电子特气/商业航天/AI应用等 一、重磅财经信息 ①韩国央行：全球半导体市场目前仍处于供不应求的状态由AI驱动的芯片超级周期预计还将持续一段时间 ②TrendForce集邦咨询：利基需求升温叠加MLC转单效应 预估2026年下半年SLC NAND价格将上涨120-170% 二、大盘表现 沪指跌2.06%，深证成指跌3.48%，创业板指跌3.10%，科创50跌3.42%。 沪深京三市成交额超过2.8万亿，较上一交易日缩量逾5000亿。 全市场涨停仅32家，跌停176家，超过4600家公司下跌。 风华高科、兆易创新、德明利、香农芯创等前期科技龙头集体跌停。 三、强势板块和个股分析 备注：只列举部分涨停板 中医药/创新药 《》：坚持中西医并重，坚持守正创新，遵循中医药规律和特点，完善中医药传承创新发展机制，加快推进中医药现代化，推动中医药走向世界。 涨停板：陇神戎发、万邦医药、九芝堂、哈药股份、联环药业、灵康药业、立方制药、天目药业 其他强势股：上海凯宝、广誉远、以岭药业、大唐药业 芯片产业 台积电计划于下半年再度上调3纳米制程报价，涨幅最高达15%，明年可能进一步上涨5%至10%；联电宣布2026年H2将展开选择性涨价，2027年将更全面与客户就价格调整进行商议。 涨停板：沃顿科技、睿能科技、肯特催化 其他强势股：沐曦股份、摩尔线程、争光股份、概伦电子 电子特气 商务部、海关总署决定对氦气（海关商品编号：2804290010）实施临时禁止出口管理。 涨停板：九丰能源、水发燃气 其他强势股：凯美特气、金宏气体、华特气体、杭氧股份 商业航天 长征十号乙运载火箭7月10日成功实现一子级可控回收。预计将在今年年底前完成一子级火箭复用飞行。央视财经：火箭回收背后的两本账，2030年千帆要完成超万星组网。 涨停板：贵绳股份、中信重工 其他强势股：三维通信、星网宇达、中国卫星 AI应用 2026年5月至6月新增120款生成式人工智能服务在国家网信办完成备案。截至6月30日，累计有988款生成式人工智能服务完成备案，598款生成式人工智能应用或功能完成登记。 涨停板：中国软件、梦百合 其他强势股：浪潮软件、绿盟科技、诚迈科技 其他涨停板 日科化学：拟收购亘元新材70.75%股权，标的公司主营锂电池电解液核心添加剂VC、FEC，与宁德、比亚迪等头部电池厂深度合作，2026年一季度扭亏为盈 宏桥控股：预计上半年归母净利润150亿元至160亿元，同比增长69.72%-81.04% 信通电子：聚焦公众号小牛研报纪要电力行业的工业物联网智能终端及系统解决方案提供商，在输电线路智能巡检系统等细分领域市占率领先 祖名股份：休闲食品 亚联机械：3板；2026年上半年净利1.57亿元...",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "market_share",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unverified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until Confirm 兆易创新's exposure to SLC NAND and price realization",
+      "grounding_status": "unverified_quote"
+    },
+    {
+      "evidence_id": "KPE04",
+      "segment": "Memory",
+      "variable": "profit_or_eps",
+      "direction": "up",
+      "horizon": "2026H1",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "CNY",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "reject",
+      "evidence_quote": "兆易创新（股票代码 300475，深交所上市）预告二季度净利润区间为21 亿；26 亿元人民币",
+      "verification_gate": "Stated stock code 300475 does not match target 603986; likely a data error",
+      "missing_inputs": [
+        "correct stock code"
+      ],
+      "known_kpe": {
+        "date": "2026-07-13T08:29",
+        "source": "stream_item:13507",
+        "source_type": "channel_check",
+        "credibility": "high_private_channel_hard_to_verify",
+        "decision_role": "probability/verification proxy",
+        "evidence": "📰GS 中国开盘 📈市场情绪板... 📰GS 中国开盘 📈市场情绪板块 📉上周五国内科技板块跌幅超过10%，周末落地的各类利好资讯有望助推板块在当日迎来反弹。 🗣️本土媒体披露，中际旭创在前一晚对接本土券商召开会议，专门澄清围绕其二季度业绩传播的负面传闻。 💰除此之外，兆易创新以及主营 MLCC 的风华高科发布预告，二者第二季度净利润表现均超出市场此前预期。 🏛️当日关注度较高的事件还有长鑫存储正式开启 IPO 初步线下询价，依照相关规则，它的 IPO 发行价格预计会在7 月 14 日敲定。 🔎整体预判国内 AI 板块当日出现反弹走势，但这一轮反弹后续能否延续，仍然有待后续行情进行验证。 📰新闻动态板块 📡TMT 细分领域资讯 💾1. 存储赛道：兆易创新（股票代码 300475，深交所上市）预告二季度净利润区间为21 亿；26 亿元人民币，环比波动区间为环比上涨 63% 至环比下滑 16%，业绩超出市场预期。 🔌2. MLCC 赛道：风华高科（股票代码 000636，深交所上市）披露二季度净利润环比增幅处在104%-138%这一区间。 💡3. CPO 赛道：本土媒体消息显示，中际旭创近期和本土券商开展会议，针对当下流传的各类负面传闻做出澄清说明。 📤4. 长鑫存储于当日启动 IPO 初步线下询价工作：按照既定规则，发行定价将在 7 月 14 日敲定，线上、线下统一申购安排在 7 月 16 日进行；线上配售的最终结果公示时间定为 7 月 17 日，线下配售结果则会延后至 7 月 20 日对外公布。 🏦5. 中国人寿计划新设一只一级基金，向半导体赛道投入合计50 亿元人民币的资金。 🚀航空航天资讯 🛰️我国顺利完成可复用火箭助推器的发射作业，并且成功完成助推器回收工作。 🌏外贸相关资讯 ⚖️随着美国、伊朗双方局势再度趋于紧张，国内出台临时政策，暂停氦气对外出口。",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "asp_or_price",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "rejected: no model, valuation, rating, or sizing impact",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE05",
+      "segment": "consolidated",
+      "variable": "demand_signal",
+      "direction": "up",
+      "horizon": "2026-2027",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "Token商业化加速，Anthropic ARR快速增长; 兆易创新出现在相关标的列表中",
+      "verification_gate": "Assess indirect revenue path through AI data center memory demand",
+      "missing_inputs": [
+        "quantified demand impact"
+      ],
+      "known_kpe": {
+        "date": "2026-07-13T08:15",
+        "source": "stream_item:13546",
+        "source_type": "channel_check",
+        "credibility": "identified_broker_private_text",
+        "decision_role": "probability/verification proxy",
+        "evidence": "【国金计算机&科技】Token... 【国金计算机&科技】Token商业化加速 前沿模型商业化加速，Anthropic ARR快速增长已到盈利拐点。 SemiAnalysis数据显示，Anthropic的ARR已由2025年底的90亿美元增至目前超过600亿美元，并有望于2026年三季度实现GAAP息税前利润转正。公司收入以用量计费的API业务为主，客户部署更多智能体工作流后，Token消耗和收入可在不增加客户数量的情况下持续扩张。较高的净收入留存率进一步表明，现有客户需求仍处于快速增长阶段。 OpenAI方面预计ARR达到400亿美元，近期Anthropic解除对Fable 5和Mythos 5的限制，OpenAI发布GPT-5.6分Sol/Terra和 Luna三个档位，推出Ultra性能设置，进一步支撑两家模型厂商ARR增长。Token经济性逐步兑现，算力资本开支具备较强回报基础。1）随着模型推理效率持续提升，Anthropic单位算力对应的收入快速增长，SeminiAnalysis预测今年晚些时候达到每GW 600亿美元ARR，综合毛利率和API业务毛利率明显改善。按照Epoch AI对1GW人工智能数据中心建设及运营成本的测算，前沿模型每GW算力所能支撑的年收入显著高于其年化总成本85亿美元，表明头部模型厂商扩张算力投入仍具备较好的商业回报，资本开支有望继续转化为收入和利润增长。2）Meta计划将计算基础设施容量由2026年的7GW提升至2027年的14GW，并与三星合作加快自研AI芯片量产及先进制程供应链布局，进一步验证头部科技公司仍在通过扩大算力规模、降低单位成本来提升资本开支回报。从Coding走向Work，AI Agent打开更广阔知识工作市场。市场或担忧当前大模型需求主要由程序员的Coding场景驱动，单一领域难以长期支撑高速增长。OpenAI发布的Codex研究显示，非开发者用户增速显著快于开发者，AI编程工具的使用范围正逐步扩展至产品管理、教育、设计、营销、数据分析及财务等通用知识工作场景。国内WorkBuddy、TRAE Work等办公智能体产品也在加快落地。Coding能力是智能体执行复杂电脑任务的重要基础，但更广泛的Work场景对应着更大的潜在用户和需求空间，当前大模型在知识工作人群中的渗透仍处于早期阶段。 投资建议相关标的 海外算力：东山精密、工业富联、胜宏科技、江海股份、中际旭创、中钨高新、蓝思科技、东阳光、火炬电子、三环集团、欧科亿、天孚通信、鼎泰高科、新易盛、领益智造、兆易创新、鹏鼎控股、唯科科技、天岳先进、大普微、源杰科技、麦格米特、景旺电子、英维克、京东方等；英特尔、SK海力士、Lumentum、闪迪、铠侠、美光。国内算力：寒武纪、海光信息、东阳光、中芯国际、华虹半导体、禾盛新材、摩尔线程、天数智芯、沐曦股份、...",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "unit_cost",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unverified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until Assess indirect revenue path through AI data center memory demand",
+      "grounding_status": "unverified_quote"
+    },
+    {
+      "evidence_id": "KPE06",
+      "segment": "consolidated",
+      "variable": "asp_or_price",
+      "direction": "unknown",
+      "horizon": "",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "商务部、海关总署对氦气实施临时禁止出口管理",
+      "verification_gate": "Determine if helium shortage affects memory manufacturing costs",
+      "missing_inputs": [
+        "cost pass-through"
+      ],
+      "known_kpe": {
+        "date": "2026-07-13T08:02",
+        "source": "stream_item:13593",
+        "source_type": "industry_weekly_data",
+        "credibility": "private_data_requires_methodology_check",
+        "decision_role": "KPI/forecast proxy",
+        "evidence": "盘前热点事件 一、昨日热点 ... annotation: 盘前热点事件 一、昨日热点 长十乙：贵绳股份、航天工程 创新药：哈药股份、立方制药 机器人：金帝股份、中鼎股份 中报业绩：亚联机械、高德红外 二、商务部、海关总署：对氦气实施临时禁止出口管理 商务部、海关总署决定对氦气（海关商品编号：2804290010）实施临时禁止出口管理，公告自公布之日起执行。 氦气：水发燃气、凯美特气、华特气体、金宏气体、广钢气体、蜀道装备 三、多元化突破 液化天然气制甲烷首次应用于长征十号乙 在海南成功实现网系回收的长征十号乙运载火箭，首次规模化应用了液化天然气制备的高纯甲烷新型航天燃料，标志着我国商业航天在燃料多元化供给领域取得关键性技术突破。 长征十号乙是我国专门面向商业航天市场研发的两级可重复使用运载火箭，芯级直径5米，核心部件实现100%国产化。作为我国首枚采用液氧甲烷推进剂的商用可回收运载火箭，本次发射所用甲烷燃料纯度达98.7%，全部实现国内自主供应。 甲烷：九丰能源 商业航天：贵绳股份、航天工程、神剑股份 北交所+商业航天：星图测控、创远信科、天力复合、优机股份 四、央视财经：AI热潮太费电 燃气轮机价格3年涨了300% 人工智能热潮持续升温，围绕算力展开的竞争也不断向产业链上游延伸。随着大型数据中心加速建设，燃气轮机这一传统设备也迎来了新的发展机遇。过去三年，燃气轮机的价格累计上涨了约300%。 几周前，微软刚刚向能源巨头GE Vernova采购了7台大型燃气轮机，来为其得州的数据中心供电。尽管单台燃气轮机的售价超过2.5亿美元，但这种复杂设备的市场需求依然远远超过供应。 燃气轮机：联德股份、动力新科、杰瑞股份、万泽股份 五、三星计划将龙仁晶圆厂投产提前至2029年 1、媒体报道，华为正联合深圳昇维旭，共同筹建一座12英寸DRAM内存晶圆厂。 2、三星电子计划将龙仁首座芯片工厂的投产时间提前至2029年。 3、群智咨询报告显示，先进封装需求持续高增长，供应缺口将延续至2027年，供需拐点或在2027年下半年出现。2025年全球先进封装产能供需比约为-23%，2027年下半年产能将达到平衡并进入温和增长周期。 半导体设备：赛腾股份、北方华创、华海清科、中微公司 封装：华天科技、长电科技、甬矽电子、盛合晶微 六、《》首日票房2.87亿元 打破至少9项影史纪录 暑期档爆款来袭！周星驰新作《》点燃暑期院线市场。灯塔专业版显示，该影片7月11日正式公映后不到3小时票房就突破亿元，全天的票房累计达2.87亿元，且一举刷新暑期档首映场次、首日上座率等至少9项国内影史纪录。 截至7月12日22时44分，影片《》票房突破5亿，预测总票房超20亿元。 功夫女足：儒意电影、幸福蓝海、金逸影视、横店电影 七、国务院批复《》 批复指出，要坚持中西医并重，坚持守正创新，遵循中医药...",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "asp_or_price",
+        "required_outcome": "numeric assumption delta or explicit rejection"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unverified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until Determine if helium shortage affects memory manufacturing costs",
+      "grounding_status": "unverified_quote"
+    },
+    {
+      "evidence_id": "KPE07",
+      "segment": "consolidated",
+      "variable": "unmapped",
+      "direction": "unknown",
+      "horizon": "",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "持续推荐【国产算力五大天王】... 兆易创新",
+      "verification_gate": "No specific fundamental catalyst identified",
+      "missing_inputs": [
+        "concrete driver"
+      ],
+      "known_kpe": {
+        "date": "2026-07-19T10:29",
+        "source": "stream_item:15445",
+        "source_type": "company_research_feedback",
+        "credibility": "company_research_private_hard_to_verify",
+        "decision_role": "probability/verification proxy",
+        "evidence": "【DW电子】国产算力周思考——... 【DW电子】国产算力周思考——WAIC见闻 本周五开始的为期四天的WAIC大会上AI大厂云集，周五场已是人满为患，周末更是有过之而无不及。AI热潮并未受到交易面的影响。 我们重点走访了超节点相关的展台，包括CSP厂商（阿里、百度等）、OEM厂商（中兴、浪潮等）、各家GPU厂商。＃超节点成为本场WAIC大会各家展台C位最亮眼的坐标。 其中最显眼的当数中兴展台前展出的“超节点服务器”，上方明确列出＃“交换：中兴、博通、盛科、云合”。部分GPU厂商也有透露出Switch方面推进国产化的动作。我们依然强调＃盛科是Switch环节卡位最好、最纯粹的国产替代标的。 我们和OEM厂商访谈下来，普遍还是反馈当前超节点机柜的“标准化”还是尚未解决的问题，超节点中的各类硬件仍然是耦合度非常高的。 周五美股AI企稳反弹是一个很好的信号📶，我们依然看好国产AI算力接下来全面景气！看好反弹窗口进攻方向——国产算力[拳头] 🧧持续推荐【国产算力五大天王】寒武纪 海光信息 ｜ 芯原股份 ｜ 盛科通信 ｜ 兆易创新，建议关注晶圆制造+先进封装+测试等诸多产业环节。 恳请今年大力支持东吴电子！祝周末愉快！",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "unmapped",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unverified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until No specific fundamental catalyst identified",
+      "grounding_status": "unverified_quote"
+    },
+    {
+      "evidence_id": "KPE08",
+      "segment": "Memory",
+      "variable": "profit_or_eps",
+      "direction": "up",
+      "horizon": "2026Q2",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "CNY",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "兆易创新Q2营收约73亿，归母净利润约54亿，扣非归母约35亿",
+      "verification_gate": "Wait for official Q2 report; current numbers appear implausibly high vs Q1",
+      "missing_inputs": [
+        "official Q2 results",
+        "revenue and profit breakdown"
+      ],
+      "known_kpe": {
+        "date": "2026-07-15T08:09",
+        "source": "stream_item:14402",
+        "source_type": "channel_check",
+        "credibility": "high_private_channel_hard_to_verify",
+        "decision_role": "probability/verification proxy",
+        "evidence": "【DW电子】每日观点：Q2预告... 【DW电子】每日观点：Q2预告小结 🔥PCB：AI驱动量价齐升，PCB产业链中报业绩全面高增 📌PCB板块中，沪电、深南、生益电子净利润同增约73%、62%、110%，Q2环增约35%、59%、49%；CCL板块生益科技、金安、南亚同增约125%、1000%、427%，Q2环增约76%、184%、107%。上游电子布宏和预告同增322%，产业链景气度传导顺畅。 📍展望下半年，PCB1.6T模块、Rubin、ASIC起量，新增产能陆续释放，业绩有望加速成长，建议特别关注PCB载板化方向上的深南电路。CCL板块建议聚焦关注M8/M9材料放量，同时关注上游电子布、铜箔等原材料环节在高端产品占比提升及加工费上涨背景下的盈利弹性。 🔥国产算力：Q2目前市场预期仍存在一定方差，但普遍环比Q1有一定改善。 📍国产算力板块没有发预告，但市场交易的点也不是在Q2业绩，我们看好国产链条26H2随着晶圆代工、封测等环节逐步拉通，有望逐季释放业绩，尤其是纯国产代工侧的业绩。我们看好26H2国产算力业绩主升浪。近期密集参加展会，产业普遍乐观，而且产业链的沟通交流以及上下游的耦合程度很高，下半年尤其要重视H链公司！ 🔥存储：利基存储涨价开始显现在业绩端，是“此前已涨价，涨价完整放映至Q2业绩”的 📌兆易创新Q2营收约73亿，归母净利润约54亿，扣非归母约35亿。扣非归母净利率达47%。江波龙Q2归母净利润53.38亿元至71.38亿元，环比增长38.22%至84.83%。德明利Q2利润环比略有下降。利基存储价格持续上涨，紧缺程度与涨价幅度MLC＞SLC＞利基DDR＞nor 📍海外原厂持续收缩利基存储产能，供给紧缺态势有望持续至27年。涨价&供给紧缺态势有望持续至27年底。Q2业绩披露后，利基存储明年利润逐渐清晰，考虑量不减/价增。至少可以按Q4利润×4线性外推 🔥模拟：工业/通信需求持续复苏，AI需求贡献增量；8英寸成熟产能满产。 📍海外TI已完成4轮涨价，覆盖面从中小客户扩大至所有客户，英飞凌、MPS大举跟进。模拟公司虽未披露预告，但Q2国内成熟代工端也同步涨价，景气程度仅次于存储。模拟料号中，我们核心看好Drmos大单品后续涨价趋势。Drmos龙头认准杰华特！目标1500e！ 🔥功率：工业需求好转叠加EV去库尾声，板块Q2业绩呈现边际改善 📌士兰微Q2归母净利润约3.10亿元，环比增长48.6%；斯达半导Q2营收约10.63亿元，环比增长23% 📍成本上涨正逐步向产品价格传导，随着调价落地，叠加800VDC方案加速渗透，看好相关公司后续业绩弹性。 🔥端侧：端侧板块二季度整体业绩表现亮眼，存储涨价对AIoT业务影响可控 📌瑞芯微26H1营收28.70-29.10亿元，yoy+40.28%-42.24%，归母净利润8.50-9.10亿元，yo...",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "asp_or_price",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until Wait for official Q2 report; current numbers appear implausibly high vs Q1",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE09",
+      "segment": "Memory",
+      "variable": "segment_volume",
+      "direction": "up",
+      "horizon": "2026H2",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "存储：涨价周期叠加AI终端与服务器需求，利润弹性最容易被预告验证。重点看...兆易创新",
+      "verification_gate": "Cross-check with industry pricing data and company guidance",
+      "missing_inputs": [
+        "specific revenue impact"
+      ],
+      "known_kpe": {
+        "date": "2026-07-14T14:11",
+        "source": "stream_item:13650",
+        "source_type": "channel_check",
+        "credibility": "high_private_channel_hard_to_verify",
+        "decision_role": "probability/verification proxy",
+        "evidence": "‼️【中报预告+AI硬件景气：... ‼️【中报预告+AI硬件景气：谁是下一个江波龙？】——山西证券 江波龙打出高度后，市场要问的不再是能不能追，而是扩散方向在哪。我们的判断——AI产业真正缺的不只是GPU，而是一整套硬件系统：存储决定吞吐、光模块决定通信、高端PCB决定互联、先进封装决定集成、上游材料决定成本边界。订单、价格、稼动率同步改善的环节，中报预告就是新催化！ 1）存储：涨价周期叠加AI终端与服务器需求，利润弹性最容易被预告验证。重点看德明利、佰维存储、香农芯创、兆易创新、北京君正、普冉股份； 2）先进封装/Chiplet：华为韬定律V2强化后摩尔时代系统级优化，A股映射最清晰的是晶圆级封装、TSV、多层堆叠、封测与封装材料。重点看长电科技、通富微电、华天科技、晶方科技、甬矽电子、华海诚科、深科技。 3）光模块：集群越大，瓶颈越从单卡性能转向网络通信，800G/1.6T/CPO/硅光是业绩兑现方向。重点看新易盛、中际旭创、天孚通信、光迅科技、华工科技、太辰光、剑桥科技、东山精密、联特科技。 4）高端PCB/AI服务器材料：弹性不及存储，确定性更强，容易走趋势。重点看沪电股份、胜宏科技、深南电路、生益科技、生益电子、景旺电子。 5）液冷：Rubin平台单GPU功耗2300W、单机柜200kW、强制全液冷——渗透率30%→60%的核心催化剂，平台出货节奏直接决定26H2液冷链订单可见度。重点看英维克、高澜股份、申菱环境、中石科技、思泉新材。 ☎️ 下周不要被低位轮动带偏，真正的主线只有一条：中报预告+AI硬件景气度！",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "segment_volume",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unverified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until Cross-check with industry pricing data and company guidance",
+      "grounding_status": "unverified_quote"
+    }
+  ],
+  "known_kpe_ledger": {
+    "KPE01": {
+      "date": "2026-07-15T13:51",
+      "source": "stream_item:14005",
+      "source_type": "industry_weekly_data",
+      "credibility": "private_data_requires_methodology_check",
+      "decision_role": "KPI/forecast proxy",
+      "evidence": "【东吴传媒海外 张良卫团队】存... 【东吴传媒海外 张良卫团队】存储涨价预期再强化，重视板块回调机会！ 事件：7月14日，美股存储板块整体反弹，其中美光、闪迪涨幅约5%，海力士ADR收涨27%，资金重新回流存储芯片主线。本轮上涨主要催化为KeyBanc在亚洲供应链调研后大幅上调DRAM、NAND价格及美光盈利预期，进一步强化了市场对存储供给紧张延续至2027年的判断。SK海力士ADR的大涨则叠加了流通盘稀缺和杠杆ETF产品的因素。 观点重申：看懂供需，穿越周期。AI驱动存储需求高速增长，叠加供给侧寡头格局与资本开支纪律，本轮供需紧缺的持续性与价格涨幅远超市场对\"传统周期\"的定价。我们认为海外存储龙头正处于\"周期股→成长股\"的估值范式切换起点，据我们测算AI拉动下存储供不应求格局有望延续数年，存储价格有望持续维持高位。存储厂利润释放确定性强，坚定看好存储投资机会！ [礼物] 相关标的： 1）SK Hynix (SK海力士) 2）Micron (美光科技) 3）Samsung Electronics (三星电子) 4）Sandisk (闪迪) 5） 两倍做多海力士（7709.HK） 6） 两倍做多闪迪（SNXX） 7） 两倍做多三星电子（7747.HK） 8） Western Digital（西部数据） 9） Seagate（希捷科技） 10）兆易创新（603986.SH） 11）普冉股份（688766.SH） 风险提示：上游 DRAM 及 HBM 产能释放超预期风险；云厂商 AI 资本开支节奏放缓风险。",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "asp_or_price",
+      "required_outcome": "numeric assumption delta or explicit rejection"
+    },
+    "KPE02": {
+      "date": "2026-07-15T07:31",
+      "source": "stream_item:14421",
+      "source_type": "channel_check",
+      "credibility": "high_private_channel_hard_to_verify",
+      "decision_role": "probability/verification proxy",
+      "evidence": "盘前热点事件 一、昨日热点 ... 盘前热点事件 一、昨日热点 股权变更：神州高铁、艾艾精工 中报业绩：江苏索普、世茂能源 创新药：哈药股份 石油：泰山石油 PCB：贤丰控股、广合科技 电容：江海股份、艾华集团 二、Tower半导体30亿扩产日本 以色列芯片制造商Tower Semiconductor宣布，将投资30亿美元在日本扩充芯片产能，其中10亿美元来自日本政府补助。此次投资重点布局硅光子技术和硅锗技术，前者能用光信号更快传输AI芯片间数据，后者可提升半导体器件的速度并降低能耗，直接受益于AI和数据中心市场的强劲增长。Tower半导体股价上涨11.24%。 设备：罗博特科 NPO：光迅科技、华工科技、长光华芯、中际旭创、新易盛 三、SK海力士股价上涨27% 创上市以来新高 SK海力士股价持续走高上涨27%，现报193美元/股，创上市以来新高，总市值报1.41万亿美元。SK海力士据悉已正式启动面向英伟达下一代“Vera Rubin”AI平台的12层HBM4量产出货，产品进入产能爬坡阶段。（美股） 存储芯片：太极实业、兆易创新、普冉股份、佰维存储 四、DeepSeek筹备IPO 据媒体报道，DeepSeek 已开始筹备首次公开募股（IPO），最快可能在今年年底或 2027 年初正式递交上市申请。同时，有消息称DeepSeek正在考虑开启新一轮融资。公司估值预计约为710亿美元。 DeepSeek：每日互动、杭钢股份、浙江东方、华金资本 五、7月14日全国用电负荷达15.51亿千瓦 再创新高 继7月10日全国用电负荷15.18亿千瓦首创新高后，7月14日全国用电负荷再创新高，达到15.51亿千瓦。国家发展改革委、国家能源局充分发挥全国统一电力市场体系作用，加强电力互济，7月10日跨省跨区跨网最大输送电力合计2.63亿千瓦，7月14日合计2.78亿千瓦，有力支撑全国用电保障。 电力：华电辽能、豫能控股、大唐发电、粤电力A、京能电力 六、行业要闻 1、中航光电：子公司翔通光科技订单非常饱满 部分已排到27年。（互动平台） 2、OpenAI计划推出家用智能音箱，作为其首款硬件产品。（国光电器、佳禾智能） 3、特斯拉Optimus量产进度更新，9月量产时点，年底达到周产2.5k。（拓普集团、三花智控） 4、长鑫科技：发行价格为8.66元/股 7月16日进行网上和网下申购。 5、特朗普：将用与海湾各国贸易投资协议取代霍尔木兹海峡货运费。",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "segment_volume",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE03": {
+      "date": "2026-07-13T16:23",
+      "source": "stream_item:13275",
+      "source_type": "channel_check",
+      "credibility": "high_private_channel_hard_to_verify",
+      "decision_role": "probability/verification proxy",
+      "evidence": "7月13日复盘笔记：中医药/创... annotation: 7月13日复盘笔记：中医药/创新药/芯片产业/电子特气/商业航天/AI应用等 一、重磅财经信息 ①韩国央行：全球半导体市场目前仍处于供不应求的状态由AI驱动的芯片超级周期预计还将持续一段时间 ②TrendForce集邦咨询：利基需求升温叠加MLC转单效应 预估2026年下半年SLC NAND价格将上涨120-170% 二、大盘表现 沪指跌2.06%，深证成指跌3.48%，创业板指跌3.10%，科创50跌3.42%。 沪深京三市成交额超过2.8万亿，较上一交易日缩量逾5000亿。 全市场涨停仅32家，跌停176家，超过4600家公司下跌。 风华高科、兆易创新、德明利、香农芯创等前期科技龙头集体跌停。 三、强势板块和个股分析 备注：只列举部分涨停板 中医药/创新药 《》：坚持中西医并重，坚持守正创新，遵循中医药规律和特点，完善中医药传承创新发展机制，加快推进中医药现代化，推动中医药走向世界。 涨停板：陇神戎发、万邦医药、九芝堂、哈药股份、联环药业、灵康药业、立方制药、天目药业 其他强势股：上海凯宝、广誉远、以岭药业、大唐药业 芯片产业 台积电计划于下半年再度上调3纳米制程报价，涨幅最高达15%，明年可能进一步上涨5%至10%；联电宣布2026年H2将展开选择性涨价，2027年将更全面与客户就价格调整进行商议。 涨停板：沃顿科技、睿能科技、肯特催化 其他强势股：沐曦股份、摩尔线程、争光股份、概伦电子 电子特气 商务部、海关总署决定对氦气（海关商品编号：2804290010）实施临时禁止出口管理。 涨停板：九丰能源、水发燃气 其他强势股：凯美特气、金宏气体、华特气体、杭氧股份 商业航天 长征十号乙运载火箭7月10日成功实现一子级可控回收。预计将在今年年底前完成一子级火箭复用飞行。央视财经：火箭回收背后的两本账，2030年千帆要完成超万星组网。 涨停板：贵绳股份、中信重工 其他强势股：三维通信、星网宇达、中国卫星 AI应用 2026年5月至6月新增120款生成式人工智能服务在国家网信办完成备案。截至6月30日，累计有988款生成式人工智能服务完成备案，598款生成式人工智能应用或功能完成登记。 涨停板：中国软件、梦百合 其他强势股：浪潮软件、绿盟科技、诚迈科技 其他涨停板 日科化学：拟收购亘元新材70.75%股权，标的公司主营锂电池电解液核心添加剂VC、FEC，与宁德、比亚迪等头部电池厂深度合作，2026年一季度扭亏为盈 宏桥控股：预计上半年归母净利润150亿元至160亿元，同比增长69.72%-81.04% 信通电子：聚焦公众号小牛研报纪要电力行业的工业物联网智能终端及系统解决方案提供商，在输电线路智能巡检系统等细分领域市占率领先 祖名股份：休闲食品 亚联机械：3板；2026年上半年净利1.57亿元...",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "market_share",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE04": {
+      "date": "2026-07-13T08:29",
+      "source": "stream_item:13507",
+      "source_type": "channel_check",
+      "credibility": "high_private_channel_hard_to_verify",
+      "decision_role": "probability/verification proxy",
+      "evidence": "📰GS 中国开盘 📈市场情绪板... 📰GS 中国开盘 📈市场情绪板块 📉上周五国内科技板块跌幅超过10%，周末落地的各类利好资讯有望助推板块在当日迎来反弹。 🗣️本土媒体披露，中际旭创在前一晚对接本土券商召开会议，专门澄清围绕其二季度业绩传播的负面传闻。 💰除此之外，兆易创新以及主营 MLCC 的风华高科发布预告，二者第二季度净利润表现均超出市场此前预期。 🏛️当日关注度较高的事件还有长鑫存储正式开启 IPO 初步线下询价，依照相关规则，它的 IPO 发行价格预计会在7 月 14 日敲定。 🔎整体预判国内 AI 板块当日出现反弹走势，但这一轮反弹后续能否延续，仍然有待后续行情进行验证。 📰新闻动态板块 📡TMT 细分领域资讯 💾1. 存储赛道：兆易创新（股票代码 300475，深交所上市）预告二季度净利润区间为21 亿；26 亿元人民币，环比波动区间为环比上涨 63% 至环比下滑 16%，业绩超出市场预期。 🔌2. MLCC 赛道：风华高科（股票代码 000636，深交所上市）披露二季度净利润环比增幅处在104%-138%这一区间。 💡3. CPO 赛道：本土媒体消息显示，中际旭创近期和本土券商开展会议，针对当下流传的各类负面传闻做出澄清说明。 📤4. 长鑫存储于当日启动 IPO 初步线下询价工作：按照既定规则，发行定价将在 7 月 14 日敲定，线上、线下统一申购安排在 7 月 16 日进行；线上配售的最终结果公示时间定为 7 月 17 日，线下配售结果则会延后至 7 月 20 日对外公布。 🏦5. 中国人寿计划新设一只一级基金，向半导体赛道投入合计50 亿元人民币的资金。 🚀航空航天资讯 🛰️我国顺利完成可复用火箭助推器的发射作业，并且成功完成助推器回收工作。 🌏外贸相关资讯 ⚖️随着美国、伊朗双方局势再度趋于紧张，国内出台临时政策，暂停氦气对外出口。",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "asp_or_price",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE05": {
+      "date": "2026-07-13T08:15",
+      "source": "stream_item:13546",
+      "source_type": "channel_check",
+      "credibility": "identified_broker_private_text",
+      "decision_role": "probability/verification proxy",
+      "evidence": "【国金计算机&科技】Token... 【国金计算机&科技】Token商业化加速 前沿模型商业化加速，Anthropic ARR快速增长已到盈利拐点。 SemiAnalysis数据显示，Anthropic的ARR已由2025年底的90亿美元增至目前超过600亿美元，并有望于2026年三季度实现GAAP息税前利润转正。公司收入以用量计费的API业务为主，客户部署更多智能体工作流后，Token消耗和收入可在不增加客户数量的情况下持续扩张。较高的净收入留存率进一步表明，现有客户需求仍处于快速增长阶段。 OpenAI方面预计ARR达到400亿美元，近期Anthropic解除对Fable 5和Mythos 5的限制，OpenAI发布GPT-5.6分Sol/Terra和 Luna三个档位，推出Ultra性能设置，进一步支撑两家模型厂商ARR增长。Token经济性逐步兑现，算力资本开支具备较强回报基础。1）随着模型推理效率持续提升，Anthropic单位算力对应的收入快速增长，SeminiAnalysis预测今年晚些时候达到每GW 600亿美元ARR，综合毛利率和API业务毛利率明显改善。按照Epoch AI对1GW人工智能数据中心建设及运营成本的测算，前沿模型每GW算力所能支撑的年收入显著高于其年化总成本85亿美元，表明头部模型厂商扩张算力投入仍具备较好的商业回报，资本开支有望继续转化为收入和利润增长。2）Meta计划将计算基础设施容量由2026年的7GW提升至2027年的14GW，并与三星合作加快自研AI芯片量产及先进制程供应链布局，进一步验证头部科技公司仍在通过扩大算力规模、降低单位成本来提升资本开支回报。从Coding走向Work，AI Agent打开更广阔知识工作市场。市场或担忧当前大模型需求主要由程序员的Coding场景驱动，单一领域难以长期支撑高速增长。OpenAI发布的Codex研究显示，非开发者用户增速显著快于开发者，AI编程工具的使用范围正逐步扩展至产品管理、教育、设计、营销、数据分析及财务等通用知识工作场景。国内WorkBuddy、TRAE Work等办公智能体产品也在加快落地。Coding能力是智能体执行复杂电脑任务的重要基础，但更广泛的Work场景对应着更大的潜在用户和需求空间，当前大模型在知识工作人群中的渗透仍处于早期阶段。 投资建议相关标的 海外算力：东山精密、工业富联、胜宏科技、江海股份、中际旭创、中钨高新、蓝思科技、东阳光、火炬电子、三环集团、欧科亿、天孚通信、鼎泰高科、新易盛、领益智造、兆易创新、鹏鼎控股、唯科科技、天岳先进、大普微、源杰科技、麦格米特、景旺电子、英维克、京东方等；英特尔、SK海力士、Lumentum、闪迪、铠侠、美光。国内算力：寒武纪、海光信息、东阳光、中芯国际、华虹半导体、禾盛新材、摩尔线程、天数智芯、沐曦股份、...",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "unit_cost",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE06": {
+      "date": "2026-07-13T08:02",
+      "source": "stream_item:13593",
+      "source_type": "industry_weekly_data",
+      "credibility": "private_data_requires_methodology_check",
+      "decision_role": "KPI/forecast proxy",
+      "evidence": "盘前热点事件 一、昨日热点 ... annotation: 盘前热点事件 一、昨日热点 长十乙：贵绳股份、航天工程 创新药：哈药股份、立方制药 机器人：金帝股份、中鼎股份 中报业绩：亚联机械、高德红外 二、商务部、海关总署：对氦气实施临时禁止出口管理 商务部、海关总署决定对氦气（海关商品编号：2804290010）实施临时禁止出口管理，公告自公布之日起执行。 氦气：水发燃气、凯美特气、华特气体、金宏气体、广钢气体、蜀道装备 三、多元化突破 液化天然气制甲烷首次应用于长征十号乙 在海南成功实现网系回收的长征十号乙运载火箭，首次规模化应用了液化天然气制备的高纯甲烷新型航天燃料，标志着我国商业航天在燃料多元化供给领域取得关键性技术突破。 长征十号乙是我国专门面向商业航天市场研发的两级可重复使用运载火箭，芯级直径5米，核心部件实现100%国产化。作为我国首枚采用液氧甲烷推进剂的商用可回收运载火箭，本次发射所用甲烷燃料纯度达98.7%，全部实现国内自主供应。 甲烷：九丰能源 商业航天：贵绳股份、航天工程、神剑股份 北交所+商业航天：星图测控、创远信科、天力复合、优机股份 四、央视财经：AI热潮太费电 燃气轮机价格3年涨了300% 人工智能热潮持续升温，围绕算力展开的竞争也不断向产业链上游延伸。随着大型数据中心加速建设，燃气轮机这一传统设备也迎来了新的发展机遇。过去三年，燃气轮机的价格累计上涨了约300%。 几周前，微软刚刚向能源巨头GE Vernova采购了7台大型燃气轮机，来为其得州的数据中心供电。尽管单台燃气轮机的售价超过2.5亿美元，但这种复杂设备的市场需求依然远远超过供应。 燃气轮机：联德股份、动力新科、杰瑞股份、万泽股份 五、三星计划将龙仁晶圆厂投产提前至2029年 1、媒体报道，华为正联合深圳昇维旭，共同筹建一座12英寸DRAM内存晶圆厂。 2、三星电子计划将龙仁首座芯片工厂的投产时间提前至2029年。 3、群智咨询报告显示，先进封装需求持续高增长，供应缺口将延续至2027年，供需拐点或在2027年下半年出现。2025年全球先进封装产能供需比约为-23%，2027年下半年产能将达到平衡并进入温和增长周期。 半导体设备：赛腾股份、北方华创、华海清科、中微公司 封装：华天科技、长电科技、甬矽电子、盛合晶微 六、《》首日票房2.87亿元 打破至少9项影史纪录 暑期档爆款来袭！周星驰新作《》点燃暑期院线市场。灯塔专业版显示，该影片7月11日正式公映后不到3小时票房就突破亿元，全天的票房累计达2.87亿元，且一举刷新暑期档首映场次、首日上座率等至少9项国内影史纪录。 截至7月12日22时44分，影片《》票房突破5亿，预测总票房超20亿元。 功夫女足：儒意电影、幸福蓝海、金逸影视、横店电影 七、国务院批复《》 批复指出，要坚持中西医并重，坚持守正创新，遵循中医药...",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "asp_or_price",
+      "required_outcome": "numeric assumption delta or explicit rejection"
+    },
+    "KPE07": {
+      "date": "2026-07-19T10:29",
+      "source": "stream_item:15445",
+      "source_type": "company_research_feedback",
+      "credibility": "company_research_private_hard_to_verify",
+      "decision_role": "probability/verification proxy",
+      "evidence": "【DW电子】国产算力周思考——... 【DW电子】国产算力周思考——WAIC见闻 本周五开始的为期四天的WAIC大会上AI大厂云集，周五场已是人满为患，周末更是有过之而无不及。AI热潮并未受到交易面的影响。 我们重点走访了超节点相关的展台，包括CSP厂商（阿里、百度等）、OEM厂商（中兴、浪潮等）、各家GPU厂商。＃超节点成为本场WAIC大会各家展台C位最亮眼的坐标。 其中最显眼的当数中兴展台前展出的“超节点服务器”，上方明确列出＃“交换：中兴、博通、盛科、云合”。部分GPU厂商也有透露出Switch方面推进国产化的动作。我们依然强调＃盛科是Switch环节卡位最好、最纯粹的国产替代标的。 我们和OEM厂商访谈下来，普遍还是反馈当前超节点机柜的“标准化”还是尚未解决的问题，超节点中的各类硬件仍然是耦合度非常高的。 周五美股AI企稳反弹是一个很好的信号📶，我们依然看好国产AI算力接下来全面景气！看好反弹窗口进攻方向——国产算力[拳头] 🧧持续推荐【国产算力五大天王】寒武纪 海光信息 ｜ 芯原股份 ｜ 盛科通信 ｜ 兆易创新，建议关注晶圆制造+先进封装+测试等诸多产业环节。 恳请今年大力支持东吴电子！祝周末愉快！",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "unmapped",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE08": {
+      "date": "2026-07-15T08:09",
+      "source": "stream_item:14402",
+      "source_type": "channel_check",
+      "credibility": "high_private_channel_hard_to_verify",
+      "decision_role": "probability/verification proxy",
+      "evidence": "【DW电子】每日观点：Q2预告... 【DW电子】每日观点：Q2预告小结 🔥PCB：AI驱动量价齐升，PCB产业链中报业绩全面高增 📌PCB板块中，沪电、深南、生益电子净利润同增约73%、62%、110%，Q2环增约35%、59%、49%；CCL板块生益科技、金安、南亚同增约125%、1000%、427%，Q2环增约76%、184%、107%。上游电子布宏和预告同增322%，产业链景气度传导顺畅。 📍展望下半年，PCB1.6T模块、Rubin、ASIC起量，新增产能陆续释放，业绩有望加速成长，建议特别关注PCB载板化方向上的深南电路。CCL板块建议聚焦关注M8/M9材料放量，同时关注上游电子布、铜箔等原材料环节在高端产品占比提升及加工费上涨背景下的盈利弹性。 🔥国产算力：Q2目前市场预期仍存在一定方差，但普遍环比Q1有一定改善。 📍国产算力板块没有发预告，但市场交易的点也不是在Q2业绩，我们看好国产链条26H2随着晶圆代工、封测等环节逐步拉通，有望逐季释放业绩，尤其是纯国产代工侧的业绩。我们看好26H2国产算力业绩主升浪。近期密集参加展会，产业普遍乐观，而且产业链的沟通交流以及上下游的耦合程度很高，下半年尤其要重视H链公司！ 🔥存储：利基存储涨价开始显现在业绩端，是“此前已涨价，涨价完整放映至Q2业绩”的 📌兆易创新Q2营收约73亿，归母净利润约54亿，扣非归母约35亿。扣非归母净利率达47%。江波龙Q2归母净利润53.38亿元至71.38亿元，环比增长38.22%至84.83%。德明利Q2利润环比略有下降。利基存储价格持续上涨，紧缺程度与涨价幅度MLC＞SLC＞利基DDR＞nor 📍海外原厂持续收缩利基存储产能，供给紧缺态势有望持续至27年。涨价&供给紧缺态势有望持续至27年底。Q2业绩披露后，利基存储明年利润逐渐清晰，考虑量不减/价增。至少可以按Q4利润×4线性外推 🔥模拟：工业/通信需求持续复苏，AI需求贡献增量；8英寸成熟产能满产。 📍海外TI已完成4轮涨价，覆盖面从中小客户扩大至所有客户，英飞凌、MPS大举跟进。模拟公司虽未披露预告，但Q2国内成熟代工端也同步涨价，景气程度仅次于存储。模拟料号中，我们核心看好Drmos大单品后续涨价趋势。Drmos龙头认准杰华特！目标1500e！ 🔥功率：工业需求好转叠加EV去库尾声，板块Q2业绩呈现边际改善 📌士兰微Q2归母净利润约3.10亿元，环比增长48.6%；斯达半导Q2营收约10.63亿元，环比增长23% 📍成本上涨正逐步向产品价格传导，随着调价落地，叠加800VDC方案加速渗透，看好相关公司后续业绩弹性。 🔥端侧：端侧板块二季度整体业绩表现亮眼，存储涨价对AIoT业务影响可控 📌瑞芯微26H1营收28.70-29.10亿元，yoy+40.28%-42.24%，归母净利润8.50-9.10亿元，yo...",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "asp_or_price",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE09": {
+      "date": "2026-07-14T14:11",
+      "source": "stream_item:13650",
+      "source_type": "channel_check",
+      "credibility": "high_private_channel_hard_to_verify",
+      "decision_role": "probability/verification proxy",
+      "evidence": "‼️【中报预告+AI硬件景气：... ‼️【中报预告+AI硬件景气：谁是下一个江波龙？】——山西证券 江波龙打出高度后，市场要问的不再是能不能追，而是扩散方向在哪。我们的判断——AI产业真正缺的不只是GPU，而是一整套硬件系统：存储决定吞吐、光模块决定通信、高端PCB决定互联、先进封装决定集成、上游材料决定成本边界。订单、价格、稼动率同步改善的环节，中报预告就是新催化！ 1）存储：涨价周期叠加AI终端与服务器需求，利润弹性最容易被预告验证。重点看德明利、佰维存储、香农芯创、兆易创新、北京君正、普冉股份； 2）先进封装/Chiplet：华为韬定律V2强化后摩尔时代系统级优化，A股映射最清晰的是晶圆级封装、TSV、多层堆叠、封测与封装材料。重点看长电科技、通富微电、华天科技、晶方科技、甬矽电子、华海诚科、深科技。 3）光模块：集群越大，瓶颈越从单卡性能转向网络通信，800G/1.6T/CPO/硅光是业绩兑现方向。重点看新易盛、中际旭创、天孚通信、光迅科技、华工科技、太辰光、剑桥科技、东山精密、联特科技。 4）高端PCB/AI服务器材料：弹性不及存储，确定性更强，容易走趋势。重点看沪电股份、胜宏科技、深南电路、生益科技、生益电子、景旺电子。 5）液冷：Rubin平台单GPU功耗2300W、单机柜200kW、强制全液冷——渗透率30%→60%的核心催化剂，平台出货节奏直接决定26H2液冷链订单可见度。重点看英维克、高澜股份、申菱环境、中石科技、思泉新材。 ☎️ 下周不要被低位轮动带偏，真正的主线只有一条：中报预告+AI硬件景气度！",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "segment_volume",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    }
+  },
+  "sell_side_intelligence": [
+    {
+      "intelligence_id": "KSI01",
+      "kpe_ids": "KPE08",
+      "published_at": "2026-07-15T08:09",
+      "institution": "机构未识别",
+      "analyst_or_author": "纪要小能手",
+      "freshness": "高时效/4天",
+      "rating_signal": "未披露",
+      "forecast_facts": "近期密集参加展会，产业普遍乐观，而且产业链的沟通交流以及上下游的耦合程度很高，下半年尤其要重视H链公司！ 🔥存储：利基存储涨价开始显现在业绩端，是“此前已涨价，涨价完整放映至Q2业绩”的 📌兆易创新Q2营收约73亿，归母净利润约54亿，扣非归母约35亿",
+      "valuation_facts": "未提取到目标价/估值方法与倍数",
+      "normalized_points": "无可标准化数值",
+      "revision_signal": "较前次口径发生变化；尚无可同口径比较的标准化数值",
+      "source_quote": "【DW电子】每日观点：Q2预告... 【DW电子】每日观点：Q2预告小结 🔥PCB：AI驱动量价齐升，PCB产业链中报业绩全面高增 📌PCB板块中，沪电、深南、生益电子净利润同增约73%、62%、110%，Q2环增约35%、59%、49%；CCL板块生益科技、金安、南亚同增约125%、1000%、427%，Q2环增约76%、184%、107%。上游电子布宏和预告同增322%，产业链景气度传导顺畅。 📍展望下半年，PCB1.6T模块、Rubin、ASIC起量，新增产能陆续释放，业绩有望加速成长，建议特别关注PCB载板化方向上的深南电路。CCL板块建议聚焦关注M8/M9材料放量，同时关注上游电子布、铜箔等原材料环节在高端产品占比提升及加工费上涨背景下的盈利弹性。 🔥国产算力：Q2目前市场预期仍存在一定方差，但普遍环比Q1有一定改善。 📍国产算力板块没有发预告，但市场交易的点也不是在Q2业绩，我们看好国产链条26H2随着晶圆代工..."
+    },
+    {
+      "intelligence_id": "KSI02",
+      "kpe_ids": "KPE02",
+      "published_at": "2026-07-15T07:31",
+      "institution": "机构未识别",
+      "analyst_or_author": "纪要小能手",
+      "freshness": "高时效/4天",
+      "rating_signal": "未披露",
+      "forecast_facts": "（美股） 存储芯片：太极实业、兆易创新、普冉股份、佰维存储 四、DeepSeek筹备IPO 据媒体报道，DeepSeek 已开始筹备首次公开募股（IPO），最快可能在今年年底或 2027 年初正式递交上市申请",
+      "valuation_facts": "未提取到目标价/估值方法与倍数",
+      "normalized_points": "无可标准化数值",
+      "revision_signal": "窗口内首次识别，暂无同机构前序可比",
+      "source_quote": "盘前热点事件 一、昨日热点 ... 盘前热点事件 一、昨日热点 股权变更：神州高铁、艾艾精工 中报业绩：江苏索普、世茂能源 创新药：哈药股份 石油：泰山石油 PCB：贤丰控股、广合科技 电容：江海股份、艾华集团 二、Tower半导体30亿扩产日本 以色列芯片制造商Tower Semiconductor宣布，将投资30亿美元在日本扩充芯片产能，其中10亿美元来自日本政府补助。此次投资重点布局硅光子技术和硅锗技术，前者能用光信号更快传输AI芯片间数据，后者可提升半导体器件的速度并降低能耗，直接受益于AI和数据中心市场的强劲增长。Tower半导体股价上涨11.24%。 设备：罗博特科 NPO：光迅科技、华工科技、长光华芯、中际旭创、新易盛 三、SK海力士股价上涨27% 创上市以来新高 SK海力士股价持续走高上涨27%，现报193美元/股，创上市以来新高，总市值报1.41万亿美元。SK海力士据悉已正式启动面向英伟达下一代“Vera..."
+    }
+  ],
+  "preprocessing_notes": [
+    "Segment revenue breakdown not disclosed in evidence; all metrics reported at consolidated level.",
+    "Channel check estimate for Q2 2026 (KPE08) implies net margin of ~74%, which severely diverges from reported Q1 net margin of 34.89%. This warrants caution and official confirmation.",
+    "KPE04 uses stock code 300475 which does not match target 603986; hypothesis rejected.",
+    "No baseline or revised values provided for any KPE; all financial bridge inputs are missing.",
+    "Sell-side observation KSI01 (same as KPE08) provides an unverified estimate; no valuation facts extracted.",
+    "Company exposure to downstream AI demand (e.g., HBM) is indirect; specific revenue linkage missing.",
+    "Inventory ratio improved significantly YoY, consistent with demand strength and price upcycle."
+  ],
+  "underwriting_packet": {
+    "schema_version": 2,
+    "symbol": "603986.SH",
+    "as_of_date": "2026-07-19",
+    "forecast_years": [
+      "2026E",
+      "2027E",
+      "2028E"
+    ],
+    "research_readiness": "partial",
+    "readiness_reasons": [
+      "Segment revenue/gross profit breakdown not disclosed – only consolidated quarterly metrics available; product-level economics estimated analytically.",
+      "Diluted share count not available from Tushare, market-cap/price cross-check, or filing EPS reconciliation; EPS and per-share valuations remain missing.",
+      "Q2 2026 official financials not yet reported; channel-check estimates (KPE08) imply unreasonable net margin of ~74% vs reported Q1 34.9% and are treated as unverified.",
+      "No baseline/revised price values supplied for KPE items; all ASP/volume bridges remain qualitative until pricing data is retrieved.",
+      "Key company-specific disclosures (e.g., 2025 annual report segment breakdown) are referenced but numeric tables are missing from the evidence payload.",
+      "One or more filing-reported segments required deterministic restoration.",
+      "Material segment three-year driver lines are missing: Analog, Memory, Microcontroller, Sensor",
+      "Bull/base/bear per-share valuation is incomplete.",
+      "Valuation buckets contain potential double counting.",
+      "Valuation has not closed from mutually exclusive buckets to per-share fair value.",
+      "volume_price_cost driver chain is incomplete; missing: utilization",
+      "Three-year values remain missing for consolidated line(s): Diluted EPS"
+    ],
+    "company_model": {
+      "model_profile": "corporate",
+      "operating_model_family": "volume_price_cost",
+      "business_archetype": "Fabless semiconductor design and sales (high R&D intensity, foundry-dependent manufacturing)",
+      "value_proposition_and_customers": "Designs and sells NOR Flash, SLC/MLC NAND, DRAM, MCUs, sensors and analog chips into industrial, automotive, consumer, IoT, and networking markets. Customers are OEMs, ODMs and distributors; revenue is driven by unit volumes × ASP, with memory segment benefiting from AI-driven demand and cyclical pricing.",
+      "revenue_equation": "Revenue = sum over products (Unit shipments × ASP). Memory dominates volume; NAND/NOR flash prices and bit growth are the largest drivers.",
+      "profit_equation": "Gross profit = Revenue – Wafer cost – Packaging/testing cost – Royalties. Operating profit = Gross profit – R&D expense (~17% of sales) – SG&A. Net profit = Operating profit – Finance expense + investment income – Tax (~10–15%).",
+      "cash_flow_equation": "OCF ≈ Net profit + Depreciation ± Working-capital changes (receivables, inventory, payables); historically OCF/NI ~1.2x. FCF = OCF – Capex (mainly R&D equipment, SW, IP).",
+      "capital_intensity_and_reinvestment": "Asset-light fabless model; primary reinvestment is R&D (17% of revenue). Capex is modest; foundry capacity expansion is outsourced. Returns on tangible capital are high.",
+      "diluted_share_count_mn": null,
+      "share_count_period": "",
+      "share_count_evidence_id": "",
+      "share_count_source_type": "unresolved",
+      "share_count_formula": "Not available from Tushare total_share, market-cap/price, or parent-profit/EPS reconciliation.",
+      "share_count_cross_checks": [
+        "Missing Tushare total_share; market cap 325,013,196,750 CNY as of 2026-07-17 but no close price supplied; Q1 parent profit 1,461 mn and FY2025 profit 1,648 mn could imply shares if EPS were known."
+      ],
+      "moat_mechanisms": [
+        "Broad product portfolio (NOR Flash, SLC/MLC NAND, MCU, sensor, analog) creates cross-selling and customer stickiness.",
+        "Leading market share in niche NOR Flash (especially high-reliability automotive/industrial).",
+        "High R&D investment (17% of sales) and deep firmware/software ecosystem around MCUs.",
+        "First-mover advantage in customized memory for AI edge devices (as disclosed in investor interactions)."
+      ],
+      "moat_to_financial_transmission": [
+        "Sticky demand supports higher ASP/volume, leading to above-industry gross margins (57.1% Q1 2026 vs peers).",
+        "R&D intensity creates product differentiation that slows commoditization, sustaining unit margins.",
+        "Custom memory projects (AIPC, AI phone, automotive) could lift revenue mix and ASP."
+      ],
+      "structural_risks": [
+        "Memory prices are cyclical; NOR/SLC NAND ASP collapse would sharply compress gross margin and profit.",
+        "Fabless model depends on foundry allocation; capacity shortages or geopolitical foundry restrictions could constrain volumes.",
+        "Competition from larger integrated memory makers (Winbond, Macronix, GigaDevice) and Chinese peers (Puya, etc.) in niche memory.",
+        "Revenue concentration risk if any single memory product line (e.g., NOR) faces demand shock or substitution (e.g., MRAM).",
+        "Changxin stake (1.8% pre-IPO) value is volatile and doesn't contribute to operating earnings; IPO lock-up may affect liquidity."
+      ],
+      "key_unknowns": [
+        "Segment-level revenue and gross profit split (Memory vs MCU vs Sensor vs Analog).",
+        "ASP trajectory for NOR Flash, SLC NAND, and potential MLC NAND in H2 2026–2028.",
+        "Official Q2 2026 results and full-year guidance vs channel-check hype.",
+        "Impact of Changxin IPO on equity value and any dilution or accounting treatment.",
+        "Capacity allocation from foundries (e.g., SMIC, Hua Hong) amid rising demand."
+      ],
+      "evidence_ids": [
+        "EV028",
+        "EV029",
+        "EV030",
+        "EV031",
+        "EV036",
+        "EV005",
+        "EV010",
+        "EV012",
+        "EV013",
+        "KPE01",
+        "KPE05"
+      ]
+    },
+    "business_unit_map": [
+      {
+        "unit_id": "MEM",
+        "unit_name": "Memory",
+        "unit_type": "reported_segment",
+        "disclosure_basis": "analytical",
+        "parent_unit": "company",
+        "economic_role": "Dominant revenue and profit driver; includes NOR Flash, SLC NAND, MLC NAND and some DRAM. Leverages industry price upcycle and AI demand.",
+        "revenue_driver_equation": "Revenue = bit shipments × ASP (USD->CNY). Shipments driven by design wins, customer inventory restocking, and AI-edge demand. ASP driven by industry supply/demand and technology mix.",
+        "profit_driver_equation": "Gross profit = Revenue – wafer/packaging cost (mostly USD). Gross margin benefits from ASP increases while costs rise more slowly. Operating profit = Gross profit – allocated R&D (heavy) – SG&A.",
+        "cash_and_capital_equation": "OCF = Net profit + depreciation ± working capital (receivables ~2% of sales, inventory ~20% of sales); FCF = OCF – R&D capex/IP.",
+        "reported_metrics": [
+          "Not separately disclosed in evidence; annual report (EV031) has 分产品 营业收入 营业成本 columns but values are missing."
+        ],
+        "evidence_ids": [
+          "EV028",
+          "EV029",
+          "EV030",
+          "EV031",
+          "EV035",
+          "EV036"
+        ],
+        "missing_inputs": [
+          "Segment revenue (CNY mn)",
+          "Segment gross margin (%)",
+          "Unit shipments and ASP",
+          "Product mix (NOR, NAND, DRAM) split"
+        ],
+        "next_verification": "Obtain 2025 annual report product-segment data (filing text extraction) and Q2 2026 revenue breakdown."
+      },
+      {
+        "unit_id": "MCU",
+        "unit_name": "Microcontroller",
+        "unit_type": "reported_segment",
+        "disclosure_basis": "analytical",
+        "parent_unit": "company",
+        "economic_role": "Moderate revenue contributor; MCU demand tied to industrial/auto/IoT cycles. Likely margin accretive but less cyclical than memory.",
+        "revenue_driver_equation": "Revenue = chip unit shipments × ASP. Growth driven by MCU content expansion in smart devices and industrial automation.",
+        "profit_driver_equation": "Similar fabless cost structure; gross margins likely 40-55% historically. Benefit from domestic substitution trends.",
+        "cash_and_capital_equation": "Cash conversion similar to company average; working capital needs moderate.",
+        "reported_metrics": [
+          "Not separately disclosed"
+        ],
+        "evidence_ids": [
+          "EV028",
+          "EV036"
+        ],
+        "missing_inputs": [
+          "Segment revenue, gross margin, growth rate"
+        ],
+        "next_verification": "Obtain annual report segment data and MCU unit shipment data if available."
+      },
+      {
+        "unit_id": "SEN",
+        "unit_name": "Sensor",
+        "unit_type": "reported_segment",
+        "disclosure_basis": "analytical",
+        "parent_unit": "company",
+        "economic_role": "Small revenue contributor; primarily image sensors and related products for consumer/IoT. Margin profile likely moderate, benefiting from fabless model.",
+        "revenue_driver_equation": "Sensor unit volume × ASP; demand driven by mobile, wearable, and smart-home applications.",
+        "profit_driver_equation": "Gross margins probably 30-45%; R&D allocation pressure from new pixel technologies.",
+        "cash_and_capital_equation": "Working capital needs relatively low.",
+        "reported_metrics": [],
+        "evidence_ids": [
+          "EV028",
+          "EV036"
+        ],
+        "missing_inputs": [
+          "Segment revenue, gross margin, growth rate"
+        ],
+        "next_verification": "Obtain product-level revenue split."
+      },
+      {
+        "unit_id": "ANA",
+        "unit_name": "Analog",
+        "unit_type": "reported_segment",
+        "disclosure_basis": "analytical",
+        "parent_unit": "company",
+        "economic_role": "Nascent segment; analog chips for power management, signal chain etc. Very small revenue, high growth potential but unproven scale.",
+        "revenue_driver_equation": "Analog chip shipments × ASP; growth tied to industrial/communication recovery and AI infrastructure.",
+        "profit_driver_equation": "Margins likely lower initially due to R&D investment; can improve with scale.",
+        "cash_and_capital_equation": "Negligible standalone cash impact.",
+        "reported_metrics": [],
+        "evidence_ids": [
+          "EV036"
+        ],
+        "missing_inputs": [
+          "Segment revenue, gross margin, growth rate"
+        ],
+        "next_verification": "Monitor filing updates for analog revenue disclosure."
+      },
+      {
+        "unit_id": "BU05",
+        "unit_name": "Memory (analytical)",
+        "unit_type": "reported_segment",
+        "disclosure_basis": "reported",
+        "parent_unit": "company",
+        "economic_role": "Filing segment restored after structured evidence reconciliation.",
+        "revenue_driver_equation": "",
+        "profit_driver_equation": "",
+        "cash_and_capital_equation": "",
+        "reported_metrics": [],
+        "evidence_ids": [
+          "EV012",
+          "EV013",
+          "KPE01",
+          "KPE03",
+          "KPE05",
+          "EV018",
+          "EV019"
+        ],
+        "missing_inputs": [
+          "economic sub-unit driver equations require analyst completion"
+        ],
+        "next_verification": ""
+      },
+      {
+        "unit_id": "BU07",
+        "unit_name": "MCU (analytical)",
+        "unit_type": "reported_segment",
+        "disclosure_basis": "missing",
+        "parent_unit": "company",
+        "economic_role": "Filing segment restored after structured evidence reconciliation.",
+        "revenue_driver_equation": "",
+        "profit_driver_equation": "",
+        "cash_and_capital_equation": "",
+        "reported_metrics": [],
+        "evidence_ids": [
+          "EV028",
+          "EV036"
+        ],
+        "missing_inputs": [
+          "economic sub-unit driver equations require analyst completion"
+        ],
+        "next_verification": ""
+      },
+      {
+        "unit_id": "BU09",
+        "unit_name": "Sensor (analytical)",
+        "unit_type": "reported_segment",
+        "disclosure_basis": "missing",
+        "parent_unit": "company",
+        "economic_role": "Filing segment restored after structured evidence reconciliation.",
+        "revenue_driver_equation": "",
+        "profit_driver_equation": "",
+        "cash_and_capital_equation": "",
+        "reported_metrics": [],
+        "evidence_ids": [
+          "EV028",
+          "EV036"
+        ],
+        "missing_inputs": [
+          "economic sub-unit driver equations require analyst completion"
+        ],
+        "next_verification": ""
+      },
+      {
+        "unit_id": "BU11",
+        "unit_name": "Analog (analytical)",
+        "unit_type": "reported_segment",
+        "disclosure_basis": "missing",
+        "parent_unit": "company",
+        "economic_role": "Filing segment restored after structured evidence reconciliation.",
+        "revenue_driver_equation": "",
+        "profit_driver_equation": "",
+        "cash_and_capital_equation": "",
+        "reported_metrics": [],
+        "evidence_ids": [
+          "EV036"
+        ],
+        "missing_inputs": [
+          "economic sub-unit driver equations require analyst completion"
+        ],
+        "next_verification": ""
+      }
+    ],
+    "segment_models": [
+      {
+        "segment": "Memory (analytical)",
+        "products_or_services": "NOR Flash, SLC NAND, MLC NAND, niche DRAM – design and sale",
+        "customers_and_channel": "Industrial, automotive, consumer, IoT, networking OEMs/ODMs via direct sales and distributors",
+        "revenue_weight_pct": 70.0,
+        "profit_weight_pct": 80.0,
+        "base_period": "2026Q1 (annualized seasonally)",
+        "base_revenue_value": 12913.6,
+        "base_revenue_unit": "CNY mn",
+        "base_revenue_growth_pct": 40.0,
+        "base_margin_pct": 60.0,
+        "base_margin_change_pp": 20.0,
+        "demand_and_order_drivers": [
+          "AI-driven edge and data-center demand for high-capacity NOR and SLC NAND",
+          "Industrial/automotive recovery",
+          "Customer inventory restocking after 2023 destocking",
+          "Custom memory projects (AIPC, AI phone, auto cabin)"
+        ],
+        "industry_supply_and_capacity": "Global niche memory supply disciplined; major players (Winbond, Macronix, etc.) have shifted capacity to specialty DRAM/NOR, reducing SLC NAND output. Foundry allocation tight.",
+        "volume_share_utilization": "Company is gaining share in NOR Flash (especially high-density) and SLC NAND. Fabless model relies on foundry capacity allocation; no internal fab constraint.",
+        "price_asp_take_rate": "NOR Flash ASP up ~20-30% YoY (Q1 2026); SLC NAND ASP projected up 120-170% in H2 2026 (TrendForce). Strong pricing power due to supply shortage.",
+        "unit_cost_and_input_prices": "Wafer costs rising moderately (mature nodes); packaging/testing cost stable. USD-based costs partially hedged by RMB depreciation.",
+        "margin_and_operating_leverage": "Gross margin expanded 19.6 pp YoY to 57.1% in Q1 2026; further expansion possible if ASP continues to outpace cost increases. Operating margin 38.7% supported by scale benefits on R&D/SG&A.",
+        "working_capital_and_cash_conversion": "Inventory/revenue ratio fell 11.9 pp to 20.3% in Q1; receivables/revenue at 1.7%. OCF/NI 1.22x signals strong cash conversion. Working capital will rise with revenue but is well managed.",
+        "prosperity_level": "strong",
+        "marginal_direction": "improving",
+        "causal_analysis": "AI-driven demand surge + disciplined global supply → tight market → sharp ASP increases → gross margin expansion (from ~37% to 57% YoY) → record profit. Sustainability hinges on demand durability and no rapid capacity addition by competitors.",
+        "valuation_treatment": "Core earnings stream; valued using PE multiple of 25x on 2027E operating profit, reflecting mid-cycle earnings power with growth prospects.",
+        "strongest_counterevidence": [
+          "Channel check implying Q2 net margin ~74% (KPE08) conflicts with reported Q1 margin of 34.9%; if real, suggests extreme one-off items or model error.",
+          "If NOR/SLC NAND prices correct rapidly due to new supply (e.g., Puya expanding), gross margin could revert towards 35-40%."
+        ],
+        "evidence_ids": [
+          "EV012",
+          "EV013",
+          "KPE01",
+          "KPE03",
+          "KPE05",
+          "EV018",
+          "EV019"
+        ],
+        "missing_inputs": [
+          "Exact revenue mix between NOR/NAND/DRAM",
+          "Quantified ASP and unit shipments",
+          "Foundry capacity allocation contracts",
+          "Official Q2 2026 segment revenue and margin"
+        ],
+        "next_verification": "Official Q2 2026 report; Segment data from 2025 annual report; Pricing indices (TrendForce) updates."
+      },
+      {
+        "segment": "MCU (analytical)",
+        "products_or_services": "Microcontroller chips design and sales",
+        "customers_and_channel": "Industrial, automotive, consumer electronics, IoT",
+        "revenue_weight_pct": 15.0,
+        "profit_weight_pct": 10.0,
+        "base_period": "unspecified",
+        "base_revenue_value": null,
+        "base_revenue_unit": "CNY mn",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [
+          "Industrial automation recovery",
+          "Automotive digitization",
+          "IoT device proliferation"
+        ],
+        "industry_supply_and_capacity": "Global MCU supply tight on mature nodes but modestly improving.",
+        "volume_share_utilization": "Limited data; company claims market share gain in domestic MCU for auto and industrial.",
+        "price_asp_take_rate": "MCU ASP relatively stable, with some upward pressure from feature-rich chips.",
+        "unit_cost_and_input_prices": "Fabless cost model; wafer cost increases can be partly passed on.",
+        "margin_and_operating_leverage": "Historical gross margins estimated 45-50%, lower than memory currently.",
+        "working_capital_and_cash_conversion": "Likely similar working capital profile to corporate average.",
+        "prosperity_level": "evidence_limited",
+        "marginal_direction": "unknown",
+        "causal_analysis": "Recovery depends on industrial/auto end-market improvement and domestic substitution. No strong evidence in Q1 2026 results.",
+        "valuation_treatment": "Part of core operations; not separately valued due to data scarcity.",
+        "strongest_counterevidence": [
+          "No segment disclosure prevents verification of growth or margin trends."
+        ],
+        "evidence_ids": [
+          "EV028",
+          "EV036"
+        ],
+        "missing_inputs": [
+          "Segment revenue, gross margin, growth rates"
+        ],
+        "next_verification": "Annual report segment data extraction."
+      },
+      {
+        "segment": "Sensor (analytical)",
+        "products_or_services": "Sensor chips design and sales",
+        "customers_and_channel": "Consumer electronics, IoT",
+        "revenue_weight_pct": 10.0,
+        "profit_weight_pct": 5.0,
+        "base_period": "unspecified",
+        "base_revenue_value": null,
+        "base_revenue_unit": "CNY mn",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [
+          "Mobile and wearable device upgrades",
+          "Smart home sensor adoption"
+        ],
+        "industry_supply_and_capacity": "Competitive landscape; many Chinese sensor design firms.",
+        "volume_share_utilization": "Unclear; likely modest share in image sensors.",
+        "price_asp_take_rate": "Sensor ASP under pressure due to commoditization, except for specialized high-pixel sensors.",
+        "unit_cost_and_input_prices": "Fabless; wafer cost sensitivity.",
+        "margin_and_operating_leverage": "Gross margins likely 30-40%; R&D burden high.",
+        "working_capital_and_cash_conversion": "Standard.",
+        "prosperity_level": "evidence_limited",
+        "marginal_direction": "unknown",
+        "causal_analysis": "No clear catalyst; sensor segment may be a drag on margins but small in weight.",
+        "valuation_treatment": "Part of core; no separate valuation.",
+        "strongest_counterevidence": [
+          "Open competition and commoditization risk."
+        ],
+        "evidence_ids": [
+          "EV028",
+          "EV036"
+        ],
+        "missing_inputs": [
+          "Segment revenue, margin"
+        ],
+        "next_verification": "Annual report."
+      },
+      {
+        "segment": "Analog (analytical)",
+        "products_or_services": "Analog chips (power management, signal chain) design and sales",
+        "customers_and_channel": "Industrial, communication infrastructure",
+        "revenue_weight_pct": 5.0,
+        "profit_weight_pct": 5.0,
+        "base_period": "unspecified",
+        "base_revenue_value": null,
+        "base_revenue_unit": "CNY mn",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [
+          "Industrial recovery",
+          "AI infrastructure power management"
+        ],
+        "industry_supply_and_capacity": "Mature analog market; domestic substitution opportunity.",
+        "volume_share_utilization": "Nascent; likely low share.",
+        "price_asp_take_rate": "Analog ASP can be stable but design cycles long.",
+        "unit_cost_and_input_prices": "Standard.",
+        "margin_and_operating_leverage": "Probably low margin initially due to R&D investment.",
+        "working_capital_and_cash_conversion": "Insignificant.",
+        "prosperity_level": "evidence_limited",
+        "marginal_direction": "unknown",
+        "causal_analysis": "Analog has long qualification cycles; near-term impact minimal.",
+        "valuation_treatment": "Part of core; not valued separately.",
+        "strongest_counterevidence": [
+          "Long gestation and intense competition from global analog giants."
+        ],
+        "evidence_ids": [
+          "EV036"
+        ],
+        "missing_inputs": [
+          "Revenue and margin"
+        ],
+        "next_verification": "Periodic filing updates."
+      },
+      {
+        "segment": "Memory",
+        "products_or_services": "",
+        "customers_and_channel": "",
+        "revenue_weight_pct": null,
+        "profit_weight_pct": null,
+        "base_period": "2026Q1",
+        "base_revenue_value": null,
+        "base_revenue_unit": "",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [],
+        "industry_supply_and_capacity": "",
+        "volume_share_utilization": "",
+        "price_asp_take_rate": "",
+        "unit_cost_and_input_prices": "",
+        "margin_and_operating_leverage": "",
+        "working_capital_and_cash_conversion": "",
+        "prosperity_level": "evidence_limited",
+        "marginal_direction": "unknown",
+        "causal_analysis": "",
+        "valuation_treatment": "evidence_limited",
+        "strongest_counterevidence": [],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "LLM omitted a filing-reported material segment"
+        ],
+        "next_verification": ""
+      },
+      {
+        "segment": "Microcontroller",
+        "products_or_services": "",
+        "customers_and_channel": "",
+        "revenue_weight_pct": null,
+        "profit_weight_pct": null,
+        "base_period": "unspecified",
+        "base_revenue_value": null,
+        "base_revenue_unit": "",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [],
+        "industry_supply_and_capacity": "",
+        "volume_share_utilization": "",
+        "price_asp_take_rate": "",
+        "unit_cost_and_input_prices": "",
+        "margin_and_operating_leverage": "",
+        "working_capital_and_cash_conversion": "",
+        "prosperity_level": "evidence_limited",
+        "marginal_direction": "unknown",
+        "causal_analysis": "",
+        "valuation_treatment": "evidence_limited",
+        "strongest_counterevidence": [],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "LLM omitted a filing-reported material segment"
+        ],
+        "next_verification": ""
+      },
+      {
+        "segment": "Sensor",
+        "products_or_services": "",
+        "customers_and_channel": "",
+        "revenue_weight_pct": null,
+        "profit_weight_pct": null,
+        "base_period": "unspecified",
+        "base_revenue_value": null,
+        "base_revenue_unit": "",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [],
+        "industry_supply_and_capacity": "",
+        "volume_share_utilization": "",
+        "price_asp_take_rate": "",
+        "unit_cost_and_input_prices": "",
+        "margin_and_operating_leverage": "",
+        "working_capital_and_cash_conversion": "",
+        "prosperity_level": "evidence_limited",
+        "marginal_direction": "unknown",
+        "causal_analysis": "",
+        "valuation_treatment": "evidence_limited",
+        "strongest_counterevidence": [],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "LLM omitted a filing-reported material segment"
+        ],
+        "next_verification": ""
+      },
+      {
+        "segment": "Analog",
+        "products_or_services": "",
+        "customers_and_channel": "",
+        "revenue_weight_pct": null,
+        "profit_weight_pct": null,
+        "base_period": "unspecified",
+        "base_revenue_value": null,
+        "base_revenue_unit": "",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [],
+        "industry_supply_and_capacity": "",
+        "volume_share_utilization": "",
+        "price_asp_take_rate": "",
+        "unit_cost_and_input_prices": "",
+        "margin_and_operating_leverage": "",
+        "working_capital_and_cash_conversion": "",
+        "prosperity_level": "evidence_limited",
+        "marginal_direction": "unknown",
+        "causal_analysis": "",
+        "valuation_treatment": "evidence_limited",
+        "strongest_counterevidence": [],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "LLM omitted a filing-reported material segment"
+        ],
+        "next_verification": ""
+      }
+    ],
+    "underwriting_questions": [
+      {
+        "question_id": "UQ01",
+        "question": "What is the sustainability of current NOR Flash and SLC NAND ASP levels through 2027–2028?",
+        "why_it_matters": "Memory ASP is the single largest driver of consolidated revenue and gross margin. A reversion to pre-2023 levels would collapse profit.",
+        "current_answer": "ASP up significantly YoY; Q1 2026 gross margin expanded to 57.1%. Channel checks suggest further rises in H2 2026 (SLC NAND +120-170% according to TrendForce). No official pricing data yet.",
+        "bull_evidence": [
+          "KPE01: KeyBanc expects DRAM/NAND supply tightness into 2027",
+          "KPE03: TrendForce predicts SLC NAND price up 120-170% H2 2026",
+          "KPE09: storage price cycle validated by Q2 earnings beats"
+        ],
+        "bear_evidence": [
+          "Historical NOR Flash price cycles; high profitability may attract new capacity from competitors like Puya.",
+          "Q1 2026 net margin 34.9% not extreme, but Q2 channel numbers (KPE08) imply 74% net margin – either one-off or unsustainable."
+        ],
+        "decisive_model_variables": [
+          "consolidated.ASP_assumption",
+          "segment_memory.MEM_gross_margin"
+        ],
+        "affected_financial_lines": [
+          "Revenue",
+          "Gross Profit",
+          "Parent Net Profit",
+          "EPS",
+          "FCF"
+        ],
+        "evidence_ids": [
+          "EV013",
+          "KPE01",
+          "KPE03",
+          "KPE08",
+          "KPE09"
+        ],
+        "missing_evidence": [
+          "Official H2 2026 ASP forecast or realized Q2 ASP",
+          "Supplier capacity expansion plans for NOR/SLC NAND",
+          "Long-term supply agreements with foundries"
+        ],
+        "next_verification": "Company Q2 2026 report and conference call; TrendForce/HIS pricing updates; foundry capex announcements."
+      },
+      {
+        "question_id": "UQ02",
+        "question": "How much of Q1 2026 revenue growth is volume-driven vs ASP-driven, and is volume sustainable?",
+        "why_it_matters": "If revenue growth is entirely ASP, a price correction would erase all gains. Underlying volume growth from design wins and new products (e.g., custom memory) would provide a more durable base.",
+        "current_answer": "Evidence does not separate volume and price in Q1 2026. Inventory ratio falling suggests strong sell-through, but quarterly shipment data missing.",
+        "bull_evidence": [
+          "Inventory/revenue ratio dropped -11.89pp YoY, indicating demand exceeding supply (EV018).",
+          "Investor interaction confirms custom memory projects progressing in AI phone, AIPC, auto (EV025)."
+        ],
+        "bear_evidence": [
+          "If ASP accounts for >70% of revenue growth, then shipment growth modest; post-cycle revenue could contract significantly."
+        ],
+        "decisive_model_variables": [
+          "segment_memory.volume_growth",
+          "consolidated.revenue_growth"
+        ],
+        "affected_financial_lines": [
+          "Revenue",
+          "Gross Profit",
+          "Operating Cash Flow"
+        ],
+        "evidence_ids": [
+          "EV018",
+          "EV029",
+          "KPE02",
+          "KPE09"
+        ],
+        "missing_evidence": [
+          "Unit shipment data for NOR/NAND",
+          "Bit growth rate"
+        ],
+        "next_verification": "Company may provide bit-shipment growth in Q2 conference; monitor customer design-win announcements."
+      },
+      {
+        "question_id": "UQ03",
+        "question": "Will foundry capacity constraints limit 兆易创新’s ability to meet rising demand and capture ASP upside?",
+        "why_it_matters": "Fabless model means volume is determined by wafer allocation from foundries. If mature-node capacity is tight, revenue may be capped even if demand strong.",
+        "current_answer": "No public information on foundry allocation. Industry-wide mature nodes are tight, but 兆易创新 may have preferential agreements.",
+        "bull_evidence": [
+          "Long-term relationships with SMIC, Hua Hong, etc.",
+          "KPE05: Domestic compute demand may incentivize priority for local firms."
+        ],
+        "bear_evidence": [
+          "Tight capacity could force allocation trade-offs; if foundries favor larger logic customers, memory wafer starts may suffer.",
+          "EV043 shows some CIP, but no expansion plans."
+        ],
+        "decisive_model_variables": [
+          "segment_memory.volume_capacity_constraint",
+          "consolidated.capex_allocation"
+        ],
+        "affected_financial_lines": [
+          "Revenue",
+          "Gross Profit",
+          "Capex"
+        ],
+        "evidence_ids": [
+          "EV043",
+          "KPE05"
+        ],
+        "missing_evidence": [
+          "Foundry wafer purchase agreements or annual spending",
+          "Management commentary on supply security"
+        ],
+        "next_verification": "Q2 earnings call; management Q&A on capacity; monitoring SMIC/Hua Hong financials for capacity utilization."
+      },
+      {
+        "question_id": "UQ04",
+        "question": "What is the true diluted share count, and will it dilute EPS significantly post-option exercise or convertible instruments?",
+        "why_it_matters": "Current EPS and per-share valuation are not calculable without reliable share count. Stock options could increase count by 2-3%.",
+        "current_answer": "Share count unresolved. Company has stock option plans (EV024), but current outstanding unknown. Market cap / PE-TTM suggests 2873 mn shares (325013 mn / 113.06 / EPS? Wait, that gives TTM earnings, not share count. Actually TTM net profit = 2874 mn; if EPS were known we could derive shares. No EPS given.)",
+        "bull_evidence": [],
+        "bear_evidence": [
+          "Potential dilution from past option grants could be material."
+        ],
+        "decisive_model_variables": [
+          "diluted_share_count"
+        ],
+        "affected_financial_lines": [
+          "EPS",
+          "Per-share valuation"
+        ],
+        "evidence_ids": [
+          "EV024",
+          "EV010"
+        ],
+        "missing_evidence": [
+          "Tushare total_share",
+          "End-of-quarter share count",
+          "Option exercise status"
+        ],
+        "next_verification": "Retrieve total_share from Tushare or latest filing; cross-check market cap and closing price."
+      },
+      {
+        "question_id": "UQ05",
+        "question": "What is the fair economic value of the 1.8% pre-IPO stake in Changxin and how much should it contribute to equity value?",
+        "why_it_matters": "Changxin IPO could add meaningful optionality value (potentially several billion CNY based on IPO valuation). However, it is classified as other equity instrument and does not flow through net profit; the market may misprice it.",
+        "current_answer": "Company disclosed 1.8% pre-IPO stake in Changxin, IPO price 8.66 yuan/share (KPE04). Total equity value depends on Changxin's total shares and post-IPO valuation, not yet known. Unverified accounts suggest significant value.",
+        "bull_evidence": [
+          "KPE04 mentions Changxin IPO launched, price 8.66 per share.",
+          "If Changxin market cap reaches >100 bn CNY, stake worth >1.8 bn CNY."
+        ],
+        "bear_evidence": [
+          "Stake may be locked up post-IPO; discount required.",
+          "If Changxin IPO disappoints, value could be lower."
+        ],
+        "decisive_model_variables": [
+          "Changxin_stake_value"
+        ],
+        "affected_financial_lines": [
+          "Valuation (SOTP)"
+        ],
+        "evidence_ids": [
+          "EV020",
+          "KPE04",
+          "KPE02"
+        ],
+        "missing_evidence": [
+          "Changxin total shares outstanding",
+          "Post-IPO market cap estimate",
+          "Lock-up period and discount"
+        ],
+        "next_verification": "Monitor Changxin IPO listing date and first trading day price; compute stake value."
+      }
+    ],
+    "forecast_lines": [
+      {
+        "segment": "consolidated",
+        "metric": "Revenue",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 9203.46,
+        "year_1_value": 18448.0,
+        "year_2_value": 21300.0,
+        "year_3_value": 23600.0,
+        "formula": "2026E = Q1 2026 seasonality-adjusted revenue (Q1 4188/22.7% = 18448); growth 2027 E +15.5%, 2028 E +10.8% driven by volume and slight ASP moderation",
+        "assumption_status": "analytical_estimate",
+        "evidence_ids": [
+          "EV010",
+          "EV012",
+          "KPE03",
+          "KPE01",
+          "EV013"
+        ],
+        "key_sensitivity": "Every 10% revenue change alters parent profit by ~30% given operating leverage.",
+        "missing_inputs": [
+          "Segment revenue split",
+          "Official full-year guidance",
+          "Commodity/wafer cost trend"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Gross Profit",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 1327.96,
+        "year_1_value": 10538.0,
+        "year_2_value": 11715.0,
+        "year_3_value": 12336.0,
+        "formula": "Revenue - Cost of Revenue",
+        "assumption_status": "calculated",
+        "evidence_ids": [
+          "EV013"
+        ],
+        "key_sensitivity": "",
+        "missing_inputs": []
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Gross Margin",
+        "unit": "%",
+        "base_period": "FY2025",
+        "base_value": 14.43,
+        "year_1_value": 57.1,
+        "year_2_value": 55.0,
+        "year_3_value": 52.3,
+        "formula": "2026E = Q1 2026 reported 57.1% held flat; slight decay to 55% in 2027 and 52.3% in 2028 as competition normalizes",
+        "assumption_status": "analytical_estimate",
+        "evidence_ids": [
+          "EV013",
+          "KPE03"
+        ],
+        "key_sensitivity": "Each 1pp gross margin change alters parent profit by ~184 mn CNY.",
+        "missing_inputs": [
+          "Segment margin details"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "R&D Expense",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 1570.0,
+        "year_1_value": 3315.0,
+        "year_2_value": 3728.0,
+        "year_3_value": 4160.0,
+        "formula": "~18% of revenue (slightly higher than historical 17% to support custom memory and analog)",
+        "assumption_status": "analytical_estimate",
+        "evidence_ids": [
+          "EV030"
+        ],
+        "key_sensitivity": "",
+        "missing_inputs": [
+          "Official R&D budget"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "SG&A Expense",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 880.0,
+        "year_1_value": 1900.0,
+        "year_2_value": 2130.0,
+        "year_3_value": 2360.0,
+        "formula": "~10.3% of revenue, scaling with top line",
+        "assumption_status": "analytical_estimate",
+        "evidence_ids": [],
+        "key_sensitivity": "",
+        "missing_inputs": [
+          "Detailed SG&A split"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Operating Profit",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": -1122.04,
+        "year_1_value": 5323.0,
+        "year_2_value": 5857.0,
+        "year_3_value": 5816.0,
+        "formula": "Gross Profit - R&D - SG&A; FY2025 operating loss due to low margin; 2026E operating margin ~28.9% (vs Q1 38.7%, conservatively lower for full year to reflect H2 cost pressures)",
+        "assumption_status": "analytical_estimate",
+        "evidence_ids": [
+          "EV014"
+        ],
+        "key_sensitivity": "",
+        "missing_inputs": []
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Operating Margin",
+        "unit": "%",
+        "base_period": "FY2025",
+        "base_value": -12.19,
+        "year_1_value": 28.86,
+        "year_2_value": 27.5,
+        "year_3_value": 24.65,
+        "formula": "Operating Profit / Revenue",
+        "assumption_status": "calculated",
+        "evidence_ids": [
+          "EV014"
+        ],
+        "key_sensitivity": "",
+        "missing_inputs": []
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Finance & Other Income (net)",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 250.0,
+        "year_1_value": -400.0,
+        "year_2_value": -300.0,
+        "year_3_value": -200.0,
+        "formula": "Net interest expense roughly -2.5% of revenue; some investment income from Changxin (no P&L impact, but expectation of dividend/valuation) not included.",
+        "assumption_status": "analytical_estimate",
+        "evidence_ids": [
+          "EV016"
+        ],
+        "key_sensitivity": "",
+        "missing_inputs": [
+          "Detailed finance costs"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Pre-Tax Profit",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": -872.04,
+        "year_1_value": 4923.0,
+        "year_2_value": 5557.0,
+        "year_3_value": 5616.0,
+        "formula": "Operating Profit + Finance & Other Income",
+        "assumption_status": "calculated",
+        "evidence_ids": [],
+        "key_sensitivity": "",
+        "missing_inputs": []
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Income Tax",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": -2520.24,
+        "year_1_value": 738.0,
+        "year_2_value": 834.0,
+        "year_3_value": 842.0,
+        "formula": "Effective tax rate ~15% (high-tech enterprise status)",
+        "assumption_status": "analytical_estimate",
+        "evidence_ids": [],
+        "key_sensitivity": "",
+        "missing_inputs": []
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Parent Net Profit",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 1648.02,
+        "year_1_value": 4185.0,
+        "year_2_value": 4723.0,
+        "year_3_value": 4774.0,
+        "formula": "Pre-Tax Profit - Tax; 2026E = 4923 * 0.85 = 4185, slightly lower than seasonality-adjusted Q1 run-rate (5621) to be conservative and reflect potentially higher H2 tax adjustments.",
+        "assumption_status": "analytical_estimate",
+        "evidence_ids": [
+          "EV010",
+          "EV015"
+        ],
+        "key_sensitivity": "±10% profit change = ±419 mn",
+        "missing_inputs": [
+          "Tax rate certainty",
+          "Non-recurring items"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Diluted EPS",
+        "unit": "CNY/share",
+        "base_period": "FY2025",
+        "base_value": null,
+        "year_1_value": null,
+        "year_2_value": null,
+        "year_3_value": null,
+        "formula": "Parent Net Profit / Diluted Share Count; share count missing",
+        "assumption_status": "missing",
+        "evidence_ids": [
+          "EV010"
+        ],
+        "key_sensitivity": "",
+        "missing_inputs": [
+          "Diluted share count"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Operating Cash Flow",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 1820.0,
+        "year_1_value": 5106.0,
+        "year_2_value": 5670.0,
+        "year_3_value": 5680.0,
+        "formula": "OCF = Parent Net Profit × 1.22 (cash conversion ratio from Q1 2026). FY2025 used actual ratio not available, assumed ~1.1.",
+        "assumption_status": "analytical_estimate",
+        "evidence_ids": [
+          "EV017"
+        ],
+        "key_sensitivity": "",
+        "missing_inputs": []
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Capex",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 400.0,
+        "year_1_value": 800.0,
+        "year_2_value": 1000.0,
+        "year_3_value": 1200.0,
+        "formula": "Increasing capex for R&D equipment and software; fabless capex typically <5% of revenue; here ~4.3-5.1% of revenue.",
+        "assumption_status": "analytical_estimate",
+        "evidence_ids": [
+          "EV043"
+        ],
+        "key_sensitivity": "",
+        "missing_inputs": [
+          "Exact capex breakdown"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Free Cash Flow",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 1420.0,
+        "year_1_value": 4306.0,
+        "year_2_value": 4670.0,
+        "year_3_value": 4480.0,
+        "formula": "OCF – Capex",
+        "assumption_status": "calculated",
+        "evidence_ids": [],
+        "key_sensitivity": "",
+        "missing_inputs": []
+      }
+    ],
+    "scenarios": [
+      {
+        "scenario": "bull",
+        "probability_pct": 30.0,
+        "operating_assumptions": [
+          "Memory ASP continues to surge through 2027 (SLC NAND +150%, NOR +40%), supply disciplined, no new large-scale capacity.",
+          "Volume growth >20% driven by custom memory wins and AI edge demand.",
+          "Gross margin reaches 62% in 2026 and stays >58% in 2027-28.",
+          "Revenue 2026E 22,000 mn, 2027E 28,600 mn, 2028E 34,300 mn.",
+          "Parent net profit 2026E 8,000 mn, 2027E 9,500 mn, 2028E 10,800 mn."
+        ],
+        "parent_net_profit_cny_mn": 8000.0,
+        "eps_cny": null,
+        "fcf_cny_mn": 6880.0,
+        "valuation_method": "PE multiple",
+        "valuation_multiple": 22.0,
+        "fair_value_per_share": null,
+        "evidence_ids": [
+          "KPE01",
+          "KPE03",
+          "KPE08",
+          "KPE05"
+        ],
+        "falsification": "If official Q2 2026 gross margin <50% or management guides for slowing ASP.",
+        "missing_inputs": [
+          "Share count for EPS"
+        ]
+      },
+      {
+        "scenario": "base",
+        "probability_pct": 50.0,
+        "operating_assumptions": [
+          "Memory ASPs moderate after H2 2026, reflecting supply response; ASP up ~30% for full year 2026, flat in 2027–28.",
+          "Volume growth stable at 10-12%.",
+          "Gross margin 57% in 2026, 55% in 2027, 52% in 2028 as competition normalizes.",
+          "Revenue 2026E 18,448 mn, 2027E 21,300 mn, 2028E 23,600 mn.",
+          "Parent net profit 2026E 4,185 mn, 2027E 4,723 mn, 2028E 4,774 mn."
+        ],
+        "parent_net_profit_cny_mn": 4185.0,
+        "eps_cny": null,
+        "fcf_cny_mn": 4306.0,
+        "valuation_method": "PE multiple",
+        "valuation_multiple": 25.0,
+        "fair_value_per_share": null,
+        "evidence_ids": [
+          "EV013",
+          "EV015",
+          "EV010"
+        ],
+        "falsification": "If Q2 2026 revenue <7 bn or gross margin <50%, then base case too optimistic.",
+        "missing_inputs": [
+          "Share count for EPS"
+        ]
+      },
+      {
+        "scenario": "bear",
+        "probability_pct": 20.0,
+        "operating_assumptions": [
+          "Memory ASP correction starts H2 2026 due to rapid capacity addition; prices decline 20% from H2 peak.",
+          "Volume growth only 5% as customers double-order and cancel.",
+          "Gross margin falls to 45% in 2026, 40% in 2027, 38% in 2028.",
+          "Revenue 2026E 14,000 mn, 2027E 15,400 mn, 2028E 16,500 mn.",
+          "Parent net profit 2026E 3,500 mn, 2027E 2,800 mn, 2028E 2,500 mn."
+        ],
+        "parent_net_profit_cny_mn": 3500.0,
+        "eps_cny": null,
+        "fcf_cny_mn": 2800.0,
+        "valuation_method": "PE multiple",
+        "valuation_multiple": 18.0,
+        "fair_value_per_share": null,
+        "evidence_ids": [
+          "EV012",
+          "KPE06"
+        ],
+        "falsification": "If company reports declining Q2 revenue or margins, and TrendForce revises price forecasts downwards.",
+        "missing_inputs": [
+          "Share count for EPS"
+        ]
+      }
+    ],
+    "thesis_financial_bridges": [
+      {
+        "bridge_id": "BR01",
+        "thesis_or_question": "Memory ASP super-cycle will drive revenue and profit far above consensus",
+        "affected_unit": "consolidated",
+        "operating_driver": "ASP",
+        "driver_formula": "Revenue = Bit shipments × ASP",
+        "base_assumption": "2026E revenue 18,448 mn, gross margin 57%, parent net profit 4,185 mn",
+        "bull_assumption": "ASP +50% vs base → revenue 22,000 mn, gross margin 62%, parent net profit 8,000 mn",
+        "bear_assumption": "ASP -25% vs base → revenue 14,000 mn, gross margin 45%, profit 3,500 mn",
+        "revenue_impact": "bull +3,552 mn vs base",
+        "profit_impact": "bull +3,815 mn",
+        "eps_impact": "unquantified (share count missing)",
+        "fcf_or_capital_impact": "bull FCF +2,580 mn vs base",
+        "valuation_impact": "At PE 22x, bull equity value 176,000 mn vs base 104,625 mn at 25x, reflecting scenario-specific multiples.",
+        "quantification_status": "partially_quantified",
+        "evidence_ids": [
+          "KPE01",
+          "KPE03",
+          "EV013"
+        ],
+        "missing_inputs": [
+          "Exact ASP deltas",
+          "Share count for EPS"
+        ]
+      },
+      {
+        "bridge_id": "BR02",
+        "thesis_or_question": "Gross margin expansion from operating leverage will persist even if ASP stabilizes",
+        "affected_unit": "consolidated",
+        "operating_driver": "Gross Margin",
+        "driver_formula": "Gross Margin = (Revenue – Wafer/Packaging Cost) / Revenue",
+        "base_assumption": "Gross margin 57% in 2026, declining to 52% by 2028",
+        "bull_assumption": "R&D efficiency + scale keeps margin >58% through 2028",
+        "bear_assumption": "Cost increases outpace ASP, margin falls to 40% by 2027",
+        "revenue_impact": "unchanged volume, margin change",
+        "profit_impact": "1pp margin change = ~184 mn profit",
+        "eps_impact": "unquantified",
+        "fcf_or_capital_impact": "same direction as profit",
+        "valuation_impact": "Higher margin supports higher PE multiple.",
+        "quantification_status": "partially_quantified",
+        "evidence_ids": [
+          "EV013",
+          "EV014"
+        ],
+        "missing_inputs": [
+          "Wafer cost trend"
+        ]
+      },
+      {
+        "bridge_id": "BR03",
+        "thesis_or_question": "Customized memory for AI edge devices will become a new growth driver, diversifying from cyclical NOR",
+        "affected_unit": "Memory segment",
+        "operating_driver": "New product revenue",
+        "driver_formula": "Incremental revenue = new design wins × ASP × ramp volume",
+        "base_assumption": "Custom memory revenue ~1,500 mn by 2027 (6% of total)",
+        "bull_assumption": "Custom memory revenue reaches 3,000 mn by 2027 with premium margins",
+        "bear_assumption": "Design wins fail to convert; revenue <500 mn",
+        "revenue_impact": "bull +1,500 mn vs base",
+        "profit_impact": "bull +400 mn net profit",
+        "eps_impact": "unquantified",
+        "fcf_or_capital_impact": "positive",
+        "valuation_impact": "Could add 10% to equity value if successful.",
+        "quantification_status": "unquantified",
+        "evidence_ids": [
+          "KPE05"
+        ],
+        "missing_inputs": [
+          "Number of design wins, customer names, revenue ramp specifics"
+        ]
+      }
+    ],
+    "moat_evidence_tests": [
+      {
+        "moat_mechanism": "Brand & Customer Stickiness in NOR Flash",
+        "observable_test": "Gross margin premium vs closest competitor (Winbond, Macronix) in NOR Flash segment",
+        "comparison_basis": "Competitor gross margins; 兆易创新 reported consolidated gross margin 57.1% Q1 2026 vs peer median ~40%",
+        "evidence_result": "Partial – Q1 2026 gross margin significantly higher, but not segment-specific; could be due entirely to memory ASP cycle rather than brand moat.",
+        "financial_transmission": "Higher gross margin allows higher R&D reinvestment, reinforcing product breadth.",
+        "strongest_counterevidence": "Gross margin is highly cyclical; in downturn 2025 gross margin was only 14.4%. The moat may not be structural but cyclical.",
+        "status": "partial",
+        "evidence_ids": [
+          "EV013",
+          "EV015"
+        ],
+        "next_verification": "Compare NOR Flash gross margin specifically in annual report when available; compare with Winbond/Macronix NOR segment metrics."
+      },
+      {
+        "moat_mechanism": "Switch-ing costs from MCU ecosystem",
+        "observable_test": "Repeat order rate or MCU design-in longevity vs peers like Nuvoton, STM",
+        "comparison_basis": "Customer retention and average product life cycle; not directly measured.",
+        "evidence_result": "Missing – no disclosed customer-retention data or design-win longevity.",
+        "financial_transmission": "Higher switching costs → stable MCU revenue and margin over cycle.",
+        "strongest_counterevidence": "Open standard ARM cores and open-source tools reduce lock-in; MCU gross margins have been under pressure historically.",
+        "status": "unproven",
+        "evidence_ids": [
+          "EV028"
+        ],
+        "next_verification": "Survey channel or company for design-win conversion and churn rates."
+      },
+      {
+        "moat_mechanism": "R&D scale advantage (17% of sales) creates product depth",
+        "observable_test": "Number of active product SKUs (NOR Flash >1000 types) vs nearest domestic competitor (Puya ~600).",
+        "comparison_basis": "Industry reports or company disclosure.",
+        "evidence_result": "Partial – filing mentions comprehensive product line but no exact SKU vs peer.",
+        "financial_transmission": "Wider product line increases cross-sell and customer captivity.",
+        "strongest_counterevidence": "SKU proliferation can also increase R&D burden without corresponding revenue.",
+        "status": "partial",
+        "evidence_ids": [
+          "EV028",
+          "EV030"
+        ],
+        "next_verification": "Obtain product catalog and compare with Puya."
+      }
+    ],
+    "valuation_buckets": [
+      {
+        "bucket": "Core operating earnings (2027E base-case)",
+        "inclusion": "core",
+        "valuation_method": "P/E multiple",
+        "metric_and_period": "Parent Net Profit 2027E",
+        "metric_value": 4723.0,
+        "valuation_multiple": 25.0,
+        "ownership_pct": 100.0,
+        "haircut_pct": 0.0,
+        "equity_value_cny_mn": 118075.0,
+        "per_share_value_cny": null,
+        "overlap_key": "consolidated_earnings",
+        "double_counting_treatment": "Excludes Changxin stake value and scenario probability weighting.",
+        "evidence_ids": [
+          "EV010",
+          "EV015"
+        ],
+        "missing_inputs": [
+          "Share count for per-share value"
+        ]
+      },
+      {
+        "bucket": "Scenario adjustment (probability-weighted SOTP)",
+        "inclusion": "scenario",
+        "valuation_method": "Probability-weighted scenario equity values",
+        "metric_and_period": "bull/base/bear parent profit 2027E",
+        "metric_value": null,
+        "valuation_multiple": null,
+        "ownership_pct": 100.0,
+        "haircut_pct": 0.0,
+        "equity_value_cny_mn": 118075.0,
+        "per_share_value_cny": null,
+        "overlap_key": "consolidated_earnings",
+        "double_counting_treatment": "Replaced by probability-weighted fair value in closure; this bucket is informational.",
+        "evidence_ids": [],
+        "missing_inputs": []
+      },
+      {
+        "bucket": "Changxin stake (1.8% pre-IPO)",
+        "inclusion": "optionality",
+        "valuation_method": "Market-based value",
+        "metric_and_period": "Post-IPO market value of Changxin 1.8% stake",
+        "metric_value": null,
+        "valuation_multiple": null,
+        "ownership_pct": 1.8,
+        "haircut_pct": 20.0,
+        "equity_value_cny_mn": null,
+        "per_share_value_cny": null,
+        "overlap_key": "investment",
+        "double_counting_treatment": "Not included in core earnings; additive optionality",
+        "evidence_ids": [
+          "EV020",
+          "KPE04"
+        ],
+        "missing_inputs": [
+          "Changxin total shares and post-IPO share price"
+        ]
+      }
+    ],
+    "valuation_closure": {
+      "current_price_cny": null,
+      "diluted_share_count_mn": null,
+      "core_value_per_share_cny": null,
+      "probability_weighted_fair_value_per_share_cny": null,
+      "option_value_per_share_cny": null,
+      "other_adjustments_per_share_cny": null,
+      "fair_value_per_share_cny": null,
+      "expected_return_pct": null,
+      "formula": "Probability-weighted total equity value = (bull equity value * 0.30 + base equity value * 0.50 + bear equity value * 0.20). Bull equity value = 8,000 mn * 22 PE = 176,000 mn; base = 4,185 mn * 25 PE = 104,625 mn; bear = 3,500 mn * 18 PE = 63,000 mn. Weighted = 176k*0.3 + 104.6k*0.5 + 63k*0.2 = 52,800 + 52,312.5 + 12,600 = 117,712.5 mn. Add optionality (Changxin) estimated ~2,000 mn (if listing gives ~125 bn mkt cap, 1.8% = 2,250 mn, haircut 20% → 1,800 mn). Total equity value ≈ 119,512 mn. Per share value absent share count.",
+      "rating_consistency_check": "No rating assigned; underwriting packet only.",
+      "double_counting_checks": [
+        "Changxin stake excluded from core earnings (accounted as other equity instrument, not P&L).",
+        "Scenario value replaced by probability-weighted calculation; no double-count of base case."
+      ],
+      "status": "partial",
+      "missing_inputs": [
+        "Diluted share count to compute per-share value and expected return",
+        "Changxin post-IPO price and total shares for exact optionality value",
+        "resolve duplicate valuation overlap keys: consolidated_earnings"
+      ]
+    },
+    "llm_analysis_layer": {
+      "business_question_tree": [
+        "Memory: What will be the realized ASP trend for NOR Flash and SLC NAND in H2 2026 and 2027 – will the 120-170% SLC NAND price hike materialize as forecast by TrendForce?",
+        "Memory: Is the company able to increase unit volumes in line with demand or is foundry capacity a binding constraint?",
+        "MCU & Analog: Are MCU and analog segments transitioning from early-stage investment to profit contribution, and will they provide a buffer when memory profit normalizes?",
+        "Custom Memory: How many design wins have been secured for AIPC, AI phone, and automotive customized memory, and what is the revenue recognition timeline?",
+        "Capital Allocation: How will generated FCF be deployed – R&D, dividends, buybacks, or new minority stakes? Any dilution from outstanding stock options?",
+        "Competitive Dynamics: Will Puya or other domestic NOR Flash competitors add significant capacity, eroding the current ASP advantage?"
+      ],
+      "profit_pool_priority": "Memory segment likely accounts for >80% of profit at current margins, given Q1 consolidated gross margin of 57% and the fact that memory ASP surge is the primary driver of margin expansion. MCU and sensor revenues are probably slower-growing and lower-margin; analog is nascent. Therefore, memory profitability is the sole profit pool of consequence for the next 12-24 months. Model sensitivity should focus on NOR Flash and SLC NAND pricing and bit growth; secondarily, custom memory could become a higher-value-add profit pool if design wins convert.",
+      "competition_and_substitution_analysis": "兆易创新’s main competitors in niche memory are Winbond, Macronix, and domestic players like Puya. In MCU, it competes with Nuvoton, STMicroelectronics, and GigaDevice. The structural risk is that global memory giants (Samsung, SK Hynix) could shift more capacity to NOR/niche NAND to capture high margins, increasing supply. Domestically, Puya is expanding both NOR and NAND production. On the demand side, substitution risk is low because NOR Flash remains essential for automotive and industrial code storage, but emerging technologies like MRAM or X Point could eventually displace NOR in some applications. Customer switching costs are moderate; MCU ecosystem lock-in is stronger than NOR memory because of firmware investment. No direct evidence of supplier diversification pressure; the firm uses standard foundries, which also limits unique cost advantage.",
+      "qualitative_to_quantitative_bridge": "Qualitatively, the market narrative is that memory ASP will stay elevated due to AI-driven demand. Partial data: Q1 2026 gross margin improvement of 19.6pp YoY confirms pricing power; channel checks hint at extreme Q2 ASP increases but are unverified. No quantitative ASP index or volume data for 兆易创新’s specific products is available. The gap between narrative and model is large: without official ASP data and shipment numbers, the high bull-case revenue projections (22-24 bn) rely on unverified extrapolations. The key retrieval is a reliable NOR Flash and SLC NAND price series (e.g., from TrendForce or in-house surveys) that can be tied to 兆易创新’s product mix. Until then, the model must be conservative.",
+      "expectation_gap_analysis": "The current market cap of 325 bn CNY and PE TTM of 113x implies that the market expects TTM earnings of ~2.87 bn, which is well above reported FY2025 net profit of 1.65 bn but far below the base-case 2026 estimate of 4.19 bn. This suggests the market already discounts significant profit growth but perhaps not the full extent of our base case. However, the high PB/PS percentiles indicate the stock is expensive on asset and sales measures. A gap exists in timing and magnitude: the market may be reluctant to price in >4 bn profit for 2026 until official Q2 data confirms the trend. If Q2 results validate ASP strength, the stock could re-rate; if not, a de-rating is possible. Our base-case equity value of 117.7 bn (probability-weighted) is significantly below current market cap, implying overvaluation, but this conclusion is heavily dependent on share count, which would normalize per-share comparison.",
+      "red_team_counterarguments": [
+        "Bear-case counter to bull thesis: If memory ASP correction begins in H2 2026 due to rapid competitor capacity additions, and 兆易创新’s custom memory projects fail to ramp, revenue could fall to 14,000 mn with gross margin back to 40%, slashing profit to 3,500 mn. At 18x PE, equity value would be 63,000 mn, about half the base-case valuation. Falsification signal: TrendForce reports NOR Flash spot price decline >10% monthly in Q3 2026.",
+        "Bull-case counter to bear thesis: Even in a moderate downturn, AI edge demand for NOR and SLC NAND is structural; 兆易创新’s leading share and custom memory pipeline could sustain revenue above 16,000 mn with gross margins >50%, delivering >4,000 mn profit and maintaining a 20x+ PE. Falsification signal: In a downturn scenario, if quarterly revenue stays above 3,500 mn and gross margin above 50%, the bear thesis is invalid."
+      ],
+      "valuation_explanation": "The valuation approach uses a probability-weighted SOTP: core earnings-based PE multiples for each scenario, reflecting different risk premiums. Base case applies 25x P/E on 2027E profit, consistent with a high-growth semiconductor design company with cyclical earnings but strong uptrend. Bull case 22x P/E reflects a lower multiple despite higher earnings because the boom may be seen as transitory. Bear case 18x P/E on depressed earnings reflects cyclical trough. The weighted fair equity value of ~117.7 bn CNY does not include the Changxin optionality (~1.8 bn). The wide range underscores the high sensitivity to ASP assumptions. A move from base to bull case doubles equity value, while bear case halves it. Without a share count, per-share value is indeterminate, but the gap vs current market cap suggests the market may be pricing closer to bull case, leaving limited upside in base scenario.",
+      "final_editorial_synthesis": "兆易创新’s fate hinges on memory pricing: Q1 2026 margin expansion proves the cycle is booming, but the market already prices in significant earnings recovery. The core underwriting challenge is whether the ASP super-cycle extends through 2027 or collapses as capacity catches up. Custom memory and MCU diversification provide long-term optionality but cannot offset a memory price crash. Investors must monitor quarterly ASP, bit shipment data, and foundry allocation. The research agenda should prioritize verifying Q2 2026 results, retrieving reliable price series for NOR and SLC NAND, and determining a confirmed diluted share count to gauge downside protection. Only when those inputs are hard evidence can the wide bull-bear gap be narrowed.",
+      "evidence_boundaries": [
+        "No segment revenue/profit figures available; all model assumptions are top-down cost margin projections.",
+        "No share count; EPS and per-share valuation remain missing.",
+        "KPE items are unverified channel checks and broker reports; none have been converted into official numeric assumptions.",
+        "Q2 2026 official results not included; date-sensitive follow-up required."
+      ]
+    },
+    "handoff_manifest": {
+      "handoff_version": "underwriting-v2",
+      "source_of_truth": "structured_research.underwriting_packet",
+      "frozen_reported_facts": [
+        "Q1 2026 revenue: 4,188.08 mn CNY (EV012)",
+        "Q1 2026 parent net profit: 1,461.25 mn CNY (EV010)",
+        "Q1 2026 gross margin: 57.08% (EV013)",
+        "Q1 2026 operating margin: 38.72% (EV014)",
+        "Q1 2026 net margin: 34.89% (EV015)",
+        "FY2025 revenue: 9,203.46 mn CNY (EV011)",
+        "FY2025 parent net profit: 1,648.02 mn CNY (EV011)",
+        "Market cap as of 2026-07-17: 325,013.20 mn CNY (peer_comparison)",
+        "Company holds 1.8% pre-IPO stake in Changxin (investor_interaction, EV020)",
+        "OCF/net profit ratio Q1 2026: 1.22 (EV017)",
+        "Inventory/revenue ratio Q1 2026: 20.30%, down 11.89pp YoY (EV018)",
+        "Receivables/revenue Q1 2026: 1.75%, down 1.83pp YoY (EV018)"
+      ],
+      "analyst_estimates": [
+        "2026E revenue 18,448 mn CNY (derived from seasonality-adjusted Q1 data, not official guidance)",
+        "2026E parent net profit 4,185 mn CNY (base case assumption)",
+        "Gross margin estimates for 2027E, 2028E (55%, 52.3% respectively)",
+        "Revenue growth rates beyond 2026E",
+        "Capex and FCF projections",
+        "Scenario probabilities (30/50/20) and equity value calculations",
+        "Segment revenue weights (Memory 70%, MCU 15%, Sensor 10%, Analog 5%)"
+      ],
+      "unresolved_model_cells": [
+        "Diluted share count (EPS uncomputable)",
+        "Segment revenue and gross profit breakdown",
+        "Changxin stake fair value post-IPO",
+        "Official Q2 2026 revenue and profit",
+        "Long-term ASP and volume assumptions"
+      ],
+      "downstream_must_preserve": [
+        "All business units (Memory, MCU, Sensor, Analog) and their analytical weights",
+        "Three-year consolidated forecast model (revenue through FCF)",
+        "Three scenario assumptions (bull/base/bear) and probability weights (30/50/20)",
+        "Thesis financial bridges (BR01, BR02, BR03)",
+        "Valuation buckets (Core operating earnings, Scenario adjustment, Changxin optionality)",
+        "Probability-weighted fair equity value methodology"
+      ]
+    },
+    "evidence_change_rules": [
+      {
+        "evidence_id": "KPE01",
+        "affected_segment": "Memory",
+        "affected_variable": "asp_or_price",
+        "old_assumption": "ASP increase not quantified in model",
+        "new_assumption": "unchanged",
+        "financial_transmission": "If a reliable price index for NOR/SLC NAND is provided, update base-case ASP assumption and recompute revenue/profit.",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "Cross-check with company filings and product price data"
+      },
+      {
+        "evidence_id": "KPE03",
+        "affected_segment": "Memory",
+        "affected_variable": "asp_or_price",
+        "old_assumption": "SLC NAND price trajectory unknown",
+        "new_assumption": "unchanged",
+        "financial_transmission": "SLC NAND revenue share, if obtained, can be multiplied by the forecasted 120-170% price increase to estimate revenue bump.",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "Confirm SLC NAND revenue share and actual price realization"
+      },
+      {
+        "evidence_id": "KPE08",
+        "affected_segment": "Memory",
+        "affected_variable": "profit_or_eps",
+        "old_assumption": "Q2 net profit unknown",
+        "new_assumption": "unchanged",
+        "financial_transmission": "If confirmed by official filing, would drastically raise 2026E profit and trigger reassessment of all scenarios.",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "Wait for official Q2 report"
+      },
+      {
+        "evidence_id": "KPE02",
+        "affected_segment": "Memory",
+        "affected_variable": "segment_volume",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until Check if 兆易创新 supplies related components or benefits indirectly",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "Check if 兆易创新 supplies related components or benefits indirectly"
+      },
+      {
+        "evidence_id": "KPE04",
+        "affected_segment": "Memory",
+        "affected_variable": "profit_or_eps",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "rejected: no model, valuation, rating, or sizing impact",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "reject",
+        "verification_gate": "Stated stock code 300475 does not match target 603986; likely a data error"
+      },
+      {
+        "evidence_id": "KPE05",
+        "affected_segment": "consolidated",
+        "affected_variable": "demand_signal",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until Assess indirect revenue path through AI data center memory demand",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "Assess indirect revenue path through AI data center memory demand"
+      },
+      {
+        "evidence_id": "KPE06",
+        "affected_segment": "consolidated",
+        "affected_variable": "asp_or_price",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until Determine if helium shortage affects memory manufacturing costs",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "Determine if helium shortage affects memory manufacturing costs"
+      },
+      {
+        "evidence_id": "KPE07",
+        "affected_segment": "consolidated",
+        "affected_variable": "unmapped",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until No specific fundamental catalyst identified",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "No specific fundamental catalyst identified"
+      },
+      {
+        "evidence_id": "KPE09",
+        "affected_segment": "Memory",
+        "affected_variable": "segment_volume",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption or scenario probability change until Cross-check with industry pricing data and company guidance",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch",
+        "verification_gate": "Cross-check with industry pricing data and company guidance"
+      }
+    ],
+    "reconciliation_checks": [
+      "Scenario probabilities sum to 100% (30+50+20).",
+      "Base case 2026E parent net profit (4,185 mn) is lower than seasonality-adjusted Q1 run-rate (5,621 mn), reflecting conservatism.",
+      "Total probability-weighted equity value (117,712 mn) does not double-count core earnings nor Changxin stake.",
+      "EPS fields left null due to missing share count; no fabricated EPS."
+    ],
+    "analyst_instructions": [
+      "Retrieve diluted share count from Tushare or latest filing to unlock per-share analysis.",
+      "Extract product-segment data from 2025 annual report (EV031) to refine revenue weights and margin estimates.",
+      "Obtain official Q2 2026 financials as soon as published; reassess scenario probabilities and model assumptions.",
+      "Monitor TrendForce or similar for NOR Flash and SLC NAND price indices to convert qualitative KPE into model inputs.",
+      "Update Changxin optionality value upon listing day and lock-up expiry."
+    ],
+    "preprocessing_notes": [
+      "Segment revenue breakdown not disclosed in evidence; all metrics reported at consolidated level.",
+      "Channel check estimate for Q2 2026 (KPE08) implies net margin of ~74%, which severely diverges from reported Q1 net margin of 34.89%. This warrants caution and official confirmation.",
+      "KPE04 uses stock code 300475 which does not match target 603986; hypothesis rejected.",
+      "No baseline or revised values provided for any KPE; all financial bridge inputs are missing.",
+      "Sell-side observation KSI01 (same as KPE08) provides an unverified estimate; no valuation facts extracted.",
+      "Company exposure to downstream AI demand (e.g., HBM) is indirect; specific revenue linkage missing.",
+      "Inventory ratio improved significantly YoY, consistent with demand strength and price upcycle.",
+      "unknown evidence ids removed from underwriting packet",
+      "unknown evidence ids removed from underwriting packet",
+      "duplicate consolidated forecast aliases merged into revenue",
+      "operating model driver coverage (volume_price_cost): capacity, volume, price/ASP, unit/input cost, spread/margin, capex/ROIC"
+    ]
+  }
+}
