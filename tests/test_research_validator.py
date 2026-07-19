@@ -8,12 +8,14 @@ from tradingagents.evaluation.research_validator import (
     audit_decision_integrity,
     audit_deterministic_valuation_scale,
     audit_handoff_numeric_consistency,
+    audit_official_guidance_forecast_reconciliation,
     audit_canonical_financial_reconciliation,
     audit_pm_unit_scale_arithmetic,
     audit_position_valuation_consistency,
     audit_foreign_sell_side_forecast_disclosure,
     audit_public_forecast_growth_consistency,
     audit_public_key_number_consistency,
+    audit_public_report_language,
     audit_rating_valuation_consistency,
     audit_report_redundancy,
     audit_public_process_leakage,
@@ -25,6 +27,103 @@ from tradingagents.evaluation.research_validator import (
     _is_publication_blocker,
     _normalize_rating,
 )
+
+
+def _write_guidance_reconciliation_fixture(tmp_path, *, forecast_text, scenarios):
+    context_dir = tmp_path / "0_context"
+    portfolio_dir = tmp_path / "5_portfolio"
+    context_dir.mkdir()
+    portfolio_dir.mkdir()
+    (context_dir / "forecast_model.md").write_text(forecast_text, encoding="utf-8")
+    (portfolio_dir / "canonical_decision.json").write_text(
+        json.dumps({"safe_valuation_assumptions": {"scenarios": scenarios}}),
+        encoding="utf-8",
+    )
+
+
+def test_official_guidance_requires_numeric_extraction_before_forecast(tmp_path):
+    _write_guidance_reconciliation_fixture(
+        tmp_path,
+        forecast_text=(
+            "## Official Earnings Guidance Override\n"
+            "兆易创新2026年半年度业绩预增公告 / title and link only"
+        ),
+        scenarios=[],
+    )
+
+    issues = audit_official_guidance_forecast_reconciliation(tmp_path, "")
+
+    assert [issue.section for issue in issues] == ["official_guidance_extraction"]
+
+
+def test_official_h1_guidance_blocks_unreconciled_lower_full_year_scenarios(tmp_path):
+    _write_guidance_reconciliation_fixture(
+        tmp_path,
+        forecast_text=(
+            "## Official Earnings Guidance Override\n"
+            "2026年半年度业绩预增公告：预计归属于上市公司股东的净利润为"
+            "690,000万元左右。"
+        ),
+        scenarios=[
+            {"scenario": "bear", "parent_net_profit_cny_mn": 3500},
+            {"scenario": "base", "parent_net_profit_cny_mn": 4185},
+            {"scenario": "bull", "parent_net_profit_cny_mn": 7000},
+        ],
+    )
+
+    issues = audit_official_guidance_forecast_reconciliation(
+        tmp_path,
+        "Q1归母净利润14.6亿元；H1归母净利润69亿元；全年预测尚未完成。",
+    )
+
+    assert len(issues) == 2
+    assert all(
+        issue.section == "official_guidance_full_year_reconciliation"
+        for issue in issues
+    )
+
+
+def test_official_h1_guidance_accepts_explicit_q1_q2_h1_h2_fy_bridge(tmp_path):
+    _write_guidance_reconciliation_fixture(
+        tmp_path,
+        forecast_text=(
+            "## Official Earnings Guidance Override\n"
+            "2026年半年度业绩预增公告：预计归属于上市公司股东的净利润为"
+            "690,000万元左右。"
+        ),
+        scenarios=[
+            {"scenario": "bear", "parent_net_profit_cny_mn": 7200},
+            {"scenario": "base", "parent_net_profit_cny_mn": 8500},
+            {"scenario": "bull", "parent_net_profit_cny_mn": 10000},
+        ],
+    )
+    decision = (
+        "2026H1归母净利润69亿元，其中Q1为14.6亿元，隐含Q2约54.4亿元；"
+        "H2按下半年景气回落分情景预测，全年FY归母净利润分别为72、85、100亿元。"
+    )
+
+    assert audit_official_guidance_forecast_reconciliation(tmp_path, decision) == []
+
+
+def test_chinese_public_report_blocks_full_english_reasoning_sentence():
+    decision = (
+        "这是一份中文研究报告。" * 60
+        + "\nStrong H1 earnings are confirmed but likely represent a cyclical peak, "
+        "while market pricing discounts strength and overlooks mean reversion risk."
+    )
+
+    issues = audit_public_report_language(decision)
+
+    assert [issue.section for issue in issues] == ["public_report_language"]
+
+
+def test_chinese_public_report_allows_metrics_and_product_abbreviations():
+    decision = (
+        "这是一份中文研究报告。" * 60
+        + "\n公司关注NOR Flash、DRAM、MCU、ASP、EPS和FCF等关键指标。"
+    )
+
+    assert audit_public_report_language(decision) == []
 
 _DEEP_BRIDGE_PHRASE = (
     "True operating peers are separated from broad industry screens; substitute "
@@ -780,6 +879,55 @@ def test_handoff_numeric_audit_accepts_unit_order_and_small_revenue_reconciliati
     assert audit_handoff_numeric_consistency(tmp_path) == []
 
 
+def test_handoff_numeric_audit_accepts_raw_to_million_share_normalization(tmp_path):
+    context_dir = tmp_path / "0_context"
+    research_dir = tmp_path / "2_research"
+    portfolio_dir = tmp_path / "5_portfolio"
+    context_dir.mkdir()
+    research_dir.mkdir()
+    portfolio_dir.mkdir()
+    (context_dir / "company_underwriting.json").write_text(
+        json.dumps({"forecast_years": [], "forecast_lines": []}),
+        encoding="utf-8",
+    )
+    (research_dir / "canonical_plan.json").write_text(
+        json.dumps(
+            {
+                "canonical_model_snapshot": [
+                    {
+                        "line_id": "diluted_shares",
+                        "period": "current",
+                        "metric": "Diluted Shares",
+                        "value": 701_745_100,
+                        "unit": "shares",
+                    }
+                ],
+                "model_change_rows": [],
+            }
+        ),
+        encoding="utf-8",
+    )
+    (portfolio_dir / "canonical_decision.json").write_text(
+        json.dumps(
+            {
+                "canonical_model_snapshot": [
+                    {
+                        "line_id": "diluted_shares",
+                        "period": "current",
+                        "metric": "Diluted Shares",
+                        "value": 701.7451,
+                        "unit": "mn shares",
+                    }
+                ],
+                "handoff_change_rows": [],
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    assert audit_handoff_numeric_consistency(tmp_path) == []
+
+
 def test_post_generation_audit_marks_missing_pm_analytical_spine_review_only(tmp_path):
     portfolio_dir = tmp_path / "5_portfolio"
     portfolio_dir.mkdir()
@@ -1129,6 +1277,52 @@ def test_position_instruction_cannot_exceed_deterministic_safe_ceiling(tmp_path)
     issues = audit_position_valuation_consistency(
         tmp_path,
         "计划建仓者可在120-130元区域试探性买入。",
+    )
+
+    assert [issue.section for issue in issues] == ["position_valuation_consistency"]
+
+
+def test_position_audit_does_not_pair_risk_range_with_later_build_clause(tmp_path):
+    portfolio_dir = tmp_path / "5_portfolio"
+    portfolio_dir.mkdir()
+    (portfolio_dir / "canonical_decision.json").write_text(
+        json.dumps(
+            {
+                "deterministic_valuation": {
+                    "status": "closed",
+                    "safe_buy_price_ceiling_cny": 88.02,
+                }
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    issues = audit_position_valuation_consistency(
+        tmp_path,
+        "熊市下股价可能跌向75-100元。若价格进入80元附近，可小仓试探。",
+    )
+
+    assert issues == []
+
+
+def test_position_audit_catches_nearby_price_for_starter_position(tmp_path):
+    portfolio_dir = tmp_path / "5_portfolio"
+    portfolio_dir.mkdir()
+    (portfolio_dir / "canonical_decision.json").write_text(
+        json.dumps(
+            {
+                "deterministic_valuation": {
+                    "status": "closed",
+                    "safe_buy_price_ceiling_cny": 88.02,
+                }
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    issues = audit_position_valuation_consistency(
+        tmp_path,
+        "若股价跌至200元附近，可小仓试探但严控止损。",
     )
 
     assert [issue.section for issue in issues] == ["position_valuation_consistency"]

@@ -163,6 +163,20 @@ def test_pm_deterministic_valuation_normalizes_raw_share_count_units():
     assert eps_rows[0].value == pytest.approx(1.1120, rel=1e-4)
 
 
+def test_safe_price_normalizer_preserves_risk_range_but_removes_unsafe_build_clause():
+    payload = _minimal_pm_payload()
+    payload["risks_catalysts_verification"] = (
+        "熊市下股价可能跌向75-100元。"
+        "若股价跌至200元附近，可小仓试探但严控止损。"
+    )
+
+    decision, notes = normalize_sell_side_pm_decision(payload)
+
+    assert "75-100元" in decision.risks_catalysts_verification
+    assert "200元附近" not in decision.risks_catalysts_verification
+    assert any("unsafe buy/build clause" in note for note in notes)
+
+
 def test_foreign_sell_side_forecast_is_classified_and_disclosed_publicly():
     assert _SCHEMAS.infer_sell_side_adoption_level(
         {"decision_use": "增加看多证据，但不改变基准预测；仅作需求对照。"}

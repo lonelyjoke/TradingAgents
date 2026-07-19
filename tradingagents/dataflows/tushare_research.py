@@ -2,11 +2,13 @@ from __future__ import annotations
 
 from datetime import datetime, timedelta
 import html
+from io import BytesIO
 import re
 import shutil
 import subprocess
 import tempfile
 from typing import Iterable
+from urllib.parse import parse_qs, urljoin, urlparse
 
 import pandas as pd
 import requests
@@ -560,29 +562,40 @@ def _format_event_table(data: pd.DataFrame, columns: list[str], limit: int) -> s
     return _markdown_table(selected)
 
 
-def _download_announcement_text(url: str) -> str:
-    if not str(url or "").strip():
-        return ""
-    try:
-        response = requests.get(
-            str(url),
-            timeout=25,
-            headers={"User-Agent": "Mozilla/5.0 TradingAgents earnings-guidance"},
+def _announcement_download_candidates(url: str) -> list[str]:
+    """Resolve dynamic disclosure detail pages to stable announcement files."""
+
+    raw = html.unescape(str(url or "").strip())
+    if not raw:
+        return []
+    candidates: list[str] = []
+    parsed = urlparse(raw)
+    query = parse_qs(parsed.query)
+    announcement_id = (query.get("announcementId") or [""])[0].strip()
+    announcement_time = (query.get("announcementTime") or [""])[0].strip()[:10]
+    if (
+        announcement_id
+        and announcement_time
+        and "cninfo.com.cn" in parsed.netloc.lower()
+    ):
+        candidates.append(
+            f"https://static.cninfo.com.cn/finalpage/{announcement_time}/{announcement_id}.PDF"
         )
-        response.raise_for_status()
-    except Exception:
-        return ""
-    content_type = response.headers.get("Content-Type", "").lower()
-    if str(url).lower().endswith(".pdf") or "pdf" in content_type:
-        pdftotext = shutil.which("pdftotext")
-        if not pdftotext:
-            return ""
+    candidates.append(raw)
+    return list(dict.fromkeys(candidates))
+
+
+def _extract_pdf_text(content: bytes) -> str:
+    """Extract a text-layer PDF with Poppler first and pypdf as fallback."""
+
+    pdftotext = shutil.which("pdftotext")
+    if pdftotext:
         try:
             with tempfile.TemporaryDirectory() as tmp_dir:
                 pdf_path = f"{tmp_dir}/announcement.pdf"
                 text_path = f"{tmp_dir}/announcement.txt"
                 with open(pdf_path, "wb") as handle:
-                    handle.write(response.content)
+                    handle.write(content)
                 subprocess.run(
                     [pdftotext, "-layout", pdf_path, text_path],
                     check=True,
@@ -591,11 +604,77 @@ def _download_announcement_text(url: str) -> str:
                     timeout=25,
                 )
                 with open(text_path, "r", encoding="utf-8", errors="ignore") as handle:
-                    return handle.read()
+                    extracted = handle.read()
+                if extracted.strip():
+                    return extracted
         except Exception:
-            return ""
-    response.encoding = response.encoding or "utf-8"
-    return response.text
+            pass
+    try:
+        from pypdf import PdfReader
+
+        reader = PdfReader(BytesIO(content))
+        return "\n".join((page.extract_text() or "") for page in reader.pages)
+    except Exception:
+        return ""
+
+
+def _embedded_pdf_candidates(page_url: str, page_text: str) -> list[str]:
+    """Find static PDF links exposed in an HTML disclosure response."""
+
+    matches = re.findall(
+        r"(?:https?:)?//[^\"'<>\s]+\.pdf|/[^\"'<>\s]+\.pdf",
+        html.unescape(page_text or ""),
+        re.I,
+    )
+    candidates: list[str] = []
+    for match in matches:
+        if match.startswith("//"):
+            match = "https:" + match
+        candidates.append(urljoin(page_url, match))
+    return list(dict.fromkeys(candidates))
+
+
+def _download_announcement_text(url: str) -> str:
+    candidates = _announcement_download_candidates(url)
+    if not candidates:
+        return ""
+    seen: set[str] = set()
+    first_html = ""
+    while candidates:
+        candidate = candidates.pop(0)
+        if candidate in seen:
+            continue
+        seen.add(candidate)
+        try:
+            response = requests.get(
+                candidate,
+                timeout=25,
+                headers={"User-Agent": "Mozilla/5.0 TradingAgents earnings-guidance"},
+            )
+            response.raise_for_status()
+        except Exception:
+            continue
+        content_type = response.headers.get("Content-Type", "").lower()
+        is_pdf = (
+            candidate.lower().endswith(".pdf")
+            or "pdf" in content_type
+            or response.content[:5] == b"%PDF-"
+        )
+        if is_pdf:
+            extracted = _extract_pdf_text(response.content)
+            if extracted.strip():
+                return extracted
+            continue
+        response.encoding = response.encoding or "utf-8"
+        page_text = response.text
+        if not first_html:
+            first_html = page_text
+        candidates.extend(
+            item
+            for item in _embedded_pdf_candidates(response.url or candidate, page_text)
+            if item not in seen
+        )
+    return first_html
 
 
 def _guidance_excerpt(text: str, *, limit: int = 12) -> str:
@@ -661,7 +740,7 @@ def _earnings_guidance_section(announcements: pd.DataFrame) -> str:
             ]
         )
     lines.append(
-        "- Analyst rule: official earnings guidance, performance previews and quick reports are hard public evidence for the covered period. Reconcile them against Q1, implied Q2, H1, H2 and full-year forecasts before changing rating or valuation."
+        "- Analyst rule: official earnings guidance, performance previews and quick reports are hard public evidence for the covered period; reconcile Q1, implied Q2, H1, H2 and full-year forecasts before changing rating or valuation."
     )
     return "\n".join(lines).strip()
 

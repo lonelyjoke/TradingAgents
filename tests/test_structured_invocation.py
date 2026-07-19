@@ -648,6 +648,35 @@ def test_handoff_check_detects_only_undocumented_material_changes():
     assert _canonical_handoff_issues(manager, pm) == []
 
 
+def test_handoff_check_accepts_raw_shares_to_million_shares_normalization():
+    manager = {
+        "canonical_model_snapshot": [
+            {
+                "line_id": "diluted_shares",
+                "metric": "Diluted Shares",
+                "value": 701_745_100,
+                "unit": "shares",
+            }
+        ]
+    }
+    pm = {
+        "canonical_model_snapshot": [
+            {
+                "line_id": "diluted_shares",
+                "metric": "Diluted Shares",
+                "value": 701.7451,
+                "unit": "mn shares",
+            }
+        ],
+        "handoff_change_rows": [],
+    }
+
+    assert _canonical_handoff_issues(manager, pm) == []
+    merged, notes = _merge_manager_canonical_snapshot(manager, pm)
+    assert notes == []
+    assert merged["canonical_model_snapshot"][0]["value"] == 701_745_100
+
+
 def test_pm_deterministically_restores_omitted_canonical_lines_and_changes():
     manager = {
         "canonical_model_snapshot": [
@@ -856,3 +885,33 @@ def test_pm_analytical_structure_gaps_trigger_advisory_revision():
             "core_theses": [{}, {}],
         }
     ) == []
+
+
+def test_pm_guidance_gap_triggers_revision_before_publication():
+    payload = {
+        "research_questions": ["q1", "q2", "q3"],
+        "question_verdicts": [{}, {}, {}],
+        "forecast_takeaways": [{}, {}],
+        "forecast_assumptions": [{}, {}, {}],
+        "core_theses": [{}, {}],
+        "autonomous_forecast_model": "仅讨论全年预测，没有季度桥接。",
+        "safe_valuation_assumptions": {
+            "scenarios": [
+                {"scenario": "bear", "parent_net_profit_cny_mn": 3500},
+                {"scenario": "base", "parent_net_profit_cny_mn": 4185},
+                {"scenario": "bull", "parent_net_profit_cny_mn": 7000},
+            ]
+        },
+    }
+    guidance = (
+        "KSI private sell-side view: H1 parent net profit 5,400 CNY mn.\n\n"
+        "## Official Earnings Guidance Override\n\n"
+        "2026年半年度业绩预增公告：预计归属于上市公司股东的净利润为"
+        "690,000万元左右。"
+    )
+
+    issues = _analytical_structure_issues(payload, guidance)
+
+    assert any("H1 parent profit 6900.00 CNY mn" in issue for issue in issues)
+    assert any("lacks Q1/Q2/H1/H2/FY bridge" in issue for issue in issues)
+    assert any("full-year scenarios below reported H1" in issue for issue in issues)

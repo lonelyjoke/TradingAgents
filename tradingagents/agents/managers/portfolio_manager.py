@@ -92,6 +92,52 @@ def _deterministically_owned_pm_line(row: dict) -> bool:
     )
 
 
+def _canonical_line_value_unit(row: dict) -> tuple[object, str]:
+    """Compare canonical rows by economic value, not display-unit spelling."""
+
+    value = row.get("value")
+    raw_unit = str(row.get("unit", "") or "").strip().lower().replace("_", " ")
+    unit_key = re.sub(r"[^a-z0-9%/\u4e00-\u9fff]+", "", raw_unit)
+    metric_key = re.sub(
+        r"[^a-z0-9\u4e00-\u9fff]+",
+        "",
+        " ".join(
+            (
+                str(row.get("line_id", "") or "").lower(),
+                str(row.get("metric", "") or "").lower(),
+            )
+        ),
+    )
+    try:
+        numeric = float(value)
+    except (TypeError, ValueError):
+        return value, unit_key
+    if any(token in metric_key for token in ("dilutedshare", "sharecount", "totalshare", "稀释股本", "总股本")):
+        if unit_key in {"shares", "share", "股"}:
+            return numeric / 1_000_000.0, "mnshares"
+        if unit_key in {"mnshares", "millionshares", "百万股"}:
+            return numeric, "mnshares"
+    if set(re.findall(r"[a-z]+", raw_unit)) == {"cny", "mn"}:
+        return numeric, "cnymn"
+    return numeric, unit_key
+
+
+def _canonical_line_changed(left_row: dict, right_row: dict) -> bool:
+    left_value, left_unit = _canonical_line_value_unit(left_row)
+    right_value, right_unit = _canonical_line_value_unit(right_row)
+    try:
+        left_numeric = float(left_value)
+        right_numeric = float(right_value)
+        value_changed = abs(left_numeric - right_numeric) > max(
+            abs(left_numeric) * 0.02,
+            0.01,
+        )
+    except (TypeError, ValueError):
+        value_changed = left_value != right_value
+    unit_changed = bool(left_unit and right_unit and left_unit != right_unit)
+    return value_changed or unit_changed
+
+
 def _merge_manager_canonical_snapshot(
     manager_payload: dict,
     pm_payload: dict,
@@ -139,11 +185,7 @@ def _merge_manager_canonical_snapshot(
         if line_id in accepted_changes:
             merged.append(pm_row)
             continue
-        if (
-            pm_row.get("value") != manager_row.get("value")
-            or str(pm_row.get("unit", "")).strip().lower()
-            != str(manager_row.get("unit", "")).strip().lower()
-        ):
+        if _canonical_line_changed(manager_row, pm_row):
             notes.append(f"restored undocumented canonical change {line_id}")
         merged.append(manager_row)
 
@@ -186,18 +228,10 @@ def _canonical_handoff_issues(
             continue
         manager_value = manager_line.get("value")
         pm_value = pm_line.get("value")
-        value_changed = manager_value != pm_value
-        try:
-            left = float(manager_value)
-            right = float(pm_value)
-            value_changed = abs(left - right) > max(abs(left) * 0.02, 0.01)
-        except (TypeError, ValueError):
-            pass
         manager_unit = str(manager_line.get("unit", "")).strip().lower()
         pm_unit = str(pm_line.get("unit", "")).strip().lower()
-        unit_changed = bool(manager_unit and pm_unit and manager_unit != pm_unit)
         if (
-            (value_changed or unit_changed)
+            _canonical_line_changed(manager_line, pm_line)
             and line_id not in accepted_changes
             and not _deterministically_owned_pm_line(pm_line)
         ):
@@ -208,7 +242,10 @@ def _canonical_handoff_issues(
     return issues
 
 
-def _analytical_structure_issues(pm_payload: dict) -> list[str]:
+def _analytical_structure_issues(
+    pm_payload: dict,
+    official_guidance_context: str = "",
+) -> list[str]:
     """Advisory repair triggers for the internal analytical workbench."""
     requirements = (
         ("research_questions", 3, "company-specific research questions"),
@@ -251,6 +288,121 @@ def _analytical_structure_issues(pm_payload: dict) -> list[str]:
         for label, markers in closure_markers.items():
             if not any(marker in thesis_chapter for marker in markers):
                 issues.append(f"public thesis chapter missing {label}")
+    if get_language_instruction():
+        public_fields = (
+            "rating_posture",
+            "one_line_thesis",
+            "investment_conclusion_and_core_conflict",
+            "company_disaggregation",
+            "industry_cycle_and_competition",
+            "autonomous_forecast_model",
+            "thesis_financial_bridge",
+            "moat_evidence_scorecard",
+            "valuation_closure",
+            "accounting_and_capital_allocation",
+            "expectation_gap_and_market_pricing",
+            "risks_catalysts_verification",
+        )
+        public_values: list[tuple[str, str]] = [
+            (field, str(pm_payload.get(field, "") or "")) for field in public_fields
+        ]
+        for index, row in enumerate(pm_payload.get("forecast_takeaways", []) or []):
+            public_values.extend(
+                (f"forecast_takeaways[{index}].{field}", str(row.get(field, "") or ""))
+                for field in (
+                    "takeaway",
+                    "evidence_anchor",
+                    "financial_implication",
+                    "confidence_and_risk",
+                )
+            )
+        for index, row in enumerate(pm_payload.get("forecast_assumptions", []) or []):
+            public_values.extend(
+                (f"forecast_assumptions[{index}].{field}", str(row.get(field, "") or ""))
+                for field in (
+                    "parameter",
+                    "affected_business",
+                    "historical_anchor",
+                    "base_case",
+                    "bull_case",
+                    "bear_case",
+                    "rationale_and_evidence",
+                    "sensitivity",
+                    "verification_gate",
+                )
+            )
+        english_heavy_fields: list[str] = []
+        for field, value in public_values:
+            latin_words = re.findall(r"[A-Za-z]{3,}", value)
+            latin_chars = len(re.findall(r"[A-Za-z]", value))
+            cjk_chars = len(re.findall(r"[\u4e00-\u9fff]", value))
+            if len(latin_words) >= 6 and latin_chars >= 40 and latin_chars > cjk_chars * 1.2:
+                english_heavy_fields.append(field)
+        if english_heavy_fields:
+            issues.append(
+                "public language: English-heavy reader-facing fields must be translated to Chinese: "
+                + ", ".join(english_heavy_fields[:8])
+            )
+    raw_guidance_context = official_guidance_context or ""
+    official_section = re.search(
+        r"(?ims)^##\s+Official Earnings Guidance Override\s*(.*?)(?=^##\s+|\Z)",
+        raw_guidance_context,
+    )
+    if official_section:
+        raw_guidance_context = official_section.group(1)
+    guidance_text = re.sub(r"\s+", " ", raw_guidance_context)
+    guidance_match = re.search(
+        r"(?:归属于上市公司股东的净利润|归母净利润|parent\s+net\s+profit)"
+        r"[^。；;|]{0,80}?(\d[\d,]*(?:\.\d+)?)\s*(万元|亿元|CNY\s*mn)",
+        guidance_text,
+        re.I,
+    )
+    if guidance_match and re.search(r"半年度|半年|H1|half-year", guidance_text, re.I):
+        guidance_value = float(guidance_match.group(1).replace(",", ""))
+        guidance_unit = re.sub(r"\s+", "", guidance_match.group(2).lower())
+        if guidance_unit == "万元":
+            guidance_value /= 100.0
+        elif guidance_unit == "亿元":
+            guidance_value *= 100.0
+        public_text = " ".join(
+            str(pm_payload.get(field, "") or "")
+            for field in (
+                "investment_conclusion_and_core_conflict",
+                "autonomous_forecast_model",
+                "thesis_financial_bridge",
+                "expectation_gap_and_market_pricing",
+                "valuation_closure",
+                "risks_catalysts_verification",
+            )
+        )
+        bridge_complete = all(
+            re.search(pattern, public_text, re.I)
+            for pattern in (r"Q1|一季度", r"Q2|二季度|第二季度", r"H1|上半年|半年度", r"H2|下半年")
+        )
+        scenarios_below = []
+        for row in (pm_payload.get("safe_valuation_assumptions") or {}).get("scenarios", []) or []:
+            try:
+                full_year = float(row.get("parent_net_profit_cny_mn"))
+            except (TypeError, ValueError):
+                continue
+            if full_year < guidance_value * 0.98:
+                scenarios_below.append(str(row.get("scenario", "scenario")))
+        explicit_h2_loss = bool(
+            re.search(
+                r"(?:H2|下半年)[^。；;]{0,80}(?:亏损|净亏损|公允价值[^。；;]{0,20}(?:回撤|损失|转负))",
+                public_text,
+                re.I,
+            )
+        )
+        if not bridge_complete:
+            issues.append(
+                f"official guidance: H1 parent profit {guidance_value:.2f} CNY mn lacks Q1/Q2/H1/H2/FY bridge"
+            )
+        if scenarios_below and not explicit_h2_loss:
+            issues.append(
+                "official guidance: full-year scenarios below reported H1 without explicit H2 loss/fair-value-reversal bridge: "
+                + ", ".join(scenarios_below)
+            )
     return issues
 
 
@@ -495,6 +647,10 @@ SellSidePMDecision object, including fields that are unchanged.
 
 Hard preservation rules:
 - Keep the original rating exactly unchanged.
+- When the configured output language is Chinese, translate every reader-facing prose
+  field into fluent Chinese, including forecast_takeaways and forecast_assumptions.
+  Preserve tickers, source IDs, product names, metric abbreviations and units, but never
+  preserve a complete upstream English sentence in the public report.
 - Do not invent facts, estimates, sources, segment allocations, or unavailable data.
 - Preserve the Research Manager canonical snapshot exactly unless an explicit accepted
   handoff change row states old value, new value, evidence, and recalculated impact.
@@ -740,6 +896,7 @@ def create_portfolio_manager(llm):
 - The Research Manager's `Accepted Underwriting Model` and `Model Change Ledger` are the authoritative debated revisions to the initial packet. Apply those revisions line by line. When the accepted model conflicts with the initial packet, disclose the change and use the accepted value only when its evidence and arithmetic reconcile; otherwise keep the line unresolved rather than choosing whichever supports the desired rating.
 - The PM is a report synthesizer and final allocator, not the first analyst to understand the company. Do not summarize upstream prose sequentially. Reconstruct the investment case from the shared operating equations and accepted model changes, then use debate excerpts only to explain why an assumption changed or stayed unchanged.
 - Fill every required field in `SellSidePMDecision`. The renderer, not the model, owns all H1/H2 headings and produces exactly eight public Chinese sections. Do not put H2 headings in any field. `report_markdown` is ignored legacy compatibility state and must be empty.
+- Regardless of the upstream Research Manager language, translate every reader-facing prose field into fluent Chinese before returning JSON. This includes every string in `forecast_takeaways`, `forecast_assumptions`, public thesis/forecast/valuation/risk fields, and foreign-sell-side disclosure. Preserve tickers, KPE/KSI/EV ids, product names, metric abbreviations and units, but do not copy a complete English sentence into the public report.
 - Fill `research_questions`, `question_verdicts`, `forecast_takeaways`, `forecast_assumptions`, and `core_theses` from the accepted model. Do not leave them empty when the source record supports analysis. Questions, verdicts and thesis cards are the internal analytical workbench; they must improve the reasoning but must not appear as a public question list, Q&A ledger or repeated checklist.
 - Fill `segment_economics` with every material economic unit, using reported/calculated/analyst-estimate/missing labels and explicit core/scenario/optionality/excluded valuation treatment. Fill `industry_driver_matrix` with dated demand, supply/capacity, price/cost and policy variables. Fill `accounting_quality_matrix` with working-capital, cash-conversion, capex/ROIC, leverage/impairment and shareholder-return checks. The adjacent prose interprets these tables and must not repeat every cell.
 - Business-line question discipline is mandatory and starts from financial-report revenue composition. Identify high-revenue-weight and thesis-critical segments from the filing before deciding what to analyze. For every selected segment or business bucket, answer what it sells, who buys, why customers choose or switch, what substitutes or true peers threaten it, the qualitative investment judgment when data are missing, the quantitative bridge when data are available, the financial/valuation implication and the next verification gate. Missing data must lead to a qualitative discussion plus a retrieval task, not omission of the issue.
@@ -1076,7 +1233,10 @@ If an important investment claim depends on an unverified commodity price, produ
             manager_payload,
             pm_decision_payload,
         )
-        initial_analytical_issues = _analytical_structure_issues(pm_decision_payload)
+        initial_analytical_issues = _analytical_structure_issues(
+            pm_decision_payload,
+            forecast_model_context,
+        )
         editorial_review_payload: dict = {}
         editorial_review_status: dict = {
             "mode": "not_run",
@@ -1175,7 +1335,8 @@ If an important investment claim depends on an unverified commodity price, produ
                     revised_payload,
                 )
                 revised_analytical_issues = _analytical_structure_issues(
-                    revised_payload
+                    revised_payload,
+                    forecast_model_context,
                 )
                 rating_preserved = revised_payload.get("rating") == pm_decision_payload.get(
                     "rating"

@@ -168,6 +168,9 @@ PUBLICATION_BLOCKING_SECTIONS = frozenset(
         "position_valuation_consistency",
         "underwriting_readiness",
         "company_operating_model",
+        "official_guidance_extraction",
+        "official_guidance_full_year_reconciliation",
+        "public_report_language",
     }
 )
 
@@ -312,7 +315,6 @@ def _line_changed(left: Mapping[str, Any], right: Mapping[str, Any]) -> bool:
     # Revenue estimates are a high-volume top-line input where small manager
     # reconciliations are not normally decision-changing unless they exceed 5%.
     value_tolerance = 0.05 if left_metric == "revenue" else 0.02
-    value_changed = abs(left_value - right_value) > max(abs(left_value) * value_tolerance, 0.01)
 
     def _normalized_unit(unit: object) -> str:
         raw = str(unit or "").lower().replace("_", " ").replace("/", " / ")
@@ -325,6 +327,17 @@ def _line_changed(left: Mapping[str, Any], right: Mapping[str, Any]) -> bool:
 
     left_unit = _normalized_unit(left.get("unit", ""))
     right_unit = _normalized_unit(right.get("unit", ""))
+    if left_metric == "dilutedshares":
+        if left_unit in {"shares", "share", "股"}:
+            left_value /= 1_000_000.0
+            left_unit = "mn_shares"
+        if right_unit in {"shares", "share", "股"}:
+            right_value /= 1_000_000.0
+            right_unit = "mn_shares"
+    value_changed = abs(left_value - right_value) > max(
+        abs(left_value) * value_tolerance,
+        0.01,
+    )
     return value_changed or (left_unit and right_unit and left_unit != right_unit)
 
 
@@ -421,6 +434,121 @@ def audit_handoff_numeric_consistency(report_dir: str | Path) -> list[DecisionDe
                     f"{final.get('value')} {final.get('unit')}",
                 )
             )
+    return issues
+
+
+def _amount_to_cny_mn(value: str, unit: str) -> float:
+    numeric = float(str(value).replace(",", ""))
+    normalized = re.sub(r"\s+", "", str(unit or "").lower())
+    if normalized == "万元":
+        return numeric / 100.0
+    if normalized == "亿元":
+        return numeric * 100.0
+    return numeric
+
+
+def _parent_profit_amounts_cny_mn(text: str) -> list[float]:
+    compact = re.sub(r"\s+", " ", text or "")
+    metric = r"(?:归属于上市公司股东的净利润|归母净利润|parent\s+net\s+profit)"
+    unit = r"(万元|亿元|CNY\s*mn)"
+    values: list[float] = []
+    for value, matched_unit in re.findall(
+        rf"{metric}[^。；;\n|]{{0,80}}?(\d[\d,]*(?:\.\d+)?)\s*{unit}",
+        compact,
+        re.I,
+    ):
+        try:
+            values.append(_amount_to_cny_mn(value, matched_unit))
+        except ValueError:
+            continue
+    return values
+
+
+def audit_official_guidance_forecast_reconciliation(
+    report_dir: str | Path,
+    decision_text: str,
+) -> list[DecisionDepthIssue]:
+    """Require numeric official H1 guidance to close into every FY scenario."""
+
+    report_path = Path(report_dir)
+    forecast_path = report_path / "0_context" / "forecast_model.md"
+    pm_path = report_path / "5_portfolio" / "canonical_decision.json"
+    if not forecast_path.exists() or not pm_path.exists():
+        return []
+    try:
+        forecast_text = read_text_fallback(forecast_path)
+        payload = json.loads(read_text_fallback(pm_path))
+    except (OSError, TypeError, json.JSONDecodeError):
+        return []
+    guidance_section = forecast_text
+    marker = re.search(r"^## Official Earnings Guidance Override\s*$", forecast_text, re.I | re.M)
+    if marker:
+        guidance_section = forecast_text[marker.end():]
+        next_section = re.search(r"^##\s+", guidance_section, re.M)
+        if next_section:
+            guidance_section = guidance_section[:next_section.start()]
+    has_official_h1_guidance = bool(
+        re.search(r"(?:业绩预告|业绩预增|performance preview|earnings guidance)", guidance_section, re.I)
+        and re.search(r"(?:半年度|半年|H1|half-year)", guidance_section, re.I)
+    )
+    if not has_official_h1_guidance:
+        return []
+    guidance_values = _parent_profit_amounts_cny_mn(guidance_section)
+    if not guidance_values:
+        return [
+            DecisionDepthIssue(
+                "official_guidance_extraction",
+                "error",
+                "an official half-year earnings preview is present, but its numeric parent-profit guidance was not extracted; retrieve the announcement PDF/text before forecasting",
+            )
+        ]
+    h1_parent_profit = max(guidance_values)
+    issues: list[DecisionDepthIssue] = []
+    public_values = _parent_profit_amounts_cny_mn(decision_text)
+    public_has_h1_value = any(
+        abs(value - h1_parent_profit) <= max(abs(h1_parent_profit) * 0.02, 1.0)
+        for value in public_values
+    )
+    period_bridge_complete = all(
+        re.search(pattern, decision_text, re.I)
+        for pattern in (r"Q1|一季度", r"Q2|二季度|第二季度", r"H1|上半年|半年度", r"H2|下半年")
+    )
+    if not public_has_h1_value or not period_bridge_complete:
+        issues.append(
+            DecisionDepthIssue(
+                "official_guidance_full_year_reconciliation",
+                "error",
+                f"official H1 parent-profit guidance={h1_parent_profit:.2f} CNY mn is not explicitly bridged through Q1, implied Q2, H1, H2 and FY in the public forecast",
+            )
+        )
+    scenarios = list(
+        (payload.get("safe_valuation_assumptions") or {}).get("scenarios", []) or []
+    )
+    below_h1: list[str] = []
+    for row in scenarios:
+        try:
+            full_year = float(row.get("parent_net_profit_cny_mn"))
+        except (TypeError, ValueError):
+            continue
+        if full_year < h1_parent_profit * 0.98:
+            below_h1.append(
+                f"{row.get('scenario', 'scenario')} FY={full_year:.2f} CNY mn"
+            )
+    explicit_h2_loss_bridge = bool(
+        re.search(
+            r"(?:H2|下半年)[^。；;\n]{0,80}(?:亏损|净亏损|公允价值[^。；;\n]{0,20}(?:回撤|损失|转负))",
+            decision_text,
+            re.I,
+        )
+    )
+    if below_h1 and not explicit_h2_loss_bridge:
+        issues.append(
+            DecisionDepthIssue(
+                "official_guidance_full_year_reconciliation",
+                "error",
+                f"official H1 parent profit {h1_parent_profit:.2f} CNY mn already exceeds full-year scenario input(s) {below_h1}; no explicit H2 loss/fair-value-reversal bridge is provided",
+            )
+        )
     return issues
 
 PUBLICATION_BLOCKING_DEPTH_SECTIONS = frozenset()
@@ -1963,6 +2091,31 @@ def audit_public_process_leakage(decision_text: str) -> list[DecisionDepthIssue]
     return issues
 
 
+def audit_public_report_language(decision_text: str) -> list[DecisionDepthIssue]:
+    """Keep Chinese public reports from leaking full English reasoning blocks."""
+
+    if len(re.findall(r"[\u4e00-\u9fff]", decision_text or "")) < 200:
+        return []
+    english_heavy: list[str] = []
+    for raw in (decision_text or "").splitlines():
+        line = re.sub(r"https?://\S+", "", raw).strip()
+        latin_words = re.findall(r"[A-Za-z]{3,}", line)
+        latin_chars = len(re.findall(r"[A-Za-z]", line))
+        cjk_chars = len(re.findall(r"[\u4e00-\u9fff]", line))
+        if len(latin_words) >= 8 and latin_chars >= 60 and latin_chars > cjk_chars * 1.2:
+            english_heavy.append(line[:160])
+    if not english_heavy:
+        return []
+    return [
+        DecisionDepthIssue(
+            "public_report_language",
+            "error",
+            "Chinese public memo contains English-heavy reader-facing sentence(s); translate upstream prose before rendering: "
+            + " | ".join(english_heavy[:3]),
+        )
+    ]
+
+
 def audit_canonical_financial_reconciliation(report_dir: str | Path) -> list[DecisionDepthIssue]:
     """Cross-foot the machine-readable forecast before prose can be published."""
     report_path = Path(report_dir)
@@ -2347,18 +2500,36 @@ def audit_position_valuation_consistency(report_dir: str | Path, decision_text: 
             )
         )
         return issues
-    for line in decision_text.splitlines():
-        if not re.search(r"买入|建仓|加仓|试探|build|add", line, re.I):
+    clauses = [
+        clause.strip()
+        for clause in re.split(r"(?<=[。；;])|\n", decision_text)
+        if clause.strip()
+    ]
+    for clause in clauses:
+        if not re.search(
+            r"买入|建仓|加仓|小仓试探|试探性(?:买入|建仓|仓位)|build|add",
+            clause,
+            re.I,
+        ):
             continue
-        ranges = re.findall(r"(\d+(?:\.\d+)?)\s*[-–—至]\s*(\d+(?:\.\d+)?)\s*元", line)
-        single = re.findall(r"(?:低于|不高于|上限|at or below)\s*(\d+(?:\.\d+)?)\s*元", line, re.I)
-        proposed = [max(float(left), float(right)) for left, right in ranges] + [float(value) for value in single]
+        ranges = re.findall(
+            r"(\d+(?:\.\d+)?)\s*[-–—至]\s*(\d+(?:\.\d+)?)\s*元",
+            clause,
+        )
+        single = re.findall(
+            r"(?:低于|不高于|上限|at or below)\s*(\d+(?:\.\d+)?)\s*元|"
+            r"(\d+(?:\.\d+)?)\s*元(?:以下|以内|附近|左右)",
+            clause,
+            re.I,
+        )
+        proposed = [max(float(left), float(right)) for left, right in ranges]
+        proposed.extend(float(first or second) for first, second in single)
         if proposed and max(proposed) > safe_ceiling * 1.02:
             issues.append(
                 DecisionDepthIssue(
                     "position_valuation_consistency",
                     "error",
-                    f"buy/build instruction reaches {max(proposed):.2f}, above deterministic safe-buy ceiling {safe_ceiling:.2f}: {line.strip()[:180]}",
+                    f"buy/build instruction reaches {max(proposed):.2f}, above deterministic safe-buy ceiling {safe_ceiling:.2f}: {clause[:180]}",
                 )
             )
             break
@@ -3231,6 +3402,9 @@ def audit_report_depth(report_dir: str | Path) -> pd.DataFrame:
     issues.extend(audit_structured_research_usage(report_dir, decision_text))
     issues.extend(audit_context_alignment(report_dir))
     issues.extend(audit_handoff_numeric_consistency(report_dir))
+    issues.extend(
+        audit_official_guidance_forecast_reconciliation(report_dir, decision_text)
+    )
     issues.extend(audit_pm_unit_scale_arithmetic(report_dir))
     issues.extend(audit_canonical_financial_reconciliation(report_dir))
     issues.extend(audit_public_key_number_consistency(decision_text))
@@ -3241,6 +3415,7 @@ def audit_report_depth(report_dir: str | Path) -> pd.DataFrame:
     issues.extend(audit_rating_valuation_consistency(report_dir))
     issues.extend(audit_position_valuation_consistency(report_dir, decision_text))
     issues.extend(audit_report_redundancy(decision_text))
+    issues.extend(audit_public_report_language(decision_text))
     issues.extend(audit_public_process_leakage(decision_text))
     pm_payload_path = report_path / "5_portfolio" / "canonical_decision.json"
     if pm_payload_path.exists():

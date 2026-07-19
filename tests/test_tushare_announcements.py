@@ -3,11 +3,59 @@ from datetime import datetime, timedelta
 
 from tradingagents.dataflows.tushare_a_stock import TushareDataError
 from tradingagents.dataflows.tushare_research import (
+    _announcement_download_candidates,
+    _download_announcement_text,
     _fetch_announcements,
     _cninfo_stock_query_values,
     _earnings_guidance_section,
     _parse_cninfo_announcements,
 )
+
+
+def test_cninfo_detail_url_resolves_to_static_pdf_before_dynamic_page():
+    url = (
+        "http://www.cninfo.com.cn/new/disclosure/detail?stockCode=603986"
+        "&announcementId=1225417171&orgId=9900026561"
+        "&announcementTime=2026-07-10"
+    )
+
+    assert _announcement_download_candidates(url)[0] == (
+        "https://static.cninfo.com.cn/finalpage/2026-07-10/1225417171.PDF"
+    )
+
+
+def test_download_announcement_text_uses_resolved_cninfo_pdf(monkeypatch):
+    requested = []
+
+    class FakeResponse:
+        headers = {"Content-Type": "application/pdf"}
+        content = b"%PDF-fake"
+        text = ""
+        encoding = "utf-8"
+        url = "https://static.cninfo.com.cn/finalpage/2026-07-10/1225417171.PDF"
+
+        def raise_for_status(self):
+            return None
+
+    def fake_get(url, **kwargs):
+        requested.append(url)
+        return FakeResponse()
+
+    monkeypatch.setattr("tradingagents.dataflows.tushare_research.requests.get", fake_get)
+    monkeypatch.setattr(
+        "tradingagents.dataflows.tushare_research._extract_pdf_text",
+        lambda content: "预计2026年半年度归母净利润为690,000万元左右",
+    )
+
+    text = _download_announcement_text(
+        "https://www.cninfo.com.cn/new/disclosure/detail?"
+        "announcementId=1225417171&announcementTime=2026-07-10"
+    )
+
+    assert requested == [
+        "https://static.cninfo.com.cn/finalpage/2026-07-10/1225417171.PDF"
+    ]
+    assert "690,000万元" in text
 
 
 def test_cninfo_stock_query_values_include_exchange_org_id():

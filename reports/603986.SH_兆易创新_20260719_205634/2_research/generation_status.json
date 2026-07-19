@@ -1,0 +1,37 @@
+{
+  "mode": "schema_prompt_structured",
+  "agent": "Research Manager",
+  "structured_error": "",
+  "schema": "UnderwritingResearchPlan",
+  "handoff_repair_requested": true,
+  "handoff_repair_applied": true,
+  "handoff_repair_mode": "schema_prompt_structured",
+  "handoff_deterministic_completion_applied": true,
+  "handoff_deterministic_copied_lines": [
+    "2026E_grossmargin",
+    "2027E_grossmargin",
+    "2028E_grossmargin",
+    "2026E_operatingprofit",
+    "2027E_operatingprofit",
+    "2028E_operatingprofit",
+    "2026E_经营性现金流ocf",
+    "2027E_经营性现金流ocf",
+    "2028E_经营性现金流ocf"
+  ],
+  "initial_handoff_issues": [
+    "undocumented change 2027E_revenue: 28000.0 CNY mn -> 280000.0 CNY mn",
+    "undocumented change 2028E_revenue: 22000.0 CNY mn -> 220000.0 CNY mn",
+    "missing canonical line 2026E_grossmargin: 55.0 %",
+    "missing canonical line 2027E_grossmargin: 52.0 %",
+    "missing canonical line 2028E_grossmargin: 40.0 %",
+    "missing canonical line 2026E_operatingprofit: 12000.0 CNY mn",
+    "missing canonical line 2027E_operatingprofit: 13200.0 CNY mn",
+    "missing canonical line 2028E_operatingprofit: 7000.0 CNY mn",
+    "undocumented change 2027E_parent_net_profit: 13000.0 CNY mn -> 130000.0 CNY mn",
+    "undocumented change 2028E_parent_net_profit: 6800.0 CNY mn -> 68000.0 CNY mn",
+    "missing canonical line 2026E_经营性现金流ocf: 14640.0 CNY mn",
+    "missing canonical line 2027E_经营性现金流ocf: 15860.0 CNY mn",
+    "missing canonical line 2028E_经营性现金流ocf: 8500.0 CNY mn"
+  ],
+  "remaining_handoff_issues": []
+}

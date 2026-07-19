@@ -3320,30 +3320,36 @@ def normalize_sell_side_pm_decision(
             execution_field,
             flags=re.I,
         )
-        safe_lines: list[str] = []
-        removed_unsafe_lines = 0
+        safe_clauses: list[str] = []
+        removed_unsafe_clauses = 0
         affirmative_build = re.compile(
             r"(?:建议|可以|可考虑|启动|分批|逐步|择机).{0,24}(?:买入|建仓|加仓)|"
-            r"(?:买入|建仓|加仓).{0,24}(?:建议|可以|可考虑|启动|分批|逐步|择机)",
+            r"(?:买入|建仓|加仓).{0,24}(?:建议|可以|可考虑|启动|分批|逐步|择机)|"
+            r"小仓试探|试探性(?:买入|建仓|仓位)",
             re.I,
         )
-        for line in execution_field.splitlines():
+        clauses = [
+            clause
+            for clause in re.split(r"(?<=[。；;])|\n", execution_field)
+            if clause.strip()
+        ]
+        for clause in clauses:
             prices = [
                 float(value)
-                for value in re.findall(r"(\d+(?:\.\d+)?)\s*元", line)
+                for value in re.findall(r"(\d+(?:\.\d+)?)\s*元", clause)
             ]
             if (
                 prices
                 and max(prices) > output.safe_buy_price_ceiling_cny * 1.02
-                and affirmative_build.search(line)
+                and affirmative_build.search(clause)
             ):
-                removed_unsafe_lines += 1
+                removed_unsafe_clauses += 1
                 continue
-            safe_lines.append(line)
-        execution_field = "\n".join(safe_lines).strip()
-        if removed_unsafe_lines:
+            safe_clauses.append(clause)
+        execution_field = "".join(safe_clauses).strip()
+        if removed_unsafe_clauses:
             notes.append(
-                f"removed {removed_unsafe_lines} unsafe buy/build line(s) above deterministic ceiling"
+                f"removed {removed_unsafe_clauses} unsafe buy/build clause(s) above deterministic ceiling"
             )
         deterministic_constraint = (
             f"**程序化执行约束**：当前价{assumptions.current_price_cny:.2f}元高于安全买入上限"

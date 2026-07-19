@@ -30,6 +30,24 @@ logger = logging.getLogger(__name__)
 T = TypeVar("T", bound=BaseModel)
 
 
+def _configured_language_repair_instruction() -> str:
+    """Keep schema-repair retries in the configured reader-facing language."""
+
+    try:
+        from tradingagents.dataflows.config import get_config
+
+        language = str(get_config().get("output_language", "English") or "English")
+    except Exception:
+        language = "English"
+    if language.strip().lower() == "english":
+        return ""
+    return (
+        f" Every reader-facing prose field must be written in {language}. "
+        "Translate upstream prose by meaning; preserve ticker symbols, source IDs, "
+        "metric abbreviations and units, but do not preserve full English sentences."
+    )
+
+
 def _response_text(response: Any) -> str:
     content = getattr(response, "content", response)
     if isinstance(content, list):
@@ -197,6 +215,7 @@ def invoke_structured_or_freetext(
 
 Return exactly one valid JSON object with no Markdown fences or commentary. Preserve the analysis and values already present. Do not add unsupported facts. Required JSON Schema:
 {json.dumps(fallback_schema.model_json_schema(), ensure_ascii=False, separators=(',', ':'))}
+{_configured_language_repair_instruction()}
 
 Previous response:
 {content[:50000]}
