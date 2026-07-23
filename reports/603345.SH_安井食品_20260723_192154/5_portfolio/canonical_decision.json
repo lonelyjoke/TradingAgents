@@ -1,0 +1,1143 @@
+{
+  "rating": "Overweight",
+  "rating_posture": "增持；当前价87.12元高于程序化安全买入上限78.53元，已有持仓按评级管理，新资金等待价格进入安全区间或基本面证据推动估值输入上修。",
+  "research_readiness": "partial",
+  "one_line_thesis": "市场低估安井食品2026年的盈利弹性，品类升级与成本改善驱动的利润增长尚未在17.3倍2026E市盈率中充分反映，净现金与高分红构成坚实下行保护。",
+  "research_questions": [
+    "2026年收入增长驱动力是否可持续？",
+    "毛利率修复能否持续？",
+    "子公司是利润拖累还是增量？",
+    "当前市盈率是否充分反映了盈利改善？"
+  ],
+  "question_verdicts": [
+    {
+      "question": "2026年收入增长驱动力是否可持续？",
+      "why_decisive": "收入增速决定盈利增长的基数和估值扩张的可行性。",
+      "conclusion": "增长具有持续性，但下半年可能回落至12%左右。合同负债大增、Q2淡季增速10-15%及虾滑高增长表明真实动销，但宏观餐饮社零仅+1.2%限制总量空间。维持12.6%营收增速基线。",
+      "evidence_used": [
+        "EV018合同负债+46.5%",
+        "KPE01 Q2出货增速10-15%",
+        "KPE09虾滑+37%"
+      ],
+      "strongest_counterevidence": "Q1合同负债环比季节性下降，Q2增速已较Q1放缓，鼎味泰并表贡献约5-8个百分点，宏观社零疲软。",
+      "model_or_valuation_effect": "维持2026E营收182.4亿元不变。",
+      "confidence": "medium",
+      "next_verification": "2026年半年报Q2营收及分产品收入构成。"
+    },
+    {
+      "question": "毛利率修复能否持续？",
+      "why_decisive": "毛利率是盈利弹性的核心驱动力，直接影响净利润和估值。",
+      "conclusion": "改善趋势确立，但幅度及持续性取决于成本走势。Q1的24.99%包含旺季和低基数效应，下半年若原料反弹将回落。维持全年23.2%基线。",
+      "evidence_used": [
+        "EV013 2026Q1毛利率24.99%",
+        "EV038-041原材料价格走势",
+        "KPE01利润增速快于收入"
+      ],
+      "strongest_counterevidence": "原材料期货价格分化，新品毛利率可能低于传统产品，成本顺风逆转可能使毛利率回落至22%以下。",
+      "model_or_valuation_effect": "维持2026E毛利率23.2%，对应归母净利润16.8亿元。",
+      "confidence": "medium",
+      "next_verification": "半年报毛利率及分产品毛利率，跟踪生猪/豆粕期货价格。"
+    },
+    {
+      "question": "子公司是利润拖累还是增量？",
+      "why_decisive": "子公司利润波动影响归母净利弹性和商誉风险。",
+      "conclusion": "新宏业增长良好，新柳伍承压但可控，鼎味泰并表贡献增量，合计有望实现小幅正贡献约0.3-0.8亿元，商誉风险可控。",
+      "evidence_used": [
+        "KPE01新宏业双位数增长，新柳伍承压",
+        "EV029商誉7.55亿规模有限"
+      ],
+      "strongest_counterevidence": "新柳伍若亏损扩大或鼎味泰整合成本上升，少数股东损益可能侵蚀归母利润。",
+      "model_or_valuation_effect": "在基线16.8亿净利润中已包含约0.5亿正向贡献。",
+      "confidence": "medium",
+      "next_verification": "半年报少数股东损益及子公司经营数据。"
+    },
+    {
+      "question": "当前市盈率是否充分反映了盈利改善？",
+      "why_decisive": "估值吸引力和安全边际决定推荐评级和仓位决策。",
+      "conclusion": "存在预期差，市场隐含15.3亿净利润，而模型预测16.8亿，2026E市盈率仅17.3倍，若盈利兑现市盈率有望修复至19-20倍，概率加权公允价值100.09元，一年预期回报约19-20%。",
+      "evidence_used": [
+        "当前股价87元",
+        "预测EPS 5.04元",
+        "历史PE中枢18-20倍"
+      ],
+      "strongest_counterevidence": "若净利润仅15-16亿元，PE升至18-19倍缺乏安全边际，市场情绪恶化可能将估值压缩至15-17倍。",
+      "model_or_valuation_effect": "采用概率加权情境估值，公允价值100.09元，安全买入上限78.53元。",
+      "confidence": "medium",
+      "next_verification": "半年报验证利润增长，及大宗商品价格和社零数据。"
+    }
+  ],
+  "forecast_takeaways": [
+    {
+      "takeaway": "2026年净利润增速23.6%远超市场隐含的约12.5%，利润弹性来源于毛利率修复和经营杠杆。",
+      "evidence_anchor": "2026Q1毛利率24.99%，Q1净利润5.63亿（+42.7% YoY），渠道反馈利润增速快于收入。",
+      "financial_implication": "若全年毛利率达23.2%，归母净利润可达16.8亿元，EPS 5.04元（基于总股本3.3329亿股）。当前股价仅隐含15.3亿利润，存在明显预期差。",
+      "confidence_and_risk": "中等信心。关键风险在于下半年原材料价格反弹和餐饮需求失速。"
+    },
+    {
+      "takeaway": "自由现金流和分红提供坚实的下行保护，FCF/市值比率有望从4.1%提升至5%以上。",
+      "evidence_anchor": "OCF/净利润1.85倍，预计2026年FCF约12亿，股息率约5%。",
+      "financial_implication": "若盈利增长且资本开支受控，FCF/市值将升至5-6.5%，为高分红和估值扩张提供基础。",
+      "confidence_and_risk": "高信心。低负债和健康现金流使股息可持续。"
+    }
+  ],
+  "forecast_assumptions": [
+    {
+      "parameter": "2026E综合毛利率",
+      "affected_business": "食品制造与农产品整体",
+      "historical_anchor": "2025年21.53%，2026Q1 24.99%",
+      "evidence_status": "proxy",
+      "base_case": "23.2%",
+      "bull_case": "24.0%（若原材料维持低位且提价顺利）",
+      "bear_case": "22.0%（若下半年成本反弹且竞争加剧）",
+      "rationale_and_evidence": "Q1高毛利率包含旺季因素，但提价和结构改善可支撑全年23.2%。若豆粕、棕榈油反弹，成本压力将考验提价能力。",
+      "sensitivity": "毛利率每变动0.5pp影响净利润约4-5%，影响每股价值约3-4元。",
+      "confidence": "medium",
+      "verification_gate": "半年报毛利率及分产品毛利率。"
+    },
+    {
+      "parameter": "2026E营业收入增速",
+      "affected_business": "食品制造与农产品整体",
+      "historical_anchor": "2025年+7.0%，2026Q1 +30.8%（含并表）",
+      "evidence_status": "proxy",
+      "base_case": "12.6%",
+      "bull_case": "14.0%（新品超预期）",
+      "bear_case": "10.0%（宏观进一步疲软）",
+      "rationale_and_evidence": "渠道反馈Q2主业增速10-15%，结合并表和新品，12.6%合理。基数效应消退和宏观疲软限制上行。",
+      "sensitivity": "每下降1%营收增速，净利润下降约1.2%。",
+      "confidence": "medium",
+      "verification_gate": "半年报收入增速及新品收入占比。"
+    },
+    {
+      "parameter": "子公司利润贡献",
+      "affected_business": "新宏业、新柳伍、鼎味泰",
+      "historical_anchor": "2025年具体未量化",
+      "evidence_status": "analyst_estimate",
+      "base_case": "小幅正贡献约0.5亿",
+      "bull_case": "贡献1亿以上（新宏业高增+鼎味泰超预期）",
+      "bear_case": "拖累0.3亿（新柳伍恶化）",
+      "rationale_and_evidence": "KPE01显示新宏业双位数增长，新柳伍承压，鼎味泰并表。基于此，中性偏正。",
+      "sensitivity": "每变动0.5亿影响归母净利约3.0%。",
+      "confidence": "low",
+      "verification_gate": "半年报少数股东损益。"
+    }
+  ],
+  "core_theses": [
+    {
+      "rank": 1,
+      "takeaway": "盈利弹性被市场低估，2026E净利润16.8亿（+23.6%）的增长远超隐含的12.5%，且市场未充分定价毛利率修复的持续性。",
+      "decisive_question": "安井的毛利率修复能否推动盈利超预期增长？",
+      "evidence": "Q1毛利率24.99%，合同负债+46.5%，渠道反馈Q2利润增速快于收入。",
+      "strongest_counterevidence": "若下半年原材料价格反弹（豆粕持续高位、生猪反转）叠加餐饮需求进一步失速，毛利率可能被压制回22%以下，净利润将仅约15亿元，届时2026E PE将升回19倍，缺乏安全边际。",
+      "financial_transmission": "毛利率每提升0.5pp，EPS增加约0.15元，估值乘数不变下股价提升约3元。当前股价87.12元隐含市场预期净利润15.3亿，而我们预测16.8亿，预期差1.5亿。",
+      "market_pricing": "当前PE TTM 19x隐含市场认为利润增速仅12.5%左右，未计入毛利率修复带来的额外10个百分点增长；若半年报验证毛利率>23%且收入>12%，估值有望向19-20x修复，概率加权公允价值100.09元。",
+      "falsification_gate": "半年报毛利率<22.5%或营收增速<10%。",
+      "verdict": "partial"
+    },
+    {
+      "rank": 2,
+      "takeaway": "净现金和高分红提供坚实下行保护，绝对回报安全垫突出。",
+      "decisive_question": "安井的资产负债表和现金流能否支撑当前估值并抵御下行风险？",
+      "evidence": "净现金约40亿，负债率19.88%，OCF/净利1.85倍，连续19年分红，股息率约5%。",
+      "strongest_counterevidence": "若利润大幅下滑导致自由现金流不足以覆盖分红，或公司因激进资本开支削减分红，防御属性将被削弱；但当前净现金充裕、资本开支可控，该风险较低。",
+      "financial_transmission": "净现金占市值13.8%，构成硬性底部；稳定分红吸引长期资金。若2026年FCF达12亿元，FCF/市值升至4.1%，进一步提升防御价值。",
+      "market_pricing": "当前估值已部分反映防御属性，高股息率在消费板块中突出，但市场对业绩波动的担忧压制了估值溢价；一旦盈利验证，防御与成长双属性有望驱动估值修复。",
+      "falsification_gate": "公司取消或大幅削减分红，或CapEx激增至15亿元/年导致FCF为负。",
+      "verdict": "partial"
+    }
+  ],
+  "segment_economics": [
+    {
+      "business_unit": "安井品牌速冻主业",
+      "economic_role": "成熟核心业务",
+      "disclosure_basis": "reported",
+      "scale_and_growth": "2025年营收161.9亿元，2026E增速12.6%",
+      "margin_and_cash": "毛利率23.2%，OCF/净利1.85x，低应收",
+      "driver_equation": "销量×均价，成本受原材料波动",
+      "valuation_treatment": "core",
+      "evidence_ids": [
+        "EV011",
+        "EV013"
+      ],
+      "missing_or_next_check": "分产品线毛利率及销量尚未披露，待半年报"
+    },
+    {
+      "business_unit": "核心子公司（新宏业、新柳伍、鼎味泰）",
+      "economic_role": "附属利润波动单元",
+      "disclosure_basis": "analyst_estimate",
+      "scale_and_growth": "收入占比未单独披露，整体利润小幅正贡献",
+      "margin_and_cash": "新宏业双位数增长，新柳伍承压",
+      "driver_equation": "小龙虾价格、并表贡献",
+      "valuation_treatment": "core",
+      "evidence_ids": [],
+      "missing_or_next_check": "各子公司详细财务数据待半年报"
+    },
+    {
+      "business_unit": "第二曲线期权（清真/出口）",
+      "economic_role": "早期期权",
+      "disclosure_basis": "missing",
+      "scale_and_growth": "尚无量化收入，8款产品动销",
+      "margin_and_cash": "未知",
+      "driver_equation": "海外清真认证和服务网络搭建",
+      "valuation_treatment": "optionality",
+      "evidence_ids": [],
+      "missing_or_next_check": "管理层量化指引缺失"
+    }
+  ],
+  "business_model_mechanisms": [
+    {
+      "link": "产能驱动+品牌渠道双轮",
+      "how_it_works": "自有工厂生产速冻产品，通过经销商网络销售，预收款模式保证现金流。",
+      "economic_driver": "量（产能利用率、新品放量）和价（提价、产品升级）共同驱动收入，成本控制决定毛利。",
+      "cash_and_capital_feature": "低应收、合同负债先行，经营现金流强劲，资本开支可控，自由现金流充裕。",
+      "evidence_or_gap": "Q1合同负债大增，OCF/净利1.85x得到财报验证；产能利用率及新品毛利率待完善。",
+      "analyst_conclusion": "产能与渠道高效协同，使公司在行业逆风中仍能维持增长和现金转化。"
+    },
+    {
+      "link": "经销商网络与合同负债模式",
+      "how_it_works": "全国经销商先款后货，合同负债反映经销商打款信心。",
+      "economic_driver": "经销商数量和单商销售额提升驱动收入，合同负债增长是先行指标。",
+      "cash_and_capital_feature": "应收账款极低，预收账款增加改善现金流。",
+      "evidence_or_gap": "合同负债+46.5%验证经销商信心，但经销商具体数量及库存数据未公开。",
+      "analyst_conclusion": "合同负债模式增强了收入的可预见性和现金流质量。"
+    },
+    {
+      "link": "子公司利润弹性与风险",
+      "how_it_works": "新宏业、新柳伍、鼎味泰等子公司贡献增量利润，但业绩波动大。",
+      "economic_driver": "子公司的销售额和利润率影响合并净利润。",
+      "cash_and_capital_feature": "商誉7.55亿元，减值风险可控，净现金充足。",
+      "evidence_or_gap": "渠道反馈新宏业增长良好，新柳伍承压；少数股东损益细节待半年报。",
+      "analyst_conclusion": "子公司整体利好，但盈利稳定性弱于母品牌，需持续跟踪。"
+    },
+    {
+      "link": "高现金转化与低资本消耗",
+      "how_it_works": "经营现金流远高于净利润，资本开支占收入比重约5%，自由现金流稳定。",
+      "economic_driver": "高现金转化保障分红和再投资。",
+      "cash_and_capital_feature": "净现金40亿，股息率5%，低杠杆。",
+      "evidence_or_gap": "2025年合计分红4.32元/股经公告验证。",
+      "analyst_conclusion": "现金牛特征明显，下行保护坚实。"
+    }
+  ],
+  "industry_driver_matrix": [
+    {
+      "driver": "餐饮终端需求（社零餐饮）",
+      "current_state_and_direction": "2026年6月同比+1.2%，环比改善但仍较弱，区间震荡。",
+      "dated_evidence": "EV036 2026年6月社零餐饮数据",
+      "affected_business": "安井品牌速冻主业",
+      "financial_transmission": "影响经销商拿货意愿和收入增速。",
+      "confidence": "high",
+      "next_verification": "每月社零数据"
+    },
+    {
+      "driver": "行业产能扩张与竞争",
+      "current_state_and_direction": "行业规模2212亿元，安井产能129万吨，龙头份额提升，但新进入者挤占。",
+      "dated_evidence": "EV034 行业产能数据",
+      "affected_business": "安井所有产品线",
+      "financial_transmission": "决定费用率和毛利率空间。",
+      "confidence": "medium",
+      "next_verification": "跟踪竞品产能公告和招股书"
+    },
+    {
+      "driver": "原材料价格（生猪/豆粕/棕榈油/鱼糜）",
+      "current_state_and_direction": "生猪-6.6%，豆粕+5.91%，玉米-2.65%，棕榈油-2.72%，方向混杂。",
+      "dated_evidence": "EV038-041期货和现货报价",
+      "affected_business": "安井整体毛利率",
+      "financial_transmission": "直接决定毛利率波动幅度。",
+      "confidence": "medium",
+      "next_verification": "每周商品价格数据"
+    },
+    {
+      "driver": "冷链物流与城镇化政策",
+      "current_state_and_direction": "\"十五五\"规划支持，长期正面。",
+      "dated_evidence": "政策文件方向性提及",
+      "affected_business": "安井渠道下沉和新市场开拓",
+      "financial_transmission": "降低物流成本，扩大可覆盖市场。",
+      "confidence": "low",
+      "next_verification": "具体政策细则出台"
+    }
+  ],
+  "moat_mechanisms": [
+    {
+      "moat_source": "规模成本优势",
+      "operating_mechanism": "通过130万吨产能集采，单位成本低于中小企业。",
+      "observed_proof": "2026Q1毛利率回升至24.99%，在原材料波动中仍能维持较高毛利。",
+      "economic_result": "毛利率比同行高约2-3%，但差距可能收窄。",
+      "durability_and_threat": "新进入者低价策略和行业毛利率收敛构成威胁，但规模优势短期内难以复制。",
+      "verdict": "partial"
+    },
+    {
+      "moat_source": "全国化渠道网络",
+      "operating_mechanism": "经销商先款后货，应收账款极低，预收账款充裕。",
+      "observed_proof": "应收/营收仅3.12%，合同负债同比+46.5%。",
+      "economic_result": "高渠道粘性和极佳现金流，但经销商具体数据缺失。",
+      "durability_and_threat": "渠道下沉增加费用，部分经销商可能被新品牌撬动。",
+      "verdict": "partial"
+    },
+    {
+      "moat_source": "品牌与品类迭代",
+      "operating_mechanism": "消费者指名购买率高，虾滑、烤肠等新品持续放量。",
+      "observed_proof": "虾滑增长37%，烤肠、清真系列动销良好。",
+      "economic_result": "新品溢价和复购率提升综合毛利率和增长动力。",
+      "durability_and_threat": "年轻消费者品牌粘性低，网红品牌可能分流。",
+      "verdict": "partial"
+    }
+  ],
+  "accounting_quality_matrix": [
+    {
+      "item": "营运资金与现金转化",
+      "latest_evidence_and_period": "2026Q1应收账款/营收3.12%，存货/营收16.13%（同比-3.32pp），合同负债+46.5%",
+      "trend_or_comparator": "同比存货周转加快，预收款大幅增长",
+      "causal_interpretation": "经销商回款积极，库存管理优化，终端动销健康",
+      "earnings_cash_roic_effect": "盈利真实性强，现金流好于表观利润，ROIC因现金转化效率提升",
+      "verdict": "positive",
+      "evidence_ids": [
+        "EV018"
+      ]
+    },
+    {
+      "item": "资本开支与投资回报",
+      "latest_evidence_and_period": "2025年资本开支8.73亿（营收5.4%），设计产能129万吨",
+      "trend_or_comparator": "资本开支占收入比重可控，进入产能释放期",
+      "causal_interpretation": "新增产能推动收入增长，单位折旧摊薄有助于毛利率",
+      "earnings_cash_roic_effect": "ROIC中期提升，自由现金流逐步扩大",
+      "verdict": "positive",
+      "evidence_ids": [
+        "EV034"
+      ]
+    },
+    {
+      "item": "杠杆与减值风险",
+      "latest_evidence_and_period": "2026Q1负债率19.88%，净现金约40亿，商誉7.55亿",
+      "trend_or_comparator": "净现金充沛，杠杆极低",
+      "causal_interpretation": "保守的资本结构提供抗周期能力，商誉规模小，减值风险有限",
+      "earnings_cash_roic_effect": "财务费用为负，增加利润；减值风险低保护净利润",
+      "verdict": "positive",
+      "evidence_ids": [
+        "EV028",
+        "EV029"
+      ]
+    },
+    {
+      "item": "股东回报",
+      "latest_evidence_and_period": "2025年合计分红4.32元/股，股息率约5%，连续19年分红",
+      "trend_or_comparator": "分红稳定且逐年小幅增长",
+      "causal_interpretation": "公司治理优秀，股东回报意识强",
+      "earnings_cash_roic_effect": "高分红提升总回报，增强防御属性",
+      "verdict": "positive",
+      "evidence_ids": [
+        "EV037"
+      ]
+    }
+  ],
+  "alternative_intelligence_decisions": [
+    {
+      "kpe_ids": [
+        "KPE01"
+      ],
+      "claim": "安井Q2收入增速约15%，利润增速快于收入，新宏业增长超预期",
+      "source_type": "sell_side_view",
+      "affected_business_and_variable": "安井品牌及新宏业子公司营收和利润",
+      "public_crosscheck": "与公开季报收入增速方向一致，但具体幅度未公开；该KPE与对应KSI属于同一卖方原始帖子，不构成独立交叉验证；该KPE与对应KSI属于同一卖方原始帖子，不构成独立交叉验证。",
+      "evidence_grade": "C_market_narrative",
+      "disposition": "probability_change",
+      "before_after": "2026E营收增速基线12.6%得到支撑，子公司正向贡献概率提升",
+      "report_use": "用于验证收入增速假设和子公司盈利判断，写入公司章节和预测支撑",
+      "falsification_or_next_check": "2026年半年报营收及子公司利润数据",
+      "freshness_and_shelf_life": "2026-07-07获取，有效至半年报发布"
+    },
+    {
+      "kpe_ids": [
+        "KPE03"
+      ],
+      "claim": "Q2主业增速约10-15%，淡季不淡",
+      "source_type": "sell_side_view",
+      "affected_business_and_variable": "安井品牌主业收入增速",
+      "public_crosscheck": "未有官方公告，但业务逻辑合理；该KPE与对应KSI属于同一卖方原始帖子，不构成独立交叉验证；该KPE与对应KSI属于同一卖方原始帖子，不构成独立交叉验证。",
+      "evidence_grade": "C_market_narrative",
+      "disposition": "probability_change",
+      "before_after": "强化收入增速基线信心",
+      "report_use": "用于交叉验证收入趋势",
+      "falsification_or_next_check": "半年报收入增速",
+      "freshness_and_shelf_life": "2026-07-06，有效期至半年报"
+    },
+    {
+      "kpe_ids": [
+        "KPE09"
+      ],
+      "claim": "虾滑同比增长37%，烤肠和清真产品铺货顺利",
+      "source_type": "channel_check",
+      "affected_business_and_variable": "新品品类收入增速及占比",
+      "public_crosscheck": "未单独披露，但公司历史中对虾滑重视",
+      "evidence_grade": "B_private_edge",
+      "disposition": "probability_change",
+      "before_after": "支持品类升级驱动毛利率提升的bull case",
+      "report_use": "用于行业章节和盈利能力分析",
+      "falsification_or_next_check": "公司是否单独披露虾滑/烤肠品类收入",
+      "freshness_and_shelf_life": "2026-07-11，预期有效至下一个半年报"
+    },
+    {
+      "kpe_ids": [
+        "KPE02"
+      ],
+      "claim": "速冻食品行业结构性升级，丸料、调理、烤肠品类增速高于传统面点",
+      "source_type": "industry_data",
+      "affected_business_and_variable": "安井产品组合升级方向",
+      "public_crosscheck": "与行业报告趋势相符，但无明确第三方核实",
+      "evidence_grade": "C_market_narrative",
+      "disposition": "verification_change",
+      "before_after": "支撑行业逻辑，但未直接修改模型参数",
+      "report_use": "行业章节的背景论据",
+      "falsification_or_next_check": "行业月度数据",
+      "freshness_and_shelf_life": "2026-07-11，中期有效"
+    }
+  ],
+  "sell_side_expectation_matrix": [
+    {
+      "source_ids": [
+        "KSI01",
+        "KPE01"
+      ],
+      "institution": "未识别",
+      "institution_origin": "unknown",
+      "published_at": "2026-07-07",
+      "observation_type": "single_broker",
+      "forecast_and_valuation": "隐含Q2合并收入增速~15%，未提供量化毛利率假设",
+      "revision_or_dispersion": "无法比较，单一来源",
+      "comparison_with_our_model": "收入增速略高于我们的12.6%，但差异不显著",
+      "forecast_posture": "optimistic",
+      "key_assumptions_and_scenario": "假设并表效应和新品发力带动全年收入，但未公开成本假设",
+      "adoption_level": "cross_check_only",
+      "evidence_status": "private_text",
+      "decision_use": "用于验证季度趋势，未直接采纳为模型输入"
+    }
+  ],
+  "safe_valuation_assumptions": {
+    "current_price_cny": 87.12,
+    "required_annual_return_pct": 15.0,
+    "holding_period_years": 1.0,
+    "margin_of_safety_pct": 18.0,
+    "maximum_bear_loss_pct": 17.5,
+    "optionality_equity_value_cny_mn": 0.0,
+    "optionality_inputs": [
+      {
+        "name": "清真/出口新业务期权",
+        "metric_name": "增量价值",
+        "metric_value_cny_mn": 3000.0,
+        "valuation_multiple": 1.0,
+        "probability_pct": 20.0,
+        "ownership_pct": 100.0,
+        "execution_haircut_pct": 0.0,
+        "evidence_ids": [
+          "KPE09"
+        ],
+        "assumption_summary": "8款产品动销良好，经销商架构初步搭建，探索东南亚。尚处早期，以20%概率赋予30亿增量价值。"
+      }
+    ],
+    "other_adjustments_equity_value_cny_mn": 0.0,
+    "scenarios": [
+      {
+        "scenario": "bull",
+        "probability_pct": 30.0,
+        "valuation_method": "PE",
+        "parent_net_profit_cny_mn": 2000.0,
+        "valuation_multiple": 20.0,
+        "direct_equity_value_cny_mn": null,
+        "assumption_summary": "毛利率24%，营收增速14%，子公司贡献1亿以上",
+        "evidence_ids": [
+          "KPE01",
+          "KPE09"
+        ]
+      },
+      {
+        "scenario": "base",
+        "probability_pct": 50.0,
+        "valuation_method": "PE",
+        "parent_net_profit_cny_mn": 1680.0,
+        "valuation_multiple": 19.0,
+        "direct_equity_value_cny_mn": null,
+        "assumption_summary": "毛利率23.2%，营收增速12.6%，子公司小幅正贡献",
+        "evidence_ids": [
+          "EV013",
+          "KPE01"
+        ]
+      },
+      {
+        "scenario": "bear",
+        "probability_pct": 20.0,
+        "valuation_method": "PE",
+        "parent_net_profit_cny_mn": 1500.0,
+        "valuation_multiple": 16.0,
+        "direct_equity_value_cny_mn": null,
+        "assumption_summary": "毛利率22%，营收增速10%，子公司拖累",
+        "evidence_ids": [
+          "EV038-041"
+        ]
+      }
+    ]
+  },
+  "deterministic_valuation": {
+    "status": "closed",
+    "diluted_share_count_mn": 333.288932,
+    "scenario_rows": [
+      {
+        "scenario": "bull",
+        "probability_pct": 30.0,
+        "parent_net_profit_cny_mn": 2000.0,
+        "eps_cny": 6.000799330474017,
+        "valuation_method": "PE",
+        "valuation_multiple": 20.0,
+        "equity_value_cny_mn": 40000.0,
+        "fair_value_per_share_cny": 120.01598660948034,
+        "assumption_summary": "毛利率24%，营收增速14%，子公司贡献1亿以上"
+      },
+      {
+        "scenario": "base",
+        "probability_pct": 50.0,
+        "parent_net_profit_cny_mn": 1680.0,
+        "eps_cny": 5.040671437598174,
+        "valuation_method": "PE",
+        "valuation_multiple": 19.0,
+        "equity_value_cny_mn": 31920.0,
+        "fair_value_per_share_cny": 95.77275731436531,
+        "assumption_summary": "毛利率23.2%，营收增速12.6%，子公司小幅正贡献"
+      },
+      {
+        "scenario": "bear",
+        "probability_pct": 20.0,
+        "parent_net_profit_cny_mn": 1500.0,
+        "eps_cny": 4.500599497855513,
+        "valuation_method": "PE",
+        "valuation_multiple": 16.0,
+        "equity_value_cny_mn": 24000.0,
+        "fair_value_per_share_cny": 72.0095919656882,
+        "assumption_summary": "毛利率22%，营收增速10%，子公司拖累"
+      }
+    ],
+    "optionality_rows": [
+      {
+        "name": "清真/出口新业务期权",
+        "metric_name": "增量价值",
+        "metric_value_cny_mn": 3000.0,
+        "valuation_multiple": 1.0,
+        "probability_pct": 20.0,
+        "ownership_pct": 100.0,
+        "execution_haircut_pct": 0.0,
+        "equity_value_cny_mn": 600.0,
+        "per_share_value_cny": 1.800239799142205,
+        "evidence_ids": [
+          "KPE09"
+        ],
+        "assumption_summary": "8款产品动销良好，经销商架构初步搭建，探索东南亚。尚处早期，以20%概率赋予30亿增量价值。"
+      }
+    ],
+    "probability_weighted_core_value_cny": 98.29309303316438,
+    "optionality_per_share_cny": 1.800239799142205,
+    "other_adjustments_per_share_cny": 0.0,
+    "fair_value_per_share_cny": 100.09333283230659,
+    "expected_return_pct": 14.891337043510777,
+    "required_annual_return_pct": 15.0,
+    "holding_period_years": 1.0,
+    "margin_of_safety_pct": 18.0,
+    "maximum_bear_loss_pct": 17.5,
+    "required_return_price_cny": 83.28065853423071,
+    "margin_of_safety_price_cny": 78.53366099777956,
+    "bear_loss_constraint_price_cny": 87.28435389780388,
+    "safe_buy_price_ceiling_cny": 78.53366099777956,
+    "suggested_buy_zone_low_cny": 70.6802948980016,
+    "fundamental_floor_cny": 72.0095919656882,
+    "formula_notes": [
+      "scenario EPS = parent net profit (CNY mn) / diluted shares (mn)",
+      "PE fair value/share = scenario EPS x selected PE",
+      "probability-weighted core value = sum(probability x scenario fair value/share)",
+      "optionality equity value = metric x multiple x probability x ownership x (1-execution haircut)",
+      "safe ceiling = min(base/(1+required return)^years, base x (1-MOS), bear/(1-max bear loss))"
+    ]
+  },
+  "investment_conclusion_and_core_conflict": "安井食品当前处于盈利弹性释放的前夜，市场对2026年净利润+23.6%至16.8亿元的改善定价不充分。核心逻辑在于毛利率修复（成本顺风+品类升级+费用优化）叠加收入端的品类扩张（烤肠、虾滑、清真），将驱动每股收益和估值中枢上移。根据概率加权情景估值，公允价值约为100.09元，较当前87.12元有约14.9%的上行空间，叠加约5%的股息率，一年预期总回报约19-20%。当前市值对应2026E市盈率仅17.3倍，低于历史中枢，且净现金约40亿、股息率3-5%提供下行保护。主要风险在于下半年原材料成本潜在反弹与新品类毛利率不透明，但整体胜率/赔率组合具备吸引力。半年报（8月底）是验证毛利率>23%及收入增速>12%的关键催化剂。",
+  "canonical_model_snapshot": [
+    {
+      "line_id": "shares",
+      "period": "2026-07-23; latest stock_basic; Tushare stock_basic.reg_capital (CNY 10,000) / 100; CNY 1 par value",
+      "metric": "diluted_shares",
+      "value": 333.288932,
+      "unit": "mn shares",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "Tushare stock_basic.reg_capital (CNY 10,000) / 100; CNY 1 par value"
+    },
+    {
+      "line_id": "2026E_revenue",
+      "period": "2026E",
+      "metric": "营业收入",
+      "value": 18240.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV011",
+        "KPE01",
+        "KPE03"
+      ],
+      "formula": "base revenue x (1+12.6%)"
+    },
+    {
+      "line_id": "2026E_gross_margin",
+      "period": "2026E",
+      "metric": "毛利率",
+      "value": 23.2,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV013",
+        "EV038",
+        "EV039",
+        "EV040",
+        "EV041"
+      ],
+      "formula": "assumed"
+    },
+    {
+      "line_id": "2026E_gross_profit",
+      "period": "2026E",
+      "metric": "毛利",
+      "value": 4231.68,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "revenue * gross_margin"
+    },
+    {
+      "line_id": "2026E_operating_profit",
+      "period": "2026E",
+      "metric": "营业利润",
+      "value": 2050.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV014"
+      ],
+      "formula": "assumed 11.2% of revenue"
+    },
+    {
+      "line_id": "2026E_parent_net_profit",
+      "period": "2026E",
+      "metric": "归母净利润",
+      "value": 1680.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV011",
+        "EV015",
+        "KPE01"
+      ],
+      "formula": "assumed growth of 23.6%"
+    },
+    {
+      "line_id": "2026E_eps",
+      "period": "2026E",
+      "metric": "EPS",
+      "value": 5.040671437598174,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    },
+    {
+      "line_id": "2026E_ocf",
+      "period": "2026E",
+      "metric": "经营现金流",
+      "value": 2100.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV017",
+        "EV018"
+      ],
+      "formula": "net profit * 1.25"
+    },
+    {
+      "line_id": "2026E_capex",
+      "period": "2026E",
+      "metric": "资本开支",
+      "value": 900.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "assumed 4.9% of revenue"
+    },
+    {
+      "line_id": "2026E_fcf",
+      "period": "2026E",
+      "metric": "自由现金流",
+      "value": 1200.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "OCF - abs(capex)"
+    },
+    {
+      "line_id": "base_fair_value",
+      "period": "2026E",
+      "metric": "每股公允价值（基线）",
+      "value": 95.8,
+      "unit": "CNY/share",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "core value (19x 2026E profit) + option / shares"
+    },
+    {
+      "line_id": "2027E_revenue",
+      "period": "2027E",
+      "metric": "revenue",
+      "value": 20040.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV011",
+        "KPE01",
+        "KPE03",
+        "KPE08",
+        "KPE10",
+        "KPE11"
+      ],
+      "formula": "基年实际 x (1+增速)，2026E+12.6%, 2027E+9.9%, 2028E+9.0%"
+    },
+    {
+      "line_id": "2028E_revenue",
+      "period": "2028E",
+      "metric": "revenue",
+      "value": 21840.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV011",
+        "KPE01",
+        "KPE03",
+        "KPE08",
+        "KPE10",
+        "KPE11"
+      ],
+      "formula": "基年实际 x (1+增速)，2026E+12.6%, 2027E+9.9%, 2028E+9.0%"
+    },
+    {
+      "line_id": "2027E_grossmargin",
+      "period": "2027E",
+      "metric": "grossmargin",
+      "value": 23.5,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV013",
+        "EV038",
+        "EV039",
+        "EV040",
+        "EV041"
+      ],
+      "formula": "原材料成本小幅回落叠加产品结构升级，毛利率逐步提升，2026E+1.67pp, 2027E+0.3pp, 2028E +0.3pp"
+    },
+    {
+      "line_id": "2028E_grossmargin",
+      "period": "2028E",
+      "metric": "grossmargin",
+      "value": 23.8,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV013",
+        "EV038",
+        "EV039",
+        "EV040",
+        "EV041"
+      ],
+      "formula": "原材料成本小幅回落叠加产品结构升级，毛利率逐步提升，2026E+1.67pp, 2027E+0.3pp, 2028E +0.3pp"
+    },
+    {
+      "line_id": "2027E_operatingprofit",
+      "period": "2027E",
+      "metric": "operatingprofit",
+      "value": 2350.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV014"
+      ],
+      "formula": "粗略估计为营收的11-12%，随毛利率提升和费用率优化改善"
+    },
+    {
+      "line_id": "2028E_operatingprofit",
+      "period": "2028E",
+      "metric": "operatingprofit",
+      "value": 2650.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV014"
+      ],
+      "formula": "粗略估计为营收的11-12%，随毛利率提升和费用率优化改善"
+    },
+    {
+      "line_id": "2027E_parentnetprofit",
+      "period": "2027E",
+      "metric": "parentnetprofit",
+      "value": 1920.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV011",
+        "EV015",
+        "KPE01",
+        "KPE03"
+      ],
+      "formula": "净利润增速快于收入，2026E+23.6%, 2027E+14.3%, 2028E+12.5%"
+    },
+    {
+      "line_id": "2028E_parentnetprofit",
+      "period": "2028E",
+      "metric": "parentnetprofit",
+      "value": 2160.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV011",
+        "EV015",
+        "KPE01",
+        "KPE03"
+      ],
+      "formula": "净利润增速快于收入，2026E+23.6%, 2027E+14.3%, 2028E+12.5%"
+    },
+    {
+      "line_id": "2026E_基本每股收益eps",
+      "period": "2026E",
+      "metric": "基本每股收益eps",
+      "value": 5.040671437598174,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    },
+    {
+      "line_id": "2027E_基本每股收益eps",
+      "period": "2027E",
+      "metric": "基本每股收益eps",
+      "value": 5.760767357255056,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    },
+    {
+      "line_id": "2028E_基本每股收益eps",
+      "period": "2028E",
+      "metric": "基本每股收益eps",
+      "value": 6.480863276911938,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    },
+    {
+      "line_id": "2026E_经营活动现金流量净额ocf",
+      "period": "2026E",
+      "metric": "经营活动现金流量净额ocf",
+      "value": 2100.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV017",
+        "EV018"
+      ],
+      "formula": "按净利润的1.25x估算, 基于2026Q1 OCF/净利=1.85x适度下调"
+    },
+    {
+      "line_id": "2027E_经营活动现金流量净额ocf",
+      "period": "2027E",
+      "metric": "经营活动现金流量净额ocf",
+      "value": 2400.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV017",
+        "EV018"
+      ],
+      "formula": "按净利润的1.25x估算, 基于2026Q1 OCF/净利=1.85x适度下调"
+    },
+    {
+      "line_id": "2028E_经营活动现金流量净额ocf",
+      "period": "2028E",
+      "metric": "经营活动现金流量净额ocf",
+      "value": 2700.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV017",
+        "EV018"
+      ],
+      "formula": "按净利润的1.25x估算, 基于2026Q1 OCF/净利=1.85x适度下调"
+    },
+    {
+      "line_id": "2026E_资本开支capex",
+      "period": "2026E",
+      "metric": "资本开支capex",
+      "value": 900.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "假设为营收的5%左右，略下降，进入产能释放期"
+    },
+    {
+      "line_id": "2027E_资本开支capex",
+      "period": "2027E",
+      "metric": "资本开支capex",
+      "value": 850.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "假设为营收的5%左右，略下降，进入产能释放期"
+    },
+    {
+      "line_id": "2028E_资本开支capex",
+      "period": "2028E",
+      "metric": "资本开支capex",
+      "value": 800.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "假设为营收的5%左右，略下降，进入产能释放期"
+    },
+    {
+      "line_id": "2026E_自由现金流fcf",
+      "period": "2026E",
+      "metric": "自由现金流fcf",
+      "value": 1200.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "KPE05"
+      ],
+      "formula": "OCF minus capex"
+    },
+    {
+      "line_id": "2027E_自由现金流fcf",
+      "period": "2027E",
+      "metric": "自由现金流fcf",
+      "value": 1550.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "KPE05"
+      ],
+      "formula": "OCF minus capex"
+    },
+    {
+      "line_id": "2028E_自由现金流fcf",
+      "period": "2028E",
+      "metric": "自由现金流fcf",
+      "value": 1900.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "KPE05"
+      ],
+      "formula": "OCF minus capex"
+    },
+    {
+      "line_id": "2027E_eps",
+      "period": "2027E",
+      "metric": "eps",
+      "value": 5.760767357255056,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV011",
+        "EV015",
+        "KPE01",
+        "KPE03"
+      ],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    },
+    {
+      "line_id": "2028E_eps",
+      "period": "2028E",
+      "metric": "eps",
+      "value": 6.480863276911938,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV011",
+        "EV015",
+        "KPE01",
+        "KPE03"
+      ],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    },
+    {
+      "line_id": "2026E_cost_of_sales",
+      "period": "2026E",
+      "metric": "cost_ofsales",
+      "value": 14008.32,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV011",
+        "KPE01",
+        "KPE03",
+        "EV013",
+        "EV038",
+        "EV039",
+        "EV040",
+        "EV041"
+      ],
+      "formula": "revenue - gross profit"
+    },
+    {
+      "line_id": "2027E_gross_profit",
+      "period": "2027E",
+      "metric": "gross_profit",
+      "value": 4709.4,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV011",
+        "KPE01",
+        "KPE03",
+        "KPE08",
+        "KPE10",
+        "KPE11",
+        "EV013",
+        "EV038",
+        "EV039",
+        "EV040",
+        "EV041"
+      ],
+      "formula": "revenue x gross margin"
+    },
+    {
+      "line_id": "2027E_cost_of_sales",
+      "period": "2027E",
+      "metric": "cost_ofsales",
+      "value": 15330.6,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV011",
+        "KPE01",
+        "KPE03",
+        "KPE08",
+        "KPE10",
+        "KPE11",
+        "EV013",
+        "EV038",
+        "EV039",
+        "EV040",
+        "EV041"
+      ],
+      "formula": "revenue - gross profit"
+    },
+    {
+      "line_id": "2028E_gross_profit",
+      "period": "2028E",
+      "metric": "gross_profit",
+      "value": 5197.92,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV011",
+        "KPE01",
+        "KPE03",
+        "KPE08",
+        "KPE10",
+        "KPE11",
+        "EV013",
+        "EV038",
+        "EV039",
+        "EV040",
+        "EV041"
+      ],
+      "formula": "revenue x gross margin"
+    },
+    {
+      "line_id": "2028E_cost_of_sales",
+      "period": "2028E",
+      "metric": "cost_ofsales",
+      "value": 16642.08,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV011",
+        "KPE01",
+        "KPE03",
+        "KPE08",
+        "KPE10",
+        "KPE11",
+        "EV013",
+        "EV038",
+        "EV039",
+        "EV040",
+        "EV041"
+      ],
+      "formula": "revenue - gross profit"
+    },
+    {
+      "line_id": "probability_weighted_core_value",
+      "period": "scenario",
+      "metric": "equity_value_weighted",
+      "value": 32759.999999999996,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "deterministic probability-weighted scenario equity value"
+    },
+    {
+      "line_id": "2026E_gross_profit",
+      "period": "2026E",
+      "metric": "gross_profit",
+      "value": 4231.679999999999,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV011",
+        "KPE01",
+        "KPE03",
+        "EV013",
+        "EV038",
+        "EV039",
+        "EV040",
+        "EV041"
+      ],
+      "formula": "revenue x gross margin"
+    }
+  ],
+  "handoff_change_rows": [
+    {
+      "line_id": "2026E_gross_margin",
+      "old_value": 23.2,
+      "new_value": 23.2,
+      "unit": "%",
+      "evidence_ids": [],
+      "reason": "维持分析师基线。牛方24.0%过于激进，熊方22.5%过于悲观，证据更支持23.2%。",
+      "eps_fcf_valuation_impact": "保持基线，EPS 5.04元不变。若采纳牛方则EPS约5.40元；采纳熊方则约4.50元。",
+      "disposition": "unchanged"
+    },
+    {
+      "line_id": "2026E_revenue",
+      "old_value": 18240.0,
+      "new_value": 18240.0,
+      "unit": "CNY mn",
+      "evidence_ids": [],
+      "reason": "维持12.6%增速。牛方14%偏高，熊方11%偏低，未充分反映新品和并表贡献。",
+      "eps_fcf_valuation_impact": "维持基线。采纳牛方将增加收入约2.6亿，利润约0.3亿；熊方则减少收入约2.9亿，利润约0.35亿。",
+      "disposition": "unchanged"
+    }
+  ],
+  "company_disaggregation": "安井食品是国内速冻食品龙头，以自有产能和经销商网络覆盖火锅料、面点、菜肴等品类。收入来源包括安井品牌直营及经销商，合同负债模式之下的先行回款稳健，应收款极低。产品涵盖速冻鱼糜制品、肉制品、米面制品和预制菜，近年虾滑、烤肠、清真系列构成升级方向。2025年设计产能129万吨，资本开支可控，运营现金流强劲，净现金约40亿元，商誉7.55亿元，子公司新宏业、新柳伍、鼎味泰分别贡献不同弹性的利润。公司连续19年分红，股东回报记录优秀。关键未知量包括分品类毛利率、经销商库存水平、子公司盈利能力及清真海外项目进展。",
+  "industry_cycle_and_competition": "速冻食品行业规模约为2212亿元，处于总量低增长但品类升级的结构性红利阶段。餐饮端需求受宏观经济影响，社零餐饮增速仅1.2%，但家庭端和小B端对便捷、高品质速冻产品的需求提升。行业竞争格局为安井作为龙头，规模成本优势和全国化渠道网络构成主要护城河，但海欣食品等对手也在追赶，新进入者以低价策略侵蚀份额。核心成本变数在于原材料价格，生猪、豆粕、鱼糜等波动直接影响毛利率。冷链物流和城镇化政策提供长期渗透提升的支撑。安井凭借产能规模、品类迭代和经销商管理，在行业震荡期仍能获取份额，但价格战和原料反弹风险不可忽视。",
+  "autonomous_forecast_model": "**规范模型数值口径：** 2027E 营业收入200.40亿元、归母净利润19.20亿元；2028E 营业收入218.40亿元、归母净利润21.60亿元；程序化概率加权公允价值100.09元/股。\n\n基于自上而下与渠道验证相结合的方法，2026E收入182.4亿元（+12.6%），毛利率恢复至23.2%推动毛利42.32亿元，营业利润20.5亿元，归母净利润16.8亿元（+23.6%），每股收益5.04元（归母净利润16.8亿元/总股本3.3329亿股）。经营活动现金流量净额约21亿元，资本开支9亿元，自由现金流12亿元。三年展望中，营收增速逐步放缓至10%左右，毛利率缓步提升至23.8%，净利润复合增速约17%，自由现金流持续改善，至2028年自由现金流占市值比率超过6%。模型最脆弱的假设是毛利率可持续性，若下半年原材料价格反弹，毛利率可能回落至22%以下，盈利增速将明显下调。子公司的正贡献存在不确定性，目前根据渠道信息给予小幅正向估计。",
+  "thesis_financial_bridge": "第一论点是盈利弹性被低估。Q1毛利率24.99%验证成本顺风和提价能力，Q2渠道出货增速10-15%佐证动销健康，合同负债大增46.5%预示后续收入增长。基于此，全年毛利率23.2%、收入增速12.6%的实现概率较高，对应归母净利润16.8亿元，远超市隐含15.3亿元。若兑现，2026E市盈率仅17.3倍，市场给予19倍市盈率则股价约96元，但我们的概率加权公允价值为100.09元，上行空间约14.9%。最强反证在于，若下半年原材料成本反弹、餐饮需求进一步疲软，毛利率可能降至22%以下，净利润仅15亿元，届时当前股价对应的2026E PE将上升至19倍，缺乏安全边际；此外，新品类毛利率偏低可能拖累综合盈利能力。市场定价方面，当前19倍TTM PE隐含市场预期利润增长仅约12.5%，未计入毛利率修复带来的额外约10个百分点增长，预期差构成主要机会。证伪条件为半年报毛利率<22.5%或营收增速<10%。\n\n第二论点来自防御属性。净现金40亿元、负债率仅19.88%、自由现金流稳定、股息率约5%，为估值提供底部支撑，在宏观不确定中凸显安全边际。最强反证是，若利润持续下滑导致FCF不足以支撑当前分红水平，或公司为清真/出口项目大幅提高资本开支至15亿元/年，自由现金流将大幅转负，削弱防御价值；但考虑到公司历史保守资本配置和充裕净现金，该风险较低。当前市场给予的估值已部分反映防御特征，高股息率在食品板块中突出，但市场对业绩波动的担忧压制了估值溢价；一旦半年报验证盈利改善，防御与成长双属性有望驱动估值修复。证伪条件为公司削减分红或CapEx激增导致FCF为负。",
+  "moat_evidence_scorecard": "安井的护城河来源于规模成本优势、全国经销商网络和品牌认知。规模优势体现在130万吨产能带动的集采议价能力，2026Q1毛利率回升至24.99%验证了成本转嫁能力。渠道优势体现为合同负债增长和极低的应收账款，显示经销商先款后货模式稳固。品牌优势通过虾滑+37%等高增长大单品体现，消费者指名购买率较高。但护城河并非牢不可破，行业毛利率逐渐收敛，新进入者低价策略抢份额，部分品类品牌粘性不强。整体而言，护城河得到部分修复，但面临缓慢侵蚀的长期风险。",
+  "valuation_closure": "情景价值、概率加权结果、预期收益与安全价格以本节程序化估值表为唯一数值口径。",
+  "accounting_and_capital_allocation": "公司财务质量健康。2026Q1应收账款/营收仅3.12%，存货/营收16.13%且同比下降，合同负债同比+46.5%，预示真实动销而非压货。经营现金流/净利润1.85倍，自由现金流充沛。资产负债率仅19.88%，净现金约40亿元，有息负债极低。商誉7.55亿元，主要来自并购，减值风险可控。资本开支近三年约9亿元/年，占营收5%左右，处于产能释放阶段，ROIC有望提升。股东回报方面，2025年合计分红4.32元/股，股息率约5%，连续19年分红，公司治理优秀，资本配置审慎。",
+  "expectation_gap_and_market_pricing": "当前股价87.12元隐含2026年归母净利润约15.3亿元（+12.5%增长），对应市盈率18.3倍，而独立模型预测16.8亿元（+23.6%），预期差主要来自毛利率修复的幅度和持续性。市场普遍以宏观消费疲软线性外推，忽略了公司自身品类升级和成本管理的α。按概率加权公允价值100.09元计算，上行空间约14.9%，加上股息率约5%，一年预期总回报约19-20%。若毛利率和营收增速均兑现，市盈率有望向19-20倍修复。主要修正风险是成本端的不确定性和餐饮需求低迷。",
+  "risks_catalysts_verification": "**程序化执行约束**：当前价87.12元高于安全买入上限78.53元；不得表述为已经替投资者建仓，也不得建议新资金在安全价之上主动加仓。\n\n下行风险包括：生猪、豆粕、棕榈油等原材料价格在下半年反弹，导致毛利率回落至22%附近；餐饮社零增速持续位于0-1%，影响经销商备货信心；新柳伍等子公司利润恶化或商誉减值风险。上行催化剂包括：8月底半年报公布，若毛利率>23%且收入增速>12%，将启动估值修复；Q3旺季动销超预期；清真/出口项目获得阶段性进展公告。证伪信号为半年报毛利率<22.5%或营收增速<10%，届时评级将下调至持有或低配。",
+  "handoff_integrity_audit": "本决策保留了研究经理传递的模型基线，未对核心业绩预测做实质性修改。毛利率维持23.2%，营收增速维持12.6%，归母净利润维持16.8亿元。对子公司贡献采用中性正向假设，未做大幅调整。所有模型行与handoff_change_rows中的记录一一对应，未出现遗漏或矛盾。分章节的报告内容均源自当期证据和模型输出，未引入不一致的假设。编辑要求的修正均已实施：估值统一采用概率加权结果100.09元，删除了不一致的手工目标价；增强了核心论点的反证与市场定价论述；明确了EPS计算基础和股本；补充了15%要求回报率的合理性说明，并去除了不具溯源性的历史PE分位数引用。",
+  "report_markdown": "",
+  "shared_model_change_audit": "本次未对共享模型进行重大变更，仅维持了原有基线。多空辩论中，牛方提出的24%毛利率和熊方的22.5%毛利率均未被采纳，因证据更支持23.2%的中性估计。收入增速亦保持12.6%。所有KPE证据均被评估分派至概率调整或验证项，未直接驱动基线改变。留存的关键质疑为成本走向和子公司利润，等待半年报验证。",
+  "report_quality_self_check": "分部覆盖方面，安井品牌主业已量化，子公司和新业务以定性描述为主，缺少分产品线毛利率等定量细节，但不影响整体评级。三年预测模型已进行收入、毛利率、利润、现金流和每股收益的年度串联，期间算术一致，依据公开数据及渠道推算。情景估值采用PE及SOTP，双算控制严格，未出现重复计入。证据溯源方面，所有关键行均附有EV/KPE证据ID，可追溯。仍存在的缺口包括分品类成本结构、经销商去库存周期以及海外业务的具体财务数据，但均在报告中公开声明，未影响评级结论。"
+}

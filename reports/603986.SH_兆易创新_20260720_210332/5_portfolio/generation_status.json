@@ -1,0 +1,27 @@
+{
+  "mode": "schema_prompt_structured",
+  "agent": "Portfolio Manager",
+  "structured_error": "",
+  "schema": "SellSidePMDecision",
+  "initial_mode": "schema_prompt_structured",
+  "editorial_review_mode": "schema_prompt_structured",
+  "editorial_revision_requested": true,
+  "editorial_revision_applied": true,
+  "editorial_revision_mode": "schema_prompt_structured",
+  "remaining_handoff_issues": [],
+  "remaining_analytical_issues": [],
+  "editorial_revision_rejection_reasons": [],
+  "deterministic_model_notes": [
+    "restored undocumented canonical change 2026e_eps",
+    "annotated 3 conflicting deducted-profit estimate(s) as rejected against official guidance",
+    "removed 1 manual deterministic valuation line(s) from prose",
+    "enforced safe-price execution constraint above the buy ceiling",
+    "restored undocumented canonical change 2026e_eps"
+  ],
+  "full_report_chars": "14332",
+  "public_report_chars": "7000",
+  "internal_overflow_chars": "7330",
+  "internal_sections_removed_from_public_report": "内部附录A：业务机制与分部经济, 内部附录B：行业驱动与护城河机制, 内部附录C：财务质量核查明细, 内部附录D：替代信息与卖方预期审计, 内部附录E：模型交接与报告质量审计",
+  "public_h2_count": "8",
+  "deterministic_saved_report_replay": true
+}

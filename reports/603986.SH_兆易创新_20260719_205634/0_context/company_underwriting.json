@@ -19,7 +19,10 @@
     "All claimed moat mechanisms remain unproven by observable evidence.",
     "Valuation has not closed from mutually exclusive buckets to per-share fair value.",
     "volume_price_cost driver chain is incomplete; missing: volume",
-    "Three-year values remain missing for consolidated line(s): EPS, 资本开支, 自由现金流(FCF), ocf"
+    "base scenario EPS x PE does not reconcile to fair value.",
+    "bull scenario EPS x PE does not reconcile to fair value.",
+    "bear scenario EPS x PE does not reconcile to fair value.",
+    "Three-year values remain missing for consolidated line(s): 资本开支, 自由现金流(FCF), ocf"
   ],
   "company_model": {
     "model_profile": "corporate",
@@ -30,16 +33,16 @@
     "profit_equation": "营业利润 = 收入 - 晶圆/封测成本（先进供应商，部分自研） - 研发费用（~17%收入） - 销售管理费用 - 其他; 净利润受公允价值变动、政府补贴等非经常项目扰动",
     "cash_flow_equation": "经营性现金流 = 净利润 ± 营运资金变动（应收/应付/库存） - 折旧摊销等非现金调整；历史OCF/净利约1.22x；FCF = OCF - 资本开支（主要为研发投入、IP及测试设备，无重大产能扩张）",
     "capital_intensity_and_reinvestment": "轻资产设计公司，资本开支强度低，研发费用是主要再投资（约17%收入），通过新产品导入和工艺迁移实现增长；无重大在建工程或制造基地",
-    "diluted_share_count_mn": null,
-    "share_count_period": "未获取",
+    "diluted_share_count_mn": 701.102451,
+    "share_count_period": "2026-07-19; latest stock_basic; Tushare stock_basic.reg_capital (CNY 10,000) / 100; CNY 1 par value",
     "share_count_evidence_id": "",
-    "share_count_source_type": "unresolved",
-    "share_count_formula": "",
+    "share_count_source_type": "registered_capital",
+    "share_count_formula": "Tushare stock_basic.reg_capital (CNY 10,000) / 100; CNY 1 par value",
     "share_count_cross_checks": [
-      "市值/股价但股价缺失",
-      "归母净利润/EPS但EPS缺失",
-      "Tushare total_share 未提供",
-      "管理层快照 reg_capital 未提供"
+      "registered capital proxy=701.102 mn",
+      "market cap / close=701.745 mn",
+      "pledge_stat total_share proxy=668.492 mn (not canonical)",
+      "registered-vs-market difference=0.092%"
     ],
     "moat_mechanisms": [
       "细分市场品牌与设计导入壁垒（汽车/工业认证周期长）",
@@ -502,14 +505,14 @@
     {
       "segment": "consolidated",
       "metric": "EPS",
-      "unit": "CNY",
+      "unit": "CNY/share",
       "base_period": "",
       "base_value": null,
-      "year_1_value": null,
-      "year_2_value": null,
-      "year_3_value": null,
-      "formula": "归母净利润 / 稀释股份数",
-      "assumption_status": "missing",
+      "year_1_value": 17.115900797214586,
+      "year_2_value": 18.542225863649136,
+      "year_3_value": 9.699010451754932,
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)",
+      "assumption_status": "calculated",
       "evidence_ids": [],
       "key_sensitivity": "",
       "missing_inputs": [
@@ -601,11 +604,11 @@
         "OCF/NI维持在1.2x以上"
       ],
       "parent_net_profit_cny_mn": 12000.0,
-      "eps_cny": null,
+      "eps_cny": 17.115900797214586,
       "fcf_cny_mn": null,
       "valuation_method": "周期调整PE法，2026E净利润为峰值，给予12倍PE，并考虑2028年正常化利润12倍后折现",
       "valuation_multiple": 12.0,
-      "fair_value_per_share": null,
+      "fair_value_per_share": 205.39080956657503,
       "evidence_ids": [
         "EV022",
         "KPE03",
@@ -625,11 +628,11 @@
         "2026收入260亿，净利140亿；2027收入340亿，净利180亿；2028收入350亿，净利170亿"
       ],
       "parent_net_profit_cny_mn": 14000.0,
-      "eps_cny": null,
+      "eps_cny": 19.968550930083683,
       "fcf_cny_mn": null,
       "valuation_method": "给予2026年净利15倍PE，因为可预见性延长",
       "valuation_multiple": 15.0,
-      "fair_value_per_share": null,
+      "fair_value_per_share": 299.52826395125527,
       "evidence_ids": [
         "KPE01",
         "KPE03"
@@ -648,11 +651,11 @@
         "2026收入200亿，净利90亿；2027收入150亿，净利30亿；2028年收入130亿，净利20亿"
       ],
       "parent_net_profit_cny_mn": 9000.0,
-      "eps_cny": null,
+      "eps_cny": 12.83692559791094,
       "fcf_cny_mn": null,
       "valuation_method": "2026年净利润给8倍PE，周期底部给净资产支撑等",
       "valuation_multiple": 8.0,
-      "fair_value_per_share": null,
+      "fair_value_per_share": 102.69540478328751,
       "evidence_ids": [],
       "falsification": "若公司ASP仍然坚挺且订单可见度高于预期，则熊市概率降低",
       "missing_inputs": [
@@ -744,7 +747,7 @@
       "ownership_pct": 100.0,
       "haircut_pct": 0.0,
       "equity_value_cny_mn": 144000.0,
-      "per_share_value_cny": null,
+      "per_share_value_cny": 205.39080956657503,
       "overlap_key": "core_earnings",
       "double_counting_treatment": "唯一核心盈利流",
       "evidence_ids": [
@@ -776,14 +779,14 @@
     }
   ],
   "valuation_closure": {
-    "current_price_cny": null,
-    "diluted_share_count_mn": null,
+    "current_price_cny": 463.15,
+    "diluted_share_count_mn": 701.102451,
     "core_value_per_share_cny": null,
-    "probability_weighted_fair_value_per_share_cny": null,
+    "probability_weighted_fair_value_per_share_cny": 203.25132196692323,
     "option_value_per_share_cny": null,
     "other_adjustments_per_share_cny": null,
-    "fair_value_per_share_cny": null,
-    "expected_return_pct": null,
+    "fair_value_per_share_cny": 203.25132196692323,
+    "expected_return_pct": -56.11544381584298,
     "formula": "无法计算，因缺少股价和股数",
     "rating_consistency_check": "",
     "double_counting_checks": [
@@ -975,6 +978,12 @@
     "unknown evidence ids removed from underwriting packet",
     "unknown evidence ids removed from underwriting packet",
     "unknown evidence ids removed from underwriting packet",
+    "operating model driver coverage (volume_price_cost): capacity, utilization, price/ASP, unit/input cost, spread/margin, capex/ROIC",
+    "diluted shares set deterministically: 701.102 mn (registered_capital)",
+    "valuation current price restored from market snapshot: CNY 463.1500",
+    "base fair value replaced by deterministic EPS x PE calculation.",
+    "bull fair value replaced by deterministic EPS x PE calculation.",
+    "bear fair value replaced by deterministic EPS x PE calculation.",
     "operating model driver coverage (volume_price_cost): capacity, utilization, price/ASP, unit/input cost, spread/margin, capex/ROIC"
   ]
 }

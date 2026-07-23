@@ -1136,7 +1136,7 @@ def _render_question_verdicts(items: list[ResearchQuestionVerdict]) -> str:
 def _render_forecast_takeaways(items: list[ForecastTakeaway]) -> str:
     if not items:
         return "### 预测结论\n\n- 暂无结构化take-away；以模型解释与风险披露为准。"
-    rows = ["### 预测take-aways", ""]
+    rows = ["### 预测结论", ""]
     for index, item in enumerate(items[:3], 1):
         rows.extend(
             [
@@ -4137,6 +4137,21 @@ def render_pm_decision(decision: PortfolioDecision) -> str:
 # without first registering it in ``sys.modules``.  Pydantic then cannot resolve
 # postponed enum/Literal annotations lazily.  Rebuild against the module globals
 # once so both normal imports and plugin-style loads receive complete schemas.
+_local_schema_models = [
+    candidate
+    for candidate in globals().values()
+    if isinstance(candidate, type)
+    and candidate is not BaseModel
+    and issubclass(candidate, BaseModel)
+    and candidate.__module__ == __name__
+]
+for _schema_model in _local_schema_models:
+    _schema_model.model_rebuild(
+        force=True,
+        raise_errors=False,
+        _types_namespace=globals(),
+    )
+# Rebuild the public root schemas after their nested rows have been resolved.
 for _schema_model in (
     UnderwritingResearchPlan,
     ResearchPlan,
@@ -4144,5 +4159,4 @@ for _schema_model in (
     SellSidePMDecision,
     PortfolioDecision,
 ):
-    if hasattr(_schema_model, "model_rebuild"):
-        _schema_model.model_rebuild(_types_namespace=globals())
+    _schema_model.model_rebuild(force=True, _types_namespace=globals())

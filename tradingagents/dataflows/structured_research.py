@@ -18,6 +18,10 @@ from typing import Any, Literal, Mapping
 from pydantic import BaseModel, Field
 
 from .research_evidence import extract_evidence_records
+from .official_guidance import (
+    official_guidance_record,
+    parse_official_guidance_record,
+)
 from .underwriting_packet import (
     build_company_underwriting_packet,
     compact_underwriting_packet,
@@ -137,6 +141,160 @@ def _safe_float(value: float | None) -> float | None:
         return float(value)
     except (TypeError, ValueError):
         return None
+
+
+_GUIDANCE_VARIABLES = {
+    "revenue_cny_mn": {"revenue", "operating_revenue", "营业收入"},
+    "parent_net_profit_cny_mn": {
+        "net_profit_parent",
+        "parent_net_profit",
+        "n_income_attr_p",
+        "归母净利润",
+    },
+    "deducted_parent_net_profit_cny_mn": {
+        "net_profit_excl_nonrecurring",
+        "deducted_parent_net_profit",
+        "扣非归母净利润",
+        "扣非净利润",
+    },
+}
+
+_GUIDANCE_CANONICAL_VARIABLE = {
+    "revenue_cny_mn": "revenue",
+    "parent_net_profit_cny_mn": "net_profit_parent",
+    "deducted_parent_net_profit_cny_mn": "net_profit_excl_nonrecurring",
+}
+
+
+def _semantic_metric_cny_mn(item: Mapping[str, Any]) -> float | None:
+    value = _safe_float(item.get("value"))
+    if value is None:
+        return None
+    unit = re.sub(r"\s+", "", str(item.get("unit", "") or "").lower())
+    if unit in {"cny", "rmb", "yuan", "元", "人民币元"}:
+        return value / 1_000_000.0
+    if unit in {"万元", "cny10k", "rmb10k"}:
+        return value / 100.0
+    if unit in {"亿元", "cny100m", "rmb100m"}:
+        return value * 100.0
+    if unit in {"cnymn", "cny_mn", "rmbmn", "百万元", "人民币百万元"}:
+        return value
+    return None
+
+
+def _apply_official_guidance_control(
+    metrics: list[dict[str, Any]],
+    conflicts: list[SemanticConflict],
+    contexts: Mapping[str, str],
+    errors: list[str],
+) -> tuple[list[dict[str, Any]], list[SemanticConflict]]:
+    """Make parsed official guidance the only current-period semantic metric."""
+
+    guidance_text = "\n".join(
+        str(contexts.get(key, "") or "")
+        for key in ("company_events", "forecast_model")
+    )
+    guidance = parse_official_guidance_record(guidance_text)
+    period = str(guidance.get("period", "") or "")
+    record = official_guidance_record(guidance)
+    if not period or not record:
+        return metrics, conflicts
+
+    prior_values = {
+        "parent_net_profit_cny_mn": guidance.get("parent_net_profit_prior_cny_mn"),
+        "deducted_parent_net_profit_cny_mn": guidance.get(
+            "deducted_parent_net_profit_prior_cny_mn"
+        ),
+        "revenue_cny_mn": guidance.get("revenue_prior_cny_mn"),
+    }
+    controlled: list[dict[str, Any]] = []
+    for item in metrics:
+        variable = str(item.get("variable", "") or "").strip().lower()
+        metric_key = next(
+            (
+                key
+                for key, aliases in _GUIDANCE_VARIABLES.items()
+                if variable in {alias.lower() for alias in aliases}
+            ),
+            "",
+        )
+        official_value = guidance.get(metric_key) if metric_key else None
+        item_period = str(item.get("period", "") or "")
+        same_period = bool(
+            period.lower() in item_period.lower()
+            or (
+                str(item.get("source_module", "")) == "company_events"
+                and str(item.get("model_role", "")).lower() == "earnings guidance"
+            )
+        )
+        semantic_value = _semantic_metric_cny_mn(item)
+        if official_value is not None and same_period and semantic_value is not None:
+            tolerance = max(abs(float(official_value)) * 0.02, 1.0)
+            if abs(semantic_value - float(official_value)) > tolerance:
+                rejected_value = item.get("value")
+                flags = list(item.get("control_flags", []))
+                flags.extend(
+                    [
+                        "official_guidance_conflict",
+                        "current_vs_prior_table_column_shift_suspected",
+                    ]
+                )
+                item["control_flags"] = list(dict.fromkeys(flags))
+                item["evidence_status"] = "unverified"
+                item["rejected_value"] = rejected_value
+                item["value"] = None
+                item["value_text"] = (
+                    f"rejected semantic value {semantic_value:g} CNY mn; "
+                    f"deterministic official {period} value is {float(official_value):g} CNY mn"
+                )
+                prior_value = prior_values.get(metric_key)
+                if prior_value is not None and abs(
+                    semantic_value - float(prior_value)
+                ) <= max(abs(float(prior_value)) * 0.02, 1.0):
+                    item["control_flags"].append("matched_official_prior_period_value")
+                errors.append(
+                    f"rejected {period} {metric_key}={semantic_value:g} CNY mn: "
+                    f"official current-period value={float(official_value):g} CNY mn"
+                )
+        controlled.append(item)
+
+    for metric_key, aliases in _GUIDANCE_VARIABLES.items():
+        official_value = guidance.get(metric_key)
+        if official_value is None:
+            continue
+        controlled.append(
+            {
+                "segment": "consolidated",
+                "variable": _GUIDANCE_CANONICAL_VARIABLE[metric_key],
+                "value": float(official_value),
+                "value_text": f"{float(official_value):g} CNY mn",
+                "unit": "CNY mn",
+                "period": period,
+                "comparison_basis": "official current-period guidance",
+                "source_module": "company_events",
+                "source_quote": record,
+                "evidence_status": "reported",
+                "direction": "",
+                "materiality": "high",
+                "model_role": "earnings guidance",
+                "grounding_status": "deterministic_official_guidance_parser",
+                "control_flags": ["official_current_period_source_of_truth"],
+            }
+        )
+
+    retained_conflicts: list[SemanticConflict] = []
+    for conflict in conflicts:
+        rendered = " ".join(
+            str(getattr(conflict, field, "") or "")
+            for field in ("topic", "claim_a", "claim_b", "source_a", "source_b")
+        )
+        if re.search(r"业绩预告|performance preview|earnings guidance|\bH1\b", rendered, re.I):
+            errors.append(
+                f"resolved semantic guidance conflict with deterministic official record: {conflict.topic}"
+            )
+            continue
+        retained_conflicts.append(conflict)
+    return controlled, retained_conflicts
 
 
 def _known_kpe_rows(text: str) -> dict[str, dict[str, str]]:
@@ -824,6 +982,13 @@ def build_structured_research_bundle(
             item["control_flags"] = []
         validated_metrics.append(item)
 
+    validated_metrics, validated_conflicts = _apply_official_guidance_control(
+        validated_metrics,
+        list(semantic.conflicts),
+        contexts,
+        errors,
+    )
+
     share_control = derive_share_count_control(contexts)
     canonical_shares_mn = share_control.get("canonical_share_count_mn")
     if canonical_shares_mn:
@@ -945,7 +1110,7 @@ def build_structured_research_bundle(
         "segments": [segment.model_dump() for segment in semantic.segments],
         "semantic_metrics": validated_metrics,
         "deterministic_evidence": payload["deterministic_evidence"],
-        "conflicts": [conflict.model_dump() for conflict in semantic.conflicts],
+        "conflicts": [conflict.model_dump() for conflict in validated_conflicts],
         "kpe_impacts": quantified_kpe,
         "known_kpe_ledger": kpe_rows,
         "sell_side_intelligence": sell_side_rows,

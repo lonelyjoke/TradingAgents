@@ -1,0 +1,36 @@
+{
+  "mode": "schema_prompt_structured",
+  "agent": "Portfolio Manager",
+  "structured_error": "1 validation error for SellSidePMDecision\nsegment_economics.2.disclosure_basis\n  Input should be 'reported', 'calculated', 'analyst_estimate' or 'missing' [type=literal_error, input_value='analytical', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error",
+  "schema_repair_attempts": 1,
+  "schema": "SellSidePMDecision",
+  "initial_mode": "schema_repaired_fallback",
+  "editorial_review_mode": "schema_prompt_structured",
+  "editorial_revision_requested": true,
+  "editorial_revision_applied": true,
+  "editorial_revision_mode": "schema_prompt_structured",
+  "remaining_handoff_issues": [
+    "dropped canonical line: base_fair_value"
+  ],
+  "remaining_analytical_issues": [],
+  "editorial_revision_rejection_reasons": [],
+  "deterministic_model_notes": [
+    "restored omitted canonical line 2026e_parentnetprofit",
+    "added deterministic 2026E gross profit=10200.0000",
+    "added deterministic 2027E gross profit=9975.0000",
+    "added deterministic 2028E gross profit=9990.0000",
+    "added deterministic probability-weighted core equity value 34900.0000",
+    "synchronized total fair value per share 16.8 -> 15.5180",
+    "removed 1 manual deterministic valuation line(s) from prose",
+    "removed 1 unsafe buy/build clause(s) above deterministic ceiling",
+    "enforced safe-price execution constraint above the buy ceiling",
+    "deduplicated 1 canonical model line(s)",
+    "synchronized 3 stale public numeric claim(s) to the canonical model",
+    "inserted deterministic public numeric source-of-truth disclosure"
+  ],
+  "full_report_chars": "10129",
+  "public_report_chars": "6463",
+  "internal_overflow_chars": "3664",
+  "internal_sections_removed_from_public_report": "内部附录A：业务机制与分部经济, 内部附录B：行业驱动与护城河机制, 内部附录C：财务质量核查明细, 内部附录D：替代信息与卖方预期审计, 内部附录E：模型交接与报告质量审计",
+  "public_h2_count": "8"
+}

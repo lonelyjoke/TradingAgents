@@ -406,6 +406,69 @@ def test_chinese_forecast_metric_aliases_do_not_create_empty_duplicate_rows():
     assert "Required consolidated three-year forecast lines are incomplete." not in checked.readiness_reasons
 
 
+def test_official_h1_guidance_is_frozen_and_reconciled_to_fy_scenarios():
+    packet = CompanyUnderwritingPacket(
+        symbol="603986.SH",
+        as_of_date="2026-07-20",
+        forecast_years=["2026E", "2027E", "2028E"],
+        company_model=CompanyOperatingModel(
+            model_profile="corporate",
+            operating_model_family="volume_price_cost",
+            revenue_equation="volume x ASP",
+            profit_equation="revenue x margin - expenses",
+        ),
+        forecast_lines=[
+            ForecastLine(
+                metric="revenue",
+                unit="CNY mn",
+                year_1_value=25_000,
+                year_2_value=30_000,
+                year_3_value=33_000,
+            ),
+            ForecastLine(
+                metric="parent_net_profit",
+                unit="CNY mn",
+                year_1_value=15_000,
+                year_2_value=18_000,
+                year_3_value=20_000,
+            ),
+        ],
+        scenarios=[
+            ScenarioUnderwriting(scenario="bull", probability_pct=30, parent_net_profit_cny_mn=20_000),
+            ScenarioUnderwriting(scenario="base", probability_pct=50, parent_net_profit_cny_mn=15_000),
+            ScenarioUnderwriting(scenario="bear", probability_pct=20, parent_net_profit_cny_mn=4_500),
+        ],
+    )
+    packet.handoff_manifest.frozen_reported_facts.append(
+        "H1 2026 performance preview parent net profit: CNY 1,904,456,800 (190,445.68 万元)"
+    )
+    packet.preprocessing_notes.append(
+        "Performance preview net profit number 190,445.68万元 is treated as current H1."
+    )
+    guidance = (
+        "Parsed official guidance metrics: period=2026H1; revenue_cny_mn=11500; "
+        "parent_net_profit_cny_mn=6900; parent_net_profit_prior_cny_mn=1904.4568; "
+        "deducted_parent_net_profit_cny_mn=4850; unit=CNY mn"
+    )
+
+    checked = _validate_packet(packet, {}, {"forecast_model": guidance})
+    rows = {row.metric: row for row in checked.forecast_lines}
+    bear = next(row for row in checked.scenarios if row.scenario == "bear")
+
+    assert "official 2026H1=11500 CNY mn" in rows["revenue"].formula
+    assert "implied H2=13500 CNY mn" in rows["revenue"].formula
+    assert "official 2026H1=6900 CNY mn" in rows["parent_net_profit"].formula
+    assert "deducted_parent_net_profit_cny_mn=4850 CNY mn" in " ".join(
+        checked.handoff_manifest.frozen_reported_facts
+    )
+    assert bear.parent_net_profit_cny_mn is None
+    assert checked.research_readiness == "blocked"
+    frozen_facts = " ".join(checked.handoff_manifest.frozen_reported_facts)
+    assert "1,904,456,800" not in frozen_facts
+    assert "Official 2026H1" in frozen_facts
+    assert any("matched the official prior-period column" in note for note in checked.preprocessing_notes)
+
+
 def test_operating_model_family_surfaces_missing_industry_native_drivers():
     packet = CompanyUnderwritingPacket(
         symbol="600309.SH",
@@ -477,7 +540,7 @@ def test_market_cap_and_close_restore_share_count_and_current_price():
     assert "market cap / close" in checked.company_model.share_count_period
 
 
-def test_reported_total_share_overrides_bad_llm_share_count_and_recalculates_eps():
+def test_market_share_count_overrides_pledge_proxy_and_recalculates_eps():
     packet = CompanyUnderwritingPacket(
         symbol="600309.SH",
         as_of_date="2026-06-30",
@@ -531,12 +594,50 @@ def test_reported_total_share_overrides_bad_llm_share_count_and_recalculates_eps
         row for row in checked.forecast_lines if row.metric == "Diluted EPS"
     )
 
-    assert checked.company_model.share_count_source_type == "reported_total_share"
-    assert round(checked.company_model.diluted_share_count_mn or 0, 4) == 3130.4716
-    assert round(eps.year_1_value or 0, 4) == round(13_400 / 3130.4716, 4)
-    assert round(checked.scenarios[0].eps_cny or 0, 4) == round(14_500 / 3130.4716, 4)
+    market_shares = 214_155_562_156 / 68.41 / 1_000_000
+    assert checked.company_model.share_count_source_type == "market_cap_div_close"
+    assert round(checked.company_model.diluted_share_count_mn or 0, 4) == round(market_shares, 4)
+    assert round(eps.year_1_value or 0, 4) == round(13_400 / market_shares, 4)
+    assert round(checked.scenarios[0].eps_cny or 0, 4) == round(14_500 / market_shares, 4)
     assert round(checked.scenarios[0].fair_value_per_share or 0, 4) == round(
-        14_500 / 3130.4716 * 14,
+        14_500 / market_shares * 14,
         4,
     )
     assert any("LLM-supplied diluted shares rejected" in note for note in checked.preprocessing_notes)
+
+
+def test_context_suffix_keys_and_registered_capital_control_share_count():
+    packet = CompanyUnderwritingPacket(
+        symbol="603986.SH",
+        as_of_date="2026-07-19",
+        forecast_years=["2026E", "2027E", "2028E"],
+        company_model=CompanyOperatingModel(
+            model_profile="corporate",
+            diluted_share_count_mn=7_017.5,
+            revenue_equation="volume x price",
+            profit_equation="revenue x margin",
+        ),
+    )
+    contexts = {
+        "management_capital_allocation_context": (
+            "| ts_code | name | reg_capital | list_date |\n"
+            "| --- | --- | ---: | --- |\n"
+            "| 603986.SH | 兆易创新 | 70110.2451 | 20050406 |"
+        ),
+        "forecast_model_context": (
+            "| Current market-implied expectation | / Market cap (CNY) / "
+            "325013196750 / current equity value / |"
+        ),
+        "price_earnings_decomposition_context": "| close | 463.15 |",
+        "shareholder_structure_context": (
+            "| end_date | total_share |\n| --- | ---: |\n"
+            "| 20260710 | 66849.19 |"
+        ),
+    }
+
+    checked = _validate_packet(packet, {}, contexts)
+
+    assert checked.company_model.share_count_source_type == "registered_capital"
+    assert checked.company_model.diluted_share_count_mn == 701.102451
+    assert checked.valuation_closure.current_price_cny == 463.15
+    assert not any("conflict" in reason.lower() for reason in checked.readiness_reasons)

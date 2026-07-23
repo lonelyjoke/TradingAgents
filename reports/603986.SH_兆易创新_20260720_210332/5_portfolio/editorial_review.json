@@ -1,0 +1,104 @@
+{
+  "review": {
+    "revision_required": true,
+    "company_understanding_score": 4,
+    "independent_model_score": 4,
+    "evidence_and_counterevidence_score": 3,
+    "valuation_closure_score": 3,
+    "readability_and_synthesis_score": 3,
+    "strongest_aspects": [
+      "业务分部经济特征估算清晰，如实披露了公司不披露分产品营收毛利率的关键缺失",
+      "对存储周期均值回归的历史规律有深刻阐述，并用竞争格局、代工产能信号等多层证据支撑",
+      "盈利质量疑云被列为独立核心悬念，与现金流验证矛盾形成张力，构成有效辩论框架"
+    ],
+    "findings": [
+      {
+        "section": "thesis_moat_financial_bridge",
+        "priority": "must_revise",
+        "issue": "公开核心论点章节未按研究经理要求嵌入每个排名论点的最强反证、市场定价含义和证伪条件。目前负面证据集中在2.4节笼统列举，而非逐条阐释‘反证—传导—定价—证伪’闭环。",
+        "evidence_or_logic_gap": "经理的核心论点卡片（rank 1/2/3）已分别定义了 strongest_counterevidence、market_pricing 和 falsification_gate，但报告未在相关段落中吸收为独立论断。例如，论点1未指出旺宏仅23倍PE揭示了市场对NOR周期常规定价；论点2未明确将扣非占比高低设为评级逆转的证伪关口。",
+        "revision_instruction": "在第二节核心投资论点中，按三个论点顺序，为每个论点分别建立‘看多逻辑—最强反证—财务传导—市场定价含义—证伪条件’的连贯段落。不得使用‘反证/定价/证伪’标签，而应转化为分析师语言，例如‘若半年报扣非利润不足XXX亿，则当前市值仍有XX%下行空间’。同时删除2.4节中仅汇总的反证列表，将内容归并到对应论点叙述中。"
+      },
+      {
+        "section": "valuation_and_expectation_gap",
+        "priority": "must_revise",
+        "issue": "估值结论散见于第四节质量评估、第五节预期差分析和同行比较中，未集中在专门的估值章节；且文中给出的公允市值范围与经理的规范估值（约1792亿）存在明显偏差，读者无法获得单一明确的公允价值。",
+        "evidence_or_logic_gap": "第四节给出基准情景合理市值990-1430亿元，第五节提及1792亿（来自经理），但未解释差异；同时确定性估值模型输出每股公允价值176元，而文末暗示合理区间180-220元，数字混乱。手交审核亦发现营业利润率静默改动、2028E净利润丢失等问题。",
+        "revision_instruction": "将所有估值讨论移至第七节（估值与回报），使用经理概率加权公允价值1792亿（每股256元）作为核心基准，并附上确定性情景估值表。删除其他章节重复的市值范围表述，仅保留交叉引用。必须用模型重新计算预期价值，确保文本数字与模型输出一致。若采用不同假设，须在估值章节明确说明差异来源并标注为分析师判断。"
+      },
+      {
+        "section": "cross_section_consistency",
+        "priority": "must_revise",
+        "issue": "同一假设（56%毛利率、非经常性占比30%、周期顶点等）在摘要、第二节、第四节、第五节和非经常性损益附注中多次完全复述，违反单一所有权原则。",
+        "evidence_or_logic_gap": "摘要中‘公允价值仅256元’、第二节‘毛利率峰值后回落’、第四节‘基准情景990-1430亿’、第五节‘前瞻PE 22x’等句子在多个章节出现几乎相同的表述。",
+        "revision_instruction": "秉持‘每项关键主张只详细解释一次’原则。毛利率与盈利路径的定量推导归入第二节（论点财务桥接）；公允价值和目标价集中在第七节；摘要只保留一句话结论并引用第七节。删除所有重复性段落，改用‘详见第X节’的交叉引用。"
+      },
+      {
+        "section": "industry_cycle_and_competition",
+        "priority": "should_revise",
+        "issue": "行业驱动矩阵（industry_driver_matrix）中缺少AI资本开支、代工利用率等变量的边际变化方向与财务影响量纲，未能充分解释‘产能回流延迟但不可避免’的因果链条。",
+        "evidence_or_logic_gap": "报告中虽提到了AI挤压产能、联电涨价，但并未形成从‘大型CSP资本开支→成熟制程供给弹性→公司毛利率拐点’的量化传导图，读者只能依靠叙事判断。",
+        "revision_instruction": "在行业竞争分析中插入一个驱动因素矩阵表（可省略来源ID），至少覆盖AI资本开支节奏、成熟制程产能利用率、NOR新增供给三大变量，标注现状、方向和对公司毛利率/营收的弹性幅度（如+10%资本开支—>ASP+5%），以强化因果深度。"
+      },
+      {
+        "section": "thesis_moat_financial_bridge",
+        "priority": "should_revise",
+        "issue": "护城河分析停留在定性层面，未将IP、平台生态、代工关系等转化为可追踪的财务指标（如相对利润份额、研发效率），与财务桥接脱节。",
+        "evidence_or_logic_gap": "经理的moat_evidence_tests提供了比较基础（毛利率溢价 vs 同行）但报告中仅提到‘未验证’，没有给出具体比较阈值和失败后果。",
+        "revision_instruction": "在第六部分护城河验证中，为每个护城河假设明确一个可观测的财务检验：如‘若在下行周期毛利率仍能比旺宏高3个百分点，则证明结构性优势’。一旦检验不通过，需明确指出对估值倍数的影响（不享有溢价PE）。"
+      },
+      {
+        "section": "accounting_and_capital_allocation",
+        "priority": "should_revise",
+        "issue": "会计质量矩阵中‘非经常性损益’被标为警告，但没有量化‘若非经常性占比超50%则扣非ROIC将降至X%’的后果，也未将回购行为与自由现金流直接挂钩。",
+        "evidence_or_logic_gap": "报告中指出回购是积极信号，但在当前高PB下回购是否创造价值存疑，却没有计算回购的每股净值影响或比较回购IRR与资本成本。",
+        "revision_instruction": "在会计与资本配置章节中，增加一小段‘回购效果评估’：以当前432元价格回购，假设长期ROIC为12%，估算回购的隐含回报率，明确‘高估值下回购大概率侵蚀价值’的结论。"
+      },
+      {
+        "section": "valuation_and_expectation_gap",
+        "priority": "should_revise",
+        "issue": "报告使用了KPE01（KeyBanc外国经纪）对供给紧张的判断，并影响到估值假设（周期延长），但未在估值章节说明该预测为外国卖方来源，也没有标明其假设情景（乐观/保守）、采用程度和不确定性。",
+        "evidence_or_logic_gap": "KPE01的‘存储供给紧张至2027年’是bull case的关键支撑，但文本仅作为事实引用，未区分这是KeyBanc的预测作品，也未展示其与基准模型的差异。",
+        "revision_instruction": "在估值章节的假设说明中，明确标注‘2027年供给紧张假设部分参考了KeyBanc的卖方预测，偏向乐观（可能导致公允价值高估）’。同时简述若去除该预测，基准情景公允价值将下移X%。"
+      },
+      {
+        "section": "three_year_forecast",
+        "priority": "optional",
+        "issue": "三年预测部分缺少与市场一致预期（consensus）的对比，读者无法判断分析师的偏离度。",
+        "evidence_or_logic_gap": "仅有自主情景，未引用任何第三方一致预期。",
+        "revision_instruction": "可补充一个简要表格，将自主预测的营收/净利润与可见的卖方均值（如有）对比，标出差异方向和幅度，突出核心分歧所在。"
+      }
+    ],
+    "overall_editorial_verdict": "报告抓住了兆易创新处于存储周期顶峰、盈利质量存疑的核心矛盾，逻辑方向正确；但公共章节尚未将研究经理的工作内容有效转化为读者可执行的叙事，估值数字不统一且分散，论点缺乏反证—定价—证伪的闭环。必须集中在三个‘must revise’项上重写关键段落，方可达到深度备忘录标准。"
+  },
+  "review_status": {
+    "mode": "schema_prompt_structured",
+    "agent": "Sell-Side Research Editor",
+    "structured_error": ""
+  },
+  "revision_requested": true,
+  "revision_applied": true,
+  "revision_status": {
+    "mode": "schema_prompt_structured",
+    "agent": "Portfolio Manager Editorial Revision",
+    "structured_error": ""
+  },
+  "initial_handoff_issues": [
+    "silent change 2026e_operatingmargin: 45.0 % -> 53.57142857142857 %",
+    "silent change 2027e_operatingmargin: 40.0 % -> 70.58823529411765 %",
+    "silent change 2028e_operatingmargin: 35.0 % -> 82.5 %",
+    "dropped canonical line: 2028e_parentnetprofit"
+  ],
+  "initial_analytical_issues": [
+    "public thesis chapter missing strongest counterargument/boundary",
+    "public thesis chapter missing market-pricing implication",
+    "public thesis chapter missing falsification condition"
+  ],
+  "remaining_handoff_issues": [
+    "dropped canonical line: 2028e_parentnetprofit"
+  ],
+  "remaining_analytical_issues": [
+    "public thesis chapter missing market-pricing implication"
+  ],
+  "revision_rejection_reasons": []
+}

@@ -10,6 +10,68 @@ from tradingagents.dataflows.tushare_research import (
     _earnings_guidance_section,
     _parse_cninfo_announcements,
 )
+from tradingagents.dataflows.official_guidance import (
+    official_guidance_record,
+    parse_official_guidance_metrics,
+    parse_official_guidance_record,
+)
+
+
+def test_official_guidance_metrics_survive_pdf_line_wrapping():
+    raw = """
+    历史对照：2024年半年度归属于上市公司股东的净利润为51,700万元。
+    公司预计 2026 年半年度归属于上市公司股东的净利润为 690,000 万元左右。
+    公司预计 2026 年半年度归属于上市公司股东扣除非经常性损益后的净
+    利润为 485,000 万元左右。
+    公司预计 2026 年半年度实现营业收入 1,150,000 万元左右。
+    """
+
+    metrics = parse_official_guidance_metrics(raw)
+    record = official_guidance_record(metrics)
+
+    assert metrics == {
+        "period": "2026H1",
+        "revenue_cny_mn": 11500.0,
+        "parent_net_profit_cny_mn": 6900.0,
+        "deducted_parent_net_profit_cny_mn": 4850.0,
+    }
+    assert parse_official_guidance_record(record) == metrics
+
+
+def test_official_guidance_metrics_resolve_cninfo_current_and_prior_columns():
+    """Regression for Shenhuo's real Poppler ``-layout`` text structure."""
+
+    raw = """
+               河南神火煤电股份有限公司
+                2026 年半年度业绩预告
+  一、本期业绩预计情况
+  1、业绩预告期间：2026 年 1 月 1 日至 2026 年 6 月 30 日。
+  2、业绩预告情况：预计净利润为正值且属于同向上升情形
+  （1）以确数进行业绩预告的
+                                            单位：万元
+     项   目             本报告期                上年同期
+                              480,000.00
+归属于上市公司股东的净利润                                190,445.68
+                 比上年同期增长        152.04%
+                              480,600.00
+扣除非经常性损益后的净利润                                201,006.92
+                 比上年同期增长        139.10%
+基本每股收益（元/股）                        2.169          0.860
+  二、与会计师事务所沟通情况
+"""
+
+    metrics = parse_official_guidance_metrics(raw)
+    record = official_guidance_record(metrics)
+
+    assert metrics["period"] == "2026H1"
+    assert metrics["parent_net_profit_cny_mn"] == 4800.0
+    assert metrics["parent_net_profit_prior_cny_mn"] == 1904.4568
+    assert metrics["deducted_parent_net_profit_cny_mn"] == 4806.0
+    assert round(metrics["deducted_parent_net_profit_prior_cny_mn"], 4) == 2010.0692
+    assert metrics["table_layout_control"] == "current_vs_prior_columns_resolved"
+    assert "parent_net_profit_cny_mn=4800" in record
+    assert "parent_net_profit_prior_cny_mn=1904.46" in record
+    assert parse_official_guidance_record(record)["parent_net_profit_cny_mn"] == 4800.0
 
 
 def test_cninfo_detail_url_resolves_to_static_pdf_before_dynamic_page():

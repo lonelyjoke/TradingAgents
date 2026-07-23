@@ -1,0 +1,48 @@
+{
+  "mode": "schema_prompt_structured",
+  "agent": "Portfolio Manager",
+  "structured_error": "",
+  "schema": "SellSidePMDecision",
+  "initial_mode": "schema_prompt_structured",
+  "editorial_review_mode": "schema_prompt_structured",
+  "editorial_revision_requested": true,
+  "editorial_revision_applied": true,
+  "editorial_revision_mode": "schema_prompt_structured",
+  "remaining_handoff_issues": [
+    "dropped canonical line: 2028e_parentnetprofit"
+  ],
+  "remaining_analytical_issues": [
+    "public thesis chapter missing market-pricing implication"
+  ],
+  "editorial_revision_rejection_reasons": [],
+  "deterministic_model_notes": [
+    "restored omitted canonical line 2027e_grossmargin",
+    "restored omitted canonical line 2028e_grossmargin",
+    "restored undocumented canonical change 2026e_operatingprofit",
+    "restored undocumented canonical change 2027e_operatingprofit",
+    "restored undocumented canonical change 2028e_operatingprofit",
+    "restored omitted canonical line 2028e_parentnetprofit",
+    "restored undocumented canonical change 2026e_ocf",
+    "restored undocumented canonical change 2027e_ocf",
+    "restored undocumented canonical change 2028e_ocf",
+    "restored undocumented canonical change 2026e_eps",
+    "restored undocumented canonical change 2027e_eps",
+    "restored undocumented canonical change 2028e_eps",
+    "replaced 2026E EPS 21.394875996518234 -> 14.2633",
+    "replaced 2027E EPS 25.67385119582188 -> 7.8448",
+    "replaced 2028E EPS 28.526501328690976 -> 4.2790",
+    "replaced 2027E gross profit 7140.0 -> 9350.0000",
+    "replaced 2027E cost of sales 9860.0 -> 7650.0000",
+    "replaced 2028E gross profit 5040.0 -> 7000.0000",
+    "replaced 2028E cost of sales 8960.0 -> 7000.0000",
+    "synchronized weighted equity value 179250.0 -> 123200.0000",
+    "removed 4 manual deterministic valuation line(s) from prose",
+    "enforced safe-price execution constraint above the buy ceiling",
+    "deduplicated 1 canonical model line(s)"
+  ],
+  "full_report_chars": "17852",
+  "public_report_chars": "11086",
+  "internal_overflow_chars": "6764",
+  "internal_sections_removed_from_public_report": "内部附录A：业务机制与分部经济, 内部附录B：行业驱动与护城河机制, 内部附录C：财务质量核查明细, 内部附录D：替代信息与卖方预期审计, 内部附录E：模型交接与报告质量审计",
+  "public_h2_count": "8"
+}

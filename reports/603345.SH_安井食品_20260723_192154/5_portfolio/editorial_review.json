@@ -1,0 +1,87 @@
+{
+  "review": {
+    "revision_required": true,
+    "company_understanding_score": 3,
+    "independent_model_score": 3,
+    "evidence_and_counterevidence_score": 3,
+    "valuation_closure_score": 2,
+    "readability_and_synthesis_score": 3,
+    "strongest_aspects": [
+      "公司财务质量分析深入，特别是通过合同负债、应收账款和经营现金流的多维交叉验证，有力支撑了收入真实性和现金转化能力的判断。",
+      "对子公司（新宏业、新柳伍、鼎味泰）的差异化分析到位，既指出了新宏业的改善，也明确承认新柳伍的利润压力，避免了简单化的线性外推。",
+      "风险与证伪条件清晰具体，为投资决策提供了可操作的跟踪框架。"
+    ],
+    "findings": [
+      {
+        "section": "company_disaggregation",
+        "priority": "must_revise",
+        "issue": "业务模型机制章节缺失结构化的 `business_model_mechanisms` 表格，导致公司如何创造、传递和捕获价值的因果链条不完整。",
+        "evidence_or_logic_gap": "第二节仅用文字描述了经营闭环，但未以结构化行呈现每个机制如何工作、驱动什么经济指标、有何证据支撑。根据研究计划要求，`business_model_mechanisms` 数组必须携带证据和因果深度。",
+        "revision_instruction": "在第二节补充 `业务模型机制` 子章节，使用结构化行（至少四行）并填入：(1) 产能驱动与产品迭代闭环，(2) 经销商合同负债模式与现金转化，(3) 采购规模与成本转嫁能力，(4) 子公司矩阵的利润弹性与风险。每行必须填写 `how_it_works`, `economic_driver`, `cash_and_capital_feature`, `evidence_or_gap` 和 `analyst_conclusion`，引用现有财报和渠道证据。"
+      },
+      {
+        "section": "three_year_forecast",
+        "priority": "must_revise",
+        "issue": "三年预测表在4.3节中写明“缺乏稀释后总股本数据，无法计算 EPS 及每股公允价值”，但同表却给出了精确的 EPS 值（5.04, 5.76, 6.48元），存在明显矛盾。",
+        "evidence_or_logic_gap": "决策草稿的规范模型快照中已根据 Tushare 登记的注册资本计算出稀释后总股本为 3.3329 亿股，EPS 可据此精确计算。但报告正文的免责声明与数据展示冲突，可能导致读者质疑模型严谨性。",
+        "revision_instruction": "统一处理：删除 4.3 节中“无法计算每股指标”的声明，明确写出 EPS 的计算公式（归母净利润 / 3.3329 亿股），确保表中数据与公式一致。同时检查并修正所有类似的数据可用性免责声明。"
+      },
+      {
+        "section": "thesis_moat_financial_bridge",
+        "priority": "must_revise",
+        "issue": "核心论点章节缺少最有力的反证与边界条件，也未明确阐述市场定价如何反映这些论点，违反了研究计划对公共论点章节的硬性要求。",
+        "evidence_or_logic_gap": "计划检出 `公共论点章节缺少最强反证/边界` 和 `缺少市场定价含义`。当前第五节仅正面论述护城河，未充分展示与市场定价的张力。例如，盈利弹性论点未说明在什么条件下会被证伪，以及当前估值中是否已部分反映了这些风险。",
+        "revision_instruction": "在第五节中，为每个核心论点（盈利弹性被低估、防御属性突出）清晰地增加 (1) 最强的反证和边界条件（如“若半年报毛利率<22.5%，盈利弹性证伪”）和 (2) 市场定价含义（如“当前 19 倍 TTM PE 已隐含了 12.5% 的盈利增长，我们的超额收益仅来源于市场未定价的额外 10 个百分点增长”）。这应与内部 `core_theses` 卡片的结论保持一致。"
+      },
+      {
+        "section": "valuation_and_expectation_gap",
+        "priority": "must_revise",
+        "issue": "估值章节存在多处数字不一致，且未以程序化计算结果为唯一口径，导致读者对目标价和回报率的理解混乱。",
+        "evidence_or_logic_gap": "报告第六节称基线公允价值约为 96 元，而第八节和 Shared Model Update Ledger 中提及“上行空间约 10%”和“一年预期总回报约 14-15%”。但程序化计算的概率加权公允价值为 100.09 元，上行空间为 14.9%，安全买入上限为 78.53 元。多处目标价（96, 97.8, 102, 106.5 元）和回报率不一致。",
+        "revision_instruction": "严格依据 `canonical_model_snapshot` 和 `deterministic_valuation` 章节输出最终结论。统一使用概率加权公允价值 100.09 元作为基准目标价，计算对应的上行空间和预期回报。删除其他不一致的数字，并在报告开头或结尾处明确声明：“所有估值数据以本节程序化模型输出为唯一口径。”"
+      },
+      {
+        "section": "industry_cycle_and_competition",
+        "priority": "should_revise",
+        "issue": "行业周期判断中引用的历史估值分位数（PE 处于 39.2% 分位）作为市场定价的支撑论据，存在循环论证风险，且数据源未在报告中提供。",
+        "evidence_or_logic_gap": "PE 历史分位数依赖于外部数据源，但未提供具体引用。更重要的是，对于安井这类有自己利润周期（毛利率从21%回升至23%）的公司，其自身历史估值中枢可能本身就反映了行业周期，直接比较当前 PE 与历史 PE 分位不能有效证明低估。",
+        "revision_instruction": "删除对历史 PE 分位的简单依赖，或补充论证：当前 PE（19x）与历史可比阶段的 PE（如上一轮毛利率修复周期）相比是否仍有折价。将此分析移至估值章节的讨论中，避免在行业概述中简单引用分位数。"
+      },
+      {
+        "section": "valuation_and_expectation_gap",
+        "priority": "should_revise",
+        "issue": "估值使用了 15% 的投资者要求回报率计算安全买入价格，但未对此关键假设提供依据，可能显得武断。",
+        "evidence_or_logic_gap": "公司目前股息率约 3-5%，十年期国债收益率约 2.5-3%，15% 的要求回报率意味着约 10-12% 的股权风险溢价，对于安井这样财务稳健、现金流好的公司，这个风险溢价设定可能偏高，但报告未做任何论证。",
+        "revision_instruction": "在估值章节中对 15% 要求回报率的合理性进行简短说明（例如，参考 CAPM 模型，考虑 A 股食品饮料板块的平均风险溢价和安井的贝塔值）。如果无法论证，请说明这是基于风险规避的保守假设。"
+      },
+      {
+        "section": "thesis_moat_financial_bridge",
+        "priority": "should_revise",
+        "issue": "护城河证据检验章节缺失结构化的 `moat_mechanisms` 表格，导致护城河分析停留在文字描述，未清晰呈现每个护城河来源的运作机制、经济结果和耐久性评估。",
+        "evidence_or_logic_gap": "尽管内部工作台已生成了 `moat_mechanisms` 数组，但备忘录第五节未加以利用，违反了计划中“需要 `business_model_mechanisms`、`moat_mechanisms` 等结构化表格承载证据和因果深度”的要求。",
+        "revision_instruction": "在第五节中补充并完善从内部工作台获得的 `moat_mechanisms` 表，至少包含三行：规模成本优势、全国化渠道网络、品牌认知与品类迭代。每行必须填写 `moat_source`, `operating_mechanism`, `observed_proof`, `economic_result`, `durability_and_threat`, `verdict` 各字段。"
+      }
+    ],
+    "overall_editorial_verdict": "本次备忘录在基本面分析上展现了扎实的财务功底，尤其是对现金转化、负债结构和子公司差异化的深入剖析，构成了报告的亮点。然而，在报告的结构化完整性、数据一致性和估值结论的统一性上存在明显短板。业务模型机制和护城河机制的量化归因缺失，以及估值章节多目标价并存的问题，削弱了分析的专业性和决策可用性。完成上述修订，特别是补充关键结构化表格和统一估值口径后，该报告将能有效支撑其 Overweight 推荐。"
+  },
+  "review_status": {
+    "mode": "schema_prompt_structured",
+    "agent": "Sell-Side Research Editor",
+    "structured_error": ""
+  },
+  "revision_requested": true,
+  "revision_applied": true,
+  "revision_status": {
+    "mode": "schema_prompt_structured",
+    "agent": "Portfolio Manager Editorial Revision",
+    "structured_error": ""
+  },
+  "initial_handoff_issues": [],
+  "initial_analytical_issues": [
+    "public thesis chapter missing strongest counterargument/boundary",
+    "public thesis chapter missing market-pricing implication"
+  ],
+  "remaining_handoff_issues": [],
+  "remaining_analytical_issues": [],
+  "revision_rejection_reasons": []
+}

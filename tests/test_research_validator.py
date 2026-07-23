@@ -10,10 +10,12 @@ from tradingagents.evaluation.research_validator import (
     audit_handoff_numeric_consistency,
     audit_official_guidance_forecast_reconciliation,
     audit_canonical_financial_reconciliation,
+    audit_commodity_sensitivity_arithmetic,
     audit_pm_unit_scale_arithmetic,
     audit_position_valuation_consistency,
     audit_foreign_sell_side_forecast_disclosure,
     audit_public_forecast_growth_consistency,
+    audit_public_canonical_forecast_narrative,
     audit_public_key_number_consistency,
     audit_public_report_language,
     audit_rating_valuation_consistency,
@@ -27,6 +29,57 @@ from tradingagents.evaluation.research_validator import (
     _is_publication_blocker,
     _normalize_rating,
 )
+
+
+def test_public_prose_cannot_override_canonical_forecast_or_fair_value(tmp_path):
+    portfolio_dir = tmp_path / "5_portfolio"
+    portfolio_dir.mkdir()
+    payload = {
+        "one_line_thesis": "模型预计2026E营收210亿元，公允价值256元。",
+        "canonical_model_snapshot": [
+            {
+                "line_id": "2026E_revenue",
+                "period": "2026E",
+                "metric": "revenue",
+                "value": 25_000,
+                "unit": "CNY mn",
+            }
+        ],
+        "deterministic_valuation": {"fair_value_per_share_cny": 471.13},
+    }
+    (portfolio_dir / "canonical_decision.json").write_text(
+        json.dumps(payload, ensure_ascii=False), encoding="utf-8"
+    )
+
+    issues = audit_public_canonical_forecast_narrative(tmp_path)
+
+    assert len(issues) == 2
+    assert all(issue.section == "public_canonical_forecast_narrative" for issue in issues)
+    assert all(_is_publication_blocker(issue.section, issue.severity) for issue in issues)
+
+
+def test_public_canonical_audit_keeps_labelled_external_and_scenario_values(tmp_path):
+    portfolio_dir = tmp_path / "5_portfolio"
+    portfolio_dir.mkdir()
+    payload = {
+        "forecast_takeaways": [
+            {
+                "takeaway": "外资卖方预计2026E营收300亿元。",
+                "financial_implication": "乐观情景2026E归母净利润120亿元。",
+            }
+        ],
+        "valuation_closure": "乐观情景公允价值550元，悲观情景公允价值300元。",
+        "canonical_model_snapshot": [
+            {"period": "2026E", "metric": "revenue", "value": 25_000, "unit": "CNY mn"},
+            {"period": "2026E", "metric": "parent_net_profit", "value": 10_000, "unit": "CNY mn"},
+        ],
+        "deterministic_valuation": {"fair_value_per_share_cny": 471.13},
+    }
+    (portfolio_dir / "canonical_decision.json").write_text(
+        json.dumps(payload, ensure_ascii=False), encoding="utf-8"
+    )
+
+    assert audit_public_canonical_forecast_narrative(tmp_path) == []
 
 
 def _write_guidance_reconciliation_fixture(tmp_path, *, forecast_text, scenarios):
@@ -76,11 +129,12 @@ def test_official_h1_guidance_blocks_unreconciled_lower_full_year_scenarios(tmp_
         "Q1归母净利润14.6亿元；H1归母净利润69亿元；全年预测尚未完成。",
     )
 
-    assert len(issues) == 2
+    assert len(issues) == 3
     assert all(
         issue.section == "official_guidance_full_year_reconciliation"
         for issue in issues
     )
+    assert any("implied Q2 profit is not quantified" in issue.issue for issue in issues)
 
 
 def test_official_h1_guidance_accepts_explicit_q1_q2_h1_h2_fy_bridge(tmp_path):
@@ -103,6 +157,36 @@ def test_official_h1_guidance_accepts_explicit_q1_q2_h1_h2_fy_bridge(tmp_path):
     )
 
     assert audit_official_guidance_forecast_reconciliation(tmp_path, decision) == []
+
+
+def test_official_guidance_record_overrides_larger_or_smaller_prior_table_value(tmp_path):
+    _write_guidance_reconciliation_fixture(
+        tmp_path,
+        forecast_text=(
+            "## Official Earnings Guidance Override\n"
+            "2026年半年度业绩预告\n"
+            "Parsed official guidance metrics: period=2026H1; "
+            "parent_net_profit_cny_mn=4800; parent_net_profit_prior_cny_mn=1904.4568; unit=CNY mn\n"
+            "归属于上市公司股东的净利润 190,445.68万元"
+        ),
+        scenarios=[
+            {"scenario": "bear", "parent_net_profit_cny_mn": 6000},
+            {"scenario": "base", "parent_net_profit_cny_mn": 7500},
+            {"scenario": "bull", "parent_net_profit_cny_mn": 9000},
+        ],
+    )
+    decision = (
+        "2026H1业绩预告归母净利润19.04亿元；Q1归母净利润22.90亿元；"
+        "Q2归母净利润亏损3.86亿元；H2下半年预计恢复，FY全年预测75亿元。"
+    )
+
+    issues = audit_official_guidance_forecast_reconciliation(
+        tmp_path, decision
+    )
+
+    assert issues
+    assert any("deterministic official value is 4800.00" in issue.issue for issue in issues)
+    assert any("does not reconcile to official H1 48.00" in issue.issue for issue in issues)
 
 
 def test_chinese_public_report_blocks_full_english_reasoning_sentence():
@@ -605,6 +689,90 @@ def test_pm_unit_scale_audit_blocks_tenfold_sensitivity_and_scenario(tmp_path):
     assert [issue.section for issue in issues] == ["pm_unit_scale_arithmetic"]
     assert "95" in issues[0].issue
     assert "9900" in issues[0].issue
+
+
+def test_commodity_sensitivity_blocks_profit_above_revenue_shock_and_overcapacity(tmp_path):
+    context_dir = tmp_path / "0_context"
+    portfolio_dir = tmp_path / "5_portfolio"
+    context_dir.mkdir()
+    portfolio_dir.mkdir()
+    (context_dir / "commodity_context.md").write_text(
+        "\n".join(
+            [
+                "COMMODITY_MODEL_CONTROL: segment=Electrolytic aluminum; capacity_wan_t=170; capacity_period=FY2025; selling_price_proxy=SHFE AL; sensitivity_guardrail=net below revenue shock",
+                "COMMODITY_MODEL_CONTROL: segment=Coal; capacity_wan_t=795; capacity_period=FY2025; selling_price_proxy=grade matched; sensitivity_guardrail=net below revenue shock",
+            ]
+        ),
+        encoding="utf-8",
+    )
+    payload = {
+        "forecast_assumptions": [
+            {
+                "parameter": "SHFE铝价（元/吨）",
+                "affected_business": "电解铝及有色金属板块",
+                "sensitivity": "铝价每波动1000元/吨，净利润影响约18亿元。",
+            },
+            {
+                "parameter": "电解铝产销量（万吨）",
+                "affected_business": "电解铝及有色金属板块",
+                "bear_case": "165万吨",
+                "base_case": "175万吨",
+                "bull_case": "185万吨",
+            },
+            {
+                "parameter": "煤炭平均售价（元/吨）",
+                "affected_business": "煤炭板块",
+                "sensitivity": "煤价每变动100元/吨，煤炭板块净利润影响约10亿元。",
+            },
+        ]
+    }
+    (portfolio_dir / "canonical_decision.json").write_text(
+        json.dumps(payload, ensure_ascii=False), encoding="utf-8"
+    )
+
+    issues = audit_commodity_sensitivity_arithmetic(tmp_path)
+
+    assert [issue.section for issue in issues] == ["commodity_sensitivity_arithmetic"]
+    assert "at most 17亿元" in issues[0].issue
+    assert "volume=175万吨 exceeds" in issues[0].issue
+    assert "at most 7.95亿元" in issues[0].issue
+    assert _is_publication_blocker(issues[0].section, issues[0].severity)
+
+
+def test_commodity_sensitivity_accepts_capacity_bounded_after_tax_effect(tmp_path):
+    context_dir = tmp_path / "0_context"
+    portfolio_dir = tmp_path / "5_portfolio"
+    context_dir.mkdir()
+    portfolio_dir.mkdir()
+    (context_dir / "commodity_context.md").write_text(
+        "COMMODITY_MODEL_CONTROL: segment=Electrolytic aluminum; capacity_wan_t=170; "
+        "capacity_period=FY2025; selling_price_proxy=SHFE AL; sensitivity_guardrail=net below revenue shock",
+        encoding="utf-8",
+    )
+    (portfolio_dir / "canonical_decision.json").write_text(
+        json.dumps(
+            {
+                "forecast_assumptions": [
+                    {
+                        "parameter": "SHFE铝价（元/吨）",
+                        "affected_business": "电解铝板块",
+                        "sensitivity": "铝价每波动1000元/吨，归母净利润影响约11亿元。",
+                    },
+                    {
+                        "parameter": "电解铝产量（万吨）",
+                        "affected_business": "电解铝板块",
+                        "bear_case": "155万吨",
+                        "base_case": "165万吨",
+                        "bull_case": "170万吨",
+                    },
+                ]
+            },
+            ensure_ascii=False,
+        ),
+        encoding="utf-8",
+    )
+
+    assert audit_commodity_sensitivity_arithmetic(tmp_path) == []
 
 
 def test_report_redundancy_flags_same_substantive_sentence_three_times():

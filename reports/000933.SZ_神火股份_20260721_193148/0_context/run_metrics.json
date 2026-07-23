@@ -1,0 +1,17 @@
+{
+  "llm_calls": 38,
+  "tool_calls": 25,
+  "tokens_in": 1425601,
+  "tokens_out": 156578,
+  "cached_tokens_in": 580224,
+  "llm_errors": 2,
+  "elapsed_seconds": 2209.978,
+  "selected_analysts": [
+    "market",
+    "news",
+    "fundamentals"
+  ],
+  "quick_model": "deepseek-v4-flash",
+  "deep_model": "deepseek-v4-pro",
+  "provider": "deepseek"
+}

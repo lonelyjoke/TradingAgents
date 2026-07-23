@@ -10,6 +10,7 @@ back gracefully to free-text generation.
 
 from __future__ import annotations
 
+from copy import deepcopy
 import json
 import re
 
@@ -71,6 +72,7 @@ from tradingagents.dataflows.prompt_compaction import (
     compact_state_fields,
 )
 from tradingagents.dataflows.pm_report_compaction import split_pm_public_report
+from tradingagents.dataflows.official_guidance import parse_official_guidance_record
 from tradingagents.dataflows.structured_research import compact_structured_research_for_prompt
 
 
@@ -138,6 +140,288 @@ def _canonical_line_changed(left_row: dict, right_row: dict) -> bool:
     return value_changed or unit_changed
 
 
+def _canonical_semantic_key(row: dict) -> tuple[str, str]:
+    period = re.sub(r"\s+", "", str(row.get("period", "") or "")).lower()
+    metric = re.sub(
+        r"[^a-z0-9\u4e00-\u9fff]+", "", str(row.get("metric", "") or "").lower()
+    )
+    line_id = str(row.get("line_id", "") or "").lower()
+    if not period:
+        period_match = re.search(r"20\d{2}e|current", line_id, re.I)
+        period = period_match.group(0).lower() if period_match else ""
+    if not metric:
+        metric = re.sub(r"^(?:20\d{2}e|current)[_\-\s]*", "", line_id)
+        metric = re.sub(r"[^a-z0-9\u4e00-\u9fff]+", "", metric)
+    aliases = {
+        "dilutedsharecount": "dilutedshares",
+        "dilutedshares": "dilutedshares",
+        "dilutedsharesoutstanding": "dilutedshares",
+        "sharecount": "dilutedshares",
+        "consolidatedrevenue": "revenue",
+        "revenue": "revenue",
+        "consolidatedgrossmargin": "grossmargin",
+        "grossmargin": "grossmargin",
+        "consolidatedgrossprofit": "grossprofit",
+        "grossprofit": "grossprofit",
+        "consolidatedoperatingprofit": "operatingprofit",
+        "operatingprofit": "operatingprofit",
+        "netprofitparent": "parentnetprofit",
+        "parentnetprofit": "parentnetprofit",
+        "consolidatedparentnetprofit": "parentnetprofit",
+        "epsbasiccny": "eps",
+        "epsbasic": "eps",
+        "dilutedeps": "eps",
+        "eps": "eps",
+        "operatingcashflow": "ocf",
+        "ocf": "ocf",
+        "capitalexpenditure": "capex",
+        "capex": "capex",
+        "freecashflow": "fcf",
+        "fcf": "fcf",
+    }
+    return period, aliases.get(metric, metric)
+
+
+_LEGACY_PM_LABEL_ZH = {
+    "mechanism": "业务机制",
+    "purchase_or_tender": "采购与招投标方式",
+    "pricing": "定价机制",
+    "delivery_revenue_recognition": "交付与收入确认",
+    "cost_stack_service": "成本结构与服务模式",
+    "cash_collection_capital_intensity": "回款与资本强度",
+    "segment": "业务分部",
+    "revenue_weight_pct": "收入占比",
+    "revenue_growth": "收入增速",
+    "gross_margin_pct": "毛利率",
+    "margin_change_pp": "毛利率变动",
+    "profit_pool_impact": "利润池影响",
+    "valuation_treatment": "估值处理",
+    "counterevidence": "反向证据",
+    "driver": "核心驱动因素",
+    "evidence": "证据",
+    "status": "当前状态",
+    "direction": "变化方向",
+    "next_verification": "下一验证节点",
+    "transmission": "财务传导",
+    "strongest_counterevidence": "最强反向证据",
+    "working_capital": "营运资金",
+    "cash_conversion": "现金转化",
+    "capex_roic": "资本开支与投入资本回报率",
+    "leverage_impairment": "杠杆与减值风险",
+    "shareholder_return": "股东回报",
+    "number": "序号",
+    "thesis": "投资论点",
+    "expectation_gap": "预期差",
+    "falsification": "证伪条件",
+    "verdict": "当前判断",
+    "parameter": "关键参数",
+    "base_case_2026": "2026年基准情景",
+    "base_case_2027": "2027年基准情景",
+    "base_case_2028": "2028年基准情景",
+    "sensitivity": "敏感性",
+    "base_case": "基准情景",
+    "bull_case": "乐观情景",
+    "bear_case": "悲观情景",
+    "debate_and_decision_logic": "辩论与决策逻辑",
+    "prior_rating": "此前评级",
+    "new_decisive_evidence": "新增决定性证据",
+    "unchanged_core_facts": "未改变的核心事实",
+    "rating_change_audit": "评级变更审计",
+    "current_price_cny": "当前股价（元）",
+    "diluted_share_count_mn": "稀释后总股本（百万股）",
+    "probability_weighted_fair_value_per_share_cny": "概率加权每股公允价值（元）",
+    "fair_value_per_share_cny": "每股公允价值（元）",
+    "formula": "计算公式",
+    "double_counting_checks": "重复计算检查",
+    "missing_inputs": "缺失输入",
+    "upside_risk": "上行风险",
+    "downside_risk": "下行风险",
+}
+
+
+def _legacy_pm_label(value) -> str:
+    key = re.sub(r"[^a-z0-9]+", "_", str(value or "").strip().lower()).strip("_")
+    return _LEGACY_PM_LABEL_ZH.get(key, str(value).replace("_", " "))
+
+
+def _legacy_pm_text(value) -> str:
+    """Turn a legacy/free-form PM JSON subtree into readable prose."""
+
+    if value is None:
+        return ""
+    if isinstance(value, str):
+        return value.strip()
+    if isinstance(value, (int, float, bool)):
+        return str(value)
+    if isinstance(value, list):
+        rows = [_legacy_pm_text(item) for item in value]
+        return "\n".join(f"- {row}" for row in rows if row)
+    if isinstance(value, dict):
+        rows = []
+        for key, item in value.items():
+            rendered = _legacy_pm_text(item)
+            if rendered:
+                rows.append(f"**{_legacy_pm_label(key)}**：{rendered}")
+        return "\n\n".join(rows)
+    return str(value).strip()
+
+
+def _recover_legacy_pm_decision(
+    raw_text: str,
+    manager_payload: dict,
+    underwriting_packet: dict | None = None,
+) -> SellSidePMDecision | None:
+    """Migrate coherent legacy PM JSON into the current schema.
+
+    Numeric lines come only from the validated Research Manager and company
+    underwriting packet. The legacy response contributes prose, preventing raw
+    JSON from ever being published as if it were a Markdown report.
+    """
+
+    cleaned = str(raw_text or "").strip()
+    cleaned = re.sub(r"^```(?:json)?", "", cleaned, flags=re.I).strip()
+    cleaned = re.sub(r"```$", "", cleaned).strip()
+    try:
+        legacy = json.loads(cleaned)
+    except (TypeError, ValueError):
+        return None
+    if not isinstance(legacy, dict):
+        return None
+    canonical = list(manager_payload.get("canonical_model_snapshot", []) or [])
+    if len(canonical) < 4:
+        return None
+
+    packet = dict(underwriting_packet or {})
+    packet_scenarios = []
+    for row in packet.get("scenarios", []) or []:
+        scenario = str(row.get("scenario", "")).lower()
+        if scenario not in {"bull", "base", "bear"}:
+            continue
+        profit = row.get("parent_net_profit_cny_mn")
+        multiple = row.get("valuation_multiple")
+        if profit is None or multiple is None:
+            continue
+        packet_scenarios.append(
+            {
+                "scenario": scenario,
+                "probability_pct": float(row.get("probability_pct", 0) or 0),
+                "valuation_method": "PE",
+                "parent_net_profit_cny_mn": float(profit),
+                "valuation_multiple": float(multiple),
+                "assumption_summary": _legacy_pm_text(row.get("operating_assumptions"))
+                or "沿用公司承保模型情景假设。",
+                "evidence_ids": list(row.get("evidence_ids", []) or []),
+            }
+        )
+    valuation_closure = dict(packet.get("valuation_closure", {}) or {})
+    summary = dict(legacy.get("pm_summary", {}) or {})
+    conclusion = "\n\n".join(
+        row
+        for row in (
+            str(legacy.get("one_line_thesis", "") or "").strip(),
+            str(summary.get("core_bet", "") or "").strip(),
+            str(summary.get("biggest_risk", "") or "").strip(),
+        )
+        if row
+    )
+    payload = {
+        "rating": legacy.get("rating", "Hold"),
+        "rating_posture": legacy.get("rating_posture")
+        or legacy.get("position_posture")
+        or "等待进一步验证",
+        "research_readiness": manager_payload.get("research_readiness", "partial"),
+        "one_line_thesis": legacy.get("one_line_thesis")
+        or manager_payload.get("core_bet")
+        or "结构化输出经兼容恢复，结论置信度受限。",
+        # Legacy recovery deliberately omits manager-authored analytical ledgers:
+        # they may carry the same obsolete unit scale or language leakage that
+        # caused the fallback. Their conclusions are already represented in the
+        # Chinese public prose, while numeric truth comes from canonical rows.
+        "research_questions": [],
+        "question_verdicts": [],
+        "forecast_takeaways": [],
+        "forecast_assumptions": [],
+        "core_theses": [],
+        "safe_valuation_assumptions": {
+            "current_price_cny": valuation_closure.get("current_price_cny"),
+            "scenarios": packet_scenarios,
+        },
+        "investment_conclusion_and_core_conflict": conclusion
+        or _legacy_pm_text(legacy.get("portfolio_manager_decision")),
+        "canonical_model_snapshot": canonical,
+        "handoff_change_rows": [],
+        "company_disaggregation": "\n\n".join(
+            row
+            for row in (
+                str(legacy.get("company_snapshot", "") or "").strip(),
+                _legacy_pm_text(legacy.get("business_model_mechanisms")),
+                _legacy_pm_text(legacy.get("segment_economics")),
+            )
+            if row
+        ),
+        "industry_cycle_and_competition": _legacy_pm_text(
+            legacy.get("industry_driver_matrix")
+        ),
+        "autonomous_forecast_model": "\n\n".join(
+            row
+            for row in (
+                _legacy_pm_text(packet.get("reconciliation_checks")),
+                _legacy_pm_text(legacy.get("forecast_takeaways")),
+                _legacy_pm_text(legacy.get("forecast_assumptions")),
+            )
+            if row
+        ),
+        "thesis_financial_bridge": _legacy_pm_text(legacy.get("core_theses")),
+        "moat_evidence_scorecard": _legacy_pm_text(legacy.get("moat_mechanisms")),
+        "valuation_closure": _legacy_pm_text(packet.get("valuation_closure"))
+        or "估值仅采用程序根据规范情景、股本和概率计算的结果；旧版JSON中的手工目标价未采纳。",
+        "accounting_and_capital_allocation": _legacy_pm_text(
+            legacy.get("accounting_quality_matrix")
+        ),
+        "expectation_gap_and_market_pricing": "\n\n".join(
+            row
+            for row in (
+                _legacy_pm_text(legacy.get("portfolio_manager_decision")),
+            )
+            if row
+        ),
+        "risks_catalysts_verification": "\n\n".join(
+            row
+            for row in (
+                _legacy_pm_text(legacy.get("key_risks_to_rating")),
+                _legacy_pm_text(legacy.get("verification_calendar")),
+            )
+            if row
+        ),
+        "handoff_integrity_audit": str(
+            manager_payload.get("handoff_integrity_audit", "")
+            or "沿用研究经理的规范模型快照，未接受新的数值变更。"
+        ),
+        "shared_model_change_audit": (
+            "兼容恢复仅迁移分析文字；预测数值、单位和估值情景均取自已验证的"
+            "研究经理与公司承保模型，没有采用旧JSON中的独立数值。"
+        ),
+        "report_quality_self_check": (
+            "原始模型返回旧版JSON字段，现已确定性迁移并重新渲染；未将JSON文本"
+            "直接作为Markdown发布。结构化明细不足的部分按证据缺口披露。"
+        ),
+    }
+    try:
+        return SellSidePMDecision.model_validate(payload)
+    except (TypeError, ValueError):
+        for field in (
+            "question_verdicts",
+            "forecast_takeaways",
+            "forecast_assumptions",
+            "core_theses",
+        ):
+            payload[field] = []
+        try:
+            return SellSidePMDecision.model_validate(payload)
+        except (TypeError, ValueError):
+            return None
+
+
 def _merge_manager_canonical_snapshot(
     manager_payload: dict,
     pm_payload: dict,
@@ -166,6 +450,16 @@ def _merge_manager_canonical_snapshot(
         str(row.get("line_id", "")).strip().lower()
         for row in payload.get("handoff_change_rows", []) or []
         if str(row.get("disposition", "")).lower() == "accepted"
+        and row.get("evidence_ids")
+        and all(
+            re.fullmatch(r"(?:EV|KPE|KSI)\d+", str(evidence_id).strip(), re.I)
+            for evidence_id in row.get("evidence_ids", []) or []
+        )
+        and not re.search(
+            r"research\s*manager|经理正文|经常性(?:净)?利润",
+            str(row.get("reason", "") or ""),
+            re.I,
+        )
     }
     pm_by_id = {
         str(row.get("line_id", "")).strip().lower(): row for row in pm_rows
@@ -173,6 +467,7 @@ def _merge_manager_canonical_snapshot(
     manager_ids = {
         str(row.get("line_id", "")).strip().lower() for row in manager_rows
     }
+    manager_semantic_keys = {_canonical_semantic_key(row) for row in manager_rows}
     merged: list[dict] = []
     notes: list[str] = []
     for manager_row in manager_rows:
@@ -195,6 +490,7 @@ def _merge_manager_canonical_snapshot(
         row
         for row in pm_rows
         if str(row.get("line_id", "")).strip().lower() not in manager_ids
+        and _canonical_semantic_key(row) not in manager_semantic_keys
     )
     payload["canonical_model_snapshot"] = merged
     return payload, notes
@@ -240,6 +536,368 @@ def _canonical_handoff_issues(
                 f"{pm_value} {pm_unit}"
             )
     return issues
+
+
+def _align_pm_scenarios_with_official_guidance(
+    pm_payload: dict,
+    underwriting_packet: dict,
+    official_guidance_context: str,
+) -> tuple[dict, list[str]]:
+    """Keep PM scenario fields on the reported parent-profit convention."""
+
+    payload = deepcopy(pm_payload)
+    source_text = "\n".join(
+        (
+            official_guidance_context or "",
+            json.dumps(underwriting_packet or {}, ensure_ascii=False),
+        )
+    )
+    guidance = parse_official_guidance_record(source_text)
+    period = str(guidance.get("period", ""))
+    h1_parent = guidance.get("parent_net_profit_cny_mn")
+    if not period.endswith("H1") or h1_parent is None:
+        return payload, []
+
+    h1_parent = float(h1_parent)
+    h1_revenue = guidance.get("revenue_cny_mn")
+    h1_deducted = guidance.get("deducted_parent_net_profit_cny_mn")
+    q1_parent = None
+    q1_match = re.search(
+        r"\|\s*latest reported\s*\|\s*Q1\s*\|\s*20\d{6}\s*\|"
+        r"\s*-?\d[\d,]*(?:\.\d+)?\s*\|\s*(-?\d[\d,]*(?:\.\d+)?)\s*\|",
+        official_guidance_context or "",
+        re.I,
+    )
+    if q1_match:
+        q1_parent = float(q1_match.group(1).replace(",", "")) / 1_000_000.0
+    source_scenarios = {
+        str(row.get("scenario", "")).strip().lower(): dict(row)
+        for row in (underwriting_packet or {}).get("scenarios", []) or []
+    }
+    scenarios = payload.setdefault("safe_valuation_assumptions", {}).setdefault(
+        "scenarios", []
+    )
+    notes: list[str] = []
+    for row in scenarios:
+        scenario_name = str(row.get("scenario", "")).strip().lower()
+        summary = str(row.get("assumption_summary", "") or "")
+        try:
+            full_year = float(row.get("parent_net_profit_cny_mn"))
+        except (TypeError, ValueError):
+            full_year = None
+        metric_mismatch = bool(
+            re.search(
+                r"经常性(?:净)?利润|扣非(?:归母)?(?:净)?利润|recurring\s+(?:net\s+)?profit|deducted\s+(?:parent\s+)?profit",
+                summary,
+                re.I,
+            )
+        ) and "不替代本字段" not in summary
+        below_h1 = full_year is not None and full_year < h1_parent * 0.98
+        implausibly_low_h2 = bool(
+            full_year is not None
+            and full_year >= h1_parent * 0.98
+            and full_year - h1_parent < h1_parent * 0.10
+            and not re.search(r"H2|下半年", summary, re.I)
+        )
+        invalid = metric_mismatch or below_h1 or implausibly_low_h2
+        source = source_scenarios.get(scenario_name)
+        source_profit = source.get("parent_net_profit_cny_mn") if source else None
+        if invalid and source_profit is not None and float(source_profit) >= h1_parent * 0.98:
+            row["probability_pct"] = source.get(
+                "probability_pct", row.get("probability_pct")
+            )
+            row["parent_net_profit_cny_mn"] = float(source_profit)
+            method = str(source.get("valuation_method", ""))
+            row["valuation_method"] = (
+                "PE" if re.search(r"P/?E|市盈率", method, re.I) else "direct_equity_value"
+            )
+            row["valuation_multiple"] = source.get("valuation_multiple")
+            row["direct_equity_value_cny_mn"] = None
+            row["evidence_ids"] = list(source.get("evidence_ids", []) or [])
+            full_year = float(source_profit)
+            notes.append(
+                f"restored {scenario_name} parent-profit scenario from underwriting packet; "
+                "PM recurring/deducted-profit substitution or invalid H1 bridge rejected"
+            )
+        elif invalid:
+            row["parent_net_profit_cny_mn"] = None
+            row["valuation_multiple"] = None
+            row["direct_equity_value_cny_mn"] = None
+            notes.append(
+                f"removed invalid {scenario_name} parent-profit valuation input; no valid underwriting replacement"
+            )
+            continue
+
+        if full_year is None:
+            continue
+        implied_h2 = full_year - h1_parent
+        scenario_cn = {"bull": "乐观", "base": "基准", "bear": "悲观"}.get(
+            scenario_name, scenario_name
+        )
+        quarterly_bridge = (
+            f"Q1归母净利润为{q1_parent / 100:.2f}亿元，"
+            f"由H1倒算Q2为{(h1_parent - q1_parent) / 100:.2f}亿元；"
+            if q1_parent is not None
+            else ""
+        )
+        row["assumption_summary"] = (
+            f"{scenario_cn}情景采用归属于上市公司股东的净利润口径；"
+            f"{quarterly_bridge}"
+            f"官方{period}归母净利润为{h1_parent / 100:.2f}亿元，"
+            f"全年归母净利润为{full_year / 100:.2f}亿元，"
+            f"隐含下半年归母净利润为{implied_h2 / 100:.2f}亿元。"
+            "扣非利润仅作盈利质量分析，不替代本字段。"
+        )
+
+    facts = [f"归母净利润{h1_parent / 100:.2f}亿元"]
+    if h1_revenue is not None:
+        facts.insert(0, f"营业收入{float(h1_revenue) / 100:.2f}亿元")
+    if h1_deducted is not None:
+        facts.append(f"扣非归母净利润{float(h1_deducted) / 100:.2f}亿元")
+    if q1_parent is not None:
+        facts.append(
+            f"Q1归母净利润{q1_parent / 100:.2f}亿元、倒算Q2归母净利润"
+            f"{(h1_parent - q1_parent) / 100:.2f}亿元"
+        )
+    scenario_bridges = []
+    for row in scenarios:
+        value = row.get("parent_net_profit_cny_mn")
+        if value is None:
+            continue
+        scenario_bridges.append(
+            f"{row.get('scenario')}全年{float(value) / 100:.2f}亿元/"
+            f"隐含H2 {(float(value) - h1_parent) / 100:.2f}亿元"
+        )
+    correction = (
+        f"官方业绩预告口径校正：{period} " + "、".join(facts) + "（未经审计）；"
+        + "，".join(scenario_bridges)
+        + "。归母与扣非不得混用。"
+    )
+    public_field = "autonomous_forecast_model"
+    existing = str(payload.get(public_field, "") or "")
+    existing = re.sub(
+        r"(?ms)^官方业绩预告口径校正：.*?归母与扣非不得混用。\s*",
+        "",
+        existing,
+    )
+    if correction not in existing:
+        payload[public_field] = correction + "\n\n" + existing
+    if h1_deducted is not None:
+        official_deducted_yi = float(h1_deducted) / 100.0
+        correction_count = 0
+
+        def annotate_conflicting_deducted_estimates(value):
+            nonlocal correction_count
+            if isinstance(value, dict):
+                return {
+                    key: annotate_conflicting_deducted_estimates(item)
+                    for key, item in value.items()
+                }
+            if isinstance(value, list):
+                return [annotate_conflicting_deducted_estimates(item) for item in value]
+            if not isinstance(value, str) or "扣非" not in value:
+                return value
+
+            def replace(match: re.Match) -> str:
+                nonlocal correction_count
+                estimate = float(match.group(2))
+                if abs(estimate - official_deducted_yi) <= max(
+                    official_deducted_yi * 0.03, 0.2
+                ):
+                    return match.group(0)
+                local = match.group(0)
+                if re.search(r"已拒绝|不采用|否定|冲突", local):
+                    return local
+                correction_count += 1
+                return (
+                    f"{match.group(1)}{estimate:g}亿元（第三方旧估算，与官方预告"
+                    f"{official_deducted_yi:.2f}亿元冲突，已拒绝入模）"
+                )
+
+            return re.sub(
+                r"((?:扣非归母净利润|扣非净利润|扣非利润|扣非)"
+                r"\s*(?:为|约|达|仅|[:：=])?\s*)(\d+(?:\.\d+)?)\s*亿(?:元)?",
+                replace,
+                value,
+            )
+
+        payload = annotate_conflicting_deducted_estimates(payload)
+        if correction_count:
+            notes.append(
+                f"annotated {correction_count} conflicting deducted-profit estimate(s) as rejected against official guidance"
+            )
+    return payload, notes
+
+
+_PUBLIC_NUMERIC_SPINE_FIELDS = (
+    "one_line_thesis",
+    "investment_conclusion_and_core_conflict",
+    "forecast_takeaways",
+    "forecast_assumptions",
+    "core_theses",
+    "autonomous_forecast_model",
+    "thesis_financial_bridge",
+    "expectation_gap_and_market_pricing",
+    "valuation_closure",
+)
+
+
+def _canonical_amount_cny_100m(row: dict) -> float | None:
+    """Convert one canonical currency line to the unit used in Chinese prose."""
+
+    try:
+        value = float(row.get("value"))
+    except (TypeError, ValueError):
+        return None
+    unit = re.sub(r"[\s_]+", "", str(row.get("unit", "") or "").lower())
+    if unit in {"cnymn", "rmbmn", "百万元", "人民币百万元", "mn cny".replace(" ", "")}:
+        return value / 100.0
+    if unit in {"cnybn", "rmbbn", "十亿元", "人民币十亿元"}:
+        return value * 10.0
+    if unit in {"cny100m", "rmb100m", "亿元", "人民币亿元", "亿人民币"}:
+        return value
+    return None
+
+
+def _is_noncanonical_numeric_context(text: str, start: int, end: int) -> bool:
+    """Keep explicitly labelled external, rejected and non-base scenario values."""
+
+    local = text[max(0, start - 48) : min(len(text), end + 64)]
+    return bool(
+        re.search(
+            r"旧(?:版|草稿)|拒绝|不采用|不再使用|取代|失效|未进入(?:规范)?模型|"
+            r"第三方|外资|卖方|机构预测|市场预期|一致预期|共识|KSI\d*|KPE\d*|"
+            r"乐观(?:情景)?|牛市(?:情景)?|悲观(?:情景)?|熊市(?:情景)?|bull|bear",
+            local,
+            re.I,
+        )
+    )
+
+
+def _synchronize_public_numeric_spine(pm_payload: dict) -> tuple[dict, list[str]]:
+    """Make reader-facing prose follow the validated model before publication.
+
+    LLM prose is produced before the application restores omitted canonical rows
+    and recalculates valuation.  This deterministic finalizer closes that timing
+    gap: direct/base-model numeric claims are rewritten to the canonical values,
+    while clearly labelled broker views, rejected estimates and bull/bear cases
+    remain visible as comparisons rather than silently becoming house forecasts.
+    """
+
+    payload = deepcopy(pm_payload or {})
+    canonical: dict[tuple[str, str], float] = {}
+    for row in payload.get("canonical_model_snapshot", []) or []:
+        period, metric = _canonical_semantic_key(row)
+        if not re.fullmatch(r"20\d{2}e", period, re.I):
+            continue
+        if metric not in {"revenue", "parentnetprofit"}:
+            continue
+        amount = _canonical_amount_cny_100m(row)
+        if amount is not None:
+            canonical[(period.upper(), metric)] = amount
+
+    replacement_count = 0
+
+    def synchronize_text(value: str) -> str:
+        nonlocal replacement_count
+        text = value
+        for (period, metric), expected in canonical.items():
+            labels = r"营业收入|营收" if metric == "revenue" else r"归母净利润|归母利润"
+            pattern = re.compile(
+                rf"({period}[^。；;\n]{{0,55}}?(?:{labels})[^\d\n]{{0,12}})"
+                r"(\d+(?:\.\d+)?)(\s*亿(?:元)?)",
+                re.I,
+            )
+
+            def replace_amount(match: re.Match) -> str:
+                nonlocal replacement_count
+                mentioned = float(match.group(2))
+                if _is_noncanonical_numeric_context(text, match.start(), match.end()):
+                    return match.group(0)
+                if abs(mentioned - expected) <= max(abs(expected) * 0.05, 0.5):
+                    return match.group(0)
+                replacement_count += 1
+                return f"{match.group(1)}{expected:.2f}{match.group(3)}"
+
+            text = pattern.sub(replace_amount, text)
+
+        valuation = payload.get("deterministic_valuation", {}) or {}
+        fair_value = valuation.get("fair_value_per_share_cny")
+        if fair_value is not None:
+            fair_value = float(fair_value)
+            pattern = re.compile(
+                r"((?:概率加权|综合)?公允价值\s*(?:约|为|仅|[:：=])?\s*)"
+                r"(\d+(?:\.\d+)?)(\s*元)",
+                re.I,
+            )
+
+            def replace_fair_value(match: re.Match) -> str:
+                nonlocal replacement_count
+                mentioned = float(match.group(2))
+                if _is_noncanonical_numeric_context(text, match.start(), match.end()):
+                    return match.group(0)
+                if re.search(r"情景", text[max(0, match.start() - 24) : match.end() + 16]):
+                    return match.group(0)
+                if abs(mentioned - fair_value) <= max(abs(fair_value) * 0.03, 1.0):
+                    return match.group(0)
+                replacement_count += 1
+                return f"{match.group(1)}{fair_value:.2f}{match.group(3)}"
+
+            text = pattern.sub(replace_fair_value, text)
+        return text
+
+    def synchronize_value(value):
+        if isinstance(value, str):
+            return synchronize_text(value)
+        if isinstance(value, list):
+            return [synchronize_value(item) for item in value]
+        if isinstance(value, dict):
+            return {key: synchronize_value(item) for key, item in value.items()}
+        return value
+
+    for field in _PUBLIC_NUMERIC_SPINE_FIELDS:
+        if field in payload:
+            payload[field] = synchronize_value(payload[field])
+
+    model_lines: list[str] = []
+    periods = sorted({period for period, _metric in canonical})
+    for period in periods:
+        parts = []
+        if (period, "revenue") in canonical:
+            parts.append(f"营业收入{canonical[(period, 'revenue')]:.2f}亿元")
+        if (period, "parentnetprofit") in canonical:
+            parts.append(
+                f"归母净利润{canonical[(period, 'parentnetprofit')]:.2f}亿元"
+            )
+        if parts:
+            model_lines.append(period + " " + "、".join(parts))
+    valuation = payload.get("deterministic_valuation", {}) or {}
+    if valuation.get("fair_value_per_share_cny") is not None:
+        model_lines.append(
+            "程序化概率加权公允价值"
+            f"{float(valuation['fair_value_per_share_cny']):.2f}元/股"
+        )
+    if model_lines:
+        disclosure = "**规范模型数值口径：** " + "；".join(model_lines) + "。"
+        existing = str(payload.get("autonomous_forecast_model", "") or "")
+        existing = re.sub(
+            r"(?ms)^\*\*规范模型数值口径：\*\*.*?(?:\n\n|$)",
+            "",
+            existing,
+            count=1,
+        ).strip()
+        payload["autonomous_forecast_model"] = (
+            disclosure + ("\n\n" + existing if existing else "")
+        )
+
+    notes = []
+    if replacement_count:
+        notes.append(
+            f"synchronized {replacement_count} stale public numeric claim(s) to the canonical model"
+        )
+    if model_lines:
+        notes.append("inserted deterministic public numeric source-of-truth disclosure")
+    return payload, notes
 
 
 def _analytical_structure_issues(
@@ -343,6 +1001,7 @@ def _analytical_structure_issues(
                 "public language: English-heavy reader-facing fields must be translated to Chinese: "
                 + ", ".join(english_heavy_fields[:8])
             )
+    guidance_metrics = parse_official_guidance_record(official_guidance_context or "")
     raw_guidance_context = official_guidance_context or ""
     official_section = re.search(
         r"(?ims)^##\s+Official Earnings Guidance Override\s*(.*?)(?=^##\s+|\Z)",
@@ -357,13 +1016,20 @@ def _analytical_structure_issues(
         guidance_text,
         re.I,
     )
-    if guidance_match and re.search(r"半年度|半年|H1|half-year", guidance_text, re.I):
-        guidance_value = float(guidance_match.group(1).replace(",", ""))
-        guidance_unit = re.sub(r"\s+", "", guidance_match.group(2).lower())
-        if guidance_unit == "万元":
-            guidance_value /= 100.0
-        elif guidance_unit == "亿元":
-            guidance_value *= 100.0
+    structured_parent = guidance_metrics.get("parent_net_profit_cny_mn")
+    structured_period = str(guidance_metrics.get("period", ""))
+    if (
+        structured_parent is not None and structured_period.endswith("H1")
+    ) or (guidance_match and re.search(r"半年度|半年|H1|half-year", guidance_text, re.I)):
+        if structured_parent is not None:
+            guidance_value = float(structured_parent)
+        else:
+            guidance_value = float(guidance_match.group(1).replace(",", ""))
+            guidance_unit = re.sub(r"\s+", "", guidance_match.group(2).lower())
+            if guidance_unit == "万元":
+                guidance_value /= 100.0
+            elif guidance_unit == "亿元":
+                guidance_value *= 100.0
         public_text = " ".join(
             str(pm_payload.get(field, "") or "")
             for field in (
@@ -403,6 +1069,22 @@ def _analytical_structure_issues(
                 "official guidance: full-year scenarios below reported H1 without explicit H2 loss/fair-value-reversal bridge: "
                 + ", ".join(scenarios_below)
             )
+        if guidance_metrics.get("deducted_parent_net_profit_cny_mn") is not None:
+            recurring_scenario_rows = [
+                str(row.get("scenario", "scenario"))
+                for row in (pm_payload.get("safe_valuation_assumptions") or {}).get("scenarios", []) or []
+                if re.search(
+                    r"经常性(?:净)?利润|扣非(?:归母)?(?:净)?利润|recurring\s+(?:net\s+)?profit|deducted\s+(?:parent\s+)?profit",
+                    str(row.get("assumption_summary", "") or ""),
+                    re.I,
+                )
+                and "不替代本字段" not in str(row.get("assumption_summary", "") or "")
+            ]
+            if recurring_scenario_rows:
+                issues.append(
+                    "official guidance: recurring/deducted-profit assumption stored in parent-net-profit scenario field: "
+                    + ", ".join(recurring_scenario_rows)
+                )
     return issues
 
 
@@ -1076,6 +1758,7 @@ def create_portfolio_manager(llm):
 - For telecom operators / high-dividend SOE candidates, write through operator-native drivers rather than generic software, optical-module, compute-leasing, or commodity templates. Use mobile subscribers, 5G penetration, mobile ARPU, broadband/home ARPU, enterprise/cloud/AI revenue, cloud gross margin, IDC/AI utilization, capex-to-revenue, depreciation, OCF/NI, FCF after capex, payout ratio, net cash/debt, dividend yield, and relative allocation versus China Mobile / China Unicom. Treat cloud/AI as core only when revenue, margin, utilization, customer, and capex-return evidence support it; otherwise keep it in scenario value. High dividend yield is not enough: test payout sustainability, FCF coverage, capex cycle, and dividend-trap risk.
 - For medical-device candidates, use the gated medical-device context only when it says `Status: triggered` or when other supplied evidence independently proves a medical equipment, IVD, reagent/consumables, or high-value device business. Write through device-native drivers: installed base, replacement cycle, tender/procurement cadence, reagent pull-through, VBP price-volume offset, registration, overseas channel quality, service attach rate, receivables, cash conversion, product mix, and gross-margin durability. Do not value the company like an innovative-drug pipeline unless it owns drug-like asset economics.
 - For metals/mining candidates, use the gated metals/mining context only when it says `Status: triggered` or when other supplied evidence independently proves a mining, smelting, refining, or metal-resource business. Write through mining-native drivers: exchange price proxies, realized selling price, reserve/resource quality, grade, equity output, AISC/unit cost, smelting/trading split, hedging/inventory, project capex/ramp, jurisdiction risk, balance-sheet survival, and NAV/SOTP. Do not let metal-price beta alone carry a Buy or Sell call.
+- For commodity producers with `COMMODITY_MODEL_CONTROL` rows, the scenario valuation must be reverse-underwritten from the dated commodity range. Map P20/P50/P80 or explicit bear/base/bull proxy prices into company realized price/basis and lag, cap output at reported capacity, subtract product-matched raw-material, power, anode, mining/washing and other unit costs, then show tax/minority interest, parent profit/EPS/FCF and the resulting normalized PE, EV/EBITDA, PB-ROE or NAV/SOTP fair value. Never substitute a mismatched grade benchmark (for example, coking-coal futures for anthracite/lean coal) or let net-profit sensitivity exceed volume x price shock before tax. If the cost or basis bridge is missing, label the valuation partial instead of manufacturing precision.
 - Use the Debate & Decision Logic section to summarize the strongest bull case, strongest bear case, the real disagreement, the core bet, and why you choose one side after weighing evidence quality, expectation gap, and probability/payoff.
 - Use the Catalysts & Optionality section to distinguish what belongs in the base case from what remains scenario valuation or narrative option value. Preserve verified second-growth curves, investee holdings, policy support, and live thematic catalysts, but clearly say why they do or do not change today's rating.
 - When verified primary investments, non-listed equity holdings, investee IPOs, or asset-revaluation candidates are material, include a **Primary Investment NAV / Asset Revaluation** bridge. Separate this from recurring operating earnings; show conservative/base/upside values with carrying value, latest financing or IPO reference where available, exit probability, lock-up/liquidity haircuts, tax/dilution or double-counting checks, and the resulting per-share or market-cap impact. Market theme enthusiasm may affect probability/payoff, but only the haircut-adjusted incremental NAV should enter pure value investing estimates.
@@ -1178,6 +1861,13 @@ Be decisive and ground every conclusion in specific evidence from the analysts.
 {get_focused_report_instruction()}
 If an important investment claim depends on an unverified commodity price, product spread, inventory, policy detail, wholesale price, or exact percentage, list it under an "Unverified Key Assumptions" paragraph instead of treating it as fact. Do not place unverified exact prices in the holder/builder action plan as hard triggers; turn them into verification items.{get_language_instruction()}"""
 
+        manager_payload = state.get("research_manager_plan_payload", {}) or {}
+        underwriting_packet = dict(
+            state.get("structured_research_context", {}).get(
+                "underwriting_packet", {}
+            )
+            or {}
+        )
         final_trade_decision, pm_generation_status = invoke_structured_or_freetext(
             structured_llm,
             llm,
@@ -1189,7 +1879,27 @@ If an important investment claim depends on an unverified commodity price, produ
         )
         pm_decision_payload = pm_generation_status.pop("validated_payload", {})
         pm_generation_status["schema"] = "SellSidePMDecision"
-        manager_payload = state.get("research_manager_plan_payload", {}) or {}
+        if not pm_decision_payload:
+            recovered_decision = _recover_legacy_pm_decision(
+                final_trade_decision,
+                manager_payload,
+                underwriting_packet,
+            )
+            if recovered_decision is not None:
+                pm_decision_payload = recovered_decision.model_dump(mode="json")
+                final_trade_decision = render_sell_side_pm_decision(
+                    recovered_decision
+                )
+                pm_generation_status.update(
+                    {
+                        "mode": "deterministic_legacy_recovery",
+                        "legacy_json_recovered": True,
+                        "legacy_json_recovery_note": (
+                            "Legacy JSON prose migrated; numeric lines preserved from "
+                            "validated manager/underwriting artifacts."
+                        ),
+                    }
+                )
         deterministic_model_notes: list[str] = []
         if pm_decision_payload:
             pm_decision_payload, restored_handoff_notes = (
@@ -1199,6 +1909,14 @@ If an important investment claim depends on an unverified commodity price, produ
                 )
             )
             deterministic_model_notes.extend(restored_handoff_notes)
+            pm_decision_payload, guidance_alignment_notes = (
+                _align_pm_scenarios_with_official_guidance(
+                    pm_decision_payload,
+                    underwriting_packet,
+                    forecast_model_context + "\n" + earnings_model_context,
+                )
+            )
+            deterministic_model_notes.extend(guidance_alignment_notes)
             try:
                 normalized_decision, normalization_notes = normalize_sell_side_pm_decision(
                     pm_decision_payload
@@ -1303,12 +2021,20 @@ If an important investment claim depends on an unverified commodity price, produ
                         revised_payload,
                     )
                 )
+                revised_payload, revised_guidance_notes = (
+                    _align_pm_scenarios_with_official_guidance(
+                        revised_payload,
+                        underwriting_packet,
+                        forecast_model_context + "\n" + earnings_model_context,
+                    )
+                )
                 try:
                     normalized_revision, revision_model_notes = normalize_sell_side_pm_decision(
                         revised_payload
                     )
                     revision_model_notes = [
                         *restored_revision_notes,
+                        *revised_guidance_notes,
                         *revision_model_notes,
                     ]
                 except (TypeError, ValueError) as exc:
@@ -1367,6 +2093,41 @@ If an important investment claim depends on an unverified commodity price, produ
                             "revision increased analytical structure issues "
                             f"from {len(initial_analytical_issues)} to {len(revised_analytical_issues)}"
                         )
+
+        # The structured model and deterministic valuation are application-owned
+        # by this point.  Synchronize any stale pre-normalization prose before it
+        # can reach the saved-report audit; this is a generic finalization step,
+        # not a ticker-specific report rewrite.
+        if pm_decision_payload:
+            synchronized_payload, public_sync_notes = (
+                _synchronize_public_numeric_spine(pm_decision_payload)
+            )
+            try:
+                synchronized_decision = SellSidePMDecision.model_validate(
+                    synchronized_payload
+                )
+            except (TypeError, ValueError):
+                # Compatibility test doubles and legacy providers can expose a
+                # validated-looking but partial mapping.  Keep their existing
+                # rendered fallback instead of turning deterministic cleanup
+                # into a new crash boundary.
+                deterministic_model_notes.append(
+                    "public numeric synchronization skipped for incomplete PM payload"
+                )
+            else:
+                pm_decision_payload = synchronized_payload
+                deterministic_model_notes.extend(public_sync_notes)
+                final_trade_decision = render_sell_side_pm_decision(
+                    synchronized_decision
+                )
+                remaining_handoff_issues = _canonical_handoff_issues(
+                    manager_payload,
+                    pm_decision_payload,
+                )
+                remaining_analytical_issues = _analytical_structure_issues(
+                    pm_decision_payload,
+                    forecast_model_context,
+                )
 
         initial_mode = pm_generation_status.get("mode", "unknown")
         if revision_applied:

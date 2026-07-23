@@ -1,0 +1,93 @@
+{
+  "review": {
+    "revision_required": true,
+    "company_understanding_score": 3,
+    "independent_model_score": 2,
+    "evidence_and_counterevidence_score": 2,
+    "valuation_closure_score": 2,
+    "readability_and_synthesis_score": 4,
+    "strongest_aspects": [
+      "清晰识别H1业绩预告与Q1报表之间的核心矛盾，并围绕该矛盾构建了投资分析的焦点",
+      "资产负债表与现金流质量分析有据，尤其是合同负债、OCF/净利润比率等前瞻信号捕捉得当",
+      "对Q2亏损可能性的三种情景进行了结构化梳理，为读者提供了清晰的认知框架"
+    ],
+    "findings": [
+      {
+        "section": "investment_conclusion",
+        "priority": "must_revise",
+        "issue": "评级与仓位建议严重矛盾。正文总结称“仓位建议：观察等待，半年报后决策。当前不宜重仓持有，也不宜做空”，但PM决策JSON和标题均给出Underweight减持评级，且设定安全买入上限为10.46元。该冲突使读者无法判断当前应减持、观望还是已做空。",
+        "evidence_or_logic_gap": "观察等待意味着中性仓位或无交易，与主动减持的建议不可共存。若核心矛盾尚未解决以至于无法建立方向性仓位，则不应出具Underweight评级；反之，若确信经营性恶化概率已高到足以做出判断，则应删除观望表述并给出与评级一致的明确操作指令。",
+        "revision_instruction": "必须保持一致立场。若采纳Research Manager的高置信度经营性利润压缩判断，则保留Underweight评级，删除观望等待的保守措辞，并围绕半年报证伪条件设计风险控制措施；若认为信息不对称程度仍过高而不能出评级，则将评级改为Neutral并相应调整估值语言。不论哪种选择，正文与结论的立场必须统一。"
+      },
+      {
+        "section": "company_disaggregation",
+        "priority": "must_revise",
+        "issue": "商业模型描述停留在定性罗列，未提供各业务单元的量化经济驱动方程，也未将收入、成本、利润敞口与商品价格和成本参数建立起可审计的映射关系。Research Manager明确要求business_model_mechanisms行至少4个，而当前仅有3个浅层链接。",
+        "evidence_or_logic_gap": "例如电解铝板块仅有“利润高度敏感于铝价与电价”的笼统描述，缺少销量×（铝价－氧化铝成本－电力成本－其他）的显式拆解及历史兑现数据；煤炭板块也缺乏产出、煤价与成本的关系式。读者无法判断在不同铝价情景下利润变化的精确幅度。",
+        "revision_instruction": "为每个主要业务单元补充收入、毛利与现金流的驱动方程，并至少绑定一个历史年份的实际数据作为锚点（如2025年实际销量、价格、成本结构估计）。将驱动方程与财务预测行以及估值情景中的敏感性运算链接起来，确保每个关键假设下推演出的净利润变化有据可循，不再仅凭‘年化影响约18亿’等无推演过程的笼统判断。"
+      },
+      {
+        "section": "thesis_moat_financial_bridge",
+        "priority": "must_revise",
+        "issue": "核心主张缺乏最强制反证据与可证伪边界。备忘录反复提Q2亏损可能是经营性也可能是一次性，但并未对多头主张进行一次成形的、有证据支撑的反驳，也未明确告知读者在何种关键披露下核心判断将被推翻。这与Research Manager要求每条核心论点都需附有反证和证伪门的指令不符。",
+        "evidence_or_logic_gap": "多头可能提出的‘Q2亏损来自一次性资产减值’的猜测仅在情景B中轻描淡写，既未引述任何具体潜在减值项目（如应收担保、存货减值），也未讨论为何在半年报预告中未预警此类重大非经常性的会计处理。缺少此类反证使得备忘录的偏空结论显得过于凭借作者主观，不够客观。",
+        "revision_instruction": "在thesis或专门的反证章节中，为每条核心空头论点构建明确的‘多头反驳’段落。例如，针对经营性亏损论点，需明确陈述：‘多头认为Q2亏损全部来自某未公告的4亿元非经常性损失，其依据是……，但该说法因……而站不住脚’。同时为每个论点定义清晰的证伪条件，如‘若半年报显示铝板块营业利润超过X亿元且非经常性损益条目列示Y亿元，则我们的核心判断失效’。该内容可直接引用Research Manager中的falsification_gate场合并入正文。"
+      },
+      {
+        "section": "three_year_forecast",
+        "priority": "must_revise",
+        "issue": "三年预测与估值情景之间存在数值脱节和逻辑矛盾。正文估值表中基准情景全年净利润38亿元(假设Q2包含一次性损失)，而Research Manager基准42亿元(完全经营性下滑)。备忘录同时保留了两种逻辑而不做最终选择，导致估值结果游移不定。",
+        "evidence_or_logic_gap": "基准情景下38亿净利润对应的每股价值为15.2元（9x PE），而RM独立模型给出16.8元（42亿利润）。两者差异源于对Q2性质的截然不同假设。备忘录在估值部分未解决这一分歧，读者需要自己判断。此外，预测表中缺少2027/2028年收入、利润的具体数字，违背了‘三年表必须勾稽盈利与现金流’的要求。",
+        "revision_instruction": "必须做出明确的、逻辑一致的基线选择。根据RM最终接受的论点（Q2为经营性利润压缩），应将2026E归母净利润统一校准至42亿元，删除38亿假设，同时更新所有的估值和隐含PE计算。收入、毛利、营业利润和EPS的三年预测行需要填补完整并与RM模型的canonical_snapshot行对齐，包括2027/2028E revenue, gross margin, parent net profit, EPS, OCF, capex, FCF。确保估值的每股价值直接从这些预测行中导出，不与底稿矛盾。"
+      },
+      {
+        "section": "valuation_and_expectation_gap",
+        "priority": "must_revise",
+        "issue": "估值关闭不完整，缺少确定性的概率加权公允价值计算和统一的价格输出。正文仅列出三个情景的每股价值和一个未计算的概率注释，并未给出最终概率加权后的理论价值；同时，价格与安全上限的计算被埋在PM决策JSON中，前文基础分析未做任何引导。",
+        "evidence_or_logic_gap": "根据RM计划，应明确输出16.9元（或12.1元根据重新计算）的概率加权公允价值，并与现价比较，计算出预期回报率及安全买入价格。当前备忘录中读者看到的最后价格是24.46元，三个情景价值分别是6.7、15.2、24.5元，缺少中间的加权综合。这未能有效回答预期差的核心问题：市场定价中包含了什么，而我们的模型认为什么才是合理的。",
+        "revision_instruction": "在估值章节中，从所述的概率（保守30%、基准50%、乐观20%改为与RM一致的概率：悲观30%，基准50%，乐观20%？注意RM是悲观30%对应8.9，基准50%对应16.8，乐观20%对应29，加权16.9）出发，计算明确得出的概率加权公允价值。请注意基准情景净利润修正为42亿元后，其每股价值将变为16.8元而非15.2元，请按此重新计算。随后，将该公允价值与当前市价对比，指出隐含上涨/下行空间和市场已定价的隐含利润水平，完整回答预期差。同时将安全价格上限10.46元及其推导依据（基于要求回报、安全边际和最大下跌限制）纳入正文，并评价当前价格与该上限的差距，支撑评级结论。"
+      },
+      {
+        "section": "risks_catalysts_verification",
+        "priority": "must_revise",
+        "issue": "风险章节未综合上行风险情景对公允价值的量化冲击，也未提供动态的风险调整后回报评估。虽然提及了半年报证伪和刺激政策可能导致铝价暴涨，但并未说明在何种程度上估值会变得有吸引力，缺少具体的价格阈值。",
+        "evidence_or_logic_gap": "例如，若半年报证实Q2为一次性损失且核心经营利润为X亿元，我们的公允价值将上调至Y元/股，目标价变为Z。缺乏此类明确的门槛使得投资者难以管理关键事件后的持仓调整，削弱了备忘录的操作性。",
+        "revision_instruction": "为每项关键催化剂（半年报、三季报、铝价突破特定点位）定义明确的‘决策门槛’。对于半年报，给出‘若H1扣非净利润超过X亿元，则将盈利预测上调至Y亿，公允价值提升至Z元，届时应将评级调整为中性或增持’的连贯语句。同时，将这些门槛与falsification_gate和模型更新触发条件相呼应，使整篇备忘录形成闭环逻辑。"
+      },
+      {
+        "section": "cross_section_consistency",
+        "priority": "should_revise",
+        "issue": "多处内容出现交叉重复，降低了阅读效率且易引发矛盾。例如，公司概况中的三大板块描述与后面‘三、电解铝’、‘四、煤炭业务’中的内容部分重叠；资产负债表分析中的合同负债解读与‘最核心的矛盾’中的需求信号重复。",
+        "evidence_or_logic_gap": "合同负债下降29.8%在核心矛盾讨论中用作Q2订单放缓的证据，在资产负债表中解释为预收款减少可能预示Q2订单放缓，这两个地方只换了一个表述，实质内容完全重复。同样的，煤炭业务萎缩在概览和第四章中被重复论述了两遍。这导致随笔式的结构而非精简的论证。",
+        "revision_instruction": "采用‘一处详述、他处引用’的写法。将业务单元的详细信息集中在company_disaggregation及相应的驱动矩阵中。在其后涉及具体分析的部分，例如在论证Q2利润下滑时，直接概括为‘如第X节所示，合同负债先行下降’，避免再次展开分析过程。删除重复的段落，使报告紧凑。"
+      }
+    ],
+    "overall_editorial_verdict": "备忘录找到关键的利润矛盾并构建了叙事情节，但在核心判断、模型一致性和估值关闭上存在需整改的根本缺陷。当前的评级与观望立场自相矛盾，预测数字四处游离，缺乏反证和证伪边界的论述丧失了分析的严谨性。若完成上述修订，尤其是一致化评级立场，确定化盈利预测为42亿元，并据此完成概率加权估值计算，该备忘录方可作为具有决策价值的卖方深度报告。建议重写估值和投资结论前先将分析师团队的对Q2性质的最终裁决明确锁定，再全篇统一改写。"
+  },
+  "review_status": {
+    "mode": "schema_prompt_structured",
+    "agent": "Sell-Side Research Editor",
+    "structured_error": ""
+  },
+  "revision_requested": true,
+  "revision_applied": true,
+  "revision_status": {
+    "mode": "schema_prompt_structured",
+    "agent": "Portfolio Manager Editorial Revision",
+    "structured_error": ""
+  },
+  "initial_handoff_issues": [
+    "dropped canonical line: base_fair_value"
+  ],
+  "initial_analytical_issues": [
+    "analytical structure: evidence-weighted question verdicts count=2, expected at least 3",
+    "analytical structure: auditable forecast assumptions count=2, expected at least 3",
+    "deep research matrix: business-model mechanism rows count=3, expected at least 4",
+    "public thesis chapter missing strongest counterargument/boundary"
+  ],
+  "remaining_handoff_issues": [
+    "dropped canonical line: base_fair_value"
+  ],
+  "remaining_analytical_issues": [],
+  "revision_rejection_reasons": []
+}

@@ -181,6 +181,87 @@ def test_chalco_mapping_fetches_alumina_and_marks_unavailable_costs_neutral(monk
     assert "cannot prove margin deterioration" in context
 
 
+def test_shenhuo_mapping_uses_aluminum_spread_and_grade_matched_coal(monkeypatch):
+    monkeypatch.setattr(
+        commodity_research,
+        "_fetch_futures_product",
+        lambda product, curr_date, look_back_days: {
+            "product": product["name"],
+            "role": product.get("role", ""),
+            "data_type": "Tushare futures proxy",
+            "latest_contract_or_source": f"{product['prefix']}.{product['exchange']}",
+            "latest_price": "100",
+            "latest_date": "20260721",
+            "change_over_window": "0.00%",
+            "window_price_range": "90 - 110",
+            "window_average_price": "100",
+            "latest_price_percentile": "50.0%",
+            "annualized_volatility": "20.00%",
+            "distribution_scenario_band": "P20=95; P50=100; P80=105",
+            "inventory_or_receipt": "N/A",
+            "evidence_status": "Verified by Tushare futures daily data.",
+            "evidence": "mock",
+        },
+    )
+
+    mapping = _infer_products("000933.SZ")
+    context = commodity_research.get_commodity_context("000933.SZ", "2026-07-21")
+    product_names = {product["name"] for product in mapping["products"]}
+
+    assert {"Aluminum", "Alumina", "Power cost", "Carbon anode cost"} <= product_names
+    assert "Anthracite and lean-coal realized price" in product_names
+    assert "Coking coal" not in product_names
+    assert "DCE JM is not a like-for-like proxy" in mapping["spread_note"]
+    assert "## Company Commodity Earnings Bridge" in context
+    assert "COMMODITY_MODEL_CONTROL: segment=Electrolytic aluminum" in context
+    assert "capacity_wan_t=170.0" in context
+    assert "Gross-profit impact cannot exceed the revenue shock" in context
+    assert "Match coal grade and region" in context
+
+
+def test_futures_product_outputs_distribution_and_volatility(monkeypatch):
+    board = pd.DataFrame(
+        [
+            {
+                "ts_code": "AL2609.SHF",
+                "trade_date": "20260721",
+                "close": 120.0,
+                "oi": 5000,
+                "vol": 2000,
+            }
+        ]
+    )
+    history = pd.DataFrame(
+        [
+            {"ts_code": "AL2609.SHF", "trade_date": "20260716", "close": 100.0, "vol": 1, "oi": 1},
+            {"ts_code": "AL2609.SHF", "trade_date": "20260717", "close": 110.0, "vol": 1, "oi": 1},
+            {"ts_code": "AL2609.SHF", "trade_date": "20260720", "close": 90.0, "vol": 1, "oi": 1},
+            {"ts_code": "AL2609.SHF", "trade_date": "20260721", "close": 120.0, "vol": 1, "oi": 1},
+        ]
+    )
+    monkeypatch.setattr(commodity_research, "_latest_futures_trade_date", lambda *args: board)
+    monkeypatch.setattr(commodity_research, "_query_futures_history", lambda *args: history)
+    monkeypatch.setattr(commodity_research, "_fetch_futures_receipt", lambda *args: "N/A")
+
+    result = commodity_research._fetch_futures_product(
+        {
+            "name": "Aluminum",
+            "type": "futures",
+            "role": "main product",
+            "prefix": "AL",
+            "exchange": "SHFE",
+        },
+        "2026-07-21",
+        90,
+    )
+
+    assert result["window_price_range"] == "90 - 120"
+    assert result["window_average_price"] == "105"
+    assert result["latest_price_percentile"] == "100.0%"
+    assert result["annualized_volatility"] != "N/A"
+    assert "P20=" in result["distribution_scenario_band"]
+
+
 def test_hunan_yuneng_uses_lithium_carbonate_cost_proxy():
     mapping = _infer_products("301358.SZ")
     product = mapping["products"][0]

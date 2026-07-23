@@ -21,6 +21,7 @@ from .industry_identity import (
 )
 from .research_evidence import extract_evidence_records, infer_model_variable
 from .underwriting_packet import compact_underwriting_packet
+from .official_guidance import official_guidance_record, parse_official_guidance_record
 
 
 def _compact_lines(text: str, patterns: tuple[str, ...], *, limit: int = 8) -> list[str]:
@@ -179,6 +180,9 @@ def _sell_side_expectation_excerpt(text: str) -> str:
 
 
 def _official_guidance_section(company_events_context: str) -> list[str]:
+    parsed_record = official_guidance_record(
+        parse_official_guidance_record(company_events_context)
+    )
     rows = _compact_lines(
         company_events_context,
         (
@@ -194,6 +198,8 @@ def _official_guidance_section(company_events_context: str) -> list[str]:
         for row in rows
         if not re.search(r"analyst rule|required model treatment", row, re.I)
     ]
+    if parsed_record and parsed_record not in rows:
+        rows.insert(0, parsed_record)
     if not rows:
         return []
     return [

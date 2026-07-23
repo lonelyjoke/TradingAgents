@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from datetime import datetime, timedelta
 import re
+from typing import Mapping
 from urllib.parse import urlparse
 
 import pandas as pd
@@ -236,6 +237,71 @@ COMPANY_COMMODITY_MAP = {
             ),
         ],
         "spread_note": "Use SHFE aluminum as the timely selling-price proxy and SHFE alumina as a cost/spread proxy; power cost, hydro availability, and capacity utilization determine margin pass-through. Missing cost data is a neutral evidence gap, not bearish evidence.",
+    },
+    "000933.SZ": {
+        "name": "Shenhuo",
+        "products": [
+            _metal_product("Aluminum"),
+            _metal_product("Alumina", "raw-material / spread proxy"),
+            _unavailable_key_driver(
+                "Power cost",
+                "regional tariff / captive-power input cost driver",
+                "company filings by Xinjiang/Yunnan site, regional tariff disclosures, captive-power coal burn and renewable-power disclosures",
+            ),
+            _unavailable_key_driver(
+                "Carbon anode cost",
+                "prebaked-anode input cost driver",
+                "company filings or licensed petroleum-coke / prebaked-anode spot datasets",
+            ),
+            _unavailable_key_driver(
+                "Anthracite and lean-coal realized price",
+                "coal-segment selling-price driver",
+                "company segment disclosure and matching Henan regional anthracite / lean-coal spot benchmarks; do not substitute DCE JM coking coal mechanically",
+            ),
+        ],
+        "spread_note": (
+            "Model Shenhuo through aluminum selling price minus alumina, site-specific power and anode costs, "
+            "then add a separately modeled anthracite/lean-coal segment and aluminum-foil processing fees. "
+            "DCE JM is not a like-for-like proxy for the company's disclosed anthracite and lean-coal products."
+        ),
+        "model_controls": [
+            {
+                "segment": "Electrolytic aluminum",
+                "output_or_service": "liquid aluminum / ingot",
+                "reported_capacity_wan_t": 170.0,
+                "capacity_period": "FY2025",
+                "selling_price_proxy": "SHFE AL plus verified basis/lag",
+                "required_cost_chain": "SHFE AO x company consumption coefficient + site power tariff x kWh/t + carbon anode + other cash cost",
+                "earnings_equation": "volume x (realized AL - alumina - power - anode - other cost), then tax and minority interest",
+                "sensitivity_guardrail": "gross-profit effect cannot exceed saleable volume x output-price shock; attributable net-profit effect must be lower absent an evidenced offset",
+                "valuation_treatment": "normalized cycle earnings / EV-EBITDA with PB-ROE and dividend cross-check",
+                "evidence_status": "capacity reported; realized price, unit-cost and ownership bridge required",
+            },
+            {
+                "segment": "Coal",
+                "output_or_service": "anthracite / lean coal",
+                "reported_capacity_wan_t": 795.0,
+                "capacity_period": "FY2025",
+                "selling_price_proxy": "matching regional product benchmark or company realized price; JM prohibited as direct base input",
+                "required_cost_chain": "saleable output x (realized grade-matched coal price - mining/washing cash cost)",
+                "earnings_equation": "saleable coal volume x realized spread, then tax and ownership",
+                "sensitivity_guardrail": "net-profit effect cannot exceed saleable volume x coal-price shock",
+                "valuation_treatment": "separate normalized coal earnings bucket",
+                "evidence_status": "capacity reported; saleable output, grade mix and realized price missing",
+            },
+            {
+                "segment": "Aluminum foil",
+                "output_or_service": "packaging / battery foil",
+                "reported_capacity_wan_t": 14.0,
+                "capacity_period": "2026 investor interaction",
+                "selling_price_proxy": "aluminum pass-through plus processing fee",
+                "required_cost_chain": "processed volume x processing fee - conversion cost",
+                "earnings_equation": "do not treat aluminum price pass-through as equivalent-value aluminum price beta",
+                "sensitivity_guardrail": "model processing-fee and utilization sensitivity separately",
+                "valuation_treatment": "separate processing earnings / evidenced optionality",
+                "evidence_status": "capacity and pricing mechanism reported; utilization and processing fee missing",
+            },
+        ],
     },
     "000426.SZ": {
         "name": "Xingye Silver & Tin",
@@ -729,6 +795,24 @@ def _fetch_futures_product(product: dict, curr_date: str, look_back_days: int) -
             pct = f"{(close.iloc[-1] / close.iloc[0] - 1) * 100:.2f}%"
         else:
             pct = "N/A"
+        if len(close) >= 2:
+            price_range = f"{close.min():.6g} - {close.max():.6g}"
+            average_price = f"{close.mean():.6g}"
+            p20, p50, p80 = (float(close.quantile(q)) for q in (0.2, 0.5, 0.8))
+            scenario_band = f"P20={p20:.6g}; P50={p50:.6g}; P80={p80:.6g}"
+            percentile = f"{float((close <= close.iloc[-1]).mean()) * 100:.1f}%"
+            returns = close.pct_change().dropna()
+            annualized_volatility = (
+                f"{float(returns.std()) * (252.0 ** 0.5) * 100:.2f}%"
+                if len(returns) >= 2
+                else "N/A"
+            )
+        else:
+            price_range = "N/A"
+            average_price = "N/A"
+            scenario_band = "N/A"
+            percentile = "N/A"
+            annualized_volatility = "N/A"
 
         receipt = _fetch_futures_receipt(ts_code, exchange, str(latest.get("trade_date")))
         main_note = ""
@@ -746,6 +830,11 @@ def _fetch_futures_product(product: dict, curr_date: str, look_back_days: int) -
             "latest_price": _format_value(latest.get("close")),
             "latest_date": str(latest.get("trade_date")),
             "change_over_window": pct,
+            "window_price_range": price_range,
+            "window_average_price": average_price,
+            "latest_price_percentile": percentile,
+            "annualized_volatility": annualized_volatility,
+            "distribution_scenario_band": scenario_band,
             "inventory_or_receipt": receipt,
             "evidence_status": "Verified by Tushare futures daily data.",
             "evidence": (
@@ -763,6 +852,11 @@ def _fetch_futures_product(product: dict, curr_date: str, look_back_days: int) -
             "latest_price": "N/A",
             "latest_date": "N/A",
             "change_over_window": "N/A",
+            "window_price_range": "N/A",
+            "window_average_price": "N/A",
+            "latest_price_percentile": "N/A",
+            "annualized_volatility": "N/A",
+            "distribution_scenario_band": "N/A",
             "inventory_or_receipt": "N/A",
             "evidence_status": "Unavailable; do not state price or change as fact.",
             "evidence": str(exc)[:800],
@@ -1025,6 +1119,28 @@ def _metal_price_source_audit_rows(products: list[dict]) -> list[dict[str, str]]
     return rows
 
 
+def _commodity_model_control_rows(mapping: Mapping[str, object]) -> list[dict[str, object]]:
+    controls = mapping.get("model_controls", [])
+    if isinstance(controls, list) and controls:
+        return [dict(row) for row in controls if isinstance(row, Mapping)]
+    return []
+
+
+def _commodity_model_control_records(rows: list[dict[str, object]]) -> list[str]:
+    records: list[str] = []
+    for row in rows:
+        capacity = row.get("reported_capacity_wan_t")
+        fields = [
+            f"segment={str(row.get('segment', '')).replace(';', ',')}",
+            f"capacity_wan_t={capacity if capacity is not None else 'missing'}",
+            f"capacity_period={str(row.get('capacity_period', '')).replace(';', ',')}",
+            f"selling_price_proxy={str(row.get('selling_price_proxy', '')).replace(';', ',')}",
+            f"sensitivity_guardrail={str(row.get('sensitivity_guardrail', '')).replace(';', ',')}",
+        ]
+        records.append("COMMODITY_MODEL_CONTROL: " + "; ".join(fields))
+    return records
+
+
 def get_commodity_context(ticker: str, curr_date: str, look_back_days: int = 90) -> str:
     """Return evidence-backed commodity price context for A-share companies."""
     symbol = ticker.strip().upper()
@@ -1037,6 +1153,7 @@ def get_commodity_context(ticker: str, curr_date: str, look_back_days: int = 90)
 
     mapping = _infer_products(symbol, curr_date, look_back_days)
     products = mapping.get("products", [])
+    model_controls = _commodity_model_control_rows(mapping)
     rows = []
     has_livestock_products = any(product.get("type") == "moa_livestock" for product in products)
     if has_livestock_products:
@@ -1068,6 +1185,15 @@ def get_commodity_context(ticker: str, curr_date: str, look_back_days: int = 90)
         lines.append(_markdown_table(pd.DataFrame(metal_rows)))
     else:
         lines.append("No exchange-traded metal source audit applies to the mapped products.")
+    lines.extend(["", "## Company Commodity Earnings Bridge"])
+    if model_controls:
+        lines.append(_markdown_table(pd.DataFrame(model_controls)))
+        lines.extend(_commodity_model_control_records(model_controls))
+    else:
+        lines.append(
+            "No ticker-specific deterministic commodity earnings bridge is registered. "
+            "Price evidence may inform direction only; it cannot set EPS, fair value, rating or sizing until output, realized-price, unit-cost, tax/ownership and capacity controls are supplied."
+        )
     lines.extend(
         [
             "",
@@ -1088,6 +1214,10 @@ def get_commodity_context(ticker: str, curr_date: str, look_back_days: int = 90)
         "- Do not state R32, R125, lithium, copper, gold, inventory, or spread changes as facts unless they appear in the evidence table.",
         "- If the product has no reliable data source, list it as an unverified key variable instead of inventing a price change.",
         "- If a thesis-critical input is marked missing, treat it as neutral non-evidence and a retrieval task; it cannot prove margin deterioration/resilience or mechanically change rating, conviction, or sizing.",
+        "- Build bull/base/bear price decks from the dated range, average, percentile, volatility and futures curve shown above; label them as contract-history proxies, not company realized prices.",
+        "- A product-price sensitivity must show volume x price shock first. Gross-profit impact cannot exceed the revenue shock, and attributable net-profit impact must be lower after tax/minority interest unless a separate evidenced cost or by-product offset is shown.",
+        "- A production or sales scenario cannot exceed reported capacity unless the model separately identifies purchased/traded volume or dated commissioned capacity.",
+        "- Match coal grade and region. Do not use DCE JM coking coal, Qinhuangdao thermal coal or another broad coal index as a direct realized-price input for anthracite/lean-coal producers without an evidenced basis bridge.",
     ]
     if has_livestock_products:
         instructions[3:3] = [

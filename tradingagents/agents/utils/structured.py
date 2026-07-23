@@ -80,6 +80,26 @@ def _json_object(text: str) -> dict[str, Any]:
     return value
 
 
+def _compact_validation_error(exc: Exception, limit: int = 24) -> str:
+    """Return only the actionable schema paths for a follow-up repair."""
+
+    errors = getattr(exc, "errors", None)
+    if not callable(errors):
+        return str(exc)[:6000]
+    rows: list[str] = []
+    try:
+        details = errors(include_url=False, include_context=False)
+    except TypeError:
+        details = errors()
+    for row in details[:limit]:
+        location = ".".join(str(part) for part in row.get("loc", ())) or "<root>"
+        rows.append(f"- {location}: {row.get('msg', row.get('type', 'invalid'))}")
+    remaining = max(len(details) - limit, 0)
+    if remaining:
+        rows.append(f"- ... {remaining} additional validation issues")
+    return "\n".join(rows)
+
+
 def _schema_prompt(prompt: Any, schema: type[T]) -> Any:
     instruction = f"""
 
@@ -211,34 +231,47 @@ def invoke_structured_or_freetext(
             }
             return (rendered, metadata) if return_metadata else rendered
         except Exception as first_repair_error:
-            repair_prompt = f"""Your previous response did not validate against the required schema.
+            latest_text = content
+            latest_error: Exception = first_repair_error
+            repair_failures = [f"fallback validation={first_repair_error}"]
+            # A first repair often leaves only one or two enum/missing-field
+            # errors. Feed those exact paths back once more instead of throwing
+            # away an otherwise schema-complete response and publishing raw JSON.
+            for attempt in range(1, 3):
+                repair_prompt = f"""Your previous response did not validate against the required schema.
 
-Return exactly one valid JSON object with no Markdown fences or commentary. Preserve the analysis and values already present. Do not add unsupported facts. Required JSON Schema:
+Return exactly one valid JSON object with no Markdown fences or commentary. Preserve the analysis and values already present. Do not add unsupported facts. Correct every listed validation issue. Required JSON Schema:
 {json.dumps(fallback_schema.model_json_schema(), ensure_ascii=False, separators=(',', ':'))}
 {_configured_language_repair_instruction()}
 
+Validation issues from the previous response:
+{_compact_validation_error(latest_error)}
+
 Previous response:
-{content[:50000]}
+{latest_text[:50000]}
 """
-            try:
-                repaired_response = plain_llm.invoke(repair_prompt)
-                repaired_text = _response_text(repaired_response)
-                repaired_result = fallback_schema.model_validate(
-                    _json_object(repaired_text)
-                )
-                rendered = render(repaired_result)
-                metadata = {
-                    "mode": "schema_repaired_fallback",
-                    "agent": agent_name,
-                    "structured_error": structured_error,
-                    "validated_payload": repaired_result.model_dump(mode="json"),
-                }
-                return (rendered, metadata) if return_metadata else rendered
-            except Exception as second_repair_error:
-                repair_error = (
-                    f"; fallback validation={first_repair_error}; "
-                    f"repair validation={second_repair_error}"
-                )
+                try:
+                    repaired_response = plain_llm.invoke(repair_prompt)
+                    latest_text = _response_text(repaired_response)
+                    repaired_result = fallback_schema.model_validate(
+                        _json_object(latest_text)
+                    )
+                    rendered = render(repaired_result)
+                    metadata = {
+                        "mode": "schema_repaired_fallback",
+                        "agent": agent_name,
+                        "structured_error": structured_error,
+                        "validated_payload": repaired_result.model_dump(mode="json"),
+                        "schema_repair_attempts": attempt,
+                    }
+                    return (rendered, metadata) if return_metadata else rendered
+                except Exception as next_error:
+                    latest_error = next_error
+                    repair_failures.append(
+                        f"repair attempt {attempt} validation={next_error}"
+                    )
+            content = latest_text
+            repair_error = "; " + "; ".join(repair_failures)
     metadata = {
         "mode": "free_text_fallback",
         "agent": agent_name,

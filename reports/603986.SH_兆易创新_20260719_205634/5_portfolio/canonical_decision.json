@@ -1,0 +1,491 @@
+{
+  "rating": "Underweight",
+  "rating_posture": "减持；当前价463.15元高于程序化安全买入上限120.82元，已有持仓按评级管理，新资金等待价格进入安全区间或基本面证据推动估值输入上修。",
+  "research_readiness": "partial",
+  "one_line_thesis": "公司正处于存储周期盈利顶峰，H1业绩爆发力已充分验证，但当前估值（PB 96.5%分位，股价较概率加权公允价值溢价超一倍）已对超级周期愿景过度定价；在概率加权预期回报显著为负且周期拐点信号尚未确认的背景下，应显著低配，保护利润，等待安全边际出现或催化剂改善后再重新评估。",
+  "research_questions": [],
+  "question_verdicts": [],
+  "forecast_takeaways": [],
+  "forecast_assumptions": [],
+  "core_theses": [],
+  "segment_economics": [],
+  "business_model_mechanisms": [],
+  "industry_driver_matrix": [],
+  "moat_mechanisms": [],
+  "accounting_quality_matrix": [],
+  "alternative_intelligence_decisions": [],
+  "sell_side_expectation_matrix": [],
+  "safe_valuation_assumptions": {
+    "current_price_cny": 463.15,
+    "required_annual_return_pct": 20.0,
+    "holding_period_years": 1.0,
+    "margin_of_safety_pct": 20.0,
+    "maximum_bear_loss_pct": 15.0,
+    "optionality_equity_value_cny_mn": 0.0,
+    "optionality_inputs": [],
+    "other_adjustments_equity_value_cny_mn": 0.0,
+    "scenarios": [
+      {
+        "scenario": "base",
+        "probability_pct": 50.0,
+        "valuation_method": "PE",
+        "parent_net_profit_cny_mn": 12000.0,
+        "valuation_multiple": 12.0,
+        "direct_equity_value_cny_mn": null,
+        "assumption_summary": "- 2026全年收入245亿，归母净利120亿（下半年5100，略低于上半年因非经常性减少）\n- 2027年存储价格高位震荡，MCU迅速增长，收入280亿，归母净利130亿\n- 2028年存储价格回落30%，MCU持续增长，收入220亿，归母净利68亿\n- 毛利率：55% → 52% → 40%\n- OCF/NI维持在1.2x以上",
+        "evidence_ids": [
+          "EV022",
+          "KPE03",
+          "KPE08"
+        ]
+      },
+      {
+        "scenario": "bull",
+        "probability_pct": 25.0,
+        "valuation_method": "PE",
+        "parent_net_profit_cny_mn": 14000.0,
+        "valuation_multiple": 15.0,
+        "direct_equity_value_cny_mn": null,
+        "assumption_summary": "- 存储超级周期延续至2028年，AI需求远超预期，海外产能永久退出，SLC NAND价格2027再涨50%\n- MCU与传感业务爆发，毛利率维持58%以上\n- 2026收入260亿，净利140亿；2027收入340亿，净利180亿；2028收入350亿，净利170亿",
+        "evidence_ids": [
+          "KPE01",
+          "KPE03"
+        ]
+      },
+      {
+        "scenario": "bear",
+        "probability_pct": 25.0,
+        "valuation_method": "PE",
+        "parent_net_profit_cny_mn": 9000.0,
+        "valuation_multiple": 8.0,
+        "direct_equity_value_cny_mn": null,
+        "assumption_summary": "- 2026下半年存储价格涨势停滞，Q4开始回落；2027年需求疲软，价格下跌50%，\n- 经济衰退，终端需求萎缩\n- 2026收入200亿，净利90亿；2027收入150亿，净利30亿；2028年收入130亿，净利20亿",
+        "evidence_ids": []
+      }
+    ]
+  },
+  "deterministic_valuation": {
+    "status": "closed",
+    "diluted_share_count_mn": 701.102451,
+    "scenario_rows": [
+      {
+        "scenario": "base",
+        "probability_pct": 50.0,
+        "parent_net_profit_cny_mn": 12000.0,
+        "eps_cny": 17.115900797214586,
+        "valuation_method": "PE",
+        "valuation_multiple": 12.0,
+        "equity_value_cny_mn": 144000.0,
+        "fair_value_per_share_cny": 205.39080956657503,
+        "assumption_summary": "- 2026全年收入245亿，归母净利120亿（下半年5100，略低于上半年因非经常性减少）\n- 2027年存储价格高位震荡，MCU迅速增长，收入280亿，归母净利130亿\n- 2028年存储价格回落30%，MCU持续增长，收入220亿，归母净利68亿\n- 毛利率：55% → 52% → 40%\n- OCF/NI维持在1.2x以上"
+      },
+      {
+        "scenario": "bull",
+        "probability_pct": 25.0,
+        "parent_net_profit_cny_mn": 14000.0,
+        "eps_cny": 19.968550930083683,
+        "valuation_method": "PE",
+        "valuation_multiple": 15.0,
+        "equity_value_cny_mn": 210000.0,
+        "fair_value_per_share_cny": 299.52826395125527,
+        "assumption_summary": "- 存储超级周期延续至2028年，AI需求远超预期，海外产能永久退出，SLC NAND价格2027再涨50%\n- MCU与传感业务爆发，毛利率维持58%以上\n- 2026收入260亿，净利140亿；2027收入340亿，净利180亿；2028收入350亿，净利170亿"
+      },
+      {
+        "scenario": "bear",
+        "probability_pct": 25.0,
+        "parent_net_profit_cny_mn": 9000.0,
+        "eps_cny": 12.83692559791094,
+        "valuation_method": "PE",
+        "valuation_multiple": 8.0,
+        "equity_value_cny_mn": 72000.0,
+        "fair_value_per_share_cny": 102.69540478328751,
+        "assumption_summary": "- 2026下半年存储价格涨势停滞，Q4开始回落；2027年需求疲软，价格下跌50%，\n- 经济衰退，终端需求萎缩\n- 2026收入200亿，净利90亿；2027收入150亿，净利30亿；2028年收入130亿，净利20亿"
+      }
+    ],
+    "optionality_rows": [],
+    "probability_weighted_core_value_cny": 203.25132196692323,
+    "optionality_per_share_cny": 0.0,
+    "other_adjustments_per_share_cny": 0.0,
+    "fair_value_per_share_cny": 203.25132196692323,
+    "expected_return_pct": -56.11544381584298,
+    "required_annual_return_pct": 20.0,
+    "holding_period_years": 1.0,
+    "margin_of_safety_pct": 20.0,
+    "maximum_bear_loss_pct": 15.0,
+    "required_return_price_cny": 171.15900797214587,
+    "margin_of_safety_price_cny": 164.31264765326003,
+    "bear_loss_constraint_price_cny": 120.8181232744559,
+    "safe_buy_price_ceiling_cny": 120.8181232744559,
+    "suggested_buy_zone_low_cny": 108.73631094701031,
+    "fundamental_floor_cny": 102.69540478328751,
+    "formula_notes": [
+      "scenario EPS = parent net profit (CNY mn) / diluted shares (mn)",
+      "PE fair value/share = scenario EPS x selected PE",
+      "probability-weighted core value = sum(probability x scenario fair value/share)",
+      "optionality equity value = metric x multiple x probability x ownership x (1-execution haircut)",
+      "safe ceiling = min(base/(1+required return)^years, base x (1-MOS), bear/(1-max bear loss))"
+    ]
+  },
+  "investment_conclusion_and_core_conflict": "公司正处于存储周期盈利顶峰，H1业绩爆发力已充分验证，但当前估值（PB 96.5%分位，股价较概率加权公允价值溢价超一倍）已对超级周期愿景过度定价；在概率加权预期回报显著为负且周期拐点信号尚未确认的背景下，应显著低配，保护利润，等待安全边际出现或催化剂改善后再重新评估。\n\n本轮存储超级周期的利润持续性与估值极限之间的错配。市场已将2026H1的暴利部分定价，但远期正常化利润的不确定性极大，当前估值隐含着“周期永久高位”的乐观假设，而该假设尚未被证实。\n\n1) 如果SLC NAND价格在2026H2继续超预期上涨且公司非经常性收益证实为可持续经营收益，股价可能出现报复性反弹，减持将错失部分收益；2) 市场情绪极端悲观后可能出现技术性反弹。",
+  "canonical_model_snapshot": [
+    {
+      "line_id": "shares",
+      "period": "2026-07-19; latest stock_basic; Tushare stock_basic.reg_capital (CNY 10,000) / 100; CNY 1 par value",
+      "metric": "diluted_shares",
+      "value": 701.102451,
+      "unit": "mn shares",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "Tushare stock_basic.reg_capital (CNY 10,000) / 100; CNY 1 par value"
+    },
+    {
+      "line_id": "2026E_revenue",
+      "period": "2026E",
+      "metric": "revenue",
+      "value": 24500.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV022",
+        "KPE03",
+        "KPE08"
+      ],
+      "formula": "2026E: H1预告11500 + H2估算13000（季环比略增）; 2027E: 价格高位维持，量增10%；2028E: 价格回调30%，量持平假设"
+    },
+    {
+      "line_id": "2026E_parentnetprofit",
+      "period": "2026E",
+      "metric": "parentnetprofit",
+      "value": 12000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV022",
+        "KPE08"
+      ],
+      "formula": "2026E: H1 6900 + H2 5100（考虑非经常性可能减小）；2027E: 量价高位维持，微增；2028E: 价格回落至正常，扣非净利降至~60亿，归母因非经常性调整"
+    },
+    {
+      "line_id": "2026E_eps",
+      "period": "2026E",
+      "metric": "eps",
+      "value": 17.115900797214586,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    },
+    {
+      "line_id": "2027E_revenue",
+      "period": "2027E",
+      "metric": "revenue",
+      "value": 28000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV022",
+        "KPE03",
+        "KPE08"
+      ],
+      "formula": "2026E: H1预告11500 + H2估算13000（季环比略增）; 2027E: 价格高位维持，量增10%；2028E: 价格回调30%，量持平假设"
+    },
+    {
+      "line_id": "2027E_parentnetprofit",
+      "period": "2027E",
+      "metric": "parentnetprofit",
+      "value": 13000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV022",
+        "KPE08"
+      ],
+      "formula": "2026E: H1 6900 + H2 5100（考虑非经常性可能减小）；2027E: 量价高位维持，微增；2028E: 价格回落至正常，扣非净利降至~60亿，归母因非经常性调整"
+    },
+    {
+      "line_id": "2028E_revenue",
+      "period": "2028E",
+      "metric": "revenue",
+      "value": 22000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV022",
+        "KPE03",
+        "KPE08"
+      ],
+      "formula": "2026E: H1预告11500 + H2估算13000（季环比略增）; 2027E: 价格高位维持，量增10%；2028E: 价格回调30%，量持平假设"
+    },
+    {
+      "line_id": "2028E_parentnetprofit",
+      "period": "2028E",
+      "metric": "parentnetprofit",
+      "value": 6800.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV022",
+        "KPE08"
+      ],
+      "formula": "2026E: H1 6900 + H2 5100（考虑非经常性可能减小）；2027E: 量价高位维持，微增；2028E: 价格回落至正常，扣非净利降至~60亿，归母因非经常性调整"
+    },
+    {
+      "line_id": "base_fair_value",
+      "period": "current",
+      "metric": "fair_value_per_share",
+      "value": 203.25132196692323,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [
+        "scenarios",
+        "shares"
+      ],
+      "formula": "deterministic total fair value per share"
+    },
+    {
+      "line_id": "2026E_grossmargin",
+      "period": "2026E",
+      "metric": "grossmargin",
+      "value": 55.0,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV013",
+        "KPE08"
+      ],
+      "formula": "2026E: 维持高位，略低于Q1因产品结构；2027E: 价格温和下降但规模经济支撑；2028E: 回归常态，周期中枢约40%"
+    },
+    {
+      "line_id": "2027E_grossmargin",
+      "period": "2027E",
+      "metric": "grossmargin",
+      "value": 52.0,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV013",
+        "KPE08"
+      ],
+      "formula": "2026E: 维持高位，略低于Q1因产品结构；2027E: 价格温和下降但规模经济支撑；2028E: 回归常态，周期中枢约40%"
+    },
+    {
+      "line_id": "2028E_grossmargin",
+      "period": "2028E",
+      "metric": "grossmargin",
+      "value": 40.0,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV013",
+        "KPE08"
+      ],
+      "formula": "2026E: 维持高位，略低于Q1因产品结构；2027E: 价格温和下降但规模经济支撑；2028E: 回归常态，周期中枢约40%"
+    },
+    {
+      "line_id": "2026E_operatingprofit",
+      "period": "2026E",
+      "metric": "operatingprofit",
+      "value": 12000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV014"
+      ],
+      "formula": "收入 × 营业利润率（估算，2026E~49%，含非经常性收益；2027E 47%；2028E 32%）"
+    },
+    {
+      "line_id": "2027E_operatingprofit",
+      "period": "2027E",
+      "metric": "operatingprofit",
+      "value": 13200.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV014"
+      ],
+      "formula": "收入 × 营业利润率（估算，2026E~49%，含非经常性收益；2027E 47%；2028E 32%）"
+    },
+    {
+      "line_id": "2028E_operatingprofit",
+      "period": "2028E",
+      "metric": "operatingprofit",
+      "value": 7000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV014"
+      ],
+      "formula": "收入 × 营业利润率（估算，2026E~49%，含非经常性收益；2027E 47%；2028E 32%）"
+    },
+    {
+      "line_id": "2026E_经营性现金流ocf",
+      "period": "2026E",
+      "metric": "经营性现金流ocf",
+      "value": 14640.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV017"
+      ],
+      "formula": "归母净利润 × 1.22（参考Q1 OCF/NP比率），2026E: 12000*1.22; 2027E: 13000*1.22; 2028E: 6800*1.25（周期下行时运营资金释放）"
+    },
+    {
+      "line_id": "2027E_经营性现金流ocf",
+      "period": "2027E",
+      "metric": "经营性现金流ocf",
+      "value": 15860.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV017"
+      ],
+      "formula": "归母净利润 × 1.22（参考Q1 OCF/NP比率），2026E: 12000*1.22; 2027E: 13000*1.22; 2028E: 6800*1.25（周期下行时运营资金释放）"
+    },
+    {
+      "line_id": "2028E_经营性现金流ocf",
+      "period": "2028E",
+      "metric": "经营性现金流ocf",
+      "value": 8500.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV017"
+      ],
+      "formula": "归母净利润 × 1.22（参考Q1 OCF/NP比率），2026E: 12000*1.22; 2027E: 13000*1.22; 2028E: 6800*1.25（周期下行时运营资金释放）"
+    },
+    {
+      "line_id": "2027E_eps",
+      "period": "2027E",
+      "metric": "eps",
+      "value": 18.542225863649136,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    },
+    {
+      "line_id": "2028E_eps",
+      "period": "2028E",
+      "metric": "eps",
+      "value": 9.699010451754932,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    },
+    {
+      "line_id": "2026E_gross_profit",
+      "period": "2026E",
+      "metric": "gross_profit",
+      "value": 13475.000000000002,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV022",
+        "KPE03",
+        "KPE08",
+        "EV013"
+      ],
+      "formula": "revenue x gross margin"
+    },
+    {
+      "line_id": "2026E_cost_of_sales",
+      "period": "2026E",
+      "metric": "cost_ofsales",
+      "value": 11024.999999999998,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV022",
+        "KPE03",
+        "KPE08",
+        "EV013"
+      ],
+      "formula": "revenue - gross profit"
+    },
+    {
+      "line_id": "2027E_gross_profit",
+      "period": "2027E",
+      "metric": "gross_profit",
+      "value": 14560.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV022",
+        "KPE03",
+        "KPE08",
+        "EV013"
+      ],
+      "formula": "revenue x gross margin"
+    },
+    {
+      "line_id": "2027E_cost_of_sales",
+      "period": "2027E",
+      "metric": "cost_ofsales",
+      "value": 13440.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV022",
+        "KPE03",
+        "KPE08",
+        "EV013"
+      ],
+      "formula": "revenue - gross profit"
+    },
+    {
+      "line_id": "2028E_gross_profit",
+      "period": "2028E",
+      "metric": "gross_profit",
+      "value": 8800.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV022",
+        "KPE03",
+        "KPE08",
+        "EV013"
+      ],
+      "formula": "revenue x gross margin"
+    },
+    {
+      "line_id": "2028E_cost_of_sales",
+      "period": "2028E",
+      "metric": "cost_ofsales",
+      "value": 13200.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV022",
+        "KPE03",
+        "KPE08",
+        "EV013"
+      ],
+      "formula": "revenue - gross profit"
+    },
+    {
+      "line_id": "probability_weighted_core_value",
+      "period": "scenario",
+      "metric": "equity_value_weighted",
+      "value": 142500.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "deterministic probability-weighted scenario equity value"
+    }
+  ],
+  "handoff_change_rows": [],
+  "company_disaggregation": "兆易创新（603986.SH）是中国领先的fabless集成电路设计公司，主要产品为存储器（NOR Flash、SLC NAND、利基型DRAM）、微控制器（MCU）、传感器和模拟芯片。2026年上半年受益于利基存储超级涨价周期，公司预计实现营收约115亿元，归母净利润约69亿元，业绩同比暴增。公司拥有极干净的资产负债表（净现金约124亿元）和强劲的经营现金流。当前市值约3250亿元。\n\n- **mechanism**：客户与价值主张：公司向汽车、工业、消费电子、物联网等领域客户提供利基型存储和MCU解决方案，受益于AI端侧设备存储容量升级和海外原厂产能退出的结构性缺口。\n\n**purchase or tender**：通过经销商和直销模式销售标准化芯片产品，客户依据性能、兼容性、供应稳定性和价格进行采购，汽车/工业客户认证周期长，具有设计导入壁垒。\n\n**pricing**：存储芯片价格高度市场化，由全球供需决定；SLC NAND和NOR Flash价格受海外原厂供给策略影响极大，公司作为fabless设计厂，定价权取决于市场紧缺度。当前处于罕见的价格暴涨期。\n\n**delivery revenue recognition**：芯片销售后在客户签收或验收后确认收入，通常为发货后较短期间；存货周转速度在涨价周期中极快。\n\n**cost stack service**：主要成本为晶圆代工（外包给中芯国际、华虹等）和封装测试，研发费用约17%收入。无制造产能，毛利率高度敏感于ASP与晶圆成本的价差。\n\n**cash collection capital intensity**：应收款极少（占收入不到2%），回款极快；资本开支低，主要是研发设备与IP，自由现金流在涨价周期中极强（OCF/NP 1.22x）。资产负债表净现金充裕。\n\n- **segment**：存储器（NOR/SLC NAND/DRAM）\n\n**revenue weight pct**：估计>70%\n\n**revenue growth**：2026H1同比增长远超100%，Q2环比暴增74.5%\n\n**gross margin pct**：估算55-60%（Q1整体57.1%）\n\n**margin change pp**：同比+~20pp\n\n**profit pool impact**：几乎贡献当前全部利润，SLC NAND涨价是核心弹性来源。极高的周期性，当前处于超级繁荣期。\n\n**valuation treatment**：核心价值，但必须按周期情景估值（牛市/基准/熊市），而非线性外推。\n\n**counterevidence**：存储价格可能在2027-2028年因产能恢复或需求放缓而急剧回落。\n- **segment**：MCU微控制器\n\n**revenue weight pct**：估计15-20%\n\n**revenue growth**：未单独披露，公司提及战略发展，估计恢复增长20-30%\n\n**gross margin pct**：未披露，估计40-50%\n\n**margin change pp**：N/A\n\n**profit pool impact**：第二增长曲线，但规模目前尚不足以提供下行缓冲。\n\n**valuation treatment**：场景价值，因缺乏细分财务数据，不纳入核心估值。\n\n**counterevidence**：MCU市场竞争激烈（意法半导体、瑞萨），公司份额提升难度大。\n- **segment**：传感器与模拟芯片\n\n**revenue weight pct**：<10%\n\n**revenue growth**：未披露\n\n**gross margin pct**：未披露\n\n**margin change pp**：N/A\n\n**profit pool impact**：薄利或亏损，不改变整体盈利前景。\n\n**valuation treatment**：排除，视为叙事期权。\n\n**counterevidence**：无。",
+  "industry_cycle_and_competition": "- **driver**：SLC NAND/NOR Flash价格\n\n**evidence**：TrendForce预测H2 2026涨价120-170%（KPE03）；KeyBanc调研（KPE01）\n\n**status**：行业预测，未验证公司传导系数\n\n**direction**：↑↑\n\n**next verification**：TrendForce月度报告，公司Q3营收数据\n- **driver**：海外利基存储产能退出\n\n**evidence**：三星、美光等转向HBM，国内长鑫扩产但主要聚焦DRAM，SLC NAND供给缺口大\n\n**status**：行业共识，定性\n\n**direction**：结构性紧缺\n\n**next verification**：各厂商季度电话会议与资本开支计划\n- **driver**：AI/数据中心新增需求\n\n**evidence**：AI服务器存储容量升级，端侧AI推广；公司年报提及拥抱AI定制化存储\n\n**status**：定性，需求方向明确，但量化到公司收入困难\n\n**direction**：↑\n\n**next verification**：2026半年报是否披露AI相关收入或订单\n- **driver**：晶圆代工成本\n\n**evidence**：台积电、联电计划选择性涨价（KPE05）\n\n**status**：行业信息\n\n**direction**：↑成本压力\n\n**next verification**：公司毛利率与成本结构变化",
+  "autonomous_forecast_model": "- 2026H1收入115亿 vs Q1 41.88亿 → Q2 73.12亿，一致\n- 2026H1归母净利润69亿 vs Q1 14.61亿 → Q2 54.39亿，与KPE08吻合\n- 2025年全年营收92亿，2026H1已超去年全年\n- 市值3250亿 vs 基准核心价值1440亿，显示估值偏高，如未计入长鑫及成长期权则需解释\n\n- 2026年全年归母净利润预计在110-140亿元之间（高度依赖H2价格走势），但这是周期峰值利润，不可用于长期估值锚定。\n- 2027年随着部分产能释放和需求趋于平稳，净利润将显著下降，基准假设为130亿元（仍属强劲）。\n- 2028年周期回落，正常化净利润预计将回落至30-68亿元区间（取决于成本与份额），当前市值对应远期PE将达48-108倍，安全边际匮乏。\n- 每股估值因稀释股份数可算（约70.17亿股），EPS 2026E预计为17.1元（基准），但当前股价隐含的PE倍数已提前透支。\n\n- **parameter**：SLC NAND/NOR Flash综合ASP\n\n**base case 2026**：H2较H1再涨120%\n\n**base case 2027**：持平\n\n**base case 2028**：下跌30%\n\n**sensitivity**：每变动10%，净利润变动约12-15亿元\n- **parameter**：2026E归母净利润（含非经常性）\n\n**base case**：120亿元\n\n**bull case**：140亿元\n\n**bear case**：90亿元\n- **parameter**：2028E正常化净利润\n\n**base case**：68亿元（毛利率40%）\n\n**bear case**：30亿元（毛利率35%，更悲观）\n\n**bull case**：50亿元",
+  "thesis_financial_bridge": "- **number**：1\n\n**thesis**：公司正经历历史级别的存储超级周期，2026E净利润预计达120-140亿元，但这一利润不可持续，且市场已有部分定价。\n\n**expectation gap**：当前PE TTM 113x，隐含TTM利润仅28.7亿，说明市场并未线性外推H1暴利，而是担忧周期回落。但概率加权公允价值仅205-222元/股，较现价463元仍有大幅溢价，表明市场仍为乐观情景保留过高估值。\n\n**evidence**：H1预告利润69亿；Q1毛利率57.1%；TrendForce和KeyBanc预测供给紧张延续至2027年。\n\n**counterevidence**：存储周期历史上持续6-8季度，本轮已进行近一年；2023年低谷利润接近零。管理层在预告中提示周期波动风险。\n\n**falsification**：若Q3营收环比持平或下滑，且NAND现货价格涨势停滞，则超级周期延长假设被证伪。\n\n**verdict**：已部分证实，但持续性未定。\n- **number**：2\n\n**thesis**：公司资产负债表强劲，现金转化率高，能承受周期下行，但无法改变周期股票的估值均值回归规律。\n\n**expectation gap**：市场给予了高PB（12.86x，96.5%分位），隐含了高盈利能力的持续。若周期逆转，PB将向历史中枢（4-5x）回归，将导致大幅资本损失。\n\n**evidence**：净现金124亿；OCF/NP 1.22x；零负债；应收极少。\n\n**counterevidence**：公司质量在行业低谷时并未阻止利润断崖式下跌（2023年几乎亏损）。\n\n**falsification**：如果2026下半年毛利率开始连续下滑且存货增加，则公司抵御周期的能力被高估。\n\n**verdict**：公司质量属实，但无法支撑当前估值水平。\n- **number**：3\n\n**thesis**：当前估值所隐含的“超级周期永久化”或“范式切换”未被证据支持，风险/回报严重不对称，应显著低配。\n\n**expectation gap**：概率加权公允价值约200元/股，现价463元对应预期回报为负，除非认为牛市情景概率>60%（当前仅为25%）。\n\n**evidence**：概率加权估值模型；PE/PB历史分位；MCU等新业务无实质财务贡献。\n\n**counterevidence**：若AI驱动的需求增长远超预期且海外产能永久退出，则存在牛市情景概率上修的可能。\n\n**falsification**：半年报若证实SLC NAND价格持续大涨、非经常性收益可忽略、合同负债大幅增加，则需重新评估。\n\n**verdict**：偏空结论，等待证据改善。",
+  "moat_evidence_scorecard": "- **mechanism**：利基存储的设计导入壁垒：汽车和工业客户认证周期长（5-7年），替换成本高。然而，目前缺乏可量化的市场份额或设计导入寿命数据，仅为定性陈述，标记为未证实。\n\n**transmission**：如果成立，可支撑ASP和毛利率稳定性，缓冲周期下行幅度。\n\n**strongest counterevidence**：国内同行（普冉、恒烁）在NOR Flash领域积极扩产，竞争加剧可能侵蚀份额和定价。\n- **mechanism**：多产品线平台（存储+MCU+传感器+模拟）交叉销售潜力。\n\n**transmission**：若交叉销售实现，可提升客户粘性，降低获客成本，并减弱整体业绩的存储周期依赖。\n\n**strongest counterevidence**：MCU与传感器业务当前收入和利润贡献极低，未披露具体数据，难以证明已形成平台效应。\n- **mechanism**：本土供应链优势与产业地位。公司是国内利基存储设计龙头，在国产替代和保障供应链安全背景下具备一定优势。\n\n**transmission**：有助于获取代工产能和客户信任，但无法直接转换为超额利润。\n\n**strongest counterevidence**：在极端缺货时期，所有设计公司都可能面临产能分配挑战，优势并非独占。",
+  "valuation_closure": "**current price cny**：463.15\n\n**diluted share count mn**：701.102451\n\n**probability weighted fair value per share cny**：203.25132196692323\n\n**fair value per share cny**：203.25132196692323\n\n\n**formula**：无法计算，因缺少股价和股数\n\n**double counting checks**：- 长鑫科技股权独立于核心运营资产\n\n**status**：not_valued\n\n**missing inputs**：- 当前股价\n- 稀释股份数\n- 长鑫科技股权价值量化\n\n情景价值、概率加权结果、预期收益与安全价格以本节程序化估值表为唯一数值口径。",
+  "accounting_and_capital_allocation": "**working capital**：优秀。应收/收入仅1.75%，存货/收入20.3%（同比大幅下降），合同负债环比增长65%，显示极佳的回款、库存去化和订单能见度。\n\n**cash conversion**：极好。Q1 2026 OCF/NP比率1.22x，利润有强大现金支撑。\n\n**capex roic**：低资本开支，高ROIC（因fabless轻资产模式），但研发投入强度（~17%收入）是高回报的核心。\n\n**leverage impairment**：零净负债，货币资金147亿元，总负债仅22.6亿元，资产负债率8.1%，无重大商誉减值风险。\n\n**shareholder return**：一般。历史股息率较低（0.16%），每年有少量分红，未形成稳定高回报文化。",
+  "expectation_gap_and_market_pricing": "**debate and decision logic**：本次辩论围绕“估值 vs 周期持续性”展开。牛方强调H1盈利爆发的确定性、低Forward PE和AI结构性需求，认为股价大跌后是买入机会；熊方则抓住管理层自身的周期预警、概率加权公允价值远低于现价、及远期正常化利润的极度不确定性，主张卖出。\nResearch Manager选择了Hold，理由是概率加权价值支持卖出，但股价已跌45%且半年报催化剂临近，直接清仓可能错失反弹。交易员建议卖出。\n作为PM，我综合评判：牛方对2026年利润的估计大致合理，但对2028年的正常化假设过于乐观（50亿 vs 熊方更现实的30亿或更低）；熊方对估值的判断（隐含回报为负）更具说服力，因为即使采用牛方偏高的远期利润，当前市值的隐含PE仍然过高，且周期逆转风险并未被市场充分定价。因此，我认为正面预期价值不成立，而负面预期价值清晰。结论是应转向Underweight，而非单纯Hold。\n选择Underweight而非Sell的原因：一是股价已大幅回调，市场恐慌情绪浓厚，可能接近短期情绪底部，直接全部清仓可能不够灵活；二是即将到来的2026半年报可能提供关于产品结构、非经常性损益细节和H2展望的关键信息，这或将成为改善或进一步恶化证据的关键节点。Underweight允许持有者有序降低风险敞口，同时保留在证据明显改善时重新配置的能力。对于未建仓者，则严格回避。\n核心赌注未变：超级周期能否延续并在估值中正当化当前价格。现有证据的权重不支持乐观假设，因此采取防御姿态。\n\n**prior rating**：本次为首次评级，无先前参考。\n\n**new decisive evidence**：1) 公司Q2业绩预告证实盈利爆发但管理层主动提示周期风险；2) 股价从高位急跌45%，波动率飙升，但估值绝对水平仍高；3) Research Manager概率加权估值表明当前价格缺乏安全边际。\n\n**unchanged core facts**：公司处于存储超级周期，2026年H1和全年盈利将创历史纪录；资产负债表极为健康；SLC NAND供给紧张短期内不会消失。\n\n**rating change audit**：首次评级为Underweight。与Research Manager的Hold相比，我采取更防御的姿态，因为我认为概率加权公允价值与现价之间的巨大差距需要更果断的仓位行动，而Hold过于温和，可能让组合暴露于不必要的尾端风险中。在缺乏正面预期价值的背景下，防御优于中立。",
+  "risks_catalysts_verification": "**程序化执行约束**：当前价463.15元高于安全买入上限120.82元；不得表述为已经替投资者建仓，也不得建议新资金在安全价之上主动加仓。\n\n**upside risk**：1) SLC NAND价格在H2涨幅远超预期，且公司能够进一步扩大份额，导致2026全年净利润突破150亿；2) 半年报披露非经常性损益大部分是可持续的政府补贴或经营相关，核心盈利质量高于预期；3) 市场情绪逆转，出现逼空式反弹。若上述发生，可能需要将评级上调至Hold或Overweight。**downside risk**：1) TrendForce下修NAND价格预测，或Q3营收环比大幅下降；2) 半年报显示存货大幅增加而合同负债减少，提前显示需求疲软；3) 大盘系统性风险加速释放，导致无差别抛售。若发生，应进一步减仓或清仓。- 2026年8月：半年报发布 -> 决定性验证点。若分产品毛利率强劲、非经常性占比大幅下降、合同负债持续高增，考虑上调至Hold；若数据令人失望，维持Underweight或下看Sell。- 2026年9-10月：Q3营收与TrendForce月度价格报告 -> 观察周期持续性。若营收环比继续增长且价格坚挺，可提高对H2利润的信心，但估值仍是硬约束。- 2026年Q4及以后：关注韩国/美国存储厂商的利基产能回流信号 -> 若出现明确的产能回流公告，将是周期见顶的领先指标，必须立即执行最终清仓。",
+  "handoff_integrity_audit": "**Model Version:** Unified 3-year top-down consolidated model with bull/base/bear scenarios. **Frozen Reported Facts:** 2026H1 revenue CNY 11.5 bn, net profit CNY 6.9 bn (EV022); Q1 gross margin 57.1% (EV013); OCF/NP 1.22x (EV017); total shares ~7,017.5 mn. **Accepted Estimates:** 2026E revenue CNY 245 bn, net profit CNY 120 bn; 2027E CNY 280 bn / CNY 130 bn; 2028E CNY 220 bn / CNY 68 bn. **Unresolved Cells:** Segment-level revenue and margins, exact SLC NAND exposure, non-recurring item breakdown, precise diluted share count from options, CXMT locked-up value. **Valuation Buckets:** Core probabilistic fair value CNY 200/share; CXMT optionality CNY 3-4/share. **Business Units Preserved:** Memory, MCU, Sensor, Analog, with Memory continuing to dominate. **Bridges Active:** Memory ASP sensitivity, non-recurring carve-out, MCU contribution (unquantified). **Downstream Required:** Do not assume the cycle is broken or permanent without Q3 evidence; do not compound the position until segment data is available.",
+  "report_markdown": "",
+  "shared_model_change_audit": "兼容恢复仅迁移分析文字；预测数值、单位和估值情景均取自已验证的研究经理与公司承保模型，没有采用旧JSON中的独立数值。",
+  "report_quality_self_check": "原始模型返回旧版JSON字段，现已确定性迁移并重新渲染；未将JSON文本直接作为Markdown发布。结构化明细不足的部分按证据缺口披露。"
+}

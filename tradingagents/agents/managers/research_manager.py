@@ -187,6 +187,27 @@ def _underwriting_line_map(packet: Mapping[str, Any]) -> dict[tuple[str, str], d
     return lines
 
 
+def _accepted_model_change_ids(payload: Mapping[str, Any]) -> set[str]:
+    """Return only evidence-traceable accepted changes, never prose-only edits."""
+
+    return {
+        str(row.get("line_id", "")).strip().lower()
+        for row in payload.get("model_change_rows", []) or []
+        if str(row.get("disposition", "")).strip().lower() == "accepted"
+        and str(row.get("line_id", "")).strip()
+        and row.get("evidence_ids")
+        and all(
+            re.fullmatch(r"(?:EV|KPE|KSI)\d+", str(evidence_id).strip(), re.I)
+            for evidence_id in row.get("evidence_ids", []) or []
+        )
+        and not re.search(
+            r"research\s*manager|经理正文|经常性(?:净)?利润",
+            str(row.get("reason", "") or ""),
+            re.I,
+        )
+    }
+
+
 def _complete_unchanged_handoff_lines(
     packet: Mapping[str, Any], payload: Mapping[str, Any]
 ) -> tuple[dict[str, Any], list[str]]:
@@ -201,26 +222,129 @@ def _complete_unchanged_handoff_lines(
 
     completed = deepcopy(dict(payload))
     snapshot = [dict(row) for row in completed.get("canonical_model_snapshot", []) or []]
-    accepted_keys = {
-        _handoff_metric_key(row.get("period"), row.get("metric"))
-        for row in snapshot
+    accepted_by_key = {
+        _handoff_metric_key(row.get("period"), row.get("metric")): index
+        for index, row in enumerate(snapshot)
         if row.get("value") is not None
     }
-    changed_ids = {
-        str(row.get("line_id", "")).strip().lower()
-        for row in completed.get("model_change_rows", []) or []
-        if str(row.get("disposition", "")).lower() == "accepted"
-    }
+    changed_ids = _accepted_model_change_ids(completed)
     copied_ids: list[str] = []
     for key, source in _underwriting_line_map(packet).items():
         line_id = str(source.get("line_id", "")).strip()
-        if key in accepted_keys or line_id.lower() in changed_ids:
+        if key in accepted_by_key:
+            # Calculated lines (especially EPS = profit / deterministic shares)
+            # are application-owned and must not drift through rounding or be
+            # replaced by an LLM-authored value.
+            if str(source.get("status", "")).lower() == "calculated":
+                snapshot[accepted_by_key[key]] = dict(source)
+                copied_ids.append(line_id)
+            continue
+        if line_id.lower() in changed_ids:
             continue
         snapshot.append(dict(source))
-        accepted_keys.add(key)
+        accepted_by_key[key] = len(snapshot) - 1
         copied_ids.append(line_id)
     completed["canonical_model_snapshot"] = snapshot
     return completed, copied_ids
+
+
+def _restore_suspicious_same_unit_scale_changes(
+    packet: Mapping[str, Any], payload: Mapping[str, Any]
+) -> tuple[dict[str, Any], list[str]]:
+    """Reject classic 10x/100x 'unit corrections' that keep the same unit.
+
+    The underwriting packet is the numeric source of truth. A model may revise
+    an estimate, but changing 12,000 CNY mn to 120,000 CNY mn while continuing
+    to label both values CNY mn is not a unit conversion. This deterministic
+    guard prevents a persuasive change ledger from laundering a scale error.
+    """
+
+    completed = deepcopy(dict(payload))
+    source_map = _underwriting_line_map(packet)
+    snapshot = [dict(row) for row in completed.get("canonical_model_snapshot", []) or []]
+    restored_ids: list[str] = []
+    restored_keys: set[tuple[str, str]] = set()
+    for index, row in enumerate(snapshot):
+        key = _handoff_metric_key(row.get("period"), row.get("metric"))
+        source = source_map.get(key)
+        if not source or not _normalized_unit(source.get("unit")):
+            continue
+        if _normalized_unit(source.get("unit")) != _normalized_unit(row.get("unit")):
+            continue
+        try:
+            source_value = abs(float(source.get("value")))
+            final_value = abs(float(row.get("value")))
+        except (TypeError, ValueError):
+            continue
+        if source_value <= 0 or final_value <= 0:
+            continue
+        ratio = max(source_value, final_value) / min(source_value, final_value)
+        if not any(abs(ratio - scale) / scale <= 0.02 for scale in (10.0, 100.0, 1000.0)):
+            continue
+        snapshot[index] = dict(source)
+        restored_keys.add(key)
+        restored_ids.append(str(source.get("line_id", row.get("line_id", ""))))
+    if not restored_ids:
+        return completed, []
+    completed["canonical_model_snapshot"] = snapshot
+    completed["model_change_rows"] = [
+        row
+        for row in completed.get("model_change_rows", []) or []
+        if _handoff_metric_key(
+            next(
+                (
+                    item.get("period")
+                    for item in snapshot
+                    if str(item.get("line_id", "")).lower()
+                    == str(row.get("line_id", "")).lower()
+                ),
+                "",
+            ),
+            next(
+                (
+                    item.get("metric")
+                    for item in snapshot
+                    if str(item.get("line_id", "")).lower()
+                    == str(row.get("line_id", "")).lower()
+                ),
+                row.get("line_id", ""),
+            ),
+        )
+        not in restored_keys
+    ]
+    return completed, restored_ids
+
+
+def _restore_undocumented_handoff_changes(
+    packet: Mapping[str, Any], payload: Mapping[str, Any]
+) -> tuple[dict[str, Any], list[str]]:
+    """Restore every changed packet line that lacks an accepted change row.
+
+    The packet is the application-owned source of truth.  The Research Manager
+    may disagree with an estimate, but the disagreement becomes operative only
+    through a matching accepted ``model_change_rows`` item.  This guard covers
+    ordinary drifts (for example 25,000 -> 21,000), not only obvious 10x scale
+    errors.
+    """
+
+    completed = deepcopy(dict(payload))
+    source_map = _underwriting_line_map(packet)
+    snapshot = [dict(row) for row in completed.get("canonical_model_snapshot", []) or []]
+    accepted_ids = _accepted_model_change_ids(completed)
+    restored_ids: list[str] = []
+    for index, row in enumerate(snapshot):
+        key = _handoff_metric_key(row.get("period"), row.get("metric"))
+        source = source_map.get(key)
+        if not source or not _line_changed(source, row):
+            continue
+        source_id = str(source.get("line_id", "")).strip().lower()
+        final_id = str(row.get("line_id", "")).strip().lower()
+        if source_id in accepted_ids or final_id in accepted_ids:
+            continue
+        snapshot[index] = dict(source)
+        restored_ids.append(str(source.get("line_id", row.get("line_id", ""))))
+    completed["canonical_model_snapshot"] = snapshot
+    return completed, list(dict.fromkeys(restored_ids))
 
 
 def _research_manager_handoff_issues(
@@ -234,12 +358,7 @@ def _research_manager_handoff_issues(
         for row in payload.get("canonical_model_snapshot", []) or []
         if row.get("value") is not None
     }
-    change_ids = {
-        str(row.get("line_id", "")).strip().lower()
-        for row in payload.get("model_change_rows", []) or []
-        if str(row.get("line_id", "")).strip()
-        and str(row.get("disposition", "")).lower() == "accepted"
-    }
+    change_ids = _accepted_model_change_ids(payload)
     issues: list[str] = []
     for key, original in initial.items():
         final = accepted.get(key)
@@ -666,12 +785,35 @@ If a bull or bear argument contains an exact product price, inventory figure, pr
                 "underwriting_packet", {}
             )
         )
-        initial_handoff_issues = _research_manager_handoff_issues(
-            underwriting_packet,
-            research_manager_plan_payload,
-        ) if underwriting_packet and research_manager_plan_payload else []
+        deterministic_scale_restorations: list[str] = []
+        deterministic_undocumented_restorations: list[str] = []
+        if underwriting_packet and research_manager_plan_payload:
+            initial_handoff_issues = _research_manager_handoff_issues(
+                underwriting_packet,
+                research_manager_plan_payload,
+            )
+            research_manager_plan_payload, deterministic_scale_restorations = (
+                _restore_suspicious_same_unit_scale_changes(
+                    underwriting_packet,
+                    research_manager_plan_payload,
+                )
+            )
+            (
+                research_manager_plan_payload,
+                deterministic_undocumented_restorations,
+            ) = _restore_undocumented_handoff_changes(
+                underwriting_packet,
+                research_manager_plan_payload,
+            )
+            if deterministic_scale_restorations or deterministic_undocumented_restorations:
+                restored_plan = UnderwritingResearchPlan.model_validate(
+                    research_manager_plan_payload
+                )
+                investment_plan = render_underwriting_research_plan(restored_plan)
+        else:
+            initial_handoff_issues = []
         deterministic_copied_lines: list[str] = []
-        if initial_handoff_issues:
+        if underwriting_packet and research_manager_plan_payload:
             completed_payload, deterministic_copied_lines = (
                 _complete_unchanged_handoff_lines(
                     underwriting_packet,
@@ -713,15 +855,59 @@ If a bull or bear argument contains an exact product price, inventory figure, pr
             )
             repaired_payload = repair_status.pop("validated_payload", {})
             if repaired_payload:
+                repaired_payload, repaired_scale_restorations = (
+                    _restore_suspicious_same_unit_scale_changes(
+                        underwriting_packet,
+                        repaired_payload,
+                    )
+                )
+                deterministic_scale_restorations.extend(
+                    line_id
+                    for line_id in repaired_scale_restorations
+                    if line_id not in deterministic_scale_restorations
+                )
+                repaired_payload, repaired_undocumented_restorations = (
+                    _restore_undocumented_handoff_changes(
+                        underwriting_packet,
+                        repaired_payload,
+                    )
+                )
+                deterministic_undocumented_restorations.extend(
+                    line_id
+                    for line_id in repaired_undocumented_restorations
+                    if line_id not in deterministic_undocumented_restorations
+                )
+                repaired_payload, repaired_copied_lines = (
+                    _complete_unchanged_handoff_lines(
+                        underwriting_packet,
+                        repaired_payload,
+                    )
+                )
+                deterministic_copied_lines.extend(
+                    line_id
+                    for line_id in repaired_copied_lines
+                    if line_id not in deterministic_copied_lines
+                )
                 repaired_issues = _research_manager_handoff_issues(
                     underwriting_packet,
                     repaired_payload,
                 )
                 if not repaired_issues:
-                    investment_plan = repaired_plan
-                    research_manager_plan_payload = repaired_payload
-                    remaining_handoff_issues = []
-                    repair_applied = True
+                    try:
+                        repaired_plan_model = UnderwritingResearchPlan.model_validate(
+                            repaired_payload
+                        )
+                    except (TypeError, ValueError):
+                        pass
+                    else:
+                        investment_plan = render_underwriting_research_plan(
+                            repaired_plan_model
+                        )
+                        research_manager_plan_payload = repaired_plan_model.model_dump(
+                            mode="json"
+                        )
+                        remaining_handoff_issues = []
+                        repair_applied = True
         research_manager_generation_status.update(
             {
                 "handoff_repair_requested": bool(llm_repair_issues),
@@ -731,6 +917,10 @@ If a bull or bear argument contains an exact product price, inventory figure, pr
                     deterministic_copied_lines
                 ),
                 "handoff_deterministic_copied_lines": deterministic_copied_lines,
+                "handoff_same_unit_scale_restorations": deterministic_scale_restorations,
+                "handoff_undocumented_change_restorations": (
+                    deterministic_undocumented_restorations
+                ),
                 "initial_handoff_issues": initial_handoff_issues,
                 "remaining_handoff_issues": remaining_handoff_issues,
             }

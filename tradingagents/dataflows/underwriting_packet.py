@@ -16,6 +16,8 @@ from typing import Any, Literal, Mapping
 
 from pydantic import BaseModel, Field, model_validator
 
+from .official_guidance import parse_official_guidance_record
+
 
 Readiness = Literal["ready", "partial", "blocked"]
 
@@ -77,6 +79,7 @@ class CompanyOperatingModel(NullDefaultModel):
     share_count_evidence_id: str = ""
     share_count_source_type: Literal[
         "reported_total_share",
+        "registered_capital",
         "market_cap_div_close",
         "model_supplied",
         "unresolved",
@@ -431,11 +434,12 @@ Universal rules for all A-share industries:
 3. For every material segment complete the causal chain: demand/orders -> industry supply/capacity -> company volume/share/utilization -> price/ASP/take rate -> unit cost -> margin/operating leverage -> working capital/cash -> EPS/FCF -> valuation treatment.
 4. Generate 4-6 company-specific underwriting questions, ranked by expected EPS/FCF/fair-value sensitivity. The questions are the research agenda: every downstream module must either change a model variable, change a scenario probability, or document why it is irrelevant. Avoid generic questions that could apply to any stock.
 5. Build three explicit forward years with the correct model profile. For ordinary non-financial companies include material segment revenue drivers and consolidated revenue, gross/operating margin, operating profit, parent net profit, EPS, OCF, capex and FCF. For banks use earning assets, NIM/net interest income, fee income, operating cost, credit cost/provisions, parent profit, EPS, ROE, asset quality and CET1/capital; do not force manufacturing OCF/FCF. For insurers use premium/APE, NBV, EV/CSM where disclosed, investment spread, COR for P&C, OPAT/parent profit, EPS, solvency and payout; for securities firms use brokerage, investment banking, asset management, proprietary/trading income, parent profit, EPS, ROE and capital adequacy; for REITs use occupancy, rent/unit, NOI, distributable cash flow and payout. Put the unit on every numeric line. Use CNY mn for profit/cash-flow lines and million shares for diluted share count when source conversion supports it. Before using null, complete reproducible calculations from supplied facts: Tushare total_share is in 10,000 shares; share count can also be cross-checked from market cap/price or parent profit/EPS; capex can be derived from cash paid to acquire/construct long-term assets; FCF can be derived from OCF minus consistently defined capex. Seasonal annualization must be arithmetically consistent: annual run-rate = quarterly value x 4, while seasonal-share full-year estimate = quarterly value / quarterly_share; never divide an already annualized run-rate by the seasonal share. Label these values calculated with formula, period and evidence ids. Use null plus missing_inputs only when neither reported nor reproducibly calculated evidence supports a number; never invent precision.
-5a. Diluted shares are controlled downstream and cannot be chosen to make a reported EPS fit. Prefer Tushare total_share, cross-check market cap / close, and treat parent-profit / EPS only as a diagnostic. If a filing-text EPS conflicts with parent profit / deterministic shares, label it a suspected PDF column shift and do not use it.
+5a. Diluted shares are controlled downstream and cannot be chosen to make a reported EPS fit. Prefer current Tushare stock_basic registered capital or daily_basic total_share and cross-check market cap / close. The pledge_stat total_share field is only a pledge-table proxy, not authoritative company shares. Treat parent-profit / EPS only as a diagnostic. If a filing-text EPS conflicts with parent profit / deterministic shares, label it a suspected PDF column shift and do not use it.
 6. Create bull/base/bear cases only from the same model variables. Probabilities are underwriting judgments, not facts, and must sum to 100 when all are supplied. Fair value requires a reconciled EPS/share-count or asset-value bridge.
 6a. Build 3-6 `thesis_financial_bridges` for the claims that actually decide the recommendation. Each bridge must state the operating formula and bull/base/bear assumption, then quantify or explicitly leave missing the revenue, profit, EPS, FCF/capital and valuation effect. Narrative influence without a named financial line is incomplete.
 6b. Turn every claimed moat into a `moat_evidence_test`. Test scale, license, brand, switching cost, network effect, cost advantage or customer stickiness with an observable metric versus history or true peers. State counterevidence and the exact route from the moat to price/share/margin/turnover/cash/ROIC. A management claim alone is `unproven`.
 6c. Build mutually exclusive `valuation_buckets`, then one `valuation_closure`. State what is core, scenario, optionality or excluded; identify overlap keys; reconcile share count, scenario probabilities, per-share conversion and current-price expected return. `probability_weighted_fair_value_per_share_cny` is the total probability-weighted value, not an incremental bucket to add again to core value. A subsidiary, acquired business or second curve already inside consolidated earnings must not be added again in SOTP unless the consolidated earnings base explicitly excludes it.
+6d. When `COMMODITY_MODEL_CONTROL` rows are supplied, reverse-underwrite valuation from the commodity distribution instead of applying a commodity-price story directly to a multiple. Use the dated P20/P50/P80 range, percentile and volatility to set bear/base/bull proxy prices; bridge proxy price -> company realized price/basis/lag -> volume capped by reported capacity -> grade/product-matched input costs -> segment gross profit -> tax/minority interest -> parent profit/EPS/FCF -> normalized PE, EV/EBITDA, PB-ROE or NAV/SOTP fair value. Keep different products and cost legs separate. A futures price is a proxy, not the company's realized price. If power, anode, grade mix, unit cost, ownership or realized-price basis is missing, leave the affected valuation cell missing/partial rather than inventing the spread.
 7. Use only supplied EV/KPE evidence ids. Decisive claims without a valid id must remain unverified or missing. Do not promote rows marked unverified_quote.
 8. Every KPE or alternative clue has one model outcome: numeric old->new, probability before->after, unchanged/watch, or rejected. Narrative influence without a model outcome is invalid.
 9. `research_readiness=ready` only when material segments, three-year consolidated model, scenario valuation, periods/units and decisive evidence are sufficiently complete. Use `partial` for unavailable sources or incomplete cells; those gaps are neutral and non-blocking. Use `blocked` only for a deterministic contradiction, invalid unit/period, or corrupted source that makes supplied facts unsafe—not merely because data is missing.
@@ -793,9 +797,9 @@ def _derive_market_snapshot(
         "management_capital_allocation",
     )
     text = "\n".join(
-        f"[{key}]\n{contexts.get(key, '')}"
+        f"[{key}]\n{contexts.get(key, '') or contexts.get(key + '_context', '')}"
         for key in preferred_keys
-        if contexts.get(key)
+        if contexts.get(key) or contexts.get(key + "_context")
     )
     market_cap_match = re.search(
         r"market\s*cap\s*\(cny\)\s*[|/]\s*([\d,]+(?:\.\d+)?)",
@@ -830,7 +834,11 @@ def _derive_reported_share_count(
     """Read the latest Tushare pledge table total_share (10,000 shares)."""
     if not contexts:
         return None, "", ""
-    text = str(contexts.get("shareholder_structure", "") or "")
+    text = str(
+        contexts.get("shareholder_structure", "")
+        or contexts.get("shareholder_structure_context", "")
+        or ""
+    )
     lines = text.splitlines()
     for index, line in enumerate(lines):
         if "total_share" not in line.lower() or "|" not in line:
@@ -862,41 +870,105 @@ def _derive_reported_share_count(
     return None, "", ""
 
 
+def _derive_registered_capital_share_count(
+    contexts: Mapping[str, str] | None,
+) -> tuple[float | None, str]:
+    """Derive shares from Tushare stock_basic reg_capital (CNY 10k)."""
+
+    if not contexts:
+        return None, ""
+    text = str(
+        contexts.get("management_capital_allocation", "")
+        or contexts.get("management_capital_allocation_context", "")
+        or ""
+    )
+    lines = text.splitlines()
+    for index, line in enumerate(lines):
+        if "reg_capital" not in line.lower() or "|" not in line:
+            continue
+        headers = [cell.strip().lower() for cell in line.strip().strip("|").split("|")]
+        try:
+            capital_index = headers.index("reg_capital")
+        except ValueError:
+            continue
+        for row in lines[index + 1 : index + 8]:
+            if re.search(r"\|\s*[-:]+", row):
+                continue
+            cells = [cell.strip() for cell in row.strip().strip("|").split("|")]
+            if len(cells) <= capital_index:
+                continue
+            try:
+                registered_capital_10k_cny = float(
+                    cells[capital_index].replace(",", "")
+                )
+            except ValueError:
+                continue
+            if registered_capital_10k_cny <= 0:
+                continue
+            return (
+                registered_capital_10k_cny / 100.0,
+                "Tushare stock_basic.reg_capital (CNY 10,000) / 100; CNY 1 par value",
+            )
+    return None, ""
+
+
 def derive_share_count_control(
     contexts: Mapping[str, str] | None,
 ) -> dict[str, Any]:
     """Return the canonical share count plus independent cross-checks."""
-    reported_mn, reported_period, reported_formula = _derive_reported_share_count(
+    pledge_proxy_mn, pledge_period, pledge_formula = _derive_reported_share_count(
+        contexts
+    )
+    registered_mn, registered_formula = _derive_registered_capital_share_count(
         contexts
     )
     market_mn, current_price, market_formula = _derive_market_snapshot(contexts)
     conflict_pct: float | None = None
-    if reported_mn and market_mn:
-        conflict_pct = abs(reported_mn - market_mn) / reported_mn * 100.0
-    canonical_mn = reported_mn or market_mn
+    if registered_mn and market_mn:
+        conflict_pct = abs(registered_mn - market_mn) / registered_mn * 100.0
+    canonical_mn = registered_mn or market_mn or pledge_proxy_mn
     source_type = (
-        "reported_total_share"
-        if reported_mn is not None
+        "registered_capital"
+        if registered_mn is not None
         else "market_cap_div_close"
         if market_mn is not None
+        else "pledge_stat_proxy"
+        if pledge_proxy_mn is not None
         else "unresolved"
     )
-    period = reported_period if reported_mn is not None else "market snapshot"
-    formula = reported_formula if reported_mn is not None else market_formula
+    period = (
+        "latest stock_basic"
+        if registered_mn is not None
+        else "market snapshot"
+        if market_mn is not None
+        else pledge_period
+    )
+    formula = (
+        registered_formula
+        if registered_mn is not None
+        else market_formula
+        if market_mn is not None
+        else pledge_formula
+    )
     cross_checks: list[str] = []
-    if reported_mn is not None:
-        cross_checks.append(f"reported total_share={reported_mn:.3f} mn")
+    if registered_mn is not None:
+        cross_checks.append(f"registered capital proxy={registered_mn:.3f} mn")
     if market_mn is not None:
         cross_checks.append(f"market cap / close={market_mn:.3f} mn")
+    if pledge_proxy_mn is not None:
+        cross_checks.append(
+            f"pledge_stat total_share proxy={pledge_proxy_mn:.3f} mn (not canonical)"
+        )
     if conflict_pct is not None:
-        cross_checks.append(f"reported-vs-market difference={conflict_pct:.3f}%")
+        cross_checks.append(f"registered-vs-market difference={conflict_pct:.3f}%")
     return {
         "canonical_share_count_mn": canonical_mn,
         "source_type": source_type,
         "period": period,
         "formula": formula,
         "current_price_cny": current_price,
-        "reported_share_count_mn": reported_mn,
+        "reported_share_count_mn": registered_mn,
+        "pledge_stat_share_count_proxy_mn": pledge_proxy_mn,
         "market_implied_share_count_mn": market_mn,
         "conflict_pct": conflict_pct,
         "cross_checks": cross_checks,
@@ -1096,6 +1168,73 @@ def _fallback_packet(symbol: str, as_of_date: str, structured: Mapping[str, Any]
     )
 
 
+def _text_mentions_cny_mn(text: str, target_cny_mn: float) -> bool:
+    """Return whether prose contains ``target_cny_mn`` in a supported CNY unit."""
+
+    number = r"[-+]?\d[\d,]*(?:\.\d+)?"
+    values: list[float] = []
+    suffix_scales = {
+        "cny mn": 1.0,
+        "cny_mn": 1.0,
+        "rmb mn": 1.0,
+        "\u767e\u4e07\u5143": 1.0,
+        "\u4e07\u5143": 0.01,
+        "\u4ebf\u5143": 100.0,
+        "cny": 0.000001,
+        "rmb": 0.000001,
+        "\u4eba\u6c11\u5e01\u5143": 0.000001,
+        "\u5143": 0.000001,
+    }
+    unit_pattern = "|".join(
+        re.escape(unit) for unit in sorted(suffix_scales, key=len, reverse=True)
+    )
+    for match in re.finditer(
+        rf"(?P<value>{number})\s*(?P<unit>{unit_pattern})(?![a-z_])",
+        str(text or ""),
+        re.I,
+    ):
+        raw = float(match.group("value").replace(",", ""))
+        values.append(raw * suffix_scales[match.group("unit").lower()])
+    for match in re.finditer(rf"\b(?:CNY|RMB)\s*(?P<value>{number})", str(text or ""), re.I):
+        raw = float(match.group("value").replace(",", ""))
+        values.append(raw / 1_000_000.0)
+    tolerance = max(abs(float(target_cny_mn)) * 0.005, 0.5)
+    return any(abs(value - float(target_cny_mn)) <= tolerance for value in values)
+
+
+def _remove_mislabeled_prior_guidance_claims(
+    lines: list[str],
+    period: str,
+    prior_values_cny_mn: list[float],
+) -> tuple[list[str], list[str]]:
+    """Drop prose that promotes an official comparison-column value to current H1."""
+
+    retained: list[str] = []
+    rejected: list[str] = []
+    scope_pattern = re.compile(
+        rf"(?:{re.escape(period)}|\bH1\b|performance\s+preview|earnings\s+guidance|"
+        r"\u534a\u5e74\u5ea6\u4e1a\u7ee9\u9884\u544a|\u4e1a\u7ee9\u9884\u544a)",
+        re.I,
+    )
+    prior_pattern = re.compile(
+        r"(?:prior|previous|last\s+year|comparison|comparative|"
+        r"\u4e0a\u5e74\u540c\u671f|\u53bb\u5e74\u540c\u671f|\u540c\u6bd4\u57fa\u6570|\u6bd4\u8f83\u671f)",
+        re.I,
+    )
+    for value in lines:
+        line = str(value or "")
+        mislabeled = (
+            bool(scope_pattern.search(line))
+            and not prior_pattern.search(line)
+            and any(_text_mentions_cny_mn(line, amount) for amount in prior_values_cny_mn)
+        )
+        if mislabeled:
+            rejected.append(line)
+        else:
+            retained.append(line)
+    return retained, rejected
+
+
 def _validate_packet(
     packet: CompanyUnderwritingPacket,
     structured: Mapping[str, Any],
@@ -1174,7 +1313,7 @@ def _validate_packet(
     if conflict_pct is not None and conflict_pct > 2.0:
         packet.research_readiness = "blocked"
         packet.readiness_reasons.append(
-            "Reported total_share and market-cap/close share counts conflict by "
+            "Registered-capital and market-cap/close share counts conflict by "
             f"{conflict_pct:.2f}% (>2%)."
         )
     derived_price_cny = share_control["current_price_cny"]
@@ -1548,7 +1687,125 @@ def _validate_packet(
                     f"OCF-capex-FCF reconciliation fails for {attr}."
                 )
 
+    guidance_context = "\n".join(
+        str(value or "")
+        for key, value in (contexts or {}).items()
+        if key in {"forecast_model", "company_events", "news", "earnings_model"}
+    )
+    official_guidance = parse_official_guidance_record(guidance_context)
+    guidance_period = str(official_guidance.get("period", ""))
+    prior_values = [
+        float(value)
+        for key in (
+            "parent_net_profit_prior_cny_mn",
+            "deducted_parent_net_profit_prior_cny_mn",
+            "revenue_prior_cny_mn",
+        )
+        if (value := official_guidance.get(key)) is not None
+    ]
+    if guidance_period and prior_values:
+        frozen, rejected_frozen = _remove_mislabeled_prior_guidance_claims(
+            packet.handoff_manifest.frozen_reported_facts,
+            guidance_period,
+            prior_values,
+        )
+        notes, rejected_notes = _remove_mislabeled_prior_guidance_claims(
+            packet.preprocessing_notes,
+            guidance_period,
+            prior_values,
+        )
+        packet.handoff_manifest.frozen_reported_facts = frozen
+        packet.preprocessing_notes = notes
+        if rejected_frozen or rejected_notes:
+            packet.preprocessing_notes.append(
+                f"Rejected {len(rejected_frozen) + len(rejected_notes)} mislabeled "
+                f"{guidance_period} guidance claim(s) that matched the official prior-period column."
+            )
+    first_forecast_year = str(packet.forecast_years[0] if packet.forecast_years else "")
+    guidance_is_h1_for_first_year = bool(
+        guidance_period.endswith("H1")
+        and first_forecast_year.startswith(guidance_period[:4])
+    )
+    if guidance_is_h1_for_first_year:
+        metric_rows = {
+            "revenue_cny_mn": consolidated_by_metric.get("revenue"),
+            "parent_net_profit_cny_mn": profit_row,
+        }
+        frozen_parts: list[str] = []
+        for metric_key, row in metric_rows.items():
+            h1_value = official_guidance.get(metric_key)
+            if h1_value is None:
+                continue
+            frozen_parts.append(f"{metric_key}={float(h1_value):g} CNY mn")
+            if row is None or row.year_1_value is None:
+                packet.research_readiness = "blocked"
+                packet.readiness_reasons.append(
+                    f"Official {guidance_period} {metric_key} lacks a full-year forecast bridge."
+                )
+                continue
+            if not any(
+                token in str(row.unit).lower()
+                for token in ("cny mn", "cny_mn", "rmb mn", "百万元", "百万人民币")
+            ):
+                packet.research_readiness = "blocked"
+                packet.readiness_reasons.append(
+                    f"Official {guidance_period} {metric_key} cannot be reconciled to forecast unit {row.unit!r}."
+                )
+                continue
+            full_year_value = float(row.year_1_value)
+            implied_h2 = full_year_value - float(h1_value)
+            bridge = (
+                f"official {guidance_period}={float(h1_value):g} CNY mn; "
+                f"{first_forecast_year}={full_year_value:g} CNY mn; "
+                f"implied H2={implied_h2:g} CNY mn"
+            )
+            if bridge.lower() not in str(row.formula).lower():
+                row.formula = f"{row.formula}; {bridge}".strip("; ")
+            packet.reconciliation_checks.append(bridge)
+            if implied_h2 < -max(abs(float(h1_value)) * 0.02, 1.0):
+                packet.research_readiness = "blocked"
+                packet.readiness_reasons.append(
+                    f"{first_forecast_year} {metric_key} is below official {guidance_period}; "
+                    "an explicit, evidenced H2 loss/reversal bridge is required."
+                )
+        deducted = official_guidance.get("deducted_parent_net_profit_cny_mn")
+        if deducted is not None:
+            frozen_parts.append(
+                f"deducted_parent_net_profit_cny_mn={float(deducted):g} CNY mn"
+            )
+            packet.reconciliation_checks.append(
+                f"official {guidance_period} deducted parent net profit="
+                f"{float(deducted):g} CNY mn; do not relabel parent-profit forecasts as recurring/deducted profit"
+            )
+        if frozen_parts:
+            frozen_fact = f"Official {guidance_period}: " + "; ".join(frozen_parts)
+            if frozen_fact not in packet.handoff_manifest.frozen_reported_facts:
+                packet.handoff_manifest.frozen_reported_facts.append(frozen_fact)
+            preserve_rule = (
+                f"Preserve the official {guidance_period} metrics and the H1 + implied H2 = FY bridge; "
+                "never store recurring/deducted profit in a parent-net-profit field."
+            )
+            if preserve_rule not in packet.handoff_manifest.downstream_must_preserve:
+                packet.handoff_manifest.downstream_must_preserve.append(preserve_rule)
+
     for scenario in packet.scenarios:
+        if guidance_is_h1_for_first_year and scenario.parent_net_profit_cny_mn is not None:
+            h1_parent_profit = official_guidance.get("parent_net_profit_cny_mn")
+            if (
+                h1_parent_profit is not None
+                and float(scenario.parent_net_profit_cny_mn)
+                < float(h1_parent_profit) * 0.98
+            ):
+                scenario.missing_inputs.append(
+                    f"explicit evidenced H2 loss/reversal bridge required because FY parent profit is below official {guidance_period}"
+                )
+                scenario.parent_net_profit_cny_mn = None
+                scenario.eps_cny = None
+                scenario.fair_value_per_share = None
+                packet.research_readiness = "blocked"
+                packet.readiness_reasons.append(
+                    f"{scenario.scenario} FY parent-profit scenario is below official {guidance_period}."
+                )
         if (
             scenario.parent_net_profit_cny_mn is not None
             and share_count
@@ -1825,9 +2082,11 @@ def _validate_packet(
         reason.startswith(
             (
                 "Company revenue/profit operating equations are missing.",
-                "Reported total_share and market-cap/close share counts conflict",
+                "Registered-capital and market-cap/close share counts conflict",
+                "Official ",
             )
         )
+        or "below official" in reason
         for reason in packet.readiness_reasons
     ):
         packet.research_readiness = "blocked"

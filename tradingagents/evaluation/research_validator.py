@@ -21,6 +21,7 @@ from tradingagents.dataflows.tushare_client import (
     TushareClientError,
     get_tushare_pro_client,
 )
+from tradingagents.dataflows.official_guidance import parse_official_guidance_record
 
 
 _FOREIGN_SELL_SIDE_TOKENS = (
@@ -160,8 +161,10 @@ PUBLICATION_BLOCKING_SECTIONS = frozenset(
         "share_count_source_conflict",
         "handoff_numeric_consistency",
         "pm_unit_scale_arithmetic",
+        "commodity_sensitivity_arithmetic",
         "canonical_financial_reconciliation",
         "public_key_number_consistency",
+        "public_canonical_forecast_narrative",
         "public_forecast_growth_consistency",
         "weighted_margin_arithmetic",
         "rating_valuation_consistency",
@@ -170,6 +173,7 @@ PUBLICATION_BLOCKING_SECTIONS = frozenset(
         "company_operating_model",
         "official_guidance_extraction",
         "official_guidance_full_year_reconciliation",
+        "official_guidance_structured_conflict",
         "public_report_language",
     }
 )
@@ -493,7 +497,15 @@ def audit_official_guidance_forecast_reconciliation(
     )
     if not has_official_h1_guidance:
         return []
-    guidance_values = _parent_profit_amounts_cny_mn(guidance_section)
+    guidance_metrics = parse_official_guidance_record(guidance_section)
+    parsed_parent_profit = guidance_metrics.get("parent_net_profit_cny_mn")
+    # Once a deterministic record exists, never mix it with raw table values:
+    # raw PDF text can contain the prior-period comparison beside the label.
+    guidance_values = (
+        [float(parsed_parent_profit)]
+        if parsed_parent_profit is not None
+        else _parent_profit_amounts_cny_mn(guidance_section)
+    )
     if not guidance_values:
         return [
             DecisionDepthIssue(
@@ -504,6 +516,36 @@ def audit_official_guidance_forecast_reconciliation(
         ]
     h1_parent_profit = max(guidance_values)
     issues: list[DecisionDepthIssue] = []
+
+    official_year = str(guidance_metrics.get("period", ""))[:4]
+    conflicting_h1_values: list[float] = []
+    for match in re.finditer(
+        r"(?:20\d{2}\s*年?\s*)?(?:H1|上半年|半年度)"
+        r"[^。；;\n]{0,55}?(\d+(?:\.\d+)?)\s*亿(?:元)?",
+        decision_text,
+        re.I,
+    ):
+        local = decision_text[max(0, match.start() - 24) : match.end() + 30]
+        if not re.search(r"净利润|利润|业绩预告|业绩预增|预告", local, re.I):
+            continue
+        if re.search(r"上年同期|去年同期|比较期|旧(?:版|值)|错误值|拒绝", local):
+            continue
+        mentioned_years = re.findall(r"20\d{2}", local)
+        if official_year and mentioned_years and official_year not in mentioned_years:
+            continue
+        value_cny_mn = float(match.group(1)) * 100.0
+        if abs(value_cny_mn - h1_parent_profit) > max(abs(h1_parent_profit) * 0.02, 1.0):
+            conflicting_h1_values.append(value_cny_mn)
+    if conflicting_h1_values:
+        issues.append(
+            DecisionDepthIssue(
+                "official_guidance_full_year_reconciliation",
+                "error",
+                f"public memo assigns conflicting current-period H1 parent-profit amount(s) "
+                f"{sorted(set(conflicting_h1_values))} CNY mn; deterministic official value is "
+                f"{h1_parent_profit:.2f} CNY mn",
+            )
+        )
     public_values = _parent_profit_amounts_cny_mn(decision_text)
     public_has_h1_value = any(
         abs(value - h1_parent_profit) <= max(abs(h1_parent_profit) * 0.02, 1.0)
@@ -521,6 +563,47 @@ def audit_official_guidance_forecast_reconciliation(
                 f"official H1 parent-profit guidance={h1_parent_profit:.2f} CNY mn is not explicitly bridged through Q1, implied Q2, H1, H2 and FY in the public forecast",
             )
         )
+
+    def _period_profit_yi(pattern: str) -> float | None:
+        matches = re.findall(
+            rf"(?:{pattern})[^。；;\n]{{0,55}}?(?:归母净利润|净利润|盈利|亏损)"
+            r"[^\d\-]{0,14}(-?\d+(?:\.\d+)?)\s*亿(?:元)?",
+            decision_text,
+            re.I,
+        )
+        if not matches:
+            matches = re.findall(
+                rf"(?:{pattern})[^。；;\n]{{0,18}}?(?:为|约|=|：|:)?\s*"
+                r"(-?\d+(?:\.\d+)?)\s*亿(?:元)?",
+                decision_text,
+                re.I,
+            )
+        if not matches:
+            return None
+        return float(matches[-1])
+
+    q1_yi = _period_profit_yi(r"Q1|一季度|第一季度")
+    q2_yi = _period_profit_yi(r"Q2|二季度|第二季度")
+    if q1_yi is not None:
+        if q2_yi is None:
+            issues.append(
+                DecisionDepthIssue(
+                    "official_guidance_full_year_reconciliation",
+                    "error",
+                    "official H1 guidance and a numeric Q1 profit are present, but implied Q2 profit is not quantified",
+                )
+            )
+        elif abs((q1_yi + q2_yi) * 100.0 - h1_parent_profit) > max(
+            abs(h1_parent_profit) * 0.02, 1.0
+        ):
+            issues.append(
+                DecisionDepthIssue(
+                    "official_guidance_full_year_reconciliation",
+                    "error",
+                    f"Q1 {q1_yi:.2f} + Q2 {q2_yi:.2f} CNY 100m does not reconcile to "
+                    f"official H1 {h1_parent_profit / 100.0:.2f} CNY 100m",
+                )
+            )
     scenarios = list(
         (payload.get("safe_valuation_assumptions") or {}).get("scenarios", []) or []
     )
@@ -549,6 +632,32 @@ def audit_official_guidance_forecast_reconciliation(
                 f"official H1 parent profit {h1_parent_profit:.2f} CNY mn already exceeds full-year scenario input(s) {below_h1}; no explicit H2 loss/fair-value-reversal bridge is provided",
             )
         )
+    official_deducted = guidance_metrics.get("deducted_parent_net_profit_cny_mn")
+    if official_deducted is not None:
+        conflicting_deducted: list[float] = []
+        for match in re.finditer(
+            r"(?:扣非归母净利润|扣非净利润|扣非利润|扣非)"
+            r"\s*(?:为|约|达|仅|[:：=])?\s*(\d+(?:\.\d+)?)\s*亿(?:元)?",
+            decision_text,
+            re.I,
+        ):
+            value_cny_mn = float(match.group(1)) * 100.0
+            local = decision_text[max(0, match.start() - 25) : match.end() + 70]
+            if re.search(r"旧(?:版|估算)|拒绝|不采用|否定|冲突|失效", local):
+                continue
+            if abs(value_cny_mn - float(official_deducted)) > max(
+                abs(float(official_deducted)) * 0.03, 1.0
+            ):
+                conflicting_deducted.append(value_cny_mn)
+        if conflicting_deducted:
+            issues.append(
+                DecisionDepthIssue(
+                    "official_guidance_full_year_reconciliation",
+                    "error",
+                    f"public memo uses deducted-profit amount(s) {sorted(set(conflicting_deducted))} CNY mn "
+                    f"that conflict with official H1 deducted parent profit {float(official_deducted):.2f} CNY mn without explicit rejection",
+                )
+            )
     return issues
 
 PUBLICATION_BLOCKING_DEPTH_SECTIONS = frozenset()
@@ -2021,6 +2130,119 @@ def audit_pm_unit_scale_arithmetic(report_dir: str | Path) -> list[DecisionDepth
     ]
 
 
+def audit_commodity_sensitivity_arithmetic(
+    report_dir: str | Path,
+) -> list[DecisionDepthIssue]:
+    """Enforce capacity and price-shock ceilings from commodity controls."""
+
+    report_path = Path(report_dir)
+    commodity_path = report_path / "0_context" / "commodity_context.md"
+    payload_path = report_path / "5_portfolio" / "canonical_decision.json"
+    if not commodity_path.exists() or not payload_path.exists():
+        return []
+    try:
+        commodity_text = read_text_fallback(commodity_path)
+        payload = json.loads(read_text_fallback(payload_path))
+    except (OSError, TypeError, json.JSONDecodeError):
+        return []
+
+    controls: list[tuple[str, float]] = []
+    for match in re.finditer(
+        r"COMMODITY_MODEL_CONTROL:\s*segment=([^;\n]+);\s*capacity_wan_t=([\d.]+)",
+        commodity_text,
+        re.I,
+    ):
+        controls.append((match.group(1).strip(), float(match.group(2))))
+    if not controls:
+        return []
+
+    def _tokens(segment: str) -> tuple[str, ...]:
+        lowered = segment.lower()
+        if "aluminum foil" in lowered:
+            return ("aluminum foil", "铝箔")
+        if "aluminum" in lowered:
+            return ("aluminum", "电解铝", "铝产品", "有色金属")
+        if "coal" in lowered:
+            return ("coal", "煤炭", "无烟煤", "贫瘦煤")
+        return (lowered,)
+
+    findings: list[str] = []
+    for row in payload.get("forecast_assumptions", []) or []:
+        row_text = " ".join(
+            str(row.get(key, "") or "")
+            for key in (
+                "parameter",
+                "affected_business",
+                "historical_anchor",
+                "bear_case",
+                "base_case",
+                "bull_case",
+                "sensitivity",
+            )
+        )
+        control = next(
+            (
+                (segment, capacity)
+                for segment, capacity in controls
+                if any(token.lower() in row_text.lower() for token in _tokens(segment))
+            ),
+            None,
+        )
+        if control is None:
+            continue
+        segment, capacity_wan_t = control
+        parameter = str(row.get("parameter", "") or "")
+
+        if re.search(r"产能|产量|销量|产销量|output|volume|capacity", parameter, re.I):
+            for case_name in ("bear_case", "base_case", "bull_case"):
+                case_text = str(row.get(case_name, "") or "")
+                for value_text in re.findall(r"(\d+(?:\.\d+)?)\s*万吨", case_text):
+                    value = float(value_text)
+                    if value > capacity_wan_t * 1.02:
+                        findings.append(
+                            f"{segment} {case_name} volume={value:g}万吨 exceeds registered "
+                            f"capacity={capacity_wan_t:g}万吨 without a separate purchased/traded-volume or commissioned-capacity control"
+                        )
+
+        output_price_parameter = bool(
+            re.search(r"铝价|煤价|铜价|金价|银价|售价|产品价格|realized price", parameter, re.I)
+            and not re.search(r"氧化铝|原料|电价|电力|阳极|input", parameter, re.I)
+        )
+        if not output_price_parameter:
+            continue
+        sensitivity = str(row.get("sensitivity", "") or "")
+        shock_match = re.search(
+            r"每(?:上涨|下降|变动|变化|波动)?\s*(\d+(?:\.\d+)?)\s*元\s*/?\s*吨",
+            sensitivity,
+        )
+        effect_match = re.search(
+            r"(?:归母)?净利润[^\d\n]{0,20}(\d+(?:\.\d+)?)\s*亿",
+            sensitivity,
+        )
+        if not shock_match or not effect_match:
+            continue
+        shock = float(shock_match.group(1))
+        net_profit_effect_yi = float(effect_match.group(1))
+        revenue_ceiling_yi = capacity_wan_t * shock / 10_000.0
+        if net_profit_effect_yi > revenue_ceiling_yi * 1.02:
+            findings.append(
+                f"{segment} price shock {shock:g}元/吨 x capacity {capacity_wan_t:g}万吨 "
+                f"creates at most {revenue_ceiling_yi:g}亿元 revenue/gross-profit delta, "
+                f"but memo claims {net_profit_effect_yi:g}亿元 net-profit delta"
+            )
+
+    if not findings:
+        return []
+    return [
+        DecisionDepthIssue(
+            "commodity_sensitivity_arithmetic",
+            "error",
+            "commodity scenario/sensitivity violates deterministic capacity or revenue ceilings: "
+            + "; ".join(dict.fromkeys(findings)),
+        )
+    ]
+
+
 def audit_report_redundancy(decision_text: str) -> list[DecisionDepthIssue]:
     """Flag repeated substantive prose while allowing tables and short labels."""
     counts: dict[str, int] = {}
@@ -2241,6 +2463,136 @@ def audit_public_key_number_consistency(decision_text: str) -> list[DecisionDept
                 )
             )
     return issues
+
+
+def audit_public_canonical_forecast_narrative(
+    report_dir: str | Path,
+) -> list[DecisionDepthIssue]:
+    """Block stale prose that contradicts the machine-readable forecast/valuation."""
+
+    payload_path = Path(report_dir) / "5_portfolio" / "canonical_decision.json"
+    if not payload_path.exists():
+        return []
+    try:
+        payload = json.loads(read_text_fallback(payload_path))
+    except (OSError, TypeError, json.JSONDecodeError):
+        return []
+    public_payload = {
+        key: value
+        for key, value in payload.items()
+        if key
+        in {
+            "one_line_thesis",
+            "investment_conclusion_and_core_conflict",
+            "forecast_takeaways",
+            "forecast_assumptions",
+            "core_theses",
+            "autonomous_forecast_model",
+            "thesis_financial_bridge",
+            "expectation_gap_and_market_pricing",
+            "valuation_closure",
+        }
+    }
+    prose = json.dumps(public_payload, ensure_ascii=False)
+    line_map = _numeric_line_map(payload)
+    issues: list[DecisionDepthIssue] = []
+
+    def expected(period: str, metric: str) -> float | None:
+        row = line_map.get((period.lower(), metric)) or line_map.get((period, metric))
+        try:
+            return float(row.get("value")) if row and row.get("value") is not None else None
+        except (TypeError, ValueError):
+            return None
+
+    def rejected_context(match: re.Match) -> bool:
+        local = prose[max(0, match.start() - 35) : match.end() + 55]
+        return bool(
+            re.search(
+                r"旧(?:版|草稿)|拒绝|不采用|不再使用|取代|失效|未进入(?:规范)?模型|"
+                r"第三方|外资|卖方|机构预测|市场预期|一致预期|共识|KSI\d*|KPE\d*|"
+                r"乐观(?:情景)?|牛市(?:情景)?|悲观(?:情景)?|熊市(?:情景)?|bull|bear",
+                local,
+                re.I,
+            )
+        )
+
+    def canonical_cny_100m(period: str, metric: str) -> float | None:
+        row = line_map.get((period.lower(), metric)) or line_map.get((period, metric))
+        if not row or row.get("value") is None:
+            return None
+        try:
+            value = float(row.get("value"))
+        except (TypeError, ValueError):
+            return None
+        unit = re.sub(r"[\s_]+", "", str(row.get("unit", "") or "").lower())
+        if unit in {"cnymn", "rmbmn", "百万元", "人民币百万元"}:
+            return value / 100.0
+        if unit in {"cnybn", "rmbbn", "十亿元", "人民币十亿元"}:
+            return value * 10.0
+        if unit in {"cny100m", "rmb100m", "亿元", "人民币亿元", "亿人民币"}:
+            return value
+        return None
+
+    for year in ("2026E", "2027E", "2028E"):
+        for metric, labels in (
+            ("revenue", r"营业收入|营收"),
+            ("parentnetprofit", r"归母净利润|归母利润"),
+        ):
+            canonical_yi = canonical_cny_100m(year, metric)
+            if canonical_yi is None:
+                continue
+            pattern = re.compile(
+                rf"{year}[^。；;\n]{{0,55}}?(?:{labels})[^\d\n]{{0,12}}(\d+(?:\.\d+)?)\s*亿",
+                re.I,
+            )
+            for match in pattern.finditer(prose):
+                mentioned = float(match.group(1))
+                if rejected_context(match) or abs(mentioned - canonical_yi) <= max(
+                    abs(canonical_yi) * 0.05, 0.5
+                ):
+                    continue
+                issues.append(
+                    DecisionDepthIssue(
+                        "public_canonical_forecast_narrative",
+                        "error",
+                        f"public prose says {year} {metric}={mentioned:.2f} CNY 100m, "
+                        f"but canonical model={canonical_yi:.2f} CNY 100m; revise the prose or add an accepted evidence-backed change row",
+                    )
+                )
+
+    valuation = payload.get("deterministic_valuation", {}) or {}
+    fair_value = valuation.get("fair_value_per_share_cny")
+    if fair_value is not None:
+        for match in re.finditer(
+            r"(?:概率加权|综合)?公允价值\s*(?:约|为|仅|[:：=])?\s*(\d+(?:\.\d+)?)\s*元",
+            prose,
+            re.I,
+        ):
+            mentioned = float(match.group(1))
+            local = prose[max(0, match.start() - 24) : match.end() + 16]
+            if (
+                rejected_context(match)
+                or re.search(r"情景", local)
+                or abs(mentioned - float(fair_value)) <= max(
+                abs(float(fair_value)) * 0.03, 1.0
+                )
+            ):
+                continue
+            issues.append(
+                DecisionDepthIssue(
+                    "public_canonical_forecast_narrative",
+                    "error",
+                    f"public prose fair value CNY {mentioned:.2f} conflicts with deterministic fair value CNY {float(fair_value):.2f}",
+                )
+            )
+    unique: list[DecisionDepthIssue] = []
+    seen: set[str] = set()
+    for issue in issues:
+        if issue.issue in seen:
+            continue
+        seen.add(issue.issue)
+        unique.append(issue)
+    return unique
 
 
 def audit_foreign_sell_side_forecast_disclosure(
@@ -2950,6 +3302,27 @@ def audit_structured_research_usage(
                 f"control={row.get('value_text')}",
             )
         )
+    invalid_guidance_rows = [
+        row
+        for row in bundle.get("semantic_metrics", [])
+        if "official_guidance_conflict" in row.get("control_flags", [])
+        and (
+            row.get("value") is not None
+            or str(row.get("evidence_status", "")).lower() == "reported"
+        )
+    ]
+    if invalid_guidance_rows:
+        row = invalid_guidance_rows[0]
+        issues.append(
+            DecisionDepthIssue(
+                "official_guidance_structured_conflict",
+                "error",
+                "semantic preprocessing attempted to promote a value that conflicts with "
+                "deterministic official guidance: "
+                f"period={row.get('period')}, variable={row.get('variable')}, "
+                f"rejected={row.get('rejected_value')}, control={row.get('value_text')}",
+            )
+        )
     preprocessing_mode = str(bundle.get("preprocessing_mode", ""))
     preprocessing_notes = " ".join(
         str(note) for note in bundle.get("preprocessing_notes", [])
@@ -3406,8 +3779,10 @@ def audit_report_depth(report_dir: str | Path) -> pd.DataFrame:
         audit_official_guidance_forecast_reconciliation(report_dir, decision_text)
     )
     issues.extend(audit_pm_unit_scale_arithmetic(report_dir))
+    issues.extend(audit_commodity_sensitivity_arithmetic(report_dir))
     issues.extend(audit_canonical_financial_reconciliation(report_dir))
     issues.extend(audit_public_key_number_consistency(decision_text))
+    issues.extend(audit_public_canonical_forecast_narrative(report_dir))
     issues.extend(audit_foreign_sell_side_forecast_disclosure(report_dir, decision_text))
     issues.extend(audit_public_forecast_growth_consistency(report_dir, decision_text))
     issues.extend(audit_weighted_margin_arithmetic(decision_text))
@@ -3512,6 +3887,7 @@ def audit_report_depth(report_dir: str | Path) -> pd.DataFrame:
                 "structured",
                 "schema_prompt_structured",
                 "schema_repaired_fallback",
+                "deterministic_legacy_recovery",
             }:
                 error = str(generation_status.get("structured_error", "")).strip()
                 detail = f"; structured error: {error[:240]}" if error else ""

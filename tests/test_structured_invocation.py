@@ -14,16 +14,21 @@ from tradingagents.agents.schemas import (
     render_sell_side_pm_decision,
 )
 from tradingagents.agents.managers.portfolio_manager import (
+    _align_pm_scenarios_with_official_guidance,
     _analytical_structure_issues,
     _canonical_handoff_issues,
     _editorial_revision_prompt,
     _enforce_forecast_methodology,
     _merge_manager_canonical_snapshot,
     _normalize_sell_side_lineage,
+    _recover_legacy_pm_decision,
+    _synchronize_public_numeric_spine,
 )
 from tradingagents.agents.managers.research_manager import (
     _complete_unchanged_handoff_lines,
     _research_manager_handoff_issues,
+    _restore_suspicious_same_unit_scale_changes,
+    _restore_undocumented_handoff_changes,
 )
 from tradingagents.agents.utils.structured import (
     bind_structured,
@@ -96,6 +101,19 @@ class ThinkingNoToolChoiceLLM:
         )
 
 
+class ProgressiveRepairLLM:
+    def __init__(self):
+        self.calls = 0
+
+    def invoke(self, _prompt):
+        self.calls += 1
+        if self.calls < 3:
+            return SimpleNamespace(content=json.dumps({"rating": "Hold"}))
+        return SimpleNamespace(
+            content=json.dumps({"rating": "Hold", "report": "third attempt valid"})
+        )
+
+
 def test_free_text_json_is_revalidated_and_rendered_as_structured_output():
     rendered, metadata = invoke_structured_or_freetext(
         FailingStructured(),
@@ -130,6 +148,25 @@ def test_thinking_model_uses_single_schema_prompt_without_tool_choice():
     assert metadata["mode"] == "schema_prompt_structured"
     assert len(llm.prompts) == 1
     assert "STRUCTURED OUTPUT CONTRACT" in llm.prompts[0]
+
+
+def test_schema_repair_uses_validation_feedback_for_a_second_retry():
+    llm = ProgressiveRepairLLM()
+
+    rendered, metadata = invoke_structured_or_freetext(
+        FailingStructured(),
+        llm,
+        "prompt",
+        lambda value: f"{value.rating}: {value.report}",
+        "Portfolio Manager",
+        return_metadata=True,
+        fallback_schema=TinyDecision,
+    )
+
+    assert rendered == "Hold: third attempt valid"
+    assert metadata["mode"] == "schema_repaired_fallback"
+    assert metadata["schema_repair_attempts"] == 2
+    assert llm.calls == 3
 
 
 def test_sell_side_schema_renders_all_six_company_depth_contracts():
@@ -262,7 +299,7 @@ def test_sell_side_schema_renders_all_six_company_depth_contracts():
     assert sum(1 for line in public.splitlines() if line.startswith("## ")) == 8
     assert "Company Disaggregation" not in public
     assert "2026E_revenue" not in public
-    assert "预测take-aways" in public
+    assert "预测结论" in public
     assert "本报告要回答的关键问题" not in public
     assert "核心问题裁决" not in public
     assert "核心假设与敏感性" in public
@@ -714,7 +751,12 @@ def test_pm_merge_keeps_explicitly_accepted_canonical_change():
             {"line_id": "2027E_revenue", "value": 34500, "unit": "CNY mn"},
         ],
         "handoff_change_rows": [
-            {"line_id": "2027E_revenue", "disposition": "accepted"},
+            {
+                "line_id": "2027E_revenue",
+                "disposition": "accepted",
+                "evidence_ids": ["EV013"],
+                "reason": "new official segment disclosure",
+            },
         ],
     }
 
@@ -722,6 +764,51 @@ def test_pm_merge_keeps_explicitly_accepted_canonical_change():
 
     assert merged["canonical_model_snapshot"][0]["value"] == 34500
     assert notes == []
+
+
+def test_pm_merge_rejects_prose_only_change_and_semantic_duplicate():
+    manager = {
+        "canonical_model_snapshot": [
+            {
+                "line_id": "2028E_revenue",
+                "period": "2028E",
+                "metric": "revenue",
+                "value": 33_000,
+                "unit": "CNY mn",
+            },
+        ]
+    }
+    pm = {
+        "canonical_model_snapshot": [
+            {
+                "line_id": "2028E_revenue",
+                "period": "2028E",
+                "metric": "consolidated_revenue",
+                "value": 14_000,
+                "unit": "CNY mn",
+            },
+            {
+                "line_id": "2028E_consolidated_revenue",
+                "period": "2028E",
+                "metric": "consolidated_revenue",
+                "value": 14_000,
+                "unit": "CNY mn",
+            },
+        ],
+        "handoff_change_rows": [
+            {
+                "line_id": "2028E_revenue",
+                "disposition": "accepted",
+                "evidence_ids": ["ResearchManager accepted model text"],
+                "reason": "与研究经理正文一致",
+            }
+        ],
+    }
+
+    merged, notes = _merge_manager_canonical_snapshot(manager, pm)
+
+    assert merged["canonical_model_snapshot"] == manager["canonical_model_snapshot"]
+    assert "restored undocumented canonical change 2028e_revenue" in notes
 
 
 def test_handoff_check_allows_program_recalculated_ocf():
@@ -809,7 +896,12 @@ def test_research_manager_handoff_requires_every_line_or_documented_change():
     assert not any("shares" in issue for issue in issues)
 
     payload["model_change_rows"] = [
-        {"line_id": "2026E_revenue", "disposition": "accepted"}
+        {
+            "line_id": "2026E_revenue",
+            "disposition": "accepted",
+            "evidence_ids": ["EV013"],
+            "reason": "new official disclosure",
+        }
     ]
     payload["canonical_model_snapshot"].extend(
         [
@@ -915,3 +1007,242 @@ def test_pm_guidance_gap_triggers_revision_before_publication():
     assert any("H1 parent profit 6900.00 CNY mn" in issue for issue in issues)
     assert any("lacks Q1/Q2/H1/H2/FY bridge" in issue for issue in issues)
     assert any("full-year scenarios below reported H1" in issue for issue in issues)
+
+
+def test_research_manager_rejects_same_unit_tenfold_scale_change():
+    packet = {
+        "forecast_years": ["2026E", "2027E", "2028E"],
+        "company_model": {},
+        "forecast_lines": [
+            {
+                "segment": "consolidated",
+                "metric": "revenue",
+                "unit": "CNY mn",
+                "year_1_value": 12_000,
+                "year_2_value": 13_000,
+                "year_3_value": 14_000,
+                "assumption_status": "analyst_estimate",
+            }
+        ],
+    }
+    payload = {
+        "canonical_model_snapshot": [
+            {
+                "line_id": "2026E_revenue",
+                "period": "2026E",
+                "metric": "revenue",
+                "value": 120_000,
+                "unit": "CNY mn",
+                "status": "estimated",
+            }
+        ],
+        "model_change_rows": [
+            {
+                "line_id": "2026E_revenue",
+                "old_value": 12_000,
+                "new_value": 120_000,
+                "unit": "CNY mn",
+                "reason": "unit correction",
+                "disposition": "accepted",
+            }
+        ],
+    }
+
+    restored, line_ids = _restore_suspicious_same_unit_scale_changes(packet, payload)
+
+    assert line_ids == ["2026E_revenue"]
+    assert restored["canonical_model_snapshot"][0]["value"] == 12_000
+    assert restored["model_change_rows"] == []
+
+
+def test_research_manager_restores_ordinary_undocumented_estimate_changes():
+    packet = {
+        "forecast_years": ["2026E", "2027E", "2028E"],
+        "company_model": {},
+        "forecast_lines": [
+            {
+                "segment": "consolidated",
+                "metric": "revenue",
+                "unit": "CNY mn",
+                "year_1_value": 25_000,
+                "year_2_value": 30_000,
+                "year_3_value": 33_000,
+                "assumption_status": "analyst_estimate",
+            }
+        ],
+    }
+    payload = {
+        "canonical_model_snapshot": [
+            {
+                "line_id": "2026E_revenue",
+                "period": "2026E",
+                "metric": "revenue",
+                "value": 21_000,
+                "unit": "CNY mn",
+                "status": "estimated",
+            }
+        ],
+        "model_change_rows": [],
+    }
+
+    restored, line_ids = _restore_undocumented_handoff_changes(packet, payload)
+
+    assert line_ids == ["2026E_revenue"]
+    assert restored["canonical_model_snapshot"][0]["value"] == 25_000
+
+    payload["model_change_rows"] = [
+        {
+            "line_id": "2026E_revenue",
+            "disposition": "accepted",
+            "evidence_ids": ["EV013"],
+            "reason": "new official disclosure",
+        }
+    ]
+    accepted, line_ids = _restore_undocumented_handoff_changes(packet, payload)
+    assert line_ids == []
+    assert accepted["canonical_model_snapshot"][0]["value"] == 21_000
+
+
+def test_pm_restores_parent_profit_scenarios_and_builds_h1_h2_fy_bridge():
+    pm_payload = {
+        "autonomous_forecast_model": "原模型。",
+        "safe_valuation_assumptions": {
+            "scenarios": [
+                {
+                    "scenario": "bull",
+                    "probability_pct": 30,
+                    "valuation_method": "PE",
+                    "parent_net_profit_cny_mn": 10_000,
+                    "valuation_multiple": 20,
+                    "assumption_summary": "经常性净利润100亿元",
+                },
+                {
+                    "scenario": "base",
+                    "probability_pct": 50,
+                    "valuation_method": "PE",
+                    "parent_net_profit_cny_mn": 7_000,
+                    "valuation_multiple": 18,
+                    "assumption_summary": "经常性净利润70亿元",
+                },
+                {
+                    "scenario": "bear",
+                    "probability_pct": 20,
+                    "valuation_method": "PE",
+                    "parent_net_profit_cny_mn": 4_500,
+                    "valuation_multiple": 15,
+                    "assumption_summary": "扣非净利润45亿元",
+                },
+            ]
+        },
+    }
+    packet = {
+        "scenarios": [
+            {"scenario": "bull", "probability_pct": 30, "parent_net_profit_cny_mn": 20_000, "valuation_method": "P/E 25x", "valuation_multiple": 25},
+            {"scenario": "base", "probability_pct": 50, "parent_net_profit_cny_mn": 15_000, "valuation_method": "P/E 20x", "valuation_multiple": 20},
+            {"scenario": "bear", "probability_pct": 20, "parent_net_profit_cny_mn": 10_000, "valuation_method": "P/E 15x", "valuation_multiple": 15},
+        ]
+    }
+    context = (
+        "Parsed official guidance metrics: period=2026H1; revenue_cny_mn=11500; "
+        "parent_net_profit_cny_mn=6900; deducted_parent_net_profit_cny_mn=4850; unit=CNY mn\n"
+        "| latest reported | Q1 | 20260331 | 4188075574.04 | 1461248353.08 | 0 |"
+    )
+
+    restored, notes = _align_pm_scenarios_with_official_guidance(
+        pm_payload, packet, context
+    )
+    rows = restored["safe_valuation_assumptions"]["scenarios"]
+
+    assert [row["parent_net_profit_cny_mn"] for row in rows] == [20_000, 15_000, 10_000]
+    assert all("归属于上市公司股东的净利润口径" in row["assumption_summary"] for row in rows)
+    assert "Q1归母净利润为14.61亿元" in rows[0]["assumption_summary"]
+    assert "倒算Q2为54.39亿元" in rows[0]["assumption_summary"]
+    assert "扣非归母净利润48.50亿元" in restored["autonomous_forecast_model"]
+    assert len(notes) == 3
+
+
+def test_pm_finalizer_synchronizes_public_prose_without_erasing_comparisons():
+    payload = {
+        "one_line_thesis": "本模型预计2026E营收210亿元，公允价值256元。",
+        "forecast_takeaways": [
+            {
+                "takeaway": "基准模型2026E归母净利润70亿元。",
+                "evidence_anchor": "外资卖方预计2026E营收300亿元。",
+                "financial_implication": "乐观情景2026E归母净利润120亿元。",
+                "confidence_and_risk": "需验证。",
+            }
+        ],
+        "autonomous_forecast_model": "旧的模型解释。",
+        "canonical_model_snapshot": [
+            {
+                "line_id": "2026E_revenue",
+                "period": "2026E",
+                "metric": "revenue",
+                "value": 25_000,
+                "unit": "CNY mn",
+            },
+            {
+                "line_id": "2026E_parent_net_profit",
+                "period": "2026E",
+                "metric": "parent_net_profit",
+                "value": 10_000,
+                "unit": "CNY mn",
+            },
+        ],
+        "deterministic_valuation": {"fair_value_per_share_cny": 471.13},
+    }
+
+    synchronized, notes = _synchronize_public_numeric_spine(payload)
+
+    assert "2026E营收250.00亿元" in synchronized["one_line_thesis"]
+    assert "公允价值471.13元" in synchronized["one_line_thesis"]
+    assert "基准模型2026E归母净利润100.00亿元" in synchronized["forecast_takeaways"][0]["takeaway"]
+    assert "外资卖方预计2026E营收300亿元" in synchronized["forecast_takeaways"][0]["evidence_anchor"]
+    assert "乐观情景2026E归母净利润120亿元" in synchronized["forecast_takeaways"][0]["financial_implication"]
+    assert "规范模型数值口径" in synchronized["autonomous_forecast_model"]
+    assert any("stale public numeric" in note for note in notes)
+
+
+def test_legacy_pm_json_is_migrated_to_schema_and_rendered_as_markdown():
+    manager = {
+        "research_readiness": "partial",
+        "canonical_model_snapshot": [
+            {
+                "line_id": f"202{i}E_parentnetprofit",
+                "period": f"202{i}E",
+                "metric": "parentnetprofit",
+                "value": value,
+                "unit": "CNY mn",
+                "status": "estimated",
+            }
+            for i, value in ((6, 12_000), (7, 13_000), (8, 6_800), (9, 5_000))
+        ],
+        "autonomous_forecast_model": "Q1与Q2合计形成H1，H2单独预测后得到全年。",
+        "thesis_financial_bridge": "价格、毛利率与净利润之间存在明确传导。",
+        "valuation_closure": "使用周期调整市盈率。",
+        "handoff_integrity_audit": "规范模型已保留。",
+    }
+    legacy = json.dumps(
+        {
+            "rating": "Underweight",
+            "rating_posture": "低配",
+            "company_snapshot": "公司主营存储芯片。",
+            "one_line_thesis": "盈利处于高位，但估值缺少安全边际。",
+            "industry_driver_matrix": [{"driver": "存储价格", "direction": "上行"}],
+            "core_theses": [{"thesis": "周期利润不可线性外推"}],
+            "accounting_quality_matrix": {"cash_conversion": "良好"},
+            "key_risks_to_rating": {"downside": "价格回落"},
+        },
+        ensure_ascii=False,
+    )
+
+    recovered = _recover_legacy_pm_decision(legacy, manager, {})
+
+    assert recovered is not None
+    rendered = render_sell_side_pm_decision(recovered)
+    assert rendered.lstrip().startswith("# ")
+    assert not rendered.lstrip().startswith("{")
+    assert "公司主营存储芯片" in rendered
+    assert "**核心驱动因素**" in rendered
+    assert "**driver**" not in rendered
+    assert "**mechanism**" not in rendered

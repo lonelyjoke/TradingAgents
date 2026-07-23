@@ -1,0 +1,3138 @@
+{
+  "schema_version": 3,
+  "symbol": "000933.SZ",
+  "as_of_date": "2026-07-21",
+  "preprocessing_mode": "llm_semantic_plus_deterministic_validation",
+  "company_summary": "神火股份 is a Chinese company primarily engaged in aluminum smelting, coal mining, and aluminum foil processing. Its main products include liquid aluminum, aluminum ingots, anthracite and meager-lean coal, and various aluminum foils for food, pharmaceutical, and battery applications.",
+  "segments": [
+    {
+      "segment": "Coal",
+      "aliases": [
+        "采掘业",
+        "煤炭"
+      ],
+      "products_or_services": "无烟煤、贫瘦煤、精煤、块煤、洗混煤",
+      "revenue_weight_pct": 14.13,
+      "gross_profit_or_profit_weight_pct": null,
+      "business_model": "资源周期，商品价格型",
+      "key_drivers": [
+        "coal price",
+        "production volume",
+        "capacity utilization",
+        "demand from metallurgy/chemical/power"
+      ],
+      "prosperity_level": "bottom-testing",
+      "marginal_direction": "unknown",
+      "causal_chain": "下游冶金/化工/电力需求→产能(795万吨/年)→价格(商品煤)→产能利用率→毛利率→现金流。",
+      "supporting_metric_refs": [
+        "coal_futures_price",
+        "coal_capacity",
+        "coal_revenue"
+      ],
+      "counterevidence": [],
+      "confidence": "low",
+      "missing_inputs": [
+        "segment gross margin",
+        "segment revenue for FY2025",
+        "production volume for 2026"
+      ],
+      "revenue_cny_mn": 2887.34,
+      "revenue_reported_value": 2887344129.29,
+      "revenue_reported_unit": "CNY",
+      "revenue_growth_pct": -18.99,
+      "gross_margin_pct": null,
+      "gross_margin_change_pp": null,
+      "period": "2025 H1",
+      "source_module": "company_business_model",
+      "evidence_quote": "营业收入合计 20,428,474,993.71 100 18,220,936,335.87 100 12.12 分行业 采掘业 2,887,344,129.29 14.13 3,564,245,723.31 19.56 -18.99",
+      "extraction_mode": "llm_semantic"
+    },
+    {
+      "segment": "Aluminum",
+      "aliases": [
+        "有色金属",
+        "电解铝"
+      ],
+      "products_or_services": "液铝、铝锭",
+      "revenue_weight_pct": 69.43,
+      "gross_profit_or_profit_weight_pct": null,
+      "business_model": "产品制造+资源周期，产能出货型与商品价格型结合",
+      "key_drivers": [
+        "aluminum price (SHFE)",
+        "production volume",
+        "capacity utilization",
+        "demand from construction/power/transport",
+        "electricity cost"
+      ],
+      "prosperity_level": "prosperous",
+      "marginal_direction": "positive",
+      "causal_chain": "下游建筑/电力/交通需求→产能(未披露)→价格(SHFE铝)→产能利用率→毛利率(电力成本关键)→现金流(OCF/NP 1.76)。",
+      "supporting_metric_refs": [
+        "aluminum_futures_price",
+        "aluminum_revenue",
+        "gross_margin_consolidated"
+      ],
+      "counterevidence": [
+        "aluminum futures down -4.93% on 2026-07-21"
+      ],
+      "confidence": "medium",
+      "missing_inputs": [
+        "segment gross margin",
+        "production volume",
+        "capacity",
+        "electricity cost"
+      ],
+      "revenue_cny_mn": 14182.2,
+      "revenue_reported_value": 14182200791.47,
+      "revenue_reported_unit": "CNY",
+      "revenue_growth_pct": 20.79,
+      "gross_margin_pct": null,
+      "gross_margin_change_pp": null,
+      "period": "2025 H1",
+      "source_module": "company_business_model",
+      "evidence_quote": "有色金属 14,182,200,791.47 69.43 11,741,676,354.75 64.44 20.79",
+      "extraction_mode": "llm_semantic"
+    },
+    {
+      "segment": "Aluminum Foil",
+      "aliases": [
+        "铝箔",
+        "铝加工"
+      ],
+      "products_or_services": "食品铝箔、医药铝箔、高精度电子电极铝箔、电池铝箔(8μm,7μm等)",
+      "revenue_weight_pct": null,
+      "gross_profit_or_profit_weight_pct": null,
+      "business_model": "产品制造，产能出货型，定价模式：铝锭价格+加工费",
+      "key_drivers": [
+        "aluminum price (pass-through)",
+        "processing fee",
+        "demand from food/pharma/battery",
+        "capacity utilization"
+      ],
+      "prosperity_level": "prosperous",
+      "marginal_direction": "positive",
+      "causal_chain": "下游电池/食品/医药需求→产能(未披露)→价格(铝锭+加工费)→产能利用率→加工毛利率。",
+      "supporting_metric_refs": [
+        "aluminum_foil_pricing"
+      ],
+      "counterevidence": [],
+      "confidence": "low",
+      "missing_inputs": [
+        "segment revenue",
+        "segment gross margin",
+        "capacity",
+        "production volume"
+      ],
+      "revenue_cny_mn": null,
+      "revenue_reported_value": null,
+      "revenue_reported_unit": "",
+      "revenue_growth_pct": null,
+      "gross_margin_pct": null,
+      "gross_margin_change_pp": null,
+      "period": "unspecified",
+      "source_module": "company_business_model",
+      "evidence_quote": "铝箔业务主要产品为食品铝箔、医药铝箔和高精度电子电极铝箔，主要运用于食品...",
+      "extraction_mode": "llm_semantic"
+    }
+  ],
+  "semantic_metrics": [
+    {
+      "segment": "consolidated",
+      "variable": "revenue",
+      "value": 12408562541.64,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "2026Q1",
+      "comparison_basis": "YoY (vs 2025Q1)",
+      "source_module": "earnings_model",
+      "source_quote": "| Revenue base | 12408562541.64 | N/A | YoY: 20260331 vs 20250331 | top-line starting point for volume × price × mix |",
+      "evidence_status": "reported",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "top-line starting point",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "net_profit_parent",
+      "value": 2289691883.17,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "2026Q1",
+      "comparison_basis": "",
+      "source_module": "earnings_model",
+      "source_quote": "/ latest reported / Q1 / 20260331 / 12408562541.64 / 2289691883.17 / 49634250166.56 / 9158767532.68 / 51138820250.0648 / 8969255072.5972 / historical median 0331 share 25.5% /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "earnings baseline",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "operating_cash_flow",
+      "value": 4039054901.65,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "2026Q1",
+      "comparison_basis": "",
+      "source_module": "earnings_model",
+      "source_quote": "operating_cash_flow: 2026年一季度报告: 2,271,764,611.82 714,922,693.47 217.76 净利润（元） 经营活动产生的现金流量净额（元） 4,039,054,901.65 1,687,756,817.40 139.31",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "cash quality measure",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "gross_margin",
+      "value": 33.4845,
+      "value_text": "",
+      "unit": "%",
+      "period": "2026Q1",
+      "comparison_basis": "YoY change +18.56pp",
+      "source_module": "earnings_model",
+      "source_quote": "| Gross margin | 33.4845% | +18.56pp | YoY: 20260331 vs 20250331 | main bridge from demand to gross profit |",
+      "evidence_status": "reported",
+      "direction": "up",
+      "materiality": "high",
+      "model_role": "profitability bridge",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "operating_margin",
+      "value": 29.1848,
+      "value_text": "",
+      "unit": "%",
+      "period": "2026Q1",
+      "comparison_basis": "YoY change +17.90pp",
+      "source_module": "earnings_model",
+      "source_quote": "| Operating margin | 29.1848% | +17.90pp | YoY: 20260331 vs 20250331 | tests pricing, mix, and cost absorption |",
+      "evidence_status": "reported",
+      "direction": "up",
+      "materiality": "high",
+      "model_role": "profitability bridge",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "net_margin",
+      "value": 18.4525,
+      "value_text": "",
+      "unit": "%",
+      "period": "2026Q1",
+      "comparison_basis": "YoY change +11.10pp",
+      "source_module": "earnings_model",
+      "source_quote": "| Net margin | 18.4525% | +11.10pp | YoY: 20260331 vs 20250331 | captures final earnings conversion |",
+      "evidence_status": "reported",
+      "direction": "up",
+      "materiality": "high",
+      "model_role": "profitability bridge",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "finance_expense_ratio",
+      "value": 0.2215,
+      "value_text": "",
+      "unit": "%",
+      "period": "2026Q1",
+      "comparison_basis": "YoY change -0.21pp",
+      "source_module": "earnings_model",
+      "source_quote": "| Finance-expense ratio / 0.2215% / -0.21pp / YoY: 20260331 vs 20250331 / captures leverage drag or relief |",
+      "evidence_status": "unverified",
+      "direction": "down",
+      "materiality": "low",
+      "model_role": "leverage indicator",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "ocf_to_net_profit",
+      "value": 1.764,
+      "value_text": "",
+      "unit": "x",
+      "period": "2026Q1",
+      "comparison_basis": "YoY",
+      "source_module": "earnings_model",
+      "source_quote": "| OCF / net profit / 1.764 / N/A / YoY: 20260331 vs 20250331 / tests earnings quality and cash realization |",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "medium",
+      "model_role": "earnings quality",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "receivables_to_revenue",
+      "value": 3.0156,
+      "value_text": "",
+      "unit": "%",
+      "period": "2026Q1",
+      "comparison_basis": "YoY change +0.40pp",
+      "source_module": "earnings_model",
+      "source_quote": "| Receivables / revenue / 3.0156% / +0.40pp / YoY: 20260331 vs 20250331 / tests working-capital drag; interim periods use annualized revenue |",
+      "evidence_status": "unverified",
+      "direction": "up",
+      "materiality": "low",
+      "model_role": "working capital quality",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "revenue",
+      "value": 41240761541.38,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "FY2025",
+      "comparison_basis": "",
+      "source_module": "earnings_model",
+      "source_quote": "/ latest annual / FY / 20251231 / 41240761541.38 / 4005359185.05 / 41240761541.38 / 4005359185.05 / 41240761541.38 / 4005359185.05 / FY actual /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "annual baseline",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "net_profit_parent",
+      "value": 4005359185.05,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "FY2025",
+      "comparison_basis": "",
+      "source_module": "earnings_model",
+      "source_quote": "same as above",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "annual earnings",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "market_cap",
+      "value": 55010647624.0,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "2026-07-21",
+      "comparison_basis": "",
+      "source_module": "market_expectation",
+      "source_quote": "/ Market cap (CNY) / 55010647624 / current equity value /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "valuation input",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "pe_ttm",
+      "value": 9.8466,
+      "value_text": "",
+      "unit": "x",
+      "period": "TTM",
+      "comparison_basis": "",
+      "source_module": "market_expectation",
+      "source_quote": "/ PE TTM / 9.8466 / earnings multiple the market is paying now /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "valuation multiple",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "implied_ttm_earnings",
+      "value": 5586765748.9895,
+      "value_text": "",
+      "unit": "CNY",
+      "period": "TTM",
+      "comparison_basis": "",
+      "source_module": "market_expectation",
+      "source_quote": "/ Implied TTM earnings (CNY) / 5586765748.9895 / market cap divided by PE TTM /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "earnings implied by price",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "ps_ttm",
+      "value": 1.2497,
+      "value_text": "",
+      "unit": "x",
+      "period": "TTM",
+      "comparison_basis": "",
+      "source_module": "market_expectation",
+      "source_quote": "/ PS TTM / 1.2497 / sales multiple the market is paying now /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "valuation multiple",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "pe_percentile",
+      "value": 69.9,
+      "value_text": "",
+      "unit": "%",
+      "period": "5-year",
+      "comparison_basis": "",
+      "source_module": "market_expectation",
+      "source_quote": "/ PE percentile / 69.9 / 5-year valuation position /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "medium",
+      "model_role": "valuation context",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "pb_percentile",
+      "value": 32.1,
+      "value_text": "",
+      "unit": "%",
+      "period": "5-year",
+      "comparison_basis": "",
+      "source_module": "market_expectation",
+      "source_quote": "/ PB percentile / 32.1 / 5-year valuation position /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "medium",
+      "model_role": "valuation context",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "ps_percentile",
+      "value": 79.7,
+      "value_text": "",
+      "unit": "%",
+      "period": "5-year",
+      "comparison_basis": "",
+      "source_module": "market_expectation",
+      "source_quote": "/ PS percentile / 79.7 / 5-year valuation position /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "medium",
+      "model_role": "valuation context",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "Coal",
+      "variable": "proxy_price",
+      "value": 1275.0,
+      "value_text": "",
+      "unit": "CNY/ton",
+      "period": "2026-07-21",
+      "comparison_basis": "change -7.41% over look-back",
+      "source_module": "commodity",
+      "source_quote": "/ Coking coal / industry proxy / Tushare futures proxy / JM.DCE / 1275 / 20260721 / -7.41% / N/A / Verified by Tushare futures daily data.",
+      "evidence_status": "unverified",
+      "direction": "down",
+      "materiality": "medium",
+      "model_role": "price signal",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "Aluminum",
+      "variable": "proxy_price",
+      "value": 23160.0,
+      "value_text": "",
+      "unit": "CNY/ton",
+      "period": "2026-07-21",
+      "comparison_basis": "change -4.93%",
+      "source_module": "commodity",
+      "source_quote": "/ Aluminum / industry proxy / Tushare futures proxy / AL.SHF / 23160 / 20260721 / -4.93% / N/A / Verified by Tushare futures daily data.",
+      "evidence_status": "unverified",
+      "direction": "down",
+      "materiality": "medium",
+      "model_role": "price signal",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "roe_annual",
+      "value": 17.3209,
+      "value_text": "",
+      "unit": "%",
+      "period": "TTM",
+      "comparison_basis": "",
+      "source_module": "peer_comparison",
+      "source_quote": "/ 000933.SZ / 神火股份 / 铝 / 5501064.7624 / 550.1065 / 9.8466 / 2.0454 / 1.2497 / 3.2482 / 17.3209 / 13.3311 / 8.8986 / 7.1769 / 223.2834 / 40.8811 / 67.9 /",
+      "evidence_status": "unverified",
+      "direction": "",
+      "materiality": "medium",
+      "model_role": "profitability benchmark",
+      "grounding_status": "unverified_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "Aluminum Foil",
+      "variable": "pricing_model",
+      "value": null,
+      "value_text": "铝锭价格+加工费",
+      "unit": "",
+      "period": "2026-07-20",
+      "comparison_basis": "",
+      "source_module": "investor_interaction",
+      "source_quote": "除出口产品中少量实行一口价结算外，公司铝箔产品主要采用“铝锭价格+加工费”的定价模式。",
+      "evidence_status": "reported",
+      "direction": "",
+      "materiality": "medium",
+      "model_role": "revenue model",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "Coal",
+      "variable": "production_capacity",
+      "value": 7950000.0,
+      "value_text": "",
+      "unit": "tons/year",
+      "period": "as-of 2026-07-20",
+      "comparison_basis": "",
+      "source_module": "investor_interaction",
+      "source_quote": "公司无烟煤、贫瘦煤在产矿井核定产能为795万吨/年",
+      "evidence_status": "reported",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "capacity constraint",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "Coal",
+      "variable": "equity_capacity",
+      "value": 3000000.0,
+      "value_text": "",
+      "unit": "tons/year",
+      "period": "as-of 2026-07-20",
+      "comparison_basis": "",
+      "source_module": "investor_interaction",
+      "source_quote": "公司目前仅参股新郑煤电赵家寨煤矿，产能300万吨/年",
+      "evidence_status": "reported",
+      "direction": "",
+      "materiality": "low",
+      "model_role": "other investment",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "net_profit_parent",
+      "value": 1904456800.0,
+      "value_text": "190,445.68 (万元)",
+      "unit": "CNY",
+      "period": "2026H1 forecast",
+      "comparison_basis": "同比上升",
+      "source_module": "company_events",
+      "source_quote": "- 归属于上市公司股东的净利润 190,445.68",
+      "evidence_status": "reported",
+      "direction": "up",
+      "materiality": "high",
+      "model_role": "earnings guidance",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    },
+    {
+      "segment": "consolidated",
+      "variable": "net_profit_excl_nonrecurring",
+      "value": 2010069200.0,
+      "value_text": "201,006.92 (万元)",
+      "unit": "CNY",
+      "period": "2026H1 forecast",
+      "comparison_basis": "",
+      "source_module": "company_events",
+      "source_quote": "- 扣除非经常性损益后的净利润 201,006.92",
+      "evidence_status": "reported",
+      "direction": "",
+      "materiality": "high",
+      "model_role": "earnings guidance",
+      "grounding_status": "grounded_quote",
+      "control_flags": []
+    }
+  ],
+  "deterministic_evidence": [
+    {
+      "evidence_id": "EV001",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Financial-report look-back: 900 days"
+    },
+    {
+      "evidence_id": "EV002",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度",
+      "text": "Compacted 2025年年度报告: 483051 chars -> 158151 chars."
+    },
+    {
+      "evidence_id": "EV003",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 半年",
+      "text": "Compacted 2025年半年度报告: 368345 chars -> 141584 chars."
+    },
+    {
+      "evidence_id": "EV004",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260414, 2026, 季度",
+      "text": "20260414: 2026年一季度报告"
+    },
+    {
+      "evidence_id": "EV005",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20251021, 2025, 季度",
+      "text": "20251021: 2025年三季度报告"
+    },
+    {
+      "evidence_id": "EV006",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20251009",
+      "text": "20251009: 河南神火煤电股份有限公司董事会审计委员会年报工作规程"
+    },
+    {
+      "evidence_id": "EV007",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20250819, 2025, 半年",
+      "text": "20250819: 2025年半年度报告"
+    },
+    {
+      "evidence_id": "EV008",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260324, 2025, 年度",
+      "text": "20260324: 2025年年度报告"
+    },
+    {
+      "evidence_id": "EV009",
+      "source_module": "filing_intelligence",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ announcement_lookup / ready / Found 8 candidate financial-report announcement(s) from primary and CNINFO sources. /"
+    },
+    {
+      "evidence_id": "EV010",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "Q1, 20260331",
+      "text": "/ latest reported / Q1 / 20260331 / 12408562541.64 / 2289691883.17 / 49634250166.56 / 9158767532.68 / 51138820250.0648 / 8969255072.5972 / historical median 0331 share 25.5% /"
+    },
+    {
+      "evidence_id": "EV011",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "FY, 20251231",
+      "text": "/ latest annual / FY / 20251231 / 41240761541.38 / 4005359185.05 / 41240761541.38 / 4005359185.05 / 41240761541.38 / 4005359185.05 / FY actual /"
+    },
+    {
+      "evidence_id": "EV012",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "revenue",
+      "period": "20260331, 20250331",
+      "text": "/ Revenue base / 12408562541.64 / N/A / YoY: 20260331 vs 20250331 / top-line starting point for volume × price × mix /"
+    },
+    {
+      "evidence_id": "EV013",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "20260331, 20250331",
+      "text": "/ Gross margin / 33.4845% / +18.56pp / YoY: 20260331 vs 20250331 / main bridge from demand to gross profit /"
+    },
+    {
+      "evidence_id": "EV014",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260331, 20250331",
+      "text": "/ Operating margin / 29.1848% / +17.90pp / YoY: 20260331 vs 20250331 / tests pricing, mix, and cost absorption /"
+    },
+    {
+      "evidence_id": "EV015",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "20260331, 20250331",
+      "text": "/ Net margin / 18.4525% / +11.10pp / YoY: 20260331 vs 20250331 / captures final earnings conversion /"
+    },
+    {
+      "evidence_id": "EV016",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "operating_expense",
+      "period": "20260331, 20250331",
+      "text": "/ Finance-expense ratio / 0.2215% / -0.21pp / YoY: 20260331 vs 20250331 / captures leverage drag or relief /"
+    },
+    {
+      "evidence_id": "EV017",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "profit_or_eps",
+      "period": "20260331, 20250331",
+      "text": "/ OCF / net profit / 1.764 / N/A / YoY: 20260331 vs 20250331 / tests earnings quality and cash realization /"
+    },
+    {
+      "evidence_id": "EV018",
+      "source_module": "earnings_model",
+      "source_tier": "primary_or_structured_filing",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "revenue",
+      "period": "20260331, 20250331",
+      "text": "/ Receivables / revenue / 3.0156% / +0.40pp / YoY: 20260331 vs 20250331 / tests working-capital drag; interim periods use annualized revenue /"
+    },
+    {
+      "evidence_id": "EV019",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Look-back window: 30 days"
+    },
+    {
+      "evidence_id": "EV020",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 回购/增减持 / 1 /"
+    },
+    {
+      "evidence_id": "EV021",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "valuation",
+      "period": "unspecified",
+      "text": "/ earnings guidance / performance preview / 1 /"
+    },
+    {
+      "evidence_id": "EV022",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260711, 2026-07-11",
+      "text": "/ 20260711 / 回购/增减持 / 000933.SZ / 神火股份 / 河南神火煤电股份有限公司关于持股5%以上股东减持股份触及1%整数倍的公告 / http://www.cninfo.com.cn/new/disclosure/detail?stockCode=000933&announcementId=1225418950&orgId=gssz0000933&announcementTime=2026-07-11 /"
+    },
+    {
+      "evidence_id": "EV023",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "valuation",
+      "period": "20260710, 2026, 半年",
+      "text": "/ 20260710 / earnings guidance / performance preview / 000933.SZ / 神火股份 / 河南神火煤电股份有限公司2026年半年度业绩预告 / http://www.cninfo.com.cn/new/disclosure/detail?stockCode=000933&announcementId=1225416665&orgId=gssz0000933&announcementTime=2026-07-10 /"
+    },
+    {
+      "evidence_id": "EV024",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260710, 2026, 半年",
+      "text": "/ 20260710 / 000933.SZ / 神火股份 / 河南神火煤电股份有限公司2026年半年度业绩预告 / http://www.cninfo.com.cn/new/disclosure/detail?stockCode=000933&announcementId=1225416665&orgId=gssz0000933&announcementTime=2026-07-10 /"
+    },
+    {
+      "evidence_id": "EV025",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-07-10",
+      "text": "Source: http://www.cninfo.com.cn/new/disclosure/detail?stockCode=000933&announcementId=1225416665&orgId=gssz0000933&announcementTime=2026-07-10"
+    },
+    {
+      "evidence_id": "EV026",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026",
+      "text": "1、业绩预告期间：2026 年 1 月 1 日至 2026 年 6 月 30 日。"
+    },
+    {
+      "evidence_id": "EV027",
+      "source_module": "company_events",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "profit_or_eps",
+      "period": "unspecified",
+      "text": "2、业绩预告情况：预计净利润为正值且属于同向上升情形"
+    },
+    {
+      "evidence_id": "EV028",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_volume",
+      "period": "2025, 半年",
+      "text": "/ product_manufacturer / 产品制造 / 产能出货型 / quantified disclosure / 2025年半年度报告: 公司主营业务为铝产品、煤炭的生产、加工和销售。报告期内，公司的核心业务未发生重大变化。电解铝业务的主 要产品为液铝和铝锭，主要运用于建筑、电力、交通运输等行业。煤炭业务的主要产品为无烟煤、贫瘦煤，具有低硫、 9 河南神火煤电股份有限公司 2025 年半年度报告全文 低磷、中低灰分、高发热量等特点，产品种类分为精煤、块煤、洗混煤等，主要应用于冶金、化工、电力等行..."
+    },
+    {
+      "evidence_id": "EV029",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "asp_or_price",
+      "period": "2025, 半年",
+      "text": "/ resource_cycle / 资源周期 / 商品价格型 / quantified disclosure / 2025年半年度报告: 公司主营业务为铝产品、煤炭的生产、加工和销售。报告期内，公司的核心业务未发生重大变化。电解铝业务的主 要产品为液铝和铝锭，主要运用于建筑、电力、交通运输等行业。煤炭业务的主要产品为无烟煤、贫瘦煤，具有低硫、 9 河南神火煤电股份有限公司 2025 年半年度报告全文 低磷、中低灰分、高发热量等特点，产品种类分为精煤、块煤、洗混煤等，主要应用于冶金、化工、电力等行业。铝箔 业..."
+    },
+    {
+      "evidence_id": "EV030",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "2025, 年度",
+      "text": "/ core_revenue_engine / annual / 2025年年度报告: 民币 41,240,761,541.38 元，公司财务报表营业收入为人 2） 选取销售合同样本，检查关键合同条款，评估河 / Defines what actually drives the income statement. /"
+    },
+    {
+      "evidence_id": "EV031",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "utilization_or_backlog",
+      "period": "2025, 年度",
+      "text": "/ customer_and_channel / annual / 2025年年度报告: 清洁高效利用；减少精煤运 2.提高脱水设备利用率，降低滤液水 质，增强市场竞争力与客户认 / Reveals demand source, concentration, and market validation. /"
+    },
+    {
+      "evidence_id": "EV032",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度, 2002",
+      "text": "/ geography / annual / 2025年年度报告: 公司上市以来主营 生产和销售”。2002 年增加了“经营本公司自产产品及相关技术的进出口业务”。2011 年增加了 / Explains whether growth depends on a specific geography or expansion lane. /"
+    },
+    {
+      "evidence_id": "EV033",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "capex_or_roic",
+      "period": "2025, 年度",
+      "text": "/ reinvestment_engine / annual / 2025年年度报告: 注 2：本集团下属子公司新密恒业因与债权人诉讼纠纷，存货、固定资产及部分在建工程被法院查封、拍卖；处于拍 / Shows how today's cash is being converted into tomorrow's earnings power. /"
+    },
+    {
+      "evidence_id": "EV034",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度, 2002",
+      "text": "/ product / annual / 2025年年度报告: 公司上市之初的主营业务是“煤炭生产、销售、洗选加工，发供电，铁路专用线营运，矿用器材 公司上市以来主营 生产和销售”。2002 年增加了“经营本公司自产产品及相关技术的进出口业务”。2011 年增加了 业务的变化情况 “电解铝、铝合金、铝型材及延伸产品的生产、加工、销售，废铝加工，碳素制品的生产、加 （如有） 工、销售”，并把“经营本公司自产产品及相关技术的进出口业务”修订为“从事货物和技术的 进出口业务”。2018 年把“煤炭生产、销售、洗选加..."
+    },
+    {
+      "evidence_id": "EV035",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 半年",
+      "text": "/ product / semiannual / 2025年半年度报告: 公司主营业务为铝产品、煤炭的生产、加工和销售。报告期内，公司的核心业务未发生重大变化。电解铝业务的主 要产品为液铝和铝锭，主要运用于建筑、电力、交通运输等行业。煤炭业务的主要产品为无烟煤、贫瘦煤，具有低硫、 9 河南神火煤电股份有限公司 2025 年半年度报告全文 低磷、中低灰分、高发热量等特点，产品种类分为精煤、块煤、洗混煤等，主要应用于冶金、化工、电力等行业。铝箔 业务主要产品为食品铝箔、医药铝箔和高精度电子电极铝箔，主要运用于食品..."
+    },
+    {
+      "evidence_id": "EV036",
+      "source_module": "company_business_model",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "revenue",
+      "period": "2025, 半年",
+      "text": "/ business / semiannual / 2025年半年度报告: 营业收入合计 20,428,474,993.71 100 18,220,936,335.87 100 12.12 分行业 采掘业 2,887,344,129.29 14.13 3,564,245,723.31 19.56 -18.99 有色金属 14,182,200,791.47 69.43 11,741,676,354.75 64.44 20.79 / Use this to explain revenue"
+    },
+    {
+      "evidence_id": "EV037",
+      "source_module": "industry_cycle",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "asp_or_price",
+      "period": "unspecified",
+      "text": "/ commodity/product price / range-bound / bottom-testing stage / Mapped product proxy moved -7.4% over the look-back window; price evidence alone does not prove a new upcycle. /"
+    },
+    {
+      "evidence_id": "EV038",
+      "source_module": "industry_cycle",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260721",
+      "text": "/ Coking coal / industry proxy / Tushare futures proxy / JM.DCE / 1275 / 20260721 / -7.41% / N/A / Verified by Tushare futures daily data. / exchange=DCE, query_exchange=DCE, prefix=JM, selected by open interest/volume; curve=JM2608.DCE close=1275, oi=8942, vo"
+    },
+    {
+      "evidence_id": "EV039",
+      "source_module": "industry_cycle",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260721",
+      "text": "/ Aluminum / industry proxy / Tushare futures proxy / AL.SHF / 23160 / 20260721 / -4.93% / N/A / Verified by Tushare futures daily data. / exchange=SHFE, query_exchange=SHFE, prefix=AL, selected by open interest/volume; curve=AL2608.SHF close=23155, oi=127470,"
+    },
+    {
+      "evidence_id": "EV040",
+      "source_module": "industry_cycle",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "balance_sheet",
+      "period": "unspecified",
+      "text": "Do not state R32, R125, lithium, copper, gold, inventory, or spread changes as facts unless they appear in the evidence table."
+    },
+    {
+      "evidence_id": "EV041",
+      "source_module": "industry_cycle",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "gap",
+      "status": "missing",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "If cycle evidence says bottom-testing or evidence-limited, use language such as `bottom-right validation stage`, `右侧待验证`, or `needs confirmation`."
+    },
+    {
+      "evidence_id": "EV042",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "gap",
+      "status": "missing",
+      "model_variable": "segment_margin",
+      "period": "unspecified",
+      "text": "/ coverage_grade / report_types_seen / missing_report_types / answered_questions / core_pack_status / confidence_read /"
+    },
+    {
+      "evidence_id": "EV043",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "profit_or_eps",
+      "period": "2026, 季度",
+      "text": "/ accounting_reconciliation / Check signs, units, periods, and cross-statement consistency before a number enters the PM memo. / operating_cash_flow: 2026年一季度报告: 2,271,764,611.82 714,922,693.47 217.76 净利润（元） 经营活动产生的现金流量净额（元） 4,039,054,901.65 1,687,756,817.4..."
+    },
+    {
+      "evidence_id": "EV044",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025, 年度, 2002",
+      "text": "/ segment_economics_depth / Decide whether each business line has enough disclosed scale, growth, margin, cash quality, and valuation treatment. / 2025年年度报告: 公司上市之初的主营业务是“煤炭生产、销售、洗选加工，发供电，铁路专用线营运，矿用器材 公司上市以来主营 生产和销售”。2002 年增加了“经营本公司自产产品及相关技术的进出口业务”。2011 年增加..."
+    },
+    {
+      "evidence_id": "EV045",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026, 季度, 本报告期",
+      "text": "/ footnote_radar / Surface decision-relevant notes that can hide risk or change confidence. / impairment_policy: 2026年一季度报告: 单位：元 项 目 本报告期金额 说明 非流动性资产处置损益（包括已计提资产减值准备的冲销部分） 12,189,438.39 / impairment_policy: 2026年一季度报告: 项 目 本报告期金额 说明 非流动性资产处置损益（包括已计提资产减值准备的..."
+    },
+    {
+      "evidence_id": "EV046",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "profit_or_eps",
+      "period": "2026, 季度",
+      "text": "/ cash_flow_quality_decomposition / Separate accounting profit from cash conversion, working-capital drag, and demand visibility. / operating_cash_flow: 2026年一季度报告: 2,271,764,611.82 714,922,693.47 217.76 净利润（元） 经营活动产生的现金流量净额（元） 4,039,054,901.65 1,687,756,81..."
+    },
+    {
+      "evidence_id": "EV047",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "capex_or_roic",
+      "period": "2026, 季度",
+      "text": "/ capex_cip_return_bridge / Test whether capex, construction-in-progress, or investment assets are building returns or just absorbing capital. / long_term_equity_investments: 2026年一季度报告: 其他债权投资 长期应收款 长期股权投资 5,182,180,317.16 5,166,787,905.93 / long_term_equi..."
+    },
+    {
+      "evidence_id": "EV048",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_volume",
+      "period": "2025, 年度",
+      "text": "/ mdna_text_change / Read management wording changes, proof-backed claims, risk-language upgrades, and abnormal silence across reports. / risk_language_upgrade: 2025年年度报告: 2025 年，煤炭市场供需总体呈现宽松格局，供应方面国内煤炭产量在保供政策引导下维持高位，进口煤量虽同比有所 回落，但仍保持历史较高水平，需求方面受宏观经济增速放缓、能源..."
+    },
+    {
+      "evidence_id": "EV049",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "2026, 季度",
+      "text": "/ non_recurring_profit_quality / Distinguish core operating profit from investment income, fair-value moves, subsidies, asset disposals, impairment, and other one-off items. / impairment: 2026年一季度报告: 报告期末，公司铝加工板块应收账 款规模增加，根据会计政策以固定 17 信用减值损失 -7,873,058.09 -..."
+    },
+    {
+      "evidence_id": "EV050",
+      "source_module": "industry_kpi",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "revenue",
+      "period": "2026, 季度",
+      "text": "/ balance_sheet_forward_signals / Read balance-sheet leads before income-statement confirmation. / receivables: 2026年一季度报告: 价值发生变动。 报告期内，公司铝加工板块量价齐 3 应收账款 1,461,917,412.34 1,069,147,929.52 36.74 升带动营收增长，叠加客户账期较 / receivables: 2026年一季度报告: 报告期内，公司铝加工板块量价齐 3 应..."
+    },
+    {
+      "evidence_id": "EV051",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-07-21",
+      "text": "Valuation trade date: 2026-07-21"
+    },
+    {
+      "evidence_id": "EV052",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ Market cap (CNY) / 55010647624 / current equity value /"
+    },
+    {
+      "evidence_id": "EV053",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "valuation",
+      "period": "TTM",
+      "text": "/ PE TTM / 9.8466 / earnings multiple the market is paying now /"
+    },
+    {
+      "evidence_id": "EV054",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "revenue",
+      "period": "TTM",
+      "text": "/ PS TTM / 1.2497 / sales multiple the market is paying now /"
+    },
+    {
+      "evidence_id": "EV055",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "valuation",
+      "period": "TTM",
+      "text": "/ Implied TTM earnings (CNY) / 5586765748.9895 / market cap divided by PE TTM /"
+    },
+    {
+      "evidence_id": "EV056",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "revenue",
+      "period": "TTM",
+      "text": "/ Implied TTM sales (CNY) / 44019082679.043 / market cap divided by PS TTM /"
+    },
+    {
+      "evidence_id": "EV057",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "valuation",
+      "period": "unspecified",
+      "text": "/ PE percentile / 69.9 / 5-year valuation position /"
+    },
+    {
+      "evidence_id": "EV058",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "valuation",
+      "period": "unspecified",
+      "text": "/ PB percentile / 32.1 / 5-year valuation position /"
+    },
+    {
+      "evidence_id": "EV059",
+      "source_module": "market_expectation",
+      "source_tier": "structured_market_data",
+      "evidence_type": "calculation",
+      "status": "calculated",
+      "model_variable": "valuation",
+      "period": "unspecified",
+      "text": "/ PS percentile / 79.7 / 5-year valuation position /"
+    },
+    {
+      "evidence_id": "EV060",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-07-21",
+      "text": "Valuation trade date: 2026-07-21"
+    },
+    {
+      "evidence_id": "EV061",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Market-cap units: `total_mv` is ten-thousand CNY; `total_mv_cny_100m` is 亿元 and equals `total_mv / 10,000`."
+    },
+    {
+      "evidence_id": "EV062",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_margin",
+      "period": "unspecified",
+      "text": "/ ts_code / name / industry / total_mv / total_mv_cny_100m / pe_ttm / pb / ps_ttm / dv_ttm / roe_annual / roa_annual / roe / roa / netprofit_yoy / debt_to_assets / v4_score /"
+    },
+    {
+      "evidence_id": "EV063",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 000807.SZ / 云铝股份 / 铝 / 8732316.7332 / 873.2317 / 10.0601 / 2.4493 / 1.4081 / 2.776 / 20.0643 / 20.0288 / 10.6372 / 10.6406 / 269.4536 / 17.7381 / 77.9 /"
+    },
+    {
+      "evidence_id": "EV064",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 000612.SZ / 焦作万方 / 铝 / 1279229.9562 / 127.923 / 9.0057 / 1.66 / 1.8898 / 3.0289 / 15.9566 / 16.2822 / 6.857 / 7.3431 / 216.4622 / 15.0299 / 72.9 /"
+    },
+    {
+      "evidence_id": "EV065",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 600595.SH / 中孚实业 / 铝 / 2468869.5416 / 246.887 / 11.1796 / 1.3765 / 1.0001 / 2.8409 / 10.1932 / 8.7017 / 4.6874 / 4.1747 / 256.6124 / 29.8486 / 68.3 /"
+    },
+    {
+      "evidence_id": "EV066",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 000933.SZ / 神火股份 / 铝 / 5501064.7624 / 550.1065 / 9.8466 / 2.0454 / 1.2497 / 3.2482 / 17.3209 / 13.3311 / 8.8986 / 7.1769 / 223.2834 / 40.8811 / 67.9 /"
+    },
+    {
+      "evidence_id": "EV067",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 002532.SZ / 天山铝业 / 铝 / 5651688.4875 / 565.1688 / 9.4533 / 1.8044 / 1.8825 / 4.4667 / 17.0849 / 10.8458 / 7.288 / 5.0744 / 109.6965 / 39.9421 / 66.7 /"
+    },
+    {
+      "evidence_id": "EV068",
+      "source_module": "peer_comparison",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 601677.SH / 明泰铝业 / 铝 / 1963155.8574 / 196.3156 / 8.8337 / 0.9908 / 0.5338 / 1.9951 / 10.7663 / 9.1033 / 3.6076 / 3.037 / 59.6827 / 31.4242 / 57.9 /"
+    },
+    {
+      "evidence_id": "EV069",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 000933.SZ / 刘德学 / 张文章 / 李元勋 / 224900.4399 / 19980831 / 河南 / 煤炭、发电(自发自用)、氧化铝、铝产品的生产、加工、销售。 /"
+    },
+    {
+      "evidence_id": "EV070",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260324, 20251231",
+      "text": "/ 20260324 / 20251231 / 曹广远 / 安全监察与应急管理局局长 / 750500 / 199700 /"
+    },
+    {
+      "evidence_id": "EV071",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260324, 20251231",
+      "text": "/ 20260324 / 20251231 / 刘子成 / 副总经理 / 765700 / 189700 /"
+    },
+    {
+      "evidence_id": "EV072",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260324, 20251231",
+      "text": "/ 20260324 / 20251231 / 吴长伟 / 原副总经理 / 685800 / 250000 /"
+    },
+    {
+      "evidence_id": "EV073",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260324, 20251231",
+      "text": "/ 20260324 / 20251231 / 刘超 / 董事 / N/A / 108100 /"
+    },
+    {
+      "evidence_id": "EV074",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260324, 20251231",
+      "text": "/ 20260324 / 20251231 / 陈光 / 总会计师 / 696600 / 0 /"
+    },
+    {
+      "evidence_id": "EV075",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260324, 20251231",
+      "text": "/ 20260324 / 20251231 / 曹锋 / 副总经理 / 958800 / 113820 /"
+    },
+    {
+      "evidence_id": "EV076",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260324, 20251231",
+      "text": "/ 20260324 / 20251231 / 程欢 / 副总经理,总工程师 / 565100 / 0 /"
+    },
+    {
+      "evidence_id": "EV077",
+      "source_module": "management_capital_allocation",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260324, 20251231",
+      "text": "/ 20260324 / 20251231 / 李宏伟 / 原董事长 / N/A / 2200 /"
+    },
+    {
+      "evidence_id": "EV078",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Look-back window for futures proxies: 90 days"
+    },
+    {
+      "evidence_id": "EV079",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_volume",
+      "period": "unspecified",
+      "text": "/ 1 - company hard evidence / official filings, production reports, and sales announcements / realized product mix, output, unit cost, and cash-flow conversion / usually delayed and may not include daily spot prices /"
+    },
+    {
+      "evidence_id": "EV080",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "model_estimate",
+      "status": "estimated",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ 2 - exchange market proxy / Tushare futures daily data for mapped SHFE/DCE/CZCE/GFEX/INE contracts / timely product-price direction, curve shape, and scenario stress / proxy, not the company's realized selling price or mine cost curve /"
+    },
+    {
+      "evidence_id": "EV081",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260721",
+      "text": "/ Coking coal / industry proxy / Tushare futures proxy / JM.DCE / 1275 / 20260721 / -7.41% / N/A / Verified by Tushare futures daily data. / exchange=DCE, query_exchange=DCE, prefix=JM, selected by open interest/volume; curve=JM2608.DCE close=1275, oi=8942, vo"
+    },
+    {
+      "evidence_id": "EV082",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "20260721",
+      "text": "/ Aluminum / industry proxy / Tushare futures proxy / AL.SHF / 23160 / 20260721 / -4.93% / N/A / Verified by Tushare futures daily data. / exchange=SHFE, query_exchange=SHFE, prefix=AL, selected by open interest/volume; curve=AL2608.SHF close=23155, oi=127470,"
+    },
+    {
+      "evidence_id": "EV083",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "balance_sheet",
+      "period": "unspecified",
+      "text": "Do not state R32, R125, lithium, copper, gold, inventory, or spread changes as facts unless they appear in the evidence table."
+    },
+    {
+      "evidence_id": "EV084",
+      "source_module": "commodity",
+      "source_tier": "structured_market_data",
+      "evidence_type": "gap",
+      "status": "missing",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "If a thesis-critical input is marked missing, treat it as neutral non-evidence and a retrieval task; it cannot prove margin deterioration/resilience or mechanically change rating, conviction, or sizing."
+    },
+    {
+      "evidence_id": "EV085",
+      "source_module": "policy",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2025-10-28, 2025",
+      "text": "/ 中共中央关于制定国民经济和社会发展第十五个五年规划的建议 / 中国政府网 / 2025-10-28 / national-plan / ok / https://www.gov.cn/gongbao/2025/issue_12386/202511/content_7047415.html /"
+    },
+    {
+      "evidence_id": "EV086",
+      "source_module": "policy",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2024-08-11",
+      "text": "/ 中共中央 国务院关于加快经济社会发展全面绿色转型的意见 / 中国政府网 / 2024-08-11 / national-direction / ok / https://www.gov.cn/zhengce/202408/content_6967663.htm /"
+    },
+    {
+      "evidence_id": "EV087",
+      "source_module": "policy",
+      "source_tier": "secondary_or_derived_research",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2024-08-11",
+      "text": "/ renewable-energy / 绿色转型 / 中共中央 国务院关于加快经济社会发展全面绿色转型的意见 / 中国政府网 / 2024-08-11 / national-direction / / supports multi-year demand visibility for clean-energy equipment and infrastructure / argue the company sits inside a policy-backed demand pool / test whether"
+    },
+    {
+      "evidence_id": "EV088",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Canonical company route: https://irm.cninfo.com.cn/ircs/company/companyDetail?orgId=gssz0000933&stockcode=000933"
+    },
+    {
+      "evidence_id": "EV089",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "/ cninfo / reachable / application/json;charset=UTF-8 / {\"statusCode\":200,\"title\":\"\",\"code\":\"\",\"message\":\"success\",\"data\":[{\"stockCode\":\"000933\",\"shortName\":\"神火股份\",\"pinyin\":\"SH /"
+    },
+    {
+      "evidence_id": "EV090",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "asp_or_price",
+      "period": "2026-07-16, 2026-07-20",
+      "text": "/ 2026-07-16 / 2026-07-20 / 公司旗下有1100Y合金中强高延伸电池铝箔、8μm超薄电池铝箔、高达因电池铝箔、7μm高强度双面光电池铝箔等多款高性能电池铝箔产品，请问目前是销售是怎么定价？是电解铝加加工费定价模式吗？ / 除出口产品中少量实行一口价结算外，公司铝箔产品主要采用“铝锭价格+加工费”的定价模式。 / substantive /"
+    },
+    {
+      "evidence_id": "EV091",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "utilization_or_backlog",
+      "period": "2026-07-16, 2026-07-20, 2025",
+      "text": "/ 2026-07-16 / 2026-07-20 / 请问公司目前电解铝箔产能有多少？分别是什么产品？听说在高端铝箔一块，公司有很多突破。有哪些技术优势的？是国内领先，还是国际领先 / 请查阅公司2025年年度报告。 / substantive /"
+    },
+    {
+      "evidence_id": "EV092",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-07-16, 2026-07-20, 2026",
+      "text": "/ 2026-07-16 / 2026-07-20 / 请问神火新材的最新上市进展是怎么样？目前是否有委托中介机构开始上市辅导了 / 请关注公司2026年半年度报告。 / directional-but-unquantified /"
+    },
+    {
+      "evidence_id": "EV093",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "utilization_or_backlog",
+      "period": "2026-07-16, 2026-07-20",
+      "text": "/ 2026-07-16 / 2026-07-20 / 公司聚焦电解铝及加工业，新疆参股的煤矿股份，是否考虑转让？公司目前参股的煤矿有哪一些？分别产能多少 / 公司暂未考虑转让所持新疆神兴能源有限责任公司的股权；公司目前仅参股新郑煤电赵家寨煤矿，产能300万吨/年。 / substantive /"
+    },
+    {
+      "evidence_id": "EV094",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-07-16, 2026-07-20",
+      "text": "/ 2026-07-16 / 2026-07-20 / 公司新疆的风电项目，是否已完全并网使用？请问目前运转，是否有达到预期目标？目前发电情况如何。 / 公司新疆风电项目已实现全容量并网，运营正常。 / substantive /"
+    },
+    {
+      "evidence_id": "EV095",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "segment_volume",
+      "period": "2026-07-16, 2026-07-20, 半年",
+      "text": "/ 2026-07-16 / 2026-07-20 / 公司无烟煤和瘦煤，目前核定产能是多少吨？目前产能利用率如何 / 公司无烟煤、贫瘦煤在产矿井核定产能为795万吨/年，具体产量情况请关注公司半年度报告。 / directional-but-unquantified /"
+    },
+    {
+      "evidence_id": "EV096",
+      "source_module": "investor_interaction",
+      "source_tier": "research_context",
+      "evidence_type": "reported_fact",
+      "status": "reported",
+      "model_variable": "unmapped",
+      "period": "2026-07-16, 2026-07-20, 2026",
+      "text": "/ 2026-07-16 / 2026-07-20 / 公司披露定于什么时候发布2026年中期报告？是否有可能提前发布。 / 公司将于7月28日披露2026年半年度报告。 / substantive /"
+    },
+    {
+      "evidence_id": "EV097",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "2026-06-21, 2026-07-21",
+      "text": "Window: 2026-06-21 to 2026-07-21 (30 days)"
+    },
+    {
+      "evidence_id": "EV098",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Primary query terms: 000933.SZ, 000933SZ, 000933, 神火股份"
+    },
+    {
+      "evidence_id": "EV099",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Upstream sync summary: cached=30, synced=1, index_refreshed=1"
+    },
+    {
+      "evidence_id": "EV100",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "valuation",
+      "period": "unspecified",
+      "text": "Auto-sync refresh window: latest 30 day(s); older dates use the persistent local cache."
+    },
+    {
+      "evidence_id": "EV101",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Preprocess: ok: events=10337, clusters=76, opportunities=247, ocr_low_quality=120"
+    },
+    {
+      "evidence_id": "EV102",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Matched stream items: 4"
+    },
+    {
+      "evidence_id": "EV103",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Fusion target: 000933.SZ"
+    },
+    {
+      "evidence_id": "EV104",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Direct terms: 000933.SZ, 000933SZ, 000933, 神火股份"
+    },
+    {
+      "evidence_id": "EV105",
+      "source_module": "knowledge_planet",
+      "source_tier": "private_alternative",
+      "evidence_type": "private_proxy",
+      "status": "private_proxy",
+      "model_variable": "unmapped",
+      "period": "unspecified",
+      "text": "Raw matches: stream=4; preprocessed matches: events=1, opportunities=0"
+    }
+  ],
+  "conflicts": [
+    {
+      "topic": "H1 2026 net profit forecast vs Q1 reported net profit",
+      "segment": "consolidated",
+      "claim_a": "Q1 2026 attributable net profit is 2,289,691,883.17 CNY (from earnings model)",
+      "source_a": "earnings_model (EV010)",
+      "claim_b": "H1 2026 attributable net profit forecast is 1,904,456,800 CNY (190,445.68 万元)",
+      "source_b": "company_events (EV023/EV027)",
+      "conflict_type": "inconsistency",
+      "required_resolution": "Check unit of performance preview numbers; verify if Q1 net profit includes one-time items or if forecast is for 扣非 vs 归属; reconcile with official half-year report."
+    }
+  ],
+  "kpe_impacts": [
+    {
+      "evidence_id": "KPE01",
+      "segment": "Aluminum",
+      "variable": "asp_or_price",
+      "direction": "up",
+      "horizon": "short-term (days-weeks)",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "有色板块今日强势反弹，铜铝工业金属领涨... 神火股份涨停",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "missing_inputs": [
+        "numeric price impact",
+        "baseline price assumption"
+      ],
+      "known_kpe": {
+        "date": "2026-07-11T11:12",
+        "source": "stream_item:13127",
+        "source_type": "industry_weekly_data",
+        "credibility": "promotional_private_unverified",
+        "decision_role": "KPI/forecast proxy",
+        "evidence": "【华泰金属】 有色板块反弹，铜... 【华泰金属】 有色板块反弹，铜铝龙头业绩催化集体走强 ❤️ 求派点支持 一、大盘整体概况 今日A股三大指数冲高回落集体收跌，黄白线分化明显。早盘市场一度活跃，有色、医药、商业航天等板块领涨，但午后半导体、存储芯片等科技成长股大幅跳水，拖累创业板指和科创50指数回调。全市场超3700只个股上涨，呈现''指数跌、个股涨''的分化格局。 截至当日收盘： 上证指数 -1.00%，报 3996.16 点 深证成指 -2.29%，报 15046.67 点 创业板指 -4.37%，报 3842.73 点 科创50 -5.53%，报 2064.98 点 沪深两市全天成交额约 3.41 万亿元，较上一交易日放量约 4784 亿元。全市场超 3700 只个股上涨，近百股涨停。 板块表现分化：创新药、影视院线、白酒、商业航天等板块领涨；电子化学品、半导体、能源金属、CPO等科技板块大幅回调。 有色板块今日强势反弹，铜铝工业金属领涨，黄金跟涨，锂矿链继续重挫。隔夜LME基本金属全线走强，伦锡涨2.18%，伦铜涨1.71%，叠加中报业绩密集预喜，神火股份涨停，西部矿业、江西铜业涨超5%。但锂矿板块持续下跌，融捷股份连续3日跌停。 二、有色金属个股涨跌情况 板块共 144 只个股，涨多跌少，工业金属与锂矿严重分化。 1、板块涨幅前十个股 920576 天力复合 +15.57% 688102 斯瑞新材 +11.36% 000933 神火股份 +10.02%（涨停） 002149 西部材料 +6.30% 000807 云铝股份 +5.76% 600456 宝钛股份 +5.34% 600362 江西铜业 +5.28% 601168 西部矿业 +5.00% 600988 赤峰黄金 +4.75% 002532 天山铝业 +4.69% 2、板块跌幅前十个股 002460 赣锋锂业 -4.22% 000688 国城矿业 -4.49% 002756 永兴材料 -4.94% 300835 龙磁科技 -5.15% 300057 万顺新材 -5.16% 603407 长裕集团 -5.64% 300811 铂科新材 -6.05% 688786 悦安新材 -6.08% 603937 丽岛新材 -9.40% 002192 融捷股份 -10.01%（连续3日跌停） 三、板块回调核心逻辑 1. 中报业绩密集预喜，铜铝龙头利润翻倍催化板块反弹。 西部矿业预计上半年净利润40-43亿元，同比增长114%-130%；江西铜业预增80%-103%；紫金矿业预增68%至391亿元创同期历史新高；天山铝业预增101%。铜铝价格同比大幅上涨推动产业链利润集中释放，资金回补。 2. 锂矿链继续下跌，与工业金属走势分化。 融捷股份连续3日跌停，赣锋锂业、天齐锂业跌幅均超4%。宁德时代枧下窝锂...",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "asp_or_price",
+        "required_outcome": "numeric assumption delta or explicit rejection"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unverified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "grounding_status": "unverified_quote"
+    },
+    {
+      "evidence_id": "KPE02",
+      "segment": "consolidated",
+      "variable": "asp_or_price",
+      "direction": "up",
+      "horizon": "H1 2026 reporting",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "神火股份...业绩端超预期已有验证",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "missing_inputs": [
+        "specific profit numbers from private channel"
+      ],
+      "known_kpe": {
+        "date": "2026-07-11T11:12",
+        "source": "stream_item:13130",
+        "source_type": "channel_check",
+        "credibility": "high_private_channel_hard_to_verify",
+        "decision_role": "probability/verification proxy",
+        "evidence": "工业金属上涨点评 [庆祝]事... 工业金属上涨点评 [庆祝]事件：截止7月10日早盘，工业金属指数+2.58%，个股普遍收涨，神火股份、西部矿业、中孚失业、云铝股份等领涨。 宏观催化强化，美国非农数据下修削弱加息预期，实际利率与美元走弱，对以美元计价的铜、铝等基本金属价格形成支撑，为工业金属开启估值修复窗口。 估值低位，配置性价比提升，当前工业金属指数已大幅回调（较1月峰值下跌30%），估值处于低位，结构修复空间打开。 业绩端超预期已有验证，神火股份、西部矿业、江西铜业、天山铝业等多加公司公布26年半年度业绩预告，业绩亮眼，均超预期，展现出强大盈利能力和行业高景气。 [烟花]风险提示：美联储再度转鹰；海外地缘事件扰动；国内需求不及预期。",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "asp_or_price",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unverified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "grounding_status": "unverified_quote"
+    },
+    {
+      "evidence_id": "KPE04",
+      "segment": "Coal",
+      "variable": "asp_or_price",
+      "direction": "up",
+      "horizon": "near-term (weeks)",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "截至7月17日秦港动力煤价格升至821元/吨，环比上涨29元/吨",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "missing_inputs": [
+        "specific impact on company's realized price"
+      ],
+      "known_kpe": {
+        "date": "2026-07-20T16:53",
+        "source": "stream_item:15560",
+        "source_type": "sell_side_push",
+        "credibility": "identified_broker_private_text",
+        "decision_role": "narrative challenge",
+        "evidence": "7月20日复盘笔记：电力/算力... annotation: 7月20日复盘笔记：电力/算力租赁/煤炭/油气/化工/Kimi概念/AI应用相关/创新药/中药等 一、重磅财经信息 ①7月贷款市场报价利率（LPR）报价出炉：5年期以上LPR为3.5%，上月为3.5%。1年期LPR为3%，上月为3%。 ②工信部：建设新一代通信网是推动信息通信业发展的重点。 ③广发证券策略： ETF现牛市以来第三净流入高峰 历史类似规模净流入后均对应阶段底部。 ④花旗下调韩国并上调中国股票评级 因预计新兴市场涨势范围扩大。 二、大盘表现 尾盘半小时，科创50ETF华夏（588000）、创业板ETF易方达（159915）成交额双双突破160亿元，刷新上周五（2026年7月17日）创出的2024年11月以来成交额新高。 上证50指数涨3.01%，沪指涨0.85%，深证成指跌0.71%，创业板指涨0.42%，科创50涨0.19%。 沪深京三市成交额超过2.7万亿，较上一交易日小幅放量。 三、强势板块和个股分析 备注：只列举部分涨停板 电力 江苏电网最高用电负荷达1.5759亿千瓦，再度刷新历史纪录。这是江苏电网最高用电负荷自2016年首破1亿千瓦后，连续第十年站上“亿级台阶”。 涨停板：华能蒙电、华银电力、立新能源、乐山电力、桂冠电力、晋控电力、华电辽能、华电能源、京能电力、粤电力A、深南电 A、涪陵电力、大唐发电、湖南发展、金开新能、建投能源、浙江新能、华能蒙电 其他强势股：九洲集团、协鑫能科 算力租赁 7月19日，月之暗面Kimi发布通知，决定即日起，暂停C端新用户订阅，将已有算力全部投入于服务已订阅用户，保障已订阅用户的全部权益不受影响。同时，已在全速推进算力扩容。随着新算力陆续到位，将逐步开放更多订阅名额直至全面恢复正常订阅。 涨停板：中嘉博创、美利云、浙大网新、杭钢股份、汇金股份 其他强势股：行云科技、利通电子、宏景科技、浙数文化、润泽科技 煤炭 截至7月17日秦港动力煤价格升至821元/吨，环比上涨29元/吨。本周煤炭指数上涨2.79%。6月全国原煤产量同比骤降9.7%，创近十年最大降幅，晋陕蒙样本煤矿产量同比降幅也扩大至4.4%。南方电厂日耗升至612万吨/天，库存可用天数降至19.6天，补库需求开始释放。 涨停板：大有能源、郑州煤电、中煤能源、兖矿能源、淮北矿业、晋控煤业 其他强势股：辽宁能源、昊华能源 油气 布伦特原油盘中站上91美元/桶。凯投宏观：若霍尔木兹海峡持续关闭 布油将从目前的84美元升至150美元。 涨停板：中国海油、中曼石油、博迈科、山东墨龙 其他强势股：通源石油、泰山石油 化工 涨停板：金牛化工、闰土股份、百合花、善水科技 Kimi概念/AI应用相关 头部大模型企业月之暗面已向投资人发送上市议案，预计最快6个月内有望完成港股上市。据悉，月之暗面此前...",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "segment_volume",
+        "required_outcome": "model conflict result and accepted/rejected reason"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unquantified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "grounding_status": "grounded_quote"
+    },
+    {
+      "evidence_id": "KPE05",
+      "segment": "consolidated",
+      "variable": "asp_or_price",
+      "direction": "up",
+      "horizon": "H1 2026",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "revenue_base_cny_mn": null,
+      "revenue_impact_pct": null,
+      "margin_impact_pp": null,
+      "incremental_net_margin_pct": null,
+      "tax_rate_pct": null,
+      "share_count_mn": null,
+      "cash_conversion_ratio": null,
+      "bull_probability_before_pct": null,
+      "bull_probability_after_pct": null,
+      "base_probability_before_pct": null,
+      "base_probability_after_pct": null,
+      "bear_probability_before_pct": null,
+      "bear_probability_after_pct": null,
+      "disposition": "watch",
+      "evidence_quote": "工业金属上涨点评 [庆祝]事... 神火股份...业绩亮眼",
+      "verification_gate": "产品报价、毛利率、竞品价格、下游接受度、行业价格指数",
+      "missing_inputs": [
+        "numeric baseline and revision"
+      ],
+      "known_kpe": {
+        "date": "2026-07-11T11:12",
+        "source": "preprocessed_event",
+        "source_type": "channel_check",
+        "credibility": "高",
+        "decision_role": "probability/verification proxy",
+        "evidence": "涨价/价格弹性：工业金属上涨点评 [庆祝]事... 工业金属上涨点评 [庆祝]事件：截止7月10日早盘，工业金属指数+2.58%，个股普遍收涨，神火股份、西部矿业...",
+        "verification": "产品报价、毛利率、竞品价格、下游接受度、行业价格指数",
+        "affected_variable": "asp_or_price",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "probability_triplets_valid": true,
+      "quantification_status": "unverified",
+      "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 产品报价、毛利率、竞品价格、下游接受度、行业价格指数",
+      "grounding_status": "unverified_quote"
+    },
+    {
+      "evidence_id": "KPE03",
+      "segment": "consolidated/unmapped",
+      "variable": "segment_volume",
+      "direction": "unknown",
+      "horizon": "",
+      "baseline_value": null,
+      "revised_value": null,
+      "unit": "",
+      "assumption_delta": null,
+      "revenue_delta_cny_mn": null,
+      "parent_profit_delta_cny_mn": null,
+      "eps_delta_cny": null,
+      "fcf_delta_cny_mn": null,
+      "quantification_status": "watch_no_model_change",
+      "grounding_status": "ledger_only",
+      "known_kpe": {
+        "date": "2026-07-10T16:11",
+        "source": "stream_item:12634",
+        "source_type": "channel_check",
+        "credibility": "promotional_private_unverified",
+        "decision_role": "probability/verification proxy",
+        "evidence": "7月10日复盘笔记：商业航天/... 7月10日复盘笔记：商业航天/创新药/人形机器人/电网设备/半导体/AI应用/算力相关/数据中心电源等 一、重磅财经信息 正中靶心！7月10日12时15分，长征十号乙运载火箭在海南商业航天发射场发射升空，火箭一二级分离约6分钟后，一子级垂直返回，在海上回收平台成功回收。 二、大盘表现 沪指跌1%，深证成指跌2.29%，创业板指跌4.37%，科创50跌5.53% 沪深京三市成交额超过3.4万亿，较昨日放量近5000亿 个股表现还算不错，有3700多家上涨 但昨日强势的半导体产业普遍重挫，拖累指数 商业航天涨停潮！ 三、强势板块和个股分析 备注：只列举部分涨停板 商业航天 长征十号乙运载火箭成功实现一子级可控回收。 涨停板：中国卫星、中国卫通、海兰信、航天科技、航天动力、航天发展、航天环宇、航天电子、中天火箭、钧达股份、金风科技、巨力索具、上海港湾、中信重工、华菱线缆、移远通信、神剑股份、中船防务、佳缘科技、金利华电、同益中、普天科技、九丰能源、贵绳股份、长城电工 其他强势股：南山智尚、乾照光电、泰胜风能、西测测试、超捷股份、电科蓝天 创新药 2026年上半年中国创新药对外授权（BD）交易金额近千亿美元，达997亿美元，接近2025年全年1357亿美元的73%。 涨停板：昭衍新药、常山药业、美诺华、益诺思、立方制药、哈药股份、双鹭药业、双成药业、众生药业、联环药业、光正眼科 其他强势股：美迪西、前沿生物、万邦医药、科兴制药、津药药业 人形机器人 工信部科技司副司长：我国大模型、智能体等加速迭代，今年人形机器人全年整机产量有望突破10万台。 涨停板：同益中、中鼎股份、晋拓股份、日盈电子、和而泰、首开股份、奋达科技、宏达高科 其他强势股：南山智尚、长盈精密 电网设备 《“十五五”碳达峰行动方案》要求要提升跨省跨区输电和互补互济能力，加快特高压外送通道建设，新增西电东送能力8000万千瓦以上，大力推进省间电力互济工程建设。 涨停板：金利华电、科陆电子、大连电瓷、华菱线缆、海兴电力、柘中股份 其他强势股：良信股份、三星电气 半导体 台积电计划于下半年再度上调3纳米制程报价，涨幅最高达15%，明年可能进一步上涨5%至10%；联电宣布2026年H2将展开选择性涨价，2027年将更全面与客户就价格调整进行商议。 涨停板：国林科技、新亚强、盈新发展、中天精装、时空科技、沃顿科技 其他强势股：深科达、华天科技、亚翔集成、旭光电子 AI应用 OpenAI推出由GPT-5.6驱动的ChatGPT Work，该产品是一款可跨各类应用与文件执行操作的智能体，必要时能持续跟进项目数小时，可直接将目标转化为已完成的工作成果。 涨停板：欢瑞世纪、创维数字、中国科传、锐明技术 其他强势股：福石控股、蓝色光标、中科金财、天娱数科 算力相关 根据OpenR...",
+        "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "affected_variable": "segment_volume",
+        "required_outcome": "scenario probability before->after or watch/reject"
+      },
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "disposition": "watch_unchanged",
+      "decision_outcome": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "missing_inputs": [
+        "baseline and revised operating assumption",
+        "unit and financial transmission inputs"
+      ]
+    }
+  ],
+  "known_kpe_ledger": {
+    "KPE01": {
+      "date": "2026-07-11T11:12",
+      "source": "stream_item:13127",
+      "source_type": "industry_weekly_data",
+      "credibility": "promotional_private_unverified",
+      "decision_role": "KPI/forecast proxy",
+      "evidence": "【华泰金属】 有色板块反弹，铜... 【华泰金属】 有色板块反弹，铜铝龙头业绩催化集体走强 ❤️ 求派点支持 一、大盘整体概况 今日A股三大指数冲高回落集体收跌，黄白线分化明显。早盘市场一度活跃，有色、医药、商业航天等板块领涨，但午后半导体、存储芯片等科技成长股大幅跳水，拖累创业板指和科创50指数回调。全市场超3700只个股上涨，呈现''指数跌、个股涨''的分化格局。 截至当日收盘： 上证指数 -1.00%，报 3996.16 点 深证成指 -2.29%，报 15046.67 点 创业板指 -4.37%，报 3842.73 点 科创50 -5.53%，报 2064.98 点 沪深两市全天成交额约 3.41 万亿元，较上一交易日放量约 4784 亿元。全市场超 3700 只个股上涨，近百股涨停。 板块表现分化：创新药、影视院线、白酒、商业航天等板块领涨；电子化学品、半导体、能源金属、CPO等科技板块大幅回调。 有色板块今日强势反弹，铜铝工业金属领涨，黄金跟涨，锂矿链继续重挫。隔夜LME基本金属全线走强，伦锡涨2.18%，伦铜涨1.71%，叠加中报业绩密集预喜，神火股份涨停，西部矿业、江西铜业涨超5%。但锂矿板块持续下跌，融捷股份连续3日跌停。 二、有色金属个股涨跌情况 板块共 144 只个股，涨多跌少，工业金属与锂矿严重分化。 1、板块涨幅前十个股 920576 天力复合 +15.57% 688102 斯瑞新材 +11.36% 000933 神火股份 +10.02%（涨停） 002149 西部材料 +6.30% 000807 云铝股份 +5.76% 600456 宝钛股份 +5.34% 600362 江西铜业 +5.28% 601168 西部矿业 +5.00% 600988 赤峰黄金 +4.75% 002532 天山铝业 +4.69% 2、板块跌幅前十个股 002460 赣锋锂业 -4.22% 000688 国城矿业 -4.49% 002756 永兴材料 -4.94% 300835 龙磁科技 -5.15% 300057 万顺新材 -5.16% 603407 长裕集团 -5.64% 300811 铂科新材 -6.05% 688786 悦安新材 -6.08% 603937 丽岛新材 -9.40% 002192 融捷股份 -10.01%（连续3日跌停） 三、板块回调核心逻辑 1. 中报业绩密集预喜，铜铝龙头利润翻倍催化板块反弹。 西部矿业预计上半年净利润40-43亿元，同比增长114%-130%；江西铜业预增80%-103%；紫金矿业预增68%至391亿元创同期历史新高；天山铝业预增101%。铜铝价格同比大幅上涨推动产业链利润集中释放，资金回补。 2. 锂矿链继续下跌，与工业金属走势分化。 融捷股份连续3日跌停，赣锋锂业、天齐锂业跌幅均超4%。宁德时代枧下窝锂...",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "asp_or_price",
+      "required_outcome": "numeric assumption delta or explicit rejection"
+    },
+    "KPE02": {
+      "date": "2026-07-11T11:12",
+      "source": "stream_item:13130",
+      "source_type": "channel_check",
+      "credibility": "high_private_channel_hard_to_verify",
+      "decision_role": "probability/verification proxy",
+      "evidence": "工业金属上涨点评 [庆祝]事... 工业金属上涨点评 [庆祝]事件：截止7月10日早盘，工业金属指数+2.58%，个股普遍收涨，神火股份、西部矿业、中孚失业、云铝股份等领涨。 宏观催化强化，美国非农数据下修削弱加息预期，实际利率与美元走弱，对以美元计价的铜、铝等基本金属价格形成支撑，为工业金属开启估值修复窗口。 估值低位，配置性价比提升，当前工业金属指数已大幅回调（较1月峰值下跌30%），估值处于低位，结构修复空间打开。 业绩端超预期已有验证，神火股份、西部矿业、江西铜业、天山铝业等多加公司公布26年半年度业绩预告，业绩亮眼，均超预期，展现出强大盈利能力和行业高景气。 [烟花]风险提示：美联储再度转鹰；海外地缘事件扰动；国内需求不及预期。",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "asp_or_price",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE03": {
+      "date": "2026-07-10T16:11",
+      "source": "stream_item:12634",
+      "source_type": "channel_check",
+      "credibility": "promotional_private_unverified",
+      "decision_role": "probability/verification proxy",
+      "evidence": "7月10日复盘笔记：商业航天/... 7月10日复盘笔记：商业航天/创新药/人形机器人/电网设备/半导体/AI应用/算力相关/数据中心电源等 一、重磅财经信息 正中靶心！7月10日12时15分，长征十号乙运载火箭在海南商业航天发射场发射升空，火箭一二级分离约6分钟后，一子级垂直返回，在海上回收平台成功回收。 二、大盘表现 沪指跌1%，深证成指跌2.29%，创业板指跌4.37%，科创50跌5.53% 沪深京三市成交额超过3.4万亿，较昨日放量近5000亿 个股表现还算不错，有3700多家上涨 但昨日强势的半导体产业普遍重挫，拖累指数 商业航天涨停潮！ 三、强势板块和个股分析 备注：只列举部分涨停板 商业航天 长征十号乙运载火箭成功实现一子级可控回收。 涨停板：中国卫星、中国卫通、海兰信、航天科技、航天动力、航天发展、航天环宇、航天电子、中天火箭、钧达股份、金风科技、巨力索具、上海港湾、中信重工、华菱线缆、移远通信、神剑股份、中船防务、佳缘科技、金利华电、同益中、普天科技、九丰能源、贵绳股份、长城电工 其他强势股：南山智尚、乾照光电、泰胜风能、西测测试、超捷股份、电科蓝天 创新药 2026年上半年中国创新药对外授权（BD）交易金额近千亿美元，达997亿美元，接近2025年全年1357亿美元的73%。 涨停板：昭衍新药、常山药业、美诺华、益诺思、立方制药、哈药股份、双鹭药业、双成药业、众生药业、联环药业、光正眼科 其他强势股：美迪西、前沿生物、万邦医药、科兴制药、津药药业 人形机器人 工信部科技司副司长：我国大模型、智能体等加速迭代，今年人形机器人全年整机产量有望突破10万台。 涨停板：同益中、中鼎股份、晋拓股份、日盈电子、和而泰、首开股份、奋达科技、宏达高科 其他强势股：南山智尚、长盈精密 电网设备 《“十五五”碳达峰行动方案》要求要提升跨省跨区输电和互补互济能力，加快特高压外送通道建设，新增西电东送能力8000万千瓦以上，大力推进省间电力互济工程建设。 涨停板：金利华电、科陆电子、大连电瓷、华菱线缆、海兴电力、柘中股份 其他强势股：良信股份、三星电气 半导体 台积电计划于下半年再度上调3纳米制程报价，涨幅最高达15%，明年可能进一步上涨5%至10%；联电宣布2026年H2将展开选择性涨价，2027年将更全面与客户就价格调整进行商议。 涨停板：国林科技、新亚强、盈新发展、中天精装、时空科技、沃顿科技 其他强势股：深科达、华天科技、亚翔集成、旭光电子 AI应用 OpenAI推出由GPT-5.6驱动的ChatGPT Work，该产品是一款可跨各类应用与文件执行操作的智能体，必要时能持续跟进项目数小时，可直接将目标转化为已完成的工作成果。 涨停板：欢瑞世纪、创维数字、中国科传、锐明技术 其他强势股：福石控股、蓝色光标、中科金财、天娱数科 算力相关 根据OpenR...",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "segment_volume",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    },
+    "KPE04": {
+      "date": "2026-07-20T16:53",
+      "source": "stream_item:15560",
+      "source_type": "sell_side_push",
+      "credibility": "identified_broker_private_text",
+      "decision_role": "narrative challenge",
+      "evidence": "7月20日复盘笔记：电力/算力... annotation: 7月20日复盘笔记：电力/算力租赁/煤炭/油气/化工/Kimi概念/AI应用相关/创新药/中药等 一、重磅财经信息 ①7月贷款市场报价利率（LPR）报价出炉：5年期以上LPR为3.5%，上月为3.5%。1年期LPR为3%，上月为3%。 ②工信部：建设新一代通信网是推动信息通信业发展的重点。 ③广发证券策略： ETF现牛市以来第三净流入高峰 历史类似规模净流入后均对应阶段底部。 ④花旗下调韩国并上调中国股票评级 因预计新兴市场涨势范围扩大。 二、大盘表现 尾盘半小时，科创50ETF华夏（588000）、创业板ETF易方达（159915）成交额双双突破160亿元，刷新上周五（2026年7月17日）创出的2024年11月以来成交额新高。 上证50指数涨3.01%，沪指涨0.85%，深证成指跌0.71%，创业板指涨0.42%，科创50涨0.19%。 沪深京三市成交额超过2.7万亿，较上一交易日小幅放量。 三、强势板块和个股分析 备注：只列举部分涨停板 电力 江苏电网最高用电负荷达1.5759亿千瓦，再度刷新历史纪录。这是江苏电网最高用电负荷自2016年首破1亿千瓦后，连续第十年站上“亿级台阶”。 涨停板：华能蒙电、华银电力、立新能源、乐山电力、桂冠电力、晋控电力、华电辽能、华电能源、京能电力、粤电力A、深南电 A、涪陵电力、大唐发电、湖南发展、金开新能、建投能源、浙江新能、华能蒙电 其他强势股：九洲集团、协鑫能科 算力租赁 7月19日，月之暗面Kimi发布通知，决定即日起，暂停C端新用户订阅，将已有算力全部投入于服务已订阅用户，保障已订阅用户的全部权益不受影响。同时，已在全速推进算力扩容。随着新算力陆续到位，将逐步开放更多订阅名额直至全面恢复正常订阅。 涨停板：中嘉博创、美利云、浙大网新、杭钢股份、汇金股份 其他强势股：行云科技、利通电子、宏景科技、浙数文化、润泽科技 煤炭 截至7月17日秦港动力煤价格升至821元/吨，环比上涨29元/吨。本周煤炭指数上涨2.79%。6月全国原煤产量同比骤降9.7%，创近十年最大降幅，晋陕蒙样本煤矿产量同比降幅也扩大至4.4%。南方电厂日耗升至612万吨/天，库存可用天数降至19.6天，补库需求开始释放。 涨停板：大有能源、郑州煤电、中煤能源、兖矿能源、淮北矿业、晋控煤业 其他强势股：辽宁能源、昊华能源 油气 布伦特原油盘中站上91美元/桶。凯投宏观：若霍尔木兹海峡持续关闭 布油将从目前的84美元升至150美元。 涨停板：中国海油、中曼石油、博迈科、山东墨龙 其他强势股：通源石油、泰山石油 化工 涨停板：金牛化工、闰土股份、百合花、善水科技 Kimi概念/AI应用相关 头部大模型企业月之暗面已向投资人发送上市议案，预计最快6个月内有望完成港股上市。据悉，月之暗面此前...",
+      "verification": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "affected_variable": "segment_volume",
+      "required_outcome": "model conflict result and accepted/rejected reason"
+    },
+    "KPE05": {
+      "date": "2026-07-11T11:12",
+      "source": "preprocessed_event",
+      "source_type": "channel_check",
+      "credibility": "高",
+      "decision_role": "probability/verification proxy",
+      "evidence": "涨价/价格弹性：工业金属上涨点评 [庆祝]事... 工业金属上涨点评 [庆祝]事件：截止7月10日早盘，工业金属指数+2.58%，个股普遍收涨，神火股份、西部矿业...",
+      "verification": "产品报价、毛利率、竞品价格、下游接受度、行业价格指数",
+      "affected_variable": "asp_or_price",
+      "required_outcome": "scenario probability before->after or watch/reject"
+    }
+  },
+  "sell_side_intelligence": [],
+  "preprocessing_notes": [
+    "Performance preview net profit numbers (190,445.68 and 201,006.92) are ambiguous in unit; assumed 万元 pending confirmation.",
+    "Q1 2026 net profit is significantly higher than H1 2026 forecast, suggesting either a unit mismatch or a substantial Q2 loss; requires reconciliation.",
+    "Segment-level gross margins are not disclosed; consolidated margins used.",
+    "Aluminum foil segment revenue and margins are not separately reported.",
+    "KPE03 was excluded as it pertains to commercial aerospace and not to the target company."
+  ],
+  "underwriting_packet": {
+    "schema_version": 2,
+    "symbol": "000933.SZ",
+    "as_of_date": "2026-07-21",
+    "forecast_years": [
+      "2026E",
+      "2027E",
+      "2028E"
+    ],
+    "research_readiness": "partial",
+    "readiness_reasons": [
+      "Conflict between Q1 2026 net profit (CNY 2,289.7 mn) and H1 2026 performance preview (CNY 1,904.5 mn) not yet resolved; model base case must reflect this contradiction.",
+      "Diluted share count not available from supplied evidence; market cap, PE TTM, and parent profit cannot be conclusively combined to derive share count. EPS and per-share valuation remain conditional.",
+      "Segment-level gross margin and production volume for Coal and Aluminum are missing; consolidated margins used as proxy.",
+      "Aluminum Foil segment revenue and margin are not separately reported; treated as analytical only.",
+      "Forward capex and precise working-capital assumptions are not directly reported; OCF and FCF are estimated from reported ratios.",
+      "One or more filing-reported segments required deterministic restoration.",
+      "Material segment three-year driver lines are missing: Aluminum, Aluminum Foil, Coal",
+      "Bull/base/bear per-share valuation is incomplete.",
+      "bull scenario EPS x PE does not reconcile to fair value.",
+      "base scenario EPS x PE does not reconcile to fair value.",
+      "bear scenario EPS x PE does not reconcile to fair value.",
+      "Valuation has not closed from mutually exclusive buckets to per-share fair value.",
+      "commodity_volume_price_cost driver chain is incomplete; missing: cash cost/AISC, sustaining capex"
+    ],
+    "company_model": {
+      "model_profile": "corporate",
+      "operating_model_family": "commodity_volume_price_cost",
+      "business_archetype": "Integrated coal mining, aluminum smelting, and aluminum rolling producer with exposure to commodity prices and processing spreads.",
+      "value_proposition_and_customers": "Produces and sells coking/thermal coal to metallurgy, chemical, and power sectors; primary aluminum (liquid metal and ingot) to construction, power, and transportation; aluminum foil to food, pharmaceutical, and battery industries. Revenue is directly linked to coal and aluminum exchange prices, supplemented by processing fees for foil.",
+      "revenue_equation": "Revenue = Σ (segment_volume_i × realized_price_i) where i ∈ {coal (coking/thermal), aluminum (ingot/liquid), aluminum foil (aluminum price + processing fee)}.",
+      "profit_equation": "Gross profit = revenue – (electricity, alumina, coal mining cost, other raw materials, labor); operating profit = gross profit – selling/admin expenses – depreciation; parent profit = operating profit – finance expense – tax – minority interests; margin heavily depends on aluminum price versus electricity and alumina cost spread.",
+      "cash_flow_equation": "OCF closely tracks earnings with working-capital noise (Q1 2026 OCF/net profit = 1.76x); capex is maintenance-oriented plus limited growth projects (wind power, mine upgrades); FCF = OCF – capex.",
+      "capital_intensity_and_reinvestment": "Moderate capital intensity with most reinvestment focused on maintaining coal mine capacity (7.95 Mt/year) and aluminum smelter efficiency, plus a recently commissioned wind farm in Xinjiang. New capacity additions in aluminum foil may require growth capex but are not yet quantified.",
+      "diluted_share_count_mn": 2249.004399,
+      "share_count_period": "2026-07-21; latest stock_basic; Tushare stock_basic.reg_capital (CNY 10,000) / 100; CNY 1 par value",
+      "share_count_evidence_id": "",
+      "share_count_source_type": "registered_capital",
+      "share_count_formula": "Tushare stock_basic.reg_capital (CNY 10,000) / 100; CNY 1 par value",
+      "share_count_cross_checks": [
+        "registered capital proxy=2249.004 mn"
+      ],
+      "moat_mechanisms": [
+        "Low-cost aluminum smelting capacity partially powered by captive coal and renewable energy in Xinjiang and Yunnan."
+      ],
+      "moat_to_financial_transmission": [
+        "If power cost advantage is confirmed, sustained operating margin of >25% even at mid-cycle aluminum prices, supporting higher through-cycle ROE and a premium multiple."
+      ],
+      "structural_risks": [
+        "Commodity price volatility directly affects revenue and profit; no effective hedging disclosed.",
+        "Chinese supply-side reforms (capacity swaps, environmental restrictions) can alter industry supply and the company's cost base.",
+        "Coal segment faces secular demand decline from energy transition; metallurgical coal demand is tied to steel output, which may plateau.",
+        "Concentrated customer base in construction and power grids exposes the company to property-cycle and infrastructure-spending slowdowns.",
+        "Shareholder overhang: >5% holder reducing stake (announced 2026-07-11)."
+      ],
+      "key_unknowns": [
+        "Realized aluminum sales price vs SHFE benchmark and premium/discount structure.",
+        "Unit electricity cost and alumina procurement cost, which drive margin.",
+        "Utilization rate and production volume for coal and aluminum in 2026.",
+        "Aluminum foil revenue, capacity, and profitability."
+      ],
+      "evidence_ids": [
+        "EV001",
+        "EV002",
+        "EV003",
+        "EV004",
+        "EV005",
+        "EV006",
+        "EV007",
+        "EV008",
+        "EV009",
+        "EV010",
+        "EV011",
+        "EV012",
+        "EV013",
+        "EV014",
+        "EV015",
+        "EV016",
+        "EV017",
+        "EV018"
+      ]
+    },
+    "business_unit_map": [
+      {
+        "unit_id": "coal",
+        "unit_name": "煤炭",
+        "unit_type": "reported_segment",
+        "disclosure_basis": "reported",
+        "parent_unit": "company",
+        "economic_role": "Coal mining and washing; sells coking coal, lean coal, clean coal, lump coal, and mixed coal; revenue recognized on shipment.",
+        "revenue_driver_equation": "coal_output_mt × realized_coal_price_cny_per_ton",
+        "profit_driver_equation": "coal_revenue – (mining cost per ton, washing cost, transport) → segment gross profit",
+        "cash_and_capital_equation": "OCF from coal = segment profit + depreciation – change in receivables/inventories; minimal maintenance capex required.",
+        "reported_metrics": [
+          "coal revenue (H1 2025: CNY 2,887.34 mn)",
+          "coal capacity 7.95 Mt/year"
+        ],
+        "evidence_ids": [
+          "EV029",
+          "EV036",
+          "EV006",
+          "EV007"
+        ],
+        "missing_inputs": [
+          "coal production volume (2025, 2026)",
+          "coal segment gross margin",
+          "realized coal price per ton"
+        ],
+        "next_verification": "2026 semi-annual report (due 2026-07-28) for coal output and segment profitability."
+      },
+      {
+        "unit_id": "aluminum",
+        "unit_name": "电解铝及有色金属",
+        "unit_type": "reported_segment",
+        "disclosure_basis": "reported",
+        "parent_unit": "company",
+        "economic_role": "Primary aluminum smelting: produces liquid aluminum and ingot; main products tied to SHFE aluminum price; revenue driven by output and aluminum price.",
+        "revenue_driver_equation": "aluminum_output_mt × realized_aluminum_price_cny_per_ton",
+        "profit_driver_equation": "aluminum_revenue – (alumina cost, electricity cost, anode cost, labor) → segment gross profit; electricity is the key swing factor.",
+        "cash_and_capital_equation": "OCF strong when spreads wide; working capital tied to alumina/aluminum inventory cycles; capex for smelter maintenance and efficiency.",
+        "reported_metrics": [
+          "aluminum revenue (H1 2025: CNY 14,182.20 mn)",
+          "consolidated gross margin (Q1 2026: 33.48%)"
+        ],
+        "evidence_ids": [
+          "EV012",
+          "EV013",
+          "EV036",
+          "EV038"
+        ],
+        "missing_inputs": [
+          "aluminum production volume",
+          "aluminum segment gross margin",
+          "electricity cost per kwh",
+          "alumina cost per ton"
+        ],
+        "next_verification": "2026 semi-annual report for segment revenue and detailed cost breakdown."
+      },
+      {
+        "unit_id": "aluminum_foil",
+        "unit_name": "铝箔",
+        "unit_type": "product",
+        "disclosure_basis": "analytical",
+        "parent_unit": "aluminum",
+        "economic_role": "Rolled aluminum foil for food, pharma, and battery; pricing = aluminum price + processing fee; margin depends on processing fee and utilization.",
+        "revenue_driver_equation": "foil_volume_kt × (aluminum_price + processing_fee) × mix_factor",
+        "profit_driver_equation": "Processing margin = (processing_fee – conversion cost) × volume; aluminum price pass-through.",
+        "cash_and_capital_equation": "Working capital for receivables and inventory; growth capex required for capacity expansion.",
+        "reported_metrics": [
+          "pricing model confirmed: aluminum ingot price + processing fee"
+        ],
+        "evidence_ids": [
+          "EV029",
+          "EV035",
+          "KPE04"
+        ],
+        "missing_inputs": [
+          "aluminum foil revenue",
+          "aluminum foil gross margin",
+          "capacity and production volume",
+          "processing fee level"
+        ],
+        "next_verification": "2026 semi-annual report for aluminum foil segment disclosure (if any)."
+      },
+      {
+        "unit_id": "other",
+        "unit_name": "其他业务",
+        "unit_type": "other",
+        "disclosure_basis": "analytical",
+        "parent_unit": "company",
+        "economic_role": "Remaining revenue not allocated to coal or aluminum in reported segments; likely includes trading, services, or by-products.",
+        "revenue_driver_equation": "not separately modeled",
+        "profit_driver_equation": "not separately modeled",
+        "cash_and_capital_equation": "not separately modeled",
+        "reported_metrics": [],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "composition and profitability"
+        ],
+        "next_verification": "Review footnote disclosures in 2026 annual report."
+      },
+      {
+        "unit_id": "BU08",
+        "unit_name": "Coal",
+        "unit_type": "reported_segment",
+        "disclosure_basis": "reported",
+        "parent_unit": "company",
+        "economic_role": "Filing segment restored after structured evidence reconciliation.",
+        "revenue_driver_equation": "",
+        "profit_driver_equation": "",
+        "cash_and_capital_equation": "",
+        "reported_metrics": [],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "economic sub-unit driver equations require analyst completion"
+        ],
+        "next_verification": ""
+      },
+      {
+        "unit_id": "BU10",
+        "unit_name": "Aluminum",
+        "unit_type": "reported_segment",
+        "disclosure_basis": "reported",
+        "parent_unit": "company",
+        "economic_role": "Filing segment restored after structured evidence reconciliation.",
+        "revenue_driver_equation": "",
+        "profit_driver_equation": "",
+        "cash_and_capital_equation": "",
+        "reported_metrics": [],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "economic sub-unit driver equations require analyst completion"
+        ],
+        "next_verification": ""
+      },
+      {
+        "unit_id": "BU12",
+        "unit_name": "Aluminum Foil",
+        "unit_type": "reported_segment",
+        "disclosure_basis": "missing",
+        "parent_unit": "company",
+        "economic_role": "Filing segment restored after structured evidence reconciliation.",
+        "revenue_driver_equation": "",
+        "profit_driver_equation": "",
+        "cash_and_capital_equation": "",
+        "reported_metrics": [],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "economic sub-unit driver equations require analyst completion"
+        ],
+        "next_verification": ""
+      }
+    ],
+    "segment_models": [
+      {
+        "segment": "煤炭",
+        "products_or_services": "无烟煤、贫瘦煤、精煤、块煤、洗混煤",
+        "customers_and_channel": "冶金行业（钢厂）、化工企业、电力企业；直销为主。",
+        "revenue_weight_pct": 14.13,
+        "profit_weight_pct": null,
+        "base_period": "2025 H1",
+        "base_revenue_value": 2887.34,
+        "base_revenue_unit": "CNY mn",
+        "base_revenue_growth_pct": -18.99,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [
+          "下游冶金/化工/电力需求：焦化开工率、钢材产量、化工品价格、电厂库存天数"
+        ],
+        "industry_supply_and_capacity": "国内煤炭产量受保供政策维持高位，进口煤量回落但仍在历史高位；公司核定产能795万吨/年，无重大新增计划。",
+        "volume_share_utilization": "产量取决于安全检查和市场条件；2025H1产量未知，利用率趋势未知。",
+        "price_asp_take_rate": "焦煤期货JM.DCE 2026-07-21报1275元/吨，较窗口期-7.41%；公司实际售价将通过合同折扣/质量溢价与期货有差异。",
+        "unit_cost_and_input_prices": "开采成本相对固定，人工、材料、折旧；洗煤回收率影响成本。",
+        "margin_and_operating_leverage": "价格下跌时利润快速收窄；开采成本偏刚性，经营杠杆高。",
+        "working_capital_and_cash_conversion": "煤炭销售回款良好，应收款少；库存波动小。",
+        "prosperity_level": "bottom-testing",
+        "marginal_direction": "unknown",
+        "causal_analysis": "煤炭价格从2025年高点回落，行业供需宽松；公司产量稳定，但价格下行压力大，利润贡献可能下滑。Q1 2026毛利率大幅改善可能主要由铝驱动，煤炭贡献不明。",
+        "valuation_treatment": "no separate valuation; included in consolidated earnings",
+        "strongest_counterevidence": [
+          "焦煤价格仍处下行通道，未见需求回暖信号；动力煤价格823元/吨虽有反弹，但公司产冶金煤为主，受益有限。"
+        ],
+        "evidence_ids": [
+          "EV036",
+          "EV029",
+          "EV037",
+          "KPE04"
+        ],
+        "missing_inputs": [
+          "segment gross margin",
+          "production volume",
+          "realized price differential to futures"
+        ],
+        "next_verification": "2026年中报煤炭分行业收入、成本和毛利率。"
+      },
+      {
+        "segment": "电解铝及有色金属",
+        "products_or_services": "液铝、铝锭",
+        "customers_and_channel": "建筑、电力、交通运输等行业客户；长期合同与现货销售结合。",
+        "revenue_weight_pct": 69.43,
+        "profit_weight_pct": null,
+        "base_period": "2025 H1",
+        "base_revenue_value": 14182.2,
+        "base_revenue_unit": "CNY mn",
+        "base_revenue_growth_pct": 20.79,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [
+          "建筑竣工面积、电网投资、汽车产量、出口铝材量"
+        ],
+        "industry_supply_and_capacity": "中国电解铝产能接近4500万吨天花板，供给刚性；公司产能分布在新疆和云南（具体规模未披露）。",
+        "volume_share_utilization": "开工率受电力供应（云南水电）和政策影响；2026Q1利用率可能较高。",
+        "price_asp_take_rate": "SHFE铝AL.SHF 2026-07-21报价23160元/吨，较窗口期-4.93%；公司实际售价可能与期货升贴水。",
+        "unit_cost_and_input_prices": "电力成本占比最大（约35-40%），新疆自备电成本较低，云南水电价格季节性波动；氧化铝成本受全球市场影响。",
+        "margin_and_operating_leverage": "Q1 2026毛利率33.48%，YoY大幅提升18.56pp，反映铝价同比上涨且成本增幅有限；高经营杠杆，铝价小幅波动可带来利润巨大变化。",
+        "working_capital_and_cash_conversion": "OCF/NP=1.76倍，现金转化好；但应收账款/营收3.02%，YoY小幅上升，需关注客户账期。",
+        "prosperity_level": "prosperous",
+        "marginal_direction": "positive",
+        "causal_analysis": "Q1受益于铝价高位和成本优势，利润爆发；但近期铝价回调4.9%并且下游建筑需求仍偏弱，下半年利润可能环比回落；行业供给刚性提供底部保护。",
+        "valuation_treatment": "core earnings engine; valued on normalized P/E or EV/EBITDA",
+        "strongest_counterevidence": [
+          "SHFE铝价从Q1高点回落，若持续下滑将侵蚀下半年利润；建筑需求未见强劲反弹；H1业绩预告净利仅19.04亿元，暗示Q2出现亏损或大幅下滑，与Q1强劲形成对比，需要解释。"
+        ],
+        "evidence_ids": [
+          "EV012",
+          "EV013",
+          "EV015",
+          "EV027",
+          "EV038",
+          "KPE01"
+        ],
+        "missing_inputs": [
+          "segment gross margin",
+          "production volume",
+          "electricity and alumina cost per ton"
+        ],
+        "next_verification": "2026年中报、二季度经营数据；澄清H1预告与Q1的矛盾。"
+      },
+      {
+        "segment": "铝箔",
+        "products_or_services": "食品铝箔、医药铝箔、电池铝箔（8μm、7μm等）",
+        "customers_and_channel": "食品包装、医药包装、锂电池企业；部分出口。",
+        "revenue_weight_pct": null,
+        "profit_weight_pct": null,
+        "base_period": "unspecified",
+        "base_revenue_value": null,
+        "base_revenue_unit": "",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [
+          "电池铝箔受益于新能源车和储能增长；食品/医药包装需求稳定；出口受海外经济和贸易政策影响。"
+        ],
+        "industry_supply_and_capacity": "国内铝箔产能充足，加工费竞争激烈；高端电池箔有壁垒。",
+        "volume_share_utilization": "未知",
+        "price_asp_take_rate": "定价模式：铝锭价格+加工费；加工费取决于产品规格和市场供需。",
+        "unit_cost_and_input_prices": "铝锭成本为原料（价格传导），转换成本包括电力、人工、折旧。",
+        "margin_and_operating_leverage": "加工费减去转换成本构成毛利；经营杠杆中等。",
+        "working_capital_and_cash_conversion": "应收账款可能随规模增长而增加（Q1应收账款36.74% YoY increase partly attributed to aluminum processing）。",
+        "prosperity_level": "prosperous",
+        "marginal_direction": "positive",
+        "causal_analysis": "电池箔需求高增长，公司有产品技术突破，但尚未贡献独立披露的利润；加工费能否维持需观察。",
+        "valuation_treatment": "option value or scenario bucket, not in base core earnings",
+        "strongest_counterevidence": [
+          "铝箔加工费可能下滑；新产能投产可能压低行业利润；目前收入/利润占比可能很小。"
+        ],
+        "evidence_ids": [
+          "EV029",
+          "EV035",
+          "KPE04"
+        ],
+        "missing_inputs": [
+          "segment revenue and margin",
+          "capacity, utilization, processing fee"
+        ],
+        "next_verification": "铝箔分业务收入和毛利须从半年报/年报中析出。"
+      },
+      {
+        "segment": "Coal",
+        "products_or_services": "",
+        "customers_and_channel": "",
+        "revenue_weight_pct": 14.13,
+        "profit_weight_pct": null,
+        "base_period": "2025 H1",
+        "base_revenue_value": 2887344129.29,
+        "base_revenue_unit": "CNY",
+        "base_revenue_growth_pct": -18.99,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [],
+        "industry_supply_and_capacity": "",
+        "volume_share_utilization": "",
+        "price_asp_take_rate": "",
+        "unit_cost_and_input_prices": "",
+        "margin_and_operating_leverage": "",
+        "working_capital_and_cash_conversion": "",
+        "prosperity_level": "evidence_limited",
+        "marginal_direction": "unknown",
+        "causal_analysis": "",
+        "valuation_treatment": "evidence_limited",
+        "strongest_counterevidence": [],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "LLM omitted a filing-reported material segment"
+        ],
+        "next_verification": ""
+      },
+      {
+        "segment": "Aluminum",
+        "products_or_services": "",
+        "customers_and_channel": "",
+        "revenue_weight_pct": 69.43,
+        "profit_weight_pct": null,
+        "base_period": "2025 H1",
+        "base_revenue_value": 14182200791.47,
+        "base_revenue_unit": "CNY",
+        "base_revenue_growth_pct": 20.79,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [],
+        "industry_supply_and_capacity": "",
+        "volume_share_utilization": "",
+        "price_asp_take_rate": "",
+        "unit_cost_and_input_prices": "",
+        "margin_and_operating_leverage": "",
+        "working_capital_and_cash_conversion": "",
+        "prosperity_level": "evidence_limited",
+        "marginal_direction": "unknown",
+        "causal_analysis": "",
+        "valuation_treatment": "evidence_limited",
+        "strongest_counterevidence": [],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "LLM omitted a filing-reported material segment"
+        ],
+        "next_verification": ""
+      },
+      {
+        "segment": "Aluminum Foil",
+        "products_or_services": "",
+        "customers_and_channel": "",
+        "revenue_weight_pct": null,
+        "profit_weight_pct": null,
+        "base_period": "unspecified",
+        "base_revenue_value": null,
+        "base_revenue_unit": "",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [],
+        "industry_supply_and_capacity": "",
+        "volume_share_utilization": "",
+        "price_asp_take_rate": "",
+        "unit_cost_and_input_prices": "",
+        "margin_and_operating_leverage": "",
+        "working_capital_and_cash_conversion": "",
+        "prosperity_level": "evidence_limited",
+        "marginal_direction": "unknown",
+        "causal_analysis": "",
+        "valuation_treatment": "evidence_limited",
+        "strongest_counterevidence": [],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "LLM omitted a filing-reported material segment"
+        ],
+        "next_verification": ""
+      }
+    ],
+    "underwriting_questions": [
+      {
+        "question_id": "Q1",
+        "question": "What caused the sharp QoQ profit decline implied by the H1 2026 preview (CNY 1,904 mn vs Q1 alone CNY 2,290 mn)? Is the Q2 loss real or due to unit/accounting restatement?",
+        "why_it_matters": "Determines whether Q1 earnings are sustainable or an outlier; resolves the single largest data conflict and shapes the full-year profit forecast by 50%+.",
+        "current_answer": "unresolved",
+        "bull_evidence": [
+          "Q1 gross margin expanded 18.56pp YoY, suggesting strong fundamental improvement that may persist.",
+          "Aluminum price in Q2 averaged only moderately lower; a collapse seems unlikely."
+        ],
+        "bear_evidence": [
+          "H1 preview shows profit of only CNY 1,904 mn, implying Q2 loss of ~CNY 385 mn, which could stem from mark-to-market losses, one-off charges, or severe margin compression."
+        ],
+        "decisive_model_variables": [
+          "2026E parent net profit",
+          "2026E EPS",
+          "scenario probabilities"
+        ],
+        "affected_financial_lines": [
+          "consolidated net profit 2026E-2028E",
+          "EPS",
+          "FCF"
+        ],
+        "evidence_ids": [
+          "EV010",
+          "EV023",
+          "EV027",
+          "EV043"
+        ],
+        "missing_evidence": [
+          "H1 2026 interim report with detailed segment P&L and explanation of non-recurring items.",
+          "Confirmation of unit and treatment of impairment or investment losses."
+        ],
+        "next_verification": "2026-07-28 semi-annual report release."
+      },
+      {
+        "question_id": "Q2",
+        "question": "What is the company's realized aluminum price relative to SHFE, and what are the actual unit electricity and alumina costs for its Xinjiang and Yunnan smelters?",
+        "why_it_matters": "These spreads determine the core profit engine; small changes in power cost can swing EPS by 20-30%.",
+        "current_answer": "unresolved",
+        "bull_evidence": [
+          "Q1 gross margin of 33.5% implies wide spreads; Xinjiang enjoys low-cost captive coal power and wind integration."
+        ],
+        "bear_evidence": [
+          "No disclosure of segment-level costs; if Yunnan hydro rates surged or alumina costs rose, margin could compress abruptly."
+        ],
+        "decisive_model_variables": [
+          "Aluminum segment gross margin",
+          "operating margin"
+        ],
+        "affected_financial_lines": [
+          "consolidated gross margin",
+          "operating profit",
+          "net profit"
+        ],
+        "evidence_ids": [
+          "EV013",
+          "EV014",
+          "EV038"
+        ],
+        "missing_evidence": [
+          "Aluminum segment revenue and cost breakdown from 2025 annual report or 2026 semi-annual report.",
+          "Electricity procurement contracts and alumina sourcing details."
+        ],
+        "next_verification": "Review 2025 annual report segment notes (already compacted; may need manual extraction) and 2026H1 report."
+      },
+      {
+        "question_id": "Q3",
+        "question": "What are the actual production volumes for coal and aluminum in 2025 and 2026 YTD, and what are the expected utilization rates?",
+        "why_it_matters": "Revenue growth and cost absorption directly depend on volume; without volume, ASP-only analysis is incomplete.",
+        "current_answer": "unresolved",
+        "bull_evidence": [
+          "Coal capacity 7.95 Mt/year; high utilization would maximize earnings."
+        ],
+        "bear_evidence": [
+          "May be operating below capacity due to market or regulatory constraints."
+        ],
+        "decisive_model_variables": [
+          "coal revenue",
+          "aluminum revenue",
+          "operating leverage"
+        ],
+        "affected_financial_lines": [
+          "consolidated revenue",
+          "gross profit"
+        ],
+        "evidence_ids": [
+          "EV029",
+          "EV036"
+        ],
+        "missing_evidence": [
+          "Annual coal output for 2025, 2026.",
+          "Aluminum output in metric tons."
+        ],
+        "next_verification": "2025 annual report and 2026 semi-annual report production data."
+      },
+      {
+        "question_id": "Q4",
+        "question": "Does the aluminum foil segment generate meaningful profit, and what is the processing-fee trend across battery, food, and pharma foils?",
+        "why_it_matters": "If battery foil scales profitably, it could command a higher valuation multiple and contribute to EPS growth beyond commodity cycles.",
+        "current_answer": "unresolved",
+        "bull_evidence": [
+          "Company confirmed aluminum price + processing fee model; battery foil demand is growing rapidly."
+        ],
+        "bear_evidence": [
+          "Segment not separately reported; may be too small to impact overall financials or may operate at low margins due to competition."
+        ],
+        "decisive_model_variables": [
+          "Aluminum foil segment profit",
+          "optionality valuation bucket"
+        ],
+        "affected_financial_lines": [
+          "consolidated net profit (if material)",
+          "SOTP optionality"
+        ],
+        "evidence_ids": [
+          "KPE04",
+          "EV029",
+          "EV035"
+        ],
+        "missing_evidence": [
+          "Aluminum foil revenue, tonnage, processing fee, and margins by product type."
+        ],
+        "next_verification": "Seek specific aluminum foil segment disclosure in 2026 semi-annual or annual report, or management commentary."
+      },
+      {
+        "question_id": "Q5",
+        "question": "How sensitive is consolidated EPS to a USD 1,000/ton decline in aluminum price, assuming no change in aluminum cost?",
+        "why_it_matters": "Quantifies the core commodity risk and helps set bear-case floor.",
+        "current_answer": "unmodeled",
+        "bull_evidence": [],
+        "bear_evidence": [
+          "Aluminum price fell 4.93% in look-back; if a 10% decline occurs, EPS could drop 40-50% based on illustrative leverage."
+        ],
+        "decisive_model_variables": [
+          "EPS",
+          "FCF"
+        ],
+        "affected_financial_lines": [
+          "revenue",
+          "gross profit",
+          "net profit"
+        ],
+        "evidence_ids": [
+          "EV038"
+        ],
+        "missing_evidence": [
+          "Aluminum tonnage sold, exact cost structure, and hedging policy."
+        ],
+        "next_verification": "Build explicit aluminum price sensitivity table from segment-level data when available."
+      }
+    ],
+    "forecast_lines": [
+      {
+        "segment": "consolidated",
+        "metric": "Revenue",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 41241.0,
+        "year_1_value": 51000.0,
+        "year_2_value": 52500.0,
+        "year_3_value": 54000.0,
+        "formula": "Base case assumes Q1 2026 annualized revenue of CNY 49,634 Mn adjusted upward for modest volume and price recovery in H2; 2027-2028 assume 3% growth from demand and aluminum foil ramp.",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [
+          "EV012",
+          "EV011"
+        ],
+        "key_sensitivity": "Significantly responsive to aluminum price (+/-10% = ~CNY 5,100 mn revenue impact)",
+        "missing_inputs": [
+          "Q2-Q4 2026 quarterly revenue",
+          "breakdown by segment"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Gross Margin",
+        "unit": "%",
+        "base_period": "FY2025",
+        "base_value": null,
+        "year_1_value": 20.0,
+        "year_2_value": 19.0,
+        "year_3_value": 18.5,
+        "formula": "2026: Q1 actual 33.48% is considered unsustainable; full-year estimated at ~20% reflecting Q2 margin compression and H2 aluminum price weakness. 2027-2028 normalize toward mid-to-late cycle margins.",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [
+          "EV013",
+          "EV038"
+        ],
+        "key_sensitivity": "1pp change in gross margin = ~CNY 510 mn in gross profit.",
+        "missing_inputs": [
+          "FY2025 gross margin (not supplied)",
+          "quarterly margin trajectory"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Operating Margin",
+        "unit": "%",
+        "base_period": "FY2025",
+        "base_value": null,
+        "year_1_value": 15.0,
+        "year_2_value": 14.0,
+        "year_3_value": 13.5,
+        "formula": "Gross margin less SG&A and depreciation; Q1 2026 was 29.18%, full-year assumed to moderate to 15% due to higher fixed-cost absorption and H2 commodity weakness.",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [
+          "EV014"
+        ],
+        "key_sensitivity": "Operating leverage amplifies gross margin changes.",
+        "missing_inputs": [
+          "FY2025 operating margin",
+          "detailed expense ratios"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Operating Profit",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": null,
+        "year_1_value": 7650.0,
+        "year_2_value": 7350.0,
+        "year_3_value": 7290.0,
+        "formula": "Revenue × Operating Margin",
+        "assumption_status": "derived",
+        "evidence_ids": [],
+        "key_sensitivity": "",
+        "missing_inputs": []
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Parent Net Profit",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 4005.0,
+        "year_1_value": 4000.0,
+        "year_2_value": 4100.0,
+        "year_3_value": 4200.0,
+        "formula": "2026E: assumed similar to FY2025 despite higher revenue, because Q1 net profit of CNY 2,289.7 mn annualized would be CNY 9,159 mn, but H1 preview of only CNY 1,904 mn forces a very weak H2. Base case adopts a full-year result near FY2025 level to reflect current uncertain but still healthy profitability. 2027-28 modest growth.",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [
+          "EV010",
+          "EV011",
+          "EV023",
+          "EV027"
+        ],
+        "key_sensitivity": "Aluminum price and Q2 reconciliation are critical.",
+        "missing_inputs": [
+          "H2 2026 quarterly net profit",
+          "tax rate, minority interest"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "EPS",
+        "unit": "CNY/share",
+        "base_period": "FY2025",
+        "base_value": null,
+        "year_1_value": 1.7785647737187908,
+        "year_2_value": 1.8230288930617606,
+        "year_3_value": 1.8674930124047304,
+        "formula": "parent net profit (CNY mn) / diluted shares (mn)",
+        "assumption_status": "calculated",
+        "evidence_ids": [],
+        "key_sensitivity": "",
+        "missing_inputs": [
+          "diluted share count"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Operating Cash Flow",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": null,
+        "year_1_value": 6000.0,
+        "year_2_value": 6150.0,
+        "year_3_value": 6300.0,
+        "formula": "Assumed OCF / NP ratio of 1.5x for 2026-2028, slightly below Q1 1.76x to reflect normalized working-capital build.",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [
+          "EV017"
+        ],
+        "key_sensitivity": "",
+        "missing_inputs": [
+          "FY2025 OCF"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Capex",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": null,
+        "year_1_value": 1500.0,
+        "year_2_value": 1500.0,
+        "year_3_value": 1500.0,
+        "formula": "Estimated maintenance and moderate growth capex for mining and smelting; not directly quoted.",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [],
+        "key_sensitivity": "",
+        "missing_inputs": [
+          "historical capex",
+          "growth project budget"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Free Cash Flow",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": null,
+        "year_1_value": 4500.0,
+        "year_2_value": 4650.0,
+        "year_3_value": 4800.0,
+        "formula": "OCF – Capex",
+        "assumption_status": "derived",
+        "evidence_ids": [],
+        "key_sensitivity": "",
+        "missing_inputs": []
+      }
+    ],
+    "scenarios": [
+      {
+        "scenario": "bull",
+        "probability_pct": 20.0,
+        "operating_assumptions": [
+          "Aluminum prices recover and average CNY 25,000/t in 2H26 and stay elevated through 2027-28.",
+          "Coal prices stabilize; segment profitability improves.",
+          "Aluminum foil processing margins expand as battery foil demand surges and company achieves premium pricing.",
+          "Power costs remain low due to Xinjiang wind integration and Yunnan favorable hydro.",
+          "H1 2026 profit dip caused by one-off non-cash items; underlying earnings power >CNY 6,000 mn annually."
+        ],
+        "parent_net_profit_cny_mn": 6500.0,
+        "eps_cny": 2.890167757293035,
+        "fcf_cny_mn": 7000.0,
+        "valuation_method": "P/E",
+        "valuation_multiple": 12.0,
+        "fair_value_per_share": 34.68201308751642,
+        "evidence_ids": [
+          "KPE01",
+          "KPE02"
+        ],
+        "falsification": "If H2 2026 aluminum price remains below 23,000 or aluminum foil margins compress, bull case invalid.",
+        "missing_inputs": [
+          "share count for EPS"
+        ]
+      },
+      {
+        "scenario": "base",
+        "probability_pct": 50.0,
+        "operating_assumptions": [
+          "Aluminum prices moderate to CNY 22,000-23,000/t for 2026-2028, consistent with current futures.",
+          "Coal segment continues to face price headwinds but remains cash-generative.",
+          "Aluminum foil grows revenue but adds limited profit contribution initially.",
+          "H1 profit preview reflects real Q2 weakness; full-year net profit reverts to ~CNY 4,000 mn, similar to FY2025 on higher revenue but lower margin."
+        ],
+        "parent_net_profit_cny_mn": 4000.0,
+        "eps_cny": 1.7785647737187908,
+        "fcf_cny_mn": 4500.0,
+        "valuation_method": "P/E",
+        "valuation_multiple": 9.0,
+        "fair_value_per_share": 16.007082963469117,
+        "evidence_ids": [
+          "EV023",
+          "EV027",
+          "EV038"
+        ],
+        "falsification": "If H1 2026 preview unit error resolved and actual H1 profit is much higher, base case would be too low.",
+        "missing_inputs": []
+      },
+      {
+        "scenario": "bear",
+        "probability_pct": 30.0,
+        "operating_assumptions": [
+          "Aluminum price falls to CNY 20,000/t or below due to global demand shock or China property hard landing.",
+          "Coal prices decline further; segment breakeven.",
+          "Aluminum foil growth fails to offset commodity weakness; processing fees erode.",
+          "Power costs rise (Yunnan drought) squeezing margins significantly."
+        ],
+        "parent_net_profit_cny_mn": 2000.0,
+        "eps_cny": 0.8892823868593954,
+        "fcf_cny_mn": 2500.0,
+        "valuation_method": "P/E",
+        "valuation_multiple": 8.0,
+        "fair_value_per_share": 7.114259094875163,
+        "evidence_ids": [
+          "EV038",
+          "EV037"
+        ],
+        "falsification": "If aluminum price stabilizes above 22,000 and H1 results prove resilient, bear case is unlikely.",
+        "missing_inputs": []
+      }
+    ],
+    "thesis_financial_bridges": [
+      {
+        "bridge_id": "TB1",
+        "thesis_or_question": "Aluminum price recovery drives EPS upside",
+        "affected_unit": "aluminum",
+        "operating_driver": "Realized aluminum price per ton",
+        "driver_formula": "Operating profit = volume × (price - cash cost)",
+        "base_assumption": "Aluminum price CNY 23,000/t, cash cost CNY 16,000/t → margin CNY 7,000/t",
+        "bull_assumption": "Price CNY 25,000/t, cost unchanged → margin CNY 9,000/t (+29%)",
+        "bear_assumption": "Price CNY 20,000/t, cost unchanged → margin CNY 4,000/t (-43%)",
+        "revenue_impact": "unquantified",
+        "profit_impact": "Each CNY 1,000/t change in aluminum price moves annualized pre-tax profit by ~CNY 1.5-2.0 bn based on estimated 1.5-2.0 Mt output.",
+        "eps_impact": "unquantified (share count missing)",
+        "fcf_or_capital_impact": "unquantified",
+        "valuation_impact": "Higher earnings justify P/E expansion in bull, compression in bear.",
+        "quantification_status": "partially_quantified",
+        "evidence_ids": [
+          "EV038",
+          "EV013"
+        ],
+        "missing_inputs": [
+          "precise aluminum output",
+          "unit cash cost",
+          "volume"
+        ]
+      },
+      {
+        "bridge_id": "TB2",
+        "thesis_or_question": "Electricity cost advantage protects margins and supports premium valuation",
+        "affected_unit": "aluminum",
+        "operating_driver": "Unit electricity cost (RMB/kWh)",
+        "driver_formula": "Gross margin = aluminum price - (alumina + electricity + other costs)",
+        "base_assumption": "Xinjiang electricity cost ~0.25 RMB/kWh; Yunnan ~0.35 RMB/kWh blended average 0.30",
+        "bull_assumption": "Wind power integration lowers Xinjiang cost to 0.22; hydro surplus lowers Yunnan to 0.30 → blended 0.26 → +4pp margin",
+        "bear_assumption": "Yunnan drought raises cost to 0.40; Xinjiang subsidy removed → blended 0.36 → -6pp margin",
+        "revenue_impact": "unquantified",
+        "profit_impact": "Each 0.01 RMB/kWh change moves annualized cost by ~CNY 200-300 mn.",
+        "eps_impact": "unquantified",
+        "fcf_or_capital_impact": "unquantified",
+        "valuation_impact": "Sustainable cost advantage justifies higher through-cycle P/E (10-12x vs 8x).",
+        "quantification_status": "partially_quantified",
+        "evidence_ids": [
+          "KPE04",
+          "EV013"
+        ],
+        "missing_inputs": [
+          "actual power consumption per ton",
+          "actual electricity tariff by plant"
+        ]
+      },
+      {
+        "bridge_id": "TB3",
+        "thesis_or_question": "Battery aluminum foil becomes a second growth curve",
+        "affected_unit": "aluminum_foil",
+        "operating_driver": "Foil processing fee and volume",
+        "driver_formula": "Operating profit = foil_volume × (processing fee - conversion cost)",
+        "base_assumption": "Processing fee CNY 8,000/t, cost CNY 6,000/t, volume 50 kt → profit CNY 100 mn",
+        "bull_assumption": "Fee rises to CNY 12,000/t, cost 6,000, volume 100 kt → CNY 600 mn profit",
+        "bear_assumption": "Fee CNY 6,000/t, cost 6,500, volume 20 kt → loss",
+        "revenue_impact": "unquantified",
+        "profit_impact": "In bull case, adds up to CNY 600 mn to net profit.",
+        "eps_impact": "unquantified",
+        "fcf_or_capital_impact": "Requires growth capex; FCF initially negative.",
+        "valuation_impact": "Would be valued separately at higher multiple (e.g., 20x P/E for fast-growing battery foil).",
+        "quantification_status": "partially_quantified",
+        "evidence_ids": [
+          "KPE04",
+          "EV029"
+        ],
+        "missing_inputs": [
+          "current foil capacity, utilization, and actual processing fees"
+        ]
+      }
+    ],
+    "moat_evidence_tests": [
+      {
+        "moat_mechanism": "Low-cost aluminum production via integrated coal/power in Xinjiang",
+        "observable_test": "Compare the company's reported aluminum segment gross margin vs peers (焦作万方, 天山铝业) over 2023-2025; if consistently 5pp+ above, cost advantage is confirmed.",
+        "comparison_basis": "Peers' gross margins from filings",
+        "evidence_result": "partial: Q1 2026 consolidated gross margin 33.48% vs peers 焦作万方 36.44%, 天山铝业 35.61% per peer comparison, showing the company is competitive but not clearly leading.",
+        "financial_transmission": "Sustainable higher gross margin → higher through-cycle ROIC → supports premium P/B and P/E multiple relative to peers.",
+        "strongest_counterevidence": "Peer comparison shows gross margins of 焦作万方 and 天山铝业 are comparable or slightly higher; also, Yunnan hydro reliance introduces cost volatility that peers may not face.",
+        "status": "partial",
+        "evidence_ids": [
+          "EV013",
+          "EV022"
+        ],
+        "next_verification": "Obtain segment-level cost data from 2025 annual report; compute aluminum cash cost per ton."
+      },
+      {
+        "moat_mechanism": "Battery aluminum foil technology leadership",
+        "observable_test": "Track whether the company's 7μm/8μm battery foil is qualified by top-tier battery makers (CATL, BYD) and whether volume and processing fees outpace industry average.",
+        "comparison_basis": "Industry processing fee index and competitor qualification announcements.",
+        "evidence_result": "missing: no evidence of customer qualification or premium pricing.",
+        "financial_transmission": "If proven, aluminum foil can be valued as a high-growth business with higher multiple, and it would diversify earnings away from pure commodity cycles.",
+        "strongest_counterevidence": "Many competitors are also expanding battery foil capacity; processing fees may decline rapidly as supply increases.",
+        "status": "unproven",
+        "evidence_ids": [
+          "KPE04",
+          "EV029"
+        ],
+        "next_verification": "Search for battery foil customer announcements, trade journal reports, and ask management in next interaction."
+      }
+    ],
+    "valuation_buckets": [
+      {
+        "bucket": "Core aluminum and coal operations",
+        "inclusion": "core",
+        "valuation_method": "P/E on 2027E normalized earnings",
+        "metric_and_period": "2027E parent net profit",
+        "metric_value": 4100.0,
+        "valuation_multiple": 9.0,
+        "ownership_pct": 100.0,
+        "haircut_pct": 0.0,
+        "equity_value_cny_mn": 36900.0,
+        "per_share_value_cny": 16.407260037555844,
+        "overlap_key": "consolidated_earnings",
+        "double_counting_treatment": "This bucket captures total consolidated earnings; aluminum foil optionality is excluded by using base-case earnings that do not include substantial foil profit.",
+        "evidence_ids": [
+          "EV011",
+          "EV038"
+        ],
+        "missing_inputs": [
+          "share count for per-share"
+        ]
+      },
+      {
+        "bucket": "Battery aluminum foil optionality",
+        "inclusion": "optionality",
+        "valuation_method": "DCF of incremental profit or real options",
+        "metric_and_period": "potential 2028 foil operating profit",
+        "metric_value": null,
+        "valuation_multiple": null,
+        "ownership_pct": 100.0,
+        "haircut_pct": 50.0,
+        "equity_value_cny_mn": 3000.0,
+        "per_share_value_cny": 1.3339235802890932,
+        "overlap_key": "aluminum_foil_new_profit",
+        "double_counting_treatment": "Excluded from core earnings; added only if evidence of sustainable, above-market processing margins materializes. The 50% haircut reflects probability of success.",
+        "evidence_ids": [
+          "KPE04"
+        ],
+        "missing_inputs": [
+          "foil volume, margin, capex"
+        ]
+      },
+      {
+        "bucket": "Excess cash and non-core assets",
+        "inclusion": "excluded",
+        "valuation_method": "Book value or market value",
+        "metric_and_period": "",
+        "metric_value": null,
+        "valuation_multiple": null,
+        "ownership_pct": null,
+        "haircut_pct": null,
+        "equity_value_cny_mn": null,
+        "per_share_value_cny": null,
+        "overlap_key": "",
+        "double_counting_treatment": "Not separately valued; net cash/debt already reflected in enterprise value via P/E and EV/EBITDA methods.",
+        "evidence_ids": [],
+        "missing_inputs": [
+          "net debt position"
+        ]
+      }
+    ],
+    "valuation_closure": {
+      "current_price_cny": null,
+      "diluted_share_count_mn": 2249.004399,
+      "core_value_per_share_cny": null,
+      "probability_weighted_fair_value_per_share_cny": 17.07422182770039,
+      "option_value_per_share_cny": null,
+      "other_adjustments_per_share_cny": null,
+      "fair_value_per_share_cny": 17.07422182770039,
+      "expected_return_pct": null,
+      "formula": "fair_value = sum(probability_weighted scenario fair values) + optionality. Per-share conversion requires share count.",
+      "rating_consistency_check": "Not applicable; rating-free package. If per-share values are calculated, ensure they are consistent with probability-weighted parent profit and share count.",
+      "double_counting_checks": [
+        "Core bucket uses total consolidated earnings; optionality bucket added only if foil profits are excluded from core earnings. Under current base case foil profit is negligible, so no double counting.",
+        "All scenarios apply P/E to parent net profit, consistent across buckets."
+      ],
+      "status": "not_valued",
+      "missing_inputs": [
+        "diluted share count",
+        "current share price"
+      ]
+    },
+    "llm_analysis_layer": {
+      "business_question_tree": [
+        "1. Coal segment: Is the realized coking coal price in H1 2026 above or below 1,275 RMB/ton, and what is the volume trend?",
+        "2. Aluminum segment: What was the actual Q1 2026 aluminum sales volume and unit electricity cost? Can the 33.5% gross margin be sustained if aluminum price stays at 23,000?",
+        "3. Aluminum foil: What customers have qualified the company's 8μm battery foil, and what processing fee is being realized?",
+        "4. Conflict resolution: Is the H1 2026 performance preview reliable, or does the preview contain an error in unit or classification?",
+        "5. Capital allocation: With strong cash flow, will the company increase dividends or buy back shares? The recent 5%+ shareholder reduction raises concerns."
+      ],
+      "profit_pool_priority": "Aluminum segment contributes ~70% of revenue and likely >80% of gross profit given the recent margin surge. Therefore, aluminum price and power cost are the most influential variables. Coal is a secondary profit pool but declining. Aluminum foil is a potential third pool that could become meaningful by 2028 if battery demand materializes, but currently it is small and should be treated as optionality rather than core.",
+      "competition_and_substitution_analysis": "True peers are 云铝股份 (000807), 焦作万方 (000612), 中孚实业 (600595), 天山铝业 (002532), 明泰铝业 (601677). Among them, 云铝股份 and 焦作万方 have similar aluminum-focused business with higher roe and lower leverage. Shenhuo's coal segment differentiates it but also adds commodity cycle correlation. Substitution risk: aluminum in construction faces competition from steel, plastics, and composites; in power, copper is an alternative for some applications but not all. Battery foil competes with rolled copper foil in some battery types. No evidence of disruptive technology threatening aluminum demand in the near term. The main competitive differentiator is location: Shenhuo's Xinjiang base has low-cost self-generated power, which may not be easily replicated by peers with different asset footprints.",
+      "qualitative_to_quantitative_bridge": "The qualitative view is that Shenhuo's aluminum smelting enjoys a structural cost advantage, leading to above-average margins through the cycle. Without segment-level cost data, this cannot be quantified precisely. Currently, we have only Q1 2026 consolidated gross margin of 33.48% and peer margins around 35-36%. This suggests the advantage may be real but not unique. To quantify, we need: (1) aluminum output in 2025 and 2026, (2) electricity consumption and tariff per ton for each smelter, (3) alumina purchase cost. Once obtained, we can build a unit margin bridge. The H1 profit preview of 19.0 billion (on 1,904 mn) may include non-recurring items; separating those will reveal true operating earnings.",
+      "expectation_gap_analysis": "The market values Shenhuo at 9.8x TTM PE (69.9 percentile over 5 years) and 1.25x PS (79.7 percentile), which suggests the market already prices in some recovery but is cautious due to commodity uncertainty. Implied TTM earnings of CNY 5.59 bn are above the latest annual figure of CNY 4.01 bn, implying the market expects >39% earnings growth. If the company only delivers CNY 4.0 bn in 2026 (base case), it would fall short of TTM expectations, potentially causing de-rating. If however, Q2 weakness is temporary and underlying earnings can reach CNY 5-6 bn, the stock may be undervalued. The gap is mainly about the trajectory of aluminum margins and resolution of the H1 profit conflict.",
+      "red_team_counterarguments": [
+        "Bear thesis: The H1 performance preview indicates a dramatic Q2 loss; if Q1 was boosted by one-off items or unsustainable pricing, full-year profit could be as low as CNY 2 bn, putting the stock at 27.5x FY2026E PE, which is expensive. Aluminum prices may have peaked, and the energy-intensive industry faces carbon costs and potential demand destruction from China's property downturn. Moreover, the shareholder selling suggests insider caution. Falsification signal: If H1 2026 report confirms Q2 operating loss and no non-recurring explanations, base case must be cut.",
+        "Bull counter to bear: Even if Q2 was weak, aluminum supply remains constrained and demand from EVs and power grid investment is structurally growing. The company's low-cost position in Xinjiang provides a floor. The H1 preview could be distorted by a large impairment or investment loss that is non-cash. Once investors understand this, the stock could re-rate upward. Falsification signal: If H2 2026 operating trends improve and the company reports quarterly profit of >CNY 1 bn in Q3, re-evaluate bull case."
+      ],
+      "valuation_explanation": "Under base case, we apply a 9x P/E multiple to 2027E net profit of CNY 4.1 bn, derived from moderate aluminum prices and limited foil contribution. 9x is consistent with the current commodity P/E for Chinese aluminum producers (range 8-10x) and reflects through-cycle earnings. Bull case uses 12x on higher earnings reflecting a premium for growth and cost advantage; bear case uses 8x. The core equity value is CNY 36.9 bn plus optionality of CNY 3.0 bn for aluminum foil, but probability-weighted fair value cannot be calculated without share count. The model is anchored on aluminum price: each CNY 1,000/t change shifts fair value by approximately 15-20%. The valuation is highly sensitive to the aluminum price assumption, and the current uncertainty around Q2 performance adds risk premium that the market may be assigning.",
+      "final_editorial_synthesis": "Shenhuo is a classic commodity play where the investment case turns on one question: are the recent stellar margins sustainable, or was Q1 a fluke? The Q1 numbers, if annualized, would make the stock look very cheap, but the H1 preview casts serious doubt. A portfolio manager should focus on: (1) The 2026 semi-annual report on July 28 will either confirm the profit cliff or reveal accounting noise. (2) Even if aluminum prices soften, the company's Xinjiang cost advantage should prevent a return to loss-making territory. (3) The aluminum foil business is a free call option on battery demand, but it needs tangible proof of scale and margin before adding to valuation. Position sizing should reflect the binary nature of the upcoming data. Avoid anchoring to a single scenario; the base case of flat earnings retains downside if aluminum weakens further.",
+      "evidence_boundaries": [
+        "Numeric forecast lines are built from reported Q1 2026 revenue and margin, FY2025 annual figures, and H1 2026 performance preview.",
+        "Aluminum and coal futures prices from Tushare are proxy, not company realized prices.",
+        "Segment-level margin and production data are missing; consolidated assumptions used.",
+        "Peer comparisons support margin discussions but are not used to directly forecast company earnings."
+      ]
+    },
+    "handoff_manifest": {
+      "handoff_version": "underwriting-v2",
+      "source_of_truth": "structured_research.underwriting_packet",
+      "frozen_reported_facts": [
+        "FY2025 consolidated revenue: CNY 41,240,761,541.38",
+        "FY2025 parent net profit: CNY 4,005,359,185.05",
+        "Q1 2026 revenue: CNY 12,408,562,541.64",
+        "Q1 2026 parent net profit: CNY 2,289,691,883.17",
+        "Q1 2026 gross margin: 33.48%",
+        "Q1 2026 operating margin: 29.18%",
+        "Q1 2026 OCF/net profit: 1.764x",
+        "H1 2026 performance preview parent net profit: CNY 1,904,456,800 (190,445.68 万元)",
+        "H1 2026 performance preview deducting non-recurring profit: CNY 2,010,069,200",
+        "Coal capacity: 7.95 Mt/year",
+        "Coal equity capacity: 3.0 Mt/year (Zhaojiazhai mine)",
+        "Aluminum foil pricing: aluminum price + processing fee",
+        "SHFE aluminum close 23,160/t on 2026-07-21",
+        "DCE coking coal close 1,275/t on 2026-07-21",
+        "Market cap: CNY 55,010,647,624",
+        "PE TTM: 9.8466",
+        "PB: 2.0454",
+        "PS TTM: 1.2497"
+      ],
+      "analyst_estimates": [
+        "2026E consolidated revenue: CNY 51,000 mn",
+        "2027E consolidated revenue: CNY 52,500 mn",
+        "2028E consolidated revenue: CNY 54,000 mn",
+        "2026E gross margin: 20%",
+        "2027E gross margin: 19%",
+        "2028E gross margin: 18.5%",
+        "2026E-2028E parent net profit: CNY 4,000-4,200 mn",
+        "OCF and capex assumptions",
+        "Aluminum foil optionality value of CNY 3,000 mn",
+        "Base P/E multiple: 9x; Bull: 12x; Bear: 8x"
+      ],
+      "unresolved_model_cells": [
+        "Diluted share count",
+        "EPS for all periods",
+        "Current share price",
+        "Per-share fair values",
+        "Segment gross margins and production volumes",
+        "Aluminum foil revenue and profitability",
+        "Detailed unit cost and electricity tariffs"
+      ],
+      "downstream_must_preserve": [
+        "Full three-year forecast lines (revenue through FCF)",
+        "Business unit map with coal, aluminum, aluminum foil, other",
+        "All four underwriting questions and their linkage to model variables",
+        "Three scenarios with probability weights and operating assumptions",
+        "Three thesis financial bridges (TB1-TB3)",
+        "Moat evidence tests for aluminum cost advantage and foil technology",
+        "Valuation buckets with core, optionality, and excluded assets",
+        "llm_analysis_layer insights",
+        "Handoff manifest contrast between frozen facts and estimates"
+      ]
+    },
+    "evidence_change_rules": [
+      {
+        "evidence_id": "KPE01",
+        "affected_segment": "aluminum",
+        "affected_variable": "asp_or_price",
+        "old_assumption": "No specific aluminum price uplift",
+        "new_assumption": "unchanged",
+        "financial_transmission": "None without verified price impact and company volume data.",
+        "probability_before_after": "unchanged",
+        "disposition": "watch",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+      },
+      {
+        "evidence_id": "KPE02",
+        "affected_segment": "consolidated",
+        "affected_variable": "profit_or_eps",
+        "old_assumption": "missing",
+        "new_assumption": "unchanged",
+        "financial_transmission": "None until specific profit numbers from private channel are verified.",
+        "probability_before_after": "unchanged",
+        "disposition": "watch",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+      },
+      {
+        "evidence_id": "KPE04",
+        "affected_segment": "coal",
+        "affected_variable": "asp_or_price",
+        "old_assumption": "missing",
+        "new_assumption": "unchanged",
+        "financial_transmission": "None, as the information is about thermal coal price, while company mainly produces coking coal.",
+        "probability_before_after": "unchanged",
+        "disposition": "watch",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+      },
+      {
+        "evidence_id": "KPE05",
+        "affected_segment": "consolidated",
+        "affected_variable": "asp_or_price",
+        "old_assumption": "missing",
+        "new_assumption": "unchanged",
+        "financial_transmission": "None without quantified assumptions.",
+        "probability_before_after": "unchanged",
+        "disposition": "watch",
+        "verification_gate": "产品报价、毛利率、竞品价格、下游接受度、行业价格指数"
+      },
+      {
+        "evidence_id": "KPE03",
+        "affected_segment": "consolidated/unmapped",
+        "affected_variable": "segment_volume",
+        "old_assumption": "None",
+        "new_assumption": "unchanged",
+        "financial_transmission": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "probability_before_after": "unchanged/not assigned",
+        "disposition": "watch_unchanged",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+      }
+    ],
+    "reconciliation_checks": [
+      "Q1 2026 net profit (2,289.7 mn) vs H1 2026 performance preview (1,904.5 mn): conflict flagged. Q2 implied loss ~385 mn. Resolution required from semi-annual report.",
+      "Receivables/revenue ratio of 3.02% in Q1 2026 and inventory/revenue of 7.75% are computed on annualized revenue, validated.",
+      "Peer comparison gross margins: 焦作万方 36.44% vs Shenhuo 33.48% in Q1 2026, suggests competitive position but not a clear moat.",
+      "Market cap ($55,010 mn) divided by PE TTM (9.8466) gives TTM earnings of 5,586.8 mn, which is higher than FY2025 earnings of 4,005.4 mn, indicating market expects earnings growth."
+    ],
+    "analyst_instructions": [
+      "Treat this packet as the shared underwriting model; every downstream change must be documented with evidence id, old/new assumption, and recalculated EPS/FCF/value impact.",
+      "Before using this packet, resolve the H1 2026 profit conflict by obtaining the semi-annual report post July 28.",
+      "Obtain diluted share count from Bloomberg, Wind, or directly from the company's latest filing to enable EPS and per-share valuation.",
+      "Request a segment-level operating model from the research team that splits aluminum and coal with volume, price, cost, and margin for 2025-2026.",
+      "Validate the aluminum foil thesis by gathering customer qualification announcements and processing fee benchmarks.",
+      "Do not use the Q1 33.5% gross margin as a baseline for the full year without evidence of Q2-Q4 sustainability."
+    ],
+    "preprocessing_notes": [
+      "Performance preview net profit numbers (190,445.68 and 201,006.92) are in 万元; converted to CNY 1,904,456,800 and 2,010,069,200 respectively.",
+      "Q1 2026 simple-run-rate net profit (9,158.8 mn) is unsustainably high relative to H1 preview; seasonal adjustment (8,969.3 mn) also conflicts.",
+      "Segment revenue for 2025 H1 used as weight; H1 2025 total revenue 20,428.5 mn vs FY2025 41,240.8 mn, suggesting H2 slightly larger but roughly 50/50.",
+      "Aluminum foil pricing model (aluminum price + processing fee) is a hard fact; no evidence yet on processing fee level.",
+      "diluted shares set deterministically: 2249.004 mn (registered_capital)",
+      "bull fair value replaced by deterministic EPS x PE calculation.",
+      "base fair value replaced by deterministic EPS x PE calculation.",
+      "bear fair value replaced by deterministic EPS x PE calculation.",
+      "operating model driver coverage (commodity_volume_price_cost): reserves/capacity, output, realized price, margin/FCF"
+    ]
+  }
+}

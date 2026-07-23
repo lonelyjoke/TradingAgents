@@ -15,6 +15,7 @@ import requests
 from dateutil.relativedelta import relativedelta
 
 from .industry_classifier import is_banking_entity
+from .official_guidance import official_guidance_record, parse_official_guidance_metrics
 from .tushare_a_stock import (
     TushareDataError,
     _fetch_daily,
@@ -730,11 +731,13 @@ def _earnings_guidance_section(announcements: pd.DataFrame) -> str:
         url = str(row.get("url") or "").strip()
         source_note = str(row.get("source_note") or "").strip()
         text = _download_announcement_text(url)
+        parsed_record = official_guidance_record(parse_official_guidance_metrics(text))
         lines.extend(
             [
                 f"#### {ann_date} {title}",
                 f"- Source: {url or 'missing URL'}",
                 *([f"- Retrieval note: {source_note}"] if source_note else []),
+                *([f"- {parsed_record}"] if parsed_record else []),
                 _guidance_excerpt(text),
                 "",
             ]
