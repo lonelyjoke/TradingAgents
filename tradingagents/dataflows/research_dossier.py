@@ -280,7 +280,7 @@ def build_reader_research_dossier(
         "reader_contract": {
             "audience": "普通投资者",
             "principle": "数据用于权威佐证，不能替代公司、产业链与投资逻辑。",
-            "formal_rating_position": "第七章末尾",
+            "formal_rating_position": "开篇投资摘要，并在第七章末尾重申",
             "chapter_count": 7,
         },
         "source_policy": SOURCE_POLICY,
@@ -414,7 +414,7 @@ def render_reader_research_dossier(dossier: Mapping[str, Any]) -> str:
         "",
         f"- 截止日期：{dossier.get('as_of_date', '')}",
         "- 写作原则：数据用于权威佐证，不能替代公司、产业链与投资逻辑。",
-        "- 正式评级位置：第七章末尾。",
+        "- 正式评级位置：开篇投资摘要，并在第七章末尾重申。",
         "",
         "## 公司与商业模式",
         "",

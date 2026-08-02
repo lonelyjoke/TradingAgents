@@ -1,0 +1,539 @@
+# Research Manager Accepted Underwriting Model
+
+**Rating**: Hold
+
+**Research Readiness**: partial
+
+**Core Bet**: The future variable is whether consistent bottom profit can rise from the ~3.3bn level to 4.0-5.0bn, driven by product spread recovery, Jingzhou ramp, and the Dezhou upgrade. The Q1 2026 margin improvement gives the thesis direction but not proof; the market already prices a material recovery, and the technical structure is weak.
+
+### 本报告要回答的关键问题
+
+1. What are the actual 2025 segment revenue, volume and gross profit for the non-fertilizer product lines (new energy/new materials, organic amines, acetic acid & derivatives)?
+2. What is the expected 2026-2028 capex split (growth vs. maintenance) and will FCF cover it?
+3. What is the realized coal cost structure and the sensitivity of margins to thermal/anthracite coal price changes?
+4. What is the trajectory of caprolactam and adipic acid spreads, and how do Jingzhou new capacities affect volume mix by 2028?
+
+### 核心问题裁决
+
+**Q1：What are the actual 2025 segment revenue, volume and gross profit for the non-fertilizer product lines?**
+- **为何关键：** Without segment-level detail, the profit pool composition and growth trajectory cannot be validated, directly impacting EPS sensitivity by segment.
+- **当前结论：** Partially resolved. The 2025 annual report contains the detailed product revenue/cost table, but only the fertilizer segment (revenue CNY 7.31bn, gross margin 32.30%) was extracted in the supplied evidence. Q1 2026 consolidated gross margin expanded 5.93pp YoY, indirectly suggesting non-fertilizer improvement, but this inference is weak without segment data.
+- **采用证据：** EV026: Fertilizer segment FY2025 revenue CNY 7.31bn, cost CNY 4.95bn, gross margin 32.30%.；EV012: Q1 2026 consolidated gross margin 22.28%, +5.93pp YoY; operating margin +4.65pp YoY.
+- **最强反证：** Q1 margin improvement could be solely driven by the stable fertilizer base; the other 76% of revenue may have flat margins, limiting the bull thesis to a narrow segment.
+- **模型/估值影响：** Segment revenue mix and gross margin assumptions remain estimated in the base model. 2026E consolidated gross margin kept at 23.5% (base) rather than the bull's proposed 24.0%.
+- **置信度与下次验证：** low；2026 interim report (due by end-August 2026) – extract the full '分产品' revenue/cost table from the notes.
+
+**Q2：What is the expected 2026-2028 capex split and will FCF cover it?**
+- **为何关键：** High growth capex depresses FCF and could force debt or equity financing, directly impacting cash-based valuation and dilution risk.
+- **当前结论：** Unresolved. Q1 2026 OCF was strong at CNY 1.11bn (+58.27% YoY), but capex is not separately disclosed in the evidence. The company and its partner injected CNY 2bn into the Jingzhou subsidiary, signaling ongoing investment. No capex guidance or formal budget has been made available.
+- **采用证据：** EV012: Q1 2026 OCF CNY 1.11bn, +58.27% YoY.；EV040: Jingzhou subsidiary received CNY 2bn equity injection from parent entities.；KPE01: Unverified mention of Dezhou upgrade and Jingzhou project pipeline.
+- **最强反证：** Record-high capex in 2025 may exceed operating cash flow on a full-year basis; FCF could be negative if the recovery is delayed. The bull conceded this is unresolved.
+- **模型/估值影响：** Capex assumptions kept unchanged from the underwriting packet (base: CNY 3.2/2.9/2.5bn for 2026-2028E). No adjustment made.
+- **置信度与下次验证：** low；2026 interim report – review '在建工程' (construction in progress) details and cash flow statement capex line.
+
+**Q3：What is the realized coal cost structure and sensitivity to coal price changes?**
+- **为何关键：** Coal is the primary feedstock; every CNY 100/t move can swing gross profit by hundreds of millions, critically affecting EPS and scenario probabilities.
+- **当前结论：** Unresolved. There is no public coal grade, sourcing mix, or unit consumption data. Q1 2026 gross margin improvement and OCF strength suggest cost pressure is easing, but the absence of a coal-product spread bridge prevents quantitative EPS sensitivity analysis.
+- **采用证据：** EV012: Q1 2026 gross margin 22.28% (+5.93pp YoY) and OCF +58.27%.；EV041: No coal procurement price or technical coefficient is available.
+- **最强反证：** If coal prices rebound sharply due to domestic industrial recovery, the margin improvement seen in Q1 2026 could reverse, particularly in the higher-cost non-fertilizer products.
+- **模型/估值影响：** Gross margin assumptions remain top-down and estimated. No quantitative coal sensitivity is built into the model.
+- **置信度与下次验证：** low；Obtain provincial anthracite/thermal coal price indices for Shandong/Hubei; check annual/interim report management discussion for any commentary on coal cost trends.
+
+**Q4：What is the trajectory of caprolactam and adipic acid spreads and how do Jingzhou capacities affect volume mix?**
+- **为何关键：** These products are the main growth and profit swing factors; their margins drive the bull/bear case and the ultimate valuation.
+- **当前结论：** Directionally supportive but unquantified. Unverified private channel checks (KPE02, KPE03) indicate weekly price gains for caprolactam and adipic acid in late July 2026. However, absolute spread levels and the company's cost position remain unknown. The 2025 annual report acknowledged structural overcapacity, tempering the bullish read.
+- **采用证据：** KPE02: Channel check notes WoW caprolactam +4.6%, adipic acid +4.4%, DMC +3.4%, methanol +5.3%.；KPE03: Industry weekly data suggesting chemical price bottoming.；2025 Annual Report text: Acknowledged 'structural overcapacity' and price pressure.
+- **最强反证：** Single-week price data cannot be extrapolated into a trend; absolute price levels are not disclosed. Industry overcapacity remains a headwind, as the company's own annual report confirms.
+- **模型/估值影响：** No product-level volume/price/margin model has been built. The consolidated growth and margin assumptions remain estimated. Jingzhou revenue contribution kept as a scenario upside, not base case.
+- **置信度与下次验证：** low；Track weekly public product prices for caprolactam, adipic acid, DMC, methanol; monitor for Jingzhou TDI/oxalic acid commissioning announcements.
+
+## Forecast Takeaways
+
+### 预测结论
+
+**1. Revenue growth in 2026E is primarily volume-driven from new capacity, but the revenue per unit (ASP) assumption is fragile.**
+- 证据锚：FY2025 consolidated revenue of CNY 30.97bn (EV011); Q1 2026 revenue run-rate is ~CNY 33.4bn. The model assumes 10% growth to CNY 34.07bn in 2026E.
+- 财务含义：If ASPs for caprolactam/nylon chain do not recover by H2 2026, the 10% growth assumption could be 3-5pp too high, reducing 2026E EPS by ~CNY 0.10-0.15.
+- 置信度与风险：Medium confidence in volume; low confidence in ASP. Key risk is persistent overcapacity in chemicals keeping prices low.
+
+**2. Operating cash flow generation is improving, but heavy capex will keep FCF limited through 2027E.**
+- 证据锚：Q1 2026 OCF of CNY 1.11bn, +58% YoY (EV012). Unverified capex guidance implies ~CNY 3.2bn in 2026E.
+- 财务含义：Even with improved OCF, FCF is likely breakeven at best until Jingzhou projects complete and generate returns. Dilution risk, while not imminent, is a tail risk if capex overruns.
+- 置信度与风险：Low confidence in capex numbers; high confidence that FCF will be constrained. Risk is an equity raise if debt rises too fast.
+
+## Forecast Assumption Registry
+
+### 核心假设与敏感性
+
+- **Consolidated Revenue Growth - 2026E｜All segments；primarily driven by new ene…：** 基准情景为+10% to CNY 34,066 mn (top-down assumption)；历史锚为FY2025: CNY 30,968.88 mn；Q1 2026 annualized: ~CNY 33,374 mn。
+  - **上下行情景：** 悲观为+5% if demand weakens and overcapacity caps volume growth and prices；乐观为+12% if product prices recover strongly and Jingzhou TDI/oxalic acid ramp f…。
+  - **敏感性与验证：** ±1pp growth = ±CNY 310 mn revenue = ±~CNY 30-40 mn net profit (at 10-13% net margin) = ±~C…；置信度medium，下一步关注2026 H1 revenue in interim report (August 2026)。
+- **Consolidated Gross Margin - 2026E｜All segments；margin compression risk hig…：** 基准情景为23.5% reflecting gradual spread recovery and cost absorption from higher utilization；历史锚为FY2025: 22.28%；Q1 2026: 22.28% (identical to full-year 2025, but +5.93pp YoY over a weak Q…。
+  - **上下行情景：** 悲观为21.0% if coal costs rise and product prices weaken again to 2025 trough lev…；乐观为25.0% if caprolactam-adipic acid spreads return to mid-cycle levels and ure…。
+  - **敏感性与验证：** ±1pp GM = ±CNY 341 mn gross profit = ±~CNY 30-45 mn net profit (effective tax rate ~15%) =…；置信度low，下一步关注2026 H1 gross margin in interim report (August 2026)。
+- **Capex - 2026E｜All segments；primarily Jingzhou new mate…：** 基准情景为CNY 3,200 mn (analyst estimate from underwriting packet)；历史锚为Not disclosed in evidence；Q1 2026 balance sheet shows net fixed assets ~CNY 33 bn。
+  - **上下行情景：** 悲观为CNY 3,600 mn if cost overruns and accelerated build-out；乐观为CNY 2,800 mn if projects execute under budget and some maintenance capex de…。
+  - **敏感性与验证：** ±CNY 400 mn capex = ±CNY 400 mn FCF swing, with limited near-term EPS impact but significa…；置信度low，下一步关注2026 interim report cash flow statement and '在建工程' note (August 2026)。
+- **Bull Scenario Probability｜Consolidated；probability of the 'strong…：** 基准情景为30% probability for bull case (unchanged from underwriting packet)；历史锚为Probability weights are subjective；the underwriting packet set 30/50/20 for bull/base/bear。
+  - **上下行情景：** 悲观为20% if interim report disappoints, product spreads weaken, and coal costs r…；乐观为40% if mid-August interim report confirms >CNY 2bn H1 net profit and gross…。
+  - **敏感性与验证：** ±10pp bull probability = ±~CNY 1.3-2.6 per share in probability-weighted fair value (at 14…；置信度low，下一步关注2026 interim report (August 2026)；Jingzhou TDI commissioning announcement。
+
+## Ranked Core Theses
+
+### 论点1：Earnings are improving from a trough, but the recovery is already partially priced in at current levels.
+
+- **关键问题：** Can bottom profit rise from ~3.3bn to 4.0-5.0bn, and does the market price this?
+- **核心证据：** Q1 2026 net profit of CNY 1,117 mn annualizes to ~4.47bn; gross margin +5.93pp YoY; OCF +58% YoY. Market implied TTM earnings are CNY 3.73bn, above FY2025's 3.32bn but below the Q1 run-rate. PE TTM of 15.9x is at the 73rd percentile of the 5-year range, while PB is at the 26th percentile and PS at the 32nd. This suggests the market rewards a mild recovery but not a full bull case.
+- **最强反证：** The stock is technically weak, underperforming the broad market and peers by -26% to -31% over 60/120 days, with a failed rebound from recent lows. The market is not confirming the fundamental improvement with price action.
+- **财务传导：** If 2026E net profit delivers CNY 3.7-4.0bn, the current price implies a forward PE of 13.2-14.8x, which is fair to slightly rich for a coal-chemical company with unresolved capex risk. To justify the current price under a 12.5x base multiple, net profit must reach ~CNY 4.7bn.
+- **市场定价：** The market has moved from pricing a trough recovery to pricing a moderate upcycle. The easy money has been made; further re-rating requires H1 2026 confirmation of sustained margin expansion and visible Jingzhou capex returns.
+- **证伪条件：** If 2026 H1 consolidated gross margin falls below 22% or net profit is below CNY 2.0bn, the recovery thesis is invalidated and fair value drops to ~CNY 16-18 (12.5x on ~CNY 3.3bn profit).
+- **当前裁决：** partial
+
+### 论点2：The company has a genuine cost moat and platform optionality, but it is not enough to drive deep undervaluation.
+
+- **关键问题：** Does the company's cost leadership and policy-protected growth runway justify a premium multiple?
+- **核心证据：** HLS consistently reports 2-5pp higher gross margin than coal-chemical peers. New coal-chemical capacity approvals are effectively frozen by dual-carbon policy, giving HLS a unique growth runway through its existing Jingzhou permits. The integrated coal gasification platform allows flexible product mix optimization (hydrogen, syngas, methanol, ammonia) to maximize margins.
+- **最强反证：** The current PE of 15.9x is already above the peer median, reflecting the market's recognition of this moat. The PB of 1.6x, while at a low percentile, is still a premium to liquidation value and would compress if ROE fails to recover above 10-12%.
+- **财务传导：** The moat supports above-average margins through cycles but does not guarantee a rapid return to mid-cycle profitability. The market already awards a premium multiple relative to peers, limiting upside from a pure moat argument.
+- **市场定价：** The PE premium (15.9x vs peer median ~12x for commodity chemicals) indicates the market already 'pays up' for HLS's quality. Further multiple expansion is unlikely without a step-change in earnings power, which depends on Jingzhou execution.
+- **证伪条件：** If a new cohort of coal-chemical projects gains approval (policy U-turn) or if a competitor achieves comparable cost parity, the multiple premium would compress. Track NDRC approval announcements.
+- **当前裁决：** partial
+
+## Company Disaggregation
+
+**华鲁恒升（600426.SH）经济业务单元拆解**
+
+基于年报分产品披露框架，公司将业务披露为：**化肥、新能源新材料、有机胺、醋酸及衍生品** 四大类。以下为根据证据拆解的经济业务单元：
+
+**1. 化肥产品（核心价值 / 成熟业务）**
+- **规模与利润**：2025年收入 73.06 亿元，占总收入 23.6%；毛利率 32.30%，是公司稳定的利润与现金流基石。
+- **经济特征**：产能出货型（volume × ASP × cost），国内尿素与复合肥市场，成本领先，竞争格局稳定。
+- **增长驱动**：受制于碳政策，行业无新增产能，未来利润增长主要来自出口政策窗口和成本优化。
+- **估值参考**：可视为稳定现金牛业务，宜用 PE 或 EV/EBITDA 估值，假设周期底部利润约 10-12 亿元（历史中枢附近）。
+
+**2. 新能源新材料相关产品（核心价值 / 成长业务）**
+- **规模与利润**：推断为最大收入来源（占收入 > 40%），但因年报分产品数据缺失，无法获取准确收入与毛利率。覆盖己内酰胺、己二酸、尼龙6、BDO、NMP等，荆州基地未来将集中于此。
+- **经济特征**：产能出货 + 项目交付型。产品价差（己内酰胺-纯苯-氢气、己二酸-纯苯）是利润核心驱动。公司具备煤气化一体化成本优势，但行业产能过剩导致价差波动大。
+- **增长驱动**：荆州30万吨TDI、20万吨草酸及储备项目，是2027-2028年主要增量来源。己内酰胺和己二酸价差修复是2026年盈利弹性的关键。
+- **估值参考**：由于利润强周期性和高资本开支，宜分离为“成熟产能估值”（周期PE）加“新建项目SOTP”（按ROIC/折现估值）。当前模型未拆分，统一以合并市盈率估值，精确度不足。
+- **关键未知**：2025年分产品收入、成本、毛利率，开工率，己内酰胺/己二酸实现价差。
+
+**3. 有机胺（核心价值 / 利基高毛利业务）**
+- **规模与利润**：推断为小型利基市场，DMF/甲胺等产品，定价权较强，但本次证据完全缺失。
+- **经济特征**：产能出货型。高附加值，受下游医药、农药、电子化学品需求驱动。
+- **估值参考**：可视为利润增强项，不宜单独高估值，与醋酸及衍生品一起作为“其他高毛利化学品”组合估值。
+
+**4. 醋酸及衍生品（核心价值 / 强周期业务）**
+- **规模与利润**：推断为重要周期摆动项，价格与PTA、EVA等下游高度相关，本次证据缺失。
+- **经济特征**：产能出货型。醋酸-甲醇价差是利润核心，景气和产能周期主导。
+- **估值参考**：高Beta业务，周期PE需给予大幅折扣。当前模型隐含了温和修复假设。
+
+**经济单元重要性排序**：
+1. 新能源新材料（规模最大、弹性最大、资本开支最大——决定估值中枢）
+2. 化肥（稳定利润与现金流——决定底部价值）
+3. 醋酸及衍生品（周期摆动——影响EPS波动）
+4. 有机胺（利基增强——利润安全垫）
+
+**整合争议与缺陷**：
+- 多头将“底部利润从33亿抬升至40-50亿”视为核心押注，但未能提供非化肥板块的分产品数据来支撑这一论断。其模型修改（40亿净利润、24%毛利率、40%牛市概率）所用证据KPE01/02/03/04在Knowledge Planet账本中均被标记为“unchanged/watch”，未通过样本交叉验证门禁。
+- 空头指出，若接受多头所有乐观假设（40亿利润、14倍PE），公允价值也仅20.36元，低于当前21.55元。
+- 作为研究主持人，我的裁决是：多头方向合理，但其**模型输入证据不达标**；当前模型的低估程度不足以支撑Overweight/Buy，而熊市证据（技术破位、弱预期差）也不足以构成Underweight/Sell。因此维持**Hold / Positive Watch**，等待8月中报对关键问题（UQ1、UQ2、UQ4）的解密。
+
+## Autonomous Three-Year Forecast Model
+
+**华鲁恒升（600426.SH）独立三年预测模型（自主构建，非复制一致预期）**
+
+**模型框架**：产能出货型（volume × ASP × gross margin → operating profit → net profit → FCF）。由于核心产品（新能源新材料）缺乏量、价、产能利用率数据，本模型为**混合/自上而下**构建，以合并报表财务指标为基础外推，未建立自下而上的产品级模型。
+
+---
+
+### 核心营运假设与驱动变量
+
+**1. 合并营业收入**
+- **2025A**：30,968.88 百万元（EV011）
+- **2026E**：+10% 至 34,066 百万元。驱动：己内酰胺、己二酸新产能爬坡，产品价格小幅回升（Q1 2026年化约33,400百万，隐含下半年放量）。
+- **2027E**：+8% 至 36,791 百万元。驱动：荆州TDI、草酸项目投产开始贡献营收。
+- **2028E**：+7% 至 39,326 百万元。驱动：荆州在握的3-4个储备项目部分投产。
+- **置信度**：低。缺少分产品量价预测，增长率依赖宏观与行业经验假设。
+
+**2. 合并毛利率**
+- **2025A**：22.28%（EV013）
+- **2026E**：23.5%。假设：H1毛利率维持Q1的22.28%水平，H2受益于化工品价差修复升至约24.7%。
+- **2027E**：24.0%。假设：荆州新产能的己内酰胺/尼龙链带动产品组合升级，高毛利TDI开始起量。
+- **2028E**：24.0%。维持，保守预计没有进一步大幅提升。
+- **置信度**：低。无分产品毛利数据，无上游煤价数据和下游产品绝对价差数据，上述均为方向上偏乐观的推测。
+
+**3. 营业利润率**
+- **2026E**：11.77%（通过营业成本、销售/管理/研发/财务费用估算）。
+- **2027E**：12.10%。
+- **2028E**：12.08%。
+- **置信度**：低。费用率无明细假设，简单按历史占比外推。
+
+---
+
+### 盈利预测表（合并）
+
+| 项目（百万元） | 2025A | 2026E | 2027E | 2028E | 假设/来源 |
+|---|---|---|---|---|---|
+| 营收 | 30,969 | 34,066 | 36,791 | 39,326 | 增速10%/8%/7% |
+| 毛利 | 6,900 | 8,005 | 8,830 | 9,438 | 毛利率23.5%/24.0%/24.0% |
+| 营业利润 | 3,315 | 4,010 | 4,450 | 4,750 | 营业利润率11.77%/12.10%/12.08% |
+| 归母净利润 | 3,315 | 3,694 | 4,100 | 4,370 | 有效税率~15%，利息费用略增 |
+| 稀释EPS（元） | 1.57 | 1.746 | 1.938 | 2.066 | 基于2115.34百万股（EV022） |
+
+---
+
+### 现金流与资本开支（合并）
+
+| 项目（百万元） | 2025A | 2026E | 2027E | 2028E | 假设/来源 |
+|---|---|---|---|---|---|
+| 经营现金流（OCF） | 缺失 | 3,800 | 4,500 | 5,000 | 估计为净利润+折旧-营运资本增加 |
+| 资本开支（Capex） | 缺失 | 3,200 | 2,900 | 2,500 | 分析师估算，无指引。荆州项目集中建设 |
+| 自由现金流（FCF） | 缺失 | 600 | 1,600 | 2,500 | 计算：OCF - Capex |
+
+**资本开支高度不确定警告**：模型中的capex纯属占位估计。若实际capex高于预估200-500百万，FCF可能仍为负值，将增加债务或股权融资风险，这是看多论点被当前市场接纳的最大障碍。2026中期报告是第一个可验证的里程碑。
+
+---
+
+### 情景概率估值（未变，来自承保包）
+
+| 情景 | 概率 | 2028E归母净利润（百万元） | 2028E EPS | 终止PE | 每股公允价值（元） | 假设条件 |
+|---|---|---|---|---|---|---|
+| 牛市 | 30% | 5,200 | 2.458 | 14.0x | 34.42 | 油价>$90/桶，TDI/己内酰胺价差扩大至2021年水平，荆州项目IRR>15% |
+| 基准 | 50% | 4,100 | 1.938 | 12.5x | 24.23 | 温和复苏，毛利率稳定在24%，项目正常推进 |
+| 熊市 | 20% | 2,500 | 1.182 | 10.0x | 11.82 | 产品价格跌回2025年低点，荆州项目延迟，现金流为负 |
+- 概率加权公允价值 = 30% × 34.42 + 50% × 24.23 + 20% × 11.82 = **23.80 元**（调整前为23.60元，因市盈率基数微调）。
+- 当前股价 **21.55元**，预期回报率 = (23.80 / 21.55) - 1 = **+10.4%**。
+
+**为什么不上调牛市概率至40%**：多头论据中的Q1盈利斜率、技改利润等均基于未验证的私有渠道信息（KPE01裁决为“unchanged/watch”）。在2026中报数据落地前，维持30%概率更为审慎。
+
+## Thesis-to-Financial Bridge
+
+**论点1：底部利润中枢抬升（从33亿 -> 40-50亿）**
+- **经营公式**：合并净利润 = Σ（产品别销量 × 产品价差） - 固定成本 - 期间费用
+- **基准假设**：2026E/2027E/2028E净利润 36.94 / 41.00 / 43.70 亿，对应毛利率 23.5% / 24.0% / 24.0%，隐含己内酰胺、己二酸价差从2025年低谷小幅修复。
+- **牛市假设**：2026E净利润 44-46 亿，对应毛利率 25-26%，需己内酰胺-纯苯价差恢复至接近2021年水平，以及TDI项目贡献。
+- **熊市假设**：2026E净利润 25-28 亿，对应毛利率 21-22%，即产品价格不反弹，煤价维持高位。
+- **营业收入影响**：基准下增长10%/8%/7%；牛市下增长12-14%；熊市下增长5%。
+- **EPS影响**：基准下2026E EPS 1.746元，牛市 2.10-2.20元，熊市 1.20-1.30元。
+- **估值影响**：基准下应用12.5x PE，熊市10x，牛市14x。市场当前给予2026E EPS基准的12.5x（公允约21.8元），未给牛市定价。多头论证1.455元 EPS和14倍 PE的目标价24.64元，但其EPS基于未验证的私有数据。
+- **证伪条件**：2026中报净利 < 20亿元，或毛利率 < 22%。
+
+**论点2：荆州新项目是真实增长的第二曲线，但不是当前估值的核心锚**
+- **经营公式**：增量毛利 = 新产能（kt）× 利用率 × (产品价差 - 单位现金成本) - 增量折旧
+- **基准假设**：2027-2028年荆州贡献~50亿营收/10亿毛利，对应20%毛利率。
+- **牛市假设**：营收70亿，毛利15亿，利用率>85%，TDI/草酸享受稀缺溢价。
+- **熊市假设**：项目延期，2028年仅贡献20亿营收/3亿毛利。
+- **估值影响**：项目若能实现15% ROIC，可支撑12.5倍PE；低于10%则会压缩估值。项目进展不明时，最多只能进入情景估值，不能成为锚定当期股价的多头核心理由。
+
+**论点3：煤头成本优势与政策护城河**
+- **经营公式**：成本优势毛利约占总毛利2-5%（相对油头/气头），在油价>90美元时更显著。
+- **基准假设**：油价80-90美元，煤头优势维持，但不会进一步扩大。
+- **牛市假设**：油价>100美元，额外增加约5亿以上毛利。
+- **估值影响**：提供估值下限保护，PB 1.6x有其合理性，但当前市场已给予一定溢价（PE高于纯大宗同业），因此非独立的重估因子。
+
+**论点4（反驳）：估值已反映修复，赔率不占优**
+- **经营公式**：隐含公允价值 - 市场价格
+- **基准假设**：即使接受多头所有乐观假设（40亿利润、14倍PE、40%概率），公允价值中值位于20.4-23.0元。当前21.55元已经price in了温和偏多的情形。
+- **估值影响**：上行8-15%，下行15-25%，风险回报率并不突出。因此“乐观待验证”对应“Hold”更为合适。
+
+## Moat Evidence Verdict
+
+**1. 成本领先护城河**：**部分证实**。公司连续多年保持较鲁西化工等煤化工同行高出2-5个百分点的综合毛利率，且在2025年全行业低谷仍维持22.28%的毛利率，证明其柔性联产、规模效应、物流优化的综合成本优势确实存在。财务传导：支撑更稳定的毛利率，降低周期底部亏损概率。反证：该优势并未阻止2022年后毛利率从35%+大幅回落至22%，即护城河只能减缓、不能逆转强周期下行；当产品价格大幅下跌时，绝对利润仍会受到严重侵蚀。
+
+**2. 政策准入护城河**：**成立**。双碳国策下，传统煤化工高能耗项目审批基本冻结，新的煤气化牌照极难获取。公司现有的德州和荆州基地构成稀缺的成长跑道，竞争对手难以复制。证据：KPE01/04 的行业背景描述与政策原文一致（无新批项目）。财务传导：保护公司市场份额，并为荆州第二基地的长远增长提供排他性。反证：若政策因稳增长需要而放松（目前概率较低），护城河将瓦解；或若竞品/替代技术（如生物基化工品、电化学合成）取得重大突破。
+
+**3. “底部利润30e增厚至50e以上”的卖方论述**：**尚未证实**。该表述（KPE01）虽有方向上的合理性（技改降本、荆州增量），但缺乏任何公开可验证的产能、收入、成本、利润细分模型，仅停留在未过账本门禁的私有卖方测算。在获得官方公告或可验证的产能释放数据前，该陈述不能作为护城河或估值的量化依据。
+
+综合来看，公司确实具有真实、可持续的成本和政策护城河，可支撑行业中枢的估值溢价（相对于纯大宗化工企业），但护城河强度不足以令其完全免疫化工周期，亦不构成在当前相对偏高的PE分位下继续追高的充分理由。
+
+## Valuation Closure
+
+**估值闭合（互斥桶）**
+
+估值日期：2026年8月2日
+当前股价：21.55 元/股
+总股本：2,115.341 百万股（依据：2026年8月2日Tushare注册股本，EV022）
+
+---
+
+**核心经营业务估值（基本桶）**
+- 方法：2026E基准盈利市盈率
+- 基准参数：2026E 归母净利润 3,694 百万元（EPS 1.746元），对标12.5倍市盈率
+- 计算公式：1.746元 × 12.5倍 = 21.83 元/股
+- 依据：EV045, EV015, EV022
+
+---
+
+**概率加权情景估值（情景桶）——推荐的实务闭合方式**
+- 桶类型：三相情景加权，互斥于基本桶（二选一）
+- 公式：每股价值 = (牛市概率% × 牛市每股价值) + (基准概率% × 基准每股价值) + (熊市概率% × 熊市每股价值)
+- 牛市（30%概率）：2028E EPS 2.458元 × 14.0倍 终止PE = **34.42 元/股**
+- 基准（50%概率）：2028E EPS 1.938元 × 12.5倍 终止PE = **24.23 元/股**
+- 熊市（20%概率）：2028E EPS 1.182元 × 10.0倍 终止PE = **11.82 元/股**
+- **加权平均值** = 0.30×34.42 + 0.50×24.23 + 0.20×11.82 = 10.33 + 12.12 + 2.36 ≈ **23.80 元/股**
+
+---
+
+**选项价值（可选项桶）**
+- 荆州未来3-4个储备新项目（如NMP、BDO扩建、新能源材料等）具有实物期权特征，但其产品、规模、投资额、IRR均未披露，无法量化。定性给予公司“成长跑道”评级，不纳入当前公允价值计算。
+
+---
+
+**交叉检查与去重**
+- 基本桶（21.83元）和情景桶（23.80元）均为合并后企业整体价值测算，二者互斥。情景桶反映了更多远期增长和不同情景的EPS路径，也是本报告最终的估值依据。
+- 概率加权值 23.80元 vs 现价 21.55元，隐含 **+10.4%的预期总回报**。
+- **评级一致性检查**：+10.4%的预期回报位于 Overweight 和 Hold 的分界线附近。鉴于其中大多数核心假设（毛利率修复斜率、荆州贡献时点与利润率、资本开支强度）均处于“low confidence / 未验证”状态，且技术面提供负面择时信号，给予 Overweight 的风险提前量不足。给予 **Hold / Positive Watch**，表示公司基础质量与预期方向正面，但当前价格对应的回报率尚不优于等待中报验证后再行决策的其他备选方案。
+
+## Canonical Model Snapshot
+
+| line_id | period | metric | value | unit | status | evidence/formula |
+| --- | --- | --- | ---: | --- | --- | --- |
+| shares | 2026-08-02; latest stock_basic; Tushare stock_basic.reg_capital (CNY 10,000) / 100; CNY 1 par value | diluted_shares | 2115.3408 | mn shares | calculated | EV022 |
+| 2026E_revenue | 2026E | Consolidated Revenue | 34066 | CNY mn | estimated | EV011, EV012 |
+| 2026E_gross_margin | 2026E | Gross Margin | 23.5 | % | estimated | EV012, EV013 |
+| 2026E_gross_profit | 2026E | Gross Profit | 8005.5 | CNY mn | calculated | 2026E_revenue, 2026E_gross_margin |
+| 2026E_operatingprofit | 2026E | operatingprofit | 4010 | CNY mn | calculated | EV014 |
+| 2026E_parent_net_profit | 2026E | Parent Net Profit | 3694 | CNY mn | estimated | EV015 |
+| 2026E_eps | 2026E | eps | 1.7462907 | CNY/share | calculated | EV022 |
+| 2026E_ocf | 2026E | Operating Cash Flow | 3800 | CNY mn | estimated | EV012 |
+| 2026E_capex | 2026E | Capital Expenditures | 3200 | CNY mn | estimated | EV040 |
+| 2026E_fcf | 2026E | fcf | 600 | CNY mn | calculated | OCF - capex (negative capex added) |
+| base_fair_value | 2026E | Base Case Equity Value Per Share | 21.83 | CNY/share | calculated | 2026E_eps, EV045 |
+| probability_weighted_fair_value | multi-year | Probability Weighted Fair Value Per Share | 23.8 | CNY/share | calculated | 30%*34.42 + 50%*24.23 + 20%*11.82 |
+| 2027E_revenue | 2027E | revenue | 36791 | CNY mn | estimated | EV011, EV012 |
+| 2028E_revenue | 2028E | revenue | 39326 | CNY mn | estimated | EV011, EV012 |
+| 2027E_grossmargin | 2027E | grossmargin | 24 | % | estimated | EV013 |
+| 2028E_grossmargin | 2028E | grossmargin | 24 | % | estimated | EV013 |
+| 2027E_operatingprofit | 2027E | operatingprofit | 4450 | CNY mn | calculated | EV014 |
+| 2028E_operatingprofit | 2028E | operatingprofit | 4750 | CNY mn | calculated | EV014 |
+| 2027E_parentnetprofit | 2027E | parentnetprofit | 4100 | CNY mn | estimated | EV015 |
+| 2028E_parentnetprofit | 2028E | parentnetprofit | 4370 | CNY mn | estimated | EV015 |
+| 2027E_eps | 2027E | eps | 1.938222 | CNY/share | calculated | EV022 |
+| 2028E_eps | 2028E | eps | 2.065861 | CNY/share | calculated | EV022 |
+| 2027E_ocf | 2027E | ocf | 4200 | CNY mn | estimated | EV017 |
+| 2028E_ocf | 2028E | ocf | 4500 | CNY mn | estimated | EV017 |
+| 2026E_capex | 2026E | capex | -3200 | CNY mn | estimated | EV040 |
+| 2027E_capex | 2027E | capex | -2900 | CNY mn | estimated | EV040 |
+| 2028E_capex | 2028E | capex | -2500 | CNY mn | estimated | EV040 |
+| 2027E_fcf | 2027E | fcf | 1300 | CNY mn | calculated | OCF - capex (negative capex added) |
+| 2028E_fcf | 2028E | fcf | 2000 | CNY mn | calculated | OCF - capex (negative capex added) |
+
+## Accepted Underwriting Model
+
+# 华鲁恒升（600426.SH）接受承保模型
+
+## 一、公司运营方程式
+
+- **业务原型**：多产品煤气化柔性联产平台
+- **营收方程**：Σ（产品别出货量 × 实现均价 × 产品组合）+ 副产品/能源外销
+- **利润方程**：营收 - 煤炭/原料成本 - 能源与运费 - 加工人工/制费 - 折旧 - 期间费用（销售、管理、研发、财务）
+- **现金流方程**：营业利润 + 折旧 - 营运资本变动（应收、存货、应付） - 资本开支（维持性+增长性） - 税金 - 利息 +/- 融资
+- **资本强度**：重资产。2026年一季度末固定及无形资产原值约330亿元。荆州新基地和德州技改项目需要大量的增长性资本开支。
+- **分红与回报**：连续多年派现，2025年提议中期分红，体现管理层对现金流的信心。股息率1.79%不作为高股息防御逻辑，而是现金流质量信号。
+
+## 二、核心业务单元及驱动
+
+### 1. 化肥产品（成熟核心）
+- **经济角色**：承担规模和基础现金流的基荷产品
+- **2025年已披露数据**：收入73.06亿元，成本49.46亿元，毛利率32.30%（来源：2025年报）。
+- **2026E-2028E驱动**：销量持平或微增（受国内保供稳价政策影响，出口有限），利润主要由气化炉技改带来的成本下降驱动。毛利率预测维持32-33%。
+- **估值归属**：核心价值，按稳定利润的12-14倍PE估值。
+
+### 2. 新能源新材料产品（主要增长极与利润波动来源）
+- **经济角色**：规模最大（估计>40%营收），利润弹性最高，资本开支的集中池
+- **已披露数据**：设计产能包括己内酰胺30万吨、己二酸52.66万吨、尼龙6 20万吨（来源：2025半年报）。分产品收入与成本：**缺失**。
+- **2026E-2028E驱动**：
+  - **2026E**：己内酰胺、己二酸开工率提升，价差从2025年低谷修复（定性判断，无公开数据支持精确价差）。
+  - **2027E-2028E**：荆州新建30万吨TDI、20万吨草酸投产爬坡，以及尼龙6/BDO/NMP等储备项目分批释放。
+- **估值归属**：成熟产能按周期PE（10-14倍）估值；新建荆州项目按情景估值（30%概率实现IRR>15%）。
+
+### 3. 有机胺（利基增强）
+- **经济角色**：高毛利小型利基产品，利润稳定器
+- **已披露数据**：无。
+- **2026E-2028E驱动**：假设DMF/甲胺毛利随需求温和增长。
+- **估值归属**：核心价值，纳入“其他高毛利化学品”组合，按整体PE估值。
+
+### 4. 醋酸及衍生品（强周期）
+- **经济角色**：重要的价格摆动项，行业产能周期驱动
+- **已披露数据**：无。
+- **2026E-2028E驱动**：醋酸-甲醇价差假设从当前偏弱位置小幅修复，未给予强周期定价。
+- **估值归属**：核心价值，按周期底部PE估值。
+
+## 三、合并三年预测（自上而下 / 混合模型）
+
+| 项目（单位：百万元） | 2025A | 2026E | 2027E | 2028E |
+|---|---|---|---|---|
+| 营业收入 | 30,969 | 34,066 | 36,791 | 39,326 |
+| 毛利率 | 22.28% | 23.5% | 24.0% | 24.0% |
+| 毛利润 | 6,900 | 8,006 | 8,830 | 9,438 |
+| 营业利润 | 3,315 | 4,010 | 4,450 | 4,750 |
+| 归母净利润 | 3,315 | 3,694 | 4,100 | 4,370 |
+| 经营现金流（OCF） | 缺失 | 3,800 | 4,500 | 5,000 |
+| 资本开支（Capex） | 缺失 | 3,200 | 2,900 | 2,500 |
+| 自由现金流（FCF） | 缺失 | 600 | 1,600 | 2,500 |
+| 稀释EPS（元） | 1.57 | 1.746 | 1.938 | 2.066 |
+
+**关键未知与条件**：
+- 上述营收增速和毛利率均为自上而下的分析师假设，而非自下而上的产品级（量×价）累加。
+- 资本开支与FCF两行为完全缺失的实际数据，2200-3200亿的估计基于荆州投资的定性描述，置信度极低。
+- 情景概率（30/50/20）和终止PE倍数是主观模型参数。
+
+## 四、情景估值
+
+| 情景 | 概率 | 2028E EPS (元) | 终止PE | 估值 (元/股) |
+|---|---|---|---|---|
+| 牛市 | 30% | 2.458 | 14.0x | 34.42 |
+| 基准 | 50% | 1.938 | 12.5x | 24.23 |
+| 熊市 | 20% | 1.182 | 10.0x | 11.82 |
+
+- **概率加权公允价值**：23.80元/股
+- **当前股价**：21.55元/股
+- **隐含总回报**：+10.4%
+
+模型状态：**部分就绪**。仅化肥板块有报告期数据；化学品链的量价利数据完全缺失，导致三年预测为混合/自上而下模型，置信度低。
+
+## Model Change Ledger
+
+No numeric or unit changes; canonical snapshot preserved exactly.
+
+# 模型修改分类账
+
+| 变更编号 | 问题 / 预测行 | 原独立共享模型假设 | 多头提议 | 空头反驳 | 研究主持人裁决 | 证据ID | EPS/FCF/估值影响 | 下次验证 |
+|---|---|---|---|---|---|---|---|---|
+| MC-1 | UQ1：分段利润池；2026E 归母净利润 | 36.94亿元 | **40.0亿元** | 维持原模型，称40亿为“未验证乐观外推” | **拒绝**。多头的基础是Q1年化44.65亿（EV012）和KPE01的私有卖方测算。KPE01在Knowledge Planet账本上的裁决为“unchanged/watch”，禁止直接作为模型输入。Q1净利率1.34%低于2025全年，无法证明H2 2026能超越44.65亿年化。保持36.94亿不变。 | EV012, KPE01 | 原每股价值21.83元（12.5x） vs 多头主张的24.64元。拒绝变更，维持21.83元。 | 2026中报净利润是否>20亿元？ |
+| MC-2 | UQ4：产品价差；2026E 毛利率 | 23.5% | **24.0%** | 维持23.5%上限，指出Q1实际22.28%与全年持平，无H2加速证据 | **拒绝**。多头引用未验证的单周渠道价（KPE02/03）作为支持。Q1毛利率22.28%不等于H2 24.7%，缺乏产品级价差证据。维持原23.5%不变。 | EV012, KPE02, KPE03 | EPS较原模型增加约0.04元，公允价值微增约0.5元。拒绝变更。 | 2026中报毛利率是否≥22.3%？ |
+| MC-3 | 情景权重：牛市概率 | 30% | **40%** | 维持30%，指出牛市依赖油价>$90、荆州即时达产等强假设 | **拒绝**。多头理由包含KPE01的“30->50亿”技改利润，该信息状态为未过闸。Q1盈利改善已部分包含在基准情形中，不足以再提升10个百分点概率。保持30%不变。 | KPE01 | 概率加权公允价值较多头估值模型低约1.5-2.6元/股。拒绝变更。 | 荆州TDI投产公告+2026中报确认毛利率>24%且H1利润>20亿 |
+| MC-4 | 估值倍数：基准PE | 12.5x | 隐含接受，未提议修改 | 维持12.5x，指出当前TTM PE 15.9x已处5年73.4%分位，是用盈利低谷放大的高倍，不是地板 | **采纳空头逻辑**。12.5倍反映了化工周期股合理的估值中枢。即使接受多头乐观的40亿利润，按14倍PE仅20.36元，仍低于现价。估值倍数已包含一定修复预期。保持12.5x不变。 | EV045 | 即使100%采纳多头利润，公允价值仍低于现价。 | 2026年报发布后，根据2027年可见度再议 |
+| MC-5 | 资本开支：2026-2028E Capex | 32 / 29 / 25亿（估计） | **不变/watch** | 接受不变，但强调这是“毫无依据的占位” | **无变化**。双方均无新的资本开支信息。本次维持原假设。待中期报告披露在建工程进度和现金流出后再行评估。 | 无新证据 | 无变化。Capex是最大预测风险源。 | 2026中期报告-现金流量表及附注 |
+
+**判决摘要**：多头提出的四项实质性模型修改（利润、毛利、概率、倍数）全部被拒绝或维持原状。核心原因是这些修改使用的KPE01/02/03等私有/渠道线索，在独立的Knowledge Planet账本中已被裁决为“未过闸，需与公开数据交叉验证后方可使用”。而公开发布的Q1财报（EV012）未能提供足够支持。因此，接受后的模型与原共享模型保持一致，不做任何向上修订。
+
+## Debate Verdict
+
+**负责研究的主持人对本轮辩论的裁决：**
+
+**1. 多头的贡献**：多头分析师正确地识别了最重要的宏观驱动因素——即底部利润中枢抬升的潜力，以及三个潜在的催化剂链条（产品价差修复、荆州放量、技改）。其对公司业务模式的拆解（化肥现金牛+新材料成长曲线+有机胺/醋酸弹性）是准确的。多头对空头技术面论点的回应（“低PB/低PS+盈利修复”）在逻辑上也形成了有效的防御。
+
+**2. 空头的贡献**：空头分析师发现了本轮中最关键的致命缺陷：**多头大幅上修模型的核心证据（特别是KPE01的“30亿->50亿利润增厚”）未通过独立的数据治理门禁（Knowledge Planet账本将其标记为unchanged/watch）**。空头用简单的数学证明，即使允许多头所有乐观假设成立，其估值终点仍低于当前市价，这从根本上削弱了做多赔率的计算。空头也正确指出了技术面弱势和相对估值矛盾。
+
+**3. 裁决**：**空头在证据规则和模型完整性上的胜出，直接决定了最终评级。** 多头建立一个有方向性的合理预期，但未能提供满足证据标准的量化支撑；其试图将“方向正确的故事”跳过验证闸门直接转化为“模型上调”，这一做法被有效阻击。因此，模型维持原状（概率加权公允价值约23.80元，现价21.55元，预期回报+10.4%），未产生足以将评级提升至Overweight/Buy的向上修正。
+
+**4. 关键学习点**：
+- **产品价差是命门**：缺少己内酰胺、己二酸、尿素的公开达成价差数据，任何EPS预测都缺乏底座。这是研究中最需要补全的一环。
+- **私有渠道情报必须过闸**：卖方或渠道提供的利润预测（如“技改增厚6-10亿”）在未经公司公告或可独立验证的第三方数据确认前，只能作为“待验证的假设”，不能作为模型输入。本次辩论充分暴露了违规使用此类数据的风险。
+- **技术面与基本面背离需要尊重**：Q1基本面边际改善，但价格走势（放量下跌、反弹失败、跑输大盘）却未予证实，这种背离是重要的择时与头寸信号，研究员不能仅凭一厢情愿地解释其为“市场错了”，而应将其视为风险点纳入最终的投资建议——这正是Hold立场形成的部分原因。
+
+## Probability and Payoff
+
+**概率收益比（接受模型）**
+
+- **牛市情景（概率30%）**：2028E EPS 2.458元，14x终止PE，公允价值 34.42元/股。较现价21.55元的潜在回报 **+59.7%**。需要油价>$90/桶、己内酰胺-己二酸价差恢复至接近2021年水平、荆州TDI项目满产满销并达到20%+净利率。
+- **基准情景（概率50%）**：2028E EPS 1.938元，12.5x终止PE，公允价值 24.23元/股。潜在回报 **+12.4%**。需要化工品市场温和复苏，毛利率稳定在24%左右，荆州新项目按计划投产但只贡献基准利润。
+- **熊市情景（概率20%）**：2028E EPS 1.182元，10x终止PE，公允价值 11.82元/股。潜在亏损 **-45.1%**。需要产品价格跌回2025年低点并持续低迷，或煤价大幅上涨，或荆州项目严重延期/超支/亏损。
+
+**概率加权终值**：23.80元/股。
+**当前隐含预期回报**：+10.4%。
+**下行风险**：概率加权下行风险约为 20% × (21.55 - 11.82) = 1.95元。
+
+该赔率结构（非对称，上行空间依赖小概率的牛市，基准回报率有限）表明，目前的价格已经为“中等程度的乐观”支付了代价。在核心假设（尤其是非化肥利润池和价差）获得公开数据支持之前，该赔率并不支持积极建仓（Overweight）。但鉴于公司客观上已走出最差利润谷底、并拥有真实护城河，现有仓位亦无需清仓避险（Underweight/Sell）。持有并等待右侧验证信号，是当前最合理的风险/收益比。
+
+## Unresolved Questions and Evidence Gaps
+
+### 公司层面的未决问题与证据缺口
+
+1.  **新能源新材料、有机胺、醋酸及衍生品的分产品收入与成本（UQ1）**
+    - **状态**：完全缺失。2025年报存在该分产品表，但未被本次研究证据包提取。
+    - **影响**：无法验证“底部利润中枢抬升主要由非化肥产品驱动”这一核心论点，也无法为庞大的化学品板块建立自下而上的精算模型。目前的所有利润预测都是合并推测，精确度极低。
+    - **下次验证**：**2026年8月底的中期报告**，这是必须提取并填入模型的第一优先级数据。
+
+2.  **2026-2028年具体的资本开支计划与融资方案（UQ2）**
+    - **状态**：完全缺失。无公开的更新资本开支指引。20亿元增资荆州（EV040）是正面信号，但不足以构建FCF模型。
+    - **影响**：FCF预测仅为占位符，无法评估融资缺口、债务压力或稀释风险。化工行业高资本开支若遇到盈利疲弱，是常见的价值陷阱。
+    - **下次验证**：**2026年8月底的中期报告**的“在建工程”和“资本承诺”附注；以及后续可能的债券募集说明书或交易所问询函回复。
+
+3.  **己内酰胺、己二酸、尿素等关键产品的公开周度/月度价差**
+    - **状态**：缺失。本次只有未经验证的渠道周度数据（KPE02/03），无法作为模型输入。
+    - **影响**：无法构建产品价差→毛利率→EPS的敏感性分析，也无法实时判断业绩兑现程度。
+    - **下次验证**：持续跟踪大宗商品信息平台（如百川盈孚、隆众资讯）的公开报价，建立连续时间序列。至少需要连续四周以上的趋势数据，才能形成初步判断。
+
+4.  **公司的煤炭采购成本与单耗（UQ3）**
+    - **状态**：完全缺失。无煤种、煤源、运输成本或单耗数据。
+    - **影响**：无法量化最大成本项的价格风险。在煤价大幅波动时，模型将完全失效。
+    - **下次验证**：查阅公司年报或社会责任报告中关于“能耗指标”和“采购成本”的部分。向公司IR部门定向提问。
+
+5.  **荆州TDI项目确切的投产时间与盈利指引**
+    - **状态**：缺失。项目在建是事实，但试车进度、达产时间、目标客户、目标利润率均无官方信息。
+    - **影响**：2027-2028年20-30%的增长假设缺乏项目级的执行锚。
+    - **下次验证**：关注公司官方“重大项目进展”公告或董事会决议公告。
+
+## Handoff to PM and Trader
+
+**交接清单：从研究主持人至投资经理与交易员**
+
+**1. 接受的模型版本**：
+- 已接受模型未对原共享承保模型进行任何向上修订。关键行：2026E营收34,066百万元，毛利率23.5%，归母净利润3,694百万元，EPS 1.746元，概率加权公允价值23.80元。
+- 核心变化：多头提出的所有模型上修（利润、毛利、概率）均被否决。
+
+**2. 头寸约束与行动建议**：
+- **评级**：**持有 / 正向观察（Hold / Positive Watch）**。
+- **行动**：**不新开仓位，已持有者维持现有仓位不加仓。** 等待8月中期报告验证Q2利润率和分产品数据。
+- **时间框架**：未来4-8周（8月中报前）为核心验证期。
+- **止错条件**：若中期报告显示H1净利润<19亿元，或Q2毛利率<21.5%，则应将评级下调至**Underweight/减持**。
+- **加仓条件**：若中期报告H1净利润>22亿元，Q2毛利率>24%，且“新能源新材料”分项收入增速>15%，则可将评级上调至**Overweight/增持**，目标公允价值可上调至26元以上。同时必须配合出现技术面止跌信号（放量站上50日均线）以共振确认。
+
+**3. 催化剂日程**：
+- **8月中下旬（关键节点）**：2026年半年度报告发布。核心关注：① H1归母净利、② Q2综合毛利率、③ 分产品（主营）收入/成本/毛利率表。这将是本轮辩论中所有未决问题的首次集中解密。
+- **8-10月**：荆州TDI项目的任何正式投产公告或爬坡指引。
+
+**4. 交易员重点关注的预警信号**：
+- **价格层面**：当前技术面处于空头趋势，50日线构成强阻力。如果在中报发布前，股价放量跌破前低且无基本面利空配合，这可能是市场在提前交易中报不及预期的左侧信号，需向PM发出警告。
+- **相对强弱**：持续跑输农药化肥行业指数（相对收益-23%）和大盘（-26.5%），该弱势结构在中报证实前不宜当做“错杀”而逆向抄底。只有当基本面确认改善、相对强弱指标开始收敛时，才是基本面投资的右侧入场点。
+
+**5. PM禁止做的假设（超越该模型边界的风险）**：
+- **禁止假设**：“卖方给出的‘底部利润30亿增厚至50亿'已经或即将实现”。该信息未经任何独立验证，不能作为头寸决策依据。
+- **禁止假设**：“PB 1.6x、PS低分位必然提供安全边际”。若利润下修，PB/PS的绝对低位同样难以阻止股价继续下跌，这是周期股的特性。
+- **禁止假设**：“荆州新项目必定成功，可按正常化PE估值”。新项目落地存在固有的执行、市场和财务风险，在盈利证明之前，只能作为情景/期权价值，不能线性外推至核心估值。
+
+## Handoff Integrity Audit
+
+**模型交接防丢清单**
+
+**模型版本**：接受承保模型v1.1（无多头修订案）
+
+**冻结的报告事实**：
+- 2025年营收 30,968.88 百万元 (EV011)
+- 2025年归母净利润 3,315.49 百万元 (EV011)
+- 2025年化肥产品收入 7,305.67 百万元，毛利率 32.30% (EV_seg_1)
+- 2026年Q1营收 8,343.59 百万元，归母净利润 1,116.59 百万元 (EV012)
+- 2026年8月2日总股本 2,115.341 百万股 (EV022)
+- 2026年7月31日总市值 59,261.27 百万元 (EV045)
+
+**接受的估计（禁止无痕更改）**：
+- 2026E营收增速 +10%
+- 2026E综合毛利率 23.5%
+- 2026E-2028E资本开支 32 / 29 / 25 亿元（占位符，置信度极低）
+- 情景概率 牛/基/熊 = 30% / 50% / 20%
+- 基准情境的终止PE 12.5倍
+
+**未解决的模型单元格（必须保持空白/标注）**：
+- 新能源新材料、有机胺、醋酸的分产品收入、成本、毛利率
+- 所有关键产品的开工率、实现销售均价（ASP）、单位原料成本
+- 煤炭到厂采购均价及单耗
+- 2025年完整经营现金流和资本开支
+- 荆州TDI/草酸及其他3-4个项目的IRR、总投资额、时间表
+- 德州技改（更换气化炉/净化装置）的可行性、投资额及预期回报
+
+**移交PM和交易员时需要保留的模型构件**：
+- 全部三年预测行（营收到FCF）
+- 四个经济单元定义及内嵌的风险/增长评估
+- 两个已证实的护城河证据测试
+- 情景估值闭合与检查计算
+- 完整的模型修改分类账（展示拒绝多头修改的原因）
+- 上述的未决问题清单
+
+**需要PM在未来工作中明确修订的条目**：
+- 收到2026年中期报告后，强制更新2026E-2028E的营收、毛利、净利润和资本开支预测。
+- 收到荆州基地重大项目公告后，建立项目维度的利润模型（量、价、成本、费用），替换当前粗线条的增长率外推。
+- 若公司发布股权融资计划（如非公开发行），必须重估每股价值的稀释影响。

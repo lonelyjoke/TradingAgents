@@ -352,6 +352,9 @@ def test_sell_side_schema_renders_all_six_company_depth_contracts():
 
     rendered = render_sell_side_pm_decision(decision)
     assert "中性（Hold）" in rendered
+    assert rendered.index("### 投资摘要") < rendered.index("## 一、公司是谁、如何赚钱")
+    assert rendered.index("### 核心观点与主要分歧") < rendered.index("## 一、公司是谁、如何赚钱")
+    assert "| 最终评级 | 投资观点 |" not in rendered
 
     for heading in (
         "## 一、公司是谁、如何赚钱",
@@ -712,9 +715,9 @@ def test_deterministic_pm_engine_calculates_eps_fcf_scenarios_and_safe_price():
     assert "| 基准 |" in rendered
     assert "incremental_equity_value" not in rendered
     assert "安全买入价上限：80元" in rendered
-    assert "安全买入价上限的计算公式为" in rendered
-    assert "min(83.33元，80元，90.59元) = 80元" in rendered
-    assert "不等同于目标价、综合公允价值或评级锚" in rendered
+    assert "安全买入价取收益率约束价" in rendered
+    assert "收益率约束价83.33元、安全边际价80元和熊市约束价90.59元三者最低值" in rendered
+    assert "不等同于公允价值或评级锚" in rendered
     assert "期权价值：0.5元/股" in rendered
     assert "程序化期权价值" in rendered
     assert "AIDC SST" in rendered
@@ -723,11 +726,19 @@ def test_deterministic_pm_engine_calculates_eps_fcf_scenarios_and_safe_price():
     assert "单家机构" in rendered
     assert "私域文字信息" in rendered
     assert "single_broker" not in rendered
+    reader_facing = rendered.split("## 内部附录", 1)[0]
+    assert "C_market_narrative" not in reader_facing
+    assert "B_identified_professional" not in reader_facing
+    assert "ceiling=" not in reader_facing
     assert "商业模式如何运转" in rendered
     assert "护城河的形成机制与经济结果" in rendered
     assert "另类信息增量（知识星球）" not in rendered
-    assert "程序化公允价值" not in rendered.split("## 七、估值、评级与投资结论", 1)[0]
-    assert rendered.index("程序化情景估值") < rendered.index("| 最终评级 | 投资观点 |")
+    chapters_one_to_six = rendered.split("## 一、公司是谁、如何赚钱", 1)[1].split(
+        "## 七、估值、评级与投资结论", 1
+    )[0]
+    assert "程序化公允价值" not in chapters_one_to_six
+    assert rendered.index("### 投资摘要") < rendered.index("程序化情景估值")
+    assert rendered.index("程序化情景估值") < rendered.index("> **结论重申：")
 
 
 def test_handoff_check_detects_only_undocumented_material_changes():
@@ -1046,6 +1057,25 @@ def test_pm_analytical_structure_gaps_trigger_advisory_revision():
             "core_theses": [{}, {}],
         }
     ) == []
+
+
+def test_pm_rating_valuation_conflict_routes_to_editorial_revision():
+    payload = {
+        "research_questions": ["q1", "q2", "q3"],
+        "question_verdicts": [{}, {}, {}],
+        "forecast_takeaways": [{}, {}],
+        "forecast_assumptions": [{}, {}, {}],
+        "core_theses": [{}, {}],
+        "rating": "Hold",
+        "deterministic_valuation": {
+            "status": "closed",
+            "expected_return_pct": -18.0,
+        },
+    }
+
+    issues = _analytical_structure_issues(payload)
+
+    assert any(issue.startswith("rating-valuation consistency:") for issue in issues)
 
 
 def test_pm_guidance_gap_triggers_revision_before_publication():

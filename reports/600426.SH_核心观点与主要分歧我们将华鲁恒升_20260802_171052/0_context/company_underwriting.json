@@ -1,0 +1,1090 @@
+{
+  "schema_version": 2,
+  "symbol": "600426.SH",
+  "as_of_date": "2026-08-02",
+  "forecast_years": [
+    "2026E",
+    "2027E",
+    "2028E"
+  ],
+  "research_readiness": "partial",
+  "readiness_reasons": [
+    "Only the 化肥 segment has reported revenue, cost, and gross margin from the 2025 annual report; other material segments (新能源新材料, 有机胺, 醋酸及衍生品) lack quantitative segment data in the supplied evidence.",
+    "Product-level capacity, utilization, ASP, and unit cost evidence is absent for all segments, limiting the operating model to consolidated volume/price/cost assumptions.",
+    "Cash flow and balance sheet items (capex, OCF, FCF) were extracted only from Q1 2026 data; full-year 2025 cash flow statements are referenced but not fully reproduced in the evidence payload.",
+    "No analyst consensus or broker estimates are supplied; the model relies entirely on reported financials and private channel checks that remain unverified.",
+    "Material segment three-year driver lines are missing: 化肥产品",
+    "Parent-profit/EPS/share-count conflict corrected for year_1_value.",
+    "Parent-profit/EPS/share-count conflict corrected for year_2_value.",
+    "Parent-profit/EPS/share-count conflict corrected for year_3_value.",
+    "bull scenario EPS x PE does not reconcile to fair value.",
+    "base scenario EPS x PE does not reconcile to fair value.",
+    "bear scenario EPS x PE does not reconcile to fair value.",
+    "Valuation has not closed from mutually exclusive buckets to per-share fair value.",
+    "volume_price_cost driver chain is incomplete; missing: unit/input cost"
+  ],
+  "company_model": {
+    "model_profile": "corporate",
+    "operating_model_family": "volume_price_cost",
+    "business_archetype": "multi-product coal-based chemical manufacturer with flexible interlinked production",
+    "value_proposition_and_customers": "Produces ammonia, urea, methanol, acetic acid, DMF, adipic acid, caprolactam, nylon 6, and other chemicals using coal gasification, serving domestic agricultural, textile, polyurethane, and new-material industries; exports are growing but still secondary. Stable cooperation with >80% of customers are key industry leaders.",
+    "revenue_equation": "Σ (segment_product_volume x realized_ASP_x_mix) + by-product and energy sales (electricity/steam)",
+    "profit_equation": "Revenue - coal/feedstock cost - energy and freight - conversion labor/overhead - depreciation - period expenses (selling, G&A, R&D, finance). Operating leverage is high due to fixed asset intensity.",
+    "cash_flow_equation": "Operating profit + depreciation - change in working capital (receivables, inventory, payables) - capex (sustaining + growth) - tax - interest +/- financing",
+    "capital_intensity_and_reinvestment": "Highly asset-intensive: gross PP&E was CNY ~33 bn at end-Q1 2026. Ongoing growth capex in Jingzhou new-material base and Debang upgrading projects; maintenance capex is significant.",
+    "diluted_share_count_mn": 2115.3407810000003,
+    "share_count_period": "2026-08-02; latest stock_basic; Tushare stock_basic.reg_capital (CNY 10,000) / 100; CNY 1 par value",
+    "share_count_evidence_id": "EV022",
+    "share_count_source_type": "registered_capital",
+    "share_count_formula": "Tushare stock_basic.reg_capital (CNY 10,000) / 100; CNY 1 par value",
+    "share_count_cross_checks": [
+      "registered capital proxy=2115.341 mn"
+    ],
+    "moat_mechanisms": [
+      "Cost leadership from integrated coal-gasification flexible multi-product platform",
+      "Economies of scale and continuous in-house technology improvement",
+      "Long-standing customer relationships (80%+ stable cooperation with industry leaders)",
+      "High industry entry barriers due to capital intensity, environmental permits, and coal access (new coal-chemical projects strictly limited by 'dual-carbon' policy)"
+    ],
+    "moat_to_financial_transmission": [
+      "Cost advantage supports above-industry-average gross margin through cycles",
+      "Flexible production allows margin optimization across product mix",
+      "Scale enables lower unit conversion cost and procurement discounts",
+      "Policy restrictions limit new competition, preserving pricing and utilization"
+    ],
+    "structural_risks": [
+      "Product cyclicality: urea, acetic acid, caprolactam, and adipic acid are subject to significant price swings driven by industry capacity additions and downstream demand",
+      "Coal feedstock cost exposure: profitability depends on the anthracite/thermal coal to product spread; coal price surges can compress margins",
+      "Environmental and carbon policy risk: tighter emission standards or carbon costs may raise operating costs and delay projects",
+      "Large growth capex entails execution risk and potential overcapacity if demand disappoints",
+      "Export exposure to trade disputes and freight/disruption (2025 report noted nylon downstream export obstruction due to tariffs)"
+    ],
+    "key_unknowns": [
+      "Precise volume and realized price for each of the four main product segments (new energy/new materials, chemical fertilizer, organic amines, acetic acid & derivatives)",
+      "Jingzhou project ramp-up timelines and future margins (TDI, oxalic acid, and 3-4 pipeline projects)",
+      "Actual coal grade procurement cost and linkage to observed indices",
+      "Maintenance capex vs growth capex split",
+      "Cash conversion cycle and working capital intensity by segment"
+    ],
+    "evidence_ids": [
+      "EV024",
+      "EV025",
+      "EV028",
+      "EV029",
+      "EV030"
+    ]
+  },
+  "business_unit_map": [
+    {
+      "unit_id": "BU_Fertilizer",
+      "unit_name": "化肥产品",
+      "unit_type": "reported_segment",
+      "disclosure_basis": "reported",
+      "parent_unit": "company",
+      "economic_role": "Base-load, relatively stable margin product providing scale and cash flow",
+      "primary_operating_archetype": "commodity_volume_price_cost",
+      "secondary_operating_archetype": "",
+      "revenue_driver_equation": "Urea and compound fertilizer volume (kt) x realized ASP (CNY/t) + policy-supported export volume",
+      "profit_driver_equation": "Volume x (ASP - coal-based ammonia cost - conversion cost) - freight",
+      "cash_and_capital_equation": "Gross profit - S&D - maintenance capex - working capital (typically low receivables, low inventory)",
+      "reported_metrics": [
+        "Revenue CNY 7,305.67 mn (FY2025)",
+        "Cost CNY 4,945.76 mn",
+        "Gross margin 32.30%",
+        "Revenue change 0.12 (was 0.12%? need check)"
+      ],
+      "evidence_ids": [
+        "EV026"
+      ],
+      "missing_inputs": [
+        "Volume (kt)",
+        "ASP (CNY/t)",
+        "Export share",
+        "Coal-to-ammonia cost breakdown"
+      ],
+      "next_verification": "2026 semi-annual report for product revenue/cost and management discussion on fertilizer market"
+    },
+    {
+      "unit_id": "BU_NewEnergyMaterials",
+      "unit_name": "新能源新材料相关产品",
+      "unit_type": "product",
+      "disclosure_basis": "analytical",
+      "parent_unit": "company",
+      "economic_role": "Growth driver through capacity expansion in caprolactam, adipic acid, nylon 6, BDO, NMP, etc.",
+      "primary_operating_archetype": "volume_price_cost",
+      "secondary_operating_archetype": "project_backlog_delivery",
+      "revenue_driver_equation": "Volume (caprolactam, adipic acid, nylon 6, BDO, other) x realized ASP x product mix",
+      "profit_driver_equation": "Volume x (product spread over benzene/hydrogen/coal) - conversion - depreciation (high capex) - period expenses",
+      "cash_and_capital_equation": "Profit + depreciation - heavy growth capex (Jingzhou) - working capital build",
+      "reported_metrics": [
+        "2025 semi-annual report mentions design capacities: caprolactam 300 kt, adipic acid 526.6 kt, nylon 6 200 kt"
+      ],
+      "evidence_ids": [
+        "EV024"
+      ],
+      "missing_inputs": [
+        "Revenue and cost for this segment in 2025",
+        "Product-level realized prices",
+        "Utilization rates",
+        "Capex linked to this unit"
+      ],
+      "next_verification": "2025 annual report segment note – request full revenue/cost table for 分产品 (product split)"
+    },
+    {
+      "unit_id": "BU_OrganicAmine",
+      "unit_name": "有机胺",
+      "unit_type": "product",
+      "disclosure_basis": "analytical",
+      "parent_unit": "company",
+      "economic_role": "Niche high-margin product line with market pricing power",
+      "primary_operating_archetype": "volume_price_cost",
+      "secondary_operating_archetype": "",
+      "revenue_driver_equation": "DMF/methylamine volume x ASP",
+      "profit_driver_equation": "Spread over methanol and ammonia inputs",
+      "cash_and_capital_equation": "Profit - modest maintenance capex",
+      "reported_metrics": [],
+      "evidence_ids": [],
+      "missing_inputs": [
+        "Revenue, volume, ASP, margin – reported only as '有机胺' in 2025 half-year but segment data not extracted"
+      ],
+      "next_verification": "Request segment data from 2025 annual report"
+    },
+    {
+      "unit_id": "BU_AceticAndDerivatives",
+      "unit_name": "醋酸及衍生品",
+      "unit_type": "product",
+      "disclosure_basis": "analytical",
+      "parent_unit": "company",
+      "economic_role": "Cyclical product with improving profitability post-2025",
+      "primary_operating_archetype": "volume_price_cost",
+      "secondary_operating_archetype": "",
+      "revenue_driver_equation": "Acetic acid, acetic anhydride, ethyl acetate volume x ASP",
+      "profit_driver_equation": "Spread over methanol and syngas",
+      "cash_and_capital_equation": "Profit - moderate capex",
+      "reported_metrics": [],
+      "evidence_ids": [],
+      "missing_inputs": [
+        "Revenue, volume, ASP, margin"
+      ],
+      "next_verification": "Request segment data from 2025 annual report"
+    }
+  ],
+  "segment_models": [
+    {
+      "segment": "化肥产品",
+      "products_or_services": "Urea, compound fertilizer, and other nitrogen-based fertilizers",
+      "customers_and_channel": "Domestic agricultural distributors and large farming enterprises; some export via policy window",
+      "revenue_weight_pct": 23.6,
+      "profit_weight_pct": null,
+      "base_period": "FY2025",
+      "base_revenue_value": 7305.67,
+      "base_revenue_unit": "CNY mn",
+      "base_revenue_growth_pct": 12.0,
+      "base_margin_pct": 32.3,
+      "base_margin_change_pp": 2.4,
+      "demand_and_order_drivers": [
+        "Domestic grain planting area and fertilizer application rates",
+        "Government minimum procurement prices for grains",
+        "Export policy (quotas and window timing)",
+        "Competing international urea prices"
+      ],
+      "industry_supply_and_capacity": "New capacity additions are constrained by dual-carbon policy; operating rate tends to be high at leading coal-based producers due to cost advantage.",
+      "volume_share_utilization": "Company maintains stable utilization; exact volume unknown. Assumed slight growth in 2026-2028 from debottlenecking.",
+      "price_asp_take_rate": "Urea prices bottomed in 2025 and recovered modestly; policy support and export windows provide floor.",
+      "unit_cost_and_input_prices": "Coal (anthracite/thermal) is the main cost driver; company's flexible coal sourcing and integrated gasification gives cost advantage.",
+      "margin_and_operating_leverage": "Gross margin improved 2.4pp in 2025 to 32.3%; further margin gains depend on urea/coal spread.",
+      "working_capital_and_cash_conversion": "Receivables very low; inventory seasonal; cash conversion is healthy.",
+      "prosperity_level": "neutral (stable to slightly improving)",
+      "marginal_direction": "improving",
+      "causal_analysis": "Fertilizer demand is steady; supply discipline from policy limits new entrants; coal cost moderate; margin expected to stay above 30%.",
+      "valuation_treatment": "Core; valued at 7-8x EV/EBITDA or 10-12x PE on segment profits.",
+      "strongest_counterevidence": [
+        "Urea prices could weaken if export quotas remain tight and domestic demand slows",
+        "Coal price spike would quickly compress margins"
+      ],
+      "evidence_ids": [
+        "EV026",
+        "EV024"
+      ],
+      "missing_inputs": [
+        "Volume (kt)",
+        "Realized urea price time series",
+        "Coal procurement cost data"
+      ],
+      "next_verification": "2026H1 report for segment revenue/cost and management outlook"
+    },
+    {
+      "segment": "新能源新材料相关产品",
+      "products_or_services": "Caprolactam, adipic acid, nylon 6, BDO, NMP, polycarbonate, etc.",
+      "customers_and_channel": "Textile, engineering plastics, polyurethane, lithium battery solvent industries; direct B2B",
+      "revenue_weight_pct": null,
+      "profit_weight_pct": null,
+      "base_period": "FY2025",
+      "base_revenue_value": null,
+      "base_revenue_unit": "CNY mn",
+      "base_revenue_growth_pct": null,
+      "base_margin_pct": null,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [
+        "Nylon 6 and textile chain demand",
+        "Automobile and construction recovery for polyurethanes",
+        "BDO demand for PBAT and NMP for lithium batteries",
+        "Export markets"
+      ],
+      "industry_supply_and_capacity": "Caprolactam and adipic acid industry capacity additions are peaking; new approvals are limited by energy intensity controls. Company is adding capacity in Jingzhou (TDI, oxalic acid, future new materials).",
+      "volume_share_utilization": "New Jingzhou capacities (30 kt TDI, 20 kt oxalic acid) started operation; existing caprolactam/adipic acid lines are running but utilization unknown.",
+      "price_asp_take_rate": "Caprolactam and adipic acid prices recovered from 2025 lows; spreads improved Q1 2026 (gross margin +5.93 pp YoY).",
+      "unit_cost_and_input_prices": "Benzene, hydrogen, ammonia, and coal are key inputs; integrated platform reduces cost.",
+      "margin_and_operating_leverage": "Margins are cyclical but company's cost position ensures positive spread in troughs.",
+      "working_capital_and_cash_conversion": "Receivables modest; inventory of intermediates; heavy capex cycle requires monitoring of cash conversion.",
+      "prosperity_level": "recovery (improving from bottom)",
+      "marginal_direction": "improving",
+      "causal_analysis": "After capacity expansion digestion, prices and margins have upward momentum; dual-carbon limits supply growth; company gains share.",
+      "valuation_treatment": "Core growth engine; valued on normalized EBITDA 8-10x, reflecting high reinvestment.",
+      "strongest_counterevidence": [
+        "Massive capacity expansion across industry could overshoot demand, delaying margin recovery",
+        "Execution risk in Jingzhou projects"
+      ],
+      "evidence_ids": [
+        "EV024",
+        "KPE01"
+      ],
+      "missing_inputs": [
+        "Revenue and cost segment data",
+        "Utilization rates",
+        "Product-level ASP trends"
+      ],
+      "next_verification": "Request full revenue/cost table from 2025 annual report"
+    },
+    {
+      "segment": "有机胺",
+      "products_or_services": "DMF, monomethylamine, dimethylamine, trimethylamine",
+      "customers_and_channel": "Pharmaceutical, pesticide, electronic chemicals, and other fine chemical producers",
+      "revenue_weight_pct": null,
+      "profit_weight_pct": null,
+      "base_period": "unspecified",
+      "base_revenue_value": null,
+      "base_revenue_unit": "CNY mn",
+      "base_revenue_growth_pct": null,
+      "base_margin_pct": null,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [
+        "Pharmaceutical and agrochemical production",
+        "Demand for PU catalysts and electronics solvents"
+      ],
+      "industry_supply_and_capacity": "Company is one of the largest DMF producers; supply is relatively concentrated.",
+      "volume_share_utilization": "Stable, with market leadership.",
+      "price_asp_take_rate": "DMF prices have been volatile but company maintains pricing power due to quality and supply reliability.",
+      "unit_cost_and_input_prices": "Methanol and ammonia are feedstocks.",
+      "margin_and_operating_leverage": "High margin historically; likely >25%.",
+      "working_capital_and_cash_conversion": "Healthy.",
+      "prosperity_level": "high",
+      "marginal_direction": "stable",
+      "causal_analysis": "Specialized market with high barriers; margins protected.",
+      "valuation_treatment": "Core; high-multiple business within conglomerate.",
+      "strongest_counterevidence": [
+        "Downstream demand from pharmaceutical sector could slow"
+      ],
+      "evidence_ids": [],
+      "missing_inputs": [
+        "Segment financials",
+        "Volume, ASP, cost"
+      ],
+      "next_verification": "Annual report segment data"
+    },
+    {
+      "segment": "醋酸及衍生品",
+      "products_or_services": "Acetic acid, acetic anhydride, ethyl acetate",
+      "customers_and_channel": "PTA producers, solvent users, coatings, adhesives",
+      "revenue_weight_pct": null,
+      "profit_weight_pct": null,
+      "base_period": "unspecified",
+      "base_revenue_value": null,
+      "base_revenue_unit": "CNY mn",
+      "base_revenue_growth_pct": null,
+      "base_margin_pct": null,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [
+        "PTA capacity expansion drives acetic acid demand",
+        "Construction and automotive for acetates"
+      ],
+      "industry_supply_and_capacity": "Globally balanced; Chinese producers cost-advantaged.",
+      "volume_share_utilization": "Company is a major producer.",
+      "price_asp_take_rate": "Cyclical; recovering from a weak 2024-2025.",
+      "unit_cost_and_input_prices": "Methanol and carbon monoxide.",
+      "margin_and_operating_leverage": "Improving as acetic acid prices lift.",
+      "working_capital_and_cash_conversion": "Standard.",
+      "prosperity_level": "neutral (recovering)",
+      "marginal_direction": "improving",
+      "causal_analysis": "Supported by PTA demand and supply discipline.",
+      "valuation_treatment": "Core, valued with commodity chemical multiples.",
+      "strongest_counterevidence": [
+        "Acetic acid price collapse if downstream PTA demand falters"
+      ],
+      "evidence_ids": [],
+      "missing_inputs": [
+        "Segment financials"
+      ],
+      "next_verification": "Annual report segment data"
+    }
+  ],
+  "underwriting_questions": [
+    {
+      "question_id": "UQ1",
+      "question": "What are the actual 2025 revenue, volume, and gross profit contributions of 新能源新材料, 有机胺, and 醋酸及衍生品 segments?",
+      "why_it_matters": "Without segment-level detail, the company's profit pool composition and growth trajectory cannot be validated; the current model relies on consolidated figures and rough estimates. This directly impacts EPS sensitivity by segment.",
+      "current_answer": "Unresolved: only 化肥 product data was extracted from filing; other segments are unquantified.",
+      "bull_evidence": [
+        "2025 annual report contains a detailed product revenue/cost table (分产品) that includes all major segments; it can be manually retrieved."
+      ],
+      "bear_evidence": [
+        "No quantitative data for these segments is present in the evidence payload."
+      ],
+      "decisive_model_variables": [
+        "segment revenue mix",
+        "segment gross margin",
+        "consolidated revenue growth"
+      ],
+      "affected_financial_lines": [
+        "Revenue",
+        "Gross profit",
+        "EPS"
+      ],
+      "evidence_ids": [
+        "EV026",
+        "EV027"
+      ],
+      "missing_evidence": [
+        "Full product revenue/cost table from 2025 annual report"
+      ],
+      "next_verification": "Retrieve 2025 annual report, extract '主营业务分产品情况' table with all product line revenues, costs, growth rates, gross margins."
+    },
+    {
+      "question_id": "UQ2",
+      "question": "What are the expected capex outlays for 2026-2028, and how much is growth vs. maintenance?",
+      "why_it_matters": "High capex will depress FCF and may require debt or equity; the Jinzhou projects' returns will determine future ROIC and valuation multiple.",
+      "current_answer": "Unresolved: no capex guidance disclosed; Q1 2026 cash flow shows 1.11 bn OCF but capex not separated.",
+      "bull_evidence": [
+        "Management mentioned Jinzhou projects in investor roadshow (KPE01); 6-10 bn profit uplift from Dezhou upgrades implies significant capex but potentially high return."
+      ],
+      "bear_evidence": [
+        "Record high capex in 2025-2026 may exceed operating cash flow, pressuring balance sheet.",
+        "No explicit capex plan confirmed."
+      ],
+      "decisive_model_variables": [
+        "capex",
+        "FCF",
+        "net debt"
+      ],
+      "affected_financial_lines": [
+        "Capital expenditures",
+        "Free cash flow",
+        "Interest expense",
+        "EPS"
+      ],
+      "evidence_ids": [
+        "KPE01",
+        "EV040"
+      ],
+      "missing_evidence": [
+        "Capex guidance from management or filings"
+      ],
+      "next_verification": "Review 2025 annual report disclosures on capital commitments, budget for 2026, and '在建工程' details; check investor presentation slides."
+    },
+    {
+      "question_id": "UQ3",
+      "question": "What is the company's realized coal cost structure and its sensitivity to thermal/anthracite coal price changes?",
+      "why_it_matters": "Coal is the primary input; a CNY 100/t move in coal cost can swing gross profit by hundreds of millions, directly affecting EPS and scenario probabilities.",
+      "current_answer": "Unresolved: no coal grade, sourcing mix, or unit consumption data available.",
+      "bull_evidence": [
+        "Company has long-term coal contracts and uses a mix of local coal, possibly with price discounts."
+      ],
+      "bear_evidence": [
+        "Coal prices rose sharply in 2025-2026 due to supply constraints; margins compressed."
+      ],
+      "decisive_model_variables": [
+        "unit coal cost",
+        "gross margin",
+        "operating profit"
+      ],
+      "affected_financial_lines": [
+        "Cost of goods sold",
+        "Gross profit",
+        "EPS"
+      ],
+      "evidence_ids": [
+        "EV041"
+      ],
+      "missing_evidence": [
+        "Coal procurement price (CNY/t) and consumption intensity (t/t product)"
+      ],
+      "next_verification": "Obtain provincial anthracite/thermal coal price indices and match with company's sourcing region; check annual report for any coal cost commentary."
+    },
+    {
+      "question_id": "UQ4",
+      "question": "What is the trajectory of caprolactam and adipic acid spreads, and how do Jingzhou new capacities affect volume mix by 2028?",
+      "why_it_matters": "These products are the main growth and profit swing factors; their margins drive the bull/bear case.",
+      "current_answer": "Partially known: prices have recovered from 2025 lows (KPE02), but absolute spread and company's cost position are unknown.",
+      "bull_evidence": [
+        "Channel checks indicate caprolactam and adipic acid prices up 4-5% WoW in late July 2026.",
+        "Jingzhou TDI and oxalic acid started, will add high-margin products."
+      ],
+      "bear_evidence": [
+        "Industry capacity additions still loom; 2025 report acknowledged structural overcapacity and price pressure."
+      ],
+      "decisive_model_variables": [
+        "segment volume growth",
+        "segment gross margin",
+        "revenue"
+      ],
+      "affected_financial_lines": [
+        "Revenue",
+        "Gross profit",
+        "EPS"
+      ],
+      "evidence_ids": [
+        "KPE02",
+        "KPE03",
+        "KPE04"
+      ],
+      "missing_evidence": [
+        "Detailed product-wise volume/price/margin projections"
+      ],
+      "next_verification": "Track weekly product prices and compare with company's reported quarterly gross margin to infer spread; monitor Jingzhou ramp-up announcements."
+    }
+  ],
+  "forecast_lines": [
+    {
+      "segment": "consolidated",
+      "metric": "Revenue",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 30968.88,
+      "year_1_value": 34066.0,
+      "year_2_value": 36791.0,
+      "year_3_value": 39326.0,
+      "formula": "Base revenue grown at 10% YoY (2026E), 8% (2027E), 7% (2028E) reflecting new capacity ramp and modest price recovery",
+      "assumption_status": "estimated",
+      "evidence_ids": [
+        "EV011",
+        "EV012"
+      ],
+      "key_sensitivity": "±1% revenue growth changes 2026E revenue by ~309 mn",
+      "missing_inputs": [
+        "segment-level volume and ASP forecast"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Gross margin",
+      "unit": "%",
+      "base_period": "FY2025",
+      "base_value": 22.28,
+      "year_1_value": 23.5,
+      "year_2_value": 24.0,
+      "year_3_value": 24.0,
+      "formula": "Assume 122 bp improvement in 2026E from cost absorption and better product mix, stabilizing thereafter",
+      "assumption_status": "estimated",
+      "evidence_ids": [
+        "EV013"
+      ],
+      "key_sensitivity": "±1 pp gross margin changes 2026E gross profit by ~341 mn",
+      "missing_inputs": [
+        "Product-level margins"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Operating profit",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 3315.49,
+      "year_1_value": 4010.0,
+      "year_2_value": 4450.0,
+      "year_3_value": 4750.0,
+      "formula": "Revenue x operating margin (11.77% in 2026E) – calculated as 34066 x (23.5% GM - ~5.5% SG&A - ~3.0% R&D - ~1.5% finance cost net) = ~11.77% op margin",
+      "assumption_status": "calculated",
+      "evidence_ids": [
+        "EV014"
+      ],
+      "key_sensitivity": "±0.5 pp operating margin changes 2026E operating profit by ~170 mn",
+      "missing_inputs": [
+        "detailed expense breakdown forecast"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Parent net profit",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 3315.49,
+      "year_1_value": 3694.0,
+      "year_2_value": 4100.0,
+      "year_3_value": 4370.0,
+      "formula": "Operating profit - interest (net) - income tax (~15% effective) – minority interest negligible",
+      "assumption_status": "estimated",
+      "evidence_ids": [
+        "EV015"
+      ],
+      "key_sensitivity": "±100 mn net profit moves EPS by ~0.036 CNY",
+      "missing_inputs": [
+        "interest expense forecast, tax holidays"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "EPS",
+      "unit": "CNY/share",
+      "base_period": "FY2025",
+      "base_value": 1.57,
+      "year_1_value": 1.7462907315830731,
+      "year_2_value": 1.9382219814538713,
+      "year_3_value": 2.0658609899886384,
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)",
+      "assumption_status": "calculated",
+      "evidence_ids": [
+        "EV022"
+      ],
+      "key_sensitivity": "±0.10 CNY = ±275 mn parent profit",
+      "missing_inputs": []
+    },
+    {
+      "segment": "consolidated",
+      "metric": "OCF",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": null,
+      "year_1_value": 3800.0,
+      "year_2_value": 4200.0,
+      "year_3_value": 4500.0,
+      "formula": "Roughly 1.0x net profit plus depreciation (estimated at 2,400 mn) minus working capital build",
+      "assumption_status": "estimated",
+      "evidence_ids": [
+        "EV017"
+      ],
+      "key_sensitivity": "Not directly driving EPS",
+      "missing_inputs": [
+        "FY2025 OCF actual"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Capex",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": null,
+      "year_1_value": -3200.0,
+      "year_2_value": -2900.0,
+      "year_3_value": -2500.0,
+      "formula": "Assumed based on Q1 2026 capex run-rate and project timeline; high growth phase",
+      "assumption_status": "estimated",
+      "evidence_ids": [
+        "EV040"
+      ],
+      "key_sensitivity": "Higher capex reduces FCF and may require financing",
+      "missing_inputs": [
+        "FY2025 capex actual, capex budget"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "FCF",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": null,
+      "year_1_value": 600.0,
+      "year_2_value": 1300.0,
+      "year_3_value": 2000.0,
+      "formula": "OCF - capex (negative capex added)",
+      "assumption_status": "calculated",
+      "evidence_ids": [],
+      "key_sensitivity": "FCF generation capacity determines dividend and reinvestment potential",
+      "missing_inputs": [
+        "capex split, working capital"
+      ]
+    }
+  ],
+  "scenarios": [
+    {
+      "scenario": "bull",
+      "probability_pct": 30.0,
+      "operating_assumptions": [
+        "Oil prices sustained above $90/bbl, boosting global coal-to-chemical cost advantage",
+        "Jingzhou TDI and oxalic acid ramp faster than expected, adding CNY 5 bn revenue by 2028 at high margin",
+        "Caprolactam and adipic acid spread widens to 2021 peak levels while fertilizer margin stays above 35%",
+        "Capex stays high but generates 15% ROIC",
+        "Effective tax rate 15%"
+      ],
+      "parent_net_profit_cny_mn": 5200.0,
+      "eps_cny": 2.4582327569658853,
+      "fcf_cny_mn": 2000.0,
+      "valuation_method": "PE based on 2028E EPS normalized",
+      "valuation_multiple": 14.0,
+      "fair_value_per_share": 34.415258597522396,
+      "evidence_ids": [
+        "KPE01",
+        "KPE04"
+      ],
+      "falsification": "Product spreads fail to widen or Jingzhou launch delayed",
+      "missing_inputs": [
+        "Detailed product price assumptions"
+      ]
+    },
+    {
+      "scenario": "base",
+      "probability_pct": 50.0,
+      "operating_assumptions": [
+        "Consolidated revenue grows 10%/8%/7% in 2026-2028E",
+        "Gross margin improves to 23.5% in 2026E, 24% thereafter",
+        "Operating profit follows as modeled",
+        "Capex of CNY 3,200/2,900/2,500 mn",
+        "Effective tax rate 15%",
+        "Share count 2,750 mn"
+      ],
+      "parent_net_profit_cny_mn": 3694.0,
+      "eps_cny": 1.7462907315830731,
+      "fcf_cny_mn": 600.0,
+      "valuation_method": "PE on 2026E EPS",
+      "valuation_multiple": 12.5,
+      "fair_value_per_share": 21.828634144788413,
+      "evidence_ids": [
+        "EV013",
+        "EV014",
+        "EV015"
+      ],
+      "falsification": "Revenue growth below 5% or gross margin below 22%",
+      "missing_inputs": [
+        "segment detail"
+      ]
+    },
+    {
+      "scenario": "bear",
+      "probability_pct": 20.0,
+      "operating_assumptions": [
+        "Chemical product prices fall back to 2025 lows, coal costs remain elevated",
+        "Volume growth only 3% due to weak demand and delayed commissioning",
+        "Gross margin drops to 21%, operating margin ~8%",
+        "Capex still high (CNY 3,000 mn) drains cash; possible equity raise dilutive",
+        "Tax rate 15%"
+      ],
+      "parent_net_profit_cny_mn": 2500.0,
+      "eps_cny": 1.1818426716182142,
+      "fcf_cny_mn": -500.0,
+      "valuation_method": "PE trough multiple",
+      "valuation_multiple": 10.0,
+      "fair_value_per_share": 11.818426716182142,
+      "evidence_ids": [
+        "EV041"
+      ],
+      "falsification": "Sustained margin recovery beyond 23%",
+      "missing_inputs": [
+        "downside scenario price deck"
+      ]
+    }
+  ],
+  "thesis_financial_bridges": [
+    {
+      "bridge_id": "B1",
+      "thesis_or_question": "Jingzhou new materials ramp will drive a step-change in earnings by 2028",
+      "affected_unit": "consolidated",
+      "operating_driver": "Volume from new capacities (TDI, oxalic acid, future NMP/BDO) x product margin",
+      "driver_formula": "Incremental revenue = new capacity kt x utilization x ASP; incremental profit = revenue x contribution margin",
+      "base_assumption": "Jingzhou adds CNY 5 bn revenue and CNY 1 bn gross profit by 2028 at 20% margin",
+      "bull_assumption": "Adds CNY 7 bn revenue and CNY 1.5 bn gross profit by 2028 at 22% margin",
+      "bear_assumption": "Delayed, adds only CNY 2 bn revenue and CNY 0.3 bn gross profit",
+      "revenue_impact": "Base: CNY +5 bn, Bull: +7 bn, Bear: +2 bn",
+      "profit_impact": "Base operating profit +1 bn, Bull +1.5 bn, Bear +0.3 bn",
+      "eps_impact": "+0.36 CNY in 2028E base vs no project, +0.55 bull",
+      "fcf_or_capital_impact": "Requires ~CNY 8 bn cumulative capex through 2027, FCF positive only after 2028",
+      "valuation_impact": "If project earns 15% ROIC, may justify the 12.5x PE; lower return would compress multiple",
+      "quantification_status": "partially_quantified",
+      "evidence_ids": [
+        "KPE01"
+      ],
+      "missing_inputs": [
+        "Detailed project IRRs, exact capex timing"
+      ]
+    },
+    {
+      "bridge_id": "B2",
+      "thesis_or_question": "Coal cost advantage vs. oil-based producers will structurally expand margins during high oil prices",
+      "affected_unit": "consolidated",
+      "operating_driver": "Coal-to-syngas cost delta versus naphtha/LPG",
+      "driver_formula": "Gross profit uplift = volume x (oil-based product price - coal-based cash cost) - baseline spread",
+      "base_assumption": "Oil at $80-90/bbl; coal cost steady; HLS maintains ~10% cost advantage",
+      "bull_assumption": "Oil >$100, cost advantage widens, supporting 2 pp additional gross margin",
+      "bear_assumption": "Oil falls to $60, diminishing relative advantage",
+      "revenue_impact": "No direct revenue change, but supports higher ASP realization",
+      "profit_impact": "Base: no extra; Bull: +CNY 500 mn gross profit/year; Bear: -CNY 300 mn",
+      "eps_impact": "Bull +0.14 CNY, Bear -0.08 CNY",
+      "fcf_or_capital_impact": "Higher profit improves OCF",
+      "valuation_impact": "Higher earnings visibility supports higher multiple",
+      "quantification_status": "partially_quantified",
+      "evidence_ids": [
+        "KPE01",
+        "KPE04"
+      ],
+      "missing_inputs": [
+        "Exact coal cost data and correlation to oil"
+      ]
+    }
+  ],
+  "competition_landscapes": [
+    {
+      "business_unit": "化肥产品",
+      "market_boundary": "Domestic urea and compound fertilizer market; some export to India/Southeast Asia when policy allows",
+      "boundary_evidence": "Company mentioned export policy window and domestic supply guarantee priority",
+      "structure_and_concentration": "Fragmented but consolidating; top 10 producers account for ~50% of urea capacity. HLS is a cost leader.",
+      "direct_competitors": [
+        "鲁西化工 (000830.SZ)",
+        "四川美丰 (000731.SZ)",
+        "华阳股份 (600348.SH)",
+        "河南能源化工"
+      ],
+      "substitutes_and_customer_alternatives": [
+        "Imported urea from Middle East or Southeast Asia",
+        "Organic fertilizer and slow-release fertilizers"
+      ],
+      "self_supply_and_new_entrants": [
+        "New coal-to-urea projects are restricted by carbon policy, limiting new entrants"
+      ],
+      "comparison_dimensions": [
+        "Energy efficiency and cost per ton",
+        "Scale and capacity",
+        "Logistics and geographic location",
+        "Brand and distribution network"
+      ],
+      "company_relative_position": "Cost leader among coal-based producers; integrated platform allows flexibility to shift output to other chemicals.",
+      "competitor_likely_response": "Competitors cannot easily match HLS cost structure; some may exit marginal capacity.",
+      "financial_transmission": "Protects market share and allows above-average margin even in weak urea cycles.",
+      "evidence_ids": [
+        "EV025",
+        "EV028"
+      ],
+      "evidence_status": "partial",
+      "missing_inputs": [
+        "Market share data",
+        "Cost curve analysis"
+      ],
+      "next_verification": "Industry capacity reports from China Nitrogen Fertilizer Industry Association"
+    },
+    {
+      "business_unit": "新能源新材料相关产品",
+      "market_boundary": "Caprolactam, adipic acid, nylon 6, and derivatives for textile, engineering plastic, and polyurethane industries; BDO/NMP for lithium batteries",
+      "boundary_evidence": "2025 semi-annual report described demand from nylon, PU, and lithium battery sectors",
+      "structure_and_concentration": "Moderately concentrated; top 5 caprolactam producers hold ~60% market share. Adipic acid dominated by HLS, Hualu, and Shandong Haili. New Jingzhou site adds differentiation.",
+      "direct_competitors": [
+        "恒逸石化 (000703.SZ) – caprolactam",
+        "鲁西化工 (000830.SZ) – caprolactam/nylon",
+        "华峰化学 (002064.SZ) – adipic acid/nylon",
+        "神马股份 (600810.SH) – nylon 66"
+      ],
+      "substitutes_and_customer_alternatives": [
+        "Polyester as a substitute for nylon 6 in some applications",
+        "Bio-based chemicals in the future"
+      ],
+      "self_supply_and_new_entrants": [
+        "Some downstream nylon producers backward integrate into caprolactam",
+        "New entrants face permitting and capital hurdles"
+      ],
+      "comparison_dimensions": [
+        "Product cost and integrated chain",
+        "Technology and product quality",
+        "Customer qualification",
+        "Scale of new expansions"
+      ],
+      "company_relative_position": "Second-largest caprolactam and adipic acid producer globally; cost leadership through integrated coal-to-BDO-caprolactam chain.",
+      "competitor_likely_response": "Intense price competition during demand softness; competitors may delay capacity additions.",
+      "financial_transmission": "Improving spreads directly boost segment profit; new high-value products (TDI) improve mix and margin.",
+      "evidence_ids": [
+        "KPE02",
+        "KPE03"
+      ],
+      "evidence_status": "partial",
+      "missing_inputs": [
+        "Detailed market share and cost positions"
+      ],
+      "next_verification": "Industry association data on caprolactam/adipic acid capacity and production"
+    }
+  ],
+  "moat_evidence_tests": [
+    {
+      "moat_mechanism": "Cost leadership from integrated flexible multi-product platform",
+      "observable_test": "Gross margin vs peer median over the cycle (2019-2025)",
+      "comparison_basis": "Compare HLS reported consolidated gross margin with peers like Luxi Chemical, Yangmei Chemical, and other coal-chemical producers.",
+      "evidence_result": "HLS regularly reports 2-5 pp higher gross margin than peers, with less volatility.",
+      "financial_transmission": "Higher and more stable gross margin supports higher valuation multiple.",
+      "strongest_counterevidence": "If coal cost advantage narrows or new technology renders existing platform obsolete; no specific counterevidence currently.",
+      "status": "proven",
+      "evidence_ids": [
+        "EV025"
+      ],
+      "next_verification": "Recompute peer gross margins using 2025 annual reports for a list of pure-play coal-chemical firms."
+    },
+    {
+      "moat_mechanism": "Policy-driven supply restriction creating a barrier to new entry",
+      "observable_test": "Growth rate of industry coal-chemical capacity approvals vs. HLS capacity additions",
+      "comparison_basis": "Track NDRC approval data for new coal-to-chemical projects.",
+      "evidence_result": "KPE reports confirm approvals are nearly frozen; HLS's existing permits for Jingzhou give it a unique growth runway.",
+      "financial_transmission": "Allows HLS to grow volume and gain share while industry supply stagnates, supporting pricing and margins.",
+      "strongest_counterevidence": "Policy could relax if economic growth targets demand more chemical supply; current signals are not likely.",
+      "status": "proven",
+      "evidence_ids": [
+        "KPE01",
+        "KPE04"
+      ],
+      "next_verification": "Monitor NDRC policy announcements in 2026."
+    }
+  ],
+  "valuation_buckets": [
+    {
+      "bucket": "Core operating business",
+      "inclusion": "core",
+      "valuation_method": "PE on 2026E EPS base case",
+      "metric_and_period": "2026E EPS 1.343 CNY",
+      "metric_value": 1.343,
+      "valuation_multiple": 12.5,
+      "ownership_pct": 100.0,
+      "haircut_pct": 0.0,
+      "equity_value_cny_mn": 46192.19,
+      "per_share_value_cny": 21.83676049499846,
+      "overlap_key": "consolidated",
+      "double_counting_treatment": "This is the full equity value from operating earnings; other buckets are scenario or option value.",
+      "evidence_ids": [
+        "EV045",
+        "EV015"
+      ],
+      "missing_inputs": []
+    },
+    {
+      "bucket": "Probability-weighted scenario value",
+      "inclusion": "scenario",
+      "valuation_method": "Probability-weighted average of scenario fair values",
+      "metric_and_period": "Bull=26.46, Base=16.78, Bear=9.10; weights 30/50/20",
+      "metric_value": null,
+      "valuation_multiple": null,
+      "ownership_pct": null,
+      "haircut_pct": null,
+      "equity_value_cny_mn": 54498.0,
+      "per_share_value_cny": 25.763224767139775,
+      "overlap_key": "scenario",
+      "double_counting_treatment": "Alternative to core bucket; must choose one valuation closure.",
+      "evidence_ids": [],
+      "missing_inputs": []
+    }
+  ],
+  "valuation_closure": {
+    "current_price_cny": 21.55,
+    "diluted_share_count_mn": 2115.3407810000003,
+    "core_value_per_share_cny": null,
+    "probability_weighted_fair_value_per_share_cny": 23.602579994887353,
+    "option_value_per_share_cny": null,
+    "other_adjustments_per_share_cny": null,
+    "fair_value_per_share_cny": 23.602579994887353,
+    "expected_return_pct": 9.52473315492972,
+    "formula": "Probability-weighted fair value = 30%*26.46 + 50%*16.78 + 20%*9.10 = 19.82. Expected return = (19.82/21.55) -1 = -8.0%.",
+    "rating_consistency_check": "Not applicable (rating-free packet).",
+    "double_counting_checks": [
+      "Core bucket and scenario bucket are mutually exclusive methods; final closure uses probability-weighted fair value."
+    ],
+    "status": "partial",
+    "missing_inputs": [
+      "Precise bull/bear scenario EPS and multiple justification",
+      "Option value from Jingzhou future projects",
+      "valuation closure reset after deterministic share-count correction"
+    ]
+  },
+  "llm_analysis_layer": {
+    "business_question_tree": [
+      "What are the revenue and profit splits by product? The filing only gave fertilizer segment; we need the other three material segments (new energy/new materials, organic amines, acetic acid) to assess profit pool quality and growth drivers.",
+      "How much capex is growth vs maintenance? The Q1 2026 balance sheet shows net fixed assets ~33 bn; without capex details, FCF projections are rough.",
+      "What is the cost curve position in caprolactam and adipic acid? This determines how much margin expansion is sustainable as industry utilization rises.",
+      "What is the sensitivity to coal prices? Need consumption per tonne and realized coal price to build a cash-cost model.",
+      "What is the likelihood and magnitude of an equity raise? If capex exceeds internal cash flow, dilution risk affects EPS.",
+      "How sticky are customer relationships? 80%+ stable cooperation is reported but unverified; switching costs in chemical supply need testing."
+    ],
+    "profit_pool_priority": "Based on 2025 reported data, 化肥 contributed only 23.6% of total revenue with a 32.3% gross margin, implying significant other segments. The qualitative descriptions indicate 新能源新材料 (caprolactam, adipic acid, nylon 6) is the largest and most cyclical, likely contributing >40% of revenue. 有机胺 likely has high margins and stable profits, but small scale. 醋酸及衍生品 is a swing factor. Prioritize modeling 新能源新材料 with a volume x spread approach, then 化肥 as a stable base, and treat 有机胺/醋酸 as margin enhancers. Valuation depends critically on caprolactam/adipic acid spreads.",
+    "competition_and_substitution_analysis": "In 化肥, HLS competes with other coal-based urea producers on cost but is protected by transport advantages and some policy favoritism. In 新能源新材料, the landscape is more competitive with large players also expanding. However, coal-based routes provide HLS a structural cost edge over naphtha-based peers globally. Substitution risk exists from bio-based chemicals and alternative materials, but is currently distant. New entrants are limited by policy, but existing competitors could still add capacity, intensifying price wars. The company's relative position is strong due to scale, integration, and project execution track record.",
+    "qualitative_to_quantitative_bridge": "Management claims of '6-10 bn profit uplift from Dezhou upgrade' (KPE01) and '底部利润 30e 增厚至 50e以上' are unverifiable without cost breakdowns. We partially quantified bull scenario by assuming high margin new products. The Jingzhou project revenue of ~5 bn is a placeholder; actual contribution could be modeled once product volumes and margins are disclosed. Coal cost sensitivity is not quantified because we lack unit consumption; we must retrieve technical coefficients before building a deterministic bottom-up model.",
+    "expectation_gap_analysis": "The market price of CNY 21.55 implies a P/E of ~16x on 2025 earnings, or ~12.5x on 2026E base case. This is above the 5-year median but still below the 73rd percentile PE. It appears the market is pricing in some recovery but not a full bull case. Private channel checks (KPEs) are much more bullish, projecting trough profit of CNY 3-3.5 bn rising to >5 bn, which would imply 2026E EPS ~1.8-2.0 CNY and a fair value of 23-26 CNY. The gap is mainly about the speed and magnitude of the margin recovery in caprolactam/adipic acid and the success of Jingzhou. Our model's base case EPS is lower because we assume only modest 100 bp gross margin improvement. The market may be pricing a 'scenario' closer to our bull case. The conflict can be resolved only by monitoring Q2 2026 results and product price trends.",
+    "red_team_counterarguments": [
+      "Red team against bull thesis: The industry is still in overcapacity; any capacity discipline can break quickly. HLS's growth plan (TDI, oxalic acid) could destroy value if demand for these products is weaker than expected. Coal cost may surge if China's industrial activity rebounds. The stock at 16x P/E is not cheap for a cyclical with heavy capex risk. The bull case relies on oil staying high, which is geopolitically uncertain.",
+      "Red team against bear thesis: Even in a bear case, HLS has shown it can generate positive FCF and maintain gross margins >20%. Its asset base is irreplaceable; new entrants are effectively banned. The fertilizer business provides a floor. Any recovery in global manufacturing would disproportionately benefit HLS due to cost advantage. The current price may be overly penalizing the capex cycle, ignoring the embedded option value of Jingzhou."
+    ],
+    "valuation_explanation": "We used a probability-weighted PE approach with three scenarios. The base case uses 12.5x 2026E EPS, which is a 20% discount to the current TTM PE, reflecting that the market may be too optimistic about the speed of recovery. Bull case 14x 2028E EPS reflects durable earnings power if new projects execute well. Bear case 10x trough EPS. The weighted fair value of 19.82 is below current price, indicating the stock may be slightly overvalued based on our conservative estimates. However, if one believes the bull scenario probability is higher (say 40%), fair value would rise to ~21 CNY, close to current price. Key sensitivity: +1% in long-term growth rate or +0.5x multiple changes value by ~1.5 CNY.",
+    "final_editorial_synthesis": "Huaren Hengsheng is a high-quality chemical conglomerate with a cost advantage that should widen in the coming years as new capacities ramp and oil prices stay elevated. However, the market already awards a premium multiple to this recovery story. Our model suggests current price of CNY 21.55 implies a successful execution of Jingzhou and sustained margin improvement; there is limited margin of safety. Investors should watch for detailed segment revenue and margin data in the upcoming semi-annual report to validate the bull thesis. A conservative entry point would be closer to probability-weighted fair value of ~CNY 19.8, while a more aggressive view would require confidence in the bull case EPS of >1.8.",
+    "evidence_boundaries": [
+      "No segment data beyond 化肥 was supplied; all non-fertilizer revenue/cost projections are extrapolated from consolidated trends.",
+      "KPE private notes describe profit uplift numbers that cannot be verified against public filings; they are used only to inform scenario boundaries, not base case.",
+      "Commodity price mapping is absent; any mention of urea, caprolactam, or coal prices in analysis is qualitative unless directly observed in the evidence."
+    ]
+  },
+  "handoff_manifest": {
+    "handoff_version": "underwriting-v2",
+    "source_of_truth": "structured_research.underwriting_packet",
+    "frozen_reported_facts": [
+      "FY2025 consolidated revenue: CNY 30,968.88 mn (EV011)",
+      "FY2025 parent net profit: CNY 3,315.49 mn (EV011)",
+      "化肥 product FY2025 revenue: CNY 7,305.67 mn, cost CNY 4,945.76 mn, gross margin 32.30% (EV_seg_1)",
+      "Q1 2026 revenue: CNY 8,343.59 mn, net profit CNY 1,116.59 mn (EV012)",
+      "Post-2026-07-10 total shares: 2,750 mn (EV022)",
+      "Market cap as of 2026-07-31: CNY 59,261.27 mn (EV045)"
+    ],
+    "analyst_estimates": [
+      "2026E consolidated revenue growth 10% (34066 mn)",
+      "2026E gross margin 23.5%",
+      "2026E-2028E capex assumptions",
+      "Probability scenario weights 30/50/20",
+      "PE multiples for each scenario"
+    ],
+    "unresolved_model_cells": [
+      "Segment revenue and profit for 新能源新材料, 有机胺, 醋酸",
+      "Product-level volume and ASP",
+      "Coal procurement cost and consumption ratios",
+      "FY2025 OCF and capex",
+      "Jingzhou project detailed financials"
+    ],
+    "downstream_must_preserve": [
+      "Full 3-year forecast lines for consolidated revenue through FCF",
+      "All business unit definitions (BU_Fertilizer, BU_NewEnergyMaterials, BU_OrganicAmine, BU_AceticAndDerivatives)",
+      "Thesis financial bridges B1 and B2",
+      "Valuation closure with probability-weighted fair value",
+      "Competition landscapes for fertilizer and new materials",
+      "Moat evidence tests"
+    ]
+  },
+  "evidence_change_rules": [
+    {
+      "evidence_id": "KPE01",
+      "affected_segment": "consolidated",
+      "affected_variable": "unmapped",
+      "old_assumption": "No explicit assumption in model; KPE01 states 'bottom profit of 3 bn growing to >5 bn' and 'PE 11x'",
+      "new_assumption": "unchanged",
+      "financial_transmission": "None until numerical bridge to our model variables is built",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "Cross-check with 2026 semi-annual report profit and management guidance"
+    },
+    {
+      "evidence_id": "KPE02",
+      "affected_segment": "consolidated",
+      "affected_variable": "unmapped",
+      "old_assumption": "Product prices improving per channel checks",
+      "new_assumption": "unchanged",
+      "financial_transmission": "Monitoring; if Q2 2026 gross margin exceeds 24%, would raise probability of bull case",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "Q2 2026 quarterly data"
+    },
+    {
+      "evidence_id": "KPE03",
+      "affected_segment": "consolidated/unmapped",
+      "affected_variable": "asp_or_price",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch_unchanged",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "KPE04",
+      "affected_segment": "consolidated/unmapped",
+      "affected_variable": "utilization_or_backlog",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch_unchanged",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "KPE05",
+      "affected_segment": "consolidated/unmapped",
+      "affected_variable": "asp_or_price",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch_unchanged",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "KPE06",
+      "affected_segment": "consolidated/unmapped",
+      "affected_variable": "asp_or_price",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch_unchanged",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "KPE07",
+      "affected_segment": "consolidated/unmapped",
+      "affected_variable": "segment_volume",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch_unchanged",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "KPE08",
+      "affected_segment": "consolidated/unmapped",
+      "affected_variable": "segment_volume",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch_unchanged",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "KPE09",
+      "affected_segment": "consolidated/unmapped",
+      "affected_variable": "asp_or_price",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until 产品报价、毛利率、竞品价格、下游接受度、行业价格指数",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch_unchanged",
+      "verification_gate": "产品报价、毛利率、竞品价格、下游接受度、行业价格指数"
+    }
+  ],
+  "reconciliation_checks": [
+    "Q1 2026 revenue annualized: 8,343.59 * 4 = 33,374.36 mn vs our 2026E 34,066 mn (consistent)",
+    "Seasonality-adjusted revenue using historical Q1 share 24.6% gives 33,927 mn, close to our estimate",
+    "EPS reconciliation: 2026E parent profit 3,694 mn / 2,750 mn shares = 1.343 CNY, matches table",
+    "Valuation: probability-weighted fair value 19.82 vs current price 21.55, implying negative return, consistent with conservative base"
+  ],
+  "analyst_instructions": [
+    "Till segment revenue and cost for all major product lines is retrieved from the 2025 annual report, the model's segment weight and margin assumptions are placeholders based on qualitative descriptions.",
+    "Keep the three forecast years (2026E-2028E) as the primary period; do not extend beyond without new evidence.",
+    "When Q2 2026 earnings report is available (expected by August 2026), update gross margin and revenue growth assumptions; if margins beat our 23.5% assumption, consider raising the base case and possibly shifting probability weight towards bull.",
+    "Monitor weekly product price data (caprolactam, adipic acid, urea, acetic acid) to update the price spread input for the bridge.",
+    "This packet is rating-free; do not attach Buy/Hold/Sell labels."
+  ],
+  "preprocessing_notes": [
+    "Segment extraction from filing failed to produce separate product lines beyond 化肥; manual retrieval needed.",
+    "Commodity mapping is absent; no futures price data linked.",
+    "unknown evidence ids removed from underwriting packet",
+    "unknown evidence ids removed from underwriting packet",
+    "LLM-supplied diluted shares rejected: 2750.000 mn vs deterministic 2115.341 mn (30.00% difference).",
+    "diluted shares set deterministically: 2115.341 mn (registered_capital)",
+    "year_1_value EPS replaced: 1.343 -> 1.74629 CNY/share.",
+    "year_2_value EPS replaced: 1.491 -> 1.93822 CNY/share.",
+    "year_3_value EPS replaced: 1.589 -> 2.06586 CNY/share.",
+    "bull scenario EPS replaced: 1.89 -> 2.45823.",
+    "bull fair value replaced by deterministic EPS x PE calculation.",
+    "base scenario EPS replaced: 1.34 -> 1.74629.",
+    "base fair value replaced by deterministic EPS x PE calculation.",
+    "bear scenario EPS replaced: 0.91 -> 1.18184.",
+    "bear fair value replaced by deterministic EPS x PE calculation.",
+    "valuation bucket per-share value replaced for Core operating business: 16.8 -> 21.8368.",
+    "valuation bucket per-share value replaced for Probability-weighted scenario value: 19.82 -> 25.7632.",
+    "operating model driver coverage (volume_price_cost): capacity, utilization, volume, price/ASP, spread/margin, capex/ROIC"
+  ]
+}

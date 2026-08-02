@@ -153,19 +153,19 @@ DEFAULT_CONFIG = {
     # research pack from being retransmitted in full to every downstream role.
     # The reader dossier and canonical structured model are budgeted separately.
     "prompt_context_total_chars_analyst": _env_int_or_default(
-        "PROMPT_CONTEXT_TOTAL_CHARS_ANALYST", 48000
+        "PROMPT_CONTEXT_TOTAL_CHARS_ANALYST", 36000
     ),
     "prompt_context_total_chars_research": _env_int_or_default(
-        "PROMPT_CONTEXT_TOTAL_CHARS_RESEARCH", 48000
+        "PROMPT_CONTEXT_TOTAL_CHARS_RESEARCH", 40000
     ),
     "prompt_context_total_chars_trader": _env_int_or_default(
-        "PROMPT_CONTEXT_TOTAL_CHARS_TRADER", 22000
+        "PROMPT_CONTEXT_TOTAL_CHARS_TRADER", 16000
     ),
     "prompt_context_total_chars_risk": _env_int_or_default(
-        "PROMPT_CONTEXT_TOTAL_CHARS_RISK", 14000
+        "PROMPT_CONTEXT_TOTAL_CHARS_RISK", 12000
     ),
     "prompt_context_total_chars_portfolio": _env_int_or_default(
-        "PROMPT_CONTEXT_TOTAL_CHARS_PORTFOLIO", 56000
+        "PROMPT_CONTEXT_TOTAL_CHARS_PORTFOLIO", 44000
     ),
     # A-share contexts are fetched once before the graph starts. Re-querying
     # the same Tushare/filing/event tools inside analysts adds calls and tokens
@@ -192,7 +192,7 @@ DEFAULT_CONFIG = {
     ),
     "structured_research_prompt_max_chars": _env_int_or_default(
         "STRUCTURED_RESEARCH_PROMPT_MAX_CHARS",
-        42000,
+        36000,
     ),
     # Reuse semantic extraction + underwriting only when the complete source
     # payload, model identity, configuration and implementation fingerprint are
@@ -210,7 +210,7 @@ DEFAULT_CONFIG = {
     ),
     "company_underwriting_prompt_max_chars": _env_int_or_default(
         "COMPANY_UNDERWRITING_PROMPT_MAX_CHARS",
-        60000,
+        48000,
     ),
     # A-share precomputed contexts are independent IO-heavy calls. Fetch a few
     # in parallel so the CLI does not sit idle before the first analyst starts.

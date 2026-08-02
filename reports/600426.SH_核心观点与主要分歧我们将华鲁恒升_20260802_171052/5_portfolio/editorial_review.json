@@ -1,0 +1,53 @@
+{
+  "review": {
+    "revision_required": true,
+    "overall_assessment": "Deterministic quality router found actionable issues; send them directly to the bounded revision pass.",
+    "revision_instructions": [
+      "analytical structure: company-specific research questions count=0, expected at least 3",
+      "analytical structure: evidence-weighted question verdicts count=0, expected at least 3",
+      "analytical structure: forecast take-aways count=0, expected at least 2",
+      "analytical structure: auditable forecast assumptions count=0, expected at least 3",
+      "analytical structure: ranked core theses count=0, expected at least 2",
+      "deep research matrix: business-model mechanism rows count=0, expected at least 4",
+      "deep research matrix: material segment-economics rows count=0, expected at least 2",
+      "deep research matrix: sector-native driver rows count=0, expected at least 3",
+      "deep research matrix: market-boundary competition rows count=0, expected at least 1",
+      "deep research matrix: economic moat mechanism rows count=0, expected at least 3",
+      "deep research matrix: accounting/capital-allocation rows count=0, expected at least 3",
+      "public language: English-heavy reader-facing fields must be translated to Chinese: one_line_thesis, autonomous_forecast_model, valuation_closure"
+    ]
+  },
+  "review_status": {
+    "mode": "deterministic_issue_router",
+    "agent": "Sell-Side Research Editor",
+    "structured_error": ""
+  },
+  "revision_requested": true,
+  "revision_applied": true,
+  "revision_status": {
+    "mode": "schema_prompt_structured",
+    "agent": "Portfolio Manager Editorial Revision",
+    "structured_error": ""
+  },
+  "initial_handoff_issues": [],
+  "initial_analytical_issues": [
+    "analytical structure: company-specific research questions count=0, expected at least 3",
+    "analytical structure: evidence-weighted question verdicts count=0, expected at least 3",
+    "analytical structure: forecast take-aways count=0, expected at least 2",
+    "analytical structure: auditable forecast assumptions count=0, expected at least 3",
+    "analytical structure: ranked core theses count=0, expected at least 2",
+    "deep research matrix: business-model mechanism rows count=0, expected at least 4",
+    "deep research matrix: material segment-economics rows count=0, expected at least 2",
+    "deep research matrix: sector-native driver rows count=0, expected at least 3",
+    "deep research matrix: market-boundary competition rows count=0, expected at least 1",
+    "deep research matrix: economic moat mechanism rows count=0, expected at least 3",
+    "deep research matrix: accounting/capital-allocation rows count=0, expected at least 3",
+    "public language: English-heavy reader-facing fields must be translated to Chinese: one_line_thesis, autonomous_forecast_model, valuation_closure"
+  ],
+  "remaining_handoff_issues": [],
+  "remaining_analytical_issues": [
+    "public thesis chapter missing strongest counterargument/boundary",
+    "public thesis chapter missing market-pricing implication"
+  ],
+  "revision_rejection_reasons": []
+}

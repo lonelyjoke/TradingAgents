@@ -110,9 +110,9 @@ _CONTEXT_KEYS = {
 
 _BASE_LIMITS = {
     "default": 5000,
-    "analyst_report": 4500,
-    "debate_history": 12000,
-    "risk_history": 9000,
+    "analyst_report": 3800,
+    "debate_history": 8000,
+    "risk_history": 6000,
     "investment_plan": 7000,
     "trader_plan": 4500,
     "past_context": 3500,
@@ -210,13 +210,13 @@ _CONTEXT_PRIORITY = (
 def _profile_total_limit(profile: str) -> int:
     config = get_config()
     defaults = {
-        "analyst": 48000,
-        "research": 48000,
-        "trader": 22000,
-        "risk": 14000,
-        "portfolio": 56000,
+        "analyst": 36000,
+        "research": 40000,
+        "trader": 16000,
+        "risk": 12000,
+        "portfolio": 44000,
     }
-    default = defaults.get(profile, 48000)
+    default = defaults.get(profile, 40000)
     try:
         configured = int(
             config.get(f"prompt_context_total_chars_{profile}", default) or default

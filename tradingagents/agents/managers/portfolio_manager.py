@@ -941,6 +941,56 @@ def _analytical_structure_issues(
             issues.append(
                 f"deterministic valuation: bull/base/bear scenario inputs count={len(scenarios)}, expected 3"
             )
+
+    # The public memo is an editorial product, not a dump of every structured
+    # field. These are soft chapter budgets: crossing one requests synthesis,
+    # while unavailable evidence never has to be invented to fill space.
+    public_field_budgets = {
+        "investment_conclusion_and_core_conflict": 1200,
+        "company_disaggregation": 2200,
+        "industry_cycle_and_competition": 2000,
+        "accounting_and_capital_allocation": 1600,
+        "moat_evidence_scorecard": 1600,
+        "thesis_financial_bridge": 2400,
+        "expectation_gap_and_market_pricing": 1600,
+        "valuation_closure": 1400,
+        "risks_catalysts_verification": 1600,
+    }
+    for field, budget in public_field_budgets.items():
+        length = len(str(pm_payload.get(field, "") or ""))
+        if length > budget:
+            issues.append(
+                f"public editorial compression: {field} has {length} chars; synthesize below about {budget} chars, "
+                "retain the causal chain and remove repeated evidence/workflow prose"
+            )
+
+    valuation = dict(pm_payload.get("deterministic_valuation", {}) or {})
+    try:
+        expected_return = float(valuation.get("expected_return_pct"))
+    except (TypeError, ValueError):
+        expected_return = None
+    rating = str(pm_payload.get("rating", "") or "")
+    rating_conflict = ""
+    if valuation.get("status") == "closed" and expected_return is not None:
+        if rating in {"Buy", "Overweight"} and expected_return < -2.0:
+            rating_conflict = (
+                f"{rating} conflicts with deterministic expected return {expected_return:.1f}%"
+            )
+        elif rating in {"Underweight", "Sell"} and expected_return > 20.0:
+            rating_conflict = (
+                f"{rating} conflicts with deterministic expected return {expected_return:.1f}%"
+            )
+        elif rating == "Hold" and (expected_return < -15.0 or expected_return > 25.0):
+            rating_conflict = (
+                f"Hold sits beside deterministic expected return {expected_return:.1f}%"
+            )
+    if rating_conflict:
+        issues.append(
+            "rating-valuation consistency: "
+            + rating_conflict
+            + "; revise the rating to match the closed payoff distribution, or revise auditable scenario inputs—"
+            "do not hide the conflict behind qualitative wording"
+        )
     thesis_chapter = str(pm_payload.get("thesis_financial_bridge", "")).lower()
     closure_markers = {
         "strongest counterargument/boundary": ("反证", "反方", "边界", "counter"),
@@ -1336,7 +1386,10 @@ Revise the PM draft once using the editorial findings below. Return the complete
 SellSidePMDecision object, including fields that are unchanged.
 
 Hard preservation rules:
-- Keep the original rating exactly unchanged.
+- Keep the original rating unchanged unless the deterministic findings explicitly contain
+  `rating-valuation consistency`. In that one case, change the rating only if required to
+  align it with the application-calculated expected return and payoff distribution; never
+  alter auditable valuation inputs merely to defend the original label.
 - When the configured output language is Chinese, translate every reader-facing prose
   field into fluent Chinese, including forecast_takeaways and forecast_assumptions.
   Preserve tickers, source IDs, product names, metric abbreviations and units, but never
@@ -1353,13 +1406,14 @@ Hard preservation rules:
   records below exist only to support the editor's named corrections.
 - Preserve the Portfolio Manager mandate: the output remains a self-contained public research note,
   not a checklist of upstream modules or an internal analysis transcript.
-- Preserve the compact public-writing contract: begin with a short Company Snapshot; retain the
-  Business Model & Industry Chain Primer and its upstream-midstream-downstream chain; use the
-  required Debate & Decision Logic, Catalysts & Optionality, Evidence Gaps & Data Coverage, and
-  Verification & Falsification content in their owning chapters. Use this narrative order and
-  treat source modules as materiality gates, not a checklist. Avoid repeating the same fact;
-  prefer less fragmentation, more synthesis. There is no hard word-count or section-count target.
-  Close each decisive argument as claim -> evidence -> causal transmission -> valuation/position implication.
+- Preserve the compact public-writing contract: put the rating, one-line thesis, valuation/payoff
+  and action posture in the opening investment summary, then let the seven chapters explain the
+  conclusion in causal order. Retain business mechanics, industry chain, profit pools, thesis,
+  forecast, expectations, valuation, risks and falsification in their owning chapters. Treat
+  source modules as materiality gates, not a checklist. Delete repeated facts and workflow prose;
+  prefer fewer, stronger paragraphs. Chapter budgets are editorial compression signals, not a
+  request to truncate a causal chain or invent content. Close each decisive argument as claim ->
+  evidence -> causal transmission -> valuation/position implication.
   Preserve the Bank Buy-Side Memo Overlay rule, including: If the target is not a bank, do not
   force bank-specific metrics. Route non-bank companies through their own industry-native drivers.
   For banks, retain PB/ROE/COE and earning assets x NIM logic. Preserve the Decision-Continuity Rules
@@ -1587,7 +1641,7 @@ def create_portfolio_manager(llm):
 - The PM is a report synthesizer and final allocator, not the first analyst to understand the company. Do not summarize upstream prose sequentially. Reconstruct the investment case from the shared operating equations and accepted model changes, then use debate excerpts only to explain why an assumption changed or stayed unchanged.
 - Fill every required field in `SellSidePMDecision`. The renderer, not the model, owns all H1/H2 headings and produces exactly seven public Chinese chapters. Do not put H2 headings in any field. `report_markdown` is ignored legacy compatibility state and must be empty.
 - The Structured Research Bundle contains `research_dossier`, the authoritative reader-led routing layer. Start with its company introduction, industry chain, profit pools, key underwriting questions, forecast spine, market expectations, Knowledge Planet dispositions and seven `chapter_packets`. Do not write the report by recapping raw source modules. Each chapter must follow: reader question -> clear judgment -> business/industry mechanism -> a few decisive evidence points -> strongest counterevidence/boundary -> financial or valuation implication -> transition.
-- Data support judgment; it does not replace judgment. Explain the company and its industrial chain in fluent language before presenting dense tables. Keep raw evidence ledgers, source-status bookkeeping and rejected clues in the internal appendix. The formal rating belongs at the end of chapter seven after the company, industry, profit-pool, competition, forecast and expectation-gap reasoning has been developed.
+- Data support judgment; it does not replace judgment. Open with the formal rating, one-line thesis, application-calculated valuation/payoff and action posture so the reader never has to search for the conclusion. Then explain the company and its industrial chain in fluent language. Keep raw evidence ledgers, source-status bookkeeping and rejected clues in the internal appendix, and restate the rating briefly at the end of chapter seven.
 - Regardless of the upstream Research Manager language, translate every reader-facing prose field into fluent Chinese before returning JSON. This includes every string in `forecast_takeaways`, `forecast_assumptions`, public thesis/forecast/valuation/risk fields, and foreign-sell-side disclosure. Preserve tickers, KPE/KSI/EV ids, product names, metric abbreviations and units, but do not copy a complete English sentence into the public report.
 - Fill `research_questions`, `question_verdicts`, `forecast_takeaways`, `forecast_assumptions`, and `core_theses` from the accepted model. Do not leave them empty when the source record supports analysis. Questions, verdicts and thesis cards are the internal analytical workbench; they must improve the reasoning but must not appear as a public question list, Q&A ledger or repeated checklist.
 - Fill `segment_economics` with every material economic unit, using reported/calculated/analyst-estimate/missing labels and explicit core/scenario/optionality/excluded valuation treatment. Fill `industry_driver_matrix` with dated demand, supply/capacity, price/cost and policy variables. Fill one `competition_landscapes` row per material economic unit: define the market boundary before naming direct competitors; separately test substitutes, customer self-supply and new entrants; compare on the dimensions customers actually use; state relative position, likely competitor response and the revenue/margin/cash/ROIC transmission. Missing share/concentration data is partial coverage, not grounds to omit the row or block the report. Fill `accounting_quality_matrix` with working-capital, cash-conversion, capex/ROIC, leverage/impairment and shareholder-return checks. The adjacent prose interprets these tables and must not repeat every cell.
@@ -1596,7 +1650,7 @@ def create_portfolio_manager(llm):
 - The research depth chain must be explicit in the reasoning even if not shown as a table: financial-report revenue mix -> profit-pool priority -> segment-specific question tree -> qualitative/quantitative answer -> market expectation gap -> valuation transmission -> falsification gate. Revenue weight alone is insufficient; rank business importance by revenue weight, gross margin, growth, cash conversion, capex intensity, competitive erosion risk and valuation sensitivity.
 - Every core thesis must identify the specific business-line assumption that differs from market expectations, the direction and mechanism of the difference, the revenue/profit/EPS/FCF or multiple impact, the strongest counter-mechanism, and the earliest observable KPI or disclosure that would confirm or overturn it.
 - Use the LLM analysis layer in eight places before writing the final decision: (1) generate business-line question trees from filing revenue mix, (2) judge profit-pool priority beyond revenue share, (3) analyze competition/substitution/customer switching, (4) bridge qualitative judgment to quantitative evidence or retrieval tasks, (5) infer market/consensus expectation gap, (6) red-team the thesis and define falsification, (7) explain valuation as operating-variable transmission while application code owns arithmetic, and (8) act as final sell-side editor. These are analytical judgments; do not invent historical facts or unsupported numbers.
-- The public memo must show the result of these eight LLM interventions as a single investment argument. Do not create eight visible sub-sections, paste the LLM intervention map, or expose raw question trees. The reader should see a clean sell-side note: conclusion first, business economics, industry/competition, thesis with counter-case, forecast, valuation, risks/catalysts, verification and action.
+- The public memo must show the result of these eight LLM interventions as a single investment argument. Do not create eight visible sub-sections, paste the LLM intervention map, or expose raw question trees. The reader should see a clean sell-side note: rating and conclusion first, then business economics, industry/competition, thesis with counter-case, forecast, valuation, risks/catalysts, verification and action.
 - Fill `business_model_mechanisms` with four to seven links covering customer/value proposition, purchase or tender decision, pricing, delivery/revenue recognition, cost stack/service, and cash collection/capital intensity. Fill `moat_mechanisms` with at least three mechanisms tested through observable share, win rate, ASP, margin, turnover, cash or ROIC outcomes. Awards, R&D spending and market-share labels are not moat proof by themselves.
 - Fill `safe_valuation_assumptions` with exactly bull/base/bear inputs plus required return, holding period, margin of safety and maximum acceptable bear loss. Use the risk parameters as underwriting discipline, not as a second punishment after already conservative base/bear scenarios. For mature blue chips or conservative base cases, start from required annual return 18-20%, one-year holding period unless the thesis needs a longer verification clock, 15-20% margin of safety, and 15-20% maximum acceptable bear loss. Use 25%+ required return or 25%+ bear-loss tolerance only for genuinely high-beta, highly leveraged, evidence-thin, or speculative names, and explain why in `valuation_closure`. Put each genuinely independent second curve in `optionality_inputs` with one metric value, multiple, probability, ownership and a separate execution haircut. Never add a bull-versus-base incremental value as optionality when the same volume, margin, project or multiple already differs across bull/base/bear scenarios; application code will exclude it as double counting. Never encode a 25% probability again as a 75% haircut. Do not calculate scenario EPS, equity value, per-share value, probability-weighted value, optionality per share, expected return or safety price; application code owns those outputs. In `valuation_closure`, explain method choice, evidence limits, double counting and what would change the assumptions, without publishing competing hand-calculated values or restating a manual option-value formula.
 - For each deduplicated material Knowledge Planet claim, fill `alternative_intelligence_decisions` from full topic text, not a title or ellipsis. Independently record `source_reliability`, `bias_profile` and `adoption_ceiling`, then grade it A/B/C/D, state age and decision shelf life, and force one outcome: model change, scenario-probability change, verification-clock/gate change, or explicit rejection. An identified sell-side interpretation is one reliability tier above anonymous private text but carries `sell_side_optimism`; it may become a model input only after public or independent cross-check and otherwise remains scenario/verification evidence. Multiple reposts of the same original note are one claim, not independent corroboration. Integrate the result into the affected thesis; do not create a raw-message catalog. Recent does not mean true, while stale channel checks cannot alter the current model without revalidation.
@@ -1606,13 +1660,13 @@ def create_portfolio_manager(llm):
 - `core_theses` must contain only the 2-4 conclusions that decide the rating. Do not produce separate flat lists of thesis bullets and moat bullets. A moat is relevant only when observable evidence shows transmission into share/price, margin, turnover, cash conversion, ROIC or valuation, with the strongest counterevidence and a falsification gate.
 - Copy the machine-readable Research Manager `canonical_model_snapshot` line for line, including ids, periods, values and units. Any PM revision requires a matching accepted `handoff_change_rows` entry with old/new value, evidence ids and recalculated EPS/FCF/valuation impact. A prose claim of "no change" never overrides a numeric difference.
 - A forecast may be called bottom-up only when every material business unit has three numeric forward-year rows and their revenue/profit totals reconcile to the consolidated lines. Otherwise label it top-down or hybrid and name the missing shipment/ASP/margin inputs.
-- Public-report depth contract: let length follow company complexity and evidence density, but make the public memo a synthesized seven-chapter research journey: company/how it earns -> industrial-chain position -> business and profit pools -> competition/moat/weaknesses -> growth disputes and forecast -> market expectations/risks/verification -> valuation/rating/conclusion. They must contain the causal reasoning, decisive evidence, valuation/forecast outputs and verification gates needed to understand the recommendation. The application renders compact business-mechanism, segment-economics, industry-driver, moat and accounting-quality tables in their owning chapters. Raw KPE/KSI disposition logs, handoff/model-change audits and report-quality self-checks remain in the internal appendix.
+- Public-report depth contract: let length follow company complexity and evidence density, but make the public memo a synthesized seven-chapter research journey: company/how it earns -> industrial-chain position -> business and profit pools -> competition/moat/weaknesses -> growth disputes and forecast -> market expectations/risks/verification -> valuation/rating/conclusion. They must contain the causal reasoning, decisive evidence, valuation/forecast outputs and verification gates needed to understand the recommendation. Use tables only for genuinely comparable numbers such as the three-year forecast and scenario valuation. Business mechanisms, segment economics, industry drivers, competition, moat, accounting quality and private intelligence must be concise reader-facing subsections or bullets, never wide prose tables. Raw KPE/KSI disposition logs, handoff/model-change audits and report-quality self-checks remain in the internal appendix.
 - The public report must read like an investor-facing sell-side note, not a research notebook. Do not publish raw research questions, agenda tables, evidence ledgers, unprocessed matrices or module-by-module recaps. If a thesis-critical metric is unavailable, write the investor-facing conclusion as: available disclosure does not show the metric, therefore the report uses a qualitative judgment, the implication is lower confidence or a bounded scenario, and the named verification item is required.
 - Within every substantive public chapter, use this reasoning loop when relevant: core judgment -> key evidence -> causal mechanism -> concrete company or peer case -> strongest counterargument and boundary -> financial/valuation implication -> transition to the next chapter. Questions are prompts for analyst thinking, never the reader-facing architecture.
 - Public information ownership is strict: chapter 1 explains the company and monetization; chapter 2 owns the industrial chain and industry drivers; chapter 3 owns segments, profit pools and operating/accounting quality; chapter 4 owns competition, moat tests and weaknesses; chapter 5 owns thesis reasoning and all forecast numbers; chapter 6 owns expectation gaps, material Knowledge Planet deltas, risks and verification; chapter 7 owns valuation, safety-price arithmetic and the final rating. Do not restate the same assumption or trigger in more than two chapters.
 - Always generate the complete PM memo and its structured workbench. It should complete: (1) material business-segment economics, (2) three distinct forward years or four distinct forward quarters reconciled to group earnings and cash, (3) formula-auditable valuation and safety-price arithmetic, (4) period-consistent verification thresholds, and (5) an internal explicit KPE outcome ledger. If an item cannot be completed, state the exact missing input, leave unsupported cells null, and add a retrieval task; do not suppress or mechanically downgrade the report.
 - Execution language must follow the application-calculated valuation. Never recommend a new buy/build/add range above `deterministic_valuation.safe_buy_price_ceiling_cny`; if the current quote is above that ceiling, say wait/hold and identify the evidence that would justify changing valuation inputs.
-- The public memo presents conclusions and causal reasoning, not the research workflow. Keep research questions, KPE/KSI disposition logs, evidence-grade bookkeeping, handoff audits, model-change mechanics and long matrix rows in structured fields; the renderer will place them in `internal_appendix.md`. Synthesize only their company-relevant conclusions into the owning public chapter. Do not expose a sequence of `结论/核心证据/最强反证/财务传导/市场定价/证伪门` labels for every thesis. Write connected analyst prose that makes the same logic clear.
+- The public memo presents conclusions and causal reasoning, not the research workflow. Keep research questions, KPE/KSI disposition logs, evidence-grade bookkeeping, handoff audits, model-change mechanics, English enum values and long matrix rows in structured fields; the renderer will place them in `internal_appendix.md`. Synthesize only their company-relevant conclusions into the owning public chapter. Public private-intelligence wording must use natural Chinese source descriptions and say whether the clue changed the model, changed probability, or only changed the verification clock. Do not expose KPE ids, evidence-grade enums, bias labels or adoption ceilings. Do not expose a sequence of `结论/核心证据/最强反证/财务传导/市场定价/证伪门` labels for every thesis. Write connected analyst prose that makes the same logic clear.
 - Valuation has one public owner: section 7. Outside the one-line thesis and section 7, do not repeat target price, safe price, scenario fair values, PE-derived upside or the full valuation conclusion. Sections 2-4 explain the company; section 5 explains why earnings may differ from expectations; section 6 owns forecasts. Do not turn every section into another valuation argument.
 - Section 2 must let an unfamiliar reader reconstruct the business: who pays, what problem each product solves, how the buying/tender decision works, pricing and revenue recognition, delivery/service obligations, cost stack, working-capital cycle, capital intensity, segment interactions and where profit pools actually sit. Company-description slogans are insufficient.
 - Section 3 must explain why excess returns could persist. Translate certifications, installed base, service network, product breadth, R&D and scale into observable customer choice, win rate, switching friction, ASP/margin, cash conversion or ROIC, then state the strongest erosion mechanism. Awards and rankings belong only as secondary evidence.
@@ -2105,13 +2159,24 @@ If an important investment claim depends on an unverified commodity price, produ
                 rating_preserved = revised_payload.get("rating") == pm_decision_payload.get(
                     "rating"
                 )
+                rating_change_allowed = any(
+                    issue.startswith("rating-valuation consistency:")
+                    for issue in initial_analytical_issues
+                )
+                revised_rating_conflict = any(
+                    issue.startswith("rating-valuation consistency:")
+                    for issue in revised_analytical_issues
+                )
+                rating_acceptable = rating_preserved or (
+                    rating_change_allowed and not revised_rating_conflict
+                )
                 handoff_not_worsened = len(revised_handoff_issues) <= len(
                     initial_handoff_issues
                 )
                 analytical_not_worsened = len(revised_analytical_issues) <= len(
                     initial_analytical_issues
                 )
-                if rating_preserved and handoff_not_worsened and analytical_not_worsened:
+                if rating_acceptable and handoff_not_worsened and analytical_not_worsened:
                     final_trade_decision = render_sell_side_pm_decision(normalized_revision)
                     pm_decision_payload = revised_payload
                     remaining_handoff_issues = revised_handoff_issues
@@ -2119,7 +2184,7 @@ If an important investment claim depends on an unverified commodity price, produ
                     deterministic_model_notes = revision_model_notes
                     revision_applied = True
                 else:
-                    if not rating_preserved:
+                    if not rating_acceptable:
                         revision_rejection_reasons.append("revision changed the protected rating")
                     if not handoff_not_worsened:
                         revision_rejection_reasons.append(
@@ -2201,8 +2266,8 @@ If an important investment claim depends on an unverified commodity price, produ
         )
         pm_generation_status.update(
             {
-                "report_contract": "reader_led_seven_chapter_v1",
-                "rating_position": "chapter_7_end",
+                "report_contract": "reader_led_wechat_seven_chapter_v2",
+                "rating_position": "opening_summary_and_chapter_7_recap",
                 "knowledge_planet_policy": "model_probability_verification_or_reject",
                 "full_report_chars": str(len(full_pm_decision)),
                 "public_report_chars": str(len(final_trade_decision)),

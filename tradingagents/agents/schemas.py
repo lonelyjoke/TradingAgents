@@ -1314,19 +1314,19 @@ def _render_reader_forecast_table(lines: list[CanonicalModelLine]) -> str:
 def _render_forecast_assumptions(items: list[ForecastAssumption]) -> str:
     if not items:
         return "### 核心假设与敏感性\n\n尚未形成结构化参数台账；不得将缺失参数表述为已验证。"
-    rows = [
-        "### 核心假设与敏感性",
-        "",
-        "| 参数/业务 | 历史锚与证据状态 | Bear / Base / Bull | 敏感度 | 置信度与验证门槛 |",
-        "| --- | --- | --- | --- | --- |",
-    ]
-    for item in items[:10]:
-        anchor = f"{item.historical_anchor}；{item.evidence_status}"
-        cases = f"{item.bear_case} / {item.base_case} / {item.bull_case}"
-        gate = f"{item.confidence}；{item.verification_gate}"
-        rows.append(
-            f"| {item.parameter}（{item.affected_business}） | {anchor} | {cases} | "
-            f"{item.sensitivity} | {gate} |"
+    rows = ["### 核心假设与敏感性", ""]
+    for item in items[:4]:
+        rows.extend(
+            [
+                f"- **{_reader_fragment(item.parameter, max_chars=45)}｜{_reader_fragment(item.affected_business, max_chars=40)}：** "
+                f"基准情景为{_reader_fragment(item.base_case, max_chars=90)}；历史锚为"
+                f"{_reader_fragment(item.historical_anchor, max_chars=90)}。",
+                f"  - **上下行情景：** 悲观为{_reader_fragment(item.bear_case, max_chars=75)}；"
+                f"乐观为{_reader_fragment(item.bull_case, max_chars=75)}。",
+                f"  - **敏感性与验证：** {_reader_fragment(item.sensitivity, max_chars=90)}；"
+                f"置信度{_reader_fragment(item.confidence, max_chars=20)}，下一步关注"
+                f"{_reader_fragment(item.verification_gate, max_chars=85)}。",
+            ]
         )
     return "\n".join(rows)
 
@@ -3479,22 +3479,90 @@ def _table_cell(value: object) -> str:
     return str(value or "—").replace("|", "/").replace("\n", " ").strip()
 
 
+_PUBLIC_LABELS = {
+    "reported": "已披露",
+    "calculated": "计算值",
+    "analytical": "分析判断",
+    "analyst_estimate": "分析师估计",
+    "missing": "待补充",
+    "core": "核心业务",
+    "scenario": "情景因素",
+    "optionality": "可选价值",
+    "excluded": "不纳入估值",
+    "positive": "正面",
+    "neutral": "中性",
+    "warning": "需关注",
+    "negative": "负面",
+    "partial": "部分成立",
+}
+
+
+def _reader_text(value: object, *, max_chars: int | None = None) -> str:
+    """Clean structured-workbench language for a reader-facing Chinese memo."""
+
+    text = str(value or "").replace("|", "/").replace("\n", " ").strip()
+    for raw, label in _PUBLIC_LABELS.items():
+        text = re.sub(rf"(?<![A-Za-z_]){re.escape(raw)}(?![A-Za-z_])", label, text)
+    text = re.sub(r"(?i)EPS\s*[+＋-]?\s*x{2,}\s*元?", "具体EPS影响待验证", text)
+    text = re.sub(r"(?i)\bbase\s*case\b", "基准情景", text)
+    text = re.sub(r"\s+", " ", text)
+
+    # Evidence cross-checks occasionally arrive twice after KPE/KSI lineage
+    # normalization. Keep the first occurrence without exposing a duplicated
+    # research-workflow sentence to readers.
+    clauses = [part.strip(" ；;") for part in re.split(r"[；;]+", text) if part.strip(" ；;")]
+    unique: list[str] = []
+    seen: set[str] = set()
+    for clause in clauses:
+        key = re.sub(r"\s+", "", clause).rstrip("。.!！")
+        if key in seen:
+            continue
+        seen.add(key)
+        unique.append(clause)
+    text = "；".join(unique)
+
+    if max_chars and len(text) > max_chars:
+        window = text[:max_chars]
+        cut = max(window.rfind(mark) for mark in ("。", "；", "！", "？"))
+        if cut >= int(max_chars * 0.55):
+            text = window[: cut + 1]
+        else:
+            text = window.rstrip("，、；:： ") + "…"
+    return text or "未披露"
+
+
+def _compact_public_item(title: object, *sentences: object) -> str:
+    fragments = [
+        _reader_text(value, max_chars=95).rstrip("。；;.!！?？ ")
+        for value in sentences
+    ]
+    body = "；".join(text for text in fragments if text and text != "未披露")
+    return f"- **{_reader_text(title, max_chars=36)}：** {body}。".rstrip()
+
+
+def _reader_fragment(value: object, *, max_chars: int) -> str:
+    return _reader_text(value, max_chars=max_chars).rstrip("。；;.!！?？ ")
+
+
 def _render_segment_economics(rows_in: list[SegmentEconomicsRow]) -> str:
     if not rows_in:
         return ""
-    rows = [
-        "### 分部经济与价值归属",
-        "",
-        "| 业务单元 | 经济角色/口径 | 规模与增长 | 利润与现金 | 驱动方程 | 价值归属 | 证据/缺口 |",
-        "| --- | --- | --- | --- | --- | --- | --- |",
-    ]
-    for row in rows_in[:8]:
-        evidence = ", ".join(row.evidence_ids) or "无编号"
+    rows = ["### 分部经济与价值归属", ""]
+    for row in rows_in[:5]:
+        role = f"{row.economic_role}（{_PUBLIC_LABELS.get(row.disclosure_basis, row.disclosure_basis)}）"
+        value_role = _PUBLIC_LABELS.get(row.valuation_treatment, row.valuation_treatment)
         rows.append(
-            f"| {_table_cell(row.business_unit)} | {_table_cell(row.economic_role)}；{row.disclosure_basis} | "
-            f"{_table_cell(row.scale_and_growth)} | {_table_cell(row.margin_and_cash)} | "
-            f"{_table_cell(row.driver_equation)} | {row.valuation_treatment} | "
-            f"{_table_cell(evidence)}；{_table_cell(row.missing_or_next_check)} |"
+            _compact_public_item(
+                row.business_unit,
+                role,
+                row.scale_and_growth,
+                row.margin_and_cash,
+            )
+        )
+        rows.append(
+            f"  - **驱动与验证：** {_reader_fragment(row.driver_equation, max_chars=85)}；"
+            f"{_reader_fragment(value_role, max_chars=30)}，下一步关注"
+            f"{_reader_fragment(row.missing_or_next_check, max_chars=80)}。"
         )
     return "\n".join(rows)
 
@@ -3502,27 +3570,19 @@ def _render_segment_economics(rows_in: list[SegmentEconomicsRow]) -> str:
 def _render_business_model_mechanisms(rows_in: list[BusinessModelMechanismRow]) -> str:
     if not rows_in:
         return ""
-    rows = [
-        "### 商业模式如何运转",
-        "",
-        "| 经营环节 | 运作方式 | 核心经济变量 | 现金与资本特征 | 证据或缺口 | 分析结论 |",
-        "| --- | --- | --- | --- | --- | --- |",
-    ]
-    for row in rows_in[:7]:
+    rows = ["### 商业模式如何运转", ""]
+    for row in rows_in[:4]:
         rows.append(
-            "| "
-            + " | ".join(
-                _table_cell(value)
-                for value in (
-                    row.link,
-                    row.how_it_works,
-                    row.economic_driver,
-                    row.cash_and_capital_feature,
-                    row.evidence_or_gap,
-                    row.analyst_conclusion,
-                )
+            _compact_public_item(
+                row.link,
+                row.how_it_works,
+                f"核心变量是{row.economic_driver}",
+                row.analyst_conclusion,
             )
-            + " |"
+        )
+        rows.append(
+            f"  - **现金与边界：** {_reader_fragment(row.cash_and_capital_feature, max_chars=85)}；"
+            f"{_reader_fragment(row.evidence_or_gap, max_chars=75)}。"
         )
     return "\n".join(rows)
 
@@ -3530,17 +3590,20 @@ def _render_business_model_mechanisms(rows_in: list[BusinessModelMechanismRow]) 
 def _render_industry_drivers(rows_in: list[IndustryDriverRow]) -> str:
     if not rows_in:
         return ""
-    rows = [
-        "### 行业驱动与财务传导",
-        "",
-        "| 核心变量 | 状态与方向 | 日期化证据 | 影响业务 | 财务传导 | 置信度/验证 |",
-        "| --- | --- | --- | --- | --- | --- |",
-    ]
-    for row in rows_in[:8]:
+    rows = ["### 行业驱动与财务传导", ""]
+    for row in rows_in[:4]:
         rows.append(
-            f"| {_table_cell(row.driver)} | {_table_cell(row.current_state_and_direction)} | "
-            f"{_table_cell(row.dated_evidence)} | {_table_cell(row.affected_business)} | "
-            f"{_table_cell(row.financial_transmission)} | {row.confidence}；{_table_cell(row.next_verification)} |"
+            _compact_public_item(
+                row.driver,
+                row.current_state_and_direction,
+                row.dated_evidence,
+                row.financial_transmission,
+            )
+        )
+        rows.append(
+            f"  - **影响与验证：** {_reader_fragment(row.affected_business, max_chars=45)}；"
+            f"置信度{_reader_fragment(row.confidence, max_chars=20)}，下一步关注"
+            f"{_reader_fragment(row.next_verification, max_chars=75)}。"
         )
     return "\n".join(rows)
 
@@ -3548,31 +3611,21 @@ def _render_industry_drivers(rows_in: list[IndustryDriverRow]) -> str:
 def _render_competition_landscapes(rows_in: list[CompetitionLandscapeRow]) -> str:
     if not rows_in:
         return ""
-    rows = [
-        "### \u7ade\u4e89\u683c\u5c40\u4e0e\u66ff\u4ee3\u98ce\u9669",
-        "",
-        "| \u4e1a\u52a1\u5355\u5143/\u5e02\u573a\u8fb9\u754c | \u76f4\u63a5\u7ade\u4e89\u8005 | \u66ff\u4ee3/\u81ea\u4f9b/\u65b0\u8fdb\u5165 | \u76f8\u5bf9\u4f4d\u7f6e\u4e0e\u7ade\u4e89\u53cd\u5e94 | \u8d22\u52a1\u4f20\u5bfc | \u8bc1\u636e/\u4e0b\u4e00\u9a8c\u8bc1 |",
-        "| --- | --- | --- | --- | --- | --- |",
-    ]
-    for row in rows_in[:10]:
-        direct = "; ".join(row.direct_competitors) or "\u672a\u83b7\u53d6"
-        alternatives = "; ".join(row.substitutes_self_supply_and_new_entrants) or "\u672a\u83b7\u53d6"
-        position = f"{row.company_relative_position}; \u53ef\u80fd\u53cd\u5e94: {row.competitor_likely_response}"
-        evidence = f"{row.evidence_status_and_ids}; {row.next_verification}"
-        rows.append(
-            "| "
-            + " | ".join(
-                _table_cell(value)
-                for value in (
-                    f"{row.business_unit}: {row.market_boundary}",
-                    direct,
-                    alternatives,
-                    position,
-                    row.financial_transmission,
-                    evidence,
-                )
-            )
-            + " |"
+    rows = ["### 竞争格局与替代风险", ""]
+    for row in rows_in[:3]:
+        direct = "、".join(row.direct_competitors) or "主要对手未完整披露"
+        alternatives = "、".join(row.substitutes_self_supply_and_new_entrants) or "暂无明确替代项"
+        rows.extend(
+            [
+                f"**{_reader_text(row.business_unit, max_chars=32)}**",
+                f"- **市场边界：** {_reader_fragment(row.market_boundary, max_chars=105)}。",
+                f"- **竞争判断：** 直接对手包括{_reader_text(direct, max_chars=120)}；"
+                f"替代与新进入风险包括{_reader_fragment(alternatives, max_chars=75)}。"
+                f"{_reader_fragment(row.company_relative_position, max_chars=110)}。",
+                f"- **投资含义：** {_reader_fragment(row.financial_transmission, max_chars=95)}；下一步关注"
+                f"{_reader_fragment(row.next_verification, max_chars=75)}。",
+                "",
+            ]
         )
     return "\n".join(rows)
 
@@ -3580,45 +3633,35 @@ def _render_competition_landscapes(rows_in: list[CompetitionLandscapeRow]) -> st
 def _render_moat_mechanisms(rows_in: list[MoatMechanismRow]) -> str:
     if not rows_in:
         return ""
-    rows = [
-        "### 护城河的形成机制与经济结果",
-        "",
-        "| 护城河来源 | 运作机制 | 可观察证据 | 经济结果 | 持续性与威胁 | 判断 |",
-        "| --- | --- | --- | --- | --- | --- |",
-    ]
-    for row in rows_in[:5]:
+    rows = ["### 护城河的形成机制与经济结果", ""]
+    for row in rows_in[:3]:
+        verdict = _PUBLIC_LABELS.get(row.verdict, row.verdict)
         rows.append(
-            "| "
-            + " | ".join(
-                _table_cell(value)
-                for value in (
-                    row.moat_source,
-                    row.operating_mechanism,
-                    row.observed_proof,
-                    row.economic_result,
-                    row.durability_and_threat,
-                    row.verdict,
-                )
+            _compact_public_item(
+                f"{row.moat_source}（{verdict}）",
+                row.operating_mechanism,
+                row.observed_proof,
+                row.economic_result,
             )
-            + " |"
         )
+        rows.append(f"  - **边界：** {_reader_fragment(row.durability_and_threat, max_chars=100)}。")
     return "\n".join(rows)
 
 
 def _render_accounting_quality(rows_in: list[AccountingQualityRow]) -> str:
     if not rows_in:
         return ""
-    rows = [
-        "### 财务质量核查",
-        "",
-        "| 项目 | 最新证据 | 趋势/对照 | 原因判断 | 盈利/现金/ROIC影响 | 裁决 |",
-        "| --- | --- | --- | --- | --- | --- |",
-    ]
-    for row in rows_in[:8]:
+    rows = ["### 财务质量核查", ""]
+    for row in rows_in[:4]:
+        verdict = _PUBLIC_LABELS.get(row.verdict, row.verdict)
         rows.append(
-            f"| {_table_cell(row.item)} | {_table_cell(row.latest_evidence_and_period)} | "
-            f"{_table_cell(row.trend_or_comparator)} | {_table_cell(row.causal_interpretation)} | "
-            f"{_table_cell(row.earnings_cash_roic_effect)} | {row.verdict} |"
+            _compact_public_item(
+                f"{row.item}（{verdict}）",
+                row.latest_evidence_and_period,
+                row.trend_or_comparator,
+                row.causal_interpretation,
+                row.earnings_cash_roic_effect,
+            )
         )
     return "\n".join(rows)
 
@@ -3627,23 +3670,37 @@ def _render_alternative_intelligence(rows_in: list[AlternativeIntelligenceDecisi
     material = [row for row in rows_in if row.disposition != "rejected"][:4]
     if not material:
         return ""
-    rows = [
-        "### 私域信息对核心假设的影响",
-        "",
-        "| 来源/证据 | 有效增量 | 对模型或情景的影响 | 公共验证与下一节点 |",
-        "| --- | --- | --- | --- |",
-    ]
+    rows = ["### 私域信息对核心假设的影响", ""]
+    grade_labels = {
+        "A_verified": "公开信息已验证",
+        "B_private_edge": "专业渠道线索，已获部分交叉验证",
+        "C_market_narrative": "市场观点，尚未获得公开验证",
+        "D_reject": "不采纳",
+    }
+    source_labels = {
+        "A_primary_public": "一手公开来源",
+        "B_identified_professional": "具名专业人士或机构渠道",
+        "C_private_unverified": "未公开渠道",
+        "D_unknown_or_rumor": "来源不明",
+    }
+    disposition_labels = {
+        "model_change": "已调整模型",
+        "probability_change": "仅调整情景概率",
+        "verification_change": "不进入模型，仅调整验证重点",
+    }
     for row in material:
-        ids = "/".join(row.kpe_ids) or "未编号"
-        source_label = (
-            f"{ids} / {row.evidence_grade} / {row.source_reliability} / "
-            f"{row.bias_profile} / ceiling={row.adoption_ceiling}"
+        source = source_labels.get(row.source_reliability, "私域线索")
+        grade = grade_labels.get(row.evidence_grade, "尚待验证")
+        disposition = disposition_labels.get(row.disposition, "不进入公开模型")
+        rows.extend(
+            [
+                f"- **{source}｜{grade}：** {_reader_fragment(row.claim, max_chars=155)}。",
+                f"  - **研究处理：** {disposition}。{_reader_fragment(row.before_after, max_chars=115)}。",
+                f"  - **公开验证：** {_reader_fragment(row.public_crosscheck, max_chars=115)}；下一步关注"
+                f"{_reader_fragment(row.falsification_or_next_check, max_chars=100)}。",
+            ]
         )
-        rows.append(
-            f"| {_table_cell(source_label)} | {_table_cell(row.claim)} | "
-            f"{_table_cell(row.before_after)} | {_table_cell(row.public_crosscheck + '；' + row.falsification_or_next_check)} |"
-        )
-    rows.append("- 表中私域内容仅呈现已影响核心假设或验证时点的结论；拒绝项与处理日志保留在结构化审计文件中。")
+    rows.append("\n> 私域线索只作为增量判断或验证线索；证据编号、偏差标签和完整处置记录保留在内部审计文件中。")
     return "\n".join(rows)
 
 
@@ -3679,14 +3736,60 @@ def _render_alternative_intelligence_audit(
     return "\n".join(rows)
 
 
+def _render_investment_summary(
+    decision: SellSidePMDecision,
+    rating_label: str,
+) -> str:
+    """Render the decision and action before the explanatory research journey."""
+
+    output = decision.deterministic_valuation
+    current_price = decision.safe_valuation_assumptions.current_price_cny
+    readiness_label = {
+        "ready": "模型闭合",
+        "partial": "部分数据待验证",
+        "blocked": "存在阻断性矛盾",
+    }.get(decision.research_readiness, decision.research_readiness)
+    valuation_parts: list[str] = []
+    if current_price is not None:
+        valuation_parts.append(f"现价{_display_number(current_price)}元")
+    if output.fair_value_per_share_cny is not None:
+        valuation_parts.append(
+            f"程序化公允价值{_display_number(output.fair_value_per_share_cny)}元/股"
+        )
+    if output.expected_return_pct is not None:
+        valuation_parts.append(
+            f"相对现价空间{_display_number(output.expected_return_pct)}%"
+        )
+    if output.safe_buy_price_ceiling_cny is not None:
+        valuation_parts.append(
+            f"安全买入上限{_display_number(output.safe_buy_price_ceiling_cny)}元"
+        )
+    valuation_line = "；".join(valuation_parts) or "估值输入尚未闭合"
+    posture = _reader_text(decision.rating_posture, max_chars=240)
+    thesis = _reader_text(decision.one_line_thesis, max_chars=260)
+    return "\n".join(
+        [
+            "### 投资摘要",
+            "",
+            f"> **投资评级：{rating_label}（{decision.rating.value}）｜{readiness_label}**",
+            ">",
+            f"> **一句话观点：** {thesis}",
+            ">",
+            f"> **估值与空间：** {valuation_line}。",
+            ">",
+            f"> **执行建议：** {posture}",
+        ]
+    )
+
+
 def _render_deterministic_valuation(output: DeterministicValuationOutput) -> str:
     if not output.scenario_rows:
         return "### 程序化估值与安全价\n\n尚无完整牛/基/熊结构化输入；不得发布伪精确安全价。"
     rows = [
         "### 程序化情景估值",
         "",
-        "| 情景 | 概率 | 归母净利润(CNY mn) | EPS | 方法/倍数 | 股权价值(CNY mn) | 每股价值 |",
-        "| --- | ---: | ---: | ---: | --- | ---: | ---: |",
+        "| 情景 | 概率 | 盈利假设 | 估值结果 |",
+        "| --- | ---: | --- | ---: |",
     ]
     for row in output.scenario_rows:
         multiple = row.get("valuation_multiple")
@@ -3699,20 +3802,12 @@ def _render_deterministic_valuation(output: DeterministicValuationOutput) -> str
         }.get(str(row.get("scenario", "")).lower(), str(row.get("scenario", "")))
         rows.append(
             f"| {scenario_label} | {row.get('probability_pct', 0):.1f}% | "
-            f"{_display_number(row.get('parent_net_profit_cny_mn'))} | {_display_number(row.get('eps_cny'))} | "
-            f"{method_text} | {_display_number(row.get('equity_value_cny_mn'))} | "
-            f"{_display_number(row.get('fair_value_per_share_cny'))} |"
+            f"归母净利润{_display_number(row.get('parent_net_profit_cny_mn'))}百万元 / "
+            f"EPS {_display_number(row.get('eps_cny'))}元 | "
+            f"{method_text} / {_display_number(row.get('fair_value_per_share_cny'))}元/股 |"
         )
     if output.optionality_rows:
-        rows.extend(
-            [
-                "",
-                "### 程序化期权价值",
-                "",
-                "| 期权 | 指标/规模(CNY mn) | 倍数 | 概率 | 权益 | 执行折价 | 股权价值(CNY mn) | 每股价值 |",
-                "| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |",
-            ]
-        )
+        rows.extend(["", "### 程序化期权价值", ""])
         for row in output.optionality_rows:
             metric_label = {
                 "direct_equity_value": "直接权益价值",
@@ -3721,14 +3816,13 @@ def _render_deterministic_valuation(output: DeterministicValuationOutput) -> str
                 "asset_value": "资产价值",
             }.get(str(row.get("metric_name", "")).lower(), row.get("metric_name"))
             rows.append(
-                f"| {_table_cell(row.get('name'))} | {_table_cell(metric_label)}/"
-                f"{_display_number(row.get('metric_value_cny_mn'))} | "
-                f"{_display_number(row.get('valuation_multiple'))}x | "
-                f"{_display_number(row.get('probability_pct'))}% | "
-                f"{_display_number(row.get('ownership_pct'))}% | "
-                f"{_display_number(row.get('execution_haircut_pct'))}% | "
-                f"{_display_number(row.get('equity_value_cny_mn'))} | "
-                f"{_display_number(row.get('per_share_value_cny'))} |"
+                f"- **{_reader_text(row.get('name'), max_chars=40)}：** {_reader_text(metric_label, max_chars=30)}"
+                f"{_display_number(row.get('metric_value_cny_mn'))}百万元，按"
+                f"{_display_number(row.get('valuation_multiple'))}倍、"
+                f"{_display_number(row.get('probability_pct'))}%概率、"
+                f"{_display_number(row.get('ownership_pct'))}%权益和"
+                f"{_display_number(row.get('execution_haircut_pct'))}%执行折价计入，"
+                f"对应{_display_number(row.get('per_share_value_cny'))}元/股。"
             )
     if output.status == "closed":
         rows.extend(
@@ -3739,12 +3833,13 @@ def _render_deterministic_valuation(output: DeterministicValuationOutput) -> str
                 f"- 概率加权核心价值：{_display_number(output.probability_weighted_core_value_cny)}元/股",
                 f"- 期权价值：{_display_number(output.optionality_per_share_cny)}元/股；其他调整：{_display_number(output.other_adjustments_per_share_cny)}元/股",
                 f"- 综合公允价值：{_display_number(output.fair_value_per_share_cny)}元/股；相对现价预期收益：{_display_number(output.expected_return_pct)}%",
-                f"- 本次安全价参数：要求年化收益率{_display_number(output.required_annual_return_pct)}%；持有年限{_display_number(output.holding_period_years)}年；安全边际{_display_number(output.margin_of_safety_pct)}%；最大可承受亏损{_display_number(output.maximum_bear_loss_pct)}%",
-                f"- 收益率要求价格：{_display_number(output.required_return_price_cny)}元；安全边际价格：{_display_number(output.margin_of_safety_price_cny)}元；熊市约束价格：{_display_number(output.bear_loss_constraint_price_cny)}元",
+                f"- 安全价参数：要求年化收益率{_display_number(output.required_annual_return_pct)}%、持有{_display_number(output.holding_period_years)}年、安全边际{_display_number(output.margin_of_safety_pct)}%、最大可承受熊市亏损{_display_number(output.maximum_bear_loss_pct)}%",
                 f"- **安全买入价上限：{_display_number(output.safe_buy_price_ceiling_cny)}元；建议关注区间：{_display_number(output.suggested_buy_zone_low_cny)}-{_display_number(output.safe_buy_price_ceiling_cny)}元；基本面压力价值：{_display_number(output.fundamental_floor_cny)}元。**",
                 "",
-                f"安全买入价上限的计算公式为：min(基准情景每股价值 / (1 + 要求年化收益率) ^ 持有年限，基准情景每股价值 x (1 - 安全边际比例)，悲观情景每股价值 / (1 - 最大可承受亏损比例)) = min({_display_number(output.required_return_price_cny)}元，{_display_number(output.margin_of_safety_price_cny)}元，{_display_number(output.bear_loss_constraint_price_cny)}元) = {_display_number(output.safe_buy_price_ceiling_cny)}元。",
-                "这一定价是新资金的防御性建仓上限，不等同于目标价、综合公允价值或评级锚；当现价高于安全买入价但仍接近或低于综合公允价值时，评级可以偏正面，但执行上应等待回落或等待新的基本面证据上修估值输入。",
+                f"安全买入价取收益率约束价{_display_number(output.required_return_price_cny)}元、"
+                f"安全边际价{_display_number(output.margin_of_safety_price_cny)}元和熊市约束价"
+                f"{_display_number(output.bear_loss_constraint_price_cny)}元三者最低值。它是新资金的"
+                "防御性建仓上限，不等同于公允价值或评级锚。",
             ]
         )
     else:
@@ -3925,6 +4020,14 @@ def render_sell_side_pm_decision(decision: SellSidePMDecision) -> str:
     return "\n\n".join(
         [
             "# 公司深度研究与投资决策",
+            _render_investment_summary(decision, rating_label),
+            "### 核心观点与主要分歧\n\n"
+            + _demote_embedded_headings(
+                _reader_text(
+                    decision.investment_conclusion_and_core_conflict,
+                    max_chars=1200,
+                )
+            ),
             "## 一、公司是谁、如何赚钱\n\n"
             + _demote_embedded_headings(decision.company_disaggregation)
             + "\n\n"
@@ -3968,11 +4071,8 @@ def render_sell_side_pm_decision(decision: SellSidePMDecision) -> str:
             + "\n\n### 估值解释与局限\n\n"
             + _demote_embedded_headings(decision.valuation_closure)
             + "\n\n### 投资结论\n\n"
-            + _demote_embedded_headings(decision.investment_conclusion_and_core_conflict)
-            + f"\n\n> **一句话结论：** {decision.one_line_thesis}"
-            + "\n\n| 最终评级 | 投资观点 |\n"
-            + "| --- | --- |\n"
-            + f"| {rating_label}（{decision.rating.value}） | {decision.rating_posture} |",
+            + f"> **结论重申：{rating_label}（{decision.rating.value}）。** "
+            + _reader_text(decision.rating_posture, max_chars=240),
             _render_sell_side_internal_appendix(decision),
         ]
     )

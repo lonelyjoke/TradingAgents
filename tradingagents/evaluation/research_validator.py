@@ -2402,6 +2402,101 @@ def audit_public_report_language(decision_text: str) -> list[DecisionDepthIssue]
     ]
 
 
+def audit_public_report_readability(decision_text: str) -> list[DecisionDepthIssue]:
+    """Enforce a mobile-reader contract without rewarding arbitrary brevity."""
+
+    text = str(decision_text or "")
+    issues: list[DecisionDepthIssue] = []
+    rating_position = text.find("投资评级")
+    if rating_position < 0 or rating_position > 1400:
+        issues.append(
+            DecisionDepthIssue(
+                "public_conclusion_position",
+                "warning",
+                "formal rating and action posture are not visible in the opening summary",
+            )
+        )
+
+    internal_pattern = re.compile(
+        r"\b(?:[ABCD]_(?:verified|private_edge|market_narrative|reject|primary_public|"
+        r"identified_professional|private_unverified|unknown_or_rumor)|"
+        r"sell_side_optimism|company_promotion|channel_selection_bias|"
+        r"scenario_or_verification_only|model_input_after_crosscheck|ceiling=)\b",
+        re.I,
+    )
+    leaked = internal_pattern.findall(text)
+    if leaked:
+        issues.append(
+            DecisionDepthIssue(
+                "public_internal_taxonomy_leakage",
+                "warning",
+                "public memo exposes internal evidence taxonomy; translate the source status and keep ids/enums in the internal appendix: "
+                + ", ".join(dict.fromkeys(leaked[:6])),
+            )
+        )
+    if re.search(r"(?i)(?:EPS|利润|收入|目标价)?\s*[+＋-]?\s*x{2,}\s*(?:元|%|亿元)?", text):
+        issues.append(
+            DecisionDepthIssue(
+                "public_placeholder_leakage",
+                "warning",
+                "public memo still contains an xx-style numeric placeholder; replace it with a bounded qualitative statement or a verified number",
+            )
+        )
+
+    lines = text.splitlines()
+    table_stats: list[tuple[int, int, float, int]] = []
+    index = 0
+    while index < len(lines):
+        if not re.match(r"^\s*\|.*\|\s*$", lines[index]):
+            index += 1
+            continue
+        block: list[str] = []
+        while index < len(lines) and re.match(r"^\s*\|.*\|\s*$", lines[index]):
+            block.append(lines[index])
+            index += 1
+        if len(block) < 2:
+            continue
+        data_rows = [
+            row
+            for row in block
+            if not re.match(r"^\s*\|(?:\s*:?-+:?\s*\|)+\s*$", row)
+        ]
+        cells = [
+            cell.strip()
+            for row in data_rows
+            for cell in row.strip().strip("|").split("|")
+        ]
+        if not cells:
+            continue
+        columns = len(data_rows[0].strip().strip("|").split("|"))
+        lengths = [len(cell) for cell in cells]
+        table_stats.append(
+            (columns, max(len(data_rows) - 1, 0), sum(lengths) / len(lengths), max(lengths))
+        )
+
+    if len(table_stats) > 4:
+        issues.append(
+            DecisionDepthIssue(
+                "public_table_density",
+                "warning",
+                f"public memo contains {len(table_stats)} tables; keep tables for comparable numbers and convert narrative matrices to subsections",
+            )
+        )
+    heavy_tables = [
+        stat for stat in table_stats if stat[0] > 5 or stat[2] > 42 or stat[3] > 110
+    ]
+    if heavy_tables:
+        columns, rows, average, maximum = heavy_tables[0]
+        issues.append(
+            DecisionDepthIssue(
+                "public_table_readability",
+                "warning",
+                f"mobile-unfriendly table detected: columns={columns}, rows={rows}, average_cell_chars={average:.1f}, max_cell_chars={maximum}; use short subsections for causal prose",
+            )
+        )
+    return issues
+
+
 def audit_canonical_financial_reconciliation(report_dir: str | Path) -> list[DecisionDepthIssue]:
     """Cross-foot the machine-readable forecast before prose can be published."""
     report_path = Path(report_dir)
@@ -4014,6 +4109,7 @@ def audit_report_depth(report_dir: str | Path) -> pd.DataFrame:
     issues.extend(audit_position_valuation_consistency(report_dir, decision_text))
     issues.extend(audit_report_redundancy(decision_text))
     issues.extend(audit_public_report_language(decision_text))
+    issues.extend(audit_public_report_readability(decision_text))
     issues.extend(audit_public_process_leakage(decision_text))
     pm_payload_path = report_path / "5_portfolio" / "canonical_decision.json"
     if pm_payload_path.exists():

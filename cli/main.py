@@ -1850,6 +1850,18 @@ def run_analysis(checkpoint: bool = True):
                 "portfolio_context_chars": config.get(
                     "prompt_context_total_chars_portfolio"
                 ),
+                "structured_research_prompt_chars": config.get(
+                    "structured_research_prompt_max_chars"
+                ),
+                "underwriting_prompt_chars": config.get(
+                    "company_underwriting_prompt_max_chars"
+                ),
+                "structured_research_cache_enabled": config.get(
+                    "structured_research_cache_enabled"
+                ),
+                "structured_research_cache_status": (
+                    final_state.get("structured_research_context", {}) or {}
+                ).get("_cache_status", "disabled_or_unavailable"),
                 "a_share_tool_requery_enabled": config.get(
                     "a_share_agent_tool_requery_enabled"
                 ),

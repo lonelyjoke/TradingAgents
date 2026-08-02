@@ -20,6 +20,7 @@ from tradingagents.evaluation.research_validator import (
     audit_public_key_number_consistency,
     audit_public_profit_pe_per_share_arithmetic,
     audit_public_report_language,
+    audit_public_report_readability,
     audit_rating_valuation_consistency,
     audit_report_redundancy,
     audit_public_process_leakage,
@@ -31,6 +32,46 @@ from tradingagents.evaluation.research_validator import (
     _is_publication_blocker,
     _normalize_rating,
 )
+
+
+def test_public_readability_flags_late_rating_internal_enums_and_wide_prose_table():
+    report = """# 深度报告
+
+## 公司业务
+
+正文铺垫。\n
+| 业务 | 运作方式 | 经济变量 | 现金特征 | 证据 | 结论 |
+| --- | --- | --- | --- | --- | --- |
+| 产品 | 很长的经营逻辑和因果关系，需要改成正文小节 | ASP与销量 | 营运资金 | KPE01 / C_market_narrative / B_identified_professional / ceiling=scenario_or_verification_only | EPS+xx元 |
+
+## 投资结论
+
+投资评级：中性
+"""
+
+    sections = {issue.section for issue in audit_public_report_readability(report)}
+
+    assert "public_internal_taxonomy_leakage" in sections
+    assert "public_placeholder_leakage" in sections
+    assert "public_table_readability" in sections
+
+
+def test_public_readability_accepts_opening_summary_and_compact_numeric_tables():
+    report = """# 深度报告
+
+### 投资摘要
+
+> **投资评级：中性（Hold）**
+> **一句话观点：** 盈利修复仍需验证，当前估值缺少安全边际。
+
+## 盈利预测
+
+| 指标 | 2026E | 2027E | 2028E |
+| --- | ---: | ---: | ---: |
+| EPS | 1.10 | 1.30 | 1.50 |
+"""
+
+    assert audit_public_report_readability(report) == []
 
 
 def test_public_prose_cannot_override_canonical_forecast_or_fair_value(tmp_path):

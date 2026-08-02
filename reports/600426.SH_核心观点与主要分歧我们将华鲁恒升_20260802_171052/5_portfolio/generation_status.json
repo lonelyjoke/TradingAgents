@@ -1,0 +1,37 @@
+{
+  "mode": "schema_prompt_structured",
+  "agent": "Portfolio Manager",
+  "structured_error": "schema-prompt response failed validation:\nInvalid control character at: line 932 column 285 (char 41819); fallback validation=Invalid control character at: line 932 column 285 (char 41819); repair attempt 1 validation=1 validation error for SellSidePMDecision\ninvestment_conclusion_and_core_conflict\n  Field required [type=missing, input_value={'rating': 'Hold', 'ratin..., 'report_markdown': ''}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing; repair attempt 2 validation=17 validation errors for SellSidePMDecision\nrating\n  Field required [type=missing, input_value={'investment_conclusion_a...进行积极建仓。'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nrating_posture\n  Field required [type=missing, input_value={'investment_conclusion_a...进行积极建仓。'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nresearch_readiness\n  Field required [type=missing, input_value={'investment_conclusion_a...进行积极建仓。'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\none_line_thesis\n  Field required [type=missing, input_value={'investment_conclusion_a...进行积极建仓。'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ncanonical_model_snapshot\n  Field required [type=missing, input_value={'investment_conclusion_a...进行积极建仓。'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ncompany_disaggregation\n  Field required [type=missing, input_value={'investment_conclusion_a...进行积极建仓。'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nindustry_cycle_and_competition\n  Field required [type=missing, input_value={'investment_conclusion_a...进行积极建仓。'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nautonomous_forecast_model\n  Field required [type=missing, input_value={'investment_conclusion_a...进行积极建仓。'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nthesis_financial_bridge\n  Field required [type=missing, input_value={'investment_conclusion_a...进行积极建仓。'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nmoat_evidence_scorecard\n  Field required [type=missing, input_value={'investment_conclusion_a...进行积极建仓。'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nvaluation_closure\n  Field required [type=missing, input_value={'investment_conclusion_a...进行积极建仓。'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\naccounting_and_capital_allocation\n  Field required [type=missing, input_value={'investment_conclusion_a...进行积极建仓。'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nexpectation_gap_and_market_pricing\n  Field required [type=missing, input_value={'investment_conclusion_a...进行积极建仓。'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nrisks_catalysts_verification\n  Field required [type=missing, input_value={'investment_conclusion_a...进行积极建仓。'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nhandoff_integrity_audit\n  Field required [type=missing, input_value={'investment_conclusion_a...进行积极建仓。'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nshared_model_change_audit\n  Field required [type=missing, input_value={'investment_conclusion_a...进行积极建仓。'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\nreport_quality_self_check\n  Field required [type=missing, input_value={'investment_conclusion_a...进行积极建仓。'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing",
+  "schema": "SellSidePMDecision",
+  "legacy_json_recovered": true,
+  "legacy_json_recovery_note": "Legacy JSON prose migrated; numeric lines preserved from validated manager/underwriting artifacts.",
+  "initial_mode": "deterministic_legacy_recovery",
+  "editorial_review_mode": "deterministic_issue_router",
+  "editorial_revision_requested": true,
+  "editorial_revision_applied": true,
+  "editorial_revision_mode": "schema_prompt_structured",
+  "remaining_handoff_issues": [],
+  "remaining_analytical_issues": [
+    "public thesis chapter missing strongest counterargument/boundary",
+    "public thesis chapter missing market-pricing implication"
+  ],
+  "editorial_revision_rejection_reasons": [],
+  "deterministic_model_notes": [
+    "restored undocumented canonical change 2026e_capex",
+    "added deterministic 2027E gross profit=8829.8400",
+    "added deterministic 2028E gross profit=9438.2400",
+    "added deterministic probability-weighted core equity value 49927.5000",
+    "removed 4 manual deterministic valuation line(s) from prose",
+    "enforced safe-price execution constraint above the buy ceiling",
+    "downgraded unsupported bottom-up label to hybrid model",
+    "inserted deterministic public numeric source-of-truth disclosure"
+  ],
+  "report_contract": "reader_led_wechat_seven_chapter_v2",
+  "rating_position": "opening_summary_and_chapter_7_recap",
+  "knowledge_planet_policy": "model_probability_verification_or_reject",
+  "full_report_chars": "20711",
+  "public_report_chars": "17979",
+  "internal_overflow_chars": "2729",
+  "internal_sections_removed_from_public_report": "内部附录D：替代信息与卖方预期审计, 内部附录E：模型交接与报告质量审计",
+  "public_h2_count": "7"
+}

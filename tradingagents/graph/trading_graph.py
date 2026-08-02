@@ -751,6 +751,8 @@ class TradingAgentsGraph:
                 cached = None
             if isinstance(cached, dict) and cached.get("symbol") == company_name:
                 logger.info("Structured research cache hit: %s", cache_path.name)
+                cached = dict(cached)
+                cached["_cache_status"] = "hit"
                 return cached
 
         bundle = build_structured_research_bundle(
@@ -774,6 +776,8 @@ class TradingAgentsGraph:
                 or 60000
             ),
         )
+        if isinstance(bundle, dict):
+            bundle["_cache_status"] = "miss"
         if cache_path is not None and self._structured_research_cacheable(bundle):
             try:
                 cache_path.parent.mkdir(parents=True, exist_ok=True)

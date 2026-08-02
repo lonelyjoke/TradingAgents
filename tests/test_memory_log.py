@@ -747,21 +747,17 @@ class TestPortfolioManagerInjection:
         pm_node(_make_pm_state())
         prompt = captured["prompt"]
         assert "self-contained public research note" in prompt
-        assert "short Company Snapshot" in prompt
+        assert "opening investment summary" in prompt
         assert "public research note" in prompt
-        assert "Debate & Decision Logic" in prompt
-        assert "Business Model & Industry Chain Primer" in prompt
-        assert "upstream-midstream-downstream chain" in prompt
         assert "Do not invent A-share/H-share/U.S.-listed companies" in prompt
-        assert "Use this narrative order" in prompt
         assert "materiality gates, not a checklist" in prompt
-        assert "Avoid repeating the same fact" in prompt
-        assert "Catalysts & Optionality" in prompt
-        assert "Evidence Gaps & Data Coverage" in prompt
-        assert "less fragmentation, more synthesis" in prompt
-        assert "Verification & Falsification" in prompt
-        assert "There is no hard word-count or section-count target" in prompt
-        assert "claim -> evidence -> causal transmission -> valuation/position implication" in prompt
+        assert "rating, one-line thesis, valuation/payoff" in prompt
+        assert "seven chapters explain the" in prompt
+        assert "Delete repeated facts and workflow prose" in prompt
+        assert "prefer fewer, stronger paragraphs" in prompt
+        assert "Chapter budgets are editorial compression signals" in prompt
+        assert "claim ->" in prompt
+        assert "evidence -> causal transmission -> valuation/position implication" in prompt
         assert "Bank Buy-Side Memo Overlay" in prompt
         assert "If the target is not a bank" in prompt
         assert "Route non-bank companies through their own industry-native drivers" in prompt

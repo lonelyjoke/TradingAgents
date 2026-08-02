@@ -40,7 +40,11 @@ def test_structured_research_cache_reuses_identical_source_payload(monkeypatch, 
     first = graph._build_structured_research_context("300274.SZ", "2026-07-05", contexts)
     second = graph._build_structured_research_context("300274.SZ", "2026-07-05", contexts)
 
-    assert first == second
+    assert first["_cache_status"] == "miss"
+    assert second["_cache_status"] == "hit"
+    assert {key: value for key, value in first.items() if key != "_cache_status"} == {
+        key: value for key, value in second.items() if key != "_cache_status"
+    }
     assert len(calls) == 1
 
 
