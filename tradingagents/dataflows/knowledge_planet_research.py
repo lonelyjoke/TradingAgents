@@ -57,7 +57,7 @@ DAILY_ANALYSIS_TARGETS = DAILY_MAIN_BOARD_SIZE + DAILY_WATCH_BOARD_SIZE
 DAILY_MAIN_MIN_SCORE = 55
 DAILY_WATCH_MIN_SCORE = 35
 
-PREPROCESS_SCHEMA_VERSION = 4
+PREPROCESS_SCHEMA_VERSION = 5
 
 INFORMATION_RICH_TYPES = {
     "industry_weekly_data",
@@ -345,6 +345,9 @@ class KnowledgePlanetEvidence:
     verification: str
     model_variable: str
     required_outcome: str
+    source_reliability: str = "C_private_unverified"
+    bias_profile: str = "unknown"
+    adoption_ceiling: str = "scenario_or_verification_only"
 
 
 @dataclass(frozen=True)
@@ -480,11 +483,41 @@ def _load_local_env_value(key: str) -> str:
     return ""
 
 
+def _deepseek_quick_request_settings() -> dict[str, object]:
+    config = get_config()
+    thinking = str(config.get("deepseek_quick_thinking", "enabled") or "enabled").lower()
+    if thinking not in {"enabled", "disabled"}:
+        thinking = "enabled"
+    settings: dict[str, object] = {
+        "extra_body": {"thinking": {"type": thinking}},
+    }
+    if thinking == "enabled":
+        effort = str(
+            config.get("deepseek_quick_reasoning_effort", "high") or "high"
+        ).lower()
+        settings["reasoning_effort"] = (
+            effort if effort in {"low", "high", "max"} else "high"
+        )
+    return settings
+
+
 class _DirectDeepSeekLLM:
-    def __init__(self, model: str, base_url: str | None = None, timeout: int = 90):
+    def __init__(
+        self,
+        model: str,
+        base_url: str | None = None,
+        timeout: int = 90,
+        *,
+        thinking: str = "enabled",
+        reasoning_effort: str = "high",
+    ):
         self.model = model
         self.base_url = (base_url or "https://api.deepseek.com").rstrip("/")
         self.timeout = timeout
+        self.thinking = thinking if thinking in {"enabled", "disabled"} else "enabled"
+        self.reasoning_effort = (
+            reasoning_effort if reasoning_effort in {"low", "high", "max"} else "high"
+        )
         self.api_key = _load_local_env_value("DEEPSEEK_API_KEY")
         if not self.api_key:
             raise RuntimeError("DEEPSEEK_API_KEY is not configured in environment or .env")
@@ -502,13 +535,18 @@ class _DirectDeepSeekLLM:
                 elif "ai" in class_name or "assistant" in class_name:
                     role = "assistant"
                 messages.append({"role": role, "content": str(getattr(message, "content", message))})
+        request_payload = {
+            "model": self.model,
+            "messages": messages,
+            "thinking": {"type": self.thinking},
+            "response_format": {"type": "json_object"},
+        }
+        if self.thinking == "enabled":
+            request_payload["reasoning_effort"] = self.reasoning_effort
+        else:
+            request_payload["temperature"] = 0.2
         payload = json.dumps(
-            {
-                "model": self.model,
-                "messages": messages,
-                "temperature": 0.2,
-                "response_format": {"type": "json_object"},
-            },
+            request_payload,
             ensure_ascii=False,
         ).encode("utf-8")
         request = urllib.request.Request(
@@ -547,6 +585,7 @@ def _create_market_analysis_llm(
     progress: Callable[[str], None] | None = None,
 ):
     if provider.lower() == "deepseek":
+        deepseek_settings = _deepseek_quick_request_settings()
         try:
             from tradingagents.llm_clients import create_llm_client
 
@@ -556,6 +595,7 @@ def _create_market_analysis_llm(
                 base_url=base_url,
                 timeout=90,
                 max_retries=2,
+                **deepseek_settings,
             ).get_llm()
         except Exception as exc:
             if progress:
@@ -563,7 +603,18 @@ def _create_market_analysis_llm(
                     "[llm market analysis] framework client unavailable, "
                     f"using direct DeepSeek fallback: {_compact_text(str(exc), 120)}"
                 )
-            return _DirectDeepSeekLLM(model=model, base_url=base_url)
+            extra_body = deepseek_settings.get("extra_body", {})
+            thinking = str(
+                (extra_body.get("thinking", {}) if isinstance(extra_body, dict) else {}).get(
+                    "type", "enabled"
+                )
+            )
+            return _DirectDeepSeekLLM(
+                model=model,
+                base_url=base_url,
+                thinking=thinking,
+                reasoning_effort=str(deepseek_settings.get("reasoning_effort", "high")),
+            )
 
     from tradingagents.llm_clients import create_llm_client
 
@@ -592,6 +643,26 @@ def _auto_sync_enabled() -> bool:
 def _text_only_enabled() -> bool:
     """Whether Knowledge Planet is restricted to topic text and metadata."""
     return bool(get_config().get("knowledge_planet_text_only", True))
+
+
+def _allowed_knowledge_planet_group_ids() -> frozenset[str]:
+    configured = get_config().get("knowledge_planet_allowed_group_ids") or ()
+    return frozenset(str(value).strip() for value in configured if str(value).strip())
+
+
+def _item_is_from_allowed_group(item: KpItem) -> bool:
+    """Reject explicit out-of-scope zsxq lineage while retaining legacy rows.
+
+    Older manually imported rows do not carry group metadata.  They remain
+    readable for cache compatibility, but every current zsxq sync writes a
+    group_id and is governed by the hard allowlist.
+    """
+
+    body = f"{item.text}\n{item.summary}\n{item.source_file}"
+    match = re.search(r"(?im)^\s*group_id\s*:\s*(\d+)\s*$", body)
+    if not match:
+        return True
+    return match.group(1) in _allowed_knowledge_planet_group_ids()
 
 
 def _sync_state_dir() -> Path:
@@ -708,6 +779,9 @@ def _sync_knowledge_planet_range(
     group_spec = str(config.get("knowledge_planet_auto_sync_group") or "").strip()
     if not group_spec:
         return "auto_sync_skipped:no_group"
+    group_id = group_spec.split(":", 1)[0].strip()
+    if group_id not in _allowed_knowledge_planet_group_ids():
+        return f"auto_sync_skipped:group_not_allowed:{group_id}"
 
     pages = int(
         config.get("knowledge_planet_auto_sync_max_pages", 600)
@@ -750,6 +824,20 @@ def _sync_knowledge_planet_range(
     if _text_only_enabled():
         sync_args.extend(
             ["--no-download-images", "--no-ocr-images", "--no-download-files"]
+        )
+    if bool(config.get("knowledge_planet_external_links_enabled", True)):
+        sync_args.extend(
+            [
+                "--resolve-public-links",
+                "--public-link-domains",
+                ",".join(config.get("knowledge_planet_external_link_allowed_domains") or ()),
+                "--public-link-timeout-sec",
+                str(config.get("knowledge_planet_external_link_timeout_sec", 12)),
+                "--public-link-max-bytes",
+                str(config.get("knowledge_planet_external_link_max_bytes", 600_000)),
+                "--max-public-links-per-topic",
+                str(config.get("knowledge_planet_external_link_max_per_topic", 3)),
+            ]
         )
     try:
         sync_code, sync_output = _run_project_script(sync_args, timeout=1800)
@@ -1115,6 +1203,38 @@ def _item_credibility(item: KpItem, source_type: str, evidence: str) -> str:
     if source_type in {"industry_weekly_data", "industry_data_snippet", "broker_survey_data"}:
         return "private_data_requires_methodology_check"
     return infer_credibility(source_type)
+
+
+def _source_assessment(source_type: str, credibility: str) -> tuple[str, str, str]:
+    """Separate source reliability from directional bias and permitted use."""
+
+    if source_type in {"industry_weekly_data", "industry_data_snippet", "broker_survey_data"}:
+        return (
+            "B_identified_professional",
+            "neutral_or_data",
+            "model_input_after_crosscheck",
+        )
+    if source_type in SELL_SIDE_TYPES or "broker" in credibility:
+        return (
+            "B_identified_professional",
+            "sell_side_optimism",
+            "model_input_after_crosscheck",
+        )
+    if source_type in {"company_research_feedback", "expert_call"}:
+        return (
+            "B_identified_professional" if "identified" in credibility else "C_private_unverified",
+            "company_promotion",
+            "scenario_or_verification_only",
+        )
+    if source_type == "channel_check":
+        return (
+            "C_private_unverified",
+            "channel_selection_bias",
+            "scenario_or_verification_only",
+        )
+    if source_type in {"unverified_rumor", "rumor"}:
+        return ("D_unknown_or_rumor", "unknown", "reject")
+    return ("C_private_unverified", "unknown", "scenario_or_verification_only")
 
 
 def _research_layer_for_signal(text: str, source_type: str, event_type: str = "") -> str:
@@ -1504,7 +1624,11 @@ def _query_items(
         ORDER BY COALESCE(NULLIF(published_at, ''), imported_at) DESC, id DESC
         LIMIT {int(sql_limit)}
     """
-    rows = [_row_to_item(row) for row in conn.execute(sql, params)]
+    rows = [
+        item
+        for item in (_row_to_item(row) for row in conn.execute(sql, params))
+        if _item_is_from_allowed_group(item)
+    ]
     primary = primary_terms or terms
     scored = [
         (_item_match_score(item, terms, primary), item)
@@ -5786,17 +5910,19 @@ def preprocess_knowledge_planet_window(
             (run_key,),
         ).fetchone()
         if cached is not None:
-            item_count = int(
-                conn.execute(
-                    """
-                    SELECT COUNT(*) AS n
-                    FROM kp_items
-                    WHERE substr(COALESCE(NULLIF(published_at, ''), imported_at), 1, 10) >= ?
-                      AND substr(COALESCE(NULLIF(published_at, ''), imported_at), 1, 10) <= ?
-                    """,
-                    (start_date, end_date),
-                ).fetchone()["n"]
-                or 0
+            count_rows = conn.execute(
+                """
+                SELECT *
+                FROM kp_items
+                WHERE substr(COALESCE(NULLIF(published_at, ''), imported_at), 1, 10) >= ?
+                  AND substr(COALESCE(NULLIF(published_at, ''), imported_at), 1, 10) <= ?
+                """,
+                (start_date, end_date),
+            ).fetchall()
+            item_count = sum(
+                1
+                for row in count_rows
+                if _item_is_from_allowed_group(_row_to_item(row))
             )
             report_count = 0 if text_only else int(
                 conn.execute(
@@ -5861,7 +5987,11 @@ def preprocess_knowledge_planet_window(
         """,
         (start_date, end_date),
     ).fetchall()
-    items = [_row_to_item(row) for row in item_rows]
+    items = [
+        item
+        for item in (_row_to_item(row) for row in item_rows)
+        if _item_is_from_allowed_group(item)
+    ]
     reports = [_row_to_report(row) for row in report_rows]
     if progress:
         progress(f"[preprocess] items={len(items)}, reports={len(reports)}, window={start_date}..{end_date}")
@@ -6939,18 +7069,23 @@ def _build_kp_evidence_ledger(
         if not evidence or not key or any(_near_duplicate_claim(evidence, existing) for existing in seen):
             continue
         seen.append(evidence)
+        credibility = _item_credibility(item, source_type, evidence)
+        reliability, bias, ceiling = _source_assessment(source_type, credibility)
         rows.append(
             KnowledgePlanetEvidence(
                 evidence_id=f"KPE{len(rows) + 1:02d}",
                 published_at=item.published_at[:16],
                 source=f"stream_item:{item.row_id}",
                 source_type=source_type,
-                credibility=_item_credibility(item, source_type, evidence),
+                credibility=credibility,
                 decision_role=(decision_role := _kp_decision_role(source_type, evidence)),
                 evidence=evidence,
                 verification="cross-check with filings/Tushare/price-volume/announcements before hard use",
                 model_variable=infer_model_variable(evidence),
                 required_outcome=_kp_required_outcome(decision_role),
+                source_reliability=reliability,
+                bias_profile=bias,
+                adoption_ceiling=ceiling,
             )
         )
         if len(rows) >= max_rows:
@@ -6969,13 +7104,15 @@ def _build_kp_evidence_ledger(
         if not evidence or not key or any(_near_duplicate_claim(evidence, existing) for existing in seen):
             continue
         seen.append(evidence)
+        credibility = str(row["evidence_grade"] or infer_credibility(source_type))
+        reliability, bias, ceiling = _source_assessment(source_type, credibility)
         rows.append(
             KnowledgePlanetEvidence(
                 evidence_id=f"KPE{len(rows) + 1:02d}",
                 published_at=str(row["published_at"] or "")[:16],
                 source="preprocessed_event",
                 source_type=source_type,
-                credibility=str(row["evidence_grade"] or infer_credibility(source_type)),
+                credibility=credibility,
                 decision_role=(decision_role := _kp_decision_role(source_type, evidence)),
                 evidence=evidence,
                 verification=_compact_text(
@@ -6984,6 +7121,9 @@ def _build_kp_evidence_ledger(
                 ),
                 model_variable=infer_model_variable(evidence),
                 required_outcome=_kp_required_outcome(decision_role),
+                source_reliability=reliability,
+                bias_profile=bias,
+                adoption_ceiling=ceiling,
             )
         )
         if len(rows) >= max_rows:
@@ -7133,8 +7273,8 @@ def _stock_fusion_pack_lines(
     if evidence_rows:
         lines.extend(
             [
-                "| evidence_id | date | source | type | credibility | decision_role | evidence | verification | affected_variable | required_outcome |",
-                "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
+                "| evidence_id | date | source | type | credibility | decision_role | evidence | verification | affected_variable | required_outcome | source_reliability | bias_profile | adoption_ceiling |",
+                "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
             ]
         )
         for row in evidence_rows:
@@ -7143,7 +7283,8 @@ def _stock_fusion_pack_lines(
                 f"{_md_cell(row.source_type)} | {_md_cell(row.credibility)} | "
                 f"{_md_cell(row.decision_role)} | {_md_cell(row.evidence)} | "
                 f"{_md_cell(row.verification)} | {_md_cell(row.model_variable)} | "
-                f"{_md_cell(row.required_outcome)} |"
+                f"{_md_cell(row.required_outcome)} | {_md_cell(row.source_reliability)} | "
+                f"{_md_cell(row.bias_profile)} | {_md_cell(row.adoption_ceiling)} |"
             )
     else:
         lines.append("- No company-specific high-information private/proxy evidence survived recall filtering.")
@@ -7514,7 +7655,11 @@ def _items_for_window(conn: sqlite3.Connection, report_date: str, lookback_days:
         """,
         (start_date, end_date),
     ).fetchall()
-    return [_row_to_item(row) for row in rows]
+    return [
+        item
+        for item in (_row_to_item(row) for row in rows)
+        if _item_is_from_allowed_group(item)
+    ]
 
 
 def _reports_for_window(conn: sqlite3.Connection, report_date: str, lookback_days: int) -> list[KpReport]:

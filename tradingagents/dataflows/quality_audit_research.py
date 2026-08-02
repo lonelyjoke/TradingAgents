@@ -384,7 +384,7 @@ def build_quality_audit_context(
             "",
             "## Pre-Generation Readiness Verdict",
             f"- Weak or incomplete modules: {', '.join(weak) if weak else 'none detected from supplied contexts'}",
-            "- Manager instruction: ordinary source-coverage gaps are non-blocking and neutral. A blocked shared underwriting model, corrupted source, invalid unit/period, missing company operating equations, or failed structured PM output is release-blocking and must remain a draft until repaired.",
+            "- Manager instruction: ordinary source-coverage gaps, missing operating equations, and a failed-but-recoverable LLM pass are partial and non-blocking. Reserve blocked for a reproducible ticker/period/unit/arithmetic contradiction or corrupted source that makes the supplied facts unsafe. An upstream packet still labelled blocked is release-blocking until this classifier is normalized or its contradiction is repaired; retry structured generation while preserving deterministic evidence.",
             "- Scope warning: this verdict checks input/scaffold readiness only. It cannot certify the generated PM memo. After generation, run the deterministic post-generation audit for arithmetic, period semantics, financial calendar, KPE transmission, forecast completion, and context alignment.",
         ]
     )

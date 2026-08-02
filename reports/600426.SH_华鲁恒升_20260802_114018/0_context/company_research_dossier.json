@@ -1,0 +1,1735 @@
+{
+  "schema_version": 1,
+  "symbol": "600426.SH",
+  "as_of_date": "2026-08-02",
+  "reader_contract": {
+    "audience": "普通投资者",
+    "principle": "数据用于权威佐证，不能替代公司、产业链与投资逻辑。",
+    "formal_rating_position": "第七章末尾",
+    "chapter_count": 7
+  },
+  "source_policy": {
+    "A_hard_fact": {
+      "sources": "公司财报、交易所/公司公告、官方业绩指引",
+      "allowed_use": "冻结历史事实和模型基线"
+    },
+    "B_reproducible": {
+      "sources": "Tushare结构化数据、程序计算、官方统计、行业协会",
+      "allowed_use": "财务计算、行业比较和可复核代理变量"
+    },
+    "C_external_expectation": {
+      "sources": "具名卖方报告、多机构一致预期",
+      "allowed_use": "构建市场预期与预测分歧；单家机构不得冒充一致预期"
+    },
+    "D_alternative_intelligence": {
+      "sources": "知识星球、渠道调研、专家纪要、私域卖方推送",
+      "allowed_use": "量化模型变更、情景概率变化、验证日历变化或明确拒绝"
+    },
+    "E_background": {
+      "sources": "普通新闻、政策评论、行业叙事",
+      "allowed_use": "解释背景；不得单独改变盈利预测或评级"
+    }
+  },
+  "company_introduction": {
+    "business_archetype": "多业联产柔性煤化工平台，成本领先，产能出货型",
+    "value_proposition_and_customers": "为下游农业、纺织、聚氨酯、涂料等行业提供基础化学品及新材料中间体，客户以大中型工业企业为主，稳定合作客户占比80%以上",
+    "revenue_equation": "Revenue = Σ(产品销量 × 实现均价)，销量受产能利用率与荆州新产能驱动，价格受煤炭/原油价差、行业供需及政策影响",
+    "profit_equation": "Profit = Σ[销量 × (实现均价 - 单位原料成本 - 单位加工成本)] - 期间费用(含研发) - 财务费用 - 税费，原料以煤炭为主，加工成本通过柔性联产优化",
+    "cash_flow_equation": "OCF = 净利润 + 折旧摊销 - 营运资金变动; FCF = OCF - 资本支出(维护+扩张)",
+    "capital_intensity_and_reinvestment": "高资本密集，固定资产+在建工程占总资产比重超过60%；当前处于德州基地改造、荆州新材料项目投资期，但行业新增产能审批收紧，预计2027年后资本开支逐步回落",
+    "key_unknowns": [
+      "分产品销量、价格、成本拆分",
+      "荆州TDI/草酸项目投产时间表及爬坡进度",
+      "煤炭与主要产品价差的量化敏感性",
+      "德州气化炉改造节省的具体金额与时间线"
+    ]
+  },
+  "industry_chain": {
+    "operating_model_family": "commodity_volume_price_cost",
+    "upstream_cost_and_supply": [
+      {
+        "segment": "煤化工基础产品",
+        "supply_capacity": "传统煤化工新增产能审批趋严，行业资本开支周期终结，新增产能受限；存量装置开工率有望自2026年系统性回升",
+        "unit_cost_inputs": "煤炭为主要可变成本，公司拥有低成本煤源及一体化加工优势，单位成本行业领先"
+      },
+      {
+        "segment": "化工新材料",
+        "supply_capacity": "新材料产能投放高峰已结束，行业开工率有望在2026年开始回升；荆州30万吨TDI、20万吨草酸及储备3-4个项目构成未来增量",
+        "unit_cost_inputs": "消耗煤化工平台生产的中间品，成本优势随一体化传导"
+      },
+      {
+        "segment": "化肥",
+        "supply_capacity": "化肥行业受环保与能耗政策约束，新增产能有限，尿素产能利用率较高",
+        "unit_cost_inputs": "煤炭成本占优，一体化园区降低物流和蒸汽成本"
+      },
+      {
+        "segment": "化肥产品",
+        "supply_capacity": "",
+        "unit_cost_inputs": ""
+      }
+    ],
+    "downstream_demand_and_pricing": [
+      {
+        "segment": "煤化工基础产品",
+        "customers_channel": "大型工业企业客户，直销为主，稳定合作客户占比80%以上",
+        "demand": [
+          "油价中枢上移提升煤头成本相对优势",
+          "海外地缘冲突致部分亚太装置受损，出口窗口打开",
+          "国内农业用肥及工业补库需求",
+          "双碳政策限制新增供给，有利于存量企业"
+        ],
+        "price_asp": "产品价格分化：尿素/醋酸偏弱（周度-0.1%/-1.5%），甲醇+5.3%，己二酸/己内酰胺+4.4%/+4.6%（截至2026-07-26）"
+      },
+      {
+        "segment": "化工新材料",
+        "customers_channel": "化纤、工程塑料、聚氨酯、涂料等行业客户，荆州基地面向新材料产业集群",
+        "demand": [
+          "己内酰胺、有机硅供需改善",
+          "海外补库与终端需求修复",
+          "尼龙/锦纶终端出口受美国关税冲击",
+          "TDI下游聚氨酯淡旺季波动"
+        ],
+        "price_asp": "己二酸/己内酰胺周度均价环比+4.4%/+4.6%，TDI周度均价环比-0.5%（截至2026-07-26）"
+      },
+      {
+        "segment": "化肥",
+        "customers_channel": "农资经销商、大型农场、政府采购，国内为主，正积极争取出口配额",
+        "demand": [
+          "国内农业需求刚性",
+          "政策支持出口（可能放松出口限制）",
+          "季节性施肥旺季"
+        ],
+        "price_asp": "尿素价格波段波动，2026Q2周度环比-0.1%，处于弱势"
+      },
+      {
+        "segment": "化肥产品",
+        "customers_channel": "",
+        "demand": [],
+        "price_asp": ""
+      }
+    ]
+  },
+  "profit_pools": {
+    "reported_or_analytical_units": [
+      {
+        "unit_id": "coal_base",
+        "unit_name": "煤化工基础产品",
+        "unit_type": "product",
+        "disclosure_basis": "analytical",
+        "parent_unit": "company",
+        "economic_role": "核心煤化工平台，生产尿素、甲醇、醋酸、有机胺、DMF、碳酸二甲酯等，贡献大部分收入与利润，周期性特征显著",
+        "primary_operating_archetype": "commodity_volume_price_cost",
+        "secondary_operating_archetype": "",
+        "revenue_driver_equation": "销量 = 有效产能 × 利用率 × 产品组合; 收入 = Σ(销量 × 实现ASP)",
+        "profit_driver_equation": "利润 = Σ[销量 × (市场价 - 煤基成本 - 加工成本)] - 分摊费用",
+        "cash_and_capital_equation": "OCF受价格周期与营运资金变动影响，FCF被产能扩张资本开支压制",
+        "reported_metrics": [],
+        "evidence_ids": [
+          "EV024",
+          "EV025",
+          "EV027",
+          "EV032",
+          "KPE02",
+          "KPE03"
+        ],
+        "missing_inputs": [
+          "分产品收入/成本/毛利率",
+          "产能及利用率",
+          "各产品实现价格",
+          "单位煤耗与煤炭采购价"
+        ],
+        "next_verification": "2026年中报分产品收入及毛利率明细"
+      },
+      {
+        "unit_id": "new_materials",
+        "unit_name": "化工新材料",
+        "unit_type": "product",
+        "disclosure_basis": "analytical",
+        "parent_unit": "company",
+        "economic_role": "新兴增长极，包括己二酸、己内酰胺、尼龙、TDI、草酸等，产能处于爬坡阶段，盈利取决于供需格局与新项目达产进度",
+        "primary_operating_archetype": "commodity_volume_price_cost",
+        "secondary_operating_archetype": "project_backlog_delivery",
+        "revenue_driver_equation": "销量 = 存量装置利用率提升 + 新增产能爬坡; 收入 = Σ(销量 × 实现ASP)",
+        "profit_driver_equation": "利润取决于产品价差（售价-原料成本）及新装置达产率",
+        "cash_and_capital_equation": "新项目需前期资本支出，达产后释放增量现金流",
+        "reported_metrics": [],
+        "evidence_ids": [
+          "KPE01",
+          "KPE02",
+          "KPE03",
+          "KPE09",
+          "EV029"
+        ],
+        "missing_inputs": [
+          "分部收入/毛利",
+          "各产品产能、产量、销量",
+          "荆州TDI/草酸投产时间与ASP",
+          "原料成本与产品价差"
+        ],
+        "next_verification": "荆州项目投产公告及新材料产品价格跟踪"
+      },
+      {
+        "unit_id": "fertilizer",
+        "unit_name": "化肥",
+        "unit_type": "reported_segment",
+        "disclosure_basis": "reported",
+        "parent_unit": "coal_base",
+        "economic_role": "尿素等氮肥产品，需求受国内农业周期、政策及出口影响，毛利率较高(32.3%)",
+        "primary_operating_archetype": "commodity_volume_price_cost",
+        "secondary_operating_archetype": "",
+        "revenue_driver_equation": "化肥收入 = 销售量 × 尿素ASP",
+        "profit_driver_equation": "毛利率稳定在30%以上，利润贡献较为稳定",
+        "cash_and_capital_equation": "成熟业务，资本开支少",
+        "reported_metrics": [
+          "化肥营业收入 7,305,674,635.46 CNY (2025)",
+          "化肥营业成本 4,945,756,665.40 CNY (2025)",
+          "化肥毛利率 32.30% (2025)"
+        ],
+        "evidence_ids": [
+          "EV027"
+        ],
+        "missing_inputs": [
+          "尿素销量、价格",
+          "化肥出口量和价格"
+        ],
+        "next_verification": "尿素内销及出口月度价格跟踪"
+      },
+      {
+        "unit_id": "thermal_power",
+        "unit_name": "热电",
+        "unit_type": "reported_segment",
+        "disclosure_basis": "reported",
+        "parent_unit": "company",
+        "economic_role": "自备电厂及供热，配套主业，收入占比<1%，毛利率22.5%",
+        "primary_operating_archetype": "other",
+        "secondary_operating_archetype": "",
+        "revenue_driver_equation": "热电收入 = 供电量/供热量 × 单价",
+        "profit_driver_equation": "内部服务，对外收益有限",
+        "cash_and_capital_equation": "与主业联动",
+        "reported_metrics": [
+          "热电营业收入 146,814,594.90 CNY (2025)",
+          "热电毛利率 22.50% (2025)"
+        ],
+        "evidence_ids": [
+          "EV027"
+        ],
+        "missing_inputs": [],
+        "next_verification": ""
+      },
+      {
+        "unit_id": "BU08",
+        "unit_name": "化肥产品",
+        "unit_type": "reported_segment",
+        "disclosure_basis": "reported",
+        "parent_unit": "company",
+        "economic_role": "Filing segment restored after structured evidence reconciliation.",
+        "primary_operating_archetype": "",
+        "secondary_operating_archetype": "",
+        "revenue_driver_equation": "",
+        "profit_driver_equation": "",
+        "cash_and_capital_equation": "",
+        "reported_metrics": [],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "economic sub-unit driver equations require analyst completion"
+        ],
+        "next_verification": ""
+      }
+    ],
+    "segment_models": [
+      {
+        "segment": "煤化工基础产品",
+        "products_or_services": "尿素、甲醇、醋酸、有机胺系列、DMF、碳酸二甲酯等",
+        "customers_and_channel": "大型工业企业客户，直销为主，稳定合作客户占比80%以上",
+        "revenue_weight_pct": null,
+        "profit_weight_pct": null,
+        "base_period": "FY2025/2026Q1",
+        "base_revenue_value": null,
+        "base_revenue_unit": "CNY",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [
+          "油价中枢上移提升煤头成本相对优势",
+          "海外地缘冲突致部分亚太装置受损，出口窗口打开",
+          "国内农业用肥及工业补库需求",
+          "双碳政策限制新增供给，有利于存量企业"
+        ],
+        "industry_supply_and_capacity": "传统煤化工新增产能审批趋严，行业资本开支周期终结，新增产能受限；存量装置开工率有望自2026年系统性回升",
+        "volume_share_utilization": "公司通过柔性联产优化产品组合，装置利用率待披露，但行业地位稳固",
+        "price_asp_take_rate": "产品价格分化：尿素/醋酸偏弱（周度-0.1%/-1.5%），甲醇+5.3%，己二酸/己内酰胺+4.4%/+4.6%（截至2026-07-26）",
+        "unit_cost_and_input_prices": "煤炭为主要可变成本，公司拥有低成本煤源及一体化加工优势，单位成本行业领先",
+        "margin_and_operating_leverage": "2026Q1综合毛利率22.28%（同比+5.93pp），受益于价格回暖与成本控制，但单季度毛利率能否维持尚不确定",
+        "working_capital_and_cash_conversion": "Q1 OCF/净利0.80，应收账款/年化收入0.32%，存货/年化收入5.0%，现金流质量良好",
+        "prosperity_level": "底部回升/右侧待验证",
+        "marginal_direction": "improving",
+        "causal_analysis": "需求端：油价上行与海外供给收缩增加国内煤头产品竞争力；供给端：政策限制与资本开支结束支撑供给刚性；价格端：部分产品出现反弹，但整体仍处于历史中低位；经营面：公司低成本优势在周期上行时弹性更大。不确定性在于下游补库持续性和煤价变化。",
+        "valuation_treatment": "核心利润来源，适用EV/EBITDA或PE估值；当前处于周期底部回升初期，估值可逐步修复",
+        "strongest_counterevidence": [
+          "2025年化工市场景气度较低，产品价格低谷震荡（EV031）",
+          "尿素/醋酸周度价格环比仍为负（KPE02）",
+          "补库需求可能仅是短期现象，三季度或有环比压力（KPE04）"
+        ],
+        "evidence_ids": [
+          "EV013",
+          "EV014",
+          "EV015",
+          "EV017",
+          "EV024",
+          "EV025",
+          "EV027",
+          "EV031",
+          "EV032",
+          "KPE02",
+          "KPE03",
+          "KPE04"
+        ],
+        "missing_inputs": [
+          "分产品收入/成本/毛利率",
+          "尿素/甲醇/醋酸各自销量与实现价格",
+          "煤炭成本与煤耗匹配",
+          "产能利用率"
+        ],
+        "next_verification": "2026年中报分产品数据验证底部反转是否兑现"
+      },
+      {
+        "segment": "化工新材料",
+        "products_or_services": "己二酸、己内酰胺、尼龙/锦纶原料、TDI、草酸等",
+        "customers_and_channel": "化纤、工程塑料、聚氨酯、涂料等行业客户，荆州基地面向新材料产业集群",
+        "revenue_weight_pct": null,
+        "profit_weight_pct": null,
+        "base_period": "2025/2026Q1",
+        "base_revenue_value": null,
+        "base_revenue_unit": "",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [
+          "己内酰胺、有机硅供需改善",
+          "海外补库与终端需求修复",
+          "尼龙/锦纶终端出口受美国关税冲击",
+          "TDI下游聚氨酯淡旺季波动"
+        ],
+        "industry_supply_and_capacity": "新材料产能投放高峰已结束，行业开工率有望在2026年开始回升；荆州30万吨TDI、20万吨草酸及储备3-4个项目构成未来增量",
+        "volume_share_utilization": "新项目尚未完全爬坡，存量装置开工率有提升空间，达产节奏决定收入增速",
+        "price_asp_take_rate": "己二酸/己内酰胺周度均价环比+4.4%/+4.6%，TDI周度均价环比-0.5%（截至2026-07-26）",
+        "unit_cost_and_input_prices": "消耗煤化工平台生产的中间品，成本优势随一体化传导",
+        "margin_and_operating_leverage": "无分部披露，无法独立验证毛利率水平",
+        "working_capital_and_cash_conversion": "未知",
+        "prosperity_level": "结构性分化/部分底部反转",
+        "marginal_direction": "mixed_improving",
+        "causal_analysis": "该板块处于新旧动能转换期。旧有产品（己二酸/己内酰胺）受益于供给秩序重建，价格中枢有望上移；新产品（TDI/草酸）面临市场开拓和爬坡挑战。整体景气度回暖但分化明显。",
+        "valuation_treatment": "成长性来源；若荆州项目顺利落地，可挖掘独立估值（如分部PE或DCF），但短期不确定性较高，建议以期权视角对待",
+        "strongest_counterevidence": [
+          "锦纶终端产品出口受阻，叠加产能快速增长（EV029）",
+          "TDI周度价格环比下跌，显示供需仍不乐观（KPE02）",
+          "公司在该领域并非传统龙头，市场份额和品牌溢价待建立"
+        ],
+        "evidence_ids": [
+          "EV029",
+          "KPE01",
+          "KPE02",
+          "KPE03",
+          "KPE09"
+        ],
+        "missing_inputs": [
+          "化工新材料分部收入/毛利",
+          "己二酸/己内酰胺/尼龙/TDI各自产能、产量、销量",
+          "荆州项目投产时间表与投资回报",
+          "新材料产品精确价差"
+        ],
+        "next_verification": "荆州项目投产公告及己二酸、TDI现货价格跟踪"
+      },
+      {
+        "segment": "化肥",
+        "products_or_services": "尿素/氮肥",
+        "customers_and_channel": "农资经销商、大型农场、政府采购，国内为主，正积极争取出口配额",
+        "revenue_weight_pct": 23.6,
+        "profit_weight_pct": null,
+        "base_period": "FY2025",
+        "base_revenue_value": 7305.67,
+        "base_revenue_unit": "mn CNY",
+        "base_revenue_growth_pct": 0.12,
+        "base_margin_pct": 32.3,
+        "base_margin_change_pp": 2.4,
+        "demand_and_order_drivers": [
+          "国内农业需求刚性",
+          "政策支持出口（可能放松出口限制）",
+          "季节性施肥旺季"
+        ],
+        "industry_supply_and_capacity": "化肥行业受环保与能耗政策约束，新增产能有限，尿素产能利用率较高",
+        "volume_share_utilization": "公司化肥装置产能利用率较高，出口业务弹性存在",
+        "price_asp_take_rate": "尿素价格波段波动，2026Q2周度环比-0.1%，处于弱势",
+        "unit_cost_and_input_prices": "煤炭成本占优，一体化园区降低物流和蒸汽成本",
+        "margin_and_operating_leverage": "毛利率32.3%，远高于行业平均，但易受尿素价格波动影响",
+        "working_capital_and_cash_conversion": "正常，因其大宗属性，账期短",
+        "prosperity_level": "中性偏弱",
+        "marginal_direction": "stable",
+        "causal_analysis": "化肥为成熟业务，提供稳定收入和现金流。2025年毛利率比上年增加2.4pp，体现成本优势。未来量价关键在国外出口市场能否打开。",
+        "valuation_treatment": "收入占比23.6%，利润弹性有限，按PE估值或作为稳定现金流板块",
+        "strongest_counterevidence": [
+          "尿素价格下行压力，周度价格仍为负",
+          "国内尿素产能可能存在过剩风险"
+        ],
+        "evidence_ids": [
+          "EV027",
+          "KPE02"
+        ],
+        "missing_inputs": [
+          "化肥销量、价格",
+          "出口量及占比",
+          "成本拆分"
+        ],
+        "next_verification": "尿素内销、出口价格与政策动态跟踪"
+      },
+      {
+        "segment": "化肥产品",
+        "products_or_services": "",
+        "customers_and_channel": "",
+        "revenue_weight_pct": 100.0,
+        "profit_weight_pct": 100.0,
+        "base_period": "annual filing",
+        "base_revenue_value": 7305674635.46,
+        "base_revenue_unit": "filing table unit not explicit in extracted row",
+        "base_revenue_growth_pct": 0.12,
+        "base_margin_pct": 32.3,
+        "base_margin_change_pp": 2.4,
+        "demand_and_order_drivers": [],
+        "industry_supply_and_capacity": "",
+        "volume_share_utilization": "",
+        "price_asp_take_rate": "",
+        "unit_cost_and_input_prices": "",
+        "margin_and_operating_leverage": "",
+        "working_capital_and_cash_conversion": "",
+        "prosperity_level": "evidence_limited",
+        "marginal_direction": "unknown",
+        "causal_analysis": "",
+        "valuation_treatment": "evidence_limited",
+        "strongest_counterevidence": [],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "LLM omitted a filing-reported material segment"
+        ],
+        "next_verification": ""
+      }
+    ]
+  },
+  "competition_and_moat": {
+    "landscapes": [
+      {
+        "business_unit": "煤化工基础产品",
+        "market_boundary": "中国煤基基础化学品市场，包括甲醇、醋酸、有机胺等，部分产品可实现出口",
+        "boundary_evidence": "公司年报及行业资料",
+        "structure_and_concentration": "市场集中度中等，主要参与者包括华鲁恒升、鲁西化工、宝丰能源、中煤集团等，公司为行业龙头之一",
+        "direct_competitors": [
+          "鲁西化工",
+          "宝丰能源",
+          "中煤能源（煤化工业务）",
+          "华谊集团"
+        ],
+        "substitutes_and_customer_alternatives": [
+          "油头化工品（如乙烯法醋酸、丙烯法丁辛醇）",
+          "进口产品（中东、北美）",
+          "生物基化学品"
+        ],
+        "self_supply_and_new_entrants": [
+          "下游大型用户自建煤气化装置存在可能",
+          "新进入者受双碳审批和资本壁垒严格限制，短期威胁小"
+        ],
+        "comparison_dimensions": [
+          "原料成本（煤炭价格与单耗）",
+          "产品组合与柔性联产能力",
+          "客户粘性及应收质量",
+          "规模与一体化程度"
+        ],
+        "company_relative_position": "成本领先，规模居前，柔性联产增加产品切换灵活性，稳定客户占比80%+，应收账款极低，行业影响力强",
+        "competitor_likely_response": "成本劣势企业可能通过价格战维持份额，但难以持续；鲁西化工等正向新材料转型，可能在部分产品线直接竞争",
+        "financial_transmission": "成本优势转化为高出行业平均的毛利率，周期底部仍可小幅盈利，周期上行弹性更大",
+        "evidence_ids": [
+          "EV025",
+          "EV028",
+          "KPE01"
+        ],
+        "evidence_status": "partial",
+        "missing_inputs": [
+          "各公司市场份额定量数据",
+          "竞争对手成本估算"
+        ],
+        "next_verification": "对比宝丰能源、鲁西化工毛利率、ROE、产能数据"
+      },
+      {
+        "business_unit": "化工新材料",
+        "market_boundary": "全球及中国己二酸、己内酰胺、尼龙6/66、TDI等中间体与新材料市场",
+        "boundary_evidence": "公司年报及相关行业报告",
+        "structure_and_concentration": "各子行业集中度不一，TDI全球CR5约80%，己内酰胺国内产能增长较快，集中度逐渐下降",
+        "direct_competitors": [
+          "万华化学（TDI、聚氨酯）",
+          "神马股份（尼龙66）",
+          "华峰化学（己二酸、氨纶）",
+          "鲁西化工（己内酰胺）"
+        ],
+        "substitutes_and_customer_alternatives": [
+          "替代材料（如尼龙66替代尼龙6，生物基材料）",
+          "回收再生料"
+        ],
+        "self_supply_and_new_entrants": [
+          "大型化纤企业可能向上游延伸实现自给",
+          "技术壁垒较高，但国内资本涌入使部分产品产能快速增长"
+        ],
+        "comparison_dimensions": [
+          "产品品质与一致性",
+          "成本（源于煤炭及一体化）",
+          "客户认证壁垒",
+          "应用开发能力"
+        ],
+        "company_relative_position": "作为后来者，凭借荆州基地切入，在存量市场市占率低，但成本具备后发优势；在TDI、草酸等领域面临龙头挤压",
+        "competitor_likely_response": "现有龙头可能利用规模和技术优势降价迎战，或加快自身产能布局",
+        "financial_transmission": "若产品价差维持且成功达产，可贡献增量收入和利润；若竞争激化导致价格战，可能拉低整体回报",
+        "evidence_ids": [
+          "EV029",
+          "KPE01",
+          "KPE02"
+        ],
+        "evidence_status": "partial",
+        "missing_inputs": [
+          "各新材料产品市场份额",
+          "成本及定价对比"
+        ],
+        "next_verification": "持续跟踪TDI、己内酰胺等产品价格及公司销量份额变化"
+      }
+    ],
+    "competition_and_substitution_analysis": "华鲁恒升在深化煤化工成本曲线方面处国内领先地位，与宝丰能源、鲁西化工构成第一梯队。宝丰立足宁东优质煤源，成本可能更低；鲁西在有机硅、己内酰胺有先发优势；公司的优势在于多品种柔性联产和德州-荆州双基地布局，抗产能过剩风险能力较强。替代方面，最大的威胁来自油头化工和海外低成本产能，但当前油价中枢上移反而强化了煤头优势。新进入者几乎被政策与资本壁垒排除。长期需警惕新能源和生物基化学品可能颠覆部分产品市场。",
+    "claimed_mechanisms": [
+      "成本领先（煤化工一体化、柔性联产、低价煤炭采购）",
+      "规模与产业链协同（多产品联产降低单位成本）",
+      "高客户粘性（稳定合作客户占比>80%，应收极低）"
+    ],
+    "tests": [
+      {
+        "moat_mechanism": "成本优势（煤炭采购、柔性联产、全链条降本）",
+        "observable_test": "公司毛利率与行业内可比公司（如宝丰能源、鲁西化工）毛利率中位数对比，是否持续高于均值2-3个百分点",
+        "comparison_basis": "同行业煤化工企业毛利率",
+        "evidence_result": "已有Q1 2026毛利率22.28%的数据，但缺少可比公司同期数据，无法判定相对优势",
+        "financial_transmission": "毛利率领先→周期底部不亏损→维持投资和分红→估值溢价",
+        "strongest_counterevidence": "若煤价上涨或竞争对手引进类似技术，成本差距可能收窄甚至消失",
+        "status": "partial",
+        "evidence_ids": [
+          "EV013",
+          "EV025"
+        ],
+        "next_verification": "收集宝丰能源、鲁西化工2025/2026H1毛利率并进行比较"
+      },
+      {
+        "moat_mechanism": "客户粘性与应收账款质量",
+        "observable_test": "应收账款/收入比率持续低于1%，合同负债/预收款项占比稳定，前五大客户集中度不超30%",
+        "comparison_basis": "化工行业平均应收账款周转天数",
+        "evidence_result": "Q1应收账款/年化收入仅0.32%，远低于行业平均（通常5-10%），显示极强的现金回收和客户粘性",
+        "financial_transmission": "极低应收账款→高质量现金流→OCF/净利润比率高→抗风险能力",
+        "strongest_counterevidence": "大宗品客户切换成本低，低应收可能源于短期供需紧张或公司主动收紧信用政策，非客户忠诚度",
+        "status": "partial",
+        "evidence_ids": [
+          "EV018",
+          "EV028"
+        ],
+        "next_verification": "审查年度报告前五大客户名称及占比变化，判断客户稳定性"
+      },
+      {
+        "moat_mechanism": "规模优势与产业链协同",
+        "observable_test": "吨产品制造成本低于中小煤化工企业20%以上，园区内物料闭路循环降低成本",
+        "comparison_basis": "行业平均或中小型煤化工企业",
+        "evidence_result": "无公开数据支撑，属于管理陈述",
+        "financial_transmission": "规模摊薄固定成本→高毛利率→高ROE",
+        "strongest_counterevidence": "规模优势可能因管理低效或产能过剩而被削弱，历史上多家大型化工企业曾出现规模不经济",
+        "status": "unproven",
+        "evidence_ids": [
+          "EV025"
+        ],
+        "next_verification": "需要公司或第三方披露单位产品成本的详细拆解"
+      }
+    ],
+    "structural_risks": [
+      "煤化工产品大宗属性强，同质化竞争，价格周期波动剧烈",
+      "原油价格大幅下跌将削弱煤头成本优势，缩小价差",
+      "双碳政策可能对高能耗产能实施更严格的限制或碳成本",
+      "中美贸易摩擦影响终端产品（如锦纶）出口，间接打击新材料需求",
+      "国内新增产能虽受限，但存量改造和海外的产能释放可能超预期"
+    ],
+    "interpretation_rule": "Chapter 2 owns market boundary, structure, direct competitors, substitutes and likely response; Chapter 4 owns relative advantage, observable proof and financial persistence."
+  },
+  "key_underwriting_questions": [
+    {
+      "question_id": "Q1",
+      "question": "煤化工基础产品的综合价差（产品售价-煤炭成本）能否在2026H2持续改善，还是仅为补库带来的短期脉冲？",
+      "why_it_matters": "该板块贡献绝大部分收入和利润，价差变动直接决定全年净利润能否从2025年的33亿跃升至45亿以上。若价差不能维持，当前估值（PE TTM 15.9x）可能偏高；若能维持甚至扩大，则形成bull情景。",
+      "current_answer": "unresolved",
+      "bull_evidence": [
+        "Q1 2026毛利率同比大幅提升至22.28%",
+        "统计局1-5月化工行业利润同比+71.6%",
+        "甲醇、己二酸等产品周度价格上涨"
+      ],
+      "bear_evidence": [
+        "2025年产品价格低谷震荡，景气度低",
+        "尿素/醋酸价格周度仍为负",
+        "Q2需求底部逻辑尚未被数据证实"
+      ],
+      "decisive_model_variables": [
+        "产品综合ASP",
+        "煤炭成本",
+        "毛利率"
+      ],
+      "affected_financial_lines": [
+        "营业收入",
+        "营业成本",
+        "净利润"
+      ],
+      "evidence_ids": [
+        "KPE02",
+        "KPE03",
+        "KPE04",
+        "EV013",
+        "EV015",
+        "EV031"
+      ],
+      "missing_evidence": [
+        "公司出厂价与市场价折价系数",
+        "分产品销量",
+        "煤炭采购价与煤耗单耗"
+      ],
+      "next_verification": "2026年中报分产品毛利率及三季度行业价格数据"
+    },
+    {
+      "question_id": "Q2",
+      "question": "荆州基地新材料项目（TDI/草酸等）能否按计划投产、达产并产生正面利润贡献，资本开支节奏如何？",
+      "why_it_matters": "新项目是未来2-3年核心利润增量，若成功则底部利润从30亿增厚至50亿叙事可兑现；若延期或爬坡亏损，则模型中的成长性假设落空。",
+      "current_answer": "unresolved",
+      "bull_evidence": [
+        "KPE01：卖方测算底部利润30亿增厚至50亿以上，当前底部估值仅11X",
+        "公司年报提及荆州追求行业格局优异与需求增量新材料"
+      ],
+      "bear_evidence": [
+        "TDI周度价格环比-0.5%，景气度未见好转",
+        "锦纶终端出口受阻可能连累己内酰胺需求",
+        "新进入者可能面临技术爬坡或市场开拓困难"
+      ],
+      "decisive_model_variables": [
+        "荆州项目产能",
+        "开工率",
+        "产品价差",
+        "资本支出"
+      ],
+      "affected_financial_lines": [
+        "营业收入",
+        "营业成本",
+        "资本支出",
+        "自由现金流"
+      ],
+      "evidence_ids": [
+        "KPE01",
+        "KPE02",
+        "EV029"
+      ],
+      "missing_evidence": [
+        "荆州项目具体投产时间表、投资规模、预期内部收益率"
+      ],
+      "next_verification": "关注公司项目投产公告及第三方调研"
+    },
+    {
+      "question_id": "Q3",
+      "question": "在行业供给端长期受限的背景下，公司能否将成本优势转化为持续高于0%的ROIC，并穿越周期？",
+      "why_it_matters": "决定估值倍数能否从周期底部PE（11-13x）提升至质量成长股倍数（15-18x）。ROIC维持高位才是长期重估的基础。",
+      "current_answer": "unresolved",
+      "bull_evidence": [
+        "公司成本控制优势显著，柔性联产降本",
+        "行业新增产能近乎停滞，公司地位巩固"
+      ],
+      "bear_evidence": [
+        "大宗化工品同质化竞争，成本领先可能被追赶",
+        "上一轮景气高点后估值回落幅度大"
+      ],
+      "decisive_model_variables": [
+        "ROIC",
+        "毛利率相对行业均值",
+        "资本开支强度"
+      ],
+      "affected_financial_lines": [
+        "营业利润",
+        "自由现金流",
+        "估值倍数"
+      ],
+      "evidence_ids": [
+        "EV025",
+        "KPE01",
+        "KPE05"
+      ],
+      "missing_evidence": [
+        "同行业可比公司如宝丰能源的ROIC与毛利率",
+        "公司分板块ROIC"
+      ],
+      "next_verification": "对比宝丰能源、鲁西化工年报及财务比率"
+    },
+    {
+      "question_id": "Q4",
+      "question": "化肥业务出口政策能否实质性放开，从而贡献增量销量和利润，并缓释国内尿素价格波动风险？",
+      "why_it_matters": "化肥收入占比近24%，毛利率32.3%，是稳定的利润源。若出口配额增加，可提升销量10-20%，对EPS影响明显；若国内价格持续走低，则需要出口对冲。",
+      "current_answer": "unresolved",
+      "bull_evidence": [
+        "公司年报提及积极争取出口业务",
+        "印度等南亚化肥需求刚性"
+      ],
+      "bear_evidence": [
+        "尿素周度价格环比-0.1%",
+        "国内化肥保供政策可能限制出口"
+      ],
+      "decisive_model_variables": [
+        "化肥出口量",
+        "尿素价格"
+      ],
+      "affected_financial_lines": [
+        "化肥营业收入",
+        "毛利"
+      ],
+      "evidence_ids": [
+        "EV027",
+        "KPE02"
+      ],
+      "missing_evidence": [
+        "化肥出口政策动向",
+        "国际尿素与国内价差"
+      ],
+      "next_verification": "跟踪化肥出口关税和配额政策，对比国际尿素价格"
+    },
+    {
+      "question_id": "Q5",
+      "question": "当前市场估值（PE TTM 15.9x，PB 1.73x）是否已定价了2026年盈利改善？若2026E净利润实现42.5亿以上，forward PE降至13.9x，市场会否重估？",
+      "why_it_matters": "估值是投资决策的最终落脚点。若市场定价保守，则存在预期差和修复空间；若定价已经合理甚至偏乐观，则上行空间有限。",
+      "current_answer": "unresolved",
+      "bull_evidence": [
+        "KPE05称PE约12倍，PB 1.6倍，处于历史低分位（但日期较早且股本未转增）",
+        "若以2026E利润计算，动态PE仅13.9x，低于化工龙头历史中枢15x"
+      ],
+      "bear_evidence": [
+        "2026-07-31市场PE TTM 15.9倍处于5年73.4%分位",
+        "隐含TTM盈利37.25亿已高于FY2025的33.15亿，市场是否已计入足够乐观？"
+      ],
+      "decisive_model_variables": [
+        "2026E归母净利润",
+        "合理PE倍数",
+        "转增后股本基数"
+      ],
+      "affected_financial_lines": [
+        "估值",
+        "目标价"
+      ],
+      "evidence_ids": [
+        "KPE05",
+        "KPE01",
+        "EV057"
+      ],
+      "missing_evidence": [
+        "至少3家券商一致预期盈利",
+        "转增后股价的历史PE分位"
+      ],
+      "next_verification": "收集1-3家券商盈利预测，统一股本后计算forward PE和分位"
+    }
+  ],
+  "forecast_spine": {
+    "forecast_years": [
+      "2026E",
+      "2027E",
+      "2028E"
+    ],
+    "forecast_lines": [
+      {
+        "segment": "consolidated",
+        "metric": "营业收入",
+        "unit": "mn CNY",
+        "base_period": "FY2025",
+        "base_value": 30968.88,
+        "year_1_value": 34000.0,
+        "year_2_value": 37000.0,
+        "year_3_value": 40000.0,
+        "formula": "以2026Q1年化收入34,474百万为参照，考虑后续产品价格波动及荆州新产能逐步释放，给予温和增长",
+        "assumption_status": "分析估算，受限于分产品量价缺失",
+        "evidence_ids": [
+          "EV010",
+          "EV011"
+        ],
+        "key_sensitivity": "产品综合售价每下跌1%，收入减少约340百万；销量受新产能影响，不确定性更高",
+        "missing_inputs": [
+          "分产品销量与ASP",
+          "新项目投产对收入的量化贡献"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "营业成本",
+        "unit": "mn CNY",
+        "base_period": "FY2025",
+        "base_value": 25855.0,
+        "year_1_value": 27710.0,
+        "year_2_value": 29600.0,
+        "year_3_value": 31600.0,
+        "formula": "成本 = 营业收入 × (1 - 毛利率)；FY2025毛利率按约16.5%估算（成本约25,855百万）",
+        "assumption_status": "估算",
+        "evidence_ids": [],
+        "key_sensitivity": "",
+        "missing_inputs": [
+          "FY2025准确毛利率及成本结构"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "毛利率",
+        "unit": "%",
+        "base_period": "FY2025",
+        "base_value": 16.5,
+        "year_1_value": 18.5,
+        "year_2_value": 20.0,
+        "year_3_value": 21.0,
+        "formula": "基于2026Q1 22.28%及行业复苏预期，假设逐渐改善但未回到历史极端高位",
+        "assumption_status": "假设",
+        "evidence_ids": [
+          "EV013"
+        ],
+        "key_sensitivity": "毛利率每变动1个百分点，营业利润变动约340-400百万",
+        "missing_inputs": [
+          "煤价与产品价格对毛利率的弹性系数"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "期间费用率（不含财务费用）",
+        "unit": "%",
+        "base_period": "FY2025",
+        "base_value": 5.0,
+        "year_1_value": 4.8,
+        "year_2_value": 4.5,
+        "year_3_value": 4.5,
+        "formula": "包括销售、管理、研发费用，基于Q1隐含水平，规模增长摊薄",
+        "assumption_status": "假设",
+        "evidence_ids": [
+          "EV014",
+          "EV016"
+        ],
+        "key_sensitivity": "",
+        "missing_inputs": [
+          "费用明细"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "财务费用率",
+        "unit": "%",
+        "base_period": "FY2025",
+        "base_value": 0.7,
+        "year_1_value": 0.9,
+        "year_2_value": 0.8,
+        "year_3_value": 0.7,
+        "formula": "Q1 2026为0.90%，随有息负债逐步偿还和利率环境改善略降",
+        "assumption_status": "假设",
+        "evidence_ids": [
+          "EV016"
+        ],
+        "key_sensitivity": "",
+        "missing_inputs": [
+          "有息负债规模与利率"
+        ]
+      }
+    ],
+    "scenarios": [
+      {
+        "scenario": "base",
+        "probability_pct": 50.0,
+        "operating_assumptions": [
+          "宏观：布油80-90美元/桶，煤价相对稳定（秦皇岛5500大卡800-900元/吨）",
+          "行业：煤化工供给端受双碳限制，需求整体平稳增长，化工品价格中枢缓慢上移",
+          "公司：荆州TDI/草酸项目部分投产，德州改造初步见效，底部利润由30亿向40-45亿过渡；存量装置利用率稳定",
+          "毛利率：2026E 18.5%, 2027E 20.0%, 2028E 21.0%",
+          "收入增速：2026E +9.8%, 2027E +8.8%, 2028E +8.1%"
+        ],
+        "parent_net_profit_cny_mn": 4250.0,
+        "eps_cny": 2.0091325417509642,
+        "fcf_cny_mn": -400.0,
+        "valuation_method": "PE 15x (2026E)",
+        "valuation_multiple": 15.0,
+        "fair_value_per_share": 30.136988126264463,
+        "evidence_ids": [
+          "EV010",
+          "EV011",
+          "EV013",
+          "KPE01"
+        ],
+        "falsification": "若2026H1实际毛利率<17%或累计营收<17,000百万，则下调至bear概率",
+        "missing_inputs": [
+          "荆州项目确切投产节点",
+          "煤炭价格假设基准"
+        ]
+      },
+      {
+        "scenario": "bull",
+        "probability_pct": 30.0,
+        "operating_assumptions": [
+          "宏观：布油>90美元/桶，地缘冲突持续，海外石化装置受损加剧",
+          "行业：国内煤化工产能零增长，需求强劲，出口份额扩大",
+          "公司：荆州项目满产且产品价差处于历史高位，德州改造提前完成，底部利润跃升至50亿以上",
+          "毛利率：2026E 21.0%, 2027E 23.0%, 2028E 25.0%"
+        ],
+        "parent_net_profit_cny_mn": 5200.0,
+        "eps_cny": 2.4582327569658853,
+        "fcf_cny_mn": 1000.0,
+        "valuation_method": "PE 18x (成长性溢价)",
+        "valuation_multiple": 18.0,
+        "fair_value_per_share": 44.24818962538593,
+        "evidence_ids": [
+          "KPE01",
+          "KPE09"
+        ],
+        "falsification": "若2026H2主要产品价差未显著扩大至2017-2018年水平，将bull概率下调至20%",
+        "missing_inputs": [
+          "利润结构性改善至50亿的确切时间",
+          "油价-煤化工价差历史弹性"
+        ]
+      },
+      {
+        "scenario": "bear",
+        "probability_pct": 20.0,
+        "operating_assumptions": [
+          "宏观：布油跌破70美元，煤头成本优势消失，全球经济放缓需求萎缩",
+          "行业：产能过剩重现，价格战再起，部分在建产能冲击市场",
+          "公司：荆州项目延期或严重低于预期，德州改造收效甚微，底部利润仍徘徊在30亿左右",
+          "毛利率：2026E 16.0%, 2027E 15.0%, 2028E 14.0%"
+        ],
+        "parent_net_profit_cny_mn": 3000.0,
+        "eps_cny": 1.418211205941857,
+        "fcf_cny_mn": -1500.0,
+        "valuation_method": "PE 12x (周期低迷)",
+        "valuation_multiple": 12.0,
+        "fair_value_per_share": 17.018534471302285,
+        "evidence_ids": [
+          "EV031",
+          "KPE02"
+        ],
+        "falsification": "若2026Q3收入同比转负且库存大幅上升，则上调bear概率",
+        "missing_inputs": [
+          "现时煤价与产品价差的支撑位"
+        ]
+      }
+    ],
+    "readiness": "partial",
+    "readiness_reasons": [
+      "缺少分产品（尤其是煤化工基础产品与新材料）的收入、成本、毛利、销量及实现价格数据",
+      "化工新材料分部及荆州项目投产时间、资本开支、预期回报等关键数据缺失",
+      "公司整体FY2025毛利率、营业利润、资本支出等需从完整年报补充",
+      "商品价格映射缺失，无法通过期货数据精准推算公司产品实现价",
+      "第三方卖方预测（如底部利润30亿增至50亿）未经公司验证，仅作为分析线索"
+    ]
+  },
+  "market_expectations": {
+    "sell_side_observations": [
+      {
+        "intelligence_id": "KSI01",
+        "kpe_ids": "KPE01",
+        "published_at": "2026-07-17T08:17",
+        "institution": "机构未识别",
+        "analyst_or_author": "纪要小能手",
+        "freshness": "有效窗口/16天",
+        "rating_signal": "未披露",
+        "forecast_facts": "德州追求提质增效，计划更换第一平台、二平台的气化炉和净化装置，预计实现约6-10亿利润提升空间，表内增量显著，测算底部利润30e增厚至50e以上，当前底部估值仅11X",
+        "valuation_facts": "德州追求提质增效，计划更换第一平台、二平台的气化炉和净化装置，预计实现约6-10亿利润提升空间，表内增量显著，测算底部利润30e增厚至50e以上，当前底部估值仅11X",
+        "normalized_points": "无可标准化数值",
+        "revision_signal": "较前次口径发生变化；尚无可同口径比较的标准化数值",
+        "source_quote": "华鲁恒升、鲁西化工点评：价值凸... 华鲁恒升、鲁西化工点评：价值凸显，成长趋势不变 [玫瑰]油价中枢提升、国内煤化工能源优势不变。海外地缘政治冲突加剧，油价中枢确定性上行，叠加海外部分化工装置受损，国内煤头企业一方面享受能源成本优势，一方面海外供给支撑景气上行。 [玫瑰]价差底部回暖趋势不变、供需格局改善逻辑不变。本轮化工核心逻辑是行业资本开支结束，同时传统煤化工高能耗高煤耗项目审批趋紧，新增产能严格受限。 [玫瑰]华鲁恒升：底部利润价值凸显、新项目聚焦好格局、老项目聚焦竞争力。荆州追求行业格局优异&需求增量新材料，当前已布局30万吨TDI，20万吨草酸，在手储备项目约3-4个；德州追求提质增效，计划更换第一平台、二平台的气化炉和净化装置，预计实现约6-10亿利润提升空间，表内增量显著，测算底部利润30e增厚至50e以上，当前底部估值仅11X。 [玫瑰]鲁西化工：北部园区持续推进、充分受益反内卷弹性。己内酰胺、有机硅供需..."
+      },
+      {
+        "intelligence_id": "KSI02",
+        "kpe_ids": "KPE05",
+        "published_at": "2026-07-07T08:15",
+        "institution": "机构未识别",
+        "analyst_or_author": "纪要小能手",
+        "freshness": "有效窗口/26天",
+        "rating_signal": "未披露",
+        "forecast_facts": "未提取到带期间的明确盈利预测",
+        "valuation_facts": "目前龙头万华化学和华鲁恒升的PE约为12倍，PB仅有2.1倍和1.6倍，PB位于2020年以来10%和13%的分位数（按照7月6日收盘价测算）",
+        "normalized_points": "无可标准化数值",
+        "revision_signal": "窗口内首次识别，暂无同机构前序可比",
+        "source_quote": "化工观点更新20260706 ... 化工观点更新20260706 上半年化工利润高增，头部企业业绩大增。统计局数据显示，1-5月，在涨价带动下规模以上化工行业利润同比增长71.6%。基础化工头部企业集中发布半年报业绩预增：东岳硅材（+905%~+952%）、盐湖股份（+131%~+143%）、华峰化学（+71%~+112%）、东方铁塔（+82%~+106%），新凤鸣（+95%~+112%），覆盖有机硅、氨纶、钾肥、涤纶长丝等传统化工领域，龙头企业呈现强者更强的态势。 龙头企业估值处于低位。目前龙头万华化学和华鲁恒升的PE约为12倍，PB仅有2.1倍和1.6倍，PB位于2020年以来10%和13%的分位数（按照7月6日收盘价测算）。而部分周期成长股（例如赛轮、瑞丰等PE回归12倍），配置价值凸显，化工整体进入配置区间。 中长期供给端强基本面支撑。中期看，国内双碳政策持续推进，海外因中东战争造成欧洲、日韩化工企业成本高企或加..."
+      }
+    ],
+    "valuation_closure": {
+      "current_price_cny": 21.55,
+      "diluted_share_count_mn": 2115.3407810000003,
+      "core_value_per_share_cny": null,
+      "probability_weighted_fair_value_per_share_cny": 31.746657845008468,
+      "option_value_per_share_cny": null,
+      "other_adjustments_per_share_cny": null,
+      "fair_value_per_share_cny": 31.746657845008468,
+      "expected_return_pct": 47.31627770305553,
+      "formula": "概率加权：base 50%×23.18 + bull 30%×34.04 + bear 20%×13.09 = 24.42；期权价值已嵌入bull情景，不再重复加总",
+      "rating_consistency_check": "",
+      "double_counting_checks": [
+        "荆州期权价值3.05元包含在bull 34.04元中，未重复计算",
+        "核心bucket采用2026E利润，已覆盖大部分经营资产，无遗漏重要子公司"
+      ],
+      "status": "partial",
+      "missing_inputs": [
+        "场景概率的实证基础",
+        "可比公司PE倍数更精准的量化对标",
+        "valuation closure reset after deterministic share-count correction"
+      ]
+    },
+    "rule": "单家机构是观察值；只有具备样本和口径的多机构数据才可称为一致预期。"
+  },
+  "knowledge_planet": {
+    "importance": "material_alternative_intelligence",
+    "use_rule": "每条线索必须落到模型变化、概率变化、验证变化或拒绝之一。",
+    "items": [
+      {
+        "evidence_id": "KPE01",
+        "source_type": "industry_weekly_data",
+        "published_at": "2026-07-17T08:17",
+        "source_reliability": "B_identified_professional",
+        "bias_profile": "neutral_or_data",
+        "adoption_ceiling": "model_input_after_crosscheck",
+        "target_excerpt": "华鲁恒升、鲁西化工点评：价值凸... 华鲁恒升、鲁西化工点评：价值凸显，成长趋势不变 [玫瑰]油价中枢提升、国内煤化工能源优势不变。海外地缘政治冲突加剧，油价中枢确定性上行，叠加海外部分化工装置受损，国内煤头企业一方面享受能源成本优势，一方面海外供给支撑景气上行。 [玫瑰]价差底部回暖趋势不变、供需格局改善逻辑不变。本轮化工核心逻辑是行业资本开支结束，同时传统煤化工高能耗高煤耗项目审批趋紧，新增产能严格受限。 [玫瑰]华鲁恒升：底部利润价值凸显、新项目聚焦好格局、老项目聚焦竞争力。荆州追求行业格局优异&需求增量新材料，当前已布局30万吨TDI，20万吨草酸，在手储备项目约3-4个；德州追求提质增效，计划更换第一平台、二平台的气化炉和净化装置，预计实现约6-10亿利润提升空间，表内增量显著，测算底部利润30e增厚至50e以上，当前底部估值仅11X。 [玫瑰]鲁西化工：北部园区持续推进、充分受益反内卷弹性。己内酰胺、有机硅供需明显改善，供给端产能投放高峰已结束，开工率有望自26年以来明显提升。北区园区现雏形，十五五期间规划超40e方合成气新建，打开长期成长空间。 当前行业长期供需逻辑不变，短期扰动反而逐现公司价值，并且油价中枢上",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "bottom_profit_bridge",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 待德州区气化炉/净化装置改造投产及2026中报/年报验证；底部利润口径需与公司公告净利润/EBITDA对齐。",
+        "verification_gate": "待德州区气化炉/净化装置改造投产及2026中报/年报验证；底部利润口径需与公司公告净利润/EBITDA对齐。",
+        "grounding_status": "grounded_quote",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE02",
+        "source_type": "channel_check",
+        "published_at": "2026-07-27T08:09",
+        "source_reliability": "C_private_unverified",
+        "bias_profile": "channel_selection_bias",
+        "adoption_ceiling": "scenario_or_verification_only",
+        "target_excerpt": "投资逻辑： 1、细分龙头白马：在下游需求持续修复、化工品价格底部确认的行业背景下，油价短期回升催化，估值低位，持续看好兼具规模和成本双重优势的龙头白马企业们。华鲁恒升、万华化学、卫星化学、宝丰能源、新和成、鲁西化工等。 2、磷&钾：磷矿供需紧平衡下1000元/吨均价高位有望延续，叠加磷矿全球战略属性持续强化，重视磷矿资源与一体化龙头，兴发集团(15x)、云图控股(9x)、云天化(10x)、川恒股份(13x)。东南亚、欧洲钾肥合同价格上涨，叠加下半年亚洲、美洲需求共振，业绩确定性与安全垫兼具，亚钾国际(13x)、盐湖股份(11x)、东方铁塔(12x)。 3、关注7月旺季的的农药板块。南美采购开启，草甘膦反倾销调查申请撤回提振市场需求，草铵膦周价格环比+1000元/吨，草甘膦签单价格上涨。强刚需品种关注兼顾成长性和估值安全边际的龙头企业：扬农化工、润丰股份、江山股份、利尔化学。 4、化纤产业链普涨，全产业链整体去库。检修集中+行业协同，PX/PTA/长丝/短纤/印染/纺织周度开工分别为62.6/57.3/74.1/75.7/49.3/47.8%，维持偏低水平。周PTA/涤纶长丝/短纤/纺织企业【厂内库存】环比-3.8%/-4.",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "asp_or_price",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 用公司出厂价/结算价和周度市场价交叉验证，并匹配煤炭成本变动。",
+        "verification_gate": "用公司出厂价/结算价和周度市场价交叉验证，并匹配煤炭成本变动。",
+        "grounding_status": "grounded_quote",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE02",
+        "source_type": "channel_check",
+        "published_at": "2026-07-27T08:09",
+        "source_reliability": "C_private_unverified",
+        "bias_profile": "channel_selection_bias",
+        "adoption_ceiling": "scenario_or_verification_only",
+        "target_excerpt": "投资逻辑： 1、细分龙头白马：在下游需求持续修复、化工品价格底部确认的行业背景下，油价短期回升催化，估值低位，持续看好兼具规模和成本双重优势的龙头白马企业们。华鲁恒升、万华化学、卫星化学、宝丰能源、新和成、鲁西化工等。 2、磷&钾：磷矿供需紧平衡下1000元/吨均价高位有望延续，叠加磷矿全球战略属性持续强化，重视磷矿资源与一体化龙头，兴发集团(15x)、云图控股(9x)、云天化(10x)、川恒股份(13x)。东南亚、欧洲钾肥合同价格上涨，叠加下半年亚洲、美洲需求共振，业绩确定性与安全垫兼具，亚钾国际(13x)、盐湖股份(11x)、东方铁塔(12x)。 3、关注7月旺季的的农药板块。南美采购开启，草甘膦反倾销调查申请撤回提振市场需求，草铵膦周价格环比+1000元/吨，草甘膦签单价格上涨。强刚需品种关注兼顾成长性和估值安全边际的龙头企业：扬农化工、润丰股份、江山股份、利尔化学。 4、化纤产业链普涨，全产业链整体去库。检修集中+行业协同，PX/PTA/长丝/短纤/印染/纺织周度开工分别为62.6/57.3/74.1/75.7/49.3/47.8%，维持偏低水平。周PTA/涤纶长丝/短纤/纺织企业【厂内库存】环比-3.8%/-4.",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "asp_or_price",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 确认己二酸/己内酰胺/TDI收入占比及公司实际价格敞口。",
+        "verification_gate": "确认己二酸/己内酰胺/TDI收入占比及公司实际价格敞口。",
+        "grounding_status": "grounded_quote",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE03",
+        "source_type": "industry_weekly_data",
+        "published_at": "2026-07-20T10:03",
+        "source_reliability": "B_identified_professional",
+        "bias_profile": "neutral_or_data",
+        "adoption_ceiling": "model_input_after_crosscheck",
+        "target_excerpt": "投资逻辑： 1、细分龙头白马：在下游需求持续修复、化工品价格底部确认的行业背景下，油价短期回升催化，估值低位，持续看好兼具规模和成本双重优势的龙头白马企业们。华鲁恒升、万华化学、卫星化学、宝丰能源、新和成、鲁西化工等。 2、关注兼具业绩确定性与估值安全边际的钾肥板块，当前企业PE 均在11X左右，处于历史相对低位。行业层面，东南亚氯化钾CFR稳步上行至396美元/吨，叠加厄尔尼诺极端天气支撑补钾需求。 东方铁塔、盐湖股份、亚钾国际。 3、关注7月旺季的的农药板块。当前南美采购已经开启，拜耳撤回草甘膦反倾销调查申请，海外需求正常推进。农药具备强刚需，关注兼顾成长性和估值安全边际的农药龙头企业：扬农化工、润丰股份、江山股份、利尔化学。 3、民爆行业，政策要求27年5月1日前完成非煤地下生产矿山、28年5月1日前完成非煤露天生产矿山自建队伍或者委托管理工作，倒逼落后矿服企业出清推动景气度回升，广东宏大、易普力。 4、化纤产业链开启普涨，全产业链整体去库。本周PTA行业库存/涤纶长丝厂内库存天数/短纤厂内库存天数/瓶片厂内库存天数/纺织企业厂内库存环比-13.0%/-7.3%/-7.6%/-8.5%/+1.9%。核心关注：桐昆股份",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "segment_prosperity",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 用2026中报分产品收入和毛利率验证底部反转；避免把板块代理数据直接等同于公司已实现价格。",
+        "verification_gate": "用2026中报分产品收入和毛利率验证底部反转；避免把板块代理数据直接等同于公司已实现价格。",
+        "grounding_status": "grounded_quote",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE04",
+        "source_type": "channel_check",
+        "published_at": "2026-07-18T16:46",
+        "source_reliability": "C_private_unverified",
+        "bias_profile": "channel_selection_bias",
+        "adoption_ceiling": "scenario_or_verification_only",
+        "target_excerpt": "【磷化工】：兴发集团、云图控股、川恒股份、云天化等； 【制冷剂】：巨化股份、三美股份、东岳集团、昊华科技等。 2️⃣双碳背景下具有全球优势的龙头： 【煤化工】：华鲁恒升、鲁西化工、宝丰能源等； 【石化】：恒力石化、荣盛石化、万华化学、卫星化学等。 3️⃣ AI材料： 【传统龙头布局AI材料】：巨化股份（PFA+PTFE）、兴发集团（磷化铟）、合盛硅业（光纤棒）、龙佰集团（氧化锆）等； 【四氯化硅】：三孚股份、宏柏新材、新安股份等； 【PSPI&电子化学品】：利安隆、瑞联新材、合盛硅业、滨化股份等。",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "utilization_or_backlog",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 观察中报订单/库存、开工率及三季报补库证据；若三季度量价未改善，则该情景概率下修。",
+        "verification_gate": "观察中报订单/库存、开工率及三季报补库证据；若三季度量价未改善，则该情景概率下修。",
+        "grounding_status": "grounded_quote",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE05",
+        "source_type": "channel_check",
+        "published_at": "2026-07-07T08:15",
+        "source_reliability": "C_private_unverified",
+        "bias_profile": "channel_selection_bias",
+        "adoption_ceiling": "scenario_or_verification_only",
+        "target_excerpt": "06%），新凤鸣（+95%~+112%），覆盖有机硅、氨纶、钾肥、涤纶长丝等传统化工领域，龙头企业呈现强者更强的态势。 龙头企业估值处于低位。目前龙头万华化学和华鲁恒升的PE约为12倍，PB仅有2.1倍和1.6倍，PB位于2020年以来10%和13%的分位数（按照7月6日收盘价测算）。而部分周期成长股（例如赛轮、瑞丰等PE回归12倍），配置价值凸显，化工整体进入配置区间。 中长期供给端强基本面支撑。中期看，国内双碳政策持续推进，海外因中东战争造成欧洲、日韩化工企业成本高企或加速海外产能退出。 投资建议： 1、细分龙头白马： 华鲁恒升、万华化学、卫星化学、宝丰能源、新和成、鲁西化工等。 2、需求刚性行业： 钾肥 盐湖股份、东方铁塔、亚钾国际；草铵膦 订单超预期，3月涨价恰逢中美旺季，7月南美采购旺季到来，扬农化工、润丰股份、利尔化学。蛋氨酸，价格持续高企，核心公司估值仅11倍，新和成、安迪苏。 3、库存低位， 需求修复的弹性品种。涤纶、氨纶、锦纶、染料等，企业+经销商的库存均处于底部，待需求反弹+下游开工回升提振价格，桐昆股份、新凤鸣、华峰化学、新乡化纤、浙江龙盛、闰土股份等。 4、股价调整到位的周期成长股。民爆龙头广东宏大和",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "valuation",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 与2026-07-31市值推算的PE TTM 15.91/PB 1.73核对；确认是否采用转增后股本及底部/正常化盈利。",
+        "verification_gate": "与2026-07-31市值推算的PE TTM 15.91/PB 1.73核对；确认是否采用转增后股本及底部/正常化盈利。",
+        "grounding_status": "grounded_quote",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE06",
+        "source_type": "sell_side_push",
+        "published_at": "2026-07-30T16:04",
+        "source_reliability": "B_identified_professional",
+        "bias_profile": "sell_side_optimism",
+        "adoption_ceiling": "model_input_after_crosscheck",
+        "target_excerpt": "大方向： 1️⃣超跌化工龙头 化工龙头前期受油价影响，二季度需求普遍承压，但估值及股价位置处于历史偏低位置，后续有修复空间。 重点关注【万华化学】【荣盛石化】【华鲁恒升】【龙佰集团】【华峰化学】等 2️⃣中报业绩线 二季度库存收益有望爆发，三季度仍有补库预期。重点关注长丝、轻烃、煤化工、蛋氨酸等。 关注【新凤鸣】【桐昆股份】【卫星化学】【宝丰能源】【新和成】等 3️⃣出口增量预期 前期海外补库少，当前油价平稳且海外库存相对低位，关注有海外补库预期的磷肥、农药、有机硅、润滑油添加剂等品种。 关注【云天化】【湖北宜化】【扬农化工】【润丰股份】【鲁西化工】【兴发集团】【瑞丰新材】等 近期更新联系华安化工王强峰团队或对口销售。",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "asp_or_price",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 跟踪公司主要产品9-10月报价及中报业绩预告/正式报告。",
+        "verification_gate": "跟踪公司主要产品9-10月报价及中报业绩预告/正式报告。",
+        "grounding_status": "grounded_quote",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE07",
+        "source_type": "sell_side_push",
+        "published_at": "2026-07-21T08:14",
+        "source_reliability": "B_identified_professional",
+        "bias_profile": "sell_side_optimism",
+        "adoption_ceiling": "model_input_after_crosscheck",
+        "target_excerpt": "衡表修复品种，氨纶、粘胶短纤，产能利用率处于高位，未来新增产能减少，重点关注华峰化学、新乡化纤、三友化学等。长久期回归宏观叙事，龙头白马盈利存修复预期，重点关注华鲁恒升、万华化学、博源化工等。 自中而下：长丝产业链的补库需求有望带动原本库存偏低的染料行业，同时染料价格相对坚挺，重点关注：浙江龙盛、闰土股份。“十五五”双碳规划落地，为持续优化尤其消费结构，积极推进绿色氢氨醇、生物柴油、可持续航空燃料等绿色燃料应用，建议关注：卓越新能、海新能科、复洁环保。轮胎有望底部回升。欧盟7月双反落地后海外供给趋紧，具备海外基地的企业有望提升议价能力；新能源重卡放量、公路运输改善，全钢胎景气持续修复。叠加天然橡胶旺产季带动成本改善、合成胶等价格上行受限，行业盈利弹性有望进一步释放，推荐赛轮轮胎。 自下而上，推荐道恩股份，上半年实现净利润2.28~2.65亿元，同比+171%~215%，利润增长具备持续性，此外DVA已启动量产，成功开发机器人超柔软人工肌肉TPE、温感/光感变色TPE材料及导电TPE等，部分材料已实现小规模供货。 风险提示：美伊冲突进一步升级的风险；终端需求不及预期的风险；原料价格大幅波动的风险；长久期宏观叙事证伪风险。",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "segment_volume",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 区分油价上行对煤化工是成本推动还是需求拉动；跟踪公司价差与煤价。",
+        "verification_gate": "区分油价上行对煤化工是成本推动还是需求拉动；跟踪公司价差与煤价。",
+        "grounding_status": "unverified_quote",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE08",
+        "source_type": "sell_side_push",
+        "published_at": "2026-07-14T08:07",
+        "source_reliability": "B_identified_professional",
+        "bias_profile": "sell_side_optimism",
+        "adoption_ceiling": "model_input_after_crosscheck",
+        "target_excerpt": "衡表修复品种，氨纶、粘胶短纤，产能利用率处于高位，未来新增产能减少，重点关注华峰化学、新乡化纤、三友化学等。长久期回归宏观叙事，龙头白马盈利存修复预期，重点关注华鲁恒升、万华化学、博源化工等。 自中而下：商业航天，长征十号乙火箭回收成功，国内低轨卫星放量预期，关注密封材料道恩股份，太空光伏赛伍技术。人形机器人，特斯拉V3即将落地量产，产能稳步爬坡，叠加宇树七月冲刺上市，人形机器人行业有望放量，建议关注道恩股份，人工皮肤 SiTPV、温感变色和光感变色 TPE 等方向取得重大进展；金发科技：具备LCP、PEEK 和 PPA 等机器人轻量化关键材料。长丝产业链的补库需求有望带动原本库存偏低的染料行业，同时染料价格相对坚挺，＃重点关注：浙江龙盛、闰土股份。 风险提示：美伊冲突进一步升级的风险；终端需求不及预期的风险；原料价格大幅波动的风险；长久期宏观叙事证伪风险。 观点欢迎详询东财化工团队，张志扬/梅宇鑫/马小萱/高骏",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "segment_volume",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 验证海峡冲突对全球化工供给和公司出口/能源成本的传导；若油价上行未传导至公司主要产品价差，则仅成本端压制。",
+        "verification_gate": "验证海峡冲突对全球化工供给和公司出口/能源成本的传导；若油价上行未传导至公司主要产品价差，则仅成本端压制。",
+        "grounding_status": "unverified_quote",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE09",
+        "source_type": "industry_weekly_data",
+        "published_at": "2026-07-17T08:17",
+        "source_reliability": "B_identified_professional",
+        "bias_profile": "neutral_or_data",
+        "adoption_ceiling": "model_input_after_crosscheck",
+        "target_excerpt": "涨价/价格弹性：华鲁恒升、鲁西化工点评：价值凸... 华鲁恒升、鲁西化工点评：价值凸显，成长趋势不变 [玫瑰]油价中枢提升、国内煤化工能源优势不变。海外地缘政治...",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "asp_or_price",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 把油价中枢上行转化为公司主要产品价差和销量，否则仅作为情景方向。",
+        "verification_gate": "把油价中枢上行转化为公司主要产品价差和销量，否则仅作为情景方向。",
+        "grounding_status": "unverified_quote",
+        "chapter_id": "chapter_6_expectations"
+      }
+    ]
+  },
+  "evidence_index": [
+    {
+      "evidence_id": "EV001",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "Financial-report look-back: 900 days",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV002",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "Compacted 华鲁恒升2025年年度报告: 313971 chars -> 130479 chars.",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV003",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "2025, 半年",
+      "status": "reported",
+      "text": "Compacted 华鲁恒升2025年半年度报告: 231042 chars -> 117636 chars.",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV004",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "20251030, 2025, 季度",
+      "status": "reported",
+      "text": "20251030: 华鲁恒升2025年三季度报告",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV005",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "20241031, 2024, 季度",
+      "status": "reported",
+      "text": "20241031: 华鲁恒升2024年三季度报告",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV006",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "20240425, 2024, 季度",
+      "status": "reported",
+      "text": "20240425: 华鲁恒升2024年一季度报告",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV007",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "20260428, 2026, 季度",
+      "status": "reported",
+      "text": "20260428: 华鲁恒升2026年一季度报告",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV008",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "20260331, 2025, 年度",
+      "status": "reported",
+      "text": "20260331: 华鲁恒升2025年年度报告",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV009",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "20250823, 2025, 半年",
+      "status": "reported",
+      "text": "20250823: 华鲁恒升2025年半年度报告",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV010",
+      "source_module": "earnings_model",
+      "variable": "unmapped",
+      "period": "Q1, 20260331",
+      "status": "reported",
+      "text": "/ latest reported / Q1 / 20260331 / 8343592884.31 / 1116593729.35 / 33374371537.24 / 4466374917.4 / 34474273534.1437 / 4542903815.3326 / historical median 0331 share 24.6% /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV011",
+      "source_module": "earnings_model",
+      "variable": "unmapped",
+      "period": "FY, 20251231",
+      "status": "reported",
+      "text": "/ latest annual / FY / 20251231 / 30968875947.12 / 3315494470.04 / 30968875947.12 / 3315494470.04 / 30968875947.12 / 3315494470.04 / FY actual /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV012",
+      "source_module": "earnings_model",
+      "variable": "revenue",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ Revenue base / 8343592884.31 / N/A / YoY: 20260331 vs 20250331 / top-line starting point for volume × price × mix /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV013",
+      "source_module": "earnings_model",
+      "variable": "segment_margin",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ Gross margin / 22.2802% / +5.93pp / YoY: 20260331 vs 20250331 / main bridge from demand to gross profit /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV014",
+      "source_module": "earnings_model",
+      "variable": "unmapped",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ Operating margin / 16.7878% / +4.65pp / YoY: 20260331 vs 20250331 / tests pricing, mix, and cost absorption /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV015",
+      "source_module": "earnings_model",
+      "variable": "segment_margin",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ Net margin / 13.3826% / +4.29pp / YoY: 20260331 vs 20250331 / captures final earnings conversion /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV016",
+      "source_module": "earnings_model",
+      "variable": "operating_expense",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ Finance-expense ratio / 0.9018% / +0.21pp / YoY: 20260331 vs 20250331 / captures leverage drag or relief /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV017",
+      "source_module": "earnings_model",
+      "variable": "profit_or_eps",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ OCF / net profit / 0.7977 / N/A / YoY: 20260331 vs 20250331 / tests earnings quality and cash realization /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV018",
+      "source_module": "earnings_model",
+      "variable": "revenue",
+      "period": "20260331, 20250331",
+      "status": "calculated",
+      "text": "/ Receivables / revenue / 0.3245% / -0.20pp / YoY: 20260331 vs 20250331 / tests working-capital drag; interim periods use annualized revenue /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV019",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "Look-back window: 30 days",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV020",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "/ 分红/权益 / 1 /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV021",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "20260721, 2026, 年度",
+      "status": "reported",
+      "text": "/ 20260721 / 分红/权益 / 600426.SH / 华鲁恒升 / 华鲁恒升收到控股股东提议公司实施2026年度中期分红的公告 / http://www.cninfo.com.cn/new/disclosure/detail?stockCode=600426&announcementId=1225433346&orgId=gssh0600426&announcementTime=2026-07-21 /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV022",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "20260703, 2025, 年度",
+      "status": "reported",
+      "text": "/ 20260703 / sina / N/A / N/A / 【华鲁恒升：2025年度权益分派实施 每股派0.25元转增0.3股】华鲁恒升公告称，2025年度权益分派方案经2026年5月21日的年度股东会审议通过。以总股本21.15亿股为基数，每股派发现金红利0.25元（含税），共计派发现金红利0.53亿元；每股转增0.3股，共计转增6.35亿股，分配后总股本为27.50亿股。股权登记日为2026年7月9日，除权（息）日、新增无限售条件流通股份上市日和现金红利发放日均为7月10日。 /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV023",
+      "source_module": "company_events",
+      "variable": "valuation",
+      "period": "unspecified",
+      "status": "missing",
+      "text": "If a section is unavailable because of data permission, state that limitation explicitly.",
+      "chapter_id": "chapter_7_valuation_rating"
+    },
+    {
+      "evidence_id": "EV024",
+      "source_module": "company_business_model",
+      "variable": "segment_volume",
+      "period": "2025, 半年",
+      "status": "reported",
+      "text": "/ product_manufacturer / 产品制造 / 产能出货型 / quantified disclosure / 华鲁恒升2025年半年度报告: 一、报告期内公司所属行业及主营业务情况说明 （一）行业发展情况 2025 年上半年，化工行业整体面临较大经营压力，结构性产能过剩问题依然严峻，叠加原油、 煤炭等原材料价格波动传导，化工品价格呈现下跌态势。面对复杂严峻的行业局面，化工企业需 在技术创新、产业结构调整、区域布局优化等多维度发力，同时积极开拓海外市场以探寻破局之 策。 （二）主要业务情况 公...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV025",
+      "source_module": "company_business_model",
+      "variable": "utilization_or_backlog",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ project_delivery / 项目订单 / 交付回款型 / quantified disclosure / 华鲁恒升2025年年度报告: 四、报告期内核心竞争力分析 √适用 □不适用 1、成本优势 公司具有较强的成本控制优势。公司始终坚持成本领先战略，从组织构架、资源配置、生产 运营、营销管理全链条挖潜降本，项目建设做到技术领先、投资可控、投产高效；生产发挥柔性 联产优势，深挖装置与系统潜力，优化公用工程，持续节能降耗，提高资源综合利用率；经营构 建多产业链协同运营模式，点对点减少中间环节，降低运...",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV026",
+      "source_module": "company_business_model",
+      "variable": "segment_margin",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ core_revenue_engine / annual / 华鲁恒升2025年年度报告: (1). 主营业务分行业、分产品、分地区、分销售模式情况 / Defines what actually drives the income statement. /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV027",
+      "source_module": "company_business_model",
+      "variable": "revenue",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ segment_mix / annual / 华鲁恒升2025年年度报告: 分产品 营业收入 营业成本 比上年增 比上年增 / Shows whether different profit pools are being mixed together. /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV028",
+      "source_module": "company_business_model",
+      "variable": "unmapped",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ customer_and_channel / annual / 华鲁恒升2025年年度报告: 求与行业龙头企业合作，稳定合作客户占比 80%以上，抗市场风险能力显著增强，行业影响力明 / Reveals demand source, concentration, and market validation. /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV029",
+      "source_module": "company_business_model",
+      "variable": "utilization_or_backlog",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ geography / annual / 华鲁恒升2025年年度报告: 势分析，在美国加征关税对全球贸易冲击下，锦纶终端产品出口受阻，加上产能的快速增长，2025 / Explains whether growth depends on a specific geography or expansion lane. /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV030",
+      "source_module": "company_business_model",
+      "variable": "operating_expense",
+      "period": "2025, 年度, 上年同期",
+      "status": "reported",
+      "text": "/ reinvestment_engine / annual / 华鲁恒升2025年年度报告: 研发费用变动原因说明：本期较上年同期增加 34.08%，主要原因系本期费用化研发投入增加所致。 / Shows how today's cash is being converted into tomorrow's earnings power. /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV031",
+      "source_module": "company_business_model",
+      "variable": "asp_or_price",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ product / annual / 华鲁恒升2025年年度报告: 之“化工行业经营性信息分析”之“1、行业基本情况（2）主要细分行业的基本情况及公司行业 地位”的相关内容。 报告期内公司新增重要非主营业务的说明 □适用 √不适用 二、报告期内公司所处行业情况 2025 年，全球经济增长放缓，行业内卷和结构性产能过剩与需求偏弱的矛盾依然存在，化工 市场景气度较低，化工产品价格低谷震荡，企业盈利空间被压缩，运营压力较大。面对压力，公 司统筹存量优化和增量升级，内挖潜力，外拓市场，推动项目投产，全面强化对标管...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV032",
+      "source_module": "company_business_model",
+      "variable": "asp_or_price",
+      "period": "2025, 半年",
+      "status": "reported",
+      "text": "/ product / semiannual / 华鲁恒升2025年半年度报告: 一、报告期内公司所属行业及主营业务情况说明 （一）行业发展情况 2025 年上半年，化工行业整体面临较大经营压力，结构性产能过剩问题依然严峻，叠加原油、 煤炭等原材料价格波动传导，化工品价格呈现下跌态势。面对复杂严峻的行业局面，化工企业需 在技术创新、产业结构调整、区域布局优化等多维度发力，同时积极开拓海外市场以探寻破局之 策。 （二）主要业务情况 公司为多业联产的综合型化工企业，主要业务包括：基础化学原料制造；化工产品生产和销...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV033",
+      "source_module": "industry_cycle",
+      "variable": "balance_sheet",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "Do not state R32, R125, lithium, copper, gold, inventory, or spread changes as facts unless they appear in the evidence table.",
+      "chapter_id": "chapter_2_industry_chain"
+    },
+    {
+      "evidence_id": "EV034",
+      "source_module": "industry_cycle",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "missing",
+      "text": "If cycle evidence says bottom-testing or evidence-limited, use language such as `bottom-right validation stage`, `右侧待验证`, or `needs confirmation`.",
+      "chapter_id": "chapter_2_industry_chain"
+    },
+    {
+      "evidence_id": "EV035",
+      "source_module": "industry_kpi",
+      "variable": "segment_margin",
+      "period": "unspecified",
+      "status": "missing",
+      "text": "/ coverage_grade / report_types_seen / missing_report_types / answered_questions / core_pack_status / confidence_read /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV036",
+      "source_module": "industry_kpi",
+      "variable": "profit_or_eps",
+      "period": "2026, 季度",
+      "status": "reported",
+      "text": "/ accounting_reconciliation / Check signs, units, periods, and cross-statement consistency before a number enters the PM memo. / operating_cash_flow: 华鲁恒升2026年一季度报告: 1,112,802,620.71 703,113,957.51 58.27 经常性损益的净利润 经营活动产生的现金流量净额 890,668,396.41 930,375,592.80...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV037",
+      "source_module": "industry_kpi",
+      "variable": "unmapped",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ segment_economics_depth / Decide whether each business line has enough disclosed scale, growth, margin, cash quality, and valuation treatment. / 华鲁恒升2025年年度报告: 之“化工行业经营性信息分析”之“1、行业基本情况（2）主要细分行业的基本情况及公司行业 地位”的相关内容。 报告期内公司新增重要非主营业务的说明 □适用 √不适用 二、报告期内公司所处行业情...",
+      "chapter_id": "chapter_2_industry_chain"
+    },
+    {
+      "evidence_id": "EV038",
+      "source_module": "industry_kpi",
+      "variable": "unmapped",
+      "period": "2026, 季度",
+      "status": "reported",
+      "text": "/ footnote_radar / Surface decision-relevant notes that can hide risk or change confidence. / impairment_policy: 华鲁恒升2026年一季度报告: 单位:元 币种:人民币 非经常性损益项目 本期金额 说明 非流动性资产处置损益，包括已计提资产减值准备的冲销部分 104,953.09 / impairment_policy: 华鲁恒升2026年一季度报告: 非经常性损益项目 本期金额 说明 非流动性资产...",
+      "chapter_id": "chapter_2_industry_chain"
+    },
+    {
+      "evidence_id": "EV039",
+      "source_module": "industry_kpi",
+      "variable": "profit_or_eps",
+      "period": "2026, 季度",
+      "status": "reported",
+      "text": "/ cash_flow_quality_decomposition / Separate accounting profit from cash conversion, working-capital drag, and demand visibility. / operating_cash_flow: 华鲁恒升2026年一季度报告: 1,112,802,620.71 703,113,957.51 58.27 经常性损益的净利润 经营活动产生的现金流量净额 890,668,396.41 930,375,592...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV040",
+      "source_module": "industry_kpi",
+      "variable": "capex_or_roic",
+      "period": "2026, 季度",
+      "status": "reported",
+      "text": "/ capex_cip_return_bridge / Test whether capex, construction-in-progress, or investment assets are building returns or just absorbing capital. / long_term_equity_investments: 华鲁恒升2026年一季度报告: 其他非流动金融资产 投资性房地产 固定资产 32,889,707,075.45 32,993,654,001.92 / constr...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV041",
+      "source_module": "industry_kpi",
+      "variable": "asp_or_price",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ mdna_text_change / Read management wording changes, proof-backed claims, risk-language upgrades, and abnormal silence across reports. / risk_language_upgrade: 华鲁恒升2025年年度报告: 二、报告期内公司所处行业情况 2025 年，全球经济增长放缓，行业内卷和结构性产能过剩与需求偏弱的矛盾依然存在，化工 市场景气度较低，化工产品价格低谷震荡，企业盈...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV042",
+      "source_module": "industry_kpi",
+      "variable": "segment_margin",
+      "period": "2026, 季度",
+      "status": "reported",
+      "text": "/ non_recurring_profit_quality / Distinguish core operating profit from investment income, fair-value moves, subsidies, asset disposals, impairment, and other one-off items. / impairment: 华鲁恒升2026年一季度报告: 净敞口套期收益（损失以“-”号填列） 公允价值变动收益（损失以“-”号填列） 9,246.58 信用减值损...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV043",
+      "source_module": "industry_kpi",
+      "variable": "balance_sheet",
+      "period": "2026, 季度",
+      "status": "reported",
+      "text": "/ balance_sheet_forward_signals / Read balance-sheet leads before income-statement confirmation. / receivables: 华鲁恒升2026年一季度报告: 交易性金融资产 50,009,246.58 衍生金融资产 应收票据 36,455,065.71 18,372,770.00 / receivables: 华鲁恒升2026年一季度报告: 衍生金融资产 应收票据 36,455,065.71 18,372,770...",
+      "chapter_id": "chapter_2_industry_chain"
+    },
+    {
+      "evidence_id": "EV044",
+      "source_module": "market_expectation",
+      "variable": "unmapped",
+      "period": "2026-07-31",
+      "status": "reported",
+      "text": "Valuation trade date: 2026-07-31",
+      "chapter_id": "chapter_6_expectations"
+    },
+    {
+      "evidence_id": "EV045",
+      "source_module": "market_expectation",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "/ Market cap (CNY) / 59261271650 / current equity value /",
+      "chapter_id": "chapter_6_expectations"
+    },
+    {
+      "evidence_id": "EV046",
+      "source_module": "market_expectation",
+      "variable": "valuation",
+      "period": "TTM",
+      "status": "reported",
+      "text": "/ PE TTM / 15.9081 / earnings multiple the market is paying now /",
+      "chapter_id": "chapter_7_valuation_rating"
+    },
+    {
+      "evidence_id": "EV047",
+      "source_module": "market_expectation",
+      "variable": "revenue",
+      "period": "TTM",
+      "status": "reported",
+      "text": "/ PS TTM / 1.8789 / sales multiple the market is paying now /",
+      "chapter_id": "chapter_6_expectations"
+    },
+    {
+      "evidence_id": "EV048",
+      "source_module": "market_expectation",
+      "variable": "valuation",
+      "period": "TTM",
+      "status": "calculated",
+      "text": "/ Implied TTM earnings (CNY) / 3725226246.3776 / market cap divided by PE TTM /",
+      "chapter_id": "chapter_7_valuation_rating"
+    },
+    {
+      "evidence_id": "EV049",
+      "source_module": "market_expectation",
+      "variable": "revenue",
+      "period": "TTM",
+      "status": "calculated",
+      "text": "/ Implied TTM sales (CNY) / 31540407499.0686 / market cap divided by PS TTM /",
+      "chapter_id": "chapter_6_expectations"
+    },
+    {
+      "evidence_id": "EV050",
+      "source_module": "market_expectation",
+      "variable": "valuation",
+      "period": "unspecified",
+      "status": "calculated",
+      "text": "/ PE percentile / 73.4 / 5-year valuation position /",
+      "chapter_id": "chapter_7_valuation_rating"
+    }
+  ],
+  "chapter_packets": [
+    {
+      "chapter_id": "chapter_1_company",
+      "title": "一、公司是谁、如何赚钱",
+      "reader_goal": "让普通投资者理解产品、客户、定价、收入确认、成本与现金回收。",
+      "selected_evidence_ids": [
+        "EV001",
+        "EV002",
+        "EV003",
+        "EV004",
+        "EV005",
+        "EV006",
+        "EV007",
+        "EV008",
+        "EV009",
+        "EV010",
+        "EV011",
+        "EV014"
+      ],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_2_industry_chain",
+      "title": "二、产业链位置与行业格局",
+      "reader_goal": "解释上下游、供需与价格形成，并把产业链变化传导到公司经营。",
+      "selected_evidence_ids": [
+        "EV033",
+        "EV034",
+        "EV037",
+        "EV038",
+        "EV043",
+        "EV071",
+        "EV073",
+        "EV074",
+        "EV075",
+        "EV076",
+        "EV077"
+      ],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_3_profit_pools",
+      "title": "三、业务拆解与核心利润池",
+      "reader_goal": "按核心、成长、波动和期权业务拆解收入、利润、现金与资本占用。",
+      "selected_evidence_ids": [],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_4_competition",
+      "title": "四、竞争优势、护城河与主要短板",
+      "reader_goal": "用历史或真同行验证规模、品牌、渠道、技术和成本优势。",
+      "selected_evidence_ids": [
+        "EV053",
+        "EV054",
+        "EV056",
+        "EV057",
+        "EV058",
+        "EV059",
+        "EV060",
+        "EV061"
+      ],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_5_growth_forecast",
+      "title": "五、增长逻辑、关键分歧与盈利预测",
+      "reader_goal": "围绕三至五个关键问题，把经营变量传导到三年盈利和现金流。",
+      "selected_evidence_ids": [
+        "EV012",
+        "EV013",
+        "EV015",
+        "EV017",
+        "EV018",
+        "EV024",
+        "EV026",
+        "EV027",
+        "EV031",
+        "EV032",
+        "EV035",
+        "EV036"
+      ],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_6_expectations",
+      "title": "六、市场预期差、风险与验证",
+      "reader_goal": "区分真实一致预期、单家卖方和反向隐含假设，并给出证伪日历。",
+      "selected_evidence_ids": [
+        "EV044",
+        "EV045",
+        "EV047",
+        "EV049"
+      ],
+      "knowledge_planet_ids": [
+        "KPE01",
+        "KPE02",
+        "KPE02",
+        "KPE03",
+        "KPE04",
+        "KPE05"
+      ],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_7_valuation_rating",
+      "title": "七、估值、评级与投资结论",
+      "reader_goal": "在完成公司、产业、模型和预期分析后，最后给出估值、评级与动作。",
+      "selected_evidence_ids": [
+        "EV023",
+        "EV046",
+        "EV048",
+        "EV050",
+        "EV051",
+        "EV052",
+        "EV062",
+        "EV063",
+        "EV064",
+        "EV065",
+        "EV066",
+        "EV067"
+      ],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    }
+  ],
+  "preprocessing_notes": [
+    "原始上下文不直接成为公共报告结构。",
+    "知识星球线索已按目标实体、变量、允许用途和验证门槛重新路由。",
+    "所有章节必须围绕读者问题展开，数据只作为决定性证据进入正文。"
+  ]
+}

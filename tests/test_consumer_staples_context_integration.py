@@ -47,4 +47,5 @@ def test_fundamentals_analyst_uses_consumer_staples_context_and_tool():
     assert "raw_consumer_staples_context" in source
     assert "consumer_staples_context = prompt_contexts" in source
     assert "get_consumer_staples_context" in source
-    assert "Precomputed gated consumer-staples verification context" in source
+    assert "gated_prompt_sections" in source
+    assert '("Consumer staples", consumer_staples_context, get_consumer_staples_instruction)' in source

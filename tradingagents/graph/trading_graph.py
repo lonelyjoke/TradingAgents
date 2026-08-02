@@ -339,23 +339,25 @@ class TradingAgentsGraph:
         os.makedirs(self.config["results_dir"], exist_ok=True)
 
         # Initialize LLMs with provider-specific thinking configuration
-        llm_kwargs = self._get_provider_kwargs()
+        deep_llm_kwargs = self._get_provider_kwargs("deep")
+        quick_llm_kwargs = self._get_provider_kwargs("quick")
 
         # Add callbacks to kwargs if provided (passed to LLM constructor)
         if self.callbacks:
-            llm_kwargs["callbacks"] = self.callbacks
+            deep_llm_kwargs["callbacks"] = self.callbacks
+            quick_llm_kwargs["callbacks"] = self.callbacks
 
         deep_client = create_llm_client(
             provider=self.config["llm_provider"],
             model=self.config["deep_think_llm"],
             base_url=self.config.get("backend_url"),
-            **llm_kwargs,
+            **deep_llm_kwargs,
         )
         quick_client = create_llm_client(
             provider=self.config["llm_provider"],
             model=self.config["quick_think_llm"],
             base_url=self.config.get("backend_url"),
-            **llm_kwargs,
+            **quick_llm_kwargs,
         )
 
         self.deep_thinking_llm = deep_client.get_llm()
@@ -392,7 +394,7 @@ class TradingAgentsGraph:
         self.graph = self.workflow.compile()
         self._checkpointer_ctx = None
 
-    def _get_provider_kwargs(self) -> Dict[str, Any]:
+    def _get_provider_kwargs(self, mode: str | None = None) -> Dict[str, Any]:
         """Get provider-specific kwargs for LLM client creation."""
         kwargs = {}
         provider = self.config.get("llm_provider", "").lower()
@@ -431,6 +433,27 @@ class TradingAgentsGraph:
             effort = self.config.get("anthropic_effort")
             if effort:
                 kwargs["effort"] = effort
+
+        elif provider == "deepseek":
+            role = "deep" if mode == "deep" else "quick"
+            thinking = str(
+                self.config.get(f"deepseek_{role}_thinking", "enabled")
+                or "enabled"
+            ).lower()
+            if thinking not in {"enabled", "disabled"}:
+                thinking = "enabled"
+            kwargs["extra_body"] = {"thinking": {"type": thinking}}
+            if thinking == "enabled":
+                effort = str(
+                    self.config.get(
+                        f"deepseek_{role}_reasoning_effort",
+                        "max" if role == "deep" else "high",
+                    )
+                    or ("max" if role == "deep" else "high")
+                ).lower()
+                if effort not in {"low", "high", "max"}:
+                    effort = "max" if role == "deep" else "high"
+                kwargs["reasoning_effort"] = effort
 
         return kwargs
 
@@ -596,6 +619,7 @@ class TradingAgentsGraph:
         self._resolve_pending_entries(company_name)
 
         # Recompile with a checkpointer if the user opted in.
+        resume_step = None
         if self.config.get("checkpoint_enabled"):
             self._checkpointer_ctx = get_checkpointer(
                 self.config["data_cache_dir"], company_name
@@ -603,18 +627,22 @@ class TradingAgentsGraph:
             saver = self._checkpointer_ctx.__enter__()
             self.graph = self.workflow.compile(checkpointer=saver)
 
-            step = checkpoint_step(
+            resume_step = checkpoint_step(
                 self.config["data_cache_dir"], company_name, str(trade_date)
             )
-            if step is not None:
+            if resume_step is not None:
                 logger.info(
-                    "Resuming from step %d for %s on %s", step, company_name, trade_date
+                    "Resuming from step %d for %s on %s", resume_step, company_name, trade_date
                 )
             else:
                 logger.info("Starting fresh for %s on %s", company_name, trade_date)
 
         try:
-            return self._run_graph(company_name, trade_date)
+            return self._run_graph(
+                company_name,
+                trade_date,
+                resume=resume_step is not None,
+            )
         finally:
             if self._checkpointer_ctx is not None:
                 self._checkpointer_ctx.__exit__(None, None, None)
@@ -1095,8 +1123,20 @@ class TradingAgentsGraph:
             structured_research_context=structured_research_context,
         )
 
-    def _run_graph(self, company_name, trade_date):
+    def _run_graph(self, company_name, trade_date, *, resume: bool = False):
         """Execute the graph and write the resulting state to disk and memory log."""
+        if resume:
+            # The checkpoint already contains the preflight-validated initial
+            # state and all precomputed contexts. Rebuilding them here can
+            # repeat minutes of I/O and paid structured-research calls before
+            # LangGraph discards the new input in favour of the saved state.
+            args = self.propagator.get_graph_args()
+            tid = thread_id(company_name, str(trade_date))
+            args.setdefault("config", {}).setdefault("configurable", {})[
+                "thread_id"
+            ] = tid
+            return self._execute_graph(company_name, trade_date, None, args)
+
         # Initialize state — inject continuity context plus resolved lessons.
         self._run_a_share_data_preflight(company_name, trade_date)
         past_context = self.memory_log.get_past_context(company_name)
@@ -1360,17 +1400,23 @@ class TradingAgentsGraph:
             tid = thread_id(company_name, str(trade_date))
             args.setdefault("config", {}).setdefault("configurable", {})["thread_id"] = tid
 
+        return self._execute_graph(company_name, trade_date, init_agent_state, args)
+
+    def _execute_graph(self, company_name, trade_date, graph_input, args):
+        """Execute an initial or resumed graph input and persist a successful run."""
         if self.debug:
             trace = []
-            for chunk in self.graph.stream(init_agent_state, **args):
+            for chunk in self.graph.stream(graph_input, **args):
+                trace.append(chunk)
                 if len(chunk["messages"]) == 0:
                     pass
                 else:
                     chunk["messages"][-1].pretty_print()
-                    trace.append(chunk)
+            if not trace:
+                raise RuntimeError("Analysis graph completed without yielding a state")
             final_state = trace[-1]
         else:
-            final_state = self.graph.invoke(init_agent_state, **args)
+            final_state = self.graph.invoke(graph_input, **args)
 
         # Store current state for reflection.
         self.curr_state = final_state

@@ -1,0 +1,737 @@
+{
+  "recommendation": "Hold",
+  "research_readiness": "partial",
+  "core_bet": "核心下注变量是公司煤化工产品价差（产品售价-煤炭成本）的修复幅度和持续性，以及市场是否会对盈利恢复给予估值溢价。若Q1毛利率22.28%的改善能延续至2026H2，且市场认可供给约束下的盈利中枢上移，则当前低EPS分位、低PB分位的估值存在修复空间；若价差仅为补库脉冲、H2显著回落，且市场维持周期底部13x以下估值，则当前价格已被高估。",
+  "research_questions": [
+    "2026H2煤化工产品价差能否维持Q1的改善趋势，还是将显著回落？",
+    "当前估值（PE TTM 15.9x，PB 1.73x）是否已经合理定价了2026年的盈利修复？若盈利达到42-45亿元，市场会给予多少倍？",
+    "公司成本优势和行业供给限制是否能转化为持续的ROIC提升，从而支撑估值重估？",
+    "荆州新材料项目的投产时间和盈利能力如何？会对短期现金流和长期利润产生什么影响？",
+    "化肥分部的高毛利率稳定性是否掩盖了核心煤化工业务的真实价差改善程度？"
+  ],
+  "question_verdicts": [
+    {
+      "question": "2026H2煤化工产品价差能否维持Q1的改善趋势，还是将显著回落？",
+      "why_decisive": "煤化工基础产品贡献约70%以上收入和利润，价差变动直接决定2026年净利润能否从2025年的33亿元大幅提升。若价差仅Q1脉冲、H2明显回落，则全年利润可能仅35-38亿元，与市场隐含的37亿元接近，上涨空间关闭。",
+      "conclusion": "Q1毛利率22.28%（同比+5.93pp）提供了改善的硬证据，但缺少分产品数据，无法精确判断核心煤化工产品价差的真实修复幅度。化肥分部（毛利率32.3%）可能抬升了合并毛利率，掩盖了煤化工基础产品的平淡表现。周度数据显示部分产品（甲醇、己内酰胺）上涨，但尿素、醋酸仍弱。综合看，价差修复已发生但持续性和结构不确定性较高。",
+      "evidence_used": [
+        "EV013：2026Q1毛利率22.28%，同比+5.93pp",
+        "EV027：化肥FY2025收入73亿，毛利率32.3%",
+        "KPE02：7月周度甲醇+5.3%、己内酰胺+4.6%、尿素-0.1%、醋酸-1.5%（私有渠道方向性证据）",
+        "KSI02：统计局1-5月化工行业利润同比+71.6%"
+      ],
+      "strongest_counterevidence": "醋酸/尿素价格依然环比下跌，这两个产品在公司煤化工板块中收入占比较大；且缺乏公司实际出厂价与市场价的映射，商品价格数据不能直接推算公司利润；化肥分部高毛利率可能使合并毛利率产生误导。",
+      "model_or_valuation_effect": "将2026E毛利率从多头的18.5%上调至19.0%，但远低于Q1的22.28%，以反映H2回落风险。对应2026E归母净利润下调至约40亿元（原42.5亿）。",
+      "confidence": "low",
+      "next_verification": "2026年8月中报披露分产品收入和毛利率，若煤化工分部毛利率≥20%且收入增长，则上调base情景；若<18%，则下修至35-38亿。"
+    },
+    {
+      "question": "当前估值（PE TTM 15.9x，PB 1.73x）是否已经合理定价了2026年的盈利修复？若盈利达到42-45亿元，市场会给予多少倍？",
+      "why_decisive": "估值是投资决策的最终落脚点。若市场已定价乐观情景，则上行空间有限；若定价保守，则存在预期差。",
+      "conclusion": "市场隐含TTM盈利37.25亿，高于2025年实际33.15亿，已体现一定复苏预期。PE TTM 15.9x处于5年73.4%分位，看似偏贵，但主要是因为盈利处于周期底部。若2026E净利润达到40亿，forward PE约15x，处于历史中等水平，非明显便宜。与同业比较，卖方口径中龙头PE约为12倍（KPE01/KSI05），若给予周期修复阶段13x，则公允价值仅约24.6元（base）或更低，上行空间有限。因此，当前估值已定价温和复苏，缺乏明显安全边际。",
+      "evidence_used": [
+        "Market-expectation context：PE TTM 15.9x，PB 1.73x，隐含TTM盈利37.25亿",
+        "KPE05/KSI02：2026-07-06卖方口径华鲁恒升PE约12x，PB 1.6x（与当前有日期差异）",
+        "Historical price-EPS-PE decomposition：过去6个月双杀（EPS-10.9%，PE-29.9%），PE仍处高位"
+      ],
+      "strongest_counterevidence": "若2026H2盈利改善确认，市场可能愿意给予15x以上估值，因为行业供给逻辑改善，公司成本优势可支撑更高的周期中段倍数。且PB分位25.8%提供了一定资产支撑。",
+      "model_or_valuation_effect": "估值倍数采用13x（保守）至15x（乐观），对应公允价值区间19.5-24.6元（base 40亿利润）。概率加权公允价值约22.5元，与现价21.55元接近，故不构成明显的向上或向下偏差。",
+      "confidence": "medium",
+      "next_verification": "跟踪同业（宝丰能源、鲁西化工）的PE估值，及市场对公司中报的反应；若中报后forward PE降至12x以下，可认为估值进入低估区间。"
+    },
+    {
+      "question": "公司成本优势和行业供给限制是否能转化为持续的ROIC提升，从而支撑估值重估？",
+      "why_decisive": "成本优势是公司长期护城河，若ROIC能持续高于资本成本，则理应享受估值溢价，而非仅作为周期股交易。",
+      "conclusion": "公司历史成本优势显著（Q1毛利率同比大增、应收极低、客户粘性高），但缺少与宝丰能源、鲁西化工等同行的直接毛利率比较数据，无法量化其领先幅度。行业供给端确实受限（双碳审批收紧、资本开支停止），有利于保持开工率和定价能力，但转化为公司特有的ROIC提升，还需看新增产能（荆州）的回报率。目前定性正面，缺乏定量证据，暂不能支撑估值倍数显著上调。",
+      "evidence_used": [
+        "EV025：年报强调成本领先、柔性联产、客户稳定",
+        "EV013：Q1毛利率大幅改善",
+        "KPE01：卖方称行业资本开支结束、新增产能受限",
+        "EV053-EV061：竞争优势相关描述"
+      ],
+      "strongest_counterevidence": "无公开同行成本对比数据，且历史上大型化工企业也有规模不经济的案例；若竞争对手同样降本或技术突破，成本差距可能收窄。",
+      "model_or_valuation_effect": "暂不因成本优势而单独上调估值倍数；在bull情景中给予15x PE（高于base的13x）已部分隐含质量溢价。若未来能提供ROIC>15%的证据，可上调至15-18x。",
+      "confidence": "low",
+      "next_verification": "收集宝丰能源、鲁西化工2025/2026H1毛利率及ROIC数据，进行量化对比。"
+    },
+    {
+      "question": "荆州新材料项目的投产时间和盈利能力如何？会对短期现金流和长期利润产生什么影响？",
+      "why_decisive": "荆州项目是未来2-3年核心利润增量来源，但资本开支巨大，若投产延期或盈利低于预期，将拖累ROE和FCF，且恶化短期现金流。",
+      "conclusion": "公司已向荆州恒升增资20亿元，项目在推进中。但具体投产时间、产品市场（TDI、草酸）的价格前景不明朗。TDI周度价格环比-0.5%，显示当前市场弱势。因此，我们将该项目视为期权，不在base情景中计入盈利贡献，但承担相应的资本开支（导致base情景FCF为负）。若成功量产并盈利，bull情景利润可额外增厚；若失败，不影响base估值，但会消耗现金。",
+      "evidence_used": [
+        "EV029：荆州项目相关描述（年报）",
+        "KPE01：卖方提及荆州已布局30万吨TDI、20万吨草酸",
+        "KPE02：TDI周度价格环比-0.5%"
+      ],
+      "strongest_counterevidence": "TDI价格低迷，且新进入者可能面临市场开拓困难；化工新材料技术爬坡风险高。",
+      "model_or_valuation_effect": "base情景中不包含荆州新材料项目利润，但包含相关资本开支（FCF为负）；bull情景中假设2027年后贡献利润，估值内含。期权价值已反映在bull情景34元目标价中。",
+      "confidence": "low",
+      "next_verification": "公司临时公告或定期报告披露荆州项目投产、试车进展，及产品产销数据。"
+    },
+    {
+      "question": "化肥分部的高毛利率稳定性是否掩盖了核心煤化工业务的真实价差改善程度？",
+      "why_decisive": "2026Q1合并毛利率22.28%可能被化肥分部（毛利率32.3%）拉高，若市场误将此归功于煤化工核心产品价差修复，则可能高估了公司盈利潜力。",
+      "conclusion": "从2025年报看，化肥收入占比约23.6%，毛利率32.3%，属于稳定高毛利业务。在Q1无分部数据的情况下，无法量化化肥对整体毛利率的贡献。若化肥销量季节性增长（春耕备肥），其权重上升，可能使合并毛利率高于实际煤化工毛利率。这增加了判断核心业务价差改善的不确定性。但即使化肥稳定，核心煤化工业务的毛利率也应有所提升，因为Q1毛利率跳升5.93pp，不太可能全部由化肥贡献。",
+      "evidence_used": [
+        "EV027：化肥FY2025收入73.06亿，毛利率32.3%",
+        "EV013：Q1毛利率22.28%",
+        "公司未披露Q1分产品数据"
+      ],
+      "strongest_counterevidence": "化肥价格波动极小（尿素周度-0.1%），化肥分部毛利率稳定，因此其对整体毛利率的影响方向是平稳的，大幅跳升很可能主要来自煤化工产品价差变化。",
+      "model_or_valuation_effect": "对2026E毛利率估计更趋保守，采用19.0%而非多头的18.5%作为base，但仍需等待分部数据以校准煤化工分部毛利率。",
+      "confidence": "low",
+      "next_verification": "2026年中报披露分产品收入和成本，计算煤化工分部毛利率，验证其是否达到20%以上。"
+    }
+  ],
+  "forecast_takeaways": [
+    {
+      "takeaway": "预计2026年归母净利润恢复至38-41亿元，主要受毛利率温和改善驱动，但H2价差可能从Q1高位回落，全年毛利率约19%左右，净利率约12%，盈利改善幅度有限。",
+      "evidence_anchor": "Q1毛利率22.28%但历史波动大，2025年全年毛利率仅约16.5%；且部分产品周度价格疲软；市场隐含TTM盈利37.25亿。",
+      "financial_implication": "对应EPS约1.80-1.94元，forward PE约11-12x（以现价21.55计）；若给予13x，公允价值约23.5-25.2元，与现价相比上行空间不大；若给予10x，则下行风险至18-19元。",
+      "confidence_and_risk": "中等置信度。若中报显示毛利率持续高于20%且核心产品价差普遍走强，净利润可能超过41亿；若H2需求大幅下滑、油价暴跌，净利或降至33亿附近。"
+    },
+    {
+      "takeaway": "市场估值已定价了盈利从底部回升，但未给予“中枢上移”的溢价，当前风险回报中性，不具备显著的安全边际。",
+      "evidence_anchor": "PE TTM处于5年73.4%分位，每股盈利代理处于0.7%分位，PB 25.8%分位；历史价格分解显示过去6个月估值已收缩30%，但仍高于周期底部典型倍数。",
+      "financial_implication": "若用12-13x给2026E利润，公允价值接近或略低于现价，表明当前价格缺乏低估；只有盈利超预期（>45亿）或估值扩张（>15x）才提供可观回报。",
+      "confidence_and_risk": "高置信度：当前估值不便宜，但若盈利不达预期，存在双杀风险（盈利下修+估值收缩）。"
+    },
+    {
+      "takeaway": "荆州新材料项目是重要的长期增长期权，但2026年难贡献利润，且短期现金消耗大，成为估值中的双刃剑。",
+      "evidence_anchor": "20亿增资、卖方提及30万吨TDI等规划，但TDI周度价格-0.5%，无明确投产时间表。",
+      "financial_implication": "base情景FCF为负（资本开支大），但期权价值在bull情景中提供+58%的上行空间。若项目成功，长期利润增厚明显；若延期或亏损，则只消耗现金而不产生回报，增加财务压力。",
+      "confidence_and_risk": "低置信度：项目商业化存在不确定性，需密切跟踪。"
+    }
+  ],
+  "forecast_assumptions": [
+    {
+      "parameter": "营业收入（2026E）",
+      "affected_business": "公司合并",
+      "historical_anchor": "FY2025 309.69亿元；2026Q1 83.44亿元（年化333.7亿元）",
+      "evidence_status": "analyst_estimate",
+      "base_case": "340亿元（≈Q1年化+量增，保守）",
+      "bull_case": "360亿元（荆州新产能部分贡献+产品涨价）",
+      "bear_case": "310亿元（需求疲软，产品价格下跌）",
+      "rationale_and_evidence": "Q1年化已近334亿，通常下半年工业需求不弱于上半年，加上荆州部分装置可能试车，故给340亿。",
+      "sensitivity": "每变动10亿元收入，按净利率12%计，影响净利润1.2亿元，EPS约0.057元。",
+      "confidence": "medium",
+      "verification_gate": "中报累计收入是否≥170亿元（全年340亿的一半）。"
+    },
+    {
+      "parameter": "综合毛利率（2026E）",
+      "affected_business": "公司合并",
+      "historical_anchor": "FY2025约16.5%；2026Q1 22.28%",
+      "evidence_status": "analyst_estimate",
+      "base_case": "19.0%（较Q1回落，但仍显著高于2025年）",
+      "bull_case": "22.0%（若价差持续扩大，接近Q1水平）",
+      "bear_case": "16.0%（若价差跌回2025年低谷）",
+      "rationale_and_evidence": "Q1毛利率强势但可能包含季节性因素（化肥春耕）及部分产品阶段性涨价；醋酸、尿素仍弱；缺乏商品映射，故保守假设H2回落至18%左右，全年平均19%。",
+      "sensitivity": "毛利率每变动1个百分点，营业利润变动约3.4亿元（340亿×1%），净利润约2.9亿元，EPS约0.137元。",
+      "confidence": "low",
+      "verification_gate": "中报毛利率是否≥20%，且分产品毛利率验证核心煤化工价差修复。"
+    },
+    {
+      "parameter": "期间费用率（2026E）",
+      "affected_business": "公司合并",
+      "historical_anchor": "FY2025约5.0%；2026Q1约4.8%",
+      "evidence_status": "analyst_estimate",
+      "base_case": "4.8%",
+      "bull_case": "4.5%（规模效应）",
+      "bear_case": "5.2%（研发增加、财务费用上升）",
+      "rationale_and_evidence": "Q1费用率略降，但年报显示研发费用+34%，且财务费用率略升，预计全年持平或略升。",
+      "sensitivity": "费用率每变动0.5pp，影响净利润约1.7亿元。",
+      "confidence": "medium",
+      "verification_gate": "中报费用率及明细。"
+    },
+    {
+      "parameter": "资本开支（2026E）",
+      "affected_business": "公司合并现金流",
+      "historical_anchor": "FY2024？未披露明确历史",
+      "evidence_status": "analyst_estimate",
+      "base_case": "60-70亿元（德州改造+荆州建设）",
+      "bull_case": "50亿元（部分项目延期）",
+      "bear_case": "80亿元（加速建设）",
+      "rationale_and_evidence": "公司处于资本开支密集期，分析师提及德州气化炉更换和荆州新项目，年报显示在建工程规模大。但缺少精确指引。",
+      "sensitivity": "capex每增加10亿，FCF减少10亿，可能推高有息负债。",
+      "confidence": "low",
+      "verification_gate": "中报披露的在建工程进度及资本支出。"
+    },
+    {
+      "parameter": "煤炭采购成本",
+      "affected_business": "煤化工成本",
+      "historical_anchor": "未披露，秦皇岛5500大卡约800-900元/吨",
+      "evidence_status": "proxy",
+      "base_case": "煤价稳定在800-900元/吨区间",
+      "bull_case": "煤价下跌至700元/吨以下",
+      "bear_case": "煤价上涨至1000元/吨以上",
+      "rationale_and_evidence": "公司用煤以原料为主，部分为无烟煤？无直接映射，但煤炭市场总体平稳。",
+      "sensitivity": "煤价每上涨100元/吨，假设吨耗1.5吨，成本增加约150元/吨产品；对毛利率影响显著。",
+      "confidence": "low",
+      "verification_gate": "关注煤炭价格指数及公司采购价格披露（通常不披露）。"
+    }
+  ],
+  "core_theses": [
+    {
+      "rank": 1,
+      "takeaway": "核心煤化工价差修复已在2026Q1发生，但持续性存疑，H2能否维持是关键，当前尚无法确认。",
+      "decisive_question": "2026H2煤化工产品价差能否维持Q1的改善趋势？",
+      "evidence": "Q1毛利率22.28%（同比+5.93pp），存在价差修复硬证据；部分产品（甲醇、己内酰胺）周度价格上涨；但尿素、醋酸仍弱。2025年全年毛利率仅16.5%，显示周期底部。",
+      "strongest_counterevidence": "缺乏分产品数据，化肥分部高毛利可能拉高整体，尿素/醋酸价格疲软，无客观商品映射证明价差可持续。",
+      "financial_transmission": "若价差持续，毛利率可维持20%以上，2026E净利润有望达42-45亿；若回落，净利或仅35-38亿。当前base假设毛利率19%，净利40亿，仅为温和修复。",
+      "market_pricing": "市场隐含盈利37.25亿，已包含修复预期；若base净利40亿，forward PE 15x，并无吸引力。",
+      "falsification_gate": "2026年中报毛利率<18%或累计营收<170亿，则价差修复证伪。",
+      "verdict": "partial"
+    },
+    {
+      "rank": 2,
+      "takeaway": "当前估值中性，安全边际不足，缺乏显著的预期差，等待更明确的盈利确认信号或更低的买入价格。",
+      "decisive_question": "当前估值是否已合理定价2026年的盈利修复？",
+      "evidence": "PE TTM 15.9x（5年73.4%分位），PB 1.73x（25.8%分位）；EPS代理1.355处于0.7%分位。市场已充分预期盈利从底部回升，但未给估值溢价。",
+      "strongest_counterevidence": "若供给约束逻辑被市场认可，周期股可能在盈利恢复初期享受估值扩张，且公司成本优势可赋予质量溢价。",
+      "financial_transmission": "13x PE给40亿净利 = 520亿市值（24.57元/股），较现价有+14%空间，但依赖于倍数和盈利双实现。若盈利仅38亿或倍数仅12x，则无上行。",
+      "market_pricing": "概率加权公允价值约22.5元，接近现价，无显著低估。",
+      "falsification_gate": "若中报后全年净利润预期降至35亿以下，且市场给予<12x，则目标价<20元，现价被高估。",
+      "verdict": "partial"
+    },
+    {
+      "rank": 3,
+      "takeaway": "公司长期具备成本和规模优势，荆州项目提供成长期权，但短期需消化高资本开支和不确定性，适合作为中长期关注标的。",
+      "decisive_question": "荆州项目能否成功投产并增厚利润？",
+      "evidence": "公司增资20亿，卖方称布局TDI/草酸。但TDI价格弱，无明确投产时间。",
+      "strongest_counterevidence": "新进入者技术爬坡风险，化工新材料市场竞争激烈。",
+      "financial_transmission": "bull情景中若项目满产，年利润贡献可达10亿以上，提升公司整体盈利中枢。",
+      "market_pricing": "当前价格未体现该期权价值（按我们的评估模型，期权价值仅3-4元/股，已内含于bull情景）。",
+      "falsification_gate": "2026年底前若无投产公告，或投产后亏损，则期权价值归零。",
+      "verdict": "unproven"
+    }
+  ],
+  "company_disaggregation": "公司将业务分为四个经济单元：\n\n1. **煤化工基础产品**（核心利润池，收入占比约70-75%，周期性）\n   - 产品：尿素、甲醇、醋酸、有机胺、DMF、碳酸二甲酯等。\n   - 景气度：低谷回升，Q1毛利率改善，但尿素、醋酸价格仍弱。\n   - 客户：大中型工业企业，稳定客户占比>80%，应收极低。\n   - 竞争优势：成本领先、柔性联产、客户粘性强，但缺乏同行对标数据。\n   - 估值意义：决定公司短期盈利和估值中枢，是投资核心变量。\n\n2. **化肥**（稳定利润池，收入占比约24%，高毛利）\n   - 产品：尿素等氮肥。\n   - 景气度：高且稳定，2025年毛利率32.3%，需求刚性。\n   - 估值意义：提供稳定现金流，平滑周期波动，但增量有限。需注意其高毛利可能掩盖其他业务波动。\n\n3. **化工新材料**（增长期权，目前收入占比小）\n   - 产品：己二酸、己内酰胺、TDI、草酸等。\n   - 景气度：分化，己内酰胺、己二酸价格上涨，TDI偏弱。\n   - 产能：荆州基地在建，是未来2-3年利润增量来源，但爬坡不确定。\n   - 估值意义：作为bull情景的期权价值，不在base模型计入盈利，但消耗现金。\n\n4. **热电**（辅助业务，收入占比<1%）\n   - 自备电厂，基本忽略。\n\n**关键缺失**：未披露分产品销量、价格、成本，无法精确测算各单元毛利率和景气度，需依靠合并数据推断。",
+  "autonomous_forecast_model": "**收入驱动**：2026E收入340亿元（基于Q1年化333.7亿加上微幅量增，保守）。2027E、2028E假设收入增长5-8%，受荆州新产能逐步释放和产品价格温和上涨驱动。\n\n**毛利率**：2026E 19.0%（H1因Q1拉高均价，H2假设回落至18%左右），2027E 20.0%，2028E 21.0%，反映供需格局改善和成本优化。\n\n**期间费用率**：2026E约4.8%（含销售、管理、研发），2027-2028E逐步降至4.5%。财务费用率2026E 0.9%，后续随负债偿还略降。\n\n**净利润**：2026E归母净利润约40亿元（净利率11.8%），2027E约47亿元，2028E约54亿元。\n\n**EPS**（基于21.15亿股）：2026E 1.89元，2027E 2.22元，2028E 2.55元。\n\n**Capex与FCF**：2026E资本开支约65亿元（德州改造+荆州建设），折旧摊销约20亿元，FCF约-5亿元；2027E资本开支逐步回落至40亿元，FCF转正。\n\n**情景假设**：\n- **base（50%）**：上述预测。\n- **bull（25%）**：毛利率+2pp，收入+5%，净利48亿，EPS 2.27元，估值15xPE（质量溢价）→目标价34.0元。\n- **bear（25%）**：毛利率-3pp，收入-3%，净利30亿，EPS 1.42元，估值10xPE（周期低谷）→目标价14.2元。\n\n**模型局限**：缺乏分产品量价、煤耗、商品价格映射，预测精度低，应视为方向性情景，而非精确财务预算。",
+  "thesis_financial_bridge": "**Bridge 1: 核心煤化工价差→毛利率→净利润**\n- 公式：毛利 = 煤化工产品收入 × （实现ASP - 煤基成本 - 加工成本）\n- 假设：2026E煤化工产品收入约255亿元（总340亿的75%），毛利率从2025年的约14%提升至17%（base）。\n- 影响：毛利率每提升1pp，增加毛利约2.55亿元，净利润约2.2亿元。\n- 状态：部分量化，缺乏分部数据支撑。\n\n**Bridge 2: 化肥稳定性→整体利润缓冲**\n- 公式：化肥毛利 = 73亿收入 × 32.3% = 23.6亿（假设稳定）。\n- 影响：提供约8%的利润率底部，但无法驱动增长。\n\n**Bridge 3: 荆州新材料→增量利润（期权）**\n- 公式：增量利润 = 新产能产量 × （产品价差） - 折旧等固定成本\n- 假设：2027年草酸/TDI部分投产，2028年贡献利润约5亿元。\n- 状态：完全未量化，仅存在于bull情景。\n\n**Bridge 4: 资本开支→FCF和估值**\n- Capex抑制近期FCF，但为未来增长奠基。若项目回报>资本成本，则创造价值；反之破坏价值。\n- 当前估值未对项目成功与否定价，但base FCF为负，需融资或消耗现金。",
+  "moat_evidence_verdict": "1. **成本优势**：基于历史表现和Q1毛利率提升，但缺乏与同行（宝丰能源、鲁西化工）的直接对比数据，当前状态为**部分验证**。若未来数据证明公司毛利率持续高于行业平均2-3个百分点，则可提升至**已验证**。\n\n2. **客户粘性**：应收账款/收入仅0.32%，合同负债环比增长，稳定客户占比>80%，证明了极强的现金回收能力和客户关系，状态为**部分验证**。但大宗品客户切换成本低，粘性可能源于供应紧张而非忠诚度。\n\n3. **规模与产业链协同**：无外部量化数据，仅管理陈述，状态为**未验证**。需单位成本对比数据。\n\n4. **综合**：公司拥有可论证的成本和客户护城河优势，但量化强度不足，因此该护城河应给予有限的估值溢价（如bull情景中使用15x PE，而非常规周期股12x）。",
+  "valuation_closure": "**估值方法**：情景PE法，以2026E归母净利润为基准，基于21.15亿股。\n\n| 情景 | 概率 | 2026E净利（百万元） | EPS（元） | 目标PE（倍数） | 公允价值（元/股） | 市值（亿元） |\n| --- | --- | --- | --- | --- | --- | --- |\n| base | 50% | 4,000 | 1.891 | 13.0x | 24.58 | 520 |\n| bull | 25% | 4,800 | 2.269 | 15.0x | 34.04 | 720 |\n| bear | 25% | 3,000 | 1.418 | 10.0x | 14.18 | 300 |\n\n**概率加权公允价值**：50%×24.58 + 25%×34.04 + 25%×14.18 = 24.35元。\n\n**与现价比较**：现价21.55元，隐含上行空间+13.0%。但此结果对PE倍数和盈利假设高度敏感：\n- 若base PE采用12x（更具周期底部代表性），则base公允价值22.68元，加权公允价值降至22.0元，接近现价。\n- 若base净利润降至38亿元（更保守），且PE 12x，则base公允价值21.54元，加权公允价值21.0元，无上行空间。\n\n**结论**：基于目前证据，概率加权公允价值24.35元略高于现价，但估值区内含不确定性较大。核心价值桶采用2026E利润，未给荆州期权额外加分（因已内含于bull情景）。无净现金调整（负债率适中）。当前价格难以提供高确信度的买入安全边际，因此给予**持有**评级，等待盈利能力确认和更好的买入位置。",
+  "canonical_model_snapshot": [
+    {
+      "line_id": "shares",
+      "period": "2026-08-02; latest stock_basic; Tushare stock_basic.reg_capital (CNY 10,000) / 100; CNY 1 par value",
+      "metric": "diluted_shares",
+      "value": 2115.3407810000003,
+      "unit": "mn shares",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV022"
+      ],
+      "formula": "Tushare stock_basic.reg_capital (CNY 10,000) / 100; CNY 1 par value"
+    },
+    {
+      "line_id": "2026E_revenue",
+      "period": "2026E",
+      "metric": "total_revenue",
+      "value": 34000.0,
+      "unit": "mn CNY",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV010",
+        "EV011"
+      ],
+      "formula": "Q1 annualized 33,374 + conservative volume growth"
+    },
+    {
+      "line_id": "2026E_gross_margin",
+      "period": "2026E",
+      "metric": "gross_margin",
+      "value": 0.19,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV013"
+      ],
+      "formula": "Blended estimate between Q1 22.28% and expected H2 decline"
+    },
+    {
+      "line_id": "2026E_gross_profit",
+      "period": "2026E",
+      "metric": "gross_profit",
+      "value": 6460.0,
+      "unit": "mn CNY",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "34000 * 0.19"
+    },
+    {
+      "line_id": "2026E_operatingprofit",
+      "period": "2026E",
+      "metric": "operatingprofit",
+      "value": 5100.0,
+      "unit": "mn CNY",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "营业利润 ≈ 收入×(毛利率 - 期间费用率) - 其他影响，辅以实际税率反推核对"
+    },
+    {
+      "line_id": "2026E_parent_net_profit",
+      "period": "2026E",
+      "metric": "parent_net_profit",
+      "value": 4000.0,
+      "unit": "mn CNY",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV010"
+      ],
+      "formula": "Operating profit - finance charges (0.9% of revenue) - tax (approx 15%) - minority interest"
+    },
+    {
+      "line_id": "2026E_eps",
+      "period": "2026E",
+      "metric": "eps",
+      "value": 1.545,
+      "unit": "CNY/share",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV022"
+      ],
+      "formula": "EPS = 归母净利润 / 2,750百万股"
+    },
+    {
+      "line_id": "2026E_ocf",
+      "period": "2026E",
+      "metric": "operating_cash_flow",
+      "value": 4500.0,
+      "unit": "mn CNY",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "Net profit + D&A (est 2000 mn) - working capital increase (est -1500 mn)"
+    },
+    {
+      "line_id": "2026E_capex",
+      "period": "2026E",
+      "metric": "capital_expenditure",
+      "value": 6500.0,
+      "unit": "mn CNY",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "Analyst estimate for Texas revamp + Jingzhou new projects"
+    },
+    {
+      "line_id": "2026E_fcf",
+      "period": "2026E",
+      "metric": "free_cash_flow",
+      "value": -2000.0,
+      "unit": "mn CNY",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "4500 - 6500"
+    },
+    {
+      "line_id": "base_fair_value",
+      "period": "2026E",
+      "metric": "fair_value_per_share",
+      "value": 24.58,
+      "unit": "CNY/share",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "1.891 * 13.0"
+    },
+    {
+      "line_id": "probability_weighted_fair_value",
+      "period": "2026E",
+      "metric": "weighted_fair_value_per_share",
+      "value": 24.35,
+      "unit": "CNY/share",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "0.5*24.58 + 0.25*34.04 + 0.25*14.18"
+    },
+    {
+      "line_id": "2026E_revenue",
+      "period": "2026E",
+      "metric": "revenue",
+      "value": 34000.0,
+      "unit": "mn CNY",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV010",
+        "EV011"
+      ],
+      "formula": "以2026Q1年化收入34,474百万为参照，考虑后续产品价格波动及荆州新产能逐步释放，给予温和增长"
+    },
+    {
+      "line_id": "2027E_revenue",
+      "period": "2027E",
+      "metric": "revenue",
+      "value": 37000.0,
+      "unit": "mn CNY",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV010",
+        "EV011"
+      ],
+      "formula": "以2026Q1年化收入34,474百万为参照，考虑后续产品价格波动及荆州新产能逐步释放，给予温和增长"
+    },
+    {
+      "line_id": "2028E_revenue",
+      "period": "2028E",
+      "metric": "revenue",
+      "value": 40000.0,
+      "unit": "mn CNY",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV010",
+        "EV011"
+      ],
+      "formula": "以2026Q1年化收入34,474百万为参照，考虑后续产品价格波动及荆州新产能逐步释放，给予温和增长"
+    },
+    {
+      "line_id": "2026E_营业成本",
+      "period": "2026E",
+      "metric": "营业成本",
+      "value": 27710.0,
+      "unit": "mn CNY",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "成本 = 营业收入 × (1 - 毛利率)；FY2025毛利率按约16.5%估算（成本约25,855百万）"
+    },
+    {
+      "line_id": "2027E_营业成本",
+      "period": "2027E",
+      "metric": "营业成本",
+      "value": 29600.0,
+      "unit": "mn CNY",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "成本 = 营业收入 × (1 - 毛利率)；FY2025毛利率按约16.5%估算（成本约25,855百万）"
+    },
+    {
+      "line_id": "2028E_营业成本",
+      "period": "2028E",
+      "metric": "营业成本",
+      "value": 31600.0,
+      "unit": "mn CNY",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "成本 = 营业收入 × (1 - 毛利率)；FY2025毛利率按约16.5%估算（成本约25,855百万）"
+    },
+    {
+      "line_id": "2027E_grossmargin",
+      "period": "2027E",
+      "metric": "grossmargin",
+      "value": 20.0,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV013"
+      ],
+      "formula": "基于2026Q1 22.28%及行业复苏预期，假设逐渐改善但未回到历史极端高位"
+    },
+    {
+      "line_id": "2028E_grossmargin",
+      "period": "2028E",
+      "metric": "grossmargin",
+      "value": 21.0,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV013"
+      ],
+      "formula": "基于2026Q1 22.28%及行业复苏预期，假设逐渐改善但未回到历史极端高位"
+    },
+    {
+      "line_id": "2026E_期间费用率不含财务费用",
+      "period": "2026E",
+      "metric": "期间费用率不含财务费用",
+      "value": 4.8,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV014",
+        "EV016"
+      ],
+      "formula": "包括销售、管理、研发费用，基于Q1隐含水平，规模增长摊薄"
+    },
+    {
+      "line_id": "2027E_期间费用率不含财务费用",
+      "period": "2027E",
+      "metric": "期间费用率不含财务费用",
+      "value": 4.5,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV014",
+        "EV016"
+      ],
+      "formula": "包括销售、管理、研发费用，基于Q1隐含水平，规模增长摊薄"
+    },
+    {
+      "line_id": "2028E_期间费用率不含财务费用",
+      "period": "2028E",
+      "metric": "期间费用率不含财务费用",
+      "value": 4.5,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV014",
+        "EV016"
+      ],
+      "formula": "包括销售、管理、研发费用，基于Q1隐含水平，规模增长摊薄"
+    },
+    {
+      "line_id": "2026E_财务费用率",
+      "period": "2026E",
+      "metric": "财务费用率",
+      "value": 0.9,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV016"
+      ],
+      "formula": "Q1 2026为0.90%，随有息负债逐步偿还和利率环境改善略降"
+    },
+    {
+      "line_id": "2027E_财务费用率",
+      "period": "2027E",
+      "metric": "财务费用率",
+      "value": 0.8,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV016"
+      ],
+      "formula": "Q1 2026为0.90%，随有息负债逐步偿还和利率环境改善略降"
+    },
+    {
+      "line_id": "2028E_财务费用率",
+      "period": "2028E",
+      "metric": "财务费用率",
+      "value": 0.7,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV016"
+      ],
+      "formula": "Q1 2026为0.90%，随有息负债逐步偿还和利率环境改善略降"
+    },
+    {
+      "line_id": "2027E_operatingprofit",
+      "period": "2027E",
+      "metric": "operatingprofit",
+      "value": 6100.0,
+      "unit": "mn CNY",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "营业利润 ≈ 收入×(毛利率 - 期间费用率) - 其他影响，辅以实际税率反推核对"
+    },
+    {
+      "line_id": "2028E_operatingprofit",
+      "period": "2028E",
+      "metric": "operatingprofit",
+      "value": 6900.0,
+      "unit": "mn CNY",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "营业利润 ≈ 收入×(毛利率 - 期间费用率) - 其他影响，辅以实际税率反推核对"
+    },
+    {
+      "line_id": "2027E_parentnetprofit",
+      "period": "2027E",
+      "metric": "parentnetprofit",
+      "value": 5100.0,
+      "unit": "mn CNY",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV010",
+        "EV011"
+      ],
+      "formula": "归母净利润 = (营业利润 - 财务费用) × (1 - 有效税率约16%) - 少数股东损益"
+    },
+    {
+      "line_id": "2028E_parentnetprofit",
+      "period": "2028E",
+      "metric": "parentnetprofit",
+      "value": 5800.0,
+      "unit": "mn CNY",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV010",
+        "EV011"
+      ],
+      "formula": "归母净利润 = (营业利润 - 财务费用) × (1 - 有效税率约16%) - 少数股东损益"
+    },
+    {
+      "line_id": "2027E_eps",
+      "period": "2027E",
+      "metric": "eps",
+      "value": 1.855,
+      "unit": "CNY/share",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV022"
+      ],
+      "formula": "EPS = 归母净利润 / 2,750百万股"
+    },
+    {
+      "line_id": "2028E_eps",
+      "period": "2028E",
+      "metric": "eps",
+      "value": 2.109,
+      "unit": "CNY/share",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV022"
+      ],
+      "formula": "EPS = 归母净利润 / 2,750百万股"
+    },
+    {
+      "line_id": "2026E_经营现金流净额ocf",
+      "period": "2026E",
+      "metric": "经营现金流净额ocf",
+      "value": 3600.0,
+      "unit": "mn CNY",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV017"
+      ],
+      "formula": "OCF = 归母净利润 × 0.85（基于Q1比率0.80，略有提高）"
+    },
+    {
+      "line_id": "2027E_经营现金流净额ocf",
+      "period": "2027E",
+      "metric": "经营现金流净额ocf",
+      "value": 4300.0,
+      "unit": "mn CNY",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV017"
+      ],
+      "formula": "OCF = 归母净利润 × 0.85（基于Q1比率0.80，略有提高）"
+    },
+    {
+      "line_id": "2028E_经营现金流净额ocf",
+      "period": "2028E",
+      "metric": "经营现金流净额ocf",
+      "value": 4900.0,
+      "unit": "mn CNY",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV017"
+      ],
+      "formula": "OCF = 归母净利润 × 0.85（基于Q1比率0.80，略有提高）"
+    },
+    {
+      "line_id": "2026E_资本支出capex",
+      "period": "2026E",
+      "metric": "资本支出capex",
+      "value": 4000.0,
+      "unit": "mn CNY",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "根据公司在建工程及德州、荆州投资计划主观估计；须从现金流量表核实"
+    },
+    {
+      "line_id": "2027E_资本支出capex",
+      "period": "2027E",
+      "metric": "资本支出capex",
+      "value": 3500.0,
+      "unit": "mn CNY",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "根据公司在建工程及德州、荆州投资计划主观估计；须从现金流量表核实"
+    },
+    {
+      "line_id": "2028E_资本支出capex",
+      "period": "2028E",
+      "metric": "资本支出capex",
+      "value": 3000.0,
+      "unit": "mn CNY",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "根据公司在建工程及德州、荆州投资计划主观估计；须从现金流量表核实"
+    },
+    {
+      "line_id": "2026E_自由现金流fcf",
+      "period": "2026E",
+      "metric": "自由现金流fcf",
+      "value": -400.0,
+      "unit": "mn CNY",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "FCF = OCF - Capex"
+    },
+    {
+      "line_id": "2027E_自由现金流fcf",
+      "period": "2027E",
+      "metric": "自由现金流fcf",
+      "value": 800.0,
+      "unit": "mn CNY",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "FCF = OCF - Capex"
+    },
+    {
+      "line_id": "2028E_自由现金流fcf",
+      "period": "2028E",
+      "metric": "自由现金流fcf",
+      "value": 1900.0,
+      "unit": "mn CNY",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "FCF = OCF - Capex"
+    }
+  ],
+  "model_change_rows": [
+    {
+      "line_id": "2026E_parent_net_profit",
+      "old_value": 4250.0,
+      "new_value": 4000.0,
+      "unit": "mn CNY",
+      "evidence_ids": [
+        "EV013",
+        "KPE02"
+      ],
+      "reason": "Incorporating uncertainty about H2 margin sustainability and lack of product-level data; base case reduced from 42.5 to 40 billion",
+      "eps_fcf_valuation_impact": "EPS reduced from 2.01 to 1.89, fair value at 15x falls from 30.14 to 28.37; at 13x falls from 26.12 to 24.58",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2026E_gross_margin",
+      "old_value": 0.185,
+      "new_value": 0.19,
+      "unit": "%",
+      "evidence_ids": [
+        "EV013"
+      ],
+      "reason": "Adjusting upwards slightly from overly conservative 18.5% to 19% reflecting Q1 strength, but still below Q1 to account for H2 mean reversion",
+      "eps_fcf_valuation_impact": "Margin increase partially offsets profit reduction from other factors; supports EPS around 1.89",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "bear_fair_value",
+      "old_value": 17.02,
+      "new_value": 14.18,
+      "unit": "CNY/share",
+      "evidence_ids": [],
+      "reason": "Using 10x PE instead of 12x for bear scenario, reflecting that in a severe downturn the market could assign even lower multiples",
+      "eps_fcf_valuation_impact": "Lowers probability-weighted fair value",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "base_valuation_multiple",
+      "old_value": 15.0,
+      "new_value": 13.0,
+      "unit": "times",
+      "evidence_ids": [
+        "KPE05",
+        "KSI05"
+      ],
+      "reason": "Align with sell-side comp multiples (11-12x) and cycle-aware valuation; even with recovery, 13x reflects mid-cycle rather than peak multiple",
+      "eps_fcf_valuation_impact": "Reduces base fair value significantly; core argument is that valuation cannot rely on high multiples",
+      "disposition": "accepted"
+    }
+  ],
+  "accepted_underwriting_model": "## 公司运营模型\n\n**商业模式**：多业联产煤化工平台，以煤炭为原料，通过气化生产合成气，进而柔性联产尿素、甲醇、醋酸、己二酸、己内酰胺、TDI等多种产品。成本领先是核心竞争力，体现为高于行业平均的毛利率和极低的应收账款。\n\n**业务单元**：\n1. 煤化工基础产品（核心，约75%收入）\n2. 化肥（稳定，约24%收入）\n3. 化工新材料（期权，目前收入<5%）\n4. 热电（忽略）\n\n**收入驱动**：收入 = Σ(销量 × 实现价格)。2026E收入340亿元，基于Q1年化333.7亿和温和量增。2027E、2028E分别370亿、400亿，受荆州新产能和价格温和上涨驱动。\n\n**成本结构**：原料煤成本占总成本50%以上，加工成本通过规模效应和柔性联产优化。2026E毛利率19%，2027E 20%，2028E 21%。\n\n**期间费用**：销售/管理/研发费用率4.8%，财务费用率0.9%，所得税率15%。\n\n**归母净利润**：2026E 40亿，2027E 47亿，2028E 54亿。\n\n**现金流与资本开支**：2026E OCF 45亿，Capex 65亿（德州改造+荆州项目），FCF -20亿。2027E起Capex降至40亿，FCF逐步转正。\n\n**情景概率**：\n- base (50%): 净利润40亿，EPS 1.89元，13x PE → 目标价24.58元\n- bull (25%): 净利润48亿，EPS 2.27元，15x PE → 目标价34.04元\n- bear (25%): 净利润30亿，EPS 1.42元，10x PE → 目标价14.18元\n\n**模型缺失**：\n- 分产品销量、价格、成本数据\n- 荆州项目投产时间、资本回报\n- 煤价与产品价的映射关系\n- 行业产能利用率数据\n\n**下一步验证**：\n- 2026年8月中报：分产品毛利率、累计收入\n- Q3产品周度价格与煤价对比\n- 荆州项目公告",
+  "model_change_ledger": "## 模型变更台账\n\n| # | 问题/模型行 | 原始假设（研究包） | 多方提议 | 空方提议 | 接受假设 | 证据ID | EPS/FCF/估值影响 | 下次检验 |\n|---|------------|-------------------|----------|----------|----------|--------|-----------------|----------|\n| 1 | 2026E毛利率 | 18.5% | 维持18.5%（甚至上修至20%+） | 应下调因Q1不可持续 | 19.0% | EV013 | 调整后利润40亿，EPS 1.89元 | 中报毛利率 |\n| 2 | 2026E归母净利润 | 42.5亿 | 42.5-45亿 | 38-40亿 | 40亿 | EV013,KPE02 | EPS降至1.89，目标价下调 | 中报 |\n| 3 | base情景PE倍数 | 15x | 15x | 12-13x | 13x | KPE05 | 公允价值降至24.58元 | 跟踪同业估值 |\n| 4 | bear情景PE倍数 | 12x | 12x | 10x（更保守） | 10x | 历史周期底 | 概率加权价值微降 | 宏观恶化时 |\n| 5 | 情景概率 | base50/bull30/bear20 | 中报后bull+5pp | bull25/bear30 | base50/bull25/bear25 | 缺乏客观映射 | 加权价值24.35元 | 中报 |\n| 6 | 荆州项目利润 | 不入base | 不入base，期权 | 计入capex但不计利润，不对称 | 维持不入base，期权处理 | KPE01 | bull情景内涵 | 投产公告 |\n| 7 | 合同负债 | 未直接建模 | 需求改善信号 | 确认占收入比例小（10%） | 作为观察项，不调模型 | EV??? | 无直接影响 | 中报/三季报 |\n\n**原则**：模型构建基于可控的、合理的假设。因商品价格映射缺失，所有预测均具有较高不确定性。接受多方的Q1毛利率改善是真实的，但采纳空方关于估值倍数和下半年回落的警惕。总体结论是温和修复，但当前价格并未低估。",
+  "debate_verdict": "**多方的主要贡献**：提供了Q1毛利率22.28%的硬证据，证明价差修复已在财务报表中发生；提出了合同负债上行、回购分红等积极信号；揭示了市场隐含盈利低于Q1年化的事实，使预期差分析聚焦于H2的可持续性。\n\n**多方的弱点**：低估了估值分位和倍数风险，将周期股估值简单类比成长股；未充分回答化肥分部对毛利率的扭曲问题；将私有渠道数据作为产品涨价的硬事实，而实际缺乏商品映射；对费用率和资本开支的负向影响考虑不足。\n\n**空方的主要贡献**：尖锐地指出了毛利率不可持续的风险和费用率恶化可能；揭示了估值倍数应参考同业和周期历史，而非高估；验证了市场隐含盈利计算中的错配问题；强化了资本开支与期权不对称的逻辑。\n\n**空方的不足**：对Q1毛利率大幅改善的积极意义有所低估；过度依赖历史估值规律，而未充分考虑行业供给逻辑的结构性变化；可能在悲观假设下给予过低的估值倍数，未充分给予成本优势以溢价。\n\n**综合评判**：空方关于估值倍数的批评是决定性的，将base情景的合理PE从15x降至13x是审慎的。多方的盈利修复故事部分成立，但无法支撑高倍数。因此，模型向空方倾斜，下调净利润和PE倍数，最终公允价值与现价接近，导致**持有**评级，而非买入或增持。",
+  "probability_payoff": "**分布与期望价值**：\n- bull情景：+58%（34.04 vs 21.55），概率25%\n- base情景：+14%（24.58 vs 21.55），概率50%\n- bear情景：-34%（14.18 vs 21.55），概率25%\n- 期望收益：25%×58% + 50%×14% + 25%×(-34%) = 14.5% + 7.0% - 8.5% = 13.0%\n\n**风险因素**：上行依赖H2毛利率和估值扩张双引擎同时实现；下行来自盈利不达预期和估值收缩。当前价格已包含温和修复，若实际仅38亿净利且市场给12x，则公允价值21.54元，刚好持平。因此，期望收益为正但依赖于关键假设，安全边际不足。",
+  "unresolved_questions_and_gaps": "1. **核心产品价差映射缺失**：无法从商品期货市场推算公司产品实现价格与煤价之差，因此对毛利率的预测高度依赖主观判断。下一步：补充COMPANY_COMMODITY_MAP，跟踪尿素、甲醇、醋酸、己二酸等产品现货价格和煤炭价格。\n\n2. **分部财务数据不可得**：2026Q1未披露分产品收入和毛利率，合成数据的失真风险高。下一步：等待中报披露，届时可校准模型。\n\n3. **荆州项目详细信息缺失**：投产时间、单位投资、预期回报率均未知，使得期权定价无法精确。下一步：通过公司公告、投资者互动等渠道获取。\n\n4. **同行可比数据缺失**：缺乏宝丰能源、鲁西化工的毛利率、ROIC等对比数据，难以量化公司的竞争优势。下一步：待相关公司定期报告发布后补充。\n\n5. **费用率趋势不明**：研发费用大幅增长、财务费用率上升，对净利率的挤压程度未知。下一步：关注中报费用明细和全年指引。\n\n**这些未解决问题是模型不确定性的主要来源，也是给予持有而非增持评级的关键原因。**",
+  "handoff_to_pm_and_trader": "**模型版本**：2026-08-02 研究经理辩论后模型 v2。\n\n**头寸限制**：\n- 当前建议为持有（Hold / Positive Watch），不建议新资金建仓。若已持有，可维持，但不宜加仓。\n- 最大配置比例不超过组合的2%（正常周期煤化工股票的 beta 调整配置）。\n- 若中报验证后（毛利率≥20%，净利润跟踪≥10亿），可考虑升级为增持，目标配置3-4%。\n- 若中报不及预期，降至减持或清仓。\n\n**催化剂路径**：\n1. 2026年8月中报（硬催化剂）：分产品毛利率、累计利润验证价差修复持续性。届时若达标，目标价上修至25-28元。\n2. 2026年Q3产品价差月度跟踪：若甲醇、醋酸等核心品种普遍走强，强化bull逻辑。\n3. 荆州项目投产公告：提前消化期权价值，可能驱动股价阶段性表现。\n\n**证伪条件**：\n- 中报毛利率<18% 且累计营收<170亿 → 下调至 bear，目标价可能至17-18元，建议减持。\n- 宏观：布油跌破70美元/桶且国内煤价上涨 → 煤头成本优势逻辑破坏。\n\n**不要假设**：\n- 不要假设Q1毛利率可以线性外推全年；历史季节性、化肥分部影响和商品价格波动均会导致H2回落。\n- 不要假设市场会给予15x以上的PE；周期股在盈利恢复初期往往PE收缩，只有当盈利持续超预期且ROIC>15%时才能维持高倍率。\n- 不要将荆州项目价值过早计入核心估值；除非有官方量产公告和利润指引，否则仅作为期权处理。",
+  "handoff_integrity_audit": "**模型版本**：2026-08-02-v2 (Research Manager accepted)\n\n**冻结的已报告事实**：\n- FY2025 营业收入 30,968.88 mn CNY (EV011)\n- FY2025 归母净利润 3,315.49 mn CNY (EV011)\n- Q1 2026 营业收入 8,343.59 mn CNY (EV010)\n- Q1 2026 归母净利润 1,116.59 mn CNY (EV010)\n- Q1 2026 毛利率 22.28% (EV013)\n- 稀释后总股本 2,115.34 百万股（基于Tushare注册资本）\n- 化肥FY2025 收入7,305.67 mn CNY, 毛利率32.3% (EV027)\n\n**分析师估计（接受）**：\n- 2026E-2028E 营业收入：34,000 / 37,000 / 40,000 mn CNY\n- 2026E 毛利率：19.0%\n- 2026E 归母净利润：4,000 mn CNY\n- 估值倍数：base 13x PE, bear 10x PE, bull 15x PE\n- 情景概率：base 50%, bull 25%, bear 25%\n\n**未解决的模型单元格**：\n- 分产品销量、价格、成本结构\n- 荆州项目资本开支与投产时间\n- FY2025合并毛利率与营业利润详细构成\n- 行业产能利用率与可比公司数据\n- 商品价格映射\n- 费用率的详细预测\n\n**PM必须保存或明确修订的项**：\n- 两个业务单元地图（煤化工基础产品、新材料、化肥）\n- 估值闭合方法（情景PE法，概率加权）\n- 核心敏感性：毛利率每变动1pp，净利润变动约2.9亿元\n- 验证节点：2026年8月中报、荆州项目公告、商品价差月度跟踪\n\n**潜在冲突**：\n- 市场隐含盈利计算存在期间错配（TTM利润 vs forward收入），已修正。\n- 股本基数：请统一使用21.153亿股，不使用未经实施的转增后27.5亿股。"
+}

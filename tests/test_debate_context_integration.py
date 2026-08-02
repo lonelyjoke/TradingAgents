@@ -72,6 +72,8 @@ def test_propagator_carries_policy_planning_context():
 def test_agent_state_schema_keeps_new_context_fields():
     assert "investor_interaction_context" in AgentState.__annotations__
     assert "policy_planning_context" in AgentState.__annotations__
+    assert "pm_internal_overflow" in AgentState.__annotations__
+    assert "pm_full_decision" in AgentState.__annotations__
 
 
 @pytest.mark.unit

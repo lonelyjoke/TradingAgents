@@ -4,11 +4,13 @@ import sqlite3
 import tempfile
 import unittest
 from pathlib import Path
+from types import SimpleNamespace
 from typing import TypedDict
 
 from langgraph.checkpoint.sqlite import SqliteSaver
 from langgraph.graph import END, StateGraph
 
+from cli.main import _stream_graph_with_checkpoint
 from tradingagents.graph.checkpointer import (
     checkpoint_step,
     clear_checkpoint,
@@ -16,6 +18,7 @@ from tradingagents.graph.checkpointer import (
     has_checkpoint,
     thread_id,
 )
+from tradingagents.graph.trading_graph import TradingAgentsGraph
 
 # Mutable flag to simulate crash on first run
 _should_crash = False
@@ -141,6 +144,84 @@ class TestCheckpointResume(unittest.TestCase):
 
         # Original date checkpoint still exists (untouched)
         self.assertTrue(has_checkpoint(self.tmpdir, self.ticker, self.date))
+
+    def test_cli_stream_retains_failed_checkpoint_and_resumes_with_none_input(self):
+        """The interactive CLI wrapper must implement the same resume contract."""
+        global _should_crash
+
+        class _GraphWrapper:
+            def __init__(self, workflow):
+                self.workflow = workflow
+                self.graph = workflow.compile()
+
+        graph = _GraphWrapper(_build_graph())
+        args = {"stream_mode": "values"}
+        config = {
+            "checkpoint_enabled": True,
+            "data_cache_dir": self.tmpdir,
+        }
+        failures = []
+
+        _should_crash = True
+        with self.assertRaises(RuntimeError):
+            list(
+                _stream_graph_with_checkpoint(
+                    graph,
+                    {"count": 0},
+                    args,
+                    config=config,
+                    ticker=self.ticker,
+                    analysis_date=self.date,
+                    on_error=failures.append,
+                )
+            )
+
+        self.assertEqual(len(failures), 1)
+        self.assertTrue(has_checkpoint(self.tmpdir, self.ticker, self.date))
+
+        _should_crash = False
+        chunks = list(
+            _stream_graph_with_checkpoint(
+                graph,
+                None,
+                args,
+                config=config,
+                ticker=self.ticker,
+                analysis_date=self.date,
+            )
+        )
+
+        self.assertEqual(chunks[-1]["count"], 11)
+        self.assertFalse(has_checkpoint(self.tmpdir, self.ticker, self.date))
+
+    def test_programmatic_resume_skips_paid_context_rebuild(self):
+        graph = TradingAgentsGraph.__new__(TradingAgentsGraph)
+        graph.config = {"checkpoint_enabled": True}
+        graph.propagator = SimpleNamespace(get_graph_args=lambda: {"stream_mode": "values"})
+        graph._run_a_share_data_preflight = lambda *_args: self.fail(
+            "resume must not repeat preflight or context preparation"
+        )
+        captured = {}
+
+        def execute(company_name, trade_date, graph_input, args):
+            captured.update(
+                company_name=company_name,
+                trade_date=trade_date,
+                graph_input=graph_input,
+                args=args,
+            )
+            return "resumed"
+
+        graph._execute_graph = execute
+
+        result = graph._run_graph(self.ticker, self.date, resume=True)
+
+        self.assertEqual(result, "resumed")
+        self.assertIsNone(captured["graph_input"])
+        self.assertEqual(
+            captured["args"]["config"]["configurable"]["thread_id"],
+            thread_id(self.ticker, self.date),
+        )
 
 
 if __name__ == "__main__":

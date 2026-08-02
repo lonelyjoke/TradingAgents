@@ -9,6 +9,8 @@ from __future__ import annotations
 import re
 from typing import Mapping
 
+from .operating_archetypes import render_operating_archetype_context
+
 from .industry_identity import (
     consumer_staples_subsector_hints,
     has_lithium_battery_symbol_hint,
@@ -498,6 +500,7 @@ def build_industry_kpi_context(
         ]
     )
     playbook, kpis = _detect_playbook(symbol, combined)
+    archetype_context = render_operating_archetype_context(symbol, combined)
     evidence = _matching_lines(
         combined,
         (
@@ -543,6 +546,8 @@ def build_industry_kpi_context(
             "",
             f"- Playbook: {playbook}",
             "- Purpose: force the report to verify sector-native operating data before drawing cycle, moat, or valuation conclusions.",
+            "",
+            archetype_context,
             "",
             "## Required KPI Map",
             "| KPI layer | Required public evidence | Financial driver |",

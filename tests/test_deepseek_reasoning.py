@@ -5,9 +5,8 @@ Two pieces verified:
 1. ``reasoning_content`` is captured on receive into the AIMessage's
    ``additional_kwargs`` and re-attached on send so DeepSeek's API
    sees the same value across turns.
-2. ``with_structured_output`` raises NotImplementedError for
-   ``deepseek-reasoner`` so the agent factories' free-text fallback
-   handles the request instead of failing at runtime.
+2. V4 Flash and Pro both support native thinking-mode tools/structured
+   output, while the retired ``deepseek-reasoner`` alias keeps a fallback.
 """
 
 import os
@@ -19,6 +18,7 @@ from langchain_core.prompt_values import ChatPromptValue
 from tradingagents.llm_clients.openai_client import (
     DeepSeekChatOpenAI,
     NormalizedChatOpenAI,
+    OpenAIClient,
     _input_to_messages,
 )
 
@@ -135,10 +135,11 @@ class TestDeepSeekReasonerStructuredOutput:
         with pytest.raises(NotImplementedError):
             client.with_structured_output(_Sample)
 
-    def test_with_structured_output_works_for_v4(self):
-        """V4 flash is non-thinking and can still use tool_choice."""
+    @pytest.mark.parametrize("model", ["deepseek-v4-flash", "deepseek-v4-pro"])
+    def test_with_structured_output_works_for_v4(self, model):
+        """Both V4 models support tool_choice in thinking mode."""
         client = DeepSeekChatOpenAI(
-            model="deepseek-v4-flash",
+            model=model,
             api_key="placeholder",
             base_url="https://api.deepseek.com",
         )
@@ -152,19 +153,19 @@ class TestDeepSeekReasonerStructuredOutput:
         wrapped = client.with_structured_output(_Sample)
         assert wrapped is not None
 
-    def test_with_structured_output_raises_for_v4_pro_thinking(self):
-        client = DeepSeekChatOpenAI(
-            model="deepseek-v4-pro",
+    def test_v4_request_carries_explicit_thinking_and_effort(self):
+        client = OpenAIClient(
+            "deepseek-v4-flash",
+            provider="deepseek",
             api_key="placeholder",
-            base_url="https://api.deepseek.com",
-        )
-        from pydantic import BaseModel
+            extra_body={"thinking": {"type": "enabled"}},
+            reasoning_effort="high",
+        ).get_llm()
 
-        class _Sample(BaseModel):
-            answer: str
+        payload = client._get_request_payload("analyze")
 
-        with pytest.raises(NotImplementedError):
-            client.with_structured_output(_Sample)
+        assert payload["extra_body"] == {"thinking": {"type": "enabled"}}
+        assert payload["reasoning_effort"] == "high"
 
 
 # ---------------------------------------------------------------------------

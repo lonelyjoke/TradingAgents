@@ -1,3 +1,4 @@
+from tradingagents.dataflows import prompt_compaction
 from tradingagents.dataflows.prompt_compaction import (
     compact_for_prompt,
     compact_state_fields,
@@ -51,6 +52,25 @@ def test_compact_state_fields_returns_compacted_copy_without_mutating_state():
     assert compacted["commodity_context"] == "short commodity context"
     assert len(compacted["thematic_catalyst_context"]) < len(long_context)
     assert state["thematic_catalyst_context"] == long_context
+
+
+def test_compact_state_fields_enforces_role_level_total_budget(monkeypatch):
+    monkeypatch.setattr(prompt_compaction, "_profile_total_limit", lambda _profile: 4000)
+    state = {
+        "company_business_model_context": "# Company model\n" + ("core economics\n" * 500),
+        "filing_intelligence_context": "# Filing\n" + ("reported revenue and profit\n" * 500),
+        "thematic_catalyst_context": "# Theme\n" + ("routine narrative\n" * 500),
+    }
+
+    compacted = compact_state_fields(
+        state,
+        profile="portfolio",
+        keys=set(state),
+    )
+
+    assert sum(len(value) for value in compacted.values()) <= 4000
+    assert "Company model" in compacted["company_business_model_context"]
+    assert "Filing" in compacted["filing_intelligence_context"]
 
 
 def test_gated_prompt_sections_keeps_only_triggered_sector_layers():

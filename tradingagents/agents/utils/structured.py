@@ -119,6 +119,15 @@ the schema.
     return f"{prompt}{instruction}"
 
 
+class SchemaPromptValidationError(ValueError):
+    """Keep the model's invalid JSON so repair does not repeat the full prompt."""
+
+    def __init__(self, message: str, raw_response: str, cause: Exception):
+        super().__init__(message)
+        self.raw_response = raw_response
+        self.cause = cause
+
+
 class SchemaPromptStructured:
     """Schema-validated JSON generation without provider tool_choice."""
 
@@ -130,7 +139,76 @@ class SchemaPromptStructured:
 
     def invoke(self, prompt: Any) -> T:
         response = self.llm.invoke(_schema_prompt(prompt, self.schema))
-        return self.schema.model_validate(_json_object(_response_text(response)))
+        raw_response = _response_text(response)
+        try:
+            return self.schema.model_validate(_json_object(raw_response))
+        except Exception as exc:
+            raise SchemaPromptValidationError(
+                "schema-prompt response failed validation:\n"
+                + _compact_validation_error(exc),
+                raw_response,
+                exc,
+            ) from exc
+
+
+def _schema_repair_contract(schema: type[T], exc: Exception) -> dict[str, Any]:
+    """Return the smallest useful schema fragment for a validation repair."""
+
+    full_schema = schema.model_json_schema()
+    errors = getattr(exc, "errors", None)
+    if not callable(errors):
+        return full_schema
+    try:
+        details = errors(include_url=False, include_context=False)
+    except TypeError:
+        details = errors()
+    fields = {
+        str(row.get("loc", ())[0])
+        for row in details
+        if row.get("loc") and isinstance(row.get("loc", ())[0], str)
+    }
+    properties = full_schema.get("properties", {})
+    if not fields or len(fields) > 10 or not fields.issubset(properties):
+        return full_schema
+
+    selected = {name: properties[name] for name in properties if name in fields}
+    contract: dict[str, Any] = {
+        "type": full_schema.get("type", "object"),
+        "properties": selected,
+        "required": [
+            name for name in full_schema.get("required", []) if name in fields
+        ],
+    }
+    if "additionalProperties" in full_schema:
+        contract["additionalProperties"] = full_schema["additionalProperties"]
+
+    definitions = full_schema.get("$defs", {})
+    referenced: set[str] = set()
+
+    def collect_refs(value: Any) -> None:
+        if isinstance(value, dict):
+            ref = value.get("$ref")
+            if isinstance(ref, str) and ref.startswith("#/$defs/"):
+                name = ref.rsplit("/", 1)[-1]
+                if name not in referenced:
+                    referenced.add(name)
+                    collect_refs(definitions.get(name, {}))
+            for child in value.values():
+                collect_refs(child)
+        elif isinstance(value, list):
+            for child in value:
+                collect_refs(child)
+
+    collect_refs(selected)
+    if referenced:
+        contract["$defs"] = {
+            name: definitions[name] for name in definitions if name in referenced
+        }
+    return contract
+
+
+def _validation_cause(exc: Exception) -> Exception:
+    return exc.cause if isinstance(exc, SchemaPromptValidationError) else exc
 
 
 def _is_thinking_tool_choice_error(exc: Exception) -> bool:
@@ -182,6 +260,8 @@ def invoke_structured_or_freetext(
     shape). The same value is forwarded to the free-text path so the
     fallback sees the same input the structured call did.
     """
+    retained_invalid_response = ""
+    retained_validation_error: Exception | None = None
     if structured_llm is not None:
         try:
             result = structured_llm.invoke(prompt)
@@ -195,6 +275,9 @@ def invoke_structured_or_freetext(
             return (rendered, metadata) if return_metadata else rendered
         except Exception as exc:
             structured_error = str(exc)
+            if isinstance(exc, SchemaPromptValidationError):
+                retained_invalid_response = exc.raw_response
+                retained_validation_error = exc.cause
             if fallback_schema is not None and _is_thinking_tool_choice_error(exc):
                 try:
                     runner = SchemaPromptStructured(plain_llm, fallback_schema)
@@ -209,6 +292,9 @@ def invoke_structured_or_freetext(
                     return (rendered, metadata) if return_metadata else rendered
                 except Exception as schema_prompt_error:
                     structured_error += f"; schema prompt={schema_prompt_error}"
+                    if isinstance(schema_prompt_error, SchemaPromptValidationError):
+                        retained_invalid_response = schema_prompt_error.raw_response
+                        retained_validation_error = schema_prompt_error.cause
             logger.warning(
                 "%s: structured-output invocation failed (%s); retrying once as free text",
                 agent_name, exc,
@@ -216,8 +302,11 @@ def invoke_structured_or_freetext(
     else:
         structured_error = "structured output binding unavailable"
 
-    response = plain_llm.invoke(prompt)
-    content = _response_text(response)
+    if retained_invalid_response:
+        content = retained_invalid_response
+    else:
+        response = plain_llm.invoke(prompt)
+        content = _response_text(response)
     repair_error = ""
     if fallback_schema is not None:
         try:
@@ -232,16 +321,19 @@ def invoke_structured_or_freetext(
             return (rendered, metadata) if return_metadata else rendered
         except Exception as first_repair_error:
             latest_text = content
-            latest_error: Exception = first_repair_error
+            latest_error: Exception = retained_validation_error or first_repair_error
             repair_failures = [f"fallback validation={first_repair_error}"]
             # A first repair often leaves only one or two enum/missing-field
             # errors. Feed those exact paths back once more instead of throwing
             # away an otherwise schema-complete response and publishing raw JSON.
             for attempt in range(1, 3):
+                repair_contract = _schema_repair_contract(
+                    fallback_schema, _validation_cause(latest_error)
+                )
                 repair_prompt = f"""Your previous response did not validate against the required schema.
 
 Return exactly one valid JSON object with no Markdown fences or commentary. Preserve the analysis and values already present. Do not add unsupported facts. Correct every listed validation issue. Required JSON Schema:
-{json.dumps(fallback_schema.model_json_schema(), ensure_ascii=False, separators=(',', ':'))}
+{json.dumps(repair_contract, ensure_ascii=False, separators=(',', ':'))}
 {_configured_language_repair_instruction()}
 
 Validation issues from the previous response:

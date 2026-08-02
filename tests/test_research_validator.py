@@ -109,6 +109,45 @@ def test_official_guidance_requires_numeric_extraction_before_forecast(tmp_path)
     assert [issue.section for issue in issues] == ["official_guidance_extraction"]
 
 
+def test_peer_half_year_news_does_not_trigger_target_guidance_gate(tmp_path):
+    report_dir = tmp_path / "603345.SH_安井食品_20260723_192154"
+    report_dir.mkdir()
+    _write_guidance_reconciliation_fixture(
+        report_dir,
+        forecast_text=(
+            "## Official Earnings Guidance Override\n"
+            "| supplied official evidence | required model treatment |\n"
+            "| / 2026-07-22 / 新浪财经 / 洽洽食品上半年净利润预增近两倍？ / "
+            "| reconcile Q1, implied Q2, H1, H2 and FY |\n"
+            "| Treat official earnings guidance and performance previews as hard evidence "
+            "for half-year forecasts. | required model treatment |"
+        ),
+        scenarios=[],
+    )
+
+    assert audit_official_guidance_forecast_reconciliation(report_dir, "") == []
+
+
+def test_guidance_control_target_mismatch_blocks_publication(tmp_path):
+    report_dir = tmp_path / "603345.SH_安井食品_20260723_192154"
+    report_dir.mkdir()
+    _write_guidance_reconciliation_fixture(
+        report_dir,
+        forecast_text=(
+            "## Official Earnings Guidance Override\n"
+            "OFFICIAL_GUIDANCE_DISCLOSURE: target=002557.SZ; "
+            "source_scope=company_announcement; numeric_record_status=missing\n"
+            "2026年半年度业绩预告"
+        ),
+        scenarios=[],
+    )
+
+    issues = audit_official_guidance_forecast_reconciliation(report_dir, "")
+
+    assert [issue.section for issue in issues] == ["official_guidance_extraction"]
+    assert "target mismatch" in issues[0].issue
+
+
 def test_official_h1_guidance_blocks_unreconciled_lower_full_year_scenarios(tmp_path):
     _write_guidance_reconciliation_fixture(
         tmp_path,

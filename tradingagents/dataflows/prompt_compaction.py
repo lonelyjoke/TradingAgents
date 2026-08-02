@@ -166,6 +166,72 @@ _PROFILE_MULTIPLIER = {
 }
 
 
+_CONTEXT_PRIORITY = (
+    "company_business_model_context",
+    "filing_intelligence_context",
+    "earnings_model_context",
+    "forecast_model_context",
+    "thesis_question_context",
+    "industry_cycle_context",
+    "industry_kpi_context",
+    "knowledge_planet_context",
+    "market_expectation_context",
+    "quality_audit_context",
+    "peer_comparison_context",
+    "supply_chain_comparison_context",
+    "company_events_context",
+    "management_capital_allocation_context",
+    "commodity_context",
+    "relative_strength_context",
+    "price_move_attribution_context",
+    "shareholder_structure_context",
+    "investor_interaction_context",
+    "policy_planning_context",
+    "web_fact_check_context",
+    "thematic_catalyst_context",
+    "intraday_behavior_context",
+    "shipping_context",
+    "price_earnings_decomposition_context",
+    "data_coverage_context",
+    "baijiu_context",
+    "compute_leasing_context",
+    "dividend_defensive_context",
+    "building_materials_context",
+    "consumer_staples_context",
+    "optical_module_context",
+    "biopharma_context",
+    "software_context",
+    "insurance_context",
+    "medical_device_context",
+    "metals_mining_context",
+)
+
+
+def _profile_total_limit(profile: str) -> int:
+    config = get_config()
+    defaults = {
+        "analyst": 72000,
+        "research": 64000,
+        "trader": 28000,
+        "risk": 18000,
+        "portfolio": 80000,
+    }
+    default = defaults.get(profile, 64000)
+    try:
+        configured = int(
+            config.get(f"prompt_context_total_chars_{profile}", default) or default
+        )
+    except (TypeError, ValueError):
+        configured = default
+    return max(configured, 12000)
+
+
+def _ordered_context_keys(selected: Iterable[str]) -> list[str]:
+    selected_set = set(selected)
+    priority = [key for key in _CONTEXT_PRIORITY if key in selected_set]
+    return [*priority, *sorted(selected_set - set(priority))]
+
+
 def _enabled() -> bool:
     return bool(get_config().get("prompt_context_compaction_enabled", True))
 
@@ -300,12 +366,62 @@ def compact_state_fields(
     profile: str,
     keys: set[str] | None = None,
 ) -> dict[str, str]:
-    """Return compacted copies of selected state text fields."""
+    """Return compacted state fields under one role-level aggregate budget.
+
+    Per-field limits alone still let thirty individually reasonable contexts
+    form a very expensive prompt. The aggregate pass retains every output key,
+    prioritizes company/model/evidence contexts, boosts actually-triggered
+    sector packs, and compacts lower-priority contexts more aggressively.
+    """
     selected = keys or _CONTEXT_KEYS
-    return {
-        key: compact_for_prompt(str(state.get(key, "") or ""), label=key, profile=profile)
-        for key in selected
+    ordered = _ordered_context_keys(selected)
+    raw = {key: str(state.get(key, "") or "") for key in ordered}
+    compacted = {
+        key: compact_for_prompt(value, label=key, profile=profile)
+        for key, value in raw.items()
     }
+    total_limit = _profile_total_limit(profile)
+    if sum(len(value) for value in compacted.values()) <= total_limit:
+        return {key: compacted.get(key, "") for key in selected}
+
+    active = [key for key in ordered if raw[key]]
+    if not active:
+        return {key: "" for key in selected}
+    weights: dict[str, float] = {}
+    for index, key in enumerate(active):
+        preferred = float(prompt_limit(key, profile))
+        priority_boost = 1.35 if index < 10 else 1.0
+        triggered_boost = (
+            1.45
+            if re.search(r"(?im)^\s*-?\s*status\s*[:：]\s*triggered\b", raw[key])
+            else 1.0
+        )
+        weights[key] = preferred * priority_boost * triggered_boost
+    total_weight = sum(weights.values()) or 1.0
+    result = {key: "" for key in selected}
+    remaining = total_limit
+    for offset, key in enumerate(active):
+        later = len(active) - offset - 1
+        reserve = min(420 * later, max(remaining - 900, 0))
+        proportional = int(total_limit * weights[key] / total_weight)
+        allocation = min(
+            len(compacted[key]),
+            max(700, proportional),
+            max(remaining - reserve, 0),
+        )
+        if allocation <= 0:
+            continue
+        piece = compact_for_prompt(
+            raw[key],
+            label=key,
+            profile=profile,
+            max_chars=allocation,
+        )
+        result[key] = piece[:allocation]
+        remaining -= len(result[key])
+        if remaining <= 0:
+            break
+    return result
 
 
 def compact_analyst_report(text: str, *, profile: str = "research") -> str:

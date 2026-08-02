@@ -4,6 +4,7 @@ from types import SimpleNamespace
 from tradingagents.dataflows.underwriting_packet import (
     CompanyOperatingModel,
     CompanyUnderwritingPacket,
+    CompetitionLandscape,
     ForecastLine,
     MoatEvidenceTest,
     ScenarioUnderwriting,
@@ -491,6 +492,44 @@ def test_operating_model_family_surfaces_missing_industry_native_drivers():
     assert "capex/ROIC" in reasons
 
 
+def test_missing_operating_equations_are_partial_not_blocked():
+    packet = CompanyUnderwritingPacket(
+        symbol="000001.SZ",
+        as_of_date="2026-08-01",
+        forecast_years=["2027E", "2028E", "2029E"],
+    )
+
+    checked = _validate_packet(packet, {})
+
+    assert checked.research_readiness == "partial"
+    assert "Company revenue/profit operating equations are missing." in checked.readiness_reasons
+
+
+def test_compact_underwriting_packet_preserves_competition_landscapes():
+    packet = CompanyUnderwritingPacket(
+        symbol="605499.SH",
+        as_of_date="2026-08-01",
+        forecast_years=["2027E", "2028E", "2029E"],
+        competition_landscapes=[
+            CompetitionLandscape(
+                business_unit="energy drinks",
+                market_boundary="China ready-to-drink functional beverages",
+                direct_competitors=["Red Bull"],
+                substitutes_and_customer_alternatives=["coffee", "tea"],
+                company_relative_position="strong lower-price channel challenger",
+                competitor_likely_response="promotion and channel defense",
+                financial_transmission="outlet productivity and promotion affect volume and margin",
+                evidence_status="partial",
+            )
+        ],
+    )
+
+    compact = compact_underwriting_packet(packet.model_dump())
+
+    assert compact["competition_landscapes"][0]["business_unit"] == "energy drinks"
+    assert compact["competition_landscapes"][0]["direct_competitors"] == ["Red Bull"]
+
+
 def test_moat_cannot_be_proven_without_traceable_evidence_id():
     packet = CompanyUnderwritingPacket(
         symbol="600309.SH",
@@ -522,10 +561,14 @@ def test_market_cap_and_close_restore_share_count_and_current_price():
         symbol="600309.SH",
         as_of_date="2026-06-30",
         forecast_years=["2026E", "2027E", "2028E"],
+        readiness_reasons=["缺少稀释后总股本数据，无法计算 EPS 及每股公允价值。"],
         company_model=CompanyOperatingModel(
             model_profile="corporate",
             revenue_equation="volume x price",
             profit_equation="revenue x margin",
+        ),
+        valuation_closure=ValuationClosure(
+            missing_inputs=["missing diluted share count; cannot calculate per-share value"]
         ),
     )
     contexts = {
@@ -538,6 +581,11 @@ def test_market_cap_and_close_restore_share_count_and_current_price():
     assert round(checked.company_model.diluted_share_count_mn or 0, 1) == 3_130.5
     assert checked.valuation_closure.current_price_cny == 68.41
     assert "market cap / close" in checked.company_model.share_count_period
+    assert not any("股本" in reason for reason in checked.readiness_reasons)
+    assert not any(
+        "share count" in reason.lower()
+        for reason in checked.valuation_closure.missing_inputs
+    )
 
 
 def test_market_share_count_overrides_pledge_proxy_and_recalculates_eps():

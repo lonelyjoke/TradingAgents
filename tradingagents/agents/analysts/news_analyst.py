@@ -31,6 +31,7 @@ def create_news_analyst(llm):
                 "web_fact_check_context",
                 "knowledge_planet_context",
                 "data_coverage_context",
+                "company_events_context",
             },
         )
         thematic_catalyst_context = prompt_contexts["thematic_catalyst_context"]
@@ -39,6 +40,7 @@ def create_news_analyst(llm):
         web_fact_check_context = prompt_contexts["web_fact_check_context"]
         knowledge_planet_context = prompt_contexts["knowledge_planet_context"]
         data_coverage_context = prompt_contexts["data_coverage_context"]
+        company_events_context = prompt_contexts["company_events_context"]
 
         is_a_share = is_a_share_symbol(state["company_of_interest"])
         tools = [get_news, get_global_news, get_company_events]
@@ -49,6 +51,11 @@ def create_news_analyst(llm):
             # often rate-limited and lower signal than company/policy events
             # for single-name A-share reports.
             tools = [get_company_events]
+            if (
+                company_events_context
+                and not get_config().get("a_share_agent_tool_requery_enabled", False)
+            ):
+                tools = []
         if not thematic_catalyst_context:
             tools.append(get_thematic_catalyst_context)
 
@@ -94,6 +101,12 @@ def create_news_analyst(llm):
                 else ""
             )
             + (
+                "\n\nPrecomputed ticker-scoped company announcements and events:\n"
+                + company_events_context
+                if company_events_context
+                else ""
+            )
+            + (
                 "\n\nPrecomputed data coverage audit:\n"
                 + data_coverage_context
                 if data_coverage_context
@@ -126,7 +139,7 @@ def create_news_analyst(llm):
         prompt = prompt.partial(current_date=current_date)
         prompt = prompt.partial(instrument_context=instrument_context)
 
-        chain = prompt | llm.bind_tools(tools)
+        chain = prompt | (llm.bind_tools(tools) if tools else llm)
         result = chain.invoke(state["messages"])
 
         report = ""

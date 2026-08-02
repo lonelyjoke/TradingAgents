@@ -119,6 +119,21 @@ DEFAULT_CONFIG = {
     "google_thinking_level": None,      # "high", "minimal", etc.
     "openai_reasoning_effort": None,    # "medium", "high", "low"
     "anthropic_effort": None,           # "high", "medium", "low"
+    # DeepSeek V4 exposes independent thinking controls for Flash and Pro.
+    # Quality-first defaults keep Flash at high for analyst/tool work and Pro
+    # at max for the Research Manager and final Portfolio Manager synthesis.
+    "deepseek_quick_thinking": _env_or_default(
+        "TRADINGAGENTS_DEEPSEEK_QUICK_THINKING", "enabled"
+    ).lower(),
+    "deepseek_quick_reasoning_effort": _env_or_default(
+        "TRADINGAGENTS_DEEPSEEK_QUICK_REASONING_EFFORT", "high"
+    ).lower(),
+    "deepseek_deep_thinking": _env_or_default(
+        "TRADINGAGENTS_DEEPSEEK_DEEP_THINKING", "enabled"
+    ).lower(),
+    "deepseek_deep_reasoning_effort": _env_or_default(
+        "TRADINGAGENTS_DEEPSEEK_DEEP_REASONING_EFFORT", "max"
+    ).lower(),
     # Checkpoint/resume: when True, LangGraph saves state after each node
     # so a crashed run can resume from the last successful step.
     "checkpoint_enabled": False,
@@ -132,6 +147,36 @@ DEFAULT_CONFIG = {
     # Deterministically compact long precomputed contexts before LLM prompt
     # injection. Raw contexts are still kept in state and saved reports.
     "prompt_context_compaction_enabled": True,
+    # Per-call aggregate budgets. Individual contexts keep their own signal-
+    # preserving compaction, then this second ceiling prevents the same broad
+    # research pack from being retransmitted in full to every downstream role.
+    # The reader dossier and canonical structured model are budgeted separately.
+    "prompt_context_total_chars_analyst": _env_int_or_default(
+        "PROMPT_CONTEXT_TOTAL_CHARS_ANALYST", 72000
+    ),
+    "prompt_context_total_chars_research": _env_int_or_default(
+        "PROMPT_CONTEXT_TOTAL_CHARS_RESEARCH", 64000
+    ),
+    "prompt_context_total_chars_trader": _env_int_or_default(
+        "PROMPT_CONTEXT_TOTAL_CHARS_TRADER", 28000
+    ),
+    "prompt_context_total_chars_risk": _env_int_or_default(
+        "PROMPT_CONTEXT_TOTAL_CHARS_RISK", 18000
+    ),
+    "prompt_context_total_chars_portfolio": _env_int_or_default(
+        "PROMPT_CONTEXT_TOTAL_CHARS_PORTFOLIO", 80000
+    ),
+    # A-share contexts are fetched once before the graph starts. Re-querying
+    # the same Tushare/filing/event tools inside analysts adds calls and tokens
+    # without adding fresher evidence. Operators can opt back in for diagnosis.
+    "a_share_agent_tool_requery_enabled": _env_bool_or_default(
+        "A_SHARE_AGENT_TOOL_REQUERY_ENABLED", False
+    ),
+    # A second deep-model editorial opinion is useful only when deterministic
+    # checks identify a repair target. "always" restores the legacy extra pass.
+    "pm_editorial_review_mode": _env_or_default(
+        "PM_EDITORIAL_REVIEW_MODE", "on_issues"
+    ).lower(),
     # Convert heterogeneous Markdown contexts into a typed JSON research bundle
     # before analysts run. The quick model performs semantic extraction while
     # deterministic validation checks grounding, periods, units, probabilities,
@@ -193,6 +238,10 @@ DEFAULT_CONFIG = {
     # the filing pipeline, but Knowledge Planet image/audio/file/PDF
     # attachments are neither downloaded nor read.
     "knowledge_planet_enabled": True,
+    # Governance boundary: research may consume only the 前沿信息收录 planet.
+    # This tuple is intentionally not environment-overridable; changing it is
+    # a reviewed code/config decision rather than an accidental runtime flag.
+    "knowledge_planet_allowed_group_ids": ("28888112822211",),
     "knowledge_planet_text_only": _env_bool_or_default(
         "KNOWLEDGE_PLANET_TEXT_ONLY",
         True,
@@ -219,6 +268,26 @@ DEFAULT_CONFIG = {
     "knowledge_planet_auto_sync_group": _env_or_default(
         "KNOWLEDGE_PLANET_AUTO_SYNC_GROUP",
         "28888112822211:前沿信息收录",
+    ),
+    "knowledge_planet_external_links_enabled": _env_bool_or_default(
+        "KNOWLEDGE_PLANET_EXTERNAL_LINKS",
+        True,
+    ),
+    "knowledge_planet_external_link_allowed_domains": (
+        "note.youdao.com",
+        "mp.weixin.qq.com",
+    ),
+    "knowledge_planet_external_link_timeout_sec": _env_int_or_default(
+        "KNOWLEDGE_PLANET_EXTERNAL_LINK_TIMEOUT_SEC",
+        12,
+    ),
+    "knowledge_planet_external_link_max_bytes": _env_int_or_default(
+        "KNOWLEDGE_PLANET_EXTERNAL_LINK_MAX_BYTES",
+        600_000,
+    ),
+    "knowledge_planet_external_link_max_per_topic": _env_int_or_default(
+        "KNOWLEDGE_PLANET_EXTERNAL_LINK_MAX_PER_TOPIC",
+        3,
     ),
     "knowledge_planet_auto_sync_max_pages": _env_int_or_default(
         "KNOWLEDGE_PLANET_AUTO_SYNC_MAX_PAGES",

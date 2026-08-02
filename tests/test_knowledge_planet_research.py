@@ -19,6 +19,39 @@ def test_explicit_broker_note_is_not_upgraded_to_private_channel_check():
     assert kp.infer_private_source_type(text, "raw_note") == "sell_side_push"
 
 
+def test_frontier_group_filter_rejects_explicit_other_planet_lineage():
+    def item(text: str) -> kp.KpItem:
+        return kp.KpItem(
+            row_id=1,
+            title="topic",
+            text=text,
+            summary="",
+            source_type="raw_note",
+            credibility="",
+            published_at="2026-08-01",
+            author="analyst",
+            source_file="sync.md",
+            tickers=(),
+            companies=(),
+            industries=(),
+            themes=(),
+        )
+
+    assert kp._item_is_from_allowed_group(item("source: zsxq\ngroup_id: 28888112822211"))
+    assert not kp._item_is_from_allowed_group(item("source: zsxq\ngroup_id: 999999"))
+    assert kp._item_is_from_allowed_group(item("legacy row without group metadata"))
+
+
+def test_sell_side_source_is_upweighted_but_keeps_optimism_bias():
+    reliability, bias, ceiling = kp._source_assessment(
+        "sell_side_push", "identified_broker_private_text"
+    )
+
+    assert reliability == "B_identified_professional"
+    assert bias == "sell_side_optimism"
+    assert ceiling == "model_input_after_crosscheck"
+
+
 def _make_db(path: Path) -> None:
     conn = sqlite3.connect(path)
     conn.executescript(
@@ -669,11 +702,11 @@ def test_preprocess_cache_check_returns_before_loading_details(tmp_path, monkeyp
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """,
         (
-                "2026-06-14:2026-06-20:v4:text:"
+                "2026-06-14:2026-06-20:v5:text:"
                 + hashlib.sha1("0|".encode("utf-8")).hexdigest()[:12],
             "2026-06-14",
             "2026-06-20",
-                4,
+                5,
             0,
             0,
             0,

@@ -60,3 +60,44 @@ def test_deterministic_guidance_rejects_semantic_prior_period_column_shift():
     assert retained_conflicts == []
     assert any("rejected 2026H1" in error for error in errors)
     assert any("resolved semantic guidance conflict" in error for error in errors)
+
+
+def test_broad_peer_news_is_not_reparsed_as_target_official_guidance():
+    metrics = [
+        {
+            "segment": "consolidated",
+            "variable": "net_profit_parent",
+            "value": 1_680.0,
+            "value_text": "1680 CNY mn",
+            "unit": "CNY mn",
+            "period": "2026E",
+            "source_module": "earnings_model",
+            "evidence_status": "estimated",
+            "model_role": "forecast",
+            "control_flags": [],
+        }
+    ]
+    contexts = {
+        "company_events": (
+            "# Tushare A-share event research for 603345.SH\n"
+            "- Company: 安井食品\n"
+            "## Company And Industry News\n"
+            "洽洽食品2026年半年度业绩预告：预计归母净利润为90,000万元。"
+        )
+    }
+    errors: list[str] = []
+
+    controlled, retained_conflicts = _apply_official_guidance_control(
+        metrics,
+        [],
+        contexts,
+        errors,
+    )
+
+    assert controlled == metrics
+    assert retained_conflicts == []
+    assert errors == []
+    assert not any(
+        "official_current_period_source_of_truth" in row.get("control_flags", [])
+        for row in controlled
+    )

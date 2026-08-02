@@ -128,4 +128,12 @@ class AgentState(MessagesState):
         dict,
         "Advisory sell-side editor review and bounded PM revision trace",
     ]
+    pm_internal_overflow: Annotated[
+        str,
+        "Detailed PM workbench appendix removed from the reader-facing memo",
+    ]
+    pm_full_decision: Annotated[
+        str,
+        "Full PM report before public/internal appendix separation",
+    ]
     past_context: Annotated[str, "Memory log context injected at run start (same-ticker decisions + cross-ticker lessons)"]

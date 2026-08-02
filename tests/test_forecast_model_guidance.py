@@ -17,6 +17,7 @@ def test_forecast_model_context_promotes_official_earnings_guidance():
     )
 
     assert "Official Earnings Guidance Override" in context
+    assert "OFFICIAL_GUIDANCE_DISCLOSURE: target=000933.SZ" in context
     assert "480,000.00 CNY mn" in context
     assert "reconcile Q1, implied Q2, H1, H2, full-year parent profit/EPS" in context
 
@@ -32,6 +33,44 @@ def test_forecast_model_context_does_not_promote_generic_guidance_rule():
     )
 
     assert "Official Earnings Guidance Override" not in context
+
+
+def test_forecast_model_does_not_promote_peer_guidance_from_general_news():
+    context = build_forecast_model_context(
+        "603345.SH",
+        "2026-07-23",
+        company_events_context="\n".join(
+            [
+                "# Tushare A-share event research for 603345.SH as of 2026-07-23",
+                "- Company: 安井食品",
+                "## Company Announcements",
+                "No official earnings guidance announcement found.",
+                "## Company And Industry News",
+                "### News Feed Matches",
+                "/ 2026-07-22 / 新浪财经 / 洽洽食品上半年净利润预增近两倍？ /",
+                "## Analyst Instructions",
+                "- Treat official earnings guidance, performance previews, and quick reports as harder evidence.",
+            ]
+        ),
+    )
+
+    assert "Official Earnings Guidance Override" not in context
+    assert "洽洽食品" not in context
+
+
+def test_packaged_food_forecast_requires_product_cost_and_cash_bridge():
+    context = build_forecast_model_context(
+        "603345.SH",
+        "2026-07-23",
+        company_business_model_context=(
+            "安井食品主营速冻食品，覆盖火锅料、米面制品、菜肴制品和经销渠道。"
+        ),
+    )
+
+    assert "Consumer-Staples Product, Cost And Cash Controls" in context
+    assert "Raw-material bridge" in context
+    assert "Subsidiaries / acquisitions" in context
+    assert "Three-year closure" in context
 
 
 def test_business_line_agenda_starts_from_financial_report_revenue_mix():

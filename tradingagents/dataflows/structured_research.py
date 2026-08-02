@@ -18,6 +18,10 @@ from typing import Any, Literal, Mapping
 from pydantic import BaseModel, Field
 
 from .research_evidence import extract_evidence_records
+from .research_dossier import (
+    build_reader_research_dossier,
+    compact_reader_research_dossier,
+)
 from .official_guidance import (
     official_guidance_record,
     parse_official_guidance_record,
@@ -194,7 +198,10 @@ def _apply_official_guidance_control(
         str(contexts.get(key, "") or "")
         for key in ("company_events", "forecast_model")
     )
-    guidance = parse_official_guidance_record(guidance_text)
+    guidance = parse_official_guidance_record(
+        guidance_text,
+        allow_raw_fallback=False,
+    )
     period = str(guidance.get("period", "") or "")
     record = official_guidance_record(guidance)
     if not period or not record:
@@ -316,6 +323,9 @@ def _known_kpe_rows(text: str) -> dict[str, dict[str, str]]:
             "verification": cells[7],
             "affected_variable": cells[8] if len(cells) > 8 else "",
             "required_outcome": cells[9] if len(cells) > 9 else "",
+            "source_reliability": cells[10] if len(cells) > 10 else "C_private_unverified",
+            "bias_profile": cells[11] if len(cells) > 11 else "unknown",
+            "adoption_ceiling": cells[12] if len(cells) > 12 else "scenario_or_verification_only",
         }
     return rows
 
@@ -1125,6 +1135,12 @@ def build_structured_research_bundle(
         enable_llm=enable_underwriting,
         max_prompt_chars=underwriting_prompt_max_chars,
     )
+    bundle["research_dossier"] = build_reader_research_dossier(
+        symbol,
+        str(as_of_date),
+        structured_research=bundle,
+        contexts=contexts,
+    )
     return bundle
 
 
@@ -1140,6 +1156,10 @@ def compact_structured_research_for_prompt(
         "symbol": bundle.get("symbol"),
         "as_of_date": bundle.get("as_of_date"),
         "preprocessing_mode": bundle.get("preprocessing_mode"),
+        "research_dossier": compact_reader_research_dossier(
+            bundle.get("research_dossier", {}),
+            max_chars=min(15000, max(8000, max_chars // 2)),
+        ),
         "company_summary": bundle.get("company_summary"),
         "segments": list(bundle.get("segments", []))[:10],
         "semantic_metrics": list(bundle.get("semantic_metrics", []))[:40],
@@ -1172,5 +1192,16 @@ def compact_structured_research_for_prompt(
                 continue
             while values and len(rendered) > max_chars:
                 values.pop()
-                rendered = json.dumps(compact, ensure_ascii=False, separators=(",", ":"))
+            rendered = json.dumps(compact, ensure_ascii=False, separators=(",", ":"))
+    # The dossier is the reader-facing routing layer and is intentionally kept
+    # ahead of the raw evidence arrays.  Only after the workbench arrays and
+    # packet detail have been compacted do we trim secondary dossier detail.
+    if len(rendered) > max_chars and isinstance(compact.get("research_dossier"), dict):
+        dossier = compact["research_dossier"]
+        dossier.pop("source_policy", None)
+        for key in ("industry_chain", "profit_pools", "competition_and_moat"):
+            if len(rendered) <= max_chars:
+                break
+            dossier.pop(key, None)
+            rendered = json.dumps(compact, ensure_ascii=False, separators=(",", ":"))
     return rendered

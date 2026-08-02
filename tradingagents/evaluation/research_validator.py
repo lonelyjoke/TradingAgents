@@ -491,14 +491,55 @@ def audit_official_guidance_forecast_reconciliation(
         next_section = re.search(r"^##\s+", guidance_section, re.M)
         if next_section:
             guidance_section = guidance_section[:next_section.start()]
-    has_official_h1_guidance = bool(
+    explicit_h1_announcement = bool(
         re.search(r"(?:业绩预告|业绩预增|performance preview|earnings guidance)", guidance_section, re.I)
         and re.search(r"(?:半年度|半年|H1|half-year)", guidance_section, re.I)
+        and re.search(r"(?:公告|公司预计|announcement|preannouncement|preview)", guidance_section, re.I)
+    )
+    guidance_metrics = parse_official_guidance_record(guidance_section)
+    parsed_parent_profit = guidance_metrics.get("parent_net_profit_cny_mn")
+    disclosure_control = re.search(
+        r"OFFICIAL_GUIDANCE_DISCLOSURE:\s*target=([^;\s]+);"
+        r"\s*source_scope=company_announcement;"
+        r"\s*numeric_record_status=(parsed|missing)",
+        guidance_section,
+        re.I,
+    )
+    report_name_parts = report_path.name.split("_")
+    report_symbol = (
+        report_name_parts[0].upper()
+        if report_name_parts and re.fullmatch(r"\d{6}\.(?:SH|SZ|BJ)", report_name_parts[0], re.I)
+        else ""
+    )
+    report_company_name = (
+        report_name_parts[1]
+        if report_symbol
+        and len(report_name_parts) >= 3
+        and not re.fullmatch(r"\d{8}", report_name_parts[1])
+        else ""
+    )
+    if disclosure_control and report_symbol:
+        controlled_target = disclosure_control.group(1).upper()
+        if controlled_target not in {report_symbol, "UNSPECIFIED"}:
+            return [
+                DecisionDepthIssue(
+                    "official_guidance_extraction",
+                    "error",
+                    f"official-guidance target mismatch: forecast control={controlled_target}, report={report_symbol}",
+                )
+            ]
+    target_matches_legacy_section = bool(
+        not report_company_name
+        or report_company_name.lower() in guidance_section.lower()
+        or (report_symbol and report_symbol in guidance_section.upper())
+    )
+    has_official_h1_guidance = bool(
+        disclosure_control
+        or parsed_parent_profit is not None
+        or (explicit_h1_announcement and target_matches_legacy_section)
     )
     if not has_official_h1_guidance:
         return []
-    guidance_metrics = parse_official_guidance_record(guidance_section)
-    parsed_parent_profit = guidance_metrics.get("parent_net_profit_cny_mn")
     # Once a deterministic record exists, never mix it with raw table values:
     # raw PDF text can contain the prior-period comparison beside the label.
     guidance_values = (
@@ -1243,30 +1284,35 @@ def _heading_text(text: str, heading: str) -> str:
     aliases = {
         "Company Disaggregation": (
             "Company Disaggregation",
+            "一、公司是谁、如何赚钱",
             "二、公司业务与利润池拆解",
             "二、业务模式、分部经济与增长来源",
             "二、公司画像、商业模式与利润池",
         ),
         "Autonomous Three-Year Forecast Model": (
             "Autonomous Three-Year Forecast Model",
+            "五、增长逻辑、关键分歧与盈利预测",
             "四、三年盈利及现金流预测",
             "六、盈利预测、关键假设与敏感性",
             "六、盈利预测与关键变量",
         ),
         "Thesis-to-Financial Bridge": (
             "Thesis-to-Financial Bridge",
+            "五、增长逻辑、关键分歧与盈利预测",
             "五、核心论点、护城河与财务传导",
             "五、核心投资逻辑与反方检验",
             "五、核心投资逻辑与关键分歧",
         ),
         "Moat Evidence Scorecard": (
             "Moat Evidence Scorecard",
+            "四、竞争优势、护城河与主要短板",
             "五、核心论点、护城河与财务传导",
             "三、行业结构、周期位置与竞争优势",
             "三、行业格局、竞争优势与护城河",
         ),
         "Valuation Closure": (
             "Valuation Closure",
+            "七、估值、评级与投资结论",
             "七、估值、情景与预期收益",
             "七、市场预期、估值与情景回报",
             "七、市场预期差与估值",
@@ -3868,12 +3914,12 @@ def audit_report_depth(report_dir: str | Path) -> pd.DataFrame:
     public_h2_count = sum(
         1 for line in decision_text.splitlines() if line.startswith("## ")
     )
-    if public_h2_count != 8:
+    if public_h2_count != 7:
         issues.append(
             DecisionDepthIssue(
                 "pm_format_contract",
                 "warning",
-                "public PM renderer should emit exactly eight fixed H2 sections; "
+                "public PM renderer should emit exactly seven fixed H2 chapters; "
                 f"got sections={public_h2_count}. Re-render from the validated PM payload.",
             )
         )

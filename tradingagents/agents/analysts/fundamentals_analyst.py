@@ -78,7 +78,10 @@ from tradingagents.agents.utils.agent_utils import (
 )
 from tradingagents.dataflows.tushare_a_stock import is_a_share_symbol
 from tradingagents.dataflows.config import get_config
-from tradingagents.dataflows.prompt_compaction import compact_state_fields
+from tradingagents.dataflows.prompt_compaction import (
+    compact_state_fields,
+    gated_prompt_sections,
+)
 from tradingagents.dataflows.structured_research import compact_structured_research_for_prompt
 
 
@@ -161,6 +164,21 @@ def create_fundamentals_analyst(llm):
         structured_research_context = compact_structured_research_for_prompt(
             state.get("structured_research_context", {}),
         )
+        gated_sector_context, gated_sector_instructions = gated_prompt_sections(
+            [
+                ("Baijiu", baijiu_context, get_baijiu_instruction),
+                ("Compute leasing", compute_leasing_context, get_compute_leasing_instruction),
+                ("Dividend defensive", dividend_defensive_context, get_dividend_defensive_instruction),
+                ("Building materials", building_materials_context, get_building_materials_instruction),
+                ("Consumer staples", consumer_staples_context, get_consumer_staples_instruction),
+                ("Optical module", optical_module_context, get_optical_module_instruction),
+                ("Biopharma", biopharma_context, get_biopharma_instruction),
+                ("Software", software_context, get_software_instruction),
+                ("Insurance", insurance_context, get_insurance_instruction),
+                ("Medical device", medical_device_context, get_medical_device_instruction),
+                ("Metals/mining", metals_mining_context, get_metals_mining_instruction),
+            ]
+        )
         is_a_share = is_a_share_symbol(state["company_of_interest"])
 
         tools = [
@@ -230,6 +248,32 @@ def create_fundamentals_analyst(llm):
             tools.append(get_medical_device_context)
         if is_a_share and not raw_metals_mining_context:
             tools.append(get_metals_mining_context)
+        if (
+            is_a_share
+            and state.get("structured_research_context")
+            and raw_earnings_model_context
+            and raw_filing_intelligence_context
+            and not get_config().get("a_share_agent_tool_requery_enabled", False)
+        ):
+            # These are the same real Tushare/filing inputs exposed by the core
+            # financial tools, already validated and routed into the dossier.
+            # Keep any genuinely missing specialist context tool available.
+            # ``StructuredTool`` instances are intentionally mutable and are
+            # therefore unhashable.  Compare their identities via integer IDs
+            # instead of placing the tool objects themselves in a set.
+            duplicate_core_tool_ids = {
+                id(tool)
+                for tool in (
+                    get_fundamentals,
+                    get_balance_sheet,
+                    get_cashflow,
+                    get_income_statement,
+                    get_valuation_percentiles,
+                    get_market_sector_risk,
+                    get_market_timing_context,
+                )
+            }
+            tools = [tool for tool in tools if id(tool) not in duplicate_core_tool_ids]
 
         system_message = (
             "You are a buy-side fundamental researcher. Write a focused investment memo, not an exhaustive data dump. "
@@ -245,12 +289,12 @@ def create_fundamentals_analyst(llm):
             "Before forming the thesis, read the filing context in industry order: first identify the sector-native variables that actually decide economics, then inspect the paragraph-level filing evidence around those variables, and only then synthesize generic financial metrics. "
             "Before using words such as `cycle bottom`, `周期底部`, `cycle reversal`, or `景气反转`, first cite the Industry Cycle Scan and say whether the evidence is confirmed, bottom-right validation, bottom-testing, downcycle, or insufficient. "
             "For an unfamiliar company, first explain its disclosed main businesses from the Company Business Model Primer and financial reports, then use the Business Segment Valuation Map / Segment Economics Pack to split mature core businesses, new second-curve businesses, geographies, and channels before discussing valuation. Do not apply one blended PE multiple until you have explained why split valuation is unnecessary. "
-            "The Structured Research Bundle contains a shared `underwriting_packet`. Treat its company model, segment driver chains, company-specific questions, forecast lines and evidence-change rules as the common analytical workbench used by every downstream agent. Your job is to deepen and correct that model, not write an independent narrative. Organize the memo around how the company works, material segment causal chains, the three-year model and unresolved questions. End with a compact `Shared Model Update Ledger` showing forecast/question line, old assumption, new evidence, new assumption, EPS/FCF/value effect, and unchanged/rejected items. "
+            "Read `research_dossier` inside the Structured Research Bundle first. Use its company introduction, industrial-chain map, profit pools, decisive questions, forecast spine, evidence routing and seven chapter packets as the analytical spine; do not recap source modules. Then deepen and correct the shared `underwriting_packet`, whose company model, segment driver chains, questions, forecast lines and evidence-change rules are the common workbench used by every downstream agent. Organize the memo around how the company works, material segment causal chains, the three-year model and unresolved questions. End with a compact `Shared Model Update Ledger` showing forecast/question line, old assumption, new evidence, new assumption, EPS/FCF/value effect, and unchanged/rejected items. "
             "Use the Industry KPI Checklist as the sector-native evidence agenda: state which KPI layers are verified, partial, or missing, and do not turn a missing KPI into a hard positive or negative fact. "
             "Use the Forward Forecast Model Scaffold to produce three explicit forward years (or four forward quarters) connecting segment drivers to the model-profile-appropriate consolidated earnings, cash/capital, asset-quality and per-share lines. Use revenue/margin/net profit/EPS/OCF/capex/FCF for ordinary companies, but bank-, insurance-, securities- or REIT-native drivers for financial/property vehicles. If assumptions are missing, put `missing/not disclosed` in the affected cell, name the required input, and label valuation confidence evidence-limited; a one-year profit range is not a completed forecast bridge. "
             "Use the Sell-Side Depth And Key-Number Audit to police decisive numbers: PE/PB/EV multiples, target price, safety price, dividend yield, margins, ASP, shipments, utilization, backlog, and contract liabilities need formula, source period, and evidence status. "
             "Use the Thesis Question Context as the memo's interrogation agenda: answer the company-specific soul questions before broad positives or negatives, and make unanswered thesis-critical questions explicit research gaps. "
-            "Use Knowledge Planet topic-text intelligence through the Single-Stock Knowledge Fusion Pack first: label private/proxy clues, separate industry data from promotion, and cross-check them against filings, Tushare financials, peers, price/volume, and official announcements before they affect valuation or rating. Cite each used clue by KPE id and give one auditable result: numeric assumption old->new, probability triplet before->after, unchanged/watch with verification gate, or rejected with reason. "
+            "Use Knowledge Planet topic-text intelligence through the Single-Stock Knowledge Fusion Pack and the dossier's pre-routed Knowledge Planet ledger first: label private/proxy clues, separate industry data from promotion, and cross-check them against filings, Tushare financials, peers, price/volume, and official announcements before they affect valuation or rating. Respect the routed role: model_input requires a numeric old->new bridge; probability_adjustment requires a probability triplet; verification_item changes only a dated gate; rejected never enters the thesis. Cite each used clue by KPE id and record the auditable outcome. "
             "For multi-business companies, complete a segment prosperity matrix before assigning a consolidated label. Show each material segment's same-period revenue weight, growth, margin and margin change, then explain demand -> supply/capacity -> ASP/volume -> utilization/mix -> margin -> working capital/cash -> EPS/FCF. Never call a segment fastest-growing without comparing all disclosed segments for the same period. "
             "Keep period and per-share arithmetic explicit: H1 is cumulative Q1+Q2; Q2 single-quarter and H1 thresholds need different labels. Reconcile BVPS=current price/PB, EPS=parent profit/diluted shares, and price=EPSxPE or BVPSxPB before publishing a safety/target price; otherwise withhold the range. "
             "Prioritize: Core Bet, key supporting evidence, key negative evidence, earnings bridge, market-implied expectation, expectation gap, probability/payoff, company quality, current odds, relative allocation, catalysts, falsification signals, and data gaps. "
@@ -278,17 +322,7 @@ def create_fundamentals_analyst(llm):
             + get_policy_planning_instruction()
             + get_web_fact_check_instruction()
             + get_knowledge_planet_instruction()
-            + get_baijiu_instruction()
-            + get_compute_leasing_instruction()
-            + get_dividend_defensive_instruction()
-            + get_building_materials_instruction()
-            + get_consumer_staples_instruction()
-            + get_optical_module_instruction()
-            + get_biopharma_instruction()
-            + get_software_instruction()
-            + get_insurance_instruction()
-            + get_medical_device_instruction()
-            + get_metals_mining_instruction()
+            + gated_sector_instructions
             + get_semiconductor_instruction()
             + get_price_move_attribution_instruction()
             + (
@@ -441,72 +475,8 @@ def create_fundamentals_analyst(llm):
                 if knowledge_planet_context
                 else ""
             )
-            + (
-                "\n\nPrecomputed gated baijiu verification context:\n"
-                + baijiu_context
-                if baijiu_context
-                else ""
-            )
-            + (
-                "\n\nPrecomputed gated compute-leasing verification context:\n"
-                + compute_leasing_context
-                if compute_leasing_context
-                else ""
-            )
-            + (
-                "\n\nPrecomputed gated dividend defensive verification context:\n"
-                + dividend_defensive_context
-                if dividend_defensive_context
-                else ""
-            )
-            + (
-                "\n\nPrecomputed gated building-materials verification context:\n"
-                + building_materials_context
-                if building_materials_context
-                else ""
-            )
-            + (
-                "\n\nPrecomputed gated consumer-staples verification context:\n"
-                + consumer_staples_context
-                if consumer_staples_context
-                else ""
-            )
-            + (
-                "\n\nPrecomputed gated AI optical-module verification context:\n"
-                + optical_module_context
-                if optical_module_context
-                else ""
-            )
-            + (
-                "\n\nPrecomputed gated biopharma verification context:\n"
-                + biopharma_context
-                if biopharma_context
-                else ""
-            )
-            + (
-                "\n\nPrecomputed gated software verification context:\n"
-                + software_context
-                if software_context
-                else ""
-            )
-            + (
-                "\n\nPrecomputed gated insurance verification context:\n"
-                + insurance_context
-                if insurance_context
-                else ""
-            )
-            + (
-                "\n\nPrecomputed gated medical-device verification context:\n"
-                + medical_device_context
-                if medical_device_context
-                else ""
-            )
-            + (
-                "\n\nPrecomputed gated metals/mining verification context:\n"
-                + metals_mining_context
-                if metals_mining_context
-                else ""
-            )
+            + "\n\nTriggered sector-specific verification contexts:\n"
+            + gated_sector_context
             + (
                 "\n\nPrecomputed data coverage audit:\n"
                 + data_coverage_context
@@ -540,7 +510,7 @@ def create_fundamentals_analyst(llm):
         prompt = prompt.partial(current_date=current_date)
         prompt = prompt.partial(instrument_context=instrument_context)
 
-        chain = prompt | llm.bind_tools(tools)
+        chain = prompt | (llm.bind_tools(tools) if tools else llm)
 
         result = chain.invoke(state["messages"])
 

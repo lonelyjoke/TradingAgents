@@ -113,3 +113,60 @@ def test_text_only_attachment_sync_never_requests_file_download_url(tmp_path, mo
     ]
     assert not list(tmp_path.rglob("*.pdf"))
     assert not list(tmp_path.rglob("*.mp3"))
+
+
+def test_only_frontier_information_group_is_allowed():
+    sync.validate_allowed_groups([sync.ZsxqGroup("28888112822211", "前沿信息收录")])
+
+    try:
+        sync.validate_allowed_groups([sync.ZsxqGroup("other-group")])
+    except ValueError as exc:
+        assert "前沿信息收录" in str(exc)
+        assert "other-group" in str(exc)
+    else:
+        raise AssertionError("expected out-of-scope group to be rejected")
+
+
+def test_youdao_public_share_is_extracted_from_encoded_topic_link(monkeypatch):
+    share_key = "b42b29a94073d2c3609f54cc22287771"
+    url = f"https://note.youdao.com/ynoteshare/index.html?id={share_key}&type=note"
+    topic = {"content": f'<e type="web" href="{url.replace("&", "%26")}">北方市场专家</e>'}
+
+    links = sync._public_links_from_topic(topic)
+    assert links[0] == url
+
+    def fake_request_json(request_url, **_kwargs):
+        if "personal/share" in request_url:
+            return {"entry": {"name": "北方市场专家交流"}}
+        return {"content": '{"children":[{"8":"山东终端动销与库存反馈"},{"8":"渠道库存处于正常区间"}]}' }
+
+    monkeypatch.setattr(sync, "_request_json", fake_request_json)
+    result = sync.resolve_public_link(
+        url,
+        allowed_domains={"note.youdao.com"},
+        timeout_sec=3,
+        max_bytes=100_000,
+    )
+
+    assert result.status == "resolved"
+    assert result.title == "北方市场专家交流"
+    assert "山东终端动销" in result.text
+    assert "渠道库存" in result.text
+
+
+def test_public_link_failure_is_a_non_blocking_artifact():
+    result = sync.resolve_public_link(
+        "https://example.com/private-note",
+        allowed_domains={"note.youdao.com"},
+        timeout_sec=1,
+        max_bytes=1024,
+    )
+
+    assert result.status == "skipped"
+    rendered = sync._format_topic_block(
+        {"topic_id": "1", "content": "company research"},
+        sync.ZsxqGroup("28888112822211", "前沿信息收录"),
+        external_link_results=[result],
+    )
+    assert "external_link_status: skipped" in rendered
+    assert "company research" in rendered

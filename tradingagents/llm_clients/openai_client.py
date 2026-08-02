@@ -62,10 +62,10 @@ class DeepSeekChatOpenAI(NormalizedChatOpenAI):
        fails with HTTP 400. ``_create_chat_result`` captures the field on
        receive and ``_get_request_payload`` re-attaches it on send.
 
-    2. **deepseek-reasoner has no tool_choice.** Structured output via
-       function-calling is unavailable, so we raise NotImplementedError
-       and let the agent factories fall back to free-text generation
-       (see ``tradingagents/agents/utils/structured.py``).
+    2. **Legacy deepseek-reasoner compatibility.** The retired legacy alias
+       did not reliably support forced function selection. V4 Flash and Pro
+       both support thinking-mode tools/tool_choice, so only that old alias
+       keeps the schema-prompt fallback.
     """
 
     def _get_request_payload(self, input_, *, stop=None, **kwargs):
@@ -98,20 +98,17 @@ class DeepSeekChatOpenAI(NormalizedChatOpenAI):
 
     def with_structured_output(self, schema, *, method=None, **kwargs):
         model_lower = str(self.model_name or "").lower()
-        if any(
-            token in model_lower
-            for token in ("reasoner", "thinking", "v4-pro")
-        ):
+        if "reasoner" in model_lower and "v4-" not in model_lower:
             raise NotImplementedError(
-                f"{self.model_name} thinking mode does not support tool_choice; "
-                "agent factories must use schema-prompt JSON validation."
+                f"{self.model_name} is a retired legacy reasoner alias; "
+                "use deepseek-v4-flash or deepseek-v4-pro."
             )
         return super().with_structured_output(schema, method=method, **kwargs)
 
 # Kwargs forwarded from user config to ChatOpenAI
 _PASSTHROUGH_KWARGS = (
     "timeout", "max_retries", "reasoning_effort",
-    "api_key", "callbacks", "http_client", "http_async_client",
+    "extra_body", "api_key", "callbacks", "http_client", "http_async_client",
 )
 
 # Provider base URLs and API key env vars

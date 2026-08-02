@@ -29,6 +29,7 @@ for _stream in (sys.stdout, sys.stderr):
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_ROOT = REPO_ROOT / "data" / "knowledge_planet"
+ALLOWED_GROUP_IDS = frozenset({"28888112822211"})
 
 
 @dataclass(frozen=True)
@@ -46,6 +47,15 @@ class AttachmentSyncResult:
     image_failures: int = 0
     files_downloaded: int = 0
     file_failures: int = 0
+
+
+@dataclass(frozen=True)
+class ExternalLinkResult:
+    url: str
+    status: str
+    title: str = ""
+    text: str = ""
+    reason: str = ""
 
 
 def _candidate_zsxq_cli_paths() -> list[Path]:
@@ -404,11 +414,131 @@ def sync_topic_attachments(
     )
 
 
+def _public_links_from_topic(topic: dict[str, Any]) -> list[str]:
+    raw = "\n".join(str(topic.get(key) or "") for key in ("content", "annotation", "title"))
+    candidates: list[str] = []
+    for encoded in re.findall(r"href=[\"']([^\"']+)[\"']", raw, re.I):
+        candidates.append(urllib.parse.unquote(encoded).replace("&amp;", "&"))
+    candidates.extend(re.findall(r"https?://[^\s<>\"']+", raw, re.I))
+    output: list[str] = []
+    for value in candidates:
+        cleaned = value.rstrip(".,;:!?)]}，。；：！？）】")
+        if cleaned and cleaned not in output:
+            output.append(cleaned)
+    return output
+
+
+def _read_limited(response: Any, max_bytes: int) -> bytes:
+    payload = response.read(max(1, int(max_bytes)) + 1)
+    if len(payload) > max_bytes:
+        raise ValueError(f"response exceeds {max_bytes} bytes")
+    return payload
+
+
+def _request_json(url: str, *, timeout_sec: int, max_bytes: int) -> Any:
+    request = urllib.request.Request(
+        url,
+        headers={"User-Agent": "TradingAgents/knowledge-planet-public-link-resolver"},
+    )
+    with urllib.request.urlopen(request, timeout=max(1, timeout_sec)) as response:
+        raw = _read_limited(response, max_bytes)
+    return json.loads(raw.decode("utf-8", errors="replace"))
+
+
+def _collect_youdao_text(value: Any, output: list[str]) -> None:
+    if isinstance(value, str):
+        stripped = value.strip()
+        if stripped.startswith(("{", "[")):
+            try:
+                _collect_youdao_text(json.loads(stripped), output)
+            except json.JSONDecodeError:
+                pass
+        return
+    if isinstance(value, list):
+        for item in value:
+            _collect_youdao_text(item, output)
+        return
+    if not isinstance(value, dict):
+        return
+    text_value = value.get("8")
+    if isinstance(text_value, str):
+        cleaned = _plain_text(text_value).strip()
+        if cleaned and cleaned not in output:
+            output.append(cleaned)
+    for child in value.values():
+        _collect_youdao_text(child, output)
+
+
+def _resolve_youdao_share(url: str, *, timeout_sec: int, max_bytes: int) -> ExternalLinkResult:
+    parsed = urllib.parse.urlparse(url)
+    query = urllib.parse.parse_qs(parsed.query)
+    share_key = (query.get("id") or query.get("shareKey") or [""])[0].strip()
+    if not share_key or not re.fullmatch(r"[A-Za-z0-9_-]{12,80}", share_key):
+        return ExternalLinkResult(url=url, status="unreadable", reason="missing_or_invalid_share_key")
+    encoded = urllib.parse.quote(share_key, safe="")
+    meta_url = (
+        "https://note.youdao.com/yws/api/personal/share?method=get&shareKey="
+        f"{encoded}&unloginId="
+    )
+    content_url = (
+        f"https://note.youdao.com/yws/api/note/{encoded}"
+        "?sev=j1&editorType=1&unloginId=&editorVersion=new-json-editor"
+    )
+    meta = _request_json(meta_url, timeout_sec=timeout_sec, max_bytes=max_bytes)
+    payload = _request_json(content_url, timeout_sec=timeout_sec, max_bytes=max_bytes)
+    entry = meta.get("entry") if isinstance(meta, dict) and isinstance(meta.get("entry"), dict) else {}
+    title = _plain_text(entry.get("name") or meta.get("name") if isinstance(meta, dict) else "")
+    chunks: list[str] = []
+    _collect_youdao_text(payload, chunks)
+    text = "\n".join(chunks).strip()
+    if not text:
+        return ExternalLinkResult(url=url, status="unreadable", title=title, reason="empty_public_note")
+    return ExternalLinkResult(url=url, status="resolved", title=title, text=text[:12000])
+
+
+def resolve_public_link(
+    url: str,
+    *,
+    allowed_domains: set[str],
+    timeout_sec: int,
+    max_bytes: int,
+) -> ExternalLinkResult:
+    parsed = urllib.parse.urlparse(url)
+    domain = (parsed.hostname or "").lower().rstrip(".")
+    if parsed.scheme != "https" or domain not in allowed_domains:
+        return ExternalLinkResult(url=url, status="skipped", reason="domain_or_scheme_not_allowed")
+    try:
+        if domain == "note.youdao.com":
+            return _resolve_youdao_share(url, timeout_sec=timeout_sec, max_bytes=max_bytes)
+        return ExternalLinkResult(url=url, status="unreadable", reason="public_resolver_not_implemented")
+    except (OSError, ValueError, KeyError, TypeError, json.JSONDecodeError) as exc:
+        return ExternalLinkResult(url=url, status="unreadable", reason=str(exc)[:180])
+
+
+def _external_link_lines(results: list[ExternalLinkResult]) -> list[str]:
+    if not results:
+        return []
+    lines = ["External Link Artifacts:"]
+    for result in results:
+        lines.extend(
+            [
+                f"- external_link_url: {result.url}",
+                f"  external_link_status: {result.status}",
+                f"  external_link_title: {result.title}",
+                f"  external_link_reason: {result.reason}",
+            ]
+        )
+        if result.text:
+            lines.extend(["  external_link_text:", result.text])
+    return lines
+
+
 def _format_topic_block(
     topic: dict[str, Any],
     fallback_group: ZsxqGroup,
     *,
     attachment_result: AttachmentSyncResult | None = None,
+    external_link_results: list[ExternalLinkResult] | None = None,
 ) -> str:
     group = _topic_group(topic, fallback_group)
     topic_id = str(topic.get("topic_id") or "")
@@ -441,6 +571,11 @@ def _format_topic_block(
     if attachment_result and attachment_result.file_lines:
         lines.append("")
         lines.extend(attachment_result.file_lines)
+
+    external_lines = _external_link_lines(external_link_results or [])
+    if external_lines:
+        lines.append("")
+        lines.extend(external_lines)
 
     return "\n".join(lines).strip()
 
@@ -537,6 +672,11 @@ def write_daily_markdown(
     download_files: bool,
     max_image_downloads: int | None,
     max_file_downloads: int | None,
+    resolve_public_links: bool = False,
+    public_link_domains: set[str] | None = None,
+    public_link_timeout_sec: int = 12,
+    public_link_max_bytes: int = 600_000,
+    max_public_links_per_topic: int = 3,
 ) -> tuple[int, AttachmentSyncResult]:
     blocks: list[str] = [f"# {target_date} Knowledge Planet zsxq sync"]
     count = 0
@@ -572,12 +712,30 @@ def write_daily_markdown(
             totals.image_failures += attachment_result.image_failures
             totals.files_downloaded += attachment_result.files_downloaded
             totals.file_failures += attachment_result.file_failures
+            external_results: list[ExternalLinkResult] = []
+            if resolve_public_links:
+                allowed = public_link_domains or set()
+                candidates = [
+                    url
+                    for url in _public_links_from_topic(topic)
+                    if (urllib.parse.urlparse(url).hostname or "").lower().rstrip(".") in allowed
+                ]
+                for url in candidates[: max(0, max_public_links_per_topic)]:
+                    external_results.append(
+                        resolve_public_link(
+                            url,
+                            allowed_domains=allowed,
+                            timeout_sec=public_link_timeout_sec,
+                            max_bytes=public_link_max_bytes,
+                        )
+                    )
             blocks.append("---")
             blocks.append(
                 _format_topic_block(
                     topic,
                     group_map.get(group.group_id, group),
                     attachment_result=attachment_result,
+                    external_link_results=external_results,
                 )
             )
             count += 1
@@ -591,6 +749,15 @@ def parse_group(value: str) -> ZsxqGroup:
         group_id, name = value.split(":", 1)
         return ZsxqGroup(group_id=group_id.strip(), name=name.strip())
     return ZsxqGroup(group_id=value.strip())
+
+
+def validate_allowed_groups(groups: list[ZsxqGroup]) -> None:
+    disallowed = [group.group_id for group in groups if group.group_id not in ALLOWED_GROUP_IDS]
+    if disallowed:
+        raise ValueError(
+            "Knowledge Planet governance allows only 前沿信息收录 "
+            f"({', '.join(sorted(ALLOWED_GROUP_IDS))}); rejected: {', '.join(disallowed)}"
+        )
 
 
 def main() -> int:
@@ -617,11 +784,20 @@ def main() -> int:
     parser.add_argument("--no-download-files", action="store_true", help="Do not download topic file attachments.")
     parser.add_argument("--max-image-downloads", type=int, default=100, help="Maximum images to download in this run.")
     parser.add_argument("--max-file-downloads", type=int, default=50, help="Maximum file attachments to download in this run.")
+    parser.add_argument("--resolve-public-links", action="store_true", help="Resolve allowlisted public links embedded in topic text.")
+    parser.add_argument("--public-link-domains", default="note.youdao.com,mp.weixin.qq.com", help="Comma-separated exact HTTPS domains allowed for public-link resolution.")
+    parser.add_argument("--public-link-timeout-sec", type=int, default=12, help="Per-request public-link timeout.")
+    parser.add_argument("--public-link-max-bytes", type=int, default=600000, help="Maximum bytes read from one public-link response.")
+    parser.add_argument("--max-public-links-per-topic", type=int, default=3, help="Maximum embedded links resolved for one topic.")
     args = parser.parse_args()
 
     groups = [parse_group(value) for value in args.group_id if value.strip()]
     if not groups:
         raise SystemExit("Please pass at least one --group-id. Example: --group-id 28888112822211:前沿信息收录")
+    try:
+        validate_allowed_groups(groups)
+    except ValueError as exc:
+        raise SystemExit(str(exc)) from exc
 
     start_date = str(args.start_date or args.date)
     end_date = str(args.date)
@@ -669,6 +845,15 @@ def main() -> int:
         download_files=not args.no_download_files,
         max_image_downloads=max(0, args.max_image_downloads),
         max_file_downloads=max(0, args.max_file_downloads),
+        resolve_public_links=args.resolve_public_links,
+        public_link_domains={
+            value.strip().lower()
+            for value in args.public_link_domains.split(",")
+            if value.strip()
+        },
+        public_link_timeout_sec=max(1, args.public_link_timeout_sec),
+        public_link_max_bytes=max(1024, args.public_link_max_bytes),
+        max_public_links_per_topic=max(0, args.max_public_links_per_topic),
     )
     print(f"wrote {count} topic(s) to {output}")
     print(

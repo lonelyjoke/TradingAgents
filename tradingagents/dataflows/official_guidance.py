@@ -248,12 +248,22 @@ def official_guidance_record(metrics: Mapping[str, Any]) -> str:
     return "Parsed official guidance metrics: " + "; ".join(fields) + "; unit=CNY mn"
 
 
-def parse_official_guidance_record(text: str) -> dict[str, Any]:
-    """Read the stable record after it has travelled through report contexts."""
+def parse_official_guidance_record(
+    text: str,
+    *,
+    allow_raw_fallback: bool = True,
+) -> dict[str, Any]:
+    """Read the stable record after it has travelled through report contexts.
+
+    Callers operating on a broad multi-source context should set
+    ``allow_raw_fallback=False`` so a peer-news headline cannot be re-parsed as
+    the covered company's guidance.  Raw fallback is reserved for an already
+    ticker-scoped official-announcement subsection.
+    """
 
     records = re.findall(r"Parsed official guidance metrics:[^\n|]*", text or "", re.I)
     if not records:
-        return parse_official_guidance_metrics(text)
+        return parse_official_guidance_metrics(text) if allow_raw_fallback else {}
     result: dict[str, Any] = {}
     for record in records:
         period_match = re.search(r"period=([^;\s]+)", record, re.I)

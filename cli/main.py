@@ -2,6 +2,7 @@ from typing import Optional
 import datetime
 import json
 import re
+import traceback
 import typer
 from pathlib import Path
 from functools import wraps
@@ -27,6 +28,12 @@ from rich.align import Align
 from rich.rule import Rule
 
 from tradingagents.graph.trading_graph import TradingAgentsGraph
+from tradingagents.graph.checkpointer import (
+    checkpoint_step,
+    clear_checkpoint,
+    get_checkpointer,
+    thread_id,
+)
 from tradingagents.dataflows.a_share_preflight import AShareDataPreflightError
 from tradingagents.default_config import DEFAULT_CONFIG
 from cli.models import AnalystType
@@ -757,6 +764,25 @@ def save_report_to_disk(final_state, ticker: str, save_path: Path):
                 ),
                 encoding="utf-8",
             )
+        if structured_bundle.get("research_dossier"):
+            research_dossier = structured_bundle["research_dossier"]
+            (context_dir / "company_research_dossier.json").write_text(
+                json.dumps(
+                    research_dossier,
+                    ensure_ascii=False,
+                    indent=2,
+                    default=str,
+                ),
+                encoding="utf-8",
+            )
+            from tradingagents.dataflows.research_dossier import (
+                render_reader_research_dossier,
+            )
+
+            (context_dir / "company_research_dossier.md").write_text(
+                render_reader_research_dossier(research_dossier),
+                encoding="utf-8",
+            )
     if final_state.get("relative_strength_context"):
         context_dir = save_path / "0_context"
         context_dir.mkdir(exist_ok=True)
@@ -1141,12 +1167,34 @@ def save_report_to_disk(final_state, ticker: str, save_path: Path):
                 raw_decision,
                 encoding="utf-8",
             )
+            diagnostic_parts = [
+                publication_banner,
+                (
+                    "> **诊断稿说明：** 下文保留完整研究内容，仅用于定位数据、"
+                    "期间、单位、算术或估值矛盾，不得作为正式评级、目标价或交易指令。"
+                ),
+                raw_decision,
+            ]
+            internal_appendix_path = (
+                save_path / "5_portfolio" / "internal_appendix.md"
+            )
+            if internal_appendix_path.exists():
+                diagnostic_parts.append(
+                    internal_appendix_path.read_text(encoding="utf-8")
+                )
+            (
+                save_path / "5_portfolio" / "complete_diagnostic_report.md"
+            ).write_text(
+                "\n\n".join(part for part in diagnostic_parts if part.strip()),
+                encoding="utf-8",
+            )
             published_decision = (
                 publication_banner
                 + "\n\n"
                 + "评级、目标价、仓位、替代标的与交易指令已自动从正式报告中抑制。"
                 + "请先修复 `post_generation_audit.md` 中的阻断项；"
-                + "原始输出位于 `decision_draft.md`。\n"
+                + "原始输出位于 `decision_draft.md`，完整诊断内容位于 "
+                + "`complete_diagnostic_report.md`。\n"
             )
             decision_path.write_text(
                 published_decision,
@@ -1385,7 +1433,62 @@ def format_tool_args(args, max_length=140) -> str:
         return result[:max_length - 3] + "..."
     return result
 
-def run_analysis(checkpoint: bool = False):
+
+def _stream_graph_with_checkpoint(
+    graph,
+    init_agent_state,
+    args,
+    *,
+    config,
+    ticker,
+    analysis_date,
+    on_error=None,
+):
+    """Stream a CLI graph run with real checkpoint/resume semantics.
+
+    The interactive CLI does not call ``TradingAgentsGraph.propagate()``, so
+    it must explicitly compile the workflow with a checkpointer and inject the
+    deterministic thread ID.  A failed run retains its checkpoint; a completed
+    run clears it so a future run starts fresh.
+    """
+    checkpoint_context = None
+    completed = False
+    stream_args = dict(args)
+
+    try:
+        if config.get("checkpoint_enabled"):
+            checkpoint_context = get_checkpointer(config["data_cache_dir"], ticker)
+            saver = checkpoint_context.__enter__()
+            graph.graph = graph.workflow.compile(checkpointer=saver)
+
+            graph_config = dict(stream_args.get("config") or {})
+            configurable = dict(graph_config.get("configurable") or {})
+            configurable["thread_id"] = thread_id(ticker, str(analysis_date))
+            graph_config["configurable"] = configurable
+            stream_args["config"] = graph_config
+
+        yield from graph.graph.stream(init_agent_state, **stream_args)
+        completed = True
+    except Exception as exc:
+        if on_error is not None:
+            try:
+                on_error(exc)
+            except Exception as callback_error:
+                # Diagnostics must never replace the original analysis error.
+                exc.add_note(
+                    "Failure persistence also failed: "
+                    f"{type(callback_error).__name__}: {callback_error}"
+                )
+        raise
+    finally:
+        if checkpoint_context is not None:
+            checkpoint_context.__exit__(None, None, None)
+            graph.graph = graph.workflow.compile()
+
+    if completed and config.get("checkpoint_enabled"):
+        clear_checkpoint(config["data_cache_dir"], ticker, str(analysis_date))
+
+def run_analysis(checkpoint: bool = True):
     # First get all user selections
     selections = get_user_selections()
 
@@ -1531,31 +1634,96 @@ def run_analysis(checkpoint: bool = False):
                 )
             update_display(layout, stats_handler=stats_handler, start_time=start_time)
 
-        try:
-            init_agent_state = graph.create_initial_state_with_context(
+        resume_step = (
+            checkpoint_step(
+                config["data_cache_dir"],
                 selections["ticker"],
                 selections["analysis_date"],
-                progress_callback=show_context_progress,
             )
-        except AShareDataPreflightError as exc:
-            failure_text = str(exc)
-            (results_dir / "preflight_failure.md").write_text(
-                failure_text,
-                encoding="utf-8",
+            if config.get("checkpoint_enabled")
+            else None
+        )
+        if resume_step is not None:
+            # LangGraph resumes an interrupted thread only when invoked with
+            # ``None``. Re-supplying a newly built initial state starts a new
+            # run and defeats checkpointing (and repeats paid preprocessing).
+            init_agent_state = None
+            message_buffer.add_message(
+                "System",
+                f"Resuming saved checkpoint from graph step {resume_step}",
             )
-            message_buffer.add_message("System", "A-share data preflight failed; analysis stopped before LLM generation")
-            message_buffer.update_report_section("final_trade_decision", failure_text)
-            update_display(layout, stats_handler=stats_handler, start_time=start_time)
-            raise typer.Exit(code=1)
-        message_buffer.add_message("System", "A-share context preparation completed")
+        else:
+            try:
+                init_agent_state = graph.create_initial_state_with_context(
+                    selections["ticker"],
+                    selections["analysis_date"],
+                    progress_callback=show_context_progress,
+                )
+            except AShareDataPreflightError as exc:
+                failure_text = str(exc)
+                (results_dir / "preflight_failure.md").write_text(
+                    failure_text,
+                    encoding="utf-8",
+                )
+                message_buffer.add_message("System", "A-share data preflight failed; analysis stopped before LLM generation")
+                message_buffer.update_report_section("final_trade_decision", failure_text)
+                update_display(layout, stats_handler=stats_handler, start_time=start_time)
+                raise typer.Exit(code=1)
+            message_buffer.add_message("System", "A-share context preparation completed")
         update_display(layout, stats_handler=stats_handler, start_time=start_time)
         # Pass callbacks to graph config for tool execution tracking
         # (LLM tracking is handled separately via LLM constructor)
         args = graph.propagator.get_graph_args(callbacks=[stats_handler])
 
+        def persist_graph_failure(exc):
+            failure_path = results_dir / "analysis_failure.md"
+            traceback_text = traceback.format_exc().rstrip()
+            if traceback_text == "NoneType: None":
+                traceback_text = f"{type(exc).__name__}: {exc}"
+            checkpoint_note = (
+                "Checkpoint retained; rerun the same ticker/date with --checkpoint to resume."
+                if config.get("checkpoint_enabled")
+                else "Checkpoint was disabled for this run."
+            )
+            failure_path.write_text(
+                "\n".join(
+                    [
+                        "# Analysis Failure",
+                        "",
+                        f"- Ticker: {selections['ticker']}",
+                        f"- Analysis date: {selections['analysis_date']}",
+                        f"- Provider: {config.get('llm_provider')}",
+                        f"- Quick model: {config.get('quick_think_llm')}",
+                        f"- Deep model: {config.get('deep_think_llm')}",
+                        f"- Exception: {type(exc).__name__}: {exc}",
+                        f"- Recovery: {checkpoint_note}",
+                        "",
+                        "## Traceback",
+                        "",
+                        "```text",
+                        traceback_text,
+                        "```",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+            message_buffer.add_message(
+                "System",
+                f"Analysis failed: {type(exc).__name__}: {exc}; traceback saved to {failure_path}",
+            )
+            update_display(layout, stats_handler=stats_handler, start_time=start_time)
+
         # Stream the analysis
         trace = []
-        for chunk in graph.graph.stream(init_agent_state, **args):
+        for chunk in _stream_graph_with_checkpoint(
+            graph,
+            init_agent_state,
+            args,
+            config=config,
+            ticker=selections["ticker"],
+            analysis_date=selections["analysis_date"],
+            on_error=persist_graph_failure,
+        ):
             # Process all messages in chunk, deduplicating by message ID
             for message in chunk.get("messages", []):
                 msg_id = getattr(message, "id", None)
@@ -1655,6 +1823,10 @@ def run_analysis(checkpoint: bool = False):
             trace.append(chunk)
 
         # Get final state and decision
+        if not trace:
+            exc = RuntimeError("Analysis graph completed without yielding a state")
+            persist_graph_failure(exc)
+            raise exc
         final_state = trace[-1]
         decision = graph.process_signal(final_state["final_trade_decision"])
         final_state["run_metrics"] = {
@@ -1664,6 +1836,39 @@ def run_analysis(checkpoint: bool = False):
             "quick_model": config.get("quick_think_llm"),
             "deep_model": config.get("deep_think_llm"),
             "provider": config.get("llm_provider"),
+            "token_policy": {
+                "analyst_context_chars": config.get(
+                    "prompt_context_total_chars_analyst"
+                ),
+                "research_context_chars": config.get(
+                    "prompt_context_total_chars_research"
+                ),
+                "trader_context_chars": config.get(
+                    "prompt_context_total_chars_trader"
+                ),
+                "risk_context_chars": config.get("prompt_context_total_chars_risk"),
+                "portfolio_context_chars": config.get(
+                    "prompt_context_total_chars_portfolio"
+                ),
+                "a_share_tool_requery_enabled": config.get(
+                    "a_share_agent_tool_requery_enabled"
+                ),
+                "pm_editorial_review_mode": config.get(
+                    "pm_editorial_review_mode"
+                ),
+                "deepseek_quick_thinking": config.get(
+                    "deepseek_quick_thinking"
+                ),
+                "deepseek_quick_reasoning_effort": config.get(
+                    "deepseek_quick_reasoning_effort"
+                ),
+                "deepseek_deep_thinking": config.get(
+                    "deepseek_deep_thinking"
+                ),
+                "deepseek_deep_reasoning_effort": config.get(
+                    "deepseek_deep_reasoning_effort"
+                ),
+            },
         }
 
         # Update all agent statuses to completed
@@ -1712,9 +1917,9 @@ def run_analysis(checkpoint: bool = False):
 @app.command()
 def analyze(
     checkpoint: bool = typer.Option(
-        False,
-        "--checkpoint",
-        help="Enable checkpoint/resume: save state after each node so a crashed run can resume.",
+        True,
+        "--checkpoint/--no-checkpoint",
+        help="Checkpoint/resume is enabled by default; use --no-checkpoint for a disposable run.",
     ),
     clear_checkpoints: bool = typer.Option(
         False,

@@ -6,6 +6,10 @@ def test_default_config_reads_llm_env_overrides(monkeypatch):
     monkeypatch.setenv("TRADINGAGENTS_DEEP_THINK_LLM", "deepseek-v4-pro")
     monkeypatch.setenv("TRADINGAGENTS_QUICK_THINK_LLM", "deepseek-v4-flash")
     monkeypatch.setenv("TRADINGAGENTS_BACKEND_URL", "https://api.deepseek.com")
+    monkeypatch.setenv("TRADINGAGENTS_DEEPSEEK_QUICK_THINKING", "disabled")
+    monkeypatch.setenv("TRADINGAGENTS_DEEPSEEK_QUICK_REASONING_EFFORT", "low")
+    monkeypatch.setenv("TRADINGAGENTS_DEEPSEEK_DEEP_THINKING", "enabled")
+    monkeypatch.setenv("TRADINGAGENTS_DEEPSEEK_DEEP_REASONING_EFFORT", "max")
 
     import tradingagents.default_config as default_config
 
@@ -16,6 +20,10 @@ def test_default_config_reads_llm_env_overrides(monkeypatch):
     assert config["deep_think_llm"] == "deepseek-v4-pro"
     assert config["quick_think_llm"] == "deepseek-v4-flash"
     assert config["backend_url"] == "https://api.deepseek.com"
+    assert config["deepseek_quick_thinking"] == "disabled"
+    assert config["deepseek_quick_reasoning_effort"] == "low"
+    assert config["deepseek_deep_thinking"] == "enabled"
+    assert config["deepseek_deep_reasoning_effort"] == "max"
 
 
 def test_default_config_infers_deepseek_when_only_deepseek_key_exists(monkeypatch):

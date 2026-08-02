@@ -114,6 +114,22 @@ class ProgressiveRepairLLM:
         )
 
 
+class ThinkingRepairLLM:
+    def __init__(self):
+        self.prompts = []
+
+    def with_structured_output(self, _schema):
+        raise NotImplementedError("thinking mode does not support tool_choice")
+
+    def invoke(self, prompt):
+        self.prompts.append(str(prompt))
+        if len(self.prompts) == 1:
+            return SimpleNamespace(content=json.dumps({"rating": "Hold"}))
+        return SimpleNamespace(
+            content=json.dumps({"rating": "Hold", "report": "repaired once"})
+        )
+
+
 def test_free_text_json_is_revalidated_and_rendered_as_structured_output():
     rendered, metadata = invoke_structured_or_freetext(
         FailingStructured(),
@@ -167,6 +183,28 @@ def test_schema_repair_uses_validation_feedback_for_a_second_retry():
     assert metadata["mode"] == "schema_repaired_fallback"
     assert metadata["schema_repair_attempts"] == 2
     assert llm.calls == 3
+
+
+def test_schema_prompt_validation_repairs_raw_response_without_replaying_prompt():
+    llm = ThinkingRepairLLM()
+    structured = bind_structured(llm, TinyDecision, "Research Manager")
+
+    rendered, metadata = invoke_structured_or_freetext(
+        structured,
+        llm,
+        "EXPENSIVE_FULL_RESEARCH_PROMPT",
+        lambda value: f"{value.rating}: {value.report}",
+        "Research Manager",
+        return_metadata=True,
+        fallback_schema=TinyDecision,
+    )
+
+    assert rendered == "Hold: repaired once"
+    assert metadata["schema_repair_attempts"] == 1
+    assert len(llm.prompts) == 2
+    assert "EXPENSIVE_FULL_RESEARCH_PROMPT" in llm.prompts[0]
+    assert "EXPENSIVE_FULL_RESEARCH_PROMPT" not in llm.prompts[1]
+    assert '"report"' in llm.prompts[1]
 
 
 def test_sell_side_schema_renders_all_six_company_depth_contracts():
@@ -258,7 +296,7 @@ def test_sell_side_schema_renders_all_six_company_depth_contracts():
             {
                 "business_unit": "core product",
                 "economic_role": "mature core",
-                "disclosure_basis": "analyst_estimate",
+                "disclosure_basis": "analytical",
                 "scale_and_growth": "reported revenue direction, exact split unavailable",
                 "margin_and_cash": "margin proxy with disclosed limits",
                 "driver_equation": "volume x ASP x margin",
@@ -285,18 +323,17 @@ def test_sell_side_schema_renders_all_six_company_depth_contracts():
     assert "中性（Hold）" in rendered
 
     for heading in (
-        "## 一、投资结论",
-        "## 二、公司画像、商业模式与利润池",
-        "## 三、行业格局、竞争优势与护城河",
-        "## 四、经营质量、财务特征与资本配置",
-        "## 五、核心投资逻辑与关键分歧",
-        "## 六、盈利预测与关键变量",
-        "## 七、市场预期差与估值",
-        "## 八、风险、催化剂与跟踪",
+        "## 一、公司是谁、如何赚钱",
+        "## 二、产业链位置与行业格局",
+        "## 三、业务拆解与核心利润池",
+        "## 四、竞争优势、护城河与主要短板",
+        "## 五、增长逻辑、关键分歧与盈利预测",
+        "## 六、市场预期差、风险与验证",
+        "## 七、估值、评级与投资结论",
     ):
         assert heading in rendered
     public, appendix, moved = split_pm_public_report(rendered)
-    assert sum(1 for line in public.splitlines() if line.startswith("## ")) == 8
+    assert sum(1 for line in public.splitlines() if line.startswith("## ")) == 7
     assert "Company Disaggregation" not in public
     assert "2026E_revenue" not in public
     assert "预测结论" in public
@@ -304,11 +341,11 @@ def test_sell_side_schema_renders_all_six_company_depth_contracts():
     assert "核心问题裁决" not in public
     assert "核心假设与敏感性" in public
     assert "evidence mechanism financial impact" in public
-    assert "### 商业模式如何运转" not in public
-    assert "### 分部经济与价值归属" not in public
-    assert "### 商业模式如何运转" in appendix
+    assert "### 商业模式如何运转" in public
+    assert "### 分部经济与价值归属" in public
+    assert "### 商业模式如何运转" not in appendix
     assert "### 交接完整性审计" in appendix
-    assert moved == ["内部附录A：业务机制与分部经济", "内部附录E：模型交接与报告质量审计"]
+    assert moved == ["内部附录E：模型交接与报告质量审计"]
 
 
 def test_editorial_review_is_advisory_and_section_specific():
@@ -658,7 +695,8 @@ def test_deterministic_pm_engine_calculates_eps_fcf_scenarios_and_safe_price():
     assert "商业模式如何运转" in rendered
     assert "护城河的形成机制与经济结果" in rendered
     assert "另类信息增量（知识星球）" not in rendered
-    assert "程序化公允价值" not in rendered.split("## 一、投资结论", 1)[0]
+    assert "程序化公允价值" not in rendered.split("## 七、估值、评级与投资结论", 1)[0]
+    assert rendered.index("程序化情景估值") < rendered.index("| 最终评级 | 投资观点 |")
 
 
 def test_handoff_check_detects_only_undocumented_material_changes():

@@ -53,12 +53,18 @@ def test_blocked_audit_suppresses_trade_instructions_from_formal_report(tmp_path
 
     published_decision = (tmp_path / "5_portfolio" / "decision.md").read_text(encoding="utf-8")
     draft_decision = (tmp_path / "5_portfolio" / "decision_draft.md").read_text(encoding="utf-8")
+    diagnostic_report = (
+        tmp_path / "5_portfolio" / "complete_diagnostic_report.md"
+    ).read_text(encoding="utf-8")
     complete_report = report_path.read_text(encoding="utf-8")
 
     assert "Publication status: BLOCKED" in published_decision
     assert "评级、目标价、仓位、替代标的与交易指令已自动" in published_decision
     assert "Build a 5% position now" not in published_decision
     assert "Build a 5% position now" in draft_decision
+    assert "Publication status: BLOCKED" in diagnostic_report
+    assert "仅用于定位数据" in diagnostic_report
+    assert "Build a 5% position now" in diagnostic_report
     assert "Build a 5% position now" not in complete_report
     assert not (tmp_path / "research_archive.md").exists()
 
@@ -123,7 +129,7 @@ def test_save_report_persists_pm_internal_appendix_without_public_concatenation(
             "current_aggressive_response": "",
             "current_conservative_response": "",
             "current_neutral_response": "",
-            "judge_decision": "# Public PM\n\n## 一、投资结论\n\nReadable public decision.",
+            "judge_decision": "# Public PM\n\n## 一、公司是谁、如何赚钱\n\nReadable public decision.",
             "count": 1,
         },
         "pm_internal_overflow": "## 内部附录A：业务机制与分部经济\n\nDetailed matrix rows.",

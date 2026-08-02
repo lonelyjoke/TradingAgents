@@ -140,6 +140,8 @@ class BusinessUnitMap(NullDefaultModel):
     disclosure_basis: Literal["reported", "calculated", "analytical", "missing"] = "missing"
     parent_unit: str = "company"
     economic_role: str = ""
+    primary_operating_archetype: str = ""
+    secondary_operating_archetype: str = ""
     revenue_driver_equation: str = ""
     profit_driver_equation: str = ""
     cash_and_capital_equation: str = ""
@@ -241,6 +243,32 @@ class MoatEvidenceTest(NullDefaultModel):
     next_verification: str = ""
 
 
+class CompetitionLandscape(NullDefaultModel):
+    """Competition map for one material economic unit.
+
+    Market boundaries must be established before peer comparison.  The object
+    deliberately separates direct competitors from substitutes, customer
+    self-supply and new entrants so that a generic peer list cannot masquerade
+    as competitive analysis.
+    """
+
+    business_unit: str
+    market_boundary: str = ""
+    boundary_evidence: str = ""
+    structure_and_concentration: str = ""
+    direct_competitors: list[str] = Field(default_factory=list)
+    substitutes_and_customer_alternatives: list[str] = Field(default_factory=list)
+    self_supply_and_new_entrants: list[str] = Field(default_factory=list)
+    comparison_dimensions: list[str] = Field(default_factory=list)
+    company_relative_position: str = ""
+    competitor_likely_response: str = ""
+    financial_transmission: str = ""
+    evidence_ids: list[str] = Field(default_factory=list)
+    evidence_status: Literal["verified", "partial", "analytical", "missing"] = "missing"
+    missing_inputs: list[str] = Field(default_factory=list)
+    next_verification: str = ""
+
+
 class ValuationBucket(NullDefaultModel):
     """One mutually exclusive value bucket with explicit overlap control."""
 
@@ -313,6 +341,7 @@ class CompanyUnderwritingPacket(NullDefaultModel):
     forecast_lines: list[ForecastLine] = Field(default_factory=list)
     scenarios: list[ScenarioUnderwriting] = Field(default_factory=list)
     thesis_financial_bridges: list[ThesisFinancialBridge] = Field(default_factory=list)
+    competition_landscapes: list[CompetitionLandscape] = Field(default_factory=list)
     moat_evidence_tests: list[MoatEvidenceTest] = Field(default_factory=list)
     valuation_buckets: list[ValuationBucket] = Field(default_factory=list)
     valuation_closure: ValuationClosure = Field(default_factory=ValuationClosure)
@@ -430,6 +459,7 @@ Universal rules for all A-share industries:
 1. Infer the actual business archetype, `model_profile` and material segments dynamically from filings. Copy supplied filing-backed segment names exactly where available. Never force a battery, bank, software, commodity, consumer, or other fixed template onto an unrelated company.
 1a. Do not confuse accounting disclosure segments with the economic units needed to understand the company. Build `business_unit_map` across the dimensions that actually drive economics: product, channel, geography, customer group, project/asset or financial business. Mark every unit reported/calculated/analytical/missing. An analytical unit may organize questions and forecasts, but it may not receive invented revenue, margin or value.
 1b. Select exactly one `operating_model_family` from the real economics. Product/chemical/manufacturing companies normally require capacity -> utilization -> volume -> ASP -> input/unit cost -> spread/margin -> working capital -> capex/ROIC. Retail/consumer companies require traffic/store/customer count -> conversion -> ticket/ARPU -> mix -> margin. Software requires users -> paid penetration -> ARPU -> retention/churn -> delivery/cloud cost. Project companies require opening backlog + new orders - delivery = ending backlog -> acceptance -> receivables/collection. Resource companies require reserves/capacity -> output -> realized price -> cash cost/AISC -> sustaining capex. Banks, insurers and REITs use their native spread/credit, value/solvency, or occupancy/rent models. Do not call a forecast autonomous unless the selected family's decisive driver chain is represented or explicitly missing.
+1c. Use the supplied General Operating-Model Router as candidate guidance and assign a primary, plus an optional secondary, economic archetype to each material business unit. Populate one `competition_landscapes` row per material business unit. Define the customer/product/geography/occasion boundary before naming peers; then separate direct operating competitors, substitutes and customer alternatives, customer self-supply, and new entrants. State comparison dimensions, relative position, likely competitor response and the exact revenue/margin/cash/ROIC transmission. Keep operating peers, valuation peers and investment alternatives conceptually separate. Missing market-share or concentration data makes the row partial, never blocked.
 2. Teach how the company works: who pays, what is delivered, the revenue equation, profit equation, cash-flow equation, reinvestment needs, moat mechanisms and structural risks.
 3. For every material segment complete the causal chain: demand/orders -> industry supply/capacity -> company volume/share/utilization -> price/ASP/take rate -> unit cost -> margin/operating leverage -> working capital/cash -> EPS/FCF -> valuation treatment.
 4. Generate 4-6 company-specific underwriting questions, ranked by expected EPS/FCF/fair-value sensitivity. The questions are the research agenda: every downstream module must either change a model variable, change a scenario probability, or document why it is irrelevant. Avoid generic questions that could apply to any stock.
@@ -440,6 +470,7 @@ Universal rules for all A-share industries:
 6b. Turn every claimed moat into a `moat_evidence_test`. Test scale, license, brand, switching cost, network effect, cost advantage or customer stickiness with an observable metric versus history or true peers. State counterevidence and the exact route from the moat to price/share/margin/turnover/cash/ROIC. A management claim alone is `unproven`.
 6c. Build mutually exclusive `valuation_buckets`, then one `valuation_closure`. State what is core, scenario, optionality or excluded; identify overlap keys; reconcile share count, scenario probabilities, per-share conversion and current-price expected return. `probability_weighted_fair_value_per_share_cny` is the total probability-weighted value, not an incremental bucket to add again to core value. A subsidiary, acquired business or second curve already inside consolidated earnings must not be added again in SOTP unless the consolidated earnings base explicitly excludes it.
 6d. When `COMMODITY_MODEL_CONTROL` rows are supplied, reverse-underwrite valuation from the commodity distribution instead of applying a commodity-price story directly to a multiple. Use the dated P20/P50/P80 range, percentile and volatility to set bear/base/bull proxy prices; bridge proxy price -> company realized price/basis/lag -> volume capped by reported capacity -> grade/product-matched input costs -> segment gross profit -> tax/minority interest -> parent profit/EPS/FCF -> normalized PE, EV/EBITDA, PB-ROE or NAV/SOTP fair value. Keep different products and cost legs separate. A futures price is a proxy, not the company's realized price. If power, anode, grade mix, unit cost, ownership or realized-price basis is missing, leave the affected valuation cell missing/partial rather than inventing the spread.
+6e. For packaged-food and consumer-staples companies, build separate three-year rows for every material filing product/channel and consolidated subsidiary. Bridge volume x realized ASP x mix into raw-material, packaging, energy, logistics and conversion cost, then gross profit, operating profit, tax/minority interest, EPS and FCF. Use dated commodity ranges only through a company purchase-basis and inventory/pass-through lag. Reconcile distributor sell-through, inventory, contract liabilities/advances, receivables and promotion before treating shipments as end demand. For acquired subsidiaries show consolidation period, minority interest, goodwill/impairment and cash conversion. When exact product or subsidiary data are missing, provide a bounded sensitivity and retrieval gate rather than a single unsupported growth rate.
 7. Use only supplied EV/KPE evidence ids. Decisive claims without a valid id must remain unverified or missing. Do not promote rows marked unverified_quote.
 8. Every KPE or alternative clue has one model outcome: numeric old->new, probability before->after, unchanged/watch, or rejected. Narrative influence without a model outcome is invalid.
 9. `research_readiness=ready` only when material segments, three-year consolidated model, scenario valuation, periods/units and decisive evidence are sufficiently complete. Use `partial` for unavailable sources or incomplete cells; those gaps are neutral and non-blocking. Use `blocked` only for a deterministic contradiction, invalid unit/period, or corrupted source that makes supplied facts unsafe—not merely because data is missing.
@@ -1112,8 +1143,10 @@ def _fallback_packet(symbol: str, as_of_date: str, structured: Mapping[str, Any]
         symbol=symbol,
         as_of_date=str(as_of_date),
         forecast_years=years,
-        research_readiness="blocked",
-        readiness_reasons=["LLM company underwriting failed; only deterministic skeleton is available."],
+        research_readiness="partial",
+        readiness_reasons=[
+            "LLM company underwriting failed; deterministic evidence remains usable and the missing analysis should be retried."
+        ],
         business_unit_map=business_units,
         segment_models=segment_models,
         forecast_lines=forecast_lines,
@@ -1161,8 +1194,8 @@ def _fallback_packet(symbol: str, as_of_date: str, structured: Mapping[str, Any]
             "Bull/base/bear probabilities must sum to 100 before expected value is used.",
         ],
         analyst_instructions=[
-            "Do not write a final report from this fallback skeleton.",
-            "Fill company-specific driver chains and three-year values before valuation or rating.",
+            "Continue with explicitly disclosed limits if retry is unavailable; do not invent missing driver chains.",
+            "Fill company-specific driver chains and three-year values before assigning high conviction.",
         ],
         preprocessing_notes=[note],
     )
@@ -1235,6 +1268,22 @@ def _remove_mislabeled_prior_guidance_claims(
     return retained, rejected
 
 
+def _is_resolved_share_count_gap(value: str) -> bool:
+    text = str(value or "").lower()
+    mentions_share_count = bool(
+        re.search(
+            r"share\s*count|diluted\s*shares|shares?\s+outstanding|"
+            r"稀释后总股本|总股本|股本数据|股份数量",
+            text,
+            re.I,
+        )
+    )
+    describes_absence = bool(
+        re.search(r"missing|lacks?|unavailable|cannot|缺少|缺乏|无法|未取得|未披露", text, re.I)
+    )
+    return mentions_share_count and describes_absence
+
+
 def _validate_packet(
     packet: CompanyUnderwritingPacket,
     structured: Mapping[str, Any],
@@ -1257,6 +1306,7 @@ def _validate_packet(
         *packet.forecast_lines,
         *packet.scenarios,
         *packet.thesis_financial_bridges,
+        *packet.competition_landscapes,
         *packet.moat_evidence_tests,
         *packet.valuation_buckets,
     ]:
@@ -1303,6 +1353,27 @@ def _validate_packet(
             "diluted shares set deterministically: "
             f"{canonical_shares_mn:.3f} mn ({share_control['source_type']})"
         )
+        previous_reason_count = len(packet.readiness_reasons)
+        packet.readiness_reasons = [
+            reason
+            for reason in packet.readiness_reasons
+            if not _is_resolved_share_count_gap(reason)
+        ]
+        packet.valuation_closure.missing_inputs = [
+            reason
+            for reason in packet.valuation_closure.missing_inputs
+            if not _is_resolved_share_count_gap(reason)
+        ]
+        for scenario in packet.scenarios:
+            scenario.missing_inputs = [
+                reason
+                for reason in scenario.missing_inputs
+                if not _is_resolved_share_count_gap(reason)
+            ]
+        if len(packet.readiness_reasons) != previous_reason_count:
+            packet.preprocessing_notes.append(
+                "removed stale missing-share-count readiness reason after deterministic restoration"
+            )
     elif supplied_shares_mn is not None and supplied_shares_mn > 0:
         packet.company_model.share_count_source_type = "model_supplied"
         packet.company_model.share_count_formula = (
@@ -1380,6 +1451,29 @@ def _validate_packet(
         packet.research_readiness = "partial"
         packet.readiness_reasons.append(
             "Economic business-unit map was omitted; filing segments were restored as a minimum decomposition."
+        )
+
+    if not packet.competition_landscapes:
+        packet.competition_landscapes = [
+            CompetitionLandscape(
+                business_unit=row.unit_name,
+                market_boundary="missing; define customer, product/service, geography and purchase occasion",
+                comparison_dimensions=[
+                    "price/value and product performance",
+                    "channel/customer access and switching cost",
+                    "cost/capital intensity and likely competitive response",
+                ],
+                evidence_status="missing",
+                missing_inputs=[
+                    "direct competitors, substitutes, self-supply/new-entry risk and relative economics"
+                ],
+                next_verification="Retrieve true-peer operating evidence before making a durable-moat claim.",
+            )
+            for row in packet.business_unit_map[:10]
+        ]
+        packet.research_readiness = "partial"
+        packet.readiness_reasons.append(
+            "Competition landscapes were omitted and restored as explicit verification gaps."
         )
 
     if not packet.thesis_financial_bridges:
@@ -1692,7 +1786,10 @@ def _validate_packet(
         for key, value in (contexts or {}).items()
         if key in {"forecast_model", "company_events", "news", "earnings_model"}
     )
-    official_guidance = parse_official_guidance_record(guidance_context)
+    official_guidance = parse_official_guidance_record(
+        guidance_context,
+        allow_raw_fallback=False,
+    )
     guidance_period = str(official_guidance.get("period", ""))
     prior_values = [
         float(value)
@@ -1738,7 +1835,7 @@ def _validate_packet(
                 continue
             frozen_parts.append(f"{metric_key}={float(h1_value):g} CNY mn")
             if row is None or row.year_1_value is None:
-                packet.research_readiness = "blocked"
+                packet.research_readiness = "partial"
                 packet.readiness_reasons.append(
                     f"Official {guidance_period} {metric_key} lacks a full-year forecast bridge."
                 )
@@ -2053,7 +2150,7 @@ def _validate_packet(
             + ", ".join(represented_drivers)
         )
     if not packet.company_model.revenue_equation or not packet.company_model.profit_equation:
-        packet.research_readiness = "blocked"
+        packet.research_readiness = "partial"
         packet.readiness_reasons.append("Company revenue/profit operating equations are missing.")
     packet.readiness_reasons = [
         reason
@@ -2079,13 +2176,8 @@ def _validate_packet(
         )
     packet.readiness_reasons = list(dict.fromkeys(packet.readiness_reasons))
     if any(
-        reason.startswith(
-            (
-                "Company revenue/profit operating equations are missing.",
-                "Registered-capital and market-cap/close share counts conflict",
-                "Official ",
-            )
-        )
+        reason.startswith("Registered-capital and market-cap/close share counts conflict")
+        or "cannot be reconciled to forecast unit" in reason
         or "below official" in reason
         for reason in packet.readiness_reasons
     ):
@@ -2196,6 +2288,8 @@ def compact_underwriting_packet(packet: Mapping[str, Any] | None) -> dict[str, A
         "disclosure_basis",
         "parent_unit",
         "economic_role",
+        "primary_operating_archetype",
+        "secondary_operating_archetype",
         "revenue_driver_equation",
         "profit_driver_equation",
         "cash_and_capital_equation",
@@ -2226,6 +2320,9 @@ def compact_underwriting_packet(packet: Mapping[str, Any] | None) -> dict[str, A
         "thesis_financial_bridges": [
             clip(row)
             for row in list(packet.get("thesis_financial_bridges", []))[:8]
+        ],
+        "competition_landscapes": [
+            clip(row) for row in list(packet.get("competition_landscapes", []))[:12]
         ],
         "moat_evidence_tests": [
             clip(row) for row in list(packet.get("moat_evidence_tests", []))[:10]

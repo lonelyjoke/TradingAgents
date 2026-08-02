@@ -179,12 +179,59 @@ def _sell_side_expectation_excerpt(text: str) -> str:
     return "missing; no company-specific external forecast supplied"
 
 
-def _official_guidance_section(company_events_context: str) -> list[str]:
+def _official_announcement_guidance_subsection(company_events_context: str) -> str:
+    """Return only the ticker-scoped official-announcement guidance subsection.
+
+    ``company_events_context`` also contains general company/industry news and
+    analyst instructions.  Searching that entire blob can promote a peer's
+    earnings preview into the covered company's forecast model.
+    """
+
+    marker = re.search(
+        r"^### Official Earnings Guidance / Performance Preannouncements\s*$",
+        company_events_context or "",
+        re.I | re.M,
+    )
+    if marker is None:
+        return ""
+    subsection = (company_events_context or "")[marker.start() :]
+    next_h2 = re.search(r"^##\s+", subsection, re.M)
+    if next_h2:
+        subsection = subsection[: next_h2.start()]
+    return subsection.strip()
+
+
+def _company_announcement_context(company_events_context: str) -> str:
+    """Keep ticker-scoped announcements out of the general-news evidence pool."""
+
+    text = str(company_events_context or "")
+    announcements = re.search(r"^## Company Announcements\s*$", text, re.I | re.M)
+    if announcements is None:
+        return text
+    end = re.search(
+        r"^## Company And Industry News\s*$",
+        text[announcements.start() :],
+        re.I | re.M,
+    )
+    if end is None:
+        return text
+    return text[: announcements.start() + end.start()].strip()
+
+
+def _official_guidance_section(
+    company_events_context: str,
+    symbol: str = "",
+) -> list[str]:
+    announcement_guidance = _official_announcement_guidance_subsection(
+        company_events_context
+    )
+    if not announcement_guidance:
+        return []
     parsed_record = official_guidance_record(
-        parse_official_guidance_record(company_events_context)
+        parse_official_guidance_record(announcement_guidance)
     )
     rows = _compact_lines(
-        company_events_context,
+        announcement_guidance,
         (
             r"Official Earnings Guidance|Performance Preannouncements|earnings guidance|performance preview",
             "\u4e1a\u7ee9\u9884\u544a|\u4e1a\u7ee9\u5feb\u62a5|\u9884\u589e|\u9884\u51cf|\u626d\u4e8f",
@@ -202,9 +249,16 @@ def _official_guidance_section(company_events_context: str) -> list[str]:
         rows.insert(0, parsed_record)
     if not rows:
         return []
+    target = str(symbol or "unspecified").strip().upper()
+    numeric_status = "parsed" if parsed_record else "missing"
     return [
         "",
         "## Official Earnings Guidance Override",
+        (
+            "OFFICIAL_GUIDANCE_DISCLOSURE: "
+            f"target={target}; source_scope=company_announcement; "
+            f"numeric_record_status={numeric_status}"
+        ),
         "| supplied official evidence | required model treatment |",
         "| --- | --- |",
         *[
@@ -758,6 +812,9 @@ def build_forecast_model_context(
     gated_insurance_context = (
         insurance_context if _insurance_context_triggered(insurance_context) else ""
     )
+    ticker_scoped_company_events = _company_announcement_context(
+        company_events_context
+    )
     combined = "\n".join(
         [
             earnings_model_context,
@@ -767,7 +824,7 @@ def build_forecast_model_context(
             gated_insurance_context,
             industry_kpi_context,
             metals_mining_context,
-            company_events_context,
+            ticker_scoped_company_events,
             knowledge_planet_context,
             market_expectation_context,
         ]
@@ -939,6 +996,24 @@ def build_forecast_model_context(
             "- A semiconductor Buy/Underweight call is incomplete if it relies only on static PE/PB or valuation percentiles without the operating bridge above.",
         ]
 
+    consumer_staples_model_section = []
+    if _consumer_staples_forecast_drivers(symbol, combined) is not None:
+        consumer_staples_model_section = [
+            "",
+            "## Consumer-Staples Product, Cost And Cash Controls",
+            "| control | Mandatory treatment |",
+            "| --- | --- |",
+            "| Business buckets | model every material filing product, channel and consolidated subsidiary separately; identify core, growth, scenario, optionality and excluded/double-counted value |",
+            "| Revenue bridge | saleable volume x realized ASP x product/channel mix; distinguish end-demand sell-through from distributor restocking and acquisition consolidation |",
+            "| Raw-material bridge | map each material input to a dated price range/percentile, company purchase basis and pass-through or inventory-cost lag; do not infer margin directly from one futures move |",
+            "| Gross-profit sensitivity | product revenue - grade/product-matched raw material - packaging - energy - logistics - conversion cost; show the CNY mn gross-profit and parent-profit effect of each price/margin shock |",
+            "| Channel and cash | reconcile distributor inventory, contract liabilities/advances, receivables, inventory, OCF/NI and promotional rebates before calling shipment growth real demand |",
+            "| Subsidiaries / acquisitions | show revenue, margin, minority interest, purchase-price allocation, goodwill/impairment, cash conversion and consolidation effects separately |",
+            "| Three-year closure | product/subsidiary revenue and profit must sum to group revenue, operating profit, parent profit, EPS, OCF, capex and FCF for all three years |",
+            "| Valuation | connect normalized EPS/FCF and ROE/payout to PE/FCF-yield or SOTP; keep unverified new categories and overseas projects in probability-weighted optionality |",
+            "- If product volume/ASP, subsidiary profit or raw-material basis data are unavailable, keep the affected cells missing/partial, quantify a bounded sensitivity, and name the next filing or channel verification instead of filling the gap with a narrative growth rate.",
+        ]
+
     kp_assumption_rows = _knowledge_planet_assumption_rows(knowledge_planet_context)
     kp_assumption_section = []
     if kp_assumption_rows:
@@ -961,7 +1036,7 @@ def build_forecast_model_context(
                 "earnings_model": earnings_model_context,
                 "financial_report_intelligence": filing_intelligence_context,
                 "industry_kpi": industry_kpi_context,
-                "company_events": company_events_context,
+                "company_events": ticker_scoped_company_events,
                 "market_expectation": market_expectation_context,
                 "knowledge_planet": knowledge_planet_context,
             },
@@ -1056,7 +1131,10 @@ def build_forecast_model_context(
     shared_underwriting_section = _shared_underwriting_section(
         structured_research_context
     )
-    official_guidance_section = _official_guidance_section(company_events_context)
+    official_guidance_section = _official_guidance_section(
+        company_events_context,
+        symbol,
+    )
     business_line_agenda_section = _business_line_underwriting_agenda(
         drivers=drivers,
         structured_research_context=structured_research_context,
@@ -1134,6 +1212,7 @@ def build_forecast_model_context(
             *hog_sensitivity_section,
             *battery_model_section,
             *semiconductor_model_section,
+            *consumer_staples_model_section,
             *business_line_agenda_section,
             *sell_side_depth_chain_section,
             *llm_analysis_intervention_section,

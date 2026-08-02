@@ -7,6 +7,8 @@ from tradingagents.agents.utils.agent_utils import (
     get_stock_data,
 )
 from tradingagents.dataflows.config import get_config
+from tradingagents.dataflows.prompt_compaction import compact_state_fields
+from tradingagents.dataflows.tushare_a_stock import is_a_share_symbol
 
 
 def create_market_analyst(llm):
@@ -19,6 +21,46 @@ def create_market_analyst(llm):
             get_stock_data,
             get_indicators,
         ]
+        is_a_share = is_a_share_symbol(state["company_of_interest"])
+        prompt_contexts = compact_state_fields(
+            state,
+            profile="analyst",
+            keys={
+                "price_move_attribution_context",
+                "intraday_behavior_context",
+                "relative_strength_context",
+                "market_expectation_context",
+                "data_coverage_context",
+            },
+        )
+        precomputed_market_context = "\n\n".join(
+            f"### {label}\n{prompt_contexts[key]}"
+            for key, label in (
+                ("price_move_attribution_context", "Price-move attribution"),
+                ("intraday_behavior_context", "Intraday behavior"),
+                ("relative_strength_context", "Relative strength"),
+                ("market_expectation_context", "Market expectation"),
+                ("data_coverage_context", "Data coverage"),
+            )
+            if prompt_contexts.get(key)
+        )
+        use_precomputed = bool(
+            is_a_share
+            and precomputed_market_context
+            and not get_config().get("a_share_agent_tool_requery_enabled", False)
+        )
+        if use_precomputed:
+            tools = []
+        data_access_instruction = (
+            "The A-share market data was fetched and calculated before this agent started. "
+            "Use the precomputed price, relative-strength, intraday and expectation evidence "
+            "below directly; do not request the same data again."
+            if use_precomputed
+            else (
+                "Call get_stock_data first to retrieve the CSV, then use get_indicators "
+                "with the selected indicator names."
+            )
+        )
 
         system_message = (
             """You are a trading assistant tasked with analyzing financial markets. Your role is to select the **most relevant indicators** for a given market condition or trading strategy from the following list. The goal is to choose up to **8 indicators** that provide complementary insights without redundancy. Categories and each category's indicators are:
@@ -45,7 +87,10 @@ Volatility Indicators:
 Volume-Based Indicators:
 - vwma: VWMA: A moving average weighted by volume. Usage: Confirm trends by integrating price action with volume data. Tips: Watch for skewed results from volume spikes; use in combination with other volume analyses.
 
-- Select up to 5 non-redundant indicators that answer decision questions: trend, momentum, volatility, support/resistance, and volume confirmation. Avoid cataloging every signal. When you tool call, please use the exact name of the indicators provided above as they are defined parameters, otherwise your call will fail. Please call get_stock_data first to retrieve the CSV, then use get_indicators with the selected indicator names. For exchange-qualified A-share tickers such as 600519.SH, treat unavailable OHLCV as a Tushare date-window, network, permission, or quota limitation; do not claim the data source lacks A-share coverage. Write a compact technical memo focused on whether price action confirms, contradicts, or merely times the fundamental thesis."""
+- Select up to 5 non-redundant indicators that answer decision questions: trend, momentum, volatility, support/resistance, and volume confirmation. Avoid cataloging every signal. When you tool call, please use the exact name of the indicators provided above as they are defined parameters, otherwise your call will fail. """
+            + data_access_instruction
+            + " For exchange-qualified A-share tickers such as 600519.SH, treat unavailable OHLCV as a Tushare date-window, network, permission, or quota limitation; do not claim the data source lacks A-share coverage. Write a compact technical memo focused on whether price action confirms, contradicts, or merely times the fundamental thesis."
+            + ("\n\nPrecomputed A-share market evidence:\n" + precomputed_market_context if use_precomputed else "")
             + """ Append a compact Markdown table only for trend, support/resistance, momentum, risk level, and trading implication."""
             + get_focused_report_instruction()
             + get_language_instruction()
@@ -73,7 +118,7 @@ Volume-Based Indicators:
         prompt = prompt.partial(current_date=current_date)
         prompt = prompt.partial(instrument_context=instrument_context)
 
-        chain = prompt | llm.bind_tools(tools)
+        chain = prompt | (llm.bind_tools(tools) if tools else llm)
 
         result = chain.invoke(state["messages"])
 

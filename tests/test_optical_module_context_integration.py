@@ -50,4 +50,5 @@ def test_fundamentals_analyst_uses_optical_module_context_and_tool():
     assert "raw_optical_module_context" in source
     assert "optical_module_context = prompt_contexts" in source
     assert "get_optical_module_context" in source
-    assert "get_optical_module_instruction()" in source
+    assert "gated_prompt_sections" in source
+    assert '("Optical module", optical_module_context, get_optical_module_instruction)' in source

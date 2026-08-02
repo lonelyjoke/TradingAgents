@@ -183,7 +183,13 @@ class SegmentEconomicsRow(BaseModel):
 
     business_unit: str
     economic_role: str = Field(description="Mature core, growth engine, asset/cash unit, or optionality.")
-    disclosure_basis: Literal["reported", "calculated", "analyst_estimate", "missing"]
+    disclosure_basis: Literal[
+        "reported",
+        "calculated",
+        "analyst_estimate",
+        "analytical",
+        "missing",
+    ]
     scale_and_growth: str = Field(description="Revenue/weight/growth with period, or explicitly not disclosed.")
     margin_and_cash: str = Field(description="Margin, cash conversion and capital intensity with disclosure limits.")
     driver_equation: str = Field(description="Industry-native volume/price/mix/cost or asset equation.")
@@ -226,6 +232,22 @@ class IndustryDriverRow(BaseModel):
     next_verification: str
 
 
+class CompetitionLandscapeRow(BaseModel):
+    """Market-boundary-first competition analysis for one material business."""
+
+    business_unit: str
+    market_boundary: str
+    structure_and_concentration: str = ""
+    direct_competitors: list[str] = Field(default_factory=list)
+    substitutes_self_supply_and_new_entrants: list[str] = Field(default_factory=list)
+    comparison_dimensions: list[str] = Field(default_factory=list)
+    company_relative_position: str
+    competitor_likely_response: str
+    financial_transmission: str
+    evidence_status_and_ids: str
+    next_verification: str = ""
+
+
 class AccountingQualityRow(BaseModel):
     """One accounting/capital-allocation issue tied to value creation."""
 
@@ -247,6 +269,25 @@ class AlternativeIntelligenceDecision(BaseModel):
     affected_business_and_variable: str
     public_crosscheck: str = Field(description="Official/public corroboration, contradiction, or not verified.")
     evidence_grade: Literal["A_verified", "B_private_edge", "C_market_narrative", "D_reject"]
+    source_reliability: Literal[
+        "A_primary_public",
+        "B_identified_professional",
+        "C_private_unverified",
+        "D_unknown_or_rumor",
+    ] = "C_private_unverified"
+    bias_profile: Literal[
+        "neutral_or_data",
+        "sell_side_optimism",
+        "company_promotion",
+        "channel_selection_bias",
+        "unknown",
+    ] = "unknown"
+    adoption_ceiling: Literal[
+        "reported_fact",
+        "model_input_after_crosscheck",
+        "scenario_or_verification_only",
+        "reject",
+    ] = "scenario_or_verification_only"
     disposition: Literal["model_change", "probability_change", "verification_change", "rejected"]
     before_after: str = Field(description="Numeric model/probability before->after, changed clock/gate, or rejection reason.")
     report_use: str = Field(description="Exact public chapter and thesis affected.")
@@ -1589,6 +1630,13 @@ class SellSidePMDecision(BaseModel):
         default_factory=list,
         description="Dated sector-native demand, supply/capacity, price/cost and policy drivers with financial transmission.",
     )
+    competition_landscapes: list[CompetitionLandscapeRow] = Field(
+        default_factory=list,
+        description=(
+            "One row per material business unit: establish market boundary first, then direct competitors, "
+            "substitutes/self-supply/new entrants, relative position, likely competitive response and financial transmission."
+        ),
+    )
     moat_mechanisms: list[MoatMechanismRow] = Field(
         default_factory=list,
         description=(
@@ -1742,7 +1790,7 @@ class SellSidePMDecision(BaseModel):
         default="",
         description=(
             "Legacy compatibility field. Keep empty. It is not rendered and cannot replace "
-            "the fixed eight-section memo."
+            "the fixed seven-chapter memo."
         )
     )
     shared_model_change_audit: str = Field(
@@ -3465,6 +3513,38 @@ def _render_industry_drivers(rows_in: list[IndustryDriverRow]) -> str:
     return "\n".join(rows)
 
 
+def _render_competition_landscapes(rows_in: list[CompetitionLandscapeRow]) -> str:
+    if not rows_in:
+        return ""
+    rows = [
+        "### \u7ade\u4e89\u683c\u5c40\u4e0e\u66ff\u4ee3\u98ce\u9669",
+        "",
+        "| \u4e1a\u52a1\u5355\u5143/\u5e02\u573a\u8fb9\u754c | \u76f4\u63a5\u7ade\u4e89\u8005 | \u66ff\u4ee3/\u81ea\u4f9b/\u65b0\u8fdb\u5165 | \u76f8\u5bf9\u4f4d\u7f6e\u4e0e\u7ade\u4e89\u53cd\u5e94 | \u8d22\u52a1\u4f20\u5bfc | \u8bc1\u636e/\u4e0b\u4e00\u9a8c\u8bc1 |",
+        "| --- | --- | --- | --- | --- | --- |",
+    ]
+    for row in rows_in[:10]:
+        direct = "; ".join(row.direct_competitors) or "\u672a\u83b7\u53d6"
+        alternatives = "; ".join(row.substitutes_self_supply_and_new_entrants) or "\u672a\u83b7\u53d6"
+        position = f"{row.company_relative_position}; \u53ef\u80fd\u53cd\u5e94: {row.competitor_likely_response}"
+        evidence = f"{row.evidence_status_and_ids}; {row.next_verification}"
+        rows.append(
+            "| "
+            + " | ".join(
+                _table_cell(value)
+                for value in (
+                    f"{row.business_unit}: {row.market_boundary}",
+                    direct,
+                    alternatives,
+                    position,
+                    row.financial_transmission,
+                    evidence,
+                )
+            )
+            + " |"
+        )
+    return "\n".join(rows)
+
+
 def _render_moat_mechanisms(rows_in: list[MoatMechanismRow]) -> str:
     if not rows_in:
         return ""
@@ -3523,11 +3603,47 @@ def _render_alternative_intelligence(rows_in: list[AlternativeIntelligenceDecisi
     ]
     for row in material:
         ids = "/".join(row.kpe_ids) or "未编号"
+        source_label = (
+            f"{ids} / {row.evidence_grade} / {row.source_reliability} / "
+            f"{row.bias_profile} / ceiling={row.adoption_ceiling}"
+        )
         rows.append(
-            f"| {_table_cell(ids + ' / ' + row.evidence_grade)} | {_table_cell(row.claim)} | "
+            f"| {_table_cell(source_label)} | {_table_cell(row.claim)} | "
             f"{_table_cell(row.before_after)} | {_table_cell(row.public_crosscheck + '；' + row.falsification_or_next_check)} |"
         )
     rows.append("- 表中私域内容仅呈现已影响核心假设或验证时点的结论；拒绝项与处理日志保留在结构化审计文件中。")
+    return "\n".join(rows)
+
+
+def _render_alternative_intelligence_audit(
+    rows_in: list[AlternativeIntelligenceDecision],
+) -> str:
+    """Render the complete KPE disposition ledger for internal audit."""
+    if not rows_in:
+        return ""
+    rows = [
+        "### 知识星球信息处置台账",
+        "",
+        "| KPE | 线索 | 等级 | 处置 | 模型/概率/验证变化 | 公共交叉验证 | 下一检查 |",
+        "| --- | --- | --- | --- | --- | --- | --- |",
+    ]
+    for row in rows_in:
+        rows.append(
+            "| "
+            + " | ".join(
+                _table_cell(value)
+                for value in (
+                    "/".join(row.kpe_ids) or "未编号",
+                    row.claim,
+                    row.evidence_grade,
+                    row.disposition,
+                    row.before_after,
+                    row.public_crosscheck,
+                    row.falsification_or_next_check,
+                )
+            )
+            + " |"
+        )
     return "\n".join(rows)
 
 
@@ -3724,38 +3840,19 @@ def _render_valuation_snapshot(output: DeterministicValuationOutput) -> str:
 
 
 def _render_sell_side_internal_appendix(decision: SellSidePMDecision) -> str:
-    """Render detailed workbench material that should not crowd the public memo."""
+    """Render audit ledgers that should not crowd the reader-facing memo.
+
+    Business mechanisms, segment economics, industry drivers, moat tests and
+    accounting-quality checks are decision-useful research and therefore stay
+    in the public seven-chapter memo. Only complete source-disposition and
+    model-handoff logs remain internal.
+    """
     sections: list[str] = []
-    business_detail = "\n\n".join(
-        part
-        for part in (
-            _render_business_model_mechanisms(decision.business_model_mechanisms),
-            _render_segment_economics(decision.segment_economics),
-        )
-        if part
-    ).strip()
-    if business_detail:
-        sections.append("## 内部附录A：业务机制与分部经济\n\n" + business_detail)
-
-    industry_detail = "\n\n".join(
-        part
-        for part in (
-            _render_industry_drivers(decision.industry_driver_matrix),
-            _render_moat_mechanisms(decision.moat_mechanisms),
-        )
-        if part
-    ).strip()
-    if industry_detail:
-        sections.append("## 内部附录B：行业驱动与护城河机制\n\n" + industry_detail)
-
-    accounting_detail = _render_accounting_quality(decision.accounting_quality_matrix)
-    if accounting_detail:
-        sections.append("## 内部附录C：财务质量核查明细\n\n" + accounting_detail)
 
     expectation_detail = "\n\n".join(
         part
         for part in (
-            _render_alternative_intelligence(decision.alternative_intelligence_decisions),
+            _render_alternative_intelligence_audit(decision.alternative_intelligence_decisions),
             _render_sell_side_expectations(decision.sell_side_expectation_matrix)
             if decision.sell_side_expectation_matrix
             else "",
@@ -3796,40 +3893,54 @@ def render_sell_side_pm_decision(decision: SellSidePMDecision) -> str:
     return "\n\n".join(
         [
             "# 公司深度研究与投资决策",
-            "| 最终评级 | 投资观点 |\n"
-            "| --- | --- |\n"
-            f"| {rating_label}（{decision.rating.value}） | {decision.rating_posture} |",
-            f"> **一句话结论：** {decision.one_line_thesis}",
-            "## 一、投资结论\n\n"
-            + _demote_embedded_headings(decision.investment_conclusion_and_core_conflict),
-            "## 二、公司画像、商业模式与利润池\n\n"
-            + _demote_embedded_headings(decision.company_disaggregation),
-            "## 三、行业格局、竞争优势与护城河\n\n"
-            + _demote_embedded_headings(decision.industry_cycle_and_competition)
-            + "\n\n### 护城河判断\n\n"
-            + _demote_embedded_headings(decision.moat_evidence_scorecard),
-            "## 四、经营质量、财务特征与资本配置\n\n"
-            + _demote_embedded_headings(decision.accounting_and_capital_allocation),
-            "## 五、核心投资逻辑与关键分歧\n\n"
-            + _demote_embedded_headings(decision.thesis_financial_bridge),
-            "## 六、盈利预测与关键变量\n\n"
-            + _render_forecast_takeaways(decision.forecast_takeaways)
+            "## 一、公司是谁、如何赚钱\n\n"
+            + _demote_embedded_headings(decision.company_disaggregation)
             + "\n\n"
+            + _render_business_model_mechanisms(decision.business_model_mechanisms),
+            "## 二、产业链位置与行业格局\n\n"
+            + _demote_embedded_headings(decision.industry_cycle_and_competition)
+            + "\n\n"
+            + _render_industry_drivers(decision.industry_driver_matrix)
+            + "\n\n"
+            + _render_competition_landscapes(decision.competition_landscapes),
+            "## 三、业务拆解与核心利润池\n\n"
+            + _render_segment_economics(decision.segment_economics)
+            + "\n\n"
+            + _demote_embedded_headings(decision.accounting_and_capital_allocation)
+            + "\n\n"
+            + _render_accounting_quality(decision.accounting_quality_matrix),
+            "## 四、竞争优势、护城河与主要短板\n\n"
+            + _demote_embedded_headings(decision.moat_evidence_scorecard)
+            + "\n\n"
+            + _render_moat_mechanisms(decision.moat_mechanisms),
+            "## 五、增长逻辑、关键分歧与盈利预测\n\n"
+            + _demote_embedded_headings(decision.thesis_financial_bridge)
+            + "\n\n"
+            + _render_forecast_takeaways(decision.forecast_takeaways)
+            + "\n\n### 模型解释与局限\n\n"
             + _render_reader_forecast_table(decision.canonical_model_snapshot)
             + "\n\n"
             + _render_forecast_assumptions(decision.forecast_assumptions)
-            + "\n\n### 模型解释与局限\n\n"
+            + "\n\n"
             + _demote_embedded_headings(decision.autonomous_forecast_model),
-            "## 七、市场预期差与估值\n\n"
+            "## 六、市场预期差、风险与验证\n\n"
             + _demote_embedded_headings(decision.expectation_gap_and_market_pricing)
             + "\n\n"
             + _render_foreign_sell_side_disclosure(decision.sell_side_expectation_matrix)
             + "\n\n"
+            + _render_alternative_intelligence(decision.alternative_intelligence_decisions)
+            + "\n\n### 风险、催化剂与验证日历\n\n"
+            + _demote_embedded_headings(decision.risks_catalysts_verification),
+            "## 七、估值、评级与投资结论\n\n"
             + _render_deterministic_valuation(decision.deterministic_valuation)
             + "\n\n### 估值解释与局限\n\n"
-            + _demote_embedded_headings(decision.valuation_closure),
-            "## 八、风险、催化剂与跟踪\n\n"
-            + _demote_embedded_headings(decision.risks_catalysts_verification),
+            + _demote_embedded_headings(decision.valuation_closure)
+            + "\n\n### 投资结论\n\n"
+            + _demote_embedded_headings(decision.investment_conclusion_and_core_conflict)
+            + f"\n\n> **一句话结论：** {decision.one_line_thesis}"
+            + "\n\n| 最终评级 | 投资观点 |\n"
+            + "| --- | --- |\n"
+            + f"| {rating_label}（{decision.rating.value}） | {decision.rating_posture} |",
             _render_sell_side_internal_appendix(decision),
         ]
     )
