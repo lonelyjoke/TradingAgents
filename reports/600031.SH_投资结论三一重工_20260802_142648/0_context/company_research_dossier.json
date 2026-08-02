@@ -1,0 +1,1971 @@
+{
+  "schema_version": 1,
+  "symbol": "600031.SH",
+  "as_of_date": "2026-08-02",
+  "reader_contract": {
+    "audience": "普通投资者",
+    "principle": "数据用于权威佐证，不能替代公司、产业链与投资逻辑。",
+    "formal_rating_position": "第七章末尾",
+    "chapter_count": 7
+  },
+  "source_policy": {
+    "A_hard_fact": {
+      "sources": "公司财报、交易所/公司公告、官方业绩指引",
+      "allowed_use": "冻结历史事实和模型基线"
+    },
+    "B_reproducible": {
+      "sources": "Tushare结构化数据、程序计算、官方统计、行业协会",
+      "allowed_use": "财务计算、行业比较和可复核代理变量"
+    },
+    "C_external_expectation": {
+      "sources": "具名卖方报告、多机构一致预期",
+      "allowed_use": "构建市场预期与预测分歧；单家机构不得冒充一致预期"
+    },
+    "D_alternative_intelligence": {
+      "sources": "知识星球、渠道调研、专家纪要、私域卖方推送",
+      "allowed_use": "量化模型变更、情景概率变化、验证日历变化或明确拒绝"
+    },
+    "E_background": {
+      "sources": "普通新闻、政策评论、行业叙事",
+      "allowed_use": "解释背景；不得单独改变盈利预测或评级"
+    }
+  },
+  "company_introduction": {
+    "business_archetype": "Cyclical capital-goods manufacturer with global distribution; primary archetype is product/manufacturing (capacity → utilization → volume → ASP → input cost → margin), supplemented by project/order delivery for large equipment and solution bundles. Domestic replacement cycle plus overseas share gains drive the top line, while product mix, scale, and FX/input costs dictate margins.",
+    "value_proposition_and_customers": "Manufactures and sells excavators, cranes, concrete machinery, road machinery, and other construction equipment to infrastructure, mining, real estate, and energy customers in over 150 countries. Revenue is split between domestic (c.60% estimated) and international (c.40% estimated) markets. Domestic demand relies on equipment replacement, infrastructure policy, and real estate stabilization. Overseas demand is driven by resource capex, emerging-market urbanization, and global share migration from Western incumbents. No single customer exceeds 5% of revenue.",
+    "revenue_equation": "Revenue = Σ (segment shipments × ASP) + parts & service revenue; shipments = capacity × utilization × yield. For large units a project/backlog element also exists.",
+    "profit_equation": "Gross profit = revenue - (raw materials + labour + manufacturing overhead + freight/warranty); Operating profit = gross profit - (R&D + SG&A + freight) ± other operating items; Parent profit = operating profit - net finance costs - tax - minority interest.",
+    "cash_flow_equation": "OCF ≈ net profit + depreciation ± working capital change → high correlation with net profit historically (OCF/net profit ~1.4x); FCF = OCF - capex (maintenance + growth). Working capital is dominated by receivables and inventory, both closely linked to shipments and channel stocking.",
+    "capital_intensity_and_reinvestment": "Recurring R&D spend pledged at >5% of revenue; capex is directed to smart factories, global service capacity, and localized assembly. Maintenance capex is modest (depreciation range), growth capex is fungible. The genuine reinvestment engine is the shift to electrification and automation, plus overseas distribution build-out.",
+    "key_unknowns": [
+      "Precise revenue split by product and geography for FY2025 and Q1 2026.",
+      "Company-level excavator, crane, concrete machinery shipment volumes and ASP trends.",
+      "Detailed exchange-rate exposure and hedging ratios.",
+      "Capex, depreciation, and free cash flow for FY2025 and forward plan.",
+      "Raw material procurement contracts and pass-through lag structure.",
+      "Diluted share count and any dilution from employee equity schemes."
+    ]
+  },
+  "industry_chain": {
+    "operating_model_family": "volume_price_cost",
+    "upstream_cost_and_supply": [
+      {
+        "segment": "挖掘机械",
+        "supply_capacity": "Domestic industry dominated by top 3-4 players (SANY, XCMG, Zoomlion); SANY likely holds ~28% domestic excavator share; overseas competition includes Caterpillar, Komatsu, Hitachi, Volvo, but Chinese OEMs gaining share via price-to-performance advantages. Capacity is not a bottleneck; competition is on technology, service, and finance.",
+        "unit_cost_inputs": "Main inputs: steel (plate, profiles), engines, hydraulic components, electronic controls, and tires. Steel prices have been range-bound; global supply chains are stable. Scale and vertical integration reduce unit conversion cost."
+      },
+      {
+        "segment": "海外业务",
+        "supply_capacity": "Global construction equipment market dominated by Caterpillar, Komatsu, and Volvo CE; Chinese OEMs collectively hold low-teens share globally but growing rapidly. SANY is building localized assembly and service centers to reduce tariff exposure and improve delivery.",
+        "unit_cost_inputs": "Local assembly or knock-down kits shield some input cost volatility; freight costs are falling from COVID-era peaks. Tariff measures (EU, US) could increase landed cost, partially offset by localization."
+      },
+      {
+        "segment": "国内业务",
+        "supply_capacity": "Domestic industry has consolidated; SANY, XCMG, Zoomlion account for majority of excavator and crane sales. Capacity utilization has been low during the downturn but is rising rapidly. Competition is rationalizing – price increases taken by leaders.",
+        "unit_cost_inputs": "Fixed cost absorption is a major positive as volumes recover. Raw material costs are currently stable. Logistics costs normalizing."
+      },
+      {
+        "segment": "海外/国际业务",
+        "supply_capacity": "",
+        "unit_cost_inputs": ""
+      },
+      {
+        "segment": "起重机械",
+        "supply_capacity": "",
+        "unit_cost_inputs": ""
+      }
+    ],
+    "downstream_demand_and_pricing": [
+      {
+        "segment": "挖掘机械",
+        "customers_channel": "Dealer network in China; direct sales and dealers overseas; end-users: mining companies, infrastructure contractors, rental companies, and material handlers",
+        "demand": [
+          "China: equipment replacement cycle (8-10 year fleet age), large-scale equipment renewal policy, infrastructure stabilization, mining investment",
+          "Global: resource capex (Africa, Latin America), urbanization (SE Asia), fleet modernisation in developed markets",
+          "Electrification – gradual penetration of electric excavators (65 domestic units June 2026)"
+        ],
+        "price_asp": "Industry-wide price increases announced for excavators in H1 2026; product mix shifting towards medium/large machines; electric excavators command a premium. Exact ASP undisclosed."
+      },
+      {
+        "segment": "海外业务",
+        "customers_channel": "Dealers and direct sales in 150+ countries; heavy presence in Africa, Southeast Asia, Latin America; growing in Europe and North America",
+        "demand": [
+          "Resource-rich emerging markets: mining, energy, and infrastructure capital expenditure",
+          "Chinese contractors' Belt & Road projects pulling through domestic brands",
+          "Competitive displacement of Western OEMs based on total cost of ownership and financing terms",
+          "Electrification pilot programs in Europe and North America"
+        ],
+        "price_asp": "Export ASPs are higher than domestic due to product mix (larger machines) and stronger pricing power in markets with fewer local alternatives. Pricing is stable to rising."
+      },
+      {
+        "segment": "国内业务",
+        "customers_channel": "Extensive dealer network; direct sales to large state-owned enterprises and fleet owners; increasing finance/leasing penetration",
+        "demand": [
+          "Equipment replacement cycle: average age of excavator fleet 8-10 years, entering a multi-year replacement window.",
+          "Policy support: large-scale equipment renewal policy and super-long special government bonds for infrastructure.",
+          "Infrastructure and mining: relatively stable demand from transportation, water conservancy, and mining.",
+          "Real estate stabilization: floor space under construction is still declining but pace may moderate, reducing drag on concrete machinery."
+        ],
+        "price_asp": "Industry-wide price increases implemented for excavators, cranes, and concrete machinery; SANY is a price leader. Realised ASP is gradually improving."
+      },
+      {
+        "segment": "海外/国际业务",
+        "customers_channel": "",
+        "demand": [],
+        "price_asp": ""
+      },
+      {
+        "segment": "起重机械",
+        "customers_channel": "",
+        "demand": [],
+        "price_asp": ""
+      }
+    ]
+  },
+  "profit_pools": {
+    "reported_or_analytical_units": [
+      {
+        "unit_id": "U01",
+        "unit_name": "挖掘机械",
+        "unit_type": "product",
+        "disclosure_basis": "analytical",
+        "parent_unit": "company",
+        "economic_role": "Largest revenue and profit contributor; excavators including electric models drive volume, scale and competitive position both domestically and in export markets.",
+        "primary_operating_archetype": "volume_price_cost",
+        "secondary_operating_archetype": "",
+        "revenue_driver_equation": "Excavator unit sales × domestic/export ASP, where ASP is influenced by product size mix (large vs. mini) and electrification premium.",
+        "profit_driver_equation": "Gross profit = sales × (ASP - unit BOM/steel - conversion cost - freight/warranty); segment gross margin historically higher than corporate average, with overseas margin above 31%.",
+        "cash_and_capital_equation": "Working capital tied to dealer inventory and receivables; capex directed at smart manufacturing of excavator lines.",
+        "reported_metrics": [
+          "Industry excavator sales (CCMA) – proxy only"
+        ],
+        "evidence_ids": [
+          "KPE03",
+          "KPE04",
+          "KPE06"
+        ],
+        "missing_inputs": [
+          "Company excavator unit sales by region",
+          "Excavator segment revenue, cost, gross margin",
+          "ASP and product mix evolution"
+        ],
+        "next_verification": "2026 H1 segment reporting in 2026 semi-annual report; reconcile CCMA industry data with company shipments."
+      },
+      {
+        "unit_id": "U02",
+        "unit_name": "起重机械",
+        "unit_type": "product",
+        "disclosure_basis": "analytical",
+        "parent_unit": "company",
+        "economic_role": "Second-largest product category; includes mobile, crawler, and tower cranes; closely tied to infrastructure, wind power, and petrochemical installation demand.",
+        "primary_operating_archetype": "volume_price_cost",
+        "secondary_operating_archetype": "project_backlog_delivery",
+        "revenue_driver_equation": "Crane unit sales (varied modalities) × ASP; large crawler cranes exhibit partial backlog-driven delivery.",
+        "profit_driver_equation": "Gross profit = unit sales × (ASP - structural steel/hydraulics - conversion cost - logistics); margin sensitive to product size and export mix.",
+        "cash_and_capital_equation": "Longer order-to-delivery cycle for large cranes creates working capital tied up in WIP and progress billing receivables.",
+        "reported_metrics": [
+          "Industry crane sales (6月2026: automotive +14.9%, crawler -4.4% domestic)"
+        ],
+        "evidence_ids": [
+          "KPE04",
+          "KPE09"
+        ],
+        "missing_inputs": [
+          "Company crane shipments and backlog",
+          "Segment revenue, cost, margin"
+        ],
+        "next_verification": "2026 H1 segment data and management discussion of crane orders."
+      },
+      {
+        "unit_id": "U03",
+        "unit_name": "混凝土机械",
+        "unit_type": "product",
+        "disclosure_basis": "analytical",
+        "parent_unit": "company",
+        "economic_role": "Third major product line; concrete pump trucks, mixing trucks and batching plants depend on real estate and infrastructure construction activity.",
+        "primary_operating_archetype": "volume_price_cost",
+        "secondary_operating_archetype": "",
+        "revenue_driver_equation": "Unit sales × ASP, with ASP supported by product upgrades and price increases recently announced.",
+        "profit_driver_equation": "Gross profit = volume × (ASP - chassis/steel/hydraulics - conversion cost); margin has been under pressure during property downturn.",
+        "cash_and_capital_equation": "Trade receivables from property developers and construction firms represent credit risk; inventory includes finished chassis.",
+        "reported_metrics": [],
+        "evidence_ids": [
+          "KPE04"
+        ],
+        "missing_inputs": [
+          "Segment concrete machinery revenue and margins",
+          "Shipment units and price trend"
+        ],
+        "next_verification": "Evidence of price increase realization in Q3 2026."
+      },
+      {
+        "unit_id": "U04",
+        "unit_name": "海外业务",
+        "unit_type": "geography",
+        "disclosure_basis": "reported",
+        "parent_unit": "company",
+        "economic_role": "Aggregates all products sold outside mainland China; characterized by higher gross margins and faster growth, presently estimated at c.40% of revenue and expanding.",
+        "primary_operating_archetype": "volume_price_cost",
+        "secondary_operating_archetype": "",
+        "revenue_driver_equation": "Export volume (own brand + Putzmeister) × export ASP, with regional mix (Africa, SE Asia, Europe, North America, Latin America) influencing both growth and margin.",
+        "profit_driver_equation": "Overseas gross margin ≈ 31.7% (FY2025) vs. domestic estimated mid-20s%; profit = revenue × segment gross margin - local overhead - FX losses.",
+        "cash_and_capital_equation": "Cash conversion quality is high; localized assembly and parts inventory require moderate working capital; FX fluctuation affects cash through translation and transaction.",
+        "reported_metrics": [
+          "International business gross margin 31.7% (FY2025, +2pp YoY)",
+          "Coverage of 150+ countries",
+          "Q2 2026 channel check: overseas revenue +25% YoY"
+        ],
+        "evidence_ids": [
+          "EV028",
+          "EV033",
+          "KPE02",
+          "KPE03"
+        ],
+        "missing_inputs": [
+          "Overseas revenue absolute value for FY2025 and Q1 2026",
+          "Regional revenue split and profitability",
+          "FX exposure and hedging breakdown"
+        ],
+        "next_verification": "H1 2026 overseas revenue disclosure and margin analysis."
+      },
+      {
+        "unit_id": "U05",
+        "unit_name": "国内业务",
+        "unit_type": "geography",
+        "disclosure_basis": "calculated",
+        "parent_unit": "company",
+        "economic_role": "Revenue derived from mainland China sales across all products; currently estimated as remainder of consolidated revenue less overseas; benefiting from equipment replacement cycle and price increases.",
+        "primary_operating_archetype": "volume_price_cost",
+        "secondary_operating_archetype": "",
+        "revenue_driver_equation": "Domestic shipments × domestic ASP; replacement demand from 8-10 year old equipment is the primary structural driver, augmented by infrastructure and mining investment.",
+        "profit_driver_equation": "Domestic gross margin lower than overseas; profit = revenue × margin × (1 - channel discount) - selling and administrative costs; margin is improving as price increases stick and scale returns.",
+        "cash_and_capital_equation": "Receivables from domestic dealers and end-users historically a drag; improving as industry consolidates and financing tools diversify.",
+        "reported_metrics": [
+          "Domestic excavator sales +33.9% YoY June 2026 (industry total)",
+          "Domestic revenue growth 'teens' per private channel Q2 2026"
+        ],
+        "evidence_ids": [
+          "KPE02",
+          "KPE04",
+          "KPE06",
+          "EV035"
+        ],
+        "missing_inputs": [
+          "Domestic revenue absolute value",
+          "Domestic gross margin"
+        ],
+        "next_verification": "H1 2026 domestic/overseas segment breakdown."
+      }
+    ],
+    "segment_models": [
+      {
+        "segment": "挖掘机械",
+        "products_or_services": "6-120 ton hydraulic excavators, mini excavators, electric excavators and attachments",
+        "customers_and_channel": "Dealer network in China; direct sales and dealers overseas; end-users: mining companies, infrastructure contractors, rental companies, and material handlers",
+        "revenue_weight_pct": null,
+        "profit_weight_pct": null,
+        "base_period": "2026 H1 industry data only",
+        "base_revenue_value": null,
+        "base_revenue_unit": "CNY mn",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [
+          "China: equipment replacement cycle (8-10 year fleet age), large-scale equipment renewal policy, infrastructure stabilization, mining investment",
+          "Global: resource capex (Africa, Latin America), urbanization (SE Asia), fleet modernisation in developed markets",
+          "Electrification – gradual penetration of electric excavators (65 domestic units June 2026)"
+        ],
+        "industry_supply_and_capacity": "Domestic industry dominated by top 3-4 players (SANY, XCMG, Zoomlion); SANY likely holds ~28% domestic excavator share; overseas competition includes Caterpillar, Komatsu, Hitachi, Volvo, but Chinese OEMs gaining share via price-to-performance advantages. Capacity is not a bottleneck; competition is on technology, service, and finance.",
+        "volume_share_utilization": "Industry June 2026 sales 25,445 units (+35.3% YoY); H1 2026 152,300 units (+26.4% YoY). SANY's exact unit share is unverified but has historically led; utilization rates not disclosed.",
+        "price_asp_take_rate": "Industry-wide price increases announced for excavators in H1 2026; product mix shifting towards medium/large machines; electric excavators command a premium. Exact ASP undisclosed.",
+        "unit_cost_and_input_prices": "Main inputs: steel (plate, profiles), engines, hydraulic components, electronic controls, and tires. Steel prices have been range-bound; global supply chains are stable. Scale and vertical integration reduce unit conversion cost.",
+        "margin_and_operating_leverage": "Excavator gross margin normally higher than corporate average; overseas excavator margin >31%. As volume rises, fixed factory overhead and R&D are absorbed, driving operating leverage. Evidence from KPE02 suggests Q2 2026 operating profit growth of 40%+",
+        "working_capital_and_cash_conversion": "Dealer stocking and trade-in programs tie up inventory; receivables quality has improved (receivables/revenue ratio down 3.89 pp YoY to 28.5% in Q1 2026). Cash conversion ratio ~1.4x net profit.",
+        "prosperity_level": "high",
+        "marginal_direction": "improving",
+        "causal_analysis": "Robust demand from replacement cycle and overseas resource capex → industry sales growing +25-35% → SANY likely gaining or holding share → price increases support ASP → scale and mix lift gross margin → operating profit growing faster than revenue → working capital benchmarks improving → strong FCF generation.",
+        "valuation_treatment": "Core value driver; multiple expansion justified if margin and share-gain story persists; cyclical PE range 12-18x on normalized earnings.",
+        "strongest_counterevidence": [
+          "Domestic excavator sales overstate true end-demand because some units are exported via grey channels or reported under domestic labels (KPE04 notes statistical distortion).",
+          "If housing and local government finances weaken again, replacement demand could slow abruptly.",
+          "Commodity price collapse would curtail overseas mining capex (e.g., copper, iron ore) and reduce export growth."
+        ],
+        "evidence_ids": [
+          "KPE03",
+          "KPE04",
+          "KPE06",
+          "EV013",
+          "EV017"
+        ],
+        "missing_inputs": [
+          "SANY excavator unit sales and market share",
+          "Segment revenue and gross margin"
+        ],
+        "next_verification": "H1 2026 segment reporting in August 2026."
+      },
+      {
+        "segment": "海外业务",
+        "products_or_services": "All construction machinery and parts sold outside mainland China, including SANY-brand and Putzmeister-branded equipment",
+        "customers_and_channel": "Dealers and direct sales in 150+ countries; heavy presence in Africa, Southeast Asia, Latin America; growing in Europe and North America",
+        "revenue_weight_pct": null,
+        "profit_weight_pct": null,
+        "base_period": "FY2025",
+        "base_revenue_value": null,
+        "base_revenue_unit": "CNY mn",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": 31.7,
+        "base_margin_change_pp": 2.0,
+        "demand_and_order_drivers": [
+          "Resource-rich emerging markets: mining, energy, and infrastructure capital expenditure",
+          "Chinese contractors' Belt & Road projects pulling through domestic brands",
+          "Competitive displacement of Western OEMs based on total cost of ownership and financing terms",
+          "Electrification pilot programs in Europe and North America"
+        ],
+        "industry_supply_and_capacity": "Global construction equipment market dominated by Caterpillar, Komatsu, and Volvo CE; Chinese OEMs collectively hold low-teens share globally but growing rapidly. SANY is building localized assembly and service centers to reduce tariff exposure and improve delivery.",
+        "volume_share_utilization": "Overseas revenue growth estimated at ~25% YoY in Q2 2026 (KPE02); June export excavator value +27.1% YoY (KPE03). Share gains evident across Africa (+50%), SE Asia (>20%), Europe (+30%), North America (+30%).",
+        "price_asp_take_rate": "Export ASPs are higher than domestic due to product mix (larger machines) and stronger pricing power in markets with fewer local alternatives. Pricing is stable to rising.",
+        "unit_cost_and_input_prices": "Local assembly or knock-down kits shield some input cost volatility; freight costs are falling from COVID-era peaks. Tariff measures (EU, US) could increase landed cost, partially offset by localization.",
+        "margin_and_operating_leverage": "Overseas gross margin significantly lifts consolidated margin (31.7% vs. corporate ~27.5%). As overseas mix rises, corporate margin expands mechanically, even if domestic margin flat. Channel checks indicate Q2 2026 overseas margin up sequentially and YoY despite FX headwinds.",
+        "working_capital_and_cash_conversion": "Overseas working capital includes dealer floor-plan financing and parts inventory. Cash conversion robust; management highlights net cash position in many overseas subsidiaries.",
+        "prosperity_level": "high",
+        "marginal_direction": "improving",
+        "causal_analysis": "Global capex cycle + Chinese OEM share gains → overseas revenue growth of 20-30% → high-margin mix improvement → consolidated gross margin expansion → operating profit growth > revenue growth → strong FCF, partially offset by FX losses on translation.",
+        "valuation_treatment": "Mix shift and secular share-gain story support multiple expansion relative to historical China-centric cycles; overseas profitability is underappreciated in current multiple.",
+        "strongest_counterevidence": [
+          "Geopolitical sanctions or tariff escalation (Russia, Middle East, EU, US) could abruptly halt growth in key regions.",
+          "FX losses (estimated 2025 H2 -1 bn CNY) demonstrate that cash flow can be eroded even when operating income grows.",
+          "North America profit still nascent; large scale-up may require significant capex before reaching steady-state margins."
+        ],
+        "evidence_ids": [
+          "EV028",
+          "EV030",
+          "EV033",
+          "KPE02",
+          "KPE03"
+        ],
+        "missing_inputs": [
+          "Overseas revenue absolute value",
+          "Regional profitability breakdown",
+          "FX exposure quantification"
+        ],
+        "next_verification": "2026 mid-year review for regional revenue and margin; management guidance on localization capex."
+      },
+      {
+        "segment": "国内业务",
+        "products_or_services": "All construction machinery sold in mainland China across excavators, cranes, concrete machinery, road machinery, etc.",
+        "customers_and_channel": "Extensive dealer network; direct sales to large state-owned enterprises and fleet owners; increasing finance/leasing penetration",
+        "revenue_weight_pct": null,
+        "profit_weight_pct": null,
+        "base_period": "FY2025",
+        "base_revenue_value": null,
+        "base_revenue_unit": "CNY mn",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [
+          "Equipment replacement cycle: average age of excavator fleet 8-10 years, entering a multi-year replacement window.",
+          "Policy support: large-scale equipment renewal policy and super-long special government bonds for infrastructure.",
+          "Infrastructure and mining: relatively stable demand from transportation, water conservancy, and mining.",
+          "Real estate stabilization: floor space under construction is still declining but pace may moderate, reducing drag on concrete machinery."
+        ],
+        "industry_supply_and_capacity": "Domestic industry has consolidated; SANY, XCMG, Zoomlion account for majority of excavator and crane sales. Capacity utilization has been low during the downturn but is rising rapidly. Competition is rationalizing – price increases taken by leaders.",
+        "volume_share_utilization": "Domestic excavator industry sales +33.9% YoY in June 2026; H1 +20.4%. Q2 2026 company domestic revenue growth estimated 'teens' per private channel. Market share presumed stable.",
+        "price_asp_take_rate": "Industry-wide price increases implemented for excavators, cranes, and concrete machinery; SANY is a price leader. Realised ASP is gradually improving.",
+        "unit_cost_and_input_prices": "Fixed cost absorption is a major positive as volumes recover. Raw material costs are currently stable. Logistics costs normalizing.",
+        "margin_and_operating_leverage": "Domestic gross margin is lower than overseas but is recovering. The combination of price, volume, and lower fixed cost per unit is driving operating margin improvement. Q1 2026 consolidated operating margin was 12.14%, down 1.60pp YoY mainly due to finance expenses; gross margin expanded 0.64pp, indicating underlying domestic operating margin may have improved.",
+        "working_capital_and_cash_conversion": "Domestic receivables historically the main cash drag; the ratio has declined 3.89pp YoY to 28.5% of revenue, indicating better collection. Inventory/revenue ratio slightly up (0.22pp), consistent with demand build.",
+        "prosperity_level": "recovery",
+        "marginal_direction": "improving",
+        "causal_analysis": "Replacement cycle plus policy tailwinds → domestic sales volume recovering from depressed base → utilization rising, fixed cost absorption improving → price increases flowing through with 1-2 quarter lag → domestic gross margin expanding → operating profit growth > revenue growth → working capital release provides additional cash generation.",
+        "valuation_treatment": "Domestic earnings recovery is the most important inflection for market perception; if consistent, it could de-rate the stock's perceived cyclical risk and support a higher PE.",
+        "strongest_counterevidence": [
+          "Statistical distortions: some 'domestic' sales may actually be exports, overstating true domestic demand (KPE04).",
+          "Real estate construction activity has not yet inflected; concrete machinery demand still weak.",
+          "Local government finances remain stretched, which may limit infrastructure spend beyond shovel-ready projects."
+        ],
+        "evidence_ids": [
+          "EV035",
+          "KPE02",
+          "KPE04",
+          "KPE06"
+        ],
+        "missing_inputs": [
+          "Domestic revenue absolute and growth",
+          "Domestic gross margin trajectory"
+        ],
+        "next_verification": "Q2 2026 domestic revenue disclosure; management commentary on pricing and end-market demand."
+      },
+      {
+        "segment": "海外/国际业务",
+        "products_or_services": "",
+        "customers_and_channel": "",
+        "revenue_weight_pct": null,
+        "profit_weight_pct": null,
+        "base_period": "2025年度-2026Q2",
+        "base_revenue_value": null,
+        "base_revenue_unit": "",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": 31.7,
+        "base_margin_change_pp": 2.0,
+        "demand_and_order_drivers": [],
+        "industry_supply_and_capacity": "",
+        "volume_share_utilization": "",
+        "price_asp_take_rate": "",
+        "unit_cost_and_input_prices": "",
+        "margin_and_operating_leverage": "",
+        "working_capital_and_cash_conversion": "",
+        "prosperity_level": "evidence_limited",
+        "marginal_direction": "unknown",
+        "causal_analysis": "",
+        "valuation_treatment": "evidence_limited",
+        "strongest_counterevidence": [],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "LLM omitted a filing-reported material segment"
+        ],
+        "next_verification": ""
+      },
+      {
+        "segment": "起重机械",
+        "products_or_services": "",
+        "customers_and_channel": "",
+        "revenue_weight_pct": null,
+        "profit_weight_pct": null,
+        "base_period": "2026-06行业跟踪",
+        "base_revenue_value": null,
+        "base_revenue_unit": "",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [],
+        "industry_supply_and_capacity": "",
+        "volume_share_utilization": "",
+        "price_asp_take_rate": "",
+        "unit_cost_and_input_prices": "",
+        "margin_and_operating_leverage": "",
+        "working_capital_and_cash_conversion": "",
+        "prosperity_level": "evidence_limited",
+        "marginal_direction": "unknown",
+        "causal_analysis": "",
+        "valuation_treatment": "evidence_limited",
+        "strongest_counterevidence": [],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "LLM omitted a filing-reported material segment"
+        ],
+        "next_verification": ""
+      }
+    ]
+  },
+  "competition_and_moat": {
+    "landscapes": [
+      {
+        "business_unit": "挖掘机械",
+        "market_boundary": "Global hydraulic excavator market (6t to 120t), including electric variants; broken into domestic China market and export markets.",
+        "boundary_evidence": "Industry association CCMA data; customs export data; company annual report geographic disclosure.",
+        "structure_and_concentration": "China domestic: top 3 (SANY, XCMG, Zoomlion) hold ~60%+ share; SANY is market leader. Global: dominated by Caterpillar, Komatsu, Hitachi, Volvo CE; Chinese OEMs combined share ~15%, rising.",
+        "direct_competitors": [
+          "Caterpillar (global leader)",
+          "Komatsu",
+          "XCMG (domestic No.2)",
+          "Zoomlion (domestic No.3)",
+          "Volvo CE",
+          "Liugong",
+          "Shantui"
+        ],
+        "substitutes_and_customer_alternatives": [
+          "Rental and leasing instead of purchase",
+          "Used/refurbished machines",
+          "Other earth-moving methods (bulldozers, loaders for certain tasks)"
+        ],
+        "self_supply_and_new_entrants": [
+          "Large mining companies sometimes self-maintain fleets, but rare to self-manufacture.",
+          "New entrants: electric vehicle or battery manufacturers attempting to develop electric construction machinery; still niche."
+        ],
+        "comparison_dimensions": [
+          "Product quality and reliability",
+          "Total cost of ownership (purchase price + fuel/electric + maintenance)",
+          "Dealer and service network coverage",
+          "Financing and residual value support",
+          "Technology (electrification, automation, telematics)"
+        ],
+        "company_relative_position": "SANY is the No.1 excavator brand in China by volume, with growing global share. It competes on price-performance and increasingly on technology (electric excavators, smart factories). Its main gap vs. global leaders is long-term durability perception in harsh mining environments and dealer coverage in developed markets.",
+        "competitor_likely_response": "Incumbents (Caterpillar, Komatsu) are accelerating their own electrification and digital offerings, leveraging captive finance arms and long-standing customer relationships. They may price aggressively in key export markets to defend share. Domestic peers (XCMG, Zoomlion) will match pricing and try to close the technology gap, potentially limiting domestic margin expansion.",
+        "financial_transmission": "Market share gains => higher revenue; pricing power => ASP; competitor price wars => gross margin compression; SANY's ability to maintain price premium depends on technology differentiation and service quality. Capex required to match global dealer networks could depress FCF.",
+        "evidence_ids": [
+          "KPE02",
+          "KPE03",
+          "KPE04",
+          "EV036"
+        ],
+        "evidence_status": "partial",
+        "missing_inputs": [
+          "SANY's exact global excavator market share",
+          "Competitor pricing data"
+        ],
+        "next_verification": "Industry statistics and management commentary on market share in Q2 results."
+      },
+      {
+        "business_unit": "海外业务",
+        "market_boundary": "Construction and mining equipment sold outside mainland China, including own-brand and Putzmeister concrete equipment.",
+        "boundary_evidence": "Company annual report states products in 150+ countries; geographic segmentation provided (but unit not reconciled).",
+        "structure_and_concentration": "Highly fragmented by region; Africa and SE Asia are large, price-sensitive markets; Europe and North America are brand- and service-intensive. Local competitors often strong in their home markets.",
+        "direct_competitors": [
+          "Caterpillar",
+          "Komatsu",
+          "Hitachi Construction Machinery",
+          "Volvo Construction Equipment",
+          "XCMG (overseas)",
+          "Zoomlion (overseas)",
+          "Liugong (overseas)"
+        ],
+        "substitutes_and_customer_alternatives": [
+          "Local brands in emerging markets (e.g., Tata Hitachi, Hyundai)",
+          "Used equipment imports from developed markets",
+          "Rental options from global rental companies (United Rentals, Ashtead)"
+        ],
+        "self_supply_and_new_entrants": [
+          "Some mining firms develop captive maintenance, but equipment supply remains OEM-dependent.",
+          "New entrants: Indian and Turkish manufacturers expanding in price-sensitive segments."
+        ],
+        "comparison_dimensions": [
+          "Price-performance ratio",
+          "Financing availability",
+          "Parts availability and service response time",
+          "Compliance with local emission and safety regulations",
+          "Brand trust and resale value"
+        ],
+        "company_relative_position": "SANY is the largest Chinese construction equipment exporter, with a well-recognized brand in emerging markets. It is gaining in Europe and North America but remains behind incumbents in established markets. Its competitive advantage is aggressive pricing, improving quality, and comprehensive product range. The acquisition of Putzmeister provides a premium concrete brand and European distribution.",
+        "competitor_likely_response": "Local competitors and global OEMs may lower prices or increase financing incentives in key SANY markets. Regulatory barriers (tariffs, emission standards) could be raised to protect local industries.",
+        "financial_transmission": "Overseas revenue growth and margin determine the company's ability to sustain above-peer ROE and reduce domestic cycle dependency. Any trade barrier or FX shock directly impacts profits and cash flows.",
+        "evidence_ids": [
+          "EV028",
+          "EV030",
+          "EV033",
+          "KPE02"
+        ],
+        "evidence_status": "partial",
+        "missing_inputs": [
+          "Regional competitor market shares",
+          "Tariff impact quantification"
+        ],
+        "next_verification": "Geopolitical risk analysis and regional management discussion."
+      }
+    ],
+    "competition_and_substitution_analysis": "SANY's true competition is multi-layered. In China, it is a three-player oligopoly with XCMG and Zoomlion; the market is rationalizing, but price competition can re-emerge quickly if growth slows. Globally, SANY competes with Caterpillar, Komatsu, and others on total cost of ownership, not just list price. The main substitute risk is rental/leasing and the continued availability of used equipment that pressures new sales. Customer self-supply is negligible. New entrants from adjacent industries (battery/EV companies) are a watchpoint in the electrification transition, but SANY's existing distribution and service network provides an incumbency advantage. The technology/regulatory change dimension is the most uncertain: stricter emission standards in Europe and North America could accelerate replacement but also increase engineering costs, potentially favouring established players with deeper compliance experience.",
+    "claimed_mechanisms": [
+      "Scale and cost advantage – largest domestic excavator manufacturer with high capacity utilisation and integrated supply chain; extended during downcycles while smaller peers retrenched.",
+      "Global distribution and service network – products sold in 150+ countries; localized service, parts centres, and digital platform MySANY create switching costs and brand stickiness.",
+      "R&D and electrification – >5% of revenue reinvested in R&D; early mover in electric excavators and digitalized 'lighthouse' factories.",
+      "Brand and customer relationships – recognized as market leader in China, increasingly accepted abroad; long-standing relationships with dealers and fleet owners."
+    ],
+    "tests": [
+      {
+        "moat_mechanism": "Scale and cost advantage in excavator manufacturing",
+        "observable_test": "SANY's gross margin vs. domestic peers (XCMG, Zoomlion) through the cycle; should be consistently 2-3pp higher.",
+        "comparison_basis": "Comparison with XCMG (000425.SZ) and Zoomlion (000157.SZ) gross margins, reported in their annual filings.",
+        "evidence_result": "Untested – we lack clean segment-level gross margin for SANY to compare. Consolidated margin cannot be compared directly because SANY's overseas mix is higher.",
+        "financial_transmission": "If margin advantage is proven, it supports premium pricing and higher through-cycle ROCE.",
+        "strongest_counterevidence": "In severe down-cycles (2015-2016), SANY's margin also compressed heavily, and ROE fell below cost of capital.",
+        "status": "unproven",
+        "evidence_ids": [],
+        "next_verification": "Retrieve segment gross margins for Chinese excavator businesses from annual reports of SANY, XCMG, and Zoomlion for last 5 years."
+      },
+      {
+        "moat_mechanism": "Global distribution and service network as a switching cost barrier",
+        "observable_test": "Proportion of parts and service revenue to total equipment revenue; customer retention rates; evidence of multi-year service contracts.",
+        "comparison_basis": "Caterpillar's service revenue share is ~30% of equipment sales; SANY's service/parts share is not disclosed but likely lower.",
+        "evidence_result": "Insufficient disclosed data. The MySANY digital platform and 150-country coverage suggest an attempt to build stickiness, but no metric (renewal rates, parts capture rate) has been reported.",
+        "financial_transmission": "Higher parts/service mix leads to more stable, higher-margin revenue and reduces cycle volatility.",
+        "strongest_counterevidence": "In many emerging markets, customers can choose third-party parts or cannibalize, reducing the switching cost if reliability is not superior.",
+        "status": "unproven",
+        "evidence_ids": [
+          "EV030"
+        ],
+        "next_verification": "Ask management for parts capture rate and service attachment rate on new equipment sales."
+      },
+      {
+        "moat_mechanism": "R&D and electrification leadership",
+        "observable_test": "Number of electric excavator models in serial production; battery-swap or charging infrastructure partnerships; share of revenue from electric products vs. peers.",
+        "comparison_basis": "Track electric excavator sales data from CCMA (June 2026: 65 domestic electric excavators, 34 export). Very small base.",
+        "evidence_result": "Electrification revenue is immaterial today; the moat claim is a bet on future adoption. SANY's R&D commitment (>5% of sales) is high, but output metrics are not yet proven.",
+        "financial_transmission": "If electric machines achieve meaningful scale, they could command a price premium and open regenerative revenue streams (battery services, software).",
+        "strongest_counterevidence": "Caterpillar, Komatsu, and Volvo CE also have electric prototypes; Chinese competitors like XCMG have produced similar models. Being a first mover does not guarantee sustained competitive advantage.",
+        "status": "unproven",
+        "evidence_ids": [
+          "EV034"
+        ],
+        "next_verification": "Track electric excavator sales volume and revenue contribution in 2027-2028."
+      }
+    ],
+    "structural_risks": [
+      "Cyclicality of construction and mining capex – domestic real estate and infrastructure spending are policy-dependent; global mining capex can swing with commodity prices.",
+      "Foreign exchange exposure – large unhedged overseas revenue generates FX translation and transaction losses (Q1 2026 finance expense ratio +5.08pp YoY).",
+      "Trade barriers and geopolitics – tariffs, sanctions (Russia/Middle East), and local content rules can disrupt key markets.",
+      "Raw material and component cost – steel, hydraulic components, and electronics are significant input costs; commodity inflation can compress margins if ASP cannot be passed through immediately.",
+      "Technology disruption – electrification and automation require sustained R&D and may shift competitive dynamics if new entrants emerge."
+    ],
+    "interpretation_rule": "Chapter 2 owns market boundary, structure, direct competitors, substitutes and likely response; Chapter 4 owns relative advantage, observable proof and financial persistence."
+  },
+  "key_underwriting_questions": [
+    {
+      "question_id": "Q01",
+      "question": "What is the precise volume and ASP split for SANY excavators (domestic vs. export) in H1 2026, and how does it compare to industry data?",
+      "why_it_matters": "Excavators are the dominant profit engine; any meaningful divergence between SANY's unit sales and industry figures would signal market share gain or loss, directly affecting revenue and gross profit assumptions for 2026-2028.",
+      "current_answer": "Unresolved – only industry-level volume available (CCMA total sales). Private channel suggests overall revenue growth ~20% in Q2, but no unit-level detail.",
+      "bull_evidence": [
+        "Industry Jan–Jun excavator sales +26.4% YoY; SANY historically holds ~28% share.",
+        "Overseas export value +27.1% YoY in June 2026; SANY is the largest exporter."
+      ],
+      "bear_evidence": [
+        "Competitors XCMG and Zoomlion also aggressively exporting; SANY's export share may be diluted.",
+        "Domestic sales may be overstated due to statistical re-classification of re-export units."
+      ],
+      "decisive_model_variables": [
+        "Excavator segment revenue growth",
+        "Consolidated revenue growth",
+        "Gross margin mix effect"
+      ],
+      "affected_financial_lines": [
+        "Consolidated revenue",
+        "Gross margin",
+        "Operating profit"
+      ],
+      "evidence_ids": [
+        "KPE03",
+        "KPE04",
+        "KPE06"
+      ],
+      "missing_evidence": [
+        "SANY excavator unit sales by region",
+        "SANY excavator segment revenue and gross margin"
+      ],
+      "next_verification": "H1 2026 company announcement or semi-annual report segment breakdown."
+    },
+    {
+      "question_id": "Q02",
+      "question": "Will the announced price increases across excavators, cranes, and concrete machinery be fully realised in H2 2026, and what is the net impact after channel discounts and sales rebates?",
+      "why_it_matters": "Price realisation directly determines ASP and gross margin in the domestic business, which is the largest profit pool. Without quantifying net price effect, revenue and margin forecasts are speculative.",
+      "current_answer": "Unresolved – industry sources confirm price increase notices, but the actual transaction-price lift and timing are unverified.",
+      "bull_evidence": [
+        "Headline price increases taken by market leaders, signalling rational competition.",
+        "Gross margin expanded 0.64pp YoY in Q1 2026 before full price effect."
+      ],
+      "bear_evidence": [
+        "Dealer margins may absorb part of the list-price increase.",
+        "Competitive intensity could force rebates if demand slows."
+      ],
+      "decisive_model_variables": [
+        "Domestic ASP",
+        "Consolidated gross margin"
+      ],
+      "affected_financial_lines": [
+        "Revenue",
+        "Gross profit",
+        "Operating margin"
+      ],
+      "evidence_ids": [
+        "KPE04",
+        "EV013"
+      ],
+      "missing_evidence": [
+        "Realised price indices for domestic excavators, cranes, concrete machinery",
+        "SANY's quarterly average selling price disclosure or channel checks"
+      ],
+      "next_verification": "H2 2026 quarterly results and dealer surveys in September–October 2026."
+    },
+    {
+      "question_id": "Q03",
+      "question": "What is the quantitative exposure of the P&L to FX translation and transaction losses, and can the estimated 1 bn CNY YoY FX benefit in H2 2026 be confirmed?",
+      "why_it_matters": "FX gains/losses are a material swing factor for net profit (private channel estimates ~1 bn CNY favourable swing in H2). The Q1 2026 finance expense ratio jumped 5.08pp YoY, largely driven by FX, masking operating profit improvement. Accurate FX assumptions are needed to convert operating growth into net profit.",
+      "current_answer": "Unresolved – private channel asserts 2025 H2 FX loss of ~1 bn CNY and expects a 1 bn YoY tailwind in H2 2026. No audited breakdown available.",
+      "bull_evidence": [
+        "KPE02: 'H2 FX YoY no pressure; last year Q3 lost 300 mn, Q4 lost 600–700 mn; H2 FX adds 1 bn profit.'",
+        "RMB exchange rate against USD stabilized in recent months."
+      ],
+      "bear_evidence": [
+        "Future exchange rates unpredictable; a further RMB appreciation could reverse the expected tailwind.",
+        "Company may not have fully hedged; natural hedge may be overstated."
+      ],
+      "decisive_model_variables": [
+        "Finance expenses / other gains/losses",
+        "Parent net profit",
+        "EPS"
+      ],
+      "affected_financial_lines": [
+        "Operating profit to net profit conversion",
+        "Net profit",
+        "Cash flow from operating activities"
+      ],
+      "evidence_ids": [
+        "KPE02",
+        "EV016",
+        "EV017"
+      ],
+      "missing_evidence": [
+        "Audited FY2025 and Q1 2026 FX gain/loss line item",
+        "Hedging ratio and instruments"
+      ],
+      "next_verification": "2026 interim report note on exchange gains/losses; management commentary during conference call."
+    },
+    {
+      "question_id": "Q04",
+      "question": "Are the North American operations achieving sustainable profitability, and what are the incremental capex and working capital requirements to scale?",
+      "why_it_matters": "North America is a large addressable market where SANY has historically underperformed; if profitability is genuinely turning positive (KPE02 mentions >5% net margin), it opens a new long-term growth avenue that justifies a higher valuation multiple. However, the capital required to build dealer/service networks could be a cash drain.",
+      "current_answer": "Unresolved – one channel check indicates North America revenue +30%+ and profit turned positive, but no audited segment data.",
+      "bull_evidence": [
+        "KPE02: 'North America >30% revenue growth, profit turned positive, >5% net margin'",
+        "Caterpillar's strong results suggest robust North American construction demand."
+      ],
+      "bear_evidence": [
+        "Tariff and trade policy risk under current US administration could be prohibitive.",
+        "Building a competitive dealer network requires years and significant upfront investment."
+      ],
+      "decisive_model_variables": [
+        "Overseas revenue growth",
+        "Capex",
+        "Long-term ROIC"
+      ],
+      "affected_financial_lines": [
+        "Capex",
+        "Free cash flow",
+        "Long-term revenue trajectory"
+      ],
+      "evidence_ids": [
+        "KPE02"
+      ],
+      "missing_evidence": [
+        "North America segment revenue and profitability",
+        "Capacity and dealer expansion plans with capex numbers"
+      ],
+      "next_verification": "Management strategy update and any North America-focused analyst day; confirmation in 2026 annual report geographic segment."
+    },
+    {
+      "question_id": "Q05",
+      "question": "What is the normalized free cash flow generation of the business after accounting for the current inventory and receivables cycle?",
+      "why_it_matters": "FCF is the ultimate source of shareholder returns (dividends, buybacks). While reported OCF/net profit ratio is strong at 1.43x, the sustainability depends on whether working capital is being permanently released or cyclically managed. High FCF conversion supports a higher P/FCF multiple and validates the 4-8 bn CNY buyback program.",
+      "current_answer": "Unresolved – OCF detailed only for FY2025 via a messy table; no clear capex figure. Q1 2026 OCF/net profit = 1.43x, but no capex data.",
+      "bull_evidence": [
+        "Q1 2026 OCF/net profit 1.43x; Q2 channel check claims 1.5x.",
+        "Receivables/revenue ratio declining; days sales outstanding improving."
+      ],
+      "bear_evidence": [
+        "Inventory/revenue ratio slightly increased, suggesting restocking that may reverse cash benefit.",
+        "Capex may rise with overseas capacity expansion and electrification R&D, reducing FCF."
+      ],
+      "decisive_model_variables": [
+        "OCF",
+        "Capex",
+        "FCF",
+        "FCF yield"
+      ],
+      "affected_financial_lines": [
+        "Operating cash flow",
+        "Capex",
+        "Free cash flow"
+      ],
+      "evidence_ids": [
+        "EV017",
+        "EV042",
+        "KPE02"
+      ],
+      "missing_evidence": [
+        "FY2025 cash flow statement normalized",
+        "Maintenance vs. growth capex split"
+      ],
+      "next_verification": "2025 annual report cash flow statement re-analysis; Q2 2026 cash flow statement."
+    }
+  ],
+  "forecast_spine": {
+    "forecast_years": [
+      "2026E",
+      "2027E",
+      "2028E"
+    ],
+    "forecast_lines": [
+      {
+        "segment": "consolidated",
+        "metric": "Revenue",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 89231.0,
+        "year_1_value": 102616.0,
+        "year_2_value": 115443.0,
+        "year_3_value": 126987.0,
+        "formula": "Base case: FY2026E growth +15% (consistent with Q1 seasonally-adjusted run-rate of ~100 bn +15%, supported by overseas +25% and domestic low-teens); FY2027E +12.5% (moderating overseas growth, steady replacement domestic); FY2028E +10%.",
+        "assumption_status": "analyst estimate",
+        "evidence_ids": [
+          "EV010",
+          "KPE02",
+          "KPE06"
+        ],
+        "key_sensitivity": "±5pp revenue growth shifts operating profit by ~5-6 bn CNY",
+        "missing_inputs": [
+          "Precise Q2 2026 revenue and segment split"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Gross margin",
+        "unit": "%",
+        "base_period": "Q1 2026",
+        "base_value": 27.48,
+        "year_1_value": 28.2,
+        "year_2_value": 28.8,
+        "year_3_value": 29.2,
+        "formula": "Starting from Q1 2026 27.48% (up 0.64pp YoY). Base assumes gradual improvement driven by overseas mix shift (+0.7pp pa impact) and domestic price/cost spread widening (+0.3pp pa), partially offset by product mix normalization. Operating leverage from volume also contributes.",
+        "assumption_status": "analyst estimate",
+        "evidence_ids": [
+          "EV013",
+          "EV033",
+          "KPE02"
+        ],
+        "key_sensitivity": "A 1pp swing in gross margin changes gross profit by ~1.0-1.3 bn CNY",
+        "missing_inputs": [
+          "FY2025 actual gross margin",
+          "Product and regional margin decomposition"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Operating margin",
+        "unit": "%",
+        "base_period": "Q1 2026",
+        "base_value": 12.14,
+        "year_1_value": 13.0,
+        "year_2_value": 13.6,
+        "year_3_value": 14.0,
+        "formula": "Base Q1 2026 12.14% was depressed by 5.08pp YoY jump in finance expense ratio; excluding that, underlying operating margin is significantly higher. With H2 FX tailwind decreasing the finance ratio and gross margin expansion flowing through, operating margin recovers towards mid-teens.",
+        "assumption_status": "analyst estimate",
+        "evidence_ids": [
+          "EV014",
+          "EV016",
+          "KPE02"
+        ],
+        "key_sensitivity": "Ex-finance operating margin improvement can be masked if FX does not reverse as expected.",
+        "missing_inputs": [
+          "Normalised spending ratios (R&D, SG&A) ex one-offs"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Operating profit",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": null,
+        "year_1_value": 13340.0,
+        "year_2_value": 15700.0,
+        "year_3_value": 17778.0,
+        "formula": "Operating profit = Revenue × Operating margin. FY2026E: 102,616 × 13.0% ≈ 13,340; FY2027E: 115,443 × 13.6% ≈ 15,700; FY2028E: 126,987 × 14.0% ≈ 17,778.",
+        "assumption_status": "calculated from above",
+        "evidence_ids": [],
+        "key_sensitivity": "Operating profit is the sum of revenue growth and margin expansion; both must materialise together.",
+        "missing_inputs": [
+          "Historical operating profit FY2025 (need P&L structure)"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Parent net profit",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 8408.0,
+        "year_1_value": 10260.0,
+        "year_2_value": 12120.0,
+        "year_3_value": 13750.0,
+        "formula": "Assuming effective tax rate ~20% (standard for high-tech and export rebates) and minority interest ~3% of profit before tax. FY2026E: (13,340 - net finance 1,200) × (1-0.2) × (1-0.03) ≈ 10,260; net finance includes interest income offset and lower FX losses. FY2027E: (15,700 - 1,000) × 0.776 ≈ 12,120; FY2028E: (17,778 - 900) × 0.776 ≈ 13,750.",
+        "assumption_status": "analyst estimate",
+        "evidence_ids": [
+          "EV011",
+          "EV015"
+        ],
+        "key_sensitivity": "1 bn CNY change in net finance swings parent profit by ~0.77 bn CNY.",
+        "missing_inputs": [
+          "FY2025 interest and FX expense breakdown",
+          "Minority interest proportion"
+        ]
+      }
+    ],
+    "scenarios": [
+      {
+        "scenario": "bull",
+        "probability_pct": 30.0,
+        "operating_assumptions": [
+          "Revenue growth +22% in 2026E, +18% in 2027E, +15% in 2028E driven by stronger-than-expected overseas export and domestic replacement acceleration.",
+          "Gross margin reaches 29.0% in 2026E, 30.0% in 2027E, 30.5% in 2028E (overseas mix increases faster and price increases fully stick).",
+          "Net finance expense drops sharply (H2 2026 +1 bn CNY FX benefit materializes with additional RMB depreciation), leading to net profit margin expansion.",
+          "OCF/net profit ratio elevated at 1.5x throughout; capex moderate (capex/sales 4%), generating strong FCF.",
+          "Parent net profit: 2026E ~11,800 mn, 2027E ~14,800 mn, 2028E ~17,800 mn."
+        ],
+        "parent_net_profit_cny_mn": 11800.0,
+        "eps_cny": 1.2833055253913415,
+        "fcf_cny_mn": null,
+        "valuation_method": "Normalized PE 18x on 2026E bull-case earnings, reflecting peak-cycle but with structural overseas premium.",
+        "valuation_multiple": 18.0,
+        "fair_value_per_share": 23.099499457044146,
+        "evidence_ids": [
+          "KPE02",
+          "KPE03",
+          "KPE06",
+          "KPE07"
+        ],
+        "falsification": "If H1 2026 revenue growth is below 18% or gross margin fails to expand, bull case invalidates.",
+        "missing_inputs": [
+          "Diluted share count for EPS and fair value per share"
+        ]
+      },
+      {
+        "scenario": "base",
+        "probability_pct": 50.0,
+        "operating_assumptions": [
+          "Revenue growth +15% in 2026E, +12.5% in 2027E, +10% in 2028E (moderate overseas and domestic replacement).",
+          "Gross margin 28.2% / 28.8% / 29.2%.",
+          "Finance expense normalizes but FX tailwind is modest (H2 2026 benefit ~0.5 bn CNY). Operating margin improves to 13-14% range.",
+          "OCF/net profit 1.4x; capex remains contained; FCF covers dividend and partial buyback.",
+          "Parent net profit: 2026E 10,260 mn; 2027E 12,120 mn; 2028E 13,750 mn."
+        ],
+        "parent_net_profit_cny_mn": 10260.0,
+        "eps_cny": 1.115823278857217,
+        "fcf_cny_mn": null,
+        "valuation_method": "Fair PE 14x on 2026E base earnings, consistent with mid-cycle industrial multiple.",
+        "valuation_multiple": 14.0,
+        "fair_value_per_share": 15.62152590400104,
+        "evidence_ids": [
+          "EV010",
+          "EV011",
+          "EV013",
+          "KPE02",
+          "KPE07"
+        ],
+        "falsification": "If domestic demand stalls or overseas growth falls below 20%, base case will need downward revision.",
+        "missing_inputs": [
+          "Diluted share count"
+        ]
+      },
+      {
+        "scenario": "bear",
+        "probability_pct": 20.0,
+        "operating_assumptions": [
+          "Revenue growth +5% in 2026E, +5% in 2027E, +5% in 2028E (replacement cycle losing steam, overseas hit by trade barriers and global recession).",
+          "Gross margin stagnates around 27.0% as pricing power fades and input costs rise; mix benefit limited.",
+          "Finance expense remains elevated due to RMB strength; no FX tailwind.",
+          "OCF/net profit ratio falls to 1.1x as working capital builds; capex stays moderate but FCF tightens.",
+          "Parent net profit: 2026E 8,800 mn; 2027E 9,200 mn; 2028E 9,660 mn."
+        ],
+        "parent_net_profit_cny_mn": 8800.0,
+        "eps_cny": 0.9570414087664241,
+        "fcf_cny_mn": null,
+        "valuation_method": "Trough PE 10x on 2026E bear-case earnings, reflecting risk of a down-cycle.",
+        "valuation_multiple": 10.0,
+        "fair_value_per_share": 9.57041408766424,
+        "evidence_ids": [],
+        "falsification": "If domestic excavator sales decline for two consecutive months or overseas revenue drops below +10%, bear case becomes base.",
+        "missing_inputs": [
+          "Diluted share count"
+        ]
+      }
+    ],
+    "readiness": "partial",
+    "readiness_reasons": [
+      "2026Q1 consolidated P&L available but lack segment revenue/profit/margin by product and geography.",
+      "Company-reported segment revenue totals (11,176,325 unit ambiguous) cannot be reconciled to consolidated revenue of 89,231 mn CNY without original filing normalization.",
+      "Capex, gross margin for FY2025, and detailed cash-flow items (capex, OCF breakdown) are either missing or unverified; FCF and accompanying forecast lines are labeled missing until Q2/H1 2026 filings.",
+      "KPE private channel estimates for Q2 2026 revenue, margins, and FX gains have not been verified against official filing; they remain scenario verification proxies only.",
+      "Foreign exchange and commodity/raw material pass-through lacks a proved company basis; price/margin effects are discussed directionally but not quantified."
+    ]
+  },
+  "market_expectations": {
+    "sell_side_observations": [
+      {
+        "intelligence_id": "KSI01",
+        "kpe_ids": "KPE02",
+        "published_at": "2026-07-31T08:05",
+        "institution": "机构未识别",
+        "analyst_or_author": "纪要小能手",
+        "freshness": "高时效/2天",
+        "rating_signal": "推荐措辞（非标准评级）",
+        "forecast_facts": "【长城机械 邓宇亮】三一重工 ... 【长城机械 邓宇亮】三一重工 ... 【长城机械 邓宇亮】三一重工 调研更新+持续推荐❗ 1⃣️Q2收入：整体收入增速20%，海外25%左右，国内十几个点",
+        "valuation_facts": "未提取到目标价/估值方法与倍数",
+        "normalized_points": "rating=推荐措辞（非标准评级）",
+        "revision_signal": "较前次口径发生变化；尚无可同口径比较的标准化数值",
+        "source_quote": "【长城机械 邓宇亮】三一重工 ... 【长城机械 邓宇亮】三一重工 调研更新+持续推荐❗ 1⃣️Q2收入：整体收入增速20%，海外25%左右，国内十几个点。 1⃣️Q2毛利率：海外毛利率环比、同比提升。这还是在汇兑负面影响0.5pct的情况下做到的。 3️⃣汇兑：下半年汇兑同比没有压力，去年汇兑Q3亏了3亿，Q4亏了6-7亿。下半年同比来看，汇兑多10亿利润。最难的时间已经过去。 4⃣️利润端：Q2经营端利润增速40%大几个点。考虑汇兑也有10%以上。Q3增速会更高。 5⃣️现金流：差不多1.5倍的净现比，仍然非常好。 6⃣️Q2海外分区域：除了俄罗斯、中东，其他都还好。中东占比不高，客户是优质的。增速方面，中东、俄罗斯微降，非洲50%，东南亚20%+（表现不错，市占率、规模都超过小松），欧洲出口30%+，北美30%以上，北美利润转正+开启正循环，5%以上的净利率。拉美增速也在20%-30%。普迈Q2也有增长，毛利率还提升。"
+      },
+      {
+        "intelligence_id": "KSI02",
+        "kpe_ids": "KPE07",
+        "published_at": "2026-07-29T15:12",
+        "institution": "机构未识别",
+        "analyst_or_author": "纪要小能手",
+        "freshness": "高时效/4天",
+        "rating_signal": "未披露",
+        "forecast_facts": "[烟花]整机厂经营端表现超预期： 1️⃣Q1整机厂收入增长站上双位数10-15%，Q2-3收入预期再提速，普遍在20%左右 2️⃣经营性业绩弹性突出，龙头预期Q2增长30-40%，得益于海外高毛利收入占比提高＋成本/费用的规模化效应 3️⃣受外部影响的汇兑损失是唯一压制性因素，进入26下半年汇损低基数，Q3利润端表观同比表现预期有较大改善 [红包]多关注估值性价比突出的整机厂环节：三一重工17X，徐工机械13X，中联重科10X，柳工9X，山推12X",
+        "valuation_facts": "[烟花]整机厂经营端表现超预期： 1️⃣Q1整机厂收入增长站上双位数10-15%，Q2-3收入预期再提速，普遍在20%左右 2️⃣经营性业绩弹性突出，龙头预期Q2增长30-40%，得益于海外高毛利收入占比提高＋成本/费用的规模化效应 3️⃣受外部影响的汇兑损失是唯一压制性因素，进入26下半年汇损低基数，Q3利润端表观同比表现预期有较大改善 [红包]多关注估值性价比突出的整机厂环节：三一重工17X，徐工机械13X，中联重科10X，柳工9X，山推12X",
+        "normalized_points": "无可标准化数值",
+        "revision_signal": "较前次口径发生变化；尚无可同口径比较的标准化数值",
+        "source_quote": "【招商机械】估值底部、仓位底... 【招商机械】估值底部、仓位底部、贝塔向上的典型代表——工程机械 [烟花]对贝塔的持续性保持乐观： 1️⃣1-6月挖机累计销量，内+20.4%，外+33.5% 内外均好于年初预期。 国内-中大挖3月以来保持30%＋，更新需求启动； 海外-亚非拉维持高增，欧美边际改善。 2️⃣卡特补库周期启动：建筑机械板块收入25Q3由负转正，26Q1同/环比加速向上，同比+38%（销量、价格均正贡献），其对北美、拉美、非州、欧洲需求判断乐观。 [烟花]整机厂经营端表现超预期： 1️⃣Q1整机厂收入增长站上双位数10-15%，Q2-3收入预期再提速，普遍在20%左右 2️⃣经营性业绩弹性突出，龙头预期Q2增长30-40%，得益于海外高毛利收入占比提高＋成本/费用的规模化效应 3️⃣受外部影响的汇兑损失是唯一压制性因素，进入26下半年汇损低基数，Q3利润端表观同比表现预期有较大改善 [红包]多关注估值性价比突..."
+      },
+      {
+        "intelligence_id": "KSI03",
+        "kpe_ids": "KPE05",
+        "published_at": "2026-07-21T08:21",
+        "institution": "机构未识别",
+        "analyst_or_author": "纪要小能手",
+        "freshness": "有效窗口/12天",
+        "rating_signal": "推荐措辞（非标准评级）",
+        "forecast_facts": "未提取到带期间的明确盈利预测",
+        "valuation_facts": "公司当前估值具有性价比和吸引力，重点推荐！ [红包]三一重工调研邀请 时间：7月27日（下周一）下午3点 地点：长沙 参与领导：董秘、证代等",
+        "normalized_points": "rating=推荐措辞（非标准评级）",
+        "revision_signal": "较前次口径发生变化；尚无可同口径比较的标准化数值",
+        "source_quote": "三一重工董事长提议4-8亿元回... 三一重工董事长提议4-8亿元回购股份，下周一下午我们小范围调研三一重工、欢迎报名！ 今天三一重工发布公告，董事长提议4-8亿回购股份，用于A股员工持股计划，回购价格上限不超过前30日均价的150%。 我们认为公司电动化国际化持续深化布局，26H2开始汇损压力大幅减弱、业绩有望显著提速。公司当前估值具有性价比和吸引力，重点推荐！ [红包]三一重工调研邀请 时间：7月27日（下周一）下午3点 地点：长沙 参与领导：董秘、证代等。 名额有限，欢迎与我们报名"
+      },
+      {
+        "intelligence_id": "KSI04",
+        "kpe_ids": "none",
+        "published_at": "2026-07-08T08:12",
+        "institution": "机构未识别",
+        "analyst_or_author": "纪要小能手",
+        "freshness": "有效窗口/25天",
+        "rating_signal": "推荐措辞（非标准评级）",
+        "forecast_facts": "我们预计三一重工主体26Q2从经营端国内海外均有望20%以上增长，且进入26H2及27全年汇损压力均同比大幅缓解，25H2三一重工的合计利润仅30亿出头，26H2有望大幅加速",
+        "valuation_facts": "未提取到目标价/估值方法与倍数",
+        "normalized_points": "rating=推荐措辞（非标准评级）",
+        "revision_signal": "窗口内首次识别，暂无同机构前序可比",
+        "source_quote": "重视26年中报经营端强势、下半... 重视26年中报经营端强势、下半年有望加速的出海全球化标的（工程机械、工具、服务机器人等） （1）工程机械 2026年6月协会数据，挖机销售国内同比增长33.9%，出口同比增长36.4%，继续维持强势表现。我们预计三一重工主体26Q2从经营端国内海外均有望20%以上增长，且进入26H2及27全年汇损压力均同比大幅缓解，25H2三一重工的合计利润仅30亿出头，26H2有望大幅加速。工程机械板块我们首推【三一重工，重点推荐恒立、徐工、叉车】。 （2）电动工具&手工具 美国地产对利率的敏感性在降低，且AIDC、电力等基建投入在结构性影响着北美的工具需求。港股的创科实业近期走势强劲，我们看好【巨星科技】的补涨动能。近期我们也与公司有交流，欢迎沟通。 （3）服务机器人 【九号公司、科沃斯、STKJ】均回调出绝对价值，上涨催化方面，九号公司的两轮车东南亚出海、割草机器人北美突破及新业务布局均值得重视..."
+      }
+    ],
+    "valuation_closure": {
+      "current_price_cny": null,
+      "diluted_share_count_mn": 9195.004437,
+      "core_value_per_share_cny": null,
+      "probability_weighted_fair_value_per_share_cny": 16.654695606646612,
+      "option_value_per_share_cny": null,
+      "other_adjustments_per_share_cny": null,
+      "fair_value_per_share_cny": 16.654695606646612,
+      "expected_return_pct": null,
+      "formula": "Probability-weighted equity value = 0.30 × 212,400 + 0.50 × 143,640 + 0.20 × 88,000 = 155,240 mn CNY. Per-share value not computable (shares missing). Current price also unknown, so expected return cannot be calculated.",
+      "rating_consistency_check": "No rating assigned; probability-weighted fair value would need to be compared with market price per share.",
+      "double_counting_checks": [
+        "Core earnings bucket already reflects total consolidated parent profit; bull and bear are scenario replacements, not additions.",
+        "No separate SOTP for Putzmeister or other subsidiaries because they are consolidated and their earnings are inside the core parent profit."
+      ],
+      "status": "not_valued",
+      "missing_inputs": [
+        "Diluted share count from Tushare or filing",
+        "Current market price per share as of 2026-07-31",
+        "Reliable capex/FCF information to triangulate EV approach"
+      ]
+    },
+    "rule": "单家机构是观察值；只有具备样本和口径的多机构数据才可称为一致预期。"
+  },
+  "knowledge_planet": {
+    "importance": "material_alternative_intelligence",
+    "use_rule": "每条线索必须落到模型变化、概率变化、验证变化或拒绝之一。",
+    "items": [
+      {
+        "evidence_id": "KPE01",
+        "source_type": "channel_check",
+        "published_at": "2026-07-21T08:33",
+        "source_reliability": "B_identified_professional",
+        "bias_profile": "sell_side_optimism",
+        "adoption_ceiling": "model_input_after_crosscheck",
+        "target_excerpt": "2. 7 月 20 日已有超 30 家上市公司公布股份增持或回购计划，合计计划投入金额超 100 亿元人民币。 📌涉及标的包括华友钴业 (603799.SH)、三一重工 (600031.SZ)、中国建筑 (601668.SZ)、东山精密 (002384.SZ)、三花智控 (002050.SZ) 等公司。 TMT 行业资讯 📌新易盛 (300502.SZ) 订单能见度可延续至 2027 年，当前 800G 光模块为核心出货产品，1.6T 光模块将在第三至第四季度开始量产爬坡，供应链配套约束仍是行业核心需要关注的问题。 新能源板块资讯 📌国家电投下属子公司计划和宁德时代在四川省合资建设水电站项目，项目总投资规模达 334 亿元人民币（折合 49 亿美元）。 白酒板块资讯 📌白酒行业数据跟踪：飞天茅台批价出现上行，渠道端反馈提价之后的市场动销情况。 机器人板块资讯 📌2026 年世界人工智能大会核心总结：具身 AI 成为本次大会核心议题，大会释放的产业观点印证了当前选择性布局的投资思路具备合理性。",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "shareholder_return_signal",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until Buyback/增持公告执行与ETF资金流数据；非volume/price直接输入。",
+        "verification_gate": "Buyback/增持公告执行与ETF资金流数据；非volume/price直接输入。",
+        "grounding_status": "unverified_quote",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE02",
+        "source_type": "channel_check",
+        "published_at": "2026-07-31T08:05",
+        "source_reliability": "C_private_unverified",
+        "bias_profile": "channel_selection_bias",
+        "adoption_ceiling": "scenario_or_verification_only",
+        "target_excerpt": "【长城机械 邓宇亮】三一重工 ... 【长城机械 邓宇亮】三一重工 调研更新+持续推荐❗ 1⃣️Q2收入：整体收入增速20%，海外25%左右，国内十几个点。 1⃣️Q2毛利率：海外毛利率环比、同比提升。这还是在汇兑负面影响0.5pct的情况下做到的。 3️⃣汇兑：下半年汇兑同比没有压力，去年汇兑Q3亏了3亿，Q4亏了6-7亿。下半年同比来看，汇兑多10亿利润。最难的时间已经过去。 4⃣️利润端：Q2经营端利润增速40%大几个点。考虑汇兑也有10%以上。Q3增速会更高。 5⃣️现金流：差不多1.5倍的净现比，仍然非常好。 6⃣️Q2海外分区域：除了俄罗斯、中东，其他都还好。中东占比不高，客户是优质的。增速方面，中东、俄罗斯微降，非洲50%，东南亚20%+（表现不错，市占率、规模都超过小松），欧洲出口30%+，北美30%以上，北美利润转正+开启正循环，5%以上的净利率。拉美增速也在20%-30%。普迈Q2也有增长，毛利率还提升。",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "revenue_growth_pct",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 2026Q2/H1财报及分部披露。",
+        "verification_gate": "2026Q2/H1财报及分部披露。",
+        "grounding_status": "unverified_quote",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE02",
+        "source_type": "channel_check",
+        "published_at": "2026-07-31T08:05",
+        "source_reliability": "C_private_unverified",
+        "bias_profile": "channel_selection_bias",
+        "adoption_ceiling": "scenario_or_verification_only",
+        "target_excerpt": "【长城机械 邓宇亮】三一重工 ... 【长城机械 邓宇亮】三一重工 调研更新+持续推荐❗ 1⃣️Q2收入：整体收入增速20%，海外25%左右，国内十几个点。 1⃣️Q2毛利率：海外毛利率环比、同比提升。这还是在汇兑负面影响0.5pct的情况下做到的。 3️⃣汇兑：下半年汇兑同比没有压力，去年汇兑Q3亏了3亿，Q4亏了6-7亿。下半年同比来看，汇兑多10亿利润。最难的时间已经过去。 4⃣️利润端：Q2经营端利润增速40%大几个点。考虑汇兑也有10%以上。Q3增速会更高。 5⃣️现金流：差不多1.5倍的净现比，仍然非常好。 6⃣️Q2海外分区域：除了俄罗斯、中东，其他都还好。中东占比不高，客户是优质的。增速方面，中东、俄罗斯微降，非洲50%，东南亚20%+（表现不错，市占率、规模都超过小松），欧洲出口30%+，北美30%以上，北美利润转正+开启正循环，5%以上的净利率。拉美增速也在20%-30%。普迈Q2也有增长，毛利率还提升。",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "revenue_growth_pct",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 2026Q2海外收入披露。",
+        "verification_gate": "2026Q2海外收入披露。",
+        "grounding_status": "grounded_quote",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE02",
+        "source_type": "channel_check",
+        "published_at": "2026-07-31T08:05",
+        "source_reliability": "C_private_unverified",
+        "bias_profile": "channel_selection_bias",
+        "adoption_ceiling": "scenario_or_verification_only",
+        "target_excerpt": "【长城机械 邓宇亮】三一重工 ... 【长城机械 邓宇亮】三一重工 调研更新+持续推荐❗ 1⃣️Q2收入：整体收入增速20%，海外25%左右，国内十几个点。 1⃣️Q2毛利率：海外毛利率环比、同比提升。这还是在汇兑负面影响0.5pct的情况下做到的。 3️⃣汇兑：下半年汇兑同比没有压力，去年汇兑Q3亏了3亿，Q4亏了6-7亿。下半年同比来看，汇兑多10亿利润。最难的时间已经过去。 4⃣️利润端：Q2经营端利润增速40%大几个点。考虑汇兑也有10%以上。Q3增速会更高。 5⃣️现金流：差不多1.5倍的净现比，仍然非常好。 6⃣️Q2海外分区域：除了俄罗斯、中东，其他都还好。中东占比不高，客户是优质的。增速方面，中东、俄罗斯微降，非洲50%，东南亚20%+（表现不错，市占率、规模都超过小松），欧洲出口30%+，北美30%以上，北美利润转正+开启正循环，5%以上的净利率。拉美增速也在20%-30%。普迈Q2也有增长，毛利率还提升。",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "operating_profit_growth_pct",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 2026Q2经营利润与汇兑损益拆分。",
+        "verification_gate": "2026Q2经营利润与汇兑损益拆分。",
+        "grounding_status": "unverified_quote",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE02",
+        "source_type": "channel_check",
+        "published_at": "2026-07-31T08:05",
+        "source_reliability": "C_private_unverified",
+        "bias_profile": "channel_selection_bias",
+        "adoption_ceiling": "scenario_or_verification_only",
+        "target_excerpt": "【长城机械 邓宇亮】三一重工 ... 【长城机械 邓宇亮】三一重工 调研更新+持续推荐❗ 1⃣️Q2收入：整体收入增速20%，海外25%左右，国内十几个点。 1⃣️Q2毛利率：海外毛利率环比、同比提升。这还是在汇兑负面影响0.5pct的情况下做到的。 3️⃣汇兑：下半年汇兑同比没有压力，去年汇兑Q3亏了3亿，Q4亏了6-7亿。下半年同比来看，汇兑多10亿利润。最难的时间已经过去。 4⃣️利润端：Q2经营端利润增速40%大几个点。考虑汇兑也有10%以上。Q3增速会更高。 5⃣️现金流：差不多1.5倍的净现比，仍然非常好。 6⃣️Q2海外分区域：除了俄罗斯、中东，其他都还好。中东占比不高，客户是优质的。增速方面，中东、俄罗斯微降，非洲50%，东南亚20%+（表现不错，市占率、规模都超过小松），欧洲出口30%+，北美30%以上，北美利润转正+开启正循环，5%以上的净利率。拉美增速也在20%-30%。普迈Q2也有增长，毛利率还提升。",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "fx_profit_bridge_cny_100m",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 2026年三季报/半年报汇兑损益附注。",
+        "verification_gate": "2026年三季报/半年报汇兑损益附注。",
+        "grounding_status": "grounded_quote",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE02",
+        "source_type": "channel_check",
+        "published_at": "2026-07-31T08:05",
+        "source_reliability": "C_private_unverified",
+        "bias_profile": "channel_selection_bias",
+        "adoption_ceiling": "scenario_or_verification_only",
+        "target_excerpt": "【长城机械 邓宇亮】三一重工 ... 【长城机械 邓宇亮】三一重工 调研更新+持续推荐❗ 1⃣️Q2收入：整体收入增速20%，海外25%左右，国内十几个点。 1⃣️Q2毛利率：海外毛利率环比、同比提升。这还是在汇兑负面影响0.5pct的情况下做到的。 3️⃣汇兑：下半年汇兑同比没有压力，去年汇兑Q3亏了3亿，Q4亏了6-7亿。下半年同比来看，汇兑多10亿利润。最难的时间已经过去。 4⃣️利润端：Q2经营端利润增速40%大几个点。考虑汇兑也有10%以上。Q3增速会更高。 5⃣️现金流：差不多1.5倍的净现比，仍然非常好。 6⃣️Q2海外分区域：除了俄罗斯、中东，其他都还好。中东占比不高，客户是优质的。增速方面，中东、俄罗斯微降，非洲50%，东南亚20%+（表现不错，市占率、规模都超过小松），欧洲出口30%+，北美30%以上，北美利润转正+开启正循环，5%以上的净利率。拉美增速也在20%-30%。普迈Q2也有增长，毛利率还提升。",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "cash_conversion_ratio",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until Q2现金流量表与利润表核对。",
+        "verification_gate": "Q2现金流量表与利润表核对。",
+        "grounding_status": "unverified_quote",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE02",
+        "source_type": "channel_check",
+        "published_at": "2026-07-31T08:05",
+        "source_reliability": "C_private_unverified",
+        "bias_profile": "channel_selection_bias",
+        "adoption_ceiling": "scenario_or_verification_only",
+        "target_excerpt": "【长城机械 邓宇亮】三一重工 ... 【长城机械 邓宇亮】三一重工 调研更新+持续推荐❗ 1⃣️Q2收入：整体收入增速20%，海外25%左右，国内十几个点。 1⃣️Q2毛利率：海外毛利率环比、同比提升。这还是在汇兑负面影响0.5pct的情况下做到的。 3️⃣汇兑：下半年汇兑同比没有压力，去年汇兑Q3亏了3亿，Q4亏了6-7亿。下半年同比来看，汇兑多10亿利润。最难的时间已经过去。 4⃣️利润端：Q2经营端利润增速40%大几个点。考虑汇兑也有10%以上。Q3增速会更高。 5⃣️现金流：差不多1.5倍的净现比，仍然非常好。 6⃣️Q2海外分区域：除了俄罗斯、中东，其他都还好。中东占比不高，客户是优质的。增速方面，中东、俄罗斯微降，非洲50%，东南亚20%+（表现不错，市占率、规模都超过小松），欧洲出口30%+，北美30%以上，北美利润转正+开启正循环，5%以上的净利率。拉美增速也在20%-30%。普迈Q2也有增长，毛利率还提升。",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "regional_revenue_growth_pct",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 公司海外分区域收入披露/调研纪要交叉验证。",
+        "verification_gate": "公司海外分区域收入披露/调研纪要交叉验证。",
+        "grounding_status": "grounded_quote",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE03",
+        "source_type": "industry_weekly_data",
+        "published_at": "2026-07-24T08:38",
+        "source_reliability": "B_identified_professional",
+        "bias_profile": "neutral_or_data",
+        "adoption_ceiling": "model_input_after_crosscheck",
+        "target_excerpt": "们认为工程机械行业出口仍然保持较高景气度，2026年6月份我国工程机械出口额65亿美元，同比增长25.5%，景气较好，维持工程机械行业“推荐”评级。 相关标的：三一重工、徐工机械、中联重科、柳工、山推股份、恒立液压、艾迪精密等。 风险提示：政策风险；市场风险；关税加征风险；市场需求下行风险；汇率波动风险；原材料价格大幅度波动风险；中美贸易摩擦超预期风险；中东事件风险；本数据为跟踪数据，仅供参考，不构成投资建议。 —————— 欢迎联系：国海机械 张钰莹/王恰 19802116942",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "engineering_machinery_export_growth_pct",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 海关总署月度出口数据与公司海外收入交叉核对。",
+        "verification_gate": "海关总署月度出口数据与公司海外收入交叉核对。",
+        "grounding_status": "grounded_quote",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE03",
+        "source_type": "industry_weekly_data",
+        "published_at": "2026-07-24T08:38",
+        "source_reliability": "B_identified_professional",
+        "bias_profile": "neutral_or_data",
+        "adoption_ceiling": "model_input_after_crosscheck",
+        "target_excerpt": "们认为工程机械行业出口仍然保持较高景气度，2026年6月份我国工程机械出口额65亿美元，同比增长25.5%，景气较好，维持工程机械行业“推荐”评级。 相关标的：三一重工、徐工机械、中联重科、柳工、山推股份、恒立液压、艾迪精密等。 风险提示：政策风险；市场风险；关税加征风险；市场需求下行风险；汇率波动风险；原材料价格大幅度波动风险；中美贸易摩擦超预期风险；中东事件风险；本数据为跟踪数据，仅供参考，不构成投资建议。 —————— 欢迎联系：国海机械 张钰莹/王恰 19802116942",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "excavator_export_growth_pct",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 挖机月度出口数据与公司出口销量交叉核对。",
+        "verification_gate": "挖机月度出口数据与公司出口销量交叉核对。",
+        "grounding_status": "grounded_quote",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE04",
+        "source_type": "channel_check",
+        "published_at": "2026-07-08T08:12",
+        "source_reliability": "C_private_unverified",
+        "bias_profile": "channel_selection_bias",
+        "adoption_ceiling": "scenario_or_verification_only",
+        "target_excerpt": "已回到2024年底2025年初的水平，但基本面已持续改善一年。销量向上股价向下的剪刀叉已到极限； 三季度人民币升值空间有望缩小，季度业绩拐点即将来临；核心标的：三一重工、徐工机械、中联重科、柳工、山推股份；零部件公司：恒立液压、艾迪精密、福事特、唯万密封等。",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "industry_excavator_sales_growth_pct",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until CCMA月度挖机数据与公司销量公告交叉核对。",
+        "verification_gate": "CCMA月度挖机数据与公司销量公告交叉核对。",
+        "grounding_status": "grounded_quote",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE04",
+        "source_type": "channel_check",
+        "published_at": "2026-07-08T08:12",
+        "source_reliability": "C_private_unverified",
+        "bias_profile": "channel_selection_bias",
+        "adoption_ceiling": "scenario_or_verification_only",
+        "target_excerpt": "已回到2024年底2025年初的水平，但基本面已持续改善一年。销量向上股价向下的剪刀叉已到极限； 三季度人民币升值空间有望缩小，季度业绩拐点即将来临；核心标的：三一重工、徐工机械、中联重科、柳工、山推股份；零部件公司：恒立液压、艾迪精密、福事特、唯万密封等。",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "price_increase_signal",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 经销商报价/涨价函/公司毛利率披露。",
+        "verification_gate": "经销商报价/涨价函/公司毛利率披露。",
+        "grounding_status": "grounded_quote",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE04",
+        "source_type": "channel_check",
+        "published_at": "2026-07-08T08:12",
+        "source_reliability": "C_private_unverified",
+        "bias_profile": "channel_selection_bias",
+        "adoption_ceiling": "scenario_or_verification_only",
+        "target_excerpt": "已回到2024年底2025年初的水平，但基本面已持续改善一年。销量向上股价向下的剪刀叉已到极限； 三季度人民币升值空间有望缩小，季度业绩拐点即将来临；核心标的：三一重工、徐工机械、中联重科、柳工、山推股份；零部件公司：恒立液压、艾迪精密、福事特、唯万密封等。",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "valuation_position",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 股价/估值分位与盈利预测核对。",
+        "verification_gate": "股价/估值分位与盈利预测核对。",
+        "grounding_status": "grounded_quote",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE05",
+        "source_type": "sell_side_push",
+        "published_at": "2026-07-21T08:21",
+        "source_reliability": "B_identified_professional",
+        "bias_profile": "sell_side_optimism",
+        "adoption_ceiling": "model_input_after_crosscheck",
+        "target_excerpt": "三一重工董事长提议4-8亿元回... 三一重工董事长提议4-8亿元回购股份，下周一下午我们小范围调研三一重工、欢迎报名！ 今天三一重工发布公告，董事长提议4-8亿回购股份，用于A股员工持股计划，回购价格上限不超过前30日均价的150%。 我们认为公司电动化国际化持续深化布局，26H2开始汇损压力大幅减弱、业绩有望显著提速。公司当前估值具有性价比和吸引力，重点推荐！ [红包]三一重工调研邀请 时间：7月27日（下周一）下午3点 地点：长沙 参与领导：董秘、证代等。 名额有限，欢迎与我们报名",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "buyback_amount_cny_100m",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 董事会/股东大会通过的回购方案及实际回购进展。",
+        "verification_gate": "董事会/股东大会通过的回购方案及实际回购进展。",
+        "grounding_status": "grounded_quote",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE06",
+        "source_type": "industry_weekly_data",
+        "published_at": "2026-07-30T16:03",
+        "source_reliability": "B_identified_professional",
+        "bias_profile": "neutral_or_data",
+        "adoption_ceiling": "model_input_after_crosscheck",
+        "target_excerpt": "销量7.90万台，同比增长20.4%；出口7.33万台，同比增长33.5%。3-6月连续4个月超预期且增速在加快。汇率波动的影响我们判断Q3迎来拐点；核心标的：三一重工、徐工机械、中联重科、浙江鼎力、柳工、山推股份；零部件公司：恒立液压、艾迪精密、福事特、唯万密封等。 轨交设备：高确定性。1）需求和资本开支稳中有升，上半年，全国铁路累计完成旅客发送量23.48亿人，同比增长5.0%；全国铁路累计完成货物发送量26.22亿吨，同比增长2.5%；固定资产投资完成3632亿元，同比增长2.1%。2）后市场需求扩大。全国铁路机车拥有量为2.27万台，客车拥有量为8.3万辆，动车组5230标准组，动车组即将进入替换周期。核心标的：中国中车、中国通号、时代电气、时代新材、思维列控、今创集团、康尼机电等。 通用设备：制造复苏。 1）机床：周期拐点确立，2026Q1数控金切机床市场规模、销量均实现双位数增长，26Q1机床行业上市公司业绩增速普遍转正。上游核心零部件交期拉长印证行业需求高景气，下游行业需求回暖，以液冷、3C为代表的高景气赛道贡献重要增量。核心标的：乔锋智能、津上机床中国、浙海德曼、纽威数控、海天精工、华中数控、科德数控、豪迈科",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "industry_excavator_sales_growth_pct",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until CCMA月度数据与公司中报销量确认。",
+        "verification_gate": "CCMA月度数据与公司中报销量确认。",
+        "grounding_status": "grounded_quote",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE07",
+        "source_type": "industry_weekly_data",
+        "published_at": "2026-07-29T15:12",
+        "source_reliability": "B_identified_professional",
+        "bias_profile": "neutral_or_data",
+        "adoption_ceiling": "model_input_after_crosscheck",
+        "target_excerpt": "模化效应 3️⃣受外部影响的汇兑损失是唯一压制性因素，进入26下半年汇损低基数，Q3利润端表观同比表现预期有较大改善 [红包]多关注估值性价比突出的整机厂环节：三一重工17X，徐工机械13X，中联重科10X，柳工9X，山推12X。",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "revenue_growth_pct",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 公司Q2/H1收入披露。",
+        "verification_gate": "公司Q2/H1收入披露。",
+        "grounding_status": "grounded_quote",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE07",
+        "source_type": "industry_weekly_data",
+        "published_at": "2026-07-29T15:12",
+        "source_reliability": "B_identified_professional",
+        "bias_profile": "neutral_or_data",
+        "adoption_ceiling": "model_input_after_crosscheck",
+        "target_excerpt": "模化效应 3️⃣受外部影响的汇兑损失是唯一压制性因素，进入26下半年汇损低基数，Q3利润端表观同比表现预期有较大改善 [红包]多关注估值性价比突出的整机厂环节：三一重工17X，徐工机械13X，中联重科10X，柳工9X，山推12X。",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "operating_profit_growth_pct",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 公司Q2经营利润与海外收入占比披露。",
+        "verification_gate": "公司Q2经营利润与海外收入占比披露。",
+        "grounding_status": "grounded_quote",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE07",
+        "source_type": "industry_weekly_data",
+        "published_at": "2026-07-29T15:12",
+        "source_reliability": "B_identified_professional",
+        "bias_profile": "neutral_or_data",
+        "adoption_ceiling": "model_input_after_crosscheck",
+        "target_excerpt": "模化效应 3️⃣受外部影响的汇兑损失是唯一压制性因素，进入26下半年汇损低基数，Q3利润端表观同比表现预期有较大改善 [红包]多关注估值性价比突出的整机厂环节：三一重工17X，徐工机械13X，中联重科10X，柳工9X，山推12X。",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "fx_pressure",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until Q3财报汇兑损益与利润增速。",
+        "verification_gate": "Q3财报汇兑损益与利润增速。",
+        "grounding_status": "grounded_quote",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE07",
+        "source_type": "industry_weekly_data",
+        "published_at": "2026-07-29T15:12",
+        "source_reliability": "B_identified_professional",
+        "bias_profile": "neutral_or_data",
+        "adoption_ceiling": "model_input_after_crosscheck",
+        "target_excerpt": "模化效应 3️⃣受外部影响的汇兑损失是唯一压制性因素，进入26下半年汇损低基数，Q3利润端表观同比表现预期有较大改善 [红包]多关注估值性价比突出的整机厂环节：三一重工17X，徐工机械13X，中联重科10X，柳工9X，山推12X。",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "pe_ttm",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 与结构化行情PE TTM 22.44核对估值日期/口径。",
+        "verification_gate": "与结构化行情PE TTM 22.44核对估值日期/口径。",
+        "grounding_status": "grounded_quote",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE08",
+        "source_type": "channel_check",
+        "published_at": "2026-07-29T09:53",
+        "source_reliability": "C_private_unverified",
+        "bias_profile": "channel_selection_bias",
+        "adoption_ceiling": "scenario_or_verification_only",
+        "target_excerpt": "期，足够说明问题。之前被AI吸血过于严重，现在长期逻辑没变，短期数据非常好，中期业绩加速，股价应该回到它该有的位置。半年维度50%空间，确定性比较强。 💡标的：三一重工、徐工机械、中联重科、恒立液压。 🧧深海油气： 油气供给缺口➕技术进步导致经济性可行➕国家能源安全🟰深海油气的超级周期 💡标的：博迈科，今年新签订单会远远大于公司当前市值。",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "expected_total_return_pct",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 目标价/盈利预测/估值方法验证。",
+        "verification_gate": "目标价/盈利预测/估值方法验证。",
+        "grounding_status": "grounded_quote",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE09",
+        "source_type": "strategy_view",
+        "published_at": "2026-07-18T16:46",
+        "source_reliability": "B_identified_professional",
+        "bias_profile": "sell_side_optimism",
+        "adoption_ceiling": "model_input_after_crosscheck",
+        "target_excerpt": "0.5%/-29.2%/+20.0%。整体来看，塔机内需修复显著，其他品类表现保持优异。 👉投资建议：近期市场资金逐步向避险资产回流，高切低过程中建议重点关注【三一重工】【徐工机械】【中联重科】【柳工】【山推股份】【恒立液压】。 👉风险提示：宏观经济波动；国内政策不及预期；国际贸易摩擦；行业竞争加剧。 [红包]【东吴机械】周尔双/黄瑞",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "industry_excavator_sales_growth_pct",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until CCMA月度数据交叉核对。",
+        "verification_gate": "CCMA月度数据交叉核对。",
+        "grounding_status": "grounded_quote",
+        "chapter_id": "chapter_6_expectations"
+      }
+    ]
+  },
+  "evidence_index": [
+    {
+      "evidence_id": "EV001",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "Financial-report look-back: 900 days",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV002",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "Compacted 三一重工股份有限公司2025年年度报告: 478294 chars -> 160724 chars.",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV003",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "2025, 半年",
+      "status": "reported",
+      "text": "Compacted 三一重工股份有限公司2025年半年度报告: 376932 chars -> 143814 chars.",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV004",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "20260430, 2026, 季度",
+      "status": "reported",
+      "text": "20260430: 三一重工股份有限公司2026年第一季度报告",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV005",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "20250822, 2025, 半年",
+      "status": "reported",
+      "text": "20250822: 三一重工股份有限公司2025年半年度报告",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV006",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "20241031, 2024, 季度",
+      "status": "reported",
+      "text": "20241031: 三一重工股份有限公司2024年第三季度报告",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV007",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "20240429, 2023, 年度",
+      "status": "reported",
+      "text": "20240429: 三一重工股份有限公司2023年年度报告",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV008",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "20260331, 2025, 年度",
+      "status": "reported",
+      "text": "20260331: 三一重工股份有限公司2025年年度报告",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV009",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "20251031, 2025, 季度",
+      "status": "reported",
+      "text": "20251031: 三一重工股份有限公司2025年第三季度报告",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV010",
+      "source_module": "earnings_model",
+      "variable": "unmapped",
+      "period": "Q1, 20260331",
+      "status": "reported",
+      "text": "/ latest reported / Q1 / 20260331 / 24042362000 / 2480743000 / 96169448000 / 9922972000 / 100423004030.0697 / 7903138518.5712 / historical median 0331 share 31.4% /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV011",
+      "source_module": "earnings_model",
+      "variable": "unmapped",
+      "period": "FY, 20251231",
+      "status": "reported",
+      "text": "/ latest annual / FY / 20251231 / 89231023000 / 8408057000 / 89231023000 / 8408057000 / 89231023000 / 8408057000 / FY actual /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV012",
+      "source_module": "earnings_model",
+      "variable": "revenue",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ Revenue base / 24042362000 / N/A / YoY: 20260331 vs 20250331 / top-line starting point for volume × price × mix /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV013",
+      "source_module": "earnings_model",
+      "variable": "segment_margin",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ Gross margin / 27.4803% / +0.64pp / YoY: 20260331 vs 20250331 / main bridge from demand to gross profit /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV014",
+      "source_module": "earnings_model",
+      "variable": "unmapped",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ Operating margin / 12.1363% / -1.60pp / YoY: 20260331 vs 20250331 / tests pricing, mix, and cost absorption /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV015",
+      "source_module": "earnings_model",
+      "variable": "segment_margin",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ Net margin / 10.3182% / -1.42pp / YoY: 20260331 vs 20250331 / captures final earnings conversion /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV016",
+      "source_module": "earnings_model",
+      "variable": "operating_expense",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ Finance-expense ratio / 3.3196% / +5.08pp / YoY: 20260331 vs 20250331 / captures leverage drag or relief /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV017",
+      "source_module": "earnings_model",
+      "variable": "profit_or_eps",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ OCF / net profit / 1.4273 / N/A / YoY: 20260331 vs 20250331 / tests earnings quality and cash realization /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV018",
+      "source_module": "earnings_model",
+      "variable": "revenue",
+      "period": "20260331, 20250331",
+      "status": "calculated",
+      "text": "/ Receivables / revenue / 28.4646% / -3.89pp / YoY: 20260331 vs 20250331 / tests working-capital drag; interim periods use annualized revenue /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV019",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "Look-back window: 30 days",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV020",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "/ 回购/增减持 / 2 /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV021",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "/ 分红/权益 / 2 /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV022",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "/ 一般公告 / 1 /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV023",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "/ 监管/法律 / 1 /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV024",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "20260725, 2026-07-25",
+      "status": "reported",
+      "text": "/ 20260725 / 回购/增减持 / 600031.SH / 三一重工 / 三一重工股份有限公司关于以集中竞价交易方式回购A股股份方案的公告暨回购报告书 / http://www.cninfo.com.cn/new/disclosure/detail?stockCode=600031&announcementId=1225440960&orgId=gssh0600031&announcementTime=2026-07-25 /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV025",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "20260721, 2026-07-21",
+      "status": "reported",
+      "text": "/ 20260721 / 回购/增减持 / 600031.SH / 三一重工 / 三一重工股份有限公司关于董事长提议回购公司股份的提示性公告 / http://www.cninfo.com.cn/new/disclosure/detail?stockCode=600031&announcementId=1225431852&orgId=gssh0600031&announcementTime=2026-07-21 /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV026",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "20260715, 2026, 2026-07-15",
+      "status": "reported",
+      "text": "/ 20260715 / 一般公告 / 600031.SH / 三一重工 / 三一重工股份有限公司2026年第一次临时股东会决议公告 / http://www.cninfo.com.cn/new/disclosure/detail?stockCode=600031&announcementId=1225424546&orgId=gssh0600031&announcementTime=2026-07-15 /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV027",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "20260715, 2026, 2026-07-15",
+      "status": "reported",
+      "text": "/ 20260715 / 监管/法律 / 600031.SH / 三一重工 / 湖南启元律师事务所关于三一重工股份有限公司2026年第一次临时股东会的法律意见书 / http://www.cninfo.com.cn/new/disclosure/detail?stockCode=600031&announcementId=1225424555&orgId=gssh0600031&announcementTime=2026-07-15 /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV028",
+      "source_module": "company_business_model",
+      "variable": "asp_or_price",
+      "period": "2025, 半年",
+      "status": "reported",
+      "text": "/ high_r_and_d_technology / 高研发技术产品型 / quantified disclosure / 三一重工股份有限公司2025年半年度报告: 年上半年，公司海外主营业务毛利率持续提升至 31.18%，较上年同期的 30.14%上升 1.04 个百分 自 2021 年开始，公司成立新能源技术委员会，管理新能源技术发展规划、专利布局、前瞻技 公司重视培育与引进专业电动化人才，众多领军人才加入公司，覆盖电池、电控、电驱、电 / 重点验证产品代际、客户认证、研发转化率、ASP/毛利率、供应...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV029",
+      "source_module": "company_business_model",
+      "variable": "segment_volume",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ product_manufacturer / 产品制造 / 产能出货型 / quantified disclosure / 三一重工股份有限公司2025年年度报告: 厂获得“灯塔工厂”认证，为全球制造业企业提供可借鉴的数智化发展方向。 2025 年，公司以打造新一代“灯塔工厂”为目标，深度融合自主研发的工业软件，构建覆盖 生产全流程的数字化管理体系。长沙 18 号工厂引入工业大模型，实现生产调度、质量检测、设备 / 拆解量价成本、产品结构、产能利用率、库存、原材料和资本开支回报。 /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV030",
+      "source_module": "company_business_model",
+      "variable": "segment_margin",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ core_revenue_engine / annual / 三一重工股份有限公司2025年年度报告: 截至 2025 年底，海外产品销售已覆盖 150 多个国家与地区。各区域主营业务收入情况如下： / Defines what actually drives the income statement. /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV031",
+      "source_module": "company_business_model",
+      "variable": "segment_margin",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ segment_mix / annual / 三一重工股份有限公司2025年年度报告: 分产品 营业收入 营业成本 比上年增 上年增减 毛利率比上年增减（%） / Shows whether different profit pools are being mixed together. /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV032",
+      "source_module": "company_business_model",
+      "variable": "unmapped",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ customer_and_channel / annual / 三一重工股份有限公司2025年年度报告: B.报告期内向单个客户的销售比例超过总额的 50%、前 5 名客户中存在新增客户的或严重依赖于 / Reveals demand source, concentration, and market validation. /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV033",
+      "source_module": "company_business_model",
+      "variable": "segment_margin",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ geography / annual / 三一重工股份有限公司2025年年度报告: 稳步提升。报告期内，公司国际业务毛利率 31.7%，上升 2 个百分点。 / Explains whether growth depends on a specific geography or expansion lane. /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV034",
+      "source_module": "company_business_model",
+      "variable": "unmapped",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ reinvestment_engine / annual / 三一重工股份有限公司2025年年度报告: 公司每年将销售收入的 5%以上投入研发，形成集群化的研发创新平台体系，拥有 2 个国家级企业 / Shows how today's cash is being converted into tomorrow's earnings power. /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV035",
+      "source_module": "company_business_model",
+      "variable": "unmapped",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ product / annual / 三一重工股份有限公司2025年年度报告: 报告期内公司新增重要非主营业务的说明 □适用 √不适用 二、报告期内公司所处行业情况 2025 年，国内工程机械行业步入温和复苏与结构优化的新阶段。在“大规模设备更新”政策、 一揽子增量宏观政策托底，以及“机器替人”趋势的共同催化下，国内市场景气度稳步回升。海 外工程机械市场展现强劲韧性，非洲、东南亚等新兴市场需求旺盛，中国工程机械厂商的全球份 额与盈利能力实现稳步提升。 9 / 250 三一重工股份有限公司2025 年年度报...",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV036",
+      "source_module": "company_business_model",
+      "variable": "revenue",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ business / annual / 三一重工股份有限公司2025年年度报告: 主营业务 9,819,426 9,536,336 10,235,314 10,061,125 其他业务 1,356,899 1,181,988 1,162,531 1,037,276 合计 11,176,325 10,718,324 11,397,845 11,098,401 (2). 营业收入、营业成本的分解信息 / Use this to explain revenue mix, profit-pool quality,...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV037",
+      "source_module": "industry_cycle",
+      "variable": "balance_sheet",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "Do not state R32, R125, lithium, copper, gold, inventory, or spread changes as facts unless they appear in the evidence table.",
+      "chapter_id": "chapter_2_industry_chain"
+    },
+    {
+      "evidence_id": "EV038",
+      "source_module": "industry_cycle",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "missing",
+      "text": "If cycle evidence says bottom-testing or evidence-limited, use language such as `bottom-right validation stage`, `右侧待验证`, or `needs confirmation`.",
+      "chapter_id": "chapter_2_industry_chain"
+    },
+    {
+      "evidence_id": "EV039",
+      "source_module": "industry_kpi",
+      "variable": "segment_margin",
+      "period": "unspecified",
+      "status": "missing",
+      "text": "/ coverage_grade / report_types_seen / missing_report_types / answered_questions / core_pack_status / confidence_read /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV040",
+      "source_module": "industry_kpi",
+      "variable": "profit_or_eps",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ accounting_reconciliation / Check signs, units, periods, and cross-statement consistency before a number enters the PM memo. / operating_cash_flow: 三一重工股份有限公司2025年年度报告: 8,221,213 5,333,989 5,333,989 54.13 4,388,393 经常性损益的净利润 经营活动产生的现金流量净额 19,975,261 14,81...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV041",
+      "source_module": "industry_kpi",
+      "variable": "unmapped",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ segment_economics_depth / Decide whether each business line has enough disclosed scale, growth, margin, cash quality, and valuation treatment. / 三一重工股份有限公司2025年年度报告: 报告期内公司新增重要非主营业务的说明 □适用 √不适用 二、报告期内公司所处行业情况 2025 年，国内工程机械行业步入温和复苏与结构优化的新阶段。在“大规模设备更新”政策、 一...",
+      "chapter_id": "chapter_2_industry_chain"
+    },
+    {
+      "evidence_id": "EV042",
+      "source_module": "industry_kpi",
+      "variable": "profit_or_eps",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ cash_flow_quality_decomposition / Separate accounting profit from cash conversion, working-capital drag, and demand visibility. / operating_cash_flow: 三一重工股份有限公司2025年年度报告: 8,221,213 5,333,989 5,333,989 54.13 4,388,393 经常性损益的净利润 经营活动产生的现金流量净额 19,975,261 14...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV043",
+      "source_module": "industry_kpi",
+      "variable": "capex_or_roic",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ capex_cip_return_bridge / Test whether capex, construction-in-progress, or investment assets are building returns or just absorbing capital. / long_term_equity_investments: 三一重工股份有限公司2025年年度报告: 衍生金融资产 375,720 61,070 -314,650 -560,116 应收款项融资 456,501 461,18...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV044",
+      "source_module": "industry_kpi",
+      "variable": "segment_margin",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ non_recurring_profit_quality / Distinguish core operating profit from investment income, fair-value moves, subsidies, asset disposals, impairment, and other one-off items. / impairment: 三一重工股份有限公司2025年年度报告: 其中：利息费用 568,877 845,080 利息收入 1,149,380 1,009,363...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV045",
+      "source_module": "industry_kpi",
+      "variable": "segment_margin",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ balance_sheet_forward_signals / Read balance-sheet leads before income-statement confirmation. / inventory: 三一重工股份有限公司2025年年度报告: 告期间实现归属母公司净利润 84.1 亿元，同比大幅增长 41.2%，销售净利率达 9.5%，同比提升 1.7 个百分点。 经营效率持续改善：公司持续优化存货及货款管理水平，存货、在外货款的规模、质量、周 / inventory: 三一重工股份有限公司...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV046",
+      "source_module": "industry_kpi",
+      "variable": "revenue",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ shareholder_return_authenticity / Test whether dividends, buybacks, and capital returns are funded by durable profit and cash rather than leverage or asset sales. / generic_capital_allocation: 三一重工股份有限公司2025年年度报告: 户中的回购股份数后为基数，向股权登记日在册全体股东每10股派发1.8元现金红利（含...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV047",
+      "source_module": "industry_kpi",
+      "variable": "segment_margin",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "/ disclosure_quality_score / Grade whether filing disclosure is rich enough for a buy-side thesis or only a watchlist view. / Coverage grade strong; reports seen annual/quarterly/semiannual; answered 8/9; core pack ready. Annual base text and quarterly chec...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV048",
+      "source_module": "market_expectation",
+      "variable": "unmapped",
+      "period": "2026-07-31",
+      "status": "reported",
+      "text": "Valuation trade date: 2026-07-31",
+      "chapter_id": "chapter_6_expectations"
+    },
+    {
+      "evidence_id": "EV049",
+      "source_module": "market_expectation",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "/ Market cap (CNY) / 188957340420 / current equity value /",
+      "chapter_id": "chapter_6_expectations"
+    },
+    {
+      "evidence_id": "EV050",
+      "source_module": "market_expectation",
+      "variable": "valuation",
+      "period": "TTM",
+      "status": "reported",
+      "text": "/ PE TTM / 22.4431 / earnings multiple the market is paying now /",
+      "chapter_id": "chapter_7_valuation_rating"
+    }
+  ],
+  "chapter_packets": [
+    {
+      "chapter_id": "chapter_1_company",
+      "title": "一、公司是谁、如何赚钱",
+      "reader_goal": "让普通投资者理解产品、客户、定价、收入确认、成本与现金回收。",
+      "selected_evidence_ids": [
+        "EV001",
+        "EV002",
+        "EV003",
+        "EV004",
+        "EV005",
+        "EV006",
+        "EV007",
+        "EV008",
+        "EV009",
+        "EV010",
+        "EV011",
+        "EV014"
+      ],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_2_industry_chain",
+      "title": "二、产业链位置与行业格局",
+      "reader_goal": "解释上下游、供需与价格形成，并把产业链变化传导到公司经营。",
+      "selected_evidence_ids": [
+        "EV037",
+        "EV038",
+        "EV041",
+        "EV075",
+        "EV077",
+        "EV078",
+        "EV079",
+        "EV080",
+        "EV081"
+      ],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_3_profit_pools",
+      "title": "三、业务拆解与核心利润池",
+      "reader_goal": "按核心、成长、波动和期权业务拆解收入、利润、现金与资本占用。",
+      "selected_evidence_ids": [],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_4_competition",
+      "title": "四、竞争优势、护城河与主要短板",
+      "reader_goal": "用历史或真同行验证规模、品牌、渠道、技术和成本优势。",
+      "selected_evidence_ids": [
+        "EV057",
+        "EV058",
+        "EV060",
+        "EV061",
+        "EV062",
+        "EV063",
+        "EV064",
+        "EV065"
+      ],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_5_growth_forecast",
+      "title": "五、增长逻辑、关键分歧与盈利预测",
+      "reader_goal": "围绕三至五个关键问题，把经营变量传导到三年盈利和现金流。",
+      "selected_evidence_ids": [
+        "EV012",
+        "EV013",
+        "EV015",
+        "EV017",
+        "EV018",
+        "EV028",
+        "EV029",
+        "EV030",
+        "EV031",
+        "EV033",
+        "EV036",
+        "EV039"
+      ],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_6_expectations",
+      "title": "六、市场预期差、风险与验证",
+      "reader_goal": "区分真实一致预期、单家卖方和反向隐含假设，并给出证伪日历。",
+      "selected_evidence_ids": [
+        "EV048",
+        "EV049",
+        "EV051",
+        "EV053"
+      ],
+      "knowledge_planet_ids": [
+        "KPE01",
+        "KPE02",
+        "KPE02",
+        "KPE02",
+        "KPE02",
+        "KPE02"
+      ],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_7_valuation_rating",
+      "title": "七、估值、评级与投资结论",
+      "reader_goal": "在完成公司、产业、模型和预期分析后，最后给出估值、评级与动作。",
+      "selected_evidence_ids": [
+        "EV050",
+        "EV052",
+        "EV054",
+        "EV055",
+        "EV056",
+        "EV066",
+        "EV067",
+        "EV068",
+        "EV069",
+        "EV070",
+        "EV071",
+        "EV072"
+      ],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    }
+  ],
+  "preprocessing_notes": [
+    "原始上下文不直接成为公共报告结构。",
+    "知识星球线索已按目标实体、变量、允许用途和验证门槛重新路由。",
+    "所有章节必须围绕读者问题展开，数据只作为决定性证据进入正文。"
+  ]
+}

@@ -654,7 +654,7 @@ def test_market_share_count_overrides_pledge_proxy_and_recalculates_eps():
     assert any("LLM-supplied diluted shares rejected" in note for note in checked.preprocessing_notes)
 
 
-def test_context_suffix_keys_and_registered_capital_control_share_count():
+def test_context_suffix_keys_use_current_market_share_count_over_registered_capital():
     packet = CompanyUnderwritingPacket(
         symbol="603986.SH",
         as_of_date="2026-07-19",
@@ -685,7 +685,48 @@ def test_context_suffix_keys_and_registered_capital_control_share_count():
 
     checked = _validate_packet(packet, {}, contexts)
 
-    assert checked.company_model.share_count_source_type == "registered_capital"
-    assert checked.company_model.diluted_share_count_mn == 701.102451
+    market_shares = 325_013_196_750 / 463.15 / 1_000_000
+    assert checked.company_model.share_count_source_type == "market_cap_div_close"
+    assert round(checked.company_model.diluted_share_count_mn or 0, 6) == round(
+        market_shares, 6
+    )
     assert checked.valuation_closure.current_price_cny == 463.15
     assert not any("conflict" in reason.lower() for reason in checked.readiness_reasons)
+
+
+def test_effective_stock_dividend_market_shares_override_stale_registered_capital():
+    packet = CompanyUnderwritingPacket(
+        symbol="600426.SH",
+        as_of_date="2026-08-02",
+        forecast_years=["2026E", "2027E", "2028E"],
+        company_model=CompanyOperatingModel(
+            model_profile="corporate",
+            diluted_share_count_mn=2115.340781,
+            revenue_equation="volume x price",
+            profit_equation="revenue x margin",
+        ),
+    )
+    contexts = {
+        "management_capital_allocation": (
+            "| ts_code | reg_capital |\n| --- | ---: |\n"
+            "| 600426.SH | 211534.0781 |\n\n"
+            "| ann_date | end_date | div_proc | cash_div_tax | stk_div | record_date | ex_date | pay_date |\n"
+            "| --- | --- | --- | ---: | ---: | --- | --- | --- |\n"
+            "| 20260522 | 20251231 | 实施 | 0.25 | 0.3 | 20260709 | 20260710 | 20260710 |"
+        ),
+        "forecast_model": "| Market cap (CNY) | 59261271650 | current equity value |",
+        "price_earnings_decomposition": "| close | 21.55 |",
+    }
+
+    checked = _validate_packet(packet, {}, contexts)
+
+    expected_shares = 59_261_271_650 / 21.55 / 1_000_000
+    assert checked.company_model.share_count_source_type == "market_cap_div_close"
+    assert round(checked.company_model.diluted_share_count_mn or 0, 3) == round(
+        expected_shares, 3
+    )
+    assert checked.research_readiness != "blocked"
+    assert any(
+        "registered capital may lag effective corporate actions" in note
+        for note in checked.preprocessing_notes
+    )

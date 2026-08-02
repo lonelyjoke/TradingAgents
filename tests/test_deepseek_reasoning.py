@@ -5,8 +5,8 @@ Two pieces verified:
 1. ``reasoning_content`` is captured on receive into the AIMessage's
    ``additional_kwargs`` and re-attached on send so DeepSeek's API
    sees the same value across turns.
-2. V4 Flash and Pro both support native thinking-mode tools/structured
-   output, while the retired ``deepseek-reasoner`` alias keeps a fallback.
+2. V4 Flash and Pro use native structured output when thinking is disabled,
+   and fail fast to the schema-prompt path when thinking is enabled.
 """
 
 import os
@@ -137,7 +137,7 @@ class TestDeepSeekReasonerStructuredOutput:
 
     @pytest.mark.parametrize("model", ["deepseek-v4-flash", "deepseek-v4-pro"])
     def test_with_structured_output_works_for_v4(self, model):
-        """Both V4 models support tool_choice in thinking mode."""
+        """Both V4 models support native structured output without thinking."""
         client = DeepSeekChatOpenAI(
             model=model,
             api_key="placeholder",
@@ -152,6 +152,22 @@ class TestDeepSeekReasonerStructuredOutput:
         # require a real key; we only assert binding succeeds.)
         wrapped = client.with_structured_output(_Sample)
         assert wrapped is not None
+
+    @pytest.mark.parametrize("model", ["deepseek-v4-flash", "deepseek-v4-pro"])
+    def test_thinking_v4_fails_fast_to_schema_prompt(self, model):
+        client = DeepSeekChatOpenAI(
+            model=model,
+            api_key="placeholder",
+            base_url="https://api.deepseek.com",
+            extra_body={"thinking": {"type": "enabled"}},
+        )
+        from pydantic import BaseModel
+
+        class _Sample(BaseModel):
+            answer: str
+
+        with pytest.raises(NotImplementedError, match="tool_choice"):
+            client.with_structured_output(_Sample)
 
     def test_v4_request_carries_explicit_thinking_and_effort(self):
         client = OpenAIClient(

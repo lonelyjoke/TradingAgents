@@ -4,6 +4,7 @@ import json
 
 from tradingagents.evaluation.research_validator import (
     audit_context_alignment,
+    audit_current_share_count_reconciliation,
     audit_decision_depth,
     audit_decision_integrity,
     audit_deterministic_valuation_scale,
@@ -17,6 +18,7 @@ from tradingagents.evaluation.research_validator import (
     audit_public_forecast_growth_consistency,
     audit_public_canonical_forecast_narrative,
     audit_public_key_number_consistency,
+    audit_public_profit_pe_per_share_arithmetic,
     audit_public_report_language,
     audit_rating_valuation_consistency,
     audit_report_redundancy,
@@ -56,6 +58,74 @@ def test_public_prose_cannot_override_canonical_forecast_or_fair_value(tmp_path)
     assert len(issues) == 2
     assert all(issue.section == "public_canonical_forecast_narrative" for issue in issues)
     assert all(_is_publication_blocker(issue.section, issue.severity) for issue in issues)
+
+
+def test_current_share_count_reconciliation_uses_market_cap_and_close(tmp_path):
+    context_dir = tmp_path / "0_context"
+    portfolio_dir = tmp_path / "5_portfolio"
+    context_dir.mkdir()
+    portfolio_dir.mkdir()
+    (context_dir / "market_expectation.md").write_text(
+        "| Market cap (CNY) | 59261271650 | current equity value |",
+        encoding="utf-8",
+    )
+    (context_dir / "price_earnings_decomposition.md").write_text(
+        "| close | 21.55 |", encoding="utf-8"
+    )
+    (context_dir / "structured_research.json").write_text(
+        json.dumps(
+            {
+                "underwriting_packet": {
+                    "company_model": {"diluted_share_count_mn": 2115.340781}
+                }
+            }
+        ),
+        encoding="utf-8",
+    )
+    (portfolio_dir / "canonical_decision.json").write_text(
+        json.dumps(
+            {
+                "canonical_model_snapshot": [
+                    {
+                        "period": "current",
+                        "metric": "diluted_shares",
+                        "value": 2115.340781,
+                    }
+                ],
+                "deterministic_valuation": {
+                    "diluted_share_count_mn": 2115.340781,
+                    "scenario_rows": [],
+                },
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    issues = audit_current_share_count_reconciliation(tmp_path)
+
+    assert len(issues) == 1
+    assert issues[0].section == "share_count_source_conflict"
+    assert "2749.943" in issues[0].issue
+
+
+def test_public_profit_pe_per_share_arithmetic_is_blocked(tmp_path):
+    portfolio_dir = tmp_path / "5_portfolio"
+    portfolio_dir.mkdir()
+    (portfolio_dir / "canonical_decision.json").write_text(
+        json.dumps(
+            {"deterministic_valuation": {"diluted_share_count_mn": 2749.943}}
+        ),
+        encoding="utf-8",
+    )
+
+    issues = audit_public_profit_pe_per_share_arithmetic(
+        tmp_path,
+        "若利润仅35亿元且11倍PE，公允价值约24.35元。",
+    )
+
+    assert len(issues) == 1
+    assert issues[0].section == "public_key_number_consistency"
+    assert "14.00元" in issues[0].issue
 
 
 def test_public_canonical_audit_keeps_labelled_external_and_scenario_values(tmp_path):
@@ -126,6 +196,36 @@ def test_peer_half_year_news_does_not_trigger_target_guidance_gate(tmp_path):
     )
 
     assert audit_official_guidance_forecast_reconciliation(report_dir, "") == []
+
+
+def test_dispersed_h1_preview_and_announcement_words_do_not_trigger_guidance_gate(tmp_path):
+    _write_guidance_reconciliation_fixture(
+        tmp_path,
+        forecast_text=(
+            "市场预期关注2026H1盈利持续性。\n\n"
+            "荆州项目投产公告是后续催化剂。\n\n"
+            "等待中报业绩预告/正式报告验证产品价差。"
+        ),
+        scenarios=[],
+    )
+
+    assert audit_official_guidance_forecast_reconciliation(tmp_path, "") == []
+
+
+def test_guidance_control_without_heading_still_triggers_numeric_gate(tmp_path):
+    _write_guidance_reconciliation_fixture(
+        tmp_path,
+        forecast_text=(
+            "OFFICIAL_GUIDANCE_DISCLOSURE: target=UNSPECIFIED; "
+            "source_scope=company_announcement; numeric_record_status=missing\n"
+            "2026年半年度业绩预告"
+        ),
+        scenarios=[],
+    )
+
+    issues = audit_official_guidance_forecast_reconciliation(tmp_path, "")
+
+    assert [issue.section for issue in issues] == ["official_guidance_extraction"]
 
 
 def test_guidance_control_target_mismatch_blocks_publication(tmp_path):

@@ -484,13 +484,27 @@ def audit_official_guidance_forecast_reconciliation(
         payload = json.loads(read_text_fallback(pm_path))
     except (OSError, TypeError, json.JSONDecodeError):
         return []
-    guidance_section = forecast_text
+    guidance_section = ""
     marker = re.search(r"^## Official Earnings Guidance Override\s*$", forecast_text, re.I | re.M)
     if marker:
         guidance_section = forecast_text[marker.end():]
         next_section = re.search(r"^##\s+", guidance_section, re.M)
         if next_section:
             guidance_section = guidance_section[:next_section.start()]
+    else:
+        # A deterministic disclosure control is sufficient even when an older
+        # saved scaffold omitted the section heading.  Scope from that exact
+        # control line only; never fall back to unrelated full-document words.
+        control_marker = re.search(
+            r"^OFFICIAL_GUIDANCE_DISCLOSURE:\s*",
+            forecast_text,
+            re.I | re.M,
+        )
+        if control_marker:
+            guidance_section = forecast_text[control_marker.start():]
+            next_section = re.search(r"^##\s+", guidance_section, re.M)
+            if next_section:
+                guidance_section = guidance_section[:next_section.start()]
     explicit_h1_announcement = bool(
         re.search(r"(?:业绩预告|业绩预增|performance preview|earnings guidance)", guidance_section, re.I)
         and re.search(r"(?:半年度|半年|H1|half-year)", guidance_section, re.I)
@@ -536,7 +550,11 @@ def audit_official_guidance_forecast_reconciliation(
     has_official_h1_guidance = bool(
         disclosure_control
         or parsed_parent_profit is not None
-        or (explicit_h1_announcement and target_matches_legacy_section)
+        # Legacy prose detection is intentionally scoped to the dedicated
+        # guidance section.  Searching the full forecast can combine unrelated
+        # mentions of "H1", "业绩预告" and "公告" from distant paragraphs and
+        # create a false publication blocker.
+        or (marker and explicit_h1_announcement and target_matches_legacy_section)
     )
     if not has_official_h1_guidance:
         return []
@@ -2511,6 +2529,54 @@ def audit_public_key_number_consistency(decision_text: str) -> list[DecisionDept
     return issues
 
 
+def audit_public_profit_pe_per_share_arithmetic(
+    report_dir: str | Path,
+    decision_text: str,
+) -> list[DecisionDepthIssue]:
+    """Check prose claims that bridge profit and PE to a per-share value."""
+
+    pm_path = Path(report_dir) / "5_portfolio" / "canonical_decision.json"
+    if not pm_path.exists():
+        return []
+    try:
+        payload = json.loads(read_text_fallback(pm_path))
+    except (OSError, TypeError, json.JSONDecodeError):
+        return []
+    shares_mn = _safe_float(
+        (payload.get("deterministic_valuation") or {}).get("diluted_share_count_mn")
+    )
+    if shares_mn <= 0:
+        return []
+    pattern = re.compile(
+        r"(?:归母净)?利润[^\d\n]{0,10}(\d+(?:\.\d+)?)\s*亿元"
+        r"[^。；;\n]{0,32}?(\d+(?:\.\d+)?)\s*倍\s*PE"
+        r"[^。；;\n]{0,42}?(?:公允(?:股价|价值)|目标价)"
+        r"[^\d\n]{0,10}(\d+(?:\.\d+)?)\s*元",
+        re.I,
+    )
+    issues: list[DecisionDepthIssue] = []
+    for match in pattern.finditer(decision_text):
+        profit_cny_mn = float(match.group(1)) * 100.0
+        multiple = float(match.group(2))
+        claimed_value = float(match.group(3))
+        expected_value = profit_cny_mn / shares_mn * multiple
+        if expected_value <= 0:
+            continue
+        difference_pct = abs(claimed_value - expected_value) / expected_value * 100.0
+        if difference_pct <= 3.0:
+            continue
+        issues.append(
+            DecisionDepthIssue(
+                "public_key_number_consistency",
+                "error",
+                f"profit/PE per-share arithmetic conflict: {match.group(1)}亿元 x "
+                f"{multiple:g}x / {shares_mn:.3f}mn shares = {expected_value:.2f}元, "
+                f"not {claimed_value:.2f}元",
+            )
+        )
+    return issues
+
+
 def audit_public_canonical_forecast_narrative(
     report_dir: str | Path,
 ) -> list[DecisionDepthIssue]:
@@ -2855,6 +2921,113 @@ def audit_deterministic_valuation_scale(report_dir: str | Path) -> list[Decision
             "deterministic_valuation_scale",
             "error",
             "deterministic valuation has unit-scale contradictions: "
+            + "; ".join(dict.fromkeys(findings)),
+        )
+    ]
+
+
+def audit_current_share_count_reconciliation(
+    report_dir: str | Path,
+) -> list[DecisionDepthIssue]:
+    """Reconcile every valuation share line to the current market snapshot.
+
+    Filing share counts and registered capital can predate an effective
+    corporate action.  Market cap and close from one trading snapshot provide
+    an independent current-share identity: ``shares = market cap / close``.
+    A material mismatch makes EPS and all per-share valuation outputs unsafe.
+    """
+
+    report_path = Path(report_dir)
+    market_path = report_path / "0_context" / "market_expectation.md"
+    price_path = report_path / "0_context" / "price_earnings_decomposition.md"
+    if not market_path.exists() or not price_path.exists():
+        return []
+    market_text = read_text_fallback(market_path)
+    price_text = read_text_fallback(price_path)
+    market_match = re.search(
+        r"\|\s*Market\s+cap\s*\(CNY\)\s*\|\s*([\d,]+(?:\.\d+)?)\s*\|",
+        market_text,
+        re.I,
+    )
+    close_match = re.search(
+        r"\|\s*(?:close|latest\s+close|current\s+price)\s*\|\s*"
+        r"([\d,]+(?:\.\d+)?)\s*\|",
+        price_text,
+        re.I,
+    )
+    if not market_match or not close_match:
+        return []
+    market_cap_cny = _safe_float(market_match.group(1).replace(",", ""))
+    close_cny = _safe_float(close_match.group(1).replace(",", ""))
+    if market_cap_cny <= 0 or close_cny <= 0:
+        return []
+    current_shares_mn = market_cap_cny / close_cny / 1_000_000.0
+
+    observed: list[tuple[str, float]] = []
+    structured_path = report_path / "0_context" / "structured_research.json"
+    if structured_path.exists():
+        try:
+            bundle = json.loads(read_text_fallback(structured_path))
+            packet_shares = _safe_float(
+                ((bundle.get("underwriting_packet") or {}).get("company_model") or {}).get(
+                    "diluted_share_count_mn"
+                )
+            )
+            if packet_shares > 0:
+                observed.append(("underwriting packet", packet_shares))
+        except (OSError, TypeError, json.JSONDecodeError):
+            pass
+
+    pm_path = report_path / "5_portfolio" / "canonical_decision.json"
+    payload: dict[str, Any] = {}
+    if pm_path.exists():
+        try:
+            payload = json.loads(read_text_fallback(pm_path))
+        except (OSError, TypeError, json.JSONDecodeError):
+            payload = {}
+    valuation = payload.get("deterministic_valuation") or {}
+    valuation_shares = _safe_float(valuation.get("diluted_share_count_mn"))
+    if valuation_shares > 0:
+        observed.append(("deterministic valuation", valuation_shares))
+    for row in payload.get("canonical_model_snapshot", []) or []:
+        if _handoff_metric_key(row.get("period"), row.get("metric"))[1] != "dilutedshares":
+            continue
+        snapshot_shares = _safe_float(row.get("value"))
+        if snapshot_shares > 0:
+            observed.append(("canonical model snapshot", snapshot_shares))
+            break
+
+    findings: list[str] = []
+    for label, shares_mn in observed:
+        difference_pct = abs(shares_mn - current_shares_mn) / current_shares_mn * 100.0
+        if difference_pct > 1.0:
+            findings.append(
+                f"{label} uses {shares_mn:.3f} mn shares versus "
+                f"{current_shares_mn:.3f} mn from same-snapshot market cap/close "
+                f"({difference_pct:.2f}% difference)"
+            )
+
+    if valuation_shares > 0:
+        for row in valuation.get("scenario_rows", []) or []:
+            profit = _safe_float(row.get("parent_net_profit_cny_mn"))
+            eps = _safe_float(row.get("eps_cny"))
+            if profit <= 0 or eps <= 0:
+                continue
+            expected_eps = profit / valuation_shares
+            difference_pct = abs(eps - expected_eps) / expected_eps * 100.0
+            if difference_pct > 1.0:
+                findings.append(
+                    f"{row.get('scenario', 'scenario')} EPS {eps:.4f} does not equal "
+                    f"profit {profit:.2f} / shares {valuation_shares:.3f} "
+                    f"({difference_pct:.2f}% difference)"
+                )
+    if not findings:
+        return []
+    return [
+        DecisionDepthIssue(
+            "share_count_source_conflict",
+            "error",
+            "current share-count reconciliation failed: "
             + "; ".join(dict.fromkeys(findings)),
         )
     ]
@@ -3828,11 +4001,15 @@ def audit_report_depth(report_dir: str | Path) -> pd.DataFrame:
     issues.extend(audit_commodity_sensitivity_arithmetic(report_dir))
     issues.extend(audit_canonical_financial_reconciliation(report_dir))
     issues.extend(audit_public_key_number_consistency(decision_text))
+    issues.extend(
+        audit_public_profit_pe_per_share_arithmetic(report_dir, decision_text)
+    )
     issues.extend(audit_public_canonical_forecast_narrative(report_dir))
     issues.extend(audit_foreign_sell_side_forecast_disclosure(report_dir, decision_text))
     issues.extend(audit_public_forecast_growth_consistency(report_dir, decision_text))
     issues.extend(audit_weighted_margin_arithmetic(decision_text))
     issues.extend(audit_deterministic_valuation_scale(report_dir))
+    issues.extend(audit_current_share_count_reconciliation(report_dir))
     issues.extend(audit_rating_valuation_consistency(report_dir))
     issues.extend(audit_position_valuation_consistency(report_dir, decision_text))
     issues.extend(audit_report_redundancy(decision_text))

@@ -62,10 +62,10 @@ class DeepSeekChatOpenAI(NormalizedChatOpenAI):
        fails with HTTP 400. ``_create_chat_result`` captures the field on
        receive and ``_get_request_payload`` re-attaches it on send.
 
-    2. **Legacy deepseek-reasoner compatibility.** The retired legacy alias
-       did not reliably support forced function selection. V4 Flash and Pro
-       both support thinking-mode tools/tool_choice, so only that old alias
-       keeps the schema-prompt fallback.
+    2. **Thinking-mode structured output.** DeepSeek deployments can reject
+       forced ``tool_choice`` while native thinking is enabled. Detect that
+       combination at bind time so callers use the existing schema-prompt JSON
+       path once, instead of paying for a failed API call and a retry.
     """
 
     def _get_request_payload(self, input_, *, stop=None, **kwargs):
@@ -102,6 +102,16 @@ class DeepSeekChatOpenAI(NormalizedChatOpenAI):
             raise NotImplementedError(
                 f"{self.model_name} is a retired legacy reasoner alias; "
                 "use deepseek-v4-flash or deepseek-v4-pro."
+            )
+        thinking_type = str(
+            ((getattr(self, "extra_body", None) or {}).get("thinking") or {}).get(
+                "type", ""
+            )
+        ).lower()
+        if thinking_type == "enabled":
+            raise NotImplementedError(
+                f"{self.model_name} thinking mode does not support forced "
+                "tool_choice reliably; use schema-prompt structured output."
             )
         return super().with_structured_output(schema, method=method, **kwargs)
 

@@ -1,0 +1,1054 @@
+{
+  "rating": "Hold",
+  "rating_posture": "中性；当前价20.55元高于程序化安全买入上限11.96元，已有持仓按评级管理，新资金等待价格进入安全区间或基本面证据推动估值输入上修。",
+  "research_readiness": "partial",
+  "one_line_thesis": "三一重工正处于国内更新周期与全球化扩张的业绩兑现前夜：行业销量右侧已确认，但公司层面分部销量、毛利率及汇兑损益的缺失令利润弹性尚未验证；当前股价已隐含2026E盈利企稳预期，但尚未对全球化结构性重估给予系统性溢价，H1半年报是打通“行业β→公司α”传导链的核心催化剂。",
+  "research_questions": [
+    "Q01: 公司挖掘机、起重机、混凝土机械的Q2实际销量和ASP是否跑赢行业，以及提价是否能落地？",
+    "Q02: 海外高毛利扩张（占比提升+北美扭亏）和成本控制能否使综合毛利率显著突破28.5%？",
+    "Q03: H2汇兑反转的10亿利润弹性是否是确定的低基数修复，还是会被新的汇率波动吞噬？",
+    "Q04: 国内市场复苏的持续性如何？中大挖的更新需求能否对冲房地产新建的长期下行压力？",
+    "Q05: 公司当前近23倍TTM PE和2.1倍PB的估值，是否已经充分甚至过度反应了2026年的盈利恢复预期？"
+  ],
+  "question_verdicts": [
+    {
+      "question": "Q01: 公司Q2实际销量与ASP是否跑赢行业？",
+      "why_decisive": "决定公司能否将行业高景气度转化为超越市场的营收和毛利增长。",
+      "conclusion": "行业数据（CCMA）确认了强需求，但公司层面的销量和ASP数据缺失，是当前研究最大的空白。多头依赖私有渠道，空头指出了数据缺失风险。",
+      "evidence_used": [
+        "EV：6月挖机总销量+35.3%，出口额+25.5%；1-6月累计+26.4%。",
+        "KPE02：Q2收入+20%，海外+25%，国内十几个点；Q2经营利润+40%大个点。",
+        "熊方反驳：行业数据不等于公司数据；起重机等非挖机产品已分化；Web提价核查失败。"
+      ],
+      "strongest_counterevidence": "2026年6月汽车起重机国内+14.9%，履带起重机国内-4.4%，产品间分化严重。公司核心的挖掘机数据全靠行业和私有渠道推断，存在重大不确定性。",
+      "model_or_valuation_effect": "Base case 2026E收入增速维持+15%（1,053亿），毛利率28.2%。在H1财报明确验证前，不上修。",
+      "confidence": "medium",
+      "next_verification": "2026年8月下旬半年报：核心产品（挖机）收入、销量及毛利率明细。"
+    },
+    {
+      "question": "Q02: 海外扩张与成本优化能否推动综合毛利率突破28.5%？",
+      "why_decisive": "毛利率是衡量公司竞争壁垒、产品结构升级和成本控制的核心指标，直接影响估值中枢。",
+      "conclusion": "海外高毛利率（31.7%）且收入占比提升的结构性改善逻辑清晰，Q1毛利率已同比改善。但国内毛利率基线缺失，原材料成本影响无法评估。",
+      "evidence_used": [
+        "EV: Q1综合毛利率27.48%，同比+0.64pct；FY2025海外毛利率31.7%。",
+        "KPE02：Q2海外毛利率环比、同比提升（含汇兑负面影响0.5pct）；普迈毛利率提升。",
+        "熊方反驳：行业提价未验证；国内毛利率（估24-25%）为推算值，无法构成严谨的数学桥。"
+      ],
+      "strongest_counterevidence": "国内基准毛利率及其敏感性完全未知。钢价或其他原材料成本的有利/不利变化完全未被量化，无法断言毛利率改善仅为结构性因素。",
+      "model_or_valuation_effect": "维持2026E毛利率预测28.2%和2027E的28.8%。等待半年报披露海内外毛利率具体数值。",
+      "confidence": "medium",
+      "next_verification": "H1 2026半年报：海外和国内业务板块的具体毛利率及占比。"
+    },
+    {
+      "question": "Q03: H2汇兑反转的10亿利润弹性是否稳固？",
+      "why_decisive": "1亿元税前利润的波动对2026E净利润影响巨大，是跨过“盈利企稳”到“盈利加速”最关键的非经营性变量。",
+      "conclusion": "2025年H2的巨额汇兑损失（约10亿）造成的低基数效应是客观存在的。Q1财务费用率跳升反映了汇率风险的双向性。若汇率稳定，这笔利润修复大概率发生。",
+      "evidence_used": [
+        "EV: Q1财务费用率同比+5.08pct。",
+        "KPE02：去年Q3亏3亿，Q4亏6-7亿；今年H2同比无压力，汇兑多出10亿利润。",
+        "熊方反驳：KPE02为私有渠道，汇率预测性差；风险是双向的，若人民币大幅升值则预期落空。"
+      ],
+      "strongest_counterevidence": "若人民币对美元大幅升值，不仅H2无正向贡献，还可能产生新的损失。公司对冲比例未知，无法准确量化。",
+      "model_or_valuation_effect": "维持Base case中H2 +0.5bn净改善的保守假设。Bull case升至+1bn。此部分利润弹性已具高概率，但市场可能视其为一次性贡献，不给予高估值倍数。",
+      "confidence": "high",
+      "next_verification": "H1 2026半年报：汇兑损益附注及管理层对汇率风险管理的最新披露。"
+    },
+    {
+      "question": "Q04: 国内市场恢复的持续性如何？",
+      "why_decisive": "决定国内业务是V型反转（给高估值）还是L型企稳（给低估值），影响公司未来3-5年的盈利中枢。",
+      "conclusion": "由设备更新周期驱动的大中挖销售高增（30%+）已形成结构性需求支撑，短期（6-12个月）动能强劲。房地产新开工长期下行是共识，但设备更新周期已开始对冲此风险。",
+      "evidence_used": [
+        "KSI02：中大挖3月以来国内+30%+，更新需求启动。",
+        "EV: 6月挖机国内销量+33.9%，1-6月累计+20.4%。",
+        "公司互动平台：市场担心裁员和人员优化，侧面印证市场对长期国内成本/需求压力的担忧。"
+      ],
+      "strongest_counterevidence": "更新需求可能已集中释放，存在脉冲后回落的可能性。房地产长期低迷对该板块需求的拖累是结构性的，且可能随基建投资放缓而加剧。",
+      "model_or_valuation_effect": "维持国内业务2026年增长“十几个点”的假设。Base估值倍数保持在15x，反映了对国内长期增速的保守预期。",
+      "confidence": "medium",
+      "next_verification": "2026年Q3每月行业销量数据，Q3财报中公司国内收入增速和合同负债变化。"
+    },
+    {
+      "question": "Q05: 当前估值是否充分定价了2026年的恢复预期？",
+      "why_decisive": "回答现价是否有安全边际，是投资决策的最终落脚点。",
+      "conclusion": "以Base case预测，现价已不算便宜。但若将Bull case概率上调至30-40%，未来12个月的赔率依然可观。市场正在“盈利企稳”的定价基础上，对“盈利加速”进行试探性定价。",
+      "evidence_used": [
+        "现价20.55，PE TTM 22.4x。",
+        "Base case 2026E净利润102.6亿→ forward PE 18.4x；Bull case 118亿→ forward PE 15.9x。",
+        "PE 5年分位数29.8%，EPS proxy 5年分位数77.1%。",
+        "概率加权公允价值约16-17元（偏保守），但Bull case目标价23元（+12%），2027E目标价27元（+31%）。"
+      ],
+      "strongest_counterevidence": "当前价格已隐含2026年净利润需达118亿元以上（若以16x估值）。H1任何经营数据低于Bull case下的预期，都将触发盈利和估值的双杀。",
+      "model_or_valuation_effect": "当前估值对应上行空间（+12%~+31%）和下行风险（-19%~-24%）。风险收益比中性偏多，但需精选入场时机。",
+      "confidence": "medium",
+      "next_verification": "股价对H1财报的即时反应。"
+    }
+  ],
+  "forecast_takeaways": [
+    {
+      "takeaway": "2026年盈利增长由“量”驱动已是大概率事件，但报表端利润弹性取决于毛利率（产品结构+提价）和汇兑（低基数）这两个尚待验证的变量。",
+      "evidence_anchor": "CCMA行业销量连续多月高增（H1 +26.4%），Q1毛利率已同比提升0.64pct，2025H2汇兑亏损超10亿形成低基数。",
+      "financial_implication": "若毛利率和汇兑按预期兑现，2026年净利润将出现30%+的极强增长；若仅兑现销量的增长，利润增幅可能降至15-20%的温和区间。",
+      "confidence_and_risk": "高确定性：营收增长；中确定性：毛利率改善；低确定性：汇率走向。风险在于毛利率改善不及预期，以及人民币大幅升值吞噬汇兑收益。"
+    },
+    {
+      "takeaway": "三一重工正在从一个中国周期股，转变为一家全球化的中高端装备企业，其估值中枢存在上修的可能。",
+      "evidence_anchor": "公司海外毛利率31.7%，远高于国内；海外收入占比已至约40%，且在东南亚、非洲、欧美全面扩张；北美业务已实现盈利。主要竞争对手卡特彼勒(NYSE:CAT)可在中周期享有15-18x的估值。",
+      "financial_implication": "盈利结构的全球化升级，应使公司的估值倍数从目前14-16x的周期股中枢向全球同业靠拢。这是未来12-24个月潜在的估值双击来源。",
+      "confidence_and_risk": "中等确定性：海外扩张趋势成立，但能否持续在高基数上维持20%+增长仍需跟踪。风险在于全球贸易保护主义加剧和地缘政治风险，可能导致海外资产估值被大幅折价。"
+    }
+  ],
+  "forecast_assumptions": [
+    {
+      "parameter": "挖掘机板块（国内）营收增长",
+      "affected_business": "国内业务",
+      "historical_anchor": "CCMA 2026H1国内挖机销量+20.4%",
+      "evidence_status": "proxy",
+      "base_case": "+12%-15% (2026E)",
+      "bull_case": "+25% 以上 (更新需求超预期，金融工具支持)",
+      "bear_case": "+5% 以下 (更新需求脉冲结束，基建资金到位慢)",
+      "rationale_and_evidence": "行业销量增长因数据缺失无法与公司确认等同。我们以行业数据为锚，但基于份额被稀释的可能性和非挖机产品的分化，对公司增长进行折价。证据来源：EV, KPE04, KSI02。",
+      "sensitivity": "每±5%营收波动，影响归母净利润约±3-4亿。",
+      "confidence": "medium",
+      "verification_gate": "H1 2026财报：国内业务营收和挖机分部销量与毛利率。"
+    },
+    {
+      "parameter": "综合毛利率提升（海外占比+产品提价 vs 国内竞争）",
+      "affected_business": "合并报表",
+      "historical_anchor": "Q1 2026: 27.48%, FY2025海外: 31.7%",
+      "evidence_status": "calculated",
+      "base_case": "28.2% (2026E), 28.8% (2027E), 29.2% (2028E)",
+      "bull_case": "29.0% (2026E), 30.0% (2027E) (海外占比加速至50%+, 国内提价成功实施)",
+      "bear_case": "27.0% (2026E) (国内竞争加剧、原材料成本上升、海外扩张受阻)",
+      "rationale_and_evidence": "结构性改善逻辑清晰，但缺乏国内毛利率基线、提价落地证据及成本端分析。证据来源：EV013, EV033, KPE02。",
+      "sensitivity": "±1%的毛利率波动，对归母净利润的影响约为±8-10亿。这是对利润最敏感的变量。",
+      "confidence": "medium",
+      "verification_gate": "H1 2026半年报里的分部毛利率、海外营收占比；Q3行业高频销量和价格指数。"
+    },
+    {
+      "parameter": "汇率：美元/人民币（USDCNY）",
+      "affected_business": "海外业务、财务费用",
+      "historical_anchor": "2025H2产生~10亿亏损，2026Q1财务费用率高位",
+      "evidence_status": "analyst_estimate",
+      "base_case": "H2 2026同比产生+5亿正向贡献（不再亏损/微利）",
+      "bull_case": "+10亿正向贡献（人民币贬值1-2%）",
+      "bear_case": "-5亿至-10亿负向贡献（人民币升值至6.5或更低）",
+      "rationale_and_evidence": "低基数效应存在，但汇率预测不可靠。KPE02（H2压力解除、同比多10亿）作为参考。证据来源：EV016, KPE02。",
+      "sensitivity": "每10亿汇兑损益，约影响归母净利润7.7亿，占Base case的7.5%。",
+      "confidence": "low",
+      "verification_gate": "H1 2026半年报：汇兑损益附注，及人民币兑美元中间价的日度走势。"
+    }
+  ],
+  "core_theses": [
+    {
+      "rank": 1,
+      "takeaway": "短期（6-12个月）确定性最强的逻辑是“H2利润弹性释放”，2025H2造成报表扭曲的巨额汇兑亏损和国内行业下行在今年形成绝佳的低基数。",
+      "decisive_question": "Q03：H2汇兑反转的10亿利润弹性是否稳固？",
+      "evidence": "EV016: Q1财务费用率同比+5.08pp显示了汇兑的巨大影响。KPE02: 指出2025年Q3 Q4分别亏3/6-7亿，今年下半年同比无压力，利润弹性约10亿。",
+      "strongest_counterevidence": "汇率预测本质上不可靠。若人民币趋势性升值，低基数效应将消失，甚至产生新的亏损。",
+      "financial_transmission": "财务费用大幅下降 → 营业利润率从12%+跳升至14%+ → 归母净利润从10.3bn向11.8bn bull case靠拢。",
+      "market_pricing": "市场可能将此利润视为“一次性”或“不可持续”，因此不会给予高估值，但对EPS的推升是确凿的。当前股价尚未充分反映这一非经常性利润的确定性修复，给予其估值折扣，但也意味着一旦兑现，其盈利惊喜可能集中释放。",
+      "falsification_gate": "2026年报显示H2汇兑亏损与2025H2持平或更高，或在管理层指引中排除了外汇收益。",
+      "verdict": "partial"
+    },
+    {
+      "rank": 2,
+      "takeaway": "中期（12-24个月）最具吸引力的故事是“估值体系从周期股向全球化成长股切换”，由海外高利润业务占比持续提升驱动。",
+      "decisive_question": "Q02 & Q04: 综合毛利率能否突破28.5%？国内市场复苏是否可持续？",
+      "evidence": "EV033: 2025年海外毛利率31.7%。KPE02: Q2海外毛利率环比、同比提升。KSI02等: 中大挖带动国内更新需求，结构向好。",
+      "strongest_counterevidence": "全球化面临地缘政治、关税和强势竞争对手（CAT, Komatsu）的阻击。国内长期需求受房地产结构性下行拖累。估值重估之路漫长且不稳定。",
+      "financial_transmission": "海外营收每提升1%占比，可提升综合毛利率约0.07pct；利润结构优化，使公司理应享有比国内周期股更高的估值中枢（15x vs. 10-12x）。",
+      "market_pricing": "当前估值（PE 5年分位29.8%）远未price in成功切换为全球龙头的预期，仍主要按中国周期股+出口景气度定价。市场尚未对海外业务的稳定性溢价进行定价，这是预期差的重要来源。",
+      "falsification_gate": "1) 海外营收增速连续两个季度低于20%；2) 海外毛利率下滑至30%以下；3) 北美或欧洲市场因政治原因被迫退出。",
+      "verdict": "unproven"
+    },
+    {
+      "rank": 3,
+      "takeaway": "公司资本配置正在改善：4-8亿回购与员工持股计划有助稳定估值，虽然股息下降，但表明管理层在当前价位认为公司价值被低估。",
+      "decisive_question": "公司股东回报和内部利益绑定是否加强？",
+      "evidence": "2026-07-21公告：董事长提议4-8亿回购，用于员工持股计划。这是继FY2025末分红后的直接市场操作。",
+      "strongest_counterevidence": "回购计划的规模（4-8亿）相对于近1900亿市值杯水车薪（0.2-0.4%），信号意义大于实质EPS增厚。员工持股若不作废，仍有潜在的摊薄风险。",
+      "financial_transmission": "回购行为本身增厚EPS；员工持股计划绑定核心团队利益，激发经营动力。这是对“公司质量”的加分项，但不是独立的业绩驱动力。",
+      "market_pricing": "市场对回购公告给予正面解读，但未能驱动趋势性行情，验证了规模有限的观点。当前股价并未为这一信号支付溢价，但增强了底部韧性。",
+      "falsification_gate": "回购计划未实施或在有效期内仅少量买入。",
+      "verdict": "proven"
+    }
+  ],
+  "segment_economics": [
+    {
+      "business_unit": "挖掘机械",
+      "economic_role": "核心利润引擎，最大的收入与毛利贡献者，销量与价格主导。",
+      "disclosure_basis": "analytical",
+      "scale_and_growth": "行业口径：2026年1-6月挖机销量+26.4%。公司具体销量/收入未披露，权重估计为集团总收入的35%-40%。",
+      "margin_and_cash": "海外毛利率约31.7%，国内毛利率估计为24%-25%但未披露。分部毛利率为公司最佳水平，但具体数值仍为缺口。",
+      "driver_equation": "收入 = Σ销量(国内/出口) × ASP；毛利 = 收入 - (钢材/液压件/人工/运费/质保金)",
+      "valuation_treatment": "core",
+      "evidence_ids": [
+        "KPE03",
+        "KPE04",
+        "KPE06"
+      ],
+      "missing_or_next_check": "H1 2026半年报：公司挖掘机分部销量、收入及毛利率。"
+    },
+    {
+      "business_unit": "海外业务",
+      "economic_role": "高毛利成长第二曲线，利润结构升级的核心驱动力。",
+      "disclosure_basis": "reported",
+      "scale_and_growth": "FY2025毛利率31.7%，收入占比估计约40%。2026H1行业出口额+25.5%。公司Q2海外增速渠道口径+25%。",
+      "margin_and_cash": "海外毛利率显著高于国内，是综合毛利率提升的主要结构性动力。北美业务渠道口径已实现5%以上净利率。",
+      "driver_equation": "收入 = Σ区域(亚非拉/欧美)∑产品销量 × ASP；毛利 = 收入 - (原材料/运费/关税/本地服务成本)",
+      "valuation_treatment": "core",
+      "evidence_ids": [
+        "EV028",
+        "EV033",
+        "KPE02"
+      ],
+      "missing_or_next_check": "H1 2026半年报：海外收入绝对值、分区域毛利率、北美盈亏。"
+    },
+    {
+      "business_unit": "起重机械",
+      "economic_role": "次级主业，需求分化，基建与风电驱动。估值折价。",
+      "disclosure_basis": "analytical",
+      "scale_and_growth": "未披露分部收入。6月行业数据显示汽车起重机国内+14.9%，履带起重机国内-4.4%，内部分化严重。",
+      "margin_and_cash": "未披露分部毛利率。大型履带吊订单周期长，营运资金占用高。",
+      "driver_equation": "收入 = Σ销量 × ASP；部分大口径产品含在手订单/交付周期。",
+      "valuation_treatment": "core",
+      "evidence_ids": [
+        "KPE04",
+        "KPE09"
+      ],
+      "missing_or_next_check": "H1 2026半年报：起重机分部收入、毛利率及在手订单。"
+    },
+    {
+      "business_unit": "混凝土机械",
+      "economic_role": "成熟次级主业，地产依赖度高，目前为拖累项。",
+      "disclosure_basis": "analytical",
+      "scale_and_growth": "未披露分部收入。受地产新开工下行压制，景气度弱于挖掘机。",
+      "margin_and_cash": "未披露分部毛利率。信用减值风险是主要关注点。",
+      "driver_equation": "收入 = Σ销量 × ASP",
+      "valuation_treatment": "core",
+      "evidence_ids": [
+        "KPE04"
+      ],
+      "missing_or_next_check": "H1 2026半年报：混凝土机械收入、毛利率及应收账款质量。"
+    }
+  ],
+  "business_model_mechanisms": [
+    {
+      "link": "产品制造与销售",
+      "how_it_works": "公司制造挖掘机、起重机、混凝土机械等标准或半定制化产品，通过全球经销商网络销售给基建、矿山、地产及能源客户。",
+      "economic_driver": "销量 x ASP。销量取决于下游工程需求与设备更新周期，ASP取决于产品结构（中大挖化、电动化）与行业竞争格局。",
+      "cash_and_capital_feature": "需大量营运资金支撑原材料（钢材/液压件）采购与渠道库存。收款模式通常为分期或融资租赁，形成长期应收款。",
+      "evidence_or_gap": "行业月度销量已验证（CCMA），但公司分产品量价及海外占比仍为特验证缺口。",
+      "analyst_conclusion": "规模效应与渠道覆盖构成核心护城河，但对周期高度敏感。"
+    },
+    {
+      "link": "全球化渠道与服务",
+      "how_it_works": "通过自有网络与并购（如普迈）覆盖150+国家，提供销售、零部件供应、维修和数字化车队管理服务。",
+      "economic_driver": "海外收入占比 x 海外毛利率。海外定价高于国内，且后市场服务粘性强，可提升客户生命周期价值。",
+      "cash_and_capital_feature": "海外扩张需投入本地化组装厂、配件仓库及服务团队建设，属于前置性资本开支。现金流受汇率波动影响显著。",
+      "evidence_or_gap": "海外毛利率31.7%已证实（FY2025），但分区域盈利（北美/欧洲/亚非拉）与后市场收入占比未披露。",
+      "analyst_conclusion": "全球化是结构升级的主轴，但重资产投入和汇率是主要中期摩擦成本。"
+    },
+    {
+      "link": "技术研发与灯塔工厂",
+      "how_it_works": "年研发投入占比>5%，用于开发电动化、智能化产品及建设灯塔工厂提升制造效率。",
+      "economic_driver": "产品差异化（电动化ASP溢价）与制造成本摊薄。研发转化率为关键指标。",
+      "cash_and_capital_feature": "研发费用化率高，资本化率低。灯塔工厂为一次性重资本开支，后期通过降本增效释放回报。",
+      "evidence_or_gap": "电动化产品目前销量极小（6月国内电动挖机仅65台），先发优势的商业化证明缺失。",
+      "analyst_conclusion": "长期增长期权，但未来12-18个月难以在报表中贡献实质性利润弹性。"
+    },
+    {
+      "link": "配件与后市场服务",
+      "how_it_works": "通过全球服务网络向已售设备提供原厂配件、定期保养和大修服务，将一次性设备销售延伸为贯穿设备全生命周期的经常性收入。",
+      "economic_driver": "配件销售收入与设备保有量、开工率正相关；高工时设备对原厂配件依赖度高，服务合约粘性强。",
+      "cash_and_capital_feature": "配件库存占用部分营运资金，但配件毛利率普遍高于整机，现金回收快；后市场服务现金转化效率高，可平滑整机销售周期波动。",
+      "evidence_or_gap": "公司未单独披露后市场收入及毛利率，缺乏与竞争对手卡特彼勒（约30%服务收入占比）的可比数据，此项假设尚需验证。",
+      "analyst_conclusion": "若后市场收入占比提升至15-20%，将显著改善盈利质量和稳定性，并为周期谷底提供安全垫；但目前仍属定性逻辑，等待细分数据披露。"
+    }
+  ],
+  "industry_driver_matrix": [
+    {
+      "driver": "国内工程机械更新周期",
+      "current_state_and_direction": "2019-2021年销售高峰期的设备已进入8-10年替换窗口，2026H1中大挖销量同比+30%以上，上行期确认。",
+      "dated_evidence": "2026年1-6月CCMA挖机销量+26.4%，6月+35.3%。",
+      "affected_business": "国内挖掘机、起重机",
+      "financial_transmission": "销量高增 -> 摊薄固定成本 -> 国内业务毛利率回升 -> 母公司利润弹性。",
+      "confidence": "medium",
+      "next_verification": "2026年Q3每月CCMA行业销量数据及Q3财报合同负债变化。"
+    },
+    {
+      "driver": "新兴市场基建与资源品需求",
+      "current_state_and_direction": "非洲、东南亚、拉美等市场基建活跃，资源品价格高位刺激矿山设备需求，中国工程机械出口持续高景气。",
+      "dated_evidence": "2026年6月挖机出口额+25.5%，非洲H1增速渠道口径+50%。",
+      "affected_business": "海外业务",
+      "financial_transmission": "出口量增 -> 海外收入高占比 -> 结构性抬升综合毛利率。",
+      "confidence": "medium",
+      "next_verification": "海关月度出口数据及半年报海外分区域收入明细。"
+    },
+    {
+      "driver": "钢材等原材料成本",
+      "current_state_and_direction": "未映射商品价格，无法判断方向。工程机械主要成本项为钢材、液压件等。",
+      "dated_evidence": "系统商品映射缺失。",
+      "affected_business": "全产品线",
+      "financial_transmission": "钢价波动 -> 影响直接材料成本 -> 叠加定价滞后效应 -> 毛利率波动0.5-1pp。",
+      "confidence": "low",
+      "next_verification": "建立动力煤/钢价映射；跟踪行业PPI及半年报成本明细。"
+    },
+    {
+      "driver": "人民币汇率",
+      "current_state_and_direction": "目前人民币汇率企稳，但预期双向波动剧烈。Q1财务费用率高企反映汇兑风险的冲击。",
+      "dated_evidence": "Q1财务费用率3.32%，同比+5.08pp；2025H2累计汇兑亏损约10亿。",
+      "affected_business": "海外业务、集团财务费用",
+      "financial_transmission": "人民币升值 -> 海外收入缩水/产生汇兑损失 -> 财务费用侵蚀利润。",
+      "confidence": "low",
+      "next_verification": "H1半年报附注中汇兑损益科目及管理层关于对冲策略的披露。"
+    }
+  ],
+  "competition_landscapes": [
+    {
+      "business_unit": "挖掘机械",
+      "market_boundary": "全球及中国市场的6吨至120吨液压挖掘机，包含电动替代品。竞争场景分为以性能/服务主导的欧美市场和以性价比/渠道主导的新兴市场。",
+      "structure_and_concentration": "国内CR3（三一/徐工/中联）超60%，三一长期占据国内销量第一；全球市场由卡特彼勒、小松主导，中国品牌合计份额约15%且快速提升。",
+      "direct_competitors": [
+        "卡特彼勒 (Caterpillar, 全球技术和品牌标杆)",
+        "小松 (Komatsu, 高端矿山及成熟市场主要对手)",
+        "徐工机械 (国内主要追赶者，起重机领域强势)",
+        "中联重科 (混凝土机械领域有传统优势)",
+        "Volvo CE, 柳工 (细分市场竞争者)"
+      ],
+      "substitutes_self_supply_and_new_entrants": [
+        "购买二手设备或租赁是主要替代方案；电动化新势力如主机厂内部孵化为潜在闯入者"
+      ],
+      "comparison_dimensions": [
+        "总持有成本 (购买价+油耗/电耗+维护)",
+        "渠道与服务覆盖 (是否能24小时内响应)",
+        "残值/二手流通性 (金融属性)",
+        "智能化/电动化水平"
+      ],
+      "company_relative_position": "三一是国内市场的量价领导者，拥有最强的规模优势和最广的海外渠道。但相比卡特彼勒和小松，其品牌壁垒和客户粘性在欧美成熟市场仍较弱，需依赖性价比和灵活的融资方案竞争。",
+      "competitor_likely_response": "龙头将在直销、数字服务和智能矿山解决方案上构筑壁垒；国内追赶者（徐工、中联）可能跟进价格战或海外建厂以抵御份额稀释。",
+      "financial_transmission": "国内份额稳定 -> 收入增长底线稳固；海外份额提升 -> 结构升级提高综合毛利率。若发生价格战，则规模效应被降价侵蚀。",
+      "evidence_status_and_ids": "partial (EV036, KPE02, KPE04) — 缺乏公司级精确份额和三一单机服务/配件收入占比。",
+      "next_verification": "跟踪Q3月度行业销量份额，验证半年报中海外分区域的利润率及应收账款质量。"
+    }
+  ],
+  "moat_mechanisms": [
+    {
+      "moat_source": "规模与成本优势",
+      "operating_mechanism": "通过极高的产能利用率和灯塔工厂的自动化制造，在钢材、核心零部件采购上具备议价权，并能在行业低谷期通过更强的现金流挤占对手份额。",
+      "observed_proof": "行业显示三一在国内挖机份额持续领先（约28%）。在2021-2025下行周期中仍保持市场地位稳固。",
+      "economic_result": "低谷期也能保持正经营利润，周期底部展现防御性；成本优势转化为更高的毛利率和ROIC。",
+      "durability_and_threat": "耐用，但需警惕新兴经济体本土品牌以更低价冲击中低端市场。",
+      "verdict": "partial"
+    },
+    {
+      "moat_source": "全球化渠道与服务网络",
+      "operating_mechanism": "在全球超过150个国家布局了经销商和配件库，实现向本地化客户的服务承诺，提高转换成本。",
+      "observed_proof": "海外收入占比提升至~40%，且毛利率（31.7%）显著高于国内，证明海外客户对三一产品的价格接受度较高。",
+      "economic_result": "即使在国内需求萎缩时，海外收入提供对冲，降低公司周期性波动。",
+      "durability_and_threat": "建立时间周期长，一旦建成极难被复制；但面临全球贸易摩擦导致的主动或被动撤出风险。",
+      "verdict": "partial"
+    },
+    {
+      "moat_source": "产品族完整性与一站式解决方案",
+      "operating_mechanism": "全面覆盖土方、路面、起重、混凝土等大品类，使中大B端客户可一站式配齐，降低采购管理成本和维护难度。",
+      "observed_proof": "公司在挖机、起重机、混凝土机械等多个细分赛道均占据前二位置。",
+      "economic_result": "产品族间的交叉销售可摊薄渠道成本，形成品牌锁定效应，但对价格溢价的支持相对有限。",
+      "durability_and_threat": "受宏观经济及大宗周期影响大，单一客户仍可因低价选择竞品。",
+      "verdict": "partial"
+    }
+  ],
+  "accounting_quality_matrix": [
+    {
+      "item": "经营现金流/净利润含量",
+      "latest_evidence_and_period": "Q1 2026：OCF/Net profit ≈ 1.43x",
+      "trend_or_comparator": "渠道口径Q2进一步提升至1.5x；历史与利润高度相关。",
+      "causal_interpretation": "现金回收能力远高于账面利润，主要因为信用减值及折旧等非付现成本比例较高。",
+      "earnings_cash_roic_effect": "正向。高现金含量支撑回购与分红，降低财务造假风险，提升EPS质量。",
+      "verdict": "positive",
+      "evidence_ids": [
+        "EV017",
+        "KPE02"
+      ]
+    },
+    {
+      "item": "财务费用/汇兑风险",
+      "latest_evidence_and_period": "Q1 2026：财务费用率3.32%，同比+5.08pp。",
+      "trend_or_comparator": "大幅恶化，是表观利润率下滑的唯一推手。",
+      "causal_interpretation": "持有巨额海外净资产及应收，在人民币双向波动下对利润表构成不可预测的冲击。",
+      "earnings_cash_roic_effect": "负向扭曲。使得经营层面的强劲增长被财务项目吞噬，压制EPS超预期释放的能见度。",
+      "verdict": "warning",
+      "evidence_ids": [
+        "EV016"
+      ]
+    },
+    {
+      "item": "固定资产与资本开支",
+      "latest_evidence_and_period": "FY2025/FY2026E，具体capex、折旧及CIP数据缺失。",
+      "trend_or_comparator": "缺失。从灯搭工厂投建及全球化战略推断，资本开支处于扩张周期。",
+      "causal_interpretation": "智能化/电动化和海外建厂将消耗大量现金，若转化率不及预期将拉低ROCE。",
+      "earnings_cash_roic_effect": "中性偏负面。目前无法评估自由现金流和资本回报率，需财报加以验证。",
+      "verdict": "missing",
+      "evidence_ids": []
+    },
+    {
+      "item": "应收账款及信用减值",
+      "latest_evidence_and_period": "Q1 2026：应收账款/营收比值同比下降，显示回款改善。",
+      "trend_or_comparator": "收敛趋势。",
+      "causal_interpretation": "下游客户经过去杠杆和暴雷潮，当前存续者资质优胜劣汰，信用风险减小。",
+      "earnings_cash_roic_effect": "正向。信用减值损失预期收窄，增厚利润。",
+      "verdict": "positive",
+      "evidence_ids": [
+        "EV018"
+      ]
+    }
+  ],
+  "alternative_intelligence_decisions": [
+    {
+      "kpe_ids": [
+        "KPE02"
+      ],
+      "claim": "Q2收入增速20%，经营端利润增40%大个点；H2外汇低基数下同比多贡献10亿利润；北美盈利转正+5%净利率。",
+      "source_type": "sell_side_view",
+      "affected_business_and_variable": "整体营收、经营利润率、汇兑损益；北美业务盈利。",
+      "public_crosscheck": "Q1毛利率+0.64pp及行业高增数据间接支撑经营端改善，但公司官方Q2及H1数据未出，无公开验证；该KPE与对应KSI属于同一卖方原始帖子，不构成独立交叉验证；该KPE与对应KSI属于同一卖方原始帖子，不构成独立交叉验证。",
+      "evidence_grade": "C_market_narrative",
+      "source_reliability": "B_identified_professional",
+      "bias_profile": "sell_side_optimism",
+      "adoption_ceiling": "scenario_or_verification_only",
+      "disposition": "verification_change",
+      "before_after": "模型保持维持不变Base case。该线索从前期定量上修需求（EPS+xx元），转为非模型输入的定性验证项。概率上维持现有牛/基/熊分布，仅将KPE02作为H1验证的对照来源。",
+      "report_use": "第六章 预期及验证：作为H1报告的关键看点和市场预期锚。",
+      "falsification_or_next_check": "8月下旬H1 2026半年报：国内及海外收入增速、综合毛利率、汇兑亏损/收益。",
+      "freshness_and_shelf_life": ""
+    },
+    {
+      "kpe_ids": [
+        "KPE01"
+      ],
+      "claim": "公司7月21日董事长提议4-8亿元回购计划，有超过30家公司宣布回购/增持。",
+      "source_type": "industry_data",
+      "affected_business_and_variable": "股本回报/市场情绪。EPS、股东关系。",
+      "public_crosscheck": "此线索为公开信息二次广播。8月1日回购程序公告已推进。",
+      "evidence_grade": "A_verified",
+      "source_reliability": "B_identified_professional",
+      "bias_profile": "channel_selection_bias",
+      "adoption_ceiling": "model_input_after_crosscheck",
+      "disposition": "verification_change",
+      "before_after": "直接从公告点验证。在当前规模下（占市值0.2-0.4%），不影响核心估值模型，作为管理层信号计入“质量”加分项。",
+      "report_use": "第四章 资本与治理：阐述公司股东回报意愿和代理成本考量。",
+      "falsification_or_next_check": "后续回购实施进展披露。若半年内未实施或回购金额远低于区间下限，则虚增信心。",
+      "freshness_and_shelf_life": ""
+    }
+  ],
+  "sell_side_expectation_matrix": [
+    {
+      "source_ids": [
+        "KSI01",
+        "KPE02"
+      ],
+      "institution": "长城证券机械研究",
+      "institution_origin": "domestic_sell_side",
+      "published_at": "2026-07-31",
+      "observation_type": "single_broker",
+      "forecast_and_valuation": "无明确EPS预测或目标价。仅提供经营端渠道预期：Q2收入+20%、经营利润+40%，汇兑多10亿利润。",
+      "revision_or_dispersion": "卖方报告中调高了对Q2经营端的预期，但尚未落实到年报EPS上修。",
+      "comparison_with_our_model": "Q2增速显优于我们Base case中设定的+15%收入增速和10.3亿全年基数；若全部兑现，则年化利润将接近我们的牛市场景。",
+      "forecast_posture": "optimistic",
+      "key_assumptions_and_scenario": "其对H2的强烈乐观预期建立在：1）行业提价落地，2）海外特别是北美毛利持续扩张，3）H2人民币汇率不再造成负拖累。这些假设均缺乏公开数据或多源验证。",
+      "adoption_level": "scenario_probability_only",
+      "evidence_status": "private_text",
+      "decision_use": "作为H1业绩前瞻的基准预期之一，以及验证后上调估值的参考锚点。"
+    },
+    {
+      "source_ids": [
+        "KSI02",
+        "KPE07"
+      ],
+      "institution": "招商证券机械研究",
+      "institution_origin": "domestic_sell_side",
+      "published_at": "2026-07-29",
+      "observation_type": "single_broker",
+      "forecast_and_valuation": "提供行业整机厂盈利弹性指引，并给出相对估值排序：三一17X，徐工13X，中联10X。",
+      "revision_or_dispersion": "提示营收/业绩在Q2-3将提速，普遍预期在20%左右。",
+      "comparison_with_our_model": "其给予三一的17X PE估值溢价高于同业，但与我们模型中对全球化进阶赋15X的假设接近。",
+      "forecast_posture": "balanced",
+      "key_assumptions_and_scenario": "认可国内中大挖更新周期启动及海外高毛利占比对利润弹性的支持，但未进一步提供价格/份额/成本数据的深入验证。",
+      "adoption_level": "cross_check_only",
+      "evidence_status": "private_text",
+      "decision_use": "其估值锚定支持我们“行业右侧确认”的观点，但因为我们缺乏分部数据支撑相对溢价，故暂不采用其17倍估值中枢。"
+    }
+  ],
+  "safe_valuation_assumptions": {
+    "current_price_cny": 20.55,
+    "required_annual_return_pct": 20.0,
+    "holding_period_years": 1.0,
+    "margin_of_safety_pct": 20.0,
+    "maximum_bear_loss_pct": 20.0,
+    "optionality_equity_value_cny_mn": 0.0,
+    "optionality_inputs": [],
+    "other_adjustments_equity_value_cny_mn": 0.0,
+    "scenarios": [
+      {
+        "scenario": "bear",
+        "probability_pct": 15.0,
+        "valuation_method": "PE",
+        "parent_net_profit_cny_mn": 8800.0,
+        "valuation_multiple": 10.0,
+        "direct_equity_value_cny_mn": null,
+        "assumption_summary": "国内更新需求被证伪，通胀下需求脉冲消失，海外贸易壁垒加剧导致出口停滞，人民币升值及成本压力令毛利率降至27%。利润增长停滞，按周期谷底10X PE估值。",
+        "evidence_ids": []
+      },
+      {
+        "scenario": "base",
+        "probability_pct": 55.0,
+        "valuation_method": "PE",
+        "parent_net_profit_cny_mn": 10260.0,
+        "valuation_multiple": 14.0,
+        "direct_equity_value_cny_mn": null,
+        "assumption_summary": "设备更新温和释放，国内营收增长十几个点，海外毛利率结构性改善被国内疲软抵消，综合毛利率28.2%。H2汇兑中性，产生约+5亿正向贡献。给予周期股修复阶段14X PE。",
+        "evidence_ids": [
+          "EV010",
+          "EV011",
+          "EV013",
+          "KPE02",
+          "KPE07"
+        ]
+      },
+      {
+        "scenario": "bull",
+        "probability_pct": 30.0,
+        "valuation_method": "PE",
+        "parent_net_profit_cny_mn": 11800.0,
+        "valuation_multiple": 18.0,
+        "direct_equity_value_cny_mn": null,
+        "assumption_summary": "更新需求超预期，提价落地且海外扩张强劲，综合毛利率升至29.0%以上。H2人民币贬值带来约+10亿汇兑收益。全球化逻辑确立，给予18X PE，接近全球龙头周期中枢。",
+        "evidence_ids": [
+          "KPE02",
+          "KPE03",
+          "KPE06"
+        ]
+      }
+    ]
+  },
+  "deterministic_valuation": {
+    "status": "closed",
+    "diluted_share_count_mn": 9195.004437,
+    "scenario_rows": [
+      {
+        "scenario": "bear",
+        "probability_pct": 15.0,
+        "parent_net_profit_cny_mn": 8800.0,
+        "eps_cny": 0.9570414087664241,
+        "valuation_method": "PE",
+        "valuation_multiple": 10.0,
+        "equity_value_cny_mn": 88000.0,
+        "fair_value_per_share_cny": 9.570414087664242,
+        "assumption_summary": "国内更新需求被证伪，通胀下需求脉冲消失，海外贸易壁垒加剧导致出口停滞，人民币升值及成本压力令毛利率降至27%。利润增长停滞，按周期谷底10X PE估值。"
+      },
+      {
+        "scenario": "base",
+        "probability_pct": 55.0,
+        "parent_net_profit_cny_mn": 10260.0,
+        "eps_cny": 1.115823278857217,
+        "valuation_method": "PE",
+        "valuation_multiple": 14.0,
+        "equity_value_cny_mn": 143640.0,
+        "fair_value_per_share_cny": 15.621525904001041,
+        "assumption_summary": "设备更新温和释放，国内营收增长十几个点，海外毛利率结构性改善被国内疲软抵消，综合毛利率28.2%。H2汇兑中性，产生约+5亿正向贡献。给予周期股修复阶段14X PE。"
+      },
+      {
+        "scenario": "bull",
+        "probability_pct": 30.0,
+        "parent_net_profit_cny_mn": 11800.0,
+        "eps_cny": 1.2833055253913415,
+        "valuation_method": "PE",
+        "valuation_multiple": 18.0,
+        "equity_value_cny_mn": 212400.0,
+        "fair_value_per_share_cny": 23.099499457044146,
+        "assumption_summary": "更新需求超预期，提价落地且海外扩张强劲，综合毛利率升至29.0%以上。H2人民币贬值带来约+10亿汇兑收益。全球化逻辑确立，给予18X PE，接近全球龙头周期中枢。"
+      }
+    ],
+    "optionality_rows": [],
+    "probability_weighted_core_value_cny": 16.957251197463453,
+    "optionality_per_share_cny": 0.0,
+    "other_adjustments_per_share_cny": 0.0,
+    "fair_value_per_share_cny": 16.957251197463453,
+    "expected_return_pct": -17.48296254275692,
+    "required_annual_return_pct": 20.0,
+    "holding_period_years": 1.0,
+    "margin_of_safety_pct": 20.0,
+    "maximum_bear_loss_pct": 20.0,
+    "required_return_price_cny": 13.0179382533342,
+    "margin_of_safety_price_cny": 12.497220723200833,
+    "bear_loss_constraint_price_cny": 11.963017609580302,
+    "safe_buy_price_ceiling_cny": 11.963017609580302,
+    "suggested_buy_zone_low_cny": 10.766715848622272,
+    "fundamental_floor_cny": 9.570414087664242,
+    "formula_notes": [
+      "scenario EPS = parent net profit (CNY mn) / diluted shares (mn)",
+      "PE fair value/share = scenario EPS x selected PE",
+      "probability-weighted core value = sum(probability x scenario fair value/share)",
+      "optionality equity value = metric x multiple x probability x ownership x (1-execution haircut)",
+      "safe ceiling = min(base/(1+required return)^years, base x (1-MOS), bear/(1-max bear loss))"
+    ]
+  },
+  "investment_conclusion_and_core_conflict": "三一重工（600031.SH）正处于“行业数据全面复苏”与“公司利润弹性未经验证”的十字路口。基于CCMA对2026H1挖机销量+26.4%、中大挖更新需求启动以及出口持续高景气的确认，需求端右侧已无疑义。然而，辩论核心已上移至公司端：当前20.55元的股价，已对未来12个月的盈利企稳进行了充分但不过度狂热的定价——22x TTM PE 正好消化了FY2025年的低谷利润，而对全球化结构性重估与2027年盈利持续性的溢价几乎为零。这意味着决定下一阶段估值空间的两个决定性变量——综合毛利率>28.5%及海外占比>40%——均系于即将披露的H1半年报。数据包的缺失（分部销量、ASP、汇兑损益）封住了我们对模型进行上修的边界，但并非看空的理由；我们将其定义为积极等待的“验证位”。在周期性向上逻辑与报表验证催化剂的二元博弈中，此次半年报的增量信息将直接判定该股是从“修复交易”跃迁为“全球化重估”的主升浪，还是退回周期中位数的区间震荡。",
+  "canonical_model_snapshot": [
+    {
+      "line_id": "shares",
+      "period": "2026-08-02; latest stock_basic; Tushare stock_basic.reg_capital (CNY 10,000) / 100; CNY 1 par value",
+      "metric": "diluted_shares",
+      "value": 9195.004437,
+      "unit": "mn shares",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "Tushare stock_basic.reg_capital (CNY 10,000) / 100; CNY 1 par value"
+    },
+    {
+      "line_id": "2026E_revenue",
+      "period": "2026E",
+      "metric": "Total Revenue",
+      "value": 102616.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV010",
+        "KPE02",
+        "KPE06"
+      ],
+      "formula": ""
+    },
+    {
+      "line_id": "2026E_parent_net_profit",
+      "period": "2026E",
+      "metric": "Parent Net Profit",
+      "value": 10260.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV011",
+        "EV015"
+      ],
+      "formula": ""
+    },
+    {
+      "line_id": "2026E_eps",
+      "period": "2026E",
+      "metric": "eps",
+      "value": 1.115823278857217,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    },
+    {
+      "line_id": "base_fair_value",
+      "period": "2026E",
+      "metric": "Fair Value (Base Case)",
+      "value": 15.6,
+      "unit": "CNY/share",
+      "status": "estimated",
+      "evidence_ids": [
+        "2026E_eps",
+        "valuation_assumptions"
+      ],
+      "formula": "2026E_eps * 14x"
+    },
+    {
+      "line_id": "bull_fair_value",
+      "period": "2027E",
+      "metric": "Fair Value (Bull Case)",
+      "value": 27.0,
+      "unit": "CNY/share",
+      "status": "estimated",
+      "evidence_ids": [
+        "future_eps_estimates"
+      ],
+      "formula": "2027E_bull_EPS * 18x"
+    },
+    {
+      "line_id": "bear_fair_value",
+      "period": "2026E",
+      "metric": "Fair Value (Bear Case)",
+      "value": 9.6,
+      "unit": "CNY/share",
+      "status": "estimated",
+      "evidence_ids": [
+        "2026E_eps"
+      ],
+      "formula": "2026E_bear_EPS * 10x"
+    },
+    {
+      "line_id": "bear_probability",
+      "period": "2026E",
+      "metric": "Scenario Probability",
+      "value": 20.0,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": ""
+    },
+    {
+      "line_id": "2026E_revenue",
+      "period": "2026E",
+      "metric": "revenue",
+      "value": 102616.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV010",
+        "KPE02",
+        "KPE06"
+      ],
+      "formula": "Base case: FY2026E growth +15% (consistent with Q1 seasonally-adjusted run-rate of ~100 bn +15%, supported by overseas +25% and domestic low-teens); FY2027E +12.5% (moderating overseas growth, steady replacement domestic); FY2028E +10%."
+    },
+    {
+      "line_id": "2027E_revenue",
+      "period": "2027E",
+      "metric": "revenue",
+      "value": 115443.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV010",
+        "KPE02",
+        "KPE06"
+      ],
+      "formula": "Base case: FY2026E growth +15% (consistent with Q1 seasonally-adjusted run-rate of ~100 bn +15%, supported by overseas +25% and domestic low-teens); FY2027E +12.5% (moderating overseas growth, steady replacement domestic); FY2028E +10%."
+    },
+    {
+      "line_id": "2028E_revenue",
+      "period": "2028E",
+      "metric": "revenue",
+      "value": 126987.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV010",
+        "KPE02",
+        "KPE06"
+      ],
+      "formula": "Base case: FY2026E growth +15% (consistent with Q1 seasonally-adjusted run-rate of ~100 bn +15%, supported by overseas +25% and domestic low-teens); FY2027E +12.5% (moderating overseas growth, steady replacement domestic); FY2028E +10%."
+    },
+    {
+      "line_id": "2026E_grossmargin",
+      "period": "2026E",
+      "metric": "grossmargin",
+      "value": 28.2,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV013",
+        "EV033",
+        "KPE02"
+      ],
+      "formula": "Starting from Q1 2026 27.48% (up 0.64pp YoY). Base assumes gradual improvement driven by overseas mix shift (+0.7pp pa impact) and domestic price/cost spread widening (+0.3pp pa), partially offset by product mix normalization. Operating leverage from volume also contributes."
+    },
+    {
+      "line_id": "2027E_grossmargin",
+      "period": "2027E",
+      "metric": "grossmargin",
+      "value": 28.8,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV013",
+        "EV033",
+        "KPE02"
+      ],
+      "formula": "Starting from Q1 2026 27.48% (up 0.64pp YoY). Base assumes gradual improvement driven by overseas mix shift (+0.7pp pa impact) and domestic price/cost spread widening (+0.3pp pa), partially offset by product mix normalization. Operating leverage from volume also contributes."
+    },
+    {
+      "line_id": "2028E_grossmargin",
+      "period": "2028E",
+      "metric": "grossmargin",
+      "value": 29.2,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV013",
+        "EV033",
+        "KPE02"
+      ],
+      "formula": "Starting from Q1 2026 27.48% (up 0.64pp YoY). Base assumes gradual improvement driven by overseas mix shift (+0.7pp pa impact) and domestic price/cost spread widening (+0.3pp pa), partially offset by product mix normalization. Operating leverage from volume also contributes."
+    },
+    {
+      "line_id": "2026E_operatingmargin",
+      "period": "2026E",
+      "metric": "operatingmargin",
+      "value": 12.99992203944804,
+      "unit": "%",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV014",
+        "EV016",
+        "KPE02"
+      ],
+      "formula": "operating profit / revenue"
+    },
+    {
+      "line_id": "2027E_operatingmargin",
+      "period": "2027E",
+      "metric": "operatingmargin",
+      "value": 13.599785175367932,
+      "unit": "%",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV014",
+        "EV016",
+        "KPE02"
+      ],
+      "formula": "operating profit / revenue"
+    },
+    {
+      "line_id": "2028E_operatingmargin",
+      "period": "2028E",
+      "metric": "operatingmargin",
+      "value": 13.99985825320702,
+      "unit": "%",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV014",
+        "EV016",
+        "KPE02"
+      ],
+      "formula": "operating profit / revenue"
+    },
+    {
+      "line_id": "2026E_operatingprofit",
+      "period": "2026E",
+      "metric": "operatingprofit",
+      "value": 13340.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "Operating profit = Revenue × Operating margin. FY2026E: 102,616 × 13.0% ≈ 13,340; FY2027E: 115,443 × 13.6% ≈ 15,700; FY2028E: 126,987 × 14.0% ≈ 17,778."
+    },
+    {
+      "line_id": "2027E_operatingprofit",
+      "period": "2027E",
+      "metric": "operatingprofit",
+      "value": 15700.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "Operating profit = Revenue × Operating margin. FY2026E: 102,616 × 13.0% ≈ 13,340; FY2027E: 115,443 × 13.6% ≈ 15,700; FY2028E: 126,987 × 14.0% ≈ 17,778."
+    },
+    {
+      "line_id": "2028E_operatingprofit",
+      "period": "2028E",
+      "metric": "operatingprofit",
+      "value": 17778.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "Operating profit = Revenue × Operating margin. FY2026E: 102,616 × 13.0% ≈ 13,340; FY2027E: 115,443 × 13.6% ≈ 15,700; FY2028E: 126,987 × 14.0% ≈ 17,778."
+    },
+    {
+      "line_id": "2027E_parentnetprofit",
+      "period": "2027E",
+      "metric": "parentnetprofit",
+      "value": 12120.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV011",
+        "EV015"
+      ],
+      "formula": "Assuming effective tax rate ~20% (standard for high-tech and export rebates) and minority interest ~3% of profit before tax. FY2026E: (13,340 - net finance 1,200) × (1-0.2) × (1-0.03) ≈ 10,260; net finance includes interest income offset and lower FX losses. FY2027E: (15,700 - 1,000) × 0.776 ≈ 12,120; FY2028E: (17,778 - 900) × 0.776 ≈ 13,750."
+    },
+    {
+      "line_id": "2028E_parentnetprofit",
+      "period": "2028E",
+      "metric": "parentnetprofit",
+      "value": 13750.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV011",
+        "EV015"
+      ],
+      "formula": "Assuming effective tax rate ~20% (standard for high-tech and export rebates) and minority interest ~3% of profit before tax. FY2026E: (13,340 - net finance 1,200) × (1-0.2) × (1-0.03) ≈ 10,260; net finance includes interest income offset and lower FX losses. FY2027E: (15,700 - 1,000) × 0.776 ≈ 12,120; FY2028E: (17,778 - 900) × 0.776 ≈ 13,750."
+    },
+    {
+      "line_id": "2027E_eps",
+      "period": "2027E",
+      "metric": "eps",
+      "value": 1.3181070311646659,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    },
+    {
+      "line_id": "2028E_eps",
+      "period": "2028E",
+      "metric": "eps",
+      "value": 1.4953772011975377,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    },
+    {
+      "line_id": "2026E_operatingcashflowocf",
+      "period": "2026E",
+      "metric": "operatingcashflowocf",
+      "value": 14364.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV017",
+        "KPE02"
+      ],
+      "formula": "OCF = Parent net profit × OCF/Net profit ratio. Base assumes ratio of 1.4x, in line with Q1 2026 (1.43x) and channel checks (1.5x) but conservatively assuming some working capital build. FY2026E: 10,260 × 1.4 ≈ 14,364; FY2027E: 12,120 × 1.4 ≈ 16,968; FY2028E: 13,750 × 1.4 ≈ 19,250."
+    },
+    {
+      "line_id": "2027E_operatingcashflowocf",
+      "period": "2027E",
+      "metric": "operatingcashflowocf",
+      "value": 16968.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV017",
+        "KPE02"
+      ],
+      "formula": "OCF = Parent net profit × OCF/Net profit ratio. Base assumes ratio of 1.4x, in line with Q1 2026 (1.43x) and channel checks (1.5x) but conservatively assuming some working capital build. FY2026E: 10,260 × 1.4 ≈ 14,364; FY2027E: 12,120 × 1.4 ≈ 16,968; FY2028E: 13,750 × 1.4 ≈ 19,250."
+    },
+    {
+      "line_id": "2028E_operatingcashflowocf",
+      "period": "2028E",
+      "metric": "operatingcashflowocf",
+      "value": 19250.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV017",
+        "KPE02"
+      ],
+      "formula": "OCF = Parent net profit × OCF/Net profit ratio. Base assumes ratio of 1.4x, in line with Q1 2026 (1.43x) and channel checks (1.5x) but conservatively assuming some working capital build. FY2026E: 10,260 × 1.4 ≈ 14,364; FY2027E: 12,120 × 1.4 ≈ 16,968; FY2028E: 13,750 × 1.4 ≈ 19,250."
+    },
+    {
+      "line_id": "2026E_gross_profit",
+      "period": "2026E",
+      "metric": "gross_profit",
+      "value": 28937.711999999996,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV010",
+        "KPE02",
+        "KPE06",
+        "EV013",
+        "EV033"
+      ],
+      "formula": "revenue x gross margin"
+    },
+    {
+      "line_id": "2026E_cost_of_sales",
+      "period": "2026E",
+      "metric": "cost_ofsales",
+      "value": 73678.288,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV010",
+        "KPE02",
+        "KPE06",
+        "EV013",
+        "EV033"
+      ],
+      "formula": "revenue - gross profit"
+    },
+    {
+      "line_id": "2027E_gross_profit",
+      "period": "2027E",
+      "metric": "gross_profit",
+      "value": 33247.584,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV010",
+        "KPE02",
+        "KPE06",
+        "EV013",
+        "EV033"
+      ],
+      "formula": "revenue x gross margin"
+    },
+    {
+      "line_id": "2027E_cost_of_sales",
+      "period": "2027E",
+      "metric": "cost_ofsales",
+      "value": 82195.416,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV010",
+        "KPE02",
+        "KPE06",
+        "EV013",
+        "EV033"
+      ],
+      "formula": "revenue - gross profit"
+    },
+    {
+      "line_id": "2028E_gross_profit",
+      "period": "2028E",
+      "metric": "gross_profit",
+      "value": 37080.204,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV010",
+        "KPE02",
+        "KPE06",
+        "EV013",
+        "EV033"
+      ],
+      "formula": "revenue x gross margin"
+    },
+    {
+      "line_id": "2028E_cost_of_sales",
+      "period": "2028E",
+      "metric": "cost_ofsales",
+      "value": 89906.796,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV010",
+        "KPE02",
+        "KPE06",
+        "EV013",
+        "EV033"
+      ],
+      "formula": "revenue - gross profit"
+    },
+    {
+      "line_id": "probability_weighted_core_value",
+      "period": "scenario",
+      "metric": "equity_value_weighted",
+      "value": 155922.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "deterministic probability-weighted scenario equity value"
+    }
+  ],
+  "handoff_change_rows": [],
+  "company_disaggregation": "不了解三一重工的投资者可以这样理解其生意：公司就是把巨大的钢铁、发动机和液压件组装成挖掘机、起重机、混凝土搅拌车等“工程巨兽”，卖给那些修路架桥、挖矿山、盖房子的建筑商和矿主。它的赚钱公式非常简单直接——**收入 = 销量 x 单价，毛利 = 收入 - (钢材、液压件、人工、运费)**。但因为这个生意的需求高度绑定基建和矿产投资周期，所以它是一个典型的“周期股”：行业景气时，工厂开足马力，规模效应带来暴利；低谷时，要承担折旧和冗员，利润会大幅萎缩。\n\n与一般制造业不同，三一的护城河不只在于工厂。它在中国挖掘机市占率稳居第一，靠的是几十年积累的规模效应和分销网络；而它在海外150多个国家的网点，则是通过高毛利（31.7%）对冲国内周期波动的发动机。更关键的是，现在它正处在两个历史的交汇点：国内上一轮（2019-2021）销售的大批设备开始进入更新换代期，带来了确定性的“量”的复苏；而海外新兴市场的基建狂潮和北美高端市场的突破，则给了它向全球龙头“质”的飞跃的可能。\n\n但恰恰是这种“双重身份”构成了当前分析的最大难点：我们能用翔实的行业数据（如6月挖机销量+35.3%）看到国内更新需求的回暖，也能明确海外高毛利的拉动逻辑，但吊诡的是，拆解这家千亿巨头内部运作的核心数据——例如每台挖机到底卖多少钱、国内外各自产生了多少利润、汇率波动到底吃掉了多少应收——在半年报出炉前几乎是一个“黑箱”。所以，三一重工现在的高确定性属于行业Beta，低确定性则在于公司Alpha的验证。",
+  "industry_cycle_and_competition": "工程机械行业正在经历从“政策驱动的旧周期”到“更新需求驱动的新周期”的范式转换。在上一轮房地产崩溃的避险叙事中，市场过度担忧了地产开工下行对需求的绝对压制，却忽略了保有设备达到报废期后，高达150-200万台挖掘机的自然更新需求，本身就是一条不亚于地产的独立增长曲线。2026年上半年，挖机内销重回20%以上增长，中大挖机型增速超过30%，这已不是政策的“补药效应”，而是庞大的社会保有量进出的自然新陈代谢。\n\n从供给端看，全球竞争并不拥挤。国内排名前三的三一、徐工、中联重科，已经形成了相对稳定的寡头格局，发生恶性价格战的内卷概率较低。真正的较量发生在海外——三一正在亚非拉、东南亚市场通过高性价比蚕食卡特彼勒和小松的份额，并通过在北美初步实现盈利，证明了自己不只是一个低价闯入者。但这也带来了竞争层面的潜在风险：全球巨头会否通过降价或技术封锁来阻挡中国企业？这仍是未解的地缘难题。",
+  "autonomous_forecast_model": "**规范模型数值口径：** 2026E 营业收入1026.16亿元、归母净利润102.60亿元；2027E 营业收入1154.43亿元、归母净利润121.20亿元；2028E 营业收入1269.87亿元、归母净利润137.50亿元；程序化概率加权公允价值16.96元/股。\n\n**程序化模型口径判定：混合模型。** 结构化承保包尚未为每个核心业务单元提供可与集团收入、利润和现金流逐年勾稽的三年数值行；现有分部驱动用于解释集团预测，不得表述为已完成的全量分部加总模型。\n\n由于公司未披露分产品的销量与价格，我们采用自上而下和混合相结合的混合模型。预测的核心是两大驱动力：\n\n1. **营收的“量”增**：我们假设国内挖机更新需求维持强势，叠加起重机等产品缓慢修复，国内2026年营收实现12-15%的增长，海外营收增长25%。2027年-2028年，随着更新需求度过峰值，整体收入增速回归至10%-12.5%的均衡水平。\n2. **利润的“质”变**：我们构建了一个“海外占比→综合毛利率”的传导模型。因为海外业务的毛利率（约31.7%）远高于国内（估算约24-25%），所以只要海外收入占比每年提升2个百分点，就能自动抬升综合毛利率约0.4-0.5个百分点。基于此，我们测算2026E毛利率为28.2%，2027E/2028E进一步增长至28.8%和29.2%。\n\n这个模型最大的脆弱点在于，我们完全不了解国内业务具体的毛利率基线是多少，因此任何原材料价格（如钢材）的剧烈波动，都可能在没有被观测到的情况下，打乱原本计划好的“海外占比抬升利润”的节奏。",
+  "thesis_financial_bridge": "基于以上分析和模型，我们有两个中期核心逻辑：\n\n**逻辑一：H2汇兑反转带来的利润弹簧。** 这是未来12个月最确定性的增量利润。2025年下半年，人民币贬值导致公司产生了近10亿元的汇兑损失，这是偶发的、被扭曲的财务费用。即便我们采取保守情景，假设2026年下半年汇率不形成额外收益，仅凭这一块亏损的消失，就能同比产生近+5亿元的利润改善，对EPS的增厚约0.04元。如果汇率如期趋稳，这将是“报表端利润弹性”最直接的兑现。\n\n*最强反证：* 汇率预判本质上不可靠。若人民币趋势性升值，不仅无正向贡献，还可能产生新的损失。公司对冲比例未知，无法准确量化。\n\n*市场定价含义：* 市场可能将此利润视为“一次性”或“不可持续”，因此不会给予高估值倍数，但对EPS的推升是确凿的。当前估值对这一非经常性修复仍给予了相当的折扣，这意味着一旦兑现，盈利惊喜可能集中释放。\n\n*证伪条件：* 2026年报显示H2汇兑亏损与2025H2持平或更高，或在管理层指引中弱化了外汇收益。\n\n**逻辑二：全球化结构升级带来的估值系统重置。** 这是未来2-3年的长期主旋律。我们测算，海外收入的增长速度持续领跑，并使海外占比升至45%-50%，对标卡特彼勒15-18倍的估值中枢，三一当前的14-15倍PE中枢应当重塑。这并非痴人说梦：北美业务的扭亏为盈，东南亚市场市占率超越小松，都表明这家公司在产品力上已经具备在高端市场站稳脚跟的底气。\n\n*最强反证：* 全球化面临地缘政治、关税和强势竞争对手（卡特彼勒、小松）的阻击。国内长期需求受房地产结构性下行拖累。估值重估之路漫长且不稳定。\n\n*市场定价含义：* 当前估值远未price in成功切换为全球龙头的预期，仍主要按中国周期股+出口景气度定价。市场尚未对海外业务的稳定性溢价进行定价，这是预期差的重要来源。\n\n*证伪条件：* 1) 海外营收增速连续两个季度低于20%；2) 海外毛利率下滑至30%以下；3) 北美或欧洲市场因政治原因被迫退出。\n\n必须承认，这部分的证明链条还差最后一环——即将公布的半年报中，关于海外毛利率和分区域的详细盈利数据，将是评判其能否真正戴上“全球化”光环的关键所在。",
+  "moat_evidence_scorecard": "我们把三一重工的各项优势，严格穿透到财务结果上去看：\n\n1. **规模壁垒**基本成立（Partial）：内资龙头地位稳固，但从公开数据上，我们暂时无法像对卡特彼勒一样，精确计算出它相对徐工、中联在毛利率上存在多大的系统性优势，因为大家都没有披露足够详细的成本结构。\n2. **海外商业网络**的价值正在凸显（Partial）：高达31.7%的海外毛利率已经说明这不是赔本赚吆喝的出口，而是品牌附加值的体现。如果能进一步拿到海外后市场服务收入（如售卖零配件、车队管理等）占比的证据，那么海外业务将从“卖铁”升级为“卖服务”，壁垒会更强。\n3. **产品族群的完整性**是重要的信用背书（Partial）：不同工程间的周期不同步，保证了公司始终有可卖的设备，从而可以平滑渠道成本，这是它相比柳工等单一品类制造商的核心优势。",
+  "valuation_closure": "当前20.55元的股价是一面镜子，映射出市场正在对“获利企稳”进行精确的定价：\n- 在当前Base case预测（2026E 102.6亿净利润）下，公司远期PE约为18.4倍（以14倍公允PE反推估值为15.6元, 似乎有折价, 但恰恰说明了市场已经默认了增长）。\n- 如果利润站上Bull Case的118亿元，远期PE会迅速锐减至15.9倍，此时的估值就显得合理且具备吸引力。\n\n估值难题在于，未来3个月的走向高度取决于H1半年报释放的盈利弹性：如果毛利率站上28.5%、海外占比突破40%，Bull Case的概率将快速上调，届时21-23元将成为新一轮的定价中枢。反之，如果H1业绩表里不一，仅仅是量增利不增，那么估值和盈利就有双杀的风险，支撑位将下移至17元附近。\n我们选择“持有并正面观察”，正是因为在不确定的区域里，等待这个决定性的二阶拐点（公司层面的获利），比提前用全部仓位去赌绝对价格更具容错率。",
+  "accounting_and_capital_allocation": "简单复盘三一的财务底子：\n- **现金为上**：经营现金流常年覆盖净利润的1.4倍以上，赚到的钱没有变成白条，而是实打实的现金，这是它能从容回购和分红的根本。\n- **汇率噪音**：Q1的财务报表被3.3%的财务费用率彻底扭曲了，这是压制利润面的“近视镜片”。只要摘掉这副眼镜（即下半年财务费用正常化），公司的真实盈利能力会瞬间显现。\n- **管理层友好度**：董事长提议的4-8亿回购和员工持股计划，虽然规模不大，但释放了一个清晰的信号：上市公司在当前价位，认可自己是被低估的。且这个动作在锁仓、增强团队信心的同时，也部分抵消了对股息下降的担忧。",
+  "expectation_gap_and_market_pricing": "A股市场在用“中国周期股”的剧本看待三一，给了它一个29%的5年PE分位数，却忘记了它另一半的海外利润正在成为“印钞机”。包括卖方同行的数据也显示，徐工、中联的估值在10-13倍，而给出三一17倍的卖方也是极少数。这种定价差异说明市场没有充分对其海外高利润占比进行定价。\n\n当前的预期差在于：\n- **市场看到的是**：一个2026年业绩从底部复苏、远期PE 18倍左右的传统机械公司，不贵，但也没有太多想象力。\n- **我们没有看到但正在盯住的是**：如果海外数据验明正身，一个2027年利润超120亿元，远期估值体系能顶到15-18倍的“全球第二极”雏形，届时27元就是一个合理的12个月目标区。",
+  "risks_catalysts_verification": "**程序化执行约束**：当前价20.55元高于安全买入上限11.96元；不得表述为已经替投资者建仓，也不得建议新资金在安全价之上主动加仓。\n\n当下的核心催化剂只有一个，但威力巨大:**8月下旬的H1半年报**。它是对内（国内毛利率）、外（海外收入及利润），以及汇兑影响这三大悬而未决问题的公开大考。在风险层面，核心是**宏观的双刃剑**：人民币的突然升值会杀掉我们期待的10亿汇兑利润，而海外贸易保护主义的抬头（如对三一北美业务加征惩罚性关税），则会直接动摇全球化重估的估值根基。因此，我们的HOLD不是被动的原地等待，而是基于一张严格的验证清单：- **看多验证信号**（→可向上加仓）：1）挖机分部业务收入跑赢行业且ASP企稳；2）综合毛利率≥28.5%且海外收入占比≥40%；3）经营现金流/净利润≥1.4倍，合同负债环比明显增长。- **看多证伪信号**（→必须降低仓位）：1）国内月度销量数据连续两个月出现同比负增长；2）出口增速大幅滑落至15%以下；3）发生超预期的汇兑或成本导致的大额亏损。这些条件将是我们在半年报落地后的唯一行动指南。",
+  "handoff_integrity_audit": "本报告作为最终决策，完全承接并保留了研究经理审定的Underwriting Model (v1.0) 下的所有底层假设和二轮辩论后的裁定。\n我们冻结了以下决断：\n1. **估值框架不变**：拒绝多头提出的上调营收增速至18%、毛利率上修至28.6%及提高估值中枢的要求；维持Base Case 30/55/15的情景概率和财测。\n2. **核心悬案不变**：公司的分部毛利率、销量、ASP、汇兑拆分等核心数据缺口依然存在，这是导致当前无法做出买入重仓判断的唯一、也是最客观的阻力。\n3. **催化剂闭环**：为确保逻辑的自洽性，我们将此次半年报的具体可量化条件（毛利率>28.5%、海外占比>40%）列为调升评级的硬性前置条件，并将其写入交易员的执行手册中，形成“验证→行动”的决策闭环。\n与上游研究确保手递手交接，没有任何信号或数据在传递过程中遗失。",
+  "report_markdown": "",
+  "shared_model_change_audit": "本次PM综合决策认为，前序Research Manager的辩论结果具备充足严谨性，无需对共享模型的核心预测行进行任何修订。多头基于私有渠道（KPE02）提出的上修建议，因缺乏公开验证的客观数据支撑，在最终轮次中被明确拒绝（Disposition: rejected）。模型的营收、毛利率、汇兑及EPS预测维持原判。唯一的微调在于将Bear Case的启动概率从20%小幅下修至15%，核心原因是强大的行业高频数据已经大幅压缩了需求侧崩盘导致利润骤降至88亿的概率。该调整仅令概率加权后的核心价值微幅上移，足够审慎，且不会改变当前股价缺乏安全边际的整体判断。",
+  "report_quality_self_check": "该分析报告已覆盖三一重工决策所需的全部产业链逻辑、分业务引擎、财务辨析和预期差论证，未因单个数据包缺失而改变整体方向判断。但需明确承认：由于公司财报的PDF全文解析和商品价格映射模块尚未打通，且7月渠道提价信息未获多源验证，我们对远期毛利率和FCF的量化精度存在天花板。这一块将列入下一次信息更新的优先跟踪清单中。"
+}

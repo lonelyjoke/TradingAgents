@@ -1142,7 +1142,28 @@ def _render_model_change_table(rows_in: list[ModelHandoffChange]) -> str:
 
 def _demote_embedded_headings(text: str) -> str:
     """Keep model-authored subheads from breaking the fixed public H2 contract."""
-    return re.sub(r"(?m)^#{1,6}\s+", "### ", str(text or "").strip())
+    rendered = re.sub(r"(?m)^#{1,6}\s+", "### ", str(text or "").strip())
+    # Some providers return a whole structured prose field as one physical
+    # line.  Restore the minimal Markdown boundaries used by the public memo
+    # without rewriting its wording.
+    rendered = re.sub(
+        r"(?m)^(###\s+[^*\n]+)(\*\*)",
+        r"\1\n\n\2",
+        rendered,
+    )
+    rendered = re.sub(
+        r"(\*\*[^*\n]+\*\*)[：:]\s*(?=(?:\d+\.\s*|[-*]\s+))",
+        r"\1：\n\n",
+        rendered,
+    )
+    rendered = re.sub(
+        r"(?<=[。；;])(?=\*\*(?:主要下行风险|潜在催化剂|证伪条件|验证日历))",
+        "\n\n",
+        rendered,
+    )
+    rendered = re.sub(r"(?<=[。；;])(?=\d+\.\s*\*\*)", "\n", rendered)
+    rendered = re.sub(r"(?<=[。；;])(?=[-*]\s+\*\*)", "\n", rendered)
+    return rendered
 
 
 def _render_research_questions(questions: list[str]) -> str:
@@ -1269,10 +1290,21 @@ def _render_reader_forecast_table(lines: list[CanonicalModelLine]) -> str:
         if not metric_rows:
             continue
         exemplar = next(iter(metric_rows.values()))
-        values = [
-            _display_number(metric_rows[period].value) if period in metric_rows else "—"
-            for period in periods
-        ]
+        values: list[str] = []
+        for period in periods:
+            if period not in metric_rows:
+                values.append("—")
+                continue
+            value = metric_rows[period].value
+            unit = str(metric_rows[period].unit or exemplar.unit or "")
+            if (
+                metric in {"gross_margin", "operating_margin", "net_margin"}
+                and value is not None
+                and 0 < abs(value) < 1
+                and "%" in unit
+            ):
+                value *= 100.0
+            values.append(_display_number(value))
         rows.append(
             f"| {labels[metric]} | {exemplar.unit} | " + " | ".join(values) + " |"
         )

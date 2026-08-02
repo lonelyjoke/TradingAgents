@@ -12,6 +12,8 @@ from tradingagents.agents.schemas import (
     SellSidePMDecision,
     normalize_sell_side_pm_decision,
     render_sell_side_pm_decision,
+    _demote_embedded_headings,
+    _render_reader_forecast_table,
 )
 from tradingagents.agents.managers.portfolio_manager import (
     _align_pm_scenarios_with_official_guidance,
@@ -40,6 +42,35 @@ from tradingagents.dataflows.pm_report_compaction import split_pm_public_report
 class TinyDecision(BaseModel):
     rating: str
     report: str
+
+
+def test_reader_forecast_table_renders_ratio_margin_as_percent():
+    rendered = _render_reader_forecast_table(
+        [
+            CanonicalModelLine(
+                line_id="2026E_gross_margin",
+                period="2026E",
+                metric="gross_margin",
+                value=0.19,
+                unit="%",
+                status="estimated",
+            )
+        ]
+    )
+
+    assert "| 毛利率 | % | 19 |" in rendered
+    assert "0.19" not in rendered
+
+
+def test_reader_markdown_restores_collapsed_heading_and_lists():
+    rendered = _demote_embedded_headings(
+        "### 风险、催化剂与证伪条件**主要下行风险**：1. **价差**：回落。2. **煤价**：上涨。"
+        "**潜在催化剂**：- **中报**：验证。"
+    )
+
+    assert "### 风险、催化剂与证伪条件\n\n**主要下行风险**：\n\n1." in rendered
+    assert "回落。\n2." in rendered
+    assert "**潜在催化剂**：\n\n- **中报**" in rendered
 
 
 def test_common_pm_schema_aliases_do_not_trigger_free_text_fallback():

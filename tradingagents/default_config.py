@@ -113,26 +113,27 @@ DEFAULT_CONFIG = {
     # such as http://127.0.0.1:7890 when OpenAI-compatible endpoints require
     # a local proxy. The client still honors provider/base_url settings.
     "llm_timeout": _env_int_or_default("TRADINGAGENTS_LLM_TIMEOUT", 120),
-    "llm_max_retries": _env_int_or_default("TRADINGAGENTS_LLM_MAX_RETRIES", 5),
+    "llm_max_retries": _env_int_or_default("TRADINGAGENTS_LLM_MAX_RETRIES", 3),
     "llm_proxy": os.getenv("TRADINGAGENTS_LLM_PROXY"),
     # Provider-specific thinking configuration
     "google_thinking_level": None,      # "high", "minimal", etc.
     "openai_reasoning_effort": None,    # "medium", "high", "low"
     "anthropic_effort": None,           # "high", "medium", "low"
     # DeepSeek V4 exposes independent thinking controls for Flash and Pro.
-    # Quality-first defaults keep Flash at high for analyst/tool work and Pro
-    # at max for the Research Manager and final Portfolio Manager synthesis.
+    # Balanced defaults keep reasoning quality while avoiding very long hidden
+    # reasoning traces on every debate and synthesis call. Environment
+    # overrides remain available for exceptional deep-dive runs.
     "deepseek_quick_thinking": _env_or_default(
         "TRADINGAGENTS_DEEPSEEK_QUICK_THINKING", "enabled"
     ).lower(),
     "deepseek_quick_reasoning_effort": _env_or_default(
-        "TRADINGAGENTS_DEEPSEEK_QUICK_REASONING_EFFORT", "high"
+        "TRADINGAGENTS_DEEPSEEK_QUICK_REASONING_EFFORT", "medium"
     ).lower(),
     "deepseek_deep_thinking": _env_or_default(
         "TRADINGAGENTS_DEEPSEEK_DEEP_THINKING", "enabled"
     ).lower(),
     "deepseek_deep_reasoning_effort": _env_or_default(
-        "TRADINGAGENTS_DEEPSEEK_DEEP_REASONING_EFFORT", "max"
+        "TRADINGAGENTS_DEEPSEEK_DEEP_REASONING_EFFORT", "high"
     ).lower(),
     # Checkpoint/resume: when True, LangGraph saves state after each node
     # so a crashed run can resume from the last successful step.
@@ -152,19 +153,19 @@ DEFAULT_CONFIG = {
     # research pack from being retransmitted in full to every downstream role.
     # The reader dossier and canonical structured model are budgeted separately.
     "prompt_context_total_chars_analyst": _env_int_or_default(
-        "PROMPT_CONTEXT_TOTAL_CHARS_ANALYST", 72000
+        "PROMPT_CONTEXT_TOTAL_CHARS_ANALYST", 48000
     ),
     "prompt_context_total_chars_research": _env_int_or_default(
-        "PROMPT_CONTEXT_TOTAL_CHARS_RESEARCH", 64000
+        "PROMPT_CONTEXT_TOTAL_CHARS_RESEARCH", 48000
     ),
     "prompt_context_total_chars_trader": _env_int_or_default(
-        "PROMPT_CONTEXT_TOTAL_CHARS_TRADER", 28000
+        "PROMPT_CONTEXT_TOTAL_CHARS_TRADER", 22000
     ),
     "prompt_context_total_chars_risk": _env_int_or_default(
-        "PROMPT_CONTEXT_TOTAL_CHARS_RISK", 18000
+        "PROMPT_CONTEXT_TOTAL_CHARS_RISK", 14000
     ),
     "prompt_context_total_chars_portfolio": _env_int_or_default(
-        "PROMPT_CONTEXT_TOTAL_CHARS_PORTFOLIO", 80000
+        "PROMPT_CONTEXT_TOTAL_CHARS_PORTFOLIO", 56000
     ),
     # A-share contexts are fetched once before the graph starts. Re-querying
     # the same Tushare/filing/event tools inside analysts adds calls and tokens

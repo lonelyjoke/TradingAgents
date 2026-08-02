@@ -121,9 +121,9 @@ def select_research_depth() -> int:
 
     # Define research depth options with their corresponding values
     DEPTH_OPTIONS = [
-        ("Shallow - Quick research, few debate and strategy discussion rounds", 1),
-        ("Medium - Middle ground, moderate debate rounds and strategy discussion", 3),
-        ("Deep - Comprehensive research, in depth debate and strategy discussion", 5),
+        ("Standard - Focused research with one debate round (recommended)", 1),
+        ("Extended - Two debate rounds for material uncertainty", 2),
+        ("Deep - Three debate rounds for exceptional cases", 3),
     ]
 
     choice = questionary.select(

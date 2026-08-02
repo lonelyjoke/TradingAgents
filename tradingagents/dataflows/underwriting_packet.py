@@ -946,7 +946,15 @@ def _derive_registered_capital_share_count(
 def derive_share_count_control(
     contexts: Mapping[str, str] | None,
 ) -> dict[str, Any]:
-    """Return the canonical share count plus independent cross-checks."""
+    """Return the current canonical share count plus independent cross-checks.
+
+    ``stock_basic.reg_capital`` is a useful identity check, but it can lag an
+    effective bonus issue, capitalisation issue, repurchase cancellation or
+    other corporate action.  A same-day market-cap/close observation already
+    reflects the exchange's current share base, so it owns the canonical value
+    whenever available.  Registered capital and pledge tables remain
+    diagnostics only.
+    """
     pledge_proxy_mn, pledge_period, pledge_formula = _derive_reported_share_count(
         contexts
     )
@@ -956,29 +964,29 @@ def derive_share_count_control(
     market_mn, current_price, market_formula = _derive_market_snapshot(contexts)
     conflict_pct: float | None = None
     if registered_mn and market_mn:
-        conflict_pct = abs(registered_mn - market_mn) / registered_mn * 100.0
-    canonical_mn = registered_mn or market_mn or pledge_proxy_mn
+        conflict_pct = abs(registered_mn - market_mn) / market_mn * 100.0
+    canonical_mn = market_mn or registered_mn or pledge_proxy_mn
     source_type = (
-        "registered_capital"
-        if registered_mn is not None
-        else "market_cap_div_close"
+        "market_cap_div_close"
         if market_mn is not None
+        else "registered_capital"
+        if registered_mn is not None
         else "pledge_stat_proxy"
         if pledge_proxy_mn is not None
         else "unresolved"
     )
     period = (
-        "latest stock_basic"
-        if registered_mn is not None
-        else "market snapshot"
+        "market snapshot"
         if market_mn is not None
+        else "latest stock_basic"
+        if registered_mn is not None
         else pledge_period
     )
     formula = (
-        registered_formula
-        if registered_mn is not None
-        else market_formula
+        market_formula
         if market_mn is not None
+        else registered_formula
+        if registered_mn is not None
         else pledge_formula
     )
     cross_checks: list[str] = []
@@ -991,7 +999,10 @@ def derive_share_count_control(
             f"pledge_stat total_share proxy={pledge_proxy_mn:.3f} mn (not canonical)"
         )
     if conflict_pct is not None:
-        cross_checks.append(f"registered-vs-market difference={conflict_pct:.3f}%")
+        cross_checks.append(
+            "registered capital is a lagging proxy; "
+            f"registered-vs-current-market difference={conflict_pct:.3f}%"
+        )
     return {
         "canonical_share_count_mn": canonical_mn,
         "source_type": source_type,
@@ -1382,10 +1393,10 @@ def _validate_packet(
         )
     conflict_pct = share_control.get("conflict_pct")
     if conflict_pct is not None and conflict_pct > 2.0:
-        packet.research_readiness = "blocked"
-        packet.readiness_reasons.append(
-            "Registered-capital and market-cap/close share counts conflict by "
-            f"{conflict_pct:.2f}% (>2%)."
+        packet.preprocessing_notes.append(
+            "registered capital differs from current market-implied shares by "
+            f"{conflict_pct:.2f}%; current same-snapshot market shares retained "
+            "because registered capital may lag effective corporate actions"
         )
     derived_price_cny = share_control["current_price_cny"]
     if derived_price_cny is not None:
@@ -2176,8 +2187,7 @@ def _validate_packet(
         )
     packet.readiness_reasons = list(dict.fromkeys(packet.readiness_reasons))
     if any(
-        reason.startswith("Registered-capital and market-cap/close share counts conflict")
-        or "cannot be reconciled to forecast unit" in reason
+        "cannot be reconciled to forecast unit" in reason
         or "below official" in reason
         for reason in packet.readiness_reasons
     ):

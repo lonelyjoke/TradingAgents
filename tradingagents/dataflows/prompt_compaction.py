@@ -210,13 +210,13 @@ _CONTEXT_PRIORITY = (
 def _profile_total_limit(profile: str) -> int:
     config = get_config()
     defaults = {
-        "analyst": 72000,
-        "research": 64000,
-        "trader": 28000,
-        "risk": 18000,
-        "portfolio": 80000,
+        "analyst": 48000,
+        "research": 48000,
+        "trader": 22000,
+        "risk": 14000,
+        "portfolio": 56000,
     }
-    default = defaults.get(profile, 64000)
+    default = defaults.get(profile, 48000)
     try:
         configured = int(
             config.get(f"prompt_context_total_chars_{profile}", default) or default
