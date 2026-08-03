@@ -1,0 +1,1462 @@
+{
+  "schema_version": 2,
+  "symbol": "689009.SH",
+  "as_of_date": "2026-08-03",
+  "forecast_years": [
+    "2026E",
+    "2027E",
+    "2028E"
+  ],
+  "research_readiness": "partial",
+  "readiness_reasons": [
+    "Segment-level revenue, cost, and margin breakdown not available from filings; only qualitative product descriptions found.",
+    "Cash flow statement items (OCF, capex, FCF) not reported in deterministic evidence; only negative OCF/Net profit ratio in Q1 2026 available.",
+    "Forecast base case relies on unverified sell-side broker estimates (KPE05) rather than company-disclosed guidance; must be treated as analytical placeholder.",
+    "Required consolidated three-year forecast lines are incomplete.",
+    "Bull/base/bear per-share valuation is incomplete.",
+    "bull scenario EPS x PE does not reconcile to fair value.",
+    "base scenario EPS x PE does not reconcile to fair value.",
+    "bear scenario EPS x PE does not reconcile to fair value.",
+    "All claimed moat mechanisms remain unproven by observable evidence.",
+    "Valuation buckets contain potential double counting.",
+    "Valuation has not closed from mutually exclusive buckets to per-share fair value.",
+    "Three-year values remain missing for consolidated line(s): Operating Cash Flow (OCF), Capex, Free Cash Flow (FCF), operating_profit"
+  ],
+  "company_model": {
+    "model_profile": "corporate",
+    "operating_model_family": "volume_price_cost",
+    "business_archetype": "Product manufacturer with multiple consumer durable and service robot lines: electric two-wheelers, scooters, balance scooters, all-terrain vehicles, mowing robots, e-bikes.",
+    "value_proposition_and_customers": "Simplifies and makes mobility and yard work convenient and fun. Sells smart personal electric vehicles and autonomous mowing robots globally through distributors, retail channels, and direct-to-consumer. Key customers: urban commuters, suburban families, fleet operators.",
+    "revenue_equation": "Consolidated Revenue = Σ (Product_i volume × ASP_i) across regions and channels. Volume driven by end-user demand, dealer inventory, and new model launches. ASP affected by product mix, promotions, and geographic pricing.",
+    "profit_equation": "Gross Profit = Revenue - (Material + Conversion + Warranty). Operating Profit = Gross Profit - R&D - Selling - Administrative - FX gains/losses. Net Profit (parent) = Oper. Profit + Financial Income/Expense - Income Tax - Minority Interest.",
+    "cash_flow_equation": "OCF = Net profit + D&A - ΔWorking Capital (focus on receivables, inventory, contract liabilities). FCF = OCF - Capex. Working capital sensitive to dealer stocking, seasonal build, and customer advances.",
+    "capital_intensity_and_reinvestment": "Moderate capex: tooling/molds for new models, assembly line expansion, headquarters construction. R&D spending for next-generation platforms. Cash also used for strategic equity investments and partnerships.",
+    "diluted_share_count_mn": 735.8485,
+    "share_count_period": "2026-08-03; market snapshot; market cap / close, using forecast_model and price_earnings_decomposition",
+    "share_count_evidence_id": "",
+    "share_count_source_type": "market_cap_div_close",
+    "share_count_formula": "market cap / close, using forecast_model and price_earnings_decomposition",
+    "share_count_cross_checks": [
+      "registered capital proxy=0.073 mn",
+      "market cap / close=735.848 mn",
+      "registered capital is a lagging proxy; registered-vs-current-market difference=99.990%"
+    ],
+    "moat_mechanisms": [
+      "Brand and heritage (Segway label for global recognition, trusted for personal mobility)",
+      "Technology/R&D: smart battery management, IoT connectivity, autonomous navigation for mowers",
+      "Global distribution network and local subsidiaries in US, Europe, Asia",
+      "Scale in procurement and manufacturing across multiple product lines"
+    ],
+    "moat_to_financial_transmission": [
+      "Brand → premium pricing → higher ASP and gross margin",
+      "R&D → product differentiation → lower price elasticity and customer retention",
+      "Distribution coverage → volume growth in new geographies",
+      "Scale → lower unit material and manufacturing cost → supports margin expansion"
+    ],
+    "structural_risks": [
+      "Intense competition in electric two-wheeler market (Yadea, Aima, others); risk of price wars",
+      "Regulatory changes: national standards for electric bicycles may affect product specifications and demand",
+      "Foreign exchange volatility: large proportion of revenue and costs in USD/EUR",
+      "Raw material cost fluctuations: lithium batteries, steel, semiconductors",
+      "Trade policy: anti-dumping investigations on mowers, tariffs on vehicles imported to US/Europe",
+      "Technology risk: new entrants with disruptive battery or autonomous technology"
+    ],
+    "key_unknowns": [
+      "Can electric two-wheeler market share gains continue without heavy price promotions?",
+      "Will mowing robot segment achieve sustainable profitability after initial scaling phase?",
+      "When will e-bike and all-terrain vehicle segments reach positive operating profit?",
+      "Is the aggressive revenue growth target for 2026E supported by macro and channel inventory?"
+    ],
+    "evidence_ids": [
+      "EV023",
+      "EV030",
+      "EV035",
+      "EV025"
+    ]
+  },
+  "business_unit_map": [
+    {
+      "unit_id": "BU1",
+      "unit_name": "Electric Two-Wheelers",
+      "unit_type": "product",
+      "disclosure_basis": "analytical",
+      "parent_unit": "company",
+      "economic_role": "Largest revenue and profit contributor; domestic market with smart, high-end positioning; export expansion in Southeast Asia",
+      "primary_operating_archetype": "volume_price_cost",
+      "secondary_operating_archetype": "",
+      "revenue_driver_equation": "Revenue = (Domestic units sold × ASP_dom) + (Export units × ASP_exp); volume depends on new model launches, retail channel expansion, online sales, and industry demand.",
+      "profit_driver_equation": "Gross margin = ASP - (battery + motor + frame + electronics) - manufacturing labor; operating profit absorbs R&D, marketing, channel rebates.",
+      "cash_and_capital_equation": "Working capital: dealer receivables (mostly short-term) and finished-goods inventory; capex for new painting/assembly lines and tooling.",
+      "reported_metrics": [
+        "Volume and ASP estimates from sell-side channel checks (KPE03,KPE04)",
+        "Market share data (KPE09)"
+      ],
+      "evidence_ids": [
+        "KPE03",
+        "KPE04",
+        "KPE05",
+        "KPE09"
+      ],
+      "missing_inputs": [
+        "Filing-reported segment revenue, gross margin, unit volume, ASP"
+      ],
+      "next_verification": "Next half-year/annual report segment disclosure (product split)"
+    },
+    {
+      "unit_id": "BU2",
+      "unit_name": "Electric Scooters & Balance Scooters",
+      "unit_type": "product",
+      "disclosure_basis": "analytical",
+      "parent_unit": "company",
+      "economic_role": "Mature segment; revenue from both own-brand retail (2C) and sharing-operator supply (2B); reliable cash generator",
+      "primary_operating_archetype": "volume_price_cost",
+      "secondary_operating_archetype": "",
+      "revenue_driver_equation": "Revenue = (2C units × ASP) + (2B units × contract ASP); 2B demand depends on sharing fleet expansion and replacement cycles.",
+      "profit_driver_equation": "Gross margin moderate; scale benefits from component standardization; profit sensitive to ASP pressure in 2B.",
+      "cash_and_capital_equation": "Receivables from sharing operators may be longer; inventory of finished units moderate; capex limited.",
+      "reported_metrics": [],
+      "evidence_ids": [
+        "KPE03",
+        "KPE04"
+      ],
+      "missing_inputs": [
+        "Segment revenue, gross margin, volume split between 2C/2B"
+      ],
+      "next_verification": "Filing segment note"
+    },
+    {
+      "unit_id": "BU3",
+      "unit_name": "All-Terrain Vehicles (ATV)",
+      "unit_type": "product",
+      "disclosure_basis": "analytical",
+      "parent_unit": "company",
+      "economic_role": "Growth segment; still scaling, moving toward positive operating profit; competes with established powersports brands",
+      "primary_operating_archetype": "volume_price_cost",
+      "secondary_operating_archetype": "",
+      "revenue_driver_equation": "Revenue = units shipped × ASP; driven by US/European outdoor recreation demand and dealer network build-out.",
+      "profit_driver_equation": "Currently low/negative margin due to high initial fixed costs and development expense; profitability expected with scale.",
+      "cash_and_capital_equation": "Capex for assembly lines and tooling; inventory of vehicle kits; receivables from dealers.",
+      "reported_metrics": [],
+      "evidence_ids": [
+        "KPE03",
+        "KPE04"
+      ],
+      "missing_inputs": [
+        "Segment revenue, profit/loss, volume"
+      ],
+      "next_verification": "Annual report segment profit/loss"
+    },
+    {
+      "unit_id": "BU4",
+      "unit_name": "Service Robots (Mowing Robots)",
+      "unit_type": "product",
+      "disclosure_basis": "analytical",
+      "parent_unit": "company",
+      "economic_role": "High-growth second curve; currently a significant revenue contributor (2025 revenue ~2 bn per broker) with improving margin; strategic focus",
+      "primary_operating_archetype": "volume_price_cost",
+      "secondary_operating_archetype": "",
+      "revenue_driver_equation": "Revenue = (European units × ASP_EU) + (US expansion units × ASP_US); growth tied to category awareness, product iteration, and channel expansion.",
+      "profit_driver_equation": "Gross margin healthy due to high tech content; operating margin improving with scale, but still absorbing R&D and marketing.",
+      "cash_and_capital_equation": "Requires inventory of components (semiconductors, sensors); seasonal build for Q2/Q3 selling season.",
+      "reported_metrics": [
+        "Revenue >10 bn from official 2025 annual report? Not verified; broker mentioned '机器人业务营收20.0亿元' (KPE05)"
+      ],
+      "evidence_ids": [
+        "KPE05",
+        "EV036"
+      ],
+      "missing_inputs": [
+        "Filing segment revenue and margin; precise cost structure"
+      ],
+      "next_verification": "Annual report segment note for robots"
+    },
+    {
+      "unit_id": "BU5",
+      "unit_name": "E-bikes and Other Emerging Products",
+      "unit_type": "product",
+      "disclosure_basis": "analytical",
+      "parent_unit": "company",
+      "economic_role": "Early-stage; includes e-bikes for European market and other mobility concepts; currently negligible profit, strategic optionality",
+      "primary_operating_archetype": "volume_price_cost",
+      "secondary_operating_archetype": "",
+      "revenue_driver_equation": "Revenue = initial sales to early adopters and dealers; ramping slowly.",
+      "profit_driver_equation": "Loss-making due to R&D and market entry costs.",
+      "cash_and_capital_equation": "Investment spending for product development and certification.",
+      "reported_metrics": [],
+      "evidence_ids": [],
+      "missing_inputs": [
+        "Revenue, cost, investment level"
+      ],
+      "next_verification": "Any product launch announcement"
+    },
+    {
+      "unit_id": "BU06",
+      "unit_name": "Electric Two-Wheelers (BU1)",
+      "unit_type": "reported_segment",
+      "disclosure_basis": "missing",
+      "parent_unit": "company",
+      "economic_role": "Filing segment restored after structured evidence reconciliation.",
+      "primary_operating_archetype": "",
+      "secondary_operating_archetype": "",
+      "revenue_driver_equation": "",
+      "profit_driver_equation": "",
+      "cash_and_capital_equation": "",
+      "reported_metrics": [],
+      "evidence_ids": [
+        "KPE03",
+        "KPE04",
+        "KPE05",
+        "KPE09"
+      ],
+      "missing_inputs": [
+        "economic sub-unit driver equations require analyst completion"
+      ],
+      "next_verification": ""
+    },
+    {
+      "unit_id": "BU08",
+      "unit_name": "Electric Scooters & Balance Scooters (BU2)",
+      "unit_type": "reported_segment",
+      "disclosure_basis": "missing",
+      "parent_unit": "company",
+      "economic_role": "Filing segment restored after structured evidence reconciliation.",
+      "primary_operating_archetype": "",
+      "secondary_operating_archetype": "",
+      "revenue_driver_equation": "",
+      "profit_driver_equation": "",
+      "cash_and_capital_equation": "",
+      "reported_metrics": [],
+      "evidence_ids": [
+        "KPE03"
+      ],
+      "missing_inputs": [
+        "economic sub-unit driver equations require analyst completion"
+      ],
+      "next_verification": ""
+    },
+    {
+      "unit_id": "BU10",
+      "unit_name": "All-Terrain Vehicles (BU3)",
+      "unit_type": "reported_segment",
+      "disclosure_basis": "missing",
+      "parent_unit": "company",
+      "economic_role": "Filing segment restored after structured evidence reconciliation.",
+      "primary_operating_archetype": "",
+      "secondary_operating_archetype": "",
+      "revenue_driver_equation": "",
+      "profit_driver_equation": "",
+      "cash_and_capital_equation": "",
+      "reported_metrics": [],
+      "evidence_ids": [
+        "KPE03"
+      ],
+      "missing_inputs": [
+        "economic sub-unit driver equations require analyst completion"
+      ],
+      "next_verification": ""
+    },
+    {
+      "unit_id": "BU12",
+      "unit_name": "Service Robots (BU4)",
+      "unit_type": "reported_segment",
+      "disclosure_basis": "missing",
+      "parent_unit": "company",
+      "economic_role": "Filing segment restored after structured evidence reconciliation.",
+      "primary_operating_archetype": "",
+      "secondary_operating_archetype": "",
+      "revenue_driver_equation": "",
+      "profit_driver_equation": "",
+      "cash_and_capital_equation": "",
+      "reported_metrics": [],
+      "evidence_ids": [
+        "KPE05",
+        "EV036"
+      ],
+      "missing_inputs": [
+        "economic sub-unit driver equations require analyst completion"
+      ],
+      "next_verification": ""
+    },
+    {
+      "unit_id": "BU14",
+      "unit_name": "E-bikes and Other Emerging (BU5)",
+      "unit_type": "reported_segment",
+      "disclosure_basis": "missing",
+      "parent_unit": "company",
+      "economic_role": "Filing segment restored after structured evidence reconciliation.",
+      "primary_operating_archetype": "",
+      "secondary_operating_archetype": "",
+      "revenue_driver_equation": "",
+      "profit_driver_equation": "",
+      "cash_and_capital_equation": "",
+      "reported_metrics": [],
+      "evidence_ids": [],
+      "missing_inputs": [
+        "economic sub-unit driver equations require analyst completion"
+      ],
+      "next_verification": ""
+    }
+  ],
+  "segment_models": [
+    {
+      "segment": "Electric Two-Wheelers (BU1)",
+      "products_or_services": "Smart electric bicycles and electric motorcycles with IoT app connectivity",
+      "customers_and_channel": "Domestic: retail stores, e-commerce, brand stores; Export: distributors in Southeast Asia",
+      "revenue_weight_pct": null,
+      "profit_weight_pct": null,
+      "base_period": "2025",
+      "base_revenue_value": null,
+      "base_revenue_unit": "CNY mn",
+      "base_revenue_growth_pct": null,
+      "base_margin_pct": null,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [
+        "Industry replacement cycle (new national standard drove scrappage)",
+        "Consumer preference shift from fuel motorcycles to electric",
+        "Urban regulation favoring e-bikes",
+        "Product refresh and technological upgrades (smart features)"
+      ],
+      "industry_supply_and_capacity": "Industry capacity abundant; top two players Yadea and Aima hold large shares; surplus capacity leads to price pressure in low-end, but premium segment differentiated.",
+      "volume_share_utilization": "Company volume growing ahead of industry; estimated domestic market share ~3% in 2025, rising (KPE09). Premium positioning limits TAM but supports higher margin.",
+      "price_asp_take_rate": "ASPs higher than mass-market peers due to smart features and brand; recent new models maintaining price floor.",
+      "unit_cost_and_input_prices": "Battery (lithium) and motor cost sensitive to commodity; motor and controller mainly sourced from China ecosystem; scale benefits partially offset rising raw material.",
+      "margin_and_operating_leverage": "Gross margin estimated >25%; operating leverage from SG&A dilution as volume grows; near-term pressure from promotions and new model launch costs.",
+      "working_capital_and_cash_conversion": "Receivables from dealers typically 30-60 days; inventory turnover improving with better forecasting.",
+      "prosperity_level": "high_midcycle_growing",
+      "marginal_direction": "improving",
+      "causal_analysis": "Demand tailwind from policy and fuel price; supply disciplined in premium segment; company gaining share through innovation; margin recovery expected in H2 2026 as new models ramp and cost absorption improves.",
+      "valuation_treatment": "Core segment valued on PE multiple of future normalized earnings; margin expansion is key to valuation upside.",
+      "strongest_counterevidence": [
+        "If economic slowdown reduces discretionary spending on premium e-bikes",
+        "If Yadea/Aima aggressively push into smart/graphic segment lowering ASP premium"
+      ],
+      "evidence_ids": [
+        "KPE03",
+        "KPE04",
+        "KPE05",
+        "KPE09"
+      ],
+      "missing_inputs": [
+        "Revenue, volume, ASP, segment margin from filings"
+      ],
+      "next_verification": "Q2 2026 segment data from broker or filing"
+    },
+    {
+      "segment": "Electric Scooters & Balance Scooters (BU2)",
+      "products_or_services": "Self-balancing electric scooters, kick-scooters for personal and commercial use",
+      "customers_and_channel": "Retail consumers (2C) and sharing fleet operators (2B) globally",
+      "revenue_weight_pct": null,
+      "profit_weight_pct": null,
+      "base_period": "2025",
+      "base_revenue_value": null,
+      "base_revenue_unit": "CNY mn",
+      "base_revenue_growth_pct": null,
+      "base_margin_pct": null,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [
+        "High oil prices encouraging micro-mobility adoption",
+        "Replacement demand from sharing operators",
+        "Urban tourism and last-mile commuting"
+      ],
+      "industry_supply_and_capacity": "Many Chinese manufacturers; competitive but company has Segway brand premium.",
+      "volume_share_utilization": "Steady volume, slight growth; sharing tender wins provide visibility.",
+      "price_asp_take_rate": "ASPs relatively stable; 2B contracts have volume discounts.",
+      "unit_cost_and_input_prices": "Benefiting from standardized components; cost improvements from platform design.",
+      "margin_and_operating_leverage": "Stable gross margin ~20-25%; operating margin benefits from distribution scale.",
+      "working_capital_and_cash_conversion": "2B receivables can be 60-90 days, but generally manageable.",
+      "prosperity_level": "medium_stable",
+      "marginal_direction": "stable",
+      "causal_analysis": "Mature product with steady cash generation; profitability more exposed to FX than unit economics.",
+      "valuation_treatment": "Core/stable earnings, valued at lower multiple due to slower growth.",
+      "strongest_counterevidence": [
+        "Regulatory bans on scooters in some cities",
+        "Sharing operator consolidation reducing demand"
+      ],
+      "evidence_ids": [
+        "KPE03"
+      ],
+      "missing_inputs": [
+        "Segment revenue, margin from filings"
+      ],
+      "next_verification": "Annual report product split"
+    },
+    {
+      "segment": "All-Terrain Vehicles (BU3)",
+      "products_or_services": "Four-wheel off-road vehicles for recreation/utility",
+      "customers_and_channel": "US and European dealers, online in some markets",
+      "revenue_weight_pct": null,
+      "profit_weight_pct": null,
+      "base_period": "2025",
+      "base_revenue_value": null,
+      "base_revenue_unit": "CNY mn",
+      "base_revenue_growth_pct": null,
+      "base_margin_pct": null,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [
+        "Outdoor recreation spending",
+        "Expansion of dealer network",
+        "Product competitiveness vs incumbents Polaris, BRP"
+      ],
+      "industry_supply_and_capacity": "Dominant players with strong brand; new entrant must gain trust and service capability.",
+      "volume_share_utilization": "Small volume, high growth rate; utilization low, building path to breakeven.",
+      "price_asp_take_rate": "Competitive pricing required to gain share; ASP lower than established brands.",
+      "unit_cost_and_input_prices": "High initial tooling and certification costs; component costs similar to peers.",
+      "margin_and_operating_leverage": "Negative margin currently; operating leverage will turn positive after reaching volume threshold.",
+      "working_capital_and_cash_conversion": "Inventory build as product ramps; dealer terms standard.",
+      "prosperity_level": "early_stage_investing",
+      "marginal_direction": "improving",
+      "causal_analysis": "Potential profit contributor in 2027-2028 if scale achieved; but high risk of failure.",
+      "valuation_treatment": "Option value; not included in core PE valuation; could be valued via DCF/scenario if timeline clears.",
+      "strongest_counterevidence": [
+        "If established OEMs cut prices to defend share",
+        "If demand for powersports declines in key markets"
+      ],
+      "evidence_ids": [
+        "KPE03"
+      ],
+      "missing_inputs": [
+        "Segment revenue, loss, volume"
+      ],
+      "next_verification": "FY2026 annual report segment disclosure"
+    },
+    {
+      "segment": "Service Robots (BU4)",
+      "products_or_services": "Autonomous mowing robots (I2, X4, Terranox series)",
+      "customers_and_channel": "Homeowners via retail and dealer channels in Europe (initially), expanding to US",
+      "revenue_weight_pct": null,
+      "profit_weight_pct": null,
+      "base_period": "2025",
+      "base_revenue_value": null,
+      "base_revenue_unit": "CNY mn",
+      "base_revenue_growth_pct": null,
+      "base_margin_pct": null,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [
+        "Rapid category awareness for smart gardening tools",
+        "Labor shortage and lawn care cost inflation",
+        "Technology leap from boundary-wire to wireless/vision systems"
+      ],
+      "industry_supply_and_capacity": "Husqvarna (market leader), Worx, and startups; company claims leading position in Europe.",
+      "volume_share_utilization": "Shipments growing >100% yoy; capacity being added; utilization high in season.",
+      "price_asp_take_rate": "ASP premium reflecting advanced navigation and app integration; price points €1,000-€3,000.",
+      "unit_cost_and_input_prices": "Cost dominated by sensors, chips, battery; benefiting from scale and vertical integration.",
+      "margin_and_operating_leverage": "Gross margin >40% estimated; operating margin negative due to heavy R&D and marketing, but improving with scale.",
+      "working_capital_and_cash_conversion": "Seasonal: Q1 build, Q2/Q3 sell; high receivables from European dealers.",
+      "prosperity_level": "high_early_cycle",
+      "marginal_direction": "improving",
+      "causal_analysis": "Strong demand tailwind; differentiation from legacy products; margin inflection expected when sales pass fixed cost hurdle.",
+      "valuation_treatment": "High-growth segment; value attached via higher PE multiple on future earnings or separate DCF; currently contributes to consolidated revenue multiple.",
+      "strongest_counterevidence": [
+        "If competitors match technology and pricing erodes",
+        "Anti-dumping tariffs on Chinese mowers in Europe/US disrupt market"
+      ],
+      "evidence_ids": [
+        "KPE05",
+        "EV036"
+      ],
+      "missing_inputs": [
+        "Filing segment revenue, gross margin, EBIT"
+      ],
+      "next_verification": "Half-year 2026 segment note"
+    },
+    {
+      "segment": "E-bikes and Other Emerging (BU5)",
+      "products_or_services": "Electric bicycles for European market, possibly other micro-mobility products",
+      "customers_and_channel": "Specialty bike shops, online",
+      "revenue_weight_pct": null,
+      "profit_weight_pct": null,
+      "base_period": "2025",
+      "base_revenue_value": null,
+      "base_revenue_unit": "CNY mn",
+      "base_revenue_growth_pct": null,
+      "base_margin_pct": null,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [
+        "European e-bike boom, cycling infrastructure build",
+        "Government subsidies"
+      ],
+      "industry_supply_and_capacity": "Fragmented market with many brands; competitive on price and features.",
+      "volume_share_utilization": "Very early, minimal volume.",
+      "price_asp_take_rate": "Mid-high ASP, reflecting motor and battery cost.",
+      "unit_cost_and_input_prices": "High cost due to small scale and premium components.",
+      "margin_and_operating_leverage": "Negative; heavy investment phase.",
+      "working_capital_and_cash_conversion": "Inventory risk as channel fills.",
+      "prosperity_level": "nascent_investing",
+      "marginal_direction": "unknown",
+      "causal_analysis": "High optionality but unclear timeline to profitability; capital allocation risk.",
+      "valuation_treatment": "Option bucket only; no contribution to core value until path to profit emerges.",
+      "strongest_counterevidence": [
+        "Competition from established bike brands like Giant, Trek",
+        "Capital burn without demonstrable volume ramp"
+      ],
+      "evidence_ids": [],
+      "missing_inputs": [
+        "Revenue, cost, investment plan, segment strategy"
+      ],
+      "next_verification": "Official product launch or segment disclosure"
+    }
+  ],
+  "underwriting_questions": [
+    {
+      "question_id": "Q1",
+      "question": "Can electric two-wheeler revenue growth exceed 20% in 2026-2027 without sacrificing gross margin to a level that erodes operating profit?",
+      "why_it_matters": "Two-wheelers likely contribute >50% of revenue and profit; growth drives consolidated EPS and valuation multiple.",
+      "current_answer": "Broker estimates suggest 2026 volume growth low double-digit with slight margin pressure, but new models and price hikes in Q3 could support both volume and margin. Market share gains in premium segment support, but competition intensifies.",
+      "bull_evidence": [
+        "May 2026 online sales +78% yoy (KPE05)",
+        "Q3 target of 2.6m units (+70% yoy) implied by broker (KPE04)",
+        "Company's smart features and brand loyalty create differentiation"
+      ],
+      "bear_evidence": [
+        "Q1 2026 gross margin down 3.13pp yoy (EV012)",
+        "Raw material costs and promotional spending pressuring margins",
+        "Industry-wide price competition from Yadea/Aima pushing down premium ASP"
+      ],
+      "decisive_model_variables": [
+        "two_wheeler_revenue_growth_pct",
+        "two_wheeler_gross_margin_pct"
+      ],
+      "affected_financial_lines": [
+        "Consolidated Revenue",
+        "Gross Margin %",
+        "Operating Profit",
+        "Parent Net Profit"
+      ],
+      "evidence_ids": [
+        "EV012",
+        "KPE03",
+        "KPE04",
+        "KPE05"
+      ],
+      "missing_evidence": [
+        "Filing-reported segment revenue and margin for two-wheelers"
+      ],
+      "next_verification": "Q2 2026 results (mid-August) to see volume, ASP, and margin evolution"
+    },
+    {
+      "question_id": "Q2",
+      "question": "Will mowing robot segment achieve positive operating profit in 2026 and contribute meaningfully to consolidated net income?",
+      "why_it_matters": "This is the high-growth second curve that justifies a higher group PE; failure to profit would compress multiple.",
+      "current_answer": "Revenue grew >100% yoy, but with rising chip costs and seasonal marketing expense, EBIT still negative. Broker expects EBIT improvement in Q3 after amortization ends, but no guarantee of full-year profitability.",
+      "bull_evidence": [
+        "Q2 shipments doubled yoy, demand robust (KPE03)",
+        "Gross margin likely >40%, strong unit economics",
+        "IDC data shows category growing 63.8% in 2025"
+      ],
+      "bear_evidence": [
+        "Q1 2026 mower EBIT still negative due to chip cost and rebate amortization (KPE03)",
+        "Anti-dumping investigation in Europe, potential tariffs",
+        "New entrants (e.g., Dreame, Roborock) increasing competitive intensity"
+      ],
+      "decisive_model_variables": [
+        "mower_revenue_growth_pct",
+        "mower_ebit_margin"
+      ],
+      "affected_financial_lines": [
+        "Revenue",
+        "Operating Profit",
+        "Segment profit"
+      ],
+      "evidence_ids": [
+        "KPE03",
+        "KPE05"
+      ],
+      "missing_evidence": [
+        "Quarterly segment revenue and profit for robots from filings"
+      ],
+      "next_verification": "H1 2026 segment report and management commentary on mower profitability"
+    },
+    {
+      "question_id": "Q3",
+      "question": "How large is the FX impact on reported net profit, and will hedging or operational shifts offset the headwind in 2026-2027?",
+      "why_it_matters": "Q1 2026 net margin fell 5.46pp yoy partly due to finance expenses (likely FX loss); significant overseas revenue means profit can be swamped by currency moves, distorting true operating performance.",
+      "current_answer": "Estimated 2025 Q2 had 1.8bn FX gain; 2026 Q2 expected FX loss of 'hundreds of millions', leading to headline profit decline despite operating profit growth. Analysts expect H2 2026 hedges to mitigate.",
+      "bull_evidence": [
+        "Company may increase EUR/USD hedging ratio",
+        "Overseas manufacturing expansion could reduce exposure"
+      ],
+      "bear_evidence": [
+        "Finance-expense ratio +5.51pp yoy in Q1 (EV015), signaling severe drag",
+        "OCF/Net profit negative, suggesting cash flow distorted by working capital and FX",
+        "Narrowing of EUR/CNY or USD/CNY band could inflict further losses"
+      ],
+      "decisive_model_variables": [
+        "finance_expense_ratio",
+        "effective_tax_rate",
+        "net_profit_parent"
+      ],
+      "affected_financial_lines": [
+        "Finance Expense",
+        "Net Profit",
+        "OCF"
+      ],
+      "evidence_ids": [
+        "EV015",
+        "KPE03",
+        "KPE05"
+      ],
+      "missing_evidence": [
+        "Breakdown of FX gains/losses in P&L by currency",
+        "Hedging policy and effectiveness"
+      ],
+      "next_verification": "H1 2026 financial notes on foreign exchange and hedging"
+    },
+    {
+      "question_id": "Q4",
+      "question": "Can the company generate positive free cash flow in 2026-2028 given capex for capacity expansion and working capital build?",
+      "why_it_matters": "Sustainably positive FCF supports the high growth valuation and funding for new ventures; if cash burn persists, equity dilution risk rises.",
+      "current_answer": "Q1 2026 OCF was negative relative to net profit; historical annual OCF was positive but thin. Capex likely elevated due to factory construction; FCF trajectory unknown. Market expects cash generation to improve with profit.",
+      "bull_evidence": [
+        "Strong contract liabilities (18.69 bn as Q1 2026) indicate customer prepayments reducing working capital need",
+        "Scaled production should lower capex/sales ratio"
+      ],
+      "bear_evidence": [
+        "Negative OCF/Net profit (-2.34x) signals cash consumed by working capital",
+        "Headquarters construction (4-year project) consuming cash",
+        "Heavy inventory build (Inventory/Rev +4.42pp yoy)"
+      ],
+      "decisive_model_variables": [
+        "OCF_CNY_mn",
+        "capex_CNY_mn",
+        "FCF_CNY_mn"
+      ],
+      "affected_financial_lines": [
+        "OCF",
+        "Capex",
+        "FCF"
+      ],
+      "evidence_ids": [
+        "EV016",
+        "EV029",
+        "EV040"
+      ],
+      "missing_evidence": [
+        "Detailed cash flow statement items (no published Q1 cash flow)"
+      ],
+      "next_verification": "H1 2026 cash flow statement to see working capital dynamics"
+    },
+    {
+      "question_id": "Q5",
+      "question": "Will the e-bike and ATV segments reach scale sufficient to contribute to consolidated profit by 2028, or will they remain a drain on group returns?",
+      "why_it_matters": "If these 'third curves' fail, the company may face a growth gap after two-wheeler and mower mature, and will have incurred high sunk costs.",
+      "current_answer": "ATV approaching breakeven per broker; e-bike still early. Capital allocation discipline uncertain.",
+      "bull_evidence": [
+        "ATV Q1 2026 high growth, ahead of plan (KPE03)",
+        "E-bike European launch 2027 with proven supply chain"
+      ],
+      "bear_evidence": [
+        "Both segments require heavy investment with uncertain returns",
+        "New entrants may capture market before company achieves scale"
+      ],
+      "decisive_model_variables": [
+        "ATV_revenue_growth",
+        "e_bike_revenue",
+        "segment_operating_profit"
+      ],
+      "affected_financial_lines": [
+        "Revenue",
+        "Operating Profit",
+        "Capital Employed"
+      ],
+      "evidence_ids": [
+        "KPE03",
+        "KPE04"
+      ],
+      "missing_evidence": [
+        "Official segment P&L for ATV and e-bike"
+      ],
+      "next_verification": "FY2026 annual report segment breakout"
+    }
+  ],
+  "forecast_lines": [
+    {
+      "segment": "consolidated",
+      "metric": "Revenue",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 21277.88,
+      "year_1_value": 27660.0,
+      "year_2_value": 33192.0,
+      "year_3_value": 38831.0,
+      "formula": "base × (1 + growth); growth assumption 30%, 20%, 17% (unverified broker estimate from KPE05)",
+      "assumption_status": "derived_from_unverified_broker_estimate",
+      "evidence_ids": [
+        "EV010",
+        "KPE05"
+      ],
+      "key_sensitivity": "Revenue growth +/-5pp changes 2027E revenue by ~1.6 bn and proportionally EPS",
+      "missing_inputs": []
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Gross Margin %",
+      "unit": "%",
+      "base_period": "FY2025",
+      "base_value": null,
+      "year_1_value": 26.0,
+      "year_2_value": 27.0,
+      "year_3_value": 27.5,
+      "formula": "base not reported; assumed gradual recovery from Q1 26.54% as raw material pressure eases and mix improves",
+      "assumption_status": "analyst_estimate",
+      "evidence_ids": [
+        "EV012",
+        "KPE03"
+      ],
+      "key_sensitivity": "Each 1pp gross margin change alters operating profit by ~277 mn in 2026E",
+      "missing_inputs": [
+        "FY2025 consolidated gross margin from annual report"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Operating Margin %",
+      "unit": "%",
+      "base_period": "FY2025",
+      "base_value": null,
+      "year_1_value": 7.5,
+      "year_2_value": 9.0,
+      "year_3_value": 10.0,
+      "formula": "Implied from revenue and profit; assumes SG&A leverage and R&D discipline; 2026E includes elevated launch costs, improving thereafter",
+      "assumption_status": "analyst_estimate",
+      "evidence_ids": [
+        "EV013",
+        "KPE03"
+      ],
+      "key_sensitivity": "1pp change = 277 mn operating profit",
+      "missing_inputs": [
+        "FY2025 operating margin from annual report"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Parent Net Profit",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 1758.17,
+      "year_1_value": 1940.0,
+      "year_2_value": 2630.0,
+      "year_3_value": 3300.0,
+      "formula": "Derived from broker: 2026E 19.4亿, 2027E 26.3亿, 2028E 33.0亿 (KPE05); corresponds to growth 10.2%, 35.7%, 25.5%",
+      "assumption_status": "derived_from_unverified_broker_estimate",
+      "evidence_ids": [
+        "KPE05"
+      ],
+      "key_sensitivity": "10% deviation in net profit changes EPS by same %, absent share count change",
+      "missing_inputs": [
+        "Company guidance or consensus; tax rate, minority interest assumptions"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "EPS",
+      "unit": "CNY/share",
+      "base_period": "FY2025",
+      "base_value": null,
+      "year_1_value": 2.636412250619523,
+      "year_2_value": 3.5741052675924463,
+      "year_3_value": 4.484618776827024,
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)",
+      "assumption_status": "calculated",
+      "evidence_ids": [],
+      "key_sensitivity": "Cannot be computed",
+      "missing_inputs": [
+        "Diluted share count"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Operating Cash Flow (OCF)",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "Not estimated due to lack of cash flow statement data and negative OCF/Net ratio in Q1",
+      "assumption_status": "missing",
+      "evidence_ids": [
+        "EV016"
+      ],
+      "key_sensitivity": "Working capital dynamics critical",
+      "missing_inputs": [
+        "FY2025 OCF, detailed cash flow statement, capex, working capital components"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Capex",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "Not available; expected to be elevated due to HQ construction and capacity expansion but no figure",
+      "assumption_status": "missing",
+      "evidence_ids": [
+        "EV029",
+        "EV038"
+      ],
+      "key_sensitivity": "High capex could impair FCF generation",
+      "missing_inputs": [
+        "Capex outflow from cash flow statement"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "Free Cash Flow (FCF)",
+      "unit": "CNY mn",
+      "base_period": "",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "OCF - Capex; not computable",
+      "assumption_status": "missing",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "OCF and Capex"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "operating_profit",
+      "unit": "",
+      "base_period": "",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "missing; downstream analyst must complete",
+      "assumption_status": "missing",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "required consolidated forecast line omitted"
+      ]
+    }
+  ],
+  "scenarios": [
+    {
+      "scenario": "bull",
+      "probability_pct": 30.0,
+      "operating_assumptions": [
+        "Two-wheeler revenue +35% yoy in 2026, +25% yoy in 2027; gross margin improves to 28% by 2027 as cost pressure fades and mix shifts to higher-end models",
+        "Mowing robot revenue doubles in 2026, achieves high single-digit EBIT margin in 2027",
+        "ATV and e-bikes collectively breakeven by 2028",
+        "FX losses limited; hedging effective; effective tax rate normal",
+        "Share buyback program continues, reducing share count ~2%"
+      ],
+      "parent_net_profit_cny_mn": 2200.0,
+      "eps_cny": 2.9897458512180157,
+      "fcf_cny_mn": null,
+      "valuation_method": "PE multiple on 2027E normalized EPS; assume 22x due to growth",
+      "valuation_multiple": 22.0,
+      "fair_value_per_share": 65.77440872679635,
+      "evidence_ids": [],
+      "falsification": "Failure to achieve Q3 two-wheeler volume target of 2.6m units; mower revenue growth <80% in H2 2026",
+      "missing_inputs": [
+        "EPS/share count; FCF data"
+      ]
+    },
+    {
+      "scenario": "base",
+      "probability_pct": 50.0,
+      "operating_assumptions": [
+        "Consolidated revenue growth 30%, 20%, 17% as per broker model",
+        "Gross margin 26% in 2026, gradual 50bp improvement per year",
+        "Two-wheeler remains core profit engine; mower EBIT positive in 2027",
+        "FX headwind in 2026 but normalizing after; net finance expense ~2% of revenue",
+        "No material dilution from incentive plan; repurchases offset"
+      ],
+      "parent_net_profit_cny_mn": 1940.0,
+      "eps_cny": 2.636412250619523,
+      "fcf_cny_mn": null,
+      "valuation_method": "PE on 2027E net profit; 17x multiple reflecting strong growth but near-term margin uncertainty",
+      "valuation_multiple": 17.0,
+      "fair_value_per_share": 44.81900826053189,
+      "evidence_ids": [
+        "KPE05"
+      ],
+      "falsification": "If 2026 revenue growth <25% or net profit decline >10%",
+      "missing_inputs": [
+        "EPS, FCF"
+      ]
+    },
+    {
+      "scenario": "bear",
+      "probability_pct": 20.0,
+      "operating_assumptions": [
+        "Revenue growth 20%, 15%, 10%; demand slowdown due to macro and competition",
+        "Gross margin pressured to 24% in 2026 due to price wars and raw material costs",
+        "Investment in mowers, ATV, e-bike continues to bleed cash; mower loss-making throughout",
+        "Significant FX losses (2% of revenue) erode profit; effective tax rate higher",
+        "No buyback; potential dilution from incentive plan"
+      ],
+      "parent_net_profit_cny_mn": 1600.0,
+      "eps_cny": 2.174360619067648,
+      "fcf_cny_mn": null,
+      "valuation_method": "PE 12x on depressed 2027E earnings",
+      "valuation_multiple": 12.0,
+      "fair_value_per_share": 26.092327428811775,
+      "evidence_ids": [],
+      "falsification": "If Q2 2026 net profit decline >20% and guidance cut",
+      "missing_inputs": [
+        "EPS, FCF"
+      ]
+    }
+  ],
+  "thesis_financial_bridges": [
+    {
+      "bridge_id": "B1",
+      "thesis_or_question": "Electric two-wheeler volume share gain drives revenue beat",
+      "affected_unit": "BU1",
+      "operating_driver": "two_wheeler_units_sold",
+      "driver_formula": "Units = industry domestic units × company market share + export units",
+      "base_assumption": "2026E domestic volume +12% yoy, market share ~3.5%",
+      "bull_assumption": "Volume +25% yoy, share >4% driven by new models and channel",
+      "bear_assumption": "Volume +5%, share stable as competitors retaliate",
+      "revenue_impact": "Base: ~11 bn; Bull: ~13 bn; Bear: ~9 bn (illustrative, exact segment split unknown)",
+      "profit_impact": "Gross profit proportional at assumed 25% margin, lower in bear from ASP pressure",
+      "eps_impact": "unquantified (missing segment profit and shares)",
+      "fcf_or_capital_impact": "Higher volume requires higher inventory and receivables, but improves working capital turnover if demand strong",
+      "valuation_impact": "Higher revenue and margin → higher terminal PE multiple",
+      "quantification_status": "partially_quantified",
+      "evidence_ids": [
+        "KPE03",
+        "KPE04"
+      ],
+      "missing_inputs": [
+        "Segment revenue and unit volume from filings"
+      ]
+    },
+    {
+      "bridge_id": "B2",
+      "thesis_or_question": "Mowing robot becomes profitable inflection point and becomes a significant EPS contributor",
+      "affected_unit": "BU4",
+      "operating_driver": "mower_ebit_margin",
+      "driver_formula": "EBIT = Revenue - COGS - R&D - S&M",
+      "base_assumption": "Revenue 4.5 bn in 2026E, EBIT margin -2% (loss-making)",
+      "bull_assumption": "Revenue 6 bn, EBIT margin +5% (profitable)",
+      "bear_assumption": "Revenue 3 bn, EBIT margin -10% (deep loss)",
+      "revenue_impact": "Base contributes ~16% of total revenue; bull adds 1.5 bn extra",
+      "profit_impact": "Bull adds ~300 mn operating profit; base drag ~90 mn; bear drag ~300 mn",
+      "eps_impact": "unquantified",
+      "fcf_or_capital_impact": "Working capital seasonality; profitable scenario improves FCF",
+      "valuation_impact": "If segment reaches sustained profitability, warrants separate high-growth valuation or higher group multiple",
+      "quantification_status": "partially_quantified",
+      "evidence_ids": [
+        "KPE05"
+      ],
+      "missing_inputs": [
+        "Actual segment revenue and cost structure from filings"
+      ]
+    },
+    {
+      "bridge_id": "B3",
+      "thesis_or_question": "Consolidated operating margin rebounds to double-digit by 2028 through cost absorption and mix",
+      "affected_unit": "consolidated",
+      "operating_driver": "total_operating_expense_to_sales_ratio",
+      "driver_formula": "Op margin = Gross margin - (SG&A + R&D)/Sales",
+      "base_assumption": "Gross margin 26% 2026E → 27.5% 2028E; opex ratio declines from 18.5% to 17.5%",
+      "bull_assumption": "Gross margin 28% by 2028; opex ratio 16% on higher revenue",
+      "bear_assumption": "Gross margin stays 25%; opex ratio 19% as investments continue",
+      "revenue_impact": "Revenue as per scenario",
+      "profit_impact": "Op profit: Base 3.9 bn (2028E), Bull ~4.7 bn, Bear ~2.3 bn",
+      "eps_impact": "unquantified",
+      "fcf_or_capital_impact": "Higher profit improves OCF",
+      "valuation_impact": "Multiple expansion on better margin profile",
+      "quantification_status": "partially_quantified",
+      "evidence_ids": [
+        "EV013"
+      ],
+      "missing_inputs": [
+        "Detailed opex structure"
+      ]
+    }
+  ],
+  "competition_landscapes": [
+    {
+      "business_unit": "BU1 (Electric Two-Wheelers)",
+      "market_boundary": "Smart, connected electric bicycles/motorcycles in China and entry-level electric scooters in Southeast Asia",
+      "boundary_evidence": "Products feature app connectivity, OTA, and autonomous features not typical in basic e-bikes",
+      "structure_and_concentration": "Chinese market consolidated top 2 (Yadea, Aima) with ~60% share; high fragmentation in low-end; premium smart segment smaller but growing",
+      "direct_competitors": [
+        "Yadea Group",
+        "Aima Technology",
+        "Niu Technologies (smart niche)"
+      ],
+      "substitutes_and_customer_alternatives": [
+        "Traditional gasoline motorcycles/scooters",
+        "Public transportation, ride-hailing",
+        "Shared bicycles"
+      ],
+      "self_supply_and_new_entrants": [
+        "Existing motor manufacturers adding electric lines",
+        "Large EV makers entering small mobility"
+      ],
+      "comparison_dimensions": [
+        "Smart features",
+        "Range/performance",
+        "Brand/design",
+        "Price",
+        "Dealer network"
+      ],
+      "company_relative_position": "Leader in smart premium segment; market share ~3% overall but higher in >RMB 3000 category; strong brand loyalty",
+      "competitor_likely_response": "Yadea/Aima may launch competing smart models and use scale to price lower",
+      "financial_transmission": "If competitors erode ASP premium, gross margin could compress, leading to slower profit growth and lower valuation multiple",
+      "evidence_ids": [
+        "KPE04",
+        "KPE06"
+      ],
+      "evidence_status": "partial",
+      "missing_inputs": [
+        "Market share data by price tier from independent source"
+      ],
+      "next_verification": "Industry shipment data and company market share estimates"
+    },
+    {
+      "business_unit": "BU4 (Mowing Robots)",
+      "market_boundary": "Residential and light commercial autonomous mowers for lawns (Europe & North America)",
+      "boundary_evidence": "Wire-free RTK/vision navigation; app control; distinguishes from traditional boundary-wire models",
+      "structure_and_concentration": "Husqvarna dominant with ~50% share globally; company challenging with technology leap; Chinese competitors (Dreame, Roborock) also entering",
+      "direct_competitors": [
+        "Husqvarna (Automower series)",
+        "Worx (Landroid)",
+        "Robomow",
+        "Dreame Technology",
+        "Roborock"
+      ],
+      "substitutes_and_customer_alternatives": [
+        "Traditional corded/electric mowers",
+        "Manual lawn service"
+      ],
+      "self_supply_and_new_entrants": [
+        "Large outdoor power equipment makers (John Deere, Toro, etc.) may enter",
+        "Smart home companies adding garden robots"
+      ],
+      "comparison_dimensions": [
+        "Navigation tech (RTK, vision, lidar)",
+        "Installation ease (wireless)",
+        "Lawn management app",
+        "Price",
+        "Dealer/service support"
+      ],
+      "company_relative_position": "Top 2 in wireless segment; strong reviews; European channel presence; price competitive vs Husqvarna",
+      "competitor_likely_response": "Husqvarna reducing prices and improving navigation; Dreame aggressive on pricing",
+      "financial_transmission": "If margins compress due to price war, high growth may not translate into profit; could lower group multiple",
+      "evidence_ids": [
+        "KPE05",
+        "EV036"
+      ],
+      "evidence_status": "partial",
+      "missing_inputs": [
+        "Market share data by region",
+        "Competitor pricing and unit economics"
+      ],
+      "next_verification": "IDC or company shipment reports"
+    },
+    {
+      "business_unit": "BU2 (Scooters)",
+      "market_boundary": "Electric kick-scooters for personal and commercial (sharing) use globally",
+      "boundary_evidence": "Segway brand is key; used by Lime, Bird etc.",
+      "structure_and_concentration": "Many Chinese ODMs; company maintains brand premium through Segway",
+      "direct_competitors": [
+        "Xiaomi (brand partner/competitor)",
+        "Okai",
+        "Inokim"
+      ],
+      "substitutes_and_customer_alternatives": [
+        "Bicycles, walking, public transit"
+      ],
+      "self_supply_and_new_entrants": [
+        "Sharing operators could source directly from OEMs"
+      ],
+      "comparison_dimensions": [
+        "Brand",
+        "Reliability",
+        "Price",
+        "Supply chain"
+      ],
+      "company_relative_position": "Market leader in personal scooters via Segway; stable but low growth",
+      "competitor_likely_response": "OEM pricing pressure persists",
+      "financial_transmission": "Stable revenue but low growth, modest cash generation",
+      "evidence_ids": [],
+      "evidence_status": "partial",
+      "missing_inputs": [
+        "Market share data"
+      ],
+      "next_verification": "Industry reports"
+    },
+    {
+      "business_unit": "BU3 (ATV)",
+      "market_boundary": "Mid-range trail and sport utility ATVs, particularly in US",
+      "boundary_evidence": "Competition data from broker; target price-conscious buyers",
+      "structure_and_concentration": "Dominated by Polaris, Honda, BRP, Yamaha; high brand loyalty and dealer network barriers",
+      "direct_competitors": [
+        "Polaris",
+        "BRP (Can-Am)",
+        "Honda",
+        "Yamaha",
+        "CFMoto (Chinese entrant)"
+      ],
+      "substitutes_and_customer_alternatives": [
+        "UTVs, dirt bikes"
+      ],
+      "self_supply_and_new_entrants": [
+        "Chinese manufacturers like CFMoto are gaining share with low prices"
+      ],
+      "comparison_dimensions": [
+        "Price",
+        "Performance/reliability",
+        "Dealer network",
+        "Parts availability"
+      ],
+      "company_relative_position": "Late entrant with lower price; building reputation; still unproven",
+      "competitor_likely_response": "Established players may lower prices or introduce entry-level models",
+      "financial_transmission": "If scale not achieved quickly, continued losses and capital drain",
+      "evidence_ids": [],
+      "evidence_status": "partial",
+      "missing_inputs": [
+        "Market share, sales data"
+      ],
+      "next_verification": "ATV shipment data and dealer feedback"
+    }
+  ],
+  "moat_evidence_tests": [
+    {
+      "moat_mechanism": "Brand (Segway) in personal mobility",
+      "observable_test": "Global brand recognition and customer willingness to pay premium vs generic scooters",
+      "comparison_basis": "Compare ASP of Segway kick-scooters vs Xiaomi or private-label models on Amazon/retail; compare market share in Europe and US over past 3 years",
+      "evidence_result": "Unverified; broker claims 50% share in European scooter market (KPE04), but no hard data; ASP appears higher based on retail prices",
+      "financial_transmission": "Brand strength enables higher gross margin on scooters segment, contributing to stable cash flow",
+      "strongest_counterevidence": "Chinese ODMs improving quality and selling under their own brands, narrowing price gap",
+      "status": "unproven",
+      "evidence_ids": [
+        "KPE04"
+      ],
+      "next_verification": "Third-party brand survey and retailer pricing data"
+    },
+    {
+      "moat_mechanism": "R&D and technology in smart two-wheelers and mowing robots",
+      "observable_test": "Number of patents; product features (instant acceleration, app connectivity, autonomous navigation) vs peers; proportion of revenue spent on R&D",
+      "comparison_basis": "Compare R&D/sales ratio vs Yadea, Niu, Husqvarna; compare mower navigation accuracy in independent tests",
+      "evidence_result": "No hard data; management claims continuous innovation (EV036); Q&A highlights RTK/vision fusion advantage",
+      "financial_transmission": "Technological differentiation supports premium pricing and lowers churn, leading to higher revenue retention and margin",
+      "strongest_counterevidence": "Yadea and Niu also investing in smart features; mowing robot tech catching up with Husqvarna's satellite guidance",
+      "status": "unproven",
+      "evidence_ids": [
+        "EV036"
+      ],
+      "next_verification": "Patent filings analysis, product reviews"
+    },
+    {
+      "moat_mechanism": "Scale and integrated supply chain",
+      "observable_test": "Gross margin advantage over smaller competitors at equivalent product category; production cost per unit trend",
+      "comparison_basis": "Compare company's gross margin in scooters and two-wheelers vs peers if segment data available; track unit material cost over time",
+      "evidence_result": "Cannot verify segment margins; company overall gross margin 26.5% in Q1 2026, not indicative of advantage; may be pressured",
+      "financial_transmission": "Scale allows spreading fixed costs, negotiating better component prices, improving margin",
+      "strongest_counterevidence": "Larger competitor Yadea has far higher volume in two-wheelers, potentially better scale; scooter peers may match",
+      "status": "unproven",
+      "evidence_ids": [],
+      "next_verification": "Segment margin comparison when filings disclose"
+    }
+  ],
+  "valuation_buckets": [
+    {
+      "bucket": "Core operating earnings (two-wheeler + scooter + mower profit)",
+      "inclusion": "core",
+      "valuation_method": "PE on 2027E net profit (base case)",
+      "metric_and_period": "2027E Parent Net Profit 2,630 mn",
+      "metric_value": 2630.0,
+      "valuation_multiple": 17.0,
+      "ownership_pct": 100.0,
+      "haircut_pct": 0.0,
+      "equity_value_cny_mn": 44710.0,
+      "per_share_value_cny": 60.759789549071584,
+      "overlap_key": "core",
+      "double_counting_treatment": "Core earnings already includes all consolidated operating segments",
+      "evidence_ids": [
+        "KPE05"
+      ],
+      "missing_inputs": [
+        "Share count for per-share value"
+      ]
+    },
+    {
+      "bucket": "Option value from ATV and e-bike success",
+      "inclusion": "optionality",
+      "valuation_method": "Scenario-based DCF, probability weighted",
+      "metric_and_period": "Hypothetical 2030 EBIT 500 mn at 15x, discounted back, times 25% probability",
+      "metric_value": null,
+      "valuation_multiple": null,
+      "ownership_pct": 100.0,
+      "haircut_pct": 0.0,
+      "equity_value_cny_mn": 1500.0,
+      "per_share_value_cny": 2.03846308037592,
+      "overlap_key": "option",
+      "double_counting_treatment": "Excluded from core earnings projection; added only if successful scale happens",
+      "evidence_ids": [],
+      "missing_inputs": [
+        "Revenue and margin evidence for these segments"
+      ]
+    },
+    {
+      "bucket": "Net cash / excess cash",
+      "inclusion": "core",
+      "valuation_method": "Book value adjustment",
+      "metric_and_period": "2025 year-end net cash (cash - debt) unknown; assume 2 bn CNY based on strong cash position and buyback",
+      "metric_value": 2000.0,
+      "valuation_multiple": 1.0,
+      "ownership_pct": 100.0,
+      "haircut_pct": 0.0,
+      "equity_value_cny_mn": 2000.0,
+      "per_share_value_cny": 2.71795077383456,
+      "overlap_key": "core",
+      "double_counting_treatment": "Added to core value; must be adjusted for minority interest and future capex needs",
+      "evidence_ids": [],
+      "missing_inputs": [
+        "Actual net cash from balance sheet"
+      ]
+    }
+  ],
+  "valuation_closure": {
+    "current_price_cny": 44.22,
+    "diluted_share_count_mn": 735.8485,
+    "core_value_per_share_cny": null,
+    "probability_weighted_fair_value_per_share_cny": 47.3602922340672,
+    "option_value_per_share_cny": null,
+    "other_adjustments_per_share_cny": null,
+    "fair_value_per_share_cny": 47.3602922340672,
+    "expected_return_pct": 7.101520203679801,
+    "formula": "Cannot compute without share count",
+    "rating_consistency_check": "Cannot perform without fair value vs price",
+    "double_counting_checks": [
+      "Core bucket already includes all consolidated earnings; ATV/e-bike optionality excluded from core; net cash added separately but would need to be consolidated in equity value check"
+    ],
+    "status": "partial",
+    "missing_inputs": [
+      "Current trading price",
+      "Diluted share count",
+      "Detailed balance sheet for net cash",
+      "OCF/FCF for DCF verification",
+      "resolve duplicate valuation overlap keys: core"
+    ]
+  },
+  "llm_analysis_layer": {
+    "business_question_tree": [
+      "Consumer demand: How resilient is premium e-bike demand in China given macro headwinds? What is the price elasticity?",
+      "Channel inventory: Are dealers overstocked going into Q3, risking order cuts?",
+      "Mower adoption rate: What is the churn of mowing robot users after first season? How does it vary by region?",
+      "Competition: Is Husqvarna planning a wireless mower at a lower price point?",
+      "Capital allocation: Is management willing to slow investment in e-bikes/ATV if losses persist beyond 2027?",
+      "Regulatory: Will new national standards for e-bikes increase costs for smart features?"
+    ],
+    "profit_pool_priority": "Electric two-wheelers are the dominant profit pool (>60% of operating profit) and the primary driver of near-term earnings. The mowing robot segment, while smaller, has the highest growth and margin potential, and its valuation impact is outsized because it determines whether the company deserves a technology/high-growth multiple. Scooters provide stable mid-single-digit profit but little growth. ATV and e-bikes are currently cash drains. Valuation sensitivity: two-wheeler margin a 1pp change shifts EPS ~10%, mower revenue growth a 20% swing changes EPS ~5% via operating leverage. Prioritize accurate two-wheeler volume and ASP, then mower revenue trajectory and breakeven timeline.",
+    "competition_and_substitution_analysis": "In two-wheelers, the main threat is Yadea and Aima leveraging their massive scale to offer similar smart features at lower prices, compressing Ninebot's ASP premium. We estimate if premium gap narrows by 15%, revenue growth could slow to low single digits, cutting 2027E EPS by ~20%. In mowers, the substitutability risk comes from Husqvarna transitioning to wireless and offering an end-to-end solution with dealer network advantage. However, Ninebot's product is already 2-3 years ahead in user experience; the key is whether they can hold the tech lead. In scooters, the risk is low but omnipresent. New entrants like DJI could enter mobile robotics leveraging their vision tech, posing a credible threat by 2028.",
+    "qualitative_to_quantitative_bridge": "We have strong qualitative evidence that mower demand is structurally growing (IDC data, broker checks) and that Ninebot product receives positive reviews. However, we lack quantitative data: exact unit sales, ASP, gross margins, and R&D spend allocation. To bridge to model, we used broker-supplied revenue estimates of ~2 bn for robots in 2025 and ~4.5 bn in 2026, with margin negative but improving. Without audited segment data, these numbers are fuzzy; the margin of error on mower EBIT could be ±200 mn. Must retrieve Chinese National Intellectual Property Administration patent data, European retailer sell-out data, and official segment reporting.",
+    "expectation_gap_analysis": "Current market price around ? (missing), but PE TTM 21.6x and 5-year PE percentile 12.7 suggests the stock is cheap relative to its own history. However, implied TTM earnings of 1,505 mn vs latest annual 1,758 mn indicates the market is already pricing in a ~14% profit decline. Our base case 2026E profit 1,940 mn represents a 10% growth from FY2025, implying the market may be underestimating recovery, creating a positive expectation gap if our thesis is correct. But the gap could be explained by FX headwind and margin concerns not fully captured in our base assumptions. If the market prices in bear case effectively, the current PE may be justified. The key test: Q2 2026 results - if revenue >27 bn and operating profit turns positive sequence, the market may re-rate.",
+    "red_team_counterarguments": [
+      "Bull red team: The bull case assumes smooth margin recovery and no FX shock. But if RMB appreciates sharply against USD/EUR, earnings could miss by 15%, reversing any multiple expansion. Also, mower competition could intensify earlier than expected, pushing breakeven out beyond 2028.",
+      "Bear red team: The bear case perhaps overstates risk. Even in a slowdown, company's premium brand and smart features provide some demand resilience; consumers may trade down but within Ninebot rather than switch. Also, strong contract liabilities (18.7 bn) suggest locked-in demand and healthy dealer appetite. If cost control delivers margin surprise, stock could rapidly recover."
+    ],
+    "valuation_explanation": "We value the core business at 17x 2027E net profit (2,630 mn), reflecting a growth-adjusted PE. The multiple is slightly below historical average but above current PE of 11.6x (on 2027 broker estimate) due to improved visibility. We add option value for emerging segments at 1.5 bn and net cash at 2 bn, giving equity value of ~48.2 bn CNY. On a per-share basis (missing), this would be compared to market cap of 32.5 bn, suggesting potential upside of ~48%. However, the gap also depends on share count (if shares ~700 mn, core value per share ~64 CNY, total fair value ~69 CNY, upside from current price maybe significant). Sensitivity: each 1x multiple change shifts fair value by ~0.15 bn; each 10% profit change shifts by ~2.6 bn.",
+    "final_editorial_synthesis": "Ninebot is a consumer growth story with multiple product cycles. The core narrative is an electric two-wheeler brand that is outperforming a weak industry, combined with a rapidly growing autonomous mower business that could reshape the company's growth profile. The short-term overhang is foreign exchange, which obscures the real operating performance and has punished the stock. H2 2026 offers a catalyst: low base effects, new two-wheeler models, and seasonal mower sales should drive sequential improvement. If the company delivers on these, the market will likely re-rate from a value trap multiple to a growth multiple. Key risks: competition in both businesses, execution in new launches, and capital allocation. Overall, the risk/reward is favorable, but the picture requires validation of cash generation and segment-level profitability.",
+    "evidence_boundaries": []
+  },
+  "handoff_manifest": {
+    "handoff_version": "underwriting-v2",
+    "source_of_truth": "structured_research.underwriting_packet",
+    "frozen_reported_facts": [
+      "FY2025 consolidated revenue CNY 21,277.88 mn (EV010)",
+      "FY2025 parent net profit CNY 1,758.17 mn (EV010)",
+      "Q1 2026 revenue CNY 5,869.97 mn (EV009)",
+      "Q1 2026 parent net profit CNY 203.37 mn (EV009)",
+      "Gross margin 26.54%, Operating margin 4.16%, Net margin 3.46% in Q1 2026 (EV012-14)",
+      "Market cap as of 2026-07-31 CNY 32,539 mn (EV042)",
+      "PE TTM 21.62x (EV043)"
+    ],
+    "analyst_estimates": [
+      "2026E-2028E revenue and net profit derived from broker KPE05 (unverified)",
+      "Segment growth rates and margin assumptions are judgment-based, not company guidance"
+    ],
+    "unresolved_model_cells": [
+      "Diluted share count",
+      "Segment-level revenue, gross margin, operating profit",
+      "FY2025 consolidated gross margin, operating margin",
+      "OCF, Capex, FCF for all periods",
+      "Net cash balance",
+      "EPS for all scenarios"
+    ],
+    "downstream_must_preserve": [
+      "Three-year consolidated forecast lines (revenue, profit, margins)",
+      "All business unit definitions and segment models",
+      "Thesis financial bridges B1-B3",
+      "Valuation buckets and closure structure",
+      "Scenario probabilities and bull/base/bear assumptions"
+    ]
+  },
+  "evidence_change_rules": [
+    {
+      "evidence_id": "KPE01",
+      "affected_segment": "consolidated",
+      "affected_variable": "market_share",
+      "old_assumption": "no explicit market share in model",
+      "new_assumption": "unchanged",
+      "financial_transmission": "none until quantified",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "KPE03",
+      "affected_segment": "consolidated",
+      "affected_variable": "asp_or_price",
+      "old_assumption": "no explicit ASP in model",
+      "new_assumption": "unchanged",
+      "financial_transmission": "none until quantified",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "KPE05",
+      "affected_segment": "consolidated",
+      "affected_variable": "segment_volume",
+      "old_assumption": "missing segment forecast",
+      "new_assumption": "adopted broker estimate as base case placeholder",
+      "financial_transmission": "Revenue 2026E 27.66 bn, 2027E 33.19 bn, 2028E 38.83 bn; net profit 1.94 bn, 2.63 bn, 3.30 bn",
+      "probability_before_after": "base scenario probability remains 50%",
+      "disposition": "accepted as provisional analytical input",
+      "verification_gate": "Must be rejected if Q2 2026 actuals materially differ or official guidance diverges"
+    },
+    {
+      "evidence_id": "KPE02",
+      "affected_segment": "consolidated",
+      "affected_variable": "unmapped",
+      "old_assumption": "no impact",
+      "new_assumption": "unchanged",
+      "financial_transmission": "none",
+      "probability_before_after": "unchanged",
+      "disposition": "watch",
+      "verification_gate": "cross-check with any official quality certification"
+    },
+    {
+      "evidence_id": "KPE04",
+      "affected_segment": "consolidated/unmapped",
+      "affected_variable": "market_share",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch_unchanged",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "KPE06",
+      "affected_segment": "consolidated/unmapped",
+      "affected_variable": "segment_volume",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch_unchanged",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "KPE07",
+      "affected_segment": "consolidated/unmapped",
+      "affected_variable": "segment_volume",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch_unchanged",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "KPE08",
+      "affected_segment": "consolidated/unmapped",
+      "affected_variable": "segment_margin",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch_unchanged",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "KPE09",
+      "affected_segment": "consolidated/unmapped",
+      "affected_variable": "segment_volume",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch_unchanged",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "KPE10",
+      "affected_segment": "consolidated/unmapped",
+      "affected_variable": "segment_volume",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch_unchanged",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "KPE11",
+      "affected_segment": "consolidated/unmapped",
+      "affected_variable": "segment_volume",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch_unchanged",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    },
+    {
+      "evidence_id": "KPE12",
+      "affected_segment": "consolidated/unmapped",
+      "affected_variable": "segment_volume",
+      "old_assumption": "None",
+      "new_assumption": "unchanged",
+      "financial_transmission": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch_unchanged",
+      "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use"
+    }
+  ],
+  "reconciliation_checks": [
+    "Revenue growth rate consistency: FY2025 actual 21,277.88 mn to 2026E 27,660 mn implies 30% growth; Q1 2026 revenue 5,869.97 mn annualized simple 23,480 mn, seasonality-adjusted 31,740 mn, so 27,660 mn is within range but leans to lower end; plausibility check okay.",
+    "Net profit margin check: 2026E net profit 1,940 mn / revenue 27,660 mn = 7.0% net margin, up from FY2025's 8.3% (1,758/21,278), reflecting near-term pressure but still positive.",
+    "EPS impossible without shares; parent profit identity holds with reported FY2025 EPS if one could verify, but missing.",
+    "No double-counting of segment profits; valuation buckets use consolidated net profit, option value separate."
+  ],
+  "analyst_instructions": [
+    "The three-year model uses unverified broker estimates as base; immediately replace with company guidance or updated consensus when available.",
+    "Retrieve diluted share count from Tushare (stock_basic total_share, daily_basic total_share, or recent filing) and compute EPS and per-share valuation; this is the most critical missing input.",
+    "If Q2 2026 results (expected mid-Aug) differ materially from broker estimates (revenue growth near 30%, net profit down slightly on FX), adjust the base case and scenario probabilities.",
+    "When segment revenue and margin become available from half-year or annual reports, populate segment models BM1-BU5 with actual weights and margins to refine profit-pool analysis.",
+    "Track cash flow statement: if OCF remains negative into H2 2026, reassess FCF sustainability and working capital risks.",
+    "Monitor anti-dumping investigation on mowing robots; any preliminary tariff ruling could materially change the bull/bear probabilities for BU4."
+  ],
+  "preprocessing_notes": [
+    "Semantic LLM failed to return schema-valid JSON; fallback error suggests deepseek structured output limitation. Line items built manually from deterministic evidence and broker KPEs.",
+    "Evidence payload lacked segment-level revenue/cost numbers; segment models are therefore analytical and marked with missing inputs.",
+    "No Tushare stock_basic or daily_basic provided; share count unresolved.",
+    "unknown share-count evidence id removed",
+    "diluted shares set deterministically: 735.848 mn (market_cap_div_close)",
+    "removed stale missing-share-count readiness reason after deterministic restoration",
+    "registered capital differs from current market-implied shares by 99.99%; current same-snapshot market shares retained because registered capital may lag effective corporate actions",
+    "valuation current price restored from market snapshot: CNY 44.2200",
+    "bull fair value replaced by deterministic EPS x PE calculation.",
+    "base fair value replaced by deterministic EPS x PE calculation.",
+    "bear fair value replaced by deterministic EPS x PE calculation.",
+    "operating model driver coverage (volume_price_cost): capacity, utilization, volume, price/ASP, unit/input cost, spread/margin, capex/ROIC"
+  ]
+}

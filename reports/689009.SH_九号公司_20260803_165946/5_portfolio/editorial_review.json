@@ -1,0 +1,30 @@
+{
+  "review": {
+    "revision_required": true,
+    "overall_assessment": "Deterministic quality router found actionable issues; send them directly to the bounded revision pass.",
+    "revision_instructions": [
+      "public thesis chapter missing strongest counterargument/boundary",
+      "public thesis chapter missing market-pricing implication"
+    ]
+  },
+  "review_status": {
+    "mode": "deterministic_issue_router",
+    "agent": "Sell-Side Research Editor",
+    "structured_error": ""
+  },
+  "revision_requested": true,
+  "revision_applied": true,
+  "revision_status": {
+    "mode": "schema_prompt_structured",
+    "agent": "Portfolio Manager Editorial Revision",
+    "structured_error": ""
+  },
+  "initial_handoff_issues": [],
+  "initial_analytical_issues": [
+    "public thesis chapter missing strongest counterargument/boundary",
+    "public thesis chapter missing market-pricing implication"
+  ],
+  "remaining_handoff_issues": [],
+  "remaining_analytical_issues": [],
+  "revision_rejection_reasons": []
+}

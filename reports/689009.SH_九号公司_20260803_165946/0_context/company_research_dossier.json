@@ -1,0 +1,1886 @@
+{
+  "schema_version": 1,
+  "symbol": "689009.SH",
+  "as_of_date": "2026-08-03",
+  "reader_contract": {
+    "audience": "普通投资者",
+    "principle": "数据用于权威佐证，不能替代公司、产业链与投资逻辑。",
+    "formal_rating_position": "开篇投资摘要，并在第七章末尾重申",
+    "chapter_count": 7
+  },
+  "source_policy": {
+    "A_hard_fact": {
+      "sources": "公司财报、交易所/公司公告、官方业绩指引",
+      "allowed_use": "冻结历史事实和模型基线"
+    },
+    "B_reproducible": {
+      "sources": "Tushare结构化数据、程序计算、官方统计、行业协会",
+      "allowed_use": "财务计算、行业比较和可复核代理变量"
+    },
+    "C_external_expectation": {
+      "sources": "具名卖方报告、多机构一致预期",
+      "allowed_use": "构建市场预期与预测分歧；单家机构不得冒充一致预期"
+    },
+    "D_alternative_intelligence": {
+      "sources": "知识星球、渠道调研、专家纪要、私域卖方推送",
+      "allowed_use": "量化模型变更、情景概率变化、验证日历变化或明确拒绝"
+    },
+    "E_background": {
+      "sources": "普通新闻、政策评论、行业叙事",
+      "allowed_use": "解释背景；不得单独改变盈利预测或评级"
+    }
+  },
+  "company_introduction": {
+    "business_archetype": "Product manufacturer with multiple consumer durable and service robot lines: electric two-wheelers, scooters, balance scooters, all-terrain vehicles, mowing robots, e-bikes.",
+    "value_proposition_and_customers": "Simplifies and makes mobility and yard work convenient and fun. Sells smart personal electric vehicles and autonomous mowing robots globally through distributors, retail channels, and direct-to-consumer. Key customers: urban commuters, suburban families, fleet operators.",
+    "revenue_equation": "Consolidated Revenue = Σ (Product_i volume × ASP_i) across regions and channels. Volume driven by end-user demand, dealer inventory, and new model launches. ASP affected by product mix, promotions, and geographic pricing.",
+    "profit_equation": "Gross Profit = Revenue - (Material + Conversion + Warranty). Operating Profit = Gross Profit - R&D - Selling - Administrative - FX gains/losses. Net Profit (parent) = Oper. Profit + Financial Income/Expense - Income Tax - Minority Interest.",
+    "cash_flow_equation": "OCF = Net profit + D&A - ΔWorking Capital (focus on receivables, inventory, contract liabilities). FCF = OCF - Capex. Working capital sensitive to dealer stocking, seasonal build, and customer advances.",
+    "capital_intensity_and_reinvestment": "Moderate capex: tooling/molds for new models, assembly line expansion, headquarters construction. R&D spending for next-generation platforms. Cash also used for strategic equity investments and partnerships.",
+    "key_unknowns": [
+      "Can electric two-wheeler market share gains continue without heavy price promotions?",
+      "Will mowing robot segment achieve sustainable profitability after initial scaling phase?",
+      "When will e-bike and all-terrain vehicle segments reach positive operating profit?",
+      "Is the aggressive revenue growth target for 2026E supported by macro and channel inventory?"
+    ]
+  },
+  "industry_chain": {
+    "operating_model_family": "volume_price_cost",
+    "upstream_cost_and_supply": [
+      {
+        "segment": "Electric Two-Wheelers (BU1)",
+        "supply_capacity": "Industry capacity abundant; top two players Yadea and Aima hold large shares; surplus capacity leads to price pressure in low-end, but premium segment differentiated.",
+        "unit_cost_inputs": "Battery (lithium) and motor cost sensitive to commodity; motor and controller mainly sourced from China ecosystem; scale benefits partially offset rising raw material."
+      },
+      {
+        "segment": "Electric Scooters & Balance Scooters (BU2)",
+        "supply_capacity": "Many Chinese manufacturers; competitive but company has Segway brand premium.",
+        "unit_cost_inputs": "Benefiting from standardized components; cost improvements from platform design."
+      },
+      {
+        "segment": "All-Terrain Vehicles (BU3)",
+        "supply_capacity": "Dominant players with strong brand; new entrant must gain trust and service capability.",
+        "unit_cost_inputs": "High initial tooling and certification costs; component costs similar to peers."
+      },
+      {
+        "segment": "Service Robots (BU4)",
+        "supply_capacity": "Husqvarna (market leader), Worx, and startups; company claims leading position in Europe.",
+        "unit_cost_inputs": "Cost dominated by sensors, chips, battery; benefiting from scale and vertical integration."
+      },
+      {
+        "segment": "E-bikes and Other Emerging (BU5)",
+        "supply_capacity": "Fragmented market with many brands; competitive on price and features.",
+        "unit_cost_inputs": "High cost due to small scale and premium components."
+      }
+    ],
+    "downstream_demand_and_pricing": [
+      {
+        "segment": "Electric Two-Wheelers (BU1)",
+        "customers_channel": "Domestic: retail stores, e-commerce, brand stores; Export: distributors in Southeast Asia",
+        "demand": [
+          "Industry replacement cycle (new national standard drove scrappage)",
+          "Consumer preference shift from fuel motorcycles to electric",
+          "Urban regulation favoring e-bikes",
+          "Product refresh and technological upgrades (smart features)"
+        ],
+        "price_asp": "ASPs higher than mass-market peers due to smart features and brand; recent new models maintaining price floor."
+      },
+      {
+        "segment": "Electric Scooters & Balance Scooters (BU2)",
+        "customers_channel": "Retail consumers (2C) and sharing fleet operators (2B) globally",
+        "demand": [
+          "High oil prices encouraging micro-mobility adoption",
+          "Replacement demand from sharing operators",
+          "Urban tourism and last-mile commuting"
+        ],
+        "price_asp": "ASPs relatively stable; 2B contracts have volume discounts."
+      },
+      {
+        "segment": "All-Terrain Vehicles (BU3)",
+        "customers_channel": "US and European dealers, online in some markets",
+        "demand": [
+          "Outdoor recreation spending",
+          "Expansion of dealer network",
+          "Product competitiveness vs incumbents Polaris, BRP"
+        ],
+        "price_asp": "Competitive pricing required to gain share; ASP lower than established brands."
+      },
+      {
+        "segment": "Service Robots (BU4)",
+        "customers_channel": "Homeowners via retail and dealer channels in Europe (initially), expanding to US",
+        "demand": [
+          "Rapid category awareness for smart gardening tools",
+          "Labor shortage and lawn care cost inflation",
+          "Technology leap from boundary-wire to wireless/vision systems"
+        ],
+        "price_asp": "ASP premium reflecting advanced navigation and app integration; price points €1,000-€3,000."
+      },
+      {
+        "segment": "E-bikes and Other Emerging (BU5)",
+        "customers_channel": "Specialty bike shops, online",
+        "demand": [
+          "European e-bike boom, cycling infrastructure build",
+          "Government subsidies"
+        ],
+        "price_asp": "Mid-high ASP, reflecting motor and battery cost."
+      }
+    ]
+  },
+  "profit_pools": {
+    "reported_or_analytical_units": [
+      {
+        "unit_id": "BU1",
+        "unit_name": "Electric Two-Wheelers",
+        "unit_type": "product",
+        "disclosure_basis": "analytical",
+        "parent_unit": "company",
+        "economic_role": "Largest revenue and profit contributor; domestic market with smart, high-end positioning; export expansion in Southeast Asia",
+        "primary_operating_archetype": "volume_price_cost",
+        "secondary_operating_archetype": "",
+        "revenue_driver_equation": "Revenue = (Domestic units sold × ASP_dom) + (Export units × ASP_exp); volume depends on new model launches, retail channel expansion, online sales, and industry demand.",
+        "profit_driver_equation": "Gross margin = ASP - (battery + motor + frame + electronics) - manufacturing labor; operating profit absorbs R&D, marketing, channel rebates.",
+        "cash_and_capital_equation": "Working capital: dealer receivables (mostly short-term) and finished-goods inventory; capex for new painting/assembly lines and tooling.",
+        "reported_metrics": [
+          "Volume and ASP estimates from sell-side channel checks (KPE03,KPE04)",
+          "Market share data (KPE09)"
+        ],
+        "evidence_ids": [
+          "KPE03",
+          "KPE04",
+          "KPE05",
+          "KPE09"
+        ],
+        "missing_inputs": [
+          "Filing-reported segment revenue, gross margin, unit volume, ASP"
+        ],
+        "next_verification": "Next half-year/annual report segment disclosure (product split)"
+      },
+      {
+        "unit_id": "BU2",
+        "unit_name": "Electric Scooters & Balance Scooters",
+        "unit_type": "product",
+        "disclosure_basis": "analytical",
+        "parent_unit": "company",
+        "economic_role": "Mature segment; revenue from both own-brand retail (2C) and sharing-operator supply (2B); reliable cash generator",
+        "primary_operating_archetype": "volume_price_cost",
+        "secondary_operating_archetype": "",
+        "revenue_driver_equation": "Revenue = (2C units × ASP) + (2B units × contract ASP); 2B demand depends on sharing fleet expansion and replacement cycles.",
+        "profit_driver_equation": "Gross margin moderate; scale benefits from component standardization; profit sensitive to ASP pressure in 2B.",
+        "cash_and_capital_equation": "Receivables from sharing operators may be longer; inventory of finished units moderate; capex limited.",
+        "reported_metrics": [],
+        "evidence_ids": [
+          "KPE03",
+          "KPE04"
+        ],
+        "missing_inputs": [
+          "Segment revenue, gross margin, volume split between 2C/2B"
+        ],
+        "next_verification": "Filing segment note"
+      },
+      {
+        "unit_id": "BU3",
+        "unit_name": "All-Terrain Vehicles (ATV)",
+        "unit_type": "product",
+        "disclosure_basis": "analytical",
+        "parent_unit": "company",
+        "economic_role": "Growth segment; still scaling, moving toward positive operating profit; competes with established powersports brands",
+        "primary_operating_archetype": "volume_price_cost",
+        "secondary_operating_archetype": "",
+        "revenue_driver_equation": "Revenue = units shipped × ASP; driven by US/European outdoor recreation demand and dealer network build-out.",
+        "profit_driver_equation": "Currently low/negative margin due to high initial fixed costs and development expense; profitability expected with scale.",
+        "cash_and_capital_equation": "Capex for assembly lines and tooling; inventory of vehicle kits; receivables from dealers.",
+        "reported_metrics": [],
+        "evidence_ids": [
+          "KPE03",
+          "KPE04"
+        ],
+        "missing_inputs": [
+          "Segment revenue, profit/loss, volume"
+        ],
+        "next_verification": "Annual report segment profit/loss"
+      },
+      {
+        "unit_id": "BU4",
+        "unit_name": "Service Robots (Mowing Robots)",
+        "unit_type": "product",
+        "disclosure_basis": "analytical",
+        "parent_unit": "company",
+        "economic_role": "High-growth second curve; currently a significant revenue contributor (2025 revenue ~2 bn per broker) with improving margin; strategic focus",
+        "primary_operating_archetype": "volume_price_cost",
+        "secondary_operating_archetype": "",
+        "revenue_driver_equation": "Revenue = (European units × ASP_EU) + (US expansion units × ASP_US); growth tied to category awareness, product iteration, and channel expansion.",
+        "profit_driver_equation": "Gross margin healthy due to high tech content; operating margin improving with scale, but still absorbing R&D and marketing.",
+        "cash_and_capital_equation": "Requires inventory of components (semiconductors, sensors); seasonal build for Q2/Q3 selling season.",
+        "reported_metrics": [
+          "Revenue >10 bn from official 2025 annual report? Not verified; broker mentioned '机器人业务营收20.0亿元' (KPE05)"
+        ],
+        "evidence_ids": [
+          "KPE05",
+          "EV036"
+        ],
+        "missing_inputs": [
+          "Filing segment revenue and margin; precise cost structure"
+        ],
+        "next_verification": "Annual report segment note for robots"
+      },
+      {
+        "unit_id": "BU5",
+        "unit_name": "E-bikes and Other Emerging Products",
+        "unit_type": "product",
+        "disclosure_basis": "analytical",
+        "parent_unit": "company",
+        "economic_role": "Early-stage; includes e-bikes for European market and other mobility concepts; currently negligible profit, strategic optionality",
+        "primary_operating_archetype": "volume_price_cost",
+        "secondary_operating_archetype": "",
+        "revenue_driver_equation": "Revenue = initial sales to early adopters and dealers; ramping slowly.",
+        "profit_driver_equation": "Loss-making due to R&D and market entry costs.",
+        "cash_and_capital_equation": "Investment spending for product development and certification.",
+        "reported_metrics": [],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "Revenue, cost, investment level"
+        ],
+        "next_verification": "Any product launch announcement"
+      }
+    ],
+    "segment_models": [
+      {
+        "segment": "Electric Two-Wheelers (BU1)",
+        "products_or_services": "Smart electric bicycles and electric motorcycles with IoT app connectivity",
+        "customers_and_channel": "Domestic: retail stores, e-commerce, brand stores; Export: distributors in Southeast Asia",
+        "revenue_weight_pct": null,
+        "profit_weight_pct": null,
+        "base_period": "2025",
+        "base_revenue_value": null,
+        "base_revenue_unit": "CNY mn",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [
+          "Industry replacement cycle (new national standard drove scrappage)",
+          "Consumer preference shift from fuel motorcycles to electric",
+          "Urban regulation favoring e-bikes",
+          "Product refresh and technological upgrades (smart features)"
+        ],
+        "industry_supply_and_capacity": "Industry capacity abundant; top two players Yadea and Aima hold large shares; surplus capacity leads to price pressure in low-end, but premium segment differentiated.",
+        "volume_share_utilization": "Company volume growing ahead of industry; estimated domestic market share ~3% in 2025, rising (KPE09). Premium positioning limits TAM but supports higher margin.",
+        "price_asp_take_rate": "ASPs higher than mass-market peers due to smart features and brand; recent new models maintaining price floor.",
+        "unit_cost_and_input_prices": "Battery (lithium) and motor cost sensitive to commodity; motor and controller mainly sourced from China ecosystem; scale benefits partially offset rising raw material.",
+        "margin_and_operating_leverage": "Gross margin estimated >25%; operating leverage from SG&A dilution as volume grows; near-term pressure from promotions and new model launch costs.",
+        "working_capital_and_cash_conversion": "Receivables from dealers typically 30-60 days; inventory turnover improving with better forecasting.",
+        "prosperity_level": "high_midcycle_growing",
+        "marginal_direction": "improving",
+        "causal_analysis": "Demand tailwind from policy and fuel price; supply disciplined in premium segment; company gaining share through innovation; margin recovery expected in H2 2026 as new models ramp and cost absorption improves.",
+        "valuation_treatment": "Core segment valued on PE multiple of future normalized earnings; margin expansion is key to valuation upside.",
+        "strongest_counterevidence": [
+          "If economic slowdown reduces discretionary spending on premium e-bikes",
+          "If Yadea/Aima aggressively push into smart/graphic segment lowering ASP premium"
+        ],
+        "evidence_ids": [
+          "KPE03",
+          "KPE04",
+          "KPE05",
+          "KPE09"
+        ],
+        "missing_inputs": [
+          "Revenue, volume, ASP, segment margin from filings"
+        ],
+        "next_verification": "Q2 2026 segment data from broker or filing"
+      },
+      {
+        "segment": "Electric Scooters & Balance Scooters (BU2)",
+        "products_or_services": "Self-balancing electric scooters, kick-scooters for personal and commercial use",
+        "customers_and_channel": "Retail consumers (2C) and sharing fleet operators (2B) globally",
+        "revenue_weight_pct": null,
+        "profit_weight_pct": null,
+        "base_period": "2025",
+        "base_revenue_value": null,
+        "base_revenue_unit": "CNY mn",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [
+          "High oil prices encouraging micro-mobility adoption",
+          "Replacement demand from sharing operators",
+          "Urban tourism and last-mile commuting"
+        ],
+        "industry_supply_and_capacity": "Many Chinese manufacturers; competitive but company has Segway brand premium.",
+        "volume_share_utilization": "Steady volume, slight growth; sharing tender wins provide visibility.",
+        "price_asp_take_rate": "ASPs relatively stable; 2B contracts have volume discounts.",
+        "unit_cost_and_input_prices": "Benefiting from standardized components; cost improvements from platform design.",
+        "margin_and_operating_leverage": "Stable gross margin ~20-25%; operating margin benefits from distribution scale.",
+        "working_capital_and_cash_conversion": "2B receivables can be 60-90 days, but generally manageable.",
+        "prosperity_level": "medium_stable",
+        "marginal_direction": "stable",
+        "causal_analysis": "Mature product with steady cash generation; profitability more exposed to FX than unit economics.",
+        "valuation_treatment": "Core/stable earnings, valued at lower multiple due to slower growth.",
+        "strongest_counterevidence": [
+          "Regulatory bans on scooters in some cities",
+          "Sharing operator consolidation reducing demand"
+        ],
+        "evidence_ids": [
+          "KPE03"
+        ],
+        "missing_inputs": [
+          "Segment revenue, margin from filings"
+        ],
+        "next_verification": "Annual report product split"
+      },
+      {
+        "segment": "All-Terrain Vehicles (BU3)",
+        "products_or_services": "Four-wheel off-road vehicles for recreation/utility",
+        "customers_and_channel": "US and European dealers, online in some markets",
+        "revenue_weight_pct": null,
+        "profit_weight_pct": null,
+        "base_period": "2025",
+        "base_revenue_value": null,
+        "base_revenue_unit": "CNY mn",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [
+          "Outdoor recreation spending",
+          "Expansion of dealer network",
+          "Product competitiveness vs incumbents Polaris, BRP"
+        ],
+        "industry_supply_and_capacity": "Dominant players with strong brand; new entrant must gain trust and service capability.",
+        "volume_share_utilization": "Small volume, high growth rate; utilization low, building path to breakeven.",
+        "price_asp_take_rate": "Competitive pricing required to gain share; ASP lower than established brands.",
+        "unit_cost_and_input_prices": "High initial tooling and certification costs; component costs similar to peers.",
+        "margin_and_operating_leverage": "Negative margin currently; operating leverage will turn positive after reaching volume threshold.",
+        "working_capital_and_cash_conversion": "Inventory build as product ramps; dealer terms standard.",
+        "prosperity_level": "early_stage_investing",
+        "marginal_direction": "improving",
+        "causal_analysis": "Potential profit contributor in 2027-2028 if scale achieved; but high risk of failure.",
+        "valuation_treatment": "Option value; not included in core PE valuation; could be valued via DCF/scenario if timeline clears.",
+        "strongest_counterevidence": [
+          "If established OEMs cut prices to defend share",
+          "If demand for powersports declines in key markets"
+        ],
+        "evidence_ids": [
+          "KPE03"
+        ],
+        "missing_inputs": [
+          "Segment revenue, loss, volume"
+        ],
+        "next_verification": "FY2026 annual report segment disclosure"
+      },
+      {
+        "segment": "Service Robots (BU4)",
+        "products_or_services": "Autonomous mowing robots (I2, X4, Terranox series)",
+        "customers_and_channel": "Homeowners via retail and dealer channels in Europe (initially), expanding to US",
+        "revenue_weight_pct": null,
+        "profit_weight_pct": null,
+        "base_period": "2025",
+        "base_revenue_value": null,
+        "base_revenue_unit": "CNY mn",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [
+          "Rapid category awareness for smart gardening tools",
+          "Labor shortage and lawn care cost inflation",
+          "Technology leap from boundary-wire to wireless/vision systems"
+        ],
+        "industry_supply_and_capacity": "Husqvarna (market leader), Worx, and startups; company claims leading position in Europe.",
+        "volume_share_utilization": "Shipments growing >100% yoy; capacity being added; utilization high in season.",
+        "price_asp_take_rate": "ASP premium reflecting advanced navigation and app integration; price points €1,000-€3,000.",
+        "unit_cost_and_input_prices": "Cost dominated by sensors, chips, battery; benefiting from scale and vertical integration.",
+        "margin_and_operating_leverage": "Gross margin >40% estimated; operating margin negative due to heavy R&D and marketing, but improving with scale.",
+        "working_capital_and_cash_conversion": "Seasonal: Q1 build, Q2/Q3 sell; high receivables from European dealers.",
+        "prosperity_level": "high_early_cycle",
+        "marginal_direction": "improving",
+        "causal_analysis": "Strong demand tailwind; differentiation from legacy products; margin inflection expected when sales pass fixed cost hurdle.",
+        "valuation_treatment": "High-growth segment; value attached via higher PE multiple on future earnings or separate DCF; currently contributes to consolidated revenue multiple.",
+        "strongest_counterevidence": [
+          "If competitors match technology and pricing erodes",
+          "Anti-dumping tariffs on Chinese mowers in Europe/US disrupt market"
+        ],
+        "evidence_ids": [
+          "KPE05",
+          "EV036"
+        ],
+        "missing_inputs": [
+          "Filing segment revenue, gross margin, EBIT"
+        ],
+        "next_verification": "Half-year 2026 segment note"
+      },
+      {
+        "segment": "E-bikes and Other Emerging (BU5)",
+        "products_or_services": "Electric bicycles for European market, possibly other micro-mobility products",
+        "customers_and_channel": "Specialty bike shops, online",
+        "revenue_weight_pct": null,
+        "profit_weight_pct": null,
+        "base_period": "2025",
+        "base_revenue_value": null,
+        "base_revenue_unit": "CNY mn",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [
+          "European e-bike boom, cycling infrastructure build",
+          "Government subsidies"
+        ],
+        "industry_supply_and_capacity": "Fragmented market with many brands; competitive on price and features.",
+        "volume_share_utilization": "Very early, minimal volume.",
+        "price_asp_take_rate": "Mid-high ASP, reflecting motor and battery cost.",
+        "unit_cost_and_input_prices": "High cost due to small scale and premium components.",
+        "margin_and_operating_leverage": "Negative; heavy investment phase.",
+        "working_capital_and_cash_conversion": "Inventory risk as channel fills.",
+        "prosperity_level": "nascent_investing",
+        "marginal_direction": "unknown",
+        "causal_analysis": "High optionality but unclear timeline to profitability; capital allocation risk.",
+        "valuation_treatment": "Option bucket only; no contribution to core value until path to profit emerges.",
+        "strongest_counterevidence": [
+          "Competition from established bike brands like Giant, Trek",
+          "Capital burn without demonstrable volume ramp"
+        ],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "Revenue, cost, investment plan, segment strategy"
+        ],
+        "next_verification": "Official product launch or segment disclosure"
+      }
+    ]
+  },
+  "competition_and_moat": {
+    "landscapes": [
+      {
+        "business_unit": "BU1 (Electric Two-Wheelers)",
+        "market_boundary": "Smart, connected electric bicycles/motorcycles in China and entry-level electric scooters in Southeast Asia",
+        "boundary_evidence": "Products feature app connectivity, OTA, and autonomous features not typical in basic e-bikes",
+        "structure_and_concentration": "Chinese market consolidated top 2 (Yadea, Aima) with ~60% share; high fragmentation in low-end; premium smart segment smaller but growing",
+        "direct_competitors": [
+          "Yadea Group",
+          "Aima Technology",
+          "Niu Technologies (smart niche)"
+        ],
+        "substitutes_and_customer_alternatives": [
+          "Traditional gasoline motorcycles/scooters",
+          "Public transportation, ride-hailing",
+          "Shared bicycles"
+        ],
+        "self_supply_and_new_entrants": [
+          "Existing motor manufacturers adding electric lines",
+          "Large EV makers entering small mobility"
+        ],
+        "comparison_dimensions": [
+          "Smart features",
+          "Range/performance",
+          "Brand/design",
+          "Price",
+          "Dealer network"
+        ],
+        "company_relative_position": "Leader in smart premium segment; market share ~3% overall but higher in >RMB 3000 category; strong brand loyalty",
+        "competitor_likely_response": "Yadea/Aima may launch competing smart models and use scale to price lower",
+        "financial_transmission": "If competitors erode ASP premium, gross margin could compress, leading to slower profit growth and lower valuation multiple",
+        "evidence_ids": [
+          "KPE04",
+          "KPE06"
+        ],
+        "evidence_status": "partial",
+        "missing_inputs": [
+          "Market share data by price tier from independent source"
+        ],
+        "next_verification": "Industry shipment data and company market share estimates"
+      },
+      {
+        "business_unit": "BU4 (Mowing Robots)",
+        "market_boundary": "Residential and light commercial autonomous mowers for lawns (Europe & North America)",
+        "boundary_evidence": "Wire-free RTK/vision navigation; app control; distinguishes from traditional boundary-wire models",
+        "structure_and_concentration": "Husqvarna dominant with ~50% share globally; company challenging with technology leap; Chinese competitors (Dreame, Roborock) also entering",
+        "direct_competitors": [
+          "Husqvarna (Automower series)",
+          "Worx (Landroid)",
+          "Robomow",
+          "Dreame Technology",
+          "Roborock"
+        ],
+        "substitutes_and_customer_alternatives": [
+          "Traditional corded/electric mowers",
+          "Manual lawn service"
+        ],
+        "self_supply_and_new_entrants": [
+          "Large outdoor power equipment makers (John Deere, Toro, etc.) may enter",
+          "Smart home companies adding garden robots"
+        ],
+        "comparison_dimensions": [
+          "Navigation tech (RTK, vision, lidar)",
+          "Installation ease (wireless)",
+          "Lawn management app",
+          "Price",
+          "Dealer/service support"
+        ],
+        "company_relative_position": "Top 2 in wireless segment; strong reviews; European channel presence; price competitive vs Husqvarna",
+        "competitor_likely_response": "Husqvarna reducing prices and improving navigation; Dreame aggressive on pricing",
+        "financial_transmission": "If margins compress due to price war, high growth may not translate into profit; could lower group multiple",
+        "evidence_ids": [
+          "KPE05",
+          "EV036"
+        ],
+        "evidence_status": "partial",
+        "missing_inputs": [
+          "Market share data by region",
+          "Competitor pricing and unit economics"
+        ],
+        "next_verification": "IDC or company shipment reports"
+      },
+      {
+        "business_unit": "BU2 (Scooters)",
+        "market_boundary": "Electric kick-scooters for personal and commercial (sharing) use globally",
+        "boundary_evidence": "Segway brand is key; used by Lime, Bird etc.",
+        "structure_and_concentration": "Many Chinese ODMs; company maintains brand premium through Segway",
+        "direct_competitors": [
+          "Xiaomi (brand partner/competitor)",
+          "Okai",
+          "Inokim"
+        ],
+        "substitutes_and_customer_alternatives": [
+          "Bicycles, walking, public transit"
+        ],
+        "self_supply_and_new_entrants": [
+          "Sharing operators could source directly from OEMs"
+        ],
+        "comparison_dimensions": [
+          "Brand",
+          "Reliability",
+          "Price",
+          "Supply chain"
+        ],
+        "company_relative_position": "Market leader in personal scooters via Segway; stable but low growth",
+        "competitor_likely_response": "OEM pricing pressure persists",
+        "financial_transmission": "Stable revenue but low growth, modest cash generation",
+        "evidence_ids": [],
+        "evidence_status": "partial",
+        "missing_inputs": [
+          "Market share data"
+        ],
+        "next_verification": "Industry reports"
+      },
+      {
+        "business_unit": "BU3 (ATV)",
+        "market_boundary": "Mid-range trail and sport utility ATVs, particularly in US",
+        "boundary_evidence": "Competition data from broker; target price-conscious buyers",
+        "structure_and_concentration": "Dominated by Polaris, Honda, BRP, Yamaha; high brand loyalty and dealer network barriers",
+        "direct_competitors": [
+          "Polaris",
+          "BRP (Can-Am)",
+          "Honda",
+          "Yamaha",
+          "CFMoto (Chinese entrant)"
+        ],
+        "substitutes_and_customer_alternatives": [
+          "UTVs, dirt bikes"
+        ],
+        "self_supply_and_new_entrants": [
+          "Chinese manufacturers like CFMoto are gaining share with low prices"
+        ],
+        "comparison_dimensions": [
+          "Price",
+          "Performance/reliability",
+          "Dealer network",
+          "Parts availability"
+        ],
+        "company_relative_position": "Late entrant with lower price; building reputation; still unproven",
+        "competitor_likely_response": "Established players may lower prices or introduce entry-level models",
+        "financial_transmission": "If scale not achieved quickly, continued losses and capital drain",
+        "evidence_ids": [],
+        "evidence_status": "partial",
+        "missing_inputs": [
+          "Market share, sales data"
+        ],
+        "next_verification": "ATV shipment data and dealer feedback"
+      }
+    ],
+    "competition_and_substitution_analysis": "In two-wheelers, the main threat is Yadea and Aima leveraging their massive scale to offer similar smart features at lower prices, compressing Ninebot's ASP premium. We estimate if premium gap narrows by 15%, revenue growth could slow to low single digits, cutting 2027E EPS by ~20%. In mowers, the substitutability risk comes from Husqvarna transitioning to wireless and offering an end-to-end solution with dealer network advantage. However, Ninebot's product is already 2-3 years ahead in user experience; the key is whether they can hold the tech lead. In scooters, the risk is low but omnipresent. New entrants like DJI could enter mobile robotics leveraging their vision tech, posing a credible threat by 2028.",
+    "claimed_mechanisms": [
+      "Brand and heritage (Segway label for global recognition, trusted for personal mobility)",
+      "Technology/R&D: smart battery management, IoT connectivity, autonomous navigation for mowers",
+      "Global distribution network and local subsidiaries in US, Europe, Asia",
+      "Scale in procurement and manufacturing across multiple product lines"
+    ],
+    "tests": [
+      {
+        "moat_mechanism": "Brand (Segway) in personal mobility",
+        "observable_test": "Global brand recognition and customer willingness to pay premium vs generic scooters",
+        "comparison_basis": "Compare ASP of Segway kick-scooters vs Xiaomi or private-label models on Amazon/retail; compare market share in Europe and US over past 3 years",
+        "evidence_result": "Unverified; broker claims 50% share in European scooter market (KPE04), but no hard data; ASP appears higher based on retail prices",
+        "financial_transmission": "Brand strength enables higher gross margin on scooters segment, contributing to stable cash flow",
+        "strongest_counterevidence": "Chinese ODMs improving quality and selling under their own brands, narrowing price gap",
+        "status": "unproven",
+        "evidence_ids": [
+          "KPE04"
+        ],
+        "next_verification": "Third-party brand survey and retailer pricing data"
+      },
+      {
+        "moat_mechanism": "R&D and technology in smart two-wheelers and mowing robots",
+        "observable_test": "Number of patents; product features (instant acceleration, app connectivity, autonomous navigation) vs peers; proportion of revenue spent on R&D",
+        "comparison_basis": "Compare R&D/sales ratio vs Yadea, Niu, Husqvarna; compare mower navigation accuracy in independent tests",
+        "evidence_result": "No hard data; management claims continuous innovation (EV036); Q&A highlights RTK/vision fusion advantage",
+        "financial_transmission": "Technological differentiation supports premium pricing and lowers churn, leading to higher revenue retention and margin",
+        "strongest_counterevidence": "Yadea and Niu also investing in smart features; mowing robot tech catching up with Husqvarna's satellite guidance",
+        "status": "unproven",
+        "evidence_ids": [
+          "EV036"
+        ],
+        "next_verification": "Patent filings analysis, product reviews"
+      },
+      {
+        "moat_mechanism": "Scale and integrated supply chain",
+        "observable_test": "Gross margin advantage over smaller competitors at equivalent product category; production cost per unit trend",
+        "comparison_basis": "Compare company's gross margin in scooters and two-wheelers vs peers if segment data available; track unit material cost over time",
+        "evidence_result": "Cannot verify segment margins; company overall gross margin 26.5% in Q1 2026, not indicative of advantage; may be pressured",
+        "financial_transmission": "Scale allows spreading fixed costs, negotiating better component prices, improving margin",
+        "strongest_counterevidence": "Larger competitor Yadea has far higher volume in two-wheelers, potentially better scale; scooter peers may match",
+        "status": "unproven",
+        "evidence_ids": [],
+        "next_verification": "Segment margin comparison when filings disclose"
+      }
+    ],
+    "structural_risks": [
+      "Intense competition in electric two-wheeler market (Yadea, Aima, others); risk of price wars",
+      "Regulatory changes: national standards for electric bicycles may affect product specifications and demand",
+      "Foreign exchange volatility: large proportion of revenue and costs in USD/EUR",
+      "Raw material cost fluctuations: lithium batteries, steel, semiconductors",
+      "Trade policy: anti-dumping investigations on mowers, tariffs on vehicles imported to US/Europe",
+      "Technology risk: new entrants with disruptive battery or autonomous technology"
+    ],
+    "interpretation_rule": "Chapter 2 owns market boundary, structure, direct competitors, substitutes and likely response; Chapter 4 owns relative advantage, observable proof and financial persistence."
+  },
+  "key_underwriting_questions": [
+    {
+      "question_id": "Q1",
+      "question": "Can electric two-wheeler revenue growth exceed 20% in 2026-2027 without sacrificing gross margin to a level that erodes operating profit?",
+      "why_it_matters": "Two-wheelers likely contribute >50% of revenue and profit; growth drives consolidated EPS and valuation multiple.",
+      "current_answer": "Broker estimates suggest 2026 volume growth low double-digit with slight margin pressure, but new models and price hikes in Q3 could support both volume and margin. Market share gains in premium segment support, but competition intensifies.",
+      "bull_evidence": [
+        "May 2026 online sales +78% yoy (KPE05)",
+        "Q3 target of 2.6m units (+70% yoy) implied by broker (KPE04)",
+        "Company's smart features and brand loyalty create differentiation"
+      ],
+      "bear_evidence": [
+        "Q1 2026 gross margin down 3.13pp yoy (EV012)",
+        "Raw material costs and promotional spending pressuring margins",
+        "Industry-wide price competition from Yadea/Aima pushing down premium ASP"
+      ],
+      "decisive_model_variables": [
+        "two_wheeler_revenue_growth_pct",
+        "two_wheeler_gross_margin_pct"
+      ],
+      "affected_financial_lines": [
+        "Consolidated Revenue",
+        "Gross Margin %",
+        "Operating Profit",
+        "Parent Net Profit"
+      ],
+      "evidence_ids": [
+        "EV012",
+        "KPE03",
+        "KPE04",
+        "KPE05"
+      ],
+      "missing_evidence": [
+        "Filing-reported segment revenue and margin for two-wheelers"
+      ],
+      "next_verification": "Q2 2026 results (mid-August) to see volume, ASP, and margin evolution"
+    },
+    {
+      "question_id": "Q2",
+      "question": "Will mowing robot segment achieve positive operating profit in 2026 and contribute meaningfully to consolidated net income?",
+      "why_it_matters": "This is the high-growth second curve that justifies a higher group PE; failure to profit would compress multiple.",
+      "current_answer": "Revenue grew >100% yoy, but with rising chip costs and seasonal marketing expense, EBIT still negative. Broker expects EBIT improvement in Q3 after amortization ends, but no guarantee of full-year profitability.",
+      "bull_evidence": [
+        "Q2 shipments doubled yoy, demand robust (KPE03)",
+        "Gross margin likely >40%, strong unit economics",
+        "IDC data shows category growing 63.8% in 2025"
+      ],
+      "bear_evidence": [
+        "Q1 2026 mower EBIT still negative due to chip cost and rebate amortization (KPE03)",
+        "Anti-dumping investigation in Europe, potential tariffs",
+        "New entrants (e.g., Dreame, Roborock) increasing competitive intensity"
+      ],
+      "decisive_model_variables": [
+        "mower_revenue_growth_pct",
+        "mower_ebit_margin"
+      ],
+      "affected_financial_lines": [
+        "Revenue",
+        "Operating Profit",
+        "Segment profit"
+      ],
+      "evidence_ids": [
+        "KPE03",
+        "KPE05"
+      ],
+      "missing_evidence": [
+        "Quarterly segment revenue and profit for robots from filings"
+      ],
+      "next_verification": "H1 2026 segment report and management commentary on mower profitability"
+    },
+    {
+      "question_id": "Q3",
+      "question": "How large is the FX impact on reported net profit, and will hedging or operational shifts offset the headwind in 2026-2027?",
+      "why_it_matters": "Q1 2026 net margin fell 5.46pp yoy partly due to finance expenses (likely FX loss); significant overseas revenue means profit can be swamped by currency moves, distorting true operating performance.",
+      "current_answer": "Estimated 2025 Q2 had 1.8bn FX gain; 2026 Q2 expected FX loss of 'hundreds of millions', leading to headline profit decline despite operating profit growth. Analysts expect H2 2026 hedges to mitigate.",
+      "bull_evidence": [
+        "Company may increase EUR/USD hedging ratio",
+        "Overseas manufacturing expansion could reduce exposure"
+      ],
+      "bear_evidence": [
+        "Finance-expense ratio +5.51pp yoy in Q1 (EV015), signaling severe drag",
+        "OCF/Net profit negative, suggesting cash flow distorted by working capital and FX",
+        "Narrowing of EUR/CNY or USD/CNY band could inflict further losses"
+      ],
+      "decisive_model_variables": [
+        "finance_expense_ratio",
+        "effective_tax_rate",
+        "net_profit_parent"
+      ],
+      "affected_financial_lines": [
+        "Finance Expense",
+        "Net Profit",
+        "OCF"
+      ],
+      "evidence_ids": [
+        "EV015",
+        "KPE03",
+        "KPE05"
+      ],
+      "missing_evidence": [
+        "Breakdown of FX gains/losses in P&L by currency",
+        "Hedging policy and effectiveness"
+      ],
+      "next_verification": "H1 2026 financial notes on foreign exchange and hedging"
+    },
+    {
+      "question_id": "Q4",
+      "question": "Can the company generate positive free cash flow in 2026-2028 given capex for capacity expansion and working capital build?",
+      "why_it_matters": "Sustainably positive FCF supports the high growth valuation and funding for new ventures; if cash burn persists, equity dilution risk rises.",
+      "current_answer": "Q1 2026 OCF was negative relative to net profit; historical annual OCF was positive but thin. Capex likely elevated due to factory construction; FCF trajectory unknown. Market expects cash generation to improve with profit.",
+      "bull_evidence": [
+        "Strong contract liabilities (18.69 bn as Q1 2026) indicate customer prepayments reducing working capital need",
+        "Scaled production should lower capex/sales ratio"
+      ],
+      "bear_evidence": [
+        "Negative OCF/Net profit (-2.34x) signals cash consumed by working capital",
+        "Headquarters construction (4-year project) consuming cash",
+        "Heavy inventory build (Inventory/Rev +4.42pp yoy)"
+      ],
+      "decisive_model_variables": [
+        "OCF_CNY_mn",
+        "capex_CNY_mn",
+        "FCF_CNY_mn"
+      ],
+      "affected_financial_lines": [
+        "OCF",
+        "Capex",
+        "FCF"
+      ],
+      "evidence_ids": [
+        "EV016",
+        "EV029",
+        "EV040"
+      ],
+      "missing_evidence": [
+        "Detailed cash flow statement items (no published Q1 cash flow)"
+      ],
+      "next_verification": "H1 2026 cash flow statement to see working capital dynamics"
+    },
+    {
+      "question_id": "Q5",
+      "question": "Will the e-bike and ATV segments reach scale sufficient to contribute to consolidated profit by 2028, or will they remain a drain on group returns?",
+      "why_it_matters": "If these 'third curves' fail, the company may face a growth gap after two-wheeler and mower mature, and will have incurred high sunk costs.",
+      "current_answer": "ATV approaching breakeven per broker; e-bike still early. Capital allocation discipline uncertain.",
+      "bull_evidence": [
+        "ATV Q1 2026 high growth, ahead of plan (KPE03)",
+        "E-bike European launch 2027 with proven supply chain"
+      ],
+      "bear_evidence": [
+        "Both segments require heavy investment with uncertain returns",
+        "New entrants may capture market before company achieves scale"
+      ],
+      "decisive_model_variables": [
+        "ATV_revenue_growth",
+        "e_bike_revenue",
+        "segment_operating_profit"
+      ],
+      "affected_financial_lines": [
+        "Revenue",
+        "Operating Profit",
+        "Capital Employed"
+      ],
+      "evidence_ids": [
+        "KPE03",
+        "KPE04"
+      ],
+      "missing_evidence": [
+        "Official segment P&L for ATV and e-bike"
+      ],
+      "next_verification": "FY2026 annual report segment breakout"
+    }
+  ],
+  "forecast_spine": {
+    "forecast_years": [
+      "2026E",
+      "2027E",
+      "2028E"
+    ],
+    "forecast_lines": [
+      {
+        "segment": "consolidated",
+        "metric": "Revenue",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 21277.88,
+        "year_1_value": 27660.0,
+        "year_2_value": 33192.0,
+        "year_3_value": 38831.0,
+        "formula": "base × (1 + growth); growth assumption 30%, 20%, 17% (unverified broker estimate from KPE05)",
+        "assumption_status": "derived_from_unverified_broker_estimate",
+        "evidence_ids": [
+          "EV010",
+          "KPE05"
+        ],
+        "key_sensitivity": "Revenue growth +/-5pp changes 2027E revenue by ~1.6 bn and proportionally EPS",
+        "missing_inputs": []
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Gross Margin %",
+        "unit": "%",
+        "base_period": "FY2025",
+        "base_value": null,
+        "year_1_value": 26.0,
+        "year_2_value": 27.0,
+        "year_3_value": 27.5,
+        "formula": "base not reported; assumed gradual recovery from Q1 26.54% as raw material pressure eases and mix improves",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [
+          "EV012",
+          "KPE03"
+        ],
+        "key_sensitivity": "Each 1pp gross margin change alters operating profit by ~277 mn in 2026E",
+        "missing_inputs": [
+          "FY2025 consolidated gross margin from annual report"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Operating Margin %",
+        "unit": "%",
+        "base_period": "FY2025",
+        "base_value": null,
+        "year_1_value": 7.5,
+        "year_2_value": 9.0,
+        "year_3_value": 10.0,
+        "formula": "Implied from revenue and profit; assumes SG&A leverage and R&D discipline; 2026E includes elevated launch costs, improving thereafter",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [
+          "EV013",
+          "KPE03"
+        ],
+        "key_sensitivity": "1pp change = 277 mn operating profit",
+        "missing_inputs": [
+          "FY2025 operating margin from annual report"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Parent Net Profit",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 1758.17,
+        "year_1_value": 1940.0,
+        "year_2_value": 2630.0,
+        "year_3_value": 3300.0,
+        "formula": "Derived from broker: 2026E 19.4亿, 2027E 26.3亿, 2028E 33.0亿 (KPE05); corresponds to growth 10.2%, 35.7%, 25.5%",
+        "assumption_status": "derived_from_unverified_broker_estimate",
+        "evidence_ids": [
+          "KPE05"
+        ],
+        "key_sensitivity": "10% deviation in net profit changes EPS by same %, absent share count change",
+        "missing_inputs": [
+          "Company guidance or consensus; tax rate, minority interest assumptions"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "EPS",
+        "unit": "CNY/share",
+        "base_period": "FY2025",
+        "base_value": null,
+        "year_1_value": 2.636412250619523,
+        "year_2_value": 3.5741052675924463,
+        "year_3_value": 4.484618776827024,
+        "formula": "parent net profit (CNY mn) / diluted shares (mn)",
+        "assumption_status": "calculated",
+        "evidence_ids": [],
+        "key_sensitivity": "Cannot be computed",
+        "missing_inputs": [
+          "Diluted share count"
+        ]
+      }
+    ],
+    "scenarios": [
+      {
+        "scenario": "bull",
+        "probability_pct": 30.0,
+        "operating_assumptions": [
+          "Two-wheeler revenue +35% yoy in 2026, +25% yoy in 2027; gross margin improves to 28% by 2027 as cost pressure fades and mix shifts to higher-end models",
+          "Mowing robot revenue doubles in 2026, achieves high single-digit EBIT margin in 2027",
+          "ATV and e-bikes collectively breakeven by 2028",
+          "FX losses limited; hedging effective; effective tax rate normal",
+          "Share buyback program continues, reducing share count ~2%"
+        ],
+        "parent_net_profit_cny_mn": 2200.0,
+        "eps_cny": 2.9897458512180157,
+        "fcf_cny_mn": null,
+        "valuation_method": "PE multiple on 2027E normalized EPS; assume 22x due to growth",
+        "valuation_multiple": 22.0,
+        "fair_value_per_share": 65.77440872679635,
+        "evidence_ids": [],
+        "falsification": "Failure to achieve Q3 two-wheeler volume target of 2.6m units; mower revenue growth <80% in H2 2026",
+        "missing_inputs": [
+          "EPS/share count; FCF data"
+        ]
+      },
+      {
+        "scenario": "base",
+        "probability_pct": 50.0,
+        "operating_assumptions": [
+          "Consolidated revenue growth 30%, 20%, 17% as per broker model",
+          "Gross margin 26% in 2026, gradual 50bp improvement per year",
+          "Two-wheeler remains core profit engine; mower EBIT positive in 2027",
+          "FX headwind in 2026 but normalizing after; net finance expense ~2% of revenue",
+          "No material dilution from incentive plan; repurchases offset"
+        ],
+        "parent_net_profit_cny_mn": 1940.0,
+        "eps_cny": 2.636412250619523,
+        "fcf_cny_mn": null,
+        "valuation_method": "PE on 2027E net profit; 17x multiple reflecting strong growth but near-term margin uncertainty",
+        "valuation_multiple": 17.0,
+        "fair_value_per_share": 44.81900826053189,
+        "evidence_ids": [
+          "KPE05"
+        ],
+        "falsification": "If 2026 revenue growth <25% or net profit decline >10%",
+        "missing_inputs": [
+          "EPS, FCF"
+        ]
+      },
+      {
+        "scenario": "bear",
+        "probability_pct": 20.0,
+        "operating_assumptions": [
+          "Revenue growth 20%, 15%, 10%; demand slowdown due to macro and competition",
+          "Gross margin pressured to 24% in 2026 due to price wars and raw material costs",
+          "Investment in mowers, ATV, e-bike continues to bleed cash; mower loss-making throughout",
+          "Significant FX losses (2% of revenue) erode profit; effective tax rate higher",
+          "No buyback; potential dilution from incentive plan"
+        ],
+        "parent_net_profit_cny_mn": 1600.0,
+        "eps_cny": 2.174360619067648,
+        "fcf_cny_mn": null,
+        "valuation_method": "PE 12x on depressed 2027E earnings",
+        "valuation_multiple": 12.0,
+        "fair_value_per_share": 26.092327428811775,
+        "evidence_ids": [],
+        "falsification": "If Q2 2026 net profit decline >20% and guidance cut",
+        "missing_inputs": [
+          "EPS, FCF"
+        ]
+      }
+    ],
+    "readiness": "partial",
+    "readiness_reasons": [
+      "Segment-level revenue, cost, and margin breakdown not available from filings; only qualitative product descriptions found.",
+      "Cash flow statement items (OCF, capex, FCF) not reported in deterministic evidence; only negative OCF/Net profit ratio in Q1 2026 available.",
+      "Forecast base case relies on unverified sell-side broker estimates (KPE05) rather than company-disclosed guidance; must be treated as analytical placeholder.",
+      "Required consolidated three-year forecast lines are incomplete.",
+      "Bull/base/bear per-share valuation is incomplete."
+    ]
+  },
+  "market_expectations": {
+    "sell_side_observations": [
+      {
+        "intelligence_id": "KSI01",
+        "kpe_ids": "KPE07",
+        "published_at": "2026-08-03T09:43",
+        "institution": "机构未识别",
+        "analyst_or_author": "纪要小能手",
+        "freshness": "高时效/0天",
+        "rating_signal": "未披露",
+        "forecast_facts": "未提取到带期间的明确盈利预测",
+        "valuation_facts": "【华源家电】8月观点：底部反弹... 【华源家电】8月观点：底部反弹... 【华源家电】8月观点：底部反弹已开始，关注攻守兼备的低估值+有成长品类 推荐：九号公司、安克创新H、极米科技 🛵1、九号公司：底部反转开启，Q3有望迎来最旺的夏天 1）两轮车主业触底反弹，九号份额持续提升，26H1积压的需求有望在26Q3释放（7月出货量近百万台），同时海外空间逐步打开，业绩+估值有望双击",
+        "normalized_points": "无可标准化数值",
+        "revision_signal": "较前次口径发生变化；尚无可同口径比较的标准化数值",
+        "source_quote": "【华源家电】8月观点：底部反弹... 【华源家电】8月观点：底部反弹已开始，关注攻守兼备的低估值+有成长品类 推荐：九号公司、安克创新H、极米科技 🛵1、九号公司：底部反转开启，Q3有望迎来最旺的夏天 1）两轮车主业触底反弹，九号份额持续提升，26H1积压的需求有望在26Q3释放（7月出货量近百万台），同时海外空间逐步打开，业绩+估值有望双击。 2）公司注重股东回报，近一个月回购2.2亿并全部用于注销； 3）目前估值对应26年17倍，剔除汇兑损失约15倍，向下有4.5%股息率支撑（现金充沛，现金流扎实），向上看有两年一倍的空间。 🔋2、安克创新：业绩保持高增长，港股性价比高（已入通） 1）26H2主业小充低基数，同时欧洲阳台储能、美国户储等高客单新品继续放量。Q2叠加退税与南芯投资收益，利润预计表现亮眼。 2）欧洲高温叠加厄尔尼诺（7月德国批发电价同比+20%），家用储能渗透率提升有望加速。 3）A股目前估值对应26年20..."
+      },
+      {
+        "intelligence_id": "KSI02",
+        "kpe_ids": "KPE08",
+        "published_at": "2026-07-29T18:24",
+        "institution": "机构未识别",
+        "analyst_or_author": "纪要小能手",
+        "freshness": "高时效/5天",
+        "rating_signal": "未披露",
+        "forecast_facts": "科技家电大涨！【石头科技】【九... 科技家电大涨！【石头科技】【九... 科技家电大涨！【石头科技】【九号公司】【绿联科技】【安克创新】最新更新（实际是旧端子重发☺️）——开源家电吕明团队 🔴【石头科技】 旧段子重发！【石头科技】继续推荐：预计Q2收入增速提速，剔除非经和汇兑影响，经营性净利率环比改善——开源家电吕明团队 我们的模型测算皆来自第三方数据或者公司战报等 收入端：Q2收入增速环比有望提速（最近一直提醒），我们预计收入增25-30% 我们预计Q2扫地机欧洲/亚太/北美/内销增速分别为20%+/20... / 北美退税：预计总金额2亿多人民币（去年美国收入*30%*20%计算得来），但是Q2确认多少不知道，我们通过和其他出口公司交流，大多数公司Q2能确认的关税退税不多 追觅政府融资中断，目前寄希望于市场化融资，所以预判靠剩余资金会继续维持清洁业务高费用投放，我们预计27年随着没有增量融资，费用投放会逐步减少，行业将迎来利润率大拐点 ———— 🔴【九号公司】 26Q2业绩环比改善逻辑不变，仍看好Q3起继续环比改善，连续3季度低基数——开源家电吕明团队 💡针对Q2业绩，我们仍看好收入实现接近30%增长、剔除汇率影响利润...",
+        "valuation_facts": "未提取到目标价/估值方法与倍数",
+        "normalized_points": "无可标准化数值",
+        "revision_signal": "较前次口径发生变化；尚无可同口径比较的标准化数值",
+        "source_quote": "科技家电大涨！【石头科技】【九... 科技家电大涨！【石头科技】【九号公司】【绿联科技】【安克创新】最新更新（实际是旧端子重发☺️）——开源家电吕明团队 🔴【石头科技】 旧段子重发！【石头科技】继续推荐：预计Q2收入增速提速，剔除非经和汇兑影响，经营性净利率环比改善——开源家电吕明团队 我们的模型测算皆来自第三方数据或者公司战报等 收入端：Q2收入增速环比有望提速（最近一直提醒），我们预计收入增25-30% 我们预计Q2扫地机欧洲/亚太/北美/内销增速分别为20%+/20%+/40%+/10% 我们预计Q2洗地机国内增20%，海外洗地机收入或超过5亿，洗地机全年收入45-50亿，外销占比有望达到40% 利润端：归母受非经和汇兑影响，但是预计不会大幅下滑（不考虑关税退税，预计归母利润-5%-5%），预计经营性利润增速预计高于收入增速 1、经营性净利率（剔除非经和汇兑）：预计Q2洗衣机减亏1.6亿；预计国内/美国扫地机净利率环..."
+      },
+      {
+        "intelligence_id": "KSI03",
+        "kpe_ids": "KPE04",
+        "published_at": "2026-07-22T13:23",
+        "institution": "国泰海通",
+        "analyst_or_author": "纪要小能手",
+        "freshness": "有效窗口/12天",
+        "rating_signal": "推荐措辞（非标准评级）",
+        "forecast_facts": "【国泰海通家电蔡雯娟】九号公司... 【国泰海通家电蔡雯娟】九号公司... 【国泰海通家电蔡雯娟】九号公司底部机会 九号公司早盘下跌9%，我们预计主因资金面调整，公司经营正常，短期新国标冲击逐步消退，中长期5年收入锚定640亿成长可期，25/26PE仅15/11X，股息率超3%，持续推荐 / 公司Q2收入+25~30%，利润略有压力 / 我们预计公司Q2收入约85亿元（同比+25~30%），其中两轮+10%/割草机+150%/滑板车+30%，环比Q1增速提升",
+        "valuation_facts": "【国泰海通家电蔡雯娟】九号公司... 【国泰海通家电蔡雯娟】九号公司... 【国泰海通家电蔡雯娟】九号公司底部机会 九号公司早盘下跌9%，我们预计主因资金面调整，公司经营正常，短期新国标冲击逐步消退，中长期5年收入锚定640亿成长可期，25/26PE仅15/11X，股息率超3%，持续推荐",
+        "normalized_points": "rating=推荐措辞（非标准评级）",
+        "revision_signal": "窗口内首次识别，暂无同机构前序可比",
+        "source_quote": "【国泰海通家电蔡雯娟】九号公司... 【国泰海通家电蔡雯娟】九号公司底部机会 九号公司早盘下跌9%，我们预计主因资金面调整，公司经营正常，短期新国标冲击逐步消退，中长期5年收入锚定640亿成长可期，25/26PE仅15/11X，股息率超3%，持续推荐。 公司Q2收入+25~30%，利润略有压力。我们预计公司Q2收入约85亿元（同比+25~30%），其中两轮+10%/割草机+150%/滑板车+30%，环比Q1增速提升；利润端预计略有下滑，原材料和汇兑负面影响持续。 H2拐点已至，中长期海外短出行渗透提升逻辑持续演绎。Q3两轮销售端提出260万台（+70%）目标，高性能电自Fz5和Mz3推出补全高端线矩阵，期待Q3旺季放量+Q4低基数下看好两轮修复弹性。中长期油改电驱动下，欧洲市场大盘保持+双，九号滑板车市占率50%保持稳健增长，东南亚两轮出海已准备就绪；割草机头部地位稳固，美国市场为下一增长极；ebike&全地形随着市场拓宽..."
+      },
+      {
+        "intelligence_id": "KSI04",
+        "kpe_ids": "KPE03",
+        "published_at": "2026-07-22T13:22",
+        "institution": "机构未识别",
+        "analyst_or_author": "纪要小能手",
+        "freshness": "有效窗口/12天",
+        "rating_signal": "未披露",
+        "forecast_facts": "针对Q2业绩，我们仍看好收入实现接近30%增长、剔除汇率影响利润有正增长 / 市场有低预期情况下再miss的可能性很小，并且可以期待收入增速回到30% / 收入端：预计Q2收入增速接近30%，环比Q1会提升 （1）两轮车：预计Q2增长低双位数，预计电摩占比80%",
+        "valuation_facts": "未提取到目标价/估值方法与倍数",
+        "normalized_points": "无可标准化数值",
+        "revision_signal": "较前次口径发生变化；尚无可同口径比较的标准化数值",
+        "source_quote": "【九号公司】26Q2业绩环比改... 【九号公司】26Q2业绩环比改善逻辑不变，仍看好Q3起继续环比改善，连续3季度低基数——开源家电吕明团队 今日股价调整我们认为更多是资金层面因素，例如消费板块今日有回调+股份回购已有一定比例。针对Q2业绩，我们仍看好收入实现接近30%增长、剔除汇率影响利润有正增长。市场有低预期情况下再miss的可能性很小，并且可以期待收入增速回到30%。我们认为业绩环比改善的逻辑不会变。 收入端：预计Q2收入增速接近30%，环比Q1会提升 （1）两轮车：预计Q2增长低双位数，预计电摩占比80%。 （2）割草机器人：预计Q2翻倍以上增长。反倾销调查延期至年底，据业内反馈无初裁结果不会征收临时关税和追溯。 （3）滑板车：2C滑板车受益油价催化延续Q1较高增长，2B滑板车预计几十增长系Q1收入延迟确认。 （4）全地形车：预计延续Q1较高增长，经营情况较年初目标要好。 利润端：归母受汇兑影响预计下滑10%+（..."
+      },
+      {
+        "intelligence_id": "KSI05",
+        "kpe_ids": "KPE10",
+        "published_at": "2026-07-22T08:15",
+        "institution": "机构未识别",
+        "analyst_or_author": "纪要小能手",
+        "freshness": "有效窗口/12天",
+        "rating_signal": "未披露",
+        "forecast_facts": "🛴九号公司业绩分析：九号公司二季度业绩表现亮眼，当前具备较好的配置价值： 💰a. 收入端：整体收入增速预计 30% 以上，分业务看：两轮车实现双位数增长，割草机器人增速 150% 以上，To B 滑板车增速 50% 以上，To C 滑板车增速 30% 左右，全地形车增速 20%-30%",
+        "valuation_facts": "未提取到目标价/估值方法与倍数",
+        "normalized_points": "无可标准化数值",
+        "revision_signal": "较前次口径发生变化；尚无可同口径比较的标准化数值",
+        "source_quote": "🛒家电行业现在买啥 1、家电... 🛒家电行业现在买啥 1、家电行业投资主线概述 📈家电行业投资逻辑：当前市场存在科技板块资金向消费板块转移的趋势，现阶段核心投资方向主要覆盖两类标的： 🔹a. 跌出价值的成长股：这类标的前期回调幅度较大，对应核心标的为石头科技、九号公司，后续将详细阐述相关标的的投资逻辑； 🔹b. 绩优消费股：这类标的历史业绩兑现情况较好，不少基金经理过往投资该类标的曾获收益，在科技板块资金转向消费的背景下，该类标的经过调整后，基金经理对其信任感较强，投资决策门槛更低，对应推荐标的为涛涛车业、安克创新、绿联。 📌后续将重点对上述提及公司的核心变化展开详细说明。 2、跌出价值成长股推荐 🔍成长股超跌原因分析：石头科技、九号公司均为科创 50 指数成分股，二季度科创 50 指数基金规模大幅缩减带来较大指数抛压，同时石头科技被调出沪深 300 指数也引发对应抛压。 💸两家公司二季度市场关注度较低，指数抛压下缺乏足..."
+      }
+    ],
+    "valuation_closure": {
+      "current_price_cny": 44.22,
+      "diluted_share_count_mn": 735.8485,
+      "core_value_per_share_cny": null,
+      "probability_weighted_fair_value_per_share_cny": 47.3602922340672,
+      "option_value_per_share_cny": null,
+      "other_adjustments_per_share_cny": null,
+      "fair_value_per_share_cny": 47.3602922340672,
+      "expected_return_pct": 7.101520203679801,
+      "formula": "Cannot compute without share count",
+      "rating_consistency_check": "Cannot perform without fair value vs price",
+      "double_counting_checks": [
+        "Core bucket already includes all consolidated earnings; ATV/e-bike optionality excluded from core; net cash added separately but would need to be consolidated in equity value check"
+      ],
+      "status": "partial",
+      "missing_inputs": [
+        "Current trading price",
+        "Diluted share count",
+        "Detailed balance sheet for net cash",
+        "OCF/FCF for DCF verification",
+        "resolve duplicate valuation overlap keys: core"
+      ]
+    },
+    "rule": "单家机构是观察值；只有具备样本和口径的多机构数据才可称为一致预期。"
+  },
+  "knowledge_planet": {
+    "importance": "material_alternative_intelligence",
+    "use_rule": "每条线索必须落到模型变化、概率变化、验证变化或拒绝之一。",
+    "items": [
+      {
+        "evidence_id": "KPE01",
+        "source_type": "sell_side_push",
+        "published_at": "2026-07-30T17:56",
+        "source_reliability": "B_identified_professional",
+        "bias_profile": "sell_side_optimism",
+        "adoption_ceiling": "model_input_after_crosscheck",
+        "target_excerpt": "【浙商价值战队】马莉/陈钊-重... 【浙商价值战队】马莉/陈钊-重点推荐：九号公司（689009） ——全所级别重大推荐 ——掘金消费成长股 一、推荐逻辑 （1）智能化驱动两轮车业务逆势增长，继续提升市场份额； （2）割草机器人低渗透高增长，第二成长曲线继续放量高增； （3）26下半年进入低基数阶段，基本面有加速趋势。 二、业务看点 1、基本面最新的变化 （1）二季度两轮车新品上市后保持较快增长趋势 （2）二季度为割草机器人销售旺季，增长提速 2、有别于市场的认识 市场担心：两轮车行业为存量市场、割草机器人赛道后续增长放缓且竞争加剧 我们认为： （1）两轮车行业分化明显、九号作为智能化和中高端龙头提升份额，长期仍有翻倍以上空间； （2）从欧洲到美国拓展驱动割草机器人高增有望延续，九号产品力渠道力竞争优势凸显。 三、目标空间 估值具有较大修复空间。九号26年表观利润受汇兑影响较大，预计27年归母净利润26.3亿元，对应PE为11.77x，参考出海消费中安克和涛涛27年估值17x左右（wind一致预期），九号仍有较大修复空间。 四、跟踪检验 两轮车新品及销售表现；割草机器人市场拓展及销售；其他产品线全地形车/ebike等销售",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "market_share",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "grounding_status": "ledger_only",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE02",
+        "source_type": "company_research_feedback",
+        "published_at": "2026-07-24T08:23",
+        "source_reliability": "C_private_unverified",
+        "bias_profile": "company_promotion",
+        "adoption_ceiling": "scenario_or_verification_only",
+        "target_excerpt": "针对九号公司这两天的网上传言，... 针对九号公司这两天的网上传言，解释如下： 近期网络上关于 Fz3 系列“AB机”的说法并不准确，公司不存在所谓“AB货”问题。Fz3 系列车型严格符合 GB 17761-2024新国标要求，全系产品均配备正规车辆合格证，并已完成国家强制性产品认证及相关备案。 关于同一销售车型存在 TDT167Z / TDT238Z 两个型号的问题，主要原因是不同生产基地需分别完成认证备案，因此在认证型号和备案信息上会有所区分。两个型号对应同一商业车型，配置和品质标准一致，均符合国家强制标准和认证要求。 公司每一辆出厂电动车均对应唯一 VIN 码（车架号）及车辆合格证。合格证是国家强制要求出具的重要文件，载明车辆识别信息，并证明该车辆经出厂检验符合相关强制性标准，可依法上牌、上路。因此，不同生产基地带来的认证型号差异，并不等同于“AB货”。 公司高度重视产品质量和用户反馈。针对近期不准确信息，公司相关部门已启动核查和处理程序，并将从三个方面进一步加强沟通：第一，统一客服、门店及平台解释口径；第二，提供清晰的认证及合格证核验路径；第三，对生产基地、认证型号等差异向用户作更透明的说明。核心是将市场上的猜测转化",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "unmapped",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "grounding_status": "ledger_only",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE03",
+        "source_type": "industry_weekly_data",
+        "published_at": "2026-07-22T13:22",
+        "source_reliability": "B_identified_professional",
+        "bias_profile": "neutral_or_data",
+        "adoption_ceiling": "model_input_after_crosscheck",
+        "target_excerpt": "【九号公司】26Q2业绩环比改... 【九号公司】26Q2业绩环比改善逻辑不变，仍看好Q3起继续环比改善，连续3季度低基数——开源家电吕明团队 今日股价调整我们认为更多是资金层面因素，例如消费板块今日有回调+股份回购已有一定比例。针对Q2业绩，我们仍看好收入实现接近30%增长、剔除汇率影响利润有正增长。市场有低预期情况下再miss的可能性很小，并且可以期待收入增速回到30%。我们认为业绩环比改善的逻辑不会变。 收入端：预计Q2收入增速接近30%，环比Q1会提升 （1）两轮车：预计Q2增长低双位数，预计电摩占比80%。 （2）割草机器人：预计Q2翻倍以上增长。反倾销调查延期至年底，据业内反馈无初裁结果不会征收临时关税和追溯。 （3）滑板车：2C滑板车受益油价催化延续Q1较高增长，2B滑板车预计几十增长系Q1收入延迟确认。 （4）全地形车：预计延续Q1较高增长，经营情况较年初目标要好。 利润端：归母受汇兑影响预计下滑10%+（已有预期），预计经营性利润会有正增长 1、经营性净利率（剔除汇兑）：两轮车EBIT较Q1环比提升但同比仍有压力，系原材料成本压力叠加新品未完全放量+618大促；割草机器人EBIT较Q1环比提升但同比仍下降，",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "asp_or_price",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "grounding_status": "ledger_only",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE04",
+        "source_type": "strategy_view",
+        "published_at": "2026-07-22T13:23",
+        "source_reliability": "B_identified_professional",
+        "bias_profile": "sell_side_optimism",
+        "adoption_ceiling": "model_input_after_crosscheck",
+        "target_excerpt": "【国泰海通家电蔡雯娟】九号公司... 【国泰海通家电蔡雯娟】九号公司底部机会 九号公司早盘下跌9%，我们预计主因资金面调整，公司经营正常，短期新国标冲击逐步消退，中长期5年收入锚定640亿成长可期，25/26PE仅15/11X，股息率超3%，持续推荐。 公司Q2收入+25~30%，利润略有压力。我们预计公司Q2收入约85亿元（同比+25~30%），其中两轮+10%/割草机+150%/滑板车+30%，环比Q1增速提升；利润端预计略有下滑，原材料和汇兑负面影响持续。 H2拐点已至，中长期海外短出行渗透提升逻辑持续演绎。Q3两轮销售端提出260万台（+70%）目标，高性能电自Fz5和Mz3推出补全高端线矩阵，期待Q3旺季放量+Q4低基数下看好两轮修复弹性。中长期油改电驱动下，欧洲市场大盘保持+双，九号滑板车市占率50%保持稳健增长，东南亚两轮出海已准备就绪；割草机头部地位稳固，美国市场为下一增长极；ebike&全地形随着市场拓宽也有望释放潜力。",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "market_share",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "grounding_status": "ledger_only",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE05",
+        "source_type": "sell_side_push",
+        "published_at": "2026-07-08T08:20",
+        "source_reliability": "B_identified_professional",
+        "bias_profile": "sell_side_optimism",
+        "adoption_ceiling": "model_input_after_crosscheck",
+        "target_excerpt": "【浙商消费】九号公司深度报告：... 【浙商消费】九号公司深度报告：短交通及机器人龙头企业，多级增长火箭驱动 九号公司是一家持续迭代的出行及机器人公司 九号公司从平衡车起家，收购Segway后巩固技术/品牌/渠道方面优势，不断打造多条业务增长线，助力公司快速增长，收入从2017年的13.81亿元增至2025年212.78亿元（17-25年CAGR=40.8%）。 两轮车：智能化品牌心智凸显、抢占市场份额 2026年Q1市场需求仍在恢复期，但九号两轮车收入同比+18%，实现逆势增长。近期销售旺季叠加新品发布，26年5月九号线上同比+78%，数据回暖明显。九号两轮车凭借技术及产品优势，我们测算九号国内潜在销售规模有望超过1000万台，仍有翻倍以上发展空间。除此以外，进军越南等东南亚市场带来增量。 割草机器人：技术创新驱动行业快速渗透、重要增长驱动力 技术变革极大改善产品体验，智能割草机器人持续渗透，根据IDC数据，全球割草机器人25年和26Q1出货分别增长+63.8%、+97%。九号2025年机器人业务营收20.0亿元（增速超过100%），综合产品力较为突出，持续热销（德亚割草机热销前十位中九号占据3位）。目前欧洲市占率领先，美",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "segment_volume",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "grounding_status": "ledger_only",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE06",
+        "source_type": "channel_check",
+        "published_at": "2026-07-20T14:31",
+        "source_reliability": "C_private_unverified",
+        "bias_profile": "channel_selection_bias",
+        "adoption_ceiling": "scenario_or_verification_only",
+        "target_excerpt": "，越南市场爆发加速两轮车出海进程。③投资建议：推荐雅迪控股（25年30亿利润，9倍PE）、爱玛科技（25年15-17亿利润，11-12倍，5月底回购增强信心）、九号公司（内销两轮车内销仍有超额，割草机反倾销暂缓，短期利空出尽，E-bike接力增长，26年20亿利润，同比14%，15倍PE）。 高尔夫球车：Q2业绩符合预期验证了美国制造成本可控；与传统三巨头错位竞争，渠道重合度低，充分分享美国场地外球车扩容红利。球车出厂价在25M7、26M3、26M4三次提价后达到5万元左右，同比约20%，但并未影响终端动销，渠道库存整体低位；当前月产能爬坡至7000台，预计年底达到8000-10000台，27年产能仍增加30%以上。推荐涛涛车业（26年12-13亿利润同比50%，20倍PE） [咖啡]详情欢迎联系～",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "segment_volume",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "grounding_status": "ledger_only",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE07",
+        "source_type": "channel_check",
+        "published_at": "2026-08-03T09:43",
+        "source_reliability": "C_private_unverified",
+        "bias_profile": "channel_selection_bias",
+        "adoption_ceiling": "scenario_or_verification_only",
+        "target_excerpt": "【华源家电】8月观点：底部反弹... 【华源家电】8月观点：底部反弹已开始，关注攻守兼备的低估值+有成长品类 推荐：九号公司、安克创新H、极米科技 🛵1、九号公司：底部反转开启，Q3有望迎来最旺的夏天 1）两轮车主业触底反弹，九号份额持续提升，26H1积压的需求有望在26Q3释放（7月出货量近百万台），同时海外空间逐步打开，业绩+估值有望双击。 2）公司注重股东回报，近一个月回购2.2亿并全部用于注销； 3）目前估值对应26年17倍，剔除汇兑损失约15倍，向下有4.5%股息率支撑（现金充沛，现金流扎实），向上看有两年一倍的空间。 🔋2、安克创新：业绩保持高增长，港股性价比高（已入通） 1）26H2主业小充低基数，同时欧洲阳台储能、美国户储等高客单新品继续放量。Q2叠加退税与南芯投资收益，利润预计表现亮眼。 2）欧洲高温叠加厄尔尼诺（7月德国批发电价同比+20%），家用储能渗透率提升有望加速。 3）A股目前估值对应26年20倍；港股26年17倍，27年仅14倍估值，考虑到未来3年收入利润复合25%+，当前估值极具性价比。 🎥3、极米科技：严重低估，海外继续加速，内销企稳就到买点 1）Q2海外继续加速（欧美均翻倍增长，港澳台韩起",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "segment_volume",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "grounding_status": "ledger_only",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE08",
+        "source_type": "channel_check",
+        "published_at": "2026-07-29T18:24",
+        "source_reliability": "C_private_unverified",
+        "bias_profile": "channel_selection_bias",
+        "adoption_ceiling": "scenario_or_verification_only",
+        "target_excerpt": "科技家电大涨！【石头科技】【九... 科技家电大涨！【石头科技】【九号公司】【绿联科技】【安克创新】最新更新（实际是旧端子重发☺️）——开源家电吕明团队 🔴【石头科技】 旧段子重发！【石头科技】继续推荐：预计Q2收入增速提速，剔除非经和汇兑影响，经营性净利率环比改善——开源家电吕明团队 我们的模型测算皆来自第三方数据或者公司战报等 收入端：Q2收入增速环比有望提速（最近一直提醒），我们预计收入增25-30% 我们预计Q2扫地机欧洲/亚太/北美/内销增速分别为20%+/20%+/40%+/10% 我们预计Q2洗地机国内增20%，海外洗地机收入或超过5亿，洗地机全年收入45-50亿，外销占比有望达到40% 利润端：归母受非经和汇兑影响，但是预计不会大幅下滑（不考虑关税退税，预计归母利润-5%-5%），预计经营性利润增速预计高于收入增速 1、经营性净利率（剔除非经和汇兑）：预计Q2洗衣机减亏1.6亿；预计国内/美国扫地机净利率环比改善同比略降，亚太地区净利率稳定；欧洲扫地机净利率环比同比都略降；洗地机外销带来增量净利润，根据我们的模型，经营性净利润（剔除非经和汇兑）增速超过30%；如果扣非不剔除汇兑，利润增速超15% 2、非经营性",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "segment_margin",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "grounding_status": "ledger_only",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE09",
+        "source_type": "industry_weekly_data",
+        "published_at": "2026-07-29T14:11",
+        "source_reliability": "B_identified_professional",
+        "bias_profile": "neutral_or_data",
+        "adoption_ceiling": "model_input_after_crosscheck",
+        "target_excerpt": "4%。 ③投资“机器人大脑第一股”仙工智能，占股6.45%，预计能录得2~3亿元投资收益。 ④海外整体延续高双位数增长，美国区域维持同比+30%增速。 [太阳]九号公司全年业绩实现路径清晰、业绩有望逐季改善 ①全年550万台达成路径清晰。行业整体26H1内销累计2825万台，九号公司销量同比+11%，份额同比+3.3%。 ②割草机器人Q2盈利改善。割草机器人Q1由于汇兑导致利润受影响，Q2位出货旺季、费用相对刚性，且二季度欧元敞口收窄，幅度预计明显改善。 [太阳]作为智能化/高端化消费的代表九号公司、科沃斯，股价在过去两个月与AI链多次形成跷跷板效应，但从7月开始、股价已经逐步走出Alpha趋势。作为行业beta较弱的板块，头部公司凭借产品矩阵、智能化/高端化体验、出海加速。在份额、销量端均有alpha表现，叠加汇兑影响减弱，我们坚定看好相关公司2026年的业绩、股价表现。",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "segment_volume",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "grounding_status": "ledger_only",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE10",
+        "source_type": "channel_check",
+        "published_at": "2026-07-22T08:15",
+        "source_reliability": "C_private_unverified",
+        "bias_profile": "channel_selection_bias",
+        "adoption_ceiling": "scenario_or_verification_only",
+        "target_excerpt": "当前市场存在科技板块资金向消费板块转移的趋势，现阶段核心投资方向主要覆盖两类标的： 🔹a. 跌出价值的成长股：这类标的前期回调幅度较大，对应核心标的为石头科技、九号公司，后续将详细阐述相关标的的投资逻辑； 🔹b. 绩优消费股：这类标的历史业绩兑现情况较好，不少基金经理过往投资该类标的曾获收益，在科技板块资金转向消费的背景下，该类标的经过调整后，基金经理对其信任感较强，投资决策门槛更低，对应推荐标的为涛涛车业、安克创新、绿联。 📌后续将重点对上述提及公司的核心变化展开详细说明。 2、跌出价值成长股推荐 🔍成长股超跌原因分析：石头科技、九号公司均为科创 50 指数成分股，二季度科创 50 指数基金规模大幅缩减带来较大指数抛压，同时石头科技被调出沪深 300 指数也引发对应抛压。 💸两家公司二季度市场关注度较低，指数抛压下缺乏足够接盘资金，股价跌幅显著超出基本面水平，主要由交易层面因素驱动。 📊石头科技业绩分析：石头科技二季度业绩超出市场预期： 💰a. 收入端：整体收入增速预计 25%-30%，显著高于市场 20% 左右的一致预期。 🌍分区域看：欧洲、亚太收入增速 20% 以上；内销扫地机增速 10% 左右（去年二季度国补基数较高",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "segment_volume",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "grounding_status": "ledger_only",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE11",
+        "source_type": "channel_check",
+        "published_at": "2026-07-14T12:52",
+        "source_reliability": "C_private_unverified",
+        "bias_profile": "channel_selection_bias",
+        "adoption_ceiling": "scenario_or_verification_only",
+        "target_excerpt": "我们推荐的【家电股】有起来的趋... 我们推荐的【家电股】有起来的趋势！——开源家电吕明 九号公司 26Q2收入显著改善：预计26Q2收入增长30%左右，割草机器人/2B滑板车/2C滑板车显著提速超预期 26Q2净利润：如果剔除汇兑影响（25Q2汇兑收益1.8亿，25Q2预计汇兑损失几千万），利润增速和收入增速差不多 26Q3-27Q1连续三个季度低基数。 石头科技 外销：由于pd错期，26Q2美亚/德亚增速达40%/110% 内销：26Q2扫地机/洗地机增速达11%/21% 26Q2收入预测：预计收入增速高于Q1，增速25%+ 26Q2净利润预测：由于25Q2有5700万软件退税（非经）和几千万汇兑收益，26Q2是汇兑损失，所以归母净利润表观一般，但是经营性的利润增速会比较高。 【涛涛车业】 新业务提估值：确定做燃机成撬业务，涛涛在美国有组装工厂、渠道开发能力等，擅长切入美国有需求+中国本土公司不容易直接卖到美国的品类。 球车：美国产能持续释放，27年球车销量或达12万台，销量持续上调。 催化：港股IPO预计7月拿陆条，9月发行 【安克创新】 收入持续高增长，预计26Q2收入增25-30%，预计Q2收到不少关税退税（预计小",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "segment_volume",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "grounding_status": "ledger_only",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE12",
+        "source_type": "sell_side_push",
+        "published_at": "2026-08-03T08:15",
+        "source_reliability": "B_identified_professional",
+        "bias_profile": "sell_side_optimism",
+        "adoption_ceiling": "model_input_after_crosscheck",
+        "target_excerpt": "🧧🧧重要‼️【信达消费姜文镪】... annotation: 🧧🧧重要‼️【信达消费姜文镪】精选个股、积极防御，重视消费/价值轮动投资机会 上周大事件有条不紊落地，总体有惊无险，美联储利率不变，政治局会议表态积极，海外龙头业绩&指引整体乐观，因此市场外部风险或阶段性趋于平缓，后续重点关注产业、筹码和个股业绩。 目前9月预防式加息的概率仍较大，市场在此阶段难免面临阻力，但后续加息靴子落地或者加息预期弱化，均有望改善市场环境。美伊冲突反复，全球供应链修复进程受阻，但市场定价逐步钝化。当前阶段，精选个股、积极防御依然是核心。 AI产业链定价趋于冷静，极致筹码结构打破后重视筹码再平衡带来的非科技方向…",
+        "entity_scope": "unverified_target_scope",
+        "affected_variable": "segment_volume",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "grounding_status": "ledger_only",
+        "chapter_id": "chapter_6_expectations"
+      }
+    ]
+  },
+  "evidence_index": [
+    {
+      "evidence_id": "EV001",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "Financial-report look-back: 900 days",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV002",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "2024, 半年",
+      "status": "reported",
+      "text": "Compacted 九号有限公司2024年半年度报告: 337828 chars -> 117534 chars.",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV003",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "Compacted 九号有限公司2025年年度报告: 437674 chars -> 136993 chars.",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV004",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "2025, 半年",
+      "status": "reported",
+      "text": "Compacted 九号有限公司2025年半年度报告: 318586 chars -> 98261 chars.",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV005",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "20260430, 2026, 季度",
+      "status": "reported",
+      "text": "20260430: 九号有限公司2026年第一季度报告",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV006",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "20250430, 2025, 季度",
+      "status": "reported",
+      "text": "20250430: 九号有限公司2025年第一季度报告",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV007",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "20241029, 2024, 季度",
+      "status": "reported",
+      "text": "20241029: 九号有限公司2024年第三季度报告",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV008",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "20240807, 2024, 半年",
+      "status": "reported",
+      "text": "20240807: 九号有限公司2024年半年度报告",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV009",
+      "source_module": "earnings_model",
+      "variable": "unmapped",
+      "period": "Q1, 20260331",
+      "status": "reported",
+      "text": "/ latest reported / Q1 / 20260331 / 5869970864.48 / 203367666.19 / 23479883457.92 / 813470664.76 / 31739701093.4358 / 1932420454.3555 / historical median 0331 share 10.5% /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV010",
+      "source_module": "earnings_model",
+      "variable": "unmapped",
+      "period": "FY, 20251231",
+      "status": "reported",
+      "text": "/ latest annual / FY / 20251231 / 21277876666.95 / 1758171535.84 / 21277876666.95 / 1758171535.84 / 21277876666.95 / 1758171535.84 / FY actual /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV011",
+      "source_module": "earnings_model",
+      "variable": "revenue",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ Revenue base / 5869970864.48 / N/A / YoY: 20260331 vs 20250331 / top-line starting point for volume × price × mix /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV012",
+      "source_module": "earnings_model",
+      "variable": "segment_margin",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ Gross margin / 26.5415% / -3.13pp / YoY: 20260331 vs 20250331 / main bridge from demand to gross profit /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV013",
+      "source_module": "earnings_model",
+      "variable": "unmapped",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ Operating margin / 4.1589% / -8.65pp / YoY: 20260331 vs 20250331 / tests pricing, mix, and cost absorption /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV014",
+      "source_module": "earnings_model",
+      "variable": "segment_margin",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ Net margin / 3.4645% / -5.46pp / YoY: 20260331 vs 20250331 / captures final earnings conversion /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV015",
+      "source_module": "earnings_model",
+      "variable": "operating_expense",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ Finance-expense ratio / 3.8088% / +5.51pp / YoY: 20260331 vs 20250331 / captures leverage drag or relief /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV016",
+      "source_module": "earnings_model",
+      "variable": "profit_or_eps",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ OCF / net profit / -2.3433 / N/A / YoY: 20260331 vs 20250331 / tests earnings quality and cash realization /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV017",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "Look-back window: 30 days",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV018",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "/ 回购/增减持 / 1 /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV019",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "/ 一般公告 / 1 /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV020",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "20260721, 2026-07-21",
+      "status": "reported",
+      "text": "/ 20260721 / 回购/增减持 / 689009.SH / 九号公司 / 九号有限公司关于以集中竞价交易方式回购公司股份的进展公告 / http://www.cninfo.com.cn/new/disclosure/detail?stockCode=689009&announcementId=1225432512&orgId=9900039199&announcementTime=2026-07-21 /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV021",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "20260710, 2022, 2024",
+      "status": "reported",
+      "text": "/ 20260710 / 一般公告 / 689009.SH / 九号公司 / 九号有限公司2022年至2024年限制性股票激励计划部分归属结果暨存托凭证上市公告 / http://www.cninfo.com.cn/new/disclosure/detail?stockCode=689009&announcementId=1225416564&orgId=9900039199&announcementTime=2026-07-10 /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV022",
+      "source_module": "company_events",
+      "variable": "valuation",
+      "period": "unspecified",
+      "status": "missing",
+      "text": "If a section is unavailable because of data permission, state that limitation explicitly.",
+      "chapter_id": "chapter_7_valuation_rating"
+    },
+    {
+      "evidence_id": "EV023",
+      "source_module": "company_business_model",
+      "variable": "segment_volume",
+      "period": "2025, 半年",
+      "status": "reported",
+      "text": "/ product_manufacturer / 产品制造 / 产能出货型 / quantified disclosure / 九号有限公司2025年半年度报告: 一、报告期内公司所属行业及主营业务情况说明 (一)主要业务、主要产品或服务情况 公司以国际化视野立足全球市场，以简化人和物的移动，让生活更加便捷和有趣为使命，专 注于推动智能短交通和服务类机器人产品的创新和变革。公司主营业务为智能短交通和服务类机 器人产品的设计、研发、生产、销售及服务。经过多年的发展，依托自身在技术创新、工业设计、 供应链管理、品...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV024",
+      "source_module": "company_business_model",
+      "variable": "unmapped",
+      "period": "2025, 半年",
+      "status": "reported",
+      "text": "/ platform_ecosystem / 平台生态 / 交易服务型 / quantified disclosure / 九号有限公司2025年半年度报告: 一、报告期内公司所属行业及主营业务情况说明 (一)主要业务、主要产品或服务情况 公司以国际化视野立足全球市场，以简化人和物的移动，让生活更加便捷和有趣为使命，专 注于推动智能短交通和服务类机器人产品的创新和变革。公司主营业务为智能短交通和服务类机 器人产品的设计、研发、生产、销售及服务。经过多年的发展，依托自身在技术创新、工业设计、 供应链管理、品牌推...",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV025",
+      "source_module": "company_business_model",
+      "variable": "segment_margin",
+      "period": "2024, 半年",
+      "status": "reported",
+      "text": "/ core_revenue_engine / semiannual / 九号有限公司2024年半年度报告: 客户销售产品和提供技术服务来实现收入和利润。报告期内，公司主营业务收入来源于电动平衡 / Defines what actually drives the income statement. /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV026",
+      "source_module": "company_business_model",
+      "variable": "revenue",
+      "period": "2024, 半年",
+      "status": "reported",
+      "text": "/ segment_mix / semiannual / 九号有限公司2024年半年度报告: 公司营业收入中来自境外的收入与境内收入占比相当，且境外有多家控股子公司，遍布美国、 / Shows whether different profit pools are being mixed together. /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV027",
+      "source_module": "company_business_model",
+      "variable": "unmapped",
+      "period": "2024, 半年",
+      "status": "reported",
+      "text": "/ customer_and_channel / semiannual / 九号有限公司2024年半年度报告: 客户销售产品和提供技术服务来实现收入和利润。报告期内，公司主营业务收入来源于电动平衡 / Reveals demand source, concentration, and market validation. /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV028",
+      "source_module": "company_business_model",
+      "variable": "balance_sheet",
+      "period": "2024, 半年",
+      "status": "reported",
+      "text": "/ geography / semiannual / 九号有限公司2024年半年度报告: 应收出口退税 88,774,204.01 44,193,032.79 / Explains whether growth depends on a specific geography or expansion lane. /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV029",
+      "source_module": "company_business_model",
+      "variable": "unmapped",
+      "period": "2024, 半年",
+      "status": "reported",
+      "text": "/ reinvestment_engine / semiannual / 九号有限公司2024年半年度报告: 关于总部研发、办公大楼的建设周期为 4 年，公司将按照建设计划，分批次进行资金投入。 / Shows how today's cash is being converted into tomorrow's earnings power. /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV030",
+      "source_module": "company_business_model",
+      "variable": "unmapped",
+      "period": "2025, 半年",
+      "status": "reported",
+      "text": "/ product / semiannual / 九号有限公司2025年半年度报告: 一、报告期内公司所属行业及主营业务情况说明 (一)主要业务、主要产品或服务情况 公司以国际化视野立足全球市场，以简化人和物的移动，让生活更加便捷和有趣为使命，专 注于推动智能短交通和服务类机器人产品的创新和变革。公司主营业务为智能短交通和服务类机 器人产品的设计、研发、生产、销售及服务。经过多年的发展，依托自身在技术创新、工业设计、 供应链管理、品牌推广等多方面积累的竞争优势，已经形成包括电动平衡车、电动滑板车、电动 两轮车...",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV031",
+      "source_module": "industry_cycle",
+      "variable": "balance_sheet",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "Do not state R32, R125, lithium, copper, gold, inventory, or spread changes as facts unless they appear in the evidence table.",
+      "chapter_id": "chapter_2_industry_chain"
+    },
+    {
+      "evidence_id": "EV032",
+      "source_module": "industry_cycle",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "missing",
+      "text": "If cycle evidence says bottom-testing or evidence-limited, use language such as `bottom-right validation stage`, `右侧待验证`, or `needs confirmation`.",
+      "chapter_id": "chapter_2_industry_chain"
+    },
+    {
+      "evidence_id": "EV033",
+      "source_module": "industry_kpi",
+      "variable": "segment_margin",
+      "period": "unspecified",
+      "status": "missing",
+      "text": "/ coverage_grade / report_types_seen / missing_report_types / answered_questions / core_pack_status / confidence_read /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV034",
+      "source_module": "industry_kpi",
+      "variable": "profit_or_eps",
+      "period": "2024, 半年",
+      "status": "reported",
+      "text": "/ accounting_reconciliation / Check signs, units, periods, and cross-statement consistency before a number enters the PM memo. / operating_cash_flow: 九号有限公司2024年半年度报告: 582,505,606.39 211,347,679.67 175.61 经常性损益的净利润 经营活动产生的现金流量净额 2,485,806,399.73 1,058,321,5...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV035",
+      "source_module": "industry_kpi",
+      "variable": "unmapped",
+      "period": "2025, 半年",
+      "status": "reported",
+      "text": "/ segment_economics_depth / Decide whether each business line has enough disclosed scale, growth, margin, cash quality, and valuation treatment. / 九号有限公司2025年半年度报告: 一、报告期内公司所属行业及主营业务情况说明 (一)主要业务、主要产品或服务情况 公司以国际化视野立足全球市场，以简化人和物的移动，让生活更加便捷和有趣为使命，专 注于推动智能短交通和服...",
+      "chapter_id": "chapter_2_industry_chain"
+    },
+    {
+      "evidence_id": "EV036",
+      "source_module": "industry_kpi",
+      "variable": "unmapped",
+      "period": "2024, 半年",
+      "status": "reported",
+      "text": "/ footnote_radar / Surface decision-relevant notes that can hide risk or change confidence. / impairment_policy: 九号有限公司2024年半年度报告: 非经常性损益项目 金额 （如适 用） 非流动性资产处置损益，包括已计提资产减值准备的冲销部分 2,033,964.89 / impairment_policy: 九号有限公司2024年半年度报告: 用） 非流动性资产处置损益，包括已计提资产减值准备的冲...",
+      "chapter_id": "chapter_2_industry_chain"
+    },
+    {
+      "evidence_id": "EV037",
+      "source_module": "industry_kpi",
+      "variable": "profit_or_eps",
+      "period": "2024, 半年",
+      "status": "reported",
+      "text": "/ cash_flow_quality_decomposition / Separate accounting profit from cash conversion, working-capital drag, and demand visibility. / operating_cash_flow: 九号有限公司2024年半年度报告: 582,505,606.39 211,347,679.67 175.61 经常性损益的净利润 经营活动产生的现金流量净额 2,485,806,399.73 1,058,32...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV038",
+      "source_module": "industry_kpi",
+      "variable": "capex_or_roic",
+      "period": "2024, 半年",
+      "status": "reported",
+      "text": "/ capex_cip_return_bridge / Test whether capex, construction-in-progress, or investment assets are building returns or just absorbing capital. / construction_in_progress: 九号有限公司2024年半年度报告: 号科技智 能电动车 C 在建工程 225,578,297.51 1.74 142,677,173.03 1.32 58.10 / con...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV039",
+      "source_module": "industry_kpi",
+      "variable": "segment_margin",
+      "period": "2024, 半年",
+      "status": "reported",
+      "text": "/ non_recurring_profit_quality / Distinguish core operating profit from investment income, fair-value moves, subsidies, asset disposals, impairment, and other one-off items. / impairment: 九号有限公司2024年半年度报告: 其中：利息费用 840,614.51 2,067,696.63 利息收入 59,467,329.15 ...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV040",
+      "source_module": "industry_kpi",
+      "variable": "balance_sheet",
+      "period": "2024, 半年",
+      "status": "reported",
+      "text": "/ balance_sheet_forward_signals / Read balance-sheet leads before income-statement confirmation. / receivables: 九号有限公司2024年半年度报告: 主要系应 收票据到 应收票据 7,698,940.38 0.06 11,963,354.20 0.11 -35.65 / receivables: 九号有限公司2024年半年度报告: 收票据到 应收票据 7,698,940.38 0.06 11,963,...",
+      "chapter_id": "chapter_2_industry_chain"
+    },
+    {
+      "evidence_id": "EV041",
+      "source_module": "market_expectation",
+      "variable": "unmapped",
+      "period": "2026-07-31",
+      "status": "reported",
+      "text": "Valuation trade date: 2026-07-31",
+      "chapter_id": "chapter_6_expectations"
+    },
+    {
+      "evidence_id": "EV042",
+      "source_module": "market_expectation",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "/ Market cap (CNY) / 32539220670 / current equity value /",
+      "chapter_id": "chapter_6_expectations"
+    },
+    {
+      "evidence_id": "EV043",
+      "source_module": "market_expectation",
+      "variable": "valuation",
+      "period": "TTM",
+      "status": "reported",
+      "text": "/ PE TTM / 21.6154 / earnings multiple the market is paying now /",
+      "chapter_id": "chapter_7_valuation_rating"
+    },
+    {
+      "evidence_id": "EV044",
+      "source_module": "market_expectation",
+      "variable": "revenue",
+      "period": "TTM",
+      "status": "reported",
+      "text": "/ PS TTM / 1.4767 / sales multiple the market is paying now /",
+      "chapter_id": "chapter_6_expectations"
+    },
+    {
+      "evidence_id": "EV045",
+      "source_module": "market_expectation",
+      "variable": "valuation",
+      "period": "TTM",
+      "status": "calculated",
+      "text": "/ Implied TTM earnings (CNY) / 1505372126.817 / market cap divided by PE TTM /",
+      "chapter_id": "chapter_7_valuation_rating"
+    },
+    {
+      "evidence_id": "EV046",
+      "source_module": "market_expectation",
+      "variable": "revenue",
+      "period": "TTM",
+      "status": "calculated",
+      "text": "/ Implied TTM sales (CNY) / 22035092212.3654 / market cap divided by PS TTM /",
+      "chapter_id": "chapter_6_expectations"
+    },
+    {
+      "evidence_id": "EV047",
+      "source_module": "market_expectation",
+      "variable": "valuation",
+      "period": "unspecified",
+      "status": "calculated",
+      "text": "/ PE percentile / 12.7 / 5-year valuation position /",
+      "chapter_id": "chapter_7_valuation_rating"
+    },
+    {
+      "evidence_id": "EV048",
+      "source_module": "market_expectation",
+      "variable": "valuation",
+      "period": "unspecified",
+      "status": "calculated",
+      "text": "/ PB percentile / 11.1 / 5-year valuation position /",
+      "chapter_id": "chapter_7_valuation_rating"
+    },
+    {
+      "evidence_id": "EV049",
+      "source_module": "price_earnings_decomposition",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "Look-back window: 5 years",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV050",
+      "source_module": "price_earnings_decomposition",
+      "variable": "unmapped",
+      "period": "2026-07-31",
+      "status": "reported",
+      "text": "/ latest trade date / 2026-07-31 /",
+      "chapter_id": "chapter_1_company"
+    }
+  ],
+  "chapter_packets": [
+    {
+      "chapter_id": "chapter_1_company",
+      "title": "一、公司是谁、如何赚钱",
+      "reader_goal": "让普通投资者理解产品、客户、定价、收入确认、成本与现金回收。",
+      "selected_evidence_ids": [
+        "EV001",
+        "EV002",
+        "EV003",
+        "EV004",
+        "EV005",
+        "EV006",
+        "EV007",
+        "EV008",
+        "EV009",
+        "EV010",
+        "EV013",
+        "EV015"
+      ],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_2_industry_chain",
+      "title": "二、产业链位置与行业格局",
+      "reader_goal": "解释上下游、供需与价格形成，并把产业链变化传导到公司经营。",
+      "selected_evidence_ids": [
+        "EV031",
+        "EV032",
+        "EV035",
+        "EV036",
+        "EV040",
+        "EV081",
+        "EV083",
+        "EV084",
+        "EV085",
+        "EV086",
+        "EV087"
+      ],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_3_profit_pools",
+      "title": "三、业务拆解与核心利润池",
+      "reader_goal": "按核心、成长、波动和期权业务拆解收入、利润、现金与资本占用。",
+      "selected_evidence_ids": [],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_4_competition",
+      "title": "四、竞争优势、护城河与主要短板",
+      "reader_goal": "用历史或真同行验证规模、品牌、渠道、技术和成本优势。",
+      "selected_evidence_ids": [
+        "EV065",
+        "EV066",
+        "EV068",
+        "EV069",
+        "EV070",
+        "EV071",
+        "EV072"
+      ],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_5_growth_forecast",
+      "title": "五、增长逻辑、关键分歧与盈利预测",
+      "reader_goal": "围绕三至五个关键问题，把经营变量传导到三年盈利和现金流。",
+      "selected_evidence_ids": [
+        "EV011",
+        "EV012",
+        "EV014",
+        "EV016",
+        "EV023",
+        "EV025",
+        "EV026",
+        "EV033",
+        "EV034",
+        "EV037",
+        "EV038",
+        "EV039"
+      ],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_6_expectations",
+      "title": "六、市场预期差、风险与验证",
+      "reader_goal": "区分真实一致预期、单家卖方和反向隐含假设，并给出证伪日历。",
+      "selected_evidence_ids": [
+        "EV041",
+        "EV042",
+        "EV044",
+        "EV046"
+      ],
+      "knowledge_planet_ids": [
+        "KPE01",
+        "KPE02",
+        "KPE03",
+        "KPE04",
+        "KPE05",
+        "KPE06"
+      ],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_7_valuation_rating",
+      "title": "七、估值、评级与投资结论",
+      "reader_goal": "在完成公司、产业、模型和预期分析后，最后给出估值、评级与动作。",
+      "selected_evidence_ids": [
+        "EV022",
+        "EV043",
+        "EV045",
+        "EV047",
+        "EV048",
+        "EV052",
+        "EV054",
+        "EV058",
+        "EV073",
+        "EV074",
+        "EV075",
+        "EV076"
+      ],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    }
+  ],
+  "preprocessing_notes": [
+    "原始上下文不直接成为公共报告结构。",
+    "知识星球线索已按目标实体、变量、允许用途和验证门槛重新路由。",
+    "所有章节必须围绕读者问题展开，数据只作为决定性证据进入正文。"
+  ]
+}

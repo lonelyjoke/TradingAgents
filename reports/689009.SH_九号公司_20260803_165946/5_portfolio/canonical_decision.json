@@ -1,0 +1,1108 @@
+{
+  "rating": "Overweight",
+  "rating_posture": "增持；当前价44.22元高于程序化安全买入上限35.67元，已有持仓按评级管理，新资金等待价格进入安全区间或基本面证据推动估值输入上修。",
+  "research_readiness": "partial",
+  "one_line_thesis": "当前股价44.22元隐含约15亿TTM盈利的悲观定价，未给予2027年两轮车份额提升和割草机器人规模化后盈利修复任何成长溢价；概率加权公允价值55.7元提供约26%上行空间，在H1半年报催化剂临近、多源渠道数据已交叉验证Q2需求强劲的结构下，以分阶段、小仓位方式开始建仓的赔率优于完全等待右侧确认。",
+  "research_questions": [
+    "电动两轮车能否在2026-27年实现超过20%的收入增长而不以牺牲毛利率至侵蚀经营利润为代价？",
+    "割草机器人业务能否在2026年实现正向经营利润，并在2027年为归母净利润做出有意义的贡献？",
+    "汇兑损益对报告净利润的影响有多大？2027年是否会正常化？",
+    "在扩产和营运资本需求的背景下，公司能否在2026-28年持续产生正的自由现金流？",
+    "电动自行车和全地形车等新业务能否在2028年前规模化并贡献利润？"
+  ],
+  "question_verdicts": [
+    {
+      "question": "电动两轮车能否在2026-27年实现超过20%的收入增长而不以牺牲毛利率至侵蚀经营利润为代价？",
+      "why_decisive": "两轮车是公司收入和利润的核心（占比超50%），决定了集团营收增速和EPS基准的可靠性。",
+      "conclusion": "销量增长前景乐观，Q3内部260万台目标（同比+70%）和7月近百万台出货量为强劲需求提供了多源交叉验证。但Q1毛利率同比下降3.13个百分点表明竞争和成本压力不可忽视。结论：收入高增长方向已部分证实，毛利率稳定性是H1半年报需解决的关键剩余风险。",
+      "evidence_used": [
+        "EV012：Q1毛利率同比下降3.13个百分点至26.54%",
+        "KPE04：Q3销售目标260万台，+70% YoY（国泰海通渠道验证）",
+        "KSI01：7月出货量近100万台（华源家电8月观点）",
+        "KPE05：5月线上销售+78% YoY，2026 Q1两轮车收入+18% YoY（浙商消费）",
+        "KPE03：Q2两轮车增长低双位数，电摩占比80%（开源家电）"
+      ],
+      "strongest_counterevidence": "Q1毛利率同比下降3.13个百分点（EV012），且雅迪、爱玛等行业巨头以规模优势施压价格，可能导致高端化策略的溢价空间收窄。H1的618大促和原材料成本压力（KPE03）可能在Q2延续毛利率压力。",
+      "model_or_valuation_effect": "将2026E收入增速维持30%（偏乐观），但将2026E毛利率预期下调至25.8%（低于卖方26%），直接导致2026E归母净利润从卖方19.4亿降至17.8亿，2027E盈利目标面临更大达标压力。",
+      "confidence": "medium",
+      "next_verification": "2026年H1半年报（预计8月中旬披露），重点验证两轮车营收增速是否≥25%和毛利率是否≥26%"
+    },
+    {
+      "question": "割草机器人业务能否在2026年实现正向经营利润，并在2027年为归母净利润做出有意义的贡献？",
+      "why_decisive": "这是公司获得高估值（从消费电子向科技成长股切换）的核心第二曲线，决定了集团PE能否突破17x。",
+      "conclusion": "需求增长非常确定——IDC行业数据（26Q1全球出货+97%）和公司Q2出货翻倍（KPE03）共同证实赛道处于高景气早期。但EBIT仍为负（KPE03），公司仍处于牺牲利润换规模的阶段。我们将盈利拐点从2026H2推迟至2027H1，并将其估值保持在期权属性，给予<5%的估值溢价。",
+      "evidence_used": [
+        "KPE03：Q2出货量翻倍，但EBIT仍为负（芯片成本和返利摊销拖累）",
+        "KPE05：2025年机器人营收约20亿元，增速超100%",
+        "IDC数据：26Q1全球智能割草机出货+97%",
+        "KPE03：毛利率>40%，反倾销调查延期至年底，无初裁结果不会征收临时关税"
+      ],
+      "strongest_counterevidence": "KPE03明确显示Q2 EBIT仍为负，表明芯片成本、营销费用依然高企。追觅、石头科技等竞争对手快速进入，欧盟反倾销初裁结果虽延期至年底但仍构成重大尾部风险。",
+      "model_or_valuation_effect": "盈利拐点推迟至2027H1，2027E归母净利润从卖方26.3亿下调至23.8亿。在估值上继续将其视为高增长期权，仅给予<5%的估值溢价，直到分部利润的硬证据出现。",
+      "confidence": "medium",
+      "next_verification": "2026年年报的分部报告，以及2026Q4欧盟反倾销初裁结果"
+    },
+    {
+      "question": "汇兑损益对报告净利润的影响有多大？2027年是否会正常化？",
+      "why_decisive": "2026年表观利润被汇兑损失严重扭曲，区分表观利润和经营性利润是估值定价的前提。",
+      "conclusion": "2026年利润确实受汇兑严重拖累（Q1财务费用率同比+5.51pp），且市场已有一定预期。将估值锚从2026E切换至2027E，以过滤汇兑噪音。但多头假设2027年汇兑完全正常化是高度不确定的，取决于管理层套保政策的效果。我们维持2027E财务费用率1.5%的保守水平。",
+      "evidence_used": [
+        "EV015：Q1财务费用率+5.51pp至3.81%",
+        "KPE03：Q2剔除汇兑的经营利润正增长，但归母净利润-10%+",
+        "KPE03：公司计划H2增加套保比例"
+      ],
+      "strongest_counterevidence": "套保策略的有效性和汇率市场波动均具有高度不确定性。公司将套保作为应对手段的说法目前仅为管理层指引，尚未有实际财务数据佐证其有效性。",
+      "model_or_valuation_effect": "估值锚从2026E更换为2027E，2027E财务费用率维持在1.5%的保守水平（未完全归零），导致2027E净利润基准下调至23.8亿。财务费用率每变动±0.5%影响2027E归母净利润约±1.3亿元。",
+      "confidence": "low",
+      "next_verification": "H1半年报的汇兑损益附注和套保会计披露；H2美元/欧元兑人民币汇率走势"
+    }
+  ],
+  "forecast_takeaways": [
+    {
+      "takeaway": "2026-2027年的盈利增长将由两轮车和割草机器人的销量共同驱动，但盈利能力的改善幅度将是决定投资回报的关键。",
+      "evidence_anchor": "多家机构预测Q2收入增长25-30%（KPE03/04/10），Q3旺季两轮车目标260万台（KPE04），割草机器人Q2出货翻倍（KPE03）。",
+      "financial_implication": "营收增长确定性较高，但毛利率面临压力。我们预计2027年毛利率回升至27.2%，经营利润率改善至约9.0%，推动归母净利润增至23.8亿元（较FY2025的17.58亿增长35%）。若毛利率无法修复，EPS修复空间将大幅缩小。",
+      "confidence_and_risk": "中等信心。核心风险在于竞争加剧导致ASP下降或原材料成本上涨，使得2027E 23.8亿的利润目标无法实现。"
+    },
+    {
+      "takeaway": "当前股价并未充分反映公司多业务曲线的成长潜力，但已基本消化了2026年的盈利底部预期。",
+      "evidence_anchor": "当前股价44.22元，对应2026年卖方预估利润约19.4亿PE约16.8倍，但对我们2027年基准利润23.8亿PE仅约13.7倍。PE TTM处于5年历史12.7%分位，PB处于11.1%分位。",
+      "financial_implication": "估值处于历史低位，提供了安全边际。估值修复需要H1财报验证收入增速和毛利率企稳，或Q3销售数据超预期。在缺乏催化剂时，低估值本身不构成买入理由——但催化剂已排定日程。",
+      "confidence_and_risk": "中等信心。风险在于市场可能因宏观情绪或科技股风格轮动将估值继续压缩在低位，形成短期价值陷阱。"
+    }
+  ],
+  "forecast_assumptions": [
+    {
+      "parameter": "电动两轮车销量增长率",
+      "affected_business": "电动两轮车 (BU1)",
+      "historical_anchor": "2026Q1收入+18%（KPE05）；5月线上+78%（KPE05）；Q3目标260万台+70%（KPE04）",
+      "evidence_status": "proxy",
+      "base_case": "2026E +35% YoY；2027E +25% YoY",
+      "bull_case": "2026E +40% YoY，若Q3/Q4旺季销售超预期且新国标积压需求充分释放",
+      "bear_case": "2026E +20% YoY，若价格战导致份额流失或终端动销不达预期",
+      "rationale_and_evidence": "Q3的260万台销售目标（+70%）和7月近100万台出货数据构成强右侧信号，上半年积压需求可能在H2集中释放，因此给予偏乐观的预测。",
+      "sensitivity": "收入每变动±5%，影响2026E归母净利润约±17.80亿元，影响每股价值约1.8元",
+      "confidence": "medium",
+      "verification_gate": "2026年三季度销售数据公告及H1半年报两轮车营收增速"
+    },
+    {
+      "parameter": "割草机器人经营利润率",
+      "affected_business": "割草机器人 (BU4)",
+      "historical_anchor": "2025年Q1-Q2 EBIT为负（KPE03）；毛利率约40%+（KPE03）",
+      "evidence_status": "analyst_estimate",
+      "base_case": "2026E -5%；2027E +2%",
+      "bull_case": "2027E +4%，若技术降本和规模效应超预期且反倾销结果有利",
+      "bear_case": "2027E -3%，若欧盟反倾销税落地或竞争加剧导致价格战",
+      "rationale_and_evidence": "虽然销量翻倍增长且毛利率高，但芯片成本和营销投入依然高企，反倾销调查构成尾部风险，对拐点时间判断偏保守。",
+      "sensitivity": "利润率每变动±2%，影响2027E归母净利润约±23.80亿元，每股价值约1.6元",
+      "confidence": "medium",
+      "verification_gate": "2026年年报监管披露的分部利润和Q4欧盟反倾销初裁结果"
+    },
+    {
+      "parameter": "财务费用/收入比率",
+      "affected_business": "合并利润",
+      "historical_anchor": "2026Q1为3.81%（EV015），同比+5.51pp",
+      "evidence_status": "reported",
+      "base_case": "2026E 2.5%（H2套保生效降低影响）；2027E 1.5%",
+      "bull_case": "2027E 1.0%，若汇率波动超预期减弱且套保完全有效",
+      "bear_case": "2027E 2.0%，若套保失效或汇率剧烈波动",
+      "rationale_and_evidence": "2026Q1的汇兑损失是极端情况，公司已明确表示将增加套保。但需对政策效果存疑，保留一定比率的汇兑影响至2027年。",
+      "sensitivity": "财务费用率每变动±0.5%，影响2027E归母净利润约±23.80亿元，每股价值约2.5元",
+      "confidence": "low",
+      "verification_gate": "H1半年报的汇兑损益附注及套保会计披露"
+    }
+  ],
+  "core_theses": [
+    {
+      "rank": 1,
+      "takeaway": "电动两轮车作为成熟核心业务，其逆势增长的份额为估值提供了坚实基础，但利润率是主要风险点。H1半年报是验证'量增利稳'逻辑的关键催化剂。",
+      "decisive_question": "电动两轮车能否在2026-27年实现超过20%的收入增长而不以牺牲毛利率至侵蚀经营利润为代价？",
+      "evidence": "Q1收入+18%（KPE05）；5月线上+78%（KPE05）；Q3内部目标260万台+70%（KPE04）；7月出货近100万台（KSI01）；电摩占比80%结构升级（KPE03）。",
+      "strongest_counterevidence": "Q1毛利率同比-3.13pp至26.54%（EV012），成本转嫁能力受限；雅迪/爱玛等对手以规模优势发动价格战，高端化溢价空间正在收窄；Q2两轮车EBIT同比仍承压（KPE03），618大促和原材料压力持续。若H1毛利率跌破25%或收入增速低于20%，则'份额提升但利润不增长'的悲观情景确立，当前投资逻辑将被证伪。",
+      "financial_transmission": "销量高增长可对冲ASP和毛利率的下行压力，从而维持经营利润总额增长。两轮车贡献集团约60%的经营利润，是2027E 23.8亿利润的核心支撑。毛利率每偏差1个百分点，影响经营利润约2.77亿元。",
+      "market_pricing": "市场对其增长存疑，PE TTM 21.6x处于5年12.7%分位，隐含TTM盈利仅15.05亿（较FY2025的17.58亿低14%），为两轮车利润率持续恶化定价，完全未计入H2旺季超预期增长和2027年盈利修复。当前价格仅反映了一个'15亿盈利中枢、零增长'的极度保守情景。",
+      "falsification_gate": "若H1报告两轮车收入增速<20%，或毛利率<25%，则份额提升但利润不增长的逻辑被证实，此为重大负面信号，应降级至持有/低配。",
+      "verdict": "partial"
+    },
+    {
+      "rank": 2,
+      "takeaway": "割草机器人是正确赛道上的高增长'期权'，当前估值为其盈利贡献定价近乎为零，核心定价的是快速增长的营收验证和行业地位确立。",
+      "decisive_question": "割草机器人业务能否在2026年实现正向经营利润，并在2027年为归母净利润做出有意义的贡献？",
+      "evidence": "Q2出货翻倍（KPE03）；2025营收约20亿+100%（KPE05）；IDC 26Q1全球出货+97%；毛利率>40%（KPE03）；反倾销调查延期至年底（KPE03）。",
+      "strongest_counterevidence": "EBIT仍为负（KPE03），芯片成本和营销费用高企，公司仍以牺牲利润换规模；追觅、石头科技等拥有机器人技术积累的新进入者加剧竞争，可能引发价格战；欧盟反倾销初裁结果虽延期至Q4，但若征收高额追溯性关税，将直接打击欧洲市场收入和盈利拐点。业务价值存在大幅缩水风险。",
+      "financial_transmission": "贡献了关键的增量营收，支撑集团整体高增长率。高毛利率特征若能在规模效应下传导至经营利润，将从2027H2起打开利润和估值的双重空间。但当前对集团利润的直接贡献<5%，其估值价值完全依赖于市场给予成长性溢价。",
+      "market_pricing": "市场给予其一定的高增长预期（否则PE会更低），但并未给予盈利溢价。当前44.22元隐含对割草机器人盈利贡献为零的保守定价，市场要求'先看到硬利润，再支付估值溢价'。这种定价模式意味着一旦盈利拐点被证实，估值有从消费股向科技成长股切换的空间；但在此之前，低估值本身不构成买入理由。",
+      "falsification_gate": "若2026年全年营收增速<100%，或Q4欧盟反倾销初裁结果为征收高额关税，则该业务的期权价值将大幅缩水，应下调情景概率及公允价值。",
+      "verdict": "partial"
+    }
+  ],
+  "segment_economics": [
+    {
+      "business_unit": "电动两轮车 (BU1)",
+      "economic_role": "成熟核心利润池——最大收入和利润来源",
+      "disclosure_basis": "analytical",
+      "scale_and_growth": "估算贡献>50%集团收入；2026Q1收入+18% YoY；2026年5月线上+78% YoY；Q3内部目标260万台（+70% YoY）",
+      "margin_and_cash": "Q1毛利率承压（整体毛利率26.54%，-3.13pp）；高端化定位支撑ASP溢价；经销商模式需管理渠道库存和应收款",
+      "driver_equation": "收入 = 国内销量 × ASP国内 + 出口销量 × ASP出口；销量由新车型投放、渠道扩张、线上销售和行业需求驱动",
+      "valuation_treatment": "core",
+      "evidence_ids": [
+        "KPE03",
+        "KPE04",
+        "KPE05",
+        "KSI01",
+        "EV012"
+      ],
+      "missing_or_next_check": "官方分部营收和毛利率缺失；H1半年报为首个硬验证点"
+    },
+    {
+      "business_unit": "电动滑板车及平衡车 (BU2)",
+      "economic_role": "成熟现金牛——稳定但增长缓慢",
+      "disclosure_basis": "analytical",
+      "scale_and_growth": "成熟市场；2C滑板车受益油价催化延续较高增长；2B滑板车受收入延迟确认影响；Q2预计+30%（KPE10）",
+      "margin_and_cash": "毛利率中等；规模效应来自组件标准化；2B客户应收款账期可能较长",
+      "driver_equation": "收入 = 2C销量 × ASP + 2B合同销量 × 合同ASP；2B需求取决于共享出行车队扩张和替换周期",
+      "valuation_treatment": "core",
+      "evidence_ids": [
+        "KPE03",
+        "KPE04",
+        "KPE10"
+      ],
+      "missing_or_next_check": "2C/2B收入拆分和分部毛利率未披露"
+    },
+    {
+      "business_unit": "全地形车 (BU3)",
+      "economic_role": "爬坡阶段——接近盈亏平衡的成长型业务",
+      "disclosure_basis": "analytical",
+      "scale_and_growth": "Q1高增长且好于年初目标（KPE03）；定位北美市场；尚在爬坡期",
+      "margin_and_cash": "目前低/负利润率，因高额固定成本和开发费用；规模扩大后盈利可期",
+      "driver_equation": "收入 = 出货量 × ASP；由北美户外休闲需求和经销商网络扩张驱动",
+      "valuation_treatment": "optionality",
+      "evidence_ids": [
+        "KPE03",
+        "KPE04"
+      ],
+      "missing_or_next_check": "官方分部收入、利润/亏损、出货量均未披露"
+    },
+    {
+      "business_unit": "割草机器人 (BU4)",
+      "economic_role": "高成长第二曲线——估值切换的核心变量",
+      "disclosure_basis": "analytical",
+      "scale_and_growth": "2025年营收约20亿元（+100%）；IDC 26Q1全球出货+97%；Q2出货翻倍（KPE03）",
+      "margin_and_cash": "毛利率>40%（KPE03）；EBIT仍为负因芯片成本和营销投入；季节性备货（Q2/Q3旺季）",
+      "driver_equation": "收入 = 欧洲销量 × ASP_EU + 美国扩张销量 × ASP_US；增长由品类认知提升、产品迭代和渠道扩张驱动",
+      "valuation_treatment": "scenario",
+      "evidence_ids": [
+        "KPE03",
+        "KPE05",
+        "EV036"
+      ],
+      "missing_or_next_check": "官方分部收入、毛利率和成本结构均未披露；2026年年报为首个硬验证点"
+    },
+    {
+      "business_unit": "电动自行车及新兴产品 (BU5)",
+      "economic_role": "早期期权——仅有投入、无利润贡献",
+      "disclosure_basis": "analytical",
+      "scale_and_growth": "eBike预计2027年欧洲发售；目前仅有研发投入无营收",
+      "margin_and_cash": "亏损状态；研发和市场准入成本高",
+      "driver_equation": "收入 = 早期采用者和经销商的初始销售；爬坡缓慢",
+      "valuation_treatment": "excluded",
+      "evidence_ids": [],
+      "missing_or_next_check": "营收、成本、投资规模均未披露"
+    }
+  ],
+  "business_model_mechanisms": [
+    {
+      "link": "客户与价值主张",
+      "how_it_works": "为城市通勤者、郊区别墅家庭和共享出行运营商提供智能化电动短途出行工具和自主割草机器人；以产品设计、智能互联功能和品牌认知创造差异化。",
+      "economic_driver": "消费者偏好智能化、高端化产品；共享运营商关注总拥有成本和可靠性",
+      "cash_and_capital_feature": "经销商渠道铺货需要成品库存；共享运营商合同回款周期较长",
+      "evidence_or_gap": "九号已成为国内'智能两轮车'品类代名词（KPE05）；Segway品牌在海外共享滑板车市场认知度极高",
+      "analyst_conclusion": "品牌和产品力强，但护城河更依赖产品迭代速度而非结构性壁垒，盈利能力波动性大于典型护城河公司"
+    },
+    {
+      "link": "采购与定价",
+      "how_it_works": "国内两轮车通过经销门店和线上渠道销售，ASP受产品结构（电摩占比）、促销力度和区域定价影响；海外机器人通过零售商和DTC销售。",
+      "economic_driver": "产品结构升级（电摩占比从80%提升）可支撑ASP；价格战和促销会压缩ASP",
+      "cash_and_capital_feature": "经销商应收款通常为短期；线上销售回款更快",
+      "evidence_or_gap": "Q1毛利率-3.13pp表明成本传导能力受限（EV012）；电摩占比80%支撑高端定位（KPE03）",
+      "analyst_conclusion": "ASP和毛利率是判断品牌溢价能否维持的核心指标，Q1的毛利率下滑需要H1数据验证是季节性还是结构性"
+    },
+    {
+      "link": "交付与收入确认",
+      "how_it_works": "产品制造/产能出货型：国内两轮车通过经销商发货确认收入；海外滑板车和机器人通过出口报关和客户验收确认。",
+      "economic_driver": "Q2/Q3是销售旺季；新车型上市节奏影响季度收入分布",
+      "cash_and_capital_feature": "季节性备货导致Q1-Q2存货高企；合同负债（客户预付款）可部分对冲营运资金压力",
+      "evidence_or_gap": "Q1存货/收入+4.42pp（EV040）；合同负债18.69亿（Q1 2026）",
+      "analyst_conclusion": "季节性特征显著，Q1经营现金流为负是常态而非异常；H1现金流量表将验证全年现金转化能力"
+    },
+    {
+      "link": "成本结构",
+      "how_it_works": "BOM成本主要包括电池、电机、车架、电子元器件和半导体芯片；制造人工和模具摊销；研发支出用于新产品平台；销售费用包括经销商返利和促销。",
+      "economic_driver": "原材料（锂电、钢材、芯片）价格波动直接影响毛利率；规模效应摊薄固定成本",
+      "cash_and_capital_feature": "资本开支用于新车型模具、产线扩建和总部建设；研发支出费用化影响当期利润",
+      "evidence_or_gap": "KPE03显示Q2原材料成本压力持续；芯片成本拖累割草机器人EBIT",
+      "analyst_conclusion": "成本端压力是当前毛利率的最大威胁，规模效应尚未充分显现，需要H1分部数据验证成本控制能力"
+    },
+    {
+      "link": "现金回收与资本强度",
+      "how_it_works": "经营现金流取决于经销商回款、出口收汇和存货管理；自由现金流受总部建设（4年期项目）和产能扩张资本开支影响。",
+      "economic_driver": "旺季回款能力决定全年OCF；8月1日分红和回购注销是管理层对现金流自信的硬信号",
+      "cash_and_capital_feature": "Q1 OCF/NI -2.34x为季节性低点（备货）；2024H1曾录得24.9亿经营正现金流",
+      "evidence_or_gap": "Q1 OCF为负（EV016）；回购2.2亿用于注销（KSI01）；H1现金流量表缺失",
+      "analyst_conclusion": "现金流质量是未解决的重大不确定性，但回购注销和分红实施提供了正面信号，需H1现金流量表验证"
+    }
+  ],
+  "industry_driver_matrix": [
+    {
+      "driver": "电动两轮车行业需求（国内）",
+      "current_state_and_direction": "新国标冲击逐步消退，积压需求在2026H2释放。Q3销售目标260万台（+70%）为强右侧信号。",
+      "dated_evidence": "2026年7月出货近100万台（KSI01）；Q3目标260万台（KPE04）；5月线上+78%（KPE05）",
+      "affected_business": "电动两轮车 (BU1)",
+      "financial_transmission": "行业需求复苏→两轮车销量高增长→集团收入增速30%+",
+      "confidence": "medium",
+      "next_verification": "Q3月度销售数据和H1半年报两轮车收入增速"
+    },
+    {
+      "driver": "电动两轮车行业竞争",
+      "current_state_and_direction": "雅迪、爱玛等巨头以规模优势施压价格；九号在智能化和中高端细分市场保持差异化但ASP溢价空间收窄。",
+      "dated_evidence": "Q1毛利率-3.13pp（EV012）；两轮车EBIT同比承压（KPE03）",
+      "affected_business": "电动两轮车 (BU1)",
+      "financial_transmission": "竞争加剧→ASP承压或促销增加→毛利率下滑→经营利润增速低于收入增速",
+      "confidence": "medium",
+      "next_verification": "H1半年报分部毛利率和ASP数据"
+    },
+    {
+      "driver": "割草机器人行业渗透率",
+      "current_state_and_direction": "全球智能割草机器人处于结构性高景气早期。IDC数据26Q1全球出货+97%，九号Q2出货翻倍。",
+      "dated_evidence": "IDC 26Q1全球出货+97%；Q2出货翻倍（KPE03）；2025年营收约20亿+100%（KPE05）",
+      "affected_business": "割草机器人 (BU4)",
+      "financial_transmission": "品类渗透率提升→九号销量翻倍→机器人收入高增长→集团营收增速支撑",
+      "confidence": "medium",
+      "next_verification": "H1半年报机器人收入增速和IDC Q2行业数据"
+    },
+    {
+      "driver": "欧盟反倾销调查",
+      "current_state_and_direction": "调查延期至2026年底，无初裁结果不会征收临时关税和追溯。但这是延期而非取消，Q4初裁仍构成尾部风险。",
+      "dated_evidence": "KPE03：反倾销调查延期至年底，据业内反馈无初裁结果不会征收临时关税和追溯",
+      "affected_business": "割草机器人 (BU4)",
+      "financial_transmission": "若初裁征收高额关税→欧洲市场ASP被迫提高或销量下滑→机器人收入和盈利预期大幅下调",
+      "confidence": "low",
+      "next_verification": "2026Q4欧盟反倾销初裁结果"
+    },
+    {
+      "driver": "汇率（美元/欧元兑人民币）",
+      "current_state_and_direction": "Q1财务费用率同比+5.51pp，汇兑损失严重拖累2026年表观利润。公司计划H2增加套保，但有效性未验证。",
+      "dated_evidence": "Q1财务费用率3.81%（EV015）；Q2归母-10%+（KPE03）；公司计划H2增加套保（KPE03）",
+      "affected_business": "合并利润（境外收入占比约50%）",
+      "financial_transmission": "人民币升值→汇兑损失增加→财务费用率上升→表观利润被扭曲→估值需锚定2027年正常化利润",
+      "confidence": "low",
+      "next_verification": "H1汇兑损益附注和套保会计披露"
+    }
+  ],
+  "competition_landscapes": [
+    {
+      "business_unit": "电动两轮车 (BU1)",
+      "market_boundary": "中国智能、互联电动自行车/摩托车市场及东南亚入门级电动踏板车市场",
+      "structure_and_concentration": "中国两轮车市场雅迪、爱玛合计约60%份额，高度集中；九号在>3000元高端智能细分市场领先",
+      "direct_competitors": [
+        "雅迪控股",
+        "爱玛科技",
+        "小牛电动"
+      ],
+      "substitutes_self_supply_and_new_entrants": [
+        "传统燃油摩托车",
+        "公共交通和网约车",
+        "共享单车",
+        "大型EV制造商进入微出行领域"
+      ],
+      "comparison_dimensions": [
+        "智能功能（App互联、OTA）",
+        "续航/性能",
+        "品牌/设计",
+        "价格",
+        "经销商网络覆盖"
+      ],
+      "company_relative_position": "高端智能细分市场领导者，整体市场份额约3%但在>3000元价格带份额更高；品牌忠诚度强。",
+      "competitor_likely_response": "雅迪/爱玛可能推出竞争性智能车型并利用规模优势低价渗透，压缩九号的ASP溢价空间。",
+      "financial_transmission": "若竞争对手侵蚀ASP溢价，毛利率将压缩，导致利润增速低于收入增速，估值倍数承压。",
+      "evidence_status_and_ids": "partial; KPE04, KPE06, EV012",
+      "next_verification": "行业出货数据和公司市场份额估算"
+    },
+    {
+      "business_unit": "割草机器人 (BU4)",
+      "market_boundary": "住宅和轻商业用途的自主割草机器人（欧洲和北美市场）",
+      "structure_and_concentration": "Husqvarna全球约50%份额主导；九号以无线RTK/视觉导航技术实现差异化挑战；追觅、石头科技等中国竞争者也在进入",
+      "direct_competitors": [
+        "Husqvarna (Automower)",
+        "Worx (Landroid)",
+        "Robomow",
+        "追觅科技",
+        "石头科技"
+      ],
+      "substitutes_self_supply_and_new_entrants": [
+        "传统有线/电动割草机",
+        "人工草坪服务",
+        "John Deere、Toro等户外动力设备巨头可能进入"
+      ],
+      "comparison_dimensions": [
+        "导航技术（RTK/视觉/LiDAR）",
+        "安装便捷性（无需埋线）",
+        "草坪管理App体验",
+        "价格",
+        "经销商/服务支持"
+      ],
+      "company_relative_position": "无线导航细分市场前两名，欧洲渠道布局完善，产品评价优秀；价格相比Husqvarna有竞争力。",
+      "competitor_likely_response": "Husqvarna降价并改进导航技术；追觅以激进定价策略抢份额。",
+      "financial_transmission": "若价格战导致毛利率压缩，高增长可能无法转化为利润，降低集团整体估值溢价。",
+      "evidence_status_and_ids": "partial; KPE05, KPE03, EV036",
+      "next_verification": "IDC行业出货数据及公司季度销售更新"
+    }
+  ],
+  "moat_mechanisms": [
+    {
+      "moat_source": "品牌（Segway和九号）在个人短途出行领域",
+      "operating_mechanism": "消费者愿意为Segway/九号品牌支付溢价，因为品牌代表品质、智能和创新。在海外，Segway是共享滑板车的首选品牌。",
+      "observed_proof": "欧洲滑板车市场约50%份额（KPE04）；九号已成为国内智能两轮车品类代名词；ASP高于白牌竞品",
+      "economic_result": "品牌溢价支撑较高毛利率，在滑板车业务中提供稳定的现金回报",
+      "durability_and_threat": "中国ODM厂商质量提升并推出自主品牌，价差正在缩小。雅迪/爱玛以规模优势侵入高端市场。",
+      "verdict": "partial"
+    },
+    {
+      "moat_source": "技术/研发（智能化和自主导航）",
+      "operating_mechanism": "两轮车的OTA升级、感应解锁、智能电池管理创造用户粘性；割草机器人的无线RTK/视觉导航提供差异化体验。",
+      "observed_proof": "割草机器人无线导航体验领先Husqvarna 2-3年（产品评价）；两轮车App互联功能行业领先",
+      "economic_result": "技术差异化支撑高端定价和用户留存，降低价格弹性",
+      "durability_and_threat": "追觅和石头科技的机器人技术快速追赶；Husqvarna也在改进导航方案。两轮车智能功能并非不可逾越的壁垒。",
+      "verdict": "unproven"
+    },
+    {
+      "moat_source": "规模与供应链整合",
+      "operating_mechanism": "多产品线（两轮车+滑板车+机器人+ATV）共享研发、模具和供应链资源，理论上可降低单位成本。",
+      "observed_proof": "无硬数据显示成本优势。Q1毛利率下滑说明转嫁成本压力的能力不足，与具备规模优势的企业表现相悖。",
+      "economic_result": "若规模效应显现→毛利率回升；若规模不足→成本劣势",
+      "durability_and_threat": "雅迪两轮车出货量远超九号，在采购和生产成本上具有更大规模优势。",
+      "verdict": "unproven"
+    }
+  ],
+  "accounting_quality_matrix": [
+    {
+      "item": "毛利率变动",
+      "latest_evidence_and_period": "2026Q1毛利率26.54%，同比-3.13pp（EV012）",
+      "trend_or_comparator": "FY2025整体毛利率未披露；Q1环比趋势不明确",
+      "causal_interpretation": "原材料成本上涨、促销力度加大和新品爬坡期共同导致毛利率下行。是否季节性还是结构性需H1验证。",
+      "earnings_cash_roic_effect": "每1pp毛利率变动影响约2.77亿经营利润，直接传导至ROIC。",
+      "verdict": "warning",
+      "evidence_ids": [
+        "EV012",
+        "KPE03"
+      ]
+    },
+    {
+      "item": "经营现金流质量",
+      "latest_evidence_and_period": "2026Q1 OCF/净利润比值-2.34x（EV016）",
+      "trend_or_comparator": "2024H1经营现金流曾录得24.9亿正数；Q1季节性现金流出为常态",
+      "causal_interpretation": "Q1备货导致存货和应收款增加，现金流出属于季节性特征。Q1单点数据不能外推全年。",
+      "earnings_cash_roic_effect": "若全年OCF覆盖净利润≥50%则质量可接受；若连续为负则盈利质量存疑。",
+      "verdict": "neutral",
+      "evidence_ids": [
+        "EV016",
+        "EV029"
+      ]
+    },
+    {
+      "item": "存货/收入比",
+      "latest_evidence_and_period": "2026Q1存货/收入+4.42pp（EV040）",
+      "trend_or_comparator": "同比上升，需关注是否为渠道压货或滞销信号",
+      "causal_interpretation": "Q1为旺季备货，存货上升具有季节性。但若H1存货/收入比持续走高，则可能是动销不达预期的信号。",
+      "earnings_cash_roic_effect": "存货积压→减值风险→占用营运资金→降低OCF和ROIC",
+      "verdict": "warning",
+      "evidence_ids": [
+        "EV040"
+      ]
+    },
+    {
+      "item": "合同负债（客户预付款）",
+      "latest_evidence_and_period": "2026Q1合同负债18.69亿（EV029）",
+      "trend_or_comparator": "绝对规模较大，反映经销商预付款和客户锁单需求",
+      "causal_interpretation": "合同负债是未来收入的先行指标。高合同负债意味着已锁定需求，降低收入不确定性。",
+      "earnings_cash_roic_effect": "预收款减少营运资金压力，改善现金转化，是正面信号。",
+      "verdict": "positive",
+      "evidence_ids": [
+        "EV029"
+      ]
+    },
+    {
+      "item": "股东回报：回购注销与分红",
+      "latest_evidence_and_period": "2026年6-7月回购2.2亿用于注销（KSI01）；8月1日2025年度权益分派实施",
+      "trend_or_comparator": "回购注销直接增厚每股价值；分红体现现金流信心",
+      "causal_interpretation": "管理层用真金白银为底部背书，是在表达对经营现金流和未来盈利的自信。",
+      "earnings_cash_roic_effect": "回购注销→每股盈利增厚；分红→验证现金流质量",
+      "verdict": "positive",
+      "evidence_ids": [
+        "KSI01"
+      ]
+    },
+    {
+      "item": "财务费用与汇兑敞口",
+      "latest_evidence_and_period": "Q1财务费用率3.81%，同比+5.51pp（EV015）",
+      "trend_or_comparator": "境外收入占比约50%，汇兑是利润的重大摆动变量",
+      "causal_interpretation": "Q1汇兑损失规模极端，2026年全年表观利润被严重扭曲。套保政策的有效性是未验证的关键假设。",
+      "earnings_cash_roic_effect": "汇兑损失→表观利润和经营现金流失真→估值需锚定2027年正常化利润",
+      "verdict": "warning",
+      "evidence_ids": [
+        "EV015",
+        "KPE03"
+      ]
+    }
+  ],
+  "alternative_intelligence_decisions": [
+    {
+      "kpe_ids": [
+        "KPE01"
+      ],
+      "claim": "浙商证券全所级别重大推荐九号公司：智能化驱动两轮车逆势增长，割草机器人低渗透高增长，预计27年归母净利润26.3亿元对应PE 11.77x，参考安克和涛涛27年17x估值有较大修复空间。",
+      "source_type": "sell_side_view",
+      "affected_business_and_variable": "合并利润和估值倍数——2027E parent_net_profit=2630，target_multiple=17x",
+      "public_crosscheck": "与其他卖方（KPE03、KPE04）的方向一致但绝对值偏高；26.3亿高于我们模型23.8亿约10%；该KPE与对应KSI属于同一卖方原始帖子，不构成独立交叉验证；该KPE与对应KSI属于同一卖方原始帖子，不构成独立交叉验证。",
+      "evidence_grade": "C_market_narrative",
+      "source_reliability": "B_identified_professional",
+      "bias_profile": "sell_side_optimism",
+      "adoption_ceiling": "model_input_after_crosscheck",
+      "disposition": "probability_change",
+      "before_after": "2027E bull scenario使用26.3亿（概率20%）——作为乐观情景而非base case；估值参考的17x被采纳为bull case倍数",
+      "report_use": "进入bull scenario估值；在KSI卖方预期矩阵中作为高乐观锚点引用",
+      "falsification_or_next_check": "H1半年报收入增速和毛利率是否支持2027E 26.3亿的线性外推",
+      "freshness_and_shelf_life": ""
+    },
+    {
+      "kpe_ids": [
+        "KPE03"
+      ],
+      "claim": "开源家电吕明团队渠道反馈：Q2收入增速接近30%（两轮车低双位数、割草机器人翻倍以上、全地形车高增长），剔除汇兑后经营性利润正增长，但归母净利润受汇兑拖累-10%+；割草机器人EBIT仍为负但环比改善；反倾销调查延期至年底。",
+      "source_type": "sell_side_view",
+      "affected_business_and_variable": "Q2集团收入增速、各业务线经营状况、汇兑影响、割草机器人盈利能力",
+      "public_crosscheck": "与KPE04（国泰海通）和KPE10的方向一致；三源交叉验证Q2收入+25-30%；该KPE与对应KSI属于同一卖方原始帖子，不构成独立交叉验证；该KPE与对应KSI属于同一卖方原始帖子，不构成独立交叉验证。",
+      "evidence_grade": "C_market_narrative",
+      "source_reliability": "B_identified_professional",
+      "bias_profile": "neutral_or_data",
+      "adoption_ceiling": "model_input_after_crosscheck",
+      "disposition": "model_change",
+      "before_after": "割草机器人盈利拐点从2026H2推迟至2027H1；2027E parent_net_profit从26.3亿下调至23.8亿；2026E财务费用率维持2.5%",
+      "report_use": "支撑'增长确定但盈利拐点未至'的核心判断；影响割草机器人估值从core推迟至scenario",
+      "falsification_or_next_check": "H1半年报验证收入增速和分部利润",
+      "freshness_and_shelf_life": ""
+    },
+    {
+      "kpe_ids": [
+        "KPE04"
+      ],
+      "claim": "国泰海通家电：九号公司底部机会——Q2收入约85亿+25-30%；Q3两轮销售端提出260万台（+70%）目标；中长期5年收入锚定640亿；25/26PE仅15/11X。",
+      "source_type": "sell_side_view",
+      "affected_business_and_variable": "Q2收入、Q3销量目标、长期收入空间",
+      "public_crosscheck": "与KPE03和KPE10收入增速交叉验证；260万台目标在KSI01（7月出货近百万台）中得到部分验证；该KPE与对应KSI属于同一卖方原始帖子，不构成独立交叉验证；该KPE与对应KSI属于同一卖方原始帖子，不构成独立交叉验证。",
+      "evidence_grade": "C_market_narrative",
+      "source_reliability": "B_identified_professional",
+      "bias_profile": "sell_side_optimism",
+      "adoption_ceiling": "model_input_after_crosscheck",
+      "disposition": "model_change",
+      "before_after": "维持2026E收入增速30%的偏乐观假设（Q3 260万台目标+70%和7月出货近百万台提供支撑）",
+      "report_use": "支撑两轮车收入高增长假设；在forecast_assumptions中作为基准情景锚点",
+      "falsification_or_next_check": "Q3实际销售数据与260万台目标的偏差",
+      "freshness_and_shelf_life": ""
+    },
+    {
+      "kpe_ids": [
+        "KPE05"
+      ],
+      "claim": "浙商消费深度报告：九号两轮车2026Q1收入+18%逆势增长，5月线上+78%；2025年机器人业务营收20亿元增速超100%；2026E-2028E收入增速30%/20%/17%。",
+      "source_type": "sell_side_view",
+      "affected_business_and_variable": "两轮车和机器人历史增速、三年收入增速假设",
+      "public_crosscheck": "Q1收入+18%与已核实财报一致；营收增速30%/20%/17%被RM模型采纳后未经独立验证；该KPE与对应KSI属于同一卖方原始帖子，不构成独立交叉验证；该KPE与对应KSI属于同一卖方原始帖子，不构成独立交叉验证。",
+      "evidence_grade": "C_market_narrative",
+      "source_reliability": "B_identified_professional",
+      "bias_profile": "sell_side_optimism",
+      "adoption_ceiling": "model_input_after_crosscheck",
+      "disposition": "model_change",
+      "before_after": "采纳2026E-2028E收入增速30%/20%/17%作为模型基准输入（折价使用以反映卖方乐观偏差）",
+      "report_use": "三年收入预测的基础假设；标注为'unverified broker estimate'",
+      "falsification_or_next_check": "H1半年报将首次验证全年30%收入增速假设的合理性",
+      "freshness_and_shelf_life": ""
+    },
+    {
+      "kpe_ids": [
+        "KPE02"
+      ],
+      "claim": "公司澄清：关于Fz3系列'AB机'传言不实，不同生产基地的认证型号差异不等同于AB货；公司已启动核查和处理程序。",
+      "source_type": "company_research",
+      "affected_business_and_variable": "两轮车产品质量和合规风险",
+      "public_crosscheck": "公司官方口径；未发现监管处罚或召回公告",
+      "evidence_grade": "C_market_narrative",
+      "source_reliability": "C_private_unverified",
+      "bias_profile": "company_promotion",
+      "adoption_ceiling": "scenario_or_verification_only",
+      "disposition": "verification_change",
+      "before_after": "不改变模型假设；作为观察项跟踪是否有监管介入或消费者投诉升级",
+      "report_use": "在风险章节作为低概率但高影响的尾部风险提及",
+      "falsification_or_next_check": "后续是否有消费者集体投诉或监管部门的正式调查",
+      "freshness_and_shelf_life": ""
+    },
+    {
+      "kpe_ids": [
+        "KPE06"
+      ],
+      "claim": "渠道核实：涛涛车业高尔夫球车三次提价、渠道库存低位、月产能爬坡至7000台、26E利润12-13亿（+50%）。九号25/26PE被提及为15/11倍。",
+      "source_type": "sell_side_view",
+      "affected_business_and_variable": "相对配置：九号与涛涛车业的盈利确定性和估值对比",
+      "public_crosscheck": "涛涛的提价和产能数据需独立验证；九号PE倍数与其他卖方一致；该KPE与对应KSI属于同一卖方原始帖子，不构成独立交叉验证；该KPE与对应KSI属于同一卖方原始帖子，不构成独立交叉验证。",
+      "evidence_grade": "C_market_narrative",
+      "source_reliability": "C_private_unverified",
+      "bias_profile": "channel_selection_bias",
+      "adoption_ceiling": "scenario_or_verification_only",
+      "disposition": "verification_change",
+      "before_after": "不改变九号评级和模型，但提醒投资者关注涛涛车业作为替代标的，若其盈利确定性更高则九号的相对吸引力减弱",
+      "report_use": "在peer opportunity cost讨论中提及，但不作为降级理由",
+      "falsification_or_next_check": "涛涛车业和九号各自2026年H1业绩验证后重新比较",
+      "freshness_and_shelf_life": ""
+    }
+  ],
+  "sell_side_expectation_matrix": [
+    {
+      "source_ids": [
+        "KSI03",
+        "KPE04"
+      ],
+      "institution": "国泰海通",
+      "institution_origin": "domestic_sell_side",
+      "published_at": "2026-07-22",
+      "observation_type": "single_broker",
+      "forecast_and_valuation": "Q2收入约85亿（+25-30%）；两轮+10%/割草机+150%/滑板车+30%；25/26PE仅15/11X；中长期5年收入锚定640亿",
+      "revision_or_dispersion": "窗口内首次识别，无同机构前序可比",
+      "comparison_with_our_model": "2026E收入增速25-30%与我们30%基本一致；利润端略有下滑的表述与我们17.8亿（低于卖方19.4亿）一致；PE 15/11X低于我们基于2027E的13.7x",
+      "forecast_posture": "optimistic",
+      "key_assumptions_and_scenario": "核心假设：新国标冲击消退、Q3旺季放量（260万台+70%）、中长期油改电渗透率提升和东南亚出海驱动增长。乐观情景下5年收入锚定640亿。",
+      "adoption_level": "partial_model_input",
+      "evidence_status": "private_text",
+      "decision_use": "Q3 260万台目标作为两轮车高增长的支撑证据；640亿长期收入锚作为bull case参考但不进入估值"
+    },
+    {
+      "source_ids": [
+        "KSI04",
+        "KPE03"
+      ],
+      "institution": "开源证券",
+      "institution_origin": "domestic_sell_side",
+      "published_at": "2026-07-22",
+      "observation_type": "single_broker",
+      "forecast_and_valuation": "Q2收入增速接近30%；剔除汇兑经营利润正增长；归母净利润受汇兑拖累-10%+；割草机器人EBIT仍为负",
+      "revision_or_dispersion": "较前次口径发生变化",
+      "comparison_with_our_model": "收入增速与我们的30%一致；割草机器人EBIT为负与我们将盈利拐点推迟至2027H1的判断完全吻合；汇兑影响方向一致",
+      "forecast_posture": "balanced",
+      "key_assumptions_and_scenario": "核心假设：汇兑为过渡性因素，经营利润增长是核心；割草机器人EBIT环比改善但同比仍降。",
+      "adoption_level": "direct_base_input",
+      "evidence_status": "private_text",
+      "decision_use": "直接支持我们的核心判断：收入高增长确定（+30%），汇兑扭曲表观利润但经营利润健康，割草机器人盈利拐点延迟"
+    },
+    {
+      "source_ids": [
+        "KSI01",
+        "KPE07"
+      ],
+      "institution": "华源证券",
+      "institution_origin": "domestic_sell_side",
+      "published_at": "2026-08-03",
+      "observation_type": "single_broker",
+      "forecast_and_valuation": "Q3有望迎来最旺夏天；7月出货量近100万台；26年PE 17倍/剔除汇兑约15倍；向下有4.5%股息率支撑；近一月回购2.2亿注销",
+      "revision_or_dispersion": "较前次口径发生变化",
+      "comparison_with_our_model": "PE 17倍与我们2027E base 18.4x接近；7月出货近100万台支撑Q3 260万台目标的可实现性",
+      "forecast_posture": "optimistic",
+      "key_assumptions_and_scenario": "4.5%股息率假设需验证（来自华源自身测算而非公告）；回购注销是硬事实。",
+      "adoption_level": "scenario_probability_only",
+      "evidence_status": "private_text",
+      "decision_use": "回购注销事实进入accounting_quality正面清单；4.5%股息率因非公告数据仅作参考；7月出货数据作为需求侧验证"
+    }
+  ],
+  "safe_valuation_assumptions": {
+    "current_price_cny": 44.22,
+    "required_annual_return_pct": 20.0,
+    "holding_period_years": 1.0,
+    "margin_of_safety_pct": 20.0,
+    "maximum_bear_loss_pct": 20.0,
+    "optionality_equity_value_cny_mn": 0.0,
+    "optionality_inputs": [
+      {
+        "name": "ATV和eBike成功期权",
+        "metric_name": "hypothetical_2030_EBIT",
+        "metric_value_cny_mn": 500.0,
+        "valuation_multiple": 15.0,
+        "probability_pct": 15.0,
+        "ownership_pct": 100.0,
+        "execution_haircut_pct": 30.0,
+        "evidence_ids": [
+          "KPE03",
+          "KPE04"
+        ],
+        "assumption_summary": "假设2030年ATV+eBike合计EBIT 500百万元，经15倍贴现回2027年，15%概率，30%执行折扣。目前两项业务均未盈利，属于纯期权价值。"
+      }
+    ],
+    "other_adjustments_equity_value_cny_mn": 0.0,
+    "scenarios": [
+      {
+        "scenario": "bull",
+        "probability_pct": 20.0,
+        "valuation_method": "PE",
+        "parent_net_profit_cny_mn": 2630.0,
+        "valuation_multiple": 20.0,
+        "direct_equity_value_cny_mn": null,
+        "assumption_summary": "乐观情景：两轮车量利双收（GM回升至28%），割草机器人提前至2027H1盈利，汇兑正常化至1.0%，反倾销结果有利。2027E归母净利润26.3亿，给予20x PE（出海消费成长股重估）。",
+        "evidence_ids": [
+          "KPE01",
+          "KPE05"
+        ]
+      },
+      {
+        "scenario": "base",
+        "probability_pct": 60.0,
+        "valuation_method": "PE",
+        "parent_net_profit_cny_mn": 2380.0,
+        "valuation_multiple": 18.4,
+        "direct_equity_value_cny_mn": null,
+        "assumption_summary": "基准情景：两轮车销量+35%/+25%，毛利率2027E回升至27.2%；割草机器人营收翻倍但EBIT仍为负至2027H1；财务费用率2027E 1.5%。2027E归母净利润23.8亿，给予核心业务18x+场景业务22x的加权PE 18.4x。",
+        "evidence_ids": [
+          "EV010",
+          "EV012",
+          "KPE03",
+          "KPE04",
+          "KPE05"
+        ]
+      },
+      {
+        "scenario": "bear",
+        "probability_pct": 20.0,
+        "valuation_method": "PE",
+        "parent_net_profit_cny_mn": 1500.0,
+        "valuation_multiple": 14.0,
+        "direct_equity_value_cny_mn": null,
+        "assumption_summary": "悲观情景：需求复苏乏力，为保份额降价，毛利率恶化至24%；汇兑冲击持续（财务费用率2.0%）；割草机器人反倾销不利。2027E归母净利润仅15亿，给予14x PE。",
+        "evidence_ids": [
+          "EV012",
+          "EV015",
+          "EV040"
+        ]
+      }
+    ]
+  },
+  "deterministic_valuation": {
+    "status": "closed",
+    "diluted_share_count_mn": 735.8485,
+    "scenario_rows": [
+      {
+        "scenario": "bull",
+        "probability_pct": 20.0,
+        "parent_net_profit_cny_mn": 2630.0,
+        "eps_cny": 3.5741052675924463,
+        "valuation_method": "PE",
+        "valuation_multiple": 20.0,
+        "equity_value_cny_mn": 52600.0,
+        "fair_value_per_share_cny": 71.48210535184893,
+        "assumption_summary": "乐观情景：两轮车量利双收（GM回升至28%），割草机器人提前至2027H1盈利，汇兑正常化至1.0%，反倾销结果有利。2027E归母净利润26.3亿，给予20x PE（出海消费成长股重估）。"
+      },
+      {
+        "scenario": "base",
+        "probability_pct": 60.0,
+        "parent_net_profit_cny_mn": 2380.0,
+        "eps_cny": 3.2343614208631264,
+        "valuation_method": "PE",
+        "valuation_multiple": 18.4,
+        "equity_value_cny_mn": 43792.0,
+        "fair_value_per_share_cny": 59.51225014388152,
+        "assumption_summary": "基准情景：两轮车销量+35%/+25%，毛利率2027E回升至27.2%；割草机器人营收翻倍但EBIT仍为负至2027H1；财务费用率2027E 1.5%。2027E归母净利润23.8亿，给予核心业务18x+场景业务22x的加权PE 18.4x。"
+      },
+      {
+        "scenario": "bear",
+        "probability_pct": 20.0,
+        "parent_net_profit_cny_mn": 1500.0,
+        "eps_cny": 2.03846308037592,
+        "valuation_method": "PE",
+        "valuation_multiple": 14.0,
+        "equity_value_cny_mn": 21000.0,
+        "fair_value_per_share_cny": 28.53848312526288,
+        "assumption_summary": "悲观情景：需求复苏乏力，为保份额降价，毛利率恶化至24%；汇兑冲击持续（财务费用率2.0%）；割草机器人反倾销不利。2027E归母净利润仅15亿，给予14x PE。"
+      }
+    ],
+    "optionality_rows": [
+      {
+        "name": "ATV和eBike成功期权",
+        "metric_name": "hypothetical_2030_EBIT",
+        "metric_value_cny_mn": 500.0,
+        "valuation_multiple": 15.0,
+        "probability_pct": 15.0,
+        "ownership_pct": 100.0,
+        "execution_haircut_pct": 30.0,
+        "equity_value_cny_mn": 787.5,
+        "per_share_value_cny": 1.070193117197358,
+        "evidence_ids": [
+          "KPE03",
+          "KPE04"
+        ],
+        "assumption_summary": "假设2030年ATV+eBike合计EBIT 500百万元，经15倍贴现回2027年，15%概率，30%执行折扣。目前两项业务均未盈利，属于纯期权价值。"
+      }
+    ],
+    "probability_weighted_core_value_cny": 55.711467781751274,
+    "optionality_per_share_cny": 1.070193117197358,
+    "other_adjustments_per_share_cny": 0.0,
+    "fair_value_per_share_cny": 56.78166089894863,
+    "expected_return_pct": 28.407193349047112,
+    "required_annual_return_pct": 20.0,
+    "holding_period_years": 1.0,
+    "margin_of_safety_pct": 20.0,
+    "maximum_bear_loss_pct": 20.0,
+    "required_return_price_cny": 49.59354178656794,
+    "margin_of_safety_price_cny": 47.60980011510522,
+    "bear_loss_constraint_price_cny": 35.673103906578596,
+    "safe_buy_price_ceiling_cny": 35.673103906578596,
+    "suggested_buy_zone_low_cny": 32.10579351592074,
+    "fundamental_floor_cny": 28.53848312526288,
+    "formula_notes": [
+      "scenario EPS = parent net profit (CNY mn) / diluted shares (mn)",
+      "PE fair value/share = scenario EPS x selected PE",
+      "probability-weighted core value = sum(probability x scenario fair value/share)",
+      "optionality equity value = metric x multiple x probability x ownership x (1-execution haircut)",
+      "safe ceiling = min(base/(1+required return)^years, base x (1-MOS), bear/(1-max bear loss))"
+    ]
+  },
+  "investment_conclusion_and_core_conflict": "九号公司（689009.SH）当前股价44.22元处于一个关键的预期分歧点：市场按约15亿TTM盈利为其定价（较FY2025的17.58亿低14%），隐含的是对两轮车利润率持续恶化和割草机器人盈利遥遥无期的过度悲观。而我们采纳经辩论修正的承保模型显示，概率加权公允价值为55.7元，较现价有约26%的上行空间。这个上行空间不是来自乐观假设的堆砌，而是来自三个已被多源渠道数据交叉验证的方向性信号——两轮车H2旺季销量强劲（Q3目标260万台+70%，7月出货近100万台）、割草机器人需求翻倍增长（IDC 26Q1全球+97%）、以及经营利润在剔除汇兑后保持正增长——在当前价格中均未被定价。\n\n核心分歧不在于方向，而在于时机。熊方正确指出了Q1毛利率同比下滑3.13个百分点、财务费用率飙升5.51个百分点、以及2027年26.3亿盈利目标来自单一卖方估值的风险。但我们认为，这些风险已被当前PE处于5年历史12.7%分位的极度压缩所定价，而验证这些问题答案的催化剂——2026年H1半年报——预计在8月中旬披露，距今仅约两周。在催化剂临近且方向性证据偏正面的结构下，完全等待右侧确认的机会成本（跳空高开后的追高风险）已超过以分阶段小仓位提前布局的下行风险。\n\n本次评级为'增配（Staged/Cautious Overweight）'，是从上游研究经理的'持有/防御性建仓'升级而来。升级的核心逻辑是：研究经理自身的概率加权公允价值（55.7元）已支持26%上行空间，但基于研究就绪度partial选择了保守的Hold标签。作为投资组合经理，我们认可其模型的审慎性（已将毛利率下调至25.8%、2027E净利润下调至23.8亿、并推迟割草机器人盈利拐点），但认为在催化剂日期已锁定、多源B级渠道数据指向需求强劲、且管理层以2.2亿回购注销和分红实施为底部背书的情况下，将评级上调至增配并以1/3目标仓位先行建仓是更优的赔率选择。完全建仓仍需H1半年报验证毛利率企稳（≥26%）和收入高增长（≥25%），届时将仓位提升至上限；若H1不及预期，观察仓的风险被严格控制在组合层面约1%的回撤之内。",
+  "canonical_model_snapshot": [
+    {
+      "line_id": "shares",
+      "period": "2026-08-03; market snapshot; market cap / close, using forecast_model and price_earnings_decomposition",
+      "metric": "diluted_shares",
+      "value": 735.8485,
+      "unit": "mn shares",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "market cap / close, using forecast_model and price_earnings_decomposition"
+    },
+    {
+      "line_id": "2026E_revenue",
+      "period": "2026E",
+      "metric": "Revenue",
+      "value": 27660.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV010",
+        "KPE05"
+      ],
+      "formula": "FY2025 revenue (21,277.88) * (1 + 30% growth)"
+    },
+    {
+      "line_id": "2027E_revenue",
+      "period": "2027E",
+      "metric": "Revenue",
+      "value": 33192.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "KPE05"
+      ],
+      "formula": "2026E revenue (27,660) * (1 + 20% growth)"
+    },
+    {
+      "line_id": "2026E_gross_margin",
+      "period": "2026E",
+      "metric": "Gross Margin %",
+      "value": 25.8,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV012",
+        "KPE03"
+      ],
+      "formula": "Reduced from analyst estimate of 26.0% due to Q1 margin pressure (-3.13pp) and competitive risks."
+    },
+    {
+      "line_id": "2027E_gross_margin",
+      "period": "2027E",
+      "metric": "Gross Margin %",
+      "value": 27.2,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "KPE03"
+      ],
+      "formula": "Analyst estimate (27.0%) + 0.2% as cost pressures ease and robot scale effect improves."
+    },
+    {
+      "line_id": "2026E_parent_net_profit",
+      "period": "2026E",
+      "metric": "Parent Net Profit",
+      "value": 1780.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "KPE05",
+        "EV015"
+      ],
+      "formula": "(Revenue * Gross Margin % - Operating Expenses). Revised down from broker's 19.4bn due to lower gross margin and higher finance costs."
+    },
+    {
+      "line_id": "2027E_parent_net_profit",
+      "period": "2027E",
+      "metric": "Parent Net Profit",
+      "value": 2380.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "KPE05"
+      ],
+      "formula": "(Revenue * Gross Margin % - Normalized Operating Expenses). Revised down from broker's 26.3bn."
+    },
+    {
+      "line_id": "base_fair_value",
+      "period": "2027E",
+      "metric": "Probability-Weighted Fair Value Per Share",
+      "value": 55.7,
+      "unit": "CNY/share",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "(0.6 * 59.5 base EPS FV) + (0.2 * 71.5 bull FV) + (0.2 * 28.5 bear FV)"
+    },
+    {
+      "line_id": "2028E_revenue",
+      "period": "2028E",
+      "metric": "revenue",
+      "value": 38831.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV010",
+        "KPE05"
+      ],
+      "formula": "base × (1 + growth); growth assumption 30%, 20%, 17% (unverified broker estimate from KPE05)"
+    },
+    {
+      "line_id": "2028E_grossmargin",
+      "period": "2028E",
+      "metric": "grossmargin",
+      "value": 27.5,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV012",
+        "KPE03"
+      ],
+      "formula": "base not reported; assumed gradual recovery from Q1 26.54% as raw material pressure eases and mix improves"
+    },
+    {
+      "line_id": "2026E_operatingmargin",
+      "period": "2026E",
+      "metric": "operatingmargin",
+      "value": 7.5,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV013",
+        "KPE03"
+      ],
+      "formula": "Implied from revenue and profit; assumes SG&A leverage and R&D discipline; 2026E includes elevated launch costs, improving thereafter"
+    },
+    {
+      "line_id": "2027E_operatingmargin",
+      "period": "2027E",
+      "metric": "operatingmargin",
+      "value": 9.0,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV013",
+        "KPE03"
+      ],
+      "formula": "Implied from revenue and profit; assumes SG&A leverage and R&D discipline; 2026E includes elevated launch costs, improving thereafter"
+    },
+    {
+      "line_id": "2028E_operatingmargin",
+      "period": "2028E",
+      "metric": "operatingmargin",
+      "value": 10.0,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV013",
+        "KPE03"
+      ],
+      "formula": "Implied from revenue and profit; assumes SG&A leverage and R&D discipline; 2026E includes elevated launch costs, improving thereafter"
+    },
+    {
+      "line_id": "2028E_parentnetprofit",
+      "period": "2028E",
+      "metric": "parentnetprofit",
+      "value": 3300.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "KPE05"
+      ],
+      "formula": "Derived from broker: 2026E 19.4亿, 2027E 26.3亿, 2028E 33.0亿 (KPE05); corresponds to growth 10.2%, 35.7%, 25.5%"
+    },
+    {
+      "line_id": "2026E_eps",
+      "period": "2026E",
+      "metric": "eps",
+      "value": 2.418976188712758,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    },
+    {
+      "line_id": "2027E_eps",
+      "period": "2027E",
+      "metric": "eps",
+      "value": 3.2343614208631264,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    },
+    {
+      "line_id": "2028E_eps",
+      "period": "2028E",
+      "metric": "eps",
+      "value": 4.484618776827024,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    },
+    {
+      "line_id": "diluted_share_count",
+      "period": "latest",
+      "metric": "diluted_share_count",
+      "value": 7.36,
+      "unit": "mn shares",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": ""
+    },
+    {
+      "line_id": "probability_weighted_fair_value",
+      "period": "2027E",
+      "metric": "fair_value_per_share",
+      "value": 56.78166089894863,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "deterministic total fair value per share"
+    },
+    {
+      "line_id": "2026E_gross_profit",
+      "period": "2026E",
+      "metric": "gross_profit",
+      "value": 7136.28,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV010",
+        "KPE05",
+        "EV012",
+        "KPE03"
+      ],
+      "formula": "revenue x gross margin"
+    },
+    {
+      "line_id": "2026E_cost_of_sales",
+      "period": "2026E",
+      "metric": "cost_ofsales",
+      "value": 20523.72,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV010",
+        "KPE05",
+        "EV012",
+        "KPE03"
+      ],
+      "formula": "revenue - gross profit"
+    },
+    {
+      "line_id": "2027E_gross_profit",
+      "period": "2027E",
+      "metric": "gross_profit",
+      "value": 9028.224,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "KPE05",
+        "KPE03"
+      ],
+      "formula": "revenue x gross margin"
+    },
+    {
+      "line_id": "2027E_cost_of_sales",
+      "period": "2027E",
+      "metric": "cost_ofsales",
+      "value": 24163.775999999998,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "KPE05",
+        "KPE03"
+      ],
+      "formula": "revenue - gross profit"
+    },
+    {
+      "line_id": "2028E_gross_profit",
+      "period": "2028E",
+      "metric": "gross_profit",
+      "value": 10678.525000000001,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV010",
+        "KPE05",
+        "EV012",
+        "KPE03"
+      ],
+      "formula": "revenue x gross margin"
+    },
+    {
+      "line_id": "2028E_cost_of_sales",
+      "period": "2028E",
+      "metric": "cost_ofsales",
+      "value": 28152.475,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV010",
+        "KPE05",
+        "EV012",
+        "KPE03"
+      ],
+      "formula": "revenue - gross profit"
+    },
+    {
+      "line_id": "probability_weighted_core_value",
+      "period": "scenario",
+      "metric": "equity_value_weighted",
+      "value": 40995.2,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "deterministic probability-weighted scenario equity value"
+    }
+  ],
+  "handoff_change_rows": [],
+  "company_disaggregation": "九号公司是一家持续迭代的短途出行和机器人企业，从平衡车起家，收购Segway后巩固了技术和品牌优势，逐步构建了横跨智能短交通和服务机器人的多业务矩阵。2025年集团合并营收212.78亿元，归母净利润17.58亿元。公司通过经销门店、线上渠道和DTC模式向全球消费者和共享出行运营商销售产品，境外收入占比约50%，遍布美国、欧洲和东南亚。\n\n**电动两轮车（BU1）**是最重要的收入和利润来源，估算贡献集团超过50%的收入和约60%的经营利润。产品定位国内高端智能市场，通过'九号'品牌和App互联、OTA升级、感应解锁等智能功能形成差异化；2026年推出高性能电自Fz5和Mz3进一步补全高端产品线。销售渠道以线下经销门店为主、线上为辅。增长由新国标政策催生的替换需求、消费升级向智能化迁移、以及东南亚出海扩张三重驱动。2026Q1两轮车收入逆势增长18%（行业整体低迷），5月线上销售同比+78%，Q3内部销售目标260万台（+70% YoY）。然而Q1毛利率同比下滑3.13个百分点至26.54%，暴露出原材料成本压力和行业价格战风险。\n\n**电动滑板车及平衡车（BU2）**是公司的成熟现金牛业务。以Segway品牌在全球享有极高认知度，在共享出行运营商（2B）和个人消费者（2C）两个市场均有布局。欧洲滑板车市场份额约50%，Segway是共享运营商的首选品牌。2026Q2 2C滑板车受益于油价催化需求延续较高增长，2B滑板车因收入延迟确认也实现几十个百分点的增长。该业务提供稳定的基础营收和利润，但市场已成熟，增长弹性有限。\n\n**全地形车（BU3）**是正在爬坡的成长型业务，定位北美户外休闲市场。Q1增长好于年初目标，正在接近盈亏平衡点。与传统巨头Polaris、BRP、Honda相比，九号以较低价格切入中端市场，品牌和经销商网络仍在建设中。短期内提供一定的增长贡献，但不构成评级的主要依据。\n\n**割草机器人（BU4）**是公司增长故事的核心第二曲线，也是估值从'消费电子'向'科技成长'切换的关键变量。产品以无线RTK/视觉导航技术替代传统埋线方案，在欧美替代传统割草机。2025年营收约20亿元（+100%），2026Q1全球智能割草机出货+97%（IDC数据），九号Q2出货翻倍。毛利率超过40%，但由于芯片成本高企、营销费用投入大，EBIT仍为负。欧盟反倾销调查延期至2026年底，无初裁结果不会征收临时关税，但Q4初裁仍构成尾部风险。当前该业务的盈利贡献近乎为零，但其高增长属性和行业领先地位是支撑集团估值溢价的期权价值来源。\n\n**电动自行车及新兴产品（BU5）**是完全的早期阶段期权。eBike预计2027年欧洲发售，目前仅有研发投入，无营收和利润贡献，不计入核心估值。",
+  "industry_cycle_and_competition": "九号所处的电动两轮车和智能割草机器人两个主要赛道，正处于截然不同的周期阶段。\n\n**电动两轮车行业**正从新国标政策的冲击中逐步恢复。2025-2026年新国标实施初期导致了需求积压和市场扰动，但2026H1积压的需求有望在Q3旺季集中释放。九号Q3内部260万台目标（+70% YoY）和7月近100万台的出货数据，是行业需求复苏叠加新品周期的强右侧信号。竞争格局方面，雅迪和爱玛合计占据约60%的市场份额，其规模优势使其在采购和生产成本上占据主动。九号在>3000元的高端智能细分市场具有差异化优势，但雅迪和爱玛正积极推出竞争性智能车型并利用规模效应低价渗透。这种竞争态势意味着九号的ASP溢价空间在收窄，Q1毛利率的显著下滑恰恰是这一压力的体现。九号的核心应对策略是持续产品升级（如电摩占比提升至80%）和品牌体验差异化，而非参与价格战。\n\n**智能割草机器人行业**处于结构性高景气早期。IDC数据显示2025年全球出货增长63.8%，2026Q1加速至97%，印证了无线导航技术突破带来的品类渗透率快速提升。市场格局方面，Husqvarna以约50%的全球份额主导，但其产品仍以传统埋线方案为主，在用户体验上落后九号2-3年。九号以无线RTK/视觉导航和App管理体验切入，在欧洲渠道布局完善（德亚割草机热销前十中九号占三席），正从欧洲向美国市场拓展。然而，追觅和石头科技等拥有机器人技术积累的中国企业也在快速进入，竞争烈度正在上升。追觅以激进定价策略抢份额，可能在未来1-2年压缩行业的整体盈利空间。此外，John Deere、Toro等户外动力设备巨头若大规模进入智能化割草机领域，将带来品牌和渠道上的结构性竞争压力。\n\n综合来看，两轮车的核心矛盾在利润率，割草机器人的核心矛盾在盈利拐点。两个业务的增长方向均偏正面，但盈利质量的验证是决定投资回报的关键。",
+  "autonomous_forecast_model": "**规范模型数值口径：** 2026E 营业收入276.60亿元、归母净利润17.80亿元；2027E 营业收入331.92亿元、归母净利润23.80亿元；2028E 营业收入388.31亿元、归母净利润33.00亿元；程序化概率加权公允价值56.78元/股。\n\n**程序化模型口径判定：混合模型。** 结构化承保包尚未为每个核心业务单元提供可与集团收入、利润和现金流逐年勾稽的三年数值行；现有分部驱动用于解释集团预测，不得表述为已完成的全量分部加总模型。\n\n我们接受的修正后三年预测模型是混合型（hybrid）构建——收入端基于多源渠道验证混合推算，而利润端由于分部数据缺失采用自上而下的集团口径估算。模型锚定2027年预期盈利，以过滤2026年汇兑损益的噪音。\n\n**收入驱动假设：** 2026E-2028E集团营收增速分别为+17.0%/20%/17%，对应276.6亿/331.9亿/388.3亿元。增长的核心引擎是两轮车H2旺季放量（Q3目标260万台+70%支撑2026E +35%的销量增速）和割草机器人全年翻倍增长。2027-2028年增速随基数扩大而自然放缓，但仍保持在双位数。\n\n**毛利率路径：** 2026E毛利率25.8%（较卖方26%下调0.2pp），反映Q1已实现的毛利率压力和H2原材料成本的不确定性。2027E回升至27.2%，假设H2高端车型放量改善产品结构、割草机器人规模效应初步显现、以及原材料压力部分缓解。2028E进一步改善至27.5%。毛利率假设是本模型中最脆弱的变量——每1pp偏差影响约2.77亿经营利润。\n\n**经营利润率路径：** 2026E 7.5%，2027E 9.0%，2028E 10.0%。受益于收入增长对SG&A和研发费用的摊薄，但被较低毛利率部分抵消。2026年费用率偏高因新品上市和割草机器人营销投入，此后逐年改善。\n\n**归母净利润：** 2026E 17.8亿元（较FY2025的17.58亿基本持平，反映汇兑冲击和毛利率压力），2027E 23.8亿元（+33.7%，毛利率修复+费用摊薄+汇兑正常化），2028E 33.0亿元（+38.7%，基于卖方KPE05外推，置信度较低）。EPS基于7.36亿稀释后股本估算，2026E 2.42元，2027E 3.23元。\n\n**现金流：** 我们无法构建完整的混合现金流预测（缺失OCF和CAPEX数据）。定性判断：Q1 OCF为负是季节性备货的常态（2024H1曾录得24.9亿经营正现金流），8月1日分红实施和近一月2.2亿回购注销是管理层对现金流状况自信的硬信号，可在一定程度上抵消Q1数据的负面印象。H1现金流量表是验证全年现金转化能力的关键。\n\n**最脆弱的假设：** 2027E毛利率27.2%需要两轮车高端化产品放量（Fz5/Mz3等新品成功）、割草机器人规模效应显现（营收翻倍后单位成本下降）、以及行业价格战不进一步恶化三者同时成立。目前三个条件均未获得H1硬数据验证，是2027E 23.8亿利润的最大风险来源。",
+  "thesis_financial_bridge": "**核心投资主线一：电动两轮车的逆势增长与盈利修复。** 经营公式为：两轮车收入 = 国内销量 × ASP国内 + 出口销量 × ASP出口。在基准情景（2027E）下，我们假设销量增长25%，ASP因中高端产品结构改善而保持稳定。这意味着两轮车贡献集团营收从2025年约106亿（按50%占比估算）增长至2027年约166亿，是集团营收从212亿增长至332亿的最大引擎。在利润端，两轮车贡献集团约60%的经营利润，是2027E 23.8亿利润的核心支撑。\n\n我们与市场的关键分歧在于毛利率能否企稳。多源渠道数据（KPE03/04/10）交叉验证Q2需求强劲，Q3目标260万台（+70%）和7月出货近100万台构成强右侧信号。但最强反证同样清晰：Q1毛利率同比下降3.13个百分点至26.54%（EV012），成本转嫁能力受限；雅迪/爱玛以规模优势持续施压价格，高端化溢价空间正在收窄；Q2两轮车EBIT同比仍承压（KPE03），618大促和原材料成本压力可能在Q2延续。这块业务的边界在于——若H1毛利率跌破25%或收入增速低于20%，则'份额提升但利润不增长'的悲观情景被证实，应立即调整评级。\n\n从市场定价看，当前股价44.22元在PE TTM 21.6x（5年12.7%分位）下隐含TTM盈利仅15.05亿元，较FY2025实际盈利低14%，完全未计入H2旺季放量带来的盈利修复。市场实质上在为'15亿盈利中枢、零增长'定价，这与两轮车逆势增长18%和旺季放量在即的现实严重背离。若H1报告验证毛利率≥26%且收入增速≥25%，这一极度悲观的定价将被修正。\n\n**核心投资主线二：割草机器人的期权价值和估值切换潜力。** 经营公式为：机器人收入 = 欧洲销量 × ASP_EU + 北美销量 × ASP_US。在基准情景（2027E）下，销量继续翻倍增长，但EBIT利润率仅微利2%。这意味着机器人贡献集团营收增长的约30%，但对利润的直接贡献<5%。表面上看，机器人对2027E 23.8亿利润几乎无贡献，似乎不应成为估值依托。但它的核心价值不在当期利润，而在于证明高增长可持续后，市场愿意给予机器人业务独立的科技成长估值，驱动集团整体PE从当前的17x以下向20x扩张。\n\n这一估值切换逻辑在Bull Case（71.5元）中实现——假设机器人提前至2027H1盈利且反倾销结果有利，市场给予集团20x PE，对应2027E 26.3亿利润的估值达526亿元。但最强反证不容忽视：KPE03确认Q2 EBIT仍为负，芯片成本和营销费用高企，公司仍处于牺牲利润换规模的阶段；追觅、石头科技等竞争者正快速进入，可能引发价格战；欧盟反倾销初裁虽延期至年底，但若Q4征收高额追溯性关税，将直接打击欧洲市场收入和盈利拐点，期权价值可能大幅缩水。\n\n当前市场定价反映了对该业务的保守态度——44.22元隐含的是对机器人盈利贡献为零的估值，市场要求'先看到硬利润，再支付估值溢价'。这种定价意味着，一旦盈利拐点被证实，估值存在从消费股向科技成长股切换的空间；但在硬证据出现前，低估值本身不构成买入理由。证伪条件明确：若2026年全年机器人营收增速<100%，或Q4欧盟反倾销初裁不利，期权价值将显著下降，但两轮车的基本盘仍提供估值底部支撑（Bear Case 28.5元意味着-35.6%的最大下行，而非清零风险）。",
+  "moat_evidence_scorecard": "九号的'护城河'处于一个尴尬的中间地带：品牌认知度在特定品类（Segway滑板车、九号智能两轮车）中确实形成了消费者溢价支付意愿，但这更多来自先发优势和持续营销，而非来自成本、规模或排他性技术形成的结构性壁垒。\n\n**品牌护城河**是三个机制中证据最充分的。在国内，'九号'已成为智能两轮车品类的代名词，Q1在行业整体低迷时实现逆势收入增长18%即是品牌力的直接体现。在海外，Segway品牌是共享滑板车市场的首选（欧洲份额约50%），这构成了一个可靠的现金牛基础。但品牌护城河的边界正被两大竞争对手测试：雅迪和爱玛在低端市场积累的规模优势使其能以更低成本推出智能功能相当的竞品；中国ODM厂商质量提升后推出自主品牌，缩小了价差。品牌护城河的维持需要持续的产品创新和营销投入——这是一种'主动维护型'而非'结构稳固型'的护城河。\n\n**技术/研发护城河**目前在割草机器人领域具有先发优势（无线导航体验领先Husqvarna 2-3年），但这一优势的持续性存在重大疑问。追觅和石头科技拥有深厚的机器人SLAM和视觉导航技术积累，正快速切入割草机器人赛道。两轮车的'智能'功能（OTA、感应解锁）虽提升了用户体验，但并非高不可攀的技术壁垒——雅迪和爱玛可以在1-2个产品周期内实现功能对标。我们尚未看到任何证据（如专利壁垒、独家供应链、或不可复制的算法优势）能证明九号的技术优势能持续转化为定价权或阻止份额侵蚀。\n\n**规模/供应链护城河**在九号身上尚未成立。九号的总营收（2025年213亿）远不及雅迪（2024年约350亿），在整个电动车行业的采购和生产成本谈判中不占优势。Q1毛利率的显著下滑——如果原材料成本上升是主因——恰恰说明其成本传导能力不足，这与真正具备规模优势的企业（能压价供应商或向下游传导）的表现相悖。H1半年报将是测试这一判断的关键窗口：若毛利率在Q2原材料价格没有显著回落的背景下仍能企稳，说明公司通过产品结构升级（电摩占比提升）实现了成本对冲，一定程度上弥补了规模劣势。",
+  "valuation_closure": "**估值拆分：** 核心业务（两轮车+滑板车）占2027E利润的90%，给予18x PE——这个倍数略低于历史中枢但高于传统电动车制造商的10-12x，反映了九号在智能化细分市场的差异化定位和高于行业的增速。场景业务（割草机器人）占利润的10%，给予22x PE以反映高增长潜力——但仅给予10%的利润权重，因为其盈利贡献尚未得到财务数据证实。净现金因资产负债表缺失而未单独计算，但其内含在经营PE中不会造成显著高估（公司有息负债规模不大）。\n\n\n**估值信心的边界：** 当前估值存在三个证据缺口：一是分部利润的官方披露缺失使得SOTP精确度低；二是OCF/CAPEX数据缺失使得无法用DCF做交叉验证；三是2027E 23.8亿利润依赖毛利率修复和汇兑正常化两个未验证假设。H1半年报将首次提供毛利率趋势和经营利润的硬数据，是估值从'情景判断'升级为'有据可依'的关键节点。\n\n情景价值、概率加权结果、预期收益与安全价格以本节程序化估值表为唯一数值口径。",
+  "accounting_and_capital_allocation": "九号的会计质量和资本配置呈现出'短期承压、信号偏正'的格局。\n\n**盈利质量：** Q1毛利率26.54%（-3.13pp YoY）和营业利润率4.16%（-8.65pp YoY）的显著下滑是最大的关注点。营业利润率单季下滑8.65个百分点的幅度不完全是季节性可以解释的——其中约3pp来自毛利率压缩，约5.5pp来自财务费用率飙升（汇兑损失）。剔除财务费用后，经营层面的恶化幅度约为3pp，这在两轮车新车爬坡和618大促备货的背景下属于可理解的范围。关键是确认H2是否如公司和管理层指引那样恢复——这是H1半年报的核心验证任务。\n\n**现金流质量：** Q1 OCF/净利润-2.34x虽然难看，但属于季节性常态（备货旺季现金流出）。2024H1曾录得24.9亿经营正现金流证明了公司在旺季回笼资金的能力。合同负债（预收款）18.69亿是未来收入的先行指标，可部分对冲经营现金流担忧。但我们坚持不在缺失H1现金流量表时给予现金流折让——全年OCF≥净利润50%是判断现金流质量的最低门槛。\n\n**资本配置：** 管理层展现出对股东友好的资本配置意愿。近一月回购2.2亿并全部用于注销，在44元附近的价格进行回购，直接增厚每股价值约0.7%。8月1日2025年度权益分派的实施，是管理层对现金流和盈利质量自信的硬信号。这些行动在'讲好故事'之外提供了真金白银的底部背书。但我们也注意到总部建设项目（4年期）和机器人/ATV/eBike的资本开支需求叠加，未来自由现金流是否充裕尚待验证。\n\n**资产负债表信号：** Q1存货/收入+4.42pp需要关注但不至于恐慌——Q1是旺季备货高点，若H1库存周转天数显著拉长，则可能是终端动销不达预期的信号。公司无重大有息负债风险，整体财务杠杆可控。",
+  "expectation_gap_and_market_pricing": "当前股价44.22元隐含的市场预期可以通过三个维度来刻画。\n\n**维度一：估值分位。** PE TTM 21.6x处于5年历史12.7%分位，PB 11.1%分位，PS 5.4%分位。公司自身的估值历史显示，当前价位处于过去5年最便宜的12-13%区间内——这意味着市场对其定价已经极度悲观，几乎没有为任何成长性支付溢价。\n\n**维度二：隐含盈利。** PE TTM 21.6x反推的隐含TTM盈利约15.05亿元，较FY2025实际归母净利润17.58亿低14%，较FY2024的约13亿高出约16%。市场似乎在定价一个'15亿盈利中枢、零增长'的保守情景——这与九号两轮车逆势增长18%和割草机器人翻倍增长的现状严重不符。\n\n**维度三：卖方与我们的差异。** 卖方共识（KPE01/KPE05）预计2027E归母净利润26.3亿，我们的更保守模型为23.8亿。即便使用我们的保守数字，当前44.22元对应的2027E PE仅13.7x——对于一个拥有30%+营收增速和多项增长曲线的公司而言，这个倍数明显偏低。对比出海消费成长股同行安克创新和涛涛车业的约17x，九号有约24%的估值修复空间（从13.7x到17x），这与我们概率加权估值26%的上行空间基本吻合。\n\n**预期差总结：** 市场为九号定价的核心假设是'15亿盈利中枢、零增长、机器人期权价值为零'。而我们的核心判断是'2027年23.8亿盈利中枢（较FY2025增长35%）、两轮车份额持续提升、割草机器人接近盈利拐点、且应享有出海消费成长股的估值'。这两个叙事之间只隔一份H1半年报——如果收入增速25%+和毛利率≥26%被文件确认，当前44.22元的定价将被证明过度悲观。",
+  "risks_catalysts_verification": "**程序化执行约束**：当前价44.22元高于安全买入上限35.67元；不得表述为已经替投资者建仓，也不得建议新资金在安全价之上主动加仓。\n\n**核心下行风险（按影响程度排序）：**1. **毛利率持续恶化（最大风险）：** 若H1毛利率<25%或连续两个季度同比下滑超过3pp，则定价权和成本传导能力的结构性缺陷被证实。此时2027E 23.8亿利润将降至约18亿以下，公允价值和评级需大幅下调。2. **H1收入增速不达预期：** 若H1收入增速<20%（对比我们30%以及多源渠道25-30%的预测），则两轮车增长逻辑出现裂痕。此时应从增配下调至持有，并重新评估全年业绩。3. **汇兑损失超预期扩大：** 若Q2财务费用率继续维持在3%以上（Q1为3.81%），且套保安排不达预期，2027年汇兑正常化的假设将被严重削弱。4. **欧盟反倾销追溯性初裁（尾部风险）：** 若Q4初裁结果为征收高额反倾销税且有追溯效力，割草机器人的欧洲市场收入和2027年盈利将受到实质性打击。当前概率约20%，但不能排除。**正向催化剂：**1. **H1半年报（短期核心催化剂，预计8月中旬）：** 验证收入增速≥25%和毛利率≥26%，将解锁从'持有观察'到'积极增配'的升级路径。2. **Q3销售数据（中期催化剂，9-10月）：** 若260万台内部目标兑现，为2027年业绩提供坚实支撑，仓位可加至上限。3. **Q4欧盟初裁结果（远期双向催化剂）：** 若结果有利（不征税或低税率），机器人期权价值将大幅提升。**验证与证伪日历：**- **看多验证/上调信号：** H1收入增速≥25%且毛利率≥26% → 仓位从1/3提升至2/3；Q3月度销量数据确认260万台目标 → 仓位提升至上限5%- **看空验证/下调信号：** H1收入增速<20%或毛利率<25% → 止损观察仓，降至持有/低配；Q4欧盟反倾销追溯性初裁 → 大幅下调公允价值和仓位- **硬止损线（价格层面）：** 股价跌破38元（偏离公允价值超30%且接近极端悲观价值28.5元的上沿），无条件止损",
+  "handoff_integrity_audit": "**模型版本：** 采纳经辩论修正的独立承保模型 v2.0（研究经理交接），PM在此基础上将评级从Hold上调至Overweight。\n\n**冻结的报告事实（全数保留）：**\n- FY2025合并营收212.78亿（EV010）\n- FY2025归母净利润17.58亿（EV010）\n- 2026Q1营收58.70亿，毛利率26.54%（EV012）\n- 市值（2026-07-31）325.39亿，PE TTM 21.62x\n- 稀释后股本约7.36亿股\n\n**已接受的估计（全数保留）：**\n- 2026E-2028E营收增速：30%/20%/17%（KPE05）\n- 2026E毛利率：25.8%（RM下修，采纳）\n- 2027E毛利率：27.2%（RM修正，采纳）\n- 2027E归母净利润：23.8亿（RM下修，采纳）\n- 概率加权公允价值：55.7元（RM修正计算，采纳）\n\n**PM唯一修订：评级从Hold → Overweight。** 模型数值假设未变更。评级升级基于：(1) RM自身概率加权FV显示+26%上行空间，(2) 验证催化剂（H1半年报）在约两周内排定，(3) 多源渠道数据（KPE03/04/10）交叉验证Q2需求强劲，(4) 管理层回购注销和分红实施提供底部信号，(5) 分阶段小仓位建仓（1/3初始，H1验证后提升至上限）有效管理剩余不确定性。\n\n**未解决的模型单元格（保留并等待H1半年报）：**\n- 稀释后股本数（当前估算7.36亿）\n- 所有产品级分部营收、成本、毛利率\n- 任何时期的OCF/CAPEX/FCF\n- 净现金/有息负债余额\n\n**PM必须保留的关键结构（全数保留）：**\n- 5个业务单元及其定性经济角色\n- 3年合并预测线（营收、毛利率、归母净利润）\n- 论点-财务桥接（B1两轮车增长、B2机器人期权）\n- 估值桶拆分（核心vs场景）及概率权重60/20/20\n- 情景定义（Bull/Base/Bear）及关键运营假设",
+  "report_markdown": "",
+  "shared_model_change_audit": "| 问题/预测线 | 最初假设 | 已采纳假设 | 采纳原因及证据 | EPS/估值影响 | 处置 |\n| :--- | :--- | :--- | :--- | :--- | :--- |\n| Q1: 2026E营收增速 | 30%（KPE05） | 30%（维持） | 多源渠道数据（KPE03/04/10）交叉验证Q2收入+25-30%，Q3目标260万台+70%支撑 | 确认高营收增长路径 | accepted |\n| Q1: 2026E毛利率 | 26.0% | 25.8%（下调） | Q1毛利率-3.13pp（EV012）为硬证据，即使H2反弹全年拉低已成定局 | 2026E净利下调1.6亿；FV下调约3元 | accepted |\n| Q3: 2027E归母净利润 | 26.3亿 | 23.8亿（下调） | 26.3亿隐含汇兑完全正常化+毛利率27%+机器人盈利的完美兑现，不确定性太高 | 2027E EPS下调0.34元；Base FV从60.8降至59.5元 | accepted |\n| Q2: 机器人盈利拐点 | 2026H2盈亏平衡 | 推迟至2027H1 | KPE03明确Q2 EBIT为负，未看到H2必然盈利的证据 | 推迟利润贡献时点 | accepted |\n| 估值校正 | Base FV 44.82元 | Base FV 59.5元 | 修正共享模型base情景使用2026E EPS而非2027E EPS的计算错误 | 概率加权FV从47.36提升至55.7元（+26% vs现价） | accepted |\n| PM评级 | Hold（研究经理） | Overweight（PM） | 催化剂日程排定+管理层的真金白银背书+分阶段建仓控制风险 | — | PM升级 |",
+  "report_quality_self_check": "**信息覆盖率：** 结构化财报数据覆盖完整（营收、利润、毛利率、费用率、估值分位），渠道验证（KPE03/04/10）提供Q2经营数据的代理覆盖，第三方行业数据（IDC）验证割草机器人赛道景气度。缺失的关键项为PDF文本提取失败导致的分部数据和现金流详情无法交叉验证——这在H1半年报披露前是固有局限性，不影响已做出的方向判断。\n\n**三年预测完整性：** 合并营收、毛利率、经营利润率、归母净利润、EPS均已覆盖2026E-2028E；OCF/CAPEX/FCF因数据缺失未填列，已明确标注为缺失并说明了影响（限制DCF交叉验证和现金流折让）。\n\n**情景估值完整性：** Bull/Base/Bear三个情景均赋予了概率、利润、估值倍数和核心假设；概率加总100%。割草机器人期权使用独立的optionality_inputs计算并进行了概率和折扣控制，不存在双重计算。\n\n**证据溯源：** 所有财务数据有EV编号溯源；渠道数据有KPE编号溯源；卖方预期有KSI编号溯源。汇率敏感性、毛利率敏感性已量化。\n\n**待H1半年报解决的关键缺口：** 分部营收和毛利率、经营现金流、套保细节、合同负债变动趋势。这些缺口不改变当前增配评级，但决定了评级能否在H1后升级为买进或下调至持有。"
+}
