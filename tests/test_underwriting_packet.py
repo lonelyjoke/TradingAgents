@@ -714,7 +714,7 @@ def test_effective_stock_dividend_market_shares_override_stale_registered_capita
             "| --- | --- | --- | ---: | ---: | --- | --- | --- |\n"
             "| 20260522 | 20251231 | 实施 | 0.25 | 0.3 | 20260709 | 20260710 | 20260710 |"
         ),
-        "forecast_model": "| Market cap (CNY) | 59261271650 | current equity value |",
+        "market_expectation": "| Market cap (CNY) | 59261271650 | current equity value |",
         "price_earnings_decomposition": "| close | 21.55 |",
     }
 

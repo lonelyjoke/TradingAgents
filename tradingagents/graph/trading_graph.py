@@ -414,6 +414,14 @@ class TradingAgentsGraph:
         max_retries = self.config.get("llm_max_retries")
         if max_retries is not None:
             kwargs["max_retries"] = max_retries
+        output_limit_key = (
+            "deep_llm_max_output_tokens"
+            if mode == "deep"
+            else "quick_llm_max_output_tokens"
+        )
+        output_limit = self.config.get(output_limit_key)
+        if output_limit is not None and provider in openai_compatible:
+            kwargs["max_tokens"] = int(output_limit)
         if provider in openai_compatible:
             llm_proxy = self.config.get("llm_proxy")
             if llm_proxy:
@@ -451,7 +459,7 @@ class TradingAgentsGraph:
                     )
                     or ("max" if role == "deep" else "high")
                 ).lower()
-                if effort not in {"low", "high", "max"}:
+                if effort not in {"low", "medium", "high", "max"}:
                     effort = "max" if role == "deep" else "high"
                 kwargs["reasoning_effort"] = effort
 
@@ -972,6 +980,14 @@ class TradingAgentsGraph:
                 "industry_cycle": industry_cycle_context,
                 "industry_kpi": industry_kpi_context,
                 "market_expectation": market_expectation_context,
+                # These two contexts form the current-share-count control:
+                # market cap comes from market_expectation and the same dated
+                # close comes from price/EPS/PE decomposition.  Passing only
+                # registered capital here can be stale after an effective
+                # bonus/capitalisation issue (for example 600426.SH in July
+                # 2026), which corrupts every per-share valuation downstream.
+                "price_earnings_decomposition": price_earnings_decomposition_context,
+                "shareholder_structure": shareholder_structure_context,
                 "peer_comparison": peer_comparison_context,
                 "management_capital_allocation": management_capital_allocation_context,
                 "commodity": commodity_context,

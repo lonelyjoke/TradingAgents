@@ -1856,6 +1856,12 @@ def run_analysis(checkpoint: bool = True):
                 "underwriting_prompt_chars": config.get(
                     "company_underwriting_prompt_max_chars"
                 ),
+                "quick_max_output_tokens": config.get(
+                    "quick_llm_max_output_tokens"
+                ),
+                "deep_max_output_tokens": config.get(
+                    "deep_llm_max_output_tokens"
+                ),
                 "structured_research_cache_enabled": config.get(
                     "structured_research_cache_enabled"
                 ),

@@ -9,6 +9,8 @@ def _graph_with_config(**overrides):
         "llm_timeout": None,
         "llm_max_retries": None,
         "llm_proxy": None,
+        "quick_llm_max_output_tokens": 16000,
+        "deep_llm_max_output_tokens": 24000,
         "deepseek_quick_thinking": "enabled",
         "deepseek_quick_reasoning_effort": "high",
         "deepseek_deep_thinking": "enabled",
@@ -37,6 +39,17 @@ def test_deepseek_disabled_thinking_omits_reasoning_effort():
 
     assert quick["extra_body"] == {"thinking": {"type": "disabled"}}
     assert "reasoning_effort" not in quick
+
+
+def test_deepseek_medium_effort_and_output_limits_are_preserved():
+    graph = _graph_with_config(deepseek_quick_reasoning_effort="medium")
+
+    quick = graph._get_provider_kwargs("quick")
+    deep = graph._get_provider_kwargs("deep")
+
+    assert quick["reasoning_effort"] == "medium"
+    assert quick["max_tokens"] == 16000
+    assert deep["max_tokens"] == 24000
 
 
 def test_deepseek_catalog_contains_only_current_v4_models():

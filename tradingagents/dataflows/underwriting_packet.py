@@ -822,6 +822,7 @@ def _derive_market_snapshot(
         return None, None, ""
     preferred_keys = (
         "forecast_model",
+        "market_expectation",
         "price_earnings_decomposition",
         "price_move_attribution",
         "peer_comparison",

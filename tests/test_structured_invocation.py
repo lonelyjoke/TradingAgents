@@ -161,6 +161,17 @@ class ThinkingRepairLLM:
         )
 
 
+class DeltaRepairLLM:
+    def __init__(self):
+        self.calls = 0
+
+    def invoke(self, _prompt):
+        self.calls += 1
+        if self.calls == 1:
+            return SimpleNamespace(content=json.dumps({"rating": "Hold"}))
+        return SimpleNamespace(content=json.dumps({"report": "delta repaired"}))
+
+
 def test_free_text_json_is_revalidated_and_rendered_as_structured_output():
     rendered, metadata = invoke_structured_or_freetext(
         FailingStructured(),
@@ -236,6 +247,44 @@ def test_schema_prompt_validation_repairs_raw_response_without_replaying_prompt(
     assert "EXPENSIVE_FULL_RESEARCH_PROMPT" in llm.prompts[0]
     assert "EXPENSIVE_FULL_RESEARCH_PROMPT" not in llm.prompts[1]
     assert '"report"' in llm.prompts[1]
+
+
+def test_schema_repair_merges_delta_into_mostly_valid_response():
+    llm = DeltaRepairLLM()
+
+    rendered, metadata = invoke_structured_or_freetext(
+        FailingStructured(),
+        llm,
+        "prompt",
+        lambda value: f"{value.rating}: {value.report}",
+        "Portfolio Manager",
+        return_metadata=True,
+        fallback_schema=TinyDecision,
+    )
+
+    assert rendered == "Hold: delta repaired"
+    assert metadata["schema_repair_attempts"] == 1
+    assert llm.calls == 2
+
+
+def test_schema_parser_accepts_literal_control_character_inside_json_string():
+    class ControlCharacterLLM:
+        def invoke(self, _prompt):
+            return SimpleNamespace(
+                content='{"rating":"Hold","report":"line one\nline two"}'
+            )
+
+    rendered, _metadata = invoke_structured_or_freetext(
+        FailingStructured(),
+        ControlCharacterLLM(),
+        "prompt",
+        lambda value: f"{value.rating}: {value.report}",
+        "Portfolio Manager",
+        return_metadata=True,
+        fallback_schema=TinyDecision,
+    )
+
+    assert rendered == "Hold: line one\nline two"
 
 
 def test_sell_side_schema_renders_all_six_company_depth_contracts():
@@ -370,16 +419,56 @@ def test_sell_side_schema_renders_all_six_company_depth_contracts():
     assert sum(1 for line in public.splitlines() if line.startswith("## ")) == 7
     assert "Company Disaggregation" not in public
     assert "2026E_revenue" not in public
-    assert "预测结论" in public
+    assert "预测结论" not in public
     assert "本报告要回答的关键问题" not in public
     assert "核心问题裁决" not in public
-    assert "核心假设与敏感性" in public
+    assert "核心假设与敏感性" not in public
     assert "evidence mechanism financial impact" in public
     assert "### 商业模式如何运转" in public
     assert "### 分部经济与价值归属" in public
     assert "### 商业模式如何运转" not in appendix
     assert "### 交接完整性审计" in appendix
     assert moved == ["内部附录E：模型交接与报告质量审计"]
+
+
+def test_public_renderer_strips_model_authored_tables_and_internal_ids():
+    decision = SellSidePMDecision.model_validate(
+        {
+            **SellSidePMDecision(
+                rating=PortfolioRating.HOLD,
+                rating_posture="Hold / Neutral Wait",
+                research_readiness="partial",
+                one_line_thesis="等待验证。",
+                investment_conclusion_and_core_conflict="结论。",
+                canonical_model_snapshot=[
+                    CanonicalModelLine(line_id="shares", period="current", metric="diluted shares", value=1000, unit="mn shares", status="calculated"),
+                    CanonicalModelLine(line_id="2026E_revenue", period="2026E", metric="revenue", value=100, unit="CNY mn", status="estimated"),
+                    CanonicalModelLine(line_id="2027E_revenue", period="2027E", metric="revenue", value=110, unit="CNY mn", status="estimated"),
+                    CanonicalModelLine(line_id="2028E_revenue", period="2028E", metric="revenue", value=120, unit="CNY mn", status="estimated"),
+                ],
+                company_disaggregation="KPE01 公司主业清晰。\n\n| 项目 | 内容 |\n| --- | --- |\n| 重复表 | 很长的文字 |",
+                industry_cycle_and_competition="行业仍待验证。",
+                autonomous_forecast_model="EV22 模型解释。\n\n| 年份 | 利润 |\n| --- | ---: |\n| 2026E | 10 |",
+                thesis_financial_bridge="利润取决于价差。",
+                moat_evidence_scorecard="成本优势部分验证。",
+                accounting_and_capital_allocation="现金流待验证。",
+                expectation_gap_and_market_pricing="当前价格反映部分修复。",
+                valuation_closure="采用情景估值。",
+                risks_catalysts_verification="中报验证。",
+                handoff_integrity_audit="完整。",
+                shared_model_change_audit="无变更。",
+                report_quality_self_check="已检查。",
+            ).model_dump(mode="json")
+        }
+    )
+
+    rendered = render_sell_side_pm_decision(decision)
+    public = rendered.split("## 内部附录", 1)[0]
+
+    assert "重复表" not in public
+    assert "| 年份 | 利润 |" not in public
+    assert "KPE01" not in public
+    assert "EV22" not in public
 
 
 def test_editorial_review_is_advisory_and_section_specific():

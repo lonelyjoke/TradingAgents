@@ -3501,6 +3501,7 @@ def _reader_text(value: object, *, max_chars: int | None = None) -> str:
     """Clean structured-workbench language for a reader-facing Chinese memo."""
 
     text = str(value or "").replace("|", "/").replace("\n", " ").strip()
+    text = re.sub(r"\b(?:KPE|KSI|EV|UQ)\s*\d+\b", "", text, flags=re.I)
     for raw, label in _PUBLIC_LABELS.items():
         text = re.sub(rf"(?<![A-Za-z_]){re.escape(raw)}(?![A-Za-z_])", label, text)
     text = re.sub(r"(?i)EPS\s*[+＋-]?\s*x{2,}\s*元?", "具体EPS影响待验证", text)
@@ -3531,6 +3532,85 @@ def _reader_text(value: object, *, max_chars: int | None = None) -> str:
     return text or "未披露"
 
 
+def _reader_markdown(value: object, *, max_chars: int) -> str:
+    """Compact one public prose field while preserving readable paragraphs.
+
+    The structured PM object is an analytical workbench.  Public rendering
+    owns tables and numerical summaries, so model-authored tables, internal
+    evidence IDs and workflow labels are removed here rather than relying on
+    every provider to follow a long style prompt perfectly.
+    """
+
+    raw_lines = str(value or "").strip().splitlines()
+    lines: list[str] = []
+    index = 0
+    while index < len(raw_lines):
+        line = raw_lines[index]
+        next_line = raw_lines[index + 1] if index + 1 < len(raw_lines) else ""
+        if (
+            "|" in line
+            and re.match(r"^\s*\|?\s*:?-{3,}", next_line)
+        ):
+            index += 2
+            while index < len(raw_lines) and "|" in raw_lines[index]:
+                index += 1
+            continue
+        lines.append(line.rstrip())
+        index += 1
+
+    text = "\n".join(lines)
+    text = re.sub(r"\b(?:KPE|KSI|EV|UQ)\s*\d+\b", "", text, flags=re.I)
+    text = re.sub(
+        r"(?i)\b(?:Research Manager|research host|Portfolio Manager)\b",
+        "研究判断",
+        text,
+    )
+    replacements = {
+        r"(?i)\bproven\b": "已验证",
+        r"(?i)\bpartial\b": "部分验证",
+        r"(?i)\bmedium\b": "中等",
+        r"(?i)\blow\b": "较低",
+        r"(?i)\bunchanged\s*/\s*watch\b": "暂不调整，继续验证",
+        r"(?i)\bprice\s+in\b": "计入当前价格",
+        r"(?i)\bbase\s+case\b": "基准情景",
+    }
+    for pattern, replacement in replacements.items():
+        text = re.sub(pattern, replacement, text)
+    text = re.sub(
+        r"(?<!\d)(?!20\d{2}\b)(\d{1,3}(?:\.\d+)?)\s*e\b",
+        r"\1亿元",
+        text,
+        flags=re.I,
+    )
+    text = re.sub(r"(?m)^\s*---+\s*$", "", text)
+    text = re.sub(r"[ \t]+", " ", text)
+    text = re.sub(r"\n{3,}", "\n\n", text).strip()
+    if len(text) <= max_chars:
+        return text
+
+    window = text[:max_chars]
+    cut = max(window.rfind(mark) for mark in ("\n\n", "。", "！", "？", "；"))
+    if cut < int(max_chars * 0.6):
+        cut = max_chars
+    return window[:cut].rstrip("，、；:： \n") + "…"
+
+
+def _reader_valuation_explanation(value: object, *, max_chars: int = 320) -> str:
+    """Keep valuation rationale but suppress a second hand-calculated model."""
+
+    text = _reader_markdown(value, max_chars=max_chars * 3)
+    clauses = re.split(r"(?<=[。；！？])|\n", text)
+    manual_value = re.compile(
+        r"\d|当前股价|总股本|目标价|公允价值|安全价|预期收益|每股|EPS|P/?E|市盈率|"
+        r"概率|计算公式|情景加权|核心经营业务估值",
+        re.I,
+    )
+    kept = [clause.strip() for clause in clauses if clause.strip() and not manual_value.search(clause)]
+    if not kept:
+        return "情景价值、预期收益与安全价格以程序化估值表为唯一数值口径。"
+    return _reader_markdown("".join(kept), max_chars=max_chars)
+
+
 def _compact_public_item(title: object, *sentences: object) -> str:
     fragments = [
         _reader_text(value, max_chars=95).rstrip("。；;.!！?？ ")
@@ -3548,7 +3628,7 @@ def _render_segment_economics(rows_in: list[SegmentEconomicsRow]) -> str:
     if not rows_in:
         return ""
     rows = ["### 分部经济与价值归属", ""]
-    for row in rows_in[:5]:
+    for row in rows_in[:4]:
         role = f"{row.economic_role}（{_PUBLIC_LABELS.get(row.disclosure_basis, row.disclosure_basis)}）"
         value_role = _PUBLIC_LABELS.get(row.valuation_treatment, row.valuation_treatment)
         rows.append(
@@ -3571,7 +3651,7 @@ def _render_business_model_mechanisms(rows_in: list[BusinessModelMechanismRow]) 
     if not rows_in:
         return ""
     rows = ["### 商业模式如何运转", ""]
-    for row in rows_in[:4]:
+    for row in rows_in[:3]:
         rows.append(
             _compact_public_item(
                 row.link,
@@ -3591,7 +3671,7 @@ def _render_industry_drivers(rows_in: list[IndustryDriverRow]) -> str:
     if not rows_in:
         return ""
     rows = ["### 行业驱动与财务传导", ""]
-    for row in rows_in[:4]:
+    for row in rows_in[:3]:
         rows.append(
             _compact_public_item(
                 row.driver,
@@ -3612,7 +3692,7 @@ def _render_competition_landscapes(rows_in: list[CompetitionLandscapeRow]) -> st
     if not rows_in:
         return ""
     rows = ["### 竞争格局与替代风险", ""]
-    for row in rows_in[:3]:
+    for row in rows_in[:2]:
         direct = "、".join(row.direct_competitors) or "主要对手未完整披露"
         alternatives = "、".join(row.substitutes_self_supply_and_new_entrants) or "暂无明确替代项"
         rows.extend(
@@ -3652,7 +3732,7 @@ def _render_accounting_quality(rows_in: list[AccountingQualityRow]) -> str:
     if not rows_in:
         return ""
     rows = ["### 财务质量核查", ""]
-    for row in rows_in[:4]:
+    for row in rows_in[:3]:
         verdict = _PUBLIC_LABELS.get(row.verdict, row.verdict)
         rows.append(
             _compact_public_item(
@@ -3667,7 +3747,7 @@ def _render_accounting_quality(rows_in: list[AccountingQualityRow]) -> str:
 
 
 def _render_alternative_intelligence(rows_in: list[AlternativeIntelligenceDecision]) -> str:
-    material = [row for row in rows_in if row.disposition != "rejected"][:4]
+    material = [row for row in rows_in if row.disposition != "rejected"][:2]
     if not material:
         return ""
     rows = ["### 私域信息对核心假设的影响", ""]
@@ -4023,17 +4103,21 @@ def render_sell_side_pm_decision(decision: SellSidePMDecision) -> str:
             _render_investment_summary(decision, rating_label),
             "### 核心观点与主要分歧\n\n"
             + _demote_embedded_headings(
-                _reader_text(
+                _reader_markdown(
                     decision.investment_conclusion_and_core_conflict,
-                    max_chars=1200,
+                    max_chars=620,
                 )
             ),
             "## 一、公司是谁、如何赚钱\n\n"
-            + _demote_embedded_headings(decision.company_disaggregation)
+            + _demote_embedded_headings(
+                _reader_markdown(decision.company_disaggregation, max_chars=520)
+            )
             + "\n\n"
             + _render_business_model_mechanisms(decision.business_model_mechanisms),
             "## 二、产业链位置与行业格局\n\n"
-            + _demote_embedded_headings(decision.industry_cycle_and_competition)
+            + _demote_embedded_headings(
+                _reader_markdown(decision.industry_cycle_and_competition, max_chars=560)
+            )
             + "\n\n"
             + _render_industry_drivers(decision.industry_driver_matrix)
             + "\n\n"
@@ -4041,35 +4125,45 @@ def render_sell_side_pm_decision(decision: SellSidePMDecision) -> str:
             "## 三、业务拆解与核心利润池\n\n"
             + _render_segment_economics(decision.segment_economics)
             + "\n\n"
-            + _demote_embedded_headings(decision.accounting_and_capital_allocation)
+            + _demote_embedded_headings(
+                _reader_markdown(decision.accounting_and_capital_allocation, max_chars=430)
+            )
             + "\n\n"
             + _render_accounting_quality(decision.accounting_quality_matrix),
             "## 四、竞争优势、护城河与主要短板\n\n"
-            + _demote_embedded_headings(decision.moat_evidence_scorecard)
+            + _demote_embedded_headings(
+                _reader_markdown(decision.moat_evidence_scorecard, max_chars=430)
+            )
             + "\n\n"
             + _render_moat_mechanisms(decision.moat_mechanisms),
             "## 五、增长逻辑、关键分歧与盈利预测\n\n"
-            + _demote_embedded_headings(decision.thesis_financial_bridge)
-            + "\n\n"
-            + _render_forecast_takeaways(decision.forecast_takeaways)
+            + _demote_embedded_headings(
+                _reader_markdown(decision.thesis_financial_bridge, max_chars=950)
+            )
             + "\n\n### 模型解释与局限\n\n"
             + _render_reader_forecast_table(decision.canonical_model_snapshot)
             + "\n\n"
-            + _render_forecast_assumptions(decision.forecast_assumptions)
-            + "\n\n"
-            + _demote_embedded_headings(decision.autonomous_forecast_model),
+            + _demote_embedded_headings(
+                _reader_markdown(decision.autonomous_forecast_model, max_chars=480)
+            ),
             "## 六、市场预期差、风险与验证\n\n"
-            + _demote_embedded_headings(decision.expectation_gap_and_market_pricing)
+            + _demote_embedded_headings(
+                _reader_markdown(decision.expectation_gap_and_market_pricing, max_chars=520)
+            )
             + "\n\n"
             + _render_foreign_sell_side_disclosure(decision.sell_side_expectation_matrix)
             + "\n\n"
             + _render_alternative_intelligence(decision.alternative_intelligence_decisions)
             + "\n\n### 风险、催化剂与验证日历\n\n"
-            + _demote_embedded_headings(decision.risks_catalysts_verification),
+            + _demote_embedded_headings(
+                _reader_markdown(decision.risks_catalysts_verification, max_chars=600)
+            ),
             "## 七、估值、评级与投资结论\n\n"
             + _render_deterministic_valuation(decision.deterministic_valuation)
             + "\n\n### 估值解释与局限\n\n"
-            + _demote_embedded_headings(decision.valuation_closure)
+            + _demote_embedded_headings(
+                _reader_valuation_explanation(decision.valuation_closure)
+            )
             + "\n\n### 投资结论\n\n"
             + f"> **结论重申：{rating_label}（{decision.rating.value}）。** "
             + _reader_text(decision.rating_posture, max_chars=240),

@@ -69,15 +69,33 @@ def _json_object(text: str) -> dict[str, Any]:
     cleaned = re.sub(r"^```(?:json)?", "", cleaned, flags=re.I).strip()
     cleaned = re.sub(r"```$", "", cleaned).strip()
     try:
-        value = json.loads(cleaned)
+        # Some OpenAI-compatible providers occasionally place literal newlines
+        # or other control characters inside a JSON string.  They are harmless
+        # once parsed, but the stdlib's strict decoder rejects the entire
+        # otherwise valid structured response and triggers expensive full
+        # regeneration.  ``strict=False`` accepts those characters without
+        # weakening schema validation below.
+        value = json.loads(cleaned, strict=False)
     except json.JSONDecodeError:
         match = re.search(r"\{.*\}", cleaned, re.S)
         if not match:
             raise
-        value = json.loads(match.group(0))
+        value = json.loads(match.group(0), strict=False)
     if not isinstance(value, dict):
         raise ValueError("structured fallback must return one JSON object")
     return value
+
+
+def _merge_json_patch(base: dict[str, Any], patch: dict[str, Any]) -> dict[str, Any]:
+    """Merge a schema-repair delta into the last mostly-valid response."""
+
+    merged = dict(base)
+    for key, value in patch.items():
+        if isinstance(value, dict) and isinstance(merged.get(key), dict):
+            merged[key] = _merge_json_patch(merged[key], value)
+        else:
+            merged[key] = value
+    return merged
 
 
 def _compact_validation_error(exc: Exception, limit: int = 24) -> str:
@@ -321,6 +339,10 @@ def invoke_structured_or_freetext(
             return (rendered, metadata) if return_metadata else rendered
         except Exception as first_repair_error:
             latest_text = content
+            try:
+                latest_payload = _json_object(content)
+            except Exception:
+                latest_payload = {}
             latest_error: Exception = retained_validation_error or first_repair_error
             repair_failures = [f"fallback validation={first_repair_error}"]
             # A first repair often leaves only one or two enum/missing-field
@@ -339,15 +361,18 @@ Return exactly one valid JSON object with no Markdown fences or commentary. Pres
 Validation issues from the previous response:
 {_compact_validation_error(latest_error)}
 
-Previous response:
-{latest_text[:50000]}
+Previous response (return only corrected/missing fields when the repair schema is a fragment):
+{json.dumps(latest_payload, ensure_ascii=False, separators=(',', ':'))[:50000] if latest_payload else latest_text[:50000]}
 """
                 try:
                     repaired_response = plain_llm.invoke(repair_prompt)
                     latest_text = _response_text(repaired_response)
-                    repaired_result = fallback_schema.model_validate(
-                        _json_object(latest_text)
+                    repair_payload = _json_object(latest_text)
+                    candidate_payload = _merge_json_patch(
+                        latest_payload,
+                        repair_payload,
                     )
+                    repaired_result = fallback_schema.model_validate(candidate_payload)
                     rendered = render(repaired_result)
                     metadata = {
                         "mode": "schema_repaired_fallback",
@@ -358,6 +383,16 @@ Previous response:
                     }
                     return (rendered, metadata) if return_metadata else rendered
                 except Exception as next_error:
+                    # Preserve any syntactically valid repair delta so the next
+                    # attempt fixes only what remains instead of forgetting the
+                    # already valid 90% of a large PM object.
+                    try:
+                        latest_payload = _merge_json_patch(
+                            latest_payload,
+                            _json_object(latest_text),
+                        )
+                    except Exception:
+                        pass
                     latest_error = next_error
                     repair_failures.append(
                         f"repair attempt {attempt} validation={next_error}"

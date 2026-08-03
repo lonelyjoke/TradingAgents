@@ -114,6 +114,15 @@ DEFAULT_CONFIG = {
     # a local proxy. The client still honors provider/base_url settings.
     "llm_timeout": _env_int_or_default("TRADINGAGENTS_LLM_TIMEOUT", 120),
     "llm_max_retries": _env_int_or_default("TRADINGAGENTS_LLM_MAX_RETRIES", 3),
+    # Bound total completion work.  DeepSeek usage includes visible answer and
+    # reasoning tokens; without a ceiling short debate memos can consume tens
+    # of thousands of completion tokens and dominate wall-clock time.
+    "quick_llm_max_output_tokens": _env_int_or_default(
+        "TRADINGAGENTS_QUICK_LLM_MAX_OUTPUT_TOKENS", 16000
+    ),
+    "deep_llm_max_output_tokens": _env_int_or_default(
+        "TRADINGAGENTS_DEEP_LLM_MAX_OUTPUT_TOKENS", 24000
+    ),
     "llm_proxy": os.getenv("TRADINGAGENTS_LLM_PROXY"),
     # Provider-specific thinking configuration
     "google_thinking_level": None,      # "high", "minimal", etc.
