@@ -195,6 +195,9 @@ def _handoff_metric_key(period: Any, metric: Any) -> tuple[str, str]:
         "dilutedsharesoutstanding": "dilutedshares",
         "稀释股本": "dilutedshares",
         "总股本": "dilutedshares",
+        "稀释后股本": "dilutedshares",
+        "稀释股本": "dilutedshares",
+        "总股本": "dilutedshares",
         "revenue": "revenue",
         "consolidatedrevenue": "revenue",
         "营业收入": "revenue",
@@ -260,7 +263,19 @@ def _numeric_line_map(payload: Mapping[str, Any]) -> dict[tuple[str, str], dict[
     for row in payload.get("canonical_model_snapshot", []) or []:
         key = _handoff_metric_key(row.get("period"), row.get("metric"))
         if row.get("value") is not None:
-            result[key] = dict(row)
+            candidate = dict(row)
+            existing = result.get(key)
+            if existing is None:
+                result[key] = candidate
+                continue
+            if key[1] == "dilutedshares":
+                status_rank = {"reported": 3, "calculated": 2, "estimated": 1}
+                existing_rank = status_rank.get(str(existing.get("status", "")).lower(), 0)
+                candidate_rank = status_rank.get(str(candidate.get("status", "")).lower(), 0)
+                if candidate_rank > existing_rank:
+                    result[key] = candidate
+            else:
+                result[key] = candidate
     return result
 
 
@@ -332,12 +347,23 @@ def _line_changed(left: Mapping[str, Any], right: Mapping[str, Any]) -> bool:
     left_unit = _normalized_unit(left.get("unit", ""))
     right_unit = _normalized_unit(right.get("unit", ""))
     if left_metric == "dilutedshares":
-        if left_unit in {"shares", "share", "股"}:
-            left_value /= 1_000_000.0
-            left_unit = "mn_shares"
-        if right_unit in {"shares", "share", "股"}:
-            right_value /= 1_000_000.0
-            right_unit = "mn_shares"
+        def _shares_to_mn(value: float, raw_unit: object) -> float:
+            unit = re.sub(r"[\s_/-]+", "", str(raw_unit or "").lower())
+            if any(token in unit for token in ("亿股", "100millionshares", "hundredmillionshares")):
+                return value * 100.0
+            if any(token in unit for token in ("万股", "10000shares", "10kshares")):
+                return value / 100.0
+            if any(token in unit for token in ("千股", "1000shares")):
+                return value / 1000.0
+            if any(token in unit for token in ("百万股", "millionshares", "mnshares", "mshares")):
+                return value
+            if unit in {"shares", "share", "股"}:
+                return value / 1_000_000.0
+            return value
+
+        left_value = _shares_to_mn(left_value, left.get("unit", ""))
+        right_value = _shares_to_mn(right_value, right.get("unit", ""))
+        left_unit = right_unit = "mn_shares"
     value_changed = abs(left_value - right_value) > max(
         abs(left_value) * value_tolerance,
         0.01,

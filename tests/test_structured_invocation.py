@@ -726,8 +726,9 @@ def test_deterministic_pm_engine_calculates_eps_fcf_scenarios_and_safe_price():
                     "valuation_multiple": 1,
                     "probability_pct": 20,
                     "ownership_pct": 100,
-                    "execution_haircut_pct": 0,
-                    "assumption_summary": "first commercial order remains unverified",
+                        "execution_haircut_pct": 0,
+                        "include_in_public_base_value": True,
+                        "assumption_summary": "first commercial order remains unverified",
                     "evidence_ids": ["KPE01"],
                 },
                 {
@@ -794,19 +795,20 @@ def test_deterministic_pm_engine_calculates_eps_fcf_scenarios_and_safe_price():
     assert "+20%" not in decision.autonomous_forecast_model
     assert "分部毛利率桥已撤销" in decision.thesis_financial_bridge
     assert "综合毛利率34.0% →" not in decision.thesis_financial_bridge
-    assert "高于程序化安全买入上限" in decision.rating_posture
+    assert "12个月目标价102.30元" in decision.rating_posture
     assert "首仓40%" not in decision.risks_catalysts_verification
     assert "240元" not in decision.risks_catalysts_verification
     assert "999亿元" not in decision.valuation_closure
     normalized_twice, _ = normalize_sell_side_pm_decision(decision)
-    assert normalized_twice.risks_catalysts_verification.count("程序化执行约束") == 1
+    assert normalized_twice.risks_catalysts_verification.count("程序化执行约束") == 0
     rendered = render_sell_side_pm_decision(decision)
     assert "| 基准 |" in rendered
     assert "incremental_equity_value" not in rendered
+    reader_facing = rendered.split("## 内部附录", 1)[0]
+    assert "安全买入价上限" not in reader_facing
+    assert "内部组合执行约束" in rendered
     assert "安全买入价上限：80元" in rendered
-    assert "安全买入价取收益率约束价" in rendered
-    assert "收益率约束价83.33元、安全边际价80元和熊市约束价90.59元三者最低值" in rendered
-    assert "不等同于公允价值或评级锚" in rendered
+    assert "仅供内部组合管理" in rendered
     assert "期权价值：0.5元/股" in rendered
     assert "程序化期权价值" in rendered
     assert "AIDC SST" in rendered
@@ -815,7 +817,6 @@ def test_deterministic_pm_engine_calculates_eps_fcf_scenarios_and_safe_price():
     assert "单家机构" in rendered
     assert "私域文字信息" in rendered
     assert "single_broker" not in rendered
-    reader_facing = rendered.split("## 内部附录", 1)[0]
     assert "C_market_narrative" not in reader_facing
     assert "B_identified_professional" not in reader_facing
     assert "ceiling=" not in reader_facing

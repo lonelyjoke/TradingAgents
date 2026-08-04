@@ -490,13 +490,14 @@ def _deepseek_quick_request_settings() -> dict[str, object]:
         thinking = "enabled"
     settings: dict[str, object] = {
         "extra_body": {"thinking": {"type": thinking}},
+        "max_tokens": int(config.get("quick_llm_max_output_tokens", 8000) or 8000),
     }
     if thinking == "enabled":
         effort = str(
             config.get("deepseek_quick_reasoning_effort", "high") or "high"
         ).lower()
         settings["reasoning_effort"] = (
-            effort if effort in {"low", "high", "max"} else "high"
+            effort if effort in {"low", "medium", "high", "max"} else "low"
         )
     return settings
 
@@ -510,14 +511,16 @@ class _DirectDeepSeekLLM:
         *,
         thinking: str = "enabled",
         reasoning_effort: str = "high",
+        max_tokens: int = 8000,
     ):
         self.model = model
         self.base_url = (base_url or "https://api.deepseek.com").rstrip("/")
         self.timeout = timeout
         self.thinking = thinking if thinking in {"enabled", "disabled"} else "enabled"
         self.reasoning_effort = (
-            reasoning_effort if reasoning_effort in {"low", "high", "max"} else "high"
+            reasoning_effort if reasoning_effort in {"low", "medium", "high", "max"} else "low"
         )
+        self.max_tokens = max(512, int(max_tokens))
         self.api_key = _load_local_env_value("DEEPSEEK_API_KEY")
         if not self.api_key:
             raise RuntimeError("DEEPSEEK_API_KEY is not configured in environment or .env")
@@ -540,6 +543,7 @@ class _DirectDeepSeekLLM:
             "messages": messages,
             "thinking": {"type": self.thinking},
             "response_format": {"type": "json_object"},
+            "max_tokens": self.max_tokens,
         }
         if self.thinking == "enabled":
             request_payload["reasoning_effort"] = self.reasoning_effort
@@ -614,6 +618,7 @@ def _create_market_analysis_llm(
                 base_url=base_url,
                 thinking=thinking,
                 reasoning_effort=str(deepseek_settings.get("reasoning_effort", "high")),
+                max_tokens=int(deepseek_settings.get("max_tokens", 8000)),
             )
 
     from tradingagents.llm_clients import create_llm_client

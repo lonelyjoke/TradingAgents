@@ -118,10 +118,10 @@ DEFAULT_CONFIG = {
     # reasoning tokens; without a ceiling short debate memos can consume tens
     # of thousands of completion tokens and dominate wall-clock time.
     "quick_llm_max_output_tokens": _env_int_or_default(
-        "TRADINGAGENTS_QUICK_LLM_MAX_OUTPUT_TOKENS", 16000
+        "TRADINGAGENTS_QUICK_LLM_MAX_OUTPUT_TOKENS", 8000
     ),
     "deep_llm_max_output_tokens": _env_int_or_default(
-        "TRADINGAGENTS_DEEP_LLM_MAX_OUTPUT_TOKENS", 24000
+        "TRADINGAGENTS_DEEP_LLM_MAX_OUTPUT_TOKENS", 16000
     ),
     "llm_proxy": os.getenv("TRADINGAGENTS_LLM_PROXY"),
     # Provider-specific thinking configuration
@@ -133,7 +133,7 @@ DEFAULT_CONFIG = {
     # reasoning traces on every debate and synthesis call. Environment
     # overrides remain available for exceptional deep-dive runs.
     "deepseek_quick_thinking": _env_or_default(
-        "TRADINGAGENTS_DEEPSEEK_QUICK_THINKING", "enabled"
+        "TRADINGAGENTS_DEEPSEEK_QUICK_THINKING", "disabled"
     ).lower(),
     "deepseek_quick_reasoning_effort": _env_or_default(
         "TRADINGAGENTS_DEEPSEEK_QUICK_REASONING_EFFORT", "medium"
@@ -142,7 +142,7 @@ DEFAULT_CONFIG = {
         "TRADINGAGENTS_DEEPSEEK_DEEP_THINKING", "enabled"
     ).lower(),
     "deepseek_deep_reasoning_effort": _env_or_default(
-        "TRADINGAGENTS_DEEPSEEK_DEEP_REASONING_EFFORT", "high"
+        "TRADINGAGENTS_DEEPSEEK_DEEP_REASONING_EFFORT", "medium"
     ).lower(),
     # Checkpoint/resume: when True, LangGraph saves state after each node
     # so a crashed run can resume from the last successful step.
@@ -162,10 +162,10 @@ DEFAULT_CONFIG = {
     # research pack from being retransmitted in full to every downstream role.
     # The reader dossier and canonical structured model are budgeted separately.
     "prompt_context_total_chars_analyst": _env_int_or_default(
-        "PROMPT_CONTEXT_TOTAL_CHARS_ANALYST", 36000
+        "PROMPT_CONTEXT_TOTAL_CHARS_ANALYST", 28000
     ),
     "prompt_context_total_chars_research": _env_int_or_default(
-        "PROMPT_CONTEXT_TOTAL_CHARS_RESEARCH", 40000
+        "PROMPT_CONTEXT_TOTAL_CHARS_RESEARCH", 32000
     ),
     "prompt_context_total_chars_trader": _env_int_or_default(
         "PROMPT_CONTEXT_TOTAL_CHARS_TRADER", 16000
@@ -174,7 +174,7 @@ DEFAULT_CONFIG = {
         "PROMPT_CONTEXT_TOTAL_CHARS_RISK", 12000
     ),
     "prompt_context_total_chars_portfolio": _env_int_or_default(
-        "PROMPT_CONTEXT_TOTAL_CHARS_PORTFOLIO", 44000
+        "PROMPT_CONTEXT_TOTAL_CHARS_PORTFOLIO", 36000
     ),
     # A-share contexts are fetched once before the graph starts. Re-querying
     # the same Tushare/filing/event tools inside analysts adds calls and tokens

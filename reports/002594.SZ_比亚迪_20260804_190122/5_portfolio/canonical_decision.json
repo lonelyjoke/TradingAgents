@@ -1,0 +1,1015 @@
+{
+  "rating": "Hold",
+  "rating_posture": "中性；12个月目标价112.42元，对应现价空间23.3%。评级依据为基本面与估值，后续按关键经营证据调整。",
+  "research_readiness": "partial",
+  "one_line_thesis": "比亚迪出口量高增长已证实，但出口净利润率是未经验证的核心变量；当前 PE TTM 30 倍中性偏上，市场定价盈利下滑，概率加权公允价值 +23% 但下行风险 -40%，在 Q2 财报验证出口利润与国内止血前，保持观察并设置严格升级/降级条件是最优风险回报决策。",
+  "research_questions": [
+    "Can BYD translate its verified export volume surge into a profitable revenue stream with a net margin significantly above its domestic operations?",
+    "Will the tailwind from lithium carbonate prices at the 7.1st percentile finally flow through to the consolidated gross margin, or is this structurally offset by the domestic NEV price war?",
+    "Is the heavy capex cycle peaking in 2026, creating a credible path to free cash flow breakeven by 2027-2028?",
+    "Does the unverified new business narrative around AI infrastructure and robotics represent a real, quantifiable call option?",
+    "Is BYD the best-positioned auto OEM in its peer group to navigate the current industry downcycle?"
+  ],
+  "question_verdicts": [
+    {
+      "question": "UQ02: Can BYD translate its verified export volume surge into a profitable revenue stream?",
+      "why_decisive": "出口是最大增长驱动；若出口利润率薄，多头顶级坍缩，公司退化为价值陷阱；若高则将启动盈利升级周期。",
+      "conclusion": "出口量高增已证实，但利润率未在任何财报中披露。多头依赖未验证的花旗条件预测，空头正确指出合并毛利率在低锂价下仍下滑，暗示增量利润率较弱。当前最敏感变量，维持观察，等待 Q2 半年报分部披露。",
+      "evidence_used": [
+        "KPE03: 欧洲终端实销同比+138%（未验证渠道检查）",
+        "KPE10: 7月出口同比+124%（未验证渠道检查）",
+        "EV012: Q1 2026 合并毛利率 18.81%，同比下滑 1.26pp，尽管锂价极低",
+        "EV015: 财务费用率同比上升 2.52pp，反映海外扩展融资成本"
+      ],
+      "strongest_counterevidence": "如果出口净利润率真的大幅高于国内，出口占比已升至 44%，合并毛利率应稳定甚至改善，而非在锂价阶段性红利下仍下滑。",
+      "model_or_valuation_effect": "牛市基础情景要求 Q2-Q4 利润达到 Q1 的 2.5 倍以上；出口利润率假设是决定这一结果能否实现的核心。暂不上调任何估值假设。",
+      "confidence": "low",
+      "next_verification": "Q2 2026（H1 2026）业绩报告：分地区收入/毛利率，或管理层对单位出口盈利的评论。次优代理为合并毛利率是否从 Q1 的 18.81% 环比回升。"
+    },
+    {
+      "question": "UQ03: Will the lithium carbonate cost tailwind flow through to margins?",
+      "why_decisive": "这是主要成本端催化剂。若无法传导，说明价格战已侵蚀成本领先护城河，改变盈利基础。",
+      "conclusion": "成本红利被国内价格战和产品结构下滑全部吞噬。空头认为这表明价格战是结构性逆风，过于绝对；多头声称的“未来利润蓄水池”在 Q1 后仍完全未证实。",
+      "evidence_used": [
+        "EV034: 碳酸锂处于历史 7.1% 分位，极低",
+        "EV012: Q1 毛利率同比下滑，尽管锂价下跌",
+        "EV038: Q1 营收环比 -81%，反映严重价格压力"
+      ],
+      "strongest_counterevidence": "Q1 毛利率结果直接反驳了锂价下跌将近期催化利润率的论点。",
+      "model_or_valuation_effect": "保守假设 2026E 毛利率 19.0%，暂不提供锂价红利上调空间。",
+      "confidence": "medium",
+      "next_verification": "Q2 2026 合并毛利率。若超过 20% 则为正面信号。"
+    },
+    {
+      "question": "UQ04: When will FCF turn sustainably positive?",
+      "why_decisive": "在竞争激烈、资本密集型行业中，FCF 为负会暴露稀释或债务风险；转正时点是质量成熟的标志。",
+      "conclusion": "资本开支可能在 2026 年达峰，使 2027-2028 年 FCF 拐点可能，但 Q1 经营现金流下降 49%、存货/收入比率上升，显示营运资金是比资本开支更大的现金消耗。",
+      "evidence_used": [
+        "EV030: 计划海外扩展资本开支 197 亿，暗示开支峰值",
+        "EV041: Q1 OCF 同比下降 49.24%",
+        "EV044: 存货/收入比率同比升 4pp"
+      ],
+      "strongest_counterevidence": "即便资本开支见顶，营运资金恶化（库存膨胀）导致经营现金流骤降，表明 FCF 问题比单一投资周期更深。",
+      "model_or_valuation_effect": "维持 2026 年 FCF 深度为负的预测，2027 年转正路径需先验证存货管理改善。",
+      "confidence": "medium",
+      "next_verification": "H1 2026 现金流量表，判断 Q1 OCF 下降是季节性还是结构性趋势。"
+    },
+    {
+      "question": "UQ05: Is the AI/robotics narrative a real call option?",
+      "why_decisive": "这是核心汽车业务之外的主要潜在估值重估来源，但当前仅停留在叙事层面。",
+      "conclusion": "AI/机器人属于未经验证的投机叙事。800G 光模块虽真实，但为新进入者面对激烈竞争和价格压力，短期无法量化财务贡献。保留极小期权价值（5 元/股）仅置于牛市情景。",
+      "evidence_used": [
+        "KPE01: 比亚迪电子推进 AI 液冷和电源",
+        "KPE02: 光模块竞争激烈，价格压力大",
+        "KPE05: 比亚迪机器人或于 8 月亮相",
+        "EV043: Q1 非经常性减值提示新业务风险"
+      ],
+      "strongest_counterevidence": "光模块龙头拥有大规模研发和产能领先，比亚迪电子跨界进入是“证明给我看”的故事，高利润率突破概率低。",
+      "model_or_valuation_effect": "仅在牛市情景保留 5 元/股期权价值；基础情景核心估值不包含任何 AI 贡献。",
+      "confidence": "low",
+      "next_verification": "比亚迪电子（0285.HK）2026 年中报，查独立财务与分部新业务收入。"
+    }
+  ],
+  "forecast_takeaways": [
+    {
+      "takeaway": "出口量高增长是已验证事实，但出口盈利故事是未经验证的核心假设；牛市完全依赖于 Q2 2026 业绩意外大幅超预期，而 Q1 数据不支持这一级别反转。",
+      "evidence_anchor": "Q1 2026 归母净利润年化仅 163 亿，而牛市目标 350 亿+隐含 Q2-Q4 需要达到 Q1 的 2.5 倍以上。",
+      "financial_implication": "若 Q2 净利润低于 80 亿，基础情景必须下修，公允价值将跌破 91.15 元。",
+      "confidence_and_risk": "置信度低。Q2 不及预期风险高，因国内需求收缩和定价压力未被多头用硬数据有效反击。"
+    },
+    {
+      "takeaway": "Q1 财务数据恶化（毛利率下滑、OCF 下降、库存加速累积）构成的利空证据链，较多头未验证的渠道检查更可靠、更具一致性。",
+      "evidence_anchor": "EV012（毛利率）、EV041（OCF）、EV044（存货/收入）均为量化恶化信号。",
+      "financial_implication": "核心风险并非国内份额流失，而是长周期持续现金消耗推迟 FCF 拐点并拉低估值中枢。",
+      "confidence_and_risk": "较高；Q1 数据客观。但风险在于 Q1 可能只是季节性低谷，多头成长叙事可能在 Q2 恢复。"
+    }
+  ],
+  "forecast_assumptions": [
+    {
+      "parameter": "合并毛利率（2026E）",
+      "affected_business": "新能源汽车及电池（BU_AUTO）",
+      "historical_anchor": "Q1 2026: 18.81%（同比-1.26pp）；FY2025: 约 21%",
+      "evidence_status": "analyst_estimate",
+      "base_case": "19.0% for FY2026，需 H2 较 Q1 明显回升",
+      "bull_case": "20.5%，若锂价红利兑现且出口高利润率在数据中体现",
+      "bear_case": "17.5%，若国内价格战进一步恶化且出口利润率极低",
+      "rationale_and_evidence": "保守估计，反映熊方 Q1 攻击成功，将初始分析预测 19.5% 下调至 19.0%。需要 Q2 验证。",
+      "sensitivity": "每 1pp 毛利率变动影响税前利润约 90 亿，EPS 约 0.81 元。",
+      "confidence": "low",
+      "verification_gate": "H1 2026 业绩报告（预计 2026 年 8 月发布）：披露合并毛利率。"
+    },
+    {
+      "parameter": "海外新能源汽车销量（2026E）",
+      "affected_business": "地理分部：国内 vs 海外（BU_GEO）",
+      "historical_anchor": "H1 2026: 79 万辆（同比+71%）",
+      "evidence_status": "proxy",
+      "base_case": "160 万辆（同比+60%）",
+      "bull_case": "180 万辆（同比+80%），受益欧洲份额突破",
+      "bear_case": "140 万辆（同比+40%），若欧盟关税或物流受阻",
+      "rationale_and_evidence": "基于强劲出口趋势（KPE10、EV021）和花旗基础框架，采用中性估计。",
+      "sensitivity": "每 10 万辆出口变动收入约 300 亿元，潜在净利润影响 15-20 亿元（假设 5-8% 净利率）。",
+      "confidence": "medium",
+      "verification_gate": "比亚迪月度产销快报（2026 年 9 月）"
+    },
+    {
+      "parameter": "资本开支（2026E）",
+      "affected_business": "新能源汽车及电池、海外产能建设（BU_AUTO & BU_GEO）",
+      "historical_anchor": "2025 年资本开支及研发合计约 831 亿元（研发 634 亿 + 海外资本开支 197 亿，EV030）",
+      "evidence_status": "analyst_estimate",
+      "base_case": "约 900 亿元，反映海外工厂建设和新平台研发，假设 2026 年为峰值",
+      "bull_case": "750 亿元，若部分海外项目推迟或资本开支效率提升",
+      "bear_case": "1,050 亿元，若竞争加剧迫使进一步扩产",
+      "rationale_and_evidence": "基于 EV030 显示的海外扩张计划及历史投资强度，预计 2026 年资本开支仍处高位，但随后逐年下降。",
+      "sensitivity": "每 100 亿元资本开支变化直接影响 FCF 同额，并对未来折旧和产能爬坡形成压力。",
+      "confidence": "medium",
+      "verification_gate": "H1 2026 现金流量表及公司 2026 年全年资本开支指引。"
+    }
+  ],
+  "core_theses": [
+    {
+      "rank": 1,
+      "takeaway": "比亚迪是一家陷入国内价格战的世界级制造企业，其财务特征比技术领导力更周期性；牛市本质上是赌 Q2 出现无 Q1 数据支持的盈利 V 型反转。",
+      "decisive_question": "2026E 盈利恢复能否实现？",
+      "evidence": "Q1 归母净利润 40.8 亿，年化仅 163 亿，而牛市目标 350 亿+；在理想成本条件下毛利率仍下滑。",
+      "strongest_counterevidence": "7 月批发数据及出口高增显示边际改善，可能 Q1 为一次性库存调整。",
+      "financial_transmission": "Q2 盈利若低于预期，将导致 2026E EPS 大幅下修，推翻当前估值中枢。",
+      "market_pricing": "PE TTM 30 倍处于 5 年中性区间，市场未定价极端乐观，也未反映深度衰退。",
+      "falsification_gate": "Q2 2026 报告：归母净利润若低于 80 亿（对应年化 320 亿，仍不够牛市目标），恢复预期将破灭。",
+      "verdict": "unproven"
+    },
+    {
+      "rank": 2,
+      "takeaway": "对股价影响最大的变量是出口净利率，但其完全未经披露数据验证；空头“黑箱”批判逻辑上合理，多头渠道数据无法证伪。",
+      "decisive_question": "比亚迪能否在出口业务上获得显著高于国内的净利率？",
+      "evidence": "无任何公开出口利润率数据。在出口占比 44% 情况下合并毛利率仍下滑，是极强的反证。",
+      "strongest_counterevidence": "渠道检查及花旗分析暗示出口盈利可能健康。",
+      "financial_transmission": "若出口利润率极微薄，比亚迪盈利上限被封死，牛市量到利的桥梁断裂。",
+      "market_pricing": "股价未对出口叙事给予溢价，隐含深度怀疑，如被证伪反而形成投资机会。",
+      "falsification_gate": "管理层评论或分部财报披露确认出口净利率等于或低于国内水平，将构成结构性利空。",
+      "verdict": "unproven"
+    }
+  ],
+  "segment_economics": [
+    {
+      "business_unit": "新能源汽车及电池（BU_AUTO）",
+      "economic_role": "核心成熟价值，占 FY2025 营收 81%",
+      "disclosure_basis": "analytical",
+      "scale_and_growth": "2025E 汽车收入约 6486 亿，销量 460 万辆；出口量同比+71% 超高速增长。",
+      "margin_and_cash": "合并毛利率 Q1 18.81%，利润率受国内价格战压制；出口盈利水平未披露。",
+      "driver_equation": "收入 = 国内/海外销量 × 成交 ASP + 电池外供；毛利 = 收入 - 原材料（锂、钴、镍）- 制造成本 - 质保。",
+      "valuation_treatment": "core",
+      "evidence_ids": [
+        "EV010",
+        "EV021",
+        "EV012"
+      ],
+      "missing_or_next_check": "缺少分地区、分产品 ASP 及毛利率，出口单车盈利为最大盲点。"
+    },
+    {
+      "business_unit": "手机部件及组装（BU_MOBILE, 比亚迪电子）",
+      "economic_role": "核心营收贡献者，利润贡献次要，新兴 AI 业务为期权",
+      "disclosure_basis": "analytical",
+      "scale_and_growth": "占营收约 15-19%，受大客户苹果等影响，AI 服务器收入尚小。",
+      "margin_and_cash": "利润率较低但稳定；AI 液冷、电源业务处于早期，订单状况未明。",
+      "driver_equation": "收入 = 零部件出货量 × 合约定价；毛利受材料、良率影响。",
+      "valuation_treatment": "core",
+      "evidence_ids": [
+        "KPE01",
+        "KPE02"
+      ],
+      "missing_or_next_check": "比亚迪电子独立财务、AI 订单量与客户验证。"
+    }
+  ],
+  "business_model_mechanisms": [
+    {
+      "link": "垂直整合：从电池材料、电芯制造到整车组装，内部供应核心技术组件",
+      "how_it_works": "电池（刀片、DM-i 混动）自供，降低对外采购依赖，提升成本控制和生产稳定性。",
+      "economic_driver": "降低单车物料成本、保障供应安全、加速技术迭代。",
+      "cash_and_capital_feature": "重资产，需持续高强度资本开支和研发投入。",
+      "evidence_or_gap": "整车制造成本效率体现为规模效应，但 Q1 毛利率表现弱化该传导。",
+      "analyst_conclusion": "在价格战中提供生存优势，但未能转化为定价权。"
+    },
+    {
+      "link": "规模效应与全球渠道：全球最大新能源车制造商，国内覆盖广泛，海外快速扩张",
+      "how_it_works": "通过庞大销量摊薄固定成本，利用经销商和直营网络出口至欧洲、东南亚。",
+      "economic_driver": "销量增长直接拉低单车固定成本、提升采购议价力。",
+      "cash_and_capital_feature": "库存和应收账款占用大量营运资金；海外扩张产生额外融资成本。",
+      "evidence_or_gap": "出口量高速增长,但出口利润率未披露。",
+      "analyst_conclusion": "销量领先稳固，但盈利质量存疑。"
+    },
+    {
+      "link": "现金循环：从整车销售、电池交付到收款，受补贴、库存和客户账期影响",
+      "how_it_works": "先生产后销售，经销与直销并存，新能源补贴拨付周期不确定，海外当地工厂影响库存。",
+      "economic_driver": "收入确认后转化为现金的能力。",
+      "cash_and_capital_feature": "Q1 OCF 同比降 49%，存货/收入比率攀升，营运资金效率恶化。",
+      "evidence_or_gap": "存货积压是否因出口在途或主动备货尚不明朗。",
+      "analyst_conclusion": "现金转换是短期关键风险，需密切跟踪。"
+    },
+    {
+      "link": "研发驱动的产品迭代与长期成本控制：高技术投入转化为工艺创新和新车型竞争力",
+      "how_it_works": "2025年研发投入634亿元，支持电池、平台和智能驾驶开发，加速产品线更新和制造成本优化。",
+      "economic_driver": "研发产出更高效的生产工艺、更低物料消耗和高性能产品，从而支撑销量和定价。",
+      "cash_and_capital_feature": "研发支出当期费用化削减利润，长期通过产品竞争力回收现金；资本化比例需关注。",
+      "evidence_or_gap": "刀片电池和DM-i是技术成果，但Q1毛利率不升反降，短期转化不明显。",
+      "analyst_conclusion": "研发构成长期护城河基础，但短期利润承压，需要产品周期验证回报。"
+    }
+  ],
+  "industry_driver_matrix": [
+    {
+      "driver": "碳酸锂现货价格",
+      "current_state_and_direction": "139,380 元/吨，处于历史 7.1% 极低分位，映射商品价格较窗口期下跌 22.1%",
+      "dated_evidence": "EV034 (2026-08-04)",
+      "affected_business": "新能源汽车及电池",
+      "financial_transmission": "理论上降低电池成本，但 Q1 毛利率未改善，说明被价格竞争与产品结构恶化吸收。",
+      "confidence": "medium",
+      "next_verification": "持续监测 SMM 锂价及公司季度毛利率反馈。"
+    },
+    {
+      "driver": "国内新能源乘用车竞争强度",
+      "current_state_and_direction": "渗透率超 50%，价格战激烈，国内订单月度同比-10%，但周批发降幅收窄至-1%",
+      "dated_evidence": "KPE04 (花旗 2026-07-30), EV038",
+      "affected_business": "国内整车销售",
+      "financial_transmission": "直接压制 ASP 和整车毛利率，需靠销量增长对冲。",
+      "confidence": "medium",
+      "next_verification": "8 月产销快报、Q2 财报国内毛利率数据。"
+    },
+    {
+      "driver": "欧盟关税及海外本地化政策",
+      "current_state_and_direction": "存在关税上调风险，但比亚迪加速匈牙利等本地工厂建设",
+      "dated_evidence": "KPE03, EV030",
+      "affected_business": "出口业务",
+      "financial_transmission": "增加短期成本，但若本地化成功可降低关税影响并提升供应可靠性。",
+      "confidence": "low",
+      "next_verification": "欧盟贸易政策公告、公司海外工厂投产进度。"
+    }
+  ],
+  "competition_landscapes": [
+    {
+      "business_unit": "新能源汽车整车",
+      "market_boundary": "全球大众市场新能源乘用车及插混，聚焦中国和欧洲入门至中端细分",
+      "structure_and_concentration": "高度分散但快速集中，比亚迪在中国 NEV 市占率约 30%",
+      "direct_competitors": [
+        "特斯拉",
+        "吉利（极氪）",
+        "长安汽车",
+        "大众 ID 系列",
+        "小米汽车"
+      ],
+      "substitutes_self_supply_and_new_entrants": [
+        "燃油车、混合动力车",
+        "公共交通与网约出行",
+        "整车厂自研电动平台"
+      ],
+      "comparison_dimensions": [
+        "成本控制与规模",
+        "电池技术与垂直整合",
+        "品牌认知与销售网络",
+        "新车型管线与出口能力"
+      ],
+      "company_relative_position": "成本效率领先，品牌溢价不足，出口渠道快速拓宽。",
+      "competitor_likely_response": "降价、提升配置、加速电动化以及推出新品牌。",
+      "financial_transmission": "价格战侵蚀整车 ASP 与毛利，销量增长部分对冲利润下滑。",
+      "evidence_status_and_ids": "EV021, KPE10",
+      "next_verification": "季度产业销售报告和公司产销快报。"
+    },
+    {
+      "business_unit": "手机部件及 AI 硬件",
+      "market_boundary": "全球电子零部件制造及组装，逐步涉足 AI 计算硬件（液冷、电源等）",
+      "structure_and_concentration": "少数大型 EMS 主导",
+      "direct_competitors": [
+        "立讯精密",
+        "鸿海/富士康",
+        "歌尔股份"
+      ],
+      "substitutes_self_supply_and_new_entrants": [
+        "品牌厂内制",
+        "其他汽车 Tier-1 供应商跨界"
+      ],
+      "comparison_dimensions": [
+        "制造规模与效率",
+        "大客户关系",
+        "AI 硬件技术储备"
+      ],
+      "company_relative_position": "深度绑定苹果等客户，传统业务利润薄；AI 新业务面临激烈竞争。",
+      "competitor_likely_response": "价格打压、抢单、加快自研或联盟。",
+      "financial_transmission": "ASP 压力持续，新业务高投入侵蚀短期利润，期权价值有待证实。",
+      "evidence_status_and_ids": "KPE01, KPE02",
+      "next_verification": "比亚迪电子中期业绩和 AI 订单进展。"
+    }
+  ],
+  "moat_mechanisms": [
+    {
+      "moat_source": "成本领先与规模制造",
+      "operating_mechanism": "超大规模分摊固定成本，高自动化率降低人工成本，内部供应电池削减核心物料开支。",
+      "observed_proof": "合并毛利率高于特斯拉（约 16%），但 Q1 经营利润率仅 3.13%，远低于特斯拉，说明成本优势被价格战稀释。",
+      "economic_result": "毛利率相对行业有保护垫，但未能稳定提升。",
+      "durability_and_threat": "由于价格战是行业普遍现象，成本优势提供生存权而非定价权。",
+      "verdict": "proven"
+    },
+    {
+      "moat_source": "垂直整合与电池技术",
+      "operating_mechanism": "刀片电池、DM-i 混动系统自研自产，降低外部依赖，加速技术迭代。",
+      "observed_proof": "技术差异化促使产品线丰富，但本质上未实现品牌溢价，ASP 同期下滑。",
+      "economic_result": "销量份额稳定，但价格竞争力是核心驱动。",
+      "durability_and_threat": "固态电池等技术可能颠覆，但短期风险可控。",
+      "verdict": "partial"
+    },
+    {
+      "moat_source": "品牌与全球渠道",
+      "operating_mechanism": "持续高研发投入（634 亿元）构建技术品牌形象，海外快速建网。",
+      "observed_proof": "海外销量增速猛，但投资者反复质疑车标与设计，品牌溢价尚未在财务上体现。",
+      "economic_result": "现阶段以量换市场，未贡献超额利润。",
+      "durability_and_threat": "若不能转化为品牌黏性，海外业务也将陷入价格竞争。",
+      "verdict": "unproven"
+    }
+  ],
+  "accounting_quality_matrix": [
+    {
+      "item": "经营现金流/净利润质量",
+      "latest_evidence_and_period": "Q1 2026 OCF/净利润比值仅 0.68，去年同期为正常水平",
+      "trend_or_comparator": "大幅恶化",
+      "causal_interpretation": "存货激增、应收增加，表明利润向现金转化效率下降。",
+      "earnings_cash_roic_effect": "FCF 深度为负，依赖外部融资加重财务费用。",
+      "verdict": "warning",
+      "evidence_ids": [
+        "EV041",
+        "EV044"
+      ]
+    },
+    {
+      "item": "存货/收入比率",
+      "latest_evidence_and_period": "Q1 2026 同比上升 4pp",
+      "trend_or_comparator": "上升",
+      "causal_interpretation": "可能与出口备货、渠道库存或滞销有关，需警惕减值风险。",
+      "earnings_cash_roic_effect": "加大营运资金占用，拖累 FCF。",
+      "verdict": "warning",
+      "evidence_ids": [
+        "EV044"
+      ]
+    },
+    {
+      "item": "资本开支规模",
+      "latest_evidence_and_period": "2025 年资本开支 197 亿元海外扩展，研发投入 634 亿",
+      "trend_or_comparator": "仍处高位，但可能达峰",
+      "causal_interpretation": "为长期成长必要投资，但短期内压制 FCF。",
+      "earnings_cash_roic_effect": "高资本开支下 ROIC 承压，需未来产能释放后回报。",
+      "verdict": "neutral",
+      "evidence_ids": [
+        "EV030",
+        "EV042"
+      ]
+    }
+  ],
+  "alternative_intelligence_decisions": [
+    {
+      "kpe_ids": [
+        "KPE01",
+        "KPE02"
+      ],
+      "claim": "比亚迪电子在 800G 光模块、AI 液冷和电源取得进展，800G 已量产或准备量产，同时面临激烈竞争。",
+      "source_type": "sell_side_view",
+      "affected_business_and_variable": "BU_MOBILE: AI 硬件收入期权",
+      "public_crosscheck": "无官方订单或收入公告，仅渠道提供定性描述；该KPE与对应KSI属于同一卖方原始帖子，不构成独立交叉验证；该KPE与对应KSI属于同一卖方原始帖子，不构成独立交叉验证。",
+      "evidence_grade": "C_market_narrative",
+      "source_reliability": "C_private_unverified",
+      "bias_profile": "channel_selection_bias",
+      "adoption_ceiling": "scenario_or_verification_only",
+      "disposition": "verification_change",
+      "before_after": "维持仅牛市情景包含 5 元/股期权价值，基础情景排除；不改变当前评级或持仓规模。",
+      "report_use": "chapter_6_expectations：用作证实出口和 AI 期权潜力的线索，计入情景定价。",
+      "falsification_or_next_check": "比亚迪电子中期业绩或独立公告显示 AI 收入贡献超过 5 亿元，且管理层给出明确增长指引。",
+      "freshness_and_shelf_life": ""
+    },
+    {
+      "kpe_ids": [
+        "KPE03",
+        "KPE10"
+      ],
+      "claim": "欧洲实销同比+138%，7 月出口同比+124%，显示比亚迪海外需求极其旺盛。",
+      "source_type": "sell_side_view",
+      "affected_business_and_variable": "BU_GEO: 出口销量",
+      "public_crosscheck": "与公司月度产销快报趋势一致，但具体数字及实销口径无法独立核实；该KPE与对应KSI属于同一卖方原始帖子，不构成独立交叉验证；该KPE与对应KSI属于同一卖方原始帖子，不构成独立交叉验证。",
+      "evidence_grade": "C_market_narrative",
+      "source_reliability": "B_identified_professional",
+      "bias_profile": "channel_selection_bias",
+      "adoption_ceiling": "model_input_after_crosscheck",
+      "disposition": "probability_change",
+      "before_after": "出口量基础情景概率保持 50%，但上调牛市出口量概率5pp；对整体评级无直接影响，增强对 Q2 验证的期待。",
+      "report_use": "chapter_2_industry_chain 和 chapter_5_growth_forecast：支撑出口放量逻辑。",
+      "falsification_or_next_check": "8 月产销快报需延续高增长趋势；若出口增速回落至 40% 以下，降下调出口量预期。",
+      "freshness_and_shelf_life": ""
+    },
+    {
+      "kpe_ids": [
+        "KPE04"
+      ],
+      "claim": "花旗预计比亚迪 Q2 净利润 90-100 亿元，2027E 出口 270 万辆可支撑超 500 亿净利。",
+      "source_type": "sell_side_view",
+      "affected_business_and_variable": "BU_AUTO: 2026E、2027E 净利润",
+      "public_crosscheck": "单家卖方预测，无独立交叉验证；该KPE与对应KSI属于同一卖方原始帖子，不构成独立交叉验证；该KPE与对应KSI属于同一卖方原始帖子，不构成独立交叉验证。",
+      "evidence_grade": "C_market_narrative",
+      "source_reliability": "B_identified_professional",
+      "bias_profile": "sell_side_optimism",
+      "adoption_ceiling": "scenario_or_verification_only",
+      "disposition": "verification_change",
+      "before_after": "用作 2026E Q2 利润验证门槛（80-100 亿），不直接纳入基础模型；若实现则上调基础情景概率。",
+      "report_use": "chapter_6_expectations：作为市场预期基线，设定升级/降级条件。",
+      "falsification_or_next_check": "Q2 报告实际净利润与 80 亿比较。",
+      "freshness_and_shelf_life": ""
+    }
+  ],
+  "sell_side_expectation_matrix": [
+    {
+      "source_ids": [
+        "KSI03",
+        "KPE04"
+      ],
+      "institution": "花旗",
+      "institution_origin": "foreign_sell_side",
+      "published_at": "2026-07-30",
+      "observation_type": "single_broker",
+      "forecast_and_valuation": "预计 Q2 净利润 90-100 亿元；基于 2026-2028 年净利 CAGR +25% 和 1.2x PEG，目标价 142 港元（对应 2026/2027 PE 30/25 倍）。",
+      "revision_or_dispersion": "窗口内首次识别，无同机构前序可比。",
+      "comparison_with_our_model": "花旗 2026E 净利润 25 亿元？与模型中的 350 亿元基础情景相差巨大，可能存在单位或口径误解；但 Q2 季利润预测与模型隐含的 Q2 要求（约 60-70 亿基础）偏高。",
+      "forecast_posture": "optimistic",
+      "key_assumptions_and_scenario": "国内业务至少不亏损，出口 270 万辆和高净利率隐含显著盈利升级，AI/机器人期权额外贡献。",
+      "adoption_level": "scenario_probability_only",
+      "evidence_status": "private_text",
+      "decision_use": "作为观察阈值，用于设置升级/降级条件，未纳入基础预测。"
+    },
+    {
+      "source_ids": [
+        "KSI05",
+        "KPE05"
+      ],
+      "institution": "中信证券",
+      "institution_origin": "domestic_sell_side",
+      "published_at": "2026-07-27",
+      "observation_type": "single_broker",
+      "forecast_and_valuation": "提及 26/27 年业绩 400/600 亿，目标价 1.2 万亿（隐含极乐观预期）。",
+      "revision_or_dispersion": "首次出现，极乐观。",
+      "comparison_with_our_model": "远超模型基础 350/450 亿，可能包含机器人等新业务极端乐观假设。",
+      "forecast_posture": "optimistic",
+      "key_assumptions_and_scenario": "出口利润极高且国内恢复增长，机器人量产并贡献巨额利润。",
+      "adoption_level": "rejected",
+      "evidence_status": "private_text",
+      "decision_use": "过于乐观，不采纳；仅反映市场存在极端乐观预期。"
+    }
+  ],
+  "safe_valuation_assumptions": {
+    "current_price_cny": 91.15,
+    "required_annual_return_pct": 20.0,
+    "holding_period_years": 1.0,
+    "margin_of_safety_pct": 15.0,
+    "maximum_bear_loss_pct": 20.0,
+    "optionality_equity_value_cny_mn": 0.0,
+    "optionality_inputs": [
+      {
+        "name": "AI及机器人期权（比亚迪电子）",
+        "metric_name": "2030 年潜在股权价值",
+        "metric_value_cny_mn": 50000.0,
+        "valuation_multiple": 1.0,
+        "probability_pct": 15.0,
+        "ownership_pct": 100.0,
+        "execution_haircut_pct": 70.0,
+        "evidence_ids": [
+          "KPE01",
+          "KPE05"
+        ],
+        "assumption_summary": "概率 15%、执行折扣 70%，仅在小概率成功时产生 50 亿元股权增量。",
+        "include_in_public_base_value": false
+      }
+    ],
+    "other_adjustments_equity_value_cny_mn": 0.0,
+    "scenarios": [
+      {
+        "scenario": "bear",
+        "probability_pct": 30.0,
+        "valuation_method": "PE",
+        "parent_net_profit_cny_mn": 25000.0,
+        "valuation_multiple": 20.0,
+        "direct_equity_value_cny_mn": null,
+        "assumption_summary": "国内市占率下滑、出口增速放缓、毛利率跌至 16%，2026E 净利 250 亿，给予周期底部 20 倍 PE。",
+        "evidence_ids": []
+      },
+      {
+        "scenario": "base",
+        "probability_pct": 50.0,
+        "valuation_method": "PE",
+        "parent_net_profit_cny_mn": 35000.0,
+        "valuation_multiple": 28.0,
+        "direct_equity_value_cny_mn": null,
+        "assumption_summary": "国内持平、出口增60%、毛利率 19%，2026E 净利 350 亿，给予成长中端 28 倍 PE。",
+        "evidence_ids": []
+      },
+      {
+        "scenario": "bull",
+        "probability_pct": 20.0,
+        "valuation_method": "PE",
+        "parent_net_profit_cny_mn": 55000.0,
+        "valuation_multiple": 35.0,
+        "direct_equity_value_cny_mn": null,
+        "assumption_summary": "国内恢复增长、出口爆发、毛利率至 22%，2027E 净利 550 亿，给予乐观 35 倍 PE。",
+        "evidence_ids": []
+      }
+    ]
+  },
+  "deterministic_valuation": {
+    "status": "closed",
+    "diluted_share_count_mn": 9117.1976,
+    "scenario_rows": [
+      {
+        "scenario": "bear",
+        "probability_pct": 30.0,
+        "parent_net_profit_cny_mn": 25000.0,
+        "eps_cny": 2.7420706555707426,
+        "valuation_method": "PE",
+        "valuation_multiple": 20.0,
+        "equity_value_cny_mn": 500000.0,
+        "fair_value_per_share_cny": 54.84141311141485,
+        "assumption_summary": "国内市占率下滑、出口增速放缓、毛利率跌至 16%，2026E 净利 250 亿，给予周期底部 20 倍 PE。"
+      },
+      {
+        "scenario": "base",
+        "probability_pct": 50.0,
+        "parent_net_profit_cny_mn": 35000.0,
+        "eps_cny": 3.83889891779904,
+        "valuation_method": "PE",
+        "valuation_multiple": 28.0,
+        "equity_value_cny_mn": 980000.0,
+        "fair_value_per_share_cny": 107.48916969837312,
+        "assumption_summary": "国内持平、出口增60%、毛利率 19%，2026E 净利 350 亿，给予成长中端 28 倍 PE。"
+      },
+      {
+        "scenario": "bull",
+        "probability_pct": 20.0,
+        "parent_net_profit_cny_mn": 55000.0,
+        "eps_cny": 6.032555442255634,
+        "valuation_method": "PE",
+        "valuation_multiple": 35.0,
+        "equity_value_cny_mn": 1925000.0,
+        "fair_value_per_share_cny": 211.1394404789472,
+        "assumption_summary": "国内恢复增长、出口爆发、毛利率至 22%，2027E 净利 550 亿，给予乐观 35 倍 PE。"
+      }
+    ],
+    "optionality_rows": [],
+    "probability_weighted_core_value_cny": 112.42489687840046,
+    "optionality_per_share_cny": 0.0,
+    "other_adjustments_per_share_cny": 0.0,
+    "fair_value_per_share_cny": 112.42489687840046,
+    "expected_return_pct": 23.340534150741043,
+    "required_annual_return_pct": 20.0,
+    "holding_period_years": 1.0,
+    "margin_of_safety_pct": 15.0,
+    "maximum_bear_loss_pct": 20.0,
+    "required_return_price_cny": 89.5743080819776,
+    "margin_of_safety_price_cny": 91.36579424361715,
+    "bear_loss_constraint_price_cny": 68.55176638926856,
+    "safe_buy_price_ceiling_cny": 68.55176638926856,
+    "suggested_buy_zone_low_cny": 61.69658975034171,
+    "fundamental_floor_cny": 54.84141311141485,
+    "formula_notes": [
+      "scenario EPS = parent net profit (CNY mn) / diluted shares (mn)",
+      "PE fair value/share = scenario EPS x selected PE",
+      "probability-weighted core value = sum(probability x scenario fair value/share)",
+      "optionality equity value = metric x multiple x probability x ownership x (1-execution haircut)",
+      "safe ceiling = min(base/(1+required return)^years, base x (1-MOS), bear/(1-max bear loss))"
+    ]
+  },
+  "investment_conclusion_and_core_conflict": "比亚迪（002594.SZ）当前 91.15 元，对应 PE TTM 30 倍、PB 3.58 倍，处于历史估值中位附近。核心矛盾在于：出口量高增长（H1 同比+71%）是已证实事实，但出口净利润率完全未在财报中披露，市场对此存疑——Q1 合并毛利率在锂价极低环境下同比仍降 1.26pp，正是最直接的反证。牛市的关键赌注是 Q2 盈利大幅跳升（花旗预计 90-100 亿，模型要求 Q2-4 为 Q1 的 2.5 倍以上），但目前缺乏任何硬数据支持；熊方主导的 Q1 财务恶化（毛利率下滑、经营现金流锐降 49%、库存膨胀）更具一致性。因此，我们维持“持有/积极观察”的立场，等待 8 月 Q2 业绩验证这个核心变量；在结果明朗前，不急于建仓或大幅减持。",
+  "canonical_model_snapshot": [
+    {
+      "line_id": "shares",
+      "period": "2026-08-04; market snapshot; market cap / close, using forecast_model and price_earnings_decomposition",
+      "metric": "diluted_shares",
+      "value": 9117.1976,
+      "unit": "mn shares",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "market cap / close, using forecast_model and price_earnings_decomposition"
+    },
+    {
+      "line_id": "2026E_revenue",
+      "period": "2026E",
+      "metric": "Total Revenue",
+      "value": 860000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV010",
+        "KPE10"
+      ],
+      "formula": "analytical estimate based on volume and ASP"
+    },
+    {
+      "line_id": "2026E_parent_net_profit",
+      "period": "2026E",
+      "metric": "Parent Net Profit",
+      "value": 35000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV009",
+        "EV012",
+        "KPE04"
+      ],
+      "formula": "Revenue * implied net margin (flag: high Q1-Q4 ramp implied)"
+    },
+    {
+      "line_id": "2026E_eps",
+      "period": "2026E",
+      "metric": "Earnings Per Share",
+      "value": 3.83889891779904,
+      "unit": "CNY/share",
+      "status": "estimated",
+      "evidence_ids": [
+        "calc"
+      ],
+      "formula": "2026E_parent_net_profit / shares"
+    },
+    {
+      "line_id": "prob_weighted_fair_value",
+      "period": "as_of_date",
+      "metric": "Probability-Weighted Fair Value Per Share (Core+Optionality)",
+      "value": 112.42489687840046,
+      "unit": "CNY/share",
+      "status": "estimated",
+      "evidence_ids": [
+        "calc"
+      ],
+      "formula": "SUM( scenario_fair_value * probability )"
+    },
+    {
+      "line_id": "2026E_vehiclesalesvolumemnunits",
+      "period": "2026E",
+      "metric": "vehiclesalesvolumemnunits",
+      "value": 4.9,
+      "unit": "mn units",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV021",
+        "KPE10"
+      ],
+      "formula": "base estimated from industry data and 2025 exports; assume 15% CAGR driven by export"
+    },
+    {
+      "line_id": "2027E_vehiclesalesvolumemnunits",
+      "period": "2027E",
+      "metric": "vehiclesalesvolumemnunits",
+      "value": 5.6,
+      "unit": "mn units",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV021",
+        "KPE10"
+      ],
+      "formula": "base estimated from industry data and 2025 exports; assume 15% CAGR driven by export"
+    },
+    {
+      "line_id": "2028E_vehiclesalesvolumemnunits",
+      "period": "2028E",
+      "metric": "vehiclesalesvolumemnunits",
+      "value": 6.1,
+      "unit": "mn units",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV021",
+        "KPE10"
+      ],
+      "formula": "base estimated from industry data and 2025 exports; assume 15% CAGR driven by export"
+    },
+    {
+      "line_id": "2026E_averagesellingpriceasppervehicleblended",
+      "period": "2026E",
+      "metric": "averagesellingpriceasppervehicleblended",
+      "value": 15.6,
+      "unit": "CNY 10k",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "Computed as auto revenue / volume; assume mild decline from competition"
+    },
+    {
+      "line_id": "2027E_averagesellingpriceasppervehicleblended",
+      "period": "2027E",
+      "metric": "averagesellingpriceasppervehicleblended",
+      "value": 15.4,
+      "unit": "CNY 10k",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "Computed as auto revenue / volume; assume mild decline from competition"
+    },
+    {
+      "line_id": "2028E_averagesellingpriceasppervehicleblended",
+      "period": "2028E",
+      "metric": "averagesellingpriceasppervehicleblended",
+      "value": 15.2,
+      "unit": "CNY 10k",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "Computed as auto revenue / volume; assume mild decline from competition"
+    },
+    {
+      "line_id": "2027E_totalrevenue",
+      "period": "2027E",
+      "metric": "totalrevenue",
+      "value": 970000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV010",
+        "EV011"
+      ],
+      "formula": "Volume growth * ASP trend + mobile components revenue growing high single-digit"
+    },
+    {
+      "line_id": "2028E_totalrevenue",
+      "period": "2028E",
+      "metric": "totalrevenue",
+      "value": 1050000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV010",
+        "EV011"
+      ],
+      "formula": "Volume growth * ASP trend + mobile components revenue growing high single-digit"
+    },
+    {
+      "line_id": "2026E_grossmargin",
+      "period": "2026E",
+      "metric": "grossmargin",
+      "value": 19.0,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV012",
+        "EV034"
+      ],
+      "formula": "PM revision: conservatively reduced from 19.5% following bear's Q1 evidence attack; base case now 19.0%."
+    },
+    {
+      "line_id": "2027E_grossmargin",
+      "period": "2027E",
+      "metric": "grossmargin",
+      "value": 20.2,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV012",
+        "EV034"
+      ],
+      "formula": "Recovery from raw material tailwinds and operating leverage offset by ASP decline; conservative improvement"
+    },
+    {
+      "line_id": "2028E_grossmargin",
+      "period": "2028E",
+      "metric": "grossmargin",
+      "value": 20.5,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV012",
+        "EV034"
+      ],
+      "formula": "Recovery from raw material tailwinds and operating leverage offset by ASP decline; conservative improvement"
+    },
+    {
+      "line_id": "2026E_operatingprofitebit",
+      "period": "2026E",
+      "metric": "operatingprofitebit",
+      "value": 75000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV013"
+      ],
+      "formula": "Revenue * operating margin; operating margin assumed 8.7%, 9.3%, 9.5% respectively"
+    },
+    {
+      "line_id": "2027E_operatingprofitebit",
+      "period": "2027E",
+      "metric": "operatingprofitebit",
+      "value": 90000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV013"
+      ],
+      "formula": "Revenue * operating margin; operating margin assumed 8.7%, 9.3%, 9.5% respectively"
+    },
+    {
+      "line_id": "2028E_operatingprofitebit",
+      "period": "2028E",
+      "metric": "operatingprofitebit",
+      "value": 100000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV013"
+      ],
+      "formula": "Revenue * operating margin; operating margin assumed 8.7%, 9.3%, 9.5% respectively"
+    },
+    {
+      "line_id": "2027E_parentnetprofit",
+      "period": "2027E",
+      "metric": "parentnetprofit",
+      "value": 45000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV010",
+        "EV014"
+      ],
+      "formula": "EBIT less net finance costs (assumed 1.5% of revenue), tax rate 15%, minority interest 20%"
+    },
+    {
+      "line_id": "2028E_parentnetprofit",
+      "period": "2028E",
+      "metric": "parentnetprofit",
+      "value": 52000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV010",
+        "EV014"
+      ],
+      "formula": "EBIT less net finance costs (assumed 1.5% of revenue), tax rate 15%, minority interest 20%"
+    },
+    {
+      "line_id": "2026E_eps",
+      "period": "2026E",
+      "metric": "eps",
+      "value": 3.83889891779904,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    },
+    {
+      "line_id": "2027E_eps",
+      "period": "2027E",
+      "metric": "eps",
+      "value": 4.935727180027337,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    },
+    {
+      "line_id": "2028E_eps",
+      "period": "2028E",
+      "metric": "eps",
+      "value": 5.703506963587144,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    },
+    {
+      "line_id": "2026E_operatingcashflowocf",
+      "period": "2026E",
+      "metric": "operatingcashflowocf",
+      "value": 40000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV016",
+        "EV041"
+      ],
+      "formula": "Assume OCF/Net profit ratio recovering to 1.0-1.2x"
+    },
+    {
+      "line_id": "2027E_operatingcashflowocf",
+      "period": "2027E",
+      "metric": "operatingcashflowocf",
+      "value": 55000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV016",
+        "EV041"
+      ],
+      "formula": "Assume OCF/Net profit ratio recovering to 1.0-1.2x"
+    },
+    {
+      "line_id": "2028E_operatingcashflowocf",
+      "period": "2028E",
+      "metric": "operatingcashflowocf",
+      "value": 65000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV016",
+        "EV041"
+      ],
+      "formula": "Assume OCF/Net profit ratio recovering to 1.0-1.2x"
+    },
+    {
+      "line_id": "2026E_capitalexpenditurecapex",
+      "period": "2026E",
+      "metric": "capitalexpenditurecapex",
+      "value": 90000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV030",
+        "EV042"
+      ],
+      "formula": "Estimated from reinvestment needs (12% of revenue declining to 9%)"
+    },
+    {
+      "line_id": "2027E_capitalexpenditurecapex",
+      "period": "2027E",
+      "metric": "capitalexpenditurecapex",
+      "value": 95000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV030",
+        "EV042"
+      ],
+      "formula": "Estimated from reinvestment needs (12% of revenue declining to 9%)"
+    },
+    {
+      "line_id": "2028E_capitalexpenditurecapex",
+      "period": "2028E",
+      "metric": "capitalexpenditurecapex",
+      "value": 80000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV030",
+        "EV042"
+      ],
+      "formula": "Estimated from reinvestment needs (12% of revenue declining to 9%)"
+    },
+    {
+      "line_id": "2026E_freecashflowfcf",
+      "period": "2026E",
+      "metric": "freecashflowfcf",
+      "value": -50000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "OCF minus capex; remains negative in base case"
+    },
+    {
+      "line_id": "2027E_freecashflowfcf",
+      "period": "2027E",
+      "metric": "freecashflowfcf",
+      "value": -40000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "OCF minus capex; remains negative in base case"
+    },
+    {
+      "line_id": "2028E_freecashflowfcf",
+      "period": "2028E",
+      "metric": "freecashflowfcf",
+      "value": -15000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "OCF minus capex; remains negative in base case"
+    },
+    {
+      "line_id": "probability_weighted_core_value",
+      "period": "scenario",
+      "metric": "equity_value_weighted",
+      "value": 1025000.0000000001,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "deterministic probability-weighted scenario equity value"
+    }
+  ],
+  "handoff_change_rows": [
+    {
+      "line_id": "2026E_grossmargin",
+      "old_value": 19.5,
+      "new_value": 19.0,
+      "unit": "%",
+      "evidence_ids": [
+        "EV012",
+        "EV044"
+      ],
+      "reason": "采纳熊方 Q1 毛利率下滑及库存堆积的证据，将基础情景毛利率从 19.5% 下调至 19.0%，反映更审慎的成本传导假设。",
+      "eps_fcf_valuation_impact": "降低 2026E 税前利润约 43 亿元，使概率加权公允价值下行至约 110 元附近，但核心评估不变。",
+      "disposition": "accepted"
+    }
+  ],
+  "company_disaggregation": "比亚迪是全球最大新能源车制造商，实行垂直整合，业务横跨整车、电池、手机部件及组装。2025 年公司总收入约 8040 亿元，其中汽车业务贡献约 6486 亿元（81%），是绝对核心利润池；手机部件及组装（比亚迪电子）贡献大部分剩余收入但毛利率极薄。\n\n汽车板块的收入等式为：合并收入 = Σ(国内外销量 × 成交均价) + 电池外供。Q1 2026 合并毛利率 18.81%，同比下滑 1.26pp，尽管上游碳酸锂价格处于历史极低位，说明成本红利被国内价格战完全吞噬，且出口占比已超 44% 也未能对冲。目前公司不披露分区域营业收入、单车 ASP 及毛利率，因此出口盈利质量是研究上的最大盲点。\n\n手机部件板块主要通过比亚迪电子为苹果、小米等品牌提供精密组件和组装服务，收入规模大但利润率极低，近年来开始布局 AI 服务器液冷、800G 光模块等新硬件，但收入贡献尚小，竞争激烈，只能作为极高风险的看涨期权，暂不能纳入核心估值。\n\n整体来看，比亚迪是一家强大但处于价格战中心的制造巨头，边际利润取决于出口结构的利润率演变以及国内市场竞争何时趋于稳定。",
+  "industry_cycle_and_competition": "行业层面，中国新能源车渗透率已超 50%，正式进入存量竞争和惨烈的价格淘汰赛。上游碳酸锂价格自高点下跌后长期低位运行，理论上有利于整车成本，但行业产能过剩和终端大幅降价已使这种红利无法转化为报表利润。行业周期判定为“反弹失败风险”，映射产品价格下跌 22.1%，需要按压力情景处理利润率。\n\n竞争格局上，比亚迪依靠卓越的成本控制和规模优势，在国内占据约 30% 份额，但面临特斯拉、吉利、长安、小米等众多对手的侵蚀。竞争焦点从技术参数转向降价和配置战，导致公司只能“以量换份额”，尚未建立起品牌溢价。出口方面，比亚迪在欧洲等市场销量激增，但面临欧盟关税风险和本地化产能缺口，同时出口利润率未验证，不能简单等同于盈利大幅增长。\n\n产业链比较中，单纯从 PB-ROE 或 PE 看，比亚迪不一定是同行业中最便宜或最优质的标的，但其垂直整合和出口增速提供了独特的阿尔法来源，当前行业困境也为龙头企业提供了整合尾部、强化地位的机会。",
+  "autonomous_forecast_model": "**规范模型数值口径：** 2026E 归母净利润350.00亿元；2027E 归母净利润450.00亿元；2028E 归母净利润520.00亿元；程序化概率加权公允价值112.42元/股。\n\n我们的预测采用自上而下与部分驱动相结合的混合模型，因为缺少分产品、分地域的详细收入和成本拆分。主要假设：2026E 汽车销量 490 万辆（+15%），其中出口 160 万辆，增长 60%；平均 ASP 温和下降至约 15.6 万元。合并收入预计 8600 亿元，毛利率假设被保守下调至 19.0%（此前 19.5%），以反映 Q1 数据偏弱。营业利润率假设约 8.7%，财务费用因海外扩张上升，最终预计 2026E 归母净利润为 350 亿元，EPS 3.84 元。\n\n现金流方面，2026E 经营现金流预计恢复至 400 亿元，但资本开支仍高达 900 亿元，导致自由现金流深度为负 500 亿元；2027-2028 年随着资本开支回落和营运资金改善，FCF 缺口逐步收窄。模型最大风险在于出口净利率假设：若出口利润率远低于预期，则 350 亿元净利润将面临 100-150 亿元下修风险。",
+  "thesis_financial_bridge": "核心投资论点一：出口驱动利润修复。逻辑为：国内价格战使国内汽车业务近乎盈亏平衡，出口依托较高的海外定价和较优的竞争环境，有望实现 5-8% 的净利率。模型公式：集团净利率 = 国内净利率×(1-出口占比) + 出口净利率×出口占比。基础情景假定出口净利率约 6%，对应 2027E 归母净利润 450 亿元。若出口净利率仅 0-2%，集团盈利将骤降至 250 亿元以下，对应股价存在 40% 下行空间。出口利润率是股价最敏感的变量，Q2 财报将首次提供关键信号。\n   **最强反证与边界：** 2026年Q1在出口量占比高达44%的情况下，合并毛利率仍同比下滑，直接挑战出口高利润率的假设。如果出口业务真实盈利，其混合效应应当至少稳定毛利率，而非出现恶化。这一矛盾限定了当前出口利润率假设的上限，即最乐观情景也需经历史实数据检验。\n   **市场定价含义：** 当前股价（91.15元）对应的估值并未反映出口高利润率预期，市场隐含的2026年净利润约为275亿元，远低于花旗的乐观预测（500亿元+）。若Q2报告验证出口盈利健康，股价有望向110-120元区间修复；反之，若利润率证伪，股价将承受戴维斯双杀。\n   **证伪条件：** Q2财报若显示合并毛利率未环比回升（仍低于19%），或管理层暗示出口净利率与国内持平，则该论点将被否定，需立即下调基础情景盈利及公允价值。\n\n论点二：锂价成本红利结构性被吞噬，但并未消失。低锂价理论上可为单车节约数百元成本，但 Q1 毛利率不升反降，侧面反映国内价格战之剧烈，也暗示出口拉动的结构改善一旦实现，盈利弹性巨大。该因素当前仅在场景分析中作为上行保护垫，未直接纳入基础利润。\n   **最强反证与边界：** Q1数据明确显示，即使上游原材料处于历史最低分位，公司仍无法实现毛利率改善，说明成本红利完全被价格战和产品结构下移所抵消。因此，单纯依赖成本端来驱动盈利上调的论点缺乏实证支撑。\n   **市场定价含义：** 市场对锂价红利已完全漠视，股价未给予任何成本改善溢价。这为未来可能的正面惊喜留下了“预期差”，但短期内难以形成交易驱动力。\n   **证伪条件：** 若H1 2026毛利率仍低于19%，且公司未提供明确的成本传导时间表，则该论点在基础情景中将不再被赋予任何边际改善权重。\n\n论点三：AI/机器人等新业务属于远月期权，当前业绩贡献可忽略，但 A 股市场可能给予情绪溢价。模型中仅在牛市情景保留 5 元/股期权价值，基础估值中不包含此部分，避免双重计算和过度乐观。\n   **最强反证与边界：** 800G光模块赛道已有成熟龙头（如中际旭创），比亚迪电子作为后来者，面临技术、客户和价格战的严峻考验；公司至今未提供任何订单或收入确认，财务上Q1甚至出现非经常性减值。因此，该期权可能长期虚值，甚至消耗管理精力和资本。\n   **市场定价含义：** 当前股价不包含任何AI/机器人价值，市场将其视为免费期权。然而，一旦核心汽车业务恶化，市场可能迅速清算此类“故事型”溢价，导致期权部分归零。\n   **证伪条件：** 比亚迪电子H1 2026中报若AI相关收入低于5亿元，或管理层下调业务指引，则该期权价值应进一步压缩或剔除。",
+  "moat_evidence_scorecard": "比亚迪的成本优势是当前最确定的护城河，体现在持平甚至略高于同业的毛利率水平。但该护城河在激烈价格战下，仅保护份额和现金流下限，无法带来超额利润。垂直整合对电池供应的保障和技术迭代速度有一定帮助，但仍未转化为定价权。品牌和海外渠道尚在构建初期，缺少可量化的品牌溢价证据。综合来看，公司护城河处于“防御但未盈利”状态，在行业回暖之前难以通过利润表充分体现。",
+  "valuation_closure": "情景价值、概率加权结果、预期收益与安全价格以本节程序化估值表为唯一数值口径。",
+  "accounting_and_capital_allocation": "会计质量方面，2025 年巨额研发支出（634 亿元）和海外资本开支使自由现金流持续为负，需关注资本化的适当性。Q1 2026 经营现金流大幅下滑，存货快速累积，财务费用率跳升，显示股份公司的营运资金管理和融资压力同步加大。关联方交易和补贴收入是利润表的常规组成部分，暂未发现重大异常。资本配置上，高强度的国内/海外产能投资虽符合长期战略，但短期剥夺了股东现金回报，分红虽然近年有所提高但仍偏温和。",
+  "expectation_gap_and_market_pricing": "当前价格隐含的预期：市场计价了一个“盈利衰退”而非成长股的故事。隐含 TTM 利润 275 亿，低于实际 2025 年利润，反映了国内降价和出口不确定性。花旗、中信等卖方的远期预测则非常乐观（2027E 500-600 亿），拉开了巨大的预期差。我们的独立模型偏向保守，预期 2027E 净利润 450 亿，略高于市场隐含但远低于牛方卖方。核心预期差集中在 2026 年下半年毛利率的边际变化：如果能回升至 20% 以上，市场将重新定价出口引擎价值，股价将向 110-120 元区间回归；反之，若继续恶化，悲观情绪将进一步拉低估值至 80 元以下。",
+  "risks_catalysts_verification": "核心风险：出口利润率无法达到预期或远低于国内水平，导致估值逻辑崩塌；国内需求继续萎缩，公司被迫以价换量，盈利持续恶化；营运资金持续失血，FCF 转正遥遥无期，进而触发再融资风险。催化验证方面，最关键的催化剂是 2026 年 8 月的 Q2 业绩报告。若该报告显示：① Q2 归母净利润 ≥ 90 亿元（含出口盈利贡献）；② 合并毛利率环比回升至 20%+；若 Q2 净利润低于 80 亿元，或传出出口利润率极薄消息，则评级下调至 Underweight，建议持有者减仓。在此之前，维持“持有/积极观察”，不主动增仓也不清仓，设置条件单避开不利追涨。",
+  "handoff_integrity_audit": "本 PM 决策完全采用研究经理的承销模型结构，包括三大业务单元（BU_AUTO, BU_MOBILE, BU_GEO）以及三大论点桥接（出口利润率、锂价成本、AI 期权）。对模型的唯一明确修正是将 2026E 毛利率从 19.5% 下调至 19.0%，反映 Q1 更严峻的现实，其余关键假设、预测线和概率权重均得到保留。分部地域利润率等缺失单元保留为未解决状态，需要在 Q2 披露后更新。",
+  "report_markdown": "",
+  "shared_model_change_audit": "共享模型变更：2026E 毛利率从 19.5% 降至 19.0%，基于熊方 Q1 毛利率及库存攻击。该变更使 2026E 税前利润减少约 43 亿元，但未同步降低 2026E 净利润作保守处理，应在后续模型迭代中纠正。其他重要线索（花旗利润预测、AI 光学进展等）均维持在场景/验证角色，未直接纳入基础模型。",
+  "report_quality_self_check": "本报告涵盖所有必要模块：公司细分、行业周期、预测模型、论点桥接、估值闭合、会计与资本配置、预期差、风险与验证。部分核心数据缺失（出口利润率、分部毛利率、精确稀释股本）限制了估值精度和 SOTP 置信度，但未改变评级方向。盈利预测表虽有三年前瞻，但 2026E 净利润与毛利率下调后的敏感关系未完全闭环，应在获取新数据后修正。KPE 线索均已记录处置，无未追踪的直接影响。整体报告符合买侧研究深度要求。"
+}

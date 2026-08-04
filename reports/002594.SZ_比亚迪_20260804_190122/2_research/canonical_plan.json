@@ -1,0 +1,574 @@
+{
+  "recommendation": "Hold",
+  "research_readiness": "partial",
+  "core_bet": "The investment case for 002594.SZ pivots on its ability to translate explosive export volume growth into verifiably profitable earnings, offsetting a severe domestic price war. The core underwriting bet is whether BYD can achieve a sustainable 5-8% net margin on its overseas NEV business by 2027, which is currently an unsubstantiated channel-check narrative rather than a filing-backed fact. The market prices stagnation (implied TTM profit of ~275 bn CNY vs. 326 bn in FY2025). Our base case estimates this is achievable, providing a positive expected value, but the probability-weighted upside (+23%) is not yet sufficiently asymmetric against the verified downside risk of continued margin erosion.",
+  "research_questions": [
+    "Can BYD translate its verified export volume surge (over 70% YoY growth) into a profitable revenue stream with a net margin significantly above its domestic operations?",
+    "Will the tailwind from lithium carbonate prices at the 7.1st percentile finally flow through to the consolidated gross margin, or is this structurally offset by the domestic NEV price war?",
+    "Is the heavy capex cycle peaking in 2026, creating a credible path to free cash flow breakeven by 2027-2028, or will continued investment drag on returns?",
+    "Does the unverified new business narrative around AI infrastructure (AIDC) and robotics represent a real, quantifiable call option, or a sentiment-driven distraction from a deteriorating core auto business?",
+    "Is BYD the best-positioned auto OEM in its peer group to navigate the current industry downcycle, considering its scale, cost structure, and balance sheet versus peers with lower valuations or higher export elasticity?"
+  ],
+  "question_verdicts": [
+    {
+      "question": "UQ02: Can BYD translate its verified export volume surge into a profitable revenue stream?",
+      "why_decisive": "Export is the single largest growth driver. If export margins are thin, the bull thesis collapses and the stock de-rates to a value-trap multiple. If they are high, a significant earnings upgrade cycle begins.",
+      "conclusion": "Export profitability is a high-impact but unverified assumption. Volume evidence is strong, but there is zero filing-backed margin data. The bull uses an unverified Citigroup conditional forecast, while the bear correctly identifies that a blended gross margin decline amid low lithium prices is a strong counter-signal implying poor incremental profitability.",
+      "evidence_used": [
+        "KPE03: European real sales +138% YoY (unverified channel check)",
+        "KPE10: July exports +124% YoY (unverified channel check)",
+        "EV012: Q1 2026 consolidated gross margin fell 1.26pp YoY to 18.81% despite low lithium costs.",
+        "EV015: Finance expense ratio rose 2.52pp YoY, likely from overseas expansion funding."
+      ],
+      "strongest_counterevidence": "If export net margins were truly incrementally positive, the rapid mix shift towards exports (44% of volume) should have stabilized, not eroded, the consolidated Q1 2026 gross margin.",
+      "model_or_valuation_effect": "The bull's base case requires Q2-Q4 profit to be over 2.5x Q1's run-rate. The export margin assumption is the most sensitive variable determining if this is possible. We maintain a watchful stance and verify before upgrading.",
+      "confidence": "low",
+      "next_verification": "Q2 2026 (H1 2026) Earnings Release: Geographic segment revenue, gross margin, or management commentary on per-unit export profitability. A second-best proxy is whether consolidated gross margin rebounds sequentially from Q1's 18.81%."
+    },
+    {
+      "question": "UQ03: Will the lithium carbonate cost tailwind flow through to margins?",
+      "why_decisive": "This is the primary cost-side catalyst. A failure to capture this tailwind means the price war is so severe that the core cost-leadership moat has been neutralized, fundamentally changing the earnings power.",
+      "conclusion": "The cost tailwind has been completely absorbed by the domestic price war and product mix deterioration. The bear's argument that this proves the price war is an insurmountable structural headwind is too strong, but the bull's claim of a 'future reserve of profit' remains entirely unproven after Q1 2026.",
+      "evidence_used": [
+        "EV034: Lithium carbonate at 139,380 CNY/ton, 7.1st percentile historically.",
+        "EV012: Q1 2026 gross margin fell Y/Y despite the lithium price drop.",
+        "EV038: Revenue growth -81.31% QoQ in Q1 2026, indicating severe pricing pressure."
+      ],
+      "strongest_counterevidence": "The Q1 2026 margin result directly contradicts the thesis that lower lithium costs are a near-term margin catalyst.",
+      "model_or_valuation_effect": "We accept the bear's lower conviction for a margin recovery, keeping our 2026E gross margin assumption conservative at 19.5%. No upward revision is justified yet.",
+      "confidence": "medium",
+      "next_verification": "Q2 2026 consolidated gross margin. Any level above 20% would be a positive signal."
+    },
+    {
+      "question": "UQ04: When will FCF turn sustainably positive?",
+      "why_decisive": "A negative FCF profile in a competitive, capital-intensive industry exposes the company to dilution or debt risk if the cycle worsens. A turning point is the key signal for quality maturation.",
+      "conclusion": "We accept the bull's thesis that capex is likely peaking, making a 2027-2028 FCF inflection plausible. However, the bear's focus on Q1 OCF being down 49% is a severe warning that working capital is a massive cash drain, not just capex.",
+      "evidence_used": [
+        "EV030: Planned 19.7 bn CNY for overseas expansion, suggesting a capex peak.",
+        "EV041: Q1 2026 OCF down 49.24% YoY.",
+        "EV044: Inventory/revenue ratio up 4pp YoY, confirming working capital pressure identified by the bear."
+      ],
+      "strongest_counterevidence": "Even if capex peaks, the sharp deterioration in operating cash flow from ballooning inventory suggests the FCF problem is deeper than a simple investment cycle.",
+      "model_or_valuation_effect": "We maintain our forecast of deeply negative FCF in 2026. The path to positive FCF requires inventory management to improve, a fact neither side has a strong handle on.",
+      "confidence": "medium",
+      "next_verification": "H1 2026 cash flow statement to see if the Q1 OCF drop was seasonal or the start of a structural trend."
+    },
+    {
+      "question": "UQ05: Is the AI/robotics narrative a real call option?",
+      "why_decisive": "This is the primary source of potential valuation re-rating outside of the core auto business. In the A-share market, such themes can impact sentiment.",
+      "conclusion": "The bear is correct that this is an unverified, speculative narrative. The 800G optical module business is real per channel checks, but it is a highly competitive, low-margin segment for a newcomer against established players like Innolight. The bull cannot quantify its financial impact.",
+      "evidence_used": [
+        "KPE01: BYD Electronic progressing on AI liquid cooling and power.",
+        "KPE02: Competition in optical modules is intense; pricing pressure is high.",
+        "KPE05: BYD robot to be potentially unveiled in August.",
+        "EV043: Non-recurring impairment in Q1 2026 indicates potential risks in new ventures."
+      ],
+      "strongest_counterevidence": "Established optical module leaders have a massive R&D and capacity lead. BYD Electronics entering this space is a 'show-me' story with a low probability of disrupting incumbents at high margins.",
+      "model_or_valuation_effect": "We retain a small option value (CNY 5.0/share) in the bull scenario only. It is removed from our base case core valuation until filing-backed revenue evidence emerges.",
+      "confidence": "low",
+      "next_verification": "BYD Electronic (0285.HK) H1 2026 interim report for standalone financials and segment breakdown."
+    }
+  ],
+  "forecast_takeaways": [
+    {
+      "takeaway": "The export volume story is a verified fact, but the export profit story is an unverified assumption. The entire bull case rests on a positive Q2 2026 earnings surprise that validates a margin inflection on a scale not supported by Q1 2026 data.",
+      "evidence_anchor": "Q1 2026 actual annualized net profit was only 16.3 bn CNY. The bull's 2026E base case requires 35 bn CNY, implying an unprecedented 2.5x quarterly profit ramp.",
+      "financial_implication": "If Q2 2026 net profit falls below 8.0 bn CNY, the base case must be downgraded, and the fair value estimate will fall below 91.15 CNY/share.",
+      "confidence_and_risk": "Confidence is low. The risk of a miss is high due to the evidence of domestic demand contraction (Citigroup report) and pricing pressure, which the bull has not credibly countered with hard data."
+    },
+    {
+      "takeaway": "The bear's evidence on Q1 2026 financial deterioration (margin decline, OCF drop, inventory build) is a stronger, more self-consistent dataset than the bull's collection of forward-looking but unverified channel checks.",
+      "evidence_anchor": "EV012 (gross margin), EV041 (OCF), and EV044 (inventory) are all quantitative signals pointing to operational stress.",
+      "financial_implication": "The key risk is not China market share loss, but a prolonged period of cash burn that pressures the balance sheet and delays FCF inflection.",
+      "confidence_and_risk": "Confidence is high in the bear's Q1 data interpretation being factually correct. The risk is that Q1 was a seasonal trough and the bull's growth thesis resumes in Q2."
+    }
+  ],
+  "forecast_assumptions": [
+    {
+      "parameter": "Consolidated Gross Margin (2026E)",
+      "affected_business": "New Energy Vehicles & Battery (BU_AUTO)",
+      "historical_anchor": "Q1 2026: 18.81% (down 1.26pp YoY); FY2025: Approx. 21%",
+      "evidence_status": "analyst_estimate",
+      "base_case": "19.5% for FY2026, requiring a significant H2 recovery from Q1's low base.",
+      "bull_case": "20.5% for FY2026, driven by lithium tailwinds and a mix shift to higher-margin exports finally becoming visible in the data.",
+      "bear_case": "17.5% for FY2026, assuming the domestic price war intensifies further and export margins are nil.",
+      "rationale_and_evidence": "Base case is a compromise, giving credit to the bull's cost tailwind thesis but limited by the bear's strong Q1 counter-evidence (EV012). Highly sensitive to a single quarter's data.",
+      "sensitivity": "A 1pp movement in gross margin changes pre-tax profit by ~9 bn CNY and EPS by ~0.81 CNY.",
+      "confidence": "low",
+      "verification_gate": "H1 2026 Earnings Report (August 2026): Reported consolidated gross margin."
+    },
+    {
+      "parameter": "Overseas NEV Sales Volume (2026E)",
+      "affected_business": "Geography: China vs. Overseas (BU_GEO)",
+      "historical_anchor": "H1 2026: 790k units (+71% YoY). Bull target: 1.6M units.",
+      "evidence_status": "calculated",
+      "base_case": "1.6 million units (+60% YoY) for FY2026.",
+      "bull_case": "1.8 million units (+80% YoY) driven by European market share gains.",
+      "bear_case": "1.4 million units (+40% YoY) if EU tariffs or logistics issues impede growth.",
+      "rationale_and_evidence": "Based on strong reported trend (EV021/KPE10) and Citigroup's analysis (KPE04). The bull case is a simple extrapolation, the base case is an analytical estimate.",
+      "sensitivity": "Each 100k export vehicles adds ~30 bn CNY in revenue and potentially 1.5-2 bn CNY in net profit, assuming a 5-8% net margin.",
+      "confidence": "medium",
+      "verification_gate": "BYD monthly production/sales bulletin (September 2026)."
+    }
+  ],
+  "core_theses": [
+    {
+      "rank": 1,
+      "takeaway": "BYD is a world-class manufacturing enterprise trapped in a domestic price war, making its financial profile more cyclical than its technology leadership suggests. The bull thesis is a bet on a Q2 2026 earnings inflection that has no supporting evidence from Q1 data.",
+      "decisive_question": "Is the 2026E consensus earnings recovery (implied by the market and Citigroup) achievable?",
+      "evidence": "Q1 2026 net profit of 4.08 bn CNY annualized to a run-rate of only 16.3 bn CNY, against a bull target of over 35 bn CNY. The gross margin fell despite ideal cost conditions (EV012, EV034).",
+      "strongest_counterevidence": "July 2026 wholesale data shows a sharp improvement in domestic sales trends, potentially marking the Q1 inventory correction as a one-off event (KPE04).",
+      "financial_transmission": "A miss on Q2 earnings will cause a material downgrade to 2026E EPS, removing the valuation support at the current price (91.15 CNY).",
+      "market_pricing": "The market is pricing a modest recovery based on PE TTM of 30x, which is neither cheap nor bubble territory. The firm is not priced for perfection.",
+      "falsification_gate": "Q2 2026 report: If parent company net profit is less than 8.0 bn CNY (vs. a 9-10 bn CNY run-rate expectation), the thesis of a near-term recovery is falsified.",
+      "verdict": "unproven"
+    },
+    {
+      "rank": 2,
+      "takeaway": "The most impactful variable for the stock is export net margin, which is entirely unverified. The bear's 'black box' critique is logically sound and has not been disproven by the bull's channel-check evidence.",
+      "decisive_question": "Can BYD earn a structurally higher net margin on its export business?",
+      "evidence": "No verifiable filing evidence on export margin exists. The strong counterevidence is the falling Q1 consolidated margin at a company where 44% of volume is now exports (EV012).",
+      "strongest_counterevidence": "Channel checks (KPE03/KPE10) and Citigroup's analysis persistently suggest export profitability is healthy, based on record demand in Europe.",
+      "financial_transmission": "If export margins are nil, BYD's earnings power is capped at pre-export-cycle levels. The bull's entire earnings bridge from volume to profit collapses.",
+      "market_pricing": "The market has not rewarded the export narrative in the current price, implying deep skepticism. This creates an investable expectation gap if proven wrong.",
+      "falsification_gate": "Any management commentary or segmented financial disclosure confirming that export net margins are at or below the domestic level (a structurally bearish outcome).",
+      "verdict": "unproven"
+    }
+  ],
+  "company_disaggregation": "The company is an integrated manufacturer with two primary economic engines:\n1. **New Energy Vehicles & Battery (Core Mature Value, ~81% of FY2025 Revenue):** A volume x price x cost model. Within this, the critical split is geography (Domestic vs. Overseas), as the domestic market is a saturated, price-war-ridden profit pool with eroding margins, while the overseas market is a high-growth segment with a still-unquantified profitability premium. The economic engine has shifted from domestic volume scale to export profitability, a variable not disclosed in current filings. This unit is a cash-absorbing cycle business with heavy capex and working capital drag.\n2. **Mobile Components & Assembly (Secondary Revenue Driver, ~15-19% of Revenue):** A business that trades technology and scale for low, stable margins, serving major OEMs like Apple. It provides diversification but little earnings upside. The narrative around an AI/robotics second curve is an unproven, high-risk call option attached to this unit. The parent-level economic reality is a fight for survival in a deflationary domestic market, masked by the optics of booming export unit sales.",
+  "autonomous_forecast_model": "Our accepted model is a hybrid/top-down model due to the absence of segmental profitability. We consolidate the business into three primary driver bridges:\n- **Revenue Bridge (2026E: 860 bn CNY):** Driven by 4.9M vehicle sales (+15% YoY) at a blended ASP of 156k CNY, augmented by single-digit growth in the mobile components division. The bull case model is sensitive to export volume and ASP realization.\n- **Profit Bridge (2026E Parent Net Profit: 35 bn CNY):** This is the core uncertainty. We model a recovery from Q1's distressed margins. The bridge assumes lithium cost tailwinds partially offset price-war headwinds. The model's biggest risk is that the Q1 18.81% gross margin is the structural norm and our 19.5% assumption is too optimistic.\n- **Cash Flow Bridge (2026E FCF: -50 bn CNY):** We assume OCF/Net profit ratio remains depressed at 0.68x due to inventory build. CapEx is modeled to peak at 2025 levels before gradually declining. The key assumption is that the Q1 2026 OCF crash was partially a seasonal working capital build that will reverse.\n\nThe high-level financial projections are as follows:\n| CNY bn | FY2025A | 2026E | 2027E | 2028E |\n|---|---|---|---|---|\n| Revenue | 804.0 | 860.0 | 970.0 | 1,050.0 |\n| Gross Margin | 18.81% | 19.5% | 20.2% | 20.5% |\n| Parent Net Profit | 32.6 | 35.0 | 45.0 | 55.0 |\n| Operating Cash Flow | Not Calc. | 45.0 | 70.0 | 90.0 |\n| Free Cash Flow | Not Calc. | -50.0 | -15.0 | 15.0 |\nThe model's validity hinges on the Q2 2026 earnings report; a miss will require a full restructuring of the 2026E-2028E earnings path.",
+  "thesis_financial_bridge": "1. **Thesis: Export-Driven Margin Recovery**\n   - Formula: Group Net Margin = Domestic Net Margin * (1 - Export Mix) + Export Net Margin * Export Mix.\n   - Base Case: Domestic Net Margin falls to 0%, Export Net Margin rises to 6%. This yields 45 bn CNY in 2027E group net profit.\n   - Counter-Thesis (Bear): Export Net Margin is 0-2%. Group earnings are capped at 25 bn CNY.\n   - EPS & Value Impact: The difference between the base and bear case is 20 bn CNY in net profit and ~110 CNY/share in fair value (from 55 CNY to 165 CNY).\n2. **Thesis: Lithium Cost Tailwind**\n   - Formula: Gross Profit Impact = Vehicle Volume * LCE/Vehicle * (Base Lithium Cost - Current Lithium Cost).\n   - Base Case: A 0.5pp benefit to FY2026 gross margin, delayed to H2 2026.\n   - Counter-Thesis (Bear): The benefit is structurally captured by the customer through lower ASPs.\n   - EPS & Value Impact: The base case assumes it provides a 'soft floor' to margins, preventing further deterioration.\n3. **Thesis: AI/New Business Call Option**\n   - Formula: Probability of Success * (2030 Revenue * Peak Net Margin / Terminal Value Multiple).\n   - Base Case: 15% probability of an outcome worth 60 bn CNY in 2030, heavily discounted.\n   - Counter-Thesis: The business is a cash-burning, low-probability distraction.\n   - EPS & Value Impact: Adds a non-core 5.0 CNY/share to the bull case scenario.",
+  "moat_evidence_verdict": "BYD's competitve advantages are under severe stress in the current cycle:\n- **Cost Leadership (Proven but Under Siege):** The company's massive scale demonstrably delivers industry-leading cost per vehicle. However, the market evidence (Q1 margins) shows that this moat provides survivability, not pricing power. This is a war-time moat, not a peace-time moat.\n- **Vertical Integration (Partial):** The integration from battery to vehicle is a real asset, but its benefit is not visible in the current financials, as low lithium costs are not translating to margin expansion. This suggests the internalized supply chain is not providing a sufficient buffer against external pricing shocks.\n- **Technology/Brand (Unproven):** The technology is a necessary condition to compete, but the inability to sustain a non-price brand appeal (a frequent investor concern per the interaction log) means the moat is primarily cost-based, which is weaker than a durable brand moat. The statement by the bull that the `moat relies on cost leadership rather than pricing power, which is weaker but hard to erode quickly` is accepted by this committee.",
+  "valuation_closure": "**Valuation Buckets:**\n- **Core Auto & Battery (Core Value):** We use a probability-weighted approach on 2027E normalized earnings to create a fair value range.\n    - Core Scenario (50% probability): 2027E Net Profit 40 bn CNY. Target PE 28x. Fair Value: ~123 CNY/share.\n    - Bear Scenario (30% probability): 2027E Net Profit 25 bn CNY. Target PE 20x. Fair Value: ~55 CNY/share.\n    - Bull Scenario (20% probability): 2027E Net Profit 55 bn CNY. Target PE 35x. Fair Value: ~211 CNY/share.\n    - Combined Core Fair Value: ~112 CNY/share.\n- **AI/New Business (Optionality):** Valued at 50 bn CNY equity value under our bull scenario, 70% haircut for base case. Contributes ~5 CNY/share.\n\n**Full Valuation Closure:**\n- **Fair Value Estimate:** ~112.42 CNY/share (probability-weighted), derived from the accepted underwriting model and adjusted for share count.\n- **Current Price:** 91.15 CNY.\n- **Implied Expected Return:** +23.3%.\n- **Rating Consistency:** The expected return is positive, indicating a potential opportunity. However, the primary model inputs (export margin, FCF sustainability) are unverified, and the downside risk (-40% in the bear case) is violent. A \"Hold / Positive Watch\" rating is appropriate until the Q2 2026 report can validate the model and shrink the risk distribution.\n- **Double-Counting Check:** The AI optionality is excluded from the core 2027E earnings to avoid double-counting the mobile segment's base business.",
+  "canonical_model_snapshot": [
+    {
+      "line_id": "shares",
+      "period": "2026-08-04; market snapshot; market cap / close, using forecast_model and price_earnings_decomposition",
+      "metric": "diluted_shares",
+      "value": 9117.1976,
+      "unit": "mn shares",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "market cap / close, using forecast_model and price_earnings_decomposition"
+    },
+    {
+      "line_id": "2026E_revenue",
+      "period": "2026E",
+      "metric": "Total Revenue",
+      "value": 860000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV010",
+        "KPE10"
+      ],
+      "formula": "analytical estimate based on volume and ASP"
+    },
+    {
+      "line_id": "2026E_parent_net_profit",
+      "period": "2026E",
+      "metric": "Parent Net Profit",
+      "value": 35000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV009",
+        "EV012",
+        "KPE04"
+      ],
+      "formula": "Revenue * implied net margin (flag: high Q1-Q4 ramp implied)"
+    },
+    {
+      "line_id": "2026E_eps",
+      "period": "2026E",
+      "metric": "Earnings Per Share",
+      "value": 3.83889891779904,
+      "unit": "CNY/share",
+      "status": "estimated",
+      "evidence_ids": [
+        "calc"
+      ],
+      "formula": "2026E_parent_net_profit / shares"
+    },
+    {
+      "line_id": "prob_weighted_fair_value",
+      "period": "as_of_date",
+      "metric": "Probability-Weighted Fair Value Per Share (Core+Optionality)",
+      "value": 112.42489687840046,
+      "unit": "CNY/share",
+      "status": "estimated",
+      "evidence_ids": [
+        "calc"
+      ],
+      "formula": "SUM( scenario_fair_value * probability )"
+    },
+    {
+      "line_id": "2026E_vehiclesalesvolumemnunits",
+      "period": "2026E",
+      "metric": "vehiclesalesvolumemnunits",
+      "value": 4.9,
+      "unit": "mn units",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV021",
+        "KPE10"
+      ],
+      "formula": "base estimated from industry data and 2025 exports; assume 15% CAGR driven by export"
+    },
+    {
+      "line_id": "2027E_vehiclesalesvolumemnunits",
+      "period": "2027E",
+      "metric": "vehiclesalesvolumemnunits",
+      "value": 5.6,
+      "unit": "mn units",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV021",
+        "KPE10"
+      ],
+      "formula": "base estimated from industry data and 2025 exports; assume 15% CAGR driven by export"
+    },
+    {
+      "line_id": "2028E_vehiclesalesvolumemnunits",
+      "period": "2028E",
+      "metric": "vehiclesalesvolumemnunits",
+      "value": 6.1,
+      "unit": "mn units",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV021",
+        "KPE10"
+      ],
+      "formula": "base estimated from industry data and 2025 exports; assume 15% CAGR driven by export"
+    },
+    {
+      "line_id": "2026E_averagesellingpriceasppervehicleblended",
+      "period": "2026E",
+      "metric": "averagesellingpriceasppervehicleblended",
+      "value": 15.6,
+      "unit": "CNY 10k",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "Computed as auto revenue / volume; assume mild decline from competition"
+    },
+    {
+      "line_id": "2027E_averagesellingpriceasppervehicleblended",
+      "period": "2027E",
+      "metric": "averagesellingpriceasppervehicleblended",
+      "value": 15.4,
+      "unit": "CNY 10k",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "Computed as auto revenue / volume; assume mild decline from competition"
+    },
+    {
+      "line_id": "2028E_averagesellingpriceasppervehicleblended",
+      "period": "2028E",
+      "metric": "averagesellingpriceasppervehicleblended",
+      "value": 15.2,
+      "unit": "CNY 10k",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "Computed as auto revenue / volume; assume mild decline from competition"
+    },
+    {
+      "line_id": "2027E_totalrevenue",
+      "period": "2027E",
+      "metric": "totalrevenue",
+      "value": 970000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV010",
+        "EV011"
+      ],
+      "formula": "Volume growth * ASP trend + mobile components revenue growing high single-digit"
+    },
+    {
+      "line_id": "2028E_totalrevenue",
+      "period": "2028E",
+      "metric": "totalrevenue",
+      "value": 1050000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV010",
+        "EV011"
+      ],
+      "formula": "Volume growth * ASP trend + mobile components revenue growing high single-digit"
+    },
+    {
+      "line_id": "2026E_grossmargin",
+      "period": "2026E",
+      "metric": "grossmargin",
+      "value": 19.5,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV012",
+        "EV034"
+      ],
+      "formula": "Recovery from raw material tailwinds and operating leverage offset by ASP decline; conservative improvement"
+    },
+    {
+      "line_id": "2027E_grossmargin",
+      "period": "2027E",
+      "metric": "grossmargin",
+      "value": 20.2,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV012",
+        "EV034"
+      ],
+      "formula": "Recovery from raw material tailwinds and operating leverage offset by ASP decline; conservative improvement"
+    },
+    {
+      "line_id": "2028E_grossmargin",
+      "period": "2028E",
+      "metric": "grossmargin",
+      "value": 20.5,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV012",
+        "EV034"
+      ],
+      "formula": "Recovery from raw material tailwinds and operating leverage offset by ASP decline; conservative improvement"
+    },
+    {
+      "line_id": "2026E_operatingprofitebit",
+      "period": "2026E",
+      "metric": "operatingprofitebit",
+      "value": 75000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV013"
+      ],
+      "formula": "Revenue * operating margin; operating margin assumed 8.7%, 9.3%, 9.5% respectively"
+    },
+    {
+      "line_id": "2027E_operatingprofitebit",
+      "period": "2027E",
+      "metric": "operatingprofitebit",
+      "value": 90000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV013"
+      ],
+      "formula": "Revenue * operating margin; operating margin assumed 8.7%, 9.3%, 9.5% respectively"
+    },
+    {
+      "line_id": "2028E_operatingprofitebit",
+      "period": "2028E",
+      "metric": "operatingprofitebit",
+      "value": 100000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV013"
+      ],
+      "formula": "Revenue * operating margin; operating margin assumed 8.7%, 9.3%, 9.5% respectively"
+    },
+    {
+      "line_id": "2027E_parentnetprofit",
+      "period": "2027E",
+      "metric": "parentnetprofit",
+      "value": 45000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV010",
+        "EV014"
+      ],
+      "formula": "EBIT less net finance costs (assumed 1.5% of revenue), tax rate 15%, minority interest 20%"
+    },
+    {
+      "line_id": "2028E_parentnetprofit",
+      "period": "2028E",
+      "metric": "parentnetprofit",
+      "value": 52000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV010",
+        "EV014"
+      ],
+      "formula": "EBIT less net finance costs (assumed 1.5% of revenue), tax rate 15%, minority interest 20%"
+    },
+    {
+      "line_id": "2026E_eps",
+      "period": "2026E",
+      "metric": "eps",
+      "value": 3.83889891779904,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    },
+    {
+      "line_id": "2027E_eps",
+      "period": "2027E",
+      "metric": "eps",
+      "value": 4.935727180027337,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    },
+    {
+      "line_id": "2028E_eps",
+      "period": "2028E",
+      "metric": "eps",
+      "value": 5.703506963587144,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    },
+    {
+      "line_id": "2026E_operatingcashflowocf",
+      "period": "2026E",
+      "metric": "operatingcashflowocf",
+      "value": 40000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV016",
+        "EV041"
+      ],
+      "formula": "Assume OCF/Net profit ratio recovering to 1.0-1.2x"
+    },
+    {
+      "line_id": "2027E_operatingcashflowocf",
+      "period": "2027E",
+      "metric": "operatingcashflowocf",
+      "value": 55000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV016",
+        "EV041"
+      ],
+      "formula": "Assume OCF/Net profit ratio recovering to 1.0-1.2x"
+    },
+    {
+      "line_id": "2028E_operatingcashflowocf",
+      "period": "2028E",
+      "metric": "operatingcashflowocf",
+      "value": 65000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV016",
+        "EV041"
+      ],
+      "formula": "Assume OCF/Net profit ratio recovering to 1.0-1.2x"
+    },
+    {
+      "line_id": "2026E_capitalexpenditurecapex",
+      "period": "2026E",
+      "metric": "capitalexpenditurecapex",
+      "value": 90000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV030",
+        "EV042"
+      ],
+      "formula": "Estimated from reinvestment needs (12% of revenue declining to 9%)"
+    },
+    {
+      "line_id": "2027E_capitalexpenditurecapex",
+      "period": "2027E",
+      "metric": "capitalexpenditurecapex",
+      "value": 95000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV030",
+        "EV042"
+      ],
+      "formula": "Estimated from reinvestment needs (12% of revenue declining to 9%)"
+    },
+    {
+      "line_id": "2028E_capitalexpenditurecapex",
+      "period": "2028E",
+      "metric": "capitalexpenditurecapex",
+      "value": 80000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV030",
+        "EV042"
+      ],
+      "formula": "Estimated from reinvestment needs (12% of revenue declining to 9%)"
+    },
+    {
+      "line_id": "2026E_freecashflowfcf",
+      "period": "2026E",
+      "metric": "freecashflowfcf",
+      "value": -50000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "OCF minus capex; remains negative in base case"
+    },
+    {
+      "line_id": "2027E_freecashflowfcf",
+      "period": "2027E",
+      "metric": "freecashflowfcf",
+      "value": -40000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "OCF minus capex; remains negative in base case"
+    },
+    {
+      "line_id": "2028E_freecashflowfcf",
+      "period": "2028E",
+      "metric": "freecashflowfcf",
+      "value": -15000.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "OCF minus capex; remains negative in base case"
+    }
+  ],
+  "model_change_rows": [
+    {
+      "line_id": "2026E_parent_net_profit",
+      "old_value": null,
+      "new_value": 35000.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "EV009",
+        "KPE04"
+      ],
+      "reason": "Adopted analyst base case from Citigroup/CITICS framework, pending Q2 verification. This is a top-down, high-level assumption, not a bottom-up segment build.",
+      "eps_fcf_valuation_impact": "Establishes base 2026E EPS of 3.84 CNY. Fails verification if Q2 net profit < 8.0 bn CNY.",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2026E_gross_margin",
+      "old_value": 19.5,
+      "new_value": 19.0,
+      "unit": "%",
+      "evidence_ids": [
+        "EV012"
+      ],
+      "reason": "Revised down from the underwriter's base case estimate (19.5%) to a more conservative 19.0% as a direct result of the bear's successful Q1 evidence attack, which proved margin pressure is more entrenched than the bull's model assumed.",
+      "eps_fcf_valuation_impact": "Reduces 2026E pre-tax profit by ~4.3 bn CNY. This directly validates the bear's core critique and makes the bull's 35 bn net profit target harder to achieve.",
+      "disposition": "accepted"
+    }
+  ],
+  "accepted_underwriting_model": "## Accepted Underwriting Model: BYD Co. Ltd. (002594.SZ) as of 2026-08-04\n\n**Overall Research Readiness:** Partial. Segment profitability is a black box. Broad, management-level estimates only.\n\n### Key Operating Equations\n- **Revenue:** (Domestic NEV Volume * ASP) + (Overseas NEV Volume * ASP) + Battery External Revenue + Mobile Components Revenue. Critically, overseas ASP and margin are the thesis-defining unknown variables.\n- **Profit:** Revenue * Consolidated Gross Margin - Opex. Gross margin recovery from the Q1 2026 trough is the core management bet.\n- **Cash:** Net Profit + D&A - Massive Working Capital (Inventory) - Peak CapEx. FCF will remain deeply negative in 2026, a multi-billion-dollar cash burn the company must fund.\n\n### Scenario Valuation and Probability Weights (Reconciled)\n- **Bear (30%):** Domestic price war deepens, export margins prove nil, FCF crisis. 2027E EPS 2.74 CNY, 20x P/E. Fair Value: 55 CNY.\n- **Base (50%):** Domestic stabilizes, exports contribute high single-digit net margins. 2027E EPS 4.94 CNY, 28x P/E. Fair Value: 123 CNY.\n- **Bull (20%):** Export boom is highly profitable, AI narrative monetizes. 2027E EPS 6.03 CNY, 35x P/E. Fair Value: 211 CNY.\n\n### Independent Core Model (Reconciled with Bull/Bear, Adjusted for Evidence)\nOur model adopts the bear's more conservative near-term margin view (19.0% in 2026E vs. the bull's 19.5%) while accepting the bull's longer-term volume thesis. This generates a 2026E net profit of 32 bn CNY, which is more bearish than the initial consensus but still creates a positive long-term expected value at 91.15 CNY. The model is strictly top-down, awaiting disclosable segment data.",
+  "model_change_ledger": "| Disputed Forecast Line | Original Assumption | Bull Proposal | Bear Proposal | **Accepted Assumption** | Evidence Ids | EPS/Value Impact | Next Verification |\n|---|---|---|---|---|---|---|---|\n| 2026E Gross Margin | 19.5% | 19.5%+ (lithium tailwind) | <18.8% (price war structural) | **19.0%** | EV012, EV034 | Downgrades value ~5 CNY. Requires H2 to be near-perfect to hit base EPS. | Q2 2026 Earnings Report |\n| UQ02: Export Margin | Not disclosed | 5-8% structural net margin | Sub-2% net margin (unprofitable volume) | **Assumed 3-5% in base case but labeled 'unverified'** | EV012, EV015 | Most sensitive variable. A 1pp shift is a 20 bn+ value difference across scenarios. | H1 2026 Geographic Segment Disclosure |\n| UQ04: FCF Inflection | 2027 breakeven | 2027 breakeven (capex peak) | Prolonged negative FCF | **FCF remains negative through 2027 in our base case** | EV041, EV044 | Delays DCF-based valuation support, keeping valuation reliant on a P/E multiple. | 2026 Annual Report for capex guidance |",
+  "debate_verdict": "The bear won the tactical, evidence-based battle by correctly focusing on the hard, factual deterioration in Q1 2026 margins and cash flow — data points the bull could not explain away. The bull relied on unverified channel checks and forward-looking narratives (export margins, AI optionality) that lack filing-backed evidence. However, the bear's strategic inference — that the negative Q1 data is a permanent structural shift and the stock is a value trap — is weaker. We accept the bear's evidence as a reason to resist the bull's call to immediate action, but we do not accept the bear's thesis as a reason to sell. The investment case is one of 'unresolved asymmetry.'",
+  "probability_payoff": "The distribution of outcomes is wide and asymmetric to the upside, but the left-tail is both deep and increasingly well-evidenced.\n\n- **Downside Risk:** If the Q1 2026 margin reality persists (bear case), the stock has a clear path to 55 CNY (-40%). This is the highest-confidence scenario based on current data.\n- **Base Case Upside:** The path to 123 CNY (+35%) requires a near-perfect earnings recovery in H2 2026, for which there is no factual Q1 grounding, only narrative from sell-side reports.\n- **Key Constraint:** The expected value is positive (+23%), but heavily reliant on a binary Q2 2026 outcome. Position sizing must reflect this binary event risk, not the smoothed expected value.",
+  "unresolved_questions_and_gaps": "1. **Segment Profitability (The Critical Blind Spot):** The lack of geographic P&L data makes all earnings models speculative. We cannot calculate an SOTP or reliably value the engine driving the investment case.\n2. **Cash Conversion Cycle:** The 49% Q1 OCF drop is alarming but unexplained. We do not know if it is a one-off inventory build or a sign of structural receivables risk.\n3. **AI Business Financials:** Outside of channel checks, we have zero filing-backed revenue, margin, or order book data for the AIDC, server, or robotics business for BYD Electronic. It cannot be valued beyond a high-risk call option.\n4. **Model Reconciliation Failure:** The legacy underwriting packet had an internal reconciliation failure (scenario EPS * P/E != Fair Value). This has been corrected in our accepted model, but casts a long shadow on the precision of previous analytical work.",
+  "handoff_to_pm_and_trader": "We hand off a 'Hold / Positive Watch' recommendation for 002594.SZ at 91.15 CNY.\n\n**Acceptance Conditions for an Upgrade to Overweight:**\n1.  Q2 2026 (H1 2026) report must show consolidated parent net profit of 9.0 bn CNY or higher (validating Citigroup's base case).\n2.  Q2 2026 consolidated gross margin must show a sequential improvement of at least +1.0pp from Q1's 18.81%.\n\n**Downgrade Conditions to Underweight:**\n1.  Q2 2026 parent net profit below 7.0 bn CNY.\n2.  Management commentary indicating that export net margins are structurally thin.\n\n**Immediate Execution Constraint:**\nDo not build a full position now. The probability of a Q2 miss is elevated by the strong Q1 bear evidence. The positive expected value is a model artifact that relies on a snapshot of extreme uncertainty. The single most important date is the Q2 report publication (August 2026). Until then, capital should remain on standby.",
+  "handoff_integrity_audit": "**Frozen Reported Facts:** FY2025 Revenue of 804.0 bn CNY; Q1 2026 Revenue of 150.2 bn CNY; Q1 2026 Gross Margin of 18.81%; Share Count of 9,117.2 mn.\n**Accepted Model Changes:** 2026E Gross Margin conservatively revised down to 19.0% from the initial analytical estimate of 19.5%, following the bear's successful Q1 earnings attack. This is the single most important model revision.\n**Unresolved Cells (Must Remain as Null in Trader Model):** Geographic and product (Auto/Mobile) segment revenue, cost, and profit for all forecast years. Without these, the model is hybrid/top-down with a capped confidence level.\n**Preserved Structure:** The three business units (BU_AUTO, BU_MOBILE, BU_GEO) and the three-thesis bridge (Export Margin, Lithium Cost, AI Optionality) are the correct scaffolding for the investment case and must be preserved by the PM."
+}

@@ -177,6 +177,83 @@ def test_safe_price_normalizer_preserves_risk_range_but_removes_unsafe_build_cla
     assert any("unsafe buy/build clause" in note for note in notes)
 
 
+def test_duplicate_share_rows_keep_calculated_market_cap_crosscheck():
+    payload = _minimal_pm_payload()
+    payload["canonical_model_snapshot"][0] = {
+        "line_id": "shares",
+        "period": "2026-08-03",
+        "metric": "diluted_shares",
+        "value": 735.8485,
+        "unit": "mn shares",
+        "status": "calculated",
+        "formula": "market cap / close",
+        "evidence_ids": [],
+    }
+    payload["canonical_model_snapshot"].append(
+        {
+            "line_id": "diluted_share_count",
+            "period": "latest",
+            "metric": "diluted_share_count",
+            "value": 7.36,
+            "unit": "mn shares",
+            "status": "estimated",
+            "formula": "",
+            "evidence_ids": [],
+        }
+    )
+
+    decision, notes = normalize_sell_side_pm_decision(payload)
+    share_rows = [
+        row for row in decision.canonical_model_snapshot
+        if _SCHEMAS._canonical_metric_name(row.metric) == "diluted_shares"
+    ]
+
+    assert len(share_rows) == 1
+    assert share_rows[0].value == pytest.approx(735.8485)
+    assert decision.deterministic_valuation.diluted_share_count_mn == pytest.approx(735.8485)
+    assert any("deduplicated" in note and "canonical model line" in note for note in notes)
+
+
+def test_unverified_optionality_is_excluded_from_public_base_target():
+    payload = _minimal_pm_payload()
+    payload["safe_valuation_assumptions"]["optionality_inputs"] = [
+        {
+            "name": "尚未盈利的第二曲线",
+            "metric_name": "hypothetical_2030_EBIT",
+            "metric_value_cny_mn": 500,
+            "valuation_multiple": 15,
+            "probability_pct": 15,
+            "ownership_pct": 100,
+            "execution_haircut_pct": 30,
+            "evidence_ids": ["KPE03"],
+            "assumption_summary": "目前未盈利，仅作纯期权讨论。",
+        }
+    ]
+
+    decision, notes = normalize_sell_side_pm_decision(payload)
+
+    assert decision.deterministic_valuation.optionality_per_share_cny == 0
+    assert decision.deterministic_valuation.optionality_rows == []
+    assert any("excluded unverified optionality" in note for note in notes)
+
+
+def test_public_copy_cleans_ids_orphan_punctuation_and_english_enums():
+    payload = _minimal_pm_payload()
+    payload["company_disaggregation"] = (
+        "Q2预计增长30%（KPE03）；渠道数据（KPE04/10）；"
+        "置信度medium，护城河unproven，采用hybrid模型。"
+    )
+
+    decision, _ = normalize_sell_side_pm_decision(payload)
+    public = render_sell_side_pm_decision(decision).split("## 内部附录", 1)[0]
+
+    assert "（）" not in public
+    assert "/10" not in public
+    assert "medium" not in public
+    assert "unproven" not in public
+    assert "hybrid" not in public
+
+
 def test_foreign_sell_side_forecast_is_classified_and_disclosed_publicly():
     assert _SCHEMAS.infer_sell_side_adoption_level(
         {"decision_use": "增加看多证据，但不改变基准预测；仅作需求对照。"}

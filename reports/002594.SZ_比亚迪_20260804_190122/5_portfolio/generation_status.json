@@ -1,0 +1,27 @@
+{
+  "mode": "schema_prompt_structured",
+  "agent": "Portfolio Manager",
+  "structured_error": "schema-prompt response failed validation:\n- segment_economics.1.valuation_treatment: Input should be 'core', 'scenario', 'optionality' or 'excluded'\n- moat_mechanisms.0.operating_mechanism: Field required\n- moat_mechanisms.1.operating_mechanism: Field required\n- moat_mechanisms.2.operating_mechanism: Field required",
+  "schema_repair_attempts": 1,
+  "schema": "SellSidePMDecision",
+  "initial_mode": "schema_repaired_fallback",
+  "editorial_review_mode": "deterministic_issue_router",
+  "editorial_revision_requested": true,
+  "editorial_revision_applied": true,
+  "editorial_revision_mode": "schema_prompt_structured",
+  "remaining_handoff_issues": [],
+  "remaining_analytical_issues": [],
+  "editorial_revision_rejection_reasons": [],
+  "deterministic_model_notes": [
+    "excluded unverified optionality 'AI及机器人期权（比亚迪电子）' from public base value; kept as upside-only research context",
+    "inserted deterministic public numeric source-of-truth disclosure"
+  ],
+  "report_contract": "reader_led_wechat_seven_chapter_v2",
+  "rating_position": "opening_summary_and_chapter_7_recap",
+  "knowledge_planet_policy": "model_probability_verification_or_reject",
+  "full_report_chars": "10871",
+  "public_report_chars": "8585",
+  "internal_overflow_chars": "2283",
+  "internal_sections_removed_from_public_report": "内部附录D：替代信息与卖方预期审计, 内部附录E：模型交接与报告质量审计, 内部附录F：组合执行参数",
+  "public_h2_count": "7"
+}

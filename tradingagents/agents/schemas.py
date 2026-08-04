@@ -512,6 +512,14 @@ class OptionalityValuationInput(BaseModel):
     execution_haircut_pct: float = Field(default=0.0, ge=0, le=100)
     evidence_ids: list[str] = Field(default_factory=list)
     assumption_summary: str = ""
+    include_in_public_base_value: bool = Field(
+        default=False,
+        description=(
+            "True only when official or otherwise independently verified revenue, profit, orders, "
+            "cash flow or asset value supports including this second curve in the published base target. "
+            "Unprofitable, hypothetical or channel-only optionality stays in the upside discussion."
+        ),
+    )
 
 
 class SafeValuationAssumptions(BaseModel):
@@ -1228,7 +1236,8 @@ def _canonical_metric_name(metric: str) -> str:
         "parentnetprofit": "parent_profit", "consolidatedparentnetprofit": "parent_profit", "归母净利润": "parent_profit",
         "netmargin": "net_margin", "consolidatednetmargin": "net_margin", "净利率": "net_margin",
         "eps": "eps", "epsbasic": "eps", "dilutedeps": "eps", "epsdiluted": "eps", "每股收益": "eps",
-        "dilutedshares": "diluted_shares", "totaldilutedshares": "diluted_shares",
+        "dilutedshares": "diluted_shares", "dilutedsharecount": "diluted_shares",
+        "totaldilutedshares": "diluted_shares",
         "sharecount": "diluted_shares", "totalshare": "diluted_shares",
         "总股本": "diluted_shares", "稀释股本": "diluted_shares",
         "operatingcashflow": "ocf", "ocf": "ocf", "经营活动现金流净额": "ocf",
@@ -1309,6 +1318,93 @@ def _render_reader_forecast_table(lines: list[CanonicalModelLine]) -> str:
             f"| {labels[metric]} | {exemplar.unit} | " + " | ".join(values) + " |"
         )
     return "\n".join(rows)
+
+
+def _render_profit_cash_bridge(lines: list[CanonicalModelLine]) -> str:
+    """Render the compact earnings bridge institutional readers actually use."""
+
+    data: dict[tuple[str, str], CanonicalModelLine] = {}
+    periods: list[str] = []
+    for line in lines:
+        period = str(line.period)
+        metric = _canonical_metric_name(line.metric)
+        if not re.fullmatch(r"20\d{2}[AE]", period, re.I):
+            continue
+        data[(period, metric)] = line
+        if period not in periods:
+            periods.append(period)
+    periods.sort(key=lambda value: (re.sub(r"\D", "", value), value))
+    if not periods:
+        return ""
+
+    def value(period: str, metric: str) -> float | None:
+        row = data.get((period, metric))
+        return float(row.value) if row is not None and row.value is not None else None
+
+    def pct(current: float | None, prior: float | None) -> str:
+        if current is None or prior in (None, 0):
+            return "待补充"
+        return f"{(current / prior - 1.0) * 100.0:+.1f}%"
+
+    rows = ["### 盈利与现金流桥", ""]
+    for index, period in enumerate(periods):
+        prior_period = periods[index - 1] if index else ""
+        revenue = value(period, "revenue")
+        profit = value(period, "parent_profit")
+        prior_revenue = value(prior_period, "revenue") if prior_period else None
+        prior_profit = value(prior_period, "parent_profit") if prior_period else None
+        gross_margin = value(period, "gross_margin")
+        operating_margin = value(period, "operating_margin")
+        ocf = value(period, "ocf")
+        capex = value(period, "capex")
+        fcf = value(period, "fcf")
+        income_parts = [
+            f"收入{_display_number(revenue)}百万元（同比{pct(revenue, prior_revenue)}）",
+            f"归母净利润{_display_number(profit)}百万元（同比{pct(profit, prior_profit)}）",
+        ]
+        if gross_margin is not None:
+            income_parts.append(f"毛利率{_display_number(gross_margin)}%")
+        if operating_margin is not None:
+            income_parts.append(f"营业利润率{_display_number(operating_margin)}%")
+        cash_parts = []
+        if ocf is not None:
+            cash_parts.append(f"OCF {_display_number(ocf)}百万元")
+        if capex is not None:
+            cash_parts.append(f"资本开支{_display_number(capex)}百万元")
+        if fcf is not None:
+            cash_parts.append(f"FCF {_display_number(fcf)}百万元")
+        cash_text = "；" + "、".join(cash_parts) if cash_parts else "；OCF、资本开支和FCF尚待补充"
+        rows.append(f"- **{period}：** " + "、".join(income_parts) + cash_text + "。")
+    return "\n".join(rows)
+
+
+def _render_quarterly_bridge(lines: list[CanonicalModelLine]) -> str:
+    period_rows: dict[str, dict[str, CanonicalModelLine]] = {}
+    for line in lines:
+        period = str(line.period).upper()
+        if not re.search(r"(?:Q[1-4]|H[12])", period):
+            continue
+        metric = _canonical_metric_name(line.metric)
+        if metric in {"revenue", "parent_profit", "gross_margin", "ocf"}:
+            period_rows.setdefault(period, {})[metric] = line
+    if len(period_rows) < 2:
+        return ""
+    rows = ["### 季度兑现桥", ""]
+    for period in sorted(period_rows):
+        metrics = period_rows[period]
+        parts = []
+        for metric, label, suffix in (
+            ("revenue", "收入", "百万元"),
+            ("parent_profit", "归母净利润", "百万元"),
+            ("gross_margin", "毛利率", "%"),
+            ("ocf", "OCF", "百万元"),
+        ):
+            row = metrics.get(metric)
+            if row is not None and row.value is not None:
+                parts.append(f"{label}{_display_number(row.value)}{suffix}")
+        if parts:
+            rows.append(f"- **{period}：** " + "、".join(parts) + "。")
+    return "\n".join(rows) if len(rows) > 2 else ""
 
 
 def _render_forecast_assumptions(items: list[ForecastAssumption]) -> str:
@@ -2633,6 +2729,67 @@ def normalize_sell_side_pm_decision(
             notes.append(
                 f"classified {row.get('institution', 'unknown institution')} forecast posture as {inferred_posture}"
             )
+    has_independence_warning = False
+    for row in payload.get("alternative_intelligence_decisions", []) or []:
+        row["kpe_ids"] = list(dict.fromkeys(str(item) for item in row.get("kpe_ids", []) if item))
+        crosscheck = str(row.get("public_crosscheck", "") or "")
+        row_warns_independence = "不构成独立交叉验证" in crosscheck
+        has_independence_warning = has_independence_warning or row_warns_independence
+        clauses = [
+            clause.strip(" ；;")
+            for clause in re.split(r"[；;]+", crosscheck)
+            if clause.strip(" ；;")
+        ]
+        unique_clauses: list[str] = []
+        seen_clauses: set[str] = set()
+        for clause in clauses:
+            key = re.sub(r"\s+", "", clause).rstrip("。.!！")
+            if key in seen_clauses:
+                continue
+            seen_clauses.add(key)
+            unique_clauses.append(clause)
+        crosscheck = "；".join(unique_clauses)
+        if row_warns_independence:
+            crosscheck = re.sub(
+                r"(?:三源|多源|多家|多个来源)(?:渠道数据)?(?:已)?交叉验证"
+                r"(Q\d[^；。]{0,40})",
+                r"多份线索均指向\1，但独立性不足",
+                crosscheck,
+            )
+            crosscheck = re.sub(
+                r"(?:三源|多源|多家|多个来源)(?:渠道数据)?(?:已)?交叉验证",
+                "多份线索方向一致但独立性不足",
+                crosscheck,
+            )
+        row["public_crosscheck"] = crosscheck
+
+    # Private reposts may agree directionally without constituting independent
+    # corroboration. Public prose must preserve that distinction even when the
+    # model overstates a KPE cluster as "multi-source verification".
+    if has_independence_warning:
+        for field in (
+            "one_line_thesis",
+            "investment_conclusion_and_core_conflict",
+            "industry_cycle_and_competition",
+            "thesis_financial_bridge",
+            "expectation_gap_and_market_pricing",
+            "risks_catalysts_verification",
+        ):
+            text = str(payload.get(field, "") or "")
+            text = re.sub(
+                r"(?:已被|已经|经)?(?:三源|多源|多家|多个来源)(?:渠道数据)?(?:已)?交叉验证"
+                r"Q2需求强劲",
+                "多份渠道线索指向Q2需求改善，但尚待独立公开数据验证",
+                text,
+            )
+            text, count = re.subn(
+                r"(?:已被|已经|经)?(?:三源|多源|多家|多个来源)(?:渠道数据)?(?:已)?交叉验证",
+                "多份渠道线索方向一致、但尚待独立公开数据验证",
+                text,
+            )
+            if count:
+                notes.append(f"softened {count} non-independent cross-validation claim(s) in {field}")
+            payload[field] = text
     lines = list(payload.get("canonical_model_snapshot", []))
 
     def _metric(row: dict) -> str:
@@ -2656,6 +2813,8 @@ def normalize_sell_side_pm_decision(
             "",
             " ".join((raw_unit, raw_metric, raw_formula)),
         )
+        if any(token in context_key for token in ("亿股", "100millionshares", "hundredmillionshares")):
+            return value * 100.0
         if any(token in context_key for token in ("万股", "10000shares", "10kshares")):
             return value / 100.0
         if any(token in context_key for token in ("百万股", "millionshares", "mnshares", "mshares")):
@@ -2666,17 +2825,22 @@ def normalize_sell_side_pm_decision(
             return value / 1_000_000.0
         return value
 
+    share_rows = [
+        row
+        for row in lines
+        if any(
+            token in re.sub(r"[^a-z0-9一-鿿]+", "", str(row.get("metric", "")).lower())
+            for token in ("dilutedshare", "sharecount", "totalshare", "稀释股本", "总股本")
+        )
+        and row.get("value") is not None
+    ]
     share_row = next(
         (
             row
-            for row in lines
-            if any(
-                token in re.sub(r"[^a-z0-9一-鿿]+", "", str(row.get("metric", "")).lower())
-                for token in ("dilutedshare", "sharecount", "totalshare", "稀释股本", "总股本")
-            )
-            and row.get("value") is not None
+            for row in share_rows
+            if str(row.get("status", "")).lower() in {"reported", "calculated"}
         ),
-        None,
+        share_rows[0] if share_rows else None,
     )
     shares = _share_count_mn(share_row)
     if share_row is not None and shares is not None:
@@ -2934,6 +3098,19 @@ def normalize_sell_side_pm_decision(
         prior = revenue_by_period.get(prior_period)
         if prior not in (None, 0):
             growth_by_period[period] = (current / prior - 1.0) * 100.0
+            continue
+        row = by_metric_period.get(("revenue", period))
+        formula = str(row.get("formula", "") if row else "")
+        formula_match = re.search(
+            r"(?:growth|增长|增速)[^\d+\-]{0,12}([+\-]?\d+(?:\.\d+)?)\s*%|"
+            r"([+\-]?\d+(?:\.\d+)?)\s*%\s*(?:growth|增长|增速)",
+            formula,
+            re.I,
+        )
+        if formula_match:
+            growth_by_period[period] = float(
+                formula_match.group(1) or formula_match.group(2)
+            )
 
     def _reconcile_public_revenue_growth(text: object) -> tuple[str, int]:
         rendered = str(text or "")
@@ -2973,6 +3150,25 @@ def normalize_sell_side_pm_decision(
                     replacements += count
                 lines_out.append(line)
             rendered = "\n".join(lines_out)
+        forecast_periods = sorted(growth_by_period)
+        if len(forecast_periods) >= 2:
+            first, last = forecast_periods[0], forecast_periods[-1]
+            sequence = "/".join(
+                f"{growth_by_period[period]:.1f}".rstrip("0").rstrip(".") + "%"
+                for period in forecast_periods
+            )
+            sequence_pattern = re.compile(
+                rf"((?:{first}(?:\s*[-—至]\s*{last})?|{first}\s*至\s*{last})"
+                r"[^。；\n]{0,36}?(?:收入|营收)[^。；\n]{0,12}?(?:增速|增长)"
+                r"[^\d+\-]{0,12})(?:[+\-]?\d+(?:\.\d+)?\s*%\s*/\s*)+"
+                r"[+\-]?\d+(?:\.\d+)?\s*%",
+                re.I,
+            )
+            rendered, count = sequence_pattern.subn(
+                lambda match: match.group(1) + sequence,
+                rendered,
+            )
+            replacements += count
         return rendered, replacements
 
     public_growth_fields = (
@@ -3020,14 +3216,16 @@ def normalize_sell_side_pm_decision(
         prior_period = f"{year - 1}E"
         current = revenue_by_period.get(period)
         prior = revenue_by_period.get(prior_period)
-        if current is None or prior in (None, 0):
+        growth = growth_by_period.get(period)
+        if current is None or growth is None:
             continue
-        growth = (current / prior - 1.0) * 100.0
         old = str(assumption.get("base_case", ""))
-        assumption["base_case"] = (
-            f"{growth:+.1f}% ({current:,.0f} CNY mn; calculated from "
-            f"canonical {prior_period}/{period} revenue)"
+        basis = (
+            f"calculated from canonical {prior_period}/{period} revenue"
+            if prior not in (None, 0)
+            else "taken from the canonical revenue formula"
         )
+        assumption["base_case"] = f"{growth:+.1f}% ({current:,.0f} CNY mn; {basis})"
         if old != assumption["base_case"]:
             notes.append(
                 f"reconciled {period} revenue growth assumption to {growth:+.1f}%"
@@ -3191,6 +3389,12 @@ def normalize_sell_side_pm_decision(
                         notes.append(
                             f"excluded overlapping optionality '{item.name}': "
                             "incremental scenario value is already probability-weighted"
+                        )
+                        continue
+                    if not item.include_in_public_base_value:
+                        notes.append(
+                            f"excluded unverified optionality '{item.name}' from public base value; "
+                            "kept as upside-only research context"
                         )
                         continue
                     equity_value = (
@@ -3367,91 +3571,51 @@ def normalize_sell_side_pm_decision(
                 f"removed {removed_manual_values} manual deterministic valuation line(s) from prose"
             )
 
-    if (
-        output.status == "closed"
-        and assumptions.current_price_cny is not None
-        and output.safe_buy_price_ceiling_cny is not None
-        and assumptions.current_price_cny > output.safe_buy_price_ceiling_cny * 1.02
-    ):
-        rating_zh = {
-            "Buy": "买入",
-            "Overweight": "增持",
-            "Hold": "中性",
-            "Underweight": "减持",
-            "Sell": "卖出",
-        }[decision.rating.value]
+    # A public sell-side rating is owned by the 12-month expected-return
+    # framework. Portfolio construction, entry ceilings, position sizing and
+    # price stop-losses belong to the internal appendix and must not contradict
+    # the headline recommendation.
+    rating_zh = {
+        "Buy": "买入",
+        "Overweight": "增持",
+        "Hold": "中性",
+        "Underweight": "减持",
+        "Sell": "卖出",
+    }[decision.rating.value]
+    if output.status == "closed" and output.fair_value_per_share_cny is not None:
+        return_text = (
+            f"，对应现价空间{output.expected_return_pct:.1f}%"
+            if output.expected_return_pct is not None
+            else ""
+        )
         payload["rating_posture"] = (
-            f"{rating_zh}；当前价{assumptions.current_price_cny:.2f}元高于程序化安全买入上限"
-            f"{output.safe_buy_price_ceiling_cny:.2f}元，已有持仓按评级管理，"
-            "新资金等待价格进入安全区间或基本面证据推动估值输入上修。"
+            f"{rating_zh}；12个月目标价{output.fair_value_per_share_cny:.2f}元{return_text}。"
+            "评级依据为基本面与估值，后续按关键经营证据调整。"
         )
-        execution_field = str(payload.get("risks_catalysts_verification", "") or "")
-        # Normalization may run more than once (generation, revision, render).
-        # Remove the previous application-owned constraint before inserting the
-        # current one so the public report never duplicates it.
-        execution_field = re.sub(
-            r"\*\*程序化执行约束\*\*：[^\n]*(?:\n\n)?",
-            "",
-            execution_field,
-        )
-        execution_field = re.sub(
-            r"(?:首仓|初始仓位)[^。；\n]{0,160}(?:建立|建仓)[^。；\n]*[。；]?",
-            "",
-            execution_field,
-            flags=re.I,
-        )
-        safe_clauses: list[str] = []
-        removed_unsafe_clauses = 0
-        affirmative_build = re.compile(
-            r"(?:建议|可以|可考虑|启动|分批|逐步|择机).{0,24}(?:买入|建仓|加仓)|"
-            r"(?:买入|建仓|加仓).{0,24}(?:建议|可以|可考虑|启动|分批|逐步|择机)|"
-            r"小仓试探|试探性(?:买入|建仓|仓位)",
-            re.I,
-        )
-        clauses = [
-            clause
-            for clause in re.split(r"(?<=[。；;])|\n", execution_field)
-            if clause.strip()
-        ]
-        for clause in clauses:
-            prices = [
-                float(value)
-                for value in re.findall(r"(\d+(?:\.\d+)?)\s*元", clause)
-            ]
-            if (
-                prices
-                and max(prices) > output.safe_buy_price_ceiling_cny * 1.02
-                and affirmative_build.search(clause)
-            ):
-                removed_unsafe_clauses += 1
-                continue
-            safe_clauses.append(clause)
-        execution_field = "".join(safe_clauses).strip()
-        if removed_unsafe_clauses:
-            notes.append(
-                f"removed {removed_unsafe_clauses} unsafe buy/build clause(s) above deterministic ceiling"
-            )
-        deterministic_constraint = (
-            f"**程序化执行约束**：当前价{assumptions.current_price_cny:.2f}元高于安全买入上限"
-            f"{output.safe_buy_price_ceiling_cny:.2f}元；不得表述为已经替投资者建仓，也不得建议新资金在安全价之上主动加仓。"
-        )
-        payload["risks_catalysts_verification"] = (
-            deterministic_constraint + "\n\n" + execution_field.strip()
-        ).strip()
-        notes.append("enforced safe-price execution constraint above the buy ceiling")
+    else:
+        payload["rating_posture"] = f"{rating_zh}；估值尚未完全闭合，后续按关键经营证据调整。"
 
-    posture = str(payload.get("rating_posture", "") or "")
-    latin_chars = len(re.findall(r"[A-Za-z]", posture))
-    cjk_chars = len(re.findall(r"[\u4e00-\u9fff]", posture))
-    if latin_chars >= 12 and latin_chars > cjk_chars * 1.2:
-        payload["rating_posture"] = {
-            "Buy": "买入；基本面与估值同时满足要求，按风险预算分阶段执行。",
-            "Overweight": "增持；维持积极但审慎的持仓姿态，后续加仓取决于估值与关键证据验证。",
-            "Hold": "中性；当前风险收益较均衡，等待盈利、现金流或估值出现更明确的偏离。",
-            "Underweight": "减持；降低相对配置，等待下行风险收敛或估值补偿改善。",
-            "Sell": "卖出；基本面下行与估值补偿不足，优先控制绝对风险。",
-        }[decision.rating.value]
-        notes.append("localized English-heavy rating posture into Chinese")
+    for field in ("one_line_thesis", "risks_catalysts_verification"):
+        public_text = str(payload.get(field, "") or "")
+        public_text = re.sub(r"\*\*程序化执行约束\*\*：[^\n]*(?:\n\n)?", "", public_text)
+        public_text = re.sub(r"(?m)^.*(?:硬止损线|无条件止损).*$", "", public_text)
+        public_text = re.sub(r"(?:首仓|初始仓位|仓位从)[^。；\n]*[。；]?", "", public_text)
+        public_text = re.sub(
+            r"以分阶段、小仓位方式开始建仓的赔率优于完全等待右侧确认",
+            "当前风险收益比具备吸引力，但仍需关键经营数据验证",
+            public_text,
+        )
+        if field == "risks_catalysts_verification":
+            public_text, removed_execution = re.subn(
+                r"[^。；\n]*(?:小仓试探|分批建仓|启动建仓|主动加仓|仓位提升)[^。；\n]*[。；]?",
+                "",
+                public_text,
+            )
+            if removed_execution:
+                notes.append(
+                    f"removed {removed_execution} unsafe buy/build clause(s) from public sell-side guidance"
+                )
+        payload[field] = re.sub(r"\n{3,}", "\n\n", public_text).strip()
 
     deduped_lines: list[dict] = []
     line_index: dict[tuple[str, str], int] = {}
@@ -3461,7 +3625,16 @@ def normalize_sell_side_pm_decision(
         period = "current" if metric == "diluted_shares" else str(row.get("period", ""))
         key = (period, metric)
         if key in line_index and row.get("value") is not None:
-            deduped_lines[line_index[key]] = row
+            existing_index = line_index[key]
+            existing = deduped_lines[existing_index]
+            if metric == "diluted_shares":
+                status_rank = {"reported": 3, "calculated": 2, "estimated": 1}
+                existing_rank = status_rank.get(str(existing.get("status", "")).lower(), 0)
+                candidate_rank = status_rank.get(str(row.get("status", "")).lower(), 0)
+                if candidate_rank > existing_rank:
+                    deduped_lines[existing_index] = row
+            else:
+                deduped_lines[existing_index] = row
             duplicate_count += 1
             continue
         line_index[key] = len(deduped_lines)
@@ -3494,7 +3667,31 @@ _PUBLIC_LABELS = {
     "warning": "需关注",
     "negative": "负面",
     "partial": "部分成立",
+    "unproven": "尚未验证",
+    "hybrid": "混合模型",
+    "hypothetical": "假设情景",
+    "high": "较高",
+    "medium": "中等",
+    "low": "较低",
 }
+
+
+def _clean_public_artifacts(text: str) -> str:
+    """Remove ID-stripping residue and machine-enum leakage from public copy."""
+
+    text = re.sub(r"（\s*(?:[/、,，]\s*)*）|\(\s*(?:[/,]\s*)*\)", "", text)
+    text = re.sub(r"(?<!\d)(?:/\d{1,3}){2,}(?!\d)", "", text)
+    text = re.sub(r"(?<!\d)/(?:\s*/|\s*,|\s*、|\s*\d{1,2})+(?!\d)", "", text)
+    text = re.sub(r"(?i)hypothetical[_\s-]*", "假设情景：", text)
+    text = re.sub(r"(?i)\b(?:bull|base|bear)\s+case\b", lambda m: {
+        "bull": "乐观情景", "base": "基准情景", "bear": "悲观情景"
+    }[m.group(0).split()[0].lower()], text)
+    text = re.sub(r"[ 	]+([，。；：！？])", r"\1", text)
+    text = re.sub(r"([（(])\s+", r"\1", text)
+    text = re.sub(r"\s+([）)])", r"\1", text)
+    text = re.sub(r"[；;]{2,}", "；", text)
+    text = re.sub(r"（\s*）|\(\s*\)", "", text)
+    return text
 
 
 def _reader_text(value: object, *, max_chars: int | None = None) -> str:
@@ -3507,6 +3704,7 @@ def _reader_text(value: object, *, max_chars: int | None = None) -> str:
     text = re.sub(r"(?i)EPS\s*[+＋-]?\s*x{2,}\s*元?", "具体EPS影响待验证", text)
     text = re.sub(r"(?i)\bbase\s*case\b", "基准情景", text)
     text = re.sub(r"\s+", " ", text)
+    text = _clean_public_artifacts(text)
 
     # Evidence cross-checks occasionally arrive twice after KPE/KSI lineage
     # normalization. Keep the first occurrence without exposing a duplicated
@@ -3528,7 +3726,9 @@ def _reader_text(value: object, *, max_chars: int | None = None) -> str:
         if cut >= int(max_chars * 0.55):
             text = window[: cut + 1]
         else:
-            text = window.rstrip("，、；:： ") + "…"
+            comma_cut = max(window.rfind(mark) for mark in ("，", "、", ":", "："))
+            cut = comma_cut if comma_cut >= int(max_chars * 0.45) else max_chars
+            text = window[:cut].rstrip("，、；:： ") + "。"
     return text or "未披露"
 
 
@@ -3566,13 +3766,15 @@ def _reader_markdown(value: object, *, max_chars: int) -> str:
         text,
     )
     replacements = {
-        r"(?i)\bproven\b": "已验证",
-        r"(?i)\bpartial\b": "部分验证",
-        r"(?i)\bmedium\b": "中等",
-        r"(?i)\blow\b": "较低",
-        r"(?i)\bunchanged\s*/\s*watch\b": "暂不调整，继续验证",
-        r"(?i)\bprice\s+in\b": "计入当前价格",
-        r"(?i)\bbase\s+case\b": "基准情景",
+        r"(?i)(?<![A-Za-z_])proven(?![A-Za-z_])": "已验证",
+        r"(?i)(?<![A-Za-z_])partial(?![A-Za-z_])": "部分验证",
+        r"(?i)(?<![A-Za-z_])medium(?![A-Za-z_])": "中等",
+        r"(?i)(?<![A-Za-z_])low(?![A-Za-z_])": "较低",
+        r"(?i)(?<![A-Za-z_])unchanged\s*/\s*watch(?![A-Za-z_])": "暂不调整，继续验证",
+        r"(?i)(?<![A-Za-z_])price\s+in(?![A-Za-z_])": "计入当前价格",
+        r"(?i)(?<![A-Za-z_])base\s+case(?![A-Za-z_])": "基准情景",
+        r"(?i)(?<![A-Za-z_])hybrid(?![A-Za-z_])": "混合模型",
+        r"(?i)(?<![A-Za-z_])unproven(?![A-Za-z_])": "尚未验证",
     }
     for pattern, replacement in replacements.items():
         text = re.sub(pattern, replacement, text)
@@ -3583,6 +3785,7 @@ def _reader_markdown(value: object, *, max_chars: int) -> str:
         flags=re.I,
     )
     text = re.sub(r"(?m)^\s*---+\s*$", "", text)
+    text = _clean_public_artifacts(text)
     text = re.sub(r"[ \t]+", " ", text)
     text = re.sub(r"\n{3,}", "\n\n", text).strip()
     if len(text) <= max_chars:
@@ -3590,9 +3793,9 @@ def _reader_markdown(value: object, *, max_chars: int) -> str:
 
     window = text[:max_chars]
     cut = max(window.rfind(mark) for mark in ("\n\n", "。", "！", "？", "；"))
-    if cut < int(max_chars * 0.6):
+    if cut < int(max_chars * 0.45):
         cut = max_chars
-    return window[:cut].rstrip("，、；:： \n") + "…"
+    return window[:cut].rstrip("，、；:： \n") + "。"
 
 
 def _reader_valuation_explanation(value: object, *, max_chars: int = 320) -> str:
@@ -3840,10 +4043,6 @@ def _render_investment_summary(
         valuation_parts.append(
             f"相对现价空间{_display_number(output.expected_return_pct)}%"
         )
-    if output.safe_buy_price_ceiling_cny is not None:
-        valuation_parts.append(
-            f"安全买入上限{_display_number(output.safe_buy_price_ceiling_cny)}元"
-        )
     valuation_line = "；".join(valuation_parts) or "估值输入尚未闭合"
     posture = _reader_text(decision.rating_posture, max_chars=240)
     thesis = _reader_text(decision.one_line_thesis, max_chars=260)
@@ -3908,23 +4107,36 @@ def _render_deterministic_valuation(output: DeterministicValuationOutput) -> str
         rows.extend(
             [
                 "",
-                "### 安全估值与建仓价格",
+                "### 目标价与预期收益",
                 "",
                 f"- 概率加权核心价值：{_display_number(output.probability_weighted_core_value_cny)}元/股",
                 f"- 期权价值：{_display_number(output.optionality_per_share_cny)}元/股；其他调整：{_display_number(output.other_adjustments_per_share_cny)}元/股",
                 f"- 综合公允价值：{_display_number(output.fair_value_per_share_cny)}元/股；相对现价预期收益：{_display_number(output.expected_return_pct)}%",
-                f"- 安全价参数：要求年化收益率{_display_number(output.required_annual_return_pct)}%、持有{_display_number(output.holding_period_years)}年、安全边际{_display_number(output.margin_of_safety_pct)}%、最大可承受熊市亏损{_display_number(output.maximum_bear_loss_pct)}%",
-                f"- **安全买入价上限：{_display_number(output.safe_buy_price_ceiling_cny)}元；建议关注区间：{_display_number(output.suggested_buy_zone_low_cny)}-{_display_number(output.safe_buy_price_ceiling_cny)}元；基本面压力价值：{_display_number(output.fundamental_floor_cny)}元。**",
-                "",
-                f"安全买入价取收益率约束价{_display_number(output.required_return_price_cny)}元、"
-                f"安全边际价{_display_number(output.margin_of_safety_price_cny)}元和熊市约束价"
-                f"{_display_number(output.bear_loss_constraint_price_cny)}元三者最低值。它是新资金的"
-                "防御性建仓上限，不等同于公允价值或评级锚。",
             ]
         )
     else:
         rows.extend(["", "- 估值输入不完整或概率未闭合，仅供REVIEW，不给出安全买入价。"])
     return "\n".join(rows)
+
+
+def _render_internal_safety_valuation(output: DeterministicValuationOutput) -> str:
+    if output.status != "closed":
+        return ""
+    return "\n".join(
+        [
+            "### 内部组合执行约束",
+            "",
+            f"- 安全买入价上限：{_display_number(output.safe_buy_price_ceiling_cny)}元；"
+            f"建议关注区间：{_display_number(output.suggested_buy_zone_low_cny)}-"
+            f"{_display_number(output.safe_buy_price_ceiling_cny)}元；"
+            f"基本面压力价值：{_display_number(output.fundamental_floor_cny)}元。",
+            f"- 参数：要求年化收益率{_display_number(output.required_annual_return_pct)}%、"
+            f"持有{_display_number(output.holding_period_years)}年、安全边际"
+            f"{_display_number(output.margin_of_safety_pct)}%、最大可承受熊市亏损"
+            f"{_display_number(output.maximum_bear_loss_pct)}%。",
+            "- 该区间仅供内部组合管理，不改变公共卖方评级与12个月目标价。",
+        ]
+    )
 
 
 def _render_foreign_sell_side_disclosure(rows_in: list[SellSideExpectationRow]) -> str:
@@ -4078,6 +4290,9 @@ def _render_sell_side_internal_appendix(decision: SellSidePMDecision) -> str:
         "## 内部附录E：模型交接与报告质量审计\n\n"
         + "\n\n".join(part for part in audit_parts if part.strip())
     )
+    safety = _render_internal_safety_valuation(decision.deterministic_valuation)
+    if safety:
+        sections.append("## 内部附录F：组合执行参数\n\n" + safety)
     return "\n\n".join(sections)
 
 
@@ -4105,18 +4320,18 @@ def render_sell_side_pm_decision(decision: SellSidePMDecision) -> str:
             + _demote_embedded_headings(
                 _reader_markdown(
                     decision.investment_conclusion_and_core_conflict,
-                    max_chars=620,
+                    max_chars=500,
                 )
             ),
             "## 一、公司是谁、如何赚钱\n\n"
             + _demote_embedded_headings(
-                _reader_markdown(decision.company_disaggregation, max_chars=520)
+                _reader_markdown(decision.company_disaggregation, max_chars=420)
             )
             + "\n\n"
             + _render_business_model_mechanisms(decision.business_model_mechanisms),
             "## 二、产业链位置与行业格局\n\n"
             + _demote_embedded_headings(
-                _reader_markdown(decision.industry_cycle_and_competition, max_chars=560)
+                _reader_markdown(decision.industry_cycle_and_competition, max_chars=450)
             )
             + "\n\n"
             + _render_industry_drivers(decision.industry_driver_matrix)
@@ -4126,29 +4341,32 @@ def render_sell_side_pm_decision(decision: SellSidePMDecision) -> str:
             + _render_segment_economics(decision.segment_economics)
             + "\n\n"
             + _demote_embedded_headings(
-                _reader_markdown(decision.accounting_and_capital_allocation, max_chars=430)
+                _reader_markdown(decision.accounting_and_capital_allocation, max_chars=330)
             )
             + "\n\n"
             + _render_accounting_quality(decision.accounting_quality_matrix),
             "## 四、竞争优势、护城河与主要短板\n\n"
             + _demote_embedded_headings(
-                _reader_markdown(decision.moat_evidence_scorecard, max_chars=430)
+                _reader_markdown(decision.moat_evidence_scorecard, max_chars=330)
             )
             + "\n\n"
             + _render_moat_mechanisms(decision.moat_mechanisms),
             "## 五、增长逻辑、关键分歧与盈利预测\n\n"
             + _demote_embedded_headings(
-                _reader_markdown(decision.thesis_financial_bridge, max_chars=950)
+                _reader_markdown(decision.thesis_financial_bridge, max_chars=760)
             )
+            + "\n\n"
+            + _render_profit_cash_bridge(decision.canonical_model_snapshot)
+            + ("\n\n" + _render_quarterly_bridge(decision.canonical_model_snapshot) if _render_quarterly_bridge(decision.canonical_model_snapshot) else "")
             + "\n\n### 模型解释与局限\n\n"
             + _render_reader_forecast_table(decision.canonical_model_snapshot)
             + "\n\n"
             + _demote_embedded_headings(
-                _reader_markdown(decision.autonomous_forecast_model, max_chars=480)
+                _reader_markdown(decision.autonomous_forecast_model, max_chars=400)
             ),
             "## 六、市场预期差、风险与验证\n\n"
             + _demote_embedded_headings(
-                _reader_markdown(decision.expectation_gap_and_market_pricing, max_chars=520)
+                _reader_markdown(decision.expectation_gap_and_market_pricing, max_chars=420)
             )
             + "\n\n"
             + _render_foreign_sell_side_disclosure(decision.sell_side_expectation_matrix)
@@ -4156,7 +4374,7 @@ def render_sell_side_pm_decision(decision: SellSidePMDecision) -> str:
             + _render_alternative_intelligence(decision.alternative_intelligence_decisions)
             + "\n\n### 风险、催化剂与验证日历\n\n"
             + _demote_embedded_headings(
-                _reader_markdown(decision.risks_catalysts_verification, max_chars=600)
+                _reader_markdown(decision.risks_catalysts_verification, max_chars=480)
             ),
             "## 七、估值、评级与投资结论\n\n"
             + _render_deterministic_valuation(decision.deterministic_valuation)

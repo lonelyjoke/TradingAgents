@@ -1276,6 +1276,77 @@ def test_handoff_numeric_audit_accepts_raw_to_million_share_normalization(tmp_pa
     assert audit_handoff_numeric_consistency(tmp_path) == []
 
 
+def test_handoff_numeric_audit_accepts_chinese_hundred_million_share_unit(tmp_path):
+    context_dir = tmp_path / "0_context"
+    research_dir = tmp_path / "2_research"
+    portfolio_dir = tmp_path / "5_portfolio"
+    context_dir.mkdir()
+    research_dir.mkdir()
+    portfolio_dir.mkdir()
+    (context_dir / "company_underwriting.json").write_text(
+        json.dumps({"forecast_years": [], "forecast_lines": []}), encoding="utf-8"
+    )
+    manager = {
+        "canonical_model_snapshot": [
+            {
+                "line_id": "shares",
+                "period": "current",
+                "metric": "diluted_shares",
+                "value": 735.8485,
+                "unit": "mn shares",
+                "status": "calculated",
+            }
+        ],
+        "model_change_rows": [],
+    }
+    pm = {
+        "canonical_model_snapshot": [
+            {
+                "line_id": "shares",
+                "period": "current",
+                "metric": "稀释后股本",
+                "value": 7.36,
+                "unit": "亿股",
+                "status": "calculated",
+            }
+        ],
+        "handoff_change_rows": [],
+    }
+    (research_dir / "canonical_plan.json").write_text(json.dumps(manager), encoding="utf-8")
+    (portfolio_dir / "canonical_decision.json").write_text(json.dumps(pm), encoding="utf-8")
+
+    assert audit_handoff_numeric_consistency(tmp_path) == []
+
+
+def test_handoff_numeric_audit_prefers_calculated_share_row_over_later_estimate(tmp_path):
+    context_dir = tmp_path / "0_context"
+    research_dir = tmp_path / "2_research"
+    portfolio_dir = tmp_path / "5_portfolio"
+    context_dir.mkdir()
+    research_dir.mkdir()
+    portfolio_dir.mkdir()
+    (context_dir / "company_underwriting.json").write_text(
+        json.dumps({"forecast_years": [], "forecast_lines": []}), encoding="utf-8"
+    )
+    manager = {
+        "canonical_model_snapshot": [
+            {"line_id": "shares", "period": "current", "metric": "diluted_shares", "value": 735.8485, "unit": "mn shares", "status": "calculated"}
+        ],
+        "model_change_rows": [],
+    }
+    pm = {
+        "canonical_model_snapshot": [
+            {"line_id": "shares", "period": "current", "metric": "diluted_shares", "value": 735.8485, "unit": "mn shares", "status": "calculated"},
+            {"line_id": "diluted_share_count", "period": "latest", "metric": "diluted_share_count", "value": 7.36, "unit": "mn shares", "status": "estimated"},
+        ],
+        "handoff_change_rows": [],
+    }
+    (research_dir / "canonical_plan.json").write_text(json.dumps(manager), encoding="utf-8")
+    (portfolio_dir / "canonical_decision.json").write_text(json.dumps(pm), encoding="utf-8")
+
+    assert audit_handoff_numeric_consistency(tmp_path) == []
+
+
 def test_post_generation_audit_marks_missing_pm_analytical_spine_review_only(tmp_path):
     portfolio_dir = tmp_path / "5_portfolio"
     portfolio_dir.mkdir()
