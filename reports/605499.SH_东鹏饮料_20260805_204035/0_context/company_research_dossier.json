@@ -1,0 +1,1462 @@
+{
+  "schema_version": 1,
+  "symbol": "605499.SH",
+  "as_of_date": "2026-08-05",
+  "reader_contract": {
+    "audience": "普通投资者",
+    "principle": "数据用于权威佐证，不能替代公司、产业链与投资逻辑。",
+    "formal_rating_position": "开篇投资摘要，并在第七章末尾重申",
+    "chapter_count": 7
+  },
+  "source_policy": {
+    "A_hard_fact": {
+      "sources": "公司财报、交易所/公司公告、官方业绩指引",
+      "allowed_use": "冻结历史事实和模型基线"
+    },
+    "B_reproducible": {
+      "sources": "Tushare结构化数据、程序计算、官方统计、行业协会",
+      "allowed_use": "财务计算、行业比较和可复核代理变量"
+    },
+    "C_external_expectation": {
+      "sources": "具名卖方报告、多机构一致预期",
+      "allowed_use": "构建市场预期与预测分歧；单家机构不得冒充一致预期"
+    },
+    "D_alternative_intelligence": {
+      "sources": "知识星球、渠道调研、专家纪要、私域卖方推送",
+      "allowed_use": "量化模型变更、情景概率变化、验证日历变化或明确拒绝"
+    },
+    "E_background": {
+      "sources": "普通新闻、政策评论、行业叙事",
+      "allowed_use": "解释背景；不得单独改变盈利预测或评级"
+    }
+  },
+  "company_introduction": {
+    "business_archetype": "Branded consumer-packaged-goods manufacturer and marketer, primarily functional energy drinks sold through multi-channel retail distribution",
+    "value_proposition_and_customers": "Provide affordable, readily available energy and electrolyte replenishment to blue-collar workers, drivers, students and active consumers via over 2 million points of sale; core product 东鹏特饮 competes on price-pack architecture and massive distribution coverage",
+    "revenue_equation": "Revenue = Σ (active distribution points × average volume per point × product mix weight × realized ASP per unit) ≈ channel sell-through volume (cases/litres) × ASP × mix; growth comes from outlet expansion, same-outlet productivity and mix improvement",
+    "profit_equation": "Gross profit = Revenue - (direct raw materials + packaging + manufacturing conversion costs); Operating profit = Gross profit - selling & distribution expenses - administrative & R&D; Parent net profit = Operating profit - net finance expense + other income - income tax - minority interest",
+    "cash_flow_equation": "OCF = Net profit + depreciation/amortisation – change in working capital (receivables, inventory, prepayments, payables, contract liabilities); FCF = OCF – capex (capacity, IT, maintenance); working capital seasonal, Q1 OCF/net profit low due to post-Chinese New Year channel restocking",
+    "capital_intensity_and_reinvestment": "Moderate capex intensity ~5-7% of revenue driven by nationwide production base network (14 planned, 12 operating) and expansion into new categories; construction-in-progress and land use rights significant; periodic募投项目 extensions suggest project timing risk",
+    "key_unknowns": [
+      "Whether 20% annual top-line target is still achievable after H1 slowdown signal",
+      "Sustainably of 46%+ gross margin when raw material prices (PET, sugar, taurine) normalise",
+      "OCF/net profit ratio improving from <0.4 to >0.8",
+      "Second-curve profitability for electrolyte and other 1+6 categories",
+      "H-share cornerstone overhang and potential dilution"
+    ]
+  },
+  "industry_chain": {
+    "operating_model_family": "store_traffic_conversion_ticket",
+    "upstream_cost_and_supply": [
+      {
+        "segment": "能量饮料 (Energy Drinks)",
+        "supply_capacity": "Company has 14 planned bases, 12 operating by mid-2026; competitor Red Bull and Nongfu also expanding capacity",
+        "unit_cost_inputs": "Main costs: PET resin, sugar, taurine, packaging; Q1 gross margin improved 2.42pp YoY, suggesting favourable input cost environment or mix"
+      },
+      {
+        "segment": "电解质饮料 (Electrolyte Drinks)",
+        "supply_capacity": "Category players include Gatorade, Pocari Sweat; supply not a constraint",
+        "unit_cost_inputs": "Similar cost structure to energy drinks; packaging, minerals"
+      },
+      {
+        "segment": "其他品类及国际业务 (Other New Categories & International)",
+        "supply_capacity": "Early stage; international capex plans for local production bases",
+        "unit_cost_inputs": "Likely higher initial costs due to small scale and logistics"
+      },
+      {
+        "segment": "国际业务/其他新品类 (International & Other New Categories)",
+        "supply_capacity": "",
+        "unit_cost_inputs": ""
+      }
+    ],
+    "downstream_demand_and_pricing": [
+      {
+        "segment": "能量饮料 (Energy Drinks)",
+        "customers_channel": "End consumers through convenience stores, supermarkets, conventional retail, e-commerce; heavy blue-collar, driver, student user base",
+        "demand": [
+          "Energy-drink category consumption driven by working hours, outdoor activities, traffic",
+          "Distributor network expansion and outlet activation",
+          "Brand loyalty and repeat purchase habit",
+          "Product innovation within energy drink (different pack sizes, flavours)"
+        ],
+        "price_asp": "ASP stable; management uses mix upgrade (larger packs, premium variants) rather than headline price increases"
+      },
+      {
+        "segment": "电解质饮料 (Electrolyte Drinks)",
+        "customers_channel": "Same multi-channel distribution; usage occasions: sports, heat, health",
+        "demand": [
+          "Growing health and hydration awareness",
+          "Expand shelf presence leveraging existing distribution",
+          "Potential institutional or B2B channel"
+        ],
+        "price_asp": "ASP similar to competitive set, promotional intensity high"
+      },
+      {
+        "segment": "其他品类及国际业务 (Other New Categories & International)",
+        "customers_channel": "Existing distributors globally; overseas: local operations coming online",
+        "demand": [
+          "International consumer demand for functional drinks",
+          "Local production and distribution partnerships",
+          "New category trial from existing user base"
+        ],
+        "price_asp": "Unknown"
+      },
+      {
+        "segment": "国际业务/其他新品类 (International & Other New Categories)",
+        "customers_channel": "",
+        "demand": [],
+        "price_asp": ""
+      }
+    ]
+  },
+  "profit_pools": {
+    "reported_or_analytical_units": [
+      {
+        "unit_id": "energy_drinks",
+        "unit_name": "能量饮料 (Energy Drinks)",
+        "unit_type": "product",
+        "disclosure_basis": "calculated",
+        "parent_unit": "company",
+        "economic_role": "Core revenue and profit engine; primary brand equity carrier",
+        "primary_operating_archetype": "branded_consumer_channel",
+        "secondary_operating_archetype": "volume_price_cost",
+        "revenue_driver_equation": "volume (cases) × ASP (CNY/case) × product mix; volume driven by outlet coverage and same-store productivity",
+        "profit_driver_equation": "revenue × gross margin – selling & distribution expenses – allocated overhead",
+        "cash_and_capital_equation": "OCF inherits corporate seasonal pattern with distributor prepayments and receivables; category reinvestment via capacity capex and brand marketing",
+        "reported_metrics": [
+          "revenue_weight_pct 71.92% (H1 2026)"
+        ],
+        "evidence_ids": [
+          "EV028",
+          "EV031",
+          "EV095"
+        ],
+        "missing_inputs": [
+          "absolute energy drink revenue (CNY mn)",
+          "energy drink gross margin",
+          "segment volume and ASP"
+        ],
+        "next_verification": "2026 interim report segment revenue/volume disclosure"
+      },
+      {
+        "unit_id": "electrolyte_drinks",
+        "unit_name": "电解质饮料 (Electrolyte Drinks)",
+        "unit_type": "product",
+        "disclosure_basis": "analytical",
+        "parent_unit": "company",
+        "economic_role": "Growth adjacency; second-curve option",
+        "primary_operating_archetype": "branded_consumer_channel",
+        "secondary_operating_archetype": "volume_price_cost",
+        "revenue_driver_equation": "small base, scaling via increase in distribution points and trial/repeat",
+        "profit_driver_equation": "likely low current margin due to promotional spending and small scale",
+        "cash_and_capital_equation": "absorbing working capital and marketing investment",
+        "reported_metrics": [],
+        "evidence_ids": [
+          "EV027",
+          "EV028"
+        ],
+        "missing_inputs": [
+          "electrolyte segment revenue and weight",
+          "electrolyte segment margin",
+          "breaker-even timeline"
+        ],
+        "next_verification": "management disclosure of electrolyte category revenue scale"
+      },
+      {
+        "unit_id": "other_new_and_international",
+        "unit_name": "其他品类及国际业务 (Other New Categories & International)",
+        "unit_type": "geography",
+        "disclosure_basis": "analytical",
+        "parent_unit": "company",
+        "economic_role": "Future growth vectors; currently small and unprofitable",
+        "primary_operating_archetype": "branded_consumer_channel",
+        "secondary_operating_archetype": "volume_price_cost",
+        "revenue_driver_equation": "new product/SKU introductions, international distributor expansion, local production ramp",
+        "profit_driver_equation": "initial losses likely; contribution margin unknown",
+        "cash_and_capital_equation": "capex for overseas bases (supply-chain export), promotional costs for new categories",
+        "reported_metrics": [],
+        "evidence_ids": [
+          "EV030"
+        ],
+        "missing_inputs": [
+          "revenue and profit for ASEAN and other new categories",
+          "gross margin for international",
+          "capex allocation for overseas"
+        ],
+        "next_verification": "next semi-annual/interim disclosure of overseas/segment revenue"
+      },
+      {
+        "unit_id": "BU07",
+        "unit_name": "国际业务/其他新品类 (International & Other New Categories)",
+        "unit_type": "reported_segment",
+        "disclosure_basis": "missing",
+        "parent_unit": "company",
+        "economic_role": "Filing segment restored after structured evidence reconciliation.",
+        "primary_operating_archetype": "",
+        "secondary_operating_archetype": "",
+        "revenue_driver_equation": "",
+        "profit_driver_equation": "",
+        "cash_and_capital_equation": "",
+        "reported_metrics": [],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "economic sub-unit driver equations require analyst completion"
+        ],
+        "next_verification": ""
+      }
+    ],
+    "segment_models": [
+      {
+        "segment": "能量饮料 (Energy Drinks)",
+        "products_or_services": "东鹏特饮 energy/functional beverages, core energy drink category",
+        "customers_and_channel": "End consumers through convenience stores, supermarkets, conventional retail, e-commerce; heavy blue-collar, driver, student user base",
+        "revenue_weight_pct": 71.92,
+        "profit_weight_pct": null,
+        "base_period": "FY2025 (estimated)",
+        "base_revenue_value": 15015.8,
+        "base_revenue_unit": "CNY mn",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [
+          "Energy-drink category consumption driven by working hours, outdoor activities, traffic",
+          "Distributor network expansion and outlet activation",
+          "Brand loyalty and repeat purchase habit",
+          "Product innovation within energy drink (different pack sizes, flavours)"
+        ],
+        "industry_supply_and_capacity": "Company has 14 planned bases, 12 operating by mid-2026; competitor Red Bull and Nongfu also expanding capacity",
+        "volume_share_utilization": "Volume growth impacted by H1 slowdown signal; full-year volume growth target still ~20% (management non-committal)",
+        "price_asp_take_rate": "ASP stable; management uses mix upgrade (larger packs, premium variants) rather than headline price increases",
+        "unit_cost_and_input_prices": "Main costs: PET resin, sugar, taurine, packaging; Q1 gross margin improved 2.42pp YoY, suggesting favourable input cost environment or mix",
+        "margin_and_operating_leverage": "High operating leverage as scale grows; gross margin ~46%+ in Q1, likely translates to >25% operating margin",
+        "working_capital_and_cash_conversion": "OCF/net profit only 0.36 in Q1 due to annualised working-capital calculations; H1 OCF improved to 2,492 mn showing seasonal recovery",
+        "prosperity_level": "prospering",
+        "marginal_direction": "slowing",
+        "causal_analysis": "Structurally strong demand and scale advantages support high prosperity, but growth deceleration in H1 and rising competition capthe marginal direction downwards. Margin improvement likely partly from temporary input cost relief; cash conversion remains a friction. The segment still generates substantial profit but growth quality needs monitoring.",
+        "valuation_treatment": "Core valuation driver; base case assumes moderate growth deceleration with PE multiple compression from current low percentile",
+        "strongest_counterevidence": [
+          "H1 growth slowing (EV095): '公司上半年增速进一步放缓'",
+          "OCF/net profit of 0.36 in Q1 suggests working capital build masking true earnings power",
+          "Competitive intensity from 农夫山泉 and others increasing (EV096)"
+        ],
+        "evidence_ids": [
+          "EV028",
+          "EV012",
+          "EV014",
+          "EV039",
+          "EV095"
+        ],
+        "missing_inputs": [
+          "energy drink segment absolute revenue value",
+          "energy drink segment gross margin",
+          "segment volume and ASP data",
+          "H1 2026 segment growth rate"
+        ],
+        "next_verification": "2026 interim report segment breakdown"
+      },
+      {
+        "segment": "电解质饮料 (Electrolyte Drinks)",
+        "products_or_services": "东鹏补水啦 electrolyte water, part of 1+6 strategy",
+        "customers_and_channel": "Same multi-channel distribution; usage occasions: sports, heat, health",
+        "revenue_weight_pct": null,
+        "profit_weight_pct": null,
+        "base_period": "unspecified",
+        "base_revenue_value": null,
+        "base_revenue_unit": "",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [
+          "Growing health and hydration awareness",
+          "Expand shelf presence leveraging existing distribution",
+          "Potential institutional or B2B channel"
+        ],
+        "industry_supply_and_capacity": "Category players include Gatorade, Pocari Sweat; supply not a constraint",
+        "volume_share_utilization": "Unknown; likely low base, high growth percentage but small absolute",
+        "price_asp_take_rate": "ASP similar to competitive set, promotional intensity high",
+        "unit_cost_and_input_prices": "Similar cost structure to energy drinks; packaging, minerals",
+        "margin_and_operating_leverage": "Presumed low or negative gross margin at current scale due to marketing expenses",
+        "working_capital_and_cash_conversion": "Absorbs cash through initial inventory build and distributor incentives",
+        "prosperity_level": "evidence_limited",
+        "marginal_direction": "likely_up",
+        "causal_analysis": "Category has strong growth potential, but company has disclosed no segment economics; cannot currently assess whether it is profitable or merely volume without margin. Treated as an option that may contribute modestly in outer years.",
+        "valuation_treatment": "Scenario optionality; not included in base-case earnings but assigned a small probability-weighted add-on",
+        "strongest_counterevidence": [],
+        "evidence_ids": [
+          "EV027",
+          "EV028"
+        ],
+        "missing_inputs": [
+          "electrolyte segment revenue and margin",
+          "volume scale and growth rate",
+          "channel profitability"
+        ],
+        "next_verification": "management roadmap disclosure for electrolyte"
+      },
+      {
+        "segment": "其他品类及国际业务 (Other New Categories & International)",
+        "products_or_services": "Tea, coffee, juice, plant-protein drinks, international product lines",
+        "customers_and_channel": "Existing distributors globally; overseas: local operations coming online",
+        "revenue_weight_pct": null,
+        "profit_weight_pct": null,
+        "base_period": "unspecified",
+        "base_revenue_value": null,
+        "base_revenue_unit": "",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [
+          "International consumer demand for functional drinks",
+          "Local production and distribution partnerships",
+          "New category trial from existing user base"
+        ],
+        "industry_supply_and_capacity": "Early stage; international capex plans for local production bases",
+        "volume_share_utilization": "Unknown; ASEAN revenue/profit not disclosed",
+        "price_asp_take_rate": "Unknown",
+        "unit_cost_and_input_prices": "Likely higher initial costs due to small scale and logistics",
+        "margin_and_operating_leverage": "Likely negative contribution margin",
+        "working_capital_and_cash_conversion": "Capex-heavy, long cash conversion cycle",
+        "prosperity_level": "evidence_limited",
+        "marginal_direction": "unknown",
+        "causal_analysis": "International expansion is a strategic thesis but lacks quantified economics. It can create long-term growth but requires substantial upfront capital. In the base case, we assume minimal profit impact through 2028E.",
+        "valuation_treatment": "Excluded from base-case core; can be added as a small option value if investor has conviction",
+        "strongest_counterevidence": [],
+        "evidence_ids": [
+          "EV030"
+        ],
+        "missing_inputs": [
+          "international revenue and profit",
+          "capex plan and ROI for overseas",
+          "market-share targets"
+        ],
+        "next_verification": "2026 annual report international segment disclosure"
+      },
+      {
+        "segment": "国际业务/其他新品类 (International & Other New Categories)",
+        "products_or_services": "",
+        "customers_and_channel": "",
+        "revenue_weight_pct": null,
+        "profit_weight_pct": null,
+        "base_period": "2026 H1",
+        "base_revenue_value": null,
+        "base_revenue_unit": "",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [],
+        "industry_supply_and_capacity": "",
+        "volume_share_utilization": "",
+        "price_asp_take_rate": "",
+        "unit_cost_and_input_prices": "",
+        "margin_and_operating_leverage": "",
+        "working_capital_and_cash_conversion": "",
+        "prosperity_level": "evidence_limited",
+        "marginal_direction": "unknown",
+        "causal_analysis": "",
+        "valuation_treatment": "evidence_limited",
+        "strongest_counterevidence": [],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "LLM omitted a filing-reported material segment"
+        ],
+        "next_verification": ""
+      }
+    ]
+  },
+  "competition_and_moat": {
+    "landscapes": [
+      {
+        "business_unit": "能量饮料 (Energy Drinks)",
+        "market_boundary": "Functional energy drinks in China, targeting physical and mental fatigue; consumers are blue-collar workers, drivers, students, and night-shift workers; sold through convenience/independent stores, e-commerce",
+        "boundary_evidence": "Company describes market as '功能饮料细分赛道'; national standard GB/T10789-2015 defines special-purpose beverages including energy drinks (EV025), with participants including Red Bull, Nongfu Spring, and others",
+        "structure_and_concentration": "Market likely consolidated with top 2-3 players holding majority share; 东鹏特饮 is domestic leader. Exact concentration data missing.",
+        "direct_competitors": [
+          "红牛 (Red Bull – Huabin/Thailand JV)",
+          "Monster Beverage (local via partner)",
+          "农夫山泉能源饮品 (Nongfu Spring energy line)",
+          "乐虎 (Lehu by Dali Foods)"
+        ],
+        "substitutes_and_customer_alternatives": [
+          "Coffee (fresh, instant, canned)",
+          "Tea beverages (ready-to-drink, Chinese tea)",
+          "Vitamin waters / sports drinks",
+          "Plain water and other soft drinks",
+          "Self-brewed coffee/tea at home"
+        ],
+        "self_supply_and_new_entrants": [
+          "Potential self-supply by consumers making their own caffeine beverages",
+          "New entrants from other large beverage groups (e.g., Yuanqi Forest, Nestlé)",
+          "Functional electrolyte drinks as emerging competitor"
+        ],
+        "comparison_dimensions": [
+          "Brand recognition and loyalty",
+          "Distribution coverage and shelf placement",
+          "Price-pack architecture (value vs premium)",
+          "Gross margin and ability to invest in promotions",
+          "R&D and product innovation"
+        ],
+        "company_relative_position": "Leading domestic energy drink brand with the widest affordable distribution. Strong volume growth and high profitability; however, facing increased competitive intensity from well-capitalised rivals.",
+        "competitor_likely_response": "Competitors will increase advertising, shelf-space payments, and discounting to protect/gain share; Red Bull and Nongfu will attempt to weaken 东鹏's price umbrella.",
+        "financial_transmission": "If share loss occurs, volume growth decelerates, ASP may be pressured, gross margin erodes through promotions, and operating leverage declines; cash conversion may suffer as channel incentives increase.",
+        "evidence_ids": [
+          "EV028",
+          "EV095",
+          "EV096"
+        ],
+        "evidence_status": "partial",
+        "missing_inputs": [
+          "Market share data",
+          "Detailed competitor pricing and margin benchmarks"
+        ],
+        "next_verification": "Industry reports on energy drink market shares and competitive dynamics"
+      },
+      {
+        "business_unit": "电解质饮料 (Electrolyte Drinks)",
+        "market_boundary": "Electrolyte beverages for hydration and mineral replenishment; consumption occasions include sports, heat, illness, and health. Sold through same channels as energy drinks.",
+        "boundary_evidence": "Company classifies 东鹏补水啦 as electrolyte drinks under special-purpose drink standard (EV025). Competitors include established global brands like Gatorade (PepsiCo), Pocari Sweat (Otsuka), and emerging domestic brands.",
+        "structure_and_concentration": "Still fragmenting; international brands hold mindshare but domestic players like 东鹏 can leverage distribution to gain volume. Market size and share data unavailable.",
+        "direct_competitors": [
+          "佳得乐 (Gatorade – PepsiCo)",
+          "宝矿力水特 (Pocari Sweat – Otsuka)",
+          "元气森林外星人电解质水 (Yuanqi Forest)",
+          "农夫山泉力量帝 (Nongfu Spring)"
+        ],
+        "substitutes_and_customer_alternatives": [
+          "Sports drinks (isotonic)",
+          "Coconut water",
+          "Homemade electrolyte solutions",
+          "Plain water plus salt/sugar"
+        ],
+        "self_supply_and_new_entrants": [
+          "Health-conscious consumers may make their own electrolyte drinks",
+          "Entry from functional food and health supplement companies"
+        ],
+        "comparison_dimensions": [
+          "Distribution access and channel incentives",
+          "Brand health halo and scientific credibility",
+          "Cost structure and ability to offer competitive pricing",
+          "Product format and packaging (powder, ready-to-drink)"
+        ],
+        "company_relative_position": "Early entrant leveraging existing distribution; has potential but no evidenced market leadership yet.",
+        "competitor_likely_response": "Incumbents will intensify marketing and shelf-space investment; other large beverage companies may launch copycat products.",
+        "financial_transmission": "Success in this category could add incremental revenue, improve mix, and justify higher long-term growth multiple; failure would mean sunk marketing and R&D costs with limited payoff.",
+        "evidence_ids": [
+          "EV027",
+          "EV028"
+        ],
+        "evidence_status": "partial",
+        "missing_inputs": [
+          "Market share and retail sales data",
+          "Competitor pricing and profit margins"
+        ],
+        "next_verification": "Retail audit data for electrolyte drinks in East China/Guangdong"
+      }
+    ],
+    "competition_and_substitution_analysis": "The energy drink market is a battle of brand habit, distribution density, and price-pack architecture. 东鹏 enjoys a local leader advantage with massive retail presence and low price points, but the moat is under direct assault from well-funded Nongfu Spring, which can invest heavily in R&D, advertising, and channel incentives. Substitution risk is real: coffee culture and freshly brewed options could siphon off young consumers. The company’s response—doubling down on distribution and broadening the portfolio—could either strengthen the moat (if it creates new occasion loyalty) or dilute it (if it spreads resources too thin). The financial transmission is clear: if the core energy drink market share drops by even a few percentage points, volume growth falls, ASP erosion could begin, and operating leverage reverses, leading to significant EPS cuts and multiple compression.",
+    "claimed_mechanisms": [
+      "National brand recognition and consumer habit in energy drinks",
+      "Unmatched distribution density across convenience stores, traditional trade, e-commerce",
+      "Integrated production scale with 12 operational bases providing cost and availability advantage",
+      "Low price-point value proposition creating high purchase frequency and loyal consumption occasion"
+    ],
+    "tests": [
+      {
+        "moat_mechanism": "National brand recognition and habitual purchase loyalty",
+        "observable_test": "Home brand penetration and repeat purchase rate vs competitors; gross margin premium vs peers (46.89% vs peer average ~35-40%), ROE 51.6% vs peer median <20%, revenue weight 71.92% for energy drinks indicates category dominance",
+        "comparison_basis": "Compared to listed beverage peers: 养元饮品 (PE TTM 39.85, gross margin not directly comparable but target gross margin 46.89% exceeds soft drink sector average), 承德露露 gross margin 49.32% but smaller scale and lower ROE; target ROE 51.6% is exceptional",
+        "evidence_result": "Gross margin/ROE superiority strongly suggests strong brand and cost advantages; energy drink segment weight shows focused moat strength",
+        "financial_transmission": "Brand moat allows price premium and retailer pull, resulting in high gross margin. Scale efficiency produces high operating leverage and ROE, supporting generous FCF and capacity to reinvest.",
+        "strongest_counterevidence": "Competition from Nongfu Spring, which has massive resources, could erode brand preference over time; management acknowledged growth slowdown (EV095).",
+        "status": "proven",
+        "evidence_ids": [
+          "EV012",
+          "EV028",
+          "EV072"
+        ],
+        "next_verification": "Market share data and consumer survey for brand preference trends"
+      },
+      {
+        "moat_mechanism": "Cost advantage from integrated nationwide production network",
+        "observable_test": "Manufacturing cost per unit vs peers without comparable plant network; capex returns evidenced by improving gross margin and stable low inventory/revenue ratio (2.4%) despite capacity expansion",
+        "comparison_basis": "Peers like 承德露露 and 维维股份 have lower gross margins but different product mix; no direct peer with identical 14-base network across China",
+        "evidence_result": "Preliminary: inventory/revenue ratio improved -2.0pp, suggesting efficient supply chain. Management claims 14 bases provide low-cost nationwide coverage. However, without detailed manufacturing cost data, cost advantage is partially evidenced.",
+        "financial_transmission": "Lower unit costs directly improves gross margin; proximity to demand reduces transportation costs and improves service levels, reinforcing distribution moat.",
+        "strongest_counterevidence": "Capex extensions (multiple募投项目延期) indicate project delivery risk; if plants are underutilised, fixed costs could hurt margins.",
+        "status": "partial",
+        "evidence_ids": [
+          "EV031",
+          "EV040",
+          "EV041"
+        ],
+        "next_verification": "Disclosed manufacturing cost per unit or plant-level utilisation data"
+      }
+    ],
+    "structural_risks": [
+      "Rising competition from Nongfu Spring and other large players with R&D and channel muscle potentially eroding market share",
+      "Regulatory tightening on functional beverage claims, caffeine limits, or sugar taxes",
+      "Overcapacity risk from aggressive base expansion if category growth decelerates permanently",
+      "International expansion requires significant working capital and may not generate returns for years"
+    ],
+    "interpretation_rule": "Chapter 2 owns market boundary, structure, direct competitors, substitutes and likely response; Chapter 4 owns relative advantage, observable proof and financial persistence."
+  },
+  "key_underwriting_questions": [
+    {
+      "question_id": "Q1",
+      "question": "Can the company deliver ~20% full-year 2026 top-line growth after the disclosed H1 slowdown?",
+      "why_it_matters": "Revenue growth below 15% would force a re-rating of the core growth narrative, reducing fair value by 15-25% as the earnings bridge and PE multiple compress.",
+      "current_answer": "Unresolved; management claimed full-year plan is on track but language non-committal (EV095); Q1 simple-run-rate annualised revenue implies ~12.5% growth, seasonally adjusted ~24%, but H1 sentiment cautious.",
+      "bull_evidence": [
+        "Seasonal-adjusted Q1 revenue growth 24% if historical Q1 share 23.1% holds",
+        "Distribution expansion continues; 14 bases provide capacity for volume",
+        "Management asserts '没有理由不增长目标' signalling confidence"
+      ],
+      "bear_evidence": [
+        "Investor Q&A explicitly states '公司上半年增速进一步放缓'",
+        "Q1 simple-run-rate revenue annualised shows only 12.5% growth YoY",
+        "Competitive intensity from Nongfu and others could accelerate share erosion"
+      ],
+      "decisive_model_variables": [
+        "2026E consolidated revenue growth rate",
+        "Annual revenue growth assumptions 2026E-2028E"
+      ],
+      "affected_financial_lines": [
+        "Revenue (CNY mn)",
+        "Parent net profit",
+        "EPS"
+      ],
+      "evidence_ids": [
+        "EV011",
+        "EV095",
+        "EV036"
+      ],
+      "missing_evidence": [
+        "Actual H1 2026 revenue (released 2026-07-31, not yet loaded into model)",
+        "Monthly sell-through and channel inventory data"
+      ],
+      "next_verification": "2026 semi-annual report and management commentary on H2 guidance"
+    },
+    {
+      "question_id": "Q2",
+      "question": "Is the 2.42pp YoY gross margin expansion in Q1 2026 sustainable, or will raw material costs and competitive pricing pressure reverse it?",
+      "why_it_matters": "A 1pp decline in gross margin reduces annual net profit by ~184 mn (EPS ~0.26), sufficient to alter fair value by ~5 CNY/share.",
+      "current_answer": "Partially sustainable; Q1 benefit likely includes favourable mix and input cost relief. High competition could force promotion and partially offset scale gains. The base case assumes 46% gross margin for 2026, slightly below Q1 level.",
+      "bull_evidence": [
+        "Gross margin +2.42pp YoY (46.89%) driven by mix and cost absorption",
+        "Inventory/revenue ratio down -2.0pp suggests better demand, less obsolescence risk"
+      ],
+      "bear_evidence": [
+        "Commodity prices (PET, sugar) could rise; company has no direct commodity hedge disclosed",
+        "Competition may lead to price/promotion investment, eroding margin"
+      ],
+      "decisive_model_variables": [
+        "Consolidated gross margin %",
+        "Raw material price assumptions"
+      ],
+      "affected_financial_lines": [
+        "Gross margin",
+        "Operating profit",
+        "EPS"
+      ],
+      "evidence_ids": [
+        "EV012",
+        "EV036"
+      ],
+      "missing_evidence": [
+        "Detailed cost-of-sales breakdown by raw material",
+        "Firm commodity price forecast for PET/sugar"
+      ],
+      "next_verification": "Q3 2026 gross margin and management commentary on cost trends"
+    },
+    {
+      "question_id": "Q3",
+      "question": "Can the company improve its OCF/net profit ratio from the depressed 0.36 in Q1 to a level that supports FCF generation and shareholder returns?",
+      "why_it_matters": "Persistent low cash conversion would reduce FCF available for buybacks/dividends, potentially lowering valuation and increasing financial risk despite strong accounting profits.",
+      "current_answer": "Likely to improve over full year; H1 OCF already 2,492 mn (EV039) with H1 net profit unknown. Base case assumes OCF/net profit ratio reaches 0.8 by 2026 and 0.9 by 2027 as working capital normalises.",
+      "bull_evidence": [
+        "H1 OCF rose to 2,492 mn, suggesting seasonal recovery",
+        "Inventory/revenue ratio down -2pp, reducing working capital drag"
+      ],
+      "bear_evidence": [
+        "Receivables/revenue ratio up +0.11pp, showing possible channel credit extension",
+        "OCF/net profit of 0.36 is very low; if full-year ratio stays at 0.6, FCF would be significantly lower"
+      ],
+      "decisive_model_variables": [
+        "OCF/net profit ratio",
+        "Working capital assumptions (receivables, inventory)"
+      ],
+      "affected_financial_lines": [
+        "Operating cash flow",
+        "FCF",
+        "Dividend/buyback capacity"
+      ],
+      "evidence_ids": [
+        "EV016",
+        "EV039"
+      ],
+      "missing_evidence": [
+        "Full H1 net profit to compute exact OCF ratio",
+        "Detailed working capital components"
+      ],
+      "next_verification": "FY2026 annual report cash flow statement"
+    },
+    {
+      "question_id": "Q4",
+      "question": "What is the realistic profit contribution from the electrolyte drink and other 1+6 categories by 2028, and will they require sustained promotional spending?",
+      "why_it_matters": "If second-curve categories fail to reach profitable scale, the growth narrative beyond energy drinks collapses, limiting terminal multiple. Success would add optionality value of 5-10 CNY/share.",
+      "current_answer": "Unquantified; electrolyte likely small and investment-heavy. Added as optionality in valuation (0-5 CNY/share) but base case assumes they contribute marginal profit by 2028.",
+      "bull_evidence": [
+        "Electrolyte category has strong consumer trend and distribution leverage",
+        "Company can cross-subsidise from high-margin energy drink profits"
+      ],
+      "bear_evidence": [
+        "No disclosed revenue or profitability for electrolyte or other categories",
+        "High competitive intensity may require prolonged promotion"
+      ],
+      "decisive_model_variables": [
+        "Segment revenue and margin for electrolyte/other categories",
+        "Optionality value in SOTP"
+      ],
+      "affected_financial_lines": [
+        "Consolidated revenue mix",
+        "EPS (incremental contribution)",
+        "Valuation multiple on outer years"
+      ],
+      "evidence_ids": [
+        "EV027",
+        "EV028",
+        "EV037"
+      ],
+      "missing_evidence": [
+        "Electrolyte and other product revenue and gross margin",
+        "Management guidance on break-even timeline"
+      ],
+      "next_verification": "2026 annual report segment profitability disclosure"
+    },
+    {
+      "question_id": "Q5",
+      "question": "Will the H-share listing and international capex dilute returns or create a value-accretive second curve?",
+      "why_it_matters": "International expansion requires substantial capital; if returns fall below cost of capital, it destroys value. The H-share cornerstone overhang at 248 HKD versus lower current price could also pressure A-share sentiment.",
+      "current_answer": "Uncertain; international operations not yet disclosed. Base case assumes negligible profit contribution and modest capex. Dilution risk minimal if no fresh equity raised, but cornerstone discount could create selling pressure.",
+      "bull_evidence": [
+        "International presence expands TAM and could diversify beyond China",
+        "Management executing buybacks and H-share increase to support valuations"
+      ],
+      "bear_evidence": [
+        "H-share cornerstone cost 248 HKD vs likely lower current market price signals distress",
+        "ASEAN revenue/profit not disclosed, suggesting immateriality"
+      ],
+      "decisive_model_variables": [
+        "International revenue and margin",
+        "Capex allocation and ROI",
+        "Share count dilution risk"
+      ],
+      "affected_financial_lines": [
+        "Capex",
+        "FCF",
+        "EPS (if dilution)",
+        "Valuation multiple on international segment"
+      ],
+      "evidence_ids": [
+        "EV030",
+        "EV093",
+        "EV024"
+      ],
+      "missing_evidence": [
+        "International segment P&L",
+        "H-share current price and cornerstone lock-up details"
+      ],
+      "next_verification": "Full-year 2026 international segment disclosure and H-share trading performance"
+    }
+  ],
+  "forecast_spine": {
+    "forecast_years": [
+      "2026E",
+      "2027E",
+      "2028E"
+    ],
+    "forecast_lines": [
+      {
+        "segment": "consolidated",
+        "metric": "营业收入",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 20875.27,
+        "year_1_value": 24633.0,
+        "year_2_value": 28328.0,
+        "year_3_value": 31727.0,
+        "formula": "Revenue growth 18% (2026E), 15% (2027E), 12% (2028E) from FY2025 base; growth deceleration reflects H1 slowdown and maturing category",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [
+          "EV011",
+          "EV095"
+        ],
+        "key_sensitivity": "+/-5% growth change alters 2026E revenue by ~1,044 mn, EPS by ~1.1 CNY",
+        "missing_inputs": [
+          "actual H1 2026 revenue confirmation"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "毛利",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": null,
+        "year_1_value": 11331.2,
+        "year_2_value": 13172.5,
+        "year_3_value": 14753.1,
+        "formula": "Revenue × assumed gross margin (46.0% 2026E, 46.5% 2027E, 46.5% 2028E)",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [
+          "EV012"
+        ],
+        "key_sensitivity": "1pp margin move = ~246 mn gross profit, ~0.26 CNY EPS",
+        "missing_inputs": [
+          "FY2025 gross margin base (not directly supplied)"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "毛利率",
+        "unit": "%",
+        "base_period": "FY2025",
+        "base_value": null,
+        "year_1_value": 46.0,
+        "year_2_value": 46.5,
+        "year_3_value": 46.5,
+        "formula": "Gross profit / Revenue; based on Q1 2026 46.89% with slight discount for full year and competition",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [
+          "EV012"
+        ],
+        "key_sensitivity": "",
+        "missing_inputs": [
+          "FY2025 gross margin"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "营业利润 (operating profit)",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": null,
+        "year_1_value": 6281.4,
+        "year_2_value": 7420.9,
+        "year_3_value": 8344.2,
+        "formula": "Gross profit - operating expenses (SG&A, R&D) estimated at 20.5% of revenue (2026E), 20.3% (2027E), 20.2% (2028E) based on Q1 spread of 20.2%",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [
+          "EV013",
+          "EV012"
+        ],
+        "key_sensitivity": "",
+        "missing_inputs": [
+          "FY2025 operating expense breakdown"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "营业利润率",
+        "unit": "%",
+        "base_period": "FY2025",
+        "base_value": null,
+        "year_1_value": 25.5,
+        "year_2_value": 26.2,
+        "year_3_value": 26.3,
+        "formula": "Operating profit / revenue; slight improvement on scale",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [
+          "EV013"
+        ],
+        "key_sensitivity": "",
+        "missing_inputs": []
+      }
+    ],
+    "scenarios": [
+      {
+        "scenario": "bull",
+        "probability_pct": 20.0,
+        "operating_assumptions": [
+          "2026E revenue growth 22%, 2027E 18%, 2028E 15% (demand re-accelerates)",
+          "Gross margin 47% (2026E), 48% (2027E), 48.5% (2028E) due to mix and cost tailwinds",
+          "OCF/NP ratio 0.9 (2026E), 1.0 (2027E), 1.0 (2028E)",
+          "Capex/revenue 5% (2026E), 4% (2027E), 3.5% (2028E)",
+          "PE multiple expands to 25x on sustained growth premium"
+        ],
+        "parent_net_profit_cny_mn": 5195.3,
+        "eps_cny": 7.301929178435565,
+        "fcf_cny_mn": 3555.0,
+        "valuation_method": "PE multiple on 2026E EPS",
+        "valuation_multiple": 25.0,
+        "fair_value_per_share": 182.5,
+        "evidence_ids": [
+          "EV011",
+          "EV012"
+        ],
+        "falsification": "Q3 2026 revenue growth below 18% or gross margin below 45%",
+        "missing_inputs": []
+      },
+      {
+        "scenario": "base",
+        "probability_pct": 60.0,
+        "operating_assumptions": [
+          "2026E revenue growth 18%, 2027E 15%, 2028E 12% (growth deceleration normalisation)",
+          "Gross margin 46.0% (2026E), 46.5% (2027E), 46.5% (2028E)",
+          "OCF/NP ratio 0.8, 0.9, 1.0",
+          "Capex/revenue 6%, 5%, 4%",
+          "PE multiple 20x reflecting mid-teens growth profile with high quality"
+        ],
+        "parent_net_profit_cny_mn": 4670.4,
+        "eps_cny": 6.564188792748341,
+        "fcf_cny_mn": 2258.3,
+        "valuation_method": "PE multiple on 2026E EPS",
+        "valuation_multiple": 20.0,
+        "fair_value_per_share": 131.3,
+        "evidence_ids": [
+          "EV011",
+          "EV095"
+        ],
+        "falsification": "FY2026 revenue growth below 14% or OCF/NP ratio below 0.65",
+        "missing_inputs": []
+      },
+      {
+        "scenario": "bear",
+        "probability_pct": 20.0,
+        "operating_assumptions": [
+          "2026E revenue growth 10%, 2027E 8%, 2028E 5% (intense competition, market saturation)",
+          "Gross margin 44% (2026E), 43% (2027E), 42.5% (2028E) due to promotional pressure and input cost inflation",
+          "OCF/NP ratio 0.6 (2026E), 0.7 (2027E), 0.8 (2028E)",
+          "Capex/revenue 7% (2026E) to complete delayed projects",
+          "PE multiple 15x on growth concerns"
+        ],
+        "parent_net_profit_cny_mn": 3961.1,
+        "eps_cny": 5.567276513137088,
+        "fcf_cny_mn": 998.9,
+        "valuation_method": "PE multiple on 2026E EPS",
+        "valuation_multiple": 15.0,
+        "fair_value_per_share": 83.6,
+        "evidence_ids": [
+          "EV095",
+          "EV096"
+        ],
+        "falsification": "Revenue growth exceeds 10% or gross margin stays above 45%",
+        "missing_inputs": []
+      }
+    ],
+    "readiness": "partial",
+    "readiness_reasons": [
+      "Consolidated revenue, profit, margins, OCF and capex drivers sufficiently evidenced for three-year model.",
+      "Energy-drink segment dominates (71.92% of main-business revenue); absolute segment revenue/margin, electrolyte and international economics are missing but immaterial to consolidated forecast given their small weight.",
+      "Share count derived from market cap/close cross-check, EPS consistent with parent profit.",
+      "Valuation closure built from explicit bull/base/bear operating cases with quantified EPS/fair value.",
+      "H1 2026 full results not yet available; growth acceleration question remains open but does not block base-case construction."
+    ]
+  },
+  "market_expectations": {
+    "sell_side_observations": [],
+    "valuation_closure": {
+      "current_price_cny": 126.45,
+      "diluted_share_count_mn": 711.4969034954528,
+      "core_value_per_share_cny": 131.3,
+      "probability_weighted_fair_value_per_share_cny": 132.0,
+      "option_value_per_share_cny": 2.1,
+      "other_adjustments_per_share_cny": 0.0,
+      "fair_value_per_share_cny": 134.1,
+      "expected_return_pct": 6.049822064056931,
+      "formula": "Core value (bull 20%*182.5 + base 60%*131.3 + bear 20%*83.6) = 132.0; plus optionality 2.1 => total 134.1; note that optionality is added outside scenario probabilities as it is not part of the base/bull/bear earnings stream and represents a separate option; final fair value per share 134.1",
+      "rating_consistency_check": "No rating; packet is rating-free",
+      "double_counting_checks": [
+        "Core value already includes base growth assumptions from new categories; optionality bucket reflects incremental success beyond base case, computed separately and not double-counted because base EPS assumes only marginal contribution from second curve per Q4 thesis bridge",
+        "Share count used consistently across all buckets"
+      ],
+      "status": "closed",
+      "missing_inputs": [
+        "Probability of second-curve success requires further industry diligence"
+      ]
+    },
+    "rule": "单家机构是观察值；只有具备样本和口径的多机构数据才可称为一致预期。"
+  },
+  "knowledge_planet": {
+    "importance": "material_alternative_intelligence",
+    "use_rule": "每条线索必须落到模型变化、概率变化、验证变化或拒绝之一。",
+    "items": []
+  },
+  "evidence_index": [
+    {
+      "evidence_id": "EV001",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "Financial-report look-back: 900 days",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV002",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "2026, 半年",
+      "status": "reported",
+      "text": "Compacted 东鹏饮料（集团）股份有限公司2026年半年度报告: 256160 chars -> 116829 chars.",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV003",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "Compacted 东鹏饮料（集团）股份有限公司2025年年度报告: 343370 chars -> 126340 chars.",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV004",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "20260731, 2026, 半年",
+      "status": "reported",
+      "text": "20260731: 东鹏饮料（集团）股份有限公司2026年半年度报告",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV005",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "20260430, 2026, 季度",
+      "status": "reported",
+      "text": "20260430: 东鹏饮料（集团）股份有限公司2026年第一季度报告",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV006",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "20250416, 2025, 季度",
+      "status": "reported",
+      "text": "20250416: 东鹏饮料（集团）股份有限公司2025年第一季度报告",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV007",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "20241030, 2024, 季度",
+      "status": "reported",
+      "text": "20241030: 东鹏饮料（集团）股份有限公司2024年第三季度报告",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV008",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "20260331, 2025, 年度",
+      "status": "reported",
+      "text": "20260331: 东鹏饮料（集团）股份有限公司2025年年度报告",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV009",
+      "source_module": "earnings_model",
+      "variable": "unmapped",
+      "period": "Q1, 20260331",
+      "status": "reported",
+      "text": "/ latest reported / Q1 / 20260331 / 5888248861.37 / 1257422750.29 / 23552995445.48 / 5029691001.16 / 25973822196.3052 / 5452682640.9372 / historical median 0331 share 23.1% /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV010",
+      "source_module": "earnings_model",
+      "variable": "unmapped",
+      "period": "FY, 20251231",
+      "status": "reported",
+      "text": "/ latest annual / FY / 20251231 / 20875273117.52 / 4415263147.79 / 20875273117.52 / 4415263147.79 / 20875273117.52 / 4415263147.79 / FY actual /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV011",
+      "source_module": "earnings_model",
+      "variable": "revenue",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ Revenue base / 5888248861.37 / N/A / YoY: 20260331 vs 20250331 / top-line starting point for volume × price × mix /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV012",
+      "source_module": "earnings_model",
+      "variable": "segment_margin",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ Gross margin / 46.8897% / +2.42pp / YoY: 20260331 vs 20250331 / main bridge from demand to gross profit /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV013",
+      "source_module": "earnings_model",
+      "variable": "unmapped",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ Operating margin / 26.6678% / +1.12pp / YoY: 20260331 vs 20250331 / tests pricing, mix, and cost absorption /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV014",
+      "source_module": "earnings_model",
+      "variable": "segment_margin",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ Net margin / 21.3548% / +1.14pp / YoY: 20260331 vs 20250331 / captures final earnings conversion /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV015",
+      "source_module": "earnings_model",
+      "variable": "operating_expense",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ Finance-expense ratio / 0.2184% / +0.59pp / YoY: 20260331 vs 20250331 / captures leverage drag or relief /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV016",
+      "source_module": "earnings_model",
+      "variable": "profit_or_eps",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ OCF / net profit / 0.3599 / N/A / YoY: 20260331 vs 20250331 / tests earnings quality and cash realization /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV017",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "Look-back window: 30 days",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV018",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "/ 一般公告 / 11 /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV019",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "/ 治理/人事 / 4 /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV020",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "/ 回购/增减持 / 2 /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV021",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "/ 分红/权益 / 1 /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV022",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "/ 业绩/财报 / 1 /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV023",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "/ 并购/投资 / 1 /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV024",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "20260804, 2026-08-04",
+      "status": "reported",
+      "text": "/ 20260804 / 回购/增减持 / 605499.SH / 东鹏饮料 / 东鹏饮料（集团）股份有限公司关于以集中竞价交易方式回购A股股份的进展公告 / http://www.cninfo.com.cn/new/disclosure/detail?stockCode=605499&announcementId=1225455345&orgId=9900041766&announcementTime=2026-08-04 /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV025",
+      "source_module": "company_business_model",
+      "variable": "segment_volume",
+      "period": "2026, 半年, 2015",
+      "status": "reported",
+      "text": "/ product_manufacturer / 产品制造 / 产能出货型 / quantified disclosure / 东鹏饮料（集团）股份有限公司2026年半年度报告: 一、报告期内公司所属行业及主营业务情况说明 （一）所属行业情况说明 公司所属行业为饮料制造业下的功能饮料细分赛道，行业主管部门为国家市场监督管理总局、 国家卫生健康委员会，行业自律组织为中国饮料工业协会、中国食品工业协会。 根据国家标准GB/T10789-2015《饮料通则》定义，特殊用途饮料指加入特定成分、适配特定 人群需求的液体...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV026",
+      "source_module": "company_business_model",
+      "variable": "unmapped",
+      "period": "2026, 半年, 2015",
+      "status": "reported",
+      "text": "/ brand_channel_consumer / 品牌消费 / 渠道动销型 / quantified disclosure / 东鹏饮料（集团）股份有限公司2026年半年度报告: 一、报告期内公司所属行业及主营业务情况说明 （一）所属行业情况说明 公司所属行业为饮料制造业下的功能饮料细分赛道，行业主管部门为国家市场监督管理总局、 国家卫生健康委员会，行业自律组织为中国饮料工业协会、中国食品工业协会。 根据国家标准GB/T10789-2015《饮料通则》定义，特殊用途饮料指加入特定成分、适配特定 人群需求的...",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV027",
+      "source_module": "company_business_model",
+      "variable": "segment_margin",
+      "period": "2026, 半年",
+      "status": "reported",
+      "text": "/ core_revenue_engine / semiannual / 东鹏饮料（集团）股份有限公司2026年半年度报告: 报告期内，公司主营业务为饮料的研发、生产及销售，持续深化“1+6”多品类战略布局，核 / Defines what actually drives the income statement. /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV028",
+      "source_module": "company_business_model",
+      "variable": "unmapped",
+      "period": "2026, 半年",
+      "status": "reported",
+      "text": "/ segment_mix / semiannual / 东鹏饮料（集团）股份有限公司2026年半年度报告: 报告期内，公司主营业务收入主要来自能量饮料，能量饮料收入占比为 71.92%；电解质饮料 / Shows whether different profit pools are being mixed together. /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV029",
+      "source_module": "company_business_model",
+      "variable": "unmapped",
+      "period": "2026, 半年",
+      "status": "reported",
+      "text": "/ customer_and_channel / semiannual / 东鹏饮料（集团）股份有限公司2026年半年度报告: 内履行的履约义务，本集团按照履约进度，在一段时间内确认收入：(1)客户在本集团履约的同时 / Reveals demand source, concentration, and market validation. /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV030",
+      "source_module": "company_business_model",
+      "variable": "unmapped",
+      "period": "2026, 半年",
+      "status": "reported",
+      "text": "/ geography / semiannual / 东鹏饮料（集团）股份有限公司2026年半年度报告: 公司国际化战略从产品出口步入本土化运营与供应链出海并行的新阶段，产品已进入全球 36 / Explains whether growth depends on a specific geography or expansion lane. /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV031",
+      "source_module": "company_business_model",
+      "variable": "utilization_or_backlog",
+      "period": "2026, 半年",
+      "status": "reported",
+      "text": "/ reinvestment_engine / semiannual / 东鹏饮料（集团）股份有限公司2026年半年度报告: 2026 年 6 月末，公司已在全国规划布局 14 个生产基地，其中 12 个已建成投产，产能覆盖华南、 / Shows how today's cash is being converted into tomorrow's earnings power. /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV032",
+      "source_module": "company_business_model",
+      "variable": "unmapped",
+      "period": "2026, 半年, 2015",
+      "status": "reported",
+      "text": "/ product / semiannual / 东鹏饮料（集团）股份有限公司2026年半年度报告: 一、报告期内公司所属行业及主营业务情况说明 （一）所属行业情况说明 公司所属行业为饮料制造业下的功能饮料细分赛道，行业主管部门为国家市场监督管理总局、 国家卫生健康委员会，行业自律组织为中国饮料工业协会、中国食品工业协会。 根据国家标准GB/T10789-2015《饮料通则》定义，特殊用途饮料指加入特定成分、适配特定 人群需求的液体饮料，涵盖运动饮料、营养素饮料、能量饮料、电解质饮料等子类。公司核心产 品聚焦...",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV033",
+      "source_module": "industry_cycle",
+      "variable": "balance_sheet",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "Do not state R32, R125, lithium, copper, gold, inventory, or spread changes as facts unless they appear in the evidence table.",
+      "chapter_id": "chapter_2_industry_chain"
+    },
+    {
+      "evidence_id": "EV034",
+      "source_module": "industry_cycle",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "missing",
+      "text": "If cycle evidence says bottom-testing or evidence-limited, use language such as `bottom-right validation stage`, `右侧待验证`, or `needs confirmation`.",
+      "chapter_id": "chapter_2_industry_chain"
+    },
+    {
+      "evidence_id": "EV035",
+      "source_module": "industry_kpi",
+      "variable": "segment_margin",
+      "period": "unspecified",
+      "status": "missing",
+      "text": "/ coverage_grade / report_types_seen / missing_report_types / answered_questions / core_pack_status / confidence_read /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV036",
+      "source_module": "industry_kpi",
+      "variable": "segment_margin",
+      "period": "20251231, 20260331",
+      "status": "reported",
+      "text": "/ accounting_reconciliation / Check signs, units, periods, and cross-statement consistency before a number enters the PM memo. / gross_margin_not_reaching_operating_profit: 20251231->20260331: revenue growth -71.79%, gross margin change 1.98pp, operating ma...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV037",
+      "source_module": "industry_kpi",
+      "variable": "unmapped",
+      "period": "2026, 半年",
+      "status": "reported",
+      "text": "/ segment_economics_depth / Decide whether each business line has enough disclosed scale, growth, margin, cash quality, and valuation treatment. / 东鹏饮料（集团）股份有限公司2026年半年度报告: 一、报告期内公司所属行业及主营业务情况说明 （一）所属行业情况说明 公司所属行业为饮料制造业下的功能饮料细分赛道，行业主管部门为国家市场监督管理总局、 国家卫生健康委员...",
+      "chapter_id": "chapter_2_industry_chain"
+    },
+    {
+      "evidence_id": "EV038",
+      "source_module": "industry_kpi",
+      "variable": "unmapped",
+      "period": "2026, 半年",
+      "status": "reported",
+      "text": "/ footnote_radar / Surface decision-relevant notes that can hide risk or change confidence. / impairment_policy: 东鹏饮料（集团）股份有限公司2026年半年度报告: 非经常性损益项目 金额 适用） 非流动性资产处置损益，包括已计提资产减值准备的冲销部分 29,002.32 不适用 / impairment_policy: 东鹏饮料（集团）股份有限公司2026年半年度报告: 适用） 非流动性资产处置损...",
+      "chapter_id": "chapter_2_industry_chain"
+    },
+    {
+      "evidence_id": "EV039",
+      "source_module": "industry_kpi",
+      "variable": "profit_or_eps",
+      "period": "2026, 半年",
+      "status": "reported",
+      "text": "/ cash_flow_quality_decomposition / Separate accounting profit from cash conversion, working-capital drag, and demand visibility. / operating_cash_flow: 东鹏饮料（集团）股份有限公司2026年半年度报告: 2,597,599,384.58 2,270,463,283.77 14.41 损益的净利润 经营活动产生的现金流量净额 2,492,600,974.20 ...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV040",
+      "source_module": "industry_kpi",
+      "variable": "capex_or_roic",
+      "period": "2026, 半年",
+      "status": "reported",
+      "text": "/ capex_cip_return_bridge / Test whether capex, construction-in-progress, or investment assets are building returns or just absorbing capital. / long_term_equity_investments: 东鹏饮料（集团）股份有限公司2026年半年度报告: (4) 本期实际核销的长期应收款情况 其中重要的长期应收款核销情况 (2) 长期股权投资的减值测试情况 / lo...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV041",
+      "source_module": "industry_kpi",
+      "variable": "utilization_or_backlog",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ mdna_text_change / Read management wording changes, proof-backed claims, risk-language upgrades, and abnormal silence across reports. / management_claim_with_evidence: 东鹏饮料（集团）股份有限公司2025年年度报告: 1、前瞻性产能战略布局，支撑全国化与国际化 公司已构建覆盖全国核心市场的战略性产能网络。截至目前，在全国范围内已完成 14 ...",
+      "chapter_id": "chapter_2_industry_chain"
+    },
+    {
+      "evidence_id": "EV042",
+      "source_module": "industry_kpi",
+      "variable": "segment_margin",
+      "period": "2026, 半年",
+      "status": "reported",
+      "text": "/ non_recurring_profit_quality / Distinguish core operating profit from investment income, fair-value moves, subsidies, asset disposals, impairment, and other one-off items. / impairment: 东鹏饮料（集团）股份有限公司2026年半年度报告: 其中：利息费用 45,169,719.31 50,129,868.35 利息收入 17...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV043",
+      "source_module": "market_expectation",
+      "variable": "unmapped",
+      "period": "2026-08-05",
+      "status": "reported",
+      "text": "Valuation trade date: 2026-08-05",
+      "chapter_id": "chapter_6_expectations"
+    },
+    {
+      "evidence_id": "EV044",
+      "source_module": "market_expectation",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "/ Market cap (CNY) / 89968783447 / current equity value /",
+      "chapter_id": "chapter_6_expectations"
+    },
+    {
+      "evidence_id": "EV045",
+      "source_module": "market_expectation",
+      "variable": "valuation",
+      "period": "TTM",
+      "status": "reported",
+      "text": "/ PE TTM / 18.3336 / earnings multiple the market is paying now /",
+      "chapter_id": "chapter_7_valuation_rating"
+    },
+    {
+      "evidence_id": "EV046",
+      "source_module": "market_expectation",
+      "variable": "revenue",
+      "period": "TTM",
+      "status": "reported",
+      "text": "/ PS TTM / 3.9841 / sales multiple the market is paying now /",
+      "chapter_id": "chapter_6_expectations"
+    },
+    {
+      "evidence_id": "EV047",
+      "source_module": "market_expectation",
+      "variable": "valuation",
+      "period": "TTM",
+      "status": "calculated",
+      "text": "/ Implied TTM earnings (CNY) / 4907316808.8646 / market cap divided by PE TTM /",
+      "chapter_id": "chapter_7_valuation_rating"
+    },
+    {
+      "evidence_id": "EV048",
+      "source_module": "market_expectation",
+      "variable": "revenue",
+      "period": "TTM",
+      "status": "calculated",
+      "text": "/ Implied TTM sales (CNY) / 22581959149.3687 / market cap divided by PS TTM /",
+      "chapter_id": "chapter_6_expectations"
+    },
+    {
+      "evidence_id": "EV049",
+      "source_module": "market_expectation",
+      "variable": "valuation",
+      "period": "unspecified",
+      "status": "calculated",
+      "text": "/ PE percentile / 0.7 / 5-year valuation position /",
+      "chapter_id": "chapter_7_valuation_rating"
+    },
+    {
+      "evidence_id": "EV050",
+      "source_module": "market_expectation",
+      "variable": "valuation",
+      "period": "unspecified",
+      "status": "calculated",
+      "text": "/ PB percentile / 2.6 / 5-year valuation position /",
+      "chapter_id": "chapter_7_valuation_rating"
+    }
+  ],
+  "chapter_packets": [
+    {
+      "chapter_id": "chapter_1_company",
+      "title": "一、公司是谁、如何赚钱",
+      "reader_goal": "让普通投资者理解产品、客户、定价、收入确认、成本与现金回收。",
+      "selected_evidence_ids": [
+        "EV001",
+        "EV002",
+        "EV003",
+        "EV004",
+        "EV005",
+        "EV006",
+        "EV007",
+        "EV008",
+        "EV009",
+        "EV010",
+        "EV013",
+        "EV015"
+      ],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_2_industry_chain",
+      "title": "二、产业链位置与行业格局",
+      "reader_goal": "解释上下游、供需与价格形成，并把产业链变化传导到公司经营。",
+      "selected_evidence_ids": [
+        "EV033",
+        "EV034",
+        "EV037",
+        "EV038",
+        "EV041",
+        "EV083",
+        "EV085",
+        "EV086",
+        "EV087",
+        "EV088",
+        "EV089"
+      ],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_3_profit_pools",
+      "title": "三、业务拆解与核心利润池",
+      "reader_goal": "按核心、成长、波动和期权业务拆解收入、利润、现金与资本占用。",
+      "selected_evidence_ids": [],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_4_competition",
+      "title": "四、竞争优势、护城河与主要短板",
+      "reader_goal": "用历史或真同行验证规模、品牌、渠道、技术和成本优势。",
+      "selected_evidence_ids": [
+        "EV067",
+        "EV068",
+        "EV070",
+        "EV071",
+        "EV072",
+        "EV073",
+        "EV074"
+      ],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_5_growth_forecast",
+      "title": "五、增长逻辑、关键分歧与盈利预测",
+      "reader_goal": "围绕三至五个关键问题，把经营变量传导到三年盈利和现金流。",
+      "selected_evidence_ids": [
+        "EV011",
+        "EV012",
+        "EV014",
+        "EV016",
+        "EV025",
+        "EV027",
+        "EV035",
+        "EV036",
+        "EV039",
+        "EV040",
+        "EV042",
+        "EV055"
+      ],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_6_expectations",
+      "title": "六、市场预期差、风险与验证",
+      "reader_goal": "区分真实一致预期、单家卖方和反向隐含假设，并给出证伪日历。",
+      "selected_evidence_ids": [
+        "EV043",
+        "EV044",
+        "EV046",
+        "EV048"
+      ],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_7_valuation_rating",
+      "title": "七、估值、评级与投资结论",
+      "reader_goal": "在完成公司、产业、模型和预期分析后，最后给出估值、评级与动作。",
+      "selected_evidence_ids": [
+        "EV045",
+        "EV047",
+        "EV049",
+        "EV050",
+        "EV054",
+        "EV056",
+        "EV060",
+        "EV075",
+        "EV076",
+        "EV077",
+        "EV078",
+        "EV079"
+      ],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    }
+  ],
+  "preprocessing_notes": [
+    "原始上下文不直接成为公共报告结构。",
+    "知识星球线索已按目标实体、变量、允许用途和验证门槛重新路由。",
+    "所有章节必须围绕读者问题展开，数据只作为决定性证据进入正文。"
+  ]
+}

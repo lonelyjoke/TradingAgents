@@ -1,0 +1,182 @@
+{
+  "llm_calls": 22,
+  "tool_calls": 2,
+  "tokens_in": 601662,
+  "tokens_out": 107350,
+  "cached_tokens_in": 58880,
+  "uncached_tokens_in": 542782,
+  "cache_hit_ratio": 0.0979,
+  "llm_errors": 0,
+  "node_breakdown": {
+    "Portfolio Manager": {
+      "llm_calls": 2,
+      "tool_calls": 0,
+      "tokens_in": 139734,
+      "tokens_out": 35541,
+      "cached_tokens_in": 640,
+      "llm_errors": 0
+    },
+    "Bear Researcher": {
+      "llm_calls": 2,
+      "tool_calls": 0,
+      "tokens_in": 77001,
+      "tokens_out": 5012,
+      "cached_tokens_in": 21120,
+      "llm_errors": 0
+    },
+    "Bull Researcher": {
+      "llm_calls": 2,
+      "tool_calls": 0,
+      "tokens_in": 73295,
+      "tokens_out": 4084,
+      "cached_tokens_in": 0,
+      "llm_errors": 0
+    },
+    "Research Manager": {
+      "llm_calls": 1,
+      "tool_calls": 0,
+      "tokens_in": 48304,
+      "tokens_out": 8970,
+      "cached_tokens_in": 0,
+      "llm_errors": 0
+    },
+    "DeepSeekChatOpenAI": {
+      "llm_calls": 2,
+      "tool_calls": 0,
+      "tokens_in": 47708,
+      "tokens_out": 30507,
+      "cached_tokens_in": 0,
+      "llm_errors": 0
+    },
+    "Neutral Analyst": {
+      "llm_calls": 2,
+      "tool_calls": 0,
+      "tokens_in": 43288,
+      "tokens_out": 3511,
+      "cached_tokens_in": 3456,
+      "llm_errors": 0
+    },
+    "Conservative Analyst": {
+      "llm_calls": 2,
+      "tool_calls": 0,
+      "tokens_in": 41750,
+      "tokens_out": 3796,
+      "cached_tokens_in": 3456,
+      "llm_errors": 0
+    },
+    "Aggressive Analyst": {
+      "llm_calls": 2,
+      "tool_calls": 0,
+      "tokens_in": 38328,
+      "tokens_out": 4035,
+      "cached_tokens_in": 3456,
+      "llm_errors": 0
+    },
+    "News Analyst": {
+      "llm_calls": 3,
+      "tool_calls": 0,
+      "tokens_in": 35500,
+      "tokens_out": 4386,
+      "cached_tokens_in": 21632,
+      "llm_errors": 0
+    },
+    "Fundamentals Analyst": {
+      "llm_calls": 1,
+      "tool_calls": 0,
+      "tokens_in": 29191,
+      "tokens_out": 3302,
+      "cached_tokens_in": 1536,
+      "llm_errors": 0
+    },
+    "Trader": {
+      "llm_calls": 2,
+      "tool_calls": 0,
+      "tokens_in": 21191,
+      "tokens_out": 2896,
+      "cached_tokens_in": 3584,
+      "llm_errors": 0
+    },
+    "Market Analyst": {
+      "llm_calls": 1,
+      "tool_calls": 0,
+      "tokens_in": 6372,
+      "tokens_out": 1310,
+      "cached_tokens_in": 0,
+      "llm_errors": 0
+    },
+    "tools_news": {
+      "llm_calls": 0,
+      "tool_calls": 2,
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "cached_tokens_in": 0,
+      "llm_errors": 0
+    }
+  },
+  "model_breakdown": {
+    "deepseek-v4-flash": {
+      "llm_calls": 18,
+      "tokens_in": 385103,
+      "tokens_out": 38568,
+      "cached_tokens_in": 58240,
+      "llm_errors": 0
+    },
+    "deepseek-v4-pro": {
+      "llm_calls": 4,
+      "tokens_in": 216559,
+      "tokens_out": 68782,
+      "cached_tokens_in": 640,
+      "llm_errors": 0
+    }
+  },
+  "estimated_llm_cost_cny": 1.4656,
+  "estimated_model_costs_cny": {
+    "deepseek-v4-flash": 0.405164,
+    "deepseek-v4-pro": 1.060465
+  },
+  "cost_estimate_priced_tokens": 709012,
+  "cost_pricing_snapshot": {
+    "as_of": "2026-08-01",
+    "unit": "CNY per 1M tokens",
+    "deepseek": {
+      "deepseek-v4-flash": {
+        "cache_hit": 0.02,
+        "cache_miss": 1.0,
+        "output": 2.0
+      },
+      "deepseek-v4-pro": {
+        "cache_hit": 0.025,
+        "cache_miss": 3.0,
+        "output": 6.0
+      }
+    }
+  },
+  "elapsed_seconds": 1606.966,
+  "selected_analysts": [
+    "market",
+    "news",
+    "fundamentals"
+  ],
+  "quick_model": "deepseek-v4-flash",
+  "deep_model": "deepseek-v4-pro",
+  "provider": "deepseek",
+  "token_policy": {
+    "analyst_context_chars": 28000,
+    "research_context_chars": 32000,
+    "trader_context_chars": 16000,
+    "risk_context_chars": 12000,
+    "portfolio_context_chars": 36000,
+    "structured_research_prompt_chars": 36000,
+    "underwriting_prompt_chars": 48000,
+    "quick_max_output_tokens": 8000,
+    "deep_max_output_tokens": 16000,
+    "structured_research_cache_enabled": true,
+    "structured_research_cache_status": "miss",
+    "a_share_tool_requery_enabled": false,
+    "pm_editorial_review_mode": "on_issues",
+    "deepseek_quick_thinking": "disabled",
+    "deepseek_quick_reasoning_effort": "medium",
+    "deepseek_deep_thinking": "enabled",
+    "deepseek_deep_reasoning_effort": "medium"
+  }
+}

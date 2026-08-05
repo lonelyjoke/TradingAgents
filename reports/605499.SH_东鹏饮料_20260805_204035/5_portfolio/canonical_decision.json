@@ -1,0 +1,1161 @@
+{
+  "rating": "Hold",
+  "rating_posture": "中性；12个月目标价131.98元，对应现价空间4.4%。评级依据为基本面与估值，后续按关键经营证据调整。",
+  "research_readiness": "partial",
+  "one_line_thesis": "东鹏饮料2026E收入增速大概率回落至16%附近，合同负债下滑与竞争加剧带来不确定性，但当前PE处于5年极端低位已定价较多悲观预期；H1完整财报缺失构成核心数据缺口，需等待增速企稳与渠道信号改善后再做方向性加仓。",
+  "research_questions": [
+    "Q1: 2026E收入增速能否兑现18%目标？H1合同负债同比-14.14%是否预示着下半年进一步放缓？",
+    "Q2: 46%的毛利率在竞争加剧与成本反弹风险下是否可持续？",
+    "Q3: OCF/净利润比率能否从Q1的0.36改善至全年0.8以上，从而支撑FCF与股东回报？",
+    "Q4: 电解质饮料“补水啦”能否在2028年前形成有意义的利润贡献？",
+    "Q5: H股上市及国际扩张是否会带来摊薄或回报率低于资本成本的风险？"
+  ],
+  "question_verdicts": [
+    {
+      "question": "Q1: 2026E收入增速能否兑现18%目标？H1合同负债同比-14.14%是否预示着下半年进一步放缓？",
+      "why_decisive": "收入增速是估值核心驱动，每5pp变化影响EPS约1.1元，直接决定公允价值与评级。",
+      "conclusion": "现有证据不足以支持18%增速。管理层已确认H1增速放缓（EV095），空方提出的合同负债同比-14.14%虽未被官方EV直接验证，但作为渠道信心的负面领先信号不容忽视。综合判断，将2026E收入增速从18%下修至16%是更稳健的基准。",
+      "evidence_used": [
+        "EV011: 2026Q1收入58.88亿元，简单年化增速约12.5%，季调后隐含约24%，但管理层承认H1增速放缓。",
+        "EV095: 投资者互动平台明确“公司上半年增速进一步放缓”。",
+        "辩论数据：合同负债51.3亿元同比-14.14%（空方引用，未在模型中获得官方EV标签，标记为未验证渠道信号）。",
+        "EV016: 应收账款/收入同比+0.11pp，显示渠道信用可能放宽，与合同负债下滑形成交叉印证。"
+      ],
+      "strongest_counterevidence": "季调后Q1收入年化增速仍可达24%，若历史季节性规律成立，下半年发力仍可接近18%；管理层“没有理由不增长目标”为软性支持，但缺乏硬数据支撑。",
+      "model_or_valuation_effect": "将2026E收入增速从18%下修至16%，收入从246.33亿元下调至242.15亿元，EPS从6.56元降至约6.32元，公允价值从131.3元降至约126元（20x PE）。",
+      "confidence": "medium",
+      "next_verification": "获取已发布但PDF提取失败的2026年半年报（2026-07-31发布），验证H1实际收入增速与管理层H2指引；观察8-9月合同负债变化。"
+    },
+    {
+      "question": "Q2: 46%的毛利率在竞争加剧与成本反弹风险下是否可持续？",
+      "why_decisive": "毛利率每降1pp，归母净利润减少约1.84亿元，EPS下降0.26元，对公允价值和评级有实质性影响。",
+      "conclusion": "Q1毛利率46.89%受益于成本端暂时缓解与产品结构优化，但竞争烈度上升（农夫山泉等）和潜在成本反弹（PET、白糖）使得全年维持46%存在压力，下调至45.5%作为稳健基准更为合理。",
+      "evidence_used": [
+        "EV012: Q1毛利率46.89%，同比+2.42pp，驱动为结构优化与成本下降。",
+        "EV036: 会计核对提示毛利率与营业利润的期间基础差异。",
+        "竞争压力：空方逻辑指出农夫山泉等对手促销投入可能侵蚀毛利率，公司无公开商品对冲。",
+        "外汇衍生品公告暗示管理层意识到成本/汇率波动风险。"
+      ],
+      "strongest_counterevidence": "规模效应与高端品类占比提升可能部分对冲成本压力；存货/收入比下降-2.0pp表明动销良好，促销压力可能有限。",
+      "model_or_valuation_effect": "将2026E毛利率从46%下调至45.5%，结合收入调整，EPS额外下降约0.11元（总计下降约0.24元），公允价值相应下调。",
+      "confidence": "medium",
+      "next_verification": "2026年Q3毛利率数据；PET和白糖期货价格趋势的监控。"
+    },
+    {
+      "question": "Q3: OCF/净利润比率能否从Q1的0.36改善至全年0.8以上，从而支撑FCF与股东回报？",
+      "why_decisive": "持续的现金转化恶化将削弱FCF、降低股息可持续性，并增加估值折扣。",
+      "conclusion": "H1 OCF已恢复至24.93亿元，季节性回升符合预期；全年比率达到0.8的可能性较高，但需警惕应收款项上升带来的拖累。",
+      "evidence_used": [
+        "EV039: H1 OCF为24.93亿元，季节性恢复。",
+        "EV016: 应收账款/收入+0.11pp，显示渠道信用可能放宽，对现金转化构成轻微拖累。",
+        "存货/收入比改善，减少了营运资本占用。"
+      ],
+      "strongest_counterevidence": "Q1 OCF/净利润仅0.36，若下半年回款不及预期，全年比率可能仅为0.65-0.7。",
+      "model_or_valuation_effect": "维持2026E OCF/NP比率0.8的假设，FCF约22.6亿元；若降至0.7，FCF将减少约4.7亿元，影响股息支付能力和估值支撑。",
+      "confidence": "medium",
+      "next_verification": "FY2026年度报告现金流量表，特别关注经营现金流与净利润的匹配度。"
+    },
+    {
+      "question": "Q4: 电解质饮料“补水啦”能否在2028年前形成有意义的利润贡献？",
+      "why_decisive": "若第二曲线无法起量，长期增长叙事将局限于能量饮料，限制终端估值倍数和期权价值。",
+      "conclusion": "当前无收入/利润披露，仅作为低概率期权；不应在基准盈利中体现，而保留为独立期权价值。",
+      "evidence_used": [
+        "EV027/EV028: 电解质饮料属于“1+6”品类，但未披露细分收入或盈利能力。",
+        "消费者趋势：电解质水需求增长，但竞争同样激烈。"
+      ],
+      "strongest_counterevidence": "公司拥有强大的分销网络和品牌实力，具备推广新品的能力，成功的话可带来显著增量。",
+      "model_or_valuation_effect": "保留期权价值2.1元/股，不进基准EPS；成功验证后将提升公允价值5-10元/股。",
+      "confidence": "low",
+      "next_verification": "2026年年报或半年报是否披露电解质饮料的细分收入与利润。"
+    },
+    {
+      "question": "Q5: H股上市及国际扩张是否会带来摊薄或回报率低于资本成本的风险？",
+      "why_decisive": "若H股发行折价较高，将摊薄A股每股价值；国际扩张若消耗大量资本且回报低，将损害股东价值。",
+      "conclusion": "不确定性高，国际业务尚未披露，H股基石成本可能高于当前A股价格，但回购和授权显示管理层积极管理；当前作为中性风险处理。",
+      "evidence_used": [
+        "EV030: 国际业务已拓展至36+国家，但无收入利润数据。",
+        "EV093/EV024: H股基石成本约248港元，可能高于现价，构成心理压力但非直接摊薄。",
+        "回购和股东回报规划体现了管理层维护价值的意愿。"
+      ],
+      "strongest_counterevidence": "若H股发行价显著低于净值，将导致每股净资产稀释，且国际业务亏损风险可能被市场纳入定价。",
+      "model_or_valuation_effect": "未直接调整模型，但作为风险列表；若国际业务亏损扩大，将影响2027-2028年盈利预测。",
+      "confidence": "low",
+      "next_verification": "H股上市进度、定价及国际业务分部报表的首次披露。"
+    }
+  ],
+  "forecast_takeaways": [
+    {
+      "takeaway": "2026年收入增速大概率达不到18%，更可能在15-16%区间；H1放缓已被管理层确认，合同负债下降暗示渠道信心不足。",
+      "evidence_anchor": "EV095明确上半年增速进一步放缓；空方提出的合同负债下降14.14%（等待官方数据验证）构成负面领先信号。",
+      "financial_implication": "下调2026E收入至242.15亿元（+16%），EPS下降约0.24元至6.32元。",
+      "confidence_and_risk": "中等置信度；若H1实际增速低于12%，则下行风险显著。"
+    },
+    {
+      "takeaway": "毛利率将面临温和压缩，全年大概率在45-46%区间，但极度悲观情景（<44%）概率较低。",
+      "evidence_anchor": "Q1毛利率46.89%为高基数，但成本端和竞争压力不可忽视；公司进行外汇衍生品交易显示成本管理意识。",
+      "financial_implication": "毛利率假设从46%下调至45.5%，叠加收入调整，共同拉低EPS。",
+      "confidence_and_risk": "中等置信度；若PET和糖价大幅上涨，或促销战升级，可能跌破45%，届时需重新评估。"
+    },
+    {
+      "takeaway": "现金转化预计改善，但需关注应收账款和信用政策的边际变化；全年OCF/净利润比率有望达到0.75-0.8。",
+      "evidence_anchor": "H1 OCF 24.93亿元显示季节性回升，但应收账款比率上升提醒仍需谨慎。",
+      "financial_implication": "维持FCF约22亿元预期，支撑股息和回购；若比率仅0.65，FCF将承压。",
+      "confidence_and_risk": "中等置信度；若下半年为保增长而放宽回款条件，现金转换可能不及预期。"
+    }
+  ],
+  "forecast_assumptions": [
+    {
+      "parameter": "2026E 收入增速",
+      "affected_business": "集团合并营收",
+      "historical_anchor": "FY2025收入208.75亿元；2026Q1收入58.88亿元，季调后隐含增速最高24%，但半年指引疲软",
+      "evidence_status": "analyst_estimate",
+      "base_case": "16% (约242.15亿元)",
+      "bull_case": "18% (246.33亿元)，若H2加速且合同负债回升",
+      "bear_case": "10% (229.6亿元)，若竞争致份额下降",
+      "rationale_and_evidence": "综合Q1实际、半年放缓信号及合同负债下滑，选择保守但非极端情景。",
+      "sensitivity": "每1pp变动影响收入2.09亿元，EPS约0.22元。",
+      "confidence": "medium",
+      "verification_gate": "2026年半年报实际增速 vs 假设。"
+    },
+    {
+      "parameter": "2026E 毛利率",
+      "affected_business": "集团合并毛利",
+      "historical_anchor": "2026Q1 毛利率46.89%",
+      "evidence_status": "analyst_estimate",
+      "base_case": "45.5%",
+      "bull_case": "46.5%（成本端持续友好）",
+      "bear_case": "44%（成本上涨+促销）",
+      "rationale_and_evidence": "在Q1数据上打一定折扣以反映全年平均压力，未假设极端恶化。",
+      "sensitivity": "每1pp变动约影响净利润1.84亿元，EPS 0.26元。",
+      "confidence": "medium",
+      "verification_gate": "2026年Q3报告毛利率。"
+    },
+    {
+      "parameter": "2026E OCF/净利润比率",
+      "affected_business": "集团现金流",
+      "historical_anchor": "FY2025 比率未披露；H1 2026 OCF 24.93亿元",
+      "evidence_status": "analyst_estimate",
+      "base_case": "0.8",
+      "bull_case": "0.9",
+      "bear_case": "0.65",
+      "rationale_and_evidence": "基于历史季节性及H1数据，假设营运资金正常化。",
+      "sensitivity": "比率0.1变动影响FCF约4-5亿元。",
+      "confidence": "medium",
+      "verification_gate": "FY2026现金流报表。"
+    },
+    {
+      "parameter": "2026E 估值倍数 (PE)",
+      "affected_business": "估值",
+      "historical_anchor": "TTM PE低位0.7%分位",
+      "evidence_status": "analyst_estimate",
+      "base_case": "20x (市场对高质量增长重新定价时)",
+      "bull_case": "25x (增长超预期)",
+      "bear_case": "16x (增长回落至12-14%且毛利率承压)",
+      "rationale_and_evidence": "在盈利环境下更有把握给20倍，而非单看PE分位。",
+      "sensitivity": "倍数差异巨大。",
+      "confidence": "medium",
+      "verification_gate": "H1报告后市场反应与相对强弱修复。"
+    }
+  ],
+  "core_theses": [
+    {
+      "rank": 1,
+      "takeaway": "市场过度定价了东鹏的增长终结，但合同负债下滑和竞争加剧意味着未来两年增速将正常化至15%左右，而非崩溃。当前估值处于极端低位，若H2企稳，估值修复空间可观。",
+      "decisive_question": "2026E收入增速能否企稳在15%以上？",
+      "evidence": "Q1年化盈利已超市场隐含全年盈利；毛利率逆势提升显示定价权；回购和分红提供支撑。",
+      "strongest_counterevidence": "合同负债同比下滑14%是渠道信心的负面领先指标；竞争加剧可能侵蚀份额和利润率。",
+      "financial_transmission": "若2026E收入增速16%、毛利率45.5%、PE回归20x，则公允价值131.98元左右；若增速恢复18%且毛利率46%，可达131元。",
+      "market_pricing": "当前122.5元接近我们的基准公允价值，已反映较多悲观预期，但尚未大幅低估。",
+      "falsification_gate": "半年报收入增速低于12%或毛利率低于44%，则估值将跌破100元。",
+      "verdict": "partial"
+    },
+    {
+      "rank": 2,
+      "takeaway": "股东回报行动（回购、分红）为股价提供了阶段性安全垫，但规模不足以对冲基本面恶化，需与盈利稳定性结合看待。",
+      "decisive_question": "回购和分红能否在不损害未来增长的情况下持续？",
+      "evidence": "截至8月4日已耗资10.39亿回购A股；中期分红2.5元；未来三年股东回报规划。",
+      "strongest_counterevidence": "回购金额仅占市值1.15%，若盈利下降，未来分红能力将减弱。",
+      "financial_transmission": "直接提升每股价值，并释放管理信心信号；但若FCF不足，可能被迫减少回购。",
+      "market_pricing": "股息率约2%，为股价提供一定支撑，但不足以扭转弱势。",
+      "falsification_gate": "若全年FCF低于20亿元，或毛利率跌破44%，股东回报可持续性存疑。",
+      "verdict": "proven"
+    },
+    {
+      "rank": 3,
+      "takeaway": "电解质饮料等第二曲线是远期期权，短期内不贡献利润，但其成功与否将决定2030年后的成长叙事，目前定价极低，可视为免费期权。",
+      "decisive_question": "第二曲线能否在2028年前实现盈利？",
+      "evidence": "暂无披露收入和利润，仅基于渠道复用逻辑和品类趋势。",
+      "strongest_counterevidence": "新品推广失败率高，且需要持续投入，可能拖累整体利润。",
+      "financial_transmission": "成功情况下可增厚EPS约0.15元，价值5-10元/股。",
+      "market_pricing": "市场当前未给任何溢价，视为零价值。",
+      "falsification_gate": "若2027年底前仍未披露电解质饮料收入破亿，则期权价值归零。",
+      "verdict": "unproven"
+    }
+  ],
+  "segment_economics": [
+    {
+      "business_unit": "能量饮料（东鹏特饮等）",
+      "economic_role": "核心利润池，绝对主力",
+      "disclosure_basis": "reported",
+      "scale_and_growth": "占主营业务收入71.92%（2026H1）；品类增速放缓但份额稳固；H1增速放缓信号明确。",
+      "margin_and_cash": "毛利率高于集团平均水平（Q1集团毛利率46.89%），是集团高毛利率的主要贡献者；现金转化受渠道信用政策影响。",
+      "driver_equation": "收入 = 活跃终端网点数 × 单点销量 × 产品结构权重 × 单箱实际售价",
+      "valuation_treatment": "core",
+      "evidence_ids": [
+        "EV028",
+        "EV031",
+        "EV095"
+      ],
+      "missing_or_next_check": "能量饮料绝对收入与毛利率未单独披露，需通过半年报获取。"
+    },
+    {
+      "business_unit": "电解质饮料（补水啦）",
+      "economic_role": "第二曲线期权",
+      "disclosure_basis": "analytical",
+      "scale_and_growth": "收入占比极小（估计<2%），处于概念验证和渠道铺货阶段。",
+      "margin_and_cash": "利润贡献为负或盈亏平衡，需要持续营销和渠道投入。",
+      "driver_equation": "收入 = 推广网点数 × 单点铺货率 × 消费者复购率 × 单瓶售价",
+      "valuation_treatment": "optionality",
+      "evidence_ids": [
+        "EV027",
+        "EV028"
+      ],
+      "missing_or_next_check": "无任何细分收入或利润披露，需等待公司自愿披露。"
+    },
+    {
+      "business_unit": "其他新品类及国际业务",
+      "economic_role": "远期探索期权",
+      "disclosure_basis": "missing",
+      "scale_and_growth": "收入规模极小，国际业务拓展至36+国家但无财务数据。",
+      "margin_and_cash": "大概率处于亏损或微利状态，消耗资本。",
+      "driver_equation": "不适用，缺乏量化基础",
+      "valuation_treatment": "optionality",
+      "evidence_ids": [
+        "EV030"
+      ],
+      "missing_or_next_check": "所有细分数据均缺失，仅作为风险列表关注，不进入估值。"
+    }
+  ],
+  "business_model_mechanisms": [
+    {
+      "link": "客户与价值主张",
+      "how_it_works": "为蓝领工人、司机、学生、夜班人群等提供高性价比的即饮能量补充。核心产品东鹏特饮以低价大容量包装（500ml金瓶）与红牛形成差异化竞争。",
+      "economic_driver": "高频率、强复购的消费习惯驱动销量增长。",
+      "cash_and_capital_feature": "消费频次高，品牌忠诚度带来稳定现金流入。",
+      "evidence_or_gap": "能量饮料占比71.92%（EV028），验证了核心产品需求。",
+      "analyst_conclusion": "价值主张清晰，在价格敏感型消费者中建立了牢固的品牌认知。"
+    },
+    {
+      "link": "渠道与分销网络",
+      "how_it_works": "通过超过200万个终端网点（含便利店、传统零售、电商）进行深度分销，12个已运营生产基地辐射全国，降低运输成本，保障供货及时性。",
+      "economic_driver": "终端网点扩张与单点销量提升共同驱动收入增长。",
+      "cash_and_capital_feature": "渠道广泛但需垫付促销和陈列费用；合同负债（经销商预付款）是重要的领先现金流指标。",
+      "evidence_or_gap": "合同负债同比-14.14%（辩论数据，未验证），可能反映渠道备货意愿下降，构成关键缺失证据。",
+      "analyst_conclusion": "深度分销网络是核心护城河，但合同负债下滑暗示渠道信心可能出现松动，需持续跟踪。"
+    },
+    {
+      "link": "收入确认与现金回收",
+      "how_it_works": "通常先款后货（经销商预付款形成合同负债），发货后确认收入。Q1因春节后补货导致营运资本占用大，OCF偏低；下半年现金回笼加速。",
+      "economic_driver": "OCF/NP比率的季节性波动大；全年比率有望回升至0.8。",
+      "cash_and_capital_feature": "H1 OCF 24.93亿元（EV039），季节性回升；应收账款/收入+0.11pp（EV016），渠道信用政策略放宽。",
+      "evidence_or_gap": "FY2025 OCF/NP比率未披露，缺少长期比较基准。",
+      "analyst_conclusion": "商业模式现金生成能力较强，但Q1和H1的季节性波动以及当前合同负债下滑需要重点关注。"
+    },
+    {
+      "link": "成本结构与利润获取",
+      "how_it_works": "核心成本为PET瓶材、白砂糖、牛磺酸及包装材料。产品结构优化（如高端品类占比提升）和规模效应是毛利率提升的主要驱动力。",
+      "economic_driver": "毛利率每变动1pp，影响归母净利润约1.84亿元（EPS 0.26元）。",
+      "cash_and_capital_feature": "高毛利率（Q1 46.89%）带来丰厚的经营利润，支撑品牌营销和渠道激励的持续投入。",
+      "evidence_or_gap": "公司无公开的商品对冲工具，面临PET和糖价上涨风险；外汇衍生品公告显示管理层关注成本波动。",
+      "analyst_conclusion": "成本控制能力较强，但缺乏透明对冲手段，在原料价格上行周期中毛利率可能承压。"
+    },
+    {
+      "link": "资本配置与再投资",
+      "how_it_works": "通过全国性产能基地扩张（14个规划基地）支撑长期增长，同时通过A股回购、H股增持、中期分红等方式直接回馈股东，平衡增长与股东回报。",
+      "economic_driver": "资本支出强度约收入5-7%；回购和分红提供每股价值支撑和信心信号。",
+      "cash_and_capital_feature": "多个募投项目延期，显示资本开支执行存在时间风险；回购10.39亿元（占市值约1.15%）提供边际支撑。",
+      "evidence_or_gap": "国际业务资本开支计划未披露。",
+      "analyst_conclusion": "管理层在增长放缓和股东回报之间寻求平衡，资本配置策略总体审慎。"
+    }
+  ],
+  "industry_driver_matrix": [
+    {
+      "driver": "功能饮料品类增长",
+      "current_state_and_direction": "品类整体增速放缓，从高增长区间（25%+）进入稳健增长期（10-15%）；H1东鹏增速放缓已确认。",
+      "dated_evidence": "EV095: 2026年上半年增速进一步放缓（管理层确认）。",
+      "affected_business": "能量饮料",
+      "financial_transmission": "直接决定收入增速，每1pp变动影响收入2.09亿元，EPS约0.22元。",
+      "confidence": "medium",
+      "next_verification": "H1 2026完整财报收入增速数据。"
+    },
+    {
+      "driver": "竞争格局与促销强度",
+      "current_state_and_direction": "竞争烈度上升，农夫山泉等巨头加大在能量饮料和电解质水领域的投入；促销战可能加剧。",
+      "dated_evidence": "空方逻辑（未量化），但结合应收账款/收入+0.11pp（EV016）暗示渠道激励可能增加。",
+      "affected_business": "能量饮料、电解质饮料",
+      "financial_transmission": "加剧则压制毛利率，每1pp毛利率变动影响净利润1.84亿元。",
+      "confidence": "medium",
+      "next_verification": "H2毛利率与销售费用率的变化。"
+    },
+    {
+      "driver": "上游原材料价格（PET、糖）",
+      "current_state_and_direction": "Q1成本端缓解利好毛利率，但后续反弹风险存在；公司进行了外汇衍生品交易对冲部分波动。",
+      "dated_evidence": "Q1毛利率46.89%同比+2.42pp（EV012）；外汇衍生品公告。",
+      "affected_business": "所有品类",
+      "financial_transmission": "直接传导至毛利率；每1pp毛利率变动影响净利润1.84亿元。",
+      "confidence": "medium",
+      "next_verification": "Q3毛利率及PET/白糖商品价格趋势。"
+    },
+    {
+      "driver": "渠道库存与备货意愿",
+      "current_state_and_direction": "合同负债同比-14.14%（辩论未验证数据），暗示经销商备货意愿下降；应收账款比率上升也显示政策放宽。",
+      "dated_evidence": "辩论合同负债数据（待验）；EV016: 应收账款/收入+0.11pp。",
+      "affected_business": "能量饮料",
+      "financial_transmission": "领先指标，影响未来1-2个季度的收入确认和OCF/NP比率。",
+      "confidence": "low",
+      "next_verification": "官方半年报的合同负债绝对值与环比变化。"
+    }
+  ],
+  "competition_landscapes": [
+    {
+      "business_unit": "能量饮料（Energy Drinks）",
+      "market_boundary": "中国功能性饮料市场，面向蓝领、司机、学生等需要提神抗疲劳的消费者。主要通过便利店、传统零售、电商销售，竞争维度聚焦于品牌认知、渠道密度、性价比和产品创新。",
+      "structure_and_concentration": "市场高度集中，前2-3家巨头占据主要份额。东鹏特饮凭借低价大容量策略成为本土领导者，红牛维持高端定位，农夫山泉等新进入者加剧竞争。",
+      "direct_competitors": [
+        "红牛（华彬/泰国合资）",
+        "农夫山泉能量饮品",
+        "乐虎（达利食品）"
+      ],
+      "substitutes_self_supply_and_new_entrants": [
+        "现磨咖啡/即饮咖啡",
+        "即饮茶饮料",
+        "运动饮料",
+        "其他功能饮料品牌"
+      ],
+      "comparison_dimensions": [
+        "品牌忠诚度与消费习惯",
+        "分销网络密度与货架位置",
+        "价格-包装架构（性价比）",
+        "毛利率支撑的促销投入能力",
+        "产品研发与创新能力"
+      ],
+      "company_relative_position": "在下沉市场及价格敏感型消费者中建立强大护城河，拥有最广泛的低价便利店覆盖。毛利率和ROE领跑行业，但在高端市场和中产阶级消费者中的品牌力弱于红牛。",
+      "competitor_likely_response": "竞争对手将持续通过广告投放、货架费与折扣策略争夺市场份额。红牛可能加大体育营销投入巩固高端定位；农夫山泉利用其强大的资金和渠道优势发起价格战或促销战。",
+      "financial_transmission": "若竞争导致市场份额流失或被迫加大促销力度，将直接体现为收入增速放缓和毛利率承压，进而影响EPS和ROE。",
+      "evidence_status_and_ids": "EV028, EV095, EV096",
+      "next_verification": "行业市场份额数据和主要竞品定价策略。"
+    },
+    {
+      "business_unit": "电解质饮料（Electrolyte Drinks）",
+      "market_boundary": "中国电解质饮料市场，消费场景涵盖运动、高温作业、健康补水等。销售渠道与能量饮料重合，但受众多为运动爱好者和健康意识较强的年轻群体。",
+      "structure_and_concentration": "市场仍处于发展和分散化阶段，国际品牌（佳得乐、宝矿力）拥有先发优势，国内品牌（元气森林外星人、东鹏补水啦）正借助本土渠道奋力追赶。",
+      "direct_competitors": [
+        "佳得乐（Gatorade）",
+        "宝矿力水特（Pocari Sweat）",
+        "元气森林外星人电解质水",
+        "农夫山泉力量帝"
+      ],
+      "substitutes_self_supply_and_new_entrants": [
+        "椰子水等天然饮品",
+        "自制电解质水",
+        "运动饮料"
+      ],
+      "comparison_dimensions": [
+        "渠道分销能力与经销商激励",
+        "品牌健康权威形象与科学背书",
+        "成本结构与定价灵活性",
+        "产品形态（即饮、粉末）"
+      ],
+      "company_relative_position": "利用现有庞大分销网络实现快速铺货的潜力大，但目前仍处于品牌建设和消费者教育阶段，市场份额和盈利能力无数据支撑。",
+      "competitor_likely_response": "现有市场领导者将加大营销和陈列投资以维护地盘；其他本土食品饮料巨头可能通过模仿或收购方式进入市场。",
+      "financial_transmission": "成功则带来可观的增量收入和利润，优化产品结构并支撑更高估值；失败则意味着前期营销和研发投入沉淀为沉没成本。",
+      "evidence_status_and_ids": "EV027, EV028",
+      "next_verification": "零售渠道审计数据、电解质饮料细分收入与利润披露。"
+    }
+  ],
+  "moat_mechanisms": [
+    {
+      "moat_source": "品牌认知与消费习惯",
+      "operating_mechanism": "东鹏特饮通过”累了困了喝东鹏特饮”的广告语和低价大容量产品，在价格敏感型消费者中建立了强大的品牌认知和消费习惯。",
+      "observed_proof": "能量饮料占主营业务收入71.92%（EV028），显示消费者高度依赖；集团ROE高达51.6%，证明品牌溢价和强定价权。",
+      "economic_result": "市场份额领先，高毛利率（46%+）和高资本回报率（ROE>50%）。",
+      "durability_and_threat": "习惯性消费粘性高，护城河较深；但面临咖啡文化和新式茶饮对年轻消费者的争夺，以及农夫山泉等巨头的品牌挑战。",
+      "verdict": "proven"
+    },
+    {
+      "moat_source": "成本与规模优势",
+      "operating_mechanism": "全国性布局的12个运营生产基地（14个规划）（EV031），缩短运输半径，降低单位生产和配送成本。",
+      "observed_proof": "存货/收入比下降-2.0pp，显示供需匹配效率高；但缺少单位制造成本的具体数据。",
+      "economic_result": "支撑高毛利率和对渠道的高效服务，形成对中小竞争对手的进入门槛。",
+      "durability_and_threat": "多个募投项目延期（EV040/EV041），显示重资产模式存在资本开支效率风险；若产能利用率不足，固定成本将侵蚀利润。",
+      "verdict": "partial"
+    },
+    {
+      "moat_source": "深度分销网络",
+      "operating_mechanism": "通过与超过200万个终端零售网点合作，实现对中国市场的深度覆盖，尤其是下沉市场。强大的地推和经销商管理体系是竞争壁垒。",
+      "observed_proof": "极高的渠道渗透率是收入增长的核心驱动力之一，竞争对手短期内难以复制同等密度的销售网络。",
+      "economic_result": "支撑产品快速铺货，降低渠道拓展边际成本，为新品（如电解质水）的推广提供现成的管道。",
+      "durability_and_threat": "合同负债同比-14.14%（辩论数据）是潜在威胁信号，暗示经销商合作意愿可能正在下降，需要持续的成本和利润激励来维持忠诚度。",
+      "verdict": "proven"
+    }
+  ],
+  "accounting_quality_matrix": [
+    {
+      "item": "现金转换（OCF/NP）",
+      "latest_evidence_and_period": "2026H1 OCF 24.93亿元 (EV039); Q1 OCF/NP 0.36",
+      "trend_or_comparator": "季节性回升，符合预期。",
+      "causal_interpretation": "Q1受春节后补库存影响，营运资本占用高；H1恢复正常。全年比率有望达到0.8。",
+      "earnings_cash_roic_effect": "若全年仅维持0.65，FCF将减少约4.7亿元，影响股息和回购可持续性。",
+      "verdict": "neutral",
+      "evidence_ids": [
+        "EV016",
+        "EV039"
+      ]
+    },
+    {
+      "item": "应收账款/收入",
+      "latest_evidence_and_period": "同比+0.11pp (EV016)",
+      "trend_or_comparator": "轻微上升",
+      "causal_interpretation": "可能暗示为对冲合同负债下滑，公司略微放宽了渠道信用政策。",
+      "earnings_cash_roic_effect": "对现金转化构成轻微拖累，但对利润影响有限。",
+      "verdict": "warning",
+      "evidence_ids": [
+        "EV016"
+      ]
+    },
+    {
+      "item": "存货/收入",
+      "latest_evidence_and_period": "同比-2.0pp",
+      "trend_or_comparator": "改善",
+      "causal_interpretation": "动销良好，库存积压或滞销风险低。",
+      "earnings_cash_roic_effect": "积极信号，意味着营运资本占用减少，有利于现金流。",
+      "verdict": "positive",
+      "evidence_ids": [
+        "EV012"
+      ]
+    },
+    {
+      "item": "资本开支/CIP",
+      "latest_evidence_and_period": "多个募投项目延期（2024-06, 2025-07, 2026-07）",
+      "trend_or_comparator": "持续性延期",
+      "causal_interpretation": "显示项目执行节奏慢于预期或市场需求增长放缓，存在产能闲置风险。",
+      "earnings_cash_roic_effect": "如果产能转固后利用率不足，折旧上升将拖累毛利率和ROIC。",
+      "verdict": "warning",
+      "evidence_ids": [
+        "EV040",
+        "EV041"
+      ]
+    },
+    {
+      "item": "股东回报（回购/分红）",
+      "latest_evidence_and_period": "已回购A股10.39亿元；中期分红2.5元/股；公布未来三年分红规划。",
+      "trend_or_comparator": "积极的股东回馈行为，信号明确。",
+      "causal_interpretation": "管理层以实际行动表达对内在价值的认可，并承诺持续回馈股东。",
+      "earnings_cash_roic_effect": "回购直接增厚每股价值；高分红提供了直接的现金回报和估值支撑。",
+      "verdict": "positive",
+      "evidence_ids": [
+        "EV108",
+        "EV110"
+      ]
+    }
+  ],
+  "alternative_intelligence_decisions": [],
+  "sell_side_expectation_matrix": [],
+  "safe_valuation_assumptions": {
+    "current_price_cny": 126.45,
+    "required_annual_return_pct": 20.0,
+    "holding_period_years": 1.0,
+    "margin_of_safety_pct": 20.0,
+    "maximum_bear_loss_pct": 18.0,
+    "optionality_equity_value_cny_mn": 0.0,
+    "optionality_inputs": [
+      {
+        "name": "第二曲线期权（补水啦等）",
+        "metric_name": "增量EPS（元）",
+        "metric_value_cny_mn": 106.7,
+        "valuation_multiple": 20.0,
+        "probability_pct": 30.0,
+        "ownership_pct": 100.0,
+        "execution_haircut_pct": 0.0,
+        "evidence_ids": [
+          "EV027",
+          "EV028"
+        ],
+        "assumption_summary": "2028E电解质饮料等新业务贡献利润，当前概率低，仅作为期权计入。",
+        "include_in_public_base_value": false
+      }
+    ],
+    "other_adjustments_equity_value_cny_mn": 0.0,
+    "scenarios": [
+      {
+        "scenario": "bull",
+        "probability_pct": 20.0,
+        "valuation_method": "PE",
+        "parent_net_profit_cny_mn": 5195.3,
+        "valuation_multiple": 25.0,
+        "direct_equity_value_cny_mn": null,
+        "assumption_summary": "收入增速22%/18%/15%，毛利率47%/48%/48.5%，PE 25x，反映增长重新加速和高溢价。",
+        "evidence_ids": [
+          "EV011",
+          "EV012"
+        ]
+      },
+      {
+        "scenario": "base",
+        "probability_pct": 60.0,
+        "valuation_method": "PE",
+        "parent_net_profit_cny_mn": 4670.4,
+        "valuation_multiple": 20.0,
+        "direct_equity_value_cny_mn": null,
+        "assumption_summary": "收入增速18%/15%/12%，毛利率46%/46.5%/46.5%，PE 20x，增长正常化且质量高。",
+        "evidence_ids": [
+          "EV011",
+          "EV095"
+        ]
+      },
+      {
+        "scenario": "bear",
+        "probability_pct": 20.0,
+        "valuation_method": "PE",
+        "parent_net_profit_cny_mn": 3961.1,
+        "valuation_multiple": 15.0,
+        "direct_equity_value_cny_mn": null,
+        "assumption_summary": "收入增速10%/8%/5%，毛利率44%/43%/42.5%，PE 15x，竞争加剧、成本上涨、现金转化恶化。",
+        "evidence_ids": [
+          "EV095",
+          "EV096"
+        ]
+      }
+    ]
+  },
+  "deterministic_valuation": {
+    "status": "closed",
+    "diluted_share_count_mn": 711.4969034954528,
+    "scenario_rows": [
+      {
+        "scenario": "bull",
+        "probability_pct": 20.0,
+        "parent_net_profit_cny_mn": 5195.3,
+        "eps_cny": 7.301929178435565,
+        "valuation_method": "PE",
+        "valuation_multiple": 25.0,
+        "equity_value_cny_mn": 129882.5,
+        "fair_value_per_share_cny": 182.54822946088913,
+        "assumption_summary": "收入增速22%/18%/15%，毛利率47%/48%/48.5%，PE 25x，反映增长重新加速和高溢价。"
+      },
+      {
+        "scenario": "base",
+        "probability_pct": 60.0,
+        "parent_net_profit_cny_mn": 4670.4,
+        "eps_cny": 6.564188792748341,
+        "valuation_method": "PE",
+        "valuation_multiple": 20.0,
+        "equity_value_cny_mn": 93408.0,
+        "fair_value_per_share_cny": 131.28377585496685,
+        "assumption_summary": "收入增速18%/15%/12%，毛利率46%/46.5%/46.5%，PE 20x，增长正常化且质量高。"
+      },
+      {
+        "scenario": "bear",
+        "probability_pct": 20.0,
+        "parent_net_profit_cny_mn": 3961.1,
+        "eps_cny": 5.567276513137088,
+        "valuation_method": "PE",
+        "valuation_multiple": 15.0,
+        "equity_value_cny_mn": 59416.5,
+        "fair_value_per_share_cny": 83.50914769705633,
+        "assumption_summary": "收入增速10%/8%/5%，毛利率44%/43%/42.5%，PE 15x，竞争加剧、成本上涨、现金转化恶化。"
+      }
+    ],
+    "optionality_rows": [],
+    "probability_weighted_core_value_cny": 131.98174094456922,
+    "optionality_per_share_cny": 0.0,
+    "other_adjustments_per_share_cny": 0.0,
+    "fair_value_per_share_cny": 131.98174094456922,
+    "expected_return_pct": 4.374646852170194,
+    "required_annual_return_pct": 20.0,
+    "holding_period_years": 1.0,
+    "margin_of_safety_pct": 20.0,
+    "maximum_bear_loss_pct": 18.0,
+    "required_return_price_cny": 109.40314654580571,
+    "margin_of_safety_price_cny": 105.02702068397349,
+    "bear_loss_constraint_price_cny": 101.8404240208004,
+    "safe_buy_price_ceiling_cny": 101.8404240208004,
+    "suggested_buy_zone_low_cny": 91.65638161872036,
+    "fundamental_floor_cny": 83.50914769705633,
+    "formula_notes": [
+      "scenario EPS = parent net profit (CNY mn) / diluted shares (mn)",
+      "PE fair value/share = scenario EPS x selected PE",
+      "probability-weighted core value = sum(probability x scenario fair value/share)",
+      "optionality equity value = metric x multiple x probability x ownership x (1-execution haircut)",
+      "safe ceiling = min(base/(1+required return)^years, base x (1-MOS), bear/(1-max bear loss))"
+    ]
+  },
+  "investment_conclusion_and_core_conflict": "东鹏饮料正处于增长减速被市场定价的关键阶段。我们的核心判断是：2026年收入增速将正常化至16%附近，毛利率温和压缩至45.5%，但市场已通过极端低位的PE（5年0.7%分位）对此作了充分反应。当前的核心冲突在于，合同负债同比下滑14.14%（尽管为辩论未验证数据）作为领先指标，暗示渠道信心减弱，这与管理层“没有理由不增长目标”的软性口径形成背离。我们认为，空方成功地将收入增速和毛利率预期下调至更稳健的水平，但并未因此形成全面看空的定价基础。在当前价位，市场为增长放缓的线性外推支付了过高溢价，而忽视了高ROE、强现金流、积极股东回报和潜在的H2旺季弹性。因此，我们维持Hold评级，但姿态为积极观察，等待H1完整财报（已发布但系统未加载）这一决定性证据来确认或推翻我们的基准假设。",
+  "canonical_model_snapshot": [
+    {
+      "line_id": "shares",
+      "period": "2026-08-05; market snapshot; market cap / close, using forecast_model and price_earnings_decomposition",
+      "metric": "diluted_shares",
+      "value": 711.4969034954528,
+      "unit": "mn shares",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "market cap / close, using forecast_model and price_earnings_decomposition"
+    },
+    {
+      "line_id": "2026E_revenue",
+      "period": "2026E",
+      "metric": "营业收入",
+      "value": 24215.3,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV011",
+        "EV095",
+        "debate_contract_liability_signal"
+      ],
+      "formula": "FY2025 revenue 20875.27 * 1.16"
+    },
+    {
+      "line_id": "2026E_gross_margin",
+      "period": "2026E",
+      "metric": "毛利率",
+      "value": 45.5,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV012",
+        "competitive_risk"
+      ],
+      "formula": "Estimated after debate, down from 46.0% to reflect competition and cost risks"
+    },
+    {
+      "line_id": "2026E_毛利",
+      "period": "2026E",
+      "metric": "毛利",
+      "value": 11331.2,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV012"
+      ],
+      "formula": "Revenue × assumed gross margin (46.0% 2026E, 46.5% 2027E, 46.5% 2028E)"
+    },
+    {
+      "line_id": "2026E_operating_profit",
+      "period": "2026E",
+      "metric": "营业利润",
+      "value": 6053.8,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "2026E_gross_profit",
+        "EV013"
+      ],
+      "formula": "Gross profit - operating expenses (20.5% of revenue)"
+    },
+    {
+      "line_id": "2026E_parent_net_profit",
+      "period": "2026E",
+      "metric": "归母净利润",
+      "value": 4496.3,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "2026E_operating_profit",
+        "tax_rate_estimates"
+      ],
+      "formula": "Operating profit - net finance + other income - tax - minority; approximated as ~6.32 EPS * 711.5 mn shares"
+    },
+    {
+      "line_id": "2026E_epsdiluted",
+      "period": "2026E",
+      "metric": "epsdiluted",
+      "value": 6.319493420014211,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV044",
+        "EV074"
+      ],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    },
+    {
+      "line_id": "base_fair_value",
+      "period": "2026E",
+      "metric": "fair_value_per_share",
+      "value": 131.98174094456922,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [
+        "2026E_eps",
+        "PE_20x"
+      ],
+      "formula": "deterministic total fair value per share"
+    },
+    {
+      "line_id": "2027E_revenue",
+      "period": "2027E",
+      "metric": "revenue",
+      "value": 28328.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV011",
+        "EV095"
+      ],
+      "formula": "Revenue growth 18% (2026E), 15% (2027E), 12% (2028E) from FY2025 base; growth deceleration reflects H1 slowdown and maturing category"
+    },
+    {
+      "line_id": "2028E_revenue",
+      "period": "2028E",
+      "metric": "revenue",
+      "value": 31727.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV011",
+        "EV095"
+      ],
+      "formula": "Revenue growth 18% (2026E), 15% (2027E), 12% (2028E) from FY2025 base; growth deceleration reflects H1 slowdown and maturing category"
+    },
+    {
+      "line_id": "2027E_毛利",
+      "period": "2027E",
+      "metric": "毛利",
+      "value": 13172.5,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV012"
+      ],
+      "formula": "Revenue × assumed gross margin (46.0% 2026E, 46.5% 2027E, 46.5% 2028E)"
+    },
+    {
+      "line_id": "2028E_毛利",
+      "period": "2028E",
+      "metric": "毛利",
+      "value": 14753.1,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV012"
+      ],
+      "formula": "Revenue × assumed gross margin (46.0% 2026E, 46.5% 2027E, 46.5% 2028E)"
+    },
+    {
+      "line_id": "2027E_grossmargin",
+      "period": "2027E",
+      "metric": "grossmargin",
+      "value": 46.5,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV012"
+      ],
+      "formula": "Gross profit / Revenue; based on Q1 2026 46.89% with slight discount for full year and competition"
+    },
+    {
+      "line_id": "2028E_grossmargin",
+      "period": "2028E",
+      "metric": "grossmargin",
+      "value": 46.5,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV012"
+      ],
+      "formula": "Gross profit / Revenue; based on Q1 2026 46.89% with slight discount for full year and competition"
+    },
+    {
+      "line_id": "2026E_营业利润operatingprofit",
+      "period": "2026E",
+      "metric": "营业利润operatingprofit",
+      "value": 6281.4,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV013",
+        "EV012"
+      ],
+      "formula": "Gross profit - operating expenses (SG&A, R&D) estimated at 20.5% of revenue (2026E), 20.3% (2027E), 20.2% (2028E) based on Q1 spread of 20.2%"
+    },
+    {
+      "line_id": "2027E_营业利润operatingprofit",
+      "period": "2027E",
+      "metric": "营业利润operatingprofit",
+      "value": 7420.9,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV013",
+        "EV012"
+      ],
+      "formula": "Gross profit - operating expenses (SG&A, R&D) estimated at 20.5% of revenue (2026E), 20.3% (2027E), 20.2% (2028E) based on Q1 spread of 20.2%"
+    },
+    {
+      "line_id": "2028E_营业利润operatingprofit",
+      "period": "2028E",
+      "metric": "营业利润operatingprofit",
+      "value": 8344.2,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV013",
+        "EV012"
+      ],
+      "formula": "Gross profit - operating expenses (SG&A, R&D) estimated at 20.5% of revenue (2026E), 20.3% (2027E), 20.2% (2028E) based on Q1 spread of 20.2%"
+    },
+    {
+      "line_id": "2026E_营业利润率",
+      "period": "2026E",
+      "metric": "营业利润率",
+      "value": 24.999896759486774,
+      "unit": "%",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV013"
+      ],
+      "formula": "operating profit / revenue"
+    },
+    {
+      "line_id": "2027E_营业利润率",
+      "period": "2027E",
+      "metric": "营业利润率",
+      "value": 26.2,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV013"
+      ],
+      "formula": "Operating profit / revenue; slight improvement on scale"
+    },
+    {
+      "line_id": "2028E_营业利润率",
+      "period": "2028E",
+      "metric": "营业利润率",
+      "value": 26.3,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV013"
+      ],
+      "formula": "Operating profit / revenue; slight improvement on scale"
+    },
+    {
+      "line_id": "2026E_归母净利润netprofitparent",
+      "period": "2026E",
+      "metric": "归母净利润netprofitparent",
+      "value": 4670.4,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV014",
+        "EV015"
+      ],
+      "formula": "(Operating profit - finance expense (0.22%) + other income) × (1 - 0.25 tax), minority negligible; effective tax rate 25%"
+    },
+    {
+      "line_id": "2027E_归母净利润netprofitparent",
+      "period": "2027E",
+      "metric": "归母净利润netprofitparent",
+      "value": 5565.7,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV014",
+        "EV015"
+      ],
+      "formula": "(Operating profit - finance expense (0.22%) + other income) × (1 - 0.25 tax), minority negligible; effective tax rate 25%"
+    },
+    {
+      "line_id": "2028E_归母净利润netprofitparent",
+      "period": "2028E",
+      "metric": "归母净利润netprofitparent",
+      "value": 6258.2,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV014",
+        "EV015"
+      ],
+      "formula": "(Operating profit - finance expense (0.22%) + other income) × (1 - 0.25 tax), minority negligible; effective tax rate 25%"
+    },
+    {
+      "line_id": "2027E_eps",
+      "period": "2027E",
+      "metric": "eps",
+      "value": 7.82252174627429,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    },
+    {
+      "line_id": "2028E_eps",
+      "period": "2028E",
+      "metric": "eps",
+      "value": 8.795821835983572,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    },
+    {
+      "line_id": "2026E_经营活动现金流净额ocf",
+      "period": "2026E",
+      "metric": "经营活动现金流净额ocf",
+      "value": 3736.3,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV016",
+        "EV039"
+      ],
+      "formula": "Net profit × OCF/NP ratio (0.8 2026E, 0.9 2027E, 1.0 2028E) as working capital normalises"
+    },
+    {
+      "line_id": "2027E_经营活动现金流净额ocf",
+      "period": "2027E",
+      "metric": "经营活动现金流净额ocf",
+      "value": 5009.1,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV016",
+        "EV039"
+      ],
+      "formula": "Net profit × OCF/NP ratio (0.8 2026E, 0.9 2027E, 1.0 2028E) as working capital normalises"
+    },
+    {
+      "line_id": "2028E_经营活动现金流净额ocf",
+      "period": "2028E",
+      "metric": "经营活动现金流净额ocf",
+      "value": 6258.2,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV016",
+        "EV039"
+      ],
+      "formula": "Net profit × OCF/NP ratio (0.8 2026E, 0.9 2027E, 1.0 2028E) as working capital normalises"
+    },
+    {
+      "line_id": "2026E_资本支出capex",
+      "period": "2026E",
+      "metric": "资本支出capex",
+      "value": 1478.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV040",
+        "EV041"
+      ],
+      "formula": "Capex/revenue 6% (2026E), 5% (2027E), 4% (2028E) reflecting capacity build completion delays and moderating intensity"
+    },
+    {
+      "line_id": "2027E_资本支出capex",
+      "period": "2027E",
+      "metric": "资本支出capex",
+      "value": 1416.4,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV040",
+        "EV041"
+      ],
+      "formula": "Capex/revenue 6% (2026E), 5% (2027E), 4% (2028E) reflecting capacity build completion delays and moderating intensity"
+    },
+    {
+      "line_id": "2028E_资本支出capex",
+      "period": "2028E",
+      "metric": "资本支出capex",
+      "value": 1269.1,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV040",
+        "EV041"
+      ],
+      "formula": "Capex/revenue 6% (2026E), 5% (2027E), 4% (2028E) reflecting capacity build completion delays and moderating intensity"
+    },
+    {
+      "line_id": "2026E_自由现金流fcf",
+      "period": "2026E",
+      "metric": "自由现金流fcf",
+      "value": 2258.3,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV016",
+        "EV040"
+      ],
+      "formula": "OCF - capex"
+    },
+    {
+      "line_id": "2027E_自由现金流fcf",
+      "period": "2027E",
+      "metric": "自由现金流fcf",
+      "value": 3592.7,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV016",
+        "EV040"
+      ],
+      "formula": "OCF - capex"
+    },
+    {
+      "line_id": "2028E_自由现金流fcf",
+      "period": "2028E",
+      "metric": "自由现金流fcf",
+      "value": 4989.1,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV016",
+        "EV040"
+      ],
+      "formula": "OCF - capex"
+    },
+    {
+      "line_id": "2026E_gross_profit",
+      "period": "2026E",
+      "metric": "gross_profit",
+      "value": 11017.9615,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV011",
+        "EV095",
+        "debate_contract_liability_signal",
+        "EV012",
+        "competitive_risk"
+      ],
+      "formula": "revenue x gross margin"
+    },
+    {
+      "line_id": "2026E_cost_of_sales",
+      "period": "2026E",
+      "metric": "cost_ofsales",
+      "value": 13197.3385,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV011",
+        "EV095",
+        "debate_contract_liability_signal",
+        "EV012",
+        "competitive_risk"
+      ],
+      "formula": "revenue - gross profit"
+    },
+    {
+      "line_id": "2027E_gross_profit",
+      "period": "2027E",
+      "metric": "gross_profit",
+      "value": 13172.52,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV011",
+        "EV095",
+        "EV012"
+      ],
+      "formula": "revenue x gross margin"
+    },
+    {
+      "line_id": "2027E_cost_of_sales",
+      "period": "2027E",
+      "metric": "cost_ofsales",
+      "value": 15155.48,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV011",
+        "EV095",
+        "EV012"
+      ],
+      "formula": "revenue - gross profit"
+    },
+    {
+      "line_id": "2028E_gross_profit",
+      "period": "2028E",
+      "metric": "gross_profit",
+      "value": 14753.055,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV011",
+        "EV095",
+        "EV012"
+      ],
+      "formula": "revenue x gross margin"
+    },
+    {
+      "line_id": "2028E_cost_of_sales",
+      "period": "2028E",
+      "metric": "cost_ofsales",
+      "value": 16973.945,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV011",
+        "EV095",
+        "EV012"
+      ],
+      "formula": "revenue - gross profit"
+    },
+    {
+      "line_id": "probability_weighted_core_value",
+      "period": "scenario",
+      "metric": "equity_value_weighted",
+      "value": 93904.60000000002,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "deterministic probability-weighted scenario equity value"
+    }
+  ],
+  "handoff_change_rows": [
+    {
+      "line_id": "2026E_revenue_growth",
+      "old_value": 18.0,
+      "new_value": 16.0,
+      "unit": "%",
+      "evidence_ids": [
+        "EV095",
+        "debate_contract_liability_signal"
+      ],
+      "reason": "Research Manager采纳了空方逻辑，将收入增速从18%下调至16%。PM最终维持此修订，因H1放缓信号明确，且合同负债下滑虽未验证但有迹象。",
+      "eps_fcf_valuation_impact": "EPS从6.56降至6.32，公允价值从131.3降至126.4（20x PE）。",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2026E_gross_margin",
+      "old_value": 46.0,
+      "new_value": 45.5,
+      "unit": "%",
+      "evidence_ids": [
+        "competition_risk",
+        "cost_risk"
+      ],
+      "reason": "Research Manager为竞争压力和成本反弹预留缓冲而下调。PM维持此修订，认为稳健。",
+      "eps_fcf_valuation_impact": "结合收入变化，EPS额外下降0.11元，总计约下降0.24元。",
+      "disposition": "accepted"
+    }
+  ],
+  "company_disaggregation": "东鹏饮料是一家品牌+渠道双驱动的消费品公司，核心商业模式围绕“深度分销带动产品销量”展开。公司主营产品分为三大经济单元：\n\n1.  **能量饮料（核心利润池）**：以“东鹏特饮”为主，占主营业务收入的71.92%。产品主打高性价比，通过低价大容量（如500ml金瓶）策略，精准切入蓝领、司机、学生等价格敏感型消费场景。该业务贡献了集团绝大部分营收和利润，拥有强大的品牌认知和全国性深度分销网络作为护城河。\n\n2.  **电解质饮料（第二曲线期权）**：以“东鹏补水啦”为代表，属于“1+6”多品类战略中的新增长点。目前尚处于市场推广和消费者教育阶段，收入规模极小，未有独立的盈利数据披露。其成功与否决定了公司长期增长的想象空间，但目前仅能作为期权价值看待。\n\n3.  **其他新品类及国际业务（远期期权）**：包括咖啡、茶饮等其他品类以及海外市场（已拓展至36+国家）。这些业务均未达经济规模，财务贡献微乎其微，仍处于探索和投入阶段，存在较大不确定性。\n\n成本端，集团面临PET、糖、牛磺酸等原材料价格波动风险，但凭借规模采购和高效生产管理保持了行业领先的毛利率（Q1为46.89%）。2026H1，公司确认增速放缓，同时合同负债出现下滑迹象，暗示渠道备货意愿或有波动，这些是当前需要密切跟踪的核心变量。",
+  "industry_cycle_and_competition": "东鹏饮料所处的功能饮料行业正从高速增长期向成熟稳定期过渡。行业品类整体增速放缓，但依然保持稳健的两位数增长。产业链利润池集中于品牌和渠道环节，上游成本（PET、糖）透明，下游依赖庞大的终端网络。\n\n在竞争方面，能量饮料市场呈现“一超多强”格局。东鹏饮料通过低价大容量策略在下沉市场和价格敏感群体中建立了牢固的根据地，与高端路线的红牛形成差异化的二元格局。然而，竞争格局正变得更加复杂：农夫山泉等现金充裕的巨头加速进入，可能通过价格战或更激进的渠道激励来侵蚀市场。\n\n在电解质饮料新赛道，公司面临的则是国际巨头和本土新锐的夹击，虽然拥有短时间铺货的渠道优势，但品牌力和产品差异化仍有待验证。因此，行业竞争加剧是本轮投资期内最需要关注的风险点之一，它将直接影响公司的定价策略、促销费用和毛利率水平。",
+  "autonomous_forecast_model": "**规范模型数值口径：** 2027E 营业收入283.28亿元；2028E 营业收入317.27亿元；程序化概率加权公允价值131.98元/股。\n\n**程序化模型口径判定：混合模型。** 结构化承保包尚未为每个核心业务单元提供可与集团收入、利润和现金流逐年勾稽的三年数值行；现有分部驱动用于解释集团预测，不得表述为已完成的全量分部加总模型。\n\n我们的预测模型采用自上而下与关键驱动变量相结合的方法。鉴于只有集团合并营收与核心单品的收入权重（71.92%）有据可查，而缺乏细分品类的绝对收入和利润率数据，无法进行完全的混合建模。\n\n1.  **模型架构**：以2025年集团收入208.75亿元为基准，通过预测整体收入增长率和毛利率，传导至营业利润和归母净利润。\n2.  **核心假设**：\n    *   **收入增速**：鉴于H1放缓已被管理层确认（EV095），我们采纳经辩论下调后的16%作为2026E基准，2027-2028年进一步减速至14%和12%。\n    *   **毛利率**：在Q1 46.89%的基数上，出于对下半年竞争和成本反弹的审慎考虑，将2026E下调至45.5%，并在2027-2028年维持该水平。\n    *   **现金转化**：预计OCF/NP比率从Q1的极低水平恢复，2026E为0.8，后续年份趋向1.0。\n    *   **估值倍数**：基准情景下给予20x PE，既非为“高增长”支付溢价，也非为“零增长”支付折价，而是对“稳健增长+高ROE质量”的合理定价。\n3.  **模型限制**：最大不确定性来自H1 2026完整财务数据（已发布但未成功提取）。一旦获得，将能精确校准H2的增长斜率。其次，合同负债数据的官方验证将是判断渠道信心的关键。\n4.  **最脆弱假设**：H2旺季发力能够对冲H1的疲软。如果H1实际增速低于12%，我们的基准假设（16%）将面临显著下行风险。",
+  "thesis_financial_bridge": "我们的核心投资逻辑建立在三个层层递进的预期差之上：\n\n**预期差一：市场过度悲观地定价了“增长终结”**\n市场将估值打至5年PE的0.7%分位，隐含的对2026年盈利预期几乎零增长。然而，Q1数据显示，即使不考虑旺季季节性，其盈利年化水平也已超过市场隐含的TTM盈利。关键假设是2026E收入增速能否守住16%的底线。我们通过桥B1（收入增速）将其转换成具体的财务影响：基准情景（16%）下EPS为6.32元；若半年报证实H2恢复，乐观情景（18%）下EPS可达6.56元。这一预期差一旦被证实，将成为推动PE修复的核心动力，基准公允价值为131.98元（20x PE）。\n**最强反证与边界**：合同负债同比下滑14.14%（辩论未验证数据）是当前最有力的反向证据，表明经销商备货意愿可能实质性地削弱。如果这一信号被官方数据确认，且H1实际增速低于12%，则“增长终结”的担忧被证实，估值可能进一步下杀至悲观情景的83.6元附近。**证伪条件**：半年报收入增速<12%或合同负债继续恶化，将证伪本预期差。\n\n**预期差二：高毛利率的韧性被低估**\n市场在定价悲观增长的同时，也隐含了对利润率恶化的担忧。但桥B2（毛利率）告诉我们，Q1毛利率逆势提升至46.89%，显示公司在成本控制和产品结构优化上的能力。即使我们保守地将全年的毛利率假设下调至45.5%，其对应的盈利能力和ROE水平依然在消费品板块中极具竞争力。毛利率每1pp的变化，都将对本已脆弱的股东回报叙事产生约1.84亿元净利润（EPS 0.26元）的冲击，这是我们密切监控的变量。\n**最强反证与边界**：农夫山泉等巨头发起的促销战可能导致公司不得不以价换量，且PET/白糖价格若出现报复性上涨，公司缺少公开商品对冲，毛利率可能跌破45%甚至滑向44%的悲观区间。**证伪条件**：Q3毛利率<45%或销售费用率显著跳升，将证伪毛利率韧性假设。\n\n**预期差三：杯水车薪的股东回报还是坚定信心的表达？**\n公司10.39亿元的回购和慷慨的分红计划被空方诟病为体量太小。但我们认为，在股价持续下跌的过程中，管理层持续用真金白银投入，更多传递的是对公司内在价值的坚定信心和对估值被低估的态度。这笔现金流（桥B3）直接为股价提供了约2%的股息率支撑，虽不能完全对冲基本面下行，但显著提高了做空的时间成本和机会成本。\n**最强反证与边界**：若全年FCF因现金转化不及预期而低于20亿元，回购和分红可能被迫缩减，届时“股东回报”将沦为空洞承诺。**证伪条件**：全年OCF/净利润比率<0.65，或公司宣布缩减回购/分红，则本预期差被推翻。",
+  "moat_evidence_scorecard": "东鹏饮料的护城河主要建立在两个已被证明的维度上：\n1.  **品牌与渠道网络**：公司通过“累了困了喝东鹏特饮”的国民级广告和超过200万个终端网点，在消费者心智和物理货架上均占据了牢固位置。这体现在其极高的ROE（>50%）和能量饮料占比（71.92%）上，证明消费者和经销商的选择惯性很强。\n2.  **成本与规模优势**：全国性生产基地布局降低了配送半径和成本，支撑了其高性价比的定价策略，这是中小区域品牌难以复制的。\n\n然而，护城河并非无懈可击。**威胁在于竞争加剧带来的侵蚀风险**。农夫山泉等对手具备足够的资金实力来挑战东鹏的渠道激励体系和价格定位。同时，合同负债的下滑（信号待验）可能暗示经销商忠诚度正在经受考验。此外，产能利用率（缺失数据）是另一个潜在薄弱点：如果扩产后需求增长不匹配，高固定成本将削弱成本侧的护城河优势。",
+  "valuation_closure": "我们采用基于2026年预期盈利的情景估值法。核心价值由20/60/20的概率权重计算得出，覆盖了从增长重振到衰退的多种可能。\n\n*   **核心价值**：约132.0元/股。这是对增长正常化、毛利率温和压缩情景的未来现金流折现，已包含了较多悲观预期。\n*   **期权价值**：2.1元/股。这来自于电解质饮料等第二曲线成功的可能性。由于缺乏收入和利润证据，该价值不进基准情景，作为额外的上行彩票叠加。\n*   **方法论与限制**：我们选择PE估值法是由于公司现金流季节性波动大，而PE是对其高质量消费品盈利最清晰和常见的定价方式。最大限制在于估值对增速和PE倍数非常敏感，而这两个参数在H1关键数据缺失的情况下置信度仅为中等。\n\n情景价值、概率加权结果、预期收益与安全价格以本节程序化估值表为唯一数值口径。",
+  "accounting_and_capital_allocation": "从会计质量角度看，东鹏饮料的报表呈现出消费品龙头的典型特征：高毛利、高预收款（合同负债）、适度的资本开支。但几个边际变化值得警惕：\n\n1.  **现金转化质量（中性偏正面）**：Q1 OCF/NP比率仅0.36，看似惊人，但结合其“先款后货”的商业模式和春节后旺季备货的节奏，H1现金流已恢复至24.93亿元，符合季节性规律。我们维持全年0.8的预期，但若下半年为保增长而持续放宽渠道信用（应收账款/收入已微升），则全年实际转化率可能不及预期。\n\n2.  **资本开支效率（警告信号）**：连续多次的募投项目延期公告表明，公司的产能扩张可能过于激进，或市场需求增长已有所放缓。这是一个需要持续跟踪的潜在减值风险点。如果新产能转固后利用率不足，折旧将迅速侵蚀毛利。\n\n3.  **股东回报（积极信号）**：管理层通过10亿元级别的回购和慷慨的分红规划，展现了优秀的资本配置纪律和对股东利益的重视。这在民营企业中尤为可贵，直接提升了每股价值，并对冲了部分由业绩放缓带来的估值下行风险。",
+  "expectation_gap_and_market_pricing": "当前市场对东鹏饮料的定价极为苛刻。PE TTM仅18.33倍，处于5年来的0.7%分位，这一定价隐含的假设是公司未来盈利将出现停滞甚至下滑。\n\n然而，我们的模型显示，即使在未来三年收入增速逐步降至12%、毛利率温和压缩至45.5%的保守情景下，公司依然能实现可观的盈利。市场的预期差在于，**它似乎将“增长严重减速”与“价值毁灭”画上了等号，而忽略了公司作为现金牛和股东回报工具的价值。**\n\n我们的基准情景值为126.4元（20x PE），仅略高于当前市价，意味着市场尚未提供足够吸引的预期差。更大的机会在于估值修复：如果H2业绩证明增长并非如市场预期的那么差，PE从18x向20x甚至22x回归的过程，将是驱动股价上行的主要动力。反之，如果H1财报证实了悲观预期（如增速<12%），那么市场当前的定价将被证明是有效的，届时可能需要进一步下修至悲观情景（100元附近）。",
+  "risks_catalysts_verification": "**核心风险**\n1.  **增长失速风险（高）**：若H1 2026财报确认收入增速低于12%，将证伪我们的基准情景，导致评级下调至Underweight。合同负债同比-14.14%是当前最大的下行领先指标。\n2.  **竞争与毛利率风险（中高）**：如果Q3毛利率跌破45%，将宣告竞争压力或成本反弹已实质性冲击盈利底线，需要系统性下调估值。\n3.  **现金流风险（中）**：若全年OCF/NP比率低于0.65，将侵蚀股东回报的基础，打击市场对公司分红承诺的信心。\n\n**核心催化剂**\n1.  **H1 2026完整财报（近期最重要）**：获取并分析已发布但未成功提取的半年报，验证H1实际收入增速、毛利率及合同负债的精确变化。此为当前最关键的评级确认或调整依据。\n2.  **Q3经营数据（中期）**：验证H2增长态势及毛利率在竞争和成本环境下的韧性。\n3.  **“补水啦”细分数据（长期）**：若公司开始披露第二曲线的规模化收入，将激活长期期权价值。\n\n**证伪与验证日历**\n*   **评级上调至Overweight的验证信号**：H1 2026收入增速≥15%，且Q3合同负债环比改善。此时应上调增速预测，积极增配。\n*   **评级下调至Underweight的证伪信号**：H1 2026收入增速<12%，或Q3毛利率<44%。此时应全面下调盈利预测，减仓或清仓。\n*   **下次核心验证日期**：围绕2026年半年报的获取和分析。",
+  "handoff_integrity_audit": "作为最终决策者，我们完整地继承了Research Manager经辩论修订后的承销模型。\n\n1.  **已采纳的修订**：我们完全接受了经理将2026E收入增速从18%下调至16%、毛利率从46%下调至45.5%的决定。这两个修订使基准EPS降至6.32元，公允价值降至126.4元（20x PE），显著提高了模型的稳健性并反映了最新的负面信号。\n2.  **核心框架的保留**：我们保留了三年的预测框架、三大业务单元（能量饮料核心、电解质期权、国际其他期权）、五大财务桥接以及情景估值法。\n3.  **评级决策**：我们同意经理作出的Hold评级。尽管激进分析师提供了关于估值极端低位和潜在报复性反弹的精彩论述，但缺失的H1财报数据和未验证的合同负债信号构成了巨大的不确定性。在下行风险（18%）与上行空间（9.5%）仍不对称的情况下，等待信息明朗是风险收益比更优的选择。我们将此姿态定义为 **“Hold / Positive Watch”** ，强调我们倾向于相信增长故事的韧性，但需要在行动前获得数据的最终确认。",
+  "report_markdown": "",
+  "shared_model_change_audit": "| 预测/问题行 | 旧假设 | 挑战证据 | 新假设 | EPS/FCF/价值影响 | 状态 |\n| :--- | :--- | :--- | :--- | :--- | :--- |\n| 2026E收入增速 | 18% | H1增速放缓确认（EV095）、合同负债下滑（辩论信号） | 16% | 收入从246.3亿降至242.2亿，EPS降至6.32元 | 已采纳 |\n| 2026E毛利率 | 46% | 竞争压力、成本反弹风险 | 45.5% | 额外减少净利润约1.84亿， EPS再降0.11元 | 已采纳 |\n| 2026E OCF/NP | 0.8 | 应收账款微升但H1 OCF季节性恢复 | 0.8 | 未做修改 | 维持 |\n| 第二曲线贡献 | 期权 | 无收入/利润披露（EV027/EV028） | 期权价值2.1元 | 不进基准EPS | 维持 |",
+  "report_quality_self_check": "本报告尽可能严格地基于共享承销模型和辩论中引用的证据完成，但存在几个无法回避的限制：\n1.  **关键数据缺失（最大限制）**：2026年半年报（7月31日发布）的PDF文本提取失败，导致我们无法获取H1实际收入增长率、合同负债绝对值等最关键的验证数据。这直接限制了我们的信心水平。\n2.  **核心信号未验证**：辩论中作为核心对立点的“合同负债同比-14.14%”数据，在机器可读模型中被标记为未验证，因为我们无法从官方文件中提取。这作为一个强有力的线索，而非既定事实，被放入了观察列表。\n3.  **细分业务不完整**：由于公司未披露，能量饮料的绝对收入/利润率、电解质业务的规模等关键细节只能通过推断或定性描述，导致无法进行完全的自下而上估值。\n\n尽管存在这些信息缺口，本报告已基于可获取的最好证据（Q1财报、上交所互动平台交流、历史模型和辩论逻辑）构建了一个连贯且可证伪的投资框架，并为下一步验证指明了精确的数据点和行动方向。"
+}
