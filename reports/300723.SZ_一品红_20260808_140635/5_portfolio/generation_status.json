@@ -1,0 +1,34 @@
+{
+  "mode": "schema_prompt_structured",
+  "agent": "Portfolio Manager",
+  "structured_error": "",
+  "schema": "SellSidePMDecision",
+  "initial_mode": "schema_prompt_structured",
+  "editorial_review_mode": "deterministic_issue_router",
+  "editorial_revision_requested": true,
+  "editorial_revision_applied": true,
+  "editorial_revision_mode": "schema_prompt_structured",
+  "remaining_handoff_issues": [
+    "dropped canonical line: 2026e_eps",
+    "dropped canonical line: 2027e_epsdiluted",
+    "dropped canonical line: 2028e_epsdiluted"
+  ],
+  "remaining_analytical_issues": [],
+  "editorial_revision_rejection_reasons": [],
+  "deterministic_model_notes": [
+    "restored undocumented canonical change base_fair_value",
+    "excluded unverified optionality '其他早期管线期权' from public base value; kept as upside-only research context",
+    "synchronized total fair value per share 44.75 -> 49.9986",
+    "removed 1 manual deterministic valuation line(s) from prose",
+    "deduplicated 3 canonical model line(s)",
+    "inserted deterministic public numeric source-of-truth disclosure"
+  ],
+  "report_contract": "reader_led_wechat_seven_chapter_v2",
+  "rating_position": "opening_summary_and_chapter_7_recap",
+  "knowledge_planet_policy": "model_probability_verification_or_reject",
+  "full_report_chars": "10020",
+  "public_report_chars": "8604",
+  "internal_overflow_chars": "1413",
+  "internal_sections_removed_from_public_report": "内部附录D：替代信息与卖方预期审计, 内部附录E：模型交接与报告质量审计, 内部附录F：组合执行参数",
+  "public_h2_count": "7"
+}

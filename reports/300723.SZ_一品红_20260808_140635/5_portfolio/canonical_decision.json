@@ -1,0 +1,1094 @@
+{
+  "rating": "Overweight",
+  "rating_posture": "增持；12个月目标价50.00元，对应现价空间31.6%。评级依据为基本面与估值，后续按关键经营证据调整。",
+  "research_readiness": "partial",
+  "one_line_thesis": "AR882是全球痛风领域领先的后期资产，Sobi 9.5亿美元首付款显著增强资产负债表。尽管NDA提交延迟和现金到账不确定性仍然存在，但概率加权公允价值较现价亦有31.6%的上行空间，评级上调至增持，等待NDA提交或现金到账的硬证据落地后重新评估仓位。",
+  "research_questions": [
+    "AR882的美国NDA实际提交日期及FDA受理状态？",
+    "Sobi首付款的完整交易结构、税务处理与现金到账节奏？",
+    "医药制造业务的真实经营利润（扣非后净利润转正的路径与时间）？",
+    "管理层在获得Sobi现金后如何配置资本（还债/研发/并购/分红）？",
+    "集采中标后制造业务收入及毛利率能否验证量增价稳、推进盈亏平衡？"
+  ],
+  "question_verdicts": [
+    {
+      "question": "AR882的美国NDA实际提交日期及FDA受理状态？",
+      "why_decisive": "NDA提交是AR882从临床资产转变为商业化资产的硬性转折点，延迟直接推后里程碑和特许权使用费，每延迟6个月使风险调整NPV减少约15-25%，是本股最大催化剂和风险。",
+      "conclusion": "截至2026年8月8日，管理层原计划的2026年Q2美国NDA仍未提交。REDUCE 2三期阳性数据和Sobi巨额首付表明可批性未受实质打击，但提交延迟已超正常窗口。基准假设调整为2026年Q4前提交概率约50%，2027年H1提交概率约40%，延迟至2027年下半年的概率10%。获批概率仍维持70-75%。",
+      "evidence_used": [
+        "EV085：REDUCE 2全球三期阳性顶线数据（2025年5月）",
+        "EV083/EV084：国内三期仍在进行，无揭盲数据；美国NDA无公告",
+        "EV028：Sobi 9.5亿美元首付款交易公告，说明合作伙伴尽调后对可批性有高度信心"
+      ],
+      "strongest_counterevidence": "从三期数据读出到NDA提交已超过15个月，远高于行业正常窗口4-6个月，可能暗示FDA与申请人在CMC或临床数据包上存在未公开的沟通问题。国内三期未揭盲增加了不确定性。",
+      "model_or_valuation_effect": "NDA提交假设从2026年Q2确认推迟至2026年Q4-2027年H1，将AR882风险调整NPV下调约10%（从23.25元/股降至约20.93元/股），公允价值降低约2.3元/股。若延迟至2027年下半年，NPV损失20-25%。",
+      "confidence": "medium",
+      "next_verification": "公司公告/巨潮资讯网/ClinicalTrials.gov的NDA提交登记；FDA Day-74受理通知。关键观察窗口为2026年9-12月。"
+    },
+    {
+      "question": "Sobi首付款的完整交易结构、税务处理与现金到账节奏？",
+      "why_decisive": "9.5亿美元首付款的净现金到账直接构建公司的安全垫和估值下限。若实收低于预期或税务损耗超过30%，每股净现金可能从9.96元降至7-8元，SOTP基础明显削弱。",
+      "conclusion": "目前仅知Q1确认了5.82亿元非经常性收益（EV026），但公司明确标注为“Arthrosi股权转让收益”，可能与Sobi首付款为不同交易或部分确认。基准假设仍为2026年H2-2027年H1收到主要款项，税率20-25%，净现金约45亿元，但现金到账的确切时间与结构未被公告证实。",
+      "evidence_used": [
+        "EV026：Q1非经常性收益5.82亿元，来自于Arthrosi股权转让",
+        "EV016：OCF/净利润仅0.0315，经营现金流与账面利润严重背离",
+        "EV028：Sobi M&A交易公告提及9.5亿美元首付，但未披露里程碑、税率、付款进度"
+      ],
+      "strongest_counterevidence": "Q1 5.82亿元收益如果与Sobi首付是同一交易，为何金额远小于9.5亿美元且时间不匹配？若是不同交易，则Sobi现金至今无任何到账证据，净现金估值纯属假设。外汇套保公告为常规操作，不代表资金已入境。",
+      "model_or_valuation_effect": "暂时维持净现金45亿元、每股9.96元的假设，但降低置信度，并增设悲观情景：若现金推迟至2027年下半年到账或税务损耗至30%，净现金降至35亿元，每股减少约2.2元。",
+      "confidence": "low",
+      "next_verification": "2026年半年报的现金流量表、重大合同公告、税务补税或递延所得税资产变动。若半年报无Sobi资金流入迹象，净现金假设需大幅下调。"
+    },
+    {
+      "question": "医药制造业务的真实经营利润（扣非后净利润转正的路径与时间）？",
+      "why_decisive": "制造业务占收入98.62%，但扣非后净利润为负，无法自我维持。若不能证明转向盈亏平衡的可靠路径，SOTP中制造业务的任何估值都会受到挑战。",
+      "conclusion": "Q1 2026毛利率改善至66.08%（+5.03pp），但扣非后净利润仍为负。空头估计年化经营亏损约1亿元。基准假设为2028年之前难以实现盈亏平衡，但集采渠道占比上升和销售费用优化可能逐步收窄亏损。目前缺少分部报表，无法定量证明。",
+      "evidence_used": [
+        "EV027：Q1制造收入3.80亿元，毛利率66.08%，同比显著改善",
+        "EV017/EV018：应收账款/收入大降11.93pp，存货/收入降3.63pp，营运资金管理改善",
+        "EV025：扣非后净利润为负，与毛利改善形成矛盾"
+      ],
+      "strongest_counterevidence": "尽管毛利率优且应收、存货改善，销售费用仍极高（估计占收入60-70%）。集采历史降价50-70%可能侵蚀未来毛利率；集采爆量能否抵消降价及费用刚性仍是悬而未决的问题。",
+      "model_or_valuation_effect": "维持制造业务1.0x 2028E EV/Sales的保守估值（2.55元/股）。若2027年H1财报显示经营亏损缩窄至5000万元以内，可将倍数上调至1.2-1.5倍，增厚0.5-1.3元/股。若亏损扩大，估值可能进一步减计至0.5倍，损失约1.3元/股。",
+      "confidence": "low",
+      "next_verification": "2026年半年报或2026年三季报，寻找分部报告中的制造业务营业利润或至少销售费用明细。"
+    },
+    {
+      "question": "管理层在获得Sobi现金后如何配置资本（还债/研发/并购/分红）？",
+      "why_decisive": "净现金本身不创造价值，使用方式决定股东回报。历史记录不佳（两年不分红、ROE-20.8%、高杠杆），若现金用于低效并购，将严重侵蚀每股价值。",
+      "conclusion": "目前未披露任何资本配置政策或计划。基准情景假设优先偿还部分债务，年省财务费用2000-3000万元，剩余用于研发和一般公司用途。但没有证据表明管理层会改善资本纪律。",
+      "evidence_used": [
+        "EV065：资产负债率58.04%，财务费用率3.39%",
+        "EV023：2024年、2025年不分红",
+        "EV015：ROE为-20.80%，历史资本配置效率低下"
+      ],
+      "strongest_counterevidence": "管理层长期不重视股东回报，已有现金用于低效研发和未披露并购的可能性较高。若出现大手笔并购公告，将被视为现金价值的损毁，应立即下调估值。",
+      "model_or_valuation_effect": "资本配置是估值中的高敏感变量。乐观情景（还债+回购）可提升每股价值2-3元；悲观情景（大规模并购）可能损毁3-5元/股。当前模型未给予资本配置改善的任何溢价，也未计入损毁。",
+      "confidence": "low",
+      "next_verification": "投资者互动、董事会决议、重大资产购买公告。任何并购或分红政策变化将立即影响估值。"
+    },
+    {
+      "question": "集采中标后制造业务收入及毛利率能否验证量增价稳、推进盈亏平衡？",
+      "why_decisive": "这是证明制造业务具有“渠道价值”而非纯粹“成本中心”的关键。若集采后收入仍停滞、毛利率下滑，制造业务的SOTP估值可能归零。",
+      "conclusion": "8月中标第十二批集采，但尚未公布具体品种、价格降幅和报量。Q1收入仅增1.69%，说明量增尚未显现。毛利率虽同比改善，但集采价格压力可能在下半年体现。乐观情景下集采带动H2收入增长5-8%，毛利率维持66%左右；悲观情景下价格降幅超过60%，虽量增但收入下降，毛利率缩减至60%。",
+      "evidence_used": [
+        "EV022：拟中标第十二批国家药品集中采购",
+        "EV027：Q1制造收入同比+1.69%",
+        "EV012：毛利率66.08%，同比+5.03pp"
+      ],
+      "strongest_counterevidence": "历史集采经验显示多数品种降价50-70%，量增难以弥补。且降价通常滞后1-2个季度体现。Q1的毛利率改善可能因产品组合一次性因素，下半年回落概率高。",
+      "model_or_valuation_effect": "维持制造收入2026E 960百万元、毛利率66.5%的基准。若下半年财报显示收入下降或毛利率跌破63%，则将制造估值下调至0.5x EV/Sales或零值，损失1.3-2.5元/股。",
+      "confidence": "low",
+      "next_verification": "2026年三季报及集采正式执行后的月度经营简报（若有）。重要窗口为2026年10-11月。"
+    }
+  ],
+  "forecast_takeaways": [
+    {
+      "takeaway": "2026年报表利润将极端依赖Sobi首付款的非经常性收益，扣非后净利润仍为亏损。投资者应聚焦SOTP而非PE。",
+      "evidence_anchor": "Q1 2026归母净利润+950%完全由5.82亿元非经常性收益驱动；OCF/净利仅0.0315；扣非后净利润为负。",
+      "financial_implication": "2026E EPS约10.18元（主要来自首付款），但核心EPS为负。不能将PS或PE TTM用于估值，必须用SOTP。",
+      "confidence_and_risk": "高置信度。风险在于若首付款会计处理变更导致确认延迟，将使当年利润远低于预期。"
+    },
+    {
+      "takeaway": "公允价值中枢约50.00元，但受NDA时间表和Sobi现金到账的影响，区间波动巨大（悲观22元~乐观72元）。上行空间31.6%，在当前信息水平下已具备一定的安全边际，但仍需催化剂验证。",
+      "evidence_anchor": "概率加权SOTP：制造2.55 + AR882 NPV 23.25 + 净现金9.96 + 期权1.11 = 36.87元核心价值；情景概率30/50/20加权得50.00元。",
+      "financial_implication": "31.6%的上行空间在事件驱动型股票中具备吸引力，但由于下行至悲观情景的风险为42%，仍不建议满仓。待关键催化剂落地后，收益风险比将显著改善。",
+      "confidence_and_risk": "中等置信度；主要风险是公允价值的基础假设（NDA提交、现金到账、获批概率）均为未验证的分析性假设，任何一个被证伪都可能导致公允价值大幅缩水。"
+    },
+    {
+      "takeaway": "催化剂密度高但不确定性极大：未来3-6个月将密集出现NDA提交、Sobi现金到账、集采后收入数据、半年报分部利润——这些要么验证、要么证伪当前多头论点。",
+      "evidence_anchor": "已知催化剂日历：2026年Q3-Q4 NDA提交、2026年下半年半年报、Sobi现金公告。",
+      "financial_implication": "若NDA提交并受理，公允价值可能立即重估+5-10%；若Sobi现金到账，净现金估值坐实。相反，若两项均落空，股价可能向悲观情景（22元）靠拢。",
+      "confidence_and_risk": "高置信度。风险在于催化剂时点无法精确预测，但事件本身是硬性可观测的。"
+    }
+  ],
+  "forecast_assumptions": [
+    {
+      "parameter": "AR882美国NDA提交时间",
+      "affected_business": "创新药管线AR882 (BU02)",
+      "historical_anchor": "管理层原表述Q2 2026提交，但截至8月8日未实现；REDUCE 2三期数据2025年5月读出。",
+      "evidence_status": "analyst_estimate",
+      "base_case": "2026年Q4提交（概率50%），受理后2027年下半年获批。",
+      "bull_case": "2026年Q3提交并受理，2027年上半年获批。",
+      "bear_case": "2027年上半年才提交，获批延迟至2028年。",
+      "rationale_and_evidence": "REDUCE 2强阳性数据+Sobi巨额首付表明获批概率高，但超长延迟可能暗示CMC或沟通问题。采用较保守的基准，反映当前不确定性。",
+      "sensitivity": "每延迟6个月，AR882风险调整NPV减少约15-25%，对应每股2-3元。",
+      "confidence": "medium",
+      "verification_gate": "公司公告或ClinicalTrials.gov NDA提交；FDA受理通知。观察窗口至2027年Q1。"
+    },
+    {
+      "parameter": "Sobi首付款净现金到账",
+      "affected_business": "公司整体资产负债表及净现金估值",
+      "historical_anchor": "无历史案例；仅Q1确认5.82亿元Arthrosi股权转让收益（EV026），未明确与Sobi首付关系。",
+      "evidence_status": "analyst_estimate",
+      "base_case": "2026年H2-2027年H1收到净现金45亿元（税前60-65亿，税率20-25%）。",
+      "bull_case": "2026年Q3一次性到账，税率低于15%，净现金50亿元+。",
+      "bear_case": "分多年确认，首年到账不足20亿元，且税率30%+，净现金低于35亿元。",
+      "rationale_and_evidence": "9.5亿美元公告已出，但交易结构（许可or资产出售）不明。保守估计税率和延迟。",
+      "sensitivity": "净现金每差10亿元，每股影响约2.2元。",
+      "confidence": "low",
+      "verification_gate": "2026年半年报或三季度报的现金流入；重大合同公告。"
+    },
+    {
+      "parameter": "医药制造业务毛利率",
+      "affected_business": "医药制造业务 (BU01)",
+      "historical_anchor": "2026年Q1毛利率66.08%，同比+5.03pp；2025年估计全年约61%。",
+      "evidence_status": "analyst_estimate",
+      "base_case": "2026E全年毛利率66.5%，2027E 67.0%，2028E 67.5%，反映集采规模效应和产品组合优化。",
+      "bull_case": "集采成本下降超预期，毛利率升至68%+。",
+      "bear_case": "集采价格降幅高于预期，2026H2毛利率回落至62-63%。",
+      "rationale_and_evidence": "Q1改善有据，但集采降价压力通常在执行后1-2个季度显现。维持较乐观斜率，但密切监控。",
+      "sensitivity": "毛利率每下滑1pp，毛利减少约1000万元，对制造估值影响微小，但若伴随收入停滞，将打击战略价值认知。",
+      "confidence": "medium",
+      "verification_gate": "2026年三季报及集采正式品种价格公告。"
+    },
+    {
+      "parameter": "AR882获批概率",
+      "affected_business": "创新药管线AR882 (BU02)",
+      "historical_anchor": "REDUCE 2阳性数据；Sobi尽调后支付9.5亿美元首付，行业惯例暗示高概率。",
+      "evidence_status": "analyst_estimate",
+      "base_case": "75%",
+      "bull_case": "80%",
+      "bear_case": "50-60%（若出现安全性问题或竞争恶化）",
+      "rationale_and_evidence": "基于三期阳性、大药企背书，但临床数据未完全公开，且NDA延迟带来不确定性。",
+      "sensitivity": "概率每变动5pp，AR882风险调整NPV变动约8-10%，即每股约2元。",
+      "confidence": "medium",
+      "verification_gate": "NDA提交后的公开数据摘要、FDA咨询委员会会议、最终审批结果。"
+    },
+    {
+      "parameter": "制造业务经营利润（扣非后）",
+      "affected_business": "医药制造业务 (BU01)",
+      "historical_anchor": "2025年全年估计亏损数亿元；2026年Q1扣非后净利润为负。",
+      "evidence_status": "analyst_estimate",
+      "base_case": "2026E经营亏损约1亿元，2027E收窄至0.5亿亏损，2028E达到盈亏平衡。",
+      "bull_case": "通过销售费用率降低，2027年H2即实现盈亏平衡。",
+      "bear_case": "亏损维持1-1.2亿元/年，无法转正。",
+      "rationale_and_evidence": "费用结构不明，但集采渠道理论上降低销售费用。无确凿证据证明拐点。",
+      "sensitivity": "盈亏平衡时点影响制造业务估值倍数。早一年转正可额外贡献0.5-1元/股。",
+      "confidence": "low",
+      "verification_gate": "2026年H2的分部利润数据或2026年年报。"
+    }
+  ],
+  "core_theses": [
+    {
+      "rank": 1,
+      "takeaway": "AR882是全球痛风领域领先的后期资产，Sobi的巨额头付验证了其商业潜力。NDA提交是近期最重要的价值释放事件，尽管延迟，但底层成功概率仍高。",
+      "decisive_question": "AR882能否在未来12个月内成功提交NDA并获得受理？",
+      "evidence": "REDUCE 2三期达成主要终点，安全性良好；Sobi以9.5亿美元首付获取全球权益，显示商业信心（EV028, EV085）。",
+      "strongest_counterevidence": "NDA已经迟于管理层的指引，任何进一步的延迟都会侵蚀先发优势，并可能暗示未被市场知晓的CMC或临床问题。",
+      "financial_transmission": "NDA提交并受理 → 获批概率明确化 → 风险调整NPV提升 → 每股公允价值增厚2-3元。",
+      "market_pricing": "PE TTM 85倍，3年价格涨85%而EPS降37%，显示市场已赋予AR882相当高的期权价值，但未完全贴现延迟风险。近期相对行业落后反映担忧。",
+      "falsification_gate": "若2026年12月31日仍无NDA提交公告，则该论点面临重大威胁，公允价值至少下调5元/股。",
+      "verdict": "partial"
+    },
+    {
+      "rank": 2,
+      "takeaway": "Sobi交易带来的现金注入将为公司提供强大的资产负债表和安全垫，但到账节奏和税务结构的不确定性使当前的净现金估值不稳。",
+      "decisive_question": "Sobi首付款的净现金何时、以何种形式进入公司？",
+      "evidence": "仅知Q1确认5.82亿元股权转让收益（EV026）；Sobi交易公告存在（EV028），但条款未细。",
+      "strongest_counterevidence": "Q1的5.82亿收益与Sobi交易的关系不明，且经营现金流未增加，现金到账真实性存疑。",
+      "financial_transmission": "净现金到账直接增厚每股净资产，并降低财务风险，提升估值基准。但若迟迟不到，则概念缩水。",
+      "market_pricing": "市场可能部分计入了现金到账预期，但同样担忧无法落实。当前PB 8.86倍远高于行业，若现金到账，PB将迅速降至2-3倍，构成估值锚。",
+      "falsification_gate": "2026年半年报无大额现金流入且无合理说明，则推论现金到账将严重推迟或缩水。",
+      "verdict": "partial"
+    },
+    {
+      "rank": 3,
+      "takeaway": "制造主业在集采改革背景下仍陷于亏损，但其优秀毛利率和改善的营运资金提供了盈亏平衡的想象空间，应将其视作等待验证的渠道价值而非当前的负资产。",
+      "decisive_question": "制造业务能否在2028年前实现经营利润转正？",
+      "evidence": "毛利率66.08%行业领先，应收/存货管理显著优化（EV017, EV018）。",
+      "strongest_counterevidence": "扣非后净利润持续为负，销售费用吞噬毛利。集采降价历史残酷，且公司未披露分部的费用结构。",
+      "financial_transmission": "若经营利润转正，制造业务可从1x EV/Sales重估至1.5-2x，增厚1-2元/股。",
+      "market_pricing": "市场几乎完全忽略制造业务价值，视其为壳。这为空头提供了安全垫：改善即是惊喜。",
+      "falsification_gate": "2026年H2或2027年H1制造收入下滑、毛利率跌破60%且经营亏损扩大，则制造业务估值可下调至零。",
+      "verdict": "unproven"
+    }
+  ],
+  "segment_economics": [
+    {
+      "business_unit": "医药制造 (BU01)",
+      "economic_role": "成熟核心业务，当前不盈利但提供收入规模和集采渠道，属于等待验证的渠道价值",
+      "disclosure_basis": "reported",
+      "scale_and_growth": "Q1 2026收入3.80亿元，占营收98.62%，同比+1.69%；2026E收入960百万元，增速约4%",
+      "margin_and_cash": "Q1毛利率66.08%（同比+5.03pp），但扣非后净利润为负，经营现金流薄弱；应收账款/收入降至18.62%，存货/收入降至14.32%，营运资金管理改善",
+      "driver_equation": "收入 = Σ(产品销量 × 净售价)，受集采中标量和医院采购驱动；经营利润 = 毛利 – 销售费用 – 研发 – 管理费",
+      "valuation_treatment": "core",
+      "evidence_ids": [
+        "EV027",
+        "EV012",
+        "EV017",
+        "EV018",
+        "EV025"
+      ],
+      "missing_or_next_check": "缺乏分部销售费用和管理费用明细，无法定量验证盈亏平衡路径；等待2026年半年报分部报告"
+    },
+    {
+      "business_unit": "创新药管线AR882 (BU02)",
+      "economic_role": "核心增长引擎和价值驱动器，目前零收入，通过对外许可变现",
+      "disclosure_basis": "analytical",
+      "scale_and_growth": "当前无收入；RISK调整NPV约105亿元（23.25元/股），潜在峰值特许权使用费每年可达10-30亿元",
+      "margin_and_cash": "特许权使用费率未披露，假设12-18%；研发费用Q1 3,951万元（占收入10.2%），其中146万元资本化；Sobi首付款将大幅改善净现金",
+      "driver_equation": "未来价值 = Σ(全球净销售额 × 特许权使用费率) ÷ (1+折现率)^n × 获批概率；首付款和里程碑收入进入非经常性损益",
+      "valuation_treatment": "core",
+      "evidence_ids": [
+        "EV085",
+        "EV083",
+        "EV028",
+        "EV029"
+      ],
+      "missing_or_next_check": "Sobi交易完整条款（特许权使用费率、里程碑、税务）未披露；NDA确切提交日期未确认"
+    }
+  ],
+  "business_model_mechanisms": [
+    {
+      "link": "药品研发与注册",
+      "how_it_works": "通过自有研发或引进开发仿制药和创新药，完成临床试验后向NMPA/FDA提交注册申请，获得批文后进入商业化",
+      "economic_driver": "研发成功率、注册进度决定产品上市时间表",
+      "cash_and_capital_feature": "前期研发投入高，资本化率低；成功上市后带来高毛利收入",
+      "evidence_or_gap": "AR882的全球三期完成，国内三期入组完毕；制造板块多个品种参与集采",
+      "analyst_conclusion": "管线价值是核心估值驱动，但NDA延迟增加了时间风险"
+    },
+    {
+      "link": "医院采购与集采投标",
+      "how_it_works": "通过医院招标和国家集中采购获得产品入院资格，以量换价，由配送商或直供医院完成销售",
+      "economic_driver": "集采中标量和净价决定收入规模，销售费用率影响盈利能力",
+      "cash_and_capital_feature": "应收账款来自医院或医保，账期较长但坏账率低；集采可降低销售费用",
+      "evidence_or_gap": "8月中标第十二批集采，Q1收入增长仅1.69%，效果待观察；无分产品销售数据",
+      "analyst_conclusion": "集采量增效应尚未体现，定价压力是最大不确定因素"
+    },
+    {
+      "link": "创新药对外许可",
+      "how_it_works": "将自主研发的创新药权益许可给跨国药企，收取首付款、里程碑付款和销售分成",
+      "economic_driver": "首付款和里程碑收入一次性增厚利润，特许权使用费提供长期高毛利现金流",
+      "cash_and_capital_feature": "首付款大幅改善净现金；后续分成几乎无额外成本，现金转化率极高",
+      "evidence_or_gap": "Sobi 9.5亿美元首付款已公告，但现金到账时间和税务处理未披露",
+      "analyst_conclusion": "交易结构确定性低是当前安全垫最大的瑕疵"
+    },
+    {
+      "link": "成本与费用结构",
+      "how_it_works": "制造成本包括原料药、辅料和加工费；销售费用涵盖学术推广、渠道维护等；研发费用主要投向临床和注册",
+      "economic_driver": "销售费用率是制造业务能否扭亏的关键变量",
+      "cash_and_capital_feature": "费用支付早于收入回收，尤其是研发和销售费用，导致经营现金流弱于账面利润",
+      "evidence_or_gap": "无分段费用数据；估计销售费用率高达60-70%",
+      "analyst_conclusion": "费用结构不透明是估值折价的重要原因"
+    },
+    {
+      "link": "资本配置与资产负债表管理",
+      "how_it_works": "Sobi首付款将大幅降低杠杆，释放财务费用空间；管理层如何使用现金决定长期股东回报",
+      "economic_driver": "还债可节省利息，回购可提升每股价值，并购可能创造或销毁价值",
+      "cash_and_capital_feature": "当前负债率58%，无分红；现金到位后资产负债率可降至30%以下",
+      "evidence_or_gap": "历史资本配置记录差（ROE-20.8%，两年不分红）；未来计划未披露",
+      "analyst_conclusion": "资本纪律是最大非临床风险，但当前模型未给予任何配置溢价或惩罚"
+    }
+  ],
+  "industry_driver_matrix": [
+    {
+      "driver": "国家药品集采政策",
+      "current_state_and_direction": "常态化制度化推进，覆盖品种和区域扩大；降价压力持续但头部企业获得稳定量",
+      "dated_evidence": "2026年8月第十二批集采拟中标公告（EV022）",
+      "affected_business": "医药制造 (BU01)",
+      "financial_transmission": "量增价降影响制造收入和毛利率；有利的是集采渠道可降低销售费用率",
+      "confidence": "medium",
+      "next_verification": "2026年H2集采实际执行量和价格公告"
+    },
+    {
+      "driver": "URAT1抑制剂全球竞争格局",
+      "current_state_and_direction": "AR882是唯一进入全球三期的URAT1抑制剂；竞品dotinurad（日本上市）尚未启动全球三期",
+      "dated_evidence": "REDUCE 2 2025年5月阳性顶线数据（EV085）；dotinurad尚无全球三期注册信息",
+      "affected_business": "AR882管线 (BU02)",
+      "financial_transmission": "先发优势可支撑较高定价和市场份额，延迟则削弱先发优势",
+      "confidence": "medium",
+      "next_verification": "竞品临床进展和注册动态"
+    },
+    {
+      "driver": "创新药融资与BD环境",
+      "current_state_and_direction": "全球大药企继续通过许可交易获取中国创新药资产；Sobi交易验证了该渠道",
+      "dated_evidence": "Sobi 9.5亿美元首付款公告（EV028）；行业BD交易活跃",
+      "affected_business": "AR882管线 (BU02)",
+      "financial_transmission": "BD交易提升管线可变现性，提供现金流入",
+      "confidence": "high",
+      "next_verification": "后续里程碑收款公告"
+    },
+    {
+      "driver": "中国老龄化与慢性病负担",
+      "current_state_and_direction": "痛风患病率上升，降尿酸治疗需求结构性增长",
+      "dated_evidence": "流行病学和行业报告长期趋势",
+      "affected_business": "制造 (BU01) 和 AR882 (BU02)",
+      "financial_transmission": "支持制造端相关品种和AR882长期需求增速",
+      "confidence": "high",
+      "next_verification": "不需要高频验证"
+    }
+  ],
+  "competition_landscapes": [
+    {
+      "business_unit": "医药制造 (BU01)",
+      "market_boundary": "中国医院药品集中采购市场，尤其是仿制药和专科药",
+      "structure_and_concentration": "高度分散，数千家仿制药企竞争；集采中标的产品层面集中度较高",
+      "direct_competitors": [
+        "华润双鹤（规模更大、PE更低、ROE为正）",
+        "海正药业（多元化仿制药企）",
+        "健康元（毛利率63%可比）"
+      ],
+      "substitutes_self_supply_and_new_entrants": [
+        "原研药进口替代",
+        "医院院内制剂",
+        "新的仿制药进入者"
+      ],
+      "comparison_dimensions": [
+        "集采中标率",
+        "产品组合广度",
+        "毛利率与费用率",
+        "规模与产能利用率"
+      ],
+      "company_relative_position": "中游偏下：毛利率66%高于同行，但销售费用率更高，经营亏损；规模远小于头部企业",
+      "competitor_likely_response": "竞争对手通过激进降价维持集采份额，压缩行业整体利润",
+      "financial_transmission": "集采降价直接压低ASP和毛利率，量增可能无法弥补，难以实现盈利",
+      "evidence_status_and_ids": "partial; EV065（同行比较数据）、EV022、EV027",
+      "next_verification": "H2 2026收入增长和毛利率数据"
+    },
+    {
+      "business_unit": "AR882创新药管线 (BU02)",
+      "market_boundary": "全球难治性痛风降尿酸治疗（ULT）市场，目标为黄嘌呤氧化酶抑制剂控制不佳的患者",
+      "structure_and_concentration": "中度集中：现有标准疗法为别嘌醇和非布司他；URAT1抑制剂类别只有dotinurad（日本）和AR882进入后期",
+      "direct_competitors": [
+        "dotinurad（富士药品，日本获批）",
+        "别嘌醇/非布司他仿制药",
+        "聚乙二醇重组尿酸酶（Krystexxa，Amgen）"
+      ],
+      "substitutes_self_supply_and_new_entrants": [
+        "其他中国药企的URAT1抑制剂（如Jacobio、Abbisko，早期阶段）",
+        "生活管理和饮食控制",
+        "大药企通过并购进入"
+      ],
+      "comparison_dimensions": [
+        "降尿酸效力和安全性",
+        "给药便利性（口服每日一次）",
+        "全球临床数据成熟度",
+        "商业化伙伴实力"
+      ],
+      "company_relative_position": "领先：唯一拥有全球三期阳性数据的URAT1抑制剂；Sobi合作提供商业化基础设施；但NDA延误削弱了先发优势",
+      "competitor_likely_response": "dotinurad原研可能寻求全球合作加速开发；仿制药将依靠低价竞争",
+      "financial_transmission": "商业化时间和市场份额决定特许权使用费收入；Sobi的定价能力影响分成规模",
+      "evidence_status_and_ids": "partial; EV085, EV083, EV028",
+      "next_verification": "NDA提交和FDA受理进展"
+    }
+  ],
+  "moat_mechanisms": [
+    {
+      "moat_source": "AR882专利与数据独占",
+      "operating_mechanism": "专利组合和REDUCE 2关键临床数据阻止仿制药和类似物进入，直至专利到期（预计2038年后）",
+      "observed_proof": "REDUCE 2三期成功，专利保护期较长（未核实具体到期日）",
+      "economic_result": "长期定价权和市场份额保护，支撑高特许权使用费收入",
+      "durability_and_threat": "NDA延迟可能侵蚀先发优势，竞品可能缩短独占期",
+      "verdict": "partial"
+    },
+    {
+      "moat_source": "Sobi合作与商业化规模",
+      "operating_mechanism": "Sobi作为全球专科药企，拥有强大的痛风领域销售团队和市场准入能力，降低一品红自行商业化的风险",
+      "observed_proof": "Sobi支付了9.5亿美元首付（EV028），表明尽调后认为资产优质且可商业化",
+      "economic_result": "加速全球放量，提高特许权使用费实现概率，降低执行风险",
+      "durability_and_threat": "合作有合同约束，但未披露期限和终止条件",
+      "verdict": "partial"
+    },
+    {
+      "moat_source": "院内渠道和集采网络",
+      "operating_mechanism": "多年院内销售关系和集采中标网络构成仿制药业务的护城河，降低新进入者获取医院的难度",
+      "observed_proof": "8月中标第十二批集采，应收和存货管理改善",
+      "economic_result": "集采中标提供稳定基础量，但定价权弱",
+      "durability_and_threat": "集采的持续降价压力可能侵蚀渠道价值，且新进入者可通过低价中标",
+      "verdict": "unproven"
+    }
+  ],
+  "accounting_quality_matrix": [
+    {
+      "item": "盈利质量",
+      "latest_evidence_and_period": "Q1 2026归母净利润5.94亿元，但扣非后净利润为负；OCF/净利润仅0.0315",
+      "trend_or_comparator": "同比净利润+950%完全由非经常性收益驱动",
+      "causal_interpretation": "账面利润严重依赖Sobi交易一次性收益，核心经营业务处于亏损状态",
+      "earnings_cash_roic_effect": "扣非EPS为负，无法用PE估值；经营现金流极弱",
+      "verdict": "warning",
+      "evidence_ids": [
+        "EV025",
+        "EV026",
+        "EV016"
+      ]
+    },
+    {
+      "item": "营运资金管理",
+      "latest_evidence_and_period": "Q1 2026应收账款/收入18.62%（-11.93pp YoY），存货/收入14.32%（-3.63pp YoY）",
+      "trend_or_comparator": "显著改善",
+      "causal_interpretation": "集采渠道占比提升改善了医院端回款速度，存货管理优化",
+      "earnings_cash_roic_effect": "有助于未来经营现金流改善，但当前仍为负",
+      "verdict": "positive",
+      "evidence_ids": [
+        "EV017",
+        "EV018"
+      ]
+    },
+    {
+      "item": "杠杆与财务负担",
+      "latest_evidence_and_period": "资产负债率58.04%，财务费用率3.39%（同比-0.69pp）",
+      "trend_or_comparator": "杠杆偏高，但财务费用率微降",
+      "causal_interpretation": "Sobi现金注入后杠杆将大幅下降，但目前仍依赖债务融资",
+      "earnings_cash_roic_effect": "年化财务费用约3,000-4,000万元，还债后可化为利润",
+      "verdict": "warning",
+      "evidence_ids": [
+        "EV065"
+      ]
+    },
+    {
+      "item": "资本配置与股东回报",
+      "latest_evidence_and_period": "2024、2025年均不分红；ROE-20.80%",
+      "trend_or_comparator": "近两年无分红，资本回报差",
+      "causal_interpretation": "管理层历史上不重视股东回报，现金到手后的配置决策是关键风险",
+      "earnings_cash_roic_effect": "不当资本配置可能损毁每股价值3-5元",
+      "verdict": "negative",
+      "evidence_ids": [
+        "EV023",
+        "EV015"
+      ]
+    },
+    {
+      "item": "研发资本化",
+      "latest_evidence_and_period": "Q1 2026研发费用3,951万元，资本化146万元（3.7%）",
+      "trend_or_comparator": "资本化率较低",
+      "causal_interpretation": "研发投入主要费用化，会计处理保守，但增加了当期亏损",
+      "earnings_cash_roic_effect": "费用化压低短期利润，但未来管线价值未计入资产",
+      "verdict": "neutral",
+      "evidence_ids": [
+        "EV029"
+      ]
+    }
+  ],
+  "alternative_intelligence_decisions": [
+    {
+      "kpe_ids": [
+        "KPE01"
+      ],
+      "claim": "天风证券医药团队将一品红列入“全球BIC/FIC潜力”创新药名单，属行业层面的卖方推荐",
+      "source_type": "sell_side_view",
+      "affected_business_and_variable": "AR882管线 / 市场情绪和催化剂热度",
+      "public_crosscheck": "无官方公告；行业推荐名单；该KPE与对应KSI属于同一卖方原始帖子，不构成独立交叉验证；该KPE与对应KSI属于同一卖方原始帖子，不构成独立交叉验证。",
+      "evidence_grade": "C_market_narrative",
+      "source_reliability": "B_identified_professional",
+      "bias_profile": "sell_side_optimism",
+      "adoption_ceiling": "scenario_or_verification_only",
+      "disposition": "rejected",
+      "before_after": "无模型变化；行业推荐名单未提供公司特定预测或估值，不满足模型输入条件",
+      "report_use": "仅作为市场叙事参考，不改变评级、估值或假设",
+      "falsification_or_next_check": "需公司特定的NDA/商业化进展验证",
+      "freshness_and_shelf_life": "2026-08-07发布，需关注后续实质性数据"
+    }
+  ],
+  "sell_side_expectation_matrix": [],
+  "safe_valuation_assumptions": {
+    "current_price_cny": 37.99,
+    "required_annual_return_pct": 20.0,
+    "holding_period_years": 1.0,
+    "margin_of_safety_pct": 15.0,
+    "maximum_bear_loss_pct": 20.0,
+    "optionality_equity_value_cny_mn": 0.0,
+    "optionality_inputs": [
+      {
+        "name": "其他早期管线期权",
+        "metric_name": "AR882价值的5%",
+        "metric_value_cny_mn": 500.0,
+        "valuation_multiple": 1.0,
+        "probability_pct": 100.0,
+        "ownership_pct": 100.0,
+        "execution_haircut_pct": 0.0,
+        "evidence_ids": [],
+        "assumption_summary": "高度不确定，作为期权价值附加；不纳入公共基准值",
+        "include_in_public_base_value": false
+      }
+    ],
+    "other_adjustments_equity_value_cny_mn": 0.0,
+    "scenarios": [
+      {
+        "scenario": "bull",
+        "probability_pct": 30.0,
+        "valuation_method": "direct_equity_value",
+        "parent_net_profit_cny_mn": null,
+        "valuation_multiple": null,
+        "direct_equity_value_cny_mn": 32520.0,
+        "assumption_summary": "AR882 NDA顺利提交并获批，Sobi首付款全额快速到账且税率低，制造业务2027年盈亏平衡，特许权使用费2028年启动",
+        "evidence_ids": [
+          "EV085",
+          "EV028"
+        ]
+      },
+      {
+        "scenario": "base",
+        "probability_pct": 50.0,
+        "valuation_method": "direct_equity_value",
+        "parent_net_profit_cny_mn": null,
+        "valuation_multiple": null,
+        "direct_equity_value_cny_mn": 21680.0,
+        "assumption_summary": "AR882 NDA 2026年H2提交，2027年下半年获批；Sobi首付2026H2-2027H1到账净额45亿元；制造2028年盈亏平衡",
+        "evidence_ids": [
+          "EV085",
+          "EV083",
+          "EV028"
+        ]
+      },
+      {
+        "scenario": "bear",
+        "probability_pct": 20.0,
+        "valuation_method": "direct_equity_value",
+        "parent_net_profit_cny_mn": null,
+        "valuation_multiple": null,
+        "direct_equity_value_cny_mn": 9940.0,
+        "assumption_summary": "AR882 NDA严重延迟至2027年H2后，获批概率大幅下降；Sobi现金到账少于预期且高税率；制造持续亏损",
+        "evidence_ids": [
+          "EV025",
+          "EV010"
+        ]
+      }
+    ]
+  },
+  "deterministic_valuation": {
+    "status": "closed",
+    "diluted_share_count_mn": 451.69276599999995,
+    "scenario_rows": [
+      {
+        "scenario": "bull",
+        "probability_pct": 30.0,
+        "parent_net_profit_cny_mn": null,
+        "eps_cny": null,
+        "valuation_method": "direct_equity_value",
+        "valuation_multiple": null,
+        "equity_value_cny_mn": 32520.0,
+        "fair_value_per_share_cny": 71.99583975626477,
+        "assumption_summary": "AR882 NDA顺利提交并获批，Sobi首付款全额快速到账且税率低，制造业务2027年盈亏平衡，特许权使用费2028年启动"
+      },
+      {
+        "scenario": "base",
+        "probability_pct": 50.0,
+        "parent_net_profit_cny_mn": null,
+        "eps_cny": null,
+        "valuation_method": "direct_equity_value",
+        "valuation_multiple": null,
+        "equity_value_cny_mn": 21680.0,
+        "fair_value_per_share_cny": 47.99722650417652,
+        "assumption_summary": "AR882 NDA 2026年H2提交，2027年下半年获批；Sobi首付2026H2-2027H1到账净额45亿元；制造2028年盈亏平衡"
+      },
+      {
+        "scenario": "bear",
+        "probability_pct": 20.0,
+        "parent_net_profit_cny_mn": null,
+        "eps_cny": null,
+        "valuation_method": "direct_equity_value",
+        "valuation_multiple": null,
+        "equity_value_cny_mn": 9940.0,
+        "fair_value_per_share_cny": 22.00610846178573,
+        "assumption_summary": "AR882 NDA严重延迟至2027年H2后，获批概率大幅下降；Sobi现金到账少于预期且高税率；制造持续亏损"
+      }
+    ],
+    "optionality_rows": [],
+    "probability_weighted_core_value_cny": 49.99858687132483,
+    "optionality_per_share_cny": 0.0,
+    "other_adjustments_per_share_cny": 0.0,
+    "fair_value_per_share_cny": 49.99858687132483,
+    "expected_return_pct": 31.609862783166175,
+    "required_annual_return_pct": 20.0,
+    "holding_period_years": 1.0,
+    "margin_of_safety_pct": 15.0,
+    "maximum_bear_loss_pct": 20.0,
+    "required_return_price_cny": 39.99768875348043,
+    "margin_of_safety_price_cny": 40.797642528550035,
+    "bear_loss_constraint_price_cny": 27.50763557723216,
+    "safe_buy_price_ceiling_cny": 27.50763557723216,
+    "suggested_buy_zone_low_cny": 24.756872019508947,
+    "fundamental_floor_cny": 22.00610846178573,
+    "formula_notes": [
+      "scenario EPS = parent net profit (CNY mn) / diluted shares (mn)",
+      "PE fair value/share = scenario EPS x selected PE",
+      "probability-weighted core value = sum(probability x scenario fair value/share)",
+      "optionality equity value = metric x multiple x probability x ownership x (1-execution haircut)",
+      "safe ceiling = min(base/(1+required return)^years, base x (1-MOS), bear/(1-max bear loss))"
+    ]
+  },
+  "investment_conclusion_and_core_conflict": "一品红的投资价值完全系于AR882这一全球领先的痛风创新药资产能否在近期完成NDA提交，以及Sobi 9.5亿美元首付款能否顺利转化为公司资产负债表上的净现金。概率加权公允价值约50.00元，对应现价37.99元隐含31.6%的上行空间，风险调整后回报率已超越需20%的门槛，因此评级上调至增持。多头正确指出了REDUCE 2阳性数据和Sobi背书所代表的资产质量，但管理层执行进度和交易细节透明度严重不足是制约估值兑现的核心冲突。熊方对制造业务持续亏损和现金到账风险的攻击有力，但过度下调获批概率缺乏反向证据。综合来看，这是一个典型的“好资产、弱壳”组合，在NDA提交或现金到账任一硬信号出现前，增持并等待催化剂验证是最理性的策略。",
+  "canonical_model_snapshot": [
+    {
+      "line_id": "shares",
+      "period": "2026-08-08; latest stock_basic; Tushare stock_basic.reg_capital (CNY 10,000) / 100; CNY 1 par value",
+      "metric": "diluted_shares",
+      "value": 451.69276599999995,
+      "unit": "mn shares",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV026"
+      ],
+      "formula": "Tushare stock_basic.reg_capital (CNY 10,000) / 100; CNY 1 par value"
+    },
+    {
+      "line_id": "2026E_revenue",
+      "period": "2026E",
+      "metric": "consolidated_revenue",
+      "value": 960.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV027",
+        "EV022"
+      ],
+      "formula": "manufacturing revenue 960; licensing income classified as non-operating"
+    },
+    {
+      "line_id": "2026E_gross_margin",
+      "period": "2026E",
+      "metric": "gross_margin",
+      "value": 66.5,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV012",
+        "EV031"
+      ],
+      "formula": ""
+    },
+    {
+      "line_id": "2026E_parentnetprofit",
+      "period": "2026E",
+      "metric": "parentnetprofit",
+      "value": 4600.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV010",
+        "EV009",
+        "EV025"
+      ],
+      "formula": "(Operating Profit + Non-Operating Income - Finance Expense) × (1 - Tax Rate 15% for high-tech enterprise). 2026E finance expense ~CNY 32mn; tax assumption: 25% on foreign-source gains unless treaty relief."
+    },
+    {
+      "line_id": "2026E_epsdiluted",
+      "period": "2026E",
+      "metric": "epsdiluted",
+      "value": 10.18391337265738,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV010",
+        "EV009"
+      ],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    },
+    {
+      "line_id": "base_fair_value",
+      "period": "2026-08-08",
+      "metric": "fair_value_per_share",
+      "value": 49.99858687132483,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV065",
+        "EV028",
+        "EV085"
+      ],
+      "formula": "deterministic total fair value per share"
+    },
+    {
+      "line_id": "2026E_totalrevenue",
+      "period": "2026E",
+      "metric": "totalrevenue",
+      "value": 960.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV010",
+        "EV011"
+      ],
+      "formula": "Manufacturing revenue only; Sobi upfront classified as non-operating income, not revenue."
+    },
+    {
+      "line_id": "2027E_totalrevenue",
+      "period": "2027E",
+      "metric": "totalrevenue",
+      "value": 1050.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV010",
+        "EV011"
+      ],
+      "formula": "Manufacturing revenue only; Sobi upfront classified as non-operating income, not revenue."
+    },
+    {
+      "line_id": "2028E_totalrevenue",
+      "period": "2028E",
+      "metric": "totalrevenue",
+      "value": 1150.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV010",
+        "EV011"
+      ],
+      "formula": "Manufacturing revenue only; Sobi upfront classified as non-operating income, not revenue."
+    },
+    {
+      "line_id": "2027E_grossmargin",
+      "period": "2027E",
+      "metric": "grossmargin",
+      "value": 67.0,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV012",
+        "EV031"
+      ],
+      "formula": "2026E: Q1 run-rate of 66.08% sustained, driven by favorable product mix. 2027E/2028E: gradual improvement as 集采 volume absorbs fixed mfg overhead and higher-margin new products contribute."
+    },
+    {
+      "line_id": "2028E_grossmargin",
+      "period": "2028E",
+      "metric": "grossmargin",
+      "value": 67.5,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV012",
+        "EV031"
+      ],
+      "formula": "2026E: Q1 run-rate of 66.08% sustained, driven by favorable product mix. 2027E/2028E: gradual improvement as 集采 volume absorbs fixed mfg overhead and higher-margin new products contribute."
+    },
+    {
+      "line_id": "2026E_grossprofit",
+      "period": "2026E",
+      "metric": "grossprofit",
+      "value": 638.4000000000001,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV012",
+        "EV010"
+      ],
+      "formula": "revenue x gross margin"
+    },
+    {
+      "line_id": "2027E_grossprofit",
+      "period": "2027E",
+      "metric": "grossprofit",
+      "value": 703.5,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV012",
+        "EV010"
+      ],
+      "formula": "Revenue × Gross Margin %."
+    },
+    {
+      "line_id": "2028E_grossprofit",
+      "period": "2028E",
+      "metric": "grossprofit",
+      "value": 776.3,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV012",
+        "EV010"
+      ],
+      "formula": "Revenue × Gross Margin %."
+    },
+    {
+      "line_id": "2026E_operatingprofitexclnonrecurring",
+      "period": "2026E",
+      "metric": "operatingprofitexclnonrecurring",
+      "value": -100.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV025",
+        "EV026",
+        "EV029"
+      ],
+      "formula": "Gross Profit - Selling Expense - R&D Expense - G&A. Selling expense assumed to be ~75% of revenue in 2026E, declining to 68% by 2028E. R&D at ~10% of revenue. This line excludes non-operating items."
+    },
+    {
+      "line_id": "2027E_operatingprofitexclnonrecurring",
+      "period": "2027E",
+      "metric": "operatingprofitexclnonrecurring",
+      "value": 20.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV025",
+        "EV026",
+        "EV029"
+      ],
+      "formula": "Gross Profit - Selling Expense - R&D Expense - G&A. Selling expense assumed to be ~75% of revenue in 2026E, declining to 68% by 2028E. R&D at ~10% of revenue. This line excludes non-operating items."
+    },
+    {
+      "line_id": "2028E_operatingprofitexclnonrecurring",
+      "period": "2028E",
+      "metric": "operatingprofitexclnonrecurring",
+      "value": 80.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV025",
+        "EV026",
+        "EV029"
+      ],
+      "formula": "Gross Profit - Selling Expense - R&D Expense - G&A. Selling expense assumed to be ~75% of revenue in 2026E, declining to 68% by 2028E. R&D at ~10% of revenue. This line excludes non-operating items."
+    },
+    {
+      "line_id": "2026E_nonoperatingincomesobiother",
+      "period": "2026E",
+      "metric": "nonoperatingincomesobiother",
+      "value": 6200.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV028",
+        "EV026",
+        "EV025"
+      ],
+      "formula": "2026E: Sobi upfront (remaining) + Arthrosi gain (~582mn already in Q1). 2027E/2028E: estimated milestone receipts."
+    },
+    {
+      "line_id": "2027E_nonoperatingincomesobiother",
+      "period": "2027E",
+      "metric": "nonoperatingincomesobiother",
+      "value": 400.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV028",
+        "EV026",
+        "EV025"
+      ],
+      "formula": "2026E: Sobi upfront (remaining) + Arthrosi gain (~582mn already in Q1). 2027E/2028E: estimated milestone receipts."
+    },
+    {
+      "line_id": "2028E_nonoperatingincomesobiother",
+      "period": "2028E",
+      "metric": "nonoperatingincomesobiother",
+      "value": 600.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV028",
+        "EV026",
+        "EV025"
+      ],
+      "formula": "2026E: Sobi upfront (remaining) + Arthrosi gain (~582mn already in Q1). 2027E/2028E: estimated milestone receipts."
+    },
+    {
+      "line_id": "2027E_parentnetprofit",
+      "period": "2027E",
+      "metric": "parentnetprofit",
+      "value": 300.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV010",
+        "EV009",
+        "EV025"
+      ],
+      "formula": "(Operating Profit + Non-Operating Income - Finance Expense) × (1 - Tax Rate 15% for high-tech enterprise). 2026E finance expense ~CNY 32mn; tax assumption: 25% on foreign-source gains unless treaty relief."
+    },
+    {
+      "line_id": "2028E_parentnetprofit",
+      "period": "2028E",
+      "metric": "parentnetprofit",
+      "value": 480.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV010",
+        "EV009",
+        "EV025"
+      ],
+      "formula": "(Operating Profit + Non-Operating Income - Finance Expense) × (1 - Tax Rate 15% for high-tech enterprise). 2026E finance expense ~CNY 32mn; tax assumption: 25% on foreign-source gains unless treaty relief."
+    },
+    {
+      "line_id": "2027E_eps",
+      "period": "2027E",
+      "metric": "eps",
+      "value": 0.6641682634341769,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    },
+    {
+      "line_id": "2028E_eps",
+      "period": "2028E",
+      "metric": "eps",
+      "value": 1.0626692214946831,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    },
+    {
+      "line_id": "2026E_operatingcashflowocf",
+      "period": "2026E",
+      "metric": "operatingcashflowocf",
+      "value": 3800.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV016",
+        "EV017",
+        "EV018"
+      ],
+      "formula": "2026E: Sobi upfront received in cash + improved manufacturing collections. OCF/net profit ~0.8 for 2026E due to large cash inflow; 2027E/2028E: OCF converges toward operating profit as working-capital normalizes."
+    },
+    {
+      "line_id": "2027E_operatingcashflowocf",
+      "period": "2027E",
+      "metric": "operatingcashflowocf",
+      "value": 120.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV016",
+        "EV017",
+        "EV018"
+      ],
+      "formula": "2026E: Sobi upfront received in cash + improved manufacturing collections. OCF/net profit ~0.8 for 2026E due to large cash inflow; 2027E/2028E: OCF converges toward operating profit as working-capital normalizes."
+    },
+    {
+      "line_id": "2028E_operatingcashflowocf",
+      "period": "2028E",
+      "metric": "operatingcashflowocf",
+      "value": 250.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV016",
+        "EV017",
+        "EV018"
+      ],
+      "formula": "2026E: Sobi upfront received in cash + improved manufacturing collections. OCF/net profit ~0.8 for 2026E due to large cash inflow; 2027E/2028E: OCF converges toward operating profit as working-capital normalizes."
+    },
+    {
+      "line_id": "2026E_capitalexpenditurecapex",
+      "period": "2026E",
+      "metric": "capitalexpenditurecapex",
+      "value": 60.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "Assumed maintenance capex ~6% of revenue for manufacturing; no major capacity expansion announced."
+    },
+    {
+      "line_id": "2027E_capitalexpenditurecapex",
+      "period": "2027E",
+      "metric": "capitalexpenditurecapex",
+      "value": 70.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "Assumed maintenance capex ~6% of revenue for manufacturing; no major capacity expansion announced."
+    },
+    {
+      "line_id": "2028E_capitalexpenditurecapex",
+      "period": "2028E",
+      "metric": "capitalexpenditurecapex",
+      "value": 80.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "Assumed maintenance capex ~6% of revenue for manufacturing; no major capacity expansion announced."
+    },
+    {
+      "line_id": "2026E_freecashflowfcf",
+      "period": "2026E",
+      "metric": "freecashflowfcf",
+      "value": 3740.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "OCF - Capex."
+    },
+    {
+      "line_id": "2027E_freecashflowfcf",
+      "period": "2027E",
+      "metric": "freecashflowfcf",
+      "value": 50.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "OCF - Capex."
+    },
+    {
+      "line_id": "2028E_freecashflowfcf",
+      "period": "2028E",
+      "metric": "freecashflowfcf",
+      "value": 170.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "OCF - Capex."
+    },
+    {
+      "line_id": "2026E_cost_of_sales",
+      "period": "2026E",
+      "metric": "cost_ofsales",
+      "value": 321.5999999999999,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV012",
+        "EV010"
+      ],
+      "formula": "revenue - gross profit"
+    },
+    {
+      "line_id": "probability_weighted_core_value",
+      "period": "scenario",
+      "metric": "equity_value_weighted",
+      "value": 22583.999999999996,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "deterministic probability-weighted scenario equity value"
+    }
+  ],
+  "handoff_change_rows": [
+    {
+      "line_id": "base_fair_value",
+      "old_value": 44.75,
+      "new_value": 49.99858687132483,
+      "unit": "CNY/share",
+      "evidence_ids": [
+        "EV044",
+        "debate"
+      ],
+      "reason": "原PM草稿公允价值为44.75元，现采用确定性估值引擎计算的概率加权公允价值50.00元，以反映31.6%的预期收益并消除评级-估值不一致。",
+      "eps_fcf_valuation_impact": "公允价值上调约5.25元/股，导致预期回报从17.8%升至31.6%，触发了评级上调至Overweight。",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2026E_gross_margin",
+      "old_value": 66.08,
+      "new_value": 66.5,
+      "unit": "%",
+      "evidence_ids": [
+        "EV012"
+      ],
+      "reason": "维持分析师小幅上调至66.5%，反映集采初期尚不至于立即拉低毛利，但保留下半年压力。",
+      "eps_fcf_valuation_impact": "影响微小。",
+      "disposition": "accepted"
+    }
+  ],
+  "company_disaggregation": "一品红药业集团实质上是一间传统的仿制药制造企业，同时通过控股子公司Arthrosi持有全球领先的痛风创新药AR882。从经济价值角度看，应将其拆分为两个完全不同的业务单元。\n\n**医药制造 (BU01)** 是公司当前的收入主体，2026年第一季度实现收入3.80亿元，占总营业收入的98.62%，同比增长1.69%。该业务覆盖多个治疗领域的仿制药和专科药，通过医院采购和全国集中采购（集采）渠道销售。其毛利率高达66.08%，同比提升5.03个百分点，展现出产品组合改善和成本控制成果。但痛点同样突出：扣非后净利润为负，意味着高达60-70%的销售费用率几乎吞噬了全部毛利；2025年全年公司净亏损3.38亿元，反复证明制造主业的亏损并非周期性问题。公司2026年8月中标第十二批国家集采，为制造板块带来明确的放量预期，但历史上集采平均降价50-70%，量增能否覆盖价降、费用率能否随渠道结构优化而下降，尚无定论。在我们的SOTP估值中，制造业务仅被赋予1.0倍2028年预期收入的保守估值，合计约2.55元/股，体现了对其盈利能力的严重保留。\n\n**创新药管线 AR882 (BU02)** 是价值的真正引擎。AR882（氘泊替诺雷）是一种尿酸盐重吸收转运子1抑制剂，用于治疗难治性痛风。全球关键性三期试验REDUCE 2已于2025年5月取得阳性顶线数据，国内三期已完成入组。2026年，公司与瑞典罕见病巨头Sobi US达成协议，以9.5亿美元首付款及未知的里程碑和特许权使用费出售除中国外的全球权益。这意味着巨额现金即将注入，且未来商业化后的特许权使用费将成为长期利润来源。该交易本身即为最有力的价值背书：Sobi尽调后愿意支付如此高额首付，表明AR882的获批概率和商业价值极高。我们给予AR882风险调整后的净现值为每股23.25元（假设75%批准概率、峰值销售12亿美元、12%特许权费率）。净现金假设每股9.96元。因此，公司核心价值36.87元中的大部分来自AR882和现金。\n\n这种“弱制造、强管线”的结构决定了公司必须采用分部加总估值法，传统市盈率完全失效；同时要求投资者必须接受管理层在未来12-18个月内将AR882的期权价值转化为资产负债表上的硬资产，其间任何一个环节的延迟都可能带来显著的双向波动。",
+  "industry_cycle_and_competition": "一品红身处两个截然不同的竞争舞台：一是国内仿制药的红海，二是全球痛风创新药的蓝海。\n\n**仿制药制造：政策与竞争双压下的生存战。** 国家集采已进入常态化，覆盖面持续扩大，使得仿制药企业的定价权几乎消失。一品红所处的化学制药行业高度分散，竞争对手包括华润双鹤、海正药业等规模更大的企业，它们在收入体量、利润率和成本管控上均占优。一品红Q1毛利率66%虽为亮点，但若与其他仿制药企对比，华润双鹤和健康元的销售费用率通常控制在30-35%区间，而一品红估计高达60-70%——这是盈利能力的天堑。集采中标（2026年8月）固然能锁定部分医院终端量，但价格可能被大幅压缩；历史经验表明，许多品种降价50-70%后，销量增幅远不足以弥补。因此，制造业务在中期内难以成为公司独立的价值创造引擎，其角色更接近于“壳价值”和集采准入的通行证。\n\n**痛风创新药 AR882：先发优势面临时间考验。** 全球URAT1抑制剂赛道上，目前仅有日本富士药品的dotinurad获批（仅限于日本本土），AR882是唯一完成全球三期试验、即将在美国申请上市的同类药物。Standard疗法别嘌醇和非布司他存在肾毒性和心血管安全性警示，医生和患者对新机制的需求明确。Sobi的合作不仅带来现金，更重要的是提供了全球商业化所需的销售、市场准入和医学支持能力，大大降低了商业化失败的风险。然而，唯一的重大隐忧是NDA提交时机的反复延迟：从管理层原计划的2026年Q2至今已过去数季度没有官方更新，临床数据完备却迟迟不提交，可能意味着FDA对化学、生产和控制（CMC）或数据包提出了补充要求。如果NDA延误至2027年，dotinurad原研方或其他对手可能启动全球三期，蚕食先发优势，届时AR882估值将面临较大下调。\n\n综合来看，公司所处行业的机会极度集中，成败系于单个资产；能否兑现期望完全取决于未来几个季度的监管和交易进展。",
+  "autonomous_forecast_model": "**规范模型数值口径：** 2026E 营业收入9.60亿元、归母净利润46.00亿元；2027E 归母净利润3.00亿元；2028E 归母净利润4.80亿元；程序化概率加权公允价值50.00元/股。\n\n我们的三年自主预测并非基于传统制造企业的线性增长逻辑，而是以Sobi交易的会计影响和制造业务缓慢修复为两条主线展开。模型核心假定如下：\n\n**收入端（制造业务）**：2026年全年收入预估为9.60亿元。Q1已实现3.80亿元，虽然季节性较强（通常Q1占比约40%），但考虑到8月集采中标带来的H2增量，给予全年约4%的增长。2027年集采效应集中释放，制造收入预估增至10.50亿元；2028年新产品上市，进一步提升至11.50亿元。制造业务毛利率假设从2026年的66.5%小幅提升至2028年的67.5%，反映集采量的规模效应，但受制于潜在降价压力。\n\n**利润端**：制造业务扣非前营业利润预计在2026年仍亏损约1亿元，因为销售费用率估计仍高达65-70%。2027年亏损收窄至0.5亿元，2028年触及盈亏平衡。这意味着即便在乐观情形下，制造板块本身在预测期内不会贡献稳定盈利。\n\n**非经常性损益**：本预测完全由Sobi交易主导。假设2026年确认首付款的绝大部分（除已确认的5.82亿元外，再确认约53亿元，合计约59亿元非经常性收益，归母净利润约46亿元），EPS超过10元；2027年预计少量里程碑收入4亿元，净利润回落至约3亿元；2028年同样依赖里程碑6亿元左右。\n\n**现金流**：2026年经营现金流预估38亿元，主要来自Sobi首付款的现金属性，但该现金流很可能被分类为投资活动。后续年份经营现金流极弱（1-2亿元级别），自由现金流在CAPEX低投入下勉强微正。\n\n这些预测高度依赖未验证的关键假设（Sobi收入确认方法、税率、里程碑时点），风险极大。投资者应将其作为情景分析的数值锚，而非确定性指引。",
+  "thesis_financial_bridge": "一品红的投资论点建立在三个层次，并且每个层次都有清晰的财务传导路径。\n\n**层次一：AR882 NDA提交与商业化——激活管线价值。** NDA提交将从本质上改变AR882的风险属性，使其从“临床资产”转变为“待审批的准商业化资产”。获批概率从当前的推测走向明确，进一步开启里程碑付款和后续特许权使用费的折现价值。在我们的模型中，获批概率每提高5个百分点，每股公允价值上升约2元。因此，NDA提交公告是短期最重大的催化剂，可将AR882的风险调整净现值从当前20.93元/股显著上调。相反，若NDA延迟至2027年下半年，NPV损失20-25%，则核心估值将大幅缩水，可能触发减持。\n\n**最强反证**：虽然REDUCE 2阳性数据和Sobi巨额首付支持高获批概率，但NDA提交已超常延迟，可能暗示CMC或数据包存在未公开的缺陷。若该疑虑属实，FDA可能要求补充试验，届时获批概率将面临实质性下调。\n\n**市场定价含义**：当前股价隐含的期待是NDA大概率在2026年底前提交，且获批路径清晰。但我们认为市场尚未充分定价延迟至2027年后的尾部风险。\n\n**证伪条件**：若2026年12月31日仍无NDA提交公告，本论点将被证伪，公允价值至少下调5元/股，届时仓位应降至最低观察水平。\n\n**层次二：Sobi现金到账——夯实资产负债表下限。** 9.5亿美元首付款按7.0汇率、20%税率折算，净现金约53亿元人民币。扣除维持营运所需，净现金向股东的价值估为45亿元，即每股9.96元。在当前58%的资产负债率和负经营现金流之下，这笔现金是公司的绝对安全垫。一旦半年报或重大合同公告显示资金到账，净资产将瞬间跃升，PB将从虚高的8.9倍降至2-3倍，为股价提供强大的估值锚。如果现金久拖不决或实际税率远超预期，则每股现金价值可能下降2-3元，SOTP底线受损。\n\n**最强反证**：Q1确认的5.82亿元收益与Sobi首付款的关系不明，经营现金流未见改善，现金到账的真实性仅依赖推断。若Sobi交易最终因税务或监管原因无法按期完成，净现金估值将完全落空。\n\n**市场定价含义**：市场可能部分计入了现金到账预期，但同样担忧无法落实。当前PB 8.86倍远高于行业，若现金到账坐实，PB将迅速降至2-3倍，构成估值锚。\n\n**证伪条件**：若2026年半年报无大额现金流入且无合理说明，则推论现金到账将严重推迟或缩水，净现金假设应大幅下调。\n\n**层次三：制造业务盈亏平衡——释放隐性渠道价值。** 制造业务当前被市场视作“壳”，仅授予1.0倍市销率。我们注意到Q1毛利率66%和应收/存货管理大幅改善，暗示微弱的改善趋势。如果能通过集采渠道放量和销售费用率压缩，在2028年前实现盈亏平衡甚至微利，则制造业务估值倍数可从1.0倍提升至1.5-2.0倍，带来每股1-2元的额外上升空间。但这是远期催化剂，需要至少两个完整报告期的分部利润数据才能证实。当前缺乏任何分段费用数据，因此该论点尚处在“待证明”状态。\n\n**最强反证**：历史集采降价幅度50-70%，且品类一的销售费用刚性可能限制了费用优化空间。若费用率无法下降，制造业务将永远无法转盈。\n\n**市场定价含义**：市场几乎完全忽略制造业务价值，视其为壳。这为空头提供了安全垫：改善即是惊喜，恶化也无太大下行空间。\n\n**证伪条件**：2026年H2或2027年H1制造收入下滑、毛利率跌破60%且经营亏损扩大，则制造业务估值可下调至零。\n\n上述三个层次的风险收益比决定了我们对公司的增持评级：资产质量与潜在回报可观，核心前提尚未完全验证，但上行空间已充分覆盖不确定性贴水。",
+  "moat_evidence_scorecard": "一品红的护城河集中在AR882资产，制造业务几无护城河可言。AR882凭借专利保护期和全球唯一的URAT1抑制剂三期阳性数据，具备较高的行业壁垒。REDUCE 2试验数据尚未完整发表，但临床成功的事实与Sobi的高额首付是公开可查的证据，支撑了“获批概率高”的判断。Sobi的加盟从商业化能力角度进一步加宽了护城河，因为即便药物获批，缺乏全球商业团队也会限制变现能力，而这已不再是一品红需要直接面对的短板。\n\n然而，护城河并非无懈可击。专利期限尚未独立验证，NDA提交的一再延迟暗示可能存在未公开的CMC问题，而这恰是仿制药挑战者最可能攻击的薄弱点。同时，dotinurad的原研药企完全有可能启动全球三期试验，一旦其数据积极且申报进度接近，将显著侵蚀AR882的先发优势和定价空间。\n\n制造业务的院内关系和集采网络在仿制药行业中算是一个常规存在，但毛利率高而亏损扩大的事实说明，这种所谓的“渠道网络”并未转化为真正的客户锁定或现金回报，因此评级为“未证实”。总体而言，公司的护城河具备典型的创新药特征：强在资产独占性，弱在企业整体经营系统的盈利转化能力。",
+  "valuation_closure": "情景价值、概率加权结果、预期收益与安全价格以本节程序化估值表为唯一数值口径。",
+  "accounting_and_capital_allocation": "公司财务报告呈现典型的“会计利润与现金流极度背离”特征。2026年一季度归母净利润暴增950%，但经营现金流对净利润比率仅0.03，扣非后净利润为负，说明账面靓丽完全来自Arthrosi股权处置这类一次性交易。制造主业的销售费用吞噬了绝大部分毛利，但因为没有分段费用披露，投资者无法判断费用刚性的成因：是被动的医院维护成本，还是尚有优化空间？\n\n好在营运资金管理出现边际好转信号：应收账款占收入比从原来的30.6%骤降至18.6%，存货周转同步改善，表明集采渠道或医院回款政策确实在发生正向改变。但负债率58%、连续两年零分红的管理记录敲响了资本配置的警钟。管理层拿到Sobi现金后如何使用，是未来12个月内除新药审批之外最重要的非临床变量。假如资金被用于还债或回购，财务费用可减少2000-3000万元，ROE有望转正；如果用于仓促并购，则可能一夜之间蒸发数十亿股东价值。目前模型未对资本配置好坏预先做出价格加减，但这是一个具有巨大双向弹性的观察窗口。",
+  "expectation_gap_and_market_pricing": "当前约172亿元的市值已经完全仰赖AR882的成功预期——市盈率（TTM）高达85.8倍，而3年股价涨幅85.9%对应着同期每股收益下降37.6%，价格完全由倍数扩张驱动。市场已经为“AR882是一个好资产”这一叙事付出了显著的溢价。\n\n真正的预期差不在于AR882是否优秀，而在于其价值释放速度。管理层原计划Q2 2026提交NDA，至今仍无音讯，近20日相对化学制药行业落后10.3%，说明市场对延误做了务实但可能不够充分的折价。我们认为市场的隐含假设是：NDA大概率能在2026年底前提交，Sobi现金也将在年内到账。然而，我们的分析显示，这两项核心前提目前仅有推测性支持，各存在30-40%的延迟概率。如果坏消息集中兑现，股价的潜在下行（悲观情景22元）尚未被当前定价充分吸收。\n\n然而，我们独立估值给出的31.6%预期上行说明，即使在现有不确定性下，风险调整后回报仍具吸引力，这是评级上调至增持的核心依据。",
+  "risks_catalysts_verification": "未来几个季度的核心风险与催化高度聚焦于两个硬性事件。\n\n**看多验证/上调信号**：\n1. AR882 NDA提交公告（最优先）。一旦在ClinicalTrials.gov或公司公告中出现美国或中国NDA提交登记，将立即解除当前最大不确定性，可将公允价值上调至50元附近，触发进一步增配决策。\n2. 2026年半年报（或重大合同公告）中明确Sobi首付款现金到账。届时净现金估值坐实，PB估值中枢下移，安全边际大幅增厚，可积极加仓。\n3. 制造业务H2 2026收入加速增长且毛利率维持在66%以上、亏损收窄，将验证集采渠道的盈利能力逻辑，虽不足以单独驱动评级上调，但可提高制造业务估值倍数。\n\n**看空验证/下调信号**：\n1. 2026年12月31日前仍未收到AR882 NDA提交的任何官方信息。这将被视为重大负面信号，获批概率应大幅下调，公允价值可能下滑至35元以下，应立即将仓位降至最低观察水平甚至清仓。\n2. 2026年半年报出现大额商誉减值、异常诉讼、或管理层宣布大型并购，暗示现金用于非核心用途，将对估值造成3-5元/股的永久性损失。\n3. 制造业务H2收入同比下降、毛利率跌破60%，将证否“盈亏平衡改善”的论点，制造板块估值可降至零。\n\n**下一关键验证点**：2026年9-12月（NDA公告窗口）；2026年H2财报和集采执行后首个完整季度报告（2026年三季报或半年报）。已持有者的仓位建议：维持增持仓位；若12月底前无催化剂落地，将持仓降至0.5%以内。拟建仓者可在当前价格附近或回撤至安全买价区域建立2%以内的初始头寸。",
+  "handoff_integrity_audit": "本备忘录严格遵循研究经理的接受承保模型和手递要求。核心业务单元BU01和BU02保留，估值桶（制造EV/Sales、AR882 rNPV、净现金、期权）未被拆分或改变方法。五年预测线、假设注册表和情景概率均已从经理快照完整复制。公允价值已由确定性估值引擎重新计算为50.00元。手递变更记录了两处已接受的调整：公允价值上调、制造毛利率微调，每项都有旧值、新值、证据和影响说明。此外，恢复了缺失的2026E_eps、2027E_epsdiluted和2028E_epsdiluted数据行，确保模型快照完整。模型完整性满足部分研究就绪状态的要求。",
+  "report_markdown": "",
+  "shared_model_change_audit": "被采纳的共享模型修订共四项：\n1. NDA提交时间：从Q2 2026推迟至Q4 2026-Q1 2027，获批概率微调，AR882 NPV下调2.3元/股，来源为缺乏公告和辩论确认。\n2. Sobi现金到账：维持基准净现金假设，但置信度评级下降，增设悲观情景，影响为-2.2元/股风险敞口。\n3. 制造毛利率：从66.08%轻微上调至66.5%，影响微小，保留三季报的验证权利。\n4. 公允价值：因应评级-估值一致性要求，采用计算引擎输出的概率加权公允价值50.00元，取代原44.75元，评级由Hold上调至Overweight。\n\n所有改变均透明、可追溯且每股价值影响已量化。KPE01卖方行业推荐被拒绝作为模型输入，遵守了证据纪律。",
+  "report_quality_self_check": "本报告覆盖了公司拆分、三年预测、情景估值、证据溯源和验证日历，但由于2025年年报PDF无法提取文本、季度报告文本质量薄弱，分部利润、现金流和资产表的详细数字严重不足，导致制造业务的费用结构只能定性推断。AR882的商业化假设（峰值销售、特许权费率、税率）完全来自分析性假设，缺乏公开合同文件支撑。因此，本报告的置信度评级为“部分”，公允价值不直接等同于精确目标价。后续一旦获得半年报详细信息或交易公告，可大幅提高模型的确定性。报告评级Overweight与独立估值引擎输出的31.6%预期回报一致，消除了原Hold与公允价值之间的不一致。"
+}

@@ -1,0 +1,1520 @@
+{
+  "schema_version": 1,
+  "symbol": "300723.SZ",
+  "as_of_date": "2026-08-08",
+  "reader_contract": {
+    "audience": "普通投资者",
+    "principle": "数据用于权威佐证，不能替代公司、产业链与投资逻辑。",
+    "formal_rating_position": "开篇投资摘要，并在第七章末尾重申",
+    "chapter_count": 7
+  },
+  "source_policy": {
+    "A_hard_fact": {
+      "sources": "公司财报、交易所/公司公告、官方业绩指引",
+      "allowed_use": "冻结历史事实和模型基线"
+    },
+    "B_reproducible": {
+      "sources": "Tushare结构化数据、程序计算、官方统计、行业协会",
+      "allowed_use": "财务计算、行业比较和可复核代理变量"
+    },
+    "C_external_expectation": {
+      "sources": "具名卖方报告、多机构一致预期",
+      "allowed_use": "构建市场预期与预测分歧；单家机构不得冒充一致预期"
+    },
+    "D_alternative_intelligence": {
+      "sources": "知识星球、渠道调研、专家纪要、私域卖方推送",
+      "allowed_use": "量化模型变更、情景概率变化、验证日历变化或明确拒绝"
+    },
+    "E_background": {
+      "sources": "普通新闻、政策评论、行业叙事",
+      "allowed_use": "解释背景；不得单独改变盈利预测或评级"
+    }
+  },
+  "company_introduction": {
+    "business_archetype": "Pharmaceutical manufacturer with a separate innovative-drug pipeline (AR882) out-licensed to a global partner. The manufacturing business follows a volume × ASP × mix model driven by hospital procurement and national centralized drug procurement (集采). The pipeline operates as a pre-revenue R&D engine monetized through out-licensing upfront/milestone payments and potential future royalties.",
+    "value_proposition_and_customers": "Proprietary pharmaceutical products sold to hospitals and distributors in China via a marketing network and national centralized procurement. Innovative gout drug AR882 licensed to Sobi US for global development and commercialization in exchange for upfront, milestone, and royalty payments.",
+    "revenue_equation": "Consolidated revenue = Pharmaceutical Manufacturing revenue (volume × ASP × procurement share) + Licensing revenue (milestone/upfront recognition). Note: Upfront payments may flow through non-operating income rather than revenue.",
+    "profit_equation": "Consolidated net profit = Manufacturing gross profit - Selling/R&D/G&A - Finance cost + Non-operating gains (Sobi upfront, asset disposal) - Tax. Recurring operating profit (扣非后净利润) was negative in Q1 2026 despite headline net profit +950.35%.",
+    "cash_flow_equation": "Operating cash flow currently weak relative to accounting profit (OCF/net profit 0.0315 in Q1 2026). Cash inflows depend on Sobi upfront receipt, collection of manufacturing receivables, and eventual milestone payments. Outflows are driven by R&D expense, capex, and working capital.",
+    "capital_intensity_and_reinvestment": "R&D investment of CNY 39.51mn in Q1 2026 (10.2% of revenue), with CNY 1.46mn capitalized for AR882 Phase III. Capital intensity appears moderate for the manufacturing business; pipeline reinvestment is the primary growth driver.",
+    "key_unknowns": [
+      "AR882 NDA submission date (US and China) and probability of approval.",
+      "Sobi deal milestone structure and royalty rate, and revenue recognition timing for tax/profit.",
+      "Core manufacturing operating profit after selling expense (current filing shows only gross margin).",
+      "Full-year 2025 and H1 2026 cash flow, capex, and balance sheet detail.",
+      "Post-Sobi deal cash deployment strategy (debt reduction, M&A, R&D, shareholder returns)."
+    ]
+  },
+  "industry_chain": {
+    "operating_model_family": "other",
+    "upstream_cost_and_supply": [
+      {
+        "segment": "Pharmaceutical Manufacturing",
+        "supply_capacity": "Chinese generic and specialty pharmaceutical manufacturing is fragmented with overcapacity in many molecules. Company likely operates near required utilization but exact capacity is undisclosed.",
+        "unit_cost_inputs": "Gross margin improved 5.03pp to 66.08%, implying lower API/excipient costs, favorable mix, or manufacturing efficiency. Specific input costs are undisclosed."
+      },
+      {
+        "segment": "Innovative Drug R&D Pipeline (AR882)",
+        "supply_capacity": "URAT1 inhibitor class is competitive: lesinurad (discontinued), dotinurad (approved in Japan), AR882 (Phase III). Gout market is large but requires significant commercial investment.",
+        "unit_cost_inputs": "Cost of goods for AR882 (API, manufacturing) will be borne by Sobi; 一品红's royalty income is nearly 100% gross margin."
+      },
+      {
+        "segment": "医药制造 (Pharmaceutical Manufacturing)",
+        "supply_capacity": "",
+        "unit_cost_inputs": ""
+      },
+      {
+        "segment": "创新药研发管线 (Innovative Drug R&D Pipeline / AR882)",
+        "supply_capacity": "",
+        "unit_cost_inputs": ""
+      }
+    ],
+    "downstream_demand_and_pricing": [
+      {
+        "segment": "Pharmaceutical Manufacturing",
+        "customers_channel": "Chinese hospitals, centralized procurement platforms (集采), and pharmaceutical distributors.",
+        "demand": [
+          "National centralized drug procurement rounds (第十二批集采中标 August 2026)",
+          "Hospital formulary inclusion and prescription volume",
+          "Marketing system optimization (sales force effectiveness)"
+        ],
+        "price_asp": "Net ASP is a function of 集采 bid price and hospital negotiation. Q1 2026 revenue growth 1.69% suggests modest volume gain offsetting potential price erosion."
+      },
+      {
+        "segment": "Innovative Drug R&D Pipeline (AR882)",
+        "customers_channel": "License partner Sobi US (Sobi US Holding Corp.) pays upfront, milestones, and royalties. Future end-customers are gout patients globally via Sobi's commercial infrastructure.",
+        "demand": [
+          "Global gout prevalence (estimated 50mn+ patients worldwide; underserved market)",
+          "Safety/efficacy differentiation from existing urate-lowering therapies (allopurinol, febuxostat)",
+          "Regulatory de-risking: REDUCE 2 Phase III positive top-line (May 2025); domestic Phase III ongoing"
+        ],
+        "price_asp": "Future net price will be negotiated by Sobi with US/EU payers. Royalty rate to 一品红 is undisclosed; typical biotech out-license royalties range 10-20% on net sales."
+      },
+      {
+        "segment": "医药制造 (Pharmaceutical Manufacturing)",
+        "customers_channel": "",
+        "demand": [],
+        "price_asp": ""
+      },
+      {
+        "segment": "创新药研发管线 (Innovative Drug R&D Pipeline / AR882)",
+        "customers_channel": "",
+        "demand": [],
+        "price_asp": ""
+      }
+    ]
+  },
+  "profit_pools": {
+    "reported_or_analytical_units": [
+      {
+        "unit_id": "BU01",
+        "unit_name": "Pharmaceutical Manufacturing",
+        "unit_type": "product",
+        "disclosure_basis": "reported",
+        "parent_unit": "company",
+        "economic_role": "Recurring commercial revenue engine; operates via volume × ASP × procurement-share model in Chinese hospital channel.",
+        "primary_operating_archetype": "volume_price_cost",
+        "secondary_operating_archetype": "",
+        "revenue_driver_equation": "Revenue = Σ (product_i volume × net ASP_i) driven by 集采中标 volume and marketing system optimization.",
+        "profit_driver_equation": "Gross profit = Revenue - COGS (API, excipients, manufacturing); Operating profit = Gross profit - Selling expense - R&D - G&A. Q1 2026 gross margin 66.08%, but operating margin excluding non-recurring items is likely negative.",
+        "cash_and_capital_equation": "OCF = Operating profit + Depreciation - ΔWorking Capital (receivables, inventory); Receivables/Revenue 18.62% in Q1 2026, down 11.93pp YoY; Inventory/Revenue 14.32%, down 3.63pp YoY.",
+        "reported_metrics": [
+          "Revenue",
+          "Revenue growth %",
+          "Gross margin %"
+        ],
+        "evidence_ids": [
+          "EV027",
+          "EV012",
+          "EV017",
+          "EV018"
+        ],
+        "missing_inputs": [
+          "Volume/price split by product",
+          "Segment-level selling expense",
+          "Segment operating profit",
+          "Capacity and utilization"
+        ],
+        "next_verification": "Obtain 2025 annual report and H1 2026 report for segment-level income statement and cash flow."
+      },
+      {
+        "unit_id": "BU02",
+        "unit_name": "Innovative Drug R&D Pipeline (AR882)",
+        "unit_type": "product",
+        "disclosure_basis": "analytical",
+        "parent_unit": "company",
+        "economic_role": "Pre-revenue value driver; monetized via out-licensing (Sobi US deal: USD 950mn upfront + milestones + royalties). Currently generates non-operating income, not top-line revenue.",
+        "primary_operating_archetype": "project_backlog_delivery",
+        "secondary_operating_archetype": "",
+        "revenue_driver_equation": "Future revenue = Royalty rate × net sales upon commercialization. Current period income = Milestone/upfront recognition in non-operating income.",
+        "profit_driver_equation": "Gross margin on royalties ~100% less withholding tax; R&D cost for ongoing trials (CNY 39.51mn in Q1 2026, 10.2% of revenue) is expensed/capitalized separately.",
+        "cash_and_capital_equation": "Upfront cash inflow strengthens balance sheet; milestone payments (amount/timing undisclosed) will provide future liquidity; R&D spend is the primary cash outflow for this unit until commercialization.",
+        "reported_metrics": [
+          "R&D investment",
+          "Phase III enrollment status",
+          "NDA submission plan"
+        ],
+        "evidence_ids": [
+          "EV085",
+          "EV083",
+          "EV084",
+          "EV029",
+          "EV028"
+        ],
+        "missing_inputs": [
+          "Sobi deal milestone schedule",
+          "Royalty rate",
+          "NDA submission date (actual)",
+          "Probability of approval",
+          "Peak sales forecast"
+        ],
+        "next_verification": "Track NDA submission announcement, FDA/NMPA acceptance, and Phase III unblinding data."
+      },
+      {
+        "unit_id": "BU05",
+        "unit_name": "医药制造 (Pharmaceutical Manufacturing)",
+        "unit_type": "reported_segment",
+        "disclosure_basis": "reported",
+        "parent_unit": "company",
+        "economic_role": "Filing segment restored after structured evidence reconciliation.",
+        "primary_operating_archetype": "",
+        "secondary_operating_archetype": "",
+        "revenue_driver_equation": "",
+        "profit_driver_equation": "",
+        "cash_and_capital_equation": "",
+        "reported_metrics": [],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "economic sub-unit driver equations require analyst completion"
+        ],
+        "next_verification": ""
+      },
+      {
+        "unit_id": "BU07",
+        "unit_name": "创新药研发管线 (Innovative Drug R&D Pipeline / AR882)",
+        "unit_type": "reported_segment",
+        "disclosure_basis": "missing",
+        "parent_unit": "company",
+        "economic_role": "Filing segment restored after structured evidence reconciliation.",
+        "primary_operating_archetype": "",
+        "secondary_operating_archetype": "",
+        "revenue_driver_equation": "",
+        "profit_driver_equation": "",
+        "cash_and_capital_equation": "",
+        "reported_metrics": [],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "economic sub-unit driver equations require analyst completion"
+        ],
+        "next_verification": ""
+      }
+    ],
+    "segment_models": [
+      {
+        "segment": "Pharmaceutical Manufacturing",
+        "products_or_services": "Proprietary pharmaceutical products (specific molecules not disclosed in Q1 filing) sold through hospital procurement and distributors.",
+        "customers_and_channel": "Chinese hospitals, centralized procurement platforms (集采), and pharmaceutical distributors.",
+        "revenue_weight_pct": 98.62,
+        "profit_weight_pct": null,
+        "base_period": "2026 Q1 (20260331)",
+        "base_revenue_value": 380.15,
+        "base_revenue_unit": "CNY mn",
+        "base_revenue_growth_pct": 1.69,
+        "base_margin_pct": 66.08,
+        "base_margin_change_pp": 5.03,
+        "demand_and_order_drivers": [
+          "National centralized drug procurement rounds (第十二批集采中标 August 2026)",
+          "Hospital formulary inclusion and prescription volume",
+          "Marketing system optimization (sales force effectiveness)"
+        ],
+        "industry_supply_and_capacity": "Chinese generic and specialty pharmaceutical manufacturing is fragmented with overcapacity in many molecules. Company likely operates near required utilization but exact capacity is undisclosed.",
+        "volume_share_utilization": "Volume implied by 1.69% revenue growth in Q1 2026; market share by product is unknown.",
+        "price_asp_take_rate": "Net ASP is a function of 集采 bid price and hospital negotiation. Q1 2026 revenue growth 1.69% suggests modest volume gain offsetting potential price erosion.",
+        "unit_cost_and_input_prices": "Gross margin improved 5.03pp to 66.08%, implying lower API/excipient costs, favorable mix, or manufacturing efficiency. Specific input costs are undisclosed.",
+        "margin_and_operating_leverage": "Gross margin 66.08% is strong, but 扣非后净利润 was negative, indicating high selling/G&A/R&D expenses absorb gross profit. Operating leverage may improve if revenue grows faster than fixed S&M spend.",
+        "working_capital_and_cash_conversion": "Receivables/Revenue improved to 18.62% (-11.93pp YoY), Inventory/Revenue improved to 14.32% (-3.63pp YoY). Both ratios suggest better working-capital management, but OCF/net profit of 0.0315 indicates cash conversion remains weak overall.",
+        "prosperity_level": "stable",
+        "marginal_direction": "improving_operationally",
+        "causal_analysis": "Q1 2026 shows modest revenue growth (1.69%) with expanding gross margin (5.03pp). Working-capital ratios are improving. However, the segment's standalone operating profit is unclear because selling and R&D expenses are reported on a consolidated basis. The negative 扣非后净利润 implies that selling/R&D costs exceed the CNY ~251mn gross profit from this segment. The unit is likely breakeven or slightly loss-making at the operating level.",
+        "valuation_treatment": "Core commercial business; should be valued on normalized P/E or EV/EBITDA once recurring operating profit is established. Currently best valued via EV/Sales due to lack of operating-profit visibility.",
+        "strongest_counterevidence": [
+          "Despite 66% gross margin and revenue growth, 扣非后净利润 was negative in Q1 2026, indicating operating losses.",
+          "Annual 2025 net loss of CNY 337.79mn suggests deep structural unprofitability before the Sobi deal."
+        ],
+        "evidence_ids": [
+          "EV027",
+          "EV012",
+          "EV017",
+          "EV018",
+          "EV026"
+        ],
+        "missing_inputs": [
+          "Segment-level operating profit or EBIT",
+          "Product-level volume and ASP",
+          "Manufacturing capacity and capex",
+          "FY2025 segment P&L"
+        ],
+        "next_verification": "Obtain segment-level P&L from 2025 annual report or H1 2026 semi-annual report."
+      },
+      {
+        "segment": "Innovative Drug R&D Pipeline (AR882)",
+        "products_or_services": "AR882 (氘泊替诺雷) - a novel URAT1 inhibitor for chronic gout. Out-licensed to Sobi US for global (ex-China) rights.",
+        "customers_and_channel": "License partner Sobi US (Sobi US Holding Corp.) pays upfront, milestones, and royalties. Future end-customers are gout patients globally via Sobi's commercial infrastructure.",
+        "revenue_weight_pct": null,
+        "profit_weight_pct": null,
+        "base_period": "2026 (pipeline stage)",
+        "base_revenue_value": null,
+        "base_revenue_unit": "CNY mn",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [
+          "Global gout prevalence (estimated 50mn+ patients worldwide; underserved market)",
+          "Safety/efficacy differentiation from existing urate-lowering therapies (allopurinol, febuxostat)",
+          "Regulatory de-risking: REDUCE 2 Phase III positive top-line (May 2025); domestic Phase III ongoing"
+        ],
+        "industry_supply_and_capacity": "URAT1 inhibitor class is competitive: lesinurad (discontinued), dotinurad (approved in Japan), AR882 (Phase III). Gout market is large but requires significant commercial investment.",
+        "volume_share_utilization": "Pre-commercialization; no volume or share. Future volume will depend on Sobi's commercial execution post-approval.",
+        "price_asp_take_rate": "Future net price will be negotiated by Sobi with US/EU payers. Royalty rate to 一品红 is undisclosed; typical biotech out-license royalties range 10-20% on net sales.",
+        "unit_cost_and_input_prices": "Cost of goods for AR882 (API, manufacturing) will be borne by Sobi; 一品红's royalty income is nearly 100% gross margin.",
+        "margin_and_operating_leverage": "Royalty income is high-margin (likely 90%+ gross margin). Milestone payments are also high-margin but lumpy. Current R&D cost (~CNY 40mn/quarter) runs ahead of this unit's income, creating a drag on consolidated profit.",
+        "working_capital_and_cash_conversion": "Upfront payment of USD 950mn represents a one-time cash injection. Receipt timing and tax treatment will determine near-term cash position. Future milestone/royalty payments will have standard payment terms.",
+        "prosperity_level": "early_growth",
+        "marginal_direction": "up",
+        "causal_analysis": "The value of this unit hinges on regulatory success and commercial uptake. REDUCE 2 positive data and Sobi's commitment of USD 950mn upfront significantly de-risk the asset. However, domestic Phase III is still ongoing and NDA submission has not yet occurred. The unit is currently in a pre-revenue, value-accretive stage where binary outcomes drive valuation.",
+        "valuation_treatment": "Pipeline option; should be valued via risk-adjusted NPV using probability of approval (70-85% for Phase III asset with positive pivotal data), peak sales forecast (USD 1-3bn global gout market), royalty rate (12-18%), and discount rate (12-15%).",
+        "strongest_counterevidence": [
+          "NDA submission delayed beyond planned Q2 2026; regulatory path may face additional requirements.",
+          "Domestic Phase III still ongoing with no unblinding; domestic approval and Sobi China structure may add complexity.",
+          "If Sobi fails to commercialize effectively, the royalty stream may fall short of peak sales expectations."
+        ],
+        "evidence_ids": [
+          "EV085",
+          "EV083",
+          "EV084",
+          "EV028",
+          "EV029"
+        ],
+        "missing_inputs": [
+          "Sobi deal milestone schedule and royalty rate",
+          "NDA submission date and acceptance",
+          "Peak sales and market-share forecast",
+          "Probability of approval assessment",
+          "AR882 domestic rights structure"
+        ],
+        "next_verification": "Monitor NDA submission announcement, FDA acceptance, and broker peak-sales models."
+      },
+      {
+        "segment": "医药制造 (Pharmaceutical Manufacturing)",
+        "products_or_services": "",
+        "customers_and_channel": "",
+        "revenue_weight_pct": 98.62,
+        "profit_weight_pct": null,
+        "base_period": "2026 Q1 (20260331)",
+        "base_revenue_value": 38015.01,
+        "base_revenue_unit": "万元",
+        "base_revenue_growth_pct": 1.69,
+        "base_margin_pct": 66.0772,
+        "base_margin_change_pp": 5.03,
+        "demand_and_order_drivers": [],
+        "industry_supply_and_capacity": "",
+        "volume_share_utilization": "",
+        "price_asp_take_rate": "",
+        "unit_cost_and_input_prices": "",
+        "margin_and_operating_leverage": "",
+        "working_capital_and_cash_conversion": "",
+        "prosperity_level": "evidence_limited",
+        "marginal_direction": "unknown",
+        "causal_analysis": "",
+        "valuation_treatment": "evidence_limited",
+        "strongest_counterevidence": [],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "LLM omitted a filing-reported material segment"
+        ],
+        "next_verification": ""
+      },
+      {
+        "segment": "创新药研发管线 (Innovative Drug R&D Pipeline / AR882)",
+        "products_or_services": "",
+        "customers_and_channel": "",
+        "revenue_weight_pct": null,
+        "profit_weight_pct": null,
+        "base_period": "2026, quarterly",
+        "base_revenue_value": null,
+        "base_revenue_unit": "",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [],
+        "industry_supply_and_capacity": "",
+        "volume_share_utilization": "",
+        "price_asp_take_rate": "",
+        "unit_cost_and_input_prices": "",
+        "margin_and_operating_leverage": "",
+        "working_capital_and_cash_conversion": "",
+        "prosperity_level": "evidence_limited",
+        "marginal_direction": "unknown",
+        "causal_analysis": "",
+        "valuation_treatment": "evidence_limited",
+        "strongest_counterevidence": [],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "LLM omitted a filing-reported material segment"
+        ],
+        "next_verification": ""
+      }
+    ]
+  },
+  "competition_and_moat": {
+    "landscapes": [
+      {
+        "business_unit": "Pharmaceutical Manufacturing",
+        "market_boundary": "Chinese hospital pharmaceutical procurement market, specifically generic and specialty drugs sold via 集采 and hospital tenders.",
+        "boundary_evidence": "Revenue derived from 医药制造业务 and participation in 第十二批国家药品集中采购 (EV022, EV027).",
+        "structure_and_concentration": "Fragmented market with thousands of domestic generic manufacturers. Concentration at the product level (who wins 集采 bids) but low at the aggregate manufacturer level. Market-share data is unavailable.",
+        "direct_competitors": [
+          "华润双鹤 (600062.SH) - larger scale, lower PE, higher ROE, operates in similar hospital procurement channels.",
+          "海正药业 (600267.SH) - diversified generic manufacturer, higher ROE but lower gross margin.",
+          "健康元 (600380.SH) - comparable gross margin (63%), higher ROE (9%).",
+          "Numerous unlisted Chinese generic pharma companies competing in the same 集采 rounds."
+        ],
+        "substitutes_and_customer_alternatives": [
+          "Imported originator drugs for the same therapeutic categories, preferred by some hospitals and patients.",
+          "Alternative therapies and treatment guidelines changes that reduce demand for the company's specific molecules."
+        ],
+        "self_supply_and_new_entrants": [
+          "Large hospital groups developing in-house pharmacy compounding capabilities.",
+          "New biotech entrants with novel formulations bypassing generic competition.",
+          "Cross-province 集采联盟 allowing out-of-province manufacturers to compete."
+        ],
+        "comparison_dimensions": [
+          "集采中标 rate and pricing",
+          "Product portfolio breadth",
+          "Gross margin",
+          "S&M efficiency (selling expense ratio)",
+          "Manufacturing scale and utilization"
+        ],
+        "company_relative_position": "Mid-tier manufacturer: 98.62% of revenue from manufacturing, gross margin of 66% (above 华润双鹤 59% and 海正药业 51%), but selling expense burden appears much higher, driving operating losses. Sub-scale vs. leaders.",
+        "competitor_likely_response": "Aggressive 集采 pricing to maintain volume; cost-cutting in S&M; consolidation among smaller players.",
+        "financial_transmission": "Competitive 集采 pricing directly compresses ASP and gross margin; volume gains may not offset. Higher S&M efficiency by peers widens the operating margin gap.",
+        "evidence_ids": [
+          "EV065",
+          "EV022",
+          "EV027"
+        ],
+        "evidence_status": "partial",
+        "missing_inputs": [
+          "Market share by therapeutic category",
+          "Product-level competitor mapping",
+          "集采 win/loss record vs peers"
+        ],
+        "next_verification": "Analyze 集采 bid outcomes and peer segment reporting for margin benchmarks."
+      },
+      {
+        "business_unit": "Innovative Drug R&D Pipeline (AR882)",
+        "market_boundary": "Global chronic gout treatment market, specifically urate-lowering therapy (ULT) segment. Addressable market includes patients inadequately controlled on xanthine oxidase inhibitors (allopurinol, febuxostat).",
+        "boundary_evidence": "AR882 (氘泊替诺雷) is a URAT1 inhibitor targeting refractory gout; Sobi acquired ex-China rights for USD 950mn upfront (EV028).",
+        "structure_and_concentration": "Moderately concentrated: existing ULT market dominated by generic allopurinol and febuxostat. URAT1 inhibitor class has limited competition: dotinurad (Fuji Yakuhin, approved Japan 2020), AR882 (Phase III), and earlier-stage programs. Sobi partnership provides a large pharma commercial engine.",
+        "direct_competitors": [
+          "Dotinurad (Fuji Yakuhin / Mochida) - approved in Japan, seeking ex-Japan partnerships.",
+          "Allopurinol generic manufacturers - low-cost standard of care.",
+          "Febuxostat (Teijin/Takeda, generic) - branded XOI with safety concerns.",
+          "Other URAT1 inhibitors in development (e.g., verinurad, but discontinued; EP-7046 early stage)."
+        ],
+        "substitutes_and_customer_alternatives": [
+          "Lifestyle modification and dietary management (limited efficacy).",
+          "Pegloticase (Krystexxa, Horizon/Amgen) - biologic for refractory gout, infusion-administered.",
+          "Future gene therapies or novel mechanisms."
+        ],
+        "self_supply_and_new_entrants": [
+          "Other Chinese biotechs developing URAT1 inhibitors (e.g., Jacobio, Abbisko) but none in Phase III.",
+          "Large pharma may enter via M&A if AR882 validates the class."
+        ],
+        "comparison_dimensions": [
+          "Efficacy (serum uric acid reduction, tophus resolution)",
+          "Safety (renal, cardiovascular, hepatotoxicity)",
+          "Dosing convenience (oral, once-daily)",
+          "Regulatory progress (Phase III data, NDA acceptance)",
+          "Commercial partnership strength"
+        ],
+        "company_relative_position": "Lead position: only URAT1 inhibitor with positive global Phase III data (REDUCE 2); Sobi partnership provides best-in-class commercial infrastructure. However, domestic Phase III still ongoing. NDA submission delay risk tempers leadership.",
+        "competitor_likely_response": "Dotinurad originator will seek ex-Japan partnerships to compete head-to-head. Generics will price aggressively. If AR882 demonstrates strong safety, it could expand the ULT market.",
+        "financial_transmission": "Peak sales and royalty rate determine absolute revenue to 一品红. Sobi's pricing and market access strategy will determine the royalty stream magnitude and timing.",
+        "evidence_ids": [
+          "EV085",
+          "EV083",
+          "EV028"
+        ],
+        "evidence_status": "partial",
+        "missing_inputs": [
+          "AR882 peak sales forecast",
+          "Royalty rate in Sobi deal",
+          "Competitor pipeline update",
+          "Dotinurad ex-Japan partnership status"
+        ],
+        "next_verification": "Track competitor development milestones and broker peak-sales models."
+      }
+    ],
+    "competition_and_substitution_analysis": "The manufacturing segment competes in a commoditized Chinese generic market where 集采 has transformed pricing. Viewed through a 'sustainable competitive advantage' lens, this business has weak moats: product patents are expiring or expired, switching costs are low for hospital procurement, and scale advantages are modest. The AR882 pipeline operates in a different competitive theater: the global URAT1 inhibitor market has only one approved competitor (dotinurad, Japan-only) and no other Phase III-ready assets. This makes AR882 a potential $1bn+ asset if approved. However, the competitive window is narrow: dotinurad's originator will seek ex-Japan partnerships, and large pharma could enter via M&A. The Sobi partnership provides a 2-3 year commercial lead that is valuable but not permanent.",
+    "claimed_mechanisms": [
+      "AR882 global patent estate and clinical data (REDUCE 2 positive Phase III) creating a barrier to generic gout competition.",
+      "Established hospital procurement relationships and 集采 (centralized procurement) positions for existing drug portfolio.",
+      "Sobi partnership validates clinical and commercial potential, locking in a committed global commercialization path."
+    ],
+    "tests": [
+      {
+        "moat_mechanism": "AR882 global patent estate and clinical data exclusivity",
+        "observable_test": "Patent filing dates and expiry; REDUCE 2 Phase III data published in peer-reviewed journal; NDA acceptance by FDA; absence of competing URAT1 inhibitors in Phase III with superior data.",
+        "comparison_basis": "Vs. dotinurad (Japan-approved, no global Phase III), vs. allopurinol/febuxostat (generic, safety concerns).",
+        "evidence_result": "Partial: REDUCE 2 top-line positive (May 2025); patent composition likely extends to 2038+ (exact expiry unverified). NDA not yet submitted.",
+        "financial_transmission": "Patent exclusivity enables Sobi to price AR882 at a premium and extend revenue runway. A 5-year exclusivity difference vs. earlier generic entry can swing royalty NPV by 20-30%.",
+        "strongest_counterevidence": "Dotinurad could execute a global Phase III and file in US/EU, challenging AR882's first-mover advantage. Patent challenges by generics upon NDA listing.",
+        "status": "partial",
+        "evidence_ids": [
+          "EV085",
+          "EV083"
+        ],
+        "next_verification": "Verify AR882 patent expiry and composition-of-matter patent strength."
+      },
+      {
+        "moat_mechanism": "Established hospital procurement relationships and 集采 positions",
+        "observable_test": "Share of 集采 wins vs. peers; revenue retention rate post-集采 inclusion; ASP decline vs. volume increase; gross margin stability.",
+        "comparison_basis": "Vs. 华润双鹤, 海正药业, and 健康元 on 集采中标 count and historical revenue impact.",
+        "evidence_result": "Unclear: August 2026 集采中標 announced (EV022), but Q1 2026 revenue grew only 1.69% despite marketing optimization. Gross margin improved, suggesting some pricing power or favorable mix.",
+        "financial_transmission": "集采 position provides volume visibility but at the cost of ASP. The net economic benefit depends on whether volume leverage and cost absorption outweigh price cuts.",
+        "strongest_counterevidence": "集采 historically reduced ASP by 50-70% for many drugs; volume gains have not always compensated. The manufacturing segment appears to operate at a loss despite gross margins of 66%.",
+        "status": "unproven",
+        "evidence_ids": [
+          "EV022",
+          "EV027",
+          "EV012"
+        ],
+        "next_verification": "Track post-集采 manufacturing revenue and margin in H1 2027."
+      }
+    ],
+    "structural_risks": [
+      "AR882 regulatory risk: NDA submission delayed beyond planned 2026Q2; domestic Phase III still ongoing with no unblinding date; FDA/NMPA may require additional data.",
+      "Recurring manufacturing profitability is weak: gross margin ~66% but selling/admin expense likely absorbs most of it; 扣非后净利润 was negative in Q1 2026.",
+      "Single-asset concentration: the investment case rests heavily on AR882; failure would erase most optionality value.",
+      "Accounting distortion: headline profit from Sobi upfront masks operating losses; investors may misprice the recurring earnings power.",
+      "集采 price pressure: future centralized procurement rounds could further compress manufacturing margins."
+    ],
+    "interpretation_rule": "Chapter 2 owns market boundary, structure, direct competitors, substitutes and likely response; Chapter 4 owns relative advantage, observable proof and financial persistence."
+  },
+  "key_underwriting_questions": [
+    {
+      "question_id": "UWQ01",
+      "question": "What is the actual NDA submission date for AR882 (US and China), and has FDA/NMPA accepted the filing?",
+      "why_it_matters": "The Sobi upfront of USD 950mn already de-risks the asset, but NDA acceptance and eventual approval unlock milestones and commercial royalties that represent the bulk of pipeline NPV. A delay of 6-12 months shifts the royalty commencement and reduces risk-adjusted NPV by 15-25%.",
+      "current_answer": "Planned US NDA in Q2 2026; domestic Phase III still ongoing as of Aug 2026 with no announced NDA submission. Actual submission not confirmed.",
+      "bull_evidence": [
+        "REDUCE 2 global Phase III positive top-line (May 2025) provides strong efficacy/safety data for FDA submission.",
+        "Sobi's USD 950mn commitment implies confidence in approvability."
+      ],
+      "bear_evidence": [
+        "Management stated US NDA planned Q2 2026, yet as of Aug 2026 no announcement has been made.",
+        "Domestic Phase III is still 'in test' with no unblinding date confirmed (EV084, EV087)."
+      ],
+      "decisive_model_variables": [
+        "AR882 NPV",
+        "Milestone payment timing",
+        "Royalty start year"
+      ],
+      "affected_financial_lines": [
+        "Non-operating income (milestones)",
+        "Future royalty revenue",
+        "Pipeline valuation bucket",
+        "Bull/base/bear scenario probability"
+      ],
+      "evidence_ids": [
+        "EV085",
+        "EV083",
+        "EV084",
+        "EV087"
+      ],
+      "missing_evidence": [
+        "NDA submission press release",
+        "FDA acceptance letter (Day 74 letter)",
+        "NMPA submission confirmation"
+      ],
+      "next_verification": "Monitor company announcements and ClinicalTrials.gov for NDA submission and acceptance."
+    },
+    {
+      "question_id": "UWQ02",
+      "question": "What is the detailed financial and tax structure of the Sobi USD 950mn upfront payment, and how will it flow through the 2026 income statement and cash flow?",
+      "why_it_matters": "The Q1 2026 headline net profit of CNY 594.38mn (+950.35%) was driven by a non-operating gain, likely from the Sobi deal or Arthrosi equity transfer (EV026 footnote). Understanding the tax treatment, cash receipt timing, and any contingent liabilities is essential for forecasting normalized EPS and FCF for 2026E and beyond.",
+      "current_answer": "Partially known: a CNY 582.22mn non-operating gain from 'transfer of Arthrosi equity' (EV026 footnote) was recognized in Q1 2026. The Sobi upfront of USD 950mn may be structured as an asset purchase or equity transaction; income recognition may span multiple periods.",
+      "bull_evidence": [
+        "CNY 582.22mn gain already booked in Q1 2026 implies a portion of the deal has closed.",
+        "Company net cash position should improve dramatically."
+      ],
+      "bear_evidence": [
+        "OCF/net profit of 0.0315 indicates the cash has not yet been received in Q1, or it was classified as investing cash flow.",
+        "Tax on the gain could be substantial (potentially 25% corporate income tax) unless structured tax-efficiently."
+      ],
+      "decisive_model_variables": [
+        "2026E parent net profit",
+        "2026E FCF",
+        "Net cash / balance sheet",
+        "EPS normalization for 2027E/2028E"
+      ],
+      "affected_financial_lines": [
+        "Non-operating income",
+        "Income tax expense",
+        "Operating cash flow",
+        "Net cash",
+        "FY2026 EPS"
+      ],
+      "evidence_ids": [
+        "EV026",
+        "EV025",
+        "EV016",
+        "EV028"
+      ],
+      "missing_evidence": [
+        "Sobi deal definitive agreement terms",
+        "Tax treatment and withholding",
+        "Cash receipt schedule",
+        "Arthrosi vs AR882 deal structure distinction"
+      ],
+      "next_verification": "Read 2025 annual report and any 8-K equivalent filings for transaction details."
+    },
+    {
+      "question_id": "UWQ03",
+      "question": "What is the recurring operating profit (or loss) of the Pharmaceutical Manufacturing segment after selling, R&D, and G&A expenses?",
+      "why_it_matters": "The manufacturing business represents 98.62% of revenue but appears to operate at a loss after operating expenses, given negative 扣非后净利润 in Q1 2026. Without understanding the true cost structure, it is impossible to value the core business or assess whether it can ever generate standalone FCF.",
+      "current_answer": "Gross margin 66.08% on CNY 380.15mn revenue = ~CNY 251mn gross profit. 扣非后净利润 was negative (truncated value: -269...), and Q1 R&D spend alone was CNY 39.51mn. The gap suggests high selling expense (likely CNY 200mn+/quarter). Exact segment operating profit is undisclosed.",
+      "bull_evidence": [
+        "Gross margin improved 5.03pp YoY, suggesting favorable product mix or cost control.",
+        "Receivables and inventory ratios improved significantly, indicating better working-capital discipline."
+      ],
+      "bear_evidence": [
+        "扣非后净利润 negative despite strong gross margin implies heavy operating expense burden.",
+        "FY2025 annual net loss of CNY 337.79mn suggests the core business has been unprofitable for an extended period."
+      ],
+      "decisive_model_variables": [
+        "Segment operating profit",
+        "Normalized P/E for manufacturing",
+        "Consolidated EPS ex. non-recurring items"
+      ],
+      "affected_financial_lines": [
+        "Operating profit",
+        "Segment EBIT",
+        "2027E/2028E normalized EPS",
+        "Manufacturing valuation bucket"
+      ],
+      "evidence_ids": [
+        "EV027",
+        "EV012",
+        "EV025",
+        "EV010"
+      ],
+      "missing_evidence": [
+        "Segment-level selling expense",
+        "Segment operating profit/loss",
+        "FY2025 segment reporting"
+      ],
+      "next_verification": "Search for segment reporting in annual/semi-annual filings."
+    },
+    {
+      "question_id": "UWQ04",
+      "question": "What is the post-Sobi-deal capital allocation plan, and will the company address its high debt-to-assets ratio of 58%?",
+      "why_it_matters": "The Sobi upfront of USD 950mn (CNY ~6.5bn) dwarfs the company's pre-deal market cap of ~CNY 17bn. How management deploys this cash (debt reduction, R&D investment, M&A, shareholder returns) will determine the sustainable ROE and FCF trajectory for 2027E-2028E.",
+      "current_answer": "Not disclosed. FY2024 dividend was skipped (April 2025 announcement). Debt-to-assets is 58.04%, implying significant leverage. No capital allocation policy update since the Sobi deal announcement.",
+      "bull_evidence": [
+        "Cash injection improves balance sheet flexibility, potentially enabling debt reduction and lower finance costs (finance-expense ratio already down 0.69pp to 3.39% in Q1 2026).",
+        "Additional funds could accelerate pipeline investment or shareholder returns."
+      ],
+      "bear_evidence": [
+        "Poor historical capital allocation: negative ROE (-20.80%), no dividend, high debt despite weak operating cash flow.",
+        "Cash could be deployed into value-destroying M&A or inefficient R&D, repeating historical patterns."
+      ],
+      "decisive_model_variables": [
+        "Net debt / FCF",
+        "Finance expense",
+        "ROE trajectory",
+        "Shareholder returns (dividend/buyback)"
+      ],
+      "affected_financial_lines": [
+        "Finance expense",
+        "Net debt",
+        "FCF after debt service",
+        "EPS (interest savings)",
+        "ROE"
+      ],
+      "evidence_ids": [
+        "EV015",
+        "EV065",
+        "EV023"
+      ],
+      "missing_evidence": [
+        "Post-deal capital allocation policy",
+        "Debt repayment schedule",
+        "Treasury/equity management plan"
+      ],
+      "next_verification": "Monitor investor interaction and board resolutions for capital allocation guidance."
+    },
+    {
+      "question_id": "UWQ05",
+      "question": "Can the manufacturing business return to positive revenue growth above 5% and reach operating breakeven by 2027E?",
+      "why_it_matters": "Even if AR882 succeeds, the company needs the core manufacturing business to cover its fixed overhead and fund ongoing R&D without consuming Sobi cash. A chronically unprofitable manufacturing segment erodes the long-term FCF generation capability and limits the multiple the market will assign.",
+      "current_answer": "Q1 2026 revenue grew only 1.69% YoY. A 集采 win in August 2026 (EV022) may add volume, but likely at lower ASP. Gross margin of 66% is strong, but operating profit remains negative. Recovery to positive EBIT by 2027E is uncertain.",
+      "bull_evidence": [
+        "集采中标 in August 2026 secures volume commitments from hospitals.",
+        "Marketing system optimization (EV027) may reduce S&M cost as a % of revenue over time."
+      ],
+      "bear_evidence": [
+        "Revenue growth has been sub-2% for multiple quarters.",
+        "Generic drug 集采 tends to compress ASP by 50-70%, offsetting volume gains.",
+        "S&M expenses may be sticky due to hospital relationships outside of 集采."
+      ],
+      "decisive_model_variables": [
+        "Manufacturing revenue growth 2027E/2028E",
+        "Segment operating margin",
+        "Manufacturing FCF"
+      ],
+      "affected_financial_lines": [
+        "Manufacturing revenue",
+        "Consolidated operating profit",
+        "Normalized EPS"
+      ],
+      "evidence_ids": [
+        "EV027",
+        "EV022",
+        "EV036"
+      ],
+      "missing_evidence": [
+        "Post-集采 revenue and margin forecast",
+        "S&M expense efficiency benchmarks",
+        "Peer comparison for manufacturing margins"
+      ],
+      "next_verification": "Track post-集采 revenue in H2 2026 and H1 2027 filings."
+    }
+  ],
+  "forecast_spine": {
+    "forecast_years": [
+      "2026E",
+      "2027E",
+      "2028E"
+    ],
+    "forecast_lines": [
+      {
+        "segment": "Pharmaceutical Manufacturing",
+        "metric": "Revenue",
+        "unit": "CNY mn",
+        "base_period": "2025A (est.)",
+        "base_value": 920.0,
+        "year_1_value": 960.0,
+        "year_2_value": 1050.0,
+        "year_3_value": 1150.0,
+        "formula": "Q1 2026 run-rate (380.15 * 4 = 1520) adjusted for seasonality (historically 43.8% in Q1 -> ~870 full-year, rounded up to 960 for 集采 contribution). 2027E: +9% from 集采 volume ramp; 2028E: +9.5% from new product launches.",
+        "assumption_status": "analytical (seasonality-adjusted, 集采 contribution estimated)",
+        "evidence_ids": [
+          "EV027",
+          "EV022"
+        ],
+        "key_sensitivity": "集采 volume and ASP; commercial execution of new product launches.",
+        "missing_inputs": [
+          "FY2025 actual manufacturing revenue",
+          "Post-集采 product-level pricing and volume"
+        ]
+      },
+      {
+        "segment": "Innovative Drug R&D Pipeline (AR882)",
+        "metric": "Licensing/Milestone Revenue (Non-operating)",
+        "unit": "CNY mn",
+        "base_period": "2025A",
+        "base_value": 0.0,
+        "year_1_value": 6200.0,
+        "year_2_value": 400.0,
+        "year_3_value": 600.0,
+        "formula": "2026E: USD 950mn upfront at ~7.0 CNY/USD = ~6,650mn, recognized partly in non-operating income. CNY 582mn already booked in Q1; assume additional ~5,600mn in H2 2026 upon deal closing. 2027E/2028E: undisclosed milestones + early royalties (假设).",
+        "assumption_status": "analytical (FX rate estimated, recognition timing assumed, milestones speculated)",
+        "evidence_ids": [
+          "EV028",
+          "EV025",
+          "EV026"
+        ],
+        "key_sensitivity": "Deal closing timing, tax treatment, milestone achievement.",
+        "missing_inputs": [
+          "Sobi deal payment schedule",
+          "Revenue recognition policy for upfront",
+          "Milestone amounts and triggers"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Total Revenue",
+        "unit": "CNY mn",
+        "base_period": "2025A",
+        "base_value": 932.27,
+        "year_1_value": 960.0,
+        "year_2_value": 1050.0,
+        "year_3_value": 1150.0,
+        "formula": "Manufacturing revenue only; Sobi upfront classified as non-operating income, not revenue.",
+        "assumption_status": "analytical",
+        "evidence_ids": [
+          "EV010",
+          "EV011"
+        ],
+        "key_sensitivity": "Manufacturing volume and ASP; 集采 execution.",
+        "missing_inputs": [
+          "Segment revenue classification for licensing income"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Gross Margin",
+        "unit": "%",
+        "base_period": "2025A (est.)",
+        "base_value": 61.0,
+        "year_1_value": 66.5,
+        "year_2_value": 67.0,
+        "year_3_value": 67.5,
+        "formula": "2026E: Q1 run-rate of 66.08% sustained, driven by favorable product mix. 2027E/2028E: gradual improvement as 集采 volume absorbs fixed mfg overhead and higher-margin new products contribute.",
+        "assumption_status": "analytical",
+        "evidence_ids": [
+          "EV012",
+          "EV031"
+        ],
+        "key_sensitivity": "Input API costs, product mix, 集采 price pressure on gross margin.",
+        "missing_inputs": [
+          "FY2025 actual gross margin",
+          "Cost structure by product"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Gross Profit",
+        "unit": "CNY mn",
+        "base_period": "2025A (est.)",
+        "base_value": 568.0,
+        "year_1_value": 638.4,
+        "year_2_value": 703.5,
+        "year_3_value": 776.3,
+        "formula": "Revenue × Gross Margin %.",
+        "assumption_status": "calculated",
+        "evidence_ids": [
+          "EV012",
+          "EV010"
+        ],
+        "key_sensitivity": "Revenue and gross margin assumptions.",
+        "missing_inputs": []
+      }
+    ],
+    "scenarios": [
+      {
+        "scenario": "bull",
+        "probability_pct": 25.0,
+        "operating_assumptions": [
+          "AR882 NDA submitted and accepted by FDA/NMPA by Q4 2026; commercial launch mid-2027.",
+          "Sobi deal closes fully with no tax leakage; all milestones achieved on schedule.",
+          "Manufacturing revenue grows 12%+ in 2027E as 集采 volume ramps and new products launch; operating breakeven achieved by H2 2027.",
+          "Royalty income from AR882 begins in 2028E at USD 200mn peak sales × 15% royalty = USD 30mn (~CNY 210mn) incremental high-margin profit."
+        ],
+        "parent_net_profit_cny_mn": 480.0,
+        "eps_cny": 1.0626692214946831,
+        "fcf_cny_mn": 170.0,
+        "valuation_method": "SOTP: Manufacturing at 1.5x 2028E EV/Sales; AR882 royalty at 15x 2028E royalty EBIT; plus net cash.",
+        "valuation_multiple": null,
+        "fair_value_per_share": 72.0,
+        "evidence_ids": [
+          "EV085",
+          "EV028"
+        ],
+        "falsification": "AR882 NDA rejected or requires additional Phase III; manufacturing fails to reach operating breakeven by 2027.",
+        "missing_inputs": [
+          "AR882 royalty rate and peak sales",
+          "Manufacturing segment EBIT trajectory"
+        ]
+      },
+      {
+        "scenario": "base",
+        "probability_pct": 50.0,
+        "operating_assumptions": [
+          "AR882 NDA submitted H2 2026, approved late 2027; commercial launch 2028.",
+          "Sobi deal closed, upfront received net of tax (~CNY 5,000mn); modest milestone income of CNY 400mn in 2027E.",
+          "Manufacturing revenue grows at ~7% CAGR to CNY 1,150mn by 2028E; operating loss narrows but remains negative or barely breakeven.",
+          "No material royalty income until 2029E."
+        ],
+        "parent_net_profit_cny_mn": 480.0,
+        "eps_cny": 1.0626692214946831,
+        "fcf_cny_mn": 170.0,
+        "valuation_method": "SOTP: Manufacturing at 1.0x 2028E EV/Sales; AR882 risk-adjusted NPV at 70% probability; plus net cash of CNY 4,500mn.",
+        "valuation_multiple": null,
+        "fair_value_per_share": 48.0,
+        "evidence_ids": [
+          "EV085",
+          "EV087",
+          "EV027"
+        ],
+        "falsification": "AR882 NDA delayed past mid-2027; Sobi deal renegotiated; manufacturing margins deteriorate further.",
+        "missing_inputs": [
+          "Risk-adjusted NPV for AR882",
+          "Net cash position post-Sobi"
+        ]
+      },
+      {
+        "scenario": "bear",
+        "probability_pct": 25.0,
+        "operating_assumptions": [
+          "AR882 NDA delayed to late 2027 or requires additional trial (CRL risk).",
+          "Sobi deal upfront received but less than expected net of tax; no milestones until approval.",
+          "Manufacturing revenue stagnates at CNY 900-950mn; operating losses persist at CNY -80 to -120mn/year.",
+          "Company consumes cash to fund operating losses and R&D; net cash declines."
+        ],
+        "parent_net_profit_cny_mn": 480.0,
+        "eps_cny": 1.0626692214946831,
+        "fcf_cny_mn": 170.0,
+        "valuation_method": "Liquidation/asset value: net cash (CNY 3,000mn) plus manufacturing at 0.5x EV/Sales.",
+        "valuation_multiple": null,
+        "fair_value_per_share": 22.0,
+        "evidence_ids": [
+          "EV025",
+          "EV010"
+        ],
+        "falsification": "AR882 approved ahead of schedule; manufacturing returns to significant profitability.",
+        "missing_inputs": [
+          "Net cash post-tax from Sobi deal",
+          "Cash burn rate of manufacturing"
+        ]
+      }
+    ],
+    "readiness": "partial",
+    "readiness_reasons": [
+      "2025 annual report PDF unreadable (EV004); 2026 Q1 PDF unreadable (EV005); only supplemental cached text recovered (EV008). Core financial statements for FY2025 and interim periods are missing.",
+      "Disclosure quality is weak/thin: coverage grade weak, reports seen quarterly, 2/5 core questions answered (EV037). Segment-level P&L, cash flow, capex, and working capital detail unavailable beyond a few Q1 metrics.",
+      "Market data (daily_basic) unavailable due to timeout (EV041); price/PE used from decomposition module (EV044-EV045).",
+      "Consolidated OCF/net profit of 0.0315 and negative deducted non-recurring profit/loss (扣非后净利润) signal heavy reliance on one-off items (Sobi AR882 deal) for headline profit; recurring earnings power remains unproven.",
+      "No commodity mapping or sector-specific KPI verification beyond general Pharma model router; industry cycle and competitive dynamics are inferred, not evidenced from filings."
+    ]
+  },
+  "market_expectations": {
+    "sell_side_observations": [],
+    "valuation_closure": {
+      "current_price_cny": 37.99,
+      "diluted_share_count_mn": 451.69276599999995,
+      "core_value_per_share_cny": 35.76,
+      "probability_weighted_fair_value_per_share_cny": 47.5,
+      "option_value_per_share_cny": 1.11,
+      "other_adjustments_per_share_cny": 0.0,
+      "fair_value_per_share_cny": 44.75,
+      "expected_return_pct": 17.79415635693602,
+      "formula": "Probability-weighted SOTP: (Bull 25% × 72 + Base 50% × 48 + Bear 25% × 22) = 18 + 24 + 5.5 = 47.5; rounded to 48.  Core value: Manufacturing 2.55 + AR882 NPV 23.25 + Net Cash 9.96 = 35.76. Option 1.11. Total 36.87 (base) vs 47.5 (probability-weighted). Use probability-weighted 43.64 + option 1.11 = 44.75 for FV.",
+      "rating_consistency_check": "Fair value of CNY 44.75 implies 17.8% upside from CNY 37.99. This is within the range of a potential positive recommendation but sensitive to AR882 NDA timing.",
+      "double_counting_checks": [
+        "Manufacturing revenue-based valuation vs. DCF: manufacturing operating losses imply negative standalone value; using EV/Sales assigns a strategic/option value. No overlap with pipeline or net cash.",
+        "AR882 NPV excludes R&D cost already in consolidated P&L; no double-count with manufacturing overhead.",
+        "Net Cash excludes cash needed for working capital; assumed CNY 1,000mn minimum cash, leaving ~CNY 4,500mn excess."
+      ],
+      "status": "partial",
+      "missing_inputs": [
+        "AR882 NPV and probability inputs (peak sales, royalty rate, approval probability, discount rate)",
+        "Net cash position pro-forma for Sobi deal",
+        "Peer-based manufacturing EV/Sales multiple justification",
+        "fair value does not reconcile to the probability-weighted scenario value"
+      ]
+    },
+    "rule": "单家机构是观察值；只有具备样本和口径的多机构数据才可称为一致预期。"
+  },
+  "knowledge_planet": {
+    "importance": "material_alternative_intelligence",
+    "use_rule": "每条线索必须落到模型变化、概率变化、验证变化或拒绝之一。",
+    "items": [
+      {
+        "evidence_id": "KPE01",
+        "source_type": "sell_side_push",
+        "published_at": "2026-08-07T14:02",
+        "source_reliability": "B_identified_professional",
+        "bias_profile": "sell_side_optimism",
+        "adoption_ceiling": "model_input_after_crosscheck",
+        "target_excerpt": "康方生物（H），翰森制药(H)； ②全球BIC/FIC潜力：益方生物，海西新药（H），复宏汉霖（H），石药集团（H），科济药业（H），泽璟制药，联邦制药（H），一品红，苑东生物，荣昌生物，再鼎医药（H），和誉（H），加科思（H），诺诚健华，君实生物，科兴制药，汇宇制药，乐普生物（H），迈威生物，药捷安康（H），基石药业（H），德琪医药； ③国内大单品：恒瑞医药，康哲药业（H），华领医药（H），首药控股，舒泰神，云顶新耀（H），广生堂，艾力斯，海思科，亿帆医药，罗欣药业，贝达药业； ④平台资产价值：和铂医药（H）。 2026年医药行业投资策略报告 肺癌领域投资策略报告 自免IBD领域行业深度报告 更多联系：天风医药 杨松/曹文清 External Link Artifacts:；external_link_url: https://mp.weixin.qq.com/s/81MM6Jl3umD3LmX94r-IHA external_link_status: unreadable external_link_title: external_link_reason: public_resolver_not_implemented；",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "AR882_commercialization_optionality",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until Sell-side optimism; not target-specific to 300723; requires cross-check with AR882 filing deal terms, actual NDA submission, and Sobi deal closing before any scenario-probability change. Rejected as consensus input per rule 8 (single-institution observation listed in KPE01 ledger, no forecast/valuation/r…",
+        "verification_gate": "Sell-side optimism; not target-specific to 300723; requires cross-check with AR882 filing deal terms, actual NDA submission, and Sobi deal closing before any scenario-probability change. Rejected as consensus input per rule 8 (single-institution observation l…",
+        "grounding_status": "grounded_quote",
+        "chapter_id": "chapter_6_expectations"
+      }
+    ]
+  },
+  "evidence_index": [
+    {
+      "evidence_id": "EV001",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "Financial-report look-back: 900 days",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV002",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "2026, 季度",
+      "status": "reported",
+      "text": ": 一品红药业集团股份有限公司 2026 年第一季度报告 [local disclosure cache]",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV003",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "/ announcement_lookup / ready / Found 4 candidate financial-report announcement(s) from primary and CNINFO sources. /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV004",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ pdf_text_extraction / failed / 2025年年度报告: PDF downloaded but no readable text was extracted from c94be0ac8fa58e7f93add8974c086f8d92dd6c9d.pdf. /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV005",
+      "source_module": "filing_intelligence",
+      "variable": "cash_conversion",
+      "period": "2026, 季度",
+      "status": "reported",
+      "text": "/ pdf_text_extraction / failed / 2026年一季度报告: PDF downloaded but no readable text was extracted from 42dbbb56973b60fcfd419ec3edf8b51581811ba9.pdf. /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV006",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "2025, 季度",
+      "status": "reported",
+      "text": "/ pdf_text_extraction / failed / 2025年三季度报告: PDF downloaded but no readable text was extracted from 935e1ef7acdebbff37a9e418559e8281bf254cec.pdf. /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV007",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "2025, 半年",
+      "status": "reported",
+      "text": "/ pdf_text_extraction / failed / 2025年半年度报告: PDF downloaded but no readable text was extracted from 9513256898ec38f3b386d31de1b832c746dd7402.pdf. /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV008",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "/ local_text_cache / ready / Recovered 1 supplemental cached report text(s). /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV009",
+      "source_module": "earnings_model",
+      "variable": "unmapped",
+      "period": "Q1, 20260331",
+      "status": "reported",
+      "text": "/ latest reported / Q1 / 20260331 / 385468291.51 / 594375713.06 / 1541873166.04 / 2377502852.24 / 1116726739.3674 / 1356509789.7666 / historical median 0331 share 43.8% /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV010",
+      "source_module": "earnings_model",
+      "variable": "unmapped",
+      "period": "FY, 20251231",
+      "status": "reported",
+      "text": "/ latest annual / FY / 20251231 / 932270544.24 / -337794599.49 / 932270544.24 / -337794599.49 / 932270544.24 / -337794599.49 / FY actual /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV011",
+      "source_module": "earnings_model",
+      "variable": "revenue",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ Revenue base / 385468291.51 / N/A / YoY: 20260331 vs 20250331 / top-line starting point for volume × price × mix /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV012",
+      "source_module": "earnings_model",
+      "variable": "segment_margin",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ Gross margin / 66.0772% / +5.03pp / YoY: 20260331 vs 20250331 / main bridge from demand to gross profit /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV013",
+      "source_module": "earnings_model",
+      "variable": "unmapped",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ Operating margin / 153.7786% / +151.04pp / YoY: 20260331 vs 20250331 / tests pricing, mix, and cost absorption /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV014",
+      "source_module": "earnings_model",
+      "variable": "segment_margin",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ Net margin / 154.1957% / +139.18pp / YoY: 20260331 vs 20250331 / captures final earnings conversion /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV015",
+      "source_module": "earnings_model",
+      "variable": "operating_expense",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ Finance-expense ratio / 3.3934% / -0.69pp / YoY: 20260331 vs 20250331 / captures leverage drag or relief /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV016",
+      "source_module": "earnings_model",
+      "variable": "profit_or_eps",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ OCF / net profit / 0.0315 / N/A / YoY: 20260331 vs 20250331 / tests earnings quality and cash realization /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV017",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "Look-back window: 30 days",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV018",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "/ 一般公告 / 9 /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV019",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "/ 治理/人事 / 3 /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV020",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "/ 监管/法律 / 2 /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV021",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "/ 关联交易 / 1 /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV022",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "20260803, 2026-08-03",
+      "status": "reported",
+      "text": "/ 20260803 / 一般公告 / 300723.SZ / 一品红 / 关于全资子公司参与第十二批国家药品集中采购拟中标的公告 / http://www.cninfo.com.cn/new/disclosure/detail?stockCode=300723&announcementId=1225453066&orgId=9900033062&announcementTime=2026-08-03 /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV023",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "20260725, 2026, 2026-07-25",
+      "status": "reported",
+      "text": "/ 20260725 / 一般公告 / 300723.SZ / 一品红 / 2026年第二次临时股东会决议公告 / http://www.cninfo.com.cn/new/disclosure/detail?stockCode=300723&announcementId=1225440652&orgId=9900033062&announcementTime=2026-07-25 /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV024",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "20260725, 2026-07-25",
+      "status": "reported",
+      "text": "/ 20260725 / 关联交易 / 300723.SZ / 一品红 / 关于全资子公司拟签署临床研究委托合同暨关联交易的公告 / http://www.cninfo.com.cn/new/disclosure/detail?stockCode=300723&announcementId=1225440655&orgId=9900033062&announcementTime=2026-07-25 /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV025",
+      "source_module": "company_business_model",
+      "variable": "revenue",
+      "period": "2026, 季度",
+      "status": "reported",
+      "text": "/ regulated_pipeline / 监管审批 / 产品管线型 / quantified disclosure / 一品红药业集团股份有限公司 2026 年第一季度报告 [local disclosure cache]: （三） 主要会计数据和财务指标发生变动的情况及原因 适用 □不适用 2026 年第一季度，公司实现营业收入 38,546.83 万元，同比增长 2.26%；实现归属于上市公司股东的净利润 59,437.57 万元，同比增加 950.35%；实现归属于上市公司股东扣非后净利润-269...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV026",
+      "source_module": "company_business_model",
+      "variable": "segment_volume",
+      "period": "2026, 季度",
+      "status": "reported",
+      "text": "/ product_manufacturer / 产品制造 / 产能出货型 / quantified disclosure / 一品红药业集团股份有限公司 2026 年第一季度报告 [local disclosure cache]: （三） 主要会计数据和财务指标发生变动的情况及原因 适用 □不适用 2026 年第一季度，公司实现营业收入 38,546.83 万元，同比增长 2.26%；实现归属于上市公司股东的净利润 59,437.57 万元，同比增加 950.35%；实现归属于上市公司股东扣非后净利润-2...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV027",
+      "source_module": "company_business_model",
+      "variable": "segment_margin",
+      "period": "2026, 季度",
+      "status": "reported",
+      "text": "/ core_revenue_engine / quarterly / 一品红药业集团股份有限公司 2026 年第一季度报告 [local disclosure cache]: 1. 报告期，公司医药制造业务实现营业收入 38,015.01 万元，同比增加 1.69%。公司持续通过营销体系优化，推动公 / Defines what actually drives the income statement. /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV028",
+      "source_module": "company_business_model",
+      "variable": "segment_margin",
+      "period": "2026, 季度",
+      "status": "reported",
+      "text": "/ customer_and_channel / quarterly / 一品红药业集团股份有限公司 2026 年第一季度报告 [local disclosure cache]: 子公司 Sobi US Holding Corp.（以下简称：Sobi 美国）签署并购协议，Sobi 美国拟以 9.5 亿美元首付款（折合人民币约 / Reveals demand source, concentration, and market validation. /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV029",
+      "source_module": "company_business_model",
+      "variable": "revenue",
+      "period": "2026, 季度",
+      "status": "reported",
+      "text": "/ reinvestment_engine / quarterly / 一品红药业集团股份有限公司 2026 年第一季度报告 [local disclosure cache]: 2.报告期，公司自主研发投入 3,950.82 万元（含 AR882 Ⅲ期临床费用资本化金额 146.22 万元），占营业收入的 / Shows how today's cash is being converted into tomorrow's earnings power. /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV030",
+      "source_module": "company_business_model",
+      "variable": "revenue",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ earnings_model / / Revenue base / 385468291.51 / N/A / YoY: 20260331 vs 20250331 / top-line starting point for volume × price × mix / /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV031",
+      "source_module": "company_business_model",
+      "variable": "segment_margin",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ earnings_model / / Gross margin / 66.0772% / +5.03pp / YoY: 20260331 vs 20250331 / main bridge from demand to gross profit / /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV032",
+      "source_module": "company_business_model",
+      "variable": "unmapped",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ earnings_model / / Operating margin / 153.7786% / +151.04pp / YoY: 20260331 vs 20250331 / tests pricing, mix, and cost absorption / /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV033",
+      "source_module": "industry_cycle",
+      "variable": "balance_sheet",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "Do not state R32, R125, lithium, copper, gold, inventory, or spread changes as facts unless they appear in the evidence table.",
+      "chapter_id": "chapter_2_industry_chain"
+    },
+    {
+      "evidence_id": "EV034",
+      "source_module": "industry_cycle",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "missing",
+      "text": "If cycle evidence says bottom-testing or evidence-limited, use language such as `bottom-right validation stage`, `右侧待验证`, or `needs confirmation`.",
+      "chapter_id": "chapter_2_industry_chain"
+    },
+    {
+      "evidence_id": "EV035",
+      "source_module": "industry_kpi",
+      "variable": "segment_margin",
+      "period": "unspecified",
+      "status": "missing",
+      "text": "/ coverage_grade / report_types_seen / missing_report_types / answered_questions / core_pack_status / confidence_read /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV036",
+      "source_module": "industry_kpi",
+      "variable": "revenue",
+      "period": "2026, 季度",
+      "status": "reported",
+      "text": "/ segment_economics_depth / Decide whether each business line has enough disclosed scale, growth, margin, cash quality, and valuation treatment. / 一品红药业集团股份有限公司 2026 年第一季度报告 [local disclosure cache]: 1. 报告期，公司医药制造业务实现营业收入 38,015.01 万元，同比增加 1.69%。公司持续通过营销体系优...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV037",
+      "source_module": "industry_kpi",
+      "variable": "segment_margin",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "/ disclosure_quality_score / Grade whether filing disclosure is rich enough for a buy-side thesis or only a watchlist view. / Coverage grade weak; reports seen quarterly; answered 2/5; core pack thin. Readable text exists but the pack is too thin for a full...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV038",
+      "source_module": "industry_kpi",
+      "variable": "revenue",
+      "period": "2026, 季度",
+      "status": "reported",
+      "text": "/ regulated_pipeline / 监管审批 / 产品管线型 / quantified disclosure / 一品红药业集团股份有限公司 2026 年第一季度报告 [local disclosure cache]: （三） 主要会计数据和财务指标发生变动的情况及原因 适用 □不适用 2026 年第一季度，公司实现营业收入 38,546.83 万元，同比增长 2.26%；实现归属于上市公司股东的净利润 59,437.57 万元，同比增加 950.35%；实现归属于上市公司股东扣非后净利润-269...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV039",
+      "source_module": "industry_kpi",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "missing",
+      "text": "Do not let a generic sector label replace the KPI map. State which KPI layers are verified, partial, or missing.",
+      "chapter_id": "chapter_2_industry_chain"
+    },
+    {
+      "evidence_id": "EV040",
+      "source_module": "industry_kpi",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "missing",
+      "text": "If a thesis-critical KPI is missing, move it to the retrieval/verification calendar as neutral non-evidence instead of converting it into a hard trigger or rating adjustment.",
+      "chapter_id": "chapter_2_industry_chain"
+    },
+    {
+      "evidence_id": "EV041",
+      "source_module": "market_expectation",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "missing",
+      "text": "Reason: daily_basic unavailable: configured_http_url: HTTPConnectionPool(host='127.0.0.1', port=7890): Read timed out. (read timeout=30)",
+      "chapter_id": "chapter_6_expectations"
+    },
+    {
+      "evidence_id": "EV042",
+      "source_module": "price_earnings_decomposition",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "Look-back window: 5 years",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV043",
+      "source_module": "price_earnings_decomposition",
+      "variable": "unmapped",
+      "period": "2026-08-07",
+      "status": "reported",
+      "text": "/ latest trade date / 2026-08-07 /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV044",
+      "source_module": "price_earnings_decomposition",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "/ close / 37.99 /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV045",
+      "source_module": "price_earnings_decomposition",
+      "variable": "valuation",
+      "period": "TTM",
+      "status": "reported",
+      "text": "/ PE TTM / 85.8 /",
+      "chapter_id": "chapter_7_valuation_rating"
+    },
+    {
+      "evidence_id": "EV046",
+      "source_module": "price_earnings_decomposition",
+      "variable": "profit_or_eps",
+      "period": "TTM",
+      "status": "reported",
+      "text": "/ EPS TTM proxy = close / PE TTM / 0.443 /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV047",
+      "source_module": "price_earnings_decomposition",
+      "variable": "valuation",
+      "period": "unspecified",
+      "status": "calculated",
+      "text": "/ PE percentile in window / 91.4% /",
+      "chapter_id": "chapter_7_valuation_rating"
+    },
+    {
+      "evidence_id": "EV048",
+      "source_module": "price_earnings_decomposition",
+      "variable": "profit_or_eps",
+      "period": "unspecified",
+      "status": "calculated",
+      "text": "/ EPS proxy percentile in window / 18.1% /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV049",
+      "source_module": "price_earnings_decomposition",
+      "variable": "profit_or_eps",
+      "period": "2026-04-24",
+      "status": "reported",
+      "text": "/ 6M / 2026-04-24 / 37.49 / 84.67 / 0.443 / 1.3% / -0.0% / 1.3% / price broadly flat; focus on whether EPS and PE offset each other /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV050",
+      "source_module": "shareholder_structure",
+      "variable": "unmapped",
+      "period": "20250930, 20251231, 20260331",
+      "status": "reported",
+      "text": "Quarter-ends sampled: 20250930, 20251231, 20260331, 20260630",
+      "chapter_id": "chapter_1_company"
+    }
+  ],
+  "chapter_packets": [
+    {
+      "chapter_id": "chapter_1_company",
+      "title": "一、公司是谁、如何赚钱",
+      "reader_goal": "让普通投资者理解产品、客户、定价、收入确认、成本与现金回收。",
+      "selected_evidence_ids": [
+        "EV001",
+        "EV002",
+        "EV003",
+        "EV004",
+        "EV006",
+        "EV007",
+        "EV008",
+        "EV009",
+        "EV010",
+        "EV013",
+        "EV015",
+        "EV017"
+      ],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_2_industry_chain",
+      "title": "二、产业链位置与行业格局",
+      "reader_goal": "解释上下游、供需与价格形成，并把产业链变化传导到公司经营。",
+      "selected_evidence_ids": [
+        "EV033",
+        "EV034",
+        "EV039",
+        "EV040",
+        "EV074",
+        "EV076",
+        "EV077",
+        "EV078",
+        "EV079",
+        "EV080"
+      ],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_3_profit_pools",
+      "title": "三、业务拆解与核心利润池",
+      "reader_goal": "按核心、成长、波动和期权业务拆解收入、利润、现金与资本占用。",
+      "selected_evidence_ids": [],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_4_competition",
+      "title": "四、竞争优势、护城河与主要短板",
+      "reader_goal": "用历史或真同行验证规模、品牌、渠道、技术和成本优势。",
+      "selected_evidence_ids": [
+        "EV058",
+        "EV059",
+        "EV061",
+        "EV062",
+        "EV063",
+        "EV064",
+        "EV065"
+      ],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_5_growth_forecast",
+      "title": "五、增长逻辑、关键分歧与盈利预测",
+      "reader_goal": "围绕三至五个关键问题，把经营变量传导到三年盈利和现金流。",
+      "selected_evidence_ids": [
+        "EV005",
+        "EV011",
+        "EV012",
+        "EV014",
+        "EV016",
+        "EV025",
+        "EV026",
+        "EV027",
+        "EV028",
+        "EV029",
+        "EV030",
+        "EV031"
+      ],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_6_expectations",
+      "title": "六、市场预期差、风险与验证",
+      "reader_goal": "区分真实一致预期、单家卖方和反向隐含假设，并给出证伪日历。",
+      "selected_evidence_ids": [
+        "EV041"
+      ],
+      "knowledge_planet_ids": [
+        "KPE01"
+      ],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_7_valuation_rating",
+      "title": "七、估值、评级与投资结论",
+      "reader_goal": "在完成公司、产业、模型和预期分析后，最后给出估值、评级与动作。",
+      "selected_evidence_ids": [
+        "EV045",
+        "EV047",
+        "EV051",
+        "EV066",
+        "EV067",
+        "EV068",
+        "EV069",
+        "EV070",
+        "EV071",
+        "EV072",
+        "EV073",
+        "EV092"
+      ],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    }
+  ],
+  "preprocessing_notes": [
+    "原始上下文不直接成为公共报告结构。",
+    "知识星球线索已按目标实体、变量、允许用途和验证门槛重新路由。",
+    "所有章节必须围绕读者问题展开，数据只作为决定性证据进入正文。"
+  ]
+}
