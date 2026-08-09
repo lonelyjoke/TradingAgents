@@ -572,6 +572,10 @@ class DeterministicValuationOutput(BaseModel):
 class ResearchQuestionVerdict(BaseModel):
     """Analyst-style answer to one question that can change the decision."""
 
+    question_id: str = Field(
+        default="",
+        description="Stable UWQ id copied from the shared underwriting packet.",
+    )
     question: str = Field(description="Company-specific underwriting question.")
     why_decisive: str = Field(
         description="Why this question can change earnings, cash/capital, valuation, or rating."
@@ -585,12 +589,48 @@ class ResearchQuestionVerdict(BaseModel):
     strongest_counterevidence: str = Field(
         description="Strongest observed contradiction or unresolved alternative explanation."
     )
+    conflict_resolution: str = Field(
+        default="",
+        description=(
+            "How the strongest conflicting evidence was resolved by source precedence, period, "
+            "scope or ownership; use unresolved when it cannot be reconciled."
+        ),
+    )
     model_or_valuation_effect: str = Field(
         description="Named forecast line, probability, fair value, or explicit unchanged result."
+    )
+    affected_model_lines: list[str] = Field(
+        default_factory=list,
+        description="Stable forecast, probability or valuation line ids affected by the verdict.",
     )
     confidence: Literal["high", "medium", "low"]
     next_verification: str = Field(
         description="Dated disclosure or observable threshold that can confirm or reject the answer."
+    )
+
+
+class EvidenceUtilizationDecision(BaseModel):
+    """Auditable disposition of one decisive evidence item."""
+
+    evidence_id: str = Field(description="Exact EV/KPE/KF evidence id from the source bundle.")
+    question_id: str = Field(description="UWQ id whose answer this evidence changes or tests.")
+    disposition: Literal["adopted", "rejected", "watch", "conflict_unresolved"]
+    contribution_or_reason: str = Field(
+        description=(
+            "What the evidence establishes when adopted, or the precise reason it was rejected, "
+            "kept on watch, or left unresolved."
+        )
+    )
+    model_or_probability_effect: str = Field(
+        default="",
+        description=(
+            "Named old-to-new model value, probability change, valuation change, or explicit "
+            "unchanged result. Required for adopted evidence."
+        ),
+    )
+    verification_gate: str = Field(
+        default="",
+        description="Dated source or observable threshold required for watch/unresolved evidence.",
     )
 
 
@@ -667,6 +707,14 @@ class UnderwritingResearchPlan(BaseModel):
         description=(
             "Evidence-weighted answers to the 3-5 decisive research questions. Each answer must "
             "synthesize multiple relevant sources, the strongest conflict, and the exact model effect."
+        ),
+    )
+    evidence_utilization_ledger: list[EvidenceUtilizationDecision] = Field(
+        default_factory=list,
+        description=(
+            "Machine-auditable disposition of every evidence id attached to a decisive underwriting "
+            "question or thesis bridge. Every item must be adopted, rejected, watched or unresolved; "
+            "adoption requires a named model/probability/value effect."
         ),
     )
     forecast_takeaways: list[ForecastTakeaway] = Field(
@@ -1719,6 +1767,13 @@ class SellSidePMDecision(BaseModel):
             "Cite the evidence actually used, reconcile the strongest conflicting observation, and state the "
             "named forecast/probability/valuation effect. Do not render this ledger as a public Q&A section; "
             "weave each accepted conclusion into company, industry, thesis, forecast or valuation prose."
+        ),
+    )
+    evidence_utilization_ledger: list[EvidenceUtilizationDecision] = Field(
+        default_factory=list,
+        description=(
+            "Internal evidence-use ledger copied from and reconciled with the Research Manager. "
+            "It must cover every decisive evidence id in the shared questions and thesis bridges."
         ),
     )
     forecast_takeaways: list[ForecastTakeaway] = Field(

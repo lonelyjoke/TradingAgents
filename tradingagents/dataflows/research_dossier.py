@@ -204,6 +204,11 @@ def build_reader_research_dossier(
         for row in _list(packet.get("competition_landscapes"), 12)
         if isinstance(row, Mapping)
     ]
+    material_transactions = [
+        dict(row)
+        for row in _list(packet.get("transaction_rights_map"), 8)
+        if isinstance(row, Mapping)
+    ]
     llm_analysis = dict(packet.get("llm_analysis_layer") or {})
     evidence = _evidence_index(structured_research)
     aliases = _target_aliases(symbol, contexts.get("knowledge_planet", ""))
@@ -317,6 +322,13 @@ def build_reader_research_dossier(
             "reported_or_analytical_units": business_units,
             "segment_models": segments,
         },
+        "material_transactions": {
+            "rights_and_cash_waterfalls": material_transactions,
+            "rule": (
+                "Reconcile ownership before/after, attributable cash and retained/disposed rights "
+                "before forecast, cash-flow classification or valuation."
+            ),
+        },
         "competition_and_moat": {
             "landscapes": competition_landscapes,
             "competition_and_substitution_analysis": _text(
@@ -376,6 +388,7 @@ def compact_reader_research_dossier(
         "company_introduction": dossier.get("company_introduction", {}),
         "industry_chain": dossier.get("industry_chain", {}),
         "profit_pools": dossier.get("profit_pools", {}),
+        "material_transactions": dossier.get("material_transactions", {}),
         "competition_and_moat": dossier.get("competition_and_moat", {}),
         "key_underwriting_questions": _list(dossier.get("key_underwriting_questions"), 5),
         "forecast_spine": dossier.get("forecast_spine", {}),

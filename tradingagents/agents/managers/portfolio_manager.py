@@ -340,6 +340,7 @@ def _recover_legacy_pm_decision(
         # Chinese public prose, while numeric truth comes from canonical rows.
         "research_questions": [],
         "question_verdicts": [],
+        "evidence_utilization_ledger": [],
         "forecast_takeaways": [],
         "forecast_assumptions": [],
         "core_theses": [],
@@ -412,6 +413,7 @@ def _recover_legacy_pm_decision(
     except (TypeError, ValueError):
         for field in (
             "question_verdicts",
+            "evidence_utilization_ledger",
             "forecast_takeaways",
             "forecast_assumptions",
             "core_theses",
@@ -932,6 +934,7 @@ def _analytical_structure_issues(
     requirements = (
         ("research_questions", 3, "company-specific research questions"),
         ("question_verdicts", 3, "evidence-weighted question verdicts"),
+        ("evidence_utilization_ledger", 3, "decisive evidence dispositions"),
         ("forecast_takeaways", 2, "forecast take-aways"),
         ("forecast_assumptions", 3, "auditable forecast assumptions"),
         ("core_theses", 2, "ranked core theses"),
@@ -1680,6 +1683,7 @@ def create_portfolio_manager(llm):
 - For each deduplicated material Knowledge Planet claim, fill `alternative_intelligence_decisions` from full topic text, not a title or ellipsis. Independently record `source_reliability`, `bias_profile` and `adoption_ceiling`, then grade it A/B/C/D, state age and decision shelf life, and force one outcome: model change, scenario-probability change, verification-clock/gate change, or explicit rejection. An identified sell-side interpretation is one reliability tier above anonymous private text but carries `sell_side_optimism`; it may become a model input only after public or independent cross-check and otherwise remains scenario/verification evidence. Multiple reposts of the same original note are one claim, not independent corroboration. Integrate the result into the affected thesis; do not create a raw-message catalog. Recent does not mean true, while stale channel checks cannot alter the current model without revalidation.
 - Populate `sell_side_expectation_matrix` from KSI rows. Copy the exact KSI id and only the KPE ids explicitly linked to that row; never invent aliases such as `KSI_brokername`. A KPE and KSI generated from the same original broker post are one source and never independent corroboration. Preserve institution and date, distinguish a single broker from a true multi-broker range, compare same-institution forecast/target revisions, and state the exact period/variable/magnitude difference versus the TradingAgents model. Missing method, base year or target price must remain missing; never reverse-engineer them from promotional language.
 - Fill `question_verdicts` with evidence-weighted answers to the same decisive questions. Integrate filing facts, structured financials, industry KPIs, peers, price/expectation evidence and Knowledge Planet clues only where they answer the question. Cite what was actually used, surface contradictions, and state the named model/probability/valuation effect. Then synthesize each accepted conclusion exactly once into the relevant public chapter. A sequential recap of available modules is not analysis.
+- Preserve each shared `UWQ` id in `question_verdicts.question_id` and reconcile the Research Manager's `evidence_utilization_ledger`. Every decisive evidence id must have exactly one adopted/rejected/watch/conflict_unresolved disposition. Adopted evidence needs a named old->new forecast, probability or valuation effect; rejected evidence needs a precise reason; watch/unresolved evidence needs a dated gate. Do not close valuation while a rights-ownership or attributable-cash conflict remains unresolved.
 - The forecast narrative must interpret rather than duplicate the renderer's table. State whether the model is bottom-up, top-down, or hybrid; explain the 2-3 largest earnings/cash drivers and the most fragile assumption. Do not write a precise volume, ASP, utilization, expense ratio, scenario probability or valuation multiple unless it has a historical/evidence anchor or is explicitly labeled an analyst range with sensitivity.
 - `core_theses` must contain only the 2-4 conclusions that decide the rating. Do not produce separate flat lists of thesis bullets and moat bullets. A moat is relevant only when observable evidence shows transmission into share/price, margin, turnover, cash conversion, ROIC or valuation, with the strongest counterevidence and a falsification gate.
 - Copy the machine-readable Research Manager `canonical_model_snapshot` line for line, including ids, periods, values and units. Any PM revision requires a matching accepted `handoff_change_rows` entry with old/new value, evidence ids and recalculated EPS/FCF/valuation impact. A prose claim of "no change" never overrides a numeric difference.

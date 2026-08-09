@@ -1452,6 +1452,144 @@ def test_structured_audit_flags_unused_sell_side_expectation_observation(tmp_pat
     assert "sell_side_expectation_lineage" in {issue.section for issue in issues}
 
 
+def test_structured_audit_requires_question_and_decisive_evidence_closure(tmp_path):
+    context_dir = tmp_path / "0_context"
+    portfolio_dir = tmp_path / "5_portfolio"
+    context_dir.mkdir()
+    portfolio_dir.mkdir()
+    bundle = {
+        "preprocessing_mode": "llm_semantic_plus_deterministic_validation",
+        "preprocessing_notes": [],
+        "semantic_metrics": [
+            {"evidence_id": "EV01"},
+            {
+                "evidence_id": "EV02",
+                "source_quote": (
+                    "buyer acquires 100% for upfront consideration; seller retained regional rights"
+                ),
+            },
+        ],
+        "deterministic_evidence": [],
+        "kpe_impacts": [],
+        "segments": [],
+        "underwriting_packet": {
+            "research_readiness": "partial",
+            "company_model": {
+                "revenue_equation": "volume x price",
+                "profit_equation": "revenue x margin",
+            },
+            "underwriting_questions": [
+                {"question_id": "UWQ01", "evidence_ids": ["EV01"]},
+                {"question_id": "UWQ02", "evidence_ids": ["EV02"]},
+            ],
+            "thesis_financial_bridges": [],
+            "valuation_buckets": [],
+            "valuation_closure": {"status": "partial"},
+        },
+        "conflicts": [],
+    }
+    (context_dir / "structured_research.json").write_text(
+        json.dumps(bundle), encoding="utf-8"
+    )
+    (portfolio_dir / "canonical_decision.json").write_text(
+        json.dumps(
+            {
+                "question_verdicts": [{"question_id": "UWQ01"}],
+                "evidence_utilization_ledger": [
+                    {
+                        "evidence_id": "EV01",
+                        "question_id": "UWQ01",
+                        "disposition": "adopted",
+                        "contribution_or_reason": "supports demand",
+                        "model_or_probability_effect": "",
+                    }
+                ],
+                "shared_model_change_audit": "no numeric change accepted",
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    sections = {
+        issue.section for issue in audit_structured_research_usage(tmp_path, "decision")
+    }
+
+    assert "underwriting_question_closure" in sections
+    assert "critical_evidence_utilization" in sections
+    assert "evidence_disposition_quality" in sections
+    assert "transaction_rights_attribution" in sections
+
+
+def test_structured_audit_accepts_unique_evidence_dispositions_and_flags_unresolved_conflict(tmp_path):
+    context_dir = tmp_path / "0_context"
+    portfolio_dir = tmp_path / "5_portfolio"
+    context_dir.mkdir()
+    portfolio_dir.mkdir()
+    bundle = {
+        "preprocessing_mode": "llm_semantic_plus_deterministic_validation",
+        "preprocessing_notes": [],
+        "semantic_metrics": [{"evidence_id": "EV01"}, {"evidence_id": "EV02"}],
+        "deterministic_evidence": [],
+        "kpe_impacts": [],
+        "segments": [],
+        "underwriting_packet": {
+            "research_readiness": "partial",
+            "company_model": {
+                "revenue_equation": "volume x price",
+                "profit_equation": "revenue x margin",
+            },
+            "underwriting_questions": [
+                {"question_id": "UWQ01", "evidence_ids": ["EV01"]},
+                {"question_id": "UWQ02", "evidence_ids": ["EV02"]},
+            ],
+            "thesis_financial_bridges": [],
+            "valuation_buckets": [],
+            "valuation_closure": {"status": "partial"},
+        },
+        "conflicts": [],
+    }
+    (context_dir / "structured_research.json").write_text(
+        json.dumps(bundle), encoding="utf-8"
+    )
+    (portfolio_dir / "canonical_decision.json").write_text(
+        json.dumps(
+            {
+                "question_verdicts": [
+                    {"question_id": "UWQ01"},
+                    {"question_id": "UWQ02"},
+                ],
+                "evidence_utilization_ledger": [
+                    {
+                        "evidence_id": "EV01",
+                        "question_id": "UWQ01",
+                        "disposition": "adopted",
+                        "contribution_or_reason": "supports demand",
+                        "model_or_probability_effect": "2027E revenue 100->110",
+                    },
+                    {
+                        "evidence_id": "EV02",
+                        "question_id": "UWQ02",
+                        "disposition": "conflict_unresolved",
+                        "contribution_or_reason": "dates conflict",
+                        "verification_gate": "next official filing",
+                    },
+                ],
+                "shared_model_change_audit": "EV01 adopted; EV02 unresolved",
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    sections = {
+        issue.section for issue in audit_structured_research_usage(tmp_path, "decision")
+    }
+
+    assert "underwriting_question_closure" not in sections
+    assert "critical_evidence_utilization" not in sections
+    assert "evidence_disposition_quality" not in sections
+    assert "decisive_evidence_conflict" in sections
+
+
 def test_structured_audit_rejects_wrong_kpe_paired_with_ksi(tmp_path):
     context_dir = tmp_path / "0_context"
     portfolio_dir = tmp_path / "5_portfolio"

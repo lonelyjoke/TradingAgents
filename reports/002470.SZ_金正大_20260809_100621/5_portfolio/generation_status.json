@@ -1,0 +1,42 @@
+{
+  "mode": "schema_repaired_fallback",
+  "agent": "Portfolio Manager",
+  "structured_error": "schema-prompt response failed validation:\nExpecting ',' delimiter: line 391 column 37 (char 17168)",
+  "schema_repair_attempts": 1,
+  "schema": "SellSidePMDecision",
+  "initial_mode": "schema_repaired_fallback",
+  "editorial_review_mode": "deterministic_issue_router",
+  "editorial_revision_requested": true,
+  "editorial_revision_applied": false,
+  "editorial_revision_mode": "schema_prompt_structured",
+  "remaining_handoff_issues": [],
+  "remaining_analytical_issues": [
+    "rating-valuation consistency: Hold sits beside deterministic expected return 2987.8%; revise the rating to match the closed payoff distribution, or revise auditable scenario inputs—do not hide the conflict behind qualitative wording"
+  ],
+  "editorial_revision_rejection_reasons": [
+    "revision changed the protected rating"
+  ],
+  "deterministic_model_notes": [
+    "normalized diluted share count 3286.0277 百万股 -> 32.8603 mn shares",
+    "added deterministic 2026E EPS=-15.2159",
+    "added deterministic 2027E EPS=-0.9130",
+    "added deterministic 2028E EPS=3.0432",
+    "added deterministic 2026E gross profit=1039.5000",
+    "added deterministic 2027E gross profit=1206.0000",
+    "added deterministic 2028E gross profit=1275.0000",
+    "excluded unverified optionality '磷石膏制酸技改+磷酸铁项目期权' from public base value; kept as upside-only research context",
+    "added deterministic probability-weighted core equity value 1978.6000",
+    "removed 4 manual deterministic valuation line(s) from prose",
+    "deduplicated 1 canonical model line(s)",
+    "synchronized 1 stale public numeric claim(s) to the canonical model",
+    "inserted deterministic public numeric source-of-truth disclosure"
+  ],
+  "report_contract": "reader_led_wechat_seven_chapter_v2",
+  "rating_position": "opening_summary_and_chapter_7_recap",
+  "knowledge_planet_policy": "model_probability_verification_or_reject",
+  "full_report_chars": "9908",
+  "public_report_chars": "8730",
+  "internal_overflow_chars": "1175",
+  "internal_sections_removed_from_public_report": "内部附录E：模型交接与报告质量审计, 内部附录F：组合执行参数",
+  "public_h2_count": "7"
+}

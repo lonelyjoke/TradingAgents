@@ -3809,6 +3809,47 @@ def audit_structured_research_usage(
                     "shared model does not close mutually exclusive valuation buckets to auditable per-share fair value",
                 )
             )
+        transaction_rows = list(underwriting_packet.get("transaction_rights_map", []))
+        transaction_corpus = json.dumps(
+            {
+                "semantic_metrics": bundle.get("semantic_metrics", []),
+                "deterministic_evidence": bundle.get("deterministic_evidence", []),
+                "conflicts": bundle.get("conflicts", []),
+            },
+            ensure_ascii=False,
+            default=str,
+        )
+        material_transaction_signal = re.search(
+            r"consideration|upfront|milestone|royalt|acquir(?:e|es|ed|ing)\s+100%|"
+            r"no longer holds?|retained?\s+rights?|首付款|交易对价|里程碑|特许权|"
+            r"收购.{0,24}100%|出售.{0,24}股权|不再持有|保留.{0,16}权",
+            transaction_corpus,
+            re.I | re.S,
+        )
+        if material_transaction_signal and not transaction_rows:
+            issues.append(
+                DecisionDepthIssue(
+                    "transaction_rights_attribution",
+                    "error",
+                    "Material transaction evidence exists but the shared model has no ownership, "
+                    "attributable-cash and retained/disposed-rights waterfall.",
+                )
+            )
+        incomplete_transactions = [
+            str(row.get("transaction_id", "unknown"))
+            for row in transaction_rows
+            if str(row.get("status", "unresolved")) != "verified"
+            or not str(row.get("ownership_and_cash_formula", "")).strip()
+        ]
+        if incomplete_transactions:
+            issues.append(
+                DecisionDepthIssue(
+                    "transaction_rights_attribution",
+                    "error",
+                    "Material transaction ownership/cash attribution is incomplete: "
+                    + ",".join(incomplete_transactions),
+                )
+            )
 
         handoff_manifest = dict(underwriting_packet.get("handoff_manifest", {}))
         if not handoff_manifest.get("downstream_must_preserve"):
@@ -3833,6 +3874,119 @@ def audit_structured_research_usage(
                     "underwriting_question_usage",
                     "warning",
                     "PM analytical ledger does not answer any company-specific question from the shared underwriting packet",
+                )
+            )
+        verdicts = list(pm_payload.get("question_verdicts") or [])
+        verdict_question_ids = [
+            str(row.get("question_id", "")).strip()
+            for row in verdicts
+            if str(row.get("question_id", "")).strip()
+        ]
+        missing_question_verdicts = sorted(set(question_ids) - set(verdict_question_ids))
+        duplicate_question_verdicts = sorted(
+            {
+                question_id
+                for question_id in verdict_question_ids
+                if verdict_question_ids.count(question_id) > 1
+            }
+        )
+        if missing_question_verdicts or duplicate_question_verdicts:
+            detail: list[str] = []
+            if missing_question_verdicts:
+                detail.append("missing=" + ",".join(missing_question_verdicts))
+            if duplicate_question_verdicts:
+                detail.append("duplicate=" + ",".join(duplicate_question_verdicts))
+            issues.append(
+                DecisionDepthIssue(
+                    "underwriting_question_closure",
+                    "error",
+                    "PM verdicts do not map one-to-one to the shared underwriting questions: "
+                    + "; ".join(detail),
+                )
+            )
+
+        critical_evidence_ids = {
+            str(evidence_id).strip().upper()
+            for collection in (
+                underwriting_packet.get("underwriting_questions", []),
+                underwriting_packet.get("thesis_financial_bridges", []),
+            )
+            for row in collection
+            for evidence_id in (row.get("evidence_ids") or [])
+            if str(evidence_id).strip()
+        }
+        valid_evidence_ids = {
+            str(row.get("evidence_id", "")).strip().upper()
+            for key in ("semantic_metrics", "deterministic_evidence", "kpe_impacts")
+            for row in bundle.get(key, [])
+            if str(row.get("evidence_id", "")).strip()
+        }
+        ledger = list(pm_payload.get("evidence_utilization_ledger") or [])
+        ledger_ids = [
+            str(row.get("evidence_id", "")).strip().upper()
+            for row in ledger
+            if str(row.get("evidence_id", "")).strip()
+        ]
+        missing_evidence_dispositions = sorted(critical_evidence_ids - set(ledger_ids))
+        duplicate_evidence_dispositions = sorted(
+            {evidence_id for evidence_id in ledger_ids if ledger_ids.count(evidence_id) > 1}
+        )
+        invalid_evidence_dispositions = sorted(set(ledger_ids) - valid_evidence_ids)
+        if (
+            missing_evidence_dispositions
+            or duplicate_evidence_dispositions
+            or invalid_evidence_dispositions
+        ):
+            detail = []
+            if missing_evidence_dispositions:
+                detail.append("undisposed=" + ",".join(missing_evidence_dispositions))
+            if duplicate_evidence_dispositions:
+                detail.append("duplicate=" + ",".join(duplicate_evidence_dispositions))
+            if invalid_evidence_dispositions:
+                detail.append("unknown=" + ",".join(invalid_evidence_dispositions))
+            issues.append(
+                DecisionDepthIssue(
+                    "critical_evidence_utilization",
+                    "error",
+                    "Decisive evidence is not fully and uniquely dispositioned: "
+                    + "; ".join(detail),
+                )
+            )
+        malformed_dispositions: list[str] = []
+        unresolved_dispositions: list[str] = []
+        for row in ledger:
+            evidence_id = str(row.get("evidence_id", "")).strip().upper() or "unknown"
+            disposition = str(row.get("disposition", "")).strip().lower()
+            reason = str(row.get("contribution_or_reason", "")).strip()
+            effect = str(row.get("model_or_probability_effect", "")).strip()
+            gate = str(row.get("verification_gate", "")).strip()
+            question_id = str(row.get("question_id", "")).strip()
+            if question_id not in question_ids:
+                malformed_dispositions.append(f"{evidence_id}:invalid question_id")
+            if not reason:
+                malformed_dispositions.append(f"{evidence_id}:missing reason")
+            if disposition == "adopted" and not effect:
+                malformed_dispositions.append(f"{evidence_id}:adopted without model effect")
+            if disposition in {"watch", "conflict_unresolved"} and not gate:
+                malformed_dispositions.append(f"{evidence_id}:{disposition} without gate")
+            if disposition == "conflict_unresolved":
+                unresolved_dispositions.append(evidence_id)
+        if malformed_dispositions:
+            issues.append(
+                DecisionDepthIssue(
+                    "evidence_disposition_quality",
+                    "error",
+                    "Evidence dispositions are not decision-useful: "
+                    + "; ".join(malformed_dispositions[:12]),
+                )
+            )
+        if unresolved_dispositions:
+            issues.append(
+                DecisionDepthIssue(
+                    "decisive_evidence_conflict",
+                    "error",
+                    "Decisive evidence conflicts remain unresolved: "
+                    + ",".join(unresolved_dispositions),
                 )
             )
         # This is machine bookkeeping and is validated from canonical JSON;
@@ -4144,6 +4298,7 @@ def audit_report_depth(report_dir: str | Path) -> pd.DataFrame:
             requirements = (
                 ("research_questions", 3, "company-specific research questions"),
                 ("question_verdicts", 3, "evidence-weighted question verdicts"),
+                ("evidence_utilization_ledger", 3, "decisive evidence dispositions"),
                 ("forecast_takeaways", 2, "forecast take-aways"),
                 ("forecast_assumptions", 3, "auditable forecast assumptions"),
                 ("core_theses", 2, "ranked core theses"),

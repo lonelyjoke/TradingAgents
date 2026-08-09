@@ -1,0 +1,5 @@
+# Baijiu verification context for 002470.SZ as of 2026-08-08
+
+Status: not_applicable
+
+- Reason: no baijiu company-name, industry, curated ticker, or filing-text trigger was found.

@@ -1,0 +1,34 @@
+{
+  "mode": "schema_prompt_structured",
+  "agent": "Research Manager",
+  "structured_error": "",
+  "schema": "UnderwritingResearchPlan",
+  "handoff_repair_requested": false,
+  "handoff_repair_applied": false,
+  "handoff_repair_mode": "not_run",
+  "handoff_deterministic_completion_applied": true,
+  "handoff_deterministic_copied_lines": [
+    "shares",
+    "2026E_operatingprofit",
+    "2027E_operatingprofit",
+    "2028E_operatingprofit",
+    "2026E_基本每股收益",
+    "2027E_基本每股收益",
+    "2028E_基本每股收益",
+    "2026E_ocf",
+    "2027E_ocf",
+    "2028E_ocf"
+  ],
+  "handoff_same_unit_scale_restorations": [],
+  "handoff_undocumented_change_restorations": [],
+  "initial_handoff_issues": [
+    "missing canonical line shares: 3286.0277 mn shares",
+    "missing canonical line 2026E_operatingprofit: -420.0 CNY mn",
+    "missing canonical line 2027E_operatingprofit: 50.0 CNY mn",
+    "missing canonical line 2028E_operatingprofit: 150.0 CNY mn",
+    "missing canonical line 2026E_ocf: 200.0 CNY mn",
+    "missing canonical line 2027E_ocf: 250.0 CNY mn",
+    "missing canonical line 2028E_ocf: 350.0 CNY mn"
+  ],
+  "remaining_handoff_issues": []
+}

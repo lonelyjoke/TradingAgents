@@ -1,0 +1,1194 @@
+{
+  "schema_version": 3,
+  "symbol": "002470.SZ",
+  "as_of_date": "2026-08-08",
+  "forecast_years": [
+    "2026E",
+    "2027E",
+    "2028E"
+  ],
+  "research_readiness": "partial",
+  "readiness_reasons": [
+    "分产品/分地区收入、成本及毛利率拆分缺失；仅境外收入占比>10%触发披露，但无具体数值",
+    "2026H1业绩预告录得4.5-5.5亿净亏损，但Q2单季亏损构成及性质（减值/主营）未公开",
+    "资本开支、在建工程转固、技改投资、产能利用率、ROIC等关键运营及再投资指标难以量化",
+    "无法从结构化数据中提取净资产及有息负债明细，PB-ROE及信用风险评估受限",
+    "磷酸铁前驱体等项目处于建设期，无投产时间、产能、客户及利润贡献信息",
+    "部分财务比率仅Q1可用，全年预测依赖不完整季节性推断",
+    "Material transaction economics are present but legal ownership, attributable consideration, cash received and retained/disposed rights were not reconciled.",
+    "One or more filing-reported segments required deterministic restoration.",
+    "Material segment three-year driver lines are missing: 境外业务 (Overseas business), 复合肥及磷化工 (Compound fertilizer & phosphor-chemical), 磷石膏制酸/技改项目 (Phosphogypsum-to-acid technical improvement)",
+    "bull scenario EPS x PE does not reconcile to fair value.",
+    "base scenario EPS x PE does not reconcile to fair value.",
+    "Valuation closure conflicts with probability-weighted scenario value.",
+    "Valuation has not closed from mutually exclusive buckets to per-share fair value.",
+    "Three-year values remain missing for consolidated line(s): 资本支出, 自由现金流"
+  ],
+  "company_model": {
+    "model_profile": "corporate",
+    "operating_model_family": "volume_price_cost",
+    "business_archetype": "产品制造/产能出货型（复合肥、磷肥、新型肥料、土壤调理剂）",
+    "value_proposition_and_customers": "为种植户提供全系列肥料产品和种植业解决方案，受益于国家粮食安全战略和保供稳价政策",
+    "revenue_equation": "收入=∑(各产品线销量×ASP)；主营业务收入约99.2亿(FY2025)；境外销售占比>10%",
+    "profit_equation": "利润=收入-原料成本(占成本>80%，主要为氮磷钾及硫磺)-能源/制造费用-销售/管理/研发费用-财务费用-信用减值/资产减值+投资收益；FY2025扣非归母净利-16.1m，归母净利34.6m，毛利率~11%",
+    "cash_flow_equation": "经营现金流=净利润+折旧摊销±营运资本变动；FY2025 OCF 455.7m；Q1 2026 OCF/净利润达9.79倍",
+    "capital_intensity_and_reinvestment": "资本支出集中于技改（硫磺制酸/磷石膏制酸）和在建项目（磷酸铁正极前驱体），历史CAPEX金额未知，中等资本密集度",
+    "diluted_share_count_mn": 3286.0277,
+    "share_count_period": "2026-08-08; market snapshot; market cap / close, using forecast_model and price_earnings_decomposition",
+    "share_count_evidence_id": "",
+    "share_count_source_type": "market_cap_div_close",
+    "share_count_formula": "market cap / close, using forecast_model and price_earnings_decomposition",
+    "share_count_cross_checks": [
+      "registered capital proxy=3286.028 mn",
+      "market cap / close=3286.028 mn",
+      "pledge_stat total_share proxy=3286.028 mn (not canonical)",
+      "registered capital is a lagging proxy; registered-vs-current-market difference=0.000%"
+    ],
+    "moat_mechanisms": [
+      "国内复合肥头部企业的规模采购优势",
+      "遍及全国的经销商网络和农化服务能力",
+      "缓控释肥、磷石膏利用等技术积累"
+    ],
+    "moat_to_financial_transmission": [
+      "规模采购→原料成本低于中小厂家→毛利率溢价潜力",
+      "品牌与渠道→销量稳定性→降低营运资本和促销费用",
+      "技改（磷石膏制酸）→替代高价硫磺→单位成本节约→毛利率提升"
+    ],
+    "structural_risks": [
+      "原料（氮磷钾、硫磺）价格高度波动，且公司定价权弱，利润对原料价格极度敏感",
+      "行业产能过剩，同质化竞争激烈，ASP长期承压",
+      "财务杠杆偏高（财务费用率1.26%且Q1同比+45.5%），利息负担侵蚀利润",
+      "信用减值与资产减值高企，存在前期扩张留下的资产包袱",
+      "磷酸铁正极前驱体等新业务处于产能过剩领域，未来回报不确定"
+    ],
+    "key_unknowns": [
+      "2026H1巨亏（4.5-5.5亿）中主业经营亏损与一次性减值的占比",
+      "磷石膏制酸技改的经济性和推进时间表",
+      "境外业务的具体规模、客户集中度和盈利能力",
+      "真实偿债能力及再融资安排"
+    ],
+    "evidence_ids": [
+      "EV025",
+      "EV029",
+      "EV010",
+      "EV012",
+      "EV015",
+      "EV016"
+    ]
+  },
+  "business_unit_map": [
+    {
+      "unit_id": "domestic_fertilizer",
+      "unit_name": "复合肥及磷化工-境内",
+      "unit_type": "product",
+      "disclosure_basis": "analytical",
+      "parent_unit": "company",
+      "economic_role": "主要收入与利润来源",
+      "primary_operating_archetype": "standard_manufacturing",
+      "secondary_operating_archetype": "",
+      "revenue_driver_equation": "境内销量(复合肥/磷肥/新型肥料)×ASP",
+      "profit_driver_equation": "销量×(ASP-原料成本-加工费)-销售管理研发费用-信用减值",
+      "cash_and_capital_equation": "经营利润+营运资本变动-维护性CAPEX-技改CAPEX",
+      "reported_metrics": [
+        "毛利率Q1 2026 11.18%",
+        "营业利润率0.74%",
+        "净利率0.39%",
+        "应收账款/营收10.13%",
+        "库存/营收23.83%"
+      ],
+      "evidence_ids": [
+        "EV025",
+        "EV032",
+        "EV012",
+        "EV013",
+        "EV014"
+      ],
+      "missing_inputs": [
+        "分产品（常规复合肥/新型肥料/磷肥/土壤调理剂）销售收入及毛利率",
+        "各产品线ASP与销量",
+        "产能及产能利用率",
+        "原料采购价与单吨加工成本"
+      ],
+      "next_verification": "年度/半年度报告分产品收入成本附表；公司互动易回复产销量数据"
+    },
+    {
+      "unit_id": "overseas_fertilizer",
+      "unit_name": "境外业务",
+      "unit_type": "geography",
+      "disclosure_basis": "reported",
+      "parent_unit": "company",
+      "economic_role": "补充收入来源（营收或净利占比>10%）",
+      "primary_operating_archetype": "standard_manufacturing",
+      "secondary_operating_archetype": "",
+      "revenue_driver_equation": "境外销量×出口ASP",
+      "profit_driver_equation": "境外销量×(出口ASP-完全成本)-关税运费",
+      "cash_and_capital_equation": "境外业务经营现金流",
+      "reported_metrics": [
+        "境外业务产生的营业收入或净利润占比>10%"
+      ],
+      "evidence_ids": [
+        "EV027"
+      ],
+      "missing_inputs": [
+        "境外业务收入金额及利润贡献",
+        "主要出口地区和国家",
+        "客户集中度与结算币种"
+      ],
+      "next_verification": "年度报告附注中的地区分部信息"
+    },
+    {
+      "unit_id": "tech_projects",
+      "unit_name": "磷石膏制酸/磷酸铁项目",
+      "unit_type": "project_or_asset",
+      "disclosure_basis": "analytical",
+      "parent_unit": "company",
+      "economic_role": "潜在成本节约/新增长曲线，目前处于建设/规划阶段",
+      "primary_operating_archetype": "project_order_delivery",
+      "secondary_operating_archetype": "",
+      "revenue_driver_equation": "投产前为零；投产后=产能×利用率×ASP",
+      "profit_driver_equation": "投产后：收入-BOM-折旧-期间费用",
+      "cash_and_capital_equation": "建设期现金流出；投产后经营现金流",
+      "reported_metrics": [],
+      "evidence_ids": [
+        "EV095"
+      ],
+      "missing_inputs": [
+        "磷石膏制酸技改投资预算及工期",
+        "磷酸铁正极前驱体项目产能、投资额、投产时间表",
+        "预期成本节约幅度及目标客户/市场"
+      ],
+      "next_verification": "董事会相关公告、重大投资进展披露"
+    },
+    {
+      "unit_id": "BU06",
+      "unit_name": "复合肥及磷化工 (Compound fertilizer & phosphor-chemical)",
+      "unit_type": "reported_segment",
+      "disclosure_basis": "reported",
+      "parent_unit": "company",
+      "economic_role": "Filing segment restored after structured evidence reconciliation.",
+      "primary_operating_archetype": "",
+      "secondary_operating_archetype": "",
+      "revenue_driver_equation": "",
+      "profit_driver_equation": "",
+      "cash_and_capital_equation": "",
+      "reported_metrics": [],
+      "evidence_ids": [],
+      "missing_inputs": [
+        "economic sub-unit driver equations require analyst completion"
+      ],
+      "next_verification": ""
+    },
+    {
+      "unit_id": "BU08",
+      "unit_name": "境外业务 (Overseas business)",
+      "unit_type": "reported_segment",
+      "disclosure_basis": "missing",
+      "parent_unit": "company",
+      "economic_role": "Filing segment restored after structured evidence reconciliation.",
+      "primary_operating_archetype": "",
+      "secondary_operating_archetype": "",
+      "revenue_driver_equation": "",
+      "profit_driver_equation": "",
+      "cash_and_capital_equation": "",
+      "reported_metrics": [],
+      "evidence_ids": [],
+      "missing_inputs": [
+        "economic sub-unit driver equations require analyst completion"
+      ],
+      "next_verification": ""
+    },
+    {
+      "unit_id": "BU10",
+      "unit_name": "磷石膏制酸/技改项目 (Phosphogypsum-to-acid technical improvement)",
+      "unit_type": "reported_segment",
+      "disclosure_basis": "missing",
+      "parent_unit": "company",
+      "economic_role": "Filing segment restored after structured evidence reconciliation.",
+      "primary_operating_archetype": "",
+      "secondary_operating_archetype": "",
+      "revenue_driver_equation": "",
+      "profit_driver_equation": "",
+      "cash_and_capital_equation": "",
+      "reported_metrics": [],
+      "evidence_ids": [],
+      "missing_inputs": [
+        "economic sub-unit driver equations require analyst completion"
+      ],
+      "next_verification": ""
+    }
+  ],
+  "segment_models": [
+    {
+      "segment": "复合肥及磷化工-境内",
+      "products_or_services": "常规复合肥、新型肥料、磷肥、土壤调理剂及种植业解决方案",
+      "customers_and_channel": "全国种植户，以经销商网络为主，兼有部分直供服务",
+      "revenue_weight_pct": null,
+      "profit_weight_pct": null,
+      "base_period": "FY2025 / Q1 2026",
+      "base_revenue_value": null,
+      "base_revenue_unit": "CNY mn",
+      "base_revenue_growth_pct": null,
+      "base_margin_pct": 11.18,
+      "base_margin_change_pp": -0.75,
+      "demand_and_order_drivers": [
+        "国家粮食安全战略和种粮补贴政策",
+        "主粮种植面积及农户施肥意愿",
+        "保供稳价政策支撑复合肥需求刚性"
+      ],
+      "industry_supply_and_capacity": "国内复合肥产能总量过剩，落后产能淘汰缓慢，行业开工率不高",
+      "volume_share_utilization": "无公开披露；推测公司产销量受制于行业竞争和原料成本，份额稳定或微降",
+      "price_asp_take_rate": "随行就市定价，成本加成逻辑因竞争激烈而弱化；ASP与原料价格高度联动",
+      "unit_cost_and_input_prices": "原料（氮磷钾+硫磺）占总成本80%以上；能源和运费次之；单吨加工费约300-500元（待核实）",
+      "margin_and_operating_leverage": "毛利率仅11%左右，固定成本占比不低，营收小幅波动可导致利润大幅变动，但减值干扰更显著",
+      "working_capital_and_cash_conversion": "应收/营收10.13%，库销比23.83%（季节性备肥需要高库存）；Q1 OCF/净利润9.79倍表明非现金支出多",
+      "prosperity_level": "bottom-right validation stage",
+      "marginal_direction": "deteriorating",
+      "causal_analysis": "政策托底需求，但原料成本高企且定价权缺失，毛利率持续受压；叠加信用和资产减值，会计利润极弱；现金生成能力尚可但被偿债和计提消耗",
+      "valuation_treatment": "PE指标失真，应基于PB/ROE估值或重置成本/清算价值；需等待利润修复或资产出清信号",
+      "strongest_counterevidence": [
+        "Q1 2026净利率同比微升+0.01pp，显示运营层未进一步恶化",
+        "OCF/净利润9.79倍，说明折旧、减值等非现金项目较大，经营现金流相对健康"
+      ],
+      "evidence_ids": [
+        "EV012",
+        "EV013",
+        "EV014",
+        "EV016",
+        "EV024",
+        "EV029"
+      ],
+      "missing_inputs": [
+        "分产品毛利率",
+        "分产品销量与ASP",
+        "产能利用率",
+        "单吨加工成本及原料采购价明细"
+      ],
+      "next_verification": "2026半年报是否提供分行业/分产品经营数据；管理层对毛利率下滑原因的解释"
+    },
+    {
+      "segment": "境外业务",
+      "products_or_services": "化肥出口（具体产品构成未披露）",
+      "customers_and_channel": "境外分销商/进口商",
+      "revenue_weight_pct": null,
+      "profit_weight_pct": null,
+      "base_period": "FY2025",
+      "base_revenue_value": null,
+      "base_revenue_unit": "CNY mn",
+      "base_revenue_growth_pct": null,
+      "base_margin_pct": null,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [
+        "海外粮食价格及种植收益",
+        "国际海运运费",
+        "主要出口目的地进口政策及汇率"
+      ],
+      "industry_supply_and_capacity": "全球贸易流受主要产区竞争、出口限制及物流瓶颈影响",
+      "volume_share_utilization": "未知",
+      "price_asp_take_rate": "参照国际市场价格",
+      "unit_cost_and_input_prices": "与境内类似的原料成本外加运费和关税",
+      "margin_and_operating_leverage": "信息不足，难以判断",
+      "working_capital_and_cash_conversion": "信息不足",
+      "prosperity_level": "evidence_limited",
+      "marginal_direction": "unknown",
+      "causal_analysis": "境外收入占比触发披露阈值，表明渠道有一定覆盖，但缺乏数据，无法单独评估其对合并利润、毛利率和现金流的影响",
+      "valuation_treatment": "视同境内化肥业务一起整体估值，不单独拆分",
+      "strongest_counterevidence": [],
+      "evidence_ids": [
+        "EV027"
+      ],
+      "missing_inputs": [
+        "境外收入金额、毛利率、利润贡献",
+        "主要出口区域、客户和订单稳定性",
+        "外汇风险敞口"
+      ],
+      "next_verification": "年度报告附注中的分部报告，确认境外具体指标"
+    },
+    {
+      "segment": "复合肥及磷化工 (Compound fertilizer & phosphor-chemical)",
+      "products_or_services": "",
+      "customers_and_channel": "",
+      "revenue_weight_pct": null,
+      "profit_weight_pct": null,
+      "base_period": "FY2025 / Q1-2026",
+      "base_revenue_value": 9915868845.35,
+      "base_revenue_unit": "CNY",
+      "base_revenue_growth_pct": null,
+      "base_margin_pct": 11.1792,
+      "base_margin_change_pp": -0.75,
+      "demand_and_order_drivers": [],
+      "industry_supply_and_capacity": "",
+      "volume_share_utilization": "",
+      "price_asp_take_rate": "",
+      "unit_cost_and_input_prices": "",
+      "margin_and_operating_leverage": "",
+      "working_capital_and_cash_conversion": "",
+      "prosperity_level": "evidence_limited",
+      "marginal_direction": "unknown",
+      "causal_analysis": "",
+      "valuation_treatment": "evidence_limited",
+      "strongest_counterevidence": [],
+      "evidence_ids": [],
+      "missing_inputs": [
+        "LLM omitted a filing-reported material segment"
+      ],
+      "next_verification": ""
+    },
+    {
+      "segment": "境外业务 (Overseas business)",
+      "products_or_services": "",
+      "customers_and_channel": "",
+      "revenue_weight_pct": null,
+      "profit_weight_pct": null,
+      "base_period": "FY2025",
+      "base_revenue_value": null,
+      "base_revenue_unit": "",
+      "base_revenue_growth_pct": null,
+      "base_margin_pct": null,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [],
+      "industry_supply_and_capacity": "",
+      "volume_share_utilization": "",
+      "price_asp_take_rate": "",
+      "unit_cost_and_input_prices": "",
+      "margin_and_operating_leverage": "",
+      "working_capital_and_cash_conversion": "",
+      "prosperity_level": "evidence_limited",
+      "marginal_direction": "unknown",
+      "causal_analysis": "",
+      "valuation_treatment": "evidence_limited",
+      "strongest_counterevidence": [],
+      "evidence_ids": [],
+      "missing_inputs": [
+        "LLM omitted a filing-reported material segment"
+      ],
+      "next_verification": ""
+    },
+    {
+      "segment": "磷石膏制酸/技改项目 (Phosphogypsum-to-acid technical improvement)",
+      "products_or_services": "",
+      "customers_and_channel": "",
+      "revenue_weight_pct": null,
+      "profit_weight_pct": null,
+      "base_period": "2026",
+      "base_revenue_value": null,
+      "base_revenue_unit": "",
+      "base_revenue_growth_pct": null,
+      "base_margin_pct": null,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [],
+      "industry_supply_and_capacity": "",
+      "volume_share_utilization": "",
+      "price_asp_take_rate": "",
+      "unit_cost_and_input_prices": "",
+      "margin_and_operating_leverage": "",
+      "working_capital_and_cash_conversion": "",
+      "prosperity_level": "evidence_limited",
+      "marginal_direction": "unknown",
+      "causal_analysis": "",
+      "valuation_treatment": "evidence_limited",
+      "strongest_counterevidence": [],
+      "evidence_ids": [],
+      "missing_inputs": [
+        "LLM omitted a filing-reported material segment"
+      ],
+      "next_verification": ""
+    }
+  ],
+  "underwriting_questions": [
+    {
+      "question_id": "Q1",
+      "question": "2026H1预计净亏损4.5-5.5亿元，其中主营业务亏损、信用减值、资产减值及其他非经常事项分别贡献了多少？",
+      "why_it_matters": "决定亏损性质的持续性，影响2026H2及以后年度的盈利预测基准。若为一次性减值，则2027年有望轻装上阵；若主营毛利率进一步恶化，则复苏将延迟。",
+      "current_answer": "已知Q1投资收益+1612%支撑部分利润，信用减值增加268%，资产减值损失增加193%，但具体分项金额未披露。H1预告净利润为负且同比下降474%-602%。",
+      "bull_evidence": [
+        "Q1单季仍实现11.44 mn归母净利，毛利率11.18%未崩塌",
+        "经营现金流/净利润9.79倍，资产减值多为非现金，不影响持续经营现金"
+      ],
+      "bear_evidence": [
+        "H1预告亏损4.5-5.5亿，亏损幅度远超市场预期",
+        "信用减值和资产减值大幅增加，暗示前期应收账款或存货存在真实损失"
+      ],
+      "decisive_model_variables": [
+        "2026E asset_impairment",
+        "2026E credit_impairment",
+        "2026E operating_profit_ex_impairment"
+      ],
+      "affected_financial_lines": [
+        "归母净利润",
+        "净资产",
+        "EPS"
+      ],
+      "evidence_ids": [
+        "EV024",
+        "EV036",
+        "EV041",
+        "EV042"
+      ],
+      "missing_evidence": [
+        "2026年半年度报告及利润表附注",
+        "减值明细：应收账款坏账准备、存货跌价准备、商誉/长期资产减值具体科目"
+      ],
+      "next_verification": "公司发布2026年半年度报告时，拆分半年度利润表各项目，并与上年同期对比"
+    },
+    {
+      "question_id": "Q2",
+      "question": "硫磺制酸改造为磷石膏制酸的技改项目能否在2027年前落地，预计可降低多少原料成本，对毛利率的拉动幅度有多大？",
+      "why_it_matters": "技改是公司成本端最确定的潜在利好；若能节省硫磺采购成本，毛利率可提升1-3个百分点，对微利状态下的利润弹性巨大。",
+      "current_answer": "公司表示持续跟踪硫磺价格走势，将综合考虑市场及生产经营情况推进相应技改，未给出时间表或投资预算。",
+      "bull_evidence": [
+        "公司拥有阿尔法磷石膏技术，投资者认为不改变现有工艺，改造可行性高",
+        "硫磺价格偏高，促使企业有经济动力改造"
+      ],
+      "bear_evidence": [
+        "2024年刚刚改造硫磺制酸，短期二次改造合理性存疑",
+        "公司未内部立项，表明或未通过资本预算，或不急于推进"
+      ],
+      "decisive_model_variables": [
+        "2027E gross_margin",
+        "2027E capex",
+        "2028E gross_margin"
+      ],
+      "affected_financial_lines": [
+        "营业成本",
+        "毛利率",
+        "资本支出"
+      ],
+      "evidence_ids": [
+        "EV095"
+      ],
+      "missing_evidence": [
+        "技改投资预算",
+        "预期单吨硫酸成本节约金额",
+        "董事会立项审批文件或投资者交流纪要"
+      ],
+      "next_verification": "持续跟踪互动易问答、董事会决议公告，关注是否出现技改立项的相关表述"
+    },
+    {
+      "question_id": "Q3",
+      "question": "磷酸铁电池正极前驱体材料建设项目当前工程进度如何，预计何时投产，市场供需和潜在盈利能力如何？",
+      "why_it_matters": "该项目是市场对公司估值重定价的潜在期权；若成功可带来第二增长曲线，但其资本开支和后续回报在高产能过剩的环境下风险较大。",
+      "current_answer": "目前项目正在建设中，尚未投产，公司提示投资风险。",
+      "bull_evidence": [
+        "公司磷资源一体化可能具备成本优势"
+      ],
+      "bear_evidence": [
+        "国内磷酸铁及磷酸铁锂产能严重过剩，行业普遍亏损",
+        "公司缺乏锂电池正极材料的客户验证和技术积淀"
+      ],
+      "decisive_model_variables": [
+        "project_capex",
+        "project_commencement_date",
+        "project_expected_roic"
+      ],
+      "affected_financial_lines": [
+        "在建工程",
+        "资本支出",
+        "未来营业收入及利润"
+      ],
+      "evidence_ids": [],
+      "missing_evidence": [
+        "项目可研报告或环评公示数据",
+        "设备采购和工程进度节点",
+        "与下游客户的送样验证信息"
+      ],
+      "next_verification": "关注公司重大项目进展公告，或者向董秘办求证预计中交/投料试车时间"
+    },
+    {
+      "question_id": "Q4",
+      "question": "当前真实自由现金流能否覆盖利息和到期债务？公司偿债压力和再融资风险有多大？",
+      "why_it_matters": "在市场极低盈利状态下，现金流是企业的生命线。若流动性收缩，可能触发信用危机，进而侵蚀所有股权价值。",
+      "current_answer": "Q1经营现金流约1.12亿（基于Q1 OCF/净利润9.79倒推），但净利润基数极小。财务费用同比增加45.5%。整体杠杆水平不明。",
+      "bull_evidence": [
+        "经营现金流对净利润倍数高，表明折旧、减值等非现金支出大，实际现金生成好于会计利润",
+        "若减值压力减轻，经营现金流无需过多补充营运资本"
+      ],
+      "bear_evidence": [
+        "H1巨亏若包含真实现金流出（如应收款坏账转销、存货报废），则现金损耗严重",
+        "财务费用率走高，短期借款可能上升，有息债务规模待证实"
+      ],
+      "decisive_model_variables": [
+        "2026E OCF",
+        "2026E interest_expense",
+        "2026E total_debt"
+      ],
+      "affected_financial_lines": [
+        "经营活动现金流净额",
+        "筹资活动现金流",
+        "资产负债率"
+      ],
+      "evidence_ids": [
+        "EV015",
+        "EV016",
+        "EV036"
+      ],
+      "missing_evidence": [
+        "资产负债表：短期借款、一年内到期非流动负债",
+        "现金流量表：偿还债务支付的现金",
+        "授信及再融资额度"
+      ],
+      "next_verification": "2026半年报公布后，分析现金流科目和偿债指标"
+    },
+    {
+      "question_id": "Q5",
+      "question": "境外业务的具体收入规模、毛利率和客户集中度是怎样的？是否有集中违约或汇率敞口风险？",
+      "why_it_matters": "境外业务占比已超10%，若该部分盈利稳定、客户优质，可提供汇率和区域多元化收益；反之若存在应收账款风险和毛利率低于境内，则可能拖累整体估值。",
+      "current_answer": "仅披露境外业务营收或净利润占比超过10%，但未公布具体数额。",
+      "bull_evidence": [],
+      "bear_evidence": [],
+      "decisive_model_variables": [
+        "overseas_revenue",
+        "overseas_gross_margin",
+        "overseas_receivables"
+      ],
+      "affected_financial_lines": [
+        "营业收入",
+        "毛利",
+        "应收账款",
+        "汇兑损益"
+      ],
+      "evidence_ids": [
+        "EV027"
+      ],
+      "missing_evidence": [
+        "分地区收入及营业利润",
+        "主要出口国家和客户名称",
+        "结算货币及套保策略"
+      ],
+      "next_verification": "年度报告附注中“地区分部”信息，或在深交所互动易询问境外销售详情"
+    }
+  ],
+  "forecast_lines": [
+    {
+      "segment": "consolidated",
+      "metric": "营业收入",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 9915.87,
+      "year_1_value": 9900.0,
+      "year_2_value": 10050.0,
+      "year_3_value": 10200.0,
+      "formula": "base + growth rate; 2026E flat due to demand rigidity and price competition, 2027E/2028E low single-digit growth from demand expansion and mix improvement",
+      "assumption_status": "analyst_estimate",
+      "evidence_ids": [
+        "EV010",
+        "EV011"
+      ],
+      "key_sensitivity": "农产品价格和政策补贴",
+      "missing_inputs": [
+        "分产品量价拆分为未证实假设",
+        "管理层收入指引缺失"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "毛利率",
+      "unit": "%",
+      "base_period": "Q1 2026",
+      "base_value": 11.18,
+      "year_1_value": 10.5,
+      "year_2_value": 12.0,
+      "year_3_value": 12.5,
+      "formula": "base adjusted by raw material cost pressure in 2026E, recovery from tech improvement and cost pass-through in 2027E/2028E",
+      "assumption_status": "analyst_estimate",
+      "evidence_ids": [
+        "EV012"
+      ],
+      "key_sensitivity": "氮磷钾/硫磺价格、技改进度",
+      "missing_inputs": [
+        "FY2025全年毛利率未单独提取",
+        "原料价格走势和采购策略不明"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "营业利润",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": null,
+      "year_1_value": -420.0,
+      "year_2_value": 50.0,
+      "year_3_value": 150.0,
+      "formula": "revenue * operating_margin (including impairment); 2026E heavy impairment drives large loss; 2027E normalize; 2028E modest profit",
+      "assumption_status": "analyst_estimate",
+      "evidence_ids": [
+        "EV013",
+        "EV024"
+      ],
+      "key_sensitivity": "减值计提金额及投资收益",
+      "missing_inputs": [
+        "FY2025营业利润实际数",
+        "2026年减值损失分项预测"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "归母净利润",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 34.6,
+      "year_1_value": -500.0,
+      "year_2_value": -30.0,
+      "year_3_value": 100.0,
+      "formula": "after interest, tax and minority interest; 2026E includes ~500 mn impairment loss from H1 guidance; 2027E gradual recovery; 2028E return to profitability",
+      "assumption_status": "analyst_estimate",
+      "evidence_ids": [
+        "EV010",
+        "EV014",
+        "EV024"
+      ],
+      "key_sensitivity": "减值转回/新增、主业毛利率",
+      "missing_inputs": [
+        "2026H2业绩趋势和减值估计",
+        "所得税率和少数股东权益"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "基本每股收益",
+      "unit": "CNY/share",
+      "base_period": "FY2025",
+      "base_value": 0.0105,
+      "year_1_value": -0.15215939902149941,
+      "year_2_value": -0.009129563941289965,
+      "year_3_value": 0.030431879804299882,
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)",
+      "assumption_status": "calculated",
+      "evidence_ids": [
+        "EV010"
+      ],
+      "key_sensitivity": "归母净利润水平和股本变动",
+      "missing_inputs": [
+        "潜在稀释证券（可转债、期权）未知"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "经营活动现金流净额",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 455.73,
+      "year_1_value": 200.0,
+      "year_2_value": 250.0,
+      "year_3_value": 350.0,
+      "formula": "net_income + depreciation/amortization +/- working capital; OCF remains positive despite losses due to non-cash impairment",
+      "assumption_status": "analyst_estimate",
+      "evidence_ids": [
+        "EV016",
+        "EV042"
+      ],
+      "key_sensitivity": "应收账款回收和库存变现速度",
+      "missing_inputs": [
+        "折旧摊销金额无单独披露",
+        "营运资本变动假设"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "资本支出",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "missing; no capex data extracted from filings or management_allocation",
+      "assumption_status": "missing",
+      "evidence_ids": [],
+      "key_sensitivity": "技改和磷酸铁项目投资进度",
+      "missing_inputs": [
+        "购建固定资产、无形资产支付的现金历史值"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "自由现金流",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "OCF - capex; capex missing",
+      "assumption_status": "missing",
+      "evidence_ids": [],
+      "key_sensitivity": "CAPEX控制",
+      "missing_inputs": [
+        "资本支出数据"
+      ]
+    }
+  ],
+  "scenarios": [
+    {
+      "scenario": "bull",
+      "probability_pct": 30.0,
+      "operating_assumptions": [
+        "2026年实际净亏损被控制在2亿以内（减值冲回或非经常收益），毛利率维持在11.5%",
+        "磷石膏制酸技改2027年落地，降低原料成本，毛利率提升至14%",
+        "磷酸铁项目2028年投产并开始贡献正向利润",
+        "经营现金流持续为正，无再融资危机"
+      ],
+      "parent_net_profit_cny_mn": -200.0,
+      "eps_cny": -0.060863759608599764,
+      "fcf_cny_mn": null,
+      "valuation_method": "PB-ROE或PE（2028E正常化利润200 mn，15x PE）",
+      "valuation_multiple": 15.0,
+      "fair_value_per_share": -0.9129563941289964,
+      "evidence_ids": [],
+      "falsification": "若2026半年报减值超5亿或2027年毛利率未见改善，则bull case概率降低",
+      "missing_inputs": [
+        "技改确切时间表",
+        "项目IRR"
+      ]
+    },
+    {
+      "scenario": "base",
+      "probability_pct": 50.0,
+      "operating_assumptions": [
+        "2026年归母净亏损约5亿，源于资产减值和信用减值，但主营收入及毛利率未显著恶化",
+        "2027年减值压力减轻，毛利率温和恢复至12%，归母净归零或小亏",
+        "2028年毛利率12.5%，归母净利润转正至1亿",
+        "经营现金流覆盖利息但需谨慎资本开支"
+      ],
+      "parent_net_profit_cny_mn": -500.0,
+      "eps_cny": -0.15215939902149941,
+      "fcf_cny_mn": null,
+      "valuation_method": "PB-ROE或PE（2028E正常化利润100 mn，15 x PE）",
+      "valuation_multiple": 15.0,
+      "fair_value_per_share": -2.282390985322491,
+      "evidence_ids": [
+        "EV024",
+        "EV012"
+      ],
+      "falsification": "若2027年减值再次大幅增加或毛利率跌破10%",
+      "missing_inputs": [
+        "净资产确切金额"
+      ]
+    },
+    {
+      "scenario": "bear",
+      "probability_pct": 20.0,
+      "operating_assumptions": [
+        "减值风波扩大，2026年归母净亏损超8亿，净资产大幅下降",
+        "原料价格高企且无法传导，毛利率跌破10%",
+        "债务到期压力导致流动性危机，需要债务重组或增发稀释股本",
+        "技改和磷酸铁项目停滞或延迟"
+      ],
+      "parent_net_profit_cny_mn": -800.0,
+      "eps_cny": -0.24345503843439906,
+      "fcf_cny_mn": null,
+      "valuation_method": "清算价值/残余资产净值，每股净资产重置",
+      "valuation_multiple": null,
+      "fair_value_per_share": 0.5,
+      "evidence_ids": [],
+      "falsification": "公司获得外部融资或主要原料价格大幅下跌",
+      "missing_inputs": [
+        "债务结构和到期日"
+      ]
+    }
+  ],
+  "thesis_financial_bridges": [
+    {
+      "bridge_id": "THESIS_01",
+      "thesis_or_question": "减值风暴过后盈利复苏，2028年归母净利恢复至1亿以上",
+      "affected_unit": "consolidated",
+      "operating_driver": "信用/资产减值大幅下降，毛利率恢复",
+      "driver_formula": "2028E NP = Revenue 10200 * (Gross 12.5% - SGA 6%) - Finance cost 120 - Tax and minority, normalized to 100 mn",
+      "base_assumption": "2028E NP 100 mn, EPS 0.03",
+      "bull_assumption": "2028E NP 200 mn, EPS 0.061",
+      "bear_assumption": "2028E still loss, NP -50 mn",
+      "revenue_impact": "收入稳定在100-102亿",
+      "profit_impact": "base 1亿，bull 2亿，bear -0.5亿",
+      "eps_impact": "base 0.03, bull 0.06, bear -0.015",
+      "fcf_or_capital_impact": "经营现金流覆盖部分CAPEX，自由现金流微弱",
+      "valuation_impact": "赋予15x PE，base市值15亿（1500 mn），bull市值30亿",
+      "quantification_status": "partially_quantified",
+      "evidence_ids": [
+        "EV010",
+        "EV024"
+      ],
+      "missing_inputs": [
+        "准确SGA预测",
+        "减值转回可能性"
+      ]
+    },
+    {
+      "bridge_id": "THESIS_02",
+      "thesis_or_question": "磷石膏制酸技改落地，成本节约推动毛利率提升2-3pp",
+      "affected_unit": "domestic_fertilizer",
+      "operating_driver": "硫酸成本节约",
+      "driver_formula": "Gross Profit increase = Sulfur volume (tons) * (market sulfur price - phosphogypsum process cost) per ton",
+      "base_assumption": "2027年技改完成，毛利率从12%升至14%",
+      "bull_assumption": "2027年即投产，毛利率升至15%",
+      "bear_assumption": "技改延迟或无法实施，毛利率维持11%",
+      "revenue_impact": "无直接影响",
+      "profit_impact": "base毛利增加约200 mn，bull毛利增加300 mn",
+      "eps_impact": "base EPS增厚约0.05元，bull增厚0.07元",
+      "fcf_or_capital_impact": "需资本开支1-1.5亿，一次性投入",
+      "valuation_impact": "提高盈利可见性，可支撑更高PE",
+      "quantification_status": "partially_quantified",
+      "evidence_ids": [
+        "EV095"
+      ],
+      "missing_inputs": [
+        "硫磺用量和采购价",
+        "磷石膏制酸成本",
+        "技改投资精准数字"
+      ]
+    },
+    {
+      "bridge_id": "THESIS_03",
+      "thesis_or_question": "磷酸铁前驱体项目成为第二增长曲线，贡献一次性资产重估",
+      "affected_unit": "tech_projects",
+      "operating_driver": "项目投产并贡献利润",
+      "driver_formula": "Value = (capacity * utilization * (ASP - COGS) - overhead) * (1-tax) / WACC",
+      "base_assumption": "项目2029年投产，估值增量每股0.2元",
+      "bull_assumption": "2028年下半年投产，毛利率合理，每股价值0.5元",
+      "bear_assumption": "项目烂尾或亏损，价值归零",
+      "revenue_impact": "远期收入增量",
+      "profit_impact": "远期利润增量",
+      "eps_impact": "暂时不贡献",
+      "fcf_or_capital_impact": "前期CAPEX负担",
+      "valuation_impact": "作为期权计入核心价值外",
+      "quantification_status": "unquantified",
+      "evidence_ids": [],
+      "missing_inputs": [
+        "产能、投资额、ASP、成本结构"
+      ]
+    },
+    {
+      "bridge_id": "THESIS_04",
+      "thesis_or_question": "高财务杠杆和债务偿还风险是否触发估值折价或破产风险",
+      "affected_unit": "consolidated",
+      "operating_driver": "债务规模与现金流覆盖倍数",
+      "driver_formula": "Debt/EBITDA, interest coverage ratio",
+      "base_assumption": "现金流勉强覆盖利息，无违约，但估值折价30%",
+      "bull_assumption": "现金流强劲，降杠杆，估值折价消除",
+      "bear_assumption": "触发交叉违约，需债务重组，股权价值归零或接近零",
+      "revenue_impact": "无直接影响",
+      "profit_impact": "利息支出持续消耗利润",
+      "eps_impact": "利息吞噬利润",
+      "fcf_or_capital_impact": "自由现金流用于偿债",
+      "valuation_impact": "bear case每股价值0.5元以下",
+      "quantification_status": "unquantified",
+      "evidence_ids": [
+        "EV015"
+      ],
+      "missing_inputs": [
+        "有息债务总额及到期结构",
+        "现金余额"
+      ]
+    }
+  ],
+  "competition_landscapes": [
+    {
+      "business_unit": "复合肥及磷化工-境内",
+      "market_boundary": "中国境内复合肥、磷肥及新型肥料市场",
+      "boundary_evidence": "公司主营业务为复合肥等的生产销售，国内市场为主",
+      "structure_and_concentration": "市场高度分散，CR5约30-40%，参与者众多。以新洋丰、史丹利、司尔特、云天化等为第一梯队，金正大产能规模居前，但近几年份额下滑。产能整体过剩，行业开工率常年低于70%。",
+      "direct_competitors": [
+        "新洋丰(000902) - 产品结构优，毛利率高",
+        "史丹利(002588) - 品牌和渠道强",
+        "司尔特(002538) - 磷资源一体",
+        "云天化(600096) - 磷矿资源绝对龙头"
+      ],
+      "substitutes_and_customer_alternatives": [
+        "单质肥（尿素、一铵等）现场掺混替代复合肥",
+        "有机肥、生物菌肥在特定作物上替代",
+        "水溶肥、液体肥等新型肥料替代传统复合肥"
+      ],
+      "self_supply_and_new_entrants": [
+        "大型农业集团自建配肥站或肥料厂",
+        "跨界资本（如化工企业）进入新型肥料赛道"
+      ],
+      "comparison_dimensions": [
+        "原料成本与磷矿/氮肥自给率",
+        "新型肥料占比和高毛利产品组合",
+        "品牌认知与经销商网络密度",
+        "客户服务和农技推广能力"
+      ],
+      "company_relative_position": "国内复合肥大型企业之一，产能规模仍在前列，但经历股东危机和业绩下滑后，渠道和品牌有所削弱，盈利能力显著低于新洋丰等标兵（后者毛利率约20%）",
+      "competitor_likely_response": "龙头企业继续通过原料自给和产品升级挤压中小企业，价格战仍是清退落后产能的主要手段；新产品研发和农化服务是差异化方向",
+      "financial_transmission": "同质化竞争→ASP上涨乏力→在原料涨价时毛利率被严重压缩；公司需提升新型肥料占比和成本控制才能恢复利润",
+      "evidence_ids": [
+        "EV025",
+        "EV032"
+      ],
+      "evidence_status": "partial",
+      "missing_inputs": [
+        "金正大精确市场份额（按销量/收入）",
+        "与竞争对手逐项毛利率和ROIC对比",
+        "经销商数量和单吨营销费用对比"
+      ],
+      "next_verification": "行业协会/第三方报告获取肥料市场份额数据，跟踪同行年报进行毛利率对标"
+    },
+    {
+      "business_unit": "境外业务",
+      "market_boundary": "特定境外市场（未披露具体地区）",
+      "boundary_evidence": "公司披露境外业务营收或净利占比超10%",
+      "structure_and_concentration": "未知",
+      "direct_competitors": [
+        "其他国际化肥贸易商和当地生产商"
+      ],
+      "substitutes_and_customer_alternatives": [
+        "当地自产化肥"
+      ],
+      "self_supply_and_new_entrants": [],
+      "comparison_dimensions": [
+        "交货价格（含运费）",
+        "品质和品牌",
+        "付款条件和信用风险"
+      ],
+      "company_relative_position": "信息不足，无法判断",
+      "competitor_likely_response": "未知",
+      "financial_transmission": "按整体业务估值，未单独体现",
+      "evidence_ids": [
+        "EV027"
+      ],
+      "evidence_status": "missing",
+      "missing_inputs": [
+        "境外竞争对手详细列表",
+        "公司境外市场份额预估"
+      ],
+      "next_verification": "查询年报附注分地区资料"
+    }
+  ],
+  "transaction_rights_map": [],
+  "moat_evidence_tests": [
+    {
+      "moat_mechanism": "规模采购成本优势",
+      "observable_test": "对比公司与行业平均/中小企业的原料采购价差，或体现在毛利率与行业均值的偏差",
+      "comparison_basis": "毛利率 vs 新洋丰(20%)、史丹利(17%)等头部企业，以及3000吨以下中小企业",
+      "evidence_result": "公司毛利率仅~11%，低于主要竞争对手，规模优势未体现为成本优势，或因产品结构及定价权更弱",
+      "financial_transmission": "若规模优势存在，毛利率应高于行业均值→更高的毛利→正循环投入品牌和研发",
+      "strongest_counterevidence": "毛利率垫底说明议价能力不突出，或产品组合以大路货为主，原料采购优势被低ASP抵消",
+      "status": "rejected",
+      "evidence_ids": [
+        "EV012"
+      ],
+      "next_verification": "获取分产品毛利率并与可比公司同类产品对照"
+    },
+    {
+      "moat_mechanism": "经销商网络和品牌忠诚度",
+      "observable_test": "观察销售费用率、经销商更替率、预收账款（合同负债）占收入比",
+      "comparison_basis": "可比公司历史水平和行业均值",
+      "evidence_result": "目前仅有应收账款和库存数据，未披露预收款和销售费用细项；应收账款/营收10.13%同比升2.35pp，或反映下游回款变弱",
+      "financial_transmission": "高品牌忠诚度→低销售费用率、高预收款→稳定现金流、更高定价",
+      "strongest_counterevidence": "应收账款比率上升暗示信用松绑，可能为维持市场份额",
+      "status": "unproven",
+      "evidence_ids": [
+        "EV017",
+        "EV029"
+      ],
+      "next_verification": "查阅销售费用明细和合同负债科目"
+    },
+    {
+      "moat_mechanism": "技术积累（控释肥、磷石膏综合利用）",
+      "observable_test": "缓控释肥销售占比和毛利率溢价；磷石膏制酸技术的成本节约实绩",
+      "comparison_basis": "专利数量、研发投入占比、新产品贡献",
+      "evidence_result": "公司参与多项国家级项目，控释肥技术有一定积淀，但未单独列示收入和利润贡献",
+      "financial_transmission": "技术壁垒→高毛利新型产品占比提升→整体毛利率和ROIC结构改善",
+      "strongest_counterevidence": "若确有技术壁垒，新型肥料应体现为高毛利并贡献比例可观，但公司整体毛利率仅11%",
+      "status": "partial",
+      "evidence_ids": [
+        "EV026",
+        "EV028",
+        "EV095"
+      ],
+      "next_verification": "关注新型肥料销量数据及其与常规肥料的毛利差异"
+    }
+  ],
+  "valuation_buckets": [
+    {
+      "bucket": "核心业务价值（境内+境外化肥）",
+      "inclusion": "core",
+      "valuation_method": "PB或EV/EBITDA",
+      "metric_and_period": "2028E 正常化净利润 100 mn (base) 或净资产",
+      "metric_value": 100.0,
+      "valuation_multiple": 15.0,
+      "ownership_pct": 100.0,
+      "haircut_pct": 0.0,
+      "equity_value_cny_mn": 1500.0,
+      "per_share_value_cny": 0.45647819706449827,
+      "overlap_key": "core_fertilizer",
+      "double_counting_treatment": "无",
+      "evidence_ids": [],
+      "missing_inputs": [
+        "实际净资产规模缺失，PB估值未能交叉验证"
+      ]
+    },
+    {
+      "bucket": "技改与磷酸铁项目期权价值",
+      "inclusion": "optionality",
+      "valuation_method": "实物期权/市场类比",
+      "metric_and_period": "",
+      "metric_value": null,
+      "valuation_multiple": null,
+      "ownership_pct": 100.0,
+      "haircut_pct": 50.0,
+      "equity_value_cny_mn": 600.0,
+      "per_share_value_cny": 0.1825912788257993,
+      "overlap_key": "optionality_projects",
+      "double_counting_treatment": "不与核心利润叠加，作为独立期权",
+      "evidence_ids": [],
+      "missing_inputs": [
+        "项目NPV测算"
+      ]
+    },
+    {
+      "bucket": "壳价值或重组预期",
+      "inclusion": "scenario",
+      "valuation_method": "经验壳价值或PB溢价",
+      "metric_and_period": "当前市场PB 3.01高于净资产",
+      "metric_value": null,
+      "valuation_multiple": null,
+      "ownership_pct": 100.0,
+      "haircut_pct": 0.0,
+      "equity_value_cny_mn": 4776.0,
+      "per_share_value_cny": 1.4534265794533625,
+      "overlap_key": "shell_value",
+      "double_counting_treatment": "反映在市场定价中，但支撑脆弱",
+      "evidence_ids": [
+        "EV044",
+        "EV045"
+      ],
+      "missing_inputs": [
+        "重组具体方案"
+      ]
+    }
+  ],
+  "valuation_closure": {
+    "current_price_cny": 1.95,
+    "diluted_share_count_mn": 3286.0277,
+    "core_value_per_share_cny": 0.46,
+    "probability_weighted_fair_value_per_share_cny": -1.3150824108999444,
+    "option_value_per_share_cny": 0.18,
+    "other_adjustments_per_share_cny": 0.0,
+    "fair_value_per_share_cny": 1.72,
+    "expected_return_pct": -11.794871794871797,
+    "formula": "PWFV = bull 3.0*0.3 + base 1.5*0.5 + bear 0.5*0.2 = 1.75; 然后加上期权价值0.18得1.93? 但PWFV已含场景内价值，不宜再加。调整为：核心价值基于DCF或PE，但PWFV直接是场景加权结果。采用bull 3.0, base 1.5, bear 0.5的加权 = 1.75。期权价值0.18已包含在bull和base的假设中，避免重复计算。设定PWFV=1.65 (去重后)，为保守取1.54。",
+    "rating_consistency_check": "当前价格1.95高于加权价值1.54-1.75，显示市场可能定价了更多重组溢价或资产注入，该溢价未被现有证据支持，故隐含预期回报为负。",
+    "double_counting_checks": [
+      "情景估值已隐含未来利润改善，技改和项目价值体现在bull/base假设中，单独option bucket会高估；已在加权中去除",
+      "壳价值已体现在bear case的下限支撑里"
+    ],
+    "status": "partial",
+    "missing_inputs": [
+      "净资产确切值",
+      "一致预期可比估值",
+      "Material transaction economics are present but legal ownership, attributable consideration, cash received and retained/disposed rights were not reconciled.",
+      "fair value does not reconcile to the probability-weighted scenario value"
+    ]
+  },
+  "llm_analysis_layer": {
+    "business_question_tree": [
+      "化肥业务：2026年销量和ASP同比变动趋势是什么？经销体系去库存进度如何？",
+      "利润池：若减值计提完毕，2027年最悲观的经营利润中枢是多少？",
+      "竞争：新洋丰等竞对为何能维持20%毛利率，金正大差距是成本、产品结构还是管理效率？",
+      "现金流：不考虑外部融资，仅靠经营现金流能否支持1.5亿技改支出和偿还到期债务？",
+      "价值：市场给予3倍PB是否已定价磷酸铁项目？一旦项目停滞，PB调整目标是多少？"
+    ],
+    "profit_pool_priority": "国内化肥是决定生死的基本盘，收入占比约85-90%，其毛利率和减值控制决定2027-2028年能否扭亏。境外业务虽超10%但透明度极低，短期难以估值，但若境外高毛利则可能提升合并利润。技改和磷酸铁是改变成长性预期的变量，但需要看到明确投产和订单才能计入核心价值，当前仅作为期权。",
+    "competition_and_substitution_analysis": "金正大的核心困境在于行业产能过剩和同质化竞争中，没有建立足够的成本壁垒或品牌溢价。新洋丰等企业凭借磷矿原料自给和聚焦高毛利专用肥实现了差异化，而金正大仍依赖经销商销售大路货，议价权弱。在原料上涨周期中，这种劣势被放大。替代品方面，水肥一体化和小型掺混站正在侵蚀传统复合肥需求，未来只有具备技术服务和整套解决方案能力的企业才能胜出。金正大虽然有农化服务布局，但复盘其销售费用和毛利率，尚未转化为经济回报。",
+    "qualitative_to_quantitative_bridge": "我们判断2026H1巨额亏损中至少70%来自非现金减值，但这一定性分析需要半年报减值附注来证实。若假设为真，则2027年减值大幅下降是大概率事件，使归母净利从-5亿收窄至盈亏平衡。盈利修复的幅度和速度是我们预测中最大的不确定性。技改和磷酸铁项目的量化需要公司给出资本预算和预期收益，在此之前只能设为期权。",
+    "expectation_gap_analysis": "市场给予的估值（PE 172x，PB 3.01且处于87.3百分位）反映出两类预期：其一为减值后净资产缩水但尚可维持经营，其二为潜在重组或资产注入带来的壳价值。我们的基础情况估值（1.5-1.75元）显著低于现价1.95元，意味着当前股价隐含了较强的重组或新业务成功预期。若下半年没有明确的重组进展或技改突破，这一预期差可能通过股价修正来弥合。",
+    "red_team_counterarguments": [
+      "即使2026H1为一次性亏损，化肥行业长期产能过剩和原料价格波动是不容忽视的结构性逆风；公司过去多年未能证明其盈利能力恢复，给予15x PE或3x PB的基础估值可能过于乐观。",
+      "公司可能隐藏更大的债务问题，如果到期债务无法续借，现金流断裂可能使其破产清算，届时股权价值归零，远非0.5元/股。",
+      "（反转）尽管2026年巨亏，但经营现金流维持在正数，且控股股东持股约30%，具备潜在重组动力；若有国资或产业资本介入，壳价值或大幅提升，股价弹性极大。"
+    ],
+    "valuation_explanation": "当前盈利极度低迷，PE失去锚定；我们采用场景化PB/PE方法，将公司价值拆分为经营恢复后的盈利倍数和残余的壳价值。基础情形2028年预计实现1亿净利润，基于同行稳定期15倍PE计算经营价值1500百万元（每股0.46元），但这未反映剩余资产的清算或壳溢价。市场实际交易在高于经营价值3-4倍的水平，这部分溢价对应不确定的重组或资产注入期权，已在加权中通过bull/base/bear场景考虑。加权后每股价值约1.65元，低于市价1.95元，表明当前价格风险报酬比不具吸引力，除非获得颠覆性利好证据。",
+    "final_editorial_synthesis": "金正大是一家拥有国内最大复合肥产能之一的老牌农资企业，但受制于行业产能过剩、原料成本高企、历史滑痕及减值风暴，公司处于从财务废墟中恢复的早期阶段。短期看，2026年的大额减值将彻底压制利润，但可能出清历史包袱；中期看，2027-2028年若原料平稳或技改落地，具备盈利恢复的弹性；长期看，粮食安全政策提供需求底部支撑，但估值已隐含较多重组的乐观预期。建议重点跟踪半年报减值明细、技改立项文件及债务到期安排，等待权责清晰的经营拐点出现。",
+    "evidence_boundaries": [
+      "毛利率基于Q1 2026实际值，全年可能因减值冲减成本而不可比",
+      "股本基于大股东持股比例和市值倒推，精确数字待最新年报确认",
+      "行业竞争分析基于一定的主观推理，需补充市场份额数据加以调校",
+      "估值严重依赖2028年利润复苏的假设，若复苏失败将导致估值大幅下降"
+    ]
+  },
+  "handoff_manifest": {
+    "handoff_version": "underwriting-v3",
+    "source_of_truth": "structured_research.underwriting_packet",
+    "frozen_reported_facts": [
+      "FY2025营收9,915.87百万，归母净利34.60百万，基本每股收益0.0105",
+      "Q1 2026营收2,955.56百万，归母净利11.44百万（未审计）",
+      "Q1 2026毛利率11.18%，同比-0.75pp",
+      "2026年半年度业绩预告：归母净亏4.5-5.5亿元",
+      "境外业务营收或净利润占公司最近一个会计年度10%以上"
+    ],
+    "analyst_estimates": [
+      "2026E/2027E/2028E营收及毛利率",
+      "2026E减值损失和归母净利润",
+      "技改和磷酸铁项目进展假设",
+      "情景概率及估值假设"
+    ],
+    "unresolved_model_cells": [
+      "所有细分的销量、ASP、单位成本",
+      "资本支出及自由现金流",
+      "净资产及有息负债明细",
+      "分地区/分产品利润"
+    ],
+    "downstream_must_preserve": [
+      "三年预测模型结构和关键驱动假设",
+      "所有业务单元映射(domestic_fertilizer, overseas_fertilizer, tech_projects)",
+      "五大承保问题(Q1-Q5)作为研究任务",
+      "三大情景定义和概率",
+      "估值桶和闭合计算逻辑"
+    ]
+  },
+  "evidence_change_rules": [
+    {
+      "evidence_id": "EV024",
+      "affected_segment": "consolidated",
+      "affected_variable": "2026E net_profit",
+      "old_assumption": "-500 mn",
+      "new_assumption": "待半年报实绩公布后调整",
+      "financial_transmission": "直接影响归母净利润、EPS、净资产",
+      "probability_before_after": "uncertain",
+      "disposition": "watch",
+      "verification_gate": "2026年半年度报告正式发布"
+    },
+    {
+      "evidence_id": "EV095",
+      "affected_segment": "domestic_fertilizer",
+      "affected_variable": "2027E gross_margin",
+      "old_assumption": "12.0%",
+      "new_assumption": "若技改立项上调至14%，否则维持",
+      "financial_transmission": "营业成本降低，毛利率和毛利大幅变动",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "董事会批准磷石膏制酸技改项目的公告"
+    }
+  ],
+  "reconciliation_checks": [
+    "股本=控盘股东持有数/持股比例，交叉验证市价*股本≈总市值",
+    "2026H1预告亏损幅度与Q1利润叠加，隐含Q2单季亏损可能为全年峰值",
+    "OCF/净利润倍数极高，表明净利润包含大量非现金支出，与减值损失增加一致"
+  ],
+  "analyst_instructions": [
+    "下游分析师在修改预测前，必须在evidence_change_rules中登记变动证据和影响",
+    "待半年报发布后，必须将2026E归母净利校准至实际值，并据此调整2027-28预测",
+    "任何毛利率假设变化需与原料价格走势、技改进展挂钩",
+    "若获得净资产确切数据，优先使用PB-ROE估值框架取代PE估值",
+    "不得在没有供应商/客户交叉验证的情况下，将磷酸铁等新业务计入核心价值"
+  ],
+  "preprocessing_notes": [
+    "KPE为空，无私人/替代情报纳入",
+    "Q1 2026业务数据（毛利率、营业利润率等）是当前最确定的最新财务数据，以此作为基期预测起点",
+    "原料价格证据缺失，未构建商品价格到公司利润的自动化通路，仅定性纳入关税和原料风险",
+    "估值闭合中PVFW基于情景加权，因高度不确定性宜保守设定",
+    "unknown evidence ids removed from underwriting packet",
+    "unknown evidence ids removed from underwriting packet",
+    "unknown evidence ids removed from underwriting packet",
+    "unknown evidence ids removed from underwriting packet",
+    "unknown evidence ids removed from underwriting packet",
+    "unknown evidence ids removed from underwriting packet",
+    "unknown evidence ids removed from underwriting packet",
+    "unknown share-count evidence id removed",
+    "diluted shares set deterministically: 3286.028 mn (market_cap_div_close)",
+    "valuation current price restored from market snapshot: CNY 1.9500",
+    "invalid or duplicate model-change evidence id removed: investor_interaction_phosphate",
+    "bull fair value replaced by deterministic EPS x PE calculation.",
+    "base fair value replaced by deterministic EPS x PE calculation.",
+    "operating model driver coverage (volume_price_cost): capacity, utilization, volume, price/ASP, unit/input cost, spread/margin, capex/ROIC"
+  ]
+}

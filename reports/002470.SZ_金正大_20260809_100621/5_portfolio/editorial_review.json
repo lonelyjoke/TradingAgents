@@ -1,0 +1,32 @@
+{
+  "review": {
+    "revision_required": true,
+    "overall_assessment": "Deterministic quality router found actionable issues; send them directly to the bounded revision pass.",
+    "revision_instructions": [
+      "rating-valuation consistency: Hold sits beside deterministic expected return 2987.8%; revise the rating to match the closed payoff distribution, or revise auditable scenario inputs—do not hide the conflict behind qualitative wording"
+    ]
+  },
+  "review_status": {
+    "mode": "deterministic_issue_router",
+    "agent": "Sell-Side Research Editor",
+    "structured_error": ""
+  },
+  "revision_requested": true,
+  "revision_applied": false,
+  "revision_status": {
+    "mode": "schema_prompt_structured",
+    "agent": "Portfolio Manager Editorial Revision",
+    "structured_error": ""
+  },
+  "initial_handoff_issues": [],
+  "initial_analytical_issues": [
+    "rating-valuation consistency: Hold sits beside deterministic expected return 2987.8%; revise the rating to match the closed payoff distribution, or revise auditable scenario inputs—do not hide the conflict behind qualitative wording"
+  ],
+  "remaining_handoff_issues": [],
+  "remaining_analytical_issues": [
+    "rating-valuation consistency: Hold sits beside deterministic expected return 2987.8%; revise the rating to match the closed payoff distribution, or revise auditable scenario inputs—do not hide the conflict behind qualitative wording"
+  ],
+  "revision_rejection_reasons": [
+    "revision changed the protected rating"
+  ]
+}

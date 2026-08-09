@@ -8,6 +8,7 @@ from tradingagents.dataflows.underwriting_packet import (
     ForecastLine,
     MoatEvidenceTest,
     ScenarioUnderwriting,
+    TransactionRightsMap,
     ValuationBucket,
     ValuationClosure,
     _prompt,
@@ -241,7 +242,7 @@ def test_underwriting_packet_normalizes_null_optional_defaults_without_losing_mo
     assert packet["company_model"]["moat_mechanisms"] == []
     assert packet["company_model"]["revenue_equation"].startswith("vehicle volume")
     assert "LLM company underwriting failed" not in " ".join(packet["readiness_reasons"])
-    assert packet["schema_version"] == 2
+    assert packet["schema_version"] == 3
     assert packet["handoff_manifest"]["downstream_must_preserve"]
     assert "valuation_closure" in packet
 
@@ -359,6 +360,91 @@ def test_valuation_closure_flags_double_counting_and_expected_return_mismatch():
     assert checked.valuation_closure.status == "partial"
     assert "double counting" in reasons.lower()
     assert "expected-return arithmetic" in reasons.lower()
+
+
+def test_material_transaction_requires_rights_and_cash_attribution_before_valuation():
+    packet = CompanyUnderwritingPacket(
+        symbol="300723.SZ",
+        as_of_date="2026-08-08",
+        forecast_years=["2027E", "2028E", "2029E"],
+        company_model=CompanyOperatingModel(
+            revenue_equation="product volume x price",
+            profit_equation="revenue x margin - R&D",
+        ),
+        valuation_closure=ValuationClosure(status="closed", fair_value_per_share_cny=20),
+    )
+
+    checked = _validate_packet(
+        packet,
+        {"semantic_metrics": [], "deterministic_evidence": [], "kpe_impacts": []},
+        {
+            "company_events": (
+                "The buyer's total consideration includes upfront and milestone payments; "
+                "the seller no longer holds the target and retained Greater China rights."
+            )
+        },
+    )
+
+    reasons = " ".join(checked.readiness_reasons)
+    assert "legal ownership" in reasons
+    assert checked.valuation_closure.status == "partial"
+
+
+def test_headline_transaction_value_cannot_be_inserted_into_cash_flow_or_sotp_twice():
+    packet = CompanyUnderwritingPacket(
+        symbol="300723.SZ",
+        as_of_date="2026-08-08",
+        forecast_years=["2027E", "2028E", "2029E"],
+        company_model=CompanyOperatingModel(
+            revenue_equation="product volume x price",
+            profit_equation="revenue x margin - R&D",
+        ),
+        transaction_rights_map=[
+            TransactionRightsMap(
+                transaction_id="TRX01",
+                asset_or_target="global drug-development rights",
+                transaction_type="equity_disposal",
+                ownership_before_pct=100,
+                ownership_after_pct=0,
+                total_transaction_consideration_cny_mn=950,
+                attributable_consideration_cny_mn=119,
+                cash_received_to_date_cny_mn=119,
+                disposed_rights=["target equity and ex-China development rights"],
+                retained_rights=["Greater China commercialization", "priority supply"],
+                cash_flow_classification="operating",
+                valuation_overlap_keys=["global_asset_rights"],
+                ownership_and_cash_formula=(
+                    "cash received=119; contingent consideration remains excluded until earned"
+                ),
+                status="verified",
+            )
+        ],
+        forecast_lines=[
+            ForecastLine(
+                metric="operating_cash_flow",
+                unit="CNY mn",
+                year_1_value=950,
+                year_2_value=100,
+                year_3_value=120,
+            )
+        ],
+        valuation_buckets=[
+            ValuationBucket(
+                bucket="global pipeline value",
+                inclusion="optionality",
+                overlap_key="global_asset_rights",
+            )
+        ],
+        valuation_closure=ValuationClosure(status="closed", fair_value_per_share_cny=20),
+    )
+
+    checked = _validate_packet(packet, {})
+    reasons = " ".join(checked.readiness_reasons).lower()
+
+    assert "operating cash flow" in reasons
+    assert "headline total consideration" in reasons
+    assert "double counted" in reasons
+    assert checked.valuation_closure.status == "partial"
 
 
 def test_chinese_forecast_metric_aliases_do_not_create_empty_duplicate_rows():

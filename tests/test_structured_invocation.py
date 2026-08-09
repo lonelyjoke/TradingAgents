@@ -1134,6 +1134,7 @@ def test_pm_analytical_structure_gaps_trigger_advisory_revision():
     assert _analytical_structure_issues({}) == [
         "analytical structure: company-specific research questions count=0, expected at least 3",
         "analytical structure: evidence-weighted question verdicts count=0, expected at least 3",
+        "analytical structure: decisive evidence dispositions count=0, expected at least 3",
         "analytical structure: forecast take-aways count=0, expected at least 2",
         "analytical structure: auditable forecast assumptions count=0, expected at least 3",
         "analytical structure: ranked core theses count=0, expected at least 2",
@@ -1142,6 +1143,7 @@ def test_pm_analytical_structure_gaps_trigger_advisory_revision():
         {
             "research_questions": ["q1", "q2", "q3"],
             "question_verdicts": [{}, {}, {}],
+            "evidence_utilization_ledger": [{}, {}, {}],
             "forecast_takeaways": [{}, {}],
             "forecast_assumptions": [{}, {}, {}],
             "core_theses": [{}, {}],
@@ -1153,6 +1155,7 @@ def test_pm_rating_valuation_conflict_routes_to_editorial_revision():
     payload = {
         "research_questions": ["q1", "q2", "q3"],
         "question_verdicts": [{}, {}, {}],
+        "evidence_utilization_ledger": [{}, {}, {}],
         "forecast_takeaways": [{}, {}],
         "forecast_assumptions": [{}, {}, {}],
         "core_theses": [{}, {}],
@@ -1172,6 +1175,7 @@ def test_pm_guidance_gap_triggers_revision_before_publication():
     payload = {
         "research_questions": ["q1", "q2", "q3"],
         "question_verdicts": [{}, {}, {}],
+        "evidence_utilization_ledger": [{}, {}, {}],
         "forecast_takeaways": [{}, {}],
         "forecast_assumptions": [{}, {}, {}],
         "core_theses": [{}, {}],

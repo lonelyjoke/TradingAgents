@@ -269,6 +269,44 @@ class CompetitionLandscape(NullDefaultModel):
     next_verification: str = ""
 
 
+class TransactionRightsMap(NullDefaultModel):
+    """Legal/economic ownership waterfall for a material transaction."""
+
+    transaction_id: str
+    asset_or_target: str
+    transaction_type: Literal[
+        "acquisition",
+        "equity_disposal",
+        "asset_disposal",
+        "license_out",
+        "license_in",
+        "joint_venture",
+        "other",
+    ] = "other"
+    buyer_or_counterparty: str = ""
+    ownership_before_pct: float | None = None
+    ownership_after_pct: float | None = None
+    total_transaction_consideration_cny_mn: float | None = None
+    attributable_consideration_cny_mn: float | None = None
+    cash_received_to_date_cny_mn: float | None = None
+    disposed_rights: list[str] = Field(default_factory=list)
+    retained_rights: list[str] = Field(default_factory=list)
+    contingent_rights: list[str] = Field(default_factory=list)
+    cash_flow_classification: Literal[
+        "investing",
+        "financing",
+        "operating",
+        "mixed",
+        "non_cash",
+        "unresolved",
+    ] = "unresolved"
+    valuation_overlap_keys: list[str] = Field(default_factory=list)
+    ownership_and_cash_formula: str = ""
+    evidence_ids: list[str] = Field(default_factory=list)
+    missing_inputs: list[str] = Field(default_factory=list)
+    status: Literal["verified", "partial", "unresolved"] = "unresolved"
+
+
 class ValuationBucket(NullDefaultModel):
     """One mutually exclusive value bucket with explicit overlap control."""
 
@@ -319,7 +357,7 @@ class LLMAnalysisLayer(NullDefaultModel):
 
 
 class ModelHandoffManifest(NullDefaultModel):
-    handoff_version: str = "underwriting-v2"
+    handoff_version: str = "underwriting-v3"
     source_of_truth: str = "structured_research.underwriting_packet"
     frozen_reported_facts: list[str] = Field(default_factory=list)
     analyst_estimates: list[str] = Field(default_factory=list)
@@ -328,7 +366,7 @@ class ModelHandoffManifest(NullDefaultModel):
 
 
 class CompanyUnderwritingPacket(NullDefaultModel):
-    schema_version: int = 2
+    schema_version: int = 3
     symbol: str
     as_of_date: str
     forecast_years: list[str]
@@ -342,6 +380,7 @@ class CompanyUnderwritingPacket(NullDefaultModel):
     scenarios: list[ScenarioUnderwriting] = Field(default_factory=list)
     thesis_financial_bridges: list[ThesisFinancialBridge] = Field(default_factory=list)
     competition_landscapes: list[CompetitionLandscape] = Field(default_factory=list)
+    transaction_rights_map: list[TransactionRightsMap] = Field(default_factory=list)
     moat_evidence_tests: list[MoatEvidenceTest] = Field(default_factory=list)
     valuation_buckets: list[ValuationBucket] = Field(default_factory=list)
     valuation_closure: ValuationClosure = Field(default_factory=ValuationClosure)
@@ -361,6 +400,21 @@ def _forecast_years(as_of_date: str) -> list[str]:
     return [f"{year + offset}E" for offset in range(3)]
 
 
+def _sentence_safe_clip(text: str, limit: int) -> str:
+    """Clip at a complete clause so partial transaction facts are not promoted."""
+    value = str(text or "")
+    if len(value) <= limit:
+        return value
+    head = value[:limit]
+    boundary = max(
+        head.rfind(marker)
+        for marker in ("。", "；", ";", ". ", "! ", "? ", "\n")
+    )
+    if boundary >= int(limit * 0.55):
+        return head[: boundary + 1].rstrip() + " [truncated]"
+    return head.rstrip() + " [truncated]"
+
+
 def _compact_text(text: str, *, max_chars: int) -> str:
     if len(text or "") <= max_chars:
         return text or ""
@@ -371,11 +425,18 @@ def _compact_text(text: str, *, max_chars: int) -> str:
         r"价格|成本|产能|利用率|现金|资本开支|估值|风险|景气",
         re.I,
     )
+    decision_critical = re.compile(
+        r"transaction|acquir|dispos|consideration|upfront|milestone|royalt|"
+        r"licen[cs]|ownership|retain|clinical|trial|NDA|FDA|"
+        r"收购|并购|出售|转让|股权|权益|对价|首付款|里程碑|许可|授权|特许权|"
+        r"不再持有|保留.*权|临床|试验|申报|获批",
+        re.I,
+    )
     rows: list[str] = []
     used = 0
     for raw in (text or "").splitlines():
         line = re.sub(r"\s+", " ", raw.strip())
-        if not line or not important.search(line):
+        if not line or not (important.search(line) or decision_critical.search(line)):
             continue
         wide_segment_row = any(
             marker in line.lower()
@@ -386,7 +447,7 @@ def _compact_text(text: str, *, max_chars: int) -> str:
                 "主营业务分产品",
             )
         )
-        line = line[:2400] if wide_segment_row else line[:700]
+        line = _sentence_safe_clip(line, 2400 if wide_segment_row else 1200)
         if used + len(line) > max_chars:
             break
         rows.append(line)
@@ -409,6 +470,10 @@ def _source_payload(contexts: Mapping[str, str], structured: Mapping[str, Any], 
         "policy",
         "investor_interaction",
         "knowledge_planet",
+        "company_events",
+        "biopharma",
+        "web_fact_check",
+        "shareholder_structure",
     )
     per_source = max(2200, max_chars // max(len(keys), 1))
 
@@ -418,7 +483,7 @@ def _source_payload(contexts: Mapping[str, str], structured: Mapping[str, Any], 
             row = dict(raw)
             for key, value in list(row.items()):
                 if isinstance(value, str) and len(value) > 520:
-                    row[key] = value[:517] + "..."
+                    row[key] = _sentence_safe_clip(value, 900)
                 elif isinstance(value, list):
                     row[key] = value[:8]
             result.append(row)
@@ -463,6 +528,7 @@ Universal rules for all A-share industries:
 2. Teach how the company works: who pays, what is delivered, the revenue equation, profit equation, cash-flow equation, reinvestment needs, moat mechanisms and structural risks.
 3. For every material segment complete the causal chain: demand/orders -> industry supply/capacity -> company volume/share/utilization -> price/ASP/take rate -> unit cost -> margin/operating leverage -> working capital/cash -> EPS/FCF -> valuation treatment.
 4. Generate 4-6 company-specific underwriting questions, ranked by expected EPS/FCF/fair-value sensitivity. The questions are the research agenda: every downstream module must either change a model variable, change a scenario probability, or document why it is irrelevant. Avoid generic questions that could apply to any stock.
+4a. For every material acquisition, disposal, license or asset transfer, populate `transaction_rights_map` before forecasting or valuation. Reconcile legal ownership before/after, total headline consideration, consideration attributable to this listed company, cash actually received, disposed rights, retained regional/supply/royalty/milestone rights, contingent rights and cash-flow classification. A buyer's total commitment is not automatically seller cash. Do not treat equity-disposal proceeds as operating cash flow. Do not value disposed global rights while also adding transaction cash; any retained right must be valued separately with an explicit overlap key and double-counting treatment. If ownership or attribution is unresolved, make valuation partial rather than filling the gap with the headline number.
 5. Build three explicit forward years with the correct model profile. For ordinary non-financial companies include material segment revenue drivers and consolidated revenue, gross/operating margin, operating profit, parent net profit, EPS, OCF, capex and FCF. For banks use earning assets, NIM/net interest income, fee income, operating cost, credit cost/provisions, parent profit, EPS, ROE, asset quality and CET1/capital; do not force manufacturing OCF/FCF. For insurers use premium/APE, NBV, EV/CSM where disclosed, investment spread, COR for P&C, OPAT/parent profit, EPS, solvency and payout; for securities firms use brokerage, investment banking, asset management, proprietary/trading income, parent profit, EPS, ROE and capital adequacy; for REITs use occupancy, rent/unit, NOI, distributable cash flow and payout. Put the unit on every numeric line. Use CNY mn for profit/cash-flow lines and million shares for diluted share count when source conversion supports it. Before using null, complete reproducible calculations from supplied facts: Tushare total_share is in 10,000 shares; share count can also be cross-checked from market cap/price or parent profit/EPS; capex can be derived from cash paid to acquire/construct long-term assets; FCF can be derived from OCF minus consistently defined capex. Seasonal annualization must be arithmetically consistent: annual run-rate = quarterly value x 4, while seasonal-share full-year estimate = quarterly value / quarterly_share; never divide an already annualized run-rate by the seasonal share. Label these values calculated with formula, period and evidence ids. Use null plus missing_inputs only when neither reported nor reproducibly calculated evidence supports a number; never invent precision.
 5a. Diluted shares are controlled downstream and cannot be chosen to make a reported EPS fit. Prefer current Tushare stock_basic registered capital or daily_basic total_share and cross-check market cap / close. The pledge_stat total_share field is only a pledge-table proxy, not authoritative company shares. Treat parent-profit / EPS only as a diagnostic. If a filing-text EPS conflicts with parent profit / deterministic shares, label it a suspected PDF column shift and do not use it.
 6. Create bull/base/bear cases only from the same model variables. Probabilities are underwriting judgments, not facts, and must sum to 100 when all are supplied. Fair value requires a reconciled EPS/share-count or asset-value bridge.
@@ -601,6 +667,30 @@ def _valid_evidence_ids(structured: Mapping[str, Any]) -> set[str]:
         if str(row.get("evidence_id", "")).strip()
     }
     return ids
+
+
+_MATERIAL_RIGHTS_TRANSACTION = re.compile(
+    r"consideration|upfront|milestone|royalt|acquir(?:e|es|ed|ing)\s+100%|"
+    r"no longer holds?|retained?\s+rights?|首付款|交易对价|里程碑|特许权|"
+    r"收购.{0,24}100%|出售.{0,24}股权|不再持有|保留.{0,16}权",
+    re.I | re.S,
+)
+
+
+def _has_material_rights_transaction(
+    structured: Mapping[str, Any], contexts: Mapping[str, str] | None
+) -> bool:
+    payload = {
+        "contexts": dict(contexts or {}),
+        "semantic_metrics": structured.get("semantic_metrics", []),
+        "deterministic_evidence": structured.get("deterministic_evidence", []),
+        "conflicts": structured.get("conflicts", []),
+    }
+    return bool(
+        _MATERIAL_RIGHTS_TRANSACTION.search(
+            json.dumps(payload, ensure_ascii=False, default=str)
+        )
+    )
 
 
 def _dedup_material_segments(structured: Mapping[str, Any]) -> list[dict[str, Any]]:
@@ -1151,7 +1241,7 @@ def _fallback_packet(symbol: str, as_of_date: str, structured: Mapping[str, Any]
         if row.get("evidence_id")
     ]
     return CompanyUnderwritingPacket(
-        schema_version=2,
+        schema_version=3,
         symbol=symbol,
         as_of_date=str(as_of_date),
         forecast_years=years,
@@ -1301,6 +1391,11 @@ def _validate_packet(
     structured: Mapping[str, Any],
     contexts: Mapping[str, str] | None = None,
 ) -> CompanyUnderwritingPacket:
+    if packet.schema_version != 3:
+        packet.preprocessing_notes.append(
+            f"underwriting schema normalized from v{packet.schema_version} to v3"
+        )
+        packet.schema_version = 3
     valid_ids = _valid_evidence_ids(structured)
     years = packet.forecast_years
     expected_years = _forecast_years(packet.as_of_date)
@@ -1319,6 +1414,7 @@ def _validate_packet(
         *packet.scenarios,
         *packet.thesis_financial_bridges,
         *packet.competition_landscapes,
+        *packet.transaction_rights_map,
         *packet.moat_evidence_tests,
         *packet.valuation_buckets,
     ]:
@@ -1329,6 +1425,75 @@ def _validate_packet(
         if len(accepted) != len(supplied):
             packet.preprocessing_notes.append("unknown evidence ids removed from underwriting packet")
         setattr(item, "evidence_ids", list(dict.fromkeys(accepted)))
+
+    material_transaction = _has_material_rights_transaction(structured, contexts)
+    if material_transaction and not packet.transaction_rights_map:
+        packet.research_readiness = "partial"
+        packet.valuation_closure.status = "partial"
+        reason = (
+            "Material transaction economics are present but legal ownership, attributable "
+            "consideration, cash received and retained/disposed rights were not reconciled."
+        )
+        packet.readiness_reasons.append(reason)
+        packet.valuation_closure.missing_inputs.append(reason)
+    for transaction in packet.transaction_rights_map:
+        total = transaction.total_transaction_consideration_cny_mn
+        attributable = transaction.attributable_consideration_cny_mn
+        received = transaction.cash_received_to_date_cny_mn
+        transaction_issues: list[str] = []
+        if total is not None and attributable is not None and attributable > total * 1.001:
+            transaction_issues.append(
+                "attributable consideration exceeds total transaction consideration"
+            )
+        if attributable is not None and received is not None and received > attributable * 1.001:
+            transaction_issues.append(
+                "cash received exceeds attributable consideration"
+            )
+        if total is not None and received is not None and total > received * 1.05:
+            for forecast in packet.forecast_lines:
+                if _canonical_metric_name(forecast.metric) not in {"ocf", "fcf"}:
+                    continue
+                forecast_values = (
+                    forecast.base_value,
+                    forecast.year_1_value,
+                    forecast.year_2_value,
+                    forecast.year_3_value,
+                )
+                if any(
+                    value is not None
+                    and abs(float(value) - total) <= max(abs(total) * 0.01, 1.0)
+                    for value in forecast_values
+                ):
+                    transaction_issues.append(
+                        "headline total consideration was inserted into OCF/FCF despite lower cash received"
+                    )
+                    break
+        if (
+            transaction.transaction_type in {"equity_disposal", "asset_disposal"}
+            and transaction.cash_flow_classification == "operating"
+        ):
+            transaction_issues.append(
+                "disposal consideration is incorrectly classified as operating cash flow"
+            )
+        if transaction.ownership_after_pct == 0 and not transaction.disposed_rights:
+            transaction_issues.append(
+                "zero post-transaction ownership lacks an explicit disposed-rights boundary"
+            )
+        if not transaction.ownership_and_cash_formula:
+            transaction_issues.append(
+                "ownership-to-attributable-cash formula is missing"
+            )
+        if transaction_issues:
+            transaction.status = "partial"
+            transaction.missing_inputs = list(
+                dict.fromkeys([*transaction.missing_inputs, *transaction_issues])
+            )
+            packet.research_readiness = "partial"
+            packet.valuation_closure.status = "partial"
+            packet.readiness_reasons.append(
+                f"Transaction rights map {transaction.transaction_id} is incomplete: "
+                + "; ".join(transaction_issues)
+            )
     if (
         packet.company_model.share_count_evidence_id
         and packet.company_model.share_count_evidence_id.upper() not in valid_ids
@@ -1539,12 +1704,13 @@ def _validate_packet(
         packet.research_readiness = "partial"
         packet.readiness_reasons.append("Valuation buckets are missing.")
 
-    packet.handoff_manifest.handoff_version = "underwriting-v2"
+    packet.handoff_manifest.handoff_version = "underwriting-v3"
     if not packet.handoff_manifest.downstream_must_preserve:
         packet.handoff_manifest.downstream_must_preserve = [
             "all material business units and disclosure limitations",
             "three forward years and every industry-native consolidated line",
             "thesis financial bridges and moat evidence status",
+            "material transaction ownership, attributable cash and retained/disposed rights",
             "mutually exclusive valuation buckets and double-counting checks",
             "reported facts, estimates, unresolved cells and evidence ids",
         ]
@@ -2126,6 +2292,29 @@ def _validate_packet(
         packet.readiness_reasons.append(
             "Valuation buckets contain potential double counting."
         )
+    included_buckets_by_overlap = {
+        row.overlap_key.strip().lower(): row
+        for row in packet.valuation_buckets
+        if row.inclusion != "excluded" and row.overlap_key.strip()
+    }
+    for transaction in packet.transaction_rights_map:
+        for raw_key in transaction.valuation_overlap_keys:
+            key = raw_key.strip().lower()
+            bucket = included_buckets_by_overlap.get(key)
+            if not bucket:
+                continue
+            treatment = bucket.double_counting_treatment.strip()
+            if treatment:
+                continue
+            closure.status = "partial"
+            closure.missing_inputs.append(
+                f"transaction {transaction.transaction_id} overlaps valuation bucket {bucket.bucket}"
+            )
+            packet.research_readiness = "partial"
+            packet.readiness_reasons.append(
+                "Transaction consideration/retained rights may be double counted in valuation: "
+                f"{transaction.transaction_id} -> {bucket.bucket}."
+            )
     if closure.status != "closed" or closure.fair_value_per_share_cny is None:
         packet.research_readiness = "partial"
         packet.readiness_reasons.append(
@@ -2193,7 +2382,7 @@ def _validate_packet(
         for reason in packet.readiness_reasons
     ):
         packet.research_readiness = "blocked"
-    packet.schema_version = 2
+    packet.schema_version = 3
     return packet
 
 
@@ -2334,6 +2523,9 @@ def compact_underwriting_packet(packet: Mapping[str, Any] | None) -> dict[str, A
         ],
         "competition_landscapes": [
             clip(row) for row in list(packet.get("competition_landscapes", []))[:12]
+        ],
+        "transaction_rights_map": [
+            clip(row) for row in list(packet.get("transaction_rights_map", []))[:8]
         ],
         "moat_evidence_tests": [
             clip(row) for row in list(packet.get("moat_evidence_tests", []))[:10]
