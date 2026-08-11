@@ -1,0 +1,42 @@
+{
+  "review": {
+    "revision_required": true,
+    "overall_assessment": "Deterministic quality router found actionable issues; send them directly to the bounded revision pass.",
+    "revision_instructions": [
+      "dropped canonical line: base_fair_value",
+      "dropped canonical line: bull_fair_value",
+      "dropped canonical line: bear_fair_value",
+      "public thesis chapter missing strongest counterargument/boundary",
+      "public thesis chapter missing market-pricing implication"
+    ]
+  },
+  "review_status": {
+    "mode": "deterministic_issue_router",
+    "agent": "Sell-Side Research Editor",
+    "structured_error": ""
+  },
+  "revision_requested": true,
+  "revision_applied": true,
+  "revision_status": {
+    "mode": "schema_repaired_fallback",
+    "agent": "Portfolio Manager Editorial Revision",
+    "structured_error": "schema-prompt response failed validation:\n- handoff_change_rows.0.eps_fcf_valuation_impact: Field required\n- handoff_change_rows.1.eps_fcf_valuation_impact: Field required\n- handoff_change_rows.2.eps_fcf_valuation_impact: Field required",
+    "schema_repair_attempts": 1
+  },
+  "initial_handoff_issues": [
+    "dropped canonical line: base_fair_value",
+    "dropped canonical line: bull_fair_value",
+    "dropped canonical line: bear_fair_value"
+  ],
+  "initial_analytical_issues": [
+    "public thesis chapter missing strongest counterargument/boundary",
+    "public thesis chapter missing market-pricing implication"
+  ],
+  "remaining_handoff_issues": [
+    "dropped canonical line: base_fair_value",
+    "dropped canonical line: bull_fair_value",
+    "dropped canonical line: bear_fair_value"
+  ],
+  "remaining_analytical_issues": [],
+  "revision_rejection_reasons": []
+}

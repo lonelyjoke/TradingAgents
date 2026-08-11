@@ -1,0 +1,1317 @@
+{
+  "schema_version": 1,
+  "symbol": "002407.SZ",
+  "as_of_date": "2026-08-10",
+  "reader_contract": {
+    "audience": "普通投资者",
+    "principle": "数据用于权威佐证，不能替代公司、产业链与投资逻辑。",
+    "formal_rating_position": "开篇投资摘要，并在第七章末尾重申",
+    "chapter_count": 7
+  },
+  "source_policy": {
+    "A_hard_fact": {
+      "sources": "公司财报、交易所/公司公告、官方业绩指引",
+      "allowed_use": "冻结历史事实和模型基线"
+    },
+    "B_reproducible": {
+      "sources": "Tushare结构化数据、程序计算、官方统计、行业协会",
+      "allowed_use": "财务计算、行业比较和可复核代理变量"
+    },
+    "C_external_expectation": {
+      "sources": "具名卖方报告、多机构一致预期",
+      "allowed_use": "构建市场预期与预测分歧；单家机构不得冒充一致预期"
+    },
+    "D_alternative_intelligence": {
+      "sources": "知识星球、渠道调研、专家纪要、私域卖方推送",
+      "allowed_use": "量化模型变更、情景概率变化、验证日历变化或明确拒绝"
+    },
+    "E_background": {
+      "sources": "普通新闻、政策评论、行业叙事",
+      "allowed_use": "解释背景；不得单独改变盈利预测或评级"
+    }
+  },
+  "company_introduction": {
+    "business_archetype": "",
+    "value_proposition_and_customers": "",
+    "revenue_equation": "",
+    "profit_equation": "",
+    "cash_flow_equation": "",
+    "capital_intensity_and_reinvestment": "",
+    "key_unknowns": []
+  },
+  "industry_chain": {
+    "operating_model_family": "other",
+    "upstream_cost_and_supply": [
+      {
+        "segment": "新能源材料",
+        "supply_capacity": "",
+        "unit_cost_inputs": ""
+      },
+      {
+        "segment": "电子化学品（半导体级氢氟酸等）",
+        "supply_capacity": "",
+        "unit_cost_inputs": ""
+      },
+      {
+        "segment": "氟基新材料",
+        "supply_capacity": "",
+        "unit_cost_inputs": ""
+      },
+      {
+        "segment": "新能源电池板块",
+        "supply_capacity": "",
+        "unit_cost_inputs": ""
+      }
+    ],
+    "downstream_demand_and_pricing": [
+      {
+        "segment": "新能源材料",
+        "customers_channel": "",
+        "demand": [],
+        "price_asp": ""
+      },
+      {
+        "segment": "电子化学品（半导体级氢氟酸等）",
+        "customers_channel": "",
+        "demand": [],
+        "price_asp": ""
+      },
+      {
+        "segment": "氟基新材料",
+        "customers_channel": "",
+        "demand": [],
+        "price_asp": ""
+      },
+      {
+        "segment": "新能源电池板块",
+        "customers_channel": "",
+        "demand": [],
+        "price_asp": ""
+      }
+    ]
+  },
+  "profit_pools": {
+    "reported_or_analytical_units": [
+      {
+        "unit_id": "BU01",
+        "unit_name": "新能源材料",
+        "unit_type": "reported_segment",
+        "disclosure_basis": "reported",
+        "parent_unit": "company",
+        "economic_role": "Filing-reported segment; economic sub-unit decomposition still required.",
+        "primary_operating_archetype": "",
+        "secondary_operating_archetype": "",
+        "revenue_driver_equation": "",
+        "profit_driver_equation": "",
+        "cash_and_capital_equation": "",
+        "reported_metrics": [],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "product/channel/geography/customer economics not deterministically available"
+        ],
+        "next_verification": ""
+      },
+      {
+        "unit_id": "BU02",
+        "unit_name": "电子化学品（半导体级氢氟酸等）",
+        "unit_type": "reported_segment",
+        "disclosure_basis": "reported",
+        "parent_unit": "company",
+        "economic_role": "Filing-reported segment; economic sub-unit decomposition still required.",
+        "primary_operating_archetype": "",
+        "secondary_operating_archetype": "",
+        "revenue_driver_equation": "",
+        "profit_driver_equation": "",
+        "cash_and_capital_equation": "",
+        "reported_metrics": [],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "product/channel/geography/customer economics not deterministically available"
+        ],
+        "next_verification": ""
+      },
+      {
+        "unit_id": "BU03",
+        "unit_name": "氟基新材料",
+        "unit_type": "reported_segment",
+        "disclosure_basis": "reported",
+        "parent_unit": "company",
+        "economic_role": "Filing-reported segment; economic sub-unit decomposition still required.",
+        "primary_operating_archetype": "",
+        "secondary_operating_archetype": "",
+        "revenue_driver_equation": "",
+        "profit_driver_equation": "",
+        "cash_and_capital_equation": "",
+        "reported_metrics": [],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "product/channel/geography/customer economics not deterministically available"
+        ],
+        "next_verification": ""
+      },
+      {
+        "unit_id": "BU04",
+        "unit_name": "新能源电池板块",
+        "unit_type": "reported_segment",
+        "disclosure_basis": "reported",
+        "parent_unit": "company",
+        "economic_role": "Filing-reported segment; economic sub-unit decomposition still required.",
+        "primary_operating_archetype": "",
+        "secondary_operating_archetype": "",
+        "revenue_driver_equation": "",
+        "profit_driver_equation": "",
+        "cash_and_capital_equation": "",
+        "reported_metrics": [
+          "revenue",
+          "revenue growth",
+          "margin"
+        ],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "product/channel/geography/customer economics not deterministically available"
+        ],
+        "next_verification": ""
+      }
+    ],
+    "segment_models": [
+      {
+        "segment": "新能源材料",
+        "products_or_services": "",
+        "customers_and_channel": "",
+        "revenue_weight_pct": null,
+        "profit_weight_pct": null,
+        "base_period": "2026H1",
+        "base_revenue_value": null,
+        "base_revenue_unit": "",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [],
+        "industry_supply_and_capacity": "",
+        "volume_share_utilization": "",
+        "price_asp_take_rate": "",
+        "unit_cost_and_input_prices": "",
+        "margin_and_operating_leverage": "",
+        "working_capital_and_cash_conversion": "",
+        "prosperity_level": "景气回升",
+        "marginal_direction": "改善",
+        "causal_analysis": "Reported segment economics were recovered, but the full demand, supply, price, utilization, margin and cash causal chain requires LLM underwriting.",
+        "valuation_treatment": "evidence_limited",
+        "strongest_counterevidence": [
+          "2026年Q1营收同比下滑65.92%（EV039），与全年增长趋势不符。"
+        ],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "六氟磷酸锂销量和价格的具体数据",
+          "新能源电池的产销量和毛利率数据",
+          "2026年半年报披露的细分收入和利润"
+        ],
+        "next_verification": ""
+      },
+      {
+        "segment": "电子化学品（半导体级氢氟酸等）",
+        "products_or_services": "",
+        "customers_and_channel": "",
+        "revenue_weight_pct": null,
+        "profit_weight_pct": null,
+        "base_period": "2026H1",
+        "base_revenue_value": null,
+        "base_revenue_unit": "",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [],
+        "industry_supply_and_capacity": "",
+        "volume_share_utilization": "",
+        "price_asp_take_rate": "",
+        "unit_cost_and_input_prices": "",
+        "margin_and_operating_leverage": "",
+        "working_capital_and_cash_conversion": "",
+        "prosperity_level": "景气上行",
+        "marginal_direction": "改善",
+        "causal_analysis": "Reported segment economics were recovered, but the full demand, supply, price, utilization, margin and cash causal chain requires LLM underwriting.",
+        "valuation_treatment": "evidence_limited",
+        "strongest_counterevidence": [
+          "投资者质疑G5氢氟酸出货和收入不匹配（EV102），公司未确认具体数据。"
+        ],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "G5氢氟酸的具体销量、售价和毛利率",
+          "客户验证进度和订单金额",
+          "电子化学品板块的单独收入披露"
+        ],
+        "next_verification": ""
+      },
+      {
+        "segment": "氟基新材料",
+        "products_or_services": "",
+        "customers_and_channel": "",
+        "revenue_weight_pct": null,
+        "profit_weight_pct": null,
+        "base_period": "unspecified",
+        "base_revenue_value": null,
+        "base_revenue_unit": "",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [],
+        "industry_supply_and_capacity": "",
+        "volume_share_utilization": "",
+        "price_asp_take_rate": "",
+        "unit_cost_and_input_prices": "",
+        "margin_and_operating_leverage": "",
+        "working_capital_and_cash_conversion": "",
+        "prosperity_level": "evidence_limited",
+        "marginal_direction": "unknown",
+        "causal_analysis": "Reported segment economics were recovered, but the full demand, supply, price, utilization, margin and cash causal chain requires LLM underwriting.",
+        "valuation_treatment": "evidence_limited",
+        "strongest_counterevidence": [],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "氟基新材料的收入、毛利率数据",
+          "铝行业需求趋势"
+        ],
+        "next_verification": ""
+      },
+      {
+        "segment": "新能源电池板块",
+        "products_or_services": "",
+        "customers_and_channel": "",
+        "revenue_weight_pct": 32.48555110603593,
+        "profit_weight_pct": 27.728349203314266,
+        "base_period": "annual filing",
+        "base_revenue_value": 2849639910.66,
+        "base_revenue_unit": "filing table unit not explicit in extracted row",
+        "base_revenue_growth_pct": 76.84,
+        "base_margin_pct": 12.57,
+        "base_margin_change_pp": 10.5,
+        "demand_and_order_drivers": [],
+        "industry_supply_and_capacity": "",
+        "volume_share_utilization": "",
+        "price_asp_take_rate": "",
+        "unit_cost_and_input_prices": "",
+        "margin_and_operating_leverage": "",
+        "working_capital_and_cash_conversion": "",
+        "prosperity_level": "high",
+        "marginal_direction": "improving",
+        "causal_analysis": "Reported segment economics were recovered, but the full demand, supply, price, utilization, margin and cash causal chain requires LLM underwriting.",
+        "valuation_treatment": "evidence_limited",
+        "strongest_counterevidence": [
+          "A filing growth rate alone cannot establish full segment prosperity."
+        ],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "dated demand/order evidence",
+          "capacity/utilization evidence",
+          "ASP/price evidence",
+          "segment cash-conversion evidence"
+        ],
+        "next_verification": ""
+      }
+    ]
+  },
+  "material_transactions": {
+    "rights_and_cash_waterfalls": [],
+    "rule": "Reconcile ownership before/after, attributable cash and retained/disposed rights before forecast, cash-flow classification or valuation."
+  },
+  "competition_and_moat": {
+    "landscapes": [],
+    "competition_and_substitution_analysis": "",
+    "claimed_mechanisms": [],
+    "tests": [],
+    "structural_risks": [],
+    "interpretation_rule": "Chapter 2 owns market boundary, structure, direct competitors, substitutes and likely response; Chapter 4 owns relative advantage, observable proof and financial persistence."
+  },
+  "key_underwriting_questions": [],
+  "forecast_spine": {
+    "forecast_years": [
+      "2026E",
+      "2027E",
+      "2028E"
+    ],
+    "forecast_lines": [
+      {
+        "segment": "consolidated",
+        "metric": "revenue",
+        "unit": "",
+        "base_period": "",
+        "base_value": null,
+        "year_1_value": null,
+        "year_2_value": null,
+        "year_3_value": null,
+        "formula": "requires company-specific operating bridge",
+        "assumption_status": "missing",
+        "evidence_ids": [],
+        "key_sensitivity": "",
+        "missing_inputs": [
+          "LLM underwriting model unavailable"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "gross_margin",
+        "unit": "",
+        "base_period": "",
+        "base_value": null,
+        "year_1_value": null,
+        "year_2_value": null,
+        "year_3_value": null,
+        "formula": "requires company-specific operating bridge",
+        "assumption_status": "missing",
+        "evidence_ids": [],
+        "key_sensitivity": "",
+        "missing_inputs": [
+          "LLM underwriting model unavailable"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "operating_profit",
+        "unit": "",
+        "base_period": "",
+        "base_value": null,
+        "year_1_value": null,
+        "year_2_value": null,
+        "year_3_value": null,
+        "formula": "requires company-specific operating bridge",
+        "assumption_status": "missing",
+        "evidence_ids": [],
+        "key_sensitivity": "",
+        "missing_inputs": [
+          "LLM underwriting model unavailable"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "parent_net_profit",
+        "unit": "",
+        "base_period": "",
+        "base_value": null,
+        "year_1_value": null,
+        "year_2_value": null,
+        "year_3_value": null,
+        "formula": "requires company-specific operating bridge",
+        "assumption_status": "missing",
+        "evidence_ids": [],
+        "key_sensitivity": "",
+        "missing_inputs": [
+          "LLM underwriting model unavailable"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "EPS",
+        "unit": "",
+        "base_period": "",
+        "base_value": null,
+        "year_1_value": null,
+        "year_2_value": null,
+        "year_3_value": null,
+        "formula": "requires company-specific operating bridge",
+        "assumption_status": "missing",
+        "evidence_ids": [],
+        "key_sensitivity": "",
+        "missing_inputs": [
+          "LLM underwriting model unavailable"
+        ]
+      }
+    ],
+    "scenarios": [
+      {
+        "scenario": "bull",
+        "probability_pct": null,
+        "operating_assumptions": [],
+        "parent_net_profit_cny_mn": null,
+        "eps_cny": null,
+        "fcf_cny_mn": null,
+        "valuation_method": "",
+        "valuation_multiple": null,
+        "fair_value_per_share": null,
+        "evidence_ids": [],
+        "falsification": "",
+        "missing_inputs": []
+      },
+      {
+        "scenario": "base",
+        "probability_pct": null,
+        "operating_assumptions": [],
+        "parent_net_profit_cny_mn": null,
+        "eps_cny": null,
+        "fcf_cny_mn": null,
+        "valuation_method": "",
+        "valuation_multiple": null,
+        "fair_value_per_share": null,
+        "evidence_ids": [],
+        "falsification": "",
+        "missing_inputs": []
+      },
+      {
+        "scenario": "bear",
+        "probability_pct": null,
+        "operating_assumptions": [],
+        "parent_net_profit_cny_mn": null,
+        "eps_cny": null,
+        "fcf_cny_mn": null,
+        "valuation_method": "",
+        "valuation_multiple": null,
+        "fair_value_per_share": null,
+        "evidence_ids": [],
+        "falsification": "",
+        "missing_inputs": []
+      }
+    ],
+    "readiness": "partial",
+    "readiness_reasons": [
+      "LLM company underwriting failed; deterministic evidence remains usable and the missing analysis should be retried."
+    ]
+  },
+  "market_expectations": {
+    "sell_side_observations": [
+      {
+        "intelligence_id": "KSI01",
+        "kpe_ids": "KPE03",
+        "published_at": "2026-08-06T16:12",
+        "institution": "机构未识别",
+        "analyst_or_author": "纪要小能手",
+        "freshness": "高时效/4天",
+        "rating_signal": "未披露",
+        "forecast_facts": "涨停板：中巨芯、蜀道装备、和远气体、滨化股份、多氟多、中欣氟材 其他强势股：昊华科技、华特气体、金宏气体、中船特气、广钢气体 先进封装/材料 据市场研究机构Yole预估，2025年全球先进封装的市场规模为540亿美元，预计到2031年将增至1090亿美元",
+        "valuation_facts": "未提取到目标价/估值方法与倍数",
+        "normalized_points": "无可标准化数值",
+        "revision_signal": "较前次口径发生变化；尚无可同口径比较的标准化数值",
+        "source_quote": "8月6日复盘笔记：煤炭/电子特... annotation: 8月6日复盘笔记：煤炭/电子特气/先进封装/磷化铟/医药/数字货币/信息安全/PCB/AI应用等 一、重磅财经信息 ①DeepSeek：计划近期上调API服务定价 预计涨幅较大 ②私募排排网数据显示，自6月26日以来，股票私募已连续4周保持加仓态势，仓位指数累计上涨2.12%。截至7月24日，仓位指数攀升至84.12%，创下近220周的新高。 二、大盘表现 沪指涨0.57%，深证成指跌0.24%，创业板指跌0.55%，科创50涨0.45%。 沪深京三市成交额超过2.5万亿，较昨日缩量逾千亿。 三、强势板块和个股分析 备注：只列举部分涨停板 煤炭 8月5日动力煤CCI指数全线上调，5500大卡报839元/吨涨5元/吨，5000大卡报750元/吨涨5元/吨，4500大卡报661元/吨涨6元/吨。 涨停板：昊华能源、淮北矿业、平煤股份、大有能源、潞安环能、兖矿能源、辽..."
+      },
+      {
+        "intelligence_id": "KSI02",
+        "kpe_ids": "KPE11",
+        "published_at": "2026-07-27T09:14",
+        "institution": "机构未识别",
+        "analyst_or_author": "纪要小能手",
+        "freshness": "有效窗口/14天",
+        "rating_signal": "未披露",
+        "forecast_facts": "未提取到带期间的明确盈利预测",
+        "valuation_facts": "投资建议：龙头公司对应27年估值10-15x，低估明显，继续强推格局和盈利稳定龙头电池（推荐宁德时代、亿纬锂能、蔚蓝锂芯、鹏辉能源、比亚迪、中创新航、欣旺达）、以及具备涨价弹性和优质锂电材料龙头，推荐隔膜、铝箔、铜箔、六氟、结构件等环节（推荐璞泰来、恩捷股份、鼎胜新材、佛塑科技、尚太科技、科达利、诺德股份、湖南裕能、天赐材料、富临精工、星源材质、华友钴业、嘉元科技等，关注华盛锂电、海科新源、德福科技、多氟多、万润新能、龙蟠科技、石大胜华等）",
+        "normalized_points": "无可标准化数值",
+        "revision_signal": "较前次口径发生变化；尚无可同口径比较的标准化数值",
+        "source_quote": "【东吴电新】锂电：需求持续高增... 【东吴电新】锂电：需求持续高增，估值历史底部，坚定看好！ 锂电持仓历史低位、龙头指引依然高增长、坚定看好： 1）宁德时代对未来五年需求维持年复合20-30%的判断，同时认为明年增速更乐观，远好于市场悲观预期！另外，二线电池企业多预期27年出货40-50%增长。 2）基于股价低估和未来的信心，宁德拟以200-400亿元回购股份用于注销。同时行业内多家企业，包括亿纬、璞泰来、华友、天奈、科达利、大中等均回购公司股票或高管增持，彰显对公司发展信心！ 3）Q2锂电持仓下降2pct至10%，降至近5年低位，悲观预期已完全反应，对应明年估值10-15x，明显低估。 观点重申： 8月排产旺季、27年可维持25%增长。产业链反馈7月龙头排产105GWh+，环增5%+，且大东智库反馈8月行业排产+7%，超此前预期，Q3旺季排产拐点已现。全年需求看，目前电池厂依然满产满销，今年全年动储需求预计同增35%+..."
+      },
+      {
+        "intelligence_id": "KSI03",
+        "kpe_ids": "KPE12",
+        "published_at": "2026-07-23T13:13",
+        "institution": "机构未识别",
+        "analyst_or_author": "纪要小能手",
+        "freshness": "有效窗口/18天",
+        "rating_signal": "未披露",
+        "forecast_facts": "未提取到带期间的明确盈利预测",
+        "valuation_facts": "[爱心]投资建议：龙头公司对应27年估值10-15x，低估明显，继续强推格局和盈利稳定龙头电池（推荐宁德时代、亿纬锂能、蔚蓝锂芯、鹏辉能源、比亚迪、中创新航、欣旺达）、以及具备涨价弹性和优质锂电材料龙头，推荐隔膜、铝箔、铜箔、六氟、结构件等环节（推荐璞泰来、鼎胜新材、科达利、恩捷股份、佛塑科技、尚太科技、嘉元科技、诺德股份、湖南裕能、天赐材料、富临精工、星源材质、华友钴业等，关注德福科技、多氟多、万润新能、龙蟠科技、华盛锂电、海科新源、石大胜华等）",
+        "normalized_points": "无可标准化数值",
+        "revision_signal": "窗口内首次识别，暂无同机构前序可比",
+        "source_quote": "【东吴电新】锂电：8月排产旺季... 【东吴电新】锂电：8月排产旺季将至，排产环增需求旺盛，继续坚定看好 观点重申： 8月排产旺季、27年可维持25%增长。产业链反馈7月龙头排产105GWh+，环增5%+，且大东智库反馈8月行业排产+7%，超此前预期，Q3旺季排产拐点已现。全年需求看，目前电池厂依然满产满销，今年全年动储需求预计同增35%+，明年储能维持40%+增长，叠加动力需求恢复，预计27年行业维持25%增长，当前股价回调至27年10-12x，明年增长确定性高，坚定看好！ 产业链盈利水平逐季提升、部分环节涨价Q3落地、盈利弹性显著。电池端，议价强+顺价快，Q2盈利预计环比持平微增，且扩产收紧，利好头部企业。材料端，隔膜铜箔铝箔26-27年盈利持续向上，且涨价预计Q3可陆续落地，隔膜扩产不改27年供需格局，Q2龙头单位盈利微增，龙二盈利明显改善，铜箔涨价确定性高，叠加高端电子箔供不应求，Q2起盈利预计明显改善，27年电子..."
+      }
+    ],
+    "valuation_closure": {
+      "current_price_cny": null,
+      "diluted_share_count_mn": null,
+      "core_value_per_share_cny": null,
+      "probability_weighted_fair_value_per_share_cny": null,
+      "option_value_per_share_cny": null,
+      "other_adjustments_per_share_cny": null,
+      "fair_value_per_share_cny": null,
+      "expected_return_pct": null,
+      "formula": "",
+      "rating_consistency_check": "",
+      "double_counting_checks": [],
+      "status": "not_valued",
+      "missing_inputs": [
+        "LLM underwriting model unavailable"
+      ]
+    },
+    "rule": "单家机构是观察值；只有具备样本和口径的多机构数据才可称为一致预期。"
+  },
+  "knowledge_planet": {
+    "importance": "material_alternative_intelligence",
+    "use_rule": "每条线索必须落到模型变化、概率变化、验证变化或拒绝之一。",
+    "items": [
+      {
+        "evidence_id": "KPE04",
+        "source_type": "industry_weekly_data",
+        "published_at": "2026-07-29T09:00",
+        "source_reliability": "B_identified_professional",
+        "bias_profile": "neutral_or_data",
+        "adoption_ceiling": "model_input_after_crosscheck",
+        "target_excerpt": "）优选高景气赛道：隔膜（恩捷、佛塑、星源）、储能&商用车电芯（宁德、亿纬、鹏辉）、铝箔（鼎胜、万顺）； （2）高涨价弹性：VC/溶剂（华盛、石大）、6F（天赐、多氟多）； （3）受益碳酸锂/加工费上涨：铁锂（裕能、富临）、负极（尚太、璞泰来）； （4）其他：结构件（科达利、震裕）、铜箔（德福、嘉元）。",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "segment_volume",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 等待8月真实排产数据验证",
+        "verification_gate": "等待8月真实排产数据验证",
+        "grounding_status": "grounded_quote",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE06",
+        "source_type": "industry_weekly_data",
+        "published_at": "2026-07-22T22:04",
+        "source_reliability": "B_identified_professional",
+        "bias_profile": "neutral_or_data",
+        "adoption_ceiling": "model_input_after_crosscheck",
+        "target_excerpt": "业调研，下半年新增产能主要来自天赐、宏源两家，宏源6000吨已投产，天赐4wt技改待定，Q3、Q4供给均为12.48wt（加上天赐技改）。 相关标的 天赐材料、多氟多、新宙邦、石大胜华等",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "asp_or_price",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 跟踪6F价格月度走势",
+        "verification_gate": "跟踪6F价格月度走势",
+        "grounding_status": "grounded_quote",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE09",
+        "source_type": "sell_side_push",
+        "published_at": "2026-08-10T09:54",
+        "source_reliability": "B_identified_professional",
+        "bias_profile": "sell_side_optimism",
+        "adoption_ceiling": "model_input_after_crosscheck",
+        "target_excerpt": "%。 🔥建议关注：： 1) 成本曲线有优势的企业将和竞争对手拉开差距的：宁德时代、科达利、天赐材料等； 2) 受益于排产景气、有价格弹性的：天赐材料、天际股份、多氟多、华盛锂电、嘉元科技、鼎胜新材等； 3) 新技术渗透率提升，具备细分贝塔的： 【固态电池】宁德时代、国轩高科、亿纬锂能、金龙羽、上海洗霸、德尔股份、珠海冠宇、豪鹏科技等。 【固态电池设备】宏工科技、纳科诺尔、先导智能。 风险提示 电动车消费复苏不及预期、海外政策风险、新技术落地不及预期等; 对外发布时间：2026年8月9日 报告发布机构：华福证券研究所 本报告分析师：邓伟 S0210522050005",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "segment_volume",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 与公司半年报产销量数据交叉验证",
+        "verification_gate": "与公司半年报产销量数据交叉验证",
+        "grounding_status": "grounded_quote",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE10",
+        "source_type": "sell_side_push",
+        "published_at": "2026-07-29T08:42",
+        "source_reliability": "B_identified_professional",
+        "bias_profile": "sell_side_optimism",
+        "adoption_ceiling": "model_input_after_crosscheck",
+        "target_excerpt": "； 观点重申： 电池已开始传导消费税变化，看好Q3/Q4旺季需求，材料进入备货周期，建议关注： 电池：宁德、亿纬、鹏辉、欣旺达 电解液：天赐、海科、华盛、石大、多氟多、富祥、孚日 正极：裕能、丰元、龙蟠 负极：璞泰来、尚太、中科 铝箔：鼎胜、万顺",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "segment_volume",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 验证8月实际排产数据",
+        "verification_gate": "验证8月实际排产数据",
+        "grounding_status": "grounded_quote",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE11",
+        "source_type": "sell_side_push",
+        "published_at": "2026-07-27T09:14",
+        "source_reliability": "B_identified_professional",
+        "bias_profile": "sell_side_optimism",
+        "adoption_ceiling": "model_input_after_crosscheck",
+        "target_excerpt": "泰来、恩捷股份、鼎胜新材、佛塑科技、尚太科技、科达利、诺德股份、湖南裕能、天赐材料、富临精工、星源材质、华友钴业、嘉元科技等，关注华盛锂电、海科新源、德福科技、多氟多、万润新能、龙蟠科技、石大胜华等）；看好碳酸锂龙头（推荐赣锋锂业、国城矿业、大中矿业、盛新锂能、中矿资源、永兴材料、天齐锂业、雅化集团、藏格矿业等）。 风险提示：需求不及预期",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "segment_volume",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 持续跟踪行业需求数据",
+        "verification_gate": "持续跟踪行业需求数据",
+        "grounding_status": "grounded_quote",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE12",
+        "source_type": "sell_side_push",
+        "published_at": "2026-07-23T13:13",
+        "source_reliability": "B_identified_professional",
+        "bias_profile": "sell_side_optimism",
+        "adoption_ceiling": "model_input_after_crosscheck",
+        "target_excerpt": "结构件等环节（推荐璞泰来、鼎胜新材、科达利、恩捷股份、佛塑科技、尚太科技、嘉元科技、诺德股份、湖南裕能、天赐材料、富临精工、星源材质、华友钴业等，关注德福科技、多氟多、万润新能、龙蟠科技、华盛锂电、海科新源、石大胜华等）；看好碳酸锂龙头（推荐赣锋锂业、国城矿业、大中矿业、盛新锂能、中矿资源、永兴材料、天齐锂业、雅化集团、藏格矿业等）。 [爆竹]风险提示：需求不及预期",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "segment_volume",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 验证8月排产数据",
+        "verification_gate": "验证8月排产数据",
+        "grounding_status": "grounded_quote",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE01",
+        "source_type": "channel_check",
+        "published_at": "2026-07-17T10:43",
+        "source_reliability": "C_private_unverified",
+        "bias_profile": "channel_selection_bias",
+        "adoption_ceiling": "scenario_or_verification_only",
+        "target_excerpt": "同时，另一电子级异丙醇供应商胜一表示，此前第二季度已涨价应对原料涨价，之后将密切关注原材料价格走势，第三季度不排斥继续涨价的可能，以反映成本。 电子级氢氟酸，多氟多、金石资源、中欣氟材 电子级异丙醇，红宝丽",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "asp_or_price",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "grounding_status": "ledger_only",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE02",
+        "source_type": "channel_check",
+        "published_at": "2026-08-07T07:42",
+        "source_reliability": "B_identified_professional",
+        "bias_profile": "sell_side_optimism",
+        "adoption_ceiling": "model_input_after_crosscheck",
+        "target_excerpt": "前热点事件 一、昨日热点并购：爱丽家居、锴威特反制概念-磷化铟：云南锗业反制概念-打印机：奔图科技涨价概念-煤炭：江钨装备、昊华能源涨价概念-氢氟酸：滨化股份、多氟多、中欣氟材AI6G基站：通宇通讯、武汉凡谷AI安全：天融信AI应用：凯撒文化AI硬件：豪尔赛、宝鼎科技创新药：百花医药黄金：金一文化六氟化钨：和远气体数字货币：飞天诚信黄金大外环：高争民爆、西藏天路 二、刚果（金）禁止铜精矿、钴精矿出口刚果（金）禁止出口铜精矿和钴精矿。资料显示，刚果（金）是全球最大的钴生产国，也是全球第二大铜生产国（仅次于智利）。钴：华友钴业、寒锐钴业、腾远钴业、洛阳钼业铜：北方铜业、江西铜业、云南铜业、紫金矿业 三、网信办对派拓公司启动网络安全审查为保障关键信息基础设施安全稳定运行，防范网络安全风险隐患，网络安全审查办公室按照《》，对派拓公司（Palo Alto Networks）在华销售的产品实施网络安全审查。 网络安全：天融信、国安股份、任子行、绿盟科技 四、工信部印发《》到2030年，行业治理成效显著。企业重组整合有序推进，产业集中度持续提高，形成3~5家具有较强国际运营能力的大型民爆企业集团。民爆：高争民爆、保利联合、易普力、壶化股份",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "unmapped",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "grounding_status": "ledger_only",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE03",
+        "source_type": "channel_check",
+        "published_at": "2026-08-06T16:12",
+        "source_reliability": "C_private_unverified",
+        "bias_profile": "channel_selection_bias",
+        "adoption_ceiling": "scenario_or_verification_only",
+        "target_excerpt": "I驱动的存储需求持续增长、HBM等先进技术快速发展背景下，下游客户资本性支出持续扩大，市场需求预计保持较快增长。 涨停板：中巨芯、蜀道装备、和远气体、滨化股份、多氟多、中欣氟材 其他强势股：昊华科技、华特气体、金宏气体、中船特气、广钢气体 先进封装/材料 据市场研究机构Yole预估，2025年全球先进封装的市场规模为540亿美元，预计到2031年将增至1090亿美元。 涨停板：长电科技、江化微、百合花 其他强势股：甬矽电子、劲拓股份、通富微电、华天科技、太极实业 磷化铟/光通信 英伟达预测2026年*2030年全球磷化铟晶圆整体需求将激增20倍左右，但磷化铟衬底行业扩产难度极大，单条产线投资超12亿元，扩产周期长达3年至5年，新增供给释放速度远远滞后于需求增速。 涨停板：云南锗业、有研新材、博杰股份、天通股份、汇绿生态、泰晶科技 其他强势股：欧莱新材、兴业科技 医药 医药魔方最新发布《2026Q2中国实体零售药品市场销售报告》显示，26Q2单季同比增速达到9.7%，为近8个季度最高，迎来增长小高峰。 涨停板：人民同泰、合富中国、药易购、开开实业、石药景峰、百花医药 其他强势股：建发致新、塞力医疗、华人健康 数字货币 多部门联",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "profit_or_eps",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "grounding_status": "ledger_only",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE05",
+        "source_type": "industry_weekly_data",
+        "published_at": "2026-07-27T17:00",
+        "source_reliability": "B_identified_professional",
+        "bias_profile": "neutral_or_data",
+        "adoption_ceiling": "model_input_after_crosscheck",
+        "target_excerpt": "7月27日复盘笔记：芯片/PC... 7月27日复盘笔记：芯片/PCB/玻纤/人形机器人/医药/脑机接口/AI应用/电网设备/电力等 芯片 ①长鑫上市，国产设备/材料替代有望提速。 ②SK海力士正在加快其清州P&T7先进半导体封装工厂的建设。SK海力士预计最早将于2027年7月启用位于P&T7的首个洁净室。 涨停板：雅克科技、太极实业、至纯科技、格林达、亚振家居、兴欣新材、仁东控股、爱丽家居、新亚制程、国投中鲁 其他强势股：晶方科技、中科飞测、兴福电子 PCB 受AI算力需求爆发带动，高端印制电路板PCB供不应求，价格持续走高，产业上下游都感受到了影响。一家主板生产企业的负责人介绍，高速PC…",
+        "entity_scope": "unverified_target_scope",
+        "affected_variable": "asp_or_price",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "grounding_status": "ledger_only",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE07",
+        "source_type": "channel_check",
+        "published_at": "2026-07-19T10:47",
+        "source_reliability": "C_private_unverified",
+        "bias_profile": "channel_selection_bias",
+        "adoption_ceiling": "scenario_or_verification_only",
+        "target_excerpt": "辉】等。此外，看好中游材料盈利持续修复的趋势，看好铜箔【德福、铜冠、泰金】等、铝箔【鼎胜、万顺】、负极【璞泰来、尚太】、铁锂【富临、裕能、万润】、电解液【天赐、多氟多、天际】、隔膜【佛塑、恩捷】等环节。看好储能出海龙头企业【阳光、海伦哲】。 欢迎索取具体电池企业业绩测算~",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "segment_volume",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "grounding_status": "ledger_only",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE08",
+        "source_type": "sell_side_push",
+        "published_at": "2026-07-22T08:58",
+        "source_reliability": "B_identified_professional",
+        "bias_profile": "sell_side_optimism",
+        "adoption_ceiling": "model_input_after_crosscheck",
+        "target_excerpt": "📰高盛中国早盘观点 市场情绪... 📰高盛中国早盘观点 市场情绪 📈昨日市场迎来强势反弹，隔夜多条利好国内人工智能产业链、算力板块的消息落地：北京规划落地算力 Token 工厂、腾讯加大国产芯片部署力度等。 📊本次北向资金增持明显偏好科技类个股与科技指数，科创 50、创业板 ETF 的资金净流入规模高于沪深 300ETF，也印证人工智能发展在中国具备长期战略优先级。 📌长鑫存储（CXMT）此前表态将尽快推进上市申报，其正式挂牌日期预计很快就会公布；公开申购数据显示，线上投资者弃购股份约 660 万股，弃购率仅 0.17%，对比近期其他新股 IPO 数据，该弃购水平处于偏低区间。 市场资讯 中…",
+        "entity_scope": "unverified_target_scope",
+        "affected_variable": "profit_or_eps",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "grounding_status": "ledger_only",
+        "chapter_id": "chapter_6_expectations"
+      }
+    ]
+  },
+  "evidence_index": [
+    {
+      "evidence_id": "EV001",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "Financial-report look-back: 900 days",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV002",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "Compacted 2025年年度报告: 565029 chars -> 148022 chars.",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV003",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "2025, 半年",
+      "status": "reported",
+      "text": "Compacted 2025年半年度报告: 454371 chars -> 155905 chars.",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV004",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "20260416, 2025, 年度",
+      "status": "reported",
+      "text": "20260416: 2025年年度报告",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV005",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "20251023, 2025, 季度",
+      "status": "reported",
+      "text": "20251023: 2025年三季度报告",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV006",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "20250826, 半年",
+      "status": "reported",
+      "text": "20250826: 半年报董事会决议公告",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV007",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "20250826, 2025, 半年",
+      "status": "reported",
+      "text": "20250826: 2025年半年度报告",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV008",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "20260424, 2026, 季度",
+      "status": "reported",
+      "text": "20260424: 2026年一季度报告",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV009",
+      "source_module": "earnings_model",
+      "variable": "unmapped",
+      "period": "Q1, 20260331",
+      "status": "reported",
+      "text": "/ latest reported / Q1 / 20260331 / 3215501075.67 / 375528935.28 / 12862004302.68 / 1502115741.12 / 14711124773.8485 / 1234452637.3966 / historical median 0331 share 30.4% /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV010",
+      "source_module": "earnings_model",
+      "variable": "unmapped",
+      "period": "FY, 20251231",
+      "status": "reported",
+      "text": "/ latest annual / FY / 20251231 / 9434247610.47 / 212784849.4 / 9434247610.47 / 212784849.4 / 9434247610.47 / 212784849.4 / FY actual /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV011",
+      "source_module": "earnings_model",
+      "variable": "revenue",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ Revenue base / 3215501075.67 / N/A / YoY: 20260331 vs 20250331 / top-line starting point for volume × price × mix /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV012",
+      "source_module": "earnings_model",
+      "variable": "segment_margin",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ Gross margin / 27.6087% / +14.14pp / YoY: 20260331 vs 20250331 / main bridge from demand to gross profit /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV013",
+      "source_module": "earnings_model",
+      "variable": "unmapped",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ Operating margin / 15.4511% / +11.90pp / YoY: 20260331 vs 20250331 / tests pricing, mix, and cost absorption /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV014",
+      "source_module": "earnings_model",
+      "variable": "segment_margin",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ Net margin / 11.6787% / +8.59pp / YoY: 20260331 vs 20250331 / captures final earnings conversion /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV015",
+      "source_module": "earnings_model",
+      "variable": "operating_expense",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ Finance-expense ratio / 1.4266% / +0.82pp / YoY: 20260331 vs 20250331 / captures leverage drag or relief /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV016",
+      "source_module": "earnings_model",
+      "variable": "profit_or_eps",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ OCF / net profit / -1.832 / N/A / YoY: 20260331 vs 20250331 / tests earnings quality and cash realization /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV017",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "Look-back window: 30 days",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV018",
+      "source_module": "company_events",
+      "variable": "valuation",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "/ earnings guidance / performance preview / 1 /",
+      "chapter_id": "chapter_7_valuation_rating"
+    },
+    {
+      "evidence_id": "EV019",
+      "source_module": "company_events",
+      "variable": "valuation",
+      "period": "20260711, 2026, 半年",
+      "status": "reported",
+      "text": "/ 20260711 / earnings guidance / performance preview / 002407.SZ / 多氟多 / 2026年半年度业绩预告 / http://www.cninfo.com.cn/new/disclosure/detail?stockCode=002407&announcementId=1225419392&orgId=9900012449&announcementTime=2026-07-11 /",
+      "chapter_id": "chapter_7_valuation_rating"
+    },
+    {
+      "evidence_id": "EV020",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "20260711, 2026, 半年",
+      "status": "reported",
+      "text": "/ 20260711 / 002407.SZ / 多氟多 / 2026年半年度业绩预告 / http://www.cninfo.com.cn/new/disclosure/detail?stockCode=002407&announcementId=1225419392&orgId=9900012449&announcementTime=2026-07-11 /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV021",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "2026-07-11",
+      "status": "reported",
+      "text": "Source: http://www.cninfo.com.cn/new/disclosure/detail?stockCode=002407&announcementId=1225419392&orgId=9900012449&announcementTime=2026-07-11",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV022",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "2026",
+      "status": "reported",
+      "text": "（一）业绩预告期间：2026 年 1 月 1 日至 2026 年 6 月 30 日",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV023",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "盈利：45,000 万元–56,000 万元",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV024",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "上年同期",
+      "status": "reported",
+      "text": "比上年同期增长：776.68%-990.98%",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV025",
+      "source_module": "company_business_model",
+      "variable": "segment_volume",
+      "period": "2025, 半年",
+      "status": "reported",
+      "text": "/ product_manufacturer / 产品制造 / 产能出货型 / quantified disclosure / 2025年半年度报告: 户建立了电子化学品系列产品的合作关系，在多家知名半导体和面板企业进行上线验证，部分产品已实 现批量销售。 公司已成功突破硼同位素技术壁垒，填补了国内空白，相关产品已在医疗健康、原子能与半导体等 高精尖领域开展应用。 3、新能源材料 （1）主要产品简介及用途 报告期内公司新能源材料主要包括以下产品 六氟磷酸锂：作为当前商业化电解液中综合性能最优的电解质材料，其纯...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV026",
+      "source_module": "company_business_model",
+      "variable": "utilization_or_backlog",
+      "period": "2025, 半年",
+      "status": "reported",
+      "text": "/ project_delivery / 项目订单 / 交付回款型 / quantified disclosure / 2025年半年度报告: 协同，订单响应速度大幅提升，并构建客户定制化交付系统。 公司持续推动绿色智造转型，获评国家级绿色工厂，建成河南省首个氟化工工业互联网平台，输出 20 多项智能制造标准，服务产业链企业超 200 家，形成氟基新材料、新能源电池等四大数字化业务集 / 验证订单质量、交付节奏、验收确认、毛利率、应收/合同资产和现金回款。 /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV027",
+      "source_module": "company_business_model",
+      "variable": "segment_margin",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ core_revenue_engine / annual / 2025年年度报告: 境外业务产生的营业收入或净利润占公司最近一个会计年度经审计营业收入或净利润 10%以上 / Defines what actually drives the income statement. /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV028",
+      "source_module": "company_business_model",
+      "variable": "unmapped",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ customer_and_channel / annual / 2025年年度报告: 义务，本公司按照履约进度，在一段时间内确认收入：(1)客户在本公司履约的同时即取得并消耗本公 / Reveals demand source, concentration, and market validation. /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV029",
+      "source_module": "company_business_model",
+      "variable": "unmapped",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ geography / annual / 2025年年度报告: 1.1TWh，同比增长 41%，受益于国内新能源汽车产销突破 1600 万辆，叠加海外出口市场大幅增长，需 / Explains whether growth depends on a specific geography or expansion lane. /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV030",
+      "source_module": "company_business_model",
+      "variable": "utilization_or_backlog",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ reinvestment_engine / annual / 2025年年度报告: 强大的市场竞争力。公司凭借前瞻性的战略布局，提前在大圆柱电池技术研发与产能建设上投入大量资 / Shows how today's cash is being converted into tomorrow's earnings power. /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV031",
+      "source_module": "company_business_model",
+      "variable": "unmapped",
+      "period": "2025, 年度, 2010",
+      "status": "calculated",
+      "text": "/ product / annual / 2025年年度报告: 公司上市以来主营业务的变化情况（如有） 废渣的综合利用（限分支机构经营） 。详见公司发布于中国 证券报、证券时报、巨潮资讯网的《关于完成工商变更登 记的公告》 。 （公告编号：2010-011） 6 多氟多新材料股份有限公司 2025 年年度报告全文 2012 年 8 月 22 日，经营范围变更为：无机盐、无机酸、 助剂、合金材料及制品的生产；LED 节能产品的生产；电 子数码产品，锂离子电池及材料的技术开发及销售；计算 机软件的开发与服务；自营...",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV032",
+      "source_module": "company_business_model",
+      "variable": "unmapped",
+      "period": "2025, 半年",
+      "status": "reported",
+      "text": "/ product / semiannual / 2025年半年度报告: 户建立了电子化学品系列产品的合作关系，在多家知名半导体和面板企业进行上线验证，部分产品已实 现批量销售。 公司已成功突破硼同位素技术壁垒，填补了国内空白，相关产品已在医疗健康、原子能与半导体等 高精尖领域开展应用。 3、新能源材料 （1）主要产品简介及用途 报告期内公司新能源材料主要包括以下产品 六氟磷酸锂：作为当前商业化电解液中综合性能最优的电解质材料，其纯度、稳定性直接决定电 解液的离子电导率、电化学窗口及电池的高低温性能。 双氟磺...",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV033",
+      "source_module": "industry_cycle",
+      "variable": "asp_or_price",
+      "period": "unspecified",
+      "status": "estimated",
+      "text": "/ commodity/product price / downcycle / failed-rebound risk / Mapped product proxy fell 14.0% over the look-back window; margin and inventory assumptions require stress-case treatment. /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV034",
+      "source_module": "industry_cycle",
+      "variable": "unmapped",
+      "period": "20260807",
+      "status": "reported",
+      "text": "/ Silver / industry proxy / Tushare futures proxy / AG2610.SHF / 15635 / 20260807 / -14.04% / 13545 - 18550 / 15264.6 / 69.6% / 48.69% / P20=14239; P50=14787.5; P80=16485 / 1261244 / Verified by Tushare futures daily data. / exchange=SHFE, query_exchange=SHFE,",
+      "chapter_id": "chapter_2_industry_chain"
+    },
+    {
+      "evidence_id": "EV035",
+      "source_module": "industry_cycle",
+      "variable": "unmapped",
+      "period": "20260807",
+      "status": "reported",
+      "text": "/ Lithium carbonate / industry proxy / Tushare futures proxy / LC2609.GFE / 140000 / 20260807 / -21.74% / 137760 - 178900 / 156274 / 8.7% / 40.47% / P20=143480; P50=155570; P80=167400 / 29873 / Verified by Tushare futures daily data. / exchange=GFEX, query_exc",
+      "chapter_id": "chapter_2_industry_chain"
+    },
+    {
+      "evidence_id": "EV036",
+      "source_module": "industry_cycle",
+      "variable": "balance_sheet",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "Do not state R32, R125, lithium, copper, gold, inventory, or spread changes as facts unless they appear in the evidence table.",
+      "chapter_id": "chapter_2_industry_chain"
+    },
+    {
+      "evidence_id": "EV037",
+      "source_module": "industry_cycle",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "missing",
+      "text": "If cycle evidence says bottom-testing or evidence-limited, use language such as `bottom-right validation stage`, `右侧待验证`, or `needs confirmation`.",
+      "chapter_id": "chapter_2_industry_chain"
+    },
+    {
+      "evidence_id": "EV038",
+      "source_module": "industry_kpi",
+      "variable": "segment_margin",
+      "period": "unspecified",
+      "status": "missing",
+      "text": "/ coverage_grade / report_types_seen / missing_report_types / answered_questions / core_pack_status / confidence_read /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV039",
+      "source_module": "industry_kpi",
+      "variable": "segment_margin",
+      "period": "20251231, 20260331",
+      "status": "reported",
+      "text": "/ accounting_reconciliation / Check signs, units, periods, and cross-statement consistency before a number enters the PM memo. / leverage_funding_growth: 20251231->20260331: revenue growth -65.92%, gross margin change 13.65pp, operating margin change 13.16p...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV040",
+      "source_module": "industry_kpi",
+      "variable": "unmapped",
+      "period": "2025, 年度, 2010",
+      "status": "reported",
+      "text": "/ segment_economics_depth / Decide whether each business line has enough disclosed scale, growth, margin, cash quality, and valuation treatment. / 2025年年度报告: 公司上市以来主营业务的变化情况（如有） 废渣的综合利用（限分支机构经营） 。详见公司发布于中国 证券报、证券时报、巨潮资讯网的《关于完成工商变更登 记的公告》 。 （公告编号：2010-011） 6...",
+      "chapter_id": "chapter_2_industry_chain"
+    },
+    {
+      "evidence_id": "EV041",
+      "source_module": "industry_kpi",
+      "variable": "unmapped",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ footnote_radar / Surface decision-relevant notes that can hide risk or change confidence. / impairment_policy: 2025年年度报告: 项目 2025 年金额 2024 年金额 2023 年金额 明 非流动性资产处置损益（包括已计提资产减值准备的冲销部 / impairment_policy: 2025年年度报告: 明 非流动性资产处置损益（包括已计提资产减值准备的冲销部 / Use footnot...",
+      "chapter_id": "chapter_2_industry_chain"
+    },
+    {
+      "evidence_id": "EV042",
+      "source_module": "industry_kpi",
+      "variable": "profit_or_eps",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ cash_flow_quality_decomposition / Separate accounting profit from cash conversion, working-capital drag, and demand visibility. / operating_cash_flow: 2025年年度报告: 20,841,454.94 -25,650,713.14 -18,522,411.94 122,062,565.58 经常性损益的净利润 经营活动产生的现金流量净额 -210,690,5...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV043",
+      "source_module": "industry_kpi",
+      "variable": "revenue",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ capex_cip_return_bridge / Test whether capex, construction-in-progress, or investment assets are building returns or just absorbing capital. / construction_in_progress: 2025年年度报告: 我们检查与营业收入相关的信息是否已在财务报表中作出恰当列报。  长期资产减值计提事项 2025 年度多氟多公司固定资产、在建工程及无形资产减值金额为...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV044",
+      "source_module": "industry_kpi",
+      "variable": "segment_margin",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ non_recurring_profit_quality / Distinguish core operating profit from investment income, fair-value moves, subsidies, asset disposals, impairment, and other one-off items. / impairment: 2025年年度报告: 资产减值 -57,654,408.04 -22.29% 否 减值测试，同时叠加部分存货减值因素 影响，计提存货跌价准...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV045",
+      "source_module": "industry_kpi",
+      "variable": "balance_sheet",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ balance_sheet_forward_signals / Read balance-sheet leads before income-statement confirmation. / inventory: 2025年年度报告: 产线存在减值迹象，公司根据行业发展 资产减值 -57,654,408.04 -22.29% 否 减值测试，同时叠加部分存货减值因素 / inventory: 2025年年度报告: 资产减值 -57,654,408.04 -22.29% 否 减值测试，同时叠加部分存货减值因...",
+      "chapter_id": "chapter_2_industry_chain"
+    },
+    {
+      "evidence_id": "EV046",
+      "source_module": "market_expectation",
+      "variable": "unmapped",
+      "period": "2026-08-07",
+      "status": "reported",
+      "text": "Valuation trade date: 2026-08-07",
+      "chapter_id": "chapter_6_expectations"
+    },
+    {
+      "evidence_id": "EV047",
+      "source_module": "market_expectation",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "/ Market cap (CNY) / 43498403550 / current equity value /",
+      "chapter_id": "chapter_6_expectations"
+    },
+    {
+      "evidence_id": "EV048",
+      "source_module": "market_expectation",
+      "variable": "valuation",
+      "period": "TTM",
+      "status": "reported",
+      "text": "/ PE TTM / 83.0783 / earnings multiple the market is paying now /",
+      "chapter_id": "chapter_7_valuation_rating"
+    },
+    {
+      "evidence_id": "EV049",
+      "source_module": "market_expectation",
+      "variable": "revenue",
+      "period": "TTM",
+      "status": "reported",
+      "text": "/ PS TTM / 4.1224 / sales multiple the market is paying now /",
+      "chapter_id": "chapter_6_expectations"
+    },
+    {
+      "evidence_id": "EV050",
+      "source_module": "market_expectation",
+      "variable": "valuation",
+      "period": "TTM",
+      "status": "calculated",
+      "text": "/ Implied TTM earnings (CNY) / 523583216.6763 / market cap divided by PE TTM /",
+      "chapter_id": "chapter_7_valuation_rating"
+    }
+  ],
+  "chapter_packets": [
+    {
+      "chapter_id": "chapter_1_company",
+      "title": "一、公司是谁、如何赚钱",
+      "reader_goal": "让普通投资者理解产品、客户、定价、收入确认、成本与现金回收。",
+      "selected_evidence_ids": [
+        "EV001",
+        "EV002",
+        "EV003",
+        "EV004",
+        "EV005",
+        "EV006",
+        "EV007",
+        "EV008",
+        "EV009",
+        "EV010",
+        "EV013",
+        "EV015"
+      ],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_2_industry_chain",
+      "title": "二、产业链位置与行业格局",
+      "reader_goal": "解释上下游、供需与价格形成，并把产业链变化传导到公司经营。",
+      "selected_evidence_ids": [
+        "EV034",
+        "EV035",
+        "EV036",
+        "EV037",
+        "EV040",
+        "EV041",
+        "EV045",
+        "EV086",
+        "EV088",
+        "EV089",
+        "EV090",
+        "EV091"
+      ],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_3_profit_pools",
+      "title": "三、业务拆解与核心利润池",
+      "reader_goal": "按核心、成长、波动和期权业务拆解收入、利润、现金与资本占用。",
+      "selected_evidence_ids": [],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_4_competition",
+      "title": "四、竞争优势、护城河与主要短板",
+      "reader_goal": "用历史或真同行验证规模、品牌、渠道、技术和成本优势。",
+      "selected_evidence_ids": [
+        "EV070",
+        "EV071",
+        "EV073",
+        "EV074",
+        "EV075",
+        "EV076",
+        "EV077"
+      ],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_5_growth_forecast",
+      "title": "五、增长逻辑、关键分歧与盈利预测",
+      "reader_goal": "围绕三至五个关键问题，把经营变量传导到三年盈利和现金流。",
+      "selected_evidence_ids": [
+        "EV011",
+        "EV012",
+        "EV014",
+        "EV016",
+        "EV025",
+        "EV027",
+        "EV033",
+        "EV038",
+        "EV039",
+        "EV042",
+        "EV043",
+        "EV044"
+      ],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_6_expectations",
+      "title": "六、市场预期差、风险与验证",
+      "reader_goal": "区分真实一致预期、单家卖方和反向隐含假设，并给出证伪日历。",
+      "selected_evidence_ids": [
+        "EV046",
+        "EV047",
+        "EV049",
+        "EV051"
+      ],
+      "knowledge_planet_ids": [
+        "KPE04",
+        "KPE06",
+        "KPE09",
+        "KPE10",
+        "KPE11",
+        "KPE12"
+      ],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_7_valuation_rating",
+      "title": "七、估值、评级与投资结论",
+      "reader_goal": "在完成公司、产业、模型和预期分析后，最后给出估值、评级与动作。",
+      "selected_evidence_ids": [
+        "EV018",
+        "EV019",
+        "EV048",
+        "EV050",
+        "EV052",
+        "EV053",
+        "EV057",
+        "EV059",
+        "EV063",
+        "EV078",
+        "EV079",
+        "EV080"
+      ],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    }
+  ],
+  "preprocessing_notes": [
+    "原始上下文不直接成为公共报告结构。",
+    "知识星球线索已按目标实体、变量、允许用途和验证门槛重新路由。",
+    "所有章节必须围绕读者问题展开，数据只作为决定性证据进入正文。"
+  ]
+}

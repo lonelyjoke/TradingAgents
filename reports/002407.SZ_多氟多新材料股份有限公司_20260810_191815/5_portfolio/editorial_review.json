@@ -1,0 +1,34 @@
+{
+  "review": {
+    "revision_required": true,
+    "overall_assessment": "Deterministic quality router found actionable issues; send them directly to the bounded revision pass.",
+    "revision_instructions": [
+      "rating-valuation consistency: Hold sits beside deterministic expected return -16.0%; revise the rating to match the closed payoff distribution, or revise auditable scenario inputs—do not hide the conflict behind qualitative wording",
+      "public thesis chapter missing strongest counterargument/boundary",
+      "public language: English-heavy reader-facing fields must be translated to Chinese: forecast_takeaways[0].takeaway, forecast_takeaways[0].evidence_anchor, forecast_takeaways[0].financial_implication, forecast_takeaways[0].confidence_and_risk, forecast_takeaways[1].takeaway, forecast_takeaways[1].evidence_anchor, forecast_takeaways[1].financial_implication, forecast_takeaways[1].confidence_and_risk"
+    ]
+  },
+  "review_status": {
+    "mode": "deterministic_issue_router",
+    "agent": "Sell-Side Research Editor",
+    "structured_error": ""
+  },
+  "revision_requested": true,
+  "revision_applied": true,
+  "revision_status": {
+    "mode": "schema_prompt_structured",
+    "agent": "Portfolio Manager Editorial Revision",
+    "structured_error": ""
+  },
+  "initial_handoff_issues": [],
+  "initial_analytical_issues": [
+    "rating-valuation consistency: Hold sits beside deterministic expected return -16.0%; revise the rating to match the closed payoff distribution, or revise auditable scenario inputs—do not hide the conflict behind qualitative wording",
+    "public thesis chapter missing strongest counterargument/boundary",
+    "public language: English-heavy reader-facing fields must be translated to Chinese: forecast_takeaways[0].takeaway, forecast_takeaways[0].evidence_anchor, forecast_takeaways[0].financial_implication, forecast_takeaways[0].confidence_and_risk, forecast_takeaways[1].takeaway, forecast_takeaways[1].evidence_anchor, forecast_takeaways[1].financial_implication, forecast_takeaways[1].confidence_and_risk"
+  ],
+  "remaining_handoff_issues": [],
+  "remaining_analytical_issues": [
+    "public language: English-heavy reader-facing fields must be translated to Chinese: forecast_assumptions[0].historical_anchor, forecast_assumptions[0].bull_case, forecast_assumptions[0].bear_case, forecast_assumptions[0].rationale_and_evidence, forecast_assumptions[0].verification_gate, forecast_assumptions[1].rationale_and_evidence, forecast_assumptions[1].sensitivity, forecast_assumptions[1].verification_gate"
+  ],
+  "revision_rejection_reasons": []
+}

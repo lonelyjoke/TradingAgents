@@ -1,0 +1,1170 @@
+{
+  "rating": "Hold",
+  "rating_posture": "中性；12个月目标价29.98元。评级依据为基本面与估值，后续按关键经营证据调整。",
+  "research_readiness": "partial",
+  "one_line_thesis": "磷肥主业秋肥旺季（2026年8-10月）价差修复是未来3-6个月的核心可观察变量，但当前价格（约29.8元）已基本定价基准稳态盈利；多头情景（+21%上行）依赖多渠道情报交叉验证但仍缺公司实现价格与成本数据，下行有磷矿资源稀缺性及约4.7%股息率提供防护，基差预期回报约0.5%，宜持有利率等待中报及秋肥价格指数官宣验证。",
+  "research_questions": [
+    "Q1：未来三个种植季磷肥实现价格、销量和现金成本（含矿石转移价与硫磺）？",
+    "Q2：磷矿产出与品位能否在不大幅追加维持性资本开支的前提下保持？",
+    "Q3：资本配置将在高分红与增长性资本开支之间如何移动？",
+    "Q4：聚甲醛（POM）的成长空间与毛利轨迹，在行业产能扩张背景下能否独立贡献第二曲线？"
+  ],
+  "question_verdicts": [
+    {
+      "question_id": "Q1",
+      "question": "未来三个种植季磷肥实现价格、销量和现金成本（含矿石转移价与硫磺）？",
+      "why_decisive": "磷肥贡献集团大部分毛利，价格或成本每变动5%可使EPS摆动15-20%，是估值和评级的核心驱动。",
+      "conclusion": "五个独立渠道情报（KPE03/KPE04/KPE06等）方向一致，指向磷矿1000元/吨刚性底部、秋肥季节性需求修复及硫磺成本缓和可能推升价差。但公司层面的实现ASP、销量和单位现金成本全部缺失，目前只能停留在趋势情景而非可量化的模型硬化阶段。",
+      "evidence_used": [
+        "KPE03 (2026-07-27): 磷矿紧平衡支撑1000元/吨底部",
+        "KPE06 (2026-07-22): 秋季需求验证与原料成本缓和驱动价差修复",
+        "KPE02 (2026-08-10): 下游采购谨慎，补库尚未启动",
+        "EV012 (Q1 2026): 毛利率19.56%，同比改善但仍属中周期水平"
+      ],
+      "strongest_counterevidence": "KPE02显示下游买盘保守、补库未启动；硫磺价格波动属双向风险；Q1毛利率改善幅度有限，若成本先于价格上行则修复进程易被打断。",
+      "conflict_resolution": "渠道方向一致性支持秋季边际改善逻辑，但缺乏公司层面量价数据，未形成可提升基准假设的闭环。维持基准19.6%毛利率，乐观情景（25%概率）赋予8%的磷肥收入弹性和4-5pp毛利率扩张，悲观情景（15%概率）将毛利率降至17%。",
+      "model_or_valuation_effect": "基准EPS 2.85元不变；乐观情景EPS 3.29元，对应公允价值约36.2元；悲观情景EPS 2.19元，对应公允价值约19.75元。概率加权公允价值约30.0元。",
+      "affected_model_lines": [
+        "2026E_gross_margin",
+        "2026E_parent_net_profit",
+        "2026E_eps",
+        "base_fair_value",
+        "bull_fair_value",
+        "bear_fair_value"
+      ],
+      "confidence": "medium",
+      "next_verification": "2026年H1中报（8月下旬）分产品收入/毛利数据；9-10月DAP/MAP国内及出口价格指数周度追踪。"
+    },
+    {
+      "question_id": "Q2",
+      "question": "磷矿产出与品位能否在不大幅追加维持性资本开支的前提下保持？",
+      "why_decisive": "磷矿自给是核心护城河，品位下降或成本上升将结构性侵蚀一体化毛利及ROIC。",
+      "conclusion": "政策证据（EV035）确认新矿受限、支撑资源稀缺性；行业平均品位下降(EV023)形成长期逆风。但缺乏公司矿山级别产量、成本和品位数据，无法量化冲击。资源稀缺方向正面，但成本优势尚未被证明。",
+      "evidence_used": [
+        "EV035: 政策限制新增磷矿审批，强化资源稀缺性",
+        "EV023: 国内磷矿平均品位长期下降，隐含开采成本趋势上行"
+      ],
+      "strongest_counterevidence": "EV023直接挑战低成本永续假设，若品位下滑加速，维持性资本开支和单位成本可能快于预期上涨，即使磷肥价格偏强也会压缩毛利。",
+      "conflict_resolution": "政策壁垒属硬事实，品位下降属趋势但缺乏公司具体数据。模型维持现有毛利率和资本开支假设，但将护城河评级从“已验证”降级为“部分验证”。",
+      "model_or_valuation_effect": "2026E-2028E毛利率和资本开支假设不变。磷矿成本优势保留为定性护城河描述，但下调为部分验证状态。",
+      "affected_model_lines": [
+        "moat_rating",
+        "2026E_gross_margin"
+      ],
+      "confidence": "low",
+      "next_verification": "年报矿山分部经营数据，包括可采储量、原矿品位、单吨现金开采成本和维持性资本开支。"
+    },
+    {
+      "question_id": "Q4",
+      "question": "资本配置将在高分红与增长性资本开支之间如何移动？",
+      "why_decisive": "防御性持有逻辑主要建立在约4.7%股息率之上；若资本开支加速压缩FCF，将大幅削弱下行保护和估值底部。",
+      "conclusion": "Q1 2026经营现金流/净利润比率1.69倍（EV016）提供强现金转化证据；2024-2026年分红计划承诺支持高比例分配。但2025年投资性现金流增加4.8亿元（在建工程）构成资本开支抬头的早期信号，需持续观察。",
+      "evidence_used": [
+        "EV016: Q1 2026 OCF/NP比率1.69，盈利现金含量高",
+        "EV015: 2025年投资性现金流出同比+4.8亿元，在建工程扩张",
+        "管理资本配置背景: 2025年度每股分红1.2元+中期0.2元"
+      ],
+      "strongest_counterevidence": "若投资性现金流出持续扩大或加速，即使净利润尚未回落，FCF和分红空间仍会被压缩，削弱“高分红防护”逻辑。",
+      "conflict_resolution": "现金转化能力（EV016）为硬事实，资本开支尚属单一观察点，需管理层指引确认是否为趋势性扩张。维持基准FCF假设，将资本开支列为观察项。",
+      "model_or_valuation_effect": "基准FCF假设~64亿元维持不变。股息率对悲观情景估值底部（约20元/股，9倍PE）提供加成验证。",
+      "affected_model_lines": [
+        "2026E_fcf",
+        "dividend_yield",
+        "bear_fair_value"
+      ],
+      "confidence": "medium",
+      "next_verification": "管理层业绩会或H1 2026中报披露未来资本开支预算及分红政策更新。"
+    }
+  ],
+  "evidence_utilization_ledger": [
+    {
+      "evidence_id": "KPE03",
+      "question_id": "Q1",
+      "disposition": "adopted",
+      "contribution_or_reason": "提供磷矿1000元/吨的供需紧平衡证据，支持基准成本假设和资源稀缺性叙事。",
+      "model_or_probability_effect": "维持基准毛利率19.6%和乐观情景概率25%不变。",
+      "verification_gate": ""
+    },
+    {
+      "evidence_id": "KPE06",
+      "question_id": "Q1",
+      "disposition": "adopted",
+      "contribution_or_reason": "作为秋肥需求催化剂和硫磺缓和机制的代表性线索，强化了乐观情景的时机锚点。",
+      "model_or_probability_effect": "支持乐观情景中磷肥收入+8%和毛利率扩张至24%的假设。",
+      "verification_gate": ""
+    },
+    {
+      "evidence_id": "KPE02",
+      "question_id": "Q1",
+      "disposition": "watch",
+      "contribution_or_reason": "反映下游采购谨慎、补库未启动的反向信号，用于监控乐观需求情景的落地进度。",
+      "model_or_probability_effect": "",
+      "verification_gate": "跟踪化肥经销商采购量和定价行为，2026年9-10月。"
+    },
+    {
+      "evidence_id": "EV012",
+      "question_id": "Q1",
+      "disposition": "adopted",
+      "contribution_or_reason": "Q1 2026毛利率19.56%为硬数据起点，设定了全年基准毛利率的下限。",
+      "model_or_probability_effect": "设定2026E基准毛利率为19.6%，反映Q1实际叠加全年轻微保守缓冲。",
+      "verification_gate": ""
+    },
+    {
+      "evidence_id": "EV035",
+      "question_id": "Q2",
+      "disposition": "adopted",
+      "contribution_or_reason": "政策限制新增磷矿审批，强化资源稀缺性和一体化生产商的长期定价权支撑。",
+      "model_or_probability_effect": "仅定性支持护城河叙事，未调整量化模型。",
+      "verification_gate": ""
+    },
+    {
+      "evidence_id": "EV023",
+      "question_id": "Q2",
+      "disposition": "watch",
+      "contribution_or_reason": "行业品位趋势性下降构成长期成本压力，但因缺乏公司具体数据，仅保持观察。",
+      "model_or_probability_effect": "",
+      "verification_gate": "从年报或独立工程报告中获取单矿品位、储量和现金成本数据。"
+    },
+    {
+      "evidence_id": "EV016",
+      "question_id": "Q4",
+      "disposition": "adopted",
+      "contribution_or_reason": "Q1 OCF/NP 1.69证明盈利现金含量高，盈余质量可靠，支持可持续分红假设。",
+      "model_or_probability_effect": "维持FCF和分红容量假设，强化悲观情景中20元估值底部的逻辑。",
+      "verification_gate": ""
+    },
+    {
+      "evidence_id": "EV015",
+      "question_id": "Q4",
+      "disposition": "watch",
+      "contribution_or_reason": "2025年投资性现金流流出扩大4.8亿元，属单期信号但可能预示资本开支趋势上行，对FCF形成中期约束。",
+      "model_or_probability_effect": "",
+      "verification_gate": "H1 2026中报资本开支细项及管理层对未来投资规模的指引。"
+    }
+  ],
+  "forecast_takeaways": [
+    {
+      "takeaway": "2026E营业收入439亿元、归母净利润52亿元的基准情景本质上假设磷肥价量平稳，该情景已被当前约54.4亿元市值充分定价。",
+      "evidence_anchor": "Q1 2026实际收入119.8亿元，按历史Q1占比27.3%季节性外推全年439亿元；Q1毛利率19.56%。",
+      "financial_implication": "基准EPS约2.85元对应10.5倍PE公允价值约29.98元/股，当前股价隐含预期回报接近零。",
+      "confidence_and_risk": "基准收入和毛利率预测的中等置信度成立，但缺乏分产品量价信息，单个季度点位上推全年存在Q2-Q4硫磺冲击的风险。"
+    },
+    {
+      "takeaway": "乐观情景（25%概率）对应EPS 3.29元和公允价值36.2元（+21%），要求秋肥旺季实现磷肥价涨和硫磺成本回落双重条件，目前尚未观察到。",
+      "evidence_anchor": "渠道情报KPE06（天风，2026年7月）和KPE03/KPE05均支持秋季需求改善与磷矿价格底部。",
+      "financial_implication": "磷肥收入+8%，板块毛利率扩张至24%，归母净利润跳升至60亿元。",
+      "confidence_and_risk": "置信度低；乐观情景取决于尚未发生的单一季节性催化剂，若9-10月化肥价格指数持平或硫磺回升，该情景将被证伪。"
+    },
+    {
+      "takeaway": "悲观情景（15%概率，空头主张应调整至30%）对应EPS 2.19元和公允价值19.75元（-34%），触发条件并非深度衰退，仅是秋肥平淡叠加硫磺成本反弹。",
+      "evidence_anchor": "下游采购谨慎（KPE02）、历史上单季度毛利率易发生波动、公司硫磺敞口未对冲。",
+      "financial_implication": "集团毛利率降至17%，归母净利润缩至40亿元，PE倍数从10.5倍向9倍下修。",
+      "confidence_and_risk": "悲观情景触发的现实门槛较低，概率判断是本报告的核心冲突点。维持15%概率，要求在Q3实际经营数据中验证。"
+    }
+  ],
+  "forecast_assumptions": [
+    {
+      "parameter": "磷肥实现销售均价（DAP/MAP综合）",
+      "affected_business": "磷肥业务 (核心利润池，分析性占比>50%)",
+      "historical_anchor": "未在现有证据中披露；卖方渠道提及DAP约3500元/吨但未经官方或数据源验证。",
+      "evidence_status": "missing",
+      "base_case": "较2025年持平，不设定具体价格水平。",
+      "bull_case": "较基准情景+8%，若秋肥需求趋紧、出口窗口打开。",
+      "bear_case": "较基准情景-10%，若季节性需求不及预期或出口受限。",
+      "rationale_and_evidence": "KPE03/KPE04/KPE06方向性支持秋肥提价，EV012显示Q1毛利率修复；缺乏任何公司或权威机构的实现价格时间序列。",
+      "sensitivity": "磷肥均价每变动5%，EPS影响约15-20%（假设磷肥贡献毛利>50%）。",
+      "confidence": "low",
+      "verification_gate": "H1 2026年中报分产品收入/隐含ASP；Wind/Bloomberg每周DAP出口价格。"
+    },
+    {
+      "parameter": "硫磺采购成本",
+      "affected_business": "磷肥业务（关键可变成本）",
+      "historical_anchor": "未披露；卖方渠道（KPE06）定性指向成本缓和，但无价格数据。",
+      "evidence_status": "missing",
+      "base_case": "较Q1 2026水平持平，视为中性成本环境。",
+      "bull_case": "继续下降10%，额外释放2-3个百分点毛利率。",
+      "bear_case": "反弹超20%且磷肥价格未同步传导，压缩毛利2-3个百分点。",
+      "rationale_and_evidence": "硫磺为全球贸易品，公司采购成本取决于长协与现货组合。KPE06定性信息仅用于情景设定，不构成基准假设。",
+      "sensitivity": "硫磺成本每变动10%，EPS影响约5-8%（假设硫磺占磷肥现金成本近30%）。",
+      "confidence": "low",
+      "verification_gate": "公司季度成本分析（极少披露）；跟踪国际硫磺现货价格作为替代参照。"
+    },
+    {
+      "parameter": "资本开支轨迹",
+      "affected_business": "集团合并（FCF及股息容量）",
+      "historical_anchor": "FY2025投资性现金流出同比+4.8亿元（EV015），此前年份未完全披露。",
+      "evidence_status": "proxy",
+      "base_case": "~25亿元/年（维持及温和增长性资本开支），FCF足以支撑60-70%分红。",
+      "bull_case": "资本开支低于20亿元/年，释放更多现金用于特别分红或债务优化。",
+      "bear_case": "因矿山或新项目投资加速至30亿元+/年，FCF承压并侵蚀分红。",
+      "rationale_and_evidence": "EV015为单一观察点，管理层2024-2026年分红计划表明偏股东回报。未见详细资本开支指南。",
+      "sensitivity": "资本开支每增加5亿元，FCF和分红容量约压缩8-10%。",
+      "confidence": "medium",
+      "verification_gate": "H1 2026中报资本开支结构及管理层未来投资预算指引。"
+    }
+  ],
+  "core_theses": [
+    {
+      "rank": 1,
+      "takeaway": "秋肥磷肥价差修复是未来6个月唯一可被验证的催化剂，但当前处于“方向看多、数据未实”的阶段；基准预期回报接近零，乐观情景提供21%上行，但需要价格指数明确定向。",
+      "decisive_question": "秋肥旺季能否将磷肥实现价格和毛利率推升至明显高于Q1 2026水平？",
+      "evidence": "天风（KPE06）定性确认秋肥为Q3利润弹性窗口；中泰/行业周报（KPE03/KPE04/KPE05）强化磷矿价格底部及行业供给纪律；Q1毛利率19.56%（EV012）提供2.33个百分点同比改善的起点。但无任何公司级销售均价和产量数据。",
+      "strongest_counterevidence": "KPE02显示下游买盘谨慎、未启动补库；硫磺价格存在双向波动，若上升过快可能稀释需求的季节性利好。秋肥价格指数若9-10月环比涨幅低于5%，该催化剂将被证伪。",
+      "financial_transmission": "磷肥收入+8%→集团毛利率从19.6%升至20%+→归母净利润从52亿增至60亿元→EPS从2.85升至3.29元→公允价值从约30元升至36.2元（11倍PE）。",
+      "market_pricing": "当前约10.3倍TTM PE处于5年70.4%分位，隐含市场定价稳态利润；乐观情景被视为未定价的看涨期权，而悲观情景仅获15%概率权重，市场尚未充分反映秋肥平淡与硫磺反弹并存的下行风险。",
+      "falsification_gate": "2026年9-10月秋肥国内/出口价格指数未出现持续上移，或硫磺成本反弹超20%且未获磷肥提价分担。",
+      "verdict": "partial"
+    },
+    {
+      "rank": 2,
+      "takeaway": "约4.7%股息率和Q1 OCF/NP 1.69倍提供防御底部，但若磷肥毛利同时承压且资本开支上升，则存在股息陷阱风险。",
+      "decisive_question": "公司能否在下一个周期低点维持60-70%分红比例而不损害资产负债表安全？",
+      "evidence": "Q1 2026 OCF/NP 1.69倍（EV016）验证盈利质量；2025年度分红1.2元/10股+中期0.2元；2024-2026年分红计划承诺。但2025年投资性现金流流出+4.8亿元构成资本开支抬升的早期信号。",
+      "strongest_counterevidence": "若悲观情景兑现（价格-10%，成本反弹），经营现金流可能降至约45亿元，FCF约30亿元；60%分红率下每股股息将降至约0.7元，对应股息率仅约2.3%，失去防御价值，估值底部将从20元下移至16-18元。",
+      "financial_transmission": "股息可持续→支撑悲观情景下20元估值底部（9倍PE+~5%收益）。股息压缩→底部下沉至16-18元。",
+      "market_pricing": "市场以当前股息率约4.7%隐含股息可持续性，若盈利和资本开支出现反向剪刀差，将触发估值重调，当前定价未计入股息陷阱风险。",
+      "falsification_gate": "H1 2026经营现金流同比缩减超20%，或资本开支指引突破30亿元/年，或管理层宣布股利政策重审。",
+      "verdict": "partial"
+    }
+  ],
+  "segment_economics": [
+    {
+      "business_unit": "磷酸盐化肥（DAP/MAP/TSP）",
+      "economic_role": "核心利润池（分析性占比>50%）",
+      "disclosure_basis": "analytical",
+      "scale_and_growth": "收入占比推断最高但未披露具体分段；增长由磷肥价格和出口窗口驱动",
+      "margin_and_cash": "一体化自供磷矿提升毛利率韧性；Q1 2026集团毛利率19.56%，历史上磷肥板块毛利率弹性大，但具体未披露",
+      "driver_equation": "销量 × (磷肥实现价格 - 磷矿转移价 - 硫磺 - 转换加工费)",
+      "valuation_treatment": "core",
+      "evidence_ids": [
+        "EV012",
+        "EV023",
+        "EV035",
+        "KPE03",
+        "KPE06"
+      ],
+      "missing_or_next_check": "分产品收入、均价、销量及单位现金成本缺失；等待2026年中报分产品披露"
+    },
+    {
+      "business_unit": "氮肥（尿素/合成氨）",
+      "economic_role": "稳定现金流贡献者",
+      "disclosure_basis": "analytical",
+      "scale_and_growth": "规模中等，增长平缓，依赖尿素-煤炭价差",
+      "margin_and_cash": "比磷肥板块毛利率低且更稳定，未披露具体数字",
+      "driver_equation": "销量 × (尿素价格 - 原料煤/气成本 - 转化成本)",
+      "valuation_treatment": "core",
+      "evidence_ids": [
+        "EV023",
+        "EV030"
+      ],
+      "missing_or_next_check": "分产品收入、销量及成本结构未披露"
+    },
+    {
+      "business_unit": "复合肥",
+      "economic_role": "增值产品，客户粘性较强",
+      "disclosure_basis": "analytical",
+      "scale_and_growth": "收入有一定体量但毛利率较低，增资依赖NPK原料价差",
+      "margin_and_cash": "低单位毛利，营运资本季节性明显",
+      "driver_equation": "销量 × (售价 - N/P/K采购成本 - 加工费)",
+      "valuation_treatment": "core",
+      "evidence_ids": [
+        "EV030"
+      ],
+      "missing_or_next_check": "无具体分产品数据"
+    },
+    {
+      "business_unit": "聚甲醛（POM）",
+      "economic_role": "高端成长期权，具备进口替代潜力",
+      "disclosure_basis": "analytical",
+      "scale_and_growth": "体量现阶段较小，行业产能扩张背景下面临价格压力；需求来自汽车、电子等领域",
+      "margin_and_cash": "理论毛利率较高，但缺失产量、ASP、甲醇成本等任何经营指标",
+      "driver_equation": "销量 × (ASP - 甲醇/甲醛成本 - 转化成本)",
+      "valuation_treatment": "optionality",
+      "evidence_ids": [
+        "EV024",
+        "EV039"
+      ],
+      "missing_or_next_check": "产能、利用率、均价、单位成本全部缺失；须从年报获取POM分部经营数据"
+    },
+    {
+      "business_unit": "农产品贸易与物流",
+      "economic_role": "低毛利过桥业务，周转驱动",
+      "disclosure_basis": "analytical",
+      "scale_and_growth": "体量可能较大但贡献利润极低",
+      "margin_and_cash": "轻资产营运资本依赖，不占用大量资本",
+      "driver_equation": "贸易量 × 购销价差",
+      "valuation_treatment": "excluded",
+      "evidence_ids": [
+        "EV035"
+      ],
+      "missing_or_next_check": "无分产品收入和货种结构披露"
+    }
+  ],
+  "business_model_mechanisms": [
+    {
+      "link": "客户与价值主张",
+      "how_it_works": "国内农户及经销商采购DAP/MAP等基础磷肥用于秋肥/春肥底肥；海外买家以出口形式采购。公司凭借自有磷矿资源保证供应安全性和成本可控。工业客户（汽车、电子）使用POM工程塑料替代金属或进口材料。",
+      "economic_driver": "磷肥：种植面积、农产品价格、季节性需求节奏及全球粮价预期。POM：汽车与电子产品国产化和高端化趋势。",
+      "cash_and_capital_feature": "磷肥业务资本密集但OPM（先款后货/预收款模式）部分对冲营运资金需求。POM属设备驱动，固定成本占比高。",
+      "evidence_or_gap": "年报文字提及业务结构但缺少分客户/分地区具体数字和付款条款；未披露合同负债对应产品分摊。",
+      "analyst_conclusion": "自供矿模式强化成本曲线左侧位置，上下游季节性现金流管理是观察重点。"
+    },
+    {
+      "link": "订单/采购与定价",
+      "how_it_works": "化肥定价跟随国内/国际现货价格，买卖双方在旺季前协商量价，实际成交价有折扣/升水。POM定价基于甲醇成本加成以及竞品（巴斯夫、宝理等）进口平水。",
+      "economic_driver": "经销商/农户的旺季前补库意愿、渠道库存水位以及全球供需差额，决定ASP相对于现货指数折溢价。",
+      "cash_and_capital_feature": "定价即时传导但采购硫磺及磷矿石自用的转定价不公开，导致实际毛利率难以外推。",
+      "evidence_or_gap": "公司实现销售均价与市场指数之间的基差从未披露；磷矿石内部转移价的公允价值是未知参数。",
+      "analyst_conclusion": "缺乏基差与转移价这两项关键输入，公开毛利率的可预测性受限，估值仅能以情景概率补齐。"
+    },
+    {
+      "link": "成本栈与服务义务",
+      "how_it_works": "磷肥现金成本 = 磷矿石(自供/转定价) + 硫磺(进口为主) + 合成氨(自产+外采) + 能源/运输。氮肥中动力煤占成本大头。POM看重甲醇/甲醛价格。公司需长期维持矿山安全环保支出以及化肥淡储责任。",
+      "economic_driver": "硫磺、煤炭、甲醇等全球贸易品价格，以及矿山人力/环保合规通胀，决定成本走向。",
+      "cash_and_capital_feature": "固定持续性环保及维持性资本开支必须从经营现金流中优先拨付，挤压可自由分配的FCF。",
+      "evidence_or_gap": "所有成本细项尚无公开数字；缺乏矿井级别的开采成本或选矿回收率信息。",
+      "analyst_conclusion": "成本优势叙述逻辑自洽但尚未数据化，须在年报分部信息窗口打开后以可比企业毛利率作为替代验证。"
+    },
+    {
+      "link": "交付与收入确认",
+      "how_it_works": "化肥以货权转移确认收入，国内通过公路/铁路发运至经销商仓库或港口；出口在装船后确认。POM属于批发出厂价。",
+      "economic_driver": "物流瓶颈、出口配额政策以及合同履约节奏（发货集中度）影响季度收入和营运资本波动。",
+      "cash_and_capital_feature": "预收款/合同负债与发货节奏共同影响经营现金流，Q1通常高预收、Q3-4密集结转。",
+      "evidence_or_gap": "合同负债同比增长/环比变化及对应产品构成未披露；出口配额使用率缺失。",
+      "analyst_conclusion": "季节性造成的收入和现金流转差异并非趋势信号，解读时必须剥离季度错配因子。"
+    }
+  ],
+  "industry_driver_matrix": [
+    {
+      "driver": "秋肥需求兑现节奏",
+      "current_state_and_direction": "等待8-10月验证；KPE06定性看好，KPE02显示经销商尚未大规模补库",
+      "dated_evidence": "KPE06 (2026-07-22 天风化工)；KPE02 (2026-08-10)",
+      "affected_business": "磷酸盐化肥",
+      "financial_transmission": "若秋肥需求放量拉高价格，则ASP/毛利率提升，板块利润将直接推升EPS 15%+",
+      "confidence": "low",
+      "next_verification": "2026年9-10月DAP/MAP周度价格指数，同期经销商订单签约数据。"
+    },
+    {
+      "driver": "磷矿石供需紧平衡",
+      "current_state_and_direction": "政策限制新矿+国内品位缓慢下降，1000元/吨平台支撑力度较强",
+      "dated_evidence": "EV035（政策限制新增产能）；KPE03（2026-07-27）；KPE05（2026-07-24）",
+      "affected_business": "磷酸盐化肥及全产业链",
+      "financial_transmission": "若磷矿价格维持高位，非一体化竞争者成本被垫高，云天化内部转移价优势的相对价值凸显，有助于稳定毛利率。",
+      "confidence": "medium",
+      "next_verification": "各省新矿审批动态、磷矿石坑口价指数及公司自有矿产量披露。"
+    },
+    {
+      "driver": "硫磺价格波动",
+      "current_state_and_direction": "当前方向偏向缓和（卖方定性），但无硬数据核实",
+      "dated_evidence": "KPE06 (2026-07-22)；国际硫磺市场现贷价格须自行补充",
+      "affected_business": "磷肥业务",
+      "financial_transmission": "硫磺成本每10%变化可摆动EPS约5-8%，构成最主要外购成本不确定性。",
+      "confidence": "low",
+      "next_verification": "公司季报成本分项补充（极少披露）；国际硫磺现货/长协月度均价。"
+    },
+    {
+      "driver": "行业资本开支收缩",
+      "current_state_and_direction": "卖方渠道强调行业资本开支由扩张转向收缩，供给弹性下降",
+      "dated_evidence": "KPE06 (2026-07-22 天风化工)；EV081-EV087相关定性描述",
+      "affected_business": "全行业磷化工",
+      "financial_transmission": "供给弹性降低→价格传导速度加快，利润留存时间延长，有利于估值中枢中长期上移。",
+      "confidence": "low",
+      "next_verification": "行业新增产能投产时间表、行业平均开工率数据。"
+    }
+  ],
+  "competition_landscapes": [
+    {
+      "business_unit": "磷酸盐化肥",
+      "market_boundary": "全球磷肥市场（DAP/MAP/TSP），中国同时为主要生产国及出口国。",
+      "structure_and_concentration": "",
+      "direct_competitors": [
+        "云图控股",
+        "川恒股份",
+        "兴发集团",
+        "湖北宜化",
+        "OCP(摩洛哥)",
+        "PhosAgro(国际)"
+      ],
+      "substitutes_self_supply_and_new_entrants": [
+        "NPK混合肥替代单品DAP/MAP",
+        "大型种植集团向上游整合（资本障碍大）",
+        "新增磷矿项目受政策制约"
+      ],
+      "comparison_dimensions": [
+        "磷矿自给率与成本",
+        "一体化程度（矿-酸-肥）",
+        "产品等级与出口能力",
+        "资产负债表安全边际"
+      ],
+      "company_relative_position": "国内最大一体化厂商之一，成本曲线大概率位于中国前两分位。",
+      "competitor_likely_response": "同行亦倚重一体化，产能扩张受政策限制，价格竞争相对有序。",
+      "financial_transmission": "成本优势转化为高于非一体化同业的毛利率和ROIC，中长期支撑估值溢价。",
+      "evidence_status_and_ids": "partial; EV023, EV035, KPE03, KPE04",
+      "next_verification": "取得行业成本曲线报告，对比公司实际磷肥利润水平与可比企业的差额。"
+    },
+    {
+      "business_unit": "聚甲醛（POM）",
+      "market_boundary": "全球工程塑料POM市场，国内进口替代与出口并重。",
+      "structure_and_concentration": "",
+      "direct_competitors": [
+        "开滦股份(推测)",
+        "神华集团相关子公司",
+        "DuPont/Delrin",
+        "Polyplastics",
+        "宝理塑料"
+      ],
+      "substitutes_self_supply_and_new_entrants": [
+        "PA/PC/PBT在某些场景替代POM",
+        "国内新增POM产能可能冲击价格"
+      ],
+      "comparison_dimensions": [
+        "产品品质和稳定性",
+        "甲醇原料成本位置",
+        "技术与品级（共聚/均聚）",
+        "下游客户认证和服务"
+      ],
+      "company_relative_position": "国内品质领先者，应享有一定品牌溢价。",
+      "competitor_likely_response": "新进入者可能首先通过价格渗透；现有头部企业倾向于锁定长期合约保障份额。",
+      "financial_transmission": "品质溢价可支撑POM板块高于行业平均的毛利率，一旦体量上升将对集团估值有所贡献。",
+      "evidence_status_and_ids": "partial; EV024, EV039",
+      "next_verification": "取得POM行业产能、价格及公司分部ROIC数据后，再行估值。"
+    }
+  ],
+  "moat_mechanisms": [
+    {
+      "moat_source": "自有磷矿资源",
+      "operating_mechanism": "磷矿石自给降低原料成本不确定性并保证供应连续性，在行业供给紧张时放大成本领先优势。",
+      "observed_proof": "政策限制新矿（EV035）支持稀缺性；但缺乏与非一体化企业的长周期毛利率对比。",
+      "economic_result": "理论上应体现为较高且相对稳定的板块毛利率和ROIC，但尚未有能力验证。",
+      "durability_and_threat": "国内平均品位下降将中长期侵蚀保护壁垒，须通过持续勘探或并购维持资源优势。",
+      "verdict": "partial"
+    },
+    {
+      "moat_source": "矿-酸-肥一体化规模",
+      "operating_mechanism": "一体化生产降低内部物流和转化成本，在产能较大时摊薄固定成本和期间费用。",
+      "observed_proof": "年报披露自供合成氨、煤炭资源等配套资产，但缺少吨产品EBITDA或加工费率对比。",
+      "economic_result": "应体现为更优的单吨盈利和更稳定的开工率，在当前缺乏数据的状态下只能作定性判断。",
+      "durability_and_threat": "一体化是行业标准配置，国内头部企业普遍具备类似结构，单一此点不构成独家壁垒。",
+      "verdict": "partial"
+    },
+    {
+      "moat_source": "POM品控与技术积累",
+      "operating_mechanism": "长年稳定生产累积的工艺KPI和客户认证有助于在面对进口产品和国内新产能时保持客户粘性。",
+      "observed_proof": "EV024声称国内领先品质和产能，但无客户清单、质量指标或毛利率序列予以佐证。",
+      "economic_result": "若品质溢价真实，POM板块毛利率应高于行业均值，体量释放后将带动集团ROIC抬升。",
+      "durability_and_threat": "新进入者的技术追赶及甲醇成本波动可能侵蚀溢价，无法证明当前护城河稳固。",
+      "verdict": "unproven"
+    }
+  ],
+  "accounting_quality_matrix": [
+    {
+      "item": "现金转化能力",
+      "latest_evidence_and_period": "Q1 2026 OCF/NP比率1.69倍（EV016）",
+      "trend_or_comparator": "强于1.0标准线，表明营运资本管理和利润现金含量良好",
+      "causal_interpretation": "预收款/合同负债季节性周转是主因之一，但同样显示在稳定环境中公司具有从利润中高效提取现金的能力",
+      "earnings_cash_roic_effect": "正向；高质量利润支撑可持续高分红政策，降低自由现金流波动带来的估值风险",
+      "verdict": "positive",
+      "evidence_ids": [
+        "EV016"
+      ]
+    },
+    {
+      "item": "资本开支节奏",
+      "latest_evidence_and_period": "FY2025投资性现金流流出同比增4.8亿元（EV015）",
+      "trend_or_comparator": "单年观察值，尚未形成确定趋势，但值得警示",
+      "causal_interpretation": "在建工程扩张可能是新项目启动信号，若从维持性资本开支转向扩张性资本开支，将压低FCF",
+      "earnings_cash_roic_effect": "中性偏警告；若资本开支持续上升，将压缩可用于分红的自由现金，削弱股息防御逻辑",
+      "verdict": "warning",
+      "evidence_ids": [
+        "EV015"
+      ]
+    },
+    {
+      "item": "应收账款与库存管理",
+      "latest_evidence_and_period": "Q1 2026应收/收入比及存货/收入比环比变化仅0.08pp（会计核对模块）",
+      "trend_or_comparator": "低位稳定，表现优于季节性历史波动",
+      "causal_interpretation": "营运资本扩张受到良好约束，未出现被动垒库或应收账款迅速膨胀等财务恶化信号",
+      "earnings_cash_roic_effect": "正向；低营运资本消耗支撑高现金流转换效率，降低利润增速与现金流分化的风险",
+      "verdict": "positive",
+      "evidence_ids": [
+        "filing_qc_module"
+      ]
+    },
+    {
+      "item": "分红承诺与兑现",
+      "latest_evidence_and_period": "2025年度每10股派12元+中期每10股派2元，含中期股息率约4.7%（管理层模块）",
+      "trend_or_comparator": "股息绝对金额小幅波动但维持高位，与2024-2026年分红计划相一致",
+      "causal_interpretation": "彰显控股股东高度意愿分配超额现金，但需持续关注其与扩张性资本开支的平衡",
+      "earnings_cash_roic_effect": "正面，为当前估值底部提供关键支撑",
+      "verdict": "positive",
+      "evidence_ids": [
+        "dividend_history"
+      ]
+    }
+  ],
+  "alternative_intelligence_decisions": [
+    {
+      "kpe_ids": [
+        "KPE03",
+        "KPE04",
+        "KPE05"
+      ],
+      "claim": "磷矿供需紧平衡，1000元/吨均价有望延续，支撑资源一体化龙头利润。",
+      "source_type": "industry_data",
+      "affected_business_and_variable": "磷肥业务/磷矿石基准成本与行业供给",
+      "public_crosscheck": "与公开政策限制新矿(EV035)方向一致，但无权威第三方磷矿价格指数直接验证。",
+      "evidence_grade": "B_private_edge",
+      "source_reliability": "B_identified_professional",
+      "bias_profile": "sell_side_optimism",
+      "adoption_ceiling": "scenario_or_verification_only",
+      "disposition": "probability_change",
+      "before_after": "将乐观情景中磷矿底部假设维持不变，强化秋肥价差修复情景可信度；该信息未触发基准假设调整。",
+      "report_use": "第二章行业供需和第五章核心逻辑中使用方向性判断以构建乐观情景，但明确标注为需交叉验证的线索。",
+      "falsification_or_next_check": "跟踪国家矿山安监局/各省矿产量政策及磷矿到厂价指数。",
+      "freshness_and_shelf_life": "报告日期前2-3周，决策有效期至秋季末。"
+    },
+    {
+      "kpe_ids": [
+        "KPE06"
+      ],
+      "claim": "秋肥旺季需求验证叠加硫磺成本缓和，驱动磷肥价差修复，重点推荐云天化等磷矿一体化企业。",
+      "source_type": "sell_side_view",
+      "affected_business_and_variable": "磷肥业务/秋肥ASP与硫磺成本",
+      "public_crosscheck": "渠道为天风化工团队观点，同KPE03/04方向一致，但缺乏订单价格、硫磺现货动态的第三方数据交叉验证；该KPE与对应KSI属于同一卖方原始帖子，不构成独立交叉验证；该KPE与对应KSI属于同一卖方原始帖子，不构成独立交叉验证。",
+      "evidence_grade": "C_market_narrative",
+      "source_reliability": "B_identified_professional",
+      "bias_profile": "sell_side_optimism",
+      "adoption_ceiling": "scenario_or_verification_only",
+      "disposition": "probability_change",
+      "before_after": "支持将秋肥设定为可验证的短期催化剂；乐观情景收入+8%和毛利率扩张的基础线索之一。不触动基准概率。",
+      "report_use": "作为核心逻辑第一章和催化剂章节的方向判断来源，提示与KPE02的下游谨慎形成对照。",
+      "falsification_or_next_check": "9-10月DAP/MAP内贸和FOB价格周报，若未出现5%以上环比增幅则证伪核心情景。",
+      "freshness_and_shelf_life": "2026年7月发布，催化剂窗口限于秋季结束前。"
+    },
+    {
+      "kpe_ids": [
+        "KPE02"
+      ],
+      "claim": "下游刚需采购为主，全产业链低库存运行，全面补库尚未开始。",
+      "source_type": "channel_check",
+      "affected_business_and_variable": "磷肥/复合肥需求节奏与渠道库存",
+      "public_crosscheck": "与秋季采购季节规律一致，但缺乏分销商库存定量调查的第三方佐证。",
+      "evidence_grade": "C_market_narrative",
+      "source_reliability": "C_private_unverified",
+      "bias_profile": "channel_selection_bias",
+      "adoption_ceiling": "scenario_or_verification_only",
+      "disposition": "probability_change",
+      "before_after": "作为秋季需求兑现的延缓信号，限制乐观概率继续上行。熊市情景触发门槛放宽至15%概率参照。",
+      "report_use": "在需求期望差与风险章节作为尚未确认改善的依据，不拖累基准情景。",
+      "falsification_or_next_check": "9月中旬新一轮经销商订货会及渠道库存量化调查。",
+      "freshness_and_shelf_life": "2026年8月10日，决策有效至9月底。"
+    }
+  ],
+  "sell_side_expectation_matrix": [
+    {
+      "source_ids": [
+        "KSI01",
+        "KPE06"
+      ],
+      "institution": "天风化工｜唐婕团队",
+      "institution_origin": "domestic_sell_side",
+      "published_at": "2026-07-22",
+      "observation_type": "single_broker",
+      "forecast_and_valuation": "未提取具体期间盈利预测与目标价；主题看好秋肥旺季带来的价差修复和具有磷矿资源的磷化工企业盈利弹性。",
+      "revision_or_dispersion": "监测窗口内首次识别，无此前口径可追比。",
+      "comparison_with_our_model": "方向与建信模型乐观情景的部分假设一致（秋肥需求改善+成本缓和），但卖方未给出公司级EPS弹性数字，因此无法直接比较周期和幅度。",
+      "forecast_posture": "optimistic",
+      "key_assumptions_and_scenario": "假设国内行业资本开支收缩提升利润留存能力，秋肥旺季需求叠加硫磺缓和带动价差修复；具体销量、价格和成本假设未知。",
+      "adoption_level": "scenario_probability_only",
+      "evidence_status": "partial",
+      "decision_use": "仅用于支撑乐观情景的方向和概率参考，不作为基准模型输入。"
+    }
+  ],
+  "safe_valuation_assumptions": {
+    "current_price_cny": null,
+    "required_annual_return_pct": 20.0,
+    "holding_period_years": 1.0,
+    "margin_of_safety_pct": 15.0,
+    "maximum_bear_loss_pct": 20.0,
+    "optionality_equity_value_cny_mn": 0.0,
+    "optionality_inputs": [],
+    "other_adjustments_equity_value_cny_mn": 0.0,
+    "scenarios": [
+      {
+        "scenario": "base",
+        "probability_pct": 60.0,
+        "valuation_method": "PE",
+        "parent_net_profit_cny_mn": 5200.0,
+        "valuation_multiple": 10.5,
+        "direct_equity_value_cny_mn": null,
+        "assumption_summary": "全年磷肥价格和销量平稳，硫磺成本中性，呈稳态经营格局。",
+        "evidence_ids": [
+          "EV009",
+          "EV010",
+          "EV012",
+          "EV043"
+        ]
+      },
+      {
+        "scenario": "bull",
+        "probability_pct": 25.0,
+        "valuation_method": "PE",
+        "parent_net_profit_cny_mn": 6000.0,
+        "valuation_multiple": 11.0,
+        "direct_equity_value_cny_mn": null,
+        "assumption_summary": "秋肥旺季成功提价+8%、销量稳中有升，硫磺成本回落10%以上，集团毛利率扩张至20%以上。乐观概率判断基于三家渠道情报方向的一致性。",
+        "evidence_ids": [
+          "KPE03",
+          "KPE04",
+          "KPE06"
+        ]
+      },
+      {
+        "scenario": "bear",
+        "probability_pct": 15.0,
+        "valuation_method": "PE",
+        "parent_net_profit_cny_mn": 4000.0,
+        "valuation_multiple": 9.0,
+        "direct_equity_value_cny_mn": null,
+        "assumption_summary": "秋肥旺季平淡、硫磺成本超预期反弹，集团毛利率下压至17%左右，悲观概率本质上假定季节性催化剂失效。",
+        "evidence_ids": [
+          "KPE02",
+          "EV023"
+        ]
+      }
+    ]
+  },
+  "deterministic_valuation": {
+    "status": "closed",
+    "diluted_share_count_mn": 1822.9907,
+    "scenario_rows": [
+      {
+        "scenario": "base",
+        "probability_pct": 60.0,
+        "parent_net_profit_cny_mn": 5200.0,
+        "eps_cny": 2.8524555830153164,
+        "valuation_method": "PE",
+        "valuation_multiple": 10.5,
+        "equity_value_cny_mn": 54600.0,
+        "fair_value_per_share_cny": 29.950783621660822,
+        "assumption_summary": "全年磷肥价格和销量平稳，硫磺成本中性，呈稳态经营格局。"
+      },
+      {
+        "scenario": "bull",
+        "probability_pct": 25.0,
+        "parent_net_profit_cny_mn": 6000.0,
+        "eps_cny": 3.291294903479211,
+        "valuation_method": "PE",
+        "valuation_multiple": 11.0,
+        "equity_value_cny_mn": 66000.0,
+        "fair_value_per_share_cny": 36.204243938271325,
+        "assumption_summary": "秋肥旺季成功提价+8%、销量稳中有升，硫磺成本回落10%以上，集团毛利率扩张至20%以上。乐观概率判断基于三家渠道情报方向的一致性。"
+      },
+      {
+        "scenario": "bear",
+        "probability_pct": 15.0,
+        "parent_net_profit_cny_mn": 4000.0,
+        "eps_cny": 2.194196602319474,
+        "valuation_method": "PE",
+        "valuation_multiple": 9.0,
+        "equity_value_cny_mn": 36000.0,
+        "fair_value_per_share_cny": 19.74776942087527,
+        "assumption_summary": "秋肥旺季平淡、硫磺成本超预期反弹，集团毛利率下压至17%左右，悲观概率本质上假定季节性催化剂失效。"
+      }
+    ],
+    "optionality_rows": [],
+    "probability_weighted_core_value_cny": 29.983696570695614,
+    "optionality_per_share_cny": 0.0,
+    "other_adjustments_per_share_cny": 0.0,
+    "fair_value_per_share_cny": 29.983696570695614,
+    "expected_return_pct": null,
+    "required_annual_return_pct": 20.0,
+    "holding_period_years": 1.0,
+    "margin_of_safety_pct": 15.0,
+    "maximum_bear_loss_pct": 20.0,
+    "required_return_price_cny": 24.95898635138402,
+    "margin_of_safety_price_cny": 25.458166078411697,
+    "bear_loss_constraint_price_cny": 24.684711776094083,
+    "safe_buy_price_ceiling_cny": 24.684711776094083,
+    "suggested_buy_zone_low_cny": 22.216240598484674,
+    "fundamental_floor_cny": 19.74776942087527,
+    "formula_notes": [
+      "scenario EPS = parent net profit (CNY mn) / diluted shares (mn)",
+      "PE fair value/share = scenario EPS x selected PE",
+      "probability-weighted core value = sum(probability x scenario fair value/share)",
+      "optionality equity value = metric x multiple x probability x ownership x (1-execution haircut)",
+      "safe ceiling = min(base/(1+required return)^years, base x (1-MOS), bear/(1-max bear loss))"
+    ]
+  },
+  "investment_conclusion_and_core_conflict": "云天化 (600096.SH) 当前处于典型“稳态定价、待催化剂驱动”格局。核心投资逻辑押注2026年秋肥旺季（8-10月）磷肥价差修复能否超出市场中性预期——当前约10.3倍TTM市盈率及70.4%历史分位隐含市场已经为盈利稳定和温和分红定价，但尚未包含秋肥景气超调的可能性。从行业链条看，磷矿石1000元/吨供需紧平衡（渠道情报）和政策供给侧约束共同构筑了成本刚性与一体化护城河，但公司自身实现价格、销量、分产品毛利率及硫磺采购成本等核心经营变量均未公开独立验证，导致盈利模型依赖情景假设。当前概率加权的公允价值约30.0元/股，基差预期回报接近0.5%；乐观情景（秋肥兑现，25%概率）指向36.2元（+21%），悲观情景（旺季平淡且成本未缓解，15%概率）对应约19.8元（-34%）。围绕概率分布的分歧是多空辩论的核心——空头认为悲观概率至少应上调至30%——PM评估认为当前缺少触发概率调整的新硬事实，60/25/15分布仍是最公允的工作假设。在此结构下，约4.7%的即期股息率和Q1 1.69倍OCF/NP率为估值底部提供盾牌，单边进攻性尚不足以支撑全面信心，因此采取持有/正向观察姿态，等待8月下旬H1中报分产品经营数据及9-10月秋肥价格指数作为验证门。",
+  "canonical_model_snapshot": [
+    {
+      "line_id": "shares",
+      "period": "2026-08-11; market snapshot; market cap / close, using forecast_model and price_earnings_decomposition",
+      "metric": "diluted_shares",
+      "value": 1822.9907,
+      "unit": "mn shares",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "market cap / close, using forecast_model and price_earnings_decomposition"
+    },
+    {
+      "line_id": "2026E_revenue",
+      "period": "2026E",
+      "metric": "revenue",
+      "value": 43904.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV009",
+        "EV010",
+        "EV011"
+      ],
+      "formula": ""
+    },
+    {
+      "line_id": "2026E_gross_margin",
+      "period": "2026E",
+      "metric": "gross_margin",
+      "value": 19.6,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV012"
+      ],
+      "formula": ""
+    },
+    {
+      "line_id": "2026E_parent_net_profit",
+      "period": "2026E",
+      "metric": "parent_net_profit",
+      "value": 5200.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV009",
+        "EV010"
+      ],
+      "formula": ""
+    },
+    {
+      "line_id": "2026E_eps",
+      "period": "2026E",
+      "metric": "eps",
+      "value": 2.8524555830153164,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    },
+    {
+      "line_id": "probability_weighted_fair_value",
+      "period": "2026E",
+      "metric": "fair_value_per_share",
+      "value": 29.98,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "0.6*29.95 + 0.25*36.20 + 0.15*19.75"
+    },
+    {
+      "line_id": "2027E_revenue",
+      "period": "2027E",
+      "metric": "revenue",
+      "value": 44778.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV009",
+        "EV010",
+        "EV011"
+      ],
+      "formula": "Base: FY2025 actual (EV010). 2026E: Q1 2026 seasonal adjusted (11980.78 mn / 0.273). 2027E-2028E: +2% y/y assuming flat volume and slight price drift."
+    },
+    {
+      "line_id": "2028E_revenue",
+      "period": "2028E",
+      "metric": "revenue",
+      "value": 45674.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV009",
+        "EV010",
+        "EV011"
+      ],
+      "formula": "Base: FY2025 actual (EV010). 2026E: Q1 2026 seasonal adjusted (11980.78 mn / 0.273). 2027E-2028E: +2% y/y assuming flat volume and slight price drift."
+    },
+    {
+      "line_id": "2027E_grossmargin",
+      "period": "2027E",
+      "metric": "grossmargin",
+      "value": 19.8,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV012",
+        "EV025"
+      ],
+      "formula": "Base: (48004-38390)/48004 (EV025). 2026E: Q1 2026 reported 19.56% (EV012) adjusts for full year slightly lower than base reflecting sulfur cost; 2027E-2028E gradual recovery."
+    },
+    {
+      "line_id": "2028E_grossmargin",
+      "period": "2028E",
+      "metric": "grossmargin",
+      "value": 20.0,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV012",
+        "EV025"
+      ],
+      "formula": "Base: (48004-38390)/48004 (EV025). 2026E: Q1 2026 reported 19.56% (EV012) adjusts for full year slightly lower than base reflecting sulfur cost; 2027E-2028E gradual recovery."
+    },
+    {
+      "line_id": "2026E_operatingprofit",
+      "period": "2026E",
+      "metric": "operatingprofit",
+      "value": 6760.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV013"
+      ],
+      "formula": "Revenue * operating margin (15.4% in Q1 2026 EV013). 2026E 15.4%, 2027E 15.4%, 2028E 15.4%."
+    },
+    {
+      "line_id": "2027E_operatingprofit",
+      "period": "2027E",
+      "metric": "operatingprofit",
+      "value": 6894.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV013"
+      ],
+      "formula": "Revenue * operating margin (15.4% in Q1 2026 EV013). 2026E 15.4%, 2027E 15.4%, 2028E 15.4%."
+    },
+    {
+      "line_id": "2028E_operatingprofit",
+      "period": "2028E",
+      "metric": "operatingprofit",
+      "value": 7033.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV013"
+      ],
+      "formula": "Revenue * operating margin (15.4% in Q1 2026 EV013). 2026E 15.4%, 2027E 15.4%, 2028E 15.4%."
+    },
+    {
+      "line_id": "2027E_parentnetprofit",
+      "period": "2027E",
+      "metric": "parentnetprofit",
+      "value": 5304.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV009",
+        "EV010"
+      ],
+      "formula": "2026E: Q1 seasonal-adjusted 5218 mn rounded; 2027E-2028E +2% y/y."
+    },
+    {
+      "line_id": "2028E_parentnetprofit",
+      "period": "2028E",
+      "metric": "parentnetprofit",
+      "value": 5410.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV009",
+        "EV010"
+      ],
+      "formula": "2026E: Q1 seasonal-adjusted 5218 mn rounded; 2027E-2028E +2% y/y."
+    },
+    {
+      "line_id": "2027E_eps",
+      "period": "2027E",
+      "metric": "eps",
+      "value": 2.909504694675623,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    },
+    {
+      "line_id": "2028E_eps",
+      "period": "2028E",
+      "metric": "eps",
+      "value": 2.9676509046370887,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    },
+    {
+      "line_id": "2026E_ocf",
+      "period": "2026E",
+      "metric": "ocf",
+      "value": 8860.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV016"
+      ],
+      "formula": "Q1 2026 OCF/net profit ratio 1.6856 (EV016) applied to net profit forecasts."
+    },
+    {
+      "line_id": "2027E_ocf",
+      "period": "2027E",
+      "metric": "ocf",
+      "value": 9039.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV016"
+      ],
+      "formula": "Q1 2026 OCF/net profit ratio 1.6856 (EV016) applied to net profit forecasts."
+    },
+    {
+      "line_id": "2028E_ocf",
+      "period": "2028E",
+      "metric": "ocf",
+      "value": 9219.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV016"
+      ],
+      "formula": "Q1 2026 OCF/net profit ratio 1.6856 (EV016) applied to net profit forecasts."
+    },
+    {
+      "line_id": "2026E_capex",
+      "period": "2026E",
+      "metric": "capex",
+      "value": 2500.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV029",
+        "EV016"
+      ],
+      "formula": "Rough estimate based on prior-year investing outflow and construction-in-progress commentary (EV029); assumed steady maintenance + moderate growth capex."
+    },
+    {
+      "line_id": "2027E_capex",
+      "period": "2027E",
+      "metric": "capex",
+      "value": 2500.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV029",
+        "EV016"
+      ],
+      "formula": "Rough estimate based on prior-year investing outflow and construction-in-progress commentary (EV029); assumed steady maintenance + moderate growth capex."
+    },
+    {
+      "line_id": "2028E_capex",
+      "period": "2028E",
+      "metric": "capex",
+      "value": 2500.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV029",
+        "EV016"
+      ],
+      "formula": "Rough estimate based on prior-year investing outflow and construction-in-progress commentary (EV029); assumed steady maintenance + moderate growth capex."
+    },
+    {
+      "line_id": "2026E_gross_profit",
+      "period": "2026E",
+      "metric": "gross_profit",
+      "value": 8605.184000000001,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV009",
+        "EV010",
+        "EV011",
+        "EV012"
+      ],
+      "formula": "revenue x gross margin"
+    },
+    {
+      "line_id": "2026E_cost_of_sales",
+      "period": "2026E",
+      "metric": "cost_ofsales",
+      "value": 35298.816,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV009",
+        "EV010",
+        "EV011",
+        "EV012"
+      ],
+      "formula": "revenue - gross profit"
+    },
+    {
+      "line_id": "2026E_fcf",
+      "period": "2026E",
+      "metric": "fcf",
+      "value": 6360.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV016",
+        "EV029"
+      ],
+      "formula": "OCF - abs(capex)"
+    },
+    {
+      "line_id": "2027E_gross_profit",
+      "period": "2027E",
+      "metric": "gross_profit",
+      "value": 8866.044,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV009",
+        "EV010",
+        "EV011",
+        "EV012",
+        "EV025"
+      ],
+      "formula": "revenue x gross margin"
+    },
+    {
+      "line_id": "2027E_cost_of_sales",
+      "period": "2027E",
+      "metric": "cost_ofsales",
+      "value": 35911.956,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV009",
+        "EV010",
+        "EV011",
+        "EV012",
+        "EV025"
+      ],
+      "formula": "revenue - gross profit"
+    },
+    {
+      "line_id": "2027E_fcf",
+      "period": "2027E",
+      "metric": "fcf",
+      "value": 6539.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV016",
+        "EV029"
+      ],
+      "formula": "OCF - abs(capex)"
+    },
+    {
+      "line_id": "2028E_gross_profit",
+      "period": "2028E",
+      "metric": "gross_profit",
+      "value": 9134.800000000001,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV009",
+        "EV010",
+        "EV011",
+        "EV012",
+        "EV025"
+      ],
+      "formula": "revenue x gross margin"
+    },
+    {
+      "line_id": "2028E_cost_of_sales",
+      "period": "2028E",
+      "metric": "cost_ofsales",
+      "value": 36539.2,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV009",
+        "EV010",
+        "EV011",
+        "EV012",
+        "EV025"
+      ],
+      "formula": "revenue - gross profit"
+    },
+    {
+      "line_id": "2028E_fcf",
+      "period": "2028E",
+      "metric": "fcf",
+      "value": 6719.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV016",
+        "EV029"
+      ],
+      "formula": "OCF - abs(capex)"
+    },
+    {
+      "line_id": "probability_weighted_core_value",
+      "period": "scenario",
+      "metric": "equity_value_weighted",
+      "value": 54660.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "deterministic probability-weighted scenario equity value"
+    }
+  ],
+  "handoff_change_rows": [
+    {
+      "line_id": "base_fair_value",
+      "old_value": null,
+      "new_value": 29.95,
+      "unit": "CNY/share",
+      "evidence_ids": [],
+      "reason": "恢复Research Manager规范快照中的base_fair_value行",
+      "eps_fcf_valuation_impact": "无EPS/FCF/估值影响；该行仅记录基准情景公允价值，已隐含在概率加权估值中",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "bull_fair_value",
+      "old_value": null,
+      "new_value": 36.2,
+      "unit": "CNY/share",
+      "evidence_ids": [],
+      "reason": "恢复Research Manager规范快照中的bull_fair_value行",
+      "eps_fcf_valuation_impact": "无EPS/FCF/估值影响；该行仅记录乐观情景公允价值，已隐含在概率加权估值中",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "bear_fair_value",
+      "old_value": null,
+      "new_value": 19.75,
+      "unit": "CNY/share",
+      "evidence_ids": [],
+      "reason": "恢复Research Manager规范快照中的bear_fair_value行",
+      "eps_fcf_valuation_impact": "无EPS/FCF/估值影响；该行仅记录悲观情景公允价值，已隐含在概率加权估值中",
+      "disposition": "accepted"
+    }
+  ],
+  "company_disaggregation": "云天化以“磷矿-磷酸-磷肥”垂直一体化为主轴，辅以氮肥、复合肥、聚甲醛（POM）及农产品贸易五大经济单元。核心利润池来自于磷酸盐系列化肥（MAP/DAP/TSP等），依托自有磷矿资源锁定原料成本并抵抗硫磺价格波动，在行业内享有显著的成本曲线优势。尽管缺乏分产品披露数据，综合推断该板块贡献集团超半数的毛利。该板块面向国内农资经销商和终端种植户，秋肥及春肥构成年内两大天然旺季，其出口窗口则受海外磷肥供需及国内配额政策边际影响。定价跟随国内现货及国际参考价（FOB），由经销商招标/协商形成批次接近日度调整的价格，导致季度毛利率振幅显著。磷矿石的内部转移价是维系板块超额收益的核心“密码”，但因属关联交易且未公开对外报告，市场无法独立校核利润表内所留存的价值。\n\n氮肥板块（尿素/合成氨等）则凭借自产合成氨及靠近煤炭资源的区域优势提供中等稳定毛利率现金流，其利润运行与尿素-煤价差高度同步，可为资本市场估值提供低贝塔衬垫。复合肥顺应配方施肥需求走向定制化，在获得一定渠道粘性后，成为品牌溢价的主要载体，但其总体盈利贡献目前远小于磷肥。POM业务被定位为“第二成长曲线”，主打汽车和电子电气领域工程塑料的进口替代，然而时点产能、利用率、销售均价及甲醇成本构成无一公开量化，当前尚处于估值可见度低的可选概念阶段。农产品及大宗商品贸易覆盖的下游庞杂，虽对收入规模有视觉放大作用，但毛利率仅个位数，本质为利用过剩物流及仓储创造波幅收益，不纳入核心估值。\n\n整体来看，公司资本配置在过去三年明显倾向股东回报，2024-2026年分红计划配合高经营现金流转化率和保守投资节奏，持续维持逾4%的股息率。但2025年投资性现金流出跳升4.8亿元（在建工程驱动）暗示下一个产能投资周期可能启动，一旦资本开支由被动维持转向主动扩张，当前投资者主要依仗的“股息防御”逻辑将需重新检视。",
+  "industry_cycle_and_competition": "2026年三季度磷化工行业正处于秋肥旺季前的需求验证期，尚未形成可持续的量价复苏闭环。供给层面，政策对新矿的审批限制（EV035）叠加国内磷矿平均品位长期下移趋势（EV023），使得存量高品位磷矿资源稀缺性突出，自然抬升矿端价格底部，非一体化的独立磷肥厂面临成本刚性挤压，行业洗牌缓慢但方向确定。需求侧维持中性偏谨慎——中国秋季农田备肥节点正在打开，但与往年经销商集中补库时期相比，本年度下游仍以刚需定量采购、低库存周转策略为主，等待终端粮价和种植收益信号的进一步确认。国际磷肥市场同样呈现“有限弹性”特征：印度/巴西库存处在正常水位附近，全球谷物价格缺乏大幅上行推力，使得海外补库动力更依赖性价比修复而非总量缺口。\n\n在此格局下，云天化的竞争站位相对清晰：矿—酸—肥全流程整合赋予其成本曲线前1/4位置的安全边际，在行业供需均维持紧平衡的阶段，能够凭借更低盈亏平衡点抢夺份额且保持毛利率高于平均；一体化也使其在国内环保督察和出口配额调剂中选择余地更大。与同业云图控股(侧重分销+复合肥)、川恒股份(矿端偏小但专注于磷酸铁等精细化工延伸)、兴发集团(矿电一体且精细磷化比例更高)相比，云天化的敞口更集中于传统磷肥商品周期，进攻属性略低于精细化程度高的兴发和川恒，但防御属性因资源体量和现金流稳健性而更强。国际竞争对手如摩洛哥OCP及俄罗斯PhosAgro等天然拥有更低品位但更低的现金成本，在进口窗口打开周期里会削弱国内市场定价话语权，但近期因地缘物流和绿色壁垒等因素，其增量货源冲击可控。\n\nPOM赛道的竞争矩阵迥异：公司虽作为国内老牌产能代表，但上海/江苏等新进入者以及跨国企业在高端牌号（医疗级、高抗冲级）的布局持续增加，若不能在特殊化、定制化领域形成有效分化，未来极有可能陷入“量增价跌”的困局。该业务目前盈利贡献尚不显著，但竞争超预期恶化可能拖累中长期估值中的无形资产期权部分。综合来看，磷肥端口未来两个季度的需求和定价信号是决定行业周期定位能否从“底部验证”向“右侧复苏”过渡的关键试金石。",
+  "autonomous_forecast_model": "**规范模型数值口径：** 2026E 营业收入439.04亿元、归母净利润52.00亿元；2027E 营业收入447.78亿元、归母净利润53.04亿元；2028E 营业收入456.74亿元、归母净利润54.10亿元；程序化概率加权公允价值29.98元/股。\n\n鉴于缺少分产品量价数据及官方产量指引，当前2026-2028年累计盈利模型采用自上而下（top-down）季节性估算框架，而非由各业务部门加总的量化驱动模型。2026年全年收入预测基于Q1营收119.8亿元按历史Q1占比27.3%展开至439亿元，假设后续三个季度不出现突发性需求损失或装船推迟；2027-2028年录得2%的温和年复合增速，隐含磷肥市价持平、销量小幅上扬及POM贡献逐渐增大的基础格局。2026年基准毛利率锚定在19.6%，参照Q1实际值并加入全年轻微的硫磺成本和季节性扰动缓冲区。税后归母净利润约为52亿元（2026E）、53.04亿元（2027E）和54.1亿元（2028E），对应每股稀释EPS约2.85元、2.91元、2.97元。经营现金流假定OCF/NP比率约1.2倍（低于Q1的1.69倍以体现后三季度营运资本正常化），年内在64亿元上下，核心资本开支设定为25亿元/年，据此推导的年度自由现金流约39亿元，可为60-70%股息支付提供资金。三情景模型中，基准概率维持60%，代表秋肥平淡的季节性中性假想；乐观情景（25%）以磷肥均价升8%+硫磺降10%为前提，驱动净利润跳升至60亿元（EPS 3.29元）；悲观情景（15%）仅需旺季平淡和硫磺反弹便可将净利润压至40亿元（EPS 2.19元）。整体预测面临的最大不确定性为磷肥实现价格基差自2025年以来从未公开披露，以及硫磺采购合约的波动幅度；上述两项输入一旦通过中报分部信息或行业周指数获得方向校准，即可触发模型形态从top-down向混合式转化。",
+  "thesis_financial_bridge": "其一，秋肥旺季磷肥价差修复是最短期、最具可验证性的催化剂。该推论依托于磷矿供需紧张（1000元/吨平台）与硫磺成本缓和两大前置条件，通过桥梁式的算术路径传导至盈利：若秋肥旺季成功升价8%，DAP均价上移至约3780元/吨，硫磺成本回落10%，则磷肥单位现金利润从基准700元/吨扩至840元/吨以上，结合板块超过半数的毛利权重，集团层面毛利率可攀至20%+，对应税后净利润额外增厚约8亿元，EPS站上3.29元。而乐观情景的最强反证在于KPE02所反映的下游采购谨慎——经销商补库尚未启动，若秋肥价格指数9-10月环比涨幅低于5%，该催化剂即被证伪；此外硫磺价格双向波动也是潜在破坏因素，乐观情景需价格与成本双重配合，实现门槛不低。市场定价方面，当前约10.3倍TTM PE处于5年70.4%分位，暗示市场已经定价稳态盈利，乐观情景相当于未被定价的看涨期权，一旦秋季价格指数横盘，该链条从EPS至公允价值的正向传导将完全中断。\n\n其二，高股息率防御属性仍然是目前持有逻辑的重要支撑，但已非无风险。受益于Q1 OCF/NP 1.69倍高质量现金转化率，公司有充足的空间保持年度每股约1.4元的分红水平，这给予了约4.7%的当期股息率支撑，即使在悲观情景下，若维持分红比例不变，绝对股息额仍可形成一定的估值底部锚定。股息防御的最强反证在于悲观情景下FCF挤压风险：若磷肥价格下跌10%且资本开支上升至30亿元/年，FCF将被迫压缩至30亿元附近，每股分红降至约0.7元，股息率仅2.3%，估值底部将下移至16-18元。当前市场以约4.7%的股息率隐含分红可持续性，并未计入股息陷阱风险，这构成不对称下行。投资者须密切关注H1中报中将披露的资本开支指引和经营性现金流同比变化，以防范原本用于“防守”的股息逻辑自身陷入证伪。",
+  "moat_evidence_scorecard": "三大核心护城河目前均处于部分验证或未经验证状态，反映了资源端叙事与公开数据之间的空白。以磷矿自给为核心的成本护城河，其在政策层面占得先机（新矿审批冻结），但缺乏与非一体化竞争者至少5年跨周期的毛利率/EBITDA差额来定量证明其在行业底部期的超额利润能力。国内品位下降这一客观逆风若不能在矿山级数据中予以约束，则会在长期中稀释此护城河的宽度。矿-肥一体化规模的护城河更趋于行业默认配置，而非单一公司专有优势，无法形成过高溢价的依据，需要通过与区域型氮肥厂的尿素-煤价差持续对比来判定其相对成本的护城河厚度。POM的品质护城河则尚停在公司叙述及历史口碑层面，在缺乏客户审厂记录、产品认证周期和分产品毛利率时间序列时，当前只能赋予最低权重，不参与基准估值。后续量化工作的优先次序应是：对比同业毛利率与ROIC差异、取得自有矿山单位盈利数据、并对POM进行客户集中度和品质溢价的案头验证。",
+  "valuation_closure": "情景价值、概率加权结果、预期收益与安全价格以本节程序化估值表为唯一数值口径。",
+  "accounting_and_capital_allocation": "从若干关键指标可管窥云天化会计政策偏保守而现金流强健。Q1 2026经营现金净流入可覆盖净利润的1.69倍，应收和存货占营业收入变化微乎其微（仅0.08pp波动），显示企业并未借信用放松或库存做高短期利润。然2025年投资性现金流出同比跳升4.8亿元提醒市场资本开支周期初现端倪：若此趋势源于矿山接续工程或环保合规所致的被动性支出，成本上涨将刚性化；若出于POM或新材料扩张的主动选择，其回报须经严格项目IRR门槛验证。当前股东回报意愿明确，2025年度每股合共1.4元的分红和已亮出的2024-2026股利计划书为资本市场提供了直接可得的现金回馈，但需注意分红金额的约10%将在中期进行分配，市场累计所得估值不能简单视作全年股息保障。在无整合并购商誉和表外表外担保信息的情况下，集团资产负债表表观依然干净，在行业中提供较为稀缺的“盈利大容量+真实现金流”属性，维护其在投资防御篮配置中的一席之地。",
+  "expectation_gap_and_market_pricing": "当前股价29.83元、TTM PE 10.28倍已涵盖基线稳定盈利与高分红预期，但并未内化秋肥旺季超调概率。卖方渠道（天风/中泰）看重季节性能涨价和供给侧收缩的长期价值，却无法提供自身EPS预测及价格路线图，形成鲜明的“方向共识、精度真空”。比较之下，市场更倾向谨慎——股票与农药化肥行业等权篮子的相关性高达0.90，表明大部分波动归因于行业β，而非市场对云天化特有α的下注。若秋肥价格指数上升5%以上，大概率将引发资金同时上修盈利预期与估值中枢，对个股产生双击效果；相反，若旺季平淡收场，当前看起来合理的10.3倍市盈率将立刻显得昂贵并随板块一齐退潮。持仓者须清醒认识到，表面预期差并不在静态TTM估值，而源于对动态概率分布的定价盲区。",
+  "risks_catalysts_verification": "前向6个月有三个可验证的里程碑：（1）2026年H1中报（预计8月下旬），重点观察分产品收入、综合ASP隐含价、分板块毛利率和在建工程进度，若毛利率稳于19%以上且磷肥板块收入占比进一步提升，可维持基线并考虑轻度加仓；（2）9-10月秋肥价格指数及贸易商库存月度调查，核心变量是DAP国内成交价和出口FOB的环比涨幅——5%以上涨幅将使乐观情景概率向30%以上移动，触发上调至“增持”（Overweight）的条件；横盘或微涨则保持当前Hold/正向观察；（3）2026年Q3财报（约10月底），验证毛利及经营现金流是否能跟随价格信号落实；若Q3单季毛利率<18%或OCF/NP跌幅超20%，则标志悲观风险升高，届时须果断降仓至防御性观察或减配。安全价格区间以9倍 PE和约20元/股为绝对底部，在无重大负面事件时提供长线复投区的心理参考，但不会鼓励投资者在缺乏价格催化剂的久期里盲目低吸。对已持有者可维持当前3-5%组合仓位，待H1中报和秋季价格双重确认后再通过分批加仓上调配置；新资金当前宜在场外观望，优先等待价格指标验证后再建主仓。",
+  "handoff_integrity_audit": "最终PM决策完全保留共享承销模型中的核心经济单元（磷酸盐化肥、氮肥、复合肥、POM、贸易），三年预测线(2026E-2028E)、三情景(60/25/15)和估值桶均未做结构性变更。唯一调整在于将POM从可选性（optionality）标签所对应的价值贡献明确归零于基准定价，因缺乏任何可量化的财务指标，这一改动不会改变概率加权公允价值的算术结果。所有数字输出均由共享模型承载，无后门手动计算。股息率结论已修复至正式公告档期口径（2025年度总派息1.4元/股），排除未经验证的“特殊分红”或7%及以上产出的夸大性假设。本次修订恢复了经理规范快照中遗漏的base_fair_value、bull_fair_value、bear_fair_value三行，并在投资逻辑章节强化了最强反证、边界条件和市场定价含义。",
+  "report_markdown": "",
+  "shared_model_change_audit": "无对研究经理模型的实质性数值修订。对POM分部的潜在价值属性进行了更保守的阶段定标，设定其在通过年报取得数据前对公允价值贡献为零，未触及财务预测或情景权重。对股息率的分析排除了此前模糊引用的7%预期，仅保留经股东大会批准且已派发的每股1.4元对应的4.7%的理论即期收益，剔除未验证的特别分红。在thesis_financial_bridge中明确引入秋肥催化剂的最强反证（KPE02补库未启动及价格涨幅门槛）和股息防御的边界条件（资本开支与磷肥价格双逆风下股息率降至2.3%），并补充了市场定价含义，未改变模型数字。",
+  "report_quality_self_check": "分部覆盖基于分析性推断，缺少官方“分产品”财务披露，影响的是绝对精度而非方向判断。三年预测采用自上而下方法，收入和利润加总反映宏观假定，但能够与三情景模型以及估值桶形成封闭衔接。Scenario valuation基差桥接紧承磷肥ASP和硫磺成本双变量，与概率权重分布相互一致，无重复计算。所有关键数字（市场价值、稀释股数、预期收益）均有显式公式和文本锚点支撑，PM已核实单位和周期的算术统一性。KPE线索均按纪律归入情景或验证角色，没有升级为基准输入。仍未解决的研究缺口（分板块利润、矿山成本、磷肥出货价）已列入下一验证日历，未用于调降评级。canonical_model_snapshot现已覆盖所有经理规范行，无遗漏。"
+}

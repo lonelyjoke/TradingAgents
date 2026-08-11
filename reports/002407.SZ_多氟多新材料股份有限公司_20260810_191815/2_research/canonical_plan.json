@@ -1,0 +1,281 @@
+{
+  "recommendation": "Hold",
+  "research_readiness": "partial",
+  "core_bet": "6F price stabilizes in 2H26 and the company reports H1 2026 results confirming Q2 profit > Q1 profit, proving profit cycle momentum rather than a one-off quarter. The secondary bet is that the electronic-grade hydrofluoric acid (semiconductor-grade HF) business will report material revenue, validating the second growth curve.",
+  "research_questions": [
+    "UWQ-1: Does the H1 2026 earnings preview represent the beginning of a durable 6F up-cycle, or is it a H1 seasonal / one-off event, given that Q1 revenue fell 66% YoY?",
+    "UWQ-2: Is the electronic-grade hydrogen fluoride (semiconductor-grade HF) business transitioning from 'qualification and trial sales' to material, recurring revenue, and what is the size of this contribution?",
+    "UWQ-3: What is the normalized mid-cycle earnings power for the core 6F business, and does the current price offer an attractive entry point, given the stock's high implied valuation and recent 6F price pullback?",
+    "UWQ-4: Does the company's capital allocation and balance sheet strength support the current valuation, or does it present a risk of dilution or financial stress in a downturn?"
+  ],
+  "question_verdicts": [
+    {
+      "question_id": "UWQ-1",
+      "question": "Does the H1 2026 earnings preview represent the beginning of a durable 6F up-cycle, or is it a H1 seasonal / one-off event, given that Q1 revenue fell 66% YoY?",
+      "why_decisive": "Directly determines the trajectory of 60%+ of company profits. A durable up-cycle validates EPS > 1.0 CNY and a re-rating; a one-off event leads to a sharp de-rating from the current ~83x PE TTM.",
+      "conclusion": "Incomplete but leaning positive. The H1 preview (net profit +777-991% YoY) is a strong signal, but the simultaneous Q1 revenue -66% YoY creates a major unexplained gap. The most plausible reconciliation is that Q1 revenue was hollowed out by the exit of low-margin trading business or delivery of previously low-priced 6F orders, while Q2 saw significant volume and ASP improvement. This requires explicit confirmation in the upcoming semi-annual report.",
+      "evidence_used": [
+        "EV001-Q1-2026 financials: Revenue -65.92% YoY, Gross Margin +14.14pp to 27.6%. This confirms a radical shift in business mix, not broad-based decay.",
+        "KPE06-Industry data (2026-07-22): Q3/Q4 supply expected at 124.8kt, controlled by limited new capacity (Tianci, Hongyuan). Supports a tight supply-demand balance.",
+        "KPE09/KPE12-Sell-side notes (Aug/Jul 2026): Point to Q3 peak season orders +7% MoM, with 6F named as a high-price-elasticity sector. This corroborates demand-side support for 2H volume/ASP recovery.",
+        "EV-Investor Interaction (2026-07-17): Management declined to quantify Q2 vs Q1 split, increasing uncertainty until the semi-annual report."
+      ],
+      "strongest_counterevidence": "The industry cycle scan labels the sector as 'downcycle / failed-rebound risk', and a mapped product proxy fell 14% over the last 20 days. This directly challenges the idea of a smooth 2H ramp and suggests price fragility.",
+      "conflict_resolution": "Unresolved. Leading volume indicators (orders +7% MoM) and lagging price indicators (proxy -14%) are in conflict, a common feature at cycle turning points. The semi-annual report must resolve this by providing Q2 realized ASP and shipment volumes.",
+      "model_or_valuation_effect": "Base case EPS 0.98 and Bull case EPS 1.64+ for 2026E are contingent on Q2 validation. Failure will force the accepted model to the Bear case (2026E EPS ~0.60), invalidating the current market price.",
+      "affected_model_lines": [
+        "2026E_revenue",
+        "2026E_parent_net_profit",
+        "2026E_eps",
+        "base_fair_value"
+      ],
+      "confidence": "low",
+      "next_verification": "2026 semi-annual report (due 2026-08-18). Must verify: Q2 single-quarter net profit >= 2.5bn CNY, 6F shipment volume, and a clear explanation of the Q1 revenue contraction."
+    },
+    {
+      "question_id": "UWQ-2",
+      "question": "Is the electronic-grade hydrogen fluoride (semiconductor-grade HF) business transitioning from 'qualification and trial sales' to material, recurring revenue, and what is the size of this contribution?",
+      "why_decisive": "This is the main 'second growth curve' justifying a premium over pure-play 6F peers. Without material revenue visibility, it is a narrative option and should not command a higher valuation multiple.",
+      "conclusion": "Early-stage positive signal, but unquantified. A validated Tier-1 catalyst (Taiwanese competitor price hikes) confirms the product is commercially relevant. However, the company has not disclosed any segment revenue or profit figures for this business, preventing it from being a core valuation pillar.",
+      "evidence_used": [
+        "KPE01-Channel check (2026-07-17): Reports that Taiwan's Formosa Plastics will raise electronic-grade HF prices in Q3 due to raw material cost increases. This validates the commercial value of the product.",
+        "EV-Business Model Primer: Company filings confirm successful customer validation and 'batch sales' of UPSSS-grade electronic-grade HF, but no revenue figures are provided."
+      ],
+      "strongest_counterevidence": "The absence of any revenue disclosure for the electronic chemicals segment in the company's reporting. As a listed company, material new businesses typically warrant segment reporting. The silence suggests current revenue is still immaterial.",
+      "conflict_resolution": "Unresolved. The product is real and validated, but its financial materiality is unproven. It remains an SOTP call option.",
+      "model_or_valuation_effect": "Electronic chemicals remain in the 'scenario value' bucket. 2026E revenue kept at an unverified 5bn CNY assumption, with zero contribution to base-case fair value. Only explicit semi-annual report revenue data can move this to core value.",
+      "affected_model_lines": [
+        "2026E_revenue_electronic_chemicals",
+        "option_value_per_share"
+      ],
+      "confidence": "low",
+      "next_verification": "2026 semi-annual report (2026-08-18). Must verify: segment revenue for 'Electronic Chemicals', customer count, and gross margin to size the opportunity."
+    },
+    {
+      "question_id": "UWQ-3",
+      "question": "What is the normalized mid-cycle earnings power for the core 6F business, and does the current price offer an attractive entry point, given the stock's high implied valuation and recent 6F price pullback?",
+      "why_decisive": "Defines the anchor for a cyclical company. If mid-cycle earnings power is 1.0-1.3 CNY/share, the current price (83x TTM PE) is not cheap even on a forward basis, suggesting the market is already pricing an optimistic recovery.",
+      "conclusion": "The market is already pricing a substantial earnings recovery. The current price of ~36.5 CNY implies a 2027E PE of ~22x on our base case, which is fair-to-full for a cyclical name. The risk/reward is not attractive for initiating a new, full-size position.",
+      "evidence_used": [
+        "Market-Expectation Context: PE TTM 83.1x (5Y percentile 80.1%), PB 4.96x (76.6%). The price embeds a sharp recovery expectation.",
+        "Autonomous Forecast Model (Base Case): 2027E EPS 1.31 CNY. At 36.5 CNY, this is a ~28x forward PE, not a deep-value entry.",
+        "Price-Move Attribution: Labeled 'weak_trend_continuation'. The recent -11% in 20 days and -14% product proxy drop warn against chasing."
+      ],
+      "strongest_counterevidence": "If the Bull case materializes (6F prices at 100k+/ton), 2027E EPS could reach 2.05 CNY, making the forward PE a seemingly cheap ~18x. However, this requires everything to go right (price, volume, second curve), which is a low-probability, high-payoff lottery ticket, not a base-case investment.",
+      "conflict_resolution": "Resolved. The base-case forward PE is not 'cheap'. The bull-case PE is only 'cheap' under an optimistic scenario that has a low probability (25%). Buying into an unclear cycle inflection at a high implied multiple offers poor risk/reward.",
+      "model_or_valuation_effect": "Accepts a base-case probability-weighted fair value band of 28-33 CNY (20-25x 2027E base EPS of 1.31 CNY). Current price of 36.5 CNY sits above the top of this band, confirming the market is pricing a more optimistic scenario than the base case.",
+      "affected_model_lines": [
+        "base_fair_value",
+        "bull_fair_value",
+        "bear_fair_value"
+      ],
+      "confidence": "medium",
+      "next_verification": "Monthly 6F price data for August and September 2026 to see if the recent 14% decline was a pullback within an uptrend or the start of a new leg down."
+    },
+    {
+      "question_id": "UWQ-4",
+      "question": "Does the company's capital allocation and balance sheet strength support the current valuation, or does it present a risk of dilution or financial stress in a downturn?",
+      "why_decisive": "For a company in a capital-intensive industry with a history of capacity build-outs, the balance sheet and cash flow determine survival and the ability to compound value through the cycle.",
+      "conclusion": "Adequate but not a fortress. The business generates positive operating cash flow (OCF) in up-cycles, but it is reinvested into high capex, limiting FCF. The 0.2 CNY dividend is minimal. One significant positive is the near-absence of controlling shareholder pledge risk based on available data.",
+      "evidence_used": [
+        "Management/Capital-Allocation Context: Shows a recent dividend of 0.2 CNY/share. A history of variable dividends indicates a reinvestment-focused, not shareholder-return-focused, strategy.",
+        "Shareholder-Structure Context: Pledge risk flagged as low/monitor. This is a positive governance signal.",
+        "Forecast Model: FCF remains under pressure (2026E FCF ~3bn CNY on a 43.5bn market cap; ~0.7% FCF yield). The company needs the up-cycle to de-leverage and build cash."
+      ],
+      "strongest_counterevidence": "The lack of major insider selling despite a 181% 250-day return is a mild positive signal, suggesting insiders see long-term value. This is a soft signal, however, and not a substitute for strong FCF.",
+      "conflict_resolution": "Resolved. Financial health is adequate for a growth-cycle company but does not provide a margin of safety. A downturn would pressure the balance sheet.",
+      "model_or_valuation_effect": "No uplift to the safety price from balance sheet strength. Confirms the stock is not a defensive dividend play and the thesis rests entirely on operating momentum.",
+      "affected_model_lines": [],
+      "confidence": "medium",
+      "next_verification": "2026 semi-annual report for updated debt levels, capex schedule, and OCF generation."
+    }
+  ],
+  "evidence_utilization_ledger": [
+    {
+      "evidence_id": "KPE06",
+      "question_id": "UWQ-1",
+      "disposition": "adopted",
+      "contribution_or_reason": "Provides the most concrete, verifiable industry supply forecast for 6F in 2H26, showing supply discipline.",
+      "model_or_probability_effect": "Supports the base-case assumption of a tight supply-demand balance, increasing the probability of 2H price stabilization. Probability of base case raised from prior flat assumption.",
+      "verification_gate": ""
+    },
+    {
+      "evidence_id": "KPE01",
+      "question_id": "UWQ-2",
+      "disposition": "adopted",
+      "contribution_or_reason": "Validates that electronic-grade HF is a commercially viable product with upward pricing pressure, a necessary condition for a second growth curve.",
+      "model_or_probability_effect": "Confirms electronic-grade HF is a legitimate but unquantified call option. No change to base case EPS, but supports a qualitative optionality value.",
+      "verification_gate": ""
+    },
+    {
+      "evidence_id": "KSI01",
+      "question_id": "UWQ-3",
+      "disposition": "rejected",
+      "contribution_or_reason": "A news compilation (market recap) linking the stock to 'advanced packaging/materials' theme. No fundamental, company-specific evidence of new business or profit contribution; pure sentiment/narrative.",
+      "model_or_probability_effect": "",
+      "verification_gate": ""
+    },
+    {
+      "evidence_id": "KPE09",
+      "question_id": "UWQ-1",
+      "disposition": "adopted",
+      "contribution_or_reason": "Sell-side broker (Huafu Securities) explicitly names 6F and the target company as a primary beneficiary of peak season order elasticity, reinforcing the demand-side thesis.",
+      "model_or_probability_effect": "Corroborates KPE06 demand-side drivers. Increases confidence in the 2H volume ramp assumption in the accepted model.",
+      "verification_gate": "Cross-reference with company's H1 2026 shipment data in the semi-annual report."
+    }
+  ],
+  "forecast_takeaways": [
+    {
+      "takeaway": "The H1 2026 earnings explosion is a genuine signal of cyclical profit recovery, but its sustainability is unproven due to the anomalous Q1 revenue drop.",
+      "evidence_anchor": "Q1 2026 financials showing a 14.14pp gross margin expansion despite a 66% revenue drop; this is a strong mix-shift signal. H1 preview net profit guide of 450-560mn CNY.",
+      "financial_implication": "If Q2 validates the mix-shift thesis, full-year 2026E EPS can reach 0.98 CNY. If not, the H1 preview will be seen as an isolated event, and EPS will revert towards a 0.60 CNY bear case.",
+      "confidence_and_risk": "Low confidence in the precise C2H1 split. High risk of a sharp negative reaction if the semi-annual report shows Q2 profit < 2.5bn CNY."
+    },
+    {
+      "takeaway": "The current share price discounts a successful and durable recovery, leaving little-to-no margin of safety against the key verification event (the semi-annual report).",
+      "evidence_anchor": "Current price implies a ~28x forward PE on our base-case 2027E EPS. This is above the ~22x mid-cycle norm for the sector.",
+      "financial_implication": "The risk/reward for a new long position is unfavorable ahead of the print. A 'buy the rumor, sell the fact' or 'fact miss' outcome is a significant short-term risk.",
+      "confidence_and_risk": "Medium-high confidence. The valuation math is clear; the uncertainty is on the earnings outcome."
+    }
+  ],
+  "forecast_assumptions": [
+    {
+      "parameter": "6F Product Price (CNY/ton)",
+      "affected_business": "New Energy Materials (Core Profit Pool)",
+      "historical_anchor": "Range: low of ~55k/ton in 2024 to high of ~590k/ton in 2022. Recent proxy: -14% in 20 days.",
+      "evidence_status": "proxy",
+      "base_case": "75,000 CNY/ton average for C2H1 2026",
+      "bull_case": "85,000+ CNY/ton, requiring Q3 demand to rapidly absorb all new supply",
+      "bear_case": "<65,000 CNY/ton, if the recent 14% proxy slide accelerates into a new downtrend",
+      "rationale_and_evidence": "Sell-side (KPE06, KPE09) consensus of a tight market, but this is contradicted by recent price action. The base case assumes a stabilization at current levels.",
+      "sensitivity": "+/- 1,000 CNY/ton = ~3-3.5bn CNY net profit impact, or 0.25-0.29 CNY/share EPS.",
+      "confidence": "low",
+      "verification_gate": "Company-reported realized ASP in 2026 H1 semi-annual report. Monthly spot price data for Aug/Sep 2026."
+    },
+    {
+      "parameter": "6F Sales Volume (tons)",
+      "affected_business": "New Energy Materials (Core Profit Pool)",
+      "historical_anchor": "Not disclosed. Capacity is 65,000 tons/year.",
+      "evidence_status": "analyst_estimate",
+      "base_case": "45,000 tons in 2026E (c. 70% utilization)",
+      "bull_case": "50,000+ tons",
+      "bear_case": "40,000 tons",
+      "rationale_and_evidence": "Demand-side data points to strong orders (+7% MoM). The adoption of volume is a high-conviction assumption.",
+      "sensitivity": "Each 1,000-ton volume miss/recovery impacts net profit by ~20mn CNY.",
+      "confidence": "medium",
+      "verification_gate": "Sales volume disclosure in 2026 H1 semi-annual report."
+    },
+    {
+      "parameter": "Electronic Chemicals Segment Revenue (CNY mn)",
+      "affected_business": "Electronic Chemicals (Second Curve)",
+      "historical_anchor": "Not disclosed.",
+      "evidence_status": "missing",
+      "base_case": "500mn CNY in 2026E. This is a placeholder; actual revenue is unknown.",
+      "bull_case": "1,000mn CNY, if multiple major fab validations complete.",
+      "bear_case": "200mn CNY, trial sales remain immaterial.",
+      "rationale_and_evidence": "Validation with key customers is known, but no revenue bridge exists. This assumption is top-down and low-confidence.",
+      "sensitivity": "Unknown. Gross margin and profit contribution are pure speculation without segment data.",
+      "confidence": "low",
+      "verification_gate": "Segment revenue in 2026 H1 semi-annual report."
+    }
+  ],
+  "core_theses": [
+    {
+      "rank": 1,
+      "takeaway": "The profit cycle has inflected, but the durability of the inflection is a question mark that will be answered on August 18. The investment is a binary event trade on 6F cycle momentum.",
+      "decisive_question": "UWQ-1",
+      "evidence": "H1 2026 net profit preview +777-991% YoY; Q1 2026 gross margin +14.14pp. This is confirmed, high-quality evidence of margin recovery.",
+      "strongest_counterevidence": "Q1 2026 revenue -65.92% YoY. This creates a 'margin without revenue' paradox that must be resolved.",
+      "financial_transmission": "Durable cycle -> 2026E EPS of 0.98+ -> sustained re-rating to 20-25x P/E -> fair value 28-33 CNY. Unsustainable cycle -> 2026E EPS of 0.60 -> de-rating to 15x P/E -> fair value < 20 CNY.",
+      "market_pricing": "The market is priced for the durable cycle scenario, at ~28x forward base-case P/E. The expectation gap is narrow and tilted to the downside.",
+      "falsification_gate": "2026 H1 semi-annual report (2026-08-18). Fails if Q2 net profit is less than 2.5bn CNY or QoQ growth is flat/negative.",
+      "verdict": "partial"
+    },
+    {
+      "rank": 2,
+      "takeaway": "The electronic chemicals business is a high-quality, long-duration call option on semiconductor materials localization, but it is not a reason to pay a premium multiple today.",
+      "decisive_question": "UWQ-2",
+      "evidence": "KPE01 confirms competitor price hikes, validating the product's market. Company confirms 'batch sales' and customer validations.",
+      "strongest_counterevidence": "Zero segment revenue or profit disclosure. The business is financially immaterial until proven otherwise by the company's own filings.",
+      "financial_transmission": "No contribution to base-case EPS. If the H1 report shows >5% group revenue, it can move from scenario value to core value, potentially adding 2-3 CNY/share of SOTP value.",
+      "market_pricing": "The market likely ascribes some low-probability 'theme' premium, but it's not a core driver of the current high PE, which is dominated by 6F expectations.",
+      "falsification_gate": "2026 H1 semi-annual report. Fails as a near-term catalyst if electronic chemicals revenue remains undisclosed or is immaterial.",
+      "verdict": "unproven"
+    }
+  ],
+  "company_disaggregation": "The company is organized for analysis into four economic units, ranked by profit significance: 1) **New Energy Materials (6F)**: The dominant, highly cyclical core profit pool (estimated >85% of gross profit in a recovery). Driven by ASP (6F price) x Volume x gross margin. 2) **Electronic Chemicals**: A high-potential second curve with a different customer set (semiconductor fabs) and margin profile. Currently in trial/commercialization stage, revenue is unquantified. 3) **Fluorine-based New Materials**: A mature, low-growth cash cow providing upstream integration benefits. 4) **New Energy Batteries**: A strategic, capital-intensive new business with volatile profitability. Reported segment data is insufficient to split these economic units, forcing a reliance on a consolidated model with qualitative overlays.",
+  "autonomous_forecast_model": "The accepted model is a consolidated, top-down/hybrid approach due to a lack of segment-level volume, price, and cost data. The primary driver is the recovery in the New Energy Materials (6F) segment. The three-year forecast hinges on the 6F price assumption. Revenue is built from an expected volume recovery (to 45,000 tons in 2026E) and a stabilized but not surging ASP. Gross margin recovers to 24% in 2026E (from an estimated 15% in 2025A), reflecting operating leverage on the volume recovery. The model is highly sensitive to the 6F ASP; every 1,000 CNY/ton change impacts EPS by ~0.02 CNY. The model explicitly excludes a contribution from the Electronic Chemicals unit in the base case, treating it as an unquantified option. Full details are in the `accepted_underwriting_model`.",
+  "thesis_financial_bridge": "The core thesis bridge is: (6F Sales Volume (45k tons) × ASP (75k CNY/ton)) + (Other Revenue) = Consolidated Revenue (115bn CNY). Gross Profit = Revenue × Gross Margin (24.0%). Net Profit flows from Gross Profit, with the model bifurcation point being the sustainability of the margin. If the 6F ASP stabilizes >75k/ton (Bull Case), the 2027E EPS of 2.05 is possible. If the recent price weakness continues (Bear Case), 2026E EPS of 0.60 is more likely. The current share price bridges to the upper-end of the base case and the lower-end of the bull case, indicating a market expectation that is already optimistic.",
+  "moat_evidence_verdict": "The company possesses a **proven cost advantage (partial moat)** in its core 6F business, derived from its integrated production chain (anhydrous hydrofluoric acid to 6F). This is a structural cost advantage versus non-integrated competitors. Evidence: higher-than-peer-average gross margin recovery in Q1 2026. This cost advantage is most impactful in a rising-price environment. In the Electronic Chemicals segment, the company has a **claimed technological moat** (UPSSS-grade HF qualification), which is a necessary entry ticket but does not guarantee a business moat without proven customer stickiness, pricing power, or revenue scale. The battery business has no observable moat.",
+  "valuation_closure": "We value the company using a probability-weighted scenario approach on 2027E earnings. The core, mature 6F business constitutes the entirety of the base-case value. The electronic chemicals business is an out-of-the-money call option. **Core Value:** Base 2027E EPS of 1.31 CNY × 22x mid-cycle P/E = 28.8 CNY/share. **Scenario Weights:** Base (55% prob) = 28.8; Bull (25% prob, EPS 2.05 × 25x P/E) = 51.3; Bear (20% prob, EPS 0.66 × 15x P/E) = 9.9. **Probability-Weighted Fair Value:** (0.55×28.8) + (0.25×51.3) + (0.20×9.9) = 30.6 CNY. There is no separate SOTP value for the electronic chemicals business as it lacks a financial bridge. Current price (36.5 CNY) is above the probability-weighted fair value, confirming the market is pricing a higher probability of the bull case or a higher terminal multiple. A Hold rating is consistent with this valuation closure.",
+  "canonical_model_snapshot": [
+    {
+      "line_id": "shares",
+      "period": "TTM",
+      "metric": "diluted_shares_outstanding",
+      "value": 1220.0,
+      "unit": "mn shares",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "Approximated from market cap / implied price"
+    },
+    {
+      "line_id": "2026E_revenue",
+      "period": "2026E",
+      "metric": "revenue",
+      "value": 11500.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "6F volume (45k tons) x ASP (75k/ton) + other segments"
+    },
+    {
+      "line_id": "2026E_gross_margin",
+      "period": "2026E",
+      "metric": "gross_margin",
+      "value": 24.0,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "Consolidated estimate driven by 6F margin recovery"
+    },
+    {
+      "line_id": "2026E_parent_net_profit",
+      "period": "2026E",
+      "metric": "parent_net_profit",
+      "value": 1200.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "Revenue * estimated net margin based on 6F price assumption"
+    },
+    {
+      "line_id": "2026E_eps",
+      "period": "2026E",
+      "metric": "eps",
+      "value": 0.98,
+      "unit": "CNY/share",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "1200 mn / 1220 mn shares"
+    },
+    {
+      "line_id": "base_fair_value",
+      "period": "2027E",
+      "metric": "target_price",
+      "value": 30.6,
+      "unit": "CNY/share",
+      "status": "estimated",
+      "evidence_ids": [],
+      "formula": "Probability-weighted scenario analysis on 2027E EPS"
+    }
+  ],
+  "model_change_rows": [],
+  "accepted_underwriting_model": "**002407.SZ: Accepted Underwriting Model**\n\n**1. Company Operating Equation**\nThe company generates earnings primarily as a product manufacturer. The core equation for the dominant unit is:\n*   `Gross Profit (New Energy Materials) = 6F Sales Volume × (6F Realized ASP - Unit Cost)`\n*   Consolidated Profit is heavily levered to this segment's gross profit, with fixed operating costs. The Electronic Chemicals segment is a nascent second profit pool that is currently excluded from the base-case P&L due to a lack of financial data.\n\n**2. Segment Causal Chains (Forecast Driver Profiles)**\n*   **BU01 - New Energy Materials (6F):** The profit cycle driver. `Revenue = f(Industry Demand, Competitor Capacity, Product ASP, Company Volume/Utilization)`. Margin is driven by `Company ASP - Raw Material Cost (Carbonate, HF)`, with the integrated model providing a cost advantage.\n*   **BU02 - Electronic Chemicals:** The value creation story. Currently `Revenue = unquantified` due to an immature financial profile. Qualitative driver: number of semiconductor fab customer qualifications.\n*   **BU03 - Fluorine-based New Materials:** A stable cash cow. Assumed `Revenue = ~2.0bn CNY, Gross Margin = ~25%`. Not a source of EPS growth or volatility.\n*   **BU04 - New Energy Batteries:** A capital-intensive growth option. Assumed `Revenue = 3.0bn CNY, Margin = 0%` (breakeven). A swing factor for revenue scale but neutral to profit.\n\n**3. Three-Year Consolidated Forecast Model**\n| Metric | 2026E (Base) | 2027E (Base) | 2028E (Base) | Rationale |\n|---|---|---|---|---|---|\n| **Key Driver: 6F ASP** | 75,000 CNY/ton | 80,000 CNY/ton | 85,000 CNY/ton | Cycle stabilizes, moderate uptrend |\n| **Key Driver: 6F Sales Vol** | 45,000 tons | 50,000 tons | 55,000 tons | Demand recovery, utilization ramp-up |\n| **Revenue (CNY mn)** | 11,500 | 12,800 | 14,200 | 6F volume/price + stable traditional + early battery revenue |\n| **Gross Margin %** | 24.0% | 25.5% | 26.5% | Operating leverage on volume, improving 6F price realization |\n| **Operating Profit** | *missing/not disclosed* | *missing/not disclosed* | *missing/not disclosed* | Sensitive to R&D and SGA allocations not forecasted at segment level |\n| **Parent Net Profit** | 1,200 | 1,600 | 2,000 | High leverage from gross profit expansion |\n| **EPS (CNY/share)** | 0.98 | 1.31 | 1.64 | Based on estimated 1,220mn diluted shares |\n| **OCF (CNY mn)** | 1,400 | 1,800 | 2,100 | Recovers with profit, offset by working capital build |\n| **Capex (CNY mn)** | (1,100) | (900) | (800) | Capacity build cycle winding down |\n| **FCF (CNY mn)** | 300 | 900 | 1,300 | Inflects to positive, key validation for thesis |\n\n**4. Bull / Base / Bear Scenario Probabilities and Valuation**\n*   **Base Case (55% probability):** 6F ASP stabilizes at 75k. 2027E EPS 1.31 CNY. Fair value via 22x P/E = 28.8 CNY/share.\n*   **Bull Case (25% probability):** Strong demand drives 6F ASP to 90k+. 2027E EPS 2.05 CNY. Fair value via 25x peak-cycle P/E = 51.3 CNY/share.\n*   **Bear Case (20% probability):** Cycle rolls over, 6F ASP below 65k. 2027E EPS 0.66 CNY. Fair value via 15x trough P/E = 9.9 CNY/share.",
+  "model_change_ledger": "**Model Change Ledger (Post-Debate Reconciliation)**\n\n| Line Item | Original Assumption | Bull Proposal | Bear Proposal | Accepted Assumption | Evidence IDs | EPS/FCF/Valuation Impact | Next Check |\n|---|---|---|---|---|---|---|---|\n| **2026E Revenue** | missing | 11.5bn CNY | Less than 10bn CNY | **11.5bn CNY** | EV-Q1-Rev | Sets the top line for the model. Bear case revenue would yield 2026E EPS < 0.60. | H1 2026 Revenue |\n| **6F ASP Trajectory** | missing | Upward | Downcycle / failed-rebound risk | **Stabilizes at 75k CNY/ton in 2H** | KPE06, Price Proxy | Central to the entire P&L bridge. The model remains highly sensitive to this assumption. | Monthly 6F Price Data |\n| **Electronic Chemicals Revenue**| Not in model | 5bn CNY in 2026E | Immaterial, no core value | **Unquantified / Scenario Value** | KPE01, EV-Filings | Zero contribution to base-case EPS. Prevents narrative-based multiple expansion. | Segment data in H1 Report |\n| **Q1/Q2 Profit Split** | unknown | Q2 profit >= Q1 profit | Q2 profit a one-off, unsustainable | **Unresolved, Q2 must be >= 2.5bn** | EV-Preview, EV-Interaction | This is the binary catalyst. Model either holds or collapses. | H1 2026 Semi-Annual Report |",
+  "debate_verdict": "The quality of the debate was high, effectively focusing on the key paradox (revenue vs. profit) and the critical near-term catalyst (the semi-annual report). The Bull correctly identified that the margin signal is a powerful leading indicator of a cyclical turn. The Bear correctly focused on the elevated valuation and the high burden of proof placed on the upcoming semi-annual report. The accepted model is a 'trust but verify' compromise: it accepts the Bull's forward EPS power is possible (and accounts for it in the Bull case) but rules with the Bear's distrust of high valuations until the Q2 earnings mix is proven. The model therefore reflects a bimodal probability distribution, heavily contingent on August 18.",
+  "probability_payoff": "The probability-weighted fair value is 30.6 CNY/share versus a current price of ~36.5 CNY/share, implying a -16% expected return to fair value. The distribution is bimodal. The downside risk to the Bear case (9.9 CNY) is a catastrophic -73%, while the upside to the Bull case (51.3 CNY) is a strong +41%. The probability of the Bear case (20%) is non-trivial and the payoff magnitude is large, creating a negative skew in risk/reward. The positive expected value is therefore driven by a low-probability, high-payout event, which is not a suitable basis for a high-conviction investment without a very strong catalyst path. The decision is to wait for that catalyst.",
+  "unresolved_questions_and_gaps": "1.  **Missing 6F Price Data:** No verified, high-frequency 6F spot price series is available. The model relies on a proxy that has shown recent weakness. This is the single biggest model risk.\n2.  **Missing Segment Economics for Electronic Chemicals:** Revenue, gross margin, and customer concentration for this 'second curve' are entirely undisclosed. This prevents any SOTP valuation.\n3.  **Q1/Q2 Bridge:** The 2026 Q1 report, H1 preview, and full-year outlook cannot be reconciled without the fully audited semi-annual report. This is a near-term catalyst but a current fundamental information gap.\n4.  **Peer Verification:** A direct, like-for-like comparison of cost curves with main peer Tianci Materials is not possible with only public data, making the 'cost advantage' moat a qualitative rather than strictly quantitative assessment.",
+  "handoff_to_pm_and_trader": "**Handoff for 002407.SZ**\n\n- **Rating:** HOLD / Positive Watch. The company has a high-quality profit cycle catalyst, but valuation and risk-reward are unfavorable for immediate entry.\n- **PM Action:** Do not initiate a new full-size position. A small, risk-defined 'probing' position (1/4 size) could be justified for the 'Bull Case' option value ahead of the August 18 semi-annual report, with a strict stop-loss on a negative print.\n- **Trader Execution Note:** The stock is in a 'weak trend continuation' pattern. Any buy orders should be passive (limit orders near the lower end of the recent range, ~34.0-35.0 CNY) and not chase strength into the report.\n- **The Catalyst Clock:** The single most important event is the 2026 H1 semi-annual report (due ~2026-08-18).\n    - **Upgrade Trigger (to Overweight/Buy):** H1 report confirms Q2 net profit >= 2.5bn CNY, clears up the Q1 revenue drop (non-recurring), and shows initial material revenue from Electronic Chemicals. The stock would be defendable on a ~28x forward P/E with upward earnings momentum.\n    - **Downgrade Trigger (to Underweight/Sell):** H1 report shows Q2 net profit declined from Q1 levels, or the company fails to explain the Q1 revenue contraction. The entire profit-recovery thesis would be in doubt, and a sharp de-rating would be imminent.\n- **Core Constraint:** Do not treat this as a defensive or value holding. The thesis is entirely based on a cyclical momentum trade. The stop on any probing position is firm.",
+  "handoff_integrity_audit": "**Handoff Integrity Audit**\n\n- **Accepted Model Version:** `research-manager-reconciled-v1` on 2026-08-10.\n- **Frozen Reported Facts:** Q1 2026 revenue 3,215mn CNY (-65.92% YoY), Q1 2026 gross margin 27.6% (+14.14pp YoY), H1 2026 net profit guidance 450-560mn CNY.\n- **Accepted Estimates:** 2026E 6F ASP 75k/ton, 2026E 6F Volume 45k tons, 2026E Parent Net Profit 1,200mn CNY.\n- **Unresolved Model Cells:** 2026E Electronic Chemicals Revenue, 2026E Q2 vs Q1 profit split, any and all segment-level operating metrics.\n- **Preserved Structural Elements:** All four business units, three forecast years (2026E-2028E), bull/base/bear scenario framework, and the probability-weighted SOTP valuation structure must be preserved in any downstream write-up."
+}

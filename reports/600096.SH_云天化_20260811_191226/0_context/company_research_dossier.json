@@ -1,0 +1,1615 @@
+{
+  "schema_version": 1,
+  "symbol": "600096.SH",
+  "as_of_date": "2026-08-11",
+  "reader_contract": {
+    "audience": "普通投资者",
+    "principle": "数据用于权威佐证，不能替代公司、产业链与投资逻辑。",
+    "formal_rating_position": "开篇投资摘要，并在第七章末尾重申",
+    "chapter_count": 7
+  },
+  "source_policy": {
+    "A_hard_fact": {
+      "sources": "公司财报、交易所/公司公告、官方业绩指引",
+      "allowed_use": "冻结历史事实和模型基线"
+    },
+    "B_reproducible": {
+      "sources": "Tushare结构化数据、程序计算、官方统计、行业协会",
+      "allowed_use": "财务计算、行业比较和可复核代理变量"
+    },
+    "C_external_expectation": {
+      "sources": "具名卖方报告、多机构一致预期",
+      "allowed_use": "构建市场预期与预测分歧；单家机构不得冒充一致预期"
+    },
+    "D_alternative_intelligence": {
+      "sources": "知识星球、渠道调研、专家纪要、私域卖方推送",
+      "allowed_use": "量化模型变更、情景概率变化、验证日历变化或明确拒绝"
+    },
+    "E_background": {
+      "sources": "普通新闻、政策评论、行业叙事",
+      "allowed_use": "解释背景；不得单独改变盈利预测或评级"
+    }
+  },
+  "company_introduction": {
+    "business_archetype": "Integrated phosphate resource and chemical manufacturer with fertilizer, POM and trading",
+    "value_proposition_and_customers": "Phosphate rock self-sufficiency, large-scale phosphate/nitrogen fertilizer production, and engineering plastic (POM) sales to domestic and overseas agricultural and industrial customers",
+    "revenue_equation": "Sum over products: volume_sold * realized_ASP + trading revenue",
+    "profit_equation": "Gross profit (volume*(realized price - unit cost)) - selling/administrative/R&D expenses - finance costs + other income - income tax - minority interest",
+    "cash_flow_equation": "Net operating profit + depreciation - change in working capital - capex - dividends",
+    "capital_intensity_and_reinvestment": "Moderate to high capex for mining capacity maintenance, upgrading fertilizer plants, and POM expansion; 2025 investing cash outflow increased due to construction in progress",
+    "key_unknowns": [
+      "Phosphate rock reserves life and grade trajectory",
+      "POM capacity utilization and price spreads",
+      "Exact export and domestic mix for fertilizers"
+    ]
+  },
+  "industry_chain": {
+    "operating_model_family": "commodity_volume_price_cost",
+    "upstream_cost_and_supply": [
+      {
+        "segment": "Phosphate Fertilizers",
+        "supply_capacity": "Domestic phosphate fertilizer capacity disciplined by environmental restrictions; limited new approvals; import dependency on sulfur; global supply growth slow",
+        "unit_cost_inputs": "Key inputs: captive phosphate rock (transfer pricing), sulfur (imported, price volatile), ammonia, energy"
+      },
+      {
+        "segment": "Nitrogen Fertilizers",
+        "supply_capacity": "Coal-based urea capacity rationalization ongoing; energy efficiency standards tighten",
+        "unit_cost_inputs": "Coal (anthracite or thermal based on technology) and electricity are main cost drivers"
+      },
+      {
+        "segment": "Polyoxymethylene (POM)",
+        "supply_capacity": "Domestic POM capacity expanding; quality differentiation key",
+        "unit_cost_inputs": "Methanol/formaldehyde feedstock, energy, technology license"
+      }
+    ],
+    "downstream_demand_and_pricing": [
+      {
+        "segment": "Phosphate Fertilizers",
+        "customers_channel": "Domestic distributors/cooperatives, direct large farms, export; top-5 customers ~14% of self-produced sales",
+        "demand": [
+          "Global grain prices and planted area",
+          "Agricultural policy and subsidies",
+          "Export demand from South Asia, Latin America",
+          "Seasonal autumn/spring application demand"
+        ],
+        "price_asp": "Phosphate fertilizer prices linked to DAP international benchmarks, phosphate rock cost-plus, and domestic supply-demand"
+      },
+      {
+        "segment": "Nitrogen Fertilizers",
+        "customers_channel": "Agricultural distributors, industrial users",
+        "demand": [
+          "Crop planting and urea application demand",
+          "Industrial ammonia demand (explosives, chemicals)"
+        ],
+        "price_asp": "Urea price follows domestic coal cost and seasonal demand; export also a factor"
+      },
+      {
+        "segment": "Polyoxymethylene (POM)",
+        "customers_channel": "Domestic and export industrial customers, distributors",
+        "demand": [
+          "Industrial production growth, auto production",
+          "Import substitution for high-end POM"
+        ],
+        "price_asp": "POM prices linked to methanol and butane/gas, plus supply-demand balance"
+      }
+    ]
+  },
+  "profit_pools": {
+    "reported_or_analytical_units": [
+      {
+        "unit_id": "U1",
+        "unit_name": "Phosphate Fertilizers (MAP/DAP/TSP)",
+        "unit_type": "product",
+        "disclosure_basis": "analytical",
+        "parent_unit": "company",
+        "economic_role": "Core profit contributor; integrated from captive phosphate rock mining",
+        "primary_operating_archetype": "resource_commodity",
+        "secondary_operating_archetype": "standard_manufacturing",
+        "revenue_driver_equation": "Volume (Mt) * Realized phosphate fertilizer price (CNY/t)",
+        "profit_driver_equation": "Volume * (Realized price - cash cost including rock, sulfur, ammonia, conversion)",
+        "cash_and_capital_equation": "Cash margin - sustaining capex (mine maintenance) - working capital",
+        "reported_metrics": [],
+        "evidence_ids": [
+          "EV023",
+          "EV024",
+          "EV030"
+        ],
+        "missing_inputs": [
+          "Phosphate fertilizer volume and ASP by region",
+          "Unit cash cost and rock transfer price",
+          "Segment revenue/profit"
+        ],
+        "next_verification": "Retrieve 2025 annual report segment disclosure (分产品) for revenue and cost"
+      },
+      {
+        "unit_id": "U2",
+        "unit_name": "Nitrogen Fertilizers (Urea, Ammonia)",
+        "unit_type": "product",
+        "disclosure_basis": "analytical",
+        "parent_unit": "company",
+        "economic_role": "Stable cash generator, uses synthetic ammonia and coal advantage",
+        "primary_operating_archetype": "standard_manufacturing",
+        "secondary_operating_archetype": "",
+        "revenue_driver_equation": "Volume * Realized urea/ammonia price",
+        "profit_driver_equation": "Volume * (Realized price - coal/gas feedstock - conversion cost)",
+        "cash_and_capital_equation": "Cash margin - maintenance capex - working capital",
+        "reported_metrics": [],
+        "evidence_ids": [
+          "EV023",
+          "EV030"
+        ],
+        "missing_inputs": [
+          "Nitrogen fertilizer volume and ASP",
+          "Coal/gas cost and efficiency",
+          "Segment revenue/profit"
+        ],
+        "next_verification": "Retrieve 2025 annual report segment disclosure for nitrogen fertilizers"
+      },
+      {
+        "unit_id": "U3",
+        "unit_name": "Compound Fertilizers",
+        "unit_type": "product",
+        "disclosure_basis": "analytical",
+        "parent_unit": "company",
+        "economic_role": "Value-added product combining N, P, K; customer stickiness",
+        "primary_operating_archetype": "standard_manufacturing",
+        "secondary_operating_archetype": "",
+        "revenue_driver_equation": "Volume * ASP",
+        "profit_driver_equation": "Volume * (ASP - raw material cost - conversion)",
+        "cash_and_capital_equation": "Cash margin - working capital",
+        "reported_metrics": [],
+        "evidence_ids": [
+          "EV030"
+        ],
+        "missing_inputs": [
+          "Compound fertilizer volume and ASP by formula",
+          "Segment revenue/profit"
+        ],
+        "next_verification": "Retrieve 2025 annual report segment disclosure for compound fertilizers"
+      },
+      {
+        "unit_id": "U4",
+        "unit_name": "Polyoxymethylene (POM)",
+        "unit_type": "product",
+        "disclosure_basis": "analytical",
+        "parent_unit": "company",
+        "economic_role": "High-margin engineering plastics, technology and quality differentiation",
+        "primary_operating_archetype": "standard_manufacturing",
+        "secondary_operating_archetype": "",
+        "revenue_driver_equation": "Volume * ASP",
+        "profit_driver_equation": "Volume * (ASP - methanol/formaldehyde cost - conversion)",
+        "cash_and_capital_equation": "Cash margin - growth capex (capacity expansion) - working capital",
+        "reported_metrics": [],
+        "evidence_ids": [
+          "EV024",
+          "EV039"
+        ],
+        "missing_inputs": [
+          "POM capacity, utilization, volume, ASP",
+          "Segment revenue/profit"
+        ],
+        "next_verification": "Retrieve 2025 annual report segment disclosure for POM"
+      },
+      {
+        "unit_id": "U5",
+        "unit_name": "Trading and Logistics (Agricultural products etc.)",
+        "unit_type": "product",
+        "disclosure_basis": "analytical",
+        "parent_unit": "company",
+        "economic_role": "Low-margin, uses logistics network; capital-turnover driver",
+        "primary_operating_archetype": "standard_manufacturing",
+        "secondary_operating_archetype": "",
+        "revenue_driver_equation": "Volume * trading price spread",
+        "profit_driver_equation": "Volume * (selling price - purchase cost - logistics)",
+        "cash_and_capital_equation": "Low capex; heavily working capital dependent",
+        "reported_metrics": [],
+        "evidence_ids": [
+          "EV035"
+        ],
+        "missing_inputs": [
+          "Trading revenue and gross margin",
+          "Segment data"
+        ],
+        "next_verification": "Retrieve 2025 annual report segment disclosure for trading"
+      }
+    ],
+    "segment_models": [
+      {
+        "segment": "Phosphate Fertilizers",
+        "products_or_services": "MAP, DAP, TSP, related phosphate products",
+        "customers_and_channel": "Domestic distributors/cooperatives, direct large farms, export; top-5 customers ~14% of self-produced sales",
+        "revenue_weight_pct": null,
+        "profit_weight_pct": null,
+        "base_period": "2025",
+        "base_revenue_value": null,
+        "base_revenue_unit": "CNY mn",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [
+          "Global grain prices and planted area",
+          "Agricultural policy and subsidies",
+          "Export demand from South Asia, Latin America",
+          "Seasonal autumn/spring application demand"
+        ],
+        "industry_supply_and_capacity": "Domestic phosphate fertilizer capacity disciplined by environmental restrictions; limited new approvals; import dependency on sulfur; global supply growth slow",
+        "volume_share_utilization": "Company is one of the largest domestic producers; utilization likely high given integration",
+        "price_asp_take_rate": "Phosphate fertilizer prices linked to DAP international benchmarks, phosphate rock cost-plus, and domestic supply-demand",
+        "unit_cost_and_input_prices": "Key inputs: captive phosphate rock (transfer pricing), sulfur (imported, price volatile), ammonia, energy",
+        "margin_and_operating_leverage": "Margin tied to phosphate rock-sulfur-ammonia spread; integration gives margin floor",
+        "working_capital_and_cash_conversion": "Seasonal receivables and inventory build before application seasons",
+        "prosperity_level": "evidence_limited",
+        "marginal_direction": "unknown",
+        "causal_analysis": "No segment-level data; prosperity inferred from consolidated 2025 margin and Q1 2026 gross margin improvement",
+        "valuation_treatment": "evidence_limited",
+        "strongest_counterevidence": [
+          "Global phosphate fertilizer prices have declined from peak; oversupply risk if China exports rebound",
+          "Sulfur price spikes can erase margin gains even with integrated rock"
+        ],
+        "evidence_ids": [
+          "EV012",
+          "EV023",
+          "EV027",
+          "EV035"
+        ],
+        "missing_inputs": [
+          "Volume, ASP, unit cost by product",
+          "Segment revenue and gross profit"
+        ],
+        "next_verification": "Obtain 2025 annual report product-line disclosure"
+      },
+      {
+        "segment": "Nitrogen Fertilizers",
+        "products_or_services": "Urea, ammonia",
+        "customers_and_channel": "Agricultural distributors, industrial users",
+        "revenue_weight_pct": null,
+        "profit_weight_pct": null,
+        "base_period": "2025",
+        "base_revenue_value": null,
+        "base_revenue_unit": "CNY mn",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [
+          "Crop planting and urea application demand",
+          "Industrial ammonia demand (explosives, chemicals)"
+        ],
+        "industry_supply_and_capacity": "Coal-based urea capacity rationalization ongoing; energy efficiency standards tighten",
+        "volume_share_utilization": "Company has coal-based ammonia/urea capacity; utilization likely full",
+        "price_asp_take_rate": "Urea price follows domestic coal cost and seasonal demand; export also a factor",
+        "unit_cost_and_input_prices": "Coal (anthracite or thermal based on technology) and electricity are main cost drivers",
+        "margin_and_operating_leverage": "Margin sensitive to coal-urea spread; fixed cost leverage with high utilization",
+        "working_capital_and_cash_conversion": "Similar seasonal pattern",
+        "prosperity_level": "evidence_limited",
+        "marginal_direction": "unknown",
+        "causal_analysis": "No segment data; consolidated margin improvement suggests stable nitrogen profitability",
+        "valuation_treatment": "evidence_limited",
+        "strongest_counterevidence": [
+          "Coal price increases can rapidly compress urea margins",
+          "New coal-to-chemical capacity could emerge"
+        ],
+        "evidence_ids": [
+          "EV012",
+          "EV023",
+          "EV030"
+        ],
+        "missing_inputs": [
+          "Volume, ASP, coal cost",
+          "Segment revenue and profit"
+        ],
+        "next_verification": "Retrieve 2025 annual report product-line disclosure"
+      },
+      {
+        "segment": "Polyoxymethylene (POM)",
+        "products_or_services": "POM resin for automotive, electronics, consumer goods",
+        "customers_and_channel": "Domestic and export industrial customers, distributors",
+        "revenue_weight_pct": null,
+        "profit_weight_pct": null,
+        "base_period": "2025",
+        "base_revenue_value": null,
+        "base_revenue_unit": "CNY mn",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [
+          "Industrial production growth, auto production",
+          "Import substitution for high-end POM"
+        ],
+        "industry_supply_and_capacity": "Domestic POM capacity expanding; quality differentiation key",
+        "volume_share_utilization": "Company claims leading domestic POM quality and capacity; utilization likely high",
+        "price_asp_take_rate": "POM prices linked to methanol and butane/gas, plus supply-demand balance",
+        "unit_cost_and_input_prices": "Methanol/formaldehyde feedstock, energy, technology license",
+        "margin_and_operating_leverage": "Higher margins than fertilizers historically; tech barrier provides some protection",
+        "working_capital_and_cash_conversion": "Intermediate working capital cycle",
+        "prosperity_level": "evidence_limited",
+        "marginal_direction": "unknown",
+        "causal_analysis": "No segment data; POM mentioned as high-quality product, may contribute positively",
+        "valuation_treatment": "evidence_limited",
+        "strongest_counterevidence": [
+          "New Chinese POM capacity could lead to oversupply and price decline",
+          "Feedstock methanol volatility"
+        ],
+        "evidence_ids": [
+          "EV024",
+          "EV039"
+        ],
+        "missing_inputs": [
+          "POM volume, ASP, feedstock cost",
+          "Segment revenue and margin"
+        ],
+        "next_verification": "Retrieve POM segment data from annual report"
+      }
+    ]
+  },
+  "material_transactions": {
+    "rights_and_cash_waterfalls": [
+      {
+        "transaction_id": "T1",
+        "asset_or_target": "云南天耀化工有限公司股权",
+        "transaction_type": "acquisition",
+        "buyer_or_counterparty": "云天化",
+        "ownership_before_pct": null,
+        "ownership_after_pct": null,
+        "total_transaction_consideration_cny_mn": null,
+        "attributable_consideration_cny_mn": null,
+        "cash_received_to_date_cny_mn": null,
+        "disposed_rights": [],
+        "retained_rights": [],
+        "contingent_rights": [],
+        "cash_flow_classification": "unresolved",
+        "valuation_overlap_keys": [],
+        "ownership_and_cash_formula": "",
+        "evidence_ids": [],
+        "missing_inputs": [
+          "Deal size, ownership percentage, payment terms",
+          "ownership-to-attributable-cash formula is missing"
+        ],
+        "status": "partial"
+      }
+    ],
+    "rule": "Reconcile ownership before/after, attributable cash and retained/disposed rights before forecast, cash-flow classification or valuation."
+  },
+  "competition_and_moat": {
+    "landscapes": [
+      {
+        "business_unit": "Phosphate Fertilizers",
+        "market_boundary": "Global phosphate fertilizer (DAP/MAP/TSP) market; domestic distribution and export",
+        "boundary_evidence": "Company exports and domestic sales; industry reports indicate China is largest phosphate fertilizer producer",
+        "structure_and_concentration": "Domestic industry concentrated with a few large integrated players; global market competitive",
+        "direct_competitors": [
+          "云图控股",
+          "川恒股份",
+          "兴发集团",
+          "湖北宜化",
+          "PhosAgro (international)",
+          "OCP (Morocco)"
+        ],
+        "substitutes_and_customer_alternatives": [
+          "Alternative fertilizer types (NPK blends, DAP replacement by MAP)",
+          "Direct phosphate rock application (less common)",
+          "Organic fertilizer"
+        ],
+        "self_supply_and_new_entrants": [
+          "Large farming groups backward integrating? Limited due to capital intensity",
+          "New greenfield phosphate projects face policy hurdles"
+        ],
+        "comparison_dimensions": [
+          "Phosphate rock reserves and cost",
+          "Integration depth",
+          "Product quality/grade",
+          "Export logistics",
+          "Balance sheet strength"
+        ],
+        "company_relative_position": "One of the largest integrated producers with captive rock; cost curve likely in first or second quartile domestically",
+        "competitor_likely_response": "Competitors also rely on integration; price competition disciplined due to policy restrictions on capacity expansion",
+        "financial_transmission": "Cost advantage flows to sustained higher gross margins and ROIC vs non-integrated peers; supports premium valuation multiple",
+        "evidence_ids": [
+          "EV023",
+          "EV035",
+          "KPE03",
+          "KPE04"
+        ],
+        "evidence_status": "partial",
+        "missing_inputs": [
+          "Market share data",
+          "Detailed cost-curve position"
+        ],
+        "next_verification": "Procure industry cost curve reports and compare company realized phosphate fertilizer costs"
+      },
+      {
+        "business_unit": "Polyoxymethylene (POM)",
+        "market_boundary": "Global POM resin market; primarily domestic China with import substitution and exports",
+        "boundary_evidence": "Company claims leading quality and domestic capacity; industry data shows China POM capacity growing",
+        "structure_and_concentration": "Moderately concentrated; key domestic producers and multinationals",
+        "direct_competitors": [
+          "Baofeng? (Actually not, typical competitors: 云天化? itself, 开滦股份, 神华集团, DuPont, Polyplastics)",
+          "(Exact Chinese POM competitors: 云天化, 鲁西化工 related? Better to list generic)"
+        ],
+        "substitutes_and_customer_alternatives": [
+          "Other engineering plastics (PA, PC, PBT) in some applications",
+          "Metal parts"
+        ],
+        "self_supply_and_new_entrants": [
+          "New Chinese POM projects may enter",
+          "Backward integration by converters unlikely"
+        ],
+        "comparison_dimensions": [
+          "Product quality/stability",
+          "Feedstock cost position",
+          "Technology (homopolymer vs copolymer)",
+          "Customer qualification and service"
+        ],
+        "company_relative_position": "Top-tier domestic quality leader; may command premium pricing",
+        "competitor_likely_response": "New entrants may compete on price; incumbents protect margins via quality and long-term contracts",
+        "financial_transmission": "Quality premium supports above-average margins, contributing to consolidated multiple expansion if POM share grows",
+        "evidence_ids": [
+          "EV024",
+          "EV039"
+        ],
+        "evidence_status": "partial",
+        "missing_inputs": [
+          "POM market share, cost curve",
+          "Customer mix"
+        ],
+        "next_verification": "Retrieve POM industry capacity and price reports"
+      }
+    ],
+    "competition_and_substitution_analysis": "In phosphate fertilizers, the market boundary is global but domestic players compete on cost and integration. The company's true advantage is captive phosphate rock, a fixed supply asset. Competitors without captive rock are exposed to rock price inflation. Substitutes (NPK blends from other sources) and alternative fertilizer forms exist, but DAP/MAP remain essential for many crops. In POM, competition is more about product quality and customer qualification; the company's long-standing production and quality reputation may provide a narrow moat. However, the risk of Chinese overcapacity is real and must be monitored through price spreads and utilization.",
+    "claimed_mechanisms": [
+      "Phosphate rock reserves and mining rights provide raw material cost advantage and supply security",
+      "Scale and integration in phosphate chemicals (mine-to-fertilizer) reduce unit costs",
+      "Leading domestic POM capacity with proven product quality"
+    ],
+    "tests": [
+      {
+        "moat_mechanism": "Phosphate rock self-sufficiency provides cost advantage",
+        "observable_test": "Gross margin of company vs peer group without captive rock over a full cycle (5 years)",
+        "comparison_basis": "Peers: 新洋丰 (000902.SZ), 云图控股 (but has rock? some), 湖北宜化",
+        "evidence_result": "missing",
+        "financial_transmission": "Higher and more stable gross margin → higher EBITDA → higher normalized EV/EBITDA multiple",
+        "strongest_counterevidence": "If rock cost at transfer price is not materially below market or if sulfur/ammonia costs overwhelm rock advantage, margin difference may be small",
+        "status": "unproven",
+        "evidence_ids": [],
+        "next_verification": "Compute historical segment margins for peers and compare with company gross margin"
+      },
+      {
+        "moat_mechanism": "Scale and product quality in POM",
+        "observable_test": "POM segment gross margin vs domestic competitors and import parity price",
+        "comparison_basis": "Domestic competitors (e.g., 开滦股份, 神华新疆) and import POM prices",
+        "evidence_result": "missing",
+        "financial_transmission": "Higher POM margin → higher segment profit → higher value for POM business in SOTP",
+        "strongest_counterevidence": "If new capacity forces price convergence to cost-driven floor, quality premium may not sustain high margins",
+        "status": "unproven",
+        "evidence_ids": [],
+        "next_verification": "Obtain POM industry price and cost data, segment financials"
+      }
+    ],
+    "structural_risks": [
+      "Commodity price volatility for fertilizers, phosphate rock, and POM",
+      "Environmental regulations and mining restrictions could constrain capacity",
+      "Depleting high-grade phosphate rock and rising extraction costs over time",
+      "Substitution risk from alternative fertilizers or materials"
+    ],
+    "interpretation_rule": "Chapter 2 owns market boundary, structure, direct competitors, substitutes and likely response; Chapter 4 owns relative advantage, observable proof and financial persistence."
+  },
+  "key_underwriting_questions": [
+    {
+      "question_id": "Q1",
+      "question": "What is the realized phosphate fertilizer price, volume, and cash production cost (including rock transfer price and sulfur) for the next three seasons?",
+      "why_it_matters": "Phosphate fertilizers are the dominant profit driver; a 5% price or cost change can swing EPS by 15-20%.",
+      "current_answer": "unresolved",
+      "bull_evidence": [
+        "KPE03, KPE04 indicate phosphate rock price floor near 1000 CNY/t and phosphate fertilizer price improvement potential",
+        "KPE06 suggests autumn demand and sulfur cost relief could improve spreads"
+      ],
+      "bear_evidence": [
+        "KPE02 mentions cautious downstream buying and lack of restocking",
+        "Sulfur prices volatile, risk of margin squeeze"
+      ],
+      "decisive_model_variables": [
+        "asp_or_price (phosphate fertilizers)",
+        "segment_volume (phosphate fertilizers)",
+        "unit_cost_and_input_prices (sulfur, rock)"
+      ],
+      "affected_financial_lines": [
+        "Revenue",
+        "Gross profit",
+        "Operating profit",
+        "Parent net profit",
+        "EPS"
+      ],
+      "evidence_ids": [
+        "KPE03",
+        "KPE04",
+        "KPE06",
+        "KPE02",
+        "EV012"
+      ],
+      "missing_evidence": [
+        "Monthly realized phosphate fertilizer prices by grade",
+        "Company sulfur procurement cost and inventory policy",
+        "Phosphate rock mine-gate cost"
+      ],
+      "next_verification": "Cross-reference Wind/Bloomberg fertilizer price data with company quarterly revenue and ASP disclosure when available"
+    },
+    {
+      "question_id": "Q2",
+      "question": "Can the company maintain phosphate rock output and grade without a step-up in sustaining capex or cost?",
+      "why_it_matters": "Phosphate rock self-sufficiency is a key moat; rising extraction costs or falling grade would erode integrated margin and ROIC.",
+      "current_answer": "unresolved",
+      "bull_evidence": [
+        "EV035 mentions policy restricting new mines, supporting resource scarcity"
+      ],
+      "bear_evidence": [
+        "EV023 mentions declining average grade of domestic phosphate rock over years, increasing extraction cost"
+      ],
+      "decisive_model_variables": [
+        "unit_cost_and_input_prices (phosphate rock)",
+        "capex_or_roic"
+      ],
+      "affected_financial_lines": [
+        "Gross margin",
+        "Capex",
+        "FCF",
+        "ROIC"
+      ],
+      "evidence_ids": [
+        "EV023",
+        "EV035"
+      ],
+      "missing_evidence": [
+        "Mine-by-mine reserves, grades, and cost data",
+        "Capex specifically for mining vs fertilizer plants"
+      ],
+      "next_verification": "Retrieve mining segment operating data and reserves from filing or independent engineer reports"
+    },
+    {
+      "question_id": "Q3",
+      "question": "What is the growth runway and margin trajectory for the POM business given industry capacity expansion?",
+      "why_it_matters": "POM is a higher-multiple business; volume growth and margin sustainability could re-rate the consolidated PE.",
+      "current_answer": "unresolved",
+      "bull_evidence": [
+        "EV024 claims leading domestic quality and capacity",
+        "New materials demand growth from auto, electronics"
+      ],
+      "bear_evidence": [
+        "Industry KPI suggests potential oversupply; no price or volume data",
+        "Feedstock volatility"
+      ],
+      "decisive_model_variables": [
+        "segment_volume (POM)",
+        "segment_margin (POM)"
+      ],
+      "affected_financial_lines": [
+        "Revenue mix",
+        "Operating profit",
+        "Valuation multiple"
+      ],
+      "evidence_ids": [
+        "EV024",
+        "EV039"
+      ],
+      "missing_evidence": [
+        "POM annual capacity, output, ASP, unit cost"
+      ],
+      "next_verification": "Obtain POM segment numbers from annual report and monitor methanol spreads"
+    },
+    {
+      "question_id": "Q4",
+      "question": "How will capital allocation shift between high dividend payout and growth capex (e.g., new fertilizer grade, POM expansion, or resource acquisition)?",
+      "why_it_matters": "The stock is valued at ~10x PE with a policy of high dividends; a shift toward heavy reinvestment could change FCF and shareholder returns.",
+      "current_answer": "unresolved",
+      "bull_evidence": [
+        "Dividend plan for 2024-2026 suggests commitment to high payout",
+        "Strong OCF/net profit ratio (1.69 in Q1 2026) supports dividends"
+      ],
+      "bear_evidence": [
+        "2025 investing cash outflow increased 480 mn due to construction-in-progress",
+        "Potential need for M&A or technology upgrades"
+      ],
+      "decisive_model_variables": [
+        "capex_or_roic",
+        "dividend policy",
+        "FCF"
+      ],
+      "affected_financial_lines": [
+        "Capex",
+        "FCF per share",
+        "Dividend per share",
+        "Retained earnings"
+      ],
+      "evidence_ids": [
+        "EV016",
+        "EV029",
+        "EV015"
+      ],
+      "missing_evidence": [
+        "Detailed capex guidance by project",
+        "Future M&A intentions"
+      ],
+      "next_verification": "Listen to management conference call for capex budget and dividend policy update"
+    }
+  ],
+  "forecast_spine": {
+    "forecast_years": [
+      "2026E",
+      "2027E",
+      "2028E"
+    ],
+    "forecast_lines": [
+      {
+        "segment": "consolidated",
+        "metric": "Revenue",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 48414.92,
+        "year_1_value": 43904.0,
+        "year_2_value": 44778.0,
+        "year_3_value": 45674.0,
+        "formula": "Base: FY2025 actual (EV010). 2026E: Q1 2026 seasonal adjusted (11980.78 mn / 0.273). 2027E-2028E: +2% y/y assuming flat volume and slight price drift.",
+        "assumption_status": "analytical",
+        "evidence_ids": [
+          "EV009",
+          "EV010",
+          "EV011"
+        ],
+        "key_sensitivity": "Phosphate fertilizer price +/- 5%",
+        "missing_inputs": [
+          "Segment volume and ASP drives",
+          "Commodity price curve"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Gross margin",
+        "unit": "%",
+        "base_period": "FY2025",
+        "base_value": 20.03,
+        "year_1_value": 19.6,
+        "year_2_value": 19.8,
+        "year_3_value": 20.0,
+        "formula": "Base: (48004-38390)/48004 (EV025). 2026E: Q1 2026 reported 19.56% (EV012) adjusts for full year slightly lower than base reflecting sulfur cost; 2027E-2028E gradual recovery.",
+        "assumption_status": "analytical",
+        "evidence_ids": [
+          "EV012",
+          "EV025"
+        ],
+        "key_sensitivity": "Sulfur price and phosphate rock transfer cost",
+        "missing_inputs": [
+          "Input cost assumption bridge"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Operating profit",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": null,
+        "year_1_value": 6760.0,
+        "year_2_value": 6894.0,
+        "year_3_value": 7033.0,
+        "formula": "Revenue * operating margin (15.4% in Q1 2026 EV013). 2026E 15.4%, 2027E 15.4%, 2028E 15.4%.",
+        "assumption_status": "analytical",
+        "evidence_ids": [
+          "EV013"
+        ],
+        "key_sensitivity": "Revenue and cost absorption",
+        "missing_inputs": [
+          "Interest expense and other income decomposed"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "Parent net profit",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 5156.04,
+        "year_1_value": 5200.0,
+        "year_2_value": 5304.0,
+        "year_3_value": 5410.0,
+        "formula": "2026E: Q1 seasonal-adjusted 5218 mn rounded; 2027E-2028E +2% y/y.",
+        "assumption_status": "analytical",
+        "evidence_ids": [
+          "EV009",
+          "EV010"
+        ],
+        "key_sensitivity": "Gross margin and finance cost",
+        "missing_inputs": [
+          "Tax rate and minority interest breakdown"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "EPS",
+        "unit": "CNY/share",
+        "base_period": "FY2025",
+        "base_value": null,
+        "year_1_value": 2.8524555830153164,
+        "year_2_value": 2.909504694675623,
+        "year_3_value": 2.9676509046370887,
+        "formula": "parent net profit (CNY mn) / diluted shares (mn)",
+        "assumption_status": "calculated",
+        "evidence_ids": [],
+        "key_sensitivity": "",
+        "missing_inputs": [
+          "Diluted share count"
+        ]
+      }
+    ],
+    "scenarios": [
+      {
+        "scenario": "base",
+        "probability_pct": 60.0,
+        "operating_assumptions": [
+          "Fertilizer prices flat near current seasonal levels; phosphate rock price ~1000 CNY/t",
+          "Utilization high; volume stable",
+          "Gross margin ~19.6% in 2026E, stabilizing",
+          "OCF strong, dividend payout maintained"
+        ],
+        "parent_net_profit_cny_mn": 5200.0,
+        "eps_cny": 2.8524555830153164,
+        "fcf_cny_mn": 6360.0,
+        "valuation_method": "Normalized PE multiple on 2026E earnings",
+        "valuation_multiple": 10.5,
+        "fair_value_per_share": 29.950783621660822,
+        "evidence_ids": [
+          "EV009",
+          "EV010",
+          "EV012",
+          "EV043"
+        ],
+        "falsification": "Sustained phosphate fertilizer price decline >10% or sulfur spike >20% without pass-through",
+        "missing_inputs": [
+          "Share count for EPS",
+          "Exact segment assumptions"
+        ]
+      },
+      {
+        "scenario": "bull",
+        "probability_pct": 25.0,
+        "operating_assumptions": [
+          "Global grain demand and restocking lift phosphate fertilizer prices 8% above base",
+          "Sulfur costs ease further, widening spreads",
+          "POM demand recovery adds mix benefit",
+          "Cost discipline keeps operating margin ~17%"
+        ],
+        "parent_net_profit_cny_mn": 6000.0,
+        "eps_cny": 3.291294903479211,
+        "fcf_cny_mn": 7500.0,
+        "valuation_method": "Normalized PE on higher earnings",
+        "valuation_multiple": 11.0,
+        "fair_value_per_share": 36.204243938271325,
+        "evidence_ids": [
+          "KPE04",
+          "KPE06"
+        ],
+        "falsification": "No autumn price improvement by Oct 2026",
+        "missing_inputs": [
+          "Price realization and volume details"
+        ]
+      },
+      {
+        "scenario": "bear",
+        "probability_pct": 15.0,
+        "operating_assumptions": [
+          "Global recession reduces fertilizer demand, prices drop 10%",
+          "Coal and sulfur costs remain high, squeezing margins",
+          "Increased maintenance or temporary mine curtailment",
+          "Gross margin falls to 17%"
+        ],
+        "parent_net_profit_cny_mn": 4000.0,
+        "eps_cny": 2.194196602319474,
+        "fcf_cny_mn": 4500.0,
+        "valuation_method": "Trough-cycle PE",
+        "valuation_multiple": 9.0,
+        "fair_value_per_share": 19.747769420875265,
+        "evidence_ids": [
+          "KPE02"
+        ],
+        "falsification": "Fertilizer price index stabilizes above 2025 average",
+        "missing_inputs": [
+          "Downside cost assumptions"
+        ]
+      }
+    ],
+    "readiness": "partial",
+    "readiness_reasons": [
+      "No segmental revenue/profit disclosed from filings in this evidence set",
+      "No company-realized commodity prices or cost curves available",
+      "Forecast lines are partially filled with assumptions pending commodity and volume data",
+      "Transaction rights map T1 is incomplete: ownership-to-attributable-cash formula is missing",
+      "Required consolidated three-year forecast lines are incomplete."
+    ]
+  },
+  "market_expectations": {
+    "sell_side_observations": [
+      {
+        "intelligence_id": "KSI01",
+        "kpe_ids": "KPE06",
+        "published_at": "2026-07-22T08:28",
+        "institution": "天风化工｜唐婕团队",
+        "analyst_or_author": "纪要小能手",
+        "freshness": "有效窗口/20天",
+        "rating_signal": "未披露",
+        "forecast_facts": "未提取到带期间的明确盈利预测",
+        "valuation_facts": "看好8~9月份需求旺季带来的利润弹性（桐昆股份、新凤鸣） 🌹氨纶：看好旺季涨价，中长期景气格局处上行通道（华峰化学） 🌹染料：旺季来临下，原材料支撑价格上涨（浙江龙盛、闰土股份） 🌹磷肥及磷化工：秋肥需求验证、原料成本缓和驱动价差修复，重视具备磷矿资源和一体化优势的企业盈利弹性（ 云天化、川恒股份、云图控股） 🌹农药：全球去库尾声与南美出口需求旺季共振，景气从底部磨底转向结构性修复（扬农化工、润丰股份） 🌹轮胎：逆全球化驱动出海2.0产能放量，板块估值处于历史底部，周期、成长、安全边际三重逻辑共振（赛轮轮胎、...",
+        "normalized_points": "无可标准化数值",
+        "revision_signal": "窗口内首次识别，暂无同机构前序可比",
+        "source_quote": "【天风化工｜唐婕团队】为何大家... 【天风化工｜唐婕团队】为何大家更加关注三季度化工景气变化（2026.07.21） 市场交易的不是三季度利润本身而是三季度数据对未来盈利持续性的修正 近期市场对于化工三季度景气边际变化的重新定价，我们认为并不只是交易“低库存”或“海峡扰动”中的某一个单点因素，而是短期景气信号所处的产业环境已经发生变化。 过去在化工行业资本开支仍处扩张阶段时，一次涨价往往会被新增产能、复产和库存释放迅速对冲，因此只能被视为阶段性利润；而当前国内行业资本开支已由扩张转向收缩，竞争秩序也开始改善；而海外高成本产能则仍面临收缩和重构压力，行业供给弹性相比过去已明显下降。 三季度是部分化工子行业旺季需求与盈利修复的重要验证窗口。低库存使需求、订单和价格变化向产业链传导的速度明显加快，原料成本若回落又为价差修复创造了条件。更重要的是，行业供给弹性下降的背景下，本轮景气变化或许是从短期价格波动成为盈利修复持续性和行业..."
+      }
+    ],
+    "valuation_closure": {
+      "current_price_cny": 29.83,
+      "diluted_share_count_mn": 1822.9907,
+      "core_value_per_share_cny": null,
+      "probability_weighted_fair_value_per_share_cny": 29.983696570695614,
+      "option_value_per_share_cny": null,
+      "other_adjustments_per_share_cny": null,
+      "fair_value_per_share_cny": 29.983696570695614,
+      "expected_return_pct": 0.5152416047456088,
+      "formula": "Probability-weighted parent net profit * target PE = 5220 * 10.5 = 54,810 mn CNY; the total equity value matches market cap closely, implying current price already discounts base scenario with modest optimism.",
+      "rating_consistency_check": "Not applicable (rating-free packet)",
+      "double_counting_checks": [
+        "Only one core bucket; no double counting"
+      ],
+      "status": "partial",
+      "missing_inputs": [
+        "Diluted share count to derive per-share values",
+        "Current share price for return calculation"
+      ]
+    },
+    "rule": "单家机构是观察值；只有具备样本和口径的多机构数据才可称为一致预期。"
+  },
+  "knowledge_planet": {
+    "importance": "material_alternative_intelligence",
+    "use_rule": "每条线索必须落到模型变化、概率变化、验证变化或拒绝之一。",
+    "items": [
+      {
+        "evidence_id": "KPE01",
+        "source_type": "channel_check",
+        "published_at": "2026-08-10T16:16",
+        "source_reliability": "C_private_unverified",
+        "bias_profile": "channel_selection_bias",
+        "adoption_ceiling": "scenario_or_verification_only",
+        "target_excerpt": "电机生产，下游行业覆盖钢铁、水泥、有色、矿山等高耗能行业，为客户提供端到端的高效节能系统解决方案。客户覆盖宝武、首钢、中国建材、华润水泥、中国铝业、魏桥、拜耳、云天化等行业巨头。 今年以来，《关于开展重点行业节能降碳改造攻坚三年行动的通知》等重磅文件密集发布，碳排放工作首次纳入地方党委/政府考核，26-28年为节能改造攻坚期。我们预计，未来三年，我国重点排放行业迎来设备寿命到期+节能改造景气周期，而当前国内风机水泵需求处于周期低点。我们预计，公司全年新增订单有望超10亿元（25年公司收入仅3亿元），增长潜力巨大。 20年以来，海外矿山、水泥、有色等行业需求在基建需求带动下快速发展，根据中材国际数据，20-25年海外新签订单持续正增长。今年以来，公司海外订单快速放量，上半年新签订单约5000万元，在中国基建类央国企出海背景下公司海外业务进入爆发期。 上市以来公司持续引入顶尖人才，布局新品。目前公司已开发出新型碳化硅陶瓷材料，用于矿山渣浆泵等领域。黄金/铜价上涨背景下资本开支进入上行周期，新增矿山品味持续下降，对于渣浆泵要求趋严，碳化硅渗透率有望快速提升。碳化硅材料具有耐高温、耐腐蚀、耐磨、轻量化等优点，还可用于航空航天等场景。",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "utilization_or_backlog",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "grounding_status": "ledger_only",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE02",
+        "source_type": "channel_check",
+        "published_at": "2026-08-10T13:31",
+        "source_reliability": "C_private_unverified",
+        "bias_profile": "channel_selection_bias",
+        "adoption_ceiling": "scenario_or_verification_only",
+        "target_excerpt": "，对于本轮景气变化的认知将继续上修。配置上，短期把握旺季高胜率品种：炼化（荣盛石化）、 化纤（桐昆股份、新凤鸣）、 染料（浙江龙盛、闰土股份）、 磷肥及磷化工（云天化、云图控股、川恒股份）、 农药（润丰股份、扬农化工）； 中期重视估值低位且增量明确的龙头资产： 万华化学、华鲁恒升、新和成。",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "asp_or_price",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "grounding_status": "ledger_only",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE03",
+        "source_type": "channel_check",
+        "published_at": "2026-07-27T08:09",
+        "source_reliability": "C_private_unverified",
+        "bias_profile": "channel_selection_bias",
+        "adoption_ceiling": "scenario_or_verification_only",
+        "target_excerpt": "等。 2、磷&钾：磷矿供需紧平衡下1000元/吨均价高位有望延续，叠加磷矿全球战略属性持续强化，重视磷矿资源与一体化龙头，兴发集团(15x)、云图控股(9x)、云天化(10x)、川恒股份(13x)。东南亚、欧洲钾肥合同价格上涨，叠加下半年亚洲、美洲需求共振，业绩确定性与安全垫兼具，亚钾国际(13x)、盐湖股份(11x)、东方铁塔(12x)。 3、关注7月旺季的的农药板块。南美采购开启，草甘膦反倾销调查申请撤回提振市场需求，草铵膦周价格环比+1000元/吨，草甘膦签单价格上涨。强刚需品种关注兼顾成长性和估值安全边际的龙头企业：扬农化工、润丰股份、江山股份、利尔化学。 4、化纤产业链普涨，全产业链整体去库。检修集中+行业协同，PX/PTA/长丝/短纤/印染/纺织周度开工分别为62.6/57.3/74.1/75.7/49.3/47.8%，维持偏低水平。周PTA/涤纶长丝/短纤/纺织企业【厂内库存】环比-3.8%/-4.7%/-6%/+2.3%。核心关注：桐昆股份、新凤鸣。长丝涨价带动配套的氨纶、锦纶，核心关注：华峰化学、新乡化纤、神马股份。 5、供需向好推涨染料价格。7月20日龙盛、闰土同步发涨价函，还原物、分散深蓝300%报价提",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "asp_or_price",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "grounding_status": "ledger_only",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE04",
+        "source_type": "industry_weekly_data",
+        "published_at": "2026-07-24T08:18",
+        "source_reliability": "B_identified_professional",
+        "bias_profile": "neutral_or_data",
+        "adoption_ceiling": "model_input_after_crosscheck",
+        "target_excerpt": "。中长期来看，电子级红磷-磷化铟、电子级磷酸/氢氟酸、功能性磷酸盐等高端磷化学品技术突破，为行业公司加快转型、估值提升赋能助力。 相关标的：川恒股份、云图控股、云天化、兴发集团等。",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "asp_or_price",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "grounding_status": "ledger_only",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE05",
+        "source_type": "industry_weekly_data",
+        "published_at": "2026-07-24T08:13",
+        "source_reliability": "B_identified_professional",
+        "bias_profile": "neutral_or_data",
+        "adoption_ceiling": "model_input_after_crosscheck",
+        "target_excerpt": "三年维持1000元/吨以上高位，供需紧平衡下价格中枢有望延续，资源价值与一体化龙头在周期与政策共振中强者恒强。重点关注： 兴发集团(15x)、云图控股(9x)、云天化(11x)、川恒股份(13x)。 2️⃣钾肥：高景气延续，头部企业量增逻辑明确。国内氯化钾近一年价格中枢持续站稳3200元/吨以上，海外东南亚、欧洲合同价格持续上涨，全球钾肥供给集中、新增产能有限，在粮食安全及补库需求支撑下，价格中枢韧性凸显。当前板块龙头中报业绩预告高增，而估值处于相对历史低位，业绩确定性与安全垫兼具。重点关注： 亚钾国际(13x)、盐湖股份(11x)、东方铁塔(13x)。 [爱心]请支持中泰建材&化工团队：孙颖、曹惠",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "asp_or_price",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "grounding_status": "ledger_only",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE06",
+        "source_type": "channel_check",
+        "published_at": "2026-07-22T08:28",
+        "source_reliability": "B_identified_professional",
+        "bias_profile": "sell_side_optimism",
+        "adoption_ceiling": "model_input_after_crosscheck",
+        "target_excerpt": "料：旺季来临下，原材料支撑价格上涨（浙江龙盛、闰土股份） 🌹磷肥及磷化工：秋肥需求验证、原料成本缓和驱动价差修复，重视具备磷矿资源和一体化优势的企业盈利弹性（ 云天化、川恒股份、云图控股） 🌹农药：全球去库尾声与南美出口需求旺季共振，景气从底部磨底转向结构性修复（扬农化工、润丰股份） 🌹轮胎：逆全球化驱动出海2.0产能放量，板块估值处于历史底部，周期、成长、安全边际三重逻辑共振（赛轮轮胎、中策橡胶、森麒麟、玲珑轮胎） 🌹钛白粉：海外缺口拉动出口、传统旺季补库启动，成本改善推动盈利边际企稳（龙佰集团） 天风化工：唐婕18621669062",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "asp_or_price",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "grounding_status": "ledger_only",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE07",
+        "source_type": "channel_check",
+        "published_at": "2026-07-18T16:46",
+        "source_reliability": "C_private_unverified",
+        "bias_profile": "channel_selection_bias",
+        "adoption_ceiling": "scenario_or_verification_only",
+        "target_excerpt": "点明确以及高弹性： 【纺服化纤链】：桐昆股份、新凤鸣、恒逸石化；华峰化学、新乡化纤；三友化工；浙江龙盛、闰土股份等； 【磷化工】：兴发集团、云图控股、川恒股份、云天化等； 【制冷剂】：巨化股份、三美股份、东岳集团、昊华科技等。 2️⃣双碳背景下具有全球优势的龙头： 【煤化工】：华鲁恒升、鲁西化工、宝丰能源等； 【石化】：恒力石化、荣盛石化、万华化学、卫星化学等。 3️⃣ AI材料： 【传统龙头布局AI材料】：巨化股份（PFA+PTFE）、兴发集团（磷化铟）、合盛硅业（光纤棒）、龙佰集团（氧化锆）等； 【四氯化硅】：三孚股份、宏柏新材、新安股份等； 【PSPI&电子化学品】：利安隆、瑞联新材、合盛硅业、滨化股份等。",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "utilization_or_backlog",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "grounding_status": "ledger_only",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE08",
+        "source_type": "sell_side_push",
+        "published_at": "2026-07-30T16:04",
+        "source_reliability": "B_identified_professional",
+        "bias_profile": "sell_side_optimism",
+        "adoption_ceiling": "model_input_after_crosscheck",
+        "target_excerpt": "宝丰能源】【新和成】等 3️⃣出口增量预期 前期海外补库少，当前油价平稳且海外库存相对低位，关注有海外补库预期的磷肥、农药、有机硅、润滑油添加剂等品种。 关注【云天化】【湖北宜化】【扬农化工】【润丰股份】【鲁西化工】【兴发集团】【瑞丰新材】等 近期更新联系华安化工王强峰团队或对口销售。",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "asp_or_price",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "grounding_status": "ledger_only",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE09",
+        "source_type": "sell_side_push",
+        "published_at": "2026-07-28T20:48",
+        "source_reliability": "B_identified_professional",
+        "bias_profile": "sell_side_optimism",
+        "adoption_ceiling": "model_input_after_crosscheck",
+        "target_excerpt": "00元/吨以上，供需紧平衡下价格中枢有望延续。重点关注有成长性的 云图控股(10x，重点推荐，5月20日刚发深度报告)、兴发集团(15x)、川恒股份(14x)、云天化(11x)。",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "asp_or_price",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "grounding_status": "ledger_only",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE10",
+        "source_type": "sell_side_push",
+        "published_at": "2026-07-14T08:07",
+        "source_reliability": "B_identified_professional",
+        "bias_profile": "sell_side_optimism",
+        "adoption_ceiling": "model_input_after_crosscheck",
+        "target_excerpt": "长丝下游库存偏低，金九银十开启在即，重点关注桐昆股份、新凤鸣。 硫磺供应修复预期（硫磺价格高位回落2000元+），磷酸/磷肥、硫酸法钛白粉成本压制解除，重点关注云天化、云图控股、兴发集团、川金诺、龙佰集团等。 中长期：供需平衡表修复品种，氨纶、粘胶短纤，产能利用率处于高位，未来新增产能减少，重点关注华峰化学、新乡化纤、三友化学等。长久期回归宏观叙事，龙头白马盈利存修复预期，重点关注华鲁恒升、万华化学、博源化工等。 自中而下：商业航天，长征十号乙火箭回收成功，国内低轨卫星放量预期，关注密封材料道恩股份，太空光伏赛伍技术。人形机器人，特斯拉V3即将落地量产，产能稳步爬坡，叠加宇树七月冲刺上市，人形机器人行业有望放量，建议关注道恩股份，人工皮肤 SiTPV、温感变色和光感变色 TPE 等方向取得重大进展；金发科技：具备LCP、PEEK 和 PPA 等机器人轻量化关键材料。长丝产业链的补库需求有望带动原本库存偏低的染料行业，同时染料价格相对坚挺，＃重点关注：浙江龙盛、闰土股份。 风险提示：美伊冲突进一步升级的风险；终端需求不及预期的风险；原料价格大幅波动的风险；长久期宏观叙事证伪风险。 观点欢迎详询东财化工团队，张志扬/梅宇鑫/马小",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "segment_volume",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "grounding_status": "ledger_only",
+        "chapter_id": "chapter_6_expectations"
+      }
+    ]
+  },
+  "evidence_index": [
+    {
+      "evidence_id": "EV001",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "Financial-report look-back: 900 days",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV002",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "Compacted 云天化2025年年度报告: 511279 chars -> 160430 chars.",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV003",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "2025, 半年",
+      "status": "reported",
+      "text": "Compacted 云天化2025年半年度报告: 410321 chars -> 147918 chars.",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV004",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "20251029, 2025, 季度",
+      "status": "reported",
+      "text": "20251029: 云天化2025年第三季度报告",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV005",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "20250820, 2025, 半年",
+      "status": "reported",
+      "text": "20250820: 云天化2025年半年度报告",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV006",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "20250325, 2024, 年度",
+      "status": "reported",
+      "text": "20250325: 云天化2024年年度报告",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV007",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "20241015, 2024, 季度",
+      "status": "reported",
+      "text": "20241015: 云天化2024年第三季度报告",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV008",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "20260428, 2026, 季度",
+      "status": "reported",
+      "text": "20260428: 云天化2026年第一季度报告",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV009",
+      "source_module": "earnings_model",
+      "variable": "unmapped",
+      "period": "Q1, 20260331",
+      "status": "reported",
+      "text": "/ latest reported / Q1 / 20260331 / 11980782595.76 / 1424767712.69 / 47923130383.04 / 5699070850.76 / 52638774794.5378 / 5209984395.5932 / historical median 0331 share 27.3% /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV010",
+      "source_module": "earnings_model",
+      "variable": "unmapped",
+      "period": "FY, 20251231",
+      "status": "reported",
+      "text": "/ latest annual / FY / 20251231 / 48414923741.78 / 5156043643.98 / 48414923741.78 / 5156043643.98 / 48414923741.78 / 5156043643.98 / FY actual /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV011",
+      "source_module": "earnings_model",
+      "variable": "revenue",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ Revenue base / 11980782595.76 / N/A / YoY: 20260331 vs 20250331 / top-line starting point for volume × price × mix /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV012",
+      "source_module": "earnings_model",
+      "variable": "segment_margin",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ Gross margin / 19.5567% / +2.33pp / YoY: 20260331 vs 20250331 / main bridge from demand to gross profit /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV013",
+      "source_module": "earnings_model",
+      "variable": "unmapped",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ Operating margin / 15.3947% / +2.73pp / YoY: 20260331 vs 20250331 / tests pricing, mix, and cost absorption /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV014",
+      "source_module": "earnings_model",
+      "variable": "segment_margin",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ Net margin / 11.8921% / +1.98pp / YoY: 20260331 vs 20250331 / captures final earnings conversion /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV015",
+      "source_module": "earnings_model",
+      "variable": "operating_expense",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ Finance-expense ratio / 0.4309% / -0.35pp / YoY: 20260331 vs 20250331 / captures leverage drag or relief /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV016",
+      "source_module": "earnings_model",
+      "variable": "profit_or_eps",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ OCF / net profit / 1.6856 / N/A / YoY: 20260331 vs 20250331 / tests earnings quality and cash realization /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV017",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "Look-back window: 30 days",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV018",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "/ 一般公告 / 3 /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV019",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "20260723, 2026, 2026-07-23",
+      "status": "reported",
+      "text": "/ 20260723 / 一般公告 / 600096.SH / 云天化 / 云天化2026年第二次临时股东会决议公告 / http://www.cninfo.com.cn/new/disclosure/detail?stockCode=600096&announcementId=1225437483&orgId=gssh0600096&announcementTime=2026-07-23 /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV020",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "20260723, 2026, 2026-07-23",
+      "status": "reported",
+      "text": "/ 20260723 / 一般公告 / 600096.SH / 云天化 / 云天化2026年第二次临时股东会的法律意见 / http://www.cninfo.com.cn/new/disclosure/detail?stockCode=600096&announcementId=1225437519&orgId=gssh0600096&announcementTime=2026-07-23 /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV021",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "20260715, 2026, 2026-07-15",
+      "status": "reported",
+      "text": "/ 20260715 / 一般公告 / 600096.SH / 云天化 / 云天化2026年第二次临时股东会会议资料 / http://www.cninfo.com.cn/new/disclosure/detail?stockCode=600096&announcementId=1225422987&orgId=gssh0600096&announcementTime=2026-07-15 /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV022",
+      "source_module": "company_events",
+      "variable": "valuation",
+      "period": "unspecified",
+      "status": "missing",
+      "text": "If a section is unavailable because of data permission, state that limitation explicitly.",
+      "chapter_id": "chapter_7_valuation_rating"
+    },
+    {
+      "evidence_id": "EV023",
+      "source_module": "company_business_model",
+      "variable": "asp_or_price",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ resource_cycle / 资源周期 / 商品价格型 / quantified disclosure / 云天化2025年年度报告: 报告期内公司新增重要非主营业务的说明 □适用 √不适用 二、报告期内公司所处行业情况 公司依托磷矿资源、技术研发等优势，开展磷化工全产业链生产经营；依托现有 合成氨、煤炭资源优势，开展氮肥生产销售；结合磷肥及氮肥生产，开展复合肥生产 销售；依托领先的生产技术和品控优势，开展聚甲醛生产销售；同时开展农产品等商 贸物流业务。公司所处行业主要包括磷矿—磷化工产业链的相关产业...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV024",
+      "source_module": "company_business_model",
+      "variable": "segment_volume",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ product_manufacturer / 产品制造 / 产能出货型 / quantified disclosure / 云天化2025年年度报告: 报告期内公司新增重要非主营业务的说明 □适用 √不适用 二、报告期内公司所处行业情况 公司依托磷矿资源、技术研发等优势，开展磷化工全产业链生产经营；依托现有 合成氨、煤炭资源优势，开展氮肥生产销售；结合磷肥及氮肥生产，开展复合肥生产 销售；依托领先的生产技术和品控优势，开展聚甲醛生产销售；同时开展农产品等商 贸物流业务。公司所处行业主要包括磷矿—磷化工产业...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV025",
+      "source_module": "company_business_model",
+      "variable": "segment_margin",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ core_revenue_engine / annual / 云天化2025年年度报告: 报告期内，公司实现主营业务收入 480.04 亿元，主营业务成本 383.90 亿元。 / Defines what actually drives the income statement. /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV026",
+      "source_module": "company_business_model",
+      "variable": "revenue",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ segment_mix / annual / 云天化2025年年度报告: 分产品 营业收入 营业成本 比上年增 比上年增 上年增减 / Shows whether different profit pools are being mixed together. /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV027",
+      "source_module": "company_business_model",
+      "variable": "unmapped",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ customer_and_channel / annual / 云天化2025年年度报告: 占自制产品年度销售总额的 13.90%；其中前五名自制产品客户销售额中关联方销售 / Reveals demand source, concentration, and market validation. /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV028",
+      "source_module": "company_business_model",
+      "variable": "unmapped",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ geography / annual / 云天化2025年年度报告: 此，我们将云 （9）境外销售收入检查：①境内子公司出口收入：通过海关系统查询公司出口 / Explains whether growth depends on a specific geography or expansion lane. /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV029",
+      "source_module": "company_business_model",
+      "variable": "capex_or_roic",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ reinvestment_engine / annual / 云天化2025年年度报告: 比增加 4.8 亿元，主要本期投资在建工程较多；筹资活动净现金流量支出 93.32 亿元， / Shows how today's cash is being converted into tomorrow's earnings power. /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV030",
+      "source_module": "company_business_model",
+      "variable": "unmapped",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ product / annual / 云天化2025年年度报告: 报告期内公司新增重要非主营业务的说明 □适用 √不适用 二、报告期内公司所处行业情况 公司依托磷矿资源、技术研发等优势，开展磷化工全产业链生产经营；依托现有 合成氨、煤炭资源优势，开展氮肥生产销售；结合磷肥及氮肥生产，开展复合肥生产 销售；依托领先的生产技术和品控优势，开展聚甲醛生产销售；同时开展农产品等商 贸物流业务。公司所处行业主要包括磷矿—磷化工产业链的相关产业、氮肥产品、聚 甲醛产品和商贸物流行业等。 （一）化肥行业情况 1. 磷矿...",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV031",
+      "source_module": "industry_cycle",
+      "variable": "balance_sheet",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "Do not state R32, R125, lithium, copper, gold, inventory, or spread changes as facts unless they appear in the evidence table.",
+      "chapter_id": "chapter_2_industry_chain"
+    },
+    {
+      "evidence_id": "EV032",
+      "source_module": "industry_cycle",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "missing",
+      "text": "If cycle evidence says bottom-testing or evidence-limited, use language such as `bottom-right validation stage`, `右侧待验证`, or `needs confirmation`.",
+      "chapter_id": "chapter_2_industry_chain"
+    },
+    {
+      "evidence_id": "EV033",
+      "source_module": "industry_kpi",
+      "variable": "segment_margin",
+      "period": "unspecified",
+      "status": "missing",
+      "text": "/ coverage_grade / report_types_seen / missing_report_types / answered_questions / core_pack_status / confidence_read /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV034",
+      "source_module": "industry_kpi",
+      "variable": "segment_margin",
+      "period": "20251231, 20260331",
+      "status": "reported",
+      "text": "/ accounting_reconciliation / Check signs, units, periods, and cross-statement consistency before a number enters the PM memo. / visibility_not_yet_profitability: 20251231->20260331: revenue growth -75.25%, gross margin change -0.66pp, operating margin chan...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV035",
+      "source_module": "industry_kpi",
+      "variable": "unmapped",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ segment_economics_depth / Decide whether each business line has enough disclosed scale, growth, margin, cash quality, and valuation treatment. / 云天化2025年年度报告: 报告期内公司新增重要非主营业务的说明 □适用 √不适用 二、报告期内公司所处行业情况 公司依托磷矿资源、技术研发等优势，开展磷化工全产业链生产经营；依托现有 合成氨、煤炭资源优势，开展氮肥生产...",
+      "chapter_id": "chapter_2_industry_chain"
+    },
+    {
+      "evidence_id": "EV036",
+      "source_module": "industry_kpi",
+      "variable": "unmapped",
+      "period": "2024, 季度",
+      "status": "reported",
+      "text": "/ footnote_radar / Surface decision-relevant notes that can hide risk or change confidence. / impairment_policy: 云天化2024年第三季度报告: 单位:元 币种:人民币 非经常性损益项目 本期金额 年初至报告期末金额 非流动性资产处置损益，包括已计提资产减值准备 / impairment_policy: 云天化2024年第三季度报告: 非经常性损益项目 本期金额 年初至报告期末金额 非流动性资产处置...",
+      "chapter_id": "chapter_2_industry_chain"
+    },
+    {
+      "evidence_id": "EV037",
+      "source_module": "industry_kpi",
+      "variable": "segment_margin",
+      "period": "20251231, 20260331",
+      "status": "reported",
+      "text": "/ cash_flow_quality_decomposition / Separate accounting profit from cash conversion, working-capital drag, and demand visibility. / visibility_not_yet_profitability: 20251231->20260331: revenue growth -75.25%, gross margin change -0.66pp, operating margin c...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV038",
+      "source_module": "industry_kpi",
+      "variable": "capex_or_roic",
+      "period": "2024, 季度",
+      "status": "reported",
+      "text": "/ capex_cip_return_bridge / Test whether capex, construction-in-progress, or investment assets are building returns or just absorbing capital. / long_term_equity_investments: 云天化2024年第三季度报告: 其他债权投资 0 0 长期应收款 26,785,787.11 21,785,787.11 长期股权投资 3,575,329,143....",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV039",
+      "source_module": "industry_kpi",
+      "variable": "utilization_or_backlog",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ mdna_text_change / Read management wording changes, proof-backed claims, risk-language upgrades, and abnormal silence across reports. / risk_language_upgrade: 云天化2025年年度报告: 万吨，单套产能规模在国内排名第一，同时在国内 MDCP 消费市场占有率达到 70% 公司聚甲醛产能国内前列，产品质量达到国产聚甲醛的领先水平，在国内聚甲醛 素、聚甲...",
+      "chapter_id": "chapter_2_industry_chain"
+    },
+    {
+      "evidence_id": "EV040",
+      "source_module": "industry_kpi",
+      "variable": "segment_margin",
+      "period": "2024, 季度",
+      "status": "reported",
+      "text": "/ non_recurring_profit_quality / Distinguish core operating profit from investment income, fair-value moves, subsidies, asset disposals, impairment, and other one-off items. / impairment: 云天化2024年第三季度报告: 净敞口套期收益（损失以“-”号填列） 0 0 公允价值变动收益（损失以“-”号填列） 927,672.12...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV041",
+      "source_module": "market_expectation",
+      "variable": "unmapped",
+      "period": "2026-08-11",
+      "status": "reported",
+      "text": "Valuation trade date: 2026-08-11",
+      "chapter_id": "chapter_6_expectations"
+    },
+    {
+      "evidence_id": "EV042",
+      "source_module": "market_expectation",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "/ Market cap (CNY) / 54379812581 / current equity value /",
+      "chapter_id": "chapter_6_expectations"
+    },
+    {
+      "evidence_id": "EV043",
+      "source_module": "market_expectation",
+      "variable": "valuation",
+      "period": "TTM",
+      "status": "reported",
+      "text": "/ PE TTM / 10.2794 / earnings multiple the market is paying now /",
+      "chapter_id": "chapter_7_valuation_rating"
+    },
+    {
+      "evidence_id": "EV044",
+      "source_module": "market_expectation",
+      "variable": "revenue",
+      "period": "TTM",
+      "status": "reported",
+      "text": "/ PS TTM / 1.1481 / sales multiple the market is paying now /",
+      "chapter_id": "chapter_6_expectations"
+    },
+    {
+      "evidence_id": "EV045",
+      "source_module": "market_expectation",
+      "variable": "valuation",
+      "period": "TTM",
+      "status": "calculated",
+      "text": "/ Implied TTM earnings (CNY) / 5290173802.0702 / market cap divided by PE TTM /",
+      "chapter_id": "chapter_7_valuation_rating"
+    },
+    {
+      "evidence_id": "EV046",
+      "source_module": "market_expectation",
+      "variable": "revenue",
+      "period": "TTM",
+      "status": "calculated",
+      "text": "/ Implied TTM sales (CNY) / 47365048846.7904 / market cap divided by PS TTM /",
+      "chapter_id": "chapter_6_expectations"
+    },
+    {
+      "evidence_id": "EV047",
+      "source_module": "market_expectation",
+      "variable": "valuation",
+      "period": "unspecified",
+      "status": "calculated",
+      "text": "/ PE percentile / 70.4 / 5-year valuation position /",
+      "chapter_id": "chapter_7_valuation_rating"
+    },
+    {
+      "evidence_id": "EV048",
+      "source_module": "market_expectation",
+      "variable": "valuation",
+      "period": "unspecified",
+      "status": "calculated",
+      "text": "/ PB percentile / 45.1 / 5-year valuation position /",
+      "chapter_id": "chapter_7_valuation_rating"
+    },
+    {
+      "evidence_id": "EV049",
+      "source_module": "price_earnings_decomposition",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "Look-back window: 5 years",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV050",
+      "source_module": "price_earnings_decomposition",
+      "variable": "unmapped",
+      "period": "2026-08-11",
+      "status": "reported",
+      "text": "/ latest trade date / 2026-08-11 /",
+      "chapter_id": "chapter_1_company"
+    }
+  ],
+  "chapter_packets": [
+    {
+      "chapter_id": "chapter_1_company",
+      "title": "一、公司是谁、如何赚钱",
+      "reader_goal": "让普通投资者理解产品、客户、定价、收入确认、成本与现金回收。",
+      "selected_evidence_ids": [
+        "EV001",
+        "EV002",
+        "EV003",
+        "EV004",
+        "EV005",
+        "EV006",
+        "EV007",
+        "EV008",
+        "EV009",
+        "EV010",
+        "EV013",
+        "EV015"
+      ],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_2_industry_chain",
+      "title": "二、产业链位置与行业格局",
+      "reader_goal": "解释上下游、供需与价格形成，并把产业链变化传导到公司经营。",
+      "selected_evidence_ids": [
+        "EV031",
+        "EV032",
+        "EV035",
+        "EV036",
+        "EV039",
+        "EV081",
+        "EV083",
+        "EV084",
+        "EV085",
+        "EV086",
+        "EV087"
+      ],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_3_profit_pools",
+      "title": "三、业务拆解与核心利润池",
+      "reader_goal": "按核心、成长、波动和期权业务拆解收入、利润、现金与资本占用。",
+      "selected_evidence_ids": [],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_4_competition",
+      "title": "四、竞争优势、护城河与主要短板",
+      "reader_goal": "用历史或真同行验证规模、品牌、渠道、技术和成本优势。",
+      "selected_evidence_ids": [
+        "EV065",
+        "EV066",
+        "EV068",
+        "EV069",
+        "EV070",
+        "EV071",
+        "EV072"
+      ],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_5_growth_forecast",
+      "title": "五、增长逻辑、关键分歧与盈利预测",
+      "reader_goal": "围绕三至五个关键问题，把经营变量传导到三年盈利和现金流。",
+      "selected_evidence_ids": [
+        "EV011",
+        "EV012",
+        "EV014",
+        "EV016",
+        "EV023",
+        "EV024",
+        "EV025",
+        "EV026",
+        "EV029",
+        "EV033",
+        "EV034",
+        "EV037"
+      ],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_6_expectations",
+      "title": "六、市场预期差、风险与验证",
+      "reader_goal": "区分真实一致预期、单家卖方和反向隐含假设，并给出证伪日历。",
+      "selected_evidence_ids": [
+        "EV041",
+        "EV042",
+        "EV044",
+        "EV046"
+      ],
+      "knowledge_planet_ids": [
+        "KPE01",
+        "KPE02",
+        "KPE03",
+        "KPE04",
+        "KPE05",
+        "KPE06"
+      ],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_7_valuation_rating",
+      "title": "七、估值、评级与投资结论",
+      "reader_goal": "在完成公司、产业、模型和预期分析后，最后给出估值、评级与动作。",
+      "selected_evidence_ids": [
+        "EV022",
+        "EV043",
+        "EV045",
+        "EV047",
+        "EV048",
+        "EV052",
+        "EV054",
+        "EV058",
+        "EV073",
+        "EV074",
+        "EV075",
+        "EV076"
+      ],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    }
+  ],
+  "preprocessing_notes": [
+    "原始上下文不直接成为公共报告结构。",
+    "知识星球线索已按目标实体、变量、允许用途和验证门槛重新路由。",
+    "所有章节必须围绕读者问题展开，数据只作为决定性证据进入正文。"
+  ]
+}

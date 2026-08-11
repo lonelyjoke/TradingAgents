@@ -1,0 +1,28 @@
+{
+  "mode": "schema_prompt_structured",
+  "agent": "Portfolio Manager",
+  "structured_error": "",
+  "schema": "SellSidePMDecision",
+  "initial_mode": "schema_prompt_structured",
+  "editorial_review_mode": "deterministic_issue_router",
+  "editorial_revision_requested": true,
+  "editorial_revision_applied": true,
+  "editorial_revision_mode": "schema_prompt_structured",
+  "remaining_handoff_issues": [],
+  "remaining_analytical_issues": [
+    "public language: English-heavy reader-facing fields must be translated to Chinese: forecast_assumptions[0].historical_anchor, forecast_assumptions[0].bull_case, forecast_assumptions[0].bear_case, forecast_assumptions[0].rationale_and_evidence, forecast_assumptions[0].verification_gate, forecast_assumptions[1].rationale_and_evidence, forecast_assumptions[1].sensitivity, forecast_assumptions[1].verification_gate"
+  ],
+  "editorial_revision_rejection_reasons": [],
+  "deterministic_model_notes": [
+    "excluded unverified optionality 'Electronic Chemicals Second Curve' from public base value; kept as upside-only research context",
+    "inserted deterministic public numeric source-of-truth disclosure"
+  ],
+  "report_contract": "reader_led_wechat_seven_chapter_v2",
+  "rating_position": "opening_summary_and_chapter_7_recap",
+  "knowledge_planet_policy": "model_probability_verification_or_reject",
+  "full_report_chars": "15942",
+  "public_report_chars": "12949",
+  "internal_overflow_chars": "2990",
+  "internal_sections_removed_from_public_report": "内部附录D：替代信息与卖方预期审计, 内部附录E：模型交接与报告质量审计, 内部附录F：组合执行参数",
+  "public_h2_count": "7"
+}
