@@ -1,0 +1,27 @@
+{
+  "mode": "schema_prompt_structured",
+  "agent": "Research Manager",
+  "structured_error": "",
+  "schema": "UnderwritingResearchPlan",
+  "handoff_repair_requested": false,
+  "handoff_repair_applied": false,
+  "handoff_repair_mode": "not_run",
+  "handoff_deterministic_completion_applied": true,
+  "handoff_deterministic_copied_lines": [
+    "shares",
+    "2026E_revenue",
+    "2027E_revenue",
+    "2028E_revenue",
+    "2026E_营业利润率剔除一次性减值",
+    "2027E_营业利润率剔除一次性减值",
+    "2028E_营业利润率剔除一次性减值"
+  ],
+  "handoff_same_unit_scale_restorations": [],
+  "handoff_undocumented_change_restorations": [],
+  "initial_handoff_issues": [
+    "missing canonical line 2026E_营业利润率剔除一次性减值: 7.0 %",
+    "missing canonical line 2027E_营业利润率剔除一次性减值: 8.5 %",
+    "missing canonical line 2028E_营业利润率剔除一次性减值: 9.5 %"
+  ],
+  "remaining_handoff_issues": []
+}

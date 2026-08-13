@@ -1,0 +1,936 @@
+{
+  "recommendation": "Underweight",
+  "research_readiness": "partial",
+  "core_bet": "博腾股份的核心投资变量是：2026H1收入与新签订单+8%-12%的复苏能否转化为2027-2028年有在手订单和现金回款支撑的盈利正常化，以及毛利率+4pp能否从一次性高毛利交付变为结构性改善。当前市场价格已在为这一路径的乐观版本定价，而可验证证据尚不足以支撑当前估值下的风险回报。",
+  "research_questions": [
+    "UQ01：斯洛文尼亚项目约3.3亿元减值的最终利润表与现金影响是否真正一次性？",
+    "UQ02：2026H1收入与新签订单+8%-12%能否转化为2027-2028年可持续收入与在手订单？",
+    "UQ03：Q1毛利率+4.27pp/H1整体+4pp是结构性产品组合与利用率改善，还是一次性高毛利交付？",
+    "UQ04：经营现金流何时能跟上账面利润？Q1 OCF/净利润仅0.0864。",
+    "UQ05：新分子业务能否从0.68亿元收入规模化而不持续消耗资本开支和固定成本？"
+  ],
+  "question_verdicts": [
+    {
+      "question_id": "UQ01",
+      "question": "斯洛文尼亚项目约3.3亿元减值的最终利润表与现金影响是否真正一次性？",
+      "why_decisive": "它直接决定2026年报表利润失真程度、核心利润口径以及是否还有后续现金流出或资产回收。",
+      "conclusion": "官方H1预告已明确约3.3亿元减值及归母亏损-2.5至-2.1亿元的主要原因是斯洛文尼亚项目终止；剔除后归母0.8-1.2亿元。利润表一次性属性基本确认，但处置对价、退出成本、税务影响和现金回收仍未披露，不能假设绝对无后续现金损失。",
+      "evidence_used": [
+        "EV020：2026H1官方/披露口径显示营收+8%-12%，归母净利润-2.50至-2.10亿元，主因斯洛文尼亚项目减值。",
+        "KPE01：国泰海通口径给出26H1剔除减值后归母0.8-1.2亿元，同比+196%-343%。",
+        "KPE07：中泰医药转述中报预告，剔除斯洛文尼亚减值后归母同比+196%-343%。"
+      ],
+      "strongest_counterevidence": "Q1 2026 OCF/净利润仅0.0864，且未披露斯洛文尼亚资产处置对价或退出现金成本，存在非现金减值之外仍有现金拖累的可能。",
+      "conflict_resolution": "利润表口径按官方预告处理；现金影响保持未闭合，不把减值简单等同于完全无后续成本。",
+      "model_or_valuation_effect": "2026年报表归母净利润被一次性减值扭曲；核心估值使用剔除减值后的正常化利润，但不给予额外现金回收价值。",
+      "affected_model_lines": [
+        "2026E_clean_parent_net_profit",
+        "2026E_reported_parent_net_profit"
+      ],
+      "confidence": "medium",
+      "next_verification": "2026年半年报减值附注、现金流量表及斯洛文尼亚退出成本/处置对价披露。"
+    },
+    {
+      "question_id": "UQ02",
+      "question": "2026H1收入与新签订单+8%-12%能否转化为2027-2028年可持续收入与在手订单？",
+      "why_decisive": "这是核心收入桥；若增长来自低基数或一次性交付而非在手订单/backlog抬升，2027-2028年收入和经营杠杆无法消化当前高估值。",
+      "conclusion": "H1收入指引+8%-12%、新签订单和收入“良好增长”以及行业CDMO订单共振提供了方向性正面证据，但公司未披露在手订单金额、book-to-bill和分阶段订单结构，因此收入可持续性只能按top-down假设处理。",
+      "evidence_used": [
+        "EV010：FY2025合并收入3419.83百万元，作为2026E基数。",
+        "EV011：H1收入指引+8%-12%。",
+        "EV025：核心小分子CDMO 2025年增长约13%。",
+        "EV028：小分子原料药CDMO收入占比约90%。",
+        "KPE04：TOP15跨国药企外部资本开支和行业并购景气作为需求端宏观验证。",
+        "KPE06：行业CDMO需求/新签订单渠道信息。"
+      ],
+      "strongest_counterevidence": "没有公司级backlog金额和book-to-bill；Q1经营利润率和现金转化均弱，收入增长能否落到有质量的盈利和现金流仍未证实。",
+      "conflict_resolution": "采纳官方收入增速作为模型输入；订单持续性不作为已验证的bottom-up backlog，只作为有上限的方向性证据。",
+      "model_or_valuation_effect": "2026E合并收入3761.81百万元/+10%；2027E 4138.0百万元/+10%；2028E 4469.0百万元/+8%；维持top-down预测，不升级为订单驱动bottom-up模型。",
+      "affected_model_lines": [
+        "2026E_revenue",
+        "2027E_revenue",
+        "2028E_revenue"
+      ],
+      "confidence": "medium",
+      "next_verification": "2026年半年报分业务收入、在手订单/backlog和book-to-bill披露。"
+    },
+    {
+      "question_id": "UQ03",
+      "question": "Q1毛利率+4.27pp/H1整体+4pp是结构性产品组合与利用率改善，还是一次性高毛利交付？",
+      "why_decisive": "毛利率是本轮利润弹性的主要传导变量；1pp毛利率在2026E收入口径下约等于37.6百万元毛利，相对FY2025归母净利润仅96.34百万元非常重大。",
+      "conclusion": "Q1毛利率30.60%和H1整体毛利率同比+4pp有官方/披露支撑，方向可信；但缺少分产品毛利率、产能利用率和单位成本，无法证明其持续性。基准采用32%，牛市34%，熊市29.5%。",
+      "evidence_used": [
+        "EV012：2026Q1毛利率30.5994%，同比+4.27pp。",
+        "EV013：2026Q1营业利润率2.6435%，毛利率改善未完全传导。",
+        "EV014：2026Q1净利率3.1449%，利润弹性仍小。",
+        "KPE01：H1整体毛利率同比+约4pp。",
+        "KPE07：剔减值后利润高增长，间接支持毛利改善。"
+      ],
+      "strongest_counterevidence": "Q1营业利润率仅2.64%、OCF/净利润0.0864，说明毛利率改善尚未转化为充足运营利润和现金；产品结构可能被一次性高毛利交付扭曲。",
+      "conflict_resolution": "官方毛利率提升作为已验证事实进入模型；未来年份的进一步扩张作为分析师估算，置信度有限。",
+      "model_or_valuation_effect": "2026E-2028E毛利率32.0%/33.0%/33.5%；每1pp影响约37.6百万元毛利，是本模型最高敏感性假设之一。",
+      "affected_model_lines": [
+        "2026E_gross_margin",
+        "2027E_gross_margin",
+        "2028E_gross_margin"
+      ],
+      "confidence": "medium",
+      "next_verification": "2026年半年报分业务毛利率、产品组合和产能利用率。"
+    },
+    {
+      "question_id": "UQ04",
+      "question": "经营现金流何时能跟上账面利润？Q1 OCF/净利润仅0.0864。",
+      "why_decisive": "当前市值是盈利预期驱动，但若利润不能现金化，FCF和股权价值锚会失效，高PE就没有安全边际。",
+      "conclusion": "Q1 OCF/净利润0.0864是已证实的硬负面信号。应收/收入比和存货/收入比仅小幅下降，不足以证明现金转化正常化。2026年基准情景OCF/净利润假定仍只有0.1-0.2倍，FCF大概率接近零或为负。",
+      "evidence_used": [
+        "EV016：应收/收入23.44%，同比-0.47pp。",
+        "EV017：存货/收入22.31%，同比-0.28pp。",
+        "EV036：Q1 OCF/净利润0.0864。",
+        "EV038/EV039：前期季度存在OCF为负或低转化的历史。",
+        "EV044：使用市值/价格反推543.4422百万股，用于EPS和单位现金流审计。"
+      ],
+      "strongest_counterevidence": "应收和存货收入比同比微降，存在边际改善迹象；若半年报现金回收明显改善，则此约束可能放松。",
+      "conflict_resolution": "营运资本比率微降作为边际改善观察项；OCF/净利润低作为当前已验证事实，优先用于估值风险控制。",
+      "model_or_valuation_effect": "不直接改变建模净利润，但显著削弱估值信心；FCF和OCF行保持未闭合，公允价值被下调。",
+      "affected_model_lines": [
+        "2026E_OCF",
+        "2026E_FCF",
+        "probability_weighted_fair_value_per_share"
+      ],
+      "confidence": "high",
+      "next_verification": "2026年半年报现金流量表，尤其是销售商品/提供劳务收到的现金、应收账款和存货变动。"
+    },
+    {
+      "question_id": "UQ05",
+      "question": "新分子业务能否从0.68亿元收入规模化而不持续消耗资本开支和固定成本？",
+      "why_decisive": "市场可能为AI4S和新分子期权支付溢价，但若缺少订单、利用率和盈亏平衡路径，该业务不能作为核心FCF价值。",
+      "conclusion": "2025年新分子收入68百万元/+224%，高活OEB5上海和新泽西产能已具备，但占比仅约2%，且无分线利润、产能利用率或订单簿。模型将其保留为期权价值，不计入基准净利润。",
+      "evidence_used": [
+        "EV026：2025年新分子收入68百万元，同比+224%。",
+        "EV092/EV093：上海及新泽西高活设施能力。",
+        "KPE02/KPE03：AI制药/CDMO板块线索，但无公司级订单实证。"
+      ],
+      "strongest_counterevidence": "规模极小且无利润/现金证据，新产能可能成为固定成本拖累；AI4S传导尚未出现公司级新签订单。",
+      "conflict_resolution": "官方已确认业务存在和收入规模，但利润/现金证据缺失；保持期权属性，不并入核心EPS。",
+      "model_or_valuation_effect": "核心估值中不单独加回新分子业务；仅在期权桶中给相对保守的情景价值，避免与合并收入重复计算。",
+      "affected_model_lines": [
+        "new_modalities_revenue",
+        "option_value_per_share"
+      ],
+      "confidence": "low",
+      "next_verification": "投资者互动、新分子订单公告、分线收入和产能利用率披露。"
+    }
+  ],
+  "evidence_utilization_ledger": [
+    {
+      "evidence_id": "EV020",
+      "question_id": "UQ01",
+      "disposition": "adopted",
+      "contribution_or_reason": "官方/披露口径确认2026H1收入+8%-12%及归母亏损主要由斯洛文尼亚项目减值导致。",
+      "model_or_probability_effect": "H1利润从无明确值更新为归母-2.50至-2.10亿元；核心估值口径改为剔除减值。",
+      "verification_gate": "2026年半年报减值附注。"
+    },
+    {
+      "evidence_id": "KPE01",
+      "question_id": "UQ01",
+      "disposition": "adopted",
+      "contribution_or_reason": "国泰海通给出26H1剔除减值后归母0.8-1.2亿元，作为clean profit年化起点。",
+      "model_or_probability_effect": "2026E clean parent net profit由null更新为约200百万元。",
+      "verification_gate": "2026年半年报利润表。"
+    },
+    {
+      "evidence_id": "KPE07",
+      "question_id": "UQ01",
+      "disposition": "adopted",
+      "contribution_or_reason": "中泰医药转述的业绩预告与EV020/KPE01互相印证，确认剔减值后利润+196%-343%。",
+      "model_or_probability_effect": "支持core profit情景而非reported profit情景。",
+      "verification_gate": "2026年半年报。"
+    },
+    {
+      "evidence_id": "EV010",
+      "question_id": "UQ02",
+      "disposition": "adopted",
+      "contribution_or_reason": "FY2025合并收入3419.83百万元是三年预测的硬基数。",
+      "model_or_probability_effect": "2026E收入基数由公司财务事实固定为3419.83百万元。",
+      "verification_gate": "已披露。"
+    },
+    {
+      "evidence_id": "EV011",
+      "question_id": "UQ02",
+      "disposition": "adopted",
+      "contribution_or_reason": "H1收入指引+8%-12%，中点10%，直接决定2026E收入增速。",
+      "model_or_probability_effect": "2026E收入从假设更新为3761.81百万元。",
+      "verification_gate": "2026年半年报确认H1实际收入。"
+    },
+    {
+      "evidence_id": "EV025",
+      "question_id": "UQ02",
+      "disposition": "adopted",
+      "contribution_or_reason": "核心小分子CDMO 2025年增长约13%，支撑核心业务仍处恢复通道。",
+      "model_or_probability_effect": "维持小分子业务90%收入占比假设。",
+      "verification_gate": "2026年半年报分业务收入。"
+    },
+    {
+      "evidence_id": "EV028",
+      "question_id": "UQ02",
+      "disposition": "adopted",
+      "contribution_or_reason": "小分子原料药CDMO收入占比约90%，用于分拆核心业务。",
+      "model_or_probability_effect": "2026E-2028E小分子收入按合并收入90%计算。",
+      "verification_gate": "2026年半年报分部数据。"
+    },
+    {
+      "evidence_id": "KPE04",
+      "question_id": "UQ02",
+      "disposition": "watch",
+      "contribution_or_reason": "跨国药企外部资本开支和行业并购数据是行业需求宏观验证，不是公司订单证据。",
+      "model_or_probability_effect": "不直接进入收入数值；只作为情景概率和观察项。",
+      "verification_gate": "公司2026H1订单/backlog披露。"
+    },
+    {
+      "evidence_id": "KPE06",
+      "question_id": "UQ02",
+      "disposition": "watch",
+      "contribution_or_reason": "行业CDMO需求/新签订单渠道信息指向行业景气，但无法确认为博腾公司级订单。",
+      "model_or_probability_effect": "不进入收入数值。",
+      "verification_gate": "公司订单披露与同行（如康龙化成）可验证的新签订单数据。"
+    },
+    {
+      "evidence_id": "KPE08",
+      "question_id": "UQ02",
+      "disposition": "watch",
+      "contribution_or_reason": "渠道推送提及公司处于CDMO景气内，但缺少具体订单/收入凭证。",
+      "model_or_probability_effect": "不改变模型。",
+      "verification_gate": "2026年半年报新签订单与在手订单。"
+    },
+    {
+      "evidence_id": "EV012",
+      "question_id": "UQ03",
+      "disposition": "adopted",
+      "contribution_or_reason": "2026Q1毛利率30.5994%/+4.27pp是毛利率改善的当前硬起点。",
+      "model_or_probability_effect": "2026E毛利率基准设为32.0%。",
+      "verification_gate": "2026年半年报毛利率。"
+    },
+    {
+      "evidence_id": "EV013",
+      "question_id": "UQ03",
+      "disposition": "adopted",
+      "contribution_or_reason": "Q1营业利润率2.6435%，证明毛利率改善尚未传导至运营利润。",
+      "model_or_probability_effect": "营业利润率2026E按7.0%设为改善但未完全正常化。",
+      "verification_gate": "2026年半年报期间费用结构。"
+    },
+    {
+      "evidence_id": "EV014",
+      "question_id": "UQ03",
+      "disposition": "adopted",
+      "contribution_or_reason": "Q1净利率3.1449%，支持基础情景下净利润率仍偏低。",
+      "model_or_probability_effect": "限制2026E clean净利率不高于约5.3%。",
+      "verification_gate": "2026年半年报归母净利润。"
+    },
+    {
+      "evidence_id": "EV016",
+      "question_id": "UQ04",
+      "disposition": "adopted",
+      "contribution_or_reason": "应收/收入23.44%，同比-0.47pp，显示回款边际改善有限。",
+      "model_or_probability_effect": "不显著提升OCF预测；仍是现金转化风险项。",
+      "verification_gate": "2026年半年报应收账款和收入。"
+    },
+    {
+      "evidence_id": "EV017",
+      "question_id": "UQ04",
+      "disposition": "adopted",
+      "contribution_or_reason": "存货/收入22.31%，同比-0.28pp，改善幅度极小。",
+      "model_or_probability_effect": "不改变OCF/FCF结论。",
+      "verification_gate": "2026年半年报存货明细。"
+    },
+    {
+      "evidence_id": "EV036",
+      "question_id": "UQ04",
+      "disposition": "adopted",
+      "contribution_or_reason": "Q1 OCF/净利润0.0864，是当前最硬的现金质量警示。",
+      "model_or_probability_effect": "2026E OCF/净利润按0.1-0.2倍处理；FCF大概率接近零或为负。",
+      "verification_gate": "2026年半年报现金流量表。"
+    },
+    {
+      "evidence_id": "EV038",
+      "question_id": "UQ04",
+      "disposition": "adopted",
+      "contribution_or_reason": "历史季度OCF曾为负，表明现金转化不是单季噪音。",
+      "model_or_probability_effect": "提高现金流风险折价。",
+      "verification_gate": "2026年半年报现金流。"
+    },
+    {
+      "evidence_id": "EV039",
+      "question_id": "UQ04",
+      "disposition": "adopted",
+      "contribution_or_reason": "前期现金流弱化证据，强化FCF不确定性。",
+      "model_or_probability_effect": "不给予现金回暖的基准假设。",
+      "verification_gate": "2026年半年报。"
+    },
+    {
+      "evidence_id": "EV044",
+      "question_id": "UQ04",
+      "disposition": "adopted",
+      "contribution_or_reason": "市值/现价反推543.4422百万股，用于EPS和单位估值审计。",
+      "model_or_probability_effect": "diluted shares设为543.4422百万股；EPS/Fair value由null转为可核算。",
+      "verification_gate": "公司股本确认。"
+    },
+    {
+      "evidence_id": "EV026",
+      "question_id": "UQ05",
+      "disposition": "adopted",
+      "contribution_or_reason": "2025年新分子收入68百万元/+224%，确认新业务存在且高增长但规模极小。",
+      "model_or_probability_effect": "新分子业务仅按期权桶处理，不进入核心EPS。",
+      "verification_gate": "2026年半年报新分子收入。"
+    },
+    {
+      "evidence_id": "EV092",
+      "question_id": "UQ05",
+      "disposition": "watch",
+      "contribution_or_reason": "上海/新泽西高活设施能力存在，但无利用率、订单和利润数据。",
+      "model_or_probability_effect": "不进入基准估值。",
+      "verification_gate": "新分子订单和产能利用率公告。"
+    },
+    {
+      "evidence_id": "EV093",
+      "question_id": "UQ05",
+      "disposition": "watch",
+      "contribution_or_reason": "高活payload-linker能力属于战略期权，尚无分线利润。",
+      "model_or_probability_effect": "不改变核心盈利。",
+      "verification_gate": "新分子业务收入/利润披露。"
+    },
+    {
+      "evidence_id": "KPE02",
+      "question_id": "UQ05",
+      "disposition": "watch",
+      "contribution_or_reason": "AI制药/CDMO板块提示，但无博腾公司级订单。",
+      "model_or_probability_effect": "保留为期权观察，不赋值。",
+      "verification_gate": "公司AI相关项目合作披露。"
+    },
+    {
+      "evidence_id": "KPE03",
+      "question_id": "UQ05",
+      "disposition": "watch",
+      "contribution_or_reason": "CDMO板块线索，实体范围及订单不明确。",
+      "model_or_probability_effect": "不进入模型。",
+      "verification_gate": "公司新签订单细节。"
+    },
+    {
+      "evidence_id": "EV041",
+      "question_id": "UQ04",
+      "disposition": "watch",
+      "contribution_or_reason": "资本开支/固定投资线索不完整，不能准确推算出FCF拐点。",
+      "model_or_probability_effect": "FCF维持未闭合。",
+      "verification_gate": "2026年半年报资本开支及CIP。"
+    }
+  ],
+  "forecast_takeaways": [
+    {
+      "takeaway": "集团收入复苏已获官方H1指引验证，但收入质量尚未被在手订单证明。",
+      "evidence_anchor": "FY2025收入3419.83百万元；2026H1收入指引+8%-12%（EV010/EV011）。",
+      "financial_implication": "基准2026E收入3761.81百万元，收入增长是真，但backlog缺失使2027-2028年收入可见度不足。",
+      "confidence_and_risk": "中等；若2026H1新签订单/backlog低于8%或结构恶化，2027E收入假设将被下调。"
+    },
+    {
+      "takeaway": "毛利率改善是短期利润弹性的核心，但可持续性仍是未验证变量。",
+      "evidence_anchor": "Q1毛利率30.60%/+4.27pp，H1整体毛利率约+4pp（EV012/KPE01）。",
+      "financial_implication": "1pp毛利率在2026E收入口径下约影响37.6百万元毛利；毛利率从32%到33.5%的路线决定利润弹性。",
+      "confidence_and_risk": "中等；若分产品数据证明主要是一次性高毛利产品交付，则毛利率将回落到29%-30%。"
+    },
+    {
+      "takeaway": "OCF转化是当前最硬的负面证据，决定FCF和估值安全边际。",
+      "evidence_anchor": "2026Q1 OCF/净利润仅0.0864；应收/收入23.44%、存货/收入22.31%（EV036/EV016/EV017）。",
+      "financial_implication": "即使2026E clean净利润达到约200百万元，若OCF/净利润仅0.1-0.2倍，FCF仍可能为负，股权价值缺少现金支撑。",
+      "confidence_and_risk": "高；若H1现金流改善至0.5倍以上，将缓解此约束，否则高估值不可持续。"
+    }
+  ],
+  "forecast_assumptions": [
+    {
+      "parameter": "2026E合并收入增速",
+      "affected_business": "小分子API CDMO + 新分子业务 + 其他",
+      "historical_anchor": "FY2025合并收入3419.83百万元；2026H1指引+8%-12%",
+      "evidence_status": "calculated",
+      "base_case": "+10.0%，即3761.81百万元",
+      "bull_case": "+12.0%或以上，需backlog和订单结构验证",
+      "bear_case": "+5.0%-8.0%，由低基数或一次性和行业转化不及预期触发",
+      "rationale_and_evidence": "取H1官方/披露指引中点10%作为基准，2027E/2028E按+10%/+8% top-down。",
+      "sensitivity": "1pp收入约37.6百万元收入、约12百万元毛利。",
+      "confidence": "medium",
+      "verification_gate": "2026年半年报实际收入及新签订单/backlog。"
+    },
+    {
+      "parameter": "2026E-2028E毛利率",
+      "affected_business": "合并毛利",
+      "historical_anchor": "2026Q1实际毛利率30.60%；H1整体毛利率约+4pp",
+      "evidence_status": "analyst_estimate",
+      "base_case": "2026E 32.0% / 2027E 33.0% / 2028E 33.5%",
+      "bull_case": "2026E 34%，由复杂API/高活产品占比和利用率持续提升驱动",
+      "bear_case": "2026E 29.5%-30.0%，由一次性高毛利交付退坡和价格竞争驱动",
+      "rationale_and_evidence": "官方已确认H1毛利率+4pp，但缺分产品毛利率，未来扩张按保守结构化改善处理。",
+      "sensitivity": "1pp毛利率约影响37.6百万元毛利。",
+      "confidence": "medium",
+      "verification_gate": "2026年半年报分业务毛利率和产品组合。"
+    },
+    {
+      "parameter": "剔除非经常减值后的营业利润率",
+      "affected_business": "合并运营利润",
+      "historical_anchor": "2026Q1营业利润率2.64%",
+      "evidence_status": "analyst_estimate",
+      "base_case": "2026E 7.0% / 2027E 8.5% / 2028E 9.5%",
+      "bull_case": "2026E 8.0%或更高，若规模效应和费用杠杆快速释放",
+      "bear_case": "2026E 5.0%-5.5%，若研发/管理费用刚性且产能利用率不足",
+      "rationale_and_evidence": "H1剔减值后利润高增长暗示经营杠杆改善，但Q1营业利润率尚低。",
+      "sensitivity": "1pp营业利润率约影响37.6百万元运营利润。",
+      "confidence": "low",
+      "verification_gate": "2026年半年报期间费用和营业利润。"
+    },
+    {
+      "parameter": "OCF/净利润转化率",
+      "affected_business": "合并经营现金流",
+      "historical_anchor": "2026Q1 OCF/净利润0.0864",
+      "evidence_status": "calculated",
+      "base_case": "2026E 0.1-0.2倍，FCF接近零或为负",
+      "bull_case": "2026E 0.5倍以上，需应收/存货显著下降和客户预付款增加",
+      "bear_case": "0.1倍以下甚至为负，由回款周期延长和Slovenia退出成本拖累",
+      "rationale_and_evidence": "当前现金回款远低于利润，营运资本比率改善极小。",
+      "sensitivity": "OCF/净利润每提高0.1倍，在200百万元利润下约改善20百万元OCF。",
+      "confidence": "medium",
+      "verification_gate": "2026年半年报现金流量表。"
+    },
+    {
+      "parameter": "新分子业务收入及盈亏平衡",
+      "affected_business": "新分子业务（多肽/寡核苷酸/蛋白偶联/ADC payload-linker/CGT）",
+      "historical_anchor": "FY2025收入68百万元，同比+224%，占比约2%",
+      "evidence_status": "missing",
+      "base_case": "2026E-2028E维持小于合并收入5%，不单独计入EPS",
+      "bull_case": "2028E收入超过200百万元，且出现明确订单和利用率上升",
+      "bear_case": "2028E收入仍低于100百万元，且产能固定成本拖累毛利",
+      "rationale_and_evidence": "公司已确认高活产能和收入增长，但缺分线利润/利用率/订单。",
+      "sensitivity": "新分子每增加1亿元收入，若毛利率接近集团水平，约贡献30百万元毛利，但当前规模太小。",
+      "confidence": "low",
+      "verification_gate": "投资者互动、新分子订单、分线收入和产能利用率披露。"
+    }
+  ],
+  "core_theses": [
+    {
+      "rank": 1,
+      "takeaway": "当前估值已经为盈利正常化和新分子/AI4S期权提前定价，风险回报不对称。",
+      "decisive_question": "市场当前的22.36元价格是否已经隐含了2027-2028年乐观利润路径？",
+      "evidence": "PE TTM 94.57、五年分位82.1%；市值12151百万元；隐含TTM盈利约128.5百万元。60日涨幅41.79%，相对基准短期大涨，但250日仍为相对laggard。",
+      "strongest_counterevidence": "H1剔除减值后归母0.8-1.2亿元、同比+196%-343%；CDMO行业订单强劲，需求侧可能继续改善。",
+      "financial_transmission": "当前市值若用基准2027E clean净利润260百万元计，约47倍PE；若要公允支持现价，需要2027E净利润达到约400百万元且能给35-40倍PE，这要求毛利率、营业利润率、订单和现金流几乎全部兑现。",
+      "market_pricing": "市场未给出安全折价；当前价格已接近bull路径且缺少现金验证。",
+      "falsification_gate": "若2026H1报告显示backlog>1.5倍年收入、OCF/净利润>0.5倍、分业务毛利率确认结构性，则估值约束放松。",
+      "verdict": "partial"
+    },
+    {
+      "rank": 2,
+      "takeaway": "毛利率改善是实质性的，但尚未与现金转化形成闭环，利润质量不足以支撑高估值。",
+      "decisive_question": "账面毛利率改善能否转化为现金利润和FCF？",
+      "evidence": "Q1毛利率30.60%/+4.27pp；H1官方毛利率约+4pp；但Q1 OCF/净利润0.0864，营业利润率2.64%。",
+      "strongest_counterevidence": "应收/收入比和存货/收入比同比小幅下降，存在营运资本改善迹象。",
+      "financial_transmission": "毛利率每上升1pp增加约37.6百万元毛利，但若现金回收率只有0.1-0.2倍，FCF仍可能为负，净利润不能直接作为价值锚。",
+      "market_pricing": "当前价格似乎把毛利率改善当作高确定性结构性兑现，但现金验证缺失使盈利质量折价不足。",
+      "falsification_gate": "2026H1 OCF/净利润不能恢复至0.5倍以上，或应收/存货收入比重新上升，则高估值逻辑被削弱。",
+      "verdict": "partial"
+    },
+    {
+      "rank": 3,
+      "takeaway": "新分子/CDMO恢复是真实业务变化，但新分子仍是期权而非核心估值。",
+      "decisive_question": "新分子业务是否已经从战略故事变为可计入盈利的增长曲线？",
+      "evidence": "FY2025新分子收入68百万元/+224%，占比约2%；上海/新泽西OEB5高活产能已存在；投资者互动确认可提供Payload-linker服务。",
+      "strongest_counterevidence": "没有分线利润、利用率、订单簿和盈亏平衡时间；收入规模对公司整体利润贡献几乎可忽略。",
+      "financial_transmission": "合并收入已包含新分子；若在核心估值之外再加总，可能重复计算。在2028年前新分子对EPS贡献难以量化，仅适合期权桶。",
+      "market_pricing": "部分市场资金可能将AI4S/新分子作为核心增长溢价，但缺乏订单和现金流证据。",
+      "falsification_gate": "若公司披露新分子分线收入、毛利率、订单和产能利用率达到规模化阈值，则升级该业务到情景价值。",
+      "verdict": "unproven"
+    }
+  ],
+  "company_disaggregation": "经济单元按以下排序：核心利润引擎为小分子原料药CDMO，FY2025收入占比约90%、增长约13%，是主要毛利和现金来源；新分子业务FY2025收入68百万元/+224%、占比约2%，属于期权；大健康消费品无收入，排除；海外市场（北美/欧洲/日韩等）是需求中介，不形成独立估值桶。关键量化缺口为：小分子与新分子分线收入/毛利、订单backlog、产能利用率、客户集中度、区域收入金额。当前对整体盈利影响最大的是小分子CDMO的订单转化和毛利率持续性。",
+  "autonomous_forecast_model": "模型为project-order-delivery + capacity-output混合，基准为top-down估算而非完整bottom-up。2026E-2028E合并收入3761.81/4138.0/4469.0百万元，对应+10%/+10%/+8%；毛利率32.0%/33.0%/33.5%；剔除一次性减值的营业利润率7.0%/8.5%/9.5%。以543.4422百万股计，2026E-2028E clean归母净利润估算为200/260/320百万元，EPS约0.368/0.478/0.589元。OCF和FCF因Q1现金转化极弱而未闭合。核心情景采用2027E净利润260百万元×35倍PE，得出核心每股价值约16.74元；bull为400百万元×40倍PE约29.44元；bear为200百万元×22倍PE约8.10元。",
+  "thesis_financial_bridge": "1）核心订单到收入桥：2026E收入=3419.83×1.10；bull+12%，bear+5%-8%；收入变化直接按毛利率传导为毛利。2）毛利率桥：毛利率32%为基准；bull 34%，bear 29.5%；每1pp约37.6百万元毛利。3）斯洛文尼亚一次性桥：2026E报表利润=clean利润-减值及可能的退出成本；估值不使用报表PE。4）现金桥：OCF=clean净利润+折旧摊销-应收/存货/预收变动；在OCF/净利润0.1-0.2倍基准下，FCF接近零或为负。5）新分子期权桥：收入和潜在订单为期权值，不进入基准EPS。",
+  "moat_evidence_verdict": "已验证或部分验证的护城河是端到端小分子CDMO能力和高活OEB5设施；财务验证来自H1收入增长和毛利率提升，但缺少backlog、利用率、客户保留率等可观测测试。客户切换成本因应收/收入比高和现金回收弱而未被证明。新分子业务属于未证明期权。综合结论：护城河方向存在，但当前价格支付了远高于已验证能力的溢价。",
+  "valuation_closure": "核心价值：2027E clean净利润260百万元×35倍PE/543.4422百万股=16.74元/股。bull：400×40/543.4422=29.44元/股。bear：200×22/543.4422=8.10元/股。概率沿用bull/base/bear 25%/50%/25%，概率加权价值约17.76元/股，较现价22.36元低约20.6%。新分子期权不单独加总以避免与合并收入重复；大健康消费品无财务价值，排除。估值结论与Underweight一致，当前现价隐含约47倍2027E基准净利润，且现金转化未闭合。",
+  "canonical_model_snapshot": [
+    {
+      "line_id": "shares",
+      "period": "2026-08-13; market snapshot; market cap / close, using forecast_model and price_earnings_decomposition",
+      "metric": "diluted_shares",
+      "value": 543.4422,
+      "unit": "mn shares",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV044"
+      ],
+      "formula": "market cap / close, using forecast_model and price_earnings_decomposition"
+    },
+    {
+      "line_id": "current_price_cny",
+      "period": "2026-08-13",
+      "metric": "current_price",
+      "value": 22.36,
+      "unit": "CNY/share",
+      "status": "reported",
+      "evidence_ids": [
+        "EV044"
+      ],
+      "formula": "market_snapshot"
+    },
+    {
+      "line_id": "FY2025_revenue",
+      "period": "FY2025",
+      "metric": "consolidated_revenue",
+      "value": 3419.83,
+      "unit": "CNY mn",
+      "status": "reported",
+      "evidence_ids": [
+        "EV010"
+      ],
+      "formula": "as reported"
+    },
+    {
+      "line_id": "FY2025_parent_net_profit",
+      "period": "FY2025",
+      "metric": "parent_net_profit",
+      "value": 96.34,
+      "unit": "CNY mn",
+      "status": "reported",
+      "evidence_ids": [
+        "EV010"
+      ],
+      "formula": "as reported"
+    },
+    {
+      "line_id": "2026E_revenue",
+      "period": "2026E",
+      "metric": "revenue",
+      "value": 3761.81,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV010",
+        "EV011",
+        "EV020",
+        "KPE01",
+        "KPE08"
+      ],
+      "formula": "2026E = FY2025 x 1.10 using official H1 +10% midpoint; 2027E = 2026E x 1.10; 2028E = 2027E x 1.08. Analyst demand-growth assumption, not company guidance for 2027-2028."
+    },
+    {
+      "line_id": "2027E_revenue",
+      "period": "2027E",
+      "metric": "revenue",
+      "value": 4138.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV010",
+        "EV011",
+        "EV020",
+        "KPE01",
+        "KPE08"
+      ],
+      "formula": "2026E = FY2025 x 1.10 using official H1 +10% midpoint; 2027E = 2026E x 1.10; 2028E = 2027E x 1.08. Analyst demand-growth assumption, not company guidance for 2027-2028."
+    },
+    {
+      "line_id": "2028E_revenue",
+      "period": "2028E",
+      "metric": "revenue",
+      "value": 4469.0,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV010",
+        "EV011",
+        "EV020",
+        "KPE01",
+        "KPE08"
+      ],
+      "formula": "2026E = FY2025 x 1.10 using official H1 +10% midpoint; 2027E = 2026E x 1.10; 2028E = 2027E x 1.08. Analyst demand-growth assumption, not company guidance for 2027-2028."
+    },
+    {
+      "line_id": "2026E_gross_margin",
+      "period": "2026E",
+      "metric": "gross_margin",
+      "value": 32.0,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV012",
+        "KPE01"
+      ],
+      "formula": "Q1 30.60% + H1 official +~4pp; analyst estimate"
+    },
+    {
+      "line_id": "2027E_gross_margin",
+      "period": "2027E",
+      "metric": "gross_margin",
+      "value": 33.0,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV012"
+      ],
+      "formula": "mix/utilization improvement assumption"
+    },
+    {
+      "line_id": "2028E_gross_margin",
+      "period": "2028E",
+      "metric": "gross_margin",
+      "value": 33.5,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV012"
+      ],
+      "formula": "moderating mix/utilization improvement"
+    },
+    {
+      "line_id": "2026E_clean_operating_margin",
+      "period": "2026E",
+      "metric": "operating_margin_ex_one_off",
+      "value": 7.0,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV013",
+        "KPE07"
+      ],
+      "formula": "Q1 2.64% + H1 clean operating leverage assumption"
+    },
+    {
+      "line_id": "2027E_clean_operating_margin",
+      "period": "2027E",
+      "metric": "operating_margin_ex_one_off",
+      "value": 8.5,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV013"
+      ],
+      "formula": "scale/fixed-cost absorption assumption"
+    },
+    {
+      "line_id": "2028E_clean_operating_margin",
+      "period": "2028E",
+      "metric": "operating_margin_ex_one_off",
+      "value": 9.5,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV013"
+      ],
+      "formula": "normalization assumption"
+    },
+    {
+      "line_id": "2026E_clean_parent_net_profit",
+      "period": "2026E",
+      "metric": "clean_parent_net_profit",
+      "value": 200.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "KPE01",
+        "KPE07",
+        "EV011"
+      ],
+      "formula": "H1 clean 80-120mn annualized with H2 modest improvement; top-down"
+    },
+    {
+      "line_id": "2027E_clean_parent_net_profit",
+      "period": "2027E",
+      "metric": "clean_parent_net_profit",
+      "value": 260.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV010",
+        "EV012",
+        "EV013"
+      ],
+      "formula": "revenue 4138.0 x estimated clean net margin 6.28%"
+    },
+    {
+      "line_id": "2028E_clean_parent_net_profit",
+      "period": "2028E",
+      "metric": "clean_parent_net_profit",
+      "value": 320.0,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV010",
+        "EV012",
+        "EV013"
+      ],
+      "formula": "revenue 4469.0 x estimated clean net margin 7.16%"
+    },
+    {
+      "line_id": "2026E_eps",
+      "period": "2026E",
+      "metric": "clean_eps",
+      "value": 0.368,
+      "unit": "CNY/share",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV044",
+        "KPE01"
+      ],
+      "formula": "2026E_clean_parent_net_profit 200.0 / 543.4422"
+    },
+    {
+      "line_id": "2027E_eps",
+      "period": "2027E",
+      "metric": "clean_eps",
+      "value": 0.478,
+      "unit": "CNY/share",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV044"
+      ],
+      "formula": "2027E_clean_parent_net_profit 260.0 / 543.4422"
+    },
+    {
+      "line_id": "2028E_eps",
+      "period": "2028E",
+      "metric": "clean_eps",
+      "value": 0.589,
+      "unit": "CNY/share",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV044"
+      ],
+      "formula": "2028E_clean_parent_net_profit 320.0 / 543.4422"
+    },
+    {
+      "line_id": "base_fair_value_per_share",
+      "period": "2027E",
+      "metric": "fair_value_per_share",
+      "value": 16.74,
+      "unit": "CNY/share",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV044",
+        "EV010",
+        "EV012"
+      ],
+      "formula": "2027E clean net profit 260.0 x 35 / 543.4422"
+    },
+    {
+      "line_id": "bull_fair_value_per_share",
+      "period": "2027E",
+      "metric": "fair_value_per_share",
+      "value": 29.44,
+      "unit": "CNY/share",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV044"
+      ],
+      "formula": "bull 400.0 x 40 / 543.4422"
+    },
+    {
+      "line_id": "bear_fair_value_per_share",
+      "period": "2027E",
+      "metric": "fair_value_per_share",
+      "value": 8.1,
+      "unit": "CNY/share",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV044",
+        "EV036"
+      ],
+      "formula": "bear 200.0 x 22 / 543.4422"
+    },
+    {
+      "line_id": "probability_weighted_fair_value_per_share",
+      "period": "2027E",
+      "metric": "probability_weighted_fair_value",
+      "value": 17.76,
+      "unit": "CNY/share",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV044"
+      ],
+      "formula": "0.25 x 29.44 + 0.50 x 16.74 + 0.25 x 8.10"
+    },
+    {
+      "line_id": "2026E_营业利润率剔除一次性减值",
+      "period": "2026E",
+      "metric": "营业利润率剔除一次性减值",
+      "value": 7.0,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV013",
+        "KPE01",
+        "KPE07"
+      ],
+      "formula": "2026Q1 actual; forward assumes H1 clean operating leverage and scale effects annualize, then gradual improvement."
+    },
+    {
+      "line_id": "2027E_营业利润率剔除一次性减值",
+      "period": "2027E",
+      "metric": "营业利润率剔除一次性减值",
+      "value": 8.5,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV013",
+        "KPE01",
+        "KPE07"
+      ],
+      "formula": "2026Q1 actual; forward assumes H1 clean operating leverage and scale effects annualize, then gradual improvement."
+    },
+    {
+      "line_id": "2028E_营业利润率剔除一次性减值",
+      "period": "2028E",
+      "metric": "营业利润率剔除一次性减值",
+      "value": 9.5,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV013",
+        "KPE01",
+        "KPE07"
+      ],
+      "formula": "2026Q1 actual; forward assumes H1 clean operating leverage and scale effects annualize, then gradual improvement."
+    }
+  ],
+  "model_change_rows": [
+    {
+      "line_id": "2026E_clean_parent_net_profit",
+      "old_value": null,
+      "new_value": 200.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "KPE01",
+        "KPE07",
+        "EV011"
+      ],
+      "reason": "H1剔减值利润80-120百万元，结合收入中期恢复，设定全年clean利润约200百万元。",
+      "eps_fcf_valuation_impact": "EPS 0.368元；估值口径由null转为可检验，但需半年报验证。",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2027E_clean_parent_net_profit",
+      "old_value": null,
+      "new_value": 260.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "EV010",
+        "EV012",
+        "EV013"
+      ],
+      "reason": "收入4138百万元和净利率改善的top-down估算。",
+      "eps_fcf_valuation_impact": "EPS 0.478元；成为base fair value锚。",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2028E_clean_parent_net_profit",
+      "old_value": null,
+      "new_value": 320.0,
+      "unit": "CNY mn",
+      "evidence_ids": [
+        "EV010",
+        "EV012",
+        "EV013"
+      ],
+      "reason": "收入4469百万元和利润率正常化估算。",
+      "eps_fcf_valuation_impact": "EPS 0.589元；提供中长期上行参考。",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2026E_eps",
+      "old_value": null,
+      "new_value": 0.368,
+      "unit": "CNY/share",
+      "evidence_ids": [
+        "EV044",
+        "KPE01"
+      ],
+      "reason": "clean net profit 200.0 / 543.4422百万股。",
+      "eps_fcf_valuation_impact": "用于正常化PE和估值对比。",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2027E_eps",
+      "old_value": null,
+      "new_value": 0.478,
+      "unit": "CNY/share",
+      "evidence_ids": [
+        "EV044"
+      ],
+      "reason": "clean net profit 260.0 / 543.4422百万股。",
+      "eps_fcf_valuation_impact": "支持base fair value 16.74元。",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "2028E_eps",
+      "old_value": null,
+      "new_value": 0.589,
+      "unit": "CNY/share",
+      "evidence_ids": [
+        "EV044"
+      ],
+      "reason": "clean net profit 320.0 / 543.4422百万股。",
+      "eps_fcf_valuation_impact": "中期上行需利润和现金同步验证。",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "base_fair_value_per_share",
+      "old_value": null,
+      "new_value": 16.74,
+      "unit": "CNY/share",
+      "evidence_ids": [
+        "EV044",
+        "EV010",
+        "EV012"
+      ],
+      "reason": "2027E clean net profit 260.0 x 35倍PE。",
+      "eps_fcf_valuation_impact": "当前22.36元较base高约33.6%，评级Underweight。",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "bull_fair_value_per_share",
+      "old_value": null,
+      "new_value": 29.44,
+      "unit": "CNY/share",
+      "evidence_ids": [
+        "EV044"
+      ],
+      "reason": "bull 2027E clean net profit 400.0 x 40倍PE。",
+      "eps_fcf_valuation_impact": "给出乐观路径上沿。",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "bear_fair_value_per_share",
+      "old_value": null,
+      "new_value": 8.1,
+      "unit": "CNY/share",
+      "evidence_ids": [
+        "EV044",
+        "EV036"
+      ],
+      "reason": "bear 2027E clean net profit 200.0 x 22倍PE，因现金转化弱。",
+      "eps_fcf_valuation_impact": "给出下行保护区间下沿。",
+      "disposition": "accepted"
+    },
+    {
+      "line_id": "probability_weighted_fair_value_per_share",
+      "old_value": null,
+      "new_value": 17.76,
+      "unit": "CNY/share",
+      "evidence_ids": [
+        "EV044"
+      ],
+      "reason": "沿用bull/base/bear 25%/50%/25%。",
+      "eps_fcf_valuation_impact": "预期价值显著低于现价，支持Underweight。",
+      "disposition": "accepted"
+    }
+  ],
+  "accepted_underwriting_model": "## Company Quality Verdict\n博腾股份是全球小分子CDMO头部企业之一，具备端到端小分子API/制剂服务能力、高活OEB5产能和客户认证门槛。核心业务2025年增长约13%，2026H1收入+8%-12%，行业需求端有跨国药企资本开支和同行订单共振。公司质量良好，但非规模龙头，且盈利质量和现金生成能力尚未证明。\n## Current Odds Verdict\n当前22.36元/股、市值约12151百万元，PE TTM 94.57倍、五年分位82.1%，估值已对乐观恢复充分定价。以2027E基准clean利润260百万元计算，现价隐含约47倍PE；概率加权公允值约17.76元/股。赔率不具吸引力。\n## Relative Allocation Verdict\n若看好CDMO复苏，博腾并非最优风险回报：规模、客户结构、盈利现金质量均不如头部大型CDMO；其核心优势是经营杠杆，但高经营杠杆也意味着执行风险更高。相对配置上降低权重。\n## Management & Capital Allocation Verdict\n历史上分红有连续记录，但近年受战略投入和减值影响不稳定；终止斯洛文尼亚项目虽有止损含义，但对应资产处置现金影响未披露。管理层资本配置能力属于中性偏谨慎，尚未形成高质量现金再投资证据。\n## Shareholder Structure Verdict\n股本数量已由市值/现价反推并多口径交叉验证；质押、股东人数、浮筹供应等需以后续年报/公告为准。辩论中提及的治理风险应采取不采信但持续跟踪的方式，直至出现官方公告和可验证财务影响。\n## Investor Communication Verdict\n投资者互动已确认高活Payload-linker产能和新分子业务收入，但回复偏战略描述，未提供订单、利用率、利润表和现金流细节。市场关心的在手订单和现金转化问题未获实质回应，披露质量有待半年报验证。\n## Industry Cycle Verdict\nCDMO行业处于底部测试向右侧确认的过渡阶段：TOP15跨国药企外部资本开支、License-out金额和同行新签订单支持行业需求回暖，但博腾自身backlog未披露，不能从行业回暖直接推断公司收入质量。周期判断为early upcycle/早期修复确认中。\n## Business Model / Segment Economics Verdict\n公司为项目订单交付型+产能出货型混合CDMO。小分子API/制剂业务是成熟核心价值；新分子业务是战略期权；大健康消费品无收入，排除。核心业务收入约占90%，但其分线毛利率、利用率和现金回收证据缺失。\n## Industry KPI Verdict\n已验证：H1收入+8%-12%、毛利率+4pp、Q1 OCF/净利润0.0864、应收/收入23.44%、存货/收入22.31%。部分缺失：在手订单/backlog、book-to-bill、分业务毛利率、产能利用率、资本开支/CIP回报。缺失KPI保持中性，不升级也不降级，但降低模型置信度。\n## Forward Forecast Model Verdict\n2026E-2028E收入3761.81/4138.0/4469.0百万元，毛利率32.0%/33.0%/33.5%，剔除一次性减值的营业利润率7.0%/8.5%/9.5%。Clean归母净利润估算为200/260/320百万元，EPS约0.368/0.478/0.589元。OCF/FCF因现金转化弱而未闭合，模型为partial。\n## Key Number Audit Verdict\n当前关键倍数已公式化：现价22.36元、股本543.4422百万股、市值/现价一致，PE TTM 94.57对应隐含TTM利润约128.5百万元；base fair value 16.74元=260百万元×35/543.4422百万股；bull 29.44元；bear 8.10元。报表PE因减值失真，不作为估值主要锚点。\n## Question-Led Thesis Verdict\nUQ01利润一次性部分确认但现金未闭合；UQ02收入方向确认但backlog缺失；UQ03毛利率方向确认但持续性未证明；UQ04现金转化是硬负面；UQ05新分子为未证明期权。综合看，bull回答了需求端方向，bear成功指出了价值和现金质量弱点，后者在现价下更关键。\n## Policy Direction Verdict\n政策环境对创新药和医药服务行业整体友好，但对博腾公司级订单、收款和盈利没有直接可验证的独家贡献，只能作为行业需求背景。\n## Commodity Cycle Verdict\n本标的无商品映射，不适用商品涨跌驱动；毛利率主要受产品组合、产能利用率和客户订单结构影响，而非上游商品价格。\n## Sharp Move Attribution Verdict\n近期大幅上涨为行业beta+创新药/CXO板块共振+盈利修复交易，非单一大宗事件推动，止损和情绪驱动成分较高。\n## Relative Strength Verdict\n20/60日相对强度强，但120/250日仍为relative laggard；高beta意味着板块波动会放大个股波动，不能把短期强势当作长期基本面反转确认。\n## Biopharma Verification Verdict\n作为CRO/CDMO公司，核心应跟踪订单周期、客户外包预算、项目转化、产能利用率和FCF，而非药物管线成功率。当前公司订单/backlog和利用率证据不足，新分子业务只能作期权。\n## Safety Price / Defensive Build Anchor\n当前不提供可信的安全价格区间。虽然有正常化利润情景，但Q1 OCF/净利润0.0864、FCF未闭合、资产负债表和PB锚不足，使低周期盈利地板不稳固。防御性建仓需等待2026年半年报显示OCF/净利润>0.5倍、应收/存货显著下降、backlog可见性改善后再评估。",
+  "model_change_ledger": "UQ01斯洛文尼亚：原假设是约3.3亿一次性减值；bull仍是完全一次性；bear强调退出现金成本未披露；接受口径为利润表一次性，现金效果未闭合。UQ02收入：原假设+10%；bull建议+12%且有backlog支撑；bear建议5%-8%；接受+10% top-down，但订单持续性不加溢价。UQ03毛利率：原假设32%；bull 34%；bear 29.5%-30%；接受基准32%，因为官方H1支持但分产品数据缺失。UQ04 OCF：原未设统一基准；bull设想年末0.7-1.0倍；bear认为0.1-0.2倍；接受0.1-0.2倍，FCF接近零或为负。UQ05新分子：原为期权；bull可能更乐观；bear强调规模小和现金消耗；接受期权处理，不进入基准EPS。EPS/Fair value：原为null或partial；接受clean净利润200/260/320百万元和概率加权公允值17.76元/股。",
+  "debate_verdict": "Bull在收入复苏、行业需求共振和毛利率改善上提供了有效证据，使模型能够维持+10%收入和32%毛利率方向。Bear在现金转化、估值隐含路径和订单持续性的可验证性上更接近当前价格的风险核心。最终模型采用bull的需求方向和bear的现金流/估值纪律，因而评级为Underweight。",
+  "probability_payoff": "bull/base/bear概率沿用25%/50%/25%。情景价值：bull 29.44元、base 16.74元、bear 8.10元，概率加权约17.76元。现价22.36元较加权公允值高约20.6%。驱动分布的核心假设是2027E clean净利润能否达到260百万元以上、毛利率能否维持33%附近、OCF/净利润能否脱离0.0864低位。当前概率/赔率不支持新增多头。",
+  "unresolved_questions_and_gaps": "公司级未解决问题：1）在手订单/backlog和book-to-bill未披露；2）分业务毛利率、产能利用率、单位成本未披露；3）2026H1完整现金流量表和资本开支/CIP未取得；4）斯洛文尼亚处置对价、退出成本和税务影响未披露；5）新分子业务分线收入、利润、订单和盈亏平衡时间未披露；6）辩论中提及的治理风险需官方公告确认，不应在缺少验证时直接进入模型。",
+  "handoff_to_pm_and_trader": "给PM/Trader的约束：标的为300363.SZ博腾股份。评级Underweight，新资金不宜在当前价位建立多头；已有仓位建议控制或减配，不追反弹。核心风险是估值已提前定价2027-2028年盈利正常化，但现金转化和订单持续性未验证。若2026H1报告显示backlog、分业务毛利率改善、OCF/净利润>0.5倍、资本开支可控，则重新评估评级。技术面短期强势且高波动，执行上避免在缺乏基本面验证下追高。",
+  "handoff_integrity_audit": "模型版本：underwriting-v3，300363.SZ博腾股份；是否ready：partial。冻结事实：FY2025收入3419.83百万元；FY2025归母净利润96.34百万元；2026Q1收入886.04百万元；2026Q1归母净利润27.87百万元；Q1毛利率30.60%；Q1营业利润率2.64%；Q1净利率3.14%；Q1 OCF/净利润0.0864。接受估计：2026E-2028E收入3761.81/4138.0/4469.0百万元；毛利率32.0%/33.0%/33.5%；clean归母净利润200/260/320百万元；EPS 0.368/0.478/0.589元；公允价值16.74/29.44/8.10元，加权17.76元。未闭合：OCF、FCF、capex、backlog、分业务毛利率、Slovenia现金影响、新分子利润。PM必须保留业务单元：小分子API CDMO、新分子业务、大健康消费品、海外地理；不得重复计算新分子期权。"
+}

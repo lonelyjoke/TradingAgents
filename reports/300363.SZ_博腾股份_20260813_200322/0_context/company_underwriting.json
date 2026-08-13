@@ -1,0 +1,1526 @@
+{
+  "schema_version": 3,
+  "symbol": "300363.SZ",
+  "as_of_date": "2026-08-13",
+  "forecast_years": [
+    "2026E",
+    "2027E",
+    "2028E"
+  ],
+  "research_readiness": "partial",
+  "readiness_reasons": [
+    "Material filing-backed segments identified, but full-year 2026 and 2027-2028 profit/cash-flow cells cannot be fully closed from supplied evidence.",
+    "Share count is unresolved: market cap is supplied but current price and authoritative total_share are not, so EPS and per-share fair value are partial.",
+    "Segment economics are only partially disclosed: small molecule core is ~90% of revenue, but FY2025 segment gross/operating profit and order backlog are not supplied.",
+    "2026H1 official guidance is hard for revenue and impairment; H2 and normalized run-rate profitability require the 2026 interim report.",
+    "Cash-flow conversion is a flagged risk because 2026Q1 OCF/net profit is only 0.0864 and reinvestment/capex detail is incomplete.",
+    "One or more filing-reported segments required deterministic restoration.",
+    "Required consolidated three-year forecast lines are incomplete.",
+    "Material segment three-year driver lines are missing: 小分子原料药CDMO, 新分子业务 (小分子制剂、多肽与寡核苷酸、蛋白与偶联药物、细胞与基因治疗等)",
+    "Bull/base/bear per-share valuation is incomplete.",
+    "Valuation has not closed from mutually exclusive buckets to per-share fair value.",
+    "Three-year values remain missing for consolidated line(s): 归母净利润(报告), 经营现金流/净利润, 资本支出, eps, fcf, operating_profit"
+  ],
+  "company_model": {
+    "model_profile": "corporate",
+    "operating_model_family": "project_backlog_delivery",
+    "business_archetype": "Global pharmaceutical CDMO, primarily project/order delivery with capacity-output manufacturing for small molecule API; emerging new modalities are pipeline/capacity driven.",
+    "value_proposition_and_customers": "Serves pharmaceutical companies, biotech, and research institutions with end-to-end small molecule CDMO services from starting materials to API and formulation, plus early-stage new modalities including peptides/oligonucleotides, protein/conjugate drugs, and ADC payload-linker services.",
+    "revenue_equation": "Core project delivery: opening backlog + new orders - delivered/recognized orders = ending backlog; revenue = recognized project/delivery volume x price/mix. Capacity-output businesses: effective capacity x utilization x yield x saleable volume x realized ASP/mix.",
+    "profit_equation": "Gross profit = revenue - raw materials/direct labor/manufacturing costs; operating profit = gross profit - R&D/selling/admin - impairment/other; parent profit = operating profit - finance costs - tax - minority interest.",
+    "cash_flow_equation": "OCF = net profit + depreciation/amortization - working-capital change; FCF = OCF - cash paid for long-term assets/capex.",
+    "capital_intensity_and_reinvestment": "Fixed-asset-intensive CDMO capacity; FY2023-FY2025 fixed assets reported at CNY 2.875bn, 3.073bn, 2.891bn with depreciation CNY 269mn, 311mn, 340mn. Reinvestment includes high-activity facilities and terminates Slovenia project with ~CNY 330mn impairment.",
+    "diluted_share_count_mn": 543.4422,
+    "share_count_period": "2026-08-13; market snapshot; market cap / close, using forecast_model and price_earnings_decomposition",
+    "share_count_evidence_id": "EV044",
+    "share_count_source_type": "market_cap_div_close",
+    "share_count_formula": "market cap / close, using forecast_model and price_earnings_decomposition",
+    "share_count_cross_checks": [
+      "registered capital proxy=543.442 mn",
+      "market cap / close=543.442 mn",
+      "pledge_stat total_share proxy=543.442 mn (not canonical)",
+      "registered capital is a lagging proxy; registered-vs-current-market difference=0.000%"
+    ],
+    "moat_mechanisms": [
+      "End-to-end small molecule CDMO capability from starting material to API/formulation",
+      "High-activity OEB5 payload-linker capacity in Shanghai and New Jersey",
+      "Regulatory qualification and customer qualification/site-locking costs",
+      "Specialized capacity and process know-how for complex molecules"
+    ],
+    "moat_to_financial_transmission": [
+      "Qualified capacity -> new order conversion -> utilization -> revenue",
+      "Complex product mix -> ASP and gross margin",
+      "Customer switching cost -> repeat orders -> lower cost/order and more stable backlog",
+      "Scale utilization -> fixed cost absorption -> operating margin"
+    ],
+    "structural_risks": [
+      "Customer R&D outsourcing demand decline and pharma capex cyclicality",
+      "Fixed-asset investment risk and capacity underutilization",
+      "New modality investment still small and loss-making",
+      "Overseas operation, FX, and global policy risk",
+      "Cash conversion lag behind reported profit"
+    ],
+    "key_unknowns": [
+      "2026H2 reported profit/cash flow",
+      "Order backlog and new order composition by phase/product",
+      "Segment gross margins and capacity utilization",
+      "New modality capex and time to positive cash flow",
+      "Diluted share count"
+    ],
+    "evidence_ids": [
+      "EV025",
+      "EV026",
+      "EV027",
+      "EV028",
+      "EV031",
+      "EV032",
+      "EV041",
+      "EV009",
+      "EV010",
+      "EV044",
+      "EV045"
+    ]
+  },
+  "business_unit_map": [
+    {
+      "unit_id": "small_molecule_api_cdmo",
+      "unit_name": "小分子原料药CDMO",
+      "unit_type": "product",
+      "disclosure_basis": "reported",
+      "parent_unit": "company",
+      "economic_role": "Core revenue/profit engine",
+      "primary_operating_archetype": "project_order_delivery",
+      "secondary_operating_archetype": "standard_manufacturing",
+      "revenue_driver_equation": "Backlog + new orders - delivered = ending backlog; revenue = recognized project delivery + capacity x utilization x yield x ASP/mix",
+      "profit_driver_equation": "Gross profit = revenue - material/labor/manufacturing; operating profit = gross profit - R&D/selling/admin - impairment",
+      "cash_and_capital_equation": "Collections - procurement/WIP - receivables - capex; FCF = OCF - long-term asset cash outflows",
+      "reported_metrics": [
+        "2025 revenue share ~90%",
+        "2025 revenue growth ~13%",
+        "2026H1 guidance revenue growth ~8%-12%"
+      ],
+      "evidence_ids": [
+        "EV025",
+        "EV027",
+        "EV028",
+        "EV029",
+        "EV030",
+        "EV012",
+        "EV013",
+        "KPE01",
+        "KPE07"
+      ],
+      "missing_inputs": [
+        "FY2025 and H1 2026 segment revenue/profit",
+        "backlog and new order value",
+        "capacity utilization",
+        "realized ASP/mix"
+      ],
+      "next_verification": "2026 interim report and order disclosure"
+    },
+    {
+      "unit_id": "new_modalities",
+      "unit_name": "新分子业务 (小分子制剂、多肽与寡核苷酸、蛋白与偶联药物、细胞与基因治疗等)",
+      "unit_type": "product",
+      "disclosure_basis": "reported",
+      "parent_unit": "company",
+      "economic_role": "Small but high-growth emerging business; strategic optionality",
+      "primary_operating_archetype": "pharma_biotech",
+      "secondary_operating_archetype": "standard_manufacturing",
+      "revenue_driver_equation": "Customer pipeline advancement x molecule modality mix x capacity/output x ASP",
+      "profit_driver_equation": "Revenue - high-activity facility fixed cost - development/startup cost - R&D overhead",
+      "cash_and_capital_equation": "Early-stage cash outflow; capacity investment precedes revenue; receivables/inventory not yet material",
+      "reported_metrics": [
+        "2025 revenue CNY 68mn",
+        "2025 revenue growth +224%",
+        "2025 revenue share ~2%"
+      ],
+      "evidence_ids": [
+        "EV026",
+        "EV092",
+        "EV093",
+        "KPE02",
+        "KPE03"
+      ],
+      "missing_inputs": [
+        "sub-line revenue/profit split",
+        "capacity utilization",
+        "orderbook",
+        "2026H1 segment performance"
+      ],
+      "next_verification": "Investor interaction and interim reports for new modality orders/api deliveries"
+    },
+    {
+      "unit_id": "consumer_health_exploration",
+      "unit_name": "大健康消费品",
+      "unit_type": "other",
+      "disclosure_basis": "analytical",
+      "parent_unit": "company",
+      "economic_role": "Exploratory non-core optionality; no revenue yet",
+      "primary_operating_archetype": "other",
+      "secondary_operating_archetype": "other",
+      "revenue_driver_equation": "Undefined product/consumer channel; no reported revenue equation yet",
+      "profit_driver_equation": "Undefined",
+      "cash_and_capital_equation": "Initial subsidiary setup cash outflow only",
+      "reported_metrics": [
+        "No reported revenue",
+        "Subsidiary Yao Chu Bio established"
+      ],
+      "evidence_ids": [
+        "EV095",
+        "EV096",
+        "EV023",
+        "EV024"
+      ],
+      "missing_inputs": [
+        "product line",
+        "commercialization plan",
+        "capital commitment"
+      ],
+      "next_verification": "Company disclosure on subsidiary business scope"
+    },
+    {
+      "unit_id": "geography_overseas",
+      "unit_name": "海外市场 (北美、欧洲、日韩等)",
+      "unit_type": "geography",
+      "disclosure_basis": "calculated",
+      "parent_unit": "company",
+      "economic_role": "Main demand geography; regional mix drives FX and growth",
+      "primary_operating_archetype": "project_order_delivery",
+      "secondary_operating_archetype": "other",
+      "revenue_driver_equation": "Overseas pharma/biotech outsourcing budgets x company share; regional revenue = Americas/Europe/Japan-Korea contributions",
+      "profit_driver_equation": "Regional mix affects ASP, tax, logistics and FX; not separately reported",
+      "cash_and_capital_equation": "Export receivables/collections and FX settlement",
+      "reported_metrics": [
+        "2025 Europe revenue -12%",
+        "2025 Japan-Korea and other overseas +20%",
+        "2025 Americas +39% cited in filing intelligence"
+      ],
+      "evidence_ids": [
+        "EV027",
+        "EV030"
+      ],
+      "missing_inputs": [
+        "regional revenue amounts",
+        "customer concentration",
+        "FX hedging and remittance"
+      ],
+      "next_verification": "Annual report geographic segment table"
+    },
+    {
+      "unit_id": "BU06",
+      "unit_name": "新分子业务",
+      "unit_type": "reported_segment",
+      "disclosure_basis": "reported",
+      "parent_unit": "company",
+      "economic_role": "Filing segment restored after structured evidence reconciliation.",
+      "primary_operating_archetype": "",
+      "secondary_operating_archetype": "",
+      "revenue_driver_equation": "",
+      "profit_driver_equation": "",
+      "cash_and_capital_equation": "",
+      "reported_metrics": [],
+      "evidence_ids": [],
+      "missing_inputs": [
+        "economic sub-unit driver equations require analyst completion"
+      ],
+      "next_verification": ""
+    }
+  ],
+  "segment_models": [
+    {
+      "segment": "小分子原料药CDMO",
+      "products_or_services": "From starting material to API/formulation small molecule CDMO services",
+      "customers_and_channel": "Global pharma, biotech, research institutions via direct CDMO project contracts",
+      "revenue_weight_pct": 90.0,
+      "profit_weight_pct": null,
+      "base_period": "FY2025",
+      "base_revenue_value": 3077.85,
+      "base_revenue_unit": "CNY mn",
+      "base_revenue_growth_pct": 13.0,
+      "base_margin_pct": null,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [
+        "Global pharma R&D outsourcing budgets",
+        "Innovative drug approvals and license-out activity",
+        "AI4S early-stage R&D demand",
+        "MNC external collaboration capex"
+      ],
+      "industry_supply_and_capacity": "Global CDMO supply is constrained for qualified complex small molecule capacity; competitors are adding capacity but quality/regulatory qualification is a bottleneck.",
+      "volume_share_utilization": "Company reports H1 2026 new orders and revenue growing; precise backlog, share, and utilization not supplied.",
+      "price_asp_take_rate": "High-margin product delivery lifted Q1 2026 gross margin +4.27pp; exact ASP and product mix not disclosed.",
+      "unit_cost_and_input_prices": "Raw material, labor, manufacturing, and fixed asset depreciation; cost detail not supplied.",
+      "margin_and_operating_leverage": "Q1 2026 gross margin 30.5994%; clean H1 profit growth guided +196%-343% ex impairment, implying strong operating leverage on volume/mix.",
+      "working_capital_and_cash_conversion": "Q1 2026 OCF/net profit 0.0864; receivables/revenue 23.44%; inventory/revenue 22.31%. Profitability not yet converting to cash.",
+      "prosperity_level": "evidence_limited",
+      "marginal_direction": "unknown",
+      "causal_analysis": "",
+      "valuation_treatment": "evidence_limited",
+      "strongest_counterevidence": [],
+      "evidence_ids": [],
+      "missing_inputs": [],
+      "next_verification": ""
+    },
+    {
+      "segment": "新分子业务",
+      "products_or_services": "Small molecule formulation, peptides/oligonucleotides, protein and conjugate drugs, ADC payload-linker services, CGT exploration",
+      "customers_and_channel": "Innovative pharma/biotech advancing new modality pipelines",
+      "revenue_weight_pct": 2.0,
+      "profit_weight_pct": null,
+      "base_period": "FY2025",
+      "base_revenue_value": 68.0,
+      "base_revenue_unit": "CNY mn",
+      "base_revenue_growth_pct": 224.0,
+      "base_margin_pct": null,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [
+        "ADC/payload-linker and peptide/oligo demand",
+        "Customer pipeline advancement",
+        "AI-driven candidate generation increasing molecules to synthesize"
+      ],
+      "industry_supply_and_capacity": "High-end OEB5 high-activity payload capacity is tight; company has Shanghai and New Jersey facilities.",
+      "volume_share_utilization": "Small base; 2025 revenue only CNY 68mn. Segment capacity utilization not disclosed.",
+      "price_asp_take_rate": "Not disclosed; high-activity payload services likely higher ASP but unverified.",
+      "unit_cost_and_input_prices": "High-activity facility fixed costs and startup costs dominate at small scale; no unit economics supplied.",
+      "margin_and_operating_leverage": "Likely investment-phase/negative margin but not disclosed; scale is too low for operating leverage evidence.",
+      "working_capital_and_cash_conversion": "Early-stage; not separately disclosed.",
+      "prosperity_level": "evidence_limited",
+      "marginal_direction": "unknown",
+      "causal_analysis": "",
+      "valuation_treatment": "evidence_limited",
+      "strongest_counterevidence": [],
+      "evidence_ids": [],
+      "missing_inputs": [],
+      "next_verification": ""
+    },
+    {
+      "segment": "新分子业务 (小分子制剂、多肽与寡核苷酸、蛋白与偶联药物、细胞与基因治疗等)",
+      "products_or_services": "",
+      "customers_and_channel": "",
+      "revenue_weight_pct": 10.0,
+      "profit_weight_pct": null,
+      "base_period": "2025年年度",
+      "base_revenue_value": 0.68,
+      "base_revenue_unit": "亿元",
+      "base_revenue_growth_pct": 224.0,
+      "base_margin_pct": null,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [],
+      "industry_supply_and_capacity": "",
+      "volume_share_utilization": "",
+      "price_asp_take_rate": "",
+      "unit_cost_and_input_prices": "",
+      "margin_and_operating_leverage": "",
+      "working_capital_and_cash_conversion": "",
+      "prosperity_level": "evidence_limited",
+      "marginal_direction": "unknown",
+      "causal_analysis": "",
+      "valuation_treatment": "evidence_limited",
+      "strongest_counterevidence": [],
+      "evidence_ids": [],
+      "missing_inputs": [
+        "LLM omitted a filing-reported material segment"
+      ],
+      "next_verification": ""
+    },
+    {
+      "segment": "大健康消费品",
+      "products_or_services": "",
+      "customers_and_channel": "",
+      "revenue_weight_pct": 0.0,
+      "profit_weight_pct": null,
+      "base_period": "2026年7月，公司成立初期",
+      "base_revenue_value": null,
+      "base_revenue_unit": "",
+      "base_revenue_growth_pct": null,
+      "base_margin_pct": null,
+      "base_margin_change_pp": null,
+      "demand_and_order_drivers": [],
+      "industry_supply_and_capacity": "",
+      "volume_share_utilization": "",
+      "price_asp_take_rate": "",
+      "unit_cost_and_input_prices": "",
+      "margin_and_operating_leverage": "",
+      "working_capital_and_cash_conversion": "",
+      "prosperity_level": "evidence_limited",
+      "marginal_direction": "unknown",
+      "causal_analysis": "",
+      "valuation_treatment": "evidence_limited",
+      "strongest_counterevidence": [],
+      "evidence_ids": [],
+      "missing_inputs": [
+        "LLM omitted a filing-reported material segment"
+      ],
+      "next_verification": ""
+    }
+  ],
+  "underwriting_questions": [
+    {
+      "question_id": "UQ01",
+      "question": "What is the final cash and income-statement treatment of the Slovenia R&D production base termination beyond the ~CNY 330mn impairment?",
+      "why_it_matters": "The impairment turns H1 2026 reported profit to a guided loss of CNY -250mn to -210mn; residual onerous contracts, asset disposal proceeds, future capex/exit costs, and tax treatment decide whether 2026 reported EPS/FCF are near zero or deeply negative.",
+      "current_answer": "Official H1 guidance confirms ~CNY 330mn impairment and guided H1 loss; H2 and final cash impact unresolved.",
+      "bull_evidence": [
+        "2026H1 guidance says loss is mainly from the Slovenia project impairment",
+        "Ex-impairment H1 parent profit guided CNY 80-120mn"
+      ],
+      "bear_evidence": [
+        "Q1 2026 OCF/net profit only 0.0864",
+        "No disclosed recovery or sale proceeds from Slovenia assets"
+      ],
+      "decisive_model_variables": [
+        "impairment",
+        "operating profit",
+        "parent net profit",
+        "FCF"
+      ],
+      "affected_financial_lines": [
+        "2026E parent net profit",
+        "2026E OCF",
+        "2026E FCF"
+      ],
+      "evidence_ids": [
+        "KPE01",
+        "KPE07",
+        "EV020",
+        "EV036",
+        "EV038"
+      ],
+      "missing_evidence": [
+        "H2 2026 income/cash effect",
+        "exit cost or sale proceeds",
+        "tax effect of impairment"
+      ],
+      "next_verification": "2026 interim report cash-flow and impairment notes"
+    },
+    {
+      "question_id": "UQ02",
+      "question": "Will H1 2026 CDMO order growth of 8%-12% convert into 2027-2028 revenue after current deliveries?",
+      "why_it_matters": "This is the core revenue bridge. If the growth is from one-time high-margin deliveries rather than a durable backlog lift, 2027-2028 revenue and operating leverage will fall below the current high PE.",
+      "current_answer": "Company and broker channel checks state new orders and revenue grew well in H1 2026, but no backlog/book-to-bill is supplied.",
+      "bull_evidence": [
+        "H1 2026 revenue guidance +8%-12%",
+        "CDMO industry peers report strong order growth",
+        "Top-15 pharma external capex remains high"
+      ],
+      "bear_evidence": [
+        "H1 2025 comparison base likely low",
+        "No disclosed backlog",
+        "Q1 cash conversion is weak"
+      ],
+      "decisive_model_variables": [
+        "new orders",
+        "ending backlog",
+        "revenue growth"
+      ],
+      "affected_financial_lines": [
+        "2026E-2028E consolidated revenue",
+        "small molecule CDMO revenue"
+      ],
+      "evidence_ids": [
+        "EV025",
+        "EV028",
+        "KPE01",
+        "KPE04",
+        "KPE06",
+        "KPE08"
+      ],
+      "missing_evidence": [
+        "backlog in CNY",
+        "book-to-bill",
+        "order composition by phase"
+      ],
+      "next_verification": "Interim report segment/order disclosure"
+    },
+    {
+      "question_id": "UQ03",
+      "question": "Is the Q1 2026 gross margin increase of +4.27pp sustainable and does it reflect structural mix or temporary high-margin product delivery?",
+      "why_it_matters": "Gross margin is the main profit bridge; a 1pp move on ~CNY 3.8bn revenue is ~CNY 38mn gross profit, material against FY2025 parent profit of only ~CNY 96mn.",
+      "current_answer": "Q1 2026 gross margin 30.60%, +4.27pp; company attributes H1 clean profit growth to high-margin product delivery and scale effects.",
+      "bull_evidence": [
+        "Official H1 guidance says overall gross margin up ~4pp",
+        "Clean H1 profit guided +196%-343% ex impairment"
+      ],
+      "bear_evidence": [
+        "Q1 operating margin only 2.64%, net margin 3.14%",
+        "Q1 OCF/net profit 0.0864 means gross profit did not turn into cash"
+      ],
+      "decisive_model_variables": [
+        "gross margin",
+        "product mix",
+        "utilization"
+      ],
+      "affected_financial_lines": [
+        "gross profit",
+        "operating profit",
+        "parent net profit"
+      ],
+      "evidence_ids": [
+        "EV012",
+        "EV013",
+        "EV014",
+        "KPE01",
+        "KPE07"
+      ],
+      "missing_evidence": [
+        "product mix",
+        "cost per batch/unit",
+        "fixed cost absorption"
+      ],
+      "next_verification": "H1 2026 segment gross margin and revenue mix"
+    },
+    {
+      "question_id": "UQ04",
+      "question": "When will OCF convert? Q1 2026 OCF/net profit is only 0.0864.",
+      "why_it_matters": "Current valuation is equity-rich but profitability is not cash-backed; persistent receivables/inventory-led growth without cash collection would impair FCF and fair value.",
+      "current_answer": "Q1 OCF/net profit 0.0864; receivables/revenue 23.44% and inventory/revenue 22.31% both declined slightly YoY.",
+      "bull_evidence": [
+        "Receivables/revenue -0.47pp YoY",
+        "Inventory/revenue -0.28pp YoY"
+      ],
+      "bear_evidence": [
+        "OCF/net profit ratio is extremely low",
+        "EFV evidence shows prior 2024 quarterly OCF was negative"
+      ],
+      "decisive_model_variables": [
+        "OCF",
+        "receivables",
+        "inventory",
+        "FCF"
+      ],
+      "affected_financial_lines": [
+        "2026E-2028E OCF",
+        "FCF"
+      ],
+      "evidence_ids": [
+        "EV016",
+        "EV017",
+        "EV036",
+        "EV039"
+      ],
+      "missing_evidence": [
+        "Q1 cash-flow statement detail",
+        "collection terms",
+        "inventory aging"
+      ],
+      "next_verification": "H1 2026 cash-flow statement"
+    },
+    {
+      "question_id": "UQ05",
+      "question": "Can the new molecule business scale from CNY 68mn revenue without consuming excess capex and fixed cost?",
+      "why_it_matters": "The market may be pricing AI4S and new modality optionality; without disclosed orders, utilization, and path to breakeven, this optionality cannot be valued as core FCF.",
+      "current_answer": "2025 new molecule revenue CNY 68mn, +224%, but ~2% of total. No profit or capacity utilization disclosed.",
+      "bull_evidence": [
+        "High-activity payload capacity exists in Shanghai and New Jersey",
+        "ADC/payload demand is tight"
+      ],
+      "bear_evidence": [
+        "Scale is still tiny",
+        "No segment profit/cash evidence",
+        "Fixed capacity may drag margins"
+      ],
+      "decisive_model_variables": [
+        "new molecule revenue",
+        "capex",
+        "margin"
+      ],
+      "affected_financial_lines": [
+        "new molecule revenue",
+        "consolidated capex",
+        "gross margin"
+      ],
+      "evidence_ids": [
+        "EV026",
+        "EV092",
+        "EV093",
+        "KPE02",
+        "KPE03"
+      ],
+      "missing_evidence": [
+        "sub-line revenue/profit",
+        "capacity utilization",
+        "break-even timeline"
+      ],
+      "next_verification": "Investor interaction and new order announcements"
+    },
+    {
+      "question_id": "UQ06",
+      "question": "Does AI4S actually produce company-specific order flow, or only industry-wide narrative?",
+      "why_it_matters": "AI-driven molecule generation may lift demand for synthesis/testing. If Bo Teng wins these orders, revenue growth can be above base; if not, the current AI4S-driven multiple is unsupported.",
+      "current_answer": "Private channel checks cite CDMO beneficiaries including Bo Teng, but there is no company-disclosed AI-related order or revenue.",
+      "bull_evidence": [
+        "North American technology and pharma AI demand reportedly rising",
+        "Bo Teng listed as CDMO beneficiary in channel checks"
+      ],
+      "bear_evidence": [
+        "No contract/order evidence",
+        "Beneficiary list is promotional and non-company-specific"
+      ],
+      "decisive_model_variables": [
+        "new orders",
+        "revenue growth",
+        "scenario probability"
+      ],
+      "affected_financial_lines": [
+        "2026E-2028E revenue",
+        "valuation multiple"
+      ],
+      "evidence_ids": [
+        "KPE02",
+        "KPE03",
+        "KPE05"
+      ],
+      "missing_evidence": [
+        "company-specific AI-related order value",
+        "AI project pipeline"
+      ],
+      "next_verification": "Company order announcements or interim segment disclosure"
+    }
+  ],
+  "forecast_lines": [
+    {
+      "segment": "consolidated",
+      "metric": "营业收入",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 3419.83,
+      "year_1_value": 3761.81,
+      "year_2_value": 4138.0,
+      "year_3_value": 4469.0,
+      "formula": "2026E = FY2025 x 1.10 using official H1 +10% midpoint; 2027E = 2026E x 1.10; 2028E = 2027E x 1.08. Analyst demand-growth assumption, not company guidance for 2027-2028.",
+      "assumption_status": "calculated",
+      "evidence_ids": [
+        "EV010",
+        "EV011",
+        "EV020",
+        "KPE01",
+        "KPE08"
+      ],
+      "key_sensitivity": "1pp revenue growth = ~CNY 38mn revenue, ~CNY 12mn gross profit at 32% GM",
+      "missing_inputs": [
+        "FY2027-2028 company guidance",
+        "order backlog"
+      ]
+    },
+    {
+      "segment": "small_molecule_api_cdmo",
+      "metric": "小分子原料药CDMO营业收入",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 3077.85,
+      "year_1_value": 3385.63,
+      "year_2_value": 3724.2,
+      "year_3_value": 4022.1,
+      "formula": "FY2025 = consolidated FY2025 x 90%; forward values = consolidated forecast x 90% holding share constant. Filing says 2025 share ~90%.",
+      "assumption_status": "calculated",
+      "evidence_ids": [
+        "EV028",
+        "EV010"
+      ],
+      "key_sensitivity": "Core segment share change of 1pp shifts revenue by ~CNY 38mn",
+      "missing_inputs": [
+        "actual FY2025 segment revenue in CNY",
+        "forward segment mix"
+      ]
+    },
+    {
+      "segment": "new_modalities",
+      "metric": "新分子业务营业收入",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 68.0,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "Reported 2025 base only; forward values withheld because sub-line capacity, orders, and 2026H1 segment revenue are not supplied.",
+      "assumption_status": "missing",
+      "evidence_ids": [
+        "EV092",
+        "EV093"
+      ],
+      "key_sensitivity": "small current base; high growth can lift consolidated growth only modestly until scale exceeds ~5% of revenue",
+      "missing_inputs": [
+        "2026 segment revenue",
+        "capacity",
+        "order book",
+        "sub-line mix"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "毛利率",
+      "unit": "%",
+      "base_period": "2026Q1",
+      "base_value": 30.5994,
+      "year_1_value": 32.0,
+      "year_2_value": 33.0,
+      "year_3_value": 33.5,
+      "formula": "2026E base from Q1 actual; forward assumes mix/utilization improvement continues then moderates. Official H1 says GM +~4pp YoY.",
+      "assumption_status": "analyst_estimate",
+      "evidence_ids": [
+        "EV012",
+        "KPE01",
+        "KPE07"
+      ],
+      "key_sensitivity": "1pp GM on CNY 3,762mn revenue = ~CNY 37.6mn gross profit",
+      "missing_inputs": [
+        "FY2025 gross margin",
+        "product mix",
+        "cost per unit"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "营业利润率(剔除一次性减值)",
+      "unit": "%",
+      "base_period": "2026Q1",
+      "base_value": 2.6435,
+      "year_1_value": 7.0,
+      "year_2_value": 8.5,
+      "year_3_value": 9.5,
+      "formula": "2026Q1 actual; forward assumes H1 clean operating leverage and scale effects annualize, then gradual improvement.",
+      "assumption_status": "analyst_estimate",
+      "evidence_ids": [
+        "EV013",
+        "KPE01",
+        "KPE07"
+      ],
+      "key_sensitivity": "1pp op margin on CNY 3,762mn = ~CNY 37.6mn operating profit",
+      "missing_inputs": [
+        "FY2025 operating profit",
+        "segment opex",
+        "R&D and admin structure"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "归母净利润(报告)",
+      "unit": "CNY mn",
+      "base_period": "FY2025",
+      "base_value": 96.34,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "FY2025 actual; 2026E not set because H1 includes ~CNY 330mn impairment and H2 normalized profit is not disclosed. 2027-2028 require normalized tax/minority/cash assumptions.",
+      "assumption_status": "missing",
+      "evidence_ids": [
+        "EV010",
+        "EV009",
+        "EV020",
+        "KPE01"
+      ],
+      "key_sensitivity": "CNY 100mn parent profit on CNY 12.15bn market cap = ~12.2x or ~8.2% earnings yield",
+      "missing_inputs": [
+        "H2 2026 net profit",
+        "minority interest",
+        "tax rate",
+        "future one-off items"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "EPS(摊薄)",
+      "unit": "CNY/share",
+      "base_period": "unresolved",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "Parent net profit / diluted share count; blocked because share count is unresolved.",
+      "assumption_status": "missing",
+      "evidence_ids": [
+        "EV044"
+      ],
+      "key_sensitivity": "Per-share value scales inversely with share count",
+      "missing_inputs": [
+        "diluted share count"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "经营现金流/净利润",
+      "unit": "x",
+      "base_period": "2026Q1",
+      "base_value": 0.0864,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "Q1 actual; forward conversion withheld until H1 cash-flow detail arrives.",
+      "assumption_status": "missing",
+      "evidence_ids": [
+        "EV016"
+      ],
+      "key_sensitivity": "If OCF/net profit normalizes to 1.0x on CNY 200mn clean profit, OCF adds ~CNY 183mn vs Q1 implied conversion",
+      "missing_inputs": [
+        "H1 2026 OCF",
+        "working capital movement and collection terms"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "资本支出",
+      "unit": "CNY mn",
+      "base_period": "unspecified",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "Not supplied. Fixed asset evidence shows high historical depreciation; capex cannot be reliably derived without cash paid to acquire/construct long-term assets.",
+      "assumption_status": "missing",
+      "evidence_ids": [
+        "EV031",
+        "EV040"
+      ],
+      "key_sensitivity": "Growth capex consumes OCF and lowers FCF",
+      "missing_inputs": [
+        "cash paid to acquire/construct long-term assets",
+        "maintenance vs growth capex"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "eps",
+      "unit": "",
+      "base_period": "",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "missing; downstream analyst must complete",
+      "assumption_status": "missing",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "required consolidated forecast line omitted"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "fcf",
+      "unit": "",
+      "base_period": "",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "missing; downstream analyst must complete",
+      "assumption_status": "missing",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "required consolidated forecast line omitted"
+      ]
+    },
+    {
+      "segment": "consolidated",
+      "metric": "operating_profit",
+      "unit": "",
+      "base_period": "",
+      "base_value": null,
+      "year_1_value": null,
+      "year_2_value": null,
+      "year_3_value": null,
+      "formula": "missing; downstream analyst must complete",
+      "assumption_status": "missing",
+      "evidence_ids": [],
+      "key_sensitivity": "",
+      "missing_inputs": [
+        "required consolidated forecast line omitted"
+      ]
+    }
+  ],
+  "scenarios": [
+    {
+      "scenario": "bull",
+      "probability_pct": 25.0,
+      "operating_assumptions": [
+        "FY2026 revenue +12% or more on durable order growth",
+        "Gross margin >33% from high-margin complex API and early new modality mix",
+        "Slovenia impairment is fully one-time with no further exit cash loss",
+        "Cash conversion normalizes toward 0.7-1.0x clean profit by end-2026",
+        "New modality orders scale to >CNY 120mn with visible capacity absorption"
+      ],
+      "parent_net_profit_cny_mn": null,
+      "eps_cny": null,
+      "fcf_cny_mn": null,
+      "valuation_method": "Normalized PE / EV/EBITDA on 2027E clean earnings",
+      "valuation_multiple": null,
+      "fair_value_per_share": null,
+      "evidence_ids": [
+        "KPE01",
+        "KPE04",
+        "KPE06",
+        "EV012"
+      ],
+      "falsification": "H2 2026 order growth below 8% or gross margin below Q1; OCF/net profit remains <0.3x",
+      "missing_inputs": [
+        "share count",
+        "H2 profit",
+        "full-year OCF/capex"
+      ]
+    },
+    {
+      "scenario": "base",
+      "probability_pct": 50.0,
+      "operating_assumptions": [
+        "FY2026 revenue +10% midpoint",
+        "Gross margin ~32% average",
+        "Slovenia impairment is one-time in reported profit",
+        "Clean H1 profit CNY 80-120mn annualizes moderately",
+        "Cash conversion remains a lagging issue but working capital ratios improve slowly"
+      ],
+      "parent_net_profit_cny_mn": null,
+      "eps_cny": null,
+      "fcf_cny_mn": null,
+      "valuation_method": "Normalized PE on consolidated ex-one-off earnings",
+      "valuation_multiple": null,
+      "fair_value_per_share": null,
+      "evidence_ids": [
+        "EV020",
+        "EV011",
+        "EV012",
+        "EV016",
+        "KPE01"
+      ],
+      "falsification": "Order growth falters or cash conversion deteriorates",
+      "missing_inputs": [
+        "full-year profit",
+        "share count",
+        "capex"
+      ]
+    },
+    {
+      "scenario": "bear",
+      "probability_pct": 25.0,
+      "operating_assumptions": [
+        "FY2026 revenue growth near 5%-8%",
+        "Gross margin retreats toward 29-30%",
+        "Slovenia exit creates additional cash/onerous-contract costs",
+        "Q1 weak OCF persists; FCF negative",
+        "New molecule revenue remains small and cash-absorbing"
+      ],
+      "parent_net_profit_cny_mn": null,
+      "eps_cny": null,
+      "fcf_cny_mn": null,
+      "valuation_method": "Book-plus-liquidation or downside normalized PE",
+      "valuation_multiple": null,
+      "fair_value_per_share": null,
+      "evidence_ids": [
+        "EV016",
+        "EV036",
+        "EV041"
+      ],
+      "falsification": "H1 orders and cash flow exceed bear assumptions",
+      "missing_inputs": [
+        "H2 revenue and profit",
+        "Slovenia final cash impact",
+        "capex"
+      ]
+    }
+  ],
+  "thesis_financial_bridges": [
+    {
+      "bridge_id": "TH01",
+      "thesis_or_question": "Core CDMO order growth converts into revenue growth",
+      "affected_unit": "small_molecule_api_cdmo",
+      "operating_driver": "new orders and backlog",
+      "driver_formula": "Revenue = beginning backlog + new orders - delivery; equivalent base growth model: FY2026 = FY2025 x (1+g)",
+      "base_assumption": "FY2026 +10%",
+      "bull_assumption": "FY2026 +12% and backlog builds",
+      "bear_assumption": "FY2026 +5% and backlog draws down",
+      "revenue_impact": "Base +CNY 342mn; bull +CNY 410mn; bear +CNY 171mn",
+      "profit_impact": "At 32% gross margin, base gross profit impact ~+CNY 109mn; operating leverage depends on fixed cost absorption",
+      "eps_impact": "unquantified - share count missing",
+      "fcf_or_capital_impact": "May require receivables/inventory build before cash collection",
+      "valuation_impact": "Higher revenue growth supports current high PE only if cash conversion follows",
+      "quantification_status": "partially_quantified",
+      "evidence_ids": [
+        "EV010",
+        "EV011",
+        "EV020",
+        "KPE01",
+        "KPE08"
+      ],
+      "missing_inputs": [
+        "backlog value",
+        "book-to-bill",
+        "share count"
+      ]
+    },
+    {
+      "bridge_id": "TH02",
+      "thesis_or_question": "Gross margin improvement is durable",
+      "affected_unit": "consolidated",
+      "operating_driver": "product mix, utilization, scale",
+      "driver_formula": "Gross profit = revenue x gross margin; operating profit = gross profit - period costs",
+      "base_assumption": "GM 32%",
+      "bull_assumption": "GM 34%",
+      "bear_assumption": "GM 29.5%",
+      "revenue_impact": "None directly",
+      "profit_impact": "On 2026E revenue CNY 3,762mn: base gross profit CNY 1,204mn; bull CNY 1,279mn; bear CNY 1,110mn",
+      "eps_impact": "unquantified - share count missing",
+      "fcf_or_capital_impact": "Cash conversion still controlled by receivables/inventory",
+      "valuation_impact": "GM is the main multiple-support variable; high PE requires GM expansion",
+      "quantification_status": "partially_quantified",
+      "evidence_ids": [
+        "EV012",
+        "KPE01",
+        "KPE07"
+      ],
+      "missing_inputs": [
+        "FY2025 gross margin",
+        "product mix",
+        "cost structure"
+      ]
+    },
+    {
+      "bridge_id": "TH03",
+      "thesis_or_question": "Slovenia impairment is a one-time event",
+      "affected_unit": "consolidated",
+      "operating_driver": "impairment and exit costs",
+      "driver_formula": "Reported parent profit = clean parent profit - impairment - additional exit costs",
+      "base_assumption": "Only ~CNY 330mn impairment; no further cash cost",
+      "bull_assumption": "No further P&L/cash impact and some residual asset value recovered",
+      "bear_assumption": "Additional exit costs and no recovery",
+      "revenue_impact": "None",
+      "profit_impact": "H1 2026 guided loss CNY -250mn to -210mn vs clean profit CNY 80-120mn",
+      "eps_impact": "unquantified - share count missing",
+      "fcf_or_capital_impact": "Cash exit costs/recoveries unresolved",
+      "valuation_impact": "Core value should normalize ex-Slovenia; reported 2026 PE will be distorted",
+      "quantification_status": "partially_quantified",
+      "evidence_ids": [
+        "EV020",
+        "KPE01",
+        "KPE07"
+      ],
+      "missing_inputs": [
+        "tax effect",
+        "exit cash",
+        "asset recovery"
+      ]
+    },
+    {
+      "bridge_id": "TH04",
+      "thesis_or_question": "New molecule business becomes a second growth curve",
+      "affected_unit": "new_modalities",
+      "operating_driver": "pipeline conversion and ADC/payload capacity",
+      "driver_formula": "Revenue = pipeline candidates x probability of progression x service value x capacity output",
+      "base_assumption": "Revenue grows from CNY 68mn but remains <5% of consolidated by 2028",
+      "bull_assumption": "Revenue triples to >CNY 200mn by 2028 with visible orders",
+      "bear_assumption": "Revenue growth stalls below CNY 100mn",
+      "revenue_impact": "unquantified",
+      "profit_impact": "unquantified",
+      "eps_impact": "unquantified",
+      "fcf_or_capital_impact": "Growth requires capex and may be cash-negative",
+      "valuation_impact": "Optionality only; not core FCF until profit evidence exists",
+      "quantification_status": "unquantified",
+      "evidence_ids": [
+        "EV026",
+        "EV092",
+        "EV093",
+        "KPE02",
+        "KPE03"
+      ],
+      "missing_inputs": [
+        "sub-line revenue/profit",
+        "capacity utilization",
+        "order book"
+      ]
+    }
+  ],
+  "competition_landscapes": [
+    {
+      "business_unit": "小分子原料药CDMO",
+      "market_boundary": "Global small molecule pharmaceutical CDMO services from starting material to API/formulation for innovative pharma, biotech, and research institutions",
+      "boundary_evidence": "2025 annual report states company provides full-category end-to-end CDMO services from starting material to formulation",
+      "structure_and_concentration": "Concentrated global CDMO leadership; qualified capacity and regulatory/site qualification create entry barriers. Target ranks #10 of 12 in selected peer screen.",
+      "direct_competitors": [
+        "药明康德",
+        "凯莱英",
+        "康龙化成",
+        "九洲药业",
+        "普洛药业",
+        "药石科技",
+        "奥锐特"
+      ],
+      "substitutes_and_customer_alternatives": [
+        "Customer in-house R&D and manufacturing",
+        "Alternative CDMO vendors in low-cost or alternative geographies"
+      ],
+      "self_supply_and_new_entrants": [
+        "Large pharma self-supply expansion",
+        "New CDMO capacity entrants in China and India"
+      ],
+      "comparison_dimensions": [
+        "capacity and technology platform",
+        "regulatory qualification",
+        "delivery speed",
+        "price/cost",
+        "complex molecule capability",
+        "customer retention"
+      ],
+      "company_relative_position": "Global CDMO head with end-to-end core small molecule capability; competitive but not the scale leader on disclosed data.",
+      "competitor_likely_response": "Peers will add capacity and compress price if demand softens; qualified capacity scarcity currently supports pricing for complex work.",
+      "financial_transmission": "Competitive pressure flows to ASP, utilization, gross margin, receivables terms, and incremental ROIC.",
+      "evidence_ids": [
+        "EV025",
+        "EV026",
+        "EV027",
+        "KPE06"
+      ],
+      "evidence_status": "partial",
+      "missing_inputs": [
+        "company market share",
+        "capacity vs peers",
+        "customer retention and top-client concentration"
+      ],
+      "next_verification": "Peer filings and order disclosures"
+    },
+    {
+      "business_unit": "新分子业务",
+      "market_boundary": "New modality CDMO: small molecule formulation, peptide/oligonucleotide, protein/conjugate, ADC payload-linker, CGT",
+      "boundary_evidence": "Company discloses services across these modalities and Shanghai/New Jersey high-activity capacity.",
+      "structure_and_concentration": "Competitive and fragmented; high-activity payload capacity is tight, but company remains a small early player.",
+      "direct_competitors": [
+        "药明康德",
+        "药明合联",
+        "凯莱英",
+        "药明生物",
+        "诺泰生物",
+        "圣诺生物"
+      ],
+      "substitutes_and_customer_alternatives": [
+        "Alternative specialist ADC/payload suppliers",
+        "Customer internal conjugation/payload development"
+      ],
+      "self_supply_and_new_entrants": [
+        "Large pharma internal high-activity lines",
+        "New specialty CDMO entrants"
+      ],
+      "comparison_dimensions": [
+        "OEB5/high-activity capability",
+        "regulatory readiness",
+        "payload-linker chemistry",
+        "peptide/oligo scale",
+        "price"
+      ],
+      "company_relative_position": "Early but credible due to established Shanghai and New Jersey high-activity facilities; scale below leaders.",
+      "competitor_likely_response": "Leaders will defend ADC/payload share; new entrants may price aggressively before qualification.",
+      "financial_transmission": "Revenue scale, fixed-cost absorption, and capex intensity determine whether new molecule business creates or destroys value.",
+      "evidence_ids": [
+        "EV026",
+        "EV092",
+        "EV093",
+        "KPE02",
+        "KPE03"
+      ],
+      "evidence_status": "partial",
+      "missing_inputs": [
+        "market share",
+        "sub-line revenue by modality",
+        "order book"
+      ],
+      "next_verification": "Investor interaction and interim order data"
+    }
+  ],
+  "transaction_rights_map": [
+    {
+      "transaction_id": "TXN_SLOVENIA_TERMINATION_2026H1",
+      "asset_or_target": "斯洛文尼亚研发生产基地项目",
+      "transaction_type": "asset_disposal",
+      "buyer_or_counterparty": "",
+      "ownership_before_pct": null,
+      "ownership_after_pct": null,
+      "total_transaction_consideration_cny_mn": null,
+      "attributable_consideration_cny_mn": null,
+      "cash_received_to_date_cny_mn": null,
+      "disposed_rights": [
+        "斯洛文尼亚研发生产基地项目相关资产/产能"
+      ],
+      "retained_rights": [
+        "公司其他研发生产基地和小分子CDMO交付能力"
+      ],
+      "contingent_rights": [
+        "未披露是否有资产处置对价或后续补偿"
+      ],
+      "cash_flow_classification": "unresolved",
+      "valuation_overlap_keys": [
+        "slovenia_impairment_recovery"
+      ],
+      "ownership_and_cash_formula": "Headline impairment ~CNY 330mn is non-cash; any disposal proceeds or exit cash costs are unresolved.",
+      "evidence_ids": [
+        "KPE01",
+        "KPE07",
+        "EV020"
+      ],
+      "missing_inputs": [
+        "disposal proceeds",
+        "exit cash costs",
+        "tax effect",
+        "ownership attribution"
+      ],
+      "status": "partial"
+    },
+    {
+      "transaction_id": "TXN_PORTON_EUROPE_MINORITY_2024",
+      "asset_or_target": "Porton Europe NV minority equity",
+      "transaction_type": "acquisition",
+      "buyer_or_counterparty": "",
+      "ownership_before_pct": null,
+      "ownership_after_pct": null,
+      "total_transaction_consideration_cny_mn": null,
+      "attributable_consideration_cny_mn": null,
+      "cash_received_to_date_cny_mn": null,
+      "disposed_rights": [],
+      "retained_rights": [
+        "Potential control/cash-flow rights in Porton Europe NV"
+      ],
+      "contingent_rights": [],
+      "cash_flow_classification": "investing",
+      "valuation_overlap_keys": [
+        "consolidated_cdmo_value"
+      ],
+      "ownership_and_cash_formula": "Consideration and ownership before/after not supplied in payload; treat as unresolved consolidation cell.",
+      "evidence_ids": [],
+      "missing_inputs": [
+        "buyer/counterparty",
+        "purchase consideration",
+        "legal ownership before/after"
+      ],
+      "status": "unresolved"
+    }
+  ],
+  "moat_evidence_tests": [
+    {
+      "moat_mechanism": "End-to-end small molecule CDMO capability",
+      "observable_test": "Segment revenue growth +13% in 2025 and H1 2026 order growth vs global CDMO demand",
+      "comparison_basis": "Peer CDMO order and revenue growth",
+      "evidence_result": "Partial positive: 2025 core revenue share ~90% and growth +13%; H1 2026 revenue guided +8-12%",
+      "financial_transmission": "Sustains volume/share, utilization, and gross margin; if not backed by backlog, moat is unproven.",
+      "strongest_counterevidence": "Q1 2026 operating margin only 2.64%; weak cash conversion despite margin improvement",
+      "status": "partial",
+      "evidence_ids": [
+        "EV025",
+        "EV028",
+        "EV012",
+        "EV016"
+      ],
+      "next_verification": "Backlog and customer retention data"
+    },
+    {
+      "moat_mechanism": "High-activity OEB5 payload-linker capacity",
+      "observable_test": "New molecule revenue growth and capacity utilization in Shanghai/New Jersey",
+      "comparison_basis": "ADC/payload CDMO leaders",
+      "evidence_result": "2025 revenue CNY 68mn +224% but only ~2% of total; no utilization or profit evidence",
+      "financial_transmission": "If utilization scales, lowers unit fixed cost and supports gross margin; if not, becomes cash-drag.",
+      "strongest_counterevidence": "Small scale and missing profit/cash data",
+      "status": "unproven",
+      "evidence_ids": [
+        "EV026",
+        "EV092",
+        "EV093"
+      ],
+      "next_verification": "Sub-line orders and utilization"
+    },
+    {
+      "moat_mechanism": "Customer switching costs and regulatory site qualification",
+      "observable_test": "Repeat customer revenue, top customer retention, and price/margin stability",
+      "comparison_basis": "Company history and peer retention metrics",
+      "evidence_result": "Not supplied",
+      "financial_transmission": "High switching costs should reduce receivables risk and support ASP. Without data, no moat-to-cash transmission is proven.",
+      "strongest_counterevidence": "Receivables/revenue remains 23.44% and OCF conversion is very weak",
+      "status": "unproven",
+      "evidence_ids": [
+        "EV016",
+        "EV017"
+      ],
+      "next_verification": "Customer concentration and repeat-order disclosure"
+    }
+  ],
+  "valuation_buckets": [
+    {
+      "bucket": "core_cdmo_consolidated",
+      "inclusion": "core",
+      "valuation_method": "Normalized PE / EV/EBITDA on consolidated clean 2027E operating profit",
+      "metric_and_period": "2027E normalized parent net profit",
+      "metric_value": null,
+      "valuation_multiple": null,
+      "ownership_pct": 100.0,
+      "haircut_pct": 0.0,
+      "equity_value_cny_mn": null,
+      "per_share_value_cny": null,
+      "overlap_key": "consolidated_clean_earnings",
+      "double_counting_treatment": "Do not add new modality or consumer health revenue again; they are inside consolidated earnings.",
+      "evidence_ids": [
+        "EV010",
+        "EV012",
+        "EV013",
+        "EV020"
+      ],
+      "missing_inputs": [
+        "normalized parent profit",
+        "EV/EBITDA multiple",
+        "net debt",
+        "share count"
+      ]
+    },
+    {
+      "bucket": "new_modalities_ai4s_optionality",
+      "inclusion": "optionality",
+      "valuation_method": "Growth-adjusted EV/Sales on disclosed CNY 68mn 2025 revenue plus capacity optionality",
+      "metric_and_period": "FY2025 new molecule revenue",
+      "metric_value": 68.0,
+      "valuation_multiple": null,
+      "ownership_pct": 100.0,
+      "haircut_pct": 50.0,
+      "equity_value_cny_mn": null,
+      "per_share_value_cny": null,
+      "overlap_key": "excluded_from_consolidated_core_if_core_earnings_excludes_future_new_modalities",
+      "double_counting_treatment": "Since consolidated earnings include the CNY 68mn revenue, this bucket is only additional optionality above already-consolidated earnings, not a separate SOTP addition.",
+      "evidence_ids": [
+        "EV092",
+        "EV093",
+        "KPE02",
+        "KPE03"
+      ],
+      "missing_inputs": [
+        "orders",
+        "capacity utilization",
+        "segment profit"
+      ]
+    },
+    {
+      "bucket": "consumer_health_exploration",
+      "inclusion": "excluded",
+      "valuation_method": "No financial value until product/commercial plan revealed",
+      "metric_and_period": "pre-revenue",
+      "metric_value": null,
+      "valuation_multiple": null,
+      "ownership_pct": null,
+      "haircut_pct": null,
+      "equity_value_cny_mn": null,
+      "per_share_value_cny": null,
+      "overlap_key": "none",
+      "double_counting_treatment": "Excluded from fair value",
+      "evidence_ids": [
+        "EV023",
+        "EV024",
+        "EV095",
+        "EV096"
+      ],
+      "missing_inputs": [
+        "product line",
+        "capital commitment",
+        "revenue model"
+      ]
+    }
+  ],
+  "valuation_closure": {
+    "current_price_cny": 22.36,
+    "diluted_share_count_mn": 543.4422,
+    "core_value_per_share_cny": null,
+    "probability_weighted_fair_value_per_share_cny": null,
+    "option_value_per_share_cny": null,
+    "other_adjustments_per_share_cny": null,
+    "fair_value_per_share_cny": null,
+    "expected_return_pct": null,
+    "formula": "Market cap CNY 12,151.37mn is supplied. Per-share fair value = probability-weighted equity value / diluted share count. Both numerator and denominator are unresolved, so closure is partial.",
+    "rating_consistency_check": "No rating is issued; high PE TTM 94.57 and PE percentile 82.1% must be tested against normalized clean earnings and cash conversion.",
+    "double_counting_checks": [
+      "Core consolidated earnings include new molecule revenue; do not add CNY 68mn optionality twice.",
+      "Slovenia impairment is a P&L/cash adjustment, not a separate equity asset.",
+      "Consumer health exploration is excluded."
+    ],
+    "status": "partial",
+    "missing_inputs": [
+      "current price",
+      "diluted share count",
+      "normalized clean parent profit",
+      "net debt",
+      "capex/FCF"
+    ]
+  },
+  "llm_analysis_layer": {
+    "business_question_tree": [
+      "Will the core CDMO orderbook convert to 2027-2028 revenue, and what is the book-to-bill by phase?",
+      "Is the reported H1 2026 profit weakness fully explained by the Slovenia one-off, or are underlying margins still below normalized?",
+      "Can OCF conversion improve from 0.0864x to a level that supports FCF-based valuation?",
+      "Does the new molecule business have enough sub-line evidence (payload, peptide, formulation) to be valued separately?",
+      "Is the AI4S demand signal company-specific or only a sector narrative?"
+    ],
+    "profit_pool_priority": "Small molecule API CDMO is the dominant profit pool because it is ~90% of revenue and drives the current margin recovery. New molecule business is strategically interesting but only ~2% of revenue in 2025 and lacks disclosed profit/cash; it should be treated as optionality. Consumer health is zero-revenue and excluded.",
+    "competition_and_substitution_analysis": "Bo Teng competes with larger integrated CDMOs on end-to-end small molecule capability and with specialist ADC/payload players in new modalities. The true peer boundary is not the Tushare industry peer list; it is global CDMO capability for complex molecule development and manufacturing. Customer substitution can be in-house pharma capacity or competing CDMOs; supplier/self-supply risk is highest in commoditized small molecule capacity and lowest in qualified high-activity payload work. New entrants and capacity expansion may pressure price even if demand is growing.",
+    "qualitative_to_quantitative_bridge": "The qualitative story is that the CDMO cycle is recovering, high-margin delivery is improving, and AI4S may increase molecule volume. Quantification is limited because the payload provides no backlog value, no segment profit, no capacity utilization, and no reported share count. Therefore margin and revenue directions can be modeled, but EPS/FCF/fair-value per share remain partial.",
+    "expectation_gap_analysis": "Market cap CNY 12.15bn and PE TTM 94.57 imply the market expects strong normalization of clean earnings and probably AI4S/new modality optionality. The model differs by being unable to verify the earnings normalization with cash-flow evidence and by treating the 2026 reported loss as a distortion around a still-small clean profit base. The gap may be more about cash-flow conversion and share count than direction.",
+    "red_team_counterarguments": [
+      "Bull thesis counter: Q1 OCF/net profit of 0.0864x and low operating margin suggest the margin recovery is not yet cash-backed; if the 2026H1 clean profit growth is driven by one-time high-margin deliveries, the stock is pricing cycle optimism without proof.",
+      "Bear thesis counter: Official H1 revenue guidance is positive and the impairment is explicitly described as one-off; ex-impairment H1 profit +196%-343% and tighter high-activity capacity could support a rapid recovery if receivables/inventory normalize."
+    ],
+    "valuation_explanation": "Valuation should be a function of normalized clean EPS and OCF conversion, not the distorted reported 2026 loss. Multiple selection depends on revenue durability and cash conversion; at a PE TTM of 94.57, the market is paying for normalized earnings several years forward. Without share count and full-year clean profit, valuation remains a bounded gap rather than a point estimate.",
+    "final_editorial_synthesis": "A PM-facing synthesis should explain that Bo Teng is a core global small molecule CDMO seeing recovering revenue and gross margin, but the current equity value embeds high expectations that require proof of backlog, clean profit durability, and cash collection. Slovenia is a one-time accounting shock; the main investment question is whether strong order growth converts to FCF over the next two years.",
+    "evidence_boundaries": [
+      "KPE items are private/proxy and cannot set hard financial values without company filing cross-check.",
+      "Q1 2026 earnings snapshot is labeled unverified_quote; it is used as a provisional bridge only.",
+      "Share count and current price are missing, so per-share valuation is not closed.",
+      "Official H1 2026 guidance covers revenue and impairment but not full-year profit, OCF, or capex."
+    ]
+  },
+  "handoff_manifest": {
+    "handoff_version": "underwriting-v3",
+    "source_of_truth": "structured_research.underwriting_packet",
+    "frozen_reported_facts": [
+      "FY2025 consolidated revenue CNY 3,419,829,520.97",
+      "FY2025 parent net profit CNY 96,339,888.88",
+      "2026Q1 revenue CNY 886,037,955.06",
+      "2026Q1 parent net profit CNY 27,865,092.35",
+      "2026Q1 gross margin 30.5994%, +4.27pp",
+      "2026Q1 operating margin 2.6435%, +3.12pp",
+      "2026Q1 net margin 3.1449%, +3.68pp",
+      "2026Q1 OCF/net profit 0.0864",
+      "2025 core small molecule API revenue share ~90%, growth ~13%",
+      "2025 new molecule revenue CNY 68mn, +224%, ~2% of total",
+      "Official H1 2026 guidance: revenue CNY 1,750-1,820mn; reported net loss CNY -250 to -210mn; impairment ~CNY 330mn from Slovenia termination"
+    ],
+    "analyst_estimates": [
+      "2026E consolidated revenue +10% to CNY 3,761.81mn using H1 midpoint",
+      "2027E +10%, 2028E +8% revenue growth",
+      "2026E-2028E gross margin progression 32.0%/33.0%/33.5%",
+      "Clean operating margin progression 7.0%/8.5%/9.5%",
+      "Scenario probabilities bull/base/bear 25%/50%/25%"
+    ],
+    "unresolved_model_cells": [
+      "diluted share count",
+      "current price",
+      "2026E-2028E reported parent net profit",
+      "EPS",
+      "OCF and FCF",
+      "capex",
+      "segment gross margin and operating profit",
+      "backlog/new orders in CNY"
+    ],
+    "downstream_must_preserve": [
+      "All economic business units: small molecule API CDMO, new modalities, consumer health exploration, overseas geography",
+      "Three-year forecast and scenario model",
+      "Slovenia impairment transaction treatment and no double-counting of optionality",
+      "Evidence boundaries for KPE and unverified earnings snapshot",
+      "Valuation buckets and partial valuation closure"
+    ]
+  },
+  "evidence_change_rules": [
+    {
+      "evidence_id": "KPE01",
+      "affected_segment": "small_molecule_api_cdmo",
+      "affected_variable": "utilization_or_backlog",
+      "old_assumption": "No company-specific H1 order growth",
+      "new_assumption": "H1 2026 revenue expected +8%-12%; used as official-guidance verification, not hard FY2027-2028 forecast",
+      "financial_transmission": "Revenue base +10% scenario, but no hard EPS until cash conversion and share count known",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "2026 interim report and company order disclosure"
+    },
+    {
+      "evidence_id": "KPE02",
+      "affected_segment": "small_molecule_api_cdmo",
+      "affected_variable": "segment_volume",
+      "old_assumption": "AI4S demand unverified for Company",
+      "new_assumption": "AI4S may lift industry molecule volume; company-specific order evidence missing",
+      "financial_transmission": "none until quantified",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "company AI-related order announcement"
+    },
+    {
+      "evidence_id": "KPE03",
+      "affected_segment": "small_molecule_api_cdmo",
+      "affected_variable": "segment_volume",
+      "old_assumption": "AI pharma pipeline expansion unverified for Company",
+      "new_assumption": "watch only",
+      "financial_transmission": "none until quantified",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "company AI-related order announcement"
+    },
+    {
+      "evidence_id": "KPE04",
+      "affected_segment": "consolidated",
+      "affected_variable": "capex_or_roic",
+      "old_assumption": "no verified top-15 pharma external capex transmission",
+      "new_assumption": "industry demand support only",
+      "financial_transmission": "none until quantified",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "company order and ROIC data"
+    },
+    {
+      "evidence_id": "KPE05",
+      "affected_segment": "consolidated",
+      "affected_variable": "segment_volume",
+      "old_assumption": "AI compute demand not mapped",
+      "new_assumption": "AI compute demand has no direct company-specific revenue bridge",
+      "financial_transmission": "none until quantified",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "company disclosure of AI-related CDMO project"
+    },
+    {
+      "evidence_id": "KPE06",
+      "affected_segment": "small_molecule_api_cdmo",
+      "affected_variable": "utilization_or_backlog",
+      "old_assumption": "industry CDMO capacity scarcity unverified",
+      "new_assumption": "capacity scarcity supports pricing/volume only qualitatively",
+      "financial_transmission": "none until quantified",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "peer order/capacity utilization data"
+    },
+    {
+      "evidence_id": "KPE07",
+      "affected_segment": "small_molecule_api_cdmo",
+      "affected_variable": "profit_or_eps",
+      "old_assumption": "H1 impairment impact unresolved",
+      "new_assumption": "official H1 guidance confirms impairment; ex-impairment profit guided +196%-343%",
+      "financial_transmission": "clean H1 profit contribution used as scenario signal, not EPS",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "2026 interim report"
+    },
+    {
+      "evidence_id": "KPE08",
+      "affected_segment": "small_molecule_api_cdmo",
+      "affected_variable": "utilization_or_backlog",
+      "old_assumption": "no order growth",
+      "new_assumption": "H1 revenue +8-12% and orders grew",
+      "financial_transmission": "revenue base directional",
+      "probability_before_after": "unchanged/not assigned",
+      "disposition": "watch",
+      "verification_gate": "company order/backlog disclosure"
+    }
+  ],
+  "reconciliation_checks": [
+    "Segment weight conflict: structured evidence gives new molecule business 10% weight but disclosed 2025 revenue is CNY 68mn, only ~2% of consolidated revenue. Treat as classification conflict; do not force 10% into hard forecast.",
+    "2026Q1 earnings snapshot is labeled unverified_quote; it is used only as provisional revenue/margin bridge.",
+    "FY2025 and Q1 2026 profit values are consistent with market-cap/implied TTM earnings but not converted to EPS due missing share count.",
+    "H1 2026 official guidance is hard for revenue and impairment; H1 net loss reconciles with Q1 net profit + H2 implied loss driven by one-off impairment.",
+    "Cash conversion conflict: Q1 net margin improves but OCF/net profit is only 0.0864; not resolved until H1 cash-flow detail.",
+    "No commodity mapping is registered; no product-price/commodity spread may enter the model."
+  ],
+  "analyst_instructions": [
+    "Do not issue rating recommendation; this packet is the common analytical model for downstream challenge.",
+    "Treat KPE private/broker evidence as scenario/verification only, never as frozen reported fact.",
+    "Downstream changes must cite an evidence id and recalculate EPS/FCF/value impact.",
+    "Resolve diluted share count before closing per-share valuation.",
+    "Retrieve 2026 interim report segment revenue, backlog, OCF, capex and impairment cash effect before moving readiness to ready.",
+    "Avoid double-counting new molecule optionality and core consolidated earnings."
+  ],
+  "preprocessing_notes": [
+    "Business units identified dynamically from filings and investor interaction, not a fixed pharma or manufacturing template.",
+    "Segment names copied from supplied evidence where available.",
+    "All KPE items are unverified or seller-private and restricted to scenario probability/verification.",
+    "Official H1 2026 guidance used as hard public evidence for revenue and impairment but not full-year profit.",
+    "Valuation is partial because share count, current price, normalized FCF and final Slovenia cash impact are missing.",
+    "unknown evidence ids removed from underwriting packet",
+    "diluted shares set deterministically: 543.442 mn (market_cap_div_close)",
+    "valuation current price restored from market snapshot: CNY 22.3600",
+    "operating model driver coverage (project_backlog_delivery): opening backlog, new orders, delivery/acceptance, ending backlog, receivable/collection"
+  ]
+}

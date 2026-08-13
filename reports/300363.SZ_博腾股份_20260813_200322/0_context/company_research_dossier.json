@@ -1,0 +1,1851 @@
+{
+  "schema_version": 1,
+  "symbol": "300363.SZ",
+  "as_of_date": "2026-08-13",
+  "reader_contract": {
+    "audience": "普通投资者",
+    "principle": "数据用于权威佐证，不能替代公司、产业链与投资逻辑。",
+    "formal_rating_position": "开篇投资摘要，并在第七章末尾重申",
+    "chapter_count": 7
+  },
+  "source_policy": {
+    "A_hard_fact": {
+      "sources": "公司财报、交易所/公司公告、官方业绩指引",
+      "allowed_use": "冻结历史事实和模型基线"
+    },
+    "B_reproducible": {
+      "sources": "Tushare结构化数据、程序计算、官方统计、行业协会",
+      "allowed_use": "财务计算、行业比较和可复核代理变量"
+    },
+    "C_external_expectation": {
+      "sources": "具名卖方报告、多机构一致预期",
+      "allowed_use": "构建市场预期与预测分歧；单家机构不得冒充一致预期"
+    },
+    "D_alternative_intelligence": {
+      "sources": "知识星球、渠道调研、专家纪要、私域卖方推送",
+      "allowed_use": "量化模型变更、情景概率变化、验证日历变化或明确拒绝"
+    },
+    "E_background": {
+      "sources": "普通新闻、政策评论、行业叙事",
+      "allowed_use": "解释背景；不得单独改变盈利预测或评级"
+    }
+  },
+  "company_introduction": {
+    "business_archetype": "Global pharmaceutical CDMO, primarily project/order delivery with capacity-output manufacturing for small molecule API; emerging new modalities are pipeline/capacity driven.",
+    "value_proposition_and_customers": "Serves pharmaceutical companies, biotech, and research institutions with end-to-end small molecule CDMO services from starting materials to API and formulation, plus early-stage new modalities including peptides/oligonucleotides, protein/conjugate drugs, and ADC payload-linker services.",
+    "revenue_equation": "Core project delivery: opening backlog + new orders - delivered/recognized orders = ending backlog; revenue = recognized project/delivery volume x price/mix. Capacity-output businesses: effective capacity x utilization x yield x saleable volume x realized ASP/mix.",
+    "profit_equation": "Gross profit = revenue - raw materials/direct labor/manufacturing costs; operating profit = gross profit - R&D/selling/admin - impairment/other; parent profit = operating profit - finance costs - tax - minority interest.",
+    "cash_flow_equation": "OCF = net profit + depreciation/amortization - working-capital change; FCF = OCF - cash paid for long-term assets/capex.",
+    "capital_intensity_and_reinvestment": "Fixed-asset-intensive CDMO capacity; FY2023-FY2025 fixed assets reported at CNY 2.875bn, 3.073bn, 2.891bn with depreciation CNY 269mn, 311mn, 340mn. Reinvestment includes high-activity facilities and terminates Slovenia project with ~CNY 330mn impairment.",
+    "key_unknowns": [
+      "2026H2 reported profit/cash flow",
+      "Order backlog and new order composition by phase/product",
+      "Segment gross margins and capacity utilization",
+      "New modality capex and time to positive cash flow",
+      "Diluted share count"
+    ]
+  },
+  "industry_chain": {
+    "operating_model_family": "project_backlog_delivery",
+    "upstream_cost_and_supply": [
+      {
+        "segment": "小分子原料药CDMO",
+        "supply_capacity": "Global CDMO supply is constrained for qualified complex small molecule capacity; competitors are adding capacity but quality/regulatory qualification is a bottleneck.",
+        "unit_cost_inputs": "Raw material, labor, manufacturing, and fixed asset depreciation; cost detail not supplied."
+      },
+      {
+        "segment": "新分子业务",
+        "supply_capacity": "High-end OEB5 high-activity payload capacity is tight; company has Shanghai and New Jersey facilities.",
+        "unit_cost_inputs": "High-activity facility fixed costs and startup costs dominate at small scale; no unit economics supplied."
+      },
+      {
+        "segment": "新分子业务 (小分子制剂、多肽与寡核苷酸、蛋白与偶联药物、细胞与基因治疗等)",
+        "supply_capacity": "",
+        "unit_cost_inputs": ""
+      },
+      {
+        "segment": "大健康消费品",
+        "supply_capacity": "",
+        "unit_cost_inputs": ""
+      }
+    ],
+    "downstream_demand_and_pricing": [
+      {
+        "segment": "小分子原料药CDMO",
+        "customers_channel": "Global pharma, biotech, research institutions via direct CDMO project contracts",
+        "demand": [
+          "Global pharma R&D outsourcing budgets",
+          "Innovative drug approvals and license-out activity",
+          "AI4S early-stage R&D demand",
+          "MNC external collaboration capex"
+        ],
+        "price_asp": "High-margin product delivery lifted Q1 2026 gross margin +4.27pp; exact ASP and product mix not disclosed."
+      },
+      {
+        "segment": "新分子业务",
+        "customers_channel": "Innovative pharma/biotech advancing new modality pipelines",
+        "demand": [
+          "ADC/payload-linker and peptide/oligo demand",
+          "Customer pipeline advancement",
+          "AI-driven candidate generation increasing molecules to synthesize"
+        ],
+        "price_asp": "Not disclosed; high-activity payload services likely higher ASP but unverified."
+      },
+      {
+        "segment": "新分子业务 (小分子制剂、多肽与寡核苷酸、蛋白与偶联药物、细胞与基因治疗等)",
+        "customers_channel": "",
+        "demand": [],
+        "price_asp": ""
+      },
+      {
+        "segment": "大健康消费品",
+        "customers_channel": "",
+        "demand": [],
+        "price_asp": ""
+      }
+    ]
+  },
+  "profit_pools": {
+    "reported_or_analytical_units": [
+      {
+        "unit_id": "small_molecule_api_cdmo",
+        "unit_name": "小分子原料药CDMO",
+        "unit_type": "product",
+        "disclosure_basis": "reported",
+        "parent_unit": "company",
+        "economic_role": "Core revenue/profit engine",
+        "primary_operating_archetype": "project_order_delivery",
+        "secondary_operating_archetype": "standard_manufacturing",
+        "revenue_driver_equation": "Backlog + new orders - delivered = ending backlog; revenue = recognized project delivery + capacity x utilization x yield x ASP/mix",
+        "profit_driver_equation": "Gross profit = revenue - material/labor/manufacturing; operating profit = gross profit - R&D/selling/admin - impairment",
+        "cash_and_capital_equation": "Collections - procurement/WIP - receivables - capex; FCF = OCF - long-term asset cash outflows",
+        "reported_metrics": [
+          "2025 revenue share ~90%",
+          "2025 revenue growth ~13%",
+          "2026H1 guidance revenue growth ~8%-12%"
+        ],
+        "evidence_ids": [
+          "EV025",
+          "EV027",
+          "EV028",
+          "EV029",
+          "EV030",
+          "EV012",
+          "EV013",
+          "KPE01",
+          "KPE07"
+        ],
+        "missing_inputs": [
+          "FY2025 and H1 2026 segment revenue/profit",
+          "backlog and new order value",
+          "capacity utilization",
+          "realized ASP/mix"
+        ],
+        "next_verification": "2026 interim report and order disclosure"
+      },
+      {
+        "unit_id": "new_modalities",
+        "unit_name": "新分子业务 (小分子制剂、多肽与寡核苷酸、蛋白与偶联药物、细胞与基因治疗等)",
+        "unit_type": "product",
+        "disclosure_basis": "reported",
+        "parent_unit": "company",
+        "economic_role": "Small but high-growth emerging business; strategic optionality",
+        "primary_operating_archetype": "pharma_biotech",
+        "secondary_operating_archetype": "standard_manufacturing",
+        "revenue_driver_equation": "Customer pipeline advancement x molecule modality mix x capacity/output x ASP",
+        "profit_driver_equation": "Revenue - high-activity facility fixed cost - development/startup cost - R&D overhead",
+        "cash_and_capital_equation": "Early-stage cash outflow; capacity investment precedes revenue; receivables/inventory not yet material",
+        "reported_metrics": [
+          "2025 revenue CNY 68mn",
+          "2025 revenue growth +224%",
+          "2025 revenue share ~2%"
+        ],
+        "evidence_ids": [
+          "EV026",
+          "EV092",
+          "EV093",
+          "KPE02",
+          "KPE03"
+        ],
+        "missing_inputs": [
+          "sub-line revenue/profit split",
+          "capacity utilization",
+          "orderbook",
+          "2026H1 segment performance"
+        ],
+        "next_verification": "Investor interaction and interim reports for new modality orders/api deliveries"
+      },
+      {
+        "unit_id": "consumer_health_exploration",
+        "unit_name": "大健康消费品",
+        "unit_type": "other",
+        "disclosure_basis": "analytical",
+        "parent_unit": "company",
+        "economic_role": "Exploratory non-core optionality; no revenue yet",
+        "primary_operating_archetype": "other",
+        "secondary_operating_archetype": "other",
+        "revenue_driver_equation": "Undefined product/consumer channel; no reported revenue equation yet",
+        "profit_driver_equation": "Undefined",
+        "cash_and_capital_equation": "Initial subsidiary setup cash outflow only",
+        "reported_metrics": [
+          "No reported revenue",
+          "Subsidiary Yao Chu Bio established"
+        ],
+        "evidence_ids": [
+          "EV095",
+          "EV096",
+          "EV023",
+          "EV024"
+        ],
+        "missing_inputs": [
+          "product line",
+          "commercialization plan",
+          "capital commitment"
+        ],
+        "next_verification": "Company disclosure on subsidiary business scope"
+      },
+      {
+        "unit_id": "geography_overseas",
+        "unit_name": "海外市场 (北美、欧洲、日韩等)",
+        "unit_type": "geography",
+        "disclosure_basis": "calculated",
+        "parent_unit": "company",
+        "economic_role": "Main demand geography; regional mix drives FX and growth",
+        "primary_operating_archetype": "project_order_delivery",
+        "secondary_operating_archetype": "other",
+        "revenue_driver_equation": "Overseas pharma/biotech outsourcing budgets x company share; regional revenue = Americas/Europe/Japan-Korea contributions",
+        "profit_driver_equation": "Regional mix affects ASP, tax, logistics and FX; not separately reported",
+        "cash_and_capital_equation": "Export receivables/collections and FX settlement",
+        "reported_metrics": [
+          "2025 Europe revenue -12%",
+          "2025 Japan-Korea and other overseas +20%",
+          "2025 Americas +39% cited in filing intelligence"
+        ],
+        "evidence_ids": [
+          "EV027",
+          "EV030"
+        ],
+        "missing_inputs": [
+          "regional revenue amounts",
+          "customer concentration",
+          "FX hedging and remittance"
+        ],
+        "next_verification": "Annual report geographic segment table"
+      },
+      {
+        "unit_id": "BU06",
+        "unit_name": "新分子业务",
+        "unit_type": "reported_segment",
+        "disclosure_basis": "reported",
+        "parent_unit": "company",
+        "economic_role": "Filing segment restored after structured evidence reconciliation.",
+        "primary_operating_archetype": "",
+        "secondary_operating_archetype": "",
+        "revenue_driver_equation": "",
+        "profit_driver_equation": "",
+        "cash_and_capital_equation": "",
+        "reported_metrics": [],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "economic sub-unit driver equations require analyst completion"
+        ],
+        "next_verification": ""
+      }
+    ],
+    "segment_models": [
+      {
+        "segment": "小分子原料药CDMO",
+        "products_or_services": "From starting material to API/formulation small molecule CDMO services",
+        "customers_and_channel": "Global pharma, biotech, research institutions via direct CDMO project contracts",
+        "revenue_weight_pct": 90.0,
+        "profit_weight_pct": null,
+        "base_period": "FY2025",
+        "base_revenue_value": 3077.85,
+        "base_revenue_unit": "CNY mn",
+        "base_revenue_growth_pct": 13.0,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [
+          "Global pharma R&D outsourcing budgets",
+          "Innovative drug approvals and license-out activity",
+          "AI4S early-stage R&D demand",
+          "MNC external collaboration capex"
+        ],
+        "industry_supply_and_capacity": "Global CDMO supply is constrained for qualified complex small molecule capacity; competitors are adding capacity but quality/regulatory qualification is a bottleneck.",
+        "volume_share_utilization": "Company reports H1 2026 new orders and revenue growing; precise backlog, share, and utilization not supplied.",
+        "price_asp_take_rate": "High-margin product delivery lifted Q1 2026 gross margin +4.27pp; exact ASP and product mix not disclosed.",
+        "unit_cost_and_input_prices": "Raw material, labor, manufacturing, and fixed asset depreciation; cost detail not supplied.",
+        "margin_and_operating_leverage": "Q1 2026 gross margin 30.5994%; clean H1 profit growth guided +196%-343% ex impairment, implying strong operating leverage on volume/mix.",
+        "working_capital_and_cash_conversion": "Q1 2026 OCF/net profit 0.0864; receivables/revenue 23.44%; inventory/revenue 22.31%. Profitability not yet converting to cash.",
+        "prosperity_level": "evidence_limited",
+        "marginal_direction": "unknown",
+        "causal_analysis": "",
+        "valuation_treatment": "evidence_limited",
+        "strongest_counterevidence": [],
+        "evidence_ids": [],
+        "missing_inputs": [],
+        "next_verification": ""
+      },
+      {
+        "segment": "新分子业务",
+        "products_or_services": "Small molecule formulation, peptides/oligonucleotides, protein and conjugate drugs, ADC payload-linker services, CGT exploration",
+        "customers_and_channel": "Innovative pharma/biotech advancing new modality pipelines",
+        "revenue_weight_pct": 2.0,
+        "profit_weight_pct": null,
+        "base_period": "FY2025",
+        "base_revenue_value": 68.0,
+        "base_revenue_unit": "CNY mn",
+        "base_revenue_growth_pct": 224.0,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [
+          "ADC/payload-linker and peptide/oligo demand",
+          "Customer pipeline advancement",
+          "AI-driven candidate generation increasing molecules to synthesize"
+        ],
+        "industry_supply_and_capacity": "High-end OEB5 high-activity payload capacity is tight; company has Shanghai and New Jersey facilities.",
+        "volume_share_utilization": "Small base; 2025 revenue only CNY 68mn. Segment capacity utilization not disclosed.",
+        "price_asp_take_rate": "Not disclosed; high-activity payload services likely higher ASP but unverified.",
+        "unit_cost_and_input_prices": "High-activity facility fixed costs and startup costs dominate at small scale; no unit economics supplied.",
+        "margin_and_operating_leverage": "Likely investment-phase/negative margin but not disclosed; scale is too low for operating leverage evidence.",
+        "working_capital_and_cash_conversion": "Early-stage; not separately disclosed.",
+        "prosperity_level": "evidence_limited",
+        "marginal_direction": "unknown",
+        "causal_analysis": "",
+        "valuation_treatment": "evidence_limited",
+        "strongest_counterevidence": [],
+        "evidence_ids": [],
+        "missing_inputs": [],
+        "next_verification": ""
+      },
+      {
+        "segment": "新分子业务 (小分子制剂、多肽与寡核苷酸、蛋白与偶联药物、细胞与基因治疗等)",
+        "products_or_services": "",
+        "customers_and_channel": "",
+        "revenue_weight_pct": 10.0,
+        "profit_weight_pct": null,
+        "base_period": "2025年年度",
+        "base_revenue_value": 0.68,
+        "base_revenue_unit": "亿元",
+        "base_revenue_growth_pct": 224.0,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [],
+        "industry_supply_and_capacity": "",
+        "volume_share_utilization": "",
+        "price_asp_take_rate": "",
+        "unit_cost_and_input_prices": "",
+        "margin_and_operating_leverage": "",
+        "working_capital_and_cash_conversion": "",
+        "prosperity_level": "evidence_limited",
+        "marginal_direction": "unknown",
+        "causal_analysis": "",
+        "valuation_treatment": "evidence_limited",
+        "strongest_counterevidence": [],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "LLM omitted a filing-reported material segment"
+        ],
+        "next_verification": ""
+      },
+      {
+        "segment": "大健康消费品",
+        "products_or_services": "",
+        "customers_and_channel": "",
+        "revenue_weight_pct": 0.0,
+        "profit_weight_pct": null,
+        "base_period": "2026年7月，公司成立初期",
+        "base_revenue_value": null,
+        "base_revenue_unit": "",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [],
+        "industry_supply_and_capacity": "",
+        "volume_share_utilization": "",
+        "price_asp_take_rate": "",
+        "unit_cost_and_input_prices": "",
+        "margin_and_operating_leverage": "",
+        "working_capital_and_cash_conversion": "",
+        "prosperity_level": "evidence_limited",
+        "marginal_direction": "unknown",
+        "causal_analysis": "",
+        "valuation_treatment": "evidence_limited",
+        "strongest_counterevidence": [],
+        "evidence_ids": [],
+        "missing_inputs": [
+          "LLM omitted a filing-reported material segment"
+        ],
+        "next_verification": ""
+      }
+    ]
+  },
+  "material_transactions": {
+    "rights_and_cash_waterfalls": [
+      {
+        "transaction_id": "TXN_SLOVENIA_TERMINATION_2026H1",
+        "asset_or_target": "斯洛文尼亚研发生产基地项目",
+        "transaction_type": "asset_disposal",
+        "buyer_or_counterparty": "",
+        "ownership_before_pct": null,
+        "ownership_after_pct": null,
+        "total_transaction_consideration_cny_mn": null,
+        "attributable_consideration_cny_mn": null,
+        "cash_received_to_date_cny_mn": null,
+        "disposed_rights": [
+          "斯洛文尼亚研发生产基地项目相关资产/产能"
+        ],
+        "retained_rights": [
+          "公司其他研发生产基地和小分子CDMO交付能力"
+        ],
+        "contingent_rights": [
+          "未披露是否有资产处置对价或后续补偿"
+        ],
+        "cash_flow_classification": "unresolved",
+        "valuation_overlap_keys": [
+          "slovenia_impairment_recovery"
+        ],
+        "ownership_and_cash_formula": "Headline impairment ~CNY 330mn is non-cash; any disposal proceeds or exit cash costs are unresolved.",
+        "evidence_ids": [
+          "KPE01",
+          "KPE07",
+          "EV020"
+        ],
+        "missing_inputs": [
+          "disposal proceeds",
+          "exit cash costs",
+          "tax effect",
+          "ownership attribution"
+        ],
+        "status": "partial"
+      },
+      {
+        "transaction_id": "TXN_PORTON_EUROPE_MINORITY_2024",
+        "asset_or_target": "Porton Europe NV minority equity",
+        "transaction_type": "acquisition",
+        "buyer_or_counterparty": "",
+        "ownership_before_pct": null,
+        "ownership_after_pct": null,
+        "total_transaction_consideration_cny_mn": null,
+        "attributable_consideration_cny_mn": null,
+        "cash_received_to_date_cny_mn": null,
+        "disposed_rights": [],
+        "retained_rights": [
+          "Potential control/cash-flow rights in Porton Europe NV"
+        ],
+        "contingent_rights": [],
+        "cash_flow_classification": "investing",
+        "valuation_overlap_keys": [
+          "consolidated_cdmo_value"
+        ],
+        "ownership_and_cash_formula": "Consideration and ownership before/after not supplied in payload; treat as unresolved consolidation cell.",
+        "evidence_ids": [],
+        "missing_inputs": [
+          "buyer/counterparty",
+          "purchase consideration",
+          "legal ownership before/after"
+        ],
+        "status": "unresolved"
+      }
+    ],
+    "rule": "Reconcile ownership before/after, attributable cash and retained/disposed rights before forecast, cash-flow classification or valuation."
+  },
+  "competition_and_moat": {
+    "landscapes": [
+      {
+        "business_unit": "小分子原料药CDMO",
+        "market_boundary": "Global small molecule pharmaceutical CDMO services from starting material to API/formulation for innovative pharma, biotech, and research institutions",
+        "boundary_evidence": "2025 annual report states company provides full-category end-to-end CDMO services from starting material to formulation",
+        "structure_and_concentration": "Concentrated global CDMO leadership; qualified capacity and regulatory/site qualification create entry barriers. Target ranks #10 of 12 in selected peer screen.",
+        "direct_competitors": [
+          "药明康德",
+          "凯莱英",
+          "康龙化成",
+          "九洲药业",
+          "普洛药业",
+          "药石科技",
+          "奥锐特"
+        ],
+        "substitutes_and_customer_alternatives": [
+          "Customer in-house R&D and manufacturing",
+          "Alternative CDMO vendors in low-cost or alternative geographies"
+        ],
+        "self_supply_and_new_entrants": [
+          "Large pharma self-supply expansion",
+          "New CDMO capacity entrants in China and India"
+        ],
+        "comparison_dimensions": [
+          "capacity and technology platform",
+          "regulatory qualification",
+          "delivery speed",
+          "price/cost",
+          "complex molecule capability",
+          "customer retention"
+        ],
+        "company_relative_position": "Global CDMO head with end-to-end core small molecule capability; competitive but not the scale leader on disclosed data.",
+        "competitor_likely_response": "Peers will add capacity and compress price if demand softens; qualified capacity scarcity currently supports pricing for complex work.",
+        "financial_transmission": "Competitive pressure flows to ASP, utilization, gross margin, receivables terms, and incremental ROIC.",
+        "evidence_ids": [
+          "EV025",
+          "EV026",
+          "EV027",
+          "KPE06"
+        ],
+        "evidence_status": "partial",
+        "missing_inputs": [
+          "company market share",
+          "capacity vs peers",
+          "customer retention and top-client concentration"
+        ],
+        "next_verification": "Peer filings and order disclosures"
+      },
+      {
+        "business_unit": "新分子业务",
+        "market_boundary": "New modality CDMO: small molecule formulation, peptide/oligonucleotide, protein/conjugate, ADC payload-linker, CGT",
+        "boundary_evidence": "Company discloses services across these modalities and Shanghai/New Jersey high-activity capacity.",
+        "structure_and_concentration": "Competitive and fragmented; high-activity payload capacity is tight, but company remains a small early player.",
+        "direct_competitors": [
+          "药明康德",
+          "药明合联",
+          "凯莱英",
+          "药明生物",
+          "诺泰生物",
+          "圣诺生物"
+        ],
+        "substitutes_and_customer_alternatives": [
+          "Alternative specialist ADC/payload suppliers",
+          "Customer internal conjugation/payload development"
+        ],
+        "self_supply_and_new_entrants": [
+          "Large pharma internal high-activity lines",
+          "New specialty CDMO entrants"
+        ],
+        "comparison_dimensions": [
+          "OEB5/high-activity capability",
+          "regulatory readiness",
+          "payload-linker chemistry",
+          "peptide/oligo scale",
+          "price"
+        ],
+        "company_relative_position": "Early but credible due to established Shanghai and New Jersey high-activity facilities; scale below leaders.",
+        "competitor_likely_response": "Leaders will defend ADC/payload share; new entrants may price aggressively before qualification.",
+        "financial_transmission": "Revenue scale, fixed-cost absorption, and capex intensity determine whether new molecule business creates or destroys value.",
+        "evidence_ids": [
+          "EV026",
+          "EV092",
+          "EV093",
+          "KPE02",
+          "KPE03"
+        ],
+        "evidence_status": "partial",
+        "missing_inputs": [
+          "market share",
+          "sub-line revenue by modality",
+          "order book"
+        ],
+        "next_verification": "Investor interaction and interim order data"
+      }
+    ],
+    "competition_and_substitution_analysis": "Bo Teng competes with larger integrated CDMOs on end-to-end small molecule capability and with specialist ADC/payload players in new modalities. The true peer boundary is not the Tushare industry peer list; it is global CDMO capability for complex molecule development and manufacturing. Customer substitution can be in-house pharma capacity or competing CDMOs; supplier/self-supply risk is highest in commoditized small molecule capacity and lowest in qualified high-activity payload work. New entrants and capacity expansion may pressure price even if demand is growing.",
+    "claimed_mechanisms": [
+      "End-to-end small molecule CDMO capability from starting material to API/formulation",
+      "High-activity OEB5 payload-linker capacity in Shanghai and New Jersey",
+      "Regulatory qualification and customer qualification/site-locking costs",
+      "Specialized capacity and process know-how for complex molecules"
+    ],
+    "tests": [
+      {
+        "moat_mechanism": "End-to-end small molecule CDMO capability",
+        "observable_test": "Segment revenue growth +13% in 2025 and H1 2026 order growth vs global CDMO demand",
+        "comparison_basis": "Peer CDMO order and revenue growth",
+        "evidence_result": "Partial positive: 2025 core revenue share ~90% and growth +13%; H1 2026 revenue guided +8-12%",
+        "financial_transmission": "Sustains volume/share, utilization, and gross margin; if not backed by backlog, moat is unproven.",
+        "strongest_counterevidence": "Q1 2026 operating margin only 2.64%; weak cash conversion despite margin improvement",
+        "status": "partial",
+        "evidence_ids": [
+          "EV025",
+          "EV028",
+          "EV012",
+          "EV016"
+        ],
+        "next_verification": "Backlog and customer retention data"
+      },
+      {
+        "moat_mechanism": "High-activity OEB5 payload-linker capacity",
+        "observable_test": "New molecule revenue growth and capacity utilization in Shanghai/New Jersey",
+        "comparison_basis": "ADC/payload CDMO leaders",
+        "evidence_result": "2025 revenue CNY 68mn +224% but only ~2% of total; no utilization or profit evidence",
+        "financial_transmission": "If utilization scales, lowers unit fixed cost and supports gross margin; if not, becomes cash-drag.",
+        "strongest_counterevidence": "Small scale and missing profit/cash data",
+        "status": "unproven",
+        "evidence_ids": [
+          "EV026",
+          "EV092",
+          "EV093"
+        ],
+        "next_verification": "Sub-line orders and utilization"
+      },
+      {
+        "moat_mechanism": "Customer switching costs and regulatory site qualification",
+        "observable_test": "Repeat customer revenue, top customer retention, and price/margin stability",
+        "comparison_basis": "Company history and peer retention metrics",
+        "evidence_result": "Not supplied",
+        "financial_transmission": "High switching costs should reduce receivables risk and support ASP. Without data, no moat-to-cash transmission is proven.",
+        "strongest_counterevidence": "Receivables/revenue remains 23.44% and OCF conversion is very weak",
+        "status": "unproven",
+        "evidence_ids": [
+          "EV016",
+          "EV017"
+        ],
+        "next_verification": "Customer concentration and repeat-order disclosure"
+      }
+    ],
+    "structural_risks": [
+      "Customer R&D outsourcing demand decline and pharma capex cyclicality",
+      "Fixed-asset investment risk and capacity underutilization",
+      "New modality investment still small and loss-making",
+      "Overseas operation, FX, and global policy risk",
+      "Cash conversion lag behind reported profit"
+    ],
+    "interpretation_rule": "Chapter 2 owns market boundary, structure, direct competitors, substitutes and likely response; Chapter 4 owns relative advantage, observable proof and financial persistence."
+  },
+  "key_underwriting_questions": [
+    {
+      "question_id": "UQ01",
+      "question": "What is the final cash and income-statement treatment of the Slovenia R&D production base termination beyond the ~CNY 330mn impairment?",
+      "why_it_matters": "The impairment turns H1 2026 reported profit to a guided loss of CNY -250mn to -210mn; residual onerous contracts, asset disposal proceeds, future capex/exit costs, and tax treatment decide whether 2026 reported EPS/FCF are near zero or deeply negative.",
+      "current_answer": "Official H1 guidance confirms ~CNY 330mn impairment and guided H1 loss; H2 and final cash impact unresolved.",
+      "bull_evidence": [
+        "2026H1 guidance says loss is mainly from the Slovenia project impairment",
+        "Ex-impairment H1 parent profit guided CNY 80-120mn"
+      ],
+      "bear_evidence": [
+        "Q1 2026 OCF/net profit only 0.0864",
+        "No disclosed recovery or sale proceeds from Slovenia assets"
+      ],
+      "decisive_model_variables": [
+        "impairment",
+        "operating profit",
+        "parent net profit",
+        "FCF"
+      ],
+      "affected_financial_lines": [
+        "2026E parent net profit",
+        "2026E OCF",
+        "2026E FCF"
+      ],
+      "evidence_ids": [
+        "KPE01",
+        "KPE07",
+        "EV020",
+        "EV036",
+        "EV038"
+      ],
+      "missing_evidence": [
+        "H2 2026 income/cash effect",
+        "exit cost or sale proceeds",
+        "tax effect of impairment"
+      ],
+      "next_verification": "2026 interim report cash-flow and impairment notes"
+    },
+    {
+      "question_id": "UQ02",
+      "question": "Will H1 2026 CDMO order growth of 8%-12% convert into 2027-2028 revenue after current deliveries?",
+      "why_it_matters": "This is the core revenue bridge. If the growth is from one-time high-margin deliveries rather than a durable backlog lift, 2027-2028 revenue and operating leverage will fall below the current high PE.",
+      "current_answer": "Company and broker channel checks state new orders and revenue grew well in H1 2026, but no backlog/book-to-bill is supplied.",
+      "bull_evidence": [
+        "H1 2026 revenue guidance +8%-12%",
+        "CDMO industry peers report strong order growth",
+        "Top-15 pharma external capex remains high"
+      ],
+      "bear_evidence": [
+        "H1 2025 comparison base likely low",
+        "No disclosed backlog",
+        "Q1 cash conversion is weak"
+      ],
+      "decisive_model_variables": [
+        "new orders",
+        "ending backlog",
+        "revenue growth"
+      ],
+      "affected_financial_lines": [
+        "2026E-2028E consolidated revenue",
+        "small molecule CDMO revenue"
+      ],
+      "evidence_ids": [
+        "EV025",
+        "EV028",
+        "KPE01",
+        "KPE04",
+        "KPE06",
+        "KPE08"
+      ],
+      "missing_evidence": [
+        "backlog in CNY",
+        "book-to-bill",
+        "order composition by phase"
+      ],
+      "next_verification": "Interim report segment/order disclosure"
+    },
+    {
+      "question_id": "UQ03",
+      "question": "Is the Q1 2026 gross margin increase of +4.27pp sustainable and does it reflect structural mix or temporary high-margin product delivery?",
+      "why_it_matters": "Gross margin is the main profit bridge; a 1pp move on ~CNY 3.8bn revenue is ~CNY 38mn gross profit, material against FY2025 parent profit of only ~CNY 96mn.",
+      "current_answer": "Q1 2026 gross margin 30.60%, +4.27pp; company attributes H1 clean profit growth to high-margin product delivery and scale effects.",
+      "bull_evidence": [
+        "Official H1 guidance says overall gross margin up ~4pp",
+        "Clean H1 profit guided +196%-343% ex impairment"
+      ],
+      "bear_evidence": [
+        "Q1 operating margin only 2.64%, net margin 3.14%",
+        "Q1 OCF/net profit 0.0864 means gross profit did not turn into cash"
+      ],
+      "decisive_model_variables": [
+        "gross margin",
+        "product mix",
+        "utilization"
+      ],
+      "affected_financial_lines": [
+        "gross profit",
+        "operating profit",
+        "parent net profit"
+      ],
+      "evidence_ids": [
+        "EV012",
+        "EV013",
+        "EV014",
+        "KPE01",
+        "KPE07"
+      ],
+      "missing_evidence": [
+        "product mix",
+        "cost per batch/unit",
+        "fixed cost absorption"
+      ],
+      "next_verification": "H1 2026 segment gross margin and revenue mix"
+    },
+    {
+      "question_id": "UQ04",
+      "question": "When will OCF convert? Q1 2026 OCF/net profit is only 0.0864.",
+      "why_it_matters": "Current valuation is equity-rich but profitability is not cash-backed; persistent receivables/inventory-led growth without cash collection would impair FCF and fair value.",
+      "current_answer": "Q1 OCF/net profit 0.0864; receivables/revenue 23.44% and inventory/revenue 22.31% both declined slightly YoY.",
+      "bull_evidence": [
+        "Receivables/revenue -0.47pp YoY",
+        "Inventory/revenue -0.28pp YoY"
+      ],
+      "bear_evidence": [
+        "OCF/net profit ratio is extremely low",
+        "EFV evidence shows prior 2024 quarterly OCF was negative"
+      ],
+      "decisive_model_variables": [
+        "OCF",
+        "receivables",
+        "inventory",
+        "FCF"
+      ],
+      "affected_financial_lines": [
+        "2026E-2028E OCF",
+        "FCF"
+      ],
+      "evidence_ids": [
+        "EV016",
+        "EV017",
+        "EV036",
+        "EV039"
+      ],
+      "missing_evidence": [
+        "Q1 cash-flow statement detail",
+        "collection terms",
+        "inventory aging"
+      ],
+      "next_verification": "H1 2026 cash-flow statement"
+    },
+    {
+      "question_id": "UQ05",
+      "question": "Can the new molecule business scale from CNY 68mn revenue without consuming excess capex and fixed cost?",
+      "why_it_matters": "The market may be pricing AI4S and new modality optionality; without disclosed orders, utilization, and path to breakeven, this optionality cannot be valued as core FCF.",
+      "current_answer": "2025 new molecule revenue CNY 68mn, +224%, but ~2% of total. No profit or capacity utilization disclosed.",
+      "bull_evidence": [
+        "High-activity payload capacity exists in Shanghai and New Jersey",
+        "ADC/payload demand is tight"
+      ],
+      "bear_evidence": [
+        "Scale is still tiny",
+        "No segment profit/cash evidence",
+        "Fixed capacity may drag margins"
+      ],
+      "decisive_model_variables": [
+        "new molecule revenue",
+        "capex",
+        "margin"
+      ],
+      "affected_financial_lines": [
+        "new molecule revenue",
+        "consolidated capex",
+        "gross margin"
+      ],
+      "evidence_ids": [
+        "EV026",
+        "EV092",
+        "EV093",
+        "KPE02",
+        "KPE03"
+      ],
+      "missing_evidence": [
+        "sub-line revenue/profit",
+        "capacity utilization",
+        "break-even timeline"
+      ],
+      "next_verification": "Investor interaction and new order announcements"
+    },
+    {
+      "question_id": "UQ06",
+      "question": "Does AI4S actually produce company-specific order flow, or only industry-wide narrative?",
+      "why_it_matters": "AI-driven molecule generation may lift demand for synthesis/testing. If Bo Teng wins these orders, revenue growth can be above base; if not, the current AI4S-driven multiple is unsupported.",
+      "current_answer": "Private channel checks cite CDMO beneficiaries including Bo Teng, but there is no company-disclosed AI-related order or revenue.",
+      "bull_evidence": [
+        "North American technology and pharma AI demand reportedly rising",
+        "Bo Teng listed as CDMO beneficiary in channel checks"
+      ],
+      "bear_evidence": [
+        "No contract/order evidence",
+        "Beneficiary list is promotional and non-company-specific"
+      ],
+      "decisive_model_variables": [
+        "new orders",
+        "revenue growth",
+        "scenario probability"
+      ],
+      "affected_financial_lines": [
+        "2026E-2028E revenue",
+        "valuation multiple"
+      ],
+      "evidence_ids": [
+        "KPE02",
+        "KPE03",
+        "KPE05"
+      ],
+      "missing_evidence": [
+        "company-specific AI-related order value",
+        "AI project pipeline"
+      ],
+      "next_verification": "Company order announcements or interim segment disclosure"
+    }
+  ],
+  "forecast_spine": {
+    "forecast_years": [
+      "2026E",
+      "2027E",
+      "2028E"
+    ],
+    "forecast_lines": [
+      {
+        "segment": "consolidated",
+        "metric": "营业收入",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 3419.83,
+        "year_1_value": 3761.81,
+        "year_2_value": 4138.0,
+        "year_3_value": 4469.0,
+        "formula": "2026E = FY2025 x 1.10 using official H1 +10% midpoint; 2027E = 2026E x 1.10; 2028E = 2027E x 1.08. Analyst demand-growth assumption, not company guidance for 2027-2028.",
+        "assumption_status": "calculated",
+        "evidence_ids": [
+          "EV010",
+          "EV011",
+          "EV020",
+          "KPE01",
+          "KPE08"
+        ],
+        "key_sensitivity": "1pp revenue growth = ~CNY 38mn revenue, ~CNY 12mn gross profit at 32% GM",
+        "missing_inputs": [
+          "FY2027-2028 company guidance",
+          "order backlog"
+        ]
+      },
+      {
+        "segment": "small_molecule_api_cdmo",
+        "metric": "小分子原料药CDMO营业收入",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 3077.85,
+        "year_1_value": 3385.63,
+        "year_2_value": 3724.2,
+        "year_3_value": 4022.1,
+        "formula": "FY2025 = consolidated FY2025 x 90%; forward values = consolidated forecast x 90% holding share constant. Filing says 2025 share ~90%.",
+        "assumption_status": "calculated",
+        "evidence_ids": [
+          "EV028",
+          "EV010"
+        ],
+        "key_sensitivity": "Core segment share change of 1pp shifts revenue by ~CNY 38mn",
+        "missing_inputs": [
+          "actual FY2025 segment revenue in CNY",
+          "forward segment mix"
+        ]
+      },
+      {
+        "segment": "new_modalities",
+        "metric": "新分子业务营业收入",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 68.0,
+        "year_1_value": null,
+        "year_2_value": null,
+        "year_3_value": null,
+        "formula": "Reported 2025 base only; forward values withheld because sub-line capacity, orders, and 2026H1 segment revenue are not supplied.",
+        "assumption_status": "missing",
+        "evidence_ids": [
+          "EV092",
+          "EV093"
+        ],
+        "key_sensitivity": "small current base; high growth can lift consolidated growth only modestly until scale exceeds ~5% of revenue",
+        "missing_inputs": [
+          "2026 segment revenue",
+          "capacity",
+          "order book",
+          "sub-line mix"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "毛利率",
+        "unit": "%",
+        "base_period": "2026Q1",
+        "base_value": 30.5994,
+        "year_1_value": 32.0,
+        "year_2_value": 33.0,
+        "year_3_value": 33.5,
+        "formula": "2026E base from Q1 actual; forward assumes mix/utilization improvement continues then moderates. Official H1 says GM +~4pp YoY.",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [
+          "EV012",
+          "KPE01",
+          "KPE07"
+        ],
+        "key_sensitivity": "1pp GM on CNY 3,762mn revenue = ~CNY 37.6mn gross profit",
+        "missing_inputs": [
+          "FY2025 gross margin",
+          "product mix",
+          "cost per unit"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "营业利润率(剔除一次性减值)",
+        "unit": "%",
+        "base_period": "2026Q1",
+        "base_value": 2.6435,
+        "year_1_value": 7.0,
+        "year_2_value": 8.5,
+        "year_3_value": 9.5,
+        "formula": "2026Q1 actual; forward assumes H1 clean operating leverage and scale effects annualize, then gradual improvement.",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [
+          "EV013",
+          "KPE01",
+          "KPE07"
+        ],
+        "key_sensitivity": "1pp op margin on CNY 3,762mn = ~CNY 37.6mn operating profit",
+        "missing_inputs": [
+          "FY2025 operating profit",
+          "segment opex",
+          "R&D and admin structure"
+        ]
+      }
+    ],
+    "scenarios": [
+      {
+        "scenario": "bull",
+        "probability_pct": 25.0,
+        "operating_assumptions": [
+          "FY2026 revenue +12% or more on durable order growth",
+          "Gross margin >33% from high-margin complex API and early new modality mix",
+          "Slovenia impairment is fully one-time with no further exit cash loss",
+          "Cash conversion normalizes toward 0.7-1.0x clean profit by end-2026",
+          "New modality orders scale to >CNY 120mn with visible capacity absorption"
+        ],
+        "parent_net_profit_cny_mn": null,
+        "eps_cny": null,
+        "fcf_cny_mn": null,
+        "valuation_method": "Normalized PE / EV/EBITDA on 2027E clean earnings",
+        "valuation_multiple": null,
+        "fair_value_per_share": null,
+        "evidence_ids": [
+          "KPE01",
+          "KPE04",
+          "KPE06",
+          "EV012"
+        ],
+        "falsification": "H2 2026 order growth below 8% or gross margin below Q1; OCF/net profit remains <0.3x",
+        "missing_inputs": [
+          "share count",
+          "H2 profit",
+          "full-year OCF/capex"
+        ]
+      },
+      {
+        "scenario": "base",
+        "probability_pct": 50.0,
+        "operating_assumptions": [
+          "FY2026 revenue +10% midpoint",
+          "Gross margin ~32% average",
+          "Slovenia impairment is one-time in reported profit",
+          "Clean H1 profit CNY 80-120mn annualizes moderately",
+          "Cash conversion remains a lagging issue but working capital ratios improve slowly"
+        ],
+        "parent_net_profit_cny_mn": null,
+        "eps_cny": null,
+        "fcf_cny_mn": null,
+        "valuation_method": "Normalized PE on consolidated ex-one-off earnings",
+        "valuation_multiple": null,
+        "fair_value_per_share": null,
+        "evidence_ids": [
+          "EV020",
+          "EV011",
+          "EV012",
+          "EV016",
+          "KPE01"
+        ],
+        "falsification": "Order growth falters or cash conversion deteriorates",
+        "missing_inputs": [
+          "full-year profit",
+          "share count",
+          "capex"
+        ]
+      },
+      {
+        "scenario": "bear",
+        "probability_pct": 25.0,
+        "operating_assumptions": [
+          "FY2026 revenue growth near 5%-8%",
+          "Gross margin retreats toward 29-30%",
+          "Slovenia exit creates additional cash/onerous-contract costs",
+          "Q1 weak OCF persists; FCF negative",
+          "New molecule revenue remains small and cash-absorbing"
+        ],
+        "parent_net_profit_cny_mn": null,
+        "eps_cny": null,
+        "fcf_cny_mn": null,
+        "valuation_method": "Book-plus-liquidation or downside normalized PE",
+        "valuation_multiple": null,
+        "fair_value_per_share": null,
+        "evidence_ids": [
+          "EV016",
+          "EV036",
+          "EV041"
+        ],
+        "falsification": "H1 orders and cash flow exceed bear assumptions",
+        "missing_inputs": [
+          "H2 revenue and profit",
+          "Slovenia final cash impact",
+          "capex"
+        ]
+      }
+    ],
+    "readiness": "partial",
+    "readiness_reasons": [
+      "Material filing-backed segments identified, but full-year 2026 and 2027-2028 profit/cash-flow cells cannot be fully closed from supplied evidence.",
+      "Share count is unresolved: market cap is supplied but current price and authoritative total_share are not, so EPS and per-share fair value are partial.",
+      "Segment economics are only partially disclosed: small molecule core is ~90% of revenue, but FY2025 segment gross/operating profit and order backlog are not supplied.",
+      "2026H1 official guidance is hard for revenue and impairment; H2 and normalized run-rate profitability require the 2026 interim report.",
+      "Cash-flow conversion is a flagged risk because 2026Q1 OCF/net profit is only 0.0864 and reinvestment/capex detail is incomplete."
+    ]
+  },
+  "market_expectations": {
+    "sell_side_observations": [
+      {
+        "intelligence_id": "KSI01",
+        "kpe_ids": "KPE04",
+        "published_at": "2026-08-07T17:31",
+        "institution": "高盛",
+        "analyst_or_author": "纪要小能手",
+        "freshness": "高时效/6天",
+        "rating_signal": "未披露",
+        "forecast_facts": "涨停板：博腾股份、凯莱英、昭衍新药、普洛药业、泓博医药、百花医药、海正药业、誉衡药业、毕得医药、药康生物、瑞康医药、百普赛斯、哈药股份、近岸蛋白、哈三联、开开实业 其他强势股：皓元医药、美迪西、泽璟制药 PCB 高盛：球AI服务器PCB市场将在2027年达到375亿美元，较此前预测上调38%，2028年进一步增至840亿美元",
+        "valuation_facts": "未提取到目标价/估值方法与倍数",
+        "normalized_points": "无可标准化数值",
+        "revision_signal": "窗口内首次识别，暂无同机构前序可比",
+        "source_quote": "8月7日复盘笔记：创新药/PC... annotation: 8月7日复盘笔记：创新药/PCB/半导体设备/液冷/光通信/6G/民爆/磷化铟/稀土永磁/贵金属等 一、重磅财经信息 ①今年前7个月，我国货物贸易进出口总值30.13万亿元，同比增长了17.3%，延续良好的增长态势。其中，出口17.44万亿元，增长14%；进口12.69万亿元，增长22%。 ②海关总署：1至7月集成电路累计出口金额达2160亿美元，同比增长99.5%。 ③光伏硅料八巨头签署倡议：不得低于成本价销售。 二、大盘表现 沪指涨1.02%，深成指涨1.42%，创业板指涨1.35%，科创50涨2.51%。 沪深两市成交额2.66万亿，较上一个交易日放量1356亿。 三、强势板块和个股分析 备注：只列举部分涨停板 创新药/CRO ①上半年，中国创新药License-out出海总金额约997亿美元，约为2024年全年的2倍。此外，三家创新药公司发布上半年业绩，..."
+      },
+      {
+        "intelligence_id": "KSI02",
+        "kpe_ids": "KPE07",
+        "published_at": "2026-07-20T09:51",
+        "institution": "中泰医药祝嘉琦、崔少煜",
+        "analyst_or_author": "纪要小能手",
+        "freshness": "有效窗口/24天",
+        "rating_signal": "推荐措辞（非标准评级）",
+        "forecast_facts": "④博腾股份 发布2026年中报业绩预告，预计上半年剔除斯洛文尼亚研发生产基地终止建设计提减值后归母净利润同比+196%-343%",
+        "valuation_facts": "未提取到目标价/估值方法与倍数",
+        "normalized_points": "rating=推荐措辞（非标准评级）",
+        "revision_signal": "窗口内首次识别，暂无同机构前序可比",
+        "source_quote": "【中泰医药祝嘉琦、崔少煜】持续... annotation: 【中泰医药祝嘉琦、崔少煜】持续重点推荐创新产业链、板块业绩持续强劲、积极把握中长期底部机会！ 🚀中报业绩预告持续快速增长、需求端持续强劲。①圣诺生物 发布2026年中报业绩预告，预计上半年归母净利润同比+43%-65%；②康龙化成 发布2026年中报业绩预告，预计上半年收入同比+16%-19%，经调整Non-IFRS归母同比+17%-22%，订单方面，2026年上半年新签订单同比+30%，其中小分子CDMO同比+50%，需求端持续强劲；③昭衍新药 发布2026年中报业绩预告，预计上半年归母净利润同比+885%-1377%；④博腾股份 发布2026年中报业绩预告，预计上半年剔除斯洛文尼亚研发生产基地终止建设计提减值后归母净利润同比+196%-343%；⑤美迪西 发布2026年中报业绩预告，预计上半年归母净利润同比增长425.62%至588.43% 🚀轻舟已过万重山..."
+      },
+      {
+        "intelligence_id": "KSI03",
+        "kpe_ids": "KPE01",
+        "published_at": "2026-07-15T08:20",
+        "institution": "国泰海通",
+        "analyst_or_author": "纪要小能手",
+        "freshness": "有效窗口/29天",
+        "rating_signal": "未披露",
+        "forecast_facts": "【国泰海通医药】博腾股份二季度... 【国泰海通医药】博腾股份二季度... 【国泰海通医药】博腾股份二季度业绩预告：26H1营收预计同比增长8%~12%，新签订单和收入均实现良好增长 [玫瑰]从26H1来看 [太阳]预计实现营业收入17.50-18.20亿元，同比增长8%~12% / [太阳]预计实现归母净利润-2.50至-2.10亿元（上年同期盈利0.27亿元） / [太阳]预计实现扣非归母净利润-2.70~-2.30亿元（上年同期盈利0.06亿元）",
+        "valuation_facts": "未提取到目标价/估值方法与倍数",
+        "normalized_points": "无可标准化数值",
+        "revision_signal": "窗口内首次识别，暂无同机构前序可比",
+        "source_quote": "【国泰海通医药】博腾股份二季度... 【国泰海通医药】博腾股份二季度业绩预告：26H1营收预计同比增长8%~12%，新签订单和收入均实现良好增长 [玫瑰]从26H1来看 [太阳]预计实现营业收入17.50-18.20亿元，同比增长8%~12%。 [太阳]预计实现归母净利润-2.50至-2.10亿元（上年同期盈利0.27亿元）。 [太阳]预计实现扣非归母净利润-2.70~-2.30亿元（上年同期盈利0.06亿元）。 [玫瑰]从26Q2来看 [太阳]预计实现营业收入8.64-9.34亿元，同比增长5.4-13.9%。 [太阳]预计实现归母净利润-2.78至-2.38亿元，同比由盈转亏。 [太阳]预计实现扣非归母净利润-2.95至-2.55亿元，同比由盈转亏。 [玫瑰]2026年上半年，公司持续加强前端市场开发，新签订单和收入均实现良好增长；归母净利润亏损主要系报告期内公司终止建设斯洛文尼亚研发生产基地项目合计计提资产减值准备约..."
+      }
+    ],
+    "valuation_closure": {
+      "current_price_cny": 22.36,
+      "diluted_share_count_mn": 543.4422,
+      "core_value_per_share_cny": null,
+      "probability_weighted_fair_value_per_share_cny": null,
+      "option_value_per_share_cny": null,
+      "other_adjustments_per_share_cny": null,
+      "fair_value_per_share_cny": null,
+      "expected_return_pct": null,
+      "formula": "Market cap CNY 12,151.37mn is supplied. Per-share fair value = probability-weighted equity value / diluted share count. Both numerator and denominator are unresolved, so closure is partial.",
+      "rating_consistency_check": "No rating is issued; high PE TTM 94.57 and PE percentile 82.1% must be tested against normalized clean earnings and cash conversion.",
+      "double_counting_checks": [
+        "Core consolidated earnings include new molecule revenue; do not add CNY 68mn optionality twice.",
+        "Slovenia impairment is a P&L/cash adjustment, not a separate equity asset.",
+        "Consumer health exploration is excluded."
+      ],
+      "status": "partial",
+      "missing_inputs": [
+        "current price",
+        "diluted share count",
+        "normalized clean parent profit",
+        "net debt",
+        "capex/FCF"
+      ]
+    },
+    "rule": "单家机构是观察值；只有具备样本和口径的多机构数据才可称为一致预期。"
+  },
+  "knowledge_planet": {
+    "importance": "material_alternative_intelligence",
+    "use_rule": "每条线索必须落到模型变化、概率变化、验证变化或拒绝之一。",
+    "items": [
+      {
+        "evidence_id": "KPE01",
+        "source_type": "channel_check",
+        "published_at": "2026-07-15T08:20",
+        "source_reliability": "B_identified_professional",
+        "bias_profile": "sell_side_optimism",
+        "adoption_ceiling": "model_input_after_crosscheck",
+        "target_excerpt": "【国泰海通医药】博腾股份二季度... 【国泰海通医药】博腾股份二季度业绩预告：26H1营收预计同比增长8%~12%，新签订单和收入均实现良好增长 [玫瑰]从26H1来看 [太阳]预计实现营业收入17.50-18.20亿元，同比增长8%~12%。 [太阳]预计实现归母净利润-2.50至-2.10亿元（上年同期盈利0.27亿元）。 [太阳]预计实现扣非归母净利润-2.70~-2.30亿元（上年同期盈利0.06亿元）。 [玫瑰]从26Q2来看 [太阳]预计实现营业收入8.64-9.34亿元，同比增长5.4-13.9%。 [太阳]预计实现归母净利润-2.78至-2.38亿元，同比由盈转亏。 [太阳]预计实现扣非归母净利润-2.95至-2.55亿元，同比由盈转亏。 [玫瑰]2026年上半年，公司持续加强前端市场开发，新签订单和收入均实现良好增长；归母净利润亏损主要系报告期内公司终止建设斯洛文尼亚研发生产基地项目合计计提资产减值准备约3.3亿元。 [玫瑰]26H1若剔除资产减值影响 [太阳]预计实现归母净利润0.8-1.2亿元，同比增长196%~343%； [太阳]预计实现扣非归母净利润0.6-0.9亿元，同比增长835%~1302%。",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "utilization_or_backlog",
+        "allowed_role": "verification_item",
+        "decision_outcome": "model assumption changed through the deterministic financial bridge",
+        "verification_gate": "2026年半年度报告及后续订单、收入及现金流数据",
+        "grounding_status": "unverified_quote",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE02",
+        "source_type": "channel_check",
+        "published_at": "2026-08-08T20:12",
+        "source_reliability": "C_private_unverified",
+        "bias_profile": "channel_selection_bias",
+        "adoption_ceiling": "scenario_or_verification_only",
+        "target_excerpt": "康德、康龙化成 3️⃣模式动物：百奥赛图、药康生物 4️⃣安全性评价：昭衍新药、益诺思、美迪西 5️⃣CDMO：药明生物、药明康德、康龙化成、药明合联、凯莱英、博腾股份等 6️⃣平台型玩家：晶泰科技、英矽智能、剂泰科技 7️⃣基础工具（测序仪）：华大智造",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "segment_volume",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 跟进公司AI制药相关项目合作披露及行业趋势数据",
+        "verification_gate": "跟进公司AI制药相关项目合作披露及行业趋势数据",
+        "grounding_status": "grounded_quote",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE03",
+        "source_type": "channel_check",
+        "published_at": "2026-08-08T12:54",
+        "source_reliability": "C_private_unverified",
+        "bias_profile": "channel_selection_bias",
+        "adoption_ceiling": "scenario_or_verification_only",
+        "target_excerpt": "O：药明生物、药明康德、康龙化成 模式动物：百奥赛图、药康生物 安全性评价：昭衍新药、益诺思、美迪西 CDMO：药明生物、药明康德、康龙化成、药明合联、凯莱英、博腾股份等",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "segment_volume",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 跟进公司AI相关新签订单的具体情况",
+        "verification_gate": "跟进公司AI相关新签订单的具体情况",
+        "grounding_status": "grounded_quote",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE04",
+        "source_type": "industry_weekly_data",
+        "published_at": "2026-08-07T17:31",
+        "source_reliability": "B_identified_professional",
+        "bias_profile": "neutral_or_data",
+        "adoption_ceiling": "model_input_after_crosscheck",
+        "target_excerpt": "026年7月10日，今年以来TOP15跨国药企外部资本开支已达2003亿美元，接近2025全年总额的73.5%，全球医药产业并购高景气格局已基本确立。 涨停板：博腾股份、凯莱英、昭衍新药、普洛药业、泓博医药、百花医药、海正药业、誉衡药业、毕得医药、药康生物、瑞康医药、百普赛斯、哈药股份、近岸蛋白、哈三联、开开实业 其他强势股：皓元医药、美迪西、泽璟制药 PCB 高盛：球AI服务器PCB市场将在2027年达到375亿美元，较此前预测上调38%，2028年进一步增至840亿美元；CCL市场2027年预计达到221亿美元，上调18%，2028年则有望增至480亿美元。2026年至2028年，AI服务器PCB和CCL市场规模的复合年增长率将分别达到148%和161%。 涨停板：景旺电子、生益科技、一博科技、红板科技、方正科技、华正新材、东材科技、博敏电子、诺德股份、方邦股份、光华科技、宝鼎科技、江南新材、依顿电子、奥士康、欧克科技 其他强势股：胜宏科技、沪电股份、铜冠铜箔、威尔高、逸豪新材 半导体设备 SEMI发布预测显示，全球半导体设备行业未来3年持续增长，2026年全球半导体制造设备销售额将达1659亿美元，同比增长23.2%，",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "capex_or_roic",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 分析行业资本开支与公司订单的传导路径，跟踪公司产能投入与ROIC变化",
+        "verification_gate": "分析行业资本开支与公司订单的传导路径，跟踪公司产能投入与ROIC变化",
+        "grounding_status": "unverified_quote",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE05",
+        "source_type": "channel_check",
+        "published_at": "2026-08-04T16:10",
+        "source_reliability": "C_private_unverified",
+        "bias_profile": "channel_selection_bias",
+        "adoption_ceiling": "scenario_or_verification_only",
+        "target_excerpt": "8月4日复盘笔记：算力硬件/P... annotation: 8月4日复盘笔记：算力硬件/PCB/算力租赁/AI应用/机器人/CRO/创新药/半导体/液冷/电网设备等 一、重磅财经信息 ①工信部召开光伏行业座谈会，进一步解读宣贯光伏组件强制性国家标准。 ②业界人士指出，近期原厂已完成2027全年产能分配谈判，三大原厂的DRAM与HBM产能均提前售罄。 二、大盘表现 截至收盘，沪指涨0.33%，深成指涨3.25%，创业板指涨5.64%，科创50涨4.09%。 沪深两市成交额2.21万亿，较上一个交易日放量2162亿。 三、强势板块和个股分析 备注：只列举部分涨停板 算力硬件 英伟达出货新一代S…",
+        "entity_scope": "unverified_target_scope",
+        "affected_variable": "segment_volume",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 评估AI算力需求向医药研发服务传导的机制和时间线",
+        "verification_gate": "评估AI算力需求向医药研发服务传导的机制和时间线",
+        "grounding_status": "grounded_quote",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE06",
+        "source_type": "channel_check",
+        "published_at": "2026-08-04T08:46",
+        "source_reliability": "C_private_unverified",
+        "bias_profile": "channel_selection_bias",
+        "adoption_ceiling": "scenario_or_verification_only",
+        "target_excerpt": "TIDES）、药明生物、药明合联（ADC）、普洛药业（小分子+多肽）、联化科技（小分子+小核酸）、九洲药业（诺欣妥延期+新项目）、维亚生物（MNC合作+AI）、博腾股份、皓元医药、天宇股份、药石科技、奥锐特等。 我们此前发布CDMO的“4C”分析框架及多家公司长期跟踪，欢迎交流~ 风险提示：项目进度、产能推进、审批风险等。 （招商医药梁广楷/许菲菲，肖笑园）",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "utilization_or_backlog",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 跟踪行业产能利用率、新签订单及客户资本开支动态",
+        "verification_gate": "跟踪行业产能利用率、新签订单及客户资本开支动态",
+        "grounding_status": "unverified_quote",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE07",
+        "source_type": "sell_side_push",
+        "published_at": "2026-07-20T09:51",
+        "source_reliability": "B_identified_professional",
+        "bias_profile": "sell_side_optimism",
+        "adoption_ceiling": "model_input_after_crosscheck",
+        "target_excerpt": "新签订单同比+30%，其中小分子CDMO同比+50%，需求端持续强劲；③昭衍新药 发布2026年中报业绩预告，预计上半年归母净利润同比+885%-1377%；④博腾股份 发布2026年中报业绩预告，预计上半年剔除斯洛文尼亚研发生产基地终止建设计提减值后归母净利润同比+196%-343%；⑤美迪西 发布2026年中报业绩预告，预计上半年归母净利润同比增长425.62%至588.43% 🚀轻舟已过万重山、积极把握投资机会。重点关注：①外需稳步向上：药明康德、药明生物、药明合联、凯莱英、康龙化成、博腾股份、普洛药业、九洲药业、皓元医药、药石科技、毕得医药、睿智医药、金斯瑞生物科技、维亚生物、方达控股等；②内需边际改善：昭衍新药、美迪西、益诺思、泰格医药、普蕊斯、诺思格、博济医药、阳光诺和、百诚医药等；③GLP-1多肽CDMO/原料药：诺泰生物、圣诺生物等；④AI制药：药明康德、晶泰控股、成都先导、泓博医药等。 ☁ CRO、CDMO专题报告： 💡风险提示：研发投入不及预期的风险、项目成功率不及预期的风险、AI+制药应用不及预期的风险、地缘博弈加剧的风险。",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "profit_or_eps",
+        "allowed_role": "model_input",
+        "decision_outcome": "model assumption changed through the deterministic financial bridge",
+        "verification_gate": "2026年半年度报告",
+        "grounding_status": "grounded_quote",
+        "chapter_id": "chapter_5_growth_forecast"
+      },
+      {
+        "evidence_id": "KPE08",
+        "source_type": "channel_check",
+        "published_at": "2026-07-15T08:20",
+        "source_reliability": "C_private_unverified",
+        "bias_profile": "channel_selection_bias",
+        "adoption_ceiling": "scenario_or_verification_only",
+        "target_excerpt": "订单/排产：【国泰海通医药】博腾股份二季度... 【国泰海通医药】博腾股份二季度业绩预告：26H1营收预计同比增长8%~12%，新签订单和收入均实现良好增长 ...",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "utilization_or_backlog",
+        "allowed_role": "model_input",
+        "decision_outcome": "model assumption changed through the deterministic financial bridge",
+        "verification_gate": "订单公告、排产环比、产能利用率、合同负债/预收款、收入确认节奏",
+        "grounding_status": "grounded_quote",
+        "chapter_id": "chapter_1_company"
+      }
+    ]
+  },
+  "evidence_index": [
+    {
+      "evidence_id": "EV001",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "Financial-report look-back: 900 days",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV002",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "Compacted 2025年年度报告: 370538 chars -> 137835 chars.",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV003",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "2025, 半年",
+      "status": "reported",
+      "text": "Compacted 2025年半年度报告: 301691 chars -> 127417 chars.",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV004",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "20260423, 2026, 季度",
+      "status": "reported",
+      "text": "20260423: 2026年一季度报告",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV005",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "20260404, 2025, 年度",
+      "status": "reported",
+      "text": "20260404: 2025年年度报告",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV006",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "20241025, 2024, 季度",
+      "status": "reported",
+      "text": "20241025: 2024年三季度报告",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV007",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "20241025, 2024, 季度",
+      "status": "reported",
+      "text": "20241025: 博腾股份：2024年三季度报告",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV008",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "20251025, 2025, 季度",
+      "status": "reported",
+      "text": "20251025: 2025年三季度报告",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV009",
+      "source_module": "earnings_model",
+      "variable": "unmapped",
+      "period": "Q1, 20260331",
+      "status": "reported",
+      "text": "/ latest reported / Q1 / 20260331 / 886037955.06 / 27865092.35 / 3544151820.24 / 111460369.4 / 3858405852.4276 / 84517802.3825 / historical median 0331 share 33.0% /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV010",
+      "source_module": "earnings_model",
+      "variable": "unmapped",
+      "period": "FY, 20251231",
+      "status": "reported",
+      "text": "/ latest annual / FY / 20251231 / 3419829520.97 / 96339888.88 / 3419829520.97 / 96339888.88 / 3419829520.97 / 96339888.88 / FY actual /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV011",
+      "source_module": "earnings_model",
+      "variable": "revenue",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ Revenue base / 886037955.06 / N/A / YoY: 20260331 vs 20250331 / top-line starting point for volume × price × mix /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV012",
+      "source_module": "earnings_model",
+      "variable": "segment_margin",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ Gross margin / 30.5994% / +4.27pp / YoY: 20260331 vs 20250331 / main bridge from demand to gross profit /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV013",
+      "source_module": "earnings_model",
+      "variable": "unmapped",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ Operating margin / 2.6435% / +3.12pp / YoY: 20260331 vs 20250331 / tests pricing, mix, and cost absorption /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV014",
+      "source_module": "earnings_model",
+      "variable": "segment_margin",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ Net margin / 3.1449% / +3.68pp / YoY: 20260331 vs 20250331 / captures final earnings conversion /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV015",
+      "source_module": "earnings_model",
+      "variable": "operating_expense",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ Finance-expense ratio / 1.8488% / -0.05pp / YoY: 20260331 vs 20250331 / captures leverage drag or relief /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV016",
+      "source_module": "earnings_model",
+      "variable": "profit_or_eps",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ OCF / net profit / 0.0864 / N/A / YoY: 20260331 vs 20250331 / tests earnings quality and cash realization /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV017",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "Look-back window: 30 days",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV018",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "/ 一般公告 / 5 /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV019",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "/ 治理/人事 / 1 /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV020",
+      "source_module": "company_events",
+      "variable": "valuation",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "/ earnings guidance / performance preview / 1 /",
+      "chapter_id": "chapter_7_valuation_rating"
+    },
+    {
+      "evidence_id": "EV021",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "20260803, 2026-08-03",
+      "status": "reported",
+      "text": "/ 20260803 / 一般公告 / 300363.SZ / 博腾股份 / 关于控股子公司取得《药品生产许可证》的公告 / http://www.cninfo.com.cn/new/disclosure/detail?stockCode=300363&announcementId=1225455445&orgId=9900022740&announcementTime=2026-08-03 /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV022",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "20260722, 2026-07-22",
+      "status": "reported",
+      "text": "/ 20260722 / 一般公告 / 300363.SZ / 博腾股份 / 关于公司股东取保候审的公告 / http://www.cninfo.com.cn/new/disclosure/detail?stockCode=300363&announcementId=1225436919&orgId=9900022740&announcementTime=2026-07-22 /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV023",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "20260720, 2026-07-20",
+      "status": "reported",
+      "text": "/ 20260720 / 一般公告 / 300363.SZ / 博腾股份 / 关于全资子公司完成工商登记注册的公告 / http://www.cninfo.com.cn/new/disclosure/detail?stockCode=300363&announcementId=1225434113&orgId=9900022740&announcementTime=2026-07-20 /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV024",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "20260715, 2026-07-15",
+      "status": "reported",
+      "text": "/ 20260715 / 一般公告 / 300363.SZ / 博腾股份 / 关于拟新设全资子公司的公告 / http://www.cninfo.com.cn/new/disclosure/detail?stockCode=300363&announcementId=1225427134&orgId=9900022740&announcementTime=2026-07-15 /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV025",
+      "source_module": "company_business_model",
+      "variable": "utilization_or_backlog",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ project_delivery / 项目订单 / 交付回款型 / quantified disclosure / 2025年年度报告: 三、核心竞争力分析 （一）在全球范围内提供全类别、端到端的服务，满足不同客户不同类型的需求 由于药物开发的专业性，不同类型客户、不同临床阶段的药物对CDMO企业的能力要求和服务需求各有差异。因此， 建立完善的能力体系，是 CDMO 企业作为服务平台为全球客户提供服务的核心竞争力之一。经过二十余年的业务积累和进 化，公司已经建立覆盖从起始物料到制剂的小分子CDMO服务能力...",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV026",
+      "source_module": "company_business_model",
+      "variable": "segment_volume",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ product_manufacturer / 产品制造 / 产能出货型 / quantified disclosure / 2025年年度报告: 告“管理层讨论与分析”章节中使用的部分业务数据可能与财务口径存在差异， 请投资者理解。 公司是一家在全球范围内为制药企业、生物科技公司、科研机构等提供全 类别、端到端服务的医药研发生产外包机构（CDMO），致力于为小分子药物、 多肽与寡核苷酸药物、蛋白与偶联药物及细胞与基因治疗等不同类型的药物及 疗法提供 CDMO 服务，让好药更早惠及大众。公司未来经营中可能面...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV027",
+      "source_module": "company_business_model",
+      "variable": "segment_margin",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ core_revenue_engine / annual / 2025年年度报告: 长39%，欧洲市场同比下降12%，日韩等其他海外市场同比增长20%。2025年，按业务板块和市场单元划分的营业收入分布 / Defines what actually drives the income statement. /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV028",
+      "source_module": "company_business_model",
+      "variable": "unmapped",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ segment_mix / annual / 2025年年度报告: 报告期内，公司核心基石业务小分子原料药业务收入占比约90%，同比增长约13%；新兴业务（小分子制剂业务、细 / Shows whether different profit pools are being mixed together. /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV029",
+      "source_module": "company_business_model",
+      "variable": "unmapped",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ customer_and_channel / annual / 2025年年度报告: 化生产等一系列定制研发及生产服务；（2）小分子制剂业务，主要为客户提供小分子药物开发所需制剂处方工艺开发及优 / Reveals demand source, concentration, and market validation. /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV030",
+      "source_module": "company_business_model",
+      "variable": "utilization_or_backlog",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ geography / annual / 2025年年度报告: (4) 以抽样方式检查与收入确认相关的支持性文件，包括销售合同、销售订单、销售发票、产品运输单、出口报关单、 / Explains whether growth depends on a specific geography or expansion lane. /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV031",
+      "source_module": "company_business_model",
+      "variable": "unmapped",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ reinvestment_engine / annual / 2025年年度报告: 设备资源共享、长寿工厂AI送检计划、研发设备使用率分析等32项提效专项场景，对增加业务收入、降低成本、提升效率、 / Shows how today's cash is being converted into tomorrow's earnings power. /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV032",
+      "source_module": "company_business_model",
+      "variable": "unmapped",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ product / annual / 2025年年度报告: 告“管理层讨论与分析”章节中使用的部分业务数据可能与财务口径存在差异， 请投资者理解。 公司是一家在全球范围内为制药企业、生物科技公司、科研机构等提供全 类别、端到端服务的医药研发生产外包机构（CDMO），致力于为小分子药物、 多肽与寡核苷酸药物、蛋白与偶联药物及细胞与基因治疗等不同类型的药物及 疗法提供 CDMO 服务，让好药更早惠及大众。公司未来经营中可能面对的风 险有：医药研发生产服务市场需求下降的风险、固定资产投资风险、环保安全 风险、汇...",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV033",
+      "source_module": "industry_cycle",
+      "variable": "balance_sheet",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "Do not state R32, R125, lithium, copper, gold, inventory, or spread changes as facts unless they appear in the evidence table.",
+      "chapter_id": "chapter_2_industry_chain"
+    },
+    {
+      "evidence_id": "EV034",
+      "source_module": "industry_cycle",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "missing",
+      "text": "If cycle evidence says bottom-testing or evidence-limited, use language such as `bottom-right validation stage`, `右侧待验证`, or `needs confirmation`.",
+      "chapter_id": "chapter_2_industry_chain"
+    },
+    {
+      "evidence_id": "EV035",
+      "source_module": "industry_kpi",
+      "variable": "segment_margin",
+      "period": "unspecified",
+      "status": "missing",
+      "text": "/ coverage_grade / report_types_seen / missing_report_types / answered_questions / core_pack_status / confidence_read /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV036",
+      "source_module": "industry_kpi",
+      "variable": "profit_or_eps",
+      "period": "2024, 季度",
+      "status": "reported",
+      "text": "/ accounting_reconciliation / Check signs, units, periods, and cross-statement consistency before a number enters the PM memo. / operating_cash_flow: 博腾股份：2024年三季度报告: -39,393,019.51 -211.61% -213,499,138.84 -149.58% 性损益的净利润（元） 经营活动产生的现金流量净额 / operating_cash...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV037",
+      "source_module": "industry_kpi",
+      "variable": "unmapped",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ segment_economics_depth / Decide whether each business line has enough disclosed scale, growth, margin, cash quality, and valuation treatment. / 2025年年度报告: 告“管理层讨论与分析”章节中使用的部分业务数据可能与财务口径存在差异， 请投资者理解。 公司是一家在全球范围内为制药企业、生物科技公司、科研机构等提供全 类别、端到端服务的医药研发生产外包机构（CD...",
+      "chapter_id": "chapter_2_industry_chain"
+    },
+    {
+      "evidence_id": "EV038",
+      "source_module": "industry_kpi",
+      "variable": "unmapped",
+      "period": "2024, 季度, 本报告期",
+      "status": "reported",
+      "text": "/ footnote_radar / Surface decision-relevant notes that can hide risk or change confidence. / impairment_policy: 博腾股份：2024年三季度报告: 项目 本报告期金额 说明 末金额 非流动性资产处置损益（包括已计提资产减值准备的冲 / impairment_policy: 博腾股份：2024年三季度报告: 末金额 非流动性资产处置损益（包括已计提资产减值准备的冲 / Use footnotes as...",
+      "chapter_id": "chapter_2_industry_chain"
+    },
+    {
+      "evidence_id": "EV039",
+      "source_module": "industry_kpi",
+      "variable": "profit_or_eps",
+      "period": "2024, 季度",
+      "status": "reported",
+      "text": "/ cash_flow_quality_decomposition / Separate accounting profit from cash conversion, working-capital drag, and demand visibility. / operating_cash_flow: 博腾股份：2024年三季度报告: -39,393,019.51 -211.61% -213,499,138.84 -149.58% 性损益的净利润（元） 经营活动产生的现金流量净额 / operating_c...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV040",
+      "source_module": "industry_kpi",
+      "variable": "capex_or_roic",
+      "period": "2024, 季度",
+      "status": "reported",
+      "text": "/ capex_cip_return_bridge / Test whether capex, construction-in-progress, or investment assets are building returns or just absorbing capital. / long_term_equity_investments: 博腾股份：2024年三季度报告: 其他债权投资 长期应收款 长期股权投资 344,248,277.17 362,976,190.13 / long_term_equ...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV041",
+      "source_module": "industry_kpi",
+      "variable": "unmapped",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ mdna_text_change / Read management wording changes, proof-backed claims, risk-language upgrades, and abnormal silence across reports. / risk_language_upgrade: 2025年年度报告: 风险、汇率波动风险、新业务投资风险、全球化运营及国际政策变动风险、应 收账款回收风险及其他新兴风险。具体如下： 1、医药研发生产服务市场需求下降的风险 / risk_la...",
+      "chapter_id": "chapter_2_industry_chain"
+    },
+    {
+      "evidence_id": "EV042",
+      "source_module": "industry_kpi",
+      "variable": "segment_margin",
+      "period": "2024, 季度",
+      "status": "reported",
+      "text": "/ non_recurring_profit_quality / Distinguish core operating profit from investment income, fair-value moves, subsidies, asset disposals, impairment, and other one-off items. / impairment: 博腾股份：2024年三季度报告: 收益 所致 主要系上期应收账款收回，计 信用减值损失 -9,884,621.49 38,295,627....",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV043",
+      "source_module": "market_expectation",
+      "variable": "unmapped",
+      "period": "2026-08-13",
+      "status": "reported",
+      "text": "Valuation trade date: 2026-08-13",
+      "chapter_id": "chapter_6_expectations"
+    },
+    {
+      "evidence_id": "EV044",
+      "source_module": "market_expectation",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "/ Market cap (CNY) / 12151367592 / current equity value /",
+      "chapter_id": "chapter_6_expectations"
+    },
+    {
+      "evidence_id": "EV045",
+      "source_module": "market_expectation",
+      "variable": "valuation",
+      "period": "TTM",
+      "status": "reported",
+      "text": "/ PE TTM / 94.5711 / earnings multiple the market is paying now /",
+      "chapter_id": "chapter_7_valuation_rating"
+    },
+    {
+      "evidence_id": "EV046",
+      "source_module": "market_expectation",
+      "variable": "revenue",
+      "period": "TTM",
+      "status": "reported",
+      "text": "/ PS TTM / 3.4672 / sales multiple the market is paying now /",
+      "chapter_id": "chapter_6_expectations"
+    },
+    {
+      "evidence_id": "EV047",
+      "source_module": "market_expectation",
+      "variable": "valuation",
+      "period": "TTM",
+      "status": "calculated",
+      "text": "/ Implied TTM earnings (CNY) / 128489227.597 / market cap divided by PE TTM /",
+      "chapter_id": "chapter_7_valuation_rating"
+    },
+    {
+      "evidence_id": "EV048",
+      "source_module": "market_expectation",
+      "variable": "revenue",
+      "period": "TTM",
+      "status": "calculated",
+      "text": "/ Implied TTM sales (CNY) / 3504663011.0752 / market cap divided by PS TTM /",
+      "chapter_id": "chapter_6_expectations"
+    },
+    {
+      "evidence_id": "EV049",
+      "source_module": "market_expectation",
+      "variable": "valuation",
+      "period": "unspecified",
+      "status": "calculated",
+      "text": "/ PE percentile / 82.1 / 5-year valuation position /",
+      "chapter_id": "chapter_7_valuation_rating"
+    },
+    {
+      "evidence_id": "EV050",
+      "source_module": "market_expectation",
+      "variable": "valuation",
+      "period": "unspecified",
+      "status": "calculated",
+      "text": "/ PB percentile / 41.1 / 5-year valuation position /",
+      "chapter_id": "chapter_7_valuation_rating"
+    }
+  ],
+  "chapter_packets": [
+    {
+      "chapter_id": "chapter_1_company",
+      "title": "一、公司是谁、如何赚钱",
+      "reader_goal": "让普通投资者理解产品、客户、定价、收入确认、成本与现金回收。",
+      "selected_evidence_ids": [
+        "EV001",
+        "EV002",
+        "EV003",
+        "EV004",
+        "EV005",
+        "EV006",
+        "EV007",
+        "EV008",
+        "EV009",
+        "EV010",
+        "EV013",
+        "EV015"
+      ],
+      "knowledge_planet_ids": [
+        "KPE08"
+      ],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_2_industry_chain",
+      "title": "二、产业链位置与行业格局",
+      "reader_goal": "解释上下游、供需与价格形成，并把产业链变化传导到公司经营。",
+      "selected_evidence_ids": [
+        "EV033",
+        "EV034",
+        "EV037",
+        "EV038",
+        "EV041",
+        "EV083",
+        "EV085",
+        "EV086",
+        "EV087",
+        "EV088",
+        "EV089"
+      ],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_3_profit_pools",
+      "title": "三、业务拆解与核心利润池",
+      "reader_goal": "按核心、成长、波动和期权业务拆解收入、利润、现金与资本占用。",
+      "selected_evidence_ids": [],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_4_competition",
+      "title": "四、竞争优势、护城河与主要短板",
+      "reader_goal": "用历史或真同行验证规模、品牌、渠道、技术和成本优势。",
+      "selected_evidence_ids": [
+        "EV067",
+        "EV068",
+        "EV070",
+        "EV071",
+        "EV072",
+        "EV073",
+        "EV074"
+      ],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_5_growth_forecast",
+      "title": "五、增长逻辑、关键分歧与盈利预测",
+      "reader_goal": "围绕三至五个关键问题，把经营变量传导到三年盈利和现金流。",
+      "selected_evidence_ids": [
+        "EV011",
+        "EV012",
+        "EV014",
+        "EV016",
+        "EV026",
+        "EV027",
+        "EV035",
+        "EV036",
+        "EV039",
+        "EV040",
+        "EV042",
+        "EV055"
+      ],
+      "knowledge_planet_ids": [
+        "KPE07"
+      ],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_6_expectations",
+      "title": "六、市场预期差、风险与验证",
+      "reader_goal": "区分真实一致预期、单家卖方和反向隐含假设，并给出证伪日历。",
+      "selected_evidence_ids": [
+        "EV043",
+        "EV044",
+        "EV046",
+        "EV048"
+      ],
+      "knowledge_planet_ids": [
+        "KPE01",
+        "KPE02",
+        "KPE03",
+        "KPE04",
+        "KPE05",
+        "KPE06"
+      ],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_7_valuation_rating",
+      "title": "七、估值、评级与投资结论",
+      "reader_goal": "在完成公司、产业、模型和预期分析后，最后给出估值、评级与动作。",
+      "selected_evidence_ids": [
+        "EV020",
+        "EV045",
+        "EV047",
+        "EV049",
+        "EV050",
+        "EV054",
+        "EV056",
+        "EV060",
+        "EV075",
+        "EV076",
+        "EV077",
+        "EV078"
+      ],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    }
+  ],
+  "preprocessing_notes": [
+    "原始上下文不直接成为公共报告结构。",
+    "知识星球线索已按目标实体、变量、允许用途和验证门槛重新路由。",
+    "所有章节必须围绕读者问题展开，数据只作为决定性证据进入正文。"
+  ]
+}
