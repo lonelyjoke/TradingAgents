@@ -406,11 +406,17 @@ First Research Manager JSON:
 """
 
 
-def create_research_manager(llm):
+def create_research_manager(llm, *, repair_llm=None):
+    repair_model = repair_llm or llm
     structured_llm = bind_structured(
         llm,
         UnderwritingResearchPlan,
         "Research Manager",
+    )
+    repair_structured_llm = bind_structured(
+        repair_model,
+        UnderwritingResearchPlan,
+        "Research Manager Handoff Repair",
     )
 
     def research_manager_node(state) -> dict:
@@ -775,6 +781,7 @@ If a bull or bear argument contains an exact product price, inventory figure, pr
             "Research Manager",
             return_metadata=True,
             fallback_schema=UnderwritingResearchPlan,
+            repair_llm=repair_model,
         )
         research_manager_plan_payload = research_manager_generation_status.pop(
             "validated_payload",
@@ -843,8 +850,8 @@ If a bull or bear argument contains an exact product price, inventory figure, pr
         llm_repair_issues = list(remaining_handoff_issues)
         if remaining_handoff_issues:
             repaired_plan, repair_status = invoke_structured_or_freetext(
-                structured_llm,
-                llm,
+                repair_structured_llm,
+                repair_model,
                 _handoff_repair_prompt(
                     packet=underwriting_packet,
                     payload=research_manager_plan_payload,
@@ -854,6 +861,7 @@ If a bull or bear argument contains an exact product price, inventory figure, pr
                 "Research Manager Handoff Repair",
                 return_metadata=True,
                 fallback_schema=UnderwritingResearchPlan,
+                repair_llm=repair_model,
             )
             repaired_payload = repair_status.pop("validated_payload", {})
             if repaired_payload:

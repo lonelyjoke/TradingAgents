@@ -1,0 +1,26 @@
+{
+  "mode": "schema_prompt_structured",
+  "agent": "Research Manager",
+  "structured_error": "",
+  "schema": "UnderwritingResearchPlan",
+  "handoff_repair_requested": false,
+  "handoff_repair_applied": false,
+  "handoff_repair_mode": "not_run",
+  "handoff_deterministic_completion_applied": true,
+  "handoff_deterministic_copied_lines": [
+    "shares",
+    "2026E_epscny",
+    "2026E_rdspend",
+    "2026E_eps"
+  ],
+  "handoff_same_unit_scale_restorations": [],
+  "handoff_undocumented_change_restorations": [
+    "2026E_epscny"
+  ],
+  "initial_handoff_issues": [
+    "undocumented change 2026E_eps: 1.334 CNY -> 1.3337 CNY/share",
+    "missing canonical line 2026E_rdspend: 5304.76 CNY mn",
+    "missing canonical line 2026E_eps: 1.333682909556058 CNY/share"
+  ],
+  "remaining_handoff_issues": []
+}

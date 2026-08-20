@@ -1,4 +1,6 @@
 from types import SimpleNamespace
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
 from langchain_core.messages import AIMessage
 
@@ -6,7 +8,11 @@ from cli.stats_handler import StatsCallbackHandler
 
 
 def test_stats_handler_attributes_tokens_and_cache_to_graph_node():
-    handler = StatsCallbackHandler()
+    handler = StatsCallbackHandler(
+        now_provider=lambda: datetime(
+            2026, 8, 17, 20, 0, tzinfo=ZoneInfo("Asia/Shanghai")
+        )
+    )
     run_id = "research-manager-call"
     metadata = {"langgraph_node": "Research Manager"}
 
@@ -57,9 +63,94 @@ def test_stats_handler_attributes_tokens_and_cache_to_graph_node():
         "cached_tokens_in": 60,
         "llm_errors": 0,
     }
-    assert stats["estimated_model_costs_cny"]["deepseek-v4-pro"] == 0.000242
-    assert stats["estimated_llm_cost_cny"] == 0.0002
+    assert stats["estimated_model_costs_cny"]["deepseek-v4-pro"] == 0.000459
+    assert stats["estimated_llm_cost_cny"] == 0.0005
     assert stats["cost_estimate_priced_tokens"] == 120
+    assert stats["cost_pricing_tier_tokens"] == {
+        "legacy_before_2026_08_17": 0,
+        "off_peak": 120,
+        "peak": 0,
+    }
+
+
+def test_stats_handler_prices_each_call_at_its_beijing_start_tier():
+    times = iter(
+        [
+            datetime(2026, 8, 17, 10, 0, tzinfo=ZoneInfo("Asia/Shanghai")),
+            datetime(2026, 8, 17, 20, 0, tzinfo=ZoneInfo("Asia/Shanghai")),
+        ]
+    )
+    handler = StatsCallbackHandler(now_provider=lambda: next(times))
+    response = SimpleNamespace(
+        generations=[
+            [
+                SimpleNamespace(
+                    message=AIMessage(
+                        content="done",
+                        usage_metadata={
+                            "input_tokens": 100,
+                            "output_tokens": 20,
+                            "total_tokens": 120,
+                            "input_token_details": {"cache_read": 0},
+                        },
+                    )
+                )
+            ]
+        ]
+    )
+
+    for run_id in ("peak", "off-peak"):
+        handler.on_chat_model_start(
+            {"name": "deepseek"},
+            [[]],
+            run_id=run_id,
+            invocation_params={"model": "deepseek-v4-flash"},
+        )
+        handler.on_llm_end(response, run_id=run_id)
+
+    stats = handler.get_stats()
+    assert stats["cost_pricing_tier_tokens"] == {
+        "legacy_before_2026_08_17": 0,
+        "off_peak": 120,
+        "peak": 120,
+    }
+    assert stats["estimated_model_costs_cny"]["deepseek-v4-flash"] == 0.00072
+
+
+def test_stats_handler_keeps_old_price_before_effective_date():
+    handler = StatsCallbackHandler(
+        now_provider=lambda: datetime(
+            2026, 8, 16, 20, 0, tzinfo=ZoneInfo("Asia/Shanghai")
+        )
+    )
+    handler.on_chat_model_start(
+        {"name": "deepseek"},
+        [[]],
+        run_id="legacy",
+        invocation_params={"model": "deepseek-v4-pro"},
+    )
+    response = SimpleNamespace(
+        generations=[
+            [
+                SimpleNamespace(
+                    message=AIMessage(
+                        content="done",
+                        usage_metadata={
+                            "input_tokens": 100,
+                            "output_tokens": 20,
+                            "total_tokens": 120,
+                            "input_token_details": {"cache_read": 60},
+                        },
+                    )
+                )
+            ]
+        ]
+    )
+    handler.on_llm_end(response, run_id="legacy")
+
+    stats = handler.get_stats()
+    assert stats["estimated_model_costs_cny"]["deepseek-v4-pro"] == 0.000242
+    assert stats["cost_pricing_tier_tokens"]["legacy_before_2026_08_17"] == 120
 
 
 def test_stats_handler_tracks_errors_and_tools_by_node():

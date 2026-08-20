@@ -1865,9 +1865,15 @@ def run_analysis(checkpoint: bool = True):
                 "structured_research_cache_enabled": config.get(
                     "structured_research_cache_enabled"
                 ),
+                "structured_research_component_cache_enabled": config.get(
+                    "structured_research_component_cache_enabled"
+                ),
                 "structured_research_cache_status": (
                     final_state.get("structured_research_context", {}) or {}
                 ).get("_cache_status", "disabled_or_unavailable"),
+                "structured_research_component_cache_status": (
+                    final_state.get("structured_research_context", {}) or {}
+                ).get("_component_cache_status", {}),
                 "a_share_tool_requery_enabled": config.get(
                     "a_share_agent_tool_requery_enabled"
                 ),

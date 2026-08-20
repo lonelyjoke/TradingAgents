@@ -270,6 +270,7 @@ def invoke_structured_or_freetext(
     *,
     return_metadata: bool = False,
     fallback_schema: type[T] | None = None,
+    repair_llm: Any = None,
 ) -> str | tuple[str, dict[str, Any]]:
     """Run the structured call and render to markdown; fall back to free-text on any failure.
 
@@ -320,6 +321,7 @@ def invoke_structured_or_freetext(
     else:
         structured_error = "structured output binding unavailable"
 
+    repair_model = repair_llm or plain_llm
     if retained_invalid_response:
         content = retained_invalid_response
     else:
@@ -335,6 +337,8 @@ def invoke_structured_or_freetext(
                 "agent": agent_name,
                 "structured_error": structured_error,
                 "validated_payload": repaired_result.model_dump(mode="json"),
+                "repair_model_routed": repair_llm is not None
+                and repair_llm is not plain_llm,
             }
             return (rendered, metadata) if return_metadata else rendered
         except Exception as first_repair_error:
@@ -365,7 +369,7 @@ Previous response (return only corrected/missing fields when the repair schema i
 {json.dumps(latest_payload, ensure_ascii=False, separators=(',', ':'))[:50000] if latest_payload else latest_text[:50000]}
 """
                 try:
-                    repaired_response = plain_llm.invoke(repair_prompt)
+                    repaired_response = repair_model.invoke(repair_prompt)
                     latest_text = _response_text(repaired_response)
                     repair_payload = _json_object(latest_text)
                     candidate_payload = _merge_json_patch(
@@ -380,6 +384,8 @@ Previous response (return only corrected/missing fields when the repair schema i
                         "structured_error": structured_error,
                         "validated_payload": repaired_result.model_dump(mode="json"),
                         "schema_repair_attempts": attempt,
+                        "repair_model_routed": repair_llm is not None
+                        and repair_llm is not plain_llm,
                     }
                     return (rendered, metadata) if return_metadata else rendered
                 except Exception as next_error:

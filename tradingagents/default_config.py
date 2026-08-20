@@ -210,6 +210,13 @@ DEFAULT_CONFIG = {
         "STRUCTURED_RESEARCH_CACHE_ENABLED",
         True,
     ),
+    # Cache schema-validated semantic extraction and underwriting objects by
+    # exact prompt/model/schema. This survives unrelated bundle invalidations
+    # while preserving strict content-addressed safety.
+    "structured_research_component_cache_enabled": _env_bool_or_default(
+        "STRUCTURED_RESEARCH_COMPONENT_CACHE_ENABLED",
+        True,
+    ),
     # Build one shared, rating-free company underwriting packet with the deep
     # model. Every downstream research agent consumes the same company model,
     # segment driver chains, underwriting questions and three-year forecast.

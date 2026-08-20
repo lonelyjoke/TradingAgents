@@ -1,0 +1,1660 @@
+{
+  "schema_version": 1,
+  "symbol": "688041.SH",
+  "as_of_date": "2026-08-20",
+  "reader_contract": {
+    "audience": "普通投资者",
+    "principle": "数据用于权威佐证，不能替代公司、产业链与投资逻辑。",
+    "formal_rating_position": "开篇投资摘要，并在第七章末尾重申",
+    "chapter_count": 7
+  },
+  "source_policy": {
+    "A_hard_fact": {
+      "sources": "公司财报、交易所/公司公告、官方业绩指引",
+      "allowed_use": "冻结历史事实和模型基线"
+    },
+    "B_reproducible": {
+      "sources": "Tushare结构化数据、程序计算、官方统计、行业协会",
+      "allowed_use": "财务计算、行业比较和可复核代理变量"
+    },
+    "C_external_expectation": {
+      "sources": "具名卖方报告、多机构一致预期",
+      "allowed_use": "构建市场预期与预测分歧；单家机构不得冒充一致预期"
+    },
+    "D_alternative_intelligence": {
+      "sources": "知识星球、渠道调研、专家纪要、私域卖方推送",
+      "allowed_use": "量化模型变更、情景概率变化、验证日历变化或明确拒绝"
+    },
+    "E_background": {
+      "sources": "普通新闻、政策评论、行业叙事",
+      "allowed_use": "解释背景；不得单独改变盈利预测或评级"
+    }
+  },
+  "company_introduction": {
+    "business_archetype": "高研发技术产品型 / 国产高端处理器设计销售",
+    "value_proposition_and_customers": "研发、设计和销售应用于服务器、工作站等计算/存储设备中的高端处理器，产品包括海光CPU和DCU；客户覆盖电信、金融、互联网、教育、交通等重要行业。",
+    "revenue_equation": "收入 = CPU出货量 x CPU ASP + DCU出货量 x DCU ASP + 其他业务；未披露CPU/DCU拆分。FY2025收入14,376.89 mn，Q1 2026收入4,033.59 mn。",
+    "profit_equation": "毛利 = 收入 x 毛利率，Q1 2026毛利率55.604%（同比-5.59pp）；扣除高研发/销售/管理费用后，Q1 2026净利率17.034%。",
+    "cash_flow_equation": "经营现金流 = 净利润 + 营运资本变动；Q1 2026 OCF/净利润仅0.0984；2026H1 OCF -427.54 mn，存货7,518.22 mn。",
+    "capital_intensity_and_reinvestment": "高研发投入，2026H1研发投入2,652.38 mn，占收入29.15%；开发支出由306.91 mn增至422.29 mn；现金流转化能力仍需验证。",
+    "key_unknowns": [
+      "CPU vs DCU收入与毛利结构",
+      "出货量、ASP、产能利用率、订单额",
+      "2026全年收入/利润指引",
+      "毛利率下滑是产品结构、成本还是价格压力",
+      "OCF/净利润持续恶化的原因"
+    ]
+  },
+  "industry_chain": {
+    "operating_model_family": "volume_price_cost",
+    "upstream_cost_and_supply": [
+      {
+        "segment": "高端处理器（CPU 与 DCU）",
+        "supply_capacity": "国产AI芯片集体迭代、出货放量；公司具体产能和利用率未披露。",
+        "unit_cost_inputs": "未披露单位成本、晶圆代工/先进封装成本及上游输入价格。"
+      },
+      {
+        "segment": "服务器/超节点系统集成与交付",
+        "supply_capacity": "华为Atlas 950 SuperPoD、阿里磐久128、中科曙光scaleX640等国产超节点方案成熟。",
+        "unit_cost_inputs": "未披露BOM、制造或液冷/互联成本。"
+      }
+    ],
+    "downstream_demand_and_pricing": [
+      {
+        "segment": "高端处理器（CPU 与 DCU）",
+        "customers_channel": "服务器/工作站整机与系统级客户，最终行业包括电信、金融、互联网、教育、交通等。",
+        "demand": [
+          "AI服务器/数据中心资本开支",
+          "推理工作负载的服务器收入占比提升",
+          "国产算力替代",
+          "DCU4等新品迭代与客户资本开支"
+        ],
+        "price_asp": "未披露分产品ASP或价格变化。"
+      },
+      {
+        "segment": "服务器/超节点系统集成与交付",
+        "customers_channel": "云厂商/互联网客户及AI工厂/超节点投资方。",
+        "demand": [
+          "云厂商资本开支",
+          "超节点渗透率2026年20%向2027翻倍",
+          "系统级交付从卡供给转向工厂级交付"
+        ],
+        "price_asp": "未披露公司系统集成ASP或单位价值量。"
+      }
+    ]
+  },
+  "profit_pools": {
+    "reported_or_analytical_units": [
+      {
+        "unit_id": "HYGON_PROCESSOR",
+        "unit_name": "高端处理器（CPU 与 DCU）",
+        "unit_type": "reported_segment",
+        "disclosure_basis": "reported",
+        "parent_unit": "company",
+        "economic_role": "核心收入与利润引擎，收入权重100%",
+        "primary_operating_archetype": "volume_price_cost",
+        "secondary_operating_archetype": "",
+        "revenue_driver_equation": "体积 x ASP x 产品结构；无公司披露的出货量/ASP。FY2025收入14,376.89 mn，Q1 2026收入4,033.59 mn。",
+        "profit_driver_equation": "收入 x 毛利率 - 研发/销售/管理费用；Q1 2026毛利率55.604%，营业利润率24.053%，净利率17.034%。",
+        "cash_and_capital_equation": "净利润 + 营运资本变动 - 资本开支；2026H1 OCF -427.54 mn，存货7,518.22 mn。",
+        "reported_metrics": [
+          "revenue",
+          "gross_margin",
+          "operating_margin",
+          "net_margin",
+          "rd_spend",
+          "inventory_book_value",
+          "operating_cash_flow"
+        ],
+        "evidence_ids": [
+          "EV025",
+          "EV032",
+          "EV012",
+          "EV014",
+          "EV027",
+          "EV031",
+          "EV036",
+          "EV042"
+        ],
+        "missing_inputs": [
+          "CPU vs DCU收入拆分",
+          "季度出货量/ASP/利用率",
+          "订单/在手订单金额",
+          "毛利率变动原因拆分",
+          "现金转化率年度口径"
+        ],
+        "next_verification": "调阅2025年报与2026半年报主营业务成本明细、产销量或附注，拆出CPU/DCU量价与成本。"
+      },
+      {
+        "unit_id": "HYGON_SYSTEM_INTEGRATION",
+        "unit_name": "服务器/超节点系统集成与交付",
+        "unit_type": "project_or_asset",
+        "disclosure_basis": "analytical",
+        "parent_unit": "company",
+        "economic_role": "生态延伸/潜在利润池，尚无非单独披露收入。",
+        "primary_operating_archetype": "project_backlog_delivery",
+        "secondary_operating_archetype": "volume_price_cost",
+        "revenue_driver_equation": "期初订单 + 新订单 - 交付/验收 = 期末订单；未披露公司级订单与收入占比。",
+        "profit_driver_equation": "项目收入 - BOM/人工/分包/质保 - 期间费用；系统集成利润率通常低于芯片业务。",
+        "cash_and_capital_equation": "预收/回款 + 采购/在制/验收资金占用；未披露。",
+        "reported_metrics": [],
+        "evidence_ids": [
+          "KPE05",
+          "KPE08"
+        ],
+        "missing_inputs": [
+          "系统集成收入占比",
+          "系统集成毛利率",
+          "在手订单和交付节奏"
+        ],
+        "next_verification": "跟踪公司超节点相关产品或系统级交付的收入确认及毛利率。"
+      }
+    ],
+    "segment_models": [
+      {
+        "segment": "高端处理器（CPU 与 DCU）",
+        "products_or_services": "研发、设计和销售应用于服务器、工作站等计算、存储设备中的高端处理器，产品包括海光通用处理器（CPU）和海光协处理器（DCU）",
+        "customers_and_channel": "服务器/工作站整机与系统级客户，最终行业包括电信、金融、互联网、教育、交通等。",
+        "revenue_weight_pct": 100.0,
+        "profit_weight_pct": 100.0,
+        "base_period": "FY2025收入；Q1 2026利润率",
+        "base_revenue_value": 14376.89,
+        "base_revenue_unit": "CNY mn",
+        "base_revenue_growth_pct": 56.92,
+        "base_margin_pct": 55.604,
+        "base_margin_change_pp": -5.59,
+        "demand_and_order_drivers": [
+          "AI服务器/数据中心资本开支",
+          "推理工作负载的服务器收入占比提升",
+          "国产算力替代",
+          "DCU4等新品迭代与客户资本开支"
+        ],
+        "industry_supply_and_capacity": "国产AI芯片集体迭代、出货放量；公司具体产能和利用率未披露。",
+        "volume_share_utilization": "未取得公司出货量、份额或产能利用率。",
+        "price_asp_take_rate": "未披露分产品ASP或价格变化。",
+        "unit_cost_and_input_prices": "未披露单位成本、晶圆代工/先进封装成本及上游输入价格。",
+        "margin_and_operating_leverage": "营收高增但毛利率同比下滑；研发投入增长55.05%，研发/收入29.15%，营业利润率承压。",
+        "working_capital_and_cash_conversion": "Q1 2026应收/收入23.75%，存货/收入45.45%；2026H1 OCF -427.54 mn，现金转化弱。",
+        "prosperity_level": "高景气",
+        "marginal_direction": "上行",
+        "causal_analysis": "云厂商AI capex高增 -> 国产AI芯片放量 -> 公司收入高增；但研发/制造成本上升和产品结构变化使毛利率下滑，且营运资本占用导致OCF转负。",
+        "valuation_treatment": "按成长股PE估值；当前PE TTM 182.23，估值对增长和现金质量高度敏感。",
+        "strongest_counterevidence": [
+          "Q1 2026毛利率、净利率同比下滑",
+          "2026H1经营现金流为负",
+          "PE TTM 182x，容错率低"
+        ],
+        "evidence_ids": [
+          "EV025",
+          "EV012",
+          "EV014",
+          "EV027",
+          "EV036",
+          "EV042"
+        ],
+        "missing_inputs": [
+          "分产品收入与毛利",
+          "出货量/ASP/利用率",
+          "订单与全年指引",
+          "成本与价格拆分"
+        ],
+        "next_verification": "调阅2026H1年报附注中的主营业务成本、分产品信息及现金流量表补充资料。"
+      },
+      {
+        "segment": "服务器/超节点系统集成与交付",
+        "products_or_services": "服务器、工作站等整机及系统级解决方案（含液冷、高速互联等）",
+        "customers_and_channel": "云厂商/互联网客户及AI工厂/超节点投资方。",
+        "revenue_weight_pct": null,
+        "profit_weight_pct": null,
+        "base_period": "unspecified",
+        "base_revenue_value": null,
+        "base_revenue_unit": "",
+        "base_revenue_growth_pct": null,
+        "base_margin_pct": null,
+        "base_margin_change_pp": null,
+        "demand_and_order_drivers": [
+          "云厂商资本开支",
+          "超节点渗透率2026年20%向2027翻倍",
+          "系统级交付从卡供给转向工厂级交付"
+        ],
+        "industry_supply_and_capacity": "华为Atlas 950 SuperPoD、阿里磐久128、中科曙光scaleX640等国产超节点方案成熟。",
+        "volume_share_utilization": "未披露公司在该细分领域的收入占比或订单量。",
+        "price_asp_take_rate": "未披露公司系统集成ASP或单位价值量。",
+        "unit_cost_and_input_prices": "未披露BOM、制造或液冷/互联成本。",
+        "margin_and_operating_leverage": "系统集成利润率通常低于处理器芯片。",
+        "working_capital_and_cash_conversion": "未披露系统集成应收/存货/现金流。",
+        "prosperity_level": "高景气",
+        "marginal_direction": "上行",
+        "causal_analysis": "AI算力投资从芯片供给转向系统级交付可能带来生态绑定，但若纳入公司报表会拉低整体毛利率。",
+        "valuation_treatment": "作为期权/生态验证条目，不单独计入核心估值；待收入占比披露后再建模。",
+        "strongest_counterevidence": [
+          "系统集成毛利率可能低于芯片业务",
+          "订单兑现存在周期性"
+        ],
+        "evidence_ids": [
+          "KPE05",
+          "KPE08"
+        ],
+        "missing_inputs": [
+          "收入占比",
+          "毛利率",
+          "在手订单"
+        ],
+        "next_verification": "关注公司超节点相关产品出货与收入确认。"
+      }
+    ]
+  },
+  "material_transactions": {
+    "rights_and_cash_waterfalls": [
+      {
+        "transaction_id": "TXN_MNA_20250610",
+        "asset_or_target": "未披露重大资产重组/交易（公告提示）",
+        "transaction_type": "other",
+        "buyer_or_counterparty": "未披露",
+        "ownership_before_pct": null,
+        "ownership_after_pct": null,
+        "total_transaction_consideration_cny_mn": null,
+        "attributable_consideration_cny_mn": null,
+        "cash_received_to_date_cny_mn": null,
+        "disposed_rights": [],
+        "retained_rights": [],
+        "contingent_rights": [],
+        "cash_flow_classification": "unresolved",
+        "valuation_overlap_keys": [],
+        "ownership_and_cash_formula": "未披露",
+        "evidence_ids": [],
+        "missing_inputs": [
+          "交易标的",
+          "对价和支付节奏",
+          "现金/非现金分类",
+          "是否影响合并报表"
+        ],
+        "status": "unresolved"
+      }
+    ],
+    "rule": "Reconcile ownership before/after, attributable cash and retained/disposed rights before forecast, cash-flow classification or valuation."
+  },
+  "competition_and_moat": {
+    "landscapes": [
+      {
+        "business_unit": "高端处理器（CPU 与 DCU）",
+        "market_boundary": "中国服务器/数据中心高端CPU与AI加速器/DCU市场",
+        "boundary_evidence": "Earnings model segments suggest high-end processors; product demand evidence only covers compute/AI capex.",
+        "structure_and_concentration": "国产AI芯片集中度未披露；已列出的竞争样本市场集中度高，海光在x86 CPU生态有差异化地位。",
+        "direct_competitors": [
+          "寒武纪",
+          "华为海思/昇腾",
+          "天数智芯",
+          "壁仞科技",
+          "摩尔线程"
+        ],
+        "substitutes_and_customer_alternatives": [
+          "英伟达/AMD产品（受供应限制）",
+          "云厂商自研ASIC",
+          "通用CPU替代/服务器方案替代"
+        ],
+        "self_supply_and_new_entrants": [
+          "头部云厂商自研芯片",
+          "新进入国产AI芯片企业"
+        ],
+        "comparison_dimensions": [
+          "性能/生态",
+          "x86兼容与软件栈",
+          "供应可控性",
+          "客户资格认证",
+          "毛利率与现金转化"
+        ],
+        "company_relative_position": "国内x86兼容CPU生态和电信/金融客户渗透具先发优势，但产品收入拆分缺失，难以定量比较。",
+        "competitor_likely_response": "竞争者会继续争夺国产算力市场，依靠更低价格、更具AI性能的DCU/GPU或系统级交付竞争。",
+        "financial_transmission": "竞争会压制ASP与毛利率；若公司被迫降低价格来换取量，收入增速可能维持但净利率承压。",
+        "evidence_ids": [
+          "EV032",
+          "EV025",
+          "KPE01",
+          "KPE02",
+          "KPE05"
+        ],
+        "evidence_status": "partial",
+        "missing_inputs": [
+          "市场份额",
+          "分产品ASP",
+          "竞争者价格数据"
+        ],
+        "next_verification": "获取公司市占率/订单份额和产品评价。"
+      },
+      {
+        "business_unit": "服务器/超节点系统集成与交付",
+        "market_boundary": "国产超节点/服务器整机与AI工厂级系统交付市场",
+        "boundary_evidence": "KPE05/KPE08建议国产路径同构：昇腾/海光/寒武纪→超节点→万卡集群→国产AI工厂。",
+        "structure_and_concentration": "浪潮信息、华勤、联想、中科曙光、紫光等参与者多；公司在该细分未披露收入。",
+        "direct_competitors": [
+          "中科曙光",
+          "浪潮信息",
+          "紫光股份",
+          "华勤技术",
+          "联想集团"
+        ],
+        "substitutes_and_customer_alternatives": [
+          "直接采购英伟达DGX/DSX方案",
+          "云厂商自建/自研超节点"
+        ],
+        "self_supply_and_new_entrants": [
+          "云厂商自研超节点",
+          "新系统集成商"
+        ],
+        "comparison_dimensions": [
+          "交付能力",
+          "芯片绑定",
+          "单GW价值量",
+          "液冷/互联技术与毛利率"
+        ],
+        "company_relative_position": "海光信息被列为最需验证的受益方之一，但公司未披露系统集成收入。",
+        "competitor_likely_response": "传统整机厂商会争夺超节点订单，系统集成的利润率可能被压缩。",
+        "financial_transmission": "若系统集成收入扩大，整体毛利率可能被稀释；若仅作为芯片销路，则间接影响处理器量的增长。",
+        "evidence_ids": [
+          "KPE05",
+          "KPE08"
+        ],
+        "evidence_status": "missing",
+        "missing_inputs": [
+          "公司系统集成收入占比",
+          "毛利率",
+          "订单"
+        ],
+        "next_verification": "跟踪公司超节点相关产品出货与收入确认。"
+      }
+    ],
+    "competition_and_substitution_analysis": "直接对手中，寒武纪AI芯片纯粹度高，昇腾有华为生态和系统交付能力。公司差异化在于x86兼容CPU和重点行业粘性，但DCU仍面临寒武纪等直接替代。客户自研ASIC是中长期最大不可验证威胁。竞争对手的系统级交付可能绕开单芯片、以整机方案竞争，使芯片毛利率和份额更难预测。",
+    "claimed_mechanisms": [
+      "x86兼容生态与软硬件适配",
+      "国内高端处理器设计能力与安全可信资质",
+      "高研发投入与新世代产品迭代",
+      "重点行业客户渗透"
+    ],
+    "tests": [
+      {
+        "moat_mechanism": "x86兼容生态与客户切换成本",
+        "observable_test": "毛利率/ASP是否稳定高于无x86生态的国产AI芯片；重复采购率和客户流失率是否优于同业",
+        "comparison_basis": "公司Q1 2026 GM 55.604% vs 澜起 GM不明，寒武纪 PE/PS更高但无GM直接对比",
+        "evidence_result": "未取得分产品ASP和留存率，无法判定",
+        "financial_transmission": "若生态锁定成立，应支持ASP和毛利；否则价格竞争会压缩毛利。",
+        "strongest_counterevidence": "Q1 2026毛利同比下滑5.59pp，竞争加剧",
+        "status": "unproven",
+        "evidence_ids": [
+          "EV012",
+          "EV032"
+        ],
+        "next_verification": "获取分产品毛利率、合同续约率和客户集中度变化。"
+      },
+      {
+        "moat_mechanism": "高研发投入与产品迭代",
+        "observable_test": "研发投入强度29.15%，新品DCU4能否转化为收入增长并托住毛利率",
+        "comparison_basis": "与寒武纪/澜起等研发强度和产品时点比较",
+        "evidence_result": "R&D强度高，但毛利率仍下滑，尚未证明研发转化",
+        "financial_transmission": "研发形成未来产品竞争力，但当前压低利润和OCF。",
+        "strongest_counterevidence": "2026H1 OCF为负，研发投入超过现金流承受力",
+        "status": "partial",
+        "evidence_ids": [
+          "EV027",
+          "EV031",
+          "EV036"
+        ],
+        "next_verification": "跟踪DCU4发布后的订单/收入及毛利率恢复。"
+      },
+      {
+        "moat_mechanism": "国产高端处理器安全/资质与客户粘性",
+        "observable_test": "在电信/金融等关键行业的采购份额和资格认证是否持续领先",
+        "comparison_basis": "与寒武纪、昇腾在关键行业的中标率比较",
+        "evidence_result": "定性有，但无市场份额或中标率数据",
+        "financial_transmission": "资格认证可支撑量增和ASP，降低客户流失。",
+        "strongest_counterevidence": "竞争者同样具备国产替代资格",
+        "status": "unproven",
+        "evidence_ids": [
+          "EV032"
+        ],
+        "next_verification": "获取分客户/分行业收入和中标情况。"
+      }
+    ],
+    "structural_risks": [
+      "美国出口管制/供应链限制",
+      "2026H1 OCF转负与存货/应收上升",
+      "Q1 2026毛利率、净利率同比下滑",
+      "估值处于高位，容错率低",
+      "竞争者快速入场与客户自研芯片替代"
+    ],
+    "interpretation_rule": "Chapter 2 owns market boundary, structure, direct competitors, substitutes and likely response; Chapter 4 owns relative advantage, observable proof and financial persistence."
+  },
+  "key_underwriting_questions": [
+    {
+      "question_id": "UQ01",
+      "question": "DCU4和系统级交付能否在2026H2-2027转化为可确认的收入和订单，而不只是行业叙事？",
+      "why_it_matters": "直接决定2026-2028收入增速假设；若系统集成收入未确认或毛利率很低，将改变规模与质量。",
+      "current_answer": "unresolved",
+      "bull_evidence": [
+        "腾讯Q2 capex +176%至528亿元，阿里Q1 269亿元",
+        "DCU4对标H200/B系列，超节点2027渗透率翻倍"
+      ],
+      "bear_evidence": [
+        "无公司官方DCU4订单/收入指引",
+        "系统集成收入拆分缺失"
+      ],
+      "decisive_model_variables": [
+        "segment_volume",
+        "revenue",
+        "gross_margin"
+      ],
+      "affected_financial_lines": [
+        "revenue",
+        "parent_net_profit",
+        "EPS"
+      ],
+      "evidence_ids": [
+        "KPE02",
+        "KPE05",
+        "KPE08"
+      ],
+      "missing_evidence": [
+        "DCU4订单额",
+        "分产品收入",
+        "系统集成收入占比"
+      ],
+      "next_verification": "跟踪2026中报/三季报分产品收入、订单和公司指引。"
+    },
+    {
+      "question_id": "UQ02",
+      "question": "Q1毛利率-5.59pp是产品结构、成本上升还是价格竞争，2026-2028毛利率中枢会落在哪里？",
+      "why_it_matters": "毛利率/净利率决定利润弹性；若主流产品价格战，收入高增可能无法转化为高利润。",
+      "current_answer": "unresolved",
+      "bull_evidence": [
+        "Q1 GM仍高至55.604%",
+        "推理负载占比提升可能改善结构"
+      ],
+      "bear_evidence": [
+        "GM同比下滑5.59pp，净利率下滑4.04pp",
+        "研发投入增长55%"
+      ],
+      "decisive_model_variables": [
+        "segment_margin",
+        "asp_or_price",
+        "unit_cost"
+      ],
+      "affected_financial_lines": [
+        "gross_margin",
+        "operating_margin",
+        "net_margin",
+        "parent_net_profit"
+      ],
+      "evidence_ids": [
+        "EV012",
+        "EV014",
+        "KPE02"
+      ],
+      "missing_evidence": [
+        "CPU/DCU成本拆分",
+        "分产品ASP",
+        "毛利率变动原因"
+      ],
+      "next_verification": "调阅中报分产品毛利与成本表，跟踪三季报毛利率。"
+    },
+    {
+      "question_id": "UQ03",
+      "question": "2026H1 OCF -427.5 mn是战略性备货还是需求/回款恶化，现金转化何时恢复？",
+      "why_it_matters": "自由现金流与增长质量决定估值；高存货/应收可能导致减值风险。",
+      "current_answer": "unresolved",
+      "bull_evidence": [
+        "存货增加被描述为战略备货以保障交付"
+      ],
+      "bear_evidence": [
+        "2026H1 OCF -427.5 mn",
+        "Q1 OCF/净利仅0.0984",
+        "存货账面价值7,518.22 mn，占总资产20.86%"
+      ],
+      "decisive_model_variables": [
+        "working_capital",
+        "ocf_to_net_profit",
+        "inventory"
+      ],
+      "affected_financial_lines": [
+        "operating_cash_flow",
+        "FCF",
+        "receivables",
+        "inventory"
+      ],
+      "evidence_ids": [
+        "EV016",
+        "EV036",
+        "EV039",
+        "EV042"
+      ],
+      "missing_evidence": [
+        "存货-产品结构",
+        "应收周转天数",
+        "全年OCF指引"
+      ],
+      "next_verification": "调阅现金流量表补充资料，分解存货/应收/应付变化。"
+    },
+    {
+      "question_id": "UQ04",
+      "question": "公司实际产能、利用率和先进制程/先进封装瓶颈能否支撑爆发式出货，不出现良率或成本失控？",
+      "why_it_matters": "量是收入的核心驱动；若产能或良率受限，收入增速将低于市场预期。",
+      "current_answer": "unresolved",
+      "bull_evidence": [
+        "国产CoWoS和HBM预计下半年突破",
+        "国产AI芯片集体迭代"
+      ],
+      "bear_evidence": [
+        "无公司披露产销量/利用率",
+        "上游成本与良率未披露"
+      ],
+      "decisive_model_variables": [
+        "capacity",
+        "utilization",
+        "yield",
+        "segment_volume"
+      ],
+      "affected_financial_lines": [
+        "revenue",
+        "gross_margin",
+        "capex"
+      ],
+      "evidence_ids": [
+        "KPE01",
+        "KPE06",
+        "KPE05"
+      ],
+      "missing_evidence": [
+        "产能/产量",
+        "代工/封测供应商",
+        "良率"
+      ],
+      "next_verification": "获取公司产能/订单信息披露，与客户capex交叉验证。"
+    },
+    {
+      "question_id": "UQ05",
+      "question": "在PE TTM 182x下，当前价格隐含的3-5年利润和ROIC路径是什么，已披露年度利润与EPS proxy是否可靠？",
+      "why_it_matters": "估值是最大的预期差来源；若股份数或利润口径列位移位，会改变隐含估值。",
+      "current_answer": "unresolved",
+      "bull_evidence": [
+        "PE TTM 182 vs 寒武纪190.78，澜起95.02"
+      ],
+      "bear_evidence": [
+        "PE percentile 5Y 64.2，PB percentile 77.7",
+        "FY2025 profit/calculated shares仅1.095 EPS，低于EPS TTM proxy 1.352"
+      ],
+      "decisive_model_variables": [
+        "valuation_multiple",
+        "diluted_share_count",
+        "parent_net_profit"
+      ],
+      "affected_financial_lines": [
+        "EPS",
+        "fair_value_per_share"
+      ],
+      "evidence_ids": [
+        "EV044",
+        "EV045"
+      ],
+      "missing_evidence": [
+        "权威总股本",
+        "TTM parent profit",
+        "真实列位口径"
+      ],
+      "next_verification": "用Tushare stock_basic/daily_basic总股本和最新母公司净利润重算EPS。"
+    }
+  ],
+  "forecast_spine": {
+    "forecast_years": [
+      "2026E",
+      "2027E",
+      "2028E"
+    ],
+    "forecast_lines": [
+      {
+        "segment": "consolidated",
+        "metric": "revenue",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 14376.89,
+        "year_1_value": 18198.17,
+        "year_2_value": null,
+        "year_3_value": null,
+        "formula": "2026E = 2026H1收入 x2; 2026H1收入 = 研发投入2,652.38 / 29.15% = 9,099.08 mn",
+        "assumption_status": "calculated_run_rate_not_guidance",
+        "evidence_ids": [
+          "EV025",
+          "EV027",
+          "EV031"
+        ],
+        "key_sensitivity": "H2需求与DCU4出货节奏",
+        "missing_inputs": [
+          "2026全年收入指引",
+          "直接披露的H1总收入"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "parent_net_profit",
+        "unit": "CNY mn",
+        "base_period": "FY2025",
+        "base_value": 2544.89,
+        "year_1_value": 3099.93,
+        "year_2_value": null,
+        "year_3_value": null,
+        "formula": "2026E = 2026E revenue x Q1 2026 net margin 17.0343%",
+        "assumption_status": "analyst_estimate",
+        "evidence_ids": [
+          "EV010",
+          "EV014"
+        ],
+        "key_sensitivity": "毛利率与研发费用率",
+        "missing_inputs": [
+          "2026全年利润指引",
+          "毛利率中枢"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "eps_cny",
+        "unit": "CNY",
+        "base_period": "FY2025",
+        "base_value": 1.095,
+        "year_1_value": 1.334,
+        "year_2_value": null,
+        "year_3_value": null,
+        "formula": "parent_net_profit / diluted_share_count 2324.338 mn",
+        "assumption_status": "calculated",
+        "evidence_ids": [
+          "EV010",
+          "EV044"
+        ],
+        "key_sensitivity": "利润及股份数",
+        "missing_inputs": [
+          "权威总股本",
+          "摊薄收益率"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "operating_cash_flow",
+        "unit": "CNY mn",
+        "base_period": "2026H1",
+        "base_value": -427.54,
+        "year_1_value": null,
+        "year_2_value": null,
+        "year_3_value": null,
+        "formula": "reported 2026H1 OCF",
+        "assumption_status": "reported",
+        "evidence_ids": [
+          "EV036",
+          "EV039"
+        ],
+        "key_sensitivity": "存货/应收/应付变动",
+        "missing_inputs": [
+          "FY2026 OCF",
+          "2025H1 OCF口径确认"
+        ]
+      },
+      {
+        "segment": "consolidated",
+        "metric": "rd_spend",
+        "unit": "CNY mn",
+        "base_period": "2026H1",
+        "base_value": 2652.38,
+        "year_1_value": 5304.76,
+        "year_2_value": null,
+        "year_3_value": null,
+        "formula": "2026E = 2026H1 x2 run-rate",
+        "assumption_status": "calculated_run_rate",
+        "evidence_ids": [
+          "EV027",
+          "EV031"
+        ],
+        "key_sensitivity": "研发投入强度",
+        "missing_inputs": [
+          "研发资本化/费用化拆分",
+          "全年研发预算"
+        ]
+      }
+    ],
+    "scenarios": [
+      {
+        "scenario": "bull",
+        "probability_pct": 30.0,
+        "operating_assumptions": [
+          "2026E收入22,000 mn，H2显著加速，DCU4/超节点放量",
+          "2026E净利率18.5%，毛利率和产品结构改善",
+          "OCF逐步正常化，但本packet暂不给FCF数值"
+        ],
+        "parent_net_profit_cny_mn": 4070.0,
+        "eps_cny": 1.7510361336846822,
+        "fcf_cny_mn": null,
+        "valuation_method": "2026E PE",
+        "valuation_multiple": 180.0,
+        "fair_value_per_share": 315.16,
+        "evidence_ids": [
+          "KPE02",
+          "KPE05",
+          "EV012"
+        ],
+        "falsification": "三季报毛利率继续下滑，或DCU4出货时点后移。",
+        "missing_inputs": [
+          "FCF",
+          "分产品量价"
+        ]
+      },
+      {
+        "scenario": "base",
+        "probability_pct": 45.0,
+        "operating_assumptions": [
+          "2026E收入18,198 mn = 2026H1 run-rate x2",
+          "2026E净利率维持Q1 17.034%",
+          "盈利增长与存货/应收扩张并存，现金转化弱"
+        ],
+        "parent_net_profit_cny_mn": 3099.93,
+        "eps_cny": 1.333682909556058,
+        "fcf_cny_mn": null,
+        "valuation_method": "2026E PE",
+        "valuation_multiple": 140.0,
+        "fair_value_per_share": 186.72,
+        "evidence_ids": [
+          "EV014",
+          "EV025",
+          "EV031"
+        ],
+        "falsification": "全年收入低于18,198 mn或净利率显著低于17%。",
+        "missing_inputs": [
+          "全年收入指引",
+          "FCF"
+        ]
+      },
+      {
+        "scenario": "bear",
+        "probability_pct": 25.0,
+        "operating_assumptions": [
+          "2026E收入16,000 mn，H2需求不及预期",
+          "毛利率承压，2026E净利率13.5%",
+          "存货跌价/回款拖累，OCF持续弱"
+        ],
+        "parent_net_profit_cny_mn": 2160.0,
+        "eps_cny": 0.9292968178768829,
+        "fcf_cny_mn": null,
+        "valuation_method": "2026E PE",
+        "valuation_multiple": 70.0,
+        "fair_value_per_share": 65.03,
+        "evidence_ids": [
+          "EV012",
+          "EV014",
+          "EV036",
+          "EV042"
+        ],
+        "falsification": "毛利率稳定或OCF恢复，则bear概率下调。",
+        "missing_inputs": [
+          "FCF",
+          "需求强度"
+        ]
+      }
+    ],
+    "readiness": "partial",
+    "readiness_reasons": [
+      "仅一个披露分部，但CPU/DCU产品收入拆分缺失，无法独立检验两大赛道。",
+      "未取得2026全年指引；2026E仅能用2026H1研发投入/占比反推收入，再以H1 run-rate推算，属计算值而非公司指引。",
+      "2026H1 OCF转负与利润增长之间存在未调阅附表就无法解释的缺口；研发资本化/费用化口径也未完全核对。",
+      "Required consolidated three-year forecast lines are incomplete.",
+      "Material segment three-year driver lines are missing: 服务器/超节点系统集成与交付, 高端处理器（CPU 与 DCU）"
+    ]
+  },
+  "market_expectations": {
+    "sell_side_observations": [
+      {
+        "intelligence_id": "KSI01",
+        "kpe_ids": "KPE05",
+        "published_at": "2026-08-17T22:52",
+        "institution": "机构未识别",
+        "analyst_or_author": "纪要小能手",
+        "freshness": "高时效/3天",
+        "rating_signal": "未披露",
+        "forecast_facts": "国产算力集体迭代，加速出货 26H1，寒武纪、海光信息、摩尔线程、壁仞科技收入同比均高增",
+        "valuation_facts": "未提取到目标价/估值方法与倍数",
+        "normalized_points": "无可标准化数值",
+        "revision_signal": "较前次口径发生变化；尚无可同口径比较的标准化数值",
+        "source_quote": "[红包]【申万计算机】继续重申... [红包]【申万计算机】继续重申：国产算力起点，重视供应链机会260817 2026年是中国互联网资本开支起点，2027年继续扩张 字节预计资本开支2027年进入千亿美金级别 腾讯WorkBuddy 日活破千万，26Q2资本开支超预期达528亿元； 阿里Q1投入269亿元，预计后续上修空间充足。 超节点放量在即 华为Atlas 950 SuperPoD、阿里磐久128和中科曙光scaleX640为代表的国产超节点方案成熟，配合自研芯片形成了“系统级协同”架构。 大厂自研超节点方案也已确定。 预计2026全年超节点渗透率20%，2027年渗透率翻倍提升。 国产算力集体迭代，加速出货 26H1，寒武纪、海光信息、摩尔线程、壁仞科技收入同比均高增。 26H2，国产AI芯片将继续迭代，昇腾950DT、壁仞BR20X、海光DCU4等新品问世，能力对标H200/B系列芯片。 重点方向 [玫瑰]超节点..."
+      },
+      {
+        "intelligence_id": "KSI02",
+        "kpe_ids": "KPE12",
+        "published_at": "2026-08-17T21:52",
+        "institution": "机构未识别",
+        "analyst_or_author": "纪要小能手",
+        "freshness": "高时效/3天",
+        "rating_signal": "推荐措辞（非标准评级）",
+        "forecast_facts": "②HG芯片生态：定制化产品测试指标达到海光极限要求，下游服务器厂商已明确140万支MOQ，预计获得海光生态50%+份额，2027年进入大批量采购阶段 / ⑤盈利预测及投资建议：2027年国产算力方向迎来大爆发，有望兑现近80亿增量收入（HW50亿+海光8亿+半导体14亿+光8亿），对应12-15亿利润，叠加主业军用连接器年化5亿利润，整体利润近20亿，给30XPE第一阶段目标看到600亿，国产放量阶段看到1000亿市值，当下仅300亿市值，显著低估，重点推荐！",
+        "valuation_facts": "⑤盈利预测及投资建议：2027年国产算力方向迎来大爆发，有望兑现近80亿增量收入（HW50亿+海光8亿+半导体14亿+光8亿），对应12-15亿利润，叠加主业军用连接器年化5亿利润，整体利润近20亿，给30XPE第一阶段目标看到600亿，国产放量阶段看到1000亿市值，当下仅300亿市值，显著低估，重点推荐！",
+        "normalized_points": "rating=推荐措辞（非标准评级）",
+        "revision_signal": "窗口内首次识别，暂无同机构前序可比",
+        "source_quote": "【航天电器】国产算力核心配套商... 【航天电器】国产算力核心配套商，多款产品转批产带来高增长拐点 ①H公司高速模组：昇腾950时代重新招标，航天电器预计获得20~30%份额，26Q3起批量出货，27年300万张卡放量，450亿市场空间。 ②HG芯片生态：定制化产品测试指标达到海光极限要求，下游服务器厂商已明确140万支MOQ，预计获得海光生态50%+份额，2027年进入大批量采购阶段。 ③ 半导体/存储测试机：子公司苏州华旃已打通国产ATE测试机功能板卡与待测芯片之间关键数据供给通道，深度绑定长川科技、华峰测控等国内头部测试机厂商，2026H1订单近400%增长，全年有望兑现8-10亿订单，27年存储测试机放量带来更大收入与利润弹性。 ④ ELS光源+光纤背板：2026年完成全系列产品线布局研发并同步送样，海外客户已实现批量出货。 ⑤盈利预测及投资建议：2027年国产算力方向迎来大爆发，有望兑现近80亿增量收入（HW50..."
+      },
+      {
+        "intelligence_id": "KSI03",
+        "kpe_ids": "KPE10",
+        "published_at": "2026-08-17T08:47",
+        "institution": "民生证券",
+        "analyst_or_author": "纪要小能手",
+        "freshness": "高时效/3天",
+        "rating_signal": "未披露",
+        "forecast_facts": "再次深度PPT解读 https://1ij.cn/TKrQM （四）20260301第四期 1、KIMI“龙虾”玩法演示 2、“龙虾”受益方向：国产大模型、云与数据安全 3、再谈Token需求“通胀”云涨价 https://1ij.cn/d3EWx （五）20260307第五期 OpenClaw爆发增长、智能体云平台与华为昇腾算力 https://1ij.cn/Q2rVy （六）20260314第六期 “龙虾”之火，可以燎原 https://1ij.cn/uU9vX （七）20260328第七期 1、AI存算...",
+        "valuation_facts": "再次深度PPT解读 https://1ij.cn/TKrQM （四）20260301第四期 1、KIMI“龙虾”玩法演示 2、“龙虾”受益方向：国产大模型、云与数据安全 3、再谈Token需求“通胀”云涨价 https://1ij.cn/d3EWx （五）20260307第五期 OpenClaw爆发增长、智能体云平台与华为昇腾算力 https://1ij.cn/Q2rVy （六）20260314第六期 “龙虾”之火，可以燎原 https://1ij.cn/uU9vX （七）20260328第七期 1、AI存算...",
+        "normalized_points": "无可标准化数值",
+        "revision_signal": "窗口内首次识别，暂无同机构前序可比",
+        "source_quote": "【国联民生计算机】小吕说AI纪... annotation: 【国联民生计算机】小吕说AI纪要 笔记链接 External Link Artifacts:；external_link_url: https://note.youdao.com/ynoteshare/index.html?id=2a5fcec9e2bc946fe02dc814041c69ca external_link_status: resolved external_link_title: 【国联民生计算机】小吕说AI纪要20260816.note external_link_reason: external_link_text: 202608016第二十三期 时间：2026年8月16日 主讲：国联民生计算机首席吕伟 计算机首席 吕伟 计算机 白青瑞 今天由我们针对智谱GLM 5.3在刚刚过去的周末所引发的全球范围评测反馈，以及该模型对智谱公司后续股价走势..."
+      }
+    ],
+    "valuation_closure": {
+      "current_price_cny": 246.33,
+      "diluted_share_count_mn": 2324.3381,
+      "core_value_per_share_cny": 186.72,
+      "probability_weighted_fair_value_per_share_cny": 194.82950000000002,
+      "option_value_per_share_cny": null,
+      "other_adjustments_per_share_cny": null,
+      "fair_value_per_share_cny": 194.83,
+      "expected_return_pct": -20.906913490033695,
+      "formula": "p_weighted = 0.30*bull_FV + 0.45*base_FV + 0.25*bear_FV; bull FV = 1.751 x 180; base FV = 1.334 x 140; bear FV = 0.929 x 70",
+      "rating_consistency_check": "无评级；仅记录当前价格与概率加权价值之差。",
+      "double_counting_checks": [
+        "系统集成/超节点optionality未加入核心价值，避免重复计入",
+        "所有情景均基于2026E合并口径净利润"
+      ],
+      "status": "partial",
+      "missing_inputs": [
+        "权威股份数",
+        "2027E/2028E利润",
+        "FCF和ROIC证据",
+        "期权价值"
+      ]
+    },
+    "rule": "单家机构是观察值；只有具备样本和口径的多机构数据才可称为一致预期。"
+  },
+  "knowledge_planet": {
+    "importance": "material_alternative_intelligence",
+    "use_rule": "每条线索必须落到模型变化、概率变化、验证变化或拒绝之一。",
+    "items": [
+      {
+        "evidence_id": "KPE02",
+        "source_type": "channel_check",
+        "published_at": "2026-08-17T07:38",
+        "source_reliability": "C_private_unverified",
+        "bias_profile": "channel_selection_bias",
+        "adoption_ceiling": "scenario_or_verification_only",
+        "target_excerpt": "能力与 K3 相当（参数量仅 7-8 千亿），前期错杀修复中，9-10 月下一代预训练模型发布或迎反转。国产算力财报落地：寒武纪营收低于预期但存货口径可接受，海光略超中值，天数智芯供应扰动缓解、下周起进入较好买点；核心推荐寒武纪、海光信息、天数智芯，模型侧智谱。算租继续推荐宏景...",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "asp_or_price",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 跟踪 2026 年中报与三季报中毛利率变化，以及 DCU4 新品定价。",
+        "verification_gate": "跟踪 2026 年中报与三季报中毛利率变化，以及 DCU4 新品定价。",
+        "grounding_status": "grounded_quote",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE03",
+        "source_type": "channel_check",
+        "published_at": "2026-08-19T10:12",
+        "source_reliability": "C_private_unverified",
+        "bias_profile": "channel_selection_bias",
+        "adoption_ceiling": "scenario_or_verification_only",
+        "target_excerpt": "为模型能力正更直接地转化为产品使用、收入增长与定价权。 投资建议：重点关注算力服务、国产芯片与超节点，以及具备场景、数据和企业交付能力的2B AI应用厂商，推荐海光信息、浪潮信息、神州数码、深信服、智谱、MiniMax、达梦数据、海天瑞声、金蝶国际、鼎捷数智、中控技术、视源股份、国能日新。",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "utilization_or_backlog",
+        "allowed_role": "verification_item",
+        "decision_outcome": "scenario probabilities changed; use only the validated before/after triplets",
+        "verification_gate": "等待公司中报披露产能利用率/订单收入确认节奏。",
+        "grounding_status": "unverified_quote",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE05",
+        "source_type": "industry_weekly_data",
+        "published_at": "2026-08-17T22:52",
+        "source_reliability": "B_identified_professional",
+        "bias_profile": "neutral_or_data",
+        "adoption_ceiling": "model_input_after_crosscheck",
+        "target_excerpt": "系统级协同”架构。 大厂自研超节点方案也已确定。 预计2026全年超节点渗透率20%，2027年渗透率翻倍提升。 国产算力集体迭代，加速出货 26H1，寒武纪、海光信息、摩尔线程、壁仞科技收入同比均高增。 26H2，国产AI芯片将继续迭代，昇腾950DT、壁仞BR20X、海光DCU4等新品问世，能力对标H200/B系列芯片。 重点方向 [玫瑰]超节点服务器：浪潮信息、华勤技术（电子）、联想集团、中科曙光、紫光股份（通信） [玫瑰]AI芯片：寒武纪、海光信息、天数智芯、壁仞科技、摩尔线程 [玫瑰]连接器（部分军工）：华丰科技、胜蓝股份、中航光电、航天电器、立讯精密",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "segment_volume",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 跟踪公司产品出货量/收入指引，并与客户 capex 计划交叉验证。",
+        "verification_gate": "跟踪公司产品出货量/收入指引，并与客户 capex 计划交叉验证。",
+        "grounding_status": "unverified_quote",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE08",
+        "source_type": "sell_side_push",
+        "published_at": "2026-08-17T22:31",
+        "source_reliability": "B_identified_professional",
+        "bias_profile": "sell_side_optimism",
+        "adoption_ceiling": "model_input_after_crosscheck",
+        "target_excerpt": "前指向约6000亿美元。 2）采购标的从一台服务器变成一座工厂——GPU、CPU、网络、基础设施软件打包交付，价值量分配规则随之重写。 3）国产路径同构：昇腾/海光/寒武纪→超节点→万卡集群→国产AI工厂。26Q3/Q4是国产算力收入与利润集中确认的时点，业绩拐点比订单口径更硬。 核心判断：下一阶段真正被定价的不是\"谁有国产GPU\"，而是谁能把国产GPU做成超节点、再把超节点堆成万卡级AI工厂！系统集成能力决定单GW价值量落在谁的报表里。 系统级交付/超节点，最受益也最需验证：海光信息、寒武纪、中科曙光。高速互联，弹性最前置、需求最刚性：中际旭创、新易盛、光迅科技。互联载体PCB/连接器，卡数→互联数→价值量：沪电股份、胜宏科技、深南电路、华丰科技、航天电器。",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "utilization_or_backlog",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption or scenario probability change until 关注公司超节点相关产品出货与收入确认，评估系统集成业务利润率。",
+        "verification_gate": "关注公司超节点相关产品出货与收入确认，评估系统集成业务利润率。",
+        "grounding_status": "grounded_quote",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE01",
+        "source_type": "industry_weekly_data",
+        "published_at": "2026-08-16T14:02",
+        "source_reliability": "B_identified_professional",
+        "bias_profile": "neutral_or_data",
+        "adoption_ceiling": "model_input_after_crosscheck",
+        "target_excerpt": "增速约7%。 • 中国AI半导体机遇：DeepSeek等大模型推动推理需求爆发，本土代工链AI GPU生产能力持续提升；推荐标的覆盖AI芯片（寒武纪、天数智芯、海光信息）、设备（北方华创、中微公司）、存储（兆易创新、南亚科）及测试（KYEC、MPI）等环节。 • 长期驱动与挑战：增长动力来自推理侧、边缘AI、定制ASIC的渗透；短期限制因素包括美国能源约束、中国芯片产能瓶颈、监管政策及预算压力；技术破局方向聚焦CoWoS/SoIC先进封装、HBM、CPO、氮化镓800V高压直流等。",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "segment_volume",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "grounding_status": "ledger_only",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE04",
+        "source_type": "channel_check",
+        "published_at": "2026-08-18T08:58",
+        "source_reliability": "C_private_unverified",
+        "bias_profile": "channel_selection_bias",
+        "adoption_ceiling": "scenario_or_verification_only",
+        "target_excerpt": "目地在马来西亚的液冷项目已在一季度完工。此外，＃公司已间接进入英伟达GB300/Rubin产业链，供应CDU等产品。 🔥＃数据中心液冷龙头、定制B200、昇腾、海光液冷方案 ✔公司温控设备出货量连续四年蝉联国内算力中心基础设施液冷（含冷板液冷和浸没液冷）市场榜首，市占率超过50%。其中在浸没相变领域，＃公司是国内唯一实现浸没相变液冷大规模商业化部署的企业。新一代相变浸没液冷整机柜解决方案 C8000 V3.0，散热能力超过200W/cm²，最高可支持单机柜功率超过900kW，达到MW级。 ✔＃公司可以基于包括不限于B200、H200、昇腾、海光等国内外主流芯片为客户提供定制化冷板液冷解决方案，并且均有实际案例落地。 🔥＃光合生态（海光信息/中科曙光）核心标的",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "segment_volume",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "grounding_status": "ledger_only",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE06",
+        "source_type": "company_research_feedback",
+        "published_at": "2026-08-17T13:36",
+        "source_reliability": "C_private_unverified",
+        "bias_profile": "company_promotion",
+        "adoption_ceiling": "scenario_or_verification_only",
+        "target_excerpt": "i、智谱、千问等持续迭代，未来资本开支持续增长的确定性较强； 我们建议这个时点可以重视国产算力产业链： — 代工厂：中芯国际、华虹公司； — 算力芯片：寒武纪、海光信息； — 先进封测：长电科技、通富微电、甬矽电子； — 昇腾产业链：长川科技、伟测科技、杰华特、兴森科技、强一股份；",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "utilization_or_backlog",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "grounding_status": "ledger_only",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE07",
+        "source_type": "channel_check",
+        "published_at": "2026-08-17T08:52",
+        "source_reliability": "C_private_unverified",
+        "bias_profile": "channel_selection_bias",
+        "adoption_ceiling": "scenario_or_verification_only",
+        "target_excerpt": "峰环境、行云科技、中威电子、赛意信息； 物理AI：中控技术、品茗科技、东土科技、敏芯股份、能科科技、索辰科技、海康威视等。 洁净室：国投中鲁 国产算力：寒武纪、海光信息、中科曙光",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "unmapped",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "grounding_status": "ledger_only",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE09",
+        "source_type": "sell_side_push",
+        "published_at": "2026-08-17T09:00",
+        "source_reliability": "B_identified_professional",
+        "bias_profile": "sell_side_optimism",
+        "adoption_ceiling": "model_input_after_crosscheck",
+        "target_excerpt": "，国内模型追赶预期亦较为充分，模型迭代在未来半年大概率进入平台期，明年可关注model2、Astra、Gemini4等模型进展。 重点推荐：金山办公、中控技术、海光信息、紫光股份、浪潮信息、中科曙光、新大陆、卓易信息、合合信息、汉得信息、泛微网络 欢迎沟通交流~",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "scenario_probability",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "grounding_status": "ledger_only",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE10",
+        "source_type": "sell_side_push",
+        "published_at": "2026-08-17T08:47",
+        "source_reliability": "B_identified_professional",
+        "bias_profile": "sell_side_optimism",
+        "adoption_ceiling": "model_input_after_crosscheck",
+        "target_excerpt": "【国联民生计算机】小吕说AI纪... annotation: 【国联民生计算机】小吕说AI纪要 笔记链接 External Link Artifacts:；external_link_url: https://note.youdao.com/ynoteshare/index.html?id=2a5fcec9e2bc946fe02dc814041c69ca external_link_status: resolved external_link_title: 【国联民生计算机】小吕说AI纪要20260816.note external_link_reason: external_link_te…",
+        "entity_scope": "unverified_target_scope",
+        "affected_variable": "unmapped",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "grounding_status": "ledger_only",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE11",
+        "source_type": "industry_weekly_data",
+        "published_at": "2026-08-20T15:44",
+        "source_reliability": "B_identified_professional",
+        "bias_profile": "neutral_or_data",
+        "adoption_ceiling": "model_input_after_crosscheck",
+        "target_excerpt": "23%），新易盛/东山精密-索尔斯等。 3【湖北光模块】： 出口5.8亿元（环比+78%），汇绿生态/联特科技/光迅科技/华工科技/嘉元科技-恩达通等。 4【上海光模块】： 上海出口2亿元（环比+3%）；浙江出口2.7亿元（环比+7%），剑桥等。 5【光缆广东-美国】： 出口7.2亿元（环比+6%），太辰光/特发等。 6【光缆湖北-美国】： 出口3.6亿元（环比+0%），长芯博创等。 7【光缆上海-美国】： 出口3.6亿元（环比+39%），康宁等。 海关光纤、光缆出口单价均创年内新高，光纤缆及光模块MPO海关数据库欢迎交流~ 余伟民/王彦龙/董伟康15102187507",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "unmapped",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "grounding_status": "ledger_only",
+        "chapter_id": "chapter_6_expectations"
+      },
+      {
+        "evidence_id": "KPE12",
+        "source_type": "sell_side_push",
+        "published_at": "2026-08-17T21:52",
+        "source_reliability": "B_identified_professional",
+        "bias_profile": "sell_side_optimism",
+        "adoption_ceiling": "model_input_after_crosscheck",
+        "target_excerpt": "昇腾950时代重新招标，航天电器预计获得20~30%份额，26Q3起批量出货，27年300万张卡放量，450亿市场空间。 ②HG芯片生态：定制化产品测试指标达到海光极限要求，下游服务器厂商已明确140万支MOQ，预计获得海光生态50%+份额，2027年进入大批量采购阶段。 ③ 半导体/存储测试机：子公司苏州华旃已打通国产ATE测试机功能板卡与待测芯片之间关键数据供给通道，深度绑定长川科技、华峰测控等国内头部测试机厂商，2026H1订单近400%增长，全年有望兑现8-10亿订单，27年存储测试机放量带来更大收入与利润弹性。 ④ ELS光源+光纤背板：2026年完成全系列产品线布局研发并同步送样，海外客户已实现批量出货。 ⑤盈利预测及投资建议：2027年国产算力方向迎来大爆发，有望兑现近80亿增量收入（HW50亿+海光8亿+半导体14亿+光8亿），对应12-15亿利润，叠加主业军用连接器年化5亿利润，整体利润近20亿，给30XPE第一阶段目标看到600亿，国产放量阶段看到1000亿市值，当下仅300亿市值，显著低估，重点推荐！",
+        "entity_scope": "target_mentioned",
+        "affected_variable": "segment_volume",
+        "allowed_role": "verification_item",
+        "decision_outcome": "unchanged/watch: no model assumption, scenario probability, valuation, rating, or sizing change until cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "verification_gate": "cross-check with filings/Tushare/price-volume/announcements before hard use",
+        "grounding_status": "ledger_only",
+        "chapter_id": "chapter_6_expectations"
+      }
+    ]
+  },
+  "evidence_index": [
+    {
+      "evidence_id": "EV001",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "Financial-report look-back: 900 days",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV002",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "2026, 半年",
+      "status": "reported",
+      "text": "Compacted 海光信息技术股份有限公司2026年半年度报告: 243073 chars -> 120503 chars.",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV003",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "Compacted 海光信息技术股份有限公司2025年年度报告: 374004 chars -> 129733 chars.",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV004",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "20260814, 2026, 半年",
+      "status": "reported",
+      "text": "20260814: 海光信息技术股份有限公司2026年半年度报告",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV005",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "20260408, 2026, 季度",
+      "status": "reported",
+      "text": "20260408: 海光信息技术股份有限公司2026年第一季度报告",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV006",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "20260408, 2025, 年度",
+      "status": "reported",
+      "text": "20260408: 海光信息技术股份有限公司2025年年度报告",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV007",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "20251016, 2025, 季度",
+      "status": "reported",
+      "text": "20251016: 海光信息技术股份有限公司2025年第三季度报告",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV008",
+      "source_module": "filing_intelligence",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "/ announcement_lookup / ready / Found 4 candidate financial-report announcement(s) from primary and CNINFO sources. /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV009",
+      "source_module": "earnings_model",
+      "variable": "unmapped",
+      "period": "Q1, 20260331",
+      "status": "reported",
+      "text": "/ latest reported / Q1 / 20260331 / 4033592186.34 / 687094336.71 / 16134368745.36 / 2748377346.84 / 23212634985.2819 / 3733706884.2552 / historical median 0331 share 18.4% /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV010",
+      "source_module": "earnings_model",
+      "variable": "unmapped",
+      "period": "FY, 20251231",
+      "status": "reported",
+      "text": "/ latest annual / FY / 20251231 / 14376889476.95 / 2544890905.62 / 14376889476.95 / 2544890905.62 / 14376889476.95 / 2544890905.62 / FY actual /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV011",
+      "source_module": "earnings_model",
+      "variable": "revenue",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ Revenue base / 4033592186.34 / N/A / YoY: 20260331 vs 20250331 / top-line starting point for volume × price × mix /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV012",
+      "source_module": "earnings_model",
+      "variable": "segment_margin",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ Gross margin / 55.604% / -5.59pp / YoY: 20260331 vs 20250331 / main bridge from demand to gross profit /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV013",
+      "source_module": "earnings_model",
+      "variable": "unmapped",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ Operating margin / 24.0529% / -6.36pp / YoY: 20260331 vs 20250331 / tests pricing, mix, and cost absorption /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV014",
+      "source_module": "earnings_model",
+      "variable": "segment_margin",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ Net margin / 17.0343% / -4.04pp / YoY: 20260331 vs 20250331 / captures final earnings conversion /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV015",
+      "source_module": "earnings_model",
+      "variable": "operating_expense",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ Finance-expense ratio / -0.8866% / +0.76pp / YoY: 20260331 vs 20250331 / captures leverage drag or relief /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV016",
+      "source_module": "earnings_model",
+      "variable": "profit_or_eps",
+      "period": "20260331, 20250331",
+      "status": "reported",
+      "text": "/ OCF / net profit / 0.0984 / N/A / YoY: 20260331 vs 20250331 / tests earnings quality and cash realization /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV017",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "Look-back window: 30 days",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV018",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "/ 一般公告 / 6 /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV019",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "/ 业绩/财报 / 1 /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV020",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "20260814, 2026-08-14",
+      "status": "reported",
+      "text": "/ 20260814 / 一般公告 / 688041.SH / 海光信息 / 海光信息技术股份有限公司信息披露管理制度 / https://static.cninfo.com.cn/finalpage/2026-08-14/1225472514.PDF /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV021",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "20260814, 2026, 半年",
+      "status": "reported",
+      "text": "/ 20260814 / 一般公告 / 688041.SH / 海光信息 / 海光信息技术股份有限公司2026年半年度报告摘要 / https://static.cninfo.com.cn/finalpage/2026-08-14/1225472513.PDF /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV022",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "20260814, 2026-08-14",
+      "status": "reported",
+      "text": "/ 20260814 / 一般公告 / 688041.SH / 海光信息 / 海光信息技术股份有限公司信息披露暂缓与豁免业务管理制度 / https://static.cninfo.com.cn/finalpage/2026-08-14/1225472512.PDF /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV023",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "20260814, 2026-08-14",
+      "status": "reported",
+      "text": "/ 20260814 / 一般公告 / 688041.SH / 海光信息 / 海光信息技术股份有限公司内幕信息知情人登记管理制度 / https://static.cninfo.com.cn/finalpage/2026-08-14/1225472511.PDF /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV024",
+      "source_module": "company_events",
+      "variable": "unmapped",
+      "period": "20260814, 2026, 半年",
+      "status": "reported",
+      "text": "/ 20260814 / 一般公告 / 688041.SH / 海光信息 / 海光信息技术股份有限公司2026年半年度报告 / https://static.cninfo.com.cn/finalpage/2026-08-14/1225472510.PDF /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV025",
+      "source_module": "company_business_model",
+      "variable": "revenue",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ high_r_and_d_technology / 高研发技术产品型 / quantified disclosure / 海光信息技术股份有限公司2025年年度报告: (一) 主营业务分析 1、 利润表及现金流量表相关科目变动分析表 营业收入 14,376,889,476.95 9,162,148,135.92 56.92 销售费用 633,029,862.80 175,506,644.84 260.69 管理费用 134,324,609.66 141,848,712.10 -5.30 财务费用 -174...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV026",
+      "source_module": "company_business_model",
+      "variable": "segment_volume",
+      "period": "2025, 年度",
+      "status": "reported",
+      "text": "/ product_manufacturer / 产品制造 / 产能出货型 / quantified disclosure / 海光信息技术股份有限公司2025年年度报告: (一) 主营业务分析 1、 利润表及现金流量表相关科目变动分析表 营业收入 14,376,889,476.95 9,162,148,135.92 56.92 销售费用 633,029,862.80 175,506,644.84 260.69 管理费用 134,324,609.66 141,848,712.10 -5.30 财务费用 -17...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV027",
+      "source_module": "company_business_model",
+      "variable": "segment_margin",
+      "period": "2026, 半年, 上年同期",
+      "status": "reported",
+      "text": "/ core_revenue_engine / semiannual / 海光信息技术股份有限公司2026年半年度报告: 公司研发投入 265,238.28 万元，较上年同期增长 55.05%，研发投入占营业收入比例 29.15%；公 / Defines what actually drives the income statement. /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV028",
+      "source_module": "company_business_model",
+      "variable": "unmapped",
+      "period": "2026, 半年",
+      "status": "reported",
+      "text": "/ segment_mix / semiannual / 海光信息技术股份有限公司2026年半年度报告: 需求爆发式增长。从收入结构演进趋势看，推理工作负载的服务器收入占比稳步提升，训练工作 / Shows whether different profit pools are being mixed together. /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV029",
+      "source_module": "company_business_model",
+      "variable": "unmapped",
+      "period": "2026, 半年",
+      "status": "reported",
+      "text": "/ customer_and_channel / semiannual / 海光信息技术股份有限公司2026年半年度报告: （4）本企业/本公司及相关企业不会向与公司存在竞争性业务的公司、企业或其他经营实体提供资金、技术、销售渠道、客户信息支持。 / Reveals demand source, concentration, and market validation. /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV030",
+      "source_module": "company_business_model",
+      "variable": "unmapped",
+      "period": "2026, 半年",
+      "status": "calculated",
+      "text": "/ geography / semiannual / 海光信息技术股份有限公司2026年半年度报告: 计算机系统集成；物业管理；货物及技术进出口业务。（依法须经批准的项目，经相关部门批准 / Explains whether growth depends on a specific geography or expansion lane. /",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV031",
+      "source_module": "company_business_model",
+      "variable": "revenue",
+      "period": "2026, 半年, 上年同期",
+      "status": "reported",
+      "text": "/ reinvestment_engine / semiannual / 海光信息技术股份有限公司2026年半年度报告: 公司研发投入 265,238.28 万元，较上年同期增长 55.05%，研发投入占营业收入比例 29.15%；公 / Shows how today's cash is being converted into tomorrow's earnings power. /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV032",
+      "source_module": "company_business_model",
+      "variable": "unmapped",
+      "period": "2025, 年度",
+      "status": "calculated",
+      "text": "/ product / annual / 海光信息技术股份有限公司2025年年度报告: 1. 主营业务情况 12 / 231 海光信息技术股份有限公司2025 年年度报告 公司的主营业务是研发、设计和销售应用于服务器、工作站等计算、存储设备中的高端处理 器。公司的产品包括海光通用处理器（CPU）和海光协处理器（DCU）。海光 CPU 系列产品兼容 x86 指令集以及国际上主流操作系统和应用软件，软硬件生态丰富，性能优异，安全可靠，已经 广泛应用于电信、金融、互联网、教育、交通等重要行业或领域。海光 DCU 系...",
+      "chapter_id": "chapter_1_company"
+    },
+    {
+      "evidence_id": "EV033",
+      "source_module": "industry_cycle",
+      "variable": "balance_sheet",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "Do not state R32, R125, lithium, copper, gold, inventory, or spread changes as facts unless they appear in the evidence table.",
+      "chapter_id": "chapter_2_industry_chain"
+    },
+    {
+      "evidence_id": "EV034",
+      "source_module": "industry_cycle",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "missing",
+      "text": "If cycle evidence says bottom-testing or evidence-limited, use language such as `bottom-right validation stage`, `右侧待验证`, or `needs confirmation`.",
+      "chapter_id": "chapter_2_industry_chain"
+    },
+    {
+      "evidence_id": "EV035",
+      "source_module": "industry_kpi",
+      "variable": "segment_margin",
+      "period": "unspecified",
+      "status": "missing",
+      "text": "/ coverage_grade / report_types_seen / missing_report_types / answered_questions / core_pack_status / confidence_read /",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV036",
+      "source_module": "industry_kpi",
+      "variable": "profit_or_eps",
+      "period": "2026, 半年",
+      "status": "reported",
+      "text": "/ accounting_reconciliation / Check signs, units, periods, and cross-statement consistency before a number enters the PM memo. / operating_cash_flow: 海光信息技术股份有限公司2026年半年度报告: 1,631,411,695.35 1,090,013,467.67 49.67 性损益的净利润 经营活动产生的现金流量净额 -427,541,001.36 2,176...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV037",
+      "source_module": "industry_kpi",
+      "variable": "unmapped",
+      "period": "2025, 年度",
+      "status": "calculated",
+      "text": "/ segment_economics_depth / Decide whether each business line has enough disclosed scale, growth, margin, cash quality, and valuation treatment. / 海光信息技术股份有限公司2025年年度报告: 1. 主营业务情况 12 / 231 海光信息技术股份有限公司2025 年年度报告 公司的主营业务是研发、设计和销售应用于服务器、工作站等计算、存储设备中的高端处理 器。公司...",
+      "chapter_id": "chapter_2_industry_chain"
+    },
+    {
+      "evidence_id": "EV038",
+      "source_module": "industry_kpi",
+      "variable": "unmapped",
+      "period": "2026, 半年",
+      "status": "reported",
+      "text": "/ footnote_radar / Surface decision-relevant notes that can hide risk or change confidence. / impairment_policy: 海光信息技术股份有限公司2026年半年度报告: 单位：元 币种：人民币 非经常性损益项目 金额 附注（如适用） 非流动性资产处置损益，包括已计提资产减值准备的冲 / impairment_policy: 海光信息技术股份有限公司2026年半年度报告: 非经常性损益项目 金额 附注（如适用...",
+      "chapter_id": "chapter_2_industry_chain"
+    },
+    {
+      "evidence_id": "EV039",
+      "source_module": "industry_kpi",
+      "variable": "profit_or_eps",
+      "period": "2026, 半年",
+      "status": "reported",
+      "text": "/ cash_flow_quality_decomposition / Separate accounting profit from cash conversion, working-capital drag, and demand visibility. / operating_cash_flow: 海光信息技术股份有限公司2026年半年度报告: 1,631,411,695.35 1,090,013,467.67 49.67 性损益的净利润 经营活动产生的现金流量净额 -427,541,001.36 2,...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV040",
+      "source_module": "industry_kpi",
+      "variable": "capex_or_roic",
+      "period": "2026, 半年",
+      "status": "reported",
+      "text": "/ capex_cip_return_bridge / Test whether capex, construction-in-progress, or investment assets are building returns or just absorbing capital. / long_term_equity_investments: 海光信息技术股份有限公司2026年半年度报告: 开发支出 422,290,530.46 1.17 306,912,222.40 0.86 37.59 增投入所致 主...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV041",
+      "source_module": "industry_kpi",
+      "variable": "segment_margin",
+      "period": "2026, 半年",
+      "status": "reported",
+      "text": "/ non_recurring_profit_quality / Distinguish core operating profit from investment income, fair-value moves, subsidies, asset disposals, impairment, and other one-off items. / impairment: 海光信息技术股份有限公司2026年半年度报告: 其中：利息费用 33,896,689.85 22,675,965.57 利息收入 100,...",
+      "chapter_id": "chapter_5_growth_forecast"
+    },
+    {
+      "evidence_id": "EV042",
+      "source_module": "industry_kpi",
+      "variable": "balance_sheet",
+      "period": "2026, 半年",
+      "status": "reported",
+      "text": "/ balance_sheet_forward_signals / Read balance-sheet leads before income-statement confirmation. / inventory: 海光信息技术股份有限公司2026年半年度报告: （三）财务风险 1. 存货跌价风险 公司战略备货增加，期末存货账面价值 751,822.21 万元，占期末资产总额的比例为 20.86%。 / inventory: 海光信息技术股份有限公司2026年半年度报告: 1. 存货跌价风险 公司战略备货...",
+      "chapter_id": "chapter_2_industry_chain"
+    },
+    {
+      "evidence_id": "EV043",
+      "source_module": "market_expectation",
+      "variable": "unmapped",
+      "period": "2026-08-20",
+      "status": "reported",
+      "text": "Valuation trade date: 2026-08-20",
+      "chapter_id": "chapter_6_expectations"
+    },
+    {
+      "evidence_id": "EV044",
+      "source_module": "market_expectation",
+      "variable": "unmapped",
+      "period": "unspecified",
+      "status": "reported",
+      "text": "/ Market cap (CNY) / 572554204173 / current equity value /",
+      "chapter_id": "chapter_6_expectations"
+    },
+    {
+      "evidence_id": "EV045",
+      "source_module": "market_expectation",
+      "variable": "valuation",
+      "period": "TTM",
+      "status": "reported",
+      "text": "/ PE TTM / 182.2314 / earnings multiple the market is paying now /",
+      "chapter_id": "chapter_7_valuation_rating"
+    },
+    {
+      "evidence_id": "EV046",
+      "source_module": "market_expectation",
+      "variable": "revenue",
+      "period": "TTM",
+      "status": "reported",
+      "text": "/ PS TTM / 31.7879 / sales multiple the market is paying now /",
+      "chapter_id": "chapter_6_expectations"
+    },
+    {
+      "evidence_id": "EV047",
+      "source_module": "market_expectation",
+      "variable": "valuation",
+      "period": "TTM",
+      "status": "calculated",
+      "text": "/ Implied TTM earnings (CNY) / 3141907509.7541 / market cap divided by PE TTM /",
+      "chapter_id": "chapter_7_valuation_rating"
+    },
+    {
+      "evidence_id": "EV048",
+      "source_module": "market_expectation",
+      "variable": "revenue",
+      "period": "TTM",
+      "status": "calculated",
+      "text": "/ Implied TTM sales (CNY) / 18011702697.3471 / market cap divided by PS TTM /",
+      "chapter_id": "chapter_6_expectations"
+    },
+    {
+      "evidence_id": "EV049",
+      "source_module": "market_expectation",
+      "variable": "valuation",
+      "period": "unspecified",
+      "status": "calculated",
+      "text": "/ PE percentile / 64.2 / 5-year valuation position /",
+      "chapter_id": "chapter_7_valuation_rating"
+    },
+    {
+      "evidence_id": "EV050",
+      "source_module": "market_expectation",
+      "variable": "valuation",
+      "period": "unspecified",
+      "status": "calculated",
+      "text": "/ PB percentile / 77.7 / 5-year valuation position /",
+      "chapter_id": "chapter_7_valuation_rating"
+    }
+  ],
+  "chapter_packets": [
+    {
+      "chapter_id": "chapter_1_company",
+      "title": "一、公司是谁、如何赚钱",
+      "reader_goal": "让普通投资者理解产品、客户、定价、收入确认、成本与现金回收。",
+      "selected_evidence_ids": [
+        "EV001",
+        "EV002",
+        "EV003",
+        "EV004",
+        "EV005",
+        "EV006",
+        "EV007",
+        "EV008",
+        "EV009",
+        "EV010",
+        "EV013",
+        "EV015"
+      ],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_2_industry_chain",
+      "title": "二、产业链位置与行业格局",
+      "reader_goal": "解释上下游、供需与价格形成，并把产业链变化传导到公司经营。",
+      "selected_evidence_ids": [
+        "EV033",
+        "EV034",
+        "EV037",
+        "EV038",
+        "EV042",
+        "EV083",
+        "EV085",
+        "EV086",
+        "EV087",
+        "EV088",
+        "EV089"
+      ],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_3_profit_pools",
+      "title": "三、业务拆解与核心利润池",
+      "reader_goal": "按核心、成长、波动和期权业务拆解收入、利润、现金与资本占用。",
+      "selected_evidence_ids": [],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_4_competition",
+      "title": "四、竞争优势、护城河与主要短板",
+      "reader_goal": "用历史或真同行验证规模、品牌、渠道、技术和成本优势。",
+      "selected_evidence_ids": [
+        "EV067",
+        "EV068",
+        "EV070",
+        "EV071",
+        "EV072",
+        "EV073",
+        "EV074"
+      ],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_5_growth_forecast",
+      "title": "五、增长逻辑、关键分歧与盈利预测",
+      "reader_goal": "围绕三至五个关键问题，把经营变量传导到三年盈利和现金流。",
+      "selected_evidence_ids": [
+        "EV011",
+        "EV012",
+        "EV014",
+        "EV016",
+        "EV025",
+        "EV026",
+        "EV027",
+        "EV031",
+        "EV035",
+        "EV036",
+        "EV039",
+        "EV040"
+      ],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_6_expectations",
+      "title": "六、市场预期差、风险与验证",
+      "reader_goal": "区分真实一致预期、单家卖方和反向隐含假设，并给出证伪日历。",
+      "selected_evidence_ids": [
+        "EV043",
+        "EV044",
+        "EV046",
+        "EV048"
+      ],
+      "knowledge_planet_ids": [
+        "KPE02",
+        "KPE03",
+        "KPE05",
+        "KPE08",
+        "KPE01",
+        "KPE04"
+      ],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    },
+    {
+      "chapter_id": "chapter_7_valuation_rating",
+      "title": "七、估值、评级与投资结论",
+      "reader_goal": "在完成公司、产业、模型和预期分析后，最后给出估值、评级与动作。",
+      "selected_evidence_ids": [
+        "EV045",
+        "EV047",
+        "EV049",
+        "EV050",
+        "EV054",
+        "EV056",
+        "EV060",
+        "EV075",
+        "EV076",
+        "EV077",
+        "EV078",
+        "EV079"
+      ],
+      "knowledge_planet_ids": [],
+      "writing_contract": "核心问题→清晰判断→产业/商业机制→少量决定性证据→最强反证与边界→财务或估值含义→自然过渡。不得按数据源逐项复述。"
+    }
+  ],
+  "preprocessing_notes": [
+    "原始上下文不直接成为公共报告结构。",
+    "知识星球线索已按目标实体、变量、允许用途和验证门槛重新路由。",
+    "所有章节必须围绕读者问题展开，数据只作为决定性证据进入正文。"
+  ]
+}

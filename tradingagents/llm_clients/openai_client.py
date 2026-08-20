@@ -10,6 +10,19 @@ from .base_client import BaseLLMClient, normalize_content
 from .validators import validate_model
 
 
+# DeepSeek caches exact prompt prefixes automatically.  Keep this provider-only
+# contract byte-for-byte stable and place it before role/company-specific text so
+# repeated calls share a useful prefix without weakening any downstream mandate.
+_DEEPSEEK_CACHEABLE_QUALITY_PREFIX = """TradingAgents shared quality contract v1.
+Use supplied evidence only. Distinguish reported facts, reproducible calculations,
+estimates, proxies, inference, and missing data. Never invent a source, number,
+period, unit, company segment, or valuation input. Preserve application-owned
+canonical values unless an explicit evidence-backed change contract authorizes a
+revision. Missing evidence is neutral for direction and must remain a visible
+verification task. Follow the later role-specific instructions and output schema
+exactly; this shared contract does not replace or relax them."""
+
+
 class NormalizedChatOpenAI(ChatOpenAI):
     """ChatOpenAI with normalized content output.
 
@@ -77,6 +90,13 @@ class DeepSeekChatOpenAI(NormalizedChatOpenAI):
             reasoning = message.additional_kwargs.get("reasoning_content")
             if reasoning is not None:
                 message_dict["reasoning_content"] = reasoning
+        payload["messages"] = [
+            {
+                "role": "system",
+                "content": _DEEPSEEK_CACHEABLE_QUALITY_PREFIX,
+            },
+            *outgoing,
+        ]
         return payload
 
     def _create_chat_result(self, response, generation_info=None):

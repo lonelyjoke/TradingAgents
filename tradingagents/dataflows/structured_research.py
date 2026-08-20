@@ -17,6 +17,7 @@ from typing import Any, Literal, Mapping
 
 from pydantic import BaseModel, Field
 
+from .llm_component_cache import load_cached_model, store_cached_model
 from .research_evidence import extract_evidence_records
 from .research_dossier import (
     build_reader_research_dossier,
@@ -471,7 +472,10 @@ def _json_object(text: str) -> dict[str, Any]:
         return json.loads(match.group(0))
 
 
-def _invoke_semantic_llm(llm: Any, prompt: str) -> SemanticResearchExtraction:
+def _invoke_semantic_llm_uncached(
+    llm: Any,
+    prompt: str,
+) -> SemanticResearchExtraction:
     if llm is None:
         return SemanticResearchExtraction(preprocessing_notes=["LLM semantic preprocessing unavailable; deterministic fallback used."])
     structured_error: Exception | None = None
@@ -510,6 +514,40 @@ def _invoke_semantic_llm(llm: Any, prompt: str) -> SemanticResearchExtraction:
                 "semantic fallback did not return schema-valid JSON; "
                 f"structured_error={structured_error}; fallback_error={fallback_error}"
             ) from fallback_error
+
+
+def _invoke_semantic_llm(
+    llm: Any,
+    prompt: str,
+    *,
+    component_cache_dir: str | None = None,
+    component_cache_status: dict[str, str] | None = None,
+) -> SemanticResearchExtraction:
+    cached = load_cached_model(
+        component_cache_dir,
+        component="semantic_extraction",
+        version="semantic-v1",
+        prompt=prompt,
+        llm=llm,
+        schema=SemanticResearchExtraction,
+    )
+    if cached is not None:
+        if component_cache_status is not None:
+            component_cache_status["semantic_extraction"] = "hit"
+        return cached
+
+    if component_cache_status is not None:
+        component_cache_status["semantic_extraction"] = "miss"
+    result = _invoke_semantic_llm_uncached(llm, prompt)
+    store_cached_model(
+        component_cache_dir,
+        component="semantic_extraction",
+        version="semantic-v1",
+        prompt=prompt,
+        llm=llm,
+        value=result,
+    )
+    return result
 
 
 _SEGMENT_NUMERIC_ROW_RE = re.compile(
@@ -945,10 +983,12 @@ def build_structured_research_bundle(
     contexts: Mapping[str, str],
     llm: Any = None,
     underwriting_llm: Any = None,
+    repair_llm: Any = None,
     enable_llm: bool = True,
     enable_underwriting: bool = True,
     max_prompt_chars: int = 42000,
     underwriting_prompt_max_chars: int = 60000,
+    component_cache_dir: str | None = None,
 ) -> dict[str, Any]:
     payload = _compact_source_payload(contexts, max_chars=max_prompt_chars)
     kpe_rows = _known_kpe_rows(contexts.get("knowledge_planet", ""))
@@ -957,11 +997,14 @@ def build_structured_research_bundle(
     semantic = SemanticResearchExtraction()
     mode = "deterministic_only"
     errors: list[str] = []
+    component_cache_status: dict[str, str] = {}
     if enable_llm and llm is not None:
         try:
             semantic = _invoke_semantic_llm(
                 llm,
                 _semantic_prompt(symbol, as_of_date, payload, kpe_rows, sell_side_rows),
+                component_cache_dir=component_cache_dir,
+                component_cache_status=component_cache_status,
             )
             mode = "llm_semantic_plus_deterministic_validation"
         except Exception as exc:
@@ -1132,8 +1175,11 @@ def build_structured_research_bundle(
         contexts=contexts,
         structured_research=bundle,
         llm=underwriting_llm or llm,
+        repair_llm=repair_llm or llm,
         enable_llm=enable_underwriting,
         max_prompt_chars=underwriting_prompt_max_chars,
+        component_cache_dir=component_cache_dir,
+        component_cache_status=component_cache_status,
     )
     bundle["research_dossier"] = build_reader_research_dossier(
         symbol,
@@ -1141,6 +1187,7 @@ def build_structured_research_bundle(
         structured_research=bundle,
         contexts=contexts,
     )
+    bundle["_component_cache_status"] = component_cache_status
     return bundle
 
 

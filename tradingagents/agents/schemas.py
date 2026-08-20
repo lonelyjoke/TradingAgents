@@ -1859,10 +1859,11 @@ class SellSidePMDecision(BaseModel):
         ),
     )
     canonical_model_snapshot: list[CanonicalModelLine] = Field(
-        min_length=4,
+        default_factory=list,
         description=(
-            "Copy the Research Manager canonical model snapshot exactly. If the PM changes "
-            "a value, include the replacement here and a matching handoff_change_rows entry."
+            "Application-owned Research Manager canonical snapshot. The PM may leave this "
+            "empty; deterministic finalization injects every source row. If the PM changes "
+            "a value, include only the replacement plus a matching handoff_change_rows entry."
         ),
     )
     handoff_change_rows: list[ModelHandoffChange] = Field(

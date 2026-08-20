@@ -1,0 +1,36 @@
+{
+  "review": {
+    "revision_required": true,
+    "overall_assessment": "Deterministic quality router found actionable issues; send them directly to the bounded revision pass.",
+    "revision_instructions": [
+      "public thesis chapter missing strongest counterargument/boundary",
+      "public thesis chapter missing market-pricing implication",
+      "public thesis chapter missing falsification condition"
+    ]
+  },
+  "review_status": {
+    "mode": "deterministic_issue_router",
+    "agent": "Sell-Side Research Editor",
+    "structured_error": ""
+  },
+  "revision_requested": true,
+  "revision_applied": false,
+  "revision_status": {
+    "mode": "free_text_fallback",
+    "agent": "Portfolio Manager Editorial Revision",
+    "structured_error": "1 validation error for SellSidePMDecision\n  Input should be a valid dictionary or instance of SellSidePMDecision [type=model_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/model_type; fallback validation=Expecting value: line 1 column 1 (char 0); repair attempt 1 validation=Expecting ',' delimiter: line 554 column 4 (char 20674); repair attempt 2 validation=Expecting ',' delimiter: line 554 column 4 (char 20674)"
+  },
+  "initial_handoff_issues": [],
+  "initial_analytical_issues": [
+    "public thesis chapter missing strongest counterargument/boundary",
+    "public thesis chapter missing market-pricing implication",
+    "public thesis chapter missing falsification condition"
+  ],
+  "remaining_handoff_issues": [],
+  "remaining_analytical_issues": [
+    "public thesis chapter missing strongest counterargument/boundary",
+    "public thesis chapter missing market-pricing implication",
+    "public thesis chapter missing falsification condition"
+  ],
+  "revision_rejection_reasons": []
+}

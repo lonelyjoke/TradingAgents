@@ -499,6 +499,49 @@ def _merge_manager_canonical_snapshot(
     return payload, notes
 
 
+def _preserve_accepted_handoff_changes(
+    base_payload: dict,
+    revised_payload: dict,
+) -> tuple[dict, list[str]]:
+    """Keep accepted PM numeric changes through an editorial-only revision."""
+
+    payload = deepcopy(revised_payload)
+    base_changes = {
+        str(row.get("line_id", "")).strip().lower(): dict(row)
+        for row in base_payload.get("handoff_change_rows", []) or []
+        if str(row.get("line_id", "")).strip()
+        and str(row.get("disposition", "")).lower() == "accepted"
+    }
+    if not base_changes:
+        return payload, []
+    base_rows = {
+        str(row.get("line_id", "")).strip().lower(): dict(row)
+        for row in base_payload.get("canonical_model_snapshot", []) or []
+        if str(row.get("line_id", "")).strip()
+    }
+    revised_changes = {
+        str(row.get("line_id", "")).strip().lower(): dict(row)
+        for row in payload.get("handoff_change_rows", []) or []
+        if str(row.get("line_id", "")).strip()
+    }
+    revised_rows = {
+        str(row.get("line_id", "")).strip().lower(): dict(row)
+        for row in payload.get("canonical_model_snapshot", []) or []
+        if str(row.get("line_id", "")).strip()
+    }
+    notes: list[str] = []
+    for line_id, change in base_changes.items():
+        if line_id not in revised_changes:
+            payload.setdefault("handoff_change_rows", []).append(change)
+            notes.append(f"preserved accepted handoff change contract {line_id}")
+        if line_id not in revised_rows and line_id in base_rows:
+            payload.setdefault("canonical_model_snapshot", []).append(
+                base_rows[line_id]
+            )
+            notes.append(f"preserved accepted PM replacement row {line_id}")
+    return payload, notes
+
+
 def _canonical_handoff_issues(
     manager_payload: dict,
     pm_payload: dict,
@@ -1398,7 +1441,22 @@ def _editorial_revision_prompt(
     lessons_line: str,
     recent_decision_line: str,
 ) -> str:
-    """Ask the same selected deep model for one bounded, evidence-preserving revision."""
+    """Ask the low-cost repair model for one bounded, evidence-preserving revision."""
+
+    revision_seed = deepcopy(decision_payload)
+    # The canonical numeric snapshot is injected from the Research Manager
+    # after validation. Re-sending and re-emitting it wastes tokens and is a
+    # common source of accidental line loss during editorial-only revisions.
+    accepted_change_ids = {
+        str(row.get("line_id", "")).strip().lower()
+        for row in revision_seed.get("handoff_change_rows", []) or []
+        if str(row.get("disposition", "")).lower() == "accepted"
+    }
+    revision_seed["canonical_model_snapshot"] = [
+        row
+        for row in revision_seed.get("canonical_model_snapshot", []) or []
+        if str(row.get("line_id", "")).strip().lower() in accepted_change_ids
+    ]
 
     return f"""SENIOR SELL-SIDE EDITOR REVISION PASS
 The draft below was already generated under the complete Portfolio Manager mandate and
@@ -1406,7 +1464,9 @@ validated as a SellSidePMDecision object. Revise that existing object; do not re
 research process and do not recreate unaffected sections from raw module dumps.
 
 Revise the PM draft once using the editorial findings below. Return the complete
-SellSidePMDecision object, including fields that are unchanged.
+SellSidePMDecision object, including fields that are unchanged except the
+application-owned `canonical_model_snapshot`, which must contain only replacement
+rows referenced by accepted `handoff_change_rows` and otherwise remain empty.
 
 Hard preservation rules:
 - Keep the original rating unchanged unless the deterministic findings explicitly contain
@@ -1418,8 +1478,9 @@ Hard preservation rules:
   Preserve tickers, source IDs, product names, metric abbreviations and units, but never
   preserve a complete upstream English sentence in the public report.
 - Do not invent facts, estimates, sources, segment allocations, or unavailable data.
-- Preserve the Research Manager canonical snapshot exactly unless an explicit accepted
-  handoff change row states old value, new value, evidence, and recalculated impact.
+- Leave unchanged Research Manager rows out of `canonical_model_snapshot`. Retain only
+  replacement rows referenced by explicit accepted handoff changes. The application
+  restores the remaining Research Manager snapshot deterministically.
 - Resolve deterministic handoff issues by restoring the manager value or documenting a
   valid accepted change; do not hide the discrepancy in prose.
 - Revise only sections named by the editor or needed for cross-section consistency.
@@ -1446,7 +1507,7 @@ Prior-decision context that must remain reflected when relevant:
 {lessons_line}{recent_decision_line}
 
 Original PM draft JSON:
-{json.dumps(decision_payload, ensure_ascii=False, separators=(',', ':'))}
+{json.dumps(revision_seed, ensure_ascii=False, separators=(',', ':'))}
 
 Editorial review JSON:
 {json.dumps(review_payload, ensure_ascii=False, separators=(',', ':'))}
@@ -1465,8 +1526,14 @@ Fundamental reconciliation excerpt:
 """
 
 
-def create_portfolio_manager(llm):
+def create_portfolio_manager(llm, *, repair_llm=None):
+    repair_model = repair_llm or llm
     structured_llm = bind_structured(llm, SellSidePMDecision, "Portfolio Manager")
+    repair_structured_llm = bind_structured(
+        repair_model,
+        SellSidePMDecision,
+        "Portfolio Manager Editorial Revision",
+    )
     editorial_review_llm = bind_structured(
         llm,
         SellSideEditorialReview,
@@ -1686,7 +1753,7 @@ def create_portfolio_manager(llm):
 - Preserve each shared `UWQ` id in `question_verdicts.question_id` and reconcile the Research Manager's `evidence_utilization_ledger`. Every decisive evidence id must have exactly one adopted/rejected/watch/conflict_unresolved disposition. Adopted evidence needs a named old->new forecast, probability or valuation effect; rejected evidence needs a precise reason; watch/unresolved evidence needs a dated gate. Do not close valuation while a rights-ownership or attributable-cash conflict remains unresolved.
 - The forecast narrative must interpret rather than duplicate the renderer's table. State whether the model is bottom-up, top-down, or hybrid; explain the 2-3 largest earnings/cash drivers and the most fragile assumption. Do not write a precise volume, ASP, utilization, expense ratio, scenario probability or valuation multiple unless it has a historical/evidence anchor or is explicitly labeled an analyst range with sensitivity.
 - `core_theses` must contain only the 2-4 conclusions that decide the rating. Do not produce separate flat lists of thesis bullets and moat bullets. A moat is relevant only when observable evidence shows transmission into share/price, margin, turnover, cash conversion, ROIC or valuation, with the strongest counterevidence and a falsification gate.
-- Copy the machine-readable Research Manager `canonical_model_snapshot` line for line, including ids, periods, values and units. Any PM revision requires a matching accepted `handoff_change_rows` entry with old/new value, evidence ids and recalculated EPS/FCF/valuation impact. A prose claim of "no change" never overrides a numeric difference.
+- `canonical_model_snapshot` is application-owned data movement. Do not spend output tokens copying unchanged Research Manager rows; return an empty list when there is no accepted PM change. The application deterministically injects every canonical source row after generation. Any PM revision still requires the replacement row plus a matching accepted `handoff_change_rows` entry with old/new value, evidence ids and recalculated EPS/FCF/valuation impact. A prose claim of "no change" never overrides a numeric difference.
 - A forecast may be called bottom-up only when every material business unit has three numeric forward-year rows and their revenue/profit totals reconcile to the consolidated lines. Otherwise label it top-down or hybrid and name the missing shipment/ASP/margin inputs.
 - Public-report depth contract: target roughly 8,000-9,000 Chinese characters and let evidence density, not word-count ambition, determine the final length. Make the public memo a synthesized seven-chapter research journey: company/how it earns -> industrial-chain position -> business and profit pools -> competition/moat/weaknesses -> growth disputes and forecast -> market expectations/risks/verification -> valuation/rating/conclusion. They must contain the causal reasoning, decisive evidence, valuation/forecast outputs and verification gates needed to understand the recommendation. Use tables only for genuinely comparable numbers such as the three-year forecast and scenario valuation. Business mechanisms, segment economics, industry drivers, competition, moat, accounting quality and private intelligence must be concise reader-facing subsections or bullets, never wide prose tables. Raw KPE/KSI disposition logs, handoff/model-change audits and report-quality self-checks remain in the internal appendix.
 - The public report must read like an investor-facing sell-side note, not a research notebook. Do not publish raw research questions, agenda tables, evidence ledgers, unprocessed matrices or module-by-module recaps. If a thesis-critical metric is unavailable, write the investor-facing conclusion as: available disclosure does not show the metric, therefore the report uses a qualitative judgment, the implication is lower confidence or a bounded scenario, and the named verification item is required.
@@ -1969,6 +2036,7 @@ If an important investment claim depends on an unverified commodity price, produ
             "Portfolio Manager",
             return_metadata=True,
             fallback_schema=SellSidePMDecision,
+            repair_llm=repair_model,
         )
         pm_decision_payload = pm_generation_status.pop("validated_payload", {})
         pm_generation_status["schema"] = "SellSidePMDecision"
@@ -2035,6 +2103,13 @@ If an important investment claim depends on an unverified commodity price, produ
                 )
                 deterministic_model_notes.extend(lineage_notes)
                 deterministic_model_notes.extend(methodology_notes)
+                pm_decision_payload, post_normalization_handoff_notes = (
+                    _merge_manager_canonical_snapshot(
+                        manager_payload,
+                        pm_decision_payload,
+                    )
+                )
+                deterministic_model_notes.extend(post_normalization_handoff_notes)
                 normalized_decision = SellSidePMDecision.model_validate(
                     pm_decision_payload
                 )
@@ -2116,8 +2191,8 @@ If an important investment claim depends on an unverified commodity price, produ
 
         if revision_requested:
             revised_decision, revision_status = invoke_structured_or_freetext(
-                structured_llm,
-                llm,
+                repair_structured_llm,
+                repair_model,
                 _editorial_revision_prompt(
                     decision_payload=pm_decision_payload,
                     review_payload=editorial_review_payload,
@@ -2132,9 +2207,16 @@ If an important investment claim depends on an unverified commodity price, produ
                 "Portfolio Manager Editorial Revision",
                 return_metadata=True,
                 fallback_schema=SellSidePMDecision,
+                repair_llm=repair_model,
             )
             revised_payload = revision_status.pop("validated_payload", {})
             if revised_payload:
+                revised_payload, preserved_change_notes = (
+                    _preserve_accepted_handoff_changes(
+                        pm_decision_payload,
+                        revised_payload,
+                    )
+                )
                 revised_payload, restored_revision_notes = (
                     _merge_manager_canonical_snapshot(
                         manager_payload,
@@ -2153,6 +2235,7 @@ If an important investment claim depends on an unverified commodity price, produ
                         revised_payload
                     )
                     revision_model_notes = [
+                        *preserved_change_notes,
                         *restored_revision_notes,
                         *revised_guidance_notes,
                         *revision_model_notes,
@@ -2175,6 +2258,13 @@ If an important investment claim depends on an unverified commodity price, produ
                 )
                 revision_model_notes.extend(revision_lineage_notes)
                 revision_model_notes.extend(revision_methodology_notes)
+                revised_payload, post_revision_handoff_notes = (
+                    _merge_manager_canonical_snapshot(
+                        manager_payload,
+                        revised_payload,
+                    )
+                )
+                revision_model_notes.extend(post_revision_handoff_notes)
                 normalized_revision = SellSidePMDecision.model_validate(revised_payload)
                 revised_handoff_issues = _canonical_handoff_issues(
                     manager_payload,
@@ -2233,6 +2323,12 @@ If an important investment claim depends on an unverified commodity price, produ
             synchronized_payload, public_sync_notes = (
                 _synchronize_public_numeric_spine(pm_decision_payload)
             )
+            synchronized_payload, final_handoff_notes = (
+                _merge_manager_canonical_snapshot(
+                    manager_payload,
+                    synchronized_payload,
+                )
+            )
             try:
                 synchronized_decision = SellSidePMDecision.model_validate(
                     synchronized_payload
@@ -2248,6 +2344,7 @@ If an important investment claim depends on an unverified commodity price, produ
             else:
                 pm_decision_payload = synchronized_payload
                 deterministic_model_notes.extend(public_sync_notes)
+                deterministic_model_notes.extend(final_handoff_notes)
                 final_trade_decision = render_sell_side_pm_decision(
                     synchronized_decision
                 )

@@ -761,6 +761,11 @@ class TradingAgentsGraph:
                 logger.info("Structured research cache hit: %s", cache_path.name)
                 cached = dict(cached)
                 cached["_cache_status"] = "hit"
+                if "_component_cache_status" in cached:
+                    cached["_component_cache_status"] = {
+                        "bundle": "hit",
+                        **dict(cached.get("_component_cache_status", {}) or {}),
+                    }
                 return cached
 
         bundle = build_structured_research_bundle(
@@ -769,6 +774,7 @@ class TradingAgentsGraph:
             contexts=contexts,
             llm=self.quick_thinking_llm,
             underwriting_llm=self.deep_thinking_llm,
+            repair_llm=self.quick_thinking_llm,
             enable_llm=bool(
                 self.config.get("structured_research_llm_enabled", True)
             ),
@@ -782,6 +788,17 @@ class TradingAgentsGraph:
             underwriting_prompt_max_chars=int(
                 self.config.get("company_underwriting_prompt_max_chars", 60000)
                 or 60000
+            ),
+            component_cache_dir=(
+                str(
+                    Path(self.config["data_cache_dir"])
+                    / "structured_research"
+                    / "components"
+                )
+                if self.config.get(
+                    "structured_research_component_cache_enabled", True
+                )
+                else None
             ),
         )
         if isinstance(bundle, dict):

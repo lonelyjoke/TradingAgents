@@ -16,6 +16,7 @@ from typing import Any, Literal, Mapping
 
 from pydantic import BaseModel, Field, model_validator
 
+from .llm_component_cache import load_cached_model, store_cached_model
 from .official_guidance import parse_official_guidance_record
 
 
@@ -614,7 +615,12 @@ JSON to repair:
 """
 
 
-def _invoke(llm: Any, prompt: str) -> CompanyUnderwritingPacket:
+def _invoke_uncached(
+    llm: Any,
+    prompt: str,
+    *,
+    repair_llm: Any = None,
+) -> CompanyUnderwritingPacket:
     structured_error: Exception | None = None
     try:
         bound = llm.with_structured_output(CompanyUnderwritingPacket)
@@ -647,7 +653,10 @@ def _invoke(llm: Any, prompt: str) -> CompanyUnderwritingPacket:
         # when the underlying analysis is useful. Give the LLM one constrained
         # repair pass for both JSON parsing and schema-validation failures
         # instead of losing the entire company model.
-        repaired = _response_text(llm.invoke(_repair_prompt(raw_content, initial_error)))
+        repair_model = repair_llm or llm
+        repaired = _response_text(
+            repair_model.invoke(_repair_prompt(raw_content, initial_error))
+        )
         try:
             payload = _json_object(str(repaired))
             return CompanyUnderwritingPacket.model_validate(payload)
@@ -657,6 +666,41 @@ def _invoke(llm: Any, prompt: str) -> CompanyUnderwritingPacket:
                 f"initial={initial_error}; repair={repair_error}; "
                 f"structured={structured_error}"
             ) from repair_error
+
+
+def _invoke(
+    llm: Any,
+    prompt: str,
+    *,
+    repair_llm: Any = None,
+    component_cache_dir: str | None = None,
+    component_cache_status: dict[str, str] | None = None,
+) -> CompanyUnderwritingPacket:
+    cached = load_cached_model(
+        component_cache_dir,
+        component="company_underwriting",
+        version="underwriting-v1",
+        prompt=prompt,
+        llm=llm,
+        schema=CompanyUnderwritingPacket,
+    )
+    if cached is not None:
+        if component_cache_status is not None:
+            component_cache_status["company_underwriting"] = "hit"
+        return cached
+
+    if component_cache_status is not None:
+        component_cache_status["company_underwriting"] = "miss"
+    result = _invoke_uncached(llm, prompt, repair_llm=repair_llm)
+    store_cached_model(
+        component_cache_dir,
+        component="company_underwriting",
+        version="underwriting-v1",
+        prompt=prompt,
+        llm=llm,
+        value=result,
+    )
+    return result
 
 
 def _valid_evidence_ids(structured: Mapping[str, Any]) -> set[str]:
@@ -2393,8 +2437,11 @@ def build_company_underwriting_packet(
     contexts: Mapping[str, str],
     structured_research: Mapping[str, Any],
     llm: Any = None,
+    repair_llm: Any = None,
     enable_llm: bool = True,
     max_prompt_chars: int = 60000,
+    component_cache_dir: str | None = None,
+    component_cache_status: dict[str, str] | None = None,
 ) -> dict[str, Any]:
     if not enable_llm or llm is None:
         return _fallback_packet(
@@ -2408,6 +2455,9 @@ def build_company_underwriting_packet(
         packet = _invoke(
             llm,
             _prompt(symbol, as_of_date, _forecast_years(as_of_date), payload),
+            repair_llm=repair_llm,
+            component_cache_dir=component_cache_dir,
+            component_cache_status=component_cache_status,
         )
         packet.symbol = symbol
         packet.as_of_date = str(as_of_date)

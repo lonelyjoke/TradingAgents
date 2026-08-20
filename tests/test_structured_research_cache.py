@@ -1,7 +1,13 @@
 from types import SimpleNamespace
 
+from pydantic import BaseModel
+
 from tradingagents.graph import trading_graph
 from tradingagents.graph.trading_graph import TradingAgentsGraph
+from tradingagents.dataflows.llm_component_cache import (
+    load_cached_model,
+    store_cached_model,
+)
 
 
 def _graph(tmp_path):
@@ -90,4 +96,42 @@ def test_transient_llm_failure_is_not_cacheable():
                 ]
             },
         }
+    )
+
+
+class _CachedExtraction(BaseModel):
+    summary: str
+
+
+def test_component_cache_reuses_only_exact_validated_prompt_and_model(tmp_path):
+    llm = SimpleNamespace(model_name="deepseek-v4-flash")
+    value = _CachedExtraction(summary="validated semantic result")
+    kwargs = {
+        "component": "semantic_extraction",
+        "version": "test-v1",
+        "prompt": "exact prompt and evidence",
+        "llm": llm,
+    }
+
+    store_cached_model(tmp_path, value=value, **kwargs)
+
+    assert load_cached_model(tmp_path, schema=_CachedExtraction, **kwargs) == value
+    assert (
+        load_cached_model(
+            tmp_path,
+            schema=_CachedExtraction,
+            **{**kwargs, "prompt": "changed evidence"},
+        )
+        is None
+    )
+    assert (
+        load_cached_model(
+            tmp_path,
+            schema=_CachedExtraction,
+            **{
+                **kwargs,
+                "llm": SimpleNamespace(model_name="deepseek-v4-pro"),
+            },
+        )
+        is None
     )

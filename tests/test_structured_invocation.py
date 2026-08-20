@@ -23,6 +23,7 @@ from tradingagents.agents.managers.portfolio_manager import (
     _enforce_forecast_methodology,
     _merge_manager_canonical_snapshot,
     _normalize_sell_side_lineage,
+    _preserve_accepted_handoff_changes,
     _recover_legacy_pm_decision,
     _synchronize_public_numeric_spine,
 )
@@ -267,6 +268,42 @@ def test_schema_repair_merges_delta_into_mostly_valid_response():
     assert llm.calls == 2
 
 
+def test_schema_repair_can_route_to_separate_low_cost_model():
+    class PrimaryLLM:
+        def __init__(self):
+            self.calls = 0
+
+        def invoke(self, _prompt):
+            self.calls += 1
+            return SimpleNamespace(content=json.dumps({"rating": "Hold"}))
+
+    class RepairLLM:
+        def __init__(self):
+            self.calls = 0
+
+        def invoke(self, _prompt):
+            self.calls += 1
+            return SimpleNamespace(content=json.dumps({"report": "repaired cheaply"}))
+
+    primary = PrimaryLLM()
+    repair = RepairLLM()
+    rendered, metadata = invoke_structured_or_freetext(
+        FailingStructured(),
+        primary,
+        "expensive research prompt",
+        lambda value: f"{value.rating}: {value.report}",
+        "Portfolio Manager",
+        return_metadata=True,
+        fallback_schema=TinyDecision,
+        repair_llm=repair,
+    )
+
+    assert rendered == "Hold: repaired cheaply"
+    assert primary.calls == 1
+    assert repair.calls == 1
+    assert metadata["repair_model_routed"] is True
+
+
 def test_schema_parser_accepts_literal_control_character_inside_json_string():
     class ControlCharacterLLM:
         def invoke(self, _prompt):
@@ -498,7 +535,17 @@ def test_editorial_review_is_advisory_and_section_specific():
 
 def test_editorial_revision_reuses_draft_without_original_full_prompt():
     prompt = _editorial_revision_prompt(
-        decision_payload={"rating": "Hold", "company_disaggregation": "existing depth"},
+        decision_payload={
+            "rating": "Hold",
+            "company_disaggregation": "existing depth",
+            "canonical_model_snapshot": [
+                {"line_id": "2026E_revenue", "value": 100},
+                {"line_id": "2026E_eps", "value": 2.5},
+            ],
+            "handoff_change_rows": [
+                {"line_id": "2026E_eps", "disposition": "accepted"}
+            ],
+        },
         review_payload={"revision_required": True, "findings": []},
         handoff_issues=[],
         manager_payload={"canonical_model_snapshot": [{"line_id": "2026E_revenue"}]},
@@ -515,6 +562,8 @@ def test_editorial_revision_reuses_draft_without_original_full_prompt():
     assert "PRIOR_LESSON" in prompt
     assert "PRIOR_DECISION" in prompt
     assert "recreate unaffected sections from raw module dumps" in prompt
+    assert '"line_id":"2026E_eps"' in prompt
+    assert '"line_id":"2026E_revenue","value":100' not in prompt
 
 
 def test_forecast_methodology_is_downgraded_when_segment_rows_do_not_reconcile():
@@ -934,6 +983,28 @@ def test_pm_merge_keeps_explicitly_accepted_canonical_change():
 
     assert merged["canonical_model_snapshot"][0]["value"] == 34500
     assert notes == []
+
+
+def test_editorial_revision_cannot_drop_previously_accepted_numeric_change():
+    base = {
+        "canonical_model_snapshot": [
+            {"line_id": "2027E_revenue", "value": 34500, "unit": "CNY mn"},
+        ],
+        "handoff_change_rows": [
+            {
+                "line_id": "2027E_revenue",
+                "disposition": "accepted",
+                "evidence_ids": ["EV013"],
+            }
+        ],
+    }
+    revised = {"canonical_model_snapshot": [], "handoff_change_rows": []}
+
+    protected, notes = _preserve_accepted_handoff_changes(base, revised)
+
+    assert protected["canonical_model_snapshot"] == base["canonical_model_snapshot"]
+    assert protected["handoff_change_rows"] == base["handoff_change_rows"]
+    assert len(notes) == 2
 
 
 def test_pm_merge_rejects_prose_only_change_and_semantic_duplicate():

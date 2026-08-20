@@ -113,6 +113,15 @@ class TestDeepSeekReasoningContent:
         assistant_dicts = [m for m in payload["messages"] if m.get("role") == "assistant"]
         assert assistant_dicts[0]["reasoning_content"] == "weighed bull case"
 
+    def test_every_request_starts_with_same_cacheable_quality_prefix(self):
+        client = self._client()
+        first = client._get_request_payload("analyze company A")
+        second = client._get_request_payload("challenge company B")
+
+        assert first["messages"][0]["role"] == "system"
+        assert first["messages"][0] == second["messages"][0]
+        assert "canonical values" in first["messages"][0]["content"]
+
 
 # ---------------------------------------------------------------------------
 # deepseek-reasoner: structured output unavailable, falls through to free-text
