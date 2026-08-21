@@ -1,0 +1,1627 @@
+{
+  "rating": "Hold",
+  "rating_posture": "中性；12个月目标价59.49元，对应现价空间-0.2%。评级依据为基本面与估值，后续按关键经营证据调整。",
+  "research_readiness": "partial",
+  "one_line_thesis": "300136.SZ 当前59.62元已大致定价核心消费电子温和修复与MLCC/商业卫星通信两条未验证第二曲线期权的平均预期，概率加权公允价值约59.47元、基准情景价值55.69元，因此维持持有并保持正面观察，等待可审计的分部收入、北美大客户验证和卫星订单披露后再决定升级或下调。",
+  "research_questions": [
+    "Q1: 2026-07-14信维电科股权收购及增资意向协议的交易对价、股权结构、并表时点与上市公司现金支出是什么？",
+    "Q2: 高端MLCC北美大客户验证能否转为合格供应商编码、爬坡订单和可审计收入？",
+    "Q3: 商业卫星通信/地面终端是否存在公司口径订单、交付和可归属收入？",
+    "Q4: 海外收入、客户集中度、美元结算/汇率与北美客户供应链传闻对交付和毛利率的实际影响是什么？",
+    "Q5: Q1 2026合并毛利率同比+2.30pp由产品结构、汇率、季节性还是一过性因素驱动，能否延续至2027-2028年？"
+  ],
+  "question_verdicts": [
+    {
+      "question_id": "Q1",
+      "question": "2026-07-14信维电科股权收购及增资意向协议的交易对价、股权结构、并表时点与上市公司现金支出是什么？",
+      "why_decisive": "直接决定并表归母净利、商誉/资产结构、少数股东损益和现金消耗，是2026-2028年预测与估值的硬约束。",
+      "conclusion": "仅签署意向协议，未披露总对价、上市公司自有资金/股份支付、交易前后持股比例、标的财务数据或并表时点。模型按未交易现状处理，不纳入信维电科并表利润或现金流出。",
+      "evidence_used": [
+        "EV018：2026-07-14《股权收购及增资意向协议》已披露，但对价、股权结构、标的财务、并表时点均未披露。",
+        "公司表述：相关交易各方已启动内部审批。"
+      ],
+      "strongest_counterevidence": "公司确认交易各方已启动内部审批，存在交易推进可能，但目前无正式交易方案。",
+      "conflict_resolution": "官方公告确认交易意向存在，但缺失核心条款；按未解决处理，不给任何并表贡献。",
+      "model_or_valuation_effect": "2026E/2027E/2028E归母净利、商誉、少数股东损益、FCF均不纳入交易影响；基准公平价值不变。",
+      "affected_model_lines": [
+        "2026E_parent_net_profit",
+        "2027E_parent_net_profit",
+        "2028E_parent_net_profit",
+        "2026E_fcf",
+        "2027E_fcf",
+        "2028E_fcf"
+      ],
+      "confidence": "low",
+      "next_verification": "公司披露正式股权收购及增资方案、审计报告、交易对价、交易前后股权比例和并表时点。"
+    },
+    {
+      "question_id": "Q2",
+      "question": "高端MLCC北美大客户验证能否转为合格供应商编码、爬坡订单和可审计收入？",
+      "why_decisive": "MLCC是当前高估值的重要第二曲线。验证失败或爬坡低于预期会同时冲击营收、毛利率和估值倍数；验证通过则打开牛市情景。",
+      "conclusion": "官方互动易确认部分关键高容料号已通过国内主流客户认证并批量交付，北美大客户验证仍在推进。但无MLCC收入、产能、良率、ASP、单位成本和客户验证里程碑，不能进入基准盈利；仅保留为牛市情景期权。",
+      "evidence_used": [
+        "KPE01：2026-08-11互动易确认国内主流客户认证并批量交付，北美大客户验证推进中。",
+        "KPE02：2026-08-10渠道称北美大客户或为英伟达、村田高端份额80%+，未验证。",
+        "KPE10：被引用但本次上下文未提供实质文本，需补检索。"
+      ],
+      "strongest_counterevidence": "村田等国际龙头在高端MLCC仍占主导；北美客户验证多轮、时点不定；公司无任何量化MLCC收入/良率/ASP。",
+      "conflict_resolution": "KPE01为官方互动易口径，方向采用；KPE02/KPE10为渠道或未验证线索，仅作为观察项，不进入数值。",
+      "model_or_valuation_effect": "基准不假设北美MLCC收入；牛市2027E归母净利900百万元保持为情景值；30%牛市概率保留，但受限于无MLCC收入披露，不升级。",
+      "affected_model_lines": [
+        "2027E_parent_net_profit",
+        "bull_fair_value"
+      ],
+      "confidence": "low",
+      "next_verification": "2026半年报/年报或公告披露被动元件/MLCC收入、合格料号、产能、利用率、良率、ASP及北美客户验证里程碑。"
+    },
+    {
+      "question_id": "Q3",
+      "question": "商业卫星通信/地面终端是否存在公司口径订单、交付和可归属收入？",
+      "why_decisive": "市场给予卫星/低轨链较高估值关注。若仅为卖方名单/主题映射而无公司收入利润传导，卫星期权必须保持在核心估值之外。",
+      "conclusion": "朱雀三号回收成功提升商业航天产业化预期，官方互动易确认定增募投商业卫星通信业务为第二增长曲线，但无公司口径订单、交付、backlog或可归属收入。卖方/渠道名单不构成公司订单证据。",
+      "evidence_used": [
+        "KPE03：2026-08-19卖方/渠道卫星链名单。",
+        "KPE04：2026-08-19国金证券将公司列为地面终端核心标的。",
+        "KPE06：2026-08-19渠道称21年起独家供SpaceX、定增35.6亿投卫星通信，未验证。",
+        "官方互动易：定增项目按客户需求投产，发展态势良好。",
+        "KPE08/KPE11/KPE12：被引用但本次上下文未提供实质文本。"
+      ],
+      "strongest_counterevidence": "公司已澄清不涉及军工，相关卫星业务收入贡献未披露。",
+      "conflict_resolution": "官方互动易仅确认战略方向；卖方/渠道名单为主题关联，不转为收入。",
+      "model_or_valuation_effect": "不进入基准收入/利润；牛市情景保留卫星订单贡献，但不设独立卫星估值桶。",
+      "affected_model_lines": [
+        "2027E_parent_net_profit",
+        "bull_fair_value"
+      ],
+      "confidence": "low",
+      "next_verification": "2026年报/后续公告披露公司口径商业卫星通信收入、客户、订单或backlog。"
+    },
+    {
+      "question_id": "Q4",
+      "question": "海外收入、客户集中度、美元结算/汇率与北美客户供应链传闻对交付和毛利率的实际影响是什么？",
+      "why_decisive": "海外收入与汇率直接作用营收和毛利，客户集中度影响应收/现金流与折价。区域结构和套保比例缺失导致汇率无法量化。",
+      "conclusion": "公司海外收入占比较高、美元结算，汇率敏感；但区域收入占比、前五大客户、套保比例、关税暴露均未披露。传闻澄清为未公开风险提示，不能单独定价。基准模型按汇率中性处理。",
+      "evidence_used": [
+        "EV019：公司称相关媒体报道缺乏事实依据。",
+        "EV026：海外收入/美元结算敞口存在，但比例未量化。",
+        "EV028：越南/墨西哥布局可能分散部分制造风险，但未量化收入与成本影响。"
+      ],
+      "strongest_counterevidence": "无区域收入拆分和套保比例，传闻无法与财务模型建立因果链。",
+      "conflict_resolution": "官方澄清为非量化证据；区域/客户/FX数据缺失，保持未解决。",
+      "model_or_valuation_effect": "汇率影响嵌入情景毛利率，不单独建立外汇估值桶；基准毛利率22.0%-22.8%不变。",
+      "affected_model_lines": [
+        "2026E_gross_margin",
+        "2027E_gross_margin",
+        "2028E_gross_margin"
+      ],
+      "confidence": "low",
+      "next_verification": "获取区域收入结构、前五大客户集中度、套保比例、关税/合规整改影响。"
+    },
+    {
+      "question_id": "Q5",
+      "question": "Q1 2026合并毛利率同比+2.30pp由产品结构、汇率、季节性还是一过性因素驱动，能否延续至2027-2028年？",
+      "why_decisive": "产品结构升级是利润方程核心。若Q1改善不可持续，2027-2028毛利率和净利率假设需下修，基准公平价值55.69元不成立。",
+      "conclusion": "Q1毛利率21.77%同比+2.30pp是已验证的合并口径事实，但分产品毛利率缺失，无法区分产品结构升级、汇率、一次性或季节性低基数。基准保留温和改善假设，但不给予结构化升级权重。",
+      "evidence_used": [
+        "EV012：Q1 2026合并毛利率21.7664%。",
+        "EV013：Q1 2026经营利润率6.2048%。",
+        "EV014：Q1 2026净利率5.2649%。",
+        "EV023：高端连接器产品技术水平获客户认可，但无量化。",
+        "EV029：研发投入相关，但无归因。",
+        "EV034：被引用，但本次上下文未提供实质文本。"
+      ],
+      "strongest_counterevidence": "Q4至Q1营收大幅季节性回落，可能掩盖需求变化；分产品毛利率缺失。",
+      "conflict_resolution": "Q1合并毛利率为报告事实，采用；产品结构归因未解决。",
+      "model_or_valuation_effect": "毛利率基准2026E 22.0%/2027E 22.4%/2028E 22.8%保持不变；若H1毛利率回落至21.77%以下，需下修基准公平价值。",
+      "affected_model_lines": [
+        "2026E_gross_margin",
+        "2027E_gross_margin",
+        "2028E_gross_margin",
+        "base_fair_value"
+      ],
+      "confidence": "medium",
+      "next_verification": "2026半年报分产品毛利率、汇率损益和Q2/Q3毛利率趋势。"
+    }
+  ],
+  "evidence_utilization_ledger": [
+    {
+      "evidence_id": "EV018",
+      "question_id": "Q1",
+      "disposition": "watch",
+      "contribution_or_reason": "官方公告确认股权收购及增资意向协议存在，但缺少核心交易条款，不能进入模型。",
+      "model_or_probability_effect": "模型保持未并表，无数值变化。",
+      "verification_gate": "正式交易方案、审计报告与并表时点公告。"
+    },
+    {
+      "evidence_id": "KPE01",
+      "question_id": "Q2",
+      "disposition": "adopted",
+      "contribution_or_reason": "官方互动易确认高端MLCC国内批量交付、北美验证推进，方向性证据成立，但无量化。",
+      "model_or_probability_effect": "趋势方向采用；不改变2027E基准634.35百万元，维持牛市概率30%不变。",
+      "verification_gate": "被动元件收入、合格料号、产能/良率/ASP及北美验证里程碑。"
+    },
+    {
+      "evidence_id": "KPE02",
+      "question_id": "Q2",
+      "disposition": "watch",
+      "contribution_or_reason": "渠道线索涉及英伟达直供、村田80%+份额、益阳产值300亿，未验证且含猜测。",
+      "model_or_probability_effect": "无模型变化。",
+      "verification_gate": "官方公告/定期报告证实北美客户身份、MLCC收入与估值。"
+    },
+    {
+      "evidence_id": "KPE10",
+      "question_id": "Q2",
+      "disposition": "watch",
+      "contribution_or_reason": "被引用但本次上下文未提供实质文本。",
+      "model_or_probability_effect": "无模型变化。",
+      "verification_gate": "检索KPE10原文并交叉核对MLCC收入/良率/客户。"
+    },
+    {
+      "evidence_id": "KPE03",
+      "question_id": "Q3",
+      "disposition": "watch",
+      "contribution_or_reason": "卖方/渠道名单将公司列为卫星链，不构成公司订单证据。",
+      "model_or_probability_effect": "无模型变化。",
+      "verification_gate": "公司口径卫星通信收入/订单。"
+    },
+    {
+      "evidence_id": "KPE04",
+      "question_id": "Q3",
+      "disposition": "watch",
+      "contribution_or_reason": "卖方地面终端核心标的名单，非公司订单。",
+      "model_or_probability_effect": "无模型变化。",
+      "verification_gate": "公司披露地面终端收入或客户。"
+    },
+    {
+      "evidence_id": "KPE05",
+      "question_id": "Q3",
+      "disposition": "watch",
+      "contribution_or_reason": "终端/基带射频分类名单，无公司归因订单。",
+      "model_or_probability_effect": "无模型变化。",
+      "verification_gate": "公司口径终端订单/收入。"
+    },
+    {
+      "evidence_id": "KPE06",
+      "question_id": "Q3",
+      "disposition": "watch",
+      "contribution_or_reason": "渠道称21年起供SpaceX、定增过会，属未验证私有线索；公司无SpaceX收入披露。",
+      "model_or_probability_effect": "无核心模型变化。",
+      "verification_gate": "公司公告或定期报告确认卫星终端客户与收入。"
+    },
+    {
+      "evidence_id": "KPE08",
+      "question_id": "Q3",
+      "disposition": "watch",
+      "contribution_or_reason": "被引用但本次上下文未提供实质文本。",
+      "model_or_probability_effect": "无模型变化。",
+      "verification_gate": "检索KPE08原文并核对卫星订单。"
+    },
+    {
+      "evidence_id": "KPE11",
+      "question_id": "Q3",
+      "disposition": "watch",
+      "contribution_or_reason": "被引用但本次上下文未提供实质文本。",
+      "model_or_probability_effect": "无模型变化。",
+      "verification_gate": "检索KPE11原文并核对卫星/终端业务。"
+    },
+    {
+      "evidence_id": "KPE12",
+      "question_id": "Q3",
+      "disposition": "watch",
+      "contribution_or_reason": "被引用但本次上下文未提供实质文本。",
+      "model_or_probability_effect": "无模型变化。",
+      "verification_gate": "检索KPE12原文并核对卫星/终端业务。"
+    },
+    {
+      "evidence_id": "EV019",
+      "question_id": "Q4",
+      "disposition": "watch",
+      "contribution_or_reason": "公司澄清媒体报道缺乏事实依据，但未公开内容，未能量化供应链影响。",
+      "model_or_probability_effect": "无模型变化。",
+      "verification_gate": "获取澄清公告原文及后续供应链合规披露。"
+    },
+    {
+      "evidence_id": "EV026",
+      "question_id": "Q4",
+      "disposition": "watch",
+      "contribution_or_reason": "确认海外收入/美元结算敞口存在，但无区域占比和套保比例。",
+      "model_or_probability_effect": "无模型变化。",
+      "verification_gate": "区域收入结构、汇率敞口和套保比例披露。"
+    },
+    {
+      "evidence_id": "EV028",
+      "question_id": "Q4",
+      "disposition": "watch",
+      "contribution_or_reason": "越南/墨西哥布局可能分散制造风险，但未量化收入与成本影响。",
+      "model_or_probability_effect": "无模型变化。",
+      "verification_gate": "海外基地产能/收入/毛利率数据。"
+    },
+    {
+      "evidence_id": "EV012",
+      "question_id": "Q5",
+      "disposition": "adopted",
+      "contribution_or_reason": "Q1 2026合并毛利率21.7664%为报告事实。",
+      "model_or_probability_effect": "采用为毛利率基准，2026E 22.0%为估计值；无变化。",
+      "verification_gate": "H1 2026分产品毛利率和汇率损益。"
+    },
+    {
+      "evidence_id": "EV013",
+      "question_id": "Q5",
+      "disposition": "adopted",
+      "contribution_or_reason": "Q1 2026经营利润率6.2048%为报告事实。",
+      "model_or_probability_effect": "采用为经营利润率分析基础；无变化。",
+      "verification_gate": "H1经营费用率和营业利润率。"
+    },
+    {
+      "evidence_id": "EV014",
+      "question_id": "Q5",
+      "disposition": "adopted",
+      "contribution_or_reason": "Q1 2026净利率5.2649%为报告事实。",
+      "model_or_probability_effect": "采用为净利率分析基础；无变化。",
+      "verification_gate": "H1财务费用、税项和少数股东损益。"
+    },
+    {
+      "evidence_id": "EV023",
+      "question_id": "Q5",
+      "disposition": "watch",
+      "contribution_or_reason": "高端连接器技术获客户认可，缺少单价、数量、毛利率和收入。",
+      "model_or_probability_effect": "无模型变化。",
+      "verification_gate": "高端连接器收入与毛利率。"
+    },
+    {
+      "evidence_id": "EV029",
+      "question_id": "Q5",
+      "disposition": "watch",
+      "contribution_or_reason": "研发投入高但未归因至新产品毛利。",
+      "model_or_probability_effect": "无模型变化。",
+      "verification_gate": "研发费用率及新品收入占比。"
+    },
+    {
+      "evidence_id": "EV034",
+      "question_id": "Q5",
+      "disposition": "watch",
+      "contribution_or_reason": "被引用但本次上下文未提供实质文本。",
+      "model_or_probability_effect": "无模型变化。",
+      "verification_gate": "检索EV034原文并核对季节性/毛利率归因。"
+    }
+  ],
+  "forecast_takeaways": [
+    {
+      "takeaway": "基准模型本质是利润无实质增长：2026E归母净利549.2百万元低于FY2025的708.69百万元，2027E 634.35百万元、2028E 706.43百万元也只是逐步回到FY2025水平。当前价格无法由基准盈利支撑，必须依赖牛市期权。",
+      "evidence_anchor": "FY2025 parent net profit 708.69百万CNY（EV010/EV024）；2026E/2027E/2028E parent net profit 549.20/634.35/706.43百万CNY。",
+      "financial_implication": "当前59.62元对应2027E EPS 0.656约91x PE；基准公平价值仅55.69元，当前价格高于基准公平价值。",
+      "confidence_and_risk": "中高置信度；若MLCC/卫星收入披露并显著超过基准假设，该结论失效。"
+    },
+    {
+      "takeaway": "Q1 2026毛利率改善是积极的合并口径事实，但无法归因到产品结构；不能单独证明2027-2028利润率扩张。",
+      "evidence_anchor": "Q1 2026 GM 21.77%，同比+2.30pp（EV012）；分产品毛利率缺失。",
+      "financial_implication": "若H1毛利率回落至21.77%以下，2026E/2027E/2028E毛利率和基准公平价值55.69元需下修。",
+      "confidence_and_risk": "中等置信度；主要风险是汇率、一次性收益或季节性因素。"
+    },
+    {
+      "takeaway": "Capex/FCF无法闭合，防御性安全价格和技术面支撑不足；趋势面提供的是择时约束而非基本面证伪。",
+      "evidence_anchor": "OCF estimates 424.20/507.50/600.50百万CNY；capex缺失；20日收益约-10.32%，60日约-46.76%。",
+      "financial_implication": "不能给出可靠DCF/安全价格；即使有正期权，也不宜在下跌趋势中左侧重仓。",
+      "confidence_and_risk": "中等置信度；若CAPEX和FCF披露后现金回报优于假设，可重新评估。"
+    }
+  ],
+  "forecast_assumptions": [
+    {
+      "parameter": "MLCC北美大客户验证与订单转化",
+      "affected_business": "被动元件/MLCC",
+      "historical_anchor": "公司未披露MLCC收入；KPE01 2026-08-11确认国内批量交付，北美验证中。",
+      "evidence_status": "missing",
+      "base_case": "2026E-2028E基准不含北美MLCC收入，仅有国内低基数导入。",
+      "bull_case": "2027E前北美验证通过并向AI服务器/车规爬坡，推动2027E parent NP至900百万CNY。",
+      "bear_case": "北美验证延迟/失败，2027E parent NP回落至450百万CNY。",
+      "rationale_and_evidence": "官方互动易只给方向，无收入/产能/良率/ASP；KPE02渠道线索未验证。",
+      "sensitivity": "2027E parent NP从base 634.35到bull 900约+41.9%，对应bull fair value 83.71 vs base 55.69；bear 450约-29.1%，对应32.55。",
+      "confidence": "low",
+      "verification_gate": "2026半年报/年报被动元件收入、北美客户验证里程碑、产能/良率/ASP。"
+    },
+    {
+      "parameter": "合并毛利率路径",
+      "affected_business": "合并口径",
+      "historical_anchor": "Q1 2026 21.77%，同比+2.30pp（EV012）。",
+      "evidence_status": "reported",
+      "base_case": "2026E 22.0% / 2027E 22.4% / 2028E 22.8%。",
+      "bull_case": "高端连接器/散热材料/MLCC放量，2028E毛利率>23%。",
+      "bear_case": "产品结构改善停滞或汇率/一次性因素逆转，毛利率<21.77%。",
+      "rationale_and_evidence": "Q1合并毛利率已验证，但归因和持续性未证实；分产品毛利率缺失。",
+      "sensitivity": "毛利率每下降0.5pp，2027E收入基准下毛利约减少48百万CNY，2027E parent NP约减少7%-8%。",
+      "confidence": "medium",
+      "verification_gate": "2026半年报分产品毛利率、汇率损益、Q2/Q3毛利率。"
+    },
+    {
+      "parameter": "商业卫星通信公司可归属收入",
+      "affected_business": "商业卫星通信/地面终端",
+      "historical_anchor": "公司口径收入/订单未披露。",
+      "evidence_status": "missing",
+      "base_case": "基准不含卫星收入。",
+      "bull_case": "2027E出现可归属卫星/地面终端收入，但金额未量化。",
+      "bear_case": "仍为卖方名单/主题映射，无收入贡献。",
+      "rationale_and_evidence": "KPE03-KPE06等为卖方/渠道名单；官方互动易仅证实战略方向。",
+      "sensitivity": "无独立卫星估值桶；期权隐含在牛市概率中。",
+      "confidence": "low",
+      "verification_gate": "2026年报/公告披露公司口径卫星通信收入、客户和订单。"
+    },
+    {
+      "parameter": "汇率与海外毛利率",
+      "affected_business": "海外收入/合并毛利率",
+      "historical_anchor": "区域收入占比和套保比例未披露。",
+      "evidence_status": "missing",
+      "base_case": "汇率中性。",
+      "bull_case": "人民币走弱利好出口毛利率。",
+      "bear_case": "人民币升值或套保不足压缩毛利。",
+      "rationale_and_evidence": "公司海外收入占比较高、美元结算，但无敞口和套保量化。",
+      "sensitivity": "无法量化；可能影响毛利率<1pp，间接影响2026E-2028E毛利。",
+      "confidence": "low",
+      "verification_gate": "区域收入结构、前五大客户、套保比例披露。"
+    }
+  ],
+  "core_theses": [
+    {
+      "rank": 1,
+      "takeaway": "当前价格已经基本定价MLCC/卫星期权的平均预期，基准消费电子盈利无法独立产生正期望。",
+      "decisive_question": "Q2/Q5",
+      "evidence": "PE TTM 78.37x、5年87.4%分位；概率加权公平价值59.47元，当前59.62元，预期回报约-0.25%；基准公平价值55.69元。",
+      "strongest_counterevidence": "若北美MLCC验证通过且卫星订单落地，牛市2027E parent NP 900百万元对应83.71元/股。",
+      "financial_transmission": "基准2027E parent NP 634.35百万元、85x=53890百万元，对应55.69元/股；当前价格隐含约91x base 2027E PE。",
+      "market_pricing": "市场已为MLCC/卫星第二曲线支付显著期权溢价，对已确认的国内MLCC交付和定增过会给予部分定价。",
+      "falsification_gate": "若MLCC收入或卫星订单在2027E前进入可审计报表并显著高于基准，或价格回落至55.69元以下，才支持升级/建仓；当前无。",
+      "verdict": "partial"
+    },
+    {
+      "rank": 2,
+      "takeaway": "Q1毛利率+2.30pp为真实但未归因的改善，只能支撑基准温和修复，不能支撑牛市。",
+      "decisive_question": "Q5",
+      "evidence": "Q1 2026 GM 21.77%（EV012）、OM 6.20%（EV013）、NM 5.26%（EV014）；分产品毛利率缺失。",
+      "strongest_counterevidence": "Q4至Q1收入大幅下降，季节性/汇率/一次性因素未被排除。",
+      "financial_transmission": "维持2026E GM 22.0% / 2027E 22.4% / 2028E 22.8%；若H1 GM<21.77%，基准公平价值需下修。",
+      "market_pricing": "市场隐含下半年盈利环比大幅改善，但缺少数值桥梁。",
+      "falsification_gate": "2026半年报毛利率回落至21.77%以下且MLCC/卫星收入仍为零。",
+      "verdict": "partial"
+    },
+    {
+      "rank": 3,
+      "takeaway": "高端MLCC国内批量交付是官方确认的方向性证据，但北美验证与规模收入仍未证实，是期权而非核心盈利。",
+      "decisive_question": "Q2",
+      "evidence": "KPE01官方互动易：国内批量交付、北美验证推进；无收入/产能/良率/ASP。",
+      "strongest_counterevidence": "村田高端份额80%+；公司未披露被动元件收入。",
+      "financial_transmission": "MLCC验证通过决定牛市2027E parent NP 900百万元 vs 基准634.35百万元。",
+      "market_pricing": "市场已对MLCC期权支付高估值，但未完全定价北美验证成功。",
+      "falsification_gate": "2027年一季报仍无MLCC收入披露或北美验证失败公告。",
+      "verdict": "unproven"
+    },
+    {
+      "rank": 4,
+      "takeaway": "商业卫星通信目前主要是卖方名单/主题映射，公司口径订单缺失，不应进入核心估值。",
+      "decisive_question": "Q3",
+      "evidence": "KPE03-KPE06卖方/渠道名单；官方互动易确认第二曲线战略，但无收入/订单。",
+      "strongest_counterevidence": "公司称卫星业务发展态势良好，按客户需求投产。",
+      "financial_transmission": "卫星收入不进入基准，隐含在牛市情景中。",
+      "market_pricing": "主题溢价已经存在，缺少实际订单验证。",
+      "falsification_gate": "2026年报/2027季报仍无公司口径卫星收入/订单，主题应降级为观察项。",
+      "verdict": "unproven"
+    }
+  ],
+  "segment_economics": [
+    {
+      "business_unit": "消费电子射频与模组（天线及模组/无线充电及模组/EMI-EMC器件/声学器件）",
+      "economic_role": "成熟核心，现金流基本盘",
+      "disclosure_basis": "analyst_estimate",
+      "scale_and_growth": "用户披露未量化，预计主导合并营收；FY2025合并营收8,909.78百万CNY。",
+      "margin_and_cash": "合并Q1 2026毛利率21.77%；分部毛利率、现金周期未披露。",
+      "driver_equation": "终端出货量×公司份额×单机价值量×产品结构；毛利率=收入-材料-制造成本。",
+      "valuation_treatment": "core",
+      "evidence_ids": [
+        "EV024",
+        "EV011",
+        "EV012",
+        "EV014"
+      ],
+      "missing_or_next_check": "分产品收入、毛利率、出货量、客户集中度；2026半年报。"
+    },
+    {
+      "business_unit": "高精密连接器与汽车互联产品",
+      "economic_role": "成熟+成长业务",
+      "disclosure_basis": "analyst_estimate",
+      "scale_and_growth": "产品技术获客户认可，但收入和增长未披露。",
+      "margin_and_cash": "毛利率、现金转换未披露。",
+      "driver_equation": "车型定点×项目爬坡×单车价值量；收入=项目交付×ASP。",
+      "valuation_treatment": "core",
+      "evidence_ids": [
+        "EV023",
+        "EV024",
+        "EV030"
+      ],
+      "missing_or_next_check": "高速/BTB连接器收入、汽车订单、单车价值量。"
+    },
+    {
+      "business_unit": "被动元件/高端MLCC",
+      "economic_role": "高弹性第二曲线期权",
+      "disclosure_basis": "missing",
+      "scale_and_growth": "国内批量交付、北美验证中；收入/产能/良率/ASP未披露。",
+      "margin_and_cash": "单位成本、良率、毛利率未披露。",
+      "driver_equation": "合格料号数×客户数×单客户出货量×ASP；毛利=出货量×(ASP-陶瓷浆料/电极/制造成本)-折旧/研发。",
+      "valuation_treatment": "scenario",
+      "evidence_ids": [
+        "KPE01",
+        "KPE02",
+        "KPE10"
+      ],
+      "missing_or_next_check": "MLCC收入、合格料号、产能/利用率/良率、北美客户验证结果。"
+    },
+    {
+      "business_unit": "商业卫星通信/地面终端",
+      "economic_role": "期权/主题业务",
+      "disclosure_basis": "missing",
+      "scale_and_growth": "公司口径收入/订单未披露。",
+      "margin_and_cash": "无订单、backlog、毛利率证据。",
+      "driver_equation": "期初backlog+新订单-交付确认；确认收入=交付×ASP。",
+      "valuation_treatment": "scenario",
+      "evidence_ids": [
+        "KPE03",
+        "KPE04",
+        "KPE05",
+        "KPE06",
+        "KPE08",
+        "KPE11",
+        "KPE12"
+      ],
+      "missing_or_next_check": "公司口径卫星通信收入、客户、订单、backlog。"
+    },
+    {
+      "business_unit": "信维电科收购",
+      "economic_role": "未落地交易",
+      "disclosure_basis": "missing",
+      "scale_and_growth": "对价、目标财务、并表范围未披露。",
+      "margin_and_cash": "并表利润、少数股东损益、商誉、现金支出未披露。",
+      "driver_equation": "并表后归母净利=目标净利×股权比例-少数股东损益；当前无法建立。",
+      "valuation_treatment": "excluded",
+      "evidence_ids": [
+        "EV018"
+      ],
+      "missing_or_next_check": "正式交易方案、审计报告、交易对价、股权比例、并表时点。"
+    }
+  ],
+  "business_model_mechanisms": [
+    {
+      "link": "客户与价值主张",
+      "how_it_works": "为全球科技企业提供天线/模组、无线充电、EMI/EMC、连接器、声学器件、汽车互联和被动元件，解决终端高频信号、电磁兼容、充电和结构件需求。",
+      "economic_driver": "客户机型/车型放量和产品结构选择决定出货量与ASP。",
+      "cash_and_capital_feature": "高研发、多基地制造，资本开支密集但尚未量化。",
+      "evidence_or_gap": "2025年报披露产品线完整；客户集中度和留存率未披露。",
+      "analyst_conclusion": "客户配套面广，收入引擎可控，但护城河的量化验证缺失。"
+    },
+    {
+      "link": "采购/认证决策",
+      "how_it_works": "终端客户对天线/连接器/MLCC进行多轮认证、送样和小批量验证，通过后进入批量采购。",
+      "economic_driver": "合格料号数、客户编码和验证通过率决定第二曲线收入斜率。",
+      "cash_and_capital_feature": "认证周期长，但通过后订单黏性高。",
+      "evidence_or_gap": "KPE01显示国内MLCC批量交付、北美验证推进；无客户编码和订单金额。",
+      "analyst_conclusion": "认证机制成立，但目前缺少可审计的转单证据。"
+    },
+    {
+      "link": "定价与产品结构",
+      "how_it_works": "产品结构升级淘汰低毛利产品，导入高速连接器、散热材料、高容MLCC等高ASP产品。",
+      "economic_driver": "ASP和产品组合决定毛利率能否从21.77%持续上移。",
+      "cash_and_capital_feature": "高毛利新品摊薄固定成本，但研发和产能投入先行。",
+      "evidence_or_gap": "EV012确认Q1毛利率改善；无分产品毛利率。",
+      "analyst_conclusion": "方向合理，但改善归因无法闭合。"
+    },
+    {
+      "link": "交付与收入确认",
+      "how_it_works": "按生产进度或客户订单交付元器件/模组，收入在控制权转移时确认。",
+      "economic_driver": "交付批次、验收/入厂检验通过转化收入。",
+      "cash_and_capital_feature": "存货和应收周转决定现金回款；合同负债极小。",
+      "evidence_or_gap": "Q1合同负债15.08百万CNY，占比不足1%。",
+      "analyst_conclusion": "合同负债不能作为需求改善的硬信号。"
+    },
+    {
+      "link": "成本栈",
+      "how_it_works": "原材料、制造成本、运费、质保、研发和销售管理费用构成成本栈。",
+      "economic_driver": "材料价格、良率、汇率和产能利用率决定毛利弹性。",
+      "cash_and_capital_feature": "良率低会同时侵蚀毛利与扩产资本回报。",
+      "evidence_or_gap": "MLCC浆料/电极、制造成本、良率未披露。",
+      "analyst_conclusion": "成本栈不可自下而上重建，利润弹性只能情景化。"
+    },
+    {
+      "link": "营运资金与再投资",
+      "how_it_works": "Q1 OCF/NP约0.77显示利润现金含量尚可，但全年Capex/FCF缺失。",
+      "economic_driver": "扩产、定增募投和收购支出现金需求未量化。",
+      "cash_and_capital_feature": "高研发高资本开支，自由现金流闭合受阻。",
+      "evidence_or_gap": "Capex/FCF缺失；定增和收购现金支出未量化。",
+      "analyst_conclusion": "现金回报和ROIC不能被可靠评估，估值折价依据不足。"
+    }
+  ],
+  "industry_driver_matrix": [
+    {
+      "driver": "消费电子终端需求",
+      "current_state_and_direction": "温和复苏/结构性升级，未见强劲放量数据。",
+      "dated_evidence": "FY2025营收8,909.78百万CNY，同比+1.90%；Q1 2026营收1,992.22百万CNY，环比明显回落。",
+      "affected_business": "消费电子射频与模组",
+      "financial_transmission": "终端出货和单机价值量决定核心收入与毛利率修复斜率。",
+      "confidence": "medium",
+      "next_verification": "2026H1分产品收入和Q2/Q3终端拉货。"
+    },
+    {
+      "driver": "高端MLCC国产替代",
+      "current_state_and_direction": "公司部分高容料号国内批量交付，北美验证未完成。",
+      "dated_evidence": "KPE01 2026-08-11；KPE02 2026-08-10渠道未验证。",
+      "affected_business": "被动元件/MLCC",
+      "financial_transmission": "验证通过转订单将拉动收入与毛利率；反之期权价值下降。",
+      "confidence": "low",
+      "next_verification": "2026半年报/年报被动元件收入、验证里程碑、良率/ASP。"
+    },
+    {
+      "driver": "商业航天/地面终端订单",
+      "current_state_and_direction": "行业催化升温，公司自身订单未证实。",
+      "dated_evidence": "朱雀三号回收成功2026-08-19；官方互动易称定增募投按客户需求投产。",
+      "affected_business": "商业卫星通信/地面终端",
+      "financial_transmission": "只有公司口径订单和收入才能形成盈利传导；名单映射无现金流。",
+      "confidence": "low",
+      "next_verification": "2026年报/公告披露卫星通信收入、客户、backlog。"
+    },
+    {
+      "driver": "海外收入与汇率",
+      "current_state_and_direction": "海外收入占比高、美元结算，短中期方向未量化。",
+      "dated_evidence": "EV026/EV028；公司澄清相关媒体报道缺乏事实依据（EV019）。",
+      "affected_business": "合并毛利率/财务费用",
+      "financial_transmission": "人民币升值或套保不足压缩毛利；净敞口和套保比例缺失。",
+      "confidence": "low",
+      "next_verification": "区域收入结构、前五大客户、套保比例。"
+    }
+  ],
+  "competition_landscapes": [
+    {
+      "business_unit": "消费电子射频与模组",
+      "market_boundary": "全球消费电子终端厂商的射频/模组一级配套",
+      "structure_and_concentration": "",
+      "direct_competitors": [
+        "立讯精密",
+        "Amphenol",
+        "TE Connectivity",
+        "Murata",
+        "硕贝德"
+      ],
+      "substitutes_self_supply_and_new_entrants": [
+        "天线集成化/芯片化",
+        "LDS/FPC替代",
+        "头部手机厂自研或垂直整合"
+      ],
+      "comparison_dimensions": [
+        "技术认证",
+        "交付规模",
+        "ASP",
+        "毛利率",
+        "研发强度"
+      ],
+      "company_relative_position": "全球客户配套较广，但份额与排名未披露。",
+      "competitor_likely_response": "国际龙头以技术绑定和机型覆盖压制，国内厂商价格追赶。",
+      "financial_transmission": "份额/ASP变动直接传导至营收与毛利；汇率影响海外利润。",
+      "evidence_status_and_ids": "partial；EV024/EV027/EV030",
+      "next_verification": "行业份额/客户结构数据。"
+    },
+    {
+      "business_unit": "被动元件/高端MLCC",
+      "market_boundary": "高容、小尺寸、高性能MLCC，覆盖消费级/车规级/AI服务器",
+      "structure_and_concentration": "",
+      "direct_competitors": [
+        "Murata",
+        "Samsung Electro-Mechanics",
+        "Taiyo Yuden",
+        "Yageo",
+        "三环集团",
+        "风华高科"
+      ],
+      "substitutes_self_supply_and_new_entrants": [
+        "钽电容/聚合物电容",
+        "减少MLCC用量的电路设计",
+        "国内新MLCC产能进入"
+      ],
+      "comparison_dimensions": [
+        "料号数",
+        "容量/尺寸/可靠性",
+        "认证进度",
+        "良率",
+        "单位成本"
+      ],
+      "company_relative_position": "已进入国内主流客户，北美客户尚未完成验证。",
+      "competitor_likely_response": "村田等通过技术迭代和降价维护份额。",
+      "financial_transmission": "验证通过转订单拉高营收；良率/ASP决定毛利和估值。",
+      "evidence_status_and_ids": "partial；KPE01/KPE02/KPE10",
+      "next_verification": "MLCC收入、市占率、客户认证公告。"
+    },
+    {
+      "business_unit": "高精密连接器与汽车互联产品",
+      "market_boundary": "高速连接器、BTB、磁性连接器、汽车互联",
+      "structure_and_concentration": "",
+      "direct_competitors": [
+        "TE Connectivity",
+        "Amphenol",
+        "Molex",
+        "Rosenberger",
+        "电连技术"
+      ],
+      "substitutes_self_supply_and_new_entrants": [
+        "FPC/板对板集成",
+        "汽车域控制器架构减少连接器",
+        "整车厂自研部分连接器"
+      ],
+      "comparison_dimensions": [
+        "信号完整性",
+        "认证",
+        "交付",
+        "价格",
+        "研发"
+      ],
+      "company_relative_position": "产品进入高端细分，未披露份额。",
+      "competitor_likely_response": "国际龙头凭专利和产品线粘性防守。",
+      "financial_transmission": "项目定点转化收入；ASP与产能利用率决定毛利。",
+      "evidence_status_and_ids": "partial；EV023/EV024/EV030",
+      "next_verification": "连接器/汽车业务收入与定点公告。"
+    },
+    {
+      "business_unit": "商业卫星通信/地面终端",
+      "market_boundary": "低轨星座与地面终端射频/天线/通信部件",
+      "structure_and_concentration": "",
+      "direct_competitors": [
+        "国博电子",
+        "铖昌科技",
+        "臻镭科技",
+        "通宇通讯",
+        "盟升电子"
+      ],
+      "substitutes_self_supply_and_new_entrants": [
+        "地面终端主芯片集成",
+        "相控阵方案外包",
+        "卫星制造商内制射频"
+      ],
+      "comparison_dimensions": [
+        "认证",
+        "卫星链绑定",
+        "交付",
+        "ASP",
+        "技术代际"
+      ],
+      "company_relative_position": "主题关联较强，公司自身订单验证缺失。",
+      "competitor_likely_response": "军工/卫星链厂商凭资质和平台关系争夺订单。",
+      "financial_transmission": "订单转收入；若仅为名单主题则无利润传导。",
+      "evidence_status_and_ids": "partial；KPE03-KPE06/KPE08/KPE11/KPE12",
+      "next_verification": "公司口径卫星通信收入/订单。"
+    }
+  ],
+  "moat_mechanisms": [
+    {
+      "moat_source": "全球科技客户认证与长期配套",
+      "operating_mechanism": "客户认证周期长，通过后进入一级配套名单；切换供应商会有重新验证成本。",
+      "observed_proof": "2025年报称业务与客户遍及全球；但前五大客户集中度、留存率、认证更新未披露。",
+      "economic_result": "若成立应体现为份额稳定、ASP维护和应收周转可控；当前无法验证。",
+      "durability_and_threat": "国际龙头和客户垂直整合持续构成威胁。",
+      "verdict": "unproven"
+    },
+    {
+      "moat_source": "高研发/材料配方与精密制造",
+      "operating_mechanism": "研发投入和材料配方可改善产品性能与毛利率。",
+      "observed_proof": "公司称高研发技术产品型，但研发费用率、专利、新品收入占比未量化。",
+      "economic_result": "未证明新品放量或毛利率与研发投入的因果链。",
+      "durability_and_threat": "国际竞争对手研发积累更深。",
+      "verdict": "unproven"
+    },
+    {
+      "moat_source": "高端MLCC材料与工艺壁垒",
+      "operating_mechanism": "高容、小尺寸MLCC对粉体、烧结、内电极工艺要求高。",
+      "observed_proof": "国内批量交付，北美验证进行中；无良率、ASP、车规/AI服务器通过率数据。",
+      "economic_result": "良率/ASP决定扩产回报；当前无法验证。",
+      "durability_and_threat": "村田等仍主导高端MLCC份额。",
+      "verdict": "unproven"
+    },
+    {
+      "moat_source": "全球多产品线制造布局",
+      "operating_mechanism": "多基地、多产品线可以摊薄固定成本并服务全球化客户。",
+      "observed_proof": "全球5个主要生产基地、11个研发中心；毛利率高于环旭电子但低于部分同业。",
+      "economic_result": "部分证据显示规模和布局存在，但尚未形成稳定超额盈利证明。",
+      "durability_and_threat": "全球化布局并非稀缺能力，且关税与汇率扰动存在。",
+      "verdict": "partial"
+    }
+  ],
+  "accounting_quality_matrix": [
+    {
+      "item": "盈利现金含量",
+      "latest_evidence_and_period": "Q1 2026 OCF/NP=0.7722。",
+      "trend_or_comparator": "绝对值尚可。",
+      "causal_interpretation": "当前利润现金含量未出现明显恶化，但单季数据不足以判断全年现金趋势。",
+      "earnings_cash_roic_effect": "支持盈利质量底部稳定，但无法闭环FCF。",
+      "verdict": "positive",
+      "evidence_ids": [
+        "EV016"
+      ]
+    },
+    {
+      "item": "Capex/FCF披露",
+      "latest_evidence_and_period": "2026E-2028E Capex与FCF均缺失。",
+      "trend_or_comparator": "无法与收入/利润增长比较。",
+      "causal_interpretation": "扩产、定增和收购背景下的资本开支规模未知，无法评估自由现金流和资本回报。",
+      "earnings_cash_roic_effect": "估值无法用DCF/FCF交叉验证，ROIC无法计算。",
+      "verdict": "missing",
+      "evidence_ids": []
+    },
+    {
+      "item": "合同负债",
+      "latest_evidence_and_period": "Q1 2026合同负债约15.08百万CNY，环比上升但占营收不足1%。",
+      "trend_or_comparator": "金额极小。",
+      "causal_interpretation": "不能作为MLCC或卫星订单放量的有效先行指标。",
+      "earnings_cash_roic_effect": "对收入/现金流影响微弱。",
+      "verdict": "neutral",
+      "evidence_ids": []
+    },
+    {
+      "item": "股东回报",
+      "latest_evidence_and_period": "历史分红多为每10股0.5-1元，规模较小；无量化回购记录。",
+      "trend_or_comparator": "股东回报弱。",
+      "causal_interpretation": "公司保留利润主要用于研发与扩产，但回报证据未披露。",
+      "earnings_cash_roic_effect": "资本配置能力无法通过分红/回购验证。",
+      "verdict": "warning",
+      "evidence_ids": []
+    },
+    {
+      "item": "收购交易与资本结构",
+      "latest_evidence_and_period": "2026-07-14信维电科股权收购及增资意向协议未披露交易条款。",
+      "trend_or_comparator": "未解决。",
+      "causal_interpretation": "若交易落地，可能影响并表利润、少数股东损益、商誉和现金消耗。",
+      "earnings_cash_roic_effect": "未来EPS和FCF存在向下风险，但当前不能量化。",
+      "verdict": "warning",
+      "evidence_ids": [
+        "EV018"
+      ]
+    }
+  ],
+  "alternative_intelligence_decisions": [
+    {
+      "kpe_ids": [
+        "KPE01"
+      ],
+      "claim": "公司高端MLCC部分关键高容料号已通过国内主流客户认证并批量交付，正积极推进北美大客户验证。",
+      "source_type": "channel_check",
+      "affected_business_and_variable": "被动元件/MLCC；客户认证与订单转化",
+      "public_crosscheck": "已为深交所互动易官方回复，但仍未进入定期报告财务披露，量化收入和毛利率缺失。",
+      "evidence_grade": "C_market_narrative",
+      "source_reliability": "C_private_unverified",
+      "bias_profile": "channel_selection_bias",
+      "adoption_ceiling": "scenario_or_verification_only",
+      "disposition": "verification_change",
+      "before_after": "无模型/概率变化；将MLCC国内批量交付和北美验证推进作为定期报告验证项，基准盈利仍不含北美MLCC收入。",
+      "report_use": "用于第六章市场预期/验证和第五章牛市情景条件，不进入基准盈利。",
+      "falsification_or_next_check": "2026半年报/年报被动元件收入、产能/良率/ASP及北美客户验证里程碑。",
+      "freshness_and_shelf_life": ""
+    },
+    {
+      "kpe_ids": [
+        "KPE02"
+      ],
+      "claim": "渠道称北美大客户或为英伟达，村田高端MLCC份额80%+，益阳信维年产值300亿，政府55%股权或按原价买回。",
+      "source_type": "sell_side_view",
+      "affected_business_and_variable": "被动元件/MLCC；客户身份与股东结构",
+      "public_crosscheck": "公司此前澄清媒体报道缺乏事实依据；该线索未被公开验证；该KPE与对应KSI属于同一卖方原始帖子，不构成独立交叉验证。",
+      "evidence_grade": "C_market_narrative",
+      "source_reliability": "C_private_unverified",
+      "bias_profile": "channel_selection_bias",
+      "adoption_ceiling": "scenario_or_verification_only",
+      "disposition": "verification_change",
+      "before_after": "无模型/概率变化；仅保留为客户身份和MLCC份额的观察项，不构成盈利输入。",
+      "report_use": "用于第六章未验证渠道观察，不进入第五章核心模型。",
+      "falsification_or_next_check": "官方公告/定期报告证实北美客户身份和MLCC收入。",
+      "freshness_and_shelf_life": ""
+    },
+    {
+      "kpe_ids": [
+        "KPE03"
+      ],
+      "claim": "朱雀三号回收成功后卖方/渠道将公司列入卫星链名单。",
+      "source_type": "channel_check",
+      "affected_business_and_variable": "商业卫星通信/地面终端；订单与收入可归因性",
+      "public_crosscheck": "无公司口径卫星订单、收入或backlog披露。",
+      "evidence_grade": "C_market_narrative",
+      "source_reliability": "B_identified_professional",
+      "bias_profile": "sell_side_optimism",
+      "adoption_ceiling": "scenario_or_verification_only",
+      "disposition": "verification_change",
+      "before_after": "无模型/概率变化；卫星业务仍为情景期权，公司归因收入未证实。",
+      "report_use": "用于第六章主题催化剂边界，不进入核心估值。",
+      "falsification_or_next_check": "公司公告/年报披露卫星通信收入、订单或客户。",
+      "freshness_and_shelf_life": ""
+    },
+    {
+      "kpe_ids": [
+        "KPE04"
+      ],
+      "claim": "国金证券将公司列入地面终端与运营核心标的。",
+      "source_type": "channel_check",
+      "affected_business_and_variable": "商业卫星通信/地面终端；估值主题",
+      "public_crosscheck": "属卖方名单，非公司订单证据。",
+      "evidence_grade": "C_market_narrative",
+      "source_reliability": "B_identified_professional",
+      "bias_profile": "sell_side_optimism",
+      "adoption_ceiling": "scenario_or_verification_only",
+      "disposition": "verification_change",
+      "before_after": "无模型/概率变化；不构成公司收入贡献。",
+      "report_use": "用于第六章卖方观点边界。",
+      "falsification_or_next_check": "公司披露地面终端收入或客户。",
+      "freshness_and_shelf_life": ""
+    },
+    {
+      "kpe_ids": [
+        "KPE05"
+      ],
+      "claim": "渠道将公司列入终端基带/射频分类名单。",
+      "source_type": "channel_check",
+      "affected_business_and_variable": "商业卫星通信/地面终端；产品分类",
+      "public_crosscheck": "无公司归因订单或收入。",
+      "evidence_grade": "C_market_narrative",
+      "source_reliability": "C_private_unverified",
+      "bias_profile": "channel_selection_bias",
+      "adoption_ceiling": "scenario_or_verification_only",
+      "disposition": "verification_change",
+      "before_after": "无模型/概率变化；仅作为观察项。",
+      "report_use": "用于第六章主题关联观察。",
+      "falsification_or_next_check": "公司口径终端订单/收入。",
+      "freshness_and_shelf_life": ""
+    },
+    {
+      "kpe_ids": [
+        "KPE06"
+      ],
+      "claim": "渠道称公司21年起独家供SpaceX地面终端零部件，定增60亿过会、35.6亿投商业卫星通信。",
+      "source_type": "channel_check",
+      "affected_business_and_variable": "商业卫星通信/地面终端；订单与再融资",
+      "public_crosscheck": "SpaceX供应关系未被公告/定期报告证实；定增进展需以官方披露为准。",
+      "evidence_grade": "C_market_narrative",
+      "source_reliability": "C_private_unverified",
+      "bias_profile": "channel_selection_bias",
+      "adoption_ceiling": "scenario_or_verification_only",
+      "disposition": "verification_change",
+      "before_after": "无核心模型变化；不进入基准收入。",
+      "report_use": "用于第六章未验证私有线索边界。",
+      "falsification_or_next_check": "公司公告或定期报告确认卫星终端客户与收入，以及定增实际募投进展。",
+      "freshness_and_shelf_life": ""
+    }
+  ],
+  "sell_side_expectation_matrix": [
+    {
+      "source_ids": [
+        "KSI01",
+        "KPE02"
+      ],
+      "institution": "机构未识别",
+      "institution_origin": "unknown",
+      "published_at": "2026-08-10",
+      "observation_type": "single_broker",
+      "forecast_and_valuation": "未提取到带期间的明确盈利预测；估值关键信息为图片/表格，未进入文本管道。",
+      "revision_or_dispersion": "窗口内首次识别，暂无同机构前序可比。",
+      "comparison_with_our_model": "无带期间预测可比；渠道关于英伟达直供、益阳年产值300亿、股权回购的表述未改变TradingAgents基准模型。",
+      "forecast_posture": "unknown",
+      "key_assumptions_and_scenario": "未披露；渠道推测北美大客户身份和高端MLCC份额，缺乏公开销量、ASP、收入与估值假设。",
+      "adoption_level": "rejected",
+      "evidence_status": "private_text",
+      "decision_use": "不作为一致预期；仅作为MLCC验证观察项。"
+    }
+  ],
+  "safe_valuation_assumptions": {
+    "current_price_cny": 59.62,
+    "required_annual_return_pct": 25.0,
+    "holding_period_years": 1.0,
+    "margin_of_safety_pct": 20.0,
+    "maximum_bear_loss_pct": 25.0,
+    "optionality_equity_value_cny_mn": 0.0,
+    "optionality_inputs": [],
+    "other_adjustments_equity_value_cny_mn": 0.0,
+    "scenarios": [
+      {
+        "scenario": "bull",
+        "probability_pct": 30.0,
+        "valuation_method": "PE",
+        "parent_net_profit_cny_mn": 900.0,
+        "valuation_multiple": 90.0,
+        "direct_equity_value_cny_mn": null,
+        "assumption_summary": "2027E北美MLCC验证通过并转向AI服务器/车规爬坡，卫星/地面终端订单开始转为可归属收入，毛利率显著改善。",
+        "evidence_ids": [
+          "KPE01",
+          "KPE10",
+          "KPE03",
+          "KPE04",
+          "KPE06"
+        ]
+      },
+      {
+        "scenario": "base",
+        "probability_pct": 50.0,
+        "valuation_method": "PE",
+        "parent_net_profit_cny_mn": 634.35,
+        "valuation_multiple": 85.0,
+        "direct_equity_value_cny_mn": null,
+        "assumption_summary": "消费电子温和复苏，MLCC国内低基数导入，北美验证结果未定，卫星收入不进入基准。",
+        "evidence_ids": [
+          "EV009",
+          "EV010",
+          "EV012",
+          "EV024",
+          "KPE01"
+        ]
+      },
+      {
+        "scenario": "bear",
+        "probability_pct": 20.0,
+        "valuation_method": "PE",
+        "parent_net_profit_cny_mn": 450.0,
+        "valuation_multiple": 70.0,
+        "direct_equity_value_cny_mn": null,
+        "assumption_summary": "需求疲软、毛利率改善停滞，MLCC北美验证延迟，卫星业务仍为纯主题。",
+        "evidence_ids": [
+          "EV011",
+          "EV012",
+          "KPE01"
+        ]
+      }
+    ]
+  },
+  "deterministic_valuation": {
+    "status": "closed",
+    "diluted_share_count_mn": 967.5686380073802,
+    "scenario_rows": [
+      {
+        "scenario": "bull",
+        "probability_pct": 30.0,
+        "parent_net_profit_cny_mn": 900.0,
+        "eps_cny": 0.9301665687030414,
+        "valuation_method": "PE",
+        "valuation_multiple": 90.0,
+        "equity_value_cny_mn": 81000.0,
+        "fair_value_per_share_cny": 83.71499118327372,
+        "assumption_summary": "2027E北美MLCC验证通过并转向AI服务器/车规爬坡，卫星/地面终端订单开始转为可归属收入，毛利率显著改善。"
+      },
+      {
+        "scenario": "base",
+        "probability_pct": 50.0,
+        "parent_net_profit_cny_mn": 634.35,
+        "eps_cny": 0.6556124031741937,
+        "valuation_method": "PE",
+        "valuation_multiple": 85.0,
+        "equity_value_cny_mn": 53919.75,
+        "fair_value_per_share_cny": 55.727054269806466,
+        "assumption_summary": "消费电子温和复苏，MLCC国内低基数导入，北美验证结果未定，卫星收入不进入基准。"
+      },
+      {
+        "scenario": "bear",
+        "probability_pct": 20.0,
+        "parent_net_profit_cny_mn": 450.0,
+        "eps_cny": 0.4650832843515207,
+        "valuation_method": "PE",
+        "valuation_multiple": 70.0,
+        "equity_value_cny_mn": 31500.0,
+        "fair_value_per_share_cny": 32.55582990460645,
+        "assumption_summary": "需求疲软、毛利率改善停滞，MLCC北美验证延迟，卫星业务仍为纯主题。"
+      }
+    ],
+    "optionality_rows": [],
+    "probability_weighted_core_value_cny": 59.48919047080664,
+    "optionality_per_share_cny": 0.0,
+    "other_adjustments_per_share_cny": 0.0,
+    "fair_value_per_share_cny": 59.48919047080664,
+    "expected_return_pct": -0.2194054498379061,
+    "required_annual_return_pct": 25.0,
+    "holding_period_years": 1.0,
+    "margin_of_safety_pct": 20.0,
+    "maximum_bear_loss_pct": 25.0,
+    "required_return_price_cny": 44.58164341584517,
+    "margin_of_safety_price_cny": 44.58164341584518,
+    "bear_loss_constraint_price_cny": 43.40777320614193,
+    "safe_buy_price_ceiling_cny": 43.40777320614193,
+    "suggested_buy_zone_low_cny": 39.06699588552774,
+    "fundamental_floor_cny": 32.55582990460645,
+    "formula_notes": [
+      "scenario EPS = parent net profit (CNY mn) / diluted shares (mn)",
+      "PE fair value/share = scenario EPS x selected PE",
+      "probability-weighted core value = sum(probability x scenario fair value/share)",
+      "optionality equity value = metric x multiple x probability x ownership x (1-execution haircut)",
+      "safe ceiling = min(base/(1+required return)^years, base x (1-MOS), bear/(1-max bear loss))"
+    ]
+  },
+  "investment_conclusion_and_core_conflict": "最终评级为持有，内部执行姿态为正面观察（Hold / Positive Watch）。300136.SZ当前59.62元的价格已经接近概率加权公允价值约59.47元，并且明显高于基准情景每股价值55.69元；这说明市场已经为高端MLCC北美大客户验证和商业卫星通信订单这两条第二曲线支付了较高的期权溢价，而基准的消费电子射频与模组盈利本身并不能独立产生正期望回报。Q1 2026合并毛利率21.77%、同比+2.30个百分点是已经验证的边际改善，但分产品收入、毛利率、MLCC产能/良率/ASP、卫星订单、信维电科收购条款和全年资本开支均未披露，导致核心盈利的可归因性与现金回报无法闭合。本报告的核心判断不是简单等待某项数据，而是：当前价格下，已持有者不应追高，准备建仓者不应在验证缺失时支付完整期权价格；正面观察的升级条件必须是可审计的收入或订单证据，而不是更多主题名单。",
+  "canonical_model_snapshot": [
+    {
+      "line_id": "shares",
+      "period": "2026-08-21; market snapshot; market cap / close, using forecast_model and price_earnings_decomposition",
+      "metric": "diluted_shares",
+      "value": 967.5686380073802,
+      "unit": "mn shares",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "market cap / close, using forecast_model and price_earnings_decomposition"
+    },
+    {
+      "line_id": "current_price",
+      "period": "2026-08-21",
+      "metric": "Close price",
+      "value": 59.62,
+      "unit": "CNY/share",
+      "status": "reported",
+      "evidence_ids": [
+        "EV042"
+      ],
+      "formula": ""
+    },
+    {
+      "line_id": "2026E_revenue",
+      "period": "2026E",
+      "metric": "Revenue",
+      "value": 9153.62,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV009",
+        "EV010",
+        "EV011"
+      ],
+      "formula": "Q1 2026 revenue / implied seasonality share"
+    },
+    {
+      "line_id": "2027E_revenue",
+      "period": "2027E",
+      "metric": "Revenue",
+      "value": 9611.3,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV009",
+        "EV010",
+        "EV011"
+      ],
+      "formula": "2026E revenue × 1.05"
+    },
+    {
+      "line_id": "2028E_revenue",
+      "period": "2028E",
+      "metric": "Revenue",
+      "value": 10091.87,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV009",
+        "EV010",
+        "EV011"
+      ],
+      "formula": "2027E revenue × 1.05"
+    },
+    {
+      "line_id": "2026E_gross_margin",
+      "period": "2026E",
+      "metric": "Gross margin",
+      "value": 22.0,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV012"
+      ],
+      "formula": "Q1 2026 21.7664% + product-mix improvement"
+    },
+    {
+      "line_id": "2027E_gross_margin",
+      "period": "2027E",
+      "metric": "Gross margin",
+      "value": 22.4,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV012"
+      ],
+      "formula": "Q1 2026 + gradual mix improvement"
+    },
+    {
+      "line_id": "2028E_gross_margin",
+      "period": "2028E",
+      "metric": "Gross margin",
+      "value": 22.8,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV012"
+      ],
+      "formula": "continued mix improvement"
+    },
+    {
+      "line_id": "2026E_gross_profit",
+      "period": "2026E",
+      "metric": "Gross profit",
+      "value": 2013.8,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV009",
+        "EV012"
+      ],
+      "formula": "9153.62 × 22.0%"
+    },
+    {
+      "line_id": "2027E_gross_profit",
+      "period": "2027E",
+      "metric": "Gross profit",
+      "value": 2152.93,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV010",
+        "EV012"
+      ],
+      "formula": "9611.30 × 22.4%"
+    },
+    {
+      "line_id": "2028E_gross_profit",
+      "period": "2028E",
+      "metric": "Gross profit",
+      "value": 2300.95,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV010",
+        "EV012"
+      ],
+      "formula": "10091.87 × 22.8%"
+    },
+    {
+      "line_id": "2026E_operating_margin",
+      "period": "2026E",
+      "metric": "Operating margin",
+      "value": 6.4,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV013",
+        "EV029"
+      ],
+      "formula": "Q1 2026 6.2048% + modest scale leverage"
+    },
+    {
+      "line_id": "2027E_operating_margin",
+      "period": "2027E",
+      "metric": "Operating margin",
+      "value": 7.0,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV013",
+        "EV029"
+      ],
+      "formula": "continued mix/scale"
+    },
+    {
+      "line_id": "2028E_operating_margin",
+      "period": "2028E",
+      "metric": "Operating margin",
+      "value": 7.3,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV013",
+        "EV029"
+      ],
+      "formula": "continued mix/scale"
+    },
+    {
+      "line_id": "2026E_operating_profit",
+      "period": "2026E",
+      "metric": "Operating profit",
+      "value": 585.83,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV009",
+        "EV013"
+      ],
+      "formula": "9153.62 × 6.4%"
+    },
+    {
+      "line_id": "2027E_operating_profit",
+      "period": "2027E",
+      "metric": "Operating profit",
+      "value": 672.79,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV010",
+        "EV013"
+      ],
+      "formula": "9611.30 × 7.0%"
+    },
+    {
+      "line_id": "2028E_operating_profit",
+      "period": "2028E",
+      "metric": "Operating profit",
+      "value": 736.71,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV010",
+        "EV013"
+      ],
+      "formula": "10091.87 × 7.3%"
+    },
+    {
+      "line_id": "2026E_net_margin",
+      "period": "2026E",
+      "metric": "Net margin",
+      "value": 6.0,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV014"
+      ],
+      "formula": "Q1 2026 5.2649% + seasonal recovery"
+    },
+    {
+      "line_id": "2027E_net_margin",
+      "period": "2027E",
+      "metric": "Net margin",
+      "value": 6.6,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV014"
+      ],
+      "formula": "mix/scale leverage"
+    },
+    {
+      "line_id": "2028E_net_margin",
+      "period": "2028E",
+      "metric": "Net margin",
+      "value": 7.0,
+      "unit": "%",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV014"
+      ],
+      "formula": "mix/scale leverage"
+    },
+    {
+      "line_id": "2026E_parent_net_profit",
+      "period": "2026E",
+      "metric": "Parent net profit",
+      "value": 549.2,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV010",
+        "EV014"
+      ],
+      "formula": "9153.62 × 6.0%"
+    },
+    {
+      "line_id": "2027E_parent_net_profit",
+      "period": "2027E",
+      "metric": "Parent net profit",
+      "value": 634.35,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV010",
+        "EV014"
+      ],
+      "formula": "9611.30 × 6.6%"
+    },
+    {
+      "line_id": "2028E_parent_net_profit",
+      "period": "2028E",
+      "metric": "Parent net profit",
+      "value": 706.43,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV010",
+        "EV014"
+      ],
+      "formula": "10091.87 × 7.0%"
+    },
+    {
+      "line_id": "2026E_eps",
+      "period": "2026E",
+      "metric": "eps",
+      "value": 0.5676083105907893,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV010"
+      ],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    },
+    {
+      "line_id": "2027E_eps",
+      "period": "2027E",
+      "metric": "eps",
+      "value": 0.6556124031741937,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV010"
+      ],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    },
+    {
+      "line_id": "2028E_eps",
+      "period": "2028E",
+      "metric": "eps",
+      "value": 0.7301084101432106,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV010"
+      ],
+      "formula": "parent net profit (CNY mn) / diluted shares (mn)"
+    },
+    {
+      "line_id": "2026E_OCF",
+      "period": "2026E",
+      "metric": "Operating cash flow",
+      "value": 424.2,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV016"
+      ],
+      "formula": "analyst estimate from underwriting handoff"
+    },
+    {
+      "line_id": "2027E_OCF",
+      "period": "2027E",
+      "metric": "Operating cash flow",
+      "value": 507.5,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV016"
+      ],
+      "formula": "analyst estimate from underwriting handoff"
+    },
+    {
+      "line_id": "2028E_OCF",
+      "period": "2028E",
+      "metric": "Operating cash flow",
+      "value": 600.5,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV016"
+      ],
+      "formula": "analyst estimate from underwriting handoff"
+    },
+    {
+      "line_id": "2026E_capex",
+      "period": "2026E",
+      "metric": "Capex",
+      "value": null,
+      "unit": "CNY mn",
+      "status": "missing",
+      "evidence_ids": [],
+      "formula": "missing/not disclosed"
+    },
+    {
+      "line_id": "2027E_capex",
+      "period": "2027E",
+      "metric": "Capex",
+      "value": null,
+      "unit": "CNY mn",
+      "status": "missing",
+      "evidence_ids": [],
+      "formula": "missing/not disclosed"
+    },
+    {
+      "line_id": "2028E_capex",
+      "period": "2028E",
+      "metric": "Capex",
+      "value": null,
+      "unit": "CNY mn",
+      "status": "missing",
+      "evidence_ids": [],
+      "formula": "missing/not disclosed"
+    },
+    {
+      "line_id": "2026E_fcf",
+      "period": "2026E",
+      "metric": "FCF",
+      "value": null,
+      "unit": "CNY mn",
+      "status": "missing",
+      "evidence_ids": [],
+      "formula": "OCF - capex; capex missing"
+    },
+    {
+      "line_id": "2027E_fcf",
+      "period": "2027E",
+      "metric": "FCF",
+      "value": null,
+      "unit": "CNY mn",
+      "status": "missing",
+      "evidence_ids": [],
+      "formula": "OCF - capex; capex missing"
+    },
+    {
+      "line_id": "2028E_fcf",
+      "period": "2028E",
+      "metric": "FCF",
+      "value": null,
+      "unit": "CNY mn",
+      "status": "missing",
+      "evidence_ids": [],
+      "formula": "OCF - capex; capex missing"
+    },
+    {
+      "line_id": "2027E_parentnetprofit",
+      "period": "2027E",
+      "metric": "parentnetprofit",
+      "value": 634.35,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV010",
+        "EV014"
+      ],
+      "formula": "Revenue x net margin: 9153.62*6.0%, 9611.30*6.6%, 10091.87*7.0%"
+    },
+    {
+      "line_id": "base_2027E_parent_net_profit",
+      "period": "2027E",
+      "metric": "Parent net profit",
+      "value": 634.35,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV009",
+        "EV010",
+        "EV012",
+        "EV024"
+      ],
+      "formula": "base scenario"
+    },
+    {
+      "line_id": "2027E_parentnetprofit",
+      "period": "2027E",
+      "metric": "parentnetprofit",
+      "value": 634.35,
+      "unit": "CNY mn",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV010",
+        "EV014"
+      ],
+      "formula": "Revenue x net margin: 9153.62*6.0%, 9611.30*6.6%, 10091.87*7.0%"
+    },
+    {
+      "line_id": "bear_fair_value",
+      "period": "2027E",
+      "metric": "Per-share fair value",
+      "value": 32.55,
+      "unit": "CNY/share",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV010",
+        "EV011"
+      ],
+      "formula": "450 × 70 / 967.568638"
+    },
+    {
+      "line_id": "base_fair_value",
+      "period": "2027E",
+      "metric": "Per-share fair value",
+      "value": 55.69,
+      "unit": "CNY/share",
+      "status": "estimated",
+      "evidence_ids": [
+        "EV009",
+        "EV010"
+      ],
+      "formula": "634.35 × 85 / 967.568638"
+    },
+    {
+      "line_id": "bull_fair_value",
+      "period": "2027E",
+      "metric": "Per-share fair value",
+      "value": 83.71,
+      "unit": "CNY/share",
+      "status": "estimated",
+      "evidence_ids": [
+        "KPE01",
+        "KPE03",
+        "KPE10"
+      ],
+      "formula": "900 × 90 / 967.568638"
+    },
+    {
+      "line_id": "probability_weighted_fair_value",
+      "period": "2027E",
+      "metric": "Per-share fair value",
+      "value": 59.47,
+      "unit": "CNY/share",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV009",
+        "EV010",
+        "KPE01"
+      ],
+      "formula": "0.20×32.55 + 0.50×55.69 + 0.30×83.71"
+    },
+    {
+      "line_id": "expected_return_pct",
+      "period": "2026-08-21",
+      "metric": "Expected return vs current price",
+      "value": -0.25,
+      "unit": "%",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV042"
+      ],
+      "formula": "(59.47 / 59.62 - 1) × 100"
+    },
+    {
+      "line_id": "2026E_cost_of_sales",
+      "period": "2026E",
+      "metric": "cost_ofsales",
+      "value": 7139.823600000001,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV009",
+        "EV012"
+      ],
+      "formula": "revenue - gross profit"
+    },
+    {
+      "line_id": "2027E_cost_of_sales",
+      "period": "2027E",
+      "metric": "cost_ofsales",
+      "value": 7458.3688,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV010",
+        "EV012"
+      ],
+      "formula": "revenue - gross profit"
+    },
+    {
+      "line_id": "2028E_cost_of_sales",
+      "period": "2028E",
+      "metric": "cost_ofsales",
+      "value": 7790.923640000001,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [
+        "EV010",
+        "EV012"
+      ],
+      "formula": "revenue - gross profit"
+    },
+    {
+      "line_id": "probability_weighted_core_value",
+      "period": "scenario",
+      "metric": "equity_value_weighted",
+      "value": 57559.875,
+      "unit": "CNY mn",
+      "status": "calculated",
+      "evidence_ids": [],
+      "formula": "deterministic probability-weighted scenario equity value"
+    }
+  ],
+  "handoff_change_rows": [],
+  "company_disaggregation": "300136.SZ是一家全球布局的高研发精密元器件与模组制造商。公司向全球科技企业提供天线及模组、无线充电及模组、EMI/EMC器件、高精密连接器、声学器件、汽车互联产品和被动元件，下游覆盖消费电子、商业卫星通信、智能汽车、物联网与智能家居。客户采购不是标准品现货交易，而是经过送样、认证、小批量之后进入批量供货，因此客户编码、认证周期和产品结构直接决定收入与毛利率。以2025年报和Q1 2026数据为锚，FY2025合并营业收入8,909.78百万CNY，同比增长1.90%；归母净利润708.69百万CNY，同比增长7.12%；Q1 2026合并毛利率21.77%，同比提升2.30个百分点。 从经济单元看，传统消费电子射频与模组大概率仍是主要收入和现金来源，但由于公司未披露分部收入，无法准确拆分；高精密连接器与汽车互联产品具有成长属性，但同样缺少收入与毛利证据；被动元件/MLCC和商业卫星通信是市场最关心的两条第二曲线，目前前者只有国内批量交付、北美验证推进的方向性披露，后者只有卖方名单和募投方向，均不能进入基准财务报表；信维电科收购仍为未落地意向，不纳入合并。核心利润池按证据成熟度排序为：消费电子射频与模组、连接器/汽车、MLCC期权、卫星期权。披露缺口主要在于分产品收入、毛利率、出货量、产能利用率、单位成本、客户集中度和自由现金流，这使报告无法从自下而上的量价本模型证明盈利分部，而只能使用合并口径的自上而下模型。",
+  "industry_cycle_and_competition": "对300136.SZ所处元器件行业，本报告不给出“周期底部已经确认”的结论。可获得证据显示，消费电子核心业务在FY2025只是温和增长，Q1 2026收入环比大幅回落，Q1毛利率改善又无法归因于某个产品或客户，因此只能视为底部右侧仍需验证的弱修复，而不是明确反转。MLCC的高端市场由村田等国际厂商主导，公司只是在部分高容料号上取得国内客户批量交付，北美大客户验证仍有多轮不确定性；商业卫星地面终端则处于订单早期，公司自身没有可核实订单。竞争边界必须分产品看：消费电子射频与模组直面立讯精密、Amphenol、TE Connectivity、Murata和硕贝德等；MLCC要面对村田、三星电机、太阳诱电、国巨及三环集团、风华高科；高精密连接器要面对TE、Amphenol、Molex、Rosenberger和电连技术；卫星地面终端则与国博电子、铖昌科技、臻镭科技、通宇通讯、盟升电子等争夺早期订单。公司有全球26家子公司、11个研发中心和5个主要生产基地，但直到能够量化份额、良率、ASP和现金转换前，这种“平台化配套能力”更适合视为业务基础，而不是已经验证的护城河。行业供需和竞争的财务传导路径清楚：终端出货、认证转单、ASP/良率决定收入与毛利，营运资金和扩产资本开支决定现金与ROIC；缺少这些数据时，估值只能以情景假设覆盖。",
+  "autonomous_forecast_model": "**规范模型数值口径：** 2026E 营业收入91.54亿元、归母净利润5.49亿元；2027E 营业收入96.11亿元、归母净利润6.34亿元；2028E 营业收入100.92亿元、归母净利润7.06亿元；程序化概率加权公允价值59.49元/股。\n\n**程序化模型口径判定：混合模型。** 结构化承保包尚未为每个核心业务单元提供可与集团收入、利润和现金流逐年勾稽的三年数值行；现有分部驱动用于解释集团预测，不得表述为已完成的全量分部加总模型。\n\n最终接受模型为合并口径的自上而下/混合模型，而不是分产品量价本模型。原因在于公司没有披露分产品收入、出货量、ASP、良率、产能利用率和单位成本，无法用“合格料号数×客户数×出货量×ASP”混合闭合到合并收入与毛利。模型采用2026E-2028E三年框架：营业收入9,153.62/9,611.30/10,091.87百万CNY，由Q1 2026收入季节性推算并采用年化约5%增长；毛利率22.0%/22.4%/22.8%，经营利润率6.4%/7.0%/7.3%，净利率6.0%/6.6%/7.0%；对应归母净利润549.20/634.35/706.43百万CNY，EPS约0.568/0.656/0.730元。经营现金流预测为424.20/507.50/600.50百万CNY，但全年资本开支和自由现金流为null，因为这未被披露。模型的关键结论是：基准盈利在2026年低于FY2025，2027-2028年也只是逐步回到2025年利润水平附近，因此当前价格并不是由基准EPS驱动，而是由MLCC/卫星情景驱动的估值。预测中最脆弱的假设是毛利率能否持续温和上行：如果2026半年报毛利率跌破21.77%，基准价值需要下修；如果被动元件收入或卫星订单开始披露，则需要替换为更混合的分部模型。",
+  "thesis_financial_bridge": "第一，核心投资主线是两条未定价/半定价的第二曲线期权，而不是当前消费电子利润的自然增长。高端MLCC的驱动公式是合格料号数、客户数、单客户出货量和ASP的乘积，毛利取决于良率、浆料/电极成本和制造成本；当前官方互动易只证明了国内部分料号批量交付和北美验证推进，没有收入、产能、良率和ASP，因此它不能进入基准，只能体现在30%牛市概率中。商业卫星通信的驱动公式是期初订单储备加新订单减去交付确认，当前公司口径订单、客户和收入全部缺失，卖方名单和朱雀三号回收成功不能替代公司订单。两者都只影响牛市情景，不改变基准盈利。第二，Q1 2026毛利率同比改善是真实的报告事实，但它可能是产品结构、汇率、季节性或一次性因素共同作用，分产品毛利率缺失使结构升级不能成为核心证明。若H1毛利率持续高于21.77%且分产品披露改善，则基准毛利率路径和净利率路径更可信；若回落，则牛市证据也会被削弱。第三，市场定价层面，当前PE TTM 78.37倍、5年87.4%分位说明市场已经为第二曲线支付高估值；对Q1季节性调整后盈利的隐含市盈率甚至更高，意味着下半年盈利环比大幅改善已经被price in，但实现路径并没有财务数据支撑。因此，本报告的核心预期差不是“故事是否真实”，而是“验证时点、幅度和可审计性”。最强的反证是：如果北美MLCC验证通过且卫星订单落地，2027E归母净利可能显著高于基准，届时当前价格仍有较大上行；这是本报告保留正面观察而非直接下调的核心原因。对应证伪条件是：2027年一季报仍无MLCC收入或北美验证失败，2026年报仍无卫星收入，或者H1毛利率跌破21.77%，则基准和牛市概率都需要下修。",
+  "moat_evidence_scorecard": "300136.SZ的护城河目前处于未证实到部分证实之间。客户认证粘性在理论上成立，但公司没有披露前五大客户集中度、留存率、认证更新或切换成本，因此无法证明客户粘性能稳定转化为份额和ASP。高研发与材料配方同样缺少观察证据，没有研发费用率、专利、新品收入占比或研发与毛利之间的归因。高端MLCC的工艺壁垒只停留在“国内批量交付、北美验证推进”，村田高端份额80%以上的渠道线索未被独立验证，良率、车规/服务器认证通过率、单位成本均不可见。全球多产品线和制造布局是唯一有部分支撑的机制，公司有多个基地和研发中心，且与环旭电子等企业相比毛利率不低，但这不能证明稀缺性。综合来看，目前高估值并非来自已验证护城河带来的超额现金回报，而主要来自市场对第二曲线的预期；这是持有而非买入的重要原因。",
+  "valuation_closure": "情景价值、概率加权结果、预期收益与安全价格以本节程序化估值表为唯一数值口径。",
+  "accounting_and_capital_allocation": "会计质量整体为“可接受但未闭环”。Q1 2026经营现金流/净利润约0.77，说明基础盈利现金含量尚可，但单季不能替代全年判断；Capex、自由现金流和ROIC无法计算，直接限制了估值与安全价格的可靠性。合同负债从极低基数上升至15.08百万CNY，占收入不足1%，不能作为需求爆发的前瞻信号。分红历史规模较小，未见可验证的大额回购，资本配置主要表现为研发投入、扩产和潜在收购；这些投入是否带来增量回报目前没有财务证据。2026-07-14信维电科收购及增资意向协议是重要但未解决的资本结构变量，对价、股权比例、少数股东损益、商誉和现金支出都未披露，模型因此不纳入并表贡献。未来若该交易落地，需重新评估EPS、FCF和商誉；若定增募投卫星通信项目推进，也需验证新增资本开支的订单与投资回报。",
+  "expectation_gap_and_market_pricing": "当前价格更多由估值倍数支撑，而不是由EPS支撑。PE TTM 78.37倍，PE处于5年87.4%分位，PB约7.19倍、PS 6.30倍同处高位；市值隐含TTM净利润约736百万CNY，而FY2025实际归母净利润为708.69百万CNY，说明市场已隐含下半年利润环比改善。价格-EPS-PE分解表明，这是一轮典型的倍数驱动型定价，EPS引擎并未同步给出结构性证明。与TradingAgents模型相比，市场预期的主要差异不在于“是否有MLCC/卫星故事”，而在于实现幅度和时间：模型概率加权公允价值约59.47元，与现价几乎一致，基准价值55.69元则低于现价；这说明当前价格已经包含接近平均水平的期权价值，并没有明显的安全边际。在无法量化分部收入之前，本报告不认为现价存在可交易的做多预期差，但也不能据此判断为做空理由，因为一旦官方验证通过，市场可能重新给予更高景气倍数。",
+  "risks_catalysts_verification": "主要风险不是某一个负面新闻，而是高估值下验证时点延迟。已持有者应该保持仓位但避免在59.62元附近追加，等待披露改善；准备建仓者不应在缺少可审计证据时支付完整期权价格，更不应依赖未验证的SpaceX或英伟达直供渠道消息。升级为增配的正面信号包括：定期报告首次披露被动元件/MLCC收入，或公司口径商业卫星通信订单/收入出现，同时H1毛利率≥21.77%并呈现产品结构改善，或者官方公告确认北美大客户验证通过。下调信号包括：2026半年报毛利率跌破21.77%、MLCC/卫星收入未出现、北美验证失败，或者信维电科交易条款显著恶化现金流与EPS。2026半年报是最关键的验证节点，其次是2026年报和2027年一季报。价格行为只作为验证辅助：若股价重回55.69元附近的模型基准区域且上述验证不恶化，才适合讨论观察仓；若跌破区间或伴随基本面转向，则正面观察失效。所有价格区间均为估值逻辑锚，而非机械止损线。",
+  "handoff_integrity_audit": "本次PM决策保留Research Manager接受的模型版本，2026-08-21，标的300136.SZ。已冻结报告事实：FY2025营业收入8,909.78百万CNY、归母净利润708.69百万CNY；Q1 2026营业收入1,992.22百万CNY、毛利率21.7664%、经营利润率6.2048%、净利率5.2649%、OCF/NP=0.7722；市值57,686.44百万CNY。保留估计值：2026E-2028E收入9,153.62/9,611.30/10,091.87百万CNY，归母净利润549.20/634.35/706.43百万CNY，EPS 0.568/0.656/0.730元，OCF 424.20/507.50/600.50百万CNY。保留未解决单元格：Capex、FCF、分产品收入和毛利、MLCC产能/良率/ASP、卫星订单、收购交易条款、一手总股本。股本数967.568638百万股保持不变。PM未作出任何数值修改，canonical_model_snapshot、handoff_change_rows均为空，最终评级与Research Manager非最终观点一致为Hold，但最终评级以本PM文件为准。",
+  "report_markdown": "",
+  "shared_model_change_audit": "共享模型无数值变化。Q1信维电科收购：旧假设未落地，本次无新增交易条款，新假设仍为不并表，EV018，归母净利/FCF不变。Q2 MLCC：旧假设国内低基数导入、北美验证未决；KPE01确认国内批量交付、北美验证推进，但无收入/产能/良率/ASP，故仅保留30%牛市概率，基准不变。Q3卫星：朱雀三号催化与卖方名单未形成公司订单，保持情景层级，不进入基准也不设独立估值桶。Q4汇率：区域占比与套保比例缺失，继续按汇率中性处理，毛利率假设不变。Q5毛利率：Q1 21.77%为报告事实，但因归因缺失，仍采用22.0%/22.4%/22.8%温和路径；H1毛利率若跌破21.77%则为下修触发。所有KPE的重要线索已按watch或verification_change处理，无一形成数值模型变更。",
+  "report_quality_self_check": "本报告完成度：公司模型与产业逻辑已覆盖，三年预测已给出合并口径，估值通过情景PE桥闭合并保持单一公开估值所有者。但分部经济数据未披露，2026E-2028E无法用量×价×毛利自下而上闭合；Capex/FCF缺失，DCF和安全价格无法可靠计算；一手总股本仍以市值/收盘价及登记股本代理，需定期报告更新；KPE02/KPE06等渠道线索未验证，未进入核心模型；语义预处理为deterministic_only，语义提取未返回schema-valid JSON，故本报告未宣称语义冲突消解完成。最重要检索任务是：分产品收入与毛利率、被动元件/MLCC收入及良率/ASP、公司口径卫星订单/收入、信维电科交易方案、区域收入与套保比例、全年Capex/FCF。以上缺失是中性披露缺口，不应机械改变评级，但会降低估值与建仓区域的可执行性，并约束仓位和触发条件。"
+}

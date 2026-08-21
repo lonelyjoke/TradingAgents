@@ -1,0 +1,223 @@
+{
+  "llm_calls": 24,
+  "tool_calls": 1,
+  "tokens_in": 708760,
+  "tokens_out": 162702,
+  "cached_tokens_in": 67584,
+  "uncached_tokens_in": 641176,
+  "cache_hit_ratio": 0.0954,
+  "llm_errors": 0,
+  "node_breakdown": {
+    "Portfolio Manager": {
+      "llm_calls": 5,
+      "tool_calls": 0,
+      "tokens_in": 234357,
+      "tokens_out": 58070,
+      "cached_tokens_in": 23296,
+      "llm_errors": 0
+    },
+    "DeepSeekChatOpenAI": {
+      "llm_calls": 3,
+      "tool_calls": 0,
+      "tokens_in": 89282,
+      "tokens_out": 48141,
+      "cached_tokens_in": 256,
+      "llm_errors": 0
+    },
+    "Bear Researcher": {
+      "llm_calls": 2,
+      "tool_calls": 0,
+      "tokens_in": 82569,
+      "tokens_out": 4610,
+      "cached_tokens_in": 24192,
+      "llm_errors": 0
+    },
+    "Bull Researcher": {
+      "llm_calls": 2,
+      "tool_calls": 0,
+      "tokens_in": 77926,
+      "tokens_out": 4764,
+      "cached_tokens_in": 5632,
+      "llm_errors": 0
+    },
+    "Research Manager": {
+      "llm_calls": 1,
+      "tool_calls": 0,
+      "tokens_in": 51963,
+      "tokens_out": 27590,
+      "cached_tokens_in": 0,
+      "llm_errors": 0
+    },
+    "Neutral Analyst": {
+      "llm_calls": 2,
+      "tool_calls": 0,
+      "tokens_in": 37145,
+      "tokens_out": 3156,
+      "cached_tokens_in": 640,
+      "llm_errors": 0
+    },
+    "Conservative Analyst": {
+      "llm_calls": 2,
+      "tool_calls": 0,
+      "tokens_in": 35532,
+      "tokens_out": 2814,
+      "cached_tokens_in": 640,
+      "llm_errors": 0
+    },
+    "Aggressive Analyst": {
+      "llm_calls": 2,
+      "tool_calls": 0,
+      "tokens_in": 32531,
+      "tokens_out": 3165,
+      "cached_tokens_in": 640,
+      "llm_errors": 0
+    },
+    "Fundamentals Analyst": {
+      "llm_calls": 1,
+      "tool_calls": 0,
+      "tokens_in": 30358,
+      "tokens_out": 3691,
+      "cached_tokens_in": 2176,
+      "llm_errors": 0
+    },
+    "News Analyst": {
+      "llm_calls": 2,
+      "tool_calls": 0,
+      "tokens_in": 21045,
+      "tokens_out": 3908,
+      "cached_tokens_in": 10112,
+      "llm_errors": 0
+    },
+    "Trader": {
+      "llm_calls": 1,
+      "tool_calls": 0,
+      "tokens_in": 9814,
+      "tokens_out": 391,
+      "cached_tokens_in": 0,
+      "llm_errors": 0
+    },
+    "Market Analyst": {
+      "llm_calls": 1,
+      "tool_calls": 0,
+      "tokens_in": 6238,
+      "tokens_out": 2402,
+      "cached_tokens_in": 0,
+      "llm_errors": 0
+    },
+    "tools_news": {
+      "llm_calls": 0,
+      "tool_calls": 1,
+      "tokens_in": 0,
+      "tokens_out": 0,
+      "cached_tokens_in": 0,
+      "llm_errors": 0
+    }
+  },
+  "model_breakdown": {
+    "deepseek-v4-flash": {
+      "llm_calls": 21,
+      "tokens_in": 526508,
+      "tokens_out": 78053,
+      "cached_tokens_in": 67584,
+      "llm_errors": 0
+    },
+    "deepseek-v4-pro": {
+      "llm_calls": 3,
+      "tokens_in": 182252,
+      "tokens_out": 84649,
+      "cached_tokens_in": 0,
+      "llm_errors": 0
+    }
+  },
+  "estimated_llm_cost_cny": 3.0059,
+  "estimated_model_costs_cny": {
+    "deepseek-v4-flash": 1.043004,
+    "deepseek-v4-pro": 1.962896
+  },
+  "cost_estimate_priced_tokens": 871462,
+  "cost_pricing_snapshot": {
+    "as_of": "2026-08-17",
+    "effective_at_beijing": "2026-08-17 00:00",
+    "unit": "CNY per 1M tokens",
+    "peak_hours_beijing": [
+      "09:00-12:00",
+      "14:00-18:00"
+    ],
+    "deepseek": {
+      "legacy_before_2026_08_17": {
+        "deepseek-v4-flash": {
+          "cache_hit": 0.02,
+          "cache_miss": 1.0,
+          "output": 2.0
+        },
+        "deepseek-v4-pro": {
+          "cache_hit": 0.025,
+          "cache_miss": 3.0,
+          "output": 6.0
+        }
+      },
+      "off_peak": {
+        "deepseek-v4-flash": {
+          "cache_hit": 0.05,
+          "cache_miss": 1.5,
+          "output": 4.5
+        },
+        "deepseek-v4-pro": {
+          "cache_hit": 0.15,
+          "cache_miss": 4.5,
+          "output": 13.5
+        }
+      },
+      "peak": {
+        "deepseek-v4-flash": {
+          "cache_hit": 0.1,
+          "cache_miss": 3.0,
+          "output": 9.0
+        },
+        "deepseek-v4-pro": {
+          "cache_hit": 0.3,
+          "cache_miss": 9.0,
+          "output": 27.0
+        }
+      }
+    }
+  },
+  "cost_pricing_tier_tokens": {
+    "legacy_before_2026_08_17": 0,
+    "off_peak": 871462,
+    "peak": 0
+  },
+  "elapsed_seconds": 2067.785,
+  "selected_analysts": [
+    "market",
+    "news",
+    "fundamentals"
+  ],
+  "quick_model": "deepseek-v4-flash",
+  "deep_model": "deepseek-v4-pro",
+  "provider": "deepseek",
+  "token_policy": {
+    "analyst_context_chars": 28000,
+    "research_context_chars": 32000,
+    "trader_context_chars": 16000,
+    "risk_context_chars": 12000,
+    "portfolio_context_chars": 36000,
+    "structured_research_prompt_chars": 36000,
+    "underwriting_prompt_chars": 48000,
+    "quick_max_output_tokens": 8000,
+    "deep_max_output_tokens": 16000,
+    "structured_research_cache_enabled": true,
+    "structured_research_component_cache_enabled": true,
+    "structured_research_cache_status": "miss",
+    "structured_research_component_cache_status": {
+      "semantic_extraction": "miss",
+      "company_underwriting": "miss"
+    },
+    "a_share_tool_requery_enabled": false,
+    "pm_editorial_review_mode": "on_issues",
+    "deepseek_quick_thinking": "disabled",
+    "deepseek_quick_reasoning_effort": "medium",
+    "deepseek_deep_thinking": "enabled",
+    "deepseek_deep_reasoning_effort": "medium"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "review": {
+    "revision_required": true,
+    "overall_assessment": "Deterministic quality router found actionable issues; send them directly to the bounded revision pass.",
+    "revision_instructions": [
+      "public language: English-heavy reader-facing fields must be translated to Chinese: forecast_takeaways[0].evidence_anchor, forecast_assumptions[0].sensitivity"
+    ]
+  },
+  "review_status": {
+    "mode": "deterministic_issue_router",
+    "agent": "Sell-Side Research Editor",
+    "structured_error": ""
+  },
+  "revision_requested": true,
+  "revision_applied": false,
+  "revision_status": {
+    "mode": "free_text_fallback",
+    "agent": "Portfolio Manager Editorial Revision",
+    "structured_error": "1 validation error for SellSidePMDecision\n  Input should be a valid dictionary or instance of SellSidePMDecision [type=model_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/model_type; fallback validation=Expecting ',' delimiter: line 489 column 6 (char 19544); repair attempt 1 validation=Expecting ',' delimiter: line 481 column 6 (char 19385); repair attempt 2 validation=Expecting ',' delimiter: line 481 column 6 (char 19385)"
+  },
+  "initial_handoff_issues": [],
+  "initial_analytical_issues": [
+    "public language: English-heavy reader-facing fields must be translated to Chinese: forecast_takeaways[0].evidence_anchor, forecast_assumptions[0].sensitivity"
+  ],
+  "remaining_handoff_issues": [],
+  "remaining_analytical_issues": [
+    "public language: English-heavy reader-facing fields must be translated to Chinese: forecast_takeaways[0].evidence_anchor, forecast_assumptions[0].sensitivity"
+  ],
+  "revision_rejection_reasons": []
+}
